@@ -386,7 +386,7 @@ Bytegleichheit beweist die Wiederverwendung einer Bilddatei. Sie beweist für si
 **Konkrete Beispiele:**
 
 - Auditstand: `CLAUDE.md` verwies bei den Datenmodellfallen auf einen nicht vorhandenen Handover-Abschnitt; das aktuelle Handover besitzt nur die Abschnitte 1 und 2. Der Verweis wurde in PR #358 auf `LESSONS.md` und `verification/RESUME.md` umgestellt.
-- Auditstand: `verification/RESUME.md` verwies für das Evidenzjournal noch auf einen nicht vorhandenen Handover-Abschnitt. Der Verweis wurde in PR #358 auf `HANDOVER.md#repository-layout` umgestellt.
+- Auditstand: `verification/RESUME.md` verwies für das Evidenzjournal noch auf einen nicht vorhandenen Handover-Abschnitt. Der Verweis wurde in PR #358 auf `HANDOVER.md#1-repository-layout` umgestellt.
 - Der Site-Generator nennt in seiner Artwork-Erklärung `summary.mappedWorks` „mapped artwork groups“. Gemessen sind 41 Works, aber 181 bildbasierte Appearance-Gruppen plus 73 ungelöste Gruppen. Kartentext und Artwork werden dadurch in der öffentlichen Erklärung wieder vermischt.
 - Der öffentliche Satz „Every claim carries a source outside the marketplace“ ist stärker als der tatsächlich sichtbare Bestand mit Marketplace-Finish-Kandidaten. Die Einschränkungen folgen später, sollten aber nicht erst einen uneingeschränkten Eingangssatz korrigieren müssen.
 - `CLAUDE.md` nannte im Auditstand neun ausschließlich auf inspizierten Specimens beruhende Einheiten. Im aktuellen Store gibt es insgesamt acht Einheiten mit `providerId=inspected-specimen`, fünf davon ohne Korroboration. Der aktive Begleitwert wurde in PR #358 auf fünf einzelne Specimen-Claims korrigiert; die Zahl 19 für reine Eigentümerattestation wurde überprüft und passt weiterhin.

@@ -1015,7 +1015,7 @@ obtained.
 | File | Role |
 |---|---|
 | `units.json` | **The state store.** One row per card × language × variant with `status`, `sourceUrl`, `sourceType`, `evidence`, `checkedAt`. Updated in place. |
-| `evidence.jsonl` | Append-only journal of observations (never rewritten; corrections are appended). Not canonical and not replayable into `units.json` — see [`HANDOVER.md`](../HANDOVER.md#repository-layout) for the repository boundary |
+| `evidence.jsonl` | Append-only journal of observations (never rewritten; corrections are appended). Not canonical and not replayable into `units.json` — see [`HANDOVER.md`](../HANDOVER.md#1-repository-layout) for the repository boundary |
 | `confirmed_sources.json` | Export of all confirmed units with their sources |
 | `UNCONFIRMED.json` | **The gap list** — grouped by card+variant, showing which languages still lack a source |
 | `finish_units.json` | **Finish state store** — set number × language, logical printings, evidence, and product mappings |
