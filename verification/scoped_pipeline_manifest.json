@@ -64,7 +64,7 @@
         {"id": "snapshot-check", "command": ["verification/test_tcgdex_snapshot.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
         {"id": "offline-finish-check", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
         {"id": "refresh-candidate", "command": ["scripts/finishes.py", "--refresh"], "gateLevel": "L1", "network": true, "browser": false, "writes": ["verification/cache/finish-tcgdex/"]},
-        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json"]}
+        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]}
       ],
       "skippedChecks": ["refresh candidate is skipped without --include-live", "snapshot acceptance remains an explicit owner action", "full L3 regen.py gate", "browser acceptance", "publish/deployment"]
     },

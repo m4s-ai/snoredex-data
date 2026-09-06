@@ -144,25 +144,6 @@ def main() -> int:
 
             print(f"[OK  ] {name} product {product_id}: {' + '.join(expected_subtypes)}")
 
-    if args.record:
-        recorded = {
-            url: {"success": True, "error": None,
-                  "results": project([row for row in responses.cache[url]["results"]
-                                      if row.get("productId") in ids], fields)}
-            for url, (fields, ids) in wanted_rows.items() if responses.cache[url]["success"]
-        }
-        FIXTURE.parent.mkdir(parents=True, exist_ok=True)
-        write_json(FIXTURE, {
-            "recordedAt": date.today().isoformat(),
-            "note": ("Projection of the TCGCSV responses this check reads, so its logic can be "
-                     "proved offline. Refresh with: python verification/verify_finish_sources.py "
-                     "--record"),
-            "responses": recorded,
-        })
-        print(f"\nrecorded {len(recorded)} responses to "
-              f"{FIXTURE.relative_to(VERIFICATION.parent)}")
-        return 0
-
     if failures:
         for failure in failures:
             print(f"[FAIL] {failure}")
@@ -176,6 +157,25 @@ def main() -> int:
               "endpoint(s); this is a transient network failure, not a data mismatch.",
               file=sys.stderr)
         return 2
+
+    if args.record:
+        recorded = {
+            url: {"success": True, "error": None,
+                  "results": project([row for row in responses.cache[url]["results"]
+                                      if row.get("productId") in ids], fields)}
+            for url, (fields, ids) in wanted_rows.items()
+        }
+        FIXTURE.parent.mkdir(parents=True, exist_ok=True)
+        write_json(FIXTURE, {
+            "recordedAt": date.today().isoformat(),
+            "note": ("Projection of the TCGCSV responses this check reads, so its logic can be "
+                     "proved offline. Refresh with: python verification/verify_finish_sources.py "
+                     "--record"),
+            "responses": recorded,
+        })
+        print(f"\nrecorded {len(recorded)} responses to "
+              f"{FIXTURE.relative_to(VERIFICATION.parent)}")
+        return 0
 
     print()
     print(f"Verified {checked_products} TCGCSV products across {checked_sources} source records.")

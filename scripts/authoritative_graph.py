@@ -11,7 +11,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
+import tempfile
 from copy import deepcopy
 from collections import defaultdict
 from pathlib import Path
@@ -473,8 +475,22 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
 
 
 def write_graph(graph: dict[str, Any]) -> None:
-    OUTPUT.write_text(json.dumps(graph, ensure_ascii=False, indent=2) + "\n",
-                      encoding="utf-8", newline="\n")
+    body = json.dumps(graph, ensure_ascii=False, indent=2) + "\n"
+    temporary: str | None = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w", encoding="utf-8", newline="\n", dir=OUTPUT.parent,
+            prefix=f".{OUTPUT.name}.", suffix=".tmp", delete=False,
+        ) as handle:
+            temporary = handle.name
+            handle.write(body)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, OUTPUT)
+        temporary = None
+    finally:
+        if temporary:
+            Path(temporary).unlink(missing_ok=True)
 
 
 def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1999,18 +2015,19 @@ def main() -> int:
         graph = read_graph()
         if args.write:
             graph = project_physical_evidence(graph)
-            write_graph(graph)
         elif args.check:
             projected = project_physical_evidence(deepcopy(graph))
             if projected != graph:
                 print("authoritative_graph.py: committed snapshot differs from fresh projection")
                 return 1
         errors = validate(graph)
+        if errors:
+            print("authoritative_graph.py: " + "; ".join(errors[:5]))
+            return 1
+        if args.write:
+            write_graph(graph)
     except (OSError, ValueError, KeyError, TypeError) as error:
         print(f"authoritative_graph.py: invalid snapshot: {error}")
-        return 1
-    if errors:
-        print("authoritative_graph.py: " + "; ".join(errors[:5]))
         return 1
     print(
         f"authoritative_graph.py: OK ({len(graph['entities'])} entities, "

@@ -205,7 +205,17 @@ def main() -> None:
         ).fetchone() == (0,)
         connection.close()
 
-    print("tracker one-to-one state rekey regression passed")
+        template = root / "template.sqlite"
+        tracker.build_tracker(template, catalog)
+        check_sentinel = template.with_name(template.name + ".check")
+        tmp_sentinel = template.with_name(template.name + ".check.tmp")
+        check_sentinel.write_bytes(b"keep tracker check")
+        tmp_sentinel.write_bytes(b"keep tracker temp")
+        tracker.check_template(template, catalog)
+        assert check_sentinel.read_bytes() == b"keep tracker check"
+        assert tmp_sentinel.read_bytes() == b"keep tracker temp"
+
+    print("tracker state and read-only check regressions passed")
 
 
 if __name__ == "__main__":

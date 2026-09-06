@@ -49,6 +49,10 @@ its hashes and URL set, then writes the versioned snapshot. The ignored cache re
 state only and is never the release source of truth. A refresh failure is an unreachable source
 (retry it), not evidence that a card or finish is absent.
 
+`python scripts/finishes.py --reproject` is an explicit write path for the card projection from the
+committed finish store. It cannot be combined with `--check`; check-only runs observe existing bytes
+and never repair missing projections.
+
 ### Physical-card evidence loop (#274)
 
 Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `variant`,

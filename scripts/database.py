@@ -23,6 +23,7 @@ import os
 import re
 import sqlite3
 import sys
+import tempfile
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -1344,14 +1345,11 @@ def validate_database(target: Path) -> list[str]:
                 problems.append(f"database references missing product image: {image_path}")
                 break
         connection.close()
-        rebuilt = target.with_name(target.name + ".check")
-        try:
+        with tempfile.TemporaryDirectory(prefix="snoredex-database-check-") as directory:
+            rebuilt = Path(directory) / target.name
             build_database(rebuilt)
             if sqlite_dump(target) != sqlite_dump(rebuilt):
                 problems.append("database contents differ from a fresh deterministic rebuild")
-        finally:
-            rebuilt.unlink(missing_ok=True)
-            rebuilt.with_name(rebuilt.name + ".tmp").unlink(missing_ok=True)
     except (sqlite3.Error, OSError, ValueError) as error:
         problems.append(f"cannot validate database: {error}")
     return problems
