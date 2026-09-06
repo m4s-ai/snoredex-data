@@ -1,3 +1,4 @@
+<!-- doc: role=ASTRA remediation execution plan and issue graph; stage=task -->
 <!-- graph-dependency
 parent: none
 depends_on: none
