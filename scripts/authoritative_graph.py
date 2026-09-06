@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import re
+import stat
 import tempfile
 from copy import deepcopy
 from collections import defaultdict
@@ -486,6 +487,12 @@ def write_graph(graph: dict[str, Any]) -> None:
             handle.write(body)
             handle.flush()
             os.fsync(handle.fileno())
+        output_mode = (
+            stat.S_IMODE(OUTPUT.stat().st_mode)
+            if OUTPUT.exists()
+            else 0o644
+        )
+        os.chmod(temporary, output_mode)
         os.replace(temporary, OUTPUT)
         temporary = None
     finally:
