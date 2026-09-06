@@ -130,7 +130,9 @@ existing Python workflow owners rather than copying their contracts.
 
 ## Data-model traps
 
-These are the things that have actually caused mistakes. Full treatment in `HANDOVER.md` §4.
+These are the things that have actually caused mistakes. Full treatment is in
+[`LESSONS.md`](LESSONS.md) and the source-by-source detail is in
+[`verification/RESUME.md`](verification/RESUME.md).
 
 - **Unit** = `(setCode, number, variant, language)`, status
   `confirmed | contradicted | needs-manual-review | pending`. Every resolved unit must carry a
