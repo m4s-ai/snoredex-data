@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import sys
 import tempfile
+import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,7 +34,18 @@ def main() -> None:
         database.ROOT = original_root
         database.INPUTS = original_inputs
 
-    print("database fingerprint portability regression passed")
+    with tempfile.TemporaryDirectory() as directory:
+        target = Path(directory) / "handoff.sqlite"
+        shutil.copy2(ROOT / "snoredex.sqlite", target)
+        check_sentinel = target.with_name(target.name + ".check")
+        tmp_sentinel = target.with_name(target.name + ".check.tmp")
+        check_sentinel.write_bytes(b"keep database check")
+        tmp_sentinel.write_bytes(b"keep database temp")
+        database.validate_database(target)
+        assert check_sentinel.read_bytes() == b"keep database check"
+        assert tmp_sentinel.read_bytes() == b"keep database temp"
+
+    print("database fingerprint portability and read-only check regressions passed")
 
 
 if __name__ == "__main__":

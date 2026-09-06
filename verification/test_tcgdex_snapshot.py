@@ -22,6 +22,16 @@ def load_finishes():
     return module
 
 
+def load_finish_source_verifier():
+    spec = importlib.util.spec_from_file_location(
+        "verify_finish_sources", ROOT / "verification" / "verify_finish_sources.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
+
+
 def main() -> None:
     finishes = load_finishes()
     document = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
@@ -99,6 +109,60 @@ def main() -> None:
             finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
             finishes.CACHE_DIR = original_cache_dir
             sys.argv = original_arguments
+
+    verifier = load_finish_source_verifier()
+    with tempfile.TemporaryDirectory() as temporary:
+        temporary_root = Path(temporary)
+        verification = temporary_root / "verification"
+        fixture = verification / "fixtures" / "tcgcsv_finish_sources.json"
+        fixture.parent.mkdir(parents=True)
+        old_fixture = b'{"responses":{"old":true}}\n'
+        fixture.write_bytes(old_fixture)
+        (verification / "finish_overrides.json").write_text(
+            json.dumps({
+                "sources": {
+                    "test": {
+                        "expectedSubtypes": {"1": ["Normal"]},
+                        "identityUrl": "https://example.test/identity",
+                        "url": "https://example.test/prices",
+                    }
+                }
+            }),
+            encoding="utf-8",
+        )
+        original_verification = verifier.VERIFICATION
+        original_fixture = verifier.FIXTURE
+        original_urlopen = verifier.urllib.request.urlopen
+        original_arguments = sys.argv
+
+        def unavailable(*_args, **_kwargs):
+            raise OSError("simulated total network failure")
+
+        verifier.VERIFICATION = verification
+        verifier.FIXTURE = fixture
+        verifier.urllib.request.urlopen = unavailable
+        try:
+            sys.argv = ["verify_finish_sources.py", "--record"]
+            assert verifier.main() == 2
+        finally:
+            sys.argv = original_arguments
+            verifier.urllib.request.urlopen = original_urlopen
+            verifier.VERIFICATION = original_verification
+            verifier.FIXTURE = original_fixture
+        assert fixture.read_bytes() == old_fixture
+        assert not fixture.with_name(fixture.name + ".tmp").exists()
+
+    original_arguments = sys.argv
+    try:
+        sys.argv = ["finishes.py", "--offline", "--check", "--reproject"]
+        try:
+            finishes.main()
+        except ValueError as error:
+            assert "reproject" in str(error)
+        else:
+            raise AssertionError("--check --reproject must fail")
+    finally:
+        sys.argv = original_arguments
     print(f"tcgdex snapshot regression passed: {len(records)} hashed records, offline")
 
 

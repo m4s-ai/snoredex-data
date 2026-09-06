@@ -4,7 +4,9 @@
 from __future__ import annotations
 
 import json
+import os
 import sqlite3
+import stat
 import sys
 import tempfile
 from copy import deepcopy
@@ -994,6 +996,56 @@ def main() -> None:
         ).fetchone()
     assert target_ref == u0414["targetRef"]
     assert json.loads(target_refs_json) == u0414["targetRefs"]
+
+    with tempfile.TemporaryDirectory() as directory:
+        temporary_root = Path(directory)
+        output = temporary_root / "authoritative_graph.json"
+        invalid = deepcopy(graph)
+        localization = next(
+            row for row in invalid["entities"] if row["entityType"] == "localization"
+        )
+        localization["payload"]["localizationId"] = "INVALID"
+        output.write_text(json.dumps(invalid), encoding="utf-8")
+        before = output.read_bytes()
+        original_output = graph_module.OUTPUT
+        original_arguments = sys.argv
+        graph_module.OUTPUT = output
+        try:
+            sys.argv = ["authoritative_graph.py", "--write"]
+            assert graph_module.main() == 1
+        finally:
+            sys.argv = original_arguments
+            graph_module.OUTPUT = original_output
+        assert output.read_bytes() == before
+
+        if os.name == "posix":
+            mode_output = temporary_root / "mode_graph.json"
+            mode_output.write_bytes(b"old graph")
+            os.chmod(mode_output, 0o640)
+            graph_module.OUTPUT = mode_output
+            try:
+                graph_module.write_graph(graph)
+            finally:
+                graph_module.OUTPUT = original_output
+            assert stat.S_IMODE(mode_output.stat().st_mode) == 0o640
+
+        original_replace = graph_module.os.replace
+        graph_module.OUTPUT = output
+        graph_module.os.replace = lambda *_args, **_kwargs: (_ for _ in ()).throw(
+            OSError("simulated replace failure")
+        )
+        try:
+            try:
+                graph_module.write_graph(graph)
+            except OSError:
+                pass
+            else:
+                raise AssertionError("replace failure must propagate")
+        finally:
+            graph_module.os.replace = original_replace
+            graph_module.OUTPUT = original_output
+        assert output.read_bytes() == before
+        assert not list(temporary_root.glob(".authoritative_graph.json.*.tmp"))
     print(
         "authoritative graph regression passed: "
         f"{len(entities)} entities, {len(edges)} edges, "

@@ -278,7 +278,8 @@ for the tree, and again after the push for the history
 ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
-and needs no network; it is the fast path when a projection rule changes.
+and needs no network; it is the explicit write path when a projection rule changes. It cannot be
+combined with `--check`, which is observational and never repairs a missing artifact.
 
 The normal release path is offline: `python scripts/regen.py` runs
 `finishes.py --offline`, which reads the versioned

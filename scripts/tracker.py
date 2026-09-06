@@ -20,6 +20,7 @@ import hashlib
 import os
 import sqlite3
 import sys
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -418,14 +419,11 @@ def check_template(template: Path, catalog: Path) -> list[str]:
         if foreign_keys:
             problems.append(f"tracker template foreign key errors: {foreign_keys[:3]}")
         connection.close()
-        rebuilt = template.with_name(template.name + ".check")
-        try:
+        with tempfile.TemporaryDirectory(prefix="snoredex-tracker-check-") as directory:
+            rebuilt = Path(directory) / template.name
             build_tracker(rebuilt, catalog)
             if sqlite_dump(template) != sqlite_dump(rebuilt):
                 problems.append("tracker template contents differ from a fresh deterministic rebuild")
-        finally:
-            rebuilt.unlink(missing_ok=True)
-            rebuilt.with_name(rebuilt.name + ".tmp").unlink(missing_ok=True)
     except (sqlite3.Error, OSError, ValueError) as error:
         problems.append(str(error))
     return problems

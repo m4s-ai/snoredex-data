@@ -1820,8 +1820,10 @@ def _finish_summary(
     return 0
 
 def main() -> int:
-    if "--check" in sys.argv and ("--refresh" in sys.argv or "--accept-refresh" in sys.argv):
-        raise ValueError("--check cannot be combined with refresh modes")
+    if "--check" in sys.argv and (
+        "--refresh" in sys.argv or "--accept-refresh" in sys.argv or "--reproject" in sys.argv
+    ):
+        raise ValueError("--check cannot be combined with refresh or reproject modes")
     context = _load_finish_context()
     cards_document = context["cards_document"]
     cards = context["cards"]
@@ -1953,6 +1955,9 @@ def reproject() -> None:
 
 if __name__ == "__main__":
     if "--reproject" in sys.argv:
+        if "--check" in sys.argv:
+            print("finishes.py: --check and --reproject are mutually exclusive", file=sys.stderr)
+            sys.exit(2)
         reproject()
         sys.exit(0)
     # Same contract as verification/verify_finish_sources.py, for the same reason: a caller has to
