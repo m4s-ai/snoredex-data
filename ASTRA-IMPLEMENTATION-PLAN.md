@@ -1,9 +1,9 @@
-<!-- doc: role=ASTRA remediation execution plan and issue graph; stage=task -->
+<!-- doc: role=ASTRA remediation execution plan; stage=task -->
 <!-- graph-dependency
 parent: none
 depends_on: none
-blocks: none (children are tracked below; child-to-child blocking is authoritative)
-graph_nodes: ASTRA.md findings -> safe writers/checks -> gate honesty -> identity/evidence contracts -> collector/artwork/workflow -> performance/CI -> authority/docs
+blocks: none (GitHub issues carry the current relationships)
+graph_nodes: ASTRA.md findings and linked GitHub issues
 -->
 
 # ASTRA remediation plan
@@ -54,71 +54,21 @@ Die Artwork-Seite initialisiert bei 1.440 px 73.348 DOM-Elemente, 8.566 Controls
 Mitglieder; der JSON-Artwork-Block umfasst 2.960.721 Zeichen. Diese Werte sind Messpunkte, keine
 neuen Zielwerte ohne Begründung.
 
-## Abhängigkeitsgraph
+## Issue tracker als Autorität
 
-Die Blockierungsbeziehungen zwischen den Arbeitspaketen sind als GitHub-Graph gesetzt. Das
-Tracking-Issue ist nur der Container und blockiert kein Kind. Zusätzlich enthalten die Issues einen
-maschinenlesbaren `graph-dependency`-Header.
-
-| Knoten | Arbeitspaket | Issue | Abhängigkeit |
-| --- | --- | --- | --- |
-| A | Sichere Schreibpfade und read-only Checks | [#348](https://github.com/m4s-ai/snoredex-data/issues/348) | — |
-| B | Ehrliches Regen-Gate | [#349](https://github.com/m4s-ai/snoredex-data/issues/349) | #348 |
-| C | Printing-Identität | [#350](https://github.com/m4s-ai/snoredex-data/issues/350) | #349 |
-| D | Evidence-Granularität | [#351](https://github.com/m4s-ai/snoredex-data/issues/351) | #350 |
-| E | Collector-/Tracker-Vertrag | [#352](https://github.com/m4s-ai/snoredex-data/issues/352) | #350, #351 |
-| F | Artwork-Integrität | [#353](https://github.com/m4s-ai/snoredex-data/issues/353) | #352 |
-| G | Deterministische Runs/Messung | [#354](https://github.com/m4s-ai/snoredex-data/issues/354) | #348 |
-| H | Discovery-Performance und CI | [#355](https://github.com/m4s-ai/snoredex-data/issues/355) | #353, #354 |
-| I | Artwork-UI und Assets | [#356](https://github.com/m4s-ai/snoredex-data/issues/356) | #353, #355 |
-| J | Store-Autorität, Komplexität, Doku | [#357](https://github.com/m4s-ai/snoredex-data/issues/357) | #348, #350, #353, #356 |
-
-```mermaid
-flowchart TD
-  P[#347 ASTRA tracking]
-  A[#348 sichere Schreibpfade]
-  B[#349 ehrliches Regen-Gate]
-  C[#350 Printing-Identität]
-  D[#351 Evidence-Granularität]
-  E[#352 Collector-Vertrag]
-  F[#353 Artwork-Integrität]
-  G[#354 deterministische Runs/Messung]
-  H[#355 Performance und CI]
-  I[#356 UI und Assets]
-  J[#357 Autorität, Komplexität, Doku]
-  P -. tracks .-> A
-  P -. tracks .-> B
-  P -. tracks .-> C
-  P -. tracks .-> D
-  P -. tracks .-> E
-  P -. tracks .-> F
-  P -. tracks .-> G
-  P -. tracks .-> H
-  P -. tracks .-> I
-  P -. tracks .-> J
-  A --> B
-  B --> C
-  C --> D
-  C --> E
-  D --> E
-  E --> F
-  A --> G
-  G --> H
-  F --> H
-  H --> I
-  F --> I
-  A --> J
-  C --> J
-  F --> J
-  I --> J
-```
+Das Tracking-Issue [#347](https://github.com/m4s-ai/snoredex-data/issues/347) und seine
+Kind-Issues [#348](https://github.com/m4s-ai/snoredex-data/issues/348) bis
+[#357](https://github.com/m4s-ai/snoredex-data/issues/357) enthalten den aktuellen Arbeitsgraphen,
+die Prioritäten und die Blockierungsbeziehungen. Dieses Dokument beschreibt nur die fachlichen
+Scopes, Akzeptanzkriterien und gemeinsamen Arbeitsregeln; es wiederholt keine Abhängigkeiten und
+keine operative Reihenfolge. Bei einer Änderung im Issue-Graphen ist ausschließlich GitHub zu
+aktualisieren.
 
 ## Arbeitspakete
 
 ### A — sichere Schreibpfade und wirklich read-only Checks
 
 **ASTRA:** F03, F04, F11.
-**Voraussetzungen:** keine.
 **Dateibereiche:** `scripts/authoritative_graph.py`, `scripts/database.py`, `scripts/tracker.py`,
 `scripts/finishes.py`, `verification/verify_finish_sources.py` sowie die zugehörigen Tests.
 
@@ -141,7 +91,6 @@ Exit ungleich 0 und bewahren den Fixture; atomare Writes hinterlassen keine halb
 ### B — Regen-Gate muss jeden Fehlerstatus weitergeben
 
 **ASTRA:** F05.
-**Voraussetzung:** A.
 **Dateibereiche:** `scripts/regen.py`, Gate-/Regenerationstests.
 
 **Umsetzung:**
@@ -160,7 +109,6 @@ Exit ungleich 0 und bewahren den Fixture; atomare Writes hinterlassen keine halb
 ### C — gemeinsame, reihenfolgeunabhängige Printing-Identität
 
 **ASTRA:** F02.
-**Voraussetzung:** B.
 **Dateibereiche:** `scripts/authoritative_graph.py`, `scripts/collector_catalogue.py`, gemeinsame
 Identitäts-/Normalisierungshelfer und Regressionstests.
 
@@ -181,7 +129,6 @@ Identitäts-/Normalisierungshelfer und Regressionstests.
 ### D — strukturierte Evidence-Granularität
 
 **ASTRA:** F01.
-**Voraussetzung:** C.
 **Dateibereiche:** `scripts/evidence_semantics.py`, Evidence-Schemas, Statusprojektionen und Tests.
 
 **Umsetzung:**
@@ -200,7 +147,6 @@ Identitäts-/Normalisierungshelfer und Regressionstests.
 ### E — Collector-/Tracker-Kompatibilität
 
 **ASTRA:** F06.
-**Voraussetzungen:** C und D.
 **Dateibereiche:** Collector-Katalog, Checklist-/Tracker-Projektion, Contracts und Tests.
 
 **Umsetzung:**
@@ -221,7 +167,6 @@ Identitäts-/Normalisierungshelfer und Regressionstests.
 ### F — Artwork-Projektionsversion, Persistenz und stabile Review-Identität
 
 **ASTRA:** F07, F08, F18.
-**Voraussetzung:** E.
 **Dateibereiche:** Artwork-Generator/Projection, `site/`-Artwork-JavaScript und Tests.
 
 **Umsetzung:**
@@ -243,7 +188,6 @@ Identitäts-/Normalisierungshelfer und Regressionstests.
 ### G — deterministische Run-Auswahl und Workflow-Messung
 
 **ASTRA:** F09, F10.
-**Voraussetzung:** A.
 **Dateibereiche:** `scripts/workflow_loop.py`, Mess-/Pages-Spezifikationen und Tests.
 
 **Umsetzung:**
@@ -262,7 +206,6 @@ Identitäts-/Normalisierungshelfer und Regressionstests.
 ### H — Discovery-Performance und CI-Testgrenzen
 
 **ASTRA:** F13, F16.
-**Voraussetzungen:** F und G.
 **Dateibereiche:** Discovery-Orchestrierung, `verification/`, CI-Workflow und Performance-Fixtures.
 
 **Umsetzung:**
@@ -282,7 +225,6 @@ Refresh; Messprotokoll zeigt Verbesserung ohne Gate-Verlust; CI-Matrix beschreib
 ### I — Artwork-UI- und Asset-Skalierung
 
 **ASTRA:** F14, F15.
-**Voraussetzungen:** F und H.
 **Dateibereiche:** Artwork-Seite, Datenpartitionierung, Bildderivate und Publish-Konfiguration.
 
 **Umsetzung:**
@@ -301,7 +243,6 @@ Refresh; Messprotokoll zeigt Verbesserung ohne Gate-Verlust; CI-Matrix beschreib
 ### J — Autorität, Komplexität und Dokumentationsabgleich
 
 **ASTRA:** F12, F17, F19.
-**Voraussetzungen:** A, C, F und I.
 **Dateibereiche:** Store-/Generator-Verträge, betroffene Funktionen mit hoher kognitiver Komplexität,
 `CLAUDE.md`, `HANDOVER.md`, `verification/RESUME.md`, Site-/Daten-Dokumentation.
 
@@ -341,7 +282,7 @@ Refresh; Messprotokoll zeigt Verbesserung ohne Gate-Verlust; CI-Matrix beschreib
 
 ## Definition of Done für das Tracking-Issue
 
-- Alle zehn Kinder-Issues sind in Graph-Reihenfolge geschlossen oder mit einer begründeten,
+- Alle zehn Kinder-Issues sind gemäß dem aktuellen GitHub-Graph geschlossen oder mit einer begründeten,
   reproduzierbaren Blockade dokumentiert.
 - Jede ASTRA-Feststellung ist entweder durch einen Test/Vertrag behoben oder als bewusst akzeptierte
   Restentscheidung mit Evidence vermerkt.
