@@ -74,8 +74,9 @@ aktualisieren.
 
 **Umsetzung:**
 
-1. Graph-, Datenbank- und Tracker-Checks erst vollständig validieren lassen und anschließend per
-   temporärer Datei plus atomarem Replace schreiben.
+1. Explizite Graph-, Datenbank- und Tracker-Schreibpfade erst vollständig validieren lassen und
+   anschließend per temporärer Datei plus atomarem Replace schreiben. `--check`-Pfade erzeugen
+   ihre Vergleichsartefakte außerhalb des Inputtrees und ersetzen niemals persistente Dateien.
 2. Alte `.check`- und `.check.tmp`-Dateien niemals in einem Read-only-Pfad löschen oder verändern.
 3. `finishes.py --check` ohne `--reproject` und `--reproject` mit explizitem Schreibmodus trennen;
    ein Check darf auch bei fehlender Projektion nicht still reparieren.
