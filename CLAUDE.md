@@ -60,9 +60,10 @@ existing Python workflow owners rather than copying their contracts.
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **19 units rest on owner attestation alone** and 9
-   on an inspected specimen alone. The owner holds those cards and no database records them, so
-   refusing the evidence buys a false "open" count rather than better evidence.
+   A single non-URL source may confirm a unit: **19 units rest on owner attestation alone**; the
+   current `E6` output reports how many rest on an inspected specimen alone. The owner holds
+   those cards and no database records them, so refusing the evidence buys a false "open" count
+   rather than better evidence.
 
    **`E3` enforces *checkable or strong*, not tier alone.** It fails only when an uncorroborated
    claim is both: no `sourceUrl` *and* below tier 2. A tier-3 page with a URL may carry a claim by
@@ -129,7 +130,9 @@ existing Python workflow owners rather than copying their contracts.
 
 ## Data-model traps
 
-These are the things that have actually caused mistakes. Full treatment in `HANDOVER.md` §4.
+These are the things that have actually caused mistakes. Full treatment is in
+[`LESSONS.md`](LESSONS.md) and the source-by-source detail is in
+[`verification/RESUME.md`](verification/RESUME.md).
 
 - **Unit** = `(setCode, number, variant, language)`, status
   `confirmed | contradicted | needs-manual-review | pending`. Every resolved unit must carry a
