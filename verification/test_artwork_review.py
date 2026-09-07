@@ -127,6 +127,10 @@ def main() -> int:
         if path.name == "authoritative_graph.json":
             data["entities"] = list(reversed(data["entities"]))
             data["edges"] = list(reversed(data["edges"]))
+            for entity in data["entities"]:
+                payload = entity.get("payload") or {}
+                if payload.get("legacyCounterpartUnitIds"):
+                    payload["legacyCounterpartUnitIds"] = list(reversed(payload["legacyCounterpartUnitIds"]))
         elif path.name == "finish_units.json":
             data["units"] = list(reversed(data["units"]))
             for unit in data["units"]:

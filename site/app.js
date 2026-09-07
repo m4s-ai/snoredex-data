@@ -1214,19 +1214,40 @@
     const reviewer = $("#ar-reviewer");
     const storageKey = "snoredex-artwork-review-proposals-v1";
     let drafts = {};
+    let staleDrafts = {};
     let storageWarning = "";
     const formValues = new Map();
 
+    const staleReason = (draft) => {
+      if (!draft || typeof draft !== "object" || Array.isArray(draft)) return "invalid proposal";
+      if (draft.schema !== ARTWORK_REVIEW.proposalSchema) return "proposal schema changed";
+      if (draft.schemaVersion !== ARTWORK_REVIEW.proposalSchemaVersion) return "proposal schema version changed";
+      if (draft.projectionVersion !== ARTWORK_REVIEW.projectionVersion) return "projection version changed";
+      return "";
+    };
+    const classifyStoredDrafts = (stored) => {
+      if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
+      Object.entries(stored).forEach(([releaseId, draft]) => {
+        const reason = staleReason(draft);
+        if (reason) staleDrafts[releaseId] = { draft, reason };
+        else drafts[releaseId] = draft;
+      });
+    };
+
     try {
       const saved = window.localStorage.getItem(storageKey);
-      if (saved) drafts = JSON.parse(saved) || {};
+      if (saved) classifyStoredDrafts(JSON.parse(saved));
     } catch (error) {
       storageWarning = "Browser storage unavailable; download proposals before leaving.";
     }
 
     const persist = () => {
       try {
-        window.localStorage.setItem(storageKey, JSON.stringify(drafts));
+        const stored = Object.fromEntries([
+          ...Object.entries(staleDrafts).map(([releaseId, item]) => [releaseId, item.draft]),
+          ...Object.entries(drafts),
+        ]);
+        window.localStorage.setItem(storageKey, JSON.stringify(stored));
         storageWarning = "";
         return true;
       } catch (error) {
@@ -1501,9 +1522,11 @@
 
     const updateSummary = (groups) => {
       const reviewed = members().filter((member) => draftFor(member)).length;
+      const stale = Object.keys(staleDrafts).length;
       summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
         ' releases · ' + reviewed + ' proposals ' + (storageWarning ? 'in memory only' : 'saved locally') +
         ' · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12) +
+        (stale ? ' · ' + stale + ' stale proposal' + (stale === 1 ? '' : 's') + ' available for export' : '') +
         (storageWarning ? ' · ' + storageWarning : '');
     };
 
@@ -1645,20 +1668,31 @@
     }));
     $("#ar-clear").addEventListener("click", () => {
       drafts = {};
+      staleDrafts = {};
       formValues.clear();
       persist();
       render();
     });
     $("#ar-download").addEventListener("click", () => {
       const proposals = Object.values(drafts);
-      if (!proposals.length) { summary.textContent = "No proposals saved locally yet."; return; }
+      const staleProposals = Object.entries(staleDrafts).map(([releaseId, item]) => ({
+        releaseId,
+        staleReason: item.reason,
+        proposal: item.draft,
+      }));
+      if (!proposals.length && !staleProposals.length) {
+        summary.textContent = "No proposals saved locally yet.";
+        return;
+      }
       const payload = {
         schema: ARTWORK_REVIEW.proposalSchema,
         schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
         projectionVersion: ARTWORK_REVIEW.projectionVersion,
-        reviewer: reviewer.value.trim() || proposals[0].reviewer,
+        reviewer: reviewer.value.trim() || (proposals[0] && proposals[0].reviewer) ||
+          (staleProposals[0] && staleProposals[0].proposal.reviewer) || "",
         createdAt: new Date().toISOString(),
         proposals,
+        staleProposals,
       };
       const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
       const url = URL.createObjectURL(blob);

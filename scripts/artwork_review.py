@@ -348,7 +348,7 @@ def build() -> dict[str, Any]:
             "localIdentifierKnown": bool(payload.get("localIdentifierKnown")),
             "state": payload.get("state"),
             "workMappingState": payload.get("workMappingState"),
-            "legacyCounterpartUnitIds": payload.get("legacyCounterpartUnitIds") or [],
+            "legacyCounterpartUnitIds": sorted(payload.get("legacyCounterpartUnitIds") or []),
             "legacyVariants": payload.get("legacyVariants") or [],
             "physicalPrintings": physical,
             "detection": detection,

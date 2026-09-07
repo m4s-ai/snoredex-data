@@ -284,6 +284,38 @@ def main() -> int:
         page.select_option("#ar-proposal-filter", "all")
         page.wait_for_timeout(80)
 
+        # Drafts from the previous proposal schema remain exportable, but must not be counted as
+        # current reviewed proposals after the projection/schema bump.
+        stale_context = browser.new_context()
+        stale_context.add_init_script("""
+          (() => localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            'CARD:STALE-FIXTURE': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Legacy reviewer',
+              action: 'confirm'
+            }
+          })))();
+        """)
+        stale_page = stale_context.new_page()
+        stale_page.goto(url)
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_summary = stale_page.locator("#ar-summary").inner_text().lower()
+        check("stale artwork drafts are classified without counting as current",
+              "stale proposal" in stale_summary and "0 proposals" in stale_summary,
+              stale_summary)
+        with stale_page.expect_download() as stale_download:
+            stale_page.click("#ar-download")
+        stale_payload = json.loads(Path(stale_download.value.path()).read_text(encoding="utf-8"))
+        check("stale artwork drafts remain available in exports",
+              stale_payload.get("proposals") == []
+              and len(stale_payload.get("staleProposals") or []) == 1
+              and stale_payload["staleProposals"][0]["staleReason"] == "proposal schema version changed",
+              str(stale_payload))
+        stale_page.close()
+        stale_context.close()
+
         storage_failure_index = page.evaluate("""() => Array.from(
           document.querySelectorAll('#ar-groups .artwork-member')
         ).findIndex(card => {
