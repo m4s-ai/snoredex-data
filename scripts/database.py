@@ -173,7 +173,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10006;
+PRAGMA user_version = 10007;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -1244,8 +1244,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10006:
-            problems.append("database PRAGMA user_version is not 10006")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != 10007:
+            problems.append("database PRAGMA user_version is not 10007")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()

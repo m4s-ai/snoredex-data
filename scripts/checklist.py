@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the canonical checklist-item export (#8).
+"""Generate the legacy checklist compatibility export (#8, #352).
 
 A checklist item is a legacy verified printing, finish candidate or research placeholder. The hard part is not
 producing rows, it is refusing to produce rows that were never printed. A naive expansion of

@@ -6,6 +6,8 @@ from __future__ import annotations
 import sys
 import tempfile
 import shutil
+import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -41,7 +43,14 @@ def main() -> None:
         tmp_sentinel = target.with_name(target.name + ".check.tmp")
         check_sentinel.write_bytes(b"keep database check")
         tmp_sentinel.write_bytes(b"keep database temp")
-        database.validate_database(target)
+        assert not database.validate_database(target)
+        with closing(sqlite3.connect(target)) as connection:
+            assert connection.execute("PRAGMA user_version").fetchone() == (10007,)
+            assert connection.execute(
+                "SELECT value FROM metadata WHERE key='schema_version'"
+            ).fetchone() == ("1.7.0",)
+            connection.execute("PRAGMA user_version=10006")
+        assert "database PRAGMA user_version is not 10007" in database.validate_database(target)
         assert check_sentinel.read_bytes() == b"keep database check"
         assert tmp_sentinel.read_bytes() == b"keep database temp"
 

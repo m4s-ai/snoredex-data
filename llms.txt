@@ -13,9 +13,9 @@ Use positive evidence only: a source omission is a gap, not evidence that a prin
 ## Preferred data
 
 - [Compact release chronology](analysis_confirmed_releases.csv): Small semicolon-separated table of chronological card releases, languages, finishes, and source URLs.
-- [Collector catalogue](collector_catalogue.json): Versioned application contract for current-known printings and explicit research items.
+- [Collector catalogue](collector_catalogue.json): Supported locality-aware entry point for collector applications; distinguishes verified printings, finish candidates and research placeholders.
 - [Collector catalogue schema](collector_catalogue.schema.json): JSON Schema for the collector catalogue.
-- [Physical checklist](analysis_checklist.json): Canonical checklist of documented printings and explicit unresolved placeholders.
+- [Legacy checklist](analysis_checklist.json): Compatibility view with stable predecessor IDs. Only verified printings are current-known; finish candidates and unresolved placeholders remain research.
 - [Language evidence](verification/units.json): One verdict per set code, number, variant, and language.
 - [Finish evidence](verification/finish_units.json): Positive finish evidence per set number and language.
 

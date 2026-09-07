@@ -211,7 +211,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.6.0`, with `PRAGMA user_version=10006`. Every build
+The database is UTF-8 SQLite, schema version `1.7.0`, with `PRAGMA user_version=10007`. Every build
 stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`.
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.
