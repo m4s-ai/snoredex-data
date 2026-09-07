@@ -136,12 +136,17 @@ def main() -> int:
                 for key in ("specimenIds", "sourceRecordIds"):
                     if payload.get(key):
                         payload[key] = list(reversed(payload[key]))
+                if entity.get("entityType") == "card-release" and payload.get("legacyVariants"):
+                    payload["legacyVariants"] = list(reversed(payload["legacyVariants"]))
         elif path.name == "finish_units.json":
             data["units"] = list(reversed(data["units"]))
             for unit in data["units"]:
                 unit["printings"] = list(reversed(unit.get("printings") or []))
                 for printing in unit["printings"]:
                     printing["sources"] = list(reversed(printing.get("sources") or []))
+                    for key in ("mappedVariants", "specimenIds", "markings"):
+                        if printing.get(key):
+                            printing[key] = list(reversed(printing[key]))
         elif path.name == "units.json":
             data = list(reversed(data))
         elif path.name == "snorlax_cards.json":

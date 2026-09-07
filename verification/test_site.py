@@ -398,6 +398,44 @@ def main() -> int:
               and all(item.get("releaseId") == replacement_id for item in persisted_generations),
               str(persisted_generations_payload))
 
+        # Raw collision keys from the preceding implementation carry the original release in
+        # affectedCardReleaseIds; migrate them on load and rewrite them without the suffix.
+        stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1-stale'));
+          const prior = raw[releaseId];
+          prior.reviewer = 'Raw suffix reviewer';
+          prior.affectedCardReleaseIds = [releaseId];
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({}));
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            [releaseId + '::2']: prior
+          }));
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_page.fill("#ar-reviewer", "Migration current")
+        migration_card = stale_page.locator("#ar-groups .artwork-member").first
+        migration_card.locator(".ar-action").select_option("unclear")
+        migration_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        migrated_storage = stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1-stale'));
+          return { keys: Object.keys(raw), draft: raw[releaseId] || null };
+        }""", replacement_id)
+        check("raw suffixed stale entries migrate to the original release key",
+              migrated_storage["keys"] == [replacement_id]
+              and migrated_storage["draft"].get("reviewer") == "Raw suffix reviewer",
+              str(migrated_storage))
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as migrated_download:
+            stale_page.click("#ar-download")
+        migrated_payload = json.loads(Path(migrated_download.value.path()).read_text(encoding="utf-8"))
+        check("migrated stale entry exports its original release id",
+              any(item.get("releaseId") == replacement_id
+                  and item.get("proposal", {}).get("reviewer") == "Raw suffix reviewer"
+                  for item in migrated_payload.get("staleProposals") or []),
+              str(migrated_payload))
+
         # A proposal from the immediately preceding 1.2 shape (same version, missing typed
         # identity fields) must also be classified stale rather than accepted as current.
         current_projection = stale_page.evaluate(

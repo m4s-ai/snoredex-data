@@ -80,6 +80,20 @@ def image_identity(images: list[dict[str, Any]]) -> tuple[str | None, str]:
     return f"IMAGE-GROUP:{reviewable[0]['contentHash'][:24]}", "unreviewed-image-group"
 
 
+def first_sorted_variant(payload: dict[str, Any]) -> str | None:
+    variants = sorted(payload.get("legacyVariants") or [], key=digest)
+    return variants[0] if variants else None
+
+
+def normalize_set_lists(record: dict[str, Any], keys: tuple[str, ...]) -> dict[str, Any]:
+    normalized = dict(record)
+    for key in keys:
+        values = normalized.get(key)
+        if isinstance(values, list):
+            normalized[key] = sorted(values, key=digest)
+    return normalized
+
+
 def build_groups(releases_projection: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     """Group releases by automatic image anchor while keeping unresolved releases isolated."""
     groups: dict[str, dict[str, Any]] = {}
@@ -189,7 +203,7 @@ def build() -> dict[str, Any]:
         set_code = payload.get("viaLegacySetCode")
         card_number = payload.get("viaLegacyNumber")
         language = payload.get("language")
-        variant = (payload.get("legacyVariants") or [None])[0]
+        variant = first_sorted_variant(payload)
         for row in sorted(units, key=lambda item: item.get("unitId", "")):
             if row.get("language") != language or row.get("setCode") != set_code:
                 continue
@@ -203,6 +217,7 @@ def build() -> dict[str, Any]:
     def release_projection(entity: dict[str, Any]) -> dict[str, Any]:
         payload = entity["payload"]
         release_id = entity["entityId"]
+        legacy_variants = sorted(payload.get("legacyVariants") or [], key=digest)
         work_id = release_to_work.get(release_id) or payload.get("work")
         work_entity = entities.get(work_id)
         card_key = (work_entity or {}).get("payload", {}).get("cardKey")
@@ -212,7 +227,7 @@ def build() -> dict[str, Any]:
             "state": "catalogue-derived",
             "cardName": None,
             "artist": None,
-            "variant": ", ".join(payload.get("legacyVariants") or []) or None,
+            "variant": ", ".join(legacy_variants) or None,
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -295,28 +310,18 @@ def build() -> dict[str, Any]:
             physical_entity = entities.get(physical_id)
             if not physical_entity:
                 continue
-            printing = dict(physical_entity["payload"])
-            for key in ("specimenIds", "sourceRecordIds"):
-                if isinstance(printing.get(key), list):
-                    # Provenance identifiers are set-like.  Keep their order stable so an
-                    # equivalent graph serialization does not invalidate saved proposals.
-                    printing[key] = sorted(printing[key], key=digest)
-            if isinstance(printing.get("markings"), list):
-                # Marking order is a set-like serialization detail (see printing_semantic_key).
-                # Normalize it before the projection digest so equivalent physical evidence does
-                # not invalidate saved proposals merely because a source reordered the markings.
-                printing["markings"] = sorted(printing["markings"], key=digest)
+            printing = normalize_set_lists(
+                physical_entity["payload"], ("specimenIds", "sourceRecordIds", "markings"),
+            )
             finish_source = finish_by_printing.get(printing.get("sourcePrintingId") or printing.get("physicalPrintingId"))
             if finish_source:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
-                normalized_sources = sorted(
-                    source_printing.get("sources") or [],
-                    key=lambda source: digest(source),
+                normalized_source_printing = normalize_set_lists(
+                    source_printing, ("mappedVariants", "sources", "specimenIds", "markings"),
                 )
+                normalized_sources = normalized_source_printing.get("sources") or []
                 printing["sources"] = normalized_sources
-                normalized_source_printing = dict(source_printing)
-                normalized_source_printing["sources"] = normalized_sources
                 for source_index, source in enumerate(normalized_sources):
                     source_tag = f"{source_index}:{digest(source)[:16]}"
                     observations.append(source_observation(
@@ -359,7 +364,7 @@ def build() -> dict[str, Any]:
             "state": payload.get("state"),
             "workMappingState": payload.get("workMappingState"),
             "legacyCounterpartUnitIds": sorted(payload.get("legacyCounterpartUnitIds") or []),
-            "legacyVariants": payload.get("legacyVariants") or [],
+            "legacyVariants": legacy_variants,
             "physicalPrintings": physical,
             "detection": detection,
             "images": images,

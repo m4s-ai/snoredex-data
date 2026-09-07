@@ -1249,7 +1249,10 @@
           && Object.prototype.hasOwnProperty.call(stored, "releaseId")) {
         return { releaseId: stored.releaseId || storageKey, draft: stored.draft };
       }
-      return { releaseId: storageKey, draft: stored };
+      const affectedReleaseId = stored && Array.isArray(stored.affectedCardReleaseIds)
+        ? stored.affectedCardReleaseIds[0] : null;
+      const rawSuffix = /^(.*)::\d+$/.exec(storageKey);
+      return { releaseId: (rawSuffix && affectedReleaseId) ? affectedReleaseId : storageKey, draft: stored };
     };
     const classifyStoredDrafts = (stored) => {
       if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
