@@ -93,6 +93,16 @@ CATALOG_ITEM_COLUMN_NAMES = (
 )
 CATALOG_ITEM_COLUMNS = ", ".join(CATALOG_ITEM_COLUMN_NAMES)
 
+
+def legacy_collector_state(
+    catalog_status: str, finish_verification_status: str,
+) -> tuple[str, str]:
+    if catalog_status == "unresolved":
+        return "research-placeholder", "research"
+    if finish_verification_status == "confirmed":
+        return "verified-printing", "current-known"
+    return "finish-candidate", "research"
+
 SCHEMA = f"""
 PRAGMA foreign_keys = ON;
 PRAGMA journal_mode = DELETE;
@@ -188,8 +198,7 @@ def catalog_rows(catalog: Path) -> list[tuple]:
         return [
             (
                 row[0], row[1], row[0],
-                "research-placeholder" if row[1] == "unresolved" else "verified-printing",
-                "research" if row[1] == "unresolved" else "current-known",
+                *legacy_collector_state(row[1], row[15]),
                 *row[2:],
             )
             for row in rows
@@ -241,12 +250,13 @@ def migration_select_expressions(columns: set[str]) -> list[str]:
             expressions.append("checklist_id")
         elif name == "collector_item_kind":
             expressions.append(
-                "CASE WHEN catalog_status='unresolved' "
-                "THEN 'research-placeholder' ELSE 'verified-printing' END"
+                "CASE WHEN catalog_status='unresolved' THEN 'research-placeholder' "
+                "WHEN finish_verification_status='confirmed' THEN 'verified-printing' "
+                "ELSE 'finish-candidate' END"
             )
         elif name == "collector_progress_class":
             expressions.append(
-                "CASE WHEN catalog_status='unresolved' "
+                "CASE WHEN catalog_status='unresolved' OR finish_verification_status<>'confirmed' "
                 "THEN 'research' ELSE 'current-known' END"
             )
         else:

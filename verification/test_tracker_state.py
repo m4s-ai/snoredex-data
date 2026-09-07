@@ -54,13 +54,14 @@ def write_catalog(path: Path, rows: list[tuple]) -> None:
 
 def item(
     checklist_id: str, number: str, finish: str = "unresolved",
-    release_date: str | None = "1999-06-16",
+    release_date: str | None = "1999-06-16", finish_status: str | None = None,
 ) -> tuple:
     return (
         checklist_id, "unresolved" if finish == "unresolved" else "documented", "Snorlax",
         "JU", number, "Jungle", "NL", "Dutch", "Unlimited", finish, finish, None,
         None, None, "unknown" if finish == "unresolved" else "standard",
-        "pending" if finish == "unresolved" else "confirmed", release_date, None,
+        finish_status or ("pending" if finish == "unresolved" else "confirmed"),
+        release_date, None,
         f"https://www.cardmarket.com/ju/{number}",
     )
 
@@ -224,6 +225,24 @@ def main() -> None:
         tracker.check_template(template, catalog)
         assert check_sentinel.read_bytes() == b"keep tracker check"
         assert tmp_sentinel.read_bytes() == b"keep tracker temp"
+
+        legacy_catalog = root / "legacy-catalog.sqlite"
+        write_catalog(legacy_catalog, [
+            item("legacy-confirmed", "1", "holo"),
+            item("legacy-marketplace", "2", "holo", finish_status="marketplace-claimed"),
+            item("legacy-owner", "3", "holo", finish_status="owner-attested"),
+            item("legacy-open", "4"),
+        ])
+        fallback = {
+            row[0]: (row[3], row[4])
+            for row in tracker.catalog_rows(legacy_catalog)
+        }
+        assert fallback == {
+            "legacy-confirmed": ("verified-printing", "current-known"),
+            "legacy-marketplace": ("finish-candidate", "research"),
+            "legacy-owner": ("finish-candidate", "research"),
+            "legacy-open": ("research-placeholder", "research"),
+        }
 
     rows = tracker.catalog_rows(ROOT / "snoredex.sqlite")
     assert len(rows) == 889
