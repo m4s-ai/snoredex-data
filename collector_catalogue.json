@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-09-03",
-    "catalogueFingerprint": "sha256:8f8f85c32d95fcaa44628987a510ded7b256d8442b114990c634d4dbcce50675",
+    "catalogueFingerprint": "sha256:a228f1de4f2a195407f95723f0221c9459e6f395e978328d9edb25594a999365",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -82835,6 +82835,29 @@
       "status": "owner-decision-accepted",
       "basis": "positive-printing-evidence-or-later-dated-explicit-owner-decision-required-for-promotion",
       "decisionRef": "https://github.com/m4s-ai/snoredex-checklist/issues/5#issuecomment-5407399741"
+    },
+    "legacyCompatibility": {
+      "schema": "snoredex-legacy-collector-compatibility",
+      "schemaVersion": "1.0.0",
+      "legacyStableId": "checklistId",
+      "collectorStableId": "itemId",
+      "stateFields": [
+        "itemKind",
+        "progressClass",
+        "finishVerificationStatus"
+      ],
+      "collectionProjection": {
+        "current-known": "need",
+        "research": "research"
+      },
+      "counts": {
+        "legacyRows": 889,
+        "verifiedPrintings": 701,
+        "finishCandidates": 112,
+        "researchPlaceholders": 76,
+        "currentKnown": 701,
+        "research": 188
+      }
     }
   }
 }

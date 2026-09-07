@@ -107,6 +107,17 @@ class ContractError(ValueError):
     pass
 
 
+def legacy_projection_summary(items: list[dict[str, Any]]) -> tuple[int, defaultdict[str, int]]:
+    rows = 0
+    counts: defaultdict[str, int] = defaultdict(int)
+    for item in items:
+        for _legacy_id in item["legacyChecklistIds"]:
+            rows += 1
+            counts[item["itemKind"]] += 1
+            counts[item["progressClass"]] += 1
+    return rows, counts
+
+
 def _public_text(value: Any, *, limit: int = CORRECTION_VALUE_MAX_LENGTH) -> str:
     """Return a bounded, deterministic representation for public form context."""
     if value is None:
@@ -1404,6 +1415,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     for row in items:
         counts[row["itemKind"]] += 1
         counts[row["progressClass"]] += 1
+    legacy_projection_rows, legacy_counts = legacy_projection_summary(items)
     graph_hash = sha256_bytes(canonical_bytes(graph))
     document: dict[str, Any] = {
         "meta": {
@@ -1456,6 +1468,25 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 "status": "owner-decision-accepted",
                 "basis": "positive-printing-evidence-or-later-dated-explicit-owner-decision-required-for-promotion",
                 "decisionRef": "https://github.com/m4s-ai/snoredex-checklist/issues/5#issuecomment-5407399741",
+            },
+            "legacyCompatibility": {
+                "schema": "snoredex-legacy-collector-compatibility",
+                "schemaVersion": "1.0.0",
+                "legacyStableId": "checklistId",
+                "collectorStableId": "itemId",
+                "stateFields": ["itemKind", "progressClass", "finishVerificationStatus"],
+                "collectionProjection": {
+                    "current-known": "need",
+                    "research": "research",
+                },
+                "counts": {
+                    "legacyRows": legacy_projection_rows,
+                    "verifiedPrintings": legacy_counts["verified-printing"],
+                    "finishCandidates": legacy_counts["finish-candidate"],
+                    "researchPlaceholders": legacy_counts["research-placeholder"],
+                    "currentKnown": legacy_counts["current-known"],
+                    "research": legacy_counts["research"],
+                },
             },
         },
     }
@@ -1563,9 +1594,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
 
 def fixture_document() -> dict[str, Any]:
     def fixture_item(iid: str, kind: str, progress: str, loc: str, set_id: str, edition_id: str,
-                     release_id: str, physical_id: str | None, finish: str | None) -> dict[str, Any]:
+                     release_id: str, physical_id: str | None, finish: str | None,
+                     legacy_id: str, finish_status: str) -> dict[str, Any]:
         item = {
-            "itemId": iid, "legacyChecklistIds": [], "active": True, "itemKind": kind,
+            "itemId": iid, "legacyChecklistIds": [legacy_id], "active": True, "itemKind": kind,
             "progressClass": progress, "workId": "fixture-work", "workMappingState": "mapped",
             "setEditionId": edition_id, "localSetId": set_id, "cardReleaseId": release_id,
             "physicalPrintingId": physical_id, "sourcePrintingId": None, "finishUnitId": None,
@@ -1573,7 +1605,7 @@ def fixture_document() -> dict[str, Any]:
             "localCardName": None, "localSetCode": "FX", "localSetName": "Fixture Set",
             "collectorNumber": "1", "collectorNumberDenominator": "10", "collectorNumberSortKey": "000000000001",
             "edition": None, "editionAssignmentStatus": "not-applicable",
-            "finishVerificationStatus": "confirmed" if physical_id else ("marketplace-claimed" if kind == "finish-candidate" else "pending"),
+            "finishVerificationStatus": finish_status,
             "finish": finish, "finishFamily": FINISH_FAMILY.get(finish) if finish else None,
             "finishGroupId": "fixture-group-" + kind, "foilPattern": None, "markings": [],
             "distribution": None, "cardSize": "standard", "errorClass": None,
@@ -1596,16 +1628,20 @@ def fixture_document() -> dict[str, Any]:
     ]
     sets = [
         {"localSetId": f"fixture-set-{n}", "locality": locality, "localSetCode": "FX", "localSetName": "Fixture Set", "productKind": "fixture", "identityState": "identified", "sourceRefs": ["fixture-source"], "sortKey": f"{n}"}
-        for n, locality in ((1, "WEST"), (2, "LATAM"), (3, "WEST"))
+        for n, locality in ((1, "WEST"), (2, "LATAM"), (3, "WEST"), (4, "WEST"))
     ]
     editions = [
         {"setEditionId": f"fixture-edition-{n}", "localSetId": f"fixture-set-{n}", "localizationId": loc, "localSetCode": "FX", "localSetName": "Fixture Set", "identityState": "identified", "releaseDate": "2026-01-01", "releaseDatePrecision": "day", "releaseApproximate": False, "releaseEventId": f"fixture-event-{n}", "sortKey": f"{n}"}
-        for n, loc in ((1, "fixture-loc-west-es"), (2, "fixture-loc-latam-es"), (3, "fixture-loc-west-en"))
+        for n, loc in (
+            (1, "fixture-loc-west-es"), (2, "fixture-loc-latam-es"),
+            (3, "fixture-loc-west-en"), (4, "fixture-loc-west-pt"),
+        )
     ]
     items = [
-        fixture_item("item-00000000-0000-5000-8000-000000000001", "verified-printing", "current-known", "fixture-loc-west-es", "fixture-set-1", "fixture-edition-1", "fixture-release-1", "fixture-physical-1", "holo"),
-        fixture_item("item-00000000-0000-5000-8000-000000000002", "finish-candidate", "research", "fixture-loc-latam-es", "fixture-set-2", "fixture-edition-2", "fixture-release-2", None, "reverse-holo"),
-        fixture_item("item-00000000-0000-5000-8000-000000000003", "research-placeholder", "research", "fixture-loc-west-en", "fixture-set-3", "fixture-edition-3", "fixture-release-3", None, None),
+        fixture_item("item-00000000-0000-5000-8000-000000000001", "verified-printing", "current-known", "fixture-loc-west-es", "fixture-set-1", "fixture-edition-1", "fixture-release-1", "fixture-physical-1", "holo", "fixture-legacy-provider", "confirmed"),
+        fixture_item("item-00000000-0000-5000-8000-000000000002", "finish-candidate", "research", "fixture-loc-latam-es", "fixture-set-2", "fixture-edition-2", "fixture-release-2", None, "reverse-holo", "fixture-legacy-marketplace", "marketplace-claimed"),
+        fixture_item("item-00000000-0000-5000-8000-000000000003", "finish-candidate", "research", "fixture-loc-west-en", "fixture-set-3", "fixture-edition-3", "fixture-release-3", None, "holo", "fixture-legacy-owner", "owner-attested"),
+        fixture_item("item-00000000-0000-5000-8000-000000000004", "research-placeholder", "research", "fixture-loc-west-pt", "fixture-set-4", "fixture-edition-4", "fixture-release-4", None, None, "fixture-legacy-open", "pending"),
     ]
     catalogue = {
         "meta": {
@@ -1624,6 +1660,44 @@ def fixture_document() -> dict[str, Any]:
     return {
         "meta": {"schema": "snoredex-collector-catalogue-fixture", "schemaVersion": "1.0.0"},
         "catalogue": catalogue,
+        "compatibilityCases": [
+            {
+                "caseId": "provider-confirmed-printing",
+                "legacyChecklistId": "fixture-legacy-provider",
+                "collectorItemId": "item-00000000-0000-5000-8000-000000000001",
+                "itemKind": "verified-printing",
+                "progressClass": "current-known",
+                "finishVerificationStatus": "confirmed",
+                "expectedCollectionStatus": "need",
+            },
+            {
+                "caseId": "marketplace-finish-candidate",
+                "legacyChecklistId": "fixture-legacy-marketplace",
+                "collectorItemId": "item-00000000-0000-5000-8000-000000000002",
+                "itemKind": "finish-candidate",
+                "progressClass": "research",
+                "finishVerificationStatus": "marketplace-claimed",
+                "expectedCollectionStatus": "research",
+            },
+            {
+                "caseId": "owner-attested-finish-candidate",
+                "legacyChecklistId": "fixture-legacy-owner",
+                "collectorItemId": "item-00000000-0000-5000-8000-000000000003",
+                "itemKind": "finish-candidate",
+                "progressClass": "research",
+                "finishVerificationStatus": "owner-attested",
+                "expectedCollectionStatus": "research",
+            },
+            {
+                "caseId": "open-research-placeholder",
+                "legacyChecklistId": "fixture-legacy-open",
+                "collectorItemId": "item-00000000-0000-5000-8000-000000000004",
+                "itemKind": "research-placeholder",
+                "progressClass": "research",
+                "finishVerificationStatus": "pending",
+                "expectedCollectionStatus": "research",
+            },
+        ],
         "reconciliationCases": [
             {
                 "caseId": "retained-identity",

@@ -21,10 +21,10 @@ python scripts/database.py --check
 
 | View | Use |
 |---|---|
-| `app_checklist` | One flat row per physical item to collect, including explicit unresolved finish placeholders. |
+| `app_checklist` | One flat row per physical item to collect, including explicit unresolved finish placeholders and the collector compatibility state. |
 | `app_products` | One row per Cardmarket product, with the dated marketplace snapshot kept separate from timeless card fields. |
 | `app_language_availability` | Raw repository verdict, application status, evidence scope, owner decision provenance and provider strength per claimed language. |
-| `collection_tracker_seed` | Stable checklist ids with blank `have`, `wanted` and quantity values. |
+| `collection_tracker_seed` | Stable checklist ids with blank `have`, `wanted` and quantity values; only `current-known` rows seed wanted=1. |
 | `quality_summary` | Counts of warnings and intentionally incomplete fields. |
 
 The useful status split is:
@@ -101,7 +101,7 @@ negative printing claim.
 | `release_rows` | Stable chronological row id × edition. |
 | `finish_units` | Set code × collector number × language. |
 | `printings` | Logical physical printing with technical finish, pattern, stamp, distribution and size kept separate. |
-| `checklist_items` | Stable physical checklist id. A missing `printing_id` is an explicit unresolved placeholder; `release_date` is null when no positive date is established for that physical printing. |
+| `checklist_items` | Stable physical checklist id plus `collector_item_id`, `collector_item_kind` and `collector_progress_class`. A missing `printing_id` is an explicit unresolved placeholder; `release_date` is null when no positive date is established for that physical printing. |
 | `providers` / `printing_sources` | Current source metadata and finish evidence; no historical observations. |
 | `checklist_evidence_refs` | Ordered evidence URLs or prose references. These are deliberately references, not falsely advertised as stable source IDs. |
 | `quality_issues` | One queryable record per warning or intentional null. |
@@ -128,7 +128,9 @@ python scripts/tracker.py summary
 The default personal file is `snoredex-tracker.sqlite` and is gitignored. Its `active_tracker` view
 contains card details beside `have`, `wanted`, `quantity`, `notes` and a derived
 `collection_status` (`have`, `need`, `skip`, or `research`). Unresolved catalogue placeholders
-start as `research`, not as things a collector is told to buy.
+and finish candidates start as `research`, not as things a collector is told to buy. The
+compatibility projection maps every legacy `checklist_id` exactly once to the collector's stable
+`itemId` and its `itemKind`/`progressClass`; it does not alter evidence or owner decisions.
 
 After a catalogue update, refresh it with:
 
@@ -140,7 +142,7 @@ python scripts/tracker.py sync
 inactive. It does not overwrite any ownership state or notes, so applications do not need a custom
 migration for ordinary catalogue refreshes. When a catalogue field becomes nullable, `sync`
 upgrades older tracker files in place before importing the new rows. The current tracker schema is
-`1.1.0` with `PRAGMA user_version=10001`.
+`1.2.0` with `PRAGMA user_version=10002`.
 
 ## Example queries
 
@@ -178,7 +180,7 @@ WHERE application_status = 'not-printed';
 SELECT * FROM quality_summary ORDER BY severity DESC, category;
 ```
 
-The database is UTF-8 SQLite, schema version `1.6.0`, with `PRAGMA user_version=10006`. Every build
+The database is UTF-8 SQLite, schema version `1.7.0`, with `PRAGMA user_version=10007`. Every build
 stores SHA-256 hashes of its canonical, LF-normalized text inputs in `metadata`.
 `scripts/database.py --check` fails if
 any source artifact changes without a database refresh.
