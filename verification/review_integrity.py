@@ -40,6 +40,9 @@ ALLOWED_COMPLETENESS = ("owner-adjudicated", "positive-evidence-only", "pending"
 ALLOWED_EVIDENCE_SCOPES = ("finish-unit", "standard-set")
 ALLOWED_MARKING_ROLES = ("print-identity", "reverse-holo-treatment", "distribution-promo")
 ALLOWED_EDITIONS = ("1st Edition", "Unlimited")
+ALLOWED_EVIDENCE_GRANULARITIES = (
+    "specimen-or-card", "product-or-set", "market-or-era", "sibling-derived", "unclassified"
+)
 
 
 def first(items: list, count: int = 5) -> list:
@@ -74,6 +77,28 @@ def printings_of(unit: dict | None) -> list[dict]:
     return list(unit.get("printings") or []) if unit else []
 
 
+def _check_evidence_fields(suite: Suite, units: list[dict]) -> None:
+    bad_granularity = [
+        unit.get("unitId") for unit in units
+        if unit.get("status") in RESOLVED
+        and unit.get("evidenceGranularity") not in ALLOWED_EVIDENCE_GRANULARITIES
+    ]
+    suite.check(
+        "resolved units have evidenceGranularity",
+        not bad_granularity,
+        ",".join(first(bad_granularity)),
+    )
+    bad_card_list = [
+        unit.get("unitId") for unit in units
+        if not isinstance(unit.get("evidenceIncludesCardList"), bool)
+    ]
+    suite.check(
+        "units have evidenceIncludesCardList",
+        not bad_card_list,
+        ",".join(first(bad_card_list)),
+    )
+
+
 def _check_unit_store(suite: Suite, units: list[dict], cards: list[dict], excluded: list[dict]) -> None:
     """Check unit identity, status shape, evidence, and card coverage."""
     suite.report("units total", len(units), 719)
@@ -106,6 +131,7 @@ def _check_unit_store(suite: Suite, units: list[dict], cards: list[dict], exclud
     suite.check("resolved units have evidence", not bad_evidence,
                 ",".join(first(bad_evidence)))
     suite.check("resolved units have sourceType", not bad_source, ",".join(first(bad_source)))
+    _check_evidence_fields(suite, units)
 
     stale = [u for u in units if u.get("status") in RESOLVED and u.get("manualReason")]
     suite.check("no manualReason on resolved units", not stale,

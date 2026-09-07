@@ -1,11 +1,11 @@
 {
   "meta": {
     "schema": "snoredex-evidence-semantics",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.1.0",
     "generated": "2026-09-03",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
     "status": "active application policy. Raw verdicts remain unchanged",
-    "description": "Every unit classified by the granularity of the evidence it rests on, and, for set-level confirmations, whether the inference from set to card carries. applicationStatus is the conservative consumer projection."
+    "description": "Every unit carries a reviewed evidenceGranularity and, when applicable, an evidenceIncludesCardList capability. For set-level confirmations the report also records whether the inference from set to card carries. applicationStatus is the conservative consumer projection. sourceType is descriptive only."
   },
   "runMembershipRules": {
     "Character Rare": {
