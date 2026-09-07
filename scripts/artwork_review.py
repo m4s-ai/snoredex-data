@@ -296,6 +296,11 @@ def build() -> dict[str, Any]:
             if not physical_entity:
                 continue
             printing = dict(physical_entity["payload"])
+            for key in ("specimenIds", "sourceRecordIds"):
+                if isinstance(printing.get(key), list):
+                    # Provenance identifiers are set-like.  Keep their order stable so an
+                    # equivalent graph serialization does not invalidate saved proposals.
+                    printing[key] = sorted(printing[key], key=digest)
             if isinstance(printing.get("markings"), list):
                 # Marking order is a set-like serialization detail (see printing_semantic_key).
                 # Normalize it before the projection digest so equivalent physical evidence does

@@ -133,6 +133,9 @@ def main() -> int:
                     payload["legacyCounterpartUnitIds"] = list(reversed(payload["legacyCounterpartUnitIds"]))
                 if entity.get("entityType") == "physical-printing" and payload.get("markings"):
                     payload["markings"] = list(reversed(payload["markings"]))
+                for key in ("specimenIds", "sourceRecordIds"):
+                    if payload.get(key):
+                        payload[key] = list(reversed(payload[key]))
         elif path.name == "finish_units.json":
             data["units"] = list(reversed(data["units"]))
             for unit in data["units"]:

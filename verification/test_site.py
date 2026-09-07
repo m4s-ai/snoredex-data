@@ -357,6 +357,26 @@ def main() -> int:
               persisted_stale is not None and persisted_stale.get("action") == "confirm",
               str(persisted_stale))
 
+        # When a later projection update makes the replacement stale too, retain both generations
+        # instead of letting the newly classified value overwrite the older stale export.
+        stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          raw[releaseId].projectionVersion = 'future-projection';
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(raw));
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as generations_download:
+            stale_page.click("#ar-download")
+        generations_payload = json.loads(Path(generations_download.value.path()).read_text(encoding="utf-8"))
+        generations = [item for item in generations_payload.get("staleProposals") or []
+                       if item.get("releaseId") == replacement_id]
+        check("stale artwork generations are retained independently",
+              len(generations) == 2
+              and {item.get("proposal", {}).get("reviewer") for item in generations}
+              == {"Previous reviewer", "Replacement reviewer"},
+              str(generations_payload))
+
         # A proposal from the immediately preceding 1.2 shape (same version, missing typed
         # identity fields) must also be classified stale rather than accepted as current.
         current_projection = stale_page.evaluate(

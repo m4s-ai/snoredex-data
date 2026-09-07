@@ -1233,11 +1233,21 @@
       }
       return "";
     };
+    const addStaleDraft = (releaseId, draft, reason) => {
+      const baseKey = releaseId || "unknown-release";
+      let key = baseKey;
+      let suffix = 2;
+      while (Object.prototype.hasOwnProperty.call(staleDrafts, key)) {
+        key = baseKey + "::" + suffix;
+        suffix += 1;
+      }
+      staleDrafts[key] = { releaseId, draft, reason };
+    };
     const classifyStoredDrafts = (stored) => {
       if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
       Object.entries(stored).forEach(([releaseId, draft]) => {
         const reason = staleReason(draft);
-        if (reason) staleDrafts[releaseId] = { draft, reason };
+        if (reason) addStaleDraft(releaseId, draft, reason);
         else drafts[releaseId] = draft;
       });
     };
@@ -1250,7 +1260,7 @@
         const storedStale = JSON.parse(staleSaved);
         if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
           Object.entries(storedStale).forEach(([releaseId, draft]) => {
-            staleDrafts[releaseId] = { draft, reason: staleReason(draft) || "stale proposal" };
+            addStaleDraft(releaseId, draft, staleReason(draft) || "stale proposal");
           });
         }
       }
@@ -1262,7 +1272,7 @@
       try {
         window.localStorage.setItem(storageKey, JSON.stringify(drafts));
         window.localStorage.setItem(staleStorageKey, JSON.stringify(
-          Object.fromEntries(Object.entries(staleDrafts).map(([releaseId, item]) => [releaseId, item.draft]))));
+          Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key, item.draft]))));
         storageWarning = "";
         return true;
       } catch (error) {
@@ -1699,7 +1709,7 @@
     $("#ar-download").addEventListener("click", () => {
       const proposals = Object.values(drafts);
       const staleProposals = Object.entries(staleDrafts).map(([releaseId, item]) => ({
-        releaseId,
+        releaseId: item.releaseId || releaseId,
         staleReason: item.reason,
         proposal: item.draft,
       }));
