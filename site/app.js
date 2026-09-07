@@ -1359,10 +1359,10 @@
       const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
       const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
       const selectedPhysicalIds = new Set(
-        draft && Array.isArray(draft.affectedPhysicalPrintingIds)
-          ? draft.affectedPhysicalPrintingIds
-          : form && Array.isArray(form.affectedPhysicalPrintingIds)
-            ? form.affectedPhysicalPrintingIds : physicalIds,
+        form && Array.isArray(form.affectedPhysicalPrintingIds)
+          ? form.affectedPhysicalPrintingIds
+          : draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+            ? draft.affectedPhysicalPrintingIds : physicalIds,
       );
       return { physical, images, imageHashes, physicalIds, selectedPhysicalIds };
     };
@@ -1380,11 +1380,18 @@
 
     const memberDetection = (member, draft, form) => {
       const detection = member.detection || {};
-      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection
-        || form && form.detection || {};
-      const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields
-        || form && form.clearDetectionFields || []);
-      const selectedAction = draft ? draft.action : form && form.action || "";
+      const savedProposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
+      const proposed = { ...savedProposed };
+      const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
+      if (form) {
+        Object.assign(proposed, form.detection || {});
+        (form.clearDetectionFields || []).forEach((key) => {
+          delete proposed[key];
+          cleared.add(key);
+        });
+        Object.keys(form.detection || {}).forEach((key) => cleared.delete(key));
+      }
+      const selectedAction = form ? form.action : draft ? draft.action : "";
       return { detection, proposed, cleared, selectedAction,
         existing: memberExistingFields(member, detection) };
     };
@@ -1410,9 +1417,9 @@
       const imageReviewable = hasVerifiedImages(member);
       const identity = memberIdentityLabels(member, state.detection);
       const status = memberStatusLabels(draft);
-      const target = draft && draft.proposedAfter
-        ? draft.proposedAfter.targetGroupId || ""
-        : form && form.targetGroupId || "";
+      const target = form
+        ? form.targetGroupId
+        : draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
       return {
         member,
         detection: state.detection,
@@ -1421,7 +1428,7 @@
         identity,
         status,
         target,
-        note: draft && draft.note || form && form.note || "",
+        note: form ? form.note : draft && draft.note || "",
         actionOptions: actionOptionsHTML(state.selectedAction, imageReviewable),
         structuredFields: structuredFieldsHTML(
           state.selectedAction, state.existing, state.proposed, state.cleared,

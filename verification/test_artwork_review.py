@@ -116,6 +116,8 @@ def main() -> int:
             data["units"] = list(reversed(data["units"]))
             for unit in data["units"]:
                 unit["printings"] = list(reversed(unit.get("printings") or []))
+                for printing in unit["printings"]:
+                    printing["sources"] = list(reversed(printing.get("sources") or []))
         elif path.name == "units.json":
             data = list(reversed(data))
         elif path.name == "snorlax_cards.json":

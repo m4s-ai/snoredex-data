@@ -232,10 +232,31 @@ def main() -> int:
 
         unsaved_card = page.locator("#ar-groups .artwork-member").nth(1)
         unsaved_id = unsaved_card.get_attribute("data-release-id")
+        first_review_id = first_review_member.get_attribute("data-release-id")
+        first_review_member.locator(".ar-action").select_option("unclear")
+        first_review_member.locator(".ar-note").fill("Unsaved revision must survive filtering.")
+        page.fill("#ar-search", unsaved_id)
+        page.wait_for_timeout(80)
+        page.fill("#ar-search", "")
+        page.wait_for_timeout(80)
+        check("saved artwork revisions override drafts after filtering",
+              first_review_member.locator(".ar-action").input_value() == "unclear"
+              and first_review_member.locator(".ar-note").input_value() ==
+              "Unsaved revision must survive filtering.",
+              f"action={first_review_member.locator('.ar-action').input_value()!r} "
+              f"note={first_review_member.locator('.ar-note').input_value()!r}")
         unsaved_card.locator(".ar-note").fill("Keep this unsaved draft.")
         first_review_member.locator(".ar-note").fill("Saved without losing the sibling draft.")
         first_review_member.locator(".ar-save").click()
         page.wait_for_timeout(80)
+        revised_proposal = page.evaluate("""(releaseId) => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved[releaseId] || null;
+        }""", first_review_id)
+        check("saved artwork revision persists its latest action",
+              revised_proposal is not None and revised_proposal["action"] == "unclear",
+              str(revised_proposal))
         check("saving one artwork card preserves an unsaved sibling input",
               unsaved_card.locator(".ar-note").input_value() == "Keep this unsaved draft.",
               unsaved_card.locator(".ar-note").input_value())

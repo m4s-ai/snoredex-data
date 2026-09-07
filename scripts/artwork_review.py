@@ -300,15 +300,19 @@ def build() -> dict[str, Any]:
             if finish_source:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
-                printing["sources"] = sorted(
+                normalized_sources = sorted(
                     source_printing.get("sources") or [],
                     key=lambda source: digest(source),
                 )
-                for source_index, source in enumerate(printing["sources"]):
+                printing["sources"] = normalized_sources
+                normalized_source_printing = dict(source_printing)
+                normalized_source_printing["sources"] = normalized_sources
+                for source_index, source in enumerate(normalized_sources):
                     source_tag = f"{source_index}:{digest(source)[:16]}"
                     observations.append(source_observation(
                         "finish", f"{printing.get('sourcePrintingId') or physical_id}:{source_tag}",
-                        {"finishUnitId": finish_unit.get("finishUnitId"), "printing": source_printing, "source": source},
+                        {"finishUnitId": finish_unit.get("finishUnitId"),
+                         "printing": normalized_source_printing, "source": source},
                         url=source.get("url"), evidence=source.get("evidence"), provider=source.get("sourceType"),
                     ))
             physical.append(printing)
