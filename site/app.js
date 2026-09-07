@@ -1262,30 +1262,36 @@
         else drafts[releaseId] = draft;
       });
     };
-
-    try {
-      const saved = window.localStorage.getItem(storageKey);
-      if (saved) classifyStoredDrafts(JSON.parse(saved));
-      const staleSaved = window.localStorage.getItem(staleStorageKey);
-      if (staleSaved) {
-        const storedStale = JSON.parse(staleSaved);
-        if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
-          Object.entries(storedStale).forEach(([storageKey, stored]) => {
-            const { releaseId, draft } = decodeStaleDraft(storageKey, stored);
-            addStaleDraft(releaseId, draft, staleReason(draft) || "stale proposal");
-          });
-        }
+    const storageLoadFailed = { current: false, stale: false };
+    const loadNamespace = (key, namespace, callback) => {
+      try {
+        const saved = window.localStorage.getItem(key);
+        if (saved) callback(JSON.parse(saved));
+      } catch (error) {
+        storageLoadFailed[namespace] = true;
+        storageWarning = "Browser storage unavailable; download proposals before leaving.";
       }
-    } catch (error) {
-      storageWarning = "Browser storage unavailable; download proposals before leaving.";
-    }
+    };
+    loadNamespace(storageKey, "current", classifyStoredDrafts);
+    loadNamespace(staleStorageKey, "stale", (storedStale) => {
+      if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
+        Object.entries(storedStale).forEach(([storageKey, stored]) => {
+          const { releaseId, draft } = decodeStaleDraft(storageKey, stored);
+          addStaleDraft(releaseId, draft, staleReason(draft) || "stale proposal");
+        });
+      }
+    });
 
     const persist = () => {
       try {
-        window.localStorage.setItem(storageKey, JSON.stringify(drafts));
-        window.localStorage.setItem(staleStorageKey, JSON.stringify(
-          Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
-            key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]))));
+        if (!storageLoadFailed.current) {
+          window.localStorage.setItem(storageKey, JSON.stringify(drafts));
+        }
+        if (!storageLoadFailed.stale) {
+          window.localStorage.setItem(staleStorageKey, JSON.stringify(
+            Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
+              key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]))));
+        }
         storageWarning = "";
         return true;
       } catch (error) {

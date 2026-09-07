@@ -326,6 +326,41 @@ def main() -> int:
                       for item in stale_payload["staleProposals"]),
               str(stale_payload))
 
+        # A malformed primary namespace must not prevent loading or later overwriting a valid
+        # stale namespace.
+        namespace_context = browser.new_context()
+        namespace_page = namespace_context.new_page()
+        namespace_page.goto(url)
+        namespace_page.evaluate("""() => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', '{malformed');
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            'CARD:VALID-STALE': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Valid stale reviewer',
+              action: 'confirm'
+            }
+          }));
+        }""")
+        namespace_page.reload()
+        namespace_page.wait_for_selector("#ar-groups .artwork-member")
+        namespace_page.fill("#ar-reviewer", "Namespace reviewer")
+        namespace_card = namespace_page.locator("#ar-groups .artwork-member").first
+        namespace_card.locator(".ar-action").select_option("unclear")
+        namespace_card.locator(".ar-save").click()
+        namespace_page.wait_for_timeout(80)
+        preserved_namespace = namespace_page.evaluate("""() => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1-stale');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved['CARD:VALID-STALE'] || null;
+        }""")
+        check("malformed current storage does not overwrite valid stale storage",
+              preserved_namespace is not None and preserved_namespace.get("reviewer") == "Valid stale reviewer",
+              str(preserved_namespace))
+        namespace_page.close()
+        namespace_context.close()
+
         # Replacing a stale proposal for a real release must keep the old value in the separate
         # stale namespace so a reload cannot silently discard the historical export candidate.
         replacement_id = stale_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")

@@ -121,6 +121,14 @@ def main() -> int:
     if timestamp_projection["projectionVersion"] != before_version:
         fail("generated timestamp changes the semantic projectionVersion")
 
+    # Public explanatory copy and source-path metadata do not change review semantics.
+    copy_projection = deepcopy(projection)
+    copy_projection["appearanceIdentity"] = "updated explanatory copy"
+    copy_projection["reviewBoundary"] = "updated review guidance"
+    copy_projection["identitySource"] = "verification/renamed-source.json"
+    if artwork_review.digest(artwork_review.semantic_projection_payload(copy_projection)) != before_version:
+        fail("explanatory projection metadata changes the semantic projectionVersion")
+
     # A pure permutation of set-like input collections is presentation-neutral.
     def load_permuted(path: Path):
         data = original_load(path)

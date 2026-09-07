@@ -94,6 +94,14 @@ def normalize_set_lists(record: dict[str, Any], keys: tuple[str, ...]) -> dict[s
     return normalized
 
 
+def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
+    """Return only the versioned review semantics, excluding public explanatory metadata."""
+    return {
+        key: projection[key]
+        for key in ("schemaVersion", "proposalSchemaVersion", "groups")
+    }
+
+
 def build_groups(releases_projection: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
     """Group releases by automatic image anchor while keeping unresolved releases isolated."""
     groups: dict[str, dict[str, Any]] = {}
@@ -403,16 +411,13 @@ def build() -> dict[str, Any]:
         },
         "groups": sorted(groups.values(), key=lambda group: ({"image-group": 0, "unmapped-release": 1}[group["groupKind"]], group["label"], group["groupId"])),
     }
-    # Bind the version to the semantic projection itself.  Excluding only this field avoids the
-    # circular hash while covering graph entities/edges, release display data, observations and
-    # pinned image bytes after all order-independent normalization above.
+    # Bind the version to the review semantics after all order-independent normalization above.
+    # Public explanatory copy and source paths stay outside this digest so editorial changes do
+    # not invalidate locally saved proposals.
     # The generated timestamp describes when the snapshot was built, not what a reviewer can
     # inspect.  Keep it in the public projection for provenance, but exclude it from the semantic
     # version so a routine refresh does not invalidate every saved proposal.
-    projection["projectionVersion"] = digest({
-        key: value for key, value in projection.items()
-        if key not in {"projectionVersion", "generated"}
-    })
+    projection["projectionVersion"] = digest(semantic_projection_payload(projection))
     return projection
 
 
