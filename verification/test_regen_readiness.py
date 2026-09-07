@@ -9,12 +9,17 @@ start that suite a second time.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import pathlib
 import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REGEN = pathlib.Path("scripts/regen.py")
+sys.path.insert(0, str(ROOT / "scripts"))
+import regen as regen_module  # noqa: E402
+
 # Two small deterministic artifacts make the aggregation guarantee observable without
 # touching SQLite or depending on a network response.
 TARGETS = [
@@ -37,7 +42,69 @@ def run(cmd: list[str]) -> subprocess.CompletedProcess:
                           stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
+def run_aggregation_regressions() -> None:
+    """Child failures, including P6, must share one non-green exit path."""
+    original_regen = regen_module.REGEN
+    original_check = regen_module.CHECK
+    original_tests = regen_module.TESTS
+    original_run = regen_module.subprocess.run
+    original_argv = sys.argv
+
+    def invoke(fake_run: object) -> tuple[int, str, str]:
+        regen_module.subprocess.run = fake_run  # type: ignore[assignment]
+        stdout, stderr = io.StringIO(), io.StringIO()
+        try:
+            with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
+                code = regen_module.main()
+        finally:
+            regen_module.subprocess.run = original_run
+        return code, stdout.getvalue(), stderr.getvalue()
+
+    try:
+        sys.argv = [str(REGEN)]
+        regen_module.REGEN = []
+        regen_module.CHECK = []
+        regen_module.TESTS = [["verification/review_findings.py"]]
+
+        def p6_failure(cmd: list[str], *args: object, **kwargs: object) -> subprocess.CompletedProcess:
+            if cmd[-1] == "verification/review_findings.py":
+                return subprocess.CompletedProcess(cmd, 1, "[FAIL] P6 simulated history failure\n")
+            return original_run(cmd, *args, **kwargs)
+
+        code, stdout, stderr = invoke(p6_failure)
+        assert code == 1
+        assert "[FAIL] P6 simulated history failure" in stdout
+        assert "FAILED verification/review_findings.py" in stderr
+        assert "regen.py: OK" not in stdout
+        assert "CI gate is green" not in stderr
+
+        regen_module.REGEN = [["missing-step"]]
+        regen_module.TESTS = []
+
+        def missing_step(cmd: list[str], *args: object, **kwargs: object) -> subprocess.CompletedProcess:
+            if cmd[-1] == "missing-step":
+                return subprocess.CompletedProcess(cmd, 1)
+            return original_run(cmd, *args, **kwargs)
+
+        code, _, stderr = invoke(missing_step)
+        assert code == 1
+        assert "FAILED regenerating missing-step" in stderr
+
+        regen_module.REGEN = []
+        code, stdout, stderr = invoke(original_run)
+        assert code == 0
+        assert "regen.py: OK. Generated artifacts and core regressions are current." in stdout
+        assert not stderr
+    finally:
+        regen_module.REGEN = original_regen
+        regen_module.CHECK = original_check
+        regen_module.TESTS = original_tests
+        regen_module.subprocess.run = original_run
+        sys.argv = original_argv
+
+
 def main() -> int:
+    run_aggregation_regressions()
     for path, marker in INPUT_DATE_MARKERS.items():
         source = path.read_text(encoding="utf-8")
         if "date.today()" in source or marker not in source:
