@@ -292,15 +292,20 @@ def main() -> int:
         # current reviewed proposals after the projection/schema bump.
         stale_context = browser.new_context()
         stale_context.add_init_script("""
-          (() => localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
-            'CARD:STALE-FIXTURE': {
-              schema: 'snoredex-artwork-review-proposal',
-              schemaVersion: '1.1.0',
-              projectionVersion: 'old-projection',
-              reviewer: 'Legacy reviewer',
-              action: 'confirm'
-            }
-          })))();
+          (() => {
+            if (localStorage.getItem('snoredex-stale-fixture-ready')) return;
+            localStorage.setItem('snoredex-stale-fixture-ready', '1');
+            localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+              'CARD:STALE-FIXTURE': {
+                schema: 'snoredex-artwork-review-proposal',
+                schemaVersion: '1.1.0',
+                projectionVersion: 'old-projection',
+                reviewer: 'Legacy reviewer',
+                action: 'confirm'
+              },
+              'CARD:INVALID-FIXTURE': null
+            }));
+          })();
         """)
         stale_page = stale_context.new_page()
         stale_page.goto(url)
@@ -314,9 +319,43 @@ def main() -> int:
         stale_payload = json.loads(Path(stale_download.value.path()).read_text(encoding="utf-8"))
         check("stale artwork drafts remain available in exports",
               stale_payload.get("proposals") == []
-              and len(stale_payload.get("staleProposals") or []) == 1
-              and stale_payload["staleProposals"][0]["staleReason"] == "proposal schema version changed",
+              and len(stale_payload.get("staleProposals") or []) == 2
+              and any(item["staleReason"] == "proposal schema version changed"
+                      for item in stale_payload["staleProposals"])
+              and any(item["staleReason"] == "invalid proposal"
+                      for item in stale_payload["staleProposals"]),
               str(stale_payload))
+
+        # Replacing a stale proposal for a real release must keep the old value in the separate
+        # stale namespace so a reload cannot silently discard the historical export candidate.
+        replacement_id = stale_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        stale_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Previous reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_page.fill("#ar-reviewer", "Replacement reviewer")
+        replacement_card = stale_page.locator("#ar-groups .artwork-member").first
+        replacement_card.locator(".ar-action").select_option("unclear")
+        replacement_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        persisted_stale = stale_page.evaluate("""(releaseId) => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1-stale');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved[releaseId] || null;
+        }""", replacement_id)
+        check("replacement proposals preserve stale drafts in a separate namespace",
+              persisted_stale is not None and persisted_stale.get("action") == "confirm",
+              str(persisted_stale))
         stale_page.close()
         stale_context.close()
 

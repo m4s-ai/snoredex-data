@@ -1213,6 +1213,7 @@
     const proposalFilter = $("#ar-proposal-filter");
     const reviewer = $("#ar-reviewer");
     const storageKey = "snoredex-artwork-review-proposals-v1";
+    const staleStorageKey = storageKey + "-stale";
     let drafts = {};
     let staleDrafts = {};
     let storageWarning = "";
@@ -1223,6 +1224,13 @@
       if (draft.schema !== ARTWORK_REVIEW.proposalSchema) return "proposal schema changed";
       if (draft.schemaVersion !== ARTWORK_REVIEW.proposalSchemaVersion) return "proposal schema version changed";
       if (draft.projectionVersion !== ARTWORK_REVIEW.projectionVersion) return "projection version changed";
+      if (!Object.prototype.hasOwnProperty.call(draft, "imageGroupId")
+          || !Object.prototype.hasOwnProperty.call(draft, "reviewedAppearanceId")
+          || !draft.before
+          || !Object.prototype.hasOwnProperty.call(draft.before, "imageGroupId")
+          || !Object.prototype.hasOwnProperty.call(draft.before, "reviewedAppearanceId")) {
+        return "typed artwork identity fields missing";
+      }
       return "";
     };
     const classifyStoredDrafts = (stored) => {
@@ -1237,17 +1245,24 @@
     try {
       const saved = window.localStorage.getItem(storageKey);
       if (saved) classifyStoredDrafts(JSON.parse(saved));
+      const staleSaved = window.localStorage.getItem(staleStorageKey);
+      if (staleSaved) {
+        const storedStale = JSON.parse(staleSaved);
+        if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
+          Object.entries(storedStale).forEach(([releaseId, draft]) => {
+            staleDrafts[releaseId] = { draft, reason: staleReason(draft) || "stale proposal" };
+          });
+        }
+      }
     } catch (error) {
       storageWarning = "Browser storage unavailable; download proposals before leaving.";
     }
 
     const persist = () => {
       try {
-        const stored = Object.fromEntries([
-          ...Object.entries(staleDrafts).map(([releaseId, item]) => [releaseId, item.draft]),
-          ...Object.entries(drafts),
-        ]);
-        window.localStorage.setItem(storageKey, JSON.stringify(stored));
+        window.localStorage.setItem(storageKey, JSON.stringify(drafts));
+        window.localStorage.setItem(staleStorageKey, JSON.stringify(
+          Object.fromEntries(Object.entries(staleDrafts).map(([releaseId, item]) => [releaseId, item.draft]))));
         storageWarning = "";
         return true;
       } catch (error) {
@@ -1697,7 +1712,8 @@
         schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
         projectionVersion: ARTWORK_REVIEW.projectionVersion,
         reviewer: reviewer.value.trim() || (proposals[0] && proposals[0].reviewer) ||
-          (staleProposals[0] && staleProposals[0].proposal.reviewer) || "",
+          (staleProposals[0] && staleProposals[0].proposal
+            && staleProposals[0].proposal.reviewer) || "",
         createdAt: new Date().toISOString(),
         proposals,
         staleProposals,

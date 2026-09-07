@@ -296,6 +296,11 @@ def build() -> dict[str, Any]:
             if not physical_entity:
                 continue
             printing = dict(physical_entity["payload"])
+            if isinstance(printing.get("markings"), list):
+                # Marking order is a set-like serialization detail (see printing_semantic_key).
+                # Normalize it before the projection digest so equivalent physical evidence does
+                # not invalidate saved proposals merely because a source reordered the markings.
+                printing["markings"] = sorted(printing["markings"], key=digest)
             finish_source = finish_by_printing.get(printing.get("sourcePrintingId") or printing.get("physicalPrintingId"))
             if finish_source:
                 finish_unit = finish_source["finishUnit"]
