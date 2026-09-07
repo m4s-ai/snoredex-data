@@ -1243,6 +1243,14 @@
       }
       staleDrafts[key] = { releaseId, draft, reason };
     };
+    const decodeStaleDraft = (storageKey, stored) => {
+      if (stored && typeof stored === "object" && !Array.isArray(stored)
+          && Object.prototype.hasOwnProperty.call(stored, "draft")
+          && Object.prototype.hasOwnProperty.call(stored, "releaseId")) {
+        return { releaseId: stored.releaseId || storageKey, draft: stored.draft };
+      }
+      return { releaseId: storageKey, draft: stored };
+    };
     const classifyStoredDrafts = (stored) => {
       if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
       Object.entries(stored).forEach(([releaseId, draft]) => {
@@ -1259,7 +1267,8 @@
       if (staleSaved) {
         const storedStale = JSON.parse(staleSaved);
         if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
-          Object.entries(storedStale).forEach(([releaseId, draft]) => {
+          Object.entries(storedStale).forEach(([storageKey, stored]) => {
+            const { releaseId, draft } = decodeStaleDraft(storageKey, stored);
             addStaleDraft(releaseId, draft, staleReason(draft) || "stale proposal");
           });
         }
@@ -1272,7 +1281,8 @@
       try {
         window.localStorage.setItem(storageKey, JSON.stringify(drafts));
         window.localStorage.setItem(staleStorageKey, JSON.stringify(
-          Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key, item.draft]))));
+          Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
+            key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]))));
         storageWarning = "";
         return true;
       } catch (error) {

@@ -376,6 +376,27 @@ def main() -> int:
               and {item.get("proposal", {}).get("reviewer") for item in generations}
               == {"Previous reviewer", "Replacement reviewer"},
               str(generations_payload))
+        # Persist the colliding stale keys, reload, and ensure the envelope restores the original
+        # release id instead of exposing the synthetic storage suffix to exports.
+        persistence_card = stale_page.locator("#ar-groups .artwork-member").nth(1)
+        persistence_id = persistence_card.get_attribute("data-release-id")
+        stale_page.fill("#ar-reviewer", "Persistence reviewer")
+        persistence_card.locator(".ar-action").select_option("unclear")
+        persistence_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as persisted_generations_download:
+            stale_page.click("#ar-download")
+        persisted_generations_payload = json.loads(
+            Path(persisted_generations_download.value.path()).read_text(encoding="utf-8"))
+        persisted_generations = [item for item in persisted_generations_payload.get("staleProposals") or []
+                                 if item.get("releaseId") == replacement_id]
+        check("persisted stale generations restore their release id",
+              len(persisted_generations) == 2
+              and persistence_id != replacement_id
+              and all(item.get("releaseId") == replacement_id for item in persisted_generations),
+              str(persisted_generations_payload))
 
         # A proposal from the immediately preceding 1.2 shape (same version, missing typed
         # identity fields) must also be classified stale rather than accepted as current.
