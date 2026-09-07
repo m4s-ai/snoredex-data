@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/m4s-ai/snoredex-data/blob/main/verification/evidence_unit_schema.json",
+  "title": "Snoredex language-unit evidence",
+  "description": "Schema for the canonical language-unit state store. sourceType is descriptive; evidenceGranularity is the reviewed scope used by projections.",
+  "type": "object",
+  "required": [
+    "unitId",
+    "cardName",
+    "setCode",
+    "number",
+    "variant",
+    "language",
+    "status",
+    "sourceType",
+    "evidenceGranularity",
+    "evidenceIncludesCardList",
+    "evidence",
+    "checkedAt"
+  ],
+  "properties": {
+    "unitId": {"type": "string", "pattern": "^U[0-9]{4}$"},
+    "cardName": {"type": "string"},
+    "setCode": {"type": "string"},
+    "number": {"type": ["string", "null"]},
+    "variant": {"type": "string"},
+    "language": {"type": "string"},
+    "status": {
+      "type": "string",
+      "enum": ["confirmed", "contradicted", "needs-manual-review", "pending"]
+    },
+    "sourceType": {"type": ["string", "null"]},
+    "evidenceGranularity": {
+      "type": "string",
+      "enum": [
+        "specimen-or-card",
+        "product-or-set",
+        "market-or-era",
+        "sibling-derived",
+        "unclassified"
+      ]
+    },
+    "evidenceIncludesCardList": {"type": "boolean"},
+    "evidence": {"type": ["string", "null"]},
+    "checkedAt": {"type": ["string", "null"]}
+  },
+  "additionalProperties": true
+}

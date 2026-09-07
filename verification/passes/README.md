@@ -19,3 +19,8 @@ Completed passes may move to `verification/archive/passes/` only after their ass
 by a maintained fixture or invariant. The archive is hash-pinned and never edited; no evidence is
 deleted during cleanup. Human classification remains mandatory: omitted finish, edition, marking,
 or language fields stay omitted, and a missing edition stamp is never evidence of Unlimited.
+
+The #351 migration records the reviewed `evidenceGranularity` and
+`evidenceIncludesCardList` fields on the frozen language-unit store. It is a data-model migration,
+not a recurring source pass; the maintained projection reads those fields and leaves `sourceType`
+as descriptive text.

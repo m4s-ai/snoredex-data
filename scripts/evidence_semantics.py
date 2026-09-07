@@ -20,10 +20,26 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "verification" / "evidence_semantics.json"
-SCHEMA_VERSION = "1.0.0"
+SCHEMA_VERSION = "1.1.0"
+
+EVIDENCE_GRANULARITIES = frozenset({
+    "specimen-or-card",
+    "product-or-set",
+    "market-or-era",
+    "sibling-derived",
+    "unclassified",
+})
 
 MARKET_ERA = re.compile(r"Pok[eé]mon in |market-history", re.IGNORECASE)
-SIBLING = re.compile(r"units of the same product", re.IGNORECASE)
+SIBLING = re.compile(
+    r"units of the same product|sibling(?:-derived)?(?:\s+(?:card\s+)?(?:page|record))?|"
+    r"set release schedule", re.IGNORECASE)
+NEGATED_EVIDENCE = re.compile(
+    r"\b(?:no|not|without|unavailable|missing|absence of)\s+(?:a\s+|the\s+)?"
+    r"(?:specimen|card|listing|record|page)\b|"
+    r"\b(?:specimen|card|listing|record|page)\s+(?:unavailable|missing|not available)\b",
+    re.IGNORECASE,
+)
 DIRECT_OWNER_ATTESTATION = re.compile(r"^Owner attestation", re.IGNORECASE)
 CARD_LEVEL = re.compile(
     r"card database|card catalogue detail|TCGdex|photographed|specimen|set list|card article|card page|"
@@ -155,19 +171,43 @@ def read_json(path: Path) -> Any:
         return json.load(handle)
 
 
-def granularity(unit: dict[str, Any]) -> str:
+def legacy_granularity(unit: dict[str, Any]) -> str:
+    """Classify legacy rows once while they are migrated to the structured field.
+
+    This function is deliberately not used by ``granularity`` for canonical rows. It exists only
+    for the one-time migration pass and for compatibility fixtures. Free text must not be able to
+    change the status of a row after ``evidenceGranularity`` has been recorded.
+    """
     source_type = unit.get("sourceType") or ""
     if MARKET_ERA.search(source_type):
         return "market-or-era"
-    if unit.get("providerId") == "owner-attestation" and DIRECT_OWNER_ATTESTATION.match(source_type):
-        return "specimen-or-card"
     if SIBLING.search(source_type):
         return "sibling-derived"
+    if NEGATED_EVIDENCE.search(source_type):
+        return "unclassified"
+    if unit.get("providerId") == "owner-attestation" and DIRECT_OWNER_ATTESTATION.match(source_type):
+        return "specimen-or-card"
     if CARD_LEVEL.search(source_type):
         return "specimen-or-card"
     if SET_LEVEL.search(source_type):
         return "product-or-set"
     return "unclassified"
+
+
+def granularity(unit: dict[str, Any]) -> str:
+    """Read the structured evidence scope; source descriptions are display-only.
+
+    Rows from before #351 may not have the field yet. They remain explicitly unclassified until
+    the migration pass records their reviewed legacy classification, so a new or misspelled value
+    cannot silently promote a confirmation.
+    """
+    value = unit.get("evidenceGranularity")
+    return value if value in EVIDENCE_GRANULARITIES else "unclassified"
+
+
+def carries_closed_card_list(unit: dict[str, Any]) -> bool:
+    """Return the reviewed card-list capability, never a source-description word match."""
+    return unit.get("evidenceIncludesCardList") is True
 
 
 def printed_set_sizes(set_sources: dict) -> dict[str, int]:
@@ -221,7 +261,7 @@ def build(units: list[dict], cards: list[dict],
                 + ("inside the numbered run" if inside_run else "numbered above the printed size")
             )
 
-        closed_list = bool(CLOSED_LIST_SOURCE.search(unit.get("sourceType") or ""))
+        closed_list = carries_closed_card_list(unit)
         inference = None
         if unit["status"] == "confirmed" and grain == "product-or-set":
             if inside_run or closed_list:
@@ -280,9 +320,10 @@ def build(units: list[dict], cards: list[dict],
             "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
             "status": "active application policy. Raw verdicts remain unchanged",
             "description": (
-                "Every unit classified by the granularity of the evidence it rests on, and, for "
-                "set-level confirmations, whether the inference from set to card carries. "
-                "applicationStatus is the conservative consumer projection."
+                "Every unit carries a reviewed evidenceGranularity and, when applicable, an "
+                "evidenceIncludesCardList capability. For set-level confirmations the report "
+                "also records whether the inference from set to card carries. applicationStatus "
+                "is the conservative consumer projection. sourceType is descriptive only."
             ),
         },
         "runMembershipRules": {

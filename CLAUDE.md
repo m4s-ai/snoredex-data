@@ -136,7 +136,11 @@ These are the things that have actually caused mistakes. Full treatment is in
 
 - **Unit** = `(setCode, number, variant, language)`, status
   `confirmed | contradicted | needs-manual-review | pending`. Every resolved unit must carry a
-  non-trivial `evidence` string and a `sourceType`; `review_integrity.py` enforces it.
+  non-trivial `evidence` string, a descriptive `sourceType`, and the structured
+  `evidenceGranularity`/`evidenceIncludesCardList` fields from
+  [`verification/evidence_unit_schema.json`](verification/evidence_unit_schema.json);
+  `review_integrity.py` enforces the structured values. `sourceType` is display/search text and
+  cannot change an application status.
 - **Finish unit** = `(setCode, number, language)` — deliberately **not** keyed by V-token, because
   TCGdex's positive `normal`/`holo`/`reverse` flags apply at that level. Language truth lives in
   `units.json`, finish truth in `finish_units.json`; the two backlogs are separate. **Never infer

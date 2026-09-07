@@ -5,9 +5,13 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+
+from scripts import evidence_semantics  # noqa: E402
 
 
 def load(relative: str):
@@ -22,9 +26,81 @@ def key(row: dict, variant_field: str) -> tuple[str, str, str]:
     )
 
 
+def check_structured_evidence_boundary(units: list[dict], semantics_doc: dict) -> None:
+    """Ensure source descriptions cannot promote a row after #351's migration."""
+    schema = load("verification/evidence_unit_schema.json")
+    required = set(schema["required"])
+    allowed = set(schema["properties"]["evidenceGranularity"]["enum"])
+    for unit in units:
+        missing = required - unit.keys()
+        if missing:
+            raise AssertionError(f"{unit['unitId']} misses schema fields: {sorted(missing)}")
+        if unit["evidenceGranularity"] not in allowed:
+            raise AssertionError(
+                f"{unit['unitId']} has invalid evidenceGranularity: {unit['evidenceGranularity']}"
+            )
+        if not isinstance(unit["evidenceIncludesCardList"], bool):
+            raise AssertionError(f"{unit['unitId']} has a non-boolean card-list capability")
+
+    base = next(unit for unit in units if unit["unitId"] == "U0169")
+    if base["evidenceGranularity"] != "product-or-set":
+        raise AssertionError("U0169 no longer carries its reviewed set-level classification")
+    legacy = dict(base)
+    legacy.pop("evidenceGranularity")
+    legacy.pop("evidenceIncludesCardList")
+    if evidence_semantics.legacy_granularity(legacy) != "product-or-set":
+        raise AssertionError("legacy migration no longer recognizes U0169's set evidence")
+    if evidence_semantics.legacy_granularity({
+        **legacy,
+        "sourceType": "editorial note; specimen unavailable",
+    }) != "unclassified":
+        raise AssertionError("negative specimen text was treated as positive evidence")
+    if evidence_semantics.legacy_granularity({
+        **legacy,
+        "sourceType": "sibling card page",
+    }) != "sibling-derived":
+        raise AssertionError("sibling card text was treated as direct card evidence")
+
+    cards = load("snorlax_cards.json")["cards"]
+    adjudications = load("verification/owner_adjudications.json")
+    set_sources = load("verification/set_catalogue_sources.json")
+    baseline = evidence_semantics.build(units, cards, adjudications, set_sources)
+    mutated_units = [dict(unit) for unit in units]
+    mutated = next(unit for unit in mutated_units if unit["unitId"] == "U0169")
+    mutated["sourceType"] += "; specimen unavailable; sibling card page; card list row"
+    changed = evidence_semantics.build(mutated_units, cards, adjudications, set_sources)
+    baseline_row = next(row for row in baseline["units"] if row["unitId"] == "U0169")
+    changed_row = next(row for row in changed["units"] if row["unitId"] == "U0169")
+    if changed_row != baseline_row:
+        raise AssertionError("sourceType text changed U0169's semantic projection")
+    published_row = next(row for row in semantics_doc["units"] if row["unitId"] == "U0169")
+    if changed_row["applicationStatus"] != published_row["applicationStatus"]:
+        raise AssertionError("U0169's application status changed after a text-only correction")
+
+    positive = {
+        **legacy,
+        "sourceType": "editorial note",
+        "evidenceGranularity": "specimen-or-card",
+        "evidenceIncludesCardList": False,
+    }
+    if evidence_semantics.granularity(positive) != "specimen-or-card":
+        raise AssertionError("structured positive card evidence was not accepted")
+    within, _ = evidence_semantics.transition_support("specimen-or-card", "confirmed", None)
+    if evidence_semantics.application_status("confirmed", within, None) != "exists":
+        raise AssertionError("structured positive card evidence did not project to exists")
+
+    unknown = {**positive, "evidenceGranularity": "future-evidence-kind"}
+    if evidence_semantics.granularity(unknown) != "unclassified":
+        raise AssertionError("unknown structured evidence was silently accepted")
+    within, _ = evidence_semantics.transition_support("unclassified", "confirmed", None)
+    if evidence_semantics.application_status("confirmed", within, None) != "needs-evidence":
+        raise AssertionError("unknown structured evidence was promoted to exists")
+
+
 def main() -> int:
     units = load("verification/units.json")
     semantics_doc = load("verification/evidence_semantics.json")
+    check_structured_evidence_boundary(units, semantics_doc)
     semantics = {row["unitId"]: row for row in semantics_doc["units"]}
     if set(semantics) != {unit["unitId"] for unit in units}:
         raise AssertionError("semantic application policy does not cover every raw unit")

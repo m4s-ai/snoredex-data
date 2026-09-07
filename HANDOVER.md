@@ -150,7 +150,10 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               from what is committed, so "regenerates cleanly" is proven per PR.
 verification/
   units.json                  THE STATE STORE. One row per card×language×variant with status,
-                              sourceUrl, sourceType, evidence, checkedAt.
+                              sourceUrl, descriptive sourceType, structured evidenceGranularity,
+                              evidenceIncludesCardList, evidence, checkedAt. The schema is
+                              verification/evidence_unit_schema.json; sourceType is never used to
+                              derive an application status.
   owner_adjudications.json    COLLECTION-OWNER DECISIONS. Explicit final application decisions
                               after reviewing all cited claims; never rewrites units.json or
                               attributes absence to a single provider.
