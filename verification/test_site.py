@@ -227,6 +227,10 @@ def main() -> int:
               saved_proposal is not None
               and saved_proposal["action"] == "confirm"
               and saved_proposal["projectionVersion"] == artwork_projection["projectionVersion"]
+              and "imageGroupId" in saved_proposal
+              and "reviewedAppearanceId" in saved_proposal
+              and "imageGroupId" in saved_proposal["before"]
+              and "reviewedAppearanceId" in saved_proposal["before"]
               and saved_proposal["sourceContentHashes"],
               str(saved_proposal))
 

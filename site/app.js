@@ -1599,6 +1599,8 @@
         projectionVersion: ARTWORK_REVIEW.projectionVersion,
         action,
         groupId: group.groupId,
+        imageGroupId: member.imageGroupId,
+        reviewedAppearanceId: member.reviewedAppearanceId,
         affectedCardReleaseIds: [member.cardReleaseId],
         reviewer: name,
         evidenceClass: "human-review",
@@ -1606,7 +1608,13 @@
         sourceContentHashes: sourceHashes,
         imageHashes: (member.images || []).map((item) => item.contentHash).filter(Boolean),
         affectedPhysicalPrintingIds,
-        before: { groupId: group.groupId, workId: member.workId, detection: member.detection },
+        before: {
+          groupId: group.groupId,
+          imageGroupId: member.imageGroupId,
+          reviewedAppearanceId: member.reviewedAppearanceId,
+          workId: member.workId,
+          detection: member.detection,
+        },
         proposedAfter: {
           action,
           targetGroupId: targetGroupId || null,
