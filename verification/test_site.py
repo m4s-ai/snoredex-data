@@ -270,6 +270,20 @@ def main() -> int:
         page.fill("#ar-search", "")
         page.wait_for_timeout(80)
 
+        # Saving while the unreviewed filter is active must remove the newly reviewed card from the
+        # visible list instead of leaving a stale DOM card behind the filtered summary.
+        page.select_option("#ar-proposal-filter", "unreviewed")
+        page.wait_for_timeout(80)
+        unsaved_card = page.locator("#ar-groups .artwork-member").filter(has_text=unsaved_id).first
+        unsaved_card.locator(".ar-action").select_option("unclear")
+        unsaved_card.locator(".ar-save").click()
+        page.wait_for_timeout(80)
+        check("saving under the unreviewed filter removes the reviewed card",
+              page.locator("#ar-groups .artwork-member").filter(has_text=unsaved_id).count() == 0,
+              "saved card remained visible under the unreviewed filter")
+        page.select_option("#ar-proposal-filter", "all")
+        page.wait_for_timeout(80)
+
         storage_failure_index = page.evaluate("""() => Array.from(
           document.querySelectorAll('#ar-groups .artwork-member')
         ).findIndex(card => {

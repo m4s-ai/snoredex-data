@@ -1596,6 +1596,16 @@
       };
       const persisted = persist();
       formValues.delete(member.cardReleaseId);
+      // Saving changes proposal membership.  If the active proposal filter no longer includes
+      // this member, rerender the list so the visible cards and summary stay consistent.  The
+      // other cards' snapshots were captured before this decision and therefore survive the
+      // rerender; when the member remains visible, keep the cheaper surgical refresh.
+      const remainsVisible = filteredGroups().some((visibleGroup) =>
+        visibleGroup.__visibleMembers.some((visibleMember) => visibleMember.cardReleaseId === member.cardReleaseId));
+      if (!remainsVisible) {
+        render();
+        return;
+      }
       const refreshedCard = refreshMemberCard(member.cardReleaseId);
       const refreshedStatus = refreshedCard && $(".artwork-save-status", refreshedCard);
       if (refreshedStatus) {

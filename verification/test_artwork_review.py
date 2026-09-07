@@ -106,6 +106,21 @@ def main() -> int:
     if changed_projection["projectionVersion"] == before_version:
         fail("semantic graph change leaves projectionVersion unchanged")
 
+    # A refresh timestamp is provenance only; changing it must not make semantic proposals stale.
+    timestamp_graph = deepcopy(original_graph)
+    timestamp_graph["meta"]["generated"] = "2099-12-31"
+    def load_timestamp_graph(path: Path):
+        if path.name == "authoritative_graph.json":
+            return timestamp_graph
+        return original_load(path)
+    artwork_review.load = load_timestamp_graph
+    try:
+        timestamp_projection = artwork_review.build()
+    finally:
+        artwork_review.load = original_load
+    if timestamp_projection["projectionVersion"] != before_version:
+        fail("generated timestamp changes the semantic projectionVersion")
+
     # A pure permutation of set-like input collections is presentation-neutral.
     def load_permuted(path: Path):
         data = original_load(path)

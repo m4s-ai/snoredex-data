@@ -391,8 +391,12 @@ def build() -> dict[str, Any]:
     # Bind the version to the semantic projection itself.  Excluding only this field avoids the
     # circular hash while covering graph entities/edges, release display data, observations and
     # pinned image bytes after all order-independent normalization above.
+    # The generated timestamp describes when the snapshot was built, not what a reviewer can
+    # inspect.  Keep it in the public projection for provenance, but exclude it from the semantic
+    # version so a routine refresh does not invalidate every saved proposal.
     projection["projectionVersion"] = digest({
-        key: value for key, value in projection.items() if key != "projectionVersion"
+        key: value for key, value in projection.items()
+        if key not in {"projectionVersion", "generated"}
     })
     return projection
 
