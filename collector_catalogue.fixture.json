@@ -10,7 +10,7 @@
       "datasetId": "fixture",
       "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
       "dataAsOf": "2026-08-24",
-      "catalogueFingerprint": "sha256:c9317230775c5e58a5101e0d68a4c4a10029a217e00138185d475761f61a22a3",
+      "catalogueFingerprint": "sha256:5466755e9772c0f3d6304e04e4d6408f5347a11ab9af70d749046bf6f600648d",
       "previousFingerprint": null,
       "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
       "scope": {
@@ -121,6 +121,18 @@
           "fixture-source"
         ],
         "sortKey": "3"
+      },
+      {
+        "localSetId": "fixture-set-4",
+        "locality": "WEST",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "productKind": "fixture",
+        "identityState": "identified",
+        "sourceRefs": [
+          "fixture-source"
+        ],
+        "sortKey": "4"
       }
     ],
     "setEditions": [
@@ -162,6 +174,19 @@
         "releaseApproximate": false,
         "releaseEventId": "fixture-event-3",
         "sortKey": "3"
+      },
+      {
+        "setEditionId": "fixture-edition-4",
+        "localSetId": "fixture-set-4",
+        "localizationId": "fixture-loc-west-pt",
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "identityState": "identified",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseEventId": "fixture-event-4",
+        "sortKey": "4"
       }
     ],
     "works": [
@@ -174,7 +199,9 @@
     "items": [
       {
         "itemId": "item-00000000-0000-5000-8000-000000000001",
-        "legacyChecklistIds": [],
+        "legacyChecklistIds": [
+          "fixture-legacy-provider"
+        ],
         "active": true,
         "itemKind": "verified-printing",
         "progressClass": "current-known",
@@ -227,7 +254,9 @@
       },
       {
         "itemId": "item-00000000-0000-5000-8000-000000000002",
-        "legacyChecklistIds": [],
+        "legacyChecklistIds": [
+          "fixture-legacy-marketplace"
+        ],
         "active": true,
         "itemKind": "finish-candidate",
         "progressClass": "research",
@@ -280,9 +309,11 @@
       },
       {
         "itemId": "item-00000000-0000-5000-8000-000000000003",
-        "legacyChecklistIds": [],
+        "legacyChecklistIds": [
+          "fixture-legacy-owner"
+        ],
         "active": true,
-        "itemKind": "research-placeholder",
+        "itemKind": "finish-candidate",
         "progressClass": "research",
         "workId": "fixture-work",
         "workMappingState": "mapped",
@@ -296,6 +327,61 @@
           "fixture-claim"
         ],
         "localizationId": "fixture-loc-west-en",
+        "cardName": "Snorlax",
+        "localCardName": null,
+        "localSetCode": "FX",
+        "localSetName": "Fixture Set",
+        "collectorNumber": "1",
+        "collectorNumberDenominator": "10",
+        "collectorNumberSortKey": "000000000001",
+        "edition": null,
+        "editionAssignmentStatus": "not-applicable",
+        "finishVerificationStatus": "owner-attested",
+        "finish": "holo",
+        "finishFamily": "holo",
+        "finishGroupId": "fixture-group-finish-candidate",
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "rarity": {
+          "display": null,
+          "normalizedId": null,
+          "evidenceStatus": "unknown",
+          "claimRefs": []
+        },
+        "completenessStatus": "positive-evidence-only",
+        "releaseDate": "2026-01-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "releaseSortKey": "2026-01-01|fixture",
+        "imageAssetId": null,
+        "imageScope": "unknown",
+        "sourceLinks": [],
+        "evidenceLinks": [],
+        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+FX+%E2%80%94+Fixture+Set+1+%28finish-candidate%29&row-id=item-00000000-0000-5000-8000-000000000003&card-name=Snorlax&set-code=FX+%E2%80%94+Fixture+Set&card-number=1&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+owner-attested+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+      },
+      {
+        "itemId": "item-00000000-0000-5000-8000-000000000004",
+        "legacyChecklistIds": [
+          "fixture-legacy-open"
+        ],
+        "active": true,
+        "itemKind": "research-placeholder",
+        "progressClass": "research",
+        "workId": "fixture-work",
+        "workMappingState": "mapped",
+        "setEditionId": "fixture-edition-4",
+        "localSetId": "fixture-set-4",
+        "cardReleaseId": "fixture-release-4",
+        "physicalPrintingId": null,
+        "sourcePrintingId": null,
+        "finishUnitId": null,
+        "sourceClaimRefs": [
+          "fixture-claim"
+        ],
+        "localizationId": "fixture-loc-west-pt",
         "cardName": "Snorlax",
         "localCardName": null,
         "localSetCode": "FX",
@@ -329,7 +415,7 @@
         "imageScope": "unknown",
         "sourceLinks": [],
         "evidenceLinks": [],
-        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+FX+%E2%80%94+Fixture+Set+1+%28research-placeholder%29&row-id=item-00000000-0000-5000-8000-000000000003&card-name=Snorlax&set-code=FX+%E2%80%94+Fixture+Set&card-number=1&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+        "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+FX+%E2%80%94+Fixture+Set+1+%28research-placeholder%29&row-id=item-00000000-0000-5000-8000-000000000004&card-name=Snorlax&set-code=FX+%E2%80%94+Fixture+Set&card-number=1&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
       }
     ],
     "assets": [],
@@ -337,6 +423,44 @@
       "fixture": true
     }
   },
+  "compatibilityCases": [
+    {
+      "caseId": "provider-confirmed-printing",
+      "legacyChecklistId": "fixture-legacy-provider",
+      "collectorItemId": "item-00000000-0000-5000-8000-000000000001",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "finishVerificationStatus": "confirmed",
+      "expectedCollectionStatus": "need"
+    },
+    {
+      "caseId": "marketplace-finish-candidate",
+      "legacyChecklistId": "fixture-legacy-marketplace",
+      "collectorItemId": "item-00000000-0000-5000-8000-000000000002",
+      "itemKind": "finish-candidate",
+      "progressClass": "research",
+      "finishVerificationStatus": "marketplace-claimed",
+      "expectedCollectionStatus": "research"
+    },
+    {
+      "caseId": "owner-attested-finish-candidate",
+      "legacyChecklistId": "fixture-legacy-owner",
+      "collectorItemId": "item-00000000-0000-5000-8000-000000000003",
+      "itemKind": "finish-candidate",
+      "progressClass": "research",
+      "finishVerificationStatus": "owner-attested",
+      "expectedCollectionStatus": "research"
+    },
+    {
+      "caseId": "open-research-placeholder",
+      "legacyChecklistId": "fixture-legacy-open",
+      "collectorItemId": "item-00000000-0000-5000-8000-000000000004",
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "finishVerificationStatus": "pending",
+      "expectedCollectionStatus": "research"
+    }
+  ],
   "reconciliationCases": [
     {
       "caseId": "retained-identity",

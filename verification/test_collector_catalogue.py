@@ -406,6 +406,27 @@ def main() -> None:
     assert not collector.validate_catalogue(
         fixture["catalogue"], check_asset_bytes=False
     )
+    fixture_items = {row["itemId"]: row for row in fixture["catalogue"]["items"]}
+    compatibility_cases = fixture["compatibilityCases"]
+    assert {case["caseId"] for case in compatibility_cases} == {
+        "provider-confirmed-printing",
+        "marketplace-finish-candidate",
+        "owner-attested-finish-candidate",
+        "open-research-placeholder",
+    }
+    for case in compatibility_cases:
+        item = fixture_items[case["collectorItemId"]]
+        assert case["legacyChecklistId"] in item["legacyChecklistIds"]
+        assert {
+            key: item[key]
+            for key in ("itemKind", "progressClass", "finishVerificationStatus")
+        } == {
+            key: case[key]
+            for key in ("itemKind", "progressClass", "finishVerificationStatus")
+        }
+        assert case["expectedCollectionStatus"] == (
+            "need" if item["progressClass"] == "current-known" else "research"
+        )
     assert set(schema["properties"]["items"]["items"]["properties"]["workMappingState"]["enum"]) == collector.WORK_MAPPING_STATES
     for case in fixture["workMappingCases"]:
         case_catalogue = copy.deepcopy(fixture["catalogue"])
@@ -431,7 +452,7 @@ def main() -> None:
     assert schema["properties"]["items"]["items"]["properties"]["correctionLink"]["maxLength"] == collector.CORRECTION_URL_MAX_LENGTH
 
     # Correction links are producer-owned deep links. Every generated item (including
-    # all three fixture states) must carry an exact opaque item id and only the
+    # all fixture states) must carry an exact opaque item id and only the
     # reliable issue-form prefill fields.
     form = read(".github/ISSUE_TEMPLATE/printing-correction.yml")
     form_ids = {
@@ -501,6 +522,8 @@ def main() -> None:
     assert unquote(collector.correction_link_params(long_link)["current-state"]).startswith("Item kind:")
 
     counts = catalogue["qualitySummary"]["counts"]
+    legacy_compatibility = catalogue["qualitySummary"]["legacyCompatibility"]
+    predecessor_items = predecessor["items"]
     graph_printing_ids = {
         row["payload"].get("sourcePrintingId")
         for row in graph["entities"] if row["entityType"] == "physical-printing"
@@ -509,7 +532,6 @@ def main() -> None:
         row["payload"]["cardReleaseId"]
         for row in graph["entities"] if row["entityType"] == "card-release"
     }
-    predecessor_items = predecessor["items"]
     expected_candidates = sum(
         bool(row.get("printingId")) and row["printingId"] not in graph_printing_ids
         for row in predecessor_items
@@ -531,6 +553,22 @@ def main() -> None:
     assert {row["cardReleaseId"] for row in catalogue["items"]} == graph_release_ids
     assert counts["currentKnown"] == counts["verifiedPrintings"]
     assert counts["research"] == counts["finishCandidates"] + counts["researchPlaceholders"]
+    assert legacy_compatibility == {
+        "schema": "snoredex-legacy-collector-compatibility",
+        "schemaVersion": "1.0.0",
+        "legacyStableId": "checklistId",
+        "collectorStableId": "itemId",
+        "stateFields": ["itemKind", "progressClass", "finishVerificationStatus"],
+        "collectionProjection": {"current-known": "need", "research": "research"},
+        "counts": {
+            "legacyRows": len(predecessor_items),
+            "verifiedPrintings": 701,
+            "finishCandidates": 112,
+            "researchPlaceholders": 76,
+            "currentKnown": 701,
+            "research": 188,
+        },
+    }
     build_a_bear_item = next(
         row for row in catalogue["items"]
         if row.get("sourcePrintingId") == "F0119-P01"

@@ -78,12 +78,22 @@ def main() -> None:
             f"PRAGMA user_version = {tracker.TRACKER_USER_VERSION};",
             "PRAGMA user_version = 10000;",
         ).replace("release_date TEXT,", "release_date TEXT NOT NULL,")
+        for column in (
+            "    collector_item_id TEXT NOT NULL,\n",
+            "    collector_item_kind TEXT NOT NULL CHECK (collector_item_kind IN (\n"
+            "        'verified-printing', 'finish-candidate', 'research-placeholder'\n"
+            "    )),\n",
+            "    collector_progress_class TEXT NOT NULL CHECK (collector_progress_class IN (\n"
+            "        'current-known', 'research'\n"
+            "    )),\n",
+        ):
+            legacy_schema = legacy_schema.replace(column, "")
         connection = sqlite3.connect(personal)
         connection.executescript(legacy_schema)
         rows = tracker.catalog_rows(catalog)
         connection.executemany(
             "INSERT INTO catalog_items VALUES (" + ",".join("?" for _ in range(20)) + ")",
-            [(row[0], 1, *row[1:]) for row in rows],
+            [(row[0], 1, row[1], *row[5:]) for row in rows],
         )
         connection.executemany(
             "INSERT INTO collection_state(checklist_id, wanted) VALUES (?, ?)",
@@ -214,6 +224,28 @@ def main() -> None:
         tracker.check_template(template, catalog)
         assert check_sentinel.read_bytes() == b"keep tracker check"
         assert tmp_sentinel.read_bytes() == b"keep tracker temp"
+
+    rows = tracker.catalog_rows(ROOT / "snoredex.sqlite")
+    assert len(rows) == 889
+    connection = sqlite3.connect(ROOT / "snoredex.sqlite")
+    assert connection.execute(
+        "SELECT collector_item_kind, collector_progress_class, COUNT(*) "
+        "FROM checklist_items GROUP BY collector_item_kind, collector_progress_class"
+    ).fetchall() == [
+        ("finish-candidate", "research", 112),
+        ("research-placeholder", "research", 76),
+        ("verified-printing", "current-known", 701),
+    ]
+    assert connection.execute(
+        "SELECT wanted, COUNT(*) FROM collection_tracker_seed GROUP BY wanted"
+    ).fetchall() == [(0, 188), (1, 701)]
+    connection.close()
+
+    connection = sqlite3.connect(ROOT / "snoredex-tracker-template.sqlite")
+    assert connection.execute(
+        "SELECT collection_status, COUNT(*) FROM active_tracker GROUP BY collection_status"
+    ).fetchall() == [("need", 701), ("research", 188)]
+    connection.close()
 
     print("tracker state and read-only check regressions passed")
 

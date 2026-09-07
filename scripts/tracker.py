@@ -28,13 +28,20 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / "snoredex.sqlite"
 DEFAULT_TRACKER = ROOT / "snoredex-tracker.sqlite"
 TEMPLATE = ROOT / "snoredex-tracker-template.sqlite"
-TRACKER_SCHEMA_VERSION = "1.1.0"
-TRACKER_USER_VERSION = 10001
+TRACKER_SCHEMA_VERSION = "1.2.0"
+TRACKER_USER_VERSION = 10002
 
 CATALOG_ITEMS_SCHEMA = """CREATE TABLE {table} (
     checklist_id TEXT PRIMARY KEY,
     active INTEGER NOT NULL DEFAULT 1 CHECK (active IN (0, 1)),
     catalog_status TEXT NOT NULL CHECK (catalog_status IN ('documented', 'unresolved')),
+    collector_item_id TEXT NOT NULL,
+    collector_item_kind TEXT NOT NULL CHECK (collector_item_kind IN (
+        'verified-printing', 'finish-candidate', 'research-placeholder'
+    )),
+    collector_progress_class TEXT NOT NULL CHECK (collector_progress_class IN (
+        'current-known', 'research'
+    )),
     card_name TEXT NOT NULL,
     set_code TEXT NOT NULL,
     collector_number TEXT NOT NULL,
@@ -67,7 +74,7 @@ SELECT
     cs.updated_at,
     CASE
         WHEN cs.have = 1 THEN 'have'
-        WHEN ci.catalog_status = 'unresolved' THEN 'research'
+        WHEN ci.collector_progress_class = 'research' THEN 'research'
         WHEN cs.wanted = 0 THEN 'skip'
         ELSE 'need'
     END AS collection_status
@@ -77,10 +84,14 @@ JOIN collection_state cs USING(checklist_id);
 CREATE VIEW active_tracker AS
 SELECT * FROM tracker WHERE active = 1;"""
 
-CATALOG_ITEM_COLUMNS = """checklist_id, active, catalog_status, card_name, set_code,
-collector_number, set_name, language_code, language, edition, finish_family, finish,
-foil_pattern, markings_json, distribution_json, card_size, finish_verification_status,
-release_date, image_path, cardmarket_url"""
+CATALOG_ITEM_COLUMN_NAMES = (
+    "checklist_id", "active", "catalog_status", "collector_item_id", "collector_item_kind",
+    "collector_progress_class", "card_name", "set_code", "collector_number", "set_name",
+    "language_code", "language", "edition", "finish_family", "finish", "foil_pattern",
+    "markings_json", "distribution_json", "card_size", "finish_verification_status",
+    "release_date", "image_path", "cardmarket_url",
+)
+CATALOG_ITEM_COLUMNS = ", ".join(CATALOG_ITEM_COLUMN_NAMES)
 
 SCHEMA = f"""
 PRAGMA foreign_keys = ON;
@@ -145,16 +156,44 @@ def sqlite_dump(path: Path) -> str:
 def catalog_rows(catalog: Path) -> list[tuple]:
     connection = sqlite3.connect(f"file:{catalog.as_posix()}?mode=ro", uri=True)
     try:
-        return connection.execute(
-            """
+        columns = {
+            row[1] for row in connection.execute("PRAGMA table_info(app_checklist)")
+        }
+        base_query = """
             SELECT checklist_id, catalog_status, card_name, set_code, collector_number, set_name,
                    language_code, language, edition, finish_family, finish, foil_pattern, markings_json,
                    distribution_json, card_size, finish_verification_status, release_date,
                    image_path, cardmarket_url
             FROM app_checklist
             ORDER BY checklist_id
-            """
-        ).fetchall()
+        """
+        if {
+            "collector_item_id", "collector_item_kind", "collector_progress_class",
+        } <= columns:
+            return connection.execute(
+                """
+                SELECT checklist_id, catalog_status, collector_item_id, collector_item_kind,
+                       collector_progress_class, card_name, set_code, collector_number, set_name,
+                       language_code, language, edition, finish_family, finish, foil_pattern,
+                       markings_json, distribution_json, card_size, finish_verification_status,
+                       release_date, image_path, cardmarket_url
+                FROM app_checklist
+                ORDER BY checklist_id
+                """
+            ).fetchall()
+        # Older handoff databases remain readable during the compatibility transition. Their
+        # legacy catalog status is only a fallback classification; a regenerated handoff carries
+        # the authoritative collector fields above.
+        rows = connection.execute(base_query).fetchall()
+        return [
+            (
+                row[0], row[1], row[0],
+                "research-placeholder" if row[1] == "unresolved" else "verified-printing",
+                "research" if row[1] == "unresolved" else "current-known",
+                *row[2:],
+            )
+            for row in rows
+        ]
     finally:
         connection.close()
 
@@ -183,7 +222,7 @@ def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list
     new_by_identity: dict[tuple, list[str]] = defaultdict(list)
     for row in rows:
         if row[0] not in active:
-            identity = (row[2], row[3], row[4], row[6], row[8], row[18])
+            identity = (row[5], row[6], row[7], row[9], row[11], row[21])
             new_by_identity[identity].append(row[0])
 
     return sorted(
@@ -193,15 +232,42 @@ def one_to_one_rekeys(connection: sqlite3.Connection, rows: list[tuple]) -> list
     )
 
 
+def migration_select_expressions(columns: set[str]) -> list[str]:
+    expressions = []
+    for name in CATALOG_ITEM_COLUMN_NAMES:
+        if name in columns:
+            expressions.append(name)
+        elif name == "collector_item_id":
+            expressions.append("checklist_id")
+        elif name == "collector_item_kind":
+            expressions.append(
+                "CASE WHEN catalog_status='unresolved' "
+                "THEN 'research-placeholder' ELSE 'verified-printing' END"
+            )
+        elif name == "collector_progress_class":
+            expressions.append(
+                "CASE WHEN catalog_status='unresolved' "
+                "THEN 'research' ELSE 'current-known' END"
+            )
+        else:
+            raise ValueError(f"tracker catalog_items table is missing {name}")
+    return expressions
+
+
 def migrate_tracker_schema(connection: sqlite3.Connection) -> None:
-    """Make legacy tracker release dates nullable without touching collection state."""
+    """Upgrade catalogue metadata without touching collection state."""
     columns = {
         row[1]: row for row in connection.execute("PRAGMA table_info(catalog_items)")
     }
     release_date = columns.get("release_date")
     if release_date is None:
         raise ValueError("tracker catalog_items table has no release_date column")
-    if release_date[3]:
+    compatibility_columns = {
+        "collector_item_id", "collector_item_kind", "collector_progress_class",
+    }
+    needs_rebuild = release_date[3] or not compatibility_columns <= set(columns)
+    if needs_rebuild:
+        select_expressions = migration_select_expressions(set(columns))
         connection.execute("PRAGMA foreign_keys=OFF")
         try:
             connection.executescript(
@@ -211,7 +277,7 @@ def migrate_tracker_schema(connection: sqlite3.Connection) -> None:
                 DROP VIEW IF EXISTS tracker;
                 {CATALOG_ITEMS_SCHEMA.format(table="catalog_items_new")}
                 INSERT INTO catalog_items_new ({CATALOG_ITEM_COLUMNS})
-                SELECT {CATALOG_ITEM_COLUMNS} FROM catalog_items;
+                SELECT {', '.join(select_expressions)} FROM catalog_items;
                 DROP TABLE catalog_items;
                 ALTER TABLE catalog_items_new RENAME TO catalog_items;
                 {CATALOG_ITEMS_INDEX}
@@ -245,14 +311,18 @@ def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
     connection.executemany(
         """
         INSERT INTO catalog_items (
-            checklist_id, active, catalog_status, card_name, set_code, collector_number, set_name,
+            checklist_id, active, catalog_status, collector_item_id, collector_item_kind,
+            collector_progress_class, card_name, set_code, collector_number, set_name,
             language_code, language, edition, finish_family, finish, foil_pattern, markings_json,
             distribution_json, card_size, finish_verification_status, release_date, image_path,
             cardmarket_url
-        ) VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, 1, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(checklist_id) DO UPDATE SET
             active=1,
             catalog_status=excluded.catalog_status,
+            collector_item_id=excluded.collector_item_id,
+            collector_item_kind=excluded.collector_item_kind,
+            collector_progress_class=excluded.collector_progress_class,
             card_name=excluded.card_name,
             set_code=excluded.set_code,
             collector_number=excluded.collector_number,
@@ -284,7 +354,7 @@ def sync_database(tracker: Path, catalog: Path) -> tuple[int, int, int]:
     )
     connection.executemany(
         "INSERT OR IGNORE INTO collection_state(checklist_id, wanted) VALUES (?, ?)",
-        [(row[0], 1 if row[1] == "documented" else 0) for row in rows],
+        [(row[0], 1 if row[4] == "current-known" else 0) for row in rows],
     )
     metadata = {
         "schema": "snoredex-collection-tracker",
@@ -327,7 +397,7 @@ def initialize(tracker: Path, catalog: Path, force: bool) -> None:
     if tracker.exists() and not force:
         raise FileExistsError(f"tracker already exists: {tracker}; use sync or pass --force")
     added = build_tracker(tracker, catalog)
-    print(f"initialized {tracker}: {added} items, all have=0; unresolved items are research-only")
+    print(f"initialized {tracker}: {added} items, all have=0; research-class items are research-only")
 
 
 def set_state(tracker: Path, checklist_id: str, state: str, quantity: int | None, notes: str | None):
@@ -404,7 +474,7 @@ def check_template(template: Path, catalog: Path) -> list[str]:
             )
         count, changed = connection.execute(
             "SELECT COUNT(*), SUM(CASE WHEN have<>0 "
-            "OR wanted<>CASE WHEN catalog_status='documented' THEN 1 ELSE 0 END "
+            "OR wanted<>CASE WHEN collector_progress_class='current-known' THEN 1 ELSE 0 END "
             "OR quantity<>0 OR notes<>'' OR updated_at IS NOT NULL THEN 1 ELSE 0 END) "
             "FROM collection_state JOIN catalog_items USING(checklist_id)"
         ).fetchone()

@@ -30,8 +30,14 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.6.0"
+SCHEMA_VERSION = "1.7.0"
 GRAPH_SCHEMA_VERSION = "1.1.0"
+DATABASE_USER_VERSION = 10007
+COLLECTOR_COMPATIBILITY_SCHEMA_VERSION = "1.0.0"
+COLLECTOR_ITEM_KINDS = {
+    "verified-printing", "finish-candidate", "research-placeholder",
+}
+COLLECTOR_PROGRESS_CLASSES = {"current-known", "research"}
 
 INPUTS = [
     "legacy-cardmarket-baseline.json",
@@ -46,6 +52,7 @@ INPUTS = [
     "verification/owner_adjudications.json",
     "verification/evidence_semantics.json",
     "verification/authoritative_graph.json",
+    "collector_catalogue.json",
 ]
 
 LANGUAGES = [
@@ -78,6 +85,69 @@ def load(relative: str):
 
 def compact(value) -> str:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+
+
+def collector_item_compatibility(item: dict) -> dict[str, str]:
+    item_id = item.get("itemId")
+    kind = item.get("itemKind")
+    progress = item.get("progressClass")
+    if not isinstance(item_id, str) or not item_id:
+        raise ValueError("collector item is missing stable itemId")
+    if kind not in COLLECTOR_ITEM_KINDS:
+        raise ValueError(f"collector item {item_id} has unsupported itemKind {kind!r}")
+    if progress not in COLLECTOR_PROGRESS_CLASSES:
+        raise ValueError(f"collector item {item_id} has unsupported progressClass {progress!r}")
+    return {
+        "collector_item_id": item_id,
+        "collector_item_kind": kind,
+        "collector_progress_class": progress,
+    }
+
+
+def collector_compatibility_mapping(catalogue: dict) -> dict[str, dict[str, str]]:
+    mapping: dict[str, dict[str, str]] = {}
+    for item in catalogue.get("items", []):
+        state = collector_item_compatibility(item)
+        for checklist_id in item.get("legacyChecklistIds") or []:
+            if checklist_id in mapping:
+                raise ValueError(f"legacy checklist id is mapped more than once: {checklist_id}")
+            mapping[checklist_id] = state
+    return mapping
+
+
+def collector_compatibility_counts(mapping: dict[str, dict[str, str]]) -> dict[str, int]:
+    return {
+        "legacyRows": len(mapping),
+        "verifiedPrintings": sum(row["collector_item_kind"] == "verified-printing" for row in mapping.values()),
+        "finishCandidates": sum(row["collector_item_kind"] == "finish-candidate" for row in mapping.values()),
+        "researchPlaceholders": sum(row["collector_item_kind"] == "research-placeholder" for row in mapping.values()),
+        "currentKnown": sum(row["collector_progress_class"] == "current-known" for row in mapping.values()),
+        "research": sum(row["collector_progress_class"] == "research" for row in mapping.values()),
+    }
+
+
+def collector_compatibility(catalogue: dict, checklist: list[dict]) -> dict[str, dict[str, str]]:
+    """Build the explicit legacy checklist -> collector state projection."""
+    expected_ids = {row["checklistId"] for row in checklist}
+    mapping = collector_compatibility_mapping(catalogue)
+    if set(mapping) != expected_ids:
+        missing = sorted(expected_ids - set(mapping))
+        extra = sorted(set(mapping) - expected_ids)
+        raise ValueError(
+            "collector compatibility does not account for every legacy checklist id"
+            f" (missing={missing[:3]}, extra={extra[:3]})"
+        )
+    summary = catalogue.get("qualitySummary", {}).get("legacyCompatibility", {})
+    if summary.get("schemaVersion") != COLLECTOR_COMPATIBILITY_SCHEMA_VERSION:
+        raise ValueError("collector legacy compatibility schema version is missing or unsupported")
+    summary_counts = summary.get("counts", {})
+    actual_counts = collector_compatibility_counts(mapping)
+    if summary_counts != actual_counts:
+        raise ValueError(
+            "collector legacy compatibility counts differ: "
+            f"expected={summary_counts!r}, actual={actual_counts!r}"
+        )
+    return mapping
 
 
 def canonical_input_bytes(relative: str) -> bytes:
@@ -173,7 +243,7 @@ PRAGMA journal_mode = OFF;
 PRAGMA synchronous = OFF;
 PRAGMA temp_store = MEMORY;
 PRAGMA page_size = 4096;
-PRAGMA user_version = 10006;
+PRAGMA user_version = 10007;
 
 CREATE TABLE metadata (
     key TEXT PRIMARY KEY,
@@ -404,6 +474,13 @@ CREATE TABLE checklist_items (
     edition TEXT NOT NULL,
     edition_scope TEXT NOT NULL,
     catalog_status TEXT NOT NULL CHECK (catalog_status IN ('documented', 'unresolved')),
+    collector_item_id TEXT NOT NULL,
+    collector_item_kind TEXT NOT NULL CHECK (collector_item_kind IN (
+        'verified-printing', 'finish-candidate', 'research-placeholder'
+    )),
+    collector_progress_class TEXT NOT NULL CHECK (collector_progress_class IN (
+        'current-known', 'research'
+    )),
     finish TEXT NOT NULL,
     finish_family TEXT NOT NULL,
     finish_group_id TEXT NOT NULL,
@@ -430,7 +507,7 @@ CREATE TABLE checklist_items (
 ) WITHOUT ROWID;
 
 CREATE INDEX checklist_browse
-ON checklist_items(language_code, catalog_status, release_sort, checklist_id);
+ON checklist_items(language_code, collector_progress_class, release_sort, checklist_id);
 CREATE INDEX checklist_finish
 ON checklist_items(finish_family, finish, checklist_id);
 
@@ -587,6 +664,9 @@ SELECT
     ci.finish_unit_id,
     ci.printing_id,
     ci.catalog_status,
+    ci.collector_item_id,
+    ci.collector_item_kind,
+    ci.collector_progress_class,
     p.card_name,
     p.set_code,
     p.collector_number,
@@ -625,7 +705,7 @@ CREATE VIEW collection_tracker_seed AS
 SELECT
     checklist_id,
     0 AS have,
-    CASE WHEN catalog_status = 'documented' THEN 1 ELSE 0 END AS wanted,
+    CASE WHEN collector_progress_class = 'current-known' THEN 1 ELSE 0 END AS wanted,
     0 AS quantity
 FROM checklist_items;
 
@@ -647,6 +727,8 @@ def build_database(target: Path) -> dict[str, int | str]:
     cards = cards_doc["cards"]
     checklist_doc = load("analysis_checklist.json")
     checklist = checklist_doc["items"]
+    collector_doc = load("collector_catalogue.json")
+    collector_by_checklist_id = collector_compatibility(collector_doc, checklist)
     releases = load("analysis_confirmed_releases.json")["variants"]
     units = load("verification/units.json")
     if set(evidence_semantics) != {unit["unitId"] for unit in units}:
@@ -715,6 +797,9 @@ def build_database(target: Path) -> dict[str, int | str]:
             "adjudication, otherwise disputed; pending/manual=unresolved; code cards=out-of-scope"
         ),
         "checklist_schema_version": checklist_doc["meta"]["schemaVersion"],
+        "collector_catalogue_schema_version": collector_doc["meta"]["schemaVersion"],
+        "collector_catalogue_fingerprint": collector_doc["meta"]["catalogueFingerprint"],
+        "collector_compatibility_schema_version": COLLECTOR_COMPATIBILITY_SCHEMA_VERSION,
         "owner_adjudications_schema_version": owner_adjudications_doc["meta"]["schemaVersion"],
         "generator_sha256": file_hash(Path(__file__)),
     }
@@ -1016,13 +1101,16 @@ def build_database(target: Path) -> dict[str, int | str]:
         pid = product_by_url.get(item["cardmarketUrl"])
         if pid is None:
             raise ValueError(f"checklist item {item['checklistId']} has no product URL match")
+        compatibility = collector_by_checklist_id[item["checklistId"]]
         status = "documented" if item.get("printingId") else "unresolved"
         cursor.execute(
-            "INSERT INTO checklist_items VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+            "INSERT INTO checklist_items VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
                 item["checklistId"], item["rowId"], pid, item["finishUnitId"],
                 item.get("printingId"), LANGUAGE_CODE[item["language"]], item["edition"],
-                item["editionScope"], status, item["finish"], item["finishFamily"],
+                item["editionScope"], status, compatibility["collector_item_id"],
+                compatibility["collector_item_kind"], compatibility["collector_progress_class"],
+                item["finish"], item["finishFamily"],
                 item["finishGroupId"], item["finishVerificationStatus"], item.get("foilPattern"),
                 compact(item["markingRoles"]), compact(item["markings"]) if item.get("markings") else None,
                 compact(item["distribution"]) if item.get("distribution") else None,
@@ -1196,6 +1284,21 @@ def database_stats(target: Path) -> dict[str, int | str]:
         "unresolved_items": scalar(
             "SELECT COUNT(*) FROM checklist_items WHERE catalog_status='unresolved'"
         ),
+        "collector_verified_printings": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE collector_item_kind='verified-printing'"
+        ),
+        "collector_finish_candidates": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE collector_item_kind='finish-candidate'"
+        ),
+        "collector_research_placeholders": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE collector_item_kind='research-placeholder'"
+        ),
+        "collector_current_known": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE collector_progress_class='current-known'"
+        ),
+        "collector_research": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE collector_progress_class='research'"
+        ),
         "release_rows": scalar("SELECT COUNT(*) FROM release_rows"),
         "release_rows_without_source": scalar(
             "SELECT COUNT(*) FROM release_rows WHERE source_url IS NULL"
@@ -1212,6 +1315,42 @@ def database_stats(target: Path) -> dict[str, int | str]:
     }
     connection.close()
     return stats
+
+
+def validate_collector_compatibility(connection: sqlite3.Connection) -> list[str]:
+    problems: list[str] = []
+    collector_doc = load("collector_catalogue.json")
+    checklist_doc = load("analysis_checklist.json")
+    try:
+        compatibility = collector_compatibility(collector_doc, checklist_doc["items"])
+    except ValueError as error:
+        return [str(error)]
+    actual = {
+        row[0]: {
+            "collector_item_id": row[1],
+            "collector_item_kind": row[2],
+            "collector_progress_class": row[3],
+        }
+        for row in connection.execute(
+            "SELECT checklist_id, collector_item_id, collector_item_kind, "
+            "collector_progress_class FROM checklist_items"
+        )
+    }
+    if actual != compatibility:
+        problems.append("database collector compatibility projection differs from collector catalogue")
+    seed_counts = dict(connection.execute(
+        "SELECT wanted, COUNT(*) FROM collection_tracker_seed GROUP BY wanted"
+    ).fetchall())
+    expected_seed_counts = {
+        1: sum(row["collector_progress_class"] == "current-known" for row in compatibility.values()),
+        0: sum(row["collector_progress_class"] == "research" for row in compatibility.values()),
+    }
+    if seed_counts != expected_seed_counts:
+        problems.append(
+            "collection tracker seed does not project collector progress classes: "
+            f"expected={expected_seed_counts!r}, actual={seed_counts!r}"
+        )
+    return problems
 
 
 def validate_database(target: Path) -> list[str]:
@@ -1236,8 +1375,8 @@ def validate_database(target: Path) -> list[str]:
         current_generator = file_hash(Path(__file__))
         if not generator or generator[0] != current_generator:
             problems.append("database was built by a different version of scripts/database.py")
-        if connection.execute("PRAGMA user_version").fetchone()[0] != 10006:
-            problems.append("database PRAGMA user_version is not 10006")
+        if connection.execute("PRAGMA user_version").fetchone()[0] != DATABASE_USER_VERSION:
+            problems.append(f"database PRAGMA user_version is not {DATABASE_USER_VERSION}")
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
@@ -1257,6 +1396,7 @@ def validate_database(target: Path) -> list[str]:
             actual = connection.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
             if actual != count:
                 problems.append(f"{table}: expected {count}, found {actual}")
+        problems.extend(validate_collector_compatibility(connection))
         graph_doc = load("verification/authoritative_graph.json")
         graph_expected = {
             "graph_entities": graph_doc["summary"]["entities"],
@@ -1381,6 +1521,7 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Established product-edition rows | {stats['product_editions']} ({stats['suppressed_absent_editions']} absent-language and {stats['suppressed_unverified_editions']} unverified-language projections suppressed) |
 | Finish units / logical printings | {stats['finish_units']} / {stats['printings']} |
 | Current-known physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
+| Collector compatibility projection | {stats['collector_current_known']} current-known · {stats['collector_finish_candidates']} finish candidates · {stats['collector_research_placeholders']} research placeholders ({stats['collector_research']} research rows) |
 | Release rows without row-level source | {stats['release_rows_without_source']} / {stats['release_rows']} |
 | Products without established artist | {stats['missing_artists']} |
 | Opaque V-token products without a physical variant name | {stats['opaque_variants']} |
@@ -1425,6 +1566,14 @@ Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudi
 - Missing artists, missing date sources, opaque variants and unresolved finishes stay null or
   explicit placeholders. The database never fills them by inference.
 - `quality_issues` makes every warning queryable instead of burying it in prose.
+
+The legacy `checklist_items` and `app_checklist` projections retain `checklist_id` and
+`catalog_status`, and additionally expose `collector_item_id`, `collector_item_kind` and
+`collector_progress_class`. The compatibility layer maps every legacy row exactly once to the
+collector contract. A `current-known` row seeds ordinary collection progress; both finish
+candidates and research placeholders seed `research`. This keeps positive evidence and owner
+decisions unchanged while preventing marketplace or owner-attested finish claims from becoming
+confirmed printing gaps.
 
 ## Handoff rule
 
