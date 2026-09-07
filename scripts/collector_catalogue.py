@@ -24,6 +24,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
+from printing_identity import (
+    canonical_bytes,
+    printing_semantic_core_key,
+    printing_semantic_key,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
 CHECKLIST_PATH = ROOT / "analysis_checklist.json"
@@ -82,11 +88,6 @@ WORK_MAPPING_STATES = {
 }
 WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
 WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
-FOIL_PATTERN_ALIASES = {
-    "poke ball mirror": "poke-ball",
-    "poké ball mirror": "poke-ball",
-    "master ball mirror": "master-ball",
-}
 IMAGE_SCOPE_RANK = {"unknown": 0, "legacy-product": 1, "card-release": 2, "exact-printing": 3}
 CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-11-dutch-1e-unresolved-unknown": "ju-11-dutch-1e-holo-edition-stamp-editie-1",
@@ -233,43 +234,6 @@ def correction_link_params(link: str) -> dict[str, str]:
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
-
-
-def canonical_bytes(value: Any) -> bytes:
-    return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
-
-
-def normalized_foil_pattern(value: Any) -> Any:
-    if not isinstance(value, str):
-        return value
-    return FOIL_PATTERN_ALIASES.get(value.strip().casefold(), value)
-
-
-def printing_semantic_key(release_id: str, printing: dict[str, Any]) -> bytes:
-    markings = normalized_markings(printing.get("markings"))
-    payload = {
-        "scope": release_id,
-        "finish": printing.get("finish"),
-        "edition": printing.get("edition"),
-        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
-        "markings": markings or None,
-        "distribution": printing.get("distribution") or None,
-        "cardSize": printing.get("cardSize") or "unknown",
-    }
-    return canonical_bytes(payload)
-
-
-def printing_semantic_core_key(release_id: str, printing: dict[str, Any]) -> bytes:
-    """Identity fields that remain comparable when the edition is unknown on one side."""
-    payload = {
-        "scope": release_id,
-        "finish": printing.get("finish"),
-        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
-        "markings": normalized_markings(printing.get("markings")) or None,
-        "distribution": printing.get("distribution") or None,
-        "cardSize": printing.get("cardSize") or "unknown",
-    }
-    return canonical_bytes(payload)
 
 
 def reviewed_release_rekeys(

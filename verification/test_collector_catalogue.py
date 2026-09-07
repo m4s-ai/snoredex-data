@@ -133,7 +133,10 @@ def main() -> None:
         "finish": "holo",
         "edition": "1st Edition",
         "foilPattern": "Poké Ball mirror",
-        "markings": [],
+        "markings": [
+            {"kind": "rarity-symbol", "role": "print-identity", "text": "No rarity symbol"},
+            {"kind": "illustrator-credit", "role": "print-identity", "text": "Contest"},
+        ],
         "distribution": None,
         "cardSize": "standard",
     }
@@ -143,7 +146,7 @@ def main() -> None:
         "finish": "holo",
         "edition": "1st Edition",
         "foilPattern": "poke-ball",
-        "markings": None,
+        "markings": list(reversed(legacy_row["markings"])),
         "distribution": None,
         "cardSize": "standard",
     }
@@ -151,6 +154,24 @@ def main() -> None:
         shifted_physical["cardReleaseId"], legacy_row
     ) == collector.printing_semantic_key(
         shifted_physical["cardReleaseId"], shifted_physical
+    )
+    reversed_markings = {**legacy_row, "markings": list(reversed(legacy_row["markings"]))}
+    assert collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], legacy_row
+    ) == collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], reversed_markings
+    )
+    assert collector.printing_semantic_core_key(
+        shifted_physical["cardReleaseId"], legacy_row
+    ) == collector.printing_semantic_core_key(
+        shifted_physical["cardReleaseId"], reversed_markings
+    )
+    assert collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], legacy_row
+    ) != collector.printing_semantic_key(
+        shifted_physical["cardReleaseId"], {**legacy_row, "markings": [{
+            "kind": "different-marking", "role": "print-identity", "text": "different"
+        }]}
     )
     assert collector.legacy_match_for_physical(
         shifted_physical,

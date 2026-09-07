@@ -20,6 +20,13 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from printing_identity import (
+    FOIL_PATTERN_ALIASES,
+    normalized_foil_pattern,
+    printing_semantic_key,
+    stable_printing_id,
+)
+
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 FINISH_UNITS = ROOT / "verification" / "finish_units.json"
@@ -37,13 +44,6 @@ WORK_MAPPING_STATES = {
 }
 WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
 WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
-FOIL_PATTERN_ALIASES = {
-    "poke ball mirror": "poke-ball",
-    "poké ball mirror": "poke-ball",
-    "master ball mirror": "master-ball",
-}
-
-
 def read_graph() -> dict[str, Any]:
     return json.loads(OUTPUT.read_text(encoding="utf-8"))
 
@@ -70,43 +70,8 @@ def _identity_value(field: str, value: Any) -> str:
     return _number(value) if field == "number" else _normalized(value)
 
 
-def normalized_foil_pattern(value: Any) -> Any:
-    if not isinstance(value, str):
-        return value
-    return FOIL_PATTERN_ALIASES.get(value.strip().casefold(), value)
-
-
 def _normalized(value: Any) -> str:
     return "" if value is None else str(value)
-
-
-def _semantic_markings(value: Any) -> list[dict[str, Any]] | None:
-    if not value:
-        return None
-    if not isinstance(value, list):
-        return value
-    return sorted(
-        (dict(row) for row in value),
-        key=lambda row: (str(row.get("kind", "")), str(row.get("role", "")), str(row.get("text", ""))),
-    )
-
-
-def printing_semantic_key(scope: Any, printing: dict[str, Any]) -> str:
-    """Canonical identity for a physical finish printing, independent of its ordinal id."""
-    payload = {
-        "scope": str(scope or ""),
-        "finish": printing.get("finish"),
-        "edition": printing.get("edition"),
-        "foilPattern": normalized_foil_pattern(printing.get("foilPattern")),
-        "markings": _semantic_markings(printing.get("markings")),
-        "distribution": printing.get("distribution") or None,
-        "cardSize": printing.get("cardSize") or "unknown",
-    }
-    return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
-
-
-def stable_printing_id(semantic_key: str) -> str:
-    return "PRINTING:" + hashlib.sha256(semantic_key.encode("utf-8")).hexdigest()[:24]
 
 
 def finish_unit_release_key(unit: dict[str, Any]) -> tuple[str, str, str]:

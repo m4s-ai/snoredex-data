@@ -16,6 +16,8 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 sys.path.insert(0, str(ROOT / "verification" / "passes"))
 import authoritative_graph as graph_module  # noqa: E402
+import collector_catalogue as collector_module  # noqa: E402
+import printing_identity  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
 import map_bs2_space_time_work_20260901 as bs2_work_pass  # noqa: E402
@@ -38,7 +40,39 @@ def issue263_rebuilt_graph() -> dict:
 
 
 def main() -> None:
+    printing = {
+        "finish": "non-holo",
+        "edition": None,
+        "markings": [
+            {"kind": "rarity-symbol", "role": "print-identity", "text": "No rarity symbol"},
+            {"kind": "illustrator-credit", "role": "print-identity", "text": "Contest"},
+        ],
+        "distribution": {"kind": "fixed-deck", "name": "Red Deck"},
+        "cardSize": "standard",
+    }
+    reversed_printing = {**printing, "markings": list(reversed(printing["markings"]))}
+    assert printing_identity.printing_semantic_key("release", printing) == printing_identity.printing_semantic_key(
+        "release", reversed_printing
+    )
+    assert graph_module.printing_semantic_key("release", printing) == collector_module.printing_semantic_key(
+        "release", reversed_printing
+    )
+    assert printing_identity.printing_semantic_key("release", printing) != printing_identity.printing_semantic_key(
+        "release", {**printing, "markings": [{
+            "kind": "different-marking", "role": "print-identity", "text": "Different"
+        }]}
+    )
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
+    existing_physical = next(
+        row["payload"] for row in graph["entities"]
+        if row["entityType"] == "physical-printing"
+        and row["payload"].get("sourcePrintingId") == "F0107-P02"
+    )
+    assert graph_module.stable_printing_id(
+        graph_module.printing_semantic_key(
+            existing_physical["cardReleaseId"], existing_physical
+        )
+    ) == existing_physical["semanticPrintingId"]
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
     tampered = deepcopy(graph)
