@@ -356,6 +356,33 @@ def main() -> int:
         check("replacement proposals preserve stale drafts in a separate namespace",
               persisted_stale is not None and persisted_stale.get("action") == "confirm",
               str(persisted_stale))
+
+        # A proposal from the immediately preceding 1.2 shape (same version, missing typed
+        # identity fields) must also be classified stale rather than accepted as current.
+        current_projection = stale_page.evaluate(
+            "() => JSON.parse(document.getElementById('data-artwork-review').textContent).projectionVersion"
+        )
+        stale_page.evaluate("""(projectionVersion) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            'CARD:TYPED-FIXTURE': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.2.0',
+              projectionVersion,
+              reviewer: 'Untyped reviewer',
+              action: 'confirm',
+              before: {}
+            }
+          }));
+        }""", current_projection)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as typed_download:
+            stale_page.click("#ar-download")
+        typed_payload = json.loads(Path(typed_download.value.path()).read_text(encoding="utf-8"))
+        check("untyped 1.2 artwork drafts are classified stale",
+              any(item["staleReason"] == "typed artwork identity fields missing"
+                  for item in typed_payload.get("staleProposals") or []),
+              str(typed_payload))
         stale_page.close()
         stale_context.close()
 
