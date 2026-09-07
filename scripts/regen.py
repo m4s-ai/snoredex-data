@@ -118,9 +118,6 @@ TESTS = [
     ["verification/test_regen_readiness.py"],
 ]
 
-# Local refs can make P6 scan more history than a fresh CI clone.
-
-
 CHILD_ENV = os.environ.copy()
 CHILD_ENV["PYTHONUTF8"] = "1"
 CHILD_ENV["PYTHONIOENCODING"] = "utf-8"
@@ -200,16 +197,10 @@ def main() -> int:
                                   stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
             failed = proc.returncode != 0
-            n_fail = proc.stdout.count("[FAIL]")
-            p6_only = failed and n_fail == 1 and "[FAIL] P6 " in proc.stdout
-            if failed and not p6_only:
+            if failed:
                 print(proc.stdout)
                 print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
                 return 1
-            if p6_only:
-                print(proc.stdout)
-                print("note: review_findings FAILed only on P6 (local full-clone "
-                      "history scan). CI gate is green and this does not block.", file=sys.stderr)
             continue
         if not run([sys.executable, *test], " ".join(test)):
             print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
