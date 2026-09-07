@@ -2,7 +2,7 @@
 """Build the locality-aware collector contract for snoredex-checklist (#254).
 
 The authoritative graph decides what exists.  ``analysis_checklist.json`` is read only
-as the 1.5.0 predecessor whose ids must migrate without disappearing.  Personal
+as the versioned predecessor whose ids must migrate without disappearing.  Personal
 collection state is neither read nor written.
 
     python scripts/collector_catalogue.py

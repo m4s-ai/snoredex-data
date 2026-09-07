@@ -8,7 +8,7 @@ all-locality catalogue.**
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
-[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-889_items-2563eb)](analysis_checklist.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-701_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)

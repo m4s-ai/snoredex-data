@@ -144,7 +144,7 @@ def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]
 def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
                  decisions: dict[str, Any]) -> str:
     cards = dataset["meta"]["singlesCaptured"]
-    items = checklist["meta"]["counts"]["items"]
+    items = checklist["meta"]["counts"]["documentedPrintings"]
     publication_approved = decisions.get("sitePublicationApproved") is True
     grants_approved = decisions.get("licenseGrantsApproved") is True
     publication = "approved" if publication_approved else "owner_approval_required"
