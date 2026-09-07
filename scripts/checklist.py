@@ -321,7 +321,9 @@ def main() -> int:
                 "Positive evidence is not proof of completeness. Unlisted alternatives remain unknown unless the collection owner adjudicates the unit.",
             ],
             "warning": (
-                "This checklist lists what is DOCUMENTED, not what exists. An item's absence means "
+                "Only verified-printing rows represent documented physical printings. Finish "
+                "candidates and unresolved placeholders remain research, not confirmed versions. "
+                "This is not a complete inventory. An item's absence means "
                 "no evidence has been established, never that the printing does not exist."
             ),
             "counts": {

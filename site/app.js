@@ -1154,10 +1154,11 @@
       " · " + items.length + " items (" + unresolved + " with unresolved finish)" +
       " · paper: " + paper + "</div>" +
       sections +
-      '<div class="notice"><strong>Positive evidence only.</strong> This lists printings this ' +
-      "project has documented, not everything that exists. An item marked <em>finish unresolved" +
-      "</em> is a card whose finish has not been established — it is not a confirmed physical " +
-      "version, and must not be treated as one. Absence from this list means no evidence has been " +
+      '<div class="notice"><strong>Positive evidence only.</strong> This legacy checklist includes ' +
+      "verified printings, finish candidates and research placeholders. Only verified printings " +
+      "are documented physical versions. Finish candidates and items marked <em>finish unresolved" +
+      "</em> remain research and must not be treated as confirmed versions. This is not a complete " +
+      "inventory. Absence from this list means no evidence has been " +
       "found, never that a printing does not exist.<br><br>" +
       "Intended data terms: CC BY-NC-SA 4.0; the verbatim text is included in the project, but " +
       "the grant is not operative until the owner records publication approval. Pokémon card " +
