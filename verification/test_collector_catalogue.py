@@ -6,7 +6,9 @@ from __future__ import annotations
 import copy
 import json
 import sys
+from itertools import permutations
 from pathlib import Path
+from unittest.mock import patch
 from urllib.parse import unquote
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -14,13 +16,112 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import collector_catalogue as collector  # noqa: E402
 import collector_deployment as deployment  # noqa: E402
+import authoritative_graph as graph_module  # noqa: E402
 
 
 def read(name: str) -> dict:
     return json.loads((ROOT / name).read_text(encoding="utf-8"))
 
 
+def printing_identity_regressions() -> None:
+    graph = read("verification/authoritative_graph.json")
+    physicals = collector.entity_payloads(graph, "physical-printing")
+    example = next(row for row in physicals if row["physicalPrintingId"] == "PHYSICAL:F0107-P02")
+    scope = example["cardReleaseId"]
+    original = copy.deepcopy(example)
+    # ASTRA F02: the retained two-marking printing and a tied sort-prefix fixture.
+    for markings in (
+        example["markings"],
+        [{**example["markings"][0], "detail": value} for value in ("α", "β", "γ")],
+    ):
+        keys, core_keys = set(), set()
+        for order in permutations(markings):
+            printing = {**example, "markings": list(order)}
+            key = graph_module.printing_semantic_key(scope, printing).encode("utf-8")
+            assert collector.printing_semantic_key(scope, printing) == key
+            keys.add(key)
+            core_keys.add(collector.printing_semantic_core_key(scope, printing))
+        assert len(keys) == len(core_keys) == 1
+    assert example == original, "normalization must not mutate source observations"
+
+    key = collector.printing_semantic_key(scope, example)
+    core_key = collector.printing_semantic_core_key(scope, example)
+    without_edition = json.loads(key)
+    del without_edition["edition"]
+    assert core_key == collector.canonical_bytes(without_edition)
+    for field, value in (
+        ("finish", "holo"), ("foilPattern", "star"),
+        ("distribution", {"kind": "fixture", "name": "distinct distribution"}),
+        ("cardSize", "jumbo"),
+    ):
+        changed = {**example, field: value}
+        assert collector.printing_semantic_key(scope, changed) != key
+        assert collector.printing_semantic_core_key(scope, changed) != core_key
+    for field, value in (("kind", "set-logo"), ("role", "distribution-promo"), ("text", "other text")):
+        changed = copy.deepcopy(example)
+        changed["markings"][0][field] = value
+        assert collector.printing_semantic_key(scope, changed) != key
+        assert collector.printing_semantic_core_key(scope, changed) != core_key
+    changed = {**example, "edition": "1st Edition"}
+    assert collector.printing_semantic_key(scope, changed) != key
+    assert collector.printing_semantic_core_key(scope, changed) == core_key
+    assert collector.printing_semantic_key("other release", example) != key
+    assert collector.printing_semantic_core_key("other release", example) != core_key
+    for semantic_key in (collector.printing_semantic_key, collector.printing_semantic_core_key):
+        for invalid in ("stamp", ["stamp"], [{"kind": "stamp"}], [{"kind": "stamp", "role": "", "text": "x"}]):
+            try:
+                semantic_key(scope, {**example, "markings": invalid})
+            except collector.ContractError:
+                pass
+            else:
+                raise AssertionError("shared identity must retain collector input validation")
+
+    # Existing semantic IDs must stay exact; all graph/collector keys must agree.
+    for printing in physicals:
+        release_id = printing["cardReleaseId"]
+        semantic = graph_module.printing_semantic_key(release_id, printing)
+        assert collector.printing_semantic_key(release_id, printing) == semantic.encode("utf-8")
+        if printing.get("semanticPrintingId"):
+            assert graph_module.stable_printing_id(semantic) == printing["semanticPrintingId"]
+
+    legacy = next(row for row in read("analysis_checklist.json")["items"]
+                  if row.get("printingId") == example["sourcePrintingId"])
+    exact_legacy = {**legacy, "edition": example["edition"]}
+    shifted = {**example, "sourcePrintingId": "fixture-new-ordinal",
+               "markings": list(reversed(example["markings"]))}
+    assert collector.legacy_match_for_physical(
+        shifted, {}, set(), {collector.printing_semantic_key(scope, exact_legacy): exact_legacy}, {},
+    ) is exact_legacy
+    assert collector.legacy_match_for_physical(
+        {**shifted, "sourcePrintingId": legacy["printingId"]},
+        {legacy["printingId"]: (scope, legacy)}, set(), {}, {},
+    ) is legacy
+    assert collector.legacy_match_for_physical(
+        {**shifted, "edition": "1st Edition"}, {}, set(), {},
+        {collector.printing_semantic_core_key(scope, legacy): [legacy]},
+    ) is legacy
+
+    # Permuting predecessor observations must preserve every collection ID and
+    # both published migration routes, byte for byte, including the catalogue.
+    # The raw predecessor fingerprint must still report the changed source bytes.
+    predecessor = read("analysis_checklist.json")
+    for row in predecessor["items"]:
+        if row.get("markings"):
+            row["markings"].reverse()
+    original_read = collector.read_json
+    with patch.object(collector, "read_json", side_effect=lambda path:
+                      predecessor if path == collector.CHECKLIST_PATH else original_read(path)):
+        catalogue, migrations = collector.build_catalogue()
+    assert catalogue == read("collector_catalogue.json")
+    expected_migrations = read("collector_migrations.json")
+    expected_migrations["meta"]["fromFingerprint"] = collector.sha256_bytes(
+        collector.canonical_bytes(predecessor)
+    )
+    assert migrations == expected_migrations
+
+
 def main() -> None:
+    printing_identity_regressions()
     assert collector.collector_number("076/095") == collector.collector_number("076")
     source_backed_rarity = collector.normalized_rarity(
         "release:test",
