@@ -36,8 +36,10 @@ SIBLING = re.compile(
     r"set release schedule", re.IGNORECASE)
 NEGATED_EVIDENCE = re.compile(
     r"\b(?:no|not|without|unavailable|missing|absence of)\s+(?:a\s+|the\s+)?"
-    r"(?:specimen|card|listing|record|page)\b|"
-    r"\b(?:specimen|card|listing|record|page)\s+(?:unavailable|missing|not available)\b",
+    r"(?:specimen|card|listing|record|page|set\s+list|deck\s+list|card\s+list|"
+    r"prize\s+pack\s+series\s+article)\b|"
+    r"\b(?:specimen|card|listing|record|page|set\s+list|deck\s+list|card\s+list|"
+    r"prize\s+pack\s+series\s+article)\s+(?:unavailable|missing|not available)\b",
     re.IGNORECASE,
 )
 DIRECT_OWNER_ATTESTATION = re.compile(r"^Owner attestation", re.IGNORECASE)

@@ -55,6 +55,12 @@ def check_structured_evidence_boundary(units: list[dict], semantics_doc: dict) -
         "sourceType": "editorial note; specimen unavailable",
     }) != "unclassified":
         raise AssertionError("negative specimen text was treated as positive evidence")
+    for label in ("card list", "set list"):
+        if evidence_semantics.legacy_granularity({
+            **legacy,
+            "sourceType": f"editorial note; {label} unavailable",
+        }) != "unclassified":
+            raise AssertionError(f"negative {label} text was treated as positive evidence")
     if evidence_semantics.legacy_granularity({
         **legacy,
         "sourceType": "sibling card page",
