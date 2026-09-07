@@ -1292,8 +1292,9 @@
             Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
               key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]))));
         }
-        storageWarning = "";
-        return true;
+        const complete = !storageLoadFailed.current && !storageLoadFailed.stale;
+        storageWarning = complete ? "" : "Browser storage unavailable; download proposals before leaving.";
+        return complete;
       } catch (error) {
         storageWarning = "Browser storage unavailable; download proposals before leaving.";
         return false;

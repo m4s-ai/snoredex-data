@@ -350,6 +350,7 @@ def main() -> int:
         namespace_card.locator(".ar-action").select_option("unclear")
         namespace_card.locator(".ar-save").click()
         namespace_page.wait_for_timeout(80)
+        namespace_status = namespace_card.locator(".artwork-save-status").inner_text().lower()
         preserved_namespace = namespace_page.evaluate("""() => {
           const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1-stale');
           const saved = raw ? JSON.parse(raw) : {};
@@ -358,6 +359,9 @@ def main() -> int:
         check("malformed current storage does not overwrite valid stale storage",
               preserved_namespace is not None and preserved_namespace.get("reviewer") == "Valid stale reviewer",
               str(preserved_namespace))
+        check("skipped namespace writes are reported as unsaved",
+              "storage unavailable" in namespace_status and "only in this page" in namespace_status,
+              namespace_status)
         namespace_page.close()
         namespace_context.close()
 
