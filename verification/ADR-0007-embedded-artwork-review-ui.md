@@ -32,6 +32,9 @@ does not carry a hard-coded release catalogue.
 
 The browser can confirm, correct, split, or reassign a detection, mark it unclear, or propose a new
 variant. Drafts remain in local storage; a reviewer can download versioned structured proposals.
+The generated view may group releases by a pinned image anchor, but that is an explicitly
+unreviewed image group and never a reviewed artwork identity. The current graph has no imported
+appearance registry, so reviewedAppearanceId remains null until a human decision is accepted.
 The browser never writes an authoritative store directly. Each proposal carries:
 
 - the proposal action (`confirm`, `correct`, `reassign`, `split`, `unclear`, or `propose-variant`);
@@ -39,14 +42,17 @@ The browser never writes an authoritative store directly. Each proposal carries:
 - before and proposed-after values;
 - the exact source-observation identifier and content hash;
 - reviewer/evidence-class fields required by the eventual decision store; and
-- the projection/schema version the proposal was made against.
+- the projection/schema version the proposal was made against;
+- the separate automatic image-group identifier, when one exists, without treating it as an
+  artworkId or reviewed appearance.
 
 `scripts/artwork_review.py`, `verification/test_artwork_review.py`, and the browser regression pin
 the projection/proposal schema, stable graph identities, source observation hashes, image guards,
-local draft persistence, and the download handoff. No reviewed importer or decision store exists
-yet. A downloaded proposal is therefore review material, not a catalogue fact; any future importer
-must reject stale graph identifiers, content hashes, and before-values instead of silently rebasing
-them.
+local draft persistence, and the download handoff. The projection version is a digest of the
+semantic projection after order-independent normalization, while the image-group anchor is stable
+when later evidence is appended. No reviewed importer or decision store exists yet. A downloaded
+proposal is therefore review material, not a catalogue fact; any future importer must reject stale
+graph identifiers, content hashes, and before-values instead of silently rebasing them.
 
 ## Rejected alternatives
 
@@ -62,9 +68,9 @@ them.
 The implementation remains static, offline-capable and dependency-free. It has one generated data
 projection and one browser review path, and new graph data enters through regeneration rather than
 hard-coded UI catalogue entries. The tradeoff is deliberate: a reviewer downloads a proposal
-instead of mutating the catalogue live. The current tests prove that grouping keeps localized
-prints distinct, proposals cite displayed observations and pinned hashes, unsafe image-dependent
-actions are blocked, and source-derived values cannot inject markup into the view.
+instead of mutating the catalogue live. The current tests prove that automatic image grouping keeps localized prints distinct, proposals
+cite displayed observations and pinned hashes, unsafe image-dependent actions are blocked, and
+source-derived values cannot inject markup into the view.
 
 Import validation and accepted-decision round trips remain outside the implemented browser
 boundary. They require their own reviewed decision-store contract before downloaded proposals can

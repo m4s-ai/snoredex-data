@@ -204,9 +204,11 @@ def main() -> int:
               artwork_projection["schema"] == "snoredex-artwork-review"
               and artwork_projection["summary"]["cardReleases"] >= 600
               and artwork_projection["summary"]["mappedWorks"] >= 30
-              and artwork_projection["summary"]["mappedAppearances"] > 0,
+              and artwork_projection["summary"]["imageGroups"] > 0
+              and artwork_projection["summary"]["reviewedAppearances"] == 0
+              and artwork_projection["summary"]["mappedAppearances"] == 0,
               str(artwork_projection.get("summary")))
-        check("artwork review renders a mapped group and a stable release id",
+        check("artwork review renders an automatic image group and a stable release id",
               page.locator("#artwork-review").count() == 1
               and page.locator("#ar-groups .artwork-group").count() > 0
               and page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id"),
@@ -227,6 +229,67 @@ def main() -> int:
               and saved_proposal["projectionVersion"] == artwork_projection["projectionVersion"]
               and saved_proposal["sourceContentHashes"],
               str(saved_proposal))
+
+        unsaved_card = page.locator("#ar-groups .artwork-member").nth(1)
+        unsaved_id = unsaved_card.get_attribute("data-release-id")
+        unsaved_card.locator(".ar-note").fill("Keep this unsaved draft.")
+        first_review_member.locator(".ar-note").fill("Saved without losing the sibling draft.")
+        first_review_member.locator(".ar-save").click()
+        page.wait_for_timeout(80)
+        check("saving one artwork card preserves an unsaved sibling input",
+              unsaved_card.locator(".ar-note").input_value() == "Keep this unsaved draft.",
+              unsaved_card.locator(".ar-note").input_value())
+        page.fill("#ar-search", unsaved_id)
+        page.wait_for_timeout(80)
+        filtered_unsaved = page.locator("#ar-groups .artwork-member").filter(
+            has_text=unsaved_id).first
+        check("artwork filtering preserves unsaved inputs",
+              filtered_unsaved.locator(".ar-note").input_value() == "Keep this unsaved draft.",
+              filtered_unsaved.locator(".ar-note").input_value())
+        page.fill("#ar-search", "")
+        page.wait_for_timeout(80)
+
+        storage_failure_index = page.evaluate("""() => Array.from(
+          document.querySelectorAll('#ar-groups .artwork-member')
+        ).findIndex(card => {
+          const option = card.querySelector("option[value='confirm']");
+          return option && !option.disabled;
+        })""")
+        check("artwork review has a storage-failure fixture", storage_failure_index >= 0,
+              "no image-backed review card with an enabled confirm action")
+        failure_context = browser.new_context()
+        failure_context.add_init_script("""
+          (() => {
+            const originalSetItem = Storage.prototype.setItem;
+            Storage.prototype.setItem = function(key, value) {
+              if (key === 'snoredex-artwork-review-proposals-v1') {
+                throw new DOMException('quota exceeded', 'QuotaExceededError');
+              }
+              return originalSetItem.call(this, key, value);
+            };
+          })();
+        """)
+        failure_page = failure_context.new_page()
+        failure_page.goto(url)
+        failure_page.wait_for_selector("#ar-groups .artwork-member")
+        if storage_failure_index >= 0:
+            failure_card = failure_page.locator("#ar-groups .artwork-member").nth(storage_failure_index)
+            failure_page.fill("#ar-reviewer", "Storage failure reviewer")
+            failure_card.locator(".ar-action").select_option("confirm")
+            failure_card.locator(".ar-note").fill("Storage failure fallback.")
+            failure_card.locator(".ar-save").click()
+            failure_page.wait_for_timeout(80)
+            failure_status = failure_card.locator(".artwork-save-status").inner_text().lower()
+            failure_summary = failure_page.locator("#ar-summary").inner_text().lower()
+            check("artwork review reports storage failures honestly",
+                  "storage unavailable" in failure_status
+                  and "saved locally" not in failure_status
+                  and "download before leaving" in failure_status
+                  and "in memory only" in failure_summary,
+                  failure_status or failure_summary)
+        failure_page.close()
+        failure_context.close()
+
         with page.expect_download() as artwork_download:
             page.click("#ar-download")
         check("artwork review downloads structured proposals",
@@ -235,7 +298,7 @@ def main() -> int:
 
         multi_image_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
+            const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.images && candidate.images.length > 1);
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
@@ -256,7 +319,7 @@ def main() -> int:
 
         structured_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
+            const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.detection && candidate.detection.artist
               && candidate.images && candidate.images.length && candidate.physicalPrintings
               && candidate.physicalPrintings.length);
