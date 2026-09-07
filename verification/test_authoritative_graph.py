@@ -698,6 +698,27 @@ def main() -> None:
         finish_copy = json.loads(
             (ROOT / "verification" / "finish_units.json").read_text(encoding="utf-8")
         )
+        # Marking permutations must also preserve every existing node, claim and
+        # provenance reference when the physical slice is actually rebuilt (#350).
+        for unit in finish_copy["units"]:
+            for printing in unit.get("printings", []):
+                if printing.get("markings"):
+                    printing["markings"].reverse()
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        original_finish_path = graph_module.FINISH_UNITS
+        graph_module.FINISH_UNITS = finish_path
+        try:
+            permuted_projection = project_physical_evidence(deepcopy(graph))
+        finally:
+            graph_module.FINISH_UNITS = original_finish_path
+        assert permuted_projection["edges"] == graph["edges"]
+        assert permuted_projection["migrationDispositions"] == graph["migrationDispositions"]
+        for before, after in zip(graph["entities"], permuted_projection["entities"], strict=True):
+            before, after = deepcopy(before), deepcopy(after)
+            for row in (before, after):
+                if row["entityType"] == "physical-printing":
+                    row["payload"]["markings"] = graph_module._semantic_markings(row["payload"].get("markings"))
+            assert before == after
         shifted = next(
             printing for unit in finish_copy["units"]
             for printing in unit.get("printings", [])

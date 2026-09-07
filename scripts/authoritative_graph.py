@@ -87,12 +87,21 @@ def _semantic_markings(value: Any) -> list[dict[str, Any]] | None:
         return value
     return sorted(
         (dict(row) for row in value),
-        key=lambda row: (str(row.get("kind", "")), str(row.get("role", "")), str(row.get("text", ""))),
+        key=lambda row: (
+            str(row.get("kind", "")), str(row.get("role", "")), str(row.get("text", "")),
+            json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")),
+        ),
     )
 
 
-def printing_semantic_key(scope: Any, printing: dict[str, Any]) -> str:
-    """Canonical identity for a physical finish printing, independent of its ordinal id."""
+def printing_semantic_key(
+    scope: Any, printing: dict[str, Any], *, include_edition: bool = True,
+) -> str:
+    """Shared graph/collector identity; the edition-free core supports unknown editions.
+
+    Keep source marking fields and multiplicity; only their order is immaterial.
+    Existing graph serialization is the compatibility boundary for published IDs.
+    """
     payload = {
         "scope": str(scope or ""),
         "finish": printing.get("finish"),
@@ -102,6 +111,8 @@ def printing_semantic_key(scope: Any, printing: dict[str, Any]) -> str:
         "distribution": printing.get("distribution") or None,
         "cardSize": printing.get("cardSize") or "unknown",
     }
+    if not include_edition:
+        del payload["edition"]
     return json.dumps(payload, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
 
 
