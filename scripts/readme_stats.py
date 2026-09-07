@@ -223,9 +223,10 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         f"**{application.get('not-printed', 0)} owner-adjudicated not printed**, and "
         f"**{application.get('disputed', 0)} disputed**. Raw verdicts and observations stay "
         "queryable; unsupported confirmation does not mint a printing. |",
-        f"| Current-known physical checklist | **{checklist_counts['items']} items** across "
+        f"| Legacy compatibility checklist | **{checklist_counts['items']} items** across "
         f"{checklist_counts['cards']} cards and {checklist_counts['languages']} languages: "
-        f"{checklist_counts['documentedPrintings']} documented printings plus "
+        f"{checklist_counts['documentedPrintings']} verified printings, "
+        f"{checklist_counts['finishCandidates']} finish candidates and "
         f"{checklist_counts['unresolvedPlaceholders']} explicit unresolved placeholders. |",
         f"| Current-known finish evidence | **{finishes['totalFinishUnits']} card-number × language units**: "
         f"{finishes['withConfirmedFinish']} externally confirmed, "

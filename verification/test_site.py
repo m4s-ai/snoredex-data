@@ -1042,6 +1042,9 @@ def main() -> int:
         preview = page.text_content("#cl-preview")
         check("checklist preview reports an item count", "checklist items" in (preview or ""),
               preview or "")
+        check("checklist preview separates verified printings and finish candidates",
+              "verified printings" in (preview or "") and "finish candidates" in (preview or ""),
+              preview or "")
         checklist_finish_options = page.eval_on_selector_all(
             "#cl-finishes option", "els => els.map(e => [e.value, e.textContent])")
         check("checklist selector aggregates mirror treatments under Reverse Holo",
@@ -1102,6 +1105,9 @@ def main() -> int:
               "generated checklist must work offline")
         check("checklist marks unresolved items as not confirmed",
               "finish unresolved" in content, "unresolved placeholders must be visibly marked")
+        check("checklist marks finish candidates as research",
+              "finish candidate — research, not a confirmed printing" in content,
+              "candidate treatment must not become a confirmed missing printing")
         check("checklist carries the licence and evidence caveat",
               "CC BY-NC-SA" in content and "not operative" in content
               and "never that a printing does not exist" in content,

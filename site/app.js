@@ -1055,7 +1055,8 @@
     const reverseGroups = new Set(reverseItems.map((i) => i.finishGroupId)).size;
     $("#cl-preview").innerHTML =
       "<strong>" + items.length + "</strong> checklist items — " +
-      (items.length - unresolved) + " documented printings, " +
+      items.filter((i) => i.itemKind === "verified-printing").length + " verified printings, " +
+      items.filter((i) => i.itemKind === "finish-candidate").length + " finish candidates, " +
       unresolved + " with unresolved finish. " + reverseItems.length +
       " Reverse Holo treatments in " + reverseGroups + " finish groups.";
   }
@@ -1095,6 +1096,7 @@
           item.finish === "unresolved"
             ? "<em>finish unresolved — not a confirmed version</em>"
             : "<strong>" + escapeHTML(finishLabel(family)) + "</strong>",
+          item.itemKind === "finish-candidate" ? "<em>finish candidate — research, not a confirmed printing</em>" : null,
           item.foilPattern ? "treatment: " + escapeHTML(patternLabel(item.foilPattern)) : null,
           markingText ? "markings: " + escapeHTML(markingText) : null,
           distributionText ? "distribution: " + escapeHTML(distributionText) : null,
@@ -1121,7 +1123,7 @@
 
     const unresolved = items.filter((i) => i.finish === "unresolved").length;
     const scopeLabel = $("#cl-scope").value === "filtered"
-      ? "current filtered table rows" : "all documented items";
+      ? "current filtered table rows" : "all legacy checklist items";
 
     return "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">" +
       '<meta name="viewport" content="width=device-width,initial-scale=1">' +

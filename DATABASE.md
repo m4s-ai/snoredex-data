@@ -19,9 +19,42 @@ python scripts/database.py --check
 
 ## Where an app should start
 
+New collector applications should consume [`collector_catalogue.json`](collector_catalogue.json)
+and its versioned schema. It includes source-first localities such as LATAM that have no legacy
+checklist predecessor. The views below are the legacy compatibility surface.
+
+The collector state contract is shared with `analysis_checklist.json`:
+
+| `itemKind` / SQL `item_kind` | `progressClass` / SQL `progress_class` | Legacy `catalog_status` | New tracker `wanted` |
+|---|---|---|---|
+| `verified-printing` | `current-known` | `documented` | 1 |
+| `finish-candidate` | `research` | `unresolved` | 0 |
+| `research-placeholder` | `research` | `unresolved` | 0 |
+
+Every legacy JSON row retains `checklistId`, `finishUnitId`, nullable `printingId`,
+`finishVerificationStatus` and `sourceIds`, and adds the three state fields above,
+nullable `physicalPrintingId` and `establishingClaimId`. A verified row references the graph's
+physical printing and establishing claim; a candidate references its unresolved finish claim;
+a placeholder has no printing or establishing claim and remains pending. SQL retains its
+printing/finish-unit keys and `checklist_evidence_refs` for the same evidence trail.
+The graph disposition determines state; a marketplace record or owner-attested finish alone
+does not create a verified printing. Missing evidence never asserts absence.
+
+`documentedPrintings` now counts only verified printings; `finishCandidates` and
+`unresolvedPlaceholders` report the two research subsets. `researchItems` is their sum.
+These are legacy denominators, not the all-locality collector totals. Tracker `sync` changes
+catalogue fields only: existing `have`, `wanted`, quantities, notes and timestamps survive,
+including conscious purchase decisions. A retained `wanted=1` on a candidate remains research
+in the collection-status view and does not become a verified missing printing.
+
+The contract fixture in `verification/test_tracker_state.py` checks provider-confirmed finish
+evidence → verified, marketplace claim → candidate, owner-attested finish → candidate, and
+pending finish → placeholder. It also compares every legacy row with the collector and SQL
+projection, and migrates old documented candidate rows without altering private decisions.
+
 | View | Use |
 |---|---|
-| `app_checklist` | One flat row per physical item to collect, including explicit unresolved finish placeholders. |
+| `app_checklist` | One flat legacy row per verified printing, finish candidate or research placeholder. |
 | `app_products` | One row per Cardmarket product, with the dated marketplace snapshot kept separate from timeless card fields. |
 | `app_language_availability` | Raw repository verdict, application status, evidence scope, owner decision provenance and provider strength per claimed language. |
 | `collection_tracker_seed` | Stable checklist ids with blank `have`, `wanted` and quantity values. |

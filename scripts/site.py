@@ -366,6 +366,7 @@ def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 markings.append(entry["text"])
         compact.append({
             "checklistId": item["checklistId"],
+            "itemKind": item["itemKind"],
             "rowId": item.get("rowId"),
             "cardName": item["cardName"],
             "setCode": item["setCode"],
@@ -448,7 +449,7 @@ def main() -> int:
         (f"{disputed}", "disputed claims"),
         (f"{finish_counts['totalFinishUnits']}", "current-known finish units"),
         (f"{finish_counts['withConfirmedFinish']}", "current-known confirmed finishes"),
-        (f"{checklist_doc['meta']['counts']['items']}", "current-known checklist items"),
+        (f"{checklist_doc['meta']['counts']['items']}", "legacy checklist items, including research"),
         (f"{registry['meta']['counts']['evidenceRecords']}", "distinct sources"),
         (f"{confirmed_pairs}", "confirmed legacy card×language pairs"),
     ]
@@ -782,15 +783,15 @@ def main() -> int:
 
 <section id="checklist">
   <h2>Checklist</h2>
-  <p>Generate a printable ownership checklist from the canonical export. It lists what has been
-  <em>documented</em>, and marks items whose finish is unresolved so they cannot be mistaken for
-  confirmed physical versions. Patterned reverse and mirror treatments are grouped under
+  <p>Generate a printable ownership checklist from the legacy compatibility export. It distinguishes
+  verified printings, finish candidates and research placeholders. Candidates and unresolved finishes
+  remain research, never confirmed missing cards. Patterned reverse and mirror treatments are grouped under
   <strong>Reverse Holo</strong>, while each distinct physical treatment keeps its own checkbox.</p>
   <div class="builder">
     <div class="row">
       <div class="field"><label for="cl-scope">Scope</label>
         <select id="cl-scope">
-          <option value="all">All documented items</option>
+          <option value="all">All legacy checklist items</option>
           <option value="filtered">Current filtered rows only</option>
         </select></div>
       <div class="field"><label for="cl-langs">Languages</label>
@@ -870,7 +871,8 @@ def main() -> int:
     <li><a href="DATABASE.md">DATABASE.md</a> — schema, status rules and example queries</li>
     <li><a href="legacy-cardmarket-baseline.json">legacy-cardmarket-baseline.json</a> — immutable historical candidate universe and provenance</li>
     <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
-    <li><a href="analysis_checklist.json">analysis_checklist.json</a> — canonical checklist items</li>
+    <li><a href="collector_catalogue.json">collector_catalogue.json</a> — supported locality-aware collector contract</li>
+    <li><a href="analysis_checklist.json">analysis_checklist.json</a> — legacy checklist compatibility</li>
     <li><a href="analysis_confirmed_releases.json">analysis_confirmed_releases.json</a> — chronological rows</li>
     <li><a href="analysis_confirmed_releases.csv">analysis_confirmed_releases.csv</a> — spreadsheet export</li>
     <li><a href="verification/finish_units.json">verification/finish_units.json</a> — finish state store</li>

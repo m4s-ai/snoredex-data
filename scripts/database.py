@@ -30,7 +30,7 @@ from urllib.parse import urlparse
 ROOT = Path(__file__).resolve().parent.parent
 DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
-SCHEMA_VERSION = "1.6.0"
+SCHEMA_VERSION = "1.7.0"
 GRAPH_SCHEMA_VERSION = "1.1.0"
 
 INPUTS = [
@@ -423,7 +423,7 @@ CREATE TABLE checklist_items (
     image_path TEXT,
     CHECK (
         (catalog_status = 'documented' AND printing_id IS NOT NULL) OR
-        (catalog_status = 'unresolved' AND printing_id IS NULL)
+        catalog_status = 'unresolved'
     ),
     FOREIGN KEY (printing_id, finish_unit_id)
         REFERENCES printings(printing_id, finish_unit_id)
@@ -587,6 +587,11 @@ SELECT
     ci.finish_unit_id,
     ci.printing_id,
     ci.catalog_status,
+    CASE WHEN ci.catalog_status = 'documented' THEN 'verified-printing'
+         WHEN ci.printing_id IS NOT NULL THEN 'finish-candidate'
+         ELSE 'research-placeholder' END AS item_kind,
+    CASE WHEN ci.catalog_status = 'documented' THEN 'current-known'
+         ELSE 'research' END AS progress_class,
     p.card_name,
     p.set_code,
     p.collector_number,
@@ -1016,7 +1021,7 @@ def build_database(target: Path) -> dict[str, int | str]:
         pid = product_by_url.get(item["cardmarketUrl"])
         if pid is None:
             raise ValueError(f"checklist item {item['checklistId']} has no product URL match")
-        status = "documented" if item.get("printingId") else "unresolved"
+        status = item["catalogStatus"]
         cursor.execute(
             "INSERT INTO checklist_items VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
             (
@@ -1194,7 +1199,10 @@ def database_stats(target: Path) -> dict[str, int | str]:
             "SELECT COUNT(*) FROM checklist_items WHERE catalog_status='documented'"
         ),
         "unresolved_items": scalar(
-            "SELECT COUNT(*) FROM checklist_items WHERE catalog_status='unresolved'"
+            "SELECT COUNT(*) FROM checklist_items WHERE printing_id IS NULL"
+        ),
+        "finish_candidate_items": scalar(
+            "SELECT COUNT(*) FROM checklist_items WHERE catalog_status='unresolved' AND printing_id IS NOT NULL"
         ),
         "release_rows": scalar("SELECT COUNT(*) FROM release_rows"),
         "release_rows_without_source": scalar(
@@ -1380,7 +1388,7 @@ not a universal all-locality completeness claim and contains no append-only evid
 | App language statuses | {stats['language_exists']} exists · {stats['language_needs_evidence']} needs-evidence · {stats['language_not_printed']} not-printed · {stats['language_disputed']} disputed ({stats['language_owner_adjudicated']} owner-adjudicated) |
 | Established product-edition rows | {stats['product_editions']} ({stats['suppressed_absent_editions']} absent-language and {stats['suppressed_unverified_editions']} unverified-language projections suppressed) |
 | Finish units / logical printings | {stats['finish_units']} / {stats['printings']} |
-| Current-known physical checklist | {stats['checklist_items']} ({stats['documented_items']} documented · {stats['unresolved_items']} unresolved placeholders) |
+| Legacy compatibility checklist | {stats['checklist_items']} ({stats['documented_items']} verified · {stats['finish_candidate_items']} finish candidates · {stats['unresolved_items']} unresolved placeholders) |
 | Release rows without row-level source | {stats['release_rows_without_source']} / {stats['release_rows']} |
 | Products without established artist | {stats['missing_artists']} |
 | Opaque V-token products without a physical variant name | {stats['opaque_variants']} |

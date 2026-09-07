@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate the canonical checklist-item export (#8).
 
-A checklist item is one **documented physical thing a collector can own**. The hard part is not
+A checklist item is a legacy verified printing, finish candidate or research placeholder. The hard part is not
 producing rows, it is refusing to produce rows that were never printed. A naive expansion of
 card x language x edition x finish invents combinations, and this project's whole discipline is
 that an unlisted finish is *unknown*, not *absent*.
@@ -48,7 +48,32 @@ FINISH_FAMILY = {
     "mirror-holo": "reverse-holo",
     "unresolved": "unresolved",
 }
-SCHEMA_VERSION = "1.5.0"
+SCHEMA_VERSION = "1.6.0"
+
+
+def apply_collector_contract(items: list[dict[str, Any]], graph: dict[str, Any]) -> None:
+    """Project graph-backed collector states without changing predecessor identities."""
+    states = {None: ("research-placeholder", None, None)}
+    for entity in graph["entities"]:
+        row = entity["payload"]
+        if entity["entityType"] == "physical-printing" and row.get("sourcePrintingId"):
+            states[row["sourcePrintingId"]] = (
+                "verified-printing", row["physicalPrintingId"], row["establishingClaimId"])
+        elif (entity["entityType"], row.get("sourceKind"), row.get("disposition")) == (
+                "candidate-claim", "finish-printing-record", "candidate-needs-evidence"):
+            states[row["sourceId"]] = ("finish-candidate", None, row["claimId"])
+    for item in items:
+        source_id = item.get("printingId")
+        if source_id not in states:
+            raise ValueError(f"checklist printing has no graph disposition: {source_id}")
+        kind, physical_id, claim_id = states[source_id]
+        item.update(
+            itemKind=kind,
+            progressClass="current-known" if physical_id else "research",
+            catalogStatus="documented" if physical_id else "unresolved",
+            physicalPrintingId=physical_id,
+            establishingClaimId=claim_id,
+        )
 
 
 def read_json(path: Path) -> Any:
@@ -257,12 +282,14 @@ def main() -> int:
     items.sort(key=lambda item: (item["releaseSort"], item["setCode"], item["number"],
                                  item["language"], item["edition"], item["checklistId"]))
 
-    resolved = [item for item in items if item["finish"] != "unresolved"]
+    apply_collector_contract(items, read_json(ROOT / "verification" / "authoritative_graph.json"))
+    resolved = [item for item in items if item["itemKind"] == "verified-printing"]
+    candidates = [item for item in items if item["itemKind"] == "finish-candidate"]
     unresolved_items = [item for item in items if item["finish"] == "unresolved"]
     first_edition = [item for item in items if item["edition"] == "1st Edition"]
     agnostic = [item for item in first_edition if item["editionScope"] == "edition-agnostic-evidence"]
     finish_groups = {item["finishGroupId"] for item in items}
-    reverse_family = [item for item in resolved if item["finishFamily"] == "reverse-holo"]
+    reverse_family = [item for item in items if item["finishFamily"] == "reverse-holo"]
     reverse_family_groups = {item["finishGroupId"] for item in reverse_family}
 
     document = {
@@ -277,8 +304,8 @@ def main() -> int:
                 "scopeStatus": "legacy-not-all-locality-complete",
             },
             "description": (
-                "One record per documented physical collectible item, or per explicitly unresolved "
-                "one. Collector-facing finishFamily groups technical reverse-holo and mirror-holo "
+                "Legacy compatibility view: verified printings, finish candidates and research "
+                "placeholders. Collector-facing finishFamily groups technical reverse-holo and mirror-holo "
                 "treatments without collapsing their physical printing records."
             ),
             "rules": [
@@ -300,6 +327,8 @@ def main() -> int:
             "counts": {
                 "items": len(items),
                 "documentedPrintings": len(resolved),
+                "finishCandidates": len(candidates),
+                "researchItems": len(candidates) + len(unresolved_items),
                 "unresolvedPlaceholders": len(unresolved_items),
                 # What the confirmed-only rule removed, split by whether anything actually settled
                 # it (#66). Silently dropping both kinds made a one-source disagreement look as
@@ -346,6 +375,7 @@ def main() -> int:
     counts = document["meta"]["counts"]
     print(f"checklist items: {counts['items']} "
           f"({counts['documentedPrintings']} documented printings + "
+          f"{counts['finishCandidates']} finish candidates + "
           f"{counts['unresolvedPlaceholders']} unresolved placeholders)")
     print(f"first edition: {counts['firstEditionItems']} items, "
           f"{counts['firstEditionWithEditionAgnosticEvidence']} resting on edition-agnostic evidence")
