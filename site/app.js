@@ -1254,9 +1254,18 @@
       const rawSuffix = /^(.*)::\d+$/.exec(storageKey);
       return { releaseId: (rawSuffix && affectedReleaseId) ? affectedReleaseId : storageKey, draft: stored };
     };
+    const decodeCurrentDraft = (storageKey, stored) => {
+      if (stored && typeof stored === "object" && !Array.isArray(stored)
+          && Object.prototype.hasOwnProperty.call(stored, "draft")
+          && Object.prototype.hasOwnProperty.call(stored, "releaseId")) {
+        return { releaseId: stored.releaseId || storageKey, draft: stored.draft };
+      }
+      return { releaseId: storageKey, draft: stored };
+    };
     const classifyStoredDrafts = (stored) => {
       if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
-      Object.entries(stored).forEach(([releaseId, draft]) => {
+      Object.entries(stored).forEach(([storageKey, storedDraft]) => {
+        const { releaseId, draft } = decodeCurrentDraft(storageKey, storedDraft);
         const reason = staleReason(draft);
         if (reason) addStaleDraft(releaseId, draft, reason);
         else drafts[releaseId] = draft;
@@ -1282,23 +1291,42 @@
       }
     });
 
+    const staleStoragePayload = () => Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
+      key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]));
+    const currentStoragePayload = (retainStale) => {
+      const retained = { ...drafts };
+      if (!retainStale) return retained;
+      Object.entries(staleDrafts).forEach(([baseKey, item]) => {
+        let key = baseKey;
+        let suffix = 2;
+        while (Object.prototype.hasOwnProperty.call(retained, key)) {
+          key = baseKey + "::" + suffix;
+          suffix += 1;
+        }
+        retained[key] = { releaseId: item.releaseId, draft: item.draft };
+      });
+      return retained;
+    };
     const persist = () => {
+      let staleWriteSucceeded = !storageLoadFailed.stale;
       try {
-        if (!storageLoadFailed.current) {
-          window.localStorage.setItem(storageKey, JSON.stringify(drafts));
+        if (staleWriteSucceeded) {
+          window.localStorage.setItem(staleStorageKey, JSON.stringify(staleStoragePayload()));
         }
-        if (!storageLoadFailed.stale) {
-          window.localStorage.setItem(staleStorageKey, JSON.stringify(
-            Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
-              key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]))));
-        }
-        const complete = !storageLoadFailed.current && !storageLoadFailed.stale;
-        storageWarning = complete ? "" : "Browser storage unavailable; download proposals before leaving.";
-        return complete;
       } catch (error) {
-        storageWarning = "Browser storage unavailable; download proposals before leaving.";
-        return false;
+        staleWriteSucceeded = false;
       }
+      let currentWriteSucceeded = !storageLoadFailed.current;
+      try {
+        if (currentWriteSucceeded) {
+          window.localStorage.setItem(storageKey, JSON.stringify(currentStoragePayload(!staleWriteSucceeded)));
+        }
+      } catch (error) {
+        currentWriteSucceeded = false;
+      }
+      const complete = currentWriteSucceeded && staleWriteSucceeded;
+      storageWarning = complete ? "" : "Browser storage unavailable; download proposals before leaving.";
+      return complete;
     };
     const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
     const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));

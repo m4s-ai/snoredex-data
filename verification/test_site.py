@@ -365,6 +365,65 @@ def main() -> int:
         namespace_page.close()
         namespace_context.close()
 
+        # If migrating a stale current draft cannot write the stale namespace, keep it in the
+        # current namespace as an envelope so a reload does not lose the historical proposal.
+        transaction_context = browser.new_context()
+        transaction_page = transaction_context.new_page()
+        transaction_page.goto(url)
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        transaction_id = transaction_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        transaction_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Migrated reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+        }""", transaction_id)
+        transaction_page.reload()
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        transaction_page.evaluate("""() => {
+          const originalSetItem = localStorage.setItem.bind(localStorage);
+          localStorage.setItem = (key, value) => {
+            if (key === 'snoredex-artwork-review-proposals-v1-stale') throw new Error('quota fixture');
+            originalSetItem(key, value);
+          };
+        }""")
+        transaction_page.fill("#ar-reviewer", "Transaction reviewer")
+        transaction_card = transaction_page.locator("#ar-groups .artwork-member").first
+        transaction_card.locator(".ar-action").select_option("unclear")
+        transaction_card.locator(".ar-save").click()
+        transaction_page.wait_for_timeout(80)
+        transaction_status = transaction_card.locator(".artwork-save-status").inner_text().lower()
+        retained_transaction = transaction_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          return Object.values(raw).find((value) => value && value.releaseId === releaseId
+            && value.draft && value.draft.reviewer === 'Migrated reviewer') || null;
+        }""", transaction_id)
+        check("stale migration stays in current storage when stale write fails",
+              retained_transaction is not None
+              and retained_transaction.get("releaseId") == transaction_id
+              and retained_transaction.get("draft", {}).get("reviewer") == "Migrated reviewer",
+              str(retained_transaction))
+        check("stale migration write failure is reported as unsaved",
+              "storage unavailable" in transaction_status and "only in this page" in transaction_status,
+              transaction_status)
+        transaction_page.reload()
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        with transaction_page.expect_download() as transaction_download:
+            transaction_page.click("#ar-download")
+        transaction_payload = json.loads(Path(transaction_download.value.path()).read_text(encoding="utf-8"))
+        check("retained stale migration survives a reload",
+              any(item.get("proposal", {}).get("reviewer") == "Migrated reviewer"
+                  for item in transaction_payload.get("staleProposals") or []),
+              str(transaction_payload))
+        transaction_page.close()
+        transaction_context.close()
+
         # Replacing a stale proposal for a real release must keep the old value in the separate
         # stale namespace so a reload cannot silently discard the historical export candidate.
         replacement_id = stale_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")

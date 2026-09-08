@@ -173,6 +173,11 @@ def main() -> int:
             data["variants"] = list(reversed(data["variants"]))
         elif path.name == "source_first_prints.json":
             data["prints"] = list(reversed(data["prints"]))
+            for record in data["prints"]:
+                for key in ("corroboratingSourceUrls", "providerRecordIds",
+                            "alternateCardImageUrls", "raritySupportingSourceUrls"):
+                    if record.get(key):
+                        record[key] = list(reversed(record[key]))
         elif path.name == "specimens.json":
             data["specimens"] = list(reversed(data["specimens"]))
         return data

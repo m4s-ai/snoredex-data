@@ -65,7 +65,7 @@ def source_observation(kind: str, identifier: str, payload: dict[str, Any], *, u
         "provider": provider,
         "url": url,
         "evidence": evidence,
-        "contentHash": digest(payload),
+        "contentHash": semantic_digest(payload),
         "image": image,
     }
     return record
@@ -85,27 +85,40 @@ def first_sorted_variant(payload: dict[str, Any]) -> str | None:
     return variants[0] if variants else None
 
 
-def normalize_set_lists(record: dict[str, Any], keys: tuple[str, ...]) -> dict[str, Any]:
-    normalized = dict(record)
-    for key in keys:
-        values = normalized.get(key)
-        if isinstance(values, list):
-            normalized[key] = sorted(values, key=digest)
-        elif isinstance(values, dict):
+SET_LIKE_FIELDS = frozenset({
+    "alternateCardImageUrls", "cardImageUrls", "cardReleaseIds", "claimFields", "claimIds",
+    "corroboratingSourceUrls", "citedBy", "evidenceRefs", "establishingClaimIds",
+    "establishingEvidenceIds", "expectedSubtypes", "finish", "foilPattern", "languages",
+    "legacyCounterpartUnitIds", "legacyIdentityAliases", "legacyProducts", "legacyVariants",
+    "mappedVariants", "markings", "marketScopes", "observedCollectorNumbers", "observedNames",
+    "ownerAttestedFields", "pairedCodes", "printIds", "productIds", "providerRecordIds", "providers",
+    "raritySupportingSourceUrls", "setEditionIds", "snorlaxPrintIds", "snorlaxUnitIds",
+    "sourceFirstRecordIds", "sourceRecordIds", "sourceUrls", "sources", "specimenIds",
+    "supportingSourceUrls", "targetRefs", "viaLegacySetCodes",
+})
+
+
+def normalize_semantic(value: Any) -> Any:
+    """Canonicalize set-like fields recursively at the data/hash boundary."""
+    if isinstance(value, list):
+        return [normalize_semantic(item) for item in value]
+    if not isinstance(value, dict):
+        return value
+    normalized = {key: normalize_semantic(child) for key, child in value.items()}
+    for key in SET_LIKE_FIELDS:
+        child = normalized.get(key)
+        if isinstance(child, list):
+            normalized[key] = sorted(child, key=digest)
+        elif isinstance(child, dict):
             normalized[key] = {
                 entry_key: sorted(entry_value, key=digest) if isinstance(entry_value, list) else entry_value
-                for entry_key, entry_value in sorted(values.items())
+                for entry_key, entry_value in sorted(child.items())
             }
     return normalized
 
 
-def normalize_finish_sources(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Normalize set-like provenance fields before sorting finish sources."""
-    return sorted(
-        [normalize_set_lists(source, ("languages", "claimFields", "productIds", "expectedSubtypes"))
-         for source in sources],
-        key=digest,
-    )
+def semantic_digest(value: Any) -> str:
+    return digest(normalize_semantic(value))
 
 
 def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
@@ -292,13 +305,14 @@ def build() -> dict[str, Any]:
             record = source_first_by_id.get(print_id)
             if not record:
                 continue
+            normalized_record = normalize_semantic(record)
             observations.append(source_observation(
-                "source-first", print_id, record,
-                url=record.get("sourceUrl"), evidence=record.get("evidence"),
-                provider=record.get("providerId"), image=record.get("cardImageUrl"),
+                "source-first", print_id, normalized_record,
+                url=normalized_record.get("sourceUrl"), evidence=normalized_record.get("evidence"),
+                provider=normalized_record.get("providerId"), image=normalized_record.get("cardImageUrl"),
             ))
-            add_image(images, record.get("cardImageUrl"), label="publisher card image", observation_id=f"source-first:{print_id}")
-            detection["cardName"] = detection["cardName"] or record.get("name") or record.get("cardName")
+            add_image(images, normalized_record.get("cardImageUrl"), label="publisher card image", observation_id=f"source-first:{print_id}")
+            detection["cardName"] = detection["cardName"] or normalized_record.get("name") or normalized_record.get("cardName")
 
         # A legacy row can provide the artist and finish context even when a graph release is a
         # source-first re-key with no direct unit id.
@@ -332,21 +346,16 @@ def build() -> dict[str, Any]:
             physical_entity = entities.get(physical_id)
             if not physical_entity:
                 continue
-            printing = normalize_set_lists(
-                physical_entity["payload"], ("specimenIds", "sourceRecordIds", "markings"),
-            )
+            printing = normalize_semantic(physical_entity["payload"])
             finish_source = finish_by_printing.get(printing.get("sourcePrintingId") or printing.get("physicalPrintingId"))
             if finish_source:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
-                normalized_source_printing = normalize_set_lists(
-                    source_printing, ("mappedVariants", "specimenIds", "markings"),
-                )
-                normalized_sources = normalize_finish_sources(source_printing.get("sources") or [])
-                normalized_source_printing["sources"] = normalized_sources
+                normalized_source_printing = normalize_semantic(source_printing)
+                normalized_sources = normalized_source_printing.get("sources") or []
                 printing["sources"] = normalized_sources
                 for source_index, source in enumerate(normalized_sources):
-                    source_tag = f"{source_index}:{digest(source)[:16]}"
+                    source_tag = f"{source_index}:{semantic_digest(source)[:16]}"
                     observations.append(source_observation(
                         "finish", f"{printing.get('sourcePrintingId') or physical_id}:{source_tag}",
                         {"finishUnitId": finish_unit.get("finishUnitId"),
@@ -426,13 +435,14 @@ def build() -> dict[str, Any]:
         },
         "groups": sorted(groups.values(), key=lambda group: ({"image-group": 0, "unmapped-release": 1}[group["groupKind"]], group["label"], group["groupId"])),
     }
+    projection["groups"] = normalize_semantic(projection["groups"])
     # Bind the version to the review semantics after all order-independent normalization above.
     # Public explanatory copy and source paths stay outside this digest so editorial changes do
     # not invalidate locally saved proposals.
     # The generated timestamp describes when the snapshot was built, not what a reviewer can
     # inspect.  Keep it in the public projection for provenance, but exclude it from the semantic
     # version so a routine refresh does not invalidate every saved proposal.
-    projection["projectionVersion"] = digest(semantic_projection_payload(projection))
+    projection["projectionVersion"] = semantic_digest(semantic_projection_payload(projection))
     return projection
 
 
