@@ -91,7 +91,21 @@ def normalize_set_lists(record: dict[str, Any], keys: tuple[str, ...]) -> dict[s
         values = normalized.get(key)
         if isinstance(values, list):
             normalized[key] = sorted(values, key=digest)
+        elif isinstance(values, dict):
+            normalized[key] = {
+                entry_key: sorted(entry_value, key=digest) if isinstance(entry_value, list) else entry_value
+                for entry_key, entry_value in sorted(values.items())
+            }
     return normalized
+
+
+def normalize_finish_sources(sources: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Normalize set-like provenance fields before sorting finish sources."""
+    return sorted(
+        [normalize_set_lists(source, ("languages", "claimFields", "productIds", "expectedSubtypes"))
+         for source in sources],
+        key=digest,
+    )
 
 
 def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
@@ -326,9 +340,10 @@ def build() -> dict[str, Any]:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
                 normalized_source_printing = normalize_set_lists(
-                    source_printing, ("mappedVariants", "sources", "specimenIds", "markings"),
+                    source_printing, ("mappedVariants", "specimenIds", "markings"),
                 )
-                normalized_sources = normalized_source_printing.get("sources") or []
+                normalized_sources = normalize_finish_sources(source_printing.get("sources") or [])
+                normalized_source_printing["sources"] = normalized_sources
                 printing["sources"] = normalized_sources
                 for source_index, source in enumerate(normalized_sources):
                     source_tag = f"{source_index}:{digest(source)[:16]}"

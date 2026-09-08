@@ -152,6 +152,16 @@ def main() -> int:
                 unit["printings"] = list(reversed(unit.get("printings") or []))
                 for printing in unit["printings"]:
                     printing["sources"] = list(reversed(printing.get("sources") or []))
+                    for source in printing["sources"]:
+                        for key in ("languages", "claimFields", "productIds", "expectedSubtypes"):
+                            value = source.get(key)
+                            if isinstance(value, list):
+                                source[key] = list(reversed(value))
+                            elif isinstance(value, dict):
+                                source[key] = {
+                                    entry_key: list(reversed(entry_value)) if isinstance(entry_value, list) else entry_value
+                                    for entry_key, entry_value in reversed(list(value.items()))
+                                }
                     for key in ("mappedVariants", "specimenIds", "markings"):
                         if printing.get(key):
                             printing[key] = list(reversed(printing[key]))
