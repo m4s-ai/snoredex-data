@@ -50,11 +50,14 @@ def image_dimensions(path: Path) -> tuple[int, int]:
 
 
 def png_fixture(width: int, height: int, bit_depth: int, colour_type: int,
-                interlace: int, scanlines: bytes, palette: bytes = b"") -> bytes:
+                interlace: int, scanlines: bytes, palette: bytes = b"",
+                transparency: bytes = b"") -> bytes:
     header = struct.pack(">IIBBBBB", width, height, bit_depth, colour_type, 0, 0, interlace)
     chunks = [artwork_derivatives._chunk(b"IHDR", header)]
     if palette:
         chunks.append(artwork_derivatives._chunk(b"PLTE", palette))
+    if transparency:
+        chunks.append(artwork_derivatives._chunk(b"tRNS", transparency))
     chunks.extend((artwork_derivatives._chunk(b"IDAT", zlib.compress(scanlines, 9)),
                    artwork_derivatives._chunk(b"IEND", b"")))
     return b"\x89PNG\r\n\x1a\n" + b"".join(chunks)
@@ -73,6 +76,12 @@ def verify_png_formats() -> None:
     width, height, pixels = artwork_derivatives._png_pixels(indexed)
     if (width, height, pixels) != (2, 1, [(255, 0, 0), (0, 255, 0)]):
         fail(f"4-bit indexed PNG decoded incorrectly: {(width, height, pixels)}")
+
+    indexed_alpha = png_fixture(2, 1, 8, 3, 0, b"\x00\x00\x01",
+                                 bytes((255, 0, 0, 0, 255, 0)), b"\x00\xff")
+    width, height, pixels = artwork_derivatives._png_pixels(indexed_alpha)
+    if (width, height, pixels) != (2, 1, [(255, 255, 255), (0, 255, 0)]):
+        fail(f"indexed PNG tRNS alpha was not composited onto white: {(width, height, pixels)}")
 
     rgba = png_fixture(2, 1, 8, 6, 0, b"\x00\xff\x00\x00\x00\x00\x00\xff\x80")
     width, height, pixels = artwork_derivatives._png_pixels(rgba)

@@ -49,8 +49,9 @@ def _png_dimensions(data: bytes) -> tuple[int, int]:
     return width, height
 
 
-def _png_chunk_payload(data: bytes) -> tuple[list[tuple[int, int, int]], bytes]:
-    palette: list[tuple[int, int, int]] = []
+def _png_chunk_payload(data: bytes) -> tuple[list[tuple[int, int, int, int]], bytes]:
+    palette: list[tuple[int, int, int, int]] = []
+    transparency = b""
     raw_parts: list[bytes] = []
     position = 8
     while position + 12 <= len(data):
@@ -59,15 +60,20 @@ def _png_chunk_payload(data: bytes) -> tuple[list[tuple[int, int, int]], bytes]:
         payload = data[position + 8:position + 8 + length]
         position += 12 + length
         if kind == b"PLTE":
-            palette = [tuple(payload[index:index + 3]) for index in range(0, len(payload), 3)]
+            palette = [(*payload[index:index + 3], 255) for index in range(0, len(payload), 3)]
+        elif kind == b"tRNS":
+            transparency = payload
         elif kind == b"IDAT":
             raw_parts.append(payload)
         elif kind == b"IEND":
             break
+    if transparency:
+        palette = [(*colour[:3], transparency[index] if index < len(transparency) else 255)
+                   for index, colour in enumerate(palette)]
     return palette, zlib.decompress(b"".join(raw_parts))
 
 
-def _png_payload(data: bytes) -> tuple[int, int, int, int, int, list[tuple[int, int, int]], bytes]:
+def _png_payload(data: bytes) -> tuple[int, int, int, int, int, list[tuple[int, int, int, int]], bytes]:
     width, height = _png_dimensions(data)
     bit_depth, colour_type = data[24:26]
     interlace = data[28]
@@ -163,7 +169,7 @@ def _png_composite(channels: tuple[int, int, int], alpha: int) -> tuple[int, int
 
 
 def _png_pixel(row: bytes, pixel: int, colour_type: int, bit_depth: int,
-               channels: int, palette: list[tuple[int, int, int]]) -> tuple[int, int, int]:
+               channels: int, palette: list[tuple[int, int, int, int]]) -> tuple[int, int, int]:
     values = [_png_sample(row, pixel * channels + channel, bit_depth)
               for channel in range(channels)]
     if colour_type == 0:
@@ -174,14 +180,15 @@ def _png_pixel(row: bytes, pixel: int, colour_type: int, bit_depth: int,
         palette_index = _png_sample(row, pixel, bit_depth, scale=False)
         if palette_index >= len(palette):
             raise ImageError("indexed PNG references a missing palette entry")
-        return palette[palette_index]
+        red, green, blue, alpha = palette[palette_index]
+        return _png_composite((red, green, blue), alpha)
     if colour_type == 6:
         return _png_composite(tuple(values[:3]), values[3])
     return tuple(values[:3])
 
 
 def _png_rgb(rows: list[bytes], width: int, colour_type: int, bit_depth: int,
-             channels: int, palette: list[tuple[int, int, int]]) -> list[tuple[int, int, int]]:
+             channels: int, palette: list[tuple[int, int, int, int]]) -> list[tuple[int, int, int]]:
     return [_png_pixel(row, pixel, colour_type, bit_depth, channels, palette)
             for row in rows for pixel in range(width)]
 
@@ -191,7 +198,7 @@ def _png_pass_size(length: int, start: int, step: int) -> int:
 
 
 def _png_adam7(decoded: bytes, width: int, height: int, bit_depth: int, colour_type: int,
-               channels: int, palette: list[tuple[int, int, int]]) -> list[tuple[int, int, int]]:
+               channels: int, palette: list[tuple[int, int, int, int]]) -> list[tuple[int, int, int]]:
     passes = ((0, 0, 8, 8), (4, 0, 8, 8), (0, 4, 4, 8), (2, 0, 4, 4),
               (0, 2, 2, 4), (1, 0, 2, 2), (0, 1, 1, 2))
     pixels = [(0, 0, 0)] * (width * height)
