@@ -254,6 +254,16 @@ class _Bits:
         self.bits &= (1 << self.count) - 1 if self.count else 0
         return value
 
+    def consume_restart(self) -> None:
+        """Discard entropy padding and consume the restart marker at a DRI boundary."""
+        self.bits = 0
+        self.count = 0
+        while self.index < len(self.data) and self.data[self.index] == 0xFF:
+            self.index += 1
+        if self.index >= len(self.data) or self.data[self.index] not in range(0xD0, 0xD8):
+            raise _EntropyEnd
+        self.index += 1
+
 
 def _huffman_table(bits: bytes, values: bytes) -> dict[tuple[int, int], int]:
     table: dict[tuple[int, int], int] = {}
@@ -383,12 +393,14 @@ def _jpeg_header_segment(marker: int, payload: bytes, quant: dict[int, list[int]
 
 def _jpeg_scan_record(data: bytes, position: int, payload: bytes, progressive: bool,
                       quant: dict[int, list[int]],
-                      huffman: dict[tuple[int, int], dict[tuple[int, int], int]]) -> tuple[dict[str, object], int]:
+                      huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                      restart_interval: int) -> tuple[dict[str, object], int]:
     scan, spectral_start, spectral_end, approx_high, approx_low = _jpeg_scan(payload, progressive)
     entropy_end = _jpeg_entropy_end(data, position)
     record = {"components": scan, "start": position, "end": entropy_end,
               "spectral_start": spectral_start, "spectral_end": spectral_end,
               "approx_high": approx_high, "approx_low": approx_low,
+              "restart_interval": restart_interval,
               "quant": {key: values[:] for key, values in quant.items()},
               "huffman": {key: table.copy() for key, table in huffman.items()}}
     return record, entropy_end
@@ -402,6 +414,7 @@ def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dic
     components: list[dict[str, int]] = []
     scans: list[dict[str, object]] = []
     progressive = False
+    restart_interval = 0
     width = height = 0
     position = 2
     while position + 3 < len(data):
@@ -411,11 +424,14 @@ def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dic
             continue
         marker, payload, position = segment
         if marker == 0xDA:
-            record, position = _jpeg_scan_record(data, position, payload, progressive, quant, huffman)
+            record, position = _jpeg_scan_record(
+                data, position, payload, progressive, quant, huffman, restart_interval)
             scans.append(record)
         elif marker == 0xD9:
             break
         else:
+            if marker == 0xDD and len(payload) >= 2:
+                restart_interval = struct.unpack(">H", payload[:2])[0]
             width, height, components, progressive = _jpeg_header_segment(
                 marker, payload, quant, huffman, components, progressive, width, height)
     if not scans or not components:
@@ -522,17 +538,23 @@ def _jpeg_decode_noninterleaved(reader: _Bits, component: dict[str, int],
                                 plane: tuple[int, int, list[int]],
                                 huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
                                 quant: dict[int, list[int]], progressive: bool,
-                                approx_low: int, blocks_x: int, blocks_y: int) -> None:
+                                approx_low: int, blocks_x: int, blocks_y: int,
+                                restart_interval: int) -> None:
     plane_width, plane_height, pixels = plane
     dc_table = huffman[(0, component["dc"])]
     ac_table = None if progressive else huffman[(1, component["ac"])]
     previous_dc = 0
-    for block_y in range(blocks_y):
-        for block_x in range(blocks_x):
-            previous_dc, average = _jpeg_read_block_restart(
-                reader, dc_table, ac_table, quant[component["q"]], previous_dc,
-                progressive, approx_low)
-            pixels[block_y * plane_width + block_x] = average
+    block_count = blocks_x * blocks_y
+    for block_index in range(block_count):
+        block_y, block_x = divmod(block_index, blocks_x)
+        previous_dc, average = _jpeg_read_block_restart(
+            reader, dc_table, ac_table, quant[component["q"]], previous_dc,
+            progressive, approx_low)
+        pixels[block_y * plane_width + block_x] = average
+        if (restart_interval and (block_index + 1) % restart_interval == 0
+                and block_index + 1 < block_count):
+            reader.consume_restart()
+            previous_dc = 0
     _jpeg_fill_padding(plane, blocks_x, blocks_y)
 
 
@@ -540,12 +562,17 @@ def _jpeg_decode_interleaved(reader: _Bits, components: list[dict[str, int]], ac
                              huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
                              quant: dict[int, list[int]], planes: list[tuple[int, int, list[int]]],
                              blocks_x: int, blocks_y: int, progressive: bool,
-                             approx_low: int) -> None:
+                             approx_low: int, restart_interval: int) -> None:
     previous_dc = [0, 0, 0]
-    for mcu_y in range(blocks_y):
-        for mcu_x in range(blocks_x):
-            _jpeg_decode_mcu_restart(reader, components, active_ids, huffman, quant, planes,
-                                     mcu_x, mcu_y, previous_dc, progressive, approx_low)
+    mcu_count = blocks_x * blocks_y
+    for mcu_index in range(mcu_count):
+        mcu_y, mcu_x = divmod(mcu_index, blocks_x)
+        _jpeg_decode_mcu_restart(reader, components, active_ids, huffman, quant, planes,
+                                 mcu_x, mcu_y, previous_dc, progressive, approx_low)
+        if (restart_interval and (mcu_index + 1) % restart_interval == 0
+                and mcu_index + 1 < mcu_count):
+            reader.consume_restart()
+            previous_dc[:] = [0, 0, 0]
 
 
 def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: int,
@@ -568,10 +595,12 @@ def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: 
             scan_blocks_y = math.ceil(height * component["v"] / (8 * frame_v))
             _jpeg_decode_noninterleaved(reader, components[component_index],
                                         planes[component_index], huffman, quant, progressive,
-                                        scan["approx_low"], scan_blocks_x, scan_blocks_y)
+                                        scan["approx_low"], scan_blocks_x, scan_blocks_y,
+                                        int(scan.get("restart_interval", 0)))
             return
         _jpeg_decode_interleaved(reader, components, active_ids, huffman, quant, planes,
-                                 blocks_x, blocks_y, progressive, scan["approx_low"])
+                                 blocks_x, blocks_y, progressive, scan["approx_low"],
+                                 int(scan.get("restart_interval", 0)))
     except _EntropyEnd:
         if not progressive:
             raise ImageError("JPEG entropy stream ended before all blocks")
@@ -604,12 +633,17 @@ def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, 
     pixels: list[tuple[int, int, int]] = []
     output_width = min(width, target_width) if target_width else width
     output_height = max(1, round(height * output_width / width))
+    frame_h = max(component["h"] for component in components)
+    frame_v = max(component["v"] for component in components)
+    plane_grids = [(math.ceil(width * component["h"] / (8 * frame_h)),
+                    math.ceil(height * component["v"] / (8 * frame_v)))
+                   for component in components]
     for y in range(output_height):
         for x in range(output_width):
             values = []
-            for plane_width, plane_height, plane in planes:
-                source_x = min(plane_width - 1, x * plane_width // output_width)
-                source_y = min(plane_height - 1, y * plane_height // output_height)
+            for (actual_width, actual_height), (plane_width, plane_height, plane) in zip(plane_grids, planes):
+                source_x = min(actual_width - 1, x * actual_width // output_width)
+                source_y = min(actual_height - 1, y * actual_height // output_height)
                 values.append(plane[source_y * plane_width + source_x])
             if len(values) == 1:
                 red = green = blue = values[0]

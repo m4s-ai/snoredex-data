@@ -326,6 +326,28 @@ def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
     return None
 
 
+def jpeg_component_count(data: bytes) -> int | None:
+    """Return the component count from the first JPEG frame header."""
+    if data[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i + 9 < len(data):
+        if data[i] != 0xFF:
+            i += 1
+            continue
+        marker = data[i + 1]
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            return data[i + 9]
+        if marker in (0xD8, 0xD9) or marker in range(0xD0, 0xD8) or marker == 0x01:
+            i += 2
+            continue
+        length = int.from_bytes(data[i + 2:i + 4], "big")
+        if length < 2:
+            return None
+        i += 2 + length
+    return None
+
+
 def content_hash(data: bytes) -> str:
     return "sha256:" + hashlib.sha256(data).hexdigest()
 
@@ -440,6 +462,8 @@ def validate(blob: bytes, allow_small: bool) -> tuple[str, tuple[int, int] | Non
     size = image_size(blob, ext)
     if size is None:
         fail(f"the {ext} header is malformed — dimensions could not be read")
+    if ext == "jpg" and jpeg_component_count(blob) not in (1, 3):
+        fail("the JPEG uses an unsupported component count; only grayscale and RGB/YCbCr are accepted")
     if not allow_small and max(size) < MIN_LONG_EDGE:
         fail(f"{size[0]}x{size[1]} is too small to read a card off "
              f"(minimum long edge {MIN_LONG_EDGE}px; pass --allow-small to override)")

@@ -74,6 +74,16 @@ def main() -> None:
         {"specimenId": "SPEC-9999", "photograph": None}, None, "SPEC-9999", False
     ))
     assert fetch_attachment.validate(image, allow_small=False)[0] == "png"
+    rgb_jpeg = bytearray((ROOT / "images" / "151C_143_Snorlax_V1_819209.jpg").read_bytes())
+    offset = 2
+    while offset + 9 < len(rgb_jpeg):
+        if rgb_jpeg[offset] == 0xFF and 0xC0 <= rgb_jpeg[offset + 1] <= 0xCF \
+                and rgb_jpeg[offset + 1] not in (0xC4, 0xC8, 0xCC):
+            rgb_jpeg[offset + 9] = 4
+            break
+        offset += 1
+    assert fetch_attachment.jpeg_component_count(bytes(rgb_jpeg)) == 4
+    expect_failure(lambda: fetch_attachment.validate(bytes(rgb_jpeg), allow_small=False))
     graph = json.loads(
         (ROOT / "verification" / "authoritative_graph.json").read_text(encoding="utf-8")
     )

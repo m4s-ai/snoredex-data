@@ -119,6 +119,38 @@ def verify_derivative_writer() -> None:
     if (width, height) != (2, 1) or len(set(pixels)) != 1 or any(len(set(pixel)) != 1 for pixel in pixels):
         fail(f"grayscale JPEG was not expanded to equal RGB channels: {(width, height, pixels)}")
 
+    # Restart intervals must reset predictors even when entropy padding contains decodable bits.
+    original_read_block = artwork_derivatives._jpeg_read_block_restart
+    restart_calls: list[object] = []
+    def fake_read_block(reader, dc_table, ac_table, qtable, previous, progressive, approx_low):
+        restart_calls.append(previous)
+        return previous + 1, 128
+    artwork_derivatives._jpeg_read_block_restart = fake_read_block
+    try:
+        restart_plane = (2, 1, [0, 0])
+        artwork_derivatives._jpeg_decode_noninterleaved(
+            artwork_derivatives._Bits(b"\xff\xd0"),
+            {"id": 1, "h": 1, "v": 1, "q": 0, "dc": 0, "ac": 0},
+            restart_plane, {(0, 0): {}}, {0: [1]}, True, 0, 2, 1, 1)
+    finally:
+        artwork_derivatives._jpeg_read_block_restart = original_read_block
+    if restart_calls != [0, 0] or restart_plane[2] != [128, 128]:
+        fail(f"DRI restart did not reset the DC predictor: {restart_calls}, {restart_plane[2]}")
+
+    # Padded storage is an implementation detail; visible coordinate scaling uses the actual grid.
+    original_header = artwork_derivatives._jpeg_header
+    original_decode_planes = artwork_derivatives._jpeg_decode_planes
+    try:
+        artwork_derivatives._jpeg_header = lambda data: (
+            2, 3, {}, {}, [{"id": 1, "h": 1, "v": 2, "q": 0, "dc": 0, "ac": 0}], [], False)
+        artwork_derivatives._jpeg_decode_planes = lambda *args: [(1, 2, [10, 20])]
+        width, height, pixels = artwork_derivatives._jpeg_dc_pixels(b"padded")
+    finally:
+        artwork_derivatives._jpeg_header = original_header
+        artwork_derivatives._jpeg_decode_planes = original_decode_planes
+    if (width, height, pixels) != (2, 3, [(10, 10, 10)] * 6):
+        fail(f"padded JPEG storage leaked into visible coordinate scaling: {(width, height, pixels)}")
+
     original_root = artwork_derivatives.ROOT
     original_manifest = artwork_derivatives.MANIFEST
     original_cache = artwork_derivatives._MANIFEST_CACHE
