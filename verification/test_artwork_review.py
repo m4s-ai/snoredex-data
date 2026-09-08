@@ -48,12 +48,15 @@ def image_dimensions(path: Path) -> tuple[int, int]:
 
 def verify_derivative_writer() -> None:
     """Exercise source replacement, progressive JPEG decoding, and RGB channel order."""
-    for relative in ("images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
+    for relative in ("images/151C_143_Snorlax_V1_819209.jpg",
+                     "images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
                      "images/TEU_191_Eevee___Snorlax_GX_V3_369116.jpg",
                      "images/EXS__Snorlax_548656.jpg"):
         width, height, pixels = artwork_derivatives.decode(ROOT / relative, 64)
         if width <= 0 or height <= 0 or not pixels:
             fail(f"progressive JPEG did not produce preview pixels: {relative}")
+        if len(set(pixels)) < 2:
+            fail(f"JPEG preview unexpectedly contains one flat color: {relative}")
 
     original_root = artwork_derivatives.ROOT
     original_manifest = artwork_derivatives.MANIFEST
@@ -93,6 +96,19 @@ def verify_derivative_writer() -> None:
                 fail("source replacement leaves derivative manifest hash unchanged")
             if first_bytes == second_preview.read_bytes():
                 fail("source replacement leaves derivative bytes unchanged")
+            extension_source = test_root / "images" / "extension.png"
+            extension_source.write_bytes(artwork_derivatives.encode_png(
+                4, 2, [(20, 220, 20)] * 8))
+            legacy = test_root / "images" / "previews" / "extension.jpg"
+            legacy.parent.mkdir(parents=True, exist_ok=True)
+            legacy.write_bytes(first_bytes)
+            artwork_derivatives.ensure_for_sources([extension_source])
+            extension_entry = json.loads(manifest_path.read_text(
+                encoding="utf-8"))["sources"]["images/extension.png"]
+            if not extension_entry["preview"]["path"].endswith(".png"):
+                fail("extension replacement reused a legacy derivative")
+            if (test_root / extension_entry["preview"]["path"]).read_bytes() == first_bytes:
+                fail("extension replacement copied stale derivative bytes")
     finally:
         artwork_derivatives.ROOT = original_root
         artwork_derivatives.MANIFEST = original_manifest

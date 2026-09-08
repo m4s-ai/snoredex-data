@@ -168,12 +168,12 @@ class _Bits:
     def read(self, count: int) -> int:
         while self.count < count:
             if self.index >= len(self.data):
-                raise ImageError("JPEG entropy stream ended early")
+                raise _EntropyEnd
             byte = self.data[self.index]
             self.index += 1
             if byte == 0xFF:
                 if self.index >= len(self.data):
-                    raise ImageError("JPEG entropy stream ended after marker")
+                    raise _EntropyEnd
                 marker = self.data[self.index]
                 if marker == 0:
                     self.index += 1
@@ -262,7 +262,7 @@ def _jpeg_huffman_tables(payload: bytes, huffman: dict[tuple[int, int], dict[tup
         huffman[(table_class, table_id)] = _huffman_table(bits, values)
 
 
-def _jpeg_scan(payload: bytes, progressive: bool) -> tuple[list[dict[str, int]], int, int, int]:
+def _jpeg_scan(payload: bytes, progressive: bool) -> tuple[list[dict[str, int]], int, int, int, int]:
     count = payload[0]
     cursor = 1
     scan = []
@@ -270,31 +270,12 @@ def _jpeg_scan(payload: bytes, progressive: bool) -> tuple[list[dict[str, int]],
         identifier, selector = payload[cursor:cursor + 2]
         cursor += 2
         scan.append({"id": identifier, "dc": selector >> 4, "ac": selector & 15})
-    spectral_start = spectral_end = approx_low = 0
+    spectral_start = spectral_end = approx_high = approx_low = 0
     if len(payload) >= cursor + 3:
         spectral_start, spectral_end = payload[cursor:cursor + 2]
-        approx_low = payload[cursor + 2] & 15
-    if progressive and (spectral_start or spectral_end):
-        raise ImageError("progressive JPEG AC scans are not preview-decodable")
-    return scan, spectral_start, spectral_end, approx_low
-
-
-def _jpeg_segment(marker: int, payload: bytes, quant: dict[int, list[int]],
-                  huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
-                  components: list[dict[str, int]], scan: list[dict[str, int]],
-                  progressive: bool, spectral_start: int, spectral_end: int,
-                  approx_low: int) -> tuple[list[dict[str, int]], list[dict[str, int]], bool,
-                                             int, int, int, int, int]:
-    width = height = 0
-    if marker == 0xDB:
-        _jpeg_quant_tables(payload, quant)
-    elif marker in (0xC0, 0xC1, 0xC2):
-        width, height, components, progressive = _jpeg_frame(payload, marker == 0xC2)
-    elif marker == 0xC4:
-        _jpeg_huffman_tables(payload, huffman)
-    elif marker == 0xDA:
-        scan, spectral_start, spectral_end, approx_low = _jpeg_scan(payload, progressive)
-    return components, scan, progressive, spectral_start, spectral_end, approx_low, width, height
+        approximation = payload[cursor + 2]
+        approx_high, approx_low = approximation >> 4, approximation & 15
+    return scan, spectral_start, spectral_end, approx_high, approx_low
 
 
 def _jpeg_read_segment(data: bytes, position: int) -> tuple[int, bytes, int] | None:
@@ -304,56 +285,86 @@ def _jpeg_read_segment(data: bytes, position: int) -> tuple[int, bytes, int] | N
         position += 1
     marker = data[position]
     position += 1
-    if marker in (0xD8, 0xD9):
-        return 0, b"", position
+    if marker in (0xD8, 0xD9) or marker in range(0xD0, 0xD8) or marker == 0x01:
+        return marker, b"", position
     length = struct.unpack(">H", data[position:position + 2])[0]
     payload = data[position + 2:position + length]
     return marker, payload, position + length
 
 
-def _jpeg_marker_state(data: bytes) -> tuple[int, int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, int]], bool, int, int, int]:
+def _jpeg_entropy_end(data: bytes, position: int) -> int:
+    while position + 1 < len(data):
+        if data[position] != 0xFF:
+            position += 1
+            continue
+        marker = data[position + 1]
+        if marker == 0 or marker in range(0xD0, 0xD8):
+            position += 2
+            continue
+        return position
+    return len(data)
+
+
+def _jpeg_header_segment(marker: int, payload: bytes, quant: dict[int, list[int]],
+                         huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                         components: list[dict[str, int]], progressive: bool,
+                         width: int, height: int) -> tuple[int, int, list[dict[str, int]], bool]:
+    if marker == 0xDB:
+        _jpeg_quant_tables(payload, quant)
+    elif marker in (0xC0, 0xC1, 0xC2):
+        width, height, components, progressive = _jpeg_frame(payload, marker == 0xC2)
+    elif marker == 0xC4:
+        _jpeg_huffman_tables(payload, huffman)
+    return width, height, components, progressive
+
+
+def _jpeg_scan_record(data: bytes, position: int, payload: bytes, progressive: bool,
+                      quant: dict[int, list[int]],
+                      huffman: dict[tuple[int, int], dict[tuple[int, int], int]]) -> tuple[dict[str, object], int]:
+    scan, spectral_start, spectral_end, approx_high, approx_low = _jpeg_scan(payload, progressive)
+    entropy_end = _jpeg_entropy_end(data, position)
+    record = {"components": scan, "start": position, "end": entropy_end,
+              "spectral_start": spectral_start, "spectral_end": spectral_end,
+              "approx_high": approx_high, "approx_low": approx_low,
+              "quant": {key: values[:] for key, values in quant.items()},
+              "huffman": {key: table.copy() for key, table in huffman.items()}}
+    return record, entropy_end
+
+
+def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool]:
     if not data.startswith(b"\xff\xd8"):
         raise ImageError("not a JPEG")
     quant: dict[int, list[int]] = {}
     huffman: dict[tuple[int, int], dict[tuple[int, int], int]] = {}
     components: list[dict[str, int]] = []
-    scan: list[dict[str, int]] = []
+    scans: list[dict[str, object]] = []
     progressive = False
-    spectral_start = spectral_end = approx_low = 0
     width = height = 0
     position = 2
-    entropy_start = None
     while position + 3 < len(data):
         segment = _jpeg_read_segment(data, position)
         if segment is None:
             position += 1
             continue
         marker, payload, position = segment
-        (components, scan, progressive, spectral_start, spectral_end, approx_low,
-         segment_width, segment_height) = _jpeg_segment(
-             marker, payload, quant, huffman, components, scan, progressive,
-             spectral_start, spectral_end, approx_low)
-        width = segment_width or width
-        height = segment_height or height
         if marker == 0xDA:
-            entropy_start = position
+            record, position = _jpeg_scan_record(data, position, payload, progressive, quant, huffman)
+            scans.append(record)
+        elif marker == 0xD9:
             break
-    if entropy_start is None or not components or not scan:
+        else:
+            width, height, components, progressive = _jpeg_header_segment(
+                marker, payload, quant, huffman, components, progressive, width, height)
+    if not scans or not components:
         raise ImageError("JPEG has no baseline scan")
-    return (width, height, entropy_start, quant, huffman, components, scan, progressive,
-            spectral_start, spectral_end, approx_low)
+    return width, height, quant, huffman, components, scans, progressive
 
 
-def _jpeg_header(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, int]], bool, int, int, int]:
-    (width, height, entropy_start, quant, huffman, components, scan, progressive,
-     spectral_start, spectral_end, approx_low) = _jpeg_marker_state(data)
+def _jpeg_header(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool]:
+    width, height, quant, huffman, components, scans, progressive = _jpeg_marker_state(data)
     if len(components) != 3:
         raise ImageError("only three-component JPEGs are supported")
-    for component in components:
-        selected = next((item for item in scan if item["id"] == component["id"]), {"dc": 0, "ac": 0})
-        component.update(dc=selected["dc"], ac=selected["ac"])
-    return (width, height, entropy_start, quant, huffman, components, scan, progressive,
-            spectral_start, spectral_end, approx_low)
+    return width, height, quant, huffman, components, scans, progressive
 
 
 def _jpeg_read_block(reader: _Bits, dc_table: dict[tuple[int, int], int],
@@ -397,41 +408,62 @@ def _jpeg_decode_mcu(reader: _Bits, components: list[dict[str, int]], active_ids
                 plane[origin_y * plane_width + origin_x] = average
 
 
-def _jpeg_decode_planes(data: bytes, entropy_start: int, width: int, height: int,
-                        quant: dict[int, list[int]],
-                        huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
-                        components: list[dict[str, int]], scan: list[dict[str, int]],
-                        progressive: bool, approx_low: int) -> list[tuple[int, int, list[int]]]:
-    active_ids = {item["id"] for item in scan}
-    active_components = [component for component in components if component["id"] in active_ids]
-    max_h = max(component["h"] for component in active_components)
-    max_v = max(component["v"] for component in active_components)
-    blocks_x = math.ceil(width / (8 * max_h))
-    blocks_y = math.ceil(height / (8 * max_v))
-    planes = []
-    previous_dc = [0, 0, 0]
-    reader = _Bits(data[entropy_start:])
-    for component_index, component in enumerate(components):
-        plane_width = blocks_x * component["h"]
-        plane_height = blocks_y * component["v"]
-        planes.append((plane_width, plane_height, [128] * (plane_width * plane_height)))
+def _scan_components(components: list[dict[str, int]], scan: list[dict[str, int]]) -> tuple[list[dict[str, int]], set[int]]:
+    selectors = {item["id"]: item for item in scan}
+    selected_components = []
+    active_ids = set(selectors)
+    for component in components:
+        selected = component.copy()
+        selected.update(selectors.get(component["id"], {}))
+        selected_components.append(selected)
+    return selected_components, active_ids
 
+
+def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: int,
+                      frame_components: list[dict[str, int]], planes: list[tuple[int, int, list[int]]],
+                      frame_h: int, frame_v: int, progressive: bool) -> None:
+    components, active_ids = _scan_components(frame_components, scan["components"])
+    if progressive and (scan["spectral_start"] or scan["spectral_end"] or scan["approx_high"]):
+        return
+    blocks_x = math.ceil(width / (8 * frame_h))
+    blocks_y = math.ceil(height / (8 * frame_v))
+    previous_dc = [0, 0, 0]
+    reader = _Bits(data[scan["start"]:scan["end"]])
+    quant = scan["quant"]
+    huffman = scan["huffman"]
     try:
         for mcu_y in range(blocks_y):
             for mcu_x in range(blocks_x):
                 _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
-                                 mcu_x, mcu_y, previous_dc, progressive, approx_low)
+                                 mcu_x, mcu_y, previous_dc, progressive, scan["approx_low"])
     except _EntropyEnd:
         if not progressive:
             raise ImageError("JPEG entropy stream ended before all blocks")
+
+
+def _jpeg_decode_planes(data: bytes, width: int, height: int,
+                        quant: dict[int, list[int]],
+                        huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                        components: list[dict[str, int]], scans: list[dict[str, object]],
+                        progressive: bool) -> list[tuple[int, int, list[int]]]:
+    del quant, huffman
+    frame_h = max(component["h"] for component in components)
+    frame_v = max(component["v"] for component in components)
+    blocks_x = math.ceil(width / (8 * frame_h))
+    blocks_y = math.ceil(height / (8 * frame_v))
+    planes = []
+    for component_index, component in enumerate(components):
+        plane_width = blocks_x * component["h"]
+        plane_height = blocks_y * component["v"]
+        planes.append((plane_width, plane_height, [128] * (plane_width * plane_height)))
+    for scan in scans:
+        _jpeg_decode_scan(data, scan, width, height, components, planes, frame_h, frame_v, progressive)
     return planes
 
 
 def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, int, list[tuple[int, int, int]]]:
-    (width, height, entropy_start, quant, huffman, components, scan, progressive,
-     _spectral_start, _spectral_end, approx_low) = _jpeg_header(data)
-    planes = _jpeg_decode_planes(data, entropy_start, width, height, quant, huffman,
-                                 components, scan, progressive, approx_low)
+    width, height, quant, huffman, components, scans, progressive = _jpeg_header(data)
+    planes = _jpeg_decode_planes(data, width, height, quant, huffman, components, scans, progressive)
 
     pixels: list[tuple[int, int, int]] = []
     output_width = min(width, target_width) if target_width else width
@@ -515,7 +547,10 @@ def _manifest() -> dict[str, object]:
 
 
 def _manifest_entry(source: Path) -> dict[str, object] | None:
-    entry = (_manifest().get("sources") or {}).get(_source_key(source))
+    sources = _manifest().get("sources") or {}
+    if not isinstance(sources, dict):
+        raise ImageError("derivative manifest sources is not an object")
+    entry = sources.get(_source_key(source))
     return entry if isinstance(entry, dict) else None
 
 
@@ -532,21 +567,16 @@ def _valid_record(record: object, source_hash: str) -> Path | None:
     return path
 
 
-def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
-    """Return derivatives proven to match the current source bytes.
+def _manifest_derivatives(entry: dict[str, object], source_hash: str) -> dict[str, Path]:
+    result = {}
+    for kind in ("preview", "thumbnail"):
+        path = _valid_record(entry.get(kind), source_hash)
+        if path:
+            result[kind] = path
+    return result
 
-    Existing checkouts predate the manifest, so legacy JPEG derivatives are accepted once and
-    recorded by the next write pass.  Once a source has a manifest entry, a hash mismatch never
-    falls back to an old file; the normal writer must rebuild it first.
-    """
-    entry = _manifest_entry(source)
-    if entry is not None:
-        result = {}
-        for kind in ("preview", "thumbnail"):
-            path = _valid_record(entry.get(kind), source_hash)
-            if path:
-                result[kind] = path
-        return result
+
+def _legacy_derivatives(source: Path) -> dict[str, Path]:
     result = {}
     for kind in ("preview", "thumbnail"):
         root = ROOT / "images" / ("previews" if kind == "preview" else "thumbs")
@@ -556,6 +586,24 @@ def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
                 result[kind] = path
                 break
     return result
+
+
+def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
+    """Return derivatives proven to match the current source bytes.
+
+    Existing checkouts predate the manifest, so legacy JPEG derivatives are accepted once and
+    recorded by the next write pass.  Once a source has a manifest entry, a hash mismatch never
+    falls back to an old file; the normal writer must rebuild it first.
+    """
+    manifest_sources = _manifest().get("sources") or {}
+    if not isinstance(manifest_sources, dict):
+        raise ImageError("derivative manifest sources is not an object")
+    entry = _manifest_entry(source)
+    if entry is not None:
+        return _manifest_derivatives(entry, source_hash)
+    if manifest_sources:
+        return {}
+    return _legacy_derivatives(source)
 
 
 def _record(source: Path, source_hash: str, kind: str, path: Path) -> dict[str, str]:
