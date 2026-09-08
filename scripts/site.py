@@ -734,16 +734,18 @@ def main() -> int:
 <section id="artwork-review">
   <h2>Artwork &amp; detection review</h2>
   <p>This client-side review surface reads the generated projection of the authoritative locality
-  graph. It keeps a shared work/artwork group separate from each physical local release, shows the
+  graph. It keeps an automatically derived image group separate from each physical local release, shows the
   current catalogue-derived detection fields beside the recorded image and evidence, and emits
-  downloadable review proposals. It never writes the catalogue from the browser.</p>
+  downloadable review proposals. These image groups are suggestions only; a reviewed artwork
+  identity is assigned only by an explicit human decision. It never writes the catalogue from the browser.</p>
   <div class="callout">
     <strong>Review boundary.</strong> Proposals carry stable graph IDs, before-values, source
     observation hashes and the projection version. A reviewed import must validate them against the
     current graph before any generator can change catalogue truth. The projection currently covers
     {artwork_review['summary']['cardReleases']} card releases in
-    {artwork_review['summary']['mappedWorks']} mapped artwork groups plus
-    {artwork_review['summary']['unmappedReleases']} unmapped source-first releases.
+    {artwork_review['summary']['imageGroups']} automatic image groups plus
+    {artwork_review['summary']['unmappedReleases']} unmapped source-first releases; no reviewed
+    artwork appearances are materialized here.
     <a href="verification/artwork_review_projection.json">Download the projection</a>.
   </div>
   <div class="artwork-review" id="artwork-review-app">
@@ -755,7 +757,7 @@ def main() -> int:
         </div>
         <div class="field"><label for="ar-scope">Show</label>
           <select id="ar-scope">
-            <option value="mapped">Verified artwork appearances</option>
+            <option value="image-groups">Automatic image groups (review suggestions)</option>
             <option value="all">All groups</option>
             <option value="unmapped">Unmapped releases</option>
           </select>

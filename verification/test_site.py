@@ -204,9 +204,11 @@ def main() -> int:
               artwork_projection["schema"] == "snoredex-artwork-review"
               and artwork_projection["summary"]["cardReleases"] >= 600
               and artwork_projection["summary"]["mappedWorks"] >= 30
-              and artwork_projection["summary"]["mappedAppearances"] > 0,
+              and artwork_projection["summary"]["imageGroups"] > 0
+              and artwork_projection["summary"]["reviewedAppearances"] == 0
+              and artwork_projection["summary"]["mappedAppearances"] == 0,
               str(artwork_projection.get("summary")))
-        check("artwork review renders a mapped group and a stable release id",
+        check("artwork review renders an automatic image group and a stable release id",
               page.locator("#artwork-review").count() == 1
               and page.locator("#ar-groups .artwork-group").count() > 0
               and page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id"),
@@ -225,8 +227,477 @@ def main() -> int:
               saved_proposal is not None
               and saved_proposal["action"] == "confirm"
               and saved_proposal["projectionVersion"] == artwork_projection["projectionVersion"]
+              and "imageGroupId" in saved_proposal
+              and "reviewedAppearanceId" in saved_proposal
+              and "imageGroupId" in saved_proposal["before"]
+              and "reviewedAppearanceId" in saved_proposal["before"]
               and saved_proposal["sourceContentHashes"],
               str(saved_proposal))
+
+        unsaved_card = page.locator("#ar-groups .artwork-member").nth(1)
+        unsaved_id = unsaved_card.get_attribute("data-release-id")
+        first_review_id = first_review_member.get_attribute("data-release-id")
+        first_review_member.locator(".ar-action").select_option("unclear")
+        first_review_member.locator(".ar-note").fill("Unsaved revision must survive filtering.")
+        page.fill("#ar-search", unsaved_id)
+        page.wait_for_timeout(80)
+        page.fill("#ar-search", "")
+        page.wait_for_timeout(80)
+        check("saved artwork revisions override drafts after filtering",
+              first_review_member.locator(".ar-action").input_value() == "unclear"
+              and first_review_member.locator(".ar-note").input_value() ==
+              "Unsaved revision must survive filtering.",
+              f"action={first_review_member.locator('.ar-action').input_value()!r} "
+              f"note={first_review_member.locator('.ar-note').input_value()!r}")
+        unsaved_card.locator(".ar-note").fill("Keep this unsaved draft.")
+        first_review_member.locator(".ar-note").fill("Saved without losing the sibling draft.")
+        first_review_member.locator(".ar-save").click()
+        page.wait_for_timeout(80)
+        revised_proposal = page.evaluate("""(releaseId) => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved[releaseId] || null;
+        }""", first_review_id)
+        check("saved artwork revision persists its latest action",
+              revised_proposal is not None and revised_proposal["action"] == "unclear",
+              str(revised_proposal))
+        check("saving one artwork card preserves an unsaved sibling input",
+              unsaved_card.locator(".ar-note").input_value() == "Keep this unsaved draft.",
+              unsaved_card.locator(".ar-note").input_value())
+        page.fill("#ar-search", unsaved_id)
+        page.wait_for_timeout(80)
+        filtered_unsaved = page.locator("#ar-groups .artwork-member").filter(
+            has_text=unsaved_id).first
+        check("artwork filtering preserves unsaved inputs",
+              filtered_unsaved.locator(".ar-note").input_value() == "Keep this unsaved draft.",
+              filtered_unsaved.locator(".ar-note").input_value())
+        page.fill("#ar-search", "")
+        page.wait_for_timeout(80)
+
+        # Saving while the unreviewed filter is active must remove the newly reviewed card from the
+        # visible list instead of leaving a stale DOM card behind the filtered summary.
+        page.select_option("#ar-proposal-filter", "unreviewed")
+        page.wait_for_timeout(80)
+        unsaved_card = page.locator("#ar-groups .artwork-member").filter(has_text=unsaved_id).first
+        unsaved_card.locator(".ar-action").select_option("unclear")
+        unsaved_card.locator(".ar-save").click()
+        page.wait_for_timeout(80)
+        check("saving under the unreviewed filter removes the reviewed card",
+              page.locator("#ar-groups .artwork-member").filter(has_text=unsaved_id).count() == 0,
+              "saved card remained visible under the unreviewed filter")
+        page.select_option("#ar-proposal-filter", "all")
+        page.wait_for_timeout(80)
+
+        # Drafts from the previous proposal schema remain exportable, but must not be counted as
+        # current reviewed proposals after the projection/schema bump.
+        stale_context = browser.new_context()
+        stale_context.add_init_script("""
+          (() => {
+            if (localStorage.getItem('snoredex-stale-fixture-ready')) return;
+            localStorage.setItem('snoredex-stale-fixture-ready', '1');
+            localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+              'CARD:STALE-FIXTURE': {
+                schema: 'snoredex-artwork-review-proposal',
+                schemaVersion: '1.1.0',
+                projectionVersion: 'old-projection',
+                reviewer: 'Legacy reviewer',
+                action: 'confirm'
+              },
+              'CARD:INVALID-FIXTURE': null
+            }));
+          })();
+        """)
+        stale_page = stale_context.new_page()
+        stale_page.goto(url)
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_summary = stale_page.locator("#ar-summary").inner_text().lower()
+        check("stale artwork drafts are classified without counting as current",
+              "stale proposal" in stale_summary and "0 proposals" in stale_summary,
+              stale_summary)
+        with stale_page.expect_download() as stale_download:
+            stale_page.click("#ar-download")
+        stale_payload = json.loads(Path(stale_download.value.path()).read_text(encoding="utf-8"))
+        check("stale artwork drafts remain available in exports",
+              stale_payload.get("proposals") == []
+              and len(stale_payload.get("staleProposals") or []) == 2
+              and any(item["staleReason"] == "proposal schema version changed"
+                      for item in stale_payload["staleProposals"])
+              and any(item["staleReason"] == "invalid proposal"
+                      for item in stale_payload["staleProposals"]),
+              str(stale_payload))
+
+        # Existing 1.2 drafts can carry the old target and before-detection shapes.  Loading must
+        # classify both as stale so they cannot bypass the new save-time semantic constraints.
+        stale_page.evaluate("""(projectionVersion) => {
+          const current = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1') || '{}');
+          current['CARD:LEGACY-REASSIGN'] = {
+            schema: 'snoredex-artwork-review-proposal', schemaVersion: '1.2.0', projectionVersion,
+            action: 'reassign', imageGroupId: null, reviewedAppearanceId: null,
+            proposedAfter: {targetGroupId: 'APPEARANCE:obsolete'},
+            before: {imageGroupId: null, reviewedAppearanceId: null, detection: {}},
+            reviewer: 'Legacy reassign reviewer', affectedCardReleaseIds: ['CARD:LEGACY-REASSIGN']
+          };
+          current['CARD:LEGACY-BEFORE'] = {
+            schema: 'snoredex-artwork-review-proposal', schemaVersion: '1.2.0', projectionVersion,
+            action: 'confirm', imageGroupId: null, reviewedAppearanceId: null,
+            proposedAfter: {targetGroupId: null},
+            before: {imageGroupId: null, reviewedAppearanceId: null, detection: {note: 'legacy copy'}},
+            reviewer: 'Legacy before reviewer', affectedCardReleaseIds: ['CARD:LEGACY-BEFORE']
+          };
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(current));
+        }""", artwork_projection["projectionVersion"])
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as stale_shape_download:
+            stale_page.click("#ar-download")
+        stale_shape_payload = json.loads(Path(stale_shape_download.value.path()).read_text(encoding="utf-8"))
+        stale_shape_reasons = [item.get("staleReason") for item in stale_shape_payload.get("staleProposals") or []]
+        check("stored reassign targets are revalidated on load",
+              "reassign target group changed" in stale_shape_reasons,
+              str(stale_shape_reasons))
+        check("stored before detection shape is revalidated on load",
+              "before detection shape changed" in stale_shape_reasons,
+              str(stale_shape_reasons))
+
+        # A malformed primary namespace must not prevent loading or later overwriting a valid
+        # stale namespace.
+        namespace_context = browser.new_context()
+        namespace_page = namespace_context.new_page()
+        namespace_page.goto(url)
+        namespace_page.evaluate("""() => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', '{malformed');
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            'CARD:VALID-STALE': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Valid stale reviewer',
+              action: 'confirm'
+            }
+          }));
+        }""")
+        namespace_page.reload()
+        namespace_page.wait_for_selector("#ar-groups .artwork-member")
+        namespace_page.fill("#ar-reviewer", "Namespace reviewer")
+        namespace_card = namespace_page.locator("#ar-groups .artwork-member").first
+        namespace_card.locator(".ar-action").select_option("unclear")
+        namespace_card.locator(".ar-save").click()
+        namespace_page.wait_for_timeout(80)
+        namespace_status = namespace_card.locator(".artwork-save-status").inner_text().lower()
+        preserved_namespace = namespace_page.evaluate("""() => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1-stale');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved['CARD:VALID-STALE'] || null;
+        }""")
+        check("malformed current storage does not overwrite valid stale storage",
+              preserved_namespace is not None and preserved_namespace.get("reviewer") == "Valid stale reviewer",
+              str(preserved_namespace))
+        check("skipped namespace writes are reported as unsaved",
+              "storage unavailable" in namespace_status and "only in this page" in namespace_status,
+              namespace_status)
+        namespace_page.close()
+        namespace_context.close()
+
+        # If migrating a stale current draft cannot write the stale namespace, keep it in the
+        # current namespace as an envelope so a reload does not lose the historical proposal.
+        transaction_context = browser.new_context()
+        transaction_page = transaction_context.new_page()
+        transaction_page.goto(url)
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        transaction_id = transaction_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        transaction_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Migrated reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            'CARD:ALREADY-PERSISTED': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Already persisted reviewer',
+              action: 'confirm'
+            }
+          }));
+        }""", transaction_id)
+        transaction_page.reload()
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        transaction_page.evaluate("""() => {
+          const originalSetItem = localStorage.setItem.bind(localStorage);
+          localStorage.setItem = (key, value) => {
+            if (key === 'snoredex-artwork-review-proposals-v1-stale') throw new Error('quota fixture');
+            originalSetItem(key, value);
+          };
+        }""")
+        transaction_page.fill("#ar-reviewer", "Transaction reviewer")
+        transaction_card = transaction_page.locator("#ar-groups .artwork-member").first
+        transaction_card.locator(".ar-action").select_option("unclear")
+        transaction_card.locator(".ar-save").click()
+        transaction_page.wait_for_timeout(80)
+        transaction_status = transaction_card.locator(".artwork-save-status").inner_text().lower()
+        retained_transaction = transaction_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          return Object.values(raw).find((value) => value && value.releaseId === releaseId
+            && value.draft && value.draft.reviewer === 'Migrated reviewer') || null;
+        }""", transaction_id)
+        check("stale migration stays in current storage when stale write fails",
+              retained_transaction is not None
+              and retained_transaction.get("releaseId") == transaction_id
+              and retained_transaction.get("draft", {}).get("reviewer") == "Migrated reviewer",
+              str(retained_transaction))
+        retained_already_persisted = transaction_page.evaluate("""() => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          return Object.values(raw).some((value) => value && value.releaseId === 'CARD:ALREADY-PERSISTED');
+        }""")
+        check("fallback storage does not duplicate persisted stale drafts",
+              retained_already_persisted is False,
+              str(retained_already_persisted))
+        check("stale migration write failure is reported as unsaved",
+              "storage unavailable" in transaction_status and "only in this page" in transaction_status,
+              transaction_status)
+        transaction_page.reload()
+        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        with transaction_page.expect_download() as transaction_download:
+            transaction_page.click("#ar-download")
+        transaction_payload = json.loads(Path(transaction_download.value.path()).read_text(encoding="utf-8"))
+        check("retained stale migration survives a reload",
+              any(item.get("proposal", {}).get("reviewer") == "Migrated reviewer"
+                  for item in transaction_payload.get("staleProposals") or []),
+              str(transaction_payload))
+        transaction_page.close()
+        transaction_context.close()
+
+        # If the stale write succeeds but pruning the old current namespace fails, the same
+        # migrated draft is present in both namespaces after reload and must be deduplicated.
+        partial_context = browser.new_context()
+        partial_page = partial_context.new_page()
+        partial_page.goto(url)
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        partial_id = partial_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        partial_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Partial migration reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+        }""", partial_id)
+        partial_page.reload()
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        partial_page.evaluate("""() => {
+          const originalSetItem = localStorage.setItem.bind(localStorage);
+          localStorage.setItem = (key, value) => {
+            if (key === 'snoredex-artwork-review-proposals-v1') throw new Error('quota fixture');
+            originalSetItem(key, value);
+          };
+        }""")
+        partial_page.fill("#ar-reviewer", "Partial current reviewer")
+        partial_card = partial_page.locator("#ar-groups .artwork-member").first
+        partial_card.locator(".ar-action").select_option("unclear")
+        partial_card.locator(".ar-save").click()
+        partial_page.wait_for_timeout(80)
+        partial_page.reload()
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        with partial_page.expect_download() as partial_download:
+            partial_page.click("#ar-download")
+        partial_payload = json.loads(Path(partial_download.value.path()).read_text(encoding="utf-8"))
+        partial_matches = [item for item in partial_payload.get("staleProposals") or []
+                           if item.get("proposal", {}).get("reviewer") == "Partial migration reviewer"]
+        check("partial namespace migration deduplicates stale drafts after reload",
+              len(partial_matches) == 1,
+              str(partial_payload))
+        partial_page.close()
+        partial_context.close()
+
+        # Replacing a stale proposal for a real release must keep the old value in the separate
+        # stale namespace so a reload cannot silently discard the historical export candidate.
+        replacement_id = stale_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        stale_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Previous reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_page.fill("#ar-reviewer", "Replacement reviewer")
+        replacement_card = stale_page.locator("#ar-groups .artwork-member").first
+        replacement_card.locator(".ar-action").select_option("unclear")
+        replacement_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        persisted_stale = stale_page.evaluate("""(releaseId) => {
+          const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1-stale');
+          const saved = raw ? JSON.parse(raw) : {};
+          return saved[releaseId] || null;
+        }""", replacement_id)
+        check("replacement proposals preserve stale drafts in a separate namespace",
+              persisted_stale is not None and persisted_stale.get("action") == "confirm",
+              str(persisted_stale))
+
+        # When a later projection update makes the replacement stale too, retain both generations
+        # instead of letting the newly classified value overwrite the older stale export.
+        stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          raw[releaseId].projectionVersion = 'future-projection';
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(raw));
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as generations_download:
+            stale_page.click("#ar-download")
+        generations_payload = json.loads(Path(generations_download.value.path()).read_text(encoding="utf-8"))
+        generations = [item for item in generations_payload.get("staleProposals") or []
+                       if item.get("releaseId") == replacement_id]
+        check("stale artwork generations are retained independently",
+              len(generations) == 2
+              and {item.get("proposal", {}).get("reviewer") for item in generations}
+              == {"Previous reviewer", "Replacement reviewer"},
+              str(generations_payload))
+        # Persist the colliding stale keys, reload, and ensure the envelope restores the original
+        # release id instead of exposing the synthetic storage suffix to exports.
+        persistence_card = stale_page.locator("#ar-groups .artwork-member").nth(1)
+        persistence_id = persistence_card.get_attribute("data-release-id")
+        stale_page.fill("#ar-reviewer", "Persistence reviewer")
+        persistence_card.locator(".ar-action").select_option("unclear")
+        persistence_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as persisted_generations_download:
+            stale_page.click("#ar-download")
+        persisted_generations_payload = json.loads(
+            Path(persisted_generations_download.value.path()).read_text(encoding="utf-8"))
+        persisted_generations = [item for item in persisted_generations_payload.get("staleProposals") or []
+                                 if item.get("releaseId") == replacement_id]
+        check("persisted stale generations restore their release id",
+              len(persisted_generations) == 2
+              and persistence_id != replacement_id
+              and all(item.get("releaseId") == replacement_id for item in persisted_generations),
+              str(persisted_generations_payload))
+
+        # Raw collision keys from the preceding implementation carry the original release in
+        # affectedCardReleaseIds; migrate them on load and rewrite them without the suffix.
+        stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1-stale'));
+          const prior = raw[releaseId];
+          prior.reviewer = 'Raw suffix reviewer';
+          prior.affectedCardReleaseIds = [releaseId];
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({}));
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            [releaseId + '::2']: prior
+          }));
+        }""", replacement_id)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        stale_page.fill("#ar-reviewer", "Migration current")
+        migration_card = stale_page.locator("#ar-groups .artwork-member").first
+        migration_card.locator(".ar-action").select_option("unclear")
+        migration_card.locator(".ar-save").click()
+        stale_page.wait_for_timeout(80)
+        migrated_storage = stale_page.evaluate("""(releaseId) => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1-stale'));
+          return { keys: Object.keys(raw), draft: raw[releaseId] || null };
+        }""", replacement_id)
+        check("raw suffixed stale entries migrate to the original release key",
+              migrated_storage["keys"] == [replacement_id]
+              and migrated_storage["draft"].get("reviewer") == "Raw suffix reviewer",
+              str(migrated_storage))
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as migrated_download:
+            stale_page.click("#ar-download")
+        migrated_payload = json.loads(Path(migrated_download.value.path()).read_text(encoding="utf-8"))
+        check("migrated stale entry exports its original release id",
+              any(item.get("releaseId") == replacement_id
+                  and item.get("proposal", {}).get("reviewer") == "Raw suffix reviewer"
+                  for item in migrated_payload.get("staleProposals") or []),
+              str(migrated_payload))
+
+        # A proposal from the immediately preceding 1.2 shape (same version, missing typed
+        # identity fields) must also be classified stale rather than accepted as current.
+        current_projection = stale_page.evaluate(
+            "() => JSON.parse(document.getElementById('data-artwork-review').textContent).projectionVersion"
+        )
+        stale_page.evaluate("""(projectionVersion) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            'CARD:TYPED-FIXTURE': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.2.0',
+              projectionVersion,
+              reviewer: 'Untyped reviewer',
+              action: 'confirm',
+              before: {}
+            }
+          }));
+        }""", current_projection)
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as typed_download:
+            stale_page.click("#ar-download")
+        typed_payload = json.loads(Path(typed_download.value.path()).read_text(encoding="utf-8"))
+        check("untyped 1.2 artwork drafts are classified stale",
+              any(item["staleReason"] == "typed artwork identity fields missing"
+                  for item in typed_payload.get("staleProposals") or []),
+              str(typed_payload))
+        stale_page.close()
+        stale_context.close()
+
+        storage_failure_index = page.evaluate("""() => Array.from(
+          document.querySelectorAll('#ar-groups .artwork-member')
+        ).findIndex(card => {
+          const option = card.querySelector("option[value='confirm']");
+          return option && !option.disabled;
+        })""")
+        check("artwork review has a storage-failure fixture", storage_failure_index >= 0,
+              "no image-backed review card with an enabled confirm action")
+        failure_context = browser.new_context()
+        failure_context.add_init_script("""
+          (() => {
+            const originalSetItem = Storage.prototype.setItem;
+            Storage.prototype.setItem = function(key, value) {
+              if (key === 'snoredex-artwork-review-proposals-v1') {
+                throw new DOMException('quota exceeded', 'QuotaExceededError');
+              }
+              return originalSetItem.call(this, key, value);
+            };
+          })();
+        """)
+        failure_page = failure_context.new_page()
+        failure_page.goto(url)
+        failure_page.wait_for_selector("#ar-groups .artwork-member")
+        if storage_failure_index >= 0:
+            failure_card = failure_page.locator("#ar-groups .artwork-member").nth(storage_failure_index)
+            failure_page.fill("#ar-reviewer", "Storage failure reviewer")
+            failure_card.locator(".ar-action").select_option("confirm")
+            failure_card.locator(".ar-note").fill("Storage failure fallback.")
+            failure_card.locator(".ar-save").click()
+            failure_page.wait_for_timeout(80)
+            failure_status = failure_card.locator(".artwork-save-status").inner_text().lower()
+            failure_summary = failure_page.locator("#ar-summary").inner_text().lower()
+            check("artwork review reports storage failures honestly",
+                  "storage unavailable" in failure_status
+                  and "saved locally" not in failure_status
+                  and "download before leaving" in failure_status
+                  and "in memory only" in failure_summary,
+                  failure_status or failure_summary)
+        failure_page.close()
+        failure_context.close()
+
         with page.expect_download() as artwork_download:
             page.click("#ar-download")
         check("artwork review downloads structured proposals",
@@ -235,7 +706,7 @@ def main() -> int:
 
         multi_image_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
+            const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.images && candidate.images.length > 1);
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
@@ -256,7 +727,7 @@ def main() -> int:
 
         structured_member = page.evaluate("""() => {
           for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
-            const member = group.members.find(candidate => group.groupKind === 'mapped-appearance'
+            const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.detection && candidate.detection.artist
               && candidate.images && candidate.images.length && candidate.physicalPrintings
               && candidate.physicalPrintings.length);
@@ -286,6 +757,10 @@ def main() -> int:
                   and structured_saved["proposedAfter"]["detection"]["variant"] == "reviewed-variant"
                   and structured_saved["proposedAfter"]["clearDetectionFields"] == []
                   and structured_saved["affectedPhysicalPrintingIds"] == structured_member["printingIds"],
+                  str(structured_saved))
+            check("proposal before values exclude display-only detection copy",
+                  structured_saved is not None
+                  and "note" not in structured_saved.get("before", {}).get("detection", {}),
                   str(structured_saved))
             structured_card.locator(".ar-proposed-artist").fill("")
             structured_card.locator(".ar-save").click()
@@ -1536,6 +2011,56 @@ def main() -> int:
         check("the export starts with a UTF-8 BOM so spreadsheets read the accents",
               export_path.read_bytes().startswith(b"\xef\xbb\xbf"),
               "no BOM; a double-clicked file falls back to the local codepage")
+
+        # Reassign proposals must point at a currently projected artwork group, and the hint must
+        # use the current IMAGE-GROUP/RELEASE-GROUP identity vocabulary.
+        reassign_target = page.evaluate("""() => {
+          const projection = JSON.parse(document.getElementById('data-artwork-review').textContent);
+          const member = projection.groups.flatMap(group => group.members.map(candidate => ({
+            id: candidate.cardReleaseId,
+            groupId: group.groupId,
+            reviewable: (candidate.images || []).some(image => image.reviewable && image.contentHash),
+          }))).find(candidate => candidate.reviewable);
+          const target = projection.groups.find(group => group.groupId !== member.groupId);
+          return member && target ? {id: member.id, target: target.groupId} : null;
+        }""")
+        if reassign_target:
+            page.fill("#ar-search", reassign_target["id"])
+            page.wait_for_timeout(80)
+            reassign_card = page.locator("#ar-groups .artwork-member").filter(
+                has_text=reassign_target["id"]).first
+            check("reassign hint uses current artwork group ids",
+                  reassign_card.locator(".ar-target").get_attribute("placeholder") ==
+                  "IMAGE-GROUP:… or RELEASE-GROUP:…",
+                  reassign_card.locator(".ar-target").get_attribute("placeholder"))
+            reassign_card.locator(".ar-action").select_option("reassign")
+            reassign_card.locator(".ar-target").fill("APPEARANCE:obsolete")
+            reassign_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            invalid_reassign_status = reassign_card.locator(".artwork-save-status").inner_text()
+            check("reassign rejects unknown artwork group ids",
+                  "existing IMAGE-GROUP" in invalid_reassign_status,
+                  invalid_reassign_status)
+            reassign_card.locator(".ar-target").fill(reassign_target["target"])
+            reassign_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            valid_reassign = page.evaluate("""(releaseId) => {
+              const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+              const saved = raw ? JSON.parse(raw) : {};
+              return saved[releaseId] || null;
+            }""", reassign_target["id"])
+            check("reassign accepts a projected artwork group id",
+                  valid_reassign is not None
+                  and valid_reassign.get("action") == "reassign"
+                  and valid_reassign.get("proposedAfter", {}).get("targetGroupId") == reassign_target["target"],
+                  str(valid_reassign))
+            page.fill("#ar-search", "")
+            page.wait_for_timeout(80)
+        else:
+            check("reassign hint uses current artwork group ids", False,
+                  "projection has no reviewable image member with a distinct target group")
+            check("reassign rejects unknown artwork group ids", False, "reassign fixture unavailable")
+            check("reassign accepts a projected artwork group id", False, "reassign fixture unavailable")
 
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)

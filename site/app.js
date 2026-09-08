@@ -1213,16 +1213,138 @@
     const proposalFilter = $("#ar-proposal-filter");
     const reviewer = $("#ar-reviewer");
     const storageKey = "snoredex-artwork-review-proposals-v1";
+    const staleStorageKey = storageKey + "-stale";
     let drafts = {};
+    let staleDrafts = {};
+    let storageWarning = "";
+    const formValues = new Map();
+    const semanticDetectionFields = [
+      "state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence",
+    ];
+    const semanticDetectionFieldSet = new Set(semanticDetectionFields);
+    const artworkGroupIds = new Set((ARTWORK_REVIEW.groups || []).map((group) => group.groupId));
 
-    try {
-      const saved = window.localStorage.getItem(storageKey);
-      if (saved) drafts = JSON.parse(saved) || {};
-    } catch (error) { /* Offline/file:// storage may be unavailable. */ }
+    const staleReason = (draft) => {
+      if (!draft || typeof draft !== "object" || Array.isArray(draft)) return "invalid proposal";
+      if (draft.schema !== ARTWORK_REVIEW.proposalSchema) return "proposal schema changed";
+      if (draft.schemaVersion !== ARTWORK_REVIEW.proposalSchemaVersion) return "proposal schema version changed";
+      if (draft.projectionVersion !== ARTWORK_REVIEW.projectionVersion) return "projection version changed";
+      if (!Object.prototype.hasOwnProperty.call(draft, "imageGroupId")
+          || !Object.prototype.hasOwnProperty.call(draft, "reviewedAppearanceId")
+          || !draft.before
+          || !Object.prototype.hasOwnProperty.call(draft.before, "imageGroupId")
+          || !Object.prototype.hasOwnProperty.call(draft.before, "reviewedAppearanceId")) {
+        return "typed artwork identity fields missing";
+      }
+      if (draft.action === "reassign"
+          && !artworkGroupIds.has(draft.proposedAfter && draft.proposedAfter.targetGroupId)) {
+        return "reassign target group changed";
+      }
+      const beforeDetection = draft.before.detection;
+      if (beforeDetection && typeof beforeDetection === "object" && !Array.isArray(beforeDetection)
+          && Object.keys(beforeDetection).some((key) => !semanticDetectionFieldSet.has(key))) {
+        return "before detection shape changed";
+      }
+      return "";
+    };
+    const addStaleDraft = (releaseId, draft, reason, migratedFromCurrent = false) => {
+      const duplicate = Object.values(staleDrafts).some((item) =>
+        item.releaseId === releaseId && item.reason === reason
+        && JSON.stringify(item.draft) === JSON.stringify(draft));
+      if (duplicate) return;
+      const baseKey = releaseId || "unknown-release";
+      let key = baseKey;
+      let suffix = 2;
+      while (Object.prototype.hasOwnProperty.call(staleDrafts, key)) {
+        key = baseKey + "::" + suffix;
+        suffix += 1;
+      }
+      staleDrafts[key] = { releaseId, draft, reason, migratedFromCurrent };
+    };
+    const decodeStaleDraft = (storageKey, stored) => {
+      if (stored && typeof stored === "object" && !Array.isArray(stored)
+          && Object.prototype.hasOwnProperty.call(stored, "draft")
+          && Object.prototype.hasOwnProperty.call(stored, "releaseId")) {
+        return { releaseId: stored.releaseId || storageKey, draft: stored.draft };
+      }
+      const affectedReleaseId = stored && Array.isArray(stored.affectedCardReleaseIds)
+        ? stored.affectedCardReleaseIds[0] : null;
+      const rawSuffix = /^(.*)::\d+$/.exec(storageKey);
+      return { releaseId: (rawSuffix && affectedReleaseId) ? affectedReleaseId : storageKey, draft: stored };
+    };
+    const decodeCurrentDraft = (storageKey, stored) => {
+      if (stored && typeof stored === "object" && !Array.isArray(stored)
+          && Object.prototype.hasOwnProperty.call(stored, "draft")
+          && Object.prototype.hasOwnProperty.call(stored, "releaseId")) {
+        return { releaseId: stored.releaseId || storageKey, draft: stored.draft };
+      }
+      return { releaseId: storageKey, draft: stored };
+    };
+    const classifyStoredDrafts = (stored) => {
+      if (!stored || typeof stored !== "object" || Array.isArray(stored)) return;
+      Object.entries(stored).forEach(([storageKey, storedDraft]) => {
+        const { releaseId, draft } = decodeCurrentDraft(storageKey, storedDraft);
+        const reason = staleReason(draft);
+        if (reason) addStaleDraft(releaseId, draft, reason, true);
+        else drafts[releaseId] = draft;
+      });
+    };
+    const storageLoadFailed = { current: false, stale: false };
+    const loadNamespace = (key, namespace, callback) => {
+      try {
+        const saved = window.localStorage.getItem(key);
+        if (saved) callback(JSON.parse(saved));
+      } catch (error) {
+        storageLoadFailed[namespace] = true;
+        storageWarning = "Browser storage unavailable; download proposals before leaving.";
+      }
+    };
+    loadNamespace(storageKey, "current", classifyStoredDrafts);
+    loadNamespace(staleStorageKey, "stale", (storedStale) => {
+      if (storedStale && typeof storedStale === "object" && !Array.isArray(storedStale)) {
+        Object.entries(storedStale).forEach(([storageKey, stored]) => {
+          const { releaseId, draft } = decodeStaleDraft(storageKey, stored);
+          addStaleDraft(releaseId, draft, staleReason(draft) || "stale proposal");
+        });
+      }
+    });
 
+    const staleStoragePayload = () => Object.fromEntries(Object.entries(staleDrafts).map(([key, item]) => [key,
+      key === item.releaseId ? item.draft : { releaseId: item.releaseId, draft: item.draft }]));
+    const currentStoragePayload = (retainStale) => {
+      const retained = { ...drafts };
+      if (!retainStale) return retained;
+      Object.entries(staleDrafts).filter(([, item]) => item.migratedFromCurrent).forEach(([baseKey, item]) => {
+        let key = baseKey;
+        let suffix = 2;
+        while (Object.prototype.hasOwnProperty.call(retained, key)) {
+          key = baseKey + "::" + suffix;
+          suffix += 1;
+        }
+        retained[key] = { releaseId: item.releaseId, draft: item.draft };
+      });
+      return retained;
+    };
     const persist = () => {
-      try { window.localStorage.setItem(storageKey, JSON.stringify(drafts)); }
-      catch (error) { /* The download remains available even without storage. */ }
+      let staleWriteSucceeded = !storageLoadFailed.stale;
+      try {
+        if (staleWriteSucceeded) {
+          window.localStorage.setItem(staleStorageKey, JSON.stringify(staleStoragePayload()));
+        }
+      } catch (error) {
+        staleWriteSucceeded = false;
+      }
+      let currentWriteSucceeded = !storageLoadFailed.current;
+      try {
+        if (currentWriteSucceeded) {
+          window.localStorage.setItem(storageKey, JSON.stringify(currentStoragePayload(!staleWriteSucceeded)));
+        }
+      } catch (error) {
+        currentWriteSucceeded = false;
+      }
+      const complete = currentWriteSucceeded && staleWriteSucceeded;
+      storageWarning = complete ? "" : "Browser storage unavailable; download proposals before leaving.";
+      return complete;
     };
     const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
     const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));
@@ -1235,7 +1357,30 @@
     ].filter(Boolean).join(" ").toLowerCase();
 
     const draftFor = (member) => drafts[member.cardReleaseId] || null;
-    const draftState = (member) => draftFor(member) ? "reviewed" : "unreviewed";
+    const captureCard = (card) => {
+      if (!card || !card.dataset.releaseId) return;
+      const detection = {};
+      const clearDetectionFields = [];
+      card.querySelectorAll("[data-detection-field]").forEach((field) => {
+        if (field.dataset.touched !== "true") return;
+        const key = field.dataset.detectionField;
+        const value = field.value.trim();
+        if (value) detection[key] = value;
+        else clearDetectionFields.push(key);
+      });
+      formValues.set(card.dataset.releaseId, {
+        action: $(".ar-action", card).value,
+        targetGroupId: $(".ar-target", card).value.trim(),
+        note: $(".ar-note", card).value,
+        detection,
+        clearDetectionFields,
+        affectedPhysicalPrintingIds: Array.from(card.querySelectorAll(".ar-physical:checked"))
+          .map((input) => input.value),
+      });
+    };
+    const captureVisibleForms = () => {
+      groupsBox.querySelectorAll(".artwork-member").forEach(captureCard);
+    };
     const actionLabel = (action) => ({
       confirm: "Confirm group",
       correct: "Correct detection",
@@ -1320,13 +1465,15 @@
       detection.foilPattern && detection.foilPattern.join(', '),
     ].filter(Boolean).join(' · ') || 'no fields');
 
-    const memberCollections = (member, draft) => {
+    const memberCollections = (member, draft, form) => {
       const physical = member.physicalPrintings || [];
       const images = member.images || [];
       const imageHashes = images.map((image) => image.contentHash).filter(Boolean);
       const physicalIds = physical.map((item) => item.physicalPrintingId).filter(Boolean);
       const selectedPhysicalIds = new Set(
-          draft && Array.isArray(draft.affectedPhysicalPrintingIds)
+        form && Array.isArray(form.affectedPhysicalPrintingIds)
+          ? form.affectedPhysicalPrintingIds
+          : draft && Array.isArray(draft.affectedPhysicalPrintingIds)
             ? draft.affectedPhysicalPrintingIds : physicalIds,
       );
       return { physical, images, imageHashes, physicalIds, selectedPhysicalIds };
@@ -1343,11 +1490,20 @@
       markings: (detection.markings || []).join(", "),
     });
 
-    const memberDetection = (member, draft) => {
+    const memberDetection = (member, draft, form) => {
       const detection = member.detection || {};
-      const proposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
+      const savedProposed = draft && draft.proposedAfter && draft.proposedAfter.detection || {};
+      const proposed = { ...savedProposed };
       const cleared = new Set(draft && draft.proposedAfter && draft.proposedAfter.clearDetectionFields || []);
-      const selectedAction = draft ? draft.action : "";
+      if (form) {
+        Object.assign(proposed, form.detection || {});
+        (form.clearDetectionFields || []).forEach((key) => {
+          delete proposed[key];
+          cleared.add(key);
+        });
+        Object.keys(form.detection || {}).forEach((key) => cleared.delete(key));
+      }
+      const selectedAction = form ? form.action : draft ? draft.action : "";
       return { detection, proposed, cleared, selectedAction,
         existing: memberExistingFields(member, detection) };
     };
@@ -1367,12 +1523,15 @@
     });
 
     const memberView = (member, draft) => {
-      const collections = memberCollections(member, draft);
-      const state = memberDetection(member, draft);
+      const form = formValues.get(member.cardReleaseId) || null;
+      const collections = memberCollections(member, draft, form);
+      const state = memberDetection(member, draft, form);
       const imageReviewable = hasVerifiedImages(member);
       const identity = memberIdentityLabels(member, state.detection);
       const status = memberStatusLabels(draft);
-      const target = draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
+      const target = form
+        ? form.targetGroupId
+        : draft && draft.proposedAfter ? draft.proposedAfter.targetGroupId || "" : "";
       return {
         member,
         detection: state.detection,
@@ -1381,6 +1540,7 @@
         identity,
         status,
         target,
+        note: form ? form.note : draft && draft.note || "",
         actionOptions: actionOptionsHTML(state.selectedAction, imageReviewable),
         structuredFields: structuredFieldsHTML(
           state.selectedAction, state.existing, state.proposed, state.cleared,
@@ -1413,9 +1573,9 @@
       '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
       escapeHTML(view.member.cardReleaseId) + '">' + view.actionOptions + '</select></label>' +
       '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(view.target) +
-      '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
+      '" placeholder="IMAGE-GROUP:… or RELEASE-GROUP:…" aria-label="Target artwork group"></label>' +
       '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
-      escapeHTML(view.status.note) + '</textarea></label>' +
+      escapeHTML(view.note) + '</textarea></label>' +
       '<button type="button" class="ghost ar-save">Save proposal</button>' +
       view.imageWarning +
       '<span class="artwork-save-status" role="status"></span></div></div></article>';
@@ -1427,8 +1587,8 @@
     const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
       '"><header><div><h3>' + escapeHTML(group.label) + '</h3><p><code>' +
       escapeHTML(group.groupId) + '</code> · ' + escapeHTML(group.members.length + ' local releases') +
-      '</p></div><span class="pill ' + (group.groupKind === 'mapped-appearance' ? 'confirmed' : 'pending') + '">' +
-      escapeHTML(group.groupKind === 'mapped-appearance' ? 'verified artwork appearance' : 'unresolved appearance') +
+      '</p></div><span class="pill pending">' +
+      escapeHTML(group.groupKind === 'image-group' ? 'automatic image group — review suggested' : 'unresolved appearance') +
       '</span></header><div class="artwork-members">' +
       group.members.map((member) => memberHTML(group, member)).join('') + '</div></article>';
 
@@ -1437,7 +1597,7 @@
       const mode = scope.value;
       const proposalMode = proposalFilter.value;
       return ARTWORK_REVIEW.groups.filter((group) => {
-        if (mode === "mapped" && group.groupKind !== "mapped-appearance") return false;
+        if (mode === "image-groups" && group.groupKind !== "image-group") return false;
         if (mode === "unmapped" && group.groupKind !== "unmapped-release") return false;
         const groupMatches = !needle || (group.label + " " + group.groupId).toLowerCase().includes(needle);
         const visibleMembers = group.members.filter((member) => {
@@ -1451,11 +1611,19 @@
       });
     };
 
+    const updateSummary = (groups) => {
+      const reviewed = members().filter((member) => draftFor(member)).length;
+      const stale = Object.keys(staleDrafts).length;
+      summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
+        ' releases · ' + reviewed + ' proposals ' + (storageWarning ? 'in memory only' : 'saved locally') +
+        ' · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12) +
+        (stale ? ' · ' + stale + ' stale proposal' + (stale === 1 ? '' : 's') + ' available for export' : '') +
+        (storageWarning ? ' · ' + storageWarning : '');
+    };
+
     const render = () => {
       const groups = filteredGroups();
-      const reviewed = members().filter((member) => draftFor(member)).length;
-      summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
-        ' releases · ' + reviewed + ' proposals saved locally · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12);
+      updateSummary(groups);
       groupsBox.innerHTML = groups.map((group) => {
         const original = group.members;
         group.members = group.__visibleMembers;
@@ -1465,7 +1633,26 @@
       }).join('') || '<p class="artwork-muted">No groups match the current filters.</p>';
     };
 
+    const refreshMemberCard = (memberId) => {
+      const card = Array.from(groupsBox.querySelectorAll(".artwork-member"))
+        .find((candidate) => candidate.dataset.releaseId === memberId);
+      if (!card) return null;
+      const member = memberById.get(memberId);
+      const groupElement = card.closest(".artwork-group");
+      const group = groupElement && groupById.get(groupElement.dataset.groupId);
+      if (!member || !group) return null;
+      card.outerHTML = memberMarkup(memberView(member, draftFor(member)));
+      updateSummary(filteredGroups());
+      return Array.from(groupsBox.querySelectorAll(".artwork-member"))
+        .find((candidate) => candidate.dataset.releaseId === memberId) || null;
+    };
+
+    const semanticBeforeDetection = (detection) => Object.fromEntries(
+      semanticDetectionFields.filter((key) => Object.prototype.hasOwnProperty.call(detection || {}, key))
+        .map((key) => [key, detection[key]])
+    );
     const makeProposal = (member, group, card) => {
+      captureCard(card);
       const action = $(".ar-action", card).value;
       const targetGroupId = $(".ar-target", card).value.trim();
       const note = $(".ar-note", card).value.trim();
@@ -1479,6 +1666,10 @@
         return;
       }
       if (action === "reassign" && !targetGroupId) { status.textContent = "Target group required."; return; }
+      if (action === "reassign" && !artworkGroupIds.has(targetGroupId)) {
+        status.textContent = "Target group must be an existing IMAGE-GROUP:* or RELEASE-GROUP:* id.";
+        return;
+      }
       const detection = {};
       const clearDetectionFields = [];
       card.querySelectorAll("[data-detection-field]").forEach((field) => {
@@ -1507,6 +1698,8 @@
         projectionVersion: ARTWORK_REVIEW.projectionVersion,
         action,
         groupId: group.groupId,
+        imageGroupId: member.imageGroupId,
+        reviewedAppearanceId: member.reviewedAppearanceId,
         affectedCardReleaseIds: [member.cardReleaseId],
         reviewer: name,
         evidenceClass: "human-review",
@@ -1514,7 +1707,13 @@
         sourceContentHashes: sourceHashes,
         imageHashes: (member.images || []).map((item) => item.contentHash).filter(Boolean),
         affectedPhysicalPrintingIds,
-        before: { groupId: group.groupId, workId: member.workId, detection: member.detection },
+        before: {
+          groupId: group.groupId,
+          imageGroupId: member.imageGroupId,
+          reviewedAppearanceId: member.reviewedAppearanceId,
+          workId: member.workId,
+          detection: semanticBeforeDetection(member.detection),
+        },
         proposedAfter: {
           action,
           targetGroupId: targetGroupId || null,
@@ -1525,9 +1724,25 @@
         note,
         createdAt: new Date().toISOString(),
       };
-      persist();
-      status.textContent = "Saved locally.";
-      render();
+      const persisted = persist();
+      formValues.delete(member.cardReleaseId);
+      // Saving changes proposal membership.  If the active proposal filter no longer includes
+      // this member, rerender the list so the visible cards and summary stay consistent.  The
+      // other cards' snapshots were captured before this decision and therefore survive the
+      // rerender; when the member remains visible, keep the cheaper surgical refresh.
+      const remainsVisible = filteredGroups().some((visibleGroup) =>
+        visibleGroup.__visibleMembers.some((visibleMember) => visibleMember.cardReleaseId === member.cardReleaseId));
+      if (!remainsVisible) {
+        render();
+        return;
+      }
+      const refreshedCard = refreshMemberCard(member.cardReleaseId);
+      const refreshedStatus = refreshedCard && $(".artwork-save-status", refreshedCard);
+      if (refreshedStatus) {
+        refreshedStatus.textContent = persisted
+          ? "Saved locally."
+          : "Proposal kept only in this page; storage unavailable. Download before leaving.";
+      }
     };
 
     root.addEventListener("click", (event) => {
@@ -1540,6 +1755,7 @@
     });
     root.addEventListener("change", (event) => {
       if (!event.target.matches || !event.target.matches(".ar-action")) return;
+      captureCard(event.target.closest(".artwork-member"));
       const fields = event.target.closest(".artwork-member").querySelector(".ar-structured-fields");
       if (fields) fields.hidden = !structuredActions.has(event.target.value);
     });
@@ -1547,20 +1763,44 @@
       if (event.target.matches && event.target.matches("[data-detection-field]")) {
         event.target.dataset.touched = "true";
       }
+      captureCard(event.target.closest && event.target.closest(".artwork-member"));
     });
-    [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", render));
-    [scope, proposalFilter].forEach((control) => control.addEventListener("change", render));
-    $("#ar-clear").addEventListener("click", () => { drafts = {}; persist(); render(); });
+    [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", () => {
+      captureVisibleForms();
+      render();
+    }));
+    [scope, proposalFilter].forEach((control) => control.addEventListener("change", () => {
+      captureVisibleForms();
+      render();
+    }));
+    $("#ar-clear").addEventListener("click", () => {
+      drafts = {};
+      staleDrafts = {};
+      formValues.clear();
+      persist();
+      render();
+    });
     $("#ar-download").addEventListener("click", () => {
       const proposals = Object.values(drafts);
-      if (!proposals.length) { summary.textContent = "No proposals saved locally yet."; return; }
+      const staleProposals = Object.entries(staleDrafts).map(([releaseId, item]) => ({
+        releaseId: item.releaseId || releaseId,
+        staleReason: item.reason,
+        proposal: item.draft,
+      }));
+      if (!proposals.length && !staleProposals.length) {
+        summary.textContent = "No proposals saved locally yet.";
+        return;
+      }
       const payload = {
         schema: ARTWORK_REVIEW.proposalSchema,
         schemaVersion: ARTWORK_REVIEW.proposalSchemaVersion,
         projectionVersion: ARTWORK_REVIEW.projectionVersion,
-        reviewer: reviewer.value.trim() || proposals[0].reviewer,
+        reviewer: reviewer.value.trim() || (proposals[0] && proposals[0].reviewer) ||
+          (staleProposals[0] && staleProposals[0].proposal
+            && staleProposals[0].proposal.reviewer) || "",
         createdAt: new Date().toISOString(),
         proposals,
+        staleProposals,
       };
       const blob = new Blob([JSON.stringify(payload, null, 2) + "\n"], { type: "application/json" });
       const url = URL.createObjectURL(blob);

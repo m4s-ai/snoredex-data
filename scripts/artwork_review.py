@@ -65,10 +65,130 @@ def source_observation(kind: str, identifier: str, payload: dict[str, Any], *, u
         "provider": provider,
         "url": url,
         "evidence": evidence,
-        "contentHash": digest(payload),
+        "contentHash": semantic_digest(payload),
         "image": image,
     }
     return record
+
+
+def image_identity(images: list[dict[str, Any]]) -> tuple[str | None, str]:
+    """Return a stable automatic image-group anchor and its non-reviewed state."""
+    reviewable = [image for image in images
+                  if image.get("reviewable") and image.get("contentHash")]
+    if not reviewable:
+        return None, "unresolved-release"
+    return f"IMAGE-GROUP:{reviewable[0]['contentHash'][:24]}", "unreviewed-image-group"
+
+
+def first_sorted_variant(payload: dict[str, Any]) -> str | None:
+    variants = sorted(payload.get("legacyVariants") or [], key=digest)
+    return variants[0] if variants else None
+
+
+SET_LIKE_FIELDS = frozenset({
+    "alternateCardImageUrls", "cardImageUrls", "cardReleaseIds", "claimFields", "claimIds",
+    "corroboratingSourceUrls", "citedBy", "evidenceRefs", "establishingClaimIds",
+    "establishingEvidenceIds", "expectedSubtypes", "finish", "foilPattern", "languages",
+    "legacyCounterpartUnitIds", "legacyIdentityAliases", "legacyProducts", "legacyVariants",
+    "mappedVariants", "markings", "marketScopes", "observedCollectorNumbers", "observedNames",
+    "ownerAttestedFields", "pairedCodes", "printIds", "productIds", "providerRecordIds", "providers",
+    "raritySupportingSourceUrls", "setEditionIds", "snorlaxPrintIds", "snorlaxUnitIds",
+    "sourceFirstRecordIds", "sourceRecordIds", "sourceUrls", "sources", "specimenIds",
+    "supportingSourceUrls", "targetRefs", "viaLegacySetCodes",
+})
+
+
+def normalize_semantic(value: Any) -> Any:
+    """Canonicalize set-like fields recursively at the data/hash boundary."""
+    if isinstance(value, list):
+        return [normalize_semantic(item) for item in value]
+    if not isinstance(value, dict):
+        return value
+    normalized = {key: normalize_semantic(child) for key, child in value.items()}
+    for key in SET_LIKE_FIELDS:
+        child = normalized.get(key)
+        if isinstance(child, list):
+            normalized[key] = sorted(child, key=digest)
+        elif isinstance(child, dict):
+            normalized[key] = {
+                entry_key: sorted(entry_value, key=digest) if isinstance(entry_value, list) else entry_value
+                for entry_key, entry_value in sorted(child.items())
+            }
+    return normalized
+
+
+def semantic_digest(value: Any) -> str:
+    return digest(normalize_semantic(value))
+
+
+def semantic_detection_payload(detection: dict[str, Any]) -> dict[str, Any]:
+    return {key: detection.get(key) for key in
+            ("state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence")}
+
+
+def semantic_member_payload(member: dict[str, Any]) -> dict[str, Any]:
+    return {
+        key: member.get(key)
+        for key in ("cardReleaseId", "workId", "cardKey", "reviewedAppearanceId", "imageGroupId",
+                    "appearanceIdentityState", "locality", "language", "script", "setEditionId",
+                    "localSetCode", "localNumber", "localIdentifierKnown", "state", "workMappingState",
+                    "legacyCounterpartUnitIds", "legacyVariants")
+    } | {
+        "detection": semantic_detection_payload(member.get("detection") or {}),
+        "physicalPrintings": [
+            {key: printing.get(key) for key in printing if key != "sources"}
+            for printing in member.get("physicalPrintings") or []
+        ],
+        "images": [{"contentHash": image.get("contentHash"), "reviewable": image.get("reviewable")}
+                   for image in member.get("images") or []],
+        "observations": [{"observationId": observation.get("observationId"),
+                          "contentHash": observation.get("contentHash")}
+                         for observation in member.get("observations") or []],
+    }
+
+
+def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
+    """Return proposal-validation fields, excluding public and nested display metadata."""
+    return {
+        "schemaVersion": projection["schemaVersion"],
+        "proposalSchemaVersion": projection["proposalSchemaVersion"],
+        "groups": [{key: group.get(key) for key in
+                    ("groupId", "groupKind", "reviewedAppearanceId", "imageGroupId",
+                     "appearanceIdentityState", "workIds", "cardKeys")}
+                   | {"members": [semantic_member_payload(member)
+                                  for member in group.get("members") or []]}
+                   for group in projection.get("groups") or []],
+    }
+
+
+def build_groups(releases_projection: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    """Group releases by automatic image anchor while keeping unresolved releases isolated."""
+    groups: dict[str, dict[str, Any]] = {}
+    for member in releases_projection:
+        group_id = member["imageGroupId"] or f"RELEASE-GROUP:{member['cardReleaseId']}"
+        group_kind = "image-group" if member["imageGroupId"] else "unmapped-release"
+        if group_id not in groups:
+            groups[group_id] = {
+                "groupId": group_id,
+                "groupKind": group_kind,
+                "reviewedAppearanceId": None,
+                "imageGroupId": member["imageGroupId"],
+                "appearanceIdentityState": member["appearanceIdentityState"],
+                "workIds": [],
+                "cardKeys": [],
+                "label": member.get("cardKey") or "Unresolved artwork appearance",
+                "members": [],
+            }
+        if member.get("workId"):
+            groups[group_id]["workIds"].append(member["workId"])
+        if member.get("cardKey"):
+            groups[group_id]["cardKeys"].append(member["cardKey"])
+        groups[group_id]["members"].append(member)
+
+    for group in groups.values():
+        group["workIds"] = sorted(set(group["workIds"]))
+        group["cardKeys"] = sorted(set(group["cardKeys"]))
+    return groups
 
 
 def build() -> dict[str, Any]:
@@ -88,12 +208,12 @@ def build() -> dict[str, Any]:
     edges = graph["edges"]
     release_to_work = {
         edge["fromId"]: edge["toId"]
-        for edge in edges
+        for edge in sorted(edges, key=lambda item: (item.get("fromId", ""), item.get("toId", "")))
         if edge["fromType"] == "card-release" and edge["relation"] == "implements"
         and edge["toType"] == "work"
     }
     release_to_physical: dict[str, list[str]] = defaultdict(list)
-    for edge in edges:
+    for edge in sorted(edges, key=lambda item: (item.get("toId", ""), item.get("fromId", ""))):
         if edge["fromType"] == "physical-printing" and edge["relation"] == "realizes":
             release_to_physical[edge["toId"]].append(edge["fromId"])
 
@@ -101,8 +221,8 @@ def build() -> dict[str, Any]:
     specimen_by_id = {row["specimenId"]: row for row in specimens}
     source_first_by_id = {row["printId"]: row for row in source_first}
     finish_by_printing: dict[str, dict[str, Any]] = {}
-    for finish_unit in finishes:
-        for printing in finish_unit.get("printings") or []:
+    for finish_unit in sorted(finishes, key=lambda item: item.get("finishUnitId", "")):
+        for printing in sorted(finish_unit.get("printings") or [], key=lambda item: item.get("printingId", "")):
             finish_by_printing[printing.get("printingId")] = {
                 "finishUnit": finish_unit,
                 "printing": printing,
@@ -141,17 +261,17 @@ def build() -> dict[str, Any]:
 
     def unit_candidates(payload: dict[str, Any]) -> list[dict[str, Any]]:
         candidates: list[dict[str, Any]] = []
-        for claim_id in payload.get("claimIds") or []:
+        for claim_id in sorted(payload.get("claimIds") or []):
             match = re.fullmatch(r"CLAIM:legacy:(U\d+)", claim_id)
             if match and match.group(1) in unit_by_id:
                 candidates.append(unit_by_id[match.group(1)])
         if candidates:
-            return candidates
+            return sorted(candidates, key=lambda item: item.get("unitId", ""))
         set_code = payload.get("viaLegacySetCode")
         card_number = payload.get("viaLegacyNumber")
         language = payload.get("language")
-        variant = (payload.get("legacyVariants") or [None])[0]
-        for row in units:
+        variant = first_sorted_variant(payload)
+        for row in sorted(units, key=lambda item: item.get("unitId", "")):
             if row.get("language") != language or row.get("setCode") != set_code:
                 continue
             if not number_match(card_number, row.get("number")):
@@ -159,11 +279,12 @@ def build() -> dict[str, Any]:
             if variant and row.get("variant") != variant:
                 continue
             candidates.append(row)
-        return candidates
+        return sorted(candidates, key=lambda item: item.get("unitId", ""))
 
     def release_projection(entity: dict[str, Any]) -> dict[str, Any]:
         payload = entity["payload"]
         release_id = entity["entityId"]
+        legacy_variants = sorted(payload.get("legacyVariants") or [], key=digest)
         work_id = release_to_work.get(release_id) or payload.get("work")
         work_entity = entities.get(work_id)
         card_key = (work_entity or {}).get("payload", {}).get("cardKey")
@@ -173,7 +294,7 @@ def build() -> dict[str, Any]:
             "state": "catalogue-derived",
             "cardName": None,
             "artist": None,
-            "variant": ", ".join(payload.get("legacyVariants") or []) or None,
+            "variant": ", ".join(legacy_variants) or None,
             "finish": [],
             "foilPattern": [],
             "markings": [],
@@ -212,25 +333,28 @@ def build() -> dict[str, Any]:
                     ))
                     add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
 
-        for print_id in payload.get("sourceFirstRecordIds") or []:
+        for print_id in sorted(payload.get("sourceFirstRecordIds") or []):
             record = source_first_by_id.get(print_id)
             if not record:
                 continue
+            normalized_record = normalize_semantic(record)
             observations.append(source_observation(
-                "source-first", print_id, record,
-                url=record.get("sourceUrl"), evidence=record.get("evidence"),
-                provider=record.get("providerId"), image=record.get("cardImageUrl"),
+                "source-first", print_id, normalized_record,
+                url=normalized_record.get("sourceUrl"), evidence=normalized_record.get("evidence"),
+                provider=normalized_record.get("providerId"), image=normalized_record.get("cardImageUrl"),
             ))
-            add_image(images, record.get("cardImageUrl"), label="publisher card image", observation_id=f"source-first:{print_id}")
-            detection["cardName"] = detection["cardName"] or record.get("name") or record.get("cardName")
+            add_image(images, normalized_record.get("cardImageUrl"), label="publisher card image", observation_id=f"source-first:{print_id}")
+            detection["cardName"] = detection["cardName"] or normalized_record.get("name") or normalized_record.get("cardName")
 
         # A legacy row can provide the artist and finish context even when a graph release is a
         # source-first re-key with no direct unit id.
         candidates = []
         for set_code in (payload.get("localSetCode"), payload.get("viaLegacySetCode")):
-            for row in row_by_short_key.get((number(set_code), number(payload.get("localNumber")), number(payload.get("language"))), []):
+            for row in sorted(row_by_short_key.get((number(set_code), number(payload.get("localNumber")), number(payload.get("language"))), []),
+                              key=lambda item: (item.get("rowId", ""), item.get("setCode", ""), item.get("number", ""))):
                 candidates.append(row)
-            for row in row_by_short_key.get((number(set_code), number(payload.get("viaLegacyNumber")), number(payload.get("language"))), []):
+            for row in sorted(row_by_short_key.get((number(set_code), number(payload.get("viaLegacyNumber")), number(payload.get("language"))), []),
+                              key=lambda item: (item.get("rowId", ""), item.get("setCode", ""), item.get("number", ""))):
                 candidates.append(row)
         if candidates:
             row = candidates[0]
@@ -254,17 +378,20 @@ def build() -> dict[str, Any]:
             physical_entity = entities.get(physical_id)
             if not physical_entity:
                 continue
-            printing = dict(physical_entity["payload"])
+            printing = normalize_semantic(physical_entity["payload"])
             finish_source = finish_by_printing.get(printing.get("sourcePrintingId") or printing.get("physicalPrintingId"))
             if finish_source:
                 finish_unit = finish_source["finishUnit"]
                 source_printing = finish_source["printing"]
-                printing["sources"] = source_printing.get("sources") or []
-                for source_index, source in enumerate(printing["sources"]):
-                    source_tag = f"{source_index}:{digest(source)[:16]}"
+                normalized_source_printing = normalize_semantic(source_printing)
+                normalized_sources = normalized_source_printing.get("sources") or []
+                printing["sources"] = normalized_sources
+                for source_index, source in enumerate(normalized_sources):
+                    source_tag = f"{source_index}:{semantic_digest(source)[:16]}"
                     observations.append(source_observation(
                         "finish", f"{printing.get('sourcePrintingId') or physical_id}:{source_tag}",
-                        {"finishUnitId": finish_unit.get("finishUnitId"), "printing": source_printing, "source": source},
+                        {"finishUnitId": finish_unit.get("finishUnitId"),
+                         "printing": normalized_source_printing, "source": source},
                         url=source.get("url"), evidence=source.get("evidence"), provider=source.get("sourceType"),
                     ))
             physical.append(printing)
@@ -278,24 +405,18 @@ def build() -> dict[str, Any]:
 
         for key in ("finish", "foilPattern", "markings"):
             detection[key] = sorted({value for value in detection[key] if value})
-        verified_image_hashes = sorted({
-            image["contentHash"] for image in images
-            if image.get("reviewable") and image.get("contentHash")
-        })
-        if verified_image_hashes:
-            appearance_id = f"APPEARANCE:IMAGE:{digest(verified_image_hashes)[:24]}"
-            appearance_state = "verified-image-match"
-        else:
-            # No pinned bytes means no positive artwork equivalence. Keep the release reviewable,
-            # but isolate it until a reviewer supplies explicit appearance evidence.
-            appearance_id = f"APPEARANCE:RELEASE:{release_id}"
-            appearance_state = "unresolved-release"
+        # This is an automatically derived image group, not a reviewed artwork identity.  The
+        # first canonical reviewable image is the stable anchor so adding a later specimen
+        # records new evidence without renaming the existing group. Releases without pinned bytes
+        # remain isolated until a reviewer supplies explicit appearance evidence.
+        image_group_id, appearance_state = image_identity(images)
         unique_observations = {item["observationId"]: item for item in observations}
         return {
             "cardReleaseId": release_id,
             "workId": work_id,
             "cardKey": card_key,
-            "appearanceId": appearance_id,
+            "reviewedAppearanceId": None,
+            "imageGroupId": image_group_id,
             "appearanceIdentityState": appearance_state,
             "locality": payload.get("locality"),
             "language": payload.get("language"),
@@ -306,8 +427,8 @@ def build() -> dict[str, Any]:
             "localIdentifierKnown": bool(payload.get("localIdentifierKnown")),
             "state": payload.get("state"),
             "workMappingState": payload.get("workMappingState"),
-            "legacyCounterpartUnitIds": payload.get("legacyCounterpartUnitIds") or [],
-            "legacyVariants": payload.get("legacyVariants") or [],
+            "legacyCounterpartUnitIds": sorted(payload.get("legacyCounterpartUnitIds") or []),
+            "legacyVariants": legacy_variants,
             "physicalPrintings": physical,
             "detection": detection,
             "images": images,
@@ -317,58 +438,43 @@ def build() -> dict[str, Any]:
     releases_projection = [release_projection(entity) for entity in by_type.get("card-release", [])]
     releases_projection.sort(key=lambda item: item["cardReleaseId"])
 
-    groups: dict[str, dict[str, Any]] = {}
-    for member in releases_projection:
-        group_id = member["appearanceId"]
-        if group_id not in groups:
-            groups[group_id] = {
-                "groupId": group_id,
-                "groupKind": "mapped-appearance" if member["appearanceIdentityState"] == "verified-image-match" else "unmapped-release",
-                "appearanceId": group_id,
-                "appearanceIdentityState": member["appearanceIdentityState"],
-                "workIds": [],
-                "cardKeys": [],
-                "label": member.get("cardKey") or "Unresolved artwork appearance",
-                "members": [],
-            }
-        if member.get("workId"):
-            groups[group_id]["workIds"].append(member["workId"])
-        if member.get("cardKey"):
-            groups[group_id]["cardKeys"].append(member["cardKey"])
-        groups[group_id]["members"].append(member)
-
-    for group in groups.values():
-        group["workIds"] = sorted(set(group["workIds"]))
-        group["cardKeys"] = sorted(set(group["cardKeys"]))
+    groups = build_groups(releases_projection)
 
     projection = {
         "schema": "snoredex-artwork-review",
-        "schemaVersion": "1.1.0",
+        "schemaVersion": "1.2.0",
         "proposalSchema": "snoredex-artwork-review-proposal",
-        "proposalSchemaVersion": "1.1.0",
+        "proposalSchemaVersion": "1.2.0",
         "generated": graph["meta"].get("generated"),
-        "projectionVersion": digest({
-            "graph": graph["meta"].get("inputs"),
-            "graphSchemaVersion": graph["meta"].get("schemaVersion"),
-            "appearanceIdentitySchemaVersion": "1.1.0",
-            "units": digest(units),
-            "finishes": digest(finishes),
-            "sourceFirst": digest(source_first),
-        }),
+        # Filled after the semantic projection is normalized below. Keeping the placeholder here
+        # makes it explicit that no partial input digest can be mistaken for the version.
+        "projectionVersion": None,
         "identitySource": "verification/authoritative_graph.json",
-        "appearanceIdentity": "Pinned repository image SHA-256 matches; releases without pinned bytes remain isolated until explicitly adjudicated.",
+        "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
         "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
         "summary": {
             "groups": len(groups),
             "mappedWorks": len({member["workId"] for member in releases_projection if member.get("workId") and member.get("workMappingState") == "mapped"}),
-            "mappedAppearances": sum(1 for group in groups.values() if group["groupKind"] == "mapped-appearance"),
+            "imageGroups": sum(1 for group in groups.values() if group["groupKind"] == "image-group"),
+            "reviewedAppearances": sum(1 for group in groups.values() if group.get("reviewedAppearanceId")),
+            # Kept as an explicit zero for consumers that still read the old field; automatic image
+            # groups must never be counted as reviewed appearances.
+            "mappedAppearances": sum(1 for group in groups.values() if group.get("reviewedAppearanceId")),
             "unmappedReleases": sum(1 for group in groups.values() if group["groupKind"] == "unmapped-release"),
             "cardReleases": len(releases_projection),
             "physicalPrintings": sum(len(member["physicalPrintings"]) for member in releases_projection),
             "sourceObservations": sum(len(member["observations"]) for member in releases_projection),
         },
-        "groups": sorted(groups.values(), key=lambda group: ({"mapped-appearance": 0, "unmapped-release": 1}[group["groupKind"]], group["label"], group["groupId"])),
+        "groups": sorted(groups.values(), key=lambda group: ({"image-group": 0, "unmapped-release": 1}[group["groupKind"]], group["label"], group["groupId"])),
     }
+    projection["groups"] = normalize_semantic(projection["groups"])
+    # Bind the version to the review semantics after all order-independent normalization above.
+    # Public explanatory copy and source paths stay outside this digest so editorial changes do
+    # not invalidate locally saved proposals.
+    # The generated timestamp describes when the snapshot was built, not what a reviewer can
+    # inspect.  Keep it in the public projection for provenance, but exclude it from the semantic
+    # version so a routine refresh does not invalidate every saved proposal.
+    projection["projectionVersion"] = semantic_digest(semantic_projection_payload(projection))
     return projection
 
 
