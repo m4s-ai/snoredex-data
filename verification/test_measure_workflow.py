@@ -31,7 +31,9 @@ def main() -> int:
     assert str(ROOT) not in command
     assert "r4nd0m" not in output
 
-    with tempfile.TemporaryDirectory(dir=ROOT / "verification" / "cache") as raw_root:
+    fixture_root = ROOT / "verification" / "cache"
+    fixture_root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=fixture_root) as raw_root:
         repo = Path(raw_root)
 
         def git(*args: str) -> None:

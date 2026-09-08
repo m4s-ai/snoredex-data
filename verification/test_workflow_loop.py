@@ -32,7 +32,9 @@ def main() -> int:
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
 
-    with tempfile.TemporaryDirectory(dir=ROOT / "verification" / "cache") as raw_root:
+    fixture_root = ROOT / "verification" / "cache"
+    fixture_root.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(dir=fixture_root) as raw_root:
         runs = Path(raw_root)
         older = runs / "20260101T000000Z"
         newer = runs / "20260102T000000Z"
