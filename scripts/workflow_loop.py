@@ -22,6 +22,8 @@ from typing import Any
 
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
 MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 EVIDENCE = ROOT / "verification" / "evidence_semantics.json"
 SOURCE_ADAPTERS = ROOT / "verification" / "source_adapters.json"
@@ -37,15 +39,56 @@ CARDMARKET_BASELINE = ROOT / "legacy-cardmarket-baseline.json"
 RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,99}$")
 
 
+class WorkflowLoopError(ValueError):
+    """A retained run cannot be identified safely from its manifest."""
+
+
 def read_json(path: pathlib.Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def latest_manifests(directory: pathlib.Path) -> list[dict[str, Any]]:
-    paths = sorted(directory.glob("*/manifest.json"), key=lambda path: path.stat().st_mtime)
+    paths = []
+    for path in directory.glob("*/manifest.json"):
+        manifest = read_json(path)
+        run_id = manifest.get("runId")
+        if run_id != path.parent.name:
+            raise WorkflowLoopError(
+                f"run directory and manifest id differ: {path.parent.name}"
+            )
+        paths.append((run_id, manifest))
     if not paths:
         return []
-    return [read_json(paths[-1])]
+    # Run IDs are the fachliche acquisition order (YYYYMMDDTHHMMSSZ), unlike mtime which can be
+    # changed by checkout, copying, or an interrupted retry.
+    return [max(paths, key=lambda item: item[0])[1]]
+
+
+def canonical_manifest(directory: pathlib.Path, kind: str) -> dict[str, Any] | None:
+    """Read the newest complete run selected by the owning adapter's compatibility contract."""
+    if kind == "source":
+        try:
+            from scripts import source_adapters as adapter
+        except ImportError:  # direct execution from scripts/
+            import source_adapters as adapter  # type: ignore[no-redef]
+        contract, capability = adapter.load_inputs()
+        run_id = adapter.newest_compatible_complete_run(contract, capability)
+    elif kind == "card":
+        try:
+            from scripts import card_discovery as adapter
+        except ImportError:  # direct execution from scripts/
+            import card_discovery as adapter  # type: ignore[no-redef]
+        contract, capability, _identity = adapter.load_inputs()
+        run_id = adapter.newest_compatible_complete_run(contract, capability)
+    else:
+        raise ValueError(f"unknown discovery run kind: {kind}")
+    if not run_id:
+        return None
+    path = directory / run_id / "manifest.json"
+    manifest = read_json(path)
+    if manifest.get("runId") != run_id:
+        raise WorkflowLoopError(f"canonical run manifest id differs: {run_id}")
+    return manifest
 
 
 def evidence_state() -> dict[str, Any]:
@@ -86,36 +129,64 @@ def physical_state() -> dict[str, Any]:
     }
 
 
+def _discovery_state(
+    source: list[dict[str, Any]], cards: list[dict[str, Any]],
+    source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
+    blocked: int, needs_source: int,
+) -> str:
+    if not source or not cards:
+        return "candidate"
+    if any(manifest.get("status") != "complete" for manifest in source + cards):
+        return "retained"
+    if not source_canonical or not card_canonical:
+        return "retained"
+    if blocked:
+        return "blocked-by-source"
+    if needs_source:
+        return "needs-source"
+    return "terminal"
+
+
+def _discovery_progress(
+    source: list[dict[str, Any]], cards: list[dict[str, Any]],
+    source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
+    failures: int, blocked: int, needs_source: int, total_gaps: int,
+) -> dict[str, Any]:
+    latest_source = next(iter(source), {})
+    latest_cards = next(iter(cards), {})
+    selected_source = source_canonical or {}
+    selected_cards = card_canonical or {}
+    return {
+        "sourceRun": selected_source.get("runId"),
+        "cardRun": selected_cards.get("runId"),
+        "sourceLatestAttempt": latest_source.get("runId"),
+        "cardLatestAttempt": latest_cards.get("runId"),
+        "sourceStatus": latest_source.get("status"),
+        "cardStatus": latest_cards.get("status"),
+        "sourceCanonicalStatus": selected_source.get("status"),
+        "cardCanonicalStatus": selected_cards.get("status"),
+        "failures": failures,
+        "blockedGaps": blocked,
+        "needsSourceGaps": needs_source,
+        "totalGaps": total_gaps,
+    }
+
+
 def discovery_state() -> dict[str, Any]:
     source = latest_manifests(SOURCE_RUNS)
     cards = latest_manifests(CARD_RUNS)
+    source_canonical = canonical_manifest(SOURCE_RUNS, "source")
+    card_canonical = canonical_manifest(CARD_RUNS, "card")
     gaps = read_json(SOURCE_ADAPTERS)["gaps"] + read_json(CARD_ADAPTERS)["gaps"]
     failures = sum(len(manifest.get("failures", [])) for manifest in source + cards)
-    statuses = [manifest.get("status") for manifest in source + cards]
     blocked = sum(gap.get("terminalState") == "blocked-by-source" for gap in gaps)
     needs_source = sum(gap.get("terminalState") == "needs-evidence" for gap in gaps)
-    if not source or not cards:
-        state = "candidate"
-    elif any(status != "complete" for status in statuses):
-        state = "retained"
-    elif blocked:
-        state = "blocked-by-source"
-    elif needs_source:
-        state = "needs-source"
-    else:
-        state = "terminal"
     return {
-        "state": state,
-        "progress": {
-            "sourceRun": source[0].get("runId") if source else None,
-            "cardRun": cards[0].get("runId") if cards else None,
-            "sourceStatus": source[0].get("status") if source else None,
-            "cardStatus": cards[0].get("status") if cards else None,
-            "failures": failures,
-            "blockedGaps": blocked,
-            "needsSourceGaps": needs_source,
-            "totalGaps": len(gaps),
-        },
+        "state": _discovery_state(source, cards, source_canonical, card_canonical, blocked, needs_source),
+        "progress": _discovery_progress(
+            source, cards, source_canonical, card_canonical,
+            failures, blocked, needs_source, len(gaps),
+        ),
     }
 
 

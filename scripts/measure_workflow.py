@@ -34,6 +34,12 @@ MATRIX_PATH = ROOT / "verification" / "workflow_gate_matrix.json"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from scripts.workflow_observation import (  # noqa: E402
+    changed_paths as observed_changed_paths,
+    tree_paths as observed_tree_paths,
+    tree_snapshot,
+)
+
 
 def run_git(*args: str) -> str:
     return subprocess.run(
@@ -43,9 +49,7 @@ def run_git(*args: str) -> str:
 
 
 def tree_paths() -> set[str]:
-    tracked = run_git("diff", "--name-only", "--", ".", ":(exclude)*.sqlite").splitlines()
-    untracked = run_git("ls-files", "--others", "--exclude-standard").splitlines()
-    return set(tracked) | {path for path in untracked if not path.endswith(".sqlite")}
+    return observed_tree_paths(ROOT)
 
 
 def command_path(args: list[str]) -> str:
@@ -145,27 +149,16 @@ def ci_specs(temp_root: pathlib.Path, include_browser: bool, include_live: bool)
 
 
 def pages_specs(temp_root: pathlib.Path) -> list[dict[str, Any]]:
-    commands = [
-        ["scripts/finishes.py", "--reproject"],
-        ["scripts/language_status.py"],
-        ["scripts/confirmed_releases.py"],
-        ["scripts/source_registry.py"],
-        ["scripts/source_capabilities.py"],
-        ["scripts/checklist.py"],
-        ["scripts/collector_catalogue.py"],
-        ["scripts/readme_stats.py"],
-        ["scripts/issue_templates.py"],
-        ["scripts/site.py"],
-    ]
-    specs = [
-        {"label": f"pages-{args[0].split('/')[-1]}", "phase": "pages", "args": args}
-        for args in commands
-    ]
     site = temp_root
     deployment = site / "collector_deployment.json"
     artifact_commit = git_commit()
-    specs.extend([
+    return [
         {"label": "pages-publish-build", "phase": "pages", "args": ["scripts/publish.py", "--out", str(site)]},
+        {
+            "label": "pages-publish-verify-before-manifest",
+            "phase": "pages",
+            "args": ["scripts/publish.py", "--out", str(site), "--verify"],
+        },
         {
             "label": "pages-deployment-manifest",
             "phase": "pages",
@@ -175,7 +168,11 @@ def pages_specs(temp_root: pathlib.Path) -> list[dict[str, Any]]:
                 "--published-at", "2000-01-01T00:00:00Z",
             ],
         },
-        {"label": "pages-publish-verify", "phase": "pages", "args": ["scripts/publish.py", "--out", str(site), "--verify"]},
+        {
+            "label": "pages-publish-verify-after-manifest",
+            "phase": "pages",
+            "args": ["scripts/publish.py", "--out", str(site), "--verify"],
+        },
         {
             "label": "pages-deployment-verify",
             "phase": "pages",
@@ -184,15 +181,24 @@ def pages_specs(temp_root: pathlib.Path) -> list[dict[str, Any]]:
                 "--out", str(deployment), "--artifact-commit", artifact_commit,
             ],
         },
-    ])
-    return specs
+        {
+            "label": "pages-publication-verify",
+            "phase": "pages",
+            "args": [
+                "verification/publication_gate.py",
+                "--deployment-manifest", str(deployment),
+                "--catalogue", str(site / "collector_catalogue.json"),
+                "--expected-commit", artifact_commit,
+            ],
+        },
+    ]
 
 
 def run_spec(spec: dict[str, Any], matrix: dict[str, Any]) -> dict[str, Any]:
     args = spec["args"]
     command = command_path(args)
     impacts, stores, projections = impact_metadata(command, matrix)
-    before = tree_paths()
+    before = tree_snapshot(ROOT)
     started = time.perf_counter()
     if spec.get("execute", True):
         process = subprocess.run(
@@ -207,7 +213,7 @@ def run_spec(spec: dict[str, Any], matrix: dict[str, Any]) -> dict[str, Any]:
         return_code = None
         status = "not-run"
     duration_ms = round((time.perf_counter() - started) * 1000, 1)
-    after = tree_paths()
+    after = tree_snapshot(ROOT)
     return {
         "label": spec["label"],
         "phase": spec["phase"],
@@ -218,8 +224,8 @@ def run_spec(spec: dict[str, Any], matrix: dict[str, Any]) -> dict[str, Any]:
         "impactClasses": impacts,
         "declaredReadStores": stores,
         "declaredProjectionRoots": projections,
-        "observedChangedPaths": display_paths(after - before),
-        "treeDirtyAfter": display_paths(after),
+        "observedChangedPaths": display_paths(observed_changed_paths(before, after)),
+        "treeDirtyAfter": display_paths(set(after)),
         "outputTail": redact_runtime_paths(output[-2000:]) if output else "",
     }
 
@@ -271,7 +277,7 @@ def main() -> int:
         },
         "methodology": {
             "declaredReads": "canonical stores from workflow_gate_matrix.json matched by projection root",
-            "observedWrites": "git status delta before/after each subprocess; SQLite bytes excluded",
+            "observedWrites": "SHA-256 content delta before/after each subprocess; staged, unstaged, and untracked non-SQLite paths included",
             "network": "live checks are skipped unless --include-live is supplied",
             "browser": "Playwright check is skipped unless --include-browser is supplied",
             "scope": "measurement is diagnostic and never changes merge-gate behavior",

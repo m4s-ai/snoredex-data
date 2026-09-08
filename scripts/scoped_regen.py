@@ -21,6 +21,19 @@ import sys
 import time
 from typing import Any
 
+try:
+    from scripts.workflow_observation import (
+        changed_paths as observed_changed_paths,
+        tree_paths as observed_tree_paths,
+        tree_snapshot,
+    )
+except ModuleNotFoundError:  # Direct execution puts scripts/ rather than the repo on sys.path.
+    from workflow_observation import (  # type: ignore[no-redef]
+        changed_paths as observed_changed_paths,
+        tree_paths as observed_tree_paths,
+        tree_snapshot,
+    )
+
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "verification" / "scoped_pipeline_manifest.json"
@@ -41,9 +54,7 @@ def git(*args: str) -> str:
 
 
 def tree_paths() -> set[str]:
-    tracked = git("diff", "--name-only", "--", ".", ":(exclude)*.sqlite").splitlines()
-    untracked = git("ls-files", "--others", "--exclude-standard").splitlines()
-    return set(tracked) | {path for path in untracked if not path.endswith(".sqlite")}
+    return observed_tree_paths(ROOT)
 
 
 def graph_impact(matrix: dict[str, Any], graph: dict[str, Any], classes: list[str]) -> dict[str, Any]:
@@ -78,7 +89,7 @@ def make_run_id(lane: str, manifest: dict[str, Any], commit: str) -> str:
 
 
 def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
-             dry_run: bool, before: set[str]) -> dict[str, Any]:
+             dry_run: bool, before: dict[str, str]) -> dict[str, Any]:
     command = step["command"]
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "durationMs": 0.0}
@@ -93,12 +104,12 @@ def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
         env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
         text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
     )
-    after = tree_paths()
+    after = tree_snapshot(ROOT)
     return {
         "status": "passed" if process.returncode == 0 else "failed",
         "returnCode": process.returncode,
         "durationMs": round((time.perf_counter() - started) * 1000, 1),
-        "observedChangedPaths": sorted(after - before),
+        "observedChangedPaths": sorted(observed_changed_paths(before, after)),
         "outputTail": process.stdout[-2000:],
     }
 
@@ -128,7 +139,7 @@ def main() -> int:
     skipped = list(lane["skippedChecks"])
     previous_failed = False
     for step in lane["steps"]:
-        before = tree_paths()
+        before = tree_snapshot(ROOT)
         if previous_failed:
             result = {"status": "not-run", "reason": "previous step failed", "durationMs": 0.0}
         else:
