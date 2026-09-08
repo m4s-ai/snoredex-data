@@ -80,6 +80,7 @@ def main() -> int:
     assert "name: UI browser gate" in ui
     assert "paths:" in ui and "site/app.css" in ui and "site/app.js" in ui
     assert "requirements.txt" in ui
+    assert "llms.txt" in ui
     assert "verification/test_site.py" in ui
     assert "python verification/test_site.py" in ui
 
