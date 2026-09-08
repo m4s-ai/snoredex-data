@@ -10,9 +10,16 @@ on:
       - snorlax_cards.json
       - analysis_checklist.json
       - collector_catalogue.json
+      - images/**
+      - verification/specimens/**
       - scripts/site.py
       - scripts/collector_catalogue.py
+      - scripts/artwork_review.py
+      - scripts/artwork_derivatives.py
       - verification/test_site.py
+      - verification/artwork_review_projection.json
+      - verification/artwork_review_projection.js
+      - verification/artwork_derivative_manifest.json
       - requirements.txt
       - llms.txt
       - .github/workflows/ui-pr.yml

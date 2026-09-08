@@ -147,6 +147,35 @@ Every consumer must retain stable semantic identity. In particular, collector an
 rows must not use array positions as identity and must not infer a physical printing from
 a language claim or a marketplace candidate.
 
+The artwork review is a deliberately bounded consumer of the graph. `scripts/artwork_review.py`
+writes both the canonical JSON projection and an equivalent generated JavaScript fallback. The
+site embeds only a 924-byte metadata envelope; HTTP pages fetch the JSON on demand and offline
+`file://` pages load the fallback script. The review section also preloads when it approaches the
+viewport, keeps search/filter evaluation in memory, and emits at most 20 groups per batch with an
+explicit “Load more” action. Browser proposals still carry the same projection and schema versions.
+
+Issue #356 measurements use a fresh Chromium context at 1000px height:
+
+| Viewport | Previous initial DOM / artwork cards | Current initial DOM / artwork cards | Current initial HTML bytes |
+|---:|---:|---:|---:|
+| 320 px | 73,292 / 559 | 20,395 / 0 | 2,492,850 |
+| 375 px | 73,292 / 559 | 20,395 / 0 | 2,492,850 |
+| 768 px | 73,292 / 559 | 20,395 / 0 | 2,539,053 |
+| 1440 px | 73,292 / 559 | 20,395 / 0 | 2,539,040 |
+| 1920 px | 73,292 / 559 | 20,395 / 0 | 2,539,040 |
+
+The previous run embedded 2,965,989 artwork JSON characters and built 933 image elements. The
+current initial page embeds 924 metadata characters and no artwork images. After loading, the
+first batch contains 20 groups, 65 members and 97 images; the remaining groups are reachable via
+the button. Local originals remain under `images/`; `images/previews/` and `images/thumbs/` hold
+generated preview/thumbnail derivatives (360px and 120px maximum widths). The projection retains
+each original path and SHA-256, and the UI links both the derivative preview and the original
+download. During a normal `python scripts/regen.py` write, `scripts/artwork_review.py` calls the
+standard-library `scripts/artwork_derivatives.py` writer before regenerating the projection.
+Missing derivatives are created deterministically; `verification/artwork_derivative_manifest.json`
+binds each derivative to the current source hash so a replaced source cannot reuse an old image.
+Existing derivatives are reused until that hash changes.
+
 ### D. Manual Pages deployment lane (after the reusable L4 gate)
 
 ```text

@@ -307,23 +307,92 @@ def image_complete(data: bytes, ext: str) -> bool:
     return data.rstrip().endswith(b"\xff\xd9")
 
 
+def _jpeg_segment(data: bytes, position: int) -> tuple[int, int, int] | None:
+    """Return ``(marker, payload start, next segment position)`` after JPEG fill bytes."""
+    if position >= len(data):
+        return None
+    if data[position] != 0xFF:
+        return None
+    while position < len(data) and data[position] == 0xFF:
+        position += 1
+    if position >= len(data):
+        return None
+    marker = data[position]
+    position += 1
+    if _jpeg_standalone_marker(marker):
+        return marker, position, position
+    next_position = _jpeg_segment_end(data, position)
+    if next_position is None:
+        return None
+    return marker, position + 2, next_position
+
+
+def _jpeg_standalone_marker(marker: int) -> bool:
+    return marker in (0xD8, 0xD9) or marker in range(0xD0, 0xD8) or marker == 0x01
+
+
+def _jpeg_segment_end(data: bytes, position: int) -> int | None:
+    if position + 2 > len(data):
+        return None
+    length = int.from_bytes(data[position:position + 2], "big")
+    if length < 2 or position + length > len(data):
+        return None
+    return position + length
+
+
+def _jpeg_frame_header(data: bytes) -> tuple[int, int, int, int, int] | None:
+    """Return ``(SOF marker, width, height, components, precision)`` from the first frame."""
+    if data[:2] != b"\xff\xd8":
+        return None
+    i = 2
+    while i < len(data):
+        segment = _jpeg_segment(data, i)
+        if segment is None:
+            i += 1
+            continue
+        marker, payload, next_position = segment
+        if marker == 0xDA:
+            return None
+        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
+            if payload + 7 > len(data):
+                return None
+            return (marker, int.from_bytes(data[payload + 3:payload + 5], "big"),
+                    int.from_bytes(data[payload + 1:payload + 3], "big"),
+                    data[payload + 5], data[payload])
+        i = next_position
+    return None
+
+
 def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
     """Dimensions from the header. None when the header is not where it should be."""
     if ext == "png":
         if len(data) < 24 or data[12:16] != b"IHDR":
             return None
         return (int.from_bytes(data[16:20], "big"), int.from_bytes(data[20:24], "big"))
-    i = 2
-    while i + 9 < len(data):
-        if data[i] != 0xFF:
-            i += 1
-            continue
-        marker = data[i + 1]
-        if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
-            return (int.from_bytes(data[i + 7:i + 9], "big"),
-                    int.from_bytes(data[i + 5:i + 7], "big"))
-        i += 2 + int.from_bytes(data[i + 2:i + 4], "big")
-    return None
+    frame = _jpeg_frame_header(data)
+    return (frame[1], frame[2]) if frame else None
+
+
+def jpeg_frame_info(data: bytes) -> tuple[int, int, int] | None:
+    """Return ``(SOF marker, component count, precision)`` from the first frame header."""
+    frame = _jpeg_frame_header(data)
+    return (frame[0], frame[3], frame[4]) if frame else None
+
+
+def jpeg_component_count(data: bytes) -> int | None:
+    """Return the component count from the first JPEG frame header."""
+    frame = jpeg_frame_info(data)
+    return frame[1] if frame else None
+
+
+def validate_jpeg(data: bytes) -> None:
+    frame = jpeg_frame_info(data)
+    if frame is None or frame[0] not in (0xC0, 0xC1, 0xC2):
+        fail("the JPEG uses an unsupported frame mode; only baseline and progressive Huffman JPEGs are accepted")
+    if frame[2] != 8:
+        fail("the JPEG uses an unsupported precision; only 8-bit JPEG samples are accepted")
+    if frame[1] not in (1, 3):
+        fail("the JPEG uses an unsupported component count; only grayscale and RGB/YCbCr are accepted")
 
 
 def content_hash(data: bytes) -> str:
@@ -440,6 +509,8 @@ def validate(blob: bytes, allow_small: bool) -> tuple[str, tuple[int, int] | Non
     size = image_size(blob, ext)
     if size is None:
         fail(f"the {ext} header is malformed — dimensions could not be read")
+    if ext == "jpg":
+        validate_jpeg(blob)
     if not allow_small and max(size) < MIN_LONG_EDGE:
         fail(f"{size[0]}x{size[1]} is too small to read a card off "
              f"(minimum long edge {MIN_LONG_EDGE}px; pass --allow-small to override)")

@@ -1,8 +1,10 @@
 /* Snoredex public site behaviour: table filtering and sorting (#10), checklist builder (#9).
  *
- * Vanilla JS, no dependencies, no network calls. Row and checklist data are embedded in the page
+ * Vanilla JS, no dependencies, and no third-party network calls. Row and checklist data are embedded in the page
  * as JSON script blocks rather than fetched, because `fetch` of a sibling file is blocked under
- * file:// and the page must work from a local checkout as well as from GitHub Pages.
+ * file:// and the page must work from a local checkout as well as from GitHub Pages. The large
+ * artwork review projection is the one deliberate exception: it is loaded on demand and has a
+ * generated script fallback for file://.
  *
  * Two invariants hold throughout:
  *   - a row is identified by its stable `rowId`, never by its position, so sorting and filtering
@@ -16,13 +18,38 @@
   const readJSON = (id) => JSON.parse(document.getElementById(id).textContent);
   const ROWS = readJSON("data-rows");
   const CHECKLIST = readJSON("data-checklist");
-  const ARTWORK_REVIEW = readJSON("data-artwork-review");
+  const ARTWORK_META = readJSON("data-artwork-review-meta");
+  let ARTWORK_REVIEW = null;
   const META = readJSON("data-meta");
   const LANGS = META.languages;
   // 18 fixed columns from scripts/site.py's COLUMNS, the language matrix, then the narrow-screen
   // disclosure column and the correction column. Named because three call sites need it and the
   // literal drifted the moment #121 added a column.
   const DETAIL_SPAN = 18 + LANGS.length + 2;
+
+  function loadArtworkProjection(meta) {
+    if (window.__SNOREDEX_ARTWORK_REVIEW__) {
+      return Promise.resolve(window.__SNOREDEX_ARTWORK_REVIEW__);
+    }
+    const loadFallback = () => new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = meta.fallback;
+      script.onload = () => window.__SNOREDEX_ARTWORK_REVIEW__
+        ? resolve(window.__SNOREDEX_ARTWORK_REVIEW__)
+        : reject(new Error("artwork fallback did not define a projection"));
+      script.onerror = () => reject(new Error("artwork projection could not be loaded"));
+      document.head.appendChild(script);
+    });
+    return fetch(meta.source, { cache: "force-cache" })
+      .then((response) => {
+        if (!response.ok) throw new Error("artwork projection returned HTTP " + response.status);
+        return response.json().then((projection) => {
+          window.__SNOREDEX_ARTWORK_REVIEW__ = projection;
+          return projection;
+        });
+      })
+      .catch(() => loadFallback());
+  }
 
   const FINISH_LABELS = {
     "non-holo": "Non-Holo",
@@ -1203,6 +1230,48 @@
   }
 
 
+  function initArtworkReviewLoader() {
+    const root = $("#artwork-review-app");
+    const button = $("#ar-load");
+    const status = $("#ar-load-status");
+    const controls = $(".artwork-controls", root);
+    const state = $("#ar-load-state");
+    if (!root || !button || !status || !controls || !state) return;
+    let loading = null;
+    const start = () => {
+      if (loading) return loading;
+      button.disabled = true;
+      status.textContent = "Loading artwork review data…";
+      loading = loadArtworkProjection(ARTWORK_META).then((projection) => {
+        if (!projection || projection.schema !== ARTWORK_META.schema
+            || projection.projectionVersion !== ARTWORK_META.projectionVersion) {
+          throw new Error("artwork projection metadata does not match the page");
+        }
+        ARTWORK_REVIEW = projection;
+        state.hidden = true;
+        controls.hidden = false;
+        initArtworkReview();
+        return projection;
+      }).catch((error) => {
+        loading = null;
+        button.disabled = false;
+        status.textContent = "Artwork review could not be loaded: " + error.message;
+        throw error;
+      });
+      return loading;
+    };
+    button.addEventListener("click", () => { start().catch(() => {}); });
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          start().catch(() => {});
+        }
+      }, { rootMargin: "600px 0px" });
+      observer.observe(root);
+    }
+  }
+
   function initArtworkReview() {
     const root = $("#artwork-review-app");
     if (!root || !ARTWORK_REVIEW) return;
@@ -1396,13 +1465,22 @@
       return images.length > 0 && images.every((image) => image && image.src && image.reviewable && image.contentHash);
     };
 
+    const versionedOriginalSrc = (image) => {
+      if (!image || !image.src || !image.contentHash) return image && image.src;
+      const separator = image.src.includes("?") ? "&" : "?";
+      return image.src + separator + "v=" + encodeURIComponent(image.contentHash);
+    };
     const imageHTML = (member) => {
       const images = (member.images || []).filter((image) => image && image.src);
       if (!images.length) return '<div class="artwork-images"><div class="artwork-image missing">No reviewable image recorded</div></div>';
       return '<div class="artwork-images">' + images.map((image, index) =>
-        '<figure class="artwork-image"><img loading="lazy" src="' + escapeHTML(image.src) +
+        '<figure class="artwork-image"><a href="' + escapeHTML(versionedOriginalSrc(image)) + '" target="_blank" rel="noopener">' +
+        '<img loading="lazy" decoding="async" src="' + escapeHTML(image.previewSrc || image.src) +
+        (image.thumbnailSrc ? '" srcset="' + escapeHTML(image.thumbnailSrc) + ' 120w, ' +
+          escapeHTML(image.previewSrc || image.src) + ' 360w" sizes="(max-width: 720px) 120px, 180px' : '') +
         '" alt="' + escapeHTML((member.detection && member.detection.cardName) || member.cardReleaseId) +
-        ' — image ' + (index + 1) + '"><figcaption>' + escapeHTML(image.label || 'source image') +
+        ' — image ' + (index + 1) + '"></a><figcaption>' + escapeHTML(image.label || 'source image') +
+        '<br><a href="' + escapeHTML(versionedOriginalSrc(image)) + '" download>Open original / download</a>' +
         (image.reviewable && image.contentHash
           ? '<br><code>' + escapeHTML(image.contentHash) + '</code>'
           : '<br><span class="artwork-unverified">image bytes are not pinned</span>') +
@@ -1584,13 +1662,13 @@
       return memberMarkup(memberView(member, draftFor(member)));
     };
 
-    const groupHTML = (group) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
+    const groupHTML = (group, visibleMembers = group.members) => '<article class="artwork-group" data-group-id="' + escapeHTML(group.groupId) +
       '"><header><div><h3>' + escapeHTML(group.label) + '</h3><p><code>' +
       escapeHTML(group.groupId) + '</code> · ' + escapeHTML(group.members.length + ' local releases') +
       '</p></div><span class="pill pending">' +
       escapeHTML(group.groupKind === 'image-group' ? 'automatic image group — review suggested' : 'unresolved appearance') +
       '</span></header><div class="artwork-members">' +
-      group.members.map((member) => memberHTML(group, member)).join('') + '</div></article>';
+      visibleMembers.map((member) => memberHTML(group, member)).join('') + '</div></article>';
 
     const filteredGroups = () => {
       const needle = search.value.trim().toLowerCase();
@@ -1611,11 +1689,18 @@
       });
     };
 
-    const updateSummary = (groups) => {
+    const RENDER_BATCH = 20;
+    let renderLimit = RENDER_BATCH;
+    const updateSummary = (groups, renderedGroups = groups.slice(0, renderLimit)) => {
       const reviewed = members().filter((member) => draftFor(member)).length;
       const stale = Object.keys(staleDrafts).length;
-      summary.textContent = groups.length + ' groups shown · ' + groups.reduce((n, group) => n + group.__visibleMembers.length, 0) +
-        ' releases · ' + reviewed + ' proposals ' + (storageWarning ? 'in memory only' : 'saved locally') +
+      const matchingMembers = groups.reduce((n, group) => n + group.__visibleMembers.length, 0);
+      const renderedMembers = renderedGroups.reduce((n, group) => n + group.__visibleMembers.length, 0);
+      const batchText = renderedGroups.length < groups.length
+        ? renderedGroups.length + ' of ' + groups.length + ' groups loaded · ' + renderedMembers + ' of ' + matchingMembers + ' releases'
+        : groups.length + ' groups shown · ' + matchingMembers + ' releases';
+      summary.textContent = batchText +
+        ' · ' + reviewed + ' proposals ' + (storageWarning ? 'in memory only' : 'saved locally') +
         ' · projection ' + ARTWORK_REVIEW.projectionVersion.slice(0, 12) +
         (stale ? ' · ' + stale + ' stale proposal' + (stale === 1 ? '' : 's') + ' available for export' : '') +
         (storageWarning ? ' · ' + storageWarning : '');
@@ -1623,14 +1708,13 @@
 
     const render = () => {
       const groups = filteredGroups();
-      updateSummary(groups);
-      groupsBox.innerHTML = groups.map((group) => {
-        const original = group.members;
-        group.members = group.__visibleMembers;
-        const html = groupHTML(group);
-        group.members = original;
-        return html;
-      }).join('') || '<p class="artwork-muted">No groups match the current filters.</p>';
+      const renderedGroups = groups.slice(0, renderLimit);
+      updateSummary(groups, renderedGroups);
+      groupsBox.innerHTML = renderedGroups.map((group) => groupHTML(group, group.__visibleMembers)).join('') ||
+        '<p class="artwork-muted">No groups match the current filters.</p>';
+      if (renderedGroups.length < groups.length) {
+        groupsBox.insertAdjacentHTML("beforeend", '<button type="button" class="ghost artwork-load-more" id="ar-load-more">Load more artwork groups</button>');
+      }
     };
 
     const refreshMemberCard = (memberId) => {
@@ -1746,6 +1830,13 @@
     };
 
     root.addEventListener("click", (event) => {
+      const more = event.target.closest && event.target.closest("#ar-load-more");
+      if (more) {
+        captureVisibleForms();
+        renderLimit += RENDER_BATCH;
+        render();
+        return;
+      }
       const button = event.target.closest && event.target.closest(".ar-save");
       if (!button) return;
       const card = button.closest(".artwork-member");
@@ -1767,10 +1858,12 @@
     });
     [search, scope, proposalFilter].forEach((control) => control.addEventListener("input", () => {
       captureVisibleForms();
+      renderLimit = RENDER_BATCH;
       render();
     }));
     [scope, proposalFilter].forEach((control) => control.addEventListener("change", () => {
       captureVisibleForms();
+      renderLimit = RENDER_BATCH;
       render();
     }));
     $("#ar-clear").addEventListener("click", () => {
@@ -1778,6 +1871,7 @@
       staleDrafts = {};
       formValues.clear();
       persist();
+      renderLimit = RENDER_BATCH;
       render();
     });
     $("#ar-download").addEventListener("click", () => {
@@ -1930,7 +2024,7 @@
   readURL();
   buildControls();
   initChecklist();
-  initArtworkReview();
+  initArtworkReviewLoader();
   refreshTableOverflow = initTableOverflow();
   refreshClippedCells = initClippedCells();
   refreshStickyHeader = initStickyTableHeader();
