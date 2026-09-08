@@ -74,6 +74,11 @@ def verify_png_formats() -> None:
     if (width, height, pixels) != (2, 1, [(255, 0, 0), (0, 255, 0)]):
         fail(f"4-bit indexed PNG decoded incorrectly: {(width, height, pixels)}")
 
+    rgba = png_fixture(2, 1, 8, 6, 0, b"\x00\xff\x00\x00\x00\x00\x00\xff\x80")
+    width, height, pixels = artwork_derivatives._png_pixels(rgba)
+    if (width, height, pixels) != (2, 1, [(255, 255, 255), (127, 127, 255)]):
+        fail(f"RGBA PNG alpha was not composited onto white: {(width, height, pixels)}")
+
     adam7 = png_fixture(
         2, 2, 8, 2, 1,
         b"\x00\xff\x00\x00"  # pass 1: red at (0, 0)

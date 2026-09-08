@@ -156,17 +156,27 @@ def _png_sample(row: bytes, index: int, bit_depth: int, *, scale: bool = True) -
     return round(value * 255 / ((1 << bit_depth) - 1)) if scale else value
 
 
+def _png_composite(channels: tuple[int, int, int], alpha: int) -> tuple[int, int, int]:
+    """Composite an RGBA sample over white for deterministic RGB derivatives."""
+    return tuple((channel * alpha + 255 * (255 - alpha) + 127) // 255
+                 for channel in channels)
+
+
 def _png_pixel(row: bytes, pixel: int, colour_type: int, bit_depth: int,
                channels: int, palette: list[tuple[int, int, int]]) -> tuple[int, int, int]:
     values = [_png_sample(row, pixel * channels + channel, bit_depth)
               for channel in range(channels)]
-    if colour_type == 0 or colour_type == 4:
+    if colour_type == 0:
         return values[0], values[0], values[0]
+    if colour_type == 4:
+        return _png_composite((values[0], values[0], values[0]), values[1])
     if colour_type == 3:
         palette_index = _png_sample(row, pixel, bit_depth, scale=False)
         if palette_index >= len(palette):
             raise ImageError("indexed PNG references a missing palette entry")
         return palette[palette_index]
+    if colour_type == 6:
+        return _png_composite(tuple(values[:3]), values[3])
     return tuple(values[:3])
 
 
