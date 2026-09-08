@@ -1335,6 +1335,7 @@
     const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
     const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));
     const groupById = new Map(ARTWORK_REVIEW.groups.map((group) => [group.groupId, group]));
+    const artworkGroupIds = new Set(ARTWORK_REVIEW.groups.map((group) => group.groupId));
 
     const textFor = (member) => [
       member.cardReleaseId, member.workId, member.locality, member.language, member.localSetCode,
@@ -1559,7 +1560,7 @@
       '<div class="artwork-decision"><label>Decision<select class="ar-action" aria-label="Review action for ' +
       escapeHTML(view.member.cardReleaseId) + '">' + view.actionOptions + '</select></label>' +
       '<label>Target group (for reassign)<input class="ar-target" value="' + escapeHTML(view.target) +
-      '" placeholder="APPEARANCE:…" aria-label="Target artwork group"></label>' +
+      '" placeholder="IMAGE-GROUP:… or RELEASE-GROUP:…" aria-label="Target artwork group"></label>' +
       '<label>Note<textarea class="ar-note" rows="2" placeholder="What did you inspect?">' +
       escapeHTML(view.note) + '</textarea></label>' +
       '<button type="button" class="ghost ar-save">Save proposal</button>' +
@@ -1653,6 +1654,10 @@
         return;
       }
       if (action === "reassign" && !targetGroupId) { status.textContent = "Target group required."; return; }
+      if (action === "reassign" && !artworkGroupIds.has(targetGroupId)) {
+        status.textContent = "Target group must be an existing IMAGE-GROUP:* or RELEASE-GROUP:* id.";
+        return;
+      }
       const detection = {};
       const clearDetectionFields = [];
       card.querySelectorAll("[data-detection-field]").forEach((field) => {

@@ -1979,6 +1979,56 @@ def main() -> int:
               export_path.read_bytes().startswith(b"\xef\xbb\xbf"),
               "no BOM; a double-clicked file falls back to the local codepage")
 
+        # Reassign proposals must point at a currently projected artwork group, and the hint must
+        # use the current IMAGE-GROUP/RELEASE-GROUP identity vocabulary.
+        reassign_target = page.evaluate("""() => {
+          const projection = JSON.parse(document.getElementById('data-artwork-review').textContent);
+          const member = projection.groups.flatMap(group => group.members.map(candidate => ({
+            id: candidate.cardReleaseId,
+            groupId: group.groupId,
+            reviewable: (candidate.images || []).some(image => image.reviewable && image.contentHash),
+          }))).find(candidate => candidate.reviewable);
+          const target = projection.groups.find(group => group.groupId !== member.groupId);
+          return member && target ? {id: member.id, target: target.groupId} : null;
+        }""")
+        if reassign_target:
+            page.fill("#ar-search", reassign_target["id"])
+            page.wait_for_timeout(80)
+            reassign_card = page.locator("#ar-groups .artwork-member").filter(
+                has_text=reassign_target["id"]).first
+            check("reassign hint uses current artwork group ids",
+                  reassign_card.locator(".ar-target").get_attribute("placeholder") ==
+                  "IMAGE-GROUP:… or RELEASE-GROUP:…",
+                  reassign_card.locator(".ar-target").get_attribute("placeholder"))
+            reassign_card.locator(".ar-action").select_option("reassign")
+            reassign_card.locator(".ar-target").fill("APPEARANCE:obsolete")
+            reassign_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            invalid_reassign_status = reassign_card.locator(".artwork-save-status").inner_text()
+            check("reassign rejects unknown artwork group ids",
+                  "existing IMAGE-GROUP" in invalid_reassign_status,
+                  invalid_reassign_status)
+            reassign_card.locator(".ar-target").fill(reassign_target["target"])
+            reassign_card.locator(".ar-save").click()
+            page.wait_for_timeout(80)
+            valid_reassign = page.evaluate("""(releaseId) => {
+              const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
+              const saved = raw ? JSON.parse(raw) : {};
+              return saved[releaseId] || null;
+            }""", reassign_target["id"])
+            check("reassign accepts a projected artwork group id",
+                  valid_reassign is not None
+                  and valid_reassign.get("action") == "reassign"
+                  and valid_reassign.get("proposedAfter", {}).get("targetGroupId") == reassign_target["target"],
+                  str(valid_reassign))
+            page.fill("#ar-search", "")
+            page.wait_for_timeout(80)
+        else:
+            check("reassign hint uses current artwork group ids", False,
+                  "projection has no reviewable image member with a distinct target group")
+            check("reassign rejects unknown artwork group ids", False, "reassign fixture unavailable")
+            check("reassign accepts a projected artwork group id", False, "reassign fixture unavailable")
+
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 
