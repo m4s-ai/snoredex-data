@@ -321,6 +321,13 @@ def _jpeg_frame(payload: bytes, progressive: bool) -> tuple[int, int, list[dict[
     return width, height, components, progressive
 
 
+def _jpeg_adobe_transform(payload: bytes) -> int | None:
+    """Return the Adobe APP14 colour transform when this is an Adobe segment."""
+    if len(payload) >= 12 and payload[:5] == b"Adobe":
+        return payload[11]
+    return None
+
+
 def _jpeg_huffman_tables(payload: bytes, huffman: dict[tuple[int, int], dict[tuple[int, int], int]]) -> None:
     cursor = 0
     while cursor < len(payload):
@@ -406,7 +413,7 @@ def _jpeg_scan_record(data: bytes, position: int, payload: bytes, progressive: b
     return record, entropy_end
 
 
-def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool]:
+def _jpeg_read_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool, int | None]:
     if not data.startswith(b"\xff\xd8"):
         raise ImageError("not a JPEG")
     quant: dict[int, list[int]] = {}
@@ -414,6 +421,7 @@ def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dic
     components: list[dict[str, int]] = []
     scans: list[dict[str, object]] = []
     progressive = False
+    adobe_transform: int | None = None
     restart_interval = 0
     width = height = 0
     position = 2
@@ -432,10 +440,36 @@ def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dic
         else:
             if marker == 0xDD and len(payload) >= 2:
                 restart_interval = struct.unpack(">H", payload[:2])[0]
+            elif marker == 0xEE:
+                adobe_transform = _jpeg_adobe_transform(payload)
             width, height, components, progressive = _jpeg_header_segment(
                 marker, payload, quant, huffman, components, progressive, width, height)
-    if not scans or not components:
-        raise ImageError("JPEG has no baseline scan")
+    _jpeg_require_state(scans, components)
+    return width, height, quant, huffman, components, scans, progressive, adobe_transform
+
+
+def _jpeg_require_state(scans: list[dict[str, object]], components: list[dict[str, int]]) -> None:
+    if scans and components:
+        return
+    raise ImageError("JPEG has no baseline scan")
+
+
+def _jpeg_mark_rgb(components: list[dict[str, int]], adobe_transform: int | None) -> None:
+    """Mark unambiguous Adobe transform-0 RGB components for direct channel output."""
+    rgb_channels = {1: 0, 2: 1, 3: 2, ord("R"): 0, ord("G"): 1, ord("B"): 2}
+    identifiers = [component["id"] for component in components]
+    if adobe_transform != 0 or len(components) != 3:
+        return
+    if set(identifiers) not in ({1, 2, 3}, {ord("R"), ord("G"), ord("B")}):
+        return
+    for component in components:
+        component["rgb"] = 1
+        component["rgb_channel"] = rgb_channels[component["id"]]
+
+
+def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool]:
+    width, height, quant, huffman, components, scans, progressive, adobe_transform = _jpeg_read_state(data)
+    _jpeg_mark_rgb(components, adobe_transform)
     return width, height, quant, huffman, components, scans, progressive
 
 
@@ -630,14 +664,11 @@ def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, 
     width, height, quant, huffman, components, scans, progressive = _jpeg_header(data)
     planes = _jpeg_decode_planes(data, width, height, quant, huffman, components, scans, progressive)
 
-    pixels: list[tuple[int, int, int]] = []
-    output_width = min(width, target_width) if target_width else width
-    output_height = max(1, round(height * output_width / width))
+    output_width, output_height = _jpeg_output_size(width, height, target_width)
     frame_h = max(component["h"] for component in components)
     frame_v = max(component["v"] for component in components)
-    plane_grids = [(math.ceil(width * component["h"] / (8 * frame_h)),
-                    math.ceil(height * component["v"] / (8 * frame_v)))
-                   for component in components]
+    plane_grids = _jpeg_plane_grids(width, height, components, frame_h, frame_v)
+    pixels: list[tuple[int, int, int]] = []
     for y in range(output_height):
         for x in range(output_width):
             values = []
@@ -645,16 +676,37 @@ def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, 
                 source_x = min(actual_width - 1, x * actual_width // output_width)
                 source_y = min(actual_height - 1, y * actual_height // output_height)
                 values.append(plane[source_y * plane_width + source_x])
-            if len(values) == 1:
-                red = green = blue = values[0]
-            else:
-                # JPEG stores Y, Cb, Cr.  Keep the chroma channels in their standard order when
-                # converting the low-frequency samples to RGB.
-                red = max(0, min(255, round(values[0] + 1.402 * (values[2] - 128))))
-                green = max(0, min(255, round(values[0] - 0.344136 * (values[1] - 128) - 0.714136 * (values[2] - 128))))
-                blue = max(0, min(255, round(values[0] + 1.772 * (values[1] - 128))))
-            pixels.append((red, green, blue))
+            pixels.append(_jpeg_rgb(values, components))
     return output_width, output_height, pixels
+
+
+def _jpeg_output_size(width: int, height: int, target_width: int | None) -> tuple[int, int]:
+    output_width = min(width, target_width) if target_width else width
+    return output_width, max(1, round(height * output_width / width))
+
+
+def _jpeg_plane_grids(width: int, height: int, components: list[dict[str, int]],
+                      frame_h: int, frame_v: int) -> list[tuple[int, int]]:
+    return [(math.ceil(width * component["h"] / (8 * frame_h)),
+             math.ceil(height * component["v"] / (8 * frame_v)))
+            for component in components]
+
+
+def _jpeg_rgb(values: list[int], components: list[dict[str, int]]) -> tuple[int, int, int]:
+    if len(values) == 1:
+        return values[0], values[0], values[0]
+    if all(component.get("rgb") for component in components):
+        rgb = [0, 0, 0]
+        for component, value in zip(components, values):
+            rgb[component["rgb_channel"]] = value
+        return tuple(rgb)
+    # JPEG stores Y, Cb, Cr.  Keep the chroma channels in their standard order when converting
+    # the low-frequency samples to RGB.
+    return (
+        max(0, min(255, round(values[0] + 1.402 * (values[2] - 128)))),
+        max(0, min(255, round(values[0] - 0.344136 * (values[1] - 128) - 0.714136 * (values[2] - 128)))),
+        max(0, min(255, round(values[0] + 1.772 * (values[1] - 128)))),
+    )
 
 
 def decode(path: Path, target_width: int | None = None) -> tuple[int, int, list[tuple[int, int, int]]]:

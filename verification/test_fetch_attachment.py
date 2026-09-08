@@ -84,6 +84,16 @@ def main() -> None:
         offset += 1
     assert fetch_attachment.jpeg_component_count(bytes(rgb_jpeg)) == 4
     expect_failure(lambda: fetch_attachment.validate(bytes(rgb_jpeg), allow_small=False))
+    unsupported_frame = bytearray((ROOT / "images" / "151C_143_Snorlax_V1_819209.jpg").read_bytes())
+    offset = 2
+    while offset + 9 < len(unsupported_frame):
+        if unsupported_frame[offset] == 0xFF and 0xC0 <= unsupported_frame[offset + 1] <= 0xCF \
+                and unsupported_frame[offset + 1] not in (0xC4, 0xC8, 0xCC):
+            unsupported_frame[offset + 1] = 0xC3  # lossless SOF3 is outside the decoder contract
+            break
+        offset += 1
+    assert fetch_attachment.jpeg_frame_info(bytes(unsupported_frame))[0] == 0xC3
+    expect_failure(lambda: fetch_attachment.validate(bytes(unsupported_frame), allow_small=False))
     graph = json.loads(
         (ROOT / "verification" / "authoritative_graph.json").read_text(encoding="utf-8")
     )

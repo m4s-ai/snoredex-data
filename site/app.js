@@ -1465,17 +1465,22 @@
       return images.length > 0 && images.every((image) => image && image.src && image.reviewable && image.contentHash);
     };
 
+    const versionedOriginalSrc = (image) => {
+      if (!image || !image.src || !image.contentHash) return image && image.src;
+      const separator = image.src.includes("?") ? "&" : "?";
+      return image.src + separator + "v=" + encodeURIComponent(image.contentHash);
+    };
     const imageHTML = (member) => {
       const images = (member.images || []).filter((image) => image && image.src);
       if (!images.length) return '<div class="artwork-images"><div class="artwork-image missing">No reviewable image recorded</div></div>';
       return '<div class="artwork-images">' + images.map((image, index) =>
-        '<figure class="artwork-image"><a href="' + escapeHTML(image.src) + '" target="_blank" rel="noopener">' +
+        '<figure class="artwork-image"><a href="' + escapeHTML(versionedOriginalSrc(image)) + '" target="_blank" rel="noopener">' +
         '<img loading="lazy" decoding="async" src="' + escapeHTML(image.previewSrc || image.src) +
         (image.thumbnailSrc ? '" srcset="' + escapeHTML(image.thumbnailSrc) + ' 120w, ' +
           escapeHTML(image.previewSrc || image.src) + ' 360w" sizes="(max-width: 720px) 120px, 180px' : '') +
         '" alt="' + escapeHTML((member.detection && member.detection.cardName) || member.cardReleaseId) +
         ' — image ' + (index + 1) + '"></a><figcaption>' + escapeHTML(image.label || 'source image') +
-        '<br><a href="' + escapeHTML(image.src) + '" download>Open original / download</a>' +
+        '<br><a href="' + escapeHTML(versionedOriginalSrc(image)) + '" download>Open original / download</a>' +
         (image.reviewable && image.contentHash
           ? '<br><code>' + escapeHTML(image.contentHash) + '</code>'
           : '<br><span class="artwork-unverified">image bytes are not pinned</span>') +

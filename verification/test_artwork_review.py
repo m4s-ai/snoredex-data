@@ -119,6 +119,50 @@ def verify_derivative_writer() -> None:
     if (width, height) != (2, 1) or len(set(pixels)) != 1 or any(len(set(pixel)) != 1 for pixel in pixels):
         fail(f"grayscale JPEG was not expanded to equal RGB channels: {(width, height, pixels)}")
 
+    # Adobe APP14 transform 0 with explicit RGB component identifiers must bypass YCbCr math.
+    source_rgb = (ROOT / "images" / "s5a_93_Snorlax_552704.jpg").read_bytes()
+    adobe_app14 = b"\xff\xee\x00\x0eAdobe\x00\x64\x00\x00\x00\x00"
+    direct_rgb = bytearray(source_rgb[:2] + adobe_app14 + source_rgb[2:])
+    offset = 2
+    while offset + 9 < len(direct_rgb):
+        if direct_rgb[offset] != 0xFF:
+            offset += 1
+            continue
+        marker = direct_rgb[offset + 1]
+        if marker == 0xEE:
+            length = int.from_bytes(direct_rgb[offset + 2:offset + 4], "big")
+            payload = offset + 4
+            if direct_rgb[payload:payload + 5] == b"Adobe" and length >= 14:
+                direct_rgb[payload + 11] = 0
+        elif marker in (0xC0, 0xC1, 0xC2):
+            payload = offset + 4
+            if direct_rgb[payload + 5] == 3:
+                direct_rgb[payload + 6:payload + 9] = b"RGB"
+        if marker in (0xD8, 0xD9) or marker in range(0xD0, 0xD8) or marker == 0x01:
+            offset += 2
+        else:
+            offset += 2 + int.from_bytes(direct_rgb[offset + 2:offset + 4], "big")
+    direct_header = artwork_derivatives._jpeg_header(bytes(direct_rgb))
+    if [component.get("rgb_channel") for component in direct_header[4]] != [0, 1, 2]:
+        fail("Adobe transform-0 RGB components were not identified")
+    original_header = artwork_derivatives._jpeg_header
+    original_decode_planes = artwork_derivatives._jpeg_decode_planes
+    try:
+        artwork_derivatives._jpeg_header = lambda data: (
+            1, 1, {}, {},
+            [{"id": ord("R"), "h": 1, "v": 1, "q": 0, "dc": 0, "ac": 0, "rgb": 1, "rgb_channel": 0},
+             {"id": ord("G"), "h": 1, "v": 1, "q": 0, "dc": 0, "ac": 0, "rgb": 1, "rgb_channel": 1},
+             {"id": ord("B"), "h": 1, "v": 1, "q": 0, "dc": 0, "ac": 0, "rgb": 1, "rgb_channel": 2}],
+            [], False)
+        artwork_derivatives._jpeg_decode_planes = lambda *args: [
+            (1, 1, [10]), (1, 1, [20]), (1, 1, [30])]
+        width, height, pixels = artwork_derivatives._jpeg_dc_pixels(b"direct-rgb", 1)
+    finally:
+        artwork_derivatives._jpeg_header = original_header
+        artwork_derivatives._jpeg_decode_planes = original_decode_planes
+    if (width, height, pixels) != (1, 1, [(10, 20, 30)]):
+        fail(f"direct RGB JPEG channels were converted as YCbCr: {(width, height, pixels)}")
+
     # Restart intervals must reset predictors even when entropy padding contains decodable bits.
     original_read_block = artwork_derivatives._jpeg_read_block_restart
     restart_calls: list[object] = []

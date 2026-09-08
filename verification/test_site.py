@@ -232,6 +232,24 @@ def main() -> int:
               and page.locator("#ar-groups .artwork-group").count() > 0
               and page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id"),
               "review groups or release identity missing")
+        versioned_member = next(
+            (member for group in artwork_projection.get("groups", [])
+             for member in group.get("members", [])
+             if any(image.get("contentHash") for image in member.get("images", []))),
+            None,
+        )
+        if versioned_member:
+            versioned_card = page.locator(
+                f'[data-release-id="{versioned_member["cardReleaseId"]}"]')
+            original_link = versioned_card.locator("figure.artwork-image a").first.get_attribute("href")
+            download_link = versioned_card.locator("figure.artwork-image a[download]").first.get_attribute("href")
+            expected_version = "?v=" + next(
+                image["contentHash"] for image in versioned_member["images"] if image.get("contentHash"))
+            check("artwork original links are content-versioned",
+                  versioned_card.count() == 1
+                  and original_link and expected_version in original_link
+                  and download_link and expected_version in download_link,
+                  f"original={original_link!r}, download={download_link!r}")
         check("artwork review renders a bounded initial batch",
               page.locator("#ar-groups .artwork-group").count() <= 20
               and page.locator("#ar-load-more").count() == 1,

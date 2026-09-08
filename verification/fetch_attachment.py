@@ -326,8 +326,8 @@ def image_size(data: bytes, ext: str) -> tuple[int, int] | None:
     return None
 
 
-def jpeg_component_count(data: bytes) -> int | None:
-    """Return the component count from the first JPEG frame header."""
+def jpeg_frame_info(data: bytes) -> tuple[int, int] | None:
+    """Return ``(SOF marker, component count)`` from the first JPEG frame header."""
     if data[:2] != b"\xff\xd8":
         return None
     i = 2
@@ -337,7 +337,7 @@ def jpeg_component_count(data: bytes) -> int | None:
             continue
         marker = data[i + 1]
         if 0xC0 <= marker <= 0xCF and marker not in (0xC4, 0xC8, 0xCC):
-            return data[i + 9]
+            return marker, data[i + 9]
         if marker in (0xD8, 0xD9) or marker in range(0xD0, 0xD8) or marker == 0x01:
             i += 2
             continue
@@ -346,6 +346,20 @@ def jpeg_component_count(data: bytes) -> int | None:
             return None
         i += 2 + length
     return None
+
+
+def jpeg_component_count(data: bytes) -> int | None:
+    """Return the component count from the first JPEG frame header."""
+    frame = jpeg_frame_info(data)
+    return frame[1] if frame else None
+
+
+def validate_jpeg(data: bytes) -> None:
+    frame = jpeg_frame_info(data)
+    if frame is None or frame[0] not in (0xC0, 0xC1, 0xC2):
+        fail("the JPEG uses an unsupported frame mode; only baseline and progressive Huffman JPEGs are accepted")
+    if frame[1] not in (1, 3):
+        fail("the JPEG uses an unsupported component count; only grayscale and RGB/YCbCr are accepted")
 
 
 def content_hash(data: bytes) -> str:
@@ -462,8 +476,8 @@ def validate(blob: bytes, allow_small: bool) -> tuple[str, tuple[int, int] | Non
     size = image_size(blob, ext)
     if size is None:
         fail(f"the {ext} header is malformed — dimensions could not be read")
-    if ext == "jpg" and jpeg_component_count(blob) not in (1, 3):
-        fail("the JPEG uses an unsupported component count; only grayscale and RGB/YCbCr are accepted")
+    if ext == "jpg":
+        validate_jpeg(blob)
     if not allow_small and max(size) < MIN_LONG_EDGE:
         fail(f"{size[0]}x{size[1]} is too small to read a card off "
              f"(minimum long edge {MIN_LONG_EDGE}px; pass --allow-small to override)")
