@@ -439,6 +439,52 @@ def main() -> int:
         transaction_page.close()
         transaction_context.close()
 
+        # If the stale write succeeds but pruning the old current namespace fails, the same
+        # migrated draft is present in both namespaces after reload and must be deduplicated.
+        partial_context = browser.new_context()
+        partial_page = partial_context.new_page()
+        partial_page.goto(url)
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        partial_id = partial_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
+        partial_page.evaluate("""(releaseId) => {
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
+            [releaseId]: {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Partial migration reviewer',
+              action: 'confirm'
+            }
+          }));
+          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+        }""", partial_id)
+        partial_page.reload()
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        partial_page.evaluate("""() => {
+          const originalSetItem = localStorage.setItem.bind(localStorage);
+          localStorage.setItem = (key, value) => {
+            if (key === 'snoredex-artwork-review-proposals-v1') throw new Error('quota fixture');
+            originalSetItem(key, value);
+          };
+        }""")
+        partial_page.fill("#ar-reviewer", "Partial current reviewer")
+        partial_card = partial_page.locator("#ar-groups .artwork-member").first
+        partial_card.locator(".ar-action").select_option("unclear")
+        partial_card.locator(".ar-save").click()
+        partial_page.wait_for_timeout(80)
+        partial_page.reload()
+        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        with partial_page.expect_download() as partial_download:
+            partial_page.click("#ar-download")
+        partial_payload = json.loads(Path(partial_download.value.path()).read_text(encoding="utf-8"))
+        partial_matches = [item for item in partial_payload.get("staleProposals") or []
+                           if item.get("proposal", {}).get("reviewer") == "Partial migration reviewer"]
+        check("partial namespace migration deduplicates stale drafts after reload",
+              len(partial_matches) == 1,
+              str(partial_payload))
+        partial_page.close()
+        partial_context.close()
+
         # Replacing a stale proposal for a real release must keep the old value in the separate
         # stale namespace so a reload cannot silently discard the historical export candidate.
         replacement_id = stale_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
@@ -678,6 +724,10 @@ def main() -> int:
                   and structured_saved["proposedAfter"]["detection"]["variant"] == "reviewed-variant"
                   and structured_saved["proposedAfter"]["clearDetectionFields"] == []
                   and structured_saved["affectedPhysicalPrintingIds"] == structured_member["printingIds"],
+                  str(structured_saved))
+            check("proposal before values exclude display-only detection copy",
+                  structured_saved is not None
+                  and "note" not in structured_saved.get("before", {}).get("detection", {}),
                   str(structured_saved))
             structured_card.locator(".ar-proposed-artist").fill("")
             structured_card.locator(".ar-save").click()

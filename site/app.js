@@ -1234,6 +1234,10 @@
       return "";
     };
     const addStaleDraft = (releaseId, draft, reason, migratedFromCurrent = false) => {
+      const duplicate = Object.values(staleDrafts).some((item) =>
+        item.releaseId === releaseId && item.reason === reason
+        && JSON.stringify(item.draft) === JSON.stringify(draft));
+      if (duplicate) return;
       const baseKey = releaseId || "unknown-release";
       let key = baseKey;
       let suffix = 2;
@@ -1629,6 +1633,11 @@
         .find((candidate) => candidate.dataset.releaseId === memberId) || null;
     };
 
+    const semanticBeforeDetection = (detection) => Object.fromEntries(
+      ["state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence"]
+        .filter((key) => Object.prototype.hasOwnProperty.call(detection || {}, key))
+        .map((key) => [key, detection[key]])
+    );
     const makeProposal = (member, group, card) => {
       captureCard(card);
       const action = $(".ar-action", card).value;
@@ -1686,7 +1695,7 @@
           imageGroupId: member.imageGroupId,
           reviewedAppearanceId: member.reviewedAppearanceId,
           workId: member.workId,
-          detection: member.detection,
+          detection: semanticBeforeDetection(member.detection),
         },
         proposedAfter: {
           action,
