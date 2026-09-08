@@ -3,14 +3,19 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
-
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 LOOP = ROOT / "scripts" / "workflow_loop.py"
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from scripts.workflow_loop import latest_manifests  # noqa: E402
 
 
 def remove_empty(path: Path) -> None:
@@ -26,6 +31,20 @@ def main() -> int:
     assert set(loops) == {"physical", "evidence", "discovery", "news-promo", "tcgdex", "absence", "cardmarket"}
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
+
+    with tempfile.TemporaryDirectory(dir=ROOT / "verification" / "cache") as raw_root:
+        runs = Path(raw_root)
+        older = runs / "20260101T000000Z"
+        newer = runs / "20260102T000000Z"
+        for path, run_id in ((older, older.name), (newer, newer.name)):
+            path.mkdir()
+            (path / "manifest.json").write_text(
+                json.dumps({"runId": run_id, "status": "complete"}), encoding="utf-8"
+            )
+        # Filesystem mtimes are deliberately reversed; manifest run identity still wins.
+        os.utime(older / "manifest.json", (200, 200))
+        os.utime(newer / "manifest.json", (100, 100))
+        assert latest_manifests(runs)[0]["runId"] == newer.name
     for loop in loops.values():
         assert loop["initial"] in loop["states"]
         assert set(loop["terminal"]).issubset(loop["states"])
