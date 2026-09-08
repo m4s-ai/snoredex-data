@@ -3,8 +3,8 @@
 
 Baseline: `fb9111761a896192f11a28b1c968039e4221c9bb`. Scope: open parent #256,
 children #258, #259, #262, #263, #266, and photo inbox #166. This is a research pass,
-not a claim that all evidence gaps are closed. The separate Spanish GEN 58 result
-in open PR #371 is excluded from this branch and the counts below.
+not a claim that all evidence gaps are closed. The Spanish GEN 58 reverse-holo confirmation is included alongside the five
+photo-backed observations in this combined result.
 
 ## Accepted observations
 
@@ -34,6 +34,10 @@ does not justify another physical observation in this pass. SPEC-0032 shows the
 215/SV-P identity and festival mark; its slab image does not settle finish here.
 SPEC-0039 and SPEC-0015 could not be displayed reliably by the image tool; no new
 observation is attributed to them.
+
+The [Spanish GEN 58 research record](ISSUE-266-RESEARCH-20260908.md) supplies
+the sixth printing through an exact specialist-reference row and explicit Spanish
+reverse-holo coverage. It does not reinterpret SPEC-0131 as a physical photograph.
 
 ## Scope-specific remaining research
 
@@ -126,9 +130,9 @@ physical printing, not the wider parent's date, rarity, mapping or identity gaps
 | #259 | 66 | 15 | 14 |
 | #262 | 27 | 20 | 19 |
 | #263 | 45 | 28 | 26 |
-| #266 | 50 | 5 | 5 |
+| #266 | 50 | 5 | 4 |
 
-The graph gains five physical printings (737 to 742), with 632 releases unchanged.
+The graph gains six physical printings (737 to 743), with 632 releases unchanged.
 The collector catalogue goes from 995 to 996 items: four release placeholders
 are replaced, and one Japanese holo is added beside the still-open reverse
 candidate. Every accepted observation remains positive-evidence-only.

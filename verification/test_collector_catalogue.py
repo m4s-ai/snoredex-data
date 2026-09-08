@@ -585,11 +585,11 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 702,
-            "finishCandidates": 112,
+            "verifiedPrintings": 703,
+            "finishCandidates": 111,
             "researchPlaceholders": 76,
-            "currentKnown": 702,
-            "research": 188,
+            "currentKnown": 703,
+            "research": 187,
         },
     }
     build_a_bear_item = next(

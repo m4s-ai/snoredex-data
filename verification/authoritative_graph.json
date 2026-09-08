@@ -12890,12 +12890,11 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0139-P02",
         "semanticPrintingId": "PRINTING:91b8cba40945d5ec1f91b279",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+        "materializedTargetId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -95573,6 +95572,27 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+        "semanticPrintingId": "PRINTING:91b8cba40945d5ec1f91b279",
+        "cardReleaseId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+        "finish": "reverse-holo",
+        "edition": null,
+        "foilPattern": "type-symbol-background",
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0139",
+        "sourcePrintingId": "F0139-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:91b8cba40945d5ec1f91b279"
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:92943a019975c86736d471d0",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -166645,10 +166665,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:91b8cba40945d5ec1f91b279",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -224640,6 +224662,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:91b8cba40945d5ec1f91b279",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:92943a019975c86736d471d0",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -266793,8 +266831,8 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0139-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -286062,14 +286100,14 @@
     }
   ],
   "summary": {
-    "entities": 7905,
-    "edges": 11809,
+    "entities": 7906,
+    "edges": 11811,
     "migrationInputs": 2761,
     "migrationDispositions": {
       "bounded-contradicted": 90,
-      "candidate-needs-evidence": 281,
+      "candidate-needs-evidence": 280,
       "carried": 68,
-      "established-and-mapped": 1541,
+      "established-and-mapped": 1542,
       "linked-local-counterpart": 121,
       "mapped": 304,
       "needs-evidence": 126,
@@ -286079,7 +286117,7 @@
     },
     "candidateClaims": 1987,
     "cardReleases": 632,
-    "physicalPrintings": 742,
+    "physicalPrintings": 743,
     "setSourceRecords": 432,
     "setSourceDispositions": 432,
     "localizations": 16

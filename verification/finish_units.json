@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 471,
-      "withOnlyMarketplaceClaim": 51,
+      "withConfirmedFinish": 472,
+      "withOnlyMarketplaceClaim": 50,
       "pendingFinish": 40,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 9,
@@ -12886,11 +12886,11 @@
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
@@ -12923,7 +12923,7 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
@@ -12935,6 +12935,22 @@
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
               "supportsAbsence": false
+            },
+            {
+              "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+              "sourceType": "Bulbapedia localized Generations finish description",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-08",
+              "evidence": "The retained Spanish identity is GEN 58/83 (SPEC-0131); the set row names Snorlax 58/83 as Rare and the language section explicitly includes Spanish in the reverse-holo treatment. Applied only to that already established Western release. No ordinary finish, special stamp, edition or absence is inferred.",
+              "evidenceScope": "standard-set"
             }
           ],
           "printingId": "F0139-P02"
