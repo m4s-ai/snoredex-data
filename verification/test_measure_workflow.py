@@ -67,9 +67,18 @@ def main() -> int:
 
     specs = pages_specs(ROOT / "_site-measure-pages-test")
     commands = [" ".join(spec["args"]) for spec in specs]
-    assert len(specs) == 5
+    assert len(specs) == 6
+    labels = [spec["label"] for spec in specs]
+    assert labels == [
+        "pages-publish-build",
+        "pages-publish-verify-before-manifest",
+        "pages-deployment-manifest",
+        "pages-publish-verify-after-manifest",
+        "pages-deployment-verify",
+        "pages-publication-verify",
+    ], labels
     assert all("finishes.py" not in command and "site.py" not in command for command in commands)
-    assert any("scripts/publish.py --out" in command for command in commands)
+    assert sum("scripts/publish.py --out" in command and "--verify" in command for command in commands) == 2
     assert any("verification/publication_gate.py" in command for command in commands)
     print("workflow measurement path-redaction regression passed")
     return 0

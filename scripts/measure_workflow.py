@@ -155,6 +155,11 @@ def pages_specs(temp_root: pathlib.Path) -> list[dict[str, Any]]:
     return [
         {"label": "pages-publish-build", "phase": "pages", "args": ["scripts/publish.py", "--out", str(site)]},
         {
+            "label": "pages-publish-verify-before-manifest",
+            "phase": "pages",
+            "args": ["scripts/publish.py", "--out", str(site), "--verify"],
+        },
+        {
             "label": "pages-deployment-manifest",
             "phase": "pages",
             "args": [
@@ -163,7 +168,11 @@ def pages_specs(temp_root: pathlib.Path) -> list[dict[str, Any]]:
                 "--published-at", "2000-01-01T00:00:00Z",
             ],
         },
-        {"label": "pages-publish-verify", "phase": "pages", "args": ["scripts/publish.py", "--out", str(site), "--verify"]},
+        {
+            "label": "pages-publish-verify-after-manifest",
+            "phase": "pages",
+            "args": ["scripts/publish.py", "--out", str(site), "--verify"],
+        },
         {
             "label": "pages-deployment-verify",
             "phase": "pages",
