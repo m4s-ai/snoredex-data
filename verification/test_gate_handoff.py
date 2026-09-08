@@ -68,6 +68,10 @@ def main() -> int:
     pages = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
     assert "push:" in release and "branches: [main]" in release
     assert "github.event_name != 'pull_request'" in release
+    assert "--full-refresh" in release
+    assert "bulbapedia_historical" in release
+    assert ".github/workflows/release-gate\\.yml" in release
+    assert "Install browser test dependencies\n        if: runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "matrix:\n        os: [ubuntu-latest, windows-latest]" in release
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "post-push" in release and "P6/P7" in release
@@ -79,6 +83,10 @@ def main() -> int:
     assert "--check-dir" in pages and "--expected-gate L4" in pages
     assert "Regenerate site artifacts" not in pages
     assert "collector_deployment.py" in pages and "publication_gate.py" in pages
+    ui = (ROOT / ".github" / "workflows" / "ui-pr.yml").read_text(encoding="utf-8")
+    assert "name: UI browser gate" in ui
+    assert "ui-browser (chromium)" in ui
+    assert "python verification/test_site.py" in ui
     print("gate handoff contract passed: PR=L3, push=P6/P7, Pages=L4 artifact handoff")
     return 0
 

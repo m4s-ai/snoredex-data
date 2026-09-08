@@ -258,11 +258,54 @@ class SourceAdapterTests(unittest.TestCase):
                     },
                 ) as build,
             ):
-                projection, run_dir = adapters.build_latest(contract, capability)
+                projection, run_dir = adapters.build_latest(
+                    contract, capability, full_refresh=True
+                )
         self.assertEqual(run_dir.name, "20260809T000000Z")
         self.assertEqual(projection["runId"], "20260809T000000Z")
         self.assertEqual(build.call_count, 4)
         self.assertEqual(build.call_args_list[0].args[4], contract)
+
+    def test_incremental_projection_uses_only_predecessor_and_latest_run(self):
+        contract = {
+            "meta": {"coverageVersion": "test", "reviewedAt": "2026-08-30", "policies": []},
+            "adapters": [], "explicitMappings": [], "gaps": [],
+        }
+        capability = {}
+        capability_hash = adapters.capability_pin(capability, None)
+        run_ids = [
+            "20260809T000000Z", "20260810T000000Z", "20260811T000000Z",
+        ]
+        with tempfile.TemporaryDirectory() as temporary:
+            runs_dir = Path(temporary)
+            for run_id in run_ids:
+                run_dir = runs_dir / run_id
+                run_dir.mkdir()
+                (run_dir / "manifest.json").write_text(json.dumps({
+                    "runId": run_id, "status": "complete",
+                    "contractHash": adapters.content_hash(contract),
+                    "capabilityGraphHash": capability_hash,
+                }), encoding="utf-8")
+                (run_dir / "contract.json").write_text(
+                    json.dumps(contract), encoding="utf-8"
+                )
+            with (
+                mock.patch.object(adapters, "RUNS_DIR", runs_dir),
+                mock.patch.object(
+                    adapters,
+                    "build_projection",
+                    side_effect=lambda _contract, manifest, *_args: {
+                        "runId": manifest["runId"]
+                    },
+                ) as build,
+            ):
+                projection, run_dir = adapters.build_latest(contract, capability)
+        self.assertEqual(run_dir.name, run_ids[-1])
+        self.assertEqual(projection["runId"], run_ids[-1])
+        self.assertEqual(build.call_count, 2)
+        self.assertEqual(
+            [call.args[1]["runId"] for call in build.call_args_list], run_ids[-2:]
+        )
 
     def test_replay_repins_compatible_source_bytes(self):
         contract = {

@@ -11,13 +11,16 @@ this file can exist at all:
     suites are built on, had no tests.
 
 These assert the harness properties rather than any individual check's verdict: that importing is
-free, that collecting is what costs, and that a crash mid-collection still renders what ran.
+free, that collection orchestrates its sections in order, and that a crash mid-collection still
+renders what ran. The real full collection remains the separate review_findings.py integration
+check in the core gate.
 """
 
 from __future__ import annotations
 
 import sys
 from pathlib import Path
+from unittest import mock
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -38,11 +41,29 @@ def main() -> int:
     # untestable again, so it is checked before the module is used for anything else.
     expect("import collects no results", len(rf.suite.results), 0)
 
-    rf.collect()
-    expect("collect() populates the suite", len(rf.suite.results) > 0, True)
-    checks = {c.ident for c in rf.suite.checks}
+    families = [
+        "_collect_g0", "_collect_g0b", "_collect_g1", "_collect_g2", "_collect_g2b",
+        "_collect_g2c", "_collect_g3", "_collect_g4", "_collect_g5", "_collect_g6",
+        "_collect_g7", "_collect_g8", "_collect_g9", "_collect_g10", "_collect_g11",
+        "_collect_g12", "_collect_g13", "_collect_g14",
+    ]
+    called: list[str] = []
+
+    def fixture_section(state, name):
+        called.append(name)
+        return {name: True}
+
+    with mock.patch.multiple(
+        rf, **{
+            name: mock.Mock(side_effect=lambda state, name=name: fixture_section(state, name))
+            for name in families
+        }
+    ):
+        rf.collect()
+    expect("collect() visits every section in order", called, families)
+    source = (Path(__file__).resolve().parent / "review_findings.py").read_text(encoding="utf-8")
     for ident in ("E3", "E4", "R7", "S15", "X3"):
-        expect(f"{ident} is declared", ident in checks, True)
+        expect(f"{ident} is declared", f'"{ident}"' in source, True)
 
     # Documentation inventory means tracked documents, not nested issue-handoff worktrees that
     # happen to be present beside the checkout. The latter must never make D1/D4 fail locally.
@@ -52,8 +73,7 @@ def main() -> int:
 
     # Ordering is part of the contract: sections depend on values computed earlier, so a reordered
     # check is a behaviour change.
-    idents = [c.ident for c in rf.suite.checks]
-    expect("E3 precedes E4", idents.index("E3") < idents.index("E4"), True)
+    expect("E3 precedes E4", source.index('"E3"') < source.index('"E4"'), True)
 
     # The crash path: whatever ran before the failure must still be rendered.
     suite = Suite()
@@ -90,7 +110,6 @@ def main() -> int:
     # entered, so the run reported 0/1 and lost every verdict. G0 covers the reads, G0b the indexes.
     setup = [c.ident for c in rf.suite.checks if c.ident in ("G0", "G0b")]
     expect("setup emits nothing when it succeeds", setup, [])
-    source = (Path(__file__).resolve().parent / "review_findings.py").read_text(encoding="utf-8")
     expect("the reads are guarded", 'with guarded("G0", ' in source, True)
     expect("the indexes are guarded separately", 'with guarded("G0b", ' in source, True)
     expect("and nothing is built before the first guard",
@@ -100,8 +119,8 @@ def main() -> int:
         for failure in FAILURES:
             print(f"FAIL {failure}")
         return 1
-    print(f"findings harness regressions passed: {len(checks)} checks declared, import is free, "
-          "sections isolated")
+    print(f"findings harness regressions passed: {len(families)} sections orchestrated, "
+          "import is free, sections isolated")
     return 0
 
 

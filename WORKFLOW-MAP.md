@@ -164,10 +164,13 @@ release-gate.yml (workflow_call, Linux + Windows)
 
 The reusable gate is mode-sensitive: draft PRs skip the job, ready PRs run deterministic L3 only,
 and workflow-call/manual release paths run L4 live/browser/publication checks. A push to `main`
-runs the separate P6/P7 history audit against exactly `GITHUB_SHA`. Pages does not regenerate a
-second projection tree; it downloads the artifact produced after the L4 gate and rejects missing,
-stale, or fingerprint-disagreeing handoffs before deployment. The explicit list is a deployment
-boundary, not a second full-build order.
+also runs the explicit full retained source/card-discovery history checks; a pull request that
+changes retained-run or projection-input paths runs that same history lane before merge. The
+pull-request workflow does not install browser dependencies; UI-relevant paths select
+`.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
+downloads the artifact produced after the L4 gate and rejects missing, stale, or
+fingerprint-disagreeing handoffs before deployment. The explicit lists are deployment and UI
+boundaries, not a second full-build order.
 
 ### E. Verification envelope
 
@@ -192,6 +195,11 @@ import, projection, cross-artifact, browser, live, and publish boundaries separa
 The following operational scripts are intentionally outside the normal offline DAG:
 
 - `scripts/discovery_cycle.py` acquires/validates a retained source-first run.
+- `scripts/source_adapters.py --check --full-refresh` and
+  `scripts/card_discovery.py --check --full-refresh` validate every retained discovery run in the
+  L4 history lane; their default `--check` projects only the selected run and direct predecessor.
+- `scripts/measure_discovery.py` reports retained-run selection, raw I/O bytes, parser cost and
+  projection cost for both modes without changing generated files.
 - `verification/verify_finish_sources.py` performs the explicit live finish-source check.
 - `scripts/publish.py` assembles and verifies the allowlisted public artifact.
 - `scripts/collector_deployment.py` binds the deployment manifest to the deployed commit.
@@ -262,8 +270,8 @@ distribution, and card size. It is not derived from list order.
 | Event | Gate | Expensive checks | Artifact behavior |
 |---|---|---|---|
 | Draft PR | none | none | no release artifact |
-| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows | gate manifest only |
-| Push to `main` | P6/P7 | full-history publication audit at `GITHUB_SHA` | no second build |
+| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows; UI paths add Chromium behavior lane | gate manifest only |
+| Push to `main` | P6/P7 | full retained discovery history and publication audit at `GITHUB_SHA` | no second build |
 | Manual Pages run | L4 | live finish sources, Linux browser, allowlist, publication approval | download the already verified `pages-artifact` |
 
 ## 7. Boundaries

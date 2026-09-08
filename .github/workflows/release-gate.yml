@@ -41,12 +41,12 @@ jobs:
           python-version: "3.11"
 
       - name: Install browser test dependencies
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python -m pip install -r requirements.txt
 
       # Browser behavior is platform independent. Windows verifies path portability.
       - name: Install Chromium with Linux dependencies
-        if: runner.os == 'Linux'
+        if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python -m playwright install --with-deps chromium
 
       - name: Parse every Python file
@@ -69,6 +69,21 @@ jobs:
 
       - name: Generated artifacts and core regressions
         run: python scripts/regen.py --check
+
+      - name: Full retained discovery history
+        if: runner.os == 'Linux'
+        env:
+          DISCOVERY_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+        run: |
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            if ! git diff --name-only "${DISCOVERY_BASE_SHA}...${GITHUB_SHA}" | grep -Eq \
+              '^(verification/runs/(source-adapters|card-discovery)/|verification/(source_adapters|source_adapter_schema|card_discovery_adapters|card_discovery_schema|source_capability_graph|source_capability_schema|authoritative_graph|confirmed_sources|source_first_prints)\.json$|scripts/(source_adapters|card_discovery|projection_runs|bulbapedia_historical|source_capabilities|authoritative_graph)\.py$|\.github/workflows/release-gate\.yml$)'; then
+              echo "full retained discovery history: no retained-run or projection-input changes"
+              exit 0
+            fi
+          fi
+          python scripts/source_adapters.py --check --full-refresh
+          python scripts/card_discovery.py --check --full-refresh
 
       - name: Live finish-source verification
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
