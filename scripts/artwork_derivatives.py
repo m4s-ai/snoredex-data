@@ -3,14 +3,16 @@
 
 The repository keeps original evidence bytes untouched.  This module only creates the small
 derivative used by the review UI.  PNG decoding is complete for the colour types used by the
-specimen archive; baseline JPEGs use their DC samples for a faithful low-frequency preview.  A
-new image therefore never depends on a manually run desktop tool or a non-standard Python module.
+specimen archive; baseline and progressive JPEGs use their DC samples for a faithful low-frequency
+preview.  A new image therefore never depends on a manually run desktop tool or a non-standard
+Python module.
 """
 
 from __future__ import annotations
 
 import binascii
 import hashlib
+import json
 import math
 import struct
 import zlib
@@ -20,10 +22,16 @@ from typing import Iterable
 ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_WIDTH = 360
 THUMBNAIL_WIDTH = 120
+MANIFEST = ROOT / "verification" / "artwork_derivative_manifest.json"
+_MANIFEST_CACHE: dict[str, object] | None = None
 
 
 class ImageError(ValueError):
     """Raised when an image cannot be decoded by the stdlib derivative path."""
+
+
+class _EntropyEnd(Exception):
+    """Internal marker for the end of a progressive JPEG entropy scan."""
 
 
 def _chunk(kind: bytes, payload: bytes) -> bytes:
@@ -175,7 +183,7 @@ class _Bits:
                     self.index += 1
                     continue
                 else:
-                    raise ImageError("unexpected JPEG marker in entropy stream")
+                    raise _EntropyEnd
             self.bits = (self.bits << 8) | byte
             self.count += 8
         self.count -= count
@@ -408,10 +416,14 @@ def _jpeg_decode_planes(data: bytes, entropy_start: int, width: int, height: int
         plane_height = blocks_y * component["v"]
         planes.append((plane_width, plane_height, [128] * (plane_width * plane_height)))
 
-    for mcu_y in range(blocks_y):
-        for mcu_x in range(blocks_x):
-            _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
-                             mcu_x, mcu_y, previous_dc, progressive, approx_low)
+    try:
+        for mcu_y in range(blocks_y):
+            for mcu_x in range(blocks_x):
+                _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
+                                 mcu_x, mcu_y, previous_dc, progressive, approx_low)
+    except _EntropyEnd:
+        if not progressive:
+            raise ImageError("JPEG entropy stream ended before all blocks")
     return planes
 
 
@@ -431,9 +443,11 @@ def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, 
                 source_x = min(plane_width - 1, x * plane_width // output_width)
                 source_y = min(plane_height - 1, y * plane_height // output_height)
                 values.append(plane[source_y * plane_width + source_x])
-            red = max(0, min(255, round(values[0] + 1.402 * (values[1] - 128))))
+            # JPEG stores Y, Cb, Cr.  Keep the chroma channels in their standard order when
+            # converting the low-frequency samples to RGB.
+            red = max(0, min(255, round(values[0] + 1.402 * (values[2] - 128))))
             green = max(0, min(255, round(values[0] - 0.344136 * (values[1] - 128) - 0.714136 * (values[2] - 128))))
-            blue = max(0, min(255, round(values[0] + 1.772 * (values[2] - 128))))
+            blue = max(0, min(255, round(values[0] + 1.772 * (values[1] - 128))))
             pixels.append((red, green, blue))
     return output_width, output_height, pixels
 
@@ -479,39 +493,140 @@ def derivative_path(source: Path, kind: str) -> Path:
     return root / f"{source.stem}.png"
 
 
+def _source_key(source: Path) -> str:
+    return source.resolve().relative_to(ROOT.resolve()).as_posix()
+
+
+def _manifest() -> dict[str, object]:
+    global _MANIFEST_CACHE
+    if _MANIFEST_CACHE is None:
+        if MANIFEST.is_file():
+            try:
+                loaded = json.loads(MANIFEST.read_text(encoding="utf-8"))
+            except (OSError, json.JSONDecodeError) as error:
+                raise ImageError(f"invalid derivative manifest: {MANIFEST}") from error
+            if not isinstance(loaded, dict):
+                raise ImageError("derivative manifest is not an object")
+            _MANIFEST_CACHE = loaded
+        else:
+            _MANIFEST_CACHE = {"schema": "snoredex-artwork-derivatives",
+                               "schemaVersion": "1.0.0", "sources": {}}
+    return _MANIFEST_CACHE
+
+
+def _manifest_entry(source: Path) -> dict[str, object] | None:
+    entry = (_manifest().get("sources") or {}).get(_source_key(source))
+    return entry if isinstance(entry, dict) else None
+
+
+def _valid_record(record: object, source_hash: str) -> Path | None:
+    if not isinstance(record, dict) or record.get("sourceHash") != source_hash:
+        return None
+    path_value = record.get("path")
+    expected = record.get("sha256")
+    if not isinstance(path_value, str) or not isinstance(expected, str):
+        return None
+    path = ROOT / path_value
+    if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+        return None
+    return path
+
+
+def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
+    """Return derivatives proven to match the current source bytes.
+
+    Existing checkouts predate the manifest, so legacy JPEG derivatives are accepted once and
+    recorded by the next write pass.  Once a source has a manifest entry, a hash mismatch never
+    falls back to an old file; the normal writer must rebuild it first.
+    """
+    entry = _manifest_entry(source)
+    if entry is not None:
+        result = {}
+        for kind in ("preview", "thumbnail"):
+            path = _valid_record(entry.get(kind), source_hash)
+            if path:
+                result[kind] = path
+        return result
+    result = {}
+    for kind in ("preview", "thumbnail"):
+        root = ROOT / "images" / ("previews" if kind == "preview" else "thumbs")
+        for suffix in (".jpg", ".png"):
+            path = root / f"{source.stem}{suffix}"
+            if path.is_file():
+                result[kind] = path
+                break
+    return result
+
+
+def _record(source: Path, source_hash: str, kind: str, path: Path) -> dict[str, str]:
+    return {"sourceHash": source_hash,
+            "path": path.resolve().relative_to(ROOT.resolve()).as_posix(),
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+
+
+def _write_manifest(manifest: dict[str, object]) -> None:
+    MANIFEST.parent.mkdir(parents=True, exist_ok=True)
+    rendered = json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    MANIFEST.write_text(rendered, encoding="utf-8", newline="\n")
+
+
 def ensure_derivative(source: Path, kind: str) -> Path:
-    root = ROOT / "images" / ("previews" if kind == "preview" else "thumbs")
-    for suffix in (".jpg", ".png"):
-        existing = root / f"{source.stem}{suffix}"
-        if existing.is_file():
-            return existing
-    destination = derivative_path(source, kind)
-    target = PREVIEW_WIDTH if kind == "preview" else THUMBNAIL_WIDTH
-    width, height, pixels = decode(source, target)
-    width, height, pixels = resize(width, height, pixels, target)
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(encode_png(width, height, pixels))
-    return destination
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    ensure_for_sources([source])
+    current = current_derivatives(source, source_hash).get(kind)
+    if not current:
+        raise ImageError(f"could not create {kind} derivative for {source}")
+    return current
+
+
+def _write_missing(source: Path, current: dict[str, Path]) -> None:
+    width, height, pixels = decode(source, PREVIEW_WIDTH)
+    if "preview" not in current:
+        destination = derivative_path(source, "preview")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(encode_png(width, height, pixels))
+        current["preview"] = destination
+    if "thumbnail" not in current:
+        thumb_width, thumb_height, thumb_pixels = resize(width, height, pixels, THUMBNAIL_WIDTH)
+        destination = derivative_path(source, "thumbnail")
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes(encode_png(thumb_width, thumb_height, thumb_pixels))
+        current["thumbnail"] = destination
+
+
+def _ensure_source(source: Path, entries: dict[str, object]) -> tuple[str, dict[str, object], bool]:
+    source_hash = hashlib.sha256(source.read_bytes()).hexdigest()
+    key = _source_key(source)
+    entry = entries.get(key)
+    current = current_derivatives(source, source_hash)
+    if isinstance(entry, dict) and entry.get("sourceHash") != source_hash:
+        current = {}
+    if len(current) < 2:
+        _write_missing(source, current)
+    updated: dict[str, object] = {"sourceHash": source_hash}
+    updated.update({kind: _record(source, source_hash, kind, current[kind])
+                    for kind in ("preview", "thumbnail")})
+    return key, updated, entry != updated
 
 
 def ensure_for_sources(sources: Iterable[Path]) -> None:
+    manifest = _manifest()
+    entries = manifest.setdefault("sources", {})
+    if not isinstance(entries, dict):
+        raise ImageError("derivative manifest sources is not an object")
+    changed = False
     for source in sorted(set(sources), key=lambda item: str(item)):
         if not source.is_file():
             continue
-        preview = derivative_path(source, "preview")
-        thumbnail = derivative_path(source, "thumbnail")
-        preview_exists = any((preview.with_suffix(suffix)).is_file() for suffix in (".jpg", ".png"))
-        thumbnail_exists = any((thumbnail.with_suffix(suffix)).is_file() for suffix in (".jpg", ".png"))
-        if preview_exists and thumbnail_exists:
-            continue
-        width, height, pixels = decode(source, PREVIEW_WIDTH)
-        if not preview_exists:
-            preview.parent.mkdir(parents=True, exist_ok=True)
-            preview.write_bytes(encode_png(width, height, pixels))
-        if not thumbnail_exists:
-            thumb_width, thumb_height, thumb_pixels = resize(width, height, pixels, THUMBNAIL_WIDTH)
-            thumbnail.parent.mkdir(parents=True, exist_ok=True)
-            thumbnail.write_bytes(encode_png(thumb_width, thumb_height, thumb_pixels))
+        key, updated, source_changed = _ensure_source(source, entries)
+        if source_changed:
+            entries[key] = updated
+            changed = True
+    if changed or not MANIFEST.is_file():
+        _write_manifest(manifest)
+    global _MANIFEST_CACHE
+    _MANIFEST_CACHE = manifest
 
 
-__all__ = ["ImageError", "ensure_for_sources", "ensure_derivative", "decode", "derivative_path"]
+__all__ = ["ImageError", "ensure_for_sources", "ensure_derivative", "current_derivatives",
+           "decode", "derivative_path", "encode_png"]

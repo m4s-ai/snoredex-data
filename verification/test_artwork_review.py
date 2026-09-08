@@ -6,12 +6,14 @@ from __future__ import annotations
 import hashlib
 import json
 import sys
+import tempfile
 from copy import deepcopy
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import artwork_review  # noqa: E402
+import artwork_derivatives  # noqa: E402
 
 
 def fail(message: str) -> None:
@@ -44,6 +46,59 @@ def image_dimensions(path: Path) -> tuple[int, int]:
     fail(f"could not read JPEG dimensions: {path}")
 
 
+def verify_derivative_writer() -> None:
+    """Exercise source replacement, progressive JPEG decoding, and RGB channel order."""
+    for relative in ("images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
+                     "images/TEU_191_Eevee___Snorlax_GX_V3_369116.jpg",
+                     "images/EXS__Snorlax_548656.jpg"):
+        width, height, pixels = artwork_derivatives.decode(ROOT / relative, 64)
+        if width <= 0 or height <= 0 or not pixels:
+            fail(f"progressive JPEG did not produce preview pixels: {relative}")
+
+    original_root = artwork_derivatives.ROOT
+    original_manifest = artwork_derivatives.MANIFEST
+    original_cache = artwork_derivatives._MANIFEST_CACHE
+    try:
+        with tempfile.TemporaryDirectory(prefix="artwork-derivative-test-") as temporary:
+            test_root = Path(temporary)
+            source = test_root / "images" / "replacement.png"
+            source.parent.mkdir(parents=True)
+            source.write_bytes(artwork_derivatives.encode_png(
+                4, 2, [(220, 20, 20)] * 8))
+            artwork_derivatives.ROOT = test_root
+            artwork_derivatives.MANIFEST = test_root / "verification" / "artwork_derivative_manifest.json"
+            artwork_derivatives._MANIFEST_CACHE = None
+            progressive_source = test_root / "images" / "progressive.jpg"
+            progressive_source.write_bytes((original_root / "images" /
+                                             "TEU_171_Eevee___Snorlax_GX_V2_369096.jpg").read_bytes())
+            artwork_derivatives.ensure_for_sources([progressive_source])
+            progressive_entry = json.loads(artwork_derivatives.MANIFEST.read_text(
+                encoding="utf-8"))["sources"]["images/progressive.jpg"]
+            if not (test_root / progressive_entry["preview"]["path"]).is_file():
+                fail("progressive JPEG derivative was not written")
+            artwork_derivatives.ensure_for_sources([source])
+            manifest_path = artwork_derivatives.MANIFEST
+            first = json.loads(manifest_path.read_text(encoding="utf-8"))
+            key = "images/replacement.png"
+            first_entry = first["sources"][key]
+            first_preview = test_root / first_entry["preview"]["path"]
+            first_bytes = first_preview.read_bytes()
+            source.write_bytes(artwork_derivatives.encode_png(
+                4, 2, [(20, 20, 220)] * 8))
+            artwork_derivatives.ensure_for_sources([source])
+            second = json.loads(manifest_path.read_text(encoding="utf-8"))
+            second_entry = second["sources"][key]
+            second_preview = test_root / second_entry["preview"]["path"]
+            if first_entry["sourceHash"] == second_entry["sourceHash"]:
+                fail("source replacement leaves derivative manifest hash unchanged")
+            if first_bytes == second_preview.read_bytes():
+                fail("source replacement leaves derivative bytes unchanged")
+    finally:
+        artwork_derivatives.ROOT = original_root
+        artwork_derivatives.MANIFEST = original_manifest
+        artwork_derivatives._MANIFEST_CACHE = original_cache
+
+
 def main() -> int:
     path = ROOT / "verification" / "artwork_review_projection.json"
     if not path.exists():
@@ -53,6 +108,7 @@ def main() -> int:
         fail("projection is stale; run python scripts/artwork_review.py")
     if projection.get("schemaVersion") != "1.2.0" or projection.get("proposalSchemaVersion") != "1.2.0":
         fail("unexpected projection or proposal schema version")
+    verify_derivative_writer()
 
     groups = projection.get("groups") or []
     members = [member for group in groups for member in group.get("members") or []]

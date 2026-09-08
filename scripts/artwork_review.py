@@ -21,7 +21,7 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
-from artwork_derivatives import ensure_for_sources
+import artwork_derivatives
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "verification" / "artwork_review_projection.json"
@@ -47,14 +47,11 @@ def file_digest(path: Path) -> str | None:
 def image_derivatives(src: str, content_hash: str | None) -> dict[str, str]:
     if not content_hash:
         return {}
-    stem = Path(src).stem
     result = {"originalHash": content_hash}
-    for key, directory in (("previewSrc", "previews"), ("thumbnailSrc", "thumbs")):
-        for suffix in (".jpg", ".png"):
-            candidate = ROOT / "images" / directory / f"{stem}{suffix}"
-            if candidate.is_file():
-                result[key] = f"images/{directory}/{candidate.name}"
-                break
+    for key, kind in (("previewSrc", "preview"), ("thumbnailSrc", "thumbnail")):
+        candidate = artwork_derivatives.current_derivatives(ROOT / src, content_hash).get(kind)
+        if candidate:
+            result[key] = candidate.resolve().relative_to(ROOT.resolve()).as_posix()
     return result
 
 
@@ -525,7 +522,7 @@ def main() -> int:
     check_only = "--check" in sys.argv
     projection = build()
     if not check_only:
-        ensure_for_sources(projection_sources(projection))
+        artwork_derivatives.ensure_for_sources(projection_sources(projection))
         projection = build()
     rendered, rendered_js = rendered_outputs(projection)
     if check_only:

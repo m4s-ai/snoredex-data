@@ -172,7 +172,9 @@ generated preview/thumbnail derivatives (360px and 120px maximum widths). The pr
 each original path and SHA-256, and the UI links both the derivative preview and the original
 download. During a normal `python scripts/regen.py` write, `scripts/artwork_review.py` calls the
 standard-library `scripts/artwork_derivatives.py` writer before regenerating the projection.
-Missing derivatives are created deterministically; existing files are left untouched.
+Missing derivatives are created deterministically; `verification/artwork_derivative_manifest.json`
+binds each derivative to the current source hash so a replaced source cannot reuse an old image.
+Existing derivatives are reused until that hash changes.
 
 ### D. Manual Pages deployment lane (after the reusable L4 gate)
 
