@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-09-03",
+    "generated": "2026-09-08",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,13 +57,13 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 470,
-      "withOnlyMarketplaceClaim": 52,
+      "withConfirmedFinish": 471,
+      "withOnlyMarketplaceClaim": 51,
       "pendingFinish": 40,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 9,
       "withNonHolo": 310,
-      "withHolo": 231,
+      "withHolo": 232,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 55,
@@ -31954,20 +31954,45 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Reinspection on 2026-09-08: Japanese s8b 126/184 shows dense vertical foil lines and spectral bands within the artwork window. The visible positive treatment establishes holo independently of the marketplace reverse-holo filter. No reverse finish is asserted from this image. Retained as SPEC-0212.",
+              "retrievedAt": "2026-09-08"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0212"
+          ],
+          "image": "verification/specimens/SPEC-0212.jpg",
+          "printingId": "F0363-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -31985,7 +32010,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0363-P01"
+          "printingId": "F0363-P02"
         }
       ],
       "unresolved": [

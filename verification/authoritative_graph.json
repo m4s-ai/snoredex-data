@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-03",
+    "generated": "2026-09-08",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -10982,6 +10982,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0363-P01",
+        "semanticPrintingId": "PRINTING:4ac157e61e711626000a2833",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+        "materializedTargetId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0212"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:4afab8f06fae69d857f88554",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -11006,7 +11026,7 @@
         "claimId": "CLAIM:finish:PRINTING:4b0ce98855431c1592cce1c7",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0363-P01",
+        "sourceId": "F0363-P02",
         "semanticPrintingId": "PRINTING:4b0ce98855431c1592cce1c7",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -31521,6 +31541,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0038",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0038",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0038",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0038",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0038",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0038"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0040",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -31993,6 +32030,40 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:F0519-P02, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:F0519-P02"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0083",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0083",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0083",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0083",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0083",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:177/153:Snorlax-VMAX-G-Max-Fall",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0083"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0091",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0091",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0091",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0091",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0091",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SV9s:109/139:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0091"
       }
     },
     {
@@ -33013,6 +33084,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:056d2ead3883407b6e17fef4, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:056d2ead3883407b6e17fef4"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0212",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0212",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0212",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:4ac157e61e711626000a2833, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833"
       }
     },
     {
@@ -34203,6 +34291,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:dc384593974d322d80e37abd, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:dc384593974d322d80e37abd"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0488",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0488",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0488",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0488",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0488",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0488"
       }
     },
     {
@@ -93744,6 +93849,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+        "semanticPrintingId": "PRINTING:4ac157e61e711626000a2833",
+        "cardReleaseId": "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0363",
+        "sourcePrintingId": "F0363-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+        "specimenIds": [
+          "SPEC-0212"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:4b2b39106b870d4204a504b3",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -98862,6 +98991,78 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0038",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0038",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the complete Traditional-Chinese AS5a 222/184 card visibly has broad spectral foil bands crossing the artwork and text field. This establishes holo; it does not establish an exhaustive finish list or a normalized rarity.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0038",
+        "specimenIds": [
+          "SPEC-0038"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0083",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0083",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:177/153:Snorlax-VMAX-G-Max-Fall",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the foreground Traditional-Chinese sc1b F 177/153 card shows granular foil texture and spectral color bands across its surface. The complete number is visible at bottom left. Only this foreground card is observed; the two background Spanish cards supply no additional claim.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0083",
+        "specimenIds": [
+          "SPEC-0083"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0091",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0091",
+        "cardReleaseId": "RELEASE:TH:Thai:SV9s:109/139:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the complete Thai SV9s T 109/139 card has bright spectral reflections in the illustration and outer silver border. The text panel does not carry a separate observed reverse pattern. This positively establishes holo, with no inferred stamp, distribution, or finish completeness.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0091",
+        "specimenIds": [
+          "SPEC-0091"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:specimen:SPEC-0155",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -99130,6 +99331,36 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0477",
         "specimenIds": [
           "SPEC-0477"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0488",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0488",
+        "cardReleaseId": "RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "distribution-promo",
+            "text": "Indomaret"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "The exact Indonesian 052/S-P card shows spectral foil lines in its illustration and border and the printed Indomaret logo. The matched seller listing independently describes Holo; the photograph carries this observation.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0488",
+        "specimenIds": [
+          "SPEC-0488"
         ]
       }
     },
@@ -165433,6 +165664,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:4afab8f06fae69d857f88554",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -176207,6 +176448,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0038",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0038",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0040",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -176483,6 +176734,26 @@
       "toId": "PHYSICAL:F0519-P02",
       "provenance": {
         "specimenId": "SPEC-0080"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0083",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0083",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0091",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0091",
+      "provenance": {
+        "disposition": "established-and-mapped"
       }
     },
     {
@@ -177083,6 +177354,16 @@
       "toId": "PHYSICAL:PRINTING:056d2ead3883407b6e17fef4",
       "provenance": {
         "specimenId": "SPEC-0211"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0212",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "provenance": {
+        "specimenId": "SPEC-0212"
       }
     },
     {
@@ -177783,6 +178064,16 @@
       "toId": "PHYSICAL:PRINTING:dc384593974d322d80e37abd",
       "provenance": {
         "specimenId": "SPEC-0487"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0488",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0488",
+      "provenance": {
+        "disposition": "established-and-mapped"
       }
     },
     {
@@ -223229,6 +223520,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:4b2b39106b870d4204a504b3",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -226557,6 +226864,54 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0038",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0038",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0038",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0083",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0083",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0083",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1b F:177/153:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0091",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0091",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0091",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:SV9s:109/139:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:specimen:SPEC-0155",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -226729,6 +227084,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0488",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0488",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0488",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -268599,6 +268970,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0363-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0363-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -284543,6 +284921,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0038",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0038",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0040",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -284736,6 +285121,20 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:F0519-P02, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0083",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0083",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:177/153:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0091",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0091",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SV9s:109/139:Hops-Snorlax-Extra-Helpings-Dynamic-Press"
     },
     {
       "sourceKind": "specimen-observation",
@@ -285156,6 +285555,13 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:056d2ead3883407b6e17fef4, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0212",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:4ac157e61e711626000a2833, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",
@@ -285646,17 +286052,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:dc384593974d322d80e37abd, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0488",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0488",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam"
     }
   ],
   "summary": {
-    "entities": 7894,
-    "edges": 11793,
-    "migrationInputs": 2755,
+    "entities": 7905,
+    "edges": 11809,
+    "migrationInputs": 2761,
     "migrationDispositions": {
       "bounded-contradicted": 90,
-      "candidate-needs-evidence": 280,
+      "candidate-needs-evidence": 281,
       "carried": 68,
-      "established-and-mapped": 1536,
+      "established-and-mapped": 1541,
       "linked-local-counterpart": 121,
       "mapped": 304,
       "needs-evidence": 126,
@@ -285664,9 +286077,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 1981,
+    "candidateClaims": 1987,
     "cardReleases": 632,
-    "physicalPrintings": 737,
+    "physicalPrintings": 742,
     "setSourceRecords": 432,
     "setSourceDispositions": 432,
     "localizations": 16

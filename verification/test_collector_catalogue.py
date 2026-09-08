@@ -120,8 +120,31 @@ def printing_identity_regressions() -> None:
     assert migrations == expected_migrations
 
 
+def reinspection_regressions() -> None:
+    items = read("collector_catalogue.json")["items"]
+    for locality, code, number, name in (
+        ("TH:th", "SV9s", "109", "Hop's Snorlax"),
+        ("TW:zh-Hant", "AS5a", "222", "Eevee & Snorlax GX"),
+        ("TW:zh-Hant", "sc1b F", "177", "Snorlax VMAX"),
+        ("ID:id", "S-P", "052", "Snorlax"),
+        ("JP:ja", "s8b", "126", "Snorlax"),
+    ):
+        matched = [row for row in items if row["localizationId"] == "LOCALIZATION:" + locality
+                   and row["localSetCode"] == code and row["collectorNumber"] == number
+                   and row["itemKind"] == "verified-printing"]
+        assert len(matched) == 1
+        assert matched[0]["cardName"] == name
+        assert matched[0]["finish"] == "holo"
+        assert matched[0]["imageScope"] == "exact-printing"
+        assert matched[0]["completenessStatus"] == "positive-evidence-only"
+    reverse = next(row for row in items if row.get("finishUnitId") == "F0363"
+                   and row["finish"] == "reverse-holo")
+    assert reverse["itemKind"] == "finish-candidate", "visible holo cannot confirm a reverse candidate"
+
+
 def main() -> None:
     printing_identity_regressions()
+    reinspection_regressions()
     assert collector.collector_number("076/095") == collector.collector_number("076")
     source_backed_rarity = collector.normalized_rarity(
         "release:test",
@@ -562,10 +585,10 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 701,
+            "verifiedPrintings": 702,
             "finishCandidates": 112,
             "researchPlaceholders": 76,
-            "currentKnown": 701,
+            "currentKnown": 702,
             "research": 188,
         },
     }

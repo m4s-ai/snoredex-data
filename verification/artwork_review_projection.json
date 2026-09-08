@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-03",
-  "projectionVersion": "8b9d90503bc796e3be2a4de1d453b35083d1fa4bac67b4bdb41a289ed2d76ab4",
+  "generated": "2026-09-08",
+  "projectionVersion": "4e8ca19749267b2e755055e16ded707665ccc58e090321ba1d40ea1637578379",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 73,
     "cardReleases": 632,
-    "physicalPrintings": 737,
-    "sourceObservations": 2390
+    "physicalPrintings": 742,
+    "sourceObservations": 2391
   },
   "groups": [
     {
@@ -28577,13 +28577,42 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4ac157e61e711626000a2833",
+              "semanticPrintingId": "PRINTING:4ac157e61e711626000a2833",
+              "cardReleaseId": "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0363",
+              "sourcePrintingId": "F0363-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4ac157e61e711626000a2833",
+              "specimenIds": [
+                "SPEC-0212"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Reinspection on 2026-09-08: Japanese s8b 126/184 shows dense vertical foil lines and spectral bands within the artwork window. The visible positive treatment establishes holo independently of the marketplace reverse-holo filter. No reverse finish is asserted from this image. Retained as SPEC-0212.",
+                  "retrievedAt": "2026-09-08"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Narumi Sato",
             "variant": "base",
             "finish": [
+              "holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -28605,6 +28634,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0363-P01:0:6a7425cde7d0e91b",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
+              "evidence": "Reinspection on 2026-09-08: Japanese s8b 126/184 shows dense vertical foil lines and spectral bands within the artwork window. The visible positive treatment establishes holo independently of the marketplace reverse-holo filter. No reverse finish is asserted from this image. Retained as SPEC-0212.",
+              "contentHash": "63076059fc617ed9fe1643043419c0ac16ae995ec165f831c702d4c7b8203c3c",
+              "image": null
+            },
             {
               "observationId": "unit:U0172",
               "kind": "unit",
@@ -80998,13 +81036,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0038",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Reinspection on 2026-09-08: the complete Traditional-Chinese AS5a 222/184 card visibly has broad spectral foil bands crossing the artwork and text field. This establishes holo; it does not establish an exhaustive finish list or a normalized rarity.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0038",
+              "specimenIds": [
+                "SPEC-0038"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "伊布&卡比獸GX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -81535,13 +81595,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0091",
+              "cardReleaseId": "RELEASE:TH:Thai:SV9s:109/139:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Reinspection on 2026-09-08: the complete Thai SV9s T 109/139 card has bright spectral reflections in the illustration and outer silver border. The text panel does not carry a separate observed reverse pattern. This positively establishes holo, with no inferred stamp, distribution, or finish completeness.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0091",
+              "specimenIds": [
+                "SPEC-0091"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน <ของฮ็อป>",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -82423,15 +82505,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0488",
+              "cardReleaseId": "RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "Indomaret"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "The exact Indonesian 052/S-P card shows spectral foil lines in its illustration and border and the printed Indomaret logo. The matched seller listing independently describes Holo; the photograph carries this observation.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0488",
+              "specimenIds": [
+                "SPEC-0488"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "Indomaret"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -85576,13 +85688,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0083",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:177/153:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Reinspection on 2026-09-08: the foreground Traditional-Chinese sc1b F 177/153 card shows granular foil texture and spectral color bands across its surface. The complete number is visible at bottom left. Only this foreground card is observed; the two background Spanish cards supply no additional claim.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0083",
+              "specimenIds": [
+                "SPEC-0083"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸VMAX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,

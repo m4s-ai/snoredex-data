@@ -37,15 +37,15 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-03",
+      "lastUpdated": "2026-09-08",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 470,
-      "withOnlyMarketplaceClaim": 52,
+      "withConfirmedFinish": 471,
+      "withOnlyMarketplaceClaim": 51,
       "pendingFinish": 40,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 9,
       "withNonHolo": 310,
-      "withHolo": 231,
+      "withHolo": 232,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 55,
@@ -10857,29 +10857,45 @@
             "language": "Japanese",
             "claimStatus": "confirmed",
             "availableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "unitAvailableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0363",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0363-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0212.jpg",
+                "specimenIds": [
+                  "SPEC-0212"
+                ]
+              },
+              {
+                "printingId": "F0363-P02",
                 "finish": "reverse-holo",
                 "foilPattern": null,
                 "markings": null,
