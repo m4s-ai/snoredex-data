@@ -1218,6 +1218,11 @@
     let staleDrafts = {};
     let storageWarning = "";
     const formValues = new Map();
+    const semanticDetectionFields = [
+      "state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence",
+    ];
+    const semanticDetectionFieldSet = new Set(semanticDetectionFields);
+    const artworkGroupIds = new Set((ARTWORK_REVIEW.groups || []).map((group) => group.groupId));
 
     const staleReason = (draft) => {
       if (!draft || typeof draft !== "object" || Array.isArray(draft)) return "invalid proposal";
@@ -1230,6 +1235,15 @@
           || !Object.prototype.hasOwnProperty.call(draft.before, "imageGroupId")
           || !Object.prototype.hasOwnProperty.call(draft.before, "reviewedAppearanceId")) {
         return "typed artwork identity fields missing";
+      }
+      if (draft.action === "reassign"
+          && !artworkGroupIds.has(draft.proposedAfter && draft.proposedAfter.targetGroupId)) {
+        return "reassign target group changed";
+      }
+      const beforeDetection = draft.before.detection;
+      if (beforeDetection && typeof beforeDetection === "object" && !Array.isArray(beforeDetection)
+          && Object.keys(beforeDetection).some((key) => !semanticDetectionFieldSet.has(key))) {
+        return "before detection shape changed";
       }
       return "";
     };
@@ -1335,7 +1349,6 @@
     const members = () => ARTWORK_REVIEW.groups.flatMap((group) => group.members);
     const memberById = new Map(members().map((member) => [member.cardReleaseId, member]));
     const groupById = new Map(ARTWORK_REVIEW.groups.map((group) => [group.groupId, group]));
-    const artworkGroupIds = new Set(ARTWORK_REVIEW.groups.map((group) => group.groupId));
 
     const textFor = (member) => [
       member.cardReleaseId, member.workId, member.locality, member.language, member.localSetCode,
@@ -1635,8 +1648,7 @@
     };
 
     const semanticBeforeDetection = (detection) => Object.fromEntries(
-      ["state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence"]
-        .filter((key) => Object.prototype.hasOwnProperty.call(detection || {}, key))
+      semanticDetectionFields.filter((key) => Object.prototype.hasOwnProperty.call(detection || {}, key))
         .map((key) => [key, detection[key]])
     );
     const makeProposal = (member, group, card) => {

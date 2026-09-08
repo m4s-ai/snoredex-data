@@ -326,6 +326,39 @@ def main() -> int:
                       for item in stale_payload["staleProposals"]),
               str(stale_payload))
 
+        # Existing 1.2 drafts can carry the old target and before-detection shapes.  Loading must
+        # classify both as stale so they cannot bypass the new save-time semantic constraints.
+        stale_page.evaluate("""(projectionVersion) => {
+          const current = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1') || '{}');
+          current['CARD:LEGACY-REASSIGN'] = {
+            schema: 'snoredex-artwork-review-proposal', schemaVersion: '1.2.0', projectionVersion,
+            action: 'reassign', imageGroupId: null, reviewedAppearanceId: null,
+            proposedAfter: {targetGroupId: 'APPEARANCE:obsolete'},
+            before: {imageGroupId: null, reviewedAppearanceId: null, detection: {}},
+            reviewer: 'Legacy reassign reviewer', affectedCardReleaseIds: ['CARD:LEGACY-REASSIGN']
+          };
+          current['CARD:LEGACY-BEFORE'] = {
+            schema: 'snoredex-artwork-review-proposal', schemaVersion: '1.2.0', projectionVersion,
+            action: 'confirm', imageGroupId: null, reviewedAppearanceId: null,
+            proposedAfter: {targetGroupId: null},
+            before: {imageGroupId: null, reviewedAppearanceId: null, detection: {note: 'legacy copy'}},
+            reviewer: 'Legacy before reviewer', affectedCardReleaseIds: ['CARD:LEGACY-BEFORE']
+          };
+          localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(current));
+        }""", artwork_projection["projectionVersion"])
+        stale_page.reload()
+        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        with stale_page.expect_download() as stale_shape_download:
+            stale_page.click("#ar-download")
+        stale_shape_payload = json.loads(Path(stale_shape_download.value.path()).read_text(encoding="utf-8"))
+        stale_shape_reasons = [item.get("staleReason") for item in stale_shape_payload.get("staleProposals") or []]
+        check("stored reassign targets are revalidated on load",
+              "reassign target group changed" in stale_shape_reasons,
+              str(stale_shape_reasons))
+        check("stored before detection shape is revalidated on load",
+              "before detection shape changed" in stale_shape_reasons,
+              str(stale_shape_reasons))
+
         # A malformed primary namespace must not prevent loading or later overwriting a valid
         # stale namespace.
         namespace_context = browser.new_context()
