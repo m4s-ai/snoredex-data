@@ -416,7 +416,9 @@ def main() -> int:
         "appearanceIdentity": artwork_review["appearanceIdentity"],
         "reviewBoundary": artwork_review["reviewBoundary"],
         "summary": artwork_review["summary"],
-        "source": "verification/artwork_review_projection.json",
+        # Bind the fetch URL to the semantic snapshot so force-cache cannot replay an older
+        # projection after a generated artifact changes.
+        "source": "verification/artwork_review_projection.json?v=" + artwork_review["projectionVersion"],
         "fallback": "verification/artwork_review_projection.js",
     }
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]

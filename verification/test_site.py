@@ -215,6 +215,9 @@ def main() -> int:
               f"initial members={initial_artwork_members}")
         load_artwork(page)
         artwork_projection = page.evaluate("() => window.__SNOREDEX_ARTWORK_REVIEW__")
+        check("artwork projection fetch URL is versioned",
+              artwork_meta["source"] == "verification/artwork_review_projection.json?v=" +
+              artwork_projection["projectionVersion"], artwork_meta["source"])
         check("artwork review loads the authoritative projection on demand",
               artwork_projection["schema"] == "snoredex-artwork-review"
               and artwork_projection["summary"]["cardReleases"] >= 600

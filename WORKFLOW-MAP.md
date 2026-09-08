@@ -168,8 +168,11 @@ The previous run embedded 2,965,989 artwork JSON characters and built 933 image 
 current initial page embeds 924 metadata characters and no artwork images. After loading, the
 first batch contains 20 groups, 65 members and 97 images; the remaining groups are reachable via
 the button. Local originals remain under `images/`; `images/previews/` and `images/thumbs/` hold
-generated JPEG derivatives (360px and 120px maximum widths). The projection retains each original
-path and SHA-256, and the UI links both the derivative preview and the original download.
+generated preview/thumbnail derivatives (360px and 120px maximum widths). The projection retains
+each original path and SHA-256, and the UI links both the derivative preview and the original
+download. During a normal `python scripts/regen.py` write, `scripts/artwork_review.py` calls the
+standard-library `scripts/artwork_derivatives.py` writer before regenerating the projection.
+Missing derivatives are created deterministically; existing files are left untouched.
 
 ### D. Manual Pages deployment lane (after the reusable L4 gate)
 

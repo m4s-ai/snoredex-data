@@ -72,6 +72,9 @@ projection and one browser review path, and new graph data enters through regene
 hard-coded UI catalogue entries. The browser loads review data only when requested or when the
 review section approaches the viewport, renders bounded group batches, and uses generated preview
 and thumbnail derivatives while retaining original paths and hashes for downloads and attribution.
+`artwork_review.py` invokes the standard-library `artwork_derivatives.py` writer before its normal
+projection write, so a newly admitted local image receives both derivatives in the same pass.
+Existing derivatives are reused byte-for-byte; originals are never rewritten.
 The tradeoff is deliberate: a reviewer downloads a proposal instead of mutating the catalogue
 live. The current tests prove that automatic image grouping keeps localized prints distinct, proposals
 cite displayed observations and pinned hashes, unsafe image-dependent actions are blocked, and
