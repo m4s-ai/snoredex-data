@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Validate and expose the reviewed #140 locality graph snapshot.
 
-The migration graph is now an authoritative, committed input. This module deliberately
-does not rebuild it from compatibility projections: consumers read the snapshot (or the
-SQLite graph tables) and this command only checks that the snapshot is structurally sound.
+The migration graph is a retained, authoritative input with a projected physical slice.
+--write refreshes that slice and legacy claim source URLs, validates the complete graph,
+then replaces the file atomically. --check is observational. Neither mode can reconstruct
+the reviewed locality base or stable identity mappings from compatibility projections.
+See WORKFLOW-MAP.md for field ownership and recovery boundaries.
 """
 
 from __future__ import annotations

@@ -48,7 +48,8 @@ The following invariants apply to every path:
 
 | Store | Owner / writer | What it means | Primary downstream edges |
 |---|---|---|---|
-| `snorlax_cards.json` | legacy input; `scripts/legacy_baseline.py` checks it | Frozen Cardmarket-derived candidate universe | candidate claim membership |
+| `snorlax_cards.json` | retained candidate input with field-scoped projectors (below) | Live candidate membership and metadata, plus materialized edition/finish/language fields; only the baseline is frozen | candidate claim membership |
+| `verification/authoritative_graph.json` | reviewed migration base; `scripts/authoritative_graph.py --write` refreshes its owned slice | Retained hybrid, not a disposable full projection | stable locality/identity and physical-printing edges |
 | `legacy-cardmarket-baseline.json` | reviewed immutable boundary | Historical membership floor, not verification state | candidate-claim disposition |
 | `verification/units.json` | reviewed evidence passes | Card × language × variant verification state | `supports`, `contradicts`, `established-by` |
 | `verification/evidence.jsonl` | append-only observation journal | What was observed and when; not replayable state | evidence provenance |
@@ -62,11 +63,14 @@ The following invariants apply to every path:
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |
 | `verification/card_discovery_adapters.json` | reviewed card-discovery inventory | Locality-aware card query slices and gaps | candidate card/release edges |
 
-The source-first raw runs and refresh candidates are immutable transport evidence:
+The source-first raw runs are retained transport evidence; refresh candidates are staging:
 
 - `verification/runs/source-adapters/`
 - `verification/runs/card-discovery/`
 - `verification/cache/finish-tcgdex/` (ignored transport cache only)
+
+Retained runs are immutable; ignored refresh candidates are replaceable staging, not recovery
+sources. The accepted finish snapshot is the versioned recovery source.
 
 Their staging/record files are review surfaces. They do not write `units.json`,
 `finish_units.json`, or the graph verdicts without reconciliation.
@@ -76,6 +80,36 @@ contract and the scoped capability pin. Failed, incomplete, empty, or acquisitio
 remain retained but noncanonical. A replay may reuse the source run's bytes and retrieval metadata
 only under that same acquisition boundary; it renders with the current reviewed projection contract
 and capability state and never mutates the retained source run.
+
+### Hybrid ownership and recovery
+
+Do not delete either hybrid store to force regeneration. Restore a lost file from Git first.
+`regen.py` updates owned fields in dependency order; it is not a replay of the original harvest
+or locality migration. Never run archived migration passes to recover current state.
+
+| Retained store / slice | Sole recurring writer | Recovery and preservation contract |
+|---|---|---|
+| Candidate membership, product identity and harvested metadata in `snorlax_cards.json` | Reviewed input changes; no rebuild generator | Preserve the committed file and immutable baseline. `legacy_baseline.py` validates the membership floor, not all live metadata. |
+| Candidate edition fields | `scripts/editions.py` | Reproject from its reviewed edition inputs while preserving other candidate fields. |
+| Candidate finish fields | `scripts/finishes.py --offline` | Reproject from accepted snapshot, overrides and specimen inputs; preserve unrelated fields. |
+| Candidate language fields | `scripts/language_status.py` | Reproject from unit/evidence and owner-decision semantics; marketplace `languages` remains the input claim. |
+| Graph locality, release, work and catalogue base | Reviewed graph changes; no complete rebuild generator | Preserve existing entities, mappings and stable IDs. SQLite graph tables are consumer materialization, not an independent authority. |
+| Graph legacy-language candidate `sourceRecord` | `project_physical_evidence()` in `scripts/authoritative_graph.py` | Refresh from the matching `units.json` source URL only. |
+| Graph finish/specimen claims and owned physical printings | The same physical projector | Replace claims with `sourceKind` `finish-printing-record` or `specimen-observation`, physical nodes with `sourceFinishUnitId` or `PHYSICAL:specimen:` IDs, incident edges and corresponding dispositions. Reuse existing semantic identity mappings and release proposals. |
+| Graph summaries, ordering and generation metadata | The same physical projector | Recompute after merging the retained base and projected slice; validate before atomic replacement. |
+
+The remaining canonical stores in the table above are retained inputs unless a writer is explicitly
+named. `finish_units.json` is rebuilt by `finishes.py` from its declared reviewed sources, not
+from the evidence journal. Consumer JSON/CSV reports, the artwork JSON/JS and preview derivatives,
+SQLite handoff/template and static HTML are replaceable outputs of their named generators.
+User collection databases and browser review proposals are user state, never disposable build
+outputs. The executable rebuild sequence remains `regen.py`; restoring the reviewed inputs is
+a prerequisite, not one of its steps.
+
+ADR-0008 describes the accepted registry design. Separate reviewed artwork registries and a
+complete separation of the retained graph base from its physical materialization remain design
+work, not capabilities of the current rebuild. Keeping the hybrid with explicit field ownership
+is the bounded F12 decision for #357; a bulk migration is outside this issue.
 
 ## 3. Full projection DAG
 
@@ -154,15 +188,18 @@ site embeds only a 924-byte metadata envelope; HTTP pages fetch the JSON on dema
 viewport, keeps search/filter evaluation in memory, and emits at most 20 groups per batch with an
 explicit “Load more” action. Browser proposals still carry the same projection and schema versions.
 
-Issue #356 measurements use a fresh Chromium context at 1000px height:
+Issue #356 recorded these DOM measurements in a fresh Chromium context at 1000px height:
 
-| Viewport | Previous initial DOM / artwork cards | Current initial DOM / artwork cards | Current initial HTML bytes |
-|---:|---:|---:|---:|
-| 320 px | 73,292 / 559 | 20,395 / 0 | 2,492,850 |
-| 375 px | 73,292 / 559 | 20,395 / 0 | 2,492,850 |
-| 768 px | 73,292 / 559 | 20,395 / 0 | 2,539,053 |
-| 1440 px | 73,292 / 559 | 20,395 / 0 | 2,539,040 |
-| 1920 px | 73,292 / 559 | 20,395 / 0 | 2,539,040 |
+| Viewport | Previous initial DOM / artwork cards | Current initial DOM / artwork cards |
+|---:|---:|---:|
+| 320 px | 73,292 / 559 | 20,395 / 0 |
+| 375 px | 73,292 / 559 | 20,395 / 0 |
+| 768 px | 73,292 / 559 | 20,395 / 0 |
+| 1440 px | 73,292 / 559 | 20,395 / 0 |
+| 1920 px | 73,292 / 559 | 20,395 / 0 |
+
+The static `index.html` file is 1,237,743 bytes at the #357 documentation update; serialized
+browser DOM sizes are not the file transfer size.
 
 The previous run embedded 2,965,989 artwork JSON characters and built 933 image elements. The
 current initial page embeds 924 metadata characters and no artwork images. After loading, the

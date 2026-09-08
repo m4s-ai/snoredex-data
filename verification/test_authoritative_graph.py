@@ -691,6 +691,15 @@ def main() -> None:
         for row in graph["edges"]
     )
     assert project_physical_evidence(deepcopy(graph)) == graph
+    # The reviewed base is retained input, not reconstructible physical output (#357).
+    retained = deepcopy(graph)
+    work = next(row for row in retained["entities"] if row["entityType"] == "work")
+    work["payload"]["reviewedBoundaryFixture"] = "retain reviewed metadata"
+    expected_work = deepcopy(work)
+    projected = project_physical_evidence(retained)
+    assert next(row for row in projected["entities"]
+                if row["entityId"] == expected_work["entityId"]) == expected_work
+    assert project_physical_evidence(deepcopy(projected)) == projected
     # A positional printing id may change when a new printing sorts before it.  The
     # existing physical node and claim must nevertheless follow the same semantics.
     with tempfile.TemporaryDirectory() as directory:

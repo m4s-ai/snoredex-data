@@ -8,6 +8,13 @@
 
 **Builds on:** ADR-0001, ADR-0002 and ADR-0007
 
+**Implementation boundary (2026-09-08, #357):** This is the accepted design, not a claim that
+all listed registries are separately populated today. The committed locality graph retains a
+reviewed base and stable identity mappings while its physical slice is refreshed in place.
+It cannot be deleted and rebuilt from consumer views. Reviewed artwork registries are still
+design scope; automatic image groups are proposals. See
+[current store ownership and recovery](../WORKFLOW-MAP.md#hybrid-ownership-and-recovery).
+
 ## Context
 
 The repository currently proves proposed graph shapes with generated dry runs. Those projections

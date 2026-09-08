@@ -125,6 +125,10 @@ existing Python workflow owners rather than copying their contracts.
    `finish_units.json`.
 7. **Never hand-edit a generated file.** Each carries a header saying so, including the
    `<!-- generated:… -->` blocks in `README.md` and the whole of `index.html`. Regenerate instead.
+   The candidate file and locality graph are retained hybrid stores, not disposable outputs.
+   Preserve their reviewed base and use the field owners in
+   [WORKFLOW-MAP.md](WORKFLOW-MAP.md#hybrid-ownership-and-recovery); regeneration cannot replace
+   a lost harvest or reviewed graph migration.
 8. **Run the checks after every write pass** — see [Commands](#commands). Silent data corruption
    has happened here and only the audit caught it.
 

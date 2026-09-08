@@ -104,7 +104,7 @@ verification/bulbapedia_release_dates.json
                               Reviewed set-code -> Bulbapedia page/field/date overrides. Shared
                               articles often carry both enrelease and jarelease; never select by
                               article title alone. Recheck with audit_bulbapedia_release_dates.py.
-scripts/                      Two halves; only the second can be re-run (#28). The executable
+scripts/                      Active runnable generators and workflow helpers. The executable
                               order is owned by scripts/regen.py (REGEN/CHECK/TESTS); do not copy
                               that list into handover prose. WORKFLOW-MAP.md is the human-readable
                               explanation of the same DAG, gate levels, and Pages deployment lane.
@@ -138,8 +138,8 @@ scripts/                      Two halves; only the second can be re-run (#28). T
                               They read _chunk1..3.json, a 2026-07-21 scrape of a live
                               marketplace. Not in the repo, not reproducible: the same search
                               today returns different products. snorlax_cards.json is therefore
-                              the INPUT of record, not an output of this repository. These five
-                              join the archive once their data flow is captured (#28 did that).
+                              the retained INPUT of record with projected fields, not a fully
+                              rebuildable output. All five harvest scripts are already archived.
 
                                 mkunits    Also historical, and destructive: rebuilds
                                            verification/units.json from scratch with fresh ids,
@@ -181,9 +181,12 @@ verification/
   set_catalogue_schema.sql    Executable SQLite constraint contract for ADR-0002. The historical
                               migration pass loaded it into an empty in-memory database; the #140
                               graph migration materializes the current result.
-  authoritative_graph.json   GENERATED #140 canonical locality graph snapshot: reviewed identity
+  authoritative_graph.json   RETAINED HYBRID #140 locality graph: reviewed identity
                               and catalogue entities, typed provenance edges, raw set records and
-                              one reversible migration disposition for every input.
+                              one reversible migration disposition for every input. Preserve this
+                              file: only its physical slice and legacy source URLs are refreshed;
+                              the reviewed base and stable ID mappings cannot be rebuilt from
+                              other stores. Field ownership and recovery: WORKFLOW-MAP.md section 2.
   ../collector_catalogue.json
                               GENERATED #254 collector-app projection. Its schema, predecessor
                               migration ledger and reconciliation fixture sit beside it. The
