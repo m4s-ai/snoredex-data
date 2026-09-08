@@ -34,6 +34,10 @@ class _EntropyEnd(Exception):
     """Internal marker for the end of a progressive JPEG entropy scan."""
 
 
+class _Restart(Exception):
+    """Internal marker for a JPEG restart interval boundary."""
+
+
 def _chunk(kind: bytes, payload: bytes) -> bytes:
     return struct.pack(">I", len(payload)) + kind + payload + struct.pack(">I", binascii.crc32(kind + payload) & 0xFFFFFFFF)
 
@@ -240,7 +244,7 @@ class _Bits:
                     self.bits = 0
                     self.count = 0
                     self.index += 1
-                    continue
+                    raise _Restart
                 else:
                     raise _EntropyEnd
             self.bits = (self.bits << 8) | byte
@@ -421,8 +425,8 @@ def _jpeg_marker_state(data: bytes) -> tuple[int, int, dict[int, list[int]], dic
 
 def _jpeg_header(data: bytes) -> tuple[int, int, dict[int, list[int]], dict[tuple[int, int], dict[tuple[int, int], int]], list[dict[str, int]], list[dict[str, object]], bool]:
     width, height, quant, huffman, components, scans, progressive = _jpeg_marker_state(data)
-    if len(components) != 3:
-        raise ImageError("only three-component JPEGs are supported")
+    if len(components) not in (1, 3):
+        raise ImageError("only grayscale and three-component JPEGs are supported")
     return width, height, quant, huffman, components, scans, progressive
 
 
@@ -467,6 +471,42 @@ def _jpeg_decode_mcu(reader: _Bits, components: list[dict[str, int]], active_ids
                 plane[origin_y * plane_width + origin_x] = average
 
 
+def _jpeg_read_block_restart(reader: _Bits, dc_table: dict[tuple[int, int], int],
+                             ac_table: dict[tuple[int, int], int] | None,
+                             qtable: list[int], previous: int, progressive: bool,
+                             approx_low: int) -> tuple[int, int]:
+    while True:
+        try:
+            return _jpeg_read_block(reader, dc_table, ac_table, qtable, previous,
+                                    progressive, approx_low)
+        except _Restart:
+            previous = 0
+
+
+def _jpeg_decode_mcu_restart(reader: _Bits, components: list[dict[str, int]], active_ids: set[int],
+                             huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                             quant: dict[int, list[int]], planes: list[tuple[int, int, list[int]]],
+                             mcu_x: int, mcu_y: int, previous_dc: list[int], progressive: bool,
+                             approx_low: int) -> None:
+    while True:
+        try:
+            _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
+                             mcu_x, mcu_y, previous_dc, progressive, approx_low)
+            return
+        except _Restart:
+            previous_dc[:] = [0, 0, 0]
+
+
+def _jpeg_fill_padding(plane: tuple[int, int, list[int]], blocks_x: int, blocks_y: int) -> None:
+    plane_width, plane_height, pixels = plane
+    for row in range(blocks_y):
+        start = row * plane_width
+        pixels[start + blocks_x:start + plane_width] = [pixels[start + blocks_x - 1]] * (plane_width - blocks_x)
+    last_row = pixels[(blocks_y - 1) * plane_width:blocks_y * plane_width]
+    for row in range(blocks_y, plane_height):
+        pixels[row * plane_width:(row + 1) * plane_width] = last_row
+
+
 def _scan_components(components: list[dict[str, int]], scan: list[dict[str, int]]) -> tuple[list[dict[str, int]], set[int]]:
     selectors = {item["id"]: item for item in scan}
     selected_components = []
@@ -482,17 +522,18 @@ def _jpeg_decode_noninterleaved(reader: _Bits, component: dict[str, int],
                                 plane: tuple[int, int, list[int]],
                                 huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
                                 quant: dict[int, list[int]], progressive: bool,
-                                approx_low: int) -> None:
+                                approx_low: int, blocks_x: int, blocks_y: int) -> None:
     plane_width, plane_height, pixels = plane
     dc_table = huffman[(0, component["dc"])]
     ac_table = None if progressive else huffman[(1, component["ac"])]
     previous_dc = 0
-    for block_y in range(plane_height):
-        for block_x in range(plane_width):
-            previous_dc, average = _jpeg_read_block(
+    for block_y in range(blocks_y):
+        for block_x in range(blocks_x):
+            previous_dc, average = _jpeg_read_block_restart(
                 reader, dc_table, ac_table, quant[component["q"]], previous_dc,
                 progressive, approx_low)
             pixels[block_y * plane_width + block_x] = average
+    _jpeg_fill_padding(plane, blocks_x, blocks_y)
 
 
 def _jpeg_decode_interleaved(reader: _Bits, components: list[dict[str, int]], active_ids: set[int],
@@ -503,8 +544,8 @@ def _jpeg_decode_interleaved(reader: _Bits, components: list[dict[str, int]], ac
     previous_dc = [0, 0, 0]
     for mcu_y in range(blocks_y):
         for mcu_x in range(blocks_x):
-            _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
-                             mcu_x, mcu_y, previous_dc, progressive, approx_low)
+            _jpeg_decode_mcu_restart(reader, components, active_ids, huffman, quant, planes,
+                                     mcu_x, mcu_y, previous_dc, progressive, approx_low)
 
 
 def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: int,
@@ -522,9 +563,12 @@ def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: 
         if len(active_ids) == 1:
             component_index = next(index for index, component in enumerate(components)
                                    if component["id"] in active_ids)
+            component = components[component_index]
+            scan_blocks_x = math.ceil(width * component["h"] / (8 * frame_h))
+            scan_blocks_y = math.ceil(height * component["v"] / (8 * frame_v))
             _jpeg_decode_noninterleaved(reader, components[component_index],
                                         planes[component_index], huffman, quant, progressive,
-                                        scan["approx_low"])
+                                        scan["approx_low"], scan_blocks_x, scan_blocks_y)
             return
         _jpeg_decode_interleaved(reader, components, active_ids, huffman, quant, planes,
                                  blocks_x, blocks_y, progressive, scan["approx_low"])
@@ -567,11 +611,14 @@ def _jpeg_dc_pixels(data: bytes, target_width: int | None = None) -> tuple[int, 
                 source_x = min(plane_width - 1, x * plane_width // output_width)
                 source_y = min(plane_height - 1, y * plane_height // output_height)
                 values.append(plane[source_y * plane_width + source_x])
-            # JPEG stores Y, Cb, Cr.  Keep the chroma channels in their standard order when
-            # converting the low-frequency samples to RGB.
-            red = max(0, min(255, round(values[0] + 1.402 * (values[2] - 128))))
-            green = max(0, min(255, round(values[0] - 0.344136 * (values[1] - 128) - 0.714136 * (values[2] - 128))))
-            blue = max(0, min(255, round(values[0] + 1.772 * (values[1] - 128))))
+            if len(values) == 1:
+                red = green = blue = values[0]
+            else:
+                # JPEG stores Y, Cb, Cr.  Keep the chroma channels in their standard order when
+                # converting the low-frequency samples to RGB.
+                red = max(0, min(255, round(values[0] + 1.402 * (values[2] - 128))))
+                green = max(0, min(255, round(values[0] - 0.344136 * (values[1] - 128) - 0.714136 * (values[2] - 128))))
+                blue = max(0, min(255, round(values[0] + 1.772 * (values[1] - 128))))
             pixels.append((red, green, blue))
     return output_width, output_height, pixels
 

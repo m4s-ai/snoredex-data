@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import base64
 import hashlib
 import json
 import struct
@@ -91,12 +92,32 @@ def verify_derivative_writer() -> None:
     for relative in ("images/151C_143_Snorlax_V1_819209.jpg",
                      "images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
                      "images/TEU_191_Eevee___Snorlax_GX_V3_369116.jpg",
-                     "images/EXS__Snorlax_548656.jpg"):
+                     "images/EXS__Snorlax_548656.jpg",
+                     "images/s5a_93_Snorlax_552704.jpg",
+                     "images/xJTG_117_Hop_s_Snorlax_V2_817770.jpg"):
         width, height, pixels = artwork_derivatives.decode(ROOT / relative, 64)
         if width <= 0 or height <= 0 or not pixels:
             fail(f"progressive JPEG did not produce preview pixels: {relative}")
         if len(set(pixels)) < 2:
             fail(f"JPEG preview unexpectedly contains one flat color: {relative}")
+
+    # A grayscale JPEG has one component.  Keep the decoder's component handling covered even
+    # though the repository's retained photographs are all RGB or YCbCr sources.
+    grayscale = base64.b64decode(
+        "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMU"
+        "FRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQU"
+        "FBQUFBQUFBQUFBT/wAALCAABAAIBASIA/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9"
+        "AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNk"
+        "ZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo"
+        "6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx"
+        "BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0"
+        "dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3"
+        "+Pn6/9oACAEBAAA/APv79k7/AJNY+Df/AGJmjf8ApDDRRRQH/9k=")
+    if len(artwork_derivatives._jpeg_header(grayscale)[4]) != 1:
+        fail("grayscale JPEG fixture was not parsed as one component")
+    width, height, pixels = artwork_derivatives._jpeg_dc_pixels(grayscale)
+    if (width, height) != (2, 1) or len(set(pixels)) != 1 or any(len(set(pixel)) != 1 for pixel in pixels):
+        fail(f"grayscale JPEG was not expanded to equal RGB channels: {(width, height, pixels)}")
 
     original_root = artwork_derivatives.ROOT
     original_manifest = artwork_derivatives.MANIFEST
