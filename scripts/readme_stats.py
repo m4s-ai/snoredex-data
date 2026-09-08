@@ -241,7 +241,8 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         "absence decisions. |",
         "| Quality gate | Deterministic generators, structural and evidence audits, cross-artifact "
         "consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull "
-        "requests. Browser and live-source checks run in the Linux release lane. |",
+        "requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source "
+        "release checks run on Linux. |",
         f"| Site and publication | The repository is {repository_visibility}. The interactive site "
         f"is generated and usable locally; Pages deployment is {publication_state}. |",
         "| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present "

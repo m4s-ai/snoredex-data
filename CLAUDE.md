@@ -227,10 +227,14 @@ The pre-PR gate, matching CI:
 
 ```console
 pip install -r requirements.txt
+# UI-relevant PRs and the L4 release lane install Chromium for the browser contract.
 python -m playwright install chromium
 
 python scripts/regen.py                          # write every derived artifact, then run the core gate
 python scripts/regen.py --check                  # skip the write phase; this is what CI calls
+# Deeper L4 validation of every retained source/card discovery run.
+python scripts/source_adapters.py --check --full-refresh
+python scripts/card_discovery.py --check --full-refresh
 # Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
 python scripts/regen.py --check --check-only scripts/evidence_semantics.py
 

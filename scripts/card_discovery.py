@@ -12,6 +12,7 @@ verdict store.
         --reuse-unfinished-from-run 20260808T180000Z
     python scripts/card_discovery.py
     python scripts/card_discovery.py --check
+    python scripts/card_discovery.py --check --full-refresh
 """
 
 from __future__ import annotations
@@ -34,6 +35,10 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from bulbapedia_historical import HistoricalIndexError, parse_historical_index
+try:
+    from .projection_runs import select_projection_run_ids
+except ImportError:  # direct execution from scripts/
+    from projection_runs import select_projection_run_ids
 from source_capabilities import schema_errors
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1365,7 +1370,8 @@ def newest_compatible_complete_run(
 
 
 def build_latest(
-    contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any]
+    contract: dict[str, Any], capability: dict[str, Any], identity: dict[str, Any], *,
+    full_refresh: bool = False,
 ) -> tuple[dict[str, Any], Path]:
     def load_manifest(run_dir: Path) -> dict[str, Any]:
         manifest = read_json(run_dir / "manifest.json")
@@ -1397,9 +1403,14 @@ def build_latest(
     if latest_run_id is None:
         raise DiscoveryError("no compatible complete card-discovery run exists")
     latest_dir = RUNS_DIR / latest_run_id
+    selected_run_ids = set(select_projection_run_ids(
+        [run_dir.name for run_dir in directories], latest_run_id, full_refresh
+    ))
     previous = None
     latest_projection = None
     for run_dir, manifest in manifests:
+        if run_dir.name not in selected_run_ids:
+            continue
         run_contract = load_run_contract(run_dir, manifest)
         compatible = acquisition_contract(run_contract) == acquisition_contract(contract)
         projection = build_projection(
@@ -2465,6 +2476,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="validate immutable runs and projections")
     parser.add_argument(
+        "--full-refresh", action="store_true",
+        help="project every retained run for the historical validation lane",
+    )
+    parser.add_argument(
         "--refresh", "--refresh-asia", dest="refresh", action="store_true",
         help="create or resume one immutable run across all active card adapters",
     )
@@ -2502,7 +2517,9 @@ def main() -> int:
         if args.resume:
             raise DiscoveryError("--resume requires --refresh")
         contract, capability, identity = load_inputs()
-        projection, run_dir = build_latest(contract, capability, identity)
+        projection, run_dir = build_latest(
+            contract, capability, identity, full_refresh=args.full_refresh
+        )
         rendered, records_rendered = render_projection(projection)
         if args.check:
             stale = []
