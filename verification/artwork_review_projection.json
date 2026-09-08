@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-03",
-  "projectionVersion": "8b9d90503bc796e3be2a4de1d453b35083d1fa4bac67b4bdb41a289ed2d76ab4",
+  "generated": "2026-09-08",
+  "projectionVersion": "0ec4c49ee485050f1094fcb15b4d7e5205c1d077650beefda323247827ea65cb",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 73,
     "cardReleases": 632,
-    "physicalPrintings": 737,
-    "sourceObservations": 2390
+    "physicalPrintings": 738,
+    "sourceObservations": 2393
   },
   "groups": [
     {
@@ -58280,7 +58280,53 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:91b8cba40945d5ec1f91b279",
+              "semanticPrintingId": "PRINTING:91b8cba40945d5ec1f91b279",
+              "cardReleaseId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0139",
+              "sourcePrintingId": "F0139-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:91b8cba40945d5ec1f91b279",
+              "sources": [
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+                  "supportsAbsence": false
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+                  "sourceType": "Bulbapedia localized Generations finish description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Spanish"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-08",
+                  "evidence": "The retained Spanish identity is GEN 58/83 (SPEC-0131); the set row names Snorlax 58/83 as Rare and the language section explicitly includes Spanish in the reverse-holo treatment. Applied only to that already established Western release. No ordinary finish, special stamp, edition or absence is inferred.",
+                  "evidenceScope": "standard-set"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -58311,6 +58357,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0139-P02:0:5c83ca3adad15293",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "5b022e7ffd9eccd56e6cdd744c9ec893c40d6f553ac10dfd8a37ba9e6fd5fea4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0139-P02:1:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "4770d2d4aee81f3fed612d54ced801b2a14b40dc848f64f526bed7c1aa290d65",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0139-P02:2:8f0832f96ece507b",
+              "kind": "finish",
+              "provider": "Bulbapedia localized Generations finish description",
+              "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+              "evidence": "The retained Spanish identity is GEN 58/83 (SPEC-0131); the set row names Snorlax 58/83 as Rare and the language section explicitly includes Spanish in the reverse-holo treatment. Applied only to that already established Western release. No ordinary finish, special stamp, edition or absence is inferred.",
+              "contentHash": "25c3fe0a1d7151e8aff73dea8773e03fc86b3b357cc64f6744c114dddae5591c",
+              "image": null
+            },
             {
               "observationId": "unit:U0245",
               "kind": "unit",

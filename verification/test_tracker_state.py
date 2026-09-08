@@ -251,19 +251,19 @@ def main() -> None:
         "SELECT collector_item_kind, collector_progress_class, COUNT(*) "
         "FROM checklist_items GROUP BY collector_item_kind, collector_progress_class"
     ).fetchall() == [
-        ("finish-candidate", "research", 112),
+        ("finish-candidate", "research", 111),
         ("research-placeholder", "research", 76),
-        ("verified-printing", "current-known", 701),
+        ("verified-printing", "current-known", 702),
     ]
     assert connection.execute(
         "SELECT wanted, COUNT(*) FROM collection_tracker_seed GROUP BY wanted"
-    ).fetchall() == [(0, 188), (1, 701)]
+    ).fetchall() == [(0, 187), (1, 702)]
     connection.close()
 
     connection = sqlite3.connect(ROOT / "snoredex-tracker-template.sqlite")
     assert connection.execute(
         "SELECT collection_status, COUNT(*) FROM active_tracker GROUP BY collection_status"
-    ).fetchall() == [("need", 701), ("research", 188)]
+    ).fetchall() == [("need", 702), ("research", 187)]
     connection.close()
 
     print("tracker state and read-only check regressions passed")

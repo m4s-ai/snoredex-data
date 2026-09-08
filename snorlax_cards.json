@@ -37,10 +37,10 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-03",
+      "lastUpdated": "2026-09-08",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 470,
-      "withOnlyMarketplaceClaim": 52,
+      "withConfirmedFinish": 471,
+      "withOnlyMarketplaceClaim": 51,
       "pendingFinish": 40,
       "notApplicableFinish": 75,
       "withOwnerAdjudication": 9,
@@ -15740,7 +15740,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "reverse-holo"
@@ -15919,16 +15919,16 @@
             "finishStatus": {
               "non-holo": "marketplace-claimed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "marketplace-claimed",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0139",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -15949,7 +15949,7 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
+                "verificationStatus": "confirmed",
                 "productMapping": "mapped"
               }
             ]
