@@ -78,7 +78,8 @@ def main() -> int:
     assert "uses: ./.github/workflows/release-gate.yml" in pages
     assert "audit_evidence.py" not in "\n".join(texts.values())
     assert "name: UI browser gate" in ui
-    assert "paths:" in ui and "verification/test_site.py" in ui
+    assert "paths:" in ui and "site/app.css" in ui and "site/app.js" in ui
+    assert "verification/test_site.py" in ui
     assert "python verification/test_site.py" in ui
 
     print(

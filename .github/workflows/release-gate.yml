@@ -71,8 +71,17 @@ jobs:
         run: python scripts/regen.py --check
 
       - name: Full retained discovery history
-        if: runner.os == 'Linux' && github.event_name != 'pull_request'
+        if: runner.os == 'Linux'
+        env:
+          DISCOVERY_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
         run: |
+          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
+            if ! git diff --name-only "${DISCOVERY_BASE_SHA}...${GITHUB_SHA}" | grep -Eq \
+              '^(verification/runs/(source-adapters|card-discovery)/|verification/(source_adapters|card_discovery_adapters|card_discovery|source_capability_graph|authoritative_graph)(_schema)?\\.json$|scripts/(source_adapters|card_discovery|projection_runs)\\.py$)'; then
+              echo "full retained discovery history: no retained-run or projection-input changes"
+              exit 0
+            fi
+          fi
           python scripts/source_adapters.py --check --full-refresh
           python scripts/card_discovery.py --check --full-refresh
 

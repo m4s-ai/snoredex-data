@@ -164,9 +164,10 @@ release-gate.yml (workflow_call, Linux + Windows)
 
 The reusable gate is mode-sensitive: draft PRs skip the job, ready PRs run deterministic L3 only,
 and workflow-call/manual release paths run L4 live/browser/publication checks. A push to `main`
-also runs the explicit full retained source/card-discovery history checks. The pull-request
-workflow does not install browser dependencies; UI-relevant paths select `.github/workflows/ui-pr.yml`,
-which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
+also runs the explicit full retained source/card-discovery history checks; a pull request that
+changes retained-run or projection-input paths runs that same history lane before merge. The
+pull-request workflow does not install browser dependencies; UI-relevant paths select
+`.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
 downloads the artifact produced after the L4 gate and rejects missing, stale, or
 fingerprint-disagreeing handoffs before deployment. The explicit lists are deployment and UI
 boundaries, not a second full-build order.
