@@ -406,6 +406,19 @@ def main() -> int:
     releases_doc = read_json(ROOT / "analysis_confirmed_releases.json")
     checklist_doc = read_json(ROOT / "analysis_checklist.json")
     artwork_review = read_json(ROOT / "verification" / "artwork_review_projection.json")
+    artwork_review_meta = {
+        "schema": artwork_review["schema"],
+        "schemaVersion": artwork_review["schemaVersion"],
+        "proposalSchema": artwork_review["proposalSchema"],
+        "proposalSchemaVersion": artwork_review["proposalSchemaVersion"],
+        "projectionVersion": artwork_review["projectionVersion"],
+        "identitySource": artwork_review["identitySource"],
+        "appearanceIdentity": artwork_review["appearanceIdentity"],
+        "reviewBoundary": artwork_review["reviewBoundary"],
+        "summary": artwork_review["summary"],
+        "source": "verification/artwork_review_projection.json",
+        "fallback": "verification/artwork_review_projection.js",
+    }
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
@@ -749,7 +762,12 @@ def main() -> int:
     <a href="verification/artwork_review_projection.json">Download the projection</a>.
   </div>
   <div class="artwork-review" id="artwork-review-app">
-    <div class="controls">
+    <div class="artwork-load" id="ar-load-state">
+      <p>Artwork review data is loaded only when requested, so the normal collection view stays light.</p>
+      <button type="button" class="primary" id="ar-load">Load artwork review</button>
+      <span id="ar-load-status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="controls artwork-controls" hidden>
       <div class="row">
         <div class="field" style="flex:1 1 260px">
           <label for="ar-search">Search groups and releases</label>
@@ -885,6 +903,7 @@ def main() -> int:
     <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
     <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
     <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — generated graph projection for the artwork review UI</li>
+    <li><a href="verification/artwork_review_projection.js">verification/artwork_review_projection.js</a> — offline fallback used when file:// blocks JSON fetches</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
@@ -987,7 +1006,7 @@ def main() -> int:
 
 {json_block("data-rows", rows)}
 {json_block("data-checklist", checklist)}
-{json_block("data-artwork-review", artwork_review)}
+{json_block("data-artwork-review-meta", artwork_review_meta)}
 {json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
 <script src="site/app.js"></script>

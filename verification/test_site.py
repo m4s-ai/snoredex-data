@@ -185,6 +185,15 @@ def main() -> int:
         page.goto(url)
         page.wait_for_selector("#rows tr")
         page.evaluate("localStorage.removeItem('snoredex-artwork-review-proposals-v1')")
+
+        def load_artwork(target):
+            """Load the on-demand projection and wait for the first bounded batch."""
+            button = target.locator("#ar-load")
+            if button.count() and button.is_visible() and button.is_enabled():
+                button.click()
+            target.wait_for_function("window.__SNOREDEX_ARTWORK_REVIEW__ !== undefined")
+            target.wait_for_selector("#ar-groups .artwork-member")
+
         # Column and language filters live in collapsed <details>; open them as a user would.
         page.eval_on_selector_all("details.morefilters", "els => els.forEach(d => d.open = true)")
 
@@ -196,23 +205,41 @@ def main() -> int:
               and (ROOT / "llms.txt").read_text(encoding="utf-8").startswith("# Snoredex Data\n"),
               "missing describedby relation or llms.txt H1")
 
-        # --- graph-backed artwork/detection review (#120) ---
-        artwork_projection = page.evaluate("""() => JSON.parse(
-          document.getElementById('data-artwork-review').textContent
+        # --- graph-backed artwork/detection review (#120, #356) ---
+        artwork_meta = page.evaluate("""() => JSON.parse(
+          document.getElementById('data-artwork-review-meta').textContent
         )""")
-        check("artwork review embeds the authoritative projection",
+        initial_artwork_members = page.locator("#ar-groups .artwork-member").count()
+        check("artwork review starts without rendering review cards",
+              initial_artwork_members == 0 and page.locator("#ar-load").is_visible(),
+              f"initial members={initial_artwork_members}")
+        load_artwork(page)
+        artwork_projection = page.evaluate("() => window.__SNOREDEX_ARTWORK_REVIEW__")
+        check("artwork review loads the authoritative projection on demand",
               artwork_projection["schema"] == "snoredex-artwork-review"
               and artwork_projection["summary"]["cardReleases"] >= 600
               and artwork_projection["summary"]["mappedWorks"] >= 30
               and artwork_projection["summary"]["imageGroups"] > 0
               and artwork_projection["summary"]["reviewedAppearances"] == 0
-              and artwork_projection["summary"]["mappedAppearances"] == 0,
+              and artwork_projection["summary"]["mappedAppearances"] == 0
+              and artwork_meta["projectionVersion"] == artwork_projection["projectionVersion"],
               str(artwork_projection.get("summary")))
         check("artwork review renders an automatic image group and a stable release id",
               page.locator("#artwork-review").count() == 1
               and page.locator("#ar-groups .artwork-group").count() > 0
               and page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id"),
               "review groups or release identity missing")
+        check("artwork review renders a bounded initial batch",
+              page.locator("#ar-groups .artwork-group").count() <= 20
+              and page.locator("#ar-load-more").count() == 1,
+              f"groups={page.locator('#ar-groups .artwork-group').count()}")
+        initial_group_count = page.locator("#ar-groups .artwork-group").count()
+        page.click("#ar-load-more")
+        page.wait_for_timeout(80)
+        check("artwork review exposes the next group batch explicitly",
+              page.locator("#ar-groups .artwork-group").count() == initial_group_count + 20
+              and page.locator("#ar-load-more").count() == 1,
+              f"groups={page.locator('#ar-groups .artwork-group').count()}")
         page.fill("#ar-reviewer", "Browser test reviewer")
         first_review_member = page.locator("#ar-groups .artwork-member").first
         first_review_member.locator(".ar-action").select_option("confirm")
@@ -309,7 +336,7 @@ def main() -> int:
         """)
         stale_page = stale_context.new_page()
         stale_page.goto(url)
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         stale_summary = stale_page.locator("#ar-summary").inner_text().lower()
         check("stale artwork drafts are classified without counting as current",
               "stale proposal" in stale_summary and "0 proposals" in stale_summary,
@@ -347,7 +374,7 @@ def main() -> int:
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(current));
         }""", artwork_projection["projectionVersion"])
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         with stale_page.expect_download() as stale_shape_download:
             stale_page.click("#ar-download")
         stale_shape_payload = json.loads(Path(stale_shape_download.value.path()).read_text(encoding="utf-8"))
@@ -377,7 +404,7 @@ def main() -> int:
           }));
         }""")
         namespace_page.reload()
-        namespace_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(namespace_page)
         namespace_page.fill("#ar-reviewer", "Namespace reviewer")
         namespace_card = namespace_page.locator("#ar-groups .artwork-member").first
         namespace_card.locator(".ar-action").select_option("unclear")
@@ -403,7 +430,7 @@ def main() -> int:
         transaction_context = browser.new_context()
         transaction_page = transaction_context.new_page()
         transaction_page.goto(url)
-        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(transaction_page)
         transaction_id = transaction_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
         transaction_page.evaluate("""(releaseId) => {
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
@@ -426,7 +453,7 @@ def main() -> int:
           }));
         }""", transaction_id)
         transaction_page.reload()
-        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(transaction_page)
         transaction_page.evaluate("""() => {
           const originalSetItem = localStorage.setItem.bind(localStorage);
           localStorage.setItem = (key, value) => {
@@ -461,7 +488,7 @@ def main() -> int:
               "storage unavailable" in transaction_status and "only in this page" in transaction_status,
               transaction_status)
         transaction_page.reload()
-        transaction_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(transaction_page)
         with transaction_page.expect_download() as transaction_download:
             transaction_page.click("#ar-download")
         transaction_payload = json.loads(Path(transaction_download.value.path()).read_text(encoding="utf-8"))
@@ -477,7 +504,7 @@ def main() -> int:
         partial_context = browser.new_context()
         partial_page = partial_context.new_page()
         partial_page.goto(url)
-        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(partial_page)
         partial_id = partial_page.locator("#ar-groups .artwork-member").first.get_attribute("data-release-id")
         partial_page.evaluate("""(releaseId) => {
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
@@ -492,7 +519,7 @@ def main() -> int:
           localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
         }""", partial_id)
         partial_page.reload()
-        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(partial_page)
         partial_page.evaluate("""() => {
           const originalSetItem = localStorage.setItem.bind(localStorage);
           localStorage.setItem = (key, value) => {
@@ -506,7 +533,7 @@ def main() -> int:
         partial_card.locator(".ar-save").click()
         partial_page.wait_for_timeout(80)
         partial_page.reload()
-        partial_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(partial_page)
         with partial_page.expect_download() as partial_download:
             partial_page.click("#ar-download")
         partial_payload = json.loads(Path(partial_download.value.path()).read_text(encoding="utf-8"))
@@ -534,7 +561,7 @@ def main() -> int:
           localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
         }""", replacement_id)
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         stale_page.fill("#ar-reviewer", "Replacement reviewer")
         replacement_card = stale_page.locator("#ar-groups .artwork-member").first
         replacement_card.locator(".ar-action").select_option("unclear")
@@ -557,7 +584,7 @@ def main() -> int:
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify(raw));
         }""", replacement_id)
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         with stale_page.expect_download() as generations_download:
             stale_page.click("#ar-download")
         generations_payload = json.loads(Path(generations_download.value.path()).read_text(encoding="utf-8"))
@@ -577,7 +604,7 @@ def main() -> int:
         persistence_card.locator(".ar-save").click()
         stale_page.wait_for_timeout(80)
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         with stale_page.expect_download() as persisted_generations_download:
             stale_page.click("#ar-download")
         persisted_generations_payload = json.loads(
@@ -603,7 +630,7 @@ def main() -> int:
           }));
         }""", replacement_id)
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         stale_page.fill("#ar-reviewer", "Migration current")
         migration_card = stale_page.locator("#ar-groups .artwork-member").first
         migration_card.locator(".ar-action").select_option("unclear")
@@ -618,7 +645,7 @@ def main() -> int:
               and migrated_storage["draft"].get("reviewer") == "Raw suffix reviewer",
               str(migrated_storage))
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         with stale_page.expect_download() as migrated_download:
             stale_page.click("#ar-download")
         migrated_payload = json.loads(Path(migrated_download.value.path()).read_text(encoding="utf-8"))
@@ -631,7 +658,7 @@ def main() -> int:
         # A proposal from the immediately preceding 1.2 shape (same version, missing typed
         # identity fields) must also be classified stale rather than accepted as current.
         current_projection = stale_page.evaluate(
-            "() => JSON.parse(document.getElementById('data-artwork-review').textContent).projectionVersion"
+            "() => window.__SNOREDEX_ARTWORK_REVIEW__.projectionVersion"
         )
         stale_page.evaluate("""(projectionVersion) => {
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
@@ -646,7 +673,7 @@ def main() -> int:
           }));
         }""", current_projection)
         stale_page.reload()
-        stale_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(stale_page)
         with stale_page.expect_download() as typed_download:
             stale_page.click("#ar-download")
         typed_payload = json.loads(Path(typed_download.value.path()).read_text(encoding="utf-8"))
@@ -679,7 +706,7 @@ def main() -> int:
         """)
         failure_page = failure_context.new_page()
         failure_page.goto(url)
-        failure_page.wait_for_selector("#ar-groups .artwork-member")
+        load_artwork(failure_page)
         if storage_failure_index >= 0:
             failure_card = failure_page.locator("#ar-groups .artwork-member").nth(storage_failure_index)
             failure_page.fill("#ar-reviewer", "Storage failure reviewer")
@@ -705,7 +732,7 @@ def main() -> int:
               artwork_download.value.suggested_filename)
 
         multi_image_member = page.evaluate("""() => {
-          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
             const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.images && candidate.images.length > 1);
             if (member) return {id: member.cardReleaseId, count: member.images.length};
@@ -726,7 +753,7 @@ def main() -> int:
             check("artwork review renders every associated image", False, "projection has no multi-image member")
 
         structured_member = page.evaluate("""() => {
-          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
             const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.detection && candidate.detection.artist
               && candidate.images && candidate.images.length && candidate.physicalPrintings
@@ -784,7 +811,7 @@ def main() -> int:
         page.select_option("#ar-scope", "all")
         page.wait_for_timeout(80)
         no_image_member = page.evaluate("""() => {
-          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
             const member = group.members.find(candidate => !candidate.images || !candidate.images.length);
             if (member) return member.cardReleaseId;
           }
@@ -817,7 +844,7 @@ def main() -> int:
                   "projection has no mapped member without an image")
 
         unverified_image_member = page.evaluate("""() => {
-          for (const group of JSON.parse(document.getElementById('data-artwork-review').textContent).groups) {
+          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
             const member = group.members.find(candidate => candidate.images
               && candidate.images.some(image => !image.reviewable || !image.contentHash));
             if (member) return {id: member.cardReleaseId, count: member.images.length};
@@ -2015,7 +2042,7 @@ def main() -> int:
         # Reassign proposals must point at a currently projected artwork group, and the hint must
         # use the current IMAGE-GROUP/RELEASE-GROUP identity vocabulary.
         reassign_target = page.evaluate("""() => {
-          const projection = JSON.parse(document.getElementById('data-artwork-review').textContent);
+          const projection = window.__SNOREDEX_ARTWORK_REVIEW__;
           const member = projection.groups.flatMap(group => group.members.map(candidate => ({
             id: candidate.cardReleaseId,
             groupId: group.groupId,

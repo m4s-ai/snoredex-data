@@ -23,8 +23,10 @@ equivalence edge.
 
 The review interface is an embedded client-side view in this data repository. It ships with the
 existing static site and reads `verification/artwork_review_projection.json`, generated from the
-authoritative graph produced by #140. It is not a separate app/repository and introduces no
-backend.
+authoritative graph produced by #140. The page embeds only a versioned metadata envelope; the
+large projection loads on demand through HTTP and uses the generated
+`verification/artwork_review_projection.js` fallback for `file://` checkouts. It is not a separate
+app/repository and introduces no backend.
 
 The projection and UI use stable graph identifiers, never table positions or legacy product/unit
 keys. New sets, localities and source observations enter through regenerated data, so the client
@@ -67,8 +69,11 @@ graph identifiers, content hashes, and before-values instead of silently rebasin
 
 The implementation remains static, offline-capable and dependency-free. It has one generated data
 projection and one browser review path, and new graph data enters through regeneration rather than
-hard-coded UI catalogue entries. The tradeoff is deliberate: a reviewer downloads a proposal
-instead of mutating the catalogue live. The current tests prove that automatic image grouping keeps localized prints distinct, proposals
+hard-coded UI catalogue entries. The browser loads review data only when requested or when the
+review section approaches the viewport, renders bounded group batches, and uses generated preview
+and thumbnail derivatives while retaining original paths and hashes for downloads and attribution.
+The tradeoff is deliberate: a reviewer downloads a proposal instead of mutating the catalogue
+live. The current tests prove that automatic image grouping keeps localized prints distinct, proposals
 cite displayed observations and pinned hashes, unsafe image-dependent actions are blocked, and
 source-derived values cannot inject markup into the view.
 

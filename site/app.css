@@ -449,6 +449,9 @@ tbody tr:hover td.corr { background: var(--panel); }
 .builder .preview strong { font-size: 18px; }
 
 .artwork-review { display: grid; gap: 12px; }
+.artwork-load { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.artwork-load p { margin: 0; flex: 1 1 280px; }
+.artwork-load-more { display: block; justify-self: center; }
 .artwork-group { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
 .artwork-group > header { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; }
 .artwork-group h3 { margin: 0; font-size: 18px; overflow-wrap: anywhere; }

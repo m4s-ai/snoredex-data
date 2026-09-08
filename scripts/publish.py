@@ -67,6 +67,7 @@ FILES = [
     "verification/source_capability_schema.json",
     "verification/source_capability_graph.json",
     "verification/artwork_review_projection.json",
+    "verification/artwork_review_projection.js",
     "verification/SOURCES.md",
     "verification/bulbapedia_release_dates.json",
     "verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md",

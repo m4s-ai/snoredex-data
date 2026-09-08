@@ -18,6 +18,32 @@ def fail(message: str) -> None:
     raise SystemExit(f"[FAIL] artwork review: {message}")
 
 
+def image_dimensions(path: Path) -> tuple[int, int]:
+    raw = path.read_bytes()
+    if raw.startswith(b"\x89PNG\r\n\x1a\n") and len(raw) >= 24:
+        return int.from_bytes(raw[16:20], "big"), int.from_bytes(raw[20:24], "big")
+    if raw[:2] != b"\xff\xd8":
+        fail(f"unsupported derivative image format: {path}")
+    offset = 2
+    while offset + 9 < len(raw):
+        if raw[offset] != 0xFF:
+            offset += 1
+            continue
+        marker = raw[offset + 1]
+        offset += 2
+        if marker in (0xD8, 0xD9):
+            continue
+        if offset + 2 > len(raw):
+            break
+        length = int.from_bytes(raw[offset:offset + 2], "big")
+        if marker in set(range(0xC0, 0xC4)) | set(range(0xC5, 0xC8)) | set(range(0xC9, 0xCC)) | set(range(0xCD, 0xD0)):
+            if offset + 7 > len(raw):
+                break
+            return int.from_bytes(raw[offset + 5:offset + 7], "big"), int.from_bytes(raw[offset + 3:offset + 5], "big")
+        offset += max(length, 2)
+    fail(f"could not read JPEG dimensions: {path}")
+
+
 def main() -> int:
     path = ROOT / "verification" / "artwork_review_projection.json"
     if not path.exists():
@@ -51,6 +77,9 @@ def main() -> int:
            for group in groups):
         fail("review groups still use work ids as artwork identity")
 
+    local_originals: dict[str, int] = {}
+    local_previews: dict[str, int] = {}
+    local_thumbnails: dict[str, int] = {}
     for member in members:
         if not member.get("cardReleaseId") or not member.get("locality") or not member.get("language"):
             fail(f"incomplete stable identity: {member}")
@@ -78,9 +107,28 @@ def main() -> int:
                 expected = hashlib.sha256(image_path.read_bytes()).hexdigest()
                 if image.get("contentHash") != expected:
                     fail(f"repository image hash drift: {image['src']}")
+                if image.get("originalHash") != expected:
+                    fail(f"original image hash is not retained: {image['src']}")
+                for key, maximum, totals in (("previewSrc", 360, local_previews),
+                                             ("thumbnailSrc", 120, local_thumbnails)):
+                    derivative = image.get(key)
+                    if not derivative:
+                        fail(f"repository image lacks {key}: {image['src']}")
+                    derivative_path = ROOT / derivative
+                    if not derivative_path.is_file():
+                        fail(f"image derivative is missing: {derivative}")
+                    width, height = image_dimensions(derivative_path)
+                    if width > maximum or height <= 0:
+                        fail(f"{key} exceeds its max width: {derivative} ({width}x{height})")
+                    totals[derivative] = derivative_path.stat().st_size
+                local_originals[image["src"]] = image_path.stat().st_size
             elif not str(image.get("src", "")).startswith(("http://", "https://")):
                 fail(f"external image has no URL: {image.get('src')}")
 
+    if sum(local_previews.values()) >= sum(local_originals.values()):
+        fail("preview derivatives do not reduce image bytes")
+    if sum(local_thumbnails.values()) >= sum(local_previews.values()):
+        fail("thumbnail derivatives do not reduce image bytes")
     if not all(group.get("groupKind") in {"image-group", "unmapped-release"} for group in groups):
         fail("unknown artwork group kind")
     if projection["summary"].get("mappedAppearances") != 0:
