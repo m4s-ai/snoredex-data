@@ -1233,7 +1233,7 @@
       }
       return "";
     };
-    const addStaleDraft = (releaseId, draft, reason) => {
+    const addStaleDraft = (releaseId, draft, reason, migratedFromCurrent = false) => {
       const baseKey = releaseId || "unknown-release";
       let key = baseKey;
       let suffix = 2;
@@ -1241,7 +1241,7 @@
         key = baseKey + "::" + suffix;
         suffix += 1;
       }
-      staleDrafts[key] = { releaseId, draft, reason };
+      staleDrafts[key] = { releaseId, draft, reason, migratedFromCurrent };
     };
     const decodeStaleDraft = (storageKey, stored) => {
       if (stored && typeof stored === "object" && !Array.isArray(stored)
@@ -1267,7 +1267,7 @@
       Object.entries(stored).forEach(([storageKey, storedDraft]) => {
         const { releaseId, draft } = decodeCurrentDraft(storageKey, storedDraft);
         const reason = staleReason(draft);
-        if (reason) addStaleDraft(releaseId, draft, reason);
+        if (reason) addStaleDraft(releaseId, draft, reason, true);
         else drafts[releaseId] = draft;
       });
     };
@@ -1296,7 +1296,7 @@
     const currentStoragePayload = (retainStale) => {
       const retained = { ...drafts };
       if (!retainStale) return retained;
-      Object.entries(staleDrafts).forEach(([baseKey, item]) => {
+      Object.entries(staleDrafts).filter(([, item]) => item.migratedFromCurrent).forEach(([baseKey, item]) => {
         let key = baseKey;
         let suffix = 2;
         while (Object.prototype.hasOwnProperty.call(retained, key)) {

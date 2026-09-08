@@ -121,11 +121,43 @@ def semantic_digest(value: Any) -> str:
     return digest(normalize_semantic(value))
 
 
-def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
-    """Return only the versioned review semantics, excluding public explanatory metadata."""
+def semantic_detection_payload(detection: dict[str, Any]) -> dict[str, Any]:
+    return {key: detection.get(key) for key in
+            ("state", "cardName", "artist", "variant", "finish", "foilPattern", "markings", "confidence")}
+
+
+def semantic_member_payload(member: dict[str, Any]) -> dict[str, Any]:
     return {
-        key: projection[key]
-        for key in ("schemaVersion", "proposalSchemaVersion", "groups")
+        key: member.get(key)
+        for key in ("cardReleaseId", "workId", "cardKey", "reviewedAppearanceId", "imageGroupId",
+                    "appearanceIdentityState", "locality", "language", "script", "setEditionId",
+                    "localSetCode", "localNumber", "localIdentifierKnown", "state", "workMappingState",
+                    "legacyCounterpartUnitIds", "legacyVariants")
+    } | {
+        "detection": semantic_detection_payload(member.get("detection") or {}),
+        "physicalPrintings": [
+            {key: printing.get(key) for key in printing if key != "sources"}
+            for printing in member.get("physicalPrintings") or []
+        ],
+        "images": [{"contentHash": image.get("contentHash"), "reviewable": image.get("reviewable")}
+                   for image in member.get("images") or []],
+        "observations": [{"observationId": observation.get("observationId"),
+                          "contentHash": observation.get("contentHash")}
+                         for observation in member.get("observations") or []],
+    }
+
+
+def semantic_projection_payload(projection: dict[str, Any]) -> dict[str, Any]:
+    """Return proposal-validation fields, excluding public and nested display metadata."""
+    return {
+        "schemaVersion": projection["schemaVersion"],
+        "proposalSchemaVersion": projection["proposalSchemaVersion"],
+        "groups": [{key: group.get(key) for key in
+                    ("groupId", "groupKind", "reviewedAppearanceId", "imageGroupId",
+                     "appearanceIdentityState", "workIds", "cardKeys")}
+                   | {"members": [semantic_member_payload(member)
+                                  for member in group.get("members") or []]}
+                   for group in projection.get("groups") or []],
     }
 
 

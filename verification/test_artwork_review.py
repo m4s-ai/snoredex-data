@@ -128,6 +128,13 @@ def main() -> int:
     copy_projection["identitySource"] = "verification/renamed-source.json"
     if artwork_review.digest(artwork_review.semantic_projection_payload(copy_projection)) != before_version:
         fail("explanatory projection metadata changes the semantic projectionVersion")
+    nested_copy = deepcopy(projection)
+    nested_member = nested_copy["groups"][0]["members"][0]
+    nested_member["detection"]["note"] = "updated nested display guidance"
+    if nested_member.get("images"):
+        nested_member["images"][0]["label"] = "updated nested image label"
+    if artwork_review.semantic_digest(artwork_review.semantic_projection_payload(nested_copy)) != before_version:
+        fail("nested display metadata changes the semantic projectionVersion")
 
     # A pure permutation of set-like input collections is presentation-neutral.
     def load_permuted(path: Path):

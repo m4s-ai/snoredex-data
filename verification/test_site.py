@@ -382,7 +382,15 @@ def main() -> int:
               action: 'confirm'
             }
           }));
-          localStorage.removeItem('snoredex-artwork-review-proposals-v1-stale');
+          localStorage.setItem('snoredex-artwork-review-proposals-v1-stale', JSON.stringify({
+            'CARD:ALREADY-PERSISTED': {
+              schema: 'snoredex-artwork-review-proposal',
+              schemaVersion: '1.1.0',
+              projectionVersion: 'old-projection',
+              reviewer: 'Already persisted reviewer',
+              action: 'confirm'
+            }
+          }));
         }""", transaction_id)
         transaction_page.reload()
         transaction_page.wait_for_selector("#ar-groups .artwork-member")
@@ -409,6 +417,13 @@ def main() -> int:
               and retained_transaction.get("releaseId") == transaction_id
               and retained_transaction.get("draft", {}).get("reviewer") == "Migrated reviewer",
               str(retained_transaction))
+        retained_already_persisted = transaction_page.evaluate("""() => {
+          const raw = JSON.parse(localStorage.getItem('snoredex-artwork-review-proposals-v1'));
+          return Object.values(raw).some((value) => value && value.releaseId === 'CARD:ALREADY-PERSISTED');
+        }""")
+        check("fallback storage does not duplicate persisted stale drafts",
+              retained_already_persisted is False,
+              str(retained_already_persisted))
         check("stale migration write failure is reported as unsaved",
               "storage unavailable" in transaction_status and "only in this page" in transaction_status,
               transaction_status)
