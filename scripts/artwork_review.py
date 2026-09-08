@@ -51,7 +51,8 @@ def image_derivatives(src: str, content_hash: str | None) -> dict[str, str]:
     for key, kind in (("previewSrc", "preview"), ("thumbnailSrc", "thumbnail")):
         candidate = artwork_derivatives.current_derivatives(ROOT / src, content_hash).get(kind)
         if candidate:
-            result[key] = candidate.resolve().relative_to(ROOT.resolve()).as_posix()
+            path = candidate.resolve().relative_to(ROOT.resolve()).as_posix()
+            result[key] = f"{path}?v={content_hash}"
     return result
 
 

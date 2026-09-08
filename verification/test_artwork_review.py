@@ -5,8 +5,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import struct
 import sys
 import tempfile
+import zlib
 from copy import deepcopy
 from pathlib import Path
 
@@ -46,8 +48,46 @@ def image_dimensions(path: Path) -> tuple[int, int]:
     fail(f"could not read JPEG dimensions: {path}")
 
 
+def png_fixture(width: int, height: int, bit_depth: int, colour_type: int,
+                interlace: int, scanlines: bytes, palette: bytes = b"") -> bytes:
+    header = struct.pack(">IIBBBBB", width, height, bit_depth, colour_type, 0, 0, interlace)
+    chunks = [artwork_derivatives._chunk(b"IHDR", header)]
+    if palette:
+        chunks.append(artwork_derivatives._chunk(b"PLTE", palette))
+    chunks.extend((artwork_derivatives._chunk(b"IDAT", zlib.compress(scanlines, 9)),
+                   artwork_derivatives._chunk(b"IEND", b"")))
+    return b"\x89PNG\r\n\x1a\n" + b"".join(chunks)
+
+
+def verify_png_formats() -> None:
+    """Cover the valid PNG forms accepted by the specimen importer."""
+    grayscale = png_fixture(2, 2, 1, 0, 0, b"\x00\x40\x00\x80")
+    width, height, pixels = artwork_derivatives._png_pixels(grayscale)
+    if (width, height) != (2, 2) or pixels != [(0, 0, 0), (255, 255, 255),
+                                                (255, 255, 255), (0, 0, 0)]:
+        fail(f"1-bit grayscale PNG decoded incorrectly: {(width, height, pixels)}")
+
+    indexed = png_fixture(2, 1, 4, 3, 0, b"\x00\x01",
+                          bytes((255, 0, 0, 0, 255, 0)))
+    width, height, pixels = artwork_derivatives._png_pixels(indexed)
+    if (width, height, pixels) != (2, 1, [(255, 0, 0), (0, 255, 0)]):
+        fail(f"4-bit indexed PNG decoded incorrectly: {(width, height, pixels)}")
+
+    adam7 = png_fixture(
+        2, 2, 8, 2, 1,
+        b"\x00\xff\x00\x00"  # pass 1: red at (0, 0)
+        b"\x00\x00\xff\x00"  # pass 6: green at (1, 0)
+        b"\x00\x00\x00\xff\xff\xff\xff"  # pass 7: blue, white at y=1
+    )
+    width, height, pixels = artwork_derivatives._png_pixels(adam7)
+    if (width, height, pixels) != (2, 2, [(255, 0, 0), (0, 255, 0),
+                                         (0, 0, 255), (255, 255, 255)]):
+        fail(f"Adam7 PNG decoded incorrectly: {(width, height, pixels)}")
+
+
 def verify_derivative_writer() -> None:
     """Exercise source replacement, progressive JPEG decoding, and RGB channel order."""
+    verify_png_formats()
     for relative in ("images/151C_143_Snorlax_V1_819209.jpg",
                      "images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
                      "images/TEU_191_Eevee___Snorlax_GX_V3_369116.jpg",
@@ -61,6 +101,7 @@ def verify_derivative_writer() -> None:
     original_root = artwork_derivatives.ROOT
     original_manifest = artwork_derivatives.MANIFEST
     original_cache = artwork_derivatives._MANIFEST_CACHE
+    original_review_root = artwork_review.ROOT
     try:
         with tempfile.TemporaryDirectory(prefix="artwork-derivative-test-") as temporary:
             test_root = Path(temporary)
@@ -96,6 +137,10 @@ def verify_derivative_writer() -> None:
                 fail("source replacement leaves derivative manifest hash unchanged")
             if first_bytes == second_preview.read_bytes():
                 fail("source replacement leaves derivative bytes unchanged")
+            artwork_review.ROOT = test_root
+            versioned = artwork_review.image_derivatives(key, second_entry["sourceHash"])
+            if not versioned.get("previewSrc", "").endswith(f"?v={second_entry['sourceHash']}"):
+                fail("source replacement leaves the preview URL unversioned")
             extension_source = test_root / "images" / "extension.png"
             extension_source.write_bytes(artwork_derivatives.encode_png(
                 4, 2, [(20, 220, 20)] * 8))
@@ -110,6 +155,7 @@ def verify_derivative_writer() -> None:
             if (test_root / extension_entry["preview"]["path"]).read_bytes() == first_bytes:
                 fail("extension replacement copied stale derivative bytes")
     finally:
+        artwork_review.ROOT = original_review_root
         artwork_derivatives.ROOT = original_root
         artwork_derivatives.MANIFEST = original_manifest
         artwork_derivatives._MANIFEST_CACHE = original_cache
@@ -186,9 +232,11 @@ def main() -> int:
                     derivative = image.get(key)
                     if not derivative:
                         fail(f"repository image lacks {key}: {image['src']}")
-                    derivative_path = ROOT / derivative
+                    derivative_path = ROOT / derivative.split("?", 1)[0]
                     if not derivative_path.is_file():
                         fail(f"image derivative is missing: {derivative}")
+                    if derivative != f"{derivative_path.relative_to(ROOT).as_posix()}?v={expected}":
+                        fail(f"image derivative URL is not source-versioned: {derivative}")
                     width, height = image_dimensions(derivative_path)
                     if width > maximum or height <= 0:
                         fail(f"{key} exceeds its max width: {derivative} ({width}x{height})")

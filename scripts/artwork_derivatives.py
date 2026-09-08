@@ -2,10 +2,10 @@
 """Create deterministic, dependency-free artwork preview images.
 
 The repository keeps original evidence bytes untouched.  This module only creates the small
-derivative used by the review UI.  PNG decoding is complete for the colour types used by the
-specimen archive; baseline and progressive JPEGs use their DC samples for a faithful low-frequency
-preview.  A new image therefore never depends on a manually run desktop tool or a non-standard
-Python module.
+derivative used by the review UI.  PNG decoding covers every colour type, sample depth, and
+interlace form accepted by the specimen importer; baseline and progressive JPEGs use their DC
+samples for a faithful low-frequency preview.  A new image therefore never depends on a manually
+run desktop tool or a non-standard Python module.
 """
 
 from __future__ import annotations
@@ -45,15 +45,7 @@ def _png_dimensions(data: bytes) -> tuple[int, int]:
     return width, height
 
 
-def _png_payload(data: bytes) -> tuple[int, int, int, int, list[tuple[int, int, int]], bytes]:
-    width, height = _png_dimensions(data)
-    bit_depth, colour_type = data[24:26]
-    interlace = data[28]
-    if interlace or bit_depth not in (8, 16):
-        raise ImageError("PNG requires non-interlaced 8/16-bit samples")
-    channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}.get(colour_type)
-    if channels is None:
-        raise ImageError(f"unsupported PNG colour type {colour_type}")
+def _png_chunk_payload(data: bytes) -> tuple[list[tuple[int, int, int]], bytes]:
     palette: list[tuple[int, int, int]] = []
     raw_parts: list[bytes] = []
     position = 8
@@ -68,15 +60,40 @@ def _png_payload(data: bytes) -> tuple[int, int, int, int, list[tuple[int, int, 
             raw_parts.append(payload)
         elif kind == b"IEND":
             break
-    decoded = zlib.decompress(b"".join(raw_parts))
-    return width, height, bit_depth, colour_type, palette, decoded
+    return palette, zlib.decompress(b"".join(raw_parts))
+
+
+def _png_payload(data: bytes) -> tuple[int, int, int, int, int, list[tuple[int, int, int]], bytes]:
+    width, height = _png_dimensions(data)
+    bit_depth, colour_type = data[24:26]
+    interlace = data[28]
+    allowed_depths = {0: (1, 2, 4, 8, 16), 2: (8, 16), 3: (1, 2, 4, 8),
+                      4: (8, 16), 6: (8, 16)}
+    if colour_type not in allowed_depths or bit_depth not in allowed_depths[colour_type]:
+        raise ImageError(f"unsupported PNG bit depth {bit_depth} or colour type {colour_type}")
+    if interlace not in (0, 1):
+        raise ImageError(f"unsupported PNG interlace method {interlace}")
+    channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}.get(colour_type)
+    if channels is None:
+        raise ImageError(f"unsupported PNG colour type {colour_type}")
+    palette, decoded = _png_chunk_payload(data)
+    if colour_type == 3 and not palette:
+        raise ImageError("indexed PNG has no palette")
+    return width, height, bit_depth, colour_type, interlace, palette, decoded
+
+
+def _png_row_bytes(width: int, channels: int, bit_depth: int) -> int:
+    return (width * channels * bit_depth + 7) // 8
+
+
+def _png_filter_bpp(channels: int, bit_depth: int) -> int:
+    return max(1, (channels * bit_depth + 7) // 8)
 
 
 def _png_unfilter(decoded: bytes, width: int, height: int, channels: int,
                   bit_depth: int) -> list[bytes]:
-    sample_bytes = 2 if bit_depth == 16 else 1
-    bytes_per_pixel = channels * sample_bytes
-    row_bytes = width * bytes_per_pixel
+    bytes_per_pixel = _png_filter_bpp(channels, bit_depth)
+    row_bytes = _png_row_bytes(width, channels, bit_depth)
     if len(decoded) != height * (row_bytes + 1):
         raise ImageError("PNG scanline length does not match dimensions")
 
@@ -122,40 +139,82 @@ def _png_predictor(filter_type: int, left: int, above: int, upper_left: int) -> 
     return (left, above, upper_left)[distances.index(min(distances))]
 
 
+def _png_sample(row: bytes, index: int, bit_depth: int, *, scale: bool = True) -> int:
+    if bit_depth == 16:
+        value = row[index * 2]
+        return value
+    if bit_depth == 8:
+        return row[index]
+    samples_per_byte = 8 // bit_depth
+    byte = row[index // samples_per_byte]
+    shift = 8 - bit_depth - (index % samples_per_byte) * bit_depth
+    value = (byte >> shift) & ((1 << bit_depth) - 1)
+    return round(value * 255 / ((1 << bit_depth) - 1)) if scale else value
+
+
+def _png_pixel(row: bytes, pixel: int, colour_type: int, bit_depth: int,
+               channels: int, palette: list[tuple[int, int, int]]) -> tuple[int, int, int]:
+    values = [_png_sample(row, pixel * channels + channel, bit_depth)
+              for channel in range(channels)]
+    if colour_type == 0 or colour_type == 4:
+        return values[0], values[0], values[0]
+    if colour_type == 3:
+        palette_index = _png_sample(row, pixel, bit_depth, scale=False)
+        if palette_index >= len(palette):
+            raise ImageError("indexed PNG references a missing palette entry")
+        return palette[palette_index]
+    return tuple(values[:3])
+
+
 def _png_rgb(rows: list[bytes], width: int, colour_type: int, bit_depth: int,
-             channels: int, palette: list[tuple[int, int, int]],
-             target_width: int | None = None) -> tuple[int, int, list[tuple[int, int, int]]]:
-    sample_bytes = 2 if bit_depth == 16 else 1
-    bytes_per_pixel = channels * sample_bytes
-    target_width = min(width, target_width) if target_width else width
-    target_height = max(1, round(len(rows) * target_width / width))
-    pixels: list[tuple[int, int, int]] = []
-    for output_y in range(target_height):
-        row = rows[min(len(rows) - 1, output_y * len(rows) // target_height)]
-        for output_x in range(target_width):
-            index = min(width - 1, output_x * width // target_width)
-            start = index * bytes_per_pixel
-            values = row[start:start + bytes_per_pixel]
-            if bit_depth == 16:
-                values = values[::2]
-            if colour_type == 0:
-                pixels.append((values[0], values[0], values[0]))
-            elif colour_type == 2:
-                pixels.append(tuple(values[:3]))
-            elif colour_type == 3:
-                pixels.append(palette[values[0]])
-            elif colour_type == 4:
-                pixels.append((values[0], values[0], values[0]))
-            else:
-                pixels.append(tuple(values[:3]))
-    return target_width, target_height, pixels
+             channels: int, palette: list[tuple[int, int, int]]) -> list[tuple[int, int, int]]:
+    return [_png_pixel(row, pixel, colour_type, bit_depth, channels, palette)
+            for row in rows for pixel in range(width)]
+
+
+def _png_pass_size(length: int, start: int, step: int) -> int:
+    return 0 if length <= start else (length - start + step - 1) // step
+
+
+def _png_adam7(decoded: bytes, width: int, height: int, bit_depth: int, colour_type: int,
+               channels: int, palette: list[tuple[int, int, int]]) -> list[tuple[int, int, int]]:
+    passes = ((0, 0, 8, 8), (4, 0, 8, 8), (0, 4, 4, 8), (2, 0, 4, 4),
+              (0, 2, 2, 4), (1, 0, 2, 2), (0, 1, 1, 2))
+    pixels = [(0, 0, 0)] * (width * height)
+    offset = 0
+    for start_x, start_y, step_x, step_y in passes:
+        pass_width = _png_pass_size(width, start_x, step_x)
+        pass_height = _png_pass_size(height, start_y, step_y)
+        if not pass_width or not pass_height:
+            continue
+        row_bytes = _png_row_bytes(pass_width, channels, bit_depth)
+        pass_size = pass_height * (row_bytes + 1)
+        rows = _png_unfilter(decoded[offset:offset + pass_size], pass_width, pass_height,
+                             channels, bit_depth)
+        offset += pass_size
+        for pass_y, row in enumerate(rows):
+            y = start_y + pass_y * step_y
+            for pass_x in range(pass_width):
+                x = start_x + pass_x * step_x
+                pixels[y * width + x] = _png_pixel(row, pass_x, colour_type, bit_depth,
+                                                   channels, palette)
+    if offset != len(decoded):
+        raise ImageError("PNG Adam7 data has trailing scanline bytes")
+    return pixels
 
 
 def _png_pixels(data: bytes, target_width: int | None = None) -> tuple[int, int, list[tuple[int, int, int]]]:
-    width, height, bit_depth, colour_type, palette, decoded = _png_payload(data)
+    width, height, bit_depth, colour_type, interlace, palette, decoded = _png_payload(data)
     channels = {0: 1, 2: 3, 3: 1, 4: 2, 6: 4}[colour_type]
-    rows = _png_unfilter(decoded, width, height, channels, bit_depth)
-    return _png_rgb(rows, width, colour_type, bit_depth, channels, palette, target_width)
+    if interlace:
+        pixels = _png_adam7(decoded, width, height, bit_depth, colour_type, channels, palette)
+    else:
+        rows = _png_unfilter(decoded, width, height, channels, bit_depth)
+        pixels = _png_rgb(rows, width, colour_type, bit_depth, channels, palette)
+    output_width = min(width, target_width) if target_width else width
+    if output_width == width:
+        return width, height, pixels
+    return resize(width, height, pixels, output_width)
 
 
 class _Bits:
@@ -419,6 +478,35 @@ def _scan_components(components: list[dict[str, int]], scan: list[dict[str, int]
     return selected_components, active_ids
 
 
+def _jpeg_decode_noninterleaved(reader: _Bits, component: dict[str, int],
+                                plane: tuple[int, int, list[int]],
+                                huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                                quant: dict[int, list[int]], progressive: bool,
+                                approx_low: int) -> None:
+    plane_width, plane_height, pixels = plane
+    dc_table = huffman[(0, component["dc"])]
+    ac_table = None if progressive else huffman[(1, component["ac"])]
+    previous_dc = 0
+    for block_y in range(plane_height):
+        for block_x in range(plane_width):
+            previous_dc, average = _jpeg_read_block(
+                reader, dc_table, ac_table, quant[component["q"]], previous_dc,
+                progressive, approx_low)
+            pixels[block_y * plane_width + block_x] = average
+
+
+def _jpeg_decode_interleaved(reader: _Bits, components: list[dict[str, int]], active_ids: set[int],
+                             huffman: dict[tuple[int, int], dict[tuple[int, int], int]],
+                             quant: dict[int, list[int]], planes: list[tuple[int, int, list[int]]],
+                             blocks_x: int, blocks_y: int, progressive: bool,
+                             approx_low: int) -> None:
+    previous_dc = [0, 0, 0]
+    for mcu_y in range(blocks_y):
+        for mcu_x in range(blocks_x):
+            _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
+                             mcu_x, mcu_y, previous_dc, progressive, approx_low)
+
+
 def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: int,
                       frame_components: list[dict[str, int]], planes: list[tuple[int, int, list[int]]],
                       frame_h: int, frame_v: int, progressive: bool) -> None:
@@ -427,15 +515,19 @@ def _jpeg_decode_scan(data: bytes, scan: dict[str, object], width: int, height: 
         return
     blocks_x = math.ceil(width / (8 * frame_h))
     blocks_y = math.ceil(height / (8 * frame_v))
-    previous_dc = [0, 0, 0]
     reader = _Bits(data[scan["start"]:scan["end"]])
     quant = scan["quant"]
     huffman = scan["huffman"]
     try:
-        for mcu_y in range(blocks_y):
-            for mcu_x in range(blocks_x):
-                _jpeg_decode_mcu(reader, components, active_ids, huffman, quant, planes,
-                                 mcu_x, mcu_y, previous_dc, progressive, scan["approx_low"])
+        if len(active_ids) == 1:
+            component_index = next(index for index, component in enumerate(components)
+                                   if component["id"] in active_ids)
+            _jpeg_decode_noninterleaved(reader, components[component_index],
+                                        planes[component_index], huffman, quant, progressive,
+                                        scan["approx_low"])
+            return
+        _jpeg_decode_interleaved(reader, components, active_ids, huffman, quant, planes,
+                                 blocks_x, blocks_y, progressive, scan["approx_low"])
     except _EntropyEnd:
         if not progressive:
             raise ImageError("JPEG entropy stream ended before all blocks")
