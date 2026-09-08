@@ -69,6 +69,7 @@ def main() -> int:
     assert "push:" in release and "branches: [main]" in release
     assert "github.event_name != 'pull_request'" in release
     assert "--full-refresh" in release
+    assert "bulbapedia_historical" in release
     assert "Install browser test dependencies\n        if: runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "matrix:\n        os: [ubuntu-latest, windows-latest]" in release
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release
