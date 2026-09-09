@@ -871,7 +871,10 @@ def record_linked_specimens(
 
 def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: str,
                            physical: dict, record: Callable[..., None], surfaces: dict) -> None:
-    urls = {provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")} - {None}
+    photo_url = provenance_url(specimen.get("photographSource"))
+    listing_url = provenance_url(specimen.get("listingUrl"))
+    urls = {photo_url, listing_url} - {None}
+    observed_url = photo_url or listing_url
     retained_product_images = retained_cardmarket_product_image_urls([specimen])
     for url in sorted(urls) or [None]:
         provider = specimen_provider(url, source_type)
@@ -880,7 +883,8 @@ def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: st
         dimension = card_evidence_dimension(url, provider, surfaces, "identity")
         for stable_id in [specimen["specimenId"], *unit_ids]:
             record_specimen_claim(url, source_type, provider, dimension, stable_id,
-                                  specimen.get("recordedAt"), physical, record)
+                                  specimen.get("recordedAt"), physical if url == observed_url else {},
+                                  record, surfaces)
 
 
 def specimen_surfaces() -> dict:
@@ -904,7 +908,18 @@ def card_evidence_dimension(url: str | None, provider: str | None, surfaces: dic
     return "identity"  # Unsupported evidence must still fail capability validation.
 
 
-def record_specimen_claim(url, source_type, provider, dimension, stable_id, retrieved, physical, record):
+def surface_supports_observed_finish(url, provider, surfaces) -> bool:
+    from source_capabilities import route_evidence
+    if provider is None:
+        return False
+    surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
+    return surface["finishCapability"]["mode"] == "specimen-observation" and any(
+        "finish" in edge["positiveEvidenceCapabilities"] for edge in surface["coverageEdges"]
+    )
+
+
+def record_specimen_claim(url, source_type, provider, dimension, stable_id, retrieved, physical, record,
+                          surfaces):
     if provider == "cardmarket" and not is_cardmarket_product_image(url):
         record(url, source_type, "product", stable_id, retrieved, provider_id=provider)
         record(None, source_type, "identity", stable_id, retrieved, provider_id="inspected-specimen")
@@ -916,7 +931,7 @@ def record_specimen_claim(url, source_type, provider, dimension, stable_id, retr
             record(None, "Owner attestation", "finish", stable_id, retrieved,
                    provider_id="owner-attestation")
             return
-        inspected = provider in {"inspected-specimen", "seller-listing-photo", "cardmarket-listing-photo"}
+        inspected = surface_supports_observed_finish(url, provider, surfaces)
         record(url if inspected else None, source_type, "finish", stable_id, retrieved,
                provider_id=provider if inspected else "inspected-specimen")
 

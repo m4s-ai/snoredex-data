@@ -76,7 +76,9 @@ def verify_source_first_specimen_registry():
         assert all('identity' in row['dimensions'] for row in matches)
         assert all(row['retrievedAt'] >= '2026-09-09' for row in matches)
         if number in (495, 496):
-            assert all(row['providerId'] == 'seller-listing-photo' and 'finish' in row['dimensions'] for row in matches)
+            assert all(row['providerId'] == 'seller-listing-photo' for row in matches)
+            photo_url = registry.canonical_url(registry.provenance_url(specimen['photographSource']))
+            assert any(row['canonicalUrl'] == photo_url and 'finish' in row['dimensions'] for row in matches)
         print_id = specimen['citedBy'][0]
         if number == 505:
             assert specimen['specimenId'] not in prints[print_id].get('corroboratingSpecimenIds', [])
@@ -129,11 +131,12 @@ def verify_source_first_specimen_registry():
     registry.record_specimen_claim('https://example.org/card.jpg', 'Retail listing',
         'retailer-listing', 'identity', 'sample', '2026-09-09',
         {'finish': 'holo', 'ownerAttestedFields': ['finish']},
-        lambda *a, **kw: finish_calls.append((a, kw)))
+        lambda *a, **kw: finish_calls.append((a, kw)), registry.specimen_surfaces())
     assert [(a[0], kw['provider_id']) for a, kw in finish_calls if a[2] == 'finish'] == [
         (None, 'owner-attestation')], "an owner finish assertion must not become retailer-image evidence"
     verify_source_first_asset_authority(prints, evidence, registry)
     verify_retained_image_identity(specimens, evidence, registry)
+    verify_observed_finish_attribution(specimens, registry)
 
 
 def verify_source_first_asset_authority(prints, evidence, registry):
@@ -193,6 +196,47 @@ def verify_retained_image_identity(specimens, evidence, registry):
     assert image_calls and set(image_calls) == {('identity', 'cardmarket-product-image')}
     page_calls = [a[2] for a, kw in calls if a[0] == specimen['listingUrl']]
     assert page_calls and set(page_calls) == {'product'}, 'product pages do not inherit image authority'
+
+
+def verify_observed_finish_attribution(specimens, registry):
+    from source_capabilities import route_evidence
+    surfaces = registry.specimen_surfaces()
+    for specimen in specimens:
+        physical = specimen.get('physicalObservation') or {}
+        if not physical.get('finish'):
+            continue
+        calls = []
+        source_type = registry.SPECIMEN_SOURCE_TYPES.get(str(specimen.get('heldBy', '')).casefold(),
+            specimen.get('inspectedFrom', 'Inspected physical specimen photograph'))
+        registry.record_specimen_sources(specimen, ['sample'], source_type, physical,
+            lambda *a, **kw: calls.append((a, kw)), surfaces)
+        finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
+        assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
+        if 'finish' in physical.get('ownerAttestedFields', []):
+            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation' for a, kw in finish)
+            continue
+        image = registry.provenance_url(specimen.get('photographSource')) or registry.provenance_url(specimen.get('listingUrl'))
+        primary = [(a, kw) for a, kw in calls if a[0] == image and a[2] != 'finish']
+        if not primary:
+            continue
+        provider = primary[0][1]['provider_id']
+        surface = route_evidence({'canonicalUrl': image, 'providerId': provider}, surfaces)
+        if surface['finishCapability']['mode'] == 'specimen-observation':
+            assert all(a[0] == image and kw['provider_id'] == provider for a, kw in finish), specimen['specimenId']
+    # Capabilities, not a provider-name allowlist, decide whether the URL can carry the observation.
+    synthetic = {'new-photo-provider': [{'finishCapability': {'mode': 'specimen-observation'},
+        'coverageEdges': [{'positiveEvidenceCapabilities': ['identity', 'finish']}]}]}
+    calls = []
+    registry.record_specimen_claim('https://example.org/card.jpg', 'Inspected physical specimen photograph',
+        'new-photo-provider', 'identity', 'sample', '2026-09-09', {'finish': 'holo'},
+        lambda *a, **kw: calls.append((a, kw)), synthetic)
+    assert [(a[0], kw['provider_id']) for a, kw in calls if a[2] == 'finish'] == [
+        ('https://example.org/card.jpg', 'new-photo-provider')]
+    synthetic['new-photo-provider'][0]['finishCapability']['mode'] = 'product-subtype'
+    assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
+    synthetic['new-photo-provider'][0]['finishCapability']['mode'] = 'specimen-observation'
+    synthetic['new-photo-provider'][0]['coverageEdges'][0]['positiveEvidenceCapabilities'] = ['identity']
+    assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
 
 
 def main() -> None:

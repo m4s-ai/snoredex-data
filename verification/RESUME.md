@@ -138,6 +138,11 @@ Before handing off an accepted intake, follow its IDs through all affected consu
   uses its image surface, not the marketplace page surface. If a reviewed card-image surface lacks
   `identity`, substantiate that capability from retained positive identifiers within its existing
   scope; do not silently relabel the image as release evidence or grant finish/absence authority.
+  Attribute an observed finish through the selected surface's `specimen-observation` mode and
+  explicit `finish` capability, rather than a list of provider names. Prefer the original photo
+  URL, falling back to the listing only when no usable photo URL exists. A context page must not
+  duplicate or anonymize that same observation. `ownerAttestedFields` keeps owner assertions
+  separate even when the linked image surface can support visible finishes.
 - Graph, artwork and collector outputs: the same identity retains its observations, local image,
   usable provenance link and any independently supported physical properties. Inspect the
   rendered member when image or link behavior changed; a stored file alone is not acceptance.
