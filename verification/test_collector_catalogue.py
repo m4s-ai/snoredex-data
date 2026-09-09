@@ -369,6 +369,12 @@ def main() -> None:
         source = collector.git_json_at(commit, "collector_catalogue.json")
         route = routes[fingerprint]
         source_item_ids = {row["itemId"] for row in source["items"]}
+        old_s5a = next(row["itemId"] for row in source["items"] if row.get("cardReleaseId") == "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id")
+        s5a = next(row for row in route["transitions"] if old_s5a in row["fromItemIds"])
+        assert s5a["fromItemIds"] == [old_s5a]
+        assert s5a["toItemIds"] == ["item-9877e7a6-c3a9-5fc2-956d-a1d1591018a0"]
+        assert s5a["changeKind"] == "rekey-1:1"
+        assert s5a["automaticStateAction"] == "preserve"
         covered_source_ids = [
             item_id
             for transition in route["transitions"]

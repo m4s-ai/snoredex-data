@@ -92,6 +92,8 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
 REVIEWED_CARD_RELEASE_REKEYS = {
+    "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id":
+        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
     "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
         "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
 }
