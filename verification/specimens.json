@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 493,
+  "count": 494,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10153,6 +10153,24 @@
         "TW:sc1b F:119/153:base"
       ],
       "listingUrl": "https://wiki.52poke.com/wiki/File:SC1bF119.jpg"
+    },
+    {
+      "specimenId": "SPEC-0494",
+      "setCode": "AS5D",
+      "number": "118/169",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; retailer reference image",
+      "inspectedFrom": "Beehive TCG product image inspected in browser",
+      "photograph": "SPEC-0494.png",
+      "photographSource": "https://beehivetcg.com/cdn/shop/products/aef8c9b3a05d7062fe9d2fc81d7718a1.png?v=1661778006&width=600",
+      "photographSha256": "sha256:82a8f9ce61078bf20c350002e664c2ca239fbebb6bf038848c50c7128f45f523",
+      "observed": "Visible Traditional Chinese 伊布&卡比獸 GX, HP270, TAG TEAM, AS5D, regulation C, 118/169, Illus. Mitsuhiro Arita. The card image matches the exact AS5D release. Retailer reference image; physical custody and technical finish are not established.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:AS5D:118/169:base"
+      ],
+      "listingUrl": "https://beehivetcg.com/products/as5d-118-169-%E4%BC%8A%E5%B8%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-gx"
     }
   ]
 }
