@@ -814,9 +814,14 @@ def record_corroborating_specimens(
     """Project linked identity and physical evidence without inferring corroboration."""
     corroborated = {unit["unitId"] for unit in units if unit.get("corroborated") is True}
     accepted = corroborated | {row["printId"] for row in source_first}
+    direct: dict[str, set[str]] = defaultdict(set)
+    for row in source_first:
+        if row.get("specimenId"):
+            direct[row["specimenId"]].add(row["printId"])
     surfaces = specimen_surfaces()
     for specimen in specimens:
-        unit_ids = [ref for ref in specimen.get("citedBy") or [] if ref in accepted]
+        unit_ids = sorted((set(specimen.get("citedBy") or []) & accepted)
+                          | direct.get(specimen["specimenId"], set()))
         physical = specimen.get("physicalObservation") or {}
         if not unit_ids:
             continue
@@ -852,7 +857,7 @@ def specimen_identity_dimension(url: str | None, provider: str | None, surfaces:
     surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
     capabilities = {value for edge in surface["coverageEdges"] for value in edge["positiveEvidenceCapabilities"]}
     # Use the surface's existing positive card contract; never broaden it.
-    for dimension in ("identity", "card-release", "card-existence"):
+    for dimension in ("identity", "card-release", "card-existence", "language"):
         if dimension in capabilities:
             return dimension
     return "identity"  # Unsupported evidence must still fail capability validation.
@@ -866,6 +871,10 @@ def record_specimen_claim(url, source_type, provider, dimension, stable_id, retr
         record(url, source_type, dimension, stable_id, retrieved,
                provider_id=None if provider == "cardmarket" else provider)
     if physical.get("finish"):
+        if "finish" in (physical.get("ownerAttestedFields") or []):
+            record(None, "Owner attestation", "finish", stable_id, retrieved,
+                   provider_id="owner-attestation")
+            return
         inspected = provider in {"inspected-specimen", "seller-listing-photo", "cardmarket-listing-photo"}
         record(url if inspected else None, source_type, "finish", stable_id, retrieved,
                provider_id=provider if inspected else "inspected-specimen")
@@ -886,6 +895,23 @@ def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
     if entry["providerId"] == "52poke":
         return {url for url in urls if (urlsplit(url).hostname or "").endswith(".52poke.com")}
     return urls
+
+
+def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) -> None:
+    """Index admitted claims under existing provider capabilities, without a provider allowlist."""
+    provider = entry["providerId"]
+    if provider not in surfaces or provider == "cardmarket-listing-photo":
+        # Historical marketplace aliases and listing photographs are indexed through
+        # their specimen; a Cardmarket product URL must retain catalogue-only authority.
+        if not entry.get("specimenId"):
+            raise ValueError(f"Source-first provider {provider} requires a retained specimen")
+        return
+    # A neighbouring page is not the inspected specimen's authority.
+    urls = [] if provider == "inspected-specimen" else sorted(source_first_registry_urls(entry))
+    for url in urls or [None]:
+        dimension = specimen_identity_dimension(url, provider, surfaces)
+        record(url, "Positive source-first card record", dimension,
+               entry["printId"], entry.get("retrievedAt"), provider_id=provider)
 
 
 def main() -> int:
@@ -962,14 +988,9 @@ def main() -> int:
     # evidence. Finish/edition observations remain separate and no absence capability is inferred.
     record_corroborating_specimens(specimens, units, record, source_first["prints"])
 
+    surfaces = specimen_surfaces()
     for entry in source_first["prints"]:
-        if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea", "52poke"}:
-            continue
-        for url in source_first_registry_urls(entry):
-            record(
-                url, "Positive source-first card record", "card-release",
-                entry["printId"], entry.get("retrievedAt"), provider_id=entry["providerId"],
-            )
+        record_source_first_identity(entry, record, surfaces)
         if entry.get("raritySourceUrl"):
             record(
                 entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",

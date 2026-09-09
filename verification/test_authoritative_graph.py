@@ -44,6 +44,14 @@ def verify_source_first_specimen_registry():
     assert all(row['stableIdCount'] == len(row['stableIds']) for row in evidence)
     prints = {row['printId']: row for row in json.loads(
         (ROOT / 'verification/source_first_prints.json').read_text(encoding='utf-8'))['prints']}
+    indexed = {}
+    for position, row in enumerate(evidence):
+        for stable_id in row['stableIds']:
+            indexed.setdefault(stable_id, set()).add(position)
+    assert not (prints.keys() - indexed.keys()), "every admitted source-first print must be indexed"
+    for print_id, row in prints.items():
+        if row.get('specimenId'):
+            assert indexed.get(row['specimenId'], set()) & indexed[print_id], (print_id, row['specimenId'])
     specimens = json.loads((ROOT / 'verification/specimens.json').read_text(encoding='utf-8'))['specimens']
     items = json.loads((ROOT / 'collector_catalogue.json').read_text(encoding='utf-8'))['items']
     for specimen in specimens:
@@ -75,6 +83,19 @@ def verify_source_first_specimen_registry():
     assert {call[3] for call in calls} == {'sample', 'print'}
     assert all(call[2] == 'identity' for call in calls)
     assert record['corroborated'] is False
+    calls.clear()
+    specimen['citedBy'] = []
+    record['specimenId'] = specimen['specimenId']
+    registry.record_corroborating_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    assert {call[3] for call in calls} == {'sample', 'print'}, "direct references need no reverse citation"
+    assert record['corroborated'] is False
+    finish_calls = []
+    registry.record_specimen_claim('https://example.org/card.jpg', 'Retail listing',
+        'retailer-listing', 'identity', 'sample', '2026-09-09',
+        {'finish': 'holo', 'ownerAttestedFields': ['finish']},
+        lambda *a, **kw: finish_calls.append((a, kw)))
+    assert [(a[0], kw['provider_id']) for a, kw in finish_calls if a[2] == 'finish'] == [
+        (None, 'owner-attestation')], "an owner finish assertion must not become retailer-image evidence"
 
 
 def main() -> None:
