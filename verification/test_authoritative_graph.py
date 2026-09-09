@@ -391,6 +391,8 @@ def main() -> None:
                     continue
                 evidence = source_registry[canonical_url(url)]
                 assert evidence["providerId"] == "52poke"
+                if row.get("retrievedAt"):
+                    assert evidence["retrievedAt"] >= row["retrievedAt"]
                 assert row["printId"] in evidence["stableIds"]
                 assert "card-release" in evidence["dimensions"]
     assert source_registry[fxy_rarity_url]["providerId"] == "bulbapedia"

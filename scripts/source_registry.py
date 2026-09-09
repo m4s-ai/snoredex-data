@@ -898,7 +898,7 @@ def main() -> int:
         for url in source_first_registry_urls(entry):
             record(
                 url, "Positive source-first card record", "card-release",
-                entry["printId"], provider_id=entry["providerId"],
+                entry["printId"], entry.get("retrievedAt"), provider_id=entry["providerId"],
             )
         if entry.get("raritySourceUrl"):
             record(
