@@ -37,6 +37,46 @@ def issue263_rebuilt_graph() -> dict:
     return rebuilt
 
 
+def verify_source_first_specimen_registry():
+    import source_registry as registry
+    document = json.loads((ROOT / 'verification/source_registry.json').read_text(encoding='utf-8'))
+    evidence = document['evidence']
+    assert all(row['stableIdCount'] == len(row['stableIds']) for row in evidence)
+    prints = {row['printId']: row for row in json.loads(
+        (ROOT / 'verification/source_first_prints.json').read_text(encoding='utf-8'))['prints']}
+    specimens = json.loads((ROOT / 'verification/specimens.json').read_text(encoding='utf-8'))['specimens']
+    items = json.loads((ROOT / 'collector_catalogue.json').read_text(encoding='utf-8'))['items']
+    for specimen in specimens:
+        number = int(specimen['specimenId'].split('-')[1])
+        if not 494 <= number <= 506:
+            continue
+        matches = [row for row in evidence if specimen['specimenId'] in row['stableIds']]
+        assert matches, specimen['specimenId']
+        assert all('identity' in row['dimensions'] for row in matches)
+        assert all(row['retrievedAt'] >= '2026-09-09' for row in matches)
+        if number in (495, 496):
+            assert all(row['providerId'] == 'seller-listing-photo' and 'finish' in row['dimensions'] for row in matches)
+        print_id = specimen['citedBy'][0]
+        if number == 505:
+            assert specimen['specimenId'] not in prints[print_id].get('corroboratingSpecimenIds', [])
+            continue
+        assert prints[print_id]['corroborated'] is True
+        assert all(row['providerId'] != prints[print_id]['providerId'] for row in matches)
+        urls = set(prints[print_id]['corroboratingSourceUrls'])
+        assert urls
+        assert any(urls <= set(item['evidenceLinks']) for item in items)
+        assert all(print_id in row['stableIds'] for row in matches)
+    calls = []
+    specimen = {'specimenId': 'sample', 'heldBy': 'third-party retailer',
+                'citedBy': ['print'], 'photographSource': 'https://example.org/card.jpg',
+                'recordedAt': '2026-09-09'}
+    record = {'printId': 'print', 'corroborated': False}
+    registry.record_corroborating_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    assert {call[3] for call in calls} == {'sample', 'print'}
+    assert all(call[2] == 'identity' for call in calls)
+    assert record['corroborated'] is False
+
+
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
@@ -387,6 +427,7 @@ def main() -> None:
             and row["printId"] in entity["payload"].get("sourceFirstRecordIds", [])
         )
         assert row["sourceUrl"] in release["sourceRecords"]
+    verify_source_first_specimen_registry()
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")

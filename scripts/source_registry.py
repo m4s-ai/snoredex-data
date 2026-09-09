@@ -485,6 +485,7 @@ PROVIDERS: list[dict[str, Any]] = [
             "www.target.com", "exorgames.com", "shopping.fullcomp.jp", "www.pokeca.net",
             "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
             "coleka.com", "www.coleka.com",
+            "beehivetcg.com", "rocketcoll.com",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
@@ -798,32 +799,85 @@ SPECIMEN_SOURCE_TYPES = {
     "third-party retailer": "Retail listing",
     "third-party seller": "Seller listing photograph",
     "third-party scan archive": "Third-party scan archive",
+    "third-party collector": "Third-party collector photograph",
+    "publisher or database": "Inspected reference photograph; original provider unspecified",
+    "not established; retailer reference image": "Retail listing",
+    "not established; owner supplied seller image url": "Seller listing photograph",
+    "not established; image supplied by collection owner": "Inspected card photograph; external origin unknown",
 }
 
 
 def record_corroborating_specimens(
     specimens: list[dict[str, Any]], units: list[dict[str, Any]],
-    record: Callable[..., None],
+    record: Callable[..., None], source_first: list[dict[str, Any]] = (),
 ) -> None:
-    """Project every specimen supporting a corroborated unit as identity evidence."""
+    """Project linked identity and physical evidence without inferring corroboration."""
     corroborated = {unit["unitId"] for unit in units if unit.get("corroborated") is True}
+    accepted = corroborated | {row["printId"] for row in source_first}
+    surfaces = specimen_surfaces()
     for specimen in specimens:
-        unit_ids = [ref for ref in specimen.get("citedBy") or [] if ref in corroborated]
+        unit_ids = [ref for ref in specimen.get("citedBy") or [] if ref in accepted]
+        physical = specimen.get("physicalObservation") or {}
         if not unit_ids:
             continue
         source_type = SPECIMEN_SOURCE_TYPES.get(
             str(specimen.get("heldBy", "")).casefold(),
             str(specimen.get("inspectedFrom") or "Inspected physical specimen photograph"),
         )
-        record(
-            specimen.get("photographSource"), source_type,
-            "identity", specimen["specimenId"], specimen.get("recordedAt"),
-        )
-        for unit_id in unit_ids:
-            record(
-                specimen.get("photographSource"), source_type,
-                "identity", unit_id, specimen.get("recordedAt"),
-            )
+        record_specimen_sources(specimen, unit_ids, source_type, physical, record, surfaces)
+
+
+def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: str,
+                           physical: dict, record: Callable[..., None], surfaces: dict) -> None:
+    urls = {provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")} - {None}
+    for url in sorted(urls) or [None]:
+        provider = specimen_provider(url, source_type)
+        dimension = specimen_identity_dimension(url, provider, surfaces)
+        for stable_id in [specimen["specimenId"], *unit_ids]:
+            record_specimen_claim(url, source_type, provider, dimension, stable_id,
+                                  specimen.get("recordedAt"), physical, record)
+
+
+def specimen_surfaces() -> dict:
+    surfaces: dict[str, list] = defaultdict(list)
+    for surface in read_json(ROOT / "verification/source_capabilities.json")["surfaces"]:
+        surfaces[surface["providerId"]].append(surface)
+    return surfaces
+
+
+def specimen_identity_dimension(url: str | None, provider: str | None, surfaces: dict) -> str:
+    from source_capabilities import route_evidence
+    if provider is None:
+        return "identity"  # The registry records an unresolved provider, never invents one.
+    surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
+    capabilities = {value for edge in surface["coverageEdges"] for value in edge["positiveEvidenceCapabilities"]}
+    # Use the surface's existing positive card contract; never broaden it.
+    for dimension in ("identity", "card-release", "card-existence"):
+        if dimension in capabilities:
+            return dimension
+    return "identity"  # Unsupported evidence must still fail capability validation.
+
+
+def record_specimen_claim(url, source_type, provider, dimension, stable_id, retrieved, physical, record):
+    if provider == "cardmarket" and not is_cardmarket_product_image(url):
+        record(url, source_type, "product", stable_id, retrieved, provider_id=provider)
+        record(None, source_type, "identity", stable_id, retrieved, provider_id="inspected-specimen")
+    else:
+        record(url, source_type, dimension, stable_id, retrieved,
+               provider_id=None if provider == "cardmarket" else provider)
+    if physical.get("finish"):
+        inspected = provider in {"inspected-specimen", "seller-listing-photo", "cardmarket-listing-photo"}
+        record(url if inspected else None, source_type, "finish", stable_id, retrieved,
+               provider_id=provider if inspected else "inspected-specimen")
+
+
+def specimen_provider(url: str | None, source_type: str) -> str | None:
+    provider = resolve_provider(url, source_type)
+    if source_type == "Seller listing photograph" and provider not in {
+        "cardmarket", "cardmarket-listing-photo", "cardmarket-product-image"
+    }:
+        return "seller-listing-photo"
+    return provider
 
 
 def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
@@ -906,7 +960,7 @@ def main() -> int:
 
     # Every specimen used to mark a unit corroborated must reach the source graph as identity
     # evidence. Finish/edition observations remain separate and no absence capability is inferred.
-    record_corroborating_specimens(specimens, units, record)
+    record_corroborating_specimens(specimens, units, record, source_first["prints"])
 
     for entry in source_first["prints"]:
         if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea", "52poke"}:
@@ -980,7 +1034,7 @@ def main() -> int:
             "sourceTypes": sorted(entry["sourceTypes"]),
             "dimensions": sorted(entry["dimensions"]),
             "stableIdCount": len(entry["stableIds"]),
-            "stableIds": sorted(entry["stableIds"])[:50],
+            "stableIds": sorted(entry["stableIds"]),
             "retrievedAt": entry["retrievedAt"],
             "usageCount": entry["usageCount"],
         }

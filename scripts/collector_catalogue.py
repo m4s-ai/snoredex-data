@@ -1269,6 +1269,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         source_refs.update(physical_specimen_links(physical, specimens))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
+            source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
         source_links = sorted(
             value for value in source_refs if isinstance(value, str) and re.match(r"https?://", value)
         )

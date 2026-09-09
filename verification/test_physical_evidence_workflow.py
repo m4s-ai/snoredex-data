@@ -199,9 +199,10 @@ def main() -> None:
             and row["printId"] not in independently_corroborated_prints
         ]
         assert len(official_prints) == expected_count
-        assert all(row["corroborated"] is False for row in official_prints), (
-            "matching an existing graph identity is not independent corroboration"
-        )
+        for row in official_prints:
+            assert row["corroborated"] is bool(row.get("corroboratingSpecimenIds")), (
+                "graph identity alone is not corroboration; a reviewed second specimen source is required"
+            )
     korean_official = [
         row for row in source_first_prints
         if (row["locality"], row["providerId"]) == ("KR", "pokemon-card-korea")
