@@ -686,6 +686,18 @@ def prefer_source_first_image(
     return image_path, image_scope
 
 
+def physical_specimen_links(physical: dict[str, Any] | None, specimens: dict) -> set[str]:
+    if not physical:
+        return set()
+    ids = set(physical.get("specimenIds") or [])
+    printing_id = physical.get("physicalPrintingId", "")
+    if printing_id.startswith("PHYSICAL:specimen:"):
+        ids.add(printing_id.removeprefix("PHYSICAL:specimen:"))
+    return {value for specimen_id in ids for key in ("listingUrl", "photographSource")
+            if isinstance(value := specimens.get(specimen_id, {}).get(key), str)
+            and re.match(r"https?://", value)}
+
+
 def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
     return {
         row["cardReleaseId"] for row in items if row["legacyChecklistIds"]
@@ -1254,6 +1266,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 if source.get("url") or source.get("sourceType")
             )
         source_refs.update(release.get("sourceRecords") or [])
+        source_refs.update(physical_specimen_links(physical, specimens))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
         source_links = sorted(

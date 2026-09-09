@@ -143,6 +143,15 @@ def reinspection_regressions() -> None:
 
 
 def main() -> None:
+    specimen = {"S": {"listingUrl": "https://example.org/listing", "photographSource": "owner upload"}}
+    for physical in ({"physicalPrintingId": "PHYSICAL:specimen:S"}, {"specimenIds": ["S", "missing"]}):
+        assert collector.physical_specimen_links(physical, specimen) == {"https://example.org/listing"}
+    assert collector.physical_specimen_links(None, specimen) == set()
+    for specimen_id in ("SPEC-0495", "SPEC-0496"):
+        retained = next(s for s in read("verification/specimens.json")["specimens"] if s["specimenId"] == specimen_id)
+        published = next(i for i in read("collector_catalogue.json")["items"]
+                         if i.get("physicalPrintingId") == "PHYSICAL:specimen:" + specimen_id)
+        assert {retained["listingUrl"], retained["photographSource"]} <= set(published["evidenceLinks"])
     printing_identity_regressions()
     reinspection_regressions()
     assert collector.collector_number("076/095") == collector.collector_number("076")
