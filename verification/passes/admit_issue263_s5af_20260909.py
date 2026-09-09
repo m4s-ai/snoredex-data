@@ -1,5 +1,6 @@
 """Admit the owner-supplied 52Poke s5a F 093/070 identity without inferring finish."""
 import json
+from copy import deepcopy
 from pathlib import Path
 import admit_issue263_traditional_chinese_20260828 as tw
 
@@ -19,6 +20,20 @@ ROW = {
     "evidence": "52Poke revision 2150661 explicitly lists Traditional Chinese 雙璧戰士 093/070 UR, 2021-04-02, Saki Hayashiro. Owner-supplied SPEC-0489 visibly reads s5a F, 093/070 UR, 卡比獸, 積食 and 泰山壓頂 100. No physical finish is inferred.",
 }
 
+def reproject_prior_products(graph):
+    """Replay reviewed TW rekeys without replacing later claim/finish evidence."""
+    existing = {r["printId"]: r for r in tw.read(tw.PRINTS)["prints"]}
+    rows = tw.official_rows() + tw.enrich_photo_rows() + tw.supplemental_rows(existing)
+    profiles = tw.apply_profiles(tw.read(tw.SET_SOURCES), rows)
+    units = {r["unitId"]: r for r in tw.read(tw.UNITS)}
+    replay, _ = tw.apply_graph(deepcopy(graph), profiles, rows, units)
+    products = {e["entityId"]: e["payload"]["cardReleaseIds"] for e in replay["entities"]
+                if e["entityType"] == "legacy-cardmarket-product"}
+    for entity in graph["entities"]:
+        if entity["entityType"] == "legacy-cardmarket-product":
+            entity["payload"]["cardReleaseIds"] = products[entity["entityId"]]
+
+
 def main():
     prints = tw.read(tw.PRINTS)
     by_id = {r["printId"]: r for r in prints["prints"]}
@@ -36,6 +51,7 @@ def main():
     claim = "CLAIM:source-first:" + ROW["printId"]
     tw.apply_set_graph(graph, profile, ROW["localSetCode"], [claim])
     tw.apply_release_group(graph, profile, [ROW], units)
+    reproject_prior_products(graph)
     rid = tw.release_id(ROW)
     mapping = {"legacyUnitId": "U0602", "sourceFirstRecordId": ROW["printId"],
                "assertionType": "same-work-decision", "assertedBy": "repository verification pass",
