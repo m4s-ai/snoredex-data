@@ -872,8 +872,11 @@ def record_linked_specimens(
 def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: str,
                            physical: dict, record: Callable[..., None], surfaces: dict) -> None:
     urls = {provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")} - {None}
+    retained_product_images = retained_cardmarket_product_image_urls([specimen])
     for url in sorted(urls) or [None]:
         provider = specimen_provider(url, source_type)
+        if provider == "cardmarket" and url and canonical_url(url) in retained_product_images:
+            provider = "cardmarket-product-image"
         dimension = card_evidence_dimension(url, provider, surfaces, "identity")
         for stable_id in [specimen["specimenId"], *unit_ids]:
             record_specimen_claim(url, source_type, provider, dimension, stable_id,

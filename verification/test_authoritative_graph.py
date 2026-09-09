@@ -133,6 +133,7 @@ def verify_source_first_specimen_registry():
     assert [(a[0], kw['provider_id']) for a, kw in finish_calls if a[2] == 'finish'] == [
         (None, 'owner-attestation')], "an owner finish assertion must not become retailer-image evidence"
     verify_source_first_asset_authority(prints, evidence, registry)
+    verify_retained_image_identity(specimens, evidence, registry)
 
 
 def verify_source_first_asset_authority(prints, evidence, registry):
@@ -162,6 +163,36 @@ def verify_source_first_asset_authority(prints, evidence, registry):
     assert actual['dimensions'] == ['identity']
     assert 'SPEC-0475' in actual['stableIds']
     assert 'CN:CS2aC:142/115:base' in actual['stableIds']
+
+
+def verify_retained_image_identity(specimens, evidence, registry):
+    from urllib.parse import urlsplit
+    urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
+    for specimen in specimens:
+        url = registry.provenance_url(specimen.get('photographSource'))
+        if not url or not urlsplit(url).path.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+            continue
+        row = urls.get(registry.canonical_url(url))
+        if row and specimen['specimenId'] in row['stableIds']:
+            assert 'identity' in row['dimensions'], (specimen['specimenId'], row['providerId'])
+    surfaces = registry.specimen_surfaces()
+    for provider in ('52poke', 'pokemon-official', 'pokemon-cn-official'):
+        for surface in surfaces[provider]:
+            if surface['surfaceId'] not in {'52poke-wiki', 'tpci-latam-spanish-card-assets',
+                    'tpci-eu-spanish-card-assets', 'pokemon-cn-card-image'}:
+                continue
+            assert surface['finishCapability']['mode'] == 'none'
+            for edge in surface['coverageEdges']:
+                assert 'identity' in edge['positiveEvidenceCapabilities']
+                assert edge['absenceCapability']['enabled'] is False
+    specimen = next(row for row in specimens if row['specimenId'] == 'SPEC-0189')
+    calls = []
+    registry.record_specimen_sources(specimen, ['sample'], 'Inspected physical specimen photograph',
+        {}, lambda *a, **kw: calls.append((a, kw)), surfaces)
+    image_calls = [(a[2], kw['provider_id']) for a, kw in calls if a[0] == specimen['photographSource']]
+    assert image_calls and set(image_calls) == {('identity', 'cardmarket-product-image')}
+    page_calls = [a[2] for a, kw in calls if a[0] == specimen['listingUrl']]
+    assert page_calls and set(page_calls) == {'product'}, 'product pages do not inherit image authority'
 
 
 def main() -> None:

@@ -134,6 +134,10 @@ Before handing off an accepted intake, follow its IDs through all affected consu
   verdict or `corroborated` flag. Preserve the claim's dimension: source-first release evidence
   remains `card-release` where the surface supports it; specimen identity uses `identity`.
   An available capability is permission for a dimension, not a reason to replace its meaning.
+  Inspect the final registered provider before selecting the dimension: a retained product image
+  uses its image surface, not the marketplace page surface. If a reviewed card-image surface lacks
+  `identity`, substantiate that capability from retained positive identifiers within its existing
+  scope; do not silently relabel the image as release evidence or grant finish/absence authority.
 - Graph, artwork and collector outputs: the same identity retains its observations, local image,
   usable provenance link and any independently supported physical properties. Inspect the
   rendered member when image or link behavior changed; a stored file alone is not acceptance.
