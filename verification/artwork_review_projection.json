@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-09",
-  "projectionVersion": "420a593eb633c6f6d047d4d8db04540c10b9e1b1ad188ddb5c3339a69d5aaa7f",
+  "projectionVersion": "40deb91f57354863215dae04cd72803e021ac8271bd2503560d5fdba8e95afef",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,9 +15,9 @@
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 2,
-    "cardReleases": 632,
+    "cardReleases": 631,
     "physicalPrintings": 745,
-    "sourceObservations": 2778
+    "sourceObservations": 2776
   },
   "groups": [
     {
@@ -78106,74 +78106,6 @@
               "url": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
               "evidence": "official Korean product name |ko=스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」; set list row 021/049 Snorlax, Colorless OFFICIAL KOREAN CATALOGUE 2026-09-01: https://pokemoncard.co.kr/cards/detail/BS2023023021 positively identifies 잠만보 021/049 in 스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」 and credits 0313. This supports identity and Work mapping only; no finish or absence is inferred.",
               "contentHash": "a06bd09957f4e2bdea54bd811aac67253bf4e026abcc05ab5988dadab196cc84",
-              "image": "images/svG_021_Snorlax_744984.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:TW:T-Chinese:SVG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
-          "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
-          "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:c2d3d6ff7f3ac13625e91170",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "TW",
-          "language": "T-Chinese",
-          "script": "Hant",
-          "setEditionId": "EDITION:TW:T-Chinese:SVG",
-          "localSetCode": "SVG",
-          "localNumber": "021/049",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0467"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/svG_021_Snorlax_744984.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0467",
-              "contentHash": "c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
-              "previewSrc": "images/previews/svG_021_Snorlax_744984.jpg?v=c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
-              "thumbnailSrc": "images/thumbs/svG_021_Snorlax_744984.jpg?v=c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:TW:SVG:021/049:base",
-              "kind": "source-first",
-              "provider": "52poke",
-              "url": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
-              "evidence": "The retained 52poke card record positively lists Traditional Chinese SVG 021/049 Snorlax with the exact S10a attack text.",
-              "contentHash": "dab6f3a7a0208317c75c5d6823e4b5c3ffdb51d26d4e26f2423e293e5edf185d",
-              "image": null
-            },
-            {
-              "observationId": "unit:U0467",
-              "kind": "unit",
-              "provider": "owner-attestation",
-              "url": null,
-              "evidence": "On 2026-09-09 the collection owner explicitly decided that SVG 021/049 has no Traditional Chinese variant: \"hiermit entscheide ich das es keine t-chinese variante gibt\". This supersedes the earlier repository confirmation. The absence decision belongs to the owner, not to 52Poke or Bulbapedia; earlier source evidence remains in the journal.",
-              "contentHash": "8b791c79a43ccb320162767dedd19e2158b033664880b67d127c183d2214f649",
               "image": "images/svG_021_Snorlax_744984.jpg"
             }
           ]

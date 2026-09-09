@@ -251,13 +251,7 @@ def main() -> None:
         "https://www.nacg.tw/product-details.php?id=149595",
         "https://www.ruten.com.tw/item/22223353127192/",
     }
-    svg_row = next(
-        row for row in source_first_prints if row["printId"] == "TW:SVG:021/049:base"
-    )
-    assert svg_row["corroborated"] is False
-    assert (svg_row["releaseDate"], svg_row["releaseDatePrecision"]) == (
-        "2023-11-10", "day",
-    )
+    assert not any(row["printId"] == "TW:SVG:021/049:base" for row in source_first_prints)
     marketplace_override_sources = {
         source["url"]: source
         for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}

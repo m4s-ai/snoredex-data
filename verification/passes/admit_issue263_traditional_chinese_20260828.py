@@ -209,10 +209,6 @@ SUPPLEMENTAL = [
     card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", None), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", None), card_name="Snorlax VMAX"),
-    card(
-        "svg021", "", "SVG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore",
-        ("no printed rarity symbol", None), "U0467", date=("2023-11-10", "day"),
-    ),
 ]
 
 ISSUE_UNITS = sorted({
@@ -323,21 +319,9 @@ def supplemental_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any
     }
     result = []
     for facts in SUPPLEMENTAL:
-        if facts["detail"] == "svg021":
-            base = {
-                "printId": facts["printId"], "locality": LOCALITY,
-                "localSetCode": "SVG", "localNumber": "021/049", "variant": "base",
-                "language": LANGUAGE, "script": SCRIPT, "name": "卡比獸", "cardName": "Snorlax",
-                "catchUpOf": "the exact Traditional Chinese S10a Snorlax counterpart",
-                "specimenId": None, "providerId": "52poke",
-                "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
-                "corroborated": False, "markAssetUrl": None, "cardImageUrl": None,
-                "evidence": "The retained 52poke card record positively lists Traditional Chinese SVG 021/049 Snorlax with the exact S10a attack text.",
-            }
-        else:
-            base = dict(existing[facts["printId"]])
-            if facts["printId"] in urls:
-                base["sourceUrl"] = urls[facts["printId"]]
+        base = dict(existing[facts["printId"]])
+        if facts["printId"] in urls:
+            base["sourceUrl"] = urls[facts["printId"]]
         date, precision = facts["date"] or SET_DATES[facts["localSetCode"]]
         result.append({
             **facts, **base,

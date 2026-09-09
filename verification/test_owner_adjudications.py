@@ -68,6 +68,16 @@ def main() -> int:
                for row in svg_history), "SVG correction must preserve the earlier source interpretation"
     assert any(row.get("source") == "Owner attestation (domain expert)"
                and row.get("status") == "contradicted" for row in svg_history)
+    assert any(row.get("supersededSourceFirstRecord", {}).get("printId") == "TW:SVG:021/049:base"
+               and row.get("supersededGraphEntities") for row in svg_history)
+    graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
+    assert not any(entity["entityType"] == "card-release"
+                   and entity["payload"].get("language") == "T-Chinese"
+                   and entity["payload"].get("localSetCode") == "SVG"
+                   for entity in graph["entities"])
+    catalogue = json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))
+    assert not any(item.get("language") == "T-Chinese" and item.get("localSetCode") == "SVG"
+                   for item in catalogue["items"])
     for unit_id in flf_v2_excluded:
         unit = raw_units[unit_id]
         if unit.get("providerId") != "owner-attestation" or unit.get("sourceUrl") is not None:
