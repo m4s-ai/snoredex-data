@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 500,
+  "count": 501,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10295,6 +10295,24 @@
         "TW:sv4a F:145/190:base"
       ],
       "listingUrl": "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+    },
+    {
+      "specimenId": "SPEC-0501",
+      "setCode": "SV-P",
+      "number": "215",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0501.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
+      "photographSha256": "sha256:e52f2758edc726e2944a9182d19a8243ecb4bfcd50334df31703873313c3e1a5",
+      "observed": "Seller photograph visibly shows Traditional Chinese 卡比獸, HP150, PROMO, 215/SV-P, regulation H, Illus. Ounishi, and LIGHT CONNECT ALL / 2025桃園主辦台灣燈會紀念 event marking in artwork. Card is pictured inside sealed transparent packaging. Exact identity and visible event marking are supported; technical finish is not asserted because packaging and lighting confound surface inspection.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:SV-P:215:base"
+      ],
+      "listingUrl": "https://www.ebay.de/itm/168013799605"
     }
   ]
 }
