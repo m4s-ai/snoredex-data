@@ -53,6 +53,11 @@ def main() -> None:
         release = next(e["payload"] for e in current["entities"] if e["entityType"] == "card-release" and e["entityId"] == s5af_id)
         assert release["localIdentifierKnown"] and release["localNumber"] == "093/070"
         assert release["releaseDate"] == "2021-04-02"
+        rarity = next(e["payload"] for e in current["entities"]
+                      if e["entityType"] == "rarity-claim"
+                      and e["entityId"] == "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam")
+        assert rarity["retrievedAt"] == "2026-09-09"
+        assert rarity["sourceNativeValue"] == "UR"
         assert "U0602" in release["legacyCounterpartUnitIds"]
         local_set = next(e["payload"] for e in current["entities"] if e["entityId"] == "LOCALSET:TW:s5a%20F")
         assert "雙璧戰士" in local_set["observedNames"]

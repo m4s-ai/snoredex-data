@@ -596,6 +596,8 @@ def apply_release_group(
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue263:" + rid.removeprefix(f"RELEASE:{LOCALITY}:{LANGUAGE}:")
     rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Traditional-Chinese-card", "sourceNativeValue": first["rarity"][0], "normalizedRarityId": first["rarity"][1], "sourceProductKey": first["sourceUrl"]}
+    if first.get("retrievedAt"):
+        rarity["retrievedAt"] = first["retrievedAt"]
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin=ORIGIN)
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
