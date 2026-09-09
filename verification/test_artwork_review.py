@@ -283,8 +283,24 @@ def main() -> int:
         fail("unexpected projection or proposal schema version")
     verify_derivative_writer()
 
+    assert artwork_review.release_specimens(
+        {"sourceFirstRecordIds": ["print", "missing"]},
+        [{"specimenIds": ["cited"], "physicalPrintingId": "PHYSICAL:specimen:physical"}],
+        {"print": {"cited"}}, {"print": {"specimenId": "direct"}},
+    ) == ["cited", "direct", "physical"]
+
     groups = projection.get("groups") or []
     members = [member for group in groups for member in group.get("members") or []]
+    for specimen_id in (f"SPEC-{number:04d}" for number in range(494, 507)):
+        matching = [member for member in members if any(
+            observation["observationId"] == "specimen:" + specimen_id
+            for observation in member.get("observations") or [])]
+        assert matching, f"source-first/physical specimen missing: {specimen_id}"
+        assert any(specimen_id in image["src"] and image["reviewable"]
+                   for member in matching for image in member["images"])
+        assert all(observation["provider"] != "collection-owner"
+                   for member in matching for observation in member["observations"]
+                   if observation["observationId"] == "specimen:" + specimen_id)
     ids = [member.get("cardReleaseId") for member in members]
     if len(ids) != len(set(ids)):
         fail("a card release appears in more than one review group")

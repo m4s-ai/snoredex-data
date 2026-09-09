@@ -208,6 +208,29 @@ def build_groups(releases_projection: list[dict[str, Any]]) -> dict[str, dict[st
     return groups
 
 
+def specimen_citations(specimens: list[dict[str, Any]]) -> dict[str, set[str]]:
+    result: dict[str, set[str]] = defaultdict(set)
+    for specimen in specimens:
+        for citation in specimen.get("citedBy") or []:
+            result[citation].add(specimen["specimenId"])
+    return result
+
+
+def release_specimens(payload: dict, physical: list[dict], citations: dict, records: dict) -> list[str]:
+    linked = set()
+    for print_id in payload.get("sourceFirstRecordIds") or []:
+        linked.update(citations.get(print_id, set()))
+        specimen_id = records.get(print_id, {}).get("specimenId")
+        if specimen_id:
+            linked.add(specimen_id)
+    for printing in physical:
+        linked.update(printing.get("specimenIds") or [])
+        printing_id = printing.get("physicalPrintingId", "")
+        if printing_id.startswith("PHYSICAL:specimen:"):
+            linked.add(printing_id.removeprefix("PHYSICAL:specimen:"))
+    return sorted(linked)
+
+
 def build() -> dict[str, Any]:
     graph = load(ROOT / "verification" / "authoritative_graph.json")
     units = load(ROOT / "verification" / "units.json")
@@ -236,6 +259,7 @@ def build() -> dict[str, Any]:
 
     unit_by_id = {row["unitId"]: row for row in units}
     specimen_by_id = {row["specimenId"]: row for row in specimens}
+    specimens_by_citation = specimen_citations(specimens)
     source_first_by_id = {row["printId"]: row for row in source_first}
     finish_by_printing: dict[str, dict[str, Any]] = {}
     for finish_unit in sorted(finishes, key=lambda item: item.get("finishUnitId", "")):
@@ -278,6 +302,20 @@ def build() -> dict[str, Any]:
         if local:
             image.update(image_derivatives(src, content_hash))
         images.append(image)
+
+    def add_specimen(specimen_id: str, observations: list, images: list) -> None:
+        specimen = specimen_by_id.get(specimen_id)
+        if not specimen:
+            return
+        photograph = specimen.get("photograph")
+        if photograph and not re.match(r"^https?://", str(photograph)) and "/" not in str(photograph):
+            photograph = f"verification/specimens/{photograph}"
+        observations.append(source_observation(
+            "specimen", specimen_id, specimen,
+            evidence=specimen.get("observed"), image=photograph,
+            url=specimen.get("listingUrl"),
+        ))
+        add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
 
     def unit_candidates(payload: dict[str, Any]) -> list[dict[str, Any]]:
         candidates: list[dict[str, Any]] = []
@@ -341,17 +379,7 @@ def build() -> dict[str, Any]:
             detection["artist"] = detection["artist"] or unit.get("artist")
             if unit.get("sourceRef"):
                 specimen_id = str(unit["sourceRef"]).removeprefix("specimen:")
-                specimen = specimen_by_id.get(specimen_id)
-                if specimen:
-                    photograph = specimen.get("photograph")
-                    if photograph and not re.match(r"^https?://", str(photograph)) and "/" not in str(photograph):
-                        photograph = f"verification/specimens/{photograph}"
-                    observations.append(source_observation(
-                        "specimen", specimen_id, specimen,
-                        evidence=specimen.get("observed"), image=photograph,
-                        provider="collection-owner",
-                    ))
-                    add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
+                add_specimen(specimen_id, observations, images)
 
         for print_id in sorted(payload.get("sourceFirstRecordIds") or []):
             record = source_first_by_id.get(print_id)
@@ -422,6 +450,9 @@ def build() -> dict[str, Any]:
                 text = marking.get("text") if isinstance(marking, dict) else marking
                 if text:
                     detection["markings"].append(text)
+
+        for specimen_id in release_specimens(payload, physical, specimens_by_citation, source_first_by_id):
+            add_specimen(specimen_id, observations, images)
 
         for key in ("finish", "foilPattern", "markings"):
             detection[key] = sorted({value for value in detection[key] if value})
