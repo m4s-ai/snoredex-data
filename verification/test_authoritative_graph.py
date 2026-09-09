@@ -41,6 +41,16 @@ def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
+    s5af_id = "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
+    for current in (graph, issue263_rebuilt_graph()):
+        release = next(e["payload"] for e in current["entities"] if e["entityType"] == "card-release" and e["entityId"] == s5af_id)
+        assert release["localIdentifierKnown"] and release["localNumber"] == "093/070"
+        assert release["releaseDate"] == "2021-04-02"
+        assert "U0602" in release["legacyCounterpartUnitIds"]
+        assert not any(e["entityType"] == "card-release" and ":via-s5a:" in e["entityId"] and e["payload"].get("language") == "T-Chinese" for e in current["entities"])
+    specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
+    assert "physicalObservation" not in specimen
+
     tampered = deepcopy(graph)
     next(
         row["payload"] for row in tampered["entities"]

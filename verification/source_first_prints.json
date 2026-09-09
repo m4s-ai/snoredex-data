@@ -2,13 +2,13 @@
   "meta": {
     "schema": "snoredex-source-first-prints",
     "schemaVersion": "0.1.0",
-    "generated": "2026-09-02",
+    "generated": "2026-09-09",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "decision": "ADR-0001 D1 (owner, 2026-08-09) for specimen-backed codes; ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, language and identity only",
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 170,
+      "admitted": 171,
       "held": 0
     }
   },
@@ -3979,6 +3979,30 @@
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
       "evidence": "The retained official Taiwan detail 12164 and SPEC-0306 show 卡比獸ex SVM F 094/175, including the printed attacks used for the explicit Work mapping and rarity no printed rarity symbol. The publisher render is identity and rarity evidence only; no physical finish is inferred."
+    },
+    {
+      "printId": "TW:s5a F:093/070:base",
+      "localSetCode": "s5a F",
+      "localNumber": "093/070",
+      "localSetName": "雙璧戰士",
+      "variant": "base",
+      "locality": "TW",
+      "language": "T-Chinese",
+      "script": "Hant",
+      "cardName": "Snorlax",
+      "name": "卡比獸",
+      "specimenId": "SPEC-0489",
+      "providerId": "52poke",
+      "sourceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+      "corroborated": false,
+      "cardImageUrl": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
+      "markAssetUrl": null,
+      "releaseDate": "2021-04-02",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "retrievedAt": "2026-09-09",
+      "catchUpOf": "Exact s5a 093 Snorlax: Gormandize, Body Slam 100, HP130, Saki Hayashiro and gold illustration.",
+      "evidence": "52Poke revision 2150661 explicitly lists Traditional Chinese 雙璧戰士 093/070 UR, 2021-04-02, Saki Hayashiro. Owner-supplied SPEC-0489 visibly reads s5a F, 093/070 UR, 卡比獸, 積食 and 泰山壓頂 100. No physical finish is inferred."
     },
     {
       "specimenId": "SPEC-0280",

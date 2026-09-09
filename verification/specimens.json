@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 488,
+  "count": 489,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10061,6 +10061,26 @@
       },
       "listingUrl": "https://www.ebay.com/itm/196697959025",
       "photographAllowSmall": true
+    },
+    {
+      "specimenId": "SPEC-0489",
+      "setCode": "s5a F",
+      "number": "093/070",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "owner-supplied 52Poke card image",
+      "photograph": "SPEC-0489.png",
+      "photographSource": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
+      "photographSha256": "sha256:202df308b2815a45702c67d0b3d578444488ca75e711a88ffd2ae4c3d6de5d50",
+      "observed": "Owner supplied the image from the linked 52Poke Traditional Chinese card row on 2026-09-09. Visible: 卡比獸, HP130, s5a F, regulation D, 093/070 UR, Illus. Saki Hayashiro, 積食 (Gormandize), 泰山壓頂 (Body Slam) 100, gold card design. This establishes exact Traditional Chinese identity and printed rarity, not an exhaustive finish list or a technical foil pattern. Physical custody is not asserted.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "U0602",
+        "TW:s5a F:093/070:base"
+      ],
+      "allowUnprojected": true,
+      "listingUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661"
     }
   ]
 }

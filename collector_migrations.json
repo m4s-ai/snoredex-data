@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:3ccbbaf7f49d9a685f8d85a4565e955443c8b2bbc5d6222e2a4bd21994b5650c",
+    "fromFingerprint": "sha256:354bce54a02b1969f826a1fcc96c5b3ca5cb6df618bc2775b646a3f00ddf39bc",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:6876e0add499e145ae2e531e9c713eccb89c770b54466b93137aa4f7e5d6373d",
+    "toFingerprint": "sha256:1138c1e509e628a32e83f6ef0e1e3f0d3fb09a62f17715aedf7c51ea88f7561a",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:6876e0add499e145ae2e531e9c713eccb89c770b54466b93137aa4f7e5d6373d",
+      "toFingerprint": "sha256:1138c1e509e628a32e83f6ef0e1e3f0d3fb09a62f17715aedf7c51ea88f7561a",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -11285,12 +11285,10 @@
           "fromItemIds": [
             "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
           ],
-          "toItemIds": [
-            "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-f9fefb78-a9b1-560b-abfb-f6cf331e25b8",
@@ -12444,7 +12442,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:6876e0add499e145ae2e531e9c713eccb89c770b54466b93137aa4f7e5d6373d",
+      "toFingerprint": "sha256:1138c1e509e628a32e83f6ef0e1e3f0d3fb09a62f17715aedf7c51ea88f7561a",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -22804,12 +22802,10 @@
           "fromItemIds": [
             "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
           ],
-          "toItemIds": [
-            "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-f9fefb78-a9b1-560b-abfb-f6cf331e25b8",
@@ -31155,9 +31151,11 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0602",
-      "targetCardReleaseIds": [],
-      "reconciliation": "requires-user-resolution",
-      "automaticStateAction": "none"
+      "targetCardReleaseIds": [
+        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
+      ],
+      "reconciliation": "one-to-one-reference",
+      "automaticStateAction": "preserve-by-reference"
     },
     {
       "sourceKind": "legacy-issue-rekey",
@@ -40080,6 +40078,14 @@
         "reason": null
       },
       {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-9877e7a6-c3a9-5fc2-956d-a1d1591018a0"
+        ],
+        "reason": null
+      },
+      {
         "cardReleaseId": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
@@ -40206,14 +40212,6 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-9bd7829f-92a2-5a53-aed4-054e152008c8"
-        ],
-        "reason": null
-      },
-      {
-        "cardReleaseId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
         ],
         "reason": null
       },

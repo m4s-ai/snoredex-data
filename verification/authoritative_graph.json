@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-08",
+    "generated": "2026-09-09",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -9487,24 +9487,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:20e09e1d19d1d8a33e96f8ee",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:20e09e1d19d1d8a33e96f8ee",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0360-P01",
-        "semanticPrintingId": "PRINTING:20e09e1d19d1d8a33e96f8ee",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:21943b817801c9a685687659",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -14716,6 +14698,24 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CSV5C:115:Snorlax-Doll"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:d18e73168bc6c22999da9aef",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:d18e73168bc6c22999da9aef",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0360-P01",
+        "semanticPrintingId": "PRINTING:d18e73168bc6c22999da9aef",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
       }
     },
     {
@@ -26236,8 +26236,8 @@
         "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "materializedTargetId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
         "reason": "language names its locality"
       }
     },
@@ -31009,6 +31009,23 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:TW:T-Chinese:SVM F:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "materializedTargetId": "RELEASE:TW:T-Chinese:SVM F:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "reason": "positive exact Traditional Chinese card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TW:s5a F:093/070:base",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "claimId": "CLAIM:source-first:TW:s5a F:093/070:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TW:s5a F:093/070:base",
+        "sourceRecord": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
         "reason": "positive exact Traditional Chinese card record and retained image"
       }
     },
@@ -45480,6 +45497,60 @@
     },
     {
       "entityType": "card-release",
+      "entityId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "script": "Hant",
+        "localSetCode": "s5a F",
+        "localNumber": "093/070",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-Gormandize-Body-Slam",
+        "workMappingState": "mapped-by-explicit-equivalence",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:legacy:U0602",
+          "CLAIM:source-first:TW:s5a F:093/070:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:legacy:U0602",
+          "CLAIM:source-first:TW:s5a F:093/070:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [
+          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93"
+        ],
+        "sourceRecords": [
+          "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661"
+        ],
+        "sourceFirstRecordIds": [
+          "TW:s5a F:093/070:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0602"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "s5a",
+            "93"
+          ]
+        ],
+        "releaseDate": "2021-04-02",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
+      }
+    },
+    {
+      "entityType": "card-release",
       "entityId": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
       "origin": "reviewed-evidence-issue-263",
       "payload": {
@@ -46254,42 +46325,6 @@
         "releaseDate": "2025",
         "releaseDatePrecision": "year",
         "releaseApproximate": false
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "setEditionId": "EDITION:TW:T-Chinese:via-s5a:unknown-local-set",
-        "locality": "TW",
-        "language": "T-Chinese",
-        "script": "Hant",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Gormandize-Body-Slam",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "s5a",
-        "viaLegacyNumber": "93",
-        "claimIds": [
-          "CLAIM:legacy:U0602"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0602"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93"
-        ],
-        "sourceRecords": [
-          "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
-        ]
       }
     },
     {
@@ -65202,6 +65237,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+        "collectorNumber": "093/070",
+        "origin": "issue-263-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
       "origin": "reviewed-evidence-issue-263",
       "payload": {
@@ -71470,6 +71516,24 @@
         "assertedAt": "2026-08-30",
         "evidenceUrl": "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)",
         "evidence": "The exact Korean card identity and printed attacks establish this local counterpart without merging release identities.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "legacyUnitId": "U0602",
+        "sourceFirstRecordId": "TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-09-09",
+        "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+        "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "destructiveMergeAllowed": false
       }
     },
@@ -79435,6 +79499,21 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-SF-E4333B62F131"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:TW:s5a%20F",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "localSetId": "LOCALSET:TW:s5a%20F",
+        "locality": "TW",
+        "localCode": "s5a F",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-SF-AB08434AC5E2"
         ]
       }
     },
@@ -109287,6 +109366,21 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "sourceRecordId": "SET-SRC-SF-AB08434AC5E2",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Traditional-Chinese-card",
+        "sourceNativeValue": "UR",
+        "normalizedRarityId": null,
+        "sourceProductKey": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue263:sH F:038/053:Snorlax-Heavy-Impact",
       "origin": "reviewed-evidence-issue-263",
       "payload": {
@@ -120044,6 +120138,41 @@
           "state": "identified",
           "establishingEvidenceIds": [
             "SET-SRC-SF-E4333B62F131"
+          ],
+          "localizationId": "LOCALIZATION:TW:zh-Hant"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:TW:T-Chinese:s5a F",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+        "identity": {
+          "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "script": "Hant",
+          "localSetCode": "s5a F",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:TW:s5a F:093/070:base"
+          ],
+          "localizationId": "LOCALIZATION:TW:zh-Hant"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+          "localSetId": "LOCALSET:TW:s5a%20F",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "script": "Hant",
+          "localCode": "s5a F",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-AB08434AC5E2"
           ],
           "localizationId": "LOCALIZATION:TW:zh-Hant"
         }
@@ -135307,6 +135436,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-AB08434AC5E2",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-AB08434AC5E2",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TW:s5a%20F",
+        "reason": "positive Traditional Chinese source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-SF-AE2B2C574468",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -148830,6 +148970,49 @@
           "cardImageUrls": [
             "https://asia.pokemon-card.com/th/card-img/th00000439.png",
             "https://asia.pokemon-card.com/th/card-img/th00000440.png"
+          ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-AB08434AC5E2",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-AB08434AC5E2",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "TW\u001fs5a F",
+        "retrieved": "2026-09-09",
+        "raw": {
+          "localCode": "s5a F",
+          "localName": "雙璧戰士",
+          "locality": "TW",
+          "languages": [
+            "T-Chinese"
+          ],
+          "scripts": [
+            "Hant"
+          ],
+          "printIds": [
+            "TW:s5a F:093/070:base"
+          ],
+          "providers": [
+            "52poke"
+          ],
+          "sourceUrls": [
+            "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661"
+          ],
+          "printedSetSize": 70,
+          "printedSetSizeBasis": "the denominator printed on every observed card",
+          "localeSuffix": "F",
+          "observedCollectorNumbers": [
+            "093/070"
+          ],
+          "observedCoverage": "exact positive Traditional Chinese cards reviewed for issue #263, not a set enumeration",
+          "markAssetUrls": [],
+          "cardImageUrls": [
+            "https://s1.52poke.com/wiki/1/17/S5aF093.jpg"
           ]
         }
       }
@@ -164924,14 +165107,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:20e09e1d19d1d8a33e96f8ee",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:21943b817801c9a685687659",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -167628,6 +167803,14 @@
       "relation": "proposes-for",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CSV5C:115:Snorlax-Doll",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:d18e73168bc6c22999da9aef",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -173663,7 +173846,7 @@
       "fromId": "CLAIM:legacy:U0602",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -176164,6 +176347,16 @@
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:SVM F:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TW:s5a F:093/070:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -183074,6 +183267,25 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:s5a F",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence",
+        "basis": "exact Traditional Chinese printed attacks and card traits"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -183374,24 +183586,6 @@
       "provenance": {
         "state": "mapped",
         "basis": "exact Traditional Chinese printed attacks and card traits"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:TW:T-Chinese:via-s5a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Gormandize-Body-Slam",
-      "provenance": {
-        "state": "mapped"
       }
     },
     {
@@ -197042,6 +197236,22 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:s5a F",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
       "fromId": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -206050,6 +206260,46 @@
     },
     {
       "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "legacyUnitId": "U0602",
+        "sourceFirstRecordId": "TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-09-09",
+        "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+        "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "provenance": {
+        "legacyUnitId": "U0602",
+        "sourceFirstRecordId": "TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-09-09",
+        "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+        "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
       "fromId": "ASSERT:same-work:U0610:KR:sA:010/023:base",
       "relation": "relates",
       "toType": "card-release",
@@ -209742,16 +209992,6 @@
       "relation": "maps-to",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
       "provenance": {
         "disposition": "split"
       }
@@ -214754,6 +214994,14 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-E4333B62F131",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TW:s5a%20F",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-AB08434AC5E2",
       "provenance": {}
     },
     {
@@ -237654,6 +237902,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-AB08434AC5E2",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue263:sH F:038/053:Snorlax-Heavy-Impact",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -243664,6 +243928,25 @@
     {
       "fromType": "set-edition",
       "fromId": "EDITION:TW:T-Chinese:SVM F",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:TW:zh-Hant",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TW:T-Chinese:s5a F",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TW:s5a%20F",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TW:T-Chinese:s5a F",
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:TW:zh-Hant",
@@ -252297,6 +252580,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-A8F4299BF911",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-AB08434AC5E2",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-AB08434AC5E2",
       "provenance": {}
     },
     {
@@ -272216,7 +272507,7 @@
         "RELEASE:JP:Japanese:s5a:93:Snorlax-Gormandize-Body-Slam",
         "RELEASE:KR:Korean:s5a:093/070:Snorlax-Gormandize-Body-Slam",
         "RELEASE:TH:Thai:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id"
+        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
       ],
       "reason": "5 established language-bearing card release(s)"
     },
@@ -275093,9 +275384,11 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0602",
-      "disposition": "needs-positive-local-identity",
-      "targetRef": null,
-      "targetRefs": [],
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "targetRefs": [
+        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
+      ],
       "reason": "issue #263 re-key"
     },
     {
@@ -279774,7 +280067,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0602",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+      "targetRef": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
       "reason": "language names its locality"
     },
     {
@@ -283293,6 +283586,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-AB08434AC5E2",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TW:s5a%20F",
+      "reason": "positive Traditional Chinese source-first records establish this local set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-SF-AE2B2C574468",
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:sc1D%20I",
@@ -284742,6 +285042,13 @@
     },
     {
       "sourceKind": "source-first-record",
+      "sourceId": "TW:s5a F:093/070:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+      "reason": "positive exact Traditional Chinese card record and retained image"
+    },
+    {
+      "sourceKind": "source-first-record",
       "sourceId": "TW:sH F:038/053:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:TW:T-Chinese:sH F:038/053:Snorlax-Heavy-Impact",
@@ -286100,26 +286407,26 @@
     }
   ],
   "summary": {
-    "entities": 7906,
-    "edges": 11811,
-    "migrationInputs": 2761,
+    "entities": 7914,
+    "edges": 11821,
+    "migrationInputs": 2763,
     "migrationDispositions": {
       "bounded-contradicted": 90,
       "candidate-needs-evidence": 280,
       "carried": 68,
-      "established-and-mapped": 1542,
-      "linked-local-counterpart": 121,
-      "mapped": 304,
+      "established-and-mapped": 1543,
+      "linked-local-counterpart": 122,
+      "mapped": 305,
       "needs-evidence": 126,
-      "needs-positive-local-identity": 23,
+      "needs-positive-local-identity": 22,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 1987,
+    "candidateClaims": 1988,
     "cardReleases": 632,
     "physicalPrintings": 743,
-    "setSourceRecords": 432,
-    "setSourceDispositions": 432,
+    "setSourceRecords": 433,
+    "setSourceDispositions": 433,
     "localizations": 16
   }
 }

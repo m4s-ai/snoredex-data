@@ -204,6 +204,7 @@ PHOTO_ROWS = [
 
 
 SUPPLEMENTAL = [
+    card("existing-s5af093", "SPEC-0489", "s5a F", "093/070", "Snorlax-Gormandize-Body-Slam", ("UR", None), "U0602", date=("2021-04-02", "day")),
     card("existing-as5a203", "SPEC-0039", "AS5a", "203/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("SR", None), "U0634", card_name="Eevee & Snorlax-GX"),
     card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", None), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
@@ -387,9 +388,9 @@ def build_profile(code: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "sourceRecordId": stable_profile_id(LOCALITY, code),
         "sourceKind": "source-first-local-set-profile", "provider": "mixed-positive-evidence",
-        "providerRecordKey": f"{LOCALITY}\x1f{code}", "retrieved": "2026-08-28",
+        "providerRecordKey": f"{LOCALITY}\x1f{code}", "retrieved": max(row.get("retrievedAt", "2026-08-28") for row in rows),
         "raw": {
-            "localCode": code, "localName": None, "locality": LOCALITY,
+            "localCode": code, "localName": rows[0].get("localSetName"), "locality": LOCALITY,
             "languages": [LANGUAGE], "scripts": [SCRIPT],
             "printIds": sorted({row["printId"] for row in rows}),
             "providers": sorted({row["providerId"] for row in rows}),
@@ -610,7 +611,7 @@ def apply_graph(
                 continue
             assertion_id = f"ASSERT:same-work:{legacy_id}:{row['printId']}"
             evidence = "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities."
-            assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": "2026-08-28", "evidenceUrl": row["sourceUrl"], "evidence": evidence, "destructiveMergeAllowed": False}
+            assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": row.get("retrievedAt", "2026-08-28"), "evidenceUrl": row["sourceUrl"], "evidence": evidence, "destructiveMergeAllowed": False}
             upsert_entity(graph, "equivalence-assertion", assertion_id, assertion, origin=ORIGIN)
             upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "card-release", rid, assertion)
             upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "work", f"WORK:{row['work']}", assertion)

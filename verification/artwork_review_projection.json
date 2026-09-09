@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-08",
-  "projectionVersion": "7241139dd1c6a2553d9a84ad8c55a79341df796f8d682c010cea54c9a24456ec",
+  "generated": "2026-09-09",
+  "projectionVersion": "bb4aeff314e820d48800074d3d248e21cdf64aa6adc0dec452bf3354af637f73",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 73,
     "cardReleases": 632,
     "physicalPrintings": 743,
-    "sourceObservations": 2394
+    "sourceObservations": 2395
   },
   "groups": [
     {
@@ -27612,7 +27612,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
           "cardKey": "Snorlax-Gormandize-Body-Slam",
           "reviewedAppearanceId": null,
@@ -27621,13 +27621,15 @@
           "locality": "TW",
           "language": "T-Chinese",
           "script": "Hant",
-          "setEditionId": "EDITION:TW:T-Chinese:via-s5a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:TW:T-Chinese:s5a F",
+          "localSetCode": "s5a F",
+          "localNumber": "093/070",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0602"
+          ],
           "legacyVariants": [
             "base"
           ],
@@ -27637,9 +27639,7 @@
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [
-              "reverse-holo"
-            ],
+            "finish": [],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -27656,9 +27656,26 @@
               "originalHash": "58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "previewSrc": "images/previews/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "thumbnailSrc": "images/thumbs/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d"
+            },
+            {
+              "src": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
+              "label": "publisher card image",
+              "observationId": "source-first:TW:s5a F:093/070:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
+            {
+              "observationId": "source-first:TW:s5a F:093/070:base",
+              "kind": "source-first",
+              "provider": "52poke",
+              "url": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+              "evidence": "52Poke revision 2150661 explicitly lists Traditional Chinese 雙璧戰士 093/070 UR, 2021-04-02, Saki Hayashiro. Owner-supplied SPEC-0489 visibly reads s5a F, 093/070 UR, 卡比獸, 積食 and 泰山壓頂 100. No physical finish is inferred.",
+              "contentHash": "8a93711c2d25a0fa525da8843ec52d197e8f7c0bd39e58d2f481e50a598e0a28",
+              "image": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg"
+            },
             {
               "observationId": "unit:U0602",
               "kind": "unit",
