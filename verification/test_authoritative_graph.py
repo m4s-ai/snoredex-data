@@ -381,6 +381,18 @@ def main() -> None:
         )["evidence"] if row.get("canonicalUrl")
     }
     fxy_rarity_url = fxy_row["raritySourceUrl"]
+    from source_registry import canonical_url
+    from urllib.parse import urlsplit
+    for row in issue263_pass.read(issue263_pass.PRINTS)["prints"]:
+        if row.get("providerId") == "52poke":
+            for url in {row.get("sourceUrl"), row.get("cardImageUrl"), row.get("comparisonAssetUrl")} - {None}:
+                if not urlsplit(url).hostname.endswith(".52poke.com"):
+                    assert source_registry.get(canonical_url(url), {}).get("providerId") != "52poke"
+                    continue
+                evidence = source_registry[canonical_url(url)]
+                assert evidence["providerId"] == "52poke"
+                assert row["printId"] in evidence["stableIds"]
+                assert "card-release" in evidence["dimensions"]
     assert source_registry[fxy_rarity_url]["providerId"] == "bulbapedia"
     assert "rarity" in source_registry[fxy_rarity_url]["dimensions"]
     assert fxy_row["printId"] in source_registry[fxy_rarity_url]["stableIds"]

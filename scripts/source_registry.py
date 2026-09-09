@@ -330,7 +330,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "52poke (Wiki)",
         "organization": "52Poké (神奇宝贝百科)",
         "homepage": "https://wiki.52poke.com",
-        "hosts": ["wiki.52poke.com", "s1.52poke.com", "s2.52poke.com"],
+        "hosts": ["wiki.52poke.com", "s1.52poke.com", "s2.52poke.com", "media.52poke.com"],
         "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
         "category": "collector-database",
         "authorityTier": 2,
@@ -810,6 +810,14 @@ def record_corroborating_specimens(
             )
 
 
+def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
+    """Keep linked third-party assets from inheriting the wiki's authority."""
+    urls = {entry.get("sourceUrl"), entry.get("cardImageUrl"), entry.get("comparisonAssetUrl")} - {None}
+    if entry["providerId"] == "52poke":
+        return {url for url in urls if (urlsplit(url).hostname or "").endswith(".52poke.com")}
+    return urls
+
+
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     finish_document = read_json(ROOT / "verification" / "finish_units.json")
@@ -885,12 +893,9 @@ def main() -> int:
     record_corroborating_specimens(specimens, units, record)
 
     for entry in source_first["prints"]:
-        if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea"}:
+        if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea", "52poke"}:
             continue
-        for url in {
-            entry.get("sourceUrl"), entry.get("cardImageUrl"),
-            entry.get("comparisonAssetUrl"),
-        } - {None}:
+        for url in source_first_registry_urls(entry):
             record(
                 url, "Positive source-first card record", "card-release",
                 entry["printId"], provider_id=entry["providerId"],
