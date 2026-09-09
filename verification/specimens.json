@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 504,
+  "count": 505,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10367,6 +10367,23 @@
         "TW:MC F:569/742:base"
       ],
       "listingUrl": "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8"
+    },
+    {
+      "specimenId": "SPEC-0505",
+      "setCode": "sc1D F",
+      "number": "133/164",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "owner-uploaded card image",
+      "photograph": "SPEC-0505.png",
+      "photographSource": "Owner supplied codex-clipboard-788e1bdd-1c9e-437f-97de-65d1076cff17.png on 2026-09-09; original external image URL not established",
+      "photographSha256": "sha256:dd2c8a87d4563857363afa6ffc619161ecd82ba01f851eba52a46496d42afd9c",
+      "observed": "Owner-uploaded image visibly shows Traditional Chinese 卡比獸V, HP220, sc1D F, regulation D, 133/164 RR, attacks 吞下 60 and 摔下 170, Illus. Masakazu Fukuda. Exact local identity is supported. External image origin and physical custody are not established; technical finish is not asserted.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:sc1D F:133/164:base"
+      ]
     }
   ]
 }
