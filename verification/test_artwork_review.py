@@ -302,6 +302,10 @@ def main() -> int:
                    for member in matching for observation in member["observations"]
                    if observation["observationId"] == "specimen:" + specimen_id)
     ids = [member.get("cardReleaseId") for member in members]
+    observations = {o["observationId"]: o for member in members for o in member["observations"]}
+    assert observations["specimen:SPEC-0506"]["url"] == (
+        "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d")
+    assert observations["specimen:SPEC-0477"]["url"] == "https://www.instagram.com/p/DO6tQd5jNK8/"
     if len(ids) != len(set(ids)):
         fail("a card release appears in more than one review group")
     if len(ids) != projection["summary"]["cardReleases"]:

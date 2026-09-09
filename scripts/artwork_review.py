@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any
 
 import artwork_derivatives
+from source_registry import provenance_url
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "verification" / "artwork_review_projection.json"
@@ -313,7 +314,7 @@ def build() -> dict[str, Any]:
         observations.append(source_observation(
             "specimen", specimen_id, specimen,
             evidence=specimen.get("observed"), image=photograph,
-            url=specimen.get("listingUrl"),
+            url=provenance_url(specimen.get("listingUrl")) or provenance_url(specimen.get("photographSource")),
         ))
         add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
 

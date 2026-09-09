@@ -659,6 +659,22 @@ def latest_input_date(*documents: Any) -> str:
     return max(dates)
 
 
+def provenance_url(value: Any) -> str | None:
+    """Return a public HTTP(S) link, separating a trailing prose annotation."""
+    if not isinstance(value, str):
+        return None
+    value = re.sub(r" \([^()\r\n]*\)$", "", value.strip())
+    if re.search(r'[\s<>"\\\x00-\x1f\x7f]', value):
+        return None
+    try:
+        parts = urlsplit(value)
+        if parts.scheme.lower() in {"http", "https"} and parts.hostname and parts.port != 0:
+            return value
+    except ValueError:
+        pass
+    return None
+
+
 def canonical_url(url: str) -> str:
     """Normalize path encoding, fragments and slashes so a source is counted once.
 

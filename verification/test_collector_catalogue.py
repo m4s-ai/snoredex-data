@@ -143,6 +143,14 @@ def reinspection_regressions() -> None:
 
 
 def main() -> None:
+    for value in (None, 7, "owner upload", "https:///missing-host", "javascript:alert(1)",
+                  "https://example.org/a b", "https://[broken", "https://example.org:invalid"):
+        assert collector.provenance_url(value) is None, value
+    for value in ("https://example.org/a(b)", "https://example.org/a%20b?x=1&y=2#part"):
+        assert collector.provenance_url(value) == value
+    annotated = "https://www.instagram.com/p/DO6tQd5jNK8/ (carousel image 1)"
+    assert collector.physical_specimen_links({"specimenIds": ["S"]},
+        {"S": {"photographSource": annotated}}) == {"https://www.instagram.com/p/DO6tQd5jNK8/"}
     specimen = {"S": {"listingUrl": "https://example.org/listing", "photographSource": "owner upload"}}
     for physical in ({"physicalPrintingId": "PHYSICAL:specimen:S"}, {"specimenIds": ["S", "missing"]}):
         assert collector.physical_specimen_links(physical, specimen) == {"https://example.org/listing"}

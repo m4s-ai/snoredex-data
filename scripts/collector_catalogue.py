@@ -25,6 +25,7 @@ from typing import Any
 from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
+from source_registry import provenance_url
 
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
@@ -694,8 +695,7 @@ def physical_specimen_links(physical: dict[str, Any] | None, specimens: dict) ->
     if printing_id.startswith("PHYSICAL:specimen:"):
         ids.add(printing_id.removeprefix("PHYSICAL:specimen:"))
     return {value for specimen_id in ids for key in ("listingUrl", "photographSource")
-            if isinstance(value := specimens.get(specimen_id, {}).get(key), str)
-            and re.match(r"https?://", value)}
+            if (value := provenance_url(specimens.get(specimen_id, {}).get(key)))}
 
 
 def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
