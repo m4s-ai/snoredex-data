@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1534,
-   "uniqueUrls": 1527,
+   "evidenceRecords": 1591,
+   "uniqueUrls": 1584,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 5064
+   "claimsAttributed": 6262
   }
  },
  "providers": [
@@ -64,8 +64,8 @@
     "pokemon.cn",
     "image.pokemon.com.cn"
    ],
-   "uniqueSources": 10,
-   "claimsSupported": 44
+   "uniqueSources": 11,
+   "claimsSupported": 48
   },
   {
    "providerId": "pokemon-card-jp",
@@ -110,7 +110,7 @@
     "asia.pokemon-card.com"
    ],
    "uniqueSources": 192,
-   "claimsSupported": 632
+   "claimsSupported": 704
   },
   {
    "providerId": "pokemon-card-korea",
@@ -135,7 +135,7 @@
     "www.pokemonkorea.co.kr"
    ],
    "uniqueSources": 93,
-   "claimsSupported": 210
+   "claimsSupported": 236
   },
   {
    "providerId": "tcgdex",
@@ -274,7 +274,7 @@
     "www.pokumon.com"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 30
+   "claimsSupported": 32
   },
   {
    "providerId": "pokecottage",
@@ -449,7 +449,7 @@
     "media.52poke.com"
    ],
    "uniqueSources": 13,
-   "claimsSupported": 31
+   "claimsSupported": 33
   },
   {
    "providerId": "koreanpokemoncards",
@@ -542,8 +542,8 @@
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
-   "uniqueSources": 348,
-   "claimsSupported": 871
+   "uniqueSources": 349,
+   "claimsSupported": 975
   },
   {
    "providerId": "cardmarket-product-image",
@@ -566,7 +566,7 @@
    "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
    "hosts": [],
    "uniqueSources": 48,
-   "claimsSupported": 73
+   "claimsSupported": 169
   },
   {
    "providerId": "pokemontcgio",
@@ -667,7 +667,7 @@
     "rocketcoll.com"
    ],
    "uniqueSources": 28,
-   "claimsSupported": 81
+   "claimsSupported": 95
   },
   {
    "providerId": "internal-derivation",
@@ -707,7 +707,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 111
+   "claimsSupported": 157
   },
   {
    "providerId": "inspected-specimen",
@@ -728,8 +728,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
-   "uniqueSources": 51,
-   "claimsSupported": 349
+   "uniqueSources": 61,
+   "claimsSupported": 817
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -751,7 +751,7 @@
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
    "uniqueSources": 8,
-   "claimsSupported": 18
+   "claimsSupported": 38
   },
   {
    "providerId": "seller-listing-photo",
@@ -772,8 +772,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 119,
-   "claimsSupported": 403
+   "uniqueSources": 164,
+   "claimsSupported": 747
   }
  ],
  "evidence": [
@@ -860,13 +860,14 @@
    "dimensions": [
     "card-release"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0489",
-    "TW:s5a F:093/070:base"
+    "TW:s5a F:093/070:base",
+    "U0602"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
@@ -897,13 +898,14 @@
    "dimensions": [
     "card-release"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0489",
-    "TW:s5a F:093/070:base"
+    "TW:s5a F:093/070:base",
+    "U0602"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
@@ -5852,20 +5854,23 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "F0625-P01",
     "F0626-P01",
+    "SPEC-0224",
+    "U0540",
     "XY10 057 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 3
+   "retrievedAt": "2026-08-28",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
@@ -5894,20 +5899,23 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "20th 047 base",
     "F0002-P01",
-    "F0003-P01"
+    "F0003-P01",
+    "SPEC-0195",
+    "U0679"
    ],
-   "retrievedAt": null,
-   "usageCount": 3
+   "retrievedAt": "2026-08-28",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAKthrough/Snorlax-BKT118",
@@ -5948,19 +5956,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "BW-P 207 base",
-    "F0025-P01"
+    "F0025-P01",
+    "SPEC-0196",
+    "U0575"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Base-Set-2/Snorlax-B230",
@@ -6102,20 +6113,23 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "F0301-P01",
     "F0301-P02",
-    "Pt2 070 base"
+    "Pt2 070 base",
+    "SPEC-0230",
+    "U0751"
    ],
-   "retrievedAt": null,
-   "usageCount": 3
+   "retrievedAt": "2026-08-28",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Boundaries-Crossed/Snorlax-BCR109",
@@ -6261,19 +6275,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0132-P01",
-    "G2  base"
+    "G2  base",
+    "SPEC-0194",
+    "U0427"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
@@ -6427,34 +6444,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "DP-P 126 base"
+    "DP-P 126 base",
+    "SPEC-0229",
+    "U0636"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/DP-Promos/Snorlax-LvX",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "DP-P 127 base"
+    "DP-P 127 base",
+    "SPEC-0231",
+    "U0622"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
@@ -6483,13 +6506,14 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 11,
+   "stableIdCount": 13,
    "stableIds": [
     "F0324-P01",
     "F0324-P03",
@@ -6501,27 +6525,32 @@
     "F0327-P02",
     "F0328-P01",
     "F0328-P02",
+    "SPEC-0206",
+    "U0343",
     "s10a 058 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 11
+   "retrievedAt": "2026-08-28",
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V2-s10a077",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0207",
+    "U0167",
     "s10a 077 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
@@ -6792,19 +6821,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "EXS  base",
-    "F0107-P02"
+    "F0107-P02",
+    "SPEC-0200",
+    "U0458"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fates-Collide/Snorlax-FCO77",
@@ -6875,19 +6907,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "Third-party scan archive"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0119-P01",
-    "FLF 80 V2"
+    "FLF 80 V2",
+    "SPEC-0479",
+    "U0615"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-09-02",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flight-of-Legends/Snorlax-PCG1074",
@@ -6945,17 +6980,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0226",
+    "U0401",
     "svM 094 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
@@ -7246,6 +7284,25 @@
    "usageCount": 7
   },
   {
+   "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "product"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0174-P01",
+    "SPEC-0042",
+    "SPEC-0043"
+   ],
+   "retrievedAt": "2026-08-24",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Legendary-Collection/Snorlax-LC64",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -7272,19 +7329,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0193-P01",
-    "LL 028 base"
+    "LL 028 base",
+    "SPEC-0203",
+    "U0544"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Lost-Origin/Snorlax-LORTG10",
@@ -7386,7 +7446,7 @@
     "xm2a 136 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 10
+   "usageCount": 11
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
@@ -7484,23 +7544,26 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "F0358-P02",
     "F0359-P01",
     "F0360-P01",
     "F0361-P01",
     "F0362-P01",
+    "SPEC-0211",
+    "U0600",
     "s5a 93 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 6
+   "retrievedAt": "2026-08-28",
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
@@ -7508,36 +7571,42 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "EC5 062 base",
-    "F0104-P01"
+    "F0104-P01",
+    "SPEC-0199",
+    "U0605"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/National-Pokedex-Beginning-Set/Snorlax",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "HSZ 027 base"
+    "HSZ 027 base",
+    "SPEC-0201",
+    "U0643"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
@@ -7666,20 +7735,23 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "BW7 055 base",
     "F0028-P01",
-    "F0029-P01"
+    "F0029-P01",
+    "SPEC-0197",
+    "U0578"
    ],
-   "retrievedAt": null,
-   "usageCount": 3
+   "retrievedAt": "2026-08-28",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Storm/Snorlax-PLS101",
@@ -7929,17 +8001,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "CLF 016 base"
+    "CLF 016 base",
+    "SPEC-0198",
+    "U0439"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056",
@@ -7947,23 +8022,26 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "F0334-P01",
     "F0335-P01",
     "F0336-P01",
     "F0337-P01",
     "F0338-P01",
+    "SPEC-0208",
+    "U0201",
     "s10b 056 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 6
+   "retrievedAt": "2026-08-28",
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Live-Code-Card-Snorlax-Tin-PGO",
@@ -8040,19 +8118,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0255-P01",
-    "PJU  base"
+    "PJU  base",
+    "SPEC-0204",
+    "U0380"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Products/Online-Code-Card-Snorlax-GX-Box-PKM",
@@ -8244,22 +8325,25 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 7,
    "stableIds": [
     "F0351-P01",
     "F0351-P02",
     "F0352-P01",
     "F0352-P02",
+    "SPEC-0209",
+    "U0531",
     "s2 77 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 5
+   "retrievedAt": "2026-08-28",
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-LVX-RR111",
@@ -8582,17 +8666,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0221",
+    "U0647",
     "svIba 046 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278",
@@ -8724,68 +8811,80 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0232",
+    "U0510",
     "s1H 45 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-V-V2-s1H66",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0233",
+    "U0547",
     "s1H 66 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-VMAX-V1-s1H46",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0234",
+    "U0286",
     "s1H 46 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shield/Snorlax-VMAX-V2-s1H70",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0235",
+    "U0507",
     "s1H 70 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-GX-Starter-Deck/Snorlax-CSM2DC213",
@@ -8882,23 +8981,26 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "F0471-P01",
     "F0472-P01",
     "F0473-P01",
     "F0474-P01",
     "F0475-P01",
+    "SPEC-0219",
+    "U0305",
     "sv4a 145 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 6
+   "retrievedAt": "2026-08-28",
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V2-sv4a310",
@@ -8923,13 +9025,14 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 9,
+   "stableIdCount": 11,
    "stableIds": [
     "F0354-P01",
     "F0354-P03",
@@ -8939,10 +9042,12 @@
     "F0356-P02",
     "F0357-P01",
     "F0357-P02",
+    "SPEC-0210",
+    "U0290",
     "s4 84 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 9
+   "retrievedAt": "2026-08-28",
+   "usageCount": 11
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
@@ -8975,36 +9080,42 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "DP1  base",
-    "F0101-P01"
+    "F0101-P01",
+    "SPEC-0228",
+    "U0476"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100-CoroCoro-Comic-Version/Snorlax-sN008",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0218",
+    "U0769",
     "sN 008 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
@@ -9012,22 +9123,25 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 7,
    "stableIds": [
     "F0375-P01",
     "F0376-P01",
     "F0377-P01",
     "F0378-P01",
+    "SPEC-0215",
+    "U0652",
     "sI100 341 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 5
+   "retrievedAt": "2026-08-28",
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V2-sI100342",
@@ -9035,22 +9149,25 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 7,
    "stableIds": [
     "F0379-P01",
     "F0380-P01",
     "F0381-P01",
     "F0382-P01",
+    "SPEC-0216",
+    "U0656",
     "sI100 342 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 5
+   "retrievedAt": "2026-08-28",
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Stellar-Tera-Type-Starter-Set-Sylveon-ex/Snorlax-svLN010",
@@ -9091,51 +9208,60 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0217",
+    "U0582",
     "smL 038 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Promos/Eevee-Snorlax-GX-SM-P297",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "SM-P 297 base"
+    "SM-P 297 base",
+    "SPEC-0189",
+    "U0626"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Promos/Snorlax-GX-SM-P1",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "SM-P 1 base"
+    "SM-P 1 base",
+    "SPEC-0227",
+    "U0378"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Surging-Sparks/Snorlax-SSP144",
@@ -9173,34 +9299,40 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0214",
+    "U0640",
     "sH 038 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Promos/Snorlax-S-P156",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "S-P 156 base"
+    "S-P 156 base",
+    "SPEC-0205",
+    "U0522"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Simplified-Chinese-Promos/Snorlax-S-PCS061",
@@ -9224,17 +9356,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0213",
+    "U0609",
     "sA 10 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-SSH140",
@@ -9363,51 +9498,60 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0190",
+    "U0412",
     "sm9 066 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Tag-Bolt/Eevee-Snorlax-GX-V2-sm9106",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0191",
+    "U0632",
     "sm9 106 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Tag-Bolt/Eevee-Snorlax-GX-V3-sm9115",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0192",
+    "U0556",
     "sm9 115 V3"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Team-Up/Eevee-Snorlax-GX-V1-TEU120",
@@ -9561,17 +9705,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0193",
+    "U0504",
     "UNP  base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
@@ -9579,23 +9726,26 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "F0363-P02",
     "F0364-P02",
     "F0365-P02",
     "F0366-P01",
     "F0367-P01",
+    "SPEC-0212",
+    "U0172",
     "s8b 126 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 6
+   "retrievedAt": "2026-09-08",
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
@@ -9622,17 +9772,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0220",
+    "U0465",
     "svG 021 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Portrayals-Obsidian/Snorlax-V1-CS2aC086",
@@ -9747,23 +9900,26 @@
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
     "Cardmarket product page",
-    "Seller listing photograph"
+    "Seller listing photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "F0628-P01",
     "F0629-P01",
     "KR:XY2:066/080:base",
+    "SPEC-0225",
     "SPEC-0411",
+    "U0560",
     "U0561",
     "XY2 066 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wizards-Black-Star-Promos/Snorlax-WP49",
@@ -9787,34 +9943,41 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "HXY 026 base"
+    "HXY 026 base",
+    "SPEC-0202",
+    "U0585"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Black-Star-Promos/Snorlax-XYPR179",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "Seller listing photograph"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0634-P01",
+    "SPEC-0467",
+    "U0230",
     "XYPR 179 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-01",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
@@ -9854,20 +10017,23 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 5,
    "stableIds": [
     "F0619-P01",
     "F0620-P01",
+    "SPEC-0222",
+    "U0660",
     "XY-P 149 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 3
+   "retrievedAt": "2026-08-28",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V2-XY-P261",
@@ -9875,19 +10041,22 @@
    "providerId": "cardmarket",
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0622-P02",
+    "SPEC-0223",
+    "U0663",
     "XY-P 261 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-08-28",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
@@ -9897,14 +10066,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0174-P01"
+    "F0174-P01",
+    "SPEC-0043"
    ],
    "retrievedAt": "2026-08-24",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2046269749/2046269749.jpg",
@@ -9914,14 +10085,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0315-P02"
+    "F0315-P02",
+    "SPEC-0118"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2087744043/2087744043.jpg",
@@ -9961,7 +10134,7 @@
     "U0785"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 7
+   "usageCount": 9
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2110027735/2110027735.jpg",
@@ -9971,14 +10144,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0634-P01"
+    "F0634-P01",
+    "SPEC-0467",
+    "U0230"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 1
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
@@ -9988,14 +10164,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0174-P01"
+    "F0174-P01",
+    "SPEC-0042"
    ],
    "retrievedAt": "2026-08-24",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
@@ -10039,51 +10217,63 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "20th 047 base"
+    "20th 047 base",
+    "SPEC-0195",
+    "U0679"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW-P/562335/562335.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "BW-P 207 base"
+    "BW-P 207 base",
+    "SPEC-0196",
+    "U0575"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/BW7/568344/568344.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "BW7 055 base"
+    "BW7 055 base",
+    "SPEC-0197",
+    "U0578"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CLF/743180/743180.jpg",
@@ -10091,19 +10281,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "CLF 016 base",
-    "F0035-P01"
+    "F0035-P01",
+    "SPEC-0198",
+    "U0439"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
@@ -10111,19 +10305,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "DP-P 126 base",
-    "F0095-P01"
+    "F0095-P01",
+    "SPEC-0229",
+    "U0636"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566758/566758.jpg",
@@ -10131,70 +10329,86 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "DP-P 127 base",
-    "F0098-P01"
+    "F0098-P01",
+    "SPEC-0231",
+    "U0622"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP1/699402/699402.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "DP1  base"
+    "DP1  base",
+    "SPEC-0228",
+    "U0476"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EC5/654062/654062.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "EC5 062 base"
+    "EC5 062 base",
+    "SPEC-0199",
+    "U0605"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/EXS/548656/548656.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "EXS  base"
+    "EXS  base",
+    "SPEC-0200",
+    "U0458"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/FLF/886906/886906.jpg",
@@ -10202,70 +10416,85 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket exact card catalogue detail with retained product image",
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Third-party scan archive"
    ],
    "dimensions": [
+    "card-existence",
     "image",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "FLF 80 V2",
+    "SPEC-0479",
     "U0615"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/G2/605388/605388.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "G2  base"
+    "G2  base",
+    "SPEC-0194",
+    "U0427"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HSZ/568916/568916.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "HSZ 027 base"
+    "HSZ 027 base",
+    "SPEC-0201",
+    "U0643"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/HXY/564579/564579.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "HXY 026 base"
+    "HXY 026 base",
+    "SPEC-0202",
+    "U0585"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/LL/668962/668962.jpg",
@@ -10273,19 +10502,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0193-P01",
-    "LL 028 base"
+    "LL 028 base",
+    "SPEC-0203",
+    "U0544"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
@@ -10293,53 +10526,65 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0255-P02",
-    "PJU  base"
+    "PJU  base",
+    "SPEC-0204",
+    "U0380"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/Pt2/678150/678150.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "Pt2 070 base"
+    "Pt2 070 base",
+    "SPEC-0230",
+    "U0751"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/S-P/534097/534097.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "S-P 156 base"
+    "S-P 156 base",
+    "SPEC-0205",
+    "U0522"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/468359/468359.jpg",
@@ -10347,19 +10592,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0398-P01",
-    "SM-P 1 base"
+    "SM-P 1 base",
+    "SPEC-0227",
+    "U0378"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
@@ -10367,19 +10616,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0400-P01",
-    "SM-P 297 base"
+    "SM-P 297 base",
+    "SPEC-0189",
+    "U0626"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/UNP/571773/571773.jpg",
@@ -10387,36 +10640,44 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0575-P01",
+    "SPEC-0193",
+    "U0504",
     "UNP  base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/553464/553464.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0222",
+    "U0660",
     "XY-P 149 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY-P/554018/554018.jpg",
@@ -10424,53 +10685,65 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0622-P01",
+    "SPEC-0223",
+    "U0663",
     "XY-P 261 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY10/562999/562999.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0224",
+    "U0540",
     "XY10 057 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/XY2/564369/564369.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0225",
+    "U0560",
     "XY2 066 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/656382/656382.jpg",
@@ -10478,19 +10751,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0324-P02",
+    "SPEC-0206",
+    "U0343",
     "s10a 058 V1"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10a/657056/657056.jpg",
@@ -10498,19 +10775,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0329-P01",
+    "SPEC-0207",
+    "U0167",
     "s10a 077 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s10b/664610/664610.jpg",
@@ -10518,19 +10799,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0334-P02",
+    "SPEC-0208",
+    "U0201",
     "s10b 056 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467619/467619.jpg",
@@ -10538,19 +10823,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0339-P01",
+    "SPEC-0232",
+    "U0510",
     "s1H 45 V1"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467624/467624.jpg",
@@ -10558,19 +10847,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0345-P01",
+    "SPEC-0233",
+    "U0547",
     "s1H 66 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467629/467629.jpg",
@@ -10578,19 +10871,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0348-P01",
+    "SPEC-0235",
+    "U0507",
     "s1H 70 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s1H/467634/467634.jpg",
@@ -10598,36 +10895,44 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0342-P01",
+    "SPEC-0234",
+    "U0286",
     "s1H 46 V1"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s2/464294/464294.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0209",
+    "U0531",
     "s2 77 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s4/499775/499775.jpg",
@@ -10635,19 +10940,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0354-P02",
+    "SPEC-0210",
+    "U0290",
     "s4 84 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s5a/552704/552704.jpg",
@@ -10655,19 +10964,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0358-P01",
+    "SPEC-0211",
+    "U0600",
     "s5a 93 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
@@ -10675,87 +10988,107 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0363-P01",
+    "SPEC-0212",
+    "U0172",
     "s8b 126 base"
    ],
    "retrievedAt": "2026-09-08",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sA/524195/524195.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0213",
+    "U0609",
     "sA 10 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sH/564222/564222.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0214",
+    "U0640",
     "sH 038 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588051/588051.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0215",
+    "U0652",
     "sI100 341 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sI100/588052/588052.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0216",
+    "U0656",
     "sI100 342 V2"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
@@ -10763,19 +11096,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0417-P01",
+    "SPEC-0218",
+    "U0769",
     "sN 008 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558416/558416.jpg",
@@ -10783,19 +11120,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0405-P01",
+    "SPEC-0190",
+    "U0412",
     "sm9 066 V1"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558481/558481.jpg",
@@ -10803,19 +11144,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0408-P01",
+    "SPEC-0191",
+    "U0632",
     "sm9 106 V2"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sm9/558490/558490.jpg",
@@ -10823,87 +11168,107 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0411-P01",
+    "SPEC-0192",
+    "U0556",
     "sm9 115 V3"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/smL/564732/564732.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0217",
+    "U0582",
     "smL 038 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sv4a/746527/746527.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0219",
+    "U0305",
     "sv4a 145 V1"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svG/744984/744984.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0220",
+    "U0465",
     "svG 021 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svIba/761066/761066.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
+    "SPEC-0221",
+    "U0647",
     "svIba 046 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/svM/801337/801337.jpg",
@@ -10911,19 +11276,23 @@
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
     "Cardmarket product image",
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "image"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0502-P01",
+    "SPEC-0226",
+    "U0401",
     "svM 094 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://cdn.collectory.cc/cards/kr/BS2020001/010_023.webp",
@@ -11441,18 +11810,20 @@
     "Positive source-first card record",
     "Seller listing photograph",
     "Third-party scan archive",
-    "owner photograph"
+    "owner photograph",
+    "retained Cardmarket product scan"
    ],
    "dimensions": [
     "finish",
     "identity",
     "language"
    ],
-   "stableIdCount": 61,
+   "stableIdCount": 227,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
     "F0125-P02",
+    "F0174-P01",
     "F0247-P02",
     "F0291-P02",
     "F0294-P02",
@@ -11463,7 +11834,9 @@
     "F0519-P02",
     "F0530-P01",
     "F0534-P01",
+    "F0604-P02",
     "F0615-P03",
+    "F0634-P01",
     "ID:SM-P:166:base",
     "ID:SV-P:117:V1",
     "ID:SV-P:117:V2",
@@ -11475,62 +11848,228 @@
     "KR:xsv2a:143/165:base",
     "SPEC-0001",
     "SPEC-0002",
+    "SPEC-0003",
+    "SPEC-0004",
     "SPEC-0005",
     "SPEC-0006",
     "SPEC-0014",
     "SPEC-0019",
     "SPEC-0020",
+    "SPEC-0021",
     "SPEC-0026",
     "SPEC-0028",
     "SPEC-0031",
     "SPEC-0038",
+    "SPEC-0042",
+    "SPEC-0043",
+    "SPEC-0058",
+    "SPEC-0059",
+    "SPEC-0060",
     "SPEC-0061",
+    "SPEC-0062",
+    "SPEC-0063",
+    "SPEC-0064",
+    "SPEC-0065",
+    "SPEC-0066",
+    "SPEC-0067",
+    "SPEC-0068",
+    "SPEC-0069",
+    "SPEC-0070",
+    "SPEC-0071",
+    "SPEC-0072",
+    "SPEC-0073",
+    "SPEC-0074",
+    "SPEC-0075",
+    "SPEC-0076",
+    "SPEC-0077",
+    "SPEC-0078",
+    "SPEC-0079",
+    "SPEC-0080",
+    "SPEC-0081",
+    "SPEC-0082",
+    "SPEC-0087",
+    "SPEC-0088",
+    "SPEC-0089",
+    "SPEC-0090",
+    "SPEC-0093",
+    "SPEC-0094",
+    "SPEC-0095",
+    "SPEC-0096",
+    "SPEC-0097",
+    "SPEC-0098",
+    "SPEC-0099",
+    "SPEC-0100",
+    "SPEC-0101",
+    "SPEC-0102",
+    "SPEC-0103",
+    "SPEC-0104",
     "SPEC-0145",
+    "SPEC-0189",
+    "SPEC-0190",
+    "SPEC-0191",
+    "SPEC-0192",
+    "SPEC-0193",
+    "SPEC-0194",
+    "SPEC-0195",
+    "SPEC-0196",
+    "SPEC-0197",
+    "SPEC-0198",
+    "SPEC-0199",
+    "SPEC-0200",
+    "SPEC-0201",
+    "SPEC-0202",
+    "SPEC-0203",
+    "SPEC-0204",
+    "SPEC-0205",
+    "SPEC-0206",
+    "SPEC-0207",
+    "SPEC-0208",
+    "SPEC-0209",
+    "SPEC-0210",
+    "SPEC-0211",
+    "SPEC-0212",
+    "SPEC-0213",
+    "SPEC-0214",
+    "SPEC-0215",
+    "SPEC-0216",
+    "SPEC-0217",
+    "SPEC-0218",
+    "SPEC-0219",
+    "SPEC-0220",
+    "SPEC-0221",
+    "SPEC-0222",
+    "SPEC-0223",
+    "SPEC-0224",
+    "SPEC-0225",
+    "SPEC-0226",
+    "SPEC-0227",
+    "SPEC-0228",
+    "SPEC-0229",
+    "SPEC-0230",
+    "SPEC-0231",
+    "SPEC-0232",
+    "SPEC-0233",
+    "SPEC-0234",
+    "SPEC-0235",
     "SPEC-0409",
     "SPEC-0410",
     "SPEC-0411",
+    "SPEC-0467",
+    "SPEC-0469",
+    "SPEC-0470",
+    "SPEC-0471",
+    "SPEC-0472",
+    "SPEC-0476",
+    "SPEC-0479",
     "SPEC-0505",
     "TH:SM-P:083:base",
     "TW:AS5a:222/184:base",
     "TW:SM-P:053:base",
     "TW:sc1D F:133/164:base",
     "U0100",
+    "U0110",
+    "U0116",
+    "U0167",
+    "U0172",
     "U0189",
     "U0192",
+    "U0201",
+    "U0224",
     "U0228",
     "U0229",
     "U0230",
     "U0231",
     "U0246",
+    "U0271",
+    "U0286",
+    "U0290",
     "U0294",
+    "U0305",
+    "U0316",
+    "U0322",
+    "U0336",
+    "U0343",
+    "U0364",
+    "U0378",
+    "U0380",
+    "U0399",
+    "U0401",
+    "U0412",
+    "U0420",
+    "U0427",
+    "U0439",
     "U0452",
+    "U0458",
+    "U0465",
+    "U0476",
+    "U0503",
+    "U0504",
+    "U0507",
+    "U0510",
+    "U0522",
+    "U0523",
+    "U0531",
+    "U0540",
+    "U0544",
+    "U0547",
+    "U0556",
+    "U0560",
     "U0561",
+    "U0575",
+    "U0578",
+    "U0582",
+    "U0585",
+    "U0600",
+    "U0605",
+    "U0608",
+    "U0609",
+    "U0615",
+    "U0622",
+    "U0626",
     "U0627",
+    "U0628",
+    "U0632",
+    "U0636",
+    "U0640",
+    "U0643",
+    "U0647",
+    "U0652",
+    "U0656",
+    "U0660",
     "U0661",
+    "U0663",
+    "U0679",
+    "U0751",
     "U0752",
+    "U0769",
+    "U0771",
     "U0772",
+    "U0775",
     "U0780",
     "U0785"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 90
+   "usageCount": 483
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
    "sourceTypes": [
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "Third-party collector photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0094-P01"
+    "F0094-P01",
+    "SPEC-0045"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://drive.google.com/file/d/1-SEz7Lm9ld6FYzWXmVpyzruvu5LiWqth/view",
@@ -11950,34 +12489,76 @@
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
    "sourceTypes": [
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "Third-party collector photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0024-P02"
+    "F0024-P02",
+    "SPEC-0050"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://efour.b-cdn.net/uploads/default/original/3X/b/7/b7aa1d2b7803849ac2b6773cd0f09c86ad893e91.jpeg",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
    "sourceTypes": [
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "Third-party collector photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0125-P02"
+    "F0125-P02",
+    "SPEC-0051"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://excaliburtcg.co.uk/cdn/shop/files/108_612bb9b0-6fe3-4557-8c5d-906ac9944efe.png?v=1784809179&width=533",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0154",
+    "U0588"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://excaliburtcg.co.uk/collections/set-csvl1c",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0154",
+    "U0588"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1",
@@ -11989,12 +12570,13 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0584-P01"
+    "F0584-P01",
+    "SPEC-0105"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/85",
@@ -12024,14 +12606,16 @@
     "Owner-supplied physical card photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0167-P02"
+    "F0167-P02",
+    "SPEC-0040"
    ],
    "retrievedAt": "2026-08-24",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/25528966-476a-4a82-bcaf-d9e1f76e8584",
@@ -12061,13 +12645,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:BS2:30/40:base",
-    "SPEC-0037"
+    "SPEC-0037",
+    "U0477"
    ],
    "retrievedAt": "2026-08-12",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/4ebb3154-8235-4b74-829c-4485dced8186",
@@ -12096,14 +12681,16 @@
     "Owner-supplied physical card photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0167-P01"
+    "F0167-P01",
+    "SPEC-0041"
    ],
    "retrievedAt": "2026-08-24",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
@@ -12113,14 +12700,16 @@
     "Owner-supplied physical card photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0174-P02"
+    "F0174-P02",
+    "SPEC-0044"
    ],
    "retrievedAt": "2026-08-24",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/7302c36e-1046-458a-a397-4e594916f682",
@@ -12133,13 +12722,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:S-P:101:base",
-    "SPEC-0014"
+    "SPEC-0014",
+    "U0523"
    ],
    "retrievedAt": "2026-08-03",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/aaa33550-cdd4-49e8-95ab-8c07cf67a0dd",
@@ -12189,13 +12779,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "CN:CS4DaC:341/414:base",
-    "SPEC-0155"
+    "F0378-P01",
+    "SPEC-0155",
+    "U0651"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
@@ -12208,13 +12800,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "CN:CS4DaC:341/414:base",
-    "SPEC-0155"
+    "F0378-P01",
+    "SPEC-0155",
+    "U0651"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e300898c854f4dba71eaff7ec5a4ac192bf7be85/verification/specimens/SPEC-0039.png",
@@ -12258,17 +12852,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
    "sourceTypes": [
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "Third-party collector photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0125-P01"
+    "F0125-P01",
+    "SPEC-0048"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.instagram.com/p/DLKJu7Mvpap",
@@ -12563,21 +13160,178 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://www.instagram.com/p/DO6tQd5jNK8",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Owner-supplied physical card photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CLAIM:positive:56aee25aabfce91a",
+    "SPEC-0478"
+   ],
+   "retrievedAt": "2026-09-02",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 12,
+   "stableIds": [
+    "F0164-P02",
+    "F0164-P03",
+    "F0166-P02",
+    "F0167-P01",
+    "F0167-P02",
+    "F0255-P02",
+    "SPEC-0396",
+    "SPEC-0401",
+    "SPEC-0402",
+    "SPEC-0403",
+    "SPEC-0404",
+    "SPEC-0408"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 12
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=10",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0167-P01",
+    "SPEC-0401"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=11",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0167-P02",
+    "SPEC-0402"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=12",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0164-P02",
+    "SPEC-0403"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=13",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0164-P03",
+    "SPEC-0404"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=17",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0166-P02",
+    "SPEC-0408"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=5",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Third-party collector photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0255-P02",
+    "SPEC-0396"
+   ],
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.youtube.com/watch?v=t0aMSK32ymQ&t=346s",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
    "sourceTypes": [
-    "Inspected physical specimen photograph"
+    "Inspected physical specimen photograph",
+    "Third-party collector photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0183-P01"
+    "F0183-P01",
+    "SPEC-0049"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": null,
@@ -12661,7 +13415,8 @@
     "Owner attestation (domain expert)",
     "Owner attestation (domain expert) + set release schedule",
     "Owner attestation (domain expert); localized product image",
-    "Owner attestation plus downloaded scan review"
+    "Owner attestation plus downloaded scan review",
+    "Referenced product render (context only); Owner attestation (domain expert); localized product image"
    ],
    "dimensions": [
     "edition",
@@ -12669,7 +13424,7 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 101,
+   "stableIdCount": 116,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0009-P01",
@@ -12736,13 +13491,25 @@
     "F0616-P01",
     "F0616-P02",
     "ID:AC3a:145/205:base",
+    "SPEC-0022",
+    "SPEC-0023",
+    "SPEC-0053",
+    "SPEC-0054",
+    "SPEC-0056",
+    "SPEC-0105",
+    "SPEC-0108",
     "SPEC-0426",
     "SPEC-0427",
     "SPEC-0428",
     "SPEC-0429",
     "SPEC-0430",
     "SPEC-0465",
+    "SPEC-0466",
+    "SPEC-0470",
+    "SPEC-0471",
+    "SPEC-0472",
     "SPEC-0473",
+    "SPEC-0474",
     "SPEC-0480",
     "TH:AS5a:142/184:base",
     "TW:AS5a:142:base",
@@ -12750,12 +13517,15 @@
     "U0098",
     "U0099",
     "U0246",
+    "U0255",
+    "U0297",
     "U0311",
     "U0312",
     "U0313",
     "U0314",
     "U0433",
     "U0467",
+    "U0503",
     "U0616",
     "U0617",
     "U0618",
@@ -12774,7 +13544,7 @@
     "override:owner-svp184-western-prerelease-variants"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 109
+   "usageCount": 155
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -13275,13 +14045,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV2a I:143/165:base",
-    "SPEC-0176"
+    "SPEC-0176",
+    "U0105"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00008760.png",
@@ -13294,13 +14065,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV2a I:181/165:base",
-    "SPEC-0177"
+    "SPEC-0177",
+    "U0051"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00009774.png",
@@ -13352,13 +14124,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV4a I:310/190:base",
-    "SPEC-0180"
+    "SPEC-0180",
+    "U0386"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00013757.png",
@@ -13429,13 +14202,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA3 I:136/193:base",
-    "SPEC-0184"
+    "SPEC-0184",
+    "U0129"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00017792.png",
@@ -13448,13 +14222,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA3 I:136/193:V1",
-    "SPEC-0185"
+    "SPEC-0185",
+    "U0787"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00017793.png",
@@ -13467,13 +14242,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA3 I:136/193:V2",
-    "SPEC-0186"
+    "SPEC-0186",
+    "U0792"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045",
@@ -13508,13 +14284,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV4a I:310/190:base",
-    "SPEC-0180"
+    "SPEC-0180",
+    "U0386"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/13757",
@@ -13615,7 +14392,7 @@
     "U0129"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/17792",
@@ -13628,13 +14405,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA3 I:136/193:V1",
-    "SPEC-0185"
+    "SPEC-0185",
+    "U0787"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/17793",
@@ -13647,13 +14425,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA3 I:136/193:V2",
-    "SPEC-0186"
+    "SPEC-0186",
+    "U0792"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/2129",
@@ -14017,13 +14796,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV2a I:143/165:base",
-    "SPEC-0176"
+    "SPEC-0176",
+    "U0105"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/8760",
@@ -14036,13 +14816,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:SV2a I:181/165:base",
-    "SPEC-0177"
+    "SPEC-0177",
+    "U0051"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-search/detail/9774",
@@ -14226,13 +15007,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0261",
-    "TH:s8b:126/184:base"
+    "TH:s8b:126/184:base",
+    "U0176"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00003281.png",
@@ -14284,13 +15066,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0264",
-    "TH:s10a:058/071:base"
+    "TH:s10a:058/071:base",
+    "U0347"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00006241.png",
@@ -14303,13 +15086,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0265",
-    "TH:sv2a:143/165:base"
+    "TH:sv2a:143/165:base",
+    "U0106"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00006363.png",
@@ -14322,13 +15106,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0266",
-    "TH:sv2a:181/165:base"
+    "TH:sv2a:181/165:base",
+    "U0052"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00006835.png",
@@ -14361,13 +15146,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0268",
-    "TH:sv4K:059/066:base"
+    "TH:sv4K:059/066:base",
+    "U0262"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00007755.png",
@@ -14380,13 +15166,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0269",
-    "TH:sv4a:145/190:base"
+    "TH:sv4a:145/190:base",
+    "U0309"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00008167.png",
@@ -14399,13 +15186,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0270",
-    "TH:sv5a:051/066:base"
+    "TH:sv5a:051/066:base",
+    "U0235"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00008631.png",
@@ -14418,13 +15206,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0271",
-    "TH:sv4a:310/190:base"
+    "TH:sv4a:310/190:base",
+    "U0387"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00010595.png",
@@ -14476,13 +15265,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0274",
-    "TH:MA3:136/193:base"
+    "TH:MA3:136/193:base",
+    "U0130"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00013749.png",
@@ -14495,13 +15285,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0275",
-    "TH:MA3:136/193:V1"
+    "TH:MA3:136/193:V1",
+    "U0788"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00013750.png",
@@ -14514,13 +15305,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0276",
-    "TH:MA3:136/193:V2"
+    "TH:MA3:136/193:V2",
+    "U0793"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00013857.png",
@@ -14640,7 +15432,7 @@
     "U0130"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/13749",
@@ -14653,13 +15445,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0275",
-    "TH:MA3:136/193:V1"
+    "TH:MA3:136/193:V1",
+    "U0788"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/13750",
@@ -14672,13 +15465,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0276",
-    "TH:MA3:136/193:V2"
+    "TH:MA3:136/193:V2",
+    "U0793"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/13857",
@@ -14757,7 +15551,7 @@
     "U0176"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/273",
@@ -14849,13 +15643,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0264",
-    "TH:s10a:058/071:base"
+    "TH:s10a:058/071:base",
+    "U0347"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/439",
@@ -14906,13 +15701,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0265",
-    "TH:sv2a:143/165:base"
+    "TH:sv2a:143/165:base",
+    "U0106"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/6363",
@@ -14925,13 +15721,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0266",
-    "TH:sv2a:181/165:base"
+    "TH:sv2a:181/165:base",
+    "U0052"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/6835",
@@ -14966,13 +15763,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0268",
-    "TH:sv4K:059/066:base"
+    "TH:sv4K:059/066:base",
+    "U0262"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/7755",
@@ -14994,7 +15792,7 @@
     "U0309"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/8167",
@@ -15007,13 +15805,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0270",
-    "TH:sv5a:051/066:base"
+    "TH:sv5a:051/066:base",
+    "U0235"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-search/detail/8631",
@@ -15035,7 +15834,7 @@
     "U0387"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00000375.png",
@@ -15048,13 +15847,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0278",
-    "TW:S4 F:084/100:base"
+    "TW:S4 F:084/100:base",
+    "U0292"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00001474.png",
@@ -15086,13 +15886,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0280",
-    "TW:sH F:038/053:base"
+    "TW:sH F:038/053:base",
+    "U0642"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00002220.png",
@@ -15219,13 +16020,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0287",
-    "TW:AS5a:117/184:base"
+    "TW:AS5a:117/184:base",
+    "U0414"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00002881.png",
@@ -15238,13 +16040,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0288",
-    "TW:AS5a:142:base"
+    "TW:AS5a:142:base",
+    "U0265"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00003553.png",
@@ -15295,13 +16098,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0291",
-    "TW:S8b F:126/184:base"
+    "TW:S8b F:126/184:base",
+    "U0174"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00005618.png",
@@ -15314,13 +16118,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0292",
-    "TW:S-P:145:base"
+    "TW:S-P:145:base",
+    "U0625"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00005968.png",
@@ -15373,13 +16178,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0295",
-    "TW:S10a F:058/071:base"
+    "TW:S10a F:058/071:base",
+    "U0345"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00006589.png",
@@ -15392,13 +16198,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0296",
-    "TW:S10b F:056/071:base"
+    "TW:S10b F:056/071:base",
+    "U0203"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00007016.png",
@@ -15411,13 +16218,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0297",
-    "TW:SN F:008/024:base"
+    "TW:SN F:008/024:base",
+    "U0771"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00007426.png",
@@ -15449,13 +16257,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0299",
-    "TW:sv2a F:143/165:base"
+    "TW:sv2a F:143/165:base",
+    "U0104"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00008304.png",
@@ -15468,13 +16277,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0300",
-    "TW:sv2a F:181/165:base"
+    "TW:sv2a F:181/165:base",
+    "U0050"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00008943.png",
@@ -15487,13 +16297,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0301",
-    "TW:sv4K F:059/066:base"
+    "TW:sv4K F:059/066:base",
+    "U0261"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00009173.png",
@@ -15526,13 +16337,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0303",
-    "TW:sv4a F:310/190:base"
+    "TW:sv4a F:310/190:base",
+    "U0385"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00010298.png",
@@ -15545,13 +16357,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0304",
-    "TW:sv5a F:051/066:base"
+    "TW:sv5a F:051/066:base",
+    "U0234"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00011337.png",
@@ -15622,13 +16435,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0308",
-    "TW:SV9 F:075/100:base"
+    "TW:SV9 F:075/100:base",
+    "U0371"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00013148.png",
@@ -15680,13 +16494,15 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "SPEC-0311",
-    "TW:sv2a F:143/165:poke-ball-pattern"
+    "TW:sv2a F:143/165:poke-ball-pattern",
+    "U0776",
+    "U0781"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00016453.png",
@@ -15699,13 +16515,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0312",
-    "TW:M2a F:136/193:poke-ball-pattern"
+    "TW:M2a F:136/193:poke-ball-pattern",
+    "U0786"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00016454.png",
@@ -15718,13 +16535,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0313",
-    "TW:M2a F:136/193:colorless-energy-star-pattern"
+    "TW:M2a F:136/193:colorless-energy-star-pattern",
+    "U0791"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00017038.png",
@@ -15836,13 +16654,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0304",
-    "TW:sv5a F:051/066:base"
+    "TW:sv5a F:051/066:base",
+    "U0234"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/11337",
@@ -15915,13 +16734,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0308",
-    "TW:SV9 F:075/100:base"
+    "TW:SV9 F:075/100:base",
+    "U0371"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/13148",
@@ -15992,13 +16812,15 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "SPEC-0311",
-    "TW:sv2a F:143/165:poke-ball-pattern"
+    "TW:sv2a F:143/165:poke-ball-pattern",
+    "U0776",
+    "U0781"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/16453",
@@ -16011,13 +16833,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0312",
-    "TW:M2a F:136/193:poke-ball-pattern"
+    "TW:M2a F:136/193:poke-ball-pattern",
+    "U0786"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/16454",
@@ -16032,14 +16855,15 @@
     "card-existence",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "SPEC-0313",
     "TW:M2a F:136/193:colorless-energy-star-pattern",
-    "U0128"
+    "U0128",
+    "U0791"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17038",
@@ -16159,13 +16983,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0280",
-    "TW:sH F:038/053:base"
+    "TW:sH F:038/053:base",
+    "U0642"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2220",
@@ -16292,13 +17117,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0287",
-    "TW:AS5a:117/184:base"
+    "TW:AS5a:117/184:base",
+    "U0414"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2881",
@@ -16311,13 +17137,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0288",
-    "TW:AS5a:142:base"
+    "TW:AS5a:142:base",
+    "U0265"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/3553",
@@ -16349,13 +17176,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0278",
-    "TW:S4 F:084/100:base"
+    "TW:S4 F:084/100:base",
+    "U0292"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/4244",
@@ -16387,13 +17215,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0291",
-    "TW:S8b F:126/184:base"
+    "TW:S8b F:126/184:base",
+    "U0174"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5618",
@@ -16406,13 +17235,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0292",
-    "TW:S-P:145:base"
+    "TW:S-P:145:base",
+    "U0625"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5968",
@@ -16469,13 +17299,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0295",
-    "TW:S10a F:058/071:base"
+    "TW:S10a F:058/071:base",
+    "U0345"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/6589",
@@ -16488,13 +17319,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0296",
-    "TW:S10b F:056/071:base"
+    "TW:S10b F:056/071:base",
+    "U0203"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/7016",
@@ -16507,13 +17339,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0297",
-    "TW:SN F:008/024:base"
+    "TW:SN F:008/024:base",
+    "U0771"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/7426",
@@ -16545,13 +17378,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0299",
-    "TW:sv2a F:143/165:base"
+    "TW:sv2a F:143/165:base",
+    "U0104"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8304",
@@ -16564,13 +17398,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0300",
-    "TW:sv2a F:181/165:base"
+    "TW:sv2a F:181/165:base",
+    "U0050"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8943",
@@ -16583,13 +17418,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0301",
-    "TW:sv4K F:059/066:base"
+    "TW:sv4K F:059/066:base",
+    "U0261"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-search/detail/9173",
@@ -16624,13 +17460,14 @@
    "dimensions": [
     "card-existence"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0303",
-    "TW:sv4a F:310/190:base"
+    "TW:sv4a F:310/190:base",
+    "U0385"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": null,
@@ -17332,7 +18169,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17349,7 +18186,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17366,7 +18203,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17383,7 +18220,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17400,7 +18237,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17417,7 +18254,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17434,7 +18271,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17451,7 +18288,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17468,7 +18305,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17487,16 +18324,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s10a:058/071:base",
-    "SPEC-0236"
+    "SPEC-0236",
+    "U0344"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10a/S10a_077.png?w=512",
@@ -17508,16 +18347,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s10a:077/071:base",
-    "SPEC-0237"
+    "SPEC-0237",
+    "U0168"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S10b/S10b_056.png?w=512",
@@ -17529,16 +18370,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s10b:056/071:base",
-    "SPEC-0238"
+    "SPEC-0238",
+    "U0202"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_045.png?w=512",
@@ -17550,16 +18393,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s1H:045/060:base",
-    "SPEC-0244"
+    "SPEC-0244",
+    "U0511"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_046.png?w=512",
@@ -17571,16 +18416,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s1H:046/060:base",
-    "SPEC-0245"
+    "SPEC-0245",
+    "U0287"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S1H/S1H_066.png?w=512",
@@ -17592,16 +18439,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s1H:066/060:base",
-    "SPEC-0246"
+    "SPEC-0246",
+    "U0548"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
@@ -17613,16 +18462,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s2:077/096:base",
-    "SPEC-0239"
+    "SPEC-0239",
+    "U0532"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S4/S4_084.png?w=512",
@@ -17634,16 +18485,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s4:084/100:base",
-    "SPEC-0240"
+    "SPEC-0240",
+    "U0291"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S8b/S8b_126.png?w=512",
@@ -17655,16 +18508,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:s8b:126/184:base",
-    "SPEC-0241"
+    "SPEC-0241",
+    "U0173"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SA/SA_G_010.png?w=512",
@@ -17674,7 +18529,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17691,7 +18546,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17710,16 +18565,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sI:341/414:base",
-    "SPEC-0242"
+    "SPEC-0242",
+    "U0653"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512",
@@ -17731,16 +18588,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sI:342/414:base",
-    "SPEC-0243"
+    "SPEC-0243",
+    "U0657"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SN/SN_008.png?w=512",
@@ -17752,16 +18611,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sN:008/024:base",
-    "SPEC-0247"
+    "SPEC-0247",
+    "U0770"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/PROMO/SMP_017.png?w=512",
@@ -17771,7 +18632,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17788,7 +18649,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17807,16 +18668,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sm10:076/095:base",
-    "SPEC-0248"
+    "SPEC-0248",
+    "U0264"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
@@ -17826,7 +18689,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17843,7 +18706,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17862,16 +18725,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sm9:106/095:base",
-    "SPEC-0250"
+    "SPEC-0250",
+    "U0633"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
@@ -17885,13 +18750,14 @@
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:smL:038/051:base",
-    "SPEC-0249"
+    "SPEC-0249",
+    "U0583"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML_/SML_038.png?w=512",
@@ -17901,7 +18767,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17918,7 +18784,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17935,7 +18801,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17952,7 +18818,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17969,7 +18835,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -17988,16 +18854,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:sv4a:310/190:base",
-    "SPEC-0251"
+    "SPEC-0251",
+    "U0384"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV5a/SV5a_051.png?w=512",
@@ -18007,7 +18875,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18024,7 +18892,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18043,16 +18911,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:svG:021/049:base",
-    "SPEC-0252"
+    "SPEC-0252",
+    "U0466"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVI/SVI_046_L.png?w=512",
@@ -18062,7 +18932,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18079,7 +18949,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18096,7 +18966,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18113,7 +18983,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18130,7 +19000,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18147,7 +19017,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18164,7 +19034,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18198,7 +19068,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity"
+    "card-release"
    ],
    "stableIdCount": 1,
    "stableIds": [
@@ -18217,7 +19087,7 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language",
     "rarity"
    ],
@@ -18239,7 +19109,7 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language",
     "rarity"
    ],
@@ -18260,7 +19130,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18280,7 +19150,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18300,7 +19170,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18321,6 +19191,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18331,7 +19202,7 @@
     "U0583"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2019007076",
@@ -18342,7 +19213,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18362,7 +19233,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "set-membership"
    ],
    "stableIdCount": 1,
@@ -18381,7 +19252,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18401,7 +19272,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18421,7 +19292,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18441,7 +19312,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18461,7 +19332,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18482,6 +19353,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18492,7 +19364,7 @@
     "U0291"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2021013039",
@@ -18503,7 +19375,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18524,6 +19396,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18534,7 +19407,7 @@
     "U0173"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022003341",
@@ -18545,7 +19418,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18565,7 +19438,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18585,7 +19458,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18606,6 +19479,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18616,7 +19490,7 @@
     "U0202"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
@@ -18628,6 +19502,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18638,7 +19513,7 @@
     "U0344"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011126",
@@ -18650,6 +19525,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18660,7 +19536,7 @@
     "U0168"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
@@ -18672,7 +19548,7 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language",
     "rarity"
    ],
@@ -18694,7 +19570,7 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language",
     "rarity"
    ],
@@ -18715,7 +19591,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18736,6 +19612,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18746,7 +19623,7 @@
     "U0466"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001145",
@@ -18757,7 +19634,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18778,6 +19655,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "language"
    ],
@@ -18788,7 +19666,7 @@
     "U0384"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2024006084",
@@ -18799,7 +19677,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18820,7 +19698,7 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language",
     "rarity"
    ],
@@ -18841,7 +19719,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18861,7 +19739,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18881,7 +19759,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18901,7 +19779,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18921,7 +19799,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18941,7 +19819,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18961,7 +19839,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -18981,7 +19859,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19001,7 +19879,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19021,7 +19899,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19041,7 +19919,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19061,7 +19939,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19082,16 +19960,18 @@
     "Positive source-native rarity record"
    ],
    "dimensions": [
+    "card-release",
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "KR:S-P:101:base",
-    "SPEC-0014"
+    "SPEC-0014",
+    "U0523"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
@@ -19102,7 +19982,7 @@
     "Positive source-first card record"
    ],
    "dimensions": [
-    "identity",
+    "card-release",
     "language"
    ],
    "stableIdCount": 2,
@@ -19129,6 +20009,24 @@
    ],
    "retrievedAt": "2026-09-01",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://image.pokemon.com.cn/wp-content/uploads/2025/09/68b581bfc64965fa84605ef01034e7714c1fb3a3.png?auth_key=1787864011-c3c391b112e24f00be4b06179d924d51-0-7f39f61eab18c34a7b56d314d38a10ad",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "card-existence"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0146",
+    "U0457"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15499.html",
@@ -19253,19 +20151,23 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-cn-official",
    "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified",
     "Official Mainland China Simplified Chinese product specification"
    ],
    "dimensions": [
+    "card-existence",
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0071-P01",
+    "SPEC-0146",
+    "U0457",
     "override:pokemon-cn-shining-synergy-starter"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
@@ -22219,15 +23121,16 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0458-P01",
     "ID:SV-P:278:base",
     "SPEC-0187",
+    "U0773",
     "override:pokumon-id-svp278"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo",
@@ -22243,15 +23146,16 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0459-P01",
     "ID:SV-P:286:base",
     "SPEC-0188",
+    "U0687",
     "override:pokumon-id-svp286"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
@@ -22448,14 +23352,15 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0057-P01",
-    "SPEC-0473"
+    "SPEC-0473",
+    "U0255"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 3
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
@@ -22467,12 +23372,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0057-P02"
+    "F0057-P02",
+    "SPEC-0474",
+    "U0255"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 1
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png",
@@ -22486,13 +23393,15 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "CN:CS2aC:142/115:base",
-    "SPEC-0475"
+    "F0058-P01",
+    "SPEC-0475",
+    "U0592"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 3
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965",
@@ -22768,15 +23677,21 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 10,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "CN:CS2aC:142/115:base",
+    "F0057-P01",
+    "F0057-P02",
+    "F0058-P01",
     "SPEC-0473",
-    "SPEC-0475"
+    "SPEC-0474",
+    "SPEC-0475",
+    "U0255",
+    "U0592"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 4
+   "usageCount": 11
   },
   {
    "canonicalUrl": "https://www.target.com/p/-/A-1007431499",
@@ -22817,13 +23732,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0324",
-    "TW:S10a F:077/071:base"
+    "TW:S10a F:077/071:base",
+    "U0169"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
@@ -22833,14 +23749,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0024-P01"
+    "F0024-P01",
+    "SPEC-0047"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
@@ -22853,14 +23771,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0037-P01",
     "SPEC-0319",
-    "TW:CLF:016/032:base"
+    "TW:CLF:016/032:base",
+    "U0441"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-7r991-lny2yl0igo4d9b",
@@ -22873,14 +23792,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0037-P01",
     "SPEC-0320",
-    "TW:CLF:016/032:base"
+    "TW:CLF:016/032:base",
+    "U0441"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
@@ -22893,14 +23813,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0037-P01",
     "SPEC-0321",
-    "TW:CLF:016/032:base"
+    "TW:CLF:016/032:base",
+    "U0441"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://cf.shopee.tw/file/tw-11134207-820lg-mpg97q4m34lof2",
@@ -22913,14 +23834,34 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0037-P01",
     "SPEC-0322",
-    "TW:CLF:016/032:base"
+    "TW:CLF:016/032:base",
+    "U0441"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://collectorworth.com/cards/snorlax-15",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0118-P02",
+    "SPEC-0107"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
@@ -22930,14 +23871,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0118-P02"
+    "F0118-P02",
+    "SPEC-0107"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://down-br.img.susercontent.com/file/br-11134207-7r98o-mbky8ohmgkpu78",
@@ -22949,12 +23892,13 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0140-P01"
+    "F0140-P01",
+    "SPEC-0053"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
@@ -22975,6 +23919,43 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://federicstore.it/prodotto/50-68-snorlax-rara-it-mint",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0146-P01",
+    "SPEC-0108"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://federicstore.it/prodotto/50-68-snorlax-rara-reverse-it-mint",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0146-P02",
+    "SPEC-0109"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -22984,12 +23965,13 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0146-P01"
+    "F0146-P01",
+    "SPEC-0108"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68r-destinosfuggente.png",
@@ -22999,14 +23981,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0146-P02"
+    "F0146-P02",
+    "SPEC-0109"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://github.com/user-attachments/assets/0766a589-2407-486b-8cf5-438a612b8d66",
@@ -23143,6 +24127,25 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://globalbunjang.com/product/408219334",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0448",
+    "U0548"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://globalbunjang.com/product/411963518",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -23160,6 +24163,25 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/414684191",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0446",
+    "U0511"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://globalbunjang.com/product/416373605",
@@ -23181,7 +24203,7 @@
    "usageCount": 3
   },
   {
-   "canonicalUrl": "https://globalbunjang.com/product/420832203",
+   "canonicalUrl": "https://globalbunjang.com/product/418966418",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
    "sourceTypes": [
@@ -23193,11 +24215,31 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
+    "SPEC-0453",
+    "U0173"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/420832203",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0604-P01",
     "SPEC-0437",
     "U0790"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://globalbunjang.com/product/421867656",
@@ -23217,6 +24259,24 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/421876007",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0452",
+    "U0168"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://globalbunjang.com/product/423230156",
@@ -23240,6 +24300,25 @@
    "usageCount": 5
   },
   {
+   "canonicalUrl": "https://globalbunjang.com/product/423230216",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0454",
+    "U0202"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://globalbunjang.com/product/423487583",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -23258,6 +24337,81 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/423858186",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0450",
+    "U0633"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/425341258",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0456",
+    "U0291"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/425468617",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0447",
+    "U0287"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://globalbunjang.com/product/425674631",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0451",
+    "U0344"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://globalbunjang.com/product/426224532",
@@ -23298,6 +24452,24 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://globalbunjang.com/product/427352825",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0455",
+    "U0532"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/1vUAAeSw5Jpp7Xrg/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -23305,14 +24477,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0152-P01"
+    "F0152-P01",
+    "SPEC-0482",
+    "U0585"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/26IAAOSwlHhm6u9o/s-l1600.jpg",
@@ -23361,12 +24536,32 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0009-P01"
+    "F0009-P01",
+    "SPEC-0466",
+    "U0297"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 1
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/AjoAAeSww31qRcgd/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0468",
+    "U0503"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/B04AAeSwYRNp~LNc/s-l1600.jpg",
@@ -23443,7 +24638,7 @@
     "U0452"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/GlsAAOSwCkFlTZzd/s-l1600.jpg",
@@ -23453,14 +24648,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0492-P01"
+    "F0492-P01",
+    "SPEC-0486",
+    "U0465"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
@@ -23480,7 +24678,7 @@
     "U0094"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/H4wAAeSwIihqJ9Kd/s-l1600.jpg",
@@ -23490,14 +24688,34 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0311-P02"
+    "F0311-P02",
+    "SPEC-0117"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/HWAAAOSwCFhmfJaN/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0150",
+    "U0431"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/IZ0AAeSwl~ZplBcJ/s-l1600.jpg",
@@ -23507,14 +24725,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0034-P02"
+    "F0034-P02",
+    "SPEC-0106"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/IqwAAOSwYPtih0RB/s-l1600.jpg",
@@ -23573,7 +24793,25 @@
     "U0527"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/LQ8AAeSwvPRp6784/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0148",
+    "U0559"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/MRAAAeSwQw5qVjfE/s-l1600.jpg",
@@ -23583,14 +24821,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0414-P01"
+    "F0414-P01",
+    "SPEC-0485",
+    "U0582"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/NTwAAOSwREVhTZRC/s-l1600.jpg",
@@ -23619,14 +24860,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0371-P01"
+    "F0371-P01",
+    "SPEC-0484",
+    "U0640"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
@@ -23636,14 +24880,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0385-P02"
+    "F0385-P02",
+    "SPEC-0113"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg",
@@ -23673,14 +24919,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0073-P01"
+    "F0073-P01",
+    "SPEC-0153",
+    "U0513"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
@@ -23707,14 +24956,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0495-P01"
+    "F0495-P01",
+    "SPEC-0487",
+    "U0647"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/VSAAAOSwV6pnD7GI/s-l1600.webp",
@@ -23727,13 +24979,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CN:CS4DaC:342/414:base",
-    "SPEC-0156"
+    "SPEC-0156",
+    "U0655"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
@@ -23762,12 +25015,13 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0093-P01"
+    "F0093-P01",
+    "SPEC-0056"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
@@ -23780,12 +25034,13 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0166-P02"
+    "F0166-P02",
+    "SPEC-0055"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 2
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/cxcAAOSwi6ZiAqH1/s-l1600.jpg",
@@ -23805,7 +25060,7 @@
     "U0527"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/do0AAOSw~-RmRu8w/s-l1600.jpg",
@@ -23815,14 +25070,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0320-P01"
+    "F0320-P01",
+    "SPEC-0483",
+    "U0522"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
@@ -23834,12 +25092,13 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0148-P01"
+    "F0148-P01",
+    "SPEC-0054"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
@@ -23849,14 +25108,18 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 4,
    "stableIds": [
-    "F0083-P02"
+    "F0083-P01",
+    "F0083-P02",
+    "SPEC-0149",
+    "U0431"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
@@ -23877,6 +25140,24 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/ggcAAeSwa3Vpa1kc/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0152",
+    "U0503"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -23893,7 +25174,7 @@
     "U0246"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",
@@ -23903,14 +25184,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0066-P01"
+    "F0066-P01",
+    "SPEC-0147",
+    "U0559"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/itEAAOSwaLhiAqH7/s-l1600.jpg",
@@ -23930,7 +25214,7 @@
     "U0527"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/jSkAAOSwoeloDpxQ/s-l1600.jpg",
@@ -23950,7 +25234,7 @@
     "U0244"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
@@ -23970,7 +25254,7 @@
     "U0122"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",
@@ -24000,14 +25284,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0149-P01"
+    "F0149-P01",
+    "SPEC-0481",
+    "U0643"
    ],
    "retrievedAt": "2026-09-03",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
@@ -24027,7 +25314,7 @@
     "U0122"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg",
@@ -24114,14 +25401,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0562-P01"
+    "F0562-P01",
+    "SPEC-0052"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
@@ -24158,6 +25447,24 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/zdEAAeSwOqxqHUXB/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0151",
+    "U0503"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -24165,14 +25472,16 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0094-P02"
+    "F0094-P02",
+    "SPEC-0046"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/386929037_1_1777783357_w480.jpg",
@@ -24239,14 +25548,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0346-P01"
+    "F0346-P01",
+    "SPEC-0448",
+    "U0548"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/411963518_1_1781756877_w480.jpg",
@@ -24275,14 +25587,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0340-P01"
+    "F0340-P01",
+    "SPEC-0446",
+    "U0511"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/416373605_1_1782484118_w480.jpg",
@@ -24311,14 +25626,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0364-P01"
+    "F0364-P01",
+    "SPEC-0453",
+    "U0173"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
@@ -24338,7 +25656,7 @@
     "U0790"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/421867656_1_1787253313_w480.jpg",
@@ -24358,6 +25676,24 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/421876007_1_1786944583_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0452",
+    "U0168"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/423230156_1_1786302841_w480.jpg",
@@ -24387,14 +25723,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0335-P02"
+    "F0335-P02",
+    "SPEC-0454",
+    "U0202"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/423487583_1_1786404365_w480.jpg",
@@ -24418,6 +25757,24 @@
    "usageCount": 7
   },
   {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/423858186_1_1787118223_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0450",
+    "U0633"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -24425,14 +25782,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0355-P02"
+    "F0355-P02",
+    "SPEC-0456",
+    "U0291"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/425468617_1_1787834121_w480.jpg",
@@ -24442,14 +25802,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0343-P01"
+    "F0343-P01",
+    "SPEC-0447",
+    "U0287"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/425674631_1_1787968532_w480.jpg",
@@ -24459,14 +25822,17 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0325-P02"
+    "F0325-P02",
+    "SPEC-0451",
+    "U0344"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 1
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/426224532_1_1787819127_w480.jpg",
@@ -24507,6 +25873,24 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/427352825_1_1788084118_w480.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0455",
+    "U0532"
+   ],
+   "retrievedAt": "2026-08-30",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -24514,14 +25898,34 @@
     "Seller listing photograph"
    ],
    "dimensions": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0636-P01"
+    "F0636-P01",
+    "SPEC-0057"
    ],
    "retrievedAt": "2026-08-26",
-   "usageCount": 1
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0140-P01",
+    "SPEC-0053"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://shopee.tw/product/16896213/51412187955",
@@ -24535,15 +25939,16 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0037-P01",
     "SPEC-0322",
     "TW:CLF:016/032:base",
+    "U0441",
     "override:tw-clf016-shopee-d"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://shopee.tw/product/4914178/22786197647",
@@ -24557,15 +25962,16 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0037-P01",
     "SPEC-0320",
     "TW:CLF:016/032:base",
+    "U0441",
     "override:tw-clf016-shopee-b"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://shopee.tw/product/6777510/50602680694",
@@ -24579,15 +25985,16 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0037-P01",
     "SPEC-0321",
     "TW:CLF:016/032:base",
+    "U0441",
     "override:tw-clf016-shopee-c"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://shopee.tw/product/9736187/25206242683",
@@ -24601,15 +26008,16 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0037-P01",
     "SPEC-0319",
     "TW:CLF:016/032:base",
+    "U0441",
     "override:tw-clf016-shopee-a"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://shpnpokestore.de/cdn/shop/files/F4A76B27-1CFF-4B56-9964-4FCED20B2D52.jpg?v=1759855302&width=1445",
@@ -24661,10 +26069,69 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0598-P01",
     "SPEC-0144",
     "U0452"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://www.ebay.co.uk/itm/397876834888",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "SPEC-0147",
+    "SPEC-0148",
+    "U0559"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/117384644583",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0484",
+    "U0640"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/127702710280",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0385-P02",
+    "SPEC-0113"
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 4
@@ -24680,14 +26147,34 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0165-P01",
     "SPEC-0129",
     "SPEC-0130",
     "U0122"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 8
+   "usageCount": 12
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/167729662724",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0153",
+    "U0513"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.ebay.com/itm/177940547168",
@@ -24700,13 +26187,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0173-P01",
     "SPEC-0120",
     "U0094"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.ebay.com/itm/224621405527",
@@ -24747,7 +26235,44 @@
    "usageCount": 4
   },
   {
-   "canonicalUrl": "https://www.ebay.com/itm/356156650452",
+   "canonicalUrl": "https://www.ebay.com/itm/227367215820",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "SPEC-0151",
+    "SPEC-0152",
+    "U0503"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/235807084646",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0148-P01",
+    "SPEC-0054"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/257574042846",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
    "sourceTypes": [
@@ -24759,10 +26284,220 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
+    "F0562-P01",
+    "SPEC-0052"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/318581147040",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0485",
+    "U0582"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/335112243811",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0486",
+    "U0465"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/356156650452",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
     "CN:CS4DaC:342/414:base",
-    "SPEC-0156"
+    "SPEC-0156",
+    "U0655"
    ],
    "retrievedAt": "2026-08-27",
+   "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/356707199467",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
+    "F0083-P01",
+    "SPEC-0149",
+    "SPEC-0150",
+    "U0431"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 8
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/358744944023",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0468",
+    "U0503"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/366541317089",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0093-P01",
+    "SPEC-0056"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/386908467357",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0487",
+    "U0647"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/387286965530",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0483",
+    "U0522"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/388365217371",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0482",
+    "U0585"
+   ],
+   "retrievedAt": "2026-09-03",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/397923018972",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0166-P02",
+    "SPEC-0055"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/398270461415",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0481",
+    "U0643"
+   ],
+   "retrievedAt": "2026-09-03",
    "usageCount": 4
   },
   {
@@ -24813,13 +26548,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0137-P02",
     "SPEC-0124",
     "U0244"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.ebay.de/itm/366600950681",
@@ -24891,15 +26627,16 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
+    "F0116-P02",
     "SPEC-0140",
     "SPEC-0141",
     "SPEC-0142",
     "U0527"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 12
+   "usageCount": 18
   },
   {
    "canonicalUrl": "https://www.ebay.fr/itm/336572623072",
@@ -24923,6 +26660,44 @@
    "usageCount": 12
   },
   {
+   "canonicalUrl": "https://www.ebay.it/itm/127694028517",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0034-P02",
+    "SPEC-0106"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.ebay.it/itm/174939387384",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0009-P01",
+    "SPEC-0466",
+    "U0297"
+   ],
+   "retrievedAt": "2026-09-01",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://www.ebay.it/itm/287396391988",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -24932,13 +26707,71 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0138-P01",
     "SPEC-0465",
     "U0246"
    ],
    "retrievedAt": "2026-09-01",
-   "usageCount": 2
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.ebay.it/itm/398044139298",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0311-P02",
+    "SPEC-0117"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0636-P01",
+    "SPEC-0057"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://www.fanaticscollect.com/buy-now/e9048304-5bf4-46ba-a471-47edd15fc986/2015-pokemon-russian-xy-breakthrough-snorlax-118-cgc-8-nm-mt",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0024-P01",
+    "SPEC-0047"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.lotticards.de/Generationen",
@@ -24951,13 +26784,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0137-P01",
     "SPEC-0123",
     "U0244"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",
@@ -24977,7 +26811,7 @@
     "U0244"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
@@ -24990,13 +26824,14 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "SPEC-0323",
-    "TW:S10a F:077/071:base"
+    "TW:S10a F:077/071:base",
+    "U0169"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.nacg.tw/product-details.php?id=149595",
@@ -25011,15 +26846,16 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0331-P01",
     "SPEC-0323",
     "TW:S10a F:077/071:base",
+    "U0169",
     "override:tw-s10a077-nacg"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.ruten.com.tw/item/22223353127192",
@@ -25033,15 +26869,35 @@
     "finish-override",
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "F0331-P01",
     "SPEC-0324",
     "TW:S10a F:077/071:base",
+    "U0169",
     "override:tw-s10a077-ruten"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
+  },
+  {
+   "canonicalUrl": "https://www.vinted.pl/items/9302907930-snorlax-37130-reverse-holo-diament-i-perla",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0094-P02",
+    "SPEC-0046"
+   ],
+   "retrievedAt": "2026-08-26",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://snkrdunk.com/en/trading-cards/used/listings/01KEKJJGWGHJHMN4EV1C2J8CXN",

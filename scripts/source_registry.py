@@ -796,6 +796,7 @@ def resolve_evidence_provider(
 
 SPECIMEN_SOURCE_TYPES = {
     "collection owner": "Owner-supplied physical card photograph",
+    "collection-owner supplied source image": "Owner-supplied physical card photograph",
     "third-party retailer": "Retail listing",
     "third-party seller": "Seller listing photograph",
     "third-party scan archive": "Third-party scan archive",
@@ -807,13 +808,47 @@ SPECIMEN_SOURCE_TYPES = {
 }
 
 
-def record_corroborating_specimens(
+def registry_claim_ids(units: list[dict], source_first: list[dict], finish_units: list[dict],
+                       reviewed_graph: dict | None = None) -> set[str]:
+    """Resolve citation targets from upstream canonical stores, without grading their evidence."""
+    # The retained graph base owns reviewed claims. Its generated physical slice is downstream
+    # of this registry and must not feed back into reference resolution.
+    reviewed_ids = {row["entityId"] for row in (reviewed_graph or {}).get("entities", [])
+                    if row["entityType"] == "candidate-claim"
+                    and row["origin"] != "physical-evidence-projection"}
+    return ({unit["unitId"] for unit in units}
+            | {row["printId"] for row in source_first}
+            | {printing["printingId"] for unit in finish_units for printing in unit["printings"]}
+            | reviewed_ids)
+
+
+def record_product_render_context(specimen: dict, references: list[str], units: dict,
+                                  record: Callable) -> bool:
+    """Attach an unlocated historical render to its existing claim, never invent image authority."""
+    if specimen.get("inspectedFrom") != "product image" or any(
+        provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")
+    ):
+        return False
+    if not all(ref in units for ref in references):
+        return False
+    for ref in references:
+        unit = units[ref]
+        for stable_id in (ref, specimen["specimenId"]):
+            record(unit.get("sourceUrl"), "Referenced product render (context only); " + str(unit.get("sourceType")),
+                   "language", stable_id, (unit.get("checkedAt") or "")[:10] or None,
+                   provider_id=unit.get("providerId"))
+    return True
+
+
+def record_linked_specimens(
     specimens: list[dict[str, Any]], units: list[dict[str, Any]],
     record: Callable[..., None], source_first: list[dict[str, Any]] = (),
+    finish_units: list[dict[str, Any]] = (),
+    reviewed_graph: dict | None = None,
 ) -> None:
     """Project linked identity and physical evidence without inferring corroboration."""
-    corroborated = {unit["unitId"] for unit in units if unit.get("corroborated") is True}
-    accepted = corroborated | {row["printId"] for row in source_first}
+    accepted = registry_claim_ids(units, source_first, finish_units, reviewed_graph)
+    units_by_id = {unit["unitId"]: unit for unit in units}
     direct: dict[str, set[str]] = defaultdict(set)
     for row in source_first:
         if row.get("specimenId"):
@@ -824,6 +859,8 @@ def record_corroborating_specimens(
                           | direct.get(specimen["specimenId"], set()))
         physical = specimen.get("physicalObservation") or {}
         if not unit_ids:
+            continue
+        if record_product_render_context(specimen, unit_ids, units_by_id, record):
             continue
         source_type = SPECIMEN_SOURCE_TYPES.get(
             str(specimen.get("heldBy", "")).casefold(),
@@ -837,7 +874,7 @@ def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: st
     urls = {provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")} - {None}
     for url in sorted(urls) or [None]:
         provider = specimen_provider(url, source_type)
-        dimension = specimen_identity_dimension(url, provider, surfaces)
+        dimension = card_evidence_dimension(url, provider, surfaces, "identity")
         for stable_id in [specimen["specimenId"], *unit_ids]:
             record_specimen_claim(url, source_type, provider, dimension, stable_id,
                                   specimen.get("recordedAt"), physical, record)
@@ -850,14 +887,15 @@ def specimen_surfaces() -> dict:
     return surfaces
 
 
-def specimen_identity_dimension(url: str | None, provider: str | None, surfaces: dict) -> str:
+def card_evidence_dimension(url: str | None, provider: str | None, surfaces: dict,
+                            preferred: str) -> str:
     from source_capabilities import route_evidence
     if provider is None:
         return "identity"  # The registry records an unresolved provider, never invents one.
     surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
     capabilities = {value for edge in surface["coverageEdges"] for value in edge["positiveEvidenceCapabilities"]}
     # Use the surface's existing positive card contract; never broaden it.
-    for dimension in ("identity", "card-release", "card-existence", "language"):
+    for dimension in (preferred, "identity", "card-release", "card-existence", "language"):
         if dimension in capabilities:
             return dimension
     return "identity"  # Unsupported evidence must still fail capability validation.
@@ -909,7 +947,7 @@ def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) 
     # A neighbouring page is not the inspected specimen's authority.
     urls = [] if provider == "inspected-specimen" else sorted(source_first_registry_urls(entry))
     for url in urls or [None]:
-        dimension = specimen_identity_dimension(url, provider, surfaces)
+        dimension = card_evidence_dimension(url, provider, surfaces, "card-release")
         record(url, "Positive source-first card record", dimension,
                entry["printId"], entry.get("retrievedAt"), provider_id=provider)
 
@@ -984,9 +1022,11 @@ def main() -> int:
                    unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
 
-    # Every specimen used to mark a unit corroborated must reach the source graph as identity
-    # evidence. Finish/edition observations remain separate and no absence capability is inferred.
-    record_corroborating_specimens(specimens, units, record, source_first["prints"])
+    # Citation resolution is independent of corroboration or the target's verdict.
+    # A linked observation neither confirms its target nor becomes independent agreement.
+    reviewed_graph = read_json(ROOT / "verification" / "authoritative_graph.json")
+    record_linked_specimens(specimens, units, record, source_first["prints"], finish_units,
+                           reviewed_graph)
 
     surfaces = specimen_surfaces()
     for entry in source_first["prints"]:

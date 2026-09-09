@@ -20,7 +20,7 @@
       "coverageEdges": 48,
       "absenceEdges": 0,
       "observations": 50,
-      "resolvedVerdictSources": 1534
+      "resolvedVerdictSources": 1591
     },
     "surfaceStates": {
       "active": 19,
@@ -5689,26 +5689,30 @@
       ],
       "outcome": "The retained exact product image visibly establishes the Japanese SM-P 297 card and its pictured finish only.",
       "rawRecordRef": "verification/source_registry.json:https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
-      "rawRecordHash": "sha256:56bdaa116cac7cfc766611f98e1ac2a1fa78441f6f8cdbb51445dd6d1ea28557",
+      "rawRecordHash": "sha256:10daf56446bcfc02fff4c30fa62fc1726906873e41460c785671a2356bb144e1",
       "rawRecord": {
         "canonicalUrl": "https://product-images.s3.cardmarket.com/51/SM-P/470044/470044.jpg",
         "nonUrlEvidenceId": null,
         "providerId": "cardmarket-product-image",
         "sourceTypes": [
           "Cardmarket product image",
-          "Inspected physical specimen photograph"
+          "Inspected physical specimen photograph",
+          "retained Cardmarket product scan"
         ],
         "dimensions": [
+          "card-existence",
           "finish",
           "image"
         ],
-        "stableIdCount": 2,
+        "stableIdCount": 4,
         "stableIds": [
           "F0400-P01",
-          "SM-P 297 base"
+          "SM-P 297 base",
+          "SPEC-0189",
+          "U0626"
         ],
         "retrievedAt": "2026-08-28",
-        "usageCount": 2
+        "usageCount": 4
       }
     },
     {
@@ -6009,7 +6013,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:bcaf1407aebbd7bc8aced8d5c0730785dcf6f1edde6744a173ad8a3a74acbc2a",
+      "rawRecordHash": "sha256:fe15069588a2ae945dc479e5e8c185c2fcb7171a695073d03c7173a25d39bb99",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -6022,7 +6026,8 @@
           "Owner attestation (domain expert)",
           "Owner attestation (domain expert) + set release schedule",
           "Owner attestation (domain expert); localized product image",
-          "Owner attestation plus downloaded scan review"
+          "Owner attestation plus downloaded scan review",
+          "Referenced product render (context only); Owner attestation (domain expert); localized product image"
         ],
         "dimensions": [
           "edition",
@@ -6030,7 +6035,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 101,
+        "stableIdCount": 116,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -6097,13 +6102,25 @@
           "F0616-P01",
           "F0616-P02",
           "ID:AC3a:145/205:base",
+          "SPEC-0022",
+          "SPEC-0023",
+          "SPEC-0053",
+          "SPEC-0054",
+          "SPEC-0056",
+          "SPEC-0105",
+          "SPEC-0108",
           "SPEC-0426",
           "SPEC-0427",
           "SPEC-0428",
           "SPEC-0429",
           "SPEC-0430",
           "SPEC-0465",
+          "SPEC-0466",
+          "SPEC-0470",
+          "SPEC-0471",
+          "SPEC-0472",
           "SPEC-0473",
+          "SPEC-0474",
           "SPEC-0480",
           "TH:AS5a:142/184:base",
           "TW:AS5a:142:base",
@@ -6111,12 +6128,15 @@
           "U0098",
           "U0099",
           "U0246",
+          "U0255",
+          "U0297",
           "U0311",
           "U0312",
           "U0313",
           "U0314",
           "U0433",
           "U0467",
+          "U0503",
           "U0616",
           "U0617",
           "U0618",
@@ -6135,7 +6155,7 @@
           "override:owner-svp184-western-prerelease-variants"
         ],
         "retrievedAt": "2026-09-09",
-        "usageCount": 109
+        "usageCount": 155
       }
     },
     {
@@ -6156,7 +6176,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:a5046a7ef2257f8a9a7ebc8f44e9536bf5f64bd1c7b418c492722eee3f01abdf",
+      "rawRecordHash": "sha256:b589ad44645eb0addd7fbd064690092903ceec5b985d1b2cfe7cfb6245643508",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -6172,18 +6192,20 @@
           "Positive source-first card record",
           "Seller listing photograph",
           "Third-party scan archive",
-          "owner photograph"
+          "owner photograph",
+          "retained Cardmarket product scan"
         ],
         "dimensions": [
           "finish",
           "identity",
           "language"
         ],
-        "stableIdCount": 61,
+        "stableIdCount": 227,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
           "F0125-P02",
+          "F0174-P01",
           "F0247-P02",
           "F0291-P02",
           "F0294-P02",
@@ -6194,7 +6216,9 @@
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
+          "F0604-P02",
           "F0615-P03",
+          "F0634-P01",
           "ID:SM-P:166:base",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
@@ -6206,45 +6230,208 @@
           "KR:xsv2a:143/165:base",
           "SPEC-0001",
           "SPEC-0002",
+          "SPEC-0003",
+          "SPEC-0004",
           "SPEC-0005",
           "SPEC-0006",
           "SPEC-0014",
           "SPEC-0019",
           "SPEC-0020",
+          "SPEC-0021",
           "SPEC-0026",
           "SPEC-0028",
           "SPEC-0031",
           "SPEC-0038",
+          "SPEC-0042",
+          "SPEC-0043",
+          "SPEC-0058",
+          "SPEC-0059",
+          "SPEC-0060",
           "SPEC-0061",
+          "SPEC-0062",
+          "SPEC-0063",
+          "SPEC-0064",
+          "SPEC-0065",
+          "SPEC-0066",
+          "SPEC-0067",
+          "SPEC-0068",
+          "SPEC-0069",
+          "SPEC-0070",
+          "SPEC-0071",
+          "SPEC-0072",
+          "SPEC-0073",
+          "SPEC-0074",
+          "SPEC-0075",
+          "SPEC-0076",
+          "SPEC-0077",
+          "SPEC-0078",
+          "SPEC-0079",
+          "SPEC-0080",
+          "SPEC-0081",
+          "SPEC-0082",
+          "SPEC-0087",
+          "SPEC-0088",
+          "SPEC-0089",
+          "SPEC-0090",
+          "SPEC-0093",
+          "SPEC-0094",
+          "SPEC-0095",
+          "SPEC-0096",
+          "SPEC-0097",
+          "SPEC-0098",
+          "SPEC-0099",
+          "SPEC-0100",
+          "SPEC-0101",
+          "SPEC-0102",
+          "SPEC-0103",
+          "SPEC-0104",
           "SPEC-0145",
+          "SPEC-0189",
+          "SPEC-0190",
+          "SPEC-0191",
+          "SPEC-0192",
+          "SPEC-0193",
+          "SPEC-0194",
+          "SPEC-0195",
+          "SPEC-0196",
+          "SPEC-0197",
+          "SPEC-0198",
+          "SPEC-0199",
+          "SPEC-0200",
+          "SPEC-0201",
+          "SPEC-0202",
+          "SPEC-0203",
+          "SPEC-0204",
+          "SPEC-0205",
+          "SPEC-0206",
+          "SPEC-0207",
+          "SPEC-0208",
+          "SPEC-0209",
+          "SPEC-0210",
+          "SPEC-0211",
+          "SPEC-0212",
+          "SPEC-0213",
+          "SPEC-0214",
+          "SPEC-0215",
+          "SPEC-0216",
+          "SPEC-0217",
+          "SPEC-0218",
+          "SPEC-0219",
+          "SPEC-0220",
+          "SPEC-0221",
+          "SPEC-0222",
+          "SPEC-0223",
+          "SPEC-0224",
+          "SPEC-0225",
+          "SPEC-0226",
+          "SPEC-0227",
+          "SPEC-0228",
+          "SPEC-0229",
+          "SPEC-0230",
+          "SPEC-0231",
+          "SPEC-0232",
+          "SPEC-0233",
+          "SPEC-0234",
+          "SPEC-0235",
           "SPEC-0409",
           "SPEC-0410",
           "SPEC-0411",
+          "SPEC-0467",
+          "SPEC-0469",
+          "SPEC-0470",
+          "SPEC-0471",
+          "SPEC-0472",
+          "SPEC-0476",
+          "SPEC-0479",
           "SPEC-0505",
           "TH:SM-P:083:base",
           "TW:AS5a:222/184:base",
           "TW:SM-P:053:base",
           "TW:sc1D F:133/164:base",
           "U0100",
+          "U0110",
+          "U0116",
+          "U0167",
+          "U0172",
           "U0189",
           "U0192",
+          "U0201",
+          "U0224",
           "U0228",
           "U0229",
           "U0230",
           "U0231",
           "U0246",
+          "U0271",
+          "U0286",
+          "U0290",
           "U0294",
+          "U0305",
+          "U0316",
+          "U0322",
+          "U0336",
+          "U0343",
+          "U0364",
+          "U0378",
+          "U0380",
+          "U0399",
+          "U0401",
+          "U0412",
+          "U0420",
+          "U0427",
+          "U0439",
           "U0452",
+          "U0458",
+          "U0465",
+          "U0476",
+          "U0503",
+          "U0504",
+          "U0507",
+          "U0510",
+          "U0522",
+          "U0523",
+          "U0531",
+          "U0540",
+          "U0544",
+          "U0547",
+          "U0556",
+          "U0560",
           "U0561",
+          "U0575",
+          "U0578",
+          "U0582",
+          "U0585",
+          "U0600",
+          "U0605",
+          "U0608",
+          "U0609",
+          "U0615",
+          "U0622",
+          "U0626",
           "U0627",
+          "U0628",
+          "U0632",
+          "U0636",
+          "U0640",
+          "U0643",
+          "U0647",
+          "U0652",
+          "U0656",
+          "U0660",
           "U0661",
+          "U0663",
+          "U0679",
+          "U0751",
           "U0752",
+          "U0769",
+          "U0771",
           "U0772",
+          "U0775",
           "U0780",
           "U0785"
         ],
         "retrievedAt": "2026-09-09",
-        "usageCount": 90
+        "usageCount": 483
       }
     },
     {
@@ -6265,7 +6452,7 @@
       ],
       "outcome": "The retained seller photograph visibly establishes the Dutch first-edition non-holo printing of Jungle 27/64.",
       "rawRecordRef": "verification/source_registry.json:https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
-      "rawRecordHash": "sha256:048a34ae9ee7acdab169c0baf9352ac90499f2b3ff4672d8f483e7f61c88e34f",
+      "rawRecordHash": "sha256:049bc5c92066f689a503d15513f5eb713d638536239ae6ad57c3c84d91302835",
       "rawRecord": {
         "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
         "nonUrlEvidenceId": null,
@@ -6274,14 +6461,16 @@
           "Seller listing photograph"
         ],
         "dimensions": [
-          "finish"
+          "finish",
+          "identity"
         ],
-        "stableIdCount": 1,
+        "stableIdCount": 2,
         "stableIds": [
-          "F0174-P01"
+          "F0174-P01",
+          "SPEC-0042"
         ],
         "retrievedAt": "2026-08-24",
-        "usageCount": 1
+        "usageCount": 5
       }
     },
     {
@@ -6303,7 +6492,7 @@
       ],
       "outcome": "The retained eBay seller photograph visibly establishes the Portuguese holo printing of Rocket's Snorlax ex 104/109.",
       "rawRecordRef": "verification/source_registry.json:https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
-      "rawRecordHash": "sha256:d137f70606b4d6907f85b2592962c8d873bebec793b252de294e7870e88c53a0",
+      "rawRecordHash": "sha256:b6e592409344345262060c0d65249665193926b1059e9b07ccde31d45a170042",
       "rawRecord": {
         "canonicalUrl": "https://i.ebayimg.com/images/g/w98AAeSw9fxqNICs/s-l1600.jpg",
         "nonUrlEvidenceId": null,
@@ -6312,14 +6501,16 @@
           "Seller listing photograph"
         ],
         "dimensions": [
-          "finish"
+          "finish",
+          "identity"
         ],
-        "stableIdCount": 1,
+        "stableIdCount": 2,
         "stableIds": [
-          "F0562-P01"
+          "F0562-P01",
+          "SPEC-0052"
         ],
         "retrievedAt": "2026-08-26",
-        "usageCount": 1
+        "usageCount": 5
       }
     },
     {
@@ -10820,6 +11011,18 @@
       ]
     },
     {
+      "sourceKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
+      "providerId": "cardmarket",
+      "surfaceId": "cardmarket-products",
+      "capabilityEdgeIds": [
+        "cardmarket-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "product"
+      ]
+    },
+    {
       "sourceKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Legendary-Collection/Snorlax-LC64",
       "providerId": "cardmarket",
       "surfaceId": "cardmarket-products",
@@ -12454,7 +12657,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -12466,7 +12670,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -12503,7 +12708,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -12515,7 +12721,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -12552,6 +12759,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12564,6 +12772,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12576,6 +12785,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12588,6 +12798,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12601,6 +12812,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12614,6 +12826,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12627,6 +12840,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12639,6 +12853,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12651,6 +12866,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12663,6 +12879,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image",
         "language"
       ]
@@ -12676,6 +12893,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12688,6 +12906,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12700,6 +12919,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12712,6 +12932,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12725,6 +12946,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12738,6 +12960,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12750,6 +12973,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12762,6 +12986,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12775,6 +13000,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12788,6 +13014,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12801,6 +13028,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12813,6 +13041,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12826,6 +13055,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12838,6 +13068,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12850,6 +13081,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12863,6 +13095,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12876,6 +13109,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12889,6 +13123,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12902,6 +13137,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12915,6 +13151,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12928,6 +13165,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12941,6 +13179,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -12953,6 +13192,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12966,6 +13206,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12979,6 +13220,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -12992,6 +13234,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13004,6 +13247,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13016,6 +13260,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13028,6 +13273,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13040,6 +13286,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -13053,6 +13300,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -13066,6 +13314,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -13079,6 +13328,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -13092,6 +13342,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13104,6 +13355,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13116,6 +13368,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13128,6 +13381,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "image"
       ]
     },
@@ -13140,6 +13394,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "image"
       ]
@@ -13496,7 +13751,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -13796,7 +14052,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -13808,7 +14065,32 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://excaliburtcg.co.uk/cdn/shop/files/108_612bb9b0-6fe3-4557-8c5d-906ac9944efe.png?v=1784809179&width=533",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://excaliburtcg.co.uk/collections/set-csvl1c",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {
@@ -13845,7 +14127,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -13894,7 +14177,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -13906,7 +14190,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -14007,7 +14292,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -14095,6 +14381,102 @@
       ]
     },
     {
+      "sourceKey": "https://www.instagram.com/p/DO6tQd5jNK8",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=10",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=11",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=12",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=13",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=17",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=5",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.youtube.com/watch?v=t0aMSK32ymQ&t=346s",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -14103,7 +14485,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -17012,7 +17395,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17024,7 +17407,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17036,7 +17419,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17048,7 +17431,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17060,7 +17443,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17072,7 +17455,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17084,7 +17467,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17096,7 +17479,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17108,7 +17491,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17120,6 +17503,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17133,6 +17517,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17146,6 +17531,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17159,6 +17545,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17172,6 +17559,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17185,6 +17573,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17198,6 +17587,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17211,6 +17601,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17224,6 +17615,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17237,7 +17629,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17249,7 +17641,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17261,6 +17653,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17274,6 +17667,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17287,6 +17681,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17300,7 +17695,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17312,7 +17707,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17324,6 +17719,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17337,7 +17733,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17349,7 +17745,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17361,6 +17757,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17387,7 +17784,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17399,7 +17796,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17411,7 +17808,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17423,7 +17820,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17435,7 +17832,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17447,6 +17844,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17460,7 +17858,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17472,7 +17870,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17484,6 +17882,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -17497,7 +17896,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17509,7 +17908,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17521,7 +17920,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17533,7 +17932,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17545,7 +17944,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17557,7 +17956,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17569,7 +17968,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17593,7 +17992,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "card-release"
       ]
     },
     {
@@ -17605,7 +18004,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language",
         "rarity"
       ]
@@ -17619,7 +18018,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language",
         "rarity"
       ]
@@ -17633,7 +18032,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17646,7 +18045,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17659,7 +18058,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17672,6 +18071,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17685,7 +18085,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17698,7 +18098,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "set-membership"
       ]
     },
@@ -17711,7 +18111,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17724,7 +18124,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17737,7 +18137,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17750,7 +18150,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17763,7 +18163,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17776,6 +18176,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17789,7 +18190,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17802,6 +18203,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17815,7 +18217,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17828,7 +18230,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17841,7 +18243,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17854,6 +18256,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17867,6 +18270,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17880,6 +18284,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17893,7 +18298,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language",
         "rarity"
       ]
@@ -17907,7 +18312,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language",
         "rarity"
       ]
@@ -17921,7 +18326,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17934,6 +18339,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17947,7 +18353,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17960,6 +18366,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "language"
       ]
@@ -17973,7 +18380,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -17986,7 +18393,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language",
         "rarity"
       ]
@@ -18000,7 +18407,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18013,7 +18420,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18026,7 +18433,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18039,7 +18446,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18052,7 +18459,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18065,7 +18472,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18078,7 +18485,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18091,7 +18498,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18104,7 +18511,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18117,7 +18524,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18130,7 +18537,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18143,7 +18550,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18156,6 +18563,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-release",
         "identity",
         "rarity"
       ]
@@ -18169,7 +18577,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
+        "card-release",
         "language"
       ]
     },
@@ -18183,6 +18591,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "set-membership"
+      ]
+    },
+    {
+      "sourceKey": "https://image.pokemon.com.cn/wp-content/uploads/2025/09/68b581bfc64965fa84605ef01034e7714c1fb3a3.png?auth_key=1787864011-c3c391b112e24f00be4b06179d924d51-0-7f39f61eab18c34a7b56d314d38a10ad",
+      "providerId": "pokemon-cn-official",
+      "surfaceId": "pokemon-cn-product-pages",
+      "capabilityEdgeIds": [
+        "pokemon-cn-product-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-existence"
       ]
     },
     {
@@ -18272,6 +18692,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "card-existence",
         "finish",
         "finish-override"
       ]
@@ -20467,7 +20888,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20523,6 +20945,19 @@
       ]
     },
     {
+      "sourceKey": "https://collectorworth.com/cards/snorlax-15",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20531,7 +20966,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20559,6 +20995,31 @@
       ]
     },
     {
+      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-it-mint",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-reverse-it-mint",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20579,7 +21040,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20670,6 +21132,19 @@
       ]
     },
     {
+      "sourceKey": "https://globalbunjang.com/product/408219334",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://globalbunjang.com/product/411963518",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20682,6 +21157,19 @@
       ]
     },
     {
+      "sourceKey": "https://globalbunjang.com/product/414684191",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://globalbunjang.com/product/416373605",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20690,6 +21178,19 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://globalbunjang.com/product/418966418",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -20719,6 +21220,18 @@
       ]
     },
     {
+      "sourceKey": "https://globalbunjang.com/product/421876007",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://globalbunjang.com/product/423230156",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20733,7 +21246,71 @@
       ]
     },
     {
+      "sourceKey": "https://globalbunjang.com/product/423230216",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://globalbunjang.com/product/423487583",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://globalbunjang.com/product/423858186",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://globalbunjang.com/product/425341258",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://globalbunjang.com/product/425468617",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://globalbunjang.com/product/425674631",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -20770,6 +21347,18 @@
       ]
     },
     {
+      "sourceKey": "https://globalbunjang.com/product/427352825",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/1vUAAeSw5Jpp7Xrg/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20778,7 +21367,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20808,6 +21398,18 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/AjoAAeSww31qRcgd/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -20878,7 +21480,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20903,7 +21506,20 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/HWAAAOSwCFhmfJaN/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {
@@ -20915,7 +21531,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20958,6 +21575,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/LQ8AAeSwvPRp6784/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/MRAAAeSwQw5qVjfE/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -20966,7 +21595,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -20991,7 +21621,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21003,7 +21634,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21028,7 +21660,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21052,7 +21685,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21127,7 +21761,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21151,11 +21786,24 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/ggcAAeSwa3Vpa1kc/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -21187,7 +21835,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21251,7 +21900,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21327,7 +21977,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21355,6 +22006,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/zdEAAeSwOqxqHUXB/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -21363,7 +22026,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21412,7 +22076,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21436,7 +22101,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21460,7 +22126,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21478,6 +22145,18 @@
     },
     {
       "sourceKey": "https://media.bunjang.co.kr/product/421867656_1_1787253313_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/421876007_1_1786944583_w480.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -21510,7 +22189,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21527,6 +22207,18 @@
       ]
     },
     {
+      "sourceKey": "https://media.bunjang.co.kr/product/423858186_1_1787118223_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://media.bunjang.co.kr/product/425341258_1_1787490051_w480.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -21535,7 +22227,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21547,7 +22240,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21559,7 +22253,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
       ]
     },
     {
@@ -21587,6 +22282,18 @@
       ]
     },
     {
+      "sourceKey": "https://media.bunjang.co.kr/product/427352825_1_1788084118_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -21595,7 +22302,20 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish"
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {
@@ -21694,7 +22414,59 @@
       ]
     },
     {
+      "sourceKey": "https://www.ebay.co.uk/itm/397876834888",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/117384644583",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/127702710280",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.ebay.com/itm/137311196693",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/167729662724",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -21746,7 +22518,172 @@
       ]
     },
     {
+      "sourceKey": "https://www.ebay.com/itm/227367215820",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/235807084646",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/257574042846",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/318581147040",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/335112243811",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.ebay.com/itm/356156650452",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/356707199467",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/358744944023",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/366541317089",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/386908467357",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/387286965530",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/388365217371",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/397923018972",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/398270461415",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -21862,6 +22799,31 @@
       ]
     },
     {
+      "sourceKey": "https://www.ebay.it/itm/127694028517",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.it/itm/174939387384",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.ebay.it/itm/287396391988",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -21870,6 +22832,45 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.it/itm/398044139298",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.fanaticscollect.com/buy-now/e9048304-5bf4-46ba-a471-47edd15fc986/2015-pokemon-russian-xy-breakthrough-snorlax-118-cgc-8-nm-mt",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -21937,6 +22938,19 @@
       "dimensions": [
         "finish",
         "finish-override",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.vinted.pl/items/9302907930-snorlax-37130-reverse-holo-diament-i-perla",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },

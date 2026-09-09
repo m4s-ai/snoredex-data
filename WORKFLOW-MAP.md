@@ -63,6 +63,11 @@ The following invariants apply to every path:
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |
 | `verification/card_discovery_adapters.json` | reviewed card-discovery inventory | Locality-aware card query slices and gaps | candidate card/release edges |
 
+The source registry resolves specimen citations against legacy units, admitted source-first
+prints, finish printing IDs and candidate claims in the graph's retained reviewed base. It does
+not consume the downstream `physical-evidence-projection` slice; citation resolution never
+depends on a confirmation or corroboration verdict.
+
 The source-first raw runs are retained transport evidence; refresh candidates are staging:
 
 - `verification/runs/source-adapters/`

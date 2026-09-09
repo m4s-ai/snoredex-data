@@ -53,6 +53,19 @@ def verify_source_first_specimen_registry():
         if row.get('specimenId'):
             assert indexed.get(row['specimenId'], set()) & indexed[print_id], (print_id, row['specimenId'])
     specimens = json.loads((ROOT / 'verification/specimens.json').read_text(encoding='utf-8'))['specimens']
+    units = json.loads((ROOT / 'verification/units.json').read_text(encoding='utf-8'))
+    finish_units = json.loads((ROOT / 'verification/finish_units.json').read_text(encoding='utf-8'))['units']
+    reviewed_graph = json.loads((ROOT / 'verification/authoritative_graph.json').read_text(encoding='utf-8'))
+    known_refs = registry.registry_claim_ids(units, list(prints.values()), finish_units, reviewed_graph)
+    assert 'CLAIM:positive:56aee25aabfce91a' in known_refs, 'retained reviewed claims are upstream inputs'
+    for specimen in specimens:
+        for ref in set(specimen.get('citedBy') or []) & known_refs:
+            assert indexed.get(specimen['specimenId'], set()) & indexed.get(ref, set()), (specimen['specimenId'], ref)
+    urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
+    for row in prints.values():
+        if row['providerId'] == 'pokemon-card-korea':
+            for url in registry.source_first_registry_urls(row):
+                assert 'card-release' in urls[registry.canonical_url(url)]['dimensions'], row['printId']
     items = json.loads((ROOT / 'collector_catalogue.json').read_text(encoding='utf-8'))['items']
     for specimen in specimens:
         number = int(specimen['specimenId'].split('-')[1])
@@ -79,16 +92,39 @@ def verify_source_first_specimen_registry():
                 'citedBy': ['print'], 'photographSource': 'https://example.org/card.jpg',
                 'recordedAt': '2026-09-09'}
     record = {'printId': 'print', 'corroborated': False}
-    registry.record_corroborating_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
     assert {call[3] for call in calls} == {'sample', 'print'}
     assert all(call[2] == 'identity' for call in calls)
     assert record['corroborated'] is False
     calls.clear()
     specimen['citedBy'] = []
     record['specimenId'] = specimen['specimenId']
-    registry.record_corroborating_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
     assert {call[3] for call in calls} == {'sample', 'print'}, "direct references need no reverse citation"
     assert record['corroborated'] is False
+    calls.clear()
+    unit = {'unitId': 'legacy', 'corroborated': False, 'status': 'pending'}
+    specimen['citedBy'] = ['legacy', 'F-test-P01', 'unresolved']
+    registry.record_linked_specimens([specimen], [unit], lambda *a, **kw: calls.append(a),
+        finish_units=[{'printings': [{'printingId': 'F-test-P01'}]}])
+    assert {call[3] for call in calls} == {'sample', 'legacy', 'F-test-P01'}
+    assert unit == {'unitId': 'legacy', 'corroborated': False, 'status': 'pending'}
+    graph_fixture = {'entities': [
+        {'entityType': 'candidate-claim', 'entityId': 'reviewed', 'origin': 'reviewed-evidence'},
+        {'entityType': 'candidate-claim', 'entityId': 'projected', 'origin': 'physical-evidence-projection'}]}
+    assert registry.registry_claim_ids([], [], [], graph_fixture) == {'reviewed'}, 'ignore downstream physical projection'
+    calls.clear()
+    korean_url = 'https://pokemoncard.co.kr/cards/detail/BS2010002030'
+    registry.record_source_first_identity({'providerId': 'pokemon-card-korea',
+        'sourceUrl': korean_url, 'printId': 'release'}, lambda *a, **kw: calls.append(a), registry.specimen_surfaces())
+    assert {call[2] for call in calls} == {'card-release'}
+    calls.clear()
+    specimen.update({'photographSource': korean_url, 'citedBy': ['legacy']})
+    registry.record_linked_specimens([specimen], [unit], lambda *a, **kw: calls.append(a))
+    assert {call[2] for call in calls} == {'identity'}
+    render_rows = [row for row in evidence if 'SPEC-0022' in row['stableIds']]
+    assert render_rows and all(row['providerId'] == 'owner-attestation' for row in render_rows)
+    assert all('identity' not in row['dimensions'] for row in render_rows), 'marketing render is not an inspected card'
     finish_calls = []
     registry.record_specimen_claim('https://example.org/card.jpg', 'Retail listing',
         'retailer-listing', 'identity', 'sample', '2026-09-09',
