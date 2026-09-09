@@ -59,6 +59,8 @@ def verify_source_first_specimen_registry():
     known_refs = registry.registry_claim_ids(units, list(prints.values()), finish_units, reviewed_graph)
     assert 'CLAIM:positive:56aee25aabfce91a' in known_refs, 'retained reviewed claims are upstream inputs'
     for specimen in specimens:
+        if specimen.get('physicalObservation'):
+            assert indexed.get(specimen['specimenId']), ('standalone observation omitted', specimen['specimenId'])
         for ref in set(specimen.get('citedBy') or []) & known_refs:
             assert indexed.get(specimen['specimenId'], set()) & indexed.get(ref, set()), (specimen['specimenId'], ref)
     urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
@@ -137,6 +139,35 @@ def verify_source_first_specimen_registry():
     verify_source_first_asset_authority(prints, evidence, registry)
     verify_retained_image_identity(specimens, evidence, registry)
     verify_observed_finish_attribution(specimens, registry)
+    verify_standalone_registry_observations(registry)
+
+
+def verify_standalone_registry_observations(registry):
+    direct = registry.direct_specimen_claims(
+        [{'unitId': 'U1', 'sourceRef': 'specimen:S1'}],
+        [{'printId': 'SF1', 'specimenId': 'S2', 'corroboratingSpecimenIds': ['S3']}],
+        {'entities': [
+            {'entityType': 'candidate-claim', 'entityId': 'C1', 'origin': 'reviewed', 'payload': {'specimenIds': ['S4']}},
+            {'entityType': 'candidate-claim', 'entityId': 'C2', 'origin': 'physical-evidence-projection', 'payload': {'specimenIds': ['S5']}}]})
+    assert direct == {'S1': {'U1'}, 'S2': {'SF1'}, 'S3': {'SF1'}, 'S4': {'C1'}}
+    calls = []
+    specimen = {'specimenId': 'SPEC-standalone', 'citedBy': ['unresolved'],
+                'physicalObservation': {'finish': 'holo'}, 'recordedAt': '2026-09-09',
+                'photographSource': 'https://example.org/card.jpg', 'heldBy': 'third-party seller'}
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append((a, kw)))
+    assert {a[3] for a, _ in calls} == {'SPEC-standalone'}, 'no invented printing or unresolved foreign claim'
+    assert {a[2] for a, _ in calls} == {'identity', 'finish'}
+    assert all(a[4] == '2026-09-09' for a, _ in calls)
+    assert specimen['citedBy'] == ['unresolved'], 'reference routing cannot admit a claim'
+    calls.clear()
+    specimen.pop('photographSource')
+    specimen['inspectedFrom'] = 'product image'
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append((a, kw)))
+    assert calls, 'an empty context-reference list cannot swallow a typed physical observation'
+    assert all(a[3] == 'SPEC-standalone' for a, _ in calls)
+    assert registry.specimen_provider('https://snkrdunk.com/apparels/200/', 'Seller listing photograph') == 'snkrdunk'
+    assert registry.specimen_provider('https://example.org/card.jpg', 'Seller listing photograph') == 'seller-listing-photo'
+    assert registry.specimen_provider('https://rocketcoll.com/products/example', 'Seller listing photograph') == 'seller-listing-photo'
 
 
 def verify_source_first_asset_authority(prints, evidence, registry):

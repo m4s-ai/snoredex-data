@@ -808,14 +808,17 @@ SPECIMEN_SOURCE_TYPES = {
 }
 
 
+def reviewed_candidate_claims(graph):
+    return [row for row in (graph or {}).get("entities", [])
+            if row["entityType"] == "candidate-claim" and row["origin"] != "physical-evidence-projection"]
+
+
 def registry_claim_ids(units: list[dict], source_first: list[dict], finish_units: list[dict],
                        reviewed_graph: dict | None = None) -> set[str]:
     """Resolve citation targets from upstream canonical stores, without grading their evidence."""
     # The retained graph base owns reviewed claims. Its generated physical slice is downstream
     # of this registry and must not feed back into reference resolution.
-    reviewed_ids = {row["entityId"] for row in (reviewed_graph or {}).get("entities", [])
-                    if row["entityType"] == "candidate-claim"
-                    and row["origin"] != "physical-evidence-projection"}
+    reviewed_ids = {row["entityId"] for row in reviewed_candidate_claims(reviewed_graph)}
     return ({unit["unitId"] for unit in units}
             | {row["printId"] for row in source_first}
             | {printing["printingId"] for unit in finish_units for printing in unit["printings"]}
@@ -837,7 +840,28 @@ def record_product_render_context(specimen: dict, references: list[str], units: 
             record(unit.get("sourceUrl"), "Referenced product render (context only); " + str(unit.get("sourceType")),
                    "language", stable_id, (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
-    return True
+    return bool(references)
+
+
+def specimen_claim_ids(specimen, accepted, direct) -> list[str]:
+    return sorted((set(specimen.get("citedBy") or []) & accepted)
+                  | direct.get(specimen["specimenId"], set()))
+
+
+def direct_specimen_claims(units, source_first, reviewed_graph) -> dict[str, set[str]]:
+    direct = defaultdict(set)
+    for unit in units:
+        source_ref = unit.get("sourceRef") or ""
+        if source_ref.startswith("specimen:"):
+            direct[source_ref.removeprefix("specimen:")].add(unit["unitId"])
+    for row in source_first:
+        ids = set(row.get("corroboratingSpecimenIds") or []) | {row.get("specimenId")}
+        for specimen_id in ids - {None}:
+            direct[specimen_id].add(row["printId"])
+    for row in reviewed_candidate_claims(reviewed_graph):
+        for specimen_id in row.get("payload", {}).get("specimenIds") or []:
+            direct[specimen_id].add(row["entityId"])
+    return direct
 
 
 def record_linked_specimens(
@@ -849,16 +873,12 @@ def record_linked_specimens(
     """Project linked identity and physical evidence without inferring corroboration."""
     accepted = registry_claim_ids(units, source_first, finish_units, reviewed_graph)
     units_by_id = {unit["unitId"]: unit for unit in units}
-    direct: dict[str, set[str]] = defaultdict(set)
-    for row in source_first:
-        if row.get("specimenId"):
-            direct[row["specimenId"]].add(row["printId"])
+    direct = direct_specimen_claims(units, source_first, reviewed_graph)
     surfaces = specimen_surfaces()
     for specimen in specimens:
-        unit_ids = sorted((set(specimen.get("citedBy") or []) & accepted)
-                          | direct.get(specimen["specimenId"], set()))
+        unit_ids = specimen_claim_ids(specimen, accepted, direct)
         physical = specimen.get("physicalObservation") or {}
-        if not unit_ids:
+        if not unit_ids and not physical:
             continue
         if record_product_render_context(specimen, unit_ids, units_by_id, record):
             continue
@@ -938,9 +958,7 @@ def record_specimen_claim(url, source_type, provider, dimension, stable_id, retr
 
 def specimen_provider(url: str | None, source_type: str) -> str | None:
     provider = resolve_provider(url, source_type)
-    if source_type == "Seller listing photograph" and provider not in {
-        "cardmarket", "cardmarket-listing-photo", "cardmarket-product-image"
-    }:
+    if source_type == "Seller listing photograph" and provider in {None, "retailer-listing"}:
         return "seller-listing-photo"
     return provider
 

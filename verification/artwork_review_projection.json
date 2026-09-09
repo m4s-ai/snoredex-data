@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-09",
-  "projectionVersion": "c4a563e2191240ef72578036f37fb0791b260433562ae3907cd2eaca46e88d1f",
+  "projectionVersion": "ba54c74f0966c0036a2c392e74b20011887dd75ca790cbdd1a147fdba6aa14a2",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 2,
     "cardReleases": 631,
     "physicalPrintings": 745,
-    "sourceObservations": 2776
+    "sourceObservations": 2879
   },
   "groups": [
     {
@@ -118,6 +118,17 @@
               "originalHash": "37fe3acbdf33fe75b63822afae28474d2ef39c210e6bb86cb13dfc98674004b9",
               "previewSrc": "images/previews/SPEC-0147.png?v=37fe3acbdf33fe75b63822afae28474d2ef39c210e6bb86cb13dfc98674004b9",
               "thumbnailSrc": "images/thumbs/SPEC-0147.png?v=37fe3acbdf33fe75b63822afae28474d2ef39c210e6bb86cb13dfc98674004b9"
+            },
+            {
+              "src": "verification/specimens/SPEC-0148.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0148",
+              "contentHash": "e0c835809a97711da3849d6568a8d9e2f946032c1936197fbd10ecaadea67683",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e0c835809a97711da3849d6568a8d9e2f946032c1936197fbd10ecaadea67683",
+              "previewSrc": "images/previews/SPEC-0148.png?v=e0c835809a97711da3849d6568a8d9e2f946032c1936197fbd10ecaadea67683",
+              "thumbnailSrc": "images/thumbs/SPEC-0148.png?v=e0c835809a97711da3849d6568a8d9e2f946032c1936197fbd10ecaadea67683"
             }
           ],
           "observations": [
@@ -138,6 +149,15 @@
               "evidence": "Complete front photograph of a CGC Pristine 10 Simplified Chinese Eevee & Snorlax GX CSM2.1C 054/045 card. The printed set code and number, Simplified Chinese text and CGC label establish the exact Golden Energy card; the reflective rainbow card face and CGC label's Holo designation establish its holo finish.",
               "contentHash": "4b2c17a58f638ec0a0e6530e091601857270bb18007ff745a98205df63314851",
               "image": "verification/specimens/SPEC-0147.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0148",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.co.uk/itm/397876834888",
+              "evidence": "Back photograph from the same eBay listing and CGC slab as SPEC-0147. The paired slab back and certification identity are retained separately so every listing photograph used in the assessment remains part of the data specification.",
+              "contentHash": "a158abede6f5b6f6e6cd9b29fe9069063449a233e62561f893c1517880d7d7a3",
+              "image": "verification/specimens/SPEC-0148.jpg"
             },
             {
               "observationId": "unit:U0559",
@@ -2389,6 +2409,17 @@
               "originalHash": "d063aef50742c0a61adc7fc9c4cf126c53affdf50a25787a032117e363dd7ff6",
               "previewSrc": "images/previews/SPEC-0250.png?v=d063aef50742c0a61adc7fc9c4cf126c53affdf50a25787a032117e363dd7ff6",
               "thumbnailSrc": "images/thumbs/SPEC-0250.png?v=d063aef50742c0a61adc7fc9c4cf126c53affdf50a25787a032117e363dd7ff6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0450.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0450",
+              "contentHash": "2c9831537c5f142db96945274542e422713a63691cce5b42f6610d4874e1f1a0",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "2c9831537c5f142db96945274542e422713a63691cce5b42f6610d4874e1f1a0",
+              "previewSrc": "images/previews/SPEC-0450.png?v=2c9831537c5f142db96945274542e422713a63691cce5b42f6610d4874e1f1a0",
+              "thumbnailSrc": "images/thumbs/SPEC-0450.png?v=2c9831537c5f142db96945274542e422713a63691cce5b42f6610d4874e1f1a0"
             }
           ],
           "observations": [
@@ -2409,6 +2440,15 @@
               "evidence": "Complete official Korean render for Eevee & Snorlax GX sm9 106/095. The printed Korean name, collector identity, attacks and rarity SR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "dad39ab8ce2b34d61c5279dbe5bd80fcac0b605525c870d23da9368e71cf8fa5",
               "image": "verification/specimens/SPEC-0250.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0450",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://globalbunjang.com/product/423858186",
+              "evidence": "Complete seller photograph of Korean Eevee & Snorlax GX. The Hangul name and rules text and printed sm9 106/095 SR identity establish the exact localized full-art V2 card. No finish is inferred from this lighting.",
+              "contentHash": "607c713cfc80ec4bec1a1a6facbe3917efb553d24f952ad313f50bff8302b33c",
+              "image": "verification/specimens/SPEC-0450.png"
             },
             {
               "observationId": "unit:U0633",
@@ -5081,6 +5121,17 @@
               "originalHash": "d72332881727a58bde7be0f16c3efe110184fac834aeae44f35bba73960fcaed",
               "previewSrc": "images/previews/CSM2cC_103_Eevee___Snorlax_GX_V1_851389.jpg?v=d72332881727a58bde7be0f16c3efe110184fac834aeae44f35bba73960fcaed",
               "thumbnailSrc": "images/thumbs/CSM2cC_103_Eevee___Snorlax_GX_V1_851389.jpg?v=d72332881727a58bde7be0f16c3efe110184fac834aeae44f35bba73960fcaed"
+            },
+            {
+              "src": "verification/specimens/SPEC-0146.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0146",
+              "contentHash": "416d34d130f144ba41375fc3584ae8b5f6ad242e1813a81de228b797b3d342db",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "416d34d130f144ba41375fc3584ae8b5f6ad242e1813a81de228b797b3d342db",
+              "previewSrc": "images/previews/SPEC-0146.png?v=416d34d130f144ba41375fc3584ae8b5f6ad242e1813a81de228b797b3d342db",
+              "thumbnailSrc": "images/thumbs/SPEC-0146.png?v=416d34d130f144ba41375fc3584ae8b5f6ad242e1813a81de228b797b3d342db"
             }
           ],
           "observations": [
@@ -5092,6 +5143,15 @@
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
               "contentHash": "d3230ca42a6fb95c37d465738bbc0c34616f73bf92e7ceec3ca609fc6b3e681a",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0146",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.pokemon.cn/tcg/product/16344.html",
+              "evidence": "Complete official publisher render of Simplified Chinese Eevee & Snorlax GX CSM2cC 103/150 RR. The Simplified Chinese card text, printed CSM2c C set code, collector number 103/150 and RR rarity establish the exact localized card identity. The render is retained as identity evidence only; physical finish is established separately by the official finish guide.",
+              "contentHash": "1d701a8f8d32bc2d81d3a8158608b3cf5d773ed15a25704956a19729f30bfc1d",
+              "image": "verification/specimens/SPEC-0146.png"
             },
             {
               "observationId": "unit:U0457",
@@ -6333,6 +6393,39 @@
               "thumbnailSrc": "images/thumbs/SVP_184_Hop_s_Snorlax_V2_817775.jpg?v=f0fad2d1c9d7ee744f3689ef0454dc7b9f44d472597337a2b2d920c87be6974f"
             },
             {
+              "src": "verification/specimens/SPEC-0073.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0073",
+              "contentHash": "e9e4bd1c4b57c5a6ebdc2f3dbd79ad7c3605da744e307976a7848cf0a602c5db",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e9e4bd1c4b57c5a6ebdc2f3dbd79ad7c3605da744e307976a7848cf0a602c5db",
+              "previewSrc": "images/previews/SPEC-0073.png?v=e9e4bd1c4b57c5a6ebdc2f3dbd79ad7c3605da744e307976a7848cf0a602c5db",
+              "thumbnailSrc": "images/thumbs/SPEC-0073.png?v=e9e4bd1c4b57c5a6ebdc2f3dbd79ad7c3605da744e307976a7848cf0a602c5db"
+            },
+            {
+              "src": "verification/specimens/SPEC-0074.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0074",
+              "contentHash": "c1fccd9a41cab0b3f645bb7eb0cb8ff6915a08f23bffb31e9faf2e2d5d41cd26",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c1fccd9a41cab0b3f645bb7eb0cb8ff6915a08f23bffb31e9faf2e2d5d41cd26",
+              "previewSrc": "images/previews/SPEC-0074.png?v=c1fccd9a41cab0b3f645bb7eb0cb8ff6915a08f23bffb31e9faf2e2d5d41cd26",
+              "thumbnailSrc": "images/thumbs/SPEC-0074.png?v=c1fccd9a41cab0b3f645bb7eb0cb8ff6915a08f23bffb31e9faf2e2d5d41cd26"
+            },
+            {
+              "src": "verification/specimens/SPEC-0075.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0075",
+              "contentHash": "34ef3c61cdb7b6f6232fdb721fdb12a5262745e816706af6c1f9f54d255a629e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "34ef3c61cdb7b6f6232fdb721fdb12a5262745e816706af6c1f9f54d255a629e",
+              "previewSrc": "images/previews/SPEC-0075.png?v=34ef3c61cdb7b6f6232fdb721fdb12a5262745e816706af6c1f9f54d255a629e",
+              "thumbnailSrc": "images/thumbs/SPEC-0075.png?v=34ef3c61cdb7b6f6232fdb721fdb12a5262745e816706af6c1f9f54d255a629e"
+            },
+            {
               "src": "verification/specimens/SPEC-0076.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0076",
@@ -6353,6 +6446,17 @@
               "originalHash": "c346131cf84e10af8e07418fc7f0bb71a4c77acdf1920869e432d581570d1b41",
               "previewSrc": "images/previews/SPEC-0077.png?v=c346131cf84e10af8e07418fc7f0bb71a4c77acdf1920869e432d581570d1b41",
               "thumbnailSrc": "images/thumbs/SPEC-0077.png?v=c346131cf84e10af8e07418fc7f0bb71a4c77acdf1920869e432d581570d1b41"
+            },
+            {
+              "src": "verification/specimens/SPEC-0078.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0078",
+              "contentHash": "0444fc7d9272e429e8c04546a859cb73faa7b233204d2e1dc91bcb42268e491e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0444fc7d9272e429e8c04546a859cb73faa7b233204d2e1dc91bcb42268e491e",
+              "previewSrc": "images/previews/SPEC-0078.png?v=0444fc7d9272e429e8c04546a859cb73faa7b233204d2e1dc91bcb42268e491e",
+              "thumbnailSrc": "images/thumbs/SPEC-0078.png?v=0444fc7d9272e429e8c04546a859cb73faa7b233204d2e1dc91bcb42268e491e"
             },
             {
               "src": "verification/specimens/SPEC-0079.jpg",
@@ -6451,6 +6555,33 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0073",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-16 of four English Journey Together STAFF promos. Hop's Snorlax SVP EN 184 is fully visible with HP 150, Extra Helpings, Dynamic Press 140, Journey Together logo and gold STAFF mark. Later frames are alternate views of this same physical Snorlax card.",
+              "contentHash": "8bebea451b47f340a18e151c146a06161c0cff28f661a67f06b454f1a6699759",
+              "image": "verification/specimens/SPEC-0073.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0074",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group photograph captured 2025-05-16 of the same four Journey Together STAFF promos as SPEC-0073. Hop's Snorlax SVP EN 184 remains visible at right; alternate framing only.",
+              "contentHash": "465d539b5d87e3695da07d32529f807aa5be921e4e80e42085e55a82dfc4338b",
+              "image": "verification/specimens/SPEC-0074.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0075",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Third owner group view captured 2025-05-16 of the same English Journey Together STAFF promo display. Hop's Snorlax SVP EN 184 is visible at right; no additional copy is inferred.",
+              "contentHash": "e24d09d46452468ce5d0a85bf13b0343fc14756767308e281f3c14cfb78c9b2f",
+              "image": "verification/specimens/SPEC-0075.jpg"
+            },
+            {
               "observationId": "specimen:SPEC-0076",
               "kind": "specimen",
               "provider": null,
@@ -6467,6 +6598,15 @@
               "evidence": "Close owner photograph captured 2025-05-16 of the same English Hop's Snorlax SVP EN 184 STAFF card as SPEC-0076. The printed number, attacks, STAFF and reflective border are clear.",
               "contentHash": "6a57db624cef46a70b8d0e2b92a938851a242b593249c5dcbfda00debf1cc59c",
               "image": "verification/specimens/SPEC-0077.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0078",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner detail photograph captured 2025-05-16 focused on Iono's Kilowattrel; a partial view of the same Hop's Snorlax SVP EN 184 STAFF card remains visible along the right edge. Retained because every image showing Snorlax is a separate SPEC; it is not a new card.",
+              "contentHash": "35dc15df9ee421b502c028df7fd94f1a1eeb78ca28e2206450533c74f6f7781a",
+              "image": "verification/specimens/SPEC-0078.jpg"
             },
             {
               "observationId": "specimen:SPEC-0079",
@@ -9343,9 +9483,29 @@
               "originalHash": "8cf770e83ff0014e3ea5378d38945d819dacc3ef72cd994658a025c4e4214740",
               "previewSrc": "images/previews/m2a_136_Hop_s_Snorlax_861379.jpg?v=8cf770e83ff0014e3ea5378d38945d819dacc3ef72cd994658a025c4e4214740",
               "thumbnailSrc": "images/thumbs/m2a_136_Hop_s_Snorlax_861379.jpg?v=8cf770e83ff0014e3ea5378d38945d819dacc3ef72cd994658a025c4e4214740"
+            },
+            {
+              "src": "verification/specimens/SPEC-0184.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0184",
+              "contentHash": "7ab68087f862ace21269f96212cfde17bd5d43546b3496bfb2b2cdef9371f5ab",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7ab68087f862ace21269f96212cfde17bd5d43546b3496bfb2b2cdef9371f5ab",
+              "previewSrc": "images/previews/SPEC-0184.png?v=7ab68087f862ace21269f96212cfde17bd5d43546b3496bfb2b2cdef9371f5ab",
+              "thumbnailSrc": "images/thumbs/SPEC-0184.png?v=7ab68087f862ace21269f96212cfde17bd5d43546b3496bfb2b2cdef9371f5ab"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0184",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/17374/",
+              "evidence": "Complete official Indonesian render for Snorlax <Hop> MA3 I 136/193 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "66fd1f2528d6f167e2de24333ae1b75a90279fe654a2f2a6cc7e9108951072f5",
+              "image": "verification/specimens/SPEC-0184.png"
+            },
             {
               "observationId": "unit:U0129",
               "kind": "unit",
@@ -10568,6 +10728,28 @@
               "originalHash": "b43d3c7d1d46ab455c1c9e982233aa24a119e3028db926c2ad60675c1c773b95",
               "previewSrc": "images/previews/xm2a_136_Hop_s_Snorlax_V1_861744.jpg?v=b43d3c7d1d46ab455c1c9e982233aa24a119e3028db926c2ad60675c1c773b95",
               "thumbnailSrc": "images/thumbs/xm2a_136_Hop_s_Snorlax_V1_861744.jpg?v=b43d3c7d1d46ab455c1c9e982233aa24a119e3028db926c2ad60675c1c773b95"
+            },
+            {
+              "src": "verification/specimens/SPEC-0185.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0185",
+              "contentHash": "609cec5a48a05417dbe0a8d9447d73d8e797486d5625a37e04d1e5f778ce8643",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "609cec5a48a05417dbe0a8d9447d73d8e797486d5625a37e04d1e5f778ce8643",
+              "previewSrc": "images/previews/SPEC-0185.png?v=609cec5a48a05417dbe0a8d9447d73d8e797486d5625a37e04d1e5f778ce8643",
+              "thumbnailSrc": "images/thumbs/SPEC-0185.png?v=609cec5a48a05417dbe0a8d9447d73d8e797486d5625a37e04d1e5f778ce8643"
+            },
+            {
+              "src": "verification/specimens/SPEC-0186.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0186",
+              "contentHash": "b55e81867312190794b6c149805053451534e27ac3d22fb8ce523793c9905865",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b55e81867312190794b6c149805053451534e27ac3d22fb8ce523793c9905865",
+              "previewSrc": "images/previews/SPEC-0186.png?v=b55e81867312190794b6c149805053451534e27ac3d22fb8ce523793c9905865",
+              "thumbnailSrc": "images/thumbs/SPEC-0186.png?v=b55e81867312190794b6c149805053451534e27ac3d22fb8ce523793c9905865"
             }
           ],
           "observations": [
@@ -10642,6 +10824,24 @@
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
               "contentHash": "2f29728c728c314dcc30dba7ab2af2736b5bf4d933e58fc586642a6eed0720e1",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0185",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/17792/",
+              "evidence": "Complete official Indonesian render for Snorlax <Hop> MA3 I 136/193 (V1). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "7d0c371538135906df3c0935c1a8ad860f07abe08ef9690763566c8501cbdcd0",
+              "image": "verification/specimens/SPEC-0185.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0186",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/17793/",
+              "evidence": "Complete official Indonesian render for Snorlax <Hop> MA3 I 136/193 (V2). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "5cfdecff42e3e7fede2abd28828ee87282e4ba92c4475ed62c053d06d1324550",
+              "image": "verification/specimens/SPEC-0186.png"
             },
             {
               "observationId": "unit:U0787",
@@ -14419,9 +14619,29 @@
               "originalHash": "7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa",
               "previewSrc": "images/previews/G2__Rocket_s_Snorlax_605388.jpg?v=7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa",
               "thumbnailSrc": "images/thumbs/G2__Rocket_s_Snorlax_605388.jpg?v=7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa"
+            },
+            {
+              "src": "verification/specimens/SPEC-0194.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0194",
+              "contentHash": "7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa",
+              "previewSrc": "images/previews/SPEC-0194.png?v=7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa",
+              "thumbnailSrc": "images/thumbs/SPEC-0194.png?v=7cf375db709a8846f21ebe9cedd9485a4cbf74c1e2a2bfb1578f8e2e79081dfa"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0194",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Challenge-from-the-Darkness/Rockets-Snorlax-CFTD",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Rocket's Snorlax G2 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "ea3644272953299b52616d54d0dc46e615ded9814b88e2ebecb3ea2f2a2e9841",
+              "image": "verification/specimens/SPEC-0194.jpg"
+            },
             {
               "observationId": "unit:U0427",
               "kind": "unit",
@@ -16681,9 +16901,29 @@
               "originalHash": "daef474b09b3aed505e44edd1fe5ba151d6790f93bd301164fcde8fb96419211",
               "previewSrc": "images/previews/s10b_056_Snorlax_664610.jpg?v=daef474b09b3aed505e44edd1fe5ba151d6790f93bd301164fcde8fb96419211",
               "thumbnailSrc": "images/thumbs/s10b_056_Snorlax_664610.jpg?v=daef474b09b3aed505e44edd1fe5ba151d6790f93bd301164fcde8fb96419211"
+            },
+            {
+              "src": "verification/specimens/SPEC-0173.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0173",
+              "contentHash": "d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
+              "previewSrc": "images/previews/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
+              "thumbnailSrc": "images/thumbs/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0173",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/5772/",
+              "evidence": "Complete official Indonesian render for Snorlax S10b I 056/071 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "59009cfacf1c630668e4ab97ce0cacd41a8520372e0f9204bc5ee212e18de5fe",
+              "image": "verification/specimens/SPEC-0173.png"
+            },
             {
               "observationId": "unit:U0204",
               "kind": "unit",
@@ -17280,9 +17520,29 @@
               "originalHash": "68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
               "previewSrc": "images/previews/BW7_055_Snorlax_568344.jpg?v=68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
               "thumbnailSrc": "images/thumbs/BW7_055_Snorlax_568344.jpg?v=68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc"
+            },
+            {
+              "src": "verification/specimens/SPEC-0197.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0197",
+              "contentHash": "68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
+              "previewSrc": "images/previews/SPEC-0197.png?v=68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc",
+              "thumbnailSrc": "images/thumbs/SPEC-0197.png?v=68edf9ab7cce79cca945ed0e6d4fe8490fb859ba84907972e59bca07228120dc"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0197",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax BW7 055 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "cc75b873ea322128e1c61a6abdfad4922c4c344c82bb0229e9b5754840ef169d",
+              "image": "verification/specimens/SPEC-0197.jpg"
+            },
             {
               "observationId": "unit:U0578",
               "kind": "unit",
@@ -18576,9 +18836,29 @@
               "originalHash": "97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
               "previewSrc": "images/previews/BW-P_207_Snorlax_562335.jpg?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
               "thumbnailSrc": "images/thumbs/BW-P_207_Snorlax_562335.jpg?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0196.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0196",
+              "contentHash": "97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
+              "previewSrc": "images/previews/SPEC-0196.png?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
+              "thumbnailSrc": "images/thumbs/SPEC-0196.png?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0196",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BW-Promos/Snorlax-BW-P207",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax BW-P 207 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "e108c817b4229d2514477c8486d95f49dd53d7c2e0c2f18e70290c8728955836",
+              "image": "verification/specimens/SPEC-0196.jpg"
+            },
             {
               "observationId": "unit:U0575",
               "kind": "unit",
@@ -19094,9 +19374,29 @@
               "originalHash": "48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84",
               "previewSrc": "images/previews/SV-P_ID_286_Snorlax_879048.jpg?v=48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84",
               "thumbnailSrc": "images/thumbs/SV-P_ID_286_Snorlax_879048.jpg?v=48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84"
+            },
+            {
+              "src": "verification/specimens/SPEC-0188.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0188",
+              "contentHash": "48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84",
+              "previewSrc": "images/previews/SPEC-0188.png?v=48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84",
+              "thumbnailSrc": "images/thumbs/SPEC-0188.png?v=48e19eef08428d1c8ecfcfd01f2bccf0485bcf0a0403d83c7c40234130afde84"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0188",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pokumon.com/card/snorlax-286-sv-p-indonesian-promo/",
+              "evidence": "Complete Indonesian 286/SV-P Snorlax image. The printed Indonesian text, collector number and Taro stamp establish the exact card-release identity; finish is established separately by Pokumon.",
+              "contentHash": "5a862c27cfbf546b9f1adbb55c60d9aa38c99742183344bbbd9bbc7133c9273c",
+              "image": "verification/specimens/SPEC-0188.png"
+            },
             {
               "observationId": "unit:U0687",
               "kind": "unit",
@@ -23604,9 +23904,29 @@
               "originalHash": "f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
               "previewSrc": "images/previews/s2_77_Snorlax_464294.jpg?v=f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
               "thumbnailSrc": "images/thumbs/s2_77_Snorlax_464294.jpg?v=f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a"
+            },
+            {
+              "src": "verification/specimens/SPEC-0209.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0209",
+              "contentHash": "f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
+              "previewSrc": "images/previews/SPEC-0209.png?v=f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a",
+              "thumbnailSrc": "images/thumbs/SPEC-0209.png?v=f88dbec8db4904aed3e68e27b0b099583263e44a68f04305b7e143d3abcde97a"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0209",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s2 77 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "4bc673676550947c083e3bec7c07b8f7933b2af65d99ca30afb1679f101c383f",
+              "image": "verification/specimens/SPEC-0209.jpg"
+            },
             {
               "observationId": "unit:U0531",
               "kind": "unit",
@@ -23682,6 +24002,17 @@
               "originalHash": "f802695d584a55e4163e1befaf3487946c0b04ef596399c8b9cf1b4cfbe15bdc",
               "previewSrc": "images/previews/SPEC-0239.png?v=f802695d584a55e4163e1befaf3487946c0b04ef596399c8b9cf1b4cfbe15bdc",
               "thumbnailSrc": "images/thumbs/SPEC-0239.png?v=f802695d584a55e4163e1befaf3487946c0b04ef596399c8b9cf1b4cfbe15bdc"
+            },
+            {
+              "src": "verification/specimens/SPEC-0455.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0455",
+              "contentHash": "d050cd23993f440438e410075d6556868ce5b33e5b2050e72e53012507ca7696",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d050cd23993f440438e410075d6556868ce5b33e5b2050e72e53012507ca7696",
+              "previewSrc": "images/previews/SPEC-0455.png?v=d050cd23993f440438e410075d6556868ce5b33e5b2050e72e53012507ca7696",
+              "thumbnailSrc": "images/thumbs/SPEC-0455.png?v=d050cd23993f440438e410075d6556868ce5b33e5b2050e72e53012507ca7696"
             }
           ],
           "observations": [
@@ -23702,6 +24033,15 @@
               "evidence": "Complete official Korean render for Snorlax s2 077/096. The printed Korean name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "535f526f9e8aed8571cabf66eaa5195c7fc34d0989871b52a734c03ab8780787",
               "image": "verification/specimens/SPEC-0239.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0455",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://globalbunjang.com/product/427352825",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s2 077/096 U identity establish the exact localized card. Sleeve glare is not treated as finish evidence.",
+              "contentHash": "2f9ef8cb0f34e81e5862bb72c2917d73f566e678d1c316e0ed719de8754de20d",
+              "image": "verification/specimens/SPEC-0455.png"
             },
             {
               "observationId": "unit:U0532",
@@ -27093,6 +27433,39 @@
               "originalHash": "a7c9db01d9d08ff7b4de63a793171e1d9ca27ce2ea7035712676299507a10f44",
               "previewSrc": "images/previews/BCR_109_Snorlax_280696.jpg?v=a7c9db01d9d08ff7b4de63a793171e1d9ca27ce2ea7035712676299507a10f44",
               "thumbnailSrc": "images/thumbs/BCR_109_Snorlax_280696.jpg?v=a7c9db01d9d08ff7b4de63a793171e1d9ca27ce2ea7035712676299507a10f44"
+            },
+            {
+              "src": "verification/specimens/SPEC-0068.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0068",
+              "contentHash": "92d3d3f4b13823d641224888d4fccca1a6c3cd54765f614020f2d0717c89ef19",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "92d3d3f4b13823d641224888d4fccca1a6c3cd54765f614020f2d0717c89ef19",
+              "previewSrc": "images/previews/SPEC-0068.png?v=92d3d3f4b13823d641224888d4fccca1a6c3cd54765f614020f2d0717c89ef19",
+              "thumbnailSrc": "images/thumbs/SPEC-0068.png?v=92d3d3f4b13823d641224888d4fccca1a6c3cd54765f614020f2d0717c89ef19"
+            },
+            {
+              "src": "verification/specimens/SPEC-0071.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0071",
+              "contentHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "previewSrc": "images/previews/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "thumbnailSrc": "images/thumbs/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8"
+            },
+            {
+              "src": "verification/specimens/SPEC-0072.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0072",
+              "contentHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "previewSrc": "images/previews/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "thumbnailSrc": "images/thumbs/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30"
             }
           ],
           "observations": [
@@ -27149,6 +27522,33 @@
               "evidence": "The complete localized Boundaries Crossed checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 109 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
               "contentHash": "6bf7cd80483496cf867a41d1dce1cb694d37c993d9eea452880a12f954e7d550",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0068",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner close photograph captured 2025-05-08 of Italian Snorlax BCR 109/149, HP 100, attacks Doppio Lazzo and Rotolamento. The full collector number is visible in group view SPEC-0071. No finish is inferred from the lighting.",
+              "contentHash": "d9e48ee10cf02c4e054927f08fd7e536b6c2677d5eb5a9df934bc7d5891f0e58",
+              "image": "verification/specimens/SPEC-0068.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0071",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-08 showing the same three Italian cards documented in SPEC-0065 through SPEC-0070: BCR 109/149, SWSH068 STAFF with Vivid Voltage logo, and SSH 197/202 Snorlax V. This frame establishes the BCR collector number and does not imply additional copies.",
+              "contentHash": "0bd72cb887605e30cf5e50a9bdaf4d4e35ea898914e05b7abdfaed1c9c261203",
+              "image": "verification/specimens/SPEC-0071.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0072",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner Instagram screenshot captured 2025-05-08 from account m4s.collection. The post displays the same Italian BCR 109/149, SWSH068 STAFF and SSH 197/202 cards as SPEC-0071 and describes an Italian mailday with hashtags including #staffpromo. This is derivative social-post evidence, not another physical-card observation.",
+              "contentHash": "61c3a1d7e0218d5f010e787958ebb85eddbd163237f09b1bf2085eb7a7147882",
+              "image": "verification/specimens/SPEC-0072.png"
             },
             {
               "observationId": "unit:U0224",
@@ -27569,6 +27969,72 @@
               "thumbnailSrc": "images/thumbs/HSZ_027_Snorlax_568916.jpg?v=ac930b2307077b5e538f12dbcb2cdb303c019b466aa9a550cd22897a836631c4"
             },
             {
+              "src": "verification/specimens/SPEC-0058.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0058",
+              "contentHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "previewSrc": "images/previews/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "thumbnailSrc": "images/thumbs/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562"
+            },
+            {
+              "src": "verification/specimens/SPEC-0059.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0059",
+              "contentHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "previewSrc": "images/previews/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "thumbnailSrc": "images/thumbs/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79"
+            },
+            {
+              "src": "verification/specimens/SPEC-0062.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0062",
+              "contentHash": "051f401e0473207c76b8fc3bf64d8427607f541fbd880863bfb702c4994b7690",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "051f401e0473207c76b8fc3bf64d8427607f541fbd880863bfb702c4994b7690",
+              "previewSrc": "images/previews/SPEC-0062.png?v=051f401e0473207c76b8fc3bf64d8427607f541fbd880863bfb702c4994b7690",
+              "thumbnailSrc": "images/thumbs/SPEC-0062.png?v=051f401e0473207c76b8fc3bf64d8427607f541fbd880863bfb702c4994b7690"
+            },
+            {
+              "src": "verification/specimens/SPEC-0063.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0063",
+              "contentHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "previewSrc": "images/previews/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "thumbnailSrc": "images/thumbs/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb"
+            },
+            {
+              "src": "verification/specimens/SPEC-0064.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0064",
+              "contentHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "previewSrc": "images/previews/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "thumbnailSrc": "images/thumbs/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008"
+            },
+            {
+              "src": "verification/specimens/SPEC-0201.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0201",
+              "contentHash": "ac930b2307077b5e538f12dbcb2cdb303c019b466aa9a550cd22897a836631c4",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "ac930b2307077b5e538f12dbcb2cdb303c019b466aa9a550cd22897a836631c4",
+              "previewSrc": "images/previews/SPEC-0201.png?v=ac930b2307077b5e538f12dbcb2cdb303c019b466aa9a550cd22897a836631c4",
+              "thumbnailSrc": "images/thumbs/SPEC-0201.png?v=ac930b2307077b5e538f12dbcb2cdb303c019b466aa9a550cd22897a836631c4"
+            },
+            {
               "src": "verification/specimens/SPEC-0481.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0481",
@@ -27589,6 +28055,60 @@
               "evidence": "The complete seller photograph and three close views visibly show Japanese Snorlax HSZ 027/034 with the red 16th-anniversary mark. Across the directly lit artwork and card body, the surface remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0481.",
               "contentHash": "36d60c7739740aca5db61952132310bb0d1727027a47f816b3a70d82b18eb53a",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0058",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-04. It shows three physical Snorlax cards together: T-Chinese sN F 008/024, Korean xsv2a 143/165 with a Poké Ball mirror pattern, and Japanese HSZ 027/034 with the red 16th-anniversary mark. This is the uncut source sequence for the closer views in SPEC-0060 through SPEC-0062; it does not establish three additional copies.",
+              "contentHash": "543462c87a9b3ad1ca6bf19d64457ed6b6a4cc439e7d5ef2cf6988caeb692062",
+              "image": "verification/specimens/SPEC-0058.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0059",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group view captured 2025-05-04 of the same three physical cards as SPEC-0058: T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 with the red 16th-anniversary mark. Alternate framing only; no additional physical copies are inferred.",
+              "contentHash": "193e6904313f5fceef7bcd2aecb4a2abaf43e6f3fa16b369dcb57d0ec8183114",
+              "image": "verification/specimens/SPEC-0059.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0062",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Close owner photograph captured 2025-05-04 of Japanese カビゴン HSZ 027/034, HP 100, attacks ダブルラリアット and ころがる, carrying the red 16th-anniversary mark. Group views SPEC-0058 and SPEC-0059 establish the collector number that is cropped from this frame. The reflection is retained visually but no exact finish taxonomy is asserted from this angle alone.",
+              "contentHash": "ee732f6e4dca7ff1c94a4f87ad706d2e7fdc8e13d9c5ee1c1d808ba68bcd7b06",
+              "image": "verification/specimens/SPEC-0062.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0063",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Third owner group photograph captured 2025-05-04 of the same T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 cards. It supplies an alternate focus and does not imply additional physical copies.",
+              "contentHash": "61e3a15e1831a1ba33954899e17b15ef5d1692175520637774aa70d83cc14a06",
+              "image": "verification/specimens/SPEC-0063.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0064",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Fourth owner group photograph captured 2025-05-04 of the same T-Chinese, Korean and Japanese Snorlax cards documented by SPEC-0058 through SPEC-0063. Alternate framing only; the cards are not counted again.",
+              "contentHash": "52b740bf09cba4edb5a018636171600c65eeb088667964e4991d6eb26a7f8ce4",
+              "image": "verification/specimens/SPEC-0064.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0201",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/National-Pokedex-Beginning-Set/Snorlax",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax HSZ 027 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "f7ec33cacade42ce4e9dfed21a05d6623e4b88576b0d0ca2dc42f0ba4effefe7",
+              "image": "verification/specimens/SPEC-0201.jpg"
             },
             {
               "observationId": "specimen:SPEC-0481",
@@ -30506,6 +31026,50 @@
               "originalHash": "bb7956bf8293ee56534c0ae0142db8a87c2cf57df09d8326d876295cf171605d",
               "previewSrc": "images/previews/VIV_131_Snorlax_V1_512365.jpg?v=bb7956bf8293ee56534c0ae0142db8a87c2cf57df09d8326d876295cf171605d",
               "thumbnailSrc": "images/thumbs/VIV_131_Snorlax_V1_512365.jpg?v=bb7956bf8293ee56534c0ae0142db8a87c2cf57df09d8326d876295cf171605d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0081.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0081",
+              "contentHash": "496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "previewSrc": "images/previews/SPEC-0081.png?v=496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "thumbnailSrc": "images/thumbs/SPEC-0081.png?v=496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad"
+            },
+            {
+              "src": "verification/specimens/SPEC-0082.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0082",
+              "contentHash": "6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "previewSrc": "images/previews/SPEC-0082.png?v=6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "thumbnailSrc": "images/thumbs/SPEC-0082.png?v=6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5"
+            },
+            {
+              "src": "verification/specimens/SPEC-0087.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0087",
+              "contentHash": "19e09bf953dcdee3d17ed41c17bc1eb683e3a9b42c1306b560e2e8c9309f93db",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "19e09bf953dcdee3d17ed41c17bc1eb683e3a9b42c1306b560e2e8c9309f93db",
+              "previewSrc": "images/previews/SPEC-0087.png?v=19e09bf953dcdee3d17ed41c17bc1eb683e3a9b42c1306b560e2e8c9309f93db",
+              "thumbnailSrc": "images/thumbs/SPEC-0087.png?v=19e09bf953dcdee3d17ed41c17bc1eb683e3a9b42c1306b560e2e8c9309f93db"
+            },
+            {
+              "src": "verification/specimens/SPEC-0088.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0088",
+              "contentHash": "f055c9ee3f75115b6abd99f48050c81112e123d590236d29da4832f3db11474b",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f055c9ee3f75115b6abd99f48050c81112e123d590236d29da4832f3db11474b",
+              "previewSrc": "images/previews/SPEC-0088.png?v=f055c9ee3f75115b6abd99f48050c81112e123d590236d29da4832f3db11474b",
+              "thumbnailSrc": "images/thumbs/SPEC-0088.png?v=f055c9ee3f75115b6abd99f48050c81112e123d590236d29da4832f3db11474b"
             }
           ],
           "observations": [
@@ -30571,6 +31135,42 @@
               "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "b14055879c9385d40c2ee61ef13ab95e35d8c01f2b4b8448cb5d317786b43f4d",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0081",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-21. It shows T-Chinese Snorlax VMAX sc1b F 177/153 HR with rainbow-textured foil, Spanish VIV 131/185 with a red-and-black Pokémon League artwork stamp, and Spanish LOR 143/196 with the same style of stamp. These same physical cards are shown closer in SPEC-0083 through SPEC-0090.",
+              "contentHash": "24a88d632a2ff12924e4f8fb6b72735beba4b141a5bf5aa37f455957976c9b41",
+              "image": "verification/specimens/SPEC-0081.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0082",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group photograph captured 2025-05-21 of the same T-Chinese sc1b F 177/153 HR, Spanish VIV 131/185 stamped and Spanish LOR 143/196 stamped cards as SPEC-0081. Alternate framing only.",
+              "contentHash": "586c0d272d6d280288771637a94bb194fd597fc756720490118bc0b129620f88",
+              "image": "verification/specimens/SPEC-0082.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0087",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner close photograph captured 2025-05-21 of Spanish Snorlax VIV 131/185, HP 130, Glotonear and Golpe Cuerpo 100. A red-and-black Pokémon League artwork stamp is clearly printed in the artwork window. The exact foil treatment is not inferred from this crop.",
+              "contentHash": "c10da4e1dfda98ada103741a4209b9cff22024cb928e9f245635de66b329aeff",
+              "image": "verification/specimens/SPEC-0087.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0088",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner close view captured 2025-05-21 of the same Spanish VIV 131/185 Snorlax. The red-and-black Pokémon League artwork stamp, name and attacks are visible; no additional card or finish is inferred.",
+              "contentHash": "fee235f5824e015e329d13fc1a81c6b9ecf724b78f991280d4d8e17c2f55560f",
+              "image": "verification/specimens/SPEC-0088.jpg"
             },
             {
               "observationId": "unit:U0110",
@@ -31053,6 +31653,28 @@
               "originalHash": "400bfe280f4a5261425b402ae47aaa2ceaeac314f49f55d075b8b046c924c0f9",
               "previewSrc": "images/previews/SPEC-0069.png?v=400bfe280f4a5261425b402ae47aaa2ceaeac314f49f55d075b8b046c924c0f9",
               "thumbnailSrc": "images/thumbs/SPEC-0069.png?v=400bfe280f4a5261425b402ae47aaa2ceaeac314f49f55d075b8b046c924c0f9"
+            },
+            {
+              "src": "verification/specimens/SPEC-0071.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0071",
+              "contentHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "previewSrc": "images/previews/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "thumbnailSrc": "images/thumbs/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8"
+            },
+            {
+              "src": "verification/specimens/SPEC-0072.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0072",
+              "contentHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "previewSrc": "images/previews/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "thumbnailSrc": "images/thumbs/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30"
             }
           ],
           "observations": [
@@ -31136,6 +31758,24 @@
               "evidence": "Alternate owner close view captured 2025-05-08 of the same Italian SWSH068 STAFF card as SPEC-0065 through SPEC-0067. Strong holo streaks, STAFF and the Vivid Voltage logo are visible.",
               "contentHash": "d9f0266a09b083772d40e3396b2b3b094737348baa662215ba96f5e0bb61abfc",
               "image": "verification/specimens/SPEC-0069.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0071",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-08 showing the same three Italian cards documented in SPEC-0065 through SPEC-0070: BCR 109/149, SWSH068 STAFF with Vivid Voltage logo, and SSH 197/202 Snorlax V. This frame establishes the BCR collector number and does not imply additional copies.",
+              "contentHash": "0bd72cb887605e30cf5e50a9bdaf4d4e35ea898914e05b7abdfaed1c9c261203",
+              "image": "verification/specimens/SPEC-0071.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0072",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner Instagram screenshot captured 2025-05-08 from account m4s.collection. The post displays the same Italian BCR 109/149, SWSH068 STAFF and SSH 197/202 cards as SPEC-0071 and describes an Italian mailday with hashtags including #staffpromo. This is derivative social-post evidence, not another physical-card observation.",
+              "contentHash": "61c3a1d7e0218d5f010e787958ebb85eddbd163237f09b1bf2085eb7a7147882",
+              "image": "verification/specimens/SPEC-0072.png"
             },
             {
               "observationId": "unit:U0271",
@@ -33380,9 +34020,29 @@
               "originalHash": "9eec7c336f99e03ba707851a4c30ad6063b85dab0809c9a5c2fb08f040f71817",
               "previewSrc": "images/previews/s8b_126_Snorlax_586642.jpg?v=9eec7c336f99e03ba707851a4c30ad6063b85dab0809c9a5c2fb08f040f71817",
               "thumbnailSrc": "images/thumbs/s8b_126_Snorlax_586642.jpg?v=9eec7c336f99e03ba707851a4c30ad6063b85dab0809c9a5c2fb08f040f71817"
+            },
+            {
+              "src": "verification/specimens/SPEC-0169.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0169",
+              "contentHash": "9e90d9b7ef73a17b593d6f9b0760dbc92ae6deafc0a96ccc0117a29a293598c3",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9e90d9b7ef73a17b593d6f9b0760dbc92ae6deafc0a96ccc0117a29a293598c3",
+              "previewSrc": "images/previews/SPEC-0169.png?v=9e90d9b7ef73a17b593d6f9b0760dbc92ae6deafc0a96ccc0117a29a293598c3",
+              "thumbnailSrc": "images/thumbs/SPEC-0169.png?v=9e90d9b7ef73a17b593d6f9b0760dbc92ae6deafc0a96ccc0117a29a293598c3"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0169",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/4795/",
+              "evidence": "Complete official Indonesian render for Snorlax S8b I 126/184 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "0ee49f6a10e3ead97ae3810445e8e1b8e4dca93cf45af0f63549405bf916b993",
+              "image": "verification/specimens/SPEC-0169.png"
+            },
             {
               "observationId": "unit:U0175",
               "kind": "unit",
@@ -37546,6 +38206,17 @@
               "originalHash": "7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
               "previewSrc": "images/previews/EXS__Snorlax_548656.jpg?v=7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
               "thumbnailSrc": "images/thumbs/EXS__Snorlax_548656.jpg?v=7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410"
+            },
+            {
+              "src": "verification/specimens/SPEC-0200.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0200",
+              "contentHash": "7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
+              "previewSrc": "images/previews/SPEC-0200.png?v=7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
+              "thumbnailSrc": "images/thumbs/SPEC-0200.png?v=7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410"
             }
           ],
           "observations": [
@@ -37602,6 +38273,15 @@
               "evidence": "Identifies Keita Takahashi as the illustrator and distinguishes the glossy Expansion Sheet 1 Sheet 16 printing with a rarity symbol from the non-glossy Quick Starter Gift Set Red Deck reprint; it also records the extra CoroCoro Comic Illust Contest text on the Quick Starter printing.",
               "contentHash": "11154bb6fe3763d3d408925abadcfe0a86a4d126b4bd28a8536e98c013d2ed20",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0200",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Expansion-Sheet/Snorlax-EXS",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax EXS (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "a2c9b7ce96d41d0fe7f226f9e9464b6a4dd70b62879573d15716bade963438ed",
+              "image": "verification/specimens/SPEC-0200.jpg"
             },
             {
               "observationId": "unit:U0458",
@@ -37999,6 +38679,17 @@
               "thumbnailSrc": "images/thumbs/sH_038_Snorlax_564222.jpg?v=2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730"
             },
             {
+              "src": "verification/specimens/SPEC-0214.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0214",
+              "contentHash": "2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730",
+              "previewSrc": "images/previews/SPEC-0214.png?v=2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730",
+              "thumbnailSrc": "images/thumbs/SPEC-0214.png?v=2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730"
+            },
+            {
               "src": "verification/specimens/SPEC-0484.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0484",
@@ -38019,6 +38710,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax sH 038/053. The lower-right Pikachu deck silhouette is visible on the card, preserving the fixed-deck distribution identity. The directly lit card face remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0484.",
               "contentHash": "bec1d0af05d3f3d5a1c617cd28af039a22587b13e526e8c68ed70c200fd290ea",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0214",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Family-Pokemon-Card-Game/Snorlax",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sH 038 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "95b4391be2cd036a3cd9760254878060ba0ce2779714135643e8016933e7f30f",
+              "image": "verification/specimens/SPEC-0214.jpg"
             },
             {
               "observationId": "specimen:SPEC-0484",
@@ -39663,9 +40363,29 @@
               "originalHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "previewSrc": "images/previews/sI100_341_Snorlax_V1_588051.jpg?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "thumbnailSrc": "images/thumbs/sI100_341_Snorlax_V1_588051.jpg?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80"
+            },
+            {
+              "src": "verification/specimens/SPEC-0155.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0155",
+              "contentHash": "9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a",
+              "previewSrc": "images/previews/SPEC-0155.png?v=9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a",
+              "thumbnailSrc": "images/thumbs/SPEC-0155.png?v=9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0155",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+              "evidence": "Complete listing image of Simplified Chinese Snorlax CS4DaC 341/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact specialist listing identifies this printing as Reverse Holo and the reflective card body is directly visible.",
+              "contentHash": "5a446413ac62df10f519409fb1544dd846c505361163824029b7b887a7e85d18",
+              "image": "verification/specimens/SPEC-0155.png"
+            },
             {
               "observationId": "unit:U0651",
               "kind": "unit",
@@ -39722,9 +40442,29 @@
               "originalHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "previewSrc": "images/previews/sI100_341_Snorlax_V1_588051.jpg?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "thumbnailSrc": "images/thumbs/sI100_341_Snorlax_V1_588051.jpg?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80"
+            },
+            {
+              "src": "verification/specimens/SPEC-0215.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0215",
+              "contentHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
+              "previewSrc": "images/previews/SPEC-0215.png?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
+              "thumbnailSrc": "images/thumbs/SPEC-0215.png?v=47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0215",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sI100 341 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "313151c311eabec00e98f06d870a913953e9dce845a3ed16e2c39e9620f289a2",
+              "image": "verification/specimens/SPEC-0215.jpg"
+            },
             {
               "observationId": "unit:U0652",
               "kind": "unit",
@@ -40261,6 +41001,61 @@
               "reviewable": false
             },
             {
+              "src": "verification/specimens/SPEC-0058.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0058",
+              "contentHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "previewSrc": "images/previews/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "thumbnailSrc": "images/thumbs/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562"
+            },
+            {
+              "src": "verification/specimens/SPEC-0059.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0059",
+              "contentHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "previewSrc": "images/previews/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "thumbnailSrc": "images/thumbs/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79"
+            },
+            {
+              "src": "verification/specimens/SPEC-0060.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0060",
+              "contentHash": "9ee94929dce1803cc18132ab8bd2c4fbc19155750a6fb78521e215ed086e1491",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9ee94929dce1803cc18132ab8bd2c4fbc19155750a6fb78521e215ed086e1491",
+              "previewSrc": "images/previews/SPEC-0060.png?v=9ee94929dce1803cc18132ab8bd2c4fbc19155750a6fb78521e215ed086e1491",
+              "thumbnailSrc": "images/thumbs/SPEC-0060.png?v=9ee94929dce1803cc18132ab8bd2c4fbc19155750a6fb78521e215ed086e1491"
+            },
+            {
+              "src": "verification/specimens/SPEC-0063.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0063",
+              "contentHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "previewSrc": "images/previews/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "thumbnailSrc": "images/thumbs/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb"
+            },
+            {
+              "src": "verification/specimens/SPEC-0064.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0064",
+              "contentHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "previewSrc": "images/previews/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "thumbnailSrc": "images/thumbs/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008"
+            },
+            {
               "src": "verification/specimens/SPEC-0297.png",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0297",
@@ -40290,6 +41085,51 @@
               "evidence": "The retained official Taiwan detail 7016 and SPEC-0297 show 卡比獸 SN F 008/024, including the printed attacks used for the explicit Work mapping and rarity no printed rarity symbol. The publisher render is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "9fb4b5caf23fb430b49ed87f879cde2d690aa78353ce330173c7e5b6f04e81a5",
               "image": "https://asia.pokemon-card.com/tw/card-img/tw00007016.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0058",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-04. It shows three physical Snorlax cards together: T-Chinese sN F 008/024, Korean xsv2a 143/165 with a Poké Ball mirror pattern, and Japanese HSZ 027/034 with the red 16th-anniversary mark. This is the uncut source sequence for the closer views in SPEC-0060 through SPEC-0062; it does not establish three additional copies.",
+              "contentHash": "543462c87a9b3ad1ca6bf19d64457ed6b6a4cc439e7d5ef2cf6988caeb692062",
+              "image": "verification/specimens/SPEC-0058.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0059",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group view captured 2025-05-04 of the same three physical cards as SPEC-0058: T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 with the red 16th-anniversary mark. Alternate framing only; no additional physical copies are inferred.",
+              "contentHash": "193e6904313f5fceef7bcd2aecb4a2abaf43e6f3fa16b369dcb57d0ec8183114",
+              "image": "verification/specimens/SPEC-0059.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0060",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Close owner photograph captured 2025-05-04 of the T-Chinese Snorlax printed sN F 008/024, HP 160, with the single attack 重磅衝擊 80. The same physical card also appears in SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Lighting is not treated as finish evidence.",
+              "contentHash": "5c264c32735a881bbcd4412f5fc99e12d5916797eaa0e7954575cf1f7dfd08a3",
+              "image": "verification/specimens/SPEC-0060.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0063",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Third owner group photograph captured 2025-05-04 of the same T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 cards. It supplies an alternate focus and does not imply additional physical copies.",
+              "contentHash": "61e3a15e1831a1ba33954899e17b15ef5d1692175520637774aa70d83cc14a06",
+              "image": "verification/specimens/SPEC-0063.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0064",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Fourth owner group photograph captured 2025-05-04 of the same T-Chinese, Korean and Japanese Snorlax cards documented by SPEC-0058 through SPEC-0063. Alternate framing only; the cards are not counted again.",
+              "contentHash": "52b740bf09cba4edb5a018636171600c65eeb088667964e4991d6eb26a7f8ce4",
+              "image": "verification/specimens/SPEC-0064.jpg"
             },
             {
               "observationId": "specimen:SPEC-0297",
@@ -40679,9 +41519,29 @@
               "originalHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "previewSrc": "images/previews/sI100_342_Snorlax_V2_588052.jpg?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "thumbnailSrc": "images/thumbs/sI100_342_Snorlax_V2_588052.jpg?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21"
+            },
+            {
+              "src": "verification/specimens/SPEC-0156.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0156",
+              "contentHash": "aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44",
+              "previewSrc": "images/previews/SPEC-0156.png?v=aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44",
+              "thumbnailSrc": "images/thumbs/SPEC-0156.png?v=aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0156",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/356156650452",
+              "evidence": "Complete seller photograph of Simplified Chinese Snorlax CS4DaC 342/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact listing title identifies the pictured printing as Holo.",
+              "contentHash": "f7bec3f87eaac9e04e23eb7789a12e759359de7976d9def26733d967ae00b8c4",
+              "image": "verification/specimens/SPEC-0156.png"
+            },
             {
               "observationId": "unit:U0655",
               "kind": "unit",
@@ -40738,9 +41598,29 @@
               "originalHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "previewSrc": "images/previews/sI100_342_Snorlax_V2_588052.jpg?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "thumbnailSrc": "images/thumbs/sI100_342_Snorlax_V2_588052.jpg?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21"
+            },
+            {
+              "src": "verification/specimens/SPEC-0216.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0216",
+              "contentHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
+              "previewSrc": "images/previews/SPEC-0216.png?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
+              "thumbnailSrc": "images/thumbs/SPEC-0216.png?v=c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0216",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V2-sI100342",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sI100 342 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "8448c7ebec94843af88ab3980a73fb8be662c22e2c562015649f30f35b0a6c79",
+              "image": "verification/specimens/SPEC-0216.jpg"
+            },
             {
               "observationId": "unit:U0656",
               "kind": "unit",
@@ -42422,6 +43302,17 @@
               "thumbnailSrc": "images/thumbs/smL_038_Snorlax_564732.jpg?v=520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8"
             },
             {
+              "src": "verification/specimens/SPEC-0217.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0217",
+              "contentHash": "520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8",
+              "previewSrc": "images/previews/SPEC-0217.png?v=520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8",
+              "thumbnailSrc": "images/thumbs/SPEC-0217.png?v=520131a6b7be5eec6da73f3ff1eb819c9178497d677e31bbec7bf35fb041c0d8"
+            },
+            {
               "src": "verification/specimens/SPEC-0485.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0485",
@@ -42442,6 +43333,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax smL 038/051 from the Sun & Moon Family Mewtwo Deck. The lower-right Mewtwo deck silhouette is visible on the card, preserving the fixed-deck distribution identity. The directly lit card face remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0485.",
               "contentHash": "82cbc29e4272788f0f865825fedc19d908099afc865968e31ab0f08b1da19838",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0217",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sun-Moon-Family-Pokemon-Card-Game/Snorlax",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax smL 038 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "34867f5644a07d5f6900a655b2cc5b49d5e00334fac152c2456a443f60b1fa49",
+              "image": "verification/specimens/SPEC-0217.jpg"
             },
             {
               "observationId": "specimen:SPEC-0485",
@@ -49300,6 +50200,17 @@
               "thumbnailSrc": "images/thumbs/svIba_046_Snorlax_761066.jpg?v=192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797"
             },
             {
+              "src": "verification/specimens/SPEC-0221.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0221",
+              "contentHash": "192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797",
+              "previewSrc": "images/previews/SPEC-0221.png?v=192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797",
+              "thumbnailSrc": "images/thumbs/SPEC-0221.png?v=192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797"
+            },
+            {
               "src": "verification/specimens/SPEC-0487.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0487",
@@ -49320,6 +50231,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax 046/066 from the Scarlet & Violet Battle Academy. The lower-right Battle Academy deck mark is visible on the card, preserving the fixed-deck distribution identity. The physical card prints the set mark svI; Cardmarket uses svIba for this Battle Academy product to distinguish it from the separate svI set. The directly lit card face remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0487.",
               "contentHash": "5fb1d75612a5b3ec4add1c07a3698e47f44628b3001a374b5f32397ad9ef0433",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0221",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Battle-Academy/Snorlax-svIba046",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax svIba 046 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "923dc60bf61cce9e3e0b4b2c2e8edfde6009459f6c796390f4c075bff7e421d3",
+              "image": "verification/specimens/SPEC-0221.jpg"
             },
             {
               "observationId": "specimen:SPEC-0487",
@@ -50497,9 +51417,29 @@
               "originalHash": "2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781",
               "previewSrc": "images/previews/EC5_062_Snorlax_654062.jpg?v=2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781",
               "thumbnailSrc": "images/thumbs/EC5_062_Snorlax_654062.jpg?v=2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781"
+            },
+            {
+              "src": "verification/specimens/SPEC-0199.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0199",
+              "contentHash": "2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781",
+              "previewSrc": "images/previews/SPEC-0199.png?v=2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781",
+              "thumbnailSrc": "images/thumbs/SPEC-0199.png?v=2ef013b030b7390d5c73ba0b3d57541c78707e2a11551328bc3744bf2196e781"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0199",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax EC5 062 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "704801d623b7372bff74d1939c85222eb102c4cae89627ae06c83a809a0faf1d",
+              "image": "verification/specimens/SPEC-0199.jpg"
+            },
             {
               "observationId": "unit:U0605",
               "kind": "unit",
@@ -52637,9 +53577,29 @@
               "originalHash": "c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9",
               "previewSrc": "images/previews/DP1__Snorlax_Lv_35_699402.jpg?v=c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9",
               "thumbnailSrc": "images/thumbs/DP1__Snorlax_Lv_35_699402.jpg?v=c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9"
+            },
+            {
+              "src": "verification/specimens/SPEC-0228.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0228",
+              "contentHash": "c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9",
+              "previewSrc": "images/previews/SPEC-0228.png?v=c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9",
+              "thumbnailSrc": "images/thumbs/SPEC-0228.png?v=c95b60c90c88e70fb14b94aabdcc06e5c59f7462f9f914292e1db5712b34a1a9"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0228",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.35 DP1 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "586ca82c1c973162a8879da37e6b846773cc1a03d9d21c50f446e6a5ba37a19c",
+              "image": "verification/specimens/SPEC-0228.jpg"
+            },
             {
               "observationId": "unit:U0476",
               "kind": "unit",
@@ -53868,9 +54828,29 @@
               "originalHash": "457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71",
               "previewSrc": "images/previews/Pt2_070_Snorlax_Lv_40_678150.jpg?v=457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71",
               "thumbnailSrc": "images/thumbs/Pt2_070_Snorlax_Lv_40_678150.jpg?v=457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71"
+            },
+            {
+              "src": "verification/specimens/SPEC-0230.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0230",
+              "contentHash": "457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71",
+              "previewSrc": "images/previews/SPEC-0230.png?v=457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71",
+              "thumbnailSrc": "images/thumbs/SPEC-0230.png?v=457234d4240caa6eed7e66b66e3e7679f0dbe3e6f7f5b2b8d8098c7873616c71"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0230",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax Lv.40 Pt2 070 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "c1822104b0893d493952392bb862094931b54728967fdc34885c7e3392ed1787",
+              "image": "verification/specimens/SPEC-0230.jpg"
+            },
             {
               "observationId": "unit:U0751",
               "kind": "unit",
@@ -55575,9 +56555,29 @@
               "originalHash": "9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
               "previewSrc": "images/previews/XY-P_149_Snorlax_V1_553464.jpg?v=9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
               "thumbnailSrc": "images/thumbs/XY-P_149_Snorlax_V1_553464.jpg?v=9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd"
+            },
+            {
+              "src": "verification/specimens/SPEC-0222.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0222",
+              "contentHash": "9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
+              "previewSrc": "images/previews/SPEC-0222.png?v=9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd",
+              "thumbnailSrc": "images/thumbs/SPEC-0222.png?v=9853fb33a98194c7213d9173b8b531d0196b616fa3b2c3b198c99d42b445dbcd"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0222",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax XY-P 149 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "bc3ec94576385e084a9607431143547854b35e4c3f02bf2fbbf4bda933fea3d4",
+              "image": "verification/specimens/SPEC-0222.jpg"
+            },
             {
               "observationId": "unit:U0660",
               "kind": "unit",
@@ -58638,9 +59638,29 @@
               "originalHash": "db68982642b076927d9b961763d9cd3d6001ee7571f24fc2f0f72640b028e432",
               "previewSrc": "images/previews/KSS_26_Snorlax_281292.jpg?v=db68982642b076927d9b961763d9cd3d6001ee7571f24fc2f0f72640b028e432",
               "thumbnailSrc": "images/thumbs/KSS_26_Snorlax_281292.jpg?v=db68982642b076927d9b961763d9cd3d6001ee7571f24fc2f0f72640b028e432"
+            },
+            {
+              "src": "verification/specimens/SPEC-0132.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0132",
+              "contentHash": "03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
+              "previewSrc": "images/previews/SPEC-0132.png?v=03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
+              "thumbnailSrc": "images/thumbs/SPEC-0132.png?v=03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0132",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
+              "evidence": "Spanish database scan of Kalos Starter Set Snorlax 26/39. Pokémon Básico, Golpe Roca, Fuerza and 26/39 establish the localized card identity. No physical finish is inferred from this database render.",
+              "contentHash": "2c15ff3801273b8c04788868cd369998d554ad193be0953a98dbffb307198dd4",
+              "image": "verification/specimens/SPEC-0132.png"
+            },
             {
               "observationId": "unit:U0482",
               "kind": "unit",
@@ -58754,6 +59774,17 @@
               "thumbnailSrc": "images/thumbs/HXY_026_Snorlax_564579.jpg?v=f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c"
             },
             {
+              "src": "verification/specimens/SPEC-0202.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0202",
+              "contentHash": "f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c",
+              "previewSrc": "images/previews/SPEC-0202.png?v=f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c",
+              "thumbnailSrc": "images/thumbs/SPEC-0202.png?v=f50abdda4442f3830018ce34705331321a95a28c446ddbba86176830e6a7616c"
+            },
+            {
               "src": "verification/specimens/SPEC-0482.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0482",
@@ -58774,6 +59805,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax HXY 026/039 from the XY Beginning Set. The lower-right green deck mark is visible on the card, preserving the fixed-deck distribution identity. Across the angled and directly lit card face, the artwork and card body remain uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0482.",
               "contentHash": "91455adb037330cde2947b0429b959f7933148fc4d7cbc2f7166e17f92b51d3d",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0202",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Beginning-Set/Snorlax",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax HXY 026 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "b0ff6d504f3b7c5207a0c6076e6afa4acac6db7217ecf9d6104032ec904612eb",
+              "image": "verification/specimens/SPEC-0202.jpg"
             },
             {
               "observationId": "specimen:SPEC-0482",
@@ -58848,6 +59888,17 @@
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0461.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0461",
+              "contentHash": "afff12b582d438f855bba081d1a585cdd3bccf0f73f29740afa03595fa8ebdde",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "afff12b582d438f855bba081d1a585cdd3bccf0f73f29740afa03595fa8ebdde",
+              "previewSrc": "images/previews/SPEC-0461.png?v=afff12b582d438f855bba081d1a585cdd3bccf0f73f29740afa03595fa8ebdde",
+              "thumbnailSrc": "images/thumbs/SPEC-0461.png?v=afff12b582d438f855bba081d1a585cdd3bccf0f73f29740afa03595fa8ebdde"
             }
           ],
           "observations": [
@@ -58859,6 +59910,15 @@
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 FXY 026/036 in XY 퍼스트세트 「도치마론의 진화」, with illustrator Naoki Saito and HP120. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
               "contentHash": "480c301d67776b2a3fcdeb438e70d7e9dad5afd2fa1a366c0f7ed84df8543b5b",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/FXY/FXY_G_026.jpg?w=512"
+            },
+            {
+              "observationId": "specimen:SPEC-0461",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://collectory.cc/cards/f0ae72d3-a5da-4535-bd33-585d2938cd6a?lang=en",
+              "evidence": "Complete Korean database render of Snorlax from the XY Chespin First Set. The Hangul name and rules text, printed HXY set mark and collector number 026/036 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred.",
+              "contentHash": "56038ee89194fe75ada626e97d4bc2d5b636a48a9606e0eccb3188160e5b6263",
+              "image": "verification/specimens/SPEC-0461.png"
             },
             {
               "observationId": "unit:U0586",
@@ -59558,6 +60618,17 @@
               "originalHash": "8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
               "previewSrc": "images/previews/sA_10_Snorlax_524195.jpg?v=8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
               "thumbnailSrc": "images/thumbs/sA_10_Snorlax_524195.jpg?v=8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08"
+            },
+            {
+              "src": "verification/specimens/SPEC-0213.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0213",
+              "contentHash": "8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
+              "previewSrc": "images/previews/SPEC-0213.png?v=8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08",
+              "thumbnailSrc": "images/thumbs/SPEC-0213.png?v=8954ad544160e497316bd5e014f277cc1dfaa1ea2ad50518fae0cabc039b3c08"
             }
           ],
           "observations": [
@@ -59578,6 +60649,15 @@
               "evidence": "Post 10 describes the November 2019 Starter Set V decks as having standard holo and non-holo cards and a hit-deck version in which every non-holo card is a reverse holo or mirror foil. Applied to the fixed-deck Japanese sA 10 Snorlax, this positively establishes the non-holo and mirror-holo printings; it does not close the finish list or identify a foil pattern.",
               "contentHash": "191ef32f1f5456d8a6e891f8ae1266de6448c7f6b9bda9fd2d1623da506488ea",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0213",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Starter-Decks/Snorlax-sA10",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sA 10 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "39cab2cc1b8a81a277efcfa6636f8096f3340549a38d5296e4bf6a45d3c67bb3",
+              "image": "verification/specimens/SPEC-0213.jpg"
             },
             {
               "observationId": "unit:U0609",
@@ -60515,9 +61595,29 @@
               "originalHash": "e74a0dbec59946c17c764eef0064e49c118bb0af697e9281f0d79b72cbfd6876",
               "previewSrc": "images/previews/SWSH_032_Snorlax_461684.jpg?v=e74a0dbec59946c17c764eef0064e49c118bb0af697e9281f0d79b72cbfd6876",
               "thumbnailSrc": "images/thumbs/SWSH_032_Snorlax_461684.jpg?v=e74a0dbec59946c17c764eef0064e49c118bb0af697e9281f0d79b72cbfd6876"
+            },
+            {
+              "src": "verification/specimens/SPEC-0136.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0136",
+              "contentHash": "3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd",
+              "previewSrc": "images/previews/SPEC-0136.png?v=3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd",
+              "thumbnailSrc": "images/thumbs/SPEC-0136.png?v=3efa97774bdb63a31f82b1fbf8793209a3b6332e6f9314995d75dc88ccdb1fdd"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0136",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/c/c0/latest/20200327234844/Snorlax_%28SWSH_Promo_32_TCG%29.png",
+              "evidence": "Spanish database scan of SWSH Black Star Promo Snorlax SWSH032. Pokémon Básico, Placaje Giro, Impacto Pesado, the black-star promo symbol and SWSH032 establish the localized card identity. No physical finish is inferred from this database render.",
+              "contentHash": "0300bd355df2f7c4d12c9b46ebc3adcd5b844d1a0e117cad65d319a51b115a4f",
+              "image": "verification/specimens/SPEC-0136.png"
+            },
             {
               "observationId": "unit:U0418",
               "kind": "unit",
@@ -61979,6 +63079,17 @@
               "thumbnailSrc": "images/thumbs/S-P_156_Snorlax_534097.jpg?v=0450f6ee78bc03091bbff8ab3d2b56413fd48cc9b3de0e58e8b7b9e120821c19"
             },
             {
+              "src": "verification/specimens/SPEC-0205.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0205",
+              "contentHash": "0450f6ee78bc03091bbff8ab3d2b56413fd48cc9b3de0e58e8b7b9e120821c19",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0450f6ee78bc03091bbff8ab3d2b56413fd48cc9b3de0e58e8b7b9e120821c19",
+              "previewSrc": "images/previews/SPEC-0205.png?v=0450f6ee78bc03091bbff8ab3d2b56413fd48cc9b3de0e58e8b7b9e120821c19",
+              "thumbnailSrc": "images/thumbs/SPEC-0205.png?v=0450f6ee78bc03091bbff8ab3d2b56413fd48cc9b3de0e58e8b7b9e120821c19"
+            },
+            {
               "src": "verification/specimens/SPEC-0483.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0483",
@@ -61999,6 +63110,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax PROMO 156/S-P with the コロコロイチバン! (CoroCoro Ichiban!) magazine logo printed over the artwork. A distinct reflective rainbow foil sheen is visible across the artwork, border and text area, establishing the holo printing. Retained as SPEC-0483.",
               "contentHash": "d130d3d0d5acf376b83cad227ffab0baf074b1e84c4076295367b7ca3facf23a",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0205",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield-Promos/Snorlax-S-P156",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax S-P 156 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "7ba336339c68838a31ec6930b3a6277299cacae164221eebf9fd647d5a600006",
+              "image": "verification/specimens/SPEC-0205.jpg"
             },
             {
               "observationId": "specimen:SPEC-0483",
@@ -63675,6 +64795,50 @@
               "thumbnailSrc": "images/thumbs/SV-P_CS_277_Snorlax_889496.jpg?v=4c712f58592d71ee84a42d1b4687841fe14710058e608a761bd8743b85f0475d"
             },
             {
+              "src": "verification/specimens/SPEC-0151.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0151",
+              "contentHash": "00bb86deb1bda8dcbd7414f3a3b21ec7a305fbef2fdeda75596e0d182662dfc1",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "00bb86deb1bda8dcbd7414f3a3b21ec7a305fbef2fdeda75596e0d182662dfc1",
+              "previewSrc": "images/previews/SPEC-0151.png?v=00bb86deb1bda8dcbd7414f3a3b21ec7a305fbef2fdeda75596e0d182662dfc1",
+              "thumbnailSrc": "images/thumbs/SPEC-0151.png?v=00bb86deb1bda8dcbd7414f3a3b21ec7a305fbef2fdeda75596e0d182662dfc1"
+            },
+            {
+              "src": "verification/specimens/SPEC-0152.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0152",
+              "contentHash": "fda41b4b1b2d6ba176afbbb20bb30333b498a0329c6318112a51aa0556c9f05f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "fda41b4b1b2d6ba176afbbb20bb30333b498a0329c6318112a51aa0556c9f05f",
+              "previewSrc": "images/previews/SPEC-0152.png?v=fda41b4b1b2d6ba176afbbb20bb30333b498a0329c6318112a51aa0556c9f05f",
+              "thumbnailSrc": "images/thumbs/SPEC-0152.png?v=fda41b4b1b2d6ba176afbbb20bb30333b498a0329c6318112a51aa0556c9f05f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0468.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0468",
+              "contentHash": "4a28ade023543190aa774352a9fe43522cb44280277d0dd6f1eabdd218a3e515",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4a28ade023543190aa774352a9fe43522cb44280277d0dd6f1eabdd218a3e515",
+              "previewSrc": "images/previews/SPEC-0468.png?v=4a28ade023543190aa774352a9fe43522cb44280277d0dd6f1eabdd218a3e515",
+              "thumbnailSrc": "images/thumbs/SPEC-0468.png?v=4a28ade023543190aa774352a9fe43522cb44280277d0dd6f1eabdd218a3e515"
+            },
+            {
+              "src": "verification/specimens/SPEC-0469.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0469",
+              "contentHash": "36d048e6e7c7229d0780b062f68d81ee8c0c4578f88336e4fb4f3a727076b920",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "36d048e6e7c7229d0780b062f68d81ee8c0c4578f88336e4fb4f3a727076b920",
+              "previewSrc": "images/previews/SPEC-0469.png?v=36d048e6e7c7229d0780b062f68d81ee8c0c4578f88336e4fb4f3a727076b920",
+              "thumbnailSrc": "images/thumbs/SPEC-0469.png?v=36d048e6e7c7229d0780b062f68d81ee8c0c4578f88336e4fb4f3a727076b920"
+            },
+            {
               "src": "verification/specimens/SPEC-0470.png",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0470",
@@ -63762,6 +64926,42 @@
               "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
               "contentHash": "35fc89111715a8ee135e3361fb203eb2bfb8ed03aa8e379c36e0cb66874f7b0e",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0151",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/227367215820",
+              "evidence": "Complete front photograph of Simplified Chinese Snorlax promo 277/SV-P. The Simplified Chinese text, 277/SV-P collector identity and visible Pikachu promotional stamp establish the exact localized stamped card.",
+              "contentHash": "581163b2d82dd4b4f314e41e12f83834940e142d4f80ffaf2287a48e5d24b63d",
+              "image": "verification/specimens/SPEC-0151.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0152",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/227367215820",
+              "evidence": "Second photograph from the same eBay listing and exact Simplified Chinese 277/SV-P Snorlax promo as SPEC-0151. It is retained separately so every listing photograph used in the assessment remains part of the data specification.",
+              "contentHash": "65df150b820154fd9a01066be4112fe94ab27a521602b329ee46e3b3d5cd7a07",
+              "image": "verification/specimens/SPEC-0152.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0468",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/358744944023",
+              "evidence": "Complete seller photograph of Simplified Chinese Snorlax promo 277/SV-P. The Simplified Chinese text, printed 277/SV-P collector number and visible Pikachu PROMO stamp establish the exact localized card. The straight-on listing scan is retained for identity only; it does not safely distinguish the three owner-confirmed finishes.",
+              "contentHash": "b652a77a7a154d0cddd10720a7beae48cca6e8625ba29dc04dbd8581c824f592",
+              "image": "verification/specimens/SPEC-0468.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0469",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Uncut owner photograph showing three physical Simplified Chinese Snorlax 277/SV-P promos together: the top card is owner-confirmed non-holo, the lower-left card visibly carries a Poké Ball mirror pattern, and the lower-right card visibly carries a Master Ball mirror pattern. The owner states: \"Die Promo gibt es als Non-holo, Pokeball Reverse und Masterball Reverse\". This original frame is retained so the per-card crops SPEC-0470 through SPEC-0472 can be checked against it.",
+              "contentHash": "d1a46a51e7326be38b8b056e870aa065b4952f84d48eab534c24eb12acab93d2",
+              "image": "verification/specimens/SPEC-0469.jpg"
             },
             {
               "observationId": "specimen:SPEC-0470",
@@ -64095,9 +65295,29 @@
               "originalHash": "9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47",
               "previewSrc": "images/previews/SV-P_ID_278_Snorlax_859884.jpg?v=9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47",
               "thumbnailSrc": "images/thumbs/SV-P_ID_278_Snorlax_859884.jpg?v=9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47"
+            },
+            {
+              "src": "verification/specimens/SPEC-0187.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0187",
+              "contentHash": "9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47",
+              "previewSrc": "images/previews/SPEC-0187.png?v=9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47",
+              "thumbnailSrc": "images/thumbs/SPEC-0187.png?v=9fb01dcbefe69fc223fe14c418e8e1251eed04665873501b62072fc1e8f7bd47"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0187",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo/",
+              "evidence": "Complete Indonesian 278/SV-P Snorlax image. The printed Indonesian text, collector number and Pokémon TCG GYM stamp establish the exact card-release identity; finish is established separately by Pokumon.",
+              "contentHash": "3914ecee4176f342940a981411097fba194ae6a58e19408e96dac1f8322660ac",
+              "image": "verification/specimens/SPEC-0187.png"
+            },
             {
               "observationId": "unit:U0773",
               "kind": "unit",
@@ -66444,6 +67664,17 @@
               "thumbnailSrc": "images/thumbs/SPEC-0051.png?v=ac63d55db742bd902c0527fb69a469e88e7a42593c89f3d7db9a6bc31f597c08"
             },
             {
+              "src": "verification/specimens/SPEC-0101.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0101",
+              "contentHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "previewSrc": "images/previews/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "thumbnailSrc": "images/thumbs/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343"
+            },
+            {
               "src": "verification/specimens/SPEC-0103.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0103",
@@ -66527,6 +67758,15 @@
               "evidence": "The Elite Fourum binder photograph shows Russian Flashfire Snorlax 80/106 non-holo and reverse-holo copies side by side. The reverse copy visibly carries the type-symbol background treatment while the Russian name, artwork and 80/106 identify the exact card. On 2026-08-26 the collection owner reviewed candidate 2 and confirmed it as the correct reverse-holo printing.",
               "contentHash": "e1bfebacdae5fb554c25095a8cac0c73619798934c7fbc103516887c6bf2c7ee",
               "image": "verification/specimens/SPEC-0051.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0101",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "iOS memory group frame exported in 2026 with the overlay Erinnerung 1. Mai 2025. It derives from an owner photograph and shows three physical cards: Japanese XY10 057/078, Russian FLF 80/106 reverse-holo, and English Legendary Collection 64/110. The committed JPEG is a Windows WIC conversion of the original HEIC and is derivative evidence, not three additional cards.",
+              "contentHash": "17e8419f4ec0af0f78267dc02ef0924164dfdb63543b98a0dcf2086ff523c5f4",
+              "image": "verification/specimens/SPEC-0101.jpg"
             },
             {
               "observationId": "specimen:SPEC-0103",
@@ -67324,6 +68564,17 @@
               "thumbnailSrc": "images/thumbs/GEN_58_Snorlax_288496.jpg?v=64da63e4c52dc1a5c118a5ce0b4578ea2e265a07ac5a5dd415069b3dd8a2bb60"
             },
             {
+              "src": "verification/specimens/SPEC-0409.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0409",
+              "contentHash": "3019dd135d8d1d81caafcff80f23a56bd1a517961c40cd9d4eea5d5d77b0c13c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3019dd135d8d1d81caafcff80f23a56bd1a517961c40cd9d4eea5d5d77b0c13c",
+              "previewSrc": "images/previews/SPEC-0409.png?v=3019dd135d8d1d81caafcff80f23a56bd1a517961c40cd9d4eea5d5d77b0c13c",
+              "thumbnailSrc": "images/thumbs/SPEC-0409.png?v=3019dd135d8d1d81caafcff80f23a56bd1a517961c40cd9d4eea5d5d77b0c13c"
+            },
+            {
               "src": "verification/specimens/SPEC-0465.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0465",
@@ -67362,6 +68613,15 @@
               "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
               "contentHash": "a1fa149aef43f2b4c3ae94123fe2d4e17d31c94b2cfd0febd4c78dcba70d58d5",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0409",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "Complete Cardmarket seller photograph of Italian Generations Snorlax 58/83. The visible Italian rules text, the Generations set symbol and collector number 58/83 establish the exact localized card identity. No finish is inferred from the photograph or from the marketplace language filter.",
+              "contentHash": "0ff5543daed97e4ec00201ea0007f43a7cd85dfc1d92b981da7038d96d2e89bd",
+              "image": "verification/specimens/SPEC-0409.jpg"
             },
             {
               "observationId": "specimen:SPEC-0465",
@@ -67630,6 +68890,17 @@
               "originalHash": "64da63e4c52dc1a5c118a5ce0b4578ea2e265a07ac5a5dd415069b3dd8a2bb60",
               "previewSrc": "images/previews/GEN_58_Snorlax_288496.jpg?v=64da63e4c52dc1a5c118a5ce0b4578ea2e265a07ac5a5dd415069b3dd8a2bb60",
               "thumbnailSrc": "images/thumbs/GEN_58_Snorlax_288496.jpg?v=64da63e4c52dc1a5c118a5ce0b4578ea2e265a07ac5a5dd415069b3dd8a2bb60"
+            },
+            {
+              "src": "verification/specimens/SPEC-0131.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0131",
+              "contentHash": "6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
+              "previewSrc": "images/previews/SPEC-0131.png?v=6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
+              "thumbnailSrc": "images/thumbs/SPEC-0131.png?v=6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a"
             }
           ],
           "observations": [
@@ -67659,6 +68930,15 @@
               "evidence": "The retained Spanish identity is GEN 58/83 (SPEC-0131); the set row names Snorlax 58/83 as Rare and the language section explicitly includes Spanish in the reverse-holo treatment. Applied only to that already established Western release. No ordinary finish, special stamp, edition or absence is inferred.",
               "contentHash": "25c3fe0a1d7151e8aff73dea8773e03fc86b3b357cc64f6744c114dddae5591c",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0131",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.pkparaiso.com/tcg/twentiethann/es_512/058.jpg",
+              "evidence": "Spanish database scan of Generations Snorlax 58/83. Pokémon Básico, Vuelta y Cabezadita, Presión Soporífera, the Generations symbol and 58/83 establish the localized card identity. No physical finish is inferred from this database render.",
+              "contentHash": "395a6ffde990a9d85a372df1fb40351073d2325b10139ea7f11c4dd12dff107f",
+              "image": "verification/specimens/SPEC-0131.jpg"
             },
             {
               "observationId": "unit:U0245",
@@ -67732,9 +69012,29 @@
               "originalHash": "a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136",
               "previewSrc": "images/previews/20th_047_Snorlax_563078.jpg?v=a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136",
               "thumbnailSrc": "images/thumbs/20th_047_Snorlax_563078.jpg?v=a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136"
+            },
+            {
+              "src": "verification/specimens/SPEC-0195.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0195",
+              "contentHash": "a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136",
+              "previewSrc": "images/previews/SPEC-0195.png?v=a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136",
+              "thumbnailSrc": "images/thumbs/SPEC-0195.png?v=a77dfd96683c1d58f6d4bad2d63d8d8d7fcafa9c96abac8d5f33378524923136"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0195",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAK-Starter-Pack/Snorlax-20th047",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax 20th 047 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "702b6e2f222f07143b2590380035b841ac435b31933fa7984d0477f7ffe3c341",
+              "image": "verification/specimens/SPEC-0195.jpg"
+            },
             {
               "observationId": "unit:U0679",
               "kind": "unit",
@@ -67875,9 +69175,29 @@
               "originalHash": "cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
               "previewSrc": "images/previews/XY2_066_Snorlax_564369.jpg?v=cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
               "thumbnailSrc": "images/thumbs/XY2_066_Snorlax_564369.jpg?v=cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62"
+            },
+            {
+              "src": "verification/specimens/SPEC-0225.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0225",
+              "contentHash": "cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
+              "previewSrc": "images/previews/SPEC-0225.png?v=cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62",
+              "thumbnailSrc": "images/thumbs/SPEC-0225.png?v=cc82eaa598b1683d32fb9b193c29773bb1012d4a1b13db0e0fb6cd80f4b37c62"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0225",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax XY2 066 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "15c59e5e73fb766fa559aaa2a11d476dbeb1c6dc75ce42aee4b6e553086c4011",
+              "image": "verification/specimens/SPEC-0225.jpg"
+            },
             {
               "observationId": "unit:U0560",
               "kind": "unit",
@@ -68826,9 +70146,29 @@
               "originalHash": "2d0b43c821f3f4b94f1f53735aa8df6e70dbd679bbed66f0d4fd6a2e6b699c88",
               "previewSrc": "images/previews/JU_27_Snorlax_V2_273824.jpg?v=2d0b43c821f3f4b94f1f53735aa8df6e70dbd679bbed66f0d4fd6a2e6b699c88",
               "thumbnailSrc": "images/thumbs/JU_27_Snorlax_V2_273824.jpg?v=2d0b43c821f3f4b94f1f53735aa8df6e70dbd679bbed66f0d4fd6a2e6b699c88"
+            },
+            {
+              "src": "verification/specimens/SPEC-0134.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0134",
+              "contentHash": "1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
+              "previewSrc": "images/previews/SPEC-0134.png?v=1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
+              "thumbnailSrc": "images/thumbs/SPEC-0134.png?v=1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0134",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png",
+              "evidence": "Spanish database scan of Jungle Snorlax 27/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 27/64 establish the localized card identity. No physical finish is inferred from this database render.",
+              "contentHash": "d46bfb6b0e4c344ba4d152570edff60bf17ea3137ec16a781007e137f226a6e0",
+              "image": "verification/specimens/SPEC-0134.png"
+            },
             {
               "observationId": "unit:U0092",
               "kind": "unit",
@@ -68962,6 +70302,15 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax PJU (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Large stars and reflective circles are visible throughout the artwork window.",
               "contentHash": "6faf50ff0e7d6b6a66e6d14f34fedd3cdfdccfe1d54a7c9c0c7155ca283f51f9",
               "image": "verification/specimens/SPEC-0204.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0396",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 5/17 shows one complete CGC-encapsulated Japanese Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1997) Japanese / Pokémon Jungle / Holo\" and assigns grade PRISTINE 10. The post caption explicitly identifies this carousel position as Japanese. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "90a4c0c15a6f15b47b536fc7e13c9176193b219f6b8619b40a0b0899f6bc96b2",
+              "image": null
             },
             {
               "observationId": "unit:U0380",
@@ -69158,6 +70507,24 @@
               "evidence": "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries the EDITIE 1 stamp and a reflective holographic art field; the grading label independently reads 1st Edition 11/64 Holo.",
               "contentHash": "83761fd456710721deb0f17311fda141ad82b14dbd60cabd7176915d9c91ea34",
               "image": "verification/specimens/SPEC-0041.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0401",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 10/17 shows one complete CGC-encapsulated Dutch Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Dutch / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT+ 9.5. The post caption explicitly identifies this carousel position as Dutch 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "8cf6b70536cfb614e5a64cce9035c4a6c765b19ab51c1545aa133f3c6dff75c8",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0402",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 11/17 shows one complete CGC-encapsulated Dutch Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Dutch / Jungle - 11/64 / Holo\" and assigns grade MINT 9. The post caption explicitly identifies this carousel position as Dutch Unlimited. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "cb6b8827a97111270de655f790a9393165701cd8e3d31505c6b2f7ab948a3b4f",
+              "image": null
             },
             {
               "observationId": "unit:U0125",
@@ -69658,6 +71025,24 @@
               "image": "verification/specimens/SPEC-0111.jpg"
             },
             {
+              "observationId": "specimen:SPEC-0403",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 12/17 shows one complete CGC-encapsulated Italian Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Italian / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT 9. The post caption explicitly identifies this carousel position as Italian 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "8e100a97793ea30a57c343847e19fea2400d7515160f487f85a16ca8442db315",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0404",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 13/17 shows one complete CGC-encapsulated Italian Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (2000) Italian / Jungle - 11/64 / Holo\" and assigns grade GEM MINT 10. The post caption explicitly identifies this carousel position as Italian Unlimited. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "b445897810f996df39a81b3ad235f140ff90fd9ee29042bc3b7a1c7660830c1c",
+              "image": null
+            },
+            {
               "observationId": "unit:U0123",
               "kind": "unit",
               "provider": "bulbapedia",
@@ -69795,6 +71180,15 @@
               "image": "verification/specimens/SPEC-0055.jpg"
             },
             {
+              "observationId": "specimen:SPEC-0408",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 17/17 shows one complete CGC-encapsulated Portuguese Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Portuguese / Jungle - Unlimited - 11/64 / Holo\" and assigns grade GEM MINT 10. The post caption explicitly identifies this carousel position as Portuguese Unlimited. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "07ee06b62e0c4f1e5f4f39044e1c9fa552e71e2c861bcb232271f5dc6a6b3f4e",
+              "image": null
+            },
+            {
               "observationId": "unit:U0124",
               "kind": "unit",
               "provider": "bulbapedia",
@@ -69912,6 +71306,17 @@
               "originalHash": "5e02efc307764513cd636b3477d856709e54e0cef2323e87f97b10cb0497e2f6",
               "previewSrc": "images/previews/SPEC-0130.png?v=5e02efc307764513cd636b3477d856709e54e0cef2323e87f97b10cb0497e2f6",
               "thumbnailSrc": "images/thumbs/SPEC-0130.png?v=5e02efc307764513cd636b3477d856709e54e0cef2323e87f97b10cb0497e2f6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0133.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0133",
+              "contentHash": "9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+              "previewSrc": "images/previews/SPEC-0133.png?v=9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+              "thumbnailSrc": "images/thumbs/SPEC-0133.png?v=9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0"
             }
           ],
           "observations": [
@@ -69959,6 +71364,15 @@
               "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment.",
               "contentHash": "68b62351a706a56790aef7e039496f27f9195cc17c63a1f8776e6d79ce5ba4f2",
               "image": "verification/specimens/SPEC-0130.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0133",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_%28Jungla_11_TCG%29.png",
+              "evidence": "Spanish database scan of Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the localized card identity. No physical finish is inferred from this database render; the separate physical seller photographs SPEC-0129 and SPEC-0130 support the holo observation.",
+              "contentHash": "85d1f82da90e02e863e4f97f0b6381fcc3852a04c0d46a42fd59fa76a31a8104",
+              "image": "verification/specimens/SPEC-0133.png"
             },
             {
               "observationId": "unit:U0122",
@@ -70737,6 +72151,17 @@
               "originalHash": "a0f6f1b5d501cdfdb096a4599f518988350d262e860dd6da3cfb0b085ff2b2f6",
               "previewSrc": "images/previews/XYPR_179_Snorlax_295168.jpg?v=a0f6f1b5d501cdfdb096a4599f518988350d262e860dd6da3cfb0b085ff2b2f6",
               "thumbnailSrc": "images/thumbs/XYPR_179_Snorlax_295168.jpg?v=a0f6f1b5d501cdfdb096a4599f518988350d262e860dd6da3cfb0b085ff2b2f6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0135.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0135",
+              "contentHash": "0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54",
+              "previewSrc": "images/previews/SPEC-0135.png?v=0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54",
+              "thumbnailSrc": "images/thumbs/SPEC-0135.png?v=0c14442b0ffbf0daf133e2d5815bed368647f9b7d897debde8a9f784e9322f54"
             }
           ],
           "observations": [
@@ -70748,6 +72173,15 @@
               "evidence": "Physical Spanish copy inspected from a photograph: \"Snorlax\", BASICO, Niv.20, 130 PS, \"Habilidad: Inmunidad\", attack \"Golpe Cuerpo\" 50, Pokedex line \"N.o 143 Pokemon Dormir Altura: 2,1 m Peso: 460,0 kg\", debilidad Fighting x2, retirada 4. All three photographed copies carry card number XY179 with the black star promo symbol, \"Illus. Ken Sugimori\" and (c)2016 Pokemon, matching the English XY179 print. This also shows the promo was localized across Europe, which the Bulbapedia release note (\"in the English Snorlax-GX Box\") does not convey.",
               "contentHash": "ca948681b3a7d26359dc2da85d736e2d0fbd5ee23826503485312dcaa0877dc3",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0135",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/e/e9/latest/20210107134302/Snorlax_%28XY_Promo_179_TCG%29.png",
+              "evidence": "Spanish database scan of XY Black Star Promo Snorlax XY179. Pokémon Básico, Habilidad: Inmunidad, Golpe Cuerpo, the black-star promo symbol and XY179 establish the localized card identity. No physical finish is inferred from this database render.",
+              "contentHash": "a44c5806c51dd800b3cf97e19f1c96906fb1460de433d38688a5c4f790379327",
+              "image": "verification/specimens/SPEC-0135.png"
             },
             {
               "observationId": "unit:U0229",
@@ -71022,6 +72456,28 @@
               "originalHash": "cd2b571eb84cf1a4424df069274ddb164e5f0579b052a989382714d2ca96ad33",
               "previewSrc": "images/previews/LC_64_Snorlax_274829.jpg?v=cd2b571eb84cf1a4424df069274ddb164e5f0579b052a989382714d2ca96ad33",
               "thumbnailSrc": "images/thumbs/LC_64_Snorlax_274829.jpg?v=cd2b571eb84cf1a4424df069274ddb164e5f0579b052a989382714d2ca96ad33"
+            },
+            {
+              "src": "verification/specimens/SPEC-0101.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0101",
+              "contentHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "previewSrc": "images/previews/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "thumbnailSrc": "images/thumbs/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343"
+            },
+            {
+              "src": "verification/specimens/SPEC-0102.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0102",
+              "contentHash": "6ee4524fc38f8b1a170f2f46ad1a62ace768e5406b320d2a73f28238d323893c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6ee4524fc38f8b1a170f2f46ad1a62ace768e5406b320d2a73f28238d323893c",
+              "previewSrc": "images/previews/SPEC-0102.png?v=6ee4524fc38f8b1a170f2f46ad1a62ace768e5406b320d2a73f28238d323893c",
+              "thumbnailSrc": "images/thumbs/SPEC-0102.png?v=6ee4524fc38f8b1a170f2f46ad1a62ace768e5406b320d2a73f28238d323893c"
             }
           ],
           "observations": [
@@ -71069,6 +72525,24 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
               "contentHash": "fc1642502e5ba45ad61c410f72885faf6cf5c50ba4c6e07b83e93fa63fc30165",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0101",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "iOS memory group frame exported in 2026 with the overlay Erinnerung 1. Mai 2025. It derives from an owner photograph and shows three physical cards: Japanese XY10 057/078, Russian FLF 80/106 reverse-holo, and English Legendary Collection 64/110. The committed JPEG is a Windows WIC conversion of the original HEIC and is derivative evidence, not three additional cards.",
+              "contentHash": "17e8419f4ec0af0f78267dc02ef0924164dfdb63543b98a0dcf2086ff523c5f4",
+              "image": "verification/specimens/SPEC-0101.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0102",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "iOS memory close frame exported in 2026 with the overlay Erinnerung 1. Mai 2025, derived from the owner group photograph in SPEC-0101. It shows English Legendary Collection Snorlax 64/110, HP 90, Pokémon Power Thick Skinned and Body Slam 30. The number is established by the group frame; the committed JPEG is a Windows WIC conversion of the original HEIC.",
+              "contentHash": "132cd038cef910118e1d4af14c3e93b86ab98c224577839ccba12d3711a55ba4",
+              "image": "verification/specimens/SPEC-0102.jpg"
             },
             {
               "observationId": "unit:U0322",
@@ -72267,9 +73741,69 @@
               "originalHash": "bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
               "previewSrc": "images/previews/XY10_057_Snorlax_562999.jpg?v=bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
               "thumbnailSrc": "images/thumbs/XY10_057_Snorlax_562999.jpg?v=bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11"
+            },
+            {
+              "src": "verification/specimens/SPEC-0101.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0101",
+              "contentHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "previewSrc": "images/previews/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343",
+              "thumbnailSrc": "images/thumbs/SPEC-0101.png?v=bf0326e0ee03e8b26b60deb2696f2913b86d63bacc36782868727c066760d343"
+            },
+            {
+              "src": "verification/specimens/SPEC-0104.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0104",
+              "contentHash": "957e000252681e4aa497743db0649f0f1215b3d3966508e5bb22084f7a66846f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "957e000252681e4aa497743db0649f0f1215b3d3966508e5bb22084f7a66846f",
+              "previewSrc": "images/previews/SPEC-0104.png?v=957e000252681e4aa497743db0649f0f1215b3d3966508e5bb22084f7a66846f",
+              "thumbnailSrc": "images/thumbs/SPEC-0104.png?v=957e000252681e4aa497743db0649f0f1215b3d3966508e5bb22084f7a66846f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0224.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0224",
+              "contentHash": "bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
+              "previewSrc": "images/previews/SPEC-0224.png?v=bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11",
+              "thumbnailSrc": "images/thumbs/SPEC-0224.png?v=bf35095d3926582fdfd054fb4b46ec72c9975001c2aee7d4b6d7567be3918f11"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0101",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "iOS memory group frame exported in 2026 with the overlay Erinnerung 1. Mai 2025. It derives from an owner photograph and shows three physical cards: Japanese XY10 057/078, Russian FLF 80/106 reverse-holo, and English Legendary Collection 64/110. The committed JPEG is a Windows WIC conversion of the original HEIC and is derivative evidence, not three additional cards.",
+              "contentHash": "17e8419f4ec0af0f78267dc02ef0924164dfdb63543b98a0dcf2086ff523c5f4",
+              "image": "verification/specimens/SPEC-0101.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0104",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "iOS memory close frame exported in 2026 with the overlay Erinnerung 1. Mai 2025, derived from the owner group photograph in SPEC-0101. It shows Japanese カビゴン XY10 057/078, HP 140, attacks ねがえり and のみこむ. The collector number is established by the group frame; the committed JPEG is a Windows WIC conversion of the original HEIC. No finish is inferred from the derived crop.",
+              "contentHash": "4cb4c3a76d1af68b2633c2e6f36d7d4cde05d53541785a0edee7ebd4b5b1e7d6",
+              "image": "verification/specimens/SPEC-0104.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0224",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax XY10 057 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "9a8b688e8eb28c1b6832b9ca18e974d3c45620db39c6f507bec7e5bd6db66002",
+              "image": "verification/specimens/SPEC-0224.jpg"
+            },
             {
               "observationId": "unit:U0540",
               "kind": "unit",
@@ -74629,6 +76163,50 @@
               "originalHash": "0986f4ae8a99d7f5c068feb863907843becf23252941311f71c38110f8de725c",
               "previewSrc": "images/previews/LOR_143_Snorlax_V1_674153.jpg?v=0986f4ae8a99d7f5c068feb863907843becf23252941311f71c38110f8de725c",
               "thumbnailSrc": "images/thumbs/LOR_143_Snorlax_V1_674153.jpg?v=0986f4ae8a99d7f5c068feb863907843becf23252941311f71c38110f8de725c"
+            },
+            {
+              "src": "verification/specimens/SPEC-0081.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0081",
+              "contentHash": "496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "previewSrc": "images/previews/SPEC-0081.png?v=496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad",
+              "thumbnailSrc": "images/thumbs/SPEC-0081.png?v=496a5275a5fc19bc4b695d1e3a2d58c73abc153e5cca85d9a42d5cc4be49edad"
+            },
+            {
+              "src": "verification/specimens/SPEC-0082.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0082",
+              "contentHash": "6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "previewSrc": "images/previews/SPEC-0082.png?v=6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5",
+              "thumbnailSrc": "images/thumbs/SPEC-0082.png?v=6ed3d26decde5c0ced24f9d13129511f94d118ba8d97322886a11ce839006db5"
+            },
+            {
+              "src": "verification/specimens/SPEC-0089.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0089",
+              "contentHash": "646a21dd2cd8c1a089ac265587e228aeea5eab7dd170a91297713172eee7b811",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "646a21dd2cd8c1a089ac265587e228aeea5eab7dd170a91297713172eee7b811",
+              "previewSrc": "images/previews/SPEC-0089.png?v=646a21dd2cd8c1a089ac265587e228aeea5eab7dd170a91297713172eee7b811",
+              "thumbnailSrc": "images/thumbs/SPEC-0089.png?v=646a21dd2cd8c1a089ac265587e228aeea5eab7dd170a91297713172eee7b811"
+            },
+            {
+              "src": "verification/specimens/SPEC-0090.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0090",
+              "contentHash": "1981293e4d9057b4ebceefc70444ad29807b54997801bbd6478e9d999aee1b92",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1981293e4d9057b4ebceefc70444ad29807b54997801bbd6478e9d999aee1b92",
+              "previewSrc": "images/previews/SPEC-0090.png?v=1981293e4d9057b4ebceefc70444ad29807b54997801bbd6478e9d999aee1b92",
+              "thumbnailSrc": "images/thumbs/SPEC-0090.png?v=1981293e4d9057b4ebceefc70444ad29807b54997801bbd6478e9d999aee1b92"
             }
           ],
           "observations": [
@@ -74694,6 +76272,42 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
               "contentHash": "3cf958b8fb0cebdb229857b44275b85750908a879144efa30913b2007e0fc7bc",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0081",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-21. It shows T-Chinese Snorlax VMAX sc1b F 177/153 HR with rainbow-textured foil, Spanish VIV 131/185 with a red-and-black Pokémon League artwork stamp, and Spanish LOR 143/196 with the same style of stamp. These same physical cards are shown closer in SPEC-0083 through SPEC-0090.",
+              "contentHash": "24a88d632a2ff12924e4f8fb6b72735beba4b141a5bf5aa37f455957976c9b41",
+              "image": "verification/specimens/SPEC-0081.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0082",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group photograph captured 2025-05-21 of the same T-Chinese sc1b F 177/153 HR, Spanish VIV 131/185 stamped and Spanish LOR 143/196 stamped cards as SPEC-0081. Alternate framing only.",
+              "contentHash": "586c0d272d6d280288771637a94bb194fd597fc756720490118bc0b129620f88",
+              "image": "verification/specimens/SPEC-0082.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0089",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner close photograph captured 2025-05-21 of Spanish Snorlax LOR 143/196, HP 150, Grasa Impávida and Ronquido Descomunal 180. A red-and-black Pokémon League artwork stamp is clearly visible. The exact foil treatment is not inferred from this crop.",
+              "contentHash": "7e4cbd96b04319859f75e2c6845cbc6ea8732810ba50c88910311dceab210dbb",
+              "image": "verification/specimens/SPEC-0089.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0090",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner close view captured 2025-05-21 of the same Spanish LOR 143/196 Snorlax. The full card identity and red-and-black Pokémon League artwork stamp are legible; no additional copy or finish is inferred.",
+              "contentHash": "14e103fa0995537664c54ad453e65ac8b67736e700eb208dbb7e3a935b96ae3a",
+              "image": "verification/specimens/SPEC-0090.jpg"
             },
             {
               "observationId": "unit:U0116",
@@ -74768,9 +76382,29 @@
               "originalHash": "176589fdb7d0af75c4617d1595d75a466a7e429ab6abd6aed12d5edc0e6b519f",
               "previewSrc": "images/previews/s10a_058_Snorlax_V1_656382.jpg?v=176589fdb7d0af75c4617d1595d75a466a7e429ab6abd6aed12d5edc0e6b519f",
               "thumbnailSrc": "images/thumbs/s10a_058_Snorlax_V1_656382.jpg?v=176589fdb7d0af75c4617d1595d75a466a7e429ab6abd6aed12d5edc0e6b519f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0174.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0174",
+              "contentHash": "f1e497075f9fdd52c944159834e8a332f2f6d1fca6174ffadcd39b9ec8d94e51",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f1e497075f9fdd52c944159834e8a332f2f6d1fca6174ffadcd39b9ec8d94e51",
+              "previewSrc": "images/previews/SPEC-0174.png?v=f1e497075f9fdd52c944159834e8a332f2f6d1fca6174ffadcd39b9ec8d94e51",
+              "thumbnailSrc": "images/thumbs/SPEC-0174.png?v=f1e497075f9fdd52c944159834e8a332f2f6d1fca6174ffadcd39b9ec8d94e51"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0174",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/6007/",
+              "evidence": "Complete official Indonesian render for Snorlax S10a I 058/071 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "bee11df84b88d79ea3d648412ff823b3cbffc962078d7ef5904ce75016ac232d",
+              "image": "verification/specimens/SPEC-0174.png"
+            },
             {
               "observationId": "unit:U0346",
               "kind": "unit",
@@ -76177,6 +77811,17 @@
               "originalHash": "e348ae42132f2bf04b936bc10937fde9e7ee35992717c7483e52632e14cb6387",
               "previewSrc": "images/previews/SPEC-0149.png?v=e348ae42132f2bf04b936bc10937fde9e7ee35992717c7483e52632e14cb6387",
               "thumbnailSrc": "images/thumbs/SPEC-0149.png?v=e348ae42132f2bf04b936bc10937fde9e7ee35992717c7483e52632e14cb6387"
+            },
+            {
+              "src": "verification/specimens/SPEC-0150.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0150",
+              "contentHash": "0234f81e8eb95e6ef42351426ce3a59316da40c424c0524f120132bc55508576",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0234f81e8eb95e6ef42351426ce3a59316da40c424c0524f120132bc55508576",
+              "previewSrc": "images/previews/SPEC-0150.png?v=0234f81e8eb95e6ef42351426ce3a59316da40c424c0524f120132bc55508576",
+              "thumbnailSrc": "images/thumbs/SPEC-0150.png?v=0234f81e8eb95e6ef42351426ce3a59316da40c424c0524f120132bc55508576"
             }
           ],
           "observations": [
@@ -76197,6 +77842,15 @@
               "evidence": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F rarity and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo.",
               "contentHash": "631d7821383679c11a3e34e60ea118e3b6fc43451a4358bb3fdb1101acd8db1c",
               "image": "verification/specimens/SPEC-0149.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0150",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/356707199467",
+              "evidence": "Back photograph from the same eBay listing and physical Simplified Chinese CSZC 018/066 Snorlax as SPEC-0149. It is retained separately so every listing photograph used in the assessment remains part of the data specification.",
+              "contentHash": "720dd863e5f783cd75395f18ed243ec712e8d8519912cd8496bcb54aa3288ff9",
+              "image": "verification/specimens/SPEC-0150.jpg"
             },
             {
               "observationId": "unit:U0431",
@@ -76723,6 +78377,17 @@
               "originalHash": "3f2ea9b4beb6e30c7e27611f0e8174d6cdb8f1c88fbbc2998618d1a2604a6fbf",
               "previewSrc": "images/previews/SPEC-0237.png?v=3f2ea9b4beb6e30c7e27611f0e8174d6cdb8f1c88fbbc2998618d1a2604a6fbf",
               "thumbnailSrc": "images/thumbs/SPEC-0237.png?v=3f2ea9b4beb6e30c7e27611f0e8174d6cdb8f1c88fbbc2998618d1a2604a6fbf"
+            },
+            {
+              "src": "verification/specimens/SPEC-0452.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0452",
+              "contentHash": "647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2",
+              "previewSrc": "images/previews/SPEC-0452.png?v=647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2",
+              "thumbnailSrc": "images/thumbs/SPEC-0452.png?v=647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2"
             }
           ],
           "observations": [
@@ -76743,6 +78408,15 @@
               "evidence": "Complete official Korean render for Snorlax s10a 077/071. The printed Korean name, collector identity, attacks and rarity CHR establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "6f7822f2f4b308e352633ccb6f755fa2eb9aa60929daaf9be9e9685db9c14d42",
               "image": "verification/specimens/SPEC-0237.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0452",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://globalbunjang.com/product/421876007",
+              "evidence": "Seller photograph of Korean Snorlax with Hangul name and rules text; the exact listing identifies the s10a 077/071 CHR printing. The distinct full-card character artwork establishes the localized V2 card. No finish is inferred from this lighting.",
+              "contentHash": "ff8d34b8ca2404f0adc0c1e7a9787ac7af0a5b1ff1784ecce70878f4cae20e4f",
+              "image": "verification/specimens/SPEC-0452.png"
             },
             {
               "observationId": "unit:U0168",
@@ -77973,6 +79647,17 @@
               "thumbnailSrc": "images/thumbs/svG_021_Snorlax_744984.jpg?v=c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910"
             },
             {
+              "src": "verification/specimens/SPEC-0220.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0220",
+              "contentHash": "c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
+              "previewSrc": "images/previews/SPEC-0220.png?v=c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910",
+              "thumbnailSrc": "images/thumbs/SPEC-0220.png?v=c2d3d6ff7f3ac13625e91170407a67d7d184fed461a496cd612a078a38e5c910"
+            },
+            {
               "src": "verification/specimens/SPEC-0486.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0486",
@@ -77993,6 +79678,15 @@
               "evidence": "The complete seller photograph visibly shows Japanese Snorlax svG 021/049 from the Venusaur & Charizard & Blastoise Special Deck Set ex. The directly lit card face remains uniformly printed without a separate reflective foil layer or foil pattern, establishing the non-holo printing. Retained as SPEC-0486.",
               "contentHash": "0cfa9492c866e2c932b8cc37332234070d4491bb1f0678ad0dd22db6b27090e6",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0220",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Venusaur-Charizard-Blastoise-Special-Deck-Set-ex/Snorlax-svG021",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax svG 021 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "2f4da7b149ac05d380330cc95936003be14b977a904047ef894325e0b64754de",
+              "image": "verification/specimens/SPEC-0220.jpg"
             },
             {
               "observationId": "specimen:SPEC-0486",
@@ -80715,6 +82409,28 @@
               "originalHash": "f01af6ddbe038201a438c9946b1abc8ca41938c63e1e6f9d4f1a913cd25ca117",
               "previewSrc": "images/previews/SPEC-0070.png?v=f01af6ddbe038201a438c9946b1abc8ca41938c63e1e6f9d4f1a913cd25ca117",
               "thumbnailSrc": "images/thumbs/SPEC-0070.png?v=f01af6ddbe038201a438c9946b1abc8ca41938c63e1e6f9d4f1a913cd25ca117"
+            },
+            {
+              "src": "verification/specimens/SPEC-0071.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0071",
+              "contentHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "previewSrc": "images/previews/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8",
+              "thumbnailSrc": "images/thumbs/SPEC-0071.png?v=19c4ce0f1b73527294ed35152b7080ecd6db5cbf1f5dfa690c0e35c9926cfaf8"
+            },
+            {
+              "src": "verification/specimens/SPEC-0072.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0072",
+              "contentHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "previewSrc": "images/previews/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30",
+              "thumbnailSrc": "images/thumbs/SPEC-0072.png?v=bdc897fff8f8e264d11fe3430b45e0fecbb535c735038dd9b9cf2b7dea5ffc30"
             }
           ],
           "observations": [
@@ -80753,6 +82469,24 @@
               "evidence": "Owner photograph captured 2025-05-08 of Italian Snorlax V SSH 197/202, HP 220, full-art card with Introeenergia and Tombolone. The full face shows the textured reflective treatment; this is the same physical card in SPEC-0071.",
               "contentHash": "d6b02e5f64519290fe23506beb13d98e09b470761f5ffe8f5bddb987e7ef4fc8",
               "image": "verification/specimens/SPEC-0070.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0071",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-08 showing the same three Italian cards documented in SPEC-0065 through SPEC-0070: BCR 109/149, SWSH068 STAFF with Vivid Voltage logo, and SSH 197/202 Snorlax V. This frame establishes the BCR collector number and does not imply additional copies.",
+              "contentHash": "0bd72cb887605e30cf5e50a9bdaf4d4e35ea898914e05b7abdfaed1c9c261203",
+              "image": "verification/specimens/SPEC-0071.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0072",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner Instagram screenshot captured 2025-05-08 from account m4s.collection. The post displays the same Italian BCR 109/149, SWSH068 STAFF and SSH 197/202 cards as SPEC-0071 and describes an Italian mailday with hashtags including #staffpromo. This is derivative social-post evidence, not another physical-card observation.",
+              "contentHash": "61c3a1d7e0218d5f010e787958ebb85eddbd163237f09b1bf2085eb7a7147882",
+              "image": "verification/specimens/SPEC-0072.png"
             },
             {
               "observationId": "unit:U0399",
@@ -81073,6 +82807,28 @@
               "originalHash": "9fb6a6f0a6b9a6db662f9c6eb7c1d2c57ccb2a35075589caf2c697deedc6e5ab",
               "previewSrc": "images/previews/SPEC-0098.png?v=9fb6a6f0a6b9a6db662f9c6eb7c1d2c57ccb2a35075589caf2c697deedc6e5ab",
               "thumbnailSrc": "images/thumbs/SPEC-0098.png?v=9fb6a6f0a6b9a6db662f9c6eb7c1d2c57ccb2a35075589caf2c697deedc6e5ab"
+            },
+            {
+              "src": "verification/specimens/SPEC-0099.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0099",
+              "contentHash": "929791afeb49648d4814c25817641a4d22c2a81a3e309ec9687e75ffa90cda9a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "929791afeb49648d4814c25817641a4d22c2a81a3e309ec9687e75ffa90cda9a",
+              "previewSrc": "images/previews/SPEC-0099.png?v=929791afeb49648d4814c25817641a4d22c2a81a3e309ec9687e75ffa90cda9a",
+              "thumbnailSrc": "images/thumbs/SPEC-0099.png?v=929791afeb49648d4814c25817641a4d22c2a81a3e309ec9687e75ffa90cda9a"
+            },
+            {
+              "src": "verification/specimens/SPEC-0100.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0100",
+              "contentHash": "b01306cbe6345a39340aa04e3bc0b6ad537b97bcddea8ea94f063601fcf87ea8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b01306cbe6345a39340aa04e3bc0b6ad537b97bcddea8ea94f063601fcf87ea8",
+              "previewSrc": "images/previews/SPEC-0100.png?v=b01306cbe6345a39340aa04e3bc0b6ad537b97bcddea8ea94f063601fcf87ea8",
+              "thumbnailSrc": "images/thumbs/SPEC-0100.png?v=b01306cbe6345a39340aa04e3bc0b6ad537b97bcddea8ea94f063601fcf87ea8"
             }
           ],
           "observations": [
@@ -81093,6 +82849,24 @@
               "evidence": "Full owner photograph captured 2025-05-27 of S-Chinese Snorlax V CS1aC 188/135 SR, HP 220. The full-art card directly shows a textured reflective surface. SPEC-0099 and SPEC-0100 show the same physical card beside T-Chinese sc1b F 120/153 RRR Snorlax VMAX.",
               "contentHash": "31775fae5d7a385d10c543c2952e5785927add079d84dc4e6df3be99fe9a60ad",
               "image": "verification/specimens/SPEC-0098.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0099",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-27 showing S-Chinese Snorlax V CS1aC 188/135 SR and T-Chinese Snorlax VMAX sc1b F 120/153 RRR. Both show reflective full-card treatments. The cards are the same physical copies shown in SPEC-0098 and SPEC-0100.",
+              "contentHash": "2b404fa605ed19430d75afddaa5321e75ed177211931c001c97503409426f2f4",
+              "image": "verification/specimens/SPEC-0099.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0100",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group photograph captured 2025-05-27 of the same S-Chinese CS1aC 188/135 SR Snorlax V and T-Chinese sc1b F 120/153 RRR Snorlax VMAX. The collector numbers and reflective treatments are visible; alternate framing only.",
+              "contentHash": "04711ebeddf066fd4d8acdcc1d46e7a48bfcc84a1c2b4c56c9074b2ee8f66e14",
+              "image": "verification/specimens/SPEC-0100.jpg"
             },
             {
               "observationId": "unit:U0608",
@@ -84657,6 +86431,17 @@
               "originalHash": "1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d",
               "previewSrc": "images/previews/sv2a_181_Snorlax_V2_719634.jpg?v=1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d",
               "thumbnailSrc": "images/thumbs/sv2a_181_Snorlax_V2_719634.jpg?v=1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0177.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0177",
+              "contentHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
+              "previewSrc": "images/previews/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
+              "thumbnailSrc": "images/thumbs/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6"
             }
           ],
           "observations": [
@@ -84668,6 +86453,15 @@
               "evidence": "SV2a-181 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "83777adec95d47d94f073ff9bd06721caefd8472d7cf2155e2169f3da55e92d0",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0177",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
+              "evidence": "Complete official Indonesian render for Snorlax SV2a I 181/165 (base). The printed name, set code, collector number, attacks and rarity AR establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "37065ed024ecef1895f6e28ef33178ecbc7db8b03ba83763e802d8febdb478a1",
+              "image": "verification/specimens/SPEC-0177.png"
             },
             {
               "observationId": "unit:U0051",
@@ -85344,6 +87138,17 @@
               "originalHash": "2d449e73b965293eccb149af7914cddc2a59cac1f99ebda04de9d085b64d7367",
               "previewSrc": "images/previews/sv4a_310_Snorlax_V2_747664.jpg?v=2d449e73b965293eccb149af7914cddc2a59cac1f99ebda04de9d085b64d7367",
               "thumbnailSrc": "images/thumbs/sv4a_310_Snorlax_V2_747664.jpg?v=2d449e73b965293eccb149af7914cddc2a59cac1f99ebda04de9d085b64d7367"
+            },
+            {
+              "src": "verification/specimens/SPEC-0180.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0180",
+              "contentHash": "745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
+              "previewSrc": "images/previews/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
+              "thumbnailSrc": "images/thumbs/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d"
             }
           ],
           "observations": [
@@ -85355,6 +87160,15 @@
               "evidence": "SV4a-310 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "3a3c2b41b45109bff489e22d95ca97dd8e47e132c50ae012e5a989ea6638a781",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0180",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/10239/",
+              "evidence": "Complete official Indonesian render for Snorlax SV4a I 310/190 (base). The printed name, set code, collector number, attacks and rarity S establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "6632a6c67495d246256f86e1ec81ecb1512c119802cf7f8e4d61cd1c118e3ae1",
+              "image": "verification/specimens/SPEC-0180.png"
             },
             {
               "observationId": "unit:U0386",
@@ -88022,9 +89836,29 @@
               "originalHash": "c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
               "previewSrc": "images/previews/sv4a_145_Snorlax_V1_746527.jpg?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
               "thumbnailSrc": "images/thumbs/sv4a_145_Snorlax_V1_746527.jpg?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0179.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0179",
+              "contentHash": "11eb002a103ed14b49c692b0dee71d00a9ca8911fbfa762f3dced2c6391af3a3",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "11eb002a103ed14b49c692b0dee71d00a9ca8911fbfa762f3dced2c6391af3a3",
+              "previewSrc": "images/previews/SPEC-0179.png?v=11eb002a103ed14b49c692b0dee71d00a9ca8911fbfa762f3dced2c6391af3a3",
+              "thumbnailSrc": "images/thumbs/SPEC-0179.png?v=11eb002a103ed14b49c692b0dee71d00a9ca8911fbfa762f3dced2c6391af3a3"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0179",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/10045/",
+              "evidence": "Complete official Indonesian render for Snorlax SV4a I 145/190 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "215ae42510336a73ed89a4d65b6bbda3367c9fa2f017af5ec5b1ec6fa5da6fdf",
+              "image": "verification/specimens/SPEC-0179.png"
+            },
             {
               "observationId": "unit:U0308",
               "kind": "unit",
@@ -88081,9 +89915,29 @@
               "originalHash": "c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
               "previewSrc": "images/previews/sv4a_145_Snorlax_V1_746527.jpg?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
               "thumbnailSrc": "images/thumbs/sv4a_145_Snorlax_V1_746527.jpg?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0219.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0219",
+              "contentHash": "c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
+              "previewSrc": "images/previews/SPEC-0219.png?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f",
+              "thumbnailSrc": "images/thumbs/SPEC-0219.png?v=c44abdd0a606c785acccf6c633f733b52c9f3f5d520a516d925dd48159e5880f"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0219",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+              "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sv4a 145 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
+              "contentHash": "ee070814b955d7aa5b47b28dfb323cdbfd0c8c63d312483d13062a64c04e618b",
+              "image": "verification/specimens/SPEC-0219.jpg"
+            },
             {
               "observationId": "unit:U0305",
               "kind": "unit",
@@ -89162,6 +91016,17 @@
               "originalHash": "c6697bd6a380833adb350b05032538b3883b4fbafa498c0028bf56a71fc6ed0e",
               "previewSrc": "images/previews/sv2a_143_Snorlax_V1_719596.jpg?v=c6697bd6a380833adb350b05032538b3883b4fbafa498c0028bf56a71fc6ed0e",
               "thumbnailSrc": "images/thumbs/sv2a_143_Snorlax_V1_719596.jpg?v=c6697bd6a380833adb350b05032538b3883b4fbafa498c0028bf56a71fc6ed0e"
+            },
+            {
+              "src": "verification/specimens/SPEC-0176.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0176",
+              "contentHash": "0c53c6cb79b94e75dfb05214b7b313126851c52b7c13d80540b265047ab2c5e8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0c53c6cb79b94e75dfb05214b7b313126851c52b7c13d80540b265047ab2c5e8",
+              "previewSrc": "images/previews/SPEC-0176.png?v=0c53c6cb79b94e75dfb05214b7b313126851c52b7c13d80540b265047ab2c5e8",
+              "thumbnailSrc": "images/thumbs/SPEC-0176.png?v=0c53c6cb79b94e75dfb05214b7b313126851c52b7c13d80540b265047ab2c5e8"
             }
           ],
           "observations": [
@@ -89182,6 +91047,15 @@
               "evidence": "SV2a-143 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "62977a74901339c748afb1f83bbf7cc0cc7c9fde86f23c98c35e0ec911cd8186",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0176",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/8554/",
+              "evidence": "Complete official Indonesian render for Snorlax SV2a I 143/165 (base). The printed name, set code, collector number, attacks and rarity U establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "20c33bfbba6a1516690f46dbbb195b64cd39f9402b987f6ff4fbe7e05a1c39c4",
+              "image": "verification/specimens/SPEC-0176.png"
             },
             {
               "observationId": "unit:U0105",
@@ -90528,6 +92402,28 @@
               "thumbnailSrc": "images/thumbs/xsv2a_143_Snorlax_V1_837510.jpg?v=3b5046e6c0b343d818374eadd26b203f14782f44852fd560d274c900e3d85d08"
             },
             {
+              "src": "verification/specimens/SPEC-0058.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0058",
+              "contentHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "previewSrc": "images/previews/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562",
+              "thumbnailSrc": "images/thumbs/SPEC-0058.png?v=f48b1484729d546d54f91421143ee5cd3c53726a106a0e573a22d912974e5562"
+            },
+            {
+              "src": "verification/specimens/SPEC-0059.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0059",
+              "contentHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "previewSrc": "images/previews/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79",
+              "thumbnailSrc": "images/thumbs/SPEC-0059.png?v=f8c08b10213d870ee0d7fc5c4462349c8f135d45c4e0ba73cc0a307b5ad66f79"
+            },
+            {
               "src": "verification/specimens/SPEC-0061.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0061",
@@ -90537,6 +92433,28 @@
               "originalHash": "02f2bb8595a45f17082f2a75e271e945cdc0f9c9397f6c1ea52f917a42bb80bd",
               "previewSrc": "images/previews/SPEC-0061.png?v=02f2bb8595a45f17082f2a75e271e945cdc0f9c9397f6c1ea52f917a42bb80bd",
               "thumbnailSrc": "images/thumbs/SPEC-0061.png?v=02f2bb8595a45f17082f2a75e271e945cdc0f9c9397f6c1ea52f917a42bb80bd"
+            },
+            {
+              "src": "verification/specimens/SPEC-0063.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0063",
+              "contentHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "previewSrc": "images/previews/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb",
+              "thumbnailSrc": "images/thumbs/SPEC-0063.png?v=87f353274f0c458c06026f9bb55177394a3877674ef82d3de21ae2b0abfde7bb"
+            },
+            {
+              "src": "verification/specimens/SPEC-0064.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0064",
+              "contentHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "previewSrc": "images/previews/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008",
+              "thumbnailSrc": "images/thumbs/SPEC-0064.png?v=4168b350a9585f46527f634a7fa3f5908e8f2c70ba8858000df7eeedd4b46008"
             }
           ],
           "observations": [
@@ -90604,6 +92522,24 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0058",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner group photograph captured 2025-05-04. It shows three physical Snorlax cards together: T-Chinese sN F 008/024, Korean xsv2a 143/165 with a Poké Ball mirror pattern, and Japanese HSZ 027/034 with the red 16th-anniversary mark. This is the uncut source sequence for the closer views in SPEC-0060 through SPEC-0062; it does not establish three additional copies.",
+              "contentHash": "543462c87a9b3ad1ca6bf19d64457ed6b6a4cc439e7d5ef2cf6988caeb692062",
+              "image": "verification/specimens/SPEC-0058.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0059",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Second owner group view captured 2025-05-04 of the same three physical cards as SPEC-0058: T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 with the red 16th-anniversary mark. Alternate framing only; no additional physical copies are inferred.",
+              "contentHash": "193e6904313f5fceef7bcd2aecb4a2abaf43e6f3fa16b369dcb57d0ec8183114",
+              "image": "verification/specimens/SPEC-0059.jpg"
+            },
+            {
               "observationId": "specimen:SPEC-0061",
               "kind": "specimen",
               "provider": null,
@@ -90611,6 +92547,24 @@
               "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064.",
               "contentHash": "78465fd35e76a40a51fc2d6695cda4b4733d83947b8222d6adcc62bf56fde5da",
               "image": "verification/specimens/SPEC-0061.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0063",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Third owner group photograph captured 2025-05-04 of the same T-Chinese sN F 008/024, Korean xsv2a 143/165 Poké Ball mirror, and Japanese HSZ 027/034 cards. It supplies an alternate focus and does not imply additional physical copies.",
+              "contentHash": "61e3a15e1831a1ba33954899e17b15ef5d1692175520637774aa70d83cc14a06",
+              "image": "verification/specimens/SPEC-0063.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0064",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Fourth owner group photograph captured 2025-05-04 of the same T-Chinese, Korean and Japanese Snorlax cards documented by SPEC-0058 through SPEC-0063. Alternate framing only; the cards are not counted again.",
+              "contentHash": "52b740bf09cba4edb5a018636171600c65eeb088667964e4991d6eb26a7f8ce4",
+              "image": "verification/specimens/SPEC-0064.jpg"
             },
             {
               "observationId": "unit:U0775",
@@ -90727,6 +92681,17 @@
               "originalHash": "fc9749a4e8669d59d3f2238c95e6059c0ecffb185bc4cf811ee44075cbf6af84",
               "previewSrc": "images/previews/CSVL1C_109_Snorlax_839842.jpg?v=fc9749a4e8669d59d3f2238c95e6059c0ecffb185bc4cf811ee44075cbf6af84",
               "thumbnailSrc": "images/thumbs/CSVL1C_109_Snorlax_839842.jpg?v=fc9749a4e8669d59d3f2238c95e6059c0ecffb185bc4cf811ee44075cbf6af84"
+            },
+            {
+              "src": "verification/specimens/SPEC-0154.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0154",
+              "contentHash": "5d4ec6ab97ef98dd4f6decf04e0731c7cbdf898d54dac50e47cd2a096a451295",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "5d4ec6ab97ef98dd4f6decf04e0731c7cbdf898d54dac50e47cd2a096a451295",
+              "previewSrc": "images/previews/SPEC-0154.png?v=5d4ec6ab97ef98dd4f6decf04e0731c7cbdf898d54dac50e47cd2a096a451295",
+              "thumbnailSrc": "images/thumbs/SPEC-0154.png?v=5d4ec6ab97ef98dd4f6decf04e0731c7cbdf898d54dac50e47cd2a096a451295"
             }
           ],
           "observations": [
@@ -90738,6 +92703,15 @@
               "evidence": "The official Departure Special Pack specification states that the second card can be a newly included Pokémon special-illustration 闪卡; SPEC-0154 establishes the exact CSVL1C 109/049 Snorlax special-illustration identity.",
               "contentHash": "ebfc0a3811c914373eb4758ff9df8d726df86fc5470d5c1c4c2a343848ccdc88",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0154",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://excaliburtcg.co.uk/collections/set-csvl1c",
+              "evidence": "Complete reference image of Simplified Chinese Snorlax CSVL1C 109/049. The Simplified Chinese text, printed CSVL1C set code, collector number 109/049 and special-illustration artwork establish the exact localized card identity. The image is retained as identity evidence only; physical finish is established separately by the official Departure Special Pack product specification.",
+              "contentHash": "000d917b5fc45a1c3a5b1ec2288a303939afe6c82c3cf494c05f003da84a4264",
+              "image": "verification/specimens/SPEC-0154.png"
             },
             {
               "observationId": "unit:U0588",
@@ -90809,9 +92783,29 @@
               "originalHash": "42408eb764cd043f554523fb522fed1c91b209e14add6d78e6150e0331752044",
               "previewSrc": "images/previews/svM_094_Snorlax_ex_801337.jpg?v=42408eb764cd043f554523fb522fed1c91b209e14add6d78e6150e0331752044",
               "thumbnailSrc": "images/thumbs/svM_094_Snorlax_ex_801337.jpg?v=42408eb764cd043f554523fb522fed1c91b209e14add6d78e6150e0331752044"
+            },
+            {
+              "src": "verification/specimens/SPEC-0182.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0182",
+              "contentHash": "fd30edd1f088d172eaa710cfab3e77b2f6775cac187ca9961f49c39597ccca7b",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "fd30edd1f088d172eaa710cfab3e77b2f6775cac187ca9961f49c39597ccca7b",
+              "previewSrc": "images/previews/SPEC-0182.png?v=fd30edd1f088d172eaa710cfab3e77b2f6775cac187ca9961f49c39597ccca7b",
+              "thumbnailSrc": "images/thumbs/SPEC-0182.png?v=fd30edd1f088d172eaa710cfab3e77b2f6775cac187ca9961f49c39597ccca7b"
             }
           ],
           "observations": [
+            {
+              "observationId": "specimen:SPEC-0182",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/15253/",
+              "evidence": "Complete official Indonesian render for Snorlax ex SVM I 094/175 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+              "contentHash": "7e6238fa4aff153f9eff49dd4c40129d0432e6a5dfa0a9cb683634a6b0b60dd8",
+              "image": "verification/specimens/SPEC-0182.png"
+            },
             {
               "observationId": "unit:U0404",
               "kind": "unit",

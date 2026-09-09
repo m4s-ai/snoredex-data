@@ -272,6 +272,36 @@ def verify_derivative_writer() -> None:
         artwork_derivatives._MANIFEST_CACHE = original_cache
 
 
+def verify_specimen_reference_routes():
+    from specimen_links import release_specimens, specimen_reference_index, item_specimen_links
+    specimens = [
+        {'specimenId': key, 'citedBy': [ref], 'listingUrl': 'https://example.org/' + key}
+        for key, ref in [('legacy', 'U1'), ('sf', 'SF1'), ('finish', 'F1'),
+                         ('reviewed', 'C-reviewed'), ('unrelated', 'U2'), ('unknown', 'missing')]
+    ]
+    specimens += [{'specimenId': key, 'listingUrl': 'https://example.org/' + key}
+                  for key in ['legacy-direct', 'sf-direct', 'sf-corroborating', 'claim-direct', 'physical']]
+    index = specimen_reference_index(specimens, [{'unitId': 'U1', 'sourceRef': 'specimen:legacy-direct'}])
+    claims = {'C-legacy': {'sourceKind': 'legacy-language-unit', 'sourceId': 'U1'},
+              'C-sf': {'sourceKind': 'source-first-record', 'sourceId': 'SF1'},
+              'C-finish': {'sourceKind': 'finish-printing-record', 'sourceId': 'F1'},
+              'C-reviewed': {'sourceKind': 'reviewed-positive-evidence', 'sourceId': 'U2',
+                             'specimenIds': ['claim-direct']}}
+    release = {'claimIds': ['C-legacy'], 'establishingClaimIds': ['C-sf', 'C-reviewed']}
+    physical = {'sourcePrintingId': 'F1', 'establishingClaimId': 'C-finish', 'specimenIds': ['physical']}
+    records = {'SF1': {'specimenId': 'sf-direct', 'corroboratingSpecimenIds': ['sf-corroborating', 'sf']}}
+    expected = {'legacy', 'legacy-direct', 'sf', 'sf-direct', 'sf-corroborating', 'reviewed', 'claim-direct'}
+    assert release_specimens(release, [], index, records, claims) == sorted(expected)
+    assert release_specimens(release, [physical], index, records, claims) == sorted(expected | {'finish', 'physical'})
+    assert release_specimens({}, [], index, records, claims) == [], 'never match neighboring cards or set-level source IDs'
+    by_id = {row['specimenId']: row for row in specimens}
+    assert item_specimen_links(release, None, index, records, claims, by_id) == {
+        'https://example.org/' + key for key in expected}
+    assert item_specimen_links(release, physical, index, records, claims, by_id) == {
+        'https://example.org/' + key for key in expected | {'finish', 'physical'}}
+    assert release_specimens({'sourceFirstRecordIds': ['SF1']}, [], index, records, {}) == ['sf', 'sf-corroborating', 'sf-direct']
+
+
 def main() -> int:
     path = ROOT / "verification" / "artwork_review_projection.json"
     if not path.exists():
@@ -282,15 +312,21 @@ def main() -> int:
     if projection.get("schemaVersion") != "1.2.0" or projection.get("proposalSchemaVersion") != "1.2.0":
         fail("unexpected projection or proposal schema version")
     verify_derivative_writer()
+    verify_specimen_reference_routes()
 
     assert artwork_review.release_specimens(
         {"sourceFirstRecordIds": ["print", "missing"]},
         [{"specimenIds": ["cited"], "physicalPrintingId": "PHYSICAL:specimen:physical"}],
-        {"print": {"cited"}}, {"print": {"specimenId": "direct"}},
+        {"print": {"cited"}}, {"print": {"specimenId": "direct"}}, {},
     ) == ["cited", "direct", "physical"]
 
     groups = projection.get("groups") or []
     members = [member for group in groups for member in group.get("members") or []]
+    matched = [member for member in members if any(
+        obs['observationId'] == 'specimen:SPEC-0146' for obs in member['observations'])]
+    assert len(matched) == 1 and ':CSM2cC:103:' in matched[0]['cardReleaseId']
+    assert any(image['src'] == 'verification/specimens/SPEC-0146.png' and image['reviewable']
+               for image in matched[0]['images']), 'legacy citedBy image must reach its exact release'
     for specimen_id in (f"SPEC-{number:04d}" for number in range(494, 507)):
         matching = [member for member in members if any(
             observation["observationId"] == "specimen:" + specimen_id

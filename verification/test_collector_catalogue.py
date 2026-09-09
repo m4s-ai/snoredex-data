@@ -155,6 +155,13 @@ def main() -> None:
     for physical in ({"physicalPrintingId": "PHYSICAL:specimen:S"}, {"specimenIds": ["S", "missing"]}):
         assert collector.physical_specimen_links(physical, specimen) == {"https://example.org/listing"}
     assert collector.physical_specimen_links(None, specimen) == set()
+    retained = next(s for s in read('verification/specimens.json')['specimens'] if s['specimenId'] == 'SPEC-0146')
+    items = read('collector_catalogue.json')['items']
+    matching = [item for item in items if ':CSM2cC:103:' in item['cardReleaseId']]
+    assert matching and all({retained['listingUrl'], retained['photographSource']} <= set(item['evidenceLinks'])
+                            for item in matching), 'identity-level specimen citations must reach collector provenance'
+    assert not any(retained['photographSource'] in item['evidenceLinks'] for item in items
+                   if ':CSM2cC:103:' not in item['cardReleaseId']), 'do not borrow the neighboring card evidence'
     for specimen_id in ("SPEC-0495", "SPEC-0496"):
         retained = next(s for s in read("verification/specimens.json")["specimens"] if s["specimenId"] == specimen_id)
         published = next(i for i in read("collector_catalogue.json")["items"]

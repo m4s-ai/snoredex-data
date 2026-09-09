@@ -26,6 +26,7 @@ from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
 from source_registry import provenance_url
+from specimen_links import item_specimen_links, physical_specimen_ids, specimen_reference_index, specimen_provenance_links
 
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
@@ -33,6 +34,7 @@ CHECKLIST_PATH = ROOT / "analysis_checklist.json"
 FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
 SOURCE_FIRST_PATH = ROOT / "verification" / "source_first_prints.json"
 SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
+UNITS_PATH = ROOT / "verification" / "units.json"
 COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
 
 CATALOGUE_PATH = ROOT / "collector_catalogue.json"
@@ -688,14 +690,7 @@ def prefer_source_first_image(
 
 
 def physical_specimen_links(physical: dict[str, Any] | None, specimens: dict) -> set[str]:
-    if not physical:
-        return set()
-    ids = set(physical.get("specimenIds") or [])
-    printing_id = physical.get("physicalPrintingId", "")
-    if printing_id.startswith("PHYSICAL:specimen:"):
-        ids.add(printing_id.removeprefix("PHYSICAL:specimen:"))
-    return {value for specimen_id in ids for key in ("listingUrl", "photographSource")
-            if (value := provenance_url(specimens.get(specimen_id, {}).get(key)))}
+    return specimen_provenance_links(physical_specimen_ids(physical), specimens)
 
 
 def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
@@ -1023,6 +1018,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     finish_units = read_json(FINISH_UNITS_PATH)["units"]
     source_first = {row["printId"]: row for row in read_json(SOURCE_FIRST_PATH)["prints"]}
     specimens = {row["specimenId"]: row for row in read_json(SPECIMENS_PATH)["specimens"]}
+    citations = specimen_reference_index(specimens.values(), read_json(UNITS_PATH))
     completeness = read_json(COMPLETENESS_PATH)
 
     localizations = entity_payloads(graph, "localization")
@@ -1266,7 +1262,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 if source.get("url") or source.get("sourceType")
             )
         source_refs.update(release.get("sourceRecords") or [])
-        source_refs.update(physical_specimen_links(physical, specimens))
+        source_refs.update(item_specimen_links(release, physical, citations, source_first, claims, specimens))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
             source_refs.update(source_first_row.get("corroboratingSourceUrls", []))

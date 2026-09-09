@@ -67,6 +67,12 @@ The source registry resolves specimen citations against legacy units, admitted s
 prints, finish printing IDs and candidate claims in the graph's retained reviewed base. It does
 not consume the downstream `physical-evidence-projection` slice; citation resolution never
 depends on a confirmation or corroboration verdict.
+Typed standalone observations are registered under their own SPEC ID, without inventing an
+upstream physical ID. Downstream, `scripts/specimen_links.py` supplies the common artwork and
+collector reference resolver: release claims and source-first records plus the applicable
+physical printing's explicit IDs. Artwork aggregates its release; collector provenance adds only
+the current item's physical evidence. These joins expose evidence and never change admission,
+corroboration, finish truth or collection identity.
 
 The source-first raw runs are retained transport evidence; refresh candidates are staging:
 

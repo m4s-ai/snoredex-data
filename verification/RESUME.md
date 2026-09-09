@@ -101,6 +101,7 @@ that distinction through `ownerAttestedFields` as described in [FINISH_SOURCES.m
 | Specimen supports a retained reviewed graph claim | Specimen `citedBy` names a `candidate-claim` in the graph's reviewed base | Index its exact claim ID. Read the canonical retained base, not the downstream `physical-evidence-projection` slice. |
 | A reviewed second provider corroborates a source-first card | Canonical `corroborated`, `corroboratingSpecimenIds` and `corroboratingSourceUrls` | Record the reviewed agreement, then retain its provenance in the graph and collector evidence links. A `citedBy` link alone does not set corroboration. |
 | A specimen establishes a physical printing | Projected `specimenIds` or `PHYSICAL:specimen:SPEC-nnnn` identity | The graph, artwork observations/images and collector links resolve the same evidence. Create these through the canonical projectors. |
+| Standalone physical observation has no legacy/source-first citation | Specimen `physicalObservation` under its own `SPEC-nnnn` | Register its provenance and supported dimensions under that SPEC ID even when `citedBy` is empty. Do not invent a printing or release ID to make it discoverable. |
 
 Only record relationships the evidence establishes; not every intake needs every row of the table.
 Retain a pre-admission observation as a visible unresolved candidate using the documented importer
@@ -130,6 +131,9 @@ Before handing off an accepted intake, follow its IDs through all affected consu
 - `source_registry.json`: the admitted print, applicable specimen IDs, source URLs, provider,
   supported dimensions and available dates remain discoverable. Direct references and reverse
   citations must both work; no provider-specific branch may silently omit an admitted claim.
+  Include legacy `sourceRef`, source-first direct/corroborating specimen IDs and retained reviewed
+  claim `specimenIds` even without reverse citations. Typed standalone observations remain indexed
+  under their own SPEC ID; unknown citations are not silently converted into accepted targets.
   Resolve valid legacy, source-first, finish-printing and retained reviewed graph references independently of the target's
   verdict or `corroborated` flag. Preserve the claim's dimension: source-first release evidence
   remains `card-release` where the surface supports it; specimen identity uses `identity`.
@@ -143,9 +147,18 @@ Before handing off an accepted intake, follow its IDs through all affected consu
   URL, falling back to the listing only when no usable photo URL exists. A context page must not
   duplicate or anonymize that same observation. `ownerAttestedFields` keeps owner assertions
   separate even when the linked image surface can support visible finishes.
+  Preserve a recognized image/listing provider; use the generic seller-photo class only when no
+  more specific provider is known. The holder's description cannot overwrite known source ownership.
 - Graph, artwork and collector outputs: the same identity retains its observations, local image,
   usable provenance link and any independently supported physical properties. Inspect the
   rendered member when image or link behavior changed; a stored file alone is not acceptance.
+  Artwork and collector use `scripts/specimen_links.py` to follow the release's explicit claims,
+  source-first IDs and each relevant physical printing. Resolve legacy unit IDs, finish printing
+  IDs and exact reviewed claim IDs as well as source-first citations. Never follow an unrelated
+  set-level source ID as if it identified this card. Artwork can show all physical observations of
+  its release; a collector item receives release-level evidence plus its own printing's evidence,
+  without borrowing another finish's specimen. A release-level identity image adds provenance,
+  not an exact-finish assertion or a new collector item.
 - Rekeys or withdrawals: reconcile active claims, releases, product references and collector
   migrations together; preserve historical observations and confirmed one-to-one collection
   state. Retiring a legacy claim alone must not leave a contradictory source-first item active.
@@ -160,8 +173,10 @@ For a shared-path repair, enumerate all affected inputs and consumers before req
 review. `verify_source_first_specimen_registry()` in `test_authoritative_graph.py` checks the
 complete admitted print corpus, direct specimen associations and resolvable citations in the
 legacy, source-first and finish stores and the retained reviewed graph, plus claim-dimension and
-owner-finish boundaries. It complements the graph, artwork, collector and capability checks
-in the central gate; it does not prove every possible reference or image correct. Keep regression
+owner-finish boundaries. The central gate also checks typed standalone observations, direct
+references without reverse citations, each supported reference namespace and the exclusion of
+unrelated releases/physical printings through graph, artwork, collector and capability tests.
+It does not prove every possible reference or image correct. Keep regression
 coverage at the violated contract, rather than only the newly reported SPEC IDs. State any
 unresolved association explicitly, and answer each addressed PR finding in its original thread
 with the applicable fix and verification result.
