@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-03",
+  "generated": "2026-09-08",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1278,
-   "uniqueUrls": 1271,
+   "evidenceRecords": 1279,
+   "uniqueUrls": 1272,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 3720
+   "claimsAttributed": 3723
   }
  },
  "providers": [
@@ -182,8 +182,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 84,
-   "claimsSupported": 635
+   "uniqueSources": 85,
+   "claimsSupported": 637
   },
   {
    "providerId": "tcgcsv",
@@ -565,7 +565,7 @@
    "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
    "hosts": [],
    "uniqueSources": 48,
-   "claimsSupported": 72
+   "claimsSupported": 73
   },
   {
    "providerId": "pokemontcgio",
@@ -858,6 +858,25 @@
    ],
    "retrievedAt": null,
    "usageCount": 199
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia localized Generations finish description"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0139-P02",
+    "override:issue-266-generations-spanish-reverse"
+   ],
+   "retrievedAt": "2026-09-08",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)",
@@ -8979,7 +8998,7 @@
    ],
    "stableIdCount": 6,
    "stableIds": [
-    "F0363-P01",
+    "F0363-P02",
     "F0364-P02",
     "F0365-P02",
     "F0366-P01",
@@ -10060,17 +10079,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
    "sourceTypes": [
-    "Cardmarket product image"
+    "Cardmarket product image",
+    "Inspected physical specimen photograph"
    ],
    "dimensions": [
+    "finish",
     "image"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0363-P01",
     "s8b 126 base"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-09-08",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/sA/524195/524195.jpg",

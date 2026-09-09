@@ -988,6 +988,18 @@ def schema_document() -> dict[str, Any]:
     }
 
 
+def legacy_work_names(legacy_items, legacy_release, releases, work_id_by_key) -> dict[str, str]:
+    """Keep work display names stable when source-first releases gain a printing."""
+    names = {}
+    for row in legacy_items:
+        work_id = work_id_by_key.get(releases[legacy_release[row["checklistId"]]].get("work"))
+        if work_id:
+            previous = names.setdefault(work_id, row["cardName"])
+            if previous != row["cardName"]:
+                raise ContractError(f"mapped work has conflicting card names: {work_id}")
+    return names
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     if graph.get("meta", {}).get("schemaVersion") != "1.1.0":
@@ -1127,7 +1139,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         }
         return aid, scope
 
-    card_name_by_work: dict[str, str] = {}
+    card_name_by_work = legacy_work_names(legacy_items, legacy_release, releases, work_id_by_key)
 
     def item_context(release_id: str, old: dict[str, Any] | None) -> dict[str, Any]:
         release = releases[release_id]

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-03",
+    "generated": "2026-09-08",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 48,
       "absenceEdges": 0,
       "observations": 50,
-      "resolvedVerdictSources": 1278
+      "resolvedVerdictSources": 1279
     },
     "surfaceStates": {
       "active": 19,
@@ -6693,6 +6693,20 @@
       ]
     },
     {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)",
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
@@ -12657,6 +12671,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "finish",
         "image"
       ]
     },

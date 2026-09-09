@@ -10641,16 +10641,16 @@
      "finishStatus": {
       "non-holo": "marketplace-claimed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "marketplace-claimed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0139",
      "productMappingStatus": "confirmed",
      "printings": [
@@ -10671,7 +10671,7 @@
        "markings": null,
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
+       "verificationStatus": "confirmed",
        "productMapping": "mapped"
       }
      ]
@@ -22862,29 +22862,45 @@
      "language": "Japanese",
      "claimStatus": "confirmed",
      "availableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "unitAvailableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0363",
      "productMappingStatus": "confirmed",
      "printings": [
       {
        "printingId": "F0363-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0212.jpg",
+       "specimenIds": [
+        "SPEC-0212"
+       ]
+      },
+      {
+       "printingId": "F0363-P02",
        "finish": "reverse-holo",
        "foilPattern": null,
        "markings": null,

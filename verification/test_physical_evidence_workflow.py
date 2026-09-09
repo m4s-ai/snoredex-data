@@ -677,12 +677,23 @@ def main() -> None:
         if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0529", "F0635"}
     }
     assert archive_only_finish_statuses == {
-        "F0139": "marketplace-claimed",
+        "F0139": "confirmed",
         "F0172": "marketplace-claimed",
         "F0179": "marketplace-claimed",
         "F0529": "pending",
         "F0635": "pending",
     }
+    spanish_generations = next(unit for unit in finish_units if unit["finishUnitId"] == "F0139")
+    assert spanish_generations["finishStatus"]["reverse-holo"] == "confirmed"
+    assert spanish_generations["finishStatus"]["non-holo"] == "marketplace-claimed"
+    assert spanish_generations["completenessStatus"] == "positive-evidence-only"
+    reverse_print = next(p for p in spanish_generations["printings"] if p["finish"] == "reverse-holo")
+    assert any("oldid=4587656" in source.get("url", "")
+               and source.get("claimFields") == ["finish"]
+               and source.get("languages") == ["Spanish"]
+               and source.get("supportsAbsence") is False
+               for source in reverse_print["sources"])
+    assert "physicalObservation" not in specimen_by_id["SPEC-0131"]
     conflict = dict(fixture[0])
     conflict["physicalObservation"] = {
         **fixture[0]["physicalObservation"],

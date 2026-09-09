@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 487,
+  "count": 488,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -741,13 +741,22 @@
       "inspectedFrom": "owner photograph",
       "photograph": "SPEC-0038.png",
       "photographSource": "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e8fdc2d8cdf3017b1f4ff6436546dcc63930e378/verification/specimens/SPEC-0038.png",
-      "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner and supplied through issue #84: the card reads 伊布&卡比獸GX, Basic, TAG TEAM, HP 270, and carries the AS5a set mark with collector number 222/184. The rainbow treatment and the independent 52poke card record identify this as the HR local counterpart of legacy sm9 115 V3; no finish status is projected from the photograph here.",
-      "recordedAt": "2026-08-21",
+      "photographSha256": "sha256:7cd1d1e3381e3a2a8a25bf6c6e65cb6790d90662f94a57c45f9e5448eb4b19db",
+      "observed": "Reinspection on 2026-09-08: the complete Traditional-Chinese AS5a 222/184 card visibly has broad spectral foil bands crossing the artwork and text field. This establishes holo; it does not establish an exhaustive finish list or a normalized rarity.",
+      "recordedAt": "2026-09-08",
       "citedBy": [
         "TW:AS5a:222/184:base"
       ],
-      "photographSha256": "sha256:7cd1d1e3381e3a2a8a25bf6c6e65cb6790d90662f94a57c45f9e5448eb4b19db",
-      "listingUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the complete Traditional-Chinese AS5a 222/184 card visibly has broad spectral foil bands crossing the artwork and text field. This establishes holo; it does not establish an exhaustive finish list or a normalized rarity."
+      },
+      "listingUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",
+      "photographAllowSmall": true
     },
     {
       "specimenId": "SPEC-0039",
@@ -1801,9 +1810,18 @@
       "photograph": "SPEC-0083.jpg",
       "photographSource": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250521_213114776_iOS.jpg",
       "photographSha256": "sha256:6f83c2c07919e4d2fd9c519c1a6e1b1935d14d0228c04665bb71336538b16b5c",
-      "observed": "Owner full-card photograph captured 2025-05-21 of T-Chinese 卡比獸 VMAX sc1b F 177/153 HR, HP 340. The rainbow surface and textured outlines are directly visible. This is the same physical card as SPEC-0081, SPEC-0082 and SPEC-0084 through SPEC-0086; the catch-up printing is retained as identity evidence even though it is not yet a canonical finish unit.",
-      "recordedAt": "2026-08-26",
-      "citedBy": []
+      "observed": "Reinspection on 2026-09-08: the foreground Traditional-Chinese sc1b F 177/153 card shows granular foil texture and spectral color bands across its surface. The complete number is visible at bottom left. Only this foreground card is observed; the two background Spanish cards supply no additional claim.",
+      "recordedAt": "2026-09-08",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the foreground Traditional-Chinese sc1b F 177/153 card shows granular foil texture and spectral color bands across its surface. The complete number is visible at bottom left. Only this foreground card is observed; the two background Spanish cards supply no additional claim."
+      },
+      "photographAllowSmall": true
     },
     {
       "specimenId": "SPEC-0084",
@@ -1929,9 +1947,18 @@
       "photograph": "SPEC-0091.jpg",
       "photographSource": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250523_093802679_iOS.jpg",
       "photographSha256": "sha256:b0525db423b4d8774794a016cb24b650973184bee4d47326b945c156c454ae3d",
-      "observed": "Full owner photograph captured 2025-05-23 of Thai Hop's Snorlax, printed คาบิกอน ของฮ็อป, SV9s T 109/139 R, HP 150, ©2025. Rainbow reflection is directly visible in the artwork and border. This remains specimen evidence for the existing Thai discovery candidate until that release has a canonical card and finish unit.",
-      "recordedAt": "2026-08-26",
-      "citedBy": []
+      "observed": "Reinspection on 2026-09-08: the complete Thai SV9s T 109/139 card has bright spectral reflections in the illustration and outer silver border. The text panel does not carry a separate observed reverse pattern. This positively establishes holo, with no inferred stamp, distribution, or finish completeness.",
+      "recordedAt": "2026-09-08",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: the complete Thai SV9s T 109/139 card has bright spectral reflections in the illustration and outer silver border. The text panel does not carry a separate observed reverse pattern. This positively establishes holo, with no inferred stamp, distribution, or finish completeness."
+      },
+      "photographAllowSmall": true
     },
     {
       "specimenId": "SPEC-0092",
@@ -4572,12 +4599,21 @@
       "photograph": "SPEC-0212.jpg",
       "photographSource": "https://product-images.s3.cardmarket.com/51/s8b/586642/586642.jpg",
       "photographSha256": "sha256:9eec7c336f99e03ba707851a4c30ad6063b85dab0809c9a5c2fb08f040f71817",
-      "observed": "Complete retained Cardmarket catalogue scan for Japanese Snorlax s8b 126 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
-      "recordedAt": "2026-08-28",
+      "observed": "Reinspection on 2026-09-08: Japanese s8b 126/184 shows dense vertical foil lines and spectral bands within the artwork window. The visible positive treatment establishes holo independently of the marketplace reverse-holo filter. No reverse finish is asserted from this image.",
+      "recordedAt": "2026-09-08",
       "citedBy": [
         "U0172"
       ],
-      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax"
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-09-08: Japanese s8b 126/184 shows dense vertical foil lines and spectral bands within the artwork window. The visible positive treatment establishes holo independently of the marketplace reverse-holo filter. No reverse finish is asserted from this image."
+      },
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
+      "photographAllowSmall": true
     },
     {
       "specimenId": "SPEC-0213",
@@ -10000,6 +10036,31 @@
         "basis": "The complete front seller photograph shows the Japanese 046/066 card face under direct lighting, including the lower-right Battle Academy deck mark. The surface remains uniformly printed throughout, without a separate reflective foil layer or foil pattern; the printed svI mark and 046/066 identity match the Battle Academy card represented by Cardmarket's svIba alias."
       },
       "listingUrl": "https://www.ebay.com/itm/386908467357"
+    },
+    {
+      "specimenId": "SPEC-0488",
+      "setCode": "S-P",
+      "number": "052",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller full-card photograph",
+      "photograph": "SPEC-0488.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/9K8AAOSw8YNnAU3d/s-l1200.jpg",
+      "photographSha256": "sha256:384c1f86d420590711790c6d34b573bb3a5109e31ac8c87ca9dfdc04bf0e9cdd",
+      "observed": "Inspected full seller photograph of Indonesian Snorlax 052/S-P. Timbun Makanan Dalam Perut, Menindih, 052/S-P, regulation D and the Indomaret logo are visible. Vertical spectral foil reflections appear in the illustration and silver border. The sleeve causes glare but the foil is visible in multiple separated card regions. No edition or exhaustive finish list is asserted.",
+      "recordedAt": "2026-09-08",
+      "citedBy": [],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "Indomaret",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The exact Indonesian 052/S-P card shows spectral foil lines in its illustration and border and the printed Indomaret logo. The matched seller listing independently describes Holo; the photograph carries this observation."
+      },
+      "listingUrl": "https://www.ebay.com/itm/196697959025",
+      "photographAllowSmall": true
     }
   ]
 }
