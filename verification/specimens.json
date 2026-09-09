@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 505,
+  "count": 506,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10383,6 +10383,23 @@
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:sc1D F:133/164:base"
+      ]
+    },
+    {
+      "specimenId": "SPEC-0506",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; owner supplied seller image URL",
+      "inspectedFrom": "owner-supplied Shopee CDN image and larger original",
+      "photograph": "SPEC-0506.jpg",
+      "photographSource": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
+      "photographSha256": "sha256:84019598cb04f7891378e8428bf2b4a1b2a6b54e962734f3c51c75780decb6bd",
+      "observed": "Visible Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, Illus. 5ban Graphics. Printed set is sc1b F, resolving the earlier listing-title sc2b ambiguity. Larger JPEG original retrieved from same CDN image ID and visually matched to owner-supplied resized WebP. Technical finish and physical custody are not asserted.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
       ]
     }
   ]
