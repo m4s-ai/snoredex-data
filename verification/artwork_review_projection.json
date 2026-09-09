@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-09",
-  "projectionVersion": "bb4aeff314e820d48800074d3d248e21cdf64aa6adc0dec452bf3354af637f73",
+  "projectionVersion": "b00ac89f3c12c470ea773bdc732c1ce3962ae4662c93e6c82daee575eb40d28c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 73,
     "cardReleases": 632,
-    "physicalPrintings": 743,
+    "physicalPrintings": 744,
     "sourceObservations": 2395
   },
   "groups": [
@@ -85498,13 +85498,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0495",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Seller photograph visibly identifies Traditional Chinese 卡比獸V, sc1b F, 165/153 SR, HP220. Rainbow reflections cross the card face and border, supporting holo; the exact listing also explicitly describes Holo. No named foil pattern or exhaustive finish inventory is inferred.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0495",
+              "specimenIds": [
+                "SPEC-0495"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸V",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,

@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:354bce54a02b1969f826a1fcc96c5b3ca5cb6df618bc2775b646a3f00ddf39bc",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:a72c6a1dfa33f27b6628d0bdd02fe0cbe16347ac28d07ad18028792a4c63d27a",
+    "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a72c6a1dfa33f27b6628d0bdd02fe0cbe16347ac28d07ad18028792a4c63d27a",
+      "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12444,7 +12444,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a72c6a1dfa33f27b6628d0bdd02fe0cbe16347ac28d07ad18028792a4c63d27a",
+      "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30346,6 +30346,15 @@
       "reconciliation": "requires-user-resolution"
     },
     {
+      "fromItemId": "item-0464d3f7-163a-53df-ac87-ecbf0b59e60c",
+      "toItemIds": [
+        "item-31d2fee3-40dd-587a-9f18-a531f17c0f45"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-c6f3afff-f78b-5edb-a544-0bea422ccea9",
       "toItemIds": [
         "item-1e7619b0-6c1c-5248-a0c1-2e870ea005d0"
@@ -40141,7 +40150,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down",
         "disposition": "projected",
         "targetItemIds": [
-          "item-0464d3f7-163a-53df-ac87-ecbf0b59e60c"
+          "item-31d2fee3-40dd-587a-9f18-a531f17c0f45"
         ],
         "reason": null
       },
@@ -46980,12 +46989,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0488",
         "disposition": "projected",
         "targetItemId": "item-76fb4c4e-0167-5082-80cb-8eb646687de9"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0495",
+        "disposition": "projected",
+        "targetItemId": "item-31d2fee3-40dd-587a-9f18-a531f17c0f45"
       }
     ],
     "summary": {
       "legacyChecklistRows": 890,
       "cardReleases": 632,
-      "physicalPrintings": 743,
+      "physicalPrintings": 744,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

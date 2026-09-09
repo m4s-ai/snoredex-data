@@ -34327,6 +34327,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0495",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0495",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0495",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0495",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0495",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0495"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -99462,6 +99479,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0488",
         "specimenIds": [
           "SPEC-0488"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0495",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0495",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "Seller photograph visibly identifies Traditional Chinese 卡比獸V, sc1b F, 165/153 SR, HP220. Rainbow reflections cross the card face and border, supporting holo; the exact listing also explicitly describes Holo. No named foil pattern or exhaustive finish inventory is inferred.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0495",
+        "specimenIds": [
+          "SPEC-0495"
         ]
       }
     },
@@ -178294,6 +178335,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0495",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0495",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -227388,6 +227439,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0495",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0495",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0495",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down",
       "provenance": {}
     },
     {
@@ -286406,17 +286473,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0488",
       "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S-P:052:Snorlax-Gormandize-Body-Slam"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0495",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0495",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:165/153:Snorlax-V-Swallow-Falling-Down"
     }
   ],
   "summary": {
-    "entities": 7914,
-    "edges": 11821,
-    "migrationInputs": 2763,
+    "entities": 7916,
+    "edges": 11824,
+    "migrationInputs": 2764,
     "migrationDispositions": {
       "bounded-contradicted": 90,
       "candidate-needs-evidence": 280,
       "carried": 68,
-      "established-and-mapped": 1543,
+      "established-and-mapped": 1544,
       "linked-local-counterpart": 122,
       "mapped": 305,
       "needs-evidence": 126,
@@ -286424,9 +286498,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 1988,
+    "candidateClaims": 1989,
     "cardReleases": 632,
-    "physicalPrintings": 743,
+    "physicalPrintings": 744,
     "setSourceRecords": 433,
     "setSourceDispositions": 433,
     "localizations": 16

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 494,
+  "count": 495,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10171,6 +10171,32 @@
         "TW:AS5D:118/169:base"
       ],
       "listingUrl": "https://beehivetcg.com/products/as5d-118-169-%E4%BC%8A%E5%B8%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-gx"
+    },
+    {
+      "specimenId": "SPEC-0495",
+      "setCode": "sc1b F",
+      "number": "165/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0495.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/NTwAAOSwREVhTZRC/s-l1600.jpg",
+      "photographSha256": "sha256:ea0f3f68b54050bbc64bbbbacf8d877b8d13ab9dace46dae45bbd7b1121dbe35",
+      "observed": "Seller photograph visibly identifies Traditional Chinese 卡比獸V, sc1b F, 165/153 SR, HP220. Rainbow reflections cross the card face and border, supporting holo; the exact listing also explicitly describes Holo. No named foil pattern or exhaustive finish inventory is inferred.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:sc1b F:165/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": null,
+        "markingRole": null,
+        "cardSize": "standard",
+        "basis": "Seller photograph visibly identifies Traditional Chinese 卡比獸V, sc1b F, 165/153 SR, HP220. Rainbow reflections cross the card face and border, supporting holo; the exact listing also explicitly describes Holo. No named foil pattern or exhaustive finish inventory is inferred."
+      },
+      "listingUrl": "https://www.ebay.com/itm/224621405527"
     }
   ]
 }
