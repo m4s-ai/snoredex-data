@@ -19,12 +19,12 @@ in `verification/owner_adjudications.json`.
 | **Pokémon Card official database and rules (Korea)** | official-publisher | 1 | positive only | 93 | 158 | language, product |
 | **Pokémon official website (Mainland China)** | official-publisher | 1 | positive only | 10 | 44 | language, finish, product |
 | **The Pokémon Company official cards and checklists** | official-publisher | 1 | positive only | 123 | 419 | language, finish, product |
-| **52poke (Wiki)** | collector-database | 2 | positive only | 5 | 7 | language, artist, edition, finish |
+| **52poke (Wiki)** | collector-database | 2 | positive only | 5 | 6 | language, artist, edition, finish |
 | **Bulbapedia** | fan-wiki | 2 | positive only | 85 | 637 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | positive only | 0 | 0 | finish, language |
 | **Cardmarket exact product image** | marketplace-photo | 2 | positive only | 48 | 73 | language, identity, finish, edition, image |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | positive only | 8 | 13 | language, identity, finish, edition |
-| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 88 | language, finish, edition |
+| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 89 | language, finish, edition |
 | **Elite Fourum** | collector-community | 2 | positive only | 5 | 19 | language, edition |
 | **PSA certification and registry** | grading-registry | 2 | positive only | 1 | 2 | finish |
 | **SNKRDUNK** | marketplace | 2 | positive only | 1 | 3 | finish, language |

@@ -593,9 +593,9 @@ def main() -> None:
             "legacyRows": len(predecessor_items),
             "verifiedPrintings": 703,
             "finishCandidates": 111,
-            "researchPlaceholders": 76,
+            "researchPlaceholders": 75,
             "currentKnown": 703,
-            "research": 187,
+            "research": 186,
         },
     }
     build_a_bear_item = next(

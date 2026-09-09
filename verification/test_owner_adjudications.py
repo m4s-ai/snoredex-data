@@ -63,6 +63,11 @@ def main() -> int:
         FLF_TCGPLAYER_URL,
         FLF_IMAGE_URL,
     }
+    svg_history = [row for row in journal_rows if row.get("unitId") == "U0467"]
+    assert any(row.get("supersededObservation", {}).get("providerId") == "52poke"
+               for row in svg_history), "SVG correction must preserve the earlier source interpretation"
+    assert any(row.get("source") == "Owner attestation (domain expert)"
+               and row.get("status") == "contradicted" for row in svg_history)
     for unit_id in flf_v2_excluded:
         unit = raw_units[unit_id]
         if unit.get("providerId") != "owner-attestation" or unit.get("sourceUrl") is not None:

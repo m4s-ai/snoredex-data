@@ -24040,12 +24040,12 @@
         "claimKind": "card-release",
         "sourceKind": "legacy-language-unit",
         "sourceId": "U0467",
-        "sourceRecord": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
+        "sourceRecord": null,
+        "evidenceStatus": "contradicted",
+        "disposition": "bounded-contradicted",
         "proposedTargetId": "RELEASE:TW:T-Chinese:SVG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
-        "materializedTargetId": "RELEASE:TW:T-Chinese:SVG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
-        "reason": "language names its locality"
+        "materializedTargetId": null,
+        "reason": "On 2026-09-09 the collection owner explicitly decided that SVG 021/049 has no Traditional Chinese variant: \"hiermit entscheide ich das es keine t-chinese variante gibt\". This supersedes the earlier repository confirmation. The absence decision belongs to the owner, not to 52Poke or Bulbapedia; earlier source evidence remains in the journal."
       }
     },
     {
@@ -45404,10 +45404,11 @@
           "CLAIM:source-first:TW:SVG:021/049:base"
         ],
         "establishingClaimIds": [
-          "CLAIM:legacy:U0467",
           "CLAIM:source-first:TW:SVG:021/049:base"
         ],
-        "nonEstablishingClaimIds": [],
+        "nonEstablishingClaimIds": [
+          "CLAIM:legacy:U0467"
+        ],
         "legacyVariants": [
           "base"
         ],
@@ -121289,9 +121290,7 @@
           "viaLegacySetCodes": [
             "svG"
           ],
-          "establishingClaimIds": [
-            "CLAIM:legacy:U0467"
-          ],
+          "establishingClaimIds": [],
           "localizationId": "LOCALIZATION:TW:zh-Hant"
         },
         "catalogue": {
@@ -121302,9 +121301,7 @@
           "script": "Hant",
           "localCode": null,
           "state": "needs-local-identifier",
-          "establishingEvidenceIds": [
-            "CLAIM:legacy:U0467"
-          ],
+          "establishingEvidenceIds": [],
           "localizationId": "LOCALIZATION:TW:zh-Hant"
         }
       }
@@ -173017,16 +173014,6 @@
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:svG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:legacy:U0467",
-      "relation": "materializes",
-      "toType": "card-release",
-      "toId": "RELEASE:TW:T-Chinese:SVG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -279305,9 +279292,9 @@
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0467",
-      "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:TW:T-Chinese:SVG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "reason": "language names its locality"
+      "disposition": "bounded-contradicted",
+      "targetRef": null,
+      "reason": "On 2026-09-09 the collection owner explicitly decided that SVG 021/049 has no Traditional Chinese variant: \"hiermit entscheide ich das es keine t-chinese variante gibt\". This supersedes the earlier repository confirmation. The absence decision belongs to the owner, not to 52Poke or Bulbapedia; earlier source evidence remains in the journal."
     },
     {
       "sourceKind": "legacy-language-unit",
@@ -286564,13 +286551,13 @@
   ],
   "summary": {
     "entities": 7918,
-    "edges": 11827,
+    "edges": 11826,
     "migrationInputs": 2765,
     "migrationDispositions": {
-      "bounded-contradicted": 90,
+      "bounded-contradicted": 91,
       "candidate-needs-evidence": 280,
       "carried": 68,
-      "established-and-mapped": 1545,
+      "established-and-mapped": 1544,
       "linked-local-counterpart": 122,
       "mapped": 305,
       "needs-evidence": 126,

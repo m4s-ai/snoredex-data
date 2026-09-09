@@ -465,7 +465,10 @@ def remove_old_releases(
 ) -> tuple[list[tuple[str, str | None]], list[str], dict[str, list[str]]]:
     first = group[0]
     legacy_ids = {unit_id for row in group for unit_id in row["legacy"]}
-    active_legacy_ids = legacy_ids & set(ISSUE_UNITS)
+    active_legacy_ids = {
+        unit_id for unit_id in legacy_ids & set(ISSUE_UNITS)
+        if units[unit_id].get("status") == "confirmed"
+    }
     patterns = {(str(units[unit_id]["setCode"]), str(units[unit_id]["number"]).lstrip("0")) for unit_id in legacy_ids}
 
     def matches_old_ref(value: Any) -> bool:
