@@ -192,6 +192,8 @@ physical evidence uses the canonical observation-manifest importer. A new Python
 `verification/` is reserved for migration, bulk repair, or a data-model change. Then the generators
 and checks are re-run; `units.json` and `finish_units.json` are never hand-edited.
 [`CLAUDE.md`](CLAUDE.md) has the required command order.
+The [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract)
+explains how retained images must remain connected to their claims and consumer views.
 
 ## How the repository is built
 

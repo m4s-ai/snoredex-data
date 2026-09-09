@@ -19,7 +19,7 @@ Work from the repository root. Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.m
 2. Establish a clean baseline with `python scripts/regen.py --check`. Record any pre-existing failure; do not hide it in the evidence change.
 3. Classify what the source positively establishes. Provider silence, missing rows, zero results, and TCGdex `false` are not negative evidence.
 4. Resolve the provider and its capability in the reviewed source registry. Attribute the claim to the source it would fail without; mark corroboration only when a second provider supports this same unit.
-5. Follow `RESUME.md` to update the canonical store and append the observation journal. Never edit generated projections, reuse a neighbour's evidence, or invent a source reference.
+5. Follow `RESUME.md` to update the canonical store and append the observation journal. For specimen-backed claims or changed references, apply its [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract). Never edit generated projections, reuse a neighbour's evidence, or invent a source reference.
 6. Treat an explicit collection-owner absence decision as adjudication input. A scoped source may support the rationale but cannot itself produce `not-printed`; otherwise leave the claim pending or disputed.
 7. Run the smallest relevant check while iterating:
    - ordinary claim change: `python scripts/scoped_regen.py --lane correction`

@@ -123,6 +123,8 @@ existing Python workflow owners rather than copying their contracts.
    graph projectors and release gate. Write a new Python pass under `verification/` only for a
    migration, bulk repair, or data-model change. Never hand-edit `units.json` or
    `finish_units.json`.
+   An intake is complete only when its supported references reach the affected consumers; follow
+   the [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract).
 7. **Never hand-edit a generated file.** Each carries a header saying so, including the
    `<!-- generated:… -->` blocks in `README.md` and the whole of `index.html`. Regenerate instead.
    The candidate file and locality graph are retained hybrid stores, not disposable outputs.

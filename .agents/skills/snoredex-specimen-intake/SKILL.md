@@ -19,8 +19,8 @@ Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), the c
 2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.
 3. For repository issue attachments, prepare one reviewed observation manifest and run `python verification/fetch_attachment.py --issue <number> --manifest <path>`. For a local or already reachable image, use the documented `--specimen ... --from ...` form.
 4. Preserve the stable issue or listing URL as provenance and the imported byte hash as integrity evidence. File seller photographs as third-party-held specimens, never as a bare marketplace link.
-5. Record `physicalObservation` only for facts the image supports. Leave finish or other fields unset when glare, resolution, crop, or missing card surfaces prevent a reliable reading.
+5. Record visible physical properties under `physicalObservation`. For explicit owner determinations, preserve the field-specific attribution described in `FINISH_SOURCES.md`; unclear image properties remain unset without that separate evidence.
 6. Run `python scripts/workflow_loop.py --loop physical --max-cycles 3` and inspect its stop reason. Then run `python scripts/scoped_regen.py --lane physical-evidence`.
-7. Run `python scripts/regen.py`, review specimen, finish, graph, collector, and publication-allowlist effects, and report any evidence still missing.
+7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and the affected registry, artwork and collector views. Run `python scripts/regen.py`, review the complete artifact diff and publication-allowlist effects, and report any evidence still missing.
 
 If the original bytes cannot be obtained or safely matched to a specimen, stop with the exact missing input. A missing photograph is not evidence of absence.

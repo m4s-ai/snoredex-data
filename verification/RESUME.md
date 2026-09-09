@@ -55,9 +55,9 @@ and never repair missing projections.
 
 ### Physical-card evidence loop (#274)
 
-Keep one reviewed JSON manifest per issue. Each row names `setCode`, `number`, `variant`,
+Keep a reviewed JSON manifest for each intake batch and link it to the owning issue. Each row names `setCode`, `number`, `variant`,
 `language`, `heldBy`, `inspectedFrom`, `observed`, and `recordedAt`; seller rows also need
-`listingUrl`. Add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
+`listingUrl`. For image-based findings, add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
 when the retained image positively establishes a physical treatment. An identity-legible database
 scan may omit `physicalObservation` entirely when it establishes the localized card but not its
 finish, edition, marking, distribution, or size; omission is never evidence of non-holo. An optional
@@ -83,6 +83,69 @@ neighbouring product.
 `conflictsWith` review markers; conflicted observations remain pending until resolved.
 `authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again
 in `finish_overrides.json` or in a one-off pass.
+
+### Specimen and reference acceptance contract
+
+Retaining an image and connecting its evidence are separate operations. Apply this contract when
+adding a photograph, admitting a source-first card, adding corroboration, or changing an identity.
+The importer does not turn a citation into a reviewed confirmation or independent corroboration.
+An explicit owner determination may establish a property the photograph does not show; record
+that distinction through `ownerAttestedFields` as described in [FINISH_SOURCES.md](FINISH_SOURCES.md#recording-what-a-scan-shows-150).
+
+| Relationship | Canonical representation | Acceptance check |
+|---|---|---|
+| Legacy unit rests on a specimen | Unit `sourceRef: "specimen:SPEC-nnnn"` | It resolves to that exact specimen, not a neighbouring card or prose description. |
+| Source-first card rests on a specimen | Admitted print's `specimenId` | The registry indexes the exact `printId` together with its `SPEC-nnnn`; a missing reverse citation must not drop the direct reference. |
+| Specimen supports an existing claim | Specimen `citedBy` contains the exact legacy unit or source-first print ID | Resolve the ID in its owning store; a shared set, artwork or collector number is not an identity mapping. |
+| A reviewed second provider corroborates a source-first card | Canonical `corroborated`, `corroboratingSpecimenIds` and `corroboratingSourceUrls` | Record the reviewed agreement, then retain its provenance in the graph and collector evidence links. A `citedBy` link alone does not set corroboration. |
+| A specimen establishes a physical printing | Projected `specimenIds` or `PHYSICAL:specimen:SPEC-nnnn` identity | The graph, artwork observations/images and collector links resolve the same evidence. Create these through the canonical projectors. |
+
+Only record relationships the evidence establishes; not every intake needs every row of the table.
+Retain a pre-admission observation as a visible unresolved candidate using the documented importer
+path where applicable, rather than inventing a legacy unit or borrowing a nearby release. When
+admission occurs, reconcile the retained specimen and its references in the same change.
+
+For provenance, retain the original bytes and hash, the issue/listing page and the actual image
+source when available. `attachment` locates the input bytes; `photograph` and
+`photographSha256` identify the retained artifact; `listingUrl` and `photographSource` preserve
+where it came from. Keep new URL values free of explanatory suffixes; put crop, carousel and
+inspection notes in `observed` or `basis`. Record the real inspection/retrieval date, not a reused
+pass date. Reuse an existing retained image when the importer identifies identical bytes, while
+preserving the additional source relationship through the reviewed input path.
+
+Grade each property by its supporting evidence. A publisher or wiki page does not lend its
+authority to a linked third-party image; a Cardmarket product page remains catalogue metadata
+even when a retained seller photo supports identity. Unknown image origin stays unknown. A second
+URL, the same image on another listing, or another record from the same provider does not by
+itself establish independent agreement. A legible name/number does not establish foil, rarity
+does not establish finish, and a matching image does not close the finish inventory.
+
+Before handing off an accepted intake, follow its IDs through all affected consumers:
+
+- `source_registry.json`: the admitted print, applicable specimen IDs, source URLs, provider,
+  supported dimensions and available dates remain discoverable. Direct references and reverse
+  citations must both work; no provider-specific branch may silently omit an admitted claim.
+- Graph, artwork and collector outputs: the same identity retains its observations, local image,
+  usable provenance link and any independently supported physical properties. Inspect the
+  rendered member when image or link behavior changed; a stored file alone is not acceptance.
+- Rekeys or withdrawals: reconcile active claims, releases, product references and collector
+  migrations together; preserve historical observations and confirmed one-to-one collection
+  state. Retiring a legacy claim alone must not leave a contradictory source-first item active.
+
+Use [WORKFLOW-MAP.md](../WORKFLOW-MAP.md) for the full dependency and gate order. Regenerate all
+affected artifacts, including both SQLite handoffs and collector fingerprints, and review the
+complete diff before committing. If changed capability observations invalidate a retained run,
+use the supported offline replay only when acquisition inputs are unchanged; preserve original
+retrieval evidence and immutable old runs. Do not weaken capability checks or invent a new fetch.
+
+For a shared-path repair, enumerate all affected inputs and consumers before requesting another
+review. `verify_source_first_specimen_registry()` in `test_authoritative_graph.py` checks the
+complete admitted print corpus and every direct specimen association, plus direct-only citation
+and owner-finish boundaries. It complements the graph, artwork, collector and capability checks
+in the central gate; it does not prove every possible reference or image correct. Keep regression
+coverage at the violated contract, rather than only the newly reported SPEC IDs. State any
+unresolved association explicitly, and answer each addressed PR finding in its original thread
+with the applicable fix and verification result.
 
 ## What this file is
 
