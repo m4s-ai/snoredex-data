@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-09",
-  "projectionVersion": "b00ac89f3c12c470ea773bdc732c1ce3962ae4662c93e6c82daee575eb40d28c",
+  "projectionVersion": "cfd7b70873f59bee32dfb5a6d23ccb89c508146888430a3cc95ab0006c5a6606",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 73,
     "cardReleases": 632,
-    "physicalPrintings": 744,
+    "physicalPrintings": 745,
     "sourceObservations": 2395
   },
   "groups": [
@@ -81211,15 +81211,45 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0496",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "distribution-promo",
+                  "text": "POKÉMON TCG GYM stamp in artwork"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "The seller photograph visibly shows Traditional Chinese 伊布&卡比獸 GX, HP270, PROMO and 053/SM-P, with the POKÉMON TCG GYM logo in the artwork. Spectral reflections across the face and border establish holo; the exact listing also describes Holo. No named foil pattern or complete finish inventory is asserted.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0496",
+              "specimenIds": [
+                "SPEC-0496"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "伊布&卡比獸 GX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "POKÉMON TCG GYM stamp in artwork"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },

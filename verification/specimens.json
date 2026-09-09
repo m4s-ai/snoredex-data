@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 495,
+  "count": 496,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10197,6 +10197,32 @@
         "basis": "Seller photograph visibly identifies Traditional Chinese 卡比獸V, sc1b F, 165/153 SR, HP220. Rainbow reflections cross the card face and border, supporting holo; the exact listing also explicitly describes Holo. No named foil pattern or exhaustive finish inventory is inferred."
       },
       "listingUrl": "https://www.ebay.com/itm/224621405527"
+    },
+    {
+      "specimenId": "SPEC-0496",
+      "setCode": "SM-P",
+      "number": "053",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph",
+      "photograph": "SPEC-0496.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/IqwAAOSwYPtih0RB/s-l1600.jpg",
+      "photographSha256": "sha256:f9eac59437ebac69ff9bf84ecf18dd07cfb2cd9e869145d6d07d2870bca7517f",
+      "observed": "The seller photograph visibly shows Traditional Chinese 伊布&卡比獸 GX, HP270, PROMO and 053/SM-P, with the POKÉMON TCG GYM logo in the artwork. Spectral reflections across the face and border establish holo; the exact listing also describes Holo. No named foil pattern or complete finish inventory is asserted.",
+      "recordedAt": "2026-09-09",
+      "citedBy": [
+        "TW:SM-P:053:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": null,
+        "markings": "POKÉMON TCG GYM stamp in artwork",
+        "markingRole": "distribution-promo",
+        "cardSize": "standard",
+        "basis": "The seller photograph visibly shows Traditional Chinese 伊布&卡比獸 GX, HP270, PROMO and 053/SM-P, with the POKÉMON TCG GYM logo in the artwork. Spectral reflections across the face and border establish holo; the exact listing also describes Holo. No named foil pattern or complete finish inventory is asserted."
+      },
+      "listingUrl": "https://www.ebay.com/itm/226754170463"
     }
   ]
 }

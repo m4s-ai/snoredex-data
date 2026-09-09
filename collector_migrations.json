@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:354bce54a02b1969f826a1fcc96c5b3ca5cb6df618bc2775b646a3f00ddf39bc",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
+    "toFingerprint": "sha256:490175176dda9108b7b6dfe1bb5e774de82b298e51e4d8bdbeeb3d3bbe851dea",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
+      "toFingerprint": "sha256:490175176dda9108b7b6dfe1bb5e774de82b298e51e4d8bdbeeb3d3bbe851dea",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -9635,11 +9635,11 @@
             "item-d2531ad4-cb90-5e70-a957-e515381942ae"
           ],
           "toItemIds": [
-            "item-d2531ad4-cb90-5e70-a957-e515381942ae"
+            "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-d263277c-78a3-5de6-b4aa-cc9397eca26f",
@@ -12444,7 +12444,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b7b8dd2bcfd28e61d1416c7568c6da62a3b8c676963b5b5b41da47b012484d86",
+      "toFingerprint": "sha256:490175176dda9108b7b6dfe1bb5e774de82b298e51e4d8bdbeeb3d3bbe851dea",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -21142,11 +21142,11 @@
             "item-d2531ad4-cb90-5e70-a957-e515381942ae"
           ],
           "toItemIds": [
-            "item-d2531ad4-cb90-5e70-a957-e515381942ae"
+            "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-d263277c-78a3-5de6-b4aa-cc9397eca26f",
@@ -30344,6 +30344,15 @@
       "changeKind": "split-1:N",
       "automaticStateAction": "none",
       "reconciliation": "requires-user-resolution"
+    },
+    {
+      "fromItemId": "item-d2531ad4-cb90-5e70-a957-e515381942ae",
+      "toItemIds": [
+        "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
     },
     {
       "fromItemId": "item-0464d3f7-163a-53df-ac87-ecbf0b59e60c",
@@ -40038,7 +40047,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-d2531ad4-cb90-5e70-a957-e515381942ae"
+          "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
         ],
         "reason": null
       },
@@ -46994,12 +47003,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0495",
         "disposition": "projected",
         "targetItemId": "item-31d2fee3-40dd-587a-9f18-a531f17c0f45"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0496",
+        "disposition": "projected",
+        "targetItemId": "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
       }
     ],
     "summary": {
       "legacyChecklistRows": 890,
       "cardReleases": 632,
-      "physicalPrintings": 744,
+      "physicalPrintings": 745,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
