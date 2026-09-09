@@ -440,6 +440,9 @@ def apply_set_graph(graph: dict[str, Any], profile: dict[str, Any], code: str, c
         append_unique(matches[0]["payload"].setdefault("sourceRecordIds", []), source_id)
     else:
         upsert_entity(graph, "local-set", local_set_id, {"localSetId": local_set_id, "locality": LOCALITY, "localCode": code, "observedNames": [], "productKind": "physical-card-set-or-product", "sourceRecordIds": [source_id]}, origin=ORIGIN)
+    local_set = next(item["payload"] for item in graph["entities"] if item["entityType"] == "local-set" and item["entityId"] == local_set_id)
+    if name := profile.get("raw", {}).get("localName"):
+        append_unique(local_set.setdefault("observedNames", []), name)
     upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", source_id)
     editions = [item for item in graph["entities"] if item.get("entityType") == "set-edition" and item.get("entityId") == edition_id]
     if editions:
@@ -512,6 +515,12 @@ def remove_old_releases(
             disposition["targetRef"] = target
         if "targetRefs" in disposition:
             disposition["targetRefs"] = [target if value in obsolete or matches_old_ref(value) else value for value in disposition["targetRefs"]]
+    for item in graph["entities"]:
+        if item.get("entityType") == "legacy-cardmarket-product":
+            payload = item["payload"]
+            refs = payload.get("cardReleaseIds", [])
+            if any(value in obsolete or matches_old_ref(value) for value in refs):
+                payload["cardReleaseIds"] = sorted({target if value in obsolete or matches_old_ref(value) else value for value in refs})
     catalogue = {item["entityId"] for item in graph["entities"] if item.get("entityType") == "catalogue-card-release-ref" and item.get("payload", {}).get("cardReleaseId") in obsolete}
     graph["entities"] = [item for item in graph["entities"] if not ((item.get("entityType") == "card-release" and item.get("entityId") in obsolete) or (item.get("entityType") == "catalogue-card-release-ref" and item.get("entityId") in catalogue))]
     graph["edges"] = [edge for edge in graph["edges"] if not ((edge.get("fromType") == "card-release" and edge.get("fromId") in obsolete) or (edge.get("toType") == "card-release" and edge.get("toId") in obsolete) or (edge.get("fromType") == "catalogue-card-release-ref" and edge.get("fromId") in catalogue) or (edge.get("toType") == "catalogue-card-release-ref" and edge.get("toId") in catalogue))]

@@ -47,6 +47,12 @@ def main() -> None:
         assert release["localIdentifierKnown"] and release["localNumber"] == "093/070"
         assert release["releaseDate"] == "2021-04-02"
         assert "U0602" in release["legacyCounterpartUnitIds"]
+        local_set = next(e["payload"] for e in current["entities"] if e["entityId"] == "LOCALSET:TW:s5a%20F")
+        assert "雙璧戰士" in local_set["observedNames"]
+        product = next(e["payload"] for e in current["entities"] if e["entityType"] == "legacy-cardmarket-product" and e["payload"]["sourceId"].endswith("/Matchless-Fighter/Snorlax-s5a93"))
+        assert s5af_id in product["cardReleaseIds"]
+        assert len(product["cardReleaseIds"]) == 5
+        assert not any(":TW:T-Chinese:via-s5a:" in ref for ref in product["cardReleaseIds"])
         assert not any(e["entityType"] == "card-release" and ":via-s5a:" in e["entityId"] and e["payload"].get("language") == "T-Chinese" for e in current["entities"])
     specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
     assert "physicalObservation" not in specimen
