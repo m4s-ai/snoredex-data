@@ -928,11 +928,15 @@ def specimen_provider(url: str | None, source_type: str) -> str | None:
 
 
 def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
-    """Keep linked third-party assets from inheriting the wiki's authority."""
-    urls = {entry.get("sourceUrl"), entry.get("cardImageUrl"), entry.get("comparisonAssetUrl")} - {None}
-    if entry["providerId"] == "52poke":
-        return {url for url in urls if (urlsplit(url).hostname or "").endswith(".52poke.com")}
-    return urls
+    """Keep the declared primary source and only assets owned by that provider.
+
+    Foreign or unknown-host assets use their own specimen provenance; a link from the
+    primary source never gives them its authority or claim dimension.
+    """
+    assets = {entry.get("cardImageUrl"), entry.get("comparisonAssetUrl")} - {None}
+    return ({entry.get("sourceUrl")} - {None}) | {
+        url for url in assets if resolve_provider(url, None) == entry["providerId"]
+    }
 
 
 def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) -> None:

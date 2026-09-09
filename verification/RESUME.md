@@ -117,7 +117,10 @@ preserving the additional source relationship through the reviewed input path.
 
 Grade each property by its supporting evidence. A publisher or wiki page does not lend its
 authority to a linked third-party image; a Cardmarket product page remains catalogue metadata
-even when a retained seller photo supports identity. Unknown image origin stays unknown. A second
+even when a retained seller photo supports identity. For every source-first provider, index a
+linked image/comparison asset under the primary source only when its provider matches. Foreign
+or unknown-host assets use their own retained specimen provenance; do not borrow the page's
+claim dimension or rely on an earlier registry row to correct its provider. Unknown image origin stays unknown. A second
 URL, the same image on another listing, or another record from the same provider does not by
 itself establish independent agreement. A legible name/number does not establish foil, rarity
 does not establish finish, and a matching image does not close the finish inventory.

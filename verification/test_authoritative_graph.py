@@ -132,6 +132,36 @@ def verify_source_first_specimen_registry():
         lambda *a, **kw: finish_calls.append((a, kw)))
     assert [(a[0], kw['provider_id']) for a, kw in finish_calls if a[2] == 'finish'] == [
         (None, 'owner-attestation')], "an owner finish assertion must not become retailer-image evidence"
+    verify_source_first_asset_authority(prints, evidence, registry)
+
+
+def verify_source_first_asset_authority(prints, evidence, registry):
+    surfaces = registry.specimen_surfaces()
+    for row in prints.values():
+        calls = []
+        registry.record_source_first_identity(row, lambda *a, **kw: calls.append(a), surfaces)
+        for field in ('cardImageUrl', 'comparisonAssetUrl'):
+            asset = row.get(field)
+            if asset and registry.resolve_provider(asset, None) != row['providerId']:
+                assert asset not in {call[0] for call in calls}, (row['printId'], field)
+    # No specimen/earlier registry row exists to mask incorrect ownership in these cases.
+    for provider, primary in (
+        ('52poke', 'https://wiki.52poke.com/wiki/example'),
+        ('bulbapedia', 'https://bulbapedia.bulbagarden.net/wiki/example'),
+        ('pokemon-card-korea', 'https://pokemoncard.co.kr/cards/detail/example'),
+    ):
+        calls = []
+        registry.record_source_first_identity({'providerId': provider, 'printId': 'sample',
+            'sourceUrl': primary, 'cardImageUrl': 'https://media.pokipair.com/foreign.png',
+            'comparisonAssetUrl': 'https://unknown.example/foreign.png'},
+            lambda *a, **kw: calls.append((a, kw)), surfaces)
+        assert [(a[0], kw['provider_id']) for a, kw in calls] == [(primary, provider)]
+    actual = next(row for row in evidence if row.get('canonicalUrl') ==
+        prints['CN:CS2aC:142/115:base']['cardImageUrl'])
+    assert actual['providerId'] == 'retailer-listing'
+    assert actual['dimensions'] == ['identity']
+    assert 'SPEC-0475' in actual['stableIds']
+    assert 'CN:CS2aC:142/115:base' in actual['stableIds']
 
 
 def main() -> None:
