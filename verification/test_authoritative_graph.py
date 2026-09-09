@@ -37,10 +37,271 @@ def issue263_rebuilt_graph() -> dict:
     return rebuilt
 
 
+def verify_source_first_specimen_registry():
+    import source_registry as registry
+    document = json.loads((ROOT / 'verification/source_registry.json').read_text(encoding='utf-8'))
+    evidence = document['evidence']
+    assert all(row['stableIdCount'] == len(row['stableIds']) for row in evidence)
+    prints = {row['printId']: row for row in json.loads(
+        (ROOT / 'verification/source_first_prints.json').read_text(encoding='utf-8'))['prints']}
+    indexed = {}
+    for position, row in enumerate(evidence):
+        for stable_id in row['stableIds']:
+            indexed.setdefault(stable_id, set()).add(position)
+    assert not (prints.keys() - indexed.keys()), "every admitted source-first print must be indexed"
+    for print_id, row in prints.items():
+        if row.get('specimenId'):
+            assert indexed.get(row['specimenId'], set()) & indexed[print_id], (print_id, row['specimenId'])
+    specimens = json.loads((ROOT / 'verification/specimens.json').read_text(encoding='utf-8'))['specimens']
+    units = json.loads((ROOT / 'verification/units.json').read_text(encoding='utf-8'))
+    finish_units = json.loads((ROOT / 'verification/finish_units.json').read_text(encoding='utf-8'))['units']
+    reviewed_graph = json.loads((ROOT / 'verification/authoritative_graph.json').read_text(encoding='utf-8'))
+    known_refs = registry.registry_claim_ids(units, list(prints.values()), finish_units, reviewed_graph)
+    assert 'CLAIM:positive:56aee25aabfce91a' in known_refs, 'retained reviewed claims are upstream inputs'
+    for specimen in specimens:
+        if specimen.get('physicalObservation'):
+            assert indexed.get(specimen['specimenId']), ('standalone observation omitted', specimen['specimenId'])
+        for ref in set(specimen.get('citedBy') or []) & known_refs:
+            assert indexed.get(specimen['specimenId'], set()) & indexed.get(ref, set()), (specimen['specimenId'], ref)
+    urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
+    for row in prints.values():
+        if row['providerId'] == 'pokemon-card-korea':
+            for url in registry.source_first_registry_urls(row):
+                assert 'card-release' in urls[registry.canonical_url(url)]['dimensions'], row['printId']
+    items = json.loads((ROOT / 'collector_catalogue.json').read_text(encoding='utf-8'))['items']
+    for specimen in specimens:
+        number = int(specimen['specimenId'].split('-')[1])
+        if not 494 <= number <= 506:
+            continue
+        matches = [row for row in evidence if specimen['specimenId'] in row['stableIds']]
+        assert matches, specimen['specimenId']
+        assert all('identity' in row['dimensions'] for row in matches)
+        assert all(row['retrievedAt'] >= '2026-09-09' for row in matches)
+        if number in (495, 496):
+            assert all(row['providerId'] == 'seller-listing-photo' for row in matches)
+            photo_url = registry.canonical_url(registry.provenance_url(specimen['photographSource']))
+            assert any(row['canonicalUrl'] == photo_url and 'finish' in row['dimensions'] for row in matches)
+        print_id = specimen['citedBy'][0]
+        if number == 505:
+            assert specimen['specimenId'] not in prints[print_id].get('corroboratingSpecimenIds', [])
+            continue
+        assert prints[print_id]['corroborated'] is True
+        assert all(row['providerId'] != prints[print_id]['providerId'] for row in matches)
+        urls = set(prints[print_id]['corroboratingSourceUrls'])
+        assert urls
+        assert any(urls <= set(item['evidenceLinks']) for item in items)
+        assert all(print_id in row['stableIds'] for row in matches)
+    calls = []
+    specimen = {'specimenId': 'sample', 'heldBy': 'third-party retailer',
+                'citedBy': ['print'], 'photographSource': 'https://example.org/card.jpg',
+                'recordedAt': '2026-09-09'}
+    record = {'printId': 'print', 'corroborated': False}
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    assert {call[3] for call in calls} == {'sample', 'print'}
+    assert all(call[2] == 'identity' for call in calls)
+    assert record['corroborated'] is False
+    calls.clear()
+    specimen['citedBy'] = []
+    record['specimenId'] = specimen['specimenId']
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append(a), [record])
+    assert {call[3] for call in calls} == {'sample', 'print'}, "direct references need no reverse citation"
+    assert record['corroborated'] is False
+    calls.clear()
+    unit = {'unitId': 'legacy', 'corroborated': False, 'status': 'pending'}
+    specimen['citedBy'] = ['legacy', 'F-test-P01', 'unresolved']
+    registry.record_linked_specimens([specimen], [unit], lambda *a, **kw: calls.append(a),
+        finish_units=[{'printings': [{'printingId': 'F-test-P01'}]}])
+    assert {call[3] for call in calls} == {'sample', 'legacy', 'F-test-P01'}
+    assert unit == {'unitId': 'legacy', 'corroborated': False, 'status': 'pending'}
+    graph_fixture = {'entities': [
+        {'entityType': 'candidate-claim', 'entityId': 'reviewed', 'origin': 'reviewed-evidence'},
+        {'entityType': 'candidate-claim', 'entityId': 'projected', 'origin': 'physical-evidence-projection'}]}
+    assert registry.registry_claim_ids([], [], [], graph_fixture) == {'reviewed'}, 'ignore downstream physical projection'
+    calls.clear()
+    korean_url = 'https://pokemoncard.co.kr/cards/detail/BS2010002030'
+    registry.record_source_first_identity({'providerId': 'pokemon-card-korea',
+        'sourceUrl': korean_url, 'printId': 'release'}, lambda *a, **kw: calls.append(a), registry.specimen_surfaces())
+    assert {call[2] for call in calls} == {'card-release'}
+    calls.clear()
+    specimen.update({'photographSource': korean_url, 'citedBy': ['legacy']})
+    registry.record_linked_specimens([specimen], [unit], lambda *a, **kw: calls.append(a))
+    assert {call[2] for call in calls} == {'identity'}
+    render_rows = [row for row in evidence if 'SPEC-0022' in row['stableIds']]
+    assert render_rows and all(row['providerId'] == 'owner-attestation' for row in render_rows)
+    assert all('identity' not in row['dimensions'] for row in render_rows), 'marketing render is not an inspected card'
+    finish_calls = []
+    registry.record_specimen_claim('https://example.org/card.jpg', 'Retail listing',
+        'retailer-listing', 'identity', 'sample', '2026-09-09',
+        {'finish': 'holo', 'ownerAttestedFields': ['finish']},
+        lambda *a, **kw: finish_calls.append((a, kw)), registry.specimen_surfaces())
+    assert [(a[0], kw['provider_id']) for a, kw in finish_calls if a[2] == 'finish'] == [
+        (None, 'owner-attestation')], "an owner finish assertion must not become retailer-image evidence"
+    verify_source_first_asset_authority(prints, evidence, registry)
+    verify_retained_image_identity(specimens, evidence, registry)
+    verify_observed_finish_attribution(specimens, registry)
+    verify_standalone_registry_observations(registry)
+
+
+def verify_standalone_registry_observations(registry):
+    direct = registry.direct_specimen_claims(
+        [{'unitId': 'U1', 'sourceRef': 'specimen:S1'}],
+        [{'printId': 'SF1', 'specimenId': 'S2', 'corroboratingSpecimenIds': ['S3']}],
+        {'entities': [
+            {'entityType': 'candidate-claim', 'entityId': 'C1', 'origin': 'reviewed', 'payload': {'specimenIds': ['S4']}},
+            {'entityType': 'candidate-claim', 'entityId': 'C2', 'origin': 'physical-evidence-projection', 'payload': {'specimenIds': ['S5']}}]})
+    assert direct == {'S1': {'U1'}, 'S2': {'SF1'}, 'S3': {'SF1'}, 'S4': {'C1'}}
+    calls = []
+    specimen = {'specimenId': 'SPEC-standalone', 'citedBy': ['unresolved'],
+                'physicalObservation': {'finish': 'holo'}, 'recordedAt': '2026-09-09',
+                'photographSource': 'https://example.org/card.jpg', 'heldBy': 'third-party seller'}
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append((a, kw)))
+    assert {a[3] for a, _ in calls} == {'SPEC-standalone'}, 'no invented printing or unresolved foreign claim'
+    assert {a[2] for a, _ in calls} == {'identity', 'finish'}
+    assert all(a[4] == '2026-09-09' for a, _ in calls)
+    assert specimen['citedBy'] == ['unresolved'], 'reference routing cannot admit a claim'
+    calls.clear()
+    specimen.pop('photographSource')
+    specimen['inspectedFrom'] = 'product image'
+    registry.record_linked_specimens([specimen], [], lambda *a, **kw: calls.append((a, kw)))
+    assert calls, 'an empty context-reference list cannot swallow a typed physical observation'
+    assert all(a[3] == 'SPEC-standalone' for a, _ in calls)
+    assert registry.specimen_provider('https://snkrdunk.com/apparels/200/', 'Seller listing photograph') == 'snkrdunk'
+    assert registry.specimen_provider('https://example.org/card.jpg', 'Seller listing photograph') == 'seller-listing-photo'
+    assert registry.specimen_provider('https://rocketcoll.com/products/example', 'Seller listing photograph') == 'seller-listing-photo'
+
+
+def verify_source_first_asset_authority(prints, evidence, registry):
+    surfaces = registry.specimen_surfaces()
+    for row in prints.values():
+        calls = []
+        registry.record_source_first_identity(row, lambda *a, **kw: calls.append(a), surfaces)
+        for field in ('cardImageUrl', 'comparisonAssetUrl'):
+            asset = row.get(field)
+            if asset and registry.resolve_provider(asset, None) != row['providerId']:
+                assert asset not in {call[0] for call in calls}, (row['printId'], field)
+    # No specimen/earlier registry row exists to mask incorrect ownership in these cases.
+    for provider, primary in (
+        ('52poke', 'https://wiki.52poke.com/wiki/example'),
+        ('bulbapedia', 'https://bulbapedia.bulbagarden.net/wiki/example'),
+        ('pokemon-card-korea', 'https://pokemoncard.co.kr/cards/detail/example'),
+    ):
+        calls = []
+        registry.record_source_first_identity({'providerId': provider, 'printId': 'sample',
+            'sourceUrl': primary, 'cardImageUrl': 'https://media.pokipair.com/foreign.png',
+            'comparisonAssetUrl': 'https://unknown.example/foreign.png'},
+            lambda *a, **kw: calls.append((a, kw)), surfaces)
+        assert [(a[0], kw['provider_id']) for a, kw in calls] == [(primary, provider)]
+    actual = next(row for row in evidence if row.get('canonicalUrl') ==
+        prints['CN:CS2aC:142/115:base']['cardImageUrl'])
+    assert actual['providerId'] == 'retailer-listing'
+    assert actual['dimensions'] == ['identity']
+    assert 'SPEC-0475' in actual['stableIds']
+    assert 'CN:CS2aC:142/115:base' in actual['stableIds']
+
+
+def verify_retained_image_identity(specimens, evidence, registry):
+    from urllib.parse import urlsplit
+    urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
+    for specimen in specimens:
+        url = registry.provenance_url(specimen.get('photographSource'))
+        if not url or not urlsplit(url).path.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+            continue
+        row = urls.get(registry.canonical_url(url))
+        if row and specimen['specimenId'] in row['stableIds']:
+            assert 'identity' in row['dimensions'], (specimen['specimenId'], row['providerId'])
+    surfaces = registry.specimen_surfaces()
+    for provider in ('52poke', 'pokemon-official', 'pokemon-cn-official'):
+        for surface in surfaces[provider]:
+            if surface['surfaceId'] not in {'52poke-wiki', 'tpci-latam-spanish-card-assets',
+                    'tpci-eu-spanish-card-assets', 'pokemon-cn-card-image'}:
+                continue
+            assert surface['finishCapability']['mode'] == 'none'
+            for edge in surface['coverageEdges']:
+                assert 'identity' in edge['positiveEvidenceCapabilities']
+                assert edge['absenceCapability']['enabled'] is False
+    specimen = next(row for row in specimens if row['specimenId'] == 'SPEC-0189')
+    calls = []
+    registry.record_specimen_sources(specimen, ['sample'], 'Inspected physical specimen photograph',
+        {}, lambda *a, **kw: calls.append((a, kw)), surfaces)
+    image_calls = [(a[2], kw['provider_id']) for a, kw in calls if a[0] == specimen['photographSource']]
+    assert image_calls and set(image_calls) == {('identity', 'cardmarket-product-image')}
+    page_calls = [a[2] for a, kw in calls if a[0] == specimen['listingUrl']]
+    assert page_calls and set(page_calls) == {'product'}, 'product pages do not inherit image authority'
+
+
+def verify_observed_finish_attribution(specimens, registry):
+    from source_capabilities import route_evidence
+    surfaces = registry.specimen_surfaces()
+    for specimen in specimens:
+        physical = specimen.get('physicalObservation') or {}
+        if not physical.get('finish'):
+            continue
+        calls = []
+        source_type = registry.SPECIMEN_SOURCE_TYPES.get(str(specimen.get('heldBy', '')).casefold(),
+            specimen.get('inspectedFrom', 'Inspected physical specimen photograph'))
+        registry.record_specimen_sources(specimen, ['sample'], source_type, physical,
+            lambda *a, **kw: calls.append((a, kw)), surfaces)
+        finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
+        assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
+        if 'finish' in physical.get('ownerAttestedFields', []):
+            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation' for a, kw in finish)
+            continue
+        image = registry.provenance_url(specimen.get('photographSource')) or registry.provenance_url(specimen.get('listingUrl'))
+        primary = [(a, kw) for a, kw in calls if a[0] == image and a[2] != 'finish']
+        if not primary:
+            continue
+        provider = primary[0][1]['provider_id']
+        surface = route_evidence({'canonicalUrl': image, 'providerId': provider}, surfaces)
+        if surface['finishCapability']['mode'] == 'specimen-observation':
+            assert all(a[0] == image and kw['provider_id'] == provider for a, kw in finish), specimen['specimenId']
+    # Capabilities, not a provider-name allowlist, decide whether the URL can carry the observation.
+    synthetic = {'new-photo-provider': [{'finishCapability': {'mode': 'specimen-observation'},
+        'coverageEdges': [{'positiveEvidenceCapabilities': ['identity', 'finish']}]}]}
+    calls = []
+    registry.record_specimen_claim('https://example.org/card.jpg', 'Inspected physical specimen photograph',
+        'new-photo-provider', 'identity', 'sample', '2026-09-09', {'finish': 'holo'},
+        lambda *a, **kw: calls.append((a, kw)), synthetic)
+    assert [(a[0], kw['provider_id']) for a, kw in calls if a[2] == 'finish'] == [
+        ('https://example.org/card.jpg', 'new-photo-provider')]
+    synthetic['new-photo-provider'][0]['finishCapability']['mode'] = 'product-subtype'
+    assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
+    synthetic['new-photo-provider'][0]['finishCapability']['mode'] = 'specimen-observation'
+    synthetic['new-photo-provider'][0]['coverageEdges'][0]['positiveEvidenceCapabilities'] = ['identity']
+    assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
+
+
 def main() -> None:
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
+    import admit_issue263_s5af_20260909 as s5af_pass
+    repaired = deepcopy(graph)
+    s5af_pass.reproject_prior_products(repaired)
+    assert repaired == graph, "committed product references must include all reviewed TW rekeys"
+    product_refs = lambda g: {e["entityId"]: e["payload"]["cardReleaseIds"] for e in g["entities"]
+                              if e["entityType"] == "legacy-cardmarket-product"}
+    assert product_refs(graph) == product_refs(issue263_rebuilt_graph())
+    s5af_id = "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam"
+    for current in (graph, issue263_rebuilt_graph()):
+        release = next(e["payload"] for e in current["entities"] if e["entityType"] == "card-release" and e["entityId"] == s5af_id)
+        assert release["localIdentifierKnown"] and release["localNumber"] == "093/070"
+        assert release["releaseDate"] == "2021-04-02"
+        rarity = next(e["payload"] for e in current["entities"]
+                      if e["entityType"] == "rarity-claim"
+                      and e["entityId"] == "RARITYCLAIM:issue263:s5a F:093/070:Snorlax-Gormandize-Body-Slam")
+        assert rarity["retrievedAt"] == "2026-09-09"
+        assert rarity["sourceNativeValue"] == "UR"
+        assert "U0602" in release["legacyCounterpartUnitIds"]
+        local_set = next(e["payload"] for e in current["entities"] if e["entityId"] == "LOCALSET:TW:s5a%20F")
+        assert "雙璧戰士" in local_set["observedNames"]
+        product = next(e["payload"] for e in current["entities"] if e["entityType"] == "legacy-cardmarket-product" and e["payload"]["sourceId"].endswith("/Matchless-Fighter/Snorlax-s5a93"))
+        assert s5af_id in product["cardReleaseIds"]
+        assert len(product["cardReleaseIds"]) == 5
+        assert not any(":TW:T-Chinese:via-s5a:" in ref for ref in product["cardReleaseIds"])
+        assert not any(e["entityType"] == "card-release" and ":via-s5a:" in e["entityId"] and e["payload"].get("language") == "T-Chinese" for e in current["entities"])
+    specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
+    assert "physicalObservation" not in specimen
+
     tampered = deepcopy(graph)
     next(
         row["payload"] for row in tampered["entities"]
@@ -359,12 +620,27 @@ def main() -> None:
             and row["printId"] in entity["payload"].get("sourceFirstRecordIds", [])
         )
         assert row["sourceUrl"] in release["sourceRecords"]
+    verify_source_first_specimen_registry()
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")
         )["evidence"] if row.get("canonicalUrl")
     }
     fxy_rarity_url = fxy_row["raritySourceUrl"]
+    from source_registry import canonical_url
+    from urllib.parse import urlsplit
+    for row in issue263_pass.read(issue263_pass.PRINTS)["prints"]:
+        if row.get("providerId") == "52poke":
+            for url in {row.get("sourceUrl"), row.get("cardImageUrl"), row.get("comparisonAssetUrl")} - {None}:
+                if not urlsplit(url).hostname.endswith(".52poke.com"):
+                    assert source_registry.get(canonical_url(url), {}).get("providerId") != "52poke"
+                    continue
+                evidence = source_registry[canonical_url(url)]
+                assert evidence["providerId"] == "52poke"
+                if row.get("retrievedAt"):
+                    assert evidence["retrievedAt"] >= row["retrievedAt"]
+                assert row["printId"] in evidence["stableIds"]
+                assert "card-release" in evidence["dimensions"]
     assert source_registry[fxy_rarity_url]["providerId"] == "bulbapedia"
     assert "rarity" in source_registry[fxy_rarity_url]["dimensions"]
     assert fxy_row["printId"] in source_registry[fxy_rarity_url]["stableIds"]

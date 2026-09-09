@@ -143,6 +143,30 @@ def reinspection_regressions() -> None:
 
 
 def main() -> None:
+    for value in (None, 7, "owner upload", "https:///missing-host", "javascript:alert(1)",
+                  "https://example.org/a b", "https://[broken", "https://example.org:invalid"):
+        assert collector.provenance_url(value) is None, value
+    for value in ("https://example.org/a(b)", "https://example.org/a%20b?x=1&y=2#part"):
+        assert collector.provenance_url(value) == value
+    annotated = "https://www.instagram.com/p/DO6tQd5jNK8/ (carousel image 1)"
+    assert collector.physical_specimen_links({"specimenIds": ["S"]},
+        {"S": {"photographSource": annotated}}) == {"https://www.instagram.com/p/DO6tQd5jNK8/"}
+    specimen = {"S": {"listingUrl": "https://example.org/listing", "photographSource": "owner upload"}}
+    for physical in ({"physicalPrintingId": "PHYSICAL:specimen:S"}, {"specimenIds": ["S", "missing"]}):
+        assert collector.physical_specimen_links(physical, specimen) == {"https://example.org/listing"}
+    assert collector.physical_specimen_links(None, specimen) == set()
+    retained = next(s for s in read('verification/specimens.json')['specimens'] if s['specimenId'] == 'SPEC-0146')
+    items = read('collector_catalogue.json')['items']
+    matching = [item for item in items if ':CSM2cC:103:' in item['cardReleaseId']]
+    assert matching and all({retained['listingUrl'], retained['photographSource']} <= set(item['evidenceLinks'])
+                            for item in matching), 'identity-level specimen citations must reach collector provenance'
+    assert not any(retained['photographSource'] in item['evidenceLinks'] for item in items
+                   if ':CSM2cC:103:' not in item['cardReleaseId']), 'do not borrow the neighboring card evidence'
+    for specimen_id in ("SPEC-0495", "SPEC-0496"):
+        retained = next(s for s in read("verification/specimens.json")["specimens"] if s["specimenId"] == specimen_id)
+        published = next(i for i in read("collector_catalogue.json")["items"]
+                         if i.get("physicalPrintingId") == "PHYSICAL:specimen:" + specimen_id)
+        assert {retained["listingUrl"], retained["photographSource"]} <= set(published["evidenceLinks"])
     printing_identity_regressions()
     reinspection_regressions()
     assert collector.collector_number("076/095") == collector.collector_number("076")
@@ -369,6 +393,12 @@ def main() -> None:
         source = collector.git_json_at(commit, "collector_catalogue.json")
         route = routes[fingerprint]
         source_item_ids = {row["itemId"] for row in source["items"]}
+        old_s5a = next(row["itemId"] for row in source["items"] if row.get("cardReleaseId") == "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id")
+        s5a = next(row for row in route["transitions"] if old_s5a in row["fromItemIds"])
+        assert s5a["fromItemIds"] == [old_s5a]
+        assert s5a["toItemIds"] == ["item-9877e7a6-c3a9-5fc2-956d-a1d1591018a0"]
+        assert s5a["changeKind"] == "rekey-1:1"
+        assert s5a["automaticStateAction"] == "preserve"
         covered_source_ids = [
             item_id
             for transition in route["transitions"]
@@ -587,9 +617,9 @@ def main() -> None:
             "legacyRows": len(predecessor_items),
             "verifiedPrintings": 703,
             "finishCandidates": 111,
-            "researchPlaceholders": 76,
+            "researchPlaceholders": 75,
             "currentKnown": 703,
-            "research": 187,
+            "research": 186,
         },
     }
     build_a_bear_item = next(

@@ -244,11 +244,11 @@ def main() -> int:
 
     issue84_correction = by_id["U0467"]
     if (
-        issue84_correction["status"] != "confirmed"
-        or issue84_correction.get("providerId") != "52poke"
-        or semantics["U0467"]["applicationStatus"] != "exists"
+        issue84_correction["status"] != "contradicted"
+        or issue84_correction.get("providerId") != "owner-attestation"
+        or semantics["U0467"]["applicationStatus"] != "not-printed"
     ):
-        raise AssertionError("#84 positive SVG 021/049 evidence no longer corrects U0467")
+        raise AssertionError("SVG owner decision must supersede the earlier #84 interpretation")
 
     counts = {status: len(unit_ids) for status, unit_ids in expected.items()}
     if semantics_doc["counts"]["applicationStatuses"] != {

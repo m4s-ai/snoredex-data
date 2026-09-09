@@ -16,6 +16,12 @@ tick the right boxes and describe what is wrong.
 If you would rather start from scratch:
 [open a printing correction](https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml).
 
+For a photograph, include the listing or source page and a direct image link when available.
+Say whether the card is yours and which details you can actually read or inspect. If an image is
+cropped, unclear, or has an unknown origin, say so; an identifiable card can still help even when
+its foil treatment cannot be established. Label additional photos so we can match each one to
+the card and source it supports.
+
 ## The one rule that matters
 
 **Positive evidence only. An absence is not evidence.**

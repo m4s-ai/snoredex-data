@@ -63,6 +63,17 @@ The following invariants apply to every path:
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |
 | `verification/card_discovery_adapters.json` | reviewed card-discovery inventory | Locality-aware card query slices and gaps | candidate card/release edges |
 
+The source registry resolves specimen citations against legacy units, admitted source-first
+prints, finish printing IDs and candidate claims in the graph's retained reviewed base. It does
+not consume the downstream `physical-evidence-projection` slice; citation resolution never
+depends on a confirmation or corroboration verdict.
+Typed standalone observations are registered under their own SPEC ID, without inventing an
+upstream physical ID. Downstream, `scripts/specimen_links.py` supplies the common artwork and
+collector reference resolver: release claims and source-first records plus the applicable
+physical printing's explicit IDs. Artwork aggregates its release; collector provenance adds only
+the current item's physical evidence. These joins expose evidence and never change admission,
+corroboration, finish truth or collection identity.
+
 The source-first raw runs are retained transport evidence; refresh candidates are staging:
 
 - `verification/runs/source-adapters/`
@@ -298,12 +309,15 @@ projection.
 
 ## 4. Use-case contracts
 
+The [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract)
+defines the relationship and consumer checks for retained images and their supporting references.
+
 | Use case | Canonical entry | Graph impact | Required boundary |
 |---|---|---|---|
 | Known card confirmation | Evidence observation + reviewed unit update | Existing claim/release edge; possibly source/provenance | Evidence application and source identity; no discovery refresh |
 | New card from internet/source-first | Retained adapter/discovery run, then reconciliation | New candidate/release/source edges; locality and mapping edges | Adapter/card-discovery/completeness before canonical mutation |
 | New set or promo announcement (including Pokémon.com news) | Official lead, then concrete set/card source | Set/release/card edges only when positively identified | News alone is a lead; no inferred card list or finish |
-| Physical card/image | Issue manifest → attachment importer → specimen | `observed-by`/`supported-by` to finish/printing | Image/hash/SPEC validation, then finish/graph/collector projection |
+| Physical card/image | Issue manifest → attachment importer → specimen | `observed-by`/`supported-by` to finish/printing | Image/hash/SPEC validation, then registry, graph, artwork and collector acceptance |
 | Cardmarket page or image | Historical candidate metadata, or positive visible-card evidence from a retained exact product image or seller photo | Candidate provenance or physical observation | Filters, offers and counts never verify a localized card or expand the frozen baseline automatically |
 | TCGdex refresh | Candidate snapshot → explicit accept | Finish candidate/profile edges | Hash/URL diff and review before accepting snapshot |
 | Contradiction / absence | Scoped source or owner adjudication | `contradicts` or bounded absence/adjudication edges | No zero-result inference; unresolved stays disputed/pending |

@@ -330,7 +330,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "52poke (Wiki)",
         "organization": "52Poké (神奇宝贝百科)",
         "homepage": "https://wiki.52poke.com",
-        "hosts": ["wiki.52poke.com", "s1.52poke.com", "s2.52poke.com"],
+        "hosts": ["wiki.52poke.com", "s1.52poke.com", "s2.52poke.com", "media.52poke.com"],
         "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
         "category": "collector-database",
         "authorityTier": 2,
@@ -485,6 +485,7 @@ PROVIDERS: list[dict[str, Any]] = [
             "www.target.com", "exorgames.com", "shopping.fullcomp.jp", "www.pokeca.net",
             "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
             "coleka.com", "www.coleka.com",
+            "beehivetcg.com", "rocketcoll.com",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
@@ -659,6 +660,22 @@ def latest_input_date(*documents: Any) -> str:
     return max(dates)
 
 
+def provenance_url(value: Any) -> str | None:
+    """Return a public HTTP(S) link, separating a trailing prose annotation."""
+    if not isinstance(value, str):
+        return None
+    value = re.sub(r" \([^()\r\n]*\)$", "", value.strip())
+    if re.search(r'[\s<>"\\\x00-\x1f\x7f]', value):
+        return None
+    try:
+        parts = urlsplit(value)
+        if parts.scheme.lower() in {"http", "https"} and parts.hostname and parts.port != 0:
+            return value
+    except ValueError:
+        pass
+    return None
+
+
 def canonical_url(url: str) -> str:
     """Normalize path encoding, fragments and slashes so a source is counted once.
 
@@ -779,35 +796,200 @@ def resolve_evidence_provider(
 
 SPECIMEN_SOURCE_TYPES = {
     "collection owner": "Owner-supplied physical card photograph",
+    "collection-owner supplied source image": "Owner-supplied physical card photograph",
     "third-party retailer": "Retail listing",
     "third-party seller": "Seller listing photograph",
     "third-party scan archive": "Third-party scan archive",
+    "third-party collector": "Third-party collector photograph",
+    "publisher or database": "Inspected reference photograph; original provider unspecified",
+    "not established; retailer reference image": "Retail listing",
+    "not established; owner supplied seller image url": "Seller listing photograph",
+    "not established; image supplied by collection owner": "Inspected card photograph; external origin unknown",
 }
 
 
-def record_corroborating_specimens(
+def reviewed_candidate_claims(graph):
+    return [row for row in (graph or {}).get("entities", [])
+            if row["entityType"] == "candidate-claim" and row["origin"] != "physical-evidence-projection"]
+
+
+def registry_claim_ids(units: list[dict], source_first: list[dict], finish_units: list[dict],
+                       reviewed_graph: dict | None = None) -> set[str]:
+    """Resolve citation targets from upstream canonical stores, without grading their evidence."""
+    # The retained graph base owns reviewed claims. Its generated physical slice is downstream
+    # of this registry and must not feed back into reference resolution.
+    reviewed_ids = {row["entityId"] for row in reviewed_candidate_claims(reviewed_graph)}
+    return ({unit["unitId"] for unit in units}
+            | {row["printId"] for row in source_first}
+            | {printing["printingId"] for unit in finish_units for printing in unit["printings"]}
+            | reviewed_ids)
+
+
+def record_product_render_context(specimen: dict, references: list[str], units: dict,
+                                  record: Callable) -> bool:
+    """Attach an unlocated historical render to its existing claim, never invent image authority."""
+    if specimen.get("inspectedFrom") != "product image" or any(
+        provenance_url(specimen.get(key)) for key in ("listingUrl", "photographSource")
+    ):
+        return False
+    if not all(ref in units for ref in references):
+        return False
+    for ref in references:
+        unit = units[ref]
+        for stable_id in (ref, specimen["specimenId"]):
+            record(unit.get("sourceUrl"), "Referenced product render (context only); " + str(unit.get("sourceType")),
+                   "language", stable_id, (unit.get("checkedAt") or "")[:10] or None,
+                   provider_id=unit.get("providerId"))
+    return bool(references)
+
+
+def specimen_claim_ids(specimen, accepted, direct) -> list[str]:
+    return sorted((set(specimen.get("citedBy") or []) & accepted)
+                  | direct.get(specimen["specimenId"], set()))
+
+
+def direct_specimen_claims(units, source_first, reviewed_graph) -> dict[str, set[str]]:
+    direct = defaultdict(set)
+    for unit in units:
+        source_ref = unit.get("sourceRef") or ""
+        if source_ref.startswith("specimen:"):
+            direct[source_ref.removeprefix("specimen:")].add(unit["unitId"])
+    for row in source_first:
+        ids = set(row.get("corroboratingSpecimenIds") or []) | {row.get("specimenId")}
+        for specimen_id in ids - {None}:
+            direct[specimen_id].add(row["printId"])
+    for row in reviewed_candidate_claims(reviewed_graph):
+        for specimen_id in row.get("payload", {}).get("specimenIds") or []:
+            direct[specimen_id].add(row["entityId"])
+    return direct
+
+
+def record_linked_specimens(
     specimens: list[dict[str, Any]], units: list[dict[str, Any]],
-    record: Callable[..., None],
+    record: Callable[..., None], source_first: list[dict[str, Any]] = (),
+    finish_units: list[dict[str, Any]] = (),
+    reviewed_graph: dict | None = None,
 ) -> None:
-    """Project every specimen supporting a corroborated unit as identity evidence."""
-    corroborated = {unit["unitId"] for unit in units if unit.get("corroborated") is True}
+    """Project linked identity and physical evidence without inferring corroboration."""
+    accepted = registry_claim_ids(units, source_first, finish_units, reviewed_graph)
+    units_by_id = {unit["unitId"]: unit for unit in units}
+    direct = direct_specimen_claims(units, source_first, reviewed_graph)
+    surfaces = specimen_surfaces()
     for specimen in specimens:
-        unit_ids = [ref for ref in specimen.get("citedBy") or [] if ref in corroborated]
-        if not unit_ids:
+        unit_ids = specimen_claim_ids(specimen, accepted, direct)
+        physical = specimen.get("physicalObservation") or {}
+        if not unit_ids and not physical:
+            continue
+        if record_product_render_context(specimen, unit_ids, units_by_id, record):
             continue
         source_type = SPECIMEN_SOURCE_TYPES.get(
             str(specimen.get("heldBy", "")).casefold(),
             str(specimen.get("inspectedFrom") or "Inspected physical specimen photograph"),
         )
-        record(
-            specimen.get("photographSource"), source_type,
-            "identity", specimen["specimenId"], specimen.get("recordedAt"),
-        )
-        for unit_id in unit_ids:
-            record(
-                specimen.get("photographSource"), source_type,
-                "identity", unit_id, specimen.get("recordedAt"),
-            )
+        record_specimen_sources(specimen, unit_ids, source_type, physical, record, surfaces)
+
+
+def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: str,
+                           physical: dict, record: Callable[..., None], surfaces: dict) -> None:
+    photo_url = provenance_url(specimen.get("photographSource"))
+    listing_url = provenance_url(specimen.get("listingUrl"))
+    urls = {photo_url, listing_url} - {None}
+    observed_url = photo_url or listing_url
+    retained_product_images = retained_cardmarket_product_image_urls([specimen])
+    for url in sorted(urls) or [None]:
+        provider = specimen_provider(url, source_type)
+        if provider == "cardmarket" and url and canonical_url(url) in retained_product_images:
+            provider = "cardmarket-product-image"
+        dimension = card_evidence_dimension(url, provider, surfaces, "identity")
+        for stable_id in [specimen["specimenId"], *unit_ids]:
+            record_specimen_claim(url, source_type, provider, dimension, stable_id,
+                                  specimen.get("recordedAt"), physical if url == observed_url else {},
+                                  record, surfaces)
+
+
+def specimen_surfaces() -> dict:
+    surfaces: dict[str, list] = defaultdict(list)
+    for surface in read_json(ROOT / "verification/source_capabilities.json")["surfaces"]:
+        surfaces[surface["providerId"]].append(surface)
+    return surfaces
+
+
+def card_evidence_dimension(url: str | None, provider: str | None, surfaces: dict,
+                            preferred: str) -> str:
+    from source_capabilities import route_evidence
+    if provider is None:
+        return "identity"  # The registry records an unresolved provider, never invents one.
+    surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
+    capabilities = {value for edge in surface["coverageEdges"] for value in edge["positiveEvidenceCapabilities"]}
+    # Use the surface's existing positive card contract; never broaden it.
+    for dimension in (preferred, "identity", "card-release", "card-existence", "language"):
+        if dimension in capabilities:
+            return dimension
+    return "identity"  # Unsupported evidence must still fail capability validation.
+
+
+def surface_supports_observed_finish(url, provider, surfaces) -> bool:
+    from source_capabilities import route_evidence
+    if provider is None:
+        return False
+    surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
+    return surface["finishCapability"]["mode"] == "specimen-observation" and any(
+        "finish" in edge["positiveEvidenceCapabilities"] for edge in surface["coverageEdges"]
+    )
+
+
+def record_specimen_claim(url, source_type, provider, dimension, stable_id, retrieved, physical, record,
+                          surfaces):
+    if provider == "cardmarket" and not is_cardmarket_product_image(url):
+        record(url, source_type, "product", stable_id, retrieved, provider_id=provider)
+        record(None, source_type, "identity", stable_id, retrieved, provider_id="inspected-specimen")
+    else:
+        record(url, source_type, dimension, stable_id, retrieved,
+               provider_id=None if provider == "cardmarket" else provider)
+    if physical.get("finish"):
+        if "finish" in (physical.get("ownerAttestedFields") or []):
+            record(None, "Owner attestation", "finish", stable_id, retrieved,
+                   provider_id="owner-attestation")
+            return
+        inspected = surface_supports_observed_finish(url, provider, surfaces)
+        record(url if inspected else None, source_type, "finish", stable_id, retrieved,
+               provider_id=provider if inspected else "inspected-specimen")
+
+
+def specimen_provider(url: str | None, source_type: str) -> str | None:
+    provider = resolve_provider(url, source_type)
+    if source_type == "Seller listing photograph" and provider in {None, "retailer-listing"}:
+        return "seller-listing-photo"
+    return provider
+
+
+def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
+    """Keep the declared primary source and only assets owned by that provider.
+
+    Foreign or unknown-host assets use their own specimen provenance; a link from the
+    primary source never gives them its authority or claim dimension.
+    """
+    assets = {entry.get("cardImageUrl"), entry.get("comparisonAssetUrl")} - {None}
+    return ({entry.get("sourceUrl")} - {None}) | {
+        url for url in assets if resolve_provider(url, None) == entry["providerId"]
+    }
+
+
+def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) -> None:
+    """Index admitted claims under existing provider capabilities, without a provider allowlist."""
+    provider = entry["providerId"]
+    if provider not in surfaces or provider == "cardmarket-listing-photo":
+        # Historical marketplace aliases and listing photographs are indexed through
+        # their specimen; a Cardmarket product URL must retain catalogue-only authority.
+        if not entry.get("specimenId"):
+            raise ValueError(f"Source-first provider {provider} requires a retained specimen")
+        return
+    # A neighbouring page is not the inspected specimen's authority.
+    urls = [] if provider == "inspected-specimen" else sorted(source_first_registry_urls(entry))
+    for url in urls or [None]:
+        dimension = card_evidence_dimension(url, provider, surfaces, "card-release")
+        record(url, "Positive source-first card record", dimension,
+               entry["printId"], entry.get("retrievedAt"), provider_id=provider)
 
 
 def main() -> int:
@@ -880,21 +1062,15 @@ def main() -> int:
                    unit["unitId"], (unit.get("checkedAt") or "")[:10] or None,
                    provider_id=unit.get("providerId"))
 
-    # Every specimen used to mark a unit corroborated must reach the source graph as identity
-    # evidence. Finish/edition observations remain separate and no absence capability is inferred.
-    record_corroborating_specimens(specimens, units, record)
+    # Citation resolution is independent of corroboration or the target's verdict.
+    # A linked observation neither confirms its target nor becomes independent agreement.
+    reviewed_graph = read_json(ROOT / "verification" / "authoritative_graph.json")
+    record_linked_specimens(specimens, units, record, source_first["prints"], finish_units,
+                           reviewed_graph)
 
+    surfaces = specimen_surfaces()
     for entry in source_first["prints"]:
-        if entry.get("providerId") not in {"pokemon-official", "pokemon-card-korea"}:
-            continue
-        for url in {
-            entry.get("sourceUrl"), entry.get("cardImageUrl"),
-            entry.get("comparisonAssetUrl"),
-        } - {None}:
-            record(
-                url, "Positive source-first card record", "card-release",
-                entry["printId"], provider_id=entry["providerId"],
-            )
+        record_source_first_identity(entry, record, surfaces)
         if entry.get("raritySourceUrl"):
             record(
                 entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",
@@ -959,7 +1135,7 @@ def main() -> int:
             "sourceTypes": sorted(entry["sourceTypes"]),
             "dimensions": sorted(entry["dimensions"]),
             "stableIdCount": len(entry["stableIds"]),
-            "stableIds": sorted(entry["stableIds"])[:50],
+            "stableIds": sorted(entry["stableIds"]),
             "retrievedAt": entry["retrievedAt"],
             "usageCount": entry["usageCount"],
         }

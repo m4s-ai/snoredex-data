@@ -22,6 +22,8 @@ from pathlib import Path
 from typing import Any
 
 import artwork_derivatives
+from source_registry import provenance_url
+from specimen_links import release_specimens, specimen_reference_index
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "verification" / "artwork_review_projection.json"
@@ -58,10 +60,6 @@ def image_derivatives(src: str, content_hash: str | None) -> dict[str, str]:
 
 def number(value: Any) -> str:
     return str(value or "").strip()
-
-
-def identity_key(set_code: Any, card_number: Any, language: Any, variant: Any = None) -> tuple[str, str, str, str]:
-    return (number(set_code), number(card_number), number(language), number(variant))
 
 
 def number_match(left: Any, right: Any) -> bool:
@@ -212,7 +210,6 @@ def build() -> dict[str, Any]:
     graph = load(ROOT / "verification" / "authoritative_graph.json")
     units = load(ROOT / "verification" / "units.json")
     finishes = load(ROOT / "verification" / "finish_units.json")["units"]
-    cards = load(ROOT / "snorlax_cards.json")["cards"]
     releases = load(ROOT / "analysis_confirmed_releases.json")["variants"]
     source_first = load(ROOT / "verification" / "source_first_prints.json").get("prints", [])
     specimens = load(ROOT / "verification" / "specimens.json").get("specimens", [])
@@ -236,6 +233,8 @@ def build() -> dict[str, Any]:
 
     unit_by_id = {row["unitId"]: row for row in units}
     specimen_by_id = {row["specimenId"]: row for row in specimens}
+    claim_by_id = {row["entityId"]: row["payload"] for row in by_type["candidate-claim"]}
+    specimens_by_citation = specimen_reference_index(specimens, units)
     source_first_by_id = {row["printId"]: row for row in source_first}
     finish_by_printing: dict[str, dict[str, Any]] = {}
     for finish_unit in sorted(finishes, key=lambda item: item.get("finishUnitId", "")):
@@ -247,18 +246,11 @@ def build() -> dict[str, Any]:
 
     # Product and unit rows are the best available local image/evidence bridge for legacy claims.
     # The graph still controls identity; these indexes only enrich the review card.
-    row_by_key: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
     row_by_short_key: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in releases:
         for cell in row.get("finishByLanguage") or []:
             language = cell.get("language")
-            row_by_key[identity_key(row.get("setCode"), row.get("number"), language, row.get("variant"))].append(row)
             row_by_short_key[(number(row.get("setCode")), number(row.get("number")), number(language))].append(row)
-
-    card_by_key: dict[tuple[str, str, str, str], list[dict[str, Any]]] = defaultdict(list)
-    for card in cards:
-        for language in card.get("languagesConfirmed") or card.get("languages") or []:
-            card_by_key[identity_key(card.get("setCode"), card.get("number"), language, card.get("variantToken"))].append(card)
 
     def add_image(images: list[dict[str, Any]], src: str | None, *, label: str, observation_id: str | None = None) -> None:
         if not src:
@@ -278,6 +270,20 @@ def build() -> dict[str, Any]:
         if local:
             image.update(image_derivatives(src, content_hash))
         images.append(image)
+
+    def add_specimen(specimen_id: str, observations: list, images: list) -> None:
+        specimen = specimen_by_id.get(specimen_id)
+        if not specimen:
+            return
+        photograph = specimen.get("photograph")
+        if photograph and not re.match(r"^https?://", str(photograph)) and "/" not in str(photograph):
+            photograph = f"verification/specimens/{photograph}"
+        observations.append(source_observation(
+            "specimen", specimen_id, specimen,
+            evidence=specimen.get("observed"), image=photograph,
+            url=provenance_url(specimen.get("listingUrl")) or provenance_url(specimen.get("photographSource")),
+        ))
+        add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
 
     def unit_candidates(payload: dict[str, Any]) -> list[dict[str, Any]]:
         candidates: list[dict[str, Any]] = []
@@ -341,17 +347,7 @@ def build() -> dict[str, Any]:
             detection["artist"] = detection["artist"] or unit.get("artist")
             if unit.get("sourceRef"):
                 specimen_id = str(unit["sourceRef"]).removeprefix("specimen:")
-                specimen = specimen_by_id.get(specimen_id)
-                if specimen:
-                    photograph = specimen.get("photograph")
-                    if photograph and not re.match(r"^https?://", str(photograph)) and "/" not in str(photograph):
-                        photograph = f"verification/specimens/{photograph}"
-                    observations.append(source_observation(
-                        "specimen", specimen_id, specimen,
-                        evidence=specimen.get("observed"), image=photograph,
-                        provider="collection-owner",
-                    ))
-                    add_image(images, photograph, label="inspected specimen", observation_id=f"specimen:{specimen_id}")
+                add_specimen(specimen_id, observations, images)
 
         for print_id in sorted(payload.get("sourceFirstRecordIds") or []):
             record = source_first_by_id.get(print_id)
@@ -422,6 +418,10 @@ def build() -> dict[str, Any]:
                 text = marking.get("text") if isinstance(marking, dict) else marking
                 if text:
                     detection["markings"].append(text)
+
+        for specimen_id in release_specimens(payload, physical, specimens_by_citation, source_first_by_id,
+                                             claim_by_id):
+            add_specimen(specimen_id, observations, images)
 
         for key in ("finish", "foilPattern", "markings"):
             detection[key] = sorted({value for value in detection[key] if value})

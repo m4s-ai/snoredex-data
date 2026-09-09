@@ -80,6 +80,10 @@ finish, an `evidenceOnlyForSpecimen` override may set `specimenPhotographClaimFi
 and attach the external `sourceRef` with `claimFields: ["finish"]`. This keeps both positive sources
 on one physical printing while preserving their separate authority and claim scope.
 
+Before handing off either kind of observation, apply the
+[specimen and reference acceptance contract](RESUME.md#specimen-and-reference-acceptance-contract)
+to verify that the property-specific sources reach the registry, artwork and collector views.
+
 **The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
 without the block say nothing about finish, and that silence is not evidence of non-holo. Read the
 record before adding one: a keyword scan over this corpus would have recorded a finish for

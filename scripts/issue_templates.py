@@ -271,7 +271,9 @@ def build_form(vocab: dict[str, list[str]]) -> str:
         "evidence", "Evidence",
         "Link a photo, marketplace listing, official checklist, or database entry. If the card is "
         "in your own collection, say so — that is recorded as an owner attestation and is graded "
-        "accordingly. Attach photos by dragging them into this box.",
+        "accordingly. Attach photos by dragging them into this box. Include the source/listing page "
+        "and a direct image link when available, match each photo to its card, and note unclear "
+        "details or unknown image origins.",
         "e.g. https://… , or: photo attached, card in my collection",
         required=True, multiline=True))
 

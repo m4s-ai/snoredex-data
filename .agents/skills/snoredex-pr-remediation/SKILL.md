@@ -18,7 +18,7 @@ Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and [
 1. Record the exact PR head SHA and determine whether the PR is draft, mergeable, conflicted, or already closed.
 2. Classify every unresolved finding as actionable, outdated, already fixed, unrelated, infrastructure failure, or requiring user input. Explain disagreements with evidence; do not change code merely to silence a reviewer.
 3. Work in the PR branch or a safe isolated worktree without disturbing another checkout. Preserve unrelated changes.
-4. Trace each valid finding to its shared root cause and all affected consumers. Apply the minimum complete fix and a focused regression check.
+4. Trace each valid finding to its shared root cause and all affected consumers. For specimen/reference findings, use the [acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract) to check the complete affected corpus, not just the latest reported card. Apply the minimum complete fix and a focused regression check.
 5. Run the narrowest useful checks. If the fix changes a canonical input or generator, run `python scripts/regen.py` to materialize every projection; otherwise run `python scripts/regen.py --check`. Review the complete diff before committing.
 6. Commit and push to the PR branch only when authorized. Rerun `python verification/review_findings.py` after the pushed commit so P6/P7 inspect the real history.
 7. Reply to each review thread with the disposition and evidence. Request a new review only for the unchanged exact head; if the head moves, reassess from step 1.

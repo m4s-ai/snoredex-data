@@ -199,9 +199,10 @@ def main() -> None:
             and row["printId"] not in independently_corroborated_prints
         ]
         assert len(official_prints) == expected_count
-        assert all(row["corroborated"] is False for row in official_prints), (
-            "matching an existing graph identity is not independent corroboration"
-        )
+        for row in official_prints:
+            assert row["corroborated"] is bool(row.get("corroboratingSpecimenIds")), (
+                "graph identity alone is not corroboration; a reviewed second specimen source is required"
+            )
     korean_official = [
         row for row in source_first_prints
         if (row["locality"], row["providerId"]) == ("KR", "pokemon-card-korea")
@@ -251,13 +252,7 @@ def main() -> None:
         "https://www.nacg.tw/product-details.php?id=149595",
         "https://www.ruten.com.tw/item/22223353127192/",
     }
-    svg_row = next(
-        row for row in source_first_prints if row["printId"] == "TW:SVG:021/049:base"
-    )
-    assert svg_row["corroborated"] is False
-    assert (svg_row["releaseDate"], svg_row["releaseDatePrecision"]) == (
-        "2023-11-10", "day",
-    )
+    assert not any(row["printId"] == "TW:SVG:021/049:base" for row in source_first_prints)
     marketplace_override_sources = {
         source["url"]: source
         for unit in finish_units if unit["finishUnitId"] in {"F0037", "F0331"}

@@ -204,14 +204,11 @@ PHOTO_ROWS = [
 
 
 SUPPLEMENTAL = [
+    card("existing-s5af093", "SPEC-0489", "s5a F", "093/070", "Snorlax-Gormandize-Body-Slam", ("UR", None), "U0602", date=("2021-04-02", "day")),
     card("existing-as5a203", "SPEC-0039", "AS5a", "203/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("SR", None), "U0634", card_name="Eevee & Snorlax-GX"),
     card("existing-as5a222", "SPEC-0038", "AS5a", "222/184", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("HR", None), "U0558", card_name="Eevee & Snorlax-GX"),
     card("existing-smp053", "SPEC-0029", "SM-P", "053", "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX", ("PROMO", "promo"), "U0414", card_name="Eevee & Snorlax-GX"),
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", None), card_name="Snorlax VMAX"),
-    card(
-        "svg021", "", "SVG", "021/049", "Snorlax-Unfazed-Fat-Thumping-Snore",
-        ("no printed rarity symbol", None), "U0467", date=("2023-11-10", "day"),
-    ),
 ]
 
 ISSUE_UNITS = sorted({
@@ -322,21 +319,9 @@ def supplemental_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any
     }
     result = []
     for facts in SUPPLEMENTAL:
-        if facts["detail"] == "svg021":
-            base = {
-                "printId": facts["printId"], "locality": LOCALITY,
-                "localSetCode": "SVG", "localNumber": "021/049", "variant": "base",
-                "language": LANGUAGE, "script": SCRIPT, "name": "卡比獸", "cardName": "Snorlax",
-                "catchUpOf": "the exact Traditional Chinese S10a Snorlax counterpart",
-                "specimenId": None, "providerId": "52poke",
-                "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S10a%EF%BC%89",
-                "corroborated": False, "markAssetUrl": None, "cardImageUrl": None,
-                "evidence": "The retained 52poke card record positively lists Traditional Chinese SVG 021/049 Snorlax with the exact S10a attack text.",
-            }
-        else:
-            base = dict(existing[facts["printId"]])
-            if facts["printId"] in urls:
-                base["sourceUrl"] = urls[facts["printId"]]
+        base = dict(existing[facts["printId"]])
+        if facts["printId"] in urls:
+            base["sourceUrl"] = urls[facts["printId"]]
         date, precision = facts["date"] or SET_DATES[facts["localSetCode"]]
         result.append({
             **facts, **base,
@@ -387,9 +372,9 @@ def build_profile(code: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "sourceRecordId": stable_profile_id(LOCALITY, code),
         "sourceKind": "source-first-local-set-profile", "provider": "mixed-positive-evidence",
-        "providerRecordKey": f"{LOCALITY}\x1f{code}", "retrieved": "2026-08-28",
+        "providerRecordKey": f"{LOCALITY}\x1f{code}", "retrieved": max(row.get("retrievedAt", "2026-08-28") for row in rows),
         "raw": {
-            "localCode": code, "localName": None, "locality": LOCALITY,
+            "localCode": code, "localName": rows[0].get("localSetName"), "locality": LOCALITY,
             "languages": [LANGUAGE], "scripts": [SCRIPT],
             "printIds": sorted({row["printId"] for row in rows}),
             "providers": sorted({row["providerId"] for row in rows}),
@@ -439,6 +424,9 @@ def apply_set_graph(graph: dict[str, Any], profile: dict[str, Any], code: str, c
         append_unique(matches[0]["payload"].setdefault("sourceRecordIds", []), source_id)
     else:
         upsert_entity(graph, "local-set", local_set_id, {"localSetId": local_set_id, "locality": LOCALITY, "localCode": code, "observedNames": [], "productKind": "physical-card-set-or-product", "sourceRecordIds": [source_id]}, origin=ORIGIN)
+    local_set = next(item["payload"] for item in graph["entities"] if item["entityType"] == "local-set" and item["entityId"] == local_set_id)
+    if name := profile.get("raw", {}).get("localName"):
+        append_unique(local_set.setdefault("observedNames", []), name)
     upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", source_id)
     editions = [item for item in graph["entities"] if item.get("entityType") == "set-edition" and item.get("entityId") == edition_id]
     if editions:
@@ -461,7 +449,10 @@ def remove_old_releases(
 ) -> tuple[list[tuple[str, str | None]], list[str], dict[str, list[str]]]:
     first = group[0]
     legacy_ids = {unit_id for row in group for unit_id in row["legacy"]}
-    active_legacy_ids = legacy_ids & set(ISSUE_UNITS)
+    active_legacy_ids = {
+        unit_id for unit_id in legacy_ids & set(ISSUE_UNITS)
+        if units[unit_id].get("status") == "confirmed"
+    }
     patterns = {(str(units[unit_id]["setCode"]), str(units[unit_id]["number"]).lstrip("0")) for unit_id in legacy_ids}
 
     def matches_old_ref(value: Any) -> bool:
@@ -511,6 +502,12 @@ def remove_old_releases(
             disposition["targetRef"] = target
         if "targetRefs" in disposition:
             disposition["targetRefs"] = [target if value in obsolete or matches_old_ref(value) else value for value in disposition["targetRefs"]]
+    for item in graph["entities"]:
+        if item.get("entityType") == "legacy-cardmarket-product":
+            payload = item["payload"]
+            refs = payload.get("cardReleaseIds", [])
+            if any(value in obsolete or matches_old_ref(value) for value in refs):
+                payload["cardReleaseIds"] = sorted({target if value in obsolete or matches_old_ref(value) else value for value in refs})
     catalogue = {item["entityId"] for item in graph["entities"] if item.get("entityType") == "catalogue-card-release-ref" and item.get("payload", {}).get("cardReleaseId") in obsolete}
     graph["entities"] = [item for item in graph["entities"] if not ((item.get("entityType") == "card-release" and item.get("entityId") in obsolete) or (item.get("entityType") == "catalogue-card-release-ref" and item.get("entityId") in catalogue))]
     graph["edges"] = [edge for edge in graph["edges"] if not ((edge.get("fromType") == "card-release" and edge.get("fromId") in obsolete) or (edge.get("toType") == "card-release" and edge.get("toId") in obsolete) or (edge.get("fromType") == "catalogue-card-release-ref" and edge.get("fromId") in catalogue) or (edge.get("toType") == "catalogue-card-release-ref" and edge.get("toId") in catalogue))]
@@ -583,6 +580,8 @@ def apply_release_group(
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue263:" + rid.removeprefix(f"RELEASE:{LOCALITY}:{LANGUAGE}:")
     rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Traditional-Chinese-card", "sourceNativeValue": first["rarity"][0], "normalizedRarityId": first["rarity"][1], "sourceProductKey": first["sourceUrl"]}
+    if first.get("retrievedAt"):
+        rarity["retrievedAt"] = first["retrievedAt"]
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin=ORIGIN)
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
     upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
@@ -610,7 +609,7 @@ def apply_graph(
                 continue
             assertion_id = f"ASSERT:same-work:{legacy_id}:{row['printId']}"
             evidence = "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities."
-            assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": "2026-08-28", "evidenceUrl": row["sourceUrl"], "evidence": evidence, "destructiveMergeAllowed": False}
+            assertion = {"assertionId": assertion_id, "assertionType": "same-work-decision", "fromId": rid, "toId": f"WORK:{row['work']}", "legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertedBy": "repository verification pass", "assertedAt": row.get("retrievedAt", "2026-08-28"), "evidenceUrl": row["sourceUrl"], "evidence": evidence, "destructiveMergeAllowed": False}
             upsert_entity(graph, "equivalence-assertion", assertion_id, assertion, origin=ORIGIN)
             upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "card-release", rid, assertion)
             upsert_edge(graph, "equivalence-assertion", assertion_id, "relates", "work", f"WORK:{row['work']}", assertion)

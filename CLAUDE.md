@@ -60,7 +60,7 @@ existing Python workflow owners rather than copying their contracts.
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **19 units rest on owner attestation alone**; the
+   A single non-URL source may confirm a unit: **20 units rest on owner attestation alone**; the
    current `E6` output reports how many rest on an inspected specimen alone. The owner holds
    those cards and no database records them, so refusing the evidence buys a false "open" count
    rather than better evidence.
@@ -123,6 +123,8 @@ existing Python workflow owners rather than copying their contracts.
    graph projectors and release gate. Write a new Python pass under `verification/` only for a
    migration, bulk repair, or data-model change. Never hand-edit `units.json` or
    `finish_units.json`.
+   An intake is complete only when its supported references reach the affected consumers; follow
+   the [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract).
 7. **Never hand-edit a generated file.** Each carries a header saying so, including the
    `<!-- generated:… -->` blocks in `README.md` and the whole of `index.html`. Regenerate instead.
    The candidate file and locality graph are retained hybrid stores, not disposable outputs.

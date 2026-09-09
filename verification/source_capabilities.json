@@ -528,7 +528,7 @@
       "failureState": null,
       "accessMode": "direct-download",
       "adapterState": "active",
-      "lastCheckedAt": "2026-08-11",
+      "lastCheckedAt": "2026-09-09",
       "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
       "query": {
         "method": "GET",
@@ -578,7 +578,8 @@
             "card-existence",
             "card-release",
             "local-card-identifier",
-            "physical-locality"
+            "physical-locality",
+            "identity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -616,7 +617,7 @@
       "failureState": null,
       "accessMode": "direct-download",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-11",
+      "lastCheckedAt": "2026-09-09",
       "freshnessPolicy": "Retain the exact image bytes, URL, printed local code and SHA-256; re-download before changing a positive identity.",
       "query": {
         "method": "GET",
@@ -666,7 +667,8 @@
             "card-existence",
             "card-release",
             "local-card-identifier",
-            "physical-locality"
+            "physical-locality",
+            "identity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -1799,7 +1801,7 @@
       "failureState": "Coverage and field completeness vary by article; the issue #84 scan is a reviewed positive slice, not a complete catalogue.",
       "accessMode": "browser",
       "adapterState": "active",
-      "lastCheckedAt": "2026-08-13",
+      "lastCheckedAt": "2026-09-09",
       "freshnessPolicy": "Retain original image or wikitext with revision/page identity before accepting a claim.",
       "query": {
         "method": "GET",
@@ -1851,7 +1853,9 @@
             "language",
             "card-existence",
             "image",
-            "local-set-identifier"
+            "local-set-identifier",
+            "card-release",
+            "identity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -4354,6 +4358,88 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pokemon-cn-card-image",
+      "providerId": "pokemon-cn-official",
+      "label": "Official Mainland China retained card renders",
+      "match": {
+        "urlPrefixes": [
+          "https://image.pokemon.com.cn/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only exact retained publisher renders are covered; the image host is not a complete historical manifest.",
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-09",
+      "freshnessPolicy": "Retain the exact card image, publisher detail URL, retrieval date and SHA-256.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://image.pokemon.com.cn/{retained asset path}",
+        "parameters": [
+          "exact retained card asset",
+          "signed query when supplied"
+        ],
+        "pagination": "not paginated; each retained render establishes only the pictured card",
+        "expectedIdentifiers": [
+          "printed card name",
+          "collector number",
+          "set mark"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "publisher card render; not a physical finish photograph",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-cn-card-image-positive",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "exact retained publisher renders only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained render proves the pictured identity; missing assets prove nothing."
+          },
+          "knownPositiveObservationId": "obs-pokemon-cn-card-image",
+          "boundary": {
+            "outsideScope": [
+              "unretained cards",
+              "physical finish",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "No missing image or failed request can refute a card printing."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -5725,6 +5811,29 @@
         "bulbapedia-hungry-snorlax-positive"
       ],
       "outcome": "The pinned article establishes the card identity, distinct card text and first distribution date; the owner decision keeps the indistinguishable reprint in the same collector entry."
+    },
+    {
+      "observationId": "obs-pokemon-cn-card-image",
+      "surfaceId": "pokemon-cn-card-image",
+      "kind": "known-positive",
+      "queryUrl": "https://image.pokemon.com.cn/wp-content/uploads/2025/09/68b581bfc64965fa84605ef01034e7714c1fb3a3.png?auth_key=1787864011-c3c391b112e24f00be4b06179d924d51-0-7f39f61eab18c34a7b56d314d38a10ad",
+      "queryParameters": {
+        "specimenId": "SPEC-0146"
+      },
+      "retrievedAt": "2026-08-27",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokemon-cn-official",
+        "recordKey": "https://image.pokemon.com.cn/wp-content/uploads/2025/09/68b581bfc64965fa84605ef01034e7714c1fb3a3.png?auth_key=1787864011-c3c391b112e24f00be4b06179d924d51-0-7f39f61eab18c34a7b56d314d38a10ad"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0146",
+        "U0457"
+      ],
+      "validatesEdges": [
+        "pokemon-cn-card-image-positive"
+      ],
+      "outcome": "The retained official card render visibly identifies Simplified Chinese CSM2cC 103/150 RR (SPEC-0146). It supports that pictured identity only; no physical finish or complete inventory is inferred."
     }
   ]
 }

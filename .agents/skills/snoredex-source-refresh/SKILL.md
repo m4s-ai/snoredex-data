@@ -19,7 +19,7 @@ Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [WORK
 2. Run `python scripts/discovery_cycle.py --check` for retained-run validation. For a live refresh, create a unique UTC run ID and run `python scripts/discovery_cycle.py --refresh --run-id <YYYYMMDDTHHMMSSZ>`.
 3. Verify request/checkpoint manifests, raw bytes, hashes, provider errors, pagination, and source-capability boundaries before interpreting records.
 4. Review every added, changed, disappeared, re-keyed, ambiguous, unmapped, `needsEvidence`, and gap record. Preserve provider-native locality and identifiers.
-5. Reconcile records through the reviewed adapter/card-discovery inputs. A candidate cannot directly mutate language, finish, set, or absence verdicts.
+5. Reconcile records through the reviewed adapter/card-discovery inputs. When reconciliation admits a specimen-backed print, apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract) so retained evidence reaches the admitted identity. A candidate cannot directly mutate language, finish, set, or absence verdicts.
 6. Run `python scripts/workflow_loop.py --loop discovery --max-cycles 3` and `python scripts/scoped_regen.py --lane source-discovery`. Stop when the source or owner input named by the runner is required.
 7. Run `python scripts/regen.py`, inspect completeness and graph changes, and report run IDs, hashes, provider failures, reconciliation counts, explicit gaps, and remaining blockers.
 

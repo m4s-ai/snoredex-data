@@ -25,6 +25,8 @@ from typing import Any
 from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
+from source_registry import provenance_url
+from specimen_links import item_specimen_links, physical_specimen_ids, specimen_reference_index, specimen_provenance_links
 
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
@@ -32,6 +34,7 @@ CHECKLIST_PATH = ROOT / "analysis_checklist.json"
 FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
 SOURCE_FIRST_PATH = ROOT / "verification" / "source_first_prints.json"
 SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
+UNITS_PATH = ROOT / "verification" / "units.json"
 COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
 
 CATALOGUE_PATH = ROOT / "collector_catalogue.json"
@@ -92,6 +95,8 @@ CUMULATIVE_CHECKLIST_REKEYS = {
     "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
 }
 REVIEWED_CARD_RELEASE_REKEYS = {
+    "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id":
+        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
     "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
         "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
 }
@@ -684,6 +689,10 @@ def prefer_source_first_image(
     return image_path, image_scope
 
 
+def physical_specimen_links(physical: dict[str, Any] | None, specimens: dict) -> set[str]:
+    return specimen_provenance_links(physical_specimen_ids(physical), specimens)
+
+
 def legacy_row_releases(items: list[dict[str, Any]]) -> set[str]:
     return {
         row["cardReleaseId"] for row in items if row["legacyChecklistIds"]
@@ -1009,6 +1018,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     finish_units = read_json(FINISH_UNITS_PATH)["units"]
     source_first = {row["printId"]: row for row in read_json(SOURCE_FIRST_PATH)["prints"]}
     specimens = {row["specimenId"]: row for row in read_json(SPECIMENS_PATH)["specimens"]}
+    citations = specimen_reference_index(specimens.values(), read_json(UNITS_PATH))
     completeness = read_json(COMPLETENESS_PATH)
 
     localizations = entity_payloads(graph, "localization")
@@ -1252,8 +1262,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
                 if source.get("url") or source.get("sourceType")
             )
         source_refs.update(release.get("sourceRecords") or [])
+        source_refs.update(item_specimen_links(release, physical, citations, source_first, claims, specimens))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
+            source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
         source_links = sorted(
             value for value in source_refs if isinstance(value, str) and re.match(r"https?://", value)
         )

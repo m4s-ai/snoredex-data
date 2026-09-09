@@ -15,6 +15,28 @@ Newest first.
 
 ---
 
+## An imported image is not yet connected evidence
+
+PR #373 repeatedly found the same defects on newly retained specimens: legacy-only citation
+lookups dropped source-first references, provider-specific registry branches skipped admitted
+cards, and artwork/collector consumers omitted the photograph or its provenance. Fixing one
+reported card left sibling paths broken. A follow-up audit of the pre-repair head found 20
+unindexed source-first print IDs and 35 missing direct specimen references, also present on main.
+Those are incident counts, not a current inventory.
+
+The repair joined direct `specimenId` and reverse `citedBy` references, indexed admitted providers
+through their existing capabilities, and preserved owner-versus-image attribution for finishes.
+`verify_source_first_specimen_registry()` in `verification/test_authoritative_graph.py` now checks
+all admitted prints and direct specimen associations. Graph, artwork and collector checks cover
+their downstream boundaries; a passing count or stored image alone is not proof of complete intake.
+
+The operating rule lives in the [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract).
+When a finding repeats, inspect the shared join and every affected consumer before another
+card-specific change. Every addressed finding still needs its own applicable threaded response;
+a generic PR summary does not supply that audit trail.
+
+---
+
 ## A pattern wrong about part of a group is not a reason to move the group
 
 **Trap:** *`sibling-derived` means another unit's record is part of the basis. A fact about the set

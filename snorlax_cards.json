@@ -21,12 +21,12 @@
     ],
     "verification": {
       "description": "Every card x language x variant claim was checked against sources outside Cardmarket. See verification/RESUME.md.",
-      "confirmed": 629,
-      "contradicted": 90,
+      "confirmed": 628,
+      "contradicted": 91,
       "needsManualReview": 0,
       "open": 0,
       "totalUnits": 719,
-      "lastUpdated": "2026-09-02"
+      "lastUpdated": "2026-09-09"
     },
     "editionRuleset": {
       "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
@@ -37,20 +37,20 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-08",
+      "lastUpdated": "2026-09-09",
       "totalFinishUnits": 637,
       "withConfirmedFinish": 472,
       "withOnlyMarketplaceClaim": 50,
-      "pendingFinish": 40,
-      "notApplicableFinish": 75,
+      "pendingFinish": 39,
+      "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 310,
       "withHolo": 232,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 66,
-      "withAnyUnresolvedDetail": 144,
+      "withUnresolvedProductMapping": 65,
+      "withAnyUnresolvedDetail": 143,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -30428,53 +30428,55 @@
           },
           {
             "language": "T-Chinese",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [],
             "finishStatus": {
-              "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
-              "holo": "pending",
-              "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0494",
-            "productMappingStatus": "pending",
+            "productMappingStatus": "not-applicable",
             "printings": []
           }
         ]
       },
       "languagesConfirmed": [
         "Japanese",
-        "Korean",
+        "Korean"
+      ],
+      "languagesContradicted": [
         "T-Chinese"
       ],
-      "languagesContradicted": [],
       "languagesUnresolved": [],
       "languageVerification": {
         "status": "resolved",
         "claimed": 3,
-        "repositoryConfirmed": 3,
-        "confirmed": 3,
-        "contradicted": 0,
-        "notPrinted": 0,
+        "repositoryConfirmed": 2,
+        "confirmed": 2,
+        "contradicted": 1,
+        "notPrinted": 1,
         "disputed": 0,
         "needsEvidence": 0,
         "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
-      "languagesNotPrinted": [],
+      "languagesNotPrinted": [
+        "T-Chinese"
+      ],
       "languagesDisputed": [],
       "languagesRepositoryConfirmed": [
         "Japanese",
-        "Korean",
-        "T-Chinese"
+        "Korean"
       ],
       "languagesNeedsEvidence": []
     },
