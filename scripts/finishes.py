@@ -483,6 +483,32 @@ def add_or_refine_printing(printings: list[dict[str, Any]], candidate: dict[str,
         add_printing(printings, candidate)
 
 
+def attach_finish_evidence(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
+    """Confirm existing finish/variant matches without asserting another physical identity."""
+    matches = [printing for printing in printings
+               if printing["finish"] == candidate["finish"]
+               and set(printing.get("mappedVariants") or [])
+               & set(candidate.get("mappedVariants") or [])]
+    if not matches:
+        raise ValueError("finish evidence requires an existing matching printing")
+    for printing in matches:
+        evidence = dict(printing)
+        evidence["sources"] = candidate["sources"]
+        evidence["verificationStatus"] = candidate["verificationStatus"]
+        add_printing(printings, evidence)
+
+
+def apply_manual_printing(printings: list[dict[str, Any]], candidate: dict[str, Any], manual: dict[str, Any]) -> None:
+    if not manual.get("evidenceOnlyForExistingPrintings"):
+        add_or_refine_printing(printings, candidate)
+        return
+    identity_fields = {"edition", "foilPattern", "markings", "distribution", "cardSize",
+                       "releaseDate", "image", "refinesAuto"}
+    if identity_fields.intersection(manual):
+        raise ValueError("finish-only evidence cannot define a physical identity")
+    attach_finish_evidence(printings, candidate)
+
+
 def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
     if candidate.get("cardSize") == "unknown" and any(
         source.get("evidenceScope") == "standard-set"
@@ -1334,7 +1360,7 @@ def _build_finish_unit(
                         candidate["releaseDate"] = manual["releaseDate"]
                     if "image" in manual:
                         candidate["image"] = manual["image"]
-                    add_or_refine_printing(printings, candidate)
+                    apply_manual_printing(printings, candidate, manual)
 
         _build_finish_unit_part7_suppression()
         _build_finish_unit_part7_manual()

@@ -48,6 +48,13 @@ a card image printed in another language. Neither filters nor missing images est
 
 ### Western Jungle Snorlax: number identifies finish
 
+A number-to-finish rule confirms a property of existing printings; it does not establish an
+additional printing or edition. Use `evidenceOnlyForExistingPrintings: true` for this kind of
+finish override. It attaches the source to existing matching finish/variant rows, preserving
+their edition, size and other identity fields, and fails if no matching row exists. Do not put
+physical identity fields on such a rule. Regression checks must conserve printing identities
+and cover both editions, an unrelated finish, and repeated application.
+
 The collection owner explicitly reconfirmed on 2026-09-10: **Jungle 11/64 is Holo,
 27/64 is Non-Holo in all Western languages**, independently of 1st Edition or Unlimited.
 Use the readable set/card identity and this established mapping; do not request a

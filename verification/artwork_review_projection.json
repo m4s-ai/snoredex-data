@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "39c063a8d49a3ca44c56163cccb738b931c78214e34bf96c5aa5f3a1b7613fa6",
+  "projectionVersion": "3e26b6bfe88adf2cd629e596c995928da92c6bca1a26f9d582f3ac2d19204ebb",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 2,
     "cardReleases": 641,
     "physicalPrintings": 754,
-    "sourceObservations": 2921
+    "sourceObservations": 2942
   },
   "groups": [
     {
@@ -70595,7 +70595,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0174",
-              "sourcePrintingId": "F0174-P02",
+              "sourcePrintingId": "F0174-P01",
               "establishingClaimId": "CLAIM:finish:F0174-P01",
               "specimenIds": [
                 "SPEC-0043",
@@ -70607,6 +70607,12 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Cardmarket article scan of a complete Dutch Jungle Snorlax 27/64 physical card. The card face visibly carries the EDITIE 1 stamp and the artwork field is printed non-holo. Retained as SPEC-0042.",
                   "retrievedAt": "2026-08-24"
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
                 },
                 {
                   "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
@@ -70629,12 +70635,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0174",
-              "sourcePrintingId": "F0174-P03",
+              "sourcePrintingId": "F0174-P02",
               "establishingClaimId": "CLAIM:finish:F0174-P02",
               "specimenIds": [
                 "SPEC-0044"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
                   "sourceType": "Owner-supplied physical card photograph",
@@ -70707,30 +70719,48 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0174-P02:0:2b7388fbecd47246",
+              "observationId": "finish:F0174-P01:0:2b7388fbecd47246",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
               "evidence": "Cardmarket article scan of a complete Dutch Jungle Snorlax 27/64 physical card. The card face visibly carries the EDITIE 1 stamp and the artwork field is printed non-holo. Retained as SPEC-0042.",
-              "contentHash": "5cc0b698ab8b6649d2dc59545fb1e07dc3a1fb9aa30b93c0ef42b39ce7a2cfed",
+              "contentHash": "2b10d1b18e4325cd2612cf04de9570e03f75416bdff9dc090a76ca26496ce3f0",
               "image": null
             },
             {
-              "observationId": "finish:F0174-P02:1:4ff0f5ac6b180282",
+              "observationId": "finish:F0174-P01:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "47605fe7de90a9ab6a3ef9fb42a6e0ebe7d36f267160df47046a779de662d6c5",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0174-P01:2:4ff0f5ac6b180282",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
               "evidence": "Independent Cardmarket article scan corroborating the Dutch Jungle Snorlax 27/64 1st Edition non-holo printing. EDITIE 1 and the matte printed artwork field are visible on the complete card face. Retained as SPEC-0043.",
-              "contentHash": "b54839453dad5ba463453447858d4ae81de0308885f7051aeda406384d4e4140",
+              "contentHash": "ec97da0b2b17e7be63a0a099c7d525add89f09d111b8bf0a5efe32a364dd0dd0",
               "image": null
             },
             {
-              "observationId": "finish:F0174-P03:0:9ad1f50f3576fa60",
+              "observationId": "finish:F0174-P02:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "30ffc8b5f3e55a9ffc0f6686db50dd1867ae061b55217766b0e8cfbbb570d2db",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0174-P02:1:9ad1f50f3576fa60",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
               "evidence": "Dutch Jungle Snorlax 27/64 photographed as a complete physical card and explicitly identified by the collection owner as the Unlimited printing. The card number and non-holographic printed artwork field are legible. Retained as SPEC-0044.",
-              "contentHash": "696e8d1313662f41ff43465b1ac3533366ff52dba5b48ede8154c770f123f7f5",
+              "contentHash": "207c5f29a56e2769da6d2584247958a2f23b7a4c8b53ffb9a44dbf49367a71b5",
               "image": null
             },
             {
@@ -70814,6 +70844,12 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://api.tcgdex.net/v2/en/cards/base2-27",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
@@ -70854,16 +70890,25 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "53be6e98a953e8a2cc90795d4a3d6165d054d0e7e57827122e4da696146ed54b",
+              "contentHash": "29a8079d37590074b56bc8cc3091c1c1049ac40ca3cbe9a1a7e74706eaa87c80",
               "image": null
             },
             {
-              "observationId": "finish:F0168-P01:1:8d8491ab9fbc978e",
+              "observationId": "finish:F0168-P01:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "206d9c1917a37b334de515a9aad31e0d2cb1c145b5dcea43cadcc6a0820a01e9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0168-P01:2:8d8491ab9fbc978e",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/en/cards/base2-27",
               "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "7b2fc844b642728ef6b4e4bad9c7e8e1a85afe875dc2053a1639e7592534eaec",
+              "contentHash": "1d23e79fea1c13a303f77e298bf29bf634cd0f666fc9bc15352ea45bb2d82395",
               "image": null
             },
             {
@@ -70920,6 +70965,12 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://api.tcgdex.net/v2/fr/cards/base2-27",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
@@ -70960,16 +71011,25 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "357e091df6f1b994b7d3950414e3f52e0117ce102f00042e8a6bada4cc4030d4",
+              "contentHash": "a6e04fdb5c312b21321b6ddeb07666a5a48d96bcb01c38bccaf211a0fb82aee5",
               "image": null
             },
             {
-              "observationId": "finish:F0169-P01:1:8e3e4e809a3db241",
+              "observationId": "finish:F0169-P01:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "de5cbcd36b3d6a5f5289c9a1ec2f2f7cf4b53a6963eaf23496f4bbf5e6e20112",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0169-P01:2:8e3e4e809a3db241",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/fr/cards/base2-27",
               "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "31fb38e7119365ce1a115fc14254662063b1863d3cf6b26b1e0419d53dcf7507",
+              "contentHash": "d0338259606cf2414e15148707fa518d738dfaaef77aab90e0bb53b571dc0182",
               "image": null
             },
             {
@@ -71026,6 +71086,12 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://api.tcgdex.net/v2/de/cards/base2-27",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
@@ -71066,16 +71132,25 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "1362207f1a66be7dcb5182b7e4f153508f8bdb09f5d5a59e16fda51bca2bf1f0",
+              "contentHash": "d292450a4cdbc9b533eac25061cd9fc18c395d5fee6b8d547accec3e3f33b720",
               "image": null
             },
             {
-              "observationId": "finish:F0170-P01:1:a41bc1c3fd66d102",
+              "observationId": "finish:F0170-P01:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "1faaadb82a3744bb0abe09377e3cc6bcffe561054d5dafdcd1814ac81578ebfb",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0170-P01:2:a41bc1c3fd66d102",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/de/cards/base2-27",
               "evidence": "base2-27 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "198d01f389f51561b27f2e2231592431aec881703c5f266608251888f1da0bb8",
+              "contentHash": "3739d0f0ad92673c00aff8e5eccea3ee5ef47da7b80c510c8fd72efa4d20bf79",
               "image": null
             },
             {
@@ -71123,12 +71198,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0171",
-              "sourcePrintingId": "F0171-P03",
+              "sourcePrintingId": "F0171-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:f10b18e760d3bc832c60f77e",
               "specimenIds": [
                 "SPEC-0112"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
@@ -71177,12 +71258,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0171-P03:0:56fe097d1bc2ad14",
+              "observationId": "finish:F0171-P02:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "40ecfa8135de89675f3e3ba5c41dd1e17b9d3fbf8c0bf6002e7b7e9ec8e72dd1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0171-P02:1:56fe097d1bc2ad14",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 27/64 with a uniformly printed artwork field. The exact seller title says Unlimited and Non Holo, while item data state Italian, 27/64 and finish Standard. Retained as SPEC-0112.",
-              "contentHash": "fa9d0ac0b77e631d149fe3e597644b4fab7b70d95c7d958232409dce860b31e2",
+              "contentHash": "4333cee0de8d2b2624038741966e7d77f9fc68037a401b1d8212d9681ce5c56c",
               "image": null
             },
             {
@@ -71255,6 +71345,12 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120.",
                   "retrievedAt": "2026-08-27"
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
                 }
               ]
             }
@@ -71303,7 +71399,7 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "e263b28f01e45e791e2e12c2ff3b65587eafcd3fe50b532e9fc046a7c6b465d0",
+              "contentHash": "46eb4e01601d6d67d142a95325b8a4847ba086c15a392cb5542ee9e9b8719d6c",
               "image": null
             },
             {
@@ -71312,7 +71408,16 @@
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120.",
-              "contentHash": "bed3ea92ce8ebacd9656f2ab2a83367e27978a564dbd93976019163e220ef35d",
+              "contentHash": "e1a9f154d8b43f575e093fff166d546fd34fd039943ae4744183e7e78af96164",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0173-P01:2:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "3e9aed2162f356fc92b78c21700c0c66680fcb1708026de16480290b3235f5a8",
               "image": null
             },
             {
@@ -71369,12 +71474,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0172",
-              "sourcePrintingId": "F0172-P04",
+              "sourcePrintingId": "F0172-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:1d7c2b6073e1bd447727e41d",
               "specimenIds": [
                 "SPEC-0525"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
@@ -71408,12 +71519,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0172",
-              "sourcePrintingId": "F0172-P03",
+              "sourcePrintingId": "F0172-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:20be3b07981b6b934e5bb4b4",
               "specimenIds": [
                 "SPEC-0524"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "Image supplied by the collection owner on 2026-09-10",
                   "sourceType": "Owner-supplied physical card photograph",
@@ -71496,12 +71613,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0172-P03:0:509583df93813d77",
+              "observationId": "finish:F0172-P02:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "dfe91fdbbb122c2a4175fa834249878c1eba780e6516aed6c5a786bb12dd7e39",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P02:1:509583df93813d77",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "Image supplied by the collection owner on 2026-09-10",
               "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0524.",
-              "contentHash": "b4e0c28e6cbeef2717d2c983bf47676f61cfa516e034775e1da0436b687678e8",
+              "contentHash": "87553b2f94e0d4ed183a745e81ec174626da5df2b26633145c6a3312ff4d458e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P02:2:cbab6ce9380353d3",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "243e7144f59c81964e195f3057499a5dac2293581790490073e5fb1505277ca3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P03:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "192ff01e29408d2990cb71d504c8ede1d2a2001e21a2cc28700949c6fcf45f7a",
               "image": null
             },
             {
@@ -71510,25 +71654,16 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "f9b08a120422aedf42374907da35c1c07e8344a0af1757eb32208afab672a5a6",
+              "contentHash": "748d57347f42b75f5c31297b721238a8e3d25311b03a79a9226d71828b76385c",
               "image": null
             },
             {
-              "observationId": "finish:F0172-P04:0:cbab6ce9380353d3",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "a73ed8f8bc29c8961b6f40ec0910ec3515116568d9259b02339a4b58ab81e70f",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0172-P04:1:e01d3a23a671304a",
+              "observationId": "finish:F0172-P03:2:e01d3a23a671304a",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "Image supplied by the collection owner on 2026-09-10",
               "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. Complete front has no first-edition stamp and the reverse is also shown. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0525.",
-              "contentHash": "4545fdc6049e8cdb9d5bd497e3271e074e28b305e94b2098474caea70c73c131",
+              "contentHash": "443eec879ad3ce10b8ae3c8c8a9ca4a07131d712a9e53fe99926a592172444d7",
               "image": null
             },
             {
@@ -71768,12 +71903,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0167",
-              "sourcePrintingId": "F0167-P02",
+              "sourcePrintingId": "F0167-P01",
               "establishingClaimId": "CLAIM:finish:F0167-P01",
               "specimenIds": [
                 "SPEC-0041"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
                   "sourceType": "Owner-supplied physical card photograph",
@@ -71795,12 +71936,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0167",
-              "sourcePrintingId": "F0167-P03",
+              "sourcePrintingId": "F0167-P02",
               "establishingClaimId": "CLAIM:finish:F0167-P02",
               "specimenIds": [
                 "SPEC-0040"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
                   "sourceType": "Owner-supplied physical card photograph",
@@ -71862,21 +72009,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0167-P02:0:761b3b16a6517534",
+              "observationId": "finish:F0167-P01:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "cad6fd9d22fa30b51683088177e6d78898ed1d6a9b612cf7ad13234e27ff04c4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0167-P01:1:761b3b16a6517534",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
               "evidence": "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries the EDITIE 1 stamp and a reflective holographic art field; the grading label independently reads 1st Edition 11/64 Holo. Retained as SPEC-0041.",
-              "contentHash": "dba1bcef6af0c9334b439790b9ed5b4f260c479ac46d31ccebeaef176243390a",
+              "contentHash": "e5e0a3236f3f141d037e5fdb9b49cd9c77a1c7cc2d98e606547546269a624fe4",
               "image": null
             },
             {
-              "observationId": "finish:F0167-P03:0:7429168f75434b9b",
+              "observationId": "finish:F0167-P02:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "e1df7d72f8e85031660e6990f84be62af917d36c379de27acc3bd4c2d36c65e7",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0167-P02:1:7429168f75434b9b",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
               "evidence": "Dutch Jungle Snorlax 11/64 photographed as a complete physical card and explicitly identified by the collection owner as the Unlimited printing. The printed name Snorlax, 11/64 collector number and reflective holographic art field are legible. Retained as SPEC-0040.",
-              "contentHash": "c568cebf862d03e45d1a0b413b161d8fa52fcf733d075c8a86f7e1d877e4ce07",
+              "contentHash": "8bb575c0a5d00dc0f35bdb65a04984d49f9cbee36a0932b892aada9f9070279d",
               "image": null
             },
             {
@@ -71896,6 +72061,15 @@
               "evidence": "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries the EDITIE 1 stamp and a reflective holographic art field; the grading label independently reads 1st Edition 11/64 Holo.",
               "contentHash": "83761fd456710721deb0f17311fda141ad82b14dbd60cabd7176915d9c91ea34",
               "image": "verification/specimens/SPEC-0041.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0401",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 10/17 shows one complete CGC-encapsulated Dutch Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Dutch / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT+ 9.5. The post caption explicitly identifies this carousel position as Dutch 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "8cf6b70536cfb614e5a64cce9035c4a6c765b19ab51c1545aa133f3c6dff75c8",
+              "image": null
             },
             {
               "observationId": "specimen:SPEC-0402",
@@ -71955,6 +72129,12 @@
               "establishingClaimId": "CLAIM:finish:F0161-P01",
               "sources": [
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://api.tcgdex.net/v2/en/cards/base2-11",
                   "sourceType": "TCGdex API card variants",
                   "evidence": "base2-11 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
@@ -71995,21 +72175,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0161-P01:0:761b9951c9652405",
+              "observationId": "finish:F0161-P01:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "7d8792464d98856a8d8f64b39c2f46e34d1d497405a9ac22e1d22c1d5ea54c87",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0161-P01:1:761b9951c9652405",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/en/cards/base2-11",
               "evidence": "base2-11 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "e1214cbe7751af2340059c8558fad1671e3ffd9df938742091b94c729b9e5f0d",
+              "contentHash": "3ac6e837ffa2cbc7116bf1bc1bb6b44679bba30d62ad20e8734cb23a009482e1",
               "image": null
             },
             {
-              "observationId": "finish:F0161-P01:1:94ee23d7ace7c1cc",
+              "observationId": "finish:F0161-P01:2:94ee23d7ace7c1cc",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "45f0943aa2dd56eb602634c416dd7ca55a5296361c622ab3755906f1d64946e7",
+              "contentHash": "59ab5711341fca1e940afbb275778913cd5f40445cb9d826b261dc3ee8b3a8d0",
               "image": null
             },
             {
@@ -72061,6 +72250,12 @@
               "establishingClaimId": "CLAIM:finish:F0162-P01",
               "sources": [
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
@@ -72101,21 +72296,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0162-P01:0:94ee23d7ace7c1cc",
+              "observationId": "finish:F0162-P01:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "998cfbfecfb7e75b9bc8dcb3c8f9f1f4e7785b46892e71c0ab750108f0acaa5d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0162-P01:1:94ee23d7ace7c1cc",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "b4df5b4413955426348c70b60483dfa08c94465c11e120585bb2d9c078d7d55b",
+              "contentHash": "0b54213e8b918287b00aad90f7c429fdf331bd98bc093feafc2d612a95a2932c",
               "image": null
             },
             {
-              "observationId": "finish:F0162-P01:1:f23bbbe9d45d6c4a",
+              "observationId": "finish:F0162-P01:2:f23bbbe9d45d6c4a",
               "kind": "finish",
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/fr/cards/base2-11",
               "evidence": "base2-11 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "7979b908c8cbaf58ca4f9449491b57cea866bfa0e69bff4484c79c1cbe65625d",
+              "contentHash": "7103b657d4db4beb1bf934bef9eb0606f72e4080821a8484095548d927124171",
               "image": null
             },
             {
@@ -72172,6 +72376,12 @@
                   "evidence": "base2-11 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 },
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
@@ -72212,16 +72422,25 @@
               "provider": "TCGdex API card variants",
               "url": "https://api.tcgdex.net/v2/de/cards/base2-11",
               "evidence": "base2-11 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "97fb13073347206e708c0241243702177a3978620ae0366c220f33c5970506e0",
+              "contentHash": "f3091a269723db8ee792cb59b12927d0ccabfc8b7dfae8a4e15969e49e082ee6",
               "image": null
             },
             {
-              "observationId": "finish:F0163-P01:1:94ee23d7ace7c1cc",
+              "observationId": "finish:F0163-P01:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "79f3b7ef557116e8b99dda2688c0da1df2dd58215c2804131d010c0bf8c0ea3a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0163-P01:2:94ee23d7ace7c1cc",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "cb12984d7fb88bb120a1952a955b317c8fa0cf4d005ff1f248cc57f1f4d69d9a",
+              "contentHash": "61a87656897c7d0f79866af6f02caec7982e34f6bcc31061975e5d50daf46a0d",
               "image": null
             },
             {
@@ -72269,7 +72488,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0164",
-              "sourcePrintingId": "F0164-P04",
+              "sourcePrintingId": "F0164-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:5b3b4444d26f774ebf8b5012",
               "specimenIds": [
                 "SPEC-0110"
@@ -72280,6 +72499,12 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The Italian text, Jungle symbol and 11/64 establish identity; the artwork window directly shows the star-pattern holographic field. The seller title and item data explicitly identify the card as Holo Unlimited. Retained as SPEC-0110.",
                   "retrievedAt": "2026-08-27"
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
                 }
               ]
             },
@@ -72302,12 +72527,18 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0164",
-              "sourcePrintingId": "F0164-P03",
+              "sourcePrintingId": "F0164-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:ad0c957d33b011837957b7eb",
               "specimenIds": [
                 "SPEC-0111"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
@@ -72369,21 +72600,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0164-P03:0:86702f6845a5f43a",
+              "observationId": "finish:F0164-P02:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "d154d7362809849567fc3f01f686cba66fa5193ebb0ad61d0e63030537462f3e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0164-P02:1:86702f6845a5f43a",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica. Retained as SPEC-0111.",
-              "contentHash": "6460736fa0dd4a6800bc6b463c445e523bc4ac676a637482744a579aa91ab2ae",
+              "contentHash": "567280cef22167221d3774cd8f13f6885eb7ded4683bca31d859070084d714aa",
               "image": null
             },
             {
-              "observationId": "finish:F0164-P04:0:1704853d054e013e",
+              "observationId": "finish:F0164-P03:0:1704853d054e013e",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The Italian text, Jungle symbol and 11/64 establish identity; the artwork window directly shows the star-pattern holographic field. The seller title and item data explicitly identify the card as Holo Unlimited. Retained as SPEC-0110.",
-              "contentHash": "89fcc91fddc8480c83d87e15b58caba9f03fa51cab99aa1f5f1eaad9b39571f8",
+              "contentHash": "b963cfdc76f0047e1518b0db7b0c0b7d613dfb9a8e718872e620134cf1a6ad78",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0164-P03:1:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "d24cb3eabfa8d360966ee2c7fd32715ddd481d34274c3dee8b248893901d4872",
               "image": null
             },
             {
@@ -72403,6 +72652,15 @@
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica.",
               "contentHash": "6e11cd713d1513cce518eb3cb4c3d578492ad775d4244082e397b2a5a78707d0",
               "image": "verification/specimens/SPEC-0111.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0403",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 12/17 shows one complete CGC-encapsulated Italian Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Italian / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT 9. The post caption explicitly identifies this carousel position as Italian 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "8e100a97793ea30a57c343847e19fea2400d7515160f487f85a16ca8442db315",
+              "image": null
             },
             {
               "observationId": "specimen:SPEC-0404",
@@ -72458,7 +72716,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0166",
-              "sourcePrintingId": "F0166-P03",
+              "sourcePrintingId": "F0166-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:d792d590f3ba7f882f69455d",
               "specimenIds": [
                 "SPEC-0055"
@@ -72481,6 +72739,12 @@
                     "finish",
                     "identity"
                   ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
                 }
               ]
             }
@@ -72524,21 +72788,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0166-P03:0:39a9db0fe3a99abc",
+              "observationId": "finish:F0166-P02:0:39a9db0fe3a99abc",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's edition; the retained seller listing photograph supports card identity and any independently visible properties.",
-              "contentHash": "7e8aa0acd24634de457a735df90efef60ff621f7dfa2b1bda0690f176f135afe",
+              "contentHash": "896326b72449b43a4559031c766732c9fc7c05362e2cc25dca4870dd56ae1295",
               "image": null
             },
             {
-              "observationId": "finish:F0166-P03:1:39c265e8a6dff749",
+              "observationId": "finish:F0166-P02:1:39c265e8a6dff749",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26. Retained as SPEC-0055.",
-              "contentHash": "f54792c7546c6509b60bf9d8a27e7d0978344eb823ff7f9490f3ad507b689aad",
+              "contentHash": "7614b18ee70909d7f9ec69d27d32211d87fcf505ed2ac00aa256f32529f9e74c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0166-P02:2:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "eaa9e6e081c9a284c067254b68cadd842932957c04360d2e8d5f0ba1ba07cb7d",
               "image": null
             },
             {
@@ -72549,6 +72822,15 @@
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26.",
               "contentHash": "63e1a12fb8b1371b9b0fdf418ab4f1a0f953f4d29558f75ef41b3898c177f5be",
               "image": "verification/specimens/SPEC-0055.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0408",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
+              "evidence": "The public Instagram carousel image 17/17 shows one complete CGC-encapsulated Portuguese Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Portuguese / Jungle - Unlimited - 11/64 / Holo\" and assigns grade GEM MINT 10. The post caption explicitly identifies this carousel position as Portuguese Unlimited. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
+              "contentHash": "07ee06b62e0c4f1e5f4f39044e1c9fa552e71e2c861bcb232271f5dc6a6b3f4e",
+              "image": null
             },
             {
               "observationId": "unit:U0124",
@@ -72602,6 +72884,12 @@
                 "SPEC-0129"
               ],
               "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "retrievedAt": "2026-09-10",
+                  "supportsAbsence": false,
+                  "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
@@ -72683,30 +72971,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0165-P01:0:94ee23d7ace7c1cc",
+              "observationId": "finish:F0165-P01:0:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "cd7fbc46576ec28c8e16285b9bc34c0c03b0892c47109da15dfd6be959c47ee0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0165-P01:1:94ee23d7ace7c1cc",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "02e8cde6298a5987f012e0a471b53b2e0296c0429e67d58852c0538c770fc6fb",
+              "contentHash": "41e22db9e12f08d567edaa1191ef0822deaccb6fcd19ba4c4572ddad502aa298",
               "image": null
             },
             {
-              "observationId": "finish:F0165-P01:1:a3f0da68aedf7433",
+              "observationId": "finish:F0165-P01:2:a3f0da68aedf7433",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
               "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. Retained as SPEC-0129.",
-              "contentHash": "651a64c0a5572cd47c3368576b0d53abc9cd1cffc9d354abf1c070de578bed81",
+              "contentHash": "bfd21a2bb1142a69245a2dff63e53cb880e1f18f22163c7fdb65d4d04013e348",
               "image": null
             },
             {
-              "observationId": "finish:F0165-P01:2:c6fe954118dfcf0e",
+              "observationId": "finish:F0165-P01:3:c6fe954118dfcf0e",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
               "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment. Retained as SPEC-0130.",
-              "contentHash": "c502307974d009680fc65f5386123dbb9dc95c1853fefc1a4fe60f3dcd7d3a25",
+              "contentHash": "c780201aeeb784df3d9b98187fc0e489154d003118d6d9be2de2380d05e86582",
               "image": null
             },
             {

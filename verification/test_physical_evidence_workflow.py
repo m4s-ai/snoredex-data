@@ -43,6 +43,29 @@ def finish_projector():
 
 
 def main() -> None:
+    projector = finish_projector()
+    printings = []
+    for edition, finish, variant in (("1st Edition", "non-holo", "V2"),
+                                     ("Unlimited", "non-holo", "V2"),
+                                     (None, "holo", "V1")):
+        projector.add_printing(printings, {
+            "finish": finish, "edition": edition, "mappedVariants": [variant],
+            "cardSize": "standard", "verificationStatus": "pending", "sources": [],
+        })
+    identities = [projector.printing_signature(row) for row in printings]
+    evidence = {"finish": "non-holo", "mappedVariants": ["V2"],
+                "verificationStatus": "owner-attested", "sources": [{"id": "owner-rule"}]}
+    projector.attach_finish_evidence(printings, evidence)
+    projector.attach_finish_evidence(printings, evidence)
+    assert [projector.printing_signature(row) for row in printings] == identities
+    assert all(row["sources"] == evidence["sources"] for row in printings[:2])
+    assert not printings[2]["sources"], "finish evidence must not cross to another variant"
+    try:
+        projector.attach_finish_evidence([], evidence)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("finish evidence must not create a printing")
     from review_findings import specimen_number_matches
     assert specimen_number_matches("27/64", "27")
     assert specimen_number_matches("077/071", "77/71")
@@ -294,7 +317,9 @@ def main() -> None:
         ("11", "1st Edition"), ("11", "Unlimited"),
         ("27", "1st Edition"), ("27", "Unlimited"),
     }
-    assert len(dutch[("27", "1st Edition")]["sources"]) == 2
+    assert len(dutch[("27", "1st Edition")]["sources"]) == 3
+    assert sum(source.get("sourceType") == "Owner attestation (domain expert)"
+               for source in dutch[("27", "1st Edition")]["sources"]) == 1
     assert dutch[("27", "1st Edition")]["specimenIds"] == ["SPEC-0042", "SPEC-0043"]
 
     projector = finish_projector()
