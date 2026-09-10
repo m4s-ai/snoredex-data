@@ -1039,6 +1039,8 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
 
     try:
         import importlib.util
+        # scripts/ imports cross-generator modules; insert (idempotent) before loading.
+        sys.path.insert(0, str(ROOT / "scripts"))
         graph_module_path = ROOT / "scripts" / "authoritative_graph.py"
         spec = importlib.util.spec_from_file_location("authoritative_graph", graph_module_path)
         graph_module = importlib.util.module_from_spec(spec)
