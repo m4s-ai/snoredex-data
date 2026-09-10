@@ -27,8 +27,9 @@ All three observations reach the source registry, artwork and collector projecti
 They establish the pictured Holo treatments, not exhaustive finish lists. The existing
 TCGdex positive non-holo claim for Indonesian SV2a 181 remains separate; a Holo photo
 does not disprove another printing. The printed local identifiers are retained in the
-observations; the legacy physical-release records still need structured local-set
-reconciliation. That remaining identity work must not be described as missing photos.
+observations; their legacy physical-release identifiers were subsequently reconciled
+in the [retained-image reinspection](REINSPECTION-20260910.md). The Thai s10a T and
+Indonesian s5a I release dates remain unknown; another copy of the same image cannot establish them.
 Japanese 207/BW-P was subsequently accepted as SPEC-0521, as detailed below.
 
 ## Reconciliation before research
@@ -118,6 +119,7 @@ No whole-desktop control or TLS validation bypass was used. Other downloaded ins
 copies remain in the ignored research cache; the four accepted photographs are retained
 as SPEC-0518 through SPEC-0521.
 
-The three requested photographs are now retained. Next work is the structured
-local-identity reconciliation and any independently supported alternate finishes;
-no additional front photograph is needed for these three cards.
+The requested photographs are retained and their local identities reconciled.
+The [reinspection report](REINSPECTION-20260910.md) records which other retained
+images support a finish and which remain inconclusive. Further work concerns unknown
+release dates and independently supported alternate finishes, not re-requesting these photos.

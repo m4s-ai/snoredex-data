@@ -13,7 +13,7 @@
    "evidenceRecords": 1629,
    "uniqueUrls": 1622,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6202
+   "claimsAttributed": 6212
   }
  },
  "providers": [
@@ -187,7 +187,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 89,
-   "claimsSupported": 653
+   "claimsSupported": 650
   },
   {
    "providerId": "tcgcsv",
@@ -453,7 +453,7 @@
     "media.52poke.com"
    ],
    "uniqueSources": 13,
-   "claimsSupported": 33
+   "claimsSupported": 34
   },
   {
    "providerId": "koreanpokemoncards",
@@ -733,7 +733,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 63,
-   "claimsSupported": 729
+   "claimsSupported": 732
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -777,7 +777,7 @@
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
    "uniqueSources": 177,
-   "claimsSupported": 656
+   "claimsSupported": 665
   }
  ],
  "evidence": [
@@ -859,11 +859,13 @@
    "providerId": "52poke",
    "sourceTypes": [
     "Inspected card photograph; external origin unknown",
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Retained exact-card specimen image"
    ],
    "dimensions": [
     "card-release",
-    "identity"
+    "identity",
+    "language"
    ],
    "stableIdCount": 3,
    "stableIds": [
@@ -871,8 +873,8 @@
     "TW:s5a F:093/070:base",
     "U0602"
    ],
-   "retrievedAt": "2026-09-09",
-   "usageCount": 4
+   "retrievedAt": "2026-09-10",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://s1.52poke.com/wiki/7/7b/AS5a142.png",
@@ -910,7 +912,7 @@
     "TW:s5a F:093/070:base",
     "U0602"
    ],
-   "retrievedAt": "2026-09-09",
+   "retrievedAt": "2026-09-10",
    "usageCount": 4
   },
   {
@@ -2170,7 +2172,7 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 44,
+   "stableIdCount": 41,
    "stableIds": [
     "U0085",
     "U0086",
@@ -2181,7 +2183,6 @@
     "U0123",
     "U0169",
     "U0170",
-    "U0171",
     "U0200",
     "U0212",
     "U0239",
@@ -2212,13 +2213,11 @@
     "U0549",
     "U0557",
     "U0601",
-    "U0602",
-    "U0603",
     "U0604",
     "U0630"
    ],
    "retrievedAt": "2026-07-22",
-   "usageCount": 44
+   "usageCount": 41
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
@@ -11842,7 +11841,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 223,
+   "stableIdCount": 226,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -11984,8 +11983,10 @@
     "SPEC-0472",
     "SPEC-0476",
     "SPEC-0479",
+    "SPEC-0489",
     "SPEC-0505",
     "TW:SM-P:053:base",
+    "TW:s5a F:093/070:base",
     "TW:sc1D F:133/164:base",
     "U0100",
     "U0110",
@@ -12040,6 +12041,7 @@
     "U0582",
     "U0585",
     "U0600",
+    "U0602",
     "U0605",
     "U0608",
     "U0609",
@@ -12068,8 +12070,8 @@
     "U0780",
     "U0785"
    ],
-   "retrievedAt": "2026-09-09",
-   "usageCount": 373
+   "retrievedAt": "2026-09-10",
+   "usageCount": 376
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -24427,20 +24429,23 @@
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
    "sourceTypes": [
-    "Seller listing photograph"
+    "Seller listing photograph",
+    "Seller listing photograph; retained exact-card specimen"
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0361-P01",
+    "ID:s5a I:093/070:base",
     "SPEC-0519",
     "U0603"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 5
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
@@ -26478,20 +26483,24 @@
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
    "sourceTypes": [
-    "Seller listing photograph"
+    "Positive source-first card record",
+    "Seller listing photograph",
+    "Seller listing photograph; retained exact-card specimen"
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0333-P01",
     "SPEC-0520",
+    "TH:s10a T:077/071:base",
     "U0171"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 5
+   "usageCount": 9
   },
   {
    "canonicalUrl": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
@@ -26535,18 +26544,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
    "sourceTypes": [
+    "Positive source-first card record",
     "Seller listing photograph"
    ],
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "ID:s5a I:093/070:base",
     "SPEC-0519",
     "U0603"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://shopee.tw/product/16896213/51412187955",

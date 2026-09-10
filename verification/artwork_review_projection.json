@@ -4,19 +4,19 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "f66743cbfd5655c961dcbd9dddff3bf7e6b11fedc075e6238b132675c13e473b",
+  "projectionVersion": "8cd9d998fd14d72ed679b4e7186aa59b52219fa16868c9fb00887bf45de64668",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 256,
+    "groups": 255,
     "mappedWorks": 42,
-    "imageGroups": 254,
+    "imageGroups": 253,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 2,
-    "cardReleases": 642,
-    "physicalPrintings": 749,
+    "cardReleases": 641,
+    "physicalPrintings": 750,
     "sourceObservations": 2911
   },
   "groups": [
@@ -33415,7 +33415,7 @@
       "label": "Snorlax-Gormandize-Body-Slam",
       "members": [
         {
-          "cardReleaseId": "RELEASE:ID:Indonesian:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "cardReleaseId": "RELEASE:ID:Indonesian:s5a I:093/070:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
           "cardKey": "Snorlax-Gormandize-Body-Slam",
           "reviewedAppearanceId": null,
@@ -33424,21 +33424,23 @@
           "locality": "ID",
           "language": "Indonesian",
           "script": "Latn",
-          "setEditionId": "EDITION:ID:Indonesian:via-s5a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:ID:Indonesian:s5a I",
+          "localSetCode": "s5a I",
+          "localNumber": "093/070",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0603"
+          ],
           "legacyVariants": [
             "base"
           ],
           "physicalPrintings": [
             {
               "physicalPrintingId": "PHYSICAL:PRINTING:2f1189d907fa7f88a1df6b07",
-              "semanticPrintingId": "PRINTING:2f1189d907fa7f88a1df6b07",
-              "cardReleaseId": "RELEASE:ID:Indonesian:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+              "semanticPrintingId": "PRINTING:fe7e3c6c3afa4674bff797cb",
+              "cardReleaseId": "RELEASE:ID:Indonesian:s5a I:093/070:Snorlax-Gormandize-Body-Slam",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
@@ -33469,8 +33471,7 @@
             "artist": null,
             "variant": "base",
             "finish": [
-              "holo",
-              "reverse-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -33499,6 +33500,14 @@
               "originalHash": "561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98",
               "previewSrc": "images/previews/SPEC-0519.png?v=561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98",
               "thumbnailSrc": "images/thumbs/SPEC-0519.png?v=561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98"
+            },
+            {
+              "src": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
+              "label": "publisher card image",
+              "observationId": "source-first:ID:s5a I:093/070:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -33512,21 +33521,30 @@
               "image": null
             },
             {
+              "observationId": "source-first:ID:s5a I:093/070:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-%28Indonesia-Version%29-i.52799340.41773289935",
+              "evidence": "specimen:SPEC-0519 visibly establishes s5a I 093/070, Indonesian, and printed rarity UR. Release date remains unknown.",
+              "contentHash": "894128558656f3ad896bef52f6b71de8f891a489ad5174aa5e200529440fd69c",
+              "image": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp"
+            },
+            {
               "observationId": "specimen:SPEC-0519",
               "kind": "specimen",
               "provider": null,
               "url": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-%28Indonesia-Version%29-i.52799340.41773289935",
               "evidence": "Indonesian gold Snorlax HP130 with Timbun Makanan Dalam Perut and Menindih. The lower line reads s5a I and 093/070 UR. Glittering foil is visible across the gold background and blue body. The canonical legacy key uses 93; the printed number is 093/070. No unpictured finish or edition is inferred.",
-              "contentHash": "d5529c595eec70685fc7d9b52229154fc3e18d8b2982c6c1bf7b465701666a39",
+              "contentHash": "33875aed25de1c3896afec7791dda1205329ab3f46889bebcd8d2cc5813c348a",
               "image": "verification/specimens/SPEC-0519.png"
             },
             {
               "observationId": "unit:U0603",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "Cross-language expansion index row for 双璧のファイター / Peerless Fighters (Cardmarket calls this set \"Matchless Fighters\") carries a localized Indonesian set name: \"Dua Pilar Petarung\". Full row: 双璧のファイター | Peerless Fighters | 雙璧戰士 | Dua Pilar Petarung | สองยอดนักสู้ | 쌍벽의 파이터.",
-              "contentHash": "5fc35f4951b4ed6d9b665033da30f2f45f55e49acc26a0c55415e203bff07186",
+              "provider": "seller-listing-photo",
+              "url": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
+              "evidence": "specimen:SPEC-0519 establishes the exact Indonesian card from its readable face and printed identifier. The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
+              "contentHash": "406c8039b21e351431ace403394d663037ba531dbcc46d1a9a233aaa06b39035",
               "image": "images/s5a_93_Snorlax_552704.jpg"
             }
           ]
@@ -33799,13 +33817,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0489",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Fine glittering foil is visibly retained across the gold background and blue body, with highlights varying across the card surface.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0489",
+              "specimenIds": [
+                "SPEC-0489"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -33824,14 +33864,6 @@
               "thumbnailSrc": "images/thumbs/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d"
             },
             {
-              "src": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
-              "label": "publisher card image",
-              "observationId": "source-first:TW:s5a F:093/070:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            },
-            {
               "src": "verification/specimens/SPEC-0489.png",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0489",
@@ -33841,6 +33873,14 @@
               "originalHash": "202df308b2815a45702c67d0b3d578444488ca75e711a88ffd2ae4c3d6de5d50",
               "previewSrc": "images/previews/SPEC-0489.png?v=202df308b2815a45702c67d0b3d578444488ca75e711a88ffd2ae4c3d6de5d50",
               "thumbnailSrc": "images/thumbs/SPEC-0489.png?v=202df308b2815a45702c67d0b3d578444488ca75e711a88ffd2ae4c3d6de5d50"
+            },
+            {
+              "src": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
+              "label": "publisher card image",
+              "observationId": "source-first:TW:s5a F:093/070:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
@@ -33858,17 +33898,17 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
-              "evidence": "Owner supplied the image from the linked 52Poke Traditional Chinese card row on 2026-09-09. Visible: 卡比獸, HP130, s5a F, regulation D, 093/070 UR, Illus. Saki Hayashiro, 積食 (Gormandize), 泰山壓頂 (Body Slam) 100, gold card design. This establishes exact Traditional Chinese identity and printed rarity, not an exhaustive finish list or a technical foil pattern. Physical custody is not asserted.",
-              "contentHash": "83e9f73abc2de4627f81d874e25b21d323e7987607b73d769cb7f2727bd74804",
+              "evidence": "Owner supplied the image from the linked 52Poke Traditional Chinese card row on 2026-09-09. Visible: 卡比獸, HP130, s5a F, regulation D, 093/070 UR, Illus. Saki Hayashiro, 積食 (Gormandize), 泰山壓頂 (Body Slam) 100, gold card design. This establishes exact Traditional Chinese identity and printed rarity, not an exhaustive finish list or a technical foil pattern. Physical custody is not asserted. Re-inspected 2026-09-10: fine glittering foil is visibly retained across the gold background and blue body, with highlights varying across the card surface.",
+              "contentHash": "a70475edca8ce16a3a113e896c5bc0b60ea5e3a9b9a5938288769f53948e25d7",
               "image": "verification/specimens/SPEC-0489.png"
             },
             {
               "observationId": "unit:U0602",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Matchless Fighters (s5a) is listed with a T-Chinese release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "83b9ad13b206c3dd2c462d2ab9767c15cb436f8b2d149b9e52bd25ec7aeb4a6c",
+              "provider": "52poke",
+              "url": "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
+              "evidence": "specimen:SPEC-0489 establishes the exact T-Chinese card from its readable face and printed identifier. The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
+              "contentHash": "e73468193fc944b62cceff812cc1c653ea185da169bffc73d1a0296d6533f44b",
               "image": "images/s5a_93_Snorlax_552704.jpg"
             }
           ]
@@ -79556,7 +79596,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:TH:Thai:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:TH:Thai:s10a T:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "reviewedAppearanceId": null,
@@ -79565,21 +79605,23 @@
           "locality": "TH",
           "language": "Thai",
           "script": "Thai",
-          "setEditionId": "EDITION:TH:Thai:via-s10a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:TH:Thai:s10a T",
+          "localSetCode": "s10a T",
+          "localNumber": "077/071",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0171"
+          ],
           "legacyVariants": [
             "V2"
           ],
           "physicalPrintings": [
             {
               "physicalPrintingId": "PHYSICAL:PRINTING:814e660181051db01d8ac6ab",
-              "semanticPrintingId": "PRINTING:814e660181051db01d8ac6ab",
-              "cardReleaseId": "RELEASE:TH:Thai:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+              "semanticPrintingId": "PRINTING:a835808aa558ec1f6aeb61fb",
+              "cardReleaseId": "RELEASE:TH:Thai:s10a T:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
@@ -79607,7 +79649,7 @@
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Kouki Saitou",
+            "artist": null,
             "variant": "V2",
             "finish": [
               "holo"
@@ -79652,21 +79694,30 @@
               "image": null
             },
             {
+              "observationId": "source-first:TH:s10a T:077/071:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+              "evidence": "specimen:SPEC-0520 visibly establishes s10a T 077/071, Thai, and printed rarity CHR. Release date remains unknown.",
+              "contentHash": "1778925a31597929e9bef97b7a8834154afa75039d69b32bb55a5bc0ab9da2e2",
+              "image": null
+            },
+            {
               "observationId": "specimen:SPEC-0520",
               "kind": "specimen",
               "provider": null,
               "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
               "evidence": "Thai Snorlax HP150 in the eating scene; Thai name and rules text, s10a T, regulation F and 077/071 CHR are readable. Reflective multicoloured foil is visible across the artwork and silver border. OjamaCard is a seller watermark outside the card identity, not a distribution stamp.",
-              "contentHash": "42d9c0f949a21b51bc98fd6c7634a3c97e99bc70e1c2abd6bfc7354235819ba2",
+              "contentHash": "963fd5cfce238636ed3c33acb04b68389a99349966299325c88739188b678ce2",
               "image": "verification/specimens/SPEC-0520.png"
             },
             {
               "observationId": "unit:U0171",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "cross-language expansion index row for Dark Phantasma carries a localized Thai set name (set-level evidence)",
-              "contentHash": "70a6c10fb0f3aa1da90f653a623497524d79a9ceef441f5adff786acb10d8ca6",
+              "provider": "seller-listing-photo",
+              "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+              "evidence": "specimen:SPEC-0520 establishes the exact Thai card from its readable face and printed identifier. The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
+              "contentHash": "cc6b39d68cd5e5c4025b1d5db80f3541ea4fa8ee94c04d781ee63994a68d8d72",
               "image": "images/s10a_077_Snorlax_V2_657056.jpg"
             }
           ]
@@ -87548,7 +87599,7 @@
       "label": "Snorlax-Voraciousness-Thudding-Press",
       "members": [
         {
-          "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-181:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+          "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
           "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
           "cardKey": "Snorlax-Voraciousness-Thudding-Press",
           "reviewedAppearanceId": null,
@@ -87557,21 +87608,24 @@
           "locality": "ID",
           "language": "Indonesian",
           "script": "Latn",
-          "setEditionId": "EDITION:ID:Indonesian:via-sv2a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:ID:Indonesian:SV2a I",
+          "localSetCode": "SV2a I",
+          "localNumber": "181/165",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0051"
+          ],
           "legacyVariants": [
+            "base",
             "V2"
           ],
           "physicalPrintings": [
             {
               "physicalPrintingId": "PHYSICAL:F0469-P01",
-              "semanticPrintingId": "PRINTING:1f99431bdb44926be640aaaf",
-              "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-181:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+              "semanticPrintingId": "PRINTING:3679f4cf25fa4ea193110d74",
+              "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
@@ -87593,8 +87647,8 @@
             },
             {
               "physicalPrintingId": "PHYSICAL:PRINTING:263271097aee6333c3eff78f",
-              "semanticPrintingId": "PRINTING:263271097aee6333c3eff78f",
-              "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-181:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+              "semanticPrintingId": "PRINTING:eda38747fb701861cd49eb06",
+              "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
@@ -87623,7 +87677,7 @@
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
-            "variant": "V2",
+            "variant": "base, V2",
             "finish": [
               "holo",
               "non-holo"
@@ -87644,6 +87698,14 @@
               "originalHash": "1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d",
               "previewSrc": "images/previews/sv2a_181_Snorlax_V2_719634.jpg?v=1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d",
               "thumbnailSrc": "images/thumbs/sv2a_181_Snorlax_V2_719634.jpg?v=1a0a9c17c6a6b6bef3dada95340d849f8d157d84bcc3a87d2ab45fa22bcd613d"
+            },
+            {
+              "src": "https://asia.pokemon-card.com/id/card-img/id00008760.png",
+              "label": "publisher card image",
+              "observationId": "source-first:ID:SV2a I:181/165:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             },
             {
               "src": "verification/specimens/SPEC-0177.png",
@@ -87688,6 +87750,15 @@
               "image": null
             },
             {
+              "observationId": "source-first:ID:SV2a I:181/165:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-asia",
+              "url": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
+              "evidence": "The retained official Indonesian card detail 8760 and SPEC-0177 show Snorlax 181/165 in SV2a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity AR. The image is identity and rarity evidence only; no physical finish is inferred.",
+              "contentHash": "bb18fb615126a3d027cd9f3ed69b161b2f8ceb3e4dafd853e74b2f1d398a2d8b",
+              "image": "https://asia.pokemon-card.com/id/card-img/id00008760.png"
+            },
+            {
               "observationId": "specimen:SPEC-0177",
               "kind": "specimen",
               "provider": null,
@@ -87695,6 +87766,15 @@
               "evidence": "Complete official Indonesian render for Snorlax SV2a I 181/165 (base). The printed name, set code, collector number, attacks and rarity AR establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
               "contentHash": "37065ed024ecef1895f6e28ef33178ecbc7db8b03ba83763e802d8febdb478a1",
               "image": "verification/specimens/SPEC-0177.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0375",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.instagram.com/p/DLKJu7Mvpap/",
+              "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 4, column 1 crop. The visible artwork, printed language, set identity SV2a I and collector identity 181/165 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
+              "contentHash": "26e0fa8cbb4004773e42766206fa6a2d37432285d1ee8b91a11333ced97b19e7",
+              "image": null
             },
             {
               "observationId": "specimen:SPEC-0518",
@@ -92971,127 +93051,6 @@
               "evidence": "mirror-holo (Poke Ball / Master Ball) printing of Pokemon Card 151 #143. 151 (TCG): \"In the Japanese, Korean and Traditional Chinese subsets ... common, uncommon, and rare cards have Mirror Holofoil variants featuring a Poke Ball pattern; or, rarely, a Master Ball pattern. Thai and Indonesian booster packs contain five cards with no guarantees of Holofoil cards, and has no Mirror Holofoil prints.\"",
               "contentHash": "f4723d505a7f1c308c1ef2eacd9447ef924f13536c573173e6a5d90d3c3968ed",
               "image": "images/xsv2a_143_Snorlax_V1_837510.jpg"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "IMAGE-GROUP:cafc90cada7b0ebf239c3020",
-      "groupKind": "image-group",
-      "reviewedAppearanceId": null,
-      "imageGroupId": "IMAGE-GROUP:cafc90cada7b0ebf239c3020",
-      "appearanceIdentityState": "unreviewed-image-group",
-      "workIds": [
-        "WORK:Snorlax-Voraciousness-Thudding-Press"
-      ],
-      "cardKeys": [
-        "Snorlax-Voraciousness-Thudding-Press"
-      ],
-      "label": "Snorlax-Voraciousness-Thudding-Press",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-          "workId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-          "cardKey": "Snorlax-Voraciousness-Thudding-Press",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:cafc90cada7b0ebf239c3020",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "ID",
-          "language": "Indonesian",
-          "script": "Latn",
-          "setEditionId": "EDITION:ID:Indonesian:SV2a I",
-          "localSetCode": "SV2a I",
-          "localNumber": "181/165",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0051"
-          ],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://asia.pokemon-card.com/id/card-img/id00008760.png",
-              "label": "publisher card image",
-              "observationId": "source-first:ID:SV2a I:181/165:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            },
-            {
-              "src": "verification/specimens/SPEC-0177.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0177",
-              "contentHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
-              "previewSrc": "images/previews/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
-              "thumbnailSrc": "images/thumbs/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6"
-            },
-            {
-              "src": "verification/specimens/SPEC-0518.jpg",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0518",
-              "contentHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
-              "previewSrc": "images/previews/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
-              "thumbnailSrc": "images/thumbs/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:ID:SV2a I:181/165:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-asia",
-              "url": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
-              "evidence": "The retained official Indonesian card detail 8760 and SPEC-0177 show Snorlax 181/165 in SV2a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity AR. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "bb18fb615126a3d027cd9f3ed69b161b2f8ceb3e4dafd853e74b2f1d398a2d8b",
-              "image": "https://asia.pokemon-card.com/id/card-img/id00008760.png"
-            },
-            {
-              "observationId": "specimen:SPEC-0177",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
-              "evidence": "Complete official Indonesian render for Snorlax SV2a I 181/165 (base). The printed name, set code, collector number, attacks and rarity AR establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
-              "contentHash": "37065ed024ecef1895f6e28ef33178ecbc7db8b03ba83763e802d8febdb478a1",
-              "image": "verification/specimens/SPEC-0177.png"
-            },
-            {
-              "observationId": "specimen:SPEC-0375",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.instagram.com/p/DLKJu7Mvpap/",
-              "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 4, column 1 crop. The visible artwork, printed language, set identity SV2a I and collector identity 181/165 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
-              "contentHash": "26e0fa8cbb4004773e42766206fa6a2d37432285d1ee8b91a11333ced97b19e7",
-              "image": null
-            },
-            {
-              "observationId": "specimen:SPEC-0518",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.ebay.com/itm/397048838536",
-              "evidence": "Indonesian Snorlax HP150 with Kemaruk and Tekanan Gedebuk, printed SV2a I 181/165 AR. Coloured foil reflections cross the upper artwork above the name and along the right edge. The photograph establishes this Holo specimen, not an exhaustive finish inventory.",
-              "contentHash": "e3e670c16977de1e5416eaac0242a06f2183a90b4c2500d209a0ce0987291dd1",
-              "image": "verification/specimens/SPEC-0518.jpg"
             }
           ]
         }

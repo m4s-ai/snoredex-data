@@ -271,6 +271,14 @@ def verify_observed_finish_attribution(specimens, registry):
 
 
 def main() -> None:
+    # A retained legacy specimen may follow its reviewed local re-key, but not a neighbour.
+    specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
+    release = {"localSetCode": "s5a I", "localNumber": "093/070", "language": "Indonesian",
+               "legacyIdentityAliases": [["s5a", "93"]], "legacyCounterpartUnitIds": ["U0603"]}
+    assert graph_module._specimen_has_cited_legacy_identity(specimen, release)
+    for changed in ({"language": "Thai"}, {"number": "94/070"}, {"citedBy": ["U0602"]}, {"setCode": "s4"}):
+        assert not graph_module._specimen_has_cited_legacy_identity({**specimen, **changed}, release)
+    assert not graph_module._specimen_has_cited_legacy_identity(specimen, {**release, "legacyIdentityAliases": []})
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
@@ -300,7 +308,14 @@ def main() -> None:
         assert not any(":TW:T-Chinese:via-s5a:" in ref for ref in product["cardReleaseIds"])
         assert not any(e["entityType"] == "card-release" and ":via-s5a:" in e["entityId"] and e["payload"].get("language") == "T-Chinese" for e in current["entities"])
     specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
-    assert "physicalObservation" not in specimen
+    assert specimen["physicalObservation"]["finish"] == "holo"
+    flat_render = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0294")
+    assert "physicalObservation" not in flat_render
+    for uid, code, number in [("U0051", "SV2a I", "181/165"), ("U0603", "s5a I", "093/070"), ("U0171", "s10a T", "077/071")]:
+        claim = next(e["payload"] for e in graph["entities"] if e["entityType"] == "candidate-claim" and e["payload"].get("sourceId") == uid)
+        release = next(e["payload"] for e in graph["entities"] if e["entityType"] == "card-release" and e["entityId"] == claim["materializedTargetId"])
+        assert (release["localSetCode"], release["localNumber"]) == (code, number)
+        assert uid in release["legacyCounterpartUnitIds"]
 
     tampered = deepcopy(graph)
     next(

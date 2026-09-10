@@ -119,6 +119,16 @@ def main() -> int:
         "unresolved": set(),
     }
     by_id = {unit["unitId"]: unit for unit in units}
+    # PR #375: a physical photo must also reach its exact language claim.
+    specimens = {row["specimenId"]: row for row in load("verification/specimens.json")["specimens"]}
+    for unit_id, specimen_id in {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489"}.items():
+        unit = by_id[unit_id]
+        specimen = specimens[specimen_id]
+        assert unit["sourceRef"] == f"specimen:{specimen_id}"
+        assert unit_id in specimen["citedBy"]
+        assert unit["language"] == specimen["language"]
+        assert unit["evidenceGranularity"] == "specimen-or-card"
+        assert semantics[unit_id]["applicationStatus"] == "exists"
     if "boundedLanguageAbsenceScopes" in semantics_doc["meta"]:
         raise AssertionError("evidence semantics still exposes provider absence scopes")
     for unit_id, semantic in semantics.items():

@@ -1529,7 +1529,7 @@ def _validate_unmaterialized_specimen(
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
         release = releases.get(physical.get("cardReleaseId"))
-        if release:
+        if _specimen_requires_local_identity_check(specimen, release):
             set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
             number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
             for input_field, release_field in (
@@ -1539,6 +1539,22 @@ def _validate_unmaterialized_specimen(
                 right = _number(release.get(release_field)) if input_field == "number"                     else str(release.get(release_field) or "")
                 if left != right:
                     errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
+
+
+def _specimen_requires_local_identity_check(specimen: dict[str, Any], release: dict[str, Any] | None) -> bool:
+    return release is not None and not _specimen_has_cited_legacy_identity(specimen, release)
+
+
+def _specimen_has_cited_legacy_identity(specimen: dict[str, Any], release: dict[str, Any]) -> bool:
+    """A reviewed local re-key preserves specimens filed under their cited legacy identity."""
+    if specimen.get("language") != release.get("language"):
+        return False
+    if not set(specimen.get("citedBy") or []) & set(release.get("legacyCounterpartUnitIds") or []):
+        return False
+    identity = (str(specimen.get("setCode") or ""), _number(specimen.get("number")))
+    return identity in {
+        (str(code), _number(number)) for code, number in release.get("legacyIdentityAliases") or []
+    }
 
 
 def _validate_materialized_specimen(
@@ -1562,7 +1578,7 @@ def _validate_materialized_specimen(
     if physical.get("basis") != observation.get("basis"):
         errors.append(f"specimen basis is stale: {specimen_id}")
     release = releases.get(physical.get("cardReleaseId"))
-    if not release:
+    if not _specimen_requires_local_identity_check(specimen, release):
         return
     set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
     number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"

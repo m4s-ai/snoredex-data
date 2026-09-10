@@ -396,9 +396,15 @@ def main() -> None:
         old_s5a = next(row["itemId"] for row in source["items"] if row.get("cardReleaseId") == "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id")
         s5a = next(row for row in route["transitions"] if old_s5a in row["fromItemIds"])
         assert s5a["fromItemIds"] == [old_s5a]
-        assert s5a["toItemIds"] == ["item-9877e7a6-c3a9-5fc2-956d-a1d1591018a0"]
-        assert s5a["changeKind"] == "rekey-1:1"
-        assert s5a["automaticStateAction"] == "preserve"
+        # A formerly unspecified finish now has observed Holo and an unverified
+        # marketplace candidate: never assign the owner's copy automatically.
+        assert s5a["toItemIds"] == [
+            "item-35662349-00ed-54f6-a073-5ee93b850558",
+            "item-b88ffbb2-da60-5a6c-8ab2-c85a5de59950",
+        ]
+        assert s5a["changeKind"] == "split-1:N"
+        assert s5a["automaticStateAction"] == "none"
+        assert s5a["reconciliation"] == "requires-user-resolution"
         covered_source_ids = [
             item_id
             for transition in route["transitions"]
@@ -615,11 +621,11 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 705,
-            "finishCandidates": 111,
+            "verifiedPrintings": 707,
+            "finishCandidates": 113,
             "researchPlaceholders": 75,
-            "currentKnown": 705,
-            "research": 186,
+            "currentKnown": 707,
+            "research": 188,
         },
     }
     build_a_bear_item = next(
