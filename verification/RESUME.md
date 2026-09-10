@@ -1137,6 +1137,19 @@ Safe to interrupt at any point: `units.json` is rewritten only after a full pass
 
 ## Sources used so far
 
+For the release-triggered **30th Celebration** research, use the retained
+[source inventory](research/30th-celebration-20260910/sources.json) and
+[research notes](research/30th-celebration-20260910/README.md). They preserve the official
+localized galleries, direct card images, regional product announcements, retrieval dates,
+and access gaps. The admitted card and release-date references also live in
+`source_first_prints.json`, `set_catalogue_sources.json`, and the generated source registry.
+
+New official campaigns can publish cards before the normal card-search database indexes them.
+Follow the publisher's localized gallery links and inspect each printed identifier; do not
+transfer a number, language, release date, or finish pattern from another region. Preserve
+announcement-only pages as research sources without promoting them to individual card proof.
+Tournament legality and later accessory-product dates are separate from the booster release.
+
 | Source | Scriptable | Covers | Yield |
 |---|---|---|---|
 | **TCGdex API** (`api.tcgdex.net`) | yes | en, fr, de, es, it, pt, ja, zh-tw, id, th | 352 |

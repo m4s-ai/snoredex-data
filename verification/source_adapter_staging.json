@@ -3,8 +3,8 @@
     "schema": "snoredex-source-adapter-staging",
     "schemaVersion": "1.0.0",
     "coverageVersion": "1.2.0",
-    "generatedFromRun": "20260909T171255Z",
-    "previousRun": "20260909T163334Z",
+    "generatedFromRun": "20260910T160000Z",
+    "previousRun": "20260909T171255Z",
     "contract": "verification/source_adapters.json",
     "capabilityGraph": "verification/source_capability_graph.json",
     "contractHash": "sha256:b5ac6c982efe67b28c2ced2a0428cf1d2939c6314c78a57a04145c03042554c3",
@@ -13,9 +13,9 @@
     "verdictMutationAllowed": false,
     "counts": {
       "slices": 15,
-      "records": 1621,
+      "records": 1629,
       "mapped": 5,
-      "newCandidate": 1460,
+      "newCandidate": 1468,
       "ambiguousNeedsEvidence": 156,
       "positivelyExcluded": 0,
       "runErrors": 0,
@@ -186,12 +186,12 @@
         "complete": true
       },
       "accounting": {
-        "fetched": 190,
+        "fetched": 191,
         "mapped": 0,
-        "newCandidate": 190,
+        "newCandidate": 191,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 190
+        "accounted": 191
       }
     },
     {
@@ -205,12 +205,12 @@
         "complete": true
       },
       "accounting": {
-        "fetched": 177,
+        "fetched": 184,
         "mapped": 0,
-        "newCandidate": 177,
+        "newCandidate": 184,
         "ambiguousNeedsEvidence": 0,
         "positivelyExcluded": 0,
-        "accounted": 177
+        "accounted": 184
       }
     },
     {
@@ -311,15 +311,224 @@
   ],
   "runErrors": [],
   "diff": {
-    "added": [],
-    "changed": [],
+    "added": [
+      "tcgdex|tcgdex-api|it|bw10",
+      "tcgdex|tcgdex-api|ja|M6",
+      "tcgdex|tcgdex-api|ja|SM1p",
+      "tcgdex|tcgdex-api|ja|SM2p",
+      "tcgdex|tcgdex-api|ja|SM3p",
+      "tcgdex|tcgdex-api|ja|SM4p",
+      "tcgdex|tcgdex-api|ja|SM5p",
+      "tcgdex|tcgdex-api|ja|SV-P"
+    ],
+    "changed": [
+      "tcgdex|tcgdex-api|de|P-A",
+      "tcgdex|tcgdex-api|de|bw5",
+      "tcgdex|tcgdex-api|de|g1",
+      "tcgdex|tcgdex-api|de|mep",
+      "tcgdex|tcgdex-api|de|sm1",
+      "tcgdex|tcgdex-api|de|sm115",
+      "tcgdex|tcgdex-api|de|sm4",
+      "tcgdex|tcgdex-api|de|swsh8",
+      "tcgdex|tcgdex-api|en|ecard2",
+      "tcgdex|tcgdex-api|en|mep",
+      "tcgdex|tcgdex-api|es|mep",
+      "tcgdex|tcgdex-api|fr|B1",
+      "tcgdex|tcgdex-api|fr|mep",
+      "tcgdex|tcgdex-api|it|me02",
+      "tcgdex|tcgdex-api|it|mep",
+      "tcgdex|tcgdex-api|ja|M-P",
+      "tcgdex|tcgdex-api|ja|S10P",
+      "tcgdex|tcgdex-api|ja|S10a",
+      "tcgdex|tcgdex-api|ja|S11",
+      "tcgdex|tcgdex-api|ja|S11a",
+      "tcgdex|tcgdex-api|ja|S12a",
+      "tcgdex|tcgdex-api|ja|S5I",
+      "tcgdex|tcgdex-api|ja|S6H",
+      "tcgdex|tcgdex-api|ja|S6K",
+      "tcgdex|tcgdex-api|ja|S7D",
+      "tcgdex|tcgdex-api|ja|S8",
+      "tcgdex|tcgdex-api|ja|S8b",
+      "tcgdex|tcgdex-api|ja|SM10b",
+      "tcgdex|tcgdex-api|ja|SM11a",
+      "tcgdex|tcgdex-api|ja|SM1M",
+      "tcgdex|tcgdex-api|ja|SM1S",
+      "tcgdex|tcgdex-api|ja|SM2K",
+      "tcgdex|tcgdex-api|ja|SM2L",
+      "tcgdex|tcgdex-api|ja|SM3H",
+      "tcgdex|tcgdex-api|ja|SM3N",
+      "tcgdex|tcgdex-api|ja|SM4A",
+      "tcgdex|tcgdex-api|ja|SM4S",
+      "tcgdex|tcgdex-api|ja|SM5M",
+      "tcgdex|tcgdex-api|ja|SM5S",
+      "tcgdex|tcgdex-api|ja|SM6",
+      "tcgdex|tcgdex-api|ja|SM6a",
+      "tcgdex|tcgdex-api|ja|SM6b",
+      "tcgdex|tcgdex-api|ja|SM7",
+      "tcgdex|tcgdex-api|ja|SM7a",
+      "tcgdex|tcgdex-api|ja|SM7b",
+      "tcgdex|tcgdex-api|ja|SM8",
+      "tcgdex|tcgdex-api|ja|SM8a",
+      "tcgdex|tcgdex-api|ja|SM8b",
+      "tcgdex|tcgdex-api|ja|SM9",
+      "tcgdex|tcgdex-api|ja|SM9a",
+      "tcgdex|tcgdex-api|ja|SM9b",
+      "tcgdex|tcgdex-api|ja|SV10",
+      "tcgdex|tcgdex-api|ja|SV5K",
+      "tcgdex|tcgdex-api|ja|SV5M",
+      "tcgdex|tcgdex-api|ja|SV6",
+      "tcgdex|tcgdex-api|ja|SV6a",
+      "tcgdex|tcgdex-api|ja|SV8",
+      "tcgdex|tcgdex-api|pt|mep"
+    ],
     "disappeared": [],
-    "rekeyedCandidates": [],
+    "rekeyedCandidates": [
+      {
+        "from": "tcgdex|tcgdex-api|it|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|it|swsh9tg",
+        "identityHintHash": "sha256:021acca466896f840364e95e532e10a18123cb51f1e7210a20ea6d88308e2ed3"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|fr|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|fr|swsh10tg",
+        "identityHintHash": "sha256:1adac3f5ad9f517739e17b8c67127156bee2b01aa113159e52a6957b6ac8e053"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|ko|sn11",
+        "to": "tcgdex|tcgdex-api|ko|SM11",
+        "identityHintHash": "sha256:21d64de9ae123a4a2f10aa1c048f49f8e4a9be2eddfc3c98e45436b861285362"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|fr|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|fr|swsh9tg",
+        "identityHintHash": "sha256:30c34efc6efe62bead2566b7f2783d41ed798b72502043d824ae86ef09bf3321"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|it|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|it|swsh12tg",
+        "identityHintHash": "sha256:47b8d385c8655790f17a4837b967550e0c80c8c2cf0fde5c0eaa9ffcd92adc58"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|fr|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|fr|swsh12tg",
+        "identityHintHash": "sha256:4f03a6881fa513f4c7a70060138e63f9f3489c3ce318a8cb668767e08a09b4e0"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|en|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|en|swsh10tg",
+        "identityHintHash": "sha256:56a5d751f1511ba6766abf653d44604bdf11109b864121a707bb38f354eac4f9"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|en|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|en|swsh12tg",
+        "identityHintHash": "sha256:61559d76e488273a3bc605da302d138418d1334b45681f2aab472bc002e4ba91"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|en|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|en|swsh11tg",
+        "identityHintHash": "sha256:6844a0b3ca30e8dc63f9ee3a430355e9059442f05dba78c799a8188ba0c43dfe"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|de|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|de|swsh12tg",
+        "identityHintHash": "sha256:72e75d207522986192a014fa679d6025c051766d194199eac59bb878b0b69c6f"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|pt|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|pt|swsh9tg",
+        "identityHintHash": "sha256:7f93b770979917386c66a6cabf832dc6637e65423a43c309d78102a180e995fe"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|en|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|en|swsh9tg",
+        "identityHintHash": "sha256:83348224fb70efab45ddbf02e7c19f65f29de49ff5d548c7cde8d3e4f4512f08"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|ja|sn11",
+        "to": "tcgdex|tcgdex-api|ja|SM11",
+        "identityHintHash": "sha256:89ac706cd74dd5545b46fae8702e263c73fb8575813ce477af72b1e8d964dea5"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|pt|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|pt|swsh11tg",
+        "identityHintHash": "sha256:91749e03b83ffb8358513a8c3887a936707403e2309c7bf74a87790185c4fdd2"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|es|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|es|swsh10tg",
+        "identityHintHash": "sha256:94018637ced69f86bd309dc06f54dcfc22970bf540a9eabfae527af67f4d2e48"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|es|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|es|swsh9tg",
+        "identityHintHash": "sha256:96ae2d2ccd58aa43c7746ff6e2f1a686a977ce4bf3ffd9371d30b0e9627b9973"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|de|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|de|swsh11tg",
+        "identityHintHash": "sha256:a648e5c3e7042032392d4ffb70d48c5e649b6dab169db4460badd2fb93a2ef31"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|de|swsh9.5tg",
+        "to": "tcgdex|tcgdex-api|de|swsh9tg",
+        "identityHintHash": "sha256:be5e05f9c4c7b6ccb51f34cd687fb08bbb23eb2546fb0c1d29222da75242166e"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|it|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|it|swsh10tg",
+        "identityHintHash": "sha256:c127ee9feb5ddd438dc2fb89e778bdd760d8cee445e8dd7900672f6adcea2a2e"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|es|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|es|swsh12tg",
+        "identityHintHash": "sha256:c2f38c85c887d1975607308f21f832d99f2f682d645f05a91c6f6b540006b323"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|de|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|de|swsh10tg",
+        "identityHintHash": "sha256:cac15d2e96e3d41aaa3af9852cec7c78d8bcea8558bde7e9e79a68dd69b7d964"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|it|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|it|swsh11tg",
+        "identityHintHash": "sha256:d46d4bd49ff39744cadafb9e6da5e69a750782fbb9bf16626edbad6edd77f99c"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|fr|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|fr|swsh11tg",
+        "identityHintHash": "sha256:d88c3e61647bc95c48f0ede56f8c3c36287212c0e9394333a19f8526b41794a4"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|pt|swsh12.5tg",
+        "to": "tcgdex|tcgdex-api|pt|swsh12tg",
+        "identityHintHash": "sha256:d965331745ac1bd1dd91c31a68d2fb98c56c6c89b7fb6bef37ab577ce5152fd4"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|ja|sn10a",
+        "to": "tcgdex|tcgdex-api|ja|SM10a",
+        "identityHintHash": "sha256:db665b70ed103dacf975a575bee2da6269035e506756c029742083ffcc6c87be"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|es|swsh11.5tg",
+        "to": "tcgdex|tcgdex-api|es|swsh11tg",
+        "identityHintHash": "sha256:de5240d28e1bd351ebd4eecec0113238435c87c5f6d7eff87ff3004179d27842"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|ko|sn10a",
+        "to": "tcgdex|tcgdex-api|ko|SM10a",
+        "identityHintHash": "sha256:eb468b1ebdc422ef9881463eb83dfe3c72cb76b3689cd7f7197a0ab8434da377"
+      },
+      {
+        "from": "tcgdex|tcgdex-api|pt|swsh10.5tg",
+        "to": "tcgdex|tcgdex-api|pt|swsh10tg",
+        "identityHintHash": "sha256:ff7ccfc69c0bc1273c2b4861fe65b96a82a4775af98ce8b821d72b45a9e5b149"
+      }
+    ],
     "counts": {
-      "added": 0,
-      "changed": 0,
+      "added": 8,
+      "changed": 58,
       "disappeared": 0,
-      "rekeyedCandidates": 0
+      "rekeyedCandidates": 28
     }
   },
   "gaps": [
@@ -415,5 +624,5 @@
     }
   ],
   "recordsPath": "verification/source_adapter_records.jsonl",
-  "recordsHash": "sha256:082a8583f1971fbfac69df752aec786f19a7d6ead6a923a4cc8ee2ede62dbbd5"
+  "recordsHash": "sha256:6407bab2166b2dbfb35b18d5a9f2864de72acb044e97f0c2cd4f27ec83e6a126"
 }

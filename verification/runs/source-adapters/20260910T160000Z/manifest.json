@@ -1,0 +1,431 @@
+{
+  "schema": "snoredex-source-adapter-run",
+  "schemaVersion": "1.0.0",
+  "runId": "20260910T160000Z",
+  "coverageVersion": "1.2.0",
+  "startedAt": "2026-09-10T07:39:29Z",
+  "completedAt": "2026-09-10T07:39:29Z",
+  "status": "complete",
+  "contract": "verification/source_adapters.json",
+  "contractHash": "sha256:b5ac6c982efe67b28c2ced2a0428cf1d2939c6314c78a57a04145c03042554c3",
+  "capabilityGraph": "verification/source_capability_graph.json",
+  "capabilityGraphHash": "sha256:d55b8262f46cee7179241fd084d460bb2294b07b477dee65c6aafada1c7e4f10",
+  "capabilityGraphSurfaces": [
+    "bulbapedia-mediawiki",
+    "tcgdex-api"
+  ],
+  "requests": [
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-nl-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "nl",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "nl",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-nl-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 3,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-pl-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "pl",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "pl",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-pl-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 2,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "bulbapedia-historical-language-index",
+      "adapterVersion": "1.0.0",
+      "sliceId": "bulbapedia-historical-ru-sets",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "coverageEdgeId": "bulbapedia-historical-index-positive",
+      "endpoint": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&oldid=4567865&prop=wikitext&format=json&formatversion=2",
+      "queryParameters": {
+        "rawLocale": "ru",
+        "resource": "English-set language column",
+        "pageTitle": "List of Pokémon Trading Card Game expansions in other languages",
+        "revisionId": 4567865
+      },
+      "rawLocale": "ru",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/bulbapedia-historical-ru-sets.json",
+      "responseHash": "sha256:e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+      "recordCount": 9,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-de-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/de/sets",
+      "queryParameters": {
+        "rawLocale": "de",
+        "resource": "sets"
+      },
+      "rawLocale": "de",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-de-sets.json",
+      "responseHash": "sha256:8ae0c32079134da955ca134b16192dd7c48a8ea8fcbf0c5e1bc3973bd61ee42f",
+      "recordCount": 153,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-en-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/en/sets",
+      "queryParameters": {
+        "rawLocale": "en",
+        "resource": "sets"
+      },
+      "rawLocale": "en",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-en-sets.json",
+      "responseHash": "sha256:b899d0e60db121724baa2b12d2f8ad69ad5d8682a64bbd091f94e0d0bcd1ca39",
+      "recordCount": 218,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-es-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/es/sets",
+      "queryParameters": {
+        "rawLocale": "es",
+        "resource": "sets"
+      },
+      "rawLocale": "es",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-es-sets.json",
+      "responseHash": "sha256:e74b3cd05b18362b132d94592f09db20674d9ed91b6ae363d517c333b7cb4721",
+      "recordCount": 154,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-fr-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/fr/sets",
+      "queryParameters": {
+        "rawLocale": "fr",
+        "resource": "sets"
+      },
+      "rawLocale": "fr",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-fr-sets.json",
+      "responseHash": "sha256:f972fc3e275168fbc8160fbfd11f0ce4a75f793669ea961610a8fc4c99be7eaf",
+      "recordCount": 200,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-id-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/id/sets",
+      "queryParameters": {
+        "rawLocale": "id",
+        "resource": "sets"
+      },
+      "rawLocale": "id",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-id-sets.json",
+      "responseHash": "sha256:78d4560dd992df4e5813dd8a9322c8a75f6185a86bcda6f88812990c0c27a3c9",
+      "recordCount": 70,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-it-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/it/sets",
+      "queryParameters": {
+        "rawLocale": "it",
+        "resource": "sets"
+      },
+      "rawLocale": "it",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-it-sets.json",
+      "responseHash": "sha256:5afe369cd399452ce49b1efd433a982a775d3b38ef686011e46ea8f2c28f520b",
+      "recordCount": 191,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-ja-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ja/sets",
+      "queryParameters": {
+        "rawLocale": "ja",
+        "resource": "sets"
+      },
+      "rawLocale": "ja",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-ja-sets.json",
+      "responseHash": "sha256:7f6a4c31dfd3344523f9565796a39fe01f98033acfd5dfb1b7498255131b0770",
+      "recordCount": 184,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-ko-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/ko/sets",
+      "queryParameters": {
+        "rawLocale": "ko",
+        "resource": "sets"
+      },
+      "rawLocale": "ko",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-ko-sets.json",
+      "responseHash": "sha256:d01d0ffe6e648721c09f38237a034be2b5293cd5ebf85f10bf1a3fe2fc45eb75",
+      "recordCount": 95,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-pt-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-west-positive",
+      "endpoint": "https://api.tcgdex.net/v2/pt/sets",
+      "queryParameters": {
+        "rawLocale": "pt",
+        "resource": "sets"
+      },
+      "rawLocale": "pt",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-pt-sets.json",
+      "responseHash": "sha256:cf52452e7dc81f427ae9e51fdb9aba6000700578d68731324c30d977350961f7",
+      "recordCount": 123,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-th-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/th/sets",
+      "queryParameters": {
+        "rawLocale": "th",
+        "resource": "sets"
+      },
+      "rawLocale": "th",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-th-sets.json",
+      "responseHash": "sha256:70d9a61adfe65967d664551fd3e431669d2e90f307a72119a2aa142499581717",
+      "recordCount": 72,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-zh-cn-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-cn/sets",
+      "queryParameters": {
+        "rawLocale": "zh-cn",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-cn",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-zh-cn-sets.json",
+      "responseHash": "sha256:94ba5b19e09fe32a267ea8008e32fd3beb9930effd1d46bafcf33ff2bdd1c6e1",
+      "recordCount": 57,
+      "pageCount": 1,
+      "error": null
+    },
+    {
+      "runId": "20260910T160000Z",
+      "adapterId": "tcgdex-local-set-list",
+      "adapterVersion": "1.1.0",
+      "sliceId": "tcgdex-zh-tw-sets",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "coverageEdgeId": "tcgdex-asia-thin-positive",
+      "endpoint": "https://api.tcgdex.net/v2/zh-tw/sets",
+      "queryParameters": {
+        "rawLocale": "zh-tw",
+        "resource": "sets"
+      },
+      "rawLocale": "zh-tw",
+      "retrievedAt": "2026-09-10T07:39:29Z",
+      "checkpoint": {
+        "page": 1,
+        "nextCursor": null,
+        "complete": true
+      },
+      "httpStatus": 200,
+      "rawPath": "raw/tcgdex-zh-tw-sets.json",
+      "responseHash": "sha256:86f84faf326fe423ace25829f09a25bfb82af40ff5daae6b7a25be1faaea7f29",
+      "recordCount": 98,
+      "pageCount": 1,
+      "error": null
+    }
+  ],
+  "failures": []
+}
