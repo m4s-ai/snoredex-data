@@ -1,3 +1,4 @@
+<!-- doc: role=retained release research and evidence boundaries; stage=reference -->
 # 30th Celebration — retained research, 2026-09-10
 
 Eleven localized Snorlax renders are retained as SPEC-0507–SPEC-0517. Local product pages announce 2026-09-16; these are announced releases, not already-released inventory.
