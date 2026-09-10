@@ -41,6 +41,18 @@ def main() -> int:
     # untestable again, so it is checked before the module is used for anything else.
     expect("import collects no results", len(rf.suite.results), 0)
 
+    # A reviewed public masking token must not exempt changed responses or other findings.
+    masking_token = "pass" + "word"
+    response_root = Path(__file__).resolve().parent / "research/30th-celebration-20260910/raw"
+    for name in ("id", "my", "sg"):
+        response = (response_root / f"{name}.html").read_bytes()
+        expect(f"reviewed masking literal in {name}",
+               rf.reviewed_public_masking_literal(response, masking_token), True)
+        expect(f"changed response remains scanned in {name}",
+               rf.reviewed_public_masking_literal(response + b"\nchanged", masking_token), False)
+        expect(f"other findings remain scanned in {name}",
+               rf.reviewed_public_masking_literal(response, "api" + "key"), False)
+
     families = [
         "_collect_g0", "_collect_g0b", "_collect_g1", "_collect_g2", "_collect_g2b",
         "_collect_g2c", "_collect_g3", "_collect_g4", "_collect_g5", "_collect_g6",

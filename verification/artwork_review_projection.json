@@ -3,21 +3,21 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-09",
-  "projectionVersion": "ba54c74f0966c0036a2c392e74b20011887dd75ca790cbdd1a147fdba6aa14a2",
+  "generated": "2026-09-10",
+  "projectionVersion": "d040539eb31617b7926176dbfbe9d9141f874ca1e785f41bfd40ce1bbbfff105",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 245,
-    "mappedWorks": 41,
-    "imageGroups": 243,
+    "groups": 256,
+    "mappedWorks": 42,
+    "imageGroups": 254,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 2,
-    "cardReleases": 631,
+    "cardReleases": 642,
     "physicalPrintings": 745,
-    "sourceObservations": 2879
+    "sourceObservations": 2901
   },
   "groups": [
     {
@@ -29633,6 +29633,996 @@
               "evidence": "Complete official Thai render for Snorlax MA4 091/123 (base). The printed Thai name, collector identity, attacks and rarity C establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "ab1acb30aaad78eb607a98771ec9d51273090cea60500cd5785aea5c9c1636db",
               "image": "verification/specimens/SPEC-0277.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:224af9930192b03729651ff2",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:224af9930192b03729651ff2",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:224af9930192b03729651ff2",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "ID",
+          "language": "Indonesian",
+          "script": "Latn",
+          "setEditionId": "EDITION:ID:Indonesian:MA6 I",
+          "localSetCode": "MA6 I",
+          "localNumber": "121/130",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://asia.pokemon-card.com/id/archive/special/card/ma6/images/locale/id/cards/ma6_121oijsy4ia_IDN.png",
+              "label": "publisher card image",
+              "observationId": "source-first:ID:MA6 I:121/130:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0517.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0517",
+              "contentHash": "224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208",
+              "previewSrc": "images/previews/SPEC-0517.png?v=224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208",
+              "thumbnailSrc": "images/thumbs/SPEC-0517.png?v=224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:ID:MA6 I:121/130:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-asia",
+              "url": "https://asia.pokemon-card.com/id/archive/special/card/ma6/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "7d67e07bcd2e7f1649f50abc61c914a6df38acc4e0a0b86e5d1ffc5d81a1f410",
+              "image": "https://asia.pokemon-card.com/id/archive/special/card/ma6/images/locale/id/cards/ma6_121oijsy4ia_IDN.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0517",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/id/archive/special/card/ma6/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "7491b82c7228235fe9be7db908d7a600760f7a0e1f41186b755eee0a024e5705",
+              "image": "verification/specimens/SPEC-0517.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:2f8637bef19f5c155423ea1f",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:2f8637bef19f5c155423ea1f",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:French:30C FR:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:2f8637bef19f5c155423ea1f",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "French",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:French:30C FR",
+          "localSetCode": "30C FR",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Ronflex",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/fr-fr/2M6P_FR_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C FR:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0509.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0509",
+              "contentHash": "2f8637bef19f5c155423ea1f8bc05fbc6ecb071a447b9bc72cd493da00a72139",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "2f8637bef19f5c155423ea1f8bc05fbc6ecb071a447b9bc72cd493da00a72139",
+              "previewSrc": "images/previews/SPEC-0509.png?v=2f8637bef19f5c155423ea1f8bc05fbc6ecb071a447b9bc72cd493da00a72139",
+              "thumbnailSrc": "images/thumbs/SPEC-0509.png?v=2f8637bef19f5c155423ea1f8bc05fbc6ecb071a447b9bc72cd493da00a72139"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C FR:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "af9c539b55d98f6080402acccd49449e9e8d584d765ab95f4d2ce0edb0eaa1d6",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/fr-fr/2M6P_FR_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0509",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "a86b0e12f8f0b159cd3a670578af401be7155767b4db2862379580febd4425ef",
+              "image": "verification/specimens/SPEC-0509.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:39c3a4b0beed8880f3ec54fa",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:39c3a4b0beed8880f3ec54fa",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:English:30C EN:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:39c3a4b0beed8880f3ec54fa",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "English",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:English:30C EN",
+          "localSetCode": "30C EN",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/en-us/2M6P_EN_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C EN:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0507.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0507",
+              "contentHash": "39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd",
+              "previewSrc": "images/previews/SPEC-0507.png?v=39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd",
+              "thumbnailSrc": "images/thumbs/SPEC-0507.png?v=39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C EN:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/en-us/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "b9f05b2137bdb98229d366851577fcfde5470340a1548b671490077a81ceb0a1",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/en-us/2M6P_EN_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0507",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/en-us/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "af3a222d21f905619e719dcdfca88626c5da0571798a314e336a60ab0aac7346",
+              "image": "verification/specimens/SPEC-0507.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:5e9e391d9ff0c3c91208c8a2",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:5e9e391d9ff0c3c91208c8a2",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TW:T-Chinese:M6a F:095/103:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:5e9e391d9ff0c3c91208c8a2",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "script": "Hant",
+          "setEditionId": "EDITION:TW:T-Chinese:M6a F",
+          "localSetCode": "M6a F",
+          "localNumber": "095/103",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "卡比獸",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png",
+              "label": "publisher card image",
+              "observationId": "source-first:TW:M6a F:095/103:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0515.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0515",
+              "contentHash": "5e9e391d9ff0c3c91208c8a287f9a9479a06640827e708154930b88fadae0e59",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "5e9e391d9ff0c3c91208c8a287f9a9479a06640827e708154930b88fadae0e59",
+              "previewSrc": "images/previews/SPEC-0515.png?v=5e9e391d9ff0c3c91208c8a287f9a9479a06640827e708154930b88fadae0e59",
+              "thumbnailSrc": "images/thumbs/SPEC-0515.png?v=5e9e391d9ff0c3c91208c8a287f9a9479a06640827e708154930b88fadae0e59"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:TW:M6a F:095/103:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-asia",
+              "url": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "79775da715b2cc12583ee0b4689cfd4592b2b3d9063fa490f3ff9ef8f8cbd48b",
+              "image": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0515",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "796cafcdc9826f89c07d5ce1218bf13255de0164c8209d3950664d42c5a3bfd7",
+              "image": "verification/specimens/SPEC-0515.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:7129c73403f0c5c9882da7e2",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:7129c73403f0c5c9882da7e2",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:Italian:30C IT:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:7129c73403f0c5c9882da7e2",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "Italian",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:Italian:30C IT",
+          "localSetCode": "30C IT",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/it-it/2M6P_IT_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C IT:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0510.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0510",
+              "contentHash": "7129c73403f0c5c9882da7e27ef170672b40529c06cf87f6bd48a1c244e59aff",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7129c73403f0c5c9882da7e27ef170672b40529c06cf87f6bd48a1c244e59aff",
+              "previewSrc": "images/previews/SPEC-0510.png?v=7129c73403f0c5c9882da7e27ef170672b40529c06cf87f6bd48a1c244e59aff",
+              "thumbnailSrc": "images/thumbs/SPEC-0510.png?v=7129c73403f0c5c9882da7e27ef170672b40529c06cf87f6bd48a1c244e59aff"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C IT:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/it-it/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "f6a7e7fa28994f40b0ad6cfc763c65a6470b6215ce66521fcfc27c2bc2c87c01",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/it-it/2M6P_IT_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0510",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/it-it/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "a31a09fc30d6effe2453755926abb5b013e840d5fa136dc11c4e0eab25178d01",
+              "image": "verification/specimens/SPEC-0510.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:71e112bcee942776cbbeb16f",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:71e112bcee942776cbbeb16f",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:German:30C DE:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:71e112bcee942776cbbeb16f",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "German",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:German:30C DE",
+          "localSetCode": "30C DE",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Relaxo",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/de-de/2M6P_DE_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C DE:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0508.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0508",
+              "contentHash": "71e112bcee942776cbbeb16fe675b10444d5d46127512c60e01dbb63175bba5e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "71e112bcee942776cbbeb16fe675b10444d5d46127512c60e01dbb63175bba5e",
+              "previewSrc": "images/previews/SPEC-0508.png?v=71e112bcee942776cbbeb16fe675b10444d5d46127512c60e01dbb63175bba5e",
+              "thumbnailSrc": "images/thumbs/SPEC-0508.png?v=71e112bcee942776cbbeb16fe675b10444d5d46127512c60e01dbb63175bba5e"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C DE:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/de-de/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "b980d3a48086178bf240d45677d3e5dbf17c0a27e01f5473ebec54fb60158c96",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/de-de/2M6P_DE_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0508",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/de-de/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "fce52101147b3ca093e7d26462b1694e52619f16b7a296dd434f8b33302216e7",
+              "image": "verification/specimens/SPEC-0508.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:aa7e719122b3e2839dfcd3b4",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:aa7e719122b3e2839dfcd3b4",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:JP:Japanese:M6a:095/103:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:aa7e719122b3e2839dfcd3b4",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "JP",
+          "language": "Japanese",
+          "script": "Jpan",
+          "setEditionId": "EDITION:JP:Japanese:M6a",
+          "localSetCode": "M6a",
+          "localNumber": "095/103",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "カビゴン",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://www.30th.pokemon-card.com/images/m6a/cards/m6a_095_dl0fwwpi.png",
+              "label": "publisher card image",
+              "observationId": "source-first:JP:M6a:095/103:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0514.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0514",
+              "contentHash": "aa7e719122b3e2839dfcd3b46a0454ceab0fb6b04cc0d98763446136c5130aef",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "aa7e719122b3e2839dfcd3b46a0454ceab0fb6b04cc0d98763446136c5130aef",
+              "previewSrc": "images/previews/SPEC-0514.png?v=aa7e719122b3e2839dfcd3b46a0454ceab0fb6b04cc0d98763446136c5130aef",
+              "thumbnailSrc": "images/thumbs/SPEC-0514.png?v=aa7e719122b3e2839dfcd3b46a0454ceab0fb6b04cc0d98763446136c5130aef"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:JP:M6a:095/103:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-jp",
+              "url": "https://www.30th.pokemon-card.com/product/m6a",
+              "evidence": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "1239d052387eabc758006b75fe370176e8f9e162f1fe7cb001cf6df5487aea58",
+              "image": "https://www.30th.pokemon-card.com/images/m6a/cards/m6a_095_dl0fwwpi.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0514",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.30th.pokemon-card.com/product/m6a",
+              "evidence": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "ce501b9f45dc5b66531a710d6ce84438c19db305739cd7bec48bf51163e9808f",
+              "image": "verification/specimens/SPEC-0514.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:b2600ec666d0c8e8bdbe3e1d",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:b2600ec666d0c8e8bdbe3e1d",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:Spanish:30C ES:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:b2600ec666d0c8e8bdbe3e1d",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "Spanish",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:Spanish:30C ES",
+          "localSetCode": "30C ES",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-es/2M6P_ES_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C ES:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0511.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0511",
+              "contentHash": "b2600ec666d0c8e8bdbe3e1d23ce808c7f96edf2a8880e3b746e0fbabd471507",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b2600ec666d0c8e8bdbe3e1d23ce808c7f96edf2a8880e3b746e0fbabd471507",
+              "previewSrc": "images/previews/SPEC-0511.png?v=b2600ec666d0c8e8bdbe3e1d23ce808c7f96edf2a8880e3b746e0fbabd471507",
+              "thumbnailSrc": "images/thumbs/SPEC-0511.png?v=b2600ec666d0c8e8bdbe3e1d23ce808c7f96edf2a8880e3b746e0fbabd471507"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C ES:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/es-es/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "23fb6deede9403b9cf7763b0083ab481d51b99c5bb819dfa070f3e930a0d12e4",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-es/2M6P_ES_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0511",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/es-es/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "0379416c06a44e11accf4fa0c0bd0b667c9abcb0d89fa7bbc9d19d67c1453455",
+              "image": "verification/specimens/SPEC-0511.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:ce69ea1db55ebc3c83dce901",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:ce69ea1db55ebc3c83dce901",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:ce69ea1db55ebc3c83dce901",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "setEditionId": "EDITION:TH:Thai:MA6 T",
+          "localSetCode": "MA6 T",
+          "localNumber": "121/130",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "คาบิกอน",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://asia.pokemon-card.com/th/archive/special/card/ma6/images/locale/th/cards/ma6_121oijsy4ia_TH.png",
+              "label": "publisher card image",
+              "observationId": "source-first:TH:MA6 T:121/130:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0516.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0516",
+              "contentHash": "ce69ea1db55ebc3c83dce901fe903b5cc7bb9b866457deac24fb3c6841c76ea7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "ce69ea1db55ebc3c83dce901fe903b5cc7bb9b866457deac24fb3c6841c76ea7",
+              "previewSrc": "images/previews/SPEC-0516.png?v=ce69ea1db55ebc3c83dce901fe903b5cc7bb9b866457deac24fb3c6841c76ea7",
+              "thumbnailSrc": "images/thumbs/SPEC-0516.png?v=ce69ea1db55ebc3c83dce901fe903b5cc7bb9b866457deac24fb3c6841c76ea7"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:TH:MA6 T:121/130:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-asia",
+              "url": "https://asia.pokemon-card.com/th/archive/special/card/ma6/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "68d51161b1310568a127ac9a694d6d7c678b78720dd36e97a2b31d1000655e9c",
+              "image": "https://asia.pokemon-card.com/th/archive/special/card/ma6/images/locale/th/cards/ma6_121oijsy4ia_TH.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0516",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://asia.pokemon-card.com/th/archive/special/card/ma6/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "0459684f2cf4ba4b0e8d1715e6d836315ee0adf23474bebacdd6664b46c1fc28",
+              "image": "verification/specimens/SPEC-0516.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:edbe6ba6eded294ddd655eb1",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:edbe6ba6eded294ddd655eb1",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:WEST:Portuguese:30C PT:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:edbe6ba6eded294ddd655eb1",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "WEST",
+          "language": "Portuguese",
+          "script": "Latn",
+          "setEditionId": "EDITION:WEST:Portuguese:30C PT",
+          "localSetCode": "30C PT",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/pt-br/2M6P_PTBR_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:WEST:30C PT:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0513.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0513",
+              "contentHash": "edbe6ba6eded294ddd655eb14a8d646b223c05e8ed723a6c96a6fab6b99c8c56",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "edbe6ba6eded294ddd655eb14a8d646b223c05e8ed723a6c96a6fab6b99c8c56",
+              "previewSrc": "images/previews/SPEC-0513.png?v=edbe6ba6eded294ddd655eb14a8d646b223c05e8ed723a6c96a6fab6b99c8c56",
+              "thumbnailSrc": "images/thumbs/SPEC-0513.png?v=edbe6ba6eded294ddd655eb14a8d646b223c05e8ed723a6c96a6fab6b99c8c56"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:WEST:30C PT:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "12b561939df809db621f71553a72cc266aca3f80022c343b83fba2751706e6c8",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/pt-br/2M6P_PTBR_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0513",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "92f45e21e8e8e14b5a8f57fefb70689ecaa77162db8722169593934f75162114",
+              "image": "verification/specimens/SPEC-0513.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:f916055bd99b61ecde44e501",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:f916055bd99b61ecde44e501",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:LATAM:Spanish:30C LA:119/128:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:f916055bd99b61ecde44e501",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "LATAM",
+          "language": "Spanish",
+          "script": "Latn",
+          "setEditionId": "EDITION:LATAM:Spanish:30C LA",
+          "localSetCode": "30C LA",
+          "localNumber": "119/128",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "Snorlax",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-mx/2M6P_LA_119-2x.png",
+              "label": "publisher card image",
+              "observationId": "source-first:LATAM:30C LA:119/128:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0512.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0512",
+              "contentHash": "f916055bd99b61ecde44e50129250183e65e1eca729144112b2b902ea5ffee72",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f916055bd99b61ecde44e50129250183e65e1eca729144112b2b902ea5ffee72",
+              "previewSrc": "images/previews/SPEC-0512.png?v=f916055bd99b61ecde44e50129250183e65e1eca729144112b2b902ea5ffee72",
+              "thumbnailSrc": "images/thumbs/SPEC-0512.png?v=f916055bd99b61ecde44e50129250183e65e1eca729144112b2b902ea5ffee72"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:LATAM:30C LA:119/128:base",
+              "kind": "source-first",
+              "provider": "pokemon-official",
+              "url": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "db2160d7f1f48c17cd693875330a810b715174bc3c6849a48a389a36dde8d875",
+              "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-mx/2M6P_LA_119-2x.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0512",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration/",
+              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+              "contentHash": "a898e1dd692cf721ad6a0fab3d287772739a0837189bac84ae2044f6c31c4b82",
+              "image": "verification/specimens/SPEC-0512.png"
             }
           ]
         }

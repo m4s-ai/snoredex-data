@@ -184,9 +184,9 @@ def main() -> None:
     }, "the owner photograph establishes exactly the three named Promo-card printings"
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
-        ("ID", "pokemon-card-asia"): 30,
-        ("TH", "pokemon-card-asia"): 25,
-        ("TW", "pokemon-card-asia"): 40,
+        ("ID", "pokemon-card-asia"): 31,
+        ("TH", "pokemon-card-asia"): 26,
+        ("TW", "pokemon-card-asia"): 41,
     }
     independently_corroborated_prints = {
         "KR:BS2:30/40:base", "KR:S-P:101:base", "KR:BW7:055/070:base",

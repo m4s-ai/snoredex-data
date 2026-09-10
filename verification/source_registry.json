@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-09",
+  "generated": "2026-09-10",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1600,
-   "uniqueUrls": 1593,
+   "evidenceRecords": 1622,
+   "uniqueUrls": 1615,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6106
+   "claimsAttributed": 6172
   }
  },
  "providers": [
@@ -37,10 +37,12 @@
    "hosts": [
     "assets.pokemon.com",
     "d1wx537rtdixyy.cloudfront.net",
-    "www.pokemon.com"
+    "www.pokemon.com",
+    "tcg.pokemon.com",
+    "dz3we2x72f7ol.cloudfront.net"
    ],
-   "uniqueSources": 123,
-   "claimsSupported": 430
+   "uniqueSources": 137,
+   "claimsSupported": 472
   },
   {
    "providerId": "pokemon-cn-official",
@@ -86,10 +88,12 @@
    "notes": "Never returns Japanese secret/rainbow prints; their absence is not evidence.",
    "hosts": [
     "www.pokemon-card.com",
-    "pokemon-card.com"
+    "pokemon-card.com",
+    "www.30th.pokemon-card.com",
+    "30th.pokemon-card.com"
    ],
-   "uniqueSources": 37,
-   "claimsSupported": 83
+   "uniqueSources": 39,
+   "claimsSupported": 89
   },
   {
    "providerId": "pokemon-card-asia",
@@ -109,8 +113,8 @@
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 192,
-   "claimsSupported": 704
+   "uniqueSources": 198,
+   "claimsSupported": 722
   },
   {
    "providerId": "pokemon-card-korea",
@@ -13726,6 +13730,44 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/archive/special/card/ma6",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:MA6 I:121/130:base",
+    "SPEC-0517"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/archive/special/card/ma6/images/locale/id/cards/ma6_121oijsy4ia_IDN.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:MA6 I:121/130:base",
+    "SPEC-0517"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00000454.png",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -14900,6 +14942,44 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/archive/special/card/ma6",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0516",
+    "TH:MA6 T:121/130:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/archive/special/card/ma6/images/locale/th/cards/ma6_121oijsy4ia_TH.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0516",
+    "TH:MA6 T:121/130:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00000127.png",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -15890,6 +15970,44 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0515",
+    "TW:M6a F:095/103:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0515",
+    "TW:M6a F:095/103:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00000375.png",
@@ -17575,6 +17693,44 @@
    ],
    "retrievedAt": null,
    "usageCount": 36
+  },
+  {
+   "canonicalUrl": "https://www.30th.pokemon-card.com/images/m6a/cards/m6a_095_dl0fwwpi.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-jp",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "JP:M6a:095/103:base",
+    "SPEC-0514"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.30th.pokemon-card.com/product/m6a",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-jp",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "JP:M6a:095/103:base",
+    "SPEC-0514"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all",
@@ -22612,6 +22768,272 @@
     "override:prize-pack-series-8-checklist-pt-br"
    ],
    "retrievedAt": "2026-08-26",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/de-de/2M6P_DE_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0508",
+    "WEST:30C DE:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/en-us/2M6P_EN_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0507",
+    "WEST:30C EN:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-es/2M6P_ES_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0511",
+    "WEST:30C ES:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-mx/2M6P_LA_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "LATAM:30C LA:119/128:base",
+    "SPEC-0512"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/fr-fr/2M6P_FR_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0509",
+    "WEST:30C FR:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/it-it/2M6P_IT_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0510",
+    "WEST:30C IT:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/pt-br/2M6P_PTBR_119-2x.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0513",
+    "WEST:30C PT:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/de-de/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0508",
+    "WEST:30C DE:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/en-us/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0507",
+    "WEST:30C EN:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/es-es/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0511",
+    "WEST:30C ES:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "LATAM:30C LA:119/128:base",
+    "SPEC-0512"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0509",
+    "WEST:30C FR:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/it-it/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0510",
+    "WEST:30C IT:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Official localized card-gallery render; not an owner-held physical specimen",
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0513",
+    "WEST:30C PT:119/128:base"
+   ],
+   "retrievedAt": "2026-09-10",
    "usageCount": 3
   },
   {

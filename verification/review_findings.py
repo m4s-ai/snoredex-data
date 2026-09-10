@@ -58,6 +58,25 @@ SENSITIVE_SCAN_EXEMPT = frozenset({
 })
 
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
+
+# Reviewed 30th campaign HTML embeds public New Relic input-masking code. Its three
+# password literals are a type comparison and two boolean mask settings, not secrets.
+# Pin exact blobs (including the two LF-normalized versions in local commit history).
+# Never exempt paths, changed bytes, or other findings in these same responses.
+PUBLIC_MASKING_RESPONSE_HASHES = frozenset({
+    "48636dd43d1fd020e2744e840bc9b1723f92597b265ac96a251b5d5da67852ab",  # id
+    "baa1867e8814b378e29f6fb19f10a88f2ef8e05fa4482a0fbc983286c78b6e21",  # my
+    "d92677a3eda4616ae93d206f80f0208a3f206b09ec2b12de30bac60d9b66ad74",  # sg
+    "ced799972589624e94060523d73cef76df7cfe8b13d2c5875e2060166a49598a",  # my, LF
+    "13f027aa3714b87e61d08eb0e625cd0e21d38131f4add7dd6002b5ee48ae45bb",  # sg, LF
+})
+
+
+def reviewed_public_masking_literal(data: bytes, found: str) -> bool:
+    """Accept only the reviewed masking token in these exact public responses."""
+    return found == "password" and hashlib.sha256(data).hexdigest() in PUBLIC_MASKING_RESPONSE_HASHES
+
+
 DOC_HEADER = re.compile(
     r"<!--\s*doc:\s*role=(?P<role>[^;\r\n]+)(?:;|\r?\n)\s*"
     r"stage=(?P<stage>[^\s>]+)\s*-->"
@@ -2374,6 +2393,9 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
                             matches.append(match)
                         at = text.find("@", at + 1)
 
+                matches = filter(
+                    lambda match: not reviewed_public_masking_literal(data, match.group(0)), matches
+                )
                 found_hits = []
                 for match in sorted(matches, key=lambda row: row.start()):
                     found = match.group(0)
