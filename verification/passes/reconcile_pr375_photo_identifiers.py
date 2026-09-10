@@ -2,7 +2,7 @@
 import json
 from copy import deepcopy
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urlsplit
 
 from admit_issue257_simplified_chinese_20260827 import (
     append_unique, source_profile, upsert_edge, upsert_entity, upsert_migration,
@@ -35,6 +35,15 @@ def replace_refs(value, old, new):
     if isinstance(value, list):
         return [replace_refs(v, old, new) for v in value]
     return new if value == old else value
+
+
+def specimen_evidence_url(specimen):
+    for field in ("photographSource", "listingUrl"):
+        value = specimen.get(field) or ""
+        parsed = urlsplit(value)
+        if parsed.scheme in {"http", "https"} and parsed.netloc:
+            return value
+    raise ValueError("specimen equivalence requires a navigable evidence URL")
 
 
 def main():
@@ -144,7 +153,7 @@ def main():
         mapping = next((m for m in question["mappings"] if m["legacyUnitId"] == uid and m["sourceFirstRecordId"] == pid), None)
         if mapping is None:
             mapping = {"legacyUnitId": uid, "sourceFirstRecordId": pid, "assertionType": "same-work-decision", "assertedBy": "repository verification pass",
-                       "assertedAt": DATE, "evidenceUrl": spec["photographSource"], "evidence": f"{sid} identifies the printed local code, number and matching attacks."}
+                       "assertedAt": DATE, "evidenceUrl": specimen_evidence_url(spec), "evidence": f"{sid} identifies the printed local code, number and matching attacks."}
             question["mappings"].append(mapping)
         aid = f"ASSERT:same-work:{uid}:{pid}"
         assertion = {**mapping, "assertionId": aid, "fromId": rid, "toId": "WORK:" + release["work"], "destructiveMergeAllowed": False}

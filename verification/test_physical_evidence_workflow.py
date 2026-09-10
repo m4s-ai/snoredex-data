@@ -43,6 +43,10 @@ def finish_projector():
 
 
 def main() -> None:
+    for question in read("legacy_issue_rekeys.json")["questionSets"]:
+        for mapping in question["mappings"]:
+            parsed = urlparse(mapping.get("evidenceUrl") or "")
+            assert parsed.scheme in {"http", "https"} and parsed.netloc, mapping
     projector = finish_projector()
     printings = []
     for edition, finish, variant in (("1st Edition", "non-holo", "V2"),
