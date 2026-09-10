@@ -46,6 +46,17 @@ any visibly demonstrated finish. A product/language filter combination is not ev
 localized card exists under that collector number; the selected language cannot be projected onto
 a card image printed in another language. Neither filters nor missing images establish absence.
 
+### Western Jungle Snorlax: number identifies finish
+
+The collection owner explicitly reconfirmed on 2026-09-10: **Jungle 11/64 is Holo,
+27/64 is Non-Holo in all Western languages**, independently of 1st Edition or Unlimited.
+Use the readable set/card identity and this established mapping; do not request a
+reflection photograph for these two cards. This is positive identity-based evidence,
+not an inference from missing reflections. Apply it to an established localized release;
+it does not create a language or edition merely because another printing exists.
+The retained owner source is `owner-jungle-number-finish-20260910` in
+`finish_overrides.json`. Edition still follows the pictured stamp/complete edition area.
+
 ### Recording what a scan shows (#150)
 
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record

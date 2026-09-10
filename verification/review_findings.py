@@ -143,6 +143,14 @@ def norm_number(value: Any) -> str:
     return str(value or "")
 
 
+def specimen_number_matches(left: object, right: object) -> bool:
+    """Compare collector numbers; a missing denominator is not a conflicting one."""
+    a, b = str(left).split("/", 1), str(right).split("/", 1)
+    return a[0].lstrip("0") == b[0].lstrip("0") and (
+        len(a) == 1 or len(b) == 1 or a[1].lstrip("0") == b[1].lstrip("0")
+    )
+
+
 def specimen_matches_unit(
     specimen: dict[str, Any],
     unit: dict[str, Any],
@@ -151,7 +159,7 @@ def specimen_matches_unit(
     """Accept a literal identity or a reviewed legacy-to-local release rekey."""
     literal_match = (
         specimen["setCode"] == unit["setCode"]
-        and specimen["number"] == str(unit["number"])
+        and specimen_number_matches(specimen["number"], unit["number"])
         and specimen["variant"] == (unit.get("variant") or "base")
         and specimen["language"] == unit["language"]
     )

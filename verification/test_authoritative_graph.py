@@ -275,10 +275,16 @@ def main() -> None:
     specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
     release = {"localSetCode": "s5a I", "localNumber": "093/070", "language": "Indonesian",
                "legacyIdentityAliases": [["s5a", "93"]], "legacyCounterpartUnitIds": ["U0603"]}
-    assert graph_module._specimen_has_cited_legacy_identity(specimen, release)
+    units_by_id = {"U0603": {**specimen, "number": "93"}}
+    assert graph_module._specimen_has_cited_legacy_identity(specimen, release, units_by_id)
     for changed in ({"language": "Thai"}, {"number": "94/070"}, {"citedBy": ["U0602"]}, {"setCode": "s4"}):
-        assert not graph_module._specimen_has_cited_legacy_identity({**specimen, **changed}, release)
-    assert not graph_module._specimen_has_cited_legacy_identity(specimen, {**release, "legacyIdentityAliases": []})
+        assert not graph_module._specimen_has_cited_legacy_identity({**specimen, **changed}, release, units_by_id)
+    assert not graph_module._specimen_has_cited_legacy_identity(specimen, {**release, "legacyIdentityAliases": []}, units_by_id)
+    # An alias and a citation on the same coalesced release must belong together.
+    merged = {**release, "legacyIdentityAliases": [["s5a", "93"], ["xs5a", "93"]], "legacyCounterpartUnitIds": ["U0603", "neighbour"]}
+    units_by_id["neighbour"] = {**specimen, "setCode": "xs5a"}
+    assert not graph_module._specimen_has_cited_legacy_identity({**specimen, "citedBy": ["neighbour"]}, merged, units_by_id)
+    assert graph_module._specimen_has_cited_legacy_identity({**specimen, "setCode": "xs5a", "citedBy": ["neighbour"]}, merged, units_by_id)
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
@@ -1019,10 +1025,12 @@ def main() -> None:
                 if row["entityType"] == "physical-printing":
                     row["payload"]["markings"] = graph_module._semantic_markings(row["payload"].get("markings"))
             assert before == after
+        retained_source_id = next(e["payload"]["sourcePrintingId"] for e in graph["entities"]
+                                  if e["entityId"] == "PHYSICAL:F0167-P01")
         shifted = next(
             printing for unit in finish_copy["units"]
             for printing in unit.get("printings", [])
-            if printing.get("printingId") == "F0167-P01"
+            if printing.get("printingId") == retained_source_id
         )
         shifted["printingId"] = "F0167-P99"
         finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
@@ -1294,11 +1302,10 @@ def main() -> None:
         (row["sourceKind"], row["sourceId"]): row
         for row in graph["migrationDispositions"]
     }
-    assert all(
-        migrations[("finish-printing-record", printing_id)]["targetRef"]
-        == f"PHYSICAL:{printing_id}"
-        for printing_id in ("F0167-P01", "F0167-P02", "F0174-P01", "F0174-P02")
-    )
+    for original_id in ("F0167-P01", "F0167-P02", "F0174-P01", "F0174-P02"):
+        physical = next(e["payload"] for e in graph["entities"]
+                        if e["entityId"] == f"PHYSICAL:{original_id}")
+        assert migrations[("finish-printing-record", physical["sourcePrintingId"])]["targetRef"] == f"PHYSICAL:{original_id}"
     u0414 = migrations[("legacy-issue-rekey", "U0414")]
     assert u0414["targetRefs"] == [
         "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",

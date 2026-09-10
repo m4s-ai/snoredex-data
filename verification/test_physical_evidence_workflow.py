@@ -43,6 +43,11 @@ def finish_projector():
 
 
 def main() -> None:
+    from review_findings import specimen_number_matches
+    assert specimen_number_matches("27/64", "27")
+    assert specimen_number_matches("077/071", "77/71")
+    assert not specimen_number_matches("27/64", "27/65")
+    assert not specimen_number_matches("27/64", "11/64")
     specimens = read("specimens.json")["specimens"]
     manifest_specimens: dict[str, list[dict]] = defaultdict(list)
     for manifest_path in (ROOT / "verification" / "evidence").glob("issue-*.json"):
@@ -389,12 +394,13 @@ def main() -> None:
         canonical_source = unquote(specimen["photographSource"])
         registry_row = registry_by_source[canonical_source]
         assert registry_row["providerId"] == provider_id
-        assert registry_row["dimensions"] == ["identity"]
+        expected_dimensions = ["identity", "language"] if specimen_id == "SPEC-0134" else ["identity"]
+        assert registry_row["dimensions"] == expected_dimensions
         assert specimen_id in registry_row["stableIds"]
         assert set(specimen["citedBy"]) <= set(registry_row["stableIds"])
         capability_row = capability_by_source[canonical_source]
         assert capability_row["providerId"] == provider_id
-        assert capability_row["dimensions"] == ["identity"]
+        assert capability_row["dimensions"] == expected_dimensions
     target_specimens = {
         row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
     }
@@ -594,9 +600,9 @@ def main() -> None:
     assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
     spanish_ju11 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0165")
     assert spanish_ju11["availabilityStatus"] == "confirmed"
-    assert len(spanish_ju11["printings"]) == 1
-    spanish_ju11_holo = spanish_ju11["printings"][0]
-    assert spanish_ju11_holo["printingId"] == "F0165-P01"
+    assert all(p["finish"] == "holo" for p in spanish_ju11["printings"])
+    spanish_ju11_holo = next(p for p in spanish_ju11["printings"]
+                            if p.get("specimenIds") == ["SPEC-0129", "SPEC-0130"])
     assert spanish_ju11_holo["finish"] == "holo"
     assert "edition" not in spanish_ju11_holo
     assert spanish_ju11_holo["specimenIds"] == ["SPEC-0129", "SPEC-0130"]
@@ -654,7 +660,7 @@ def main() -> None:
         "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
         "U0434": "2026-07-22T11:00:43", "U0228": "2026-07-22T17:04:58",
         "U0122": "2026-07-21T16:41:51", "U0245": "2026-07-21T16:41:51",
-        "U0482": "2026-07-21T16:56:33", "U0092": "2026-07-21T16:41:51",
+        "U0482": "2026-07-21T16:56:33", "U0092": "2026-09-10",
         "U0229": "2026-07-22T17:04:58", "U0418": "2026-07-21T14:59:21",
         "U0416": "2026-07-21T14:59:21", "U0527": "2026-07-21T14:59:21",
         "U0452": "2026-07-22T00:41:51", "U0294": "2026-07-22T09:26:20",
@@ -673,7 +679,7 @@ def main() -> None:
     }
     assert archive_only_finish_statuses == {
         "F0139": "confirmed",
-        "F0172": "marketplace-claimed",
+        "F0172": "confirmed",
         "F0179": "marketplace-claimed",
         "F0529": "pending",
         "F0635": "pending",

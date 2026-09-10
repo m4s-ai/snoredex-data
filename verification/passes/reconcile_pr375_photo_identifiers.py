@@ -1,4 +1,4 @@
-"""Reconcile three retained photo identities without losing legacy collection references."""
+"""Reconcile retained photo identities without losing legacy collection references."""
 import json
 from copy import deepcopy
 from pathlib import Path
@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[2]
 ORIGIN = "reviewed-photo-identities-pr375"
 DATE = "2026-09-10"
 TARGETS = [
+    ("U0170", "SPEC-0522", "s10a I", "077/071", "CHR", None, 258),
+    ("U0604", "SPEC-0523", "s5a T", "093/070", "UR", None, 262),
     ("U0051", "SPEC-0518", "SV2a I", "181/165", "AR", None, 258),
     ("U0603", "SPEC-0519", "s5a I", "093/070", "UR", None, 258),
     ("U0171", "SPEC-0520", "s10a T", "077/071", "CHR", None, 262),
@@ -74,8 +76,8 @@ def main():
             row = {"printId": pid, "localSetCode": code, "localNumber": number,
                    "variant": "base", "locality": locality, "language": language, "script": script,
                    "cardName": unit["cardName"], "name": unit["cardName"], "specimenId": sid,
-                   "providerId": "seller-listing-photo", "sourceUrl": spec["listingUrl"],
-                   "cardImageUrl": spec["photographSource"] if uid != "U0171" else None, "markAssetUrl": None, "corroborated": False,
+                   "providerId": "seller-listing-photo" if spec["heldBy"] == "third-party seller" else "inspected-specimen", "sourceUrl": spec["listingUrl"],
+                   "cardImageUrl": spec["photographSource"] if spec["photographSource"].startswith("https://") and spec["photographSource"] != spec["listingUrl"] else None, "markAssetUrl": None, "corroborated": False,
                    "retrievedAt": DATE, "releaseDate": None, "releaseDatePrecision": None,
                    "releaseApproximate": False,
                    "evidence": f"specimen:{sid} visibly establishes {code} {number}, {language}, and printed rarity {rarity}. Release date remains unknown."}

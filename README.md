@@ -8,7 +8,7 @@ all-locality catalogue.**
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
-[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-895_items-2563eb)](analysis_checklist.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-898_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -125,10 +125,10 @@ Current-known status snapshot: **2026-09-10**. Its candidate denominator is the 
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 628 externally confirmed, 91 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Evidence-safe application status | **620 established**, **8 needs evidence**, **87 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **895 items** across 174 cards and 15 languages: 820 documented printings plus 75 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 475 externally confirmed, 48 marketplace-only positives, 38 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 142 units. |
-| Evidence registry | **32 providers**, 1629 evidence records, 1622 unique URLs, and 6,212 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Evidence-safe application status | **622 established**, **6 needs evidence**, **87 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Current-known physical checklist | **898 items** across 174 cards and 15 languages: 825 documented printings plus 73 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 478 externally confirmed, 46 marketplace-only positives, 37 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 141 units. |
+| Evidence registry | **32 providers**, 1632 evidence records, 1625 unique URLs, and 6,261 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -176,7 +176,7 @@ throughout this project and is genuinely uncommon:
 | Single tier 1-2 source | 620 |
 | Single tier 3 source | 3 |
 
-623 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 25 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+623 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 26 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
 <!-- /generated:evidence-strength -->
 
 The physical cards behind the non-URL claims have stable ids in
@@ -304,7 +304,7 @@ finish decision may close a unit after review, and that decision never introduce
 | Known available finish | Set-number-language units |
 |---|---:|
 | Non-Holo | 310 |
-| Holo | 236 |
+| Holo | 238 |
 | Reverse Holo family | 239 |
 | Both Non-Holo and Holo | 56 |
 <!-- /generated:finish-coverage -->

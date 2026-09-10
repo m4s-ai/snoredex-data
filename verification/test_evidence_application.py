@@ -121,7 +121,7 @@ def main() -> int:
     by_id = {unit["unitId"]: unit for unit in units}
     # PR #375: a physical photo must also reach its exact language claim.
     specimens = {row["specimenId"]: row for row in load("verification/specimens.json")["specimens"]}
-    for unit_id, specimen_id in {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489"}.items():
+    for unit_id, specimen_id in {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489", "U0170": "SPEC-0522", "U0604": "SPEC-0523", "U0092": "SPEC-0134"}.items():
         unit = by_id[unit_id]
         specimen = specimens[specimen_id]
         assert unit["sourceRef"] == f"specimen:{specimen_id}"

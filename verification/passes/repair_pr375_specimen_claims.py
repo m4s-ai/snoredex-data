@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-TARGETS = {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489"}
+TARGETS = {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489", "U0170": "SPEC-0522", "U0604": "SPEC-0523", "U0092": "SPEC-0134"}
 
 
 def main():
@@ -29,10 +29,13 @@ def main():
         assert int(unit["number"]) == int(specimen["number"].split("/")[0])
         assert (ROOT / "verification/specimens" / specimen["photograph"]).is_file()
         before = dict(unit)
+        provider = {"U0602": "52poke", "U0092": "wikidex", "U0604": "inspected-specimen"}.get(unit["unitId"], "seller-listing-photo")
+        source_type = {"wikidex": "WikiDex exact-card photograph", "52poke": "52poke exact-card image", "inspected-specimen": "Owner-supplied physical photograph"}.get(provider, "Seller listing photograph")
         unit.update(
-            status="confirmed", sourceUrl=specimen["photographSource"],
-            sourceType="Retained exact-card specimen image",
-            providerId="52poke" if unit["unitId"] == "U0602" else "seller-listing-photo", sourceRef=ref, corroborated=False,
+            status="confirmed", sourceUrl=specimen["photographSource"] if specimen["photographSource"].startswith("https://") else None,
+            sourceType=source_type,
+            providerId=provider, sourceRef=ref, corroborated=bool(unit.get("corroborated")),
+
             evidence=f"{ref} establishes the exact {unit['language']} card from its readable face and printed identifier. "
                      "The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
             checkedAt="2026-09-10", evidenceGranularity="specimen-or-card",

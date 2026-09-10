@@ -20,7 +20,7 @@
       "coverageEdges": 52,
       "absenceEdges": 0,
       "observations": 54,
-      "resolvedVerdictSources": 1629
+      "resolvedVerdictSources": 1632
     },
     "surfaceStates": {
       "active": 22,
@@ -1348,7 +1348,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-10",
       "freshnessPolicy": "Retain custody, original images, inspection date and identity comparison for every specimen.",
       "query": {
         "method": "NON_URL",
@@ -1371,7 +1371,8 @@
           "visible finish",
           "foil pattern",
           "marking",
-          "card size"
+          "card size",
+          "visible edition marking"
         ],
         "publicationForm": "identified physical scan or photograph",
         "closedWithinScope": false
@@ -3855,7 +3856,8 @@
         "identity",
         "finish",
         "specimen-existence",
-        "image"
+        "image",
+        "edition"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -4213,7 +4215,8 @@
       "positiveEvidenceCapabilities": [
         "identity",
         "specimen-existence",
-        "image"
+        "image",
+        "language"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -5798,7 +5801,7 @@
       "validatesEdges": [
         "wikidex-positive-scan"
       ],
-      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only.",
+      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only. SPEC-0134 retains readable Spanish text on the exact Jungle 27 card, positively establishing its printed language as well as identity.",
       "rawRecordRef": "verification/source_registry.json:https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
       "rawRecordHash": "sha256:034f8685cfa0d1960b035191983929c9a005be5175b18adfcbea19cc8d7a840d",
       "rawRecord": {
@@ -6438,7 +6441,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:badd11e8150824717d785a5a5e0953d3f2ebaf84f4d2e905dc95b798ab5cdf84",
+      "rawRecordHash": "sha256:5f0fc50bb5ec475de0d17b20cac623ae049afec11775f3b255bb56ccaf54bd97",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -6460,7 +6463,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 138,
+        "stableIdCount": 162,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -6477,8 +6480,25 @@
           "F0140-P01",
           "F0146-P01",
           "F0148-P01",
+          "F0161-P02",
+          "F0162-P02",
+          "F0163-P02",
+          "F0164-P02",
+          "F0165-P02",
           "F0166-P02",
+          "F0166-P03",
+          "F0167-P01",
+          "F0168-P02",
+          "F0169-P02",
+          "F0170-P02",
+          "F0171-P02",
+          "F0172-P02",
+          "F0172-P03",
+          "F0172-P04",
+          "F0173-P02",
+          "F0174-P01",
           "F0289-P02",
+          "F0332-P01",
           "F0402-P02",
           "F0403-P02",
           "F0456-P01",
@@ -6528,6 +6548,7 @@
           "F0616-P01",
           "F0616-P02",
           "ID:AC3a:145/205:base",
+          "ID:s10a I:077/071:base",
           "SPEC-0022",
           "SPEC-0023",
           "SPEC-0053",
@@ -6568,11 +6589,16 @@
           "SPEC-0474",
           "SPEC-0480",
           "SPEC-0521",
+          "SPEC-0522",
+          "SPEC-0524",
+          "SPEC-0525",
           "TH:AS5a:142/184:base",
           "TW:AS5a:142:base",
+          "U0092",
           "U0097",
           "U0098",
           "U0099",
+          "U0170",
           "U0246",
           "U0255",
           "U0297",
@@ -6598,11 +6624,12 @@
           "U0791",
           "U0792",
           "U0793",
+          "override:owner-jungle-number-finish-20260910",
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants"
         ],
         "retrievedAt": "2026-09-10",
-        "usageCount": 154
+        "usageCount": 179
       }
     },
     {
@@ -6621,9 +6648,9 @@
       "validatesEdges": [
         "inspected-specimen-positive"
       ],
-      "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
+      "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:f9a3bdd0f16c89259e3eb27f8bce70ef3e4281237be199b03296fa5b46c3cba3",
+      "rawRecordHash": "sha256:5e62f731835acd7c7efed99a679305fc9851917ffcfe1efe2e2d194c4d5112f8",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -6632,6 +6659,7 @@
           "Inspected card photograph; external origin unknown",
           "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
           "Owner-supplied physical card photograph",
+          "Owner-supplied physical photograph",
           "Physical card, photographed sealed product",
           "Physical card, photographed sealed specimen",
           "Physical card, photographed specimen",
@@ -6642,19 +6670,23 @@
           "retained Cardmarket product scan"
         ],
         "dimensions": [
+          "edition",
           "finish",
           "identity",
           "language"
         ],
-        "stableIdCount": 226,
+        "stableIdCount": 234,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
           "F0125-P02",
+          "F0172-P03",
+          "F0172-P04",
           "F0174-P01",
           "F0247-P02",
           "F0291-P02",
           "F0294-P02",
+          "F0362-P01",
           "F0441-P01",
           "F0456-P01",
           "F0456-P02",
@@ -6790,9 +6822,13 @@
           "SPEC-0479",
           "SPEC-0489",
           "SPEC-0505",
+          "SPEC-0524",
+          "SPEC-0525",
+          "TH:s5a T:093/070:base",
           "TW:SM-P:053:base",
           "TW:s5a F:093/070:base",
           "TW:sc1D F:133/164:base",
+          "U0092",
           "U0100",
           "U0110",
           "U0116",
@@ -6847,6 +6883,7 @@
           "U0585",
           "U0600",
           "U0602",
+          "U0604",
           "U0605",
           "U0608",
           "U0609",
@@ -6876,7 +6913,7 @@
           "U0785"
         ],
         "retrievedAt": "2026-09-10",
-        "usageCount": 376
+        "usageCount": 387
       }
     },
     {
@@ -6897,7 +6934,7 @@
       ],
       "outcome": "The retained seller photograph visibly establishes the Dutch first-edition non-holo printing of Jungle 27/64.",
       "rawRecordRef": "verification/source_registry.json:https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
-      "rawRecordHash": "sha256:049bc5c92066f689a503d15513f5eb713d638536239ae6ad57c3c84d91302835",
+      "rawRecordHash": "sha256:a17960d7987c9d50c7ea94a760f1f56a2923278799dd29ce4d297f140daf804a",
       "rawRecord": {
         "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
         "nonUrlEvidenceId": null,
@@ -6909,9 +6946,10 @@
           "finish",
           "identity"
         ],
-        "stableIdCount": 2,
+        "stableIdCount": 3,
         "stableIds": [
           "F0174-P01",
+          "F0174-P02",
           "SPEC-0042"
         ],
         "retrievedAt": "2026-08-24",
@@ -14647,6 +14685,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "edition",
         "finish",
         "identity",
         "language"
@@ -15012,6 +15051,19 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/262",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -22184,6 +22236,19 @@
       ]
     },
     {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity",
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23553,6 +23618,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -28721,7 +28798,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "identity",
+        "language"
       ]
     },
     {

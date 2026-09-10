@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "8cd9d998fd14d72ed679b4e7186aa59b52219fa16868c9fb00887bf45de64668",
+  "projectionVersion": "39c063a8d49a3ca44c56163cccb738b931c78214e34bf96c5aa5f3a1b7613fa6",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 750,
-    "sourceObservations": 2911
+    "physicalPrintings": 754,
+    "sourceObservations": 2921
   },
   "groups": [
     {
@@ -33737,7 +33737,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:TH:Thai:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "cardReleaseId": "RELEASE:TH:Thai:s5a T:093/070:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
           "cardKey": "Snorlax-Gormandize-Body-Slam",
           "reviewedAppearanceId": null,
@@ -33746,24 +33746,54 @@
           "locality": "TH",
           "language": "Thai",
           "script": "Thai",
-          "setEditionId": "EDITION:TH:Thai:via-s5a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:TH:Thai:s5a T",
+          "localSetCode": "s5a T",
+          "localNumber": "093/070",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0604"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e5e3e1cc2b080b1292708117",
+              "semanticPrintingId": "PRINTING:e5e3e1cc2b080b1292708117",
+              "cardReleaseId": "RELEASE:TH:Thai:s5a T:093/070:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0362",
+              "sourcePrintingId": "F0362-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e5e3e1cc2b080b1292708117",
+              "specimenIds": [
+                "SPEC-0523"
+              ],
+              "sources": [
+                {
+                  "url": "Image supplied by the collection owner on 2026-09-10",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Thai gold Snorlax HP130, Thai name and rules text; printed s5a T, 093/070 UR, regulation D. Fine glittering foil is visible over the gold background and blue body. Image origin and holder were not supplied; no seller or ownership is invented. Retained as SPEC-0523.",
+                  "retrievedAt": "2026-09-10"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
             "finish": [
-              "reverse-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -33781,16 +33811,54 @@
               "originalHash": "58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "previewSrc": "images/previews/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "thumbnailSrc": "images/thumbs/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0523.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0523",
+              "contentHash": "26326881b1b47273c1ebe2eef53b283bd09a918c6bd847f4c1b09e5eaa150f7c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "26326881b1b47273c1ebe2eef53b283bd09a918c6bd847f4c1b09e5eaa150f7c",
+              "previewSrc": "images/previews/SPEC-0523.png?v=26326881b1b47273c1ebe2eef53b283bd09a918c6bd847f4c1b09e5eaa150f7c",
+              "thumbnailSrc": "images/thumbs/SPEC-0523.png?v=26326881b1b47273c1ebe2eef53b283bd09a918c6bd847f4c1b09e5eaa150f7c"
             }
           ],
           "observations": [
             {
+              "observationId": "finish:F0362-P01:0:8addf92c015868b8",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "Image supplied by the collection owner on 2026-09-10",
+              "evidence": "Thai gold Snorlax HP130, Thai name and rules text; printed s5a T, 093/070 UR, regulation D. Fine glittering foil is visible over the gold background and blue body. Image origin and holder were not supplied; no seller or ownership is invented. Retained as SPEC-0523.",
+              "contentHash": "80a8bab3f71304bf6533e0da994a4758828ae3ec406abe75f372ce26e0a46899",
+              "image": null
+            },
+            {
+              "observationId": "source-first:TH:s5a T:093/070:base",
+              "kind": "source-first",
+              "provider": "inspected-specimen",
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
+              "evidence": "specimen:SPEC-0523 visibly establishes s5a T 093/070, Thai, and printed rarity UR. Release date remains unknown.",
+              "contentHash": "7bd783e48e35e16298a381a2dd60b7e3256eded03a92e001e2ee80e31a9406fa",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0523",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
+              "evidence": "Thai gold Snorlax HP130, Thai name and rules text; printed s5a T, 093/070 UR, regulation D. Fine glittering foil is visible over the gold background and blue body. Image origin and holder were not supplied; no seller or ownership is invented.",
+              "contentHash": "ee7a4225c2e5428a1ec8aa6f4738a8b0cb00d177ab2e8b59e1bd06d48b2262f8",
+              "image": "verification/specimens/SPEC-0523.png"
+            },
+            {
               "observationId": "unit:U0604",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "Cross-language expansion index row for 双璧のファイター / Peerless Fighters (Cardmarket calls this set \"Matchless Fighters\") carries a localized Thai set name: \"สองยอดนักสู้\". Full row: 双璧のファイター | Peerless Fighters | 雙璧戰士 | Dua Pilar Petarung | สองยอดนักสู้ | 쌍벽의 파이터.",
-              "contentHash": "2d5076c4682f4a4e32a76ae8733f2d37958d7627edb890e3590ec4f17901d0ee",
+              "provider": "inspected-specimen",
+              "url": null,
+              "evidence": "specimen:SPEC-0523 establishes the exact Thai card from its readable face and printed identifier. The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
+              "contentHash": "4e71bd3255feaa2b5ac4dd06c021a039e701da54e48a24338112e3bb88b71eaf",
               "image": "images/s5a_93_Snorlax_552704.jpg"
             }
           ]
@@ -70527,7 +70595,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0174",
-              "sourcePrintingId": "F0174-P01",
+              "sourcePrintingId": "F0174-P02",
               "establishingClaimId": "CLAIM:finish:F0174-P01",
               "specimenIds": [
                 "SPEC-0043",
@@ -70561,7 +70629,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0174",
-              "sourcePrintingId": "F0174-P02",
+              "sourcePrintingId": "F0174-P03",
               "establishingClaimId": "CLAIM:finish:F0174-P02",
               "specimenIds": [
                 "SPEC-0044"
@@ -70639,30 +70707,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0174-P01:0:2b7388fbecd47246",
+              "observationId": "finish:F0174-P02:0:2b7388fbecd47246",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
               "evidence": "Cardmarket article scan of a complete Dutch Jungle Snorlax 27/64 physical card. The card face visibly carries the EDITIE 1 stamp and the artwork field is printed non-holo. Retained as SPEC-0042.",
-              "contentHash": "17a0ff0dff629cb624b66940d94763abf7370963fe79d340afcd0136c820ef49",
+              "contentHash": "5cc0b698ab8b6649d2dc59545fb1e07dc3a1fb9aa30b93c0ef42b39ce7a2cfed",
               "image": null
             },
             {
-              "observationId": "finish:F0174-P01:1:4ff0f5ac6b180282",
+              "observationId": "finish:F0174-P02:1:4ff0f5ac6b180282",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
               "evidence": "Independent Cardmarket article scan corroborating the Dutch Jungle Snorlax 27/64 1st Edition non-holo printing. EDITIE 1 and the matte printed artwork field are visible on the complete card face. Retained as SPEC-0043.",
-              "contentHash": "d71da8bdc4cfe527963f3d261db33e4309432a25829f3e389a379028e45826ff",
+              "contentHash": "b54839453dad5ba463453447858d4ae81de0308885f7051aeda406384d4e4140",
               "image": null
             },
             {
-              "observationId": "finish:F0174-P02:0:9ad1f50f3576fa60",
+              "observationId": "finish:F0174-P03:0:9ad1f50f3576fa60",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
               "evidence": "Dutch Jungle Snorlax 27/64 photographed as a complete physical card and explicitly identified by the collection owner as the Unlimited printing. The card number and non-holographic printed artwork field are legible. Retained as SPEC-0044.",
-              "contentHash": "5e682abaff515df0374a310c300e38561ce05698c7aa2f97e0b37595bb632193",
+              "contentHash": "696e8d1313662f41ff43465b1ac3533366ff52dba5b48ede8154c770f123f7f5",
               "image": null
             },
             {
@@ -71055,7 +71123,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0171",
-              "sourcePrintingId": "F0171-P02",
+              "sourcePrintingId": "F0171-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:f10b18e760d3bc832c60f77e",
               "specimenIds": [
                 "SPEC-0112"
@@ -71109,12 +71177,12 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0171-P02:0:56fe097d1bc2ad14",
+              "observationId": "finish:F0171-P03:0:56fe097d1bc2ad14",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/QKsAAOSwRA5lEsqD/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 27/64 with a uniformly printed artwork field. The exact seller title says Unlimited and Non Holo, while item data state Italian, 27/64 and finish Standard. Retained as SPEC-0112.",
-              "contentHash": "9f62e5ee17c3313f5f559aa6a7fb31e514fe1edd5b1854c5860545213f0ad1a3",
+              "contentHash": "fa9d0ac0b77e631d149fe3e597644b4fab7b70d95c7d958232409dce860b31e2",
               "image": null
             },
             {
@@ -71287,7 +71355,86 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1d7c2b6073e1bd447727e41d",
+              "semanticPrintingId": "PRINTING:1d7c2b6073e1bd447727e41d",
+              "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0172",
+              "sourcePrintingId": "F0172-P04",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1d7c2b6073e1bd447727e41d",
+              "specimenIds": [
+                "SPEC-0525"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-10",
+                  "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "Image supplied by the collection owner on 2026-09-10",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. Complete front has no first-edition stamp and the reverse is also shown. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0525.",
+                  "retrievedAt": "2026-09-10",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:20be3b07981b6b934e5bb4b4",
+              "semanticPrintingId": "PRINTING:20be3b07981b6b934e5bb4b4",
+              "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+              "finish": "non-holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0172",
+              "sourcePrintingId": "F0172-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:20be3b07981b6b934e5bb4b4",
+              "specimenIds": [
+                "SPEC-0524"
+              ],
+              "sources": [
+                {
+                  "url": "Image supplied by the collection owner on 2026-09-10",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0524.",
+                  "retrievedAt": "2026-09-10",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-10",
+                  "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -71323,9 +71470,67 @@
               "originalHash": "1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
               "previewSrc": "images/previews/SPEC-0134.png?v=1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2",
               "thumbnailSrc": "images/thumbs/SPEC-0134.png?v=1f558f4dac279dae3ed055c5b69f4ad0a2fa3027d855aa2b55f55d67d6830bb2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0524.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0524",
+              "contentHash": "d6c754e4c53fee890aedc106f745fef1dc3dabc04ce1b08e4e8092dc2d7a4229",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d6c754e4c53fee890aedc106f745fef1dc3dabc04ce1b08e4e8092dc2d7a4229",
+              "previewSrc": "images/previews/SPEC-0524.png?v=d6c754e4c53fee890aedc106f745fef1dc3dabc04ce1b08e4e8092dc2d7a4229",
+              "thumbnailSrc": "images/thumbs/SPEC-0524.png?v=d6c754e4c53fee890aedc106f745fef1dc3dabc04ce1b08e4e8092dc2d7a4229"
+            },
+            {
+              "src": "verification/specimens/SPEC-0525.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0525",
+              "contentHash": "3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2",
+              "previewSrc": "images/previews/SPEC-0525.png?v=3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2",
+              "thumbnailSrc": "images/thumbs/SPEC-0525.png?v=3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0172-P03:0:509583df93813d77",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "Image supplied by the collection owner on 2026-09-10",
+              "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0524.",
+              "contentHash": "b4e0c28e6cbeef2717d2c983bf47676f61cfa516e034775e1da0436b687678e8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P03:1:cbab6ce9380353d3",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "f9b08a120422aedf42374907da35c1c07e8344a0af1757eb32208afab672a5a6",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P04:0:cbab6ce9380353d3",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "a73ed8f8bc29c8961b6f40ec0910ec3515116568d9259b02339a4b58ab81e70f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0172-P04:1:e01d3a23a671304a",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "Image supplied by the collection owner on 2026-09-10",
+              "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. Complete front has no first-edition stamp and the reverse is also shown. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0525.",
+              "contentHash": "4545fdc6049e8cdb9d5bd497e3271e074e28b305e94b2098474caea70c73c131",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0134",
               "kind": "specimen",
@@ -71336,12 +71541,30 @@
               "image": "verification/specimens/SPEC-0134.png"
             },
             {
+              "observationId": "specimen:SPEC-0524",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections.",
+              "contentHash": "2849f1193f8513773b2348033309362991474208761b91f7ea8b30bb3d244f29",
+              "image": "verification/specimens/SPEC-0524.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0525",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. Complete front has no first-edition stamp and the reverse is also shown. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections.",
+              "contentHash": "5c2ff3149ee6a5aed1cd579dfa80cf9e6524e00cb5c0c5b5349998aa45f88612",
+              "image": "verification/specimens/SPEC-0525.png"
+            },
+            {
               "observationId": "unit:U0092",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Jungle (JU) is listed with a Spanish release in the cross-language expansion index (set-level evidence) Independent positive card-image evidence retained as SPEC-0134 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "1ddd124e8e85863039b8d69da40f1372878e6699d0faf5f0fb3c17c834141e81",
+              "provider": "wikidex",
+              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png",
+              "evidence": "Retained SPEC-0134 establishes the exact Spanish Jungle 27 card identity. Newly retained owner-supplied SPEC-0524 and SPEC-0525 independently corroborate that identity and identify both editions. The owner-specified Non-Holo number mapping is recorded separately in the finish layer.",
+              "contentHash": "51bd9efdd3eb8206be3eb4c2621b0c0baa2033ef43927b2f01d276d8aeb4cf80",
               "image": "images/JU_27_Snorlax_V2_273824.jpg"
             }
           ]
@@ -71545,7 +71768,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0167",
-              "sourcePrintingId": "F0167-P01",
+              "sourcePrintingId": "F0167-P02",
               "establishingClaimId": "CLAIM:finish:F0167-P01",
               "specimenIds": [
                 "SPEC-0041"
@@ -71572,7 +71795,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0167",
-              "sourcePrintingId": "F0167-P02",
+              "sourcePrintingId": "F0167-P03",
               "establishingClaimId": "CLAIM:finish:F0167-P02",
               "specimenIds": [
                 "SPEC-0040"
@@ -71639,21 +71862,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0167-P01:0:761b3b16a6517534",
+              "observationId": "finish:F0167-P02:0:761b3b16a6517534",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
               "evidence": "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries the EDITIE 1 stamp and a reflective holographic art field; the grading label independently reads 1st Edition 11/64 Holo. Retained as SPEC-0041.",
-              "contentHash": "9820c5d9076f832545089c442d2c4b40df133d21f5c4e9caa87037538f4a4f69",
+              "contentHash": "dba1bcef6af0c9334b439790b9ed5b4f260c479ac46d31ccebeaef176243390a",
               "image": null
             },
             {
-              "observationId": "finish:F0167-P02:0:7429168f75434b9b",
+              "observationId": "finish:F0167-P03:0:7429168f75434b9b",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
               "evidence": "Dutch Jungle Snorlax 11/64 photographed as a complete physical card and explicitly identified by the collection owner as the Unlimited printing. The printed name Snorlax, 11/64 collector number and reflective holographic art field are legible. Retained as SPEC-0040.",
-              "contentHash": "5ef82884b24f7c57b56495a847a1185632f7c119883e5964e51759dc083c94f5",
+              "contentHash": "c568cebf862d03e45d1a0b413b161d8fa52fcf733d075c8a86f7e1d877e4ce07",
               "image": null
             },
             {
@@ -71673,15 +71896,6 @@
               "evidence": "Dutch Jungle Snorlax 11/64 in a CGC holder. The card face visibly carries the EDITIE 1 stamp and a reflective holographic art field; the grading label independently reads 1st Edition 11/64 Holo.",
               "contentHash": "83761fd456710721deb0f17311fda141ad82b14dbd60cabd7176915d9c91ea34",
               "image": "verification/specimens/SPEC-0041.png"
-            },
-            {
-              "observationId": "specimen:SPEC-0401",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
-              "evidence": "The public Instagram carousel image 10/17 shows one complete CGC-encapsulated Dutch Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Dutch / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT+ 9.5. The post caption explicitly identifies this carousel position as Dutch 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
-              "contentHash": "8cf6b70536cfb614e5a64cce9035c4a6c765b19ab51c1545aa133f3c6dff75c8",
-              "image": null
             },
             {
               "observationId": "specimen:SPEC-0402",
@@ -72055,7 +72269,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0164",
-              "sourcePrintingId": "F0164-P03",
+              "sourcePrintingId": "F0164-P04",
               "establishingClaimId": "CLAIM:finish:PRINTING:5b3b4444d26f774ebf8b5012",
               "specimenIds": [
                 "SPEC-0110"
@@ -72088,7 +72302,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0164",
-              "sourcePrintingId": "F0164-P02",
+              "sourcePrintingId": "F0164-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:ad0c957d33b011837957b7eb",
               "specimenIds": [
                 "SPEC-0111"
@@ -72155,21 +72369,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0164-P02:0:86702f6845a5f43a",
+              "observationId": "finish:F0164-P03:0:86702f6845a5f43a",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica. Retained as SPEC-0111.",
-              "contentHash": "6fe32be3ffd9bdf33d7e6b3d76dde500fa50ec5362e2577b3f1279a378b1ccac",
+              "contentHash": "6460736fa0dd4a6800bc6b463c445e523bc4ac676a637482744a579aa91ab2ae",
               "image": null
             },
             {
-              "observationId": "finish:F0164-P03:0:1704853d054e013e",
+              "observationId": "finish:F0164-P04:0:1704853d054e013e",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The Italian text, Jungle symbol and 11/64 establish identity; the artwork window directly shows the star-pattern holographic field. The seller title and item data explicitly identify the card as Holo Unlimited. Retained as SPEC-0110.",
-              "contentHash": "51464c8c56c480aa150f3003b6ca6cff26d5609bc5538dfad7284947caad537c",
+              "contentHash": "89fcc91fddc8480c83d87e15b58caba9f03fa51cab99aa1f5f1eaad9b39571f8",
               "image": null
             },
             {
@@ -72189,15 +72403,6 @@
               "evidence": "Complete physical-card photograph of Italian Jungle Snorlax 11/64. The card face visibly carries the EDIZIONE 1 stamp and a reflective holographic artwork field; the seller data also identify Prima edizione and Rara olografica.",
               "contentHash": "6e11cd713d1513cce518eb3cb4c3d578492ad775d4244082e397b2a5a78707d0",
               "image": "verification/specimens/SPEC-0111.jpg"
-            },
-            {
-              "observationId": "specimen:SPEC-0403",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
-              "evidence": "The public Instagram carousel image 12/17 shows one complete CGC-encapsulated Italian Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Italian / Jungle - 1st Edition - 11/64 / Holo\" and assigns grade MINT 9. The post caption explicitly identifies this carousel position as Italian 1st Edition. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
-              "contentHash": "8e100a97793ea30a57c343847e19fea2400d7515160f487f85a16ca8442db315",
-              "image": null
             },
             {
               "observationId": "specimen:SPEC-0404",
@@ -72253,7 +72458,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0166",
-              "sourcePrintingId": "F0166-P02",
+              "sourcePrintingId": "F0166-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:d792d590f3ba7f882f69455d",
               "specimenIds": [
                 "SPEC-0055"
@@ -72319,21 +72524,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0166-P02:0:39a9db0fe3a99abc",
+              "observationId": "finish:F0166-P03:0:39a9db0fe3a99abc",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's edition; the retained seller listing photograph supports card identity and any independently visible properties.",
-              "contentHash": "45c08d7fb90a92b00191b610d749073abae6171f86e3d854263a47ba51ce76db",
+              "contentHash": "7e8aa0acd24634de457a735df90efef60ff621f7dfa2b1bda0690f176f135afe",
               "image": null
             },
             {
-              "observationId": "finish:F0166-P02:1:39c265e8a6dff749",
+              "observationId": "finish:F0166-P03:1:39c265e8a6dff749",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26. Retained as SPEC-0055.",
-              "contentHash": "c921ef72d74bf84128104f2371e6f7b80ea3ac6b983a51e15a2f01e0d65606fc",
+              "contentHash": "f54792c7546c6509b60bf9d8a27e7d0978344eb823ff7f9490f3ad507b689aad",
               "image": null
             },
             {
@@ -72344,15 +72549,6 @@
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 11/64. The Portuguese card text, Jungle symbol and 11/64 identify the exact card, while the reflective artwork field establishes the holo finish. The collection owner confirmed candidate 4 and explicitly adjudicated this copy as Unlimited on 2026-08-26.",
               "contentHash": "63e1a12fb8b1371b9b0fdf418ab4f1a0f953f4d29558f75ef41b3898c177f5be",
               "image": "verification/specimens/SPEC-0055.jpg"
-            },
-            {
-              "observationId": "specimen:SPEC-0408",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
-              "evidence": "The public Instagram carousel image 17/17 shows one complete CGC-encapsulated Portuguese Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1999) Portuguese / Jungle - Unlimited - 11/64 / Holo\" and assigns grade GEM MINT 10. The post caption explicitly identifies this carousel position as Portuguese Unlimited. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
-              "contentHash": "07ee06b62e0c4f1e5f4f39044e1c9fa552e71e2c861bcb232271f5dc6a6b3f4e",
-              "image": null
             },
             {
               "observationId": "unit:U0124",
@@ -79304,7 +79500,7 @@
       "label": "Snorlax-Unfazed-Fat-Thumping-Snore",
       "members": [
         {
-          "cardReleaseId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "cardReleaseId": "RELEASE:ID:Indonesian:s10a I:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "reviewedAppearanceId": null,
@@ -79313,23 +79509,66 @@
           "locality": "ID",
           "language": "Indonesian",
           "script": "Latn",
-          "setEditionId": "EDITION:ID:Indonesian:via-s10a:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:ID:Indonesian:s10a I",
+          "localSetCode": "s10a I",
+          "localNumber": "077/071",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0170"
+          ],
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1967f7e388729080d87e5b97",
+              "semanticPrintingId": "PRINTING:1967f7e388729080d87e5b97",
+              "cardReleaseId": "RELEASE:ID:Indonesian:s10a I:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0332",
+              "sourcePrintingId": "F0332-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1967f7e388729080d87e5b97",
+              "specimenIds": [
+                "SPEC-0522"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-10",
+                  "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Indonesian Snorlax HP150, Lemak Tidak Bermasalah and Dentum Dengkur 180; printed s10a I, regulation F, 077/071 CHR. The owner explicitly confirms Holo. The photograph establishes identity; the owner supplies the finish determination. Retained as SPEC-0522.",
+                  "retrievedAt": "2026-09-10",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Kouki Saitou",
+            "artist": null,
             "variant": "V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -79346,16 +79585,71 @@
               "originalHash": "6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355",
               "previewSrc": "images/previews/s10a_077_Snorlax_V2_657056.jpg?v=6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355",
               "thumbnailSrc": "images/thumbs/s10a_077_Snorlax_V2_657056.jpg?v=6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355"
+            },
+            {
+              "src": "verification/specimens/SPEC-0522.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0522",
+              "contentHash": "23e3054ee22a4bd4a197cb85557ca7d5f45e38cc5895add144216c45681e48e7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "23e3054ee22a4bd4a197cb85557ca7d5f45e38cc5895add144216c45681e48e7",
+              "previewSrc": "images/previews/SPEC-0522.png?v=23e3054ee22a4bd4a197cb85557ca7d5f45e38cc5895add144216c45681e48e7",
+              "thumbnailSrc": "images/thumbs/SPEC-0522.png?v=23e3054ee22a4bd4a197cb85557ca7d5f45e38cc5895add144216c45681e48e7"
+            },
+            {
+              "src": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+              "label": "publisher card image",
+              "observationId": "source-first:ID:s10a I:077/071:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             }
           ],
           "observations": [
             {
+              "observationId": "finish:F0332-P01:0:39c54827e74bb22f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "94065758ca150c204e2dcf0ab6f42c12a267337b50778f682e85718e3accb576",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0332-P01:1:48feb6531a28e4d4",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+              "evidence": "Indonesian Snorlax HP150, Lemak Tidak Bermasalah and Dentum Dengkur 180; printed s10a I, regulation F, 077/071 CHR. The owner explicitly confirms Holo. The photograph establishes identity; the owner supplies the finish determination. Retained as SPEC-0522.",
+              "contentHash": "173c3fd22fd99c6bf23999d3f40b4ef684e99adf93936a48aaea35729b3e76eb",
+              "image": null
+            },
+            {
+              "observationId": "source-first:ID:s10a I:077/071:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072",
+              "evidence": "specimen:SPEC-0522 visibly establishes s10a I 077/071, Indonesian, and printed rarity CHR. Release date remains unknown.",
+              "contentHash": "036363e1dea11040a2ffec9aa85f9276e4d13c45bb0a88e68eeb0e800e575ee3",
+              "image": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp"
+            },
+            {
+              "observationId": "specimen:SPEC-0522",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072",
+              "evidence": "Indonesian Snorlax HP150, Lemak Tidak Bermasalah and Dentum Dengkur 180; printed s10a I, regulation F, 077/071 CHR. The owner explicitly confirms Holo. The photograph establishes identity; the owner supplies the finish determination.",
+              "contentHash": "cba8c36d0f0f56c0f3bfde16be1435ee6a400ed655fd3b90d6af07a978431c11",
+              "image": "verification/specimens/SPEC-0522.png"
+            },
+            {
               "observationId": "unit:U0170",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "cross-language expansion index row for Dark Phantasma carries a localized Indonesian set name (set-level evidence)",
-              "contentHash": "97821fb9792fec38588acba7b2897419ced4e0210b5e4de1f2882c00c7152638",
+              "provider": "seller-listing-photo",
+              "url": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+              "evidence": "specimen:SPEC-0522 establishes the exact Indonesian card from its readable face and printed identifier. The retained photograph supplies card-level language evidence; its physical finish is recorded separately on the specimen.",
+              "contentHash": "5225b0063ef1beceb530a0307b9c3141fd3b75ffea88bc3f0a8e0c31ab0c162b",
               "image": "images/s10a_077_Snorlax_V2_657056.jpg"
             }
           ]

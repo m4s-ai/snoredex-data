@@ -103,11 +103,14 @@ secret-rare cards is not evidence of non-release.
 
 ### Spanish, Europe (#266)
 
-No newly inspected, language-matching physical finish photograph was found for
-JU27, XY179 or SWSH032 in this pass. [Dreephy's XY179 page](https://dreephy.cl/producto/snorlax-xy179/)
+At the initial search checkpoint, no new matching photograph had been found for
+JU27, XY179 or SWSH032. The owner subsequently supplied both Spanish JU27 editions:
+SPEC-0524 and SPEC-0525 now establish 1st Edition and Unlimited, both Non-Holo
+under the established all-Western-language Jungle number mapping. JU27 needs no
+additional reflection photograph; see [the follow-up](OWNER-FOLLOWUP-20260910.md). [Dreephy's XY179 page](https://dreephy.cl/producto/snorlax-xy179/)
 offers generic language/finish choices; those combinations do not establish the
 pictured Spanish printing. Spanish-interface marketplace pages with English cards
-are equally insufficient. If the owner holds these cards, a readable front and an
+are equally insufficient. For the still-open XY179 and SWSH032 finishes, a readable front and an
 angled foil photograph would be useful. European versus LATAM edition must also
 remain scoped to visible or separately supported evidence.
 

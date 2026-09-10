@@ -157,6 +157,15 @@ def main() -> None:
     assert collector.physical_specimen_links(None, specimen) == set()
     retained = next(s for s in read('verification/specimens.json')['specimens'] if s['specimenId'] == 'SPEC-0146')
     items = read('collector_catalogue.json')['items']
+    # The owner's number mapping establishes finish; the photographed editions stay distinct.
+    spanish_jungle = [i for i in items if i.get("localizationId") == "LOCALIZATION:WEST:es-ES"
+                      and i.get("localSetCode") == "JU" and i.get("collectorNumber") == "27"
+                      and i.get("itemKind") == "verified-printing"]
+    assert {"1st Edition", "Unlimited"} <= {i.get("edition") for i in spanish_jungle}
+    assert all(i["finish"] == "non-holo" for i in spanish_jungle)
+    specimens = {s["specimenId"]: s for s in read("verification/specimens.json")["specimens"]}
+    assert specimens["SPEC-0522"]["physicalObservation"]["ownerAttestedFields"] == ["finish"]
+    assert "ownerAttestedFields" not in specimens["SPEC-0523"]["physicalObservation"]
     matching = [item for item in items if ':CSM2cC:103:' in item['cardReleaseId']]
     assert matching and all({retained['listingUrl'], retained['photographSource']} <= set(item['evidenceLinks'])
                             for item in matching), 'identity-level specimen citations must reach collector provenance'
@@ -621,11 +630,11 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 707,
-            "finishCandidates": 113,
-            "researchPlaceholders": 75,
-            "currentKnown": 707,
-            "research": 188,
+            "verifiedPrintings": 711,
+            "finishCandidates": 114,
+            "researchPlaceholders": 73,
+            "currentKnown": 711,
+            "research": 187,
         },
     }
     build_a_bear_item = next(

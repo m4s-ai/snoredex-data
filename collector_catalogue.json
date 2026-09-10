@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-09-10",
-    "catalogueFingerprint": "sha256:793f76f629afdf3be7b3aa720c88858f2aab78399af76696e5e165e66f825944",
+    "catalogueFingerprint": "sha256:8b1b881231d55ed719c32d629b834f0b322a5fdc94659472b88fc4928b69c8dd",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -698,6 +698,18 @@
         "SET-SRC-SF-FED4F4C57464"
       ],
       "sortKey": "ID|s000000000010a i||LOCALSET:ID:S10a%20I"
+    },
+    {
+      "localSetId": "LOCALSET:ID:s10a%20I",
+      "locality": "ID",
+      "localSetCode": "s10a I",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-C2E5F40A73F0"
+      ],
+      "sortKey": "ID|s000000000010a i||LOCALSET:ID:s10a%20I"
     },
     {
       "localSetId": "LOCALSET:ID:S10b%20I",
@@ -2701,6 +2713,18 @@
         "SET-SRC-SF-9F7FBEB5FB66"
       ],
       "sortKey": "TH|ma000000000006 t|000000000030th celebration|LOCALSET:TH:MA6%20T"
+    },
+    {
+      "localSetId": "LOCALSET:TH:s5a%20T",
+      "locality": "TH",
+      "localSetCode": "s5a T",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-6627BD0B87EB"
+      ],
+      "sortKey": "TH|s000000000005a t||LOCALSET:TH:s5a%20T"
     },
     {
       "localSetId": "LOCALSET:TH:s8b",
@@ -5473,6 +5497,19 @@
       "sortKey": "9999|ID|s000000000010a i|EDITION:ID:Indonesian:S10a I"
     },
     {
+      "setEditionId": "EDITION:ID:Indonesian:s10a I",
+      "localSetId": "LOCALSET:ID:s10a%20I",
+      "localizationId": "LOCALIZATION:ID:id",
+      "localSetCode": "s10a I",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|ID|s000000000010a i|EDITION:ID:Indonesian:s10a I"
+    },
+    {
       "setEditionId": "EDITION:ID:Indonesian:S10b I",
       "localSetId": "LOCALSET:ID:S10b%20I",
       "localizationId": "LOCALIZATION:ID:id",
@@ -7265,6 +7302,19 @@
       "releaseApproximate": false,
       "releaseEventId": null,
       "sortKey": "9999|TH|ma000000000004|EDITION:TH:Thai:MA4"
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:s5a T",
+      "localSetId": "LOCALSET:TH:s5a%20T",
+      "localizationId": "LOCALIZATION:TH:th",
+      "localSetCode": "s5a T",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|TH|s000000000005a t|EDITION:TH:Thai:s5a T"
     },
     {
       "setEditionId": "EDITION:TH:Thai:s8b",
@@ -12892,85 +12942,23 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28research-placeholder%29&row-id=item-c2ef8665-e27f-52f4-90e0-607614fed6df&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+Unlimited+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
-      "itemId": "item-b3d71db6-2bac-5e16-8932-5f337fd1a55e",
+      "itemId": "item-f21fbdb7-d21a-5a4f-8413-e425273b72ee",
       "legacyChecklistIds": [
-        "ju-27-spanish-1e-unresolved-unknown"
+        "ju-27-spanish-unl-non-holo-unknown"
       ],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
       "workMappingState": "mapped",
       "setEditionId": "EDITION:WEST:Spanish:JU",
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:PRINTING:1d7c2b6073e1bd447727e41d",
+      "sourcePrintingId": "F0172-P04",
       "finishUnitId": "F0172",
       "sourceClaimRefs": [
-        "CLAIM:legacy:U0092"
-      ],
-      "localizationId": "LOCALIZATION:WEST:es-ES",
-      "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": "JU",
-      "localSetName": "Jungle",
-      "collectorNumber": "27",
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000027",
-      "edition": "1st Edition",
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-4b566816-c037-5e81-b2c7-8ff7f5a8d941",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": "Rare",
-        "normalizedId": "rare",
-        "evidenceStatus": "source-backed",
-        "claimRefs": [
-          "RARITYCLAIM:8acf4916c91d916c"
-        ]
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": "1999-06-16",
-      "releaseDatePrecision": "day",
-      "releaseApproximate": false,
-      "releaseSortKey": "1999-06-16|LOCALIZATION:WEST:es-ES|ju|000000000027|research:legacy-checklist:ju-27-spanish-1e-unresolved-unknown",
-      "imageAssetId": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f",
-      "imageScope": "legacy-product",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+27+%28research-placeholder%29&row-id=item-b3d71db6-2bac-5e16-8932-5f337fd1a55e&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=27&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+1st+Edition+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-18e5ab15-2ab0-581f-9157-3d60bc3f4657",
-      "legacyChecklistIds": [
-        "ju-27-spanish-unl-unresolved-unknown"
-      ],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:WEST:Spanish:JU",
-      "localSetId": "LOCALSET:WEST:JU",
-      "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": "F0172",
-      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:1d7c2b6073e1bd447727e41d",
         "CLAIM:legacy:U0092"
       ],
       "localizationId": "LOCALIZATION:WEST:es-ES",
@@ -12982,11 +12970,11 @@
       "collectorNumberDenominator": null,
       "collectorNumberSortKey": "000000000027",
       "edition": "Unlimited",
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-8128f29f-b560-539e-bd22-8a92609d474f",
+      "editionAssignmentStatus": "assigned",
+      "finishVerificationStatus": "confirmed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-ff12d349-74aa-5b3b-9f38-88d475fc4398",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
@@ -13004,9 +12992,9 @@
       "releaseDate": "1999-06-16",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "1999-06-16|LOCALIZATION:WEST:es-ES|ju|000000000027|research:legacy-checklist:ju-27-spanish-unl-unresolved-unknown",
-      "imageAssetId": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "1999-06-16|LOCALIZATION:WEST:es-ES|ju|000000000027|claim:CLAIM:finish:PRINTING:1d7c2b6073e1bd447727e41d",
+      "imageAssetId": "asset-a423953a-869c-5b78-99fd-64d63fabf1e8",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
@@ -13015,7 +13003,71 @@
         "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+27+%28research-placeholder%29&row-id=item-18e5ab15-2ab0-581f-9157-3d60bc3f4657&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=27&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+Unlimited+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+27+%28verified-printing%29&row-id=item-f21fbdb7-d21a-5a4f-8413-e425273b72ee&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=27&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
+      "itemId": "item-a96ec2ba-fb3d-53db-bb7b-66cd3420f8e0",
+      "legacyChecklistIds": [
+        "ju-27-spanish-1e-non-holo-unknown"
+      ],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-Thick-Skinned-Body-Slam",
+      "workMappingState": "mapped",
+      "setEditionId": "EDITION:WEST:Spanish:JU",
+      "localSetId": "LOCALSET:WEST:JU",
+      "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "physicalPrintingId": "PHYSICAL:PRINTING:20be3b07981b6b934e5bb4b4",
+      "sourcePrintingId": "F0172-P03",
+      "finishUnitId": "F0172",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:20be3b07981b6b934e5bb4b4",
+        "CLAIM:legacy:U0092"
+      ],
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "cardName": "Snorlax",
+      "localCardName": null,
+      "localSetCode": "JU",
+      "localSetName": "Jungle",
+      "collectorNumber": "27",
+      "collectorNumberDenominator": null,
+      "collectorNumberSortKey": "000000000027",
+      "edition": "1st Edition",
+      "editionAssignmentStatus": "assigned",
+      "finishVerificationStatus": "confirmed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-6e614b09-8dfe-5f2e-8838-1a1bd906e357",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "Rare",
+        "normalizedId": "rare",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:8acf4916c91d916c"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "1999-06-16",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "1999-06-16|LOCALIZATION:WEST:es-ES|ju|000000000027|claim:CLAIM:finish:PRINTING:20be3b07981b6b934e5bb4b4",
+      "imageAssetId": "asset-feb73c9d-86ae-5824-95ca-94948f7b4fa6",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_%28Jungla_27_TCG%29.png"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+27+%28verified-printing%29&row-id=item-a96ec2ba-fb3d-53db-bb7b-66cd3420f8e0&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=27&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+1st+Edition+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-a3d98e31-8dae-5fab-b854-d97e40c2ace1",
@@ -13275,7 +13327,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Italian:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:PRINTING:5b3b4444d26f774ebf8b5012",
-      "sourcePrintingId": "F0164-P03",
+      "sourcePrintingId": "F0164-P04",
       "finishUnitId": "F0164",
       "sourceClaimRefs": [
         "CLAIM:finish:PRINTING:5b3b4444d26f774ebf8b5012",
@@ -13318,16 +13370,12 @@
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
-        "https://www.ebay.it/itm/206230248590",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=13"
+        "https://www.ebay.it/itm/206230248590"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://i.ebayimg.com/images/g/wrkAAeSwCDZp62xg/s-l1600.jpg",
-        "https://www.ebay.it/itm/206230248590",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=13"
+        "https://www.ebay.it/itm/206230248590"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28verified-printing%29&row-id=item-7c2d03fa-ab81-5384-8c49-8df03c302572&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -13345,7 +13393,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Italian:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:PRINTING:ad0c957d33b011837957b7eb",
-      "sourcePrintingId": "F0164-P02",
+      "sourcePrintingId": "F0164-P03",
       "finishUnitId": "F0164",
       "sourceClaimRefs": [
         "CLAIM:finish:PRINTING:ad0c957d33b011837957b7eb",
@@ -13396,14 +13444,14 @@
         "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
         "https://www.ebay.it/itm/287192829023",
         "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=12"
+        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=13"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
         "https://i.ebayimg.com/images/g/rnEAAeSwpZxpsArr/s-l1600.jpg",
         "https://www.ebay.it/itm/287192829023",
         "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=12"
+        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=13"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28verified-printing%29&row-id=item-f3389482-15ad-5b3d-89df-92d88250aae6&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+1st+Edition+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+edition-stamp%2Fprint-identity%2FEDIZIONE+1+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -13421,7 +13469,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Italian:JU:27:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:PRINTING:f10b18e760d3bc832c60f77e",
-      "sourcePrintingId": "F0171-P02",
+      "sourcePrintingId": "F0171-P03",
       "finishUnitId": "F0171",
       "sourceClaimRefs": [
         "CLAIM:finish:PRINTING:f10b18e760d3bc832c60f77e",
@@ -13548,7 +13596,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:F0167-P01",
-      "sourcePrintingId": "F0167-P01",
+      "sourcePrintingId": "F0167-P02",
       "finishUnitId": "F0167",
       "sourceClaimRefs": [
         "CLAIM:finish:F0167-P01",
@@ -13596,15 +13644,17 @@
       "imageScope": "exact-printing",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
         "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
         "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=10"
+        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=11"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
         "https://github.com/user-attachments/assets/6ea2a81b-a8da-41a6-96b2-b0e575175475",
         "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=10"
+        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=11"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28verified-printing%29&row-id=item-ceb9707a-679d-5a5f-8c39-8e013a201eb4&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+1st+Edition+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+edition-stamp%2Fprint-identity%2FEDITIE+1+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -13622,7 +13672,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Dutch:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:F0167-P02",
-      "sourcePrintingId": "F0167-P02",
+      "sourcePrintingId": "F0167-P03",
       "finishUnitId": "F0167",
       "sourceClaimRefs": [
         "CLAIM:finish:F0167-P02",
@@ -13664,15 +13714,11 @@
       "imageScope": "exact-printing",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
-        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=11"
+        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
-        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=11"
+        "https://github.com/user-attachments/assets/08b12485-3115-4d90-abb9-e2e9fb867f8d"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28verified-printing%29&row-id=item-7e440522-be8f-5e0e-90fd-26c1d78e589d&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -13690,7 +13736,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:F0174-P01",
-      "sourcePrintingId": "F0174-P01",
+      "sourcePrintingId": "F0174-P02",
       "finishUnitId": "F0174",
       "sourceClaimRefs": [
         "CLAIM:finish:F0174-P01",
@@ -13738,12 +13784,14 @@
       "imageScope": "exact-printing",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+        "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
         "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
         "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+        "https://github.com/user-attachments/assets/7279c09d-7892-44cd-9297-7a2694687b5d",
         "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
         "https://marketplace-article-scans.s3.cardmarket.com/2122869820/2122869820.jpg",
         "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y"
@@ -13764,7 +13812,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Dutch:JU:27:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:F0174-P02",
-      "sourcePrintingId": "F0174-P02",
+      "sourcePrintingId": "F0174-P03",
       "finishUnitId": "F0174",
       "sourceClaimRefs": [
         "CLAIM:finish:F0174-P02",
@@ -13828,7 +13876,7 @@
       "localSetId": "LOCALSET:WEST:JU",
       "cardReleaseId": "RELEASE:WEST:Portuguese:JU:11:Snorlax-Thick-Skinned-Body-Slam",
       "physicalPrintingId": "PHYSICAL:PRINTING:d792d590f3ba7f882f69455d",
-      "sourcePrintingId": "F0166-P02",
+      "sourcePrintingId": "F0166-P03",
       "finishUnitId": "F0166",
       "sourceClaimRefs": [
         "CLAIM:finish:PRINTING:d792d590f3ba7f882f69455d",
@@ -13871,16 +13919,12 @@
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
         "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
-        "https://www.ebay.com/itm/397923018972",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=17"
+        "https://www.ebay.com/itm/397923018972"
       ],
       "evidenceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
         "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
-        "https://www.ebay.com/itm/397923018972",
-        "https://www.instagram.com/p/DWWTniCFMGW/",
-        "https://www.instagram.com/p/DWWTniCFMGW/?img_index=17"
+        "https://www.ebay.com/itm/397923018972"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+JU+%E2%80%94+Jungle+11+%28verified-printing%29&row-id=item-f93c16e8-4bd2-58b1-8ade-ecea50fea44d&card-name=Snorlax&set-code=JU+%E2%80%94+Jungle&card-number=11&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
@@ -44519,6 +44563,138 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s5a+%E2%80%94+Matchless+Fighters+93+%28finish-candidate%29&row-id=item-0b6ffd1c-c1a3-5905-a79d-f39a2cb8f9c7&card-name=Snorlax&set-code=s5a+%E2%80%94+Matchless+Fighters&card-number=93&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
+      "itemId": "item-03dd525c-5487-5cec-9c78-96da1ae84fae",
+      "legacyChecklistIds": [
+        "s5a-93-thai-none-reverse-holo"
+      ],
+      "active": true,
+      "itemKind": "finish-candidate",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:TH:Thai:s5a T",
+      "localSetId": "LOCALSET:TH:s5a%20T",
+      "cardReleaseId": "RELEASE:TH:Thai:s5a T:093/070:Snorlax-Gormandize-Body-Slam",
+      "physicalPrintingId": null,
+      "sourcePrintingId": "F0362-P02",
+      "finishUnitId": "F0362",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:c26bd3395dfcad627ac35c25",
+        "CLAIM:legacy:U0604",
+        "CLAIM:source-first:TH:s5a T:093/070:base"
+      ],
+      "localizationId": "LOCALIZATION:TH:th",
+      "cardName": "Snorlax",
+      "localCardName": "Snorlax",
+      "localSetCode": "s5a T",
+      "localSetName": null,
+      "collectorNumber": "093",
+      "collectorNumberDenominator": "070",
+      "collectorNumberSortKey": "000000000093",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "marketplace-claimed",
+      "finish": "reverse-holo",
+      "finishFamily": "reverse-holo",
+      "finishGroupId": "finish-group-0c454d46-a14b-5497-8864-42e358511bc5",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "UR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:pr375:TH:s5a T:093/070:base"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2021-03-19",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2021-03-19|LOCALIZATION:TH:th|s000000000005a t|000000000093|claim:CLAIM:finish:PRINTING:c26bd3395dfcad627ac35c25",
+      "imageAssetId": "asset-c8e3901c-cfd9-5be1-9671-350e1601b563",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s5a+T+093+%28finish-candidate%29&row-id=item-03dd525c-5487-5cec-9c78-96da1ae84fae&card-name=Snorlax&set-code=s5a+T&card-number=093&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-b46db516-19bf-5bd3-a23f-83a06b9bb532",
+      "legacyChecklistIds": [
+        "s5a-93-thai-none-holo-unknown"
+      ],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:TH:Thai:s5a T",
+      "localSetId": "LOCALSET:TH:s5a%20T",
+      "cardReleaseId": "RELEASE:TH:Thai:s5a T:093/070:Snorlax-Gormandize-Body-Slam",
+      "physicalPrintingId": "PHYSICAL:PRINTING:e5e3e1cc2b080b1292708117",
+      "sourcePrintingId": "F0362-P01",
+      "finishUnitId": "F0362",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:e5e3e1cc2b080b1292708117",
+        "CLAIM:legacy:U0604",
+        "CLAIM:source-first:TH:s5a T:093/070:base"
+      ],
+      "localizationId": "LOCALIZATION:TH:th",
+      "cardName": "Snorlax",
+      "localCardName": "Snorlax",
+      "localSetCode": "s5a T",
+      "localSetName": null,
+      "collectorNumber": "093",
+      "collectorNumberDenominator": "070",
+      "collectorNumberSortKey": "000000000093",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "confirmed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-26f84b0c-9f66-58b6-aaaa-63423dcee703",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "UR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:pr375:TH:s5a T:093/070:base"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2021-03-19",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2021-03-19|LOCALIZATION:TH:th|s000000000005a t|000000000093|claim:CLAIM:finish:PRINTING:e5e3e1cc2b080b1292708117",
+      "imageAssetId": "asset-c8e3901c-cfd9-5be1-9671-350e1601b563",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s5a+T+093+%28verified-printing%29&row-id=item-b46db516-19bf-5bd3-a23f-83a06b9bb532&card-name=Snorlax&set-code=s5a+T&card-number=093&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
       "itemId": "item-c7af848c-8cd3-5afc-81f4-85b292956b25",
       "legacyChecklistIds": [],
       "active": true,
@@ -48467,6 +48643,73 @@
         "https://pokemoncard.co.kr/cards/detail/BS2022009008"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+sN+008+%28research-placeholder%29&row-id=item-5f049ce0-68e0-5971-9c75-dedb8ed213f1&card-name=Snorlax&set-code=sN&card-number=008&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
+      "itemId": "item-6bd72d44-0446-57e4-94a6-6cc96c2ab28b",
+      "legacyChecklistIds": [
+        "s10a-077-indonesian-none-holo-unknown"
+      ],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:ID:Indonesian:s10a I",
+      "localSetId": "LOCALSET:ID:s10a%20I",
+      "cardReleaseId": "RELEASE:ID:Indonesian:s10a I:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:1967f7e388729080d87e5b97",
+      "sourcePrintingId": "F0332-P01",
+      "finishUnitId": "F0332",
+      "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:1967f7e388729080d87e5b97",
+        "CLAIM:legacy:U0170",
+        "CLAIM:source-first:ID:s10a I:077/071:base"
+      ],
+      "localizationId": "LOCALIZATION:ID:id",
+      "cardName": "Snorlax",
+      "localCardName": "Snorlax",
+      "localSetCode": "s10a I",
+      "localSetName": null,
+      "collectorNumber": "077",
+      "collectorNumberDenominator": "071",
+      "collectorNumberSortKey": "000000000077",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "confirmed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-24fcd217-7561-5547-be1e-7bb991c3169b",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "CHR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:pr375:ID:s10a I:077/071:base"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2022-05-13",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2022-05-13|LOCALIZATION:ID:id|s000000000010a i|000000000077|claim:CLAIM:finish:PRINTING:1967f7e388729080d87e5b97",
+      "imageAssetId": "asset-191785ac-fe01-5d5c-804c-7f4e888b980e",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+        "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+        "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s10a+I+077+%28verified-printing%29&row-id=item-6bd72d44-0446-57e4-94a6-6cc96c2ab28b&card-name=Snorlax&set-code=s10a+I&card-number=077&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-41058b1d-9a99-5958-81c3-2d492a4929da",
@@ -77974,63 +78217,6 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CS4DaC+342+%28verified-printing%29&row-id=item-fad86d65-26c5-58b3-bff8-d2118c35e088&card-name=Snorlax&set-code=CS4DaC&card-number=342&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-33e8756f-352c-54d3-8f25-bf0f3d333bd6",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:ID:Indonesian:via-s10a:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:1ea102d4a5007663e9d3",
-      "cardReleaseId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0170"
-      ],
-      "localizationId": "LOCALIZATION:ID:id",
-      "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
-      "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000077",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-e5e0f139-3f12-57d0-bc49-4c97f35ffbaa",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": null,
-        "normalizedId": null,
-        "evidenceStatus": "unknown",
-        "claimRefs": []
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:ID:id||000000000077|research:card-release:RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "imageAssetId": null,
-      "imageScope": "unknown",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-33e8756f-352c-54d3-8f25-bf0f3d333bd6&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
       "itemId": "item-36f807cc-fd1a-5ec0-8f66-6443ed147db5",
       "legacyChecklistIds": [],
       "active": true,
@@ -78582,63 +78768,6 @@
         "https://pokemoncard.co.kr/cards/detail/BS2019018060"
       ],
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+SM30A+060+%28research-placeholder%29&row-id=item-2784a253-55ef-51d0-a91f-fce89531f857&card-name=Snorlax&set-code=SM30A&card-number=060&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
-    },
-    {
-      "itemId": "item-4de558a0-6e15-5866-a3b0-8563f2afb236",
-      "legacyChecklistIds": [],
-      "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
-      "workId": "WORK:Snorlax-Gormandize-Body-Slam",
-      "workMappingState": "mapped",
-      "setEditionId": "EDITION:TH:Thai:via-s5a:unknown-local-set",
-      "localSetId": "LOCALSET:UNRESOLVED:06283c9a36318b48df72",
-      "cardReleaseId": "RELEASE:TH:Thai:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
-      "finishUnitId": null,
-      "sourceClaimRefs": [
-        "CLAIM:legacy:U0604"
-      ],
-      "localizationId": "LOCALIZATION:TH:th",
-      "cardName": "Snorlax",
-      "localCardName": null,
-      "localSetCode": null,
-      "localSetName": null,
-      "collectorNumber": null,
-      "collectorNumberDenominator": null,
-      "collectorNumberSortKey": "000000000093",
-      "edition": null,
-      "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-c233c66e-c061-5f77-a5ac-8fdaf5a31d8f",
-      "foilPattern": null,
-      "markings": [],
-      "distribution": null,
-      "cardSize": "unknown",
-      "errorClass": null,
-      "rarity": {
-        "display": null,
-        "normalizedId": null,
-        "evidenceStatus": "unknown",
-        "claimRefs": []
-      },
-      "completenessStatus": "positive-evidence-only",
-      "releaseDate": null,
-      "releaseDatePrecision": null,
-      "releaseApproximate": false,
-      "releaseSortKey": "9999|LOCALIZATION:TH:th||000000000093|research:card-release:RELEASE:TH:Thai:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "imageAssetId": null,
-      "imageScope": "unknown",
-      "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
-      ],
-      "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
-      ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+unknown+unknown+%28research-placeholder%29&row-id=item-4de558a0-6e15-5866-a3b0-8563f2afb236&card-name=Snorlax&set-code=unknown&card-number=unknown&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
@@ -79849,6 +79978,20 @@
       "mimeType": "image/png",
       "imageScope": "exact-printing",
       "altTextBasis": "Snorlax — Unbroken Bonds; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
+      "assetId": "asset-191785ac-fe01-5d5c-804c-7f4e888b980e",
+      "path": "verification/specimens/SPEC-0522.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0522.png",
+      "sha256": "sha256:23e3054ee22a4bd4a197cb85557ca7d5f45e38cc5895add144216c45681e48e7",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — s10a I; exact-printing",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -83230,6 +83373,20 @@
       }
     },
     {
+      "assetId": "asset-a423953a-869c-5b78-99fd-64d63fabf1e8",
+      "path": "verification/specimens/SPEC-0525.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0525.png",
+      "sha256": "sha256:3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Jungle; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-a4df1bb6-42a7-5a68-a71a-3d6a0ba5cc4d",
       "path": "verification/specimens/SPEC-0430.png",
       "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0430.png",
@@ -84175,6 +84332,20 @@
       "mimeType": "image/png",
       "imageScope": "card-release",
       "altTextBasis": "Snorlax — s2; card-release",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
+      "assetId": "asset-c8e3901c-cfd9-5be1-9671-350e1601b563",
+      "path": "verification/specimens/SPEC-0523.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0523.png",
+      "sha256": "sha256:26326881b1b47273c1ebe2eef53b283bd09a918c6bd847f4c1b09e5eaa150f7c",
+      "mimeType": "image/png",
+      "imageScope": "card-release",
+      "altTextBasis": "Snorlax — s5a T; card-release",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -85428,6 +85599,20 @@
       }
     },
     {
+      "assetId": "asset-feb73c9d-86ae-5824-95ca-94948f7b4fa6",
+      "path": "verification/specimens/SPEC-0524.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0524.png",
+      "sha256": "sha256:d6c754e4c53fee890aedc106f745fef1dc3dabc04ce1b08e4e8092dc2d7a4229",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Jungle; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-ff04fc4c-9db1-5fd1-9848-06248ee2292f",
       "path": "images/CSVL1C_109_Snorlax_839842.png",
       "url": "https://m4s-ai.github.io/snoredex-data/images/CSVL1C_109_Snorlax_839842.png",
@@ -85499,32 +85684,32 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:08985f0c0bb9c50b2c7f5f41a51d2505c12cb58b97f340827241c9646501d333",
+    "authoritativeGraphFingerprint": "sha256:bb3b82e219d7eff7c6c5182bdb8fc6f5cd5c7be77da7e20103e91da66a228f18",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260910T160000Z",
     "cardDiscoveryRun": "20260909T171255Z",
     "counts": {
       "localizations": 16,
-      "localSets": 351,
-      "setEditions": 558,
+      "localSets": 353,
+      "setEditions": 560,
       "works": 42,
-      "items": 1009,
-      "verifiedPrintings": 750,
-      "finishCandidates": 113,
-      "researchPlaceholders": 146,
-      "currentKnown": 750,
-      "research": 259,
-      "assets": 443
+      "items": 1010,
+      "verifiedPrintings": 754,
+      "finishCandidates": 114,
+      "researchPlaceholders": 142,
+      "currentKnown": 754,
+      "research": 256,
+      "assets": 447
     },
     "predecessor": {
       "schema": "snoredex-checklist",
       "schemaVersion": "1.5.0",
-      "rows": 895
+      "rows": 898
     },
     "graphAccounting": {
       "cardReleases": 641,
-      "physicalPrintings": 750
+      "physicalPrintings": 754
     },
     "candidateProgressPolicy": {
       "progressClass": "research",
@@ -85547,12 +85732,12 @@
         "research": "research"
       },
       "counts": {
-        "legacyRows": 895,
-        "verifiedPrintings": 707,
-        "finishCandidates": 113,
-        "researchPlaceholders": 75,
-        "currentKnown": 707,
-        "research": 188
+        "legacyRows": 898,
+        "verifiedPrintings": 711,
+        "finishCandidates": 114,
+        "researchPlaceholders": 73,
+        "currentKnown": 711,
+        "research": 187
       }
     }
   }

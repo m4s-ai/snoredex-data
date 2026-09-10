@@ -2785,7 +2785,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-10",
       "freshnessPolicy": "Retain custody, original images, inspection date and identity comparison for every specimen.",
       "query": {
         "method": "NON_URL",
@@ -2808,7 +2808,8 @@
           "visible finish",
           "foil pattern",
           "marking",
-          "card size"
+          "card size",
+          "visible edition marking"
         ],
         "publicationForm": "identified physical scan or photograph",
         "closedWithinScope": false
@@ -2840,7 +2841,8 @@
             "identity",
             "finish",
             "specimen-existence",
-            "image"
+            "image",
+            "edition"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -3463,7 +3465,8 @@
           "positiveEvidenceCapabilities": [
             "identity",
             "specimen-existence",
-            "image"
+            "image",
+            "language"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -5327,7 +5330,7 @@
       "validatesEdges": [
         "wikidex-positive-scan"
       ],
-      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only."
+      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only. SPEC-0134 retains readable Spanish text on the exact Jungle 27 card, positively establishing its printed language as well as identity."
     },
     {
       "observationId": "obs-snkrdunk",
@@ -5677,7 +5680,7 @@
       "validatesEdges": [
         "inspected-specimen-positive"
       ],
-      "outcome": "A retained physical photograph establishes visible properties of its identified specimen."
+      "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies."
     },
     {
       "observationId": "obs-cardmarket-listing-photo",
