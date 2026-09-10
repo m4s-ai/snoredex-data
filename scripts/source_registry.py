@@ -1001,12 +1001,29 @@ def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
 
 
 def _specimen_indexed_directly(entry: dict, specimens_by_id: dict | None) -> bool:
-    """True when the governed specimen's direct path already indexes a validated URL."""
+    """True when the specimen's direct path indexes a URL under inspected-specimen authority.
+
+    The anonymous inspected-specimen record carries the owned photograph's evidence. It
+    must stay when not one of the specimen's URLs resolves to inspected-specimen
+    provenance, because then the inspected evidence would otherwise be lost (e.g. a
+    specimen whose only link is a foreign corroborating page like Pokumon). Suppress it
+    only when a validated photo or listing URL actually resolves to inspected-specimen.
+    """
     spec = (specimens_by_id or {}).get(str(entry.get("specimenId")))
-    return bool(spec and (
-        provenance_url(spec.get("photographSource"))
-        or provenance_url(spec.get("listingUrl"))
-    ))
+    if not spec:
+        return False
+    source_type = SPECIMEN_SOURCE_TYPES.get(
+        str(spec.get("heldBy", "")).casefold(),
+        str(spec.get("inspectedFrom") or "Inspected physical specimen photograph"),
+    )
+    candidate_urls = {
+        provenance_url(spec.get("photographSource")),
+        provenance_url(spec.get("listingUrl")),
+    } - {None}
+    return any(
+        specimen_provider(url, source_type) == "inspected-specimen"
+        for url in candidate_urls
+    )
 
 
 def record_source_first_identity(entry: dict, record: Callable, surfaces: dict,
