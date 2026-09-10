@@ -22,6 +22,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from source_registry import specimen_markings
+
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 FINISH_UNITS = ROOT / "verification" / "finish_units.json"
@@ -511,28 +513,6 @@ def write_graph(graph: dict[str, Any]) -> None:
     finally:
         if temporary:
             Path(temporary).unlink(missing_ok=True)
-
-
-def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
-    text = observation.get("markings")
-    if not text:
-        return []
-    normalized = str(text).strip()
-    if normalized.casefold() in {"editie 1", "edizione 1", "edición 1"}:
-        kind = "edition-stamp"
-    elif normalized.casefold() == "staff":
-        kind, normalized = "staff", "Staff"
-    elif normalized.casefold().endswith(" deck silhouette"):
-        kind, normalized = "deck-logo", normalized[:-16].strip()
-    elif normalized.casefold().endswith(" replica signature"):
-        kind, normalized = "championship-signature", normalized[:-18].strip()
-    else:
-        kind = "observed-marking"
-    return [{
-        "kind": kind,
-        "role": observation.get("markingRole"),
-        "text": normalized,
-    }]
 
 
 def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:

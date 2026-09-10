@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from source_registry import provenance_url
+from source_registry import provenance_url, specimen_markings
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -533,24 +533,6 @@ def normalize_foil_pattern(value: object) -> object:
         return value
     key = " ".join(value.casefold().replace("é", "e").split())
     return FOIL_PATTERN_ALIASES.get(key, value)
-
-
-def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
-    text = observation.get("markings")
-    if not text:
-        return []
-    normalized = str(text).strip()
-    if normalized.casefold() in {"editie 1", "edizione 1", "edición 1"}:
-        kind = "edition-stamp"
-    elif normalized.casefold() == "staff":
-        kind, normalized = "staff", "Staff"
-    elif normalized.casefold().endswith(" deck silhouette"):
-        kind, normalized = "deck-logo", normalized[:-16].strip()
-    elif normalized.casefold().endswith(" replica signature"):
-        kind, normalized = "championship-signature", normalized[:-18].strip()
-    else:
-        kind = "observed-marking"
-    return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
 
 
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:

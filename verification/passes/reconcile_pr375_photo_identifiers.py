@@ -79,6 +79,12 @@ def main():
                 if entity["entityType"] == "rarity-claim" and entity["entityId"] == f"RARITYCLAIM:pr375:{pid}":
                     profile = next(s for s in sources["sourceRecords"] if s["sourceRecordId"] == entity["payload"]["sourceRecordId"])
                     entity["payload"]["sourceProvider"] = profile["provider"]
+                    # A first admission wrote descriptive provenance prose into
+                    # sourceProductKey for a target whose release already existed
+                    # (SPEC-0523). A fresh admission writes the validated photo/listing
+                    # URL, so repair idempotently: keep the native rarity, adopt the URL.
+                    if not provenance_url(entity["payload"].get("sourceProductKey")):
+                        entity["payload"]["sourceProductKey"] = specimen_evidence_url(spec)
             continue
         row = next((r for r in prints["prints"] if r["printId"] == pid), None)
         if row is None:
@@ -164,7 +170,7 @@ def main():
             rarity_id = f"RARITYCLAIM:pr375:{pid}"
             upsert_entity(graph, "rarity-claim", rarity_id, {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": srid,
                           "sourceProvider": profile["provider"], "sourceVocabulary": "printed-card", "sourceNativeValue": rarity,
-                          "normalizedRarityId": normalized, "sourceProductKey": spec["photographSource"], "retrievedAt": DATE}, origin=ORIGIN)
+                          "normalizedRarityId": normalized, "sourceProductKey": specimen_evidence_url(spec), "retrievedAt": DATE}, origin=ORIGIN)
             upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
             upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", srid)
         # Coalescing release references can make equivalent edges meet.

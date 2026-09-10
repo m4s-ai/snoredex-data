@@ -293,7 +293,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 3,
         "coverage": "positive localized card identity shown by retained database scans",
         "supportsAbsence": False,
-        "usedFor": ["identity"],
+        "usedFor": ["identity", "language"],
         "attribution": "Card scans from WikiDex.",
         "notes": "A retained database scan establishes only the visible card identity. Missing "
                  "cards, variants, or languages never establish absence or completeness.",
@@ -675,6 +675,30 @@ def provenance_url(value: Any) -> str | None:
     except ValueError:
         pass
     return None
+
+
+def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
+    """Normalize an observed specimen marking into a typed markup kind.
+
+    Shared by the finish and authoritative-graph projectors so a marking
+    classification cannot drift between the two generators. The original text
+    and the recorded ``markingRole`` are preserved; only the ``kind`` is typed.
+    """
+    text = observation.get("markings")
+    if not text:
+        return []
+    normalized = str(text).strip()
+    if normalized.casefold() in {"editie 1", "edizione 1", "edición 1"}:
+        kind = "edition-stamp"
+    elif normalized.casefold() == "staff":
+        kind, normalized = "staff", "Staff"
+    elif normalized.casefold().endswith(" deck silhouette"):
+        kind, normalized = "deck-logo", normalized[:-16].strip()
+    elif normalized.casefold().endswith(" replica signature"):
+        kind, normalized = "championship-signature", normalized[:-18].strip()
+    else:
+        kind = "observed-marking"
+    return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
 
 
 def canonical_url(url: str) -> str:

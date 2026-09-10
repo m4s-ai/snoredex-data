@@ -39,7 +39,7 @@ in `verification/owner_adjudications.json`.
 | **PokéCottage** | collector-checklist | 3 | positive only | 0 | 0 | language, finish, product, date, artist, rarity |
 | **Retailer and specialist card listings** | retail-listing | 3 | positive only | 28 | 94 | finish, product, language |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | positive only | 8 | 49 | finish, product |
-| **WikiDex** | collector-database | 3 | positive only | 5 | 11 | identity |
+| **WikiDex** | collector-database | 3 | positive only | 5 | 11 | identity, language |
 | **koreanpokemoncards.com** | collector-database | 3 | positive only | 0 | 0 | language, finish |
 | **pokumon.com** | collector-database | 3 | positive only | 10 | 32 | language, finish |
 | **Cardmarket** | marketplace-catalogue | 5 | positive only | 349 | 975 | product, image, finish |
