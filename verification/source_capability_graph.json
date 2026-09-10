@@ -19,7 +19,7 @@
       "surfaces": 50,
       "coverageEdges": 52,
       "absenceEdges": 0,
-      "observations": 54,
+      "observations": 56,
       "resolvedVerdictSources": 1633
     },
     "surfaceStates": {
@@ -7886,6 +7886,95 @@
           }
         ],
         "researchRef": "verification/research/30th-celebration-20260910/observations.json"
+      }
+    },
+    {
+      "observationId": "obs-wikidex-language-scan",
+      "surfaceId": "wikidex-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "27"
+      },
+      "retrievedAt": "2026-09-10",
+      "expectedIdentifiers": [
+        "SPEC-0134",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "wikidex-positive-scan"
+      ],
+      "outcome": "The retained Spanish Jungle 27 scan (SPEC-0134) positively establishes the printed Spanish language and identity, grounding the language capability of the wikidex-positive-scan edge.",
+      "rawRecordRef": "verification/source_registry.json:https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "rawRecordHash": "sha256:4c87073f6692430b3e5b68aaf8f0d1b206b1e4dc346683f058a503bf8a01f1ae",
+      "rawRecord": {
+        "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+        "nonUrlEvidenceId": null,
+        "providerId": "wikidex",
+        "sourceTypes": [
+          "WikiDex database scan",
+          "WikiDex exact-card photograph"
+        ],
+        "dimensions": [
+          "identity",
+          "language"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0134",
+          "U0092"
+        ],
+        "retrievedAt": "2026-09-10",
+        "usageCount": 3
+      }
+    },
+    {
+      "observationId": "obs-inspected-specimen-edition",
+      "surfaceId": "inspected-specimens",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:inspected-specimen",
+        "specimens": [
+          "SPEC-0524",
+          "SPEC-0525"
+        ]
+      },
+      "retrievedAt": "2026-09-10",
+      "expectedIdentifiers": [
+        "SPEC-0524",
+        "SPEC-0525",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "inspected-specimen-positive"
+      ],
+      "outcome": "SPEC-0524 (first-edition stamp) and SPEC-0525 (Unlimited) establish the edition capability of the inspected-specimen-positive edge.",
+      "rawRecordRef": "verification/source_registry.json:https://github.com/m4s-ai/snoredex-data/issues/266",
+      "rawRecordHash": "sha256:560292789780aa2a8ec1f203587476be937ea225b46e0c9d4136a5c5dc57f188",
+      "rawRecord": {
+        "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/266",
+        "nonUrlEvidenceId": null,
+        "providerId": "inspected-specimen",
+        "sourceTypes": [
+          "Inspected card photograph; external origin unknown",
+          "Owner-supplied physical card photograph"
+        ],
+        "dimensions": [
+          "edition",
+          "identity"
+        ],
+        "stableIdCount": 5,
+        "stableIds": [
+          "F0172-P02",
+          "F0172-P03",
+          "SPEC-0524",
+          "SPEC-0525",
+          "U0092"
+        ],
+        "retrievedAt": "2026-09-10",
+        "usageCount": 8
       }
     }
   ],

@@ -6573,6 +6573,58 @@
         "asia-30th-celebration-positive"
       ],
       "outcome": "Retained official card faces identify only the listed local releases; the corresponding localized product page announces 2026-09-16. Physical finish inventory remains open."
+    },
+    {
+      "observationId": "obs-wikidex-language-scan",
+      "surfaceId": "wikidex-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "27"
+      },
+      "retrievedAt": "2026-09-10",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "wikidex",
+        "recordKey": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0134",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "wikidex-positive-scan"
+      ],
+      "outcome": "The retained Spanish Jungle 27 scan (SPEC-0134) positively establishes the printed Spanish language and identity, grounding the language capability of the wikidex-positive-scan edge."
+    },
+    {
+      "observationId": "obs-inspected-specimen-edition",
+      "surfaceId": "inspected-specimens",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:inspected-specimen",
+        "specimens": [
+          "SPEC-0524",
+          "SPEC-0525"
+        ]
+      },
+      "retrievedAt": "2026-09-10",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "inspected-specimen",
+        "recordKey": "https://github.com/m4s-ai/snoredex-data/issues/266"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0524",
+        "SPEC-0525",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "inspected-specimen-positive"
+      ],
+      "outcome": "SPEC-0524 (first-edition stamp) and SPEC-0525 (Unlimited) establish the edition capability of the inspected-specimen-positive edge."
     }
   ]
 }
