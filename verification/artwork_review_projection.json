@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "8e0ac64fb56bb5a519eedfc4d6f058a0a19b7b6d2a70d1459934bff1af3bb798",
+  "projectionVersion": "f0a20dee0303ca27a207103e68db5381654bb0defed421afbe92e689d4001363",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -71507,20 +71507,26 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:20be3b07981b6b934e5bb4b4",
-              "semanticPrintingId": "PRINTING:20be3b07981b6b934e5bb4b4",
+              "physicalPrintingId": "PHYSICAL:PRINTING:4b5c354d7071f5992a41bc8c",
+              "semanticPrintingId": "PRINTING:4b5c354d7071f5992a41bc8c",
               "cardReleaseId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
               "finish": "non-holo",
               "edition": "1st Edition",
               "foilPattern": null,
-              "markings": [],
+              "markings": [
+                {
+                  "kind": "edition-stamp",
+                  "role": "print-identity",
+                  "text": "EDICIÓN 1"
+                }
+              ],
               "distribution": null,
               "cardSize": "unknown",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0172",
               "sourcePrintingId": "F0172-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:20be3b07981b6b934e5bb4b4",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4b5c354d7071f5992a41bc8c",
               "specimenIds": [
                 "SPEC-0524"
               ],
@@ -71561,7 +71567,9 @@
               "non-holo"
             ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "EDICIÓN 1"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -71618,7 +71626,7 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
-              "contentHash": "dfe91fdbbb122c2a4175fa834249878c1eba780e6516aed6c5a786bb12dd7e39",
+              "contentHash": "bfb83b228b06c8244d6ad17cb83a55f5dbb7b29bf7216e0ae47062fde0100045",
               "image": null
             },
             {
@@ -71627,7 +71635,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": "Image supplied by the collection owner on 2026-09-10",
               "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections. Retained as SPEC-0524.",
-              "contentHash": "87553b2f94e0d4ed183a745e81ec174626da5df2b26633145c6a3312ff4d458e",
+              "contentHash": "ef37cb90d8411c5ca81bff93448087b331804d764b6d9bdc4a2add015557ae49",
               "image": null
             },
             {
@@ -71636,7 +71644,7 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "243e7144f59c81964e195f3057499a5dac2293581790490073e5fb1505277ca3",
+              "contentHash": "89f450cda4650deeb6660e4cb909c4a4f2665b2db9aa419ecccad8918e5b3811",
               "image": null
             },
             {
@@ -71681,7 +71689,7 @@
               "provider": null,
               "url": null,
               "evidence": "Spanish Jungle Snorlax 27/64, 90 PI, Insensible and Golpe Cuerpo. EDICIÓN 1 stamp is clearly printed beside the artwork. The owner confirms the established all-Western-language Jungle identity rule: 11/64 is Holo and 27/64 is Non-Holo, for both editions. Finish follows that positive number mapping, not the absence of reflections.",
-              "contentHash": "2849f1193f8513773b2348033309362991474208761b91f7ea8b30bb3d244f29",
+              "contentHash": "1887b52fc10bfd9ef1cf445a6673956be3677796d263ad82081c2e465c192f91",
               "image": "verification/specimens/SPEC-0524.png"
             },
             {

@@ -57,6 +57,8 @@ def main() -> None:
             parsed = urlparse(mapping.get("evidenceUrl") or "")
             assert parsed.scheme in {"http", "https"} and parsed.netloc, mapping
     projector = finish_projector()
+    assert projector.specimen_markings({"markings": "EDICIÓN 1", "markingRole": "print-identity"}) == [
+        {"kind": "edition-stamp", "role": "print-identity", "text": "EDICIÓN 1"}]
     printings = []
     for edition, finish, variant in (("1st Edition", "non-holo", "V2"),
                                      ("Unlimited", "non-holo", "V2"),
