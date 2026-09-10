@@ -1000,7 +1000,17 @@ def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
     }
 
 
-def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) -> None:
+def _specimen_indexed_directly(entry: dict, specimens_by_id: dict | None) -> bool:
+    """True when the governed specimen's direct path already indexes a validated URL."""
+    spec = (specimens_by_id or {}).get(str(entry.get("specimenId")))
+    return bool(spec and (
+        provenance_url(spec.get("photographSource"))
+        or provenance_url(spec.get("listingUrl"))
+    ))
+
+
+def record_source_first_identity(entry: dict, record: Callable, surfaces: dict,
+                                 specimens_by_id: dict[str, dict] | None = None) -> None:
     """Index admitted claims under existing provider capabilities, without a provider allowlist."""
     provider = entry["providerId"]
     if provider not in surfaces or provider == "cardmarket-listing-photo":
@@ -1009,7 +1019,12 @@ def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) 
         if not entry.get("specimenId"):
             raise ValueError(f"Source-first provider {provider} requires a retained specimen")
         return
-    # A neighbouring page is not the inspected specimen's authority.
+    # A neighbouring page is not the inspected specimen's authority. When the governed
+    # specimen already supplies a validated photo/listing URL, the direct specimen path
+    # indexes that unit under the real URL; an anonymous inspected-specimen projection
+    # would duplicate the same observation as a second, untraceable evidence record.
+    if provider == "inspected-specimen" and _specimen_indexed_directly(entry, specimens_by_id):
+        return
     urls = [] if provider == "inspected-specimen" else sorted(source_first_registry_urls(entry))
     for url in urls or [None]:
         dimension = card_evidence_dimension(url, provider, surfaces, "card-release")
@@ -1094,8 +1109,9 @@ def main() -> int:
                            reviewed_graph)
 
     surfaces = specimen_surfaces()
+    specimens_by_id = {str(s.get("specimenId")): s for s in specimens}
     for entry in source_first["prints"]:
-        record_source_first_identity(entry, record, surfaces)
+        record_source_first_identity(entry, record, surfaces, specimens_by_id)
         if entry.get("raritySourceUrl"):
             record(
                 entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",
