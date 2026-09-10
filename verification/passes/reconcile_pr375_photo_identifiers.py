@@ -64,6 +64,19 @@ def main():
         rid = f"RELEASE:{locality}:{language}:{code}:{number}:{old['work']}"
         if old_id == rid:
             upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": uid, "disposition": "linked-local-counterpart", "targetRef": rid, "targetRefs": [rid], "reason": f"issue #{issue} re-key"})
+            # A first admission wrote descriptive photographSource prose into the
+            # release source records next to real URLs. A fresh admission writes the
+            # validated photo/listing URL, so replace residual prose idempotently
+            # and keep the provenance list free of duplicates.
+            replaced = [
+                (specimen_evidence_url(spec) if value == spec.get("photographSource") else value)
+                for value in old.get("sourceRecords", [])
+            ]
+            seen: set[str] = set()
+            old["sourceRecords"] = [
+                value for value in replaced
+                if not (value in seen or seen.add(value))
+            ]
             if uid in {"U0603", "U0171"}:
                 row = next(r for r in prints["prints"] if r["printId"] == pid)
                 row["sourceUrl"] = spec["listingUrl"]
@@ -135,7 +148,7 @@ def main():
         append_unique(release.setdefault("establishingClaimIds", []), scid)
         append_unique(release.setdefault("sourceFirstRecordIds", []), pid)
         append_unique(release.setdefault("legacyCounterpartUnitIds", []), uid)
-        append_unique(release.setdefault("sourceRecords", []), row["sourceUrl"], spec["photographSource"])
+        append_unique(release.setdefault("sourceRecords", []), row["sourceUrl"], specimen_evidence_url(spec))
         alias = [unit["setCode"], unit["number"]]
         if alias not in release.setdefault("legacyIdentityAliases", []): release["legacyIdentityAliases"].append(alias)
         release.update(cardReleaseId=rid, setEditionId=eid, localSetCode=code, localNumber=number,
