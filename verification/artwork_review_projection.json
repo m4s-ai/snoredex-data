@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "d040539eb31617b7926176dbfbe9d9141f874ca1e785f41bfd40ce1bbbfff105",
+  "projectionVersion": "293ae1c16ec7a5bdf6ed7d405d9254eb1e323ac1eaabb632bbd48c5b5bdaf695",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 642,
-    "physicalPrintings": 745,
-    "sourceObservations": 2901
+    "physicalPrintings": 748,
+    "sourceObservations": 2908
   },
   "groups": [
     {
@@ -33356,13 +33356,42 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2f1189d907fa7f88a1df6b07",
+              "semanticPrintingId": "PRINTING:2f1189d907fa7f88a1df6b07",
+              "cardReleaseId": "RELEASE:ID:Indonesian:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0361",
+              "sourcePrintingId": "F0361-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2f1189d907fa7f88a1df6b07",
+              "specimenIds": [
+                "SPEC-0519"
+              ],
+              "sources": [
+                {
+                  "url": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Indonesian gold Snorlax HP130 with Timbun Makanan Dalam Perut and Menindih. The lower line reads s5a I and 093/070 UR. Glittering foil is visible across the gold background and blue body. The canonical legacy key uses 93; the printed number is 093/070. No unpictured finish or edition is inferred. Retained as SPEC-0519.",
+                  "retrievedAt": "2026-09-10"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
             "finish": [
+              "holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -33381,9 +33410,38 @@
               "originalHash": "58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "previewSrc": "images/previews/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "thumbnailSrc": "images/thumbs/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0519.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0519",
+              "contentHash": "561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98",
+              "previewSrc": "images/previews/SPEC-0519.png?v=561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98",
+              "thumbnailSrc": "images/thumbs/SPEC-0519.png?v=561029193753787cc7ca375637f4c2afea54e1ad060401f3a368bc0479c60e98"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0361-P01:0:1658877af63a5335",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
+              "evidence": "Indonesian gold Snorlax HP130 with Timbun Makanan Dalam Perut and Menindih. The lower line reads s5a I and 093/070 UR. Glittering foil is visible across the gold background and blue body. The canonical legacy key uses 93; the printed number is 093/070. No unpictured finish or edition is inferred. Retained as SPEC-0519.",
+              "contentHash": "c6f6e687e47026cb2731533c2d024d3bf58107d884f55eb49b721a81582d9cc6",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0519",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-%28Indonesia-Version%29-i.52799340.41773289935",
+              "evidence": "Indonesian gold Snorlax HP130 with Timbun Makanan Dalam Perut and Menindih. The lower line reads s5a I and 093/070 UR. Glittering foil is visible across the gold background and blue body. The canonical legacy key uses 93; the printed number is 093/070. No unpictured finish or edition is inferred.",
+              "contentHash": "d5529c595eec70685fc7d9b52229154fc3e18d8b2982c6c1bf7b465701666a39",
+              "image": "verification/specimens/SPEC-0519.png"
+            },
             {
               "observationId": "unit:U0603",
               "kind": "unit",
@@ -79439,13 +79497,43 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:814e660181051db01d8ac6ab",
+              "semanticPrintingId": "PRINTING:814e660181051db01d8ac6ab",
+              "cardReleaseId": "RELEASE:TH:Thai:via-s10a:unknown-local-set:via-077:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0333",
+              "sourcePrintingId": "F0333-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:814e660181051db01d8ac6ab",
+              "specimenIds": [
+                "SPEC-0520"
+              ],
+              "sources": [
+                {
+                  "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Thai Snorlax HP150 in the eating scene; Thai name and rules text, s10a T, regulation F and 077/071 CHR are readable. Reflective multicoloured foil is visible across the artwork and silver border. OjamaCard is a seller watermark outside the card identity, not a distribution stamp. Retained as SPEC-0520.",
+                  "retrievedAt": "2026-09-10"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Kouki Saitou",
             "variant": "V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -79462,9 +79550,38 @@
               "originalHash": "6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355",
               "previewSrc": "images/previews/s10a_077_Snorlax_V2_657056.jpg?v=6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355",
               "thumbnailSrc": "images/thumbs/s10a_077_Snorlax_V2_657056.jpg?v=6e3a1a4388ad64e77103ed94b1fabfdfcbcccfe6b24b14386dae1ba124952355"
+            },
+            {
+              "src": "verification/specimens/SPEC-0520.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0520",
+              "contentHash": "1e0fa7ade3a44db5143a464fdf0c5f08948a20a74c75e26c9183c35021b28538",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1e0fa7ade3a44db5143a464fdf0c5f08948a20a74c75e26c9183c35021b28538",
+              "previewSrc": "images/previews/SPEC-0520.png?v=1e0fa7ade3a44db5143a464fdf0c5f08948a20a74c75e26c9183c35021b28538",
+              "thumbnailSrc": "images/thumbs/SPEC-0520.png?v=1e0fa7ade3a44db5143a464fdf0c5f08948a20a74c75e26c9183c35021b28538"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0333-P01:0:ffbc63b14a7df85a",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+              "evidence": "Thai Snorlax HP150 in the eating scene; Thai name and rules text, s10a T, regulation F and 077/071 CHR are readable. Reflective multicoloured foil is visible across the artwork and silver border. OjamaCard is a seller watermark outside the card identity, not a distribution stamp. Retained as SPEC-0520.",
+              "contentHash": "cd825e106db002d3a738c2f2f2c875b978e7387027f179096b48091851453263",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0520",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+              "evidence": "Thai Snorlax HP150 in the eating scene; Thai name and rules text, s10a T, regulation F and 077/071 CHR are readable. Reflective multicoloured foil is visible across the artwork and silver border. OjamaCard is a seller watermark outside the card identity, not a distribution stamp.",
+              "contentHash": "42d9c0f949a21b51bc98fd6c7634a3c97e99bc70e1c2abd6bfc7354235819ba2",
+              "image": "verification/specimens/SPEC-0520.png"
+            },
             {
               "observationId": "unit:U0171",
               "kind": "unit",
@@ -87395,6 +87512,33 @@
                   "evidence": "SV2a-181 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:263271097aee6333c3eff78f",
+              "semanticPrintingId": "PRINTING:263271097aee6333c3eff78f",
+              "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-181:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0469",
+              "sourcePrintingId": "F0469-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:263271097aee6333c3eff78f",
+              "specimenIds": [
+                "SPEC-0518"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/U7sAAeSwZPZowgKA/s-l500.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Indonesian Snorlax HP150 with Kemaruk and Tekanan Gedebuk, printed SV2a I 181/165 AR. Coloured foil reflections cross the upper artwork above the name and along the right edge. The photograph establishes this Holo specimen, not an exhaustive finish inventory. Retained as SPEC-0518.",
+                  "retrievedAt": "2026-09-10"
+                }
+              ]
             }
           ],
           "detection": {
@@ -87403,6 +87547,7 @@
             "artist": null,
             "variant": "V2",
             "finish": [
+              "holo",
               "non-holo"
             ],
             "foilPattern": [],
@@ -87432,6 +87577,17 @@
               "originalHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
               "previewSrc": "images/previews/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
               "thumbnailSrc": "images/thumbs/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0518.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0518",
+              "contentHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "previewSrc": "images/previews/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "thumbnailSrc": "images/thumbs/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5"
             }
           ],
           "observations": [
@@ -87445,6 +87601,15 @@
               "image": null
             },
             {
+              "observationId": "finish:F0469-P02:0:425c2c329981389f",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/U7sAAeSwZPZowgKA/s-l500.jpg",
+              "evidence": "Indonesian Snorlax HP150 with Kemaruk and Tekanan Gedebuk, printed SV2a I 181/165 AR. Coloured foil reflections cross the upper artwork above the name and along the right edge. The photograph establishes this Holo specimen, not an exhaustive finish inventory. Retained as SPEC-0518.",
+              "contentHash": "890df5ddb2fa775b585da5297194a32524272664c802abd517b44789a2b765b7",
+              "image": null
+            },
+            {
               "observationId": "specimen:SPEC-0177",
               "kind": "specimen",
               "provider": null,
@@ -87452,6 +87617,15 @@
               "evidence": "Complete official Indonesian render for Snorlax SV2a I 181/165 (base). The printed name, set code, collector number, attacks and rarity AR establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
               "contentHash": "37065ed024ecef1895f6e28ef33178ecbc7db8b03ba83763e802d8febdb478a1",
               "image": "verification/specimens/SPEC-0177.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0518",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/397048838536",
+              "evidence": "Indonesian Snorlax HP150 with Kemaruk and Tekanan Gedebuk, printed SV2a I 181/165 AR. Coloured foil reflections cross the upper artwork above the name and along the right edge. The photograph establishes this Holo specimen, not an exhaustive finish inventory.",
+              "contentHash": "e3e670c16977de1e5416eaac0242a06f2183a90b4c2500d209a0ce0987291dd1",
+              "image": "verification/specimens/SPEC-0518.jpg"
             },
             {
               "observationId": "unit:U0051",
@@ -92791,6 +92965,17 @@
               "originalHash": "cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
               "previewSrc": "images/previews/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6",
               "thumbnailSrc": "images/thumbs/SPEC-0177.png?v=cafc90cada7b0ebf239c3020894e61ee0c0ffc5b5769eaa61acd609c777d7aa6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0518.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0518",
+              "contentHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "previewSrc": "images/previews/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5",
+              "thumbnailSrc": "images/thumbs/SPEC-0518.png?v=9ce0e7def581a1689f4a39d9196f55e878e1c4e502bfa9b5aac0dcbdb15870d5"
             }
           ],
           "observations": [
@@ -92820,6 +93005,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 4, column 1 crop. The visible artwork, printed language, set identity SV2a I and collector identity 181/165 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "26e0fa8cbb4004773e42766206fa6a2d37432285d1ee8b91a11333ced97b19e7",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0518",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/397048838536",
+              "evidence": "Indonesian Snorlax HP150 with Kemaruk and Tekanan Gedebuk, printed SV2a I 181/165 AR. Coloured foil reflections cross the upper artwork above the name and along the right edge. The photograph establishes this Holo specimen, not an exhaustive finish inventory.",
+              "contentHash": "e3e670c16977de1e5416eaac0242a06f2183a90b4c2500d209a0ce0987291dd1",
+              "image": "verification/specimens/SPEC-0518.jpg"
             }
           ]
         }

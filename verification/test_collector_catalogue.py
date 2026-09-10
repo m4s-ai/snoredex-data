@@ -615,10 +615,10 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 703,
+            "verifiedPrintings": 704,
             "finishCandidates": 111,
             "researchPlaceholders": 75,
-            "currentKnown": 703,
+            "currentKnown": 704,
             "research": 186,
         },
     }
