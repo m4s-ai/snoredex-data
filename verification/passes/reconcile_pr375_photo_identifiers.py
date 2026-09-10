@@ -2,11 +2,12 @@
 import json
 from copy import deepcopy
 from pathlib import Path
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote
 
 from admit_issue257_simplified_chinese_20260827 import (
     append_unique, source_profile, upsert_edge, upsert_entity, upsert_migration,
 )
+from source_registry import provenance_url
 
 ROOT = Path(__file__).resolve().parents[2]
 ORIGIN = "reviewed-photo-identities-pr375"
@@ -39,9 +40,8 @@ def replace_refs(value, old, new):
 
 def specimen_evidence_url(specimen):
     for field in ("photographSource", "listingUrl"):
-        value = specimen.get(field) or ""
-        parsed = urlsplit(value)
-        if parsed.scheme in {"http", "https"} and parsed.netloc:
+        value = provenance_url(specimen.get(field))
+        if value:
             return value
     raise ValueError("specimen equivalence requires a navigable evidence URL")
 

@@ -26,6 +26,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from source_registry import provenance_url
+
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
@@ -562,11 +565,14 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
         source_type = "Owner-supplied physical card photograph"
     else:
         source_type = "Inspected physical specimen photograph"
-    return exact_source(
-        str(specimen.get("photographSource") or f"specimen:{specimen['specimenId']}"),
+    source = exact_source(
+        provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl")),
         source_type,
         f"{specimen.get('observed', '').strip()} Retained as {specimen['specimenId']}.",
     )
+    if source["url"] is None:
+        source.pop("url")
+    return source
 
 
 def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> list[dict[str, Any]]:

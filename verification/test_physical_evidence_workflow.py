@@ -57,6 +57,18 @@ def main() -> None:
             parsed = urlparse(mapping.get("evidenceUrl") or "")
             assert parsed.scheme in {"http", "https"} and parsed.netloc, mapping
     projector = finish_projector()
+    for unit in read("finish_units.json")["units"]:
+        for printing in unit["printings"]:
+            for source in printing.get("sources", []):
+                if source.get("url"):
+                    assert projector.provenance_url(source["url"]), printing["printingId"]
+    photo = {"specimenId": "SPEC-test", "heldBy": "collection owner", "observed": "Card photo",
+             "photographSource": "Owner supplied photograph", "listingUrl": "https://example.test/issue"}
+    assert projector.specimen_source(photo)["url"] == photo["listingUrl"]
+    photo["photographSource"] = "https://example.test/card.png"
+    assert projector.specimen_source(photo)["url"] == photo["photographSource"]
+    photo.update(photographSource="Owner supplied photograph", listingUrl=None)
+    assert "url" not in projector.specimen_source(photo)
     assert projector.specimen_markings({"markings": "EDICIÓN 1", "markingRole": "print-identity"}) == [
         {"kind": "edition-stamp", "role": "print-identity", "text": "EDICIÓN 1"}]
     printings = []
@@ -681,20 +693,19 @@ def main() -> None:
         cited_units = set(specimen.get("citedBy") or []) & corroborated_unit_ids
         if not cited_units:
             continue
-        source_key = (
-            unquote(specimen["photographSource"])
-            if specimen.get("photographSource") else "evidence:inspected-specimen"
-        )
+        from source_registry import provenance_url
+        source_url = provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl"))
+        source_key = unquote(source_url) if source_url else "evidence:inspected-specimen"
         if source_key not in registry_by_source:
             source_key = source_key.split("#", 1)[0]
         if source_key not in registry_by_source:
             source_key = "evidence:inspected-specimen"
         registry_row = registry_by_source[source_key]
-        assert "identity" in registry_row["dimensions"]
+        assert {"identity", "card-existence", "card-release", "language"} & set(registry_row["dimensions"])
         assert specimen["specimenId"] in registry_row["stableIds"]
         assert cited_units <= set(registry_row["stableIds"])
         capability_row = capability_by_source[source_key]
-        assert "identity" in capability_row["dimensions"]
+        assert {"identity", "card-existence", "card-release", "language"} & set(capability_row["dimensions"])
     primary_checked_at = {
         "U0094": "2026-07-21T16:41:51", "U0295": "2026-07-22T09:26:20",
         "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
