@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-10",
-  "projectionVersion": "293ae1c16ec7a5bdf6ed7d405d9254eb1e323ac1eaabb632bbd48c5b5bdaf695",
+  "projectionVersion": "f66743cbfd5655c961dcbd9dddff3bf7e6b11fedc075e6238b132675c13e473b",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 642,
-    "physicalPrintings": 748,
-    "sourceObservations": 2908
+    "physicalPrintings": 749,
+    "sourceObservations": 2911
   },
   "groups": [
     {
@@ -18811,13 +18811,53 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:b7c98fd1f3d006edce932cf7",
+              "semanticPrintingId": "PRINTING:b7c98fd1f3d006edce932cf7",
+              "cardReleaseId": "RELEASE:JP:Japanese:BW-P:207:Snorlax-Block-Teampact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0025",
+              "sourcePrintingId": "F0025-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:b7c98fd1f3d006edce932cf7",
+              "specimenIds": [
+                "SPEC-0521"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-10",
+                  "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Japanese Snorlax HP130, Team Plasma design, 207/BW-P, 5ban Graphics and CoroCoro Ichiban logo are readable. Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype. This collector scan is additional evidence alongside SPEC-0196; no exhaustive finish inventory or physical dimensions are asserted. Retained as SPEC-0521.",
+                  "retrievedAt": "2026-09-10",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "5ban Graphics",
             "variant": "base",
             "finish": [
+              "holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -18847,9 +18887,38 @@
               "originalHash": "97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
               "previewSrc": "images/previews/SPEC-0196.png?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2",
               "thumbnailSrc": "images/thumbs/SPEC-0196.png?v=97536d432d38f6704c47c2401c7278ffbfdeb5845795919d3ae7b82c722fb8c2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0521.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0521",
+              "contentHash": "ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5",
+              "previewSrc": "images/previews/SPEC-0521.png?v=ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5",
+              "thumbnailSrc": "images/thumbs/SPEC-0521.png?v=ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0025-P01:0:813a694e78571831",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties.",
+              "contentHash": "e762a617f2152293fdce7d6fea75dd2eddffa32998dfd3daf88fac5e39022a27",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0025-P01:1:8c639f3f63812efa",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+              "evidence": "Japanese Snorlax HP130, Team Plasma design, 207/BW-P, 5ban Graphics and CoroCoro Ichiban logo are readable. Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype. This collector scan is additional evidence alongside SPEC-0196; no exhaustive finish inventory or physical dimensions are asserted. Retained as SPEC-0521.",
+              "contentHash": "952af6a70abb94b59bbabfde99e8dca9b907c66957795c19685c7ffcd1500132",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0196",
               "kind": "specimen",
@@ -18858,6 +18927,15 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax BW-P 207 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
               "contentHash": "e108c817b4229d2514477c8486d95f49dd53d7c2e0c2f18e70290c8728955836",
               "image": "verification/specimens/SPEC-0196.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0521",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.elitefourum.com/t/why-is-every-copy-of-this-snorlax-207-bw-p-card-in-such-a-bad-condition/59320/11",
+              "evidence": "Japanese Snorlax HP130, Team Plasma design, 207/BW-P, 5ban Graphics and CoroCoro Ichiban logo are readable. Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype. This collector scan is additional evidence alongside SPEC-0196; no exhaustive finish inventory or physical dimensions are asserted.",
+              "contentHash": "7c3dc7eb1fd58c375eb0a54c01cb6d6ef62f1769a4f65e9da05d528b1d1abce0",
+              "image": "verification/specimens/SPEC-0521.jpg"
             },
             {
               "observationId": "unit:U0575",

@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:53ee412924ea7472457f335697d1737e4a3e62a7ebfaa04dc1aa9f70dc4e3a5f",
+    "fromFingerprint": "sha256:9dbb00d881268d0b1383be1197c59bd3fcea92e42b0cc1050b33e750a6ab377f",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:4f1b0c99ae7e64497a27b174c5c9afd4cd84246b2c385e828ec9d823856934fd",
+    "toFingerprint": "sha256:b17d368d7a106929c309ed4e948490690738fdba4d5d0cc24fc61cb9f2c0c696",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:4f1b0c99ae7e64497a27b174c5c9afd4cd84246b2c385e828ec9d823856934fd",
+      "toFingerprint": "sha256:b17d368d7a106929c309ed4e948490690738fdba4d5d0cc24fc61cb9f2c0c696",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12442,7 +12442,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:4f1b0c99ae7e64497a27b174c5c9afd4cd84246b2c385e828ec9d823856934fd",
+      "toFingerprint": "sha256:b17d368d7a106929c309ed4e948490690738fdba4d5d0cc24fc61cb9f2c0c696",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -23346,6 +23346,14 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "bw-p-207-japanese-none-holo-unknown",
+      "toItemIds": [
+        "item-0106f682-b985-523b-8a3a-53fc115c003d"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "bw-p-207-japanese-none-reverse-holo",
       "toItemIds": [
         "item-f408a049-2582-589d-a685-f3f814070819"
@@ -31902,6 +31910,13 @@
         ]
       },
       {
+        "legacyChecklistId": "bw-p-207-japanese-none-holo-unknown",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-0106f682-b985-523b-8a3a-53fc115c003d"
+        ]
+      },
+      {
         "legacyChecklistId": "bw-p-207-japanese-none-reverse-holo",
         "disposition": "projected",
         "targetItemIds": [
@@ -38662,6 +38677,7 @@
         "cardReleaseId": "RELEASE:JP:Japanese:BW-P:207:Snorlax-Block-Teampact",
         "disposition": "projected",
         "targetItemIds": [
+          "item-0106f682-b985-523b-8a3a-53fc115c003d",
           "item-f408a049-2582-589d-a685-f3f814070819"
         ],
         "reason": null
@@ -46618,6 +46634,11 @@
         "targetItemId": "item-f4e7bfbb-53b0-5a42-a315-baa903a59025"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:b7c98fd1f3d006edce932cf7",
+        "disposition": "projected",
+        "targetItemId": "item-0106f682-b985-523b-8a3a-53fc115c003d"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:b8cb7a5a34889dd927a0be75",
         "disposition": "projected",
         "targetItemId": "item-66adf014-2a59-57cd-9926-fb5824743bdf"
@@ -47119,9 +47140,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 890,
+      "legacyChecklistRows": 891,
       "cardReleases": 642,
-      "physicalPrintings": 748,
+      "physicalPrintings": 749,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

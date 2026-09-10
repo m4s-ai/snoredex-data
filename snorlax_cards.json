@@ -39,13 +39,13 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-10",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 474,
-      "withOnlyMarketplaceClaim": 49,
+      "withConfirmedFinish": 475,
+      "withOnlyMarketplaceClaim": 48,
       "pendingFinish": 38,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 310,
-      "withHolo": 235,
+      "withHolo": 236,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 56,
@@ -36978,11 +36978,13 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
+          "holo",
           "reverse-holo"
         ],
         "unitAvailableFinishes": [
+          "holo",
           "reverse-holo"
         ],
         "byLanguage": [
@@ -36990,29 +36992,45 @@
             "language": "Japanese",
             "claimStatus": "confirmed",
             "availableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "unitAvailableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0025",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0025-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "unknown",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0521.jpg",
+                "specimenIds": [
+                  "SPEC-0521"
+                ]
+              },
+              {
+                "printingId": "F0025-P02",
                 "finish": "reverse-holo",
                 "foilPattern": null,
                 "markings": null,

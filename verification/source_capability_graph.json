@@ -20,7 +20,7 @@
       "coverageEdges": 52,
       "absenceEdges": 0,
       "observations": 54,
-      "resolvedVerdictSources": 1627
+      "resolvedVerdictSources": 1629
     },
     "surfaceStates": {
       "active": 22,
@@ -6438,7 +6438,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:f5fd4ccc607cd63520544ea43c524ee2823bfd4473865955fee0322a66f259b6",
+      "rawRecordHash": "sha256:badd11e8150824717d785a5a5e0953d3f2ebaf84f4d2e905dc95b798ab5cdf84",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -6460,10 +6460,11 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 135,
+        "stableIdCount": 138,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
+          "F0025-P01",
           "F0057-P01",
           "F0057-P02",
           "F0067-P03",
@@ -6566,6 +6567,7 @@
           "SPEC-0473",
           "SPEC-0474",
           "SPEC-0480",
+          "SPEC-0521",
           "TH:AS5a:142/184:base",
           "TW:AS5a:142:base",
           "U0097",
@@ -6581,6 +6583,7 @@
           "U0433",
           "U0467",
           "U0503",
+          "U0575",
           "U0616",
           "U0617",
           "U0618",
@@ -6598,8 +6601,8 @@
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants"
         ],
-        "retrievedAt": "2026-09-09",
-        "usageCount": 151
+        "retrievedAt": "2026-09-10",
+        "usageCount": 154
       }
     },
     {
@@ -14606,6 +14609,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.elitefourum.com/t/why-is-every-copy-of-this-snorlax-207-bw-p-card-in-such-a-bad-condition/59320/11",
+      "providerId": "elitefourum",
+      "surfaceId": "elitefourum-topics",
+      "capabilityEdgeIds": [
+        "elitefourum-positive-research",
+        "elitefourum-black-star-language-table"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://www.facebook.com/groups/389018291429685/posts/2416439302020897",
       "providerId": "elitefourum",
       "surfaceId": "elitefourum-topics",
@@ -14956,6 +14972,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

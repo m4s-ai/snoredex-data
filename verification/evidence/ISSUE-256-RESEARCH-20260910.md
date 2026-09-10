@@ -29,7 +29,7 @@ TCGdex positive non-holo claim for Indonesian SV2a 181 remains separate; a Holo 
 does not disprove another printing. The printed local identifiers are retained in the
 observations; the legacy physical-release records still need structured local-set
 reconciliation. That remaining identity work must not be described as missing photos.
-Japanese 207/BW-P below remains research, outside this three-image intake.
+Japanese 207/BW-P was subsequently accepted as SPEC-0521, as detailed below.
 
 ## Reconciliation before research
 
@@ -56,12 +56,15 @@ posts 8 and 11, contains original photographs previously left uninspected in the
 - [Front and back scan](https://efour.b-cdn.net/uploads/default/original/4X/8/7/e/87ee6cf1cb30e7aa29c3bd5ab7bc86094a7a7000.jpeg)
   provides a second view of the same specimen, not an independent provider.
 
-These are additional distribution and physical-treatment observations. They do not
-yet replace SPEC-0196 or establish an exhaustive finish list. Before acceptance,
-retain the selected original through specimen intake and review the precise
-technical finish classification. No extra user photograph is needed to retrieve
-these scans. The discussion's proposed causes of surface damage are not established
-manufacturing facts.
+The original front scan is now retained as **SPEC-0521** through the
+[Japanese intake manifest](issue-259-jp207-photo-20260910.json), alongside the earlier
+SPEC-0196 catalogue image. The collection owner explicitly classified the visible
+treatment as **Holo** on 2026-09-10, without a separate foil subtype. The observation
+records `finish: holo` and `ownerAttestedFields: ["finish"]`, preserving the distinction
+between the collector scan's identity evidence and the owner's finish classification.
+No additional image or subtype decision is needed for this printing. This does not
+close the finish inventory. The discussion's proposed causes of surface damage are
+not established manufacturing facts.
 
 ## Initial retrieval blockers (resolved by the follow-up above)
 
@@ -111,8 +114,9 @@ remain scoped to visible or separately supported evidence.
 
 Text searches, direct source pages, forum JSON and original photographs were used.
 Image search was rate-limited; Chrome was unavailable in the current browser tool.
-No whole-desktop control or TLS validation bypass was used. Downloaded inspection
-copies are in the ignored research cache and have not been admitted as specimens.
+No whole-desktop control or TLS validation bypass was used. Other downloaded inspection
+copies remain in the ignored research cache; the four accepted photographs are retained
+as SPEC-0518 through SPEC-0521.
 
 The three requested photographs are now retained. Next work is the structured
 local-identity reconciliation and any independently supported alternate finishes;

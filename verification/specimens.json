@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 520,
+  "count": 521,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10666,6 +10666,31 @@
         "basis": "Reflective multicoloured foil is visible across the artwork and silver border."
       },
       "listingUrl": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at"
+    },
+    {
+      "specimenId": "SPEC-0521",
+      "setCode": "BW-P",
+      "number": "207",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Original Elite Fourum collector scan, also supplied by the collection owner in this task",
+      "photograph": "SPEC-0521.jpg",
+      "photographSource": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+      "photographSha256": "sha256:ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5",
+      "observed": "Japanese Snorlax HP130, Team Plasma design, 207/BW-P, 5ban Graphics and CoroCoro Ichiban logo are readable. Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype. This collector scan is additional evidence alongside SPEC-0196; no exhaustive finish inventory or physical dimensions are asserted.",
+      "recordedAt": "2026-09-10",
+      "citedBy": [
+        "U0575"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "basis": "Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype."
+      },
+      "listingUrl": "https://www.elitefourum.com/t/why-is-every-copy-of-this-snorlax-207-bw-p-card-in-such-a-bad-condition/59320/11"
     }
   ]
 }

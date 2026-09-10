@@ -57,13 +57,13 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 474,
-      "withOnlyMarketplaceClaim": 49,
+      "withConfirmedFinish": 475,
+      "withOnlyMarketplaceClaim": 48,
       "pendingFinish": 38,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 310,
-      "withHolo": 235,
+      "withHolo": 236,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 56,
@@ -2381,20 +2381,56 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Japanese Snorlax HP130, Team Plasma design, 207/BW-P, 5ban Graphics and CoroCoro Ichiban logo are readable. Diagonal rainbow foil reflections cross the illustration, text area and blue border. On 2026-09-10 the collection owner explicitly classified this treatment as Holo, with no separate technical subtype. This collector scan is additional evidence alongside SPEC-0196; no exhaustive finish inventory or physical dimensions are asserted. Retained as SPEC-0521.",
+              "retrievedAt": "2026-09-10",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-10",
+              "evidence": "The collection owner's explicit 2026-09-10 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0521"
+          ],
+          "image": "verification/specimens/SPEC-0521.jpg",
+          "printingId": "F0025-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -2412,7 +2448,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0025-P01"
+          "printingId": "F0025-P02"
         }
       ],
       "unresolved": [
