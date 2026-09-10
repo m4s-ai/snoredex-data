@@ -43,6 +43,15 @@ def finish_projector():
 
 
 def main() -> None:
+    photo_units = {unit["unitId"]: unit for unit in read("units.json")
+                   if unit["unitId"] in {"U0171", "U0603", "U0602", "U0170", "U0604", "U0092"}}
+    assert len(photo_units) == 6
+    for unit in photo_units.values():
+        parsed = urlparse(unit.get("sourceUrl") or "")
+        assert parsed.scheme in {"http", "https"} and parsed.netloc, unit["unitId"]
+    thai_photo = next(row for row in read("specimens.json")["specimens"]
+                      if row["specimenId"] == "SPEC-0523")
+    assert photo_units["U0604"]["sourceUrl"] == thai_photo["listingUrl"]
     for question in read("legacy_issue_rekeys.json")["questionSets"]:
         for mapping in question["mappings"]:
             parsed = urlparse(mapping.get("evidenceUrl") or "")

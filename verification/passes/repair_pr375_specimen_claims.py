@@ -1,6 +1,7 @@
 """Repair PR #375's set-only language claims from retained exact-card photos."""
 import json
 from pathlib import Path
+from reconcile_pr375_photo_identifiers import specimen_evidence_url
 
 ROOT = Path(__file__).resolve().parents[2]
 TARGETS = {"U0171": "SPEC-0520", "U0603": "SPEC-0519", "U0602": "SPEC-0489", "U0170": "SPEC-0522", "U0604": "SPEC-0523", "U0092": "SPEC-0134"}
@@ -17,9 +18,11 @@ def main():
             continue
         specimen = specimens[TARGETS[unit["unitId"]]]
         ref = "specimen:" + specimen["specimenId"]
-        if unit.get("sourceRef") == ref and unit["evidenceGranularity"] == "specimen-or-card":
+        source_url = specimen_evidence_url(specimen)
+        already_applied = unit.get("sourceRef") == ref and unit["evidenceGranularity"] == "specimen-or-card"
+        if already_applied and unit.get("sourceUrl") == source_url:
             continue
-        assert unit["evidenceGranularity"] == "product-or-set", unit["unitId"]
+        assert already_applied or unit["evidenceGranularity"] == "product-or-set", unit["unitId"]
         assert unit["unitId"] in specimen["citedBy"]
         assert all(unit[k] == specimen[k] for k in ("variant", "language"))
         if unit["setCode"] != specimen["setCode"]:
@@ -32,7 +35,7 @@ def main():
         provider = {"U0602": "52poke", "U0092": "wikidex", "U0604": "inspected-specimen"}.get(unit["unitId"], "seller-listing-photo")
         source_type = {"wikidex": "WikiDex exact-card photograph", "52poke": "52poke exact-card image", "inspected-specimen": "Owner-supplied physical photograph"}.get(provider, "Seller listing photograph")
         unit.update(
-            status="confirmed", sourceUrl=specimen["photographSource"] if specimen["photographSource"].startswith("https://") else None,
+            status="confirmed", sourceUrl=source_url,
             sourceType=source_type,
             providerId=provider, sourceRef=ref, corroborated=bool(unit.get("corroborated")),
 
