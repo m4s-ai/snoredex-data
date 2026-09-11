@@ -45,7 +45,7 @@ STRENGTH = {"pending": 0, "marketplace-claimed": 1, "owner-attested": 2, "confir
 RESERVED_DROPDOWN_OPTIONS = {"none"}
 
 # Documentation roles (#100). The stage is the design constraint, not a label: `auto` is paid for
-# on every task because CLAUDE.md and AGENTS.md are injected at session start, so only what changes
+# on every task because AGENTS.md (and the CLAUDE.md shim that imports it) is injected at session start, so only what changes
 # behaviour before an agent acts belongs there. Everything else is opened deliberately.
 # Files that quote the sensitive-expression patterns themselves, so P4 and P6 would otherwise
 # match on the check's own vocabulary. Both paths of the readiness audit are listed on purpose:
@@ -1544,7 +1544,7 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                 f"e.g. {unverifiable[:5]}",
             )
             attestation_only = by_provider.get("owner-attestation", 0)
-            policy_docs = {"CLAUDE.md": (ROOT / "CLAUDE.md").read_text(encoding="utf-8"),
+            policy_docs = {"AGENTS.md": (ROOT / "AGENTS.md").read_text(encoding="utf-8"),
                            "verification/RESUME.md": (ROOT / "verification" / "RESUME.md")
                            .read_text(encoding="utf-8")}
             figure_docs = dict(policy_docs)
@@ -1585,7 +1585,7 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                 """Declare one check over several published figures.
 
                 E4, E7 and E11 were three hand-rolled copies of the same loop, added one issue at a time
-                (#64, #65, #66). They stay three checks — CLAUDE.md and HANDOVER.md name them, and each covers
+                (#64, #65, #66). They stay three checks — AGENTS.md and HANDOVER.md name them, and each covers
                 a distinct claim — but there is now one implementation, so the next figure someone writes into
                 a document is a row rather than a fourth copy (#68).
 
@@ -2063,7 +2063,7 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
                 "FAIL",
                 not malformed,
                 f"{len(malformed)} malformed physical observation(s): {malformed[:5]}. Finish is one "
-                f"of {sorted(SPECIMEN_FINISHES)}; markings.role is the trichotomy CLAUDE.md states.",
+                f"of {sorted(SPECIMEN_FINISHES)}; markings.role is the trichotomy AGENTS.md states.",
             )
             observed_finishes = [s for s in specimens if s.get("physicalObservation")]
             check(
@@ -3459,7 +3459,7 @@ def _collect_g14(state: dict[str, Any]) -> dict[str, Any]:
         def _collect_g14_part3():
             nonlocal line
             gate_diffs = [
-                line.strip() for line in (ROOT / "CLAUDE.md").read_text(encoding="utf-8").splitlines()
+                line.strip() for line in (ROOT / "AGENTS.md").read_text(encoding="utf-8").splitlines()
                 if line.strip().startswith("git diff --exit-code")
             ]
             unscoped = [line for line in gate_diffs if "sqlite" not in line]
@@ -3472,7 +3472,7 @@ def _collect_g14(state: dict[str, Any]) -> dict[str, Any]:
                 f"{unscoped}. Those files cannot reproduce byte-for-byte across SQLite versions; their "
                 f"content is covered by `database.py --check` and `tracker.py check-template` instead."
                 if unscoped else
-                "CLAUDE.md states no gate diff at all, so the gate it documents cannot be run.",
+                "AGENTS.md states no gate diff at all, so the gate it documents cannot be run.",
             )
 
         _collect_g14_part1()

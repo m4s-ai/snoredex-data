@@ -1,14 +1,14 @@
-<!-- doc: role=incident record behind the traps in CLAUDE.md; stage=reference -->
+<!-- doc: role=incident record behind the traps in AGENTS.md; stage=reference -->
 # Lessons
 
 What went wrong here, and what now stops it happening again.
 
-`CLAUDE.md` carries each of these as a one-line trap, because that file is loaded on every task and
+`AGENTS.md` carries each of these as a one-line trap, because that file is loaded on every task and
 a rule without its failure shape reads as arbitrary. This file carries the incident: what happened,
 what it cost, and which check holds the line now.
 
 **This file is not imported.** An `@`-import is auto-loading with extra indirection, which is the
-problem #100 set out to fix. `CLAUDE.md` is meant to carry enough that opening this one is never
+problem #100 set out to fix. `AGENTS.md` is meant to carry enough that opening this one is never
 required — only useful.
 
 Newest first.
@@ -162,7 +162,7 @@ Amending the commit locally left `P7` still red: it scans every published ref, a
 still reached the old commit. The amend only takes effect once the branch is force-pushed and the
 old commit stops being reachable.
 
-**Now guarded by** a line in `CLAUDE.md`'s gate block: run `review_findings.py` before the commit
+**Now guarded by** a line in `AGENTS.md`'s gate block: run `review_findings.py` before the commit
 for the tree, and again after the push for the history.
 
 *Found by CI on PR #178.*
@@ -194,7 +194,7 @@ second provider agreed about *this* unit.
 
 **Trap:** *`E3` enforces checkable **or** strong, not tier alone.*
 
-`CLAUDE.md` said a weaker source *"may not"* stand alone, and that a check enforced it. Neither was
+`AGENTS.md` said a weaker source *"may not"* stand alone, and that a check enforced it. Neither was
 true. `E3` fails only when an uncorroborated claim is **both** un-checkable (no `sourceUrl`) **and**
 below tier 2. A tier-3 page with a URL may carry a claim by itself, and five resolved units do.
 
@@ -348,7 +348,7 @@ it runs as its own step under `-e`.
 
 **Trap:** *`git diff --exit-code` in the documented gate excludes `*.sqlite`, and must keep doing so.*
 
-The pre-PR gate in `CLAUDE.md` regenerated `snoredex.sqlite` and the tracker template for real and
+The pre-PR gate in `AGENTS.md` regenerated `snoredex.sqlite` and the tracker template for real and
 then byte-diffed the whole tree. On a clean `main` that reported drift in both files — not because
 anything was stale, but because a SQLite file stores the version number of the library that wrote it
 in its own header. Two environments on different SQLite builds cannot produce the same bytes from

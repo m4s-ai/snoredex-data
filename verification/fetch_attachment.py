@@ -32,7 +32,7 @@ So a bare attachment URL cannot be resolved here, but the issue's own HTML expos
 manifest row, while the single-specimen mode takes bytes from a local file or any reachable URL.
 Both modes validate the image and record it against a stable specimen id.
 
-Committing the image is the right end state regardless of the proxy. Rule 1 in CLAUDE.md files a
+Committing the image is the right end state regardless of the proxy. Rule 1 in AGENTS.md files a
 marketplace listing photograph as a SPEC record rather than a bare link because "listings are
 deleted and the observation has to outlive them"; a GitHub attachment is exactly as perishable,
 and it disappears with the issue. `--attachment-url` keeps the original URL as provenance while

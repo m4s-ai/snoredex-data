@@ -11,7 +11,7 @@ Produce a prioritized, reproducible review of the static site's actual behavior 
 
 ## UI-audit context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and the site/consumer paths in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). `index.html` is generated: trace defects to the owning generator, styles, templates, or canonical data instead of editing it directly.
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), and the site/consumer paths in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). `index.html` is generated: trace defects to the owning generator, styles, templates, or canonical data instead of editing it directly.
 
 ## UI-audit workflow
 

@@ -11,7 +11,7 @@ Bring one already-identified claim to the strongest state justified by the suppl
 
 ## Claim-evidence context
 
-Work from the repository root. Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and the complete [verification playbook](../../../verification/RESUME.md) before changing evidence. Read [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md) to identify downstream impact. If the claim concerns finish, foil, stamp, marking, or size, also read [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md).
+Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), and the complete [verification playbook](../../../verification/RESUME.md) before changing evidence. Read [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md) to identify downstream impact. If the claim concerns finish, foil, stamp, marking, or size, also read [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md).
 
 ## Claim-evidence workflow
 

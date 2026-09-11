@@ -56,7 +56,7 @@ def main() -> int:
     assert "scripts/regen.py` owns the ordered" in workflow_map
     assert "### D. Manual Pages deployment lane" in workflow_map
     assert "scripts/regen.py" in texts[ROOT / "README.md"]
-    assert "WORKFLOW-MAP.md" in texts[ROOT / "CLAUDE.md"]
+    assert "WORKFLOW-MAP.md" in texts[ROOT / "AGENTS.md"]
     assert "scripts/regen.py" in texts[ROOT / "HANDOVER.md"]
     active_text = "\n".join(texts[path] for path in ACTIVE_MARKDOWN)
     assert "prioritised backlog" not in active_text

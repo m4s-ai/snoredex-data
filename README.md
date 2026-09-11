@@ -109,7 +109,7 @@ python scripts/regen.py --check             # canonical deterministic PR gate
 ```
 
 The reusable release workflow adds the explicit live-source, browser, and publication checks;
-those are environment gates, not a second generator list. Read [`CLAUDE.md`](CLAUDE.md) for the
+those are environment gates, not a second generator list. Read [`AGENTS.md`](AGENTS.md) for the
 working rules,
 [`HANDOVER.md`](HANDOVER.md) for cold-start orientation and the repository map, and the
 [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) for current priorities. Read
@@ -191,7 +191,7 @@ language?" They have separate backlogs, and a confirmed language claim never imp
 physical evidence uses the canonical observation-manifest importer. A new Python pass under
 `verification/` is reserved for migration, bulk repair, or a data-model change. Then the generators
 and checks are re-run; `units.json` and `finish_units.json` are never hand-edited.
-[`CLAUDE.md`](CLAUDE.md) has the required command order.
+[`AGENTS.md`](AGENTS.md) has the required command order.
 The [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract)
 explains how retained images must remain connected to their claims and consumer views.
 
@@ -359,7 +359,7 @@ All paths are relative to the repository root.
 | [`verification/source_adapter_staging.json`](verification/source_adapter_staging.json) | Source-first local-set staging feed: 12 locale slices, raw provenance/accounting and explicit unresolved source tracks; proposals only, never verdicts. |
 | [`scripts/`](scripts/) | The generators — data, finish model, checklist, chronology, issue templates, site and publication artifact. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
-| [`CLAUDE.md`](CLAUDE.md) · [`AGENTS.md`](AGENTS.md) | Working rules for an agent: non-negotiables, data-model traps, command order. |
+| [`AGENTS.md`](AGENTS.md) · [`CLAUDE.md`](CLAUDE.md) | Working rules for an agent: non-negotiables, data-model traps, command order. |
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and repository map; priorities live in the issue tracker. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Verification playbook — source techniques, corrections, dead ends. |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction and how it is graded. |

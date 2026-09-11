@@ -11,7 +11,7 @@ Perform the explicit TCGdex candidate-to-snapshot workflow while keeping ordinar
 
 ## Finish-refresh context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the finish-refresh path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the finish-refresh path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
 
 ## Finish-refresh workflow
 

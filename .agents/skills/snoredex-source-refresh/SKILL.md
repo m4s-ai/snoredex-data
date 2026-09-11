@@ -11,7 +11,7 @@ Create one immutable provider refresh and reconcile every result to a visible te
 
 ## Source-refresh context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and [RECURRENCE.md](../../../verification/RECURRENCE.md). Treat the adapter and discovery manifests as reviewed contracts and their generated staging files as review surfaces, not truth stores.
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and [RECURRENCE.md](../../../verification/RECURRENCE.md). Treat the adapter and discovery manifests as reviewed contracts and their generated staging files as review surfaces, not truth stores.
 
 ## Source-refresh workflow
 

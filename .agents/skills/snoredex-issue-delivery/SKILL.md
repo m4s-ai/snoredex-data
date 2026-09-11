@@ -11,7 +11,7 @@ Complete one issue without mixing unrelated work or weakening the repository's e
 
 ## Issue-delivery context
 
-Work from the repository root. Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). Read the full issue, every comment, linked issue and relevant pull request before planning. If the issue changes evidence, read the domain document required by `CLAUDE.md` before editing.
+Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), and [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). Read the full issue, every comment, linked issue and relevant pull request before planning. If the issue changes evidence, read the domain document required by `AGENTS.md` before editing.
 
 ## Issue-delivery workflow
 
