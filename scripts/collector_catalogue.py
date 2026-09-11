@@ -663,7 +663,7 @@ def release_date_values(
     # A present source-first row is authoritative for the date even when it records
     # an explicit unknown. Without a date this is a real gap, not a licence to inherit
     # a legacy/predecessor *product* date: that legacy row may belong to another
-    # locality or edition (CLAUDE.md: a source-native value with no reviewed mapping
+    # locality or edition (AGENTS.md: a source-native value with no reviewed mapping
     # stays unknown). The own release event is still a legitimate local date source,
     # so it is consulted before falling through to the legacy `old` row.
     if source_first is not None:

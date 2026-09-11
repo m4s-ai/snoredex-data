@@ -56,7 +56,13 @@ def main() -> int:
     assert "scripts/regen.py` owns the ordered" in workflow_map
     assert "### D. Manual Pages deployment lane" in workflow_map
     assert "scripts/regen.py" in texts[ROOT / "README.md"]
-    assert "WORKFLOW-MAP.md" in texts[ROOT / "CLAUDE.md"]
+    assert "WORKFLOW-MAP.md" in texts[ROOT / "AGENTS.md"]
+    # AGENTS.md is canonical; CLAUDE.md must stay a thin @AGENTS.md shim, never a rules copy.
+    shim = texts[ROOT / "CLAUDE.md"]
+    assert "@AGENTS.md" in shim, "CLAUDE.md must import AGENTS.md"
+    assert not any(l.startswith("## ") for l in shim.splitlines()), (
+        "CLAUDE.md must not duplicate AGENTS.md section rules"
+    )
     assert "scripts/regen.py" in texts[ROOT / "HANDOVER.md"]
     active_text = "\n".join(texts[path] for path in ACTIVE_MARKDOWN)
     assert "prioritised backlog" not in active_text

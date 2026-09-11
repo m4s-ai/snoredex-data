@@ -11,7 +11,7 @@ Make the smallest justified repair to the current pull-request head and leave an
 
 ## PR-remediation context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), and [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). Inspect the complete PR, its base and head SHAs, commits, checks, annotations, review summaries, inline threads, and linked issue. Treat old summaries as stale until checked against the live head.
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), and [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). Inspect the complete PR, its base and head SHAs, commits, checks, annotations, review summaries, inline threads, and linked issue. Treat old summaries as stale until checked against the live head.
 
 ## PR-remediation workflow
 

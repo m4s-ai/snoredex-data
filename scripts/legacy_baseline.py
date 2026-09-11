@@ -67,7 +67,7 @@ PINNED_FILES = {
 }
 
 SCOPE_GUARD_FILES = (
-    "CLAUDE.md",
+    "AGENTS.md",
     "HANDOVER.md",
     "README.md",
     "DATABASE.md",
@@ -119,7 +119,7 @@ CLAIM_ALLOWLIST = (
 )
 
 REQUIRED_SCOPE_MARKERS = {
-    "CLAUDE.md": "legacy Cardmarket-derived candidate universe",
+    "AGENTS.md": "legacy Cardmarket-derived candidate universe",
     "HANDOVER.md": "legacy Cardmarket-derived candidate universe",
     "README.md": "not a complete all-locality catalogue",
     "verification/RESUME.md": "legacy Cardmarket candidate universe",

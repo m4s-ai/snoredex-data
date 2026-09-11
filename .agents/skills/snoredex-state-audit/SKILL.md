@@ -11,7 +11,7 @@ Report what the current tree and generated audits establish, which contracts fai
 
 ## State-audit context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), [README.md](../../../README.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and the current generated [DATA-HANDOFF-AUDIT.md](../../../verification/DATA-HANDOFF-AUDIT.md). Use the issue tracker only for priorities; do not infer backlog from stale prose.
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [README.md](../../../README.md), [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md), and the current generated [DATA-HANDOFF-AUDIT.md](../../../verification/DATA-HANDOFF-AUDIT.md). Use the issue tracker only for priorities; do not infer backlog from stale prose.
 
 ## State-audit workflow
 

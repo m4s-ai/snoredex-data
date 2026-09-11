@@ -1129,7 +1129,7 @@ obtained.
 
 ## Resume procedure
 
-The command order lives in `CLAUDE.md` — one copy, kept beside the rules that depend on it.
+The command order lives in `AGENTS.md` — one copy, kept beside the rules that depend on it.
 This file no longer restates it.
 
 Safe to interrupt at any point: `units.json` is rewritten only after a full pass, and

@@ -11,7 +11,7 @@ Turn physical-card image evidence into a stable, checkable specimen record witho
 
 ## Specimen-intake context
 
-Read [CLAUDE.md](../../../CLAUDE.md), [HANDOVER.md](../../../HANDOVER.md), the complete [verification playbook](../../../verification/RESUME.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the physical-evidence path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
+Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the complete [verification playbook](../../../verification/RESUME.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the physical-evidence path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
 
 ## Specimen-intake workflow
 

@@ -7,7 +7,7 @@ are not restated here — a second copy is a copy that goes stale.
 
 | Question | Where it is answered |
 |---|---|
-| What are the rules, and what will trip me up? | [`CLAUDE.md`](CLAUDE.md) — loaded automatically; `AGENTS.md` points to it |
+| What are the rules, and what will trip me up? | [`AGENTS.md`](AGENTS.md) — loaded automatically; `CLAUDE.md` shim imports it |
 | What is true right now? | [`verification/DATA-HANDOFF-AUDIT.md`](verification/DATA-HANDOFF-AUDIT.md) — generated from the data, so it cannot drift |
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
@@ -94,7 +94,7 @@ DATABASE.md                   The contract snoredex.sqlite offers an application
 LICENSE.md / LICENSES/        The mixed-work licence structure plus verbatim publisher texts;
 THIRD_PARTY_NOTICES.md        upstream attribution. AI-DECLARATION.md states the AI transparency
 AI-DECLARATION.md             level, and check A1 holds it to the 0.1.2 specification.
-LESSONS.md                    The incident behind each trap CLAUDE.md states: what went wrong,
+LESSONS.md                    The incident behind each trap AGENTS.md states: what went wrong,
                               what it cost, which check holds the line now. Read it when a rule
                               looks arbitrary. Deliberately not auto-loaded.
 analysis_*.json               Derived: language_drift, shared_cards, artists, variants,
