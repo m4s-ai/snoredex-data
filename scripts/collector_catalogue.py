@@ -660,11 +660,24 @@ def release_date_values(
     old: dict[str, Any] | None,
     event: dict[str, Any],
 ) -> tuple[Any, Any, bool]:
-    if source_first and source_first.get("releaseDate"):
-        return (
-            source_first["releaseDate"], source_first.get("releaseDatePrecision"),
-            bool(source_first.get("releaseApproximate")),
-        )
+    # A present source-first row is authoritative for the date even when it records
+    # an explicit unknown. Without a date this is a real gap, not a licence to inherit
+    # a legacy/predecessor *product* date: that legacy row may belong to another
+    # locality or edition (CLAUDE.md: a source-native value with no reviewed mapping
+    # stays unknown). The own release event is still a legitimate local date source,
+    # so it is consulted before falling through to the legacy `old` row.
+    if source_first is not None:
+        if source_first.get("releaseDate"):
+            return (
+                source_first["releaseDate"], source_first.get("releaseDatePrecision"),
+                bool(source_first.get("releaseApproximate")),
+            )
+        if event and event.get("releaseDate"):
+            return (
+                event.get("releaseDate"), event.get("releaseDatePrecision"),
+                bool(event.get("releaseApproximate")),
+            )
+        return (None, None, False)
     if old is not None:
         return (
             old.get("releaseDate"), old.get("releaseDatePrecision"),

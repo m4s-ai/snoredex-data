@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-09-10** · SQLite schema: **1.7.0** · source fingerprint:
-`377d8838e4683bcc…`
+`2b1da500c6855934…`
 
 ## Outcome
 
@@ -19,22 +19,22 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Legacy Cardmarket products | 198 (191 collectible, 7 code cards) |
 | Legacy raw product-language claims | 794 (75 code-card claims out of scope) |
 | Repository language verdicts | 628 confirmed · 91 contradicted |
-| App language statuses | 617 exists · 11 needs-evidence · 87 not-printed · 4 disputed (87 owner-adjudicated) |
-| Established product-edition rows | 641 (87 absent-language and 15 unverified-language projections suppressed) |
-| Finish units / logical printings | 637 / 844 |
-| Current-known physical checklist | 889 (814 documented · 75 unresolved placeholders) |
-| Collector compatibility projection | 703 current-known · 111 finish candidates · 75 research placeholders (186 research rows) |
+| App language statuses | 622 exists · 6 needs-evidence · 87 not-printed · 4 disputed (87 owner-adjudicated) |
+| Established product-edition rows | 646 (87 absent-language and 10 unverified-language projections suppressed) |
+| Finish units / logical printings | 637 / 852 |
+| Current-known physical checklist | 898 (825 documented · 73 unresolved placeholders) |
+| Collector compatibility projection | 711 current-known · 114 finish candidates · 73 research placeholders (187 research rows) |
 | Release rows without row-level source | 141 / 203 |
 | Products without established artist | 82 |
 | Opaque V-token products without a physical variant name | 58 |
-| Authoritative graph entities / typed edges | 8022 / 11957 |
-| Graph migration inputs with dispositions | 2797 (455 raw set records) |
+| Authoritative graph entities / typed edges | 8079 / 12034 |
+| Graph migration inputs with dispositions | 2822 (459 raw set records) |
 
 ## The challenged data points
 
 The database preserves all **628** raw
-`repository_verdict='confirmed'` rows. Only **617** have evidence whose
-granularity may establish the exact card. The remaining **11** are
+`repository_verdict='confirmed'` rows. Only **622** have evidence whose
+granularity may establish the exact card. The remaining **6** are
 `application_status='needs-evidence'`: their set/product or sibling observation remains queryable,
 but it cannot materialize a card printing or enter the release/checklist projections.
 
@@ -62,7 +62,7 @@ Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudi
   Spanish, so the application code is `es-ES`; Portuguese remains the source's unqualified `pt`.
 - Edition rows exist only for positively established product languages. The source projection's
   87 rows for explicitly absent languages and
-  15 rows for unverified languages are recorded as quality
+  10 rows for unverified languages are recorded as quality
   issues, not exported as facts.
 - Code cards remain queryable but are `out-of-scope` and never enter the physical checklist.
 - Missing artists, missing date sources, opaque variants and unresolved finishes stay null or

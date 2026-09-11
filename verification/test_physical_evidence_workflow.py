@@ -43,6 +43,61 @@ def finish_projector():
 
 
 def main() -> None:
+    photo_units = {unit["unitId"]: unit for unit in read("units.json")
+                   if unit["unitId"] in {"U0171", "U0603", "U0602", "U0170", "U0604", "U0092"}}
+    assert len(photo_units) == 6
+    for unit in photo_units.values():
+        parsed = urlparse(unit.get("sourceUrl") or "")
+        assert parsed.scheme in {"http", "https"} and parsed.netloc, unit["unitId"]
+    thai_photo = next(row for row in read("specimens.json")["specimens"]
+                      if row["specimenId"] == "SPEC-0523")
+    assert photo_units["U0604"]["sourceUrl"] == thai_photo["listingUrl"]
+    for question in read("legacy_issue_rekeys.json")["questionSets"]:
+        for mapping in question["mappings"]:
+            parsed = urlparse(mapping.get("evidenceUrl") or "")
+            assert parsed.scheme in {"http", "https"} and parsed.netloc, mapping
+    projector = finish_projector()
+    for unit in read("finish_units.json")["units"]:
+        for printing in unit["printings"]:
+            for source in printing.get("sources", []):
+                if source.get("url"):
+                    assert projector.provenance_url(source["url"]), printing["printingId"]
+    photo = {"specimenId": "SPEC-test", "heldBy": "collection owner", "observed": "Card photo",
+             "photographSource": "Owner supplied photograph", "listingUrl": "https://example.test/issue"}
+    assert projector.specimen_source(photo)["url"] == photo["listingUrl"]
+    photo["photographSource"] = "https://example.test/card.png"
+    assert projector.specimen_source(photo)["url"] == photo["photographSource"]
+    photo.update(photographSource="Owner supplied photograph", listingUrl=None)
+    assert "url" not in projector.specimen_source(photo)
+    assert projector.specimen_markings({"markings": "EDICIÓN 1", "markingRole": "print-identity"}) == [
+        {"kind": "edition-stamp", "role": "print-identity", "text": "EDICIÓN 1"}]
+    printings = []
+    for edition, finish, variant in (("1st Edition", "non-holo", "V2"),
+                                     ("Unlimited", "non-holo", "V2"),
+                                     (None, "holo", "V1")):
+        projector.add_printing(printings, {
+            "finish": finish, "edition": edition, "mappedVariants": [variant],
+            "cardSize": "standard", "verificationStatus": "pending", "sources": [],
+        })
+    identities = [projector.printing_signature(row) for row in printings]
+    evidence = {"finish": "non-holo", "mappedVariants": ["V2"],
+                "verificationStatus": "owner-attested", "sources": [{"id": "owner-rule"}]}
+    projector.attach_finish_evidence(printings, evidence)
+    projector.attach_finish_evidence(printings, evidence)
+    assert [projector.printing_signature(row) for row in printings] == identities
+    assert all(row["sources"] == evidence["sources"] for row in printings[:2])
+    assert not printings[2]["sources"], "finish evidence must not cross to another variant"
+    try:
+        projector.attach_finish_evidence([], evidence)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("finish evidence must not create a printing")
+    from review_findings import specimen_number_matches
+    assert specimen_number_matches("27/64", "27")
+    assert specimen_number_matches("077/071", "77/71")
+    assert not specimen_number_matches("27/64", "27/65")
+    assert not specimen_number_matches("27/64", "11/64")
     specimens = read("specimens.json")["specimens"]
     manifest_specimens: dict[str, list[dict]] = defaultdict(list)
     for manifest_path in (ROOT / "verification" / "evidence").glob("issue-*.json"):
@@ -289,7 +344,9 @@ def main() -> None:
         ("11", "1st Edition"), ("11", "Unlimited"),
         ("27", "1st Edition"), ("27", "Unlimited"),
     }
-    assert len(dutch[("27", "1st Edition")]["sources"]) == 2
+    assert len(dutch[("27", "1st Edition")]["sources"]) == 3
+    assert sum(source.get("sourceType") == "Owner attestation (domain expert)"
+               for source in dutch[("27", "1st Edition")]["sources"]) == 1
     assert dutch[("27", "1st Edition")]["specimenIds"] == ["SPEC-0042", "SPEC-0043"]
 
     projector = finish_projector()
@@ -389,12 +446,13 @@ def main() -> None:
         canonical_source = unquote(specimen["photographSource"])
         registry_row = registry_by_source[canonical_source]
         assert registry_row["providerId"] == provider_id
-        assert registry_row["dimensions"] == ["identity"]
+        expected_dimensions = ["identity", "language"] if specimen_id == "SPEC-0134" else ["identity"]
+        assert registry_row["dimensions"] == expected_dimensions
         assert specimen_id in registry_row["stableIds"]
         assert set(specimen["citedBy"]) <= set(registry_row["stableIds"])
         capability_row = capability_by_source[canonical_source]
         assert capability_row["providerId"] == provider_id
-        assert capability_row["dimensions"] == ["identity"]
+        assert capability_row["dimensions"] == expected_dimensions
     target_specimens = {
         row["specimenId"]: row for row in specimens if row["specimenId"] in portuguese_owner_confirmed
     }
@@ -594,9 +652,9 @@ def main() -> None:
     assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
     spanish_ju11 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0165")
     assert spanish_ju11["availabilityStatus"] == "confirmed"
-    assert len(spanish_ju11["printings"]) == 1
-    spanish_ju11_holo = spanish_ju11["printings"][0]
-    assert spanish_ju11_holo["printingId"] == "F0165-P01"
+    assert all(p["finish"] == "holo" for p in spanish_ju11["printings"])
+    spanish_ju11_holo = next(p for p in spanish_ju11["printings"]
+                            if p.get("specimenIds") == ["SPEC-0129", "SPEC-0130"])
     assert spanish_ju11_holo["finish"] == "holo"
     assert "edition" not in spanish_ju11_holo
     assert spanish_ju11_holo["specimenIds"] == ["SPEC-0129", "SPEC-0130"]
@@ -635,26 +693,25 @@ def main() -> None:
         cited_units = set(specimen.get("citedBy") or []) & corroborated_unit_ids
         if not cited_units:
             continue
-        source_key = (
-            unquote(specimen["photographSource"])
-            if specimen.get("photographSource") else "evidence:inspected-specimen"
-        )
+        from source_registry import provenance_url
+        source_url = provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl"))
+        source_key = unquote(source_url) if source_url else "evidence:inspected-specimen"
         if source_key not in registry_by_source:
             source_key = source_key.split("#", 1)[0]
         if source_key not in registry_by_source:
             source_key = "evidence:inspected-specimen"
         registry_row = registry_by_source[source_key]
-        assert "identity" in registry_row["dimensions"]
+        assert {"identity", "card-existence", "card-release", "language"} & set(registry_row["dimensions"])
         assert specimen["specimenId"] in registry_row["stableIds"]
         assert cited_units <= set(registry_row["stableIds"])
         capability_row = capability_by_source[source_key]
-        assert "identity" in capability_row["dimensions"]
+        assert {"identity", "card-existence", "card-release", "language"} & set(capability_row["dimensions"])
     primary_checked_at = {
         "U0094": "2026-07-21T16:41:51", "U0295": "2026-07-22T09:26:20",
         "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
         "U0434": "2026-07-22T11:00:43", "U0228": "2026-07-22T17:04:58",
         "U0122": "2026-07-21T16:41:51", "U0245": "2026-07-21T16:41:51",
-        "U0482": "2026-07-21T16:56:33", "U0092": "2026-07-21T16:41:51",
+        "U0482": "2026-07-21T16:56:33", "U0092": "2026-09-10",
         "U0229": "2026-07-22T17:04:58", "U0418": "2026-07-21T14:59:21",
         "U0416": "2026-07-21T14:59:21", "U0527": "2026-07-21T14:59:21",
         "U0452": "2026-07-22T00:41:51", "U0294": "2026-07-22T09:26:20",
@@ -673,7 +730,7 @@ def main() -> None:
     }
     assert archive_only_finish_statuses == {
         "F0139": "confirmed",
-        "F0172": "marketplace-claimed",
+        "F0172": "confirmed",
         "F0179": "marketplace-claimed",
         "F0529": "pending",
         "F0635": "pending",

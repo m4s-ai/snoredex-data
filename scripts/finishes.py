@@ -26,6 +26,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from source_registry import provenance_url, specimen_markings
+
 
 ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
@@ -483,6 +486,32 @@ def add_or_refine_printing(printings: list[dict[str, Any]], candidate: dict[str,
         add_printing(printings, candidate)
 
 
+def attach_finish_evidence(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
+    """Confirm existing finish/variant matches without asserting another physical identity."""
+    matches = [printing for printing in printings
+               if printing["finish"] == candidate["finish"]
+               and set(printing.get("mappedVariants") or [])
+               & set(candidate.get("mappedVariants") or [])]
+    if not matches:
+        raise ValueError("finish evidence requires an existing matching printing")
+    for printing in matches:
+        evidence = dict(printing)
+        evidence["sources"] = candidate["sources"]
+        evidence["verificationStatus"] = candidate["verificationStatus"]
+        add_printing(printings, evidence)
+
+
+def apply_manual_printing(printings: list[dict[str, Any]], candidate: dict[str, Any], manual: dict[str, Any]) -> None:
+    if not manual.get("evidenceOnlyForExistingPrintings"):
+        add_or_refine_printing(printings, candidate)
+        return
+    identity_fields = {"edition", "foilPattern", "markings", "distribution", "cardSize",
+                       "releaseDate", "image", "refinesAuto"}
+    if identity_fields.intersection(manual):
+        raise ValueError("finish-only evidence cannot define a physical identity")
+    attach_finish_evidence(printings, candidate)
+
+
 def apply_standard_scope_card_size(candidate: dict[str, Any]) -> None:
     if candidate.get("cardSize") == "unknown" and any(
         source.get("evidenceScope") == "standard-set"
@@ -506,24 +535,6 @@ def normalize_foil_pattern(value: object) -> object:
     return FOIL_PATTERN_ALIASES.get(key, value)
 
 
-def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
-    text = observation.get("markings")
-    if not text:
-        return []
-    normalized = str(text).strip()
-    if normalized.casefold() in {"editie 1", "edizione 1"}:
-        kind = "edition-stamp"
-    elif normalized.casefold() == "staff":
-        kind, normalized = "staff", "Staff"
-    elif normalized.casefold().endswith(" deck silhouette"):
-        kind, normalized = "deck-logo", normalized[:-16].strip()
-    elif normalized.casefold().endswith(" replica signature"):
-        kind, normalized = "championship-signature", normalized[:-18].strip()
-    else:
-        kind = "observed-marking"
-    return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
-
-
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
     holder = str(specimen.get("heldBy", "")).casefold()
     if "third-party seller" in holder:
@@ -536,11 +547,14 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
         source_type = "Owner-supplied physical card photograph"
     else:
         source_type = "Inspected physical specimen photograph"
-    return exact_source(
-        str(specimen.get("photographSource") or f"specimen:{specimen['specimenId']}"),
+    source = exact_source(
+        provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl")),
         source_type,
         f"{specimen.get('observed', '').strip()} Retained as {specimen['specimenId']}.",
     )
+    if source["url"] is None:
+        source.pop("url")
+    return source
 
 
 def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> list[dict[str, Any]]:
@@ -1334,7 +1348,7 @@ def _build_finish_unit(
                         candidate["releaseDate"] = manual["releaseDate"]
                     if "image" in manual:
                         candidate["image"] = manual["image"]
-                    add_or_refine_printing(printings, candidate)
+                    apply_manual_printing(printings, candidate, manual)
 
         _build_finish_unit_part7_suppression()
         _build_finish_unit_part7_manual()

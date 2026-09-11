@@ -157,6 +157,15 @@ def main() -> None:
     assert collector.physical_specimen_links(None, specimen) == set()
     retained = next(s for s in read('verification/specimens.json')['specimens'] if s['specimenId'] == 'SPEC-0146')
     items = read('collector_catalogue.json')['items']
+    # The owner's number mapping establishes finish; the photographed editions stay distinct.
+    spanish_jungle = [i for i in items if i.get("localizationId") == "LOCALIZATION:WEST:es-ES"
+                      and i.get("localSetCode") == "JU" and i.get("collectorNumber") == "27"
+                      and i.get("itemKind") == "verified-printing"]
+    assert {"1st Edition", "Unlimited"} <= {i.get("edition") for i in spanish_jungle}
+    assert all(i["finish"] == "non-holo" for i in spanish_jungle)
+    specimens = {s["specimenId"]: s for s in read("verification/specimens.json")["specimens"]}
+    assert specimens["SPEC-0522"]["physicalObservation"]["ownerAttestedFields"] == ["finish"]
+    assert "ownerAttestedFields" not in specimens["SPEC-0523"]["physicalObservation"]
     matching = [item for item in items if ':CSM2cC:103:' in item['cardReleaseId']]
     assert matching and all({retained['listingUrl'], retained['photographSource']} <= set(item['evidenceLinks'])
                             for item in matching), 'identity-level specimen citations must reach collector provenance'
@@ -396,9 +405,15 @@ def main() -> None:
         old_s5a = next(row["itemId"] for row in source["items"] if row.get("cardReleaseId") == "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id")
         s5a = next(row for row in route["transitions"] if old_s5a in row["fromItemIds"])
         assert s5a["fromItemIds"] == [old_s5a]
-        assert s5a["toItemIds"] == ["item-9877e7a6-c3a9-5fc2-956d-a1d1591018a0"]
-        assert s5a["changeKind"] == "rekey-1:1"
-        assert s5a["automaticStateAction"] == "preserve"
+        # A formerly unspecified finish now has observed Holo and an unverified
+        # marketplace candidate: never assign the owner's copy automatically.
+        assert s5a["toItemIds"] == [
+            "item-35662349-00ed-54f6-a073-5ee93b850558",
+            "item-b88ffbb2-da60-5a6c-8ab2-c85a5de59950",
+        ]
+        assert s5a["changeKind"] == "split-1:N"
+        assert s5a["automaticStateAction"] == "none"
+        assert s5a["reconciliation"] == "requires-user-resolution"
         covered_source_ids = [
             item_id
             for transition in route["transitions"]
@@ -615,11 +630,11 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 703,
-            "finishCandidates": 111,
-            "researchPlaceholders": 75,
-            "currentKnown": 703,
-            "research": 186,
+            "verifiedPrintings": 711,
+            "finishCandidates": 114,
+            "researchPlaceholders": 73,
+            "currentKnown": 711,
+            "research": 187,
         },
     }
     build_a_bear_item = next(

@@ -293,7 +293,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 3,
         "coverage": "positive localized card identity shown by retained database scans",
         "supportsAbsence": False,
-        "usedFor": ["identity"],
+        "usedFor": ["identity", "language"],
         "attribution": "Card scans from WikiDex.",
         "notes": "A retained database scan establishes only the visible card identity. Missing "
                  "cards, variants, or languages never establish absence or completeness.",
@@ -677,6 +677,30 @@ def provenance_url(value: Any) -> str | None:
     return None
 
 
+def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
+    """Normalize an observed specimen marking into a typed markup kind.
+
+    Shared by the finish and authoritative-graph projectors so a marking
+    classification cannot drift between the two generators. The original text
+    and the recorded ``markingRole`` are preserved; only the ``kind`` is typed.
+    """
+    text = observation.get("markings")
+    if not text:
+        return []
+    normalized = str(text).strip()
+    if normalized.casefold() in {"editie 1", "edizione 1", "edición 1"}:
+        kind = "edition-stamp"
+    elif normalized.casefold() == "staff":
+        kind, normalized = "staff", "Staff"
+    elif normalized.casefold().endswith(" deck silhouette"):
+        kind, normalized = "deck-logo", normalized[:-16].strip()
+    elif normalized.casefold().endswith(" replica signature"):
+        kind, normalized = "championship-signature", normalized[:-18].strip()
+    else:
+        kind = "observed-marking"
+    return [{"kind": kind, "role": observation.get("markingRole"), "text": normalized}]
+
+
 def canonical_url(url: str) -> str:
     """Normalize path encoding, fragments and slashes so a source is counted once.
 
@@ -976,7 +1000,34 @@ def source_first_registry_urls(entry: dict[str, Any]) -> set[str]:
     }
 
 
-def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) -> None:
+def _specimen_indexed_directly(entry: dict, specimens_by_id: dict | None) -> bool:
+    """True when the specimen's direct path indexes a URL under inspected-specimen authority.
+
+    The anonymous inspected-specimen record carries the owned photograph's evidence. It
+    must stay when not one of the specimen's URLs resolves to inspected-specimen
+    provenance, because then the inspected evidence would otherwise be lost (e.g. a
+    specimen whose only link is a foreign corroborating page like Pokumon). Suppress it
+    only when a validated photo or listing URL actually resolves to inspected-specimen.
+    """
+    spec = (specimens_by_id or {}).get(str(entry.get("specimenId")))
+    if not spec:
+        return False
+    source_type = SPECIMEN_SOURCE_TYPES.get(
+        str(spec.get("heldBy", "")).casefold(),
+        str(spec.get("inspectedFrom") or "Inspected physical specimen photograph"),
+    )
+    candidate_urls = {
+        provenance_url(spec.get("photographSource")),
+        provenance_url(spec.get("listingUrl")),
+    } - {None}
+    return any(
+        specimen_provider(url, source_type) == "inspected-specimen"
+        for url in candidate_urls
+    )
+
+
+def record_source_first_identity(entry: dict, record: Callable, surfaces: dict,
+                                 specimens_by_id: dict[str, dict] | None = None) -> None:
     """Index admitted claims under existing provider capabilities, without a provider allowlist."""
     provider = entry["providerId"]
     if provider not in surfaces or provider == "cardmarket-listing-photo":
@@ -985,7 +1036,12 @@ def record_source_first_identity(entry: dict, record: Callable, surfaces: dict) 
         if not entry.get("specimenId"):
             raise ValueError(f"Source-first provider {provider} requires a retained specimen")
         return
-    # A neighbouring page is not the inspected specimen's authority.
+    # A neighbouring page is not the inspected specimen's authority. When the governed
+    # specimen already supplies a validated photo/listing URL, the direct specimen path
+    # indexes that unit under the real URL; an anonymous inspected-specimen projection
+    # would duplicate the same observation as a second, untraceable evidence record.
+    if provider == "inspected-specimen" and _specimen_indexed_directly(entry, specimens_by_id):
+        return
     urls = [] if provider == "inspected-specimen" else sorted(source_first_registry_urls(entry))
     for url in urls or [None]:
         dimension = card_evidence_dimension(url, provider, surfaces, "card-release")
@@ -1070,8 +1126,9 @@ def main() -> int:
                            reviewed_graph)
 
     surfaces = specimen_surfaces()
+    specimens_by_id = {str(s.get("specimenId")): s for s in specimens}
     for entry in source_first["prints"]:
-        record_source_first_identity(entry, record, surfaces)
+        record_source_first_identity(entry, record, surfaces, specimens_by_id)
         if entry.get("raritySourceUrl"):
             record(
                 entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",

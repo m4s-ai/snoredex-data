@@ -22,6 +22,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from source_registry import specimen_markings
+
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
 FINISH_UNITS = ROOT / "verification" / "finish_units.json"
@@ -511,28 +513,6 @@ def write_graph(graph: dict[str, Any]) -> None:
     finally:
         if temporary:
             Path(temporary).unlink(missing_ok=True)
-
-
-def specimen_markings(observation: dict[str, Any]) -> list[dict[str, Any]]:
-    text = observation.get("markings")
-    if not text:
-        return []
-    normalized = str(text).strip()
-    if normalized.casefold() in {"editie 1", "edizione 1"}:
-        kind = "edition-stamp"
-    elif normalized.casefold() == "staff":
-        kind, normalized = "staff", "Staff"
-    elif normalized.casefold().endswith(" deck silhouette"):
-        kind, normalized = "deck-logo", normalized[:-16].strip()
-    elif normalized.casefold().endswith(" replica signature"):
-        kind, normalized = "championship-signature", normalized[:-18].strip()
-    else:
-        kind = "observed-marking"
-    return [{
-        "kind": kind,
-        "role": observation.get("markingRole"),
-        "text": normalized,
-    }]
 
 
 def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -1506,6 +1486,7 @@ def _validate_unmaterialized_specimen(
     printings: dict[str, dict[str, Any]],
     releases: dict[str, dict[str, Any]],
     edge_keys: list[tuple[Any, ...]],
+    units_by_id: dict[str, dict[str, Any]],
 ) -> None:
     if specimen.get("physicalObservation", {}).get("coversMultipleCards"):
         return
@@ -1529,7 +1510,7 @@ def _validate_unmaterialized_specimen(
         if (physical.get("markings") or []) != specimen_markings(observation):
             errors.append(f"specimen printing is stale: {specimen_id}:markings")
         release = releases.get(physical.get("cardReleaseId"))
-        if release:
+        if _specimen_requires_local_identity_check(specimen, release, units_by_id):
             set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
             number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
             for input_field, release_field in (
@@ -1541,6 +1522,21 @@ def _validate_unmaterialized_specimen(
                     errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
 
+def _specimen_requires_local_identity_check(specimen: dict[str, Any], release: dict[str, Any] | None, units_by_id: dict[str, dict[str, Any]]) -> bool:
+    return release is not None and not _specimen_has_cited_legacy_identity(specimen, release, units_by_id)
+
+
+def _specimen_has_cited_legacy_identity(specimen: dict[str, Any], release: dict[str, Any], units_by_id: dict[str, dict[str, Any]]) -> bool:
+    """Bind a reviewed alias to the exact cited unit, never a neighbouring counterpart."""
+    identity = (specimen.get("language"), specimen.get("setCode"), _number(specimen.get("number")), specimen.get("variant"))
+    aliases = {(code, _number(number)) for code, number in release.get("legacyIdentityAliases") or []}
+    cited = set(specimen.get("citedBy") or []) & set(release.get("legacyCounterpartUnitIds") or [])
+    return identity[0] == release.get("language") and identity[1:3] in aliases and any(
+        identity == (unit.get("language"), unit.get("setCode"), _number(unit.get("number")), unit.get("variant"))
+        for uid in cited if (unit := units_by_id.get(uid)) is not None
+    )
+
+
 def _validate_materialized_specimen(
     errors: list[str],
     specimen_id: str,
@@ -1548,6 +1544,7 @@ def _validate_materialized_specimen(
     claim: dict[str, Any],
     printings: dict[str, dict[str, Any]],
     releases: dict[str, dict[str, Any]],
+    units_by_id: dict[str, dict[str, Any]],
 ) -> None:
     physical = printings.get(claim["materializedTargetId"])
     observation = specimen.get("physicalObservation", {})
@@ -1562,7 +1559,7 @@ def _validate_materialized_specimen(
     if physical.get("basis") != observation.get("basis"):
         errors.append(f"specimen basis is stale: {specimen_id}")
     release = releases.get(physical.get("cardReleaseId"))
-    if not release:
+    if not _specimen_requires_local_identity_check(specimen, release, units_by_id):
         return
     set_field = "localSetCode" if release.get("localIdentifierKnown") else "viaLegacySetCode"
     number_field = "localNumber" if release.get("localIdentifierKnown") else "viaLegacyNumber"
@@ -1582,16 +1579,17 @@ def _validate_specimens(
     printings: dict[str, dict[str, Any]],
     releases: dict[str, dict[str, Any]],
     edge_keys: list[tuple[Any, ...]],
+    units_by_id: dict[str, dict[str, Any]],
 ) -> None:
     for specimen_id, specimen in observed_specimens.items():
         claim = claims_by_source.get(("specimen-observation", specimen_id))
         if not claim or not claim.get("materializedTargetId"):
             _validate_unmaterialized_specimen(
-                errors, specimen_id, specimen, claim, printings, releases, edge_keys
+                errors, specimen_id, specimen, claim, printings, releases, edge_keys, units_by_id
             )
             continue
         _validate_materialized_specimen(
-            errors, specimen_id, specimen, claim, printings, releases
+            errors, specimen_id, specimen, claim, printings, releases, units_by_id
         )
 
 # Append-only raw catalogue source boundary.
@@ -1984,7 +1982,7 @@ def validate(
         errors, rekeys_raw, units_by_id, claims_by_source, releases, by_type,
         relations, migration_by_key,
     )
-    _validate_specimens(errors, observed_specimens, claims_by_source, printings, releases, edge_keys)
+    _validate_specimens(errors, observed_specimens, claims_by_source, printings, releases, edge_keys, units_by_id)
     graph_sources, graph_source_dispositions = _validate_source_registry(
         errors, source_registry, by_type
     )

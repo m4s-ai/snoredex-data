@@ -19,8 +19,8 @@
       "surfaces": 50,
       "coverageEdges": 52,
       "absenceEdges": 0,
-      "observations": 54,
-      "resolvedVerdictSources": 1622
+      "observations": 56,
+      "resolvedVerdictSources": 1633
     },
     "surfaceStates": {
       "active": 22,
@@ -1348,7 +1348,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-10",
       "freshnessPolicy": "Retain custody, original images, inspection date and identity comparison for every specimen.",
       "query": {
         "method": "NON_URL",
@@ -1371,7 +1371,8 @@
           "visible finish",
           "foil pattern",
           "marking",
-          "card size"
+          "card size",
+          "visible edition marking"
         ],
         "publicationForm": "identified physical scan or photograph",
         "closedWithinScope": false
@@ -3855,7 +3856,8 @@
         "identity",
         "finish",
         "specimen-existence",
-        "image"
+        "image",
+        "edition"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -4213,7 +4215,8 @@
       "positiveEvidenceCapabilities": [
         "identity",
         "specimen-existence",
-        "image"
+        "image",
+        "language"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -5798,7 +5801,7 @@
       "validatesEdges": [
         "wikidex-positive-scan"
       ],
-      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only.",
+      "outcome": "The retained Spanish Kalos Starter Set scan positively establishes the displayed localized card identity only. SPEC-0134 retains readable Spanish text on the exact Jungle 27 card, positively establishing its printed language as well as identity.",
       "rawRecordRef": "verification/source_registry.json:https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_(Bienvenidos_a_Kalos_TCG).png",
       "rawRecordHash": "sha256:034f8685cfa0d1960b035191983929c9a005be5175b18adfcbea19cc8d7a840d",
       "rawRecord": {
@@ -6438,7 +6441,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:f5fd4ccc607cd63520544ea43c524ee2823bfd4473865955fee0322a66f259b6",
+      "rawRecordHash": "sha256:a91558bf1ddae049670165ba7e68357f2486d4bf8197045230baae288aa7e685",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -6460,10 +6463,11 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 135,
+        "stableIdCount": 167,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
+          "F0025-P01",
           "F0057-P01",
           "F0057-P02",
           "F0067-P03",
@@ -6476,8 +6480,30 @@
           "F0140-P01",
           "F0146-P01",
           "F0148-P01",
+          "F0161-P01",
+          "F0162-P01",
+          "F0163-P01",
+          "F0164-P01",
+          "F0164-P02",
+          "F0164-P03",
+          "F0165-P01",
+          "F0166-P01",
           "F0166-P02",
+          "F0167-P01",
+          "F0167-P02",
+          "F0168-P01",
+          "F0169-P01",
+          "F0170-P01",
+          "F0171-P01",
+          "F0171-P02",
+          "F0172-P01",
+          "F0172-P02",
+          "F0172-P03",
+          "F0173-P01",
+          "F0174-P01",
+          "F0174-P02",
           "F0289-P02",
+          "F0332-P01",
           "F0402-P02",
           "F0403-P02",
           "F0456-P01",
@@ -6527,6 +6553,7 @@
           "F0616-P01",
           "F0616-P02",
           "ID:AC3a:145/205:base",
+          "ID:s10a I:077/071:base",
           "SPEC-0022",
           "SPEC-0023",
           "SPEC-0053",
@@ -6566,11 +6593,17 @@
           "SPEC-0473",
           "SPEC-0474",
           "SPEC-0480",
+          "SPEC-0521",
+          "SPEC-0522",
+          "SPEC-0524",
+          "SPEC-0525",
           "TH:AS5a:142/184:base",
           "TW:AS5a:142:base",
+          "U0092",
           "U0097",
           "U0098",
           "U0099",
+          "U0170",
           "U0246",
           "U0255",
           "U0297",
@@ -6581,6 +6614,7 @@
           "U0433",
           "U0467",
           "U0503",
+          "U0575",
           "U0616",
           "U0617",
           "U0618",
@@ -6595,11 +6629,12 @@
           "U0791",
           "U0792",
           "U0793",
+          "override:owner-jungle-number-finish-20260910",
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants"
         ],
-        "retrievedAt": "2026-09-09",
-        "usageCount": 151
+        "retrievedAt": "2026-09-10",
+        "usageCount": 187
       }
     },
     {
@@ -6618,9 +6653,9 @@
       "validatesEdges": [
         "inspected-specimen-positive"
       ],
-      "outcome": "A retained physical photograph establishes visible properties of its identified specimen.",
+      "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:bd925bd79a981143080ecbbc54e690e6825f3d0160948ecb004938dfc51c7d84",
+      "rawRecordHash": "sha256:4a7f99b2fa79c960f3953fbebd38faf71e7b915c2a0da5f3efb49cd3608413c9",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -6643,7 +6678,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 223,
+        "stableIdCount": 225,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
@@ -6662,7 +6697,6 @@
           "F0604-P02",
           "F0615-P03",
           "F0634-P01",
-          "ID:SM-P:166:base",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
           "KR:SM-P:140:base",
@@ -6785,8 +6819,10 @@
           "SPEC-0472",
           "SPEC-0476",
           "SPEC-0479",
+          "SPEC-0489",
           "SPEC-0505",
           "TW:SM-P:053:base",
+          "TW:s5a F:093/070:base",
           "TW:sc1D F:133/164:base",
           "U0100",
           "U0110",
@@ -6841,6 +6877,7 @@
           "U0582",
           "U0585",
           "U0600",
+          "U0602",
           "U0605",
           "U0608",
           "U0609",
@@ -6869,8 +6906,8 @@
           "U0780",
           "U0785"
         ],
-        "retrievedAt": "2026-09-09",
-        "usageCount": 373
+        "retrievedAt": "2026-09-10",
+        "usageCount": 375
       }
     },
     {
@@ -7848,6 +7885,95 @@
         ],
         "researchRef": "verification/research/30th-celebration-20260910/observations.json"
       }
+    },
+    {
+      "observationId": "obs-wikidex-language-scan",
+      "surfaceId": "wikidex-card-scans",
+      "kind": "known-positive",
+      "queryUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "queryParameters": {
+        "language": "es",
+        "cardNumber": "27"
+      },
+      "retrievedAt": "2026-09-10",
+      "expectedIdentifiers": [
+        "SPEC-0134",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "wikidex-positive-scan"
+      ],
+      "outcome": "The retained Spanish Jungle 27 scan (SPEC-0134) positively establishes the printed Spanish language and identity, grounding the language capability of the wikidex-positive-scan edge.",
+      "rawRecordRef": "verification/source_registry.json:https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+      "rawRecordHash": "sha256:4c87073f6692430b3e5b68aaf8f0d1b206b1e4dc346683f058a503bf8a01f1ae",
+      "rawRecord": {
+        "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/1/1c/latest/20180622213217/Snorlax_(Jungla_27_TCG).png",
+        "nonUrlEvidenceId": null,
+        "providerId": "wikidex",
+        "sourceTypes": [
+          "WikiDex database scan",
+          "WikiDex exact-card photograph"
+        ],
+        "dimensions": [
+          "identity",
+          "language"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "SPEC-0134",
+          "U0092"
+        ],
+        "retrievedAt": "2026-09-10",
+        "usageCount": 3
+      }
+    },
+    {
+      "observationId": "obs-inspected-specimen-edition",
+      "surfaceId": "inspected-specimens",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:inspected-specimen",
+        "specimens": [
+          "SPEC-0524",
+          "SPEC-0525"
+        ]
+      },
+      "retrievedAt": "2026-09-10",
+      "expectedIdentifiers": [
+        "SPEC-0524",
+        "SPEC-0525",
+        "U0092"
+      ],
+      "validatesEdges": [
+        "inspected-specimen-positive"
+      ],
+      "outcome": "SPEC-0524 (first-edition stamp) and SPEC-0525 (Unlimited) establish the edition capability of the inspected-specimen-positive edge.",
+      "rawRecordRef": "verification/source_registry.json:https://github.com/m4s-ai/snoredex-data/issues/266",
+      "rawRecordHash": "sha256:560292789780aa2a8ec1f203587476be937ea225b46e0c9d4136a5c5dc57f188",
+      "rawRecord": {
+        "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/266",
+        "nonUrlEvidenceId": null,
+        "providerId": "inspected-specimen",
+        "sourceTypes": [
+          "Inspected card photograph; external origin unknown",
+          "Owner-supplied physical card photograph"
+        ],
+        "dimensions": [
+          "edition",
+          "identity"
+        ],
+        "stableIdCount": 5,
+        "stableIds": [
+          "F0172-P02",
+          "F0172-P03",
+          "SPEC-0524",
+          "SPEC-0525",
+          "U0092"
+        ],
+        "retrievedAt": "2026-09-10",
+        "usageCount": 8
+      }
     }
   ],
   "sourceResolution": [
@@ -7909,7 +8035,8 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "card-release",
-        "identity"
+        "identity",
+        "language"
       ]
     },
     {
@@ -14606,6 +14733,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.elitefourum.com/t/why-is-every-copy-of-this-snorlax-207-bw-p-card-in-such-a-bad-condition/59320/11",
+      "providerId": "elitefourum",
+      "surfaceId": "elitefourum-topics",
+      "capabilityEdgeIds": [
+        "elitefourum-positive-research",
+        "elitefourum-black-star-language-table"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://www.facebook.com/groups/389018291429685/posts/2416439302020897",
       "providerId": "elitefourum",
       "surfaceId": "elitefourum-topics",
@@ -14960,6 +15100,18 @@
       ]
     },
     {
+      "sourceKey": "https://efour.b-cdn.net/uploads/default/original/4X/0/9/4/09418448b536d7eabb096a9b1eeef62a2a892795.jpeg",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://excaliburtcg.co.uk/cdn/shop/files/108_612bb9b0-6fe3-4557-8c5d-906ac9944efe.png?v=1784809179&width=533",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -14984,6 +15136,20 @@
       ]
     },
     {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/262",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity",
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/265#attachment-1",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -14992,6 +15158,19 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://github.com/m4s-ai/snoredex-data/issues/266",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "edition",
         "identity"
       ]
     },
@@ -22152,6 +22331,33 @@
       ]
     },
     {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity",
+        "language"
+      ]
+    },
+    {
+      "sourceKey": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity",
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -22863,6 +23069,19 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/U7sAAeSwZPZowgKA/s-l500.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/VSAAAOSwV6pnD7GI/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23471,6 +23690,20 @@
       ]
     },
     {
+      "sourceKey": "https://ojamacard.com/product/29071/077-071-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-chr-s10at",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity",
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://photos.enjoei.com.br/carta-pokemon-snorlax-1a-edicao/1200xN/czM6Ly9waG90b3MuZW5qb2VpLmNvbS5ici9wcm9kdWN0cy8yNjAxNjk3My8yZWI3NzVmODE5NTFlYTk3NTg0YzYxOWEyODQ4NGU1My5qcGc",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23484,7 +23717,31 @@
       ]
     },
     {
+      "sourceKey": "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-(Indonesia-Version)-i.52799340.41773289935",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23830,6 +24087,18 @@
     },
     {
       "sourceKey": "https://www.ebay.com/itm/388365217371",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/397048838536",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -28624,7 +28893,8 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "identity",
+        "language"
       ]
     },
     {
