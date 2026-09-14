@@ -6,6 +6,8 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+import io
+from contextlib import redirect_stderr
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -110,6 +112,41 @@ def verify_multiple_views() -> None:
     for reverse in (False, True):
         for secondary_finish in (False, True):
             verify_multiple_views_case(secondary_finish=secondary_finish, reverse=reverse)
+
+
+def verify_duplicate_photo_batch() -> None:
+    """One hash cannot create two SPEC IDs, even inside a new/replacement/dry-run batch."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry, manifest = scratch / "specimens.json", scratch / "manifest.json"
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        source = ROOT / "verification/specimens/SPEC-0041.png"
+        rows = [{
+            "specimenId": f"SPEC-99{index:02d}", "attachment": str(source),
+            "photographSource": f"https://example.test/batch/view-{index}",
+            "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+            "heldBy": "collection owner", "inspectedFrom": "synthetic storage fixture",
+            "observed": "Same original bytes at distinct URLs do not establish another view.",
+            "recordedAt": "2026-09-14", "physicalObservation": {"finish": "holo", "basis": "fixture"},
+        } for index in (1, 2)]
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry, SPECIMEN_DIR=scratch / "photos"):
+            for linked in (False, True):
+                if linked:
+                    rows[1]["sameCardAs"] = {"specimenId": "SPEC-9901", "basis": "synthetic link"}
+                for reverse in (False, True):
+                    ordered = rows[::-1] if reverse else rows
+                    manifest.write_text(json.dumps({"observations": ordered}), encoding="utf-8")
+                    before = {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+                    for replace, dry_run in ((False, False), (True, False), (False, True), (True, True)):
+                        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                                               allow_small=False, replace=replace, dry_run=dry_run)
+                        error_output = io.StringIO()
+                        with redirect_stderr(error_output):
+                            expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+                        expected = (f"image bytes already belong to {ordered[0]['specimenId']}; "
+                                    f"duplicate evidence cannot create {ordered[1]['specimenId']}")
+                        assert expected in error_output.getvalue(), error_output.getvalue()
+                        assert before == {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
 
 
 def verify_group_contract(records) -> None:
@@ -833,6 +870,7 @@ def main() -> None:
         new_photo.unlink(missing_ok=True)
 
     verify_multiple_views()
+    verify_duplicate_photo_batch()
     print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 
