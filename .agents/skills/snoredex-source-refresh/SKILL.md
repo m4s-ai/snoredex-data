@@ -44,8 +44,20 @@ this public repository). This is the retrieval step for discovery and adjudicati
    result only as supporting evidence alongside what the page actually contains.
 4. Extract the evidence relevant to the disputed units (set code, number, language row, release date,
    rarity). For set-code pages, grep the markdown for the set code, numbers, and locale markers.
-   Retain the recovered content through the existing source-run evidence path (raw bytes, hashes and
-   run markers) rather than a one-off scraped file.
+   A recovered page is **not an adapter run**: `scripts/source_adapters.py` and
+   `scripts/card_discovery.py` fetch their configured endpoints or replay existing runs; neither
+   imports externally scraped Markdown. Use their normal run path only for supported acquisitions.
+   For manual retrieval, retain an issue-scoped JSON snapshot under
+   [verification/evidence/](../../../verification/evidence/), following the existing research records:
+   original/canonical source URL, actual retrieval date, capture method, returned content or exact
+   relevant excerpt, its SHA-256, source-native identifiers, and field-specific limits. Distinguish
+   a hash of the retained excerpt from a full-response hash; omit transport credentials and private
+   backend details. This is a research input, not a generated run or an accepted claim. Do not invent
+   run IDs, edit immutable run files, or treat the ignored cache as retained evidence.
+   Before applying it, resolve the source's reviewed provider/surface and capability under
+   [ADR-0003](../../../verification/ADR-0003-source-capability-coverage.md). An unregistered source
+   such as TCGCollector remains a research lead until that contract is reviewed and added; do not
+   borrow another provider's authority. Automated discovery needs its own reviewed adapter path.
 5. Classify what it proves — e.g. a localized existence as a **catch-up/reprint set** is distinct
    from existence under the original set number. Do not call a disputed unit `not-printed` because a
    set predates a market launch when a catch-up printing exists.

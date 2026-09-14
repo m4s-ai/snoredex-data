@@ -31,12 +31,21 @@ runtime provides (a vision-capable tool) for artwork, layout, finish, stamps and
 establish printed text (name, attacks, artist, set code, number); it cannot reliably establish
 foil/finish or subtle stamps — finish needs visible visual evidence, a comparison photo, or explicit
 owner confirmation. Record the confidence/evidence class per field: observation, OCR extraction,
-user confirmation, inference. Leave uncertain finish details unset rather than guessing. `SPEC-nnnn`
-names a **physical specimen, not a photograph**: keep one record per card and reuse it across every
-photo of that same card; never split a card's SPEC per photo and never deduplicate solely on text,
-name, collector number or artwork. Follow [fetch_attachment](../../../verification/fetch_attachment.py):
-re-filing identical bytes for a specimen that already declares them is a no-op, and the same
-committed image cannot become two independent specimens.
+user confirmation, inference. Leave uncertain finish details unset rather than guessing.
+
+The current [fetch_attachment](../../../verification/fetch_attachment.py) importer retains **one
+photograph per `SPEC-nnnn` evidence record**. Reuse that record for identical bytes and unchanged
+metadata; a manifest cannot repeat its ID. For distinct original photos of the same physical card,
+assign separate observation IDs in the reviewed manifest so every image keeps its own original
+bytes, hash and provenance. Record the established same-card relationship in each row's `observed`
+text and the batch review table, with the other observation IDs and the basis for that relationship.
+Use the same exact `citedBy` claim only when each image supports it; keep each photo's visible
+properties separate. These are multiple views of one card, not independent corroboration, extra
+owned cards or distinct printings. Never deduplicate cards solely on text, number or artwork.
+Do not use `--replace` to add an angle: it overwrites the retained photo and may remove the
+superseded file. Identical image bytes must not receive another SPEC ID. If the association or
+required property cannot be established, retain the uncertainty rather than transferring a finish
+from a neighbouring photo.
 
 ## Specimen-intake multi-photo finish batches
 
@@ -44,7 +53,8 @@ When one contribution holds several cards, keep the batch discipline:
 
 1. Inventory every image first with a stable sequence number, source path, SHA-256 and OCR output —
    do not process only the clearest image.
-2. Build a review table with one row per photographed card: identity, language/market, set code,
+2. Build a review table with one row per photographed card, linking every view and its SPEC ID:
+   identity, language/market, set code,
    collector number, artist, candidate reference IDs, visible or owner-confirmed finish, stamp, and
    confidence.
 3. Group by the base print key `(localization, market, set code, collector number)`, then compare

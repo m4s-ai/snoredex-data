@@ -30,13 +30,17 @@ Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.m
 ## Claim-evidence source-recovery
 
 For a source link that is bot-gated (Cloudflare/CAPTCHA/403/JS), do **not** reinvent retrieval:
-follow the scraping technique in [source-refresh bot-gated retrieval](../snoredex-source-refresh/SKILL.md),
+follow the acquisition and retention steps in
+[source-refresh bot-gated retrieval](../snoredex-source-refresh/SKILL.md#source-refresh-bot-gated-retrieval),
 then classify here what the recovered source positively establishes for this exact unit. Retrieval
 is never evidence on its own; the determination that the source proves (or does not prove) a claim
 is this workflow's task.
 
 For localized set-code research, inspect the exact TCGCollector card page and preserve its native
-set code, number and language. Check `verification/source_first_prints.json` and the reviewed
+set code, number and language in the retained research snapshot. TCGCollector currently has no
+registered provider/surface or discovery adapter: keep its result as a lead until a reviewed source
+contract exists, without changing a verdict or marking corroboration. Check
+`verification/source_first_prints.json` and the reviewed
 identity/source stores before calling a find new. If an official source already establishes that
 same field for that same release, evaluate the page as possible corroboration under the provider's
 capabilities; never assign corroboration merely because the page exists. Catalogue metadata is not

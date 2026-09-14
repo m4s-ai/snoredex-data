@@ -5,12 +5,16 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "verification"))
 import fetch_attachment  # noqa: E402
+sys.path.insert(0, str(ROOT / "scripts"))
+import finishes  # noqa: E402
 
 
 def expect_failure(callable_: object) -> None:
@@ -19,6 +23,59 @@ def expect_failure(callable_: object) -> None:
     except SystemExit:
         return
     raise AssertionError("expected validation failure")
+
+
+def verify_multiple_views() -> None:
+    """Distinct views survive import/replay without multiplying printing identity (#382)."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry = scratch / "specimens.json"
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        manifest = scratch / "intake.json"
+        # Existing valid PNG/JPEG fixtures exercise storage; this is not a visual identity test.
+        inputs = [ROOT / "verification/specimens/SPEC-0040.png",
+                  ROOT / "images/151C_143_Snorlax_V1_819209.jpg"]
+        rows = [{
+            "specimenId": f"SPEC-{index:04d}", "attachment": str(source),
+            "photographSource": f"https://example.test/card/view-{index}",
+            "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+            "heldBy": "owner", "inspectedFrom": "photo", "recordedAt": "2026-09-14",
+            "observed": "Owner identifies SPEC-0001 and SPEC-0002 as views of one card.",
+            "physicalObservation": {"finish": "holo", "basis": "synthetic storage fixture"},
+        } for index, source in enumerate(inputs, 1)]
+        manifest.write_text(json.dumps({"observations": rows}), encoding="utf-8")
+        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                               allow_small=False, replace=False, dry_run=False)
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
+                            SPECIMEN_DIR=scratch / "photos"):
+            assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
+            records = fetch_attachment.load_registry()["specimens"]
+            assert len(records) == 2
+            for record, source in zip(records, inputs):
+                assert (scratch / "photos" / record["photograph"]).read_bytes() == source.read_bytes()
+                assert record["photographSha256"] == fetch_attachment.content_hash(source.read_bytes())
+            before = {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+            assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
+            assert before == {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+
+            # Reusing an ID for the other view fails before either retained image is replaced.
+            manifest.write_text(json.dumps({"observations": [
+                {**rows[1], "specimenId": rows[0]["specimenId"]},
+            ]}), encoding="utf-8")
+            expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+            assert all(path.read_bytes() == content for path, content in before.items() if path != manifest)
+
+        printings = []
+        for record in records:
+            finishes.add_printing(printings, finishes.specimen_printing(record))
+        assert len(printings) == 1
+        assert printings[0]["specimenIds"] == ["SPEC-0001", "SPEC-0002"]
+        other_finish = {**records[0], "specimenId": "SPEC-0003", "physicalObservation": {
+            "finish": "non-holo", "basis": "a different synthetic card",
+        }}
+        finishes.add_printing(printings, finishes.specimen_printing(other_finish))
+        assert len(printings) == 2
+        assert {row["finish"] for row in printings} == {"holo", "non-holo"}
 
 
 def main() -> None:
@@ -591,7 +648,8 @@ def main() -> None:
         old_photo.unlink(missing_ok=True)
         new_photo.unlink(missing_ok=True)
 
-    print("fetch_attachment validation, hash and fallback regressions passed")
+    verify_multiple_views()
+    print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 
 if __name__ == "__main__":
