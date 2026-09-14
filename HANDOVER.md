@@ -10,6 +10,7 @@ are not restated here — a second copy is a copy that goes stale.
 | What are the rules, and what will trip me up? | [`AGENTS.md`](AGENTS.md) — loaded automatically; `CLAUDE.md` shim imports it |
 | What is true right now? | [`verification/DATA-HANDOFF-AUDIT.md`](verification/DATA-HANDOFF-AUDIT.md) — generated from the data, so it cannot drift |
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
+| Which existing workflow fits this task? | [WORKFLOW-MAP.md §4](WORKFLOW-MAP.md#4-use-case-contracts) — task phrases → skill, domain contract and implementation owner; also works without automatic skill discovery |
 | How do I add or change evidence? | [`verification/RESUME.md`](verification/RESUME.md) — read it before touching a confirmation or contradiction |
 | How do the workflows, graph edges, generators and gates connect? | [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md) — normative DAG and data-contract boundary |
 | How do I *use* the data? | [`README.md`](README.md), with [`FINDINGS.md`](FINDINGS.md) for what fell out of building it |

@@ -39,9 +39,13 @@ specimens. Owner statements are authoritative but are still graded explicitly as
 `RESUME.md` is long and worth it. It records every source technique, dead end and methodology
 correction already made here, and reading it is how you avoid repeating one.
 
-Reusable repository workflows live under [`.agents/skills/`](.agents/skills/). Select the narrow
-skill whose description matches the task; each routes back to these canonical documents and the
-existing Python workflow owners rather than copying their contracts.
+Choose the task in [WORKFLOW-MAP.md §4](WORKFLOW-MAP.md#4-use-case-contracts), then read its
+linked skill and required domain contract. This route also works without automatic skill discovery.
+If no row fits, follow [the skill directory](.agents/skills/) and choose the narrow existing skill
+by its description, including issue delivery and PR remediation. The table covers registered data
+workflows; other repository tasks use this fallback.
+Before creating another processing path, inspect the existing workflow/lane and its implementation
+owner; reuse that path unless the task establishes a concrete gap.
 
 ## Non-negotiable rules
 
