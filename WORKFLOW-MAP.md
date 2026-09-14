@@ -309,19 +309,34 @@ projection.
 
 ## 4. Use-case contracts
 
-The [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract)
-defines the relationship and consumer checks for retained images and their supporting references.
+Select the row matching the requested action, then read its skill and required domain contract.
+This table is the single maintained intent-to-workflow route; a reader without automatic skill
+discovery follows the same links. Selecting a route does not authorize executing its write path.
 
-| Use case | Canonical entry | Graph impact | Required boundary |
-|---|---|---|---|
-| Known card confirmation | Evidence observation + reviewed unit update | Existing claim/release edge; possibly source/provenance | Evidence application and source identity; no discovery refresh |
-| New card from internet/source-first | Retained adapter/discovery run, then reconciliation | New candidate/release/source edges; locality and mapping edges | Adapter/card-discovery/completeness before canonical mutation |
-| New set or promo announcement (including Pokémon.com news) | Official lead, then concrete set/card source | Set/release/card edges only when positively identified | News alone is a lead; no inferred card list or finish |
-| Physical card/image | Issue manifest → attachment importer → specimen | `observed-by`/`supported-by` to finish/printing | Image/hash/SPEC validation, then registry, graph, artwork and collector acceptance |
-| Cardmarket page or image | Historical candidate metadata, or positive visible-card evidence from a retained exact product image or seller photo | Candidate provenance or physical observation | Filters, offers and counts never verify a localized card or expand the frozen baseline automatically |
-| TCGdex refresh | Candidate snapshot → explicit accept | Finish candidate/profile edges | Hash/URL diff and review before accepting snapshot |
-| Contradiction / absence | Scoped source or owner adjudication | `contradicts` or bounded absence/adjudication edges | No zero-result inference; unresolved stays disputed/pending |
-| Artwork review | Graph-backed browser projection | Artwork/work/image observation edges | Browser proposals never write catalogue truth directly |
+The registration column uses `workflow:<id>` from
+[the gate matrix](verification/workflow_gate_matrix.json) and optional `lane:<id>` from
+[the scoped manifest](verification/scoped_pipeline_manifest.json). Each registered workflow has
+one row; a scoped lane may serve several compatible rows. A dash means an observational route
+without a registered mutation workflow. Commands and execution order remain owned by the
+existing scripts and manifests.
+
+| Task / intent | Registered workflow / lane | Skill | Canonical entry | Graph impact | Required boundary |
+|---|---|---|---|---|---|
+| Verify a known card claim / bekannten Claim belegen | `workflow:known-card-confirmation` / `lane:correction` | [claim evidence](.agents/skills/snoredex-claim-evidence/SKILL.md) | [Evidence playbook](verification/RESUME.md), observation + reviewed unit update; [application semantics](scripts/evidence_semantics.py) | Existing claim/release edge; possibly source/provenance | Evidence application and source identity; no discovery refresh |
+| Refresh sources, find new cards, digging / Quellen aktualisieren, neue Karten suchen | `workflow:source-first-card-discovery` / `lane:source-discovery` | [source refresh](.agents/skills/snoredex-source-refresh/SKILL.md) | [Discovery cycle](scripts/discovery_cycle.py), [card discovery](scripts/card_discovery.py), [adapter inventory](verification/card_discovery_adapters.json); retained run, then reconciliation | New candidate/release/source edges; locality and mapping edges | Offline validation and authorized live refresh are distinct; candidate cannot mutate a verdict |
+| Investigate a new set or promo announcement (including Pokémon.com news) | `workflow:set-or-promo-announcement` / `lane:source-discovery` | [source refresh](.agents/skills/snoredex-source-refresh/SKILL.md) | Official lead, then concrete set/card source via [source adapters](scripts/source_adapters.py) and [recurrence contract](verification/RECURRENCE.md) | Set/release/card edges only when positively identified | News alone is a lead; no inferred card list or finish |
+| Add photos, scans or issue attachments / Fotos übernehmen | `workflow:physical-card-image` / `lane:physical-evidence` | [specimen intake](.agents/skills/snoredex-specimen-intake/SKILL.md) | Issue manifest → [attachment importer](verification/fetch_attachment.py) → specimen; [acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract) | `observed-by`/`supported-by` to finish/printing | Image/hash/SPEC validation, then registry, graph, artwork and collector acceptance |
+| Inspect a Cardmarket page or image | `workflow:cardmarket-lead` | Metadata: [state audit](.agents/skills/snoredex-state-audit/SKILL.md); retained image: [specimen intake](.agents/skills/snoredex-specimen-intake/SKILL.md) | Historical candidate metadata, or the physical-image route above for visible-card evidence from a retained exact product image or seller photo | Candidate provenance or physical observation | Filters, offers and counts never verify a localized card or expand the frozen baseline automatically |
+| Refresh TCGdex finish data / Finish-Daten aktualisieren | `workflow:tcgdex-refresh` / `lane:finish-refresh` | [finish refresh](.agents/skills/snoredex-finish-refresh/SKILL.md) | [Finish owner](scripts/finishes.py) and [finish-source contract](verification/FINISH_SOURCES.md); candidate snapshot → review → authorized accept | Finish candidate/profile edges | Hash/URL diff and review before accepting the exact staged snapshot; no card discovery |
+| Assess a contradiction or owner absence decision | `workflow:absence-adjudication` / `lane:absence` | [claim evidence](.agents/skills/snoredex-claim-evidence/SKILL.md) | [Evidence playbook](verification/RESUME.md), [absence model](scripts/absence_model.py) and [application semantics](scripts/evidence_semantics.py) | `contradicts` or bounded absence/adjudication edges | Only owner adjudication settles absence; no zero-result inference; unresolved stays disputed/pending |
+| Review artwork in the browser | `workflow:artwork-review` | [UI audit](.agents/skills/snoredex-ui-audit/SKILL.md) | [Artwork projection](scripts/artwork_review.py) and [browser review contract](verification/ADR-0007-embedded-artwork-review-ui.md) | Artwork/work/image observation edges | Browser proposals never write catalogue truth directly |
+| Audit state only, change nothing / Datenzustand nur prüfen | — | [state audit](.agents/skills/snoredex-state-audit/SKILL.md) | [Current handoff audit](verification/DATA-HANDOFF-AUDIT.md); relevant observational checks, or [full gate](scripts/regen.py) with `--check` | Observation only | No repair, import, refresh or snapshot acceptance; scoped lanes can write and are not automatically read-only |
+
+The [documentation check](verification/test_pipeline_documentation.py) validates row-local
+registration coverage, compatible lane impacts, owner references and existing linked targets.
+It covers the registered workflows and lanes, not arbitrary unregistered scripts or prior reading.
+New operator entry points must be classified during review; helpers do not require a user route.
+See [ADR-0010](verification/ADR-0010-agent-discovery-surface.md) for the decision and acceptance boundary.
 
 ## 5. Graph edge contract
 

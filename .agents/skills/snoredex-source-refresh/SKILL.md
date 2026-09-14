@@ -1,6 +1,6 @@
 ---
 name: snoredex-source-refresh
-description: Refresh and reconcile Snoredex source-first set and card discovery runs. Use for scheduled, release-triggered, provider-change, or manual catalogue discovery; not for applying evidence to an already-known unit.
+description: Refresh and reconcile Snoredex source-first set and card discovery runs. Use for finding new cards, digging, source updates, set or promo announcements, and scheduled, release-triggered, provider-change or manual catalogue discovery. Excludes photo or attachment intake, evidence for an already-known claim, and TCGdex finish-snapshot refresh.
 ---
 
 <!-- doc: role=source-refresh workflow skill; stage=task -->
