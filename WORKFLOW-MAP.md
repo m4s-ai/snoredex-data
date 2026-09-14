@@ -338,6 +338,12 @@ It covers the registered workflows and lanes, not arbitrary unregistered scripts
 New operator entry points must be classified during review; helpers do not require a user route.
 See [ADR-0010](verification/ADR-0010-agent-discovery-surface.md) for the decision and acceptance boundary.
 
+Bot-gated source retrieval is a helper, not another operator route. Use the
+[source-refresh retrieval technique](.agents/skills/snoredex-source-refresh/SKILL.md#source-refresh-bot-gated-retrieval)
+for acquisition; apply recovered evidence through the existing
+[claim-evidence workflow](.agents/skills/snoredex-claim-evidence/SKILL.md).
+Retrieval alone creates no graph verdict and does not bypass retained-run or adjudication contracts.
+
 ## 5. Graph edge contract
 
 The current graph uses typed relations including:

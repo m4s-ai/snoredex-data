@@ -27,4 +27,20 @@ Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.m
    - state-machine diagnosis: `python scripts/workflow_loop.py --loop evidence --max-cycles 3` or `--loop absence`
 8. Run `python scripts/regen.py`, review every changed canonical and generated artifact, and report the evidence, provider, status transition, graph impact, and remaining uncertainty.
 
+## Claim-evidence source-recovery
+
+For a source link that is bot-gated (Cloudflare/CAPTCHA/403/JS), do **not** reinvent retrieval:
+follow the scraping technique in [source-refresh bot-gated retrieval](../snoredex-source-refresh/SKILL.md),
+then classify here what the recovered source positively establishes for this exact unit. Retrieval
+is never evidence on its own; the determination that the source proves (or does not prove) a claim
+is this workflow's task.
+
+For localized set-code research, inspect the exact TCGCollector card page and preserve its native
+set code, number and language. Check `verification/source_first_prints.json` and the reviewed
+identity/source stores before calling a find new. If an official source already establishes that
+same field for that same release, evaluate the page as possible corroboration under the provider's
+capabilities; never assign corroboration merely because the page exists. Catalogue metadata is not
+specimen evidence and cannot establish physical finish. Source silence proves neither absence nor
+first release; keep catch-up/reprint identities separate from the original set.
+
 Stop without changing the claim when identity, locality, source capability, or owner intent is unresolved.

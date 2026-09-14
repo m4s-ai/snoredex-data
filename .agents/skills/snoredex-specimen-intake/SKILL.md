@@ -23,4 +23,37 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the c
 6. Run `python scripts/workflow_loop.py --loop physical --max-cycles 3` and inspect its stop reason. Then run `python scripts/scoped_regen.py --lane physical-evidence`.
 7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and the affected registry, artwork and collector views. Run `python scripts/regen.py`, review the complete artifact diff and publication-allowlist effects, and report any evidence still missing.
 
+## Specimen-intake image verification
+
+Run **local OCR first** for every supplied image when its output is readable enough to verify, so
+extraction stays inspectable and locally controlled; complement with whatever image inspection the
+runtime provides (a vision-capable tool) for artwork, layout, finish, stamps and damage. OCR can
+establish printed text (name, attacks, artist, set code, number); it cannot reliably establish
+foil/finish or subtle stamps — finish needs visible visual evidence, a comparison photo, or explicit
+owner confirmation. Record the confidence/evidence class per field: observation, OCR extraction,
+user confirmation, inference. Leave uncertain finish details unset rather than guessing. `SPEC-nnnn`
+names a **physical specimen, not a photograph**: keep one record per card and reuse it across every
+photo of that same card; never split a card's SPEC per photo and never deduplicate solely on text,
+name, collector number or artwork. Follow [fetch_attachment](../../../verification/fetch_attachment.py):
+re-filing identical bytes for a specimen that already declares them is a no-op, and the same
+committed image cannot become two independent specimens.
+
+## Specimen-intake multi-photo finish batches
+
+When one contribution holds several cards, keep the batch discipline:
+
+1. Inventory every image first with a stable sequence number, source path, SHA-256 and OCR output —
+   do not process only the clearest image.
+2. Build a review table with one row per photographed card: identity, language/market, set code,
+   collector number, artist, candidate reference IDs, visible or owner-confirmed finish, stamp, and
+   confidence.
+3. Group by the base print key `(localization, market, set code, collector number)`, then compare
+   finish and stamp separately — cards with identical printed text may still be distinct variants.
+4. Never merge Non-Holo, Holo, Reverse Holo, Cosmos Holo, Poké Ball, Master Ball, stamped and other
+   confirmed treatments. A generic model `reverse_holo` label is not authority for Poké Ball / Master
+   Ball / ordinary Holo — present the image-linked proposal for review; an explicit owner correction
+   overrides model evidence.
+5. Do not treat one photo as proof that no parallel or finish variant exists; one specimen only
+   establishes what the visible card face itself proves.
+
 If the original bytes cannot be obtained or safely matched to a specimen, stop with the exact missing input. A missing photograph is not evidence of absence.
