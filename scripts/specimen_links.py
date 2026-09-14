@@ -6,17 +6,23 @@ These joins expose evidence; they never admit a card, infer a finish, or match n
 from collections import defaultdict
 
 from source_registry import provenance_url
+from specimen_groups import group_specimens
 
 
 def specimen_reference_index(specimens, units=()) -> dict[str, set[str]]:
     result = defaultdict(set)
-    for specimen in specimens:
-        for citation in specimen.get("citedBy") or []:
-            result[citation].add(specimen["specimenId"])
+    for group in group_specimens(list(specimens)):
+        members = group.get("_views", [group])
+        ids = {row["specimenId"] for row in members}
+        for specimen in members:
+            result[specimen["specimenId"]].update(ids)
+            for citation in specimen.get("citedBy") or []:
+                result[citation].update(ids)
     for unit in units:
         source_ref = unit.get("sourceRef") or ""
         if source_ref.startswith("specimen:"):
-            result[unit["unitId"]].add(source_ref.removeprefix("specimen:"))
+            sid = source_ref.removeprefix("specimen:")
+            result[unit["unitId"]].update(result.get(sid, {sid}))
     return result
 
 
@@ -60,6 +66,8 @@ def release_specimens(release, physicals, citations, records, claims) -> list[st
     for ref in release_reference_ids(release, physicals, claims):
         linked.update(citations.get(ref, ()))
         linked.update(direct_specimen_ids(records.get(ref, {}), claims.get(ref, {})))
+    for sid in list(linked):
+        linked.update(citations.get(sid, ()))
     return sorted(linked)
 
 

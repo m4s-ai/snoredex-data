@@ -889,6 +889,18 @@ def direct_specimen_claims(units, source_first, reviewed_graph) -> dict[str, set
     return direct
 
 
+def share_specimen_group_references(specimens, accepted, direct):
+    from specimen_groups import group_specimens
+    grouped = set()
+    for group in group_specimens(specimens):
+        if members := group.get("_views"):
+            references = {ref for member in members for ref in specimen_claim_ids(member, accepted, direct)}
+            for member in members:
+                direct[member["specimenId"]].update(references)
+                grouped.add(member["specimenId"])
+    return grouped
+
+
 def record_linked_specimens(
     specimens: list[dict[str, Any]], units: list[dict[str, Any]],
     record: Callable[..., None], source_first: list[dict[str, Any]] = (),
@@ -899,11 +911,13 @@ def record_linked_specimens(
     accepted = registry_claim_ids(units, source_first, finish_units, reviewed_graph)
     units_by_id = {unit["unitId"]: unit for unit in units}
     direct = direct_specimen_claims(units, source_first, reviewed_graph)
+    # Share identity references, while recording each view's own physical fields below.
+    grouped = share_specimen_group_references(specimens, accepted, direct)
     surfaces = specimen_surfaces()
     for specimen in specimens:
         unit_ids = specimen_claim_ids(specimen, accepted, direct)
         physical = specimen.get("physicalObservation") or {}
-        if not unit_ids and not physical:
+        if not unit_ids and not physical and specimen["specimenId"] not in grouped:
             continue
         if record_product_render_context(specimen, unit_ids, units_by_id, record):
             continue
@@ -911,11 +925,13 @@ def record_linked_specimens(
             str(specimen.get("heldBy", "")).casefold(),
             str(specimen.get("inspectedFrom") or "Inspected physical specimen photograph"),
         )
-        record_specimen_sources(specimen, unit_ids, source_type, physical, record, surfaces)
+        fields = ("finish", "edition") if specimen["specimenId"] in grouped else ("finish",)
+        record_specimen_sources(specimen, unit_ids, source_type, physical, record, surfaces, fields=fields)
 
 
 def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: str,
-                           physical: dict, record: Callable[..., None], surfaces: dict) -> None:
+                           physical: dict, record: Callable[..., None], surfaces: dict,
+                           *, fields=("finish",)) -> None:
     photo_url = provenance_url(specimen.get("photographSource"))
     listing_url = provenance_url(specimen.get("listingUrl"))
     urls = {photo_url, listing_url} - {None}
@@ -929,7 +945,7 @@ def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: st
         for stable_id in [specimen["specimenId"], *unit_ids]:
             record_specimen_claim(url, source_type, provider, dimension, stable_id,
                                   specimen.get("recordedAt"), physical if url == observed_url else {},
-                                  record, surfaces)
+                                  record, surfaces, fields=fields)
 
 
 def specimen_surfaces() -> dict:
@@ -954,30 +970,36 @@ def card_evidence_dimension(url: str | None, provider: str | None, surfaces: dic
 
 
 def surface_supports_observed_finish(url, provider, surfaces) -> bool:
+    return surface_supports_observed_property(url, provider, surfaces, "finish")
+
+
+def surface_supports_observed_property(url, provider, surfaces, field) -> bool:
     from source_capabilities import route_evidence
     if provider is None:
         return False
     surface = route_evidence({"canonicalUrl": url, "providerId": provider}, surfaces)
     return surface["finishCapability"]["mode"] == "specimen-observation" and any(
-        "finish" in edge["positiveEvidenceCapabilities"] for edge in surface["coverageEdges"]
+        field in edge["positiveEvidenceCapabilities"] for edge in surface["coverageEdges"]
     )
 
 
 def record_specimen_claim(url, source_type, provider, dimension, stable_id, retrieved, physical, record,
-                          surfaces):
+                          surfaces, *, fields=("finish",)):
     if provider == "cardmarket" and not is_cardmarket_product_image(url):
         record(url, source_type, "product", stable_id, retrieved, provider_id=provider)
         record(None, source_type, "identity", stable_id, retrieved, provider_id="inspected-specimen")
     else:
         record(url, source_type, dimension, stable_id, retrieved,
                provider_id=None if provider == "cardmarket" else provider)
-    if physical.get("finish"):
-        if "finish" in (physical.get("ownerAttestedFields") or []):
-            record(None, "Owner attestation", "finish", stable_id, retrieved,
+    for field in fields:
+        if not physical.get(field):
+            continue
+        if field in (physical.get("ownerAttestedFields") or []):
+            record(None, "Owner attestation", field, stable_id, retrieved,
                    provider_id="owner-attestation")
-            return
-        inspected = surface_supports_observed_finish(url, provider, surfaces)
-        record(url if inspected else None, source_type, "finish", stable_id, retrieved,
+            continue
+        inspected = surface_supports_observed_property(url, provider, surfaces, field)
+        record(url if inspected else None, source_type, field, stable_id, retrieved,
                provider_id=provider if inspected else "inspected-specimen")
 
 
@@ -1047,6 +1069,23 @@ def record_source_first_identity(entry: dict, record: Callable, surfaces: dict,
         dimension = card_evidence_dimension(url, provider, surfaces, "card-release")
         record(url, "Positive source-first card record", dimension,
                entry["printId"], entry.get("retrievedAt"), provider_id=provider)
+
+
+def record_printing_source(source, printing_id, dimensions, record, surfaces):
+    if source.get("specimenId") and "observedFields" in source:
+        # Grouped photograph sources follow the same property/provider boundary as
+        # direct specimens. A site's finish capability does not grant edition authority.
+        url, source_type = source.get("url"), source.get("sourceType")
+        provider = specimen_provider(url, source_type)
+        dimension = card_evidence_dimension(url, provider, surfaces, "identity")
+        physical = dict.fromkeys(set(dimensions) & {"finish", "edition"}, True)
+        record_specimen_claim(url, source_type, provider, dimension, printing_id,
+                              source.get("retrievedAt"), physical, record, surfaces,
+                              fields=("finish", "edition"))
+        return
+    for dimension in dimensions:
+        record(source.get("url"), source.get("sourceType"), dimension,
+               printing_id, source.get("retrievedAt"))
 
 
 def main() -> int:
@@ -1154,9 +1193,7 @@ def main() -> int:
                         f"claimFields:{printing['printingId']} value={dimensions!r}"
                     )
                     continue
-                for dimension in dimensions:
-                    record(source.get("url"), source.get("sourceType"), dimension,
-                           printing["printingId"], source.get("retrievedAt"))
+                record_printing_source(source, printing["printingId"], dimensions, record, surfaces)
 
     for name, source in (overrides.get("sources") or {}).items():
         record(source.get("url"), source.get("sourceType"), "finish-override", f"override:{name}")

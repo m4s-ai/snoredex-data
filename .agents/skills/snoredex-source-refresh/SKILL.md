@@ -23,4 +23,49 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [WORK
 6. Run `python scripts/workflow_loop.py --loop discovery --max-cycles 3` and `python scripts/scoped_regen.py --lane source-discovery`. Stop when the source or owner input named by the runner is required.
 7. Run `python scripts/regen.py`, inspect completeness and graph changes, and report run IDs, hashes, provider failures, reconciliation counts, explicit gaps, and remaining blockers.
 
+## Source-refresh bot-gated retrieval
+
+When a source link cannot be read with plain `web_extract`/`curl` — Cloudflare "Just a moment…",
+CAPTCHA walls, 403, or JS-only pages — retrieve it through a **locally configured scraping backend**
+(a Firecrawl-compatible endpoint whose base URL and API key come from the operator's environment, not
+this public repository). This is the retrieval step for discovery and adjudication inputs:
+
+1. Collect the links from issue comments via `gh api .../issues/N/comments` (a small Python script —
+   avoid fragile one-line shell parsing).
+2. Scrape each protected URL through the scraping endpoint (`POST /v1/scrape`, formats `markdown`,
+   `onlyMainContent`). Use only the operator-approved backend; do not reach for unapproved tools or
+   credential-holding bypasses to defeat a CAPTCHA or an authenticated wall. If a source is
+   legitimately gated behind login or a bot check that the approved backend cannot cross, report it
+   as still-gated rather than trying to circumvent it.
+3. Byte length is a **heuristic, not proof.** Judge readability by inspecting the returned page
+   content itself: a meaningful title plus real set/card/release rows means readable; a
+   Cloudflare/`"Just a moment…"`/`"Performing security verification"` page, an HTML error, or an
+   empty body means still gated or blocked regardless of length. Record the measured size and HTTP
+   result only as supporting evidence alongside what the page actually contains.
+4. Extract the evidence relevant to the disputed units (set code, number, language row, release date,
+   rarity). For set-code pages, grep the markdown for the set code, numbers, and locale markers.
+   A recovered page is **not an adapter run**: `scripts/source_adapters.py` and
+   `scripts/card_discovery.py` fetch their configured endpoints or replay existing runs; neither
+   imports externally scraped Markdown. Use their normal run path only for supported acquisitions.
+   For manual retrieval, retain an issue-scoped JSON snapshot under
+   [verification/evidence/](../../../verification/evidence/), following the existing research records:
+   original/canonical source URL, actual retrieval date, capture method, returned content or exact
+   relevant excerpt, its SHA-256, source-native identifiers, and field-specific limits. Distinguish
+   a hash of the retained excerpt from a full-response hash; omit transport credentials and private
+   backend details. This is a research input, not a generated run or an accepted claim. Do not invent
+   run IDs, edit immutable run files, or treat the ignored cache as retained evidence.
+   Before applying it, resolve the source's reviewed provider/surface and capability under
+   [ADR-0003](../../../verification/ADR-0003-source-capability-coverage.md). An unregistered source
+   such as TCGCollector remains a research lead until that contract is reviewed and added; do not
+   borrow another provider's authority. Automated discovery needs its own reviewed adapter path.
+5. Classify what it proves — e.g. a localized existence as a **catch-up/reprint set** is distinct
+   from existence under the original set number. Do not call a disputed unit `not-printed` because a
+   set predates a market launch when a catch-up printing exists.
+6. Apply the result per the owning lane: discovery/recovery feeds this `source-refresh` workflow;
+   classifying supplied evidence for an existing claim belongs to
+   [claim-evidence](../snoredex-claim-evidence/SKILL.md).
+
+Never use the scraping backend for anything but read-only retrieval, and never treat retrieval alone
+as a verdict.
+
 Never rewrite an immutable run, the legacy Cardmarket baseline, or an archived pass. Zero rows and unreachable providers are failures or gaps, not empty catalogues.

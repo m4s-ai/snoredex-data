@@ -5,12 +5,23 @@ from __future__ import annotations
 
 import json
 import sys
+import tempfile
+import io
+from contextlib import redirect_stderr
 from pathlib import Path
 from types import SimpleNamespace
+from unittest.mock import patch
+from copy import deepcopy
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "verification"))
 import fetch_attachment  # noqa: E402
+sys.path.insert(0, str(ROOT / "scripts"))
+import finishes  # noqa: E402
+import authoritative_graph as graph_module  # noqa: E402
+import source_registry  # noqa: E402
+from specimen_groups import group_specimens  # noqa: E402
+from specimen_links import specimen_reference_index, release_specimens, item_specimen_links  # noqa: E402
 
 
 def expect_failure(callable_: object) -> None:
@@ -19,6 +30,273 @@ def expect_failure(callable_: object) -> None:
     except SystemExit:
         return
     raise AssertionError("expected validation failure")
+
+
+def verify_multiple_views_case(*, secondary_finish: bool, reverse: bool) -> None:
+    """Distinct views survive import/replay without multiplying printing identity (#382)."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry = scratch / "specimens.json"
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        manifest = scratch / "intake.json"
+        # Existing valid PNG/JPEG fixtures exercise storage; this is not a visual identity test.
+        inputs = [ROOT / "verification/specimens/SPEC-0040.png",
+                  ROOT / "images/151C_143_Snorlax_V1_819209.jpg"]
+        rows = [{
+            "specimenId": f"SPEC-{index:04d}", "attachment": str(source),
+            "photographSource": f"https://example.test/card/view-{index}",
+            "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+            "heldBy": "owner", "inspectedFrom": "photo", "recordedAt": "2026-09-14",
+            "observed": "Owner identifies SPEC-0001 and SPEC-0002 as views of one card.",
+            "physicalObservation": {"finish": "holo", "basis": "synthetic storage fixture"},
+        } for index, source in enumerate(inputs, 1)]
+        rows[1]["sameCardAs"] = {"specimenId": "SPEC-0001", "basis": "Owner identifies the same physical card."}
+        rows[1]["physicalObservation"]["edition"] = "1st Edition"
+        if not secondary_finish:
+            del rows[1]["physicalObservation"]["finish"]
+        if reverse:
+            rows.reverse()
+        manifest.write_text(json.dumps({"observations": rows}), encoding="utf-8")
+        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                               allow_small=False, replace=False, dry_run=False)
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
+                            SPECIMEN_DIR=scratch / "photos"):
+            assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
+            records = fetch_attachment.load_registry()["specimens"]
+            assert len(records) == 2
+            for record, source in zip(records, inputs):
+                assert (scratch / "photos" / record["photograph"]).read_bytes() == source.read_bytes()
+                assert record["photographSha256"] == fetch_attachment.content_hash(source.read_bytes())
+            before = {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+            assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
+            assert before == {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+
+            # Reusing an ID for the other view fails before either retained image is replaced.
+            manifest.write_text(json.dumps({"observations": [
+                {**rows[1], "specimenId": rows[0]["specimenId"]},
+            ]}), encoding="utf-8")
+            expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+            assert all(path.read_bytes() == content for path, content in before.items() if path != manifest)
+            # A replacement that contradicts another retained view must fail atomically too.
+            changed = deepcopy(next(row for row in rows if row["specimenId"] == "SPEC-0001"))
+            changed["physicalObservation"]["edition"] = "Unlimited"
+            manifest.write_text(json.dumps({"observations": [changed]}), encoding="utf-8")
+            args.replace = True
+            for dry_run in (True, False):
+                args.dry_run = dry_run
+                expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+                assert all(path.read_bytes() == content for path, content in before.items() if path != manifest)
+
+        printings = []
+        for record in group_specimens(records):
+            finishes.add_printing(printings, finishes.specimen_printing(record))
+        assert len(printings) == 1
+        assert printings[0]["specimenIds"] == ["SPEC-0001", "SPEC-0002"]
+        assert printings[0]["edition"] == "1st Edition"
+        assert printings[0]["specimenFieldSources"]["edition"] == ["SPEC-0002"]
+        assert records[0]["physicalObservation"].get("edition") is None
+        if not secondary_finish:
+            assert "finish" not in printings[0]["sources"][1]["claimFields"]
+        other_finish = {**records[0], "specimenId": "SPEC-0003", "physicalObservation": {
+            "finish": "non-holo", "basis": "a different synthetic card",
+        }}
+        finishes.add_printing(printings, finishes.specimen_printing(other_finish))
+        assert len(printings) == 2
+        assert {row["finish"] for row in printings} == {"holo", "non-holo"}
+        verify_group_contract(records)
+        if not reverse and not secondary_finish:
+            verify_group_projection(records, scratch)
+
+
+def verify_multiple_views() -> None:
+    for reverse in (False, True):
+        for secondary_finish in (False, True):
+            verify_multiple_views_case(secondary_finish=secondary_finish, reverse=reverse)
+
+
+def verify_duplicate_photo_batch() -> None:
+    """One hash cannot create two SPEC IDs, even inside a new/replacement/dry-run batch."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry, manifest = scratch / "specimens.json", scratch / "manifest.json"
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        source = ROOT / "verification/specimens/SPEC-0041.png"
+        rows = [{
+            "specimenId": f"SPEC-99{index:02d}", "attachment": str(source),
+            "photographSource": f"https://example.test/batch/view-{index}",
+            "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+            "heldBy": "collection owner", "inspectedFrom": "synthetic storage fixture",
+            "observed": "Same original bytes at distinct URLs do not establish another view.",
+            "recordedAt": "2026-09-14", "physicalObservation": {"finish": "holo", "basis": "fixture"},
+        } for index in (1, 2)]
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry, SPECIMEN_DIR=scratch / "photos"):
+            for linked in (False, True):
+                if linked:
+                    rows[1]["sameCardAs"] = {"specimenId": "SPEC-9901", "basis": "synthetic link"}
+                for reverse in (False, True):
+                    ordered = rows[::-1] if reverse else rows
+                    manifest.write_text(json.dumps({"observations": ordered}), encoding="utf-8")
+                    before = {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+                    for replace, dry_run in ((False, False), (True, False), (False, True), (True, True)):
+                        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                                               allow_small=False, replace=replace, dry_run=dry_run)
+                        error_output = io.StringIO()
+                        with redirect_stderr(error_output):
+                            expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+                        expected = (f"image bytes already belong to {ordered[0]['specimenId']}; "
+                                    f"duplicate evidence cannot create {ordered[1]['specimenId']}")
+                        assert expected in error_output.getvalue(), error_output.getvalue()
+                        assert before == {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
+
+
+def verify_group_contract(records) -> None:
+    for invalid in (
+        {"sameCardAs": {"specimenId": "SPEC-0002", "basis": "self"}},
+        {"sameCardAs": {"specimenId": "SPEC-9999", "basis": "missing"}},
+        {"sameCardAs": {"specimenId": "SPEC-0001", "basis": " "}},
+        {"language": "English"}, {"number": "12/64"}, {"number": "11/100"}, {"variant": "V2"},
+        {"physicalObservation": {"finish": "non-holo", "basis": "contradiction"}},
+        {"physicalObservation": {"finish": "holo", "basis": "context", "coversMultipleCards": True}},
+        {"physicalObservation": {"finish": "holo", "basis": "conflict", "conflictsWith": ["SPEC-0001"]}},
+    ):
+        try:
+            group_specimens([records[0], {**records[1], **invalid}])
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"invalid same-card group accepted: {invalid}")
+    cyclic = deepcopy(records)
+    cyclic[0]["sameCardAs"] = {"specimenId": "SPEC-0002", "basis": "cycle"}
+    try:
+        group_specimens(cyclic)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("cyclic sameCardAs accepted")
+    # The same printed identity never itself authorizes merging complementary observations.
+    separate = deepcopy(records)
+    separate[1].pop("sameCardAs")
+    separate[1]["physicalObservation"]["finish"] = "holo"
+    printings = []
+    for record in group_specimens(separate):
+        finishes.add_printing(printings, finishes.specimen_printing(record))
+    assert len(printings) == 2
+    attested = deepcopy(records)
+    attested[1]["physicalObservation"]["ownerAttestedFields"] = ["edition"]
+    candidate = finishes.specimen_printing(group_specimens(attested)[0])
+    sources = [source for source in candidate["sources"] if source["specimenId"] == "SPEC-0002"]
+    assert "edition" not in sources[0]["claimFields"]
+    assert sources[1]["claimFields"] == ["edition"] and "url" not in sources[1]
+    equal = deepcopy(records)
+    equal[1]["physicalObservation"] = deepcopy(equal[0]["physicalObservation"])
+    assert finishes.specimen_printing(group_specimens(equal)[0])["specimenIds"] == ["SPEC-0001", "SPEC-0002"]
+    identity_only = deepcopy(records)
+    for row in identity_only:
+        row.pop("physicalObservation")
+    assert finishes.specimen_printing(group_specimens(identity_only)[0]) is None
+    incoming = {**records[0], "specimenId": "SPEC-0003", "physicalObservation": {
+        "finish": "non-holo", "basis": "conflicting independent observation", "conflictsWith": ["SPEC-0002"]}}
+    candidate = finishes.specimen_printing(group_specimens([*records, incoming])[0])
+    printings = []
+    finishes.add_printing(printings, candidate)
+    assert printings[0]["verificationStatus"] == "pending" and printings[0]["conflictsWith"] == ["SPEC-0003"]
+
+
+def verify_group_projection(records, scratch) -> None:
+    """Exercise the real finish/graph paths, including an already catalogued edition pair."""
+    records = deepcopy(records)
+    for index, record in enumerate(records, 1):
+        record["specimenId"] = f"SPEC-99{index:02d}"
+    records[1]["sameCardAs"]["specimenId"] = "SPEC-9901"
+    # Matching a known printing requires the fixture's own positive stamp/size evidence.
+    records[1]["physicalObservation"].update({"markings": "EDITIE 1", "markingRole": "print-identity"})
+    records[1]["physicalObservation"]["ownerAttestedFields"] = ["edition"]
+    records[0]["physicalObservation"]["cardSize"] = "standard"
+    original_doc = json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))
+    document = {**original_doc, "specimens": original_doc["specimens"] + records}
+    document["count"] = len(document["specimens"])
+    path = scratch / "all-specimens.json"
+    path.write_text(json.dumps(document), encoding="utf-8")
+    with patch.object(finishes, "SPECIMENS_PATH", path):
+        context = finishes._load_finish_context()
+        assert finishes._resolve_tcgdex(context) is None
+        finishes._prepare_finish_indexes(context)
+        unit_index = sorted(context["grouped_units"], key=finishes.group_sort_key).index(("JU", "11", "Dutch"))
+        unit = finishes._build_finish_unit(context, unit_index, ("JU", "11", "Dutch"))
+    assert len(unit["printings"]) == 2, unit["printings"]
+    matched = [row for row in unit["printings"] if "SPEC-9901" in row.get("specimenIds", [])]
+    assert len(matched) == 1 and matched[0]["edition"] == "1st Edition"
+    finish_doc = json.loads((ROOT / "verification/finish_units.json").read_text(encoding="utf-8"))
+    finish_doc["units"] = [unit if row["finishUnitId"] == unit["finishUnitId"] else row
+                           for row in finish_doc["units"]]
+    finish_path = scratch / "finishes.json"
+    graph = graph_module.read_graph()
+    for standalone in (False, True):
+        current_finishes = deepcopy(finish_doc)
+        if standalone:
+            # Keep legacy printings intact but remove fixture evidence to exercise the fallback.
+            baseline = json.loads((ROOT / "verification/finish_units.json").read_text(encoding="utf-8"))
+            current_finishes = baseline
+        finish_path.write_text(json.dumps(current_finishes), encoding="utf-8")
+        with patch.multiple(graph_module, SPECIMENS=path, FINISH_UNITS=finish_path):
+            projected = graph_module.project_physical_evidence(deepcopy(graph))
+        errors = graph_module.validate(projected, identity_inputs={"specimens": document, "finishes": current_finishes})
+        assert not errors, errors
+        physicals = [row["payload"] for row in projected["entities"]
+                     if row["entityType"] == "physical-printing" and "SPEC-9901" in row["payload"].get("specimenIds", [])]
+        assert len(physicals) == 1 and physicals[0]["edition"] == "1st Edition"
+        assert {"SPEC-9901", "SPEC-9902"}.issubset(physicals[0]["specimenIds"])
+        claim = next(row["payload"] for row in projected["entities"]
+                     if row["entityId"] == "CLAIM:specimen:SPEC-9902")
+        assert "edition" not in claim["observedFields"] and claim["ownerAttestedFields"] == ["edition"]
+        changed = deepcopy(projected)
+        bad_claim = next(row["payload"] for row in changed["entities"]
+                         if row["entityId"] == "CLAIM:specimen:SPEC-9902")
+        bad_claim["observedFields"].append("edition")
+        assert any("specimen view provenance is stale" in error for error in graph_module.validate(
+            changed, identity_inputs={"specimens": document, "finishes": current_finishes}))
+        assert not any(edge["relation"] == "corroborates" and edge["fromId"].startswith("CLAIM:specimen:SPEC-99")
+                       for edge in projected["edges"])
+        verify_group_links(records, physicals[0])
+
+
+def verify_group_links(records, physical) -> None:
+    citation_index = specimen_reference_index(records)
+    release = {"sourceFirstRecordIds": ["fixture-print"]}
+    source_first = {"fixture-print": {"specimenId": "SPEC-9901"}}
+    assert release_specimens(release, [], citation_index, source_first, {}) == ["SPEC-9901", "SPEC-9902"]
+    assert item_specimen_links(release, physical, citation_index, source_first, {},
+                              {row["specimenId"]: row for row in records}) == {
+                                  row["photographSource"] for row in records}
+    calls = []
+    source_registry.record_linked_specimens(records, [], lambda *a, **kw: calls.append(a),
+                                          [{"printId": "fixture-print", "specimenId": "SPEC-9901"}])
+    assert any(call[3] == "SPEC-9902" for call in calls)
+    assert any(call[0] == records[1]["photographSource"] and call[3] == "fixture-print" for call in calls)
+    assert not any(call[0] == records[1]["photographSource"] and call[2] == "finish" for call in calls)
+    assert any(call[0] is None and call[2] == "edition" and call[3] == "SPEC-9902" for call in calls)
+    assert not any(call[0] == records[1]["photographSource"] and call[2] == "edition" for call in calls)
+    # An observed-finish capability does not automatically authorize observed edition.
+    calls = []
+    source_registry.record_specimen_claim(
+        "https://example.test/photo", "Retail listing", "retailer-listing", "identity", "SPEC-9902",
+        "2026-09-14", {"edition": "1st Edition"}, lambda *a, **kw: calls.append((a, kw)),
+        source_registry.specimen_surfaces(), fields=("edition",))
+    edition_call = next(call for call in calls if call[0][2] == "edition")
+    assert edition_call[0][0] is None and edition_call[1]["provider_id"] == "inspected-specimen"
+    identity_primary = deepcopy(records)
+    identity_primary[0].pop("physicalObservation")
+    identity_primary[1]["physicalObservation"]["finish"] = "holo"
+    calls = []
+    source_registry.record_linked_specimens(identity_primary, [], lambda *a, **kw: calls.append(a))
+    assert any(call[0] == identity_primary[0]["photographSource"] and call[3] == "SPEC-9901" for call in calls)
+    assert not any(call[3] == "SPEC-9901" and call[2] == "finish" for call in calls)
+    calls = []
+    source_registry.record_printing_source({"specimenId": "SPEC-9902", "url": "https://example.test/photo",
+        "sourceType": "Retail listing", "observedFields": ["edition"], "retrievedAt": "2026-09-14"},
+        "F-TEST-P01", ["identity", "edition"], lambda *a, **kw: calls.append((a, kw)), source_registry.specimen_surfaces())
+    edition_call = next(call for call in calls if call[0][2] == "edition")
+    assert edition_call[0][0] is None and edition_call[1]["provider_id"] == "inspected-specimen"
 
 
 def main() -> None:
@@ -591,7 +869,9 @@ def main() -> None:
         old_photo.unlink(missing_ok=True)
         new_photo.unlink(missing_ok=True)
 
-    print("fetch_attachment validation, hash and fallback regressions passed")
+    verify_multiple_views()
+    verify_duplicate_photo_batch()
+    print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 
 if __name__ == "__main__":

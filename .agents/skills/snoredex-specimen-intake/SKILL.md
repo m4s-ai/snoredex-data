@@ -23,4 +23,53 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the c
 6. Run `python scripts/workflow_loop.py --loop physical --max-cycles 3` and inspect its stop reason. Then run `python scripts/scoped_regen.py --lane physical-evidence`.
 7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and the affected registry, artwork and collector views. Run `python scripts/regen.py`, review the complete artifact diff and publication-allowlist effects, and report any evidence still missing.
 
+## Specimen-intake image verification
+
+Run **local OCR first** for every supplied image when its output is readable enough to verify, so
+extraction stays inspectable and locally controlled; complement with whatever image inspection the
+runtime provides (a vision-capable tool) for artwork, layout, finish, stamps and damage. OCR can
+establish printed text (name, attacks, artist, set code, number); it cannot reliably establish
+foil/finish or subtle stamps — finish needs visible visual evidence, a comparison photo, or explicit
+owner confirmation. Record the confidence/evidence class per field: observation, OCR extraction,
+user confirmation, inference. Leave uncertain finish details unset rather than guessing.
+
+The current [fetch_attachment](../../../verification/fetch_attachment.py) importer retains **one
+photograph per `SPEC-nnnn` evidence record**. Reuse that record for identical bytes and unchanged
+metadata; a manifest cannot repeat its ID. For distinct original photos of the same physical card,
+assign separate observation IDs in the reviewed manifest so every image keeps its own original
+bytes, hash and provenance. Choose one primary observation and put
+`"sameCardAs": {"specimenId": "SPEC-nnnn", "basis": "<positive same-card identification>"}`
+on every additional view, pointing directly to that primary. Prose alone does not join observations.
+The [multi-view contract](../../../verification/FINISH_SOURCES.md#multiple-views-of-one-physical-card)
+defines reference validation, complementary observations and atomic conflict rejection.
+Use the same exact `citedBy` claim only when each image supports it; keep each photo's visible
+properties separate. A linked view may record only edition or another observed property when the
+group positively establishes finish; an identity-only view omits `physicalObservation`. The
+projectors combine compatible group facts once and retain all view IDs and field-specific sources.
+The relationship does not establish independent corroboration, extra owned cards or a complete
+printing inventory. Never deduplicate cards solely on text, number or artwork.
+Do not use `--replace` to add an angle: it overwrites the retained photo and may remove the
+superseded file. Identical image bytes must not receive another SPEC ID. If the association or
+required property cannot be established, retain the uncertainty rather than transferring a finish
+from a neighbouring photo.
+
+## Specimen-intake multi-photo finish batches
+
+When one contribution holds several cards, keep the batch discipline:
+
+1. Inventory every image first with a stable sequence number, source path, SHA-256 and OCR output —
+   do not process only the clearest image.
+2. Build a review table with one row per photographed card, linking every view and its SPEC ID:
+   identity, language/market, set code,
+   collector number, artist, candidate reference IDs, visible or owner-confirmed finish, stamp, and
+   confidence.
+3. Group by the base print key `(localization, market, set code, collector number)`, then compare
+   finish and stamp separately — cards with identical printed text may still be distinct variants.
+4. Never merge Non-Holo, Holo, Reverse Holo, Cosmos Holo, Poké Ball, Master Ball, stamped and other
+   confirmed treatments. A generic model `reverse_holo` label is not authority for Poké Ball / Master
+   Ball / ordinary Holo — present the image-linked proposal for review; an explicit owner correction
+   overrides model evidence.
+5. Do not treat one photo as proof that no parallel or finish variant exists; one specimen only
+   establishes what the visible card face itself proves.
+
 If the original bytes cannot be obtained or safely matched to a specimen, stop with the exact missing input. A missing photograph is not evidence of absence.

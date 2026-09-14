@@ -102,6 +102,46 @@ Before handing off either kind of observation, apply the
 [specimen and reference acceptance contract](RESUME.md#specimen-and-reference-acceptance-contract)
 to verify that the property-specific sources reach the registry, artwork and collector views.
 
+### Multiple views of one physical card
+
+Each original photograph retains its own SPEC record, bytes, SHA-256, source and inspection date.
+An additional view may link directly to a primary photograph through a positive assertion:
+
+```json
+"sameCardAs": {
+  "specimenId": "SPEC-0001",
+  "basis": "The owner explicitly identifies both supplied views as the same physical card."
+}
+```
+
+The primary has no `sameCardAs`. The importer validates the complete proposed registry before
+writing any image or metadata, including with `--dry-run` and `--replace`. Missing targets,
+self-links, chained links/cycles, mismatched set/number/variant/language, different positively read
+number denominators and multi-card frames are rejected. Every member needs a retained photograph,
+hash and date. A shared number, artwork or a note in `observed` alone never joins cards.
+
+Record only each view's own positive properties and `basis`. For example, the primary's
+`physicalObservation` may contain `finish: "holo"`; its linked front view may contain only
+`edition: "1st Edition"` plus its own basis. The group must positively establish a finish if any
+member carries a physical observation. An identity-only view omits the block; a group of only
+identity views establishes no printing. Unlinked physical observations still require finish.
+Keep `ownerAttestedFields` on the individual observation that records the determination.
+
+The finish and graph projectors combine compatible observations before creating a printing.
+`specimenIds` retains every view; `specimenFieldSources` maps each established property (including
+distribution leaves) to the observations that support it. Per-view sources retain their original
+date and evidence, with `claimFields` separating identity/finish/edition and `observedFields`
+recording other photographed properties. Owner-attested fields remain separate from photo claims.
+The registry, artwork and collector joins follow the same explicit group even for a direct citation
+to only one view. Additional views create provenance edges, never independent corroboration.
+
+Conflicting positive values or an explicit `conflictsWith` within a group reject the entire import
+without changing retained files. Keep the proposed input for clarification; do not overwrite one
+view's observation or pick a winner. Existing external conflicts remain pending. Unknown values
+are not negative evidence. A group does not borrow unobserved properties from another card: merging
+with an existing printing still requires its positive semantic identity, or an explicit same-card
+link to that retained specimen. No existing specimens are grouped automatically.
+
 **The block is optional and is never back-filled.** Current counts live in `specimens.json`; records
 without the block say nothing about finish, and that silence is not evidence of non-holo. Read the
 record before adding one: a keyword scan over this corpus would have recorded a finish for
@@ -215,9 +255,11 @@ page, and the official card page carries the card data only — exactly as the s
 The missing product page does not say anything about unlisted finishes. It records a research gap
 only.
 
-That is what opened the finish layer to rule 4. Owner attestation still cannot *establish* a finish
-— it stays in the row above — but the collection owner may now **close the list** of finishes a unit
-already has evidence for, exactly as they may settle a language absence. The decision is recorded in
+That is what opened the finish layer to rule 4. A completeness decision does not itself establish
+a finish. A separate, explicit owner determination can establish the named specimen property
+through `ownerAttestedFields` as described above. The collection owner may also **close the list**
+of finishes a unit already has evidence for, exactly as they may settle a language absence. That
+completeness decision is recorded in
 `owner_adjudications.json` under `finishDecisions` and projects to a distinct status:
 
 | completenessStatus | set by |

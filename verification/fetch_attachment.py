@@ -83,6 +83,9 @@ from pathlib import Path
 from urllib.parse import urlparse, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "scripts"))
+from specimen_groups import group_specimens
+
 VERIFICATION = ROOT / "verification"
 SPECIMENS_JSON = VERIFICATION / "specimens.json"
 SPECIMEN_DIR = VERIFICATION / "specimens"
@@ -432,16 +435,22 @@ def ensure_cited_identity(current: dict | None, candidate: dict) -> None:
              "a replacement must keep its set, number, variant and language")
 
 
-def validate_observation(
-    physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None
-) -> dict:
-    if not isinstance(physical, dict):
-        fail(f"manifest row for {specimen_id} needs physicalObservation")
-    finish = physical.get("finish")
+def validate_observed_finish(finish, specimen_id, defer_finish):
+    if finish is None and defer_finish:
+        return
     if not isinstance(finish, str) or not finish:
         fail(f"manifest row for {specimen_id} needs physicalObservation.finish")
     if finish not in SPECIMEN_FINISHES:
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.finish")
+
+
+def validate_observation(
+    physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None,
+    *, defer_finish: bool = False,
+) -> dict:
+    if not isinstance(physical, dict):
+        fail(f"manifest row for {specimen_id} needs physicalObservation")
+    validate_observed_finish(physical.get("finish"), specimen_id, defer_finish)
     if not isinstance(physical.get("basis"), str) or not physical["basis"].strip():
         fail(f"manifest row for {specimen_id} needs physicalObservation.basis")
     edition = physical.get("edition")
@@ -694,7 +703,8 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
     validate_manifest_fields(item, specimen_id)
     physical = item.get("physicalObservation")
     if physical is not None:
-        physical = validate_observation(physical, specimen_id, known_specimen_ids)
+        # Group context is checked on the complete proposed registry before any write.
+        physical = validate_observation(physical, specimen_id, known_specimen_ids, defer_finish=True)
     if item.get("heldBy") == "third-party seller" and not listing_url:
         fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
     record = {
@@ -712,19 +722,26 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "recordedAt": item["recordedAt"],
         "citedBy": list(item.get("citedBy") or []) if cited_by is None else list(cited_by),
     }
+    add_specimen_options(record, item, physical, listing_url, allow_small)
+    return record
+
+
+def add_specimen_options(record, item, physical, listing_url, allow_small):
     if physical is not None:
         record["physicalObservation"] = physical
+    if "sameCardAs" in item:
+        record["sameCardAs"] = item["sameCardAs"]
     if item.get("allowUnprojected") is True:
         record["allowUnprojected"] = True
     if listing_url:
         record["listingUrl"] = listing_url
     if allow_small:
         record["photographAllowSmall"] = True
-    return record
 
 
 def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
     """Commit every image and the registry together, restoring the prior state on failure."""
+    validate_import_groups(doc, records)
     registry_before = SPECIMENS_JSON.read_bytes()
     prepared_destinations = {destination for destination, _ in prepared}
     current_by_id = {row["specimenId"]: row for row in doc["specimens"]}
@@ -946,6 +963,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         prepared.append((destination, blob))
         print(f"prepared {specimen_id}: {size[0]}x{size[1]} {ext} from {source_label}")
 
+    validate_import_groups(doc, records)
     source_description = f"issue #{args.issue}" if args.issue else "direct manifest sources"
     if args.dry_run:
         print(f"DRY RUN — would import {len(records)} specimen(s) from {source_description}")
@@ -959,6 +977,15 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     return result
 
 
+def validate_import_groups(doc: dict, records: list[dict]) -> None:
+    proposed = {row["specimenId"]: row for row in doc["specimens"]}
+    proposed.update({row["specimenId"]: row for row in records})
+    try:
+        group_specimens(list(proposed.values()))
+    except ValueError as error:
+        fail(str(error))
+
+
 def registry_count_errors(registry: dict) -> list[str]:
     """Return a bounded error when declared specimen metadata drifts from the records."""
     specimens = registry.get("specimens", [])
@@ -969,11 +996,25 @@ def registry_count_errors(registry: dict) -> list[str]:
     return []
 
 
+def specimen_group_errors(specimens):
+    try:
+        group_specimens(specimens)
+    except ValueError as error:
+        return [str(error)]
+    return []
+
+
+def observed_finish_is_missing(observation, unit):
+    return observation.get("finish") and not any(printing.get("finish") == observation["finish"]
+                                                for printing in unit.get("printings", []))
+
+
 def command_evidence_check(*, check_projection: bool = True) -> int:
     """Check the evidence slice without network access or generated-output writes."""
     registry = load_registry()
     errors = registry_count_errors(registry)
     specimens = registry.get("specimens", [])
+    errors.extend(specimen_group_errors(specimens))
     photographed = [row for row in specimens if row.get("photograph")]
     for specimen in photographed:
         photograph = specimen.get("photograph")
@@ -1033,8 +1074,7 @@ def command_evidence_check(*, check_projection: bool = True) -> int:
         if not any(specimen["specimenId"] in (printing.get("specimenIds") or [])
                    for printing in unit.get("printings", [])):
             errors.append(f"{specimen['specimenId']}: finish projection is missing its source")
-        if not any(printing.get("finish") == observation.get("finish")
-                   for printing in unit.get("printings", [])):
+        if observed_finish_is_missing(observation, unit):
             errors.append(f"{specimen['specimenId']}: observed finish is not projected")
 
     try:

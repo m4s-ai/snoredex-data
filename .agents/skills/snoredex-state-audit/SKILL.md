@@ -23,4 +23,12 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [READ
 6. Validate each finding with a concrete file, command result, invariant, or reproducible example. Absence of a record is not evidence of a missing printing.
 7. Rank findings by correctness or data-loss risk, downstream graph fan-out, reproducibility, and remediation cost. Separate confirmed defects from questions and enhancement ideas.
 
+## State-audit cross-layer validation
+
+Trace source and asset identity through the affected graph and consumer projections; compare
+current counts rather than copying historical totals. Use the existing read-only gate selection
+in step 5, not bare generator commands. A failed invariant is a finding, not permission to repair
+data, regenerate outputs or weaken an assertion. Determinism checks that require rebuilding belong
+to a separately authorized implementation workflow, not this read-only audit.
+
 Return an executive conclusion, audit boundary, verified findings with paths, affected consumers, gate evidence, and a small ordered remediation list. Do not create issues or modify files without explicit authorization.

@@ -127,6 +127,17 @@ def main() -> int:
     expect("and nothing is built before the first guard",
            source.index('with guarded("G0"') < source.index("finish_by_key = {"), True)
 
+    # Importing a group validator must not change how later audit sections resolve modules.
+    # scripts/ contains names that shadow ordinary imports; its path is a scoped dependency.
+    before_path = list(sys.path)
+    malformed = []
+    expect("empty specimen grouping is valid", rf.specimen_group_check([], malformed), set())
+    expect("group check preserves the import path", sys.path, before_path)
+    rf.specimen_group_check([{"specimenId": "SPEC-9999", "sameCardAs": {
+        "specimenId": "SPEC-9998", "basis": "missing target fixture"}}], malformed)
+    expect("bad group is reported", bool(malformed), True)
+    expect("failed group check also preserves the import path", sys.path, before_path)
+
     if FAILURES:
         for failure in FAILURES:
             print(f"FAIL {failure}")

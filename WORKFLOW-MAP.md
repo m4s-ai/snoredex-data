@@ -57,7 +57,7 @@ The following invariants apply to every path:
 | `verification/finish_units.json` | `scripts/finishes.py` from reviewed inputs | Set-number × language finish state and mappings | `asserts-finish-for`, `uses-profile`, `maps-to` |
 | `verification/finish_overrides.json` | reviewed special-printing input | Finish facts not expressible by group-level sources | finish/profile edges |
 | `verification/finish_tcgdex_snapshot.json` | explicit refresh/accept flow | Versioned offline TCGdex input | finish candidates; never direct verdicts |
-| `verification/specimens.json` + `verification/specimens/` | `verification/fetch_attachment.py` | Stable physical cards and optional observations/photos | `observed-by`, `supported-by`, physical printing provenance |
+| `verification/specimens.json` + `verification/specimens/` | `verification/fetch_attachment.py` | Stable photo/observation records; explicit `sameCardAs` groups validated by `scripts/specimen_groups.py` | `observed-by`, `supported-by`, physical printing provenance with per-view field sources |
 | `verification/set_catalogue_sources.json` | reviewed catalogue input | Set/product identity, releases, dates, edition scope | `asserts-release-event`, `asserts-set-edition`, `scoped-to` |
 | `scripts/source_registry.py` + `verification/source_capabilities.json` | reviewed provider and capability inputs | Provider authority plus bounded positive confirmation dimensions, including PokéCottage | provider/surface/coverage/observation edges |
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |
@@ -337,6 +337,12 @@ registration coverage, compatible lane impacts, owner references and existing li
 It covers the registered workflows and lanes, not arbitrary unregistered scripts or prior reading.
 New operator entry points must be classified during review; helpers do not require a user route.
 See [ADR-0010](verification/ADR-0010-agent-discovery-surface.md) for the decision and acceptance boundary.
+
+Bot-gated source retrieval is a helper, not another operator route. Use the
+[source-refresh retrieval technique](.agents/skills/snoredex-source-refresh/SKILL.md#source-refresh-bot-gated-retrieval)
+for acquisition; apply recovered evidence through the existing
+[claim-evidence workflow](.agents/skills/snoredex-claim-evidence/SKILL.md).
+Retrieval alone creates no graph verdict and does not bypass retained-run or adjudication contracts.
 
 ## 5. Graph edge contract
 

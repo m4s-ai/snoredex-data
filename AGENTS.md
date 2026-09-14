@@ -47,6 +47,16 @@ workflows; other repository tasks use this fallback.
 Before creating another processing path, inspect the existing workflow/lane and its implementation
 owner; reuse that path unless the task establishes a concrete gap.
 
+**Project-skill discovery is runtime-specific.** In Hermes, automatic discovery requires an
+owner-approved project root in `skills.trusted_project_dirs`, enabled `skills.project_discovery`,
+and a session started inside the checkout. After inspecting the skills and obtaining the user's
+trust approval, use `hermes skills trust <repo>` in the intended profile, then start a fresh
+project-scoped session. Inspect discovery/filter/quarantine diagnostics if skills remain absent;
+do not bypass a rejected scan or enable trust automatically. A terminal `cd` alone does not
+rebuild an existing conversation's skill inventory. Other agents use their own supported project
+skill and trust mechanisms, not Hermes commands. Without automatic discovery, follow the links in
+`WORKFLOW-MAP.md` §4 and read the selected skill directly, subject to the runtime's trust policy.
+
 ## Non-negotiable rules
 
 1. **A Cardmarket catalogue claim is not evidence; a retained card image can be.** A product's
