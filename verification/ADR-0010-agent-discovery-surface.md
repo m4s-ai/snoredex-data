@@ -14,6 +14,10 @@ intent-to-workflow table. Its rows link the existing skill, domain contract and 
 owner while retaining evidence and graph boundaries. [AGENTS.md](../AGENTS.md) owns the rule to
 consult that route before inventing another processing path. [HANDOVER.md](../HANDOVER.md) points
 to the same section. Skill descriptions distinguish nearby tasks without duplicating the table.
+The table covers registered data workflows, not every repository task. AGENTS retains a direct
+skill-directory fallback for unmatched tasks, including issue delivery and PR remediation.
+The existing UI skill distinguishes artwork proposal review from site-behavior auditing and
+owns the browser-only proposal procedure, with ADR-0007 retaining its data-authority boundary.
 
 [llms.txt](../llms.txt) links operators to the rules and routing section using absolute GitHub
 URLs. The publisher copies that text without rewriting links; these targets stay in the

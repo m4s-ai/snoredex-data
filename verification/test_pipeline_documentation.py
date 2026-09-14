@@ -210,6 +210,10 @@ def main() -> int:
 
     for entry in ("AGENTS.md", "HANDOVER.md"):
         assert "WORKFLOW-MAP.md#4-use-case-contracts" in MARKDOWN_LINK.findall(texts[ROOT / entry]), entry
+    # The data-workflow table is bounded; unmatched repository tasks still need discoverable skills.
+    assert ".agents/skills/" in MARKDOWN_LINK.findall(texts[ROOT / "AGENTS.md"]), (
+        "AGENTS.md must retain the skill-directory fallback for tasks outside the routing table"
+    )
     operator_section = texts[ROOT / "llms.txt"].split("## Repository operators\n", 1)[1].split("\n## ", 1)[0]
     operator_targets = set(MARKDOWN_LINK.findall(operator_section))
     github_base = "https://github.com/m4s-ai/snoredex-data/blob/main/"
