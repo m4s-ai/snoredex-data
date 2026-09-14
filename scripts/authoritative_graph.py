@@ -23,6 +23,7 @@ from pathlib import Path
 from typing import Any
 
 from source_registry import specimen_markings
+from specimen_groups import projected_specimens, photographed_fields
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
@@ -172,6 +173,23 @@ def _entity(entity_type: str, entity_id: str, payload: dict[str, Any]) -> dict[s
     }
 
 
+def _group_claim_provenance(claim, specimen_id, group, target, standalone_target):
+    if group.get("_views"):
+        original = next(view for view in group["_views"] if view["specimenId"] == specimen_id)
+        observation = original.get("physicalObservation") or {}
+        claim["observedFields"] = photographed_fields(observation)
+        claim["ownerAttestedFields"] = observation.get("ownerAttestedFields", [])
+        claim["sameCardPrimaryId"] = group["specimenId"]
+        if target and not standalone_target:
+            claim["reason"] = f"retained view of the same card provides provenance for {target}"
+    return claim["reason"]
+
+
+def _retain_field_sources(payload, sources):
+    if sources:
+        payload["specimenFieldSources"] = sources
+
+
 def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     """Refresh source provenance and rebuild finish/specimen nodes from canonical inputs.
 
@@ -194,11 +212,9 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     finish_document = _read_json(FINISH_UNITS)
     specimen_document = _read_json(SPECIMENS)
     finish_units = finish_document.get("units", [])
-    specimens = [row for row in specimen_document.get("specimens", [])
-                 if row.get("physicalObservation")]
+    specimen_by_id = projected_specimens(specimen_document.get("specimens", []))
     release_ids = _release_index(graph)
     release_aliases = _release_alias_index(graph)
-    specimen_by_id = {str(row["specimenId"]): row for row in specimens}
     existing_finish_proposals = {
         str(row.get("payload", {}).get("sourceId")): row.get("payload", {}).get("proposedCardReleaseId")
         for row in graph["entities"]
@@ -322,6 +338,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             }
             if specimen_ids:
                 physical_payload["specimenIds"] = specimen_ids
+            _retain_field_sources(physical_payload, printing.get("specimenFieldSources"))
             if printing.get("conflictsWith"):
                 physical_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
             generated_entities.append(_entity("physical-printing", physical_id, physical_payload))
@@ -345,8 +362,11 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             for specimen_id in specimen_ids:
                 specimen_targets[specimen_id] = physical_id
 
-    for specimen_id, specimen in sorted(specimen_by_id.items()):
+    # Groups are ordered with their primary first, including when its ID sorts last.
+    for specimen_id, specimen in specimen_by_id.items():
         target = specimen_targets.get(specimen_id)
+        group = specimen.get("_group", specimen)
+        member_ids = sorted(view["specimenId"] for view in group.get("_views", [specimen]))
         claim_id = f"CLAIM:specimen:{specimen_id}"
         observation = specimen.get("physicalObservation") or {}
         release_id = release_ids.get((
@@ -356,7 +376,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         standalone_target = None
         if (not target and release_id and not observation.get("coversMultipleCards")
                 and not observation.get("conflictsWith")
-                and specimen_id not in conflicted_specimen_ids):
+                and not conflicted_specimen_ids.intersection(member_ids)):
             standalone_target = f"PHYSICAL:specimen:{specimen_id}"
             target = standalone_target
             physical_payload = {
@@ -374,8 +394,11 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "sourceFinishUnitId": None,
                 "sourcePrintingId": None,
                 "establishingClaimId": claim_id,
-                "specimenIds": [specimen_id],
+                "specimenIds": member_ids,
             }
+            _retain_field_sources(physical_payload, group.get("_fieldSources"))
+            for member_id in member_ids:
+                specimen_targets[member_id] = standalone_target
             generated_entities.append(_entity("physical-printing", standalone_target,
                                               physical_payload))
             generated_edges.extend([
@@ -418,6 +441,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         }
         if target:
             claim_payload["provenanceTargetId"] = target
+        reason = _group_claim_provenance(claim_payload, specimen_id, group, target, standalone_target)
         generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
         generated_dispositions.append({
             "sourceKind": "specimen-observation",
@@ -1098,9 +1122,11 @@ def _collect_identity_claim_inputs(
             errors, expected_claims, "source-first-record", row.get("printId"),
             "confirmed", "established-and-mapped", row.get("sourceUrl"),
         )
-    observed_specimens = {
-        str(row.get("specimenId")): row for row in specimens if row.get("physicalObservation")
-    }
+    try:
+        observed_specimens = projected_specimens(specimens)
+    except ValueError as error:
+        errors.append(str(error))
+        observed_specimens = {}
     for row in observed_specimens.values():
         _expect_identity_claim(
             errors, expected_claims, "specimen-observation", row.get("specimenId"),
@@ -1572,6 +1598,30 @@ def _validate_materialized_specimen(
             errors.append(f"specimen release identity is stale: {specimen_id}:{input_field}")
 
 
+def _validate_group_target(errors, specimen_id, group, physical):
+    for field, ids in group["_fieldSources"].items():
+        if not set(ids).issubset(physical.get("specimenFieldSources", {}).get(field, [])):
+            errors.append(f"specimen field provenance is stale: {specimen_id}:{field}")
+    if not {view["specimenId"] for view in group["_views"]}.issubset(physical.get("specimenIds", [])):
+        errors.append(f"specimen group is incomplete: {specimen_id}")
+    if physical.get("distribution") != group["physicalObservation"].get("distribution"):
+        errors.append(f"specimen printing is stale: {specimen_id}:distribution")
+
+
+def _validate_group_claim(errors, specimen_id, group, claim, printings):
+    claim = claim or {}
+    target_id = claim.get("provenanceTargetId") or claim.get("materializedTargetId")
+    if target_id:
+        _validate_group_target(errors, specimen_id, group, printings.get(target_id, {}))
+    original = next(view for view in group["_views"] if view["specimenId"] == specimen_id)
+    observation = original.get("physicalObservation") or {}
+    expected = photographed_fields(observation)
+    if claim.get("observedFields") != expected or claim.get("sameCardPrimaryId") != group["specimenId"]:
+        errors.append(f"specimen view provenance is stale: {specimen_id}")
+    if claim.get("ownerAttestedFields") != observation.get("ownerAttestedFields", []):
+        errors.append(f"specimen owner attribution is stale: {specimen_id}")
+
+
 def _validate_specimens(
     errors: list[str],
     observed_specimens: dict[str, dict[str, Any]],
@@ -1583,6 +1633,8 @@ def _validate_specimens(
 ) -> None:
     for specimen_id, specimen in observed_specimens.items():
         claim = claims_by_source.get(("specimen-observation", specimen_id))
+        if group := specimen.get("_group"):
+            _validate_group_claim(errors, specimen_id, group, claim, printings)
         if not claim or not claim.get("materializedTargetId"):
             _validate_unmaterialized_specimen(
                 errors, specimen_id, specimen, claim, printings, releases, edge_keys, units_by_id

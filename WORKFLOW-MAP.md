@@ -57,7 +57,7 @@ The following invariants apply to every path:
 | `verification/finish_units.json` | `scripts/finishes.py` from reviewed inputs | Set-number × language finish state and mappings | `asserts-finish-for`, `uses-profile`, `maps-to` |
 | `verification/finish_overrides.json` | reviewed special-printing input | Finish facts not expressible by group-level sources | finish/profile edges |
 | `verification/finish_tcgdex_snapshot.json` | explicit refresh/accept flow | Versioned offline TCGdex input | finish candidates; never direct verdicts |
-| `verification/specimens.json` + `verification/specimens/` | `verification/fetch_attachment.py` | Stable physical cards and optional observations/photos | `observed-by`, `supported-by`, physical printing provenance |
+| `verification/specimens.json` + `verification/specimens/` | `verification/fetch_attachment.py` | Stable photo/observation records; explicit `sameCardAs` groups validated by `scripts/specimen_groups.py` | `observed-by`, `supported-by`, physical printing provenance with per-view field sources |
 | `verification/set_catalogue_sources.json` | reviewed catalogue input | Set/product identity, releases, dates, edition scope | `asserts-release-event`, `asserts-set-edition`, `scoped-to` |
 | `scripts/source_registry.py` + `verification/source_capabilities.json` | reviewed provider and capability inputs | Provider authority plus bounded positive confirmation dimensions, including PokéCottage | provider/surface/coverage/observation edges |
 | `verification/source_adapters.json` | reviewed source-first adapter inventory | Provider slices, gaps, and terminal states | source/capability and candidate edges |

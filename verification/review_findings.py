@@ -1852,6 +1852,26 @@ def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
         )
     return updates
 
+def specimen_group_check(specimens, malformed):
+    sys.path.insert(0, str(ROOT / "scripts"))
+    try:
+        from specimen_groups import group_specimens
+        return {view["specimenId"] for group in group_specimens(specimens) for view in group.get("_views", [])}
+    except ValueError as error:
+        malformed.append(str(error))
+        return set()
+    finally:
+        sys.path.pop(0)
+
+
+def valid_specimen_finish(observation, sid, grouped_ids, vocabulary):
+    return observation.get("finish") in vocabulary or (observation.get("finish") is None and sid in grouped_ids)
+
+
+def specimens_with_finish(specimens):
+    return [row for row in specimens if (row.get("physicalObservation") or {}).get("finish")]
+
+
 def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     u = None
@@ -2040,12 +2060,13 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
 
         def _collect_g6_part6():
             nonlocal s, sid, specimen
+            grouped_ids = specimen_group_check(specimens, malformed)
             for specimen in specimens:
                 observation = specimen.get("physicalObservation")
                 if observation is None:
                     continue
                 sid = specimen["specimenId"]
-                if observation.get("finish") not in SPECIMEN_FINISHES:
+                if not valid_specimen_finish(observation, sid, grouped_ids, SPECIMEN_FINISHES):
                     malformed.append(f"{sid}: finish {observation.get('finish')!r}")
                 if not str(observation.get("basis") or "").strip():
                     malformed.append(f"{sid}: no basis quoted")
@@ -2065,7 +2086,7 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
                 f"{len(malformed)} malformed physical observation(s): {malformed[:5]}. Finish is one "
                 f"of {sorted(SPECIMEN_FINISHES)}; markings.role is the trichotomy AGENTS.md states.",
             )
-            observed_finishes = [s for s in specimens if s.get("physicalObservation")]
+            observed_finishes = specimens_with_finish(specimens)
             check(
                 "S17",
                 "Specimens carrying an observed finish",

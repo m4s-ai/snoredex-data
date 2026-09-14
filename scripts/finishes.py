@@ -28,6 +28,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from source_registry import provenance_url, specimen_markings
+from specimen_groups import group_specimens, photographed_fields
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -429,6 +430,7 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         existing["specimenIds"] = sorted(set(existing.get("specimenIds") or [])
                                           | set(candidate["specimenIds"]))
         existing["_origin"] = "specimen"
+    merge_specimen_field_sources(existing, candidate)
     existing_conflicts = sorted(set(existing.get("conflictsWith") or []))
     if existing_conflicts or conflicts:
         existing["verificationStatus"] = "pending"
@@ -442,6 +444,12 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
             seen_sources.add(source_signature(source))
     if "image" not in existing and candidate.get("image"):
         existing["image"] = candidate["image"]
+
+
+def merge_specimen_field_sources(existing, candidate):
+    for field, ids in candidate.get("specimenFieldSources", {}).items():
+        sources = existing.setdefault("specimenFieldSources", {})
+        sources[field] = sorted(set(sources.get(field, [])) | set(ids))
 
 
 def refine_auto_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> bool:
@@ -612,7 +620,35 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     photograph = specimen.get("photograph")
     if photograph:
         candidate["image"] = f"verification/specimens/{photograph}"
+    apply_specimen_group_sources(candidate, specimen)
     return candidate
+
+
+def apply_specimen_group_sources(candidate, specimen):
+    if views := specimen.get("_views"):
+        candidate["specimenIds"] = sorted(view["specimenId"] for view in views)
+        candidate["specimenFieldSources"] = specimen["_fieldSources"]
+        candidate["sources"] = [source for view in views for source in specimen_view_sources(view)]
+
+
+def specimen_view_sources(view):
+    observation = view.get("physicalObservation") or {}
+    sources = specimen_sources(view, observation)
+    photographed = set(photographed_fields(observation))
+    sources[0]["claimFields"] = ["identity", *sorted(photographed & {"finish", "edition"})]
+    sources[0]["observedFields"] = sorted(photographed)
+    for source in sources:
+        source["specimenId"] = view["specimenId"]
+    return sources
+
+
+def limit_specimen_photograph_fields(candidate, specimen, fields):
+    if specimen.get("_views"):
+        for source in candidate["sources"]:
+            if "observedFields" in source:
+                source["claimFields"] = [field for field in source["claimFields"] if field in fields] or ["identity"]
+    else:
+        candidate["sources"][0]["claimFields"] = list(fields)
 
 
 def merge_curated_specimen_identity(
@@ -799,6 +835,14 @@ def project_unit_onto_product(unit: dict[str, Any], token: str) -> dict[str, Any
     }
 
 
+def specimen_reverse_conflicts(specimens):
+    reverse = defaultdict(set)
+    for specimen in specimens:
+        for reference in (specimen.get("physicalObservation") or {}).get("conflictsWith") or []:
+            reverse[str(reference)].add(str(specimen["specimenId"]))
+    return reverse
+
+
 def _load_finish_context() -> dict[str, Any]:
     cards_document = read_json(CARDS_PATH)
     cards = cards_document["cards"]
@@ -807,11 +851,8 @@ def _load_finish_context() -> dict[str, Any]:
     specimens_document = read_json(SPECIMENS_PATH)
     validate_specimen_conflicts(specimens_document)
     specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
-    reverse_conflicts: dict[str, set[str]] = defaultdict(set)
-    for specimen in specimens_document.get("specimens", []):
-        specimen_id = str(specimen.get("specimenId"))
-        for reference in (specimen.get("physicalObservation") or {}).get("conflictsWith") or []:
-            reverse_conflicts[str(reference)].add(specimen_id)
+    reverse_conflicts = specimen_reverse_conflicts(specimens_document.get("specimens", []))
+    for specimen in group_specimens(specimens_document.get("specimens", [])):
         # A frame that explicitly covers multiple cards is context evidence only.  It must not
         # become a synthetic ``base`` printing; the per-card crops/records are the canonical
         # observations that carry the variant mapping.
@@ -1256,9 +1297,7 @@ def _build_finish_unit(
                                     "invalid specimenPhotographClaimFields for "
                                     f"{set_code} {number} {language}"
                                 )
-                            candidate["sources"][0]["claimFields"] = list(
-                                photograph_claim_fields
-                            )
+                            limit_specimen_photograph_fields(candidate, specimen, photograph_claim_fields)
                         localized_refs = [
                             ref for ref in manual.get("sourceRefs") or []
                             if language in (source_registry[ref].get("languages") or [])

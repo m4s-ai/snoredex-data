@@ -37,11 +37,17 @@ The current [fetch_attachment](../../../verification/fetch_attachment.py) import
 photograph per `SPEC-nnnn` evidence record**. Reuse that record for identical bytes and unchanged
 metadata; a manifest cannot repeat its ID. For distinct original photos of the same physical card,
 assign separate observation IDs in the reviewed manifest so every image keeps its own original
-bytes, hash and provenance. Record the established same-card relationship in each row's `observed`
-text and the batch review table, with the other observation IDs and the basis for that relationship.
+bytes, hash and provenance. Choose one primary observation and put
+`"sameCardAs": {"specimenId": "SPEC-nnnn", "basis": "<positive same-card identification>"}`
+on every additional view, pointing directly to that primary. Prose alone does not join observations.
+The [multi-view contract](../../../verification/FINISH_SOURCES.md#multiple-views-of-one-physical-card)
+defines reference validation, complementary observations and atomic conflict rejection.
 Use the same exact `citedBy` claim only when each image supports it; keep each photo's visible
-properties separate. These are multiple views of one card, not independent corroboration, extra
-owned cards or distinct printings. Never deduplicate cards solely on text, number or artwork.
+properties separate. A linked view may record only edition or another observed property when the
+group positively establishes finish; an identity-only view omits `physicalObservation`. The
+projectors combine compatible group facts once and retain all view IDs and field-specific sources.
+The relationship does not establish independent corroboration, extra owned cards or a complete
+printing inventory. Never deduplicate cards solely on text, number or artwork.
 Do not use `--replace` to add an angle: it overwrites the retained photo and may remove the
 superseded file. Identical image bytes must not receive another SPEC ID. If the association or
 required property cannot be established, retain the uncertainty rather than transferring a finish
