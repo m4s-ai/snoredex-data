@@ -55,3 +55,7 @@ Official identity/context pages inspected during the pass:
 - https://asia.pokemon-card.com/th/card-search/detail/1806/ (scA)
 
 Next productive step: obtain readable original seller photographs for the exact svM, s8b and sv4a offers above. For NonHolo, seek an explicit applicable print specification or sufficiently documented physical examination; do not treat a flat image as proof. Image-search throttling and blocked marketplace pages limited retrieval in this pass. No access control or TLS checks were bypassed.
+
+## Official Thai set-list PDF follow-up
+
+The [subsequent PDF audit](../issue-262-pdf-audit-20260915/README.md) follows 83 official product pages, processes 27 linked PDFs (464 pages), and retains ten inspected card excerpts. Its combined index covers 95 observed set codes across PDFs and 83 online set lists. Four additional Thai card-release candidates and the s8b sample-number discrepancy remain explicit research observations; no additional finish claims or canonical admissions are made in that increment. PR #383 remains a draft.
