@@ -1,6 +1,8 @@
 <!-- doc: role=retained Thai research before implementation; stage=history -->
 # Recherche zu Issue #262 – Thai-Beleglücken
 
+Historical record — Recherchestand vor der anschließenden Umsetzung.
+
 Die folgende Recherche beschreibt den Stand vor der Umsetzung. Die anschließend beauftragten Änderungen und den neuen Stand 13/28 dokumentiert [IMPLEMENTATION.md](IMPLEMENTATION.md).
 
 Stand: 15.09.2026 (Europe/Berlin). Abrufe erfolgten am 14.09.2026 UTC; die einzelnen Zeitstempel stehen in den Capture-Dateien.
