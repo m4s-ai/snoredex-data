@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-09-10",
+    "generated": "2026-09-15",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 478,
-      "withOnlyMarketplaceClaim": 46,
-      "pendingFinish": 37,
+      "withConfirmedFinish": 480,
+      "withOnlyMarketplaceClaim": 45,
+      "pendingFinish": 36,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 310,
+      "withNonHolo": 311,
       "withHolo": 238,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 63,
-      "withAnyUnresolvedDetail": 141,
+      "withUnresolvedProductMapping": 62,
+      "withAnyUnresolvedDetail": 140,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -39474,7 +39474,7 @@
       "finishUnitId": "F0460",
       "cardName": "Snorlax",
       "setCode": "SV-P/TH",
-      "releaseSetCode": null,
+      "releaseSetCode": "SV-P",
       "setName": "Scarlet & Violet Thai Promos",
       "number": "082",
       "language": "Thai",
@@ -39493,23 +39493,58 @@
           "image": "images/SV-P_TH_082_Snorlax_824688.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "stamp",
+              "text": "CENTRAL PATTANA",
+              "role": "distribution-promo"
+            }
+          ],
+          "distribution": {
+            "kind": "purchase-promo",
+            "name": "Central Pattana Great Celebration"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo/",
+              "sourceType": "Specialist per-language promo record",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "Thai"
+              ],
+              "retrievedAt": "2026-08-28",
+              "evidence": "The exact Thai 082/SV-P record positively identifies the Central Pattana Great Celebration distribution, event stamp and Non-holo treatment. Reviewed 2026-09-15: retained exact page and image establish the printed CENTRAL PATTANA logo; the event name is distribution context, not printed stamp wording. The override lookup uses legacy unit number 082; the local release remains 082/SV-P."
+            }
+          ],
+          "printingId": "F0460-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0461",
@@ -40414,11 +40449,11 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -40432,14 +40467,24 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Thai card face, printed sv4a T 145/190, HP150, regulation G and HYOGONOSUKE, matching the retained sv4a Thai release and SPEC-0269. Visible reflective foil in the rules and lower background outside the illustration. Conflicting Japanese/Normal listing metadata is not evidence. Server-provided JPEG of the previously inspected WebP gallery image. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually. Retained as SPEC-0527.",
+              "retrievedAt": "2026-09-15"
             }
           ],
+          "specimenIds": [
+            "SPEC-0527"
+          ],
+          "image": "verification/specimens/SPEC-0527.jpg",
           "printingId": "F0475-P01"
         }
       ],

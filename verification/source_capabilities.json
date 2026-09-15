@@ -4766,6 +4766,91 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Thai S5a and S10a product publication dates",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+          "https://asia.pokemon-card.com/th/archives/1596/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-15",
+      "freshnessPolicy": "Retain exact product date statement, Thai route, retrieval time and SHA-256; other products remain outside scope.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the retained S5a and S10a date statements.",
+        "expectedIdentifiers": [
+          "Thai product identity",
+          "publication date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-th-reviewed-product-dates-positive",
+          "coverage": {
+            "localities": [
+              "TH"
+            ],
+            "languages": [
+              "Thai"
+            ],
+            "scripts": [
+              "Thai"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only retained S5a and S10a product date statements."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "release-event",
+            "date",
+            "set-existence",
+            "local-set-identifier"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A returned localized card page establishes that card; filters, missing pages and other locale routes are not a manifest."
+          },
+          "knownPositiveObservationId": "obs-asia-th-reviewed-product-dates",
+          "boundary": {
+            "outsideScope": [
+              "other products",
+              "other localities",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A Thai product date does not establish a date or finish for another local edition."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -6625,6 +6710,89 @@
         "inspected-specimen-positive"
       ],
       "outcome": "SPEC-0524 (first-edition stamp) and SPEC-0525 (Unlimited) establish the edition capability of the inspected-specimen-positive edge."
+    },
+    {
+      "observationId": "obs-asia-th-reviewed-product-dates",
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+      "queryParameters": {
+        "scope": "two reviewed Thai product dates"
+      },
+      "retrievedAt": "2026-09-14",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "dates": [
+            {
+              "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-asia",
+              "providerRecordKey": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+              "retrieved": "2026-09-14",
+              "sourceUrl": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+              "raw": {
+                "localCode": "s5a T",
+                "page": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+                "date": "2021-04-30",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "TH",
+                "languageScope": "Thai",
+                "marketScopes": [
+                  "TH"
+                ],
+                "marketScopeBasis": "Official Thai product listing/announcement",
+                "sourceNativeDate": "04-30-2021",
+                "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s5a-date.html",
+                "sha256": "a798afcd4010d4b473976390f5e02af48670eebb3c8cafd98ff6d448d03b1ad5",
+                "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
+                "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-asia",
+              "providerRecordKey": "https://asia.pokemon-card.com/th/archives/1596/",
+              "retrieved": "2026-09-14",
+              "sourceUrl": "https://asia.pokemon-card.com/th/archives/1596/",
+              "raw": {
+                "localCode": "s10a T",
+                "page": "https://asia.pokemon-card.com/th/archives/1596/",
+                "date": "2022-07-29",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "TH",
+                "languageScope": "Thai",
+                "marketScopes": [
+                  "TH"
+                ],
+                "marketScopeBasis": "Official Thai product listing/announcement",
+                "sourceNativeDate": "29 July 2565 BE",
+                "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s10a-date.text.txt",
+                "sha256": "6bb99bd6d01cda879517e44bcb0068d4802f93acf9c050d5830e47fb203713f3",
+                "retrievedAt": "2026-09-14T22:16:01.141428+00:00",
+                "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred.",
+                "originalResponseSha256": "f5da6ed425cdf7e0cd3cc96ffa7e588d2fbf2ee280b4ed6534022b6454f2e7d3",
+                "captureMethod": "Derived visible text; script/style content omitted; original HTTP response hash retained separately."
+              }
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "s5a T",
+        "2021-04-30",
+        "s10a T",
+        "2022-07-29"
+      ],
+      "validatesEdges": [
+        "asia-th-reviewed-product-dates-positive"
+      ],
+      "outcome": "The retained official Thai pages explicitly give the named product dates; physical finish is outside scope."
     }
   ]
 }

@@ -14,6 +14,7 @@ verification/fixtures/** -text
 # CRLF while neighbouring pages use LF, so Git must not normalize the retained response bytes.
 verification/runs/card-discovery/**/raw/** -text -whitespace
 verification/research/**/raw/** -text -whitespace
+verification/evidence/**/raw/** -text -whitespace
 
 # Preserve the publisher's exact legalcode bytes, including its intentional final blank line.
 LICENSES/CC-BY-NC-SA-4.0.md whitespace=-blank-at-eof

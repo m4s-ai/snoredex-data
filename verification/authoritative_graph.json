@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-10",
+    "generated": "2026-09-15",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -10362,12 +10362,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0475-P01",
         "semanticPrintingId": "PRINTING:37de4f3f7cbe1fb379de165c",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+        "materializedTargetId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0527"
+        ]
       }
     },
     {
@@ -11154,6 +11156,23 @@
         "specimenIds": [
           "SPEC-0524"
         ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0460-P01",
+        "semanticPrintingId": "PRINTING:4badad5fb1c2c404534ca698",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+        "materializedTargetId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -34923,6 +34942,40 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0526",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0526",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0526",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0526",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0526",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0526"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0527",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0527",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0527",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -43904,7 +43957,8 @@
         ],
         "sourceRecords": [
           "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-          "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at"
+          "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
+          "https://asia.pokemon-card.com/th/archives/1596/"
         ],
         "sourceFirstRecordIds": [
           "TH:s10a T:077/071:base"
@@ -44063,7 +44117,8 @@
         ],
         "sourceRecords": [
           "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
-          "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages"
+          "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "https://asia.pokemon-card.com/th/card-search/?pageNo=4"
         ],
         "sourceFirstRecordIds": [
           "TH:s5a T:093/070:base"
@@ -94863,6 +94918,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+        "semanticPrintingId": "PRINTING:37de4f3f7cbe1fb379de165c",
+        "cardReleaseId": "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "reverse-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0475",
+        "sourcePrintingId": "F0475-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:37de4f3f7cbe1fb379de165c",
+        "specimenIds": [
+          "SPEC-0527"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -95606,6 +95685,36 @@
         "specimenIds": [
           "SPEC-0524"
         ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+        "semanticPrintingId": "PRINTING:4badad5fb1c2c404534ca698",
+        "cardReleaseId": "RELEASE:TH:Thai:SV-P:082/SV-P:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "stamp",
+            "text": "CENTRAL PATTANA",
+            "role": "distribution-promo"
+          }
+        ],
+        "distribution": {
+          "kind": "purchase-promo",
+          "name": "Central Pattana Great Celebration"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0460",
+        "sourcePrintingId": "F0460-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698"
       }
     },
     {
@@ -101245,6 +101354,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0496",
         "specimenIds": [
           "SPEC-0496"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0526",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0526",
+        "cardReleaseId": "RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Thai card face, sc3b T 126/158 R, HP130 and Anesaki Nishida. Visible rainbow foil in the illustration and border. Watermarked seller scan; the seller watermark is not a card marking. Product page unavailable; original CDN image obtained from its indexed listing.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0526",
+        "specimenIds": [
+          "SPEC-0526"
         ]
       }
     },
@@ -112392,6 +112525,54 @@
     },
     {
       "entityType": "release-event",
+      "entityId": "EVENT:TH:s10a T:launch",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "releaseEventId": "EVENT:TH:s10a T:launch",
+        "localSetId": "LOCALSET:TH:s10a%20T",
+        "setEditionIds": [
+          "EDITION:TH:Thai:s10a T"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2022-07-29",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "TH"
+        ],
+        "marketScopeBasis": "Official Thai product statement",
+        "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+        "linkBasis": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+      }
+    },
+    {
+      "entityType": "release-event",
+      "entityId": "EVENT:TH:s5a T:launch",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "releaseEventId": "EVENT:TH:s5a T:launch",
+        "localSetId": "LOCALSET:TH:s5a%20T",
+        "setEditionIds": [
+          "EDITION:TH:Thai:s5a T"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2021-04-30",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "TH"
+        ],
+        "marketScopeBasis": "Official Thai product statement",
+        "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+        "linkBasis": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+      }
+    },
+    {
+      "entityType": "release-event",
       "entityId": "EVENT:a6eae0a49ffd0643",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -120774,7 +120955,8 @@
           "localCode": "s10a T",
           "state": "identified",
           "establishingEvidenceIds": [
-            "SET-SRC-SF-9CBF36A23C34"
+            "SET-SRC-SF-9CBF36A23C34",
+            "SET-SRC-TH-DATE-S10A-20260915"
           ],
           "localizationId": "LOCALIZATION:TH:th"
         }
@@ -120844,7 +121026,8 @@
           "localCode": "s5a T",
           "state": "identified",
           "establishingEvidenceIds": [
-            "SET-SRC-SF-6627BD0B87EB"
+            "SET-SRC-SF-6627BD0B87EB",
+            "SET-SRC-TH-DATE-S5A-20260915"
           ],
           "localizationId": "LOCALIZATION:TH:th"
         }
@@ -138922,6 +139105,28 @@
       }
     },
     {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-TH-DATE-S10A-20260915",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+        "disposition": "mapped",
+        "targetRef": "EVENT:TH:s10a T:launch",
+        "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-TH-DATE-S5A-20260915",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+        "disposition": "mapped",
+        "targetRef": "EVENT:TH:s5a T:launch",
+        "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+      }
+    },
+    {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-30C-DATE-DE-DE",
       "origin": "reviewed-30th-celebration-20260910",
@@ -155114,6 +155319,94 @@
       }
     },
     {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-TH-DATE-S10A-20260915",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+        "sourceKind": "release-date-record",
+        "provider": "pokemon-card-asia",
+        "providerRecordKey": "https://asia.pokemon-card.com/th/archives/1596/",
+        "retrieved": "2026-09-14",
+        "sourceUrl": "https://asia.pokemon-card.com/th/archives/1596/",
+        "raw": {
+          "localCode": "s10a T",
+          "page": "https://asia.pokemon-card.com/th/archives/1596/",
+          "date": "2022-07-29",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "locality": "TH",
+          "languageScope": "Thai",
+          "marketScopes": [
+            "TH"
+          ],
+          "marketScopeBasis": "Official Thai product listing/announcement",
+          "sourceNativeDate": "29 July 2565 BE",
+          "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s10a-date.text.txt",
+          "sha256": "6bb99bd6d01cda879517e44bcb0068d4802f93acf9c050d5830e47fb203713f3",
+          "retrievedAt": "2026-09-14T22:16:01.141428+00:00",
+          "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred.",
+          "originalResponseSha256": "f5da6ed425cdf7e0cd3cc96ffa7e588d2fbf2ee280b4ed6534022b6454f2e7d3",
+          "captureMethod": "Derived visible text; script/style content omitted; original HTTP response hash retained separately."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-TH-DATE-S5A-20260915",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+        "sourceKind": "release-date-record",
+        "provider": "pokemon-card-asia",
+        "providerRecordKey": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+        "retrieved": "2026-09-14",
+        "sourceUrl": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+        "raw": {
+          "localCode": "s5a T",
+          "page": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+          "date": "2021-04-30",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "locality": "TH",
+          "languageScope": "Thai",
+          "marketScopes": [
+            "TH"
+          ],
+          "marketScopeBasis": "Official Thai product listing/announcement",
+          "sourceNativeDate": "04-30-2021",
+          "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s5a-date.html",
+          "sha256": "a798afcd4010d4b473976390f5e02af48670eebb3c8cafd98ff6d448d03b1ad5",
+          "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
+          "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+        }
+      }
+    },
+    {
+      "entityType": "source-assertion",
+      "entityId": "ASSERT:SET-SRC-TH-DATE-S10A-20260915:release",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceAssertionId": "ASSERT:SET-SRC-TH-DATE-S10A-20260915:release",
+        "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+        "assertionKind": "asserts-release-event",
+        "releaseEventId": "EVENT:TH:s10a T:launch"
+      }
+    },
+    {
+      "entityType": "source-assertion",
+      "entityId": "ASSERT:SET-SRC-TH-DATE-S5A-20260915:release",
+      "origin": "reviewed-evidence-issue-262-20260915",
+      "payload": {
+        "sourceAssertionId": "ASSERT:SET-SRC-TH-DATE-S5A-20260915:release",
+        "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+        "assertionKind": "asserts-release-event",
+        "releaseEventId": "EVENT:TH:s5a T:launch"
+      }
+    },
+    {
       "entityType": "source-assertion",
       "entityId": "SOURCEASSERTION:0096239295dce590",
       "origin": "authoritative-set-catalogue-migration",
@@ -169389,10 +169682,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:37de4f3f7cbe1fb379de165c",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -169794,6 +170089,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:4b5c354d7071f5992a41bc8c",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -182456,6 +182761,26 @@
       "toId": "PHYSICAL:PRINTING:1d7c2b6073e1bd447727e41d",
       "provenance": {
         "specimenId": "SPEC-0525"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0526",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0526",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0527",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "provenance": {
+        "specimenId": "SPEC-0527"
       }
     },
     {
@@ -228309,6 +228634,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:37de4f3f7cbe1fb379de165c",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:381b77be9971497ec417f3dd",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -228785,6 +229126,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Spanish:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:SV-P:082/SV-P:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {}
     },
     {
@@ -232449,6 +232806,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0526",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0526",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0526",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -243905,6 +244278,38 @@
       "relation": "supports",
       "toType": "set-edition",
       "toId": "EDITION:CN:S-Chinese:CSM2.1C",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:TH:s10a T:launch",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:s10a%20T",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:TH:s10a T:launch",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:s10a T",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:TH:s5a T:launch",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:s5a%20T",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:TH:s5a T:launch",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:s5a T",
       "provenance": {}
     },
     {
@@ -258777,6 +259182,22 @@
       "provenance": {}
     },
     {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-TH-DATE-S10A-20260915",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-DATE-S10A-20260915",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-TH-DATE-S5A-20260915",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-DATE-S5A-20260915",
+      "provenance": {}
+    },
+    {
       "fromType": "set-source-record",
       "fromId": "SET-SRC-30C-DATE-DE-DE",
       "relation": "asserts-release-event",
@@ -258862,6 +259283,38 @@
       "relation": "asserts-release-event",
       "toType": "release-event",
       "toId": "EVENT:30th-2026-tw",
+      "provenance": {}
+    },
+    {
+      "fromType": "source-assertion",
+      "fromId": "ASSERT:SET-SRC-TH-DATE-S10A-20260915:release",
+      "relation": "asserted-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-DATE-S10A-20260915",
+      "provenance": {}
+    },
+    {
+      "fromType": "source-assertion",
+      "fromId": "ASSERT:SET-SRC-TH-DATE-S10A-20260915:release",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:TH:s10a T:launch",
+      "provenance": {}
+    },
+    {
+      "fromType": "source-assertion",
+      "fromId": "ASSERT:SET-SRC-TH-DATE-S5A-20260915:release",
+      "relation": "asserted-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-DATE-S5A-20260915",
+      "provenance": {}
+    },
+    {
+      "fromType": "source-assertion",
+      "fromId": "ASSERT:SET-SRC-TH-DATE-S5A-20260915:release",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:TH:s5a T:launch",
       "provenance": {}
     },
     {
@@ -275979,6 +276432,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0460-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+      "reason": "finish printing record carries positive evidence"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0461-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0461-P01",
@@ -276078,9 +276538,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0475-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -290054,6 +290514,20 @@
       "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
     },
     {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-TH-DATE-S10A-20260915",
+      "disposition": "mapped",
+      "targetRef": "EVENT:TH:s10a T:launch",
+      "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-TH-DATE-S5A-20260915",
+      "disposition": "mapped",
+      "targetRef": "EVENT:TH:s5a T:launch",
+      "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+    },
+    {
       "sourceKind": "source-first-record",
       "sourceId": "CN:CS2DaC:038/053:base",
       "disposition": "established-and-mapped",
@@ -292656,29 +293130,43 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:1d7c2b6073e1bd447727e41d, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0526",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0526",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0527",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 8079,
-    "edges": 12034,
-    "migrationInputs": 2822,
+    "entities": 8093,
+    "edges": 12053,
+    "migrationInputs": 2827,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 288,
       "carried": 68,
-      "established-and-mapped": 1567,
+      "established-and-mapped": 1570,
       "linked-local-counterpart": 125,
-      "mapped": 330,
+      "mapped": 332,
       "needs-evidence": 126,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2021,
+    "candidateClaims": 2024,
     "cardReleases": 641,
-    "physicalPrintings": 754,
-    "setSourceRecords": 459,
-    "setSourceDispositions": 459,
+    "physicalPrintings": 757,
+    "setSourceRecords": 461,
+    "setSourceDispositions": 461,
     "localizations": 16
   }
 }

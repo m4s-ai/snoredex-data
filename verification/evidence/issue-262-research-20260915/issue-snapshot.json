@@ -1,0 +1,159 @@
+{
+  "body": "# Thai: current research progress\n\nParent: #256\n\nSnapshot: 2026-09-10. Merged [main `b986b46`](https://github.com/m4s-ai/snoredex-data/commit/b986b4690f9e85331fd5e5166d0d992d7c4070f5); pending [PR #375 `ec291f4`](https://github.com/m4s-ai/snoredex-data/pull/375).\n\nCounts below cover **current canonical releases**, not the original PR #255 denominator. A release is counted once even with several gaps. These are tracked-field gaps, not a claim of exhaustive catalogue or finish completeness. Accepted `mapped-by-explicit-equivalence` records are valid mappings, not missing evidence. Unknown numbers on unnumbered cards and duplicate legacy identities require model/reconciliation review; they are not automatically requests for photographs.\n\n- Merged: **8/28 releases have no tracked gap**; **20 remain**.\n- Including pending PR #375: **10/28 gap-free**; **18 remain**.\n- Merged catalogue fingerprint: `sha256:57fb4e20abb370086fe46e78f1091aed518b8a5a7018e90db581644114271de3`.\n\n## Current gap counts\n\n| Tracked gap | Merged main | Including PR #375 |\n|---|---:|---:|\n| `collector-number` | 2 | 0 |\n| `image` | 2 | 0 |\n| `local-set-identity` | 2 | 0 |\n| `physical-printing:candidate-needs-evidence` | 4 | 4 |\n| `physical-printing:no-candidate` | 16 | 14 |\n| `rarity` | 3 | 1 |\n| `release-date` | 2 | 0 |\n\n## What is done / what to do next\n\n- PR #375 retains and reconciles Thai s10a T 077/071 CHR and s5a T 093/070 UR (SPEC-0520, SPEC-0523), including Holo evidence and exact-card language claims. Both previously requested photographs are supplied; no repeat image is needed. Release-date evidence is retained separately and is not inferred from the photographs.\n- Next finish research: Thai s8b 126/184, s10a 058/071, s10b 056/071 and sv4a 145/190. Use the actual remaining list; identity alone does not settle foil.\n- MA6 T 121/130 is announced; no physical finish is inferred from a render.\n\n## Current remaining releases\n\nThis list reflects the pending PR snapshot. A resolved-in-PR item is listed separately above and is not counted as merged.\n\n- **Snorlax — sc1a T 127**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc1a T:127/154:Snorlax-Collect-Collapse`\n- **Snorlax V — sc1b T 119**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down`\n- **Snorlax VMAX — sc1b T 120**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall`\n- **Snorlax — sc1D T 132**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact`\n- **Snorlax V — sc1D T 133**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc1D T:133/164:Snorlax-V-Swallow-Falling-Down`\n- **Snorlax — sc3b T 126**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam`\n- **Snorlax — scA T 084**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam`\n- **Snorlax — SH 026**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact`\n- **Snorlax — s8b 126**: `physical-printing:candidate-needs-evidence`.\n  Release: `RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam`\n- **Snorlax — scD T 111**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle`\n- **Snorlax — s10b 056**: `physical-printing:candidate-needs-evidence`.\n  Release: `RELEASE:TH:Thai:s10b:056/071:Snorlax-Block-Collapse`\n- **Snorlax — s10a 058**: `physical-printing:candidate-needs-evidence`.\n  Release: `RELEASE:TH:Thai:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore`\n- **Snorlax — SV-P 082/SV-P**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:SV-P:082/SV-P:Snorlax-Voraciousness-Thudding-Press`\n- **Snorlax — sv4a 145**: `physical-printing:candidate-needs-evidence`.\n  Release: `RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press`\n- **Snorlax — sv4a 310**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press`\n- **Snorlax ex — svM 094**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press`\n- **Snorlax — MA4 091**: `physical-printing:no-candidate`.\n  Release: `RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over`\n- **Snorlax — MA6 T 121**: `physical-printing:no-candidate`, `rarity`.\n  Release: `RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse`\n\n## Verification and scope\n\nCounts were recomputed from both exact catalogue snapshots, grouped by cardReleaseId. Required fields: a verified physical printing, accepted Work mapping, local set code, collector number, date, rarity display, pinned image and public source URL. Properly attributed owner/specimen evidence remains valid without a public URL; that field is a visibility gap. A missing rarity normalization alone is not a gap.\n\nPR #375 passed local regeneration, the full repository gate, specimen integrity and repeat-import checks. Its CI/review status is tracked on the PR. This issue remains open; no absence decision is inferred from missing evidence.\n",
+  "comments": [
+    {
+      "id": "IC_kwDOTgqot88AAAABRKccWQ",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "## Research update — 22/24 identity tracks resolved; 7/24 releases fully complete\n\nImplemented in exact commit `a424999b4296296624f7cfd8406205399750b30a`.\n\nPositive evidence admitted:\n- 25 exact official Pokémon Asia Thai card renders retained as `SPEC-0253` through `SPEC-0277`, each SHA-256 pinned and used for local identity, Work mapping, release date, rarity and image scope only.\n- Existing owner photo `SPEC-0026` linked to the exact Thai 083/SM-P record; Pokumon positively establishes the 2020 FunFromHome distribution, Ripple treatment and event stamp.\n- Thai 082/SV-P linked to the official card detail and Pokumon's exact Central Pattana record, which positively establishes the 2023-11-07 distribution, event stamp and non-holo finish.\n- 14 legacy units re-keyed to exact Thai local releases, covering 13 legacy checklist releases. Existing finish evidence was preserved across the local-identity migration.\n- 10 pre-existing source-first issue releases received explicit Work/date/rarity/image evidence. Additional exact Thai publisher cards found during the same research were retained as specs as requested.\n\nChecklist accounting: **7/24** releases have every originally listed gap resolved. Fifteen additional releases gained positive local identity, Work, date, rarity and image evidence but remain unchecked because their physical-printing gap still needs positive manufacturing/finish evidence.\n\nStill open at the identity layer, without absence inference:\n- `U0171` — Thai `s10a 077` needs a positive exact local identity.\n- `U0604` — Thai `s5a 93` needs a positive exact local identity.\n\nNo provider silence or failed request was used as evidence. Publisher renders were not treated as physical finish photographs.\n\nValidation on the exact commit:\n- `python verification/passes/admit_issue262_thai_20260828.py --check`\n- `python scripts/regen.py --check`\n- physical evidence integrity: 105 observed specimens, offline OK\n- `verification/review_findings.py`: 111/111 green",
+      "createdAt": "2026-08-28T00:17:53Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5446769753",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABRMvGsg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "Consolidated delivery is now in PR #326: https://github.com/m4s-ai/snoredex-data/pull/326\n\nIssue-specific commit: 816c4d44d460672cb8e2367e677fc30cdb742acf\n\nThis retains SPEC-0253 through SPEC-0277 and resolves the local identity layer for 22 of 24 issue tracks. Under the stricter original-gap checklist, 7/24 releases are fully complete; the identity-only publisher renders do not close physical-printing gaps. U0171 (s10a 077) and U0604 (s5a 093) remain open at the identity layer. The earlier comment's local commit SHA was rewritten only to add the repository-required co-author trailer; the evidence tree is unchanged.",
+      "createdAt": "2026-08-28T06:20:49Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5449172658",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABRQnWog",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- guided-pr-issue-update:328:cdc5374cf17f47baf69c905f180238db5ccbff74 -->\nFindings from open [PR #328](https://github.com/m4s-ai/snoredex-data/pull/328) at exact head `cdc5374cf17f47baf69c905f180238db5ccbff74` for Thai:\n\n- 17 unchecked rows reclassified: 15 fully direct and 2 same-work.\n- No row still needs a target-language picture.\n- Remaining work is canonical mapping cleanup for legacy `s10a 077` and `s5a 93`, already supported by retained Thai SPEC evidence under their actual localized releases.\n\nThis is the picture/SPEC classification in the open PR, not a claim that the whole issue is complete or merged. Validation at this head: `python scripts/regen.py --check`; `python verification/review_findings.py` — 111/111. [Full audit](https://github.com/m4s-ai/snoredex-data/blob/cdc5374cf17f47baf69c905f180238db5ccbff74/verification/history/REVIEW-2026-08-28-OPEN-ISSUE-SPEC-AUDIT.md)",
+      "createdAt": "2026-08-28T13:41:28Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5453239970",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABRcHjVA",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- guided-pr-issue-update:330:6f7e24f4d5dfa4b03407836c44857e77b9e6f71f -->\nThai research update from open [PR #330](https://github.com/m4s-ai/snoredex-data/pull/330) at exact head `6f7e24f4d5dfa4b03407836c44857e77b9e6f71f`:\n\n- Admits `TH:AS5a:142/184:base` as a distinct Thai release, not the existing Traditional-Chinese AS5a 142 release.\n- Positive facts: `คาบิกอน`, AS5a 142/184, rarity R, 150 HP, Illus. kanahei, release date 2020-02-27.\n- `SPEC-0427` positively establishes a non-holo copy and `SPEC-0428` a holo copy; both now materialize separate physical printings.\n- Official Thai product/PDF, Bulbapedia's exact set/card records, Ojama's R/R-Foil SKUs, and exact seller-photo listings are retained with positive-only scope. No foil pattern or exhaustive finish list is inferred.\n\nThis AS5a release was not one of the issue's original 24 legacy snapshot rows, so the documented 7/24 completion count is not inflated. The broader Thai backlog remains open until merge and until its remaining legacy mapping/physical-printing work is complete.\n\nValidation: focused pass check; discovery check; full `python scripts/regen.py --check`; post-push findings 111/111.",
+      "createdAt": "2026-08-29T22:41:24Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5465301844",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABRvn0_A",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- babysit-pr-issue-update:m4s-ai/snoredex-data#262:pr-336:cd233f9e47dad07e7baa4a9a5821c2c2fec85d6b -->\n<!-- guided-pr-issue-update:336:cd233f9e47dad07e7baa4a9a5821c2c2fec85d6b -->\nOpen [PR #336](https://github.com/m4s-ai/snoredex-data/pull/336) at exact head `cd233f9e47dad07e7baa4a9a5821c2c2fec85d6b` corrects the Thai `sc1b T 120/153` rarity projection: source-native `RRR` remains positive evidence, while the unsupported `triple-rare` normalized ID becomes null until a reviewed catalogue mapping exists.\n\nThis changes no release checklist count, physical-printing status, or remaining evidence work for #262. Validation: full commit-bound `python scripts/regen.py --check`; `verification/review_findings.py` — 111/111.",
+      "createdAt": "2026-08-31T22:42:17Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5485753596",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABRvxvcg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- babysit-pr-issue-update:m4s-ai/snoredex-data#262:pr-336:47c83c02267c0f569073359a2036852869ed7b1d -->\nOpen [PR #336](https://github.com/m4s-ai/snoredex-data/pull/336) at exact head `47c83c02267c0f569073359a2036852869ed7b1d` now enforces the reviewed Thai rarity contract by locality, source vocabulary, and exact source-native value. Supported Thai mappings are explicit; source-native `RRR` remains preserved but unnormalized because no reviewed mapping exists.\n\nThis changes no release checklist count, physical-printing status, or remaining evidence work for #262. Verification: full commit-bound `python scripts/regen.py --check`; post-push `verification/review_findings.py` - 111/111.",
+      "createdAt": "2026-08-31T23:00:15Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5485916018",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABTUKzwg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- babysit-pr-issue-update:m4s-ai/snoredex-data#262:pr-372:d165f8bf8af60517489968d780ffba3101cd2950 -->\nMerged [PR #372](https://github.com/m4s-ai/snoredex-data/pull/372), exact head `d165f8bf8af60517489968d780ffba3101cd2950`. It incorporates #371.\n\nReinspected owner SPEC-0091 positively establishes Thai SV9s T 109/139 holo; the existing canonical release now receives its physical printing. Releases without graph-backed physical printings: 20 -> 19 of 27. Existing image bytes remain unchanged; no distribution or exhaustive finish list is inferred.\n\nCounts concern physical-printing gaps only; remaining field and evidence gaps keep this issue open. Full regeneration, commit-bound `python scripts/regen.py --check` and 155/155 browser checks passed. Ubuntu, Windows and Chromium CI now pass. The unchanged-head Chromium rerun passed after the initial two storage-reload test failures; a local reproduction also passed 155/155. The intermittent failure cause is not established. Clean review for d165f8bf8af60517489968d780ffba3101cd2950 completed 2026-09-08 20:43:42 UTC: https://github.com/m4s-ai/snoredex-data/pull/372#issuecomment-5591607104 . No review threads or new actionable comments; GitHub reports CLEAN. Merged on 2026-09-09 at 06:46:42 UTC as e97841c2e23192a62506bdeeb0f50bf4e387e3de. Monitoring is stopped. The six evidence results are now in main; this issue remains open because the documented research gaps remain.\n\n[Combined research report](https://github.com/m4s-ai/snoredex-data/blob/d165f8bf8af60517489968d780ffba3101cd2950/verification/evidence/ISSUE-256-RESEARCH-20260908.md).",
+      "createdAt": "2026-09-08T20:09:16Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5591184322",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABTtkJtg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- babysit-pr-issue-update:m4s-ai/snoredex-data#262:pr-374:9d76a0fdbbad6d9cca8aebc6b32b855102ad13a4 -->\r\nOpen [PR #374](https://github.com/m4s-ai/snoredex-data/pull/374), exact head `9d76a0fdbbad6d9cca8aebc6b32b855102ad13a4`.\r\n\r\nAdds Thai MA6 T 121/130, established by its official local gallery and retained SPEC-0516, with the local announced 2026-09-16 date, reviewed Good Sleep / Collapse Work mapping and collector image/source links.\r\n\r\nThese are newly announced releases, not completion of the original issue checklist. Their physical finish inventory remains unresolved; no printing or absence is inferred from a render. Existing collection identities and historical evidence remain intact.\r\n\r\nValidation: full local gate stages through 111/111 cross-artifact checks; final readiness regression passed on targeted retry after a Windows restore error; both full retained-discovery checks and 155/155 Chromium checks passed. Eleven original-image hashes and eight raw-page hashes verified. Final-head Ubuntu, Windows and Chromium CI passed. Clean review for 9d76a0fdbbad6d9cca8aebc6b32b855102ad13a4 completed at 2026-09-10 11:26:09 UTC: https://github.com/m4s-ai/snoredex-data/pull/374#issuecomment-5617915256 . No review threads or new actionable comments; GitHub reports CLEAN and the worktree is clean. CAN BE MERGED; awaiting the owner’s merge decision. No merge performed. Review monitoring is complete.\r\n\r\nRemaining: exact physical finish evidence and the issue’s existing field/research gaps. The issue remains open; nothing is merged yet.\r\n",
+      "createdAt": "2026-09-10T11:17:11Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5617813942",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABTvBNyg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "<!-- babysit-pr-issue-update:m4s-ai/snoredex-data#262:pr-375:cbe130f3d433255124848fbc0a471acb1ec1ce17 -->\nOpen [PR #375](https://github.com/m4s-ai/snoredex-data/pull/375), exact head `cbe130f3d433255124848fbc0a471acb1ec1ce17`.\n\nNew SPEC-0523 retains the supplied Thai s5a T 093/070 UR photograph with visible glittering Holo and exact local identity. Existing s10a T evidence is preserved. Both requested Thai photographs are supplied. Pending: 10/28 gap-free releases; other cards remain open.\n\n[Retained-image reinspection report](https://github.com/m4s-ai/snoredex-data/blob/cbe130f3d433255124848fbc0a471acb1ec1ce17/verification/evidence/OWNER-FOLLOWUP-20260910.md).\n\nVerification: full regeneration and regen.py --check passed; post-push history/cross-artifact audit 111/111. Source, physical finish and collection-migration regressions passed. The PR remains unmerged and awaits fresh exact-head CI/review. This broader issue stays open.\n\nEvidence URL review remediation: SPEC-0523 equivalence evidence now uses its stable issue listing URL instead of descriptive photograph provenance. The admission pass selects an HTTP(S) photo URL, then an HTTP(S) listing URL, and rejects missing URLs. The corpus check covers every legacy issue mapping; only U0604 needed repair. Full regen.py --check passed; image URL selection, listing fallback, missing-URL rejection and all-mapping URL checks passed; post-push audit passed 111/111. The PR remains open; the broader issue remains open.\n\nLanguage URL review remediation: The previous URL repair covered equivalence evidence but missed the language-claim path. Both passes now reuse the validated photo/listing URL selector. U0604 has its stable listing URL; the correction is appended to the evidence journal and a second repair run is a no-op. All six scoped language claims and every equivalence mapping have navigable evidence URLs. Full regen.py --check passed; all six language URL assertions, listing fallback, all-mapping URL checks and repair idempotency passed; post-push audit passed 111/111. The PR remains open; the broader issue remains open.\n\nPhysical URL review remediation: The earlier URL fixes missed the finish generator. Physical sources now use the registry HTTP(S) validator, preferring the photo URL then listing URL, and omit url when neither is valid. The language/equivalence selector uses the same validator. SPEC-0524/0525 retain their documented issue provenance; all generated finish URLs pass the full-corpus URL check. Original images and physical identities are unchanged. Full regen.py --check passed; photo/listing/no-link regressions, all finish URLs, registry attribution and image integrity checks passed; post-push audit passed 111/111. The PR remains open; the broader issue remains open.",
+      "createdAt": "2026-09-10T13:19:43Z",
+      "includesCreatedEdit": true,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5619338698",
+      "viewerDidAuthor": true
+    },
+    {
+      "id": "IC_kwDOTgqot88AAAABTwK3vg",
+      "author": {
+        "login": "Scarrty"
+      },
+      "authorAssociation": "MEMBER",
+      "body": "Owner-supplied evidence intake for PR #375: the new original Thai photograph SPEC-0523 visibly identifies s5a T 093/070 UR and glittering Holo foil. The photo holder and original listing were not supplied. The retained original will be committed in this PR; no release date is inferred. Import and downstream checks are in progress.",
+      "createdAt": "2026-09-10T14:44:53Z",
+      "includesCreatedEdit": false,
+      "isMinimized": false,
+      "minimizedReason": "",
+      "reactionGroups": [],
+      "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
+      "viewerDidAuthor": true
+    }
+  ],
+  "state": "OPEN",
+  "title": "[Research 8/28 current releases gap-free] Close collector evidence gaps — Thai",
+  "updatedAt": "2026-09-10T17:20:49Z",
+  "url": "https://github.com/m4s-ai/snoredex-data/issues/262"
+}
