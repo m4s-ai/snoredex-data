@@ -1,6 +1,8 @@
 <!-- doc: role=further Thai missing-card research and source discrepancies; stage=reference -->
 # Further Thai card research — 2026-09-15
 
+Subsequent [marketplace and sold-listing research](../issue-262-marketplaces-20260915/README.md) recovered an additional AS1b 112/150 seller image and records qualified eBay/Mavin, ThaiPick and Carousell leads. No additional identity or physical-finish claim was admitted.
+
 Research supplement for #262 and draft PR #383. This pass followed both pages of the official Thai name search (`keyword=คาบิกอน`, `cardType=all`, `regulation=all`), retrieved all 26 linked detail pages, inspected six relevant official card images, and followed external leads for older GX releases. These are manual research captures, not a fabricated discovery run or new canonical claims. Source silence remains unknown.
 
 ## Newly located missing card
