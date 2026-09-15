@@ -63,3 +63,7 @@ The [subsequent PDF audit](../issue-262-pdf-audit-20260915/README.md) follows 83
 ## Multilingual source survey
 
 The owner-requested [survey beyond Thai](../multilang-setlists-20260915/README.md) records 69 reachable Asian set-list PDF links, 20 retrieved western checklists in five languages, and language-specific online alternatives. All 69 Asian PDFs (45 unique contents) now have bounded visual triage, including the [completed remaining-queue review](../multilang-setlists-20260915/REMAINING-REVIEW.md). Selected western/translation examples were inspected. Three new admission candidates, a numerator-only identity reconciliation and an Indonesian filename/content mismatch are retained as research observations. No cross-language physical-print or finish inference is made.
+
+## Further Thai search
+
+The [next Thai pass](../issue-262-thai-further-20260915/README.md) adds the overlooked official-PDF candidate **AS5a 117/184 RR**, bringing the Thai PDF candidate queue to five. AS5D 118/169 and AS5a 222/184 remain text-only leads. Both official name-search pages and all 26 detail records were read; seven inspected image artifacts retain the new candidate, exact Shiny/MA6/MA3 depictions and the online s8b number discrepancy. Physical-finish gaps remain unchanged.

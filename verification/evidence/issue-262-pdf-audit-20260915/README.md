@@ -4,6 +4,8 @@
 
 Research for #262, retained in draft PR #383. This increment adds source observations and discovery coverage, not canonical card or finish claims.
 
+Follow-up correction: [the subsequent Thai review](../issue-262-thai-further-20260915/README.md) found **AS5a 117/184 RR on page 13**, overlooked in this initial triage. The four candidates reported below describe this earlier pass; the cumulative Thai PDF queue now has five image-backed candidates. No claim of exhaustive card transcription is intended.
+
 ## Scope and completion
 
 - Followed 83 distinct non-accessory product-page links from the [official product index](https://asia.pokemon-card.com/th/products/): 23 pages link PDFs, 34 link online card lists, and 26 expose neither type of link in the inspected HTML. No product-page retrieval failed.
