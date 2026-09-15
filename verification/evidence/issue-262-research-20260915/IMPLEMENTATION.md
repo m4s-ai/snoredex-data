@@ -1,3 +1,4 @@
+<!-- doc: role=Thai issue 262 draft implementation handoff; stage=reference -->
 # Umsetzung der Empfehlungen aus #262
 
 Stand: 15.09.2026. Branch: `codex/research-262-20260915`, Basis `2c1818c01f299d5f085721145a9d05e3f7dfebeb`. Sammelstand für einen ausdrücklich gewünschten Entwurfs-PR; weitere Recherche folgt. Noch nicht gemergt.

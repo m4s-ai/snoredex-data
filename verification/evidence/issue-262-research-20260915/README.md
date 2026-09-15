@@ -1,3 +1,4 @@
+<!-- doc: role=retained Thai research before implementation; stage=history -->
 # Recherche zu Issue #262 – Thai-Beleglücken
 
 Die folgende Recherche beschreibt den Stand vor der Umsetzung. Die anschließend beauftragten Änderungen und den neuen Stand 13/28 dokumentiert [IMPLEMENTATION.md](IMPLEMENTATION.md).

@@ -1,3 +1,4 @@
+<!-- doc: role=prepared issue 262 progress update; stage=reference -->
 # Thai: current research progress
 
 Parent: #256
