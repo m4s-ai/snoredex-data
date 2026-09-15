@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-10",
+  "generated": "2026-09-15",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1633,
-   "uniqueUrls": 1626,
+   "evidenceRecords": 1637,
+   "uniqueUrls": 1630,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6267
+   "claimsAttributed": 6281
   }
  },
  "providers": [
@@ -278,7 +278,7 @@
     "www.pokumon.com"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 32
+   "claimsSupported": 33
   },
   {
    "providerId": "pokecottage",
@@ -777,8 +777,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 179,
-   "claimsSupported": 674
+   "uniqueSources": 183,
+   "claimsSupported": 687
   }
  ],
  "evidence": [
@@ -23677,14 +23677,16 @@
     "Specialist per-language promo record"
    ],
    "dimensions": [
+    "finish",
     "finish-override"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0460-P01",
     "override:pokumon-th-svp082"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo",
@@ -24540,6 +24542,25 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 8
+  },
+  {
+   "canonicalUrl": "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0526",
+    "TH:sc3b T:126/158:base"
+   ],
+   "retrievedAt": "2026-09-15",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
@@ -25482,6 +25503,26 @@
     "U0582"
    ],
    "retrievedAt": "2026-09-03",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0475-P01",
+    "SPEC-0527",
+    "TH:sv4a:145/190:base"
+   ],
+   "retrievedAt": "2026-09-15",
    "usageCount": 5
   },
   {
@@ -26636,6 +26677,24 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://shopee.co.th/product/431199770/23151999066",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0526",
+    "TH:sc3b T:126/158:base"
+   ],
+   "retrievedAt": "2026-09-15",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27040,6 +27099,24 @@
     "SPEC-0052"
    ],
    "retrievedAt": "2026-08-26",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/297969171577",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0527",
+    "TH:sv4a:145/190:base"
+   ],
+   "retrievedAt": "2026-09-15",
    "usageCount": 2
   },
   {

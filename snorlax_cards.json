@@ -37,20 +37,20 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-10",
+      "lastUpdated": "2026-09-15",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 478,
-      "withOnlyMarketplaceClaim": 46,
-      "pendingFinish": 37,
+      "withConfirmedFinish": 480,
+      "withOnlyMarketplaceClaim": 45,
+      "pendingFinish": 36,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 310,
+      "withNonHolo": 311,
       "withHolo": 238,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 63,
-      "withAnyUnresolvedDetail": 141,
+      "withUnresolvedProductMapping": 62,
+      "withAnyUnresolvedDetail": 140,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -20110,16 +20110,16 @@
             "finishStatus": {
               "non-holo": "pending",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0475",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -20130,8 +20130,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0527.jpg",
+                "specimenIds": [
+                  "SPEC-0527"
+                ]
               }
             ]
           }
@@ -45664,31 +45668,59 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "pending",
-        "availableFinishes": [],
-        "unitAvailableFinishes": [],
+        "status": "confirmed",
+        "availableFinishes": [
+          "non-holo"
+        ],
+        "unitAvailableFinishes": [
+          "non-holo"
+        ],
         "byLanguage": [
           {
             "language": "Thai",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "non-holo"
+            ],
+            "unitAvailableFinishes": [
+              "non-holo"
+            ],
             "finishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "pending",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0460",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0460-P01",
+                "finish": "non-holo",
+                "foilPattern": null,
+                "markings": [
+                  {
+                    "kind": "stamp",
+                    "text": "CENTRAL PATTANA",
+                    "role": "distribution-promo"
+                  }
+                ],
+                "distribution": {
+                  "kind": "purchase-promo",
+                  "name": "Central Pattana Great Celebration"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           }
         ]
       },

@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-10",
-  "projectionVersion": "9826b9824d7601e93839c78d52f87b98957ce0b6f91e6d0d66e06953891ec059",
+  "generated": "2026-09-15",
+  "projectionVersion": "3e46534b09fc4bf9b947aea5cf0f1333851d9ed349a81bea6d9dbc78aa469cbf",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 754,
-    "sourceObservations": 2942
+    "physicalPrintings": 757,
+    "sourceObservations": 2947
   },
   "groups": [
     {
@@ -33826,8 +33826,8 @@
               "kind": "source-first",
               "provider": "inspected-specimen",
               "url": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
-              "evidence": "specimen:SPEC-0523 visibly establishes s5a T 093/070, Thai, and printed rarity UR. Release date remains unknown.",
-              "contentHash": "7bd783e48e35e16298a381a2dd60b7e3256eded03a92e001e2ee80e31a9406fa",
+              "evidence": "specimen:SPEC-0523 visibly establishes s5a T 093/070, Thai, and printed rarity UR. The separate official Thai release event EVENT:TH:s5a T:launch establishes 2021-04-30; the specimen does not establish the date.",
+              "contentHash": "25456261ddc5d46f4b27beff33aa1aec4c0fb7809949964891931e23e991efb0",
               "image": null
             },
             {
@@ -34248,13 +34248,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0526",
+              "cardReleaseId": "RELEASE:TH:Thai:sc3b T:126/158:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Thai card face, sc3b T 126/158 R, HP130 and Anesaki Nishida. Visible rainbow foil in the illustration and border. Watermarked seller scan; the seller watermark is not a card marking. Product page unavailable; original CDN image obtained from its indexed listing.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0526",
+              "specimenIds": [
+                "SPEC-0526"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -34279,6 +34301,17 @@
               "originalHash": "7642e39960730f6ba8b5d0280966a9ff59d4d7f8ed4155f2adb3ff3a08957522",
               "previewSrc": "images/previews/SPEC-0258.png?v=7642e39960730f6ba8b5d0280966a9ff59d4d7f8ed4155f2adb3ff3a08957522",
               "thumbnailSrc": "images/thumbs/SPEC-0258.png?v=7642e39960730f6ba8b5d0280966a9ff59d4d7f8ed4155f2adb3ff3a08957522"
+            },
+            {
+              "src": "verification/specimens/SPEC-0526.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0526",
+              "contentHash": "d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34",
+              "previewSrc": "images/previews/SPEC-0526.png?v=d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34",
+              "thumbnailSrc": "images/thumbs/SPEC-0526.png?v=d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34"
             }
           ],
           "observations": [
@@ -34308,6 +34341,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 3/6, row 2, column 3 crop. The visible artwork, printed language, set identity sc3b T and collector identity 126/158 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "d03d13557869c54c9d42c6565ce138ea1095db6aa20573e10f0fb01045911235",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0526",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/431199770/23151999066",
+              "evidence": "Thai card face, sc3b T 126/158 R, HP130 and Anesaki Nishida. Visible rainbow foil in the illustration and border. Watermarked seller scan; the seller watermark is not a card marking. Product page unavailable; original CDN image obtained from its indexed listing. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually.",
+              "contentHash": "a84da38519020aaab9a5716b70e171a6577f2d81368bee64d26b405f3b6b463c",
+              "image": "verification/specimens/SPEC-0526.jpg"
             }
           ]
         }
@@ -80277,8 +80319,8 @@
               "kind": "source-first",
               "provider": "seller-listing-photo",
               "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
-              "evidence": "specimen:SPEC-0520 visibly establishes s10a T 077/071, Thai, and printed rarity CHR. Release date remains unknown.",
-              "contentHash": "1778925a31597929e9bef97b7a8834154afa75039d69b32bb55a5bc0ab9da2e2",
+              "evidence": "specimen:SPEC-0520 visibly establishes s10a T 077/071, Thai, and printed rarity CHR. The separate official Thai release event EVENT:TH:s10a T:launch establishes 2022-07-29; the specimen does not establish the date.",
+              "contentHash": "710a7cd173b21c9a5ffebd582cff5d0686af82b1a5a3f20dd2b1d4ee35066786",
               "image": null
             },
             {
@@ -89663,15 +89705,59 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4badad5fb1c2c404534ca698",
+              "semanticPrintingId": "PRINTING:4badad5fb1c2c404534ca698",
+              "cardReleaseId": "RELEASE:TH:Thai:SV-P:082/SV-P:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "stamp",
+                  "text": "CENTRAL PATTANA",
+                  "role": "distribution-promo"
+                }
+              ],
+              "distribution": {
+                "kind": "purchase-promo",
+                "name": "Central Pattana Great Celebration"
+              },
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0460",
+              "sourcePrintingId": "F0460-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4badad5fb1c2c404534ca698",
+              "sources": [
+                {
+                  "url": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo/",
+                  "sourceType": "Specialist per-language promo record",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Thai"
+                  ],
+                  "retrievedAt": "2026-08-28",
+                  "evidence": "The exact Thai 082/SV-P record positively identifies the Central Pattana Great Celebration distribution, event stamp and Non-holo treatment. Reviewed 2026-09-15: retained exact page and image establish the printed CENTRAL PATTANA logo; the event name is distribution context, not printed stamp wording. The override lookup uses legacy unit number 082; the local release remains 082/SV-P."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
-            "markings": [],
+            "markings": [
+              "CENTRAL PATTANA"
+            ],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -89708,6 +89794,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0460-P01:0:3f00a66a08ba9d5b",
+              "kind": "finish",
+              "provider": "Specialist per-language promo record",
+              "url": "https://pokumon.com/card/snorlax-082-sv-p-thai-promo/",
+              "evidence": "The exact Thai 082/SV-P record positively identifies the Central Pattana Great Celebration distribution, event stamp and Non-holo treatment. Reviewed 2026-09-15: retained exact page and image establish the printed CENTRAL PATTANA logo; the event name is distribution context, not printed stamp wording. The override lookup uses legacy unit number 082; the local release remains 082/SV-P.",
+              "contentHash": "2ea1998cb918cd08ad8f591f9d6cc075d255a6fc552dea7cddfb289f38edd94f",
+              "image": null
+            },
             {
               "observationId": "source-first:TH:SV-P:082/SV-P:base",
               "kind": "source-first",
@@ -91947,13 +92042,48 @@
             "V1",
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:37de4f3f7cbe1fb379de165c",
+              "semanticPrintingId": "PRINTING:37de4f3f7cbe1fb379de165c",
+              "cardReleaseId": "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0475",
+              "sourcePrintingId": "F0475-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:37de4f3f7cbe1fb379de165c",
+              "specimenIds": [
+                "SPEC-0527"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Thai card face, printed sv4a T 145/190, HP150, regulation G and HYOGONOSUKE, matching the retained sv4a Thai release and SPEC-0269. Visible reflective foil in the rules and lower background outside the illustration. Conflicting Japanese/Normal listing metadata is not evidence. Server-provided JPEG of the previously inspected WebP gallery image. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually. Retained as SPEC-0527.",
+                  "retrievedAt": "2026-09-15"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "V1, base",
-            "finish": [],
+            "finish": [
+              "reverse-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -91989,9 +92119,38 @@
               "originalHash": "bf1c521252000f872f482f13da60c77c074950562c2a1c98ec1407cfe7f381d2",
               "previewSrc": "images/previews/SPEC-0269.png?v=bf1c521252000f872f482f13da60c77c074950562c2a1c98ec1407cfe7f381d2",
               "thumbnailSrc": "images/thumbs/SPEC-0269.png?v=bf1c521252000f872f482f13da60c77c074950562c2a1c98ec1407cfe7f381d2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0527.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0527",
+              "contentHash": "fd15c3583227f10632fda1085bc7cccac4754d1501c68a52fd1f2127dccdca07",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "fd15c3583227f10632fda1085bc7cccac4754d1501c68a52fd1f2127dccdca07",
+              "previewSrc": "images/previews/SPEC-0527.png?v=fd15c3583227f10632fda1085bc7cccac4754d1501c68a52fd1f2127dccdca07",
+              "thumbnailSrc": "images/thumbs/SPEC-0527.png?v=fd15c3583227f10632fda1085bc7cccac4754d1501c68a52fd1f2127dccdca07"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0475-P01:0:6793d75e498878de",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+              "evidence": "Thai card face, printed sv4a T 145/190, HP150, regulation G and HYOGONOSUKE, matching the retained sv4a Thai release and SPEC-0269. Visible reflective foil in the rules and lower background outside the illustration. Conflicting Japanese/Normal listing metadata is not evidence. Server-provided JPEG of the previously inspected WebP gallery image. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually. Retained as SPEC-0527.",
+              "contentHash": "4c3af6389b35637293de49bfad2eeec6ab458097b6871b520f2b7b63be7caa3a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0475-P01:1:758d51dd1a45a8d5",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "cdd5c75263621740f48caca1fa41d364ca97b8df39bb0ebc6526991db94c342b",
+              "image": null
+            },
             {
               "observationId": "source-first:TH:sv4a:145/190:base",
               "kind": "source-first",
@@ -92027,6 +92186,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 5/6, row 1, column 4 crop. The visible artwork, printed language, set identity sv4a and collector identity 145/190 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "804ba9ced0ea68bcd14291c033e87058beb6d469c4f6f3b0f46dd53e75ab45a8",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0527",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/297969171577",
+              "evidence": "Thai card face, printed sv4a T 145/190, HP150, regulation G and HYOGONOSUKE, matching the retained sv4a Thai release and SPEC-0269. Visible reflective foil in the rules and lower background outside the illustration. Conflicting Japanese/Normal listing metadata is not evidence. Server-provided JPEG of the previously inspected WebP gallery image. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually.",
+              "contentHash": "731b20477602e0478f902071a8bc784ae97e25338caa06adcb84e493336d3fa0",
+              "image": "verification/specimens/SPEC-0527.jpg"
             },
             {
               "observationId": "unit:U0309",

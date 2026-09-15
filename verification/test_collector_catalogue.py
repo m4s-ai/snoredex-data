@@ -630,13 +630,36 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 711,
-            "finishCandidates": 114,
-            "researchPlaceholders": 73,
-            "currentKnown": 711,
-            "research": 187,
+            "verifiedPrintings": 713,
+            "finishCandidates": 113,
+            "researchPlaceholders": 72,
+            "currentKnown": 713,
+            "research": 185,
         },
     }
+    # Issue #262: preserve exact Thai identity while admitting field-specific evidence.
+    thai = [row for row in catalogue["items"]
+            if row["active"] and row["localizationId"] == "LOCALIZATION:TH:th"]
+    for code, date, url in (
+        ("s5a T", "2021-04-30", "https://asia.pokemon-card.com/th/card-search/?pageNo=4"),
+        ("s10a T", "2022-07-29", "https://asia.pokemon-card.com/th/archives/1596/"),
+    ):
+        rows = [row for row in thai if row["localSetCode"] == code]
+        assert rows and all(row["releaseDate"] == date and url in row["sourceLinks"] for row in rows)
+    for release_fragment, finish, image_url in (
+        (":sc3b T:126/158:", "holo", "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7"),
+        (":sv4a:145/190:", "reverse-holo", "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg"),
+    ):
+        row = next(row for row in thai if release_fragment in row["cardReleaseId"]
+                   and row["itemKind"] == "verified-printing")
+        assert row["finish"] == finish
+        assert image_url in row["evidenceLinks"]
+    promo = next(row for row in thai if ":SV-P:082/SV-P:" in row["cardReleaseId"])
+    assert promo["itemKind"] == "verified-printing" and promo["finish"] == "non-holo"
+    assert promo["collectorNumber"] == "082/SV-P"
+    assert any(mark["text"] == "CENTRAL PATTANA" for mark in promo["markings"])
+    assert "https://pokumon.com/card/snorlax-082-sv-p-thai-promo/" in promo["sourceLinks"]
+
     build_a_bear_item = next(
         row for row in catalogue["items"]
         if row.get("sourcePrintingId") == "F0119-P01"
