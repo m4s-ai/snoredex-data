@@ -8,9 +8,9 @@ Follow-up requested by the owner after the [Thai PDF audit](../issue-262-pdf-aud
 
 | Language / market | Located source | Review status |
 |---|---|---|
-| Traditional Chinese — Taiwan | 24 reachable set-list PDF links from product pages | SC1b downloaded and visually triaged, page 19 inspected closely |
-| Traditional Chinese — Hong Kong | 25 reachable set-list PDF links from product pages | SC1b downloaded; byte-identical to Taiwan file |
-| Indonesian | 20 reachable set-list PDF links from product pages | SC1b downloaded and visually triaged, page 19 inspected closely |
+| Traditional Chinese — Taiwan | 24 reachable set-list PDF links from product pages | All linked PDFs downloaded and visually triaged; candidate pages enlarged |
+| Traditional Chinese — Hong Kong | 25 reachable set-list PDF links from product pages | All linked PDFs downloaded and visually triaged; mirror hashes recorded |
+| Indonesian | 20 reachable set-list PDF links from product pages | All linked PDFs downloaded and visually triaged; candidate pages enlarged |
 | English | 4 official PDFs: XY2, SM9, SWSH1, PAR | Parsed and visually triaged |
 | German | 4 official PDFs: XY2, SM9, SWSH1, PAR | Parsed and visually triaged; SWSH1 enlarged and retained |
 | French | 4 official PDFs: XY2, SM9, SWSH1, PAR | Parsed and visually triaged |
@@ -23,7 +23,7 @@ Follow-up requested by the owner after the [Thai PDF audit](../issue-262-pdf-aud
 | Russian | [Official SM3 card-translation PDF](https://assets.pokemon.com/assets/cms2-ru-ru/pdf/trading-card-game/tcg_sun_moon_3_card_translation.pdf) | 53 pages parsed; first page inspected to classify it as a translation, not physical-print evidence |
 | Dutch / Polish | Targeted web search | No official localized set-list PDF located in this pass; no absence claim |
 
-The Asian sweep followed **303 distinct product-page URLs**, all retrieved successfully, from the Taiwan, Hong Kong and Indonesian product indexes. It found **71 PDF links**. Two Classic preorder retailer lists were excluded, leaving **69 reachable set-list links**. This is a URL count, not a count of unique PDF contents or unique expansions. Only three Asian PDFs have been downloaded and content-reviewed in this increment; the other 66 remain explicit content-review work.
+The Asian sweep followed **303 distinct product-page URLs**, all retrieved successfully, from the Taiwan, Hong Kong and Indonesian product indexes. It found **71 PDF links**. Two Classic preorder retailer lists were excluded, leaving **69 reachable set-list links**. This is a URL count, not a count of unique PDF contents or unique expansions. All 69 Asian PDFs have now been downloaded and visually triaged (45 unique contents). The [remaining-queue review](REMAINING-REVIEW.md) closes the 66-file follow-up with 14 retained Snorlax observations and a filename/content mismatch.
 
 The western probes establish **20 actual PDFs in five languages**, four selected sets each. File signatures, parsing and localized page titles were checked; a guessed URL alone was never accepted. These samples span XY, Sun & Moon, Sword & Shield and Scarlet & Violet, but the western search does not yet enumerate every set.
 
@@ -54,78 +54,78 @@ The source product-page URL and exact PDF-link HTML fragment are retained in `as
 
 | Market | PDF | Content review |
 |---|---|---|
-| HK | [AS5a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS5a.pdf) | Pending; HEAD reachability only |
-| HK | [AS5b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS5b.pdf) | Pending; HEAD reachability only |
-| HK | [AS6a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS6a.pdf) | Pending; HEAD reachability only |
-| HK | [AS6b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS6b.pdf) | Pending; HEAD reachability only |
-| HK | [Booster-2A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-2A.pdf) | Pending; HEAD reachability only |
-| HK | [Booster-2B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-2B.pdf) | Pending; HEAD reachability only |
-| HK | [Booster-A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-A.pdf) | Pending; HEAD reachability only |
-| HK | [Booster-B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-B.pdf) | Pending; HEAD reachability only |
-| HK | [CH-S4.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/CH-S4.pdf) | Pending; HEAD reachability only |
-| HK | [S4a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S4a.pdf) | Pending; HEAD reachability only |
-| HK | [S5I.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5I.pdf) | Pending; HEAD reachability only |
-| HK | [S5R.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5R.pdf) | Pending; HEAD reachability only |
-| HK | [S5a_9ups_in-number.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5a_9ups_in-number.pdf) | Pending; HEAD reachability only |
-| HK | [S6H-Chinese-SR.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6H-Chinese-SR.pdf) | Pending; HEAD reachability only |
-| HK | [S6K-Chinese-SR.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6K-Chinese-SR.pdf) | Pending; HEAD reachability only |
-| HK | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6a_9ups_in-number.pdf) | Pending; HEAD reachability only |
-| HK | [SC1_Set_A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC1_Set_A.pdf) | Pending; HEAD reachability only |
+| HK | [AS5a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS5a.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [AS5b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS5b.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [AS6a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS6a.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [AS6b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/AS6b.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [Booster-2A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-2A.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [Booster-2B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-2B.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [Booster-A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-A.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [Booster-B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/Booster-B.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [CH-S4.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/CH-S4.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S4a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S4a.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S5I.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5I.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S5R.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5R.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S5a_9ups_in-number.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S5a_9ups_in-number.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S6H-Chinese-SR.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6H-Chinese-SR.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S6K-Chinese-SR.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6K-Chinese-SR.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/S6a_9ups_in-number.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [SC1_Set_A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC1_Set_A.pdf) | Reviewed; see remaining-queue ledger |
 | HK | [SC1_Set_B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC1_Set_B.pdf) | SC1b sample reviewed |
-| HK | [SC2_Set_A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC2_Set_A.pdf) | Pending; HEAD reachability only |
-| HK | [SC2_Set_B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC2_Set_B.pdf) | Pending; HEAD reachability only |
-| HK | [s7_a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/s7_a.pdf) | Pending; HEAD reachability only |
-| HK | [s7_b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/s7_b.pdf) | Pending; HEAD reachability only |
-| HK | [cardlist1.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist1.pdf) | Pending; HEAD reachability only |
-| HK | [cardlist2.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist2.pdf) | Pending; HEAD reachability only |
-| HK | [cardlist3.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist3.pdf) | Pending; HEAD reachability only |
-| ID | [1st_Cardlist_SetA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/1st_Cardlist_SetA.pdf) | Pending; HEAD reachability only |
-| ID | [1st_Cardlist_SetB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/1st_Cardlist_SetB.pdf) | Pending; HEAD reachability only |
-| ID | [AC3_setA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setA.pdf) | Pending; HEAD reachability only |
-| ID | [AC3_setB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf) | Pending; HEAD reachability only |
-| ID | [ID_SC1a_9ups.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/ID_SC1a_9ups.pdf) | Pending; HEAD reachability only |
+| HK | [SC2_Set_A.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC2_Set_A.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [SC2_Set_B.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/SC2_Set_B.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [s7_a.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/s7_a.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [s7_b.pdf](https://asia.pokemon-card.com/hk/archive/card/pdf/s7_b.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [cardlist1.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist1.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [cardlist2.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist2.pdf) | Reviewed; see remaining-queue ledger |
+| HK | [cardlist3.pdf](https://asia.pokemon-card.com/hk/archive/special/card/family_game/pdf/cardlist3.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [1st_Cardlist_SetA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/1st_Cardlist_SetA.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [1st_Cardlist_SetB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/1st_Cardlist_SetB.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [AC3_setA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setA.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [AC3_setB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [ID_SC1a_9ups.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/ID_SC1a_9ups.pdf) | Reviewed; see remaining-queue ledger |
 | ID | [ID_SC1b_9ups.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/ID_SC1b_9ups.pdf) | SC1b sample reviewed |
-| ID | [IND_2nd_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_2nd_SETA.pdf) | Pending; HEAD reachability only |
-| ID | [IND_2nd_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_2nd_SETB.pdf) | Pending; HEAD reachability only |
-| ID | [IND_3_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_3_SETA.pdf) | Pending; HEAD reachability only |
-| ID | [IND_3_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_3_SETB.pdf) | Pending; HEAD reachability only |
-| ID | [IND_4_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_4_SETA.pdf) | Pending; HEAD reachability only |
-| ID | [IND_4_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_4_SETB.pdf) | Pending; HEAD reachability only |
-| ID | [Indonesian SC3a.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/Indonesian%20SC3a.pdf) | Pending; HEAD reachability only |
-| ID | [Indonesian SC3b.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/Indonesian%20SC3b.pdf) | Pending; HEAD reachability only |
-| ID | [S5I.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S5I.pdf) | Pending; HEAD reachability only |
-| ID | [S5R.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S5R.pdf) | Pending; HEAD reachability only |
-| ID | [S6H-Indonesian.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6H-Indonesian.pdf) | Pending; HEAD reachability only |
-| ID | [S6K-Indonesian.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6K-Indonesian.pdf) | Pending; HEAD reachability only |
-| ID | [S6a_9ups_Indonesia.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6a_9ups_Indonesia.pdf) | Pending; HEAD reachability only |
-| ID | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6a_9ups_in-number.pdf) | Pending; HEAD reachability only |
-| TW | [AS5a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf) | Pending; HEAD reachability only |
-| TW | [AS5b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS5b.pdf) | Pending; HEAD reachability only |
-| TW | [AS6a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS6a.pdf) | Pending; HEAD reachability only |
-| TW | [AS6b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS6b.pdf) | Pending; HEAD reachability only |
-| TW | [Booster-2A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-2A.pdf) | Pending; HEAD reachability only |
-| TW | [Booster-2B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-2B.pdf) | Pending; HEAD reachability only |
-| TW | [Booster-B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-B.pdf) | Pending; HEAD reachability only |
-| TW | [CH-S4.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/CH-S4.pdf) | Pending; HEAD reachability only |
-| TW | [S4a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S4a.pdf) | Pending; HEAD reachability only |
-| TW | [S5I.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5I.pdf) | Pending; HEAD reachability only |
-| TW | [S5R.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5R.pdf) | Pending; HEAD reachability only |
-| TW | [S5a_9ups_in-number.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5a_9ups_in-number.pdf) | Pending; HEAD reachability only |
-| TW | [S6H-Chinese-SR.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6H-Chinese-SR.pdf) | Pending; HEAD reachability only |
-| TW | [S6K-Chinese-SR.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6K-Chinese-SR.pdf) | Pending; HEAD reachability only |
-| TW | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6a_9ups_in-number.pdf) | Pending; HEAD reachability only |
-| TW | [SC1_Set_A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC1_Set_A.pdf) | Pending; HEAD reachability only |
+| ID | [IND_2nd_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_2nd_SETA.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [IND_2nd_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_2nd_SETB.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [IND_3_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_3_SETA.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [IND_3_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_3_SETB.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [IND_4_SETA.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_4_SETA.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [IND_4_SETB.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/IND_4_SETB.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [Indonesian SC3a.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/Indonesian%20SC3a.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [Indonesian SC3b.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/Indonesian%20SC3b.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S5I.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S5I.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S5R.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S5R.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S6H-Indonesian.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6H-Indonesian.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S6K-Indonesian.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6K-Indonesian.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S6a_9ups_Indonesia.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6a_9ups_Indonesia.pdf) | Reviewed; see remaining-queue ledger |
+| ID | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/id/archive/card/pdf/S6a_9ups_in-number.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [AS5a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [AS5b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS5b.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [AS6a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS6a.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [AS6b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/AS6b.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [Booster-2A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-2A.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [Booster-2B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-2B.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [Booster-B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/Booster-B.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [CH-S4.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/CH-S4.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S4a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S4a.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S5I.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5I.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S5R.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5R.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S5a_9ups_in-number.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S5a_9ups_in-number.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S6H-Chinese-SR.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6H-Chinese-SR.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S6K-Chinese-SR.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6K-Chinese-SR.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [S6a_9ups_in-number.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/S6a_9ups_in-number.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [SC1_Set_A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC1_Set_A.pdf) | Reviewed; see remaining-queue ledger |
 | TW | [SC1_Set_B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC1_Set_B.pdf) | SC1b sample reviewed |
-| TW | [SC2_Set_A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC2_Set_A.pdf) | Pending; HEAD reachability only |
-| TW | [SC2_Set_B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC2_Set_B.pdf) | Pending; HEAD reachability only |
-| TW | [s7_a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/s7_a.pdf) | Pending; HEAD reachability only |
-| TW | [s7_b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/s7_b.pdf) | Pending; HEAD reachability only |
-| TW | [cardlist1.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist1.pdf) | Pending; HEAD reachability only |
-| TW | [cardlist2.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist2.pdf) | Pending; HEAD reachability only |
-| TW | [cardlist3.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist3.pdf) | Pending; HEAD reachability only |
+| TW | [SC2_Set_A.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC2_Set_A.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [SC2_Set_B.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/SC2_Set_B.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [s7_a.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/s7_a.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [s7_b.pdf](https://asia.pokemon-card.com/tw/archive/card/pdf/s7_b.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [cardlist1.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist1.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [cardlist2.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist2.pdf) | Reviewed; see remaining-queue ledger |
+| TW | [cardlist3.pdf](https://asia.pokemon-card.com/tw/archive/special/card/family_game/pdf/cardlist3.pdf) | Reviewed; see remaining-queue ledger |
 
 ## Retention and next processing steps
 
-Original PDFs, full HTML responses and contact sheets remain in ignored `verification/cache/multilang-pdf/`; a recorded original hash does not mean the original is retained in Git. Four selected derived PNGs are committed with source hashes, source retrieval timestamps, page/crop coordinates and excerpt hashes in `retained-excerpts.json`. Product-link HTML fragments and relevant source-announcement excerpts are retained separately from full-response hashes.
+Original PDFs, full HTML responses and contact sheets remain in ignored `verification/cache/multilang-pdf/`; a recorded original hash does not mean the original is retained in Git. Four initial selected derived PNGs are committed with source hashes, source retrieval timestamps, page/crop coordinates and excerpt hashes in `retained-excerpts.json`. Sixteen additional excerpts and their provenance are retained in `remaining-excerpts.json`. Product-link HTML fragments and relevant source-announcement excerpts are retained separately from full-response hashes.
 
-Next process the 66 Asian PDF links still awaiting content review, preserving market links and comparing hashes before counting mirrors separately. Expand the five western language inventories beyond the four sample sets; use each document’s legend rather than copying a rarity/finish assumption. Portuguese, Dutch, Polish and Japanese/Korean PDF coverage remain open research gaps. Do not use blank deck-registration forms, rules PDFs, retailer lists or translated gameplay aids as localized set manifests. No new normalized card or finish claim is admitted by this survey. **Keep PR #383 as a draft.**
+The 66-file Asian content-review queue is complete; see [the review and admission candidates](REMAINING-REVIEW.md). Reconcile the three unmaterialized candidates and AS5a 142’s denominator through the existing admission workflow before changing canonical data. Expand the five western language inventories beyond the four sample sets; use each document’s legend rather than copying a rarity/finish assumption. Portuguese, Dutch, Polish and Japanese/Korean PDF coverage remain open research gaps. Do not use blank deck-registration forms, rules PDFs, retailer lists or translated gameplay aids as localized set manifests. No new normalized card or finish claim is admitted by this survey. **Keep PR #383 as a draft.**
