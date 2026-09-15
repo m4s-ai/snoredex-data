@@ -59,3 +59,7 @@ Next productive step: obtain readable original seller photographs for the exact 
 ## Official Thai set-list PDF follow-up
 
 The [subsequent PDF audit](../issue-262-pdf-audit-20260915/README.md) follows 83 official product pages, processes 27 linked PDFs (464 pages), and retains ten inspected card excerpts. Its combined index covers 95 observed set codes across PDFs and 83 online set lists. Four additional Thai card-release candidates and the s8b sample-number discrepancy remain explicit research observations; no additional finish claims or canonical admissions are made in that increment. PR #383 remains a draft.
+
+## Multilingual source survey
+
+The owner-requested [survey beyond Thai](../multilang-setlists-20260915/README.md) records 69 reachable Asian set-list PDF links, 20 retrieved western checklists in five languages, and language-specific online alternatives. Three Asian sample PDFs and selected western/translation examples were inspected; remaining content-review work is explicit. No cross-language physical-print or finish inference is made.
