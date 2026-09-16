@@ -119,16 +119,16 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-09-10**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-09-15**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 628 externally confirmed, 91 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **622 established**, **6 needs evidence**, **87 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **898 items** across 174 cards and 15 languages: 825 documented printings plus 73 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 478 externally confirmed, 46 marketplace-only positives, 37 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 141 units. |
-| Evidence registry | **32 providers**, 1633 evidence records, 1626 unique URLs, and 6,267 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Current-known physical checklist | **898 items** across 174 cards and 15 languages: 826 documented printings plus 72 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 480 externally confirmed, 45 marketplace-only positives, 36 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 140 units. |
+| Evidence registry | **32 providers**, 1647 evidence records, 1640 unique URLs, and 6,340 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -303,7 +303,7 @@ finish decision may close a unit after review, and that decision never introduce
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-Holo | 310 |
+| Non-Holo | 311 |
 | Holo | 238 |
 | Reverse Holo family | 239 |
 | Both Non-Holo and Holo | 56 |

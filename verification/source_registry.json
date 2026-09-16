@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-10",
+  "generated": "2026-09-15",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1633,
-   "uniqueUrls": 1626,
+   "evidenceRecords": 1647,
+   "uniqueUrls": 1640,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6267
+   "claimsAttributed": 6340
   }
  },
  "providers": [
@@ -30,7 +30,8 @@
    "usedFor": [
     "language",
     "finish",
-    "product"
+    "product",
+    "date"
    ],
    "attribution": "Official card pages and product checklists © The Pokémon Company International.",
    "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. Missing entries remain unknown.",
@@ -41,8 +42,8 @@
     "tcg.pokemon.com",
     "dz3we2x72f7ol.cloudfront.net"
    ],
-   "uniqueSources": 137,
-   "claimsSupported": 472
+   "uniqueSources": 144,
+   "claimsSupported": 479
   },
   {
    "providerId": "pokemon-cn-official",
@@ -93,7 +94,7 @@
     "30th.pokemon-card.com"
    ],
    "uniqueSources": 39,
-   "claimsSupported": 89
+   "claimsSupported": 90
   },
   {
    "providerId": "pokemon-card-asia",
@@ -106,15 +107,16 @@
    "coverage": "recent Traditional Chinese, Indonesian and Thai cards",
    "supportsAbsence": false,
    "usedFor": [
-    "language"
+    "language",
+    "date"
    ],
    "attribution": "Asian card data © The Pokémon Company.",
    "notes": "Recent releases only; older printings are out of coverage.",
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 198,
-   "claimsSupported": 722
+   "uniqueSources": 200,
+   "claimsSupported": 727
   },
   {
    "providerId": "pokemon-card-korea",
@@ -187,7 +189,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 89,
-   "claimsSupported": 647
+   "claimsSupported": 692
   },
   {
    "providerId": "tcgcsv",
@@ -278,7 +280,7 @@
     "www.pokumon.com"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 32
+   "claimsSupported": 33
   },
   {
    "providerId": "pokecottage",
@@ -653,7 +655,8 @@
    "usedFor": [
     "finish",
     "product",
-    "language"
+    "language",
+    "date"
    ],
    "attribution": "Retail listings from independent sellers.",
    "notes": "Grouped deliberately: these are one-off listings or retained retailer set-list images, not authoritative catalogues, so per-host provider entries would imply a coverage guarantee none of them offers. An image counts only when it identifies the printing.",
@@ -671,8 +674,8 @@
     "beehivetcg.com",
     "rocketcoll.com"
    ],
-   "uniqueSources": 28,
-   "claimsSupported": 94
+   "uniqueSources": 29,
+   "claimsSupported": 95
   },
   {
    "providerId": "internal-derivation",
@@ -777,8 +780,8 @@
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
    "hosts": [],
-   "uniqueSources": 179,
-   "claimsSupported": 674
+   "uniqueSources": 183,
+   "claimsSupported": 687
   }
  ],
  "evidence": [
@@ -1311,19 +1314,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSV5C",
+    "SET-SRC-BP-DATE-FFA626271A99",
     "U0521"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
@@ -1367,7 +1372,8 @@
     "Bulbapedia (fan wiki), product article, deck list",
     "Bulbapedia (fan wiki), product article, half-deck list + \"In other languages\" table",
     "Bulbapedia expansion/product release field",
-    "Bulbapedia sealed-deck contents"
+    "Bulbapedia sealed-deck contents",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
@@ -1375,10 +1381,11 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 8,
    "stableIds": [
     "BA20",
     "F0006-P01",
+    "SET-SRC-BP-DATE-6B6414EE501D",
     "U0293",
     "U0294",
     "U0295",
@@ -1386,7 +1393,7 @@
     "override:battle-academy-2020"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 7
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Battle_Party:_Shared_Dream_(ATCG)",
@@ -1428,19 +1435,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSMPC",
+    "SET-SRC-BP-DATE-19933051D116",
     "U0675"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Blade_Awakening_(ATCG)",
@@ -1448,19 +1457,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSV7C",
+    "SET-SRC-BP-DATE-08C8C544FA2D",
     "U0685"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Collection_151_(ATCG)",
@@ -1524,38 +1535,43 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "CSVH4C",
+    "SET-SRC-BP-DATE-C266C8A2842E",
     "U0767",
     "U0768"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Diamond_%26_Pearl_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "DP",
-    "DP1"
+    "DP1",
+    "SET-SRC-BP-DATE-9CE5112BBAA2",
+    "SET-SRC-BP-DATE-F0B9DF07FF1E"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
@@ -1585,19 +1601,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSAC",
+    "SET-SRC-BP-DATE-644A97FCB759",
     "U0514"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_V_Starter_Deck_(ATCG)",
@@ -1605,73 +1623,84 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CS1DC",
+    "SET-SRC-BP-DATE-7428C9F53DAA",
     "U0581"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_Dragon_Frontiers_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "DF",
-    "PCG9"
+    "PCG9",
+    "SET-SRC-BP-DATE-1BB2DB79A1C2",
+    "SET-SRC-BP-DATE-B55D35690D8F"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_FireRed_%26_LeafGreen_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "FL",
-    "PCG1"
+    "PCG1",
+    "SET-SRC-BP-DATE-9A89A862F14C",
+    "SET-SRC-BP-DATE-B7ADE9CF4868"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/EX_Team_Rocket_Returns_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "PCG3",
+    "SET-SRC-BP-DATE-5CAF502EA702",
+    "SET-SRC-BP-DATE-641EF40B0382",
     "TRR"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Eevee_%26_Snorlax-GX_(Team_Up_120)",
@@ -1697,34 +1726,38 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-E629C64EE849",
     "XY10"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Flashfire_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-4B2C2AA78201",
     "XY2"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_(ATCG)",
@@ -1732,27 +1765,8 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
-   ],
-   "dimensions": [
-    "date",
-    "language"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "CS5aC",
-    "U0183"
-   ],
-   "retrievedAt": "2026-07-31",
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_(ATCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
@@ -1760,12 +1774,35 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
+    "CS5aC",
+    "SET-SRC-BP-DATE-2AC19BA9E6B1",
+    "U0183"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date",
+    "language"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
     "CS5DC",
+    "SET-SRC-BP-DATE-E2104ABD6305",
     "U0650",
     "U0765"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)",
@@ -1774,6 +1811,7 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), product article, DeckInfobox \"release\" field, card list row",
     "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record",
     "Positive source-first card record",
     "Positive source-native rarity record"
    ],
@@ -1782,14 +1820,15 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "20th",
     "KR:20th:047/072:base",
+    "SET-SRC-BP-DATE-B042B037FFBD",
     "U0680"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Golden_Energy_(ATCG)",
@@ -1797,19 +1836,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSM2.1C",
+    "SET-SRC-BP-DATE-E1139D5C3F34",
     "U0559"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gym_Challenge_(TCG)",
@@ -1817,19 +1858,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion set list (Japanese numbering)",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "G2",
+    "SET-SRC-BP-DATE-145279686365",
     "U0427"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Hidden_Fates_(TCG)",
@@ -2062,19 +2105,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSVL1C",
+    "SET-SRC-BP-DATE-DC17692669A8",
     "U0588"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
@@ -2111,15 +2156,17 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
     "Bulbapedia (fan wiki), expansion set list (Japanese numbering)",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 7,
    "stableIds": [
     "PJU",
+    "SET-SRC-BP-DATE-62786B18076B",
     "U0094",
     "U0095",
     "U0124",
@@ -2127,7 +2174,7 @@
     "U0380"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
@@ -2136,6 +2183,7 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), expansion article",
     "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record",
     "Positive source-native rarity record"
    ],
    "dimensions": [
@@ -2143,10 +2191,11 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 13,
+   "stableIdCount": 14,
    "stableIds": [
     "HXY",
     "KR:FXY:026/036:base",
+    "SET-SRC-BP-DATE-04918A893A9C",
     "U0482",
     "U0484",
     "U0485",
@@ -2160,7 +2209,7 @@
     "U0495"
    ],
    "retrievedAt": "2026-08-10",
-   "usageCount": 13
+   "usageCount": 14
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
@@ -2222,17 +2271,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "LL"
+    "LL",
+    "SET-SRC-BP-DATE-2B8BBAACE896"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/MEGA_Dream_ex_(TCG)",
@@ -2258,19 +2309,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CS6bC",
+    "SET-SRC-BP-DATE-54C51EA13E7F",
     "U0213"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)",
@@ -2297,36 +2350,40 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), product article, exclusivity statement + half-deck list",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "HSZ",
+    "SET-SRC-BP-DATE-7D4F97250224",
     "U0644"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Nihil_Zero_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-5BCD5B09A575",
     "m3"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Peerless_Fighters_(TCG)",
@@ -2351,19 +2408,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSZC",
+    "SET-SRC-BP-DATE-5F03AAED72A5",
     "U0431"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pikachu_%26_Clefairy_%26_Turtwig_%26_Gimmighoul_Happy_Set_(ATCG)",
@@ -2371,36 +2430,40 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSVH1C",
+    "SET-SRC-BP-DATE-5B172C6DAA3E",
     "U0612"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Plasma_Storm_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "BW7"
+    "BW7",
+    "SET-SRC-BP-DATE-51F1B740554D"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Display_Set_Gift_Box_Vol._3_(ATCG)",
@@ -2408,19 +2471,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSUC",
+    "SET-SRC-BP-DATE-22E5715594C4",
     "U0513"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Card_Game_Battle_Academy_(TCG)",
@@ -2536,19 +2601,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CS3DC",
+    "SET-SRC-BP-DATE-7E11FEBAE7C1",
     "U0614"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
@@ -2592,17 +2659,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "Pt2"
+    "Pt2",
+    "SET-SRC-BP-DATE-678F6966A72A"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/S-P_Promotional_cards_(SCTCG)",
@@ -2826,23 +2895,26 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 6,
+   "stableIdCount": 8,
    "stableIds": [
     "CSM2bC",
     "CSM2cC",
+    "SET-SRC-BP-DATE-AFB7C2128F00",
+    "SET-SRC-BP-DATE-FD7A8D45DBCC",
     "U0240",
     "U0430",
     "U0457",
     "U0635"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Shining_Synergy_GX_Starter_Deck_(ATCG)",
@@ -2850,27 +2922,8 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
-    "Bulbapedia expansion/product release field"
-   ],
-   "dimensions": [
-    "date",
-    "language"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "CSM2DC",
-    "U0613"
-   ],
-   "retrievedAt": "2026-07-31",
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_(TCG)",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\"",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
@@ -2878,12 +2931,35 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
+    "CSM2DC",
+    "SET-SRC-BP-DATE-6B7E4329CF80",
+    "U0613"
+   ],
+   "retrievedAt": "2026-07-31",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Skyridge_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Bulbapedia (fan wiki), expansion article, \"Languages this set is released in\"",
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date",
+    "language"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
     "EC5",
+    "SET-SRC-BP-DATE-43F82BFE00C5",
     "U0186",
     "U0605"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Call_of_Legends_33)",
@@ -2991,17 +3067,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-2B18162E4B87",
     "mC"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_Battle_Collection_CoroCiao_Version_(TCG)",
@@ -3026,17 +3104,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-DA3DC1D6019A",
     "svLN"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Storming_Emergence_(ATCG)",
@@ -3044,36 +3124,40 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSM1cC",
+    "SET-SRC-BP-DATE-FEC0A71D3B09",
     "U0438"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "SET-SRC-BP-DATE-EBE9ED05D099",
     "smL"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
@@ -3120,19 +3204,21 @@
    "providerId": "bulbapedia",
    "sourceTypes": [
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
-    "Bulbapedia expansion/product release field"
+    "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CSV10C",
+    "SET-SRC-BP-DATE-B89AC04101B7",
     "U0761"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
@@ -3179,22 +3265,24 @@
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row",
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, via shared card identity",
     "Bulbapedia expansion/product release field",
+    "Localized set/product release-date record",
     "Positive source-first card record"
    ],
    "dimensions": [
     "date",
     "language"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 6,
    "stableIds": [
     "CN:CS2aC:142/115:base",
     "CS2aC",
+    "SET-SRC-BP-DATE-1663BE889889",
     "U0255",
     "U0289",
     "U0592"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/XY-P_Promotional_cards_(TCG)",
@@ -13850,19 +13938,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
    "sourceTypes": [
+    "Localized set/product release-date record",
     "Official localized card-gallery render; not an owner-held physical specimen",
     "Positive source-first card record"
    ],
    "dimensions": [
+    "date",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "ID:MA6 I:121/130:base",
+    "SET-SRC-30C-DATE-ID",
     "SPEC-0517"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/archive/special/card/ma6/images/locale/id/cards/ma6_121oijsy4ia_IDN.png",
@@ -15062,19 +15153,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
    "sourceTypes": [
+    "Localized set/product release-date record",
     "Official localized card-gallery render; not an owner-held physical specimen",
     "Positive source-first card record"
    ],
    "dimensions": [
+    "date",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "SET-SRC-30C-DATE-TH",
     "SPEC-0516",
     "TH:MA6 T:121/130:base"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/archive/special/card/ma6/images/locale/th/cards/ma6_121oijsy4ia_TH.png",
@@ -15094,6 +15188,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/archives/1596",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-TH-DATE-S10A-20260915"
+   ],
+   "retrievedAt": "2026-09-14T22:16:01.141428+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/th/card-img/th00000127.png",
@@ -16088,23 +16199,43 @@
    "usageCount": 5
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/th/card-search?pageNo=4",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-TH-DATE-S5A-20260915"
+   ],
+   "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
    "sourceTypes": [
+    "Localized set/product release-date record",
     "Official localized card-gallery render; not an owner-held physical specimen",
     "Positive source-first card record"
    ],
    "dimensions": [
+    "date",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "SET-SRC-30C-DATE-TW",
     "SPEC-0515",
     "TW:M6a F:095/103:base"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png",
@@ -17834,19 +17965,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-jp",
    "sourceTypes": [
+    "Localized set/product release-date record",
     "Official localized card-gallery render; not an owner-held physical specimen",
     "Positive source-first card record"
    ],
    "dimensions": [
+    "date",
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "JP:M6a:095/103:base",
+    "SET-SRC-30C-DATE-JP",
     "SPEC-0514"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.pokemon-card.com/card-search/details.php/card/1082/regu/all",
@@ -23020,6 +23154,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://tcg.pokemon.com/de-de/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-DE-DE"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://tcg.pokemon.com/de-de/galleries/30th-celebration",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -23037,6 +23188,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/en-us/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-EN-US"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://tcg.pokemon.com/en-us/galleries/30th-celebration",
@@ -23058,6 +23226,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://tcg.pokemon.com/es-es/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-ES-ES"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://tcg.pokemon.com/es-es/galleries/30th-celebration",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -23075,6 +23260,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/es-mx/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-ES-MX"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration",
@@ -23096,6 +23298,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://tcg.pokemon.com/fr-fr/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-FR-FR"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -23115,6 +23334,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://tcg.pokemon.com/it-it/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-IT-IT"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://tcg.pokemon.com/it-it/galleries/30th-celebration",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -23132,6 +23368,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://tcg.pokemon.com/pt-br/expansions/30th-celebration",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-30C-DATE-PT-BR"
+   ],
+   "retrievedAt": "2026-09-10",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration",
@@ -23677,14 +23930,16 @@
     "Specialist per-language promo record"
    ],
    "dimensions": [
+    "finish",
     "finish-override"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "F0460-P01",
     "override:pokumon-th-svp082"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-08-28",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo",
@@ -23775,6 +24030,23 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
+   ],
+   "retrievedAt": "2026-08-25",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://beehivetcg.com/cdn/shop/files/0e76344daaa0cb314f25bf211ef84d42.png?v=1768747014&width=600",
@@ -24540,6 +24812,25 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 8
+  },
+  {
+   "canonicalUrl": "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0526",
+    "TH:sc3b T:126/158:base"
+   ],
+   "retrievedAt": "2026-09-15",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
@@ -25482,6 +25773,26 @@
     "U0582"
    ],
    "retrievedAt": "2026-09-03",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0475-P01",
+    "SPEC-0527",
+    "TH:sv4a:145/190:base"
+   ],
+   "retrievedAt": "2026-09-15",
    "usageCount": 5
   },
   {
@@ -26636,6 +26947,24 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://shopee.co.th/product/431199770/23151999066",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0526",
+    "TH:sc3b T:126/158:base"
+   ],
+   "retrievedAt": "2026-09-15",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27040,6 +27369,24 @@
     "SPEC-0052"
    ],
    "retrievedAt": "2026-08-26",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/297969171577",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0527",
+    "TH:sv4a:145/190:base"
+   ],
+   "retrievedAt": "2026-09-15",
    "usageCount": 2
   },
   {

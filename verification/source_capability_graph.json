@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-10",
+    "generated": "2026-09-15",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -16,14 +16,14 @@
     ],
     "counts": {
       "providers": 32,
-      "surfaces": 50,
-      "coverageEdges": 52,
+      "surfaces": 52,
+      "coverageEdges": 54,
       "absenceEdges": 0,
-      "observations": 56,
-      "resolvedVerdictSources": 1633
+      "observations": 58,
+      "resolvedVerdictSources": 1647
     },
     "surfaceStates": {
-      "active": 22,
+      "active": 24,
       "blocked-by-browser": 3,
       "incomplete": 19,
       "internal": 1,
@@ -2274,6 +2274,82 @@
       },
       "coverageEdgeIds": [
         "asia-30th-celebration-positive"
+      ]
+    },
+    {
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Thai S5a and S10a product publication dates",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/th/card-search?pageNo=4",
+          "https://asia.pokemon-card.com/th/archives/1596"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-15",
+      "freshnessPolicy": "Retain exact product date statement, Thai route, retrieval time and SHA-256; other products remain outside scope.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the retained S5a and S10a date statements.",
+        "expectedIdentifiers": [
+          "Thai product identity",
+          "publication date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "asia-th-reviewed-product-dates-positive"
+      ]
+    },
+    {
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "providerId": "retailer-listing",
+      "label": "Retained Mexican Journey Together prerelease event date",
+      "match": {
+        "urlPrefixes": [
+          "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-08-25",
+      "freshnessPolicy": "Retained organizer event statement only; not a general release date or card-language claim.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+        "parameters": [],
+        "pagination": "One retained organizer event.",
+        "expectedIdentifiers": [
+          "event name",
+          "venue",
+          "event date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "retailer-reviewed-prerelease-date-positive"
       ]
     }
   ],
@@ -4943,6 +5019,101 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A shared card number alone cannot establish another language or regional printing."
+      }
+    },
+    {
+      "edgeId": "asia-th-reviewed-product-dates-positive",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "coverage": {
+        "localities": [
+          "TH"
+        ],
+        "languages": [
+          "Thai"
+        ],
+        "scripts": [
+          "Thai"
+        ],
+        "productCategories": [
+          "set",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only retained S5a and S10a product date statements."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "release-event",
+        "date",
+        "set-existence",
+        "local-set-identifier"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A returned localized card page establishes that card; filters, missing pages and other locale routes are not a manifest."
+      },
+      "knownPositiveObservationId": "obs-asia-th-reviewed-product-dates",
+      "boundary": {
+        "outsideScope": [
+          "other products",
+          "other localities",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A Thai product date does not establish a date or finish for another local edition."
+      }
+    },
+    {
+      "edgeId": "retailer-reviewed-prerelease-date-positive",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "coverage": {
+        "localities": [
+          "LATAM"
+        ],
+        "languages": [
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2025-03-22",
+          "end": "2025-03-22",
+          "basis": "Retained organizer event date in Culiacan, Mexico; not card-language evidence."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Missing events or listings never establish absence."
+      },
+      "knownPositiveObservationId": "obs-retailer-reviewed-prerelease-date",
+      "boundary": {
+        "outsideScope": [
+          "other events",
+          "general set release date",
+          "card language",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "An organizer event date does not establish a general release date or card language."
       }
     }
   ],
@@ -7973,6 +8144,132 @@
         ],
         "retrievedAt": "2026-09-10",
         "usageCount": 8
+      }
+    },
+    {
+      "observationId": "obs-asia-th-reviewed-product-dates",
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+      "queryParameters": {
+        "scope": "two reviewed Thai product dates"
+      },
+      "retrievedAt": "2026-09-14",
+      "expectedIdentifiers": [
+        "s5a T",
+        "2021-04-30",
+        "s10a T",
+        "2022-07-29"
+      ],
+      "validatesEdges": [
+        "asia-th-reviewed-product-dates-positive"
+      ],
+      "outcome": "The retained official Thai pages explicitly give the named product dates; physical finish is outside scope.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:cdb1945e38f36d209e276bdbc0afff670cb1b8c352f41cb2fb21ab142457735e",
+      "rawRecord": {
+        "dates": [
+          {
+            "sourceRecordId": "SET-SRC-TH-DATE-S5A-20260915",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-asia",
+            "providerRecordKey": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+            "retrieved": "2026-09-14",
+            "sourceUrl": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+            "raw": {
+              "localCode": "s5a T",
+              "page": "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
+              "date": "2021-04-30",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "TH",
+              "languageScope": "Thai",
+              "marketScopes": [
+                "TH"
+              ],
+              "marketScopeBasis": "Official Thai product listing/announcement",
+              "sourceNativeDate": "04-30-2021",
+              "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s5a-date.html",
+              "sha256": "a798afcd4010d4b473976390f5e02af48670eebb3c8cafd98ff6d448d03b1ad5",
+              "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
+              "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-TH-DATE-S10A-20260915",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-asia",
+            "providerRecordKey": "https://asia.pokemon-card.com/th/archives/1596/",
+            "retrieved": "2026-09-14",
+            "sourceUrl": "https://asia.pokemon-card.com/th/archives/1596/",
+            "raw": {
+              "localCode": "s10a T",
+              "page": "https://asia.pokemon-card.com/th/archives/1596/",
+              "date": "2022-07-29",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "TH",
+              "languageScope": "Thai",
+              "marketScopes": [
+                "TH"
+              ],
+              "marketScopeBasis": "Official Thai product listing/announcement",
+              "sourceNativeDate": "29 July 2565 BE",
+              "retainedPath": "verification/evidence/issue-262-research-20260915/raw/official-s10a-date.text.txt",
+              "sha256": "6bb99bd6d01cda879517e44bcb0068d4802f93acf9c050d5830e47fb203713f3",
+              "retrievedAt": "2026-09-14T22:16:01.141428+00:00",
+              "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred.",
+              "originalResponseSha256": "f5da6ed425cdf7e0cd3cc96ffa7e588d2fbf2ee280b4ed6534022b6454f2e7d3",
+              "captureMethod": "Derived visible text; script/style content omitted; original HTTP response hash retained separately."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "observationId": "obs-retailer-reviewed-prerelease-date",
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "kind": "known-positive",
+      "queryUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+      "queryParameters": {
+        "sourceRecordId": "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
+      },
+      "retrievedAt": "2026-08-25",
+      "expectedIdentifiers": [
+        "SET-SRC-RETAIL-DATE:23ca130aa87a707a",
+        "2025-03-22"
+      ],
+      "validatesEdges": [
+        "retailer-reviewed-prerelease-date-positive"
+      ],
+      "outcome": "Previously retained organizer statement establishes this event date only; no card language, physical finish or general release date inferred.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:abda992c81b5b74624240947f29cadd73cf794ba7e0a6ac3345c06b2a84e908a",
+      "rawRecord": {
+        "sourceRecordId": "SET-SRC-RETAIL-DATE:23ca130aa87a707a",
+        "sourceKind": "release-date-record",
+        "provider": "retailer-listing",
+        "providerRecordKey": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/#2025-03-22",
+        "retrieved": "2026-08-25",
+        "raw": {
+          "localCode": null,
+          "page": "Pokemon TCG - Journey Together PRERELEASE",
+          "field": "event date",
+          "date": "2025-03-22",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "locality": "LATAM",
+          "languageScope": "Spanish",
+          "marketScopes": [
+            "MX"
+          ],
+          "marketScopeBasis": "the venue line identifies Culiacan, Sinaloa, Mexico",
+          "sourceUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+          "note": "The organizer lists a Journey Together prerelease on March 22, 2025 and says entry includes a kit, two boosters and a Series 5 Prize Pack. The page does not enumerate the four possible promos or state the card language."
+        }
       }
     }
   ],
@@ -15694,6 +15991,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "date",
         "identity"
       ]
     },
@@ -16444,6 +16742,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "date",
         "identity"
       ]
     },
@@ -16457,6 +16756,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/th/archives/1596",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "capabilityEdgeIds": [
+        "asia-th-reviewed-product-dates-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -17067,6 +17378,18 @@
       ]
     },
     {
+      "sourceKey": "https://asia.pokemon-card.com/th/card-search?pageNo=4",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-th-reviewed-product-dates",
+      "capabilityEdgeIds": [
+        "asia-th-reviewed-product-dates-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://asia.pokemon-card.com/tw/archive/special/card/m6a",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-30th-celebration",
@@ -17075,6 +17398,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "date",
         "identity"
       ]
     },
@@ -18116,6 +18440,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "date",
         "identity"
       ]
     },
@@ -21465,6 +21790,18 @@
       ]
     },
     {
+      "sourceKey": "https://tcg.pokemon.com/de-de/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://tcg.pokemon.com/de-de/galleries/30th-celebration",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-30th-celebration",
@@ -21474,6 +21811,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://tcg.pokemon.com/en-us/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -21489,6 +21838,18 @@
       ]
     },
     {
+      "sourceKey": "https://tcg.pokemon.com/es-es/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://tcg.pokemon.com/es-es/galleries/30th-celebration",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-30th-celebration",
@@ -21498,6 +21859,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://tcg.pokemon.com/es-mx/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -21513,6 +21886,18 @@
       ]
     },
     {
+      "sourceKey": "https://tcg.pokemon.com/fr-fr/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-30th-celebration",
@@ -21525,6 +21910,18 @@
       ]
     },
     {
+      "sourceKey": "https://tcg.pokemon.com/it-it/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://tcg.pokemon.com/it-it/galleries/30th-celebration",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-30th-celebration",
@@ -21534,6 +21931,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://tcg.pokemon.com/pt-br/expansions/30th-celebration",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-30th-celebration",
+      "capabilityEdgeIds": [
+        "tpci-30th-celebration-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -21815,6 +22224,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "finish",
         "finish-override"
       ]
     },
@@ -21873,6 +22283,18 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "capabilityEdgeIds": [
+        "retailer-reviewed-prerelease-date-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -22355,6 +22777,19 @@
         "finish",
         "identity",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
       ]
     },
     {
@@ -22966,6 +23401,19 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/MRAAAeSwQw5qVjfE/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23729,6 +24177,18 @@
       ]
     },
     {
+      "sourceKey": "https://shopee.co.th/product/431199770/23151999066",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23979,6 +24439,18 @@
     },
     {
       "sourceKey": "https://www.ebay.com/itm/257574042846",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/297969171577",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
