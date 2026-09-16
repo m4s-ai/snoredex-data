@@ -64,6 +64,21 @@ def verify_source_first_specimen_registry():
         for ref in set(specimen.get('citedBy') or []) & known_refs:
             assert indexed.get(specimen['specimenId'], set()) & indexed.get(ref, set()), (specimen['specimenId'], ref)
     urls = {row['canonicalUrl']: row for row in evidence if row['canonicalUrl']}
+    set_sources = json.loads((ROOT / 'verification/set_catalogue_sources.json').read_text(encoding='utf-8'))
+    providers = {row['providerId']: row for row in document['providers']}
+    for source in set_sources['sourceRecords']:
+        if source['sourceKind'] != 'release-date-record':
+            continue
+        url = source.get('sourceUrl') or source.get('raw', {}).get('sourceUrl')
+        if not url and source['provider'] == 'bulbapedia':
+            url = 'https://bulbapedia.bulbagarden.net/wiki/' + source['raw']['page'].replace(' ', '_')
+        row = urls[registry.canonical_url(url)]
+        assert row['providerId'] == source['provider'], source['sourceRecordId']
+        assert 'date' in row['dimensions'], source['sourceRecordId']
+        assert source['sourceRecordId'] in row['stableIds'], source['sourceRecordId']
+        retrieved = source.get('raw', {}).get('retrievedAt') or source.get('retrieved')
+        assert not retrieved or row['retrievedAt'] >= retrieved, source['sourceRecordId']
+        assert 'date' in providers[source['provider']]['usedFor']
     for row in prints.values():
         if row['providerId'] == 'pokemon-card-korea':
             for url in registry.source_first_registry_urls(row):

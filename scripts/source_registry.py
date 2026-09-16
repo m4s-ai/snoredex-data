@@ -643,7 +643,7 @@ def read_json(path: Path) -> Any:
 
 
 def latest_input_date(*documents: Any) -> str:
-    keys = {"checkedAt", "decidedAt", "generated", "lastUpdated", "recordedAt", "retrievedAt"}
+    keys = {"checkedAt", "decidedAt", "generated", "lastUpdated", "recordedAt", "retrievedAt", "retrieved"}
     dates: list[str] = []
     stack = list(documents)
     while stack:
@@ -1088,6 +1088,25 @@ def record_printing_source(source, printing_id, dimensions, record, surfaces):
                printing_id, source.get("retrievedAt"))
 
 
+def record_set_dates(document: dict, record: Callable) -> dict[str, list[str]]:
+    """Index canonical date provenance without inferring other card properties."""
+    dimensions = {}
+    for entry in document["sourceRecords"]:
+        if entry["sourceKind"] != "release-date-record":
+            continue
+        url = entry.get("sourceUrl") or entry.get("raw", {}).get("sourceUrl")
+        if not url and entry["provider"] == "bulbapedia":
+            url = "https://bulbapedia.bulbagarden.net/wiki/" + entry["raw"]["page"].replace(" ", "_")
+        if not url:
+            raise ValueError(f"Release-date source lacks a URL: {entry['sourceRecordId']}")
+        record(url, "Localized set/product release-date record", "date",
+               entry["sourceRecordId"], entry.get("raw", {}).get("retrievedAt") or entry.get("retrieved"),
+               provider_id=entry["provider"])
+
+        dimensions[entry["provider"]] = ["date"]
+    return dimensions
+
+
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     finish_document = read_json(ROOT / "verification" / "finish_units.json")
@@ -1101,6 +1120,7 @@ def main() -> int:
     bulbapedia_dates = read_json(
         ROOT / "verification" / "bulbapedia_release_dates.json"
     )
+    set_dates = read_json(ROOT / "verification" / "set_catalogue_sources.json")
     generated = latest_input_date(
         units,
         finish_document,
@@ -1110,6 +1130,7 @@ def main() -> int:
         artists,
         source_first,
         bulbapedia_dates,
+        set_dates,
     )
     retained_cardmarket_images = retained_cardmarket_product_image_urls(specimens)
 
@@ -1221,6 +1242,7 @@ def main() -> int:
                "Bulbapedia expansion/product release field", "date",
                entry["setCode"], entry.get("retrievedAt") or bulbapedia_dates["generated"])
 
+    date_dimensions = record_set_dates(set_dates, record)
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
         row = {
@@ -1250,6 +1272,7 @@ def main() -> int:
         providers_out.append({
             **{k: v for k, v in provider.items() if k != "hosts"},
             "hosts": provider["hosts"],
+            "usedFor": list(dict.fromkeys(provider["usedFor"] + date_dimensions.get(pid, []))),
             "uniqueSources": urls_by_provider.get(pid, 0) or usage_by_provider.get(pid, 0),
             "claimsSupported": claims_by_provider.get(pid, 0),
         })

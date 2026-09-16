@@ -4773,8 +4773,8 @@
       "label": "Official Thai S5a and S10a product publication dates",
       "match": {
         "urlPrefixes": [
-          "https://asia.pokemon-card.com/th/card-search/?pageNo=4",
-          "https://asia.pokemon-card.com/th/archives/1596/"
+          "https://asia.pokemon-card.com/th/card-search?pageNo=4",
+          "https://asia.pokemon-card.com/th/archives/1596"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -4848,6 +4848,86 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "A Thai product date does not establish a date or finish for another local edition."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "providerId": "retailer-listing",
+      "label": "Retained Mexican Journey Together prerelease event date",
+      "match": {
+        "urlPrefixes": [
+          "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-08-25",
+      "freshnessPolicy": "Retained organizer event statement only; not a general release date or card-language claim.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+        "parameters": [],
+        "pagination": "One retained organizer event.",
+        "expectedIdentifiers": [
+          "event name",
+          "venue",
+          "event date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "retailer-reviewed-prerelease-date-positive",
+          "coverage": {
+            "localities": [
+              "LATAM"
+            ],
+            "languages": [
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2025-03-22",
+              "end": "2025-03-22",
+              "basis": "Retained organizer event date in Culiacan, Mexico; not card-language evidence."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Missing events or listings never establish absence."
+          },
+          "knownPositiveObservationId": "obs-retailer-reviewed-prerelease-date",
+          "boundary": {
+            "outsideScope": [
+              "other events",
+              "general set release date",
+              "card language",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An organizer event date does not establish a general release date or card language."
           }
         }
       ]
@@ -6793,6 +6873,51 @@
         "asia-th-reviewed-product-dates-positive"
       ],
       "outcome": "The retained official Thai pages explicitly give the named product dates; physical finish is outside scope."
+    },
+    {
+      "observationId": "obs-retailer-reviewed-prerelease-date",
+      "surfaceId": "retailer-reviewed-prerelease-date",
+      "kind": "known-positive",
+      "queryUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+      "queryParameters": {
+        "sourceRecordId": "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
+      },
+      "retrievedAt": "2026-08-25",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceRecordId": "SET-SRC-RETAIL-DATE:23ca130aa87a707a",
+          "sourceKind": "release-date-record",
+          "provider": "retailer-listing",
+          "providerRecordKey": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/#2025-03-22",
+          "retrieved": "2026-08-25",
+          "raw": {
+            "localCode": null,
+            "page": "Pokemon TCG - Journey Together PRERELEASE",
+            "field": "event date",
+            "date": "2025-03-22",
+            "datePrecision": "day",
+            "approximate": false,
+            "status": "released",
+            "locality": "LATAM",
+            "languageScope": "Spanish",
+            "marketScopes": [
+              "MX"
+            ],
+            "marketScopeBasis": "the venue line identifies Culiacan, Sinaloa, Mexico",
+            "sourceUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
+            "note": "The organizer lists a Journey Together prerelease on March 22, 2025 and says entry includes a kit, two boosters and a Series 5 Prize Pack. The page does not enumerate the four possible promos or state the card language."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "SET-SRC-RETAIL-DATE:23ca130aa87a707a",
+        "2025-03-22"
+      ],
+      "validatesEdges": [
+        "retailer-reviewed-prerelease-date-positive"
+      ],
+      "outcome": "Previously retained organizer statement establishes this event date only; no card language, physical finish or general release date inferred."
     }
   ]
 }
