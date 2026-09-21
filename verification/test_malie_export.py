@@ -71,6 +71,7 @@ def check_bundle_contract(profile, fixture):
     check_withheld_companions(inputs)
     check_foil_applicability(inputs)
     check_identity_digests(inputs)
+    check_entry_digests(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -249,6 +250,28 @@ def check_withheld_companions(inputs):
             pass
         else:
             raise AssertionError("accepted damaged withheld companion")
+
+
+def check_entry_digests(inputs):
+    altered = copy.deepcopy(inputs)
+    altered[1]["items"][1]["localSetId"] = "LOCALSET:outside"
+    bundle = exporter.build_bundle(*altered)
+    report = json.loads(bundle["report.json"])
+    mutations = [
+        lambda r: r["entries"][0]["fieldSources"]["/name"]["sources"][0].update(
+            providerId="other", url="https://example.invalid/other", authorityTier=5, licenseOrTerms="other"),
+        lambda r: r["entries"][1].update(reasons=[{"status": "outside-profile", "code": "unrelated",
+                                                  "field": "/name", "message": "Unrelated but well-formed."}]),
+    ]
+    for mutate in mutations:
+        broken = copy.deepcopy(report)
+        mutate(broken)
+        try:
+            exporter.validate_bundle({**bundle, "report.json": exporter.canonical_bytes(broken)})
+        except exporter.ExportError as error:
+            assert "entry digest" in str(error)
+        else:
+            raise AssertionError("accepted replaced provenance or reasons")
 
 
 def check_identity_digests(inputs):

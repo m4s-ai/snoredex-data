@@ -214,12 +214,15 @@ localization, local set, edition ID/value/status, technical
 finish, foil pattern, markings with their roles and multiplicity, distribution,
 size and error classification from the reviewed collector join. Missing metadata
 remains explicitly null/unknown. An equal card payload never merges physical IDs.
-The generated profile adds `identitySha256` to each selected target, hashing the
-complete companion identity (including physical sources) from the accepted
-collector/source join. Every bundle validation checks that digest for exported
-and withheld entries, so changing any retained identity dimension is detected.
+The generated profile adds `entrySha256` to each selected target, hashing its
+complete report entry: identity, physical sources, qualified field provenance,
+status/reasons and any card index/hash from the accepted collector/source join.
+Every bundle validation checks that digest for exported and withheld entries,
+so changing retained identity, source attribution or disposition is detected.
 The digest is generated metadata, not a second canonical identity store or an
 authenticity signature; the release handoff binds the full files to their commit.
+The generated profile also carries `payloadSchema`, the executable structural
+contract, so a standalone consumer can validate payloads without internal imports.
 Consumers needing physical identity must consume the report together with cards.
 Unsupported physical properties are retained there and receive a mapping reason;
 they must not be hidden by injecting undocumented fields into the cards payload.
