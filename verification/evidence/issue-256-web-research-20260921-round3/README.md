@@ -1,12 +1,12 @@
 <!-- doc: role=third research round physical evidence for issue 256; stage=reference -->
 # Korean seller photographs — 2026-09-21
 
-Two formerly image-less Korean releases now have inspected physical evidence in draft PR #390. The stable records are SPEC-0528 (s5a 093/070 UR) and SPEC-0529 (s1H 070/060 HR). Each is a distinct physical card; no same-card grouping or independent corroboration is asserted.
+Two formerly image-less Korean releases now have inspected physical evidence in draft PR #390. The stable records are SPEC-0552 (s5a 093/070 UR) and SPEC-0553 (s1H 070/060 HR). Each is a distinct physical card; no same-card grouping or independent corroboration is asserted.
 
 | Specimen | Card | Visible evidence | Listing |
 |---|---|---|---|
-| SPEC-0528 | Korean s5a 093/070 | Hangul, set code/number, UR, Saki Hayashiro, gold reflective textured surface | https://m.bunjang.co.kr/products/430221399 |
-| SPEC-0529 | Korean s1H 070/060 | Hangul, set code/number, HR, aky CG Works, rainbow reflective textured surface | https://m.bunjang.co.kr/products/430796194 |
+| SPEC-0552 | Korean s5a 093/070 | Hangul, set code/number, UR, Saki Hayashiro, gold reflective textured surface | https://m.bunjang.co.kr/products/430221399 |
+| SPEC-0553 | Korean s1H 070/060 | Hangul, set code/number, HR, aky CG Works, rainbow reflective textured surface | https://m.bunjang.co.kr/products/430796194 |
 
 The physical observation records `holo`; no unreviewed gold/rainbow foil-pattern identifier is invented. Printed rarity was already present in the reviewed identity records and is not independently re-adjudicated here. Local Tesseract OCR was unavailable, so card text was read visually from the original 900×1200 photographs. Both image URLs return WebP bytes despite a .jpg suffix. Their original bytes are retained here; losslessly decoded PNG copies are imported through the canonical specimen manifest. Pixel equality was checked during conversion, and both original and filed hashes are retained in sources.json.
 

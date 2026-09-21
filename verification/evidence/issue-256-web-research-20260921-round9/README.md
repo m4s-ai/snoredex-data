@@ -1,7 +1,7 @@
 <!-- doc: role=retained research evidence; stage=reference -->
 # Round nine: Indonesian Chatime photographs and remaining leads
 
-SPEC-0548 and SPEC-0549 retain two original seller photographs of Indonesian Snorlax PROMO E 356/S-P, HP160, Heavy Impact 80, Oswaldo KATO, with the purple Chatime logo. Both are identity-only observations; no additional physical card count or independent corroboration is inferred. Original WebP hashes and dimensions are in sources.json. PNG intake preserves decoded RGB pixels exactly. Local OCR was unavailable; printed facts were inspected visually.
+SPEC-0548 and SPEC-0549 retain two original seller photographs of Indonesian Snorlax PROMO E 356/S-P, HP160, Heavy Impact 80, Oswaldo KATO, with the purple Chatime logo. Both are identity-only observations; SPEC-0549 explicitly links to SPEC-0548 as another view of the same sleeved card, matching sleeve creases and Pikachu marker. No independent corroboration is inferred. Original WebP hashes and dimensions are in sources.json. PNG intake preserves decoded RGB pixels exactly. Local OCR was unavailable; printed facts were inspected visually.
 
 The eBay listing https://www.ebay.com/itm/196895868442 calls the finish Holo; https://pokumon.com/card/snorlax-356-s-p-indonesian-promo/ labels Non-holo and Event Stamp. These conflicting descriptions are research leads, not a canonical finish contradiction. Transparent sleeve reflections and lighting prevent a confident photographed finish determination. The official matching identity is https://asia.pokemon-card.com/id/card-search/detail/6671/ .
 

@@ -1017,6 +1017,25 @@ def main() -> None:
     assert project_physical_evidence(deepcopy(dated))["meta"]["generated"] == "2030-01-02"
     dated["meta"]["generated"] = "2030-01-03"
     assert project_physical_evidence(dated)["meta"]["generated"] == "2030-01-03"
+    # A later identity-only photo updates the shared snapshot even without a finish.
+    with tempfile.TemporaryDirectory() as directory:
+        specimens_path = Path(directory) / "specimens.json"
+        specimens = json.loads(graph_module.SPECIMENS.read_text(encoding="utf-8"))
+        identity_only = next(row for row in specimens["specimens"]
+                             if row["specimenId"] == "SPEC-0551")
+        assert not identity_only.get("physicalObservation")
+        identity_only["recordedAt"] = "2031-02-03"
+        specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+        original_specimens_path = graph_module.SPECIMENS
+        graph_module.SPECIMENS = specimens_path
+        try:
+            dated_identity = project_physical_evidence(deepcopy(graph))
+            assert dated_identity["meta"]["generated"] == "2031-02-03"
+            assert project_physical_evidence(deepcopy(dated_identity)) == dated_identity
+            dated_identity["meta"]["generated"] = "2031-02-04"
+            assert project_physical_evidence(dated_identity)["meta"]["generated"] == "2031-02-04"
+        finally:
+            graph_module.SPECIMENS = original_specimens_path
     # The reviewed base is retained input, not reconstructible physical output (#357).
     retained = deepcopy(graph)
     work = next(row for row in retained["entities"] if row["entityType"] == "work")

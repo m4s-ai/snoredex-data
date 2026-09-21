@@ -29,4 +29,4 @@ The pre-change full regeneration check passed. Run the full regeneration gate af
 
 Final local validation passed: full `python scripts/regen.py`, including determinism and core regressions; browser suite 155/155. Fourteen items across nine releases changed only the three date fields. All six retained excerpt hashes match. Korean gap-free releases rise from 5/52 to 11/52 within the draft; overall remaining tracked-gap releases fall from 159 to 153. Together with round one, this draft addresses nineteen date gaps on 28 items. Main remains unchanged until merge.
 
-Follow-up: the [round-three intake](../issue-256-web-research-20260921-round3/README.md) successfully retained and inspected the s5a 093/070 listing photo as SPEC-0528 and a separate s1H 070/060 listing as SPEC-0529. The earlier inaccessible-photo status above is historical.
+Follow-up: the [round-three intake](../issue-256-web-research-20260921-round3/README.md) successfully retained and inspected the s5a 093/070 listing photo as SPEC-0552 and a separate s1H 070/060 listing as SPEC-0553. The earlier inaccessible-photo status above is historical.

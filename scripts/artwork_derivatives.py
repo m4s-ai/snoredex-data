@@ -22,6 +22,7 @@ from typing import Iterable
 ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_WIDTH = 360
 THUMBNAIL_WIDTH = 120
+PNG_ENCODER_VERSION = 2
 MANIFEST = ROOT / "verification" / "artwork_derivative_manifest.json"
 _MANIFEST_CACHE: dict[str, object] | None = None
 
@@ -748,15 +749,16 @@ def resize(width: int, height: int, pixels: list[tuple[int, int, int]], max_widt
 
 
 def encode_png(width: int, height: int, pixels: Iterable[tuple[int, int, int]]) -> bytes:
-    # A deterministic RGB332 palette keeps photographic previews compact without a dependency.
-    palette = [(r, g, b) for r in range(0, 256, 51) for g in range(0, 256, 43) for b in range(0, 256, 85)]
+    # Equal RGB axes preserve neutral greys. The old unequal palette capped green
+    # at 215 and introduced a magenta cast, including on white card backgrounds.
+    palette = [(r, g, b) for r in range(0, 256, 51) for g in range(0, 256, 51) for b in range(0, 256, 51)]
     palette_bytes = b"".join(bytes(item) for item in palette)
     indexed = bytearray()
     for red, green, blue in pixels:
-        red_index = min(5, red * 6 // 256)
-        green_index = min(5, green * 6 // 256)
-        blue_index = min(3, blue * 4 // 256)
-        indexed.append((red_index * 24) + (green_index * 4) + blue_index)
+        red_index = (red + 25) // 51
+        green_index = (green + 25) // 51
+        blue_index = (blue + 25) // 51
+        indexed.append((red_index * 36) + (green_index * 6) + blue_index)
     rows = b"".join(b"\x00" + bytes(indexed[row * width:(row + 1) * width]) for row in range(height))
     header = struct.pack(">IIBBBBB", width, height, 8, 3, 0, 0, 0)
     return b"\x89PNG\r\n\x1a\n" + _chunk(b"IHDR", header) + _chunk(b"PLTE", palette_bytes) + _chunk(b"IDAT", zlib.compress(rows, 9)) + _chunk(b"IEND", b"")
@@ -804,6 +806,8 @@ def _valid_record(record: object, source_hash: str) -> Path | None:
     if not isinstance(path_value, str) or not isinstance(expected, str):
         return None
     path = ROOT / path_value
+    if path.suffix == ".png" and record.get("encoderVersion") != PNG_ENCODER_VERSION:
+        return None
     if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
         return None
     return path
@@ -822,7 +826,8 @@ def _legacy_derivatives(source: Path) -> dict[str, Path]:
     result = {}
     for kind in ("preview", "thumbnail"):
         root = ROOT / "images" / ("previews" if kind == "preview" else "thumbs")
-        for suffix in (".jpg", ".png"):
+        # Unversioned PNGs may contain the old palette defect and must be rebuilt.
+        for suffix in (".jpg",):
             path = root / f"{source.stem}{suffix}"
             if path.is_file():
                 result[kind] = path
@@ -848,10 +853,11 @@ def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
     return _legacy_derivatives(source)
 
 
-def _record(source: Path, source_hash: str, kind: str, path: Path) -> dict[str, str]:
+def _record(source: Path, source_hash: str, kind: str, path: Path) -> dict[str, object]:
     return {"sourceHash": source_hash,
             "path": path.resolve().relative_to(ROOT.resolve()).as_posix(),
-            "sha256": hashlib.sha256(path.read_bytes()).hexdigest()}
+            "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+            **({"encoderVersion": PNG_ENCODER_VERSION} if path.suffix == ".png" else {})}
 
 
 def _write_manifest(manifest: dict[str, object]) -> None:

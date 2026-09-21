@@ -49,11 +49,13 @@ FOIL_PATTERN_ALIASES = {
 }
 
 
-def snapshot_date(graph: dict[str, Any], finish_document: dict[str, Any]) -> str:
+def snapshot_date(graph: dict[str, Any], finish_document: dict[str, Any],
+                  specimen_document: dict[str, Any]) -> str:
     """Keep physical refreshes from backdating newer reviewed source evidence."""
     return max(
         graph["meta"].get("generated") or "",
         finish_document.get("meta", {}).get("generated") or "",
+        *(row.get("recordedAt") or "" for row in specimen_document.get("specimens", [])),
         *(row["payload"].get("retrieved") or ""
           for row in graph["entities"] if row["entityType"] == "set-source-record"),
     )
@@ -518,7 +520,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         ),
         "localizations": entity_counts["localization"],
     }
-    graph["meta"]["generated"] = snapshot_date(graph, finish_document)
+    graph["meta"]["generated"] = snapshot_date(graph, finish_document, specimen_document)
     return graph
 
 

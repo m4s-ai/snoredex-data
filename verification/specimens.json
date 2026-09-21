@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 551,
+  "count": 553,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10847,47 +10847,37 @@
     },
     {
       "specimenId": "SPEC-0528",
-      "setCode": "s5a",
-      "number": "093/070",
+      "setCode": "MEW",
+      "number": "143/165",
       "variant": "base",
-      "language": "Korean",
-      "heldBy": "third-party seller",
-      "inspectedFrom": "retained original seller listing photograph; manual visual inspection",
+      "language": "English",
+      "heldBy": "TCGdex digital card image",
+      "inspectedFrom": "Retained TCGdex front image; local Windows OCR (de-DE model), then manual visual verification",
       "photograph": "SPEC-0528.png",
-      "photographSource": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
-      "photographSha256": "sha256:a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00",
-      "observed": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+      "photographSource": "https://assets.tcgdex.net/en/sv/sv03.5/143/high.png",
+      "photographSha256": "sha256:7071ea33566e0096318926d858f72226b0313abe628c41d944448d0cf1513d44",
+      "observed": "Localized English MEW 143/165 front, regulation G, HYOGONOSUKE credit, HP 150 and printed rules text. OCR used as a transcription aid; small print and symbols visually checked. Identity/content only: the digital front does not establish physical finish, size, back or ownership.",
       "recordedAt": "2026-09-21",
       "citedBy": [
-        "KR:s5a:093/070:base"
-      ],
-      "physicalObservation": {
-        "finish": "holo",
-        "basis": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration."
-      },
-      "listingUrl": "https://m.bunjang.co.kr/products/430221399"
+        "U0012"
+      ]
     },
     {
       "specimenId": "SPEC-0529",
-      "setCode": "s1H",
-      "number": "070/060",
+      "setCode": "MEW",
+      "number": "143/165",
       "variant": "base",
-      "language": "Korean",
-      "heldBy": "third-party seller",
-      "inspectedFrom": "retained original seller listing photograph; manual visual inspection",
+      "language": "German",
+      "heldBy": "TCGdex digital card image",
+      "inspectedFrom": "Retained TCGdex front image; local Windows OCR (de-DE model), then manual visual verification",
       "photograph": "SPEC-0529.png",
-      "photographSource": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
-      "photographSha256": "sha256:e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254",
-      "observed": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+      "photographSource": "https://assets.tcgdex.net/de/sv/sv03.5/143/high.png",
+      "photographSha256": "sha256:0c4f5d8539c650dbea1f898d3face81203160be068b02b874e58494ae61cf6d5",
+      "observed": "Localized German MEW 143/165 front, regulation G, HYOGONOSUKE credit, HP 150 and printed rules text. OCR used as a transcription aid; small print and symbols visually checked. Identity/content only: the digital front does not establish physical finish, size, back or ownership.",
       "recordedAt": "2026-09-21",
       "citedBy": [
-        "KR:s1H:070/060:base"
-      ],
-      "physicalObservation": {
-        "finish": "holo",
-        "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card."
-      },
-      "listingUrl": "https://m.bunjang.co.kr/products/430796194"
+        "U0014"
+      ]
     },
     {
       "specimenId": "SPEC-0530",
@@ -11297,6 +11287,10 @@
       "citedBy": [
         "ID:S-P:356:base"
       ],
+      "sameCardAs": {
+        "specimenId": "SPEC-0548",
+        "basis": "Two seller views show the same sleeved card, matching sleeve creases and the same Pikachu marker immediately below on the same textured surface."
+      },
       "listingUrl": "https://www.ebay.com/itm/196895868442"
     },
     {
@@ -11339,6 +11333,50 @@
         "TW:AS5a:203/184:base"
       ],
       "listingUrl": "https://shopee.tw/product/7259140/40052091182"
+    },
+    {
+      "specimenId": "SPEC-0552",
+      "setCode": "s5a",
+      "number": "093/070",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "retained original seller listing photograph; manual visual inspection",
+      "photograph": "SPEC-0552.png",
+      "photographSource": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+      "photographSha256": "sha256:a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00",
+      "observed": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+      "recordedAt": "2026-09-21",
+      "citedBy": [
+        "KR:s5a:093/070:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration."
+      },
+      "listingUrl": "https://m.bunjang.co.kr/products/430221399"
+    },
+    {
+      "specimenId": "SPEC-0553",
+      "setCode": "s1H",
+      "number": "070/060",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "retained original seller listing photograph; manual visual inspection",
+      "photograph": "SPEC-0553.png",
+      "photographSource": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+      "photographSha256": "sha256:e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254",
+      "observed": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+      "recordedAt": "2026-09-21",
+      "citedBy": [
+        "KR:s1H:070/060:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card."
+      },
+      "listingUrl": "https://m.bunjang.co.kr/products/430796194"
     }
   ]
 }

@@ -136,6 +136,21 @@ PROVIDERS: list[dict[str, Any]] = [
         "notes": "Upstream documents its variant coverage as incomplete, so a false flag is never absence.",
     },
     {
+        "providerId": "malie",
+        "displayName": "Malie TCGL reference",
+        "organization": "malie.io",
+        "homepage": "https://malie.io",
+        "hosts": ["malie.io"],
+        "licenseOrTerms": "Public TCGL-derived reference data; no separate licence grant inferred. See https://malie.io.",
+        "category": "open-database",
+        "authorityTier": 2,
+        "coverage": "explicit fields on retained localized TCGL reference records",
+        "supportsAbsence": False,
+        "usedFor": ["card-content", "size", "back", "foil"],
+        "attribution": "Reference records from malie.io; Pokémon card content belongs to its respective rights holders.",
+        "notes": "Third-party extraction, not an official physical-print manifest. Missing fields and records remain unknown.",
+    },
+    {
         "providerId": "bulbapedia",
         "displayName": "Bulbapedia",
         "organization": "Bulbagarden",
@@ -1110,6 +1125,24 @@ def record_set_dates(document: dict, record: Callable) -> dict[str, list[str]]:
     return dimensions
 
 
+def record_card_content(content: dict, record: Callable) -> dict[str, list[str]]:
+    """Index field-scoped assertions without granting a language/finish verdict."""
+    sources = {source["sourceId"]: source for source in content["sources"]}
+    dimensions: dict[str, set[str]] = defaultdict(set)
+    for observation in content["observations"]:
+        if observation["state"] not in {"known", "not-applicable"}:
+            continue
+        dimension = {"/size": "size", "/back": "back", "/foil": "foil"}.get(
+            observation["field"], "card-content"
+        )
+        for source_id in observation["sourceIds"]:
+            source = sources[source_id]
+            record(source["url"], "Reviewed printed-card content observation", dimension,
+                   observation["observationId"], source["retrievedAt"], source["providerId"])
+            dimensions[source["providerId"]].add(dimension)
+    return {provider: sorted(values) for provider, values in dimensions.items()}
+
+
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     finish_document = read_json(ROOT / "verification" / "finish_units.json")
@@ -1124,6 +1157,7 @@ def main() -> int:
         ROOT / "verification" / "bulbapedia_release_dates.json"
     )
     set_dates = read_json(ROOT / "verification" / "set_catalogue_sources.json")
+    content = read_json(ROOT / "verification" / "card_content_observations.json")
     generated = latest_input_date(
         units,
         finish_document,
@@ -1134,6 +1168,7 @@ def main() -> int:
         source_first,
         bulbapedia_dates,
         set_dates,
+        content,
     )
     retained_cardmarket_images = retained_cardmarket_product_image_urls(specimens)
 
@@ -1245,6 +1280,7 @@ def main() -> int:
                "Bulbapedia expansion/product release field", "date",
                entry["setCode"], entry.get("retrievedAt") or bulbapedia_dates["generated"])
 
+    content_dimensions = record_card_content(content, record)
     date_dimensions = record_set_dates(set_dates, record)
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
@@ -1275,7 +1311,8 @@ def main() -> int:
         providers_out.append({
             **{k: v for k, v in provider.items() if k != "hosts"},
             "hosts": provider["hosts"],
-            "usedFor": list(dict.fromkeys(provider["usedFor"] + date_dimensions.get(pid, []))),
+            "usedFor": list(dict.fromkeys(provider["usedFor"] + date_dimensions.get(pid, [])
+                                          + content_dimensions.get(pid, []))),
             "uniqueSources": urls_by_provider.get(pid, 0) or usage_by_provider.get(pid, 0),
             "claimsSupported": claims_by_provider.get(pid, 0),
         })
