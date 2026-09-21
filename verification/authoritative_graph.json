@@ -35278,6 +35278,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0550",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0550",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0550",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0550",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0550",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0550"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -101969,6 +101986,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0547",
         "specimenIds": [
           "SPEC-0547"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0550",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0550",
+        "cardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180 readable. Colored vertical foil reflections cross the illustration and silver border.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0550",
+        "specimenIds": [
+          "SPEC-0550"
         ]
       }
     },
@@ -184559,6 +184600,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0550",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0550",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -234789,6 +234840,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0550",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0550",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0550",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
     },
     {
@@ -295841,17 +295908,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0547",
       "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0550",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0550",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore"
     }
   ],
   "summary": {
-    "entities": 8174,
-    "edges": 12159,
-    "migrationInputs": 2857,
+    "entities": 8176,
+    "edges": 12162,
+    "migrationInputs": 2858,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 293,
       "carried": 68,
-      "established-and-mapped": 1582,
+      "established-and-mapped": 1583,
       "linked-local-counterpart": 125,
       "mapped": 345,
       "needs-evidence": 126,
@@ -295859,9 +295933,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2041,
+    "candidateClaims": 2042,
     "cardReleases": 641,
-    "physicalPrintings": 769,
+    "physicalPrintings": 770,
     "setSourceRecords": 474,
     "setSourceDispositions": 474,
     "localizations": 16

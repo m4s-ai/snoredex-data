@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:0f558a04bb9f6c3f4c75793b428a26cca97f3f9d58f627c0aa184fc0278ab553",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:7f02538fae900ac7d99f8537516e71de9327bcd2b2eb234dc3801c5d1ef44590",
+    "toFingerprint": "sha256:e1b7141e9160d6e7c8a35c025cc7da230c4b580d2b3d1dcabd0791264548ac5c",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:7f02538fae900ac7d99f8537516e71de9327bcd2b2eb234dc3801c5d1ef44590",
+      "toFingerprint": "sha256:e1b7141e9160d6e7c8a35c025cc7da230c4b580d2b3d1dcabd0791264548ac5c",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12426,7 +12426,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:7f02538fae900ac7d99f8537516e71de9327bcd2b2eb234dc3801c5d1ef44590",
+      "toFingerprint": "sha256:e1b7141e9160d6e7c8a35c025cc7da230c4b580d2b3d1dcabd0791264548ac5c",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30278,6 +30278,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-15916c75-78a2-5d15-a1fa-43de41a67a3f",
+      "toItemIds": [
+        "item-fa26a76c-a9d5-54db-94c6-3fb6baa40bbb"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-b9c67249-0538-544f-a3be-857a34859126",
       "toItemIds": [
         "item-be6d506c-3295-55e0-b3c8-9919c89f11e0"
@@ -38518,7 +38527,7 @@
         "cardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
         "disposition": "projected",
         "targetItemIds": [
-          "item-15916c75-78a2-5d15-a1fa-43de41a67a3f"
+          "item-fa26a76c-a9d5-54db-94c6-3fb6baa40bbb"
         ],
         "reason": null
       },
@@ -47392,12 +47401,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0547",
         "disposition": "projected",
         "targetItemId": "item-ed5a44f9-c630-5e1c-b797-0eb7945c24eb"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0550",
+        "disposition": "projected",
+        "targetItemId": "item-fa26a76c-a9d5-54db-94c6-3fb6baa40bbb"
       }
     ],
     "summary": {
       "legacyChecklistRows": 899,
       "cardReleases": 641,
-      "physicalPrintings": 769,
+      "physicalPrintings": 770,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
