@@ -193,6 +193,18 @@ Every consumer must retain stable semantic identity. In particular, collector an
 rows must not use array positions as identity and must not infer a physical printing from
 a language claim or a marketplace candidate.
 
+The bounded [Malie export](verification/MALIE-EXPORT.md) consumes the reviewed collector
+join, the versioned profile and field observations. Its three generated files under
+`exports/malie/` are an additional consumer view; they do not write evidence, graph or
+collection state back. The report preserves all selected IDs, unresolved reasons and
+physical dimensions, and binds the cards/profile/input bytes by digest. `regen.py`
+places the exporter after its collector/source dependencies and owns its write/check/test
+commands. The real-pilot test checks exact localized values, full accounting, corrupt
+bundles and unchanged input/output metadata across repeated observational checks. The
+same L3 path runs on Linux and Windows. The [package guide](exports/malie/README.md)
+documents the standalone consumer; its isolated regression reads only the three bundle
+files. Publication remains a separate gate through the existing allowlisted publisher.
+
 The artwork review is a deliberately bounded consumer of the graph. `scripts/artwork_review.py`
 writes both the canonical JSON projection and an equivalent generated JavaScript fallback. The
 site embeds only a 924-byte metadata envelope; HTTP pages fetch the JSON on demand and offline
@@ -295,7 +307,8 @@ The following operational scripts are intentionally outside the normal offline D
   on terminal state, unchanged progress, failed lane, or the cycle cap; it never promotes a
   missing result to an absence verdict.
 - `verification/gate_manifest.py` is a runtime-only handoff contract. It binds a successful L3/L4
-  gate to the full commit/tree and collector catalogue fingerprints; `pages.yml` verifies all
+  gate to the full commit/tree, collector catalogue fingerprints and exact Malie bundle digests;
+  schema 1.1.0 rejects export bytes absent from the containing commit. `pages.yml` verifies all
   OS manifests before deploying the uploaded artifact. It is intentionally not a canonical store
   and never enters `regen.py`'s generated output.
 
@@ -323,6 +336,7 @@ existing scripts and manifests.
 
 | Task / intent | Registered workflow / lane | Skill | Canonical entry | Graph impact | Required boundary |
 |---|---|---|---|---|---|
+| Generate or check the bounded Malie export | `workflow:malie-export` | [issue delivery](.agents/skills/snoredex-issue-delivery/SKILL.md) | [Exporter](scripts/malie_export.py), [profile and field contract](verification/MALIE-EXPORT.md); accepted inputs only | Read release/printing/localization identity; no graph mutation | Explicit write versus observational check; complete dispositions, source binding and independent real-pilot acceptance |
 | Verify a known card claim / bekannten Claim belegen | `workflow:known-card-confirmation` / `lane:correction` | [claim evidence](.agents/skills/snoredex-claim-evidence/SKILL.md) | [Evidence playbook](verification/RESUME.md), observation + reviewed unit update; [application semantics](scripts/evidence_semantics.py) | Existing claim/release edge; possibly source/provenance | Evidence application and source identity; no discovery refresh |
 | Refresh sources, find new cards, digging / Quellen aktualisieren, neue Karten suchen | `workflow:source-first-card-discovery` / `lane:source-discovery` | [source refresh](.agents/skills/snoredex-source-refresh/SKILL.md) | [Discovery cycle](scripts/discovery_cycle.py), [card discovery](scripts/card_discovery.py), [adapter inventory](verification/card_discovery_adapters.json); retained run, then reconciliation | New candidate/release/source edges; locality and mapping edges | Offline validation and authorized live refresh are distinct; candidate cannot mutate a verdict |
 | Investigate a new set or promo announcement (including Pokémon.com news) | `workflow:set-or-promo-announcement` / `lane:source-discovery` | [source refresh](.agents/skills/snoredex-source-refresh/SKILL.md) | Official lead, then concrete set/card source via [source adapters](scripts/source_adapters.py) and [recurrence contract](verification/RECURRENCE.md) | Set/release/card edges only when positively identified | News alone is a lead; no inferred card list or finish |

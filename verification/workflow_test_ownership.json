@@ -11,6 +11,8 @@
     "publish": "Allowlisted artifact and deployment-manifest integrity after the release gate."
   },
   "fixtureRegistry": [
+    {"id": "malie-contract", "path": "verification/fixtures/malie_contract.json", "owner": "malie-profile", "deterministic": true, "consumers": ["malie-profile", "malie-export"]},
+    {"id": "malie-pilot-bundle", "path": "exports/malie/{cards,report,profile}.json", "owner": "malie-export", "deterministic": true, "consumers": ["malie-integration", "malie-package"]},
     {
       "id": "canonical-stores",
       "path": "verification/{units,evidence,finish_units,owner_adjudications}.json*",
@@ -77,6 +79,10 @@
   ],
   "tests": [
     {"id": "card-content", "command": ["verification/test_card_content.py"], "primaryOwner": "card-content", "boundary": "import", "gateLevel": "L0", "fixtures": []},
+    {"id": "malie-profile", "command": ["verification/test_malie_profile.py"], "primaryOwner": "malie-profile", "boundary": "import", "gateLevel": "L0", "fixtures": ["malie-contract"]},
+    {"id": "malie-export", "command": ["verification/test_malie_export.py"], "primaryOwner": "malie-export", "boundary": "projection", "gateLevel": "L2", "fixtures": ["malie-contract"]},
+    {"id": "malie-integration", "command": ["verification/test_malie_integration.py"], "primaryOwner": "malie-integration", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": ["malie-pilot-bundle"]},
+    {"id": "malie-package", "command": ["verification/test_malie_package.py"], "primaryOwner": "malie-package", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": ["malie-pilot-bundle"]},
     {"id": "complexity-guard", "command": ["verification/test_complexity.py"], "primaryOwner": "complexity-guard", "boundary": "import", "gateLevel": "L0", "fixtures": ["complexity-fixture"]},
     {"id": "review-integrity", "command": ["verification/review_integrity.py"], "primaryOwner": "store-invariants", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
     {"id": "evidence-application", "command": ["verification/test_evidence_application.py"], "primaryOwner": "evidence-application", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},

@@ -1,9 +1,11 @@
 <!-- doc: role=Malie export profile and implementation contract; stage=task -->
 # Malie export contract
 
-Implementation contract for #385, under #384. Profile identifier:
-`snoredex-malie-sv-pilot/1`. This document does not claim that the exporter,
-field evidence or release package has already been delivered.
+Implementation contract for #385–#389, under #384. Profile identifier:
+`snoredex-malie-sv-pilot/1`. The offline exporter and real field evidence are
+integrated. The [release package and independent reader](../exports/malie/README.md)
+use the existing publisher and runtime gate handoff. Release readiness does not
+claim a live deployment or external Malie compatibility.
 
 ## Boundary and upstream pin
 
@@ -30,7 +32,11 @@ Selection is not export approval: #386 must supply the field-level evidence.
 Never remove a blocked mandatory target silently. A substitution requires a versioned
 selection change recording the old ID, replacement ID and evidence-based reason.
 
-### Current enrichment worklist
+### Initial enrichment worklist
+
+This section records the pre-enrichment selection baseline. The accepted #386
+inputs and remaining cases are documented in the retained
+[pilot evidence record](evidence/issue-386-malie-pilot/README.md).
 
 At selection base `899688cd40071095e502513c19e0430891b20da8`, the two mandatory
 MEW printings have confirmed non-holo identity and standard size in the collector
@@ -99,6 +105,9 @@ No observable fact is admitted merely because an observation has the right shape
 `C` below means a reviewed content observation, `P` an existing physical owner plus
 any required exact-print observation, and `G` the existing graph/localization owner.
 Every emitted leaf retains its observation/source references in the companion.
+Known companion observations also retain their field values. Exported values must
+agree with every accepted observation after the documented tag normalization;
+source references and leaf coverage alone do not establish value agreement.
 Unless stated otherwise, unknown or blocked applicable data withholds the whole card.
 The permitted enumerations are in the profile's `vocabulary`. Rarity designation
 and icon arrays correspond by index and must be validated as pairs, not independently.
@@ -202,10 +211,32 @@ including trailing LF). Neither is an identity. Whole-file digest validation is
 mandatory before using positions. A consumer validates the selected input ID set,
 unique entry IDs, exported positions, per-card hashes and count conservation.
 
-`identity` preserves localization, local set, edition ID/value/status, technical
+`identity` repeats the selected item/release/physical-printing IDs and validates
+that binding for every disposition, including withheld entries. It preserves
+localization, local set, edition ID/value/status, technical
 finish, foil pattern, markings with their roles and multiplicity, distribution,
 size and error classification from the reviewed collector join. Missing metadata
 remains explicitly null/unknown. An equal card payload never merges physical IDs.
+The generated profile adds `entrySha256` to each selected target, hashing its
+complete report entry: identity, physical sources, qualified field provenance,
+status/reasons and any card index/hash from the accepted collector/source join.
+Every bundle validation checks that digest for exported and withheld entries,
+so changing retained identity, source attribution or disposition is detected.
+The digest is generated metadata, not a second canonical identity store or an
+authenticity signature; the release handoff binds the full files to their commit.
+The generated profile also carries `payloadSchema`, the executable structural
+contract, so a standalone consumer can validate payloads without internal imports.
+Bundle validation compares that published schema with the generated profile contract.
+The generated profile records the complete sorted `inputPaths` (canonical inputs
+and every retained content-source file) and `inputsSha256`, binding the report's
+entire input digest map. Validation rejects missing inputs and source digests that
+disagree with the qualified field references, including on withheld entries.
+Input dependencies include every retained source validated by the content loader,
+even when no selected observation uses it. Field provenance is consequently a
+subset of the dependency set, not its definition. The producer rejects additional
+paths absent from the canonical-input/content-source set. Offline bundle hashes
+prove internal consistency, not authenticity after a party rewrites every binding;
+the commit-bound release manifest supplies the external package identity.
 Consumers needing physical identity must consume the report together with cards.
 Unsupported physical properties are retained there and receive a mapping reason;
 they must not be hidden by injecting undocumented fields into the cards payload.
@@ -226,11 +257,36 @@ catalogue coverage must not be confused with the finite pilot denominator.
 
 ## Implementation and verification handoff
 
-The planned `malie_export.py` command in `scripts/`, with `--write`, will create validated outputs, with the report
+The `malie_export.py` command in `scripts/`, with `--write`, creates validated outputs, with the report
 written last as the bundle's digest binding. Temporary-file replacement protects
 individual files; a partial multi-file replacement is rejected by digest checks.
 `--check` is strictly observational even if an output is missing or corrupt.
 No network, repair, timestamps or canonical-store writes are allowed in that mode.
+
+Run `python scripts/malie_export.py --write` after accepting the #386 field inputs;
+then run `python scripts/malie_export.py --check`. Both commands fail if those
+inputs are unavailable. There is no invented substitute for real observations.
+`python verification/test_malie_export.py`
+checks the implementation against independently specified synthetic expectations.
+
+The finite profile declares supported local-set IDs, printed language suffixes
+and the mappings to existing rarity-owner IDs. The exporter checks observed set
+markers, numbering, locale, name when known, size, rarity and finish against the
+collector owners. An absent mapping is a reason to withhold a card, never permission
+to invent an identity. Additional physical dimensions stay in the companion entry.
+Known numbering components cannot be omitted. Unknown physical size needs evidence;
+positive non-standard size is outside the profile. Distribution, markings, edition
+and error distinctions remain visible but block export until a mapping is reviewed.
+The single reviewed foil-pattern agreement covers the retained English MEW reverse
+record: `intricate-tiled-type-symbol` with explicitly observed `FLAT_SILVER`/`REVERSE`.
+This is an agreement check, never a rule to manufacture missing foil observations.
+
+Determinism means identical accepted input bytes produce identical bundle bytes.
+Reordering in-memory traversal produces the same cards, entries and provenance.
+Reformatting or reordering a retained input file changes its exact raw-file digest
+in `report.inputs`, even when the resulting card values are unchanged: preserving
+that evidence binding takes precedence over pretending different source bytes
+are identical. No runtime timestamp participates in either case.
 
 #387 supplies independent expected fixtures and tests for required/nested enums,
 zero versus null, localized names, prefixed and zero-padded numbers, duplicate
@@ -244,13 +300,21 @@ from the repository root to validate the selection against the current catalogue
 This contract check does not validate exported payloads or replace the later gates.
 
 #388 registers the exporter/check/tests in the existing `regen.py` lists and test
-ownership/gate contracts. Full Linux and Windows gates must use identical input
+ownership/gate contracts. The committed pilot has three exported printings in two
+languages, two deferred SVP entries and one outside-profile Jungle research entry.
+`test_malie_integration.py` independently checks the real expected IDs, values and
+dispositions, corrupt bundles, and preserved canonical/output bytes and metadata.
+Full Linux and Windows gates must use identical input
 bytes. The pure export must leave all existing identities, verdicts and collector
 state unchanged relative to the same accepted inputs.
 
-#389 extends the existing package allowlist/verification and adds a standalone
-stdlib consumer that reads only the three package files. It checks independently
-specified expected IDs and values; importing exporter internals is not acceptance.
+#389 extends the existing package allowlist/verification. The standalone
+`scripts/malie_consumer.py` reads only the three package files;
+`verification/test_malie_package.py` copies it into an isolated directory and
+checks independently specified expected IDs and values. The copied consumer imports
+no exporter or repository helper. The publisher additionally validates the staged bundle and
+compares it with the checked source artifacts. Runtime gate manifests bind all
+three digests to the containing commit after it exists, outside regeneration.
 The two real-language outputs, all dispositions, exact revision and package digests
 must be recorded before completion. External Malie interoperability remains
 unverified until actually exercised. Release readiness does not authorize deployment.
