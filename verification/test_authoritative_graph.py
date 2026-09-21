@@ -1003,6 +1003,15 @@ def main() -> None:
         for row in graph["edges"]
     )
     assert project_physical_evidence(deepcopy(graph)) == graph
+    # A newer publisher observation survives physical refresh and reaches export metadata.
+    dated = deepcopy(graph)
+    source = next(row for row in dated["entities"] if row["entityType"] == "set-source-record")
+    source["payload"]["retrieved"] = "2030-01-02"
+    dated = project_physical_evidence(dated)
+    assert dated["meta"]["generated"] == "2030-01-02"
+    assert project_physical_evidence(deepcopy(dated))["meta"]["generated"] == "2030-01-02"
+    dated["meta"]["generated"] = "2030-01-03"
+    assert project_physical_evidence(dated)["meta"]["generated"] == "2030-01-03"
     # The reviewed base is retained input, not reconstructible physical output (#357).
     retained = deepcopy(graph)
     work = next(row for row in retained["entities"] if row["entityType"] == "work")
