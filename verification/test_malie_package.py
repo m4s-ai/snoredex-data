@@ -83,10 +83,7 @@ def corruptions(script, bundle, original):
             card.pop(field)
         else:
             card[field] = value
-        for entry in docs["report.json"]["entries"]:
-            if entry.get("cardIndex") == 1:
-                entry["cardSha256"] = hashlib.sha256(canonical(card)).hexdigest()
-        docs["report.json"]["cardsSha256"] = hashlib.sha256(canonical(docs["cards.json"])).hexdigest()
+        refresh_bindings(docs)
         for name, value in docs.items():
             (bundle / name).write_bytes(canonical(value))
         assert run_reader(script, bundle).returncode != 0
@@ -95,6 +92,51 @@ def corruptions(script, bundle, original):
     (bundle / "profile.json").unlink()
     assert run_reader(script, bundle).returncode != 0
     assert publish.malie_problems(bundle.parent.parent)
+
+
+def refresh_bindings(docs):
+    report, profile = docs["report.json"], docs["profile.json"]
+    targets = {target["itemId"]: target for target in profile["pilot"]}
+    for entry in report["entries"]:
+        if "cardIndex" in entry:
+            entry["cardSha256"] = hashlib.sha256(canonical(docs["cards.json"][entry["cardIndex"]])).hexdigest()
+        targets[entry["itemId"]]["entrySha256"] = hashlib.sha256(canonical(entry)).hexdigest()
+    report["cardsSha256"] = hashlib.sha256(canonical(docs["cards.json"])).hexdigest()
+    report["profileSha256"] = hashlib.sha256(canonical(profile)).hexdigest()
+
+
+def semantic_corruptions(script, bundle, original):
+    """A coherently rehashed package must still satisfy payload/evidence rules."""
+    mutations = [
+        lambda d: d["cards.json"][0].pop("name"),
+        lambda d: d["cards.json"][0].pop("stage_text"),
+        lambda d: d["cards.json"][0].update(hp=True),
+        lambda d: d["cards.json"][0].update(retreat=None),
+        lambda d: d["cards.json"][0].update(types=["INVALID"]),
+        lambda d: d["cards.json"][0].update(unexpected="field"),
+        lambda d: d["cards.json"][0]["text"][0].pop("text"),
+        lambda d: d["cards.json"][0]["text"][1].update(cost=[]),
+        lambda d: d["cards.json"][0]["text"][1].update(cost=["FREE", "COLORLESS"]),
+        lambda d: d["cards.json"][0]["collector_number"].update(numeric=42),
+        lambda d: d["cards.json"][0]["rarity"].update(icon="SOLID_STAR"),
+        lambda d: d["cards.json"][0]["copyright"].update(year=1999),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"].update(
+            observations=[], sources=[], covers=[]),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(sourceIds=["missing"]),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(state="not-a-state"),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0]["scope"].update(physicalPrintingIds=[]),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(sha256="bad"),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/text"].update(covers=[]),
+    ]
+    for mutate in mutations:
+        docs = {name: json.loads(raw) for name, raw in original.items()}
+        mutate(docs)
+        refresh_bindings(docs)
+        for name, value in docs.items():
+            (bundle / name).write_bytes(canonical(value))
+        assert run_reader(script, bundle).returncode != 0
+    for name, raw in original.items():
+        (bundle / name).write_bytes(raw)
 
 
 def check_failed_build_preserves_stage(directory):
@@ -137,6 +179,7 @@ def main():
         expected_pilot(decoded)
         assert decoded["digests"] == {name: hashlib.sha256(raw).hexdigest() for name, raw in original.items()}
         assert not publish.malie_problems(directory)
+        semantic_corruptions(script, bundle, original)
         corruptions(script, bundle, original)
         check_failed_build_preserves_stage(directory)
     print("Standalone Malie consumer passed with only 3 bundle inputs: exact pilot values, IDs, gaps, digests and corruption rejection.")

@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -78,7 +79,7 @@ def physical_card(entry, card, target, profile):
 def consume_entry(entry, target, cards, profile):
     for key in ("itemId", "cardReleaseId", "physicalPrintingId"):
         require(entry[key] == target[key], "selected identity mismatch: " + key)
-    companion(entry, target)
+    companion(entry, target, profile)
     reasons = entry["reasons"]
     require(isinstance(reasons, list), "missing reasons")
     statuses = {reason_status(reason) for reason in reasons}
@@ -93,7 +94,10 @@ def consume_entry(entry, target, cards, profile):
     require(type(position) is int and 0 <= position < len(cards), "invalid card position")
     card = cards[position]
     require(sha(canonical(card)) == entry["cardSha256"], "per-card digest mismatch")
+    schema_check(card, profile["payloadSchema"])
+    payload_rules(card, profile)
     physical_card(entry, card, target, profile)
+    exported_evidence(entry, card)
     result["card"] = card
     return result, position
 
@@ -105,10 +109,10 @@ def reason_status(reason):
     return reason["status"]
 
 
-def companion(entry, target):
+def companion(entry, target, profile):
     identity = entry["identity"]
     require(isinstance(identity, dict), "missing companion identity")
-    require(sha(canonical(identity)) == target["identitySha256"], "companion identity digest mismatch")
+    require(sha(canonical(entry)) == target["entrySha256"], "complete report entry digest mismatch")
     require(all(identity[key] == target[key] for key in
                 ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId")), "companion target mismatch")
     required = {"localSetId", "setEditionId", "edition", "finish", "foilPattern", "distribution",
@@ -117,12 +121,144 @@ def companion(entry, target):
     require(isinstance(identity["markings"], list) and isinstance(identity["physicalSources"], list),
             "missing physical companion arrays")
     fields = entry["fieldSources"]
-    require(isinstance(fields, dict) and bool(fields), "missing field provenance")
+    expected = {"/" + name for name in profile["payloadSchema"]["properties"]} | {"/subtype"}
+    require(isinstance(fields, dict) and set(fields) == expected, "incomplete field provenance")
     for field, provenance in fields.items():
         require(field.startswith("/"), "invalid provenance field")
         require(isinstance(provenance, dict) and set(provenance) == {"observations", "sources", "covers"},
                 "incomplete field provenance")
         require(all(isinstance(value, list) for value in provenance.values()), "invalid field provenance arrays")
+        source_evidence(field, provenance, entry)
+
+
+def schema_matches(value, schema):
+    try:
+        schema_check(value, schema)
+        return True
+    except ValueError:
+        return False
+
+
+def schema_check(value, schema):
+    """Validate exactly the structural keywords emitted by this finite profile."""
+    keywords = {"type", "properties", "required", "additionalProperties", "items", "minItems",
+                "minLength", "pattern", "minimum", "const", "enum", "oneOf"}
+    require(isinstance(schema, dict) and set(schema) <= keywords, "unsupported schema keyword")
+    if "oneOf" in schema:
+        require(sum(schema_matches(value, option) for option in schema["oneOf"]) == 1, "invalid union value")
+    if "const" in schema:
+        require(value == schema["const"], "invalid constant")
+    if "enum" in schema:
+        require(value in schema["enum"], "invalid enumeration")
+    kind = schema.get("type")
+    if kind is not None:
+        types = {"object": dict, "array": list, "string": str, "integer": int}
+        require(kind in types and type(value) is types[kind], "invalid field type")
+        {"object": schema_object, "array": schema_array, "string": schema_string,
+         "integer": schema_integer}[kind](value, schema)
+
+
+def schema_object(value, schema):
+    require(set(schema.get("required", [])) <= value.keys(), "missing required field")
+    properties = schema.get("properties", {})
+    for key, child in value.items():
+        require(key in properties or schema.get("additionalProperties", True), "unknown field")
+        if key in properties:
+            schema_check(child, properties[key])
+
+
+def schema_array(value, schema):
+    require(len(value) >= schema.get("minItems", 0), "empty required array")
+    for child in value:
+        schema_check(child, schema["items"])
+
+
+def schema_string(value, schema):
+    require(len(value) >= schema.get("minLength", 0), "empty required text")
+    if "pattern" in schema:
+        require(re.search(schema["pattern"], value) is not None, "invalid text pattern")
+
+
+def schema_integer(value, schema):
+    require(value >= schema.get("minimum", value), "integer below minimum")
+
+
+def payload_rules(card, profile):
+    number = card["collector_number"]
+    parsed = re.fullmatch(profile["numberPattern"], number["numerator"])
+    require(parsed is not None and int(parsed.group(1)) == number["numeric"], "number component mismatch")
+    full = number["numerator"] + ("/" + number["denominator"] if "denominator" in number else "")
+    require(number["full"] == full, "printed number mismatch")
+    years = re.findall(r"(?<!\d)\d{4}(?!\d)", card["copyright"]["text"])
+    require(bool(years) and max(map(int, years)) == card["copyright"]["year"], "copyright year mismatch")
+    vocabulary = profile["vocabulary"]
+    if "rarity" in card:
+        pairs = dict(zip(vocabulary["rarity.designation"], vocabulary["rarity.icon"]))
+        require(pairs[card["rarity"]["designation"]] == card["rarity"]["icon"], "rarity pair mismatch")
+    if "tags" in card:
+        require(card["tags"] == sorted(set(card["tags"])), "tags must be unique and sorted")
+    for block in card["text"]:
+        if "FREE" in block.get("cost", []):
+            require(block["cost"] == ["FREE"], "FREE cannot accompany other cost symbols")
+
+
+def text_fields(record, names):
+    for name in names:
+        require(isinstance(record.get(name), str) and bool(record[name].strip()), "missing evidence text: " + name)
+
+
+def source_evidence(field, provenance, entry):
+    sources = indexed(provenance["sources"], "sourceId")
+    observations = indexed(provenance["observations"], "observationId")
+    for source in sources.values():
+        text_fields(source, ("sourceId", "providerId", "url", "retrievedAt", "retainedPath", "sha256", "licenseOrTerms"))
+        require(re.fullmatch(r"[0-9a-f]{64}", source["sha256"]) is not None, "invalid retained-source digest")
+        require(type(source["authorityTier"]) is int and source["authorityTier"] in {1, 2, 3, 5}, "invalid source grade")
+        source_scope(source["scope"], field, entry)
+    for observation in observations.values():
+        observation_refs(observation, sources)
+    require(all(isinstance(path, str) and (path == field or path.startswith(field + "/"))
+                for path in provenance["covers"]), "evidence covers unrelated field")
+
+
+def source_scope(scope, field, entry):
+    require(isinstance(scope, dict), "missing source scope")
+    require(isinstance(scope.get("physicalPrintingIds"), list) and isinstance(scope.get("fields"), list),
+            "missing source scope arrays")
+    require(scope.get("cardReleaseId") == entry["cardReleaseId"], "source release mismatch")
+    require(entry["physicalPrintingId"] in scope["physicalPrintingIds"], "source printing mismatch")
+    require(field in scope["fields"], "source field mismatch")
+
+
+def observation_refs(observation, sources):
+    text_fields(observation, ("observationId", "state", "observedAt", "method", "basis"))
+    state = observation["state"]
+    require(state in {"known", "not-applicable", "unknown", "blocked-by-source"}, "unknown evidence state")
+    refs = observation["sourceIds"]
+    require(isinstance(refs, list) and all(isinstance(ref, str) for ref in refs), "invalid observation references")
+    require(set(refs) <= sources.keys(), "unresolved observation source")
+    if state in {"known", "not-applicable"}:
+        require(bool(refs), "accepted observation lacks a source")
+    else:
+        text_fields(observation, ("nextStep",))
+
+
+def leaves(value, path):
+    if isinstance(value, dict):
+        return [leaf for key in sorted(value)
+                for leaf in leaves(value[key], path + "/" + key.replace("~", "~0").replace("/", "~1"))]
+    if isinstance(value, list):
+        return [leaf for index, child in enumerate(value) for leaf in leaves(child, path + "/" + str(index))]
+    return [path]
+
+
+def exported_evidence(entry, card):
+    for field, provenance in entry["fieldSources"].items():
+        name = field[1:]
+        state = "known" if name in card else "not-applicable"
+        require(any(row["state"] == state for row in provenance["observations"]), "missing accepted field evidence")
+        paths = leaves(card[name], field) if name in card else []
+        require(provenance["covers"] == paths, "incomplete field-leaf evidence coverage")
 
 
 def consume(directory):

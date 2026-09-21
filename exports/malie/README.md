@@ -25,11 +25,15 @@ python malie_consumer.py path/to/exports/malie
 ```
 
 The script uses only the Python standard library and reads only these three files.
-It checks canonical JSON, file/card/complete-identity hashes, selected-input accounting, ID/locality
+It checks canonical JSON, file/card/complete-entry hashes, selected-input accounting, ID/locality
 joins and supported physical scope, then prints JSON with cards attached to their
 stable IDs. It preserves all deferred entries and reasons. JSON output uses ASCII
 escapes for accents so Windows pipes remain portable; decoding the JSON restores
 the exact Unicode text. It does not contact upstream or load internal graph files.
+The profile includes the executable payload schema. The reader independently
+validates its structural keywords, numbering/rarity/copyright/cost relationships,
+qualified source references, observation states and complete field-leaf coverage.
+Consistently recomputing hashes does not make an invalid payload or empty evidence valid.
 
 The expected pilot result is **6 selected, 3 exported, 2 needs-evidence and 1
 outside-profile**. The two SVP variants retain distinct printing/distribution/stamp
