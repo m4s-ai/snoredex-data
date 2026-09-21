@@ -34,8 +34,11 @@ The profile includes the executable payload schema. The reader independently
 validates its structural keywords, numbering/rarity/copyright/cost relationships,
 qualified source references, observation states and complete field-leaf coverage.
 Consistently recomputing hashes does not make an invalid payload or empty evidence valid.
-The reader pins the schema digest for this profile version, so editing the bundled
-schema cannot remove required fields while retaining the same profile identifier.
+The reader pins the versioned profile contract, including its schema, pilot IDs,
+locale mappings and vocabulary. Editing those bundled semantics cannot remove
+required fields or substitute printings while retaining the same profile identifier.
+Evidence-dependent entry/input hashes are checked separately and may change after
+accepted source updates without changing the declared selection or mapping rules.
 It also checks the complete canonical input list, the bound input digest map and
 agreement with retained-source digests in every field reference.
 

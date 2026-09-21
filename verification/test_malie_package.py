@@ -109,6 +109,8 @@ def semantic_corruptions(script, bundle, original):
     """A coherently rehashed package must still satisfy payload/evidence rules."""
     mutations = [
         remove_name_contract,
+        replace_pilot_identity,
+        lambda d: d["profile.json"]["languages"].update({"LOCALIZATION:WEST:en": "de-DE"}),
         lambda d: d["report.json"].update(inputs={"collector_catalogue.json": "0" * 64}),
         lambda d: d["cards.json"][0].pop("name"),
         lambda d: d["cards.json"][0].pop("stage_text"),
@@ -139,6 +141,21 @@ def semantic_corruptions(script, bundle, original):
         assert run_reader(script, bundle).returncode != 0
     for name, raw in original.items():
         (bundle / name).write_bytes(raw)
+
+
+def replace_pilot_identity(documents):
+    old, new = "PHYSICAL:F0225-P01", "PHYSICAL:FAKE-P99"
+    for target in documents["profile.json"]["pilot"]:
+        if target["physicalPrintingId"] == old:
+            target["physicalPrintingId"] = new
+    for entry in documents["report.json"]["entries"]:
+        if entry["physicalPrintingId"] == old:
+            entry["physicalPrintingId"] = new
+            entry["identity"]["physicalPrintingId"] = new
+        for provenance in entry["fieldSources"].values():
+            for source in provenance["sources"]:
+                source["scope"]["physicalPrintingIds"] = [
+                    new if value == old else value for value in source["scope"]["physicalPrintingIds"]]
 
 
 def remove_name_contract(documents):

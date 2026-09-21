@@ -16,7 +16,7 @@ from collections import Counter
 from pathlib import Path
 
 PROFILE = "snoredex-malie-sv-pilot/1"
-PAYLOAD_SCHEMA_SHA256 = "573c3e9b5288fcbe94f71cf6f6ab73f45753d9cb8c768518136994acf63c81e1"
+PROFILE_CONTRACT_SHA256 = "2d91b30ef97256247d70976b6369be283156398b0ca9d228ec28ca4c7170b645"
 INPUT_FILES = {
     "verification/malie_profile.json", "collector_catalogue.json",
     "verification/card_content_observations.json", "verification/authoritative_graph.json",
@@ -60,9 +60,17 @@ def load(directory):
     require(report["upstream"] == profile["upstream"], "mixed upstream pin")
     require(report["cardsSha256"] == sha(raw["cards.json"]), "cards digest mismatch")
     require(report["profileSha256"] == sha(raw["profile.json"]), "profile digest mismatch")
-    require(sha(canonical(profile["payloadSchema"])) == PAYLOAD_SCHEMA_SHA256, "declared profile schema mismatch")
+    validate_profile_contract(profile)
     input_bindings(report, profile)
     return data, {name: sha(value) for name, value in raw.items()}
+
+
+def validate_profile_contract(profile):
+    # Pin versioned semantics, while allowing evidence-dependent hashes to change.
+    contract = {key: value for key, value in profile.items() if key not in {"inputPaths", "inputsSha256"}}
+    contract["pilot"] = [{key: value for key, value in row.items() if key != "entrySha256"}
+                         for row in profile["pilot"]]
+    require(sha(canonical(contract)) == PROFILE_CONTRACT_SHA256, "declared profile contract mismatch")
 
 
 def input_bindings(report, profile):
