@@ -214,7 +214,7 @@ def field_provenance(field: str, rows: list[dict], sources: dict, providers: dic
 
 
 def choose_field(field: str, rows: list[dict]) -> tuple[str | None, object, list[dict]]:
-    accepted = [row for row in rows if row["state"] in {"known", "not-applicable"}]
+    accepted = [normalized_observation(field, row) for row in rows if row["state"] in {"known", "not-applicable"}]
     signatures = {canonical_bytes([row["state"], row.get("value")]) for row in accepted}
     if len(signatures) > 1:
         return None, None, [reason("needs-mapping", "conflicting-observations", field,
@@ -226,6 +226,15 @@ def choose_field(field: str, rows: list[dict]) -> tuple[str | None, object, list
                                   "No accepted field value or applicability observation.")]
     return None, None, [reason("blocked-by-source" if row["state"] == "blocked-by-source" else "needs-evidence",
                               "unresolved-field", field, row["basis"]) for row in rows]
+
+
+def normalized_observation(field: str, row: dict) -> dict:
+    result = copy.deepcopy(row)
+    if field == "/tags" and result["state"] == "known":
+        payload = {"tags": result["value"]}
+        normalize_tags(payload)
+        result["value"] = payload["tags"]
+    return result
 
 
 def content_fields(item: dict, content: dict, profile: dict, providers: dict) -> tuple[dict, dict, list]:
@@ -320,9 +329,9 @@ def printed_identity_conflicts(item: dict, payload: dict, profile: dict) -> list
 
 def rarity_conflicts(item: dict, payload: dict, profile: dict) -> list[dict]:
     owner, observed = item.get("rarity") or {}, payload.get("rarity")
-    if owner.get("evidenceStatus") != "source-backed" or not isinstance(observed, dict):
+    if owner.get("evidenceStatus") != "source-backed":
         return []
-    mapped = profile["rarityOwnerIds"].get(observed.get("designation"))
+    mapped = profile["rarityOwnerIds"].get(observed.get("designation")) if isinstance(observed, dict) else None
     if mapped is None or mapped != owner.get("normalizedId"):
         return [reason("needs-mapping", "rarity-owner-conflict", "/rarity", "No agreeing mapping to the source-backed rarity owner.")]
     return []
@@ -335,6 +344,8 @@ def finish_conflicts(item: dict, payload: dict) -> list[dict]:
         return [reason("needs-mapping", "foil-conflicts-with-non-holo", "/foil", "The physical owner establishes non-holo.")]
     if finish in {"reverse-holo", "mirror-holo"} and isinstance(foil, dict) and foil.get("mask") != "REVERSE":
         return [reason("needs-mapping", "foil-mask-conflict", "/foil/mask", "The observed mask disagrees with the physical reverse finish.")]
+    if finish == "holo" and isinstance(foil, dict) and foil.get("mask") == "REVERSE":
+        return [reason("needs-mapping", "foil-mask-conflict", "/foil/mask", "A reverse mask disagrees with the physical holo finish.")]
     return []
 
 
