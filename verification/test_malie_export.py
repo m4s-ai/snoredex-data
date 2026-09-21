@@ -47,7 +47,8 @@ def synthetic_inputs(profile, fixture):
         observations.append(row)
     content = {"sources": [source], "observations": observations}
     providers = {"fixture": {"authorityTier": 2, "licenseOrTerms": "Synthetic test fixture only."}}
-    return profile, {"items": items}, content, {"synthetic.json": "0" * 64}, providers, {}
+    digests = {path: "0" * 64 for path in (*exporter.INPUT_FILES, source["retainedPath"])}
+    return profile, {"items": items}, content, digests, providers, {}
 
 
 def check_bundle_contract(profile, fixture):
@@ -72,6 +73,7 @@ def check_bundle_contract(profile, fixture):
     check_foil_applicability(inputs)
     check_identity_digests(inputs)
     check_entry_digests(inputs)
+    check_envelope_contract(bundle)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -250,6 +252,26 @@ def check_withheld_companions(inputs):
             pass
         else:
             raise AssertionError("accepted damaged withheld companion")
+
+
+def check_envelope_contract(bundle):
+    mutations = [
+        lambda d: d["profile.json"]["payloadSchema"]["properties"]["name"].update(type="integer"),
+        lambda d: d["profile.json"].pop("payloadSchema"),
+        lambda d: d["report.json"].update(inputs={"collector_catalogue.json": "0" * 64}),
+        lambda d: d["report.json"]["inputs"].pop("verification/fixtures/malie_contract.json"),
+        lambda d: d["report.json"]["inputs"].update({"collector_catalogue.json": "1" * 64}),
+    ]
+    for mutate in mutations:
+        documents = {name: json.loads(raw) for name, raw in bundle.items()}
+        mutate(documents)
+        documents["report.json"]["profileSha256"] = exporter.digest(documents["profile.json"])
+        try:
+            exporter.validate_bundle({name: exporter.canonical_bytes(value) for name, value in documents.items()})
+        except exporter.ExportError:
+            pass
+        else:
+            raise AssertionError("accepted inconsistent published schema or input accounting")
 
 
 def check_entry_digests(inputs):
