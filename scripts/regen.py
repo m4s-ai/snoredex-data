@@ -108,6 +108,7 @@ TESTS = [
     ["verification/test_malie_profile.py"],
     ["verification/test_malie_export.py"],
     ["verification/test_malie_integration.py"],
+    ["verification/test_malie_package.py"],
     ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
     ["verification/test_korean_burning_confrontation.py"],

@@ -6,7 +6,7 @@ import json
 import subprocess
 from pathlib import Path
 
-from gate_manifest import build_manifest, manifest_fingerprint, validate_directory, validate_manifest
+from gate_manifest import MALIE_FILES, build_manifest, manifest_fingerprint, validate_directory, validate_manifest
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -21,6 +21,10 @@ def main() -> int:
         committed_catalogue.write_bytes(subprocess.check_output(
             ["git", "show", f"{commit}:collector_catalogue.json"], cwd=ROOT,
         ))
+        for name in MALIE_FILES:
+            path = temp / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(subprocess.check_output(["git", "show", f"{commit}:{name}"], cwd=ROOT))
         linux = build_manifest(
             commit=commit, gate_level="L4", runner_os="Linux", workflow="test", run_id="test-run",
             generated_at="2026-01-01T00:00:00Z", catalogue=committed_catalogue,
@@ -51,10 +55,27 @@ def main() -> int:
             tampered, catalogue=committed_catalogue,
             expected_commit=commit, expected_gate="L4"
         )
+        tampered = json.loads(json.dumps(linux))
+        tampered["malieDigests"]["exports/malie/cards.json"] = "sha256:" + "0" * 64
+        tampered["manifestFingerprint"] = manifest_fingerprint(tampered)
+        assert "Malie digests differ from the checked artifact" in validate_manifest(
+            tampered, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4")
+        card_path = temp / "exports/malie/cards.json"
+        card_path.write_bytes(b"[]\n")
+        assert any("exact Malie bytes" in error for error in validate_manifest(
+            linux, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4"))
+        card_path.unlink()
+        assert any("could not verify Malie" in error for error in validate_manifest(
+            linux, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4"))
     finally:
         for path in temp.glob("gate-manifest-*.json"):
             path.unlink(missing_ok=True)
         (temp / "collector_catalogue.json").unlink(missing_ok=True)
+        for name in MALIE_FILES:
+            (temp / name).unlink(missing_ok=True)
+        for directory in (temp / "exports/malie", temp / "exports"):
+            if directory.is_dir():
+                directory.rmdir()
         try:
             temp.rmdir()
         except OSError:

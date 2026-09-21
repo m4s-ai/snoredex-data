@@ -193,7 +193,7 @@ def leaf_paths(value, prefix: str) -> list[str]:
 
 def observation_provenance(row: dict) -> dict:
     result = {key: copy.deepcopy(row[key]) for key in
-              ("observationId", "state", "sourceIds", "observedAt", "method", "basis", "nextStep") if key in row}
+              ("observationId", "state", "value", "sourceIds", "observedAt", "method", "basis", "nextStep") if key in row}
     result["sourceIds"] = sorted(row["sourceIds"])
     return result
 
@@ -465,7 +465,7 @@ def provenance_schema() -> dict:
     observation = object_schema({
         "observationId": TEXT, "state": enum_schema(["known", "not-applicable", "unknown", "blocked-by-source"]),
         "sourceIds": {"type": "array", "items": TEXT}, "observedAt": TEXT,
-        "method": TEXT, "basis": TEXT, "nextStep": TEXT,
+        "method": TEXT, "basis": TEXT, "nextStep": TEXT, "value": {},
     }, ["observationId", "state", "sourceIds", "observedAt", "method", "basis"])
     source = object_schema({
         "sourceId": TEXT, "providerId": TEXT, "url": TEXT, "retrievedAt": TEXT,
@@ -502,6 +502,7 @@ def validate_companion_refs(field: str, provenance: dict, entry: dict) -> None:
     sources = unique(provenance["sources"], "sourceId")
     observations = unique(provenance["observations"], "observationId")
     for row in observations.values():
+        require((row["state"] == "known") == ("value" in row), f"observation value/state mismatch: {field}")
         require(set(row["sourceIds"]) <= sources.keys(), f"unresolved companion source: {field}")
         if row["state"] in {"known", "not-applicable"}:
             require(bool(row["sourceIds"]), f"unproven companion observation: {field}")
@@ -536,7 +537,11 @@ def validate_field_provenance(entry: dict, card: dict, profile: dict) -> None:
         provenance = entry.get("fieldSources", {}).get(field, {})
         sources = unique(provenance.get("sources"), "sourceId")
         state = "known" if name in card else "not-applicable"
-        accepted = [row for row in provenance.get("observations", []) if row.get("state") == state]
+        accepted = [normalized_observation(field, row) for row in provenance.get("observations", [])
+                    if row.get("state") in {"known", "not-applicable"}]
+        require(all(row["state"] == state and (state != "known" or
+                    canonical_bytes(row["value"]) == canonical_bytes(card[name])) for row in accepted),
+                f"exported value disagrees with observation: {field}")
         require(any(row.get("sourceIds") and set(row["sourceIds"]) <= sources.keys() for row in accepted),
                 f"unproven exported field/applicability: {field}")
         paths = leaf_paths(card[name], field) if name in card else []

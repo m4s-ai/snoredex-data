@@ -201,7 +201,9 @@ physical dimensions, and binds the cards/profile/input bytes by digest. `regen.p
 places the exporter after its collector/source dependencies and owns its write/check/test
 commands. The real-pilot test checks exact localized values, full accounting, corrupt
 bundles and unchanged input/output metadata across repeated observational checks. The
-same L3 path runs on Linux and Windows; publication integration remains a separate gate.
+same L3 path runs on Linux and Windows. The [package guide](exports/malie/README.md)
+documents the standalone consumer; its isolated regression reads only the three bundle
+files. Publication remains a separate gate through the existing allowlisted publisher.
 
 The artwork review is a deliberately bounded consumer of the graph. `scripts/artwork_review.py`
 writes both the canonical JSON projection and an equivalent generated JavaScript fallback. The
@@ -305,7 +307,8 @@ The following operational scripts are intentionally outside the normal offline D
   on terminal state, unchanged progress, failed lane, or the cycle cap; it never promotes a
   missing result to an absence verdict.
 - `verification/gate_manifest.py` is a runtime-only handoff contract. It binds a successful L3/L4
-  gate to the full commit/tree and collector catalogue fingerprints; `pages.yml` verifies all
+  gate to the full commit/tree, collector catalogue fingerprints and exact Malie bundle digests;
+  schema 1.1.0 rejects export bytes absent from the containing commit. `pages.yml` verifies all
   OS manifests before deploying the uploaded artifact. It is intentionally not a canonical store
   and never enters `regen.py`'s generated output.
 
