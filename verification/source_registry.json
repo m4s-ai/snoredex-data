@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-15",
+  "generated": "2026-09-21",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 32,
-   "evidenceRecords": 1647,
-   "uniqueUrls": 1640,
+   "evidenceRecords": 1654,
+   "uniqueUrls": 1647,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6340
+   "claimsAttributed": 6347
   }
  },
  "providers": [
@@ -115,8 +115,8 @@
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 200,
-   "claimsSupported": 727
+   "uniqueSources": 202,
+   "claimsSupported": 729
   },
   {
    "providerId": "pokemon-card-korea",
@@ -130,7 +130,8 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
-    "product"
+    "product",
+    "date"
    ],
    "attribution": "Korean card and product data © Pokémon Korea.",
    "notes": "Historical card-detail endpoints may return HTTP 410; retained exact positive observations remain card evidence, while endpoint silence proves nothing.",
@@ -140,8 +141,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 93,
-   "claimsSupported": 236
+   "uniqueSources": 98,
+   "claimsSupported": 241
   },
   {
    "providerId": "tcgdex",
@@ -15149,6 +15150,40 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-search?pageNo=3",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-ID-DATE-S10A-I-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/card-search?pageNo=4",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-ID-DATE-S5A-I-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/th/archive/special/card/ma6",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -19505,6 +19540,57 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://new.pokemonkorea.co.kr/card/401",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-KR-DATE-S8B-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://new.pokemonkorea.co.kr/card/551",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-KR-DATE-SV2A-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://new.pokemonkorea.co.kr/card/601",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-KR-DATE-SV4A-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/card/277",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -19519,6 +19605,40 @@
     "KR:SM30A:060/080:base"
    ],
    "retrievedAt": "2026-09-01",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/447",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-KR-DATE-S10A-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/636",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-KR-DATE-SV5A-20260921"
+   ],
+   "retrievedAt": "2026-09-21",
    "usageCount": 1
   },
   {

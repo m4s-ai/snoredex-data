@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 455,
+      "sourceRecords": 468,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 135,
-      "releaseDateRecords": 57,
+      "releaseDateRecords": 66,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -13968,6 +13968,188 @@
         "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred.",
         "originalResponseSha256": "f5da6ed425cdf7e0cd3cc96ffa7e588d2fbf2ee280b4ed6534022b6454f2e7d3",
         "captureMethod": "Derived visible text; script/style content omitted; original HTTP response hash retained separately."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-ID-DATE-S10A-I-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+      "raw": {
+        "localCode": "s10a I",
+        "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+        "date": "2022-08-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "ID",
+        "languageScope": "Indonesian",
+        "marketScopes": [
+          "ID"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s10a-i-date.txt",
+        "sha256": "25d7c6f76a1fdb95c3cf6eb7baae99a56040caf37f63d68bdec5a8f4e24408e8",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Official campaign https://asia.pokemon-card.com/id/archives/2051/ explicitly coincides with product release. Product article /id/archives/1806/ only says late August. AKG lists August 1; retain discrepancy, prioritize precise publisher date."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-ID-DATE-S5A-I-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+      "raw": {
+        "localCode": "s5a I",
+        "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+        "date": "2021-07-02",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "ID",
+        "languageScope": "Indonesian",
+        "marketScopes": [
+          "ID"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s5a-i-date.txt",
+        "sha256": "b3910d256f8356ea2d693de42996131a2c173e4aecc387af48b652f467ee2c31",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Month-day-year listing; AKG product index independently displays 02 July 2021."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-DATE-S10A-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/447",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://pokemoncard.co.kr/card/447",
+      "raw": {
+        "localCode": "s10a",
+        "page": "https://pokemoncard.co.kr/card/447",
+        "date": "2022-07-22",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s10a-date.txt",
+        "sha256": "f874d9075c25cbc77640de4a553cb099e8f73a316c4cb1e5abfd1f748f895575",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-DATE-S8B-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://new.pokemonkorea.co.kr/card/401",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://new.pokemonkorea.co.kr/card/401",
+      "raw": {
+        "localCode": "s8b",
+        "page": "https://new.pokemonkorea.co.kr/card/401",
+        "date": "2022-01-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s8b-date.txt",
+        "sha256": "d6eb7c3e4f7f793d32cca3fc8d7ec64138845ddba262f6a3205e3d0feba0331a",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not use the 2022-02-03 album/accessory release."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-DATE-SV2A-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://new.pokemonkorea.co.kr/card/551",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://new.pokemonkorea.co.kr/card/551",
+      "raw": {
+        "localCode": "sv2a",
+        "page": "https://new.pokemonkorea.co.kr/card/551",
+        "date": "2023-07-28",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv2a-date.txt",
+        "sha256": "d8db9f77621bf81a1506267d415b66059dca7381836ba7a4f0d16b69e6a0d654",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not automatically transfer to xsv2a catch-up identities."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-DATE-SV4A-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://new.pokemonkorea.co.kr/card/601",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://new.pokemonkorea.co.kr/card/601",
+      "raw": {
+        "localCode": "sv4a",
+        "page": "https://new.pokemonkorea.co.kr/card/601",
+        "date": "2024-01-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv4a-date.txt",
+        "sha256": "8527b5815838736f9f2bfd833f4936eec7d3243c1da413c93c0480cd1191e738",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-01-20."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-DATE-SV5A-20260921",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/636",
+      "retrieved": "2026-09-21",
+      "sourceUrl": "https://pokemoncard.co.kr/card/636",
+      "raw": {
+        "localCode": "sv5a",
+        "page": "https://pokemoncard.co.kr/card/636",
+        "date": "2024-05-24",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product statement",
+        "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv5a-date.txt",
+        "sha256": "af6a3f52beedb4f18a0d85ae09cf29f0732fc007ff50141bb73660fd98cf329b",
+        "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+        "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-05-18."
       }
     }
   ]
