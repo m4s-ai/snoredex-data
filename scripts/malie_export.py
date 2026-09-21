@@ -424,6 +424,7 @@ def validate_entry(entry: dict, target: dict, cards: list, profile: dict) -> int
             "report target identity mismatch")
     status = entry.get("status")
     require(status in STATUSES, "unknown report status")
+    validate_companion(entry, target, profile)
     require(isinstance(entry.get("reasons"), list), "missing disposition reasons")
     statuses = {row.get("status") for row in entry["reasons"]}
     require(statuses <= set(STATUSES[:-1]), "invalid reason status")
@@ -443,6 +444,60 @@ def validate_entry(entry: dict, target: dict, cards: list, profile: dict) -> int
     validate_exported_identity(entry, card, target, profile)
     validate_field_provenance(entry, card, profile)
     return index
+
+
+def provenance_schema() -> dict:
+    observation = object_schema({
+        "observationId": TEXT, "state": enum_schema(["known", "not-applicable", "unknown", "blocked-by-source"]),
+        "sourceIds": {"type": "array", "items": TEXT}, "observedAt": TEXT,
+        "method": TEXT, "basis": TEXT, "nextStep": TEXT,
+    }, ["observationId", "state", "sourceIds", "observedAt", "method", "basis"])
+    source = object_schema({
+        "sourceId": TEXT, "providerId": TEXT, "url": TEXT, "retrievedAt": TEXT,
+        "retainedPath": TEXT, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "scope": {"type": "object"}, "authorityTier": {"type": "integer", "enum": [1, 2, 3, 5]},
+        "licenseOrTerms": TEXT,
+    })
+    source["additionalProperties"] = True
+    return object_schema({"observations": {"type": "array", "items": observation},
+                          "sources": {"type": "array", "items": source},
+                          "covers": {"type": "array", "items": TEXT}})
+
+
+def validate_companion(entry: dict, target: dict, profile: dict) -> None:
+    identity = entry.get("identity")
+    require(isinstance(identity, dict) and set(IDENTITY_FIELDS) <= identity.keys(), "incomplete companion identity")
+    require(identity["localizationId"] == target["localizationId"], "companion locality mismatch")
+    require(isinstance(identity.get("markings"), list) and isinstance(identity.get("physicalSources"), list),
+            "missing physical companion arrays")
+    reason_schema = object_schema({"status": enum_schema(STATUSES[:-1]), "code": TEXT, "field": TEXT, "message": TEXT})
+    schema = {"type": "array", "items": reason_schema}
+    require(not schema_errors(entry.get("reasons"), schema, schema), "invalid disposition reason structure")
+    expected = {"/" + name for name in payload_schema(profile)["properties"]} | {"/subtype"}
+    fields = entry.get("fieldSources")
+    require(isinstance(fields, dict) and set(fields) == expected, "incomplete field companion")
+    schema = provenance_schema()
+    for field, provenance in fields.items():
+        require(not schema_errors(provenance, schema, schema), f"invalid provenance structure: {field}")
+        validate_companion_refs(field, provenance, entry)
+
+
+def validate_companion_refs(field: str, provenance: dict, entry: dict) -> None:
+    sources = unique(provenance["sources"], "sourceId")
+    observations = unique(provenance["observations"], "observationId")
+    for row in observations.values():
+        require(set(row["sourceIds"]) <= sources.keys(), f"unresolved companion source: {field}")
+        if row["state"] in {"known", "not-applicable"}:
+            require(bool(row["sourceIds"]), f"unproven companion observation: {field}")
+        else:
+            require(bool(row.get("nextStep")), f"unresolved companion lacks next step: {field}")
+    for source in sources.values():
+        scope = source["scope"]
+        require(scope.get("cardReleaseId") == entry["cardReleaseId"]
+                and entry["physicalPrintingId"] in scope.get("physicalPrintingIds", [])
+                and field in scope.get("fields", []), f"companion source outside target/field scope: {field}")
+    require(all(path == field or path.startswith(field + "/") for path in provenance["covers"]),
+            f"companion covers another field: {field}")
 
 
 def validate_exported_identity(entry: dict, card: dict, target: dict, profile: dict) -> None:
