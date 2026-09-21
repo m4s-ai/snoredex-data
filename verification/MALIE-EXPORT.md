@@ -226,11 +226,30 @@ catalogue coverage must not be confused with the finite pilot denominator.
 
 ## Implementation and verification handoff
 
-The planned `malie_export.py` command in `scripts/`, with `--write`, will create validated outputs, with the report
+The `malie_export.py` command in `scripts/`, with `--write`, creates validated outputs, with the report
 written last as the bundle's digest binding. Temporary-file replacement protects
 individual files; a partial multi-file replacement is rejected by digest checks.
 `--check` is strictly observational even if an output is missing or corrupt.
 No network, repair, timestamps or canonical-store writes are allowed in that mode.
+
+Run `python scripts/malie_export.py --write` after accepting the #386 field inputs;
+then run `python scripts/malie_export.py --check`. Both commands fail if those
+inputs are unavailable. The separate exporter branch intentionally carries no
+invented substitute for the real observations. `python verification/test_malie_export.py`
+checks the implementation against independently specified synthetic expectations.
+
+The finite profile declares supported local-set IDs, printed language suffixes
+and the mappings to existing rarity-owner IDs. The exporter checks observed set
+markers, numbering, locale, name when known, size, rarity and finish against the
+collector owners. An absent mapping is a reason to withhold a card, never permission
+to invent an identity. Additional physical dimensions stay in the companion entry.
+
+Determinism means identical accepted input bytes produce identical bundle bytes.
+Reordering in-memory traversal produces the same cards, entries and provenance.
+Reformatting or reordering a retained input file changes its exact raw-file digest
+in `report.inputs`, even when the resulting card values are unchanged: preserving
+that evidence binding takes precedence over pretending different source bytes
+are identical. No runtime timestamp participates in either case.
 
 #387 supplies independent expected fixtures and tests for required/nested enums,
 zero versus null, localized names, prefixed and zero-padded numbers, duplicate
