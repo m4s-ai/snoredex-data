@@ -13813,6 +13813,27 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0467-P01",
+        "semanticPrintingId": "PRINTING:a8e0d44f9ca9ecedaea75388",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "materializedTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0545",
+          "SPEC-0546"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:a956b903560d5d70fa74c425",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -35203,6 +35224,57 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0541",
         "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0541"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0545",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0545",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0545",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0546",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0546",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0546",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0547",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0547",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0547",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0547",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0547",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0547"
       }
     },
     {
@@ -98569,6 +98641,31 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "semanticPrintingId": "PRINTING:a8e0d44f9ca9ecedaea75388",
+        "cardReleaseId": "RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0467",
+        "sourcePrintingId": "F0467-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+        "specimenIds": [
+          "SPEC-0545",
+          "SPEC-0546"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:a956b903560d5d70fa74c425",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -101848,6 +101945,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0541",
         "specimenIds": [
           "SPEC-0541"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0547",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0547",
+        "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Physical Indonesian Snorlax VMAX HP340 on stand; sc1b I D 120/153 RRR, G-Max Fall and aky CG Works readable. Multicolored reflective foil and surface texture visible across card.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0547",
+        "specimenIds": [
+          "SPEC-0547"
         ]
       }
     },
@@ -172971,6 +173092,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:a956b903560d5d70fa74c425",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -184393,6 +184524,36 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0541",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0545",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "provenance": {
+        "specimenId": "SPEC-0545"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0546",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "provenance": {
+        "specimenId": "SPEC-0546"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0547",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0547",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -232472,6 +232633,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:a956b903560d5d70fa74c425",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -234596,6 +234773,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0547",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0547",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0547",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall",
       "provenance": {}
     },
     {
@@ -278789,6 +278982,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0467-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0468-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:a633fac8167e5453b42952db",
@@ -295620,17 +295820,38 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0541",
       "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0545",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0546",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0547",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0547",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall"
     }
   ],
   "summary": {
-    "entities": 8168,
-    "edges": 12151,
-    "migrationInputs": 2853,
+    "entities": 8174,
+    "edges": 12159,
+    "migrationInputs": 2857,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 291,
+      "candidate-needs-evidence": 293,
       "carried": 68,
-      "established-and-mapped": 1580,
+      "established-and-mapped": 1582,
       "linked-local-counterpart": 125,
       "mapped": 345,
       "needs-evidence": 126,
@@ -295638,9 +295859,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2037,
+    "candidateClaims": 2041,
     "cardReleases": 641,
-    "physicalPrintings": 767,
+    "physicalPrintings": 769,
     "setSourceRecords": 474,
     "setSourceDispositions": 474,
     "localizations": 16

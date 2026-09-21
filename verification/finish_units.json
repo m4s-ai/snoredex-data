@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 483,
+      "withConfirmedFinish": 484,
       "withOnlyMarketplaceClaim": 44,
-      "pendingFinish": 34,
+      "pendingFinish": 33,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 311,
-      "withHolo": 241,
+      "withHolo": 242,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 57,
-      "withUnresolvedProductMapping": 60,
-      "withAnyUnresolvedDetail": 138,
+      "withUnresolvedProductMapping": 59,
+      "withAnyUnresolvedDetail": 137,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -39998,23 +39998,54 @@
           "image": "images/sv2a_181_Snorlax_V2_719634.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/430875494_1_1789132446.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Physical Korean Snorlax HP150 in holder, Hangul, sv2a G 181/165 AR and GOSSAN readable. Strong colored foil reflections across the forest illustration. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0545.",
+              "retrievedAt": "2026-09-21"
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/391014143_1_1771809634.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Separate seller photograph of physical Korean Snorlax HP150 on dark fabric; Hangul, sv2a G 181/165 AR and GOSSAN readable, broad colored foil reflections across illustration. No assertion that this is the same physical card as SPEC-0545. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0546.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0545",
+            "SPEC-0546"
+          ],
+          "image": "verification/specimens/SPEC-0545.png",
+          "printingId": "F0467-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0468",

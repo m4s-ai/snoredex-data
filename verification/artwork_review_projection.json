@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "b1666606af4f5747bc9f026d80c6dfc55a170e2d77b1ad30f55555f53c188a5a",
+  "projectionVersion": "548ea8d35d2879fc2045e533a5ee8c7d8e59647e45f49ba07453681995705c1b",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 767,
-    "sourceObservations": 2968
+    "physicalPrintings": 769,
+    "sourceObservations": 2973
   },
   "groups": [
     {
@@ -85666,13 +85666,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0547",
+              "cardReleaseId": "RELEASE:ID:Indonesian:sc1b I:120/153:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Physical Indonesian Snorlax VMAX HP340 on stand; sc1b I D 120/153 RRR, G-Max Fall and aky CG Works readable. Multicolored reflective foil and surface texture visible across card.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0547",
+              "specimenIds": [
+                "SPEC-0547"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -85697,6 +85719,17 @@
               "originalHash": "0079e30c3f2be3c3e617c5123b3d85fad6e0122d20f5e33ec271e70483fe10c2",
               "previewSrc": "images/previews/SPEC-0159.png?v=0079e30c3f2be3c3e617c5123b3d85fad6e0122d20f5e33ec271e70483fe10c2",
               "thumbnailSrc": "images/thumbs/SPEC-0159.png?v=0079e30c3f2be3c3e617c5123b3d85fad6e0122d20f5e33ec271e70483fe10c2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0547.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0547",
+              "contentHash": "7295743f6f621eb8b9a5d2c7542ed431d684038348a6cd6e65290689624a2994",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7295743f6f621eb8b9a5d2c7542ed431d684038348a6cd6e65290689624a2994",
+              "previewSrc": "images/previews/SPEC-0547.png?v=7295743f6f621eb8b9a5d2c7542ed431d684038348a6cd6e65290689624a2994",
+              "thumbnailSrc": "images/thumbs/SPEC-0547.png?v=7295743f6f621eb8b9a5d2c7542ed431d684038348a6cd6e65290689624a2994"
             }
           ],
           "observations": [
@@ -85726,6 +85759,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax VMAX card at carousel image 3/6, row 1, column 3 crop. The visible artwork, printed language, set identity sc1b I and collector identity 120/153 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "9a1c6296823bae980e884fbfb3b5e4e224f0edaf7e18bb7b426abcb65b5b326e",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0547",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/product/1189706179/47506051185",
+              "evidence": "Physical Indonesian Snorlax VMAX HP340 on stand; sc1b I D 120/153 RRR, G-Max Fall and aky CG Works readable. Multicolored reflective foil and surface texture visible across card. No exact foil taxonomy or exhaustive finish inventory asserted.",
+              "contentHash": "72a01b2dc6167254d7a47c8f50db06ab81066c3f2cd2b9d21fcac7ad6c195c0e",
+              "image": "verification/specimens/SPEC-0547.png"
             }
           ]
         }
@@ -89019,13 +89061,50 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:a8e0d44f9ca9ecedaea75388",
+              "semanticPrintingId": "PRINTING:a8e0d44f9ca9ecedaea75388",
+              "cardReleaseId": "RELEASE:KR:Korean:sv2a:181/165:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0467",
+              "sourcePrintingId": "F0467-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a8e0d44f9ca9ecedaea75388",
+              "specimenIds": [
+                "SPEC-0546",
+                "SPEC-0545"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/391014143_1_1771809634.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Separate seller photograph of physical Korean Snorlax HP150 on dark fabric; Hangul, sv2a G 181/165 AR and GOSSAN readable, broad colored foil reflections across illustration. No assertion that this is the same physical card as SPEC-0545. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0546.",
+                  "retrievedAt": "2026-09-21"
+                },
+                {
+                  "url": "https://media.bunjang.co.kr/product/430875494_1_1789132446.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical Korean Snorlax HP150 in holder, Hangul, sv2a G 181/165 AR and GOSSAN readable. Strong colored foil reflections across the forest illustration. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0545.",
+                  "retrievedAt": "2026-09-21"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "GOSSAN",
             "variant": "V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -89050,9 +89129,49 @@
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0545.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0545",
+              "contentHash": "683b132473d9379730daa0edd389fcd7bbe018da5112ee95becb7f358bd8ab9d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "683b132473d9379730daa0edd389fcd7bbe018da5112ee95becb7f358bd8ab9d",
+              "previewSrc": "images/previews/SPEC-0545.png?v=683b132473d9379730daa0edd389fcd7bbe018da5112ee95becb7f358bd8ab9d",
+              "thumbnailSrc": "images/thumbs/SPEC-0545.png?v=683b132473d9379730daa0edd389fcd7bbe018da5112ee95becb7f358bd8ab9d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0546.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0546",
+              "contentHash": "e5f01ad4c4d2163310633bc71ed313dd366688fb8aa7fa460f5b4afba4815a30",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e5f01ad4c4d2163310633bc71ed313dd366688fb8aa7fa460f5b4afba4815a30",
+              "previewSrc": "images/previews/SPEC-0546.png?v=e5f01ad4c4d2163310633bc71ed313dd366688fb8aa7fa460f5b4afba4815a30",
+              "thumbnailSrc": "images/thumbs/SPEC-0546.png?v=e5f01ad4c4d2163310633bc71ed313dd366688fb8aa7fa460f5b4afba4815a30"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0467-P01:0:3aee73b13969dbbc",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/391014143_1_1771809634.jpg",
+              "evidence": "Separate seller photograph of physical Korean Snorlax HP150 on dark fabric; Hangul, sv2a G 181/165 AR and GOSSAN readable, broad colored foil reflections across illustration. No assertion that this is the same physical card as SPEC-0545. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0546.",
+              "contentHash": "b98d65cfb2ebece92d8251c5b9ca80f4dd57677a45d4ca6a1368d41c1eecab94",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0467-P01:1:7aecb2d8fe9a4271",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/430875494_1_1789132446.jpg",
+              "evidence": "Physical Korean Snorlax HP150 in holder, Hangul, sv2a G 181/165 AR and GOSSAN readable. Strong colored foil reflections across the forest illustration. No exact foil taxonomy or exhaustive finish inventory asserted. Retained as SPEC-0545.",
+              "contentHash": "acdd02077df7833a0667a349bdb6ce316141514666a79cd84ea5edb204b48471",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sv2a:181/165:base",
               "kind": "source-first",
@@ -89061,6 +89180,24 @@
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv2a 181/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」, with illustrator GOSSAN and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
               "contentHash": "9e0c22d1eb6084928eb8cca4f3f6476e7d3e50a051894495d07855e052972b66",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_181.png?w=512"
+            },
+            {
+              "observationId": "specimen:SPEC-0545",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/430875494",
+              "evidence": "Physical Korean Snorlax HP150 in holder, Hangul, sv2a G 181/165 AR and GOSSAN readable. Strong colored foil reflections across the forest illustration. No exact foil taxonomy or exhaustive finish inventory asserted.",
+              "contentHash": "922f98ed440e1bd6b353e9a87edbb32eed8cc95534977df615027ab98041ee4b",
+              "image": "verification/specimens/SPEC-0545.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0546",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/391014143",
+              "evidence": "Separate seller photograph of physical Korean Snorlax HP150 on dark fabric; Hangul, sv2a G 181/165 AR and GOSSAN readable, broad colored foil reflections across illustration. No assertion that this is the same physical card as SPEC-0545. No exact foil taxonomy or exhaustive finish inventory asserted.",
+              "contentHash": "be68727819b6f52bddfaadfa7c816f2818900304e37f91a87db53b4217117a42",
+              "image": "verification/specimens/SPEC-0546.png"
             },
             {
               "observationId": "unit:U0049",

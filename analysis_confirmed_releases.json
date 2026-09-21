@@ -29700,24 +29700,44 @@
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0467",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0467-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0545.png",
+       "specimenIds": [
+        "SPEC-0545",
+        "SPEC-0546"
+       ]
+      }
+     ]
     },
     {
      "language": "T-Chinese",
@@ -29849,7 +29869,7 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
-    "Korean": "pending",
+    "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
