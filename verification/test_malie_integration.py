@@ -105,6 +105,8 @@ def main():
     bundle = {name: (ROOT / "exports/malie" / name).read_bytes()
               for name in ("cards.json", "report.json", "profile.json")}
     report = json.loads(bundle["report.json"])
+    assert all(any(path == store or (store.endswith("/") and path.startswith(store))
+                   for store in stores) for path in report["inputs"]), "undeclared runtime input dependency"
     assert json.loads(bundle["profile.json"])["implementationState"] == "real-pilot-integrated"
     paths = set(report["inputs"]) | {"exports/malie/" + name for name in bundle} | {
         "collector_migrations.json", "collector_catalogue.fixture.json", "snoredex-tracker-template.sqlite"}
