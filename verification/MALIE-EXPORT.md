@@ -1,9 +1,10 @@
 <!-- doc: role=Malie export profile and implementation contract; stage=task -->
 # Malie export contract
 
-Implementation contract for #385, under #384. Profile identifier:
-`snoredex-malie-sv-pilot/1`. This document does not claim that the exporter,
-field evidence or release package has already been delivered.
+Implementation contract for #385–#388, under #384. Profile identifier:
+`snoredex-malie-sv-pilot/1`. The offline exporter and real field evidence are
+integrated. Package publication and external compatibility are separate acceptance
+boundaries; an implemented export does not claim either.
 
 ## Boundary and upstream pin
 
@@ -30,7 +31,11 @@ Selection is not export approval: #386 must supply the field-level evidence.
 Never remove a blocked mandatory target silently. A substitution requires a versioned
 selection change recording the old ID, replacement ID and evidence-based reason.
 
-### Current enrichment worklist
+### Initial enrichment worklist
+
+This section records the pre-enrichment selection baseline. The accepted #386
+inputs and remaining cases are documented in the retained
+[pilot evidence record](evidence/issue-386-malie-pilot/README.md).
 
 At selection base `899688cd40071095e502513c19e0430891b20da8`, the two mandatory
 MEW printings have confirmed non-holo identity and standard size in the collector
@@ -256,8 +261,8 @@ No network, repair, timestamps or canonical-store writes are allowed in that mod
 
 Run `python scripts/malie_export.py --write` after accepting the #386 field inputs;
 then run `python scripts/malie_export.py --check`. Both commands fail if those
-inputs are unavailable. The separate exporter branch intentionally carries no
-invented substitute for the real observations. `python verification/test_malie_export.py`
+inputs are unavailable. There is no invented substitute for real observations.
+`python verification/test_malie_export.py`
 checks the implementation against independently specified synthetic expectations.
 
 The finite profile declares supported local-set IDs, printed language suffixes
@@ -291,7 +296,11 @@ from the repository root to validate the selection against the current catalogue
 This contract check does not validate exported payloads or replace the later gates.
 
 #388 registers the exporter/check/tests in the existing `regen.py` lists and test
-ownership/gate contracts. Full Linux and Windows gates must use identical input
+ownership/gate contracts. The committed pilot has three exported printings in two
+languages, two deferred SVP entries and one outside-profile Jungle research entry.
+`test_malie_integration.py` independently checks the real expected IDs, values and
+dispositions, corrupt bundles, and preserved canonical/output bytes and metadata.
+Full Linux and Windows gates must use identical input
 bytes. The pure export must leave all existing identities, verdicts and collector
 state unchanged relative to the same accepted inputs.
 

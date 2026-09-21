@@ -200,6 +200,15 @@
       "projectionGate": "L2",
       "mergeGate": "L3"
     },
+    "malie-export": {
+      "canonicalStores": ["verification/malie_profile.json", "verification/card_content_observations.json", "verification/authoritative_graph.json", "verification/source_capabilities.json", "verification/finish_units.json", "verification/units.json", "verification/specimens.json", "verification/source_first_prints.json", "verification/source_registry.json", "collector_catalogue.json", "verification/evidence/", "verification/specimens/"],
+      "graphEntityTypes": ["card-release", "physical-printing", "localization"],
+      "graphRelations": ["materializes", "supported-by", "scoped-to"],
+      "projectionRoots": ["scripts/malie_export.py"],
+      "minimumGate": "L0",
+      "projectionGate": "L2",
+      "mergeGate": "L3"
+    },
     "artwork-projection": {
       "canonicalStores": [
         "verification/authoritative_graph.json",
@@ -215,6 +224,18 @@
     }
   },
   "workflows": [
+    {
+      "id": "malie-export",
+      "impactClass": "malie-export",
+      "entry": "reviewed profile and field observations through scripts/malie_export.py",
+      "minimumGate": "L0",
+      "projectionGate": "L2",
+      "mergeGate": "L3",
+      "releaseGate": "L4",
+      "networkOnNormalPath": false,
+      "dependsOn": ["known-card-confirmation", "physical-card-image"],
+      "forbiddenShortcuts": ["export writes canonical truth", "unknown foil becomes non-foil", "missing selected input disappears", "array position becomes printing identity"]
+    },
     {
       "id": "known-card-confirmation",
       "impactClass": "claim-language",
@@ -320,12 +341,12 @@
     },
     {
       "from": "physical-observation",
-      "to": ["finish-claim", "artwork-projection"],
+      "to": ["finish-claim", "artwork-projection", "malie-export"],
       "reason": "A cited specimen can support a typed physical observation and downstream printing projection."
     },
     {
       "from": "finish-claim",
-      "to": ["artwork-projection"],
+      "to": ["artwork-projection", "malie-export"],
       "reason": "Reviewed finish profiles and physical printings are consumed by the graph-backed artwork view."
     },
     {
@@ -335,7 +356,7 @@
     },
     {
       "from": "catalogue-set",
-      "to": ["finish-claim", "artwork-projection"],
+      "to": ["finish-claim", "artwork-projection", "malie-export"],
       "reason": "Set and release identity scopes finish profiles and graph-backed artwork groups."
     },
     {
@@ -352,6 +373,11 @@
       "from": "market-lead",
       "to": ["claim-language", "physical-observation"],
       "reason": "A marketplace lead is routed to positive evidence or a specimen; it never mutates the frozen baseline."
+    },
+    {
+      "from": "malie-export",
+      "to": [],
+      "reason": "The export consumes accepted field evidence and collector identity; it never writes truth back."
     },
     {
       "from": "artwork-projection",
