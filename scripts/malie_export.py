@@ -409,9 +409,11 @@ def build_bundle(profile: dict, catalogue: dict, content: dict, inputs: dict,
     profile = copy.deepcopy(profile)
     profile["pilot"] = sorted(profile["pilot"], key=lambda row: row["itemId"])
     profile["supportedLocalSetIds"] = sorted(profile["supportedLocalSetIds"])
+    targets = unique(profile["pilot"], "itemId")
     cards, entries = [], []
     for item in selected_items(profile, catalogue):
         entry, payload = compile_entry(item, profile, content, providers, physical_sources)
+        targets[item["itemId"]]["identitySha256"] = digest(entry["identity"])
         if entry["status"] == "exported":
             entry.update(cardIndex=len(cards), cardSha256=digest(payload))
             cards.append(payload)  # Equal payloads still occupy distinct physical entries.
@@ -476,6 +478,7 @@ def provenance_schema() -> dict:
 def validate_companion(entry: dict, target: dict, profile: dict) -> None:
     identity = entry.get("identity")
     require(isinstance(identity, dict) and set(IDENTITY_FIELDS) <= identity.keys(), "incomplete companion identity")
+    require(target.get("identitySha256") == digest(identity), "companion identity digest differs from selected target")
     require(all(identity[key] == target[key] for key in
                 ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId")), "companion target identity mismatch")
     require(isinstance(identity.get("markings"), list) and isinstance(identity.get("physicalSources"), list),

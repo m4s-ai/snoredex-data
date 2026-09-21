@@ -70,6 +70,7 @@ def check_bundle_contract(profile, fixture):
     check_observation_agreement(inputs)
     check_withheld_companions(inputs)
     check_foil_applicability(inputs)
+    check_identity_digests(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -248,6 +249,29 @@ def check_withheld_companions(inputs):
             pass
         else:
             raise AssertionError("accepted damaged withheld companion")
+
+
+def check_identity_digests(inputs):
+    for withheld in (False, True):
+        altered = copy.deepcopy(inputs)
+        if withheld:
+            altered[1]["items"][0]["finish"] = "unknown"
+        bundle = exporter.build_bundle(*altered)
+        report = json.loads(bundle["report.json"])
+        identity = report["entries"][0]["identity"]
+        mutations = [(field, "changed" if value is None else None) for field, value in identity.items()]
+        mutations.extend([("localSetId", "LOCALSET:WEST:SVP"), ("finish", "holo"),
+                          ("distribution", {"kind": "elite-trainer-box"}),
+                          ("physicalSources", [{"sourceId": "unrelated-printing"}])])
+        for field, value in mutations:
+            broken = copy.deepcopy(report)
+            broken["entries"][0]["identity"][field] = value
+            try:
+                exporter.validate_bundle({**bundle, "report.json": exporter.canonical_bytes(broken)})
+            except exporter.ExportError:
+                pass
+            else:
+                raise AssertionError(f"accepted changed identity field {field}; withheld={withheld}")
 
 
 def check_foil_applicability(inputs):
