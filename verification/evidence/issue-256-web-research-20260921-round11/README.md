@@ -22,3 +22,11 @@ Baseline full check and final full regeneration/core gate passed. The physical-e
 Local browser inspection loaded both affected members and every associated image. Thai AS1b has one retained seller image and zero inferred physical printings; AS5a has the new SPEC-0554 holo observation alongside its pre-existing identity images. The new Thai source row intentionally has no publisher card-image URL: the original seller URL remains in the specimen provenance. Registry identity attribution, graph reachability and artwork reachability were checked explicitly. No existing physical facts or picture hashes were removed.
 
 Review remediation assessment: identity/provenance 9/10, conservative finish boundary 9/10, reference reachability 9/10, conservation/validation 9/10. Remaining uncertainty is Thai AS1b finish/date and other documented search gaps, not a failed gate. Remediation FINAL; external exact-head review remains pending until delivery.
+
+## Follow-up: one identity source per seller photograph
+
+The follow-up review exposed a shared registry path: source-first seller-photo records were indexed once under the listing and again by direct specimen intake. The same mechanism affected TH AS1b 112/150, ID s5a I 093/070, TH s10a T 077/071 and ID s10a I 077/071. The existing photo-provider branch now routes generic seller-photo admissions through their retained specimen, like the existing Cardmarket-photo path; listing URLs remain canonical provenance.
+
+A regression failed before the fix on the Indonesian sibling, then passed for every current seller-photo admission. It checks exactly one photo identity record with both print/specimen IDs and rejects a photo admission without a specimen ID; existing official-provider tests remain in place. Full regeneration/core checks passed. All 1012 catalogue items, assets, provenance links, specimens, source-first records and graph entities are unchanged. Registry counts decrease from 1617 to 1614 records and from 6259 to 6255 attributions: three redundant listing records and one duplicate usage of an already shared URL. No evidence is deleted.
+
+Remediation FINAL: causal scope, provenance retention, regression coverage and conservation each 9/10. Post-push history audit and new exact-head review are recorded in PR delivery; external review remains a separate pending gate.

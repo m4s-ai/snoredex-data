@@ -194,6 +194,28 @@ def verify_source_first_asset_authority(prints, evidence, registry):
             asset = row.get(field)
             if asset and registry.resolve_provider(asset, None) != row['providerId']:
                 assert asset not in {call[0] for call in calls}, (row['printId'], field)
+    # Photo-backed admissions must use the retained photo path, not count the
+    # listing as a second identity source. Cover every current sibling admission.
+    for row in prints.values():
+        if row['providerId'] != 'seller-listing-photo':
+            continue
+        calls = []
+        registry.record_source_first_identity(row, lambda *a, **kw: calls.append(a), surfaces)
+        assert not calls, (row['printId'], 'listing duplicates retained photo identity')
+        identities = [source for source in evidence
+                      if row['printId'] in source.get('stableIds', [])
+                      and source['providerId'] == 'seller-listing-photo'
+                      and 'identity' in source['dimensions']]
+        assert len(identities) == 1, (row['printId'], identities)
+        assert row['specimenId'] in identities[0]['stableIds']
+    try:
+        registry.record_source_first_identity(
+            {'providerId': 'seller-listing-photo', 'printId': 'missing-photo'},
+            lambda *a, **kw: None, surfaces)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('photo admission without retained specimen must be rejected')
     # No specimen/earlier registry row exists to mask incorrect ownership in these cases.
     for provider, primary in (
         ('52poke', 'https://wiki.52poke.com/wiki/example'),
