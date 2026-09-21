@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "d2e044c2c67c802987c1f77d597222895f9732bf5b57f9c1c29b2579cff32f4d",
+  "projectionVersion": "a99f820cfb2f802c4f541ddee201ac8133a735f71bcce0238844460bf5154394",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 2,
     "cardReleases": 641,
     "physicalPrintings": 770,
-    "sourceObservations": 2977
+    "sourceObservations": 2978
   },
   "groups": [
     {
@@ -3879,6 +3879,17 @@
               "originalHash": "713f2c9de60b9220c1fc6bc74d5ea811beaed7e39ebf17363bbea3db11d0eab0",
               "previewSrc": "images/previews/SPEC-0490.png?v=713f2c9de60b9220c1fc6bc74d5ea811beaed7e39ebf17363bbea3db11d0eab0",
               "thumbnailSrc": "images/thumbs/SPEC-0490.png?v=713f2c9de60b9220c1fc6bc74d5ea811beaed7e39ebf17363bbea3db11d0eab0"
+            },
+            {
+              "src": "verification/specimens/SPEC-0551.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0551",
+              "contentHash": "497e2a6c53ee9875840c5012a859ae232e0dc0a247fcd68efed6a21d73d6b3f7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "497e2a6c53ee9875840c5012a859ae232e0dc0a247fcd68efed6a21d73d6b3f7",
+              "previewSrc": "images/previews/SPEC-0551.png?v=497e2a6c53ee9875840c5012a859ae232e0dc0a247fcd68efed6a21d73d6b3f7",
+              "thumbnailSrc": "images/thumbs/SPEC-0551.png?v=497e2a6c53ee9875840c5012a859ae232e0dc0a247fcd68efed6a21d73d6b3f7"
             }
           ],
           "observations": [
@@ -3908,6 +3919,15 @@
               "evidence": "Visually inspected Traditional Chinese card image: printed set code AS5a and collector number 203/184 match the requested release. Retained reference image; physical custody, technical finish and exhaustive variant availability are not asserted.",
               "contentHash": "d959eead9e05c2d625f423fc8b686b687ac3736769e0e249b4221f93813f7d7f",
               "image": "verification/specimens/SPEC-0490.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0551",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.tw/product/7259140/40052091182",
+              "evidence": "Traditional Chinese Eevee and Snorlax GX HP270. AS5a C 203/184 SR and 5ban Graphics readable. Isolated product depiction establishes identity and printed rarity only; illustrated shine/texture is not a physical finish observation. No physical finish or exhaustive variant inventory asserted.",
+              "contentHash": "08a288d15bf65dfe921ab94906d23bb237751bebc82ca94802008153b4a48e81",
+              "image": "verification/specimens/SPEC-0551.jpg"
             }
           ]
         }
