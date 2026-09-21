@@ -69,6 +69,7 @@ def check_bundle_contract(profile, fixture):
     check_physical_boundaries(inputs)
     check_observation_agreement(inputs)
     check_withheld_companions(inputs)
+    check_foil_applicability(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -224,6 +225,7 @@ def check_observation_agreement(inputs):
 def check_withheld_companions(inputs):
     altered = copy.deepcopy(inputs)
     altered[1]["items"][0]["finish"] = "unknown"
+    altered[1]["items"][1]["cardSize"] = "unknown"
     bundle = exporter.build_bundle(*altered)
     report = json.loads(bundle["report.json"])
     assert report["entries"][0]["status"] == "needs-evidence"
@@ -235,6 +237,7 @@ def check_withheld_companions(inputs):
         lambda row: row["fieldSources"]["/name"]["sources"][0].pop("sha256"),
         lambda row: row["fieldSources"]["/name"]["observations"][0].update(sourceIds=["missing"]),
         lambda row: row["fieldSources"]["/name"]["sources"][0]["scope"].update(cardReleaseId="other"),
+        lambda row: row.update(identity=copy.deepcopy(report["entries"][1]["identity"])),
     ]
     for mutate in mutations:
         corrupt = copy.deepcopy(report)
@@ -245,6 +248,21 @@ def check_withheld_companions(inputs):
             pass
         else:
             raise AssertionError("accepted damaged withheld companion")
+
+
+def check_foil_applicability(inputs):
+    for finish in ("holo", "reverse-holo", "mirror-holo"):
+        altered = copy.deepcopy(inputs)
+        altered[1]["items"][0]["finish"] = finish
+        rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+        assert rows[0]["status"] == "needs-mapping", finish
+        assert any(r["code"] == "foil-applicability-conflict" for r in rows[0]["reasons"])
+        assert not any(r["code"] == "missing-foil-mapping" for r in rows[0]["reasons"])
+        assert rows[1]["status"] == "exported", "explicit non-foil sibling no longer exports"
+        altered[2]["observations"] = [r for r in altered[2]["observations"] if r["field"] != "/foil"]
+        rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+        assert rows[0]["status"] == "needs-evidence"
+        assert any(r["code"] == "missing-foil-mapping" for r in rows[0]["reasons"])
 
 
 def main():
