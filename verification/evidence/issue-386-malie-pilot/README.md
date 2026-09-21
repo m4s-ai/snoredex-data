@@ -1,4 +1,7 @@
+<!-- doc: role=retained pilot evidence and acceptance record; stage=history -->
 # Reviewed Malie pilot content — 2026-09-21
+
+Historical record of the bounded #386 evidence intake and its acceptance checks.
 
 Issue: [#386](https://github.com/m4s-ai/snoredex-data/issues/386).
 Contract: [MALIE-EXPORT.md](../../MALIE-EXPORT.md).
