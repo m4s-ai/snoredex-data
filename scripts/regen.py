@@ -102,6 +102,7 @@ TESTS = [
     ["verification/test_tcgdex_snapshot.py"],
     ["verification/fetch_attachment.py", "--evidence-check"],
     ["verification/test_collector_catalogue.py"],
+    ["verification/test_card_content.py"],
     ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
     ["verification/test_korean_burning_confrontation.py"],

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-15",
+  "generated": "2026-09-21",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 32,
-   "evidenceRecords": 1647,
-   "uniqueUrls": 1640,
+   "providers": 33,
+   "evidenceRecords": 1651,
+   "uniqueUrls": 1644,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6340
+   "claimsAttributed": 6393
   }
  },
  "providers": [
@@ -155,7 +155,8 @@
    "supportsAbsence": false,
    "usedFor": [
     "language",
-    "finish"
+    "finish",
+    "card-content"
    ],
    "attribution": "Card data from TCGdex.",
    "notes": "Upstream documents its variant coverage as incomplete, so a false flag is never absence.",
@@ -164,8 +165,32 @@
     "tcgdex.net",
     "tcgdex.dev"
    ],
-   "uniqueSources": 308,
-   "claimsSupported": 739
+   "uniqueSources": 310,
+   "claimsSupported": 785
+  },
+  {
+   "providerId": "malie",
+   "displayName": "Malie TCGL reference",
+   "organization": "malie.io",
+   "homepage": "https://malie.io",
+   "licenseOrTerms": "Public TCGL-derived reference data; no separate licence grant inferred. See https://malie.io.",
+   "category": "open-database",
+   "authorityTier": 2,
+   "coverage": "explicit fields on retained localized TCGL reference records",
+   "supportsAbsence": false,
+   "usedFor": [
+    "card-content",
+    "size",
+    "back",
+    "foil"
+   ],
+   "attribution": "Reference records from malie.io; Pokémon card content belongs to its respective rights holders.",
+   "notes": "Third-party extraction, not an official physical-print manifest. Missing fields and records remain unknown.",
+   "hosts": [
+    "malie.io"
+   ],
+   "uniqueSources": 2,
+   "claimsSupported": 7
   },
   {
    "providerId": "bulbapedia",
@@ -13614,6 +13639,49 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv3-5.de-DE.json",
+   "nonUrlEvidenceId": null,
+   "providerId": "malie",
+   "sourceTypes": [
+    "Reviewed printed-card content observation"
+   ],
+   "dimensions": [
+    "back",
+    "foil",
+    "size"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "content-mew143-de-back",
+    "content-mew143-de-foil",
+    "content-mew143-de-size"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv3-5.en-US.json",
+   "nonUrlEvidenceId": null,
+   "providerId": "malie",
+   "sourceTypes": [
+    "Reviewed printed-card content observation"
+   ],
+   "dimensions": [
+    "back",
+    "foil",
+    "size"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
+    "content-mew143-en-back",
+    "content-mew143-en-foil",
+    "content-mew143-en-foil-reverse",
+    "content-mew143-en-size"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 4
   },
   {
    "canonicalUrl": null,
@@ -34569,6 +34637,88 @@
    ],
    "retrievedAt": "2026-07-21",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://assets.tcgdex.net/de/sv/sv03.5/143/high.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "tcgdex",
+   "sourceTypes": [
+    "Retained TCGdex front image; local Windows OCR (de-DE model), then manual visual verification",
+    "Reviewed printed-card content observation"
+   ],
+   "dimensions": [
+    "card-content",
+    "identity"
+   ],
+   "stableIdCount": 23,
+   "stableIds": [
+    "SPEC-0529",
+    "U0014",
+    "content-mew143-de-artists",
+    "content-mew143-de-card_type",
+    "content-mew143-de-collector_number",
+    "content-mew143-de-copyright",
+    "content-mew143-de-flavor_text",
+    "content-mew143-de-hp",
+    "content-mew143-de-lang",
+    "content-mew143-de-name",
+    "content-mew143-de-rarity",
+    "content-mew143-de-regulation_mark",
+    "content-mew143-de-resistance",
+    "content-mew143-de-retreat",
+    "content-mew143-de-set_icon",
+    "content-mew143-de-stage",
+    "content-mew143-de-stage_text",
+    "content-mew143-de-subtitle",
+    "content-mew143-de-subtype",
+    "content-mew143-de-tags",
+    "content-mew143-de-text",
+    "content-mew143-de-types",
+    "content-mew143-de-weakness"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 23
+  },
+  {
+   "canonicalUrl": "https://assets.tcgdex.net/en/sv/sv03.5/143/high.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "tcgdex",
+   "sourceTypes": [
+    "Retained TCGdex front image; local Windows OCR (de-DE model), then manual visual verification",
+    "Reviewed printed-card content observation"
+   ],
+   "dimensions": [
+    "card-content",
+    "identity"
+   ],
+   "stableIdCount": 23,
+   "stableIds": [
+    "SPEC-0528",
+    "U0012",
+    "content-mew143-en-artists",
+    "content-mew143-en-card_type",
+    "content-mew143-en-collector_number",
+    "content-mew143-en-copyright",
+    "content-mew143-en-flavor_text",
+    "content-mew143-en-hp",
+    "content-mew143-en-lang",
+    "content-mew143-en-name",
+    "content-mew143-en-rarity",
+    "content-mew143-en-regulation_mark",
+    "content-mew143-en-resistance",
+    "content-mew143-en-retreat",
+    "content-mew143-en-set_icon",
+    "content-mew143-en-stage",
+    "content-mew143-en-stage_text",
+    "content-mew143-en-subtitle",
+    "content-mew143-en-subtype",
+    "content-mew143-en-tags",
+    "content-mew143-en-text",
+    "content-mew143-en-types",
+    "content-mew143-en-weakness"
+   ],
+   "retrievedAt": "2026-09-21",
+   "usageCount": 23
   },
   {
    "canonicalUrl": "https://images.wikidexcdn.net/mwuploads/wikidex/0/0d/latest/20180604134733/Snorlax_(Jungla_11_TCG).png",
