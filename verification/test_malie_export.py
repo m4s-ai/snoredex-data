@@ -25,9 +25,7 @@ def synthetic_inputs(profile, fixture):
                       "rarity": {"evidenceStatus": "source-backed", "normalizedId": "uncommon"},
                       "itemKind": "verified-printing", "finishVerificationStatus": "confirmed",
                       "finish": "non-holo", "cardSize": "standard",
-                      "edition": "synthetic-edition-" + suffix,
-                      "markings": [{"role": "distribution-promo", "text": "synthetic-" + suffix}],
-                      "distribution": "synthetic-" + suffix})
+                      "edition": None, "markings": [], "distribution": None})
     profile["pilot"] = [{key: row[key] for key in ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId")}
                         for row in items]
     source = {"sourceId": "fixture", "providerId": "fixture", "url": "https://example.invalid/synthetic",
@@ -56,9 +54,7 @@ def check_bundle_contract(profile, fixture):
     assert cards == [fixture["validPayload"], fixture["validPayload"]]
     assert [r["physicalPrintingId"] for r in report["entries"]] == ["SYNTHETIC-PRINTING-a", "SYNTHETIC-PRINTING-b"]
     assert [r["cardIndex"] for r in report["entries"]] == [0, 1]
-    assert [r["identity"]["distribution"] for r in report["entries"]] == ["synthetic-a", "synthetic-b"]
-    assert [r["identity"]["edition"] for r in report["entries"]] == ["synthetic-edition-a", "synthetic-edition-b"]
-    assert [r["identity"]["markings"][0]["text"] for r in report["entries"]] == ["synthetic-a", "synthetic-b"]
+    assert all(row["identity"]["distribution"] is None for row in report["entries"])
     assert report["summary"] == {"selected": 2, "exported": 2, "needs-evidence": 0,
                                  "needs-mapping": 0, "outside-profile": 0, "blocked-by-source": 0}
     reordered = copy.deepcopy(inputs)
@@ -67,6 +63,7 @@ def check_bundle_contract(profile, fixture):
     reordered[2]["observations"].reverse()
     assert exporter.build_bundle(*reordered) == bundle
     check_disposition_reasons(inputs)
+    check_physical_boundaries(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -162,6 +159,30 @@ def check_disposition_reasons(inputs):
         assert "precedence" in str(error)
     else:
         raise AssertionError("incorrect main status accepted")
+
+
+def check_physical_boundaries(inputs):
+    altered = copy.deepcopy(inputs)
+    number = next(row for row in altered[2]["observations"] if row["field"] == "/collector_number")
+    number["value"].pop("denominator")
+    number["value"]["full"] = "001"
+    rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+    assert all(row["status"] == "needs-mapping" for row in rows)
+    assert all(any(r["field"] == "/collector_number/denominator" for r in row["reasons"]) for row in rows)
+    for size, status in (("unknown", "needs-evidence"), (None, "needs-evidence"), ("oversized", "outside-profile")):
+        altered = copy.deepcopy(inputs)
+        altered[1]["items"][0]["cardSize"] = size
+        rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+        assert rows[0]["status"] == status and rows[1]["status"] == "exported"
+    for key, value in (("distribution", {"kind": "elite-trainer-box"}),
+                       ("markings", [{"role": "distribution-promo", "text": "Pokemon Center"}]),
+                       ("edition", "1st Edition"), ("errorClass", "misprint"), ("foilPattern", "unknown-pattern")):
+        altered = copy.deepcopy(inputs)
+        altered[1]["items"][0][key] = value
+        rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+        assert rows[0]["status"] == "needs-mapping" and rows[1]["status"] == "exported", key
+        assert rows[0]["identity"][key] == value, key
+        assert any(r["field"] == "/identity/" + key for r in rows[0]["reasons"]), key
 
 
 def main():

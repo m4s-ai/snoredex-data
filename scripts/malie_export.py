@@ -265,7 +265,7 @@ def scope_reasons(item: dict, profile: dict) -> list[dict]:
 
 
 def identity_conflicts(item: dict, payload: dict, profile: dict) -> list[dict]:
-    reasons = []
+    reasons = physical_scope_reasons(item, payload, profile)
     comparisons = {
         "lang": profile["languages"].get(item["localizationId"]),
         "name": item.get("localCardName"),
@@ -282,12 +282,31 @@ def identity_conflicts(item: dict, payload: dict, profile: dict) -> list[dict]:
     return reasons
 
 
+def physical_scope_reasons(item: dict, payload: dict, profile: dict) -> list[dict]:
+    reasons = []
+    size = item.get("cardSize")
+    if size != "standard":
+        status = "needs-evidence" if size in {None, "unknown"} else "outside-profile"
+        reasons.append(reason(status, "unsupported-physical-size", "/size",
+                              "The physical owner must positively establish standard size."))
+    for key in ("distribution", "markings", "edition", "errorClass"):
+        if item.get(key):
+            reasons.append(reason("needs-mapping", "unsupported-physical-dimension", "/identity/" + key,
+                                  "Retained in the companion; this profile has no payload mapping for the physical distinction."))
+    pattern = item.get("foilPattern")
+    if pattern is not None and (pattern not in profile["foilPatternMappings"]
+                                or profile["foilPatternMappings"][pattern] != payload.get("foil")):
+        reasons.append(reason("needs-mapping", "unsupported-foil-pattern", "/identity/foilPattern",
+                              "No reviewed pattern/layer/mask agreement in this profile."))
+    return reasons
+
+
 def printed_identity_conflicts(item: dict, payload: dict, profile: dict) -> list[dict]:
     reasons = []
     number = payload.get("collector_number")
     if isinstance(number, dict):
         for field, owner in (("numerator", "collectorNumber"), ("denominator", "collectorNumberDenominator")):
-            if item.get(owner) is not None and field in number and number[field] != item[owner]:
+            if item.get(owner) is not None and number.get(field) != item[owner]:
                 reasons.append(reason("needs-mapping", "printed-number-conflict", "/collector_number/" + field,
                                       "Printed numbering disagrees with the current localized owner."))
     suffix = profile["printedLanguageSuffixes"].get(item["localizationId"])
@@ -425,6 +444,7 @@ def validate_exported_identity(entry: dict, card: dict, target: dict, profile: d
     require(identity["finish"] in {"non-holo", "holo", "reverse-holo", "mirror-holo"}, "unknown exported finish")
     require((identity["finish"] == "non-holo") == ("foil" not in card), "foil applicability mismatch")
     require(not finish_conflicts(identity, card), "exported foil conflicts with physical identity")
+    require(not physical_scope_reasons(identity, card, profile), "unsupported exported physical scope")
 
 
 def validate_field_provenance(entry: dict, card: dict, profile: dict) -> None:

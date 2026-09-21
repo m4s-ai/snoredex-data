@@ -243,6 +243,12 @@ and the mappings to existing rarity-owner IDs. The exporter checks observed set
 markers, numbering, locale, name when known, size, rarity and finish against the
 collector owners. An absent mapping is a reason to withhold a card, never permission
 to invent an identity. Additional physical dimensions stay in the companion entry.
+Known numbering components cannot be omitted. Unknown physical size needs evidence;
+positive non-standard size is outside the profile. Distribution, markings, edition
+and error distinctions remain visible but block export until a mapping is reviewed.
+The single reviewed foil-pattern agreement covers the retained English MEW reverse
+record: `intricate-tiled-type-symbol` with explicitly observed `FLAT_SILVER`/`REVERSE`.
+This is an agreement check, never a rule to manufacture missing foil observations.
 
 Determinism means identical accepted input bytes produce identical bundle bytes.
 Reordering in-memory traversal produces the same cards, entries and provenance.
