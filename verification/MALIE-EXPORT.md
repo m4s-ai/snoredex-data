@@ -1,10 +1,11 @@
 <!-- doc: role=Malie export profile and implementation contract; stage=task -->
 # Malie export contract
 
-Implementation contract for #385–#388, under #384. Profile identifier:
+Implementation contract for #385–#389, under #384. Profile identifier:
 `snoredex-malie-sv-pilot/1`. The offline exporter and real field evidence are
-integrated. Package publication and external compatibility are separate acceptance
-boundaries; an implemented export does not claim either.
+integrated. The [release package and independent reader](../exports/malie/README.md)
+use the existing publisher and runtime gate handoff. Release readiness does not
+claim a live deployment or external Malie compatibility.
 
 ## Boundary and upstream pin
 
@@ -290,9 +291,13 @@ Full Linux and Windows gates must use identical input
 bytes. The pure export must leave all existing identities, verdicts and collector
 state unchanged relative to the same accepted inputs.
 
-#389 extends the existing package allowlist/verification and adds a standalone
-stdlib consumer that reads only the three package files. It checks independently
-specified expected IDs and values; importing exporter internals is not acceptance.
+#389 extends the existing package allowlist/verification. The standalone
+`scripts/malie_consumer.py` reads only the three package files;
+`verification/test_malie_package.py` copies it into an isolated directory and
+checks independently specified expected IDs and values. The copied consumer imports
+no exporter or repository helper. The publisher additionally validates the staged bundle and
+compares it with the checked source artifacts. Runtime gate manifests bind all
+three digests to the containing commit after it exists, outside regeneration.
 The two real-language outputs, all dispositions, exact revision and package digests
 must be recorded before completion. External Malie interoperability remains
 unverified until actually exercised. Release readiness does not authorize deployment.

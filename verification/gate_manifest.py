@@ -2,7 +2,7 @@
 """Create and validate the runtime handoff between CI gates and Pages deployment.
 
 The manifest is deliberately ephemeral. It binds a successful L3/L4 run to the exact commit,
-repository tree, and collector catalogue bytes that the workflow checked. It is never a canonical
+repository tree, collector catalogue and Malie bundle bytes that the workflow checked. It is never a canonical
 data store and must not be added to ``scripts/regen.py``'s generated projections.
 """
 from __future__ import annotations
@@ -22,11 +22,12 @@ from typing import Any
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 CATALOGUE = ROOT / "collector_catalogue.json"
 SCHEMA = "snoredex-gate-manifest"
-VERSION = "1.0.0"
+VERSION = "1.1.0"
+MALIE_FILES = tuple("exports/malie/" + name for name in ("cards.json", "report.json", "profile.json"))
 FIELDS = {
     "schema", "schemaVersion", "commit", "gateLevel", "gateResult", "treeFingerprint",
     "catalogueFingerprint", "catalogueDigest", "generatedAt", "workflow", "runId",
-    "runnerOS", "manifestFingerprint",
+    "runnerOS", "manifestFingerprint", "malieDigests",
 }
 FULL_SHA = re.compile(r"^[0-9a-f]{40}$")
 
@@ -76,6 +77,28 @@ def commit_contains_catalogue(commit: str, path: pathlib.Path) -> bool:
         return False
 
 
+def malie_state(root: pathlib.Path, commit: str) -> dict[str, str]:
+    """Bind all three deterministic export files to the containing commit."""
+    digests = {}
+    for name in MALIE_FILES:
+        raw = (root / name).read_bytes()
+        if git("show", f"{commit}:{name}") != raw:
+            raise ValueError(f"checked commit does not contain exact Malie bytes: {name}")
+        digests[name] = sha256_bytes(raw)
+    return digests
+
+
+def validate_malie(manifest: dict, root: pathlib.Path, commit: str) -> list[str]:
+    if not isinstance(commit, str) or not FULL_SHA.fullmatch(commit):
+        return ["cannot bind Malie files to an invalid commit"]
+    try:
+        if manifest.get("malieDigests") != malie_state(root, current_commit(commit)):
+            return ["Malie digests differ from the checked artifact"]
+    except (OSError, ValueError, subprocess.CalledProcessError) as error:
+        return [f"could not verify Malie artifact: {error}"]
+    return []
+
+
 def now_utc() -> str:
     return dt.datetime.now(dt.timezone.utc).isoformat().replace("+00:00", "Z")
 
@@ -108,6 +131,7 @@ def build_manifest(
         "treeFingerprint": tree_fingerprint(commit),
         "catalogueFingerprint": catalogue_fingerprint,
         "catalogueDigest": catalogue_digest,
+        "malieDigests": malie_state(catalogue.parent, commit),
         "generatedAt": generated_at or now_utc(),
         "workflow": workflow or os.environ.get("GITHUB_WORKFLOW", "local"),
         "runId": run_id or os.environ.get("GITHUB_RUN_ID", "local"),
@@ -159,6 +183,7 @@ def validate_manifest(
             errors.append("checked commit does not contain the exact collector catalogue bytes")
     except (OSError, ValueError, json.JSONDecodeError, subprocess.CalledProcessError) as error:
         errors.append(f"could not verify catalogue: {error}")
+    errors.extend(validate_malie(manifest, catalogue.parent, commit))
     return errors
 
 
@@ -186,8 +211,8 @@ def validate_directory(
         ))
         manifests.append(manifest)
     if manifests:
-        for key in ("commit", "gateLevel", "gateResult", "treeFingerprint", "catalogueFingerprint", "catalogueDigest"):
-            if len({manifest.get(key) for manifest in manifests}) != 1:
+        for key in ("commit", "gateLevel", "gateResult", "treeFingerprint", "catalogueFingerprint", "catalogueDigest", "malieDigests"):
+            if len({json.dumps(manifest.get(key), sort_keys=True) for manifest in manifests}) != 1:
                 errors.append(f"gate manifests disagree on {key}")
     return errors
 

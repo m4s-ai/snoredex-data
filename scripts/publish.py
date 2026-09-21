@@ -19,9 +19,12 @@ import shutil
 import sys
 from pathlib import Path
 
+from malie_export import validate_bundle
+
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PREFIX = "_site"
 REPO_BLOB = "https://github.com/m4s-ai/snoredex-data/blob/main/"
+MALIE_FILES = tuple("exports/malie/" + name for name in ("cards.json", "report.json", "profile.json"))
 
 # Markdown links resolve against the repository, but the artifact is a strict subset of it, so a
 # link to something deliberately left out (a script, the handover notes) silently breaks on the
@@ -32,6 +35,8 @@ MARKDOWN_LINK = re.compile(r'(\]\()([^)\s]+)(\))')
 
 # Exact files. Each is here because the site links to it or a reader needs it.
 FILES = [
+    *MALIE_FILES,
+    "exports/malie/README.md",
     "index.html",
     "llms.txt",
     "README.md",
@@ -175,6 +180,8 @@ def relink_markdown(text: str, source: str, published: set[str]) -> str:
 
 def build(out: Path) -> list[str]:
     out = validate_output(out)
+    # Reject an incomplete source bundle before replacing any existing staged site.
+    read_malie_bundle(ROOT)
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)
@@ -194,6 +201,21 @@ def build(out: Path) -> list[str]:
     return wanted
 
 
+def read_malie_bundle(root: Path) -> dict[str, bytes]:
+    bundle = {Path(name).name: (root / name).read_bytes() for name in MALIE_FILES}
+    validate_bundle(bundle)
+    return bundle
+
+
+def malie_problems(out: Path) -> list[str]:
+    try:
+        if read_malie_bundle(out) != read_malie_bundle(ROOT):
+            return ["Malie bundle differs from the checked source artifacts"]
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        return [f"Malie bundle: {error}"]
+    return []
+
+
 def verify(out: Path) -> int:
     out = validate_output(out)
     if not out.is_dir():
@@ -201,7 +223,7 @@ def verify(out: Path) -> int:
         return 1
     allowed = set(collect()) | {".nojekyll"}
     allowed.update(name for name in RUNTIME_FILES if (out / name).is_file())
-    problems: list[str] = []
+    problems: list[str] = malie_problems(out)
     present = []
     for path in sorted(out.rglob("*")):
         if not path.is_file():
@@ -271,7 +293,11 @@ def main() -> int:
     if args.verify:
         return verify(out)
 
-    wanted = build(out)
+    try:
+        wanted = build(out)
+    except (OSError, ValueError, KeyError, TypeError) as error:
+        print(f"artifact build failed: {error}", file=sys.stderr)
+        return 1
     # Count what is on disk, not what the allowlist asked for: build() also writes .nojekyll, so
     # the two lines disagreed by one and read as a discrepancy in an artifact whose whole point is
     # that its contents are known exactly (#68).
