@@ -119,7 +119,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-09-15**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-09-21**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
@@ -128,7 +128,7 @@ Current-known status snapshot: **2026-09-15**. Its candidate denominator is the 
 | Evidence-safe application status | **622 established**, **6 needs evidence**, **87 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **898 items** across 174 cards and 15 languages: 826 documented printings plus 72 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 480 externally confirmed, 45 marketplace-only positives, 36 without positive finish evidence, and 76 not applicable. The remaining detail/mapping queue contains 140 units. |
-| Evidence registry | **32 providers**, 1647 evidence records, 1640 unique URLs, and 6,340 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Evidence registry | **33 providers**, 1651 evidence records, 1644 unique URLs, and 6,393 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -152,7 +152,7 @@ agreed independently, and `verification/source_registry.json` records the author
 | Tier | Sources |
 |---|---|
 | 1 | Inspected physical specimen · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · Pokémon Card official database and rules (Korea) · Pokémon official website (Mainland China) · The Pokémon Company official cards and checklists |
-| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket exact product image · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · PSA certification and registry · SNKRDUNK · Seller listing photograph · TCGdex · pokemontcg.io |
+| 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket exact product image · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · Malie TCGL reference · PSA certification and registry · SNKRDUNK · Seller listing photograph · TCGdex · pokemontcg.io |
 | 3 | Collectory · LigaPokemon · Limitless TCG · PKParaiso · PokéCardex · PokéCottage · Retailer and specialist card listings · TCGCSV (TCGplayer product data) · WikiDex · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
