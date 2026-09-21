@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-09-21",
-    "catalogueFingerprint": "sha256:b32232cf424dc387a1f6dfd88a98a5b347312a44e78f095b28be0f78fb10066b",
+    "catalogueFingerprint": "sha256:9c7d8c7a67fa87bde39041f465dcc2b4b731fc87d0a6a639fb2ec9118d5ec205",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -2664,6 +2664,19 @@
         "SET-SRC-CM-48A40A4DC0EE"
       ],
       "sortKey": "SEA|sv-p/th|scarlet & violet thai promos|LOCALSET:SEA:SV-P%2FTH"
+    },
+    {
+      "localSetId": "LOCALSET:TH:AS1b",
+      "locality": "TH",
+      "localSetCode": "AS1b",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-IDX-756A53FA32A7",
+        "SET-SRC-SF-756A53FA32A7"
+      ],
+      "sortKey": "TH|as000000000001b||LOCALSET:TH:AS1b"
     },
     {
       "localSetId": "LOCALSET:TH:AS5a",
@@ -7289,6 +7302,19 @@
       "releaseApproximate": false,
       "releaseEventId": null,
       "sortKey": "9999|KR||EDITION:KR:Korean:via-xsv2a:unknown-local-set"
+    },
+    {
+      "setEditionId": "EDITION:TH:Thai:AS1b",
+      "localSetId": "LOCALSET:TH:AS1b",
+      "localizationId": "LOCALIZATION:TH:th",
+      "localSetCode": "AS1b",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseEventId": null,
+      "sortKey": "9999|TH|as000000000001b|EDITION:TH:Thai:AS1b"
     },
     {
       "setEditionId": "EDITION:TH:Thai:AS5a",
@@ -33568,21 +33594,22 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+HIF+%E2%80%94+Hidden+Fates+50+%28verified-printing%29&row-id=item-7561ae90-f48b-5c6e-86ee-bb3f87012ed8&card-name=Snorlax&set-code=HIF+%E2%80%94+Hidden+Fates&card-number=50&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-c0de9f26-e31b-5695-99dc-d78d87ec3ac9",
+      "itemId": "item-7016abb1-8876-5fcf-a684-26ebf7554c08",
       "legacyChecklistIds": [],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "workMappingState": "mapped-by-explicit-equivalence",
       "setEditionId": "EDITION:TW:T-Chinese:AS5a",
       "localSetId": "LOCALSET:TW:AS5a",
       "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "physicalPrintingId": null,
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0554",
       "sourcePrintingId": null,
       "finishUnitId": null,
       "sourceClaimRefs": [
-        "CLAIM:source-first:TW:AS5a:117/184:base"
+        "CLAIM:source-first:TW:AS5a:117/184:base",
+        "CLAIM:specimen:SPEC-0554"
       ],
       "localizationId": "LOCALIZATION:TW:zh-Hant",
       "cardName": "Eevee & Snorlax GX",
@@ -33594,10 +33621,10 @@
       "collectorNumberSortKey": "000000000117",
       "edition": null,
       "editionAssignmentStatus": "unresolved",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-82780ddf-59a7-5629-a5e0-5e52abfb0b1d",
+      "finishVerificationStatus": "observed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-dfa17521-0632-594d-b3dd-e974799cc8ba",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
@@ -33615,18 +33642,22 @@
       "releaseDate": "2019-10-09",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2019-10-09|LOCALIZATION:TW:zh-Hant|as000000000005a|000000000117|research:card-release:RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "imageAssetId": "asset-d194c76b-a1a8-506a-8ab0-99a8d4d2997e",
-      "imageScope": "card-release",
+      "releaseSortKey": "2019-10-09|LOCALIZATION:TW:zh-Hant|as000000000005a|000000000117|claim:CLAIM:specimen:SPEC-0554",
+      "imageAssetId": "asset-312d5bfb-b87a-5431-bdf1-2206a2b9cc99",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://asia.pokemon-card.com/tw/card-img/tw00002856.png",
-        "https://asia.pokemon-card.com/tw/card-search/detail/2856/"
+        "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
+        "https://down-tw.img.susercontent.com/file/b081281638625e2a4454dcef6c738278",
+        "https://shopee.tw/product/3768885/7017610542"
       ],
       "evidenceLinks": [
         "https://asia.pokemon-card.com/tw/card-img/tw00002856.png",
-        "https://asia.pokemon-card.com/tw/card-search/detail/2856/"
+        "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
+        "https://down-tw.img.susercontent.com/file/b081281638625e2a4454dcef6c738278",
+        "https://shopee.tw/product/3768885/7017610542"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+AS5a+117+%28research-placeholder%29&row-id=item-c0de9f26-e31b-5695-99dc-d78d87ec3ac9&card-name=Eevee+%26+Snorlax+GX&set-code=AS5a&card-number=117&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Eevee+%26+Snorlax+GX+%E2%80%94+AS5a+117+%28verified-printing%29&row-id=item-7016abb1-8876-5fcf-a684-26ebf7554c08&card-name=Eevee+%26+Snorlax+GX&set-code=AS5a&card-number=117&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-6ea175e1-a9e2-5576-a973-d93a2786d909",
@@ -78860,6 +78891,67 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+XY10+057+%28finish-candidate%29&row-id=item-3c9f3740-c118-5fc0-9e61-f93a21de5b20&card-name=Snorlax&set-code=XY10&card-number=057&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+assigned+Edition%3A+Unlimited+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
+      "itemId": "item-48a560ad-e894-5a45-a9f5-3b425dfde615",
+      "legacyChecklistIds": [],
+      "active": true,
+      "itemKind": "research-placeholder",
+      "progressClass": "research",
+      "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "workMappingState": "mapped",
+      "setEditionId": "EDITION:TH:Thai:AS1b",
+      "localSetId": "LOCALSET:TH:AS1b",
+      "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "physicalPrintingId": null,
+      "sourcePrintingId": null,
+      "finishUnitId": null,
+      "sourceClaimRefs": [
+        "CLAIM:source-first:TH:AS1b:112/150:base"
+      ],
+      "localizationId": "LOCALIZATION:TH:th",
+      "cardName": "Snorlax GX",
+      "localCardName": "คาบิกอน GX",
+      "localSetCode": "AS1b",
+      "localSetName": null,
+      "collectorNumber": "112",
+      "collectorNumberDenominator": "150",
+      "collectorNumberSortKey": "000000000112",
+      "edition": null,
+      "editionAssignmentStatus": "unresolved",
+      "finishVerificationStatus": "pending",
+      "finish": null,
+      "finishFamily": null,
+      "finishGroupId": "finish-group-8110fae3-effb-5c54-b3cd-36d4613ce626",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "RR",
+        "normalizedId": "double-rare",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue262:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "releaseSortKey": "9999|LOCALIZATION:TH:th|as000000000001b|000000000112|research:card-release:RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "imageAssetId": "asset-9ca13d2f-7323-58b2-8fac-2714a665e03f",
+      "imageScope": "card-release",
+      "sourceLinks": [
+        "https://down-th.img.susercontent.com/file/787bf94ac2580f36b56b7bfb9b3ba282",
+        "https://shopee.co.th/product/136710401/2176323915"
+      ],
+      "evidenceLinks": [
+        "https://down-th.img.susercontent.com/file/787bf94ac2580f36b56b7bfb9b3ba282",
+        "https://shopee.co.th/product/136710401/2176323915"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+GX+%E2%80%94+AS1b+112+%28research-placeholder%29&row-id=item-48a560ad-e894-5a45-a9f5-3b425dfde615&card-name=Snorlax+GX&set-code=AS1b&card-number=112&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
       "itemId": "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
       "legacyChecklistIds": [],
       "active": true,
@@ -80794,6 +80886,20 @@
       "mimeType": "image/jpeg",
       "imageScope": "exact-printing",
       "altTextBasis": "Snorlax — S10b I; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
+      "assetId": "asset-312d5bfb-b87a-5431-bdf1-2206a2b9cc99",
+      "path": "verification/specimens/SPEC-0554.jpg",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0554.jpg",
+      "sha256": "sha256:b5afc2267a90a2c398e1559af7c5a0e5757963a6b370925669415ef9dab2c60a",
+      "mimeType": "image/jpeg",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Eevee & Snorlax GX — AS5a; exact-printing",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -83447,6 +83553,20 @@
       }
     },
     {
+      "assetId": "asset-9ca13d2f-7323-58b2-8fac-2714a665e03f",
+      "path": "verification/specimens/SPEC-0543.jpg",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0543.jpg",
+      "sha256": "sha256:7a19c4031b4d72d116400f9b73119755d39f724a0754a4070d6b73ba3eb07677",
+      "mimeType": "image/jpeg",
+      "imageScope": "card-release",
+      "altTextBasis": "Snorlax GX — AS1b; card-release",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-9cf6a964-f052-5c69-9272-b46a40de8d6e",
       "path": "images/FLF_80_Snorlax_V1_281563.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/images/FLF_80_Snorlax_V1_281563.jpg",
@@ -84903,20 +85023,6 @@
       }
     },
     {
-      "assetId": "asset-d194c76b-a1a8-506a-8ab0-99a8d4d2997e",
-      "path": "verification/specimens/SPEC-0287.png",
-      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0287.png",
-      "sha256": "sha256:d91b058876a79ae958d03b06c6e3f65791e88ea91fb1b0a00589fae16a7a25f3",
-      "mimeType": "image/png",
-      "imageScope": "card-release",
-      "altTextBasis": "Eevee & Snorlax GX — AS5a; card-release",
-      "attribution": {
-        "rightsStatus": "third-party-rights-excluded-from-project-grants",
-        "licenceRef": "LICENSE.md",
-        "noticeRef": "THIRD_PARTY_NOTICES.md"
-      }
-    },
-    {
       "assetId": "asset-d278abfa-cf8d-5063-ae03-ea8766a7b01f",
       "path": "images/XY-P_149_Snorlax_V1_553464.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/images/XY-P_149_Snorlax_V1_553464.jpg",
@@ -85982,23 +86088,23 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:2268696f2fa4cbd007ee4a099b07cad2f830beae87dd327882dc32ea2c4b8f44",
+    "authoritativeGraphFingerprint": "sha256:b0ac86c1eef25d6d65655a2d8185686cc31d38bbba16be98039647d194d2bcfc",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260910T160000Z",
     "cardDiscoveryRun": "20260909T171255Z",
     "counts": {
       "localizations": 16,
-      "localSets": 353,
-      "setEditions": 560,
+      "localSets": 354,
+      "setEditions": 561,
       "works": 42,
-      "items": 1011,
-      "verifiedPrintings": 770,
+      "items": 1012,
+      "verifiedPrintings": 771,
       "finishCandidates": 113,
       "researchPlaceholders": 128,
-      "currentKnown": 770,
+      "currentKnown": 771,
       "research": 241,
-      "assets": 451
+      "assets": 452
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -86006,8 +86112,8 @@
       "rows": 899
     },
     "graphAccounting": {
-      "cardReleases": 641,
-      "physicalPrintings": 770
+      "cardReleases": 642,
+      "physicalPrintings": 771
     },
     "candidateProgressPolicy": {
       "progressClass": "research",

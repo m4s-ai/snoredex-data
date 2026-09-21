@@ -2,13 +2,13 @@
   "meta": {
     "schema": "snoredex-source-first-prints",
     "schemaVersion": "0.1.0",
-    "generated": "2026-09-10",
+    "generated": "2026-09-21",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "decision": "ADR-0001 D1 (owner, 2026-08-09) for specimen-backed codes; ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, language and identity only",
     "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
     "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
     "counts": {
-      "admitted": 185,
+      "admitted": 186,
       "held": 0
     }
   },
@@ -4843,6 +4843,28 @@
       "releaseDatePrecision": null,
       "releaseApproximate": false,
       "evidence": "specimen:SPEC-0523 visibly establishes s5a T 093/070, Thai, and printed rarity UR. The separate official Thai release event EVENT:TH:s5a T:launch establishes 2021-04-30; the specimen does not establish the date."
+    },
+    {
+      "printId": "TH:AS1b:112/150:base",
+      "locality": "TH",
+      "localSetCode": "AS1b",
+      "localNumber": "112/150",
+      "variant": "base",
+      "language": "Thai",
+      "script": "Thai",
+      "name": "คาบิกอน GX",
+      "cardName": "Snorlax GX",
+      "specimenId": "SPEC-0543",
+      "providerId": "seller-listing-photo",
+      "sourceUrl": "https://shopee.co.th/product/136710401/2176323915",
+      "cardImageUrl": null,
+      "markAssetUrl": null,
+      "corroborated": false,
+      "retrievedAt": "2026-09-21",
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "releaseApproximate": false,
+      "evidence": "Retained SPEC-0543 visibly establishes Thai AS1b A 112/150 RR, Snorlax GX HP190, 5ban Graphics, Collapse 80, Thunderous Snore 180 and Pulverizing Pancake GX 210. Printed attacks and card traits establish Work equivalence. Identity and printed rarity only; physical finish and release date remain unresolved."
     }
   ],
   "held": []

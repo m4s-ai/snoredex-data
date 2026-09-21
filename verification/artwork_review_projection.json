@@ -4,20 +4,20 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "4164311f7be601fce79436dd72a0333ade15808f0bcbd59a836a5fa993adf189",
+  "projectionVersion": "12ab23901a7887bee0444416c46d502c49a3934e5895f8f513c2376e62bb60ce",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 255,
+    "groups": 256,
     "mappedWorks": 42,
-    "imageGroups": 253,
+    "imageGroups": 254,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 2,
-    "cardReleases": 641,
-    "physicalPrintings": 770,
-    "sourceObservations": 2980
+    "cardReleases": 642,
+    "physicalPrintings": 771,
+    "sourceObservations": 2983
   },
   "groups": [
     {
@@ -5242,13 +5242,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0554",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Rainbow foil reflections on the upper silver frame and image of the photographed physical card. Printed AS5a C 117/184 RR and Traditional Chinese text visible; rarity alone is not the finish evidence.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0554",
+              "specimenIds": [
+                "SPEC-0554"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "伊布&卡比獸GX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -5273,6 +5295,17 @@
               "originalHash": "d91b058876a79ae958d03b06c6e3f65791e88ea91fb1b0a00589fae16a7a25f3",
               "previewSrc": "images/previews/SPEC-0287.png?v=89ccebb7d95f1bd06ac309db931d5870877ee8592665fcda44e57bf29ea9a167",
               "thumbnailSrc": "images/thumbs/SPEC-0287.png?v=cc4b22220b89fe09a0fb96c3e299171dbb459060e679ec304ad1ee1cb631ea2d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0554.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0554",
+              "contentHash": "b5afc2267a90a2c398e1559af7c5a0e5757963a6b370925669415ef9dab2c60a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b5afc2267a90a2c398e1559af7c5a0e5757963a6b370925669415ef9dab2c60a",
+              "previewSrc": "images/previews/SPEC-0554.png?v=3d829f536f5f729ef02dc495c91913a37c208d1df5ac1ce642a7db52f18c7b35",
+              "thumbnailSrc": "images/thumbs/SPEC-0554.png?v=5a08353a1494c8eda1d4d5c40ad61fa4cc819f094ab8674e35df7b3eec8d3348"
             }
           ],
           "observations": [
@@ -5293,6 +5326,15 @@
               "evidence": "Complete retained image for Traditional Chinese Eevee & Snorlax-GX AS5a 117/184 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "5ffa4b416e9ea22f1a6bb05aae05fac75312f7572763a6e23b251b83d9334c7d",
               "image": "verification/specimens/SPEC-0287.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0554",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.tw/product/3768885/7017610542",
+              "evidence": "Physical Traditional Chinese Eevee and Snorlax GX HP270, AS5a C 117/184 RR, Mitsuhiro Arita. Visible traditional text includes the printed attacks. Colored foil reflections cross the upper metallic border and illustration; holo observed. No exact foil-pattern taxonomy or exhaustive finish inventory asserted.",
+              "contentHash": "d1b9e7127ff11ea9cdb4d14506210640196192a0fe7dcfb45d3359cd21cc5775",
+              "image": "verification/specimens/SPEC-0554.jpg"
             }
           ]
         }
@@ -28858,6 +28900,88 @@
               "evidence": "Visually inspected Traditional Chinese card image: printed set code AC1b and collector number 118/158 match the requested release. Retained reference image; physical custody, technical finish and exhaustive variant availability are not asserted.",
               "contentHash": "704331e4f40600521c0b165d5a77615b892cd4a78f84d340059dcad70f9057f6",
               "image": "verification/specimens/SPEC-0491.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:7a19c4031b4d72d116400f9b",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:7a19c4031b4d72d116400f9b",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+      ],
+      "cardKeys": [
+        "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+      ],
+      "label": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+          "workId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+          "cardKey": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:7a19c4031b4d72d116400f9b",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "setEditionId": "EDITION:TH:Thai:AS1b",
+          "localSetCode": "AS1b",
+          "localNumber": "112/150",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "คาบิกอน GX",
+            "artist": null,
+            "variant": "base",
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "verification/specimens/SPEC-0543.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0543",
+              "contentHash": "7a19c4031b4d72d116400f9b73119755d39f724a0754a4070d6b73ba3eb07677",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7a19c4031b4d72d116400f9b73119755d39f724a0754a4070d6b73ba3eb07677",
+              "previewSrc": "images/previews/SPEC-0543.png?v=b5aa45307064f8e2f23a11dc252e79449103df41773d57f4d7ae4915ea248b2b",
+              "thumbnailSrc": "images/thumbs/SPEC-0543.png?v=fd1f885fe5dfb0908ca4e0017f8174083f734230a393be71d322fb976fbd1a24"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:TH:AS1b:112/150:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://shopee.co.th/product/136710401/2176323915",
+              "evidence": "Retained SPEC-0543 visibly establishes Thai AS1b A 112/150 RR, Snorlax GX HP190, 5ban Graphics, Collapse 80, Thunderous Snore 180 and Pulverizing Pancake GX 210. Printed attacks and card traits establish Work equivalence. Identity and printed rarity only; physical finish and release date remain unresolved.",
+              "contentHash": "7a857b7523f584eb94c24404a4f28595b985277659db7413f4362ef5dd82dddd",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0543",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/136710401/2176323915",
+              "evidence": "Retained SPEC-0543 visibly establishes Thai AS1b A 112/150 RR, Snorlax GX HP190, 5ban Graphics, Collapse 80, Thunderous Snore 180 and Pulverizing Pancake GX 210. Printed attacks and card traits establish Work equivalence. Identity and printed rarity only; physical finish and release date remain unresolved.",
+              "contentHash": "8fca1837f2b8d6e595bff74d4e9963572042a6130d44c68993fdba3f939be5ce",
+              "image": "verification/specimens/SPEC-0543.jpg"
             }
           ]
         }

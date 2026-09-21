@@ -10,7 +10,7 @@ PR #390 remains draft. Seven new original images are retained in this batch. Ima
 | SPEC-0540 | Indonesian SV4a I 310/190 S | Angled card in holder with visible texture and multicolored foil: holo. |
 | SPEC-0541 | Indonesian S10b I 056/071 | Physical card on stand; Indonesian Portal/Tumbang and number legible, colored vertical foil: holo. Rarity area partly obscured, so no new rarity determination. |
 | SPEC-0542 | Indonesian MA6 I 121/130 | Isolated depiction confirms identity, HP160, Aya Kusube, Good Sleep/Tumbang and 30th-anniversary logo. No physical finish inferred. |
-| SPEC-0543 | Thai AS1b 112/150 RR | Magic Poke Shop depiction confirms identity and printed RR. Retained explicitly unprojected pending source-first admission. No physical finish inferred. |
+| SPEC-0543 | Thai AS1b 112/150 RR | Magic Poke Shop depiction confirms identity and printed RR. Admitted in round eleven as TH:AS1b:112/150:base and linked to the retained image. No physical finish inferred. |
 | SPEC-0544 | Traditional Chinese AS5D 118/169 | Isolated depiction confirms identity, HP270, Mitsuhiro Arita. Boxed C is regulation. No physical finish inferred from seller wording or absent reflections. |
 
 ## Bunjang full-image correction

@@ -7,9 +7,9 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 474,
+      "sourceRecords": 475,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 135,
+      "sourceFirstLocalSets": 140,
       "releaseDateRecords": 72,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
@@ -6215,10 +6215,12 @@
         "series": "Sun and Moon",
         "releaseDate": null,
         "indexCoverage": "Bulbapedia tags this table {{outdated}} — \"needs=updated list of booster packs since SWSH\" — so it stops in the Sun & Moon era. Thai Sword & Shield-era codes this repository already holds are absent from the index because the article never listed them, not because they do not exist. Never read this index as a catalogue of Thai releases.",
-        "snorlaxExaminationState": "not-examined",
-        "snorlaxPrintIds": [],
+        "snorlaxExaminationState": "examined-snorlax-found",
+        "snorlaxPrintIds": [
+          "TH:AS1b:112/150:base"
+        ],
         "snorlaxUnitIds": [],
-        "examinationBasis": "no Snorlax has been established for this code. This source cannot distinguish a set with no Snorlax from a set it does not list, and it is explicitly outdated, so the state is 'not examined' and never an absence."
+        "examinationBasis": "Retained SPEC-0543 positively establishes Thai AS1b 112/150. This is one exact card, not a complete set or finish inventory."
       }
     },
     {
@@ -14306,6 +14308,42 @@
         "sha256": "9c89eb71c8bfc8a395071fe5ad38774ff915e611868e92c33b144092cf401020",
         "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
         "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale announced for 2025-03-15; retained as context only. March 28 product 740 is a different battle enhancement box."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-756A53FA32A7",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "TH\u001fAS1b",
+      "retrieved": "2026-09-21",
+      "raw": {
+        "localCode": "AS1b",
+        "localName": null,
+        "locality": "TH",
+        "languages": [
+          "Thai"
+        ],
+        "scripts": [
+          "Thai"
+        ],
+        "printIds": [
+          "TH:AS1b:112/150:base"
+        ],
+        "providers": [
+          "seller-listing-photo"
+        ],
+        "sourceUrls": [
+          "https://shopee.co.th/product/136710401/2176323915"
+        ],
+        "printedSetSize": 150,
+        "printedSetSizeBasis": "the denominator printed on every observed card",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "112/150"
+        ],
+        "observedCoverage": "exact positive Thai cards reviewed for issue #262, not a set enumeration",
+        "markAssetUrls": [],
+        "cardImageUrls": []
       }
     }
   ]

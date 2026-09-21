@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 553,
+  "count": 554,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -11163,10 +11163,11 @@
       "photograph": "SPEC-0543.jpg",
       "photographSource": "https://down-th.img.susercontent.com/file/787bf94ac2580f36b56b7bfb9b3ba282",
       "photographSha256": "sha256:7a19c4031b4d72d116400f9b73119755d39f724a0754a4070d6b73ba3eb07677",
-      "observed": "Magic Poke Shop depiction shows Thai Snorlax GX HP190, AS1b A 112/150 RR and 5ban Graphics. Exact identity and printed rarity visible. Physical foil versus illustrated light effects unresolved. Retain as source-first admission candidate; no neighbouring release is borrowed. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Retained SPEC-0543 visibly establishes Thai AS1b A 112/150 RR, Snorlax GX HP190, 5ban Graphics, Collapse 80, Thunderous Snore 180 and Pulverizing Pancake GX 210. Printed attacks and card traits establish Work equivalence. Identity and printed rarity only; physical finish and release date remain unresolved.",
       "recordedAt": "2026-09-21",
-      "citedBy": [],
-      "allowUnprojected": true,
+      "citedBy": [
+        "TH:AS1b:112/150:base"
+      ],
       "listingUrl": "https://shopee.co.th/product/136710401/2176323915"
     },
     {
@@ -11377,6 +11378,28 @@
         "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card."
       },
       "listingUrl": "https://m.bunjang.co.kr/products/430796194"
+    },
+    {
+      "specimenId": "SPEC-0554",
+      "setCode": "AS5a",
+      "number": "117/184",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original seller photograph; manual visual inspection; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0554.jpg",
+      "photographSource": "https://down-tw.img.susercontent.com/file/b081281638625e2a4454dcef6c738278",
+      "photographSha256": "sha256:b5afc2267a90a2c398e1559af7c5a0e5757963a6b370925669415ef9dab2c60a",
+      "observed": "Physical Traditional Chinese Eevee and Snorlax GX HP270, AS5a C 117/184 RR, Mitsuhiro Arita. Visible traditional text includes the printed attacks. Colored foil reflections cross the upper metallic border and illustration; holo observed. No exact foil-pattern taxonomy or exhaustive finish inventory asserted.",
+      "recordedAt": "2026-09-21",
+      "citedBy": [
+        "TW:AS5a:117/184:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Rainbow foil reflections on the upper silver frame and image of the photographed physical card. Printed AS5a C 117/184 RR and Traditional Chinese text visible; rarity alone is not the finish evidence."
+      },
+      "listingUrl": "https://shopee.tw/product/3768885/7017610542"
     }
   ]
 }

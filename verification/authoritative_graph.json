@@ -30393,6 +30393,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TH:AS1b:112/150:base",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "claimId": "CLAIM:source-first:TH:AS1b:112/150:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TH:AS1b:112/150:base",
+        "sourceRecord": "https://shopee.co.th/product/136710401/2176323915",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "materializedTargetId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "reason": "positive exact Thai card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:TH:AS5a:142/184:base",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -35292,6 +35309,23 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0553",
         "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0553"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0554",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0554",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0554",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0554",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0554",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0554"
       }
     },
     {
@@ -43859,6 +43893,48 @@
         "sourceFirstRecordIds": [
           "LATAM:SVP LA:184:base"
         ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "setEditionId": "EDITION:TH:Thai:AS1b",
+        "locality": "TH",
+        "language": "Thai",
+        "script": "Thai",
+        "localSetCode": "AS1b",
+        "localNumber": "112/150",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TH:AS1b:112/150:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TH:AS1b:112/150:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://shopee.co.th/product/136710401/2176323915"
+        ],
+        "sourceFirstRecordIds": [
+          "TH:AS1b:112/150:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
+        "releaseDate": null,
+        "releaseDatePrecision": null,
+        "releaseApproximate": false
       }
     },
     {
@@ -66150,6 +66226,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "setEditionId": "EDITION:TH:Thai:AS1b",
+        "collectorNumber": "112/150",
+        "origin": "issue-262-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -80581,6 +80668,22 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-CM-48A40A4DC0EE"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:TH:AS1b",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "localSetId": "LOCALSET:TH:AS1b",
+        "locality": "TH",
+        "localCode": "AS1b",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-IDX-756A53FA32A7",
+          "SET-SRC-SF-756A53FA32A7"
         ]
       }
     },
@@ -102014,6 +102117,30 @@
       }
     },
     {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0554",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0554",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Rainbow foil reflections on the upper silver frame and image of the photographed physical card. Printed AS5a C 117/184 RR and Traditional Chinese text visible; rarity alone is not the finish evidence.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0554",
+        "specimenIds": [
+          "SPEC-0554"
+        ]
+      }
+    },
+    {
       "entityType": "profile-finish-claim",
       "entityId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "origin": "authoritative-set-catalogue-migration",
@@ -111117,6 +111244,21 @@
         "normalizedRarityId": "uncommon",
         "sourceProductKey": "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f",
         "retrievedAt": "2026-08-30"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue262:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue262:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "sourceRecordId": "SET-SRC-SF-756A53FA32A7",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Thai-card",
+        "sourceNativeValue": "RR",
+        "normalizedRarityId": "double-rare",
+        "sourceProductKey": "https://shopee.co.th/product/136710401/2176323915"
       }
     },
     {
@@ -121562,6 +121704,41 @@
             "SET-SRC-RETAIL-DATE:23ca130aa87a707a"
           ],
           "localizationId": "LOCALIZATION:LATAM:es-419"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:TH:Thai:AS1b",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "setEditionId": "EDITION:TH:Thai:AS1b",
+        "identity": {
+          "setEditionId": "EDITION:TH:Thai:AS1b",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localSetCode": "AS1b",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:TH:AS1b:112/150:base"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:TH:Thai:AS1b",
+          "localSetId": "LOCALSET:TH:AS1b",
+          "locality": "TH",
+          "language": "Thai",
+          "script": "Thai",
+          "localCode": "AS1b",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-756A53FA32A7"
+          ],
+          "localizationId": "LOCALIZATION:TH:th"
         }
       }
     },
@@ -137688,12 +137865,12 @@
     {
       "entityType": "set-source-disposition",
       "entityId": "SET-SRC-IDX-756A53FA32A7",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-262",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-756A53FA32A7",
-        "disposition": "needs-evidence",
-        "targetRef": null,
-        "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS1b",
+        "reason": "Retained Thai AS1b card establishes the indexed local set."
       }
     },
     {
@@ -139189,6 +139366,17 @@
         "sourceRecordId": "SET-SRC-SF-74E1378DF787",
         "disposition": "mapped",
         "targetRef": "LOCALSET:TH:s10a",
+        "reason": "positive Thai source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-756A53FA32A7",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-756A53FA32A7",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS1b",
         "reason": "positive Thai source-first records establish this local set"
       }
     },
@@ -147677,7 +147865,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-IDX-756A53FA32A7",
-      "origin": "authoritative-set-catalogue-migration",
+      "origin": "reviewed-evidence-issue-262",
       "payload": {
         "sourceRecordId": "SET-SRC-IDX-756A53FA32A7",
         "sourceKind": "locality-set-index-record",
@@ -147695,10 +147883,12 @@
           "series": "Sun and Moon",
           "releaseDate": null,
           "indexCoverage": "Bulbapedia tags this table {{outdated}} — \"needs=updated list of booster packs since SWSH\" — so it stops in the Sun & Moon era. Thai Sword & Shield-era codes this repository already holds are absent from the index because the article never listed them, not because they do not exist. Never read this index as a catalogue of Thai releases.",
-          "snorlaxExaminationState": "not-examined",
-          "snorlaxPrintIds": [],
+          "snorlaxExaminationState": "examined-snorlax-found",
+          "snorlaxPrintIds": [
+            "TH:AS1b:112/150:base"
+          ],
           "snorlaxUnitIds": [],
-          "examinationBasis": "no Snorlax has been established for this code. This source cannot distinguish a set with no Snorlax from a set it does not list, and it is explicitly outdated, so the state is 'not examined' and never an absence."
+          "examinationBasis": "Retained SPEC-0543 positively establishes Thai AS1b 112/150. This is one exact card, not a complete set or finish inventory."
         }
       }
     },
@@ -152818,6 +153008,47 @@
           "cardImageUrls": [
             "https://asia.pokemon-card.com/th/card-img/th00003495.png"
           ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-756A53FA32A7",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-756A53FA32A7",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "TH\u001fAS1b",
+        "retrieved": "2026-09-21",
+        "raw": {
+          "localCode": "AS1b",
+          "localName": null,
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "scripts": [
+            "Thai"
+          ],
+          "printIds": [
+            "TH:AS1b:112/150:base"
+          ],
+          "providers": [
+            "seller-listing-photo"
+          ],
+          "sourceUrls": [
+            "https://shopee.co.th/product/136710401/2176323915"
+          ],
+          "printedSetSize": 150,
+          "printedSetSizeBasis": "the denominator printed on every observed card",
+          "localeSuffix": null,
+          "observedCollectorNumbers": [
+            "112/150"
+          ],
+          "observedCoverage": "exact positive Thai cards reviewed for issue #262, not a set enumeration",
+          "markAssetUrls": [],
+          "cardImageUrls": []
         }
       }
     },
@@ -181741,6 +181972,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TH:AS1b:112/150:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:TH:AS5a:142/184:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -184605,6 +184846,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0553",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0554",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0554",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -188603,6 +188854,25 @@
         "state": "mapped",
         "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
         "basis": "the official article names Hop's Snorlax and describes Extra Helpings plus its 170-damage attack; the exact LA asset carries their Spanish translation"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS1b",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "provenance": {
+        "state": "mapped",
+        "basis": "exact Thai printed attacks and card traits"
       }
     },
     {
@@ -203046,6 +203316,22 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS1b",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "provenance": {}
     },
     {
@@ -221612,6 +221898,22 @@
     },
     {
       "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS1b",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-IDX-756A53FA32A7",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS1b",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-756A53FA32A7",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
       "fromId": "LOCALSET:TH:AS5a",
       "relation": "observed-by",
       "toType": "set-source-record",
@@ -234859,6 +235161,22 @@
       "provenance": {}
     },
     {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0554",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0554",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0554",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
       "fromType": "profile-finish-claim",
       "fromId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "relation": "asserts-finish-for",
@@ -244524,6 +244842,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue262:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-756A53FA32A7",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -250870,6 +251204,25 @@
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:LATAM:es-419",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS1b",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:AS1b",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:TH:Thai:AS1b",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:TH:th",
       "provenance": {
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
@@ -260789,6 +261142,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-74E1378DF787",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-756A53FA32A7",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-756A53FA32A7",
       "provenance": {}
     },
     {
@@ -291586,9 +291947,9 @@
     {
       "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-IDX-756A53FA32A7",
-      "disposition": "needs-evidence",
-      "targetRef": null,
-      "reason": "source kind is retained but not yet mapped by schema version 0.1.0"
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS1b",
+      "reason": "Retained Thai AS1b card establishes the indexed local set."
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -292540,6 +292901,13 @@
       "sourceId": "SET-SRC-SF-74E1378DF787",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:s10a",
+      "reason": "positive Thai source-first records establish this local set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-756A53FA32A7",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS1b",
       "reason": "positive Thai source-first records establish this local set"
     },
     {
@@ -293899,6 +294267,13 @@
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:LATAM:Spanish:SVP LA:184:unmapped-work:SPEC-0033",
       "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TH:AS1b:112/150:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "reason": "positive exact Thai card record and retained image"
     },
     {
       "sourceKind": "source-first-record",
@@ -295915,29 +296290,36 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0553",
       "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0554",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0554",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
     }
   ],
   "summary": {
-    "entities": 8176,
-    "edges": 12162,
-    "migrationInputs": 2858,
+    "entities": 8186,
+    "edges": 12177,
+    "migrationInputs": 2861,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 293,
       "carried": 68,
-      "established-and-mapped": 1583,
+      "established-and-mapped": 1585,
       "linked-local-counterpart": 125,
-      "mapped": 345,
-      "needs-evidence": 126,
+      "mapped": 347,
+      "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2042,
-    "cardReleases": 641,
-    "physicalPrintings": 770,
-    "setSourceRecords": 474,
-    "setSourceDispositions": 474,
+    "candidateClaims": 2044,
+    "cardReleases": 642,
+    "physicalPrintings": 771,
+    "setSourceRecords": 475,
+    "setSourceDispositions": 475,
     "localizations": 16
   }
 }
