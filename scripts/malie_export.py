@@ -410,6 +410,8 @@ def build_bundle(profile: dict, catalogue: dict, content: dict, inputs: dict,
     profile["pilot"] = sorted(profile["pilot"], key=lambda row: row["itemId"])
     profile["supportedLocalSetIds"] = sorted(profile["supportedLocalSetIds"])
     profile["payloadSchema"] = payload_schema(profile)
+    profile["inputPaths"] = sorted(set(INPUT_FILES) | {source["retainedPath"] for source in content["sources"]})
+    profile["inputsSha256"] = digest(inputs)
     targets = unique(profile["pilot"], "itemId")
     cards, entries = [], []
     for item in selected_items(profile, catalogue):
@@ -552,11 +554,27 @@ def validate_envelope(cards: list, report: dict, profile: dict, bundle: dict[str
     require(isinstance(cards, list) and isinstance(report, dict) and isinstance(profile, dict), "invalid bundle envelope")
     require(report.get("schemaVersion") == 1 and report.get("profileId") == profile["profileId"], "profile identity mismatch")
     require(report.get("upstream") == profile["upstream"], "upstream pin mismatch")
+    require(profile.get("payloadSchema") == payload_schema(profile), "published payload schema mismatch")
     require(isinstance(report.get("inputs"), dict) and bool(report["inputs"]), "missing input digests")
+    validate_input_bindings(report, profile)
     require(all(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
                 for value in report["inputs"].values()), "invalid input digest")
     require(report.get("cardsSha256") == hashlib.sha256(bundle["cards.json"]).hexdigest(), "cards file digest mismatch")
     require(report.get("profileSha256") == hashlib.sha256(bundle["profile.json"]).hexdigest(), "profile file digest mismatch")
+
+
+def validate_input_bindings(report: dict, profile: dict) -> None:
+    paths = profile.get("inputPaths")
+    require(isinstance(paths, list) and all(isinstance(path, str) for path in paths), "missing input path contract")
+    require(paths == sorted(set(paths)) and set(INPUT_FILES) <= set(paths), "incomplete canonical input set")
+    inputs = report["inputs"]
+    require(set(inputs) == set(paths), "incomplete input digest set")
+    require(profile.get("inputsSha256") == digest(inputs), "input digest binding mismatch")
+    for entry in report["entries"]:
+        for provenance in entry.get("fieldSources", {}).values():
+            for source in provenance.get("sources", []):
+                require(source.get("retainedPath") in inputs and
+                        inputs[source["retainedPath"]] == source.get("sha256"), "retained source input mismatch")
 
 
 def validate_bundle(bundle: dict[str, bytes]) -> None:

@@ -223,6 +223,11 @@ The digest is generated metadata, not a second canonical identity store or an
 authenticity signature; the release handoff binds the full files to their commit.
 The generated profile also carries `payloadSchema`, the executable structural
 contract, so a standalone consumer can validate payloads without internal imports.
+Bundle validation compares that published schema with the generated profile contract.
+The generated profile records the complete sorted `inputPaths` (canonical inputs
+and every retained content-source file) and `inputsSha256`, binding the report's
+entire input digest map. Validation rejects missing inputs and source digests that
+disagree with the qualified field references, including on withheld entries.
 Consumers needing physical identity must consume the report together with cards.
 Unsupported physical properties are retained there and receive a mapping reason;
 they must not be hidden by injecting undocumented fields into the cards payload.
