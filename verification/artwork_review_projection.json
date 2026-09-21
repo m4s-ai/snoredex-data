@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "c5e1fa3744e56d78e47480d277429db6d0c57caf9a0048ea94df13ee56f1fc99",
+  "projectionVersion": "b1666606af4f5747bc9f026d80c6dfc55a170e2d77b1ad30f55555f53c188a5a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 763,
-    "sourceObservations": 2958
+    "physicalPrintings": 767,
+    "sourceObservations": 2968
   },
   "groups": [
     {
@@ -2741,6 +2741,17 @@
               "originalHash": "82a8f9ce61078bf20c350002e664c2ca239fbebb6bf038848c50c7128f45f523",
               "previewSrc": "images/previews/SPEC-0494.png?v=82a8f9ce61078bf20c350002e664c2ca239fbebb6bf038848c50c7128f45f523",
               "thumbnailSrc": "images/thumbs/SPEC-0494.png?v=82a8f9ce61078bf20c350002e664c2ca239fbebb6bf038848c50c7128f45f523"
+            },
+            {
+              "src": "verification/specimens/SPEC-0544.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0544",
+              "contentHash": "59b8007555d70ddd90d3bc4093d8ebb952a12e57050012b2f3d5c79a23fa4c90",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "59b8007555d70ddd90d3bc4093d8ebb952a12e57050012b2f3d5c79a23fa4c90",
+              "previewSrc": "images/previews/SPEC-0544.png?v=59b8007555d70ddd90d3bc4093d8ebb952a12e57050012b2f3d5c79a23fa4c90",
+              "thumbnailSrc": "images/thumbs/SPEC-0544.png?v=59b8007555d70ddd90d3bc4093d8ebb952a12e57050012b2f3d5c79a23fa4c90"
             }
           ],
           "observations": [
@@ -2770,6 +2781,15 @@
               "evidence": "Visible Traditional Chinese 伊布&卡比獸 GX, HP270, TAG TEAM, AS5D, regulation C, 118/169, Illus. Mitsuhiro Arita. The card image matches the exact AS5D release. Retailer reference image; physical custody and technical finish are not established.",
               "contentHash": "7ac63c78c44802610e7a4c099ae88a9eb9d7697c42bfcfce0a72d0facbc00180",
               "image": "verification/specimens/SPEC-0494.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0544",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.tw/product/27756288/25871401400",
+              "evidence": "Traditional Chinese Eevee and Snorlax GX HP270, AS5D C 118/169, Mitsuhiro Arita. Isolated product depiction, identity only. Boxed C is regulation, not rarity; seller wording is not a physical finish observation. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "40b8d22a58c34048b177c99264af2ed9e3cd3f88c55dda692941d9345abcc28f",
+              "image": "verification/specimens/SPEC-0544.jpg"
             }
           ]
         }
@@ -16768,13 +16788,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0541",
+              "cardReleaseId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Physical Indonesian Snorlax HP150 on a stand, printed s10b I F 056/071, Portal and Tumbang 150, Pokemon GO logo. Strong colored vertical foil reflections occur in illustration and borders. Stand partly covers the rarity area; no new rarity reading asserted.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0541",
+              "specimenIds": [
+                "SPEC-0541"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -16799,6 +16841,17 @@
               "originalHash": "d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
               "previewSrc": "images/previews/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
               "thumbnailSrc": "images/thumbs/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0541.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0541",
+              "contentHash": "9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "previewSrc": "images/previews/SPEC-0541.png?v=9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "thumbnailSrc": "images/thumbs/SPEC-0541.png?v=9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c"
             }
           ],
           "observations": [
@@ -16828,6 +16881,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 2, column 1 crop. The visible artwork, printed language, set identity S10b I and collector identity 056/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "7978a1f0e01be0b0bd33dfcdd1ef504f8d25be22a6d878bac58f524dad961926",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0541",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/product/397703499/50008554082",
+              "evidence": "Physical Indonesian Snorlax HP150 on a stand, printed s10b I F 056/071, Portal and Tumbang 150, Pokemon GO logo. Strong colored vertical foil reflections occur in illustration and borders. Stand partly covers the rarity area; no new rarity reading asserted. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "268574028fcddb4ddbbce9127e6255b66e1f80e5ff24105ebfeca71a48ffb9b5",
+              "image": "verification/specimens/SPEC-0541.jpg"
             }
           ]
         }
@@ -16903,6 +16965,17 @@
               "originalHash": "d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
               "previewSrc": "images/previews/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2",
               "thumbnailSrc": "images/thumbs/SPEC-0173.png?v=d9c592d86ae14889d5dcf39f8d8dde582d618286dd5d7ae7372d1edc297bc2d2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0541.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0541",
+              "contentHash": "9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "previewSrc": "images/previews/SPEC-0541.png?v=9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c",
+              "thumbnailSrc": "images/thumbs/SPEC-0541.png?v=9561e5cc8970f040e1bf788f6631c37df41bb6be8234c835bc0a884c84e8ff2c"
             }
           ],
           "observations": [
@@ -16914,6 +16987,15 @@
               "evidence": "Complete official Indonesian render for Snorlax S10b I 056/071 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
               "contentHash": "59009cfacf1c630668e4ab97ce0cacd41a8520372e0f9204bc5ee212e18de5fe",
               "image": "verification/specimens/SPEC-0173.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0541",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/product/397703499/50008554082",
+              "evidence": "Physical Indonesian Snorlax HP150 on a stand, printed s10b I F 056/071, Portal and Tumbang 150, Pokemon GO logo. Strong colored vertical foil reflections occur in illustration and borders. Stand partly covers the rarity area; no new rarity reading asserted. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "268574028fcddb4ddbbce9127e6255b66e1f80e5ff24105ebfeca71a48ffb9b5",
+              "image": "verification/specimens/SPEC-0541.jpg"
             },
             {
               "observationId": "unit:U0204",
@@ -17222,13 +17304,43 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:c63f3239216d65b49e8a1ed1",
+              "semanticPrintingId": "PRINTING:c63f3239216d65b49e8a1ed1",
+              "cardReleaseId": "RELEASE:TH:Thai:s10b:056/071:Snorlax-Block-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0338",
+              "sourcePrintingId": "F0338-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:c63f3239216d65b49e8a1ed1",
+              "specimenIds": [
+                "SPEC-0538"
+              ],
+              "sources": [
+                {
+                  "url": "https://down-th.img.susercontent.com/file/th-11134207-7r98o-lkpj05sp499a24.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical sleeved Thai Snorlax HP150 on wood; s10b T F 056/071 R, Pokemon GO logo, N-DESIGN Inc. Colored reflective foil is visible in the illustration and upper/lower borders. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0538.",
+                  "retrievedAt": "2026-09-21"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -17275,9 +17387,29 @@
               "originalHash": "1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589",
               "previewSrc": "images/previews/SPEC-0536.png?v=1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589",
               "thumbnailSrc": "images/thumbs/SPEC-0536.png?v=1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589"
+            },
+            {
+              "src": "verification/specimens/SPEC-0538.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0538",
+              "contentHash": "8e4d184f5be4c93724335f0e65ef83ea605a029c018462a0ed290a8443c93057",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8e4d184f5be4c93724335f0e65ef83ea605a029c018462a0ed290a8443c93057",
+              "previewSrc": "images/previews/SPEC-0538.png?v=8e4d184f5be4c93724335f0e65ef83ea605a029c018462a0ed290a8443c93057",
+              "thumbnailSrc": "images/thumbs/SPEC-0538.png?v=8e4d184f5be4c93724335f0e65ef83ea605a029c018462a0ed290a8443c93057"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0338-P02:0:87cc4dfdff2d1b0d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7r98o-lkpj05sp499a24.webp",
+              "evidence": "Physical sleeved Thai Snorlax HP150 on wood; s10b T F 056/071 R, Pokemon GO logo, N-DESIGN Inc. Colored reflective foil is visible in the illustration and upper/lower borders. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0538.",
+              "contentHash": "52412d4c431fbf162a0803caa389c062ba419e5acf737bd62e1a08b60140529f",
+              "image": null
+            },
             {
               "observationId": "source-first:TH:s10b:056/071:base",
               "kind": "source-first",
@@ -17313,6 +17445,15 @@
               "evidence": "OjamaCard designed product image shows Thai Snorlax HP150, Pokemon GO logo and s10b T F 056/071 R. Rainbow bands are depicted in illustration and border, but physical photography versus rendered foil is unresolved. Identity evidence only; no physical finish confirmation.",
               "contentHash": "4cd0b57151c776ca44062b3db8f7cc88385ac9aa878395be2362073f8911657a",
               "image": "verification/specimens/SPEC-0536.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0538",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/431199770/22777598129",
+              "evidence": "Physical sleeved Thai Snorlax HP150 on wood; s10b T F 056/071 R, Pokemon GO logo, N-DESIGN Inc. Colored reflective foil is visible in the illustration and upper/lower borders. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "4a31899938c34e5306b7340353f761f568cd68818bc60c263d3304b493c9f4de",
+              "image": "verification/specimens/SPEC-0538.png"
             },
             {
               "observationId": "unit:U0205",
@@ -29854,6 +29995,17 @@
               "originalHash": "224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208",
               "previewSrc": "images/previews/SPEC-0517.png?v=224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208",
               "thumbnailSrc": "images/thumbs/SPEC-0517.png?v=224af9930192b03729651ff2003a83e381107da2043f7fccb7e4456925f40208"
+            },
+            {
+              "src": "verification/specimens/SPEC-0542.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0542",
+              "contentHash": "70e97ade01de16bf35a150de93b6614b1709645abcd017d05c887149d84f5e59",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "70e97ade01de16bf35a150de93b6614b1709645abcd017d05c887149d84f5e59",
+              "previewSrc": "images/previews/SPEC-0542.png?v=70e97ade01de16bf35a150de93b6614b1709645abcd017d05c887149d84f5e59",
+              "thumbnailSrc": "images/thumbs/SPEC-0542.png?v=70e97ade01de16bf35a150de93b6614b1709645abcd017d05c887149d84f5e59"
             }
           ],
           "observations": [
@@ -29874,6 +30026,15 @@
               "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
               "contentHash": "7491b82c7228235fe9be7db908d7a600760f7a0e1f41186b755eee0a024e5705",
               "image": "verification/specimens/SPEC-0517.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0542",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/198648492982",
+              "evidence": "Indonesian Snorlax MA6 I J 121/130, HP160, Good Sleep, Tumbang 130, Aya Kusube and Pikachu 30th anniversary logo. Isolated product depiction; identity only. Depicted rainbow effects do not independently establish a physical finish. No separate rarity symbol is read. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "dd8ef52ef187fe2a59fa9b031c6f105ec7b5fc0ff0a3bae53310a67cc5550e32",
+              "image": "verification/specimens/SPEC-0542.png"
             }
           ]
         }
@@ -80266,13 +80427,43 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:26b2f6195d63f5bf1af004ce",
+              "semanticPrintingId": "PRINTING:26b2f6195d63f5bf1af004ce",
+              "cardReleaseId": "RELEASE:KR:Korean:s10a:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0330",
+              "sourcePrintingId": "F0330-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:26b2f6195d63f5bf1af004ce",
+              "specimenIds": [
+                "SPEC-0539"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/430112687_1_1789714245.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Full physical seller photograph shows Korean Hangul, Snorlax HP150, s10a F 077/071 CHR and Kouki Saitou. Colored foil reflections are visible at the left of the illustration. The media-viewer original includes the lower edge missing from square CDN thumbnails. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0539.",
+                  "retrievedAt": "2026-09-21"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Kouki Saitou",
             "variant": "base, V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -80319,9 +80510,29 @@
               "originalHash": "647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2",
               "previewSrc": "images/previews/SPEC-0452.png?v=647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2",
               "thumbnailSrc": "images/thumbs/SPEC-0452.png?v=647b4da368b8aada4096958c0f8f5dcbfdbcd3ab6ce2e4981b9ec42742ee9ad2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0539.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0539",
+              "contentHash": "fb9f7c4c9290f06541ed914e2858b80136e2332fcd43877ee9c2bc28aee04cd0",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "fb9f7c4c9290f06541ed914e2858b80136e2332fcd43877ee9c2bc28aee04cd0",
+              "previewSrc": "images/previews/SPEC-0539.png?v=fb9f7c4c9290f06541ed914e2858b80136e2332fcd43877ee9c2bc28aee04cd0",
+              "thumbnailSrc": "images/thumbs/SPEC-0539.png?v=fb9f7c4c9290f06541ed914e2858b80136e2332fcd43877ee9c2bc28aee04cd0"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0330-P01:0:fbbef949a97213bc",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/430112687_1_1789714245.jpg",
+              "evidence": "Full physical seller photograph shows Korean Hangul, Snorlax HP150, s10a F 077/071 CHR and Kouki Saitou. Colored foil reflections are visible at the left of the illustration. The media-viewer original includes the lower edge missing from square CDN thumbnails. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0539.",
+              "contentHash": "e0158d3f67f768d2cd2208a2f657d3e85e00a8d063465e352a1cd85681cf449a",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:s10a:077/071:base",
               "kind": "source-first",
@@ -80348,6 +80559,15 @@
               "evidence": "Seller photograph of Korean Snorlax with Hangul name and rules text; the exact listing identifies the s10a 077/071 CHR printing. The distinct full-card character artwork establishes the localized V2 card. No finish is inferred from this lighting.",
               "contentHash": "ff8d34b8ca2404f0adc0c1e7a9787ac7af0a5b1ff1784ecce70878f4cae20e4f",
               "image": "verification/specimens/SPEC-0452.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0539",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/430112687",
+              "evidence": "Full physical seller photograph shows Korean Hangul, Snorlax HP150, s10a F 077/071 CHR and Kouki Saitou. Colored foil reflections are visible at the left of the illustration. The media-viewer original includes the lower edge missing from square CDN thumbnails. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "313d8897d47208b8053c04007e66ca44f25b167d97f8ac4ec08967dd68ecdda5",
+              "image": "verification/specimens/SPEC-0539.png"
             },
             {
               "observationId": "unit:U0168",
@@ -89360,6 +89580,17 @@
               "originalHash": "745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
               "previewSrc": "images/previews/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
               "thumbnailSrc": "images/thumbs/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0540.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0540",
+              "contentHash": "5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "previewSrc": "images/previews/SPEC-0540.png?v=5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "thumbnailSrc": "images/thumbs/SPEC-0540.png?v=5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91"
             }
           ],
           "observations": [
@@ -89380,6 +89611,15 @@
               "evidence": "Complete official Indonesian render for Snorlax SV4a I 310/190 (base). The printed name, set code, collector number, attacks and rarity S establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
               "contentHash": "6632a6c67495d246256f86e1ec81ecb1512c119802cf7f8e4d61cd1c118e3ae1",
               "image": "verification/specimens/SPEC-0180.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0540",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/product/1343192572/40831397416",
+              "evidence": "Angled physical Indonesian Snorlax HP150 in holder. Printed sv4a I G 310/190 S, Kemaruk, Tekan Gedebuk and Shigenori Negishi. Strong multicolored foil reflections and surface texture are visible across the illustration. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "c65963463bdec8f1d83146b7d48eb7e89e4d47f0440a46d099dac3c241fecd16",
+              "image": "verification/specimens/SPEC-0540.jpg"
             },
             {
               "observationId": "unit:U0386",
@@ -91244,13 +91484,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0540",
+              "cardReleaseId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Angled physical Indonesian Snorlax HP150 in holder. Printed sv4a I G 310/190 S, Kemaruk, Tekan Gedebuk and Shigenori Negishi. Strong multicolored foil reflections and surface texture are visible across the illustration.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0540",
+              "specimenIds": [
+                "SPEC-0540"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -91275,6 +91537,17 @@
               "originalHash": "745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
               "previewSrc": "images/previews/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d",
               "thumbnailSrc": "images/thumbs/SPEC-0180.png?v=745f78a5bd90e5c4056ac7312a2ea91bcea705bc22363f594cd1cc6bf18a781d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0540.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0540",
+              "contentHash": "5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "previewSrc": "images/previews/SPEC-0540.png?v=5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91",
+              "thumbnailSrc": "images/thumbs/SPEC-0540.png?v=5a63c2dee24c45f432081f8e51b17df8aef4c759742b7ed9c65a5cc50ada6c91"
             }
           ],
           "observations": [
@@ -91304,6 +91577,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 5/6, row 3, column 4 crop. The visible artwork, printed language, set identity SV4a I and collector identity 310/190 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "7333dcdc360cadc0db9fc02f0924b42449c4ead536e7dcba21518b44ca521b50",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0540",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/product/1343192572/40831397416",
+              "evidence": "Angled physical Indonesian Snorlax HP150 in holder. Printed sv4a I G 310/190 S, Kemaruk, Tekan Gedebuk and Shigenori Negishi. Strong multicolored foil reflections and surface texture are visible across the illustration. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+              "contentHash": "c65963463bdec8f1d83146b7d48eb7e89e4d47f0440a46d099dac3c241fecd16",
+              "image": "verification/specimens/SPEC-0540.jpg"
             }
           ]
         }

@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 481,
-      "withOnlyMarketplaceClaim": 45,
-      "pendingFinish": 35,
+      "withConfirmedFinish": 483,
+      "withOnlyMarketplaceClaim": 44,
+      "pendingFinish": 34,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 311,
-      "withHolo": 239,
+      "withHolo": 241,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
-      "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 61,
-      "withAnyUnresolvedDetail": 139,
+      "withBothNonHoloAndHolo": 57,
+      "withUnresolvedProductMapping": 60,
+      "withAnyUnresolvedDetail": 138,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -30083,23 +30083,47 @@
           "image": "images/s10a_077_Snorlax_V2_657056.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/430112687_1_1789714245.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Full physical seller photograph shows Korean Hangul, Snorlax HP150, s10a F 077/071 CHR and Kouki Saitou. Colored foil reflections are visible at the left of the illustration. The media-viewer original includes the lower edge missing from square CDN thumbnails. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0539.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0539"
+          ],
+          "image": "verification/specimens/SPEC-0539.png",
+          "printingId": "F0330-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0331",
@@ -30640,16 +30664,17 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "non-holo",
+        "holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -30672,6 +30697,30 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0338-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7r98o-lkpj05sp499a24.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Physical sleeved Thai Snorlax HP150 on wood; s10b T F 056/071 R, Pokemon GO logo, N-DESIGN Inc. Colored reflective foil is visible in the illustration and upper/lower borders. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0538.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0538"
+          ],
+          "image": "verification/specimens/SPEC-0538.png",
+          "printingId": "F0338-P02"
         }
       ],
       "unresolved": []
