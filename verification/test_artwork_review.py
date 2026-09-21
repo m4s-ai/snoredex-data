@@ -103,6 +103,20 @@ def verify_png_formats() -> None:
 def verify_derivative_writer() -> None:
     """Exercise source replacement, progressive JPEG decoding, and RGB channel order."""
     verify_png_formats()
+    # Independent palette expectations exercise the encoder as well as the PNG decoder.
+    # Both old asymmetric palette steps and floor-only quantization failed these.
+    colours = [(0, 0, 0), (255, 255, 255), (237, 237, 237), (128, 128, 128),
+               (255, 0, 0), (0, 255, 0), (0, 0, 255), (30, 80, 130)]
+    expected_colours = [(0, 0, 0), (255, 255, 255), (255, 255, 255), (153, 153, 153),
+                        (255, 0, 0), (0, 255, 0), (0, 0, 255), (51, 102, 153)]
+    encoded = artwork_derivatives.encode_png(len(colours), 1, colours)
+    if artwork_derivatives._png_pixels(encoded) != (len(colours), 1, expected_colours):
+        fail("PNG preview palette changed neutral greys, primaries or nearest-colour rounding")
+    greys = [(v, v, v) for v in range(256)]
+    _, _, quantized = artwork_derivatives._png_pixels(artwork_derivatives.encode_png(256, 1, greys))
+    if any(len(set(pixel)) != 1 or abs(pixel[0] - value) > 25
+           for value, pixel in enumerate(quantized)):
+        fail("PNG preview palette must preserve neutral greys within the quantization bound")
     for relative in ("images/151C_143_Snorlax_V1_819209.jpg",
                      "images/TEU_171_Eevee___Snorlax_GX_V2_369096.jpg",
                      "images/TEU_191_Eevee___Snorlax_GX_V3_369116.jpg",
@@ -238,6 +252,19 @@ def verify_derivative_writer() -> None:
             first_entry = first["sources"][key]
             first_preview = test_root / first_entry["preview"]["path"]
             first_bytes = first_preview.read_bytes()
+            # A cache made by the old encoder must be invalid even when its byte
+            # digest and unchanged original source hash still match the manifest.
+            first_preview.write_bytes(artwork_derivatives.encode_png(4, 2, [(255, 204, 255)] * 8))
+            first_entry["preview"]["sha256"] = hashlib.sha256(first_preview.read_bytes()).hexdigest()
+            for kind in ("preview", "thumbnail"):
+                first_entry[kind].pop("encoderVersion", None)
+            manifest_path.write_text(json.dumps(first), encoding="utf-8")
+            artwork_derivatives._MANIFEST_CACHE = first
+            if artwork_derivatives.current_derivatives(source, first_entry["sourceHash"]):
+                fail("old PNG encoder cache survived version invalidation")
+            artwork_derivatives.ensure_for_sources([source])
+            if first_preview.read_bytes() != first_bytes:
+                fail("old PNG encoder cache was not rebuilt from the unchanged source")
             source.write_bytes(artwork_derivatives.encode_png(
                 4, 2, [(20, 20, 220)] * 8))
             artwork_derivatives.ensure_for_sources([source])
@@ -250,8 +277,8 @@ def verify_derivative_writer() -> None:
                 fail("source replacement leaves derivative bytes unchanged")
             artwork_review.ROOT = test_root
             versioned = artwork_review.image_derivatives(key, second_entry["sourceHash"])
-            if not versioned.get("previewSrc", "").endswith(f"?v={second_entry['sourceHash']}"):
-                fail("source replacement leaves the preview URL unversioned")
+            if not versioned.get("previewSrc", "").endswith(f"?v={second_entry['preview']['sha256']}"):
+                fail("preview URL does not bind the derivative bytes")
             extension_source = test_root / "images" / "extension.png"
             extension_source.write_bytes(artwork_derivatives.encode_png(
                 4, 2, [(20, 220, 20)] * 8))
@@ -402,7 +429,8 @@ def main() -> int:
                     derivative_path = ROOT / derivative.split("?", 1)[0]
                     if not derivative_path.is_file():
                         fail(f"image derivative is missing: {derivative}")
-                    if derivative != f"{derivative_path.relative_to(ROOT).as_posix()}?v={expected}":
+                    derivative_hash = hashlib.sha256(derivative_path.read_bytes()).hexdigest()
+                    if derivative != f"{derivative_path.relative_to(ROOT).as_posix()}?v={derivative_hash}":
                         fail(f"image derivative URL is not source-versioned: {derivative}")
                     width, height = image_dimensions(derivative_path)
                     if width > maximum or height <= 0:

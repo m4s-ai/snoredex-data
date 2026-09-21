@@ -76,6 +76,7 @@
     }
   ],
   "tests": [
+    {"id": "card-content", "command": ["verification/test_card_content.py"], "primaryOwner": "card-content", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "complexity-guard", "command": ["verification/test_complexity.py"], "primaryOwner": "complexity-guard", "boundary": "import", "gateLevel": "L0", "fixtures": ["complexity-fixture"]},
     {"id": "review-integrity", "command": ["verification/review_integrity.py"], "primaryOwner": "store-invariants", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},
     {"id": "evidence-application", "command": ["verification/test_evidence_application.py"], "primaryOwner": "evidence-application", "boundary": "projection", "gateLevel": "L1", "fixtures": ["canonical-stores"]},

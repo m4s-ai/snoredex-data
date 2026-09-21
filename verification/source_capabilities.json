@@ -236,6 +236,13 @@
       "authorityTier": 2,
       "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
       "rawRetention": "Retain marketplace, listing URL/id, seller image, capture date and SHA-256 for every accepted specimen."
+    },
+    {
+      "providerId": "malie",
+      "operator": "malie.io",
+      "authorityTier": 2,
+      "licenseOrTerms": "Public TCGL-derived reference data; no separate licence grant inferred. See https://malie.io.",
+      "rawRetention": "Retain exact selected records with source URL, full-response SHA-256, array index and excerpt digest."
     }
   ],
   "surfaces": [
@@ -4931,6 +4938,191 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "tcgdex-card-images",
+      "providerId": "tcgdex",
+      "label": "TCGdex retained localized front images",
+      "match": {
+        "urlPrefixes": [
+          "https://assets.tcgdex.net/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "direct-download",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain original bytes and inspect the exact printed front; no physical finish, back, or size from a digital image.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://assets.tcgdex.net/{locale}/{series}/{set}/{number}/high.png",
+        "parameters": [
+          "locale",
+          "series",
+          "set",
+          "number"
+        ],
+        "pagination": "not applicable to one retained render",
+        "expectedIdentifiers": [
+          "localized card name",
+          "collector number",
+          "printed set identity",
+          "printed rarity when present"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained digital card render",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tcgdex-localized-front-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English",
+              "German"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the concrete retained render only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "rarity",
+            "specimen-existence",
+            "image",
+            "card-content"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A complete inspected front supports its visible fields, never an absent printing or finish inventory."
+          },
+          "knownPositiveObservationId": "obs-tcgdex-mew143-front",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "physical size",
+              "back",
+              "unretained images",
+              "complete catalogue"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Source omission and image lighting cannot establish non-foil or an unprinted language."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "malie-tcgl-reference",
+      "providerId": "malie",
+      "label": "Malie versioned TCGL reference records",
+      "match": {
+        "urlPrefixes": [
+          "https://cdn.malie.io/file/malie-io/tcgl/export/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Localized records omit some written-draft fields; only explicitly present values support observations.",
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Pin the exact export version and retained record hashes; review changed fields before acceptance.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://cdn.malie.io/file/malie-io/tcgl/export/{version}/{set}.{lang}.json",
+        "parameters": [
+          "version",
+          "set",
+          "lang"
+        ],
+        "pagination": "one array per localized set; select by exact card and variant identifiers",
+        "expectedIdentifiers": [
+          "lang",
+          "set_icon",
+          "collector_number",
+          "ext.tcgl.cardID",
+          "ext.tcgl.longFormID"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "NonFoil_None",
+          "FlatSilver_Reverse"
+        ],
+        "publicationForm": "Explicit TCGL named variety and foil object on the same localized card record",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "malie-mew143-reference-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English",
+              "German"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Retained v0.1.9.13 English/German MEW 143 records only; existing independently evidenced physical printings must be joined explicitly."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "card-content",
+            "identity",
+            "size",
+            "back",
+            "foil",
+            "tcgl-membership"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Explicit per-record assertions only; missing draft fields and absent records remain unknown."
+          },
+          "knownPositiveObservationId": "obs-malie-mew143-reference",
+          "boundary": {
+            "outsideScope": [
+              "independent physical-print existence",
+              "unlisted variants",
+              "missing optional fields",
+              "other languages and cards"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Digital-game records are not physical existence evidence; an omitted foil object alone never means Non-Holo."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -6918,6 +7110,144 @@
         "retailer-reviewed-prerelease-date-positive"
       ],
       "outcome": "Previously retained organizer statement establishes this event date only; no card language, physical finish or general release date inferred."
+    },
+    {
+      "observationId": "obs-tcgdex-mew143-front",
+      "surfaceId": "tcgdex-card-images",
+      "kind": "known-positive",
+      "queryUrl": "https://assets.tcgdex.net/en/sv/sv03.5/143/high.png",
+      "queryParameters": {
+        "locale": "en",
+        "card": "sv03.5-143"
+      },
+      "retrievedAt": "2026-09-21",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "tcgdex",
+        "recordKey": "https://assets.tcgdex.net/en/sv/sv03.5/143/high.png"
+      },
+      "expectedIdentifiers": [
+        "SPEC-0528",
+        "U0012",
+        "MEW EN 143/165"
+      ],
+      "validatesEdges": [
+        "tcgdex-localized-front-positive"
+      ],
+      "outcome": "The retained English front shows the exact localized name, number and card text. The independently retained German front SPEC-0529 establishes its own German wording. Neither image asserts physical finish, back or size."
+    },
+    {
+      "observationId": "obs-malie-mew143-reference",
+      "surfaceId": "malie-tcgl-reference",
+      "kind": "known-positive",
+      "queryUrl": "https://cdn.malie.io/file/malie-io/tcgl/export/v0.1.9.13/sv3-5.en-US.json",
+      "queryParameters": {
+        "lang": "en-US",
+        "number": "143",
+        "version": "v0.1.9.13"
+      },
+      "retrievedAt": "2026-09-21",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "arrayIndex": 274,
+          "record": {
+            "artists": {
+              "list": [
+                "HYOGONOSUKE"
+              ],
+              "text": "Illus. HYOGONOSUKE"
+            },
+            "back": "POKEMON_1999",
+            "card_type": "POKEMON",
+            "collector_number": {
+              "denominator": "165",
+              "full": "143/165",
+              "numerator": "143",
+              "numeric": 143
+            },
+            "copyright": {
+              "text": "©2023 Pokémon / Nintendo / Creatures / GAME FREAK",
+              "year": 2023
+            },
+            "ext": {
+              "tcgl": {
+                "archetypeID": "0xd0b9ef4e",
+                "cardID": "sv3-5_143",
+                "key": "sv3-5",
+                "longFormID": "Snorlax_sv3-5_143_std_Uncommon_NonFoil_None",
+                "reldate": "2023-09-21 17:00:00+00:00"
+              }
+            },
+            "flavor_text": "This Pokémon’s stomach is so strong, even eating moldy or rotten food will not affect it.",
+            "hp": 150,
+            "images": {
+              "tcgl": {
+                "jpg": {
+                  "front": "https://cdn.malie.io/file/malie-io/tcgl/cards/jpg/en/sv3-5/sv3-5_en_143_std.jpg"
+                },
+                "png": {
+                  "front": "https://cdn.malie.io/file/malie-io/tcgl/cards/png/en/sv3-5/sv3-5_en_143_std.png"
+                },
+                "tex": {
+                  "front": "https://cdn.malie.io/file/malie-io/tcgl/cards/tex/en/sv3-5/sv3-5_en_143_std.png"
+                }
+              }
+            },
+            "lang": "en-US",
+            "name": "Snorlax",
+            "rarity": {
+              "designation": "UNCOMMON",
+              "icon": "SOLID_DIAMOND"
+            },
+            "regulation_mark": "G",
+            "retreat": 4,
+            "set_icon": "MEW_EN",
+            "size": "STANDARD",
+            "stage": "BASIC",
+            "text": [
+              {
+                "kind": "ABILITY",
+                "name": "Voraciousness",
+                "text": "Once during your turn, you may put up to 2 Leftovers cards from your discard pile into your hand."
+              },
+              {
+                "cost": [
+                  "COLORLESS",
+                  "COLORLESS",
+                  "COLORLESS"
+                ],
+                "damage": {
+                  "amount": 130
+                },
+                "kind": "ATTACK",
+                "name": "Thudding Press",
+                "text": "This Pokémon also does 30 damage to itself."
+              }
+            ],
+            "types": [
+              "COLORLESS"
+            ],
+            "weakness": {
+              "amount": 2,
+              "operator": "×",
+              "types": [
+                "FIGHTING"
+              ]
+            }
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "MEW_EN",
+        "143/165",
+        "sv3-5_143",
+        "Snorlax_sv3-5_143_std_Uncommon_NonFoil_None"
+      ],
+      "validatesEdges": [
+        "malie-mew143-reference-positive"
+      ],
+      "outcome": "The exact reference explicitly states STANDARD and POKEMON_1999 and a NonFoil named variant. The separate reverse row states FLAT_SILVER/REVERSE. Neither asserts catalogue completeness or establishes a new physical printing."
     }
   ]
 }
