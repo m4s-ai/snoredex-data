@@ -15008,6 +15008,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0480-P01",
+        "semanticPrintingId": "PRINTING:d7111703090eae422e9218c7",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+        "materializedTargetId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0531"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:d74a894f7617469ee0b661fd",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -35007,6 +35027,57 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0529",
         "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0529"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0530",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0530",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0530",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0530",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0530",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0530"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0531",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0531",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0531",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:d7111703090eae422e9218c7, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0532",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0532",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0532",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0532",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0532",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0532"
       }
     },
     {
@@ -99429,6 +99500,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+        "semanticPrintingId": "PRINTING:d7111703090eae422e9218c7",
+        "cardReleaseId": "RELEASE:TH:Thai:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0480",
+        "sourcePrintingId": "F0480-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+        "specimenIds": [
+          "SPEC-0531"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:d74a894f7617469ee0b661fd",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -101460,6 +101555,54 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0529",
         "specimenIds": [
           "SPEC-0529"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0530",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0530",
+        "cardReleaseId": "RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Thai Snorlax VMAX HP340, printed sc1b T D 120/153 RRR and Illus. aky CG Works. The photograph shows multicolored reflective foil and fine texture across the physical card, with a hand and sleeve visible.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0530",
+        "specimenIds": [
+          "SPEC-0530"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0532",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0532",
+        "cardReleaseId": "RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Thai Snorlax V HP220, printed sc1b T D 119/153 RR and Illus. Masakazu Fukuda. The sleeved physical card is photographed on a dark surface; multicolored foil reflections are visible along the lower rule bars and right border.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0532",
+        "specimenIds": [
+          "SPEC-0532"
         ]
       }
     },
@@ -173199,6 +173342,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:d74a894f7617469ee0b661fd",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -183895,6 +184048,36 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0529",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0530",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0530",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0531",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "provenance": {
+        "specimenId": "SPEC-0531"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0532",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0532",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -232678,6 +232861,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:d74a894f7617469ee0b661fd",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -233970,6 +234169,38 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0530",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0530",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0530",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0532",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0532",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0532",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down",
       "provenance": {}
     },
     {
@@ -278233,6 +278464,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0480-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0481-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0481-P01",
@@ -294917,17 +295155,38 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0529",
       "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0530",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0530",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0531",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:d7111703090eae422e9218c7, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0532",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0532",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down"
     }
   ],
   "summary": {
-    "entities": 8149,
-    "edges": 12124,
-    "migrationInputs": 2842,
+    "entities": 8156,
+    "edges": 12134,
+    "migrationInputs": 2846,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 288,
+      "candidate-needs-evidence": 289,
       "carried": 68,
-      "established-and-mapped": 1572,
+      "established-and-mapped": 1575,
       "linked-local-counterpart": 125,
       "mapped": 345,
       "needs-evidence": 126,
@@ -294935,9 +295194,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2026,
+    "candidateClaims": 2030,
     "cardReleases": 641,
-    "physicalPrintings": 759,
+    "physicalPrintings": 762,
     "setSourceRecords": 474,
     "setSourceDispositions": 474,
     "localizations": 16

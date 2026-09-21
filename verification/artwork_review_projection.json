@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "2324dd7e7cdc83836c7273bbce6e4f9c9ab24f0910ab7cfe4502fd884d945b4a",
+  "projectionVersion": "d86a7bc891bbb1e93cbaaaa5ec23e4788d672c9a59d301fad74424cf4e90734e",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 759,
-    "sourceObservations": 2949
+    "physicalPrintings": 762,
+    "sourceObservations": 2953
   },
   "groups": [
     {
@@ -83326,13 +83326,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0532",
+              "cardReleaseId": "RELEASE:TH:Thai:sc1b T:119/153:Snorlax-V-Swallow-Falling-Down",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Thai Snorlax V HP220, printed sc1b T D 119/153 RR and Illus. Masakazu Fukuda. The sleeved physical card is photographed on a dark surface; multicolored foil reflections are visible along the lower rule bars and right border.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0532",
+              "specimenIds": [
+                "SPEC-0532"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอนV",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -83357,6 +83379,17 @@
               "originalHash": "93ad599fca9777b0941adc3b4cf34a2d3eb6c0ab5f92c420bea90d07aedd4bcf",
               "previewSrc": "images/previews/SPEC-0254.png?v=93ad599fca9777b0941adc3b4cf34a2d3eb6c0ab5f92c420bea90d07aedd4bcf",
               "thumbnailSrc": "images/thumbs/SPEC-0254.png?v=93ad599fca9777b0941adc3b4cf34a2d3eb6c0ab5f92c420bea90d07aedd4bcf"
+            },
+            {
+              "src": "verification/specimens/SPEC-0532.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0532",
+              "contentHash": "11a8605f8793f4afcd65c9e6f58718cfbe7c178dfa7358829469b8e91a3662a4",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "11a8605f8793f4afcd65c9e6f58718cfbe7c178dfa7358829469b8e91a3662a4",
+              "previewSrc": "images/previews/SPEC-0532.png?v=11a8605f8793f4afcd65c9e6f58718cfbe7c178dfa7358829469b8e91a3662a4",
+              "thumbnailSrc": "images/thumbs/SPEC-0532.png?v=11a8605f8793f4afcd65c9e6f58718cfbe7c178dfa7358829469b8e91a3662a4"
             }
           ],
           "observations": [
@@ -83386,6 +83419,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax V card at carousel image 2/6, row 4, column 1 crop. The visible artwork, printed language, set identity sc1b T and collector identity 119/153 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "2b361eced50dabf85b11ae65d2033879ea2cc3c4044cfb0b41608d91bafcaec8",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0532",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/260033515/4170279559",
+              "evidence": "Thai Snorlax V HP220, printed sc1b T D 119/153 RR and Illus. Masakazu Fukuda. The sleeved physical card is photographed on a dark surface; multicolored foil reflections are visible along the lower rule bars and right border. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted.",
+              "contentHash": "542380c630d43f9a72ff0656b0d4dbbc9f6359d802f6ad25b32a756f636ec114",
+              "image": "verification/specimens/SPEC-0532.jpg"
             }
           ]
         }
@@ -86844,13 +86886,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0530",
+              "cardReleaseId": "RELEASE:TH:Thai:sc1b T:120/153:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Thai Snorlax VMAX HP340, printed sc1b T D 120/153 RRR and Illus. aky CG Works. The photograph shows multicolored reflective foil and fine texture across the physical card, with a hand and sleeve visible.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0530",
+              "specimenIds": [
+                "SPEC-0530"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอนVMAX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -86875,6 +86939,17 @@
               "originalHash": "775ffc3c0e6209d9a151d0c8d14f8620d3b259518bb2042de6500ef8d8d332cf",
               "previewSrc": "images/previews/SPEC-0255.png?v=775ffc3c0e6209d9a151d0c8d14f8620d3b259518bb2042de6500ef8d8d332cf",
               "thumbnailSrc": "images/thumbs/SPEC-0255.png?v=775ffc3c0e6209d9a151d0c8d14f8620d3b259518bb2042de6500ef8d8d332cf"
+            },
+            {
+              "src": "verification/specimens/SPEC-0530.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0530",
+              "contentHash": "92f5c19ba7e22149755055db0e873503bea97ed76a3c9c68a1bd3633ae8ffff2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "92f5c19ba7e22149755055db0e873503bea97ed76a3c9c68a1bd3633ae8ffff2",
+              "previewSrc": "images/previews/SPEC-0530.png?v=92f5c19ba7e22149755055db0e873503bea97ed76a3c9c68a1bd3633ae8ffff2",
+              "thumbnailSrc": "images/thumbs/SPEC-0530.png?v=92f5c19ba7e22149755055db0e873503bea97ed76a3c9c68a1bd3633ae8ffff2"
             }
           ],
           "observations": [
@@ -86904,6 +86979,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax VMAX card at carousel image 2/6, row 4, column 3 crop. The visible artwork, printed language, set identity sc1b T and collector identity 120/153 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "45bd4508812881621a0a0e9e67ef6cb0d27cbf6e406f37955579bf7609e31a2f",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0530",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/412643607/23229873986",
+              "evidence": "Thai Snorlax VMAX HP340, printed sc1b T D 120/153 RRR and Illus. aky CG Works. The photograph shows multicolored reflective foil and fine texture across the physical card, with a hand and sleeve visible. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted.",
+              "contentHash": "1f1792f11997790008275de06c02948ef7f6a8c598bb2c85fc27baca5ef33767",
+              "image": "verification/specimens/SPEC-0530.jpg"
             }
           ]
         }
@@ -89418,13 +89502,43 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d7111703090eae422e9218c7",
+              "semanticPrintingId": "PRINTING:d7111703090eae422e9218c7",
+              "cardReleaseId": "RELEASE:TH:Thai:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0480",
+              "sourcePrintingId": "F0480-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d7111703090eae422e9218c7",
+              "specimenIds": [
+                "SPEC-0531"
+              ],
+              "sources": [
+                {
+                  "url": "https://down-th.img.susercontent.com/file/th-11134207-7r990-lrbal5xusp8d56",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Thai Snorlax HP150, printed sv4a T G 310/190 S and Illus. Shigenori Negishi. A physical card is photographed against booster packs; colored foil reflections and fine texture are visible in the illustration and on the blue body. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted. Retained as SPEC-0531.",
+                  "retrievedAt": "2026-09-21"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base, V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -89460,9 +89574,29 @@
               "originalHash": "679ef6aab75627b046eee9a05771fdd2738db14ffe54b6e2764d5c07a42a8dc5",
               "previewSrc": "images/previews/SPEC-0271.png?v=679ef6aab75627b046eee9a05771fdd2738db14ffe54b6e2764d5c07a42a8dc5",
               "thumbnailSrc": "images/thumbs/SPEC-0271.png?v=679ef6aab75627b046eee9a05771fdd2738db14ffe54b6e2764d5c07a42a8dc5"
+            },
+            {
+              "src": "verification/specimens/SPEC-0531.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0531",
+              "contentHash": "42410076723d2a6d5518a42a39fab6a9b6e09f86609bade7b753292aa7e1792e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "42410076723d2a6d5518a42a39fab6a9b6e09f86609bade7b753292aa7e1792e",
+              "previewSrc": "images/previews/SPEC-0531.png?v=42410076723d2a6d5518a42a39fab6a9b6e09f86609bade7b753292aa7e1792e",
+              "thumbnailSrc": "images/thumbs/SPEC-0531.png?v=42410076723d2a6d5518a42a39fab6a9b6e09f86609bade7b753292aa7e1792e"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0480-P01:0:4a0a07f8d20dddb8",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7r990-lrbal5xusp8d56",
+              "evidence": "Thai Snorlax HP150, printed sv4a T G 310/190 S and Illus. Shigenori Negishi. A physical card is photographed against booster packs; colored foil reflections and fine texture are visible in the illustration and on the blue body. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted. Retained as SPEC-0531.",
+              "contentHash": "17a43e8166e4969d3edc45521dae4efb11eff1d93becf5f20f6b61bc714c7373",
+              "image": null
+            },
             {
               "observationId": "source-first:TH:sv4a:310/190:base",
               "kind": "source-first",
@@ -89489,6 +89623,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 5/6, row 3, column 3 crop. The visible artwork, printed language, set identity sv4a and collector identity 310/190 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "ad576d94ff5ad54338f68f3d9a5de95c0dde9b2bba7abf614b5f9e5155ac4ab2",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0531",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/76081799/25812272577",
+              "evidence": "Thai Snorlax HP150, printed sv4a T G 310/190 S and Illus. Shigenori Negishi. A physical card is photographed against booster packs; colored foil reflections and fine texture are visible in the illustration and on the blue body. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted.",
+              "contentHash": "20614b3d76eadb1e2a8a43f6e2a899bcce7ea569cb595c1e959984b1630c0b77",
+              "image": "verification/specimens/SPEC-0531.jpg"
             },
             {
               "observationId": "unit:U0387",

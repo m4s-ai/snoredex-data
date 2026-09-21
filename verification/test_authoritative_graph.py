@@ -256,6 +256,11 @@ def verify_observed_finish_attribution(specimens, registry):
             specimen.get('inspectedFrom', 'Inspected physical specimen photograph'))
         registry.record_specimen_sources(specimen, ['sample'], source_type, physical,
             lambda *a, **kw: calls.append((a, kw)), surfaces)
+        photo = registry.provenance_url(specimen.get('photographSource'))
+        listing = registry.provenance_url(specimen.get('listingUrl'))
+        if source_type == "Seller listing photograph" and photo and listing and photo != listing:
+            context_claims = [a for a, kw in calls if a[0] == listing]
+            assert all(a[2] == 'product' for a in context_claims), specimen['specimenId']
         finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
         assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
         if 'finish' in physical.get('ownerAttestedFields', []):

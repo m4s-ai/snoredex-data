@@ -936,6 +936,9 @@ def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: st
     listing_url = provenance_url(specimen.get("listingUrl"))
     urls = {photo_url, listing_url} - {None}
     observed_url = photo_url or listing_url
+    # A seller listing is provenance for its photo, not a second identity source.
+    if source_type == "Seller listing photograph":
+        urls = {observed_url} - {None}
     retained_product_images = retained_cardmarket_product_image_urls([specimen])
     for url in sorted(urls) or [None]:
         provider = specimen_provider(url, source_type)

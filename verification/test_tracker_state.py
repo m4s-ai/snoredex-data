@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import sqlite3
 import sys
 import tempfile
@@ -244,27 +245,36 @@ def main() -> None:
             "legacy-open": ("research-placeholder", "research"),
         }
 
+    # Compare every current legacy row with the canonical catalogue, rather than
+    # freezing research counts that legitimately change as evidence is added.
+    catalogue = json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))
+    expected = {}
+    for item_record in catalogue["items"]:
+        for checklist_id in item_record["legacyChecklistIds"]:
+            assert checklist_id not in expected, checklist_id
+            expected[checklist_id] = (item_record["itemKind"], item_record["progressClass"])
+    checklist = json.loads((ROOT / "analysis_checklist.json").read_text(encoding="utf-8"))
+    assert set(expected) == {row["checklistId"] for row in checklist["items"]}
     rows = tracker.catalog_rows(ROOT / "snoredex.sqlite")
-    assert len(rows) == 898
-    connection = sqlite3.connect(ROOT / "snoredex.sqlite")
-    assert connection.execute(
-        "SELECT collector_item_kind, collector_progress_class, COUNT(*) "
-        "FROM checklist_items GROUP BY collector_item_kind, collector_progress_class"
-    ).fetchall() == [
-        ("finish-candidate", "research", 113),
-        ("research-placeholder", "research", 72),
-        ("verified-printing", "current-known", 713),
-    ]
-    assert connection.execute(
-        "SELECT wanted, COUNT(*) FROM collection_tracker_seed GROUP BY wanted"
-    ).fetchall() == [(0, 185), (1, 713)]
-    connection.close()
+    assert {row[0]: (row[3], row[4]) for row in rows} == expected
+    assert len(rows) == len(expected)
+    with sqlite3.connect(ROOT / "snoredex.sqlite") as connection:
+        assert {
+            row[0]: (row[1], row[2]) for row in connection.execute(
+                "SELECT checklist_id, collector_item_kind, collector_progress_class FROM checklist_items"
+            )
+        } == expected
+        assert dict(connection.execute(
+            "SELECT checklist_id, wanted FROM collection_tracker_seed"
+        )) == {key: int(value[1] == "current-known") for key, value in expected.items()}
 
-    connection = sqlite3.connect(ROOT / "snoredex-tracker-template.sqlite")
-    assert connection.execute(
-        "SELECT collection_status, COUNT(*) FROM active_tracker GROUP BY collection_status"
-    ).fetchall() == [("need", 713), ("research", 185)]
-    connection.close()
+    with sqlite3.connect(ROOT / "snoredex-tracker-template.sqlite") as connection:
+        assert dict(connection.execute(
+            "SELECT checklist_id, collection_status FROM active_tracker"
+        )) == {
+            key: "need" if value[1] == "current-known" else "research"
+            for key, value in expected.items()
+        }
 
     print("tracker state and read-only check regressions passed")
 

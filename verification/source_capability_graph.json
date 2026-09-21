@@ -20,7 +20,7 @@
       "coverageEdges": 57,
       "absenceEdges": 0,
       "observations": 61,
-      "resolvedVerdictSources": 1664
+      "resolvedVerdictSources": 1592
     },
     "surfaceStates": {
       "active": 27,
@@ -7091,7 +7091,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:4a7f99b2fa79c960f3953fbebd38faf71e7b915c2a0da5f3efb49cd3608413c9",
+      "rawRecordHash": "sha256:9dfababecb81a461b668cfb306d576e522048099e80071bfa712a0e4db595ba6",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -7104,7 +7104,6 @@
           "Physical card, photographed sealed specimen",
           "Physical card, photographed specimen",
           "Positive source-first card record",
-          "Seller listing photograph",
           "Third-party scan archive",
           "owner photograph",
           "retained Cardmarket product scan"
@@ -7114,12 +7113,11 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 225,
+        "stableIdCount": 211,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
           "F0125-P02",
-          "F0174-P01",
           "F0247-P02",
           "F0291-P02",
           "F0294-P02",
@@ -7130,15 +7128,11 @@
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
-          "F0604-P02",
           "F0615-P03",
-          "F0634-P01",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
           "KR:SM-P:140:base",
           "KR:XY-P:167:base",
-          "KR:XY2:066/080:base",
-          "KR:xm2a:136/193:base",
           "KR:xsv2a:143/165:base",
           "SPEC-0001",
           "SPEC-0002",
@@ -7152,8 +7146,6 @@
           "SPEC-0028",
           "SPEC-0030",
           "SPEC-0031",
-          "SPEC-0042",
-          "SPEC-0043",
           "SPEC-0058",
           "SPEC-0059",
           "SPEC-0060",
@@ -7245,10 +7237,6 @@
           "SPEC-0233",
           "SPEC-0234",
           "SPEC-0235",
-          "SPEC-0409",
-          "SPEC-0410",
-          "SPEC-0411",
-          "SPEC-0467",
           "SPEC-0469",
           "SPEC-0470",
           "SPEC-0471",
@@ -7273,7 +7261,6 @@
           "U0229",
           "U0230",
           "U0231",
-          "U0246",
           "U0271",
           "U0286",
           "U0290",
@@ -7307,7 +7294,6 @@
           "U0547",
           "U0556",
           "U0560",
-          "U0561",
           "U0575",
           "U0578",
           "U0582",
@@ -7339,11 +7325,10 @@
           "U0771",
           "U0772",
           "U0775",
-          "U0780",
-          "U0785"
+          "U0780"
         ],
         "retrievedAt": "2026-09-10",
-        "usageCount": 375
+        "usageCount": 359
       }
     },
     {
@@ -13016,18 +13001,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "product"
-      ]
-    },
-    {
-      "sourceKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
-      "providerId": "cardmarket",
-      "surfaceId": "cardmarket-products",
-      "capabilityEdgeIds": [
-        "cardmarket-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
         "product"
       ]
     },
@@ -23451,6 +23424,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.nacg.tw/product-details.php?id=149595",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokeca.net/product/22292",
       "providerId": "retailer-listing",
       "surfaceId": "retailer-listings",
@@ -23567,18 +23553,6 @@
       ]
     },
     {
-      "sourceKey": "https://collectorworth.com/cards/snorlax-15",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23631,6 +23605,45 @@
       ]
     },
     {
+      "sourceKey": "https://down-th.img.susercontent.com/file/bf847b90e210baa4314649a110306962",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7r990-lrbal5xusp8d56",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7r992-lsldqgsxcdpq20",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23645,30 +23658,6 @@
     },
     {
       "sourceKey": "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-it-mint",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-reverse-it-mint",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23761,20 +23750,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/404911233",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
       ]
     },
     {
@@ -23786,104 +23762,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/408219334",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/411963518",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/414684191",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/416373605",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/418966418",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/420832203",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/421867656",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/421876007",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
       ]
     },
     {
@@ -23895,116 +23774,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/423230216",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/423487583",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/423858186",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425341258",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425468617",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425674631",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/426224532",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/427231898",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/427352825",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
       ]
     },
     {
@@ -24726,30 +24496,6 @@
       ]
     },
     {
-      "sourceKey": "https://m.bunjang.co.kr/products/430221399",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://m.bunjang.co.kr/products/430796194",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://media.bunjang.co.kr/product/386929037_1_1777783357_w480.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25078,30 +24824,6 @@
       ]
     },
     {
-      "sourceKey": "https://shopee.co.th/product/431199770/23151999066",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-(Indonesia-Version)-i.52799340.41773289935",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25123,8 +24845,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -25137,8 +24858,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -25151,8 +24871,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -25165,8 +24884,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -25179,582 +24897,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shpnpokestore.de/en/products/pokemon-karte-holo-promo-relaxo-xy179-deutsch-1",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.ca/itm/116684597526",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.co.uk/itm/397876834888",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/117384644583",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/127702710280",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/137311196693",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/167729662724",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/177940547168",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/196697959025",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/224621405527",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/226754170463",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/227367215820",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/235807084646",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/257574042846",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/297969171577",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/318581147040",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/335112243811",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/356156650452",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/356707199467",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/358744944023",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/366541317089",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/386908467357",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/387286965530",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/388365217371",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/397048838536",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/397923018972",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/398270461415",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/406290210703",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/147246589735",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/168013799605",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/205451368369",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/366600950681",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/397718149955",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/133870581495?_ul=FR",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/134018568041",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/336572623072",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/127694028517",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/135296329933",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/156269693911",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/174939387384",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/206230248590",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287192829023",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287396391988",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287532726389",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/398044139298",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.fanaticscollect.com/buy-now/e9048304-5bf4-46ba-a471-47edd15fc986/2015-pokemon-russian-xy-breakthrough-snorlax-118-cgc-8-nm-mt",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.lotticards.de/Generationen",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
         "identity"
       ]
     },
@@ -25785,20 +24927,6 @@
       ]
     },
     {
-      "sourceKey": "https://www.nacg.tw/product-details.php?id=149595",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish",
-        "finish-override",
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://www.ruten.com.tw/item/22223353127192",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25808,20 +24936,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.vinted.pl/items/9302907930-snorlax-37130-reverse-holo-diament-i-perla",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
+        "finish-override"
       ]
     },
     {

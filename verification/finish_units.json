@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 480,
+      "withConfirmedFinish": 481,
       "withOnlyMarketplaceClaim": 45,
-      "pendingFinish": 36,
+      "pendingFinish": 35,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 311,
-      "withHolo": 238,
+      "withHolo": 239,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 62,
-      "withAnyUnresolvedDetail": 140,
+      "withUnresolvedProductMapping": 61,
+      "withAnyUnresolvedDetail": 139,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -40736,23 +40736,47 @@
           "image": "images/sv4a_310_Snorlax_V2_747664.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7r990-lrbal5xusp8d56",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Thai Snorlax HP150, printed sv4a T G 310/190 S and Illus. Shigenori Negishi. A physical card is photographed against booster packs; colored foil reflections and fine texture are visible in the illustration and on the blue body. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy, independent corroboration or complete finish inventory is asserted. Retained as SPEC-0531.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0531"
+          ],
+          "image": "verification/specimens/SPEC-0531.jpg",
+          "printingId": "F0480-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0481",

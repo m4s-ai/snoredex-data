@@ -621,6 +621,8 @@ def main() -> None:
     assert {row["cardReleaseId"] for row in catalogue["items"]} == graph_release_ids
     assert counts["currentKnown"] == counts["verifiedPrintings"]
     assert counts["research"] == counts["finishCandidates"] + counts["researchPlaceholders"]
+    legacy_placeholders = sum(not row.get("printingId") for row in predecessor_items)
+    legacy_verified = len(predecessor_items) - expected_candidates - legacy_placeholders
     assert legacy_compatibility == {
         "schema": "snoredex-legacy-collector-compatibility",
         "schemaVersion": "1.0.0",
@@ -630,11 +632,11 @@ def main() -> None:
         "collectionProjection": {"current-known": "need", "research": "research"},
         "counts": {
             "legacyRows": len(predecessor_items),
-            "verifiedPrintings": 713,
-            "finishCandidates": 113,
-            "researchPlaceholders": 72,
-            "currentKnown": 713,
-            "research": 185,
+            "verifiedPrintings": legacy_verified,
+            "finishCandidates": expected_candidates,
+            "researchPlaceholders": legacy_placeholders,
+            "currentKnown": legacy_verified,
+            "research": expected_candidates + legacy_placeholders,
         },
     }
     # Issue #262: preserve exact Thai identity while admitting field-specific evidence.
