@@ -24,10 +24,466 @@
     "unknown",
     "blocked-by-source"
   ],
+  "payloadSchema": {
+    "additionalProperties": false,
+    "properties": {
+      "artists": {
+        "additionalProperties": false,
+        "properties": {
+          "list": {
+            "items": {
+              "minLength": 1,
+              "pattern": "\\S",
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          },
+          "text": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "list"
+        ],
+        "type": "object"
+      },
+      "back": {
+        "enum": [
+          "POKEMON_1999"
+        ],
+        "type": "string"
+      },
+      "card_type": {
+        "enum": [
+          "POKEMON"
+        ],
+        "type": "string"
+      },
+      "collector_number": {
+        "additionalProperties": false,
+        "properties": {
+          "denominator": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "full": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "numerator": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "numeric": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "full",
+          "numerator",
+          "numeric"
+        ],
+        "type": "object"
+      },
+      "copyright": {
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "minLength": 1,
+            "pattern": "\\S",
+            "type": "string"
+          },
+          "year": {
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "text",
+          "year"
+        ],
+        "type": "object"
+      },
+      "flavor_text": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "foil": {
+        "additionalProperties": false,
+        "properties": {
+          "mask": {
+            "enum": [
+              "HOLO",
+              "REVERSE",
+              "ETCHED",
+              "STAMPED"
+            ],
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "ACE_FOIL",
+              "COSMOS",
+              "CRACKED_ICE",
+              "FLAT_SILVER",
+              "RAINBOW",
+              "STAMPED",
+              "SUN_PILLAR",
+              "SV_HOLO",
+              "SV_ULTRA_SCODIX",
+              "SV_ULTRA"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "mask"
+        ],
+        "type": "object"
+      },
+      "hp": {
+        "minimum": 1,
+        "type": "integer"
+      },
+      "lang": {
+        "enum": [
+          "de-DE",
+          "en-US"
+        ],
+        "type": "string"
+      },
+      "name": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "rarity": {
+        "additionalProperties": false,
+        "properties": {
+          "designation": {
+            "enum": [
+              "PROMO",
+              "COMMON",
+              "UNCOMMON",
+              "RARE",
+              "DOUBLE_RARE",
+              "ILLUSTRATION_RARE",
+              "ULTRA_RARE",
+              "SPECIAL_ILLUSTRATION_RARE",
+              "HYPER_RARE",
+              "SHINY_RARE",
+              "SHINY_ULTRA_RARE",
+              "ACE_SPEC_RARE"
+            ],
+            "type": "string"
+          },
+          "icon": {
+            "enum": [
+              "BLACK_STAR_PROMO",
+              "SOLID_CIRCLE",
+              "SOLID_DIAMOND",
+              "SOLID_STAR",
+              "TWO_BLACK_STARS",
+              "GOLD_STAR",
+              "TWO_SILVER_STARS",
+              "TWO_GOLD_STARS",
+              "THREE_GOLD_STARS",
+              "SHINY_STAR",
+              "TWO_SHINY_STARS",
+              "PINK_STAR"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "designation",
+          "icon"
+        ],
+        "type": "object"
+      },
+      "regulation_mark": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "resistance": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "operator": {
+            "const": "-"
+          },
+          "types": {
+            "items": {
+              "enum": [
+                "GRASS",
+                "FIRE",
+                "WATER",
+                "LIGHTNING",
+                "PSYCHIC",
+                "FIGHTING",
+                "DARKNESS",
+                "METAL",
+                "FAIRY",
+                "DRAGON",
+                "COLORLESS"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "types",
+          "amount",
+          "operator"
+        ],
+        "type": "object"
+      },
+      "retreat": {
+        "minimum": 0,
+        "type": "integer"
+      },
+      "set_icon": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "size": {
+        "enum": [
+          "STANDARD"
+        ],
+        "type": "string"
+      },
+      "stage": {
+        "enum": [
+          "BASIC"
+        ],
+        "type": "string"
+      },
+      "stage_text": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "subtitle": {
+        "minLength": 1,
+        "pattern": "\\S",
+        "type": "string"
+      },
+      "tags": {
+        "items": {
+          "enum": [
+            "ANCIENT",
+            "FUTURE",
+            "ACE_SPEC",
+            "EX_LOWER",
+            "TERA",
+            "ITEM",
+            "G9_ITEM",
+            "TOOL",
+            "PLAYABLE_TRAINER",
+            "SHINY"
+          ],
+          "type": "string"
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "text": {
+        "items": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "ABILITY"
+                },
+                "name": {
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                },
+                "text": {
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "text"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "cost": {
+                  "items": {
+                    "enum": [
+                      "GRASS",
+                      "FIRE",
+                      "WATER",
+                      "LIGHTNING",
+                      "PSYCHIC",
+                      "FIGHTING",
+                      "DARKNESS",
+                      "METAL",
+                      "FAIRY",
+                      "DRAGON",
+                      "COLORLESS",
+                      "FREE"
+                    ],
+                    "type": "string"
+                  },
+                  "minItems": 1,
+                  "type": "array"
+                },
+                "damage": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "amount": {
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "suffix": {
+                      "enum": [
+                        "×",
+                        "+",
+                        "-"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "amount"
+                  ],
+                  "type": "object"
+                },
+                "kind": {
+                  "const": "ATTACK"
+                },
+                "name": {
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                },
+                "text": {
+                  "minLength": 1,
+                  "pattern": "\\S",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "name",
+                "cost"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "types": {
+        "items": {
+          "enum": [
+            "GRASS",
+            "FIRE",
+            "WATER",
+            "LIGHTNING",
+            "PSYCHIC",
+            "FIGHTING",
+            "DARKNESS",
+            "METAL",
+            "FAIRY",
+            "DRAGON",
+            "COLORLESS"
+          ],
+          "type": "string"
+        },
+        "minItems": 1,
+        "type": "array"
+      },
+      "weakness": {
+        "additionalProperties": false,
+        "properties": {
+          "amount": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "operator": {
+            "const": "×"
+          },
+          "types": {
+            "items": {
+              "enum": [
+                "GRASS",
+                "FIRE",
+                "WATER",
+                "LIGHTNING",
+                "PSYCHIC",
+                "FIGHTING",
+                "DARKNESS",
+                "METAL",
+                "FAIRY",
+                "DRAGON",
+                "COLORLESS"
+              ],
+              "type": "string"
+            },
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "types",
+          "amount",
+          "operator"
+        ],
+        "type": "object"
+      }
+    },
+    "required": [
+      "lang",
+      "card_type",
+      "name",
+      "regulation_mark",
+      "set_icon",
+      "collector_number",
+      "copyright",
+      "size",
+      "back",
+      "text",
+      "stage",
+      "stage_text",
+      "hp",
+      "types",
+      "retreat"
+    ],
+    "type": "object"
+  },
   "pilot": [
     {
       "cardReleaseId": "RELEASE:WEST:German:JU:11:Snorlax-Thick-Skinned-Body-Slam",
-      "identitySha256": "8c27cb238773b6aeec380fed9de6250baaf0964a2cb84591e098d76dfcdb0da2",
+      "entrySha256": "a7feebbf9aa5748cd9267901ba5769a6158acf3bffe85eceb08142af507281a3",
       "itemId": "item-2645c53d-7c6e-5b47-ad37-51c2e959df6e",
       "localizationId": "LOCALIZATION:WEST:de",
       "physicalPrintingId": null,
@@ -35,7 +491,7 @@
     },
     {
       "cardReleaseId": "RELEASE:WEST:English:MEW:143:Snorlax-Voraciousness-Thudding-Press",
-      "identitySha256": "01cc9bd6398c4449cfe36ddddacb79bce4644d98b6f6e6a2b7405e1d0195edff",
+      "entrySha256": "d902cd93b2e4e1b8111969fe68f79ef2bf9461789694d3b593501e60bc94fd2c",
       "itemId": "item-345ada2b-32ce-5fa1-8132-308cba7b3c54",
       "localizationId": "LOCALIZATION:WEST:en",
       "physicalPrintingId": "PHYSICAL:F0225-P01",
@@ -43,7 +499,7 @@
     },
     {
       "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
-      "identitySha256": "f7f637d8c3451262350a486a82d8f478e9b5425d046401b953103895677771c4",
+      "entrySha256": "e0ae1899f41f8172d900eb345992a04bb5ec592936a84edcc1964255073078e9",
       "itemId": "item-85d569de-bd2a-51f6-a00e-7d870e35b60f",
       "localizationId": "LOCALIZATION:WEST:en",
       "physicalPrintingId": "PHYSICAL:F0507-P02",
@@ -51,7 +507,7 @@
     },
     {
       "cardReleaseId": "RELEASE:WEST:English:MEW:143:Snorlax-Voraciousness-Thudding-Press",
-      "identitySha256": "a1e45eaba7e023a3a7a7d1630d57cc9cc9da9e01416e7c966166236167aa40dd",
+      "entrySha256": "42a14f377367c8abfca38c632bfb8198dd13925d992cf144de051b9fb14e8da0",
       "itemId": "item-86d6224a-18c1-584c-96bb-5eaf92f6c2ec",
       "localizationId": "LOCALIZATION:WEST:en",
       "physicalPrintingId": "PHYSICAL:F0225-P02",
@@ -59,7 +515,7 @@
     },
     {
       "cardReleaseId": "RELEASE:WEST:German:MEW:143:Snorlax-Voraciousness-Thudding-Press",
-      "identitySha256": "6ec6aa5e24d786b1391a743934798f0683385668a91264a37f453a45cbf5e7c9",
+      "entrySha256": "94a8f4967e2d734ad8f6f236bdb2f387dc599d91a53b2323e6bf2a2e530d82d0",
       "itemId": "item-9781d666-3475-5612-86d6-0e0a3c9e0f96",
       "localizationId": "LOCALIZATION:WEST:de",
       "physicalPrintingId": "PHYSICAL:F0227-P01",
@@ -67,7 +523,7 @@
     },
     {
       "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
-      "identitySha256": "c4179651baf5c2606b27deef2a1cbe2d6d537fd054410567da60eef97f711a13",
+      "entrySha256": "93b62103aa27b3f8b59659a98ffdca93894f9c210ba41d8df72b36209772220b",
       "itemId": "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085",
       "localizationId": "LOCALIZATION:WEST:en",
       "physicalPrintingId": "PHYSICAL:F0507-P01",
