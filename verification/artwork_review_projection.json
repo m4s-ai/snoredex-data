@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "3e46534b09fc4bf9b947aea5cf0f1333851d9ed349a81bea6d9dbc78aa469cbf",
+  "projectionVersion": "2324dd7e7cdc83836c7273bbce6e4f9c9ab24f0910ab7cfe4502fd884d945b4a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 757,
-    "sourceObservations": 2947
+    "physicalPrintings": 759,
+    "sourceObservations": 2949
   },
   "groups": [
     {
@@ -33677,13 +33677,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0528",
+              "cardReleaseId": "RELEASE:KR:Korean:s5a:093/070:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0528",
+              "specimenIds": [
+                "SPEC-0528"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -33700,6 +33722,17 @@
               "originalHash": "58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "previewSrc": "images/previews/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d",
               "thumbnailSrc": "images/thumbs/s5a_93_Snorlax_552704.jpg?v=58f312b533e38d34d29dcdc8f47c2c7d85f90daf0a87a18231965640e5bf6a5d"
+            },
+            {
+              "src": "verification/specimens/SPEC-0528.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0528",
+              "contentHash": "a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00",
+              "previewSrc": "images/previews/SPEC-0528.png?v=a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00",
+              "thumbnailSrc": "images/thumbs/SPEC-0528.png?v=a8c5818a99cf90089003bd78b8876b91406b2f694ec5a3159f130a28c51eae00"
             }
           ],
           "observations": [
@@ -33711,6 +33744,15 @@
               "evidence": "The retained positive bulbapedia record identifies Korean s5a 093/070 for Snorlax and states rarity UR. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
               "contentHash": "d52de2f99a0d6c8e1ecf892f1c8c841d65e91d9a08e1de4c66fd5d0c46851c36",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0528",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/430221399",
+              "evidence": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+              "contentHash": "4aebc5e4ed65a4d7524a09ac895a3120392e70de5aa3204a929e590f505caf02",
+              "image": "verification/specimens/SPEC-0528.png"
             },
             {
               "observationId": "unit:U0601",
@@ -87136,13 +87178,35 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0529",
+              "cardReleaseId": "RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0529",
+              "specimenIds": [
+                "SPEC-0529"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax VMAX",
             "artist": null,
             "variant": "V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -87159,6 +87223,17 @@
               "originalHash": "ab20c54817a03dd2c5a2f83613e5d3327954858d7dab055327318044effcc575",
               "previewSrc": "images/previews/s1H_70_Snorlax_VMAX_V2_467629.jpg?v=ab20c54817a03dd2c5a2f83613e5d3327954858d7dab055327318044effcc575",
               "thumbnailSrc": "images/thumbs/s1H_70_Snorlax_VMAX_V2_467629.jpg?v=ab20c54817a03dd2c5a2f83613e5d3327954858d7dab055327318044effcc575"
+            },
+            {
+              "src": "verification/specimens/SPEC-0529.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0529",
+              "contentHash": "e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254",
+              "previewSrc": "images/previews/SPEC-0529.png?v=e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254",
+              "thumbnailSrc": "images/thumbs/SPEC-0529.png?v=e9e87ca2fa6dad864da712ea9c1a2eb950723e06c2e520920d7982760a907254"
             }
           ],
           "observations": [
@@ -87170,6 +87245,15 @@
               "evidence": "The retained positive bulbapedia record identifies Korean s1H 070/060 for Snorlax VMAX and states rarity HR. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
               "contentHash": "4e8e2f570d665d04ddb3b98a0328db8dc116bc7a3c26767df5ed92fc743b029c",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0529",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/430796194",
+              "evidence": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
+              "contentHash": "367944a4d4869e1ec460761afce192429de0a2fea74359418f9530b71421f3c3",
+              "image": "verification/specimens/SPEC-0529.png"
             },
             {
               "observationId": "unit:U0508",

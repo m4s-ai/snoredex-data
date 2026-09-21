@@ -767,6 +767,7 @@ def build_database(target: Path) -> dict[str, int | str]:
         cards_doc["meta"]["verification"]["lastUpdated"],
         checklist_doc["meta"]["generated"],
         load("analysis_confirmed_releases.json")["generated"],
+        graph_doc["meta"]["generated"],
     )
     metadata = {
         "schema": "snoredex-current-state",
