@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-21",
-  "projectionVersion": "d86a7bc891bbb1e93cbaaaa5ec23e4788d672c9a59d301fad74424cf4e90734e",
+  "projectionVersion": "c5e1fa3744e56d78e47480d277429db6d0c57caf9a0048ea94df13ee56f1fc99",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 641,
-    "physicalPrintings": 762,
-    "sourceObservations": 2953
+    "physicalPrintings": 763,
+    "sourceObservations": 2958
   },
   "groups": [
     {
@@ -17264,6 +17264,17 @@
               "originalHash": "5afbda46e1128d441f4bf883aa9ea46653ac8080626b7b59c3b9dd3df4b37858",
               "previewSrc": "images/previews/SPEC-0262.png?v=5afbda46e1128d441f4bf883aa9ea46653ac8080626b7b59c3b9dd3df4b37858",
               "thumbnailSrc": "images/thumbs/SPEC-0262.png?v=5afbda46e1128d441f4bf883aa9ea46653ac8080626b7b59c3b9dd3df4b37858"
+            },
+            {
+              "src": "verification/specimens/SPEC-0536.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0536",
+              "contentHash": "1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589",
+              "previewSrc": "images/previews/SPEC-0536.png?v=1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589",
+              "thumbnailSrc": "images/thumbs/SPEC-0536.png?v=1f4861f8a4683f81a68661c7eff3328cc06817feed4d91b66dee3d9bce070589"
             }
           ],
           "observations": [
@@ -17293,6 +17304,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 4/6, row 1, column 4 crop. The visible artwork, printed language, set identity s10b and collector identity 056/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "56d0d6fdebfa1f1d98b8daa3377116c174fbf25b80c61baee886e3479e56434d",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0536",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://ojamacard.com/product/28693/056-071-คาบิกอน-r-s10bt",
+              "evidence": "OjamaCard designed product image shows Thai Snorlax HP150, Pokemon GO logo and s10b T F 056/071 R. Rainbow bands are depicted in illustration and border, but physical photography versus rendered foil is unresolved. Identity evidence only; no physical finish confirmation.",
+              "contentHash": "4cd0b57151c776ca44062b3db8f7cc88385ac9aa878395be2362073f8911657a",
+              "image": "verification/specimens/SPEC-0536.jpg"
             },
             {
               "observationId": "unit:U0205",
@@ -22258,13 +22278,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0533",
+              "cardReleaseId": "RELEASE:TH:Thai:sc1a T:127/154:Snorlax-Collect-Collapse",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "The seller photograph establishes Thai sc1a T 127/154 U identity; the collection owner explicitly confirmed non-holo for this exact supplied image on 2026-09-21. No ownership, absence of parallel finishes, or inventory completeness is asserted.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0533",
+              "specimenIds": [
+                "SPEC-0533"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -22289,6 +22331,17 @@
               "originalHash": "a3193ff8b91b36f6c796a266ae881717eb9bdc1bb6118e8e10efb04457c55cb4",
               "previewSrc": "images/previews/SPEC-0253.png?v=a3193ff8b91b36f6c796a266ae881717eb9bdc1bb6118e8e10efb04457c55cb4",
               "thumbnailSrc": "images/thumbs/SPEC-0253.png?v=a3193ff8b91b36f6c796a266ae881717eb9bdc1bb6118e8e10efb04457c55cb4"
+            },
+            {
+              "src": "verification/specimens/SPEC-0533.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0533",
+              "contentHash": "a32b389233ef4629b3cc41b262569a2ae4ba69b66d23160c7c53beb5065cef7d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "a32b389233ef4629b3cc41b262569a2ae4ba69b66d23160c7c53beb5065cef7d",
+              "previewSrc": "images/previews/SPEC-0533.png?v=a32b389233ef4629b3cc41b262569a2ae4ba69b66d23160c7c53beb5065cef7d",
+              "thumbnailSrc": "images/thumbs/SPEC-0533.png?v=a32b389233ef4629b3cc41b262569a2ae4ba69b66d23160c7c53beb5065cef7d"
             }
           ],
           "observations": [
@@ -22318,6 +22371,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 3/6, row 2, column 1 crop. The visible artwork, printed language, set identity sc1a T and collector identity 127/154 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "20838f7f3704ed74e96cdec6e680b848ab9edeee9eb0fe6b2bb2253f4ca5567f",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0533",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/425086629/13703047839",
+              "evidence": "Physical Thai Snorlax HP150, Collect attack drawing two cards, Body Slam 120, Eri Yamaki, sc1a T D 127/154 U. Initial conversational transcription scA 123/154 was incorrect; the photograph was rechecked against official card detail 127. The owner explicitly determined the finish as non-holo on 2026-09-21: finish ist erkennbar als non holo. This property is attributed to the owner, not inferred from absent reflections.",
+              "contentHash": "4c24a6dd678fcd9713e63d722e5baf776a3d03cd33ad2f837559242f775893b9",
+              "image": "verification/specimens/SPEC-0533.png"
             }
           ]
         }
@@ -29682,6 +29744,17 @@
               "originalHash": "f66a1c4dd7fd4a4262372f8931b398110a6351d163ddac845b98d44bc10086f7",
               "previewSrc": "images/previews/SPEC-0277.png?v=f66a1c4dd7fd4a4262372f8931b398110a6351d163ddac845b98d44bc10086f7",
               "thumbnailSrc": "images/thumbs/SPEC-0277.png?v=f66a1c4dd7fd4a4262372f8931b398110a6351d163ddac845b98d44bc10086f7"
+            },
+            {
+              "src": "verification/specimens/SPEC-0537.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0537",
+              "contentHash": "29f96f38ef7a1904f12cbb93d46dfdc875bbc720424aebfcc4d2e54c52a3a776",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "29f96f38ef7a1904f12cbb93d46dfdc875bbc720424aebfcc4d2e54c52a3a776",
+              "previewSrc": "images/previews/SPEC-0537.png?v=29f96f38ef7a1904f12cbb93d46dfdc875bbc720424aebfcc4d2e54c52a3a776",
+              "thumbnailSrc": "images/thumbs/SPEC-0537.png?v=29f96f38ef7a1904f12cbb93d46dfdc875bbc720424aebfcc4d2e54c52a3a776"
             }
           ],
           "observations": [
@@ -29702,6 +29775,15 @@
               "evidence": "Complete official Thai render for Snorlax MA4 091/123 (base). The printed Thai name, collector identity, attacks and rarity C establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "ab1acb30aaad78eb607a98771ec9d51273090cea60500cd5785aea5c9c1636db",
               "image": "verification/specimens/SPEC-0277.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0537",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.th/product/136710401/41979577897",
+              "evidence": "User-supplied Magic Poke Shop product depiction shows Thai Snorlax HP160, MA4 T J 091/123 C and illustrator Toshinao Aoki. Printed identity and rarity are readable; physical finish is unresolved. Store watermark is not a card marking.",
+              "contentHash": "fb1ea00079d40713eb0c3e212183d17b7733bbf460900cdf7692792510e60d2b",
+              "image": "verification/specimens/SPEC-0537.png"
             }
           ]
         }
@@ -34354,6 +34436,17 @@
               "originalHash": "d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34",
               "previewSrc": "images/previews/SPEC-0526.png?v=d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34",
               "thumbnailSrc": "images/thumbs/SPEC-0526.png?v=d51033bce2e19dfc672c089e3974082115bba7dca1c853b168b3791d91c6bd34"
+            },
+            {
+              "src": "verification/specimens/SPEC-0535.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0535",
+              "contentHash": "73ccb82767e31b25c7e34203868777770bd6f790c5f88c7e4cd3cd88d9c478cd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "73ccb82767e31b25c7e34203868777770bd6f790c5f88c7e4cd3cd88d9c478cd",
+              "previewSrc": "images/previews/SPEC-0535.png?v=73ccb82767e31b25c7e34203868777770bd6f790c5f88c7e4cd3cd88d9c478cd",
+              "thumbnailSrc": "images/thumbs/SPEC-0535.png?v=73ccb82767e31b25c7e34203868777770bd6f790c5f88c7e4cd3cd88d9c478cd"
             }
           ],
           "observations": [
@@ -34392,6 +34485,15 @@
               "evidence": "Thai card face, sc3b T 126/158 R, HP130 and Anesaki Nishida. Visible rainbow foil in the illustration and border. Watermarked seller scan; the seller watermark is not a card marking. Product page unavailable; original CDN image obtained from its indexed listing. No exact foil pattern or finish inventory completeness is asserted. Local Tesseract OCR was unavailable; text was read visually.",
               "contentHash": "a84da38519020aaab9a5716b70e171a6577f2d81368bee64d26b405f3b6b463c",
               "image": "verification/specimens/SPEC-0526.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0535",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7rasl-m9ckecm7pn2h06@resize_w450_nl.webp",
+              "evidence": "PP Card Game Shop image supplied under the label s8b 126/184, but its printed Thai face reads sc3b T 126/158 R, HP130. Retained as identity evidence only. Does not support s8b 126/184 or contradict its existence; listing association remains contextual rather than an independently retrieved page.",
+              "contentHash": "638a9c72442541df3c0d1ca346be92b20c4783b8e6a6e9531e19c44bef546985",
+              "image": "verification/specimens/SPEC-0535.png"
             }
           ]
         }
@@ -95287,6 +95389,17 @@
               "originalHash": "3690ce9fcf6bfeb63e695620b1f9120747bb73540ccbd8bb91b8986ed5d89838",
               "previewSrc": "images/previews/SPEC-0272.png?v=3690ce9fcf6bfeb63e695620b1f9120747bb73540ccbd8bb91b8986ed5d89838",
               "thumbnailSrc": "images/thumbs/SPEC-0272.png?v=3690ce9fcf6bfeb63e695620b1f9120747bb73540ccbd8bb91b8986ed5d89838"
+            },
+            {
+              "src": "verification/specimens/SPEC-0534.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0534",
+              "contentHash": "32ce5e24698563aed16d67abf5d4859f30179b03270fe4b345cac52db7c21edc",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "32ce5e24698563aed16d67abf5d4859f30179b03270fe4b345cac52db7c21edc",
+              "previewSrc": "images/previews/SPEC-0534.png?v=32ce5e24698563aed16d67abf5d4859f30179b03270fe4b345cac52db7c21edc",
+              "thumbnailSrc": "images/thumbs/SPEC-0534.png?v=32ce5e24698563aed16d67abf5d4859f30179b03270fe4b345cac52db7c21edc"
             }
           ],
           "observations": [
@@ -95316,6 +95429,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax ex card at carousel image 6/6, row 2, column 4 crop. The visible artwork, printed language, set identity svM and collector identity 094/175 establish this specimen's card identity. The right edge is outside the source photograph; the name, artwork and collector identity remain visible. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "b9746e93994355fb86464a411bc0a338c5e2d985f4e9a9b56734b10eb2ee247b",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0534",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7rasc-m5zlwj1xn4jafd@resize_w450_nl.webp",
+              "evidence": "Magic Poke Shop product depiction showing Thai Snorlax ex HP260, svM T 094/175. Identity only; the isolated product depiction does not establish a physical finish. Listing relationship is a research lead; the exact CDN image was supplied in the conversation.",
+              "contentHash": "e256f9e7182450fb7797da0802d942e7daa1caadec31ffdaa0ce45082aa2601d",
+              "image": "verification/specimens/SPEC-0534.png"
             },
             {
               "observationId": "unit:U0405",
