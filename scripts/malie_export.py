@@ -409,14 +409,15 @@ def build_bundle(profile: dict, catalogue: dict, content: dict, inputs: dict,
     profile = copy.deepcopy(profile)
     profile["pilot"] = sorted(profile["pilot"], key=lambda row: row["itemId"])
     profile["supportedLocalSetIds"] = sorted(profile["supportedLocalSetIds"])
+    profile["payloadSchema"] = payload_schema(profile)
     targets = unique(profile["pilot"], "itemId")
     cards, entries = [], []
     for item in selected_items(profile, catalogue):
         entry, payload = compile_entry(item, profile, content, providers, physical_sources)
-        targets[item["itemId"]]["identitySha256"] = digest(entry["identity"])
         if entry["status"] == "exported":
             entry.update(cardIndex=len(cards), cardSha256=digest(payload))
             cards.append(payload)  # Equal payloads still occupy distinct physical entries.
+        targets[item["itemId"]]["entrySha256"] = digest(entry)
         entries.append(entry)
     profile_bytes = canonical_bytes(profile)
     cards_bytes = canonical_bytes(cards)
@@ -441,6 +442,7 @@ def validate_entry(entry: dict, target: dict, cards: list, profile: dict) -> int
     require(statuses <= set(STATUSES[:-1]), "invalid reason status")
     expected = next((value for value in STATUSES if value in statuses), "exported")
     require(status == expected, "disposition precedence mismatch")
+    require(target.get("entrySha256") == digest(entry), "report entry digest differs from selected target")
     if status != "exported":
         require(bool(entry["reasons"]) and "cardIndex" not in entry and "cardSha256" not in entry,
                 "unexported entry has a payload or lacks reasons")
@@ -478,7 +480,6 @@ def provenance_schema() -> dict:
 def validate_companion(entry: dict, target: dict, profile: dict) -> None:
     identity = entry.get("identity")
     require(isinstance(identity, dict) and set(IDENTITY_FIELDS) <= identity.keys(), "incomplete companion identity")
-    require(target.get("identitySha256") == digest(identity), "companion identity digest differs from selected target")
     require(all(identity[key] == target[key] for key in
                 ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId")), "companion target identity mismatch")
     require(isinstance(identity.get("markings"), list) and isinstance(identity.get("physicalSources"), list),
