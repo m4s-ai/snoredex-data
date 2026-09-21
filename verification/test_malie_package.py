@@ -108,6 +108,8 @@ def refresh_bindings(docs):
 def semantic_corruptions(script, bundle, original):
     """A coherently rehashed package must still satisfy payload/evidence rules."""
     mutations = [
+        remove_name_contract,
+        lambda d: d["report.json"].update(inputs={"collector_catalogue.json": "0" * 64}),
         lambda d: d["cards.json"][0].pop("name"),
         lambda d: d["cards.json"][0].pop("stage_text"),
         lambda d: d["cards.json"][0].update(hp=True),
@@ -137,6 +139,15 @@ def semantic_corruptions(script, bundle, original):
         assert run_reader(script, bundle).returncode != 0
     for name, raw in original.items():
         (bundle / name).write_bytes(raw)
+
+
+def remove_name_contract(documents):
+    documents["cards.json"][0].pop("name")
+    documents["profile.json"]["payloadSchema"]["required"].remove("name")
+    field = documents["report.json"]["entries"][1]["fieldSources"]["/name"]
+    field["covers"] = []
+    for observation in field["observations"]:
+        observation["state"] = "not-applicable"
 
 
 def check_failed_build_preserves_stage(directory):

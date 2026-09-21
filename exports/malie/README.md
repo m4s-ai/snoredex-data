@@ -17,7 +17,7 @@ the report's IDs identify printings; an array position or payload hash does not.
 
 ## Read the bundle offline
 
-Copy the standalone [consumer script](../../scripts/malie_consumer.py) and this
+Copy the standalone [consumer script](https://github.com/m4s-ai/snoredex-data/blob/main/scripts/malie_consumer.py) and this
 three-file bundle to any directory with Python 3.11 or later. Run:
 
 ```console
@@ -34,6 +34,10 @@ The profile includes the executable payload schema. The reader independently
 validates its structural keywords, numbering/rarity/copyright/cost relationships,
 qualified source references, observation states and complete field-leaf coverage.
 Consistently recomputing hashes does not make an invalid payload or empty evidence valid.
+The reader pins the schema digest for this profile version, so editing the bundled
+schema cannot remove required fields while retaining the same profile identifier.
+It also checks the complete canonical input list, the bound input digest map and
+agreement with retained-source digests in every field reference.
 
 The expected pilot result is **6 selected, 3 exported, 2 needs-evidence and 1
 outside-profile**. The two SVP variants retain distinct printing/distribution/stamp
@@ -72,5 +76,5 @@ remains the existing separately authorized manual release path.
   overwrite accepted rules or silently remove a selected blocked input.
 - A later Malie-oriented internal content model is a separate architectural decision.
 
-The [field and identity contract](../../verification/MALIE-EXPORT.md) explains the
+The [field and identity contract](https://github.com/m4s-ai/snoredex-data/blob/main/verification/MALIE-EXPORT.md) explains the
 full boundary. [Repository licence](../../LICENSE.md) and source attribution still apply.

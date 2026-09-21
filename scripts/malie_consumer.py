@@ -16,6 +16,13 @@ from collections import Counter
 from pathlib import Path
 
 PROFILE = "snoredex-malie-sv-pilot/1"
+PAYLOAD_SCHEMA_SHA256 = "573c3e9b5288fcbe94f71cf6f6ab73f45753d9cb8c768518136994acf63c81e1"
+INPUT_FILES = {
+    "verification/malie_profile.json", "collector_catalogue.json",
+    "verification/card_content_observations.json", "verification/authoritative_graph.json",
+    "verification/specimens.json", "verification/units.json", "verification/source_first_prints.json",
+    "verification/finish_units.json", "verification/source_registry.json", "verification/source_capabilities.json",
+}
 STATUSES = ["outside-profile", "blocked-by-source", "needs-evidence", "needs-mapping", "exported"]
 FILES = ("cards.json", "report.json", "profile.json")
 
@@ -53,7 +60,24 @@ def load(directory):
     require(report["upstream"] == profile["upstream"], "mixed upstream pin")
     require(report["cardsSha256"] == sha(raw["cards.json"]), "cards digest mismatch")
     require(report["profileSha256"] == sha(raw["profile.json"]), "profile digest mismatch")
+    require(sha(canonical(profile["payloadSchema"])) == PAYLOAD_SCHEMA_SHA256, "declared profile schema mismatch")
+    input_bindings(report, profile)
     return data, {name: sha(value) for name, value in raw.items()}
+
+
+def input_bindings(report, profile):
+    paths = profile["inputPaths"]
+    require(isinstance(paths, list) and all(isinstance(path, str) for path in paths), "missing input path contract")
+    require(paths == sorted(set(paths)) and INPUT_FILES <= set(paths), "incomplete canonical input set")
+    inputs = report["inputs"]
+    require(isinstance(inputs, dict) and set(inputs) == set(paths), "incomplete input digest set")
+    require(all(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
+                for value in inputs.values()), "invalid input digest")
+    require(sha(canonical(inputs)) == profile["inputsSha256"], "input digest binding mismatch")
+    for entry in report["entries"]:
+        for provenance in entry["fieldSources"].values():
+            for source in provenance["sources"]:
+                require(inputs.get(source["retainedPath"]) == source["sha256"], "retained source input mismatch")
 
 
 def physical_card(entry, card, target, profile):
