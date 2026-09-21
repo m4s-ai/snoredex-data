@@ -1,3 +1,4 @@
+<!-- doc: role=research evidence and draft implementation notes for issue 256; stage=reference -->
 # Research follow-up for #256 — 2026-09-21
 
 Draft implementation for #256, #258 and the current Korean gaps documented in #260. Keep this PR as a draft until the next research round is complete; no merge or issue closure is authorized by this checkpoint. Baseline: merged main 899688c. Seven official product/date pages address ten current release-date gaps (eight KR, two ID). The seven regular-launch statements are mapped only to the ten already established card releases listed in sources.json. Physical identity, finish, rarity and special-edition dates are unchanged.
