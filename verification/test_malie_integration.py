@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 import malie_export as exporter
+import measure_workflow
 
 EXPECTED = {
     "item-345ada2b-32ce-5fa1-8132-308cba7b3c54": ("PHYSICAL:F0225-P01", "en-US", "Snorlax", None),
@@ -98,6 +99,9 @@ def check_corruptions(bundle):
 
 
 def main():
+    matrix = json.loads((ROOT / "verification/workflow_gate_matrix.json").read_bytes())
+    impacts, stores, _ = measure_workflow.impact_metadata("scripts/malie_export.py", matrix)
+    assert "malie-export" in impacts and set(exporter.INPUT_FILES) <= set(stores)
     bundle = {name: (ROOT / "exports/malie" / name).read_bytes()
               for name in ("cards.json", "report.json", "profile.json")}
     report = json.loads(bundle["report.json"])
