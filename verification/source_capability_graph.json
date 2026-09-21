@@ -16,14 +16,14 @@
     ],
     "counts": {
       "providers": 33,
-      "surfaces": 54,
-      "coverageEdges": 56,
+      "surfaces": 57,
+      "coverageEdges": 59,
       "absenceEdges": 0,
-      "observations": 60,
-      "resolvedVerdictSources": 1651
+      "observations": 63,
+      "resolvedVerdictSources": 1614
     },
     "surfaceStates": {
-      "active": 25,
+      "active": 28,
       "blocked-by-browser": 3,
       "incomplete": 20,
       "internal": 1,
@@ -2357,6 +2357,130 @@
       },
       "coverageEdgeIds": [
         "retailer-reviewed-prerelease-date-positive"
+      ]
+    },
+    {
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed Korean product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/447",
+          "https://new.pokemonkorea.co.kr/card/551",
+          "https://new.pokemonkorea.co.kr/card/601",
+          "https://pokemoncard.co.kr/card/636",
+          "https://new.pokemonkorea.co.kr/card/401"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/447",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Korean product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ]
+    },
+    {
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "providerId": "pokemon-card-asia",
+      "label": "Reviewed Indonesian product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/card-search?pageNo=4",
+          "https://asia.pokemon-card.com/id/card-search?pageNo=3"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Indonesian product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "id-reviewed-product-dates-20260921-positive"
+      ]
+    },
+    {
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed Korean product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/286",
+          "https://pokemoncard.co.kr/card/297",
+          "https://pokemoncard.co.kr/card/333",
+          "https://pokemoncard.co.kr/card/360",
+          "https://pokemoncard.co.kr/card/439",
+          "https://pokemoncard.co.kr/card/731"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/286",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Korean product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
       ]
     },
     {
@@ -5213,6 +5337,147 @@
       }
     },
     {
+      "edgeId": "kr-reviewed-product-dates-20260921-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "set",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only the retained product statements for this batch."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "release-event",
+        "date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Product date statements cannot establish absence or catalogue completeness."
+      },
+      "knownPositiveObservationId": "obs-kr-reviewed-product-dates-20260921",
+      "boundary": {
+        "outsideScope": [
+          "other products",
+          "other localities",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+      }
+    },
+    {
+      "edgeId": "id-reviewed-product-dates-20260921-positive",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "coverage": {
+        "localities": [
+          "ID"
+        ],
+        "languages": [
+          "Indonesian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "set",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only the retained product statements for this batch."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "release-event",
+        "date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Product date statements cannot establish absence or catalogue completeness."
+      },
+      "knownPositiveObservationId": "obs-id-reviewed-product-dates-20260921",
+      "boundary": {
+        "outsideScope": [
+          "other products",
+          "other localities",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+      }
+    },
+    {
+      "edgeId": "kr-reviewed-product-dates-20260921-round2-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "set",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only the retained product statements for this batch."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "release-event",
+        "date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Product date statements cannot establish absence or catalogue completeness."
+      },
+      "knownPositiveObservationId": "obs-kr-reviewed-product-dates-20260921-round2",
+      "boundary": {
+        "outsideScope": [
+          "other products",
+          "other localities",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+      }
+    },
+    {
       "edgeId": "tcgdex-localized-front-positive",
       "providerId": "tcgdex",
       "surfaceId": "tcgdex-card-images",
@@ -6810,7 +7075,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:a91558bf1ddae049670165ba7e68357f2486d4bf8197045230baae288aa7e685",
+      "rawRecordHash": "sha256:9ae5afb6363b7091cd522c27aa8bcbbd6a9ab40b997d85be74ce26fcdf46a90c",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -6832,7 +7097,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 167,
+        "stableIdCount": 169,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -6966,7 +7231,9 @@
           "SPEC-0522",
           "SPEC-0524",
           "SPEC-0525",
+          "SPEC-0533",
           "TH:AS5a:142/184:base",
+          "TH:sc1a T:127/154:base",
           "TW:AS5a:142:base",
           "U0092",
           "U0097",
@@ -7002,8 +7269,8 @@
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants"
         ],
-        "retrievedAt": "2026-09-10",
-        "usageCount": 187
+        "retrievedAt": "2026-09-21",
+        "usageCount": 189
       }
     },
     {
@@ -7024,7 +7291,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:4a7f99b2fa79c960f3953fbebd38faf71e7b915c2a0da5f3efb49cd3608413c9",
+      "rawRecordHash": "sha256:9dfababecb81a461b668cfb306d576e522048099e80071bfa712a0e4db595ba6",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -7037,7 +7304,6 @@
           "Physical card, photographed sealed specimen",
           "Physical card, photographed specimen",
           "Positive source-first card record",
-          "Seller listing photograph",
           "Third-party scan archive",
           "owner photograph",
           "retained Cardmarket product scan"
@@ -7047,12 +7313,11 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 225,
+        "stableIdCount": 211,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
           "F0125-P02",
-          "F0174-P01",
           "F0247-P02",
           "F0291-P02",
           "F0294-P02",
@@ -7063,15 +7328,11 @@
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
-          "F0604-P02",
           "F0615-P03",
-          "F0634-P01",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
           "KR:SM-P:140:base",
           "KR:XY-P:167:base",
-          "KR:XY2:066/080:base",
-          "KR:xm2a:136/193:base",
           "KR:xsv2a:143/165:base",
           "SPEC-0001",
           "SPEC-0002",
@@ -7085,8 +7346,6 @@
           "SPEC-0028",
           "SPEC-0030",
           "SPEC-0031",
-          "SPEC-0042",
-          "SPEC-0043",
           "SPEC-0058",
           "SPEC-0059",
           "SPEC-0060",
@@ -7178,10 +7437,6 @@
           "SPEC-0233",
           "SPEC-0234",
           "SPEC-0235",
-          "SPEC-0409",
-          "SPEC-0410",
-          "SPEC-0411",
-          "SPEC-0467",
           "SPEC-0469",
           "SPEC-0470",
           "SPEC-0471",
@@ -7206,7 +7461,6 @@
           "U0229",
           "U0230",
           "U0231",
-          "U0246",
           "U0271",
           "U0286",
           "U0290",
@@ -7240,7 +7494,6 @@
           "U0547",
           "U0556",
           "U0560",
-          "U0561",
           "U0575",
           "U0578",
           "U0582",
@@ -7272,11 +7525,10 @@
           "U0771",
           "U0772",
           "U0775",
-          "U0780",
-          "U0785"
+          "U0780"
         ],
         "retrievedAt": "2026-09-10",
-        "usageCount": 375
+        "usageCount": 359
       }
     },
     {
@@ -8468,6 +8720,436 @@
           "sourceUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease/",
           "note": "The organizer lists a Journey Together prerelease on March 22, 2025 and says entry includes a kit, two boosters and a Series 5 Prize Pack. The page does not enumerate the four possible promos or state the card language."
         }
+      }
+    },
+    {
+      "observationId": "obs-kr-reviewed-product-dates-20260921",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/447",
+      "queryParameters": {
+        "scope": "5 reviewed Korean product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "expectedIdentifiers": [
+        "s10a",
+        "2022-07-22",
+        "sv2a",
+        "2023-07-28",
+        "sv4a",
+        "2024-01-26",
+        "sv5a",
+        "2024-05-24",
+        "s8b",
+        "2022-01-26"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:77989eacb6417b09ba11fe87e68c10017955f453458b5d5cfb965166fb755ea0",
+      "rawRecord": {
+        "dates": [
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S10A-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/447",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/447",
+            "raw": {
+              "localCode": "s10a",
+              "page": "https://pokemoncard.co.kr/card/447",
+              "date": "2022-07-22",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s10a-date.txt",
+              "sha256": "f874d9075c25cbc77640de4a553cb099e8f73a316c4cb1e5abfd1f748f895575",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-SV2A-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://new.pokemonkorea.co.kr/card/551",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://new.pokemonkorea.co.kr/card/551",
+            "raw": {
+              "localCode": "sv2a",
+              "page": "https://new.pokemonkorea.co.kr/card/551",
+              "date": "2023-07-28",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv2a-date.txt",
+              "sha256": "d8db9f77621bf81a1506267d415b66059dca7381836ba7a4f0d16b69e6a0d654",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not automatically transfer to xsv2a catch-up identities."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-SV4A-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://new.pokemonkorea.co.kr/card/601",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://new.pokemonkorea.co.kr/card/601",
+            "raw": {
+              "localCode": "sv4a",
+              "page": "https://new.pokemonkorea.co.kr/card/601",
+              "date": "2024-01-26",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv4a-date.txt",
+              "sha256": "8527b5815838736f9f2bfd833f4936eec7d3243c1da413c93c0480cd1191e738",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-01-20."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-SV5A-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/636",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/636",
+            "raw": {
+              "localCode": "sv5a",
+              "page": "https://pokemoncard.co.kr/card/636",
+              "date": "2024-05-24",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv5a-date.txt",
+              "sha256": "af6a3f52beedb4f18a0d85ae09cf29f0732fc007ff50141bb73660fd98cf329b",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-05-18."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S8B-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://new.pokemonkorea.co.kr/card/401",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://new.pokemonkorea.co.kr/card/401",
+            "raw": {
+              "localCode": "s8b",
+              "page": "https://new.pokemonkorea.co.kr/card/401",
+              "date": "2022-01-26",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s8b-date.txt",
+              "sha256": "d6eb7c3e4f7f793d32cca3fc8d7ec64138845ddba262f6a3205e3d0feba0331a",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not use the 2022-02-03 album/accessory release."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "observationId": "obs-id-reviewed-product-dates-20260921",
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+      "queryParameters": {
+        "scope": "2 reviewed Indonesian product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "expectedIdentifiers": [
+        "s5a I",
+        "2021-07-02",
+        "s10a I",
+        "2022-08-26"
+      ],
+      "validatesEdges": [
+        "id-reviewed-product-dates-20260921-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:0ee99de5b58f7f1bc806b0c743ac265e18dd35223fd6d1de075a100374ea7f61",
+      "rawRecord": {
+        "dates": [
+          {
+            "sourceRecordId": "SET-SRC-ID-DATE-S5A-I-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-asia",
+            "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+            "raw": {
+              "localCode": "s5a I",
+              "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+              "date": "2021-07-02",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "ID",
+              "languageScope": "Indonesian",
+              "marketScopes": [
+                "ID"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s5a-i-date.txt",
+              "sha256": "b3910d256f8356ea2d693de42996131a2c173e4aecc387af48b652f467ee2c31",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Month-day-year listing; AKG product index independently displays 02 July 2021."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-ID-DATE-S10A-I-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-asia",
+            "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+            "raw": {
+              "localCode": "s10a I",
+              "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+              "date": "2022-08-26",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "ID",
+              "languageScope": "Indonesian",
+              "marketScopes": [
+                "ID"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s10a-i-date.txt",
+              "sha256": "25d7c6f76a1fdb95c3cf6eb7baae99a56040caf37f63d68bdec5a8f4e24408e8",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Official campaign https://asia.pokemon-card.com/id/archives/2051/ explicitly coincides with product release. Product article /id/archives/1806/ only says late August. AKG lists August 1; retain discrepancy, prioritize precise publisher date."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "observationId": "obs-kr-reviewed-product-dates-20260921-round2",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/286",
+      "queryParameters": {
+        "scope": "6 reviewed Korean product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "expectedIdentifiers": [
+        "s1H",
+        "2020-02-07",
+        "s2",
+        "2020-04-16",
+        "s4",
+        "2020-10-21",
+        "s5a",
+        "2021-04-21",
+        "s10b",
+        "2022-06-17",
+        "sv9",
+        "2025-03-21"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:38fcea13b9c63a3ec4ac6788e80bb21fe73e0d4baa0539d57fc033b0035dc7a4",
+      "rawRecord": {
+        "dates": [
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S1H-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/286",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/286",
+            "raw": {
+              "localCode": "s1H",
+              "page": "https://pokemoncard.co.kr/card/286",
+              "date": "2020-02-07",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s1h-date.txt",
+              "sha256": "f271cb6a408aaf94ec1079a019a84e8aacef62bc3dfb0bb58ab2b112dc107e37",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Joint Sword/Shield launch; mapped only to the existing Korean Shield edition s1H."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S2-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/297",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/297",
+            "raw": {
+              "localCode": "s2",
+              "page": "https://pokemoncard.co.kr/card/297",
+              "date": "2020-04-16",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s2-date.txt",
+              "sha256": "be4021b4ac0be4f8de52685de34687cb6a18d0d51d9780c01374a429d359adea",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not substitute the April 29 bundle release (product 304)."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S4-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/333",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/333",
+            "raw": {
+              "localCode": "s4",
+              "page": "https://pokemoncard.co.kr/card/333",
+              "date": "2020-10-21",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s4-date.txt",
+              "sha256": "45514589260f1adaae7ad2ef76ad741439998dc4a66430dfbf1af2904ce4cdde",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not substitute the October 31 special kit release (product 341)."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S5A-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/360",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/360",
+            "raw": {
+              "localCode": "s5a",
+              "page": "https://pokemoncard.co.kr/card/360",
+              "date": "2021-04-21",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s5a-date.txt",
+              "sha256": "76433dd4bb0cbbeb40d4d93c0f2d47c52d1ef9e71a3cc27d64895e4a3665f106",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-S10B-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/439",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/439",
+            "raw": {
+              "localCode": "s10b",
+              "page": "https://pokemoncard.co.kr/card/439",
+              "date": "2022-06-17",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s10b-date.txt",
+              "sha256": "71a3d1db072b2e138ecbacd1e342e4af44295951a57bfe512eb6d7f583e23b20",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Korean localized date; no transfer to international editions or album product 440."
+            }
+          },
+          {
+            "sourceRecordId": "SET-SRC-KR-DATE-SV9-20260921",
+            "sourceKind": "release-date-record",
+            "provider": "pokemon-card-korea",
+            "providerRecordKey": "https://pokemoncard.co.kr/card/731",
+            "retrieved": "2026-09-21",
+            "sourceUrl": "https://pokemoncard.co.kr/card/731",
+            "raw": {
+              "localCode": "sv9",
+              "page": "https://pokemoncard.co.kr/card/731",
+              "date": "2025-03-21",
+              "datePrecision": "day",
+              "approximate": false,
+              "status": "released",
+              "locality": "KR",
+              "languageScope": "Korean",
+              "marketScopes": [
+                "KR"
+              ],
+              "marketScopeBasis": "Exact localized publisher product statement",
+              "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-sv9-date.txt",
+              "sha256": "9c89eb71c8bfc8a395071fe5ad38774ff915e611868e92c33b144092cf401020",
+              "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+              "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale announced for 2025-03-15; retained as context only. March 28 product 740 is a different battle enhancement box."
+            }
+          }
+        ]
       }
     },
     {
@@ -12694,18 +13376,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "product"
-      ]
-    },
-    {
-      "sourceKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax?language=Dutch&isFirstEdition=Y",
-      "providerId": "cardmarket",
-      "surfaceId": "cardmarket-products",
-      "capabilityEdgeIds": [
-        "cardmarket-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
         "product"
       ]
     },
@@ -17135,6 +17805,30 @@
       ]
     },
     {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-search?pageNo=3",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "id-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/id/card-search?pageNo=4",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "id-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://asia.pokemon-card.com/th/archive/special/card/ma6",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-30th-celebration",
@@ -19876,6 +20570,42 @@
       ]
     },
     {
+      "sourceKey": "https://new.pokemonkorea.co.kr/card/401",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://new.pokemonkorea.co.kr/card/551",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://new.pokemonkorea.co.kr/card/601",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://pokemoncard.co.kr/card/277",
       "providerId": "pokemon-card-korea",
       "surfaceId": "pokemon-card-korea-fixed-product",
@@ -19885,6 +20615,102 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "rarity"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/286",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/297",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/333",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/360",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/439",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/447",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/636",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/731",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "capabilityEdgeIds": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -23001,6 +23827,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.nacg.tw/product-details.php?id=149595",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokeca.net/product/22292",
       "providerId": "retailer-listing",
       "surfaceId": "retailer-listings",
@@ -23117,18 +23956,6 @@
       ]
     },
     {
-      "sourceKey": "https://collectorworth.com/cards/snorlax-15",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23167,6 +23994,58 @@
       ]
     },
     {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-7r98y-lwug818tswp969",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-82251-mkj3dsj5huyrbe.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-822wi-mnzq63n48k5ebe",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-822wq-mp0bd8g68sgb06",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-my.img.susercontent.com/file/my-11134207-820le-mfm1sxr4e9lbae@resize_w900_nl.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -23181,7 +24060,120 @@
       ]
     },
     {
+      "sourceKey": "https://down-th.img.susercontent.com/file/787bf94ac2580f36b56b7bfb9b3ba282",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/7cf2fc9eebd1204f48ffb47dc15b229b.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/bf847b90e210baa4314649a110306962",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7r98o-lkpj05sp499a24.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7r990-lrbal5xusp8d56",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7r992-lsldqgsxcdpq20",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7rasc-m5zlwj1xn4jafd@resize_w450_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-th.img.susercontent.com/file/th-11134207-7rasl-m9ckecm7pn2h06@resize_w450_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-tw.img.susercontent.com/file/b081281638625e2a4454dcef6c738278",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23206,7 +24198,7 @@
       ]
     },
     {
-      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-it-mint",
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7r98u-ltf6xwg189lnb9",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23218,7 +24210,7 @@
       ]
     },
     {
-      "sourceKey": "https://federicstore.it/prodotto/50-68-snorlax-rara-reverse-it-mint",
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7rbk9-ma5nc55vl2mq48",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23311,20 +24303,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/404911233",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
       ]
     },
     {
@@ -23336,104 +24315,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/408219334",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/411963518",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/414684191",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/416373605",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/418966418",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/420832203",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/421867656",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/421876007",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
       ]
     },
     {
@@ -23445,108 +24327,11 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity",
         "rarity"
       ]
     },
     {
-      "sourceKey": "https://globalbunjang.com/product/423230216",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/423487583",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/423858186",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425341258",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425468617",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/425674631",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/426224532",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/427231898",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://globalbunjang.com/product/427352825",
+      "sourceKey": "https://h.lnwfile.com/_/h/_raw/mu/u3/4u.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -23598,6 +24383,18 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/7-YAAOSwsZthQL5m/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/71cAAeSwYjtqrCHF/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -24033,6 +24830,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/f5kAAOSwuqpnXwML/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24160,6 +24969,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/pzMAAOSwvMtnXwMG/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/qVwAAeSw7cFp~LNc/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24277,6 +25098,19 @@
     },
     {
       "sourceKey": "https://media.bunjang.co.kr/product/386929037_1_1777783357_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/391014143_1_1771809634.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -24539,6 +25373,58 @@
       ]
     },
     {
+      "sourceKey": "https://media.bunjang.co.kr/product/430112687_1_1789714245.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/430875494_1_1789132446.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://ojamacard.com/product/29071/077-071-%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99-chr-s10at",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24566,43 +25452,7 @@
       ]
     },
     {
-      "sourceKey": "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shopee.co.th/product/431199770/23151999066",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shopee.com.br/Carta-Pokemon-Snorlax-Original-SP-i.1159663797.22893697140",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shopee.com.my/Pokemon-Trading-Card-Game-PTCG-Snorlax-093-070-UR-(Indonesia-Version)-i.52799340.41773289935",
+      "sourceKey": "https://shopee.co.th/product/136710401/41979577897",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -24623,8 +25473,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -24637,8 +25486,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -24651,8 +25499,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -24665,8 +25512,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
+        "finish-override"
       ]
     },
     {
@@ -24679,582 +25525,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://shpnpokestore.de/en/products/pokemon-karte-holo-promo-relaxo-xy179-deutsch-1",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.ca/itm/116684597526",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.co.uk/itm/397876834888",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/117384644583",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/127702710280",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/137311196693",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/167729662724",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/177940547168",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/196697959025",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/224621405527",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/226754170463",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/227367215820",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/235807084646",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/257574042846",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/297969171577",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/318581147040",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/335112243811",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/356156650452",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/356707199467",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/358744944023",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/366541317089",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/386908467357",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/387286965530",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/388365217371",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/397048838536",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/397923018972",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/398270461415",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.com/itm/406290210703",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/147246589735",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/168013799605",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/205451368369",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/366600950681",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.de/itm/397718149955",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/133870581495?_ul=FR",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/134018568041",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.fr/itm/336572623072",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/127694028517",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/135296329933",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/156269693911",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/174939387384",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/206230248590",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287192829023",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287396391988",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/287532726389",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.ebay.it/itm/398044139298",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.enjoei.com.br/p/carta-pokemon-snorlax-1a-edicao-67794705",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.fanaticscollect.com/buy-now/e9048304-5bf4-46ba-a471-47edd15fc986/2015-pokemon-russian-xy-breakthrough-snorlax-118-cgc-8-nm-mt",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.lotticards.de/Generationen",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
         "identity"
       ]
     },
@@ -25285,20 +25555,6 @@
       ]
     },
     {
-      "sourceKey": "https://www.nacg.tw/product-details.php?id=149595",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "finish",
-        "finish-override",
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://www.ruten.com.tw/item/22223353127192",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25308,20 +25564,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
-        "finish-override",
-        "identity"
-      ]
-    },
-    {
-      "sourceKey": "https://www.vinted.pl/items/9302907930-snorlax-37130-reverse-holo-diament-i-perla",
-      "providerId": "seller-listing-photo",
-      "surfaceId": "seller-listing-photos",
-      "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
+        "finish-override"
       ]
     },
     {

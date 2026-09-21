@@ -448,9 +448,10 @@ def main() -> int:
     established = sum(len(c.get("languagesConfirmed") or []) for c in dataset["cards"])
     needs_evidence = sum(len(c.get("languagesNeedsEvidence") or []) for c in dataset["cards"])
     # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
-    # stale as soon as CI ran in a different timezone or on the next day. Reuse the checklist
-    # snapshot date so identical inputs always produce identical bytes.
-    generated = str(checklist_doc.get("meta", {}).get("generated") or "unknown")
+    # stale as soon as CI ran in a different timezone or on the next day. Include the graph-backed
+    # artwork snapshot so newly reviewed evidence cannot leave the page date behind.
+    generated = max(checklist_doc["meta"]["generated"], artwork_review["generated"],
+                    releases_doc["generated"], verification["lastUpdated"])
 
     confirmed_pairs = sum(len(r["confirmedLanguages"]) for r in releases_doc["variants"]
                           if r["edition"] != "1st Edition")

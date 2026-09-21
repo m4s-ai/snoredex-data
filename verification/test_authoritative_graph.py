@@ -194,6 +194,28 @@ def verify_source_first_asset_authority(prints, evidence, registry):
             asset = row.get(field)
             if asset and registry.resolve_provider(asset, None) != row['providerId']:
                 assert asset not in {call[0] for call in calls}, (row['printId'], field)
+    # Photo-backed admissions must use the retained photo path, not count the
+    # listing as a second identity source. Cover every current sibling admission.
+    for row in prints.values():
+        if row['providerId'] != 'seller-listing-photo':
+            continue
+        calls = []
+        registry.record_source_first_identity(row, lambda *a, **kw: calls.append(a), surfaces)
+        assert not calls, (row['printId'], 'listing duplicates retained photo identity')
+        identities = [source for source in evidence
+                      if row['printId'] in source.get('stableIds', [])
+                      and source['providerId'] == 'seller-listing-photo'
+                      and 'identity' in source['dimensions']]
+        assert len(identities) == 1, (row['printId'], identities)
+        assert row['specimenId'] in identities[0]['stableIds']
+    try:
+        registry.record_source_first_identity(
+            {'providerId': 'seller-listing-photo', 'printId': 'missing-photo'},
+            lambda *a, **kw: None, surfaces)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('photo admission without retained specimen must be rejected')
     # No specimen/earlier registry row exists to mask incorrect ownership in these cases.
     for provider, primary in (
         ('52poke', 'https://wiki.52poke.com/wiki/example'),
@@ -256,6 +278,11 @@ def verify_observed_finish_attribution(specimens, registry):
             specimen.get('inspectedFrom', 'Inspected physical specimen photograph'))
         registry.record_specimen_sources(specimen, ['sample'], source_type, physical,
             lambda *a, **kw: calls.append((a, kw)), surfaces)
+        photo = registry.provenance_url(specimen.get('photographSource'))
+        listing = registry.provenance_url(specimen.get('listingUrl'))
+        if source_type == "Seller listing photograph" and photo and listing and photo != listing:
+            context_claims = [a for a, kw in calls if a[0] == listing]
+            assert all(a[2] == 'product' for a in context_claims), specimen['specimenId']
         finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
         assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
         if 'finish' in physical.get('ownerAttestedFields', []):
@@ -1003,6 +1030,53 @@ def main() -> None:
         for row in graph["edges"]
     )
     assert project_physical_evidence(deepcopy(graph)) == graph
+    # A newer publisher observation survives physical refresh and reaches export metadata.
+    dated = deepcopy(graph)
+    source = next(row for row in dated["entities"] if row["entityType"] == "set-source-record")
+    source["payload"]["retrieved"] = "2030-01-02"
+    dated = project_physical_evidence(dated)
+    assert dated["meta"]["generated"] == "2030-01-02"
+    assert project_physical_evidence(deepcopy(dated))["meta"]["generated"] == "2030-01-02"
+    dated["meta"]["generated"] = "2030-01-03"
+    assert project_physical_evidence(dated)["meta"]["generated"] == "2030-01-03"
+    # A later identity-only photo updates the shared snapshot even without a finish.
+    with tempfile.TemporaryDirectory() as directory:
+        specimens_path = Path(directory) / "specimens.json"
+        specimens = json.loads(graph_module.SPECIMENS.read_text(encoding="utf-8"))
+        identity_only = next(row for row in specimens["specimens"]
+                             if row["specimenId"] == "SPEC-0551")
+        assert not identity_only.get("physicalObservation")
+        identity_only["recordedAt"] = "2031-02-03"
+        specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+        original_specimens_path = graph_module.SPECIMENS
+        graph_module.SPECIMENS = specimens_path
+        try:
+            unlinked = next(row for row in specimens["specimens"]
+                            if not row.get("citedBy") and not row.get("physicalObservation")
+                            and not row.get("sameCardAs") and row["specimenId"] == "SPEC-0012")
+            unlinked["recordedAt"] = "2040-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            dated_identity = project_physical_evidence(deepcopy(graph))
+            assert dated_identity["meta"]["generated"] == "2031-02-03"
+            assert project_physical_evidence(deepcopy(dated_identity)) == dated_identity
+            dated_identity["meta"]["generated"] = "2031-02-04"
+            assert project_physical_evidence(dated_identity)["meta"]["generated"] == "2031-02-04"
+            # An unknown citation cannot promote the later unadmitted date either.
+            unlinked["citedBy"] = ["nonexistent:release"]
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2031-02-03"
+            # Direct source-first evidence remains supporting without a reverse citation.
+            direct = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0285")
+            direct["citedBy"] = []
+            direct["recordedAt"] = "2032-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2032-01-01"
+            physical = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0554")
+            physical["recordedAt"] = "2033-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2033-01-01"
+        finally:
+            graph_module.SPECIMENS = original_specimens_path
     # The reviewed base is retained input, not reconstructible physical output (#357).
     retained = deepcopy(graph)
     work = next(row for row in retained["entities"] if row["entityType"] == "work")

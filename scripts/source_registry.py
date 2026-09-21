@@ -951,6 +951,9 @@ def record_specimen_sources(specimen: dict, unit_ids: list[str], source_type: st
     listing_url = provenance_url(specimen.get("listingUrl"))
     urls = {photo_url, listing_url} - {None}
     observed_url = photo_url or listing_url
+    # A seller listing is provenance for its photo, not a second identity source.
+    if source_type == "Seller listing photograph":
+        urls = {observed_url} - {None}
     retained_product_images = retained_cardmarket_product_image_urls([specimen])
     for url in sorted(urls) or [None]:
         provider = specimen_provider(url, source_type)
@@ -1067,7 +1070,7 @@ def record_source_first_identity(entry: dict, record: Callable, surfaces: dict,
                                  specimens_by_id: dict[str, dict] | None = None) -> None:
     """Index admitted claims under existing provider capabilities, without a provider allowlist."""
     provider = entry["providerId"]
-    if provider not in surfaces or provider == "cardmarket-listing-photo":
+    if provider not in surfaces or provider in {"cardmarket-listing-photo", "seller-listing-photo"}:
         # Historical marketplace aliases and listing photographs are indexed through
         # their specimen; a Cardmarket product URL must retain catalogue-only authority.
         if not entry.get("specimenId"):

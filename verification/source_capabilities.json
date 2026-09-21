@@ -4940,6 +4940,262 @@
       ]
     },
     {
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed Korean product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/447",
+          "https://new.pokemonkorea.co.kr/card/551",
+          "https://new.pokemonkorea.co.kr/card/601",
+          "https://pokemoncard.co.kr/card/636",
+          "https://new.pokemonkorea.co.kr/card/401"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/447",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Korean product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "kr-reviewed-product-dates-20260921-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only the retained product statements for this batch."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "release-event",
+            "date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product date statements cannot establish absence or catalogue completeness."
+          },
+          "knownPositiveObservationId": "obs-kr-reviewed-product-dates-20260921",
+          "boundary": {
+            "outsideScope": [
+              "other products",
+              "other localities",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "providerId": "pokemon-card-asia",
+      "label": "Reviewed Indonesian product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/card-search?pageNo=4",
+          "https://asia.pokemon-card.com/id/card-search?pageNo=3"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Indonesian product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "id-reviewed-product-dates-20260921-positive",
+          "coverage": {
+            "localities": [
+              "ID"
+            ],
+            "languages": [
+              "Indonesian"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only the retained product statements for this batch."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "release-event",
+            "date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product date statements cannot establish absence or catalogue completeness."
+          },
+          "knownPositiveObservationId": "obs-id-reviewed-product-dates-20260921",
+          "boundary": {
+            "outsideScope": [
+              "other products",
+              "other localities",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed Korean product launch dates (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/286",
+          "https://pokemoncard.co.kr/card/297",
+          "https://pokemoncard.co.kr/card/333",
+          "https://pokemoncard.co.kr/card/360",
+          "https://pokemoncard.co.kr/card/439",
+          "https://pokemoncard.co.kr/card/731"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-21",
+      "freshnessPolicy": "Retain the exact product/date excerpt and its hash. Product launch dates do not establish physical finishes.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/286",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Korean product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "kr-reviewed-product-dates-20260921-round2-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only the retained product statements for this batch."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "release-event",
+            "date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product date statements cannot establish absence or catalogue completeness."
+          },
+          "knownPositiveObservationId": "obs-kr-reviewed-product-dates-20260921-round2",
+          "boundary": {
+            "outsideScope": [
+              "other products",
+              "other localities",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A launch statement cannot establish a card finish, catch-up printing date or another locality."
+          }
+        }
+      ]
+    },
+    {
       "surfaceId": "tcgdex-card-images",
       "providerId": "tcgdex",
       "label": "TCGdex retained localized front images",
@@ -7110,6 +7366,439 @@
         "retailer-reviewed-prerelease-date-positive"
       ],
       "outcome": "Previously retained organizer statement establishes this event date only; no card language, physical finish or general release date inferred."
+    },
+    {
+      "observationId": "obs-kr-reviewed-product-dates-20260921",
+      "surfaceId": "kr-reviewed-product-dates-20260921",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/447",
+      "queryParameters": {
+        "scope": "5 reviewed Korean product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "dates": [
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S10A-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/447",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/447",
+              "raw": {
+                "localCode": "s10a",
+                "page": "https://pokemoncard.co.kr/card/447",
+                "date": "2022-07-22",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s10a-date.txt",
+                "sha256": "f874d9075c25cbc77640de4a553cb099e8f73a316c4cb1e5abfd1f748f895575",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-SV2A-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://new.pokemonkorea.co.kr/card/551",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://new.pokemonkorea.co.kr/card/551",
+              "raw": {
+                "localCode": "sv2a",
+                "page": "https://new.pokemonkorea.co.kr/card/551",
+                "date": "2023-07-28",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv2a-date.txt",
+                "sha256": "d8db9f77621bf81a1506267d415b66059dca7381836ba7a4f0d16b69e6a0d654",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not automatically transfer to xsv2a catch-up identities."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-SV4A-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://new.pokemonkorea.co.kr/card/601",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://new.pokemonkorea.co.kr/card/601",
+              "raw": {
+                "localCode": "sv4a",
+                "page": "https://new.pokemonkorea.co.kr/card/601",
+                "date": "2024-01-26",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv4a-date.txt",
+                "sha256": "8527b5815838736f9f2bfd833f4936eec7d3243c1da413c93c0480cd1191e738",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-01-20."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-SV5A-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/636",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/636",
+              "raw": {
+                "localCode": "sv5a",
+                "page": "https://pokemoncard.co.kr/card/636",
+                "date": "2024-05-24",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-sv5a-date.txt",
+                "sha256": "af6a3f52beedb4f18a0d85ae09cf29f0732fc007ff50141bb73660fd98cf329b",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale: 2024-05-18."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S8B-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://new.pokemonkorea.co.kr/card/401",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://new.pokemonkorea.co.kr/card/401",
+              "raw": {
+                "localCode": "s8b",
+                "page": "https://new.pokemonkorea.co.kr/card/401",
+                "date": "2022-01-26",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/kr-s8b-date.txt",
+                "sha256": "d6eb7c3e4f7f793d32cca3fc8d7ec64138845ddba262f6a3205e3d0feba0331a",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not use the 2022-02-03 album/accessory release."
+              }
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "s10a",
+        "2022-07-22",
+        "sv2a",
+        "2023-07-28",
+        "sv4a",
+        "2024-01-26",
+        "sv5a",
+        "2024-05-24",
+        "s8b",
+        "2022-01-26"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-product-dates-20260921-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance."
+    },
+    {
+      "observationId": "obs-id-reviewed-product-dates-20260921",
+      "surfaceId": "id-reviewed-product-dates-20260921",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+      "queryParameters": {
+        "scope": "2 reviewed Indonesian product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "dates": [
+            {
+              "sourceRecordId": "SET-SRC-ID-DATE-S5A-I-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-asia",
+              "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+              "raw": {
+                "localCode": "s5a I",
+                "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=4",
+                "date": "2021-07-02",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "ID",
+                "languageScope": "Indonesian",
+                "marketScopes": [
+                  "ID"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s5a-i-date.txt",
+                "sha256": "b3910d256f8356ea2d693de42996131a2c173e4aecc387af48b652f467ee2c31",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Month-day-year listing; AKG product index independently displays 02 July 2021."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-ID-DATE-S10A-I-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-asia",
+              "providerRecordKey": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+              "raw": {
+                "localCode": "s10a I",
+                "page": "https://asia.pokemon-card.com/id/card-search/?pageNo=3",
+                "date": "2022-08-26",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "ID",
+                "languageScope": "Indonesian",
+                "marketScopes": [
+                  "ID"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921/id-s10a-i-date.txt",
+                "sha256": "25d7c6f76a1fdb95c3cf6eb7baae99a56040caf37f63d68bdec5a8f4e24408e8",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Official campaign https://asia.pokemon-card.com/id/archives/2051/ explicitly coincides with product release. Product article /id/archives/1806/ only says late August. AKG lists August 1; retain discrepancy, prioritize precise publisher date."
+              }
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "s5a I",
+        "2021-07-02",
+        "s10a I",
+        "2022-08-26"
+      ],
+      "validatesEdges": [
+        "id-reviewed-product-dates-20260921-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance."
+    },
+    {
+      "observationId": "obs-kr-reviewed-product-dates-20260921-round2",
+      "surfaceId": "kr-reviewed-product-dates-20260921-round2",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/286",
+      "queryParameters": {
+        "scope": "6 reviewed Korean product dates"
+      },
+      "retrievedAt": "2026-09-21",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "dates": [
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S1H-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/286",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/286",
+              "raw": {
+                "localCode": "s1H",
+                "page": "https://pokemoncard.co.kr/card/286",
+                "date": "2020-02-07",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s1h-date.txt",
+                "sha256": "f271cb6a408aaf94ec1079a019a84e8aacef62bc3dfb0bb58ab2b112dc107e37",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Joint Sword/Shield launch; mapped only to the existing Korean Shield edition s1H."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S2-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/297",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/297",
+              "raw": {
+                "localCode": "s2",
+                "page": "https://pokemoncard.co.kr/card/297",
+                "date": "2020-04-16",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s2-date.txt",
+                "sha256": "be4021b4ac0be4f8de52685de34687cb6a18d0d51d9780c01374a429d359adea",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not substitute the April 29 bundle release (product 304)."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S4-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/333",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/333",
+              "raw": {
+                "localCode": "s4",
+                "page": "https://pokemoncard.co.kr/card/333",
+                "date": "2020-10-21",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s4-date.txt",
+                "sha256": "45514589260f1adaae7ad2ef76ad741439998dc4a66430dfbf1af2904ce4cdde",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Do not substitute the October 31 special kit release (product 341)."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S5A-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/360",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/360",
+              "raw": {
+                "localCode": "s5a",
+                "page": "https://pokemoncard.co.kr/card/360",
+                "date": "2021-04-21",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s5a-date.txt",
+                "sha256": "76433dd4bb0cbbeb40d4d93c0f2d47c52d1ef9e71a3cc27d64895e4a3665f106",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-S10B-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/439",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/439",
+              "raw": {
+                "localCode": "s10b",
+                "page": "https://pokemoncard.co.kr/card/439",
+                "date": "2022-06-17",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-s10b-date.txt",
+                "sha256": "71a3d1db072b2e138ecbacd1e342e4af44295951a57bfe512eb6d7f583e23b20",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Korean localized date; no transfer to international editions or album product 440."
+              }
+            },
+            {
+              "sourceRecordId": "SET-SRC-KR-DATE-SV9-20260921",
+              "sourceKind": "release-date-record",
+              "provider": "pokemon-card-korea",
+              "providerRecordKey": "https://pokemoncard.co.kr/card/731",
+              "retrieved": "2026-09-21",
+              "sourceUrl": "https://pokemoncard.co.kr/card/731",
+              "raw": {
+                "localCode": "sv9",
+                "page": "https://pokemoncard.co.kr/card/731",
+                "date": "2025-03-21",
+                "datePrecision": "day",
+                "approximate": false,
+                "status": "released",
+                "locality": "KR",
+                "languageScope": "Korean",
+                "marketScopes": [
+                  "KR"
+                ],
+                "marketScopeBasis": "Exact localized publisher product statement",
+                "retainedPath": "verification/evidence/issue-256-web-research-20260921-round2/kr-sv9-date.txt",
+                "sha256": "9c89eb71c8bfc8a395071fe5ad38774ff915e611868e92c33b144092cf401020",
+                "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
+                "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale announced for 2025-03-15; retained as context only. March 28 product 740 is a different battle enhancement box."
+              }
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "s1H",
+        "2020-02-07",
+        "s2",
+        "2020-04-16",
+        "s4",
+        "2020-10-21",
+        "s5a",
+        "2021-04-21",
+        "s10b",
+        "2022-06-17",
+        "sv9",
+        "2025-03-21"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-product-dates-20260921-round2-positive"
+      ],
+      "outcome": "Retained publisher statements establish only the named local product regular launch dates. No card existence, finish, rarity, absence or special-edition inheritance."
     },
     {
       "observationId": "obs-tcgdex-mew143-front",

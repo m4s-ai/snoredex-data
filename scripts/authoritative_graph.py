@@ -24,6 +24,7 @@ from typing import Any
 
 from source_registry import specimen_markings
 from specimen_groups import projected_specimens, photographed_fields
+from specimen_links import release_specimens, specimen_reference_index
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT = ROOT / "verification" / "authoritative_graph.json"
@@ -47,6 +48,38 @@ FOIL_PATTERN_ALIASES = {
     "poké ball mirror": "poke-ball",
     "master ball mirror": "master-ball",
 }
+
+
+def supporting_specimen_ids(graph: dict[str, Any], specimens: list[dict]) -> set[str]:
+    """Use the catalogue/artwork join to retain only reachable specimen dates."""
+    claims = {row["claimId"]: row for row in _payloads(graph, "candidate-claim")}
+    records = {row["printId"]: row for row in
+               _read_json(ROOT / "verification" / "source_first_prints.json")["prints"]}
+    citations = specimen_reference_index(specimens, _read_json(UNITS))
+    physicals = defaultdict(list)
+    for physical in _payloads(graph, "physical-printing"):
+        physicals[physical["cardReleaseId"]].append(physical)
+    supporting = {row["sourceId"] for row in claims.values()
+                  if row.get("sourceKind") == "specimen-observation"}
+    for release in _payloads(graph, "card-release"):
+        supporting.update(release_specimens(
+            release, physicals[release["cardReleaseId"]], citations, records, claims))
+    return supporting
+
+
+def snapshot_date(graph: dict[str, Any], finish_document: dict[str, Any],
+                  specimen_document: dict[str, Any]) -> str:
+    """Date the snapshot from evidence reachable through its projected claims."""
+    specimens = specimen_document.get("specimens", [])
+    supporting = supporting_specimen_ids(graph, specimens)
+    return max(
+        graph["meta"].get("generated") or "",
+        finish_document.get("meta", {}).get("generated") or "",
+        *(row.get("recordedAt") or "" for row in specimens
+          if row["specimenId"] in supporting),
+        *(row["payload"].get("retrieved") or ""
+          for row in graph["entities"] if row["entityType"] == "set-source-record"),
+    )
 
 
 def read_graph() -> dict[str, Any]:
@@ -508,9 +541,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         ),
         "localizations": entity_counts["localization"],
     }
-    graph["meta"]["generated"] = finish_document.get("meta", {}).get(
-        "generated", graph["meta"].get("generated")
-    )
+    graph["meta"]["generated"] = snapshot_date(graph, finish_document, specimen_document)
     return graph
 
 

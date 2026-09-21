@@ -305,7 +305,10 @@ if _dupe_ids:
 
 rows.sort(key=lambda r: (r["dateSort"], r["setName"], str(r["number"]), r["variant"], r["edord"]))
 
-generated = max(u["checkedAt"][:10] for u in units if u.get("checkedAt"))
+generated = max(
+    max(u["checkedAt"][:10] for u in units if u.get("checkedAt")),
+    finish_document["meta"]["generated"][:10],
+)
 
 output_document = {"schema": "snoredex-confirmed-releases",
            # 1.x while `dateExact` is still emitted. It is the deprecated inverse of
