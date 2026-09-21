@@ -26,6 +26,7 @@ STATUSES = ["outside-profile", "blocked-by-source", "needs-evidence", "needs-map
 OPTIONAL_FIELDS = {"subtype", "subtitle", "artists", "rarity", "tags", "foil",
                    "weakness", "resistance", "flavor_text"}
 IDENTITY_FIELDS = (
+    "itemId", "cardReleaseId", "physicalPrintingId",
     "localizationId", "localSetId", "setEditionId", "edition", "editionAssignmentStatus",
     "finish", "finishVerificationStatus", "foilPattern", "markings", "distribution",
     "cardSize", "errorClass", "itemKind", "sourceClaimRefs", "completenessStatus", "progressClass",
@@ -372,9 +373,7 @@ def compile_entry(item: dict, profile: dict, content: dict, providers: dict, phy
     payload, field_sources, reasons = content_fields(item, content, profile, providers)
     reasons.extend(scope_reasons(item, profile))
     reasons.extend(identity_conflicts(item, payload, profile))
-    # Do not turn an observed inapplicability marker into non-foil for a known foiled printing.
-    if item.get("finish") in {"holo", "reverse-holo", "mirror-holo"} and "foil" not in payload:
-        reasons.append(reason("needs-evidence", "missing-foil-mapping", "/foil", "A foiled printing needs an explicit layer and mask."))
+    reasons.extend(missing_foil_reasons(item, payload, field_sources))
     normalize_tags(payload)
     bind_leaf_paths(payload, field_sources)
     reasons.extend(reason("needs-mapping", "invalid-field-value", "/", message)
@@ -387,6 +386,16 @@ def compile_entry(item: dict, profile: dict, content: dict, providers: dict, phy
     entry = {key: item[key] for key in ("itemId", "cardReleaseId", "physicalPrintingId")}
     entry.update(status=status, reasons=reasons, identity=identity, fieldSources=field_sources)
     return entry, payload
+
+
+def missing_foil_reasons(item: dict, payload: dict, fields: dict) -> list[dict]:
+    if item.get("finish") not in {"holo", "reverse-holo", "mirror-holo"} or "foil" in payload:
+        return []
+    accepted = any(row["state"] in {"known", "not-applicable"} for row in fields["/foil"]["observations"])
+    if accepted:
+        return [reason("needs-mapping", "foil-applicability-conflict", "/foil",
+                       "Accepted foil observations do not agree with the established foiled printing.")]
+    return [reason("needs-evidence", "missing-foil-mapping", "/foil", "A foiled printing needs an explicit layer and mask.")]
 
 
 def bind_leaf_paths(payload: dict, field_sources: dict) -> None:
@@ -467,7 +476,8 @@ def provenance_schema() -> dict:
 def validate_companion(entry: dict, target: dict, profile: dict) -> None:
     identity = entry.get("identity")
     require(isinstance(identity, dict) and set(IDENTITY_FIELDS) <= identity.keys(), "incomplete companion identity")
-    require(identity["localizationId"] == target["localizationId"], "companion locality mismatch")
+    require(all(identity[key] == target[key] for key in
+                ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId")), "companion target identity mismatch")
     require(isinstance(identity.get("markings"), list) and isinstance(identity.get("physicalSources"), list),
             "missing physical companion arrays")
     reason_schema = object_schema({"status": enum_schema(STATUSES[:-1]), "code": TEXT, "field": TEXT, "message": TEXT})

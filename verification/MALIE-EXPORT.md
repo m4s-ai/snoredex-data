@@ -207,7 +207,9 @@ including trailing LF). Neither is an identity. Whole-file digest validation is
 mandatory before using positions. A consumer validates the selected input ID set,
 unique entry IDs, exported positions, per-card hashes and count conservation.
 
-`identity` preserves localization, local set, edition ID/value/status, technical
+`identity` repeats the selected item/release/physical-printing IDs and validates
+that binding for every disposition, including withheld entries. It preserves
+localization, local set, edition ID/value/status, technical
 finish, foil pattern, markings with their roles and multiplicity, distribution,
 size and error classification from the reviewed collector join. Missing metadata
 remains explicitly null/unknown. An equal card payload never merges physical IDs.
