@@ -74,6 +74,7 @@ def check_bundle_contract(profile, fixture):
     check_identity_digests(inputs)
     check_entry_digests(inputs)
     check_envelope_contract(bundle)
+    check_input_dependencies(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -252,6 +253,29 @@ def check_withheld_companions(inputs):
             pass
         else:
             raise AssertionError("accepted damaged withheld companion")
+
+
+def check_input_dependencies(inputs):
+    altered = copy.deepcopy(inputs)
+    altered[3]["nonexistent.json"] = "0" * 64
+    try:
+        exporter.build_bundle(*altered)
+    except exporter.ExportError as error:
+        assert "input digest set" in str(error)
+    else:
+        raise AssertionError("producer accepted a fabricated input dependency")
+    # The loader validates every retained content source, even without a selected
+    # observation. Its actual read remains a dependency of the successful build.
+    altered = copy.deepcopy(inputs)
+    source = copy.deepcopy(altered[2]["sources"][0])
+    source.update(sourceId="unused-fixture", retainedPath="verification/fixtures/unused.json")
+    altered[2]["sources"].append(source)
+    altered[3][source["retainedPath"]] = source["sha256"]
+    bundle = exporter.build_bundle(*altered)
+    report = json.loads(bundle["report.json"])
+    assert source["retainedPath"] in report["inputs"]
+    assert all(source["sourceId"] != row["sourceId"] for entry in report["entries"]
+               for field in entry["fieldSources"].values() for row in field["sources"])
 
 
 def check_envelope_contract(bundle):
