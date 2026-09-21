@@ -30,7 +30,10 @@ def synthetic_inputs(profile, fixture):
                         for row in items]
     source = {"sourceId": "fixture", "providerId": "fixture", "url": "https://example.invalid/synthetic",
               "retainedPath": "verification/fixtures/malie_contract.json", "sha256": "0" * 64,
-              "scope": "Synthetic contract input, not accepted physical-card evidence."}
+              "retrievedAt": "2026-09-21",
+              "scope": {"cardReleaseId": release, "physicalPrintingIds": [row["physicalPrintingId"] for row in items],
+                        "fields": ["/" + name for name in set(fixture["validPayload"]) | set(fixture["knownInapplicableFields"])],
+                        "limits": "Synthetic contract input, not accepted physical-card evidence."}}
     observations = []
     for name in sorted(set(fixture["validPayload"]) | set(fixture["knownInapplicableFields"])):
         known = name in fixture["validPayload"]
@@ -65,6 +68,7 @@ def check_bundle_contract(profile, fixture):
     check_disposition_reasons(inputs)
     check_physical_boundaries(inputs)
     check_observation_agreement(inputs)
+    check_withheld_companions(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -215,6 +219,32 @@ def check_observation_agreement(inputs):
     foil["value"]["mask"] = "HOLO"
     rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
     assert rows[0]["status"] == "exported", "matching holo treatment was rejected"
+
+
+def check_withheld_companions(inputs):
+    altered = copy.deepcopy(inputs)
+    altered[1]["items"][0]["finish"] = "unknown"
+    bundle = exporter.build_bundle(*altered)
+    report = json.loads(bundle["report.json"])
+    assert report["entries"][0]["status"] == "needs-evidence"
+    mutations = [
+        lambda row: row.pop("identity"), lambda row: row.pop("fieldSources"),
+        lambda row: row["identity"].update(localizationId="LOCALIZATION:WEST:de"),
+        lambda row: row.update(reasons=[{"status": "needs-evidence"}]),
+        lambda row: row["fieldSources"]["/name"].pop("observations"),
+        lambda row: row["fieldSources"]["/name"]["sources"][0].pop("sha256"),
+        lambda row: row["fieldSources"]["/name"]["observations"][0].update(sourceIds=["missing"]),
+        lambda row: row["fieldSources"]["/name"]["sources"][0]["scope"].update(cardReleaseId="other"),
+    ]
+    for mutate in mutations:
+        corrupt = copy.deepcopy(report)
+        mutate(corrupt["entries"][0])
+        try:
+            exporter.validate_bundle({**bundle, "report.json": exporter.canonical_bytes(corrupt)})
+        except exporter.ExportError:
+            pass
+        else:
+            raise AssertionError("accepted damaged withheld companion")
 
 
 def main():
