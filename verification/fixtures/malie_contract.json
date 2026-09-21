@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "profileId": "snoredex-malie-sv-pilot/1",
+  "fixtureKind": "synthetic-contract-only",
+  "notice": "Invented test content. These records are not observations, real cards, or evidence for the two-language pilot.",
+  "validPayload": {
+    "lang": "en-US",
+    "card_type": "POKEMON",
+    "name": "Synthetic contract card",
+    "artists": {
+      "text": "Illus. Synthetic Artist",
+      "list": ["Synthetic Artist"]
+    },
+    "regulation_mark": "G",
+    "set_icon": "MEW_EN",
+    "collector_number": {
+      "full": "001/165",
+      "numerator": "001",
+      "denominator": "165",
+      "numeric": 1
+    },
+    "rarity": {"designation": "UNCOMMON", "icon": "SOLID_DIAMOND"},
+    "copyright": {"text": "Synthetic copyright 2023", "year": 2023},
+    "size": "STANDARD",
+    "back": "POKEMON_1999",
+    "text": [
+      {
+        "kind": "ABILITY",
+        "name": "Synthetic ability",
+        "text": "Synthetic ability text."
+      },
+      {
+        "kind": "ATTACK",
+        "name": "Synthetic attack",
+        "cost": ["FREE"],
+        "damage": {"amount": 0, "suffix": "+"},
+        "text": "Synthetic attack text with {C}."
+      }
+    ],
+    "stage": "BASIC",
+    "stage_text": "BASIC",
+    "hp": 150,
+    "types": ["COLORLESS"],
+    "weakness": {"types": ["FIGHTING"], "amount": 2, "operator": "×"},
+    "retreat": 0,
+    "flavor_text": "Synthetic flavor text."
+  },
+  "knownInapplicableFields": ["subtype", "subtitle", "tags", "foil", "resistance"],
+  "independentExpectations": {
+    "preservedNumerator": "001",
+    "preservedRetreat": 0,
+    "preservedAttackDamage": 0,
+    "preservedTextKindOrder": ["ABILITY", "ATTACK"],
+    "preservedAttackCost": ["FREE"],
+    "samePayloadDistinctPhysicalIds": "two entries and two payload instances; never deduplicate",
+    "unknownFoil": "needs-evidence; no card payload",
+    "missingCopyright": "needs-evidence; no card payload",
+    "unknownLocalName": "needs-evidence; no English fallback",
+    "nullRetreat": "invalid payload; required zero must be explicit",
+    "booleanHp": "invalid payload; bool is not a JSON integer for this contract",
+    "emptyAttackCost": "invalid payload; free cost is the explicit FREE symbol",
+    "wrongLocalization": "reject incompatible target and observed language",
+    "unknownSelectedId": "bundle-build error; never silently skip",
+    "duplicateSelectedId": "bundle-build error",
+    "mixedCardsAndReport": "bundle validation fails before resolving cardIndex",
+    "reorderedInputRows": "byte-identical bundle",
+    "partialEvidence": "entry remains in report with all applicable reasons"
+  },
+  "numberCases": [
+    {"full": "001/165", "numerator": "001", "denominator": "165", "numeric": 1},
+    {"full": "TG05/TG30", "numerator": "TG05", "denominator": "TG30", "numeric": 5},
+    {"full": "SWSH285", "numerator": "SWSH285", "numeric": 285},
+    {"full": "000/165", "numerator": "000", "denominator": "165", "numeric": 0}
+  ],
+  "numberCasesScope": "Parser contract only; historical prefixes do not extend the real pilot's era scope."
+}
