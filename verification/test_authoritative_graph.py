@@ -1051,11 +1051,30 @@ def main() -> None:
         original_specimens_path = graph_module.SPECIMENS
         graph_module.SPECIMENS = specimens_path
         try:
+            unlinked = next(row for row in specimens["specimens"]
+                            if not row.get("citedBy") and not row.get("physicalObservation")
+                            and not row.get("sameCardAs") and row["specimenId"] == "SPEC-0012")
+            unlinked["recordedAt"] = "2040-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
             dated_identity = project_physical_evidence(deepcopy(graph))
             assert dated_identity["meta"]["generated"] == "2031-02-03"
             assert project_physical_evidence(deepcopy(dated_identity)) == dated_identity
             dated_identity["meta"]["generated"] = "2031-02-04"
             assert project_physical_evidence(dated_identity)["meta"]["generated"] == "2031-02-04"
+            # An unknown citation cannot promote the later unadmitted date either.
+            unlinked["citedBy"] = ["nonexistent:release"]
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2031-02-03"
+            # Direct source-first evidence remains supporting without a reverse citation.
+            direct = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0285")
+            direct["citedBy"] = []
+            direct["recordedAt"] = "2032-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2032-01-01"
+            physical = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0554")
+            physical["recordedAt"] = "2033-01-01"
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2033-01-01"
         finally:
             graph_module.SPECIMENS = original_specimens_path
     # The reviewed base is retained input, not reconstructible physical output (#357).
