@@ -64,6 +64,7 @@ def check_bundle_contract(profile, fixture):
     assert exporter.build_bundle(*reordered) == bundle
     check_disposition_reasons(inputs)
     check_physical_boundaries(inputs)
+    check_observation_agreement(inputs)
 
     for field in ("/foil", "/copyright", "/name"):
         altered = copy.deepcopy(inputs)
@@ -183,6 +184,37 @@ def check_physical_boundaries(inputs):
         assert rows[0]["status"] == "needs-mapping" and rows[1]["status"] == "exported", key
         assert rows[0]["identity"][key] == value, key
         assert any(r["field"] == "/identity/" + key for r in rows[0]["reasons"]), key
+
+
+def check_observation_agreement(inputs):
+    altered = copy.deepcopy(inputs)
+    rarity = next(row for row in altered[2]["observations"] if row["field"] == "/rarity")
+    rarity.update(state="not-applicable")
+    rarity.pop("value")
+    rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+    assert all(row["status"] == "needs-mapping" for row in rows)
+    assert all(any(r["code"] == "rarity-owner-conflict" for r in row["reasons"]) for row in rows)
+    altered = copy.deepcopy(inputs)
+    tags = next(row for row in altered[2]["observations"] if row["field"] == "/tags")
+    tags.update(state="known", value=["FUTURE", "ANCIENT"])
+    altered[2]["observations"].append({**tags, "observationId": "second-tags", "value": ["ANCIENT", "FUTURE"]})
+    bundle = exporter.build_bundle(*altered)
+    assert tags["value"] == ["FUTURE", "ANCIENT"], "normalization changed accepted input observations"
+    assert all(card["tags"] == ["ANCIENT", "FUTURE"] for card in json.loads(bundle["cards.json"]))
+    assert len(json.loads(bundle["cards.json"])) == 2
+    reordered = copy.deepcopy(altered)
+    reordered[2]["observations"].reverse()
+    assert exporter.build_bundle(*reordered) == bundle
+    altered = copy.deepcopy(inputs)
+    altered[1]["items"][0]["finish"] = "holo"
+    foil = next(row for row in altered[2]["observations"] if row["field"] == "/foil")
+    foil.update(state="known", value={"type": "FLAT_SILVER", "mask": "REVERSE"})
+    rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+    assert rows[0]["status"] == "needs-mapping"
+    assert any(r["code"] == "foil-mask-conflict" for r in rows[0]["reasons"])
+    foil["value"]["mask"] = "HOLO"
+    rows = json.loads(exporter.build_bundle(*altered)["report.json"])["entries"]
+    assert rows[0]["status"] == "exported", "matching holo treatment was rejected"
 
 
 def main():
