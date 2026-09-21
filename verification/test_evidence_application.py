@@ -191,9 +191,14 @@ def main() -> int:
             if set(card.get(field) or []) != group[status]:
                 raise AssertionError(f"{identity} {field} does not match {status}")
 
+    releases = load("analysis_confirmed_releases.json")
+    finish_snapshot = load("verification/finish_units.json")["meta"]["generated"][:10]
+    assert releases["generated"] >= finish_snapshot, "release export predates its finish evidence"
+    assert all(releases["generated"] >= unit["checkedAt"][:10]
+               for unit in units if unit.get("checkedAt")), "release export predates language evidence"
     release_pairs = {
         (row["setCode"], str(row.get("number") or ""), row["variant"], language)
-        for row in load("analysis_confirmed_releases.json")["variants"]
+        for row in releases["variants"]
         if row["edition"] != "1st Edition"
         for language in row["confirmedLanguages"]
     }
