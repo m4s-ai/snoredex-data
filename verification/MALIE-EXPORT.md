@@ -228,6 +228,12 @@ The generated profile records the complete sorted `inputPaths` (canonical inputs
 and every retained content-source file) and `inputsSha256`, binding the report's
 entire input digest map. Validation rejects missing inputs and source digests that
 disagree with the qualified field references, including on withheld entries.
+Input dependencies include every retained source validated by the content loader,
+even when no selected observation uses it. Field provenance is consequently a
+subset of the dependency set, not its definition. The producer rejects additional
+paths absent from the canonical-input/content-source set. Offline bundle hashes
+prove internal consistency, not authenticity after a party rewrites every binding;
+the commit-bound release manifest supplies the external package identity.
 Consumers needing physical identity must consume the report together with cards.
 Unsupported physical properties are retained there and receive a mapping reason;
 they must not be hidden by injecting undocumented fields into the cards payload.
