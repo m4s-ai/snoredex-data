@@ -14,9 +14,15 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+from urllib.parse import urlsplit
 
 PROFILE = "snoredex-malie-sv-pilot/1"
 PROFILE_CONTRACT_SHA256 = "2d91b30ef97256247d70976b6369be283156398b0ca9d228ec28ca4c7170b645"
+PILOT_SEMANTICS_SHA256 = "e11d92f662d3cdf8a1cfd979076596ef6ded633b75746ee5e7d9b883c0a642e9"
+SEMANTIC_FIELDS = ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId", "localSetId",
+                   "setEditionId", "edition", "finish", "foilPattern", "markings", "distribution",
+                   "cardSize", "errorClass", "sourcePrintingId", "finishUnitId", "itemKind")
+EVIDENCE_PROVIDERS = {"malie": (2, "cdn.malie.io"), "tcgdex": (2, "assets.tcgdex.net")}
 INPUT_FILES = {
     "verification/malie_profile.json", "collector_catalogue.json",
     "verification/card_content_observations.json", "verification/authoritative_graph.json",
@@ -248,7 +254,7 @@ def source_evidence(field, provenance, entry):
         require(type(source["authorityTier"]) is int and source["authorityTier"] in {1, 2, 3, 5}, "invalid source grade")
         source_scope(source["scope"], field, entry)
     for observation in observations.values():
-        observation_refs(observation, sources)
+        observation_refs(observation, sources, field)
     require(all(isinstance(path, str) and (path == field or path.startswith(field + "/"))
                 for path in provenance["covers"]), "evidence covers unrelated field")
 
@@ -262,7 +268,7 @@ def source_scope(scope, field, entry):
     require(field in scope["fields"], "source field mismatch")
 
 
-def observation_refs(observation, sources):
+def observation_refs(observation, sources, field):
     text_fields(observation, ("observationId", "state", "observedAt", "method", "basis"))
     state = observation["state"]
     require(state in {"known", "not-applicable", "unknown", "blocked-by-source"}, "unknown evidence state")
@@ -271,8 +277,21 @@ def observation_refs(observation, sources):
     require(set(refs) <= sources.keys(), "unresolved observation source")
     if state in {"known", "not-applicable"}:
         require(bool(refs), "accepted observation lacks a source")
+        for reference in refs:
+            eligible_evidence(sources[reference], field)
     else:
         text_fields(observation, ("nextStep",))
+
+
+def eligible_evidence(source, field):
+    provider = source["providerId"]
+    require(provider in EVIDENCE_PROVIDERS, "provider is not qualified for this pilot")
+    tier, host = EVIDENCE_PROVIDERS[provider]
+    url = urlsplit(source["url"])
+    require(source["authorityTier"] == tier and url.scheme == "https" and url.hostname == host,
+            "source grade or origin is not qualified for this pilot")
+    require(provider != "tcgdex" or field not in {"/size", "/back", "/foil"},
+            "front image cannot establish this physical field")
 
 
 def leaves(value, path):
@@ -300,6 +319,8 @@ def consume(directory):
     targets = indexed(profile["pilot"], "itemId")
     entries = indexed(report["entries"], "itemId")
     require(entries.keys() == targets.keys(), "selected-input accounting mismatch")
+    semantics = {iid: {key: entry["identity"][key] for key in SEMANTIC_FIELDS} for iid, entry in entries.items()}
+    require(sha(canonical(semantics)) == PILOT_SEMANTICS_SHA256, "selected printing semantics mismatch")
     physical_ids = [target["physicalPrintingId"] for target in targets.values() if target["physicalPrintingId"] is not None]
     require(len(physical_ids) == len(set(physical_ids)), "duplicate physical printing")
     items, positions = [], []

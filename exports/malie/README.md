@@ -39,6 +39,12 @@ locale mappings and vocabulary. Editing those bundled semantics cannot remove
 required fields or substitute printings while retaining the same profile identifier.
 Evidence-dependent entry/input hashes are checked separately and may change after
 accepted source updates without changing the declared selection or mapping rules.
+The reader independently pins the defining physical dimensions of every selected
+item as well, so a stable ID cannot silently change finish, edition, markings,
+distribution or size. Accepted field observations must use the reviewed pilot's
+provider/grade/origin policy; catalogue hints are not field evidence, and front
+images cannot establish back, size or foil. Adding another eligible provider or
+changing a printing's meaning requires a reviewed consumer/profile update.
 It also checks the complete canonical input list, the bound input digest map and
 agreement with retained-source digests in every field reference.
 

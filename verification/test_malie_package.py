@@ -110,6 +110,10 @@ def semantic_corruptions(script, bundle, original):
     mutations = [
         remove_name_contract,
         replace_pilot_identity,
+        replace_printing_semantics,
+        replace_source_eligibility,
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(authorityTier=5),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(url="https://example.invalid/evidence"),
         lambda d: d["profile.json"]["languages"].update({"LOCALIZATION:WEST:en": "de-DE"}),
         lambda d: d["report.json"].update(inputs={"collector_catalogue.json": "0" * 64}),
         lambda d: d["cards.json"][0].pop("name"),
@@ -141,6 +145,21 @@ def semantic_corruptions(script, bundle, original):
         assert run_reader(script, bundle).returncode != 0
     for name, raw in original.items():
         (bundle / name).write_bytes(raw)
+
+
+def replace_printing_semantics(documents):
+    import copy
+    entries = documents["report.json"]["entries"]
+    entries[1]["identity"].update(finish="reverse-holo", foilPattern="intricate-tiled-type-symbol")
+    documents["cards.json"][0]["foil"] = copy.deepcopy(documents["cards.json"][1]["foil"])
+    entries[1]["fieldSources"]["/foil"] = copy.deepcopy(entries[3]["fieldSources"]["/foil"])
+
+
+def replace_source_eligibility(documents):
+    for entry in documents["report.json"]["entries"]:
+        for field in entry["fieldSources"].values():
+            for source in field["sources"]:
+                source.update(providerId="cardmarket", authorityTier=5)
 
 
 def replace_pilot_identity(documents):
