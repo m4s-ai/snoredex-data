@@ -112,6 +112,10 @@ def physical_card(entry, card, target, profile):
         require(card["foil"]["mask"] == "REVERSE", "reverse treatment mismatch")
     if finish == "holo":
         require(card["foil"]["mask"] != "REVERSE", "holo treatment mismatch")
+    pattern = identity["foilPattern"]
+    if pattern is not None:
+        require(pattern in profile["foilPatternMappings"] and
+                card.get("foil") == profile["foilPatternMappings"][pattern], "foil-pattern mapping mismatch")
 
 
 def consume_entry(entry, target, cards, profile):
@@ -271,6 +275,7 @@ def source_scope(scope, field, entry):
 def observation_refs(observation, sources, field):
     text_fields(observation, ("observationId", "state", "observedAt", "method", "basis"))
     state = observation["state"]
+    require((state == "known") == ("value" in observation), "observation value/state mismatch")
     require(state in {"known", "not-applicable", "unknown", "blocked-by-source"}, "unknown evidence state")
     refs = observation["sourceIds"]
     require(isinstance(refs, list) and all(isinstance(ref, str) for ref in refs), "invalid observation references")
@@ -307,7 +312,14 @@ def exported_evidence(entry, card):
     for field, provenance in entry["fieldSources"].items():
         name = field[1:]
         state = "known" if name in card else "not-applicable"
-        require(any(row["state"] == state for row in provenance["observations"]), "missing accepted field evidence")
+        accepted = [row for row in provenance["observations"] if row["state"] in {"known", "not-applicable"}]
+        require(bool(accepted), "missing accepted field evidence")
+        for row in accepted:
+            value = row.get("value")
+            if name == "tags" and isinstance(value, list):
+                value = sorted(set(value))
+            require(row["state"] == state and (state != "known" or canonical(value) == canonical(card[name])),
+                    "exported value disagrees with observation")
         paths = leaves(card[name], field) if name in card else []
         require(provenance["covers"] == paths, "incomplete field-leaf evidence coverage")
 

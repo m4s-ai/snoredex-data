@@ -155,6 +155,40 @@ def replace_printing_semantics(documents):
     entries[1]["fieldSources"]["/foil"] = copy.deepcopy(entries[3]["fieldSources"]["/foil"])
 
 
+def value_corruptions(script, bundle, original):
+    """Source values must agree at both producer and independent consumer boundaries."""
+    mutations = [
+        lambda d: d["cards.json"][0].update(name="Pikachu"),
+        lambda d: d["cards.json"][0]["text"][1]["damage"].update(amount=140),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].pop("value"),
+        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(value="Pikachu"),
+        replace_foil_mapping,
+    ]
+    for mutate in mutations:
+        docs = {name: json.loads(raw) for name, raw in original.items()}
+        mutate(docs)
+        refresh_bindings(docs)
+        for name, value in docs.items():
+            (bundle / name).write_bytes(canonical(value))
+        assert run_reader(script, bundle).returncode != 0
+        try:
+            publish.read_malie_bundle(bundle.parent.parent)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("producer accepted altered field value or foil mapping")
+    for name, raw in original.items():
+        (bundle / name).write_bytes(raw)
+
+
+def replace_foil_mapping(documents):
+    documents["cards.json"][1]["foil"]["type"] = "COSMOS"
+    # Also change the observation so the independent physical mapping must reject it.
+    for row in documents["report.json"]["entries"][3]["fieldSources"]["/foil"]["observations"]:
+        if row["state"] == "known":
+            row["value"]["type"] = "COSMOS"
+
+
 def replace_source_eligibility(documents):
     for entry in documents["report.json"]["entries"]:
         for field in entry["fieldSources"].values():
@@ -227,6 +261,7 @@ def main():
         assert decoded["digests"] == {name: hashlib.sha256(raw).hexdigest() for name, raw in original.items()}
         assert not publish.malie_problems(directory)
         semantic_corruptions(script, bundle, original)
+        value_corruptions(script, bundle, original)
         corruptions(script, bundle, original)
         check_failed_build_preserves_stage(directory)
     print("Standalone Malie consumer passed with only 3 bundle inputs: exact pilot values, IDs, gaps, digests and corruption rejection.")

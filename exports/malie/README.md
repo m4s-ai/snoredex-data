@@ -34,6 +34,10 @@ The profile includes the executable payload schema. The reader independently
 validates its structural keywords, numbering/rarity/copyright/cost relationships,
 qualified source references, observation states and complete field-leaf coverage.
 Consistently recomputing hashes does not make an invalid payload or empty evidence valid.
+Known observations retain their exact field values in the companion; both the
+producer and independent reader compare every accepted observation with the exported
+value (including nested content and the documented unordered-tag normalization).
+The full foil type/mask must also agree with the pinned physical-pattern mapping.
 The reader pins the versioned profile contract, including its schema, pilot IDs,
 locale mappings and vocabulary. Editing those bundled semantics cannot remove
 required fields or substitute printings while retaining the same profile identifier.

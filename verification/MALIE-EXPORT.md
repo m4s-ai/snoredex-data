@@ -105,6 +105,9 @@ No observable fact is admitted merely because an observation has the right shape
 `C` below means a reviewed content observation, `P` an existing physical owner plus
 any required exact-print observation, and `G` the existing graph/localization owner.
 Every emitted leaf retains its observation/source references in the companion.
+Known companion observations also retain their field values. Exported values must
+agree with every accepted observation after the documented tag normalization;
+source references and leaf coverage alone do not establish value agreement.
 Unless stated otherwise, unknown or blocked applicable data withholds the whole card.
 The permitted enumerations are in the profile's `vocabulary`. Rarity designation
 and icon arrays correspond by index and must be validated as pairs, not independently.
