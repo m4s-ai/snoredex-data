@@ -1,6 +1,6 @@
 ---
 name: snoredex-source-refresh
-description: Refresh and reconcile Snoredex source-first set and card discovery runs. Use for finding new cards, digging, source updates, set or promo announcements, and scheduled, release-triggered, provider-change or manual catalogue discovery. Excludes photo or attachment intake, evidence for an already-known claim, and TCGdex finish-snapshot refresh.
+description: Refresh and reconcile Snoredex source-first set and card discovery runs. Use for catalogue discovery, source updates, set or promo announcements, and scheduled, release-triggered, provider-change or manual discovery runs. Excludes targeted web searches for prompt-specified cards, photo intake, evidence for an already-known claim, and TCGdex finish-snapshot refresh.
 ---
 
 <!-- doc: role=source-refresh workflow skill; stage=task -->
@@ -8,6 +8,10 @@ description: Refresh and reconcile Snoredex source-first set and card discovery 
 # Snoredex source refresh
 
 Create one immutable provider refresh and reconcile every result to a visible terminal state without turning source failure or silence into a verdict.
+
+For targeted online evidence searches whose cards come from a prompt or issue, start with
+[card search](../card-search/SKILL.md). Return here when a find needs source-first admission;
+searching for one card does not require refreshing an entire provider or evaluating a whole setlist.
 
 ## Source-refresh context
 
