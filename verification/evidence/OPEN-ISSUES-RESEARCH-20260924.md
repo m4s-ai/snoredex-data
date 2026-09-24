@@ -45,10 +45,11 @@ the in-app browser at
 [`tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl`](https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl).
 It visibly matches Traditional Chinese 卡比獸, regulation H, MC F, 568/742, attack 懶散壓制 120, HP160 and illustrator
 Po-Suzuki. That exact identity was already retained under SPEC-0503 from a separate retailer image and in the official
-Taiwan source-first record. This newly supplied marketplace image is a flat listing image with no clearly inspectable
-physical foil surface; the listing title's “Mirror Flash” wording is not a card-face observation. It therefore does not
-resolve the open physical-finish question, and no new specimen or finish claim is admitted. If the owner has a physical card
-photo with reflected light or confirms the treatment from a card they hold, that would be useful finish evidence.
+Taiwan source-first record. I initially misread the finish. After the owner's correction that the image clearly shows
+reverse holo, the photograph was retained through the specimen importer as SPEC-0555 and the finish was recorded with
+`ownerAttestedFields: ["finish"]`. The retained listing image supports the exact identity; the finish attribution is the
+collection owner's, not the seller title's. This resolves the finish evidence gap for this identified printing without
+asserting the list of all possible finishes or a separate physical specimen held by the owner.
 
 ### European Spanish 30C ES 119/128 — useful set context, not exact physical evidence
 
@@ -89,12 +90,11 @@ search snippets, missing catalogue rows and inaccessible photographs remain lead
 
 ## Next useful evidence
 
-1. Owner photo for Traditional Chinese MC F 568/742 showing the full card front and enough surface detail to inspect foil.
-2. Exact Indonesian fronts for AC3b 238/204 and 239/204, especially if a visible locality/edition mark is present.
-3. Exact Thai fronts for MA4 091/123 and the remaining open #262 candidates; preserve the disagreement between official
+1. Exact Indonesian fronts for AC3b 238/204 and 239/204, especially if a visible locality/edition mark is present.
+2. Exact Thai fronts for MA4 091/123 and the remaining open #262 candidates; preserve the disagreement between official
    record, listing, and card where they do not match.
-4. Exact Japanese card/number evidence for the five unresolved #259 collector numbers and a G2 Snorlax face.
-5. Revisit WikiDex 30C only if a card scan or independently reviewable physical image becomes available; its expansion-level
+3. Exact Japanese card/number evidence for the five unresolved #259 collector numbers and a G2 Snorlax face.
+4. Revisit WikiDex 30C only if a card scan or independently reviewable physical image becomes available; its expansion-level
    finish statement is not a substitute for observing the card's surface.
 
 ## Retrieval and limitations

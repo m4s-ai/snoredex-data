@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-21",
+  "generated": "2026-09-24",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1614,
-   "uniqueUrls": 1607,
+   "evidenceRecords": 1615,
+   "uniqueUrls": 1608,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6255
+   "claimsAttributed": 6263
   }
  },
  "providers": [
@@ -741,7 +741,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 191
+   "claimsSupported": 194
   },
   {
    "providerId": "inspected-specimen",
@@ -763,7 +763,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 65,
-   "claimsSupported": 731
+   "claimsSupported": 733
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -805,9 +805,11 @@
    ],
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
-   "hosts": [],
-   "uniqueSources": 133,
-   "claimsSupported": 564
+   "hosts": [
+    "down-tw.img.susercontent.com"
+   ],
+   "uniqueSources": 134,
+   "claimsSupported": 567
   }
  ],
  "evidence": [
@@ -11918,7 +11920,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 211,
+   "stableIdCount": 213,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -11930,6 +11932,8 @@
     "F0456-P01",
     "F0456-P02",
     "F0456-P03",
+    "F0457-P01",
+    "F0457-P02",
     "F0519-P02",
     "F0530-P01",
     "F0534-P01",
@@ -12133,7 +12137,7 @@
     "U0780"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 359
+   "usageCount": 361
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -13656,7 +13660,7 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 169,
+   "stableIdCount": 172,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0009-P01",
@@ -13695,6 +13699,7 @@
     "F0173-P01",
     "F0174-P01",
     "F0174-P02",
+    "F0221-P01",
     "F0289-P02",
     "F0332-P01",
     "F0402-P02",
@@ -13791,9 +13796,11 @@
     "SPEC-0524",
     "SPEC-0525",
     "SPEC-0533",
+    "SPEC-0555",
     "TH:AS5a:142/184:base",
     "TH:sc1a T:127/154:base",
     "TW:AS5a:142:base",
+    "TW:MC F:568/742:base",
     "U0092",
     "U0097",
     "U0098",
@@ -13828,8 +13835,8 @@
     "override:owner-scan-review",
     "override:owner-svp184-western-prerelease-variants"
    ],
-   "retrievedAt": "2026-09-21",
-   "usageCount": 189
+   "retrievedAt": "2026-09-24",
+   "usageCount": 192
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -25378,6 +25385,26 @@
    ],
    "retrievedAt": "2026-09-21",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Inspected physical specimen photograph",
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0221-P01",
+    "SPEC-0555",
+    "TW:MC F:568/742:base"
+   ],
+   "retrievedAt": "2026-09-24",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",

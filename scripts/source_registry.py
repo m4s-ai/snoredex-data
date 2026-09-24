@@ -590,7 +590,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "displayName": "Seller listing photograph",
         "organization": "Various online marketplaces",
         "homepage": None,
-        "hosts": [],
+        "hosts": ["down-tw.img.susercontent.com"],
         "licenseOrTerms": "Seller photographs remain the seller's; depicted artwork remains the rights holders'.",
         "category": "marketplace-photo",
         "authorityTier": 2,

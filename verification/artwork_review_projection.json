@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-21",
-  "projectionVersion": "12ab23901a7887bee0444416c46d502c49a3934e5895f8f513c2376e62bb60ce",
+  "generated": "2026-09-24",
+  "projectionVersion": "ac2579b0b2775136524085e35f7e7b35eb75c83f4f942370f58dcea3b6e60988",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 642,
-    "physicalPrintings": 771,
-    "sourceObservations": 2983
+    "physicalPrintings": 770,
+    "sourceObservations": 2989
   },
   "groups": [
     {
@@ -52336,13 +52336,59 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:ea9efaec9de0abf757ff6aea",
+              "semanticPrintingId": "PRINTING:ea9efaec9de0abf757ff6aea",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:MC F:568/742:Snorlax-Lazy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0221",
+              "sourcePrintingId": "F0221-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:ea9efaec9de0abf757ff6aea",
+              "specimenIds": [
+                "SPEC-0555"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-24",
+                  "evidence": "The collection owner's explicit 2026-09-24 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl.webp",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Visible Traditional Chinese 卡比獸, HP160, regulation H, MC F 568/742, attack 懶散壓制 120, Illus. Po-Suzuki. The collection owner explicitly identifies the pictured treatment as reverse holo; finish is attributed to owner attestation, not inferred from the seller title. Retained as SPEC-0555.",
+                  "retrievedAt": "2026-09-24",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "reverse-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -52400,9 +52446,47 @@
               "originalHash": "2e1294a6b9ba815cba687a4c10288f52ef290d40ec308969d748ff99d8d9a3fc",
               "previewSrc": "images/previews/SPEC-0503.png?v=e78af0f59706c17f5e9493725a3159e1c83af123ec6757351d716f9cb71bab74",
               "thumbnailSrc": "images/thumbs/SPEC-0503.png?v=ea865ddc4c03fb958b8ece87099b70fa1905c1c1f564dceb8415fc0248007f13"
+            },
+            {
+              "src": "verification/specimens/SPEC-0555.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0555",
+              "contentHash": "9847bd257144fca98d580961635cc9358e5d9b41e3e0f4843f8e8fc898d8b220",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9847bd257144fca98d580961635cc9358e5d9b41e3e0f4843f8e8fc898d8b220",
+              "previewSrc": "images/previews/SPEC-0555.png?v=40772e543d3abc27d80ad4203e7a22240a467ff5ff05c790c03fc0e7826032d4",
+              "thumbnailSrc": "images/thumbs/SPEC-0555.png?v=d6a3ed35fbae66268fa4221f6bb2ec78f31d11830bd5b8aac58257d32aa8cfb1"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0221-P01:0:23cb28d3f4e74769",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "32343aac2b11cb927d73bae30de506a77b4ec62cd7b2928eebaa0c7fa4b14537",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0221-P01:1:51627e1628bfb205",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-24 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties.",
+              "contentHash": "f31728667823339e8e3edc0ff3cbf2abe9d5ab53dac8974eab5ad0f996cfc089",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0221-P01:2:7424fa84e59f497e",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl.webp",
+              "evidence": "Visible Traditional Chinese 卡比獸, HP160, regulation H, MC F 568/742, attack 懶散壓制 120, Illus. Po-Suzuki. The collection owner explicitly identifies the pictured treatment as reverse holo; finish is attributed to owner attestation, not inferred from the seller title. Retained as SPEC-0555.",
+              "contentHash": "f3582caf1e3109d862b7274d79ae848cd3fb45c7fc35bf2584310be313798872",
+              "image": null
+            },
             {
               "observationId": "source-first:TW:MC F:568/742:base",
               "kind": "source-first",
@@ -52438,6 +52522,15 @@
               "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 568/742, attack 懶散壓制 120, Illus. Po-Suzuki. Exact reference image supports local identity; physical custody and technical finish are not asserted.",
               "contentHash": "c60160c8ea57c4c960019503620906d424a7ef52c6bef5506a08d31c6b980eb0",
               "image": "verification/specimens/SPEC-0503.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0555",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.tw/%E3%80%90%E9%80%90%E9%9B%BB%E7%8B%97%E5%8D%A1%E8%88%96%E3%80%91%E5%AF%B6%E5%8F%AF%E5%A4%A2-PTCG-%E4%B8%AD%E6%96%87%E7%89%88-100%E5%B0%8D%E6%88%B0%E6%94%B6%E8%97%8F-%E9%8F%A1%E9%96%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-%E6%87%B6%E6%95%A3%E5%A3%93%E5%88%B6-H-MC-F-568-742-i.12163161.52007816909",
+              "evidence": "Visible Traditional Chinese 卡比獸, HP160, regulation H, MC F 568/742, attack 懶散壓制 120, Illus. Po-Suzuki. The collection owner explicitly identifies the pictured treatment as reverse holo; finish is attributed to owner attestation, not inferred from the seller title.",
+              "contentHash": "a9119b75562fb014ffddd06608aed8bbb9bcad8c83102261bf6e3f6668643346",
+              "image": "verification/specimens/SPEC-0555.png"
             },
             {
               "observationId": "unit:U0591",
@@ -92636,7 +92729,15 @@
               "sourceFinishUnitId": "F0457",
               "sourcePrintingId": "F0457-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:025d4f8d86f9a0db9a436142",
+              "specimenIds": [
+                "SPEC-0019"
+              ],
               "sources": [
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019.",
+                  "retrievedAt": "2026-08-04"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
                   "sourceType": "user",
@@ -92659,50 +92760,20 @@
               "sourceFinishUnitId": "F0457",
               "sourcePrintingId": "F0457-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:6b10493667a50689f6de8c30",
+              "specimenIds": [
+                "SPEC-0020"
+              ],
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
                   "sourceType": "user",
                   "evidence": "Curated variant name: Master Ball mirror holo"
+                },
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020.",
+                  "retrievedAt": "2026-08-04"
                 }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0019",
-              "cardReleaseId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "\"carrying a Poké Ball mirror foil pattern\"; \"the ball outlines are legible across the text box and lower border at full resolution\".",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0019",
-              "specimenIds": [
-                "SPEC-0019"
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0020",
-              "cardReleaseId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "master-ball",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "\"carrying a Master Ball mirror foil pattern\"; \"The pattern is strong and covers the whole face\".",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0020",
-              "specimenIds": [
-                "SPEC-0020"
               ]
             }
           ],
@@ -92753,16 +92824,34 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
               "evidence": "Curated variant name: Master Ball mirror holo",
-              "contentHash": "3d31bb29d4537db1dd53fcb7b23ba966d86695eaf91f926d045edfb79dcdf49f",
+              "contentHash": "f6f4e740f4c2926329def40e64d01161397b4c8544568b5333476f0360c28dda",
               "image": null
             },
             {
-              "observationId": "finish:F0457-P02:0:4d3590ec9cc18300",
+              "observationId": "finish:F0457-P01:1:b2cc1d8b92a72063",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020.",
+              "contentHash": "ac0c31aea3898af9b51f2b94c27f4daf92d3ce8e944dbde38fc371a528b9e37f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0457-P02:0:052a22258ddc656a",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019.",
+              "contentHash": "dace40c0c29aa66e3584d16b7f58ddd3f564b876b332b5fb3191f0c54a80dcdc",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0457-P02:1:4d3590ec9cc18300",
               "kind": "finish",
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
               "evidence": "Curated variant name: Poké Ball mirror holo",
-              "contentHash": "6e0446d7e0ac64aacd76750434d909b58f97c97daa330a5549c91c9a9b39f14d",
+              "contentHash": "38764b2320e48bcea9efcfe84561754aad7bc3d6b7f7144ecc09c66dd4472e58",
               "image": null
             },
             {

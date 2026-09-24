@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-21",
+    "generated": "2026-09-24",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 59,
       "absenceEdges": 0,
       "observations": 63,
-      "resolvedVerdictSources": 1614
+      "resolvedVerdictSources": 1615
     },
     "surfaceStates": {
       "active": 28,
@@ -7075,7 +7075,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:9ae5afb6363b7091cd522c27aa8bcbbd6a9ab40b997d85be74ce26fcdf46a90c",
+      "rawRecordHash": "sha256:31db23121548b8e56da5a9444465f91681e5bca30b17e732c1d01b0828a69d62",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7097,7 +7097,7 @@
           "finish-override",
           "language"
         ],
-        "stableIdCount": 169,
+        "stableIdCount": 172,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -7136,6 +7136,7 @@
           "F0173-P01",
           "F0174-P01",
           "F0174-P02",
+          "F0221-P01",
           "F0289-P02",
           "F0332-P01",
           "F0402-P02",
@@ -7232,9 +7233,11 @@
           "SPEC-0524",
           "SPEC-0525",
           "SPEC-0533",
+          "SPEC-0555",
           "TH:AS5a:142/184:base",
           "TH:sc1a T:127/154:base",
           "TW:AS5a:142:base",
+          "TW:MC F:568/742:base",
           "U0092",
           "U0097",
           "U0098",
@@ -7269,8 +7272,8 @@
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants"
         ],
-        "retrievedAt": "2026-09-21",
-        "usageCount": 189
+        "retrievedAt": "2026-09-24",
+        "usageCount": 192
       }
     },
     {
@@ -7291,7 +7294,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:9dfababecb81a461b668cfb306d576e522048099e80071bfa712a0e4db595ba6",
+      "rawRecordHash": "sha256:cbf97301ad00ea672d4d1e8f51b73ead02cc27f4b61dd225e28c99df9e6e9de8",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -7313,7 +7316,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 211,
+        "stableIdCount": 213,
         "stableIds": [
           "F0054-P01",
           "F0094-P02",
@@ -7325,6 +7328,8 @@
           "F0456-P01",
           "F0456-P02",
           "F0456-P03",
+          "F0457-P01",
+          "F0457-P02",
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
@@ -7528,7 +7533,7 @@
           "U0780"
         ],
         "retrievedAt": "2026-09-10",
-        "usageCount": 359
+        "usageCount": 361
       }
     },
     {
@@ -24211,6 +24216,18 @@
     },
     {
       "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7rbk9-ma5nc55vl2mq48",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [

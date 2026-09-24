@@ -37,10 +37,10 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-09-21",
+      "lastUpdated": "2026-09-24",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 484,
-      "withOnlyMarketplaceClaim": 44,
+      "withConfirmedFinish": 485,
+      "withOnlyMarketplaceClaim": 43,
       "pendingFinish": 33,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
@@ -38217,16 +38217,16 @@
             "finishStatus": {
               "non-holo": "pending",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
               "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0221",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -38237,8 +38237,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0555.png",
+                "specimenIds": [
+                  "SPEC-0555"
+                ]
               }
             ]
           }
@@ -45665,7 +45669,11 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped"
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0019.png",
+                "specimenIds": [
+                  "SPEC-0019"
+                ]
               }
             ]
           }
@@ -47118,7 +47126,11 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped"
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0020.png",
+                "specimenIds": [
+                  "SPEC-0020"
+                ]
               }
             ]
           }
