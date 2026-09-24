@@ -76,14 +76,19 @@ The issue already has official localized gallery render evidence for identity; t
 The owner also supplied [PokéWallet's 30th Celebration reveal](https://pokewallet.io/blog/30th-celebration-set-officially-revealed),
 dated 2026-06-01. It claims that every card in the set is foil, but the page does not define that claim by localized
 release or provide a per-language checklist. It explicitly limits the "30" Pikachu stamp to the 30 Classic Collection
-reprints; it does **not** say that every card carries a stamp. The chronology also weakens this as finish evidence: the
-PokéWallet post says the complete set details had been officially revealed on June 1, while the later official
-[Pokémon product showcase](https://www.pokemon.com/uk/news/pokemon-tcg-30th-celebration-product-showcase), published
-2026-06-30, confirms five foil Pokémon/Trainer cards and one foil Basic Energy per booster but does not state that every
-numbered card in every localized list is foil. Pokémon's [worldwide launch notice](https://www.pokemon.com/uk/news/the-pokemon-tcg-30th-celebration-expansion-is-available-now)
-confirms simultaneous release, not identical card lists or a universal stamp treatment. Treat PokéWallet as a secondary
-lead, not a global finish manifest: it cannot establish that Spanish 30C 119/128 is foil or that every worldwide card is
-stamped. Keep the Spanish unit open pending locale-scoped positive evidence.
+reprints; it does **not** say that every main-set card carries a stamp. The separate [30-card list](https://pokewallet.io/blog/30th-celebration-classic-collection-all-30-cards)
+includes both Base Set Pikachu and Base Set Charizard and says each Classic Collection reprint receives the "30" Pikachu
+stamp and a special holofoil treatment. Thus the Base Set reprints are included in the stamped subset; this does not make
+the entire 30th Celebration main set stamped.
+
+For the separate all-foil claim, PokéWallet says every card in the set is foil, but does not define that claim by
+localized release or provide a per-language checklist. Its June 1 post says it drew the Classic Collection cards from
+Japan's official site animation. The later official [Pokémon product showcase](https://www.pokemon.com/uk/news/pokemon-tcg-30th-celebration-product-showcase),
+published 2026-06-30, confirms five foil Pokémon/Trainer cards and one foil Basic Energy per booster, but does not state
+that every numbered card in every localized list is foil. Pokémon's [worldwide launch notice](https://www.pokemon.com/uk/news/the-pokemon-tcg-30th-celebration-expansion-is-available-now)
+confirms simultaneous release, not identical card lists or a universal stamp treatment. Treat PokéWallet's blanket foil
+statement as a secondary set-level lead, not a locale-scoped finish manifest: it does not independently identify Spanish
+30C 119/128's finish. Keep that Spanish unit open pending locale-scoped positive evidence.
 
 An indexed Aukro seller page described a 30C 119/128 Snorlax as “holo”, but the listing had expired and its card photo was
 not visible during inspection. The language/locality and card-face treatment could not be checked; discard as a lead.
