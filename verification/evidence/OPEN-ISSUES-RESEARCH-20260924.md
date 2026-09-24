@@ -53,8 +53,17 @@ photo with reflected light or confirms the treatment from a card they hold, that
 ### European Spanish 30C ES 119/128 — useful set context, not exact physical evidence
 
 The [Spanish Pokémon official announcement](https://www.pokemon.com/es/noticias/productos-de-celebracion-30-o-aniversario-de-jcc-pokemon)
-announces the Spanish-language 30th Celebration product and says its packs contain five holographic cards. It is set/product
-context and does not enumerate Snorlax 119/128 or establish its own physical treatment.
+announces the Spanish-language 30th Celebration product and says each booster contains five holographic cards (including
+one of the 30 Pikachu illustrations) plus one holographic Basic Energy. It is set/product context and does not enumerate
+Snorlax 119/128 or establish its own physical treatment.
+
+The owner-supplied [PokéBeach report](https://www.pokebeach.com/2026/09/30th-celebration-full-set-list-revealed-for-japan-features-176-cards)
+(2026-09-09) explicitly says **every card in Japan's 30th Celebration set is foil** and lists Japanese Snorlax as card
+095. The same article says the Japanese and English sets have different card lists. This is positive finish evidence for
+the Japanese set as described by the article, but it does not identify the Spanish Snorlax 119/128 or prove its physical
+finish. The Spanish official pack statement is broader product context, not a card-specific foil assignment. Keep the
+European Spanish 30C 119 finish question open pending a source that covers that localized card/listing or an inspected
+physical image.
 
 The [WikiDex expansion page](https://www.wikidex.net/wiki/Celebraci%C3%B3n_30.%C2%BA_Aniversario_(TCG))
 lists Snorlax 119/128, gives a 16 September 2026 Spanish/Latin American release date, and states that all expansion cards
