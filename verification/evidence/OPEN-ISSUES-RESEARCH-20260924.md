@@ -136,9 +136,9 @@ pattern or complete finish inventory. The item specifics are not the evidence ba
 source-first release exists for this exact key yet, so SPEC-0556 remains an `allowUnprojected` physical candidate and is
 not linked to the separate Instagram observation SPEC-0334.
 
-SPEC-0556 adds a retained physical candidate for the Indonesian AC3b 239/204 open row, but cannot yet connect to a
-canonical release or finish unit. Other marketplace language labels, search snippets, missing catalogue rows and
-inaccessible photographs remain leads only.
+SPEC-0556 adds a retained physical candidate for the Indonesian AC3b 239/204 row. Its Indonesian AC3b release
+identity is visible, while its source-first card-release record remains unmaterialized. Other marketplace language labels,
+search snippets, missing catalogue rows and inaccessible photographs remain leads only.
 
 ### New follow-up lead — Indonesian AC3b 238/204
 
@@ -149,13 +149,18 @@ Indonesian card text and reflective foil across the face and border. SPEC-0557 r
 `holo` for this pictured copy. It does not assign a precise foil-pattern taxonomy or establish a complete finish
 inventory. The seller listing page was CAPTCHA-gated; the separately supplied image endpoint was accessible.
 
-SPEC-0557 remains an `allowUnprojected` candidate because no matching canonical source-first release or finish unit
-exists yet. It is not linked to SPEC-0335, which represents a separate carousel observation. Reconcile both Indonesian
-AC3b 238/204 and 239/204 candidates with canonical releases when those are admitted.
+The owner clarifies that AC3b 238/204 is its own Indonesian release and that its artwork is from Japanese SM9.
+Visual comparison matches the retained Japanese SM9 106/095 image (same Eevee & Snorlax GX artwork and Work); the
+Japanese release supplies artwork/work lineage, not the Indonesian card's release identity. The official Indonesian
+`AC3_setB.pdf` page 27 independently shows the local AC3b 238/204 SR identity. The canonical identity to materialize is
+`ID:AC3b:238/204:base` under the existing Eevee & Snorlax GX Work. The source-first row is not yet in the canonical
+store, which is why SPEC-0557 still projects as an explicit candidate. Its observed `holo` finish is directly recorded
+from the seller photo; this remaining step is release graph materialization, not further finish research. It is not linked
+to SPEC-0335, a separate carousel observation. AC3b 239/204 remains a separate admission candidate.
 
 ## Next useful evidence
 
-1. Reconcile the retained Indonesian AC3b 238/204 and 239/204 candidates with canonical releases when admitted.
+1. Materialize the owner-identified Indonesian AC3b 238/204 release and connect SPEC-0557; separately reconcile AC3b 239/204.
 2. Exact Thai fronts for MA4 091/123 and the remaining open #262 candidates; preserve the disagreement between official
    record, listing, and card where they do not match.
 3. Exact Japanese card/number evidence for the five unresolved #259 collector numbers and a G2 Snorlax face.
