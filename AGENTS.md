@@ -120,12 +120,11 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    that boundary. Provider coverage remains useful research context, but it never turns omission
    into evidence.
 
-   **The finish layer has the same mechanism since #119.** `owner_adjudications.json` carries a
-   second array, `finishDecisions`, and a decision there closes the list of finishes for one
-   set-number-language unit with `completenessStatus=owner-adjudicated`. It exists because some
-   products have no finish-specific product page to find. `/ex/` product pages
-   are not published for magazine-bonus decks, and the official card page carries no finish
-   vocabulary at all (`FINISH_SOURCES.md` records the probe, with a working control).
+   **The finish layer has the same mechanism since #119.** A `finishDecisions` entry closes the
+   list of finishes for one set-number-language unit with `completenessStatus=owner-adjudicated`,
+   because some products have no finish-specific product page to find (no `/ex/` page for
+   magazine-bonus decks; the official page carries no finish vocabulary — `FINISH_SOURCES.md`
+   records the probe, with a working control).
 
    A finish decision **closes a list and never asserts a finish.** `E13` enforces both halves. It
    must name exactly the finishes the evidence already found, and it may not apply to a unit with no
@@ -287,26 +286,17 @@ history audit at `GITHUB_SHA`; Pages downloads and verifies the L4-produced arti
 manifests instead of rebuilding a second projection tree. The workflow map is the single
 human-readable explanation; this file intentionally does not maintain a second command list.
 
-**The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file records the
-version number of the library that wrote it in its own header, so two environments running different
-SQLite builds produce different bytes from identical data — measured here as 128,107 differing bytes
-between SQLite 3.53.1 and 3.45.1 whose `iterdump()` output was identical line for line. Regeneration
-is deterministic *within* one version and cannot be made deterministic *across* versions, `VACUUM`
-included. `scripts/database.py` has always known this — `sqlite_dump()` exists precisely so `--check`
-compares the logical dump instead of a file hash. `database.py --check` and
-`tracker.py check-template` cover their content instead
-([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
-Their content is still covered, by those two checks, against what is committed.
+**The `.sqlite` files are excluded from regen.py's byte diff, and always must be.** A SQLite file embeds the
+library version that wrote it in its header, so two environments produce different bytes from identical
+data. `scripts/database.py`'s `sqlite_dump()` exists precisely so `--check` compares the logical dump
+instead of a file hash; `database.py --check` and `tracker.py check-template` cover the content against what
+is committed ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
 
-`P6` scans full git history, so it fails on a shallow clone regardless of the tree. `git fetch
---unshallow` once, and it becomes a real check locally instead of expected noise.
+`P6` scans full git history, so it fails on a shallow clone — `git fetch --unshallow` once.
 
-**`P6` and `P7` read git history, so run `review_findings.py` once more after committing and
-pushing.** Everything else in this gate reads the working tree, and a green run before the commit
-says nothing about the commit itself: `P7` fails on any author or committer address without
-`noreply` in it, and it cannot see yours until the commit exists — nor the old one until the pushed
-ref stops reaching it, so an amend needs a force-push before it re-passes. Run it before the commit
-for the tree, and again after the push for the history
+**`P6` and `P7` read git history, so run `review_findings.py` once more after committing and pushing.**
+Everything else in this gate reads the working tree, and a green run before the commit says nothing about
+the commit itself. Run it before the commit for the tree, and again after the push for the history
 ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
@@ -383,23 +373,18 @@ the index lives in the code rather than here.
 
 ## Counts are reported, never asserted — but a losing move fails
 
-Nothing fails because a count is the wrong *size*. Counts are reported as drift against a baseline,
-and only a move in the **losing direction** is a finding. Since #69 that finding fails the run:
-before it, a genuine loss printed a banner and exited 0. Structural facts still fail the run.
-
+Nothing fails because a count is the wrong *size*; counts are reported as drift against a baseline, and only a
+move in the **losing direction** is a finding (it fails the run since #69; structural facts always fail).
 Each metric declares which way losing is:
 
-- **`up-is-progress`** (the default) — units, artist coverage, finish rows. These measure work that
-  exists, so a fall means something was lost.
-- **`down-is-progress`** — `pending units`, `manual-review units`. These measure work left to do,
-  and their baseline is the **low-water mark**, so a queue climbing back is caught immediately.
+- **`up-is-progress`** (the default) — units, artist coverage, finish rows. A fall means something was lost.
+- **`down-is-progress`** — `pending units`, `manual-review units`. Baseline is the **low-water mark**, so a rising
+  queue is caught immediately.
 
-Do not "fix" a losing move by editing the baseline; find what changed. Re-anchoring a queue's
-baseline *downward* after closing it is the opposite move and is correct — it tightens the check.
-Never raise one to silence a rise: a gate that reddens when the project improves is a gate people
-learn to edit rather than read, and this project has run one
-([LESSONS](LESSONS.md#a-gate-that-reddens-when-the-project-improves)). When a queue grows because
-the corpus grew, record the cause beside the number.
+Never "fix" a losing move by editing the baseline — find what changed. Re-anchoring a queue's baseline *downward*
+after closing it is correct (it tightens the check); never raise one to silence a rise, a gate that reddens when
+the project improves gets edited rather than read ([LESSONS](LESSONS.md#a-gate-that-reddens-when-the-project-improves)).
+When a queue grows because the corpus grew, record the cause beside the number.
 
 ## Git and publication
 
