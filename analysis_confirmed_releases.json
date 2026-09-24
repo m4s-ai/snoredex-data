@@ -19462,24 +19462,42 @@
     {
      "language": "Spanish",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0529",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0529-P01",
+       "finish": "holo",
+       "foilPattern": "cosmos",
+       "markings": [],
+       "distribution": {
+        "kind": "blister-promo",
+        "name": "Blister promo"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
     },
     {
      "language": "Italian",
@@ -19581,7 +19599,7 @@
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only",
-    "Spanish": "pending",
+    "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
    "languageEvidence": {

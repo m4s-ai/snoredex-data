@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-09-24",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 485,
+      "withConfirmedFinish": 486,
       "withOnlyMarketplaceClaim": 43,
-      "pendingFinish": 33,
+      "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 311,
-      "withHolo": 242,
+      "withHolo": 243,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 57,
-      "withUnresolvedProductMapping": 59,
-      "withAnyUnresolvedDetail": 137,
+      "withUnresolvedProductMapping": 58,
+      "withAnyUnresolvedDetail": 136,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -27111,7 +27111,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -27259,24 +27259,42 @@
           {
             "language": "Spanish",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0529",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0529-P01",
+                "finish": "holo",
+                "foilPattern": "cosmos",
+                "markings": [],
+                "distribution": {
+                  "kind": "blister-promo",
+                  "name": "Blister promo"
+                },
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped"
+              }
+            ]
           },
           {
             "language": "Italian",

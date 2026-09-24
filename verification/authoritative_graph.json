@@ -13857,6 +13857,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:a9fd807e003d6f9b7985bfc4",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0529-P01",
+        "semanticPrintingId": "PRINTING:a9fd807e003d6f9b7985bfc4",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+        "materializedTargetId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+        "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:a9fddbe0d023db763eeb9973",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -98857,6 +98874,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+        "semanticPrintingId": "PRINTING:a9fd807e003d6f9b7985bfc4",
+        "cardReleaseId": "RELEASE:WEST:Spanish:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": "cosmos",
+        "markings": [],
+        "distribution": {
+          "kind": "blister-promo",
+          "name": "Blister promo"
+        },
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0529",
+        "sourcePrintingId": "F0529-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:a9fd807e003d6f9b7985bfc4"
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:a9fddbe0d023db763eeb9973",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -173407,6 +173448,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:a9fddbe0d023db763eeb9973",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -233053,6 +233104,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Spanish:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:a9fddbe0d023db763eeb9973",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -279842,6 +279909,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0529-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:a9fd807e003d6f9b7985bfc4",
+      "reason": "finish printing record carries positive evidence"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0530-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:e5d2e31a32ac116518455a64",
@@ -296333,14 +296407,14 @@
     }
   ],
   "summary": {
-    "entities": 8187,
-    "edges": 12176,
-    "migrationInputs": 2863,
+    "entities": 8189,
+    "edges": 12179,
+    "migrationInputs": 2864,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 296,
       "carried": 68,
-      "established-and-mapped": 1584,
+      "established-and-mapped": 1585,
       "linked-local-counterpart": 125,
       "mapped": 347,
       "needs-evidence": 125,
@@ -296348,9 +296422,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2046,
+    "candidateClaims": 2047,
     "cardReleases": 642,
-    "physicalPrintings": 770,
+    "physicalPrintings": 771,
     "setSourceRecords": 475,
     "setSourceDispositions": 475,
     "localizations": 16

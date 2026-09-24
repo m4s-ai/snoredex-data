@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 485,
+      "withConfirmedFinish": 486,
       "withOnlyMarketplaceClaim": 43,
-      "pendingFinish": 33,
+      "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 311,
-      "withHolo": 242,
+      "withHolo": 243,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 57,
-      "withUnresolvedProductMapping": 59,
-      "withAnyUnresolvedDetail": 137,
+      "withUnresolvedProductMapping": 58,
+      "withAnyUnresolvedDetail": 136,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -44278,23 +44278,49 @@
           "image": "images/SWSH_032_Snorlax_461684.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [],
+          "distribution": {
+            "kind": "blister-promo",
+            "name": "Blister promo"
+          },
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "retrievedAt": "2026-09-24",
+              "supportsAbsence": false,
+              "languages": [
+                "Spanish"
+              ],
+              "evidence": "The collection owner explicitly determines that Spanish SWSH032 Snorlax is a Cosmos Holo because it is a blister promo. This is a positive finish, foil-pattern, and distribution determination for the Spanish printing only."
+            }
+          ],
+          "printingId": "F0529-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0530",
