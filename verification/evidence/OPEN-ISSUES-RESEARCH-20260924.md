@@ -74,12 +74,16 @@ to review against the source-capability contract, not enough to close the physic
 The issue already has official localized gallery render evidence for identity; that render is not a physical specimen.
 
 The owner also supplied [PokéWallet's 30th Celebration reveal](https://pokewallet.io/blog/30th-celebration-set-officially-revealed),
-dated 2026-06-01. It claims that every card in the set is foil, but the page does not define that claim by localized
-release or provide a per-language checklist. It explicitly limits the "30" Pikachu stamp to the 30 Classic Collection
-reprints; it does **not** say that every main-set card carries a stamp. The separate [30-card list](https://pokewallet.io/blog/30th-celebration-classic-collection-all-30-cards)
-includes both Base Set Pikachu and Base Set Charizard and says each Classic Collection reprint receives the "30" Pikachu
-stamp and a special holofoil treatment. Thus the Base Set reprints are included in the stamped subset; this does not make
-the entire 30th Celebration main set stamped.
+dated 2026-06-01. My initial reading wrongly restricted the "30" Pikachu stamp to Classic Collection reprints. A visual
+check of PokéBeach's [Japanese set-list gallery](https://www.pokebeach.com/2026/09/30th-celebration-full-set-list-revealed-for-japan-features-176-cards)
+shows the stamp on ordinary main-set cards as well: it is visible at the lower right of #049 Zapdos, #050 Zekrom,
+#051 Toxtricity, and #095 Snorlax. PokéWallet's English-facing article also visibly shows it on ordinary main-set
+Greninja ex, Espeon, and Sylveon ex, while its separate [30-card list](https://pokewallet.io/blog/30th-celebration-classic-collection-all-30-cards)
+shows Base Set Pikachu and Charizard carrying it. These images establish that the mark is not confined to the Classic
+Collection and appears on both Japanese and English card images. The owner further attests that all cards across the
+worldwide releases carry the stamp regardless of their release-specific card lists; record that universal scope as owner
+attestation, with the inspected main-set images as visual corroboration. PokéWallet's prose itself only explicitly assigns
+the stamp to Classic Collection cards, so do not attribute the universal claim to that prose.
 
 For the separate all-foil claim, PokéWallet says every card in the set is foil, but does not define that claim by
 localized release or provide a per-language checklist. Its June 1 post says it drew the Classic Collection cards from
