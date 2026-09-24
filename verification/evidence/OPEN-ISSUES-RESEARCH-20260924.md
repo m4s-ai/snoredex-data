@@ -129,10 +129,14 @@ listing is a distinct image-level lead rather than finish corroboration of that 
 
 **Follow-up after the owner supplied the direct image:** the exact original `s-l1600.webp` endpoint is reachable, and the
 image itself shows the identified card and reflective holo appearance. The current canonical specimen importer accepts
-only PNG/JPEG; its dry run rejected the fetched bytes as WebP. I did not convert the image or claim a hash for converted
-pixels as if they were the original. This is not yet filed as a `SPEC` and does not change canonical finish data. The
-seller metadata also says Holo; no other finish or complete finish inventory is inferred. To finish intake without
-changing the importer, a PNG/JPEG copy of this same original image is needed.
+only PNG/JPEG; its dry run rejected the fetched bytes as WebP. Earlier physical-evidence rounds handled this same format
+by retaining each original WebP with its original hash and dimensions in the round's evidence bundle, then importing a
+losslessly decoded PNG through the existing SPEC manifest. Round 3, for example, records both original and filed hashes
+and checked pixel equality; rounds 6–9 document the same preservation boundary. The importer hashes the PNG it stores,
+while `sources.json` preserves the original WebP hash. This is the established path, so a user-supplied PNG/JPEG is not
+required. The current image is not yet filed as a `SPEC`: this environment has fetched the original WebP but has not yet
+produced and pixel-checked its PNG decode. Canonical finish data remains unchanged. The seller metadata also says Holo;
+no other finish or complete finish inventory is inferred.
 
 These searches produced no additional admissible physical-printing or finish evidence. Marketplace language labels,
 search snippets, missing catalogue rows and inaccessible photographs remain leads only.
