@@ -127,11 +127,12 @@ the photo itself is the basis for this visual observation, not those fields. An 
 record already identifies an Indonesian AC3b 239/204 card, but retains no image bytes and records no finish, so this
 listing is a distinct image-level lead rather than finish corroboration of that specimen.
 
-I could not retrieve the original seller image bytes for canonical intake: the image CDN endpoint returned a cache-miss
-error through the page reader, and the in-app browser exposed the photo for visual review but not as a local original
-file. This observation is therefore not filed as a `SPEC` and does not change canonical finish data. To retain it under
-the seller-photo contract, the original first listing image is still needed. The seller metadata says Holo, but no other
-finish or complete finish inventory is inferred.
+**Follow-up after the owner supplied the direct image:** the exact original `s-l1600.webp` endpoint is reachable, and the
+image itself shows the identified card and reflective holo appearance. The current canonical specimen importer accepts
+only PNG/JPEG; its dry run rejected the fetched bytes as WebP. I did not convert the image or claim a hash for converted
+pixels as if they were the original. This is not yet filed as a `SPEC` and does not change canonical finish data. The
+seller metadata also says Holo; no other finish or complete finish inventory is inferred. To finish intake without
+changing the importer, a PNG/JPEG copy of this same original image is needed.
 
 These searches produced no additional admissible physical-printing or finish evidence. Marketplace language labels,
 search snippets, missing catalogue rows and inaccessible photographs remain leads only.
