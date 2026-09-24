@@ -369,13 +369,48 @@ def _next_replay_run_id(now: dt.datetime, retained_run_ids: set[str]) -> str:
     return run_id
 
 
+def _next_discovery_run_id(
+    now: dt.datetime, source_run_ids: set[str], card_run_ids: set[str],
+) -> str:
+    """Keep one discovery-cycle ID newer than both immutable run streams."""
+    return _next_replay_run_id(now, source_run_ids | card_run_ids)
+
+
+def _retained_discovery_run_ids() -> tuple[set[str], set[str]]:
+    def retained(directory: pathlib.Path) -> set[str]:
+        return {
+            path.name for path in directory.iterdir()
+            if path.is_dir() and re.fullmatch(r"\d{8}T\d{6}Z", path.name)
+        }
+
+    return retained(SOURCE_RUNS), retained(CARD_RUNS)
+
+
 def _discovery_replay_command(source_run_id: str, now: dt.datetime | None = None) -> list[str]:
-    retained = {
-        path.name for path in CARD_RUNS.iterdir()
-        if path.is_dir() and re.fullmatch(r"\d{8}T\d{6}Z", path.name)
-    }
-    replay_id = _next_replay_run_id(now or dt.datetime.now(dt.timezone.utc), retained)
+    source_runs, card_runs = _retained_discovery_run_ids()
+    replay_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc), source_runs, card_runs
+    )
     return ["scripts/card_discovery.py", "--replay-from-run", source_run_id, "--run-id", replay_id]
+
+
+def _discovery_replay_commands(
+    source_run_id: str, now: dt.datetime | None = None,
+) -> list[list[str]]:
+    return [
+        _discovery_replay_command(source_run_id, now),
+        ["scripts/completeness_gate.py"],
+    ]
+
+
+def _discovery_refresh_command(
+    now: dt.datetime | None = None,
+) -> list[str]:
+    source_runs, card_runs = _retained_discovery_run_ids()
+    run_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc), source_runs, card_runs
+    )
+    return ["scripts/discovery_cycle.py", "--refresh", "--run-id", run_id]
 
 
 def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
@@ -420,25 +455,43 @@ def run_cycle(
 ) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
-    if loop_id == "discovery" and replay_from_run:
-        command = _discovery_replay_command(replay_from_run)
-    elif loop_id == "discovery" and include_live:
-        timestamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        command = ["scripts/discovery_cycle.py", "--refresh", "--run-id", timestamp]
-    else:
-        command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
-        if include_live and loop_id == "tcgdex":
-            command.append("--include-live")
-    process = subprocess.run(
-        [sys.executable, *command], cwd=ROOT, text=True, encoding="utf-8",
-        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    return _run_command_sequence(
+        _cycle_commands(loop_id, lane, cycle_id, include_live, replay_from_run)
     )
+
+
+def _cycle_commands(
+    loop_id: str, lane: str, cycle_id: str, include_live: bool,
+    replay_from_run: str | None,
+) -> list[list[str]]:
+    if loop_id == "discovery" and replay_from_run:
+        return _discovery_replay_commands(replay_from_run)
+    elif loop_id == "discovery" and include_live:
+        return [_discovery_refresh_command()]
+    command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
+    if include_live and loop_id == "tcgdex":
+        command.append("--include-live")
+    return [command]
+
+
+def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
+    outputs = []
+    return_code = 0
+    for command in commands:
+        process = subprocess.run(
+            [sys.executable, *command], cwd=ROOT, text=True, encoding="utf-8",
+            env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        )
+        outputs.append(process.stdout)
+        return_code = process.returncode
+        if return_code:
+            break
     return {
-        "status": "passed" if process.returncode == 0 else "failed",
-        "returnCode": process.returncode,
-        "command": command,
-        "output": process.stdout[-2000:],
+        "status": "passed" if return_code == 0 else "failed",
+        "returnCode": return_code,
+        "command": commands[0] if len(commands) == 1 else commands,
+        "output": "\n".join(outputs)[-2000:],
     }
 
 

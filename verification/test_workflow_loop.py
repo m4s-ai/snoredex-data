@@ -17,7 +17,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.workflow_loop import (  # noqa: E402
-    _discovery_cycle_stop_reason, _discovery_replay_command, _discovery_state, _next_replay_run_id,
+    _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
+    _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _live_refresh_follows_replay, _staging_matches_inputs, latest_manifests,
 )
 
@@ -86,6 +87,23 @@ def main() -> int:
     now = dt.datetime(2026, 9, 24, 21, 0, tzinfo=dt.timezone.utc)
     latest = "20260925T000000Z"
     assert _next_replay_run_id(now, {latest}) == "20260925T000001Z"
+    source_latest = "20260925T000003Z"
+    card_latest = "20260925T000010Z"
+    next_discovery = _next_discovery_run_id(now, {source_latest}, {card_latest})
+    assert next_discovery == "20260925T000011Z"
+    assert _discovery_refresh_command(now)[:3] == [
+        "scripts/discovery_cycle.py", "--refresh", "--run-id"
+    ]
+    assert _discovery_replay_commands("20260909T171255Z", now)[-1] == [
+        "scripts/completeness_gate.py"
+    ]
+    replay_commands = _cycle_commands("discovery", "source-discovery", "cycle", True,
+                                      "20260909T171255Z")
+    assert len(replay_commands) == 2
+    assert replay_commands[0][:3] == [
+        "scripts/card_discovery.py", "--replay-from-run", "20260909T171255Z"
+    ]
+    assert replay_commands[1] == ["scripts/completeness_gate.py"]
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
