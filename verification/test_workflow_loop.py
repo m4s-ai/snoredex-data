@@ -19,7 +19,8 @@ if str(ROOT) not in sys.path:
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
-    _completeness_matches_inputs, _staging_matches_inputs, latest_manifests,
+    _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
+    latest_manifests,
 )
 
 
@@ -78,6 +79,14 @@ def main() -> int:
                             1, 1, 41, True, True) == "needs-reconciliation"
     assert _discovery_state([], failed_attempt, complete_canonical, canonical,
                             1, 1, 41, True, True) == "candidate"
+    discovery_terminals = {"terminal", "needs-reconciliation", "needs-source", "blocked-by-source"}
+    assert not _should_skip_terminal_state(
+        "discovery", "needs-reconciliation", discovery_terminals, True,
+    )
+    assert _should_skip_terminal_state(
+        "discovery", "blocked-by-source", discovery_terminals, False,
+    )
+    assert not _should_skip_terminal_state("tcgdex", "needs-source", {"needs-source"}, True)
     replay_after = {"state": "needs-reconciliation", "progress": {"needsSourceGaps": 21}}
     assert _discovery_cycle_stop_reason(
         replay_after, replay_after, {"needs-reconciliation"},

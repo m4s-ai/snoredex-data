@@ -468,6 +468,16 @@ def _discovery_cycle_stop_reason(
     return None
 
 
+def _should_skip_terminal_state(
+    loop_id: str, state: str, terminal_states: set[str], include_live: bool,
+) -> bool:
+    if state not in terminal_states:
+        return False
+    return not (include_live and (
+        loop_id == "discovery" or state in {"needs-refresh", "needs-source"}
+    ))
+
+
 def run_cycle(
     loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
     replay_from_run: str | None = None,
@@ -563,14 +573,8 @@ def main() -> int:
     current = before
 
     for number in range(1, args.max_cycles + 1):
-        live_discovery_refresh = (
-            args.include_live
-            and args.loop == "discovery"
-            and current["progress"].get("needsSourceGaps", 0) > 0
-        )
-        if current["state"] in loop["terminal"] and not (
-            live_discovery_refresh
-            or (args.include_live and current["state"] in {"needs-refresh", "needs-source"})
+        if _should_skip_terminal_state(
+            args.loop, current["state"], set(loop["terminal"]), args.include_live,
         ):
             stop_reason = f"state={current['state']} requires external input or is terminal"
             skipped.append(stop_reason)
