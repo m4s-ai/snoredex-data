@@ -127,23 +127,24 @@ the photo itself is the basis for this visual observation, not those fields. An 
 record already identifies an Indonesian AC3b 239/204 card, but retains no image bytes and records no finish, so this
 listing is a distinct image-level lead rather than finish corroboration of that specimen.
 
-**Follow-up after the owner supplied the direct image:** the exact original `s-l1600.webp` endpoint is reachable, and the
-image itself shows the identified card and reflective holo appearance. The current canonical specimen importer accepts
-only PNG/JPEG; its dry run rejected the fetched bytes as WebP. Earlier physical-evidence rounds handled this same format
-by retaining each original WebP with its original hash and dimensions in the round's evidence bundle, then importing a
-losslessly decoded PNG through the existing SPEC manifest. Round 3, for example, records both original and filed hashes
-and checked pixel equality; rounds 6–9 document the same preservation boundary. The importer hashes the PNG it stores,
-while `sources.json` preserves the original WebP hash. This is the established path, so a user-supplied PNG/JPEG is not
-required. The current image is not yet filed as a `SPEC`: this environment has fetched the original WebP but has not yet
-produced and pixel-checked its PNG decode. Canonical finish data remains unchanged. The seller metadata also says Holo;
-no other finish or complete finish inventory is inferred.
+**Follow-up after the owner supplied the direct image:** the exact original `s-l1600.webp` endpoint was retrieved and
+visually inspected. Its card face shows Indonesian AC3b C 239/204 SR and reflective foil. SPEC-0556 now retains it via
+the existing canonical manifest importer: the original WebP, hash, size and dimensions stay in this bundle;
+`verification/specimens/SPEC-0556.png` is the lossless PNG accepted by the importer. Decoded RGBA pixels compared equal
+after reopening the PNG. This follows the documented WebP route from issue #256 rounds 3 and 6–9; a user-supplied
+PNG/JPEG was not needed. The specimen records `holo` from the visible reflective surface, without assigning a foil
+pattern or complete finish inventory. The item specifics are not the evidence basis. No canonical finish unit or
+source-first release exists for this exact key yet, so SPEC-0556 remains an `allowUnprojected` physical candidate and is
+not linked to the separate Instagram observation SPEC-0334.
 
-These searches produced no additional admissible physical-printing or finish evidence. Marketplace language labels,
-search snippets, missing catalogue rows and inaccessible photographs remain leads only.
+SPEC-0556 adds a retained physical candidate for the Indonesian AC3b 239/204 open row, but cannot yet connect to a
+canonical release or finish unit. Other marketplace language labels, search snippets, missing catalogue rows and
+inaccessible photographs remain leads only.
 
 ## Next useful evidence
 
-1. Exact Indonesian fronts for AC3b 238/204 and 239/204, especially if a visible locality/edition mark is present.
+1. Exact Indonesian front for AC3b 238/204, especially if a visible locality/edition mark is present; reconcile the
+   retained SPEC-0556 candidate with a canonical release when one is admitted.
 2. Exact Thai fronts for MA4 091/123 and the remaining open #262 candidates; preserve the disagreement between official
    record, listing, and card where they do not match.
 3. Exact Japanese card/number evidence for the five unresolved #259 collector numbers and a G2 Snorlax face.
