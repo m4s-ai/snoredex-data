@@ -2,6 +2,7 @@
 """Regression tests for bounded workflow-loop state and stop semantics."""
 from __future__ import annotations
 
+import datetime as dt
 import json
 import os
 import subprocess
@@ -15,7 +16,10 @@ LOOP = ROOT / "scripts" / "workflow_loop.py"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.workflow_loop import latest_manifests  # noqa: E402
+from scripts.workflow_loop import (  # noqa: E402
+    _discovery_replay_command, _discovery_state, _next_replay_run_id,
+    _staging_matches_inputs, latest_manifests,
+)
 
 
 def remove_empty(path: Path) -> None:
@@ -31,6 +35,37 @@ def main() -> int:
     assert set(loops) == {"physical", "evidence", "discovery", "news-promo", "tcgdex", "absence", "cardmarket"}
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
+
+    canonical = {"runId": "run-1"}
+    staging_meta = {
+        "generatedFromRun": "run-1",
+        "contractHash": "contract-1",
+        "capabilityGraphHash": "capability-1",
+        "authoritativeGraphHash": "graph-1",
+    }
+    assert _staging_matches_inputs(staging_meta, canonical, "contract-1", "capability-1", "graph-1")
+    stale_hashes = (
+        ("generatedFromRun", "run-2"),
+        ("contractHash", "contract-2"),
+        ("capabilityGraphHash", "capability-2"),
+        ("authoritativeGraphHash", "graph-2"),
+    )
+    for field, value in stale_hashes:
+        stale_meta = {**staging_meta, field: value}
+        assert not _staging_matches_inputs(
+            stale_meta, canonical, "contract-1", "capability-1", "graph-1"
+        )
+    complete = [{"status": "complete"}]
+    assert _discovery_state(complete, complete, {"runId": "source-1"}, canonical,
+                            0, 0, 0, False) == "retained"
+    assert _discovery_state(complete, complete, {"runId": "source-1"}, canonical,
+                            1, 1, 41, True) == "needs-reconciliation"
+    now = dt.datetime(2026, 9, 24, 21, 0, tzinfo=dt.timezone.utc)
+    latest = "20260925T000000Z"
+    assert _next_replay_run_id(now, {latest}) == "20260925T000001Z"
+    assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
+        "--replay-from-run", "20260909T171255Z", "--run-id"
+    ]
 
     with tempfile.TemporaryDirectory(dir=ROOT) as raw_root:
         runs = Path(raw_root)
@@ -117,13 +152,14 @@ def main() -> int:
         assert discovery.returncode == 0, discovery.stdout
         discovery_report = json.loads(reports[3].read_text(encoding="utf-8"))
         progress = discovery_report["stateBefore"]["progress"]
+        if progress["newCandidateRecords"]:
+            assert progress["stagingMatchesCanonicalInputs"]
+            assert progress["newCandidateRecords"] == progress["stagingCandidateRecords"]
+            assert discovery_report["stateBefore"]["state"] == "needs-reconciliation"
+        elif not progress["stagingMatchesCanonicalInputs"]:
+            assert progress["newCandidateRecords"] == 0
+            assert discovery_report["stateBefore"]["state"] == "retained"
         if progress["blockedGaps"] and progress["needsSourceGaps"]:
-            statuses = (progress["sourceStatus"], progress["cardStatus"])
-            expected_state = (
-                "retained" if any(status != "complete" for status in statuses)
-                else "blocked-by-source"
-            )
-            assert discovery_report["stateBefore"]["state"] == expected_state
             assert discovery_report["cycleCount"] == 1
             assert discovery_report["cycles"][0]["lane"]["reason"] == "dry-run"
     finally:

@@ -92,6 +92,20 @@ def canonical_manifest(directory: pathlib.Path, kind: str) -> dict[str, Any] | N
     return manifest
 
 
+def _staging_matches_inputs(
+    staging_meta: dict[str, Any], card_canonical: dict[str, Any] | None,
+    contract_hash: str, capability_graph_hash: str, authoritative_graph_hash: str,
+) -> bool:
+    """A run id alone does not make staging current after reconciliation inputs change."""
+    return bool(
+        card_canonical
+        and staging_meta.get("generatedFromRun") == card_canonical.get("runId")
+        and staging_meta.get("contractHash") == contract_hash
+        and staging_meta.get("capabilityGraphHash") == capability_graph_hash
+        and staging_meta.get("authoritativeGraphHash") == authoritative_graph_hash
+    )
+
+
 def evidence_state() -> dict[str, Any]:
     counts = read_json(EVIDENCE)["counts"]["applicationStatuses"]
     if counts.get("needs-evidence", 0):
@@ -130,6 +144,16 @@ def physical_state() -> dict[str, Any]:
     }
 
 
+def _discovery_outcome(blocked: int, needs_source: int, new_candidates: int) -> str:
+    if new_candidates:
+        return "needs-reconciliation"
+    if blocked:
+        return "blocked-by-source"
+    if needs_source:
+        return "needs-source"
+    return "terminal"
+
+
 def _discovery_state(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
@@ -143,20 +167,15 @@ def _discovery_state(
         return "retained"
     if not staging_is_current:
         return "retained"
-    if new_candidates:
-        return "needs-reconciliation"
-    if blocked:
-        return "blocked-by-source"
-    if needs_source:
-        return "needs-source"
-    return "terminal"
+    return _discovery_outcome(blocked, needs_source, new_candidates)
 
 
 def _discovery_progress(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     failures: int, blocked: int, needs_source: int, total_gaps: int,
-    new_candidates: int, staging_run: str | None,
+    new_candidates: int, staged_candidates: int, staging_run: str | None,
+    staging_is_current: bool,
 ) -> dict[str, Any]:
     latest_source = next(iter(source), {})
     latest_cards = next(iter(cards), {})
@@ -176,10 +195,9 @@ def _discovery_progress(
         "needsSourceGaps": needs_source,
         "totalGaps": total_gaps,
         "newCandidateRecords": new_candidates,
+        "stagingCandidateRecords": staged_candidates,
         "stagingRun": staging_run,
-        "stagingMatchesCanonicalRun": bool(
-            selected_cards.get("runId") and staging_run == selected_cards.get("runId")
-        ),
+        "stagingMatchesCanonicalInputs": staging_is_current,
     }
 
 
@@ -192,10 +210,21 @@ def discovery_state() -> dict[str, Any]:
     failures = sum(len(manifest.get("failures", [])) for manifest in source + cards)
     blocked = sum(gap.get("terminalState") == "blocked-by-source" for gap in gaps)
     needs_source = sum(gap.get("terminalState") == "needs-evidence" for gap in gaps)
-    staging = read_json(CARD_STAGING)
-    staging_run = staging.get("meta", {}).get("generatedFromRun")
-    new_candidates = staging.get("meta", {}).get("counts", {}).get("newCandidate", 0)
-    staging_is_current = bool(card_canonical and staging_run == card_canonical.get("runId"))
+    try:
+        from scripts import card_discovery as adapter
+    except ImportError:  # direct execution from scripts/
+        import card_discovery as adapter  # type: ignore[no-redef]
+    contract, capability, identity = adapter.load_inputs()
+    staging_meta = read_json(CARD_STAGING).get("meta", {})
+    staging_run = staging_meta.get("generatedFromRun")
+    staging_is_current = _staging_matches_inputs(
+        staging_meta, card_canonical,
+        adapter.content_hash(contract),
+        adapter.capability_pin(capability, adapter.manifest_surfaces(card_canonical or {})),
+        identity.get("authoritativeGraphHash", adapter.content_hash(identity)),
+    )
+    staged_candidates = staging_meta.get("counts", {}).get("newCandidate", 0)
+    new_candidates = staged_candidates if staging_is_current else 0
     return {
         "state": _discovery_state(
             source, cards, source_canonical, card_canonical, blocked, needs_source,
@@ -203,7 +232,8 @@ def discovery_state() -> dict[str, Any]:
         ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,
-            failures, blocked, needs_source, len(gaps), new_candidates, staging_run,
+            failures, blocked, needs_source, len(gaps), new_candidates,
+            staged_candidates, staging_run, staging_is_current,
         ),
     }
 
@@ -322,10 +352,45 @@ EVALUATORS = {
 }
 
 
-def run_cycle(loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool) -> dict[str, Any]:
+def _next_replay_run_id(now: dt.datetime, retained_run_ids: set[str]) -> str:
+    candidate = now.astimezone(dt.timezone.utc).replace(microsecond=0)
+    latest = max(retained_run_ids, default=None)
+    if latest and candidate.strftime("%Y%m%dT%H%M%SZ") <= latest:
+        candidate = dt.datetime.strptime(latest, "%Y%m%dT%H%M%SZ").replace(
+            tzinfo=dt.timezone.utc
+        ) + dt.timedelta(seconds=1)
+    run_id = candidate.strftime("%Y%m%dT%H%M%SZ")
+    while run_id in retained_run_ids:
+        candidate += dt.timedelta(seconds=1)
+        run_id = candidate.strftime("%Y%m%dT%H%M%SZ")
+    return run_id
+
+
+def _discovery_replay_command(source_run_id: str, now: dt.datetime | None = None) -> list[str]:
+    retained = {
+        path.name for path in CARD_RUNS.iterdir()
+        if path.is_dir() and re.fullmatch(r"\d{8}T\d{6}Z", path.name)
+    }
+    replay_id = _next_replay_run_id(now or dt.datetime.now(dt.timezone.utc), retained)
+    return ["scripts/card_discovery.py", "--replay-from-run", source_run_id, "--run-id", replay_id]
+
+
+def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
+    progress = current["progress"]
+    if loop_id != "discovery" or progress.get("stagingMatchesCanonicalInputs"):
+        return None
+    return progress.get("cardRun")
+
+
+def run_cycle(
+    loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
+    replay_from_run: str | None = None,
+) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
-    if loop_id == "discovery" and include_live:
+    if loop_id == "discovery" and replay_from_run:
+        command = _discovery_replay_command(replay_from_run)
+    elif loop_id == "discovery" and include_live:
         timestamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
         command = ["scripts/discovery_cycle.py", "--refresh", "--run-id", timestamp]
     else:
@@ -343,6 +408,21 @@ def run_cycle(loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_ru
         "command": command,
         "output": process.stdout[-2000:],
     }
+
+
+def _discovery_summary(loop_id: str, progress: dict[str, Any]) -> str:
+    if loop_id != "discovery":
+        return ""
+    action = (
+        "reproject-staging" if not progress.get("stagingMatchesCanonicalInputs")
+        else "reconcile-to-release-or-record-open-decision"
+    )
+    return (
+        f" newCandidates={progress.get('newCandidateRecords', 0)}"
+        f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
+        f" stagingCurrent={progress.get('stagingMatchesCanonicalInputs')}"
+        f" action={action} review=verification/card_discovery_staging.json"
+    )
 
 
 def main() -> int:
@@ -383,7 +463,10 @@ def main() -> int:
             skipped.append(stop_reason)
             break
         cycle_id = f"{run_id}-c{number}"
-        result = run_cycle(args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run)
+        result = run_cycle(
+            args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
+            replay_from_run=_stale_discovery_run(args.loop, current),
+        )
         if result["status"] == "not-run":
             skipped.append(result["reason"])
             stop_reason = result["reason"]
@@ -427,12 +510,7 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    candidate_summary = (
-        f" newCandidates={current['progress'].get('newCandidateRecords', 0)}"
-        f" action=reconcile-to-release-or-record-open-decision"
-        f" review=verification/card_discovery_staging.json"
-        if args.loop == "discovery" else ""
-    )
+    candidate_summary = _discovery_summary(args.loop, current["progress"])
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
           f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
     return 1 if any(c["lane"].get("status") == "failed" for c in cycle_reports) else 0
