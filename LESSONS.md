@@ -15,6 +15,31 @@ Newest first.
 
 ---
 
+## A WebP download is not a failed specimen intake
+
+**Trap:** *When an image endpoint returns WebP, retain those original bytes and losslessly decode
+them to PNG before using the canonical specimen importer.*
+
+The eBay card image supplied for Indonesian AC3b 239/204 returned WebP. The importer correctly
+rejected those bytes because retained specimen photographs must be PNG or JPEG. The first reading
+of that error was that the owner would need to provide a PNG/JPEG. That overlooked earlier work:
+issue #256 rounds 3 and 6–9 had already retained the WebP originals, decoded them to PNG, and
+checked pixel equality. The owner had supplied the reachable original image; asking for another
+format would have added an unnecessary handoff and delayed the evidence intake.
+
+The corrected intake keeps the original WebP, URL, dimensions, size and hash in the evidence
+bundle, then records the decoded PNG hash and verifies exact decoded-pixel equality before import.
+The URL suffix is not a format check. The conversion changes the container, not the inspected
+pixels; it does not upgrade seller metadata or broaden what one photographed copy proves.
+
+**Now guarded by** the [WebP procedure in the specimen-intake skill](.agents/skills/snoredex-specimen-intake/SKILL.md#webp-source-photographs),
+the physical-card workflow in `verification/RESUME.md`, and the format note in
+`verification/fetch_attachment.py`. `AGENTS.md` points each intake to that procedure.
+
+*PR #397.*
+
+---
+
 ## An imported image is not yet connected evidence
 
 PR #373 repeatedly found the same defects on newly retained specimens: legacy-only citation
