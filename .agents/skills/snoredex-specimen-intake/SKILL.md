@@ -23,6 +23,18 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the c
 6. Run `python scripts/workflow_loop.py --loop physical --max-cycles 3` and inspect its stop reason. Then run `python scripts/scoped_regen.py --lane physical-evidence`.
 7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and the affected registry, artwork and collector views. Run `python scripts/regen.py`, review the complete artifact diff and publication-allowlist effects, and report any evidence still missing.
 
+### WebP source photographs
+
+If a seller or browser image is WebP, keep the original and use the established WebP-to-PNG intake; do not ask the user to supply another format when the original bytes are reachable. The canonical importer and image-integrity gate accept PNG/JPEG, so WebP cannot be the committed `SPEC` photograph.
+
+1. Determine the actual format from the bytes, not the URL suffix or HTTP content type. Retain the untouched original WebP in the batch's `verification/evidence/...` bundle.
+2. Decode it to PNG with an available image library. Do not crop, resize, enhance, or otherwise transform it. Compare decoded source pixels with pixels reopened from the PNG in the same mode (RGB or RGBA); require exact equality before import.
+3. Record the original URL, retrieval date, MIME type, byte size, dimensions and SHA-256, plus the filed PNG path and SHA-256, decoder/library version, conversion method and pixel-equality result in `sources.json`.
+4. Import the PNG through the canonical manifest importer. Keep the manifest replayable from a retained PNG path, normally `verification/specimens/SPEC-nnnn.png` after successful import. Preserve the original WebP and conversion record beside the manifest.
+5. Inspect the original at sufficient resolution for identity and finish. The lossless conversion preserves pixels; it does not make seller metadata authoritative or establish more than the photographed copy shows.
+
+Prior examples are documented in [issue #256 WebP evidence rounds](../../../verification/evidence/issue-256-web-research-20260921-round3/README.md) and the related rounds 6–9.
+
 ## Specimen-intake image verification
 
 Run **local OCR first** for every supplied image when its output is readable enough to verify, so

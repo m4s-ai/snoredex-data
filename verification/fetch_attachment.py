@@ -47,7 +47,11 @@ truncated download, and an image too small to read a card off.
 
 Accepted formats are PNG and JPEG only. `scripts/publish.py` also allowlists `.webp` for the
 directory, but `image_format` in `review_findings.py` recognises PNG and JPEG magic alone, so a
-committed `.webp` would fail S9. The narrower set is the one that passes the gate.
+committed `.webp` would fail S9. The narrower set is the one that passes the gate. For a WebP
+source, retain the original bytes and provenance in the evidence bundle, losslessly decode to PNG,
+verify pixel equality, then point the reviewed manifest at the PNG. The specimen-intake skill and
+`verification/RESUME.md` document the required hashes and conversion record; prior examples are in
+`verification/evidence/issue-256-web-research-20260921-round3/`.
 
 USAGE
 

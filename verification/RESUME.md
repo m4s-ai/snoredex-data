@@ -79,6 +79,17 @@ The direct manifest form reads each row's `attachment` path or URL and keeps its
 source-first release, the reviewed row may set `allowUnprojected: true`; the specimen is retained
 as an explicit graph candidate until that release is admitted rather than being mis-keyed to a
 neighbouring product.
+
+**WebP sources use the same importer after a lossless decode.** Seller endpoints may return WebP
+even when their URL ends in `.jpg`, and the importer/gate accept only PNG/JPEG. Retain the original
+WebP and its SHA-256, byte size, dimensions, URL and retrieval date in the evidence bundle; decode
+without cropping, resizing or enhancement to PNG; compare the source's decoded pixels against the
+reopened PNG in the same color mode and require exact equality. Record both original and filed
+hashes, the decoder/version and equality result in `sources.json`. Import the PNG normally and keep
+the manifest replayable from the canonical `verification/specimens/SPEC-nnnn.png`. See the
+[specimen-intake WebP procedure](../.agents/skills/snoredex-specimen-intake/SKILL.md#webp-source-photographs)
+and the retained [historical examples](evidence/issue-256-web-research-20260921-round3/README.md).
+
 `finishes.py` projects typed finish, edition, marking, size, specimen ids, and explicit
 `conflictsWith` review markers; conflicted observations remain pending until resolved.
 `authoritative_graph.py` then projects provenance edges. Never add the same SPEC evidence again
