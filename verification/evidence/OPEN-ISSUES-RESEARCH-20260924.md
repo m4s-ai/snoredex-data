@@ -1,4 +1,4 @@
-<!-- doc: role=live open-issue evidence research; stage=research-only -->
+<!-- doc: role=live open-issue evidence research; stage=reference -->
 # Open issue evidence research — 2026-09-24
 
 This is a research-only snapshot for the seven open evidence issues checked on 2026-09-24:
