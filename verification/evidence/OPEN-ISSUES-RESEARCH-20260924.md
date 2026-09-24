@@ -38,8 +38,17 @@ The [Shopee Taiwan listing](https://shopee.tw/%E3%80%90%E9%80%90%E9%9B%BB%E7%8B%
 is titled “Pokemon TCG Traditional Chinese 100 Battle Collection, Mirror Flash Snorlax Lazy Press H MC F 568/742”.
 The visible marketplace page initially showed the exact title and listing metadata. Its product image subsequently redirected
 to a CAPTCHA in the in-app browser. The title is seller/catalogue text and does not let us inspect card language, set mark,
-or foil surface. Do not accept it as a physical-printing or finish observation. On 2026-09-24 I asked the owner to attach
-the original card-front photo here or to #166; if supplied, process it through the specimen importer.
+or foil surface. Do not accept it as a physical-printing or finish observation.
+
+**Follow-up after the owner supplied the image in chat:** the listing's 450×450 card-front image is now accessible through
+the in-app browser at
+[`tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl`](https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl).
+It visibly matches Traditional Chinese 卡比獸, regulation H, MC F, 568/742, attack 懶散壓制 120, HP160 and illustrator
+Po-Suzuki. That exact identity was already retained under SPEC-0503 from a separate retailer image and in the official
+Taiwan source-first record. This newly supplied marketplace image is a flat listing image with no clearly inspectable
+physical foil surface; the listing title's “Mirror Flash” wording is not a card-face observation. It therefore does not
+resolve the open physical-finish question, and no new specimen or finish claim is admitted. If the owner has a physical card
+photo with reflected light or confirms the treatment from a card they hold, that would be useful finish evidence.
 
 ### European Spanish 30C ES 119/128 — useful set context, not exact physical evidence
 
