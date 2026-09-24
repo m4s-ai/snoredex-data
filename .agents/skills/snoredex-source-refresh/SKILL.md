@@ -29,18 +29,20 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [WORK
 
 ## Source-refresh bot-gated retrieval
 
-When a source link cannot be read with plain `web_extract`/`curl` — Cloudflare "Just a moment…",
-CAPTCHA walls, 403, or JS-only pages — retrieve it through a **locally configured scraping backend**
-(a Firecrawl-compatible endpoint whose base URL and API key come from the operator's environment, not
-this public repository). This is the retrieval step for discovery and adjudication inputs:
+Choose an available retrieval method: ordinary HTTP, a supported browser, or an already
+operator-approved local scraping backend. A Firecrawl-compatible backend is one option; neither
+installing it nor configuring a VPN is a prerequisite. Credentials and private endpoint details
+stay in the operator's environment. For Cloudflare, CAPTCHA, 403 or JS-only pages, use this bounded
+acquisition path for discovery and adjudication inputs:
 
-1. Collect the links from issue comments via `gh api .../issues/N/comments` (a small Python script —
-   avoid fragile one-line shell parsing).
-2. Scrape each protected URL through the scraping endpoint (`POST /v1/scrape`, formats `markdown`,
-   `onlyMainContent`). Use only the operator-approved backend; do not reach for unapproved tools or
-   credential-holding bypasses to defeat a CAPTCHA or an authenticated wall. If a source is
-   legitimately gated behind login or a bot check that the approved backend cannot cross, report it
-   as still-gated rather than trying to circumvent it.
+1. Collect links from the complete issue body and all comment pages, for example with
+   `gh api --paginate .../issues/N/comments`. Preserve listing and exposed direct-image URLs.
+2. Try the available methods that can change the result. For a configured Firecrawl-compatible
+   backend use `POST /v1/scrape`, formats `markdown`, `onlyMainContent`. Inspect a successful
+   response before trying another method. Do not bypass access controls or retry an unchanged
+   blocker indefinitely. When access remains blocked, report the target, exact missing field,
+   source/direct-image links and attempts; request only the needed capture or clarification while
+   continuing independent targets. Never claim that inaccessible image bytes were inspected.
 3. Byte length is a **heuristic, not proof.** Judge readability by inspecting the returned page
    content itself: a meaningful title plus real set/card/release rows means readable; a
    Cloudflare/`"Just a moment…"`/`"Performing security verification"` page, an HTML error, or an
@@ -59,9 +61,10 @@ this public repository). This is the retrieval step for discovery and adjudicati
    backend details. This is a research input, not a generated run or an accepted claim. Do not invent
    run IDs, edit immutable run files, or treat the ignored cache as retained evidence.
    Before applying it, resolve the source's reviewed provider/surface and capability under
-   [ADR-0003](../../../verification/ADR-0003-source-capability-coverage.md). An unregistered source
-   such as TCGCollector remains a research lead until that contract is reviewed and added; do not
-   borrow another provider's authority. Automated discovery needs its own reviewed adapter path.
+   [ADR-0003](../../../verification/ADR-0003-source-capability-coverage.md). If the provider or
+   capability is missing, use [source onboarding](../snoredex-source-onboarding/SKILL.md) within
+   the authorized scope. Until reviewed, retain it as a lead without borrowing another provider's
+   authority. Automated discovery needs its own reviewed adapter path.
 5. Classify what it proves — e.g. a localized existence as a **catch-up/reprint set** is distinct
    from existence under the original set number. Do not call a disputed unit `not-printed` because a
    set predates a market launch when a catch-up printing exists.

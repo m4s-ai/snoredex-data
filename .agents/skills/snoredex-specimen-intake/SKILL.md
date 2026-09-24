@@ -16,7 +16,7 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the c
 ## Specimen-intake workflow
 
 1. Inspect the original image at sufficient resolution. Identify only visible facts: card identity, printed language/locality markers, finish or foil pattern, stamps or markings, distribution marks, and size cues.
-2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.
+2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow, following the collision check below. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.
 3. For repository issue attachments, prepare one reviewed observation manifest and run `python verification/fetch_attachment.py --issue <number> --manifest <path>`. For a local or already reachable image, use the documented `--specimen ... --from ...` form.
 4. Preserve the stable issue or listing URL as provenance and the imported byte hash as integrity evidence. File seller photographs as third-party-held specimens, never as a bare marketplace link.
 5. Record visible physical properties under `physicalObservation`. For explicit owner determinations, preserve the field-specific attribution described in `FINISH_SOURCES.md`; unclear image properties remain unset without that separate evidence.
@@ -73,3 +73,17 @@ When one contribution holds several cards, keep the batch discipline:
    establishes what the visible card face itself proves.
 
 If the original bytes cannot be obtained or safely matched to a specimen, stop with the exact missing input. A missing photograph is not evidence of absence.
+
+## Specimen-intake collision check
+
+Before assigning IDs, fetch the latest `origin/main` and compare its specimen IDs and photograph
+hashes with the working branch. Inspect known overlapping intake PRs/tasks without modifying their
+work. Record each source image/hash to SPEC mapping in the manifest; a branch-local next number is
+not a reservation. If an overlapping allocation is known, coordinate or defer that allocation.
+
+Repeat this comparison before integrating/pushing the batch. Reuse identical retained bytes with
+compatible metadata; do not overwrite a retained ID or photograph to resolve a collision. Re-key
+only the unintegrated conflicting observation through its manifest, including `sameCardAs`,
+`citedBy` and affected references, then rerun intake and reference acceptance. Reconcile the branch
+with current main when needed. If origin is unavailable, report that collision safety is unverified
+and keep the allocation provisional. No central reservation service is needed.

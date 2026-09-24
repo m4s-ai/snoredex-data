@@ -975,9 +975,20 @@ this card when explaining why a marketplace language filter needs independent ev
 
 Simplified-Chinese-exclusive products have their own Bulbapedia articles with the suffix **`(ATCG)`**, e.g. `Dynamax_Clash_(ATCG)`, `Collection_151_(ATCG)`, `Shining_Synergy_(ATCG)`. These carry full set lists and are the correct source.
 
-The blocker is **extraction truncation**: these set lists are long, and the fetch returns the head of the table only. `Collection 151` confirmed 143/151 but cut off before 169; `Shining Synergy` truncated before any Snorlax row. Add new findings to `verification/archive/passes/verify_manual.ps1`, which applies hand-verified rows.
+At this checkpoint the blocker was **extraction truncation**: `Collection 151` exposed 143/151 but
+cut off before 169, and `Shining Synergy` truncated before any Snorlax row. The historical manual
+pass is now immutable; never add findings to or rerun `verification/archive/passes/verify_manual.ps1`.
+New exact-card research follows [card search](../.agents/skills/card-search/SKILL.md), then
+[claim evidence](../.agents/skills/snoredex-claim-evidence/SKILL.md) or the existing admission owner
+for retained, reviewed findings. Use the complete browser/API retrieval described above when
+available; a truncated extraction does not establish absence.
 
-Dead ends, do not retry: `pokemonkorea.co.kr` (410 to scripts), `pokemon.cardmon.com` (host gone), `ptcg.cn` (a Magic: The Gathering site, not Pokémon), `pokeos.com` (JS-driven). **52poke wiki** is scriptable via `wiki.52poke.com/api.php` but names card pages by *Japanese* set code (`卡比兽（S1H）`), so it evidences the card, not a Simplified Chinese printing.
+Historical access results: `pokemonkorea.co.kr` returned 410 to scripts and is obsolete (use the
+current official source listed earlier); `pokemon.cardmon.com` was unreachable, `ptcg.cn` was an
+unrelated Magic site, and `pokeos.com` required JavaScript. Do not repeat unchanged failed requests;
+a new lead or supported browser can justify a fresh, bounded attempt. **52poke wiki** was scriptable
+via `wiki.52poke.com/api.php` but named these card pages by *Japanese* set code (`卡比兽（S1H）`), so
+those observations evidence that card identity, not a Simplified Chinese printing.
 
 Phases: `tcgdex` → `tcgdex-full` → `asia-official` → `exclude-codecards` → `rare-languages` → `jp-official` → `asia-setlevel`.
 

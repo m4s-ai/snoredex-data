@@ -37,9 +37,10 @@ is never evidence on its own; the determination that the source proves (or does 
 is this workflow's task.
 
 For localized set-code research, inspect the exact TCGCollector card page and preserve its native
-set code, number and language in the retained research snapshot. TCGCollector currently has no
-registered provider/surface or discovery adapter: keep its result as a lead until a reviewed source
-contract exists, without changing a verdict or marking corroboration. Check
+set code, number and language in the retained research snapshot. Resolve its provider/surface
+against the current inventory. If the needed capability is missing and registration is authorized, use
+[source onboarding](../snoredex-source-onboarding/SKILL.md); otherwise keep the result as a lead
+until its source contract is reviewed, without changing a verdict or marking corroboration. Check
 `verification/source_first_prints.json` and the reviewed
 identity/source stores before calling a find new. If an official source already establishes that
 same field for that same release, evaluate the page as possible corroboration under the provider's
