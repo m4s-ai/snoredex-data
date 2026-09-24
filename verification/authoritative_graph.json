@@ -35387,6 +35387,22 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0557",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0557",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0557",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0557",
+        "materializedTargetId": null,
+        "reason": "physical observation has no matching projected printing"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -296404,15 +296420,22 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "physical observation has no matching projected printing"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0557",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "physical observation has no matching projected printing"
     }
   ],
   "summary": {
-    "entities": 8189,
+    "entities": 8190,
     "edges": 12179,
-    "migrationInputs": 2864,
+    "migrationInputs": 2865,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 296,
+      "candidate-needs-evidence": 297,
       "carried": 68,
       "established-and-mapped": 1585,
       "linked-local-counterpart": 125,
@@ -296422,7 +296445,7 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2047,
+    "candidateClaims": 2048,
     "cardReleases": 642,
     "physicalPrintings": 771,
     "setSourceRecords": 475,

@@ -112,8 +112,10 @@ not visible during inspection. The language/locality and card-face treatment cou
 
 - **Thai MA4 091/123:** an indexed Thai shop listing names the card and code, but no localized card face or finish was
   inspected. Product title alone does not resolve the open physical evidence.
-- **Indonesian AC3b 238/204 and 239/204:** general card-list references surfaced, but no Indonesian-language card face
-  was found. Japanese/English or other localities cannot be transferred to Indonesian.
+- **Indonesian AC3b 238/204:** the owner supplied a direct Shopee seller-photo URL. The retained card face shows
+  Indonesian text, `238/204 SR`, and reflective foil; SPEC-0557 records `holo` for this pictured copy.
+  **239/204** is separately documented below as SPEC-0556. Neither seller photograph alone closes a set-level
+  finish inventory or supports other copies.
 - **Japanese G2 and remaining older rows:** general Snorlax checklist pages did not supply an inspected exact localized
   card scan for the unresolved G2 identity. No claim follows from checklist omissions.
 
@@ -140,10 +142,22 @@ SPEC-0556 adds a retained physical candidate for the Indonesian AC3b 239/204 ope
 canonical release or finish unit. Other marketplace language labels, search snippets, missing catalogue rows and
 inaccessible photographs remain leads only.
 
+### New follow-up lead — Indonesian AC3b 238/204
+
+The owner supplied the direct [Shopee seller photograph](https://down-id.img.susercontent.com/file/id-11134207-81zto-mr3r2xnw3ny9e7)
+and its [listing](https://shopee.co.id/READY-VERY-RARE-EEVEE-SNORLAX-GX-TAG-TEAM-SR-INDONESIA-AC3B-238-204-i.1420128610.54964847150).
+The original JPEG was visually inspected: the face shows Indonesian Eevee & Snorlax GX, `AC3b C 238/204 SR`,
+Indonesian card text and reflective foil across the face and border. SPEC-0557 retains the original JPEG and records
+`holo` for this pictured copy. It does not assign a precise foil-pattern taxonomy or establish a complete finish
+inventory. The seller listing page was CAPTCHA-gated; the separately supplied image endpoint was accessible.
+
+SPEC-0557 remains an `allowUnprojected` candidate because no matching canonical source-first release or finish unit
+exists yet. It is not linked to SPEC-0335, which represents a separate carousel observation. Reconcile both Indonesian
+AC3b 238/204 and 239/204 candidates with canonical releases when those are admitted.
+
 ## Next useful evidence
 
-1. Exact Indonesian front for AC3b 238/204, especially if a visible locality/edition mark is present; reconcile the
-   retained SPEC-0556 candidate with a canonical release when one is admitted.
+1. Reconcile the retained Indonesian AC3b 238/204 and 239/204 candidates with canonical releases when admitted.
 2. Exact Thai fronts for MA4 091/123 and the remaining open #262 candidates; preserve the disagreement between official
    record, listing, and card where they do not match.
 3. Exact Japanese card/number evidence for the five unresolved #259 collector numbers and a G2 Snorlax face.
