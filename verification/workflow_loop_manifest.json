@@ -45,12 +45,12 @@
       "impactClasses": ["source-discovery", "catalogue-set"],
       "dependsOn": [],
       "gateLevel": "L0-L2 scoped lane; L3 merge gate",
-      "retry": "Replay a retained Run-ID; use --include-live only for an explicit provider refresh, then reconcile the new positive run.",
-      "states": ["candidate", "retained", "reconciled", "needs-source", "blocked-by-source", "terminal"],
+      "retry": "Replay a retained Run-ID; use --include-live only for an explicit provider refresh, then reconcile every new-candidate record to a release or an explicit unresolved decision.",
+      "states": ["candidate", "retained", "reconciled", "needs-reconciliation", "needs-source", "blocked-by-source", "terminal"],
       "initial": "candidate",
-      "terminal": ["terminal", "needs-source", "blocked-by-source"],
-      "progressMetric": "latest retained source/card run status plus explicit gap terminal states",
-      "stopReasons": ["all retained records are reconciled", "provider boundary needs a new positive source", "no metric change"]
+      "terminal": ["terminal", "needs-reconciliation", "needs-source", "blocked-by-source"],
+      "progressMetric": "latest retained source/card run status, new-candidate count, and explicit gap terminal states",
+      "stopReasons": ["all retained records are reconciled", "positive card candidates need a reviewed release mapping", "provider boundary needs a new positive source", "no metric change"]
     },
     {
       "id": "news-promo",

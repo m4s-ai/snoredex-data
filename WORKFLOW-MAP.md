@@ -170,6 +170,10 @@ scripts/source_registry.py
   provider-policy change cannot bypass its registry or capability graph.
 - Source adapters and card discovery reproject retained runs; refresh acquisition belongs
   to `discovery_cycle.py`, not to normal offline regeneration.
+- A complete, balanced card-discovery run can still have positive `new-candidate` records.
+  `workflow_loop.py --loop discovery` reports these as `needs-reconciliation` and prints their
+  count plus the review file; reconcile each to a release or an explicit unresolved decision
+  before calling the discovery work complete.
 - `authoritative_graph.py` is the identity/provenance hub. It materializes reviewed graph
   entities and typed edges; it does not turn a candidate into a verdict merely because a
   row exists.

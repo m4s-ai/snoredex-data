@@ -28,6 +28,7 @@ MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 EVIDENCE = ROOT / "verification" / "evidence_semantics.json"
 SOURCE_ADAPTERS = ROOT / "verification" / "source_adapters.json"
 CARD_ADAPTERS = ROOT / "verification" / "card_discovery_adapters.json"
+CARD_STAGING = ROOT / "verification" / "card_discovery_staging.json"
 SOURCE_RUNS = ROOT / "verification" / "runs" / "source-adapters"
 CARD_RUNS = ROOT / "verification" / "runs" / "card-discovery"
 SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
@@ -132,7 +133,7 @@ def physical_state() -> dict[str, Any]:
 def _discovery_state(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
-    blocked: int, needs_source: int,
+    blocked: int, needs_source: int, new_candidates: int, staging_is_current: bool,
 ) -> str:
     if not source or not cards:
         return "candidate"
@@ -140,6 +141,10 @@ def _discovery_state(
         return "retained"
     if not source_canonical or not card_canonical:
         return "retained"
+    if not staging_is_current:
+        return "retained"
+    if new_candidates:
+        return "needs-reconciliation"
     if blocked:
         return "blocked-by-source"
     if needs_source:
@@ -151,6 +156,7 @@ def _discovery_progress(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     failures: int, blocked: int, needs_source: int, total_gaps: int,
+    new_candidates: int, staging_run: str | None,
 ) -> dict[str, Any]:
     latest_source = next(iter(source), {})
     latest_cards = next(iter(cards), {})
@@ -169,6 +175,11 @@ def _discovery_progress(
         "blockedGaps": blocked,
         "needsSourceGaps": needs_source,
         "totalGaps": total_gaps,
+        "newCandidateRecords": new_candidates,
+        "stagingRun": staging_run,
+        "stagingMatchesCanonicalRun": bool(
+            selected_cards.get("runId") and staging_run == selected_cards.get("runId")
+        ),
     }
 
 
@@ -181,11 +192,18 @@ def discovery_state() -> dict[str, Any]:
     failures = sum(len(manifest.get("failures", [])) for manifest in source + cards)
     blocked = sum(gap.get("terminalState") == "blocked-by-source" for gap in gaps)
     needs_source = sum(gap.get("terminalState") == "needs-evidence" for gap in gaps)
+    staging = read_json(CARD_STAGING)
+    staging_run = staging.get("meta", {}).get("generatedFromRun")
+    new_candidates = staging.get("meta", {}).get("counts", {}).get("newCandidate", 0)
+    staging_is_current = bool(card_canonical and staging_run == card_canonical.get("runId"))
     return {
-        "state": _discovery_state(source, cards, source_canonical, card_canonical, blocked, needs_source),
+        "state": _discovery_state(
+            source, cards, source_canonical, card_canonical, blocked, needs_source,
+            new_candidates, staging_is_current,
+        ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,
-            failures, blocked, needs_source, len(gaps),
+            failures, blocked, needs_source, len(gaps), new_candidates, staging_run,
         ),
     }
 
@@ -409,8 +427,14 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    candidate_summary = (
+        f" newCandidates={current['progress'].get('newCandidateRecords', 0)}"
+        f" action=reconcile-to-release-or-record-open-decision"
+        f" review=verification/card_discovery_staging.json"
+        if args.loop == "discovery" else ""
+    )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
-          f"state={current['state']} stop={stop_reason}; report={report_path}")
+          f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
     return 1 if any(c["lane"].get("status") == "failed" for c in cycle_reports) else 0
 
 
