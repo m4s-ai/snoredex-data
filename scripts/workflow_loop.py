@@ -428,20 +428,24 @@ def _discovery_replay_command(source_run_id: str, now: dt.datetime | None = None
 
 
 def _discovery_replay_commands(
-    source_run_id: str, now: dt.datetime | None = None,
+    source_run_id: str, now: dt.datetime | None = None, include_live: bool = False,
 ) -> list[list[str]]:
-    return [
+    commands = [
         _discovery_replay_command(source_run_id, now),
         ["scripts/completeness_gate.py"],
     ]
+    if include_live:
+        commands.append(_discovery_refresh_command(now, {commands[0][-1]}))
+    return commands
 
 
 def _discovery_refresh_command(
-    now: dt.datetime | None = None,
+    now: dt.datetime | None = None, reserved_run_ids: set[str] | None = None,
 ) -> list[str]:
     source_runs, card_runs = _retained_discovery_run_ids()
     run_id = _next_discovery_run_id(
-        now or dt.datetime.now(dt.timezone.utc), source_runs, card_runs
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
     )
     return ["scripts/discovery_cycle.py", "--refresh", "--run-id", run_id]
 
@@ -453,34 +457,10 @@ def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
     return progress.get("cardRun")
 
 
-def _live_refresh_follows_repair(
-    loop_id: str, include_live: bool, repair_performed: bool,
-    after: dict[str, Any],
-) -> bool:
-    """Keep an explicitly requested source refresh queued after discovery repair."""
-    return bool(
-        loop_id == "discovery"
-        and include_live
-        and repair_performed
-        and after["progress"].get("needsSourceGaps", 0) > 0
-    )
-
-
-def _discovery_repair_performed(
-    loop_id: str, replay_from_run: str | None, completeness_is_current: bool,
-) -> bool:
-    return loop_id == "discovery" and bool(replay_from_run or not completeness_is_current)
-
-
 def _discovery_cycle_stop_reason(
-    loop_id: str, include_live: bool, repair_performed: bool,
     current: dict[str, Any], after: dict[str, Any], terminal_states: set[str],
-    cycle_number: int, max_cycles: int,
 ) -> str | None:
     """Return a stop reason, or None when the bounded loop should continue."""
-    if (_live_refresh_follows_repair(loop_id, include_live, repair_performed, after)
-            and cycle_number < max_cycles):
-        return None
     if after["state"] in terminal_states:
         return f"state={after['state']}"
     if after["progress"] == current["progress"]:
@@ -505,13 +485,17 @@ def run_cycle(
 def _cycle_commands(
     loop_id: str, lane: str, cycle_id: str, include_live: bool,
     replay_from_run: str | None, completeness_is_current: bool = True,
+    now: dt.datetime | None = None,
 ) -> list[list[str]]:
     if loop_id == "discovery" and replay_from_run:
-        return _discovery_replay_commands(replay_from_run)
+        return _discovery_replay_commands(replay_from_run, now, include_live)
     elif loop_id == "discovery" and not completeness_is_current:
+        if include_live:
+            # The full refresh rebuilds staging and runs the completeness gate itself.
+            return [_discovery_refresh_command(now)]
         return [["scripts/completeness_gate.py"]]
     elif loop_id == "discovery" and include_live:
-        return [_discovery_refresh_command()]
+        return [_discovery_refresh_command(now)]
     command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
     if include_live and loop_id == "tcgdex":
         command.append("--include-live")
@@ -594,9 +578,6 @@ def main() -> int:
         cycle_id = f"{run_id}-c{number}"
         replay_from_run = _stale_discovery_run(args.loop, current)
         completeness_is_current = current["progress"].get("completenessMatchesInputs", True)
-        repair_performed = _discovery_repair_performed(
-            args.loop, replay_from_run, completeness_is_current,
-        )
         result = run_cycle(
             args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
             replay_from_run=replay_from_run,
@@ -614,8 +595,7 @@ def main() -> int:
             current = after
             break
         cycle_stop_reason = _discovery_cycle_stop_reason(
-            args.loop, args.include_live, repair_performed, current, after,
-            set(loop["terminal"]), number, args.max_cycles,
+            current, after, set(loop["terminal"]),
         )
         if cycle_stop_reason:
             stop_reason = cycle_stop_reason
