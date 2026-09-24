@@ -23,7 +23,7 @@ or absence verdict is changed here.
 - **#263 Traditional Chinese:** 23/45 gap-free, 22 remain. Seventeen no-candidate rows and five candidate rows remain,
   plus a rarity field.
 - **#266 European Spanish:** 46/51 gap-free, five remain: KSS 26 candidate evidence, XYPR 179, SWSH 032, 30C ES 119
-  physical/rarity evidence, and SVP ES 184 release date.
+  remaining physical/rarity review (official render now visually supports holo treatment), and SVP ES 184 release date.
 - **#166 photo inbox:** the current issue body says all attachments through SPEC-0527 have been processed; there were
   no unprocessed attachments to intake during this check. It remains useful for future owner photos.
 
@@ -55,23 +55,35 @@ asserting the list of all possible finishes or a separate physical specimen held
 
 The [Spanish Pokémon official announcement](https://www.pokemon.com/es/noticias/productos-de-celebracion-30-o-aniversario-de-jcc-pokemon)
 announces the Spanish-language 30th Celebration product and says each booster contains five holographic cards (including
-one of the 30 Pikachu illustrations) plus one holographic Basic Energy. It is set/product context and does not enumerate
-Snorlax 119/128 or establish its own physical treatment.
+one of the 30 Pikachu illustrations) plus one holographic Basic Energy.
+
+On 2026-09-24 I rechecked the complete retained set of eleven official localized Snorlax renders,
+[`SPEC-0507`–`SPEC-0517`](../research/30th-celebration-20260910/README.md). **All eleven visibly render the same
+speckled holofoil treatment across the Snorlax artwork and show the 30th Pikachu stamp.** They cover English, German,
+French, Italian, European Spanish, Latin-American Spanish, Portuguese, Japanese, Traditional Chinese, Thai, and
+Indonesian. This includes the exact `30C ES 119/128` and `30C LA 119/128` faces. Korean and Simplified Chinese Snorlax
+renders are not in this retained set. Pokédexia also labels `30C 119` “Normale (Holo)” and offers localized face images
+for ES/DE/EN/FR/IT, but it is an unregistered secondary source; treat that as corroboration context, not canonical
+evidence.
+
+This visual review corrects the earlier claim below that no localized card-specific positive evidence was available.
+The publisher images positively show the intended holofoil appearance for the eleven named localized cards. They remain
+publisher renders rather than scans of owner-held physical cards, so the retained research still distinguishes depicted
+finish from physical-specimen inspection; do not describe them as eleven physical specimens.
 
 The owner-supplied [PokéBeach report](https://www.pokebeach.com/2026/09/30th-celebration-full-set-list-revealed-for-japan-features-176-cards)
 (2026-09-09) explicitly says **every card in Japan's 30th Celebration set is foil** and lists Japanese Snorlax as card
-095. The same article says the Japanese and English sets have different card lists. This is positive finish evidence for
-the Japanese set as described by the article, but it does not identify the Spanish Snorlax 119/128 or prove its physical
-finish. The Spanish official pack statement is broader product context, not a card-specific foil assignment. Keep the
-European Spanish 30C 119 finish question open pending a source that covers that localized card/listing or an inspected
-physical image.
+095. The same article says the Japanese and English sets have different card lists. Its Japanese face and the official
+localized renders above agree on the holo treatment; the direct localized images cover Spanish `119/128` rather than
+requiring transfer from the Japanese number. Keep the remaining project finish-inventory status distinct from this
+positive image-level finish observation.
 
 The [WikiDex expansion page](https://www.wikidex.net/wiki/Celebraci%C3%B3n_30.%C2%BA_Aniversario_(TCG))
 lists Snorlax 119/128, gives a 16 September 2026 Spanish/Latin American release date, and states that all expansion cards
 are holographic. WikiDex is registered as tier 3 for positive localized identity from retained database scans, but this
 page is not an inspected card scan and the registered capability does not establish physical finish. It is a useful lead
 to review against the source-capability contract, not enough to close the physical-printing or rarity/finish issue row.
-The issue already has official localized gallery render evidence for identity; that render is not a physical specimen.
+The official localized gallery render is positive card-face evidence, while still not a physical specimen.
 
 The owner also supplied [PokéWallet's 30th Celebration reveal](https://pokewallet.io/blog/30th-celebration-set-officially-revealed),
 dated 2026-06-01. My initial reading wrongly restricted the "30" Pikachu stamp to Classic Collection reprints. A visual
@@ -90,9 +102,9 @@ localized release or provide a per-language checklist. Its June 1 post says it d
 Japan's official site animation. The later official [Pokémon product showcase](https://www.pokemon.com/uk/news/pokemon-tcg-30th-celebration-product-showcase),
 published 2026-06-30, confirms five foil Pokémon/Trainer cards and one foil Basic Energy per booster, but does not state
 that every numbered card in every localized list is foil. Pokémon's [worldwide launch notice](https://www.pokemon.com/uk/news/the-pokemon-tcg-30th-celebration-expansion-is-available-now)
-confirms simultaneous release, not identical card lists or a universal stamp treatment. Treat PokéWallet's blanket foil
-statement as a secondary set-level lead, not a locale-scoped finish manifest: it does not independently identify Spanish
-30C 119/128's finish. Keep that Spanish unit open pending locale-scoped positive evidence.
+confirms simultaneous release, not identical card lists or a universal stamp treatment. The official image review now
+provides localized positive evidence for the eleven Snorlax faces above; PokéWallet's blanket claim remains secondary
+set-level context and is not the basis for those card-specific observations.
 
 An indexed Aukro seller page described a 30C 119/128 Snorlax as “holo”, but the listing had expired and its card photo was
 not visible during inspection. The language/locality and card-face treatment could not be checked; discard as a lead.
