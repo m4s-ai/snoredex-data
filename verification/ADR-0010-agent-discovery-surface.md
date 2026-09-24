@@ -35,7 +35,9 @@ Each route links an existing skill whose frontmatter name matches its directory.
 documents and scripts must exist. For registered workflows with projection roots, the entry
 must name one of those owners. A scoped lane must support the workflow's impact class, and its
 row must name an existing entry or step from that lane. Not every skill is an executable command;
-observational routes may have no registered mutation workflow.
+observational or coordinating routes may have no dedicated registered mutation workflow. Their
+rows must state the mutation boundary and route accepted changes through existing owners; a dash
+is not authorization or proof that every command in the linked skill is observational.
 
 This is a bounded workflow assignment check. It does not prove that an operator read a document,
 that prose is semantically correct, or that an unregistered script is not another entry point.
@@ -62,6 +64,11 @@ workflow/lane coverage, incompatible lanes, missing owners, renamed skills and m
 An unrelated helper must leave routing coverage unchanged. The documentation test also checks
 the operator URLs against their local repository targets. D1/D4 in the existing review gate
 check document role/stage and heading hygiene, not semantic task selection.
+
+[The behavioral cases](SKILL-WORKFLOW-ACCEPTANCE.md) supply bounded prompts and raw fixtures for
+new skills and recurring delivery failures. Give the evaluator only the case inputs and available
+skills/routes, then assess against the separate acceptance criteria. Record observed decisions and
+limitations in the implementation PR; a documented case is not itself a passed test.
 
 An isolated publication build and verification must preserve the operator links, followed by
 the normal repository gate. Results belong to the implementation PR; this decision alone is

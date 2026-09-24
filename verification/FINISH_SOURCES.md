@@ -38,7 +38,7 @@ Official Pokémon sources confirm only the named finishes for the matching langu
 | TCGCSV or TCGplayer product plus positive price subtype | A marketplace claim for Normal, Holofoil, or Reverse Holofoil | Positive only |
 | PSA cert, spec, or registry entry | The exact variety named on the label or checklist | Positive only |
 | Identified physical scan | Visible finish, pattern, marking, and size on that specimen | Positive only |
-| Owner attestation | A review lead, or corroboration when recorded with a scan | Positive only |
+| Owner attestation | An explicit field-specific determination, attributed separately from what a retained photograph shows via `ownerAttestedFields` below; an unscoped statement remains a lead | Positive only; does not close a finish list |
 
 For Cardmarket, keep the image and catalogue claims separate. A retained product or seller image
 may support only facts visible on the pictured card, including its printed language, identity and
@@ -165,8 +165,8 @@ The live split is `meta.pendingByLanguage` in
 | Japanese | **Official product pages** (`pokemon-card.com/ex/<set>/index.html`) | **Not** the card database — see below. The retained [Elite Fourum Starter Set V post](https://www.elitefourum.com/t/help-cant-find-these-snorlax-raw-cards-anywhere-for-the-master-set/57319/10) is a scoped exception for the explicitly named sA 10 non-holo and mirror-foil treatments; it does not close the finish list. |
 | Traditional Chinese | `asia.pokemon-card.com`, TCGdex `zh-tw` | TCGdex coverage is partial, so many rows need the Asia site. |
 | Indonesian, Thai | `asia.pokemon-card.com`, TCGdex `id` / `th` | Both TCGdex locale slices are thin. |
-| Korean | No source found | TCGdex serves `ko`, but see below. Needs pokumon, Elite Fourum, or an inspected card. |
-| Simplified Chinese | No source found | TCGdex serves `zh-cn`, but see below. Needs an inspected card. |
+| Korean | Scoped positive sources or inspected card photographs | The 2026-08-02 API/catalogue probe below found no usable finish coverage for its targets; check current capabilities and retained evidence. |
+| Simplified Chinese | Scoped positive sources or inspected card photographs | TCGdex serves `zh-cn`; the dated probe below is an access/coverage snapshot, not a ban on new evidence. |
 
 Two consequences worth internalising before planning work:
 
@@ -175,19 +175,20 @@ Two consequences worth internalising before planning work:
   have no TCGdex URL at all — their language claims were confirmed by Bulbapedia, the Japanese
   official database, or the Asia site. Re-running the generator asks a source that was never
   consulted for those cards.
-- **Korean and Simplified Chinese together are the largest block, and the pipeline cannot reach
-  them.** They are not neglected rows; they are rows whose answer does not exist in any source the
-  toolchain currently speaks to. Treat them as specimen-led, and tell the owner which cards would
-  close the most rows rather than waiting on a scrape.
+- **An API coverage gap does not close research for Korean or Simplified Chinese cards.** Use
+  current retained evidence and exact-card sources, including inspectable seller photographs,
+  through [card search](../.agents/skills/card-search/SKILL.md) and specimen intake. Report the
+  concrete missing fields and available next source; read the current queue before prioritizing.
 
-### Korean and Simplified Chinese: searched, and there is nothing to use
+### Korean and Simplified Chinese: dated coverage probe (2026-08-02)
 
-Do not repeat this search. Every avenue below was tried on 2026-08-02 and none of it answers a
-finish question for these 54 units.
+The avenues below were tried on 2026-08-02 and yielded no usable finish evidence for the then
+54-unit cohort. Avoid repeating the same failed request without a changed source, access method
+or new lead. This probe does not prohibit a targeted search or a reviewed provider refresh.
 
 **TCGdex serves both locales — the coverage is the problem, not the locale.** An earlier version of
-this file said TCGdex "has no `zh-cn` locale", which is wrong: `/v2/zh-cn/sets` returns 57 sets and
-`/v2/ko/sets` returns 95. What they do not return is cards.
+this file said TCGdex "has no `zh-cn` locale", which was wrong: the probe returned 57 sets from
+`/v2/zh-cn/sets` and 95 from `/v2/ko/sets`, with sparse per-card coverage:
 
 | Locale | Cards declared across its sets | Card records actually served | Snorlax cards |
 |---|---:|---:|---:|
@@ -196,23 +197,24 @@ this file said TCGdex "has no `zh-cn` locale", which is wrong: `/v2/zh-cn/sets` 
 | `zh-tw` | — | 7 436 | (populated) |
 | `ja` | — | 8 159 | (populated) |
 
-The sets are catalogued with names and counts; the per-card records behind them are 3 % populated
-for Korean and 13 % for Simplified Chinese. The single Korean hit is `SV4K-060` **잠만보인형** —
-*Snorlax Doll*, a Trainer item, not a Snorlax card. Where records do exist they carry the usual
-`variants` flags, so the API shape is fine; there is simply nothing there for these cards.
+The probed per-card records were 3 % populated for Korean and 13 % for Simplified Chinese.
+The single Korean hit was `SV4K-060` **잠만보인형** — *Snorlax Doll*, a Trainer item, not a
+Snorlax card. Returned records carried the usual `variants` flags; the limitation was the
+observed coverage for those targets, not the API shape or the possibility of later evidence.
 
-**No marketplace equivalent of LigaPokemon exists for either market.** LigaPokemon works because it
-is a web catalogue keyed by set and card number, so a listing can be cited per printing.
-`jihuanshe.com` (集换社), the main Chinese TCG marketplace, is now an **app-only landing page** —
-8 KB, four links, no search and no card catalogue. Korean general marketplaces (Bunjang, Naver
-Shopping, 11st) are reachable but index listings, not cards: nothing there is addressable by set
-code and collector number, so a citation could not be re-checked by a third party.
+**The probe found no equivalent catalogue route to LigaPokemon.** At that time `jihuanshe.com`
+(集换社) returned an app landing page (8 KB, four links, no searchable card catalogue). Bunjang,
+Naver Shopping and 11st exposed listings rather than the set/number catalogue sought by the probe.
+That limits the acquisition method; it does not disqualify an exact listing or its visible card
+face. Retain inspected original photographs, hashes and listing provenance through
+[specimen intake](../.agents/skills/snoredex-specimen-intake/SKILL.md) so the observation remains
+checkable after the listing expires. Listing metadata alone cannot establish physical finish.
 
-**What that leaves.** These 54 units are not neglected work — they are a limit of what is knowable
-from any source this project can reach. `pending` already means *not established, never absent*, so
-the model states this correctly. Closing them needs a physical card inspected, and the queue is
-flat: 54 rows across 52 distinct cards, only two of which close more than one row. There is no
-high-yield card to chase.
+**What the snapshot established.** The unresolved cohort then comprised 54 rows across 52 cards;
+it was an evidence gap, not a limit of what could ever be known. `pending` means *not established,
+never absent*. Current work comes from `FINISH_REVIEW.json` and retained observations, not those
+historical counts. New sources use [source onboarding](../.agents/skills/snoredex-source-onboarding/SKILL.md)
+when their required capability is not yet reviewed; accepted evidence follows the existing lane.
 
 ### The Japanese card database records text, not finish
 

@@ -81,7 +81,8 @@ Never transfer finish from rarity, another language or a neighbouring card; a sa
 release date.
 
 Resolve the current reviewed provider/surface capability before accepting a claim. Unregistered
-sources remain leads until reviewed; do not borrow another provider's authority. Reposted photos
+sources remain leads until reviewed through [source onboarding](../snoredex-source-onboarding/SKILL.md);
+use that route when registration is authorized. Do not borrow another provider's authority. Reposted photos
 and multiple URLs for one listing are not independent corroboration.
 
 ## Card-search retention and integration
@@ -100,7 +101,8 @@ belongs outside ignored caches. Keep original bytes separate from OCR, crops or 
 label derivatives and preserve their relation to originals. Exclude credentials, cookies and private
 retrieval-backend configuration from commits.
 
-Check current SPEC IDs and hashes before allocation. Reuse identical bytes. Multiple positively
+Follow the [specimen collision check](../snoredex-specimen-intake/SKILL.md#specimen-intake-collision-check)
+before allocation and integration. Reuse identical bytes. Multiple positively
 matched views of one physical card use specimen intake's `sameCardAs` contract; do not overwrite
 an original to add an angle or infer same-card identity solely from matching artwork.
 
@@ -111,7 +113,8 @@ independent listing and specimen authority.
 
 ## Card-search validation and commits
 
-Follow [issue delivery](../snoredex-issue-delivery/SKILL.md) for branch isolation and delivery.
+Follow [issue delivery](../snoredex-issue-delivery/SKILL.md) for branch isolation, the complete
+target/evidence record and handoff. Reconcile every accepted target before calling the batch done.
 Respect session authorization, including “always put accepted findings in the PR” or draft-only
 instructions when applicable; do not copy publication decisions from an unrelated research round.
 

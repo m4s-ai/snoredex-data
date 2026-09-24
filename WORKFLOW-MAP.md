@@ -330,12 +330,15 @@ discovery follows the same links. Selecting a route does not authorize executing
 The registration column uses `workflow:<id>` from
 [the gate matrix](verification/workflow_gate_matrix.json) and optional `lane:<id>` from
 [the scoped manifest](verification/scoped_pipeline_manifest.json). Each registered workflow has
-one row; a scoped lane may serve several compatible rows. A dash means an observational route
-without a registered mutation workflow. Commands and execution order remain owned by the
-existing scripts and manifests.
+one row; a scoped lane may serve several compatible rows. A dash means no dedicated registered
+mutation workflow: the row states whether it is observational or coordinates authorized changes
+through existing owners. Commands and execution order remain owned by the existing scripts and
+manifests.
 
 | Task / intent | Registered workflow / lane | Skill | Canonical entry | Graph impact | Required boundary |
 |---|---|---|---|---|---|
+| Reconcile issue progress, rank dependencies or maintain the backlog | — | [issue triage](.agents/skills/snoredex-issue-triage/SKILL.md) | Current issue bodies/comments and PRs, then [evidence and reference contract](verification/RESUME.md#specimen-and-reference-acceptance-contract) | Observation only; issue maintenance cannot change evidence | Original cohort versus current catalogue; no parent/child double counting; update tracker only within authorized scope |
+| Register a new source or extend its reviewed capability | — | [source onboarding](.agents/skills/snoredex-source-onboarding/SKILL.md) | [Provider declarations](scripts/source_registry.py), [capabilities](verification/source_capabilities.json), [source contract](verification/ADR-0003-source-capability-coverage.md) | Reviewed provider/capability edges; evidence application uses its existing lane | Retained positive example plus unsupported boundary; manual use needs no automatic adapter; no inferred finish or absence |
 | Generate or check the bounded Malie export | `workflow:malie-export` | [issue delivery](.agents/skills/snoredex-issue-delivery/SKILL.md) | [Exporter](scripts/malie_export.py), [profile and field contract](verification/MALIE-EXPORT.md); accepted inputs only | Read release/printing/localization identity; no graph mutation | Explicit write versus observational check; complete dispositions, source binding and independent real-pilot acceptance |
 | Search online for specific cards from a prompt or issue / gezielte Kartenbelege suchen | — | [card search](.agents/skills/card-search/SKILL.md) | [Evidence playbook](verification/RESUME.md); search and retention, then existing claim/specimen/admission owner | No mutation from search alone; accepted findings use the owning lane | Exact-card scope; excludes whole-setlist evaluation, set discovery and foundational research |
 | Verify a known card claim / bekannten Claim belegen | `workflow:known-card-confirmation` / `lane:correction` | [claim evidence](.agents/skills/snoredex-claim-evidence/SKILL.md) | [Evidence playbook](verification/RESUME.md), observation + reviewed unit update; [application semantics](scripts/evidence_semantics.py) | Existing claim/release edge; possibly source/provenance | Evidence application and source identity; no discovery refresh |
@@ -353,6 +356,13 @@ registration coverage, compatible lane impacts, owner references and existing li
 It covers the registered workflows and lanes, not arbitrary unregistered scripts or prior reading.
 New operator entry points must be classified during review; helpers do not require a user route.
 See [ADR-0010](verification/ADR-0010-agent-discovery-surface.md) for the decision and acceptance boundary.
+
+[Behavioral acceptance cases](verification/SKILL-WORKFLOW-ACCEPTANCE.md) exercise selection and
+decisions beyond syntax/link checks. They are review fixtures, not another executable workflow.
+The general [compare-implementations template](skill-templates/compare-implementations/SKILL.md)
+is portable personal-skill source, outside project skill discovery. Install that directory in the
+runtime's personal skills location (Codex: `$CODEX_HOME/skills`, normally `~/.codex/skills`) when
+requested; keep the installed copy identical to the reviewed template and record its hash.
 
 Bot-gated source retrieval is a helper, not another operator route. Use the
 [source-refresh retrieval technique](.agents/skills/snoredex-source-refresh/SKILL.md#source-refresh-bot-gated-retrieval)
