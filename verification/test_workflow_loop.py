@@ -17,8 +17,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.workflow_loop import (  # noqa: E402
-    _discovery_replay_command, _discovery_state, _next_replay_run_id,
-    _staging_matches_inputs, latest_manifests,
+    _discovery_cycle_stop_reason, _discovery_replay_command, _discovery_state, _next_replay_run_id,
+    _live_refresh_follows_replay, _staging_matches_inputs, latest_manifests,
 )
 
 
@@ -36,7 +36,7 @@ def main() -> int:
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
 
-    canonical = {"runId": "run-1"}
+    canonical = {"runId": "run-1", "status": "complete"}
     staging_meta = {
         "generatedFromRun": "run-1",
         "contractHash": "contract-1",
@@ -56,10 +56,33 @@ def main() -> int:
             stale_meta, canonical, "contract-1", "capability-1", "graph-1"
         )
     complete = [{"status": "complete"}]
-    assert _discovery_state(complete, complete, {"runId": "source-1"}, canonical,
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
                             0, 0, 0, False) == "retained"
-    assert _discovery_state(complete, complete, {"runId": "source-1"}, canonical,
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
                             1, 1, 41, True) == "needs-reconciliation"
+    failed_attempt = [{"runId": "attempt-2", "status": "failed"}]
+    complete_canonical = {"runId": "run-1", "status": "complete"}
+    assert _discovery_state(failed_attempt, failed_attempt, complete_canonical, canonical,
+                            1, 1, 41, True) == "needs-reconciliation"
+    assert _discovery_state([], failed_attempt, complete_canonical, canonical,
+                            1, 1, 41, True) == "candidate"
+    replay_after = {"state": "needs-reconciliation", "progress": {"needsSourceGaps": 21}}
+    assert _live_refresh_follows_replay("discovery", True, "run-1", replay_after)
+    assert not _live_refresh_follows_replay("discovery", False, "run-1", replay_after)
+    assert not _live_refresh_follows_replay("discovery", True, None, replay_after)
+    assert not _live_refresh_follows_replay(
+        "discovery", True, "run-1", {"state": "terminal", "progress": {"needsSourceGaps": 0}}
+    )
+    assert _discovery_cycle_stop_reason(
+        "discovery", True, "run-1", replay_after, replay_after,
+        {"needs-reconciliation"}, 1, 3,
+    ) is None
+    assert _discovery_cycle_stop_reason(
+        "discovery", True, "run-1", replay_after, replay_after,
+        {"needs-reconciliation"}, 3, 3,
+    ) == "state=needs-reconciliation"
     now = dt.datetime(2026, 9, 24, 21, 0, tzinfo=dt.timezone.utc)
     latest = "20260925T000000Z"
     assert _next_replay_run_id(now, {latest}) == "20260925T000001Z"

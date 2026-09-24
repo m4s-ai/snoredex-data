@@ -161,9 +161,12 @@ def _discovery_state(
 ) -> str:
     if not source or not cards:
         return "candidate"
-    if any(manifest.get("status") != "complete" for manifest in source + cards):
-        return "retained"
     if not source_canonical or not card_canonical:
+        return "retained"
+    # Newer failed or incomplete attempts are diagnostic only. The selected compatible
+    # complete manifests remain the canonical basis for staging and reconciliation.
+    if (source_canonical.get("status") != "complete"
+            or card_canonical.get("status") != "complete"):
         return "retained"
     if not staging_is_current:
         return "retained"
@@ -382,6 +385,35 @@ def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
     return progress.get("cardRun")
 
 
+def _live_refresh_follows_replay(
+    loop_id: str, include_live: bool, replay_from_run: str | None,
+    after: dict[str, Any],
+) -> bool:
+    """Keep an explicitly requested source refresh queued after replay housekeeping."""
+    return bool(
+        loop_id == "discovery"
+        and include_live
+        and replay_from_run
+        and after["progress"].get("needsSourceGaps", 0) > 0
+    )
+
+
+def _discovery_cycle_stop_reason(
+    loop_id: str, include_live: bool, replay_from_run: str | None,
+    current: dict[str, Any], after: dict[str, Any], terminal_states: set[str],
+    cycle_number: int, max_cycles: int,
+) -> str | None:
+    """Return a stop reason, or None when the bounded loop should continue."""
+    if (_live_refresh_follows_replay(loop_id, include_live, replay_from_run, after)
+            and cycle_number < max_cycles):
+        return None
+    if after["state"] in terminal_states:
+        return f"state={after['state']}"
+    if after["progress"] == current["progress"]:
+        return "no-metric-change"
+    return None
+
+
 def run_cycle(
     loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
     replay_from_run: str | None = None,
@@ -463,9 +495,10 @@ def main() -> int:
             skipped.append(stop_reason)
             break
         cycle_id = f"{run_id}-c{number}"
+        replay_from_run = _stale_discovery_run(args.loop, current)
         result = run_cycle(
             args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
-            replay_from_run=_stale_discovery_run(args.loop, current),
+            replay_from_run=replay_from_run,
         )
         if result["status"] == "not-run":
             skipped.append(result["reason"])
@@ -478,12 +511,12 @@ def main() -> int:
             stop_reason = "lane-failed"
             current = after
             break
-        if after["state"] in loop["terminal"]:
-            stop_reason = f"state={after['state']}"
-            current = after
-            break
-        if after["progress"] == current["progress"]:
-            stop_reason = "no-metric-change"
+        cycle_stop_reason = _discovery_cycle_stop_reason(
+            args.loop, args.include_live, replay_from_run, current, after,
+            set(loop["terminal"]), number, args.max_cycles,
+        )
+        if cycle_stop_reason:
+            stop_reason = cycle_stop_reason
             current = after
             break
         current = after
