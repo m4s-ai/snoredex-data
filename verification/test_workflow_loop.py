@@ -19,7 +19,8 @@ if str(ROOT) not in sys.path:
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
-    _live_refresh_follows_replay, _staging_matches_inputs, latest_manifests,
+    _completeness_matches_inputs, _live_refresh_follows_repair, _staging_matches_inputs,
+    latest_manifests,
 )
 
 
@@ -56,32 +57,41 @@ def main() -> int:
         assert not _staging_matches_inputs(
             stale_meta, canonical, "contract-1", "capability-1", "graph-1"
         )
+    expected_summary = {"meta": {"cardDiscoveryRun": "run-1"}}
+    expected_text = json.dumps(expected_summary, ensure_ascii=False, indent=2) + "\n"
+    assert _completeness_matches_inputs({}, [], expected_text, expected_summary)
+    assert not _completeness_matches_inputs({}, [], "stale summary", expected_summary)
+    assert not _completeness_matches_inputs({}, ["invalid locality reference"],
+                                           expected_text, expected_summary)
     complete = [{"status": "complete"}]
     assert _discovery_state(complete, complete,
                             {"runId": "source-1", "status": "complete"}, canonical,
-                            0, 0, 0, False) == "retained"
+                            0, 0, 0, False, True) == "retained"
     assert _discovery_state(complete, complete,
                             {"runId": "source-1", "status": "complete"}, canonical,
-                            1, 1, 41, True) == "needs-reconciliation"
+                            1, 1, 41, True, True) == "needs-reconciliation"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, False) == "retained"
     failed_attempt = [{"runId": "attempt-2", "status": "failed"}]
     complete_canonical = {"runId": "run-1", "status": "complete"}
     assert _discovery_state(failed_attempt, failed_attempt, complete_canonical, canonical,
-                            1, 1, 41, True) == "needs-reconciliation"
+                            1, 1, 41, True, True) == "needs-reconciliation"
     assert _discovery_state([], failed_attempt, complete_canonical, canonical,
-                            1, 1, 41, True) == "candidate"
+                            1, 1, 41, True, True) == "candidate"
     replay_after = {"state": "needs-reconciliation", "progress": {"needsSourceGaps": 21}}
-    assert _live_refresh_follows_replay("discovery", True, "run-1", replay_after)
-    assert not _live_refresh_follows_replay("discovery", False, "run-1", replay_after)
-    assert not _live_refresh_follows_replay("discovery", True, None, replay_after)
-    assert not _live_refresh_follows_replay(
-        "discovery", True, "run-1", {"state": "terminal", "progress": {"needsSourceGaps": 0}}
+    assert _live_refresh_follows_repair("discovery", True, True, replay_after)
+    assert not _live_refresh_follows_repair("discovery", False, True, replay_after)
+    assert not _live_refresh_follows_repair("discovery", True, False, replay_after)
+    assert not _live_refresh_follows_repair(
+        "discovery", True, True, {"state": "terminal", "progress": {"needsSourceGaps": 0}}
     )
     assert _discovery_cycle_stop_reason(
-        "discovery", True, "run-1", replay_after, replay_after,
+        "discovery", True, True, replay_after, replay_after,
         {"needs-reconciliation"}, 1, 3,
     ) is None
     assert _discovery_cycle_stop_reason(
-        "discovery", True, "run-1", replay_after, replay_after,
+        "discovery", True, True, replay_after, replay_after,
         {"needs-reconciliation"}, 3, 3,
     ) == "state=needs-reconciliation"
     now = dt.datetime(2026, 9, 24, 21, 0, tzinfo=dt.timezone.utc)
@@ -104,6 +114,15 @@ def main() -> int:
         "scripts/card_discovery.py", "--replay-from-run", "20260909T171255Z"
     ]
     assert replay_commands[1] == ["scripts/completeness_gate.py"]
+    assert _cycle_commands("discovery", "source-discovery", "cycle", False, None, False) == [
+        ["scripts/completeness_gate.py"]
+    ]
+    assert _cycle_commands("discovery", "source-discovery", "cycle", True, None, False) == [
+        ["scripts/completeness_gate.py"]
+    ]
+    assert _cycle_commands("discovery", "source-discovery", "cycle", True, None, True)[0][:2] == [
+        "scripts/discovery_cycle.py", "--refresh"
+    ]
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]

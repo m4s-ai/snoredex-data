@@ -106,6 +106,32 @@ def _staging_matches_inputs(
     )
 
 
+def _completeness_matches_inputs(inputs: dict[str, Any], errors: list[str],
+                                 current_text: str, summary: dict[str, Any]) -> bool:
+    """Compare the retained completeness projection with its complete current inputs."""
+    if errors:
+        return False
+    expected = json.dumps(summary, ensure_ascii=False, indent=2) + "\n"
+    return current_text == expected
+
+
+def _completeness_is_current() -> bool:
+    try:
+        from scripts import completeness_gate
+    except ImportError:  # direct execution from scripts/
+        import completeness_gate  # type: ignore[no-redef]
+    try:
+        inputs, errors = completeness_gate.validate_inputs()
+        current_text = completeness_gate.OUTPUT.read_text(encoding="utf-8")
+        return _completeness_matches_inputs(
+            inputs, errors, current_text, completeness_gate.summary(inputs),
+        )
+    except (OSError, KeyError, TypeError, ValueError):
+        # Treat malformed/missing inputs as pending projection work. The owning gate command
+        # reports the concrete validation error; the loop must not mistake the old output as current.
+        return False
+
+
 def evidence_state() -> dict[str, Any]:
     counts = read_json(EVIDENCE)["counts"]["applicationStatuses"]
     if counts.get("needs-evidence", 0):
@@ -158,6 +184,7 @@ def _discovery_state(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     blocked: int, needs_source: int, new_candidates: int, staging_is_current: bool,
+    completeness_is_current: bool,
 ) -> str:
     if not source or not cards:
         return "candidate"
@@ -170,6 +197,8 @@ def _discovery_state(
         return "retained"
     if not staging_is_current:
         return "retained"
+    if not completeness_is_current:
+        return "retained"
     return _discovery_outcome(blocked, needs_source, new_candidates)
 
 
@@ -178,7 +207,7 @@ def _discovery_progress(
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     failures: int, blocked: int, needs_source: int, total_gaps: int,
     new_candidates: int, staged_candidates: int, staging_run: str | None,
-    staging_is_current: bool,
+    staging_is_current: bool, completeness_is_current: bool,
 ) -> dict[str, Any]:
     latest_source = next(iter(source), {})
     latest_cards = next(iter(cards), {})
@@ -201,6 +230,7 @@ def _discovery_progress(
         "stagingCandidateRecords": staged_candidates,
         "stagingRun": staging_run,
         "stagingMatchesCanonicalInputs": staging_is_current,
+        "completenessMatchesInputs": completeness_is_current,
     }
 
 
@@ -228,15 +258,18 @@ def discovery_state() -> dict[str, Any]:
     )
     staged_candidates = staging_meta.get("counts", {}).get("newCandidate", 0)
     new_candidates = staged_candidates if staging_is_current else 0
+    completeness_is_current = _completeness_is_current()
     return {
         "state": _discovery_state(
             source, cards, source_canonical, card_canonical, blocked, needs_source,
             new_candidates, staging_is_current,
+            completeness_is_current,
         ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,
             failures, blocked, needs_source, len(gaps), new_candidates,
             staged_candidates, staging_run, staging_is_current,
+            completeness_is_current,
         ),
     }
 
@@ -420,26 +453,32 @@ def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
     return progress.get("cardRun")
 
 
-def _live_refresh_follows_replay(
-    loop_id: str, include_live: bool, replay_from_run: str | None,
+def _live_refresh_follows_repair(
+    loop_id: str, include_live: bool, repair_performed: bool,
     after: dict[str, Any],
 ) -> bool:
-    """Keep an explicitly requested source refresh queued after replay housekeeping."""
+    """Keep an explicitly requested source refresh queued after discovery repair."""
     return bool(
         loop_id == "discovery"
         and include_live
-        and replay_from_run
+        and repair_performed
         and after["progress"].get("needsSourceGaps", 0) > 0
     )
 
 
+def _discovery_repair_performed(
+    loop_id: str, replay_from_run: str | None, completeness_is_current: bool,
+) -> bool:
+    return loop_id == "discovery" and bool(replay_from_run or not completeness_is_current)
+
+
 def _discovery_cycle_stop_reason(
-    loop_id: str, include_live: bool, replay_from_run: str | None,
+    loop_id: str, include_live: bool, repair_performed: bool,
     current: dict[str, Any], after: dict[str, Any], terminal_states: set[str],
     cycle_number: int, max_cycles: int,
 ) -> str | None:
     """Return a stop reason, or None when the bounded loop should continue."""
-    if (_live_refresh_follows_replay(loop_id, include_live, replay_from_run, after)
+    if (_live_refresh_follows_repair(loop_id, include_live, repair_performed, after)
             and cycle_number < max_cycles):
         return None
     if after["state"] in terminal_states:
@@ -452,20 +491,25 @@ def _discovery_cycle_stop_reason(
 def run_cycle(
     loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
     replay_from_run: str | None = None,
+    completeness_is_current: bool = True,
 ) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
     return _run_command_sequence(
-        _cycle_commands(loop_id, lane, cycle_id, include_live, replay_from_run)
+        _cycle_commands(
+            loop_id, lane, cycle_id, include_live, replay_from_run, completeness_is_current,
+        )
     )
 
 
 def _cycle_commands(
     loop_id: str, lane: str, cycle_id: str, include_live: bool,
-    replay_from_run: str | None,
+    replay_from_run: str | None, completeness_is_current: bool = True,
 ) -> list[list[str]]:
     if loop_id == "discovery" and replay_from_run:
         return _discovery_replay_commands(replay_from_run)
+    elif loop_id == "discovery" and not completeness_is_current:
+        return [["scripts/completeness_gate.py"]]
     elif loop_id == "discovery" and include_live:
         return [_discovery_refresh_command()]
     command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
@@ -549,9 +593,14 @@ def main() -> int:
             break
         cycle_id = f"{run_id}-c{number}"
         replay_from_run = _stale_discovery_run(args.loop, current)
+        completeness_is_current = current["progress"].get("completenessMatchesInputs", True)
+        repair_performed = _discovery_repair_performed(
+            args.loop, replay_from_run, completeness_is_current,
+        )
         result = run_cycle(
             args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
             replay_from_run=replay_from_run,
+            completeness_is_current=completeness_is_current,
         )
         if result["status"] == "not-run":
             skipped.append(result["reason"])
@@ -565,7 +614,7 @@ def main() -> int:
             current = after
             break
         cycle_stop_reason = _discovery_cycle_stop_reason(
-            args.loop, args.include_live, replay_from_run, current, after,
+            args.loop, args.include_live, repair_performed, current, after,
             set(loop["terminal"]), number, args.max_cycles,
         )
         if cycle_stop_reason:
