@@ -22,8 +22,8 @@ or absence verdict is changed here.
   rarity and release-date fields.
 - **#263 Traditional Chinese:** 23/45 gap-free, 22 remain. Seventeen no-candidate rows and five candidate rows remain,
   plus a rarity field.
-- **#266 European Spanish:** 46/51 gap-free, five remain: KSS 26 candidate evidence, XYPR 179, SWSH 032, 30C ES 119/128
-  rarity review (its Holo finish is confirmed by the exact official card render), and SVP ES 184 release date.
+- **#266 European Spanish:** 47/51 gap-free, four remain: KSS 26 candidate evidence, XYPR 179, SWSH 032, and SVP ES 184
+  release date. The 30C ES 119/128 render resolves the card-face, Common rarity, Holo finish, and stamp observations.
 - **#166 photo inbox:** the current issue body says all attachments through SPEC-0527 have been processed; there were
   no unprocessed attachments to intake during this check. It remains useful for future owner photos.
 
@@ -51,7 +51,7 @@ reverse holo, the photograph was retained through the specimen importer as SPEC-
 collection owner's, not the seller title's. This resolves the finish evidence gap for this identified printing without
 asserting the list of all possible finishes or a separate physical specimen held by the owner.
 
-### 30C Snorlax 119/128 — official localized renders confirm Holo
+### 30C Snorlax 119/128 — official localized renders resolve the card row
 
 The [Spanish Pokémon official announcement](https://www.pokemon.com/es/noticias/productos-de-celebracion-30-o-aniversario-de-jcc-pokemon)
 announces the Spanish-language 30th Celebration product and says each booster contains five holographic cards (including
@@ -68,8 +68,8 @@ evidence.
 
 This visual review corrects the earlier claim below that no localized card-specific positive evidence was available.
 The publisher images positively show the Holo treatment on the exact Snorlax card face in each of the eleven named
-languages. That resolves the finish question for those depicted releases; it does not claim that the renders are
-owner-held physical specimens or establish any additional finish not shown in the images.
+languages. Each also visibly prints the Common rarity circle beside `119/128`. That resolves the card-face, rarity, and
+finish questions for those localized releases; no further rarity review is open for 30C ES 119/128.
 
 The owner-supplied [PokéBeach report](https://www.pokebeach.com/2026/09/30th-celebration-full-set-list-revealed-for-japan-features-176-cards)
 (2026-09-09) explicitly says **every card in Japan's 30th Celebration set is foil** and lists Japanese Snorlax as card
@@ -79,10 +79,8 @@ requiring transfer from the Japanese number. The Holo finish for these eleven re
 by their card faces.
 
 The [WikiDex expansion page](https://www.wikidex.net/wiki/Celebraci%C3%B3n_30.%C2%BA_Aniversario_(TCG))
-lists Snorlax 119/128, gives a 16 September 2026 Spanish/Latin American release date, and states that all expansion cards
-are holographic. WikiDex is registered as tier 3 for positive localized identity from retained database scans, but this
-page is not needed to establish the Holo finish: the exact official localized card render already shows it. The remaining
-rarity question is separate from the finish determination.
+lists Snorlax 119/128 and gives a 16 September 2026 Spanish/Latin American release date. Its broader foil statement is
+not needed here: the official localized card faces directly show Holo and the printed Common rarity symbol.
 
 The owner also supplied [PokéWallet's 30th Celebration reveal](https://pokewallet.io/blog/30th-celebration-set-officially-revealed),
 dated 2026-06-01. My initial reading wrongly restricted the "30" Pikachu stamp to Classic Collection reprints. A visual
