@@ -118,6 +118,21 @@ not visible during inspection. The language/locality and card-face treatment cou
 - **Japanese G2 and remaining older rows:** general Snorlax checklist pages did not supply an inspected exact localized
   card scan for the unresolved G2 identity. No claim follows from checklist omissions.
 
+### New follow-up lead — Indonesian AC3b 239/204
+
+An active [eBay listing](https://www.ebay.com/itm/397057806875) for Eevee & Snorlax GX AC3b 239/204 was opened in the
+in-app browser on 2026-09-24. The first seller photo visibly shows the Indonesian card face, `239/204 SR`, and a
+reflective foil appearance across the full-art card. The listing's item specifics separately say Indonesian and Holo;
+the photo itself is the basis for this visual observation, not those fields. An existing public Instagram carousel
+record already identifies an Indonesian AC3b 239/204 card, but retains no image bytes and records no finish, so this
+listing is a distinct image-level lead rather than finish corroboration of that specimen.
+
+I could not retrieve the original seller image bytes for canonical intake: the image CDN endpoint returned a cache-miss
+error through the page reader, and the in-app browser exposed the photo for visual review but not as a local original
+file. This observation is therefore not filed as a `SPEC` and does not change canonical finish data. To retain it under
+the seller-photo contract, the original first listing image is still needed. The seller metadata says Holo, but no other
+finish or complete finish inventory is inferred.
+
 These searches produced no additional admissible physical-printing or finish evidence. Marketplace language labels,
 search snippets, missing catalogue rows and inaccessible photographs remain leads only.
 
