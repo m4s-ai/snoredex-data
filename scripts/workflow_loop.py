@@ -688,9 +688,7 @@ def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
     }
 
 
-def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str:
-    if state == "terminal":
-        return "complete"
+def _stale_discovery_action(progress: dict[str, Any]) -> str:
     source_stale = not progress.get("sourceRecordsCurrent", True)
     staging_stale = not progress.get("stagingMatchesCanonicalInputs", True)
     if (
@@ -707,7 +705,17 @@ def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str
     return "reconcile-to-release-or-record-open-decision"
 
 
+def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str:
+    if state == "failed":
+        return "inspect-failed-discovery-run"
+    if state == "terminal":
+        return "complete"
+    return _stale_discovery_action(progress)
+
+
 def _discovery_review_files(progress: dict[str, Any], state: str | None = None) -> str:
+    if state == "failed":
+        return "verification/runs/source-adapters,verification/runs/card-discovery"
     if state == "terminal":
         return "none"
     review_files = []
@@ -720,9 +728,12 @@ def _discovery_review_files(progress: dict[str, Any], state: str | None = None) 
 
 def _discovery_summary(
     loop_id: str, progress: dict[str, Any], state: str | None = None,
+    stop_reason: str | None = None,
 ) -> str:
     if loop_id != "discovery":
         return ""
+    if stop_reason == "lane-failed":
+        state = "failed"
     return (
         f" newCandidates={progress.get('newCandidateRecords', 0)}"
         f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
@@ -821,7 +832,9 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    candidate_summary = _discovery_summary(args.loop, current["progress"], current["state"])
+    candidate_summary = _discovery_summary(
+        args.loop, current["progress"], current["state"], stop_reason,
+    )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
           f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
     return 1 if any(c["lane"].get("status") == "failed" for c in cycle_reports) else 0

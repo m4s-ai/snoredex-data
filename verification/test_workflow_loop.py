@@ -249,6 +249,13 @@ def main() -> int:
         "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
     }, "terminal")
     assert "action=complete review=none" in terminal_summary
+    failed_refresh_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "completenessMatchesInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal", "lane-failed")
+    assert "action=inspect-failed-discovery-run" in failed_refresh_summary
+    assert "review=verification/runs/source-adapters,verification/runs/card-discovery" in failed_refresh_summary
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
