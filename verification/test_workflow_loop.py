@@ -20,6 +20,7 @@ if str(ROOT) not in sys.path:
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_decision, _discovery_refresh_command,
     _discovery_replay_command, _discovery_summary, _incomplete_live_refresh_index,
+    _mark_incomplete_live_refresh,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
     _records_projection_matches, _read_staging, _source_staging_matches_inputs,
@@ -306,6 +307,32 @@ def main() -> int:
     assert incomplete_decision["state"] == "terminal"
     assert incomplete_decision["action"] == "retry-incomplete-live-refresh"
     assert incomplete_decision["result"] == "incomplete"
+    failed_incomplete_refresh = [{
+        **incomplete_refresh[0],
+        "lane": {**incomplete_refresh[0]["lane"], "status": "failed", "returnCode": 1},
+    }]
+    failed_index, failed_stop_reason = _mark_incomplete_live_refresh(
+        failed_incomplete_refresh, "lane-failed",
+    )
+    failed_lane = failed_incomplete_refresh[failed_index]["lane"]
+    failed_decision = _discovery_decision(
+        incomplete_refresh[0]["after"]["progress"], "terminal", failed_stop_reason,
+    )
+    assert failed_index == 0 and failed_stop_reason == "lane-failed"
+    assert failed_lane["status"] == "failed" and failed_lane["returnCode"] == 1
+    assert failed_lane["liveRefreshIncomplete"] is True
+    assert failed_decision["result"] == "failed"
+    assert failed_decision["action"] == "inspect-failed-discovery-run"
+    incomplete_cycle = [{**incomplete_refresh[0],
+                         "lane": {**incomplete_refresh[0]["lane"], "status": "passed"}}]
+    incomplete_index, incomplete_stop_reason = _mark_incomplete_live_refresh(
+        incomplete_cycle, "state=terminal",
+    )
+    incomplete_lane = incomplete_cycle[incomplete_index]["lane"]
+    assert incomplete_index == 0 and incomplete_stop_reason == "incomplete-live-refresh"
+    assert incomplete_lane["status"] == "incomplete"
+    assert incomplete_lane["liveRefreshIncomplete"] is True
+    assert incomplete_lane["reason"] == "provider run manifest is incomplete"
     incomplete_refresh[0]["lane"]["executedCommands"] = incomplete_refresh[0]["lane"]["command"]
     assert _incomplete_live_refresh_index(incomplete_refresh) == 0
     incomplete_refresh[0]["lane"]["executedCommands"] = [

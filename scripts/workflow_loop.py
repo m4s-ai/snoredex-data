@@ -788,6 +788,20 @@ def _incomplete_live_refresh_index(cycles: list[dict[str, Any]]) -> int | None:
     return None
 
 
+def _mark_incomplete_live_refresh(
+    cycles: list[dict[str, Any]], stop_reason: str,
+) -> tuple[int | None, str]:
+    index = _incomplete_live_refresh_index(cycles)
+    if index is None:
+        return None, stop_reason
+    lane = cycles[index]["lane"]
+    lane["liveRefreshIncomplete"] = True
+    if lane.get("status") != "failed":
+        lane.update(status="incomplete", reason="provider run manifest is incomplete")
+        stop_reason = "incomplete-live-refresh"
+    return index, stop_reason
+
+
 def _workflow_exit_code(loop_id: str, decision: dict[str, Any] | None,
                         cycle_reports: list[dict[str, Any]]) -> int:
     if loop_id == "discovery":
@@ -863,13 +877,10 @@ def main() -> int:
             break
         current = after
 
-    incomplete_refresh_index = _incomplete_live_refresh_index(cycle_reports)
+    incomplete_refresh_index, stop_reason = _mark_incomplete_live_refresh(
+        cycle_reports, stop_reason,
+    )
     incomplete_live_refresh = incomplete_refresh_index is not None
-    if incomplete_live_refresh:
-        cycle_reports[incomplete_refresh_index]["lane"].update(
-            status="incomplete", reason="provider run manifest is incomplete",
-        )
-        stop_reason = "incomplete-live-refresh"
     decision = None
     if args.loop == "discovery":
         decision = _discovery_decision(current["progress"], current["state"], stop_reason)
