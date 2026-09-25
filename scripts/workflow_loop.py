@@ -716,6 +716,9 @@ def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str
     if state == "terminal":
         return "complete"
     if state == "needs-source":
+        stale_action = _stale_discovery_action(progress)
+        if stale_action == "live-acquisition-required":
+            return stale_action
         return "find-positive-source-for-open-gaps"
     if state == "blocked-by-source":
         return "add-positive-source-coverage"
@@ -730,7 +733,14 @@ def _discovery_review_files(progress: dict[str, Any], state: str | None = None) 
     if state == "terminal":
         return "none"
     if state in {"needs-source", "blocked-by-source"}:
+        stale_action = _stale_discovery_action(progress)
+        if stale_action == "live-acquisition-required":
+            return _stale_review_files(progress)
         return "verification/source_adapters.json,verification/card_discovery_adapters.json"
+    return _stale_review_files(progress)
+
+
+def _stale_review_files(progress: dict[str, Any]) -> str:
     review_files = []
     if not progress.get("sourceRecordsCurrent", True):
         review_files.append("verification/source_adapter_staging.json")

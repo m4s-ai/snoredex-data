@@ -298,6 +298,17 @@ def main() -> int:
         }, state)
         assert f"action={action}" in summary
         assert "review=verification/source_adapters.json,verification/card_discovery_adapters.json" in summary
+    for stale_progress, review_file in (
+        ({"sourceRecordsCurrent": False, "sourceReplayRun": None,
+          "stagingMatchesCanonicalInputs": True},
+         "verification/source_adapter_staging.json"),
+        ({"sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": False,
+          "cardReplayRun": None},
+         "verification/card_discovery_staging.json"),
+    ):
+        summary = _discovery_summary("discovery", stale_progress, "needs-source")
+        assert "action=live-acquisition-required" in summary
+        assert f"review={review_file}" in summary
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
