@@ -15,6 +15,36 @@ Newest first.
 
 ---
 
+## An incomplete archive can still prove the row it contains
+
+**Trap:** *A source does not need a historically complete list for one exact positive card row to count as evidence.*
+
+The Indonesian AC3b archive visibly lists Snorlax & Eevee GX 238/204 and 239/204. Both exact seller photographs
+independently show the Indonesian card faces and foil. The Taiwan AS5a archive visibly lists 204/184. Initial research
+stalled on whether those archive pages were complete across history. That question was relevant to claims about omitted
+cards, but it did not weaken the positive rows in front of us. Requiring completeness before admitting a positive row
+turned a useful exact observation into another unresolved placeholder.
+
+There was a second failure after the evidence was admitted: the Indonesian pass moved legacy claims to identified
+source-first releases while leaving superseded `unknown-local-set` releases in the graph. The graph therefore retained
+the appearance of an unresolved identity beside a positive canonical target. The pass now removes only a placeholder
+whose confirmed legacy claim already targets an existing identified release, and preserves its aliases and connected
+references. Its capability update also preserves existing surfaces and observations, so replaying the pass cannot erase
+newer registrations or invalidate unrelated retained discovery runs.
+
+Record an exact positive row in the canonical store using only the identity and fields it establishes. Keep an explicit
+unknown for absent rows, and do not claim the exact row closes a set, language, finish, or historical inventory without
+separate evidence for that broader scope.
+
+**Now guarded by** the positive-row rule in `AGENTS.md` §3, the exact AC3b and AS5a admissions in
+`verification/passes/admit_issue258_indonesian_20260828.py` and
+`verification/passes/admit_issue263_traditional_chinese_20260828.py`, and the source-first-to-consumer checks in
+`verification/review_findings.py`.
+
+*PR #397.*
+
+---
+
 ## A WebP download is not a failed specimen intake
 
 **Trap:** *When an image endpoint returns WebP, retain those original bytes and losslessly decode

@@ -328,6 +328,21 @@ def supplemental_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any
             "work": facts["work"], "rarity": facts["rarity"], "legacy": facts["legacy"],
             "releaseDate": date, "releaseDatePrecision": precision, "releaseApproximate": False,
         })
+    result.append({
+        "detail": "official-archive-as5a-204", "specimenId": None,
+        "printId": "TW:AS5a:204/184:base", "localSetCode": "AS5a", "localNumber": "204/184",
+        "variant": "base", "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "rarity": ("SR", None), "legacy": [], "cardName": "Eevee & Snorlax-GX",
+        "locality": LOCALITY, "language": LANGUAGE, "script": SCRIPT,
+        "name": "伊布&卡比獸GX",
+        "catchUpOf": "the Traditional-Chinese Eevee & Snorlax-GX work identified by the exact printed card face and attacks",
+        "providerId": "pokemon-card-asia",
+        "sourceUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "corroborated": False, "markAssetUrl": None, "cardImageUrl": None,
+        "releaseDate": "2019-10-09", "releaseDatePrecision": "day", "releaseApproximate": False,
+        "retrievedAt": "2026-09-15",
+        "evidence": "The official Taiwan AS5a archive card list, page 23 (retained crop zh-as5a-204.png), positively identifies 伊布&卡比獸GX as 204/184 SR and shows its printed card face and attacks. This establishes the exact Traditional-Chinese release and its Work mapping; it does not claim the archived list is historically complete, and it supplies no physical finish evidence.",
+    })
     return result
 
 
@@ -692,7 +707,7 @@ def apply_finish_evidence(document: dict[str, Any]) -> None:
     ]
     keys = {(row["setCode"], row["number"], tuple(row.get("languages") or [])) for row in rows}
     document["overrides"] = [row for row in document["overrides"] if (row["setCode"], row["number"], tuple(row.get("languages") or [])) not in keys] + rows
-    document["meta"]["lastUpdated"] = "2026-08-28"
+    document["meta"]["lastUpdated"] = "2026-09-25"
 
 
 def apply_discovery_adapters(document: dict[str, Any], rows: list[dict[str, Any]]) -> None:
@@ -840,7 +855,7 @@ def main() -> int:
             persisted["corroboratingSourceUrls"] = sorted({item["sourceUrl"] for item in photos if item["printId"] == row["printId"]})
         by_print[row["printId"]] = persisted
     prints["prints"] = sorted(by_print.values(), key=lambda row: row["printId"])
-    prints["meta"]["generated"] = "2026-08-28"
+    prints["meta"]["generated"] = "2026-09-25"
     prints["meta"]["counts"]["admitted"] = len(prints["prints"])
 
     specimens = read(SPECIMENS)

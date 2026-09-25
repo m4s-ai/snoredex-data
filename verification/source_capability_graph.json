@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-24",
+    "generated": "2026-09-25",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 59,
       "absenceEdges": 0,
       "observations": 63,
-      "resolvedVerdictSources": 1617
+      "resolvedVerdictSources": 1619
     },
     "surfaceStates": {
       "active": 28,
@@ -17061,6 +17061,18 @@
       ]
     },
     {
+      "sourceKey": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "capabilityEdgeIds": [
+        "asia-card-search-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-existence"
+      ]
+    },
+    {
       "sourceKey": "https://asia.pokemon-card.com/id/archive/special/card/ma6",
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-30th-celebration",
@@ -18489,6 +18501,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date"
+      ]
+    },
+    {
+      "sourceKey": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-card-search",
+      "capabilityEdgeIds": [
+        "asia-card-search-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "card-existence"
       ]
     },
     {

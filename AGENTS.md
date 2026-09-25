@@ -106,7 +106,9 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    never from a reused pass default.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap. It has
    not proved the printing does not exist. Official Pokémon sources confirm only the releases they
-   name for the matching language and region. Missing rows, fields, pages, and results stay unknown.
+   name for the matching language and region. An exact positive card row remains evidence for that
+   named card even when the archive is not historically complete; incomplete coverage limits
+   extrapolation, not the value of the row itself. Missing rows, fields, pages, and results stay unknown.
    This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted
    ([LESSONS](LESSONS.md#an-absence-argument-that-produced-a-false-contradiction)).

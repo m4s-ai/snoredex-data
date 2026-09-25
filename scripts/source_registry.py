@@ -97,11 +97,14 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "recent Traditional Chinese, Indonesian and Thai cards",
+        "coverage": "recent localized card details and exact rows from individually inspected archived Asian card lists",
         "supportsAbsence": False,
-        "usedFor": ["language"],
+        "usedFor": ["language", "card-existence", "local-set-identifier", "rarity"],
         "attribution": "Asian card data © The Pokémon Company.",
-        "notes": "Recent releases only; older printings are out of coverage.",
+        "notes": ("The searchable card database is recent and does not cover all older printings. "
+                  "Individually inspected archived card-list rows positively support only the exact "
+                  "cards they show; the archive is not assumed historically complete and omissions "
+                  "remain unknown. Neither surface establishes physical finish."),
     },
     {
         "providerId": "pokemon-card-korea",

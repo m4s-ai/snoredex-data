@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-24",
+  "generated": "2026-09-25",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1617,
-   "uniqueUrls": 1610,
+   "evidenceRecords": 1619,
+   "uniqueUrls": 1612,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6269
+   "claimsAttributed": 6276
   }
  },
  "providers": [
@@ -104,19 +104,22 @@
    "licenseOrTerms": "Publisher's own terms.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "recent Traditional Chinese, Indonesian and Thai cards",
+   "coverage": "recent localized card details and exact rows from individually inspected archived Asian card lists",
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "card-existence",
+    "local-set-identifier",
+    "rarity",
     "date"
    ],
    "attribution": "Asian card data © The Pokémon Company.",
-   "notes": "Recent releases only; older printings are out of coverage.",
+   "notes": "The searchable card database is recent and does not cover all older printings. Individually inspected archived card-list rows positively support only the exact cards they show; the archive is not assumed historically complete and omissions remain unknown. Neither surface establishes physical finish.",
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 202,
-   "claimsSupported": 729
+   "uniqueSources": 204,
+   "claimsSupported": 732
   },
   {
    "providerId": "pokemon-card-korea",
@@ -809,7 +812,7 @@
     "down-tw.img.susercontent.com"
    ],
    "uniqueSources": 136,
-   "claimsSupported": 571
+   "claimsSupported": 575
   }
  ],
  "evidence": [
@@ -13965,6 +13968,24 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-existence"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:AC3b:238/204:base",
+    "ID:AC3b:239/204:base"
+   ],
+   "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/id/archive/special/card/ma6",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -16278,6 +16299,23 @@
     "SET-SRC-TH-DATE-S5A-20260915"
    ],
    "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Positive source-first card record"
+   ],
+   "dimensions": [
+    "card-existence"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "TW:AS5a:204/184:base"
+   ],
+   "retrievedAt": "2026-09-15",
    "usageCount": 1
   },
   {
@@ -25074,12 +25112,13 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "ID:AC3b:238/204:base",
     "SPEC-0557"
    ],
    "retrievedAt": "2026-09-24",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://down-id.img.susercontent.com/file/id-11134207-82251-mkj3dsj5huyrbe.webp",
@@ -26255,12 +26294,13 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
+    "ID:AC3b:239/204:base",
     "SPEC-0556"
    ],
    "retrievedAt": "2026-09-24",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",

@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-24",
+    "generated": "2026-09-25",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -6556,23 +6556,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0464-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0464-P01",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0464-P01",
-        "semanticPrintingId": "PRINTING:911f2d6a777c696daf4e7115",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0464-P01",
-        "materializedTargetId": "PHYSICAL:F0464-P01",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:F0466-P01",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -6619,23 +6602,6 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:F0476-P01",
         "materializedTargetId": "PHYSICAL:F0476-P01",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0479-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0479-P01",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0479-P01",
-        "semanticPrintingId": "PRINTING:8ab82f55a8864c78f94c8803",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0479-P01",
-        "materializedTargetId": "PHYSICAL:F0479-P01",
         "reason": "finish printing record carries positive evidence"
       }
     },
@@ -8147,40 +8113,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0606-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0606-P01",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0606-P01",
-        "semanticPrintingId": "PRINTING:8d6285db7199b9b794372a76",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0606-P01",
-        "materializedTargetId": "PHYSICAL:F0606-P01",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:F0606-P02",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:F0606-P02",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0606-P02",
-        "semanticPrintingId": "PRINTING:b321da16794682fbd27fa747",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:F0606-P02",
-        "materializedTargetId": "PHYSICAL:F0606-P02",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:F0608-P01",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -8801,6 +8733,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:1111abeea6ad6d382addeeae",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:1111abeea6ad6d382addeeae",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0327-P01",
+        "semanticPrintingId": "PRINTING:1111abeea6ad6d382addeeae",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:1167a08e6546faf2808f4a49",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -9145,24 +9095,6 @@
         "specimenIds": [
           "SPEC-0107"
         ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:1846c61d2c2312f848efc01e",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:1846c61d2c2312f848efc01e",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0327-P01",
-        "semanticPrintingId": "PRINTING:1846c61d2c2312f848efc01e",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id"
       }
     },
     {
@@ -10702,24 +10634,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:43ecbb1dc47d70ce26b24850",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:43ecbb1dc47d70ce26b24850",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0337-P01",
-        "semanticPrintingId": "PRINTING:43ecbb1dc47d70ce26b24850",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:44987d5fe8d7e8c2cc81138b",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -11377,6 +11291,23 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:515bcf8bf56b989a253c74ee",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:515bcf8bf56b989a253c74ee",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0464-P01",
+        "semanticPrintingId": "PRINTING:515bcf8bf56b989a253c74ee",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+        "materializedTargetId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -12264,6 +12195,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:738180c0a758b29e9afae360",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:738180c0a758b29e9afae360",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0337-P01",
+        "semanticPrintingId": "PRINTING:738180c0a758b29e9afae360",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:739ab468d8be6851b49d1671",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -12365,6 +12314,23 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:JP:Japanese:sm10:076:Snorlax-Lazy-Eating-Big-Counter"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0606-P02",
+        "semanticPrintingId": "PRINTING:760b4269462960075b2e8546",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+        "materializedTargetId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -12494,6 +12460,23 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:PRINTING:7be48d72c932887c8d4dda51",
         "materializedTargetId": "PHYSICAL:PRINTING:7be48d72c932887c8d4dda51",
+        "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0606-P01",
+        "semanticPrintingId": "PRINTING:7c29f4d9750a8aa764278b2c",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
+        "materializedTargetId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
         "reason": "finish printing record carries positive evidence"
       }
     },
@@ -13201,6 +13184,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:9705aa24281d28f5eb561ff1",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:9705aa24281d28f5eb561ff1",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0479-P01",
+        "semanticPrintingId": "PRINTING:9705aa24281d28f5eb561ff1",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+        "materializedTargetId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+        "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:9727a5b1e6fdff1ecf941a37",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -13296,6 +13296,24 @@
         "proposedTargetId": "PHYSICAL:PRINTING:9ac639749b0b373e20bda119",
         "materializedTargetId": "PHYSICAL:PRINTING:9ac639749b0b373e20bda119",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:9b518136f002c406b55fe7fe",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:9b518136f002c406b55fe7fe",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0366-P01",
+        "semanticPrintingId": "PRINTING:9b518136f002c406b55fe7fe",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam"
       }
     },
     {
@@ -14175,24 +14193,6 @@
         "proposedTargetId": "PHYSICAL:PRINTING:b3277f4ea39b9b87c278a2c8",
         "materializedTargetId": "PHYSICAL:PRINTING:b3277f4ea39b9b87c278a2c8",
         "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:b33055b568cd7831ada45611",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:b33055b568cd7831ada45611",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0327-P02",
-        "semanticPrintingId": "PRINTING:b33055b568cd7831ada45611",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id"
       }
     },
     {
@@ -15537,6 +15537,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:e2cf9900cbeba92a0ea91a72",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:e2cf9900cbeba92a0ea91a72",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0474-P01",
+        "semanticPrintingId": "PRINTING:e2cf9900cbeba92a0ea91a72",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:e30c60f0477bd21d8902a60d",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -15570,24 +15588,6 @@
         "proposedTargetId": "PHYSICAL:PRINTING:e47cc096b4faf2832a7caac5",
         "materializedTargetId": "PHYSICAL:PRINTING:e47cc096b4faf2832a7caac5",
         "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:e4becb23e2ec9e9c7408b9f7",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:e4becb23e2ec9e9c7408b9f7",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0366-P01",
-        "semanticPrintingId": "PRINTING:e4becb23e2ec9e9c7408b9f7",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id"
       }
     },
     {
@@ -15700,24 +15700,6 @@
         "proposedTargetId": "PHYSICAL:PRINTING:ea2fd98ddbbeb061071ece18",
         "materializedTargetId": "PHYSICAL:PRINTING:ea2fd98ddbbeb061071ece18",
         "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:ea907954191f8fdfe3c3d13b",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:ea907954191f8fdfe3c3d13b",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0474-P01",
-        "semanticPrintingId": "PRINTING:ea907954191f8fdfe3c3d13b",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id"
       }
     },
     {
@@ -15928,6 +15910,24 @@
         "specimenIds": [
           "SPEC-0128"
         ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:efe7b9b87b381ac39a48c6bc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:efe7b9b87b381ac39a48c6bc",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0327-P02",
+        "semanticPrintingId": "PRINTING:efe7b9b87b381ac39a48c6bc",
+        "evidenceStatus": "marketplace-claimed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "finish printing record carries positive evidence",
+        "proposedCardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore"
       }
     },
     {
@@ -18174,8 +18174,8 @@
         "sourceRecord": "https://api.tcgdex.net/v2/id/cards/SV2a-143",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
         "reason": "language names its locality"
       }
     },
@@ -18582,8 +18582,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/17374/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "reason": "language names its locality"
       }
     },
@@ -19364,8 +19364,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/4795/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
+        "materializedTargetId": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
         "reason": "language names its locality"
       }
     },
@@ -19857,8 +19857,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/5772/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
+        "materializedTargetId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
         "reason": "language names its locality"
       }
     },
@@ -21625,8 +21625,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/10045/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
         "reason": "language names its locality"
       }
     },
@@ -22271,8 +22271,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/6007/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "materializedTargetId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
         "reason": "language names its locality"
       }
     },
@@ -22951,8 +22951,8 @@
         "sourceRecord": "https://api.tcgdex.net/v2/id/cards/SV4a-310",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
         "reason": "language names its locality"
       }
     },
@@ -23257,8 +23257,8 @@
         "sourceRecord": "https://asia.pokemon-card.com/id/card-search/detail/15253/",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "reason": "language names its locality"
       }
     },
@@ -27966,8 +27966,8 @@
         "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact",
         "reason": "language names its locality"
       }
     },
@@ -28000,8 +28000,8 @@
         "sourceRecord": null,
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
         "reason": "language names its locality"
       }
     },
@@ -28238,8 +28238,8 @@
         "sourceRecord": null,
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
         "reason": "language names its locality"
       }
     },
@@ -28255,8 +28255,8 @@
         "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch",
+        "materializedTargetId": "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch",
         "reason": "language names its locality"
       }
     },
@@ -28493,8 +28493,8 @@
         "sourceRecord": null,
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "reason": "language names its locality"
       }
     },
@@ -28578,8 +28578,8 @@
         "sourceRecord": null,
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "materializedTargetId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "proposedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "materializedTargetId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "reason": "language names its locality"
       }
     },
@@ -28777,6 +28777,40 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
         "materializedTargetId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+        "reason": "positive exact Indonesian card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:ID:AC3b:238/204:base",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "claimId": "CLAIM:source-first:ID:AC3b:238/204:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "ID:AC3b:238/204:base",
+        "sourceRecord": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "reason": "positive exact Indonesian card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:ID:AC3b:239/204:base",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "claimId": "CLAIM:source-first:ID:AC3b:239/204:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "ID:AC3b:239/204:base",
+        "sourceRecord": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "reason": "positive exact Indonesian card record and retained image"
       }
     },
@@ -29107,7 +29141,7 @@
     {
       "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:ID:SV2a I:181/165:base",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
         "claimId": "CLAIM:source-first:ID:SV2a I:181/165:base",
         "claimKind": "card-release",
@@ -29118,7 +29152,7 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
         "materializedTargetId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-        "reason": "retained exact card identity"
+        "reason": "positive exact Indonesian card record and retained image"
       }
     },
     {
@@ -31026,6 +31060,23 @@
         "disposition": "established-and-mapped",
         "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "reason": "positive exact Traditional Chinese card record and retained image"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:TW:AS5a:204/184:base",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "claimId": "CLAIM:source-first:TW:AS5a:204/184:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "TW:AS5a:204/184:base",
+        "sourceRecord": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "materializedTargetId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "reason": "positive exact Traditional Chinese card record and retained image"
       }
     },
@@ -35380,10 +35431,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0556",
         "evidenceStatus": "observed",
-        "disposition": "candidate-needs-evidence",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:specimen:SPEC-0556",
-        "materializedTargetId": null,
-        "reason": "physical observation has no matching projected printing"
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0556",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0556"
       }
     },
     {
@@ -35396,10 +35448,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0557",
         "evidenceStatus": "observed",
-        "disposition": "candidate-needs-evidence",
+        "disposition": "established-and-mapped",
         "proposedTargetId": "PHYSICAL:specimen:SPEC-0557",
-        "materializedTargetId": null,
-        "reason": "physical observation has no matching projected printing"
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0557",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0557"
       }
     },
     {
@@ -37081,6 +37134,7 @@
           "ID:AC3D:120/172:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-07-10",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37122,6 +37176,91 @@
           "ID:AC3a:145/205:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
+        "releaseDate": "2020-07-10",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:ID:Indonesian:AC3b",
+        "locality": "ID",
+        "language": "Indonesian",
+        "script": "Latn",
+        "localSetCode": "AC3b",
+        "localNumber": "238/204",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:ID:AC3b:238/204:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:ID:AC3b:238/204:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf"
+        ],
+        "sourceFirstRecordIds": [
+          "ID:AC3b:238/204:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
+        "releaseDate": "2020-07-10",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:ID:Indonesian:AC3b",
+        "locality": "ID",
+        "language": "Indonesian",
+        "script": "Latn",
+        "localSetCode": "AC3b",
+        "localNumber": "239/204",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:ID:AC3b:239/204:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:ID:AC3b:239/204:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf"
+        ],
+        "sourceFirstRecordIds": [
+          "ID:AC3b:239/204:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-07-10",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37163,6 +37302,7 @@
           "ID:AS1D:108/140:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2019-08-08",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37204,6 +37344,7 @@
           "ID:AS1b:112/150:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2019-08-08",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37228,11 +37369,17 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0129",
+          "CLAIM:legacy:U0787",
+          "CLAIM:legacy:U0792",
           "CLAIM:source-first:ID:MA3 I:136/193:V1",
           "CLAIM:source-first:ID:MA3 I:136/193:V2",
           "CLAIM:source-first:ID:MA3 I:136/193:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0129",
+          "CLAIM:legacy:U0787",
+          "CLAIM:legacy:U0792",
           "CLAIM:source-first:ID:MA3 I:136/193:V1",
           "CLAIM:source-first:ID:MA3 I:136/193:V2",
           "CLAIM:source-first:ID:MA3 I:136/193:base"
@@ -37258,6 +37405,16 @@
           "U0129",
           "U0787",
           "U0792"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "m2a",
+            "136"
+          ],
+          [
+            "xm2a",
+            "136"
+          ]
         ],
         "releaseDate": "2026-01-30",
         "releaseDatePrecision": "day",
@@ -37342,6 +37499,7 @@
           "ID:S-P:030:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2021",
         "releaseDatePrecision": "year",
         "releaseApproximate": false
@@ -37383,6 +37541,7 @@
           "ID:S-P:052:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2021-05",
         "releaseDatePrecision": "month",
         "releaseApproximate": false
@@ -37424,6 +37583,7 @@
           "ID:S-P:100:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2021",
         "releaseDatePrecision": "year",
         "releaseApproximate": false
@@ -37465,6 +37625,7 @@
           "ID:S-P:356:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2022-12",
         "releaseDatePrecision": "month",
         "releaseApproximate": false
@@ -37489,9 +37650,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0346",
           "CLAIM:source-first:ID:S10a I:058/071:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0346",
           "CLAIM:source-first:ID:S10a I:058/071:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37507,6 +37670,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0346"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "s10a",
+            "058"
+          ]
         ],
         "releaseDate": "2022-08-26",
         "releaseDatePrecision": "day",
@@ -37532,9 +37701,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0204",
           "CLAIM:source-first:ID:S10b I:056/071:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0204",
           "CLAIM:source-first:ID:S10b I:056/071:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37550,6 +37721,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0204"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "s10b",
+            "056"
+          ]
         ],
         "releaseDate": "2022-06-17",
         "releaseDatePrecision": "day",
@@ -37575,9 +37752,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0175",
           "CLAIM:source-first:ID:S8b I:126/184:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0175",
           "CLAIM:source-first:ID:S8b I:126/184:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37593,6 +37772,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0175"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "s8b",
+            "126"
+          ]
         ],
         "releaseDate": "2022-01-21",
         "releaseDatePrecision": "day",
@@ -37635,6 +37820,7 @@
           "ID:SM-P:166:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-07-25",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37659,10 +37845,14 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0752",
+          "CLAIM:legacy:U0772",
           "CLAIM:source-first:ID:SV-P:117:V1",
           "CLAIM:source-first:ID:SV-P:117:V2"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0752",
+          "CLAIM:legacy:U0772",
           "CLAIM:source-first:ID:SV-P:117:V1",
           "CLAIM:source-first:ID:SV-P:117:V2"
         ],
@@ -37683,6 +37873,12 @@
         "legacyCounterpartUnitIds": [
           "U0752",
           "U0772"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "SV-P/ID",
+            "117"
+          ]
         ],
         "releaseDate": "2024-06-28",
         "releaseDatePrecision": "day",
@@ -37708,9 +37904,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0773",
           "CLAIM:source-first:ID:SV-P:278:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0773",
           "CLAIM:source-first:ID:SV-P:278:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37726,6 +37924,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0773"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "SV-P/ID",
+            "278"
+          ]
         ],
         "releaseDate": "2025-07-25",
         "releaseDatePrecision": "day",
@@ -37751,9 +37955,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0687",
           "CLAIM:source-first:ID:SV-P:286:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0687",
           "CLAIM:source-first:ID:SV-P:286:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37769,6 +37975,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0687"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "SV-P/ID",
+            "286"
+          ]
         ],
         "releaseDate": "2026-01",
         "releaseDatePrecision": "month",
@@ -37794,9 +38006,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0105",
           "CLAIM:source-first:ID:SV2a I:143/165:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0105",
           "CLAIM:source-first:ID:SV2a I:143/165:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37813,6 +38027,12 @@
         "legacyCounterpartUnitIds": [
           "U0105"
         ],
+        "legacyIdentityAliases": [
+          [
+            "sv2a",
+            "143"
+          ]
+        ],
         "releaseDate": "2023-07-28",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -37821,7 +38041,7 @@
     {
       "entityType": "card-release",
       "entityId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
         "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
         "setEditionId": "EDITION:ID:Indonesian:SV2a I",
@@ -37846,16 +38066,11 @@
         ],
         "nonEstablishingClaimIds": [],
         "legacyVariants": [
-          "V2",
           "base"
         ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V2-sv2a181"
-        ],
+        "legacyProducts": [],
         "sourceRecords": [
-          "https://api.tcgdex.net/v2/id/cards/SV2a-181",
-          "https://asia.pokemon-card.com/id/card-search/detail/8760/",
-          "https://i.ebayimg.com/images/g/U7sAAeSwZPZowgKA/s-l500.jpg"
+          "https://asia.pokemon-card.com/id/card-search/detail/8760/"
         ],
         "sourceFirstRecordIds": [
           "ID:SV2a I:181/165:base"
@@ -37863,15 +38078,15 @@
         "legacyCounterpartUnitIds": [
           "U0051"
         ],
-        "releaseDate": "2023-07-28",
-        "releaseDatePrecision": "day",
-        "releaseApproximate": false,
         "legacyIdentityAliases": [
           [
             "sv2a",
             "181"
           ]
-        ]
+        ],
+        "releaseDate": "2023-07-28",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -37893,9 +38108,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0308",
           "CLAIM:source-first:ID:SV4a I:145/190:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0308",
           "CLAIM:source-first:ID:SV4a I:145/190:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37911,6 +38128,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0308"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "sv4a",
+            "145"
+          ]
         ],
         "releaseDate": "2024-01-26",
         "releaseDatePrecision": "day",
@@ -37936,9 +38159,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0386",
           "CLAIM:source-first:ID:SV4a I:310/190:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0386",
           "CLAIM:source-first:ID:SV4a I:310/190:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -37954,6 +38179,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0386"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "sv4a",
+            "310"
+          ]
         ],
         "releaseDate": "2024-01-26",
         "releaseDatePrecision": "day",
@@ -37996,6 +38227,7 @@
           "ID:SV4s I:118/132:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2023-12-15",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38037,6 +38269,7 @@
           "ID:SV6s I:136/167:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2024-05-31",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38078,6 +38311,7 @@
           "ID:SV9s I:109/139:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2025-04-18",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38102,9 +38336,11 @@
         "viaLegacySetCode": null,
         "viaLegacyNumber": null,
         "claimIds": [
+          "CLAIM:legacy:U0404",
           "CLAIM:source-first:ID:SVM I:094/175:base"
         ],
         "establishingClaimIds": [
+          "CLAIM:legacy:U0404",
           "CLAIM:source-first:ID:SVM I:094/175:base"
         ],
         "nonEstablishingClaimIds": [],
@@ -38120,6 +38356,12 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0404"
+        ],
+        "legacyIdentityAliases": [
+          [
+            "svM",
+            "094"
+          ]
         ],
         "releaseDate": "2025-01-31",
         "releaseDatePrecision": "day",
@@ -38266,6 +38508,7 @@
           "ID:sc1D I:132/164:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-11-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38307,6 +38550,7 @@
           "ID:sc1D I:133/164:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-11-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38348,6 +38592,7 @@
           "ID:sc1a I:127/154:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-11-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38389,6 +38634,7 @@
           "ID:sc1b I:119/153:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-11-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38430,6 +38676,7 @@
           "ID:sc1b I:120/153:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2020-11-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38471,6 +38718,7 @@
           "ID:sc3b I:126/158:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2021-03-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38512,6 +38760,7 @@
           "ID:scA I:084/135:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2021-03-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -38553,445 +38802,10 @@
           "ID:scD I:111/159:base"
         ],
         "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2022-01-21",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Voraciousness-Thudding-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "SV-P/ID",
-        "viaLegacyNumber": "117",
-        "claimIds": [
-          "CLAIM:legacy:U0752",
-          "CLAIM:legacy:U0772"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0752",
-          "CLAIM:legacy:U0772"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V1",
-          "V2"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117"
-        ],
-        "sourceRecords": []
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Spike-Draw-Mega-Punch",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "SV-P/ID",
-        "viaLegacyNumber": "278",
-        "claimIds": [
-          "CLAIM:legacy:U0773"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0773"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278"
-        ],
-        "sourceRecords": [
-          "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-But-First-Food-Heavy-Impact",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "SV-P/ID",
-        "viaLegacyNumber": "286",
-        "claimIds": [
-          "CLAIM:legacy:U0687"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0687"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286"
-        ],
-        "sourceRecords": [
-          "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(ITCG)"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-m2a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "m2a",
-        "viaLegacyNumber": "136",
-        "claimIds": [
-          "CLAIM:legacy:U0129"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0129"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/17374/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-s10a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Unfazed-Fat-Thumping-Snore",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "s10a",
-        "viaLegacyNumber": "058",
-        "claimIds": [
-          "CLAIM:legacy:U0346"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0346"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V1"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/6007/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-s10b:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Block-Collapse",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "s10b",
-        "viaLegacyNumber": "056",
-        "claimIds": [
-          "CLAIM:legacy:U0204"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0204"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/5772/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-s8b:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Gormandize-Body-Slam",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "s8b",
-        "viaLegacyNumber": "126",
-        "claimIds": [
-          "CLAIM:legacy:U0175"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0175"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/4795/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-sv2a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Voraciousness-Thudding-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "sv2a",
-        "viaLegacyNumber": "143",
-        "claimIds": [
-          "CLAIM:legacy:U0105"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0105"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V1"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143"
-        ],
-        "sourceRecords": [
-          "https://api.tcgdex.net/v2/id/cards/SV2a-143"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-sv4a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Voraciousness-Thudding-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "sv4a",
-        "viaLegacyNumber": "145",
-        "claimIds": [
-          "CLAIM:legacy:U0308"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0308"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V1"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/10045/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-sv4a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-Voraciousness-Thudding-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "sv4a",
-        "viaLegacyNumber": "310",
-        "claimIds": [
-          "CLAIM:legacy:U0386"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0386"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V2"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V2-sv4a310"
-        ],
-        "sourceRecords": [
-          "https://api.tcgdex.net/v2/id/cards/SV4a-310"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-svM:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Snorlax-ex-Strength-Toss-and-Turn-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "svM",
-        "viaLegacyNumber": "094",
-        "claimIds": [
-          "CLAIM:legacy:U0404"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0404"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations-Start-Decks/Snorlax-ex-svM094"
-        ],
-        "sourceRecords": [
-          "https://asia.pokemon-card.com/id/card-search/detail/15253/"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
-      "entityId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "setEditionId": "EDITION:ID:Indonesian:via-xm2a:unknown-local-set",
-        "locality": "ID",
-        "language": "Indonesian",
-        "script": "Latn",
-        "localSetCode": null,
-        "localNumber": null,
-        "localIdentifierKnown": false,
-        "state": "needs-local-identifier",
-        "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "xm2a",
-        "viaLegacyNumber": "136",
-        "claimIds": [
-          "CLAIM:legacy:U0787",
-          "CLAIM:legacy:U0792"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0787",
-          "CLAIM:legacy:U0792"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "V1",
-          "V2"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136"
-        ],
-        "sourceRecords": []
       }
     },
     {
@@ -45443,9 +45257,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/3553/",
-          "https://beehivetcg.com/cdn/shop/products/aef8c9b3a05d7062fe9d2fc81d7718a1.png?v=1661778006&width=600",
-          "https://beehivetcg.com/products/as5d-118-169-%E4%BC%8A%E5%B8%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-gx"
+          "https://asia.pokemon-card.com/tw/card-search/detail/3553/"
         ],
         "sourceFirstRecordIds": [
           "TW:AS5D:118/169:base"
@@ -45599,6 +45411,48 @@
             "106"
           ]
         ],
+        "releaseDate": "2019-10-09",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "locality": "TW",
+        "language": "T-Chinese",
+        "script": "Hant",
+        "localSetCode": "AS5a",
+        "localNumber": "204/184",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:TW:AS5a:204/184:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:TW:AS5a:204/184:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf"
+        ],
+        "sourceFirstRecordIds": [
+          "TW:AS5a:204/184:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "legacyIdentityAliases": [],
         "releaseDate": "2019-10-09",
         "releaseDatePrecision": "day",
         "releaseApproximate": false
@@ -45916,9 +45770,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC567"
         ],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/17038/",
-          "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600",
-          "https://beehivetcg.com/products/mcf-567-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/17038/"
         ],
         "sourceFirstRecordIds": [
           "TW:MC F:567/742:base"
@@ -45972,9 +45824,7 @@
         ],
         "sourceRecords": [
           "https://asia.pokemon-card.com/tw/card-search/detail/17039/",
-          "https://asia.pokemon-card.com/tw/card-search/detail/18292/",
-          "https://beehivetcg.com/cdn/shop/files/0e76344daaa0cb314f25bf211ef84d42.png?v=1768747014&width=600",
-          "https://beehivetcg.com/products/mcf-568-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/18292/"
         ],
         "sourceFirstRecordIds": [
           "TW:MC F:568/742:base"
@@ -46027,9 +45877,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Hops-Snorlax-mC569"
         ],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/17040/",
-          "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
-          "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/17040/"
         ],
         "sourceFirstRecordIds": [
           "TW:MC F:569/742:base"
@@ -46405,9 +46253,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/1474/",
-          "https://rocketcoll.com/cdn/shop/files/377577.png?v=1767884934",
-          "https://rocketcoll.com/products/sca-084-135-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/1474/"
         ],
         "sourceFirstRecordIds": [
           "TW:SCA F:084/135:base"
@@ -46454,9 +46300,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341"
         ],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/5968/",
-          "https://rocketcoll.com/cdn/shop/files/381827.png?v=1767887802",
-          "https://rocketcoll.com/products/%E9%8F%A1%E9%9D%A2%E9%96%83%E7%89%88sif-341-414"
+          "https://asia.pokemon-card.com/tw/card-search/detail/5968/"
         ],
         "sourceFirstRecordIds": [
           "TW:SI F:341/414:base"
@@ -46559,9 +46403,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://i.ebayimg.com/images/g/IqwAAOSwYPtih0RB/s-l1600.jpg",
-          "https://pokumon.com/card/eevee-snorlax-gx-053-sm-p-chinese-promo",
-          "https://www.ebay.com/itm/226754170463"
+          "https://pokumon.com/card/eevee-snorlax-gx-053-sm-p-chinese-promo"
         ],
         "sourceFirstRecordIds": [
           "TW:SM-P:053:base"
@@ -46664,9 +46506,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/12268/",
-          "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
-          "https://www.ebay.de/itm/168013799605"
+          "https://asia.pokemon-card.com/tw/card-search/detail/12268/"
         ],
         "sourceFirstRecordIds": [
           "TW:SV-P:215:base"
@@ -46861,7 +46701,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Matchless-Fighter/Snorlax-s5a93"
         ],
         "sourceRecords": [
-          "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "https://s1.52poke.com/wiki/1/17/S5aF093.jpg",
           "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661"
         ],
         "sourceFirstRecordIds": [
@@ -47133,8 +46973,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/2542/",
-          "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d"
+          "https://asia.pokemon-card.com/tw/card-search/detail/2542/"
         ],
         "sourceFirstRecordIds": [
           "TW:sc1b F:120/153:base"
@@ -47176,9 +47015,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/7426/",
-          "https://i.ebayimg.com/images/g/NTwAAOSwREVhTZRC/s-l1600.jpg",
-          "https://www.ebay.com/itm/224621405527"
+          "https://asia.pokemon-card.com/tw/card-search/detail/7426/"
         ],
         "sourceFirstRecordIds": [
           "TW:sc1b F:165/153:base"
@@ -47262,9 +47099,7 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/2220/",
-          "https://rocketcoll.com/cdn/shop/files/377909_d908b57a-0f09-4289-9fc6-12657bafc582.png?v=1767886000",
-          "https://rocketcoll.com/products/scd-111-159-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/2220/"
         ],
         "sourceFirstRecordIds": [
           "TW:scD F:111/159:base"
@@ -47494,9 +47329,7 @@
           "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145"
         ],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/9173/",
-          "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965",
-          "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8"
+          "https://asia.pokemon-card.com/tw/card-search/detail/9173/"
         ],
         "sourceFirstRecordIds": [
           "TW:sv4a F:145/190:base"
@@ -64584,6 +64417,28 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:ID:Indonesian:AC3b",
+        "collectorNumber": "238/204",
+        "origin": "issue-258-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:ID:Indonesian:AC3b",
+        "collectorNumber": "239/204",
+        "origin": "issue-258-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -64761,12 +64616,12 @@
     {
       "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
         "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
         "setEditionId": "EDITION:ID:Indonesian:SV2a I",
         "collectorNumber": "181/165",
-        "origin": "reviewed-photo-identities-pr375"
+        "origin": "issue-258-positive-evidence"
       }
     },
     {
@@ -66669,6 +66524,17 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "setEditionId": "EDITION:TW:T-Chinese:AS5a",
         "collectorNumber": "203/184",
+        "origin": "issue-263-positive-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+        "collectorNumber": "204/184",
         "origin": "issue-263-positive-evidence"
       }
     },
@@ -71874,18 +71740,18 @@
     {
       "entityType": "equivalence-assertion",
       "entityId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
+        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
+        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "legacyUnitId": "U0051",
         "sourceFirstRecordId": "ID:SV2a I:181/165:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-08-28",
         "evidenceUrl": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
         "evidence": "The exact Indonesian card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
-        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "destructiveMergeAllowed": false
       }
     },
@@ -73298,16 +73164,16 @@
       "entityId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
       "origin": "reviewed-evidence-issue-263",
       "payload": {
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0602",
         "sourceFirstRecordId": "TW:s5a F:093/070:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-09-09",
         "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
         "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
-        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
-        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "destructiveMergeAllowed": false
       }
     },
@@ -74793,7 +74659,7 @@
           "CLAIM:legacy:U0347"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+          "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore",
           "RELEASE:KR:Korean:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
           "RELEASE:TH:Thai:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
@@ -75213,7 +75079,7 @@
           "CLAIM:legacy:U0405"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
           "RELEASE:JP:Japanese:svM:094:Snorlax-ex-Strength-Toss-and-Turn-Press",
           "RELEASE:KR:Korean:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
@@ -75598,7 +75464,7 @@
           "CLAIM:legacy:U0793"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:KR:Korean:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
@@ -75622,7 +75488,7 @@
           "CLAIM:legacy:U0788"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:KR:Korean:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
@@ -75646,7 +75512,7 @@
           "CLAIM:legacy:U0130"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:JP:Japanese:m2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
           "RELEASE:KR:Korean:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
@@ -76164,7 +76030,7 @@
           "CLAIM:legacy:U0106"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:JP:Japanese:sv2a:143:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:KR:Korean:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -76232,7 +76098,7 @@
           "CLAIM:legacy:U0205"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+          "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
           "RELEASE:JP:Japanese:s10b:056:Snorlax-Block-Collapse",
           "RELEASE:KR:Korean:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
           "RELEASE:TH:Thai:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
@@ -76924,7 +76790,7 @@
           "CLAIM:legacy:U0773"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id"
+          "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch"
         ],
         "reason": "1 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278"
@@ -76940,7 +76806,7 @@
           "CLAIM:legacy:U0687"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id"
+          "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact"
         ],
         "reason": "1 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286"
@@ -76956,7 +76822,7 @@
           "CLAIM:legacy:U0752"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id"
+          "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press"
         ],
         "reason": "1 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117"
@@ -76972,7 +76838,7 @@
           "CLAIM:legacy:U0772"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id"
+          "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press"
         ],
         "reason": "1 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117"
@@ -77192,7 +77058,7 @@
           "CLAIM:legacy:U0309"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:JP:Japanese:sv4a:145:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:KR:Korean:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -77216,7 +77082,7 @@
           "CLAIM:legacy:U0387"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+          "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:JP:Japanese:sv4a:310:Snorlax-Voraciousness-Thudding-Press",
           "RELEASE:KR:Korean:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
           "RELEASE:TH:Thai:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
@@ -77944,7 +77810,7 @@
           "CLAIM:legacy:U0176"
         ],
         "cardReleaseIds": [
-          "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+          "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
           "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
           "RELEASE:KR:Korean:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
           "RELEASE:TH:Thai:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
@@ -78776,6 +78642,21 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-SF-F7CD34FB5724"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:ID:AC3b",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "localSetId": "LOCALSET:ID:AC3b",
+        "locality": "ID",
+        "localCode": "AC3b",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-SF-CFAB8925D821"
         ]
       }
     },
@@ -91239,27 +91120,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0464-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0464-P01",
-        "semanticPrintingId": "PRINTING:911f2d6a777c696daf4e7115",
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0464",
-        "sourcePrintingId": "F0464-P01",
-        "establishingClaimId": "CLAIM:finish:F0464-P01"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:F0466-P01",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -91319,27 +91179,6 @@
         "sourceFinishUnitId": "F0476",
         "sourcePrintingId": "F0476-P01",
         "establishingClaimId": "CLAIM:finish:F0476-P01"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0479-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0479-P01",
-        "semanticPrintingId": "PRINTING:8ab82f55a8864c78f94c8803",
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0479",
-        "sourcePrintingId": "F0479-P01",
-        "establishingClaimId": "CLAIM:finish:F0479-P01"
       }
     },
     {
@@ -93267,48 +93106,6 @@
         "sourceFinishUnitId": "F0603",
         "sourcePrintingId": "F0603-P02",
         "establishingClaimId": "CLAIM:finish:F0603-P02"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0606-P01",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0606-P01",
-        "semanticPrintingId": "PRINTING:8d6285db7199b9b794372a76",
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "finish": "mirror-holo",
-        "edition": null,
-        "foilPattern": "colorless-energy-star",
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0606",
-        "sourcePrintingId": "F0606-P01",
-        "establishingClaimId": "CLAIM:finish:F0606-P01"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:F0606-P02",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:F0606-P02",
-        "semanticPrintingId": "PRINTING:b321da16794682fbd27fa747",
-        "cardReleaseId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-        "finish": "mirror-holo",
-        "edition": null,
-        "foilPattern": "poke-ball",
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0606",
-        "sourcePrintingId": "F0606-P02",
-        "establishingClaimId": "CLAIM:finish:F0606-P02"
       }
     },
     {
@@ -96437,6 +96234,27 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+        "semanticPrintingId": "PRINTING:515bcf8bf56b989a253c74ee",
+        "cardReleaseId": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0464",
+        "sourcePrintingId": "F0464-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:515bcf8bf56b989a253c74ee"
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:52f9e9efc813585389511b28",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97248,6 +97066,27 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+        "semanticPrintingId": "PRINTING:760b4269462960075b2e8546",
+        "cardReleaseId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": "poke-ball",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0606",
+        "sourcePrintingId": "F0606-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546"
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97370,6 +97209,27 @@
         "sourceFinishUnitId": "F0059",
         "sourcePrintingId": "F0059-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:7be48d72c932887c8d4dda51"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
+        "semanticPrintingId": "PRINTING:7c29f4d9750a8aa764278b2c",
+        "cardReleaseId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": "colorless-energy-star",
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0606",
+        "sourcePrintingId": "F0606-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c"
       }
     },
     {
@@ -98139,6 +97999,27 @@
         "sourceFinishUnitId": "F0558",
         "sourcePrintingId": "F0558-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:95b2ca2d15ed5917c056cf6f"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+        "semanticPrintingId": "PRINTING:9705aa24281d28f5eb561ff1",
+        "cardReleaseId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0479",
+        "sourcePrintingId": "F0479-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:9705aa24281d28f5eb561ff1"
       }
     },
     {
@@ -102217,6 +102098,54 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0554",
         "specimenIds": [
           "SPEC-0554"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0556",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0556",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "The retained seller image shows reflective foil across the illustrated face and multiple frame regions. The Indonesian card identity is visible as AC3b C 239/204 SR; rarity is not used to infer the finish.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0556",
+        "specimenIds": [
+          "SPEC-0556"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0557",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0557",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "The retained seller photograph shows reflective foil across the illustrated face and multiple frame regions. The Indonesian card identity is visible as AC3b C 238/204 SR; rarity is not used to infer the finish.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0557",
+        "specimenIds": [
+          "SPEC-0557"
         ]
       }
     },
@@ -110106,6 +110035,36 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue258:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue258:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "sourceRecordId": "SET-SRC-SF-CFAB8925D821",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Indonesian-card-render",
+        "sourceNativeValue": "SR",
+        "normalizedRarityId": null,
+        "sourceProductKey": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue258:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue258:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "sourceRecordId": "SET-SRC-SF-CFAB8925D821",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Indonesian-card-render",
+        "sourceNativeValue": "SR",
+        "normalizedRarityId": null,
+        "sourceProductKey": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue258:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -111343,21 +111302,6 @@
     },
     {
       "entityType": "rarity-claim",
-      "entityId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-      "origin": "reviewed-evidence-issue-262",
-      "payload": {
-        "rarityClaimId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-        "sourceRecordId": "SET-SRC-SF-FF7AA1CC9DD8",
-        "sourceProvider": "mixed-positive-evidence",
-        "sourceVocabulary": "printed-Thai-card",
-        "sourceNativeValue": "R",
-        "normalizedRarityId": "rare",
-        "sourceProductKey": "https://bulbapedia.bulbagarden.net/wiki/AS5a"
-      }
-    },
-    {
-      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue262:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "origin": "reviewed-evidence-issue-262",
       "payload": {
@@ -111789,6 +111733,22 @@
         "sourceNativeValue": "SR",
         "normalizedRarityId": null,
         "sourceProductKey": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue263:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "origin": "reviewed-evidence-issue-263",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue263:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "sourceRecordId": "SET-SRC-SF-D96C620721A4",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Traditional-Chinese-card",
+        "sourceNativeValue": "SR",
+        "normalizedRarityId": null,
+        "sourceProductKey": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "retrievedAt": "2026-09-15"
       }
     },
     {
@@ -115548,6 +115508,42 @@
           "establishingEvidenceIds": [
             "CLAIM:source-first:ID:AC3a:145/205:base",
             "SET-SRC-SF-F7CD34FB5724"
+          ],
+          "localizationId": "LOCALIZATION:ID:id"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:ID:Indonesian:AC3b",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "setEditionId": "EDITION:ID:Indonesian:AC3b",
+        "identity": {
+          "setEditionId": "EDITION:ID:Indonesian:AC3b",
+          "locality": "ID",
+          "language": "Indonesian",
+          "script": "Latn",
+          "localSetCode": "AC3b",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:ID:AC3b:238/204:base",
+            "CLAIM:source-first:ID:AC3b:239/204:base"
+          ],
+          "localizationId": "LOCALIZATION:ID:id"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:ID:Indonesian:AC3b",
+          "localSetId": "LOCALSET:ID:AC3b",
+          "locality": "ID",
+          "language": "Indonesian",
+          "script": "Latn",
+          "localCode": "AC3b",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-CFAB8925D821"
           ],
           "localizationId": "LOCALIZATION:ID:id"
         }
@@ -123220,6 +123216,7 @@
             "CLAIM:source-first:TW:AS5a:117/184:base",
             "CLAIM:source-first:TW:AS5a:142:base",
             "CLAIM:source-first:TW:AS5a:203/184:base",
+            "CLAIM:source-first:TW:AS5a:204/184:base",
             "CLAIM:source-first:TW:AS5a:222/184:base"
           ],
           "localizationId": "LOCALIZATION:TW:zh-Hant"
@@ -140002,12 +139999,12 @@
     {
       "entityType": "set-source-disposition",
       "entityId": "SET-SRC-SF-CB7A879AE0AA",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-CB7A879AE0AA",
         "disposition": "mapped",
         "targetRef": "LOCALSET:ID:SV2a%20I",
-        "reason": "retained exact card identifies its local set"
+        "reason": "positive Indonesian source-first records establish this local set"
       }
     },
     {
@@ -140041,6 +140038,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:TW:sc1a%20F",
         "reason": "positive Traditional Chinese source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-CFAB8925D821",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-CFAB8925D821",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:ID:AC3b",
+        "reason": "positive Indonesian source-first records establish this local set"
       }
     },
     {
@@ -155495,7 +155503,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-SF-CB7A879AE0AA",
-      "origin": "reviewed-photo-identities-pr375",
+      "origin": "reviewed-evidence-issue-258",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-CB7A879AE0AA",
         "sourceKind": "source-first-local-set-profile",
@@ -155686,6 +155694,49 @@
     },
     {
       "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-CFAB8925D821",
+      "origin": "reviewed-evidence-issue-258",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-CFAB8925D821",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "ID\u001fAC3b",
+        "retrieved": "2026-09-15",
+        "raw": {
+          "localCode": "AC3b",
+          "localName": null,
+          "locality": "ID",
+          "languages": [
+            "Indonesian"
+          ],
+          "scripts": [
+            "Latn"
+          ],
+          "printIds": [
+            "ID:AC3b:238/204:base",
+            "ID:AC3b:239/204:base"
+          ],
+          "providers": [
+            "pokemon-card-asia"
+          ],
+          "sourceUrls": [
+            "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf"
+          ],
+          "printedSetSize": 204,
+          "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
+          "localeSuffix": null,
+          "observedCollectorNumbers": [
+            "238/204",
+            "239/204"
+          ],
+          "observedCoverage": "two exact positive card rows manually inspected in the official AC3b archive list; not an enumeration or completeness claim",
+          "markAssetUrls": [],
+          "cardImageUrls": []
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
       "entityId": "SET-SRC-SF-D316955E9507",
       "origin": "reviewed-evidence-issue-260",
       "payload": {
@@ -155843,7 +155894,7 @@
         "sourceKind": "source-first-local-set-profile",
         "provider": "mixed-positive-evidence",
         "providerRecordKey": "TW\u001fAS5a",
-        "retrieved": "2026-08-28",
+        "retrieved": "2026-09-15",
         "raw": {
           "localCode": "AS5a",
           "localName": null,
@@ -155858,6 +155909,7 @@
             "TW:AS5a:117/184:base",
             "TW:AS5a:142:base",
             "TW:AS5a:203/184:base",
+            "TW:AS5a:204/184:base",
             "TW:AS5a:222/184:base"
           ],
           "providers": [
@@ -155865,6 +155917,7 @@
             "pokemon-card-asia"
           ],
           "sourceUrls": [
+            "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
             "https://asia.pokemon-card.com/tw/card-search/detail/2856/",
             "https://asia.pokemon-card.com/tw/card-search/detail/2881/",
             "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
@@ -155876,6 +155929,7 @@
             "117/184",
             "142",
             "203/184",
+            "204/184",
             "222/184"
           ],
           "observedCoverage": "exact positive Traditional Chinese cards reviewed for issue #263, not a set enumeration",
@@ -169554,16 +169608,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0464-P01",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0464-P01",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0466-P01",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -169588,16 +169632,6 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:F0476-P01",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0479-P01",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0479-P01",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -170484,26 +170518,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0606-P01",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0606-P01",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:F0606-P02",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:F0606-P02",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:F0608-P01",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -170840,6 +170854,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:1111abeea6ad6d382addeeae",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:1167a08e6546faf2808f4a49",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -171017,14 +171039,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:1846c61d2c2312f848efc01e",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -171820,14 +171834,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:43ecbb1dc47d70ce26b24850",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:44987d5fe8d7e8c2cc81138b",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -172165,6 +172171,16 @@
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:515bcf8bf56b989a253c74ee",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -172620,6 +172636,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:738180c0a758b29e9afae360",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:739ab468d8be6851b49d1671",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -172671,6 +172695,16 @@
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:sm10:076:Snorlax-Lazy-Eating-Big-Counter",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -172734,6 +172768,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:7be48d72c932887c8d4dda51",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -173114,6 +173158,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:9705aa24281d28f5eb561ff1",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:9727a5b1e6fdff1ecf941a37",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -173161,6 +173215,14 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:9b518136f002c406b55fe7fe",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -173633,14 +173695,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:b33055b568cd7831ada45611",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -174326,6 +174380,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:e2cf9900cbeba92a0ea91a72",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:e30c60f0477bd21d8902a60d",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -174343,14 +174405,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:e4becb23e2ec9e9c7408b9f7",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -174409,14 +174463,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:ea907954191f8fdfe3c3d13b",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -174523,6 +174569,14 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:efe7b9b87b381ac39a48c6bc",
+      "relation": "proposes-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -175797,7 +175851,7 @@
       "fromId": "CLAIM:legacy:U0105",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -176037,7 +176091,7 @@
       "fromId": "CLAIM:legacy:U0129",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -176497,7 +176551,7 @@
       "fromId": "CLAIM:legacy:U0175",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -176777,7 +176831,7 @@
       "fromId": "CLAIM:legacy:U0204",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -177767,7 +177821,7 @@
       "fromId": "CLAIM:legacy:U0308",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -178137,7 +178191,7 @@
       "fromId": "CLAIM:legacy:U0346",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -178507,7 +178561,7 @@
       "fromId": "CLAIM:legacy:U0386",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -178687,7 +178741,7 @@
       "fromId": "CLAIM:legacy:U0404",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -180697,7 +180751,7 @@
       "fromId": "CLAIM:legacy:U0687",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -180717,7 +180771,7 @@
       "fromId": "CLAIM:legacy:U0752",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -180857,7 +180911,7 @@
       "fromId": "CLAIM:legacy:U0772",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -180867,7 +180921,7 @@
       "fromId": "CLAIM:legacy:U0773",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -180967,7 +181021,7 @@
       "fromId": "CLAIM:legacy:U0787",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -181017,7 +181071,7 @@
       "fromId": "CLAIM:legacy:U0792",
       "relation": "materializes",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "toId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -181128,6 +181182,26 @@
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:AC3a:145/205:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:ID:AC3b:238/204:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:ID:AC3b:239/204:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -182418,6 +182492,16 @@
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:TW:AS5a:204/184:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -184963,6 +185047,26 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0556",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0556",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0557",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0557",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -185812,6 +185916,44 @@
     },
     {
       "fromType": "card-release",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:ID:Indonesian:AC3b",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped",
+        "basis": "exact localized attacks and card traits"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:ID:Indonesian:AC3b",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped",
+        "basis": "exact localized attacks and card traits"
+      }
+    },
+    {
+      "fromType": "card-release",
       "fromId": "RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -186138,7 +186280,7 @@
       "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "state": "mapped-by-explicit-equivalence",
-        "basis": "exact printed identity and attacks retained in SPEC-0518"
+        "basis": "exact localized attacks and card traits"
       }
     },
     {
@@ -186443,222 +186585,6 @@
       "provenance": {
         "state": "mapped",
         "basis": "exact localized attacks and card traits"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Spike-Draw-Mega-Punch",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-SV-P/ID:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-But-First-Food-Heavy-Impact",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-m2a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-s10a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-s10b:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Block-Collapse",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-s8b:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Gormandize-Body-Slam",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-sv2a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-sv4a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-sv4a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-svM:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-ex-Strength-Toss-and-Turn-Press",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:ID:Indonesian:via-xm2a:unknown-local-set",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {
-        "state": "mapped"
       }
     },
     {
@@ -189609,6 +189535,25 @@
       "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {
         "state": "mapped-by-explicit-equivalence",
+        "basis": "exact Traditional Chinese printed attacks and card traits"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {
+        "state": "mapped",
         "basis": "exact Traditional Chinese printed attacks and card traits"
       }
     },
@@ -200926,6 +200871,38 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:ID:Indonesian:AC3b",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:ID:Indonesian:AC3b",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
       "fromId": "RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -203962,6 +203939,22 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5a",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {}
     },
     {
@@ -210339,16 +210332,16 @@
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
+        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
+        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "legacyUnitId": "U0051",
         "sourceFirstRecordId": "ID:SV2a I:181/165:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-08-28",
         "evidenceUrl": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
         "evidence": "The exact Indonesian card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
-        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "destructiveMergeAllowed": false
       }
     },
@@ -210359,16 +210352,16 @@
       "toType": "work",
       "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
+        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
+        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "legacyUnitId": "U0051",
         "sourceFirstRecordId": "ID:SV2a I:181/165:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-08-28",
         "evidenceUrl": "https://asia.pokemon-card.com/id/card-search/detail/8760/",
         "evidence": "The exact Indonesian card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0051:ID:SV2a I:181/165:base",
-        "fromId": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-        "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
         "destructiveMergeAllowed": false
       }
     },
@@ -213499,16 +213492,16 @@
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
       "provenance": {
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0602",
         "sourceFirstRecordId": "TW:s5a F:093/070:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-09-09",
         "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
         "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
-        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
-        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "destructiveMergeAllowed": false
       }
     },
@@ -213519,16 +213512,16 @@
       "toType": "work",
       "toId": "WORK:Snorlax-Gormandize-Body-Slam",
       "provenance": {
+        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
+        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "legacyUnitId": "U0602",
         "sourceFirstRecordId": "TW:s5a F:093/070:base",
-        "assertionType": "same-work-decision",
         "assertedBy": "repository verification pass",
         "assertedAt": "2026-09-09",
         "evidenceUrl": "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
         "evidence": "The exact Traditional Chinese card identity and printed attacks establish this local counterpart without merging release identities.",
-        "assertionId": "ASSERT:same-work:U0602:TW:s5a F:093/070:base",
-        "fromId": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
-        "toId": "WORK:Snorlax-Gormandize-Body-Slam",
         "destructiveMergeAllowed": false
       }
     },
@@ -216015,16 +216008,6 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {
         "disposition": "split"
@@ -216605,16 +216588,6 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations-Start-Decks/Snorlax-ex-svM094",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations-Start-Decks/Snorlax-ex-svM094",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:svM:094:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "provenance": {
         "disposition": "split"
@@ -217185,16 +217158,6 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {
         "disposition": "split"
@@ -217205,27 +217168,7 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
       "provenance": {
         "disposition": "split"
       }
@@ -217955,16 +217898,6 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:sv2a:143:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "disposition": "split"
@@ -217996,16 +217929,6 @@
       "relation": "maps-to",
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:CLF:016:Snorlax-Collect-Collapse",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
       "provenance": {
         "disposition": "split"
       }
@@ -219202,46 +219125,6 @@
     },
     {
       "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
-      "provenance": {
-        "disposition": "carried"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
-      "provenance": {
-        "disposition": "carried"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "carried"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "carried"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Simplified-Chinese-Promos/Snorlax-SV-PCS277",
       "relation": "maps-to",
       "toType": "card-release",
@@ -219345,27 +219228,7 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:sv4a:145:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V2-sv4a310",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
       "provenance": {
         "disposition": "split"
       }
@@ -220355,16 +220218,6 @@
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
       "relation": "maps-to",
       "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
-      "relation": "maps-to",
-      "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
       "provenance": {
         "disposition": "split"
@@ -221004,6 +220857,14 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-F7CD34FB5724",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:ID:AC3b",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-CFAB8925D821",
       "provenance": {}
     },
     {
@@ -227952,22 +227813,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0464-P01",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0464-P01",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0464-P01",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:F0466-P01",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -228012,22 +227857,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:sv4a:310:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0479-P01",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0479-P01",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0479-P01",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
       "provenance": {}
     },
     {
@@ -229436,38 +229265,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0606-P01",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0606-P01",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0606-P01",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0606-P02",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:F0606-P02",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:F0606-P02",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
       "provenance": {}
     },
     {
@@ -231520,6 +231317,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:515bcf8bf56b989a253c74ee",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:52f9e9efc813585389511b28",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -232048,6 +231861,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:767f358bf7c9d17f83c68e5e",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -232124,6 +231953,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CS3DC:117:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "provenance": {}
     },
     {
@@ -232620,6 +232465,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:TEU:191:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:9705aa24281d28f5eb561ff1",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {}
     },
     {
@@ -235276,6 +235137,38 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AS5a:117/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0556",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0556",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0556",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0557",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0557",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0557",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {}
     },
     {
@@ -243696,6 +243589,38 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue258:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue258:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-CFAB8925D821",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue258:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue258:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-CFAB8925D821",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue258:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -244960,22 +244885,6 @@
     },
     {
       "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-      "relation": "asserts-rarity-for",
-      "toType": "card-release",
-      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:issue262:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
-      "relation": "observed-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-SF-FF7AA1CC9DD8",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue262:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -245433,6 +245342,22 @@
     {
       "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue263:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-D96C620721A4",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue263:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue263:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-D96C620721A4",
@@ -247989,6 +247914,25 @@
     },
     {
       "fromType": "set-edition",
+      "fromId": "EDITION:ID:Indonesian:AC3b",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:ID:AC3b",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:ID:Indonesian:AC3b",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:ID:id",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
       "fromId": "EDITION:ID:Indonesian:AS1D",
       "relation": "belongs-to",
       "toType": "local-set",
@@ -248191,7 +248135,10 @@
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:ID:id",
-      "provenance": {}
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
     },
     {
       "fromType": "set-edition",
@@ -261676,6 +261623,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-CDBFB934EB83",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-CFAB8925D821",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-CFAB8925D821",
       "provenance": {}
     },
     {
@@ -279493,7 +279448,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0464-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0464-P01",
+      "targetRef": "PHYSICAL:PRINTING:515bcf8bf56b989a253c74ee",
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -279598,7 +279553,7 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0479-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0479-P01",
+      "targetRef": "PHYSICAL:PRINTING:9705aa24281d28f5eb561ff1",
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -280725,14 +280680,14 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0606-P01",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0606-P01",
+      "targetRef": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
       "reason": "finish printing record carries positive evidence"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0606-P02",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0606-P02",
+      "targetRef": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
       "reason": "finish printing record carries positive evidence"
     },
     {
@@ -281344,9 +281299,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Phantasma/Snorlax-V1-s10a058",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+        "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
         "RELEASE:JP:Japanese:s10a:058:Snorlax-Unfazed-Fat-Thumping-Snore",
         "RELEASE:KR:Korean:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
         "RELEASE:TH:Thai:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
@@ -281592,9 +281547,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations-Start-Decks/Snorlax-ex-svM094",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "RELEASE:JP:Japanese:svM:094:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "RELEASE:KR:Korean:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "RELEASE:TH:Thai:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
@@ -281815,9 +281770,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
@@ -281829,9 +281784,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
@@ -281843,9 +281798,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex/Hops-Snorlax-m2a136",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:JP:Japanese:m2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
         "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
@@ -282141,9 +282096,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:JP:Japanese:sv2a:143:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:KR:Korean:sv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:TH:Thai:sv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
@@ -282181,9 +282136,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO-Enhanced-Expansion-Pack/Snorlax-s10b056",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+        "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
         "RELEASE:JP:Japanese:s10b:056:Snorlax-Block-Collapse",
         "RELEASE:KR:Korean:s10b:056/071:Snorlax-Block-Collapse",
         "RELEASE:TH:Thai:s10b:056/071:Snorlax-Block-Collapse",
@@ -282590,9 +282545,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID278",
       "disposition": "carried",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id"
+        "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch"
       ],
       "reason": "1 established language-bearing card release(s)"
     },
@@ -282600,9 +282555,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-SV-PID286",
       "disposition": "carried",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id"
+        "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact"
       ],
       "reason": "1 established language-bearing card release(s)"
     },
@@ -282610,9 +282565,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
       "disposition": "carried",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id"
+        "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press"
       ],
       "reason": "1 established language-bearing card release(s)"
     },
@@ -282620,9 +282575,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
       "disposition": "carried",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id"
+        "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press"
       ],
       "reason": "1 established language-bearing card release(s)"
     },
@@ -282752,9 +282707,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:JP:Japanese:sv4a:145:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:TH:Thai:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
@@ -282766,9 +282721,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V2-sv4a310",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+        "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:JP:Japanese:sv4a:310:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:KR:Korean:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
         "RELEASE:TH:Thai:sv4a:310/190:Snorlax-Voraciousness-Thudding-Press",
@@ -283192,9 +283147,9 @@
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/VMAX-Climax/Snorlax",
       "disposition": "split",
-      "targetRef": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
       "targetRefs": [
-        "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+        "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
         "RELEASE:JP:Japanese:s8b:126:Snorlax-Gormandize-Body-Slam",
         "RELEASE:KR:Korean:s8b:126/184:Snorlax-Gormandize-Body-Slam",
         "RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam",
@@ -286037,7 +285992,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0105",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv2a:unknown-local-set:via-143:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV2a I:143/165:Snorlax-Voraciousness-Thudding-Press",
       "reason": "language names its locality"
     },
     {
@@ -286205,7 +286160,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0129",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-m2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "reason": "language names its locality"
     },
     {
@@ -286527,7 +286482,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0175",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-s8b:unknown-local-set:via-126:Snorlax-Gormandize-Body-Slam:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S8b I:126/184:Snorlax-Gormandize-Body-Slam",
       "reason": "language names its locality"
     },
     {
@@ -286730,7 +286685,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0204",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-s10b:unknown-local-set:via-056:Snorlax-Block-Collapse:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S10b I:056/071:Snorlax-Block-Collapse",
       "reason": "language names its locality"
     },
     {
@@ -287458,7 +287413,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0308",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-145:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
       "reason": "language names its locality"
     },
     {
@@ -287724,7 +287679,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0346",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-s10a:unknown-local-set:via-058:Snorlax-Unfazed-Fat-Thumping-Snore:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
       "reason": "language names its locality"
     },
     {
@@ -288004,7 +287959,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0386",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-sv4a:unknown-local-set:via-310:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV4a I:310/190:Snorlax-Voraciousness-Thudding-Press",
       "reason": "language names its locality"
     },
     {
@@ -288130,7 +288085,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0404",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-svM:unknown-local-set:via-094:Snorlax-ex-Strength-Toss-and-Turn-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "reason": "language names its locality"
     },
     {
@@ -290069,7 +290024,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0687",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-286:Snorlax-But-First-Food-Heavy-Impact:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:286:Snorlax-But-First-Food-Heavy-Impact",
       "reason": "language names its locality"
     },
     {
@@ -290083,7 +290038,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0752",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "reason": "language names its locality"
     },
     {
@@ -290181,14 +290136,14 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0772",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-117:Snorlax-Voraciousness-Thudding-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
       "reason": "language names its locality"
     },
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0773",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-SV-P/ID:unknown-local-set:via-278:Snorlax-Spike-Draw-Mega-Punch:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:SV-P:278:Snorlax-Spike-Draw-Mega-Punch",
       "reason": "language names its locality"
     },
     {
@@ -290286,7 +290241,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0787",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "reason": "language names its locality"
     },
     {
@@ -290321,7 +290276,7 @@
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0792",
       "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:ID:Indonesian:via-xm2a:unknown-local-set:via-136:Hops-Snorlax-Extra-Helpings-Dynamic-Press:unknown-local-id",
+      "targetRef": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
       "reason": "language names its locality"
     },
     {
@@ -293367,7 +293322,7 @@
       "sourceId": "SET-SRC-SF-CB7A879AE0AA",
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:SV2a%20I",
-      "reason": "retained exact card identifies its local set"
+      "reason": "positive Indonesian source-first records establish this local set"
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -293389,6 +293344,13 @@
       "disposition": "mapped",
       "targetRef": "LOCALSET:TW:sc1a%20F",
       "reason": "positive Traditional Chinese source-first records establish this local set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-CFAB8925D821",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:ID:AC3b",
+      "reason": "positive Indonesian source-first records establish this local set"
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -293728,6 +293690,20 @@
     },
     {
       "sourceKind": "source-first-record",
+      "sourceId": "ID:AC3b:238/204:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive exact Indonesian card record and retained image"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "ID:AC3b:239/204:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive exact Indonesian card record and retained image"
+    },
+    {
+      "sourceKind": "source-first-record",
       "sourceId": "ID:AS1D:108/140:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:ID:Indonesian:AS1D:108/140:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
@@ -293864,7 +293840,7 @@
       "sourceId": "ID:SV2a I:181/165:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:ID:Indonesian:SV2a I:181/165:Snorlax-Voraciousness-Thudding-Press",
-      "reason": "retained exact card identity"
+      "reason": "positive exact Indonesian card record and retained image"
     },
     {
       "sourceKind": "source-first-record",
@@ -294627,6 +294603,13 @@
       "sourceId": "TW:AS5a:203/184:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "reason": "positive exact Traditional Chinese card record and retained image"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "TW:AS5a:204/184:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "reason": "positive exact Traditional Chinese card record and retained image"
     },
     {
@@ -296417,39 +296400,39 @@
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0556",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "physical observation has no matching projected printing"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0556",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3b:239/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
     },
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0557",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "physical observation has no matching projected printing"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0557",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AC3b:238/204:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
     }
   ],
   "summary": {
-    "entities": 8190,
-    "edges": 12179,
-    "migrationInputs": 2865,
+    "entities": 8195,
+    "edges": 12170,
+    "migrationInputs": 2869,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 297,
+      "candidate-needs-evidence": 295,
       "carried": 68,
-      "established-and-mapped": 1585,
+      "established-and-mapped": 1590,
       "linked-local-counterpart": 125,
-      "mapped": 347,
+      "mapped": 348,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2048,
-    "cardReleases": 642,
-    "physicalPrintings": 771,
-    "setSourceRecords": 475,
-    "setSourceDispositions": 475,
+    "candidateClaims": 2051,
+    "cardReleases": 633,
+    "physicalPrintings": 773,
+    "setSourceRecords": 476,
+    "setSourceDispositions": 476,
     "localizations": 16
   }
 }
