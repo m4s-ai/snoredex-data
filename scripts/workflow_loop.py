@@ -747,8 +747,9 @@ def _discovery_summary(
     )
 
 
-def _has_incomplete_live_refresh(cycles: list[dict[str, Any]]) -> bool:
-    for cycle in cycles:
+def _incomplete_live_refresh_index(cycles: list[dict[str, Any]]) -> int | None:
+    for index in reversed(range(len(cycles))):
+        cycle = cycles[index]
         commands = cycle["lane"].get("command", [])
         if commands and isinstance(commands[0], str):
             commands = [commands]
@@ -766,8 +767,9 @@ def _has_incomplete_live_refresh(cycles: list[dict[str, Any]]) -> bool:
             and after.get("cardStatus") != "complete"
         )
         if source_incomplete or card_incomplete:
-            return True
-    return False
+            return index
+        return None
+    return None
 
 
 def main() -> int:
@@ -837,6 +839,13 @@ def main() -> int:
             break
         current = after
 
+    incomplete_refresh_index = _incomplete_live_refresh_index(cycle_reports)
+    incomplete_live_refresh = incomplete_refresh_index is not None
+    if incomplete_live_refresh:
+        cycle_reports[incomplete_refresh_index]["lane"].update(
+            status="incomplete", reason="provider run manifest is incomplete",
+        )
+        stop_reason = "incomplete-live-refresh"
     report = {
         "schema": "snoredex-workflow-loop-run",
         "version": "1.0.0",
@@ -851,6 +860,7 @@ def main() -> int:
         "stateAfter": current,
         "cycleCount": len(cycle_reports),
         "stopReason": stop_reason,
+        "liveRefreshIncomplete": incomplete_live_refresh,
         "skippedChecks": skipped,
         "positiveEvidenceRule": manifest["loopContract"]["positiveEvidence"],
         "mergeBoundary": manifest["loopContract"]["mergeBoundary"],
@@ -859,15 +869,14 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    summary_state = "incomplete" if (
-        args.loop == "discovery" and _has_incomplete_live_refresh(cycle_reports)
-    ) else current["state"]
+    summary_state = "incomplete" if incomplete_live_refresh else current["state"]
     candidate_summary = _discovery_summary(
         args.loop, current["progress"], summary_state, stop_reason,
     )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
           f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
-    return 1 if any(c["lane"].get("status") == "failed" for c in cycle_reports) else 0
+    return 1 if any(c["lane"].get("status") in {"failed", "incomplete"}
+                    for c in cycle_reports) else 0
 
 
 if __name__ == "__main__":

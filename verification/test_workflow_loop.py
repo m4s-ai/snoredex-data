@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
 
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
-    _discovery_summary, _has_incomplete_live_refresh,
+    _discovery_summary, _incomplete_live_refresh_index,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
     _records_projection_matches, _read_staging, _source_staging_matches_inputs,
@@ -269,14 +269,14 @@ def main() -> int:
             "scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new",
         ]},
     }]
-    assert _has_incomplete_live_refresh(incomplete_refresh)
-    assert not _has_incomplete_live_refresh([{
+    assert _incomplete_live_refresh_index(incomplete_refresh) == 0
+    assert _incomplete_live_refresh_index([{
         **incomplete_refresh[0],
         "after": {"progress": {
             "sourceLatestAttempt": "source-new", "sourceStatus": "complete",
             "cardLatestAttempt": "card-new", "cardStatus": "complete",
         }},
-    }])
+    }]) is None
     assert "action=retry-incomplete-live-refresh" in _discovery_summary(
         "discovery", incomplete_refresh[0]["after"]["progress"], "incomplete",
     )
