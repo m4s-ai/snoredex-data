@@ -16,16 +16,16 @@
     ],
     "counts": {
       "providers": 33,
-      "surfaces": 57,
-      "coverageEdges": 59,
+      "surfaces": 58,
+      "coverageEdges": 61,
       "absenceEdges": 0,
-      "observations": 63,
+      "observations": 65,
       "resolvedVerdictSources": 1619
     },
     "surfaceStates": {
       "active": 28,
       "blocked-by-browser": 3,
-      "incomplete": 20,
+      "incomplete": 21,
       "internal": 1,
       "needs-evidence": 2,
       "non-url": 2,
@@ -600,6 +600,49 @@
       },
       "coverageEdgeIds": [
         "asia-card-search-positive"
+      ]
+    },
+    {
+      "surfaceId": "asia-archived-card-list-pdf",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Asia archived card list PDFs",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+          "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "incomplete",
+      "failureState": "Only exact manually inspected archived PDF rows are registered; historical list coverage and locale-specific route closure are not established.",
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-15",
+      "freshnessPolicy": "Retain each source PDF retrieval time, hash and exact positive excerpt. Re-inspect the locale route before reuse; never infer from omitted rows.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "Exact official localized archive PDF URLs retained in the positive observations.",
+        "parameters": [
+          "locale archive PDF URL",
+          "printed set and collector number"
+        ],
+        "pagination": "not established; each manually inspected exact excerpt establishes only its named card row",
+        "expectedIdentifiers": [
+          "localized card name",
+          "local set identifier",
+          "collector number",
+          "source-native rarity"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "Archive rows publish printed rarity, not physical finish.",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "asia-id-archive-positive",
+        "asia-tw-archive-positive"
       ]
     },
     {
@@ -2973,6 +3016,102 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "An older known Asian printing outside the returned window prevents zero results from becoming absence."
+      }
+    },
+    {
+      "edgeId": "asia-id-archive-positive",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-archived-card-list-pdf",
+      "coverage": {
+        "localities": [
+          "ID"
+        ],
+        "languages": [
+          "Indonesian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the exact manually retained positive archive rows only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "local-set-identifier",
+        "rarity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An inspected archive row supports only the exact card it names; archive omissions never prove absence."
+      },
+      "knownPositiveObservationId": "obs-asia-id-archive-ac3b",
+      "boundary": {
+        "outsideScope": [
+          "uninspected archive rows",
+          "omitted historical releases",
+          "finish/treatment",
+          "other locality routes"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "These archives provide exact positive rows but no evidence that a list is historically complete."
+      }
+    },
+    {
+      "edgeId": "asia-tw-archive-positive",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-archived-card-list-pdf",
+      "coverage": {
+        "localities": [
+          "TW"
+        ],
+        "languages": [
+          "T-Chinese"
+        ],
+        "scripts": [
+          "Hant"
+        ],
+        "productCategories": [
+          "card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "the exact manually retained positive archive rows only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "language",
+        "card-existence",
+        "local-set-identifier",
+        "rarity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An inspected archive row supports only the exact card it names; archive omissions never prove absence."
+      },
+      "knownPositiveObservationId": "obs-asia-tw-archive-as5a",
+      "boundary": {
+        "outsideScope": [
+          "uninspected archive rows",
+          "omitted historical releases",
+          "finish/treatment",
+          "other locality routes"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "These archives provide exact positive rows but no evidence that a list is historically complete."
       }
     },
     {
@@ -9332,6 +9471,84 @@
             ]
           }
         }
+      }
+    },
+    {
+      "observationId": "obs-asia-id-archive-ac3b",
+      "surfaceId": "asia-archived-card-list-pdf",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+      "queryParameters": {
+        "locale": "id",
+        "archive": "card/pdf",
+        "document": "AC3_setB.pdf"
+      },
+      "retrievedAt": "2026-09-15",
+      "expectedIdentifiers": [
+        "AC3b 238/204 SR",
+        "AC3b 239/204 SR"
+      ],
+      "validatesEdges": [
+        "asia-id-archive-positive"
+      ],
+      "outcome": "Exact AC3b positive rows 238/204 and 239/204 are retained as excerpts from the Indonesian archive PDF.",
+      "rawRecordRef": "verification/source_registry.json:https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+      "rawRecordHash": "sha256:686dc9947acad4e0895b5335ff86830ce47b36bed373519798c173f751e0656a",
+      "rawRecord": {
+        "canonicalUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-card-asia",
+        "sourceTypes": [
+          "Positive source-first card record"
+        ],
+        "dimensions": [
+          "card-existence"
+        ],
+        "stableIdCount": 2,
+        "stableIds": [
+          "ID:AC3b:238/204:base",
+          "ID:AC3b:239/204:base"
+        ],
+        "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-asia-tw-archive-as5a",
+      "surfaceId": "asia-archived-card-list-pdf",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+      "queryParameters": {
+        "locale": "tw",
+        "archive": "card/pdf",
+        "document": "AS5a.pdf"
+      },
+      "retrievedAt": "2026-09-15",
+      "expectedIdentifiers": [
+        "AS5a 204/184 SR"
+      ],
+      "validatesEdges": [
+        "asia-tw-archive-positive"
+      ],
+      "outcome": "Exact Taiwan AS5a 204/184 positive row is retained as an excerpt from the equivalent official Taiwan archive PDF.",
+      "rawRecordRef": "verification/source_registry.json:https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+      "rawRecordHash": "sha256:4bec24f346ae102c384e9aa91fd92e2208def2941647de76015fcf634b4c30cd",
+      "rawRecord": {
+        "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "nonUrlEvidenceId": null,
+        "providerId": "pokemon-card-asia",
+        "sourceTypes": [
+          "Positive source-first card record"
+        ],
+        "dimensions": [
+          "card-existence"
+        ],
+        "stableIdCount": 1,
+        "stableIds": [
+          "TW:AS5a:204/184:base"
+        ],
+        "retrievedAt": "2026-09-15",
+        "usageCount": 1
       }
     }
   ],
@@ -17063,9 +17280,10 @@
     {
       "sourceKey": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
       "providerId": "pokemon-card-asia",
-      "surfaceId": "asia-card-search",
+      "surfaceId": "asia-archived-card-list-pdf",
       "capabilityEdgeIds": [
-        "asia-card-search-positive"
+        "asia-id-archive-positive",
+        "asia-tw-archive-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18506,9 +18724,10 @@
     {
       "sourceKey": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
       "providerId": "pokemon-card-asia",
-      "surfaceId": "asia-card-search",
+      "surfaceId": "asia-archived-card-list-pdf",
       "capabilityEdgeIds": [
-        "asia-card-search-positive"
+        "asia-id-archive-positive",
+        "asia-tw-archive-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
