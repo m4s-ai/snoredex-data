@@ -21,7 +21,7 @@ from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
-    _staging_records_match, _stale_discovery_run,
+    _records_projection_matches, _stale_discovery_run, _stale_source_run,
     latest_manifests,
 )
 
@@ -66,14 +66,28 @@ def main() -> int:
         records_projection = {
             "recordsHash": "sha256:" + hashlib.sha256(records_bytes).hexdigest(),
         }
-        assert _staging_records_match(records_projection, records_path)
+        assert _records_projection_matches(records_projection, records_path)
         records_path.write_bytes(b'{"recordId":"record-2"}\n')
-        assert not _staging_records_match(records_projection, records_path)
+        assert not _records_projection_matches(records_projection, records_path)
         assert _stale_discovery_run("discovery", {
-            "progress": {"stagingMatchesCanonicalInputs": False, "cardRun": "run-1"},
-        }) == "run-1"
+            "progress": {
+                "stagingMatchesCanonicalInputs": False,
+                "cardRun": "older-canonical-run",
+                "cardReplayRun": "newest-acquisition-run",
+            },
+        }) == "newest-acquisition-run"
+        assert _stale_source_run("discovery", {
+            "progress": {
+                "sourceRecordsCurrent": False,
+                "sourceRun": "canonical-source-run",
+                "sourceReplayRun": "newest-source-acquisition-run",
+            },
+        }) == "newest-source-acquisition-run"
+        assert _stale_source_run("discovery", {
+            "progress": {"sourceRecordsCurrent": True},
+        }) is None
         records_path.unlink()
-        assert not _staging_records_match(records_projection, records_path)
+        assert not _records_projection_matches(records_projection, records_path)
     expected_summary = {"meta": {"cardDiscoveryRun": "run-1"}}
     expected_text = json.dumps(expected_summary, ensure_ascii=False, indent=2) + "\n"
     assert _completeness_matches_inputs({}, [], expected_text, expected_summary)
@@ -131,6 +145,17 @@ def main() -> int:
     assert replay_commands[1] == ["scripts/completeness_gate.py"]
     assert replay_commands[2][:2] == ["scripts/discovery_cycle.py", "--refresh"]
     assert replay_commands[2][-1] > replay_commands[0][-1]
+    both_replay_commands = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True,
+        "card-acquisition-run", False, now,
+        source_replay_from_run="source-acquisition-run",
+    )
+    assert [command[0] for command in both_replay_commands] == [
+        "scripts/source_adapters.py", "scripts/card_discovery.py",
+        "scripts/completeness_gate.py", "scripts/discovery_cycle.py",
+    ]
+    replay_ids = [both_replay_commands[index][-1] for index in (0, 1, 3)]
+    assert replay_ids == sorted(replay_ids) and len(set(replay_ids)) == 3
     stale_completeness_live = _cycle_commands(
         "discovery", "source-discovery", "cycle", True, None, False, now,
     )

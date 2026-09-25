@@ -27,6 +27,8 @@ if str(ROOT / "scripts") not in sys.path:
 MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 EVIDENCE = ROOT / "verification" / "evidence_semantics.json"
 SOURCE_ADAPTERS = ROOT / "verification" / "source_adapters.json"
+SOURCE_STAGING = ROOT / "verification" / "source_adapter_staging.json"
+SOURCE_RECORDS = ROOT / "verification" / "source_adapter_records.jsonl"
 CARD_ADAPTERS = ROOT / "verification" / "card_discovery_adapters.json"
 CARD_STAGING = ROOT / "verification" / "card_discovery_staging.json"
 CARD_RECORDS = ROOT / "verification" / "card_discovery_records.jsonl"
@@ -107,10 +109,10 @@ def _staging_matches_inputs(
     )
 
 
-def _staging_records_match(
-    staging: dict[str, Any], records_path: pathlib.Path = CARD_RECORDS,
+def _records_projection_matches(
+    staging: dict[str, Any], records_path: pathlib.Path,
 ) -> bool:
-    """A current staging summary is stale if its generated records projection is not intact."""
+    """A staging summary is stale if its generated records projection is not intact."""
     expected_hash = staging.get("recordsHash")
     if not isinstance(expected_hash, str):
         return False
@@ -119,6 +121,29 @@ def _staging_records_match(
     except OSError:
         return False
     return actual_hash == expected_hash
+
+
+def _source_replay_state() -> tuple[bool, str | None]:
+    try:
+        from scripts import source_adapters as adapter
+    except ImportError:  # direct execution from scripts/
+        import source_adapters as adapter  # type: ignore[no-redef]
+    try:
+        current = _records_projection_matches(read_json(SOURCE_STAGING), SOURCE_RECORDS)
+    except (OSError, KeyError, TypeError, ValueError):
+        current = False
+    if current:
+        return True, None
+    contract, _capability = adapter.load_inputs()
+    return False, adapter.newest_acquisition_compatible_complete_run(contract)
+
+
+def _card_replay_source(
+    adapter: Any, contract: dict[str, Any], staging_is_current: bool,
+) -> str | None:
+    return None if staging_is_current else adapter.newest_acquisition_compatible_complete_run(
+        contract
+    )
 
 
 def _completeness_matches_inputs(inputs: dict[str, Any], errors: list[str],
@@ -222,7 +247,9 @@ def _discovery_progress(
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     failures: int, blocked: int, needs_source: int, total_gaps: int,
     new_candidates: int, staged_candidates: int, staging_run: str | None,
-    staging_is_current: bool, completeness_is_current: bool,
+    staging_is_current: bool, source_records_current: bool,
+    source_replay_run: str | None, card_replay_run: str | None,
+    completeness_is_current: bool,
 ) -> dict[str, Any]:
     latest_source = next(iter(source), {})
     latest_cards = next(iter(cards), {})
@@ -245,6 +272,9 @@ def _discovery_progress(
         "stagingCandidateRecords": staged_candidates,
         "stagingRun": staging_run,
         "stagingMatchesCanonicalInputs": staging_is_current,
+        "sourceRecordsCurrent": source_records_current,
+        "sourceReplayRun": source_replay_run,
+        "cardReplayRun": card_replay_run,
         "completenessMatchesInputs": completeness_is_current,
     }
 
@@ -263,6 +293,7 @@ def discovery_state() -> dict[str, Any]:
     except ImportError:  # direct execution from scripts/
         import card_discovery as adapter  # type: ignore[no-redef]
     contract, capability, identity = adapter.load_inputs()
+    source_records_current, source_replay_run = _source_replay_state()
     staging_document = read_json(CARD_STAGING)
     staging_meta = staging_document.get("meta", {})
     staging_run = staging_meta.get("generatedFromRun")
@@ -271,7 +302,8 @@ def discovery_state() -> dict[str, Any]:
         adapter.content_hash(contract),
         adapter.capability_pin(capability, adapter.manifest_surfaces(card_canonical or {})),
         identity.get("authoritativeGraphHash", adapter.content_hash(identity)),
-    ) and _staging_records_match(staging_document)
+    ) and _records_projection_matches(staging_document, CARD_RECORDS)
+    card_replay_run = _card_replay_source(adapter, contract, staging_is_current)
     staged_candidates = staging_meta.get("counts", {}).get("newCandidate", 0)
     new_candidates = staged_candidates if staging_is_current else 0
     completeness_is_current = _completeness_is_current()
@@ -285,6 +317,7 @@ def discovery_state() -> dict[str, Any]:
             source, cards, source_canonical, card_canonical,
             failures, blocked, needs_source, len(gaps), new_candidates,
             staged_candidates, staging_run, staging_is_current,
+            source_records_current, source_replay_run, card_replay_run,
             completeness_is_current,
         ),
     }
@@ -435,23 +468,48 @@ def _retained_discovery_run_ids() -> tuple[set[str], set[str]]:
     return retained(SOURCE_RUNS), retained(CARD_RUNS)
 
 
-def _discovery_replay_command(source_run_id: str, now: dt.datetime | None = None) -> list[str]:
+def _discovery_replay_command(
+    source_run_id: str, now: dt.datetime | None = None,
+    reserved_run_ids: set[str] | None = None,
+) -> list[str]:
     source_runs, card_runs = _retained_discovery_run_ids()
     replay_id = _next_discovery_run_id(
-        now or dt.datetime.now(dt.timezone.utc), source_runs, card_runs
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
     )
     return ["scripts/card_discovery.py", "--replay-from-run", source_run_id, "--run-id", replay_id]
 
 
+def _source_adapter_replay_command(
+    source_run_id: str, now: dt.datetime | None = None,
+    reserved_run_ids: set[str] | None = None,
+) -> list[str]:
+    source_runs, card_runs = _retained_discovery_run_ids()
+    replay_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
+    )
+    return ["scripts/source_adapters.py", "--replay-from-run", source_run_id,
+            "--run-id", replay_id]
+
+
 def _discovery_replay_commands(
-    source_run_id: str, now: dt.datetime | None = None, include_live: bool = False,
+    card_source_run: str | None, now: dt.datetime | None = None,
+    include_live: bool = False, source_adapter_run: str | None = None,
 ) -> list[list[str]]:
-    commands = [
-        _discovery_replay_command(source_run_id, now),
-        ["scripts/completeness_gate.py"],
-    ]
+    commands = []
+    reserved: set[str] = set()
+    if source_adapter_run:
+        source_command = _source_adapter_replay_command(source_adapter_run, now, reserved)
+        commands.append(source_command)
+        reserved.add(source_command[-1])
+    if card_source_run:
+        card_command = _discovery_replay_command(card_source_run, now, reserved)
+        commands.append(card_command)
+        reserved.add(card_command[-1])
+    commands.append(["scripts/completeness_gate.py"])
     if include_live:
-        commands.append(_discovery_refresh_command(now, {commands[0][-1]}))
+        commands.append(_discovery_refresh_command(now, reserved))
     return commands
 
 
@@ -470,7 +528,14 @@ def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
     progress = current["progress"]
     if loop_id != "discovery" or progress.get("stagingMatchesCanonicalInputs"):
         return None
-    return progress.get("cardRun")
+    return progress.get("cardReplayRun")
+
+
+def _stale_source_run(loop_id: str, current: dict[str, Any]) -> str | None:
+    progress = current["progress"]
+    if loop_id != "discovery" or progress.get("sourceRecordsCurrent", True):
+        return None
+    return progress.get("sourceReplayRun")
 
 
 def _discovery_cycle_stop_reason(
@@ -482,6 +547,12 @@ def _discovery_cycle_stop_reason(
     if after["progress"] == current["progress"]:
         return "no-metric-change"
     return None
+
+
+def _has_discovery_replay(
+    loop_id: str, card_run: str | None, source_run: str | None,
+) -> bool:
+    return loop_id == "discovery" and bool(card_run or source_run)
 
 
 def _should_skip_terminal_state(
@@ -498,12 +569,14 @@ def run_cycle(
     loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
     replay_from_run: str | None = None,
     completeness_is_current: bool = True,
+    source_replay_from_run: str | None = None,
 ) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
     return _run_command_sequence(
         _cycle_commands(
-            loop_id, lane, cycle_id, include_live, replay_from_run, completeness_is_current,
+            loop_id, lane, cycle_id, include_live, replay_from_run,
+            completeness_is_current, source_replay_from_run=source_replay_from_run,
         )
     )
 
@@ -511,10 +584,12 @@ def run_cycle(
 def _cycle_commands(
     loop_id: str, lane: str, cycle_id: str, include_live: bool,
     replay_from_run: str | None, completeness_is_current: bool = True,
-    now: dt.datetime | None = None,
+    now: dt.datetime | None = None, source_replay_from_run: str | None = None,
 ) -> list[list[str]]:
-    if loop_id == "discovery" and replay_from_run:
-        return _discovery_replay_commands(replay_from_run, now, include_live)
+    if _has_discovery_replay(loop_id, replay_from_run, source_replay_from_run):
+        return _discovery_replay_commands(
+            replay_from_run, now, include_live, source_replay_from_run,
+        )
     elif loop_id == "discovery" and not completeness_is_current:
         if include_live:
             # The full refresh rebuilds staging and runs the completeness gate itself.
@@ -597,11 +672,13 @@ def main() -> int:
             break
         cycle_id = f"{run_id}-c{number}"
         replay_from_run = _stale_discovery_run(args.loop, current)
+        source_replay_from_run = _stale_source_run(args.loop, current)
         completeness_is_current = current["progress"].get("completenessMatchesInputs", True)
         result = run_cycle(
             args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
             replay_from_run=replay_from_run,
             completeness_is_current=completeness_is_current,
+            source_replay_from_run=source_replay_from_run,
         )
         if result["status"] == "not-run":
             skipped.append(result["reason"])
