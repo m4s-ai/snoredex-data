@@ -269,7 +269,7 @@ def main() -> int:
     assert "review=verification/runs/source-adapters,verification/runs/card-discovery" in failed_refresh_summary
     failed_decision = _discovery_decision({}, "terminal", "lane-failed")
     assert failed_decision == {
-        "state": "failed", "action": "inspect-failed-discovery-run",
+        "state": "terminal", "action": "inspect-failed-discovery-run",
         "review": "verification/runs/source-adapters,verification/runs/card-discovery",
         "result": "failed",
     }
@@ -297,12 +297,13 @@ def main() -> int:
         }},
     }]) is None
     assert "action=retry-incomplete-live-refresh" in _discovery_summary(
-        "discovery", incomplete_refresh[0]["after"]["progress"], "incomplete",
+        "discovery", incomplete_refresh[0]["after"]["progress"],
+        "terminal", "incomplete-live-refresh",
     )
     incomplete_decision = _discovery_decision(
         incomplete_refresh[0]["after"]["progress"], "terminal", "incomplete-live-refresh",
     )
-    assert incomplete_decision["state"] == "incomplete"
+    assert incomplete_decision["state"] == "terminal"
     assert incomplete_decision["action"] == "retry-incomplete-live-refresh"
     assert incomplete_decision["result"] == "incomplete"
     incomplete_refresh[0]["lane"]["executedCommands"] = incomplete_refresh[0]["lane"]["command"]

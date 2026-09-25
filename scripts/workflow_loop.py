@@ -712,27 +712,29 @@ def _discovery_decision(
     progress: dict[str, Any], state: str, stop_reason: str | None = None,
 ) -> dict[str, Any]:
     """Resolve discovery state and operator guidance once for reports and console output."""
-    state = {"lane-failed": "failed", "incomplete-live-refresh": "incomplete"}.get(
-        stop_reason, state,
+    result = {"lane-failed": "failed", "incomplete-live-refresh": "incomplete"}.get(
+        stop_reason, "passed",
     )
     run_files = "verification/runs/source-adapters,verification/runs/card-discovery"
     adapter_files = "verification/source_adapters.json,verification/card_discovery_adapters.json"
-    fixed = {
+    operational = {
         "failed": ("inspect-failed-discovery-run", run_files),
         "incomplete": ("retry-incomplete-live-refresh", run_files),
+    }
+    fixed = {
         "terminal": ("complete", "none"),
     }
     stale_action = _stale_discovery_action(progress)
     action, review = fixed.get(
         state, (stale_action, _stale_review_files(progress)),
     )
+    action, review = operational.get(result, (action, review))
     gap_decisions = {
         "needs-source": ("find-positive-source-for-open-gaps", adapter_files),
         "blocked-by-source": ("add-positive-source-coverage", adapter_files),
     }
-    if state in gap_decisions and stale_action != "live-acquisition-required":
+    if result == "passed" and state in gap_decisions and stale_action != "live-acquisition-required":
         action, review = gap_decisions[state]
-    result = {"failed": "failed", "incomplete": "incomplete"}.get(state, "passed")
     return {"state": state, "action": action, "review": review, "result": result}
 
 
@@ -755,6 +757,7 @@ def _discovery_summary(loop_id: str, progress: dict[str, Any],
         f" newCandidates={progress.get('newCandidateRecords', 0)}"
         f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
         f" stagingCurrent={progress.get('stagingMatchesCanonicalInputs')}"
+        f" result={decision['result']}"
         f" action={decision['action']}"
         f" review={decision['review']}"
     )
@@ -870,7 +873,6 @@ def main() -> int:
     decision = None
     if args.loop == "discovery":
         decision = _discovery_decision(current["progress"], current["state"], stop_reason)
-        current = {**current, "state": decision["state"]}
     report = {
         "schema": "snoredex-workflow-loop-run",
         "version": "1.0.0",
