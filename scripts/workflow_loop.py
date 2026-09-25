@@ -705,7 +705,7 @@ def _stale_discovery_action(progress: dict[str, Any]) -> str:
         return "reproject-source-staging"
     if staging_stale:
         return "reproject-staging"
-    return "reconcile-to-release-or-record-open-decision"
+    return "inspect-discovery-staging"
 
 
 def _discovery_decision(
@@ -723,6 +723,10 @@ def _discovery_decision(
     }
     fixed = {
         "terminal": ("complete", "none"),
+        "needs-reconciliation": (
+            "reconcile-by-reviewed-mapping-or-positive-exclusion",
+            "verification/card_discovery_staging.json,verification/card_discovery_records.jsonl",
+        ),
     }
     stale_action = _stale_discovery_action(progress)
     action, review = fixed.get(

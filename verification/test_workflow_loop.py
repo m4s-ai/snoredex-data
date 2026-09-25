@@ -258,6 +258,12 @@ def main() -> int:
     assert terminal_decision == {
         "state": "terminal", "action": "complete", "review": "none", "result": "passed",
     }
+    assert _discovery_decision({}, "needs-reconciliation") == {
+        "state": "needs-reconciliation",
+        "action": "reconcile-by-reviewed-mapping-or-positive-exclusion",
+        "review": "verification/card_discovery_staging.json,verification/card_discovery_records.jsonl",
+        "result": "passed",
+    }
     assert "action=complete review=none" in _discovery_summary(
         "discovery", {}, decision=terminal_decision,
     )
