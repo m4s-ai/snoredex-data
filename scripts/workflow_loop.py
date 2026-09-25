@@ -51,6 +51,15 @@ def read_json(path: pathlib.Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _read_staging(path: pathlib.Path) -> dict[str, Any]:
+    """Missing or malformed staging is stale work, not a state-evaluation failure."""
+    try:
+        document = read_json(path)
+    except (OSError, TypeError, ValueError):
+        return {}
+    return document if isinstance(document, dict) else {}
+
+
 def latest_manifests(directory: pathlib.Path) -> list[dict[str, Any]]:
     paths = []
     for path in directory.glob("*/manifest.json"):
@@ -123,18 +132,39 @@ def _records_projection_matches(
     return actual_hash == expected_hash
 
 
-def _source_replay_state() -> tuple[bool, str | None]:
+def _source_staging_matches_inputs(
+    staging: dict[str, Any], records_path: pathlib.Path,
+    source_canonical: dict[str, Any] | None,
+    contract_hash: str, capability_graph_hash: str,
+) -> bool:
+    """Source staging is current only for its canonical run, inputs, and records bytes."""
+    meta = staging.get("meta", {})
+    if not isinstance(meta, dict):
+        return False
+    return bool(
+        source_canonical
+        and meta.get("generatedFromRun") == source_canonical.get("runId")
+        and meta.get("contractHash") == contract_hash
+        and meta.get("capabilityGraphHash") == capability_graph_hash
+        and _records_projection_matches(staging, records_path)
+    )
+
+
+def _source_replay_state(
+    source_canonical: dict[str, Any] | None,
+) -> tuple[bool, str | None]:
     try:
         from scripts import source_adapters as adapter
     except ImportError:  # direct execution from scripts/
         import source_adapters as adapter  # type: ignore[no-redef]
-    try:
-        current = _records_projection_matches(read_json(SOURCE_STAGING), SOURCE_RECORDS)
-    except (OSError, KeyError, TypeError, ValueError):
-        current = False
+    contract, capability = adapter.load_inputs()
+    current = _source_staging_matches_inputs(
+        _read_staging(SOURCE_STAGING), SOURCE_RECORDS, source_canonical,
+        adapter.content_hash(contract),
+        adapter.capability_pin(capability, adapter.manifest_surfaces(source_canonical or {})),
+    )
     if current:
         return True, None
-    contract, _capability = adapter.load_inputs()
     return False, adapter.newest_acquisition_compatible_complete_run(contract)
 
 
@@ -293,9 +323,11 @@ def discovery_state() -> dict[str, Any]:
     except ImportError:  # direct execution from scripts/
         import card_discovery as adapter  # type: ignore[no-redef]
     contract, capability, identity = adapter.load_inputs()
-    source_records_current, source_replay_run = _source_replay_state()
-    staging_document = read_json(CARD_STAGING)
+    source_records_current, source_replay_run = _source_replay_state(source_canonical)
+    staging_document = _read_staging(CARD_STAGING)
     staging_meta = staging_document.get("meta", {})
+    if not isinstance(staging_meta, dict):
+        staging_meta = {}
     staging_run = staging_meta.get("generatedFromRun")
     staging_is_current = _staging_matches_inputs(
         staging_meta, card_canonical,
@@ -304,7 +336,8 @@ def discovery_state() -> dict[str, Any]:
         identity.get("authoritativeGraphHash", adapter.content_hash(identity)),
     ) and _records_projection_matches(staging_document, CARD_RECORDS)
     card_replay_run = _card_replay_source(adapter, contract, staging_is_current)
-    staged_candidates = staging_meta.get("counts", {}).get("newCandidate", 0)
+    counts = staging_meta.get("counts", {})
+    staged_candidates = counts.get("newCandidate", 0) if isinstance(counts, dict) else 0
     new_candidates = staged_candidates if staging_is_current else 0
     completeness_is_current = _completeness_is_current()
     return {

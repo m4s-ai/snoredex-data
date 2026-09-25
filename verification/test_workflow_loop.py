@@ -21,7 +21,8 @@ from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
-    _records_projection_matches, _stale_discovery_run, _stale_source_run,
+    _records_projection_matches, _read_staging, _source_staging_matches_inputs,
+    _stale_discovery_run, _stale_source_run,
     latest_manifests,
 )
 
@@ -63,10 +64,43 @@ def main() -> int:
         records_path = Path(raw_records) / "records.jsonl"
         records_bytes = b'{"recordId":"record-1"}\n'
         records_path.write_bytes(records_bytes)
+        records_hash = "sha256:" + hashlib.sha256(records_bytes).hexdigest()
         records_projection = {
-            "recordsHash": "sha256:" + hashlib.sha256(records_bytes).hexdigest(),
+            "recordsHash": records_hash,
         }
         assert _records_projection_matches(records_projection, records_path)
+        source_canonical = {"runId": "source-run-1"}
+        source_staging = {
+            "meta": {
+                "generatedFromRun": "source-run-1",
+                "contractHash": "source-contract-1",
+                "capabilityGraphHash": "source-capability-1",
+            },
+            "recordsHash": records_hash,
+        }
+        assert _source_staging_matches_inputs(
+            source_staging, records_path, source_canonical,
+            "source-contract-1", "source-capability-1",
+        )
+        for field, value in (
+            ("generatedFromRun", "older-run"),
+            ("contractHash", "changed-contract"),
+            ("capabilityGraphHash", "changed-capabilities"),
+        ):
+            stale_staging = {
+                **source_staging,
+                "meta": {**source_staging["meta"], field: value},
+            }
+            assert not _source_staging_matches_inputs(
+                stale_staging, records_path, source_canonical,
+                "source-contract-1", "source-capability-1",
+            )
+        missing_staging_path = Path(raw_records) / "missing-staging.json"
+        assert _read_staging(missing_staging_path) == {}
+        missing_staging_path.write_text("{truncated", encoding="utf-8")
+        assert _read_staging(missing_staging_path) == {}
+        missing_staging_path.write_text("[]", encoding="utf-8")
+        assert _read_staging(missing_staging_path) == {}
         records_path.write_bytes(b'{"recordId":"record-2"}\n')
         assert not _records_projection_matches(records_projection, records_path)
         assert _stale_discovery_run("discovery", {
