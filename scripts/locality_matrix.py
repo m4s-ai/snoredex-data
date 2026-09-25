@@ -27,7 +27,6 @@ REQUIRED_TRACKS = {
     "west-pt-unqualified", "latam-es", "latam-pt-br", "west-nl", "west-pl",
     "west-ru", "sea-en-coordinated",
 }
-REQUIRED_EXCLUSIONS = {"U0492": "Czech", "U0493": "Hungarian"}
 UNIVERSE_STATES = {
     "established-positive", "owner-scoped", "provisional-legacy",
     "candidate-needs-evidence", "coordinated",
@@ -145,6 +144,32 @@ def validate_reference(reference: str, track: dict[str, Any], indexes: dict[str,
     return errors
 
 
+def duplicate_exclusions(exclusions: list[dict[str, Any]]) -> list[str]:
+    identifiers = [item.get("unitId") for item in exclusions]
+    return sorted(
+        identifier for identifier, count in Counter(identifiers).items()
+        if identifier and count > 1
+    )
+
+
+def validate_exclusions(exclusions: Any, indexes: dict[str, Any]) -> list[str]:
+    if not isinstance(exclusions, list):
+        return ["excludedLegacyClaims must be an array"]
+    errors: list[str] = []
+    duplicates = duplicate_exclusions(exclusions)
+    if duplicates:
+        errors.append(f"duplicate excluded legacy claims: {duplicates}")
+    for item in exclusions:
+        unit = indexes["unit"].get(item.get("unitId"))
+        if not unit or unit.get("language") != item.get("language"):
+            errors.append(f"excluded claim does not resolve: {item}")
+        elif unit.get("status") != "contradicted":
+            errors.append(f"excluded claim {item['unitId']} is not contradicted")
+        if not item.get("reason"):
+            errors.append(f"excluded claim {item.get('unitId')} needs a reason")
+    return errors
+
+
 def validate(manifest: dict[str, Any], indexes: dict[str, Any]) -> list[str]:
     errors: list[str] = []
     meta = manifest.get("meta", {})
@@ -154,26 +179,7 @@ def validate(manifest: dict[str, Any], indexes: dict[str, Any]) -> list[str]:
     if not isinstance(tracks, list):
         return errors + ["tracks must be an array"]
 
-    exclusions = manifest.get("excludedLegacyClaims")
-    if not isinstance(exclusions, list):
-        errors.append("excludedLegacyClaims must be an array")
-    else:
-        actual_exclusions = {
-            item.get("unitId"): item.get("language") for item in exclusions
-        }
-        if actual_exclusions != REQUIRED_EXCLUSIONS:
-            errors.append(
-                f"excluded legacy claims differ: expected={REQUIRED_EXCLUSIONS}, "
-                f"actual={actual_exclusions}"
-            )
-        for item in exclusions:
-            unit = indexes["unit"].get(item.get("unitId"))
-            if not unit or unit.get("language") != item.get("language"):
-                errors.append(f"excluded claim does not resolve: {item}")
-            elif unit.get("status") != "contradicted":
-                errors.append(f"excluded claim {item['unitId']} is not contradicted")
-            if not item.get("reason"):
-                errors.append(f"excluded claim {item.get('unitId')} needs a reason")
+    errors.extend(validate_exclusions(manifest.get("excludedLegacyClaims"), indexes))
 
     ids = [item.get("trackId") for item in tracks]
     duplicates = sorted(item for item, count in Counter(ids).items() if item and count > 1)

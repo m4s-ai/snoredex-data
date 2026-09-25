@@ -40,6 +40,7 @@ COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
 CATALOGUE_PATH = ROOT / "collector_catalogue.json"
 SCHEMA_PATH = ROOT / "collector_catalogue.schema.json"
 MIGRATIONS_PATH = ROOT / "collector_migrations.json"
+MIGRATION_ROUTES_PATH = ROOT / "verification" / "collector_migration_routes.json"
 FIXTURE_PATH = ROOT / "collector_catalogue.fixture.json"
 
 SCHEMA_NAME = "snoredex-collector-catalogue"
@@ -88,24 +89,28 @@ WORK_MAPPING_STATES = {
 WORK_REQUIRED_STATES = {"mapped", "mapped-by-explicit-equivalence"}
 WORK_EMPTY_STATES = {"needs-explicit-equivalence", "unmapped"}
 IMAGE_SCOPE_RANK = {"unknown": 0, "legacy-product": 1, "card-release": 2, "exact-printing": 3}
+_migration_routes = json.loads(MIGRATION_ROUTES_PATH.read_text(encoding="utf-8"))
+if _migration_routes.get("meta", {}).get("schema") != "snoredex-collector-migration-routes":
+    raise ValueError(f"invalid collector migration routes: {MIGRATION_ROUTES_PATH}")
 CUMULATIVE_CHECKLIST_REKEYS = {
-    "ju-11-dutch-1e-unresolved-unknown": "ju-11-dutch-1e-holo-edition-stamp-editie-1",
-    "ju-11-dutch-unl-unresolved-unknown": "ju-11-dutch-unl-holo",
-    "ju-27-dutch-1e-unresolved-unknown": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1",
-    "ju-27-dutch-unl-unresolved-unknown": "ju-27-dutch-unl-non-holo",
+    row["from"]: row["to"] for row in _migration_routes["cumulativeChecklistRekeys"]
 }
 REVIEWED_CARD_RELEASE_REKEYS = {
-    "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id":
-        "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam",
-    "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037":
-        "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up",
+    row["from"]: row["to"] for row in _migration_routes["cardReleaseRekeys"]
 }
 REVIEWED_ITEM_SPLITS = {
-    "item-ba258f3e-4106-5795-87f4-97d9c19a3e42": (
-        "sv-p-cs-277-s-chinese-none-mirror-holo-master-ball",
-        "sv-p-cs-277-s-chinese-none-mirror-holo-poke-ball",
-    ),
+    row["fromItemId"]: tuple(row["toLegacyChecklistIds"])
+    for row in _migration_routes["itemSplits"]
 }
+for _field, _rows in (
+    ("cumulativeChecklistRekeys", _migration_routes["cumulativeChecklistRekeys"]),
+    ("cardReleaseRekeys", _migration_routes["cardReleaseRekeys"]),
+    ("itemSplits", _migration_routes["itemSplits"]),
+):
+    _keys = [row["from"] if "from" in row else row["fromItemId"] for row in _rows]
+    if len(_keys) != len(set(_keys)) or any(not row.get("reason") for row in _rows):
+        raise ValueError(f"invalid or duplicate reviewed route in {_field}")
+del _migration_routes, _field, _rows, _keys
 
 
 class ContractError(ValueError):

@@ -93,6 +93,7 @@
     {"id": "card-discovery", "command": ["verification/test_card_discovery.py"], "primaryOwner": "card-discovery-contract", "boundary": "import", "gateLevel": "L1", "fixtures": ["card-discovery-inline"]},
     {"id": "metric-polarity", "command": ["verification/test_metric_polarity.py"], "primaryOwner": "metric-polarity", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "asia-locality", "command": ["verification/test_asia_locality_matrix.py"], "primaryOwner": "asia-locality", "boundary": "projection", "gateLevel": "L2", "fixtures": []},
+    {"id": "locality-matrix", "command": ["verification/test_locality_matrix.py"], "primaryOwner": "locality-matrix", "boundary": "projection", "gateLevel": "L2", "fixtures": []},
     {"id": "authoritative-graph", "command": ["verification/test_authoritative_graph.py"], "primaryOwner": "authoritative-graph", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph"]},
     {"id": "physical-evidence", "command": ["verification/test_physical_evidence_workflow.py"], "primaryOwner": "physical-evidence", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph", "physical-specimens"]},
     {"id": "attachment-import", "command": ["verification/test_fetch_attachment.py"], "primaryOwner": "attachment-import", "boundary": "import", "gateLevel": "L0", "fixtures": ["authoritative-graph", "physical-specimens"]},
