@@ -236,6 +236,13 @@ def main() -> int:
         "stagingMatchesCanonicalInputs": False, "cardReplayRun": None,
         "newCandidateRecords": 0, "stagingCandidateRecords": 0,
     })
+    replayable_source_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": False, "sourceReplayRun": "source-run",
+        "stagingMatchesCanonicalInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0,
+    })
+    assert "action=reproject-source-staging" in replayable_source_summary
+    assert "review=verification/source_adapter_staging.json" in replayable_source_summary
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]

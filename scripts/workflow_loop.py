@@ -688,24 +688,40 @@ def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
     }
 
 
+def _discovery_action(progress: dict[str, Any]) -> str:
+    source_stale = not progress.get("sourceRecordsCurrent", True)
+    staging_stale = not progress.get("stagingMatchesCanonicalInputs", True)
+    if (
+        source_stale and not progress.get("sourceReplayRun")
+        or staging_stale and not progress.get("cardReplayRun")
+    ):
+        return "live-acquisition-required"
+    if source_stale and staging_stale:
+        return "reproject-stale-staging"
+    if source_stale:
+        return "reproject-source-staging"
+    if staging_stale:
+        return "reproject-staging"
+    return "reconcile-to-release-or-record-open-decision"
+
+
+def _discovery_review_files(progress: dict[str, Any]) -> str:
+    review_files = []
+    if not progress.get("sourceRecordsCurrent", True):
+        review_files.append("verification/source_adapter_staging.json")
+    if not progress.get("stagingMatchesCanonicalInputs", True) or not review_files:
+        review_files.append("verification/card_discovery_staging.json")
+    return ",".join(review_files)
+
+
 def _discovery_summary(loop_id: str, progress: dict[str, Any]) -> str:
     if loop_id != "discovery":
         return ""
-    source_stale = not progress.get("sourceRecordsCurrent", True)
-    staging_stale = not progress.get("stagingMatchesCanonicalInputs", True)
-    unavailable_replay = (
-        source_stale and not progress.get("sourceReplayRun")
-        or staging_stale and not progress.get("cardReplayRun")
-    )
-    action = "live-acquisition-required" if unavailable_replay else (
-        "reproject-staging" if staging_stale
-        else "reconcile-to-release-or-record-open-decision"
-    )
     return (
         f" newCandidates={progress.get('newCandidateRecords', 0)}"
         f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
         f" stagingCurrent={progress.get('stagingMatchesCanonicalInputs')}"
-        f" action={action} review=verification/card_discovery_staging.json"
+        f" action={_discovery_action(progress)} review={_discovery_review_files(progress)}"
     )
 
 
