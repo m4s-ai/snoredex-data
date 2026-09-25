@@ -708,6 +708,8 @@ def _stale_discovery_action(progress: dict[str, Any]) -> str:
 def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str:
     if state == "failed":
         return "inspect-failed-discovery-run"
+    if state == "incomplete":
+        return "retry-incomplete-live-refresh"
     if state == "terminal":
         return "complete"
     return _stale_discovery_action(progress)
@@ -715,6 +717,8 @@ def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str
 
 def _discovery_review_files(progress: dict[str, Any], state: str | None = None) -> str:
     if state == "failed":
+        return "verification/runs/source-adapters,verification/runs/card-discovery"
+    if state == "incomplete":
         return "verification/runs/source-adapters,verification/runs/card-discovery"
     if state == "terminal":
         return "none"
@@ -741,6 +745,29 @@ def _discovery_summary(
         f" action={_discovery_action(progress, state)}"
         f" review={_discovery_review_files(progress, state)}"
     )
+
+
+def _has_incomplete_live_refresh(cycles: list[dict[str, Any]]) -> bool:
+    for cycle in cycles:
+        commands = cycle["lane"].get("command", [])
+        if commands and isinstance(commands[0], str):
+            commands = [commands]
+        if not any(command[:2] == ["scripts/discovery_cycle.py", "--refresh"]
+                   for command in commands):
+            continue
+        before = cycle["before"]["progress"]
+        after = cycle.get("after", {}).get("progress", {})
+        source_incomplete = (
+            after.get("sourceLatestAttempt") != before.get("sourceLatestAttempt")
+            and after.get("sourceStatus") != "complete"
+        )
+        card_incomplete = (
+            after.get("cardLatestAttempt") != before.get("cardLatestAttempt")
+            and after.get("cardStatus") != "complete"
+        )
+        if source_incomplete or card_incomplete:
+            return True
+    return False
 
 
 def main() -> int:
@@ -832,8 +859,11 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    summary_state = "incomplete" if (
+        args.loop == "discovery" and _has_incomplete_live_refresh(cycle_reports)
+    ) else current["state"]
     candidate_summary = _discovery_summary(
-        args.loop, current["progress"], current["state"], stop_reason,
+        args.loop, current["progress"], summary_state, stop_reason,
     )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
           f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")

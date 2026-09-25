@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
 
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
-    _discovery_summary,
+    _discovery_summary, _has_incomplete_live_refresh,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
     _records_projection_matches, _read_staging, _source_staging_matches_inputs,
@@ -256,6 +256,30 @@ def main() -> int:
     }, "terminal", "lane-failed")
     assert "action=inspect-failed-discovery-run" in failed_refresh_summary
     assert "review=verification/runs/source-adapters,verification/runs/card-discovery" in failed_refresh_summary
+    incomplete_refresh = [{
+        "before": {"progress": {
+            "sourceLatestAttempt": "source-old", "sourceStatus": "complete",
+            "cardLatestAttempt": "card-old", "cardStatus": "complete",
+        }},
+        "after": {"progress": {
+            "sourceLatestAttempt": "source-new", "sourceStatus": "incomplete",
+            "cardLatestAttempt": "card-new", "cardStatus": "complete",
+        }},
+        "lane": {"status": "passed", "command": [
+            "scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new",
+        ]},
+    }]
+    assert _has_incomplete_live_refresh(incomplete_refresh)
+    assert not _has_incomplete_live_refresh([{
+        **incomplete_refresh[0],
+        "after": {"progress": {
+            "sourceLatestAttempt": "source-new", "sourceStatus": "complete",
+            "cardLatestAttempt": "card-new", "cardStatus": "complete",
+        }},
+    }])
+    assert "action=retry-incomplete-live-refresh" in _discovery_summary(
+        "discovery", incomplete_refresh[0]["after"]["progress"], "incomplete",
+    )
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
