@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -149,7 +150,11 @@ ARCHIVE_ADMISSIONS = [
         "specimenId": "SPEC-0557", "providerId": "pokemon-card-asia",
         "sourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
         "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "raritySourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "rarityProviderId": "pokemon-card-asia",
+        "rarityRetrievedAt": "2026-09-15T12:51:30.841678+00:00",
         "corroboratingSourceUrls": ["https://shopee.co.id/READY-VERY-RARE-EEVEE-SNORLAX-GX-TAG-TEAM-SR-INDONESIA-AC3B-238-204-i.1420128610.54964847150"],
+        "corroboratingSpecimenIds": ["SPEC-0557"],
         "corroborated": True, "markAssetUrl": None, "cardImageUrl": None,
         "releaseDate": "2020-07-10", "releaseDatePrecision": "day", "releaseApproximate": False,
         "evidence": "The official Indonesian AC3b archive card list, page 27 (retained crop id-ac3b-238.png), positively identifies Eevee & Snorlax GX as AC3b C 238/204 SR. SPEC-0557 independently shows the Indonesian card face and the pictured copy's holo treatment. These exact positive observations establish this release and specimen only; they do not claim a complete historical list or finish inventory.",
@@ -164,7 +169,11 @@ ARCHIVE_ADMISSIONS = [
         "specimenId": "SPEC-0556", "providerId": "pokemon-card-asia",
         "sourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
         "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "raritySourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "rarityProviderId": "pokemon-card-asia",
+        "rarityRetrievedAt": "2026-09-15T12:51:30.841678+00:00",
         "corroboratingSourceUrls": ["https://www.ebay.com/itm/397057806875"],
+        "corroboratingSpecimenIds": ["SPEC-0556"],
         "corroborated": True, "markAssetUrl": None, "cardImageUrl": None,
         "releaseDate": "2020-07-10", "releaseDatePrecision": "day", "releaseApproximate": False,
         "evidence": "The official Indonesian AC3b archive card list, page 27 (retained crop id-ac3b-239.png), positively identifies Eevee & Snorlax GX as AC3b C 239/204 SR. SPEC-0556 independently shows the Indonesian card face and the pictured copy's holo treatment. These exact positive observations establish this release and specimen only; they do not claim a complete historical list or finish inventory.",
@@ -269,18 +278,57 @@ def specimen_rows(prints: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def apply_profiles(document: dict[str, Any], prints: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    missing_archive_rarity = [
+        row["printId"] for row in prints
+        if "/archive/card/pdf/" in row.get("sourceUrl", "")
+        and row.get("rarity") and not row.get("raritySourceUrl")
+    ]
+    if missing_archive_rarity:
+        raise ValueError("archive rarity rows need explicit rarity-source provenance: " + ", ".join(missing_archive_rarity))
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in prints:
         grouped.setdefault(row["localSetCode"], []).append(row)
     profiles = {code: source_profile(group) for code, group in grouped.items()}
+    rarity_profiles = {
+        row["printId"]: rarity_source_profile(row)
+        for row in prints if row.get("raritySourceUrl")
+    }
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
     by_id.update({row["sourceRecordId"]: row for row in profiles.values()})
+    by_id.update({row["sourceRecordId"]: row for row in rarity_profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])
     document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
     document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
         row["sourceKind"] == "source-first-local-set-profile" for row in document["sourceRecords"]
     )
-    return profiles
+    return {**profiles, **{f"rarity:{key}": value for key, value in rarity_profiles.items()}}
+
+
+def rarity_source_profile(row: dict[str, Any]) -> dict[str, Any]:
+    provider = row.get("rarityProviderId")
+    url = row.get("raritySourceUrl")
+    retrieved = row.get("rarityRetrievedAt")
+    if not provider or not url or not retrieved:
+        raise ValueError(f"archive rarity evidence lacks provider, URL, or retrieval time: {row['printId']}")
+    locality, code, number = row["locality"], row["localSetCode"], row["localNumber"]
+    material = f"{locality}\x1f{code}\x1frarity\x1f{row['printId']}\x1f{url}".encode()
+    source_id = f"SET-SRC-SF-{hashlib.sha256(material).hexdigest()[:12].upper()}"
+    denominator = number.partition("/")[2]
+    size = int(denominator) if denominator.isdigit() else None
+    return {
+        "sourceRecordId": source_id, "sourceKind": "source-first-local-set-profile",
+        "provider": provider, "providerRecordKey": f"{url}#{row['printId']}", "retrieved": retrieved,
+        "raw": {
+            "localCode": code, "localName": None, "locality": locality,
+            "languages": [row["language"]], "scripts": [row["script"]],
+            "printIds": [row["printId"]], "providers": [provider], "sourceUrls": [url],
+            "printedSetSize": size,
+            "printedSetSizeBasis": "the denominator printed beside the exact observed collector number" if size else "no printed set size observed",
+            "localeSuffix": None, "observedCollectorNumbers": [number],
+            "observedCoverage": "one exact positive card and rarity row from the official archive; not a set enumeration",
+            "markAssetUrls": [], "cardImageUrls": [],
+        },
+    }
 
 
 def remove_superseded_unknown_releases(graph: dict[str, Any]) -> None:
@@ -400,6 +448,18 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         else:
             upsert_entity(graph, "local-set", local_set_id, {"localSetId": local_set_id, "locality": "ID", "localCode": code, "observedNames": [], "productKind": "physical-card-set-or-product", "sourceRecordIds": [source_id]}, origin="reviewed-evidence-issue-258")
         upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", source_id)
+        for row in group:
+            rarity_profile = profiles.get(f"rarity:{row['printId']}")
+            if rarity_profile:
+                rarity_source_id = rarity_profile["sourceRecordId"]
+                upsert_entity(graph, "set-source-record", rarity_source_id, rarity_profile, origin="reviewed-evidence-issue-258")
+                disposition = {"sourceRecordId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": "an exact official archive row positively establishes this card rarity"}
+                upsert_entity(graph, "set-source-disposition", rarity_source_id, disposition, origin="reviewed-evidence-issue-258")
+                upsert_edge(graph, "set-source-disposition", rarity_source_id, "disposes", "set-source-record", rarity_source_id)
+                upsert_migration(graph, {"sourceKind": "set-catalogue-source", "sourceId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": disposition["reason"]})
+                local_set = next(item["payload"] for item in graph["entities"] if item.get("entityType") == "local-set" and item.get("entityId") == local_set_id)
+                append_unique(local_set.setdefault("sourceRecordIds", []), rarity_source_id)
+                upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", rarity_source_id)
 
         edition_matches = [row for row in graph["entities"] if row.get("entityType") == "set-edition" and row.get("entityId") == edition_id]
         if edition_matches:
@@ -556,7 +616,11 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
             "nonEstablishingClaimIds": sorted({value for old in old_payloads for value in old.get("nonEstablishingClaimIds", [])}),
             "legacyVariants": sorted({row["variant"] for row in group} | {value for old in old_payloads for value in old.get("legacyVariants", [])}),
             "legacyProducts": sorted({value for old in old_payloads for value in old.get("legacyProducts", [])}),
-            "sourceRecords": sorted(set(urls) | {value for old in old_payloads for value in old.get("sourceRecords", [])}),
+            "sourceRecords": sorted(
+                set(urls)
+                | {url for row in group for url in row.get("corroboratingSourceUrls", [])}
+                | {value for old in old_payloads for value in old.get("sourceRecords", [])}
+            ),
             "sourceFirstRecordIds": sorted({row["printId"] for row in group} | {value for old in old_payloads for value in old.get("sourceFirstRecordIds", [])}),
             "legacyCounterpartUnitIds": sorted(set(legacy) | {value for old in old_payloads for value in old.get("legacyCounterpartUnitIds", [])}),
             "legacyIdentityAliases": [list(value) for value in identity_aliases],
@@ -569,13 +633,23 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
         upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
 
-        source_id = stable_profile_id("ID", first["localSetCode"])
         rarity_id = "RARITYCLAIM:issue258:" + rid.removeprefix("RELEASE:ID:Indonesian:")
         rarity_native, rarity_normalized = first["rarity"]
-        rarity_payload = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": source_id, "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Indonesian-card-render", "sourceNativeValue": rarity_native, "normalizedRarityId": rarity_normalized, "sourceProductKey": first["sourceUrl"]}
+        set_profile = profiles[first["localSetCode"]]
+        rarity_profile = profiles.get(f"rarity:{first['printId']}", set_profile)
+        rarity_source_id = rarity_profile["sourceRecordId"]
+        rarity_payload = {
+            "rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": rarity_source_id,
+            "sourceProvider": rarity_profile["provider"],
+            "sourceVocabulary": "printed-Indonesian-card-render",
+            "sourceNativeValue": rarity_native, "normalizedRarityId": rarity_normalized,
+            "sourceProductKey": first.get("raritySourceUrl") or first["sourceUrl"],
+        }
+        if first.get("rarityRetrievedAt") or first.get("retrievedAt"):
+            rarity_payload["retrievedAt"] = first.get("rarityRetrievedAt") or first["retrievedAt"]
         upsert_entity(graph, "rarity-claim", rarity_id, rarity_payload, origin="reviewed-evidence-issue-258")
         upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
-        upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", source_id)
+        upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", rarity_source_id)
 
     mapping_rows = []
     for row in prints:
