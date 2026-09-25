@@ -138,6 +138,10 @@ def main() -> int:
     assert _discovery_state(complete, complete,
                             {"runId": "source-1", "status": "complete"}, canonical,
                             1, 1, 41, True, False) == "retained"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, True,
+                            source_records_current=False) == "retained"
     failed_attempt = [{"runId": "attempt-2", "status": "failed"}]
     complete_canonical = {"runId": "run-1", "status": "complete"}
     assert _discovery_state(failed_attempt, failed_attempt, complete_canonical, canonical,

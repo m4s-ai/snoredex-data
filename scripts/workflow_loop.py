@@ -254,7 +254,7 @@ def _discovery_state(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     blocked: int, needs_source: int, new_candidates: int, staging_is_current: bool,
-    completeness_is_current: bool,
+    completeness_is_current: bool, source_records_current: bool = True,
 ) -> str:
     if not source or not cards:
         return "candidate"
@@ -266,6 +266,8 @@ def _discovery_state(
             or card_canonical.get("status") != "complete"):
         return "retained"
     if not staging_is_current:
+        return "retained"
+    if not source_records_current:
         return "retained"
     if not completeness_is_current:
         return "retained"
@@ -343,8 +345,8 @@ def discovery_state() -> dict[str, Any]:
     return {
         "state": _discovery_state(
             source, cards, source_canonical, card_canonical, blocked, needs_source,
-            new_candidates, staging_is_current,
-            completeness_is_current,
+            new_candidates, staging_is_current, completeness_is_current,
+            source_records_current,
         ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,
