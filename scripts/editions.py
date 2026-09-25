@@ -23,27 +23,15 @@ from pathlib import Path
 B = Path(__file__).resolve().parent.parent
 data = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))
 cards = data["cards"]
-
-WEST = {"English","French","German","Italian","Spanish","Portuguese","Dutch","Polish","Russian"}
-
-# setCodes whose Western (WOTC) release had a 1st edition (Base Set..Neo Destiny, minus Base Set 2)
-WEST_1ST = {"JU", "GH"}   # Jungle, Gym Heroes - the only Base..Neo-Destiny Snorlax sets we hold
-# WOTC-era Western sets that were explicitly unlimited-only
-WEST_UNLIMITED_ONLY = {"B2", "LC"}   # Base Set 2 (the documented exception), Legendary Collection
-# Japanese sets (ADV/e-Card era through XY/Evolutions) whose JP release had 1st + unlimited
-JP_1ST = {"EC5", "PCG1", "PCG3", "PCG9", "DP1", "Pt2", "BW7", "XY2", "XY10"}
-# In the JP 1st-edition era but on the Elite Fourum "omitted" list (no 1st-edition run):
-#   Lost Link and BREAK Starter Pack are named there explicitly. Lost Link's Bulbapedia line
-#   {{TCG|1st Edition|Unlimited Edition}} renders as "Unlimited Edition" - unlimited only.
-JP_UNLIMITED_ONLY = {"LL", "20th"}
-
-SRC = {
-  "west": 'Bulbapedia "1st Edition (TCG)": WOTC printed 1st editions for English+European releases, every set Base Set through Neo Destiny except Base Set 2.',
-  "jp":   'Bulbapedia set articles: Japanese release available in both 1st and unlimited edition (ADV/e-Card era through XY). "Since the Sun & Moon era, Japanese 1st edition cards are no longer printed."',
-  "unl":  'Bulbapedia: set released only in unlimited edition.',
-  "none": 'Post-Neo-Destiny Western / Sun & Moon-era-onward Japanese / Korean-Chinese-SEA: the 1st-edition system does not apply. Cards have a single edition.',
-  "kor":  'Bulbapedia (e.g. Plasma Gale, Wild Blaze): the Korean set is only available in unlimited edition; Korean never had 1st editions.',
-}
+RULES = json.load(io.open(os.path.join(B, "verification", "edition_rules.json"), encoding="utf-8"))
+if RULES.get("meta", {}).get("schema") != "snoredex-edition-rules":
+    raise SystemExit("invalid verification/edition_rules.json schema")
+WEST = set(RULES["westernLanguages"])
+WEST_1ST = set(RULES["westernFirstEditionSetCodes"])
+WEST_UNLIMITED_ONLY = set(RULES["westernUnlimitedOnlySetCodes"])
+JP_1ST = set(RULES["japaneseFirstEditionSetCodes"])
+JP_UNLIMITED_ONLY = set(RULES["japaneseUnlimitedOnlySetCodes"])
+SRC = RULES["sources"]
 
 def classify(c):
     sc = c["setCode"]
@@ -66,14 +54,14 @@ def classify(c):
         return {"hasFirstEdition": True, "system": "Japanese",
                 "firstEditionLanguages": fe,
                 "unlimitedLanguages": conf,
-                "source": SRC["jp"] + (" " + SRC["kor"] if any(l!="Japanese" for l in conf) else "")}
+                "source": SRC["jp"] + (" " + SRC["korean"] if any(l!="Japanese" for l in conf) else "")}
     if sc in WEST_UNLIMITED_ONLY:
         return {"hasFirstEdition": False, "system": "WOTC-unlimited-only",
-                "firstEditionLanguages": [], "unlimitedLanguages": conf, "source": SRC["unl"]}
+                "firstEditionLanguages": [], "unlimitedLanguages": conf, "source": SRC["unlimited"]}
     if sc in JP_UNLIMITED_ONLY:
         return {"hasFirstEdition": False, "system": "JP-unlimited-only",
                 "firstEditionLanguages": [], "unlimitedLanguages": conf,
-                "source": 'Elite Fourum "1st Edition Timeline" - listed among Japanese sets omitted from 1st-edition printing.'}
+                "source": SRC["japaneseUnlimitedOnly"]}
     return {"hasFirstEdition": False, "system": "none",
             "firstEditionLanguages": [], "unlimitedLanguages": conf, "source": SRC["none"]}
 
@@ -89,13 +77,7 @@ for c in cards:
     if e["hasFirstEdition"] or e["system"]=="WOTC-unlimited-only":
         summary[tag].append(f'{c["name"]} {c["setCode"]} {c.get("number") or ""}'.strip())
 
-data["meta"]["editionRuleset"] = {
-    "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
-    "japaneseFirstEdition": "ADV/e-Card era through XY era; none from Sun & Moon era onward; none 1996-2001",
-    "koreanChineseSEA": "unlimited only, never 1st edition",
-    "note": "Cardmarket's First Edition filter axis was NOT used (unreliable: present on 83/198 incl. modern cards). Starter/beginning products had no 1st-edition run. Lost Link and BREAK Starter Pack are on the Elite Fourum omitted list. Jungle 1st edition existed in all seven Western languages including Brazilian Portuguese (owner-confirmed).",
-    "source": "Bulbapedia + Elite Fourum '1st Edition Timeline' (t/16054), verified 2026-07-23",
-}
+data["meta"]["editionRuleset"] = RULES["rulesetSummary"]
 # The trailing newline matters, and this was the only writer of this file omitting it. Every other
 # generator that touches snorlax_cards.json ends it with one, so the file's final byte depended on
 # which generator happened to run last — and CI's determinism step does not run this script, so its
