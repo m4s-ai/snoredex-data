@@ -708,36 +708,32 @@ def _stale_discovery_action(progress: dict[str, Any]) -> str:
     return "reconcile-to-release-or-record-open-decision"
 
 
-def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str:
-    if state == "failed":
-        return "inspect-failed-discovery-run"
-    if state == "incomplete":
-        return "retry-incomplete-live-refresh"
-    if state == "terminal":
-        return "complete"
-    if state == "needs-source":
-        stale_action = _stale_discovery_action(progress)
-        if stale_action == "live-acquisition-required":
-            return stale_action
-        return "find-positive-source-for-open-gaps"
-    if state == "blocked-by-source":
-        return "add-positive-source-coverage"
-    return _stale_discovery_action(progress)
-
-
-def _discovery_review_files(progress: dict[str, Any], state: str | None = None) -> str:
-    if state == "failed":
-        return "verification/runs/source-adapters,verification/runs/card-discovery"
-    if state == "incomplete":
-        return "verification/runs/source-adapters,verification/runs/card-discovery"
-    if state == "terminal":
-        return "none"
-    if state in {"needs-source", "blocked-by-source"}:
-        stale_action = _stale_discovery_action(progress)
-        if stale_action == "live-acquisition-required":
-            return _stale_review_files(progress)
-        return "verification/source_adapters.json,verification/card_discovery_adapters.json"
-    return _stale_review_files(progress)
+def _discovery_decision(
+    progress: dict[str, Any], state: str, stop_reason: str | None = None,
+) -> dict[str, Any]:
+    """Resolve discovery state and operator guidance once for reports and console output."""
+    state = {"lane-failed": "failed", "incomplete-live-refresh": "incomplete"}.get(
+        stop_reason, state,
+    )
+    run_files = "verification/runs/source-adapters,verification/runs/card-discovery"
+    adapter_files = "verification/source_adapters.json,verification/card_discovery_adapters.json"
+    fixed = {
+        "failed": ("inspect-failed-discovery-run", run_files),
+        "incomplete": ("retry-incomplete-live-refresh", run_files),
+        "terminal": ("complete", "none"),
+    }
+    stale_action = _stale_discovery_action(progress)
+    action, review = fixed.get(
+        state, (stale_action, _stale_review_files(progress)),
+    )
+    gap_decisions = {
+        "needs-source": ("find-positive-source-for-open-gaps", adapter_files),
+        "blocked-by-source": ("add-positive-source-coverage", adapter_files),
+    }
+    if state in gap_decisions and stale_action != "live-acquisition-required":
+        action, review = gap_decisions[state]
+    result = {"failed": "failed", "incomplete": "incomplete"}.get(state, "passed")
+    return {"state": state, "action": action, "review": review, "result": result}
 
 
 def _stale_review_files(progress: dict[str, Any]) -> str:
@@ -749,20 +745,18 @@ def _stale_review_files(progress: dict[str, Any]) -> str:
     return ",".join(review_files)
 
 
-def _discovery_summary(
-    loop_id: str, progress: dict[str, Any], state: str | None = None,
-    stop_reason: str | None = None,
-) -> str:
+def _discovery_summary(loop_id: str, progress: dict[str, Any],
+                       state: str | None = None, stop_reason: str | None = None,
+                       decision: dict[str, Any] | None = None) -> str:
     if loop_id != "discovery":
         return ""
-    if stop_reason == "lane-failed":
-        state = "failed"
+    decision = decision or _discovery_decision(progress, state or "candidate", stop_reason)
     return (
         f" newCandidates={progress.get('newCandidateRecords', 0)}"
         f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
         f" stagingCurrent={progress.get('stagingMatchesCanonicalInputs')}"
-        f" action={_discovery_action(progress, state)}"
-        f" review={_discovery_review_files(progress, state)}"
+        f" action={decision['action']}"
+        f" review={decision['review']}"
     )
 
 
@@ -789,6 +783,14 @@ def _incomplete_live_refresh_index(cycles: list[dict[str, Any]]) -> int | None:
             return index
         return None
     return None
+
+
+def _workflow_exit_code(loop_id: str, decision: dict[str, Any] | None,
+                        cycle_reports: list[dict[str, Any]]) -> int:
+    if loop_id == "discovery":
+        return int(decision["result"] in {"failed", "incomplete"})
+    return int(any(cycle["lane"].get("status") in {"failed", "incomplete"}
+                   for cycle in cycle_reports))
 
 
 def main() -> int:
@@ -865,6 +867,10 @@ def main() -> int:
             status="incomplete", reason="provider run manifest is incomplete",
         )
         stop_reason = "incomplete-live-refresh"
+    decision = None
+    if args.loop == "discovery":
+        decision = _discovery_decision(current["progress"], current["state"], stop_reason)
+        current = {**current, "state": decision["state"]}
     report = {
         "schema": "snoredex-workflow-loop-run",
         "version": "1.0.0",
@@ -877,6 +883,7 @@ def main() -> int:
         "maxCycles": args.max_cycles,
         "stateBefore": before,
         "stateAfter": current,
+        "decision": decision,
         "cycleCount": len(cycle_reports),
         "stopReason": stop_reason,
         "liveRefreshIncomplete": incomplete_live_refresh,
@@ -888,14 +895,12 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    summary_state = "incomplete" if incomplete_live_refresh else current["state"]
     candidate_summary = _discovery_summary(
-        args.loop, current["progress"], summary_state, stop_reason,
+        args.loop, current["progress"], decision=decision,
     )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
           f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
-    return 1 if any(c["lane"].get("status") in {"failed", "incomplete"}
-                    for c in cycle_reports) else 0
+    return _workflow_exit_code(args.loop, decision, cycle_reports)
 
 
 if __name__ == "__main__":

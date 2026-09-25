@@ -18,8 +18,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.workflow_loop import (  # noqa: E402
-    _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
-    _discovery_summary, _incomplete_live_refresh_index,
+    _cycle_commands, _discovery_cycle_stop_reason, _discovery_decision, _discovery_refresh_command,
+    _discovery_replay_command, _discovery_summary, _incomplete_live_refresh_index,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
     _records_projection_matches, _read_staging, _source_staging_matches_inputs,
@@ -249,6 +249,17 @@ def main() -> int:
         "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
     }, "terminal")
     assert "action=complete review=none" in terminal_summary
+    terminal_decision = _discovery_decision({
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+        "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal")
+    assert terminal_decision == {
+        "state": "terminal", "action": "complete", "review": "none", "result": "passed",
+    }
+    assert "action=complete review=none" in _discovery_summary(
+        "discovery", {}, decision=terminal_decision,
+    )
     failed_refresh_summary = _discovery_summary("discovery", {
         "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
         "completenessMatchesInputs": True, "newCandidateRecords": 0,
@@ -256,6 +267,12 @@ def main() -> int:
     }, "terminal", "lane-failed")
     assert "action=inspect-failed-discovery-run" in failed_refresh_summary
     assert "review=verification/runs/source-adapters,verification/runs/card-discovery" in failed_refresh_summary
+    failed_decision = _discovery_decision({}, "terminal", "lane-failed")
+    assert failed_decision == {
+        "state": "failed", "action": "inspect-failed-discovery-run",
+        "review": "verification/runs/source-adapters,verification/runs/card-discovery",
+        "result": "failed",
+    }
     incomplete_refresh = [{
         "before": {"progress": {
             "sourceLatestAttempt": "source-old", "sourceStatus": "complete",
@@ -282,6 +299,12 @@ def main() -> int:
     assert "action=retry-incomplete-live-refresh" in _discovery_summary(
         "discovery", incomplete_refresh[0]["after"]["progress"], "incomplete",
     )
+    incomplete_decision = _discovery_decision(
+        incomplete_refresh[0]["after"]["progress"], "terminal", "incomplete-live-refresh",
+    )
+    assert incomplete_decision["state"] == "incomplete"
+    assert incomplete_decision["action"] == "retry-incomplete-live-refresh"
+    assert incomplete_decision["result"] == "incomplete"
     incomplete_refresh[0]["lane"]["executedCommands"] = incomplete_refresh[0]["lane"]["command"]
     assert _incomplete_live_refresh_index(incomplete_refresh) == 0
     incomplete_refresh[0]["lane"]["executedCommands"] = [
