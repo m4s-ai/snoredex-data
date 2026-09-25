@@ -243,6 +243,12 @@ def main() -> int:
     })
     assert "action=reproject-source-staging" in replayable_source_summary
     assert "review=verification/source_adapter_staging.json" in replayable_source_summary
+    terminal_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "completenessMatchesInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal")
+    assert "action=complete review=none" in terminal_summary
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
