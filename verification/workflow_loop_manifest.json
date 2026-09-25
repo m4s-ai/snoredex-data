@@ -45,7 +45,7 @@
       "impactClasses": ["source-discovery", "catalogue-set"],
       "dependsOn": [],
       "gateLevel": "L0-L2 scoped lane; L3 merge gate",
-      "retry": "Replay a retained Run-ID; use --include-live only for an explicit provider refresh, then reconcile every new-candidate record to a release or an explicit unresolved decision.",
+      "retry": "Replay a retained Run-ID; use --include-live only for an explicit provider refresh, then map each new-candidate record to a canonical release with reviewed evidence or positively exclude it only when the source establishes another identity. Unresolved identities remain new-candidate and keep state needs-reconciliation.",
       "states": ["candidate", "retained", "reconciled", "needs-reconciliation", "needs-source", "blocked-by-source", "terminal"],
       "initial": "candidate",
       "terminal": ["terminal", "needs-reconciliation", "needs-source", "blocked-by-source"],
