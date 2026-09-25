@@ -250,24 +250,46 @@ def _discovery_outcome(blocked: int, needs_source: int, new_candidates: int) -> 
     return "terminal"
 
 
+def _stale_projection_needs_source(
+    source_records_current: bool, staging_is_current: bool,
+    source_replay_available: bool, card_replay_available: bool,
+) -> bool:
+    return (
+        (not source_records_current and not source_replay_available)
+        or (not staging_is_current and not card_replay_available)
+    )
+
+
+def _stale_projection_state(
+    source_records_current: bool, staging_is_current: bool,
+    source_replay_available: bool, card_replay_available: bool,
+) -> str:
+    return "needs-source" if _stale_projection_needs_source(
+        source_records_current, staging_is_current,
+        source_replay_available, card_replay_available,
+    ) else "retained"
+
+
 def _discovery_state(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     blocked: int, needs_source: int, new_candidates: int, staging_is_current: bool,
     completeness_is_current: bool, source_records_current: bool = True,
+    source_replay_available: bool = True, card_replay_available: bool = True,
 ) -> str:
     if not source or not cards:
         return "candidate"
+    if not staging_is_current or not source_records_current:
+        return _stale_projection_state(
+            source_records_current, staging_is_current,
+            source_replay_available, card_replay_available,
+        )
     if not source_canonical or not card_canonical:
         return "retained"
     # Newer failed or incomplete attempts are diagnostic only. The selected compatible
     # complete manifests remain the canonical basis for staging and reconciliation.
     if (source_canonical.get("status") != "complete"
             or card_canonical.get("status") != "complete"):
-        return "retained"
-    if not staging_is_current:
-        return "retained"
-    if not source_records_current:
         return "retained"
     if not completeness_is_current:
         return "retained"
@@ -347,6 +369,8 @@ def discovery_state() -> dict[str, Any]:
             source, cards, source_canonical, card_canonical, blocked, needs_source,
             new_candidates, staging_is_current, completeness_is_current,
             source_records_current,
+            source_replay_available=source_replay_run is not None,
+            card_replay_available=card_replay_run is not None,
         ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,

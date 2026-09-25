@@ -142,6 +142,14 @@ def main() -> int:
                             {"runId": "source-1", "status": "complete"}, canonical,
                             1, 1, 41, True, True,
                             source_records_current=False) == "retained"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, True, source_records_current=False,
+                            source_replay_available=False) == "needs-source"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, False, True,
+                            card_replay_available=False) == "needs-source"
     failed_attempt = [{"runId": "attempt-2", "status": "failed"}]
     complete_canonical = {"runId": "run-1", "status": "complete"}
     assert _discovery_state(failed_attempt, failed_attempt, complete_canonical, canonical,
@@ -154,6 +162,12 @@ def main() -> int:
     )
     assert _should_skip_terminal_state(
         "discovery", "blocked-by-source", discovery_terminals, False,
+    )
+    assert _should_skip_terminal_state(
+        "discovery", "needs-source", discovery_terminals, False,
+    )
+    assert not _should_skip_terminal_state(
+        "discovery", "needs-source", discovery_terminals, True,
     )
     assert not _should_skip_terminal_state("tcgdex", "needs-source", {"needs-source"}, True)
     replay_after = {"state": "needs-reconciliation", "progress": {"needsSourceGaps": 21}}
