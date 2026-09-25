@@ -267,6 +267,8 @@ def main() -> int:
         }},
         "lane": {"status": "passed", "command": [
             "scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new",
+        ], "executedCommands": [
+            ["scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new"],
         ]},
     }]
     assert _incomplete_live_refresh_index(incomplete_refresh) == 0
@@ -280,6 +282,22 @@ def main() -> int:
     assert "action=retry-incomplete-live-refresh" in _discovery_summary(
         "discovery", incomplete_refresh[0]["after"]["progress"], "incomplete",
     )
+    incomplete_refresh[0]["lane"]["executedCommands"] = incomplete_refresh[0]["lane"]["command"]
+    assert _incomplete_live_refresh_index(incomplete_refresh) == 0
+    incomplete_refresh[0]["lane"]["executedCommands"] = [
+        ["scripts/card_discovery.py", "--replay-from-run", "card-old"],
+    ]
+    assert _incomplete_live_refresh_index(incomplete_refresh) is None
+    for state, action in (
+        ("needs-source", "find-positive-source-for-open-gaps"),
+        ("blocked-by-source", "add-positive-source-coverage"),
+    ):
+        summary = _discovery_summary("discovery", {
+            "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+            "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+        }, state)
+        assert f"action={action}" in summary
+        assert "review=verification/source_adapters.json,verification/card_discovery_adapters.json" in summary
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]

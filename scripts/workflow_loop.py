@@ -669,8 +669,10 @@ def _cycle_commands(
 
 def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
     outputs = []
+    executed_commands = []
     return_code = 0
     for command in commands:
+        executed_commands.append(command)
         process = subprocess.run(
             [sys.executable, *command], cwd=ROOT, text=True, encoding="utf-8",
             env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
@@ -684,6 +686,7 @@ def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
         "status": "passed" if return_code == 0 else "failed",
         "returnCode": return_code,
         "command": commands[0] if len(commands) == 1 else commands,
+        "executedCommands": executed_commands,
         "output": "\n".join(outputs)[-2000:],
     }
 
@@ -712,6 +715,10 @@ def _discovery_action(progress: dict[str, Any], state: str | None = None) -> str
         return "retry-incomplete-live-refresh"
     if state == "terminal":
         return "complete"
+    if state == "needs-source":
+        return "find-positive-source-for-open-gaps"
+    if state == "blocked-by-source":
+        return "add-positive-source-coverage"
     return _stale_discovery_action(progress)
 
 
@@ -722,6 +729,8 @@ def _discovery_review_files(progress: dict[str, Any], state: str | None = None) 
         return "verification/runs/source-adapters,verification/runs/card-discovery"
     if state == "terminal":
         return "none"
+    if state in {"needs-source", "blocked-by-source"}:
+        return "verification/source_adapters.json,verification/card_discovery_adapters.json"
     review_files = []
     if not progress.get("sourceRecordsCurrent", True):
         review_files.append("verification/source_adapter_staging.json")
@@ -750,7 +759,7 @@ def _discovery_summary(
 def _incomplete_live_refresh_index(cycles: list[dict[str, Any]]) -> int | None:
     for index in reversed(range(len(cycles))):
         cycle = cycles[index]
-        commands = cycle["lane"].get("command", [])
+        commands = cycle["lane"].get("executedCommands", [])
         if commands and isinstance(commands[0], str):
             commands = [commands]
         if not any(command[:2] == ["scripts/discovery_cycle.py", "--refresh"]
