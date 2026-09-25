@@ -1,3 +1,4 @@
+<!-- doc: role=hard-coded data audit; stage=task -->
 # Hard-coded data and exception audit (#400)
 
 **Audit baseline:** `86abf2cd4091e38898851581e477322c367c057a` (`origin/main`, after #397).
