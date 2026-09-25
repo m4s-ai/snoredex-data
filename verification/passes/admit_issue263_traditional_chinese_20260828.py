@@ -211,6 +211,21 @@ SUPPLEMENTAL = [
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", None), card_name="Snorlax VMAX"),
 ]
 
+# Preserve exact second-source evidence when this pass rebuilds official Taiwan rows.
+RETAINED_CORROBORATION = {
+    "TW:AS5D:118/169:base": ("SPEC-0494", "https://beehivetcg.com/cdn/shop/products/aef8c9b3a05d7062fe9d2fc81d7718a1.png?v=1661778006&width=600", "https://beehivetcg.com/products/as5d-118-169-%E4%BC%8A%E5%B8%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-gx"),
+    "TW:MC F:567/742:base": ("SPEC-0502", "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600", "https://beehivetcg.com/products/mcf-567-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:MC F:568/742:base": ("SPEC-0503", "https://beehivetcg.com/cdn/shop/files/0e76344daaa0cb314f25bf211ef84d42.png?v=1768747014&width=600", "https://beehivetcg.com/products/mcf-568-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:MC F:569/742:base": ("SPEC-0504", "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600", "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:SCA F:084/135:base": ("SPEC-0498", "https://rocketcoll.com/cdn/shop/files/377577.png?v=1767884934", "https://rocketcoll.com/products/sca-084-135-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:SI F:341/414:base": ("SPEC-0499", "https://rocketcoll.com/cdn/shop/files/381827.png?v=1767887802", "https://rocketcoll.com/products/%E9%8F%A1%E9%9D%A2%E9%96%83%E7%89%88sif-341-414"),
+    "TW:SV-P:215:base": ("SPEC-0501", "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg", "https://www.ebay.de/itm/168013799605"),
+    "TW:sc1b F:120/153:base": ("SPEC-0506", "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d"),
+    "TW:sc1b F:165/153:base": ("SPEC-0495", "https://i.ebayimg.com/images/g/NTwAAOSwREVhTZRC/s-l1600.jpg", "https://www.ebay.com/itm/224621405527"),
+    "TW:scD F:111/159:base": ("SPEC-0497", "https://rocketcoll.com/cdn/shop/files/377909_d908b57a-0f09-4289-9fc6-12657bafc582.png?v=1767886000", "https://rocketcoll.com/products/scd-111-159-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:sv4a F:145/190:base": ("SPEC-0500", "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965", "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+}
+
 ISSUE_UNITS = sorted({
     "U0050", "U0104", "U0128", "U0169", "U0174", "U0203", "U0234", "U0258",
     "U0261", "U0292", "U0307", "U0345", "U0371", "U0385", "U0403", "U0441",
@@ -240,12 +255,25 @@ def discovery_rows() -> dict[str, dict[str, Any]]:
     return rows
 
 
-def official_rows() -> list[dict[str, Any]]:
+def official_rows(existing: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    if existing is None:
+        existing = {row["printId"]: row for row in read(PRINTS)["prints"]}
     discovered = discovery_rows()
     result = []
     for facts in OFFICIAL:
         raw = discovered[facts["detail"]]
         date, precision = facts["date"] or SET_DATES[facts["localSetCode"]]
+        print_id = facts["printId"]
+        prior = existing.get(print_id, {})
+        retained = RETAINED_CORROBORATION.get(print_id)
+        specimen_ids = prior.get("corroboratingSpecimenIds") or ([retained[0]] if retained else [])
+        source_urls = prior.get("corroboratingSourceUrls") or (list(retained[1:]) if retained else [])
+        corroboration = {}
+        if specimen_ids and source_urls:
+            corroboration = {
+                "corroboratingSpecimenIds": sorted(set(specimen_ids)),
+                "corroboratingSourceUrls": sorted(set(source_urls)),
+            }
         result.append({
             **facts,
             "locality": LOCALITY,
@@ -255,7 +283,8 @@ def official_rows() -> list[dict[str, Any]]:
             "catchUpOf": "the exact Traditional Chinese counterpart established by its printed attacks and card traits",
             "providerId": "pokemon-card-asia",
             "sourceUrl": raw["sourceUrl"],
-            "corroborated": False,
+            "corroborated": bool(corroboration),
+            **corroboration,
             "markAssetUrl": raw["raw"].get("setSymbolUrl"),
             "cardImageUrl": raw["raw"]["cardImageUrl"],
             "releaseDate": date,
@@ -328,6 +357,24 @@ def supplemental_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any
             "work": facts["work"], "rarity": facts["rarity"], "legacy": facts["legacy"],
             "releaseDate": date, "releaseDatePrecision": precision, "releaseApproximate": False,
         })
+    result.append({
+        "detail": "official-archive-as5a-204", "specimenId": None,
+        "printId": "TW:AS5a:204/184:base", "localSetCode": "AS5a", "localNumber": "204/184",
+        "variant": "base", "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "rarity": ("SR", None), "legacy": [], "cardName": "Eevee & Snorlax-GX",
+        "locality": LOCALITY, "language": LANGUAGE, "script": SCRIPT,
+        "name": "伊布&卡比獸GX",
+        "catchUpOf": "the Traditional-Chinese Eevee & Snorlax-GX work identified by the exact printed card face and attacks",
+        "providerId": "pokemon-card-asia",
+        "sourceUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "raritySourceUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+        "rarityProviderId": "pokemon-card-asia",
+        "rarityRetrievedAt": "2026-09-15",
+        "corroborated": False, "markAssetUrl": None, "cardImageUrl": None,
+        "releaseDate": "2019-10-09", "releaseDatePrecision": "day", "releaseApproximate": False,
+        "retrievedAt": "2026-09-15",
+        "evidence": "The official Taiwan AS5a archive card list, page 23 (retained crop zh-as5a-204.png), positively identifies 伊布&卡比獸GX as 204/184 SR and shows its printed card face and attacks. This establishes the exact Traditional-Chinese release and its Work mapping; it does not claim the archived list is historically complete, and it supplies no physical finish evidence.",
+    })
     return result
 
 
@@ -391,25 +438,68 @@ def build_profile(code: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
 
 
 def apply_profiles(document: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    missing_archive_rarity = [
+        row["printId"] for row in rows
+        if "/archive/card/pdf/" in row.get("sourceUrl", "")
+        and row.get("rarity") and not row.get("raritySourceUrl")
+    ]
+    if missing_archive_rarity:
+        raise ValueError("archive rarity rows need explicit rarity-source provenance: " + ", ".join(missing_archive_rarity))
     grouped: dict[str, list[dict[str, Any]]] = defaultdict(list)
     for row in rows:
         grouped[row["localSetCode"]].append(row)
     profiles = {code: build_profile(code, group) for code, group in grouped.items()}
+    rarity_profiles = {
+        row["printId"]: rarity_source_profile(row)
+        for row in rows if row.get("raritySourceUrl")
+    }
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
     by_id.update({profile["sourceRecordId"]: profile for profile in profiles.values()})
+    by_id.update({profile["sourceRecordId"]: profile for profile in rarity_profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])
     document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
     document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
         row["sourceKind"] == "source-first-local-set-profile" for row in document["sourceRecords"]
     )
-    return profiles
+    return {**profiles, **{f"rarity:{key}": value for key, value in rarity_profiles.items()}}
+
+
+def rarity_source_profile(row: dict[str, Any]) -> dict[str, Any]:
+    provider = row.get("rarityProviderId")
+    url = row.get("raritySourceUrl")
+    retrieved = row.get("rarityRetrievedAt") or row.get("retrievedAt")
+    if not provider or not url or not retrieved:
+        raise ValueError(f"archive rarity evidence lacks provider, URL, or retrieval time: {row['printId']}")
+    locality, code, number = row["locality"], row["localSetCode"], row["localNumber"]
+    material = f"{locality}\x1f{code}\x1frarity\x1f{row['printId']}\x1f{url}".encode()
+    source_id = f"SET-SRC-SF-{hashlib.sha256(material).hexdigest()[:12].upper()}"
+    denominator = number.partition("/")[2]
+    size = int(denominator) if denominator.isdigit() else None
+    return {
+        "sourceRecordId": source_id, "sourceKind": "source-first-local-set-profile",
+        "provider": provider, "providerRecordKey": f"{url}#{row['printId']}", "retrieved": retrieved,
+        "raw": {
+            "localCode": code, "localName": None, "locality": locality,
+            "languages": [row["language"]], "scripts": [row["script"]],
+            "printIds": [row["printId"]], "providers": [provider], "sourceUrls": [url],
+            "printedSetSize": size,
+            "printedSetSizeBasis": "the denominator printed beside the exact observed collector number" if size else "no printed set size observed",
+            "localeSuffix": None, "observedCollectorNumbers": [number],
+            "observedCoverage": "one exact positive card and rarity row from the official archive; not a set enumeration",
+            "markAssetUrls": [], "cardImageUrls": [],
+        },
+    }
 
 
 def release_id(row: dict[str, Any]) -> str:
     return f"RELEASE:{LOCALITY}:{LANGUAGE}:{row['localSetCode']}:{row['localNumber']}:{row['work']}"
 
 
-def apply_set_graph(graph: dict[str, Any], profile: dict[str, Any], code: str, claim_ids: list[str]) -> None:
+def apply_set_graph(
+    graph: dict[str, Any], profile: dict[str, Any], code: str, claim_ids: list[str],
+    rarity_profiles: list[dict[str, Any]] | None = None,
+) -> None:
+    rarity_profiles = rarity_profiles or []
     source_id = profile["sourceRecordId"]
     local_set_id = f"LOCALSET:{LOCALITY}:{quote(code, safe='')}"
     edition_id = f"EDITION:{LOCALITY}:{LANGUAGE}:{code}"
@@ -428,6 +518,15 @@ def apply_set_graph(graph: dict[str, Any], profile: dict[str, Any], code: str, c
     if name := profile.get("raw", {}).get("localName"):
         append_unique(local_set.setdefault("observedNames", []), name)
     upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", source_id)
+    for rarity_profile in rarity_profiles:
+        rarity_source_id = rarity_profile["sourceRecordId"]
+        upsert_entity(graph, "set-source-record", rarity_source_id, rarity_profile, origin=ORIGIN)
+        rarity_disposition = {"sourceRecordId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": "an exact official archive row positively establishes this card rarity"}
+        upsert_entity(graph, "set-source-disposition", rarity_source_id, rarity_disposition, origin=ORIGIN)
+        upsert_edge(graph, "set-source-disposition", rarity_source_id, "disposes", "set-source-record", rarity_source_id)
+        upsert_migration(graph, {"sourceKind": "set-catalogue-source", "sourceId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": rarity_disposition["reason"]})
+        append_unique(local_set.setdefault("sourceRecordIds", []), rarity_source_id)
+        upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", rarity_source_id)
     editions = [item for item in graph["entities"] if item.get("entityType") == "set-edition" and item.get("entityId") == edition_id]
     if editions:
         payload = editions[0]["payload"]
@@ -529,8 +628,11 @@ def remove_old_releases(
 
 
 def apply_release_group(
-    graph: dict[str, Any], profile: dict[str, Any], group: list[dict[str, Any]], units: dict[str, dict[str, Any]],
+    graph: dict[str, Any], profile: dict[str, Any], group: list[dict[str, Any]],
+    units: dict[str, dict[str, Any]],
+    rarity_profiles: dict[str, dict[str, Any]] | None = None,
 ) -> None:
+    rarity_profiles = rarity_profiles or {}
     first = group[0]
     rid = release_id(first)
     legacy_claims, finish_claims, heritage = remove_old_releases(graph, group, rid, units)
@@ -579,12 +681,20 @@ def apply_release_group(
     upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", payload["setEditionId"])
     upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
     rarity_id = "RARITYCLAIM:issue263:" + rid.removeprefix(f"RELEASE:{LOCALITY}:{LANGUAGE}:")
-    rarity = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": profile["sourceRecordId"], "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Traditional-Chinese-card", "sourceNativeValue": first["rarity"][0], "normalizedRarityId": first["rarity"][1], "sourceProductKey": first["sourceUrl"]}
-    if first.get("retrievedAt"):
-        rarity["retrievedAt"] = first["retrievedAt"]
+    rarity_profile = rarity_profiles.get(f"rarity:{first['printId']}", profile)
+    rarity_source_id = rarity_profile["sourceRecordId"]
+    rarity = {
+        "rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": rarity_source_id,
+        "sourceProvider": rarity_profile["provider"],
+        "sourceVocabulary": "printed-Traditional-Chinese-card",
+        "sourceNativeValue": first["rarity"][0], "normalizedRarityId": first["rarity"][1],
+        "sourceProductKey": first.get("raritySourceUrl") or first["sourceUrl"],
+    }
+    if first.get("rarityRetrievedAt") or first.get("retrievedAt"):
+        rarity["retrievedAt"] = first.get("rarityRetrievedAt") or first["retrievedAt"]
     upsert_entity(graph, "rarity-claim", rarity_id, rarity, origin=ORIGIN)
     upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
-    upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", profile["sourceRecordId"])
+    upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", rarity_source_id)
 
 
 def apply_graph(
@@ -596,9 +706,10 @@ def apply_graph(
         by_code[row["localSetCode"]].append(row)
         by_release[release_id(row)].append(row)
     for code, group in by_code.items():
-        apply_set_graph(graph, profiles[code], code, sorted({f"CLAIM:source-first:{row['printId']}" for row in group}))
+        rarity_sources = [profiles[f"rarity:{row['printId']}"] for row in group if f"rarity:{row['printId']}" in profiles]
+        apply_set_graph(graph, profiles[code], code, sorted({f"CLAIM:source-first:{row['printId']}" for row in group}), rarity_sources)
     for group in by_release.values():
-        apply_release_group(graph, profiles[group[0]["localSetCode"]], group, units)
+        apply_release_group(graph, profiles[group[0]["localSetCode"]], group, units, profiles)
     mappings_by_unit = {}
     for row in rows:
         rid = release_id(row)
@@ -692,7 +803,7 @@ def apply_finish_evidence(document: dict[str, Any]) -> None:
     ]
     keys = {(row["setCode"], row["number"], tuple(row.get("languages") or [])) for row in rows}
     document["overrides"] = [row for row in document["overrides"] if (row["setCode"], row["number"], tuple(row.get("languages") or [])) not in keys] + rows
-    document["meta"]["lastUpdated"] = "2026-08-28"
+    document["meta"]["lastUpdated"] = "2026-09-25"
 
 
 def apply_discovery_adapters(document: dict[str, Any], rows: list[dict[str, Any]]) -> None:
@@ -820,7 +931,7 @@ def main() -> int:
 
     prints = read(PRINTS)
     existing_prints = {row["printId"]: row for row in prints["prints"]}
-    official = official_rows()
+    official = official_rows(existing_prints)
     photos = enrich_photo_rows()
     supplemental = supplemental_rows(existing_prints)
     rows = official + photos + supplemental
@@ -840,7 +951,7 @@ def main() -> int:
             persisted["corroboratingSourceUrls"] = sorted({item["sourceUrl"] for item in photos if item["printId"] == row["printId"]})
         by_print[row["printId"]] = persisted
     prints["prints"] = sorted(by_print.values(), key=lambda row: row["printId"])
-    prints["meta"]["generated"] = "2026-08-28"
+    prints["meta"]["generated"] = "2026-09-25"
     prints["meta"]["counts"]["admitted"] = len(prints["prints"])
 
     specimens = read(SPECIMENS)

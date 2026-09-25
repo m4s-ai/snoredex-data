@@ -140,6 +140,16 @@ def reinspection_regressions() -> None:
     reverse = next(row for row in items if row.get("finishUnitId") == "F0363"
                    and row["finish"] == "reverse-holo")
     assert reverse["itemKind"] == "finish-candidate", "visible holo cannot confirm a reverse candidate"
+    bridged_indonesian_promo = [
+        row for row in items
+        if row["localizationId"] == "LOCALIZATION:ID:id"
+        and row["localSetCode"] == "SV-P"
+        and row["collectorNumber"] == "117"
+        and row["finish"] == "mirror-holo"
+        and row["foilPattern"] == "poke-ball"
+    ]
+    assert len(bridged_indonesian_promo) == 1
+    assert bridged_indonesian_promo[0]["imageScope"] == "exact-printing"
 
 
 def main() -> None:
@@ -367,12 +377,18 @@ def main() -> None:
         )
         for item in catalogue["items"]
     )
+    items_by_asset: dict[str, list[dict]] = {}
+    for item in catalogue["items"]:
+        if item["imageAssetId"]:
+            items_by_asset.setdefault(item["imageAssetId"], []).append(item)
     shared_specimen_assets = {
-        "asset-53984045-44f5-5f60-82fe-45e3718eb0f1",
-        "asset-5901cd2c-e9e3-5019-b60f-b2ae12c08979",
-        "asset-5d002e29-9fde-5a5d-8c3e-191b24712df9",
+        asset_id for asset_id, linked_items in items_by_asset.items()
+        if assets[asset_id]["path"].startswith("verification/specimens/")
+        and len({item.get("physicalPrintingId") or item.get("sourcePrintingId")
+                 for item in linked_items}) > 1
     }
-    assert {assets[aid]["imageScope"] for aid in shared_specimen_assets} == {"card-release"}
+    assert shared_specimen_assets
+    assert all(assets[aid]["imageScope"] == "card-release" for aid in shared_specimen_assets)
     assert all(
         item["imageScope"] == "card-release"
         for item in catalogue["items"]

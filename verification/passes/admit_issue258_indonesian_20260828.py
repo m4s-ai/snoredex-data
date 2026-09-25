@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from pathlib import Path
@@ -35,6 +36,11 @@ GRAPH = ROOT / "verification" / "authoritative_graph.json"
 DISCOVERY = ROOT / "verification" / "card_discovery_records.jsonl"
 DISCOVERY_ADAPTERS = ROOT / "verification" / "card_discovery_adapters.json"
 CAPABILITIES = ROOT / "verification" / "source_capabilities.json"
+UNITS = ROOT / "verification" / "units.json"
+ARCHIVE_MANIFESTS = [
+    ROOT / "verification" / "evidence" / "issue-258-ac3b-238-20260924" / "manifest.json",
+    ROOT / "verification" / "evidence" / "issue-258-ac3b-239-20260924" / "manifest.json",
+]
 
 
 # Official detail records used by issue #258. Rarity is read from the exact retained
@@ -128,6 +134,51 @@ PROMOS = [
         "markAssetUrl": None, "cardImageUrl": None, "releaseDate": "2026-01", "releaseDatePrecision": "month", "releaseApproximate": False,
         "evidence": "The Pokumon record and retained copy of its exact Indonesian 286/SV-P Taro-stamped image in SPEC-0188 identify the January-February 2026 promotion and non-holo treatment.",
         "work": "Snorlax-But-First-Food-Heavy-Impact", "rarity": ("PROMO", "promo"), "legacy": ["U0687"],
+    },
+]
+
+
+# Exact positive rows from the manually inspected official archived AC3b list. This
+# historical checklist surface is not treated as exhaustive; seller specimens independently
+# corroborate the two localized card identities and alone establish the pictured foil.
+ARCHIVE_ADMISSIONS = [
+    {
+        "printId": "ID:AC3b:238/204:base", "locality": "ID", "localSetCode": "AC3b",
+        "localNumber": "238/204", "variant": "base", "language": "Indonesian", "script": "Latn",
+        "name": "Eevee & Snorlax GX", "cardName": "Eevee & Snorlax GX",
+        "catchUpOf": "the Indonesian AC3b counterpart established by the exact card face and printed attacks",
+        "specimenId": "SPEC-0557", "providerId": "pokemon-card-asia",
+        "sourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "raritySourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "rarityProviderId": "pokemon-card-asia",
+        "rarityRetrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "corroboratingSourceUrls": ["https://shopee.co.id/READY-VERY-RARE-EEVEE-SNORLAX-GX-TAG-TEAM-SR-INDONESIA-AC3B-238-204-i.1420128610.54964847150"],
+        "corroboratingSpecimenIds": ["SPEC-0557"],
+        "corroborated": True, "markAssetUrl": None, "cardImageUrl": None,
+        "releaseDate": "2020-07-10", "releaseDatePrecision": "day", "releaseApproximate": False,
+        "evidence": "The official Indonesian AC3b archive card list, page 27 (retained crop id-ac3b-238.png), positively identifies Eevee & Snorlax GX as AC3b C 238/204 SR. SPEC-0557 independently shows the Indonesian card face and the pictured copy's holo treatment. These exact positive observations establish this release and specimen only; they do not claim a complete historical list or finish inventory.",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "rarity": ("SR", None), "legacy": [],
+    },
+    {
+        "printId": "ID:AC3b:239/204:base", "locality": "ID", "localSetCode": "AC3b",
+        "localNumber": "239/204", "variant": "base", "language": "Indonesian", "script": "Latn",
+        "name": "Eevee & Snorlax GX", "cardName": "Eevee & Snorlax GX",
+        "catchUpOf": "the Indonesian AC3b counterpart established by the exact card face and printed attacks",
+        "specimenId": "SPEC-0556", "providerId": "pokemon-card-asia",
+        "sourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "raritySourceUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+        "rarityProviderId": "pokemon-card-asia",
+        "rarityRetrievedAt": "2026-09-15T12:51:30.841678+00:00",
+        "corroboratingSourceUrls": ["https://www.ebay.com/itm/397057806875"],
+        "corroboratingSpecimenIds": ["SPEC-0556"],
+        "corroborated": True, "markAssetUrl": None, "cardImageUrl": None,
+        "releaseDate": "2020-07-10", "releaseDatePrecision": "day", "releaseApproximate": False,
+        "evidence": "The official Indonesian AC3b archive card list, page 27 (retained crop id-ac3b-239.png), positively identifies Eevee & Snorlax GX as AC3b C 239/204 SR. SPEC-0556 independently shows the Indonesian card face and the pictured copy's holo treatment. These exact positive observations establish this release and specimen only; they do not claim a complete historical list or finish inventory.",
+        "work": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "rarity": ("SR", None), "legacy": [],
     },
 ]
 
@@ -227,21 +278,136 @@ def specimen_rows(prints: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 
 def apply_profiles(document: dict[str, Any], prints: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    missing_archive_rarity = [
+        row["printId"] for row in prints
+        if "/archive/card/pdf/" in row.get("sourceUrl", "")
+        and row.get("rarity") and not row.get("raritySourceUrl")
+    ]
+    if missing_archive_rarity:
+        raise ValueError("archive rarity rows need explicit rarity-source provenance: " + ", ".join(missing_archive_rarity))
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in prints:
         grouped.setdefault(row["localSetCode"], []).append(row)
     profiles = {code: source_profile(group) for code, group in grouped.items()}
+    rarity_profiles = {
+        row["printId"]: rarity_source_profile(row)
+        for row in prints if row.get("raritySourceUrl")
+    }
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
     by_id.update({row["sourceRecordId"]: row for row in profiles.values()})
+    by_id.update({row["sourceRecordId"]: row for row in rarity_profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])
     document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
     document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
         row["sourceKind"] == "source-first-local-set-profile" for row in document["sourceRecords"]
     )
-    return profiles
+    return {**profiles, **{f"rarity:{key}": value for key, value in rarity_profiles.items()}}
+
+
+def rarity_source_profile(row: dict[str, Any]) -> dict[str, Any]:
+    provider = row.get("rarityProviderId")
+    url = row.get("raritySourceUrl")
+    retrieved = row.get("rarityRetrievedAt")
+    if not provider or not url or not retrieved:
+        raise ValueError(f"archive rarity evidence lacks provider, URL, or retrieval time: {row['printId']}")
+    locality, code, number = row["locality"], row["localSetCode"], row["localNumber"]
+    material = f"{locality}\x1f{code}\x1frarity\x1f{row['printId']}\x1f{url}".encode()
+    source_id = f"SET-SRC-SF-{hashlib.sha256(material).hexdigest()[:12].upper()}"
+    denominator = number.partition("/")[2]
+    size = int(denominator) if denominator.isdigit() else None
+    return {
+        "sourceRecordId": source_id, "sourceKind": "source-first-local-set-profile",
+        "provider": provider, "providerRecordKey": f"{url}#{row['printId']}", "retrieved": retrieved,
+        "raw": {
+            "localCode": code, "localName": None, "locality": locality,
+            "languages": [row["language"]], "scripts": [row["script"]],
+            "printIds": [row["printId"]], "providers": [provider], "sourceUrls": [url],
+            "printedSetSize": size,
+            "printedSetSizeBasis": "the denominator printed beside the exact observed collector number" if size else "no printed set size observed",
+            "localeSuffix": None, "observedCollectorNumbers": [number],
+            "observedCoverage": "one exact positive card and rarity row from the official archive; not a set enumeration",
+            "markAssetUrls": [], "cardImageUrls": [],
+        },
+    }
+
+
+def remove_superseded_unknown_releases(graph: dict[str, Any]) -> None:
+    """Drop only legacy placeholders whose positive claim already maps to a real release."""
+    releases = {
+        item["entityId"]: item for item in graph["entities"]
+        if item.get("entityType") == "card-release"
+    }
+    replacements: dict[str, str] = {}
+    claims = [item for item in graph["entities"] if item.get("entityType") == "candidate-claim"]
+    for release_id_, release in releases.items():
+        payload = release.get("payload", {})
+        if (payload.get("locality") != "ID" or payload.get("language") != "Indonesian"
+                or payload.get("localIdentifierKnown") is not False
+                or "unknown-local-set" not in release_id_):
+            continue
+        mapped = {
+            claim.get("payload", {}).get("materializedTargetId")
+            for claim in claims
+            if claim.get("payload", {}).get("sourceKind") == "legacy-language-unit"
+            and claim.get("payload", {}).get("sourceId") in payload.get("legacyCounterpartUnitIds", [])
+            and claim.get("payload", {}).get("evidenceStatus") == "confirmed"
+        }
+        mapped = {target for target in mapped if target in releases and target != release_id_}
+        if len(mapped) == 1:
+            replacements[release_id_] = next(iter(mapped))
+
+    if not replacements:
+        return
+    finish_targets: list[tuple[str, str]] = []
+    for claim in claims:
+        payload = claim.get("payload", {})
+        target = replacements.get(payload.get("proposedCardReleaseId"))
+        if payload.get("sourceKind") == "finish-printing-record" and target:
+            payload["proposedCardReleaseId"] = target
+            finish_targets.append((claim["entityId"], target))
+    for item in graph["entities"]:
+        if item.get("entityType") == "rarity-claim":
+            old = item["payload"].get("cardReleaseId")
+            if old in replacements:
+                item["payload"]["cardReleaseId"] = replacements[old]
+        elif item.get("entityType") == "legacy-cardmarket-product":
+            refs = item["payload"].get("cardReleaseIds", [])
+            item["payload"]["cardReleaseIds"] = sorted({replacements.get(value, value) for value in refs})
+    for disposition in graph["migrationDispositions"]:
+        if disposition.get("targetRef") in replacements:
+            disposition["targetRef"] = replacements[disposition["targetRef"]]
+        if "targetRefs" in disposition:
+            disposition["targetRefs"] = [replacements.get(value, value) for value in disposition["targetRefs"]]
+    catalogue_ids = {
+        item["entityId"] for item in graph["entities"]
+        if item.get("entityType") == "catalogue-card-release-ref"
+        and item.get("payload", {}).get("cardReleaseId") in replacements
+    }
+    graph["entities"] = [item for item in graph["entities"] if not (
+        (item.get("entityType") == "card-release" and item.get("entityId") in replacements)
+        or (item.get("entityType") == "catalogue-card-release-ref" and item.get("entityId") in catalogue_ids)
+    )]
+    graph["edges"] = [edge for edge in graph["edges"] if not (
+        (edge.get("fromType") == "card-release" and edge.get("fromId") in replacements)
+        or (edge.get("toType") == "card-release" and edge.get("toId") in replacements)
+        or (edge.get("fromType") == "catalogue-card-release-ref" and edge.get("fromId") in catalogue_ids)
+        or (edge.get("toType") == "catalogue-card-release-ref" and edge.get("toId") in catalogue_ids)
+    )]
+    graph["edges"] = [edge for edge in graph["edges"] if not (
+        edge.get("fromType") == "candidate-claim" and edge.get("relation") == "proposes-for"
+        and edge.get("toId") in replacements
+    )]
+    for claim_id, target in finish_targets:
+        upsert_edge(graph, "candidate-claim", claim_id, "proposes-for", "card-release", target)
+    for item in graph["entities"]:
+        if item.get("entityType") == "rarity-claim":
+            target = item["payload"].get("cardReleaseId")
+            if target in releases and target not in replacements:
+                upsert_edge(graph, "rarity-claim", item["entityId"], "asserts-rarity-for", "card-release", target)
 
 
 def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prints: list[dict[str, Any]]) -> dict[str, Any]:
+    remove_superseded_unknown_releases(graph)
     localization_id = "LOCALIZATION:ID:id"
     by_code: dict[str, list[dict[str, Any]]] = {}
     for row in prints:
@@ -282,6 +448,18 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         else:
             upsert_entity(graph, "local-set", local_set_id, {"localSetId": local_set_id, "locality": "ID", "localCode": code, "observedNames": [], "productKind": "physical-card-set-or-product", "sourceRecordIds": [source_id]}, origin="reviewed-evidence-issue-258")
         upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", source_id)
+        for row in group:
+            rarity_profile = profiles.get(f"rarity:{row['printId']}")
+            if rarity_profile:
+                rarity_source_id = rarity_profile["sourceRecordId"]
+                upsert_entity(graph, "set-source-record", rarity_source_id, rarity_profile, origin="reviewed-evidence-issue-258")
+                disposition = {"sourceRecordId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": "an exact official archive row positively establishes this card rarity"}
+                upsert_entity(graph, "set-source-disposition", rarity_source_id, disposition, origin="reviewed-evidence-issue-258")
+                upsert_edge(graph, "set-source-disposition", rarity_source_id, "disposes", "set-source-record", rarity_source_id)
+                upsert_migration(graph, {"sourceKind": "set-catalogue-source", "sourceId": rarity_source_id, "disposition": "mapped", "targetRef": local_set_id, "reason": disposition["reason"]})
+                local_set = next(item["payload"] for item in graph["entities"] if item.get("entityType") == "local-set" and item.get("entityId") == local_set_id)
+                append_unique(local_set.setdefault("sourceRecordIds", []), rarity_source_id)
+                upsert_edge(graph, "local-set", local_set_id, "observed-by", "set-source-record", rarity_source_id)
 
         edition_matches = [row for row in graph["entities"] if row.get("entityType") == "set-edition" and row.get("entityId") == edition_id]
         if edition_matches:
@@ -298,6 +476,7 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         upsert_edge(graph, "set-edition", edition_id, "belongs-to", "local-set", local_set_id)
         upsert_edge(graph, "set-edition", edition_id, "localized-as", "localization", localization_id, {"decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254", "reviewedAt": "2026-08-24"})
 
+    units_by_id = {row["unitId"]: row for row in read(UNITS)}
     release_groups: dict[str, list[dict[str, Any]]] = {}
     for row in prints:
         release_groups.setdefault(release_id(row), []).append(row)
@@ -307,15 +486,62 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         first = group[0]
         edition_id = f"EDITION:ID:Indonesian:{first['localSetCode']}"
         work_id = f"WORK:{first['work']}"
+        legacy_ids = {unit_id for row in group for unit_id in row.get("legacy", [])}
+        legacy_patterns = {
+            (str(units_by_id[unit_id]["setCode"]), str(units_by_id[unit_id]["number"]).partition("/")[0])
+            for unit_id in legacy_ids if unit_id in units_by_id
+        }
+
+        def is_old_identity(value: Any) -> bool:
+            text = str(value or "")
+            return text.startswith("RELEASE:ID:Indonesian:") and any(
+                f":via-{code}:unknown-local-set:via-{number}:" in text
+                for code, number in legacy_patterns
+            )
+
         obsolete_release_ids = {
             item["entityId"] for item in graph["entities"]
             if item.get("entityType") == "card-release"
             and item.get("entityId") != rid
             and item.get("payload", {}).get("language") == "Indonesian"
-            and item.get("payload", {}).get("localSetCode") == first["localSetCode"]
-            and str(item.get("payload", {}).get("localNumber") or "").partition("/")[0].lstrip("0")
-            == first["localNumber"].partition("/")[0].lstrip("0")
+            and (
+                is_old_identity(item.get("entityId"))
+                or (item.get("payload", {}).get("localSetCode") == first["localSetCode"]
+                    and str(item.get("payload", {}).get("localNumber") or "").partition("/")[0].lstrip("0")
+                    == first["localNumber"].partition("/")[0].lstrip("0"))
+            )
         }
+        for item in graph["entities"]:
+            claim = item.get("payload", {})
+            if (item.get("entityType") == "candidate-claim"
+                    and claim.get("sourceKind") == "legacy-language-unit"
+                    and claim.get("sourceId") in legacy_ids
+                    and is_old_identity(claim.get("materializedTargetId"))):
+                obsolete_release_ids.add(claim["materializedTargetId"])
+        old_payloads = [item["payload"] for item in graph["entities"]
+                        if item.get("entityType") == "card-release" and item.get("entityId") in obsolete_release_ids]
+        finish_claim_ids: list[str] = []
+        rarity_claim_ids: list[str] = []
+        for item in graph["entities"]:
+            claim = item.get("payload", {})
+            if item.get("entityType") == "candidate-claim" and claim.get("sourceKind") == "finish-printing-record" and (
+                claim.get("proposedCardReleaseId") in obsolete_release_ids or is_old_identity(claim.get("proposedCardReleaseId"))
+            ):
+                claim["proposedCardReleaseId"] = rid
+                finish_claim_ids.append(item["entityId"])
+            elif item.get("entityType") == "rarity-claim" and claim.get("cardReleaseId") in obsolete_release_ids:
+                claim["cardReleaseId"] = rid
+                rarity_claim_ids.append(item["entityId"])
+        for disposition in graph["migrationDispositions"]:
+            if disposition.get("targetRef") in obsolete_release_ids or is_old_identity(disposition.get("targetRef")):
+                disposition["targetRef"] = rid
+            if "targetRefs" in disposition:
+                disposition["targetRefs"] = [rid if value in obsolete_release_ids or is_old_identity(value) else value for value in disposition["targetRefs"]]
+        for item in graph["entities"]:
+            if item.get("entityType") == "legacy-cardmarket-product":
+                refs = item["payload"].get("cardReleaseIds", [])
+                if any(value in obsolete_release_ids or is_old_identity(value) for value in refs):
+                    item["payload"]["cardReleaseIds"] = sorted({rid if value in obsolete_release_ids or is_old_identity(value) else value for value in refs})
         obsolete_catalogue_ids = {
             item["entityId"] for item in graph["entities"]
             if item.get("entityType") == "catalogue-card-release-ref"
@@ -337,6 +563,13 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
                 or (edge.get("toType") == "catalogue-card-release-ref" and edge.get("toId") in obsolete_catalogue_ids)
             )
         ]
+        graph["edges"] = [edge for edge in graph["edges"] if not (
+            edge.get("fromId") in finish_claim_ids and edge.get("relation") == "proposes-for" and edge.get("toId") != rid
+        )]
+        for claim_id in finish_claim_ids:
+            upsert_edge(graph, "candidate-claim", claim_id, "proposes-for", "card-release", rid)
+        for claim_id in rarity_claim_ids:
+            upsert_edge(graph, "rarity-claim", claim_id, "asserts-rarity-for", "card-release", rid)
         claims = []
         urls = []
         legacy = []
@@ -350,14 +583,47 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
             upsert_edge(graph, "candidate-claim", claim_id, "materializes", "card-release", rid, {"disposition": "established-and-mapped"})
             upsert_migration(graph, {"sourceKind": "source-first-record", "sourceId": row["printId"], "disposition": "established-and-mapped", "targetRef": rid, "reason": claim["reason"]})
 
+        legacy_claim_ids = []
+        for legacy_id in sorted(set(legacy)):
+            legacy_claim_id = f"CLAIM:legacy:{legacy_id}"
+            legacy_claim = next((item for item in graph["entities"] if item.get("entityType") == "candidate-claim" and item.get("entityId") == legacy_claim_id), None)
+            if legacy_claim is None:
+                continue
+            payload = legacy_claim["payload"]
+            payload["proposedTargetId"] = rid
+            payload["materializedTargetId"] = rid
+            payload["disposition"] = "established-and-mapped"
+            legacy_claim_ids.append(legacy_claim_id)
+            graph["edges"] = [edge for edge in graph["edges"] if not (
+                edge.get("fromType") == "candidate-claim" and edge.get("fromId") == legacy_claim_id
+                and edge.get("relation") == "materializes" and edge.get("toId") != rid
+            )]
+            upsert_edge(graph, "candidate-claim", legacy_claim_id, "materializes", "card-release", rid, {"disposition": "established-and-mapped"})
+            upsert_migration(graph, {"sourceKind": "legacy-language-unit", "sourceId": legacy_id, "disposition": "established-and-mapped", "targetRef": rid, "reason": payload.get("reason", "issue #258 re-key")})
+
         mapping_state = "mapped-by-explicit-equivalence" if legacy else "mapped"
+        identity_aliases = sorted({
+            (str(units_by_id[unit_id]["setCode"]), str(units_by_id[unit_id]["number"]))
+            for unit_id in legacy if unit_id in units_by_id
+        } | {tuple(value) for old in old_payloads for value in old.get("legacyIdentityAliases", [])})
+        claims = sorted(set(claims) | set(legacy_claim_ids))
         payload = {
             "cardReleaseId": rid, "setEditionId": edition_id, "locality": "ID", "language": "Indonesian", "script": "Latn",
             "localSetCode": first["localSetCode"], "localNumber": first["localNumber"], "localIdentifierKnown": True, "state": "identified",
             "work": first["work"], "workMappingState": mapping_state, "viaLegacySetCode": None, "viaLegacyNumber": None,
-            "claimIds": sorted(claims), "establishingClaimIds": sorted(claims), "nonEstablishingClaimIds": [],
-            "legacyVariants": sorted({row["variant"] for row in group}), "legacyProducts": [], "sourceRecords": sorted(set(urls)),
-            "sourceFirstRecordIds": sorted(row["printId"] for row in group), "legacyCounterpartUnitIds": sorted(set(legacy)),
+            "claimIds": sorted(set(claims) | {value for old in old_payloads for value in old.get("claimIds", [])}),
+            "establishingClaimIds": sorted(set(claims) | {value for old in old_payloads for value in old.get("establishingClaimIds", []) if not value.startswith("CLAIM:legacy:")}),
+            "nonEstablishingClaimIds": sorted({value for old in old_payloads for value in old.get("nonEstablishingClaimIds", [])}),
+            "legacyVariants": sorted({row["variant"] for row in group} | {value for old in old_payloads for value in old.get("legacyVariants", [])}),
+            "legacyProducts": sorted({value for old in old_payloads for value in old.get("legacyProducts", [])}),
+            "sourceRecords": sorted(
+                set(urls)
+                | {url for row in group for url in row.get("corroboratingSourceUrls", [])}
+                | {value for old in old_payloads for value in old.get("sourceRecords", [])}
+            ),
+            "sourceFirstRecordIds": sorted({row["printId"] for row in group} | {value for old in old_payloads for value in old.get("sourceFirstRecordIds", [])}),
+            "legacyCounterpartUnitIds": sorted(set(legacy) | {value for old in old_payloads for value in old.get("legacyCounterpartUnitIds", [])}),
+            "legacyIdentityAliases": [list(value) for value in identity_aliases],
             "releaseDate": first["releaseDate"], "releaseDatePrecision": first["releaseDatePrecision"], "releaseApproximate": bool(first.get("releaseApproximate")),
         }
         upsert_entity(graph, "card-release", rid, payload, origin="reviewed-evidence-issue-258")
@@ -367,13 +633,23 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
         upsert_edge(graph, "catalogue-card-release-ref", rid, "belongs-to", "set-edition", edition_id)
         upsert_edge(graph, "catalogue-card-release-ref", rid, "references", "card-release", rid)
 
-        source_id = stable_profile_id("ID", first["localSetCode"])
         rarity_id = "RARITYCLAIM:issue258:" + rid.removeprefix("RELEASE:ID:Indonesian:")
         rarity_native, rarity_normalized = first["rarity"]
-        rarity_payload = {"rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": source_id, "sourceProvider": "mixed-positive-evidence", "sourceVocabulary": "printed-Indonesian-card-render", "sourceNativeValue": rarity_native, "normalizedRarityId": rarity_normalized, "sourceProductKey": first["sourceUrl"]}
+        set_profile = profiles[first["localSetCode"]]
+        rarity_profile = profiles.get(f"rarity:{first['printId']}", set_profile)
+        rarity_source_id = rarity_profile["sourceRecordId"]
+        rarity_payload = {
+            "rarityClaimId": rarity_id, "cardReleaseId": rid, "sourceRecordId": rarity_source_id,
+            "sourceProvider": rarity_profile["provider"],
+            "sourceVocabulary": "printed-Indonesian-card-render",
+            "sourceNativeValue": rarity_native, "normalizedRarityId": rarity_normalized,
+            "sourceProductKey": first.get("raritySourceUrl") or first["sourceUrl"],
+        }
+        if first.get("rarityRetrievedAt") or first.get("retrievedAt"):
+            rarity_payload["retrievedAt"] = first.get("rarityRetrievedAt") or first["retrievedAt"]
         upsert_entity(graph, "rarity-claim", rarity_id, rarity_payload, origin="reviewed-evidence-issue-258")
         upsert_edge(graph, "rarity-claim", rarity_id, "asserts-rarity-for", "card-release", rid)
-        upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", source_id)
+        upsert_edge(graph, "rarity-claim", rarity_id, "observed-by", "set-source-record", rarity_source_id)
 
     mapping_rows = []
     for row in prints:
@@ -387,9 +663,6 @@ def apply_graph(graph: dict[str, Any], profiles: dict[str, dict[str, Any]], prin
             upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": legacy_id, "disposition": "linked-local-counterpart", "targetRef": rid, "targetRefs": [rid], "reason": "issue #258 re-key"})
             mapping_rows.append({"legacyUnitId": legacy_id, "sourceFirstRecordId": row["printId"], "assertionType": "same-work-decision", "assertedBy": "repository verification pass", "assertedAt": "2026-08-28", "evidenceUrl": row["sourceUrl"], "evidence": assertion["evidence"]})
 
-    for unresolved in ("U0170", "U0603"):
-        upsert_migration(graph, {"sourceKind": "legacy-issue-rekey", "sourceId": unresolved, "disposition": "needs-positive-local-identity", "targetRef": None, "targetRefs": [], "reason": "issue #258 re-key"})
-
     return graph_projection.project_physical_evidence(graph), mapping_rows
 
 
@@ -399,14 +672,14 @@ def main() -> int:
     args = parser.parse_args()
 
     official = official_prints()
-    issue_prints = official + PROMOS
+    issue_prints = official + ARCHIVE_ADMISSIONS + PROMOS
 
     prints_doc = read(PRINTS)
     before_prints = encoded(prints_doc)
     by_print = {row["printId"]: row for row in prints_doc["prints"]}
     by_print.update({row["printId"]: {key: value for key, value in row.items() if key not in {"work", "rarity", "legacy"}} for row in issue_prints})
     prints_doc["prints"] = sorted(by_print.values(), key=lambda row: row["printId"])
-    prints_doc["meta"]["generated"] = "2026-08-28"
+    prints_doc["meta"]["generated"] = "2026-09-25"
     prints_doc["meta"]["counts"]["admitted"] = len(prints_doc["prints"])
 
     specimens_doc = read(SPECIMENS)
@@ -424,7 +697,20 @@ def main() -> int:
     specimen_27 = by_specimen["SPEC-0027"]
     specimen_27["physicalObservation"] = {"finish": "holo", "foilPattern": "ripple", "markings": "Indomaret logo in artwork", "markingRole": "distribution-promo", "distribution": {"kind": "purchase-promo", "name": "Indomaret booster pack purchase, July 25-August 31, 2020"}, "cardSize": "standard", "basis": "The owner photograph shows reflective treatment across the full-art card and Pokumon independently classifies the exact Indonesian 166/SM-P printing as Ripple."}
     specimen_27["citedBy"] = sorted(set(specimen_27.get("citedBy") or []) | {"ID:SM-P:166:base"})
+    for row in ARCHIVE_ADMISSIONS:
+        specimen = by_specimen[row["specimenId"]]
+        specimen["citedBy"] = sorted(set(specimen.get("citedBy") or []) | {row["printId"]})
+        specimen.pop("allowUnprojected", None)
     specimens_doc["specimens"] = sorted(by_specimen.values(), key=lambda row: int(row["specimenId"].split("-")[1]))
+
+    manifests = []
+    for path, row in zip(ARCHIVE_MANIFESTS, ARCHIVE_ADMISSIONS, strict=True):
+        document = read(path)
+        before = encoded(document)
+        observation = next(item for item in document["observations"] if item["specimenId"] == row["specimenId"])
+        observation["citedBy"] = sorted(set(observation.get("citedBy") or []) | {row["printId"]})
+        observation.pop("allowUnprojected", None)
+        manifests.append((path, document, before))
 
     finishes = read(FINISHES)
     before_finishes = encoded(finishes)
@@ -449,11 +735,17 @@ def main() -> int:
     for row in finishes["overrides"]:
         if row.get("setCode") == "SV-P/ID" and row.get("number") == "117" and "Indonesian" in (row.get("languages") or []):
             row["releaseSetCode"] = "SV-P"
-    finishes["meta"]["lastUpdated"] = "2026-08-28"
+    finishes["meta"]["lastUpdated"] = "2026-09-25"
 
     set_sources = read(SET_SOURCES)
     before_sources = encoded(set_sources)
     profiles = apply_profiles(set_sources, issue_prints)
+    ac3b_profile = profiles["AC3b"]
+    ac3b_profile["retrieved"] = "2026-09-15"
+    ac3b_profile["raw"]["observedCoverage"] = "two exact positive card rows manually inspected in the official AC3b archive list; not an enumeration or completeness claim"
+    for record in set_sources["sourceRecords"]:
+        if record["sourceRecordId"] == ac3b_profile["sourceRecordId"]:
+            record.update(ac3b_profile)
 
     discovery_adapters = read(DISCOVERY_ADAPTERS)
     before_discovery_adapters = encoded(discovery_adapters)
@@ -468,17 +760,7 @@ def main() -> int:
 
     capabilities = read(CAPABILITIES)
     before_capabilities = encoded(capabilities)
-    asia_surface = next(
-        row for row in capabilities["surfaces"]
-        if row["surfaceId"] == "asia-card-search"
-    )
-    asia_edge = next(
-        row for row in asia_surface["coverageEdges"]
-        if row["edgeId"] == "asia-card-search-positive"
-    )
-    asia_edge["positiveEvidenceCapabilities"] = [
-        "language", "card-existence", "local-set-identifier"
-    ]
+    original_surface_order = [row["surfaceId"] for row in capabilities["surfaces"]]
     image_surface = {
         "surfaceId": "asia-card-image",
         "providerId": "pokemon-card-asia",
@@ -541,19 +823,8 @@ def main() -> int:
     }
     by_surface = {row["surfaceId"]: row for row in capabilities["surfaces"]}
     by_surface[image_surface["surfaceId"]] = image_surface
-    surface_order = [
-        "pokemon-cn-product-pages", "tpci-checklists", "tpci-localized-card-archive",
-        "tpci-latam-spanish-card-assets", "tpci-eu-spanish-card-assets", "jp-card-search",
-        "jp-product-pages", "asia-card-search", "pokemon-card-korea-historical-detail",
-        "tcgdex-api", "bulbapedia-mediawiki", "tcgcsv-api", "psa-registry", "cgc-registry",
-        "pokumon-search", "snkrdunk-listings", "52poke-wiki", "koreanpokemoncards-site",
-        "elitefourum-topics", "ligapokemon-catalogue", "cardmarket-products",
-        "pokemontcgio-api", "limitlesstcg-cards", "play-pokemon-gallery", "retailer-listings",
-        "internal-derivations", "owner-attestations", "inspected-specimens",
-        "cardmarket-listing-photos", "seller-listing-photos", "pokecottage-master-lists",
-        "pokecardex-scan-archive", "pkparaiso-card-scans", "wikidex-card-scans",
-        "asia-card-image",
-    ]
+    surface_order = original_surface_order
+    surface_order.extend(sorted(set(by_surface) - set(surface_order)))
     capabilities["surfaces"] = [by_surface[surface_id] for surface_id in surface_order]
     image_observation = {
         "observationId": "obs-asia-card-image",
@@ -575,19 +846,8 @@ def main() -> int:
         row["observationId"]: row for row in capabilities["observations"]
     }
     by_observation[image_observation["observationId"]] = image_observation
-    observation_order = [
-        "obs-tpci-checklist", "obs-tpci-outside-checklist", "obs-tpci-it-card-archive",
-        "obs-tpci-latam-svp184", "obs-tpci-eu-svp184", "obs-jp-card-search",
-        "obs-jp-product-page", "obs-asia-card-search", "obs-pokemon-card-korea-bs2010002030",
-        "obs-tcgdex-west", "obs-tcgdex-asia", "obs-bulbapedia", "obs-tcgcsv", "obs-psa",
-        "obs-cgc", "obs-pokumon", "obs-pokumon-finish-tag", "obs-pokecottage-snorlax-master-list",
-        "obs-pokecardex-scan", "obs-pkparaiso-scan", "obs-wikidex-scan", "obs-snkrdunk",
-        "obs-52poke", "obs-elitefourum", "obs-elitefourum-outside-table", "obs-ligapokemon",
-        "obs-cardmarket", "obs-pokemontcgio", "obs-play-series7", "obs-play-outside-series7",
-        "obs-retailer", "obs-internal-derivation", "obs-owner-attestation",
-        "obs-inspected-specimen", "obs-cardmarket-listing-photo", "obs-seller-listing-photo",
-        "obs-bulbapedia-historical-index", "obs-pokemon-cn-finish-rules", "obs-asia-card-image",
-    ]
+    observation_order = [row["observationId"] for row in capabilities["observations"]]
+    observation_order.extend(sorted(set(by_observation) - set(observation_order)))
     capabilities["observations"] = [
         by_observation[observation_id] for observation_id in observation_order
     ]
@@ -595,6 +855,25 @@ def main() -> int:
     graph = read(GRAPH)
     before_graph = encoded(graph)
     graph, mappings = apply_graph(graph, profiles, issue_prints)
+    for legacy_id in ("U0170", "U0603"):
+        assertions = [
+            item["payload"] for item in graph["entities"]
+            if item.get("entityType") == "equivalence-assertion"
+            and item.get("payload", {}).get("legacyUnitId") == legacy_id
+        ]
+        if len(assertions) != 1:
+            raise ValueError(f"expected one retained positive issue #258 re-key for {legacy_id}")
+        assertion = assertions[0]
+        mappings.append({key: assertion[key] for key in (
+            "legacyUnitId", "sourceFirstRecordId", "assertionType", "assertedBy",
+            "assertedAt", "evidenceUrl", "evidence",
+        )})
+        target = assertion["fromId"]
+        upsert_migration(graph, {
+            "sourceKind": "legacy-issue-rekey", "sourceId": legacy_id,
+            "disposition": "linked-local-counterpart", "targetRef": target,
+            "targetRefs": [target], "reason": "issue #258 re-key",
+        })
 
     rekeys = read(REKEYS)
     before_rekeys = encoded(rekeys)
@@ -603,7 +882,7 @@ def main() -> int:
     by_issue[258] = question
     rekeys["questionSets"] = sorted(by_issue.values(), key=lambda row: row["issueNumber"])
 
-    changed = any((before_prints != encoded(prints_doc), before_specimens != encoded(specimens_doc), before_finishes != encoded(finishes), before_sources != encoded(set_sources), before_discovery_adapters != encoded(discovery_adapters), before_capabilities != encoded(capabilities), before_graph != encoded(graph), before_rekeys != encoded(rekeys)))
+    changed = any((before_prints != encoded(prints_doc), before_specimens != encoded(specimens_doc), before_finishes != encoded(finishes), before_sources != encoded(set_sources), before_discovery_adapters != encoded(discovery_adapters), before_capabilities != encoded(capabilities), before_graph != encoded(graph), before_rekeys != encoded(rekeys), *(before != encoded(document) for _, document, before in manifests)))
     if args.check:
         missing = [row["specimenId"] for row in specimen_rows(official) if not by_specimen.get(row["specimenId"], {}).get("photographSha256")]
         if missing:
@@ -621,6 +900,8 @@ def main() -> int:
     write(CAPABILITIES, capabilities)
     GRAPH.write_text(encoded(graph), encoding="utf-8", newline="\n")
     write(REKEYS, rekeys)
+    for path, document, _ in manifests:
+        write(path, document)
     print(f"admitted {len(issue_prints)} Indonesian source-first records, {len(mappings)} positive re-keys and {len(specimen_rows(official))} image specs")
     return 0
 

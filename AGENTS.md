@@ -106,7 +106,9 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    never from a reused pass default.
 3. **Never contradict on bare absence.** A source that fails to list a printing has a gap. It has
    not proved the printing does not exist. Official Pokémon sources confirm only the releases they
-   name for the matching language and region. Missing rows, fields, pages, and results stay unknown.
+   name for the matching language and region. An exact positive card row remains evidence for that
+   named card even when the archive is not historically complete; incomplete coverage limits
+   extrapolation, not the value of the row itself. Missing rows, fields, pages, and results stay unknown.
    This rule exists because an
    absence argument produced a false contradiction (`XY-P 149`) that had to be reverted
    ([LESSONS](LESSONS.md#an-absence-argument-that-produced-a-false-contradiction)).
@@ -222,7 +224,11 @@ These are the things that have actually caused mistakes. Full treatment is in
   records the stable issue URL as `photographSource`; it is provenance, not a place the image
   will still be. The direct
   `--specimen ... --from ...` form remains for a local or already reachable image. Never write a
-  new prose description of a specimen — that is what the ids replaced.
+  new prose description of a specimen — that is what the ids replaced. If the source bytes are
+  WebP, retain and hash the original, decode it losslessly to PNG, compare decoded pixels exactly,
+  then import the PNG; record both hashes and conversion details in the evidence bundle. The
+  [specimen-intake skill](.agents/skills/snoredex-specimen-intake/SKILL.md#webp-source-photographs)
+  gives the full procedure and historical examples.
 - **Graph printing identity is semantic, not ordinal.** Finish records still carry their source
   `printingId` for traceability, but graph claims/nodes derive a `semanticPrintingId` from the
   release, finish, edition, foil pattern, markings, distribution, and card size. Existing graph

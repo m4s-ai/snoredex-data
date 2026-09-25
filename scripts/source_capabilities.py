@@ -210,6 +210,18 @@ def unmatched_surface_fallback(candidates: list[dict[str, Any]]) -> list[dict[st
     return [surface for surface in candidates if not surface.get("match")]
 
 
+def validate_asia_archive_route(row: dict[str, Any], surface: dict[str, Any]) -> None:
+    """Keep official archived card-list PDFs off the recent-search fallback."""
+    source_url = row.get("canonicalUrl") or ""
+    if row["providerId"] == "pokemon-card-asia" \
+            and "/archive/card/pdf/" in source_url \
+            and surface["surfaceId"] != "asia-archived-card-list-pdf":
+        raise ContractError(
+            f"official archived card-list PDF {source_url} must resolve to "
+            "asia-archived-card-list-pdf, not the recent card-search fallback"
+        )
+
+
 def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
                        ) -> dict[str, Any]:
     providers = require_unique(manifest["providers"], "providerId", "provider ids")
@@ -325,6 +337,7 @@ def validate_semantics(manifest: dict[str, Any], registry: dict[str, Any]
     source_resolution = []
     for row in registry["evidence"]:
         surface = route_evidence(row, surfaces_by_provider)
+        validate_asia_archive_route(row, surface)
         surface_edges = surface["coverageEdges"]
         if not surface_edges:
             source = row.get("canonicalUrl") or row.get("nonUrlEvidenceId")

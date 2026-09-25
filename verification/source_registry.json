@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-21",
+  "generated": "2026-09-25",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1614,
-   "uniqueUrls": 1607,
+   "evidenceRecords": 1619,
+   "uniqueUrls": 1612,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6255
+   "claimsAttributed": 6279
   }
  },
  "providers": [
@@ -104,19 +104,22 @@
    "licenseOrTerms": "Publisher's own terms.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "recent Traditional Chinese, Indonesian and Thai cards",
+   "coverage": "recent localized card details and exact rows from individually inspected archived Asian card lists",
    "supportsAbsence": false,
    "usedFor": [
     "language",
+    "card-existence",
+    "local-set-identifier",
+    "rarity",
     "date"
    ],
    "attribution": "Asian card data © The Pokémon Company.",
-   "notes": "Recent releases only; older printings are out of coverage.",
+   "notes": "The searchable card database is recent and does not cover all older printings. Individually inspected archived card-list rows positively support only the exact cards they show; the archive is not assumed historically complete and omissions remain unknown. Neither surface establishes physical finish.",
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 202,
-   "claimsSupported": 729
+   "uniqueSources": 204,
+   "claimsSupported": 735
   },
   {
    "providerId": "pokemon-card-korea",
@@ -741,7 +744,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 191
+   "claimsSupported": 196
   },
   {
    "providerId": "inspected-specimen",
@@ -763,7 +766,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 65,
-   "claimsSupported": 731
+   "claimsSupported": 733
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -805,9 +808,11 @@
    ],
    "attribution": "Seller listing photograph from the marketplace named by the retained listing URL.",
    "notes": "Generic tier-2 provider for retained eBay, Shopee, Enjoei and similar marketplace photographs. The exact marketplace remains explicit in each listing URL and specimen record. Cardmarket photographs retain their dedicated provider. Positive evidence only: a listing proves only the visible specimen and never absence or catalogue completeness.",
-   "hosts": [],
-   "uniqueSources": 133,
-   "claimsSupported": 564
+   "hosts": [
+    "down-tw.img.susercontent.com"
+   ],
+   "uniqueSources": 136,
+   "claimsSupported": 575
   }
  ],
  "evidence": [
@@ -11918,7 +11923,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 211,
+   "stableIdCount": 213,
    "stableIds": [
     "F0054-P01",
     "F0094-P02",
@@ -11930,6 +11935,8 @@
     "F0456-P01",
     "F0456-P02",
     "F0456-P03",
+    "F0457-P01",
+    "F0457-P02",
     "F0519-P02",
     "F0530-P01",
     "F0534-P01",
@@ -12133,7 +12140,7 @@
     "U0780"
    ],
    "retrievedAt": "2026-09-10",
-   "usageCount": 359
+   "usageCount": 361
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -13656,7 +13663,7 @@
     "finish-override",
     "language"
    ],
-   "stableIdCount": 169,
+   "stableIdCount": 174,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0009-P01",
@@ -13695,6 +13702,7 @@
     "F0173-P01",
     "F0174-P01",
     "F0174-P02",
+    "F0221-P01",
     "F0289-P02",
     "F0332-P01",
     "F0402-P02",
@@ -13712,6 +13720,7 @@
     "F0523-P02",
     "F0524-P01",
     "F0524-P02",
+    "F0529-P01",
     "F0569-P02",
     "F0569-P03",
     "F0570-P02",
@@ -13791,9 +13800,11 @@
     "SPEC-0524",
     "SPEC-0525",
     "SPEC-0533",
+    "SPEC-0555",
     "TH:AS5a:142/184:base",
     "TH:sc1a T:127/154:base",
     "TW:AS5a:142:base",
+    "TW:MC F:568/742:base",
     "U0092",
     "U0097",
     "U0098",
@@ -13826,10 +13837,11 @@
     "U0793",
     "override:owner-jungle-number-finish-20260910",
     "override:owner-scan-review",
-    "override:owner-svp184-western-prerelease-variants"
+    "override:owner-svp184-western-prerelease-variants",
+    "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-09-21",
-   "usageCount": 189
+   "retrievedAt": "2026-09-24",
+   "usageCount": 194
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -13954,6 +13966,26 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/archive/card/pdf/AC3_setB.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-existence",
+    "rarity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:AC3b:238/204:base",
+    "ID:AC3b:239/204:base"
+   ],
+   "retrievedAt": "2026-09-15T12:51:30.841678+00:00",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/id/archive/special/card/ma6",
@@ -16270,6 +16302,25 @@
    ],
    "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Positive source-first card record",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "card-existence",
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "TW:AS5a:204/184:base"
+   ],
+   "retrievedAt": "2026-09-15",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a",
@@ -25055,6 +25106,25 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://down-id.img.susercontent.com/file/id-11134207-81zto-mr3r2xnw3ny9e7",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:AC3b:238/204:base",
+    "SPEC-0557"
+   ],
+   "retrievedAt": "2026-09-24",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://down-id.img.susercontent.com/file/id-11134207-82251-mkj3dsj5huyrbe.webp",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -25378,6 +25448,26 @@
    ],
    "retrievedAt": "2026-09-21",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://down-tw.img.susercontent.com/file/tw-11134207-820la-mkyw9uejp81zaa@resize_w450_nl.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Inspected physical specimen photograph",
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0221-P01",
+    "SPEC-0555",
+    "TW:MC F:568/742:base"
+   ],
+   "retrievedAt": "2026-09-24",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
@@ -26196,6 +26286,25 @@
    ],
    "retrievedAt": "2026-08-26",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/YVsAAeSwBUJoxXXv/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:AC3b:239/204:base",
+    "SPEC-0556"
+   ],
+   "retrievedAt": "2026-09-24",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",

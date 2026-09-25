@@ -15,6 +15,61 @@ Newest first.
 
 ---
 
+## An incomplete archive can still prove the row it contains
+
+**Trap:** *A source does not need a historically complete list for one exact positive card row to count as evidence.*
+
+The Indonesian AC3b archive visibly lists Snorlax & Eevee GX 238/204 and 239/204. Both exact seller photographs
+independently show the Indonesian card faces and foil. The Taiwan AS5a archive visibly lists 204/184. Initial research
+stalled on whether those archive pages were complete across history. That question was relevant to claims about omitted
+cards, but it did not weaken the positive rows in front of us. Requiring completeness before admitting a positive row
+turned a useful exact observation into another unresolved placeholder.
+
+There was a second failure after the evidence was admitted: the Indonesian pass moved legacy claims to identified
+source-first releases while leaving superseded `unknown-local-set` releases in the graph. The graph therefore retained
+the appearance of an unresolved identity beside a positive canonical target. The pass now removes only a placeholder
+whose confirmed legacy claim already targets an existing identified release, and preserves its aliases and connected
+references. Its capability update also preserves existing surfaces and observations, so replaying the pass cannot erase
+newer registrations or invalidate unrelated retained discovery runs.
+
+Record an exact positive row in the canonical store using only the identity and fields it establishes. Keep an explicit
+unknown for absent rows, and do not claim the exact row closes a set, language, finish, or historical inventory without
+separate evidence for that broader scope.
+
+**Now guarded by** the positive-row rule in `AGENTS.md` §3, the exact AC3b and AS5a admissions in
+`verification/passes/admit_issue258_indonesian_20260828.py` and
+`verification/passes/admit_issue263_traditional_chinese_20260828.py`, and the source-first-to-consumer checks in
+`verification/review_findings.py`.
+
+*PR #397.*
+
+---
+
+## A WebP download is not a failed specimen intake
+
+**Trap:** *When an image endpoint returns WebP, retain those original bytes and losslessly decode
+them to PNG before using the canonical specimen importer.*
+
+The eBay card image supplied for Indonesian AC3b 239/204 returned WebP. The importer correctly
+rejected those bytes because retained specimen photographs must be PNG or JPEG. The first reading
+of that error was that the owner would need to provide a PNG/JPEG. That overlooked earlier work:
+issue #256 rounds 3 and 6–9 had already retained the WebP originals, decoded them to PNG, and
+checked pixel equality. The owner had supplied the reachable original image; asking for another
+format would have added an unnecessary handoff and delayed the evidence intake.
+
+The corrected intake keeps the original WebP, URL, dimensions, size and hash in the evidence
+bundle, then records the decoded PNG hash and verifies exact decoded-pixel equality before import.
+The URL suffix is not a format check. The conversion changes the container, not the inspected
+pixels; it does not upgrade seller metadata or broaden what one photographed copy proves.
+
+**Now guarded by** the [WebP procedure in the specimen-intake skill](.agents/skills/snoredex-specimen-intake/SKILL.md#webp-source-photographs),
+the physical-card workflow in `verification/RESUME.md`, and the format note in
+`verification/fetch_attachment.py`. `AGENTS.md` points each intake to that procedure.
+
+*PR #397.*
+
+---
+
 ## An imported image is not yet connected evidence
 
 PR #373 repeatedly found the same defects on newly retained specimens: legacy-only citation

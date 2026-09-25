@@ -25,7 +25,7 @@ from authoritative_graph import identity_view, project_physical_evidence, valida
 def issue263_rebuilt_graph() -> dict:
     prints = issue263_pass.read(issue263_pass.PRINTS)
     existing = {row["printId"]: row for row in prints["prints"]}
-    official = issue263_pass.official_rows()
+    official = issue263_pass.official_rows(existing)
     photos = issue263_pass.enrich_photo_rows()
     rows = official + photos + issue263_pass.supplemental_rows(existing)
     sources = issue263_pass.read(issue263_pass.SET_SOURCES)

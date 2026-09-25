@@ -239,14 +239,35 @@ def main() -> None:
     }, "the owner photograph establishes exactly the three named Promo-card printings"
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
-        ("ID", "pokemon-card-asia"): 31,
+        ("ID", "pokemon-card-asia"): 33,
         ("TH", "pokemon-card-asia"): 26,
-        ("TW", "pokemon-card-asia"): 41,
+        ("TW", "pokemon-card-asia"): 42,
     }
     independently_corroborated_prints = {
         "KR:BS2:30/40:base", "KR:S-P:101:base", "KR:BW7:055/070:base",
         "KR:XY2:066/080:base", "KR:sv5a:051/066:base",
     }
+    retained_taiwan_specimens = {
+        "TW:AS5D:118/169:base": "SPEC-0494",
+        "TW:MC F:567/742:base": "SPEC-0502",
+        "TW:MC F:568/742:base": "SPEC-0503",
+        "TW:MC F:569/742:base": "SPEC-0504",
+        "TW:SCA F:084/135:base": "SPEC-0498",
+        "TW:SI F:341/414:base": "SPEC-0499",
+        "TW:SV-P:215:base": "SPEC-0501",
+        "TW:sc1b F:120/153:base": "SPEC-0506",
+        "TW:sc1b F:165/153:base": "SPEC-0495",
+        "TW:scD F:111/159:base": "SPEC-0497",
+        "TW:sv4a F:145/190:base": "SPEC-0500",
+    }
+    taiwan_by_print = {row["printId"]: row for row in source_first_prints}
+    assert set(retained_taiwan_specimens) <= set(taiwan_by_print)
+    for print_id, specimen_id in retained_taiwan_specimens.items():
+        row = taiwan_by_print[print_id]
+        assert row["corroborated"] is True
+        assert specimen_id in row["corroboratingSpecimenIds"]
+        assert row["corroboratingSourceUrls"]
+        assert print_id in specimen_by_id[specimen_id]["citedBy"]
     for provider_key, expected_count in single_provider_counts.items():
         official_prints = [
             row for row in source_first_prints
@@ -726,15 +747,18 @@ def main() -> None:
     ) == [{"kind": "deck-logo", "role": "distribution-promo", "text": "Mewtwo"}]
     archive_only_finish_statuses = {
         unit["finishUnitId"]: unit["availabilityStatus"] for unit in finish_units
-        if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0529", "F0635"}
+        if unit["finishUnitId"] in {"F0139", "F0172", "F0179", "F0635"}
     }
     assert archive_only_finish_statuses == {
         "F0139": "confirmed",
         "F0172": "confirmed",
         "F0179": "marketplace-claimed",
-        "F0529": "pending",
         "F0635": "pending",
     }
+    spanish_swsh032 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0529")
+    assert spanish_swsh032["availabilityStatus"] == "confirmed"
+    assert spanish_swsh032["finishStatus"]["holo"] == "confirmed"
+    assert spanish_swsh032["printings"][0]["foilPattern"] == "cosmos"
     spanish_generations = next(unit for unit in finish_units if unit["finishUnitId"] == "F0139")
     assert spanish_generations["finishStatus"]["reverse-holo"] == "confirmed"
     assert spanish_generations["finishStatus"]["non-holo"] == "marketplace-claimed"
