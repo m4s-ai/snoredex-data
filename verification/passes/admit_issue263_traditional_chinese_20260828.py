@@ -211,6 +211,21 @@ SUPPLEMENTAL = [
     card("existing-sc1b177", "SPEC-0008", "sc1b F", "177/153", "Snorlax-VMAX-G-Max-Fall", ("HR", None), card_name="Snorlax VMAX"),
 ]
 
+# Preserve exact second-source evidence when this pass rebuilds official Taiwan rows.
+RETAINED_CORROBORATION = {
+    "TW:AS5D:118/169:base": ("SPEC-0494", "https://beehivetcg.com/cdn/shop/products/aef8c9b3a05d7062fe9d2fc81d7718a1.png?v=1661778006&width=600", "https://beehivetcg.com/products/as5d-118-169-%E4%BC%8A%E5%B8%83-%E5%8D%A1%E6%AF%94%E7%8D%B8-gx"),
+    "TW:MC F:567/742:base": ("SPEC-0502", "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600", "https://beehivetcg.com/products/mcf-567-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:MC F:568/742:base": ("SPEC-0503", "https://beehivetcg.com/cdn/shop/files/0e76344daaa0cb314f25bf211ef84d42.png?v=1768747014&width=600", "https://beehivetcg.com/products/mcf-568-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:MC F:569/742:base": ("SPEC-0504", "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600", "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:SCA F:084/135:base": ("SPEC-0498", "https://rocketcoll.com/cdn/shop/files/377577.png?v=1767884934", "https://rocketcoll.com/products/sca-084-135-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:SI F:341/414:base": ("SPEC-0499", "https://rocketcoll.com/cdn/shop/files/381827.png?v=1767887802", "https://rocketcoll.com/products/%E9%8F%A1%E9%9D%A2%E9%96%83%E7%89%88sif-341-414"),
+    "TW:SV-P:215:base": ("SPEC-0501", "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg", "https://www.ebay.de/itm/168013799605"),
+    "TW:sc1b F:120/153:base": ("SPEC-0506", "https://down-tw.img.susercontent.com/file/sg-11134201-22120-3dqgx92101kv6d"),
+    "TW:sc1b F:165/153:base": ("SPEC-0495", "https://i.ebayimg.com/images/g/NTwAAOSwREVhTZRC/s-l1600.jpg", "https://www.ebay.com/itm/224621405527"),
+    "TW:scD F:111/159:base": ("SPEC-0497", "https://rocketcoll.com/cdn/shop/files/377909_d908b57a-0f09-4289-9fc6-12657bafc582.png?v=1767886000", "https://rocketcoll.com/products/scd-111-159-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+    "TW:sv4a F:145/190:base": ("SPEC-0500", "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965", "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8"),
+}
+
 ISSUE_UNITS = sorted({
     "U0050", "U0104", "U0128", "U0169", "U0174", "U0203", "U0234", "U0258",
     "U0261", "U0292", "U0307", "U0345", "U0371", "U0385", "U0403", "U0441",
@@ -240,12 +255,23 @@ def discovery_rows() -> dict[str, dict[str, Any]]:
     return rows
 
 
-def official_rows() -> list[dict[str, Any]]:
+def official_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
     discovered = discovery_rows()
     result = []
     for facts in OFFICIAL:
         raw = discovered[facts["detail"]]
         date, precision = facts["date"] or SET_DATES[facts["localSetCode"]]
+        print_id = facts["printId"]
+        prior = existing.get(print_id, {})
+        retained = RETAINED_CORROBORATION.get(print_id)
+        specimen_ids = prior.get("corroboratingSpecimenIds") or ([retained[0]] if retained else [])
+        source_urls = prior.get("corroboratingSourceUrls") or (list(retained[1:]) if retained else [])
+        corroboration = {}
+        if specimen_ids and source_urls:
+            corroboration = {
+                "corroboratingSpecimenIds": sorted(set(specimen_ids)),
+                "corroboratingSourceUrls": sorted(set(source_urls)),
+            }
         result.append({
             **facts,
             "locality": LOCALITY,
@@ -255,7 +281,8 @@ def official_rows() -> list[dict[str, Any]]:
             "catchUpOf": "the exact Traditional Chinese counterpart established by its printed attacks and card traits",
             "providerId": "pokemon-card-asia",
             "sourceUrl": raw["sourceUrl"],
-            "corroborated": False,
+            "corroborated": bool(corroboration),
+            **corroboration,
             "markAssetUrl": raw["raw"].get("setSymbolUrl"),
             "cardImageUrl": raw["raw"]["cardImageUrl"],
             "releaseDate": date,
@@ -899,7 +926,7 @@ def main() -> int:
 
     prints = read(PRINTS)
     existing_prints = {row["printId"]: row for row in prints["prints"]}
-    official = official_rows()
+    official = official_rows(existing_prints)
     photos = enrich_photo_rows()
     supplemental = supplemental_rows(existing_prints)
     rows = official + photos + supplemental
