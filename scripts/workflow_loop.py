@@ -27,7 +27,11 @@ if str(ROOT / "scripts") not in sys.path:
 MANIFEST = ROOT / "verification" / "workflow_loop_manifest.json"
 EVIDENCE = ROOT / "verification" / "evidence_semantics.json"
 SOURCE_ADAPTERS = ROOT / "verification" / "source_adapters.json"
+SOURCE_STAGING = ROOT / "verification" / "source_adapter_staging.json"
+SOURCE_RECORDS = ROOT / "verification" / "source_adapter_records.jsonl"
 CARD_ADAPTERS = ROOT / "verification" / "card_discovery_adapters.json"
+CARD_STAGING = ROOT / "verification" / "card_discovery_staging.json"
+CARD_RECORDS = ROOT / "verification" / "card_discovery_records.jsonl"
 SOURCE_RUNS = ROOT / "verification" / "runs" / "source-adapters"
 CARD_RUNS = ROOT / "verification" / "runs" / "card-discovery"
 SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
@@ -45,6 +49,15 @@ class WorkflowLoopError(ValueError):
 
 def read_json(path: pathlib.Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def _read_staging(path: pathlib.Path) -> dict[str, Any]:
+    """Missing or malformed staging is stale work, not a state-evaluation failure."""
+    try:
+        document = read_json(path)
+    except (OSError, TypeError, ValueError):
+        return {}
+    return document if isinstance(document, dict) else {}
 
 
 def latest_manifests(directory: pathlib.Path) -> list[dict[str, Any]]:
@@ -91,6 +104,104 @@ def canonical_manifest(directory: pathlib.Path, kind: str) -> dict[str, Any] | N
     return manifest
 
 
+def _staging_matches_inputs(
+    staging_meta: dict[str, Any], card_canonical: dict[str, Any] | None,
+    contract_hash: str, capability_graph_hash: str, authoritative_graph_hash: str,
+) -> bool:
+    """A run id alone does not make staging current after reconciliation inputs change."""
+    return bool(
+        card_canonical
+        and staging_meta.get("generatedFromRun") == card_canonical.get("runId")
+        and staging_meta.get("contractHash") == contract_hash
+        and staging_meta.get("capabilityGraphHash") == capability_graph_hash
+        and staging_meta.get("authoritativeGraphHash") == authoritative_graph_hash
+    )
+
+
+def _records_projection_matches(
+    staging: dict[str, Any], records_path: pathlib.Path,
+) -> bool:
+    """A staging summary is stale if its generated records projection is not intact."""
+    expected_hash = staging.get("recordsHash")
+    if not isinstance(expected_hash, str):
+        return False
+    try:
+        actual_hash = "sha256:" + hashlib.sha256(records_path.read_bytes()).hexdigest()
+    except OSError:
+        return False
+    return actual_hash == expected_hash
+
+
+def _source_staging_matches_inputs(
+    staging: dict[str, Any], records_path: pathlib.Path,
+    source_canonical: dict[str, Any] | None,
+    contract_hash: str, capability_graph_hash: str,
+) -> bool:
+    """Source staging is current only for its canonical run, inputs, and records bytes."""
+    meta = staging.get("meta", {})
+    if not isinstance(meta, dict):
+        return False
+    return bool(
+        source_canonical
+        and meta.get("generatedFromRun") == source_canonical.get("runId")
+        and meta.get("contractHash") == contract_hash
+        and meta.get("capabilityGraphHash") == capability_graph_hash
+        and _records_projection_matches(staging, records_path)
+    )
+
+
+def _source_replay_state(
+    source_canonical: dict[str, Any] | None,
+) -> tuple[bool, str | None]:
+    try:
+        from scripts import source_adapters as adapter
+    except ImportError:  # direct execution from scripts/
+        import source_adapters as adapter  # type: ignore[no-redef]
+    contract, capability = adapter.load_inputs()
+    current = _source_staging_matches_inputs(
+        _read_staging(SOURCE_STAGING), SOURCE_RECORDS, source_canonical,
+        adapter.content_hash(contract),
+        adapter.capability_pin(capability, adapter.manifest_surfaces(source_canonical or {})),
+    )
+    if current:
+        return True, None
+    return False, adapter.newest_acquisition_compatible_complete_run(contract)
+
+
+def _card_replay_source(
+    adapter: Any, contract: dict[str, Any], staging_is_current: bool,
+) -> str | None:
+    return None if staging_is_current else adapter.newest_acquisition_compatible_complete_run(
+        contract
+    )
+
+
+def _completeness_matches_inputs(inputs: dict[str, Any], errors: list[str],
+                                 current_text: str, summary: dict[str, Any]) -> bool:
+    """Compare the retained completeness projection with its complete current inputs."""
+    if errors:
+        return False
+    expected = json.dumps(summary, ensure_ascii=False, indent=2) + "\n"
+    return current_text == expected
+
+
+def _completeness_is_current() -> bool:
+    try:
+        from scripts import completeness_gate
+    except ImportError:  # direct execution from scripts/
+        import completeness_gate  # type: ignore[no-redef]
+    try:
+        inputs, errors = completeness_gate.validate_inputs()
+        current_text = completeness_gate.OUTPUT.read_text(encoding="utf-8")
+        return _completeness_matches_inputs(
+            inputs, errors, current_text, completeness_gate.summary(inputs),
+        )
+    except (OSError, KeyError, TypeError, ValueError):
+        # Treat malformed/missing inputs as pending projection work. The owning gate command
+        # reports the concrete validation error; the loop must not mistake the old output as current.
+        return False
+
+
 def evidence_state() -> dict[str, Any]:
     counts = read_json(EVIDENCE)["counts"]["applicationStatuses"]
     if counts.get("needs-evidence", 0):
@@ -129,17 +240,9 @@ def physical_state() -> dict[str, Any]:
     }
 
 
-def _discovery_state(
-    source: list[dict[str, Any]], cards: list[dict[str, Any]],
-    source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
-    blocked: int, needs_source: int,
-) -> str:
-    if not source or not cards:
-        return "candidate"
-    if any(manifest.get("status") != "complete" for manifest in source + cards):
-        return "retained"
-    if not source_canonical or not card_canonical:
-        return "retained"
+def _discovery_outcome(blocked: int, needs_source: int, new_candidates: int) -> str:
+    if new_candidates:
+        return "needs-reconciliation"
     if blocked:
         return "blocked-by-source"
     if needs_source:
@@ -147,10 +250,60 @@ def _discovery_state(
     return "terminal"
 
 
+def _stale_projection_needs_source(
+    source_records_current: bool, staging_is_current: bool,
+    source_replay_available: bool, card_replay_available: bool,
+) -> bool:
+    return (
+        (not source_records_current and not source_replay_available)
+        or (not staging_is_current and not card_replay_available)
+    )
+
+
+def _stale_projection_state(
+    source_records_current: bool, staging_is_current: bool,
+    source_replay_available: bool, card_replay_available: bool,
+) -> str:
+    return "needs-source" if _stale_projection_needs_source(
+        source_records_current, staging_is_current,
+        source_replay_available, card_replay_available,
+    ) else "retained"
+
+
+def _discovery_state(
+    source: list[dict[str, Any]], cards: list[dict[str, Any]],
+    source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
+    blocked: int, needs_source: int, new_candidates: int, staging_is_current: bool,
+    completeness_is_current: bool, source_records_current: bool = True,
+    source_replay_available: bool = True, card_replay_available: bool = True,
+) -> str:
+    if not source or not cards:
+        return "candidate"
+    if not staging_is_current or not source_records_current:
+        return _stale_projection_state(
+            source_records_current, staging_is_current,
+            source_replay_available, card_replay_available,
+        )
+    if not source_canonical or not card_canonical:
+        return "retained"
+    # Newer failed or incomplete attempts are diagnostic only. The selected compatible
+    # complete manifests remain the canonical basis for staging and reconciliation.
+    if (source_canonical.get("status") != "complete"
+            or card_canonical.get("status") != "complete"):
+        return "retained"
+    if not completeness_is_current:
+        return "retained"
+    return _discovery_outcome(blocked, needs_source, new_candidates)
+
+
 def _discovery_progress(
     source: list[dict[str, Any]], cards: list[dict[str, Any]],
     source_canonical: dict[str, Any] | None, card_canonical: dict[str, Any] | None,
     failures: int, blocked: int, needs_source: int, total_gaps: int,
+    new_candidates: int, staged_candidates: int, staging_run: str | None,
+    staging_is_current: bool, source_records_current: bool,
+    source_replay_run: str | None, card_replay_run: str | None,
+    completeness_is_current: bool,
 ) -> dict[str, Any]:
     latest_source = next(iter(source), {})
     latest_cards = next(iter(cards), {})
@@ -169,6 +322,14 @@ def _discovery_progress(
         "blockedGaps": blocked,
         "needsSourceGaps": needs_source,
         "totalGaps": total_gaps,
+        "newCandidateRecords": new_candidates,
+        "stagingCandidateRecords": staged_candidates,
+        "stagingRun": staging_run,
+        "stagingMatchesCanonicalInputs": staging_is_current,
+        "sourceRecordsCurrent": source_records_current,
+        "sourceReplayRun": source_replay_run,
+        "cardReplayRun": card_replay_run,
+        "completenessMatchesInputs": completeness_is_current,
     }
 
 
@@ -181,11 +342,42 @@ def discovery_state() -> dict[str, Any]:
     failures = sum(len(manifest.get("failures", [])) for manifest in source + cards)
     blocked = sum(gap.get("terminalState") == "blocked-by-source" for gap in gaps)
     needs_source = sum(gap.get("terminalState") == "needs-evidence" for gap in gaps)
+    try:
+        from scripts import card_discovery as adapter
+    except ImportError:  # direct execution from scripts/
+        import card_discovery as adapter  # type: ignore[no-redef]
+    contract, capability, identity = adapter.load_inputs()
+    source_records_current, source_replay_run = _source_replay_state(source_canonical)
+    staging_document = _read_staging(CARD_STAGING)
+    staging_meta = staging_document.get("meta", {})
+    if not isinstance(staging_meta, dict):
+        staging_meta = {}
+    staging_run = staging_meta.get("generatedFromRun")
+    staging_is_current = _staging_matches_inputs(
+        staging_meta, card_canonical,
+        adapter.content_hash(contract),
+        adapter.capability_pin(capability, adapter.manifest_surfaces(card_canonical or {})),
+        identity.get("authoritativeGraphHash", adapter.content_hash(identity)),
+    ) and _records_projection_matches(staging_document, CARD_RECORDS)
+    card_replay_run = _card_replay_source(adapter, contract, staging_is_current)
+    counts = staging_meta.get("counts", {})
+    staged_candidates = counts.get("newCandidate", 0) if isinstance(counts, dict) else 0
+    new_candidates = staged_candidates if staging_is_current else 0
+    completeness_is_current = _completeness_is_current()
     return {
-        "state": _discovery_state(source, cards, source_canonical, card_canonical, blocked, needs_source),
+        "state": _discovery_state(
+            source, cards, source_canonical, card_canonical, blocked, needs_source,
+            new_candidates, staging_is_current, completeness_is_current,
+            source_records_current,
+            source_replay_available=source_replay_run is not None,
+            card_replay_available=card_replay_run is not None,
+        ),
         "progress": _discovery_progress(
             source, cards, source_canonical, card_canonical,
-            failures, blocked, needs_source, len(gaps),
+            failures, blocked, needs_source, len(gaps), new_candidates,
+            staged_candidates, staging_run, staging_is_current,
+            source_records_current, source_replay_run, card_replay_run,
+            completeness_is_current,
         ),
     }
 
@@ -304,27 +496,322 @@ EVALUATORS = {
 }
 
 
-def run_cycle(loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool) -> dict[str, Any]:
+def _next_replay_run_id(now: dt.datetime, retained_run_ids: set[str]) -> str:
+    candidate = now.astimezone(dt.timezone.utc).replace(microsecond=0)
+    latest = max(retained_run_ids, default=None)
+    if latest and candidate.strftime("%Y%m%dT%H%M%SZ") <= latest:
+        candidate = dt.datetime.strptime(latest, "%Y%m%dT%H%M%SZ").replace(
+            tzinfo=dt.timezone.utc
+        ) + dt.timedelta(seconds=1)
+    run_id = candidate.strftime("%Y%m%dT%H%M%SZ")
+    while run_id in retained_run_ids:
+        candidate += dt.timedelta(seconds=1)
+        run_id = candidate.strftime("%Y%m%dT%H%M%SZ")
+    return run_id
+
+
+def _next_discovery_run_id(
+    now: dt.datetime, source_run_ids: set[str], card_run_ids: set[str],
+) -> str:
+    """Keep one discovery-cycle ID newer than both immutable run streams."""
+    return _next_replay_run_id(now, source_run_ids | card_run_ids)
+
+
+def _retained_discovery_run_ids() -> tuple[set[str], set[str]]:
+    def retained(directory: pathlib.Path) -> set[str]:
+        return {
+            path.name for path in directory.iterdir()
+            if path.is_dir() and re.fullmatch(r"\d{8}T\d{6}Z", path.name)
+        }
+
+    return retained(SOURCE_RUNS), retained(CARD_RUNS)
+
+
+def _discovery_replay_command(
+    source_run_id: str, now: dt.datetime | None = None,
+    reserved_run_ids: set[str] | None = None,
+) -> list[str]:
+    source_runs, card_runs = _retained_discovery_run_ids()
+    replay_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
+    )
+    return ["scripts/card_discovery.py", "--replay-from-run", source_run_id, "--run-id", replay_id]
+
+
+def _source_adapter_replay_command(
+    source_run_id: str, now: dt.datetime | None = None,
+    reserved_run_ids: set[str] | None = None,
+) -> list[str]:
+    source_runs, card_runs = _retained_discovery_run_ids()
+    replay_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
+    )
+    return ["scripts/source_adapters.py", "--replay-from-run", source_run_id,
+            "--run-id", replay_id]
+
+
+def _discovery_replay_commands(
+    card_source_run: str | None, now: dt.datetime | None = None,
+    include_live: bool = False, source_adapter_run: str | None = None,
+) -> list[list[str]]:
+    commands = []
+    reserved: set[str] = set()
+    if source_adapter_run:
+        source_command = _source_adapter_replay_command(source_adapter_run, now, reserved)
+        commands.append(source_command)
+        reserved.add(source_command[-1])
+    if card_source_run:
+        card_command = _discovery_replay_command(card_source_run, now, reserved)
+        commands.append(card_command)
+        reserved.add(card_command[-1])
+    commands.append(["scripts/completeness_gate.py"])
+    if include_live:
+        commands.append(_discovery_refresh_command(now, reserved))
+    return commands
+
+
+def _discovery_refresh_command(
+    now: dt.datetime | None = None, reserved_run_ids: set[str] | None = None,
+) -> list[str]:
+    source_runs, card_runs = _retained_discovery_run_ids()
+    run_id = _next_discovery_run_id(
+        now or dt.datetime.now(dt.timezone.utc),
+        source_runs | (reserved_run_ids or set()), card_runs,
+    )
+    return ["scripts/discovery_cycle.py", "--refresh", "--run-id", run_id]
+
+
+def _stale_discovery_run(loop_id: str, current: dict[str, Any]) -> str | None:
+    progress = current["progress"]
+    if loop_id != "discovery" or progress.get("stagingMatchesCanonicalInputs"):
+        return None
+    return progress.get("cardReplayRun")
+
+
+def _stale_source_run(loop_id: str, current: dict[str, Any]) -> str | None:
+    progress = current["progress"]
+    if loop_id != "discovery" or progress.get("sourceRecordsCurrent", True):
+        return None
+    return progress.get("sourceReplayRun")
+
+
+def _discovery_cycle_stop_reason(
+    current: dict[str, Any], after: dict[str, Any], terminal_states: set[str],
+) -> str | None:
+    """Return a stop reason, or None when the bounded loop should continue."""
+    if after["state"] in terminal_states:
+        return f"state={after['state']}"
+    if after["progress"] == current["progress"]:
+        return "no-metric-change"
+    return None
+
+
+def _has_discovery_replay(
+    loop_id: str, card_run: str | None, source_run: str | None,
+) -> bool:
+    return loop_id == "discovery" and bool(card_run or source_run)
+
+
+def _should_skip_terminal_state(
+    loop_id: str, state: str, terminal_states: set[str], include_live: bool,
+) -> bool:
+    if state not in terminal_states:
+        return False
+    return not (include_live and (
+        loop_id == "discovery" or state in {"needs-refresh", "needs-source"}
+    ))
+
+
+def run_cycle(
+    loop_id: str, lane: str, cycle_id: str, include_live: bool, dry_run: bool,
+    replay_from_run: str | None = None,
+    completeness_is_current: bool = True,
+    source_replay_from_run: str | None = None,
+    live_refresh_required: bool = False,
+) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
-    if loop_id == "discovery" and include_live:
-        timestamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-        command = ["scripts/discovery_cycle.py", "--refresh", "--run-id", timestamp]
-    else:
-        command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
-        if include_live and loop_id == "tcgdex":
-            command.append("--include-live")
-    process = subprocess.run(
-        [sys.executable, *command], cwd=ROOT, text=True, encoding="utf-8",
-        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
-        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    return _run_command_sequence(
+        _cycle_commands(
+            loop_id, lane, cycle_id, include_live, replay_from_run,
+            completeness_is_current, source_replay_from_run=source_replay_from_run,
+            live_refresh_required=live_refresh_required,
+        )
     )
+
+
+def _cycle_commands(
+    loop_id: str, lane: str, cycle_id: str, include_live: bool,
+    replay_from_run: str | None, completeness_is_current: bool = True,
+    now: dt.datetime | None = None, source_replay_from_run: str | None = None,
+    live_refresh_required: bool = False,
+) -> list[list[str]]:
+    if live_refresh_required:
+        return [_discovery_refresh_command(now)]
+    if _has_discovery_replay(loop_id, replay_from_run, source_replay_from_run):
+        return _discovery_replay_commands(
+            replay_from_run, now, include_live, source_replay_from_run,
+        )
+    elif loop_id == "discovery" and not completeness_is_current:
+        if include_live:
+            # The full refresh rebuilds staging and runs the completeness gate itself.
+            return [_discovery_refresh_command(now)]
+        return [["scripts/completeness_gate.py"]]
+    elif loop_id == "discovery" and include_live:
+        return [_discovery_refresh_command(now)]
+    command = ["scripts/scoped_regen.py", "--lane", lane, "--run-id", cycle_id]
+    if include_live and loop_id == "tcgdex":
+        command.append("--include-live")
+    return [command]
+
+
+def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
+    outputs = []
+    executed_commands = []
+    return_code = 0
+    for command in commands:
+        executed_commands.append(command)
+        process = subprocess.run(
+            [sys.executable, *command], cwd=ROOT, text=True, encoding="utf-8",
+            env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+            stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        )
+        outputs.append(process.stdout)
+        return_code = process.returncode
+        if return_code:
+            break
     return {
-        "status": "passed" if process.returncode == 0 else "failed",
-        "returnCode": process.returncode,
-        "command": command,
-        "output": process.stdout[-2000:],
+        "status": "passed" if return_code == 0 else "failed",
+        "returnCode": return_code,
+        "command": commands[0] if len(commands) == 1 else commands,
+        "executedCommands": executed_commands,
+        "output": "\n".join(outputs)[-2000:],
     }
+
+
+def _stale_discovery_action(progress: dict[str, Any]) -> str:
+    source_stale = not progress.get("sourceRecordsCurrent", True)
+    staging_stale = not progress.get("stagingMatchesCanonicalInputs", True)
+    if (
+        source_stale and not progress.get("sourceReplayRun")
+        or staging_stale and not progress.get("cardReplayRun")
+    ):
+        return "live-acquisition-required"
+    if source_stale and staging_stale:
+        return "reproject-stale-staging"
+    if source_stale:
+        return "reproject-source-staging"
+    if staging_stale:
+        return "reproject-staging"
+    return "inspect-discovery-staging"
+
+
+def _discovery_decision(
+    progress: dict[str, Any], state: str, stop_reason: str | None = None,
+) -> dict[str, Any]:
+    """Resolve discovery state and operator guidance once for reports and console output."""
+    result = {"lane-failed": "failed", "incomplete-live-refresh": "incomplete"}.get(
+        stop_reason, "passed",
+    )
+    run_files = "verification/runs/source-adapters,verification/runs/card-discovery"
+    adapter_files = "verification/source_adapters.json,verification/card_discovery_adapters.json"
+    operational = {
+        "failed": ("inspect-failed-discovery-run", run_files),
+        "incomplete": ("retry-incomplete-live-refresh", run_files),
+    }
+    fixed = {
+        "terminal": ("complete", "none"),
+        "needs-reconciliation": (
+            "reconcile-by-reviewed-mapping-or-positive-exclusion",
+            "verification/card_discovery_staging.json,verification/card_discovery_records.jsonl",
+        ),
+    }
+    stale_action = _stale_discovery_action(progress)
+    action, review = fixed.get(
+        state, (stale_action, _stale_review_files(progress)),
+    )
+    action, review = operational.get(result, (action, review))
+    gap_decisions = {
+        "needs-source": ("find-positive-source-for-open-gaps", adapter_files),
+        "blocked-by-source": ("add-positive-source-coverage", adapter_files),
+    }
+    if result == "passed" and state in gap_decisions and stale_action != "live-acquisition-required":
+        action, review = gap_decisions[state]
+    return {"state": state, "action": action, "review": review, "result": result}
+
+
+def _stale_review_files(progress: dict[str, Any]) -> str:
+    review_files = []
+    if not progress.get("sourceRecordsCurrent", True):
+        review_files.append("verification/source_adapter_staging.json")
+    if not progress.get("stagingMatchesCanonicalInputs", True) or not review_files:
+        review_files.append("verification/card_discovery_staging.json")
+    return ",".join(review_files)
+
+
+def _discovery_summary(loop_id: str, progress: dict[str, Any],
+                       state: str | None = None, stop_reason: str | None = None,
+                       decision: dict[str, Any] | None = None) -> str:
+    if loop_id != "discovery":
+        return ""
+    decision = decision or _discovery_decision(progress, state or "candidate", stop_reason)
+    return (
+        f" newCandidates={progress.get('newCandidateRecords', 0)}"
+        f" stagedCandidates={progress.get('stagingCandidateRecords', 0)}"
+        f" stagingCurrent={progress.get('stagingMatchesCanonicalInputs')}"
+        f" result={decision['result']}"
+        f" action={decision['action']}"
+        f" review={decision['review']}"
+    )
+
+
+def _incomplete_live_refresh_index(cycles: list[dict[str, Any]]) -> int | None:
+    for index in reversed(range(len(cycles))):
+        cycle = cycles[index]
+        commands = cycle["lane"].get("executedCommands", [])
+        if commands and isinstance(commands[0], str):
+            commands = [commands]
+        if not any(command[:2] == ["scripts/discovery_cycle.py", "--refresh"]
+                   for command in commands):
+            continue
+        before = cycle["before"]["progress"]
+        after = cycle.get("after", {}).get("progress", {})
+        source_incomplete = (
+            after.get("sourceLatestAttempt") != before.get("sourceLatestAttempt")
+            and after.get("sourceStatus") != "complete"
+        )
+        card_incomplete = (
+            after.get("cardLatestAttempt") != before.get("cardLatestAttempt")
+            and after.get("cardStatus") != "complete"
+        )
+        if source_incomplete or card_incomplete:
+            return index
+        return None
+    return None
+
+
+def _mark_incomplete_live_refresh(
+    cycles: list[dict[str, Any]], stop_reason: str,
+) -> tuple[int | None, str]:
+    index = _incomplete_live_refresh_index(cycles)
+    if index is None:
+        return None, stop_reason
+    lane = cycles[index]["lane"]
+    lane["liveRefreshIncomplete"] = True
+    if lane.get("status") != "failed":
+        lane.update(status="incomplete", reason="provider run manifest is incomplete")
+        stop_reason = "incomplete-live-refresh"
+    return index, stop_reason
+
+
+def _workflow_exit_code(loop_id: str, decision: dict[str, Any] | None,
+                        cycle_reports: list[dict[str, Any]]) -> int:
+    if loop_id == "discovery":
+        return int(decision["result"] in {"failed", "incomplete"})
+    return int(any(cycle["lane"].get("status") in {"failed", "incomplete"}
+                   for cycle in cycle_reports))
 
 
 def main() -> int:
@@ -352,20 +839,28 @@ def main() -> int:
     current = before
 
     for number in range(1, args.max_cycles + 1):
-        live_discovery_refresh = (
-            args.include_live
-            and args.loop == "discovery"
-            and current["progress"].get("needsSourceGaps", 0) > 0
-        )
-        if current["state"] in loop["terminal"] and not (
-            live_discovery_refresh
-            or (args.include_live and current["state"] in {"needs-refresh", "needs-source"})
+        if _should_skip_terminal_state(
+            args.loop, current["state"], set(loop["terminal"]), args.include_live,
         ):
             stop_reason = f"state={current['state']} requires external input or is terminal"
             skipped.append(stop_reason)
             break
         cycle_id = f"{run_id}-c{number}"
-        result = run_cycle(args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run)
+        replay_from_run = _stale_discovery_run(args.loop, current)
+        source_replay_from_run = _stale_source_run(args.loop, current)
+        completeness_is_current = current["progress"].get("completenessMatchesInputs", True)
+        progress = current["progress"]
+        live_refresh_required = args.include_live and (
+            not progress.get("sourceRecordsCurrent", True) and not source_replay_from_run
+            or not progress.get("stagingMatchesCanonicalInputs", True) and not replay_from_run
+        )
+        result = run_cycle(
+            args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
+            replay_from_run=replay_from_run,
+            completeness_is_current=completeness_is_current,
+            source_replay_from_run=source_replay_from_run,
+            live_refresh_required=live_refresh_required,
+        )
         if result["status"] == "not-run":
             skipped.append(result["reason"])
             stop_reason = result["reason"]
@@ -377,16 +872,22 @@ def main() -> int:
             stop_reason = "lane-failed"
             current = after
             break
-        if after["state"] in loop["terminal"]:
-            stop_reason = f"state={after['state']}"
-            current = after
-            break
-        if after["progress"] == current["progress"]:
-            stop_reason = "no-metric-change"
+        cycle_stop_reason = _discovery_cycle_stop_reason(
+            current, after, set(loop["terminal"]),
+        )
+        if cycle_stop_reason:
+            stop_reason = cycle_stop_reason
             current = after
             break
         current = after
 
+    incomplete_refresh_index, stop_reason = _mark_incomplete_live_refresh(
+        cycle_reports, stop_reason,
+    )
+    incomplete_live_refresh = incomplete_refresh_index is not None
+    decision = None
+    if args.loop == "discovery":
+        decision = _discovery_decision(current["progress"], current["state"], stop_reason)
     report = {
         "schema": "snoredex-workflow-loop-run",
         "version": "1.0.0",
@@ -399,8 +900,10 @@ def main() -> int:
         "maxCycles": args.max_cycles,
         "stateBefore": before,
         "stateAfter": current,
+        "decision": decision,
         "cycleCount": len(cycle_reports),
         "stopReason": stop_reason,
+        "liveRefreshIncomplete": incomplete_live_refresh,
         "skippedChecks": skipped,
         "positiveEvidenceRule": manifest["loopContract"]["positiveEvidence"],
         "mergeBoundary": manifest["loopContract"]["mergeBoundary"],
@@ -409,9 +912,12 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    candidate_summary = _discovery_summary(
+        args.loop, current["progress"], decision=decision,
+    )
     print(f"workflow loop: runId={run_id} loop={args.loop} cycles={len(cycle_reports)} "
-          f"state={current['state']} stop={stop_reason}; report={report_path}")
-    return 1 if any(c["lane"].get("status") == "failed" for c in cycle_reports) else 0
+          f"state={current['state']}{candidate_summary} stop={stop_reason}; report={report_path}")
+    return _workflow_exit_code(args.loop, decision, cycle_reports)
 
 
 if __name__ == "__main__":

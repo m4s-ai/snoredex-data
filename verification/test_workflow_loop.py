@@ -2,6 +2,8 @@
 """Regression tests for bounded workflow-loop state and stop semantics."""
 from __future__ import annotations
 
+import datetime as dt
+import hashlib
 import json
 import os
 import subprocess
@@ -15,7 +17,16 @@ LOOP = ROOT / "scripts" / "workflow_loop.py"
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from scripts.workflow_loop import latest_manifests  # noqa: E402
+from scripts.workflow_loop import (  # noqa: E402
+    _cycle_commands, _discovery_cycle_stop_reason, _discovery_decision, _discovery_refresh_command,
+    _discovery_replay_command, _discovery_summary, _incomplete_live_refresh_index,
+    _mark_incomplete_live_refresh,
+    _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
+    _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
+    _records_projection_matches, _read_staging, _source_staging_matches_inputs,
+    _stale_discovery_run, _stale_source_run,
+    latest_manifests,
+)
 
 
 def remove_empty(path: Path) -> None:
@@ -31,6 +42,333 @@ def main() -> int:
     assert set(loops) == {"physical", "evidence", "discovery", "news-promo", "tcgdex", "absence", "cardmarket"}
     assert document["loopContract"]["positiveEvidence"].startswith("No loop may turn")
     assert document["loopContract"]["mergeBoundary"].endswith("L3 merge gate.")
+
+    canonical = {"runId": "run-1", "status": "complete"}
+    staging_meta = {
+        "generatedFromRun": "run-1",
+        "contractHash": "contract-1",
+        "capabilityGraphHash": "capability-1",
+        "authoritativeGraphHash": "graph-1",
+    }
+    assert _staging_matches_inputs(staging_meta, canonical, "contract-1", "capability-1", "graph-1")
+    stale_hashes = (
+        ("generatedFromRun", "run-2"),
+        ("contractHash", "contract-2"),
+        ("capabilityGraphHash", "capability-2"),
+        ("authoritativeGraphHash", "graph-2"),
+    )
+    for field, value in stale_hashes:
+        stale_meta = {**staging_meta, field: value}
+        assert not _staging_matches_inputs(
+            stale_meta, canonical, "contract-1", "capability-1", "graph-1"
+        )
+    with tempfile.TemporaryDirectory(dir=ROOT) as raw_records:
+        records_path = Path(raw_records) / "records.jsonl"
+        records_bytes = b'{"recordId":"record-1"}\n'
+        records_path.write_bytes(records_bytes)
+        records_hash = "sha256:" + hashlib.sha256(records_bytes).hexdigest()
+        records_projection = {
+            "recordsHash": records_hash,
+        }
+        assert _records_projection_matches(records_projection, records_path)
+        source_canonical = {"runId": "source-run-1"}
+        source_staging = {
+            "meta": {
+                "generatedFromRun": "source-run-1",
+                "contractHash": "source-contract-1",
+                "capabilityGraphHash": "source-capability-1",
+            },
+            "recordsHash": records_hash,
+        }
+        assert _source_staging_matches_inputs(
+            source_staging, records_path, source_canonical,
+            "source-contract-1", "source-capability-1",
+        )
+        for field, value in (
+            ("generatedFromRun", "older-run"),
+            ("contractHash", "changed-contract"),
+            ("capabilityGraphHash", "changed-capabilities"),
+        ):
+            stale_staging = {
+                **source_staging,
+                "meta": {**source_staging["meta"], field: value},
+            }
+            assert not _source_staging_matches_inputs(
+                stale_staging, records_path, source_canonical,
+                "source-contract-1", "source-capability-1",
+            )
+        missing_staging_path = Path(raw_records) / "missing-staging.json"
+        assert _read_staging(missing_staging_path) == {}
+        missing_staging_path.write_text("{truncated", encoding="utf-8")
+        assert _read_staging(missing_staging_path) == {}
+        missing_staging_path.write_text("[]", encoding="utf-8")
+        assert _read_staging(missing_staging_path) == {}
+        records_path.write_bytes(b'{"recordId":"record-2"}\n')
+        assert not _records_projection_matches(records_projection, records_path)
+        assert _stale_discovery_run("discovery", {
+            "progress": {
+                "stagingMatchesCanonicalInputs": False,
+                "cardRun": "older-canonical-run",
+                "cardReplayRun": "newest-acquisition-run",
+            },
+        }) == "newest-acquisition-run"
+        assert _stale_source_run("discovery", {
+            "progress": {
+                "sourceRecordsCurrent": False,
+                "sourceRun": "canonical-source-run",
+                "sourceReplayRun": "newest-source-acquisition-run",
+            },
+        }) == "newest-source-acquisition-run"
+        assert _stale_source_run("discovery", {
+            "progress": {"sourceRecordsCurrent": True},
+        }) is None
+        records_path.unlink()
+        assert not _records_projection_matches(records_projection, records_path)
+    expected_summary = {"meta": {"cardDiscoveryRun": "run-1"}}
+    expected_text = json.dumps(expected_summary, ensure_ascii=False, indent=2) + "\n"
+    assert _completeness_matches_inputs({}, [], expected_text, expected_summary)
+    assert not _completeness_matches_inputs({}, [], "stale summary", expected_summary)
+    assert not _completeness_matches_inputs({}, ["invalid locality reference"],
+                                           expected_text, expected_summary)
+    complete = [{"status": "complete"}]
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            0, 0, 0, False, True) == "retained"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, True) == "needs-reconciliation"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, False) == "retained"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, True,
+                            source_records_current=False) == "retained"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, True, True, source_records_current=False,
+                            source_replay_available=False) == "needs-source"
+    assert _discovery_state(complete, complete,
+                            {"runId": "source-1", "status": "complete"}, canonical,
+                            1, 1, 41, False, True,
+                            card_replay_available=False) == "needs-source"
+    failed_attempt = [{"runId": "attempt-2", "status": "failed"}]
+    complete_canonical = {"runId": "run-1", "status": "complete"}
+    assert _discovery_state(failed_attempt, failed_attempt, complete_canonical, canonical,
+                            1, 1, 41, True, True) == "needs-reconciliation"
+    assert _discovery_state([], failed_attempt, complete_canonical, canonical,
+                            1, 1, 41, True, True) == "candidate"
+    discovery_terminals = {"terminal", "needs-reconciliation", "needs-source", "blocked-by-source"}
+    assert not _should_skip_terminal_state(
+        "discovery", "needs-reconciliation", discovery_terminals, True,
+    )
+    assert _should_skip_terminal_state(
+        "discovery", "blocked-by-source", discovery_terminals, False,
+    )
+    assert _should_skip_terminal_state(
+        "discovery", "needs-source", discovery_terminals, False,
+    )
+    assert not _should_skip_terminal_state(
+        "discovery", "needs-source", discovery_terminals, True,
+    )
+    assert not _should_skip_terminal_state("tcgdex", "needs-source", {"needs-source"}, True)
+    replay_after = {"state": "needs-reconciliation", "progress": {"needsSourceGaps": 21}}
+    assert _discovery_cycle_stop_reason(
+        replay_after, replay_after, {"needs-reconciliation"},
+    ) == "state=needs-reconciliation"
+    now = dt.datetime(2026, 9, 24, 21, 0, tzinfo=dt.timezone.utc)
+    latest = "20260925T000000Z"
+    assert _next_replay_run_id(now, {latest}) == "20260925T000001Z"
+    source_latest = "20260925T000003Z"
+    card_latest = "20260925T000010Z"
+    next_discovery = _next_discovery_run_id(now, {source_latest}, {card_latest})
+    assert next_discovery == "20260925T000011Z"
+    assert _discovery_refresh_command(now)[:3] == [
+        "scripts/discovery_cycle.py", "--refresh", "--run-id"
+    ]
+    assert _discovery_replay_commands("20260909T171255Z", now)[-1] == [
+        "scripts/completeness_gate.py"
+    ]
+    replay_commands = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True, "20260909T171255Z", False, now,
+    )
+    assert len(replay_commands) == 3
+    assert replay_commands[0][:3] == [
+        "scripts/card_discovery.py", "--replay-from-run", "20260909T171255Z"
+    ]
+    assert replay_commands[1] == ["scripts/completeness_gate.py"]
+    assert replay_commands[2][:2] == ["scripts/discovery_cycle.py", "--refresh"]
+    assert replay_commands[2][-1] > replay_commands[0][-1]
+    unreplayable_source_live = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True, "card-acquisition-run", False, now,
+        live_refresh_required=True,
+    )
+    assert len(unreplayable_source_live) == 1
+    assert unreplayable_source_live[0][:2] == ["scripts/discovery_cycle.py", "--refresh"]
+    both_replay_commands = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True,
+        "card-acquisition-run", False, now,
+        source_replay_from_run="source-acquisition-run",
+    )
+    assert [command[0] for command in both_replay_commands] == [
+        "scripts/source_adapters.py", "scripts/card_discovery.py",
+        "scripts/completeness_gate.py", "scripts/discovery_cycle.py",
+    ]
+    replay_ids = [both_replay_commands[index][-1] for index in (0, 1, 3)]
+    assert replay_ids == sorted(replay_ids) and len(set(replay_ids)) == 3
+    stale_completeness_live = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True, None, False, now,
+    )
+    assert len(stale_completeness_live) == 1
+    assert stale_completeness_live[0][:2] == ["scripts/discovery_cycle.py", "--refresh"]
+    assert _cycle_commands("discovery", "source-discovery", "cycle", False, None, False) == [
+        ["scripts/completeness_gate.py"]
+    ]
+    assert _cycle_commands("discovery", "source-discovery", "cycle", True, None, True)[0][:2] == [
+        "scripts/discovery_cycle.py", "--refresh"
+    ]
+    assert "action=live-acquisition-required" in _discovery_summary("discovery", {
+        "sourceRecordsCurrent": False, "sourceReplayRun": None,
+        "stagingMatchesCanonicalInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0,
+    })
+    assert "action=live-acquisition-required" in _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True,
+        "stagingMatchesCanonicalInputs": False, "cardReplayRun": None,
+        "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+    })
+    replayable_source_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": False, "sourceReplayRun": "source-run",
+        "stagingMatchesCanonicalInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0,
+    })
+    assert "action=reproject-source-staging" in replayable_source_summary
+    assert "review=verification/source_adapter_staging.json" in replayable_source_summary
+    terminal_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "completenessMatchesInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal")
+    assert "action=complete review=none" in terminal_summary
+    terminal_decision = _discovery_decision({
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+        "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal")
+    assert terminal_decision == {
+        "state": "terminal", "action": "complete", "review": "none", "result": "passed",
+    }
+    assert _discovery_decision({}, "needs-reconciliation") == {
+        "state": "needs-reconciliation",
+        "action": "reconcile-by-reviewed-mapping-or-positive-exclusion",
+        "review": "verification/card_discovery_staging.json,verification/card_discovery_records.jsonl",
+        "result": "passed",
+    }
+    assert "action=complete review=none" in _discovery_summary(
+        "discovery", {}, decision=terminal_decision,
+    )
+    failed_refresh_summary = _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+        "completenessMatchesInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0, "blockedGaps": 0, "needsSourceGaps": 0,
+    }, "terminal", "lane-failed")
+    assert "action=inspect-failed-discovery-run" in failed_refresh_summary
+    assert "review=verification/runs/source-adapters,verification/runs/card-discovery" in failed_refresh_summary
+    failed_decision = _discovery_decision({}, "terminal", "lane-failed")
+    assert failed_decision == {
+        "state": "terminal", "action": "inspect-failed-discovery-run",
+        "review": "verification/runs/source-adapters,verification/runs/card-discovery",
+        "result": "failed",
+    }
+    incomplete_refresh = [{
+        "before": {"progress": {
+            "sourceLatestAttempt": "source-old", "sourceStatus": "complete",
+            "cardLatestAttempt": "card-old", "cardStatus": "complete",
+        }},
+        "after": {"progress": {
+            "sourceLatestAttempt": "source-new", "sourceStatus": "incomplete",
+            "cardLatestAttempt": "card-new", "cardStatus": "complete",
+        }},
+        "lane": {"status": "passed", "command": [
+            "scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new",
+        ], "executedCommands": [
+            ["scripts/discovery_cycle.py", "--refresh", "--run-id", "run-new"],
+        ]},
+    }]
+    assert _incomplete_live_refresh_index(incomplete_refresh) == 0
+    assert _incomplete_live_refresh_index([{
+        **incomplete_refresh[0],
+        "after": {"progress": {
+            "sourceLatestAttempt": "source-new", "sourceStatus": "complete",
+            "cardLatestAttempt": "card-new", "cardStatus": "complete",
+        }},
+    }]) is None
+    assert "action=retry-incomplete-live-refresh" in _discovery_summary(
+        "discovery", incomplete_refresh[0]["after"]["progress"],
+        "terminal", "incomplete-live-refresh",
+    )
+    incomplete_decision = _discovery_decision(
+        incomplete_refresh[0]["after"]["progress"], "terminal", "incomplete-live-refresh",
+    )
+    assert incomplete_decision["state"] == "terminal"
+    assert incomplete_decision["action"] == "retry-incomplete-live-refresh"
+    assert incomplete_decision["result"] == "incomplete"
+    failed_incomplete_refresh = [{
+        **incomplete_refresh[0],
+        "lane": {**incomplete_refresh[0]["lane"], "status": "failed", "returnCode": 1},
+    }]
+    failed_index, failed_stop_reason = _mark_incomplete_live_refresh(
+        failed_incomplete_refresh, "lane-failed",
+    )
+    failed_lane = failed_incomplete_refresh[failed_index]["lane"]
+    failed_decision = _discovery_decision(
+        incomplete_refresh[0]["after"]["progress"], "terminal", failed_stop_reason,
+    )
+    assert failed_index == 0 and failed_stop_reason == "lane-failed"
+    assert failed_lane["status"] == "failed" and failed_lane["returnCode"] == 1
+    assert failed_lane["liveRefreshIncomplete"] is True
+    assert failed_decision["result"] == "failed"
+    assert failed_decision["action"] == "inspect-failed-discovery-run"
+    incomplete_cycle = [{**incomplete_refresh[0],
+                         "lane": {**incomplete_refresh[0]["lane"], "status": "passed"}}]
+    incomplete_index, incomplete_stop_reason = _mark_incomplete_live_refresh(
+        incomplete_cycle, "state=terminal",
+    )
+    incomplete_lane = incomplete_cycle[incomplete_index]["lane"]
+    assert incomplete_index == 0 and incomplete_stop_reason == "incomplete-live-refresh"
+    assert incomplete_lane["status"] == "incomplete"
+    assert incomplete_lane["liveRefreshIncomplete"] is True
+    assert incomplete_lane["reason"] == "provider run manifest is incomplete"
+    incomplete_refresh[0]["lane"]["executedCommands"] = incomplete_refresh[0]["lane"]["command"]
+    assert _incomplete_live_refresh_index(incomplete_refresh) == 0
+    incomplete_refresh[0]["lane"]["executedCommands"] = [
+        ["scripts/card_discovery.py", "--replay-from-run", "card-old"],
+    ]
+    assert _incomplete_live_refresh_index(incomplete_refresh) is None
+    for state, action in (
+        ("needs-source", "find-positive-source-for-open-gaps"),
+        ("blocked-by-source", "add-positive-source-coverage"),
+    ):
+        summary = _discovery_summary("discovery", {
+            "sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": True,
+            "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+        }, state)
+        assert f"action={action}" in summary
+        assert "review=verification/source_adapters.json,verification/card_discovery_adapters.json" in summary
+    for stale_progress, review_file in (
+        ({"sourceRecordsCurrent": False, "sourceReplayRun": None,
+          "stagingMatchesCanonicalInputs": True},
+         "verification/source_adapter_staging.json"),
+        ({"sourceRecordsCurrent": True, "stagingMatchesCanonicalInputs": False,
+          "cardReplayRun": None},
+         "verification/card_discovery_staging.json"),
+    ):
+        summary = _discovery_summary("discovery", stale_progress, "needs-source")
+        assert "action=live-acquisition-required" in summary
+        assert f"review={review_file}" in summary
+    assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
+        "--replay-from-run", "20260909T171255Z", "--run-id"
+    ]
 
     with tempfile.TemporaryDirectory(dir=ROOT) as raw_root:
         runs = Path(raw_root)
@@ -117,13 +455,14 @@ def main() -> int:
         assert discovery.returncode == 0, discovery.stdout
         discovery_report = json.loads(reports[3].read_text(encoding="utf-8"))
         progress = discovery_report["stateBefore"]["progress"]
+        if progress["newCandidateRecords"]:
+            assert progress["stagingMatchesCanonicalInputs"]
+            assert progress["newCandidateRecords"] == progress["stagingCandidateRecords"]
+            assert discovery_report["stateBefore"]["state"] == "needs-reconciliation"
+        elif not progress["stagingMatchesCanonicalInputs"]:
+            assert progress["newCandidateRecords"] == 0
+            assert discovery_report["stateBefore"]["state"] == "retained"
         if progress["blockedGaps"] and progress["needsSourceGaps"]:
-            statuses = (progress["sourceStatus"], progress["cardStatus"])
-            expected_state = (
-                "retained" if any(status != "complete" for status in statuses)
-                else "blocked-by-source"
-            )
-            assert discovery_report["stateBefore"]["state"] == expected_state
             assert discovery_report["cycleCount"] == 1
             assert discovery_report["cycles"][0]["lane"]["reason"] == "dry-run"
     finally:

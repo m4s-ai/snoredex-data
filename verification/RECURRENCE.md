@@ -19,6 +19,12 @@ not commit, merge, or publish. Review every `newCandidate`, `ambiguous`, `needsE
 delta before opening a PR. A failed request remains a source failure in the immutable run; it is
 not an empty catalogue.
 
+Review is not reconciliation: a positive `newCandidate` still needs a reviewed mapping to a
+canonical release, or source evidence that supports a positive exclusion. The contract has no
+separate unresolved-disposition record; if neither outcome is supported, keep it as
+`new-candidate`. The discovery workflow loop continues to report `needs-reconciliation` and count
+that candidate until one is supported. Balanced bucket accounting alone does not close the task.
+
 Canonical staging uses the newest complete retained run compatible with the acquisition contract
 and scoped capability pin. Failed, incomplete, empty, and incompatible runs stay retained but do
 not displace it. Replay preserves the selected source run's bytes and retrieval metadata while
