@@ -23,7 +23,7 @@ ROW = {
 def reproject_prior_products(graph):
     """Replay reviewed TW rekeys without replacing later claim/finish evidence."""
     existing = {r["printId"]: r for r in tw.read(tw.PRINTS)["prints"]}
-    rows = tw.official_rows() + tw.enrich_photo_rows() + tw.supplemental_rows(existing)
+    rows = tw.official_rows(existing) + tw.enrich_photo_rows() + tw.supplemental_rows(existing)
     profiles = tw.apply_profiles(tw.read(tw.SET_SOURCES), rows)
     units = {r["unitId"]: r for r in tw.read(tw.UNITS)}
     replay, _ = tw.apply_graph(deepcopy(graph), profiles, rows, units)

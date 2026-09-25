@@ -255,7 +255,9 @@ def discovery_rows() -> dict[str, dict[str, Any]]:
     return rows
 
 
-def official_rows(existing: dict[str, dict[str, Any]]) -> list[dict[str, Any]]:
+def official_rows(existing: dict[str, dict[str, Any]] | None = None) -> list[dict[str, Any]]:
+    if existing is None:
+        existing = {row["printId"]: row for row in read(PRINTS)["prints"]}
     discovered = discovery_rows()
     result = []
     for facts in OFFICIAL:
@@ -495,8 +497,9 @@ def release_id(row: dict[str, Any]) -> str:
 
 def apply_set_graph(
     graph: dict[str, Any], profile: dict[str, Any], code: str, claim_ids: list[str],
-    rarity_profiles: list[dict[str, Any]],
+    rarity_profiles: list[dict[str, Any]] | None = None,
 ) -> None:
+    rarity_profiles = rarity_profiles or []
     source_id = profile["sourceRecordId"]
     local_set_id = f"LOCALSET:{LOCALITY}:{quote(code, safe='')}"
     edition_id = f"EDITION:{LOCALITY}:{LANGUAGE}:{code}"
@@ -626,8 +629,10 @@ def remove_old_releases(
 
 def apply_release_group(
     graph: dict[str, Any], profile: dict[str, Any], group: list[dict[str, Any]],
-    units: dict[str, dict[str, Any]], rarity_profiles: dict[str, dict[str, Any]],
+    units: dict[str, dict[str, Any]],
+    rarity_profiles: dict[str, dict[str, Any]] | None = None,
 ) -> None:
+    rarity_profiles = rarity_profiles or {}
     first = group[0]
     rid = release_id(first)
     legacy_claims, finish_claims, heritage = remove_old_releases(graph, group, rid, units)

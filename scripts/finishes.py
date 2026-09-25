@@ -843,6 +843,56 @@ def specimen_reverse_conflicts(specimens):
     return reverse
 
 
+def _finish_release_code_aliases(overrides):
+    release_code_aliases: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
+    for override in overrides:
+        if release_code := override.get("releaseSetCode"):
+            release_code_aliases[(str(release_code), str(override.get("number") or ""))].append(override)
+
+    return release_code_aliases
+
+
+def _finish_product_variants(cards):
+    return {
+        (str(card.get("setCode") or ""), str(card.get("number") or ""), variant_token(card))
+        for card in cards if not card.get("isCodeCard")
+    }
+
+
+def _add_release_code_aliases(specimens_by_group, specimen, specimen_key,
+                              release_code_aliases, valid_product_variants):
+    for override in release_code_aliases.get((specimen_key[0], specimen_key[1]), []):
+        product_key = (str(override["setCode"]), specimen_key[1],
+                       str(specimen.get("variant") or "base"))
+        if product_key not in valid_product_variants:
+            continue
+        if override.get("languages") and specimen_key[2] not in override["languages"]:
+            continue
+        specimens_by_group[
+            (str(override["setCode"]), specimen_key[1], specimen_key[2])
+        ].append(specimen)
+
+
+def _finish_specimens_by_group(specimens, overrides, cards):
+    specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
+    release_code_aliases = _finish_release_code_aliases(overrides)
+    valid_product_variants = _finish_product_variants(cards)
+    for specimen in group_specimens(specimens):
+        # Multi-card frames are context evidence; only per-card records enter finish groups.
+        observation = specimen.get("physicalObservation")
+        if not observation or observation.get("coversMultipleCards"):
+            continue
+        specimen_set_code = str(specimen.get("setCode") or "")
+        specimen_key = (specimen_set_code, specimen_number(specimen.get("number")),
+                        str(specimen.get("language") or ""))
+        specimens_by_group[specimen_key].append(specimen)
+        # Source-first release codes can differ from Cardmarket/finish product codes.
+        # The reviewed finish override's releaseSetCode is the explicit bridge between them.
+        _add_release_code_aliases(specimens_by_group, specimen, specimen_key,
+                                  release_code_aliases, valid_product_variants)
+    return specimens_by_group
+
+
 def _load_finish_context() -> dict[str, Any]:
     cards_document = read_json(CARDS_PATH)
     cards = cards_document["cards"]
@@ -850,38 +900,11 @@ def _load_finish_context() -> dict[str, Any]:
     overrides_document = read_json(OVERRIDES_PATH)
     specimens_document = read_json(SPECIMENS_PATH)
     validate_specimen_conflicts(specimens_document)
-    specimens_by_group: dict[tuple[str, str, str], list[dict[str, Any]]] = defaultdict(list)
     reverse_conflicts = specimen_reverse_conflicts(specimens_document.get("specimens", []))
-    release_code_aliases = [
-        override for override in overrides_document.get("overrides", [])
-        if override.get("releaseSetCode")
-    ]
-    valid_product_variants = {
-        (str(card.get("setCode") or ""), str(card.get("number") or ""), variant_token(card))
-        for card in cards if not card.get("isCodeCard")
-    }
-    for specimen in group_specimens(specimens_document.get("specimens", [])):
-        # A frame that explicitly covers multiple cards is context evidence only.  It must not
-        # become a synthetic ``base`` printing; the per-card crops/records are the canonical
-        # observations that carry the variant mapping.
-        observation = specimen.get("physicalObservation")
-        if observation and not observation.get("coversMultipleCards"):
-            specimen_set_code = str(specimen.get("setCode") or "")
-            specimen_key = (specimen_set_code, specimen_number(specimen.get("number")),
-                            str(specimen.get("language") or ""))
-            specimens_by_group[specimen_key].append(specimen)
-            # Source-first release codes can differ from Cardmarket/finish product codes.
-            # The reviewed finish override's releaseSetCode is the explicit bridge between them.
-            for override in release_code_aliases:
-                if (str(override.get("releaseSetCode")) == specimen_set_code
-                        and specimen_key[1] == str(override.get("number") or "")
-                        and (str(override["setCode"]), specimen_key[1],
-                             str(specimen.get("variant") or "base")) in valid_product_variants
-                        and (not override.get("languages")
-                             or specimen_key[2] in override["languages"])):
-                    specimens_by_group[
-                        (str(override["setCode"]), specimen_key[1], specimen_key[2])
-                    ].append(specimen)
+    specimens_by_group = _finish_specimens_by_group(
+        specimens_document.get("specimens", []),
+        overrides_document.get("overrides", []), cards,
+    )
     # Rule 4 owner decisions, finish half (#119). Keyed by (setCode, number, language) rather
     # than by finishUnitId, because the F-numbers are positional and would silently retarget.
     adjudications_document = read_json(ADJUDICATIONS_PATH)
