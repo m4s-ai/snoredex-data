@@ -629,6 +629,7 @@ def run_cycle(
     replay_from_run: str | None = None,
     completeness_is_current: bool = True,
     source_replay_from_run: str | None = None,
+    live_refresh_required: bool = False,
 ) -> dict[str, Any]:
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "output": ""}
@@ -636,6 +637,7 @@ def run_cycle(
         _cycle_commands(
             loop_id, lane, cycle_id, include_live, replay_from_run,
             completeness_is_current, source_replay_from_run=source_replay_from_run,
+            live_refresh_required=live_refresh_required,
         )
     )
 
@@ -644,7 +646,10 @@ def _cycle_commands(
     loop_id: str, lane: str, cycle_id: str, include_live: bool,
     replay_from_run: str | None, completeness_is_current: bool = True,
     now: dt.datetime | None = None, source_replay_from_run: str | None = None,
+    live_refresh_required: bool = False,
 ) -> list[list[str]]:
+    if live_refresh_required:
+        return [_discovery_refresh_command(now)]
     if _has_discovery_replay(loop_id, replay_from_run, source_replay_from_run):
         return _discovery_replay_commands(
             replay_from_run, now, include_live, source_replay_from_run,
@@ -686,8 +691,14 @@ def _run_command_sequence(commands: list[list[str]]) -> dict[str, Any]:
 def _discovery_summary(loop_id: str, progress: dict[str, Any]) -> str:
     if loop_id != "discovery":
         return ""
-    action = (
-        "reproject-staging" if not progress.get("stagingMatchesCanonicalInputs")
+    source_stale = not progress.get("sourceRecordsCurrent", True)
+    staging_stale = not progress.get("stagingMatchesCanonicalInputs", True)
+    unavailable_replay = (
+        source_stale and not progress.get("sourceReplayRun")
+        or staging_stale and not progress.get("cardReplayRun")
+    )
+    action = "live-acquisition-required" if unavailable_replay else (
+        "reproject-staging" if staging_stale
         else "reconcile-to-release-or-record-open-decision"
     )
     return (
@@ -733,11 +744,17 @@ def main() -> int:
         replay_from_run = _stale_discovery_run(args.loop, current)
         source_replay_from_run = _stale_source_run(args.loop, current)
         completeness_is_current = current["progress"].get("completenessMatchesInputs", True)
+        progress = current["progress"]
+        live_refresh_required = args.include_live and (
+            not progress.get("sourceRecordsCurrent", True) and not source_replay_from_run
+            or not progress.get("stagingMatchesCanonicalInputs", True) and not replay_from_run
+        )
         result = run_cycle(
             args.loop, loop["lane"], cycle_id, args.include_live, args.dry_run,
             replay_from_run=replay_from_run,
             completeness_is_current=completeness_is_current,
             source_replay_from_run=source_replay_from_run,
+            live_refresh_required=live_refresh_required,
         )
         if result["status"] == "not-run":
             skipped.append(result["reason"])

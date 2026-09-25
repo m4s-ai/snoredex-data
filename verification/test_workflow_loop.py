@@ -19,6 +19,7 @@ if str(ROOT) not in sys.path:
 
 from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
+    _discovery_summary,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
     _records_projection_matches, _read_staging, _source_staging_matches_inputs,
@@ -197,6 +198,12 @@ def main() -> int:
     assert replay_commands[1] == ["scripts/completeness_gate.py"]
     assert replay_commands[2][:2] == ["scripts/discovery_cycle.py", "--refresh"]
     assert replay_commands[2][-1] > replay_commands[0][-1]
+    unreplayable_source_live = _cycle_commands(
+        "discovery", "source-discovery", "cycle", True, "card-acquisition-run", False, now,
+        live_refresh_required=True,
+    )
+    assert len(unreplayable_source_live) == 1
+    assert unreplayable_source_live[0][:2] == ["scripts/discovery_cycle.py", "--refresh"]
     both_replay_commands = _cycle_commands(
         "discovery", "source-discovery", "cycle", True,
         "card-acquisition-run", False, now,
@@ -219,6 +226,16 @@ def main() -> int:
     assert _cycle_commands("discovery", "source-discovery", "cycle", True, None, True)[0][:2] == [
         "scripts/discovery_cycle.py", "--refresh"
     ]
+    assert "action=live-acquisition-required" in _discovery_summary("discovery", {
+        "sourceRecordsCurrent": False, "sourceReplayRun": None,
+        "stagingMatchesCanonicalInputs": True, "newCandidateRecords": 0,
+        "stagingCandidateRecords": 0,
+    })
+    assert "action=live-acquisition-required" in _discovery_summary("discovery", {
+        "sourceRecordsCurrent": True,
+        "stagingMatchesCanonicalInputs": False, "cardReplayRun": None,
+        "newCandidateRecords": 0, "stagingCandidateRecords": 0,
+    })
     assert _discovery_replay_command("20260909T171255Z", now)[1:4] == [
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
