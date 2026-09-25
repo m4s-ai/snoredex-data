@@ -29,6 +29,7 @@ EVIDENCE = ROOT / "verification" / "evidence_semantics.json"
 SOURCE_ADAPTERS = ROOT / "verification" / "source_adapters.json"
 CARD_ADAPTERS = ROOT / "verification" / "card_discovery_adapters.json"
 CARD_STAGING = ROOT / "verification" / "card_discovery_staging.json"
+CARD_RECORDS = ROOT / "verification" / "card_discovery_records.jsonl"
 SOURCE_RUNS = ROOT / "verification" / "runs" / "source-adapters"
 CARD_RUNS = ROOT / "verification" / "runs" / "card-discovery"
 SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
@@ -104,6 +105,20 @@ def _staging_matches_inputs(
         and staging_meta.get("capabilityGraphHash") == capability_graph_hash
         and staging_meta.get("authoritativeGraphHash") == authoritative_graph_hash
     )
+
+
+def _staging_records_match(
+    staging: dict[str, Any], records_path: pathlib.Path = CARD_RECORDS,
+) -> bool:
+    """A current staging summary is stale if its generated records projection is not intact."""
+    expected_hash = staging.get("recordsHash")
+    if not isinstance(expected_hash, str):
+        return False
+    try:
+        actual_hash = "sha256:" + hashlib.sha256(records_path.read_bytes()).hexdigest()
+    except OSError:
+        return False
+    return actual_hash == expected_hash
 
 
 def _completeness_matches_inputs(inputs: dict[str, Any], errors: list[str],
@@ -248,14 +263,15 @@ def discovery_state() -> dict[str, Any]:
     except ImportError:  # direct execution from scripts/
         import card_discovery as adapter  # type: ignore[no-redef]
     contract, capability, identity = adapter.load_inputs()
-    staging_meta = read_json(CARD_STAGING).get("meta", {})
+    staging_document = read_json(CARD_STAGING)
+    staging_meta = staging_document.get("meta", {})
     staging_run = staging_meta.get("generatedFromRun")
     staging_is_current = _staging_matches_inputs(
         staging_meta, card_canonical,
         adapter.content_hash(contract),
         adapter.capability_pin(capability, adapter.manifest_surfaces(card_canonical or {})),
         identity.get("authoritativeGraphHash", adapter.content_hash(identity)),
-    )
+    ) and _staging_records_match(staging_document)
     staged_candidates = staging_meta.get("counts", {}).get("newCandidate", 0)
     new_candidates = staged_candidates if staging_is_current else 0
     completeness_is_current = _completeness_is_current()

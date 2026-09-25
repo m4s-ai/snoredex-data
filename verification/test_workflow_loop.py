@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import datetime as dt
+import hashlib
 import json
 import os
 import subprocess
@@ -20,6 +21,7 @@ from scripts.workflow_loop import (  # noqa: E402
     _cycle_commands, _discovery_cycle_stop_reason, _discovery_refresh_command, _discovery_replay_command,
     _discovery_replay_commands, _discovery_state, _next_discovery_run_id, _next_replay_run_id,
     _completeness_matches_inputs, _should_skip_terminal_state, _staging_matches_inputs,
+    _staging_records_match, _stale_discovery_run,
     latest_manifests,
 )
 
@@ -57,6 +59,21 @@ def main() -> int:
         assert not _staging_matches_inputs(
             stale_meta, canonical, "contract-1", "capability-1", "graph-1"
         )
+    with tempfile.TemporaryDirectory(dir=ROOT) as raw_records:
+        records_path = Path(raw_records) / "records.jsonl"
+        records_bytes = b'{"recordId":"record-1"}\n'
+        records_path.write_bytes(records_bytes)
+        records_projection = {
+            "recordsHash": "sha256:" + hashlib.sha256(records_bytes).hexdigest(),
+        }
+        assert _staging_records_match(records_projection, records_path)
+        records_path.write_bytes(b'{"recordId":"record-2"}\n')
+        assert not _staging_records_match(records_projection, records_path)
+        assert _stale_discovery_run("discovery", {
+            "progress": {"stagingMatchesCanonicalInputs": False, "cardRun": "run-1"},
+        }) == "run-1"
+        records_path.unlink()
+        assert not _staging_records_match(records_projection, records_path)
     expected_summary = {"meta": {"cardDiscoveryRun": "run-1"}}
     expected_text = json.dumps(expected_summary, ensure_ascii=False, indent=2) + "\n"
     assert _completeness_matches_inputs({}, [], expected_text, expected_summary)
