@@ -695,7 +695,10 @@ def existing_photo_hash_owners(doc: dict) -> dict[str, str]:
 def validate_manifest_fields(item: dict, specimen_id: str) -> None:
     required = ("setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
                 "observed", "recordedAt")
-    missing = [field for field in required if not isinstance(item.get(field), str) or not item[field]]
+    # An explicit empty number is canonical for unnumbered cards (for example DP1).
+    # command_issue still requires an exact canonical target before reaching this check.
+    missing = [field for field in required if not isinstance(item.get(field), str)
+               or (field != "number" and not item[field])]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
 

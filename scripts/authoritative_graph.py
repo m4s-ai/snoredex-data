@@ -223,6 +223,28 @@ def _retain_field_sources(payload, sources):
         payload["specimenFieldSources"] = sources
 
 
+def _standalone_printing_target(by_semantic, payload):
+    key = printing_semantic_key(payload["cardReleaseId"], payload)
+    previous = by_semantic.setdefault(key, payload)
+    if previous is payload:
+        return payload["physicalPrintingId"], payload["physicalPrintingId"]
+    # Separate copies support one printing without being asserted to be the same card.
+    previous["specimenIds"] = sorted(set(previous["specimenIds"] + payload["specimenIds"]))
+    for field, ids in payload.get("specimenFieldSources", {}).items():
+        sources = previous.setdefault("specimenFieldSources", {})
+        sources[field] = sorted(set(sources.get(field, []) + ids))
+    return previous["physicalPrintingId"], None
+
+
+def _specimen_projection_reason(target, standalone_target, release_id):
+    if standalone_target:
+        return f"physical observation establishes standalone printing for {release_id}"
+    if target:
+        source = "another specimen" if target.startswith("PHYSICAL:specimen:") else "the finish store"
+        return f"provides provenance for {target}, already established from {source}"
+    return "physical observation has no matching projected printing"
+
+
 def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     """Refresh source provenance and rebuild finish/specimen nodes from canonical inputs.
 
@@ -395,6 +417,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             for specimen_id in specimen_ids:
                 specimen_targets[specimen_id] = physical_id
 
+    standalone_by_semantic = {}
     # Groups are ordered with their primary first, including when its ID sorts last.
     for specimen_id, specimen in specimen_by_id.items():
         target = specimen_targets.get(specimen_id)
@@ -430,37 +453,34 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "specimenIds": member_ids,
             }
             _retain_field_sources(physical_payload, group.get("_fieldSources"))
+            target, standalone_target = _standalone_printing_target(standalone_by_semantic, physical_payload)
             for member_id in member_ids:
-                specimen_targets[member_id] = standalone_target
-            generated_entities.append(_entity("physical-printing", standalone_target,
-                                              physical_payload))
-            generated_edges.extend([
-                {
-                    "fromType": "candidate-claim", "fromId": claim_id,
-                    "relation": "materializes", "toType": "physical-printing",
-                    "toId": standalone_target,
-                    "provenance": {"disposition": "established-and-mapped"},
-                },
-                {
-                    "fromType": "physical-printing", "fromId": standalone_target,
-                    "relation": "established-by", "toType": "candidate-claim",
-                    "toId": claim_id, "provenance": {},
-                },
-                {
-                    "fromType": "physical-printing", "fromId": standalone_target,
-                    "relation": "realizes", "toType": "card-release", "toId": release_id,
-                    "provenance": {},
-                },
-            ])
+                specimen_targets[member_id] = target
+            if standalone_target:
+                generated_entities.append(_entity("physical-printing", standalone_target,
+                                                  physical_payload))
+                generated_edges.extend([
+                    {
+                        "fromType": "candidate-claim", "fromId": claim_id,
+                        "relation": "materializes", "toType": "physical-printing",
+                        "toId": standalone_target,
+                        "provenance": {"disposition": "established-and-mapped"},
+                    },
+                    {
+                        "fromType": "physical-printing", "fromId": standalone_target,
+                        "relation": "established-by", "toType": "candidate-claim",
+                        "toId": claim_id, "provenance": {},
+                    },
+                    {
+                        "fromType": "physical-printing", "fromId": standalone_target,
+                        "relation": "realizes", "toType": "card-release", "toId": release_id,
+                        "provenance": {},
+                    },
+                ])
         # A specimen listed on a finish printing is the evidence used to derive that
         # printing, not an independent provider.  Keep the link as provenance so the
         # graph never counts an observation as corroborating its own projection.
-        reason = (
-            f"physical observation establishes standalone printing for {release_id}"
-            if standalone_target else
-            f"provides provenance for {target}, already established from the finish store"
-            if target else "physical observation has no matching projected printing"
-        )
+        reason = _specimen_projection_reason(target, standalone_target, release_id)
         claim_payload = {
             "claimId": claim_id,
             "claimKind": "physical-printing",

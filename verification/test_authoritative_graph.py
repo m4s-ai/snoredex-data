@@ -11,6 +11,7 @@ import sys
 import tempfile
 from copy import deepcopy
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -312,7 +313,34 @@ def verify_observed_finish_attribution(specimens, registry):
     assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
 
 
+def verify_standalone_printing_identity() -> None:
+    graph = {"meta": {}, "entities": [{"entityType": "card-release", "entityId": "release",
+             "payload": {"cardReleaseId": "release", "localSetCode": "TEST",
+                         "localNumber": "1", "language": "Japanese"}}],
+             "edges": [], "migrationDispositions": []}
+    specimens = [{"specimenId": f"SPEC-{index:04d}", "setCode": "TEST", "number": "1",
+                  "language": "Japanese", "recordedAt": "2026-09-28",
+                  "physicalObservation": {"finish": finish, "basis": f"copy {index}"}}
+                 for index, finish in enumerate(("holo", "holo", "non-holo"), 1)]
+    inputs = {graph_module.UNITS: [], graph_module.FINISH_UNITS: {"units": []},
+              ROOT / "verification/source_first_prints.json": {"prints": []},
+              graph_module.SPECIMENS: {"specimens": specimens}}
+    with patch.object(graph_module, "_read_json", side_effect=inputs.__getitem__):
+        result = project_physical_evidence(deepcopy(graph))
+        specimens.reverse()
+        assert project_physical_evidence(deepcopy(graph)) == result
+        assert project_physical_evidence(deepcopy(result)) == result
+    physicals = [row["payload"] for row in result["entities"]
+                 if row["entityType"] == "physical-printing"]
+    assert len(physicals) == 2, "copies share a printing; different finishes stay separate"
+    holo = next(row for row in physicals if row["finish"] == "holo")
+    assert holo["specimenIds"] == ["SPEC-0001", "SPEC-0002"]
+    assert any(row["fromId"] == "CLAIM:specimen:SPEC-0002" and row["relation"] == "provenance"
+               and row["toId"] == holo["physicalPrintingId"] for row in result["edges"])
+
+
 def main() -> None:
+    verify_standalone_printing_identity()
     # A retained legacy specimen may follow its reviewed local re-key, but not a neighbour.
     specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
     release = {"localSetCode": "s5a I", "localNumber": "093/070", "language": "Indonesian",

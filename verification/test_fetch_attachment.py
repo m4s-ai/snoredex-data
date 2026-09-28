@@ -108,6 +108,33 @@ def verify_multiple_views_case(*, secondary_finish: bool, reverse: bool) -> None
             verify_group_projection(records, scratch)
 
 
+def verify_unnumbered_manifest() -> None:
+    """DP1's canonical empty number must survive the same intake as numbered cards."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry, manifest = scratch / "specimens.json", scratch / "intake.json"
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        row = {
+            "attachment": str(ROOT / "verification/specimens/SPEC-0040.png"),
+            "photographSource": "https://example.test/unnumbered", "setCode": "DP1",
+            "number": "", "variant": "base", "language": "Japanese", "heldBy": "owner",
+            "inspectedFrom": "synthetic storage fixture", "observed": "identity only",
+            "recordedAt": "2026-09-28", "citedBy": ["U0476"],
+        }
+        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                               allow_small=False, replace=False, dry_run=False)
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
+                            SPECIMEN_DIR=scratch / "photos"):
+            manifest.write_text(json.dumps({"observations": [row]}), encoding="utf-8")
+            assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
+            assert fetch_attachment.load_registry()["specimens"][0]["number"] == ""
+            for invalid in ({**row, "number": None},
+                            {key: value for key, value in row.items() if key != "number"}):
+                expect_failure(lambda: fetch_attachment.validate_manifest_fields(invalid, "SPEC-0001"))
+            manifest.write_text(json.dumps({"observations": [{**row, "setCode": "JU"}]}), encoding="utf-8")
+            expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
+
+
 def verify_multiple_views() -> None:
     for reverse in (False, True):
         for secondary_finish in (False, True):
@@ -871,6 +898,7 @@ def main() -> None:
 
     verify_multiple_views()
     verify_duplicate_photo_batch()
+    verify_unnumbered_manifest()
     print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 
