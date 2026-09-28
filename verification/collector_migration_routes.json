@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "schema": "snoredex-collector-migration-routes",
+    "schemaVersion": "1.0.0",
+    "description": "Reviewed semantic routes used when predecessor collector identities no longer match current generated items."
+  },
+  "cumulativeChecklistRekeys": [
+    {"from": "ju-11-dutch-1e-unresolved-unknown", "to": "ju-11-dutch-1e-holo-edition-stamp-editie-1", "reason": "Reviewed predecessor-to-current checklist identity rekey."},
+    {"from": "ju-11-dutch-unl-unresolved-unknown", "to": "ju-11-dutch-unl-holo", "reason": "Reviewed predecessor-to-current checklist identity rekey."},
+    {"from": "ju-27-dutch-1e-unresolved-unknown", "to": "ju-27-dutch-1e-non-holo-edition-stamp-editie-1", "reason": "Reviewed predecessor-to-current checklist identity rekey."},
+    {"from": "ju-27-dutch-unl-unresolved-unknown", "to": "ju-27-dutch-unl-non-holo", "reason": "Reviewed predecessor-to-current checklist identity rekey."}
+  ],
+  "cardReleaseRekeys": [
+    {"from": "RELEASE:TW:T-Chinese:via-s5a:unknown-local-set:via-93:Snorlax-Gormandize-Body-Slam:unknown-local-id", "to": "RELEASE:TW:T-Chinese:s5a F:093/070:Snorlax-Gormandize-Body-Slam", "reason": "Reviewed local set and collector number resolve the predecessor release identity."},
+    {"from": "RELEASE:KR:Korean:BS2:30/40:unmapped-work:SPEC-0037", "to": "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up", "reason": "Reviewed card identity resolves the predecessor release work mapping."}
+  ],
+  "itemSplits": [
+    {
+      "fromItemId": "item-ba258f3e-4106-5795-87f4-97d9c19a3e42",
+      "toLegacyChecklistIds": ["sv-p-cs-277-s-chinese-none-mirror-holo-master-ball", "sv-p-cs-277-s-chinese-none-mirror-holo-poke-ball"],
+      "reason": "Reviewed source item represents two distinct Poké Ball and Master Ball mirror printings."
+    }
+  ]
+}

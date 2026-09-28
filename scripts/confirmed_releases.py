@@ -2,12 +2,9 @@
 """Build a chronological list of every card-variant with its CONFIRMED languages.
 
 Date sources, in precedence order:
-  1. Reviewed Bulbapedia expansion/product release fields in
-     verification/bulbapedia_release_dates.json. One article commonly carries both English and
-     Japanese dates, so the reviewed record identifies the matching field as well as the page.
-  2. DATES table below - dates verified during the verification sessions
-     (official DB entries, Bulbapedia infobox release fields, campaign dates)
-  3. artists_pokemontcg.io releaseDate (English-market fallback)
+  1. Exact card overrides in verification/confirmed_release_overrides.json.
+  2. Reviewed Bulbapedia expansion/product release fields, with page and field provenance.
+  3. Set-level fallback dates in the override file, then artists_pokemontcg.io English fallback.
   4. Approximate dates carry exact=False and render as "~YYYY".
 Outputs: analysis_confirmed_releases.json + .csv (the HTML page is built by scripts/site.py)
 """
@@ -48,110 +45,20 @@ for a in artists:
     if a.get("releaseDate") and a.get("setName"):
         en_dates[a["setName"]] = a["releaseDate"].replace("/", "-")
 
-EN_NAME_MAP = {
-    "151": "151", "Jungle": "Jungle", "Base Set 2": "Base Set 2",
-    "Legendary Collection": "Legendary Collection", "Skyridge": "Skyridge",
-    "EX FireRed & LeafGreen": "FireRed & LeafGreen", "EX Team Rocket Returns": "Team Rocket Returns",
-    "EX Dragon Frontiers": "Dragon Frontiers", "Diamond & Pearl": "Diamond & Pearl",
-    "Rising Rivals": "Rising Rivals", "Call of Legends": "Call of Legends",
-    "Boundaries Crossed": "Boundaries Crossed", "Plasma Storm": "Plasma Storm",
-    "XY Kalos Starter Set": "Kalos Starter Set", "Flashfire": "Flashfire",
-    "BREAKthrough": "BREAKthrough", "Generations": "Generations", "Fates Collide": "Fates Collide",
-    "Team Up": "Team Up", "Unbroken Bonds": "Unbroken Bonds", "Hidden Fates": "Hidden Fates",
-    "Sword & Shield": "Sword & Shield", "Rebel Clash": "Rebel Clash",
-    "Vivid Voltage": "Vivid Voltage", "Chilling Reign": "Chilling Reign",
-    "Fusion Strike": "Fusion Strike", "Pokémon GO": "Pokémon GO", "Lost Origin": "Lost Origin",
-    "Crown Zenith": "Crown Zenith", "Paradox Rift": "Paradox Rift",
-    "Paldean Fates": "Paldean Fates", "Twilight Masquerade": "Twilight Masquerade",
-    "Surging Sparks": "Surging Sparks", "Prismatic Evolutions": "Prismatic Evolutions",
-    "Journey Together": "Journey Together", "Perfect Order": "Perfect Order",
-    "Gym Heroes": "Gym Heroes",
-}
-
+OVERRIDES = json.load(io.open(
+    os.path.join(B, "verification", "confirmed_release_overrides.json"), encoding="utf-8"
+))
+if OVERRIDES.get("meta", {}).get("schema") != "snoredex-confirmed-release-overrides":
+    raise SystemExit("invalid verification/confirmed_release_overrides.json schema")
+EN_NAME_MAP = OVERRIDES["setNameAliases"]
 DATES = {
-    # Japanese classics
-    "PJU": ("1997-03", False),
-    "EXS": ("1998-03-23", True),  # Later Quick Starter printings are dated per checklist item.
-    "G2": ("1999", False), "EC5": ("2002", False),
-    "PCG1": ("2004", False), "PCG3": ("2004", False), "PCG9": ("2006", False),
-    "DP1": ("2006-10", False),
-    ("DP-P", "126"): ("2008-10", True),   # Domino's Pizza Oct-Dec 2008
-    ("DP-P", "127"): ("2008-12", True),   # Domino's Pizza Dec 2008-Jan 2009
-    "Pt2": ("2009-03", False), "LL": ("2010", False), "BW7": ("2012", False),
-    ("BW-P", "207"): ("2013-02", True),   # CoroCoro Ichiban! March 2013 issue insert
-    "HSZ": ("2012", False), "HXY": ("2013-12", False), "XY2": ("2014-03", False),
-    ("XY-P", "149"): ("2015-07", True),   # Marumiya promotion July 2015
-    ("XY-P", "261"): ("2016-09-01", True),# Daiichi Pan Sep 1 2016
-    "XY10": ("2016-03", False), "20th": ("2016-09", False),
-    # Wizards/EN promos with card-specific dates
-    ("WP", "49"): ("2002-08", True),      # Pokemon League August 2002
-    ("XYPR", "179"): ("2016-12-14", True),# Snorlax-GX Box
-    ("SM", "05"): ("2016-12-14", True),   # same box
-    ("SM-P", "1"): ("2016-12", False),
-    "smL": ("2018", False),
-    "sm9": ("2018-12-07", True),
-    ("SM-P", "297"): ("2018-12", True),   # Tag Bolt booster box campaign
-    ("SM", "169"): ("2019-02", False),
-    "sm10": ("2019-03-01", True),
-    "sA": ("2019-11-29", True),           # V Starter Sets infobox
-    "s1H": ("2019-12-06", True),          # Shield
-    "s2": ("2020-03-06", True),
-    "BA20": ("2020-06", True),            # Battle Academy 2020
-    ("SWSH", "032"): ("2020-05", False), ("SWSH", "068"): ("2020-11", False),
-    "s4": ("2020-09-18", True),           # Amazing Volt Tackle
-    ("S-P", "156"): ("2021-01-21", True), # CoroCoro Ichiban! March 2021 issue insert
-    "s5a": ("2021-03-19", True),
-    "sH": ("2021-07-09", True),           # Family Card Game infobox
-    ("SWSH", "119"): ("2021-07", False),
-    ("PKMTCH S-P", "S-P 145"): ("2021-10", False),
-    "s8b": ("2021-12-03", True),
-    "sI100": ("2021-12-17", True),        # Start Deck 100 infobox
-    "sN": ("2022-03", True),              # CoroCoro Comic Version infobox
-    "s10a": ("2022-05-13", True), "s10b": ("2022-06-17", True),
-    "PPS1 VIV": ("2022-11-09", True),     # Prize Pack Series One
-    ("SVP", "051"): ("2023", False),
-    "CS1aC": ("2023-05-19", True),        # Dynamax Clash (ATCG article)
-    "CS1DC": ("2023", False), "CSAC": ("2023", False),
-    "sv2a": ("2023-06-16", True), "xsv2a": ("2023-06-16", True),
-    "PPS3 LOR": ("2023-06", False),
-    "sv4K": ("2023-10-27", True),
-    "svG": ("2023-11-10", True),          # Special Deck Set ex infobox
-    "CLV": ("2023-11-17", True), "CLF": ("2023-11", False),
-    "WCD23 LOR": ("2023-11", False),
-    "sv4a": ("2023-12-01", True),
-    ("SVP", "122"): ("2024", False),
-    "svIba": ("2024-03-08", True),        # Battle Academy JP infobox
-    "sv5a": ("2024-03-22", True),
-    ("SV-P/ID", "117"): ("2024-06-28", True),  # Monthly Promo Card
-    "svLN": ("2024", False),
-    "svM": ("2024-11-22", True),          # Generations Start Decks infobox
-    ("SV-P/TH", "082"): ("2024", False),
-    ("S-P/CS", "061"): ("2023", False),
-    "151C": ("2025-01-17", True),         # Collection 151 (ATCG article)
-    "sv9": ("2025-01-24", True),
-    "xPRE": ("2025-02", False),           # Snorlax ex & Blissey ex Special Collection
-    "CSVE1C": ("2025-02-28", True),       # Battle Party: Shared Dream
-    ("SVP", "184"): ("2025-03", False),
-    "xJTG": ("2025-04", False),
-    ("SV-P/ID", "278"): ("2025-07-25", True),  # Gym Promo Card Pack 11
-    "CSVE2C": ("2025-07-18", True),       # Battle Party: Shining Dream
-    "PPS7 JTG": ("2025-08-14", True),     # Prize Pack Series Seven
-    "m2a": ("2025-11-28", True), "xm2a": ("2025-11-28", True),
-    "mC": ("2025-12", False),
-    "mP1": ("2025-12-19", True),          # CoroCiao Version infobox
-    "PPS8 JTG": ("2026-01-01", True),     # Prize Pack Series Eight
-    ("SV-P/ID", "286"): ("2026-01", True),# Taro promotion Jan-Feb 2026
-    "m3": ("2026-01", False),
-    ("SV-P/CS", "277"): ("2025", False),
-    # Simplified Chinese sets without pinned dates
-    "CS2aC": ("2024", False), "CS3DC": ("2024", False), "CS5aC": ("2025", False),
-    "CS5DC": ("2025", False), "CS6bC": ("2025", False), "CSV5C": ("2024", False),
-    "CSV7C": ("2025", False), "CSV10C": ("2025-12", False),
-    "CSM1cC": ("2025", False), "CSM2bC": ("2025", False), "CSM2cC": ("2025", False),
-    "CSM2.1C": ("2025", False), "CSM2DC": ("2025", False), "CSMPC": ("2025", False),
-    "CSZC": ("2025", False), "CSUC": ("2025", False), "CSVL1C": ("2025", False),
-    "CSVH1C": ("2025", False), "CSVH4C": ("2025-26", False),
+    row["setCode"]: (row["date"], row["exact"])
+    for row in OVERRIDES["releaseDates"]["sets"]
 }
+DATES.update({
+    (row["setCode"], row["number"]): (row["date"], row["exact"])
+    for row in OVERRIDES["releaseDates"]["cards"]
+})
 
 def get_date(c):
     num = c.get("number") or ""

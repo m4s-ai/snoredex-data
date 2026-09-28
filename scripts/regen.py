@@ -98,6 +98,7 @@ TESTS = [
     ["verification/test_card_discovery.py"],
     ["verification/test_metric_polarity.py"],
     ["verification/test_asia_locality_matrix.py"],
+    ["verification/test_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
     ["verification/test_physical_evidence_workflow.py"],
     ["verification/test_fetch_attachment.py"],
