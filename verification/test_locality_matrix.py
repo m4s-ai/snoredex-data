@@ -28,11 +28,44 @@ class LocalityMatrixTests(unittest.TestCase):
         indexes["unit"]["U9999"] = {
             "unitId": "U9999", "language": "Czech", "status": "contradicted"
         }
+        indexes["adjudication"]["OA-TEST-U9999"] = {
+            "adjudicationId": "OA-TEST-U9999", "unitId": "U9999",
+            "decision": "not-printed", "authority": "collection-owner",
+        }
         manifest["excludedLegacyClaims"].append({
             "unitId": "U9999", "language": "Czech",
             "reason": "Regression fixture for manifest-owned exclusions.",
         })
         self.assertEqual(matrix.validate(manifest, indexes), [])
+
+    def test_contradicted_claim_without_owner_decision_is_not_an_exclusion(self) -> None:
+        manifest = copy.deepcopy(self.manifest)
+        manifest["excludedLegacyClaims"].append({
+            "unitId": "U0265", "language": "T-Chinese",
+            "reason": "A contradicted claim alone cannot settle absence.",
+        })
+        self.assertTrue(any(
+            "needs a collection-owner not-printed adjudication" in error
+            and "U0265" in error
+            for error in matrix.validate(manifest, self.indexes)
+        ))
+
+    def test_non_absence_owner_decision_does_not_settle_exclusion(self) -> None:
+        manifest = copy.deepcopy(self.manifest)
+        indexes = copy.deepcopy(self.indexes)
+        indexes["adjudication"]["OA-TEST-U0265"] = {
+            "adjudicationId": "OA-TEST-U0265", "unitId": "U0265",
+            "decision": "disputed", "authority": "collection-owner",
+        }
+        manifest["excludedLegacyClaims"].append({
+            "unitId": "U0265", "language": "T-Chinese",
+            "reason": "A non-absence decision is not enough.",
+        })
+        self.assertTrue(any(
+            "needs a collection-owner not-printed adjudication" in error
+            and "U0265" in error
+            for error in matrix.validate(manifest, indexes)
+        ))
 
     def test_duplicate_exclusion_is_rejected(self) -> None:
         manifest = copy.deepcopy(self.manifest)

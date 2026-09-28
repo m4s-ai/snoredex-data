@@ -152,6 +152,15 @@ def duplicate_exclusions(exclusions: list[dict[str, Any]]) -> list[str]:
     )
 
 
+def has_owner_absence_decision(unit_id: str, indexes: dict[str, Any]) -> bool:
+    return any(
+        decision.get("unitId") == unit_id
+        and decision.get("decision") == "not-printed"
+        and decision.get("authority") == "collection-owner"
+        for decision in indexes["adjudication"].values()
+    )
+
+
 def validate_exclusions(exclusions: Any, indexes: dict[str, Any]) -> list[str]:
     if not isinstance(exclusions, list):
         return ["excludedLegacyClaims must be an array"]
@@ -165,6 +174,11 @@ def validate_exclusions(exclusions: Any, indexes: dict[str, Any]) -> list[str]:
             errors.append(f"excluded claim does not resolve: {item}")
         elif unit.get("status") != "contradicted":
             errors.append(f"excluded claim {item['unitId']} is not contradicted")
+        if not has_owner_absence_decision(item.get("unitId"), indexes):
+            errors.append(
+                f"excluded claim {item.get('unitId')} needs a collection-owner "
+                "not-printed adjudication"
+            )
         if not item.get("reason"):
             errors.append(f"excluded claim {item.get('unitId')} needs a reason")
     return errors
