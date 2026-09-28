@@ -1,3 +1,5 @@
+<!-- doc: role=retained seller image intake and acceptance record; stage=task -->
+
 # Browser image intake — 2026-09-28
 
 Review of all 24 supplied seller-link leads for draft PR #402. Public source URLs are retained here; the private working checklist and account/session data are not included.
