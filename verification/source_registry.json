@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-25",
+  "generated": "2026-09-28",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1619,
-   "uniqueUrls": 1612,
+   "evidenceRecords": 1620,
+   "uniqueUrls": 1613,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6279
+   "claimsAttributed": 6280
   }
  },
  "providers": [
@@ -217,8 +217,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 89,
-   "claimsSupported": 692
+   "uniqueSources": 90,
+   "claimsSupported": 693
   },
   {
    "providerId": "tcgcsv",
@@ -1321,6 +1321,23 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 11
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT"
+   ],
+   "retrievedAt": "2026-09-28",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/AS5a",

@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-25",
+    "generated": "2026-09-28",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -113658,6 +113658,30 @@
     },
     {
       "entityType": "release-event",
+      "entityId": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "releaseEventId": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+        "localSetId": "LOCALSET:TH:AS1b",
+        "setEditionIds": [
+          "EDITION:TH:Thai:AS1b"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2019-02-01",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "TH"
+        ],
+        "marketScopeBasis": "The article explicitly states Thailand's First Impact release date and identifies Set A and Set B as the two components; this record maps the date only to the Thai AS1b Set B local set.",
+        "sourceRecordId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+        "linkBasis": "The source identifies the Thai First Impact launch and names Set A and Set B as its components; AS1b is the established Thai Set B local set."
+      }
+    },
+    {
+      "entityType": "release-event",
       "entityId": "EVENT:TH:s10a T:launch",
       "origin": "reviewed-evidence-issue-262-20260915",
       "payload": {
@@ -135913,6 +135937,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+        "disposition": "mapped",
+        "targetRef": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+        "reason": "The source explicitly dates the Thai First Impact launch; its Set A/Set B description scopes the date to the Thai AS1b edition without transferring it to Indonesian AS1b."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-CM-0243DE5FBFC0",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -142170,6 +142205,35 @@
           ],
           "marketScopeBasis": "single frozen provider context for this raw code",
           "note": null
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "origin": "reviewed-evidence-issue-262",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+        "sourceKind": "release-date-record",
+        "provider": "bulbapedia",
+        "providerRecordKey": "https://bulbapedia.bulbagarden.net/wiki/AS1a#release-date:TH:AS1b",
+        "retrieved": "2026-09-28",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+        "raw": {
+          "localCode": "AS1b",
+          "page": "First Impact (ATCG)",
+          "field": "Thai release date",
+          "date": "2019-02-01",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "locality": "TH",
+          "languageScope": "Thai",
+          "marketScopes": [
+            "TH"
+          ],
+          "marketScopeBasis": "The article explicitly states Thailand's First Impact release date and identifies Set A and Set B as the two components; this record maps the date only to the Thai AS1b Set B local set.",
+          "note": "Bulbapedia reports First Impact and its GX Starter Deck released in Thailand on February 1, 2019. Indonesian AS1b is a separate locality and retains its separately sourced August 8, 2019 date."
         }
       }
     },
@@ -247328,6 +247392,22 @@
     },
     {
       "fromType": "release-event",
+      "fromId": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:TH:AS1b",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:TH:Thai:AS1b",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
       "fromId": "EVENT:TH:s10a T:launch",
       "relation": "belongs-to",
       "toType": "local-set",
@@ -262514,6 +262594,14 @@
       "relation": "asserts-release-event",
       "toType": "release-event",
       "toId": "EVENT:30th-2026-tw",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-record",
+      "fromId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
       "provenance": {}
     },
     {
@@ -291182,6 +291270,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "disposition": "mapped",
+      "targetRef": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
+      "reason": "The source explicitly dates the Thai First Impact launch; its Set A/Set B description scopes the date to the Thai AS1b edition without transferring it to Indonesian AS1b."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-CM-0243DE5FBFC0",
       "disposition": "mapped",
       "targetRef": "LOCALSET:WEST:PLS",
@@ -296901,16 +296996,16 @@
     }
   ],
   "summary": {
-    "entities": 8201,
-    "edges": 12208,
-    "migrationInputs": 2872,
+    "entities": 8204,
+    "edges": 12211,
+    "migrationInputs": 2873,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 295,
       "carried": 68,
       "established-and-mapped": 1590,
       "linked-local-counterpart": 125,
-      "mapped": 351,
+      "mapped": 352,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
@@ -296919,8 +297014,8 @@
     "candidateClaims": 2051,
     "cardReleases": 633,
     "physicalPrintings": 773,
-    "setSourceRecords": 479,
-    "setSourceDispositions": 479,
+    "setSourceRecords": 480,
+    "setSourceDispositions": 480,
     "localizations": 16
   }
 }

@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 479,
+      "sourceRecords": 480,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 144,
-      "releaseDateRecords": 72,
+      "releaseDateRecords": 73,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -1356,6 +1356,30 @@
         ],
         "marketScopeBasis": "single frozen provider context for this raw code",
         "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "https://bulbapedia.bulbagarden.net/wiki/AS1a#release-date:TH:AS1b",
+      "retrieved": "2026-09-28",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+      "raw": {
+        "localCode": "AS1b",
+        "page": "First Impact (ATCG)",
+        "field": "Thai release date",
+        "date": "2019-02-01",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "TH",
+        "languageScope": "Thai",
+        "marketScopes": [
+          "TH"
+        ],
+        "marketScopeBasis": "The article explicitly states Thailand's First Impact release date and identifies Set A and Set B as the two components; this record maps the date only to the Thai AS1b Set B local set.",
+        "note": "Bulbapedia reports First Impact and its GX Starter Deck released in Thailand on February 1, 2019. Indonesian AS1b is a separate locality and retains its separately sourced August 8, 2019 date."
       }
     },
     {

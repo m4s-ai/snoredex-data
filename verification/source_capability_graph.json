@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-25",
+    "generated": "2026-09-28",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 61,
       "absenceEdges": 0,
       "observations": 65,
-      "resolvedVerdictSources": 1619
+      "resolvedVerdictSources": 1620
     },
     "surfaceStates": {
       "active": 28,
@@ -9756,6 +9756,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
