@@ -41,7 +41,7 @@ Review of all 24 supplied seller-link leads for draft PR #402. Public source URL
 
 - Visible holo is supported for Indonesian S10a I 058/071, Thai sc3b T 126/158, Traditional Chinese sc1b F 119/153 (seller copies 2 and 3), and AC1b 118/158. The first two already have retained holo observations; the two Traditional Chinese identities gain positive physical evidence. Two copies from one seller are not independent-provider corroboration. No exact foil-pattern taxonomy, absence, or exhaustive finish list is asserted.
 - Rendered sparkle/rainbow effects and seller labels such as “Reverse Holo” or “NON-HOLO” remain insufficient physical-finish evidence. The visible Chatime/INACO/anniversary logos and Japanese 1st Edition marks are retained in the observations without inventing a finish-specific printing.
-- DP1 visibly says DPBP#174. That identifier is not silently substituted for the unresolved canonical collector number. The importer now accepts an explicitly empty number only through its existing canonical-target lookup; absent/non-string numbers still fail validation.
+- DP1 visibly says DPBP#174, its Battle Pokédex identifier. The numbering follow-up below confirms the existing unnumbered identity; the collector number correctly remains empty. The importer accepts an explicitly empty number only through its existing canonical-target lookup; absent/non-string numbers still fail validation.
 - AS5a 203/184 is the same listing depiction already retained as SPEC-0551. The Thai svM derivative decodes to exactly the existing SPEC-0534 PNG hash. Neither receives a duplicate SPEC ID.
 - The putative Thai MA4 link is an Indonesian MA4 I 091/123 render. It supplies no evidence for Thailand. The missing Mercari page supplies no evidence of absence.
 
@@ -81,7 +81,7 @@ The same correction applies to EXS Snorlax. The supplied [Elite Fourum discussio
 
 The existing `RELEASE:JP:Japanese:EXS:unnumbered:Snorlax-Guard-Roll-Over` also has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector-number fields remain correct, and the two existing physical printings `F0107-P01` and `F0107-P02` remain distinct. No canonical identity, number, rarity or finish is changed by this research correction.
 
-The research audit accepts the positively reviewed unnumbered identities PJU, EXS, UNP and G2 (below) instead of counting their null numbers as missing. Other empty numbers still require their own evidence and reconciliation. This establishes no additional finish or exhaustive finish list.
+The research audit accepts the positively reviewed unnumbered identities PJU, EXS, UNP, G2 and DP1 (below) instead of counting their null numbers as missing. Other empty numbers still require their own evidence and reconciliation. This establishes no additional finish or exhaustive finish list.
 
 ## UNP numbering follow-up — 2026-09-29
 
@@ -93,13 +93,21 @@ UNP therefore has no remaining tracked-field gap. Its former number task was an 
 
 The collection owner explicitly confirms: “Rocket’s Snorlax – G2 also unnumbered im japanischen wie PJU”. The retained [SPEC-0194](../../specimens/SPEC-0194.jpg) shows the complete Japanese Rocket's Snorlax face with Pokédex No.143 and no set collector number. The existing `RELEASE:JP:Japanese:G2:unnumbered:Rockets-Snorlax-Restless-Sleep-Collapse` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`; its null collector-number fields are correct.
 
-The G2 numbering task is complete. Its physical-printing candidate `F0132-P01` remains `marketplace-claimed`, so the separate finish-evidence task stays open. No canonical identity, card number, finish or stable ID changes. Japanese numbering reviews fall from two to one (DP1); parent numbering reviews fall from seven to six. Unique remaining-release counts do not fall because G2 still needs physical evidence.
+The G2 numbering task is complete. Its physical-printing candidate `F0132-P01` remains `marketplace-claimed`, so the separate finish-evidence task stays open. No canonical identity, card number, finish or stable ID changes. Unique remaining-release counts do not fall because G2 still needs physical evidence.
 
-The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-G2-follow-up draft head `fd0a43dd3fd6df6682fa3eed577b9f5a9f790f49`, is:
+## DP1 numbering follow-up — 2026-09-29
+
+The owner supplied the [Diamond & Pearl Battle Pokédex explanation](https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_by_Diamond_%26_Pearl_Battle_Pok%C3%A9dex_number). Reviewed on 2026-09-29, that source places Snorlax at Battle Pokédex **174**, distinct from National Pokédex **143**. The retained seller photograph [SPEC-0570](../../specimens/SPEC-0570.png) shows Japanese Snorlax Lv.35 with `DPBP#174`, No.143 and the DP1 set mark, without a separate collector number. The database explanation interprets the visible identifier; it does not supply a physical-finish claim.
+
+The existing `RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector number is correct; neither 174 nor 143 replaces it. The dated 2026-09-28 intake observations in the manifest, link record and SPEC-0570 describe the collector-number question as unresolved. This follow-up supersedes that pre-review uncertainty and closes the numbering task. Canonical identity, stable IDs and number fields need no change.
+
+Both projected DP1 items remain research placeholders without a verified physical finish. All five Japanese numbering reviews are now complete; Japanese numbering gaps fall from one to zero and parent numbering gaps from six to five. The separate DP1 finish task remains open, so the unique remaining-release counts stay unchanged.
+
+The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-DP1-follow-up draft head `4e8bcd6b74309142d975359637aeac7f7de1df64`, is:
 
 | Scope | Main gap-free / remaining | Including draft #402 gap-free / remaining |
 |---|---:|---:|
 | Japanese, 67 releases | 53 / 14 | 53 / 14 |
 | Parent research, 633 releases | 510 / 123 | 513 / 120 |
 
-The seven open issue bodies and private TODO are reconciled with this rule. PJU's, EXS's, UNP's and G2's numbering tasks are complete; only the DP1 numbering review remains open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
+The seven open issue bodies and private TODO are reconciled with this rule. PJU's, EXS's, UNP's, G2's and DP1's numbering tasks are complete; no Japanese numbering review remains open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
