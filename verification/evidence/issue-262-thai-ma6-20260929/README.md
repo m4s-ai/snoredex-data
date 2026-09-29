@@ -41,3 +41,6 @@ Main-based issue totals stay unchanged until merge.
 
 The subsequent [sc1D T 133/164 owner confirmation](../issue-262-sc1dt133-20260929/README.md)
 raises the draft Thai result to 21/29, with eight finish gaps remaining.
+
+The later [SH 026/038 intake](../issue-262-sh026-20260929/README.md) brings the draft
+to 22/29 Thai releases with seven finish gaps.

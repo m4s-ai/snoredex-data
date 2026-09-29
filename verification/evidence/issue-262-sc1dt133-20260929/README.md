@@ -11,6 +11,9 @@ is claimed. The canonical importer records the positive finish determination und
 `manifest.json` replays the metadata update from the retained image. No other finish
 is contradicted, and the owner has not closed this release's finish list.
 
-This follow-up to the first PR #403 bundle raises Thai tracked-field coverage from
+This intermediate follow-up to the first PR #403 bundle raised Thai tracked-field coverage from
 20/29 to 21/29, leaving eight finish gaps. One research placeholder becomes a verified
 Non-Holo printing through the standard migration path. Main remains unchanged until merge.
+
+The subsequent [SH 026/038 intake](../issue-262-sh026-20260929/README.md) raises
+the draft to 22/29, with seven finish gaps remaining.

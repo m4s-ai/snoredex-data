@@ -35998,6 +35998,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0596",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0596",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0596",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0596",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0596",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0596"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -103184,6 +103201,36 @@
       }
     },
     {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0596",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0596",
+        "cardReleaseId": "RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "print-identity",
+            "text": "25th anniversary Pikachu logo"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "The retained screenshot visibly shows the yellow 25th anniversary Pikachu logo. Collection-owner finish determination on 2026-09-29: SH 026/038 non-holo; supplied YouTube timestamp 7:23.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0596",
+        "specimenIds": [
+          "SPEC-0596"
+        ]
+      }
+    },
+    {
       "entityType": "profile-finish-claim",
       "entityId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "origin": "authoritative-set-catalogue-migration",
@@ -154755,7 +154802,15 @@
           ],
           "cardImageUrls": [
             "https://asia.pokemon-card.com/th/card-img/th00003343.png"
-          ]
+          ],
+          "printedCodeObservation": {
+            "sourceNativeValue": "sH T",
+            "localeSuffix": "T",
+            "observedAt": "2026-09-29",
+            "sourceRef": "specimen:SPEC-0596",
+            "ownerStatement": "das bild zeigt vor allem das in der Thai version auch mit T nach dem sH angezeigt wird das es sich um die Thai Verison handelt",
+            "basis": "Visible printed code and explicit owner clarification; localCode SH remains the established catalogue key for the same Thai release."
+          }
         }
       }
     },
@@ -186915,6 +186970,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0595",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0596",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0596",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -237366,6 +237431,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0596",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0596",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0596",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
       "provenance": {}
     },
     {
@@ -299273,17 +299354,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0595",
       "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0596",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0596",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact"
     }
   ],
   "summary": {
-    "entities": 8266,
-    "edges": 12293,
-    "migrationInputs": 2907,
+    "entities": 8268,
+    "edges": 12296,
+    "migrationInputs": 2908,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 305,
       "carried": 68,
-      "established-and-mapped": 1610,
+      "established-and-mapped": 1611,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299291,9 +299379,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2081,
+    "candidateClaims": 2082,
     "cardReleases": 633,
-    "physicalPrintings": 793,
+    "physicalPrintings": 794,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

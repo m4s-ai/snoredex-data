@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:3d59aaba3e777d7af0aa67b30b57666ba24af53deb2c723e5334138cd2329353",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
+    "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
+      "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12394,7 +12394,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
+      "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30374,6 +30374,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-7f7b111e-6436-583b-b3f2-a4b1d3a9ab94",
+      "toItemIds": [
+        "item-2d4914fd-3739-54ee-b2b9-a28a46974a2d"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-5dde6bf6-727a-5b43-be0f-7d120b0c5e2e",
       "toItemIds": [
         "item-a79a9c99-056e-5c62-a123-d3bc00a93003"
@@ -39895,7 +39904,7 @@
         "cardReleaseId": "RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-7f7b111e-6436-583b-b3f2-a4b1d3a9ab94"
+          "item-2d4914fd-3739-54ee-b2b9-a28a46974a2d"
         ],
         "reason": null
       },
@@ -47524,12 +47533,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0595",
         "disposition": "projected",
         "targetItemId": "item-efdbc7ae-79fa-5aca-974a-b4dc6f0cbe24"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0596",
+        "disposition": "projected",
+        "targetItemId": "item-2d4914fd-3739-54ee-b2b9-a28a46974a2d"
       }
     ],
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 793,
+      "physicalPrintings": 794,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

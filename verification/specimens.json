@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 595,
+  "count": 596,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12311,6 +12311,33 @@
         ],
         "basis": "Collection-owner determination on 2026-09-29 for this exact supplied image: non-holo sieht man doch"
       }
+    },
+    {
+      "specimenId": "SPEC-0596",
+      "setCode": "SH",
+      "number": "026/038",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Owner-supplied video screenshot; exact card independently inspected in the in-app YouTube player at 00:07:23; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0596.png",
+      "photographSource": "https://www.youtube.com/watch?v=99FSc0MlWwQ&t=443s",
+      "photographSha256": "sha256:47e78a2040132aa8849859d548d8651be9e9c95c0432064904cd8f9b3d6dc25b",
+      "observed": "The supplied screenshot shows Thai Snorlax, HP160, SH 026/038, regulation E, Heavy Impact 80, Illus. Oswaldo KATO and the yellow 25th anniversary Pikachu logo. The owner supplies the YouTube URL and timestamp 7:23 and explicitly confirms Non-Holo. The screenshot itself was inspected and the same card was independently observed in the in-app YouTube player at 7:23, with the visible player time confirming the supplied timestamp. This is not an owner-held specimen or a finish-list closure. Printed-code clarification from the owner on 2026-09-29: the card reads sH T; the suffix T identifies the Thai version here. SH is the existing catalogue key for this same release, not a transcription of the complete printed code.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "TH:SH:026/038:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "markings": "25th anniversary Pikachu logo",
+        "markingRole": "print-identity",
+        "basis": "The retained screenshot visibly shows the yellow 25th anniversary Pikachu logo. Collection-owner finish determination on 2026-09-29: SH 026/038 non-holo; supplied YouTube timestamp 7:23."
+      },
+      "listingUrl": "https://www.youtube.com/watch?v=99FSc0MlWwQ"
     }
   ]
 }
