@@ -50,6 +50,14 @@ def verify_source_first_specimen_registry():
         for stable_id in row['stableIds']:
             indexed.setdefault(stable_id, set()).add(position)
     assert not (prints.keys() - indexed.keys()), "every admitted source-first print must be indexed"
+    # A non-URL owner rarity decision must not borrow the publisher's authority.
+    m6a = prints['JP:M6a:095/103:base']
+    owner = next(row for row in evidence if row['providerId'] == 'owner-attestation')
+    assert m6a['printId'] in owner['stableIds'] and 'rarity' in owner['dimensions']
+    assert owner['canonicalUrl'] is None and m6a['raritySourceUrl'] is None
+    assert m6a['providerId'] == 'pokemon-card-jp'
+    publisher = next(row for row in evidence if row['canonicalUrl'] == m6a['sourceUrl'])
+    assert 'rarity' not in publisher['dimensions']
     for print_id, row in prints.items():
         if row.get('specimenId'):
             assert indexed.get(row['specimenId'], set()) & indexed[print_id], (print_id, row['specimenId'])

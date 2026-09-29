@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-28",
+    "generated": "2026-09-29",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -19,7 +19,7 @@
       "surfaces": 58,
       "coverageEdges": 61,
       "absenceEdges": 0,
-      "observations": 65,
+      "observations": 66,
       "resolvedVerdictSources": 1648
     },
     "surfaceStates": {
@@ -1362,7 +1362,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-29",
       "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
       "query": {
         "method": "NON_URL",
@@ -4243,7 +4243,8 @@
       "positiveEvidenceCapabilities": [
         "language",
         "finish",
-        "edition"
+        "edition",
+        "rarity"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -4257,7 +4258,8 @@
         "outsideScope": [
           "cards not named",
           "unstated finishes/languages",
-          "collection completeness"
+          "collection completeness",
+          "rarities not explicitly determined by the owner"
         ],
         "zeroResultMeans": "unknown",
         "challenge": "Silence in an attestation cannot be read as a negative claim."
@@ -7214,7 +7216,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:ce1cabdfda216fc780f8a22f42df7b1b3b23883f9e6f807d160a503d8db844df",
+      "rawRecordHash": "sha256:7217454240eb0f89b4e102caf00cf286c927b0f5e6156107e3e9430aa05b8474",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7228,15 +7230,17 @@
           "Owner attestation (domain expert) + set release schedule",
           "Owner attestation (domain expert); localized product image",
           "Owner attestation plus downloaded scan review",
+          "Positive source-native rarity record",
           "Referenced product render (context only); Owner attestation (domain expert); localized product image"
         ],
         "dimensions": [
           "edition",
           "finish",
           "finish-override",
-          "language"
+          "language",
+          "rarity"
         ],
-        "stableIdCount": 174,
+        "stableIdCount": 175,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -7329,6 +7333,7 @@
           "F0616-P02",
           "ID:AC3a:145/205:base",
           "ID:s10a I:077/071:base",
+          "JP:M6a:095/103:base",
           "SPEC-0022",
           "SPEC-0023",
           "SPEC-0053",
@@ -7413,8 +7418,8 @@
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-09-24",
-        "usageCount": 194
+        "retrievedAt": "2026-09-29",
+        "usageCount": 195
       }
     },
     {
@@ -9553,6 +9558,61 @@
         ],
         "retrievedAt": "2026-09-15",
         "usageCount": 2
+      }
+    },
+    {
+      "observationId": "obs-owner-m6a-rarity-20260929",
+      "surfaceId": "owner-attestations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:owner-attestation"
+      },
+      "retrievedAt": "2026-09-29",
+      "expectedIdentifiers": [
+        "JP:M6a:095/103:base",
+        "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "Common"
+      ],
+      "validatesEdges": [
+        "owner-attestation-positive"
+      ],
+      "outcome": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:2331c56bb7cd053d1edf95a91b167e270c7de337238cf45b5bd2ba8e37c64baa",
+      "rawRecord": {
+        "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "M6a",
+          "locality": "JP",
+          "languages": [
+            "Japanese"
+          ],
+          "scripts": [
+            "Jpan"
+          ],
+          "printIds": [
+            "JP:M6a:095/103:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "095/103"
+          ],
+          "observedCoverage": "owner rarity determination for one exact card",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29",
+          "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+          "rarity": "Common",
+          "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+        }
       }
     }
   ],
@@ -17228,7 +17288,8 @@
         "edition",
         "finish",
         "finish-override",
-        "language"
+        "language",
+        "rarity"
       ]
     },
     {

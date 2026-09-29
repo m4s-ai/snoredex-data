@@ -2845,7 +2845,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-29",
       "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
       "query": {
         "method": "NON_URL",
@@ -2895,7 +2895,8 @@
           "positiveEvidenceCapabilities": [
             "language",
             "finish",
-            "edition"
+            "edition",
+            "rarity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -2909,7 +2910,8 @@
             "outsideScope": [
               "cards not named",
               "unstated finishes/languages",
-              "collection completeness"
+              "collection completeness",
+              "rarities not explicitly determined by the owner"
             ],
             "zeroResultMeans": "unknown",
             "challenge": "Silence in an attestation cannot be read as a negative claim."
@@ -8119,6 +8121,62 @@
         "asia-tw-archive-positive"
       ],
       "outcome": "Exact Taiwan AS5a 204/184 positive row is retained as an excerpt from the equivalent official Taiwan archive PDF."
+    },
+    {
+      "observationId": "obs-owner-m6a-rarity-20260929",
+      "surfaceId": "owner-attestations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:owner-attestation"
+      },
+      "retrievedAt": "2026-09-29",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+          "sourceKind": "source-first-local-set-profile",
+          "provider": "owner-attestation",
+          "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+          "retrieved": "2026-09-29",
+          "sourceUrl": null,
+          "raw": {
+            "localCode": "M6a",
+            "locality": "JP",
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "printIds": [
+              "JP:M6a:095/103:base"
+            ],
+            "providers": [
+              "owner-attestation"
+            ],
+            "sourceUrls": [],
+            "observedCollectorNumbers": [
+              "095/103"
+            ],
+            "observedCoverage": "owner rarity determination for one exact card",
+            "assertedBy": "collection owner",
+            "assertedAt": "2026-09-29",
+            "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+            "rarity": "Common",
+            "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "JP:M6a:095/103:base",
+        "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "Common"
+      ],
+      "validatesEdges": [
+        "owner-attestation-positive"
+      ],
+      "outcome": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
     }
   ]
 }

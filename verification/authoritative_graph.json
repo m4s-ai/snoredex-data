@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-09-28",
+    "generated": "2026-09-29",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -112459,6 +112459,23 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+      "origin": "reviewed-owner-rarity-20260929",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+        "cardReleaseId": "RELEASE:JP:Japanese:M6a:095/103:Snorlax-Good-Sleep-Collapse",
+        "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "sourceProvider": "owner-attestation",
+        "sourceVocabulary": "owner-classification",
+        "sourceNativeValue": "Common",
+        "normalizedRarityId": "common",
+        "sourceProductKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+        "retrievedAt": "2026-09-29",
+        "evidence": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:pr375:ID:s10a I:077/071:base",
       "origin": "reviewed-photo-identities-pr375",
       "payload": {
@@ -138921,6 +138938,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "origin": "reviewed-owner-rarity-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:JP:M6a",
+        "reason": "Exact owner determination for existing Japanese M6a 095/103 rarity only."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
       "origin": "reviewed-evidence-issue-261",
       "payload": {
@@ -150317,6 +150345,45 @@
           "sha256": "9c89eb71c8bfc8a395071fe5ad38774ff915e611868e92c33b144092cf401020",
           "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
           "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale announced for 2025-03-15; retained as context only. March 28 product 740 is a different battle enhancement box."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "origin": "reviewed-owner-rarity-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "M6a",
+          "locality": "JP",
+          "languages": [
+            "Japanese"
+          ],
+          "scripts": [
+            "Jpan"
+          ],
+          "printIds": [
+            "JP:M6a:095/103:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "095/103"
+          ],
+          "observedCoverage": "owner rarity determination for one exact card",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29",
+          "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+          "rarity": "Common",
+          "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
         }
       }
     },
@@ -246675,6 +246742,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:JP:Japanese:M6a:095/103:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:pr375:ID:s10a I:077/071:base",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -261397,6 +261480,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-KR-DATE-SV9-20260921",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
       "provenance": {}
     },
     {
@@ -293276,6 +293367,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:JP:M6a",
+      "reason": "Exact owner determination for existing Japanese M6a 095/103 rarity only."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
       "disposition": "mapped",
       "targetRef": "LOCALSET:LATAM:SVP%20LA",
@@ -297210,16 +297308,16 @@
     }
   ],
   "summary": {
-    "entities": 8210,
-    "edges": 12218,
-    "migrationInputs": 2878,
+    "entities": 8213,
+    "edges": 12221,
+    "migrationInputs": 2879,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 299,
       "carried": 68,
       "established-and-mapped": 1591,
       "linked-local-counterpart": 125,
-      "mapped": 352,
+      "mapped": 353,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
@@ -297228,8 +297326,8 @@
     "candidateClaims": 2056,
     "cardReleases": 633,
     "physicalPrintings": 774,
-    "setSourceRecords": 480,
-    "setSourceDispositions": 480,
+    "setSourceRecords": 481,
+    "setSourceDispositions": 481,
     "localizations": 16
   }
 }

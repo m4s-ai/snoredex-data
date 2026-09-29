@@ -57,6 +57,20 @@ That consumer review exposed a projector defect: each standalone specimen create
 
 Final validation: all canonical regeneration steps completed, followed by the full `regen.py --check` gate and both retained-source `--check --full-refresh` checks. A local, uncommitted runner retried only transient Windows file-open/temporary-directory locks; no checks were skipped. The corrected browser projection renders sc1b F 119/153 as one physical printing with both SPEC-0566/0567 previews loaded. The final pre-push collision check found unchanged main/PR ownership through SPEC-0557.
 
+## M6a rarity owner determination — 2026-09-29
+
+The collection owner explicitly assigns **Common** to Japanese Snorlax **M6a 095/103**,
+using the western counterpart's circle/Common rarity as the rationale. The exact statement
+is retained in `SET-SRC-OWNER-M6A-095-RARITY-20260929`; the graph claim
+`RARITYCLAIM:owner:JP:M6a:095/103:20260929` normalizes that owner label to `common`.
+The claim is tier-2 `owner-attestation`, separate from the publisher's SPEC-0514 identity
+render. It does not assert a Japanese printed circle, an official Japanese rarity field,
+a physical finish, or rarity for another language.
+
+This closes the draft's last Japanese rarity gap. Japan still has **15 releases with open
+research**, because M6a's physical finish remains unresolved. Main retains one Japanese
+rarity gap until this draft is merged.
+
 ## PJU and EXS numbering follow-up — 2026-09-29
 
 The missing collector-number flag for Japanese Jungle Snorlax in [#259](https://github.com/m4s-ai/snoredex-data/issues/259) was an audit error. [Pokellector's Japanese Jungle checklist](https://jp.pokellector.com/Pokemon-Jungle-Expansion/) explicitly describes the set as unnumbered and lists 48 cards. The retained tier-2 product image [SPEC-0204](../../specimens/SPEC-0204.jpg) shows Pokédex No.143. [TCGcollector's Snorlax entry](https://www.tcgcollector.com/cards/29983/snorlax-pokemon-jungle-no-047) separately lists checklist position No.047 and Pokédex #0143. The external checklists provide research context for interpreting the existing identity; no new provider-backed language or finish claim is introduced.

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-28",
+  "generated": "2026-09-29",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -13,7 +13,7 @@
    "evidenceRecords": 1648,
    "uniqueUrls": 1641,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6352
+   "claimsAttributed": 6353
   }
  },
  "providers": [
@@ -733,18 +733,19 @@
    "licenseOrTerms": "Contributed to this project; published as an anonymous evidence class.",
    "category": "non-url-evidence",
    "authorityTier": 2,
-   "coverage": "specimens physically held or inspected by the collection owner",
+   "coverage": "specimens physically held or inspected by the collection owner and explicit field-scoped owner determinations",
    "supportsAbsence": false,
    "usedFor": [
     "language",
     "finish",
-    "edition"
+    "edition",
+    "rarity"
    ],
    "attribution": "Owner attestation (domain expert), recorded anonymously.",
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 196
+   "claimsSupported": 197
   },
   {
    "providerId": "inspected-specimen",
@@ -13672,15 +13673,17 @@
     "Owner attestation (domain expert) + set release schedule",
     "Owner attestation (domain expert); localized product image",
     "Owner attestation plus downloaded scan review",
+    "Positive source-native rarity record",
     "Referenced product render (context only); Owner attestation (domain expert); localized product image"
    ],
    "dimensions": [
     "edition",
     "finish",
     "finish-override",
-    "language"
+    "language",
+    "rarity"
    ],
-   "stableIdCount": 174,
+   "stableIdCount": 175,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0009-P01",
@@ -13773,6 +13776,7 @@
     "F0616-P02",
     "ID:AC3a:145/205:base",
     "ID:s10a I:077/071:base",
+    "JP:M6a:095/103:base",
     "SPEC-0022",
     "SPEC-0023",
     "SPEC-0053",
@@ -13857,8 +13861,8 @@
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-09-24",
-   "usageCount": 194
+   "retrievedAt": "2026-09-29",
+   "usageCount": 195
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
