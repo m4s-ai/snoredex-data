@@ -10459,7 +10459,7 @@
         "claimId": "CLAIM:finish:PRINTING:3b065ac2e34aea057f5dcea0",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0367-P01",
+        "sourceId": "F0367-P02",
         "semanticPrintingId": "PRINTING:3b065ac2e34aea057f5dcea0",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -12744,6 +12744,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:7ef5069c215ce4c3157860bd",
         "materializedTargetId": "PHYSICAL:PRINTING:7ef5069c215ce4c3157860bd",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0367-P01",
+        "semanticPrintingId": "PRINTING:7fd59662283b4330f7383105",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+        "materializedTargetId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0597"
+        ]
       }
     },
     {
@@ -36012,6 +36032,23 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0596",
         "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0596"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0597",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0597",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0597",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:7fd59662283b4330f7383105, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105"
       }
     },
     {
@@ -98149,6 +98186,30 @@
         "sourceFinishUnitId": "F0082",
         "sourcePrintingId": "F0082-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:7ef5069c215ce4c3157860bd"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+        "semanticPrintingId": "PRINTING:7fd59662283b4330f7383105",
+        "cardReleaseId": "RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0367",
+        "sourcePrintingId": "F0367-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+        "specimenIds": [
+          "SPEC-0597"
+        ]
       }
     },
     {
@@ -174518,6 +174579,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:80076f9cea64c2935c2eed9f",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -186982,6 +187053,16 @@
       "toId": "PHYSICAL:specimen:SPEC-0596",
       "provenance": {
         "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0597",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "provenance": {
+        "specimenId": "SPEC-0597"
       }
     },
     {
@@ -234135,6 +234216,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CSVL1C:109:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -281362,6 +281459,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0367-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0367-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -299361,17 +299465,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0596",
       "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0597",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:7fd59662283b4330f7383105, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 8268,
-    "edges": 12296,
-    "migrationInputs": 2908,
+    "entities": 8271,
+    "edges": 12300,
+    "migrationInputs": 2910,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 305,
+      "candidate-needs-evidence": 306,
       "carried": 68,
-      "established-and-mapped": 1611,
+      "established-and-mapped": 1612,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299379,9 +299490,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2082,
+    "candidateClaims": 2084,
     "cardReleases": 633,
-    "physicalPrintings": 794,
+    "physicalPrintings": 795,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

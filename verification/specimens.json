@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 596,
+  "count": 597,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12338,6 +12338,31 @@
         "basis": "The retained screenshot visibly shows the yellow 25th anniversary Pikachu logo. Collection-owner finish determination on 2026-09-29: SH 026/038 non-holo; supplied YouTube timestamp 7:23."
       },
       "listingUrl": "https://www.youtube.com/watch?v=99FSc0MlWwQ"
+    },
+    {
+      "specimenId": "SPEC-0597",
+      "setCode": "s8b",
+      "number": "126/184",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "third party (eBay image; holder not independently verified)",
+      "inspectedFrom": "Owner-linked eBay photograph, original WebP visually inspected; lossless PNG conversion; local Tesseract unavailable",
+      "photograph": "SPEC-0597.png",
+      "photographSource": "https://i.ebayimg.com/images/g/xvoAAeSwKuFpiFRC/s-l1600.webp",
+      "photographSha256": "sha256:07f59bc7f41e7bf87a4b4e0a2d169d2394516377b0710ddbf9b28ce816af1cec",
+      "observed": "Thai Snorlax HP130, printed s8b T, regulation D, 126/184, Gormandize, Body Slam 100, Illus. Narumi Sato. Colored foil bands are visible along the silver border; the owner explicitly confirms Holo. T is the Thai marker on this card. No listing page was supplied. This positive Holo observation does not close the finish list or refute the existing marketplace-only reverse-holo candidate.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "TH:s8b:126/184:base",
+        "U0176"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "basis": "Colored foil bands visibly appear along the silver border. Collection-owner determination on 2026-09-29 for this exact image: eindeutig holo."
+      }
     }
   ]
 }

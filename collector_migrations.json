@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:3d59aaba3e777d7af0aa67b30b57666ba24af53deb2c723e5334138cd2329353",
+    "fromFingerprint": "sha256:861cf2035204249c71e0056bc31efd3b795e8447ffc1692cd1617006707c087e",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
+    "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
+      "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -10687,11 +10687,12 @@
             "item-ec8fd51a-221d-56c7-b169-9f29985c429b"
           ],
           "toItemIds": [
-            "item-5ea374c0-9b85-5824-a376-48b871dea4e6"
+            "item-5ea374c0-9b85-5824-a376-48b871dea4e6",
+            "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
           ],
-          "changeKind": "rekey-1:1",
-          "automaticStateAction": "preserve",
-          "reconciliation": "one-to-one-preserve"
+          "changeKind": "split-1:N",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-eccfa861-d55d-5865-b028-8cea313625ae",
@@ -12394,7 +12395,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:fe709bd01267e50f2695802f17d80d7264d239701412fac7be06000aa8b26d81",
+      "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -22156,11 +22157,12 @@
             "item-ec8fd51a-221d-56c7-b169-9f29985c429b"
           ],
           "toItemIds": [
-            "item-5ea374c0-9b85-5824-a376-48b871dea4e6"
+            "item-5ea374c0-9b85-5824-a376-48b871dea4e6",
+            "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
           ],
-          "changeKind": "rekey-1:1",
-          "automaticStateAction": "preserve",
-          "reconciliation": "one-to-one-preserve"
+          "changeKind": "split-1:N",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-eccfa861-d55d-5865-b028-8cea313625ae",
@@ -27437,6 +27439,14 @@
       "fromItemId": "s8b-126-t-chinese-none-reverse-holo",
       "toItemIds": [
         "item-ee0e7275-1148-5eb2-af6c-c7cd7c4cd5fc"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "s8b-126-thai-none-holo-unknown",
+      "toItemIds": [
+        "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -35701,6 +35711,13 @@
         ]
       },
       {
+        "legacyChecklistId": "s8b-126-thai-none-holo-unknown",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
+        ]
+      },
+      {
         "legacyChecklistId": "s8b-126-thai-none-reverse-holo",
         "disposition": "projected",
         "targetItemIds": [
@@ -39971,7 +39988,8 @@
         "cardReleaseId": "RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam",
         "disposition": "projected",
         "targetItemIds": [
-          "item-5ea374c0-9b85-5824-a376-48b871dea4e6"
+          "item-5ea374c0-9b85-5824-a376-48b871dea4e6",
+          "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
         ],
         "reason": null
       },
@@ -46505,6 +46523,11 @@
         "targetItemId": "item-dfd0dee6-d0bf-58dc-b154-117e88d222e6"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+        "disposition": "projected",
+        "targetItemId": "item-c5d1175f-2a94-5627-b4ce-d425040ba246"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:805b27a4aa7a355c1528c78d",
         "disposition": "projected",
         "targetItemId": "item-84043b5e-7142-53ea-a87b-0352754d74d7"
@@ -47541,9 +47564,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 903,
+      "legacyChecklistRows": 904,
       "cardReleases": 633,
-      "physicalPrintings": 794,
+      "physicalPrintings": 795,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

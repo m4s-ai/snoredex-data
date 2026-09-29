@@ -57,13 +57,13 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 499,
-      "withOnlyMarketplaceClaim": 30,
+      "withConfirmedFinish": 500,
+      "withOnlyMarketplaceClaim": 29,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 315,
-      "withHolo": 243,
+      "withHolo": 244,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 57,
@@ -32897,20 +32897,56 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/xvoAAeSwKuFpiFRC/s-l1600.webp",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Thai Snorlax HP130, printed s8b T, regulation D, 126/184, Gormandize, Body Slam 100, Illus. Narumi Sato. Colored foil bands are visible along the silver border; the owner explicitly confirms Holo. T is the Thai marker on this card. No listing page was supplied. This positive Holo observation does not close the finish list or refute the existing marketplace-only reverse-holo candidate. Retained as SPEC-0597.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0597"
+          ],
+          "image": "verification/specimens/SPEC-0597.png",
+          "printingId": "F0367-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -32928,7 +32964,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0367-P01"
+          "printingId": "F0367-P02"
         }
       ],
       "unresolved": [

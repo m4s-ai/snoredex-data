@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "7b85ab38a133631227f24317074faed39d9c7e906e95411bde269d455ce41404",
+  "projectionVersion": "0af2e9becb9d352205d879175b4000592eb0c543ae561b1d14b901a2fc0038ee",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 794,
-    "sourceObservations": 3051
+    "physicalPrintings": 795,
+    "sourceObservations": 3054
   },
   "groups": [
     {
@@ -36501,13 +36501,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7fd59662283b4330f7383105",
+              "semanticPrintingId": "PRINTING:7fd59662283b4330f7383105",
+              "cardReleaseId": "RELEASE:TH:Thai:s8b:126/184:Snorlax-Gormandize-Body-Slam",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0367",
+              "sourcePrintingId": "F0367-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7fd59662283b4330f7383105",
+              "specimenIds": [
+                "SPEC-0597"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/xvoAAeSwKuFpiFRC/s-l1600.webp",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Thai Snorlax HP130, printed s8b T, regulation D, 126/184, Gormandize, Body Slam 100, Illus. Narumi Sato. Colored foil bands are visible along the silver border; the owner explicitly confirms Holo. T is the Thai marker on this card. No listing page was supplied. This positive Holo observation does not close the finish list or refute the existing marketplace-only reverse-holo candidate. Retained as SPEC-0597.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -36543,9 +36584,38 @@
               "originalHash": "3dd2e13ee14cde039ce827072fded43904f74e00a2109065676f4aad1c7e9ed8",
               "previewSrc": "images/previews/SPEC-0261.png?v=12941c5cb9d814851eaf4c869bfb782a586aa120648c2c38f70b383d69086bc0",
               "thumbnailSrc": "images/thumbs/SPEC-0261.png?v=bc51ac49e39728232421326c0d4d58724c07eec42a139be4d98047004ae6c4dc"
+            },
+            {
+              "src": "verification/specimens/SPEC-0597.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0597",
+              "contentHash": "07f59bc7f41e7bf87a4b4e0a2d169d2394516377b0710ddbf9b28ce816af1cec",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "07f59bc7f41e7bf87a4b4e0a2d169d2394516377b0710ddbf9b28ce816af1cec",
+              "previewSrc": "images/previews/SPEC-0597.png?v=05f574bf0e50a6c4f5321c60668de5fa587502a85d2baa8172934a45ea277835",
+              "thumbnailSrc": "images/thumbs/SPEC-0597.png?v=9eb123cbec7a5dad6e4f146d97eb2af96cd74111d91c96c70b1a3322bcc8866e"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0367-P01:0:8cdf1af92ead6746",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties.",
+              "contentHash": "7d4abbf3d7791ab256dd7336008e5fe2a340e69326d276e7d571a787f173ef25",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0367-P01:1:a8adffc1cf69554f",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://i.ebayimg.com/images/g/xvoAAeSwKuFpiFRC/s-l1600.webp",
+              "evidence": "Thai Snorlax HP130, printed s8b T, regulation D, 126/184, Gormandize, Body Slam 100, Illus. Narumi Sato. Colored foil bands are visible along the silver border; the owner explicitly confirms Holo. T is the Thai marker on this card. No listing page was supplied. This positive Holo observation does not close the finish list or refute the existing marketplace-only reverse-holo candidate. Retained as SPEC-0597.",
+              "contentHash": "2bbe675b82d20b056bd1bd3391cf00f57a060d1c1ccab9b4aa6c955ef90364b7",
+              "image": null
+            },
             {
               "observationId": "source-first:TH:s8b:126/184:base",
               "kind": "source-first",
@@ -36572,6 +36642,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 3/6, row 3, column 4 crop. The visible artwork, printed language, set identity s8b and collector identity 126/184 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "94f08e251f39203135b7a3a611f35a4af05bb9073a59d4dc0df87e04704c8d3f",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0597",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://i.ebayimg.com/images/g/xvoAAeSwKuFpiFRC/s-l1600.webp",
+              "evidence": "Thai Snorlax HP130, printed s8b T, regulation D, 126/184, Gormandize, Body Slam 100, Illus. Narumi Sato. Colored foil bands are visible along the silver border; the owner explicitly confirms Holo. T is the Thai marker on this card. No listing page was supplied. This positive Holo observation does not close the finish list or refute the existing marketplace-only reverse-holo candidate.",
+              "contentHash": "679a664c2f4fe0ebdd39b877d639da2e18acc399aec1184f279c6ba3efed61f0",
+              "image": "verification/specimens/SPEC-0597.png"
             },
             {
               "observationId": "unit:U0176",
