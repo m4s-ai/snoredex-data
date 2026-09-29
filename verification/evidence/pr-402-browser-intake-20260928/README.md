@@ -81,7 +81,7 @@ The same correction applies to EXS Snorlax. The supplied [Elite Fourum discussio
 
 The existing `RELEASE:JP:Japanese:EXS:unnumbered:Snorlax-Guard-Roll-Over` also has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector-number fields remain correct, and the two existing physical printings `F0107-P01` and `F0107-P02` remain distinct. No canonical identity, number, rarity or finish is changed by this research correction.
 
-The research audit accepts the positively reviewed unnumbered identities PJU, EXS and UNP (below) instead of counting their null numbers as missing. Other empty numbers still require their own evidence and reconciliation. This establishes no additional finish or exhaustive finish list.
+The research audit accepts the positively reviewed unnumbered identities PJU, EXS, UNP and G2 (below) instead of counting their null numbers as missing. Other empty numbers still require their own evidence and reconciliation. This establishes no additional finish or exhaustive finish list.
 
 ## UNP numbering follow-up — 2026-09-29
 
@@ -89,11 +89,17 @@ The collection owner explicitly confirms: “Hungry Snorlax – UNP auch unnumbe
 
 UNP therefore has no remaining tracked-field gap. Its former number task was an audit error, not a missing canonical identity or a request for another photograph. The stable release/item/printing IDs and canonical stores need no change.
 
-The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-UNP-follow-up draft head `9a6574d82097ca492bd4075f40b11e81040eeffb`, is:
+## G2 numbering follow-up — 2026-09-29
+
+The collection owner explicitly confirms: “Rocket’s Snorlax – G2 also unnumbered im japanischen wie PJU”. The retained [SPEC-0194](../../specimens/SPEC-0194.jpg) shows the complete Japanese Rocket's Snorlax face with Pokédex No.143 and no set collector number. The existing `RELEASE:JP:Japanese:G2:unnumbered:Rockets-Snorlax-Restless-Sleep-Collapse` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`; its null collector-number fields are correct.
+
+The G2 numbering task is complete. Its physical-printing candidate `F0132-P01` remains `marketplace-claimed`, so the separate finish-evidence task stays open. No canonical identity, card number, finish or stable ID changes. Japanese numbering reviews fall from two to one (DP1); parent numbering reviews fall from seven to six. Unique remaining-release counts do not fall because G2 still needs physical evidence.
+
+The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-G2-follow-up draft head `fd0a43dd3fd6df6682fa3eed577b9f5a9f790f49`, is:
 
 | Scope | Main gap-free / remaining | Including draft #402 gap-free / remaining |
 |---|---:|---:|
 | Japanese, 67 releases | 53 / 14 | 53 / 14 |
 | Parent research, 633 releases | 510 / 123 | 513 / 120 |
 
-The seven open issue bodies and private TODO are reconciled with this rule. PJU's, EXS's and UNP's numbering tasks are complete; the two other Japanese numbering reviews (G2 and DP1) remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
+The seven open issue bodies and private TODO are reconciled with this rule. PJU's, EXS's, UNP's and G2's numbering tasks are complete; only the DP1 numbering review remains open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
