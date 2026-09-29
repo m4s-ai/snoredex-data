@@ -135,6 +135,38 @@ def verify_unnumbered_manifest() -> None:
             expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
 
 
+def verify_dry_run_preserves_photograph_date() -> None:
+    """The unchanged-image date invariant must run before dry-run exits without writing."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry, manifest = scratch / "specimens.json", scratch / "manifest.json"
+        doc = json.loads(fetch_attachment.SPECIMENS_JSON.read_text(encoding="utf-8"))
+        current = next(row for row in doc["specimens"] if row.get("photograph")
+                       and row.get("heldBy") != "third-party seller")
+        image = (fetch_attachment.SPECIMEN_DIR / current["photograph"]).read_bytes()
+        registry.write_text(json.dumps({"count": 1, "specimens": [current]}), encoding="utf-8")
+        manifest.write_text(json.dumps({"observations": [{
+            "specimenId": current["specimenId"], "setCode": current["setCode"],
+            "number": current["number"], "variant": current["variant"],
+            "language": current["language"], "heldBy": current["heldBy"],
+            "inspectedFrom": current["inspectedFrom"], "observed": current["observed"],
+            "recordedAt": "2026-09-29" if current["recordedAt"] != "2026-09-29" else "2026-09-28",
+            **({"physicalObservation": current["physicalObservation"]}
+               if "physicalObservation" in current else {}),
+        }]}), encoding="utf-8")
+        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                               allow_small=False, replace=True, dry_run=True)
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
+                            SPECIMEN_DIR=scratch / "photos"), patch.object(
+                                fetch_attachment, "acquire_manifest_image",
+                                return_value=(image, current["photographSource"],
+                                              current["photographSource"], "retained image")):
+            before = registry.read_bytes()
+            expect_failure(lambda: fetch_attachment.command_issue(doc, args))
+            assert registry.read_bytes() == before
+            assert not (scratch / "photos").exists()
+
+
 def verify_multiple_views() -> None:
     for reverse in (False, True):
         for secondary_finish in (False, True):
@@ -990,6 +1022,7 @@ def main() -> None:
     verify_multiple_views()
     verify_duplicate_photo_batch()
     verify_unnumbered_manifest()
+    verify_dry_run_preserves_photograph_date()
     print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 

@@ -763,6 +763,7 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "citedBy": list(item.get("citedBy") or []) if cited_by is None else list(cited_by),
     }
     add_specimen_options(record, item, physical, listing_url, allow_small)
+    ensure_photograph_date(current or {}, record)
     return record
 
 
