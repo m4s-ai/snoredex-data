@@ -733,6 +733,32 @@ def main() -> None:
             ),
         ) == 0
         assert source_first_doc["specimens"][0]["setCode"] == "S-P"
+        # A legacy V-token must not shadow the exact source-first base release.
+        source_first_units.write_text(json.dumps({"units": [{
+            "setCode": "S-P", "number": "145", "language": "T-Chinese",
+            "products": [{"variant": "V1", "claimStatus": "confirmed"}],
+        }]}), encoding="utf-8")
+        assert fetch_attachment.command_issue(
+            source_first_doc,
+            SimpleNamespace(issue=999, issue_html=str(source_first_issue),
+                            manifest=str(source_first_manifest), allow_small=False,
+                            replace=False, dry_run=False),
+        ) == 0
+        source_first_units.write_text(json.dumps({"units": [{
+            "setCode": "S-P", "number": "145", "language": "T-Chinese",
+            "products": [{"variant": "base", "claimStatus": "contradicted"}],
+        }]}), encoding="utf-8")
+        try:
+            fetch_attachment.command_issue(
+                source_first_doc,
+                SimpleNamespace(issue=999, issue_html=str(source_first_issue),
+                                manifest=str(source_first_manifest), allow_small=False,
+                                replace=False, dry_run=False),
+            )
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("source-first fallback must not bypass a contradicted product")
     finally:
         fetch_attachment.SPECIMENS_JSON = original_registry
         fetch_attachment.SPECIMEN_DIR = original_specimen_dir

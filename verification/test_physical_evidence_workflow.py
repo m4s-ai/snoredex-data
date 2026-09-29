@@ -378,6 +378,11 @@ def main() -> None:
     projector.apply_standard_scope_card_size(standard_scoped)
     assert standard_scoped["cardSize"] == "standard"
     seller_source = projector.specimen_printing(fixture[2])["sources"][0]
+    source_first_base = dict(fixture[2], variant="base")
+    unmapped = projector.specimen_printing(source_first_base, {"V1"})
+    assert unmapped["mappedVariants"] == []
+    assert unmapped["verificationStatus"] == "confirmed"
+    assert projector.specimen_printing(source_first_base, {"base"})["mappedVariants"] == ["base"]
     assert seller_source["sourceType"] == "Seller listing photograph"
     archived_seller = next(row for row in specimens if row["specimenId"] == "SPEC-0107")
     assert archived_seller["heldBy"] == "third-party seller"

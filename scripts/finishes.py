@@ -595,7 +595,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
     return sources
 
 
-def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
+def specimen_printing(specimen: dict[str, Any], present_variants=None) -> dict[str, Any] | None:
     observation = specimen.get("physicalObservation")
     if not isinstance(observation, dict) or not observation.get("finish"):
         return None
@@ -621,6 +621,8 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     if photograph:
         candidate["image"] = f"verification/specimens/{photograph}"
     apply_specimen_group_sources(candidate, specimen)
+    if present_variants is not None:
+        candidate["mappedVariants"] = sorted(set(candidate["mappedVariants"]) & present_variants)
     return candidate
 
 
@@ -1315,7 +1317,7 @@ def _build_finish_unit(
     def _build_finish_unit_part6():
         nonlocal candidate, field, manual, override
         for specimen in specimens_by_group.get((set_code, number, language), []):
-            candidate = specimen_printing(specimen)
+            candidate = specimen_printing(specimen, present_variants)
             if candidate is not None:
                 add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
                 for override in applicable_overrides:
@@ -1396,7 +1398,7 @@ def _build_finish_unit(
                         if printing["finish"] == finish and (
                             printing.get("_origin") == "auto" or observed_variants
                         ):
-                            printing["mappedVariants"] = sorted(set(usable) | observed_variants)
+                            printing["mappedVariants"] = sorted((set(usable) | observed_variants) & present_variants)
                             if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                                 printing["cardSize"] = next(iter(mapped_sizes))
 

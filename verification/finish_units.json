@@ -57,16 +57,16 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 501,
-      "withOnlyMarketplaceClaim": 29,
+      "withConfirmedFinish": 502,
+      "withOnlyMarketplaceClaim": 28,
       "pendingFinish": 31,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 316,
-      "withHolo": 244,
+      "withHolo": 245,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
-      "withBothNonHoloAndHolo": 57,
+      "withBothNonHoloAndHolo": 58,
       "withUnresolvedProductMapping": 57,
       "withAnyUnresolvedDetail": 135,
       "tcgdexUrlsRequested": 308,
@@ -30130,16 +30130,17 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -30164,6 +30165,39 @@
           "printingId": "F0328-P01"
         },
         {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+              "sourceType": "Inspected physical specimen photograph",
+              "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0264"
+          ],
+          "image": "verification/specimens/SPEC-0264.png",
+          "printingId": "F0328-P02"
+        },
+        {
           "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
@@ -30180,7 +30214,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0328-P02"
+          "printingId": "F0328-P03"
         }
       ],
       "unresolved": [

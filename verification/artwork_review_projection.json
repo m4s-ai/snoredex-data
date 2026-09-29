@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "471b00debbe3554ee4f0bb23079b4224d5389fdf87c8f3ca6e15513b9a5bb221",
+  "projectionVersion": "8c1f32bcfce995a3a7c67c7c8901a46a584d0b227d171e984bd1057c0f3f8e48",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 800,
-    "sourceObservations": 3057
+    "physicalPrintings": 801,
+    "sourceObservations": 3059
   },
   "groups": [
     {
@@ -80677,13 +80677,54 @@
             "V1",
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:b5be07f38881661dc9c93517",
+              "semanticPrintingId": "PRINTING:b5be07f38881661dc9c93517",
+              "cardReleaseId": "RELEASE:TH:Thai:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0328",
+              "sourcePrintingId": "F0328-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:b5be07f38881661dc9c93517",
+              "specimenIds": [
+                "SPEC-0264"
+              ],
+              "sources": [
+                {
+                  "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+                  "sourceType": "Inspected physical specimen photograph",
+                  "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "V1, base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -80723,6 +80764,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0328-P02:0:3208dec78a5150b7",
+              "kind": "finish",
+              "provider": "Inspected physical specimen photograph",
+              "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+              "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
+              "contentHash": "487a0a2a30beffebd121eff43bc394ad5ac00e943faba12db237bbc1f45054dd",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0328-P02:1:8cdf1af92ead6746",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties.",
+              "contentHash": "cae5d9cb497b371a21e86b074ae721abb351dd40b4efbbfe825bd1aa6cb53d05",
+              "image": null
+            },
+            {
               "observationId": "source-first:TH:s10a:058/071:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
@@ -80736,8 +80795,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/card-search/detail/3495/",
-              "evidence": "Complete official Thai render for Snorlax s10a 058/071 (base). The printed Thai name, collector identity, attacks and rarity R establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "114007930e849bacff6f6edad99cd743c9b1730a306235237c8db6835209cef2",
+              "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates.",
+              "contentHash": "b4cf77ac97e03cb81bafb53aacfe14426a79d22065897f69a32191f16e1e7baf",
               "image": "verification/specimens/SPEC-0264.png"
             },
             {

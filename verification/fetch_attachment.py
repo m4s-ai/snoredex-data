@@ -852,6 +852,13 @@ def manifest_target_exists(source_first_release: dict | None, variant: str, item
     )
 
 
+def validate_source_first_base_product(source_first_release, variant, products, specimen_id):
+    """A source-first base may coexist with V-tokens, but not override a base product."""
+    if (variant != "base" or source_first_release is None
+            or any(str(product.get("variant")) == variant for product in products)):
+        fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
+
+
 def unprojected_finish_is_missing(specimen: dict, source_first_release: dict | None) -> bool:
     """Return whether an observed specimen should already have a projected finish unit."""
     return source_first_release is None and specimen.get("allowUnprojected") is not True
@@ -928,7 +935,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         elif not any(str(product.get("variant")) == variant
                      and product.get("claimStatus") != "contradicted"
                      for product in finish_unit.get("products", [])):
-            fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
+            source_first_release = source_first_release_for(
+                source_first_releases, item.get("setCode"), number, item.get("language")
+            )
+            # A source-first base identity need not use a legacy marketplace V-token.
+            validate_source_first_base_product(
+                source_first_release, variant, finish_unit.get("products", []), specimen_id)
         current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
         ensure_cited_identity(current, item)
 
