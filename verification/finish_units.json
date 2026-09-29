@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 496,
-      "withOnlyMarketplaceClaim": 33,
+      "withConfirmedFinish": 497,
+      "withOnlyMarketplaceClaim": 32,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
@@ -31593,13 +31593,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -31610,17 +31610,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP150, もってくる and たおれこむ 120, s2 077/096 U, regulation D and Illus. Eri Yamaki are visible. The card is photographed in a transparent hard holder. The collection owner explicitly confirms Non-Holo. Physical ownership and the original external photograph provider were not supplied. This positive confirmation does not close the finish list. Retained as SPEC-0591.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0591"
+          ],
+          "image": "verification/specimens/SPEC-0591.png",
           "printingId": "F0351-P01"
         },
         {

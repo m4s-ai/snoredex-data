@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "a176812fd35ecec605d45993623f541f2269647ed045832da4015e0de968b18f",
+  "projectionVersion": "2b876b894970921a96dd5eee373e80a1c183c6e5f437ff1282a891427dfa014f",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 786,
-    "sourceObservations": 3038
+    "physicalPrintings": 787,
+    "sourceObservations": 3042
   },
   "groups": [
     {
@@ -24469,7 +24469,50 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:eecd654d1671965b8e543bfa",
+              "semanticPrintingId": "PRINTING:eecd654d1671965b8e543bfa",
+              "cardReleaseId": "RELEASE:JP:Japanese:s2:77:Snorlax-Collect-Collapse",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0351",
+              "sourcePrintingId": "F0351-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:eecd654d1671965b8e543bfa",
+              "specimenIds": [
+                "SPEC-0591"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Japanese カビゴン HP150, もってくる and たおれこむ 120, s2 077/096 U, regulation D and Illus. Eri Yamaki are visible. The card is photographed in a transparent hard holder. The collection owner explicitly confirms Non-Holo. Physical ownership and the original external photograph provider were not supplied. This positive confirmation does not close the finish list. Retained as SPEC-0591.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -24517,9 +24560,47 @@
               "originalHash": "d09670d67076e8351ef71e268edf31bca75c99b006bbbc1b3428445ccee96efd",
               "previewSrc": "images/previews/SPEC-0574.png?v=3c451325ba9b8988ba71ad2a0513b82ae77152f1154bc70ea76cd213100afbd0",
               "thumbnailSrc": "images/thumbs/SPEC-0574.png?v=601229fc13edac4954888ce13efb7d12df793d4cc538f2a23e74ebe1b96d4917"
+            },
+            {
+              "src": "verification/specimens/SPEC-0591.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0591",
+              "contentHash": "c6b340ea84f339911ca03d3dac2aba348cea15807ee4261d3a0efc15bc14a95b",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "c6b340ea84f339911ca03d3dac2aba348cea15807ee4261d3a0efc15bc14a95b",
+              "previewSrc": "images/previews/SPEC-0591.png?v=0e85e5c44b1230350e6d32618c7f869c26da97d6d7f246d39fcddd435db2a6a3",
+              "thumbnailSrc": "images/thumbs/SPEC-0591.png?v=ba79bfb22f227be934e9bf398ea66934f498d432bacd42831f9e0c22f40ebbd1"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0351-P01:0:1c025f30b292a1e5",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Japanese カビゴン HP150, もってくる and たおれこむ 120, s2 077/096 U, regulation D and Illus. Eri Yamaki are visible. The card is photographed in a transparent hard holder. The collection owner explicitly confirms Non-Holo. Physical ownership and the original external photograph provider were not supplied. This positive confirmation does not close the finish list. Retained as SPEC-0591.",
+              "contentHash": "edcf189a3d9fc33cfa08903e3c4bbe256231034d7e7206f8eb39b1ec3f63d8ea",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0351-P01:1:44cb1b83ad50345c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "1fc5bcd3bff79d8e732db6845c2ab0e72585e242d0d98a58f02a06e820ee5ba1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0351-P01:2:eefb88f741cd114f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "ed9f4868e6a2cc49de9d4ed6bd5e47f261769a87df9b87b943842d0454b91867",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0209",
               "kind": "specimen",
@@ -24537,6 +24618,15 @@
               "evidence": "Physical Japanese Snorlax HP150 on a display stand, printed s2 D 077/096 U, Eri Yamaki, もってくる and たおれこむ 120. Canonical legacy number 77 is preserved while the exact printed 077/096 is retained here. The flat view supports identity; technical finish remains unresolved. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
               "contentHash": "5027e7fbcced6a2d6ed427fe8c08df0eee2e2bec4f2b47ec905c1d87df2c0043",
               "image": "verification/specimens/SPEC-0574.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0591",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Japanese カビゴン HP150, もってくる and たおれこむ 120, s2 077/096 U, regulation D and Illus. Eri Yamaki are visible. The card is photographed in a transparent hard holder. The collection owner explicitly confirms Non-Holo. Physical ownership and the original external photograph provider were not supplied. This positive confirmation does not close the finish list.",
+              "contentHash": "d6c8a2768b8586d2f6484c4b39df985d054cc7d4a1660bab9fc5f5468d375c01",
+              "image": "verification/specimens/SPEC-0591.png"
             },
             {
               "observationId": "unit:U0531",

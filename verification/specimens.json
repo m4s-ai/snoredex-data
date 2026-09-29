@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 590,
+  "count": 591,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12173,6 +12173,31 @@
         ],
         "cardSize": "standard",
         "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: japanese non-holo"
+      }
+    },
+    {
+      "specimenId": "SPEC-0591",
+      "setCode": "s2",
+      "number": "77",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph; original image visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0591.png",
+      "photographSource": "user-supplied:codex-clipboard-795f6d00-e20a-4fa5-8860-a28a25c4d287.png",
+      "photographSha256": "sha256:c6b340ea84f339911ca03d3dac2aba348cea15807ee4261d3a0efc15bc14a95b",
+      "observed": "Japanese カビゴン HP150, もってくる and たおれこむ 120, s2 077/096 U, regulation D and Illus. Eri Yamaki are visible. The card is photographed in a transparent hard holder. The collection owner explicitly confirms Non-Holo. Physical ownership and the original external photograph provider were not supplied. This positive confirmation does not close the finish list.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "U0531"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "cardSize": "standard",
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: non holo"
       }
     }
   ]

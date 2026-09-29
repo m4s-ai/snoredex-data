@@ -1,6 +1,9 @@
 <!-- doc: role=owner-confirmed Non-Holo photograph intake and acceptance; stage=task -->
 # Owner-confirmed Non-Holo intake — 2026-09-29
 
+**Snapshot at 208fa3f.** The later [s2 Non-Holo follow-up](../owner-s2-nonholo-20260929/README.md)
+confirms s2 077/096 through SPEC-0591, reducing this snapshot's three Japanese gaps to two.
+
 All ten images supplied in this conversation are retained unchanged as SPEC-0581–SPEC-0590.
 The collection owner explicitly confirms Non-Holo for each pictured card. Nine images identify
 Japanese releases; the English Rocket's Snorlax is separate evidence for Gym Heroes 33/132.
