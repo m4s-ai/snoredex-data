@@ -435,6 +435,28 @@
           "completenessStatus": {
             "type": "string"
           },
+          "completenessEvidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "description": "Owner finish-list decision and its unfiltered references; repository paths and specimen references are not URLs.",
+            "required": [
+              "adjudicationId",
+              "evidenceRefs"
+            ],
+            "properties": {
+              "adjudicationId": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidenceRefs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "uniqueItems": true
+              }
+            }
+          },
           "releaseDate": {
             "type": [
               "string",
@@ -491,6 +513,20 @@
           }
         },
         "allOf": [
+          {
+            "if": {
+              "properties": {
+                "completenessStatus": {
+                  "const": "owner-adjudicated"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "completenessEvidence"
+              ]
+            }
+          },
           {
             "if": {
               "properties": {

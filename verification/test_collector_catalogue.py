@@ -162,6 +162,14 @@ def source_first_finish_decision_regressions() -> None:
     assert collector.item_completeness(decision, None, None) == "owner-adjudicated"
     assert collector.item_completeness(None, None, None) == "positive-evidence-only"
     assert collector.item_completeness(None, None, {"completenessStatus": "pending"}) == "pending"
+    assert collector.completeness_fields("positive-evidence-only", decision) == {
+        "completenessStatus": "positive-evidence-only"}
+    try:
+        collector.completeness_fields("owner-adjudicated", None)
+    except collector.ContractError:
+        pass
+    else:
+        raise AssertionError("owner closure without its decision was accepted")
     assert resolve([], [], {"R": release}, {"P": printing}) == {}
     assert resolve([decision], [decision], {"R": release}, {}) == {}
     for decisions, releases, printings in (
@@ -188,6 +196,23 @@ def main() -> None:
     assert len(m6a) == 1
     assert (m6a[0]["finish"], m6a[0]["completenessStatus"], m6a[0]["itemKind"]) == (
         "holo", "owner-adjudicated", "verified-printing")
+    decisions = {row["adjudicationId"]: row for row in read("verification/owner_adjudications.json")["finishDecisions"]}
+    finish_units = {row["finishUnitId"]: row for row in read("verification/finish_units.json")["units"]}
+    closed_items = [row for row in read("collector_catalogue.json")["items"]
+                    if row["completenessStatus"] == "owner-adjudicated"]
+    assert any(row["finishUnitId"] for row in closed_items), "exercise the legacy closure path too"
+    for row in closed_items:
+        evidence = row["completenessEvidence"]
+        decision = decisions[evidence["adjudicationId"]]
+        if row["finishUnitId"]:
+            unit = finish_units[row["finishUnitId"]]
+            assert all(decision[key] == unit[key] for key in ("setCode", "number", "language"))
+        assert evidence["evidenceRefs"] == sorted(set(decision["evidenceRefs"]))
+        assert all(link.startswith(("http://", "https://")) for link in row["evidenceLinks"])
+    assert m6a[0]["completenessEvidence"]["adjudicationId"] == "OAF-20260929-M6a-095-ja"
+    assert "verification/evidence/jp-finish-20260929/m6a-owner-determination.json" in m6a[0]["completenessEvidence"]["evidenceRefs"]
+    assert all("completenessEvidence" not in row for row in read("collector_catalogue.json")["items"]
+               if row["completenessStatus"] != "owner-adjudicated"), "positive evidence alone cannot imply closure"
     for value in (None, 7, "owner upload", "https:///missing-host", "javascript:alert(1)",
                   "https://example.org/a b", "https://[broken", "https://example.org:invalid"):
         assert collector.provenance_url(value) is None, value

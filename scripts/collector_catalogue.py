@@ -893,6 +893,15 @@ def schema_document() -> dict[str, Any]:
             },
         },
         "completenessStatus": {"type": "string"},
+        "completenessEvidence": {
+            "type": "object", "additionalProperties": False,
+            "description": "Owner finish-list decision and its unfiltered references; repository paths and specimen references are not URLs.",
+            "required": ["adjudicationId", "evidenceRefs"],
+            "properties": {
+                "adjudicationId": {"type": "string", "minLength": 1},
+                "evidenceRefs": string_array,
+            },
+        },
         "releaseDate": nullable_string,
         "releaseDatePrecision": nullable_string,
         "releaseApproximate": {"type": "boolean"},
@@ -912,9 +921,13 @@ def schema_document() -> dict[str, Any]:
     item_schema = {
         "type": "object",
         "additionalProperties": False,
-        "required": list(item_properties),
+        "required": [key for key in item_properties if key != "completenessEvidence"],
         "properties": item_properties,
         "allOf": [
+            {
+                "if": {"properties": {"completenessStatus": {"const": "owner-adjudicated"}}},
+                "then": {"required": ["completenessEvidence"]},
+            },
             {
                 "if": {"properties": {"workMappingState": {"enum": sorted(WORK_REQUIRED_STATES)}}},
                 "then": {"properties": {"workId": {"type": "string"}}},
@@ -1075,6 +1088,18 @@ def item_completeness(decision, old, unit):
     return (old or {}).get("completenessStatus") or (unit or {}).get("completenessStatus") or "positive-evidence-only"
 
 
+def completeness_fields(status, decision):
+    result = {"completenessStatus": status}
+    if status == "owner-adjudicated":
+        if not decision:
+            raise ContractError("owner-adjudicated item has no finish decision")
+        result["completenessEvidence"] = {
+            "adjudicationId": decision["adjudicationId"],
+            "evidenceRefs": sorted(set(decision.get("evidenceRefs") or [])),
+        }
+    return result
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     if graph.get("meta", {}).get("schemaVersion") != "1.1.0":
@@ -1092,9 +1117,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     editions = {row["setEditionId"]: row for row in entity_payloads(graph, "set-edition")}
     releases = {row["cardReleaseId"]: row for row in entity_payloads(graph, "card-release")}
     physicals = {row["physicalPrintingId"]: row for row in entity_payloads(graph, "physical-printing")}
+    owner_finish_decisions = {
+        (row["setCode"], row["number"], row["language"]): row
+        for row in read_json(ADJUDICATIONS_PATH).get("finishDecisions", [])
+    }
     finish_decisions = source_first_finish_decisions(
-        read_json(ADJUDICATIONS_PATH).get("finishDecisions", []), finish_units, releases, physicals,
+        owner_finish_decisions.values(), finish_units, releases, physicals,
     )
+    legacy_finish_decisions = {}
     claims = {row["claimId"]: row for row in entity_payloads(graph, "candidate-claim")}
     works = entity_payloads(graph, "work")
     events = entity_payloads(graph, "release-event")
@@ -1131,6 +1161,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     unit_by_printing: dict[str, dict[str, Any]] = {}
     printing_by_id: dict[str, dict[str, Any]] = {}
     for unit in finish_units:
+        legacy_finish_decisions[unit["finishUnitId"]] = owner_finish_decisions.get(
+            (unit["setCode"], unit["number"], unit["language"])
+        )
         for printing in unit.get("printings", []):
             unit_by_printing[printing["printingId"]] = unit
             printing_by_id[printing["printingId"]] = printing
@@ -1330,7 +1363,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             )
         source_refs.update(release.get("sourceRecords") or [])
         source_refs.update(item_specimen_links(release, physical, citations, source_first, claims, specimens))
-        source_refs.update(finish_decisions.get(release_id, {}).get("evidenceRefs", []))
+        finish_decision = finish_decisions.get(release_id) or legacy_finish_decisions.get(
+            (unit or old or {}).get("finishUnitId")
+        )
+        source_refs.update((finish_decision or {}).get("evidenceRefs", []))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
             source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
@@ -1408,7 +1444,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "cardSize": card_size,
             "errorClass": error_class,
             "rarity": normalized_rarity(release_id, reference, rarity_by_release),
-            "completenessStatus": item_completeness(finish_decisions.get(release_id), old, unit),
+            **completeness_fields(item_completeness(finish_decisions.get(release_id), old, unit), finish_decision),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,
             "releaseApproximate": release_approximate,
