@@ -57,19 +57,23 @@ That consumer review exposed a projector defect: each standalone specimen create
 
 Final validation: all canonical regeneration steps completed, followed by the full `regen.py --check` gate and both retained-source `--check --full-refresh` checks. A local, uncommitted runner retried only transient Windows file-open/temporary-directory locks; no checks were skipped. The corrected browser projection renders sc1b F 119/153 as one physical printing with both SPEC-0566/0567 previews loaded. The final pre-push collision check found unchanged main/PR ownership through SPEC-0557.
 
-## PJU numbering follow-up — 2026-09-29
+## PJU and EXS numbering follow-up — 2026-09-29
 
 The missing collector-number flag for Japanese Jungle Snorlax in [#259](https://github.com/m4s-ai/snoredex-data/issues/259) was an audit error. [Pokellector's Japanese Jungle checklist](https://jp.pokellector.com/Pokemon-Jungle-Expansion/) explicitly describes the set as unnumbered and lists 48 cards. The retained tier-2 product image [SPEC-0204](../../specimens/SPEC-0204.jpg) shows Pokédex No.143. [TCGcollector's Snorlax entry](https://www.tcgcollector.com/cards/29983/snorlax-pokemon-jungle-no-047) separately lists checklist position No.047 and Pokédex #0143. The external checklists provide research context for interpreting the existing identity; no new provider-backed language or finish claim is introduced.
 
 The existing release `RELEASE:JP:Japanese:PJU:unnumbered:Snorlax-Thick-Skinned-Body-Slam` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"` in the authoritative graph. Its collector projection correctly retains null `collectorNumber` and `collectorNumberDenominator`. Neither checklist position 47, Pokédex number 143 nor set size 48 is a printed collector-number field. The release, physical-printing IDs and canonical stores therefore require no change.
 
-The research audit accepts this positively reviewed unnumbered identity instead of counting its null number as missing. This is specific to the reviewed PJU card; other empty numbers still require their own evidence and reconciliation. It establishes no additional finish or exhaustive finish list.
+The same correction applies to EXS Snorlax. The supplied [Elite Fourum discussion](https://www.elitefourum.com/t/question-on-a-japanese-snorlax/28479) prompted the review, but the numbering conclusion rests on the exact-card sources: Bulbapedia labels 143 as [Pokédex data](https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)#Pok%C3%A9dex_data), and lists Snorlax with `—` in the number column for both [Expansion Sheet 1](https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)#Expansion_Sheet:_Series_1_(Blue)) and the [Quick Starter Red Deck](https://bulbapedia.bulbagarden.net/wiki/Quick_Starter_Gift_Set_(TCG)#Deck_lists). The retained tier-2 [SPEC-0200](../../specimens/SPEC-0200.jpg) shows the Quick Starter face and No.143. That printed species identifier is useful for lookup, but is not a set collector number; Sheet 16 identifies the distribution sheet rather than the card's collector position.
 
-The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-follow-up draft head `540c20ec0edf41ac28aa2cb8db4f366303714d74`, is:
+The existing `RELEASE:JP:Japanese:EXS:unnumbered:Snorlax-Guard-Roll-Over` also has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector-number fields remain correct, and the two existing physical printings `F0107-P01` and `F0107-P02` remain distinct. No canonical identity, number, rarity or finish is changed by this research correction.
+
+The research audit accepts these two positively reviewed unnumbered identities instead of counting their null numbers as missing. This is specific to PJU and EXS; other empty numbers still require their own evidence and reconciliation. It establishes no additional finish or exhaustive finish list.
+
+The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-EXS-follow-up draft head `5a29a674edff53acd68eb52ad24f8b3bdd5aa0cc`, is:
 
 | Scope | Main gap-free / remaining | Including draft #402 gap-free / remaining |
 |---|---:|---:|
-| Japanese, 67 releases | 51 / 16 | 51 / 16 |
-| Parent research, 633 releases | 508 / 125 | 511 / 122 |
+| Japanese, 67 releases | 52 / 15 | 52 / 15 |
+| Parent research, 633 releases | 509 / 124 | 512 / 121 |
 
-The seven open issue bodies and private TODO were reconciled with this rule. PJU's numbering task is complete; the other Japanese numbering reviews remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
+The seven open issue bodies and private TODO are reconciled with this rule. PJU's and EXS's numbering tasks are complete; the three other Japanese numbering reviews remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
