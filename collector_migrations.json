@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:3d59aaba3e777d7af0aa67b30b57666ba24af53deb2c723e5334138cd2329353",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:a7c8cd14d869f2ceeb9f8fd5dda1bdd56ffe004122dd091ce8697d9f0da5e867",
+    "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a7c8cd14d869f2ceeb9f8fd5dda1bdd56ffe004122dd091ce8697d9f0da5e867",
+      "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12394,7 +12394,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a7c8cd14d869f2ceeb9f8fd5dda1bdd56ffe004122dd091ce8697d9f0da5e867",
+      "toFingerprint": "sha256:d2fe3ca4bb5e50ccc2b6e24f2cd33b938cff331faf05f5fd8d547f3af2054bb2",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30401,6 +30401,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-df842ae9-7d95-51b3-bf0a-ab9f57f7cd68",
+      "toItemIds": [
+        "item-21e80c6f-7b93-53fc-b448-27cc38e6d547"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-cacfed1e-0cd4-5968-8916-6699b497ff89",
       "toItemIds": [
         "item-a7f289f6-4bdf-56e2-8a3b-15a1eb5a7838"
@@ -39969,7 +39978,7 @@
         "cardReleaseId": "RELEASE:TH:Thai:sc1D T:133/164:Snorlax-V-Swallow-Falling-Down",
         "disposition": "projected",
         "targetItemIds": [
-          "item-df842ae9-7d95-51b3-bf0a-ab9f57f7cd68"
+          "item-21e80c6f-7b93-53fc-b448-27cc38e6d547"
         ],
         "reason": null
       },
@@ -47357,6 +47366,11 @@
         "targetItemId": "item-fad86d65-26c5-58b3-bff8-d2118c35e088"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0257",
+        "disposition": "projected",
+        "targetItemId": "item-21e80c6f-7b93-53fc-b448-27cc38e6d547"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0323",
         "disposition": "projected",
         "targetItemId": "item-0381b02e-5db5-5c08-9a00-6a0abaf88dbe"
@@ -47515,7 +47529,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 792,
+      "physicalPrintings": 793,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

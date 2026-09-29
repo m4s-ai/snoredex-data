@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "277309168fecdabaec7ed39f100c94ef7546403e21ec9e99d9f69ee2babd978e",
+  "projectionVersion": "5b19d33690e18ff258d6d9f3c750f205b01d18ac37ce4eb1474c2312aad4c506",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 792,
+    "physicalPrintings": 793,
     "sourceObservations": 3050
   },
   "groups": [
@@ -85833,13 +85833,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0257",
+              "cardReleaseId": "RELEASE:TH:Thai:sc1D T:133/164:Snorlax-V-Swallow-Falling-Down",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: sc1D T **133/164**  non-holo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0257",
+              "specimenIds": [
+                "SPEC-0257"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอนV",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -85881,8 +85903,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/card-search/detail/440/",
-              "evidence": "Complete official Thai render for Snorlax V sc1D T 133/164 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "a8191563b49f01d3a8932ca3cc36d2cf7974e61763cac94cb0e724a9e86ca6e1",
+              "evidence": "Complete official Thai render for Snorlax V sc1D T 133/164 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred. On 2026-09-29 the collection owner explicitly confirms this exact Thai sc1D T 133/164 as Non-Holo. The publisher render remains identity evidence; the finish is separately owner-attested. This positive confirmation does not close the finish list.",
+              "contentHash": "417e0b57ed2b2124fa0ee8d814040902dbce0f75db0645ee9cd7951b1ce77f16",
               "image": "verification/specimens/SPEC-0257.png"
             }
           ]

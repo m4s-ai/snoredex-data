@@ -33,8 +33,11 @@ No specimen-provider rarity capability is added. Reviewed rarity claims and thei
 source records enter the retained graph base; normal projectors produce the
 physical nodes, registry, artwork, collector and database consumers.
 
-Draft result: Thai 20/29 tracked-field-complete (9 finish gaps), Indonesian 18/37
+First-batch result: Thai 20/29 tracked-field-complete (9 finish gaps), Indonesian 18/37
 (19 finish gaps). This is not an exhaustive card/finish inventory. The three new
 physical printings replace the existing research placeholders through the standard
 collector migration path. The additional AS5a photo supports its existing release.
 Main-based issue totals stay unchanged until merge.
+
+The subsequent [sc1D T 133/164 owner confirmation](../issue-262-sc1dt133-20260929/README.md)
+raises the draft Thai result to 21/29, with eight finish gaps remaining.
