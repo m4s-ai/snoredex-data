@@ -34118,6 +34118,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0260",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0260",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0260",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0260",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0260",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0260"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0319",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -102625,6 +102642,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0259",
         "specimenIds": [
           "SPEC-0259"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0260",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0260",
+        "cardReleaseId": "RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29: scD T 111/159 ist non-holo auf dem bild zu erkennen.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0260",
+        "specimenIds": [
+          "SPEC-0260"
         ]
       }
     },
@@ -186111,6 +186152,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0260",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0260",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0319",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -237298,6 +237349,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0260",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0260",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0260",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
       "provenance": {}
     },
     {
@@ -298975,6 +299042,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0260",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0260",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0319",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -299808,14 +299882,14 @@
     }
   ],
   "summary": {
-    "entities": 8280,
-    "edges": 12313,
-    "migrationInputs": 2915,
+    "entities": 8282,
+    "edges": 12316,
+    "migrationInputs": 2916,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1616,
+      "established-and-mapped": 1617,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299823,9 +299897,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2089,
+    "candidateClaims": 2090,
     "cardReleases": 633,
-    "physicalPrintings": 799,
+    "physicalPrintings": 800,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

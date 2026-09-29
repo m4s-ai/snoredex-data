@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "97ba45568ea98b0611ba0ffe90992759434a77b102bb34f20e7e8e5884f70f3d",
+  "projectionVersion": "471b00debbe3554ee4f0bb23079b4224d5389fdf87c8f3ca6e15513b9a5bb221",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 799,
+    "physicalPrintings": 800,
     "sourceObservations": 3057
   },
   "groups": [
@@ -67319,13 +67319,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0260",
+              "cardReleaseId": "RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: scD T 111/159 ist non-holo auf dem bild zu erkennen.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0260",
+              "specimenIds": [
+                "SPEC-0260"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -67367,8 +67389,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/card-search/detail/2297/",
-              "evidence": "Complete official Thai render for Snorlax scD T 111/159 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "eeeac252f8aca14562317d6053023036e7f60fbdd3cb0ec98338db0b42ef57f5",
+              "evidence": "Retained official Thai render shows Snorlax scD T 111/159. Printed Thai text, collector identity and attacks establish the exact card; no printed rarity symbol is present. On 2026-09-29 the collection owner explicitly confirms this card as Non-Holo from the picture. The publisher render remains identity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list.",
+              "contentHash": "c102c422ef159cfe5e92f11a8f5218c23515eeb035cacf5e9db90ff92578132e",
               "image": "verification/specimens/SPEC-0260.png"
             }
           ]
