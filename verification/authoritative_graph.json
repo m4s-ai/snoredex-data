@@ -35149,6 +35149,40 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0516",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0516",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0516",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0516",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0516",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0516"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0517",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0517",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0517",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0517",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0517",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0517"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0518",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -35927,6 +35961,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:7c94784ac860820a0eb37933, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:7c94784ac860820a0eb37933"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0595",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0595",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0595",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0595",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0595",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0595"
       }
     },
     {
@@ -102658,6 +102709,54 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0516",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0516",
+        "cardReleaseId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29: m6a jp erklärung passt auch zu ma6 T und I. This explicitly extends the prior Japanese M6a Holo determination to MA6 T and MA6 I.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0516",
+        "specimenIds": [
+          "SPEC-0516"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0517",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0517",
+        "cardReleaseId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29: m6a jp erklärung passt auch zu ma6 T und I. This explicitly extends the prior Japanese M6a Holo determination to MA6 T and MA6 I.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0517",
+        "specimenIds": [
+          "SPEC-0517"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:specimen:SPEC-0526",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -103016,6 +103115,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0577",
         "specimenIds": [
           "SPEC-0577"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0595",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0595",
+        "cardReleaseId": "RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29 for this exact supplied image: non-holo sieht man doch",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0595",
+        "specimenIds": [
+          "SPEC-0595"
         ]
       }
     },
@@ -113211,6 +113334,23 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+        "cardReleaseId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+        "sourceRecordId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+        "sourceProvider": "owner-attestation",
+        "sourceVocabulary": "owner-classification",
+        "sourceNativeValue": "Common",
+        "normalizedRarityId": "common",
+        "sourceProductKey": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+        "retrievedAt": "2026-09-29",
+        "evidence": "On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Indonesian MA6 I 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred."
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
       "origin": "reviewed-owner-rarity-20260929",
       "payload": {
@@ -113224,6 +113364,23 @@
         "sourceProductKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
         "retrievedAt": "2026-09-29",
         "evidence": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+        "cardReleaseId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+        "sourceRecordId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+        "sourceProvider": "owner-attestation",
+        "sourceVocabulary": "owner-classification",
+        "sourceNativeValue": "Common",
+        "normalizedRarityId": "common",
+        "sourceProductKey": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+        "retrievedAt": "2026-09-29",
+        "evidence": "On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Thai MA6 T 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred."
       }
     },
     {
@@ -113288,6 +113445,23 @@
         "normalizedRarityId": null,
         "sourceProductKey": "https://github.com/m4s-ai/snoredex-data/issues/262#issuecomment-5620545470",
         "retrievedAt": "2026-09-10"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+        "cardReleaseId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+        "sourceRecordId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+        "sourceProvider": "owner-attestation",
+        "sourceVocabulary": "printed-Thai-card",
+        "sourceNativeValue": "R",
+        "normalizedRarityId": "rare",
+        "sourceProductKey": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+        "retrievedAt": "2026-09-29",
+        "evidence": "Retained owner-supplied Ojama Card image SPEC-0594 visibly reads Thai AS5a 142/184 R. The owner explicitly identifies R as Rare. The printed value R and reviewed Thai mapping to rare are preserved; the seller FOIL caption supplies no new finish claim."
       }
     },
     {
@@ -138337,6 +138511,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:ID:MA6%20I",
+        "reason": "Exact Indonesian MA6 I 121/130 rarity evidence."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-IDX-02D7D81ED6E5",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -141450,6 +141635,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5a",
+        "reason": "Exact Thai AS5a 142/184 rarity evidence."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-TH-DATE-S10A-20260915",
       "origin": "reviewed-evidence-issue-262-20260915",
       "payload": {
@@ -141468,6 +141664,17 @@
         "disposition": "mapped",
         "targetRef": "EVENT:TH:s5a T:launch",
         "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:MA6%20T",
+        "reason": "Exact Thai MA6 T 121/130 rarity evidence."
       }
     },
     {
@@ -147608,6 +147815,50 @@
           "sha256": "b3910d256f8356ea2d693de42996131a2c173e4aecc387af48b652f467ee2c31",
           "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
           "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Month-day-year listing; AKG product index independently displays 02 July 2021."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "MA6 I",
+          "locality": "ID",
+          "languages": [
+            "Indonesian"
+          ],
+          "scripts": [
+            "Latn"
+          ],
+          "printIds": [
+            "ID:MA6 I:121/130:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "121/130"
+          ],
+          "observedCoverage": "one exact card rarity determination",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29",
+          "statement": "m6a jp erklärung passt auch zu ma6 T und I",
+          "rarity": "Common",
+          "basis": "On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Indonesian MA6 I 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred.",
+          "specimenId": "SPEC-0517",
+          "evidenceRefs": [
+            "specimen:SPEC-0517",
+            "verification/evidence/issue-262-thai-ma6-20260929/owner-determination.json"
+          ]
         }
       }
     },
@@ -158347,6 +158598,50 @@
     },
     {
       "entityType": "set-source-record",
+      "entityId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "AS5a",
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "scripts": [
+            "Thai"
+          ],
+          "printIds": [
+            "TH:AS5a:142/184:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "142/184"
+          ],
+          "observedCoverage": "one exact photographed card rarity observation",
+          "statement": "AS5a **142/184**  R für Rare auf dem Bild",
+          "rarity": "R",
+          "basis": "Retained owner-supplied Ojama Card image SPEC-0594 visibly reads Thai AS5a 142/184 R. The owner explicitly identifies R as Rare. The printed value R and reviewed Thai mapping to rare are preserved; the seller FOIL caption supplies no new finish claim.",
+          "specimenId": "SPEC-0594",
+          "evidenceRefs": [
+            "specimen:SPEC-0594",
+            "verification/evidence/issue-262-thai-ma6-20260929/sources.json"
+          ],
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29"
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
       "entityId": "SET-SRC-TH-DATE-S10A-20260915",
       "origin": "reviewed-evidence-issue-262-20260915",
       "payload": {
@@ -158408,6 +158703,50 @@
           "sha256": "a798afcd4010d4b473976390f5e02af48670eebb3c8cafd98ff6d448d03b1ad5",
           "retrievedAt": "2026-09-14T22:18:41.431242+00:00",
           "note": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+      "origin": "reviewed-thai-ma6-evidence-20260929",
+      "payload": {
+        "sourceRecordId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "MA6 T",
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "scripts": [
+            "Thai"
+          ],
+          "printIds": [
+            "TH:MA6 T:121/130:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "121/130"
+          ],
+          "observedCoverage": "one exact card rarity determination",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29",
+          "statement": "m6a jp erklärung passt auch zu ma6 T und I",
+          "rarity": "Common",
+          "basis": "On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Thai MA6 T 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred.",
+          "specimenId": "SPEC-0516",
+          "evidenceRefs": [
+            "specimen:SPEC-0516",
+            "verification/evidence/issue-262-thai-ma6-20260929/owner-determination.json"
+          ]
         }
       }
     },
@@ -186041,6 +186380,26 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0516",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0516",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0517",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0517",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0518",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -186497,6 +186856,16 @@
       "toId": "PHYSICAL:PRINTING:7c94784ac860820a0eb37933",
       "provenance": {
         "specimenId": "SPEC-0593"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0595",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0595",
+      "provenance": {
+        "disposition": "established-and-mapped"
       }
     },
     {
@@ -236646,6 +237015,38 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0516",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0516",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0516",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0517",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0517",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0517",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:specimen:SPEC-0526",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -236882,6 +237283,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:AC1b:118/158:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0595",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0595",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0595",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
       "provenance": {}
     },
     {
@@ -247958,6 +248375,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -247970,6 +248403,22 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:TH:MA6 T:121/130:20260929",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
       "provenance": {}
     },
     {
@@ -248034,6 +248483,22 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-6627BD0B87EB",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS5a:142/184:Snorlax-Lazy-Eating-Big-Counter",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:specimen:TH:AS5a:142/184:20260929",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
       "provenance": {}
     },
     {
@@ -261716,6 +262181,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-IDX-02D7D81ED6E5",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -263980,6 +264453,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-TH-DATE-S10A-20260915",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -263992,6 +264473,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-TH-DATE-S5A-20260915",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
       "provenance": {}
     },
     {
@@ -293771,6 +294260,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-ID-MA6-I-121-RARITY-20260929",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:ID:MA6%20I",
+      "reason": "Exact Indonesian MA6 I 121/130 rarity evidence."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-IDX-02D7D81ED6E5",
       "disposition": "needs-evidence",
       "targetRef": null,
@@ -295752,6 +296248,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5a",
+      "reason": "Exact Thai AS5a 142/184 rarity evidence."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-TH-DATE-S10A-20260915",
       "disposition": "mapped",
       "targetRef": "EVENT:TH:s10a T:launch",
@@ -295763,6 +296266,13 @@
       "disposition": "mapped",
       "targetRef": "EVENT:TH:s5a T:launch",
       "reason": "Exact Thai product publication date; local printed set identity established by the already retained specimen. No other locality or finish inferred."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-TH-MA6-T-121-RARITY-20260929",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:MA6%20T",
+      "reason": "Exact Thai MA6 T 121/130 rarity evidence."
     },
     {
       "sourceKind": "source-first-record",
@@ -298349,6 +298859,20 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0516",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0516",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0517",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0517",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0518",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -298668,29 +299192,36 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:7c94784ac860820a0eb37933, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0595",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0595",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact"
     }
   ],
   "summary": {
-    "entities": 8249,
-    "edges": 12272,
-    "migrationInputs": 2900,
+    "entities": 8264,
+    "edges": 12290,
+    "migrationInputs": 2906,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 305,
       "carried": 68,
-      "established-and-mapped": 1606,
+      "established-and-mapped": 1609,
       "linked-local-counterpart": 125,
-      "mapped": 353,
+      "mapped": 356,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2077,
+    "candidateClaims": 2080,
     "cardReleases": 633,
-    "physicalPrintings": 789,
-    "setSourceRecords": 481,
-    "setSourceDispositions": 481,
+    "physicalPrintings": 792,
+    "setSourceRecords": 484,
+    "setSourceDispositions": 484,
     "localizations": 16
   }
 }

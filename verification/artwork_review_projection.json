@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "0449f7a8a090a611c6c5cd63bd0e373e0a46739ad41726e891ebe7a9cd74a754",
+  "projectionVersion": "277309168fecdabaec7ed39f100c94ef7546403e21ec9e99d9f69ee2babd978e",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 789,
-    "sourceObservations": 3048
+    "physicalPrintings": 792,
+    "sourceObservations": 3050
   },
   "groups": [
     {
@@ -30517,13 +30517,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0517",
+              "cardReleaseId": "RELEASE:ID:Indonesian:MA6 I:121/130:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: m6a jp erklärung passt auch zu ma6 T und I. This explicitly extends the prior Japanese M6a Holo determination to MA6 T and MA6 I.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0517",
+              "specimenIds": [
+                "SPEC-0517"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30578,8 +30600,8 @@
               "kind": "source-first",
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/archive/special/card/ma6/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo; the card face shows no separate rarity symbol. Local product page announces 2026-09-16. This is a publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "f0286085a1177c4894fb85275f3ec71965412bde33d1ced762af3ba4333d8809",
+              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo; the card face shows no separate rarity symbol. Local product page announces 2026-09-16. This is a publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Rarity evidence 2026-09-29: On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Indonesian MA6 I 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred. See SET-SRC-ID-MA6-I-121-RARITY-20260929.",
+              "contentHash": "b261c1d2f710f2f77425ebdea1e5c0691b2c2d5b6554fe2d0202f910b4267b2f",
               "image": "https://asia.pokemon-card.com/id/archive/special/card/ma6/images/locale/id/cards/ma6_121oijsy4ia_IDN.png"
             },
             {
@@ -30587,8 +30609,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/id/archive/special/card/ma6/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "7491b82c7228235fe9be7db908d7a600760f7a0e1f41186b755eee0a024e5705",
+              "evidence": "Official localized publisher gallery and retained SPEC-0517 identify Snorlax, MA6 I 121/130, HP 160, Good Sleep and Tumbang 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. On 2026-09-29 the collection owner explicitly extends the Japanese M6a determination to this exact MA6 localized release: Common and Holo, with no reverse/mirror variant. The publisher image establishes identity; the owner supplies rarity, positive finish and the separately recorded finish-list closure.",
+              "contentHash": "881c69367ce6fdcdd775a676c4b069051e6a7b0c25521b898a6be27bee1739c5",
               "image": "verification/specimens/SPEC-0517.png"
             },
             {
@@ -31299,13 +31321,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0516",
+              "cardReleaseId": "RELEASE:TH:Thai:MA6 T:121/130:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: m6a jp erklärung passt auch zu ma6 T und I. This explicitly extends the prior Japanese M6a Holo determination to MA6 T and MA6 I.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0516",
+              "specimenIds": [
+                "SPEC-0516"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31338,8 +31382,8 @@
               "kind": "source-first",
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/th/archive/special/card/ma6/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo; the card face shows no separate rarity symbol. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "01b8fa9a0d7db09dc9c14292005c007d1a3f733a36de73f7318bae7b514947cb",
+              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo; the card face shows no separate rarity symbol. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Rarity evidence 2026-09-29: On 2026-09-29 the collection owner explicitly extends the Japanese M6a Common determination to Thai MA6 T 121/130: m6a jp erklärung passt auch zu ma6 T und I. Common is an owner classification, not a symbol observed on the publisher render. No classification of another release is inferred. See SET-SRC-TH-MA6-T-121-RARITY-20260929.",
+              "contentHash": "0abf4f8a1e0d96ace34555a5040ebebee5a896d09d32fd4c02514e98b3487f29",
               "image": "https://asia.pokemon-card.com/th/archive/special/card/ma6/images/locale/th/cards/ma6_121oijsy4ia_TH.png"
             },
             {
@@ -31347,8 +31391,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/archive/special/card/ma6/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "0459684f2cf4ba4b0e8d1715e6d836315ee0adf23474bebacdd6664b46c1fc28",
+              "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. On 2026-09-29 the collection owner explicitly extends the Japanese M6a determination to this exact MA6 localized release: Common and Holo, with no reverse/mirror variant. The publisher image establishes identity; the owner supplies rarity, positive finish and the separately recorded finish-list closure.",
+              "contentHash": "323dca24a51edd42aa6a2d4f92d764554f20d7855491aa5338cb2dc6b1030441",
               "image": "verification/specimens/SPEC-0516.png"
             }
           ]
@@ -50007,6 +50051,17 @@
               "originalHash": "88e21668d32c62449fda1ca69f81b8c2a7adfd14cb3eae78a14302cae1e6d8a3",
               "previewSrc": "images/previews/SPEC-0428.png?v=5bfc7e83cf9b379f7002a13dc00f6dc16563e337b48d83b5e7e7184d1d2135a0",
               "thumbnailSrc": "images/thumbs/SPEC-0428.png?v=29580abf33f70cb458c2bc255004cfbbe5ad0e98d6f96ed403392b172ba38c62"
+            },
+            {
+              "src": "verification/specimens/SPEC-0594.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0594",
+              "contentHash": "db066f19683d35b3741675845cec0f61a9fba47c18e2af0876b6ab5d88f61dfa",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "db066f19683d35b3741675845cec0f61a9fba47c18e2af0876b6ab5d88f61dfa",
+              "previewSrc": "images/previews/SPEC-0594.png?v=2e2196cdb31b678d97b59fb57b1bd417af04cf272f55cc65e645abed9c687df0",
+              "thumbnailSrc": "images/thumbs/SPEC-0594.png?v=9e80377cb6bff4e24560ed9dc04aacac56865ad10685d3989e51b66891885342"
             }
           ],
           "observations": [
@@ -50015,8 +50070,8 @@
               "kind": "source-first",
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/AS5a",
-              "evidence": "Bulbapedia's exact AS5a list identifies Thai Snorlax 142/184 as rarity R and dates Double Burst Set A to 2020-02-27. The official Thai product page and retained official card-list PDF establish the AS5a product. SPEC-0427 and SPEC-0428 positively show the Thai card face, collector number, 150 HP and kanahei credit; their owner attestations separately establish regular and holo physical copies. Ojama's exact R and R-Foil SKUs and the two exact seller-photo listings independently corroborate the two treatments. No completeness or unpictured variant is inferred.",
-              "contentHash": "d69fd3fd51e719f5671a1fcdf2021dc78f34328ef4f4b95fda2b566e9f629af1",
+              "evidence": "Bulbapedia's exact AS5a list identifies Thai Snorlax 142/184 as rarity R and dates Double Burst Set A to 2020-02-27. The official Thai product page and retained official card-list PDF establish the AS5a product. SPEC-0427 and SPEC-0428 positively show the Thai card face, collector number, 150 HP and kanahei credit; their owner attestations separately establish regular and holo physical copies. Ojama's exact R and R-Foil SKUs and the two exact seller-photo listings independently corroborate the two treatments. No completeness or unpictured variant is inferred. Rarity evidence 2026-09-29: Retained owner-supplied Ojama Card image SPEC-0594 visibly reads Thai AS5a 142/184 R. The owner explicitly identifies R as Rare. The printed value R and reviewed Thai mapping to rare are preserved; the seller FOIL caption supplies no new finish claim. See SET-SRC-TH-AS5A-142-RARITY-20260929.",
+              "contentHash": "145370d0494b09d28b919e41feac56c0d49df5b2ba260160583a38da0cb473da",
               "image": null
             },
             {
@@ -50036,6 +50091,15 @@
               "evidence": "The retained full-card photograph positively identifies Thai Snorlax AS5a 142/184, 150 HP and Illus. kanahei. The collection-owner checklist identifies this physical copy as Holo. The researched Thai source-first release is materialized separately from the T-Chinese AS5a 142 release.",
               "contentHash": "53e5bdbc850a421f96f12b6f02ec46c5ed1c0d2960ed91b7d55c73d9a0bcbb15",
               "image": "verification/specimens/SPEC-0428.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0594",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "The supplied Ojama Card image shows Thai Snorlax, AS5a 142/184 R, HP150 and kanahei. Printed R is visibly established and the owner identifies it as Rare. The FOIL seller caption is not used to assert a new physical finish; existing SPEC-0427/0428 retain their separate Non-Holo/Holo evidence.",
+              "contentHash": "b287bb9ca430692d7f7ac60644eeba9872a7e1836ac36604f62f20d738e2bdb2",
+              "image": "verification/specimens/SPEC-0594.png"
             }
           ]
         }
@@ -63069,13 +63133,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0595",
+              "cardReleaseId": "RELEASE:TH:Thai:sc1D T:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29 for this exact supplied image: non-holo sieht man doch",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0595",
+              "specimenIds": [
+                "SPEC-0595"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -63100,6 +63186,17 @@
               "originalHash": "4f0429bdb4cfb62ef6b765abe5ce987f210512fc30da54e9ecd243c95b54fbc6",
               "previewSrc": "images/previews/SPEC-0256.png?v=ff8976916d65056e697c53b7228c18f00a760f4bf5d5959c600424323016616b",
               "thumbnailSrc": "images/thumbs/SPEC-0256.png?v=e93cec9f542483928f92dbe1a3037dd7491e4595bfd77834febaa5295f5bd202"
+            },
+            {
+              "src": "verification/specimens/SPEC-0595.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0595",
+              "contentHash": "2961886b253b32c16255ff8dbdc1b167cbee73e994975ec964c6df4042ba57ad",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "2961886b253b32c16255ff8dbdc1b167cbee73e994975ec964c6df4042ba57ad",
+              "previewSrc": "images/previews/SPEC-0595.png?v=326fecc68e0bd8d21de3143076b260ca989ab23f101c91ae36084f233d8f7cc9",
+              "thumbnailSrc": "images/thumbs/SPEC-0595.png?v=c1240ec6b1a42e39857dca1b9451c2c6e0de8cc541b028ad442932e5a35819af"
             }
           ],
           "observations": [
@@ -63120,6 +63217,15 @@
               "evidence": "Complete official Thai render for Snorlax sc1D T 132/164 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "5d5394d97fd4c55e52e77c1e037d94641c2f15f512da344902c8488b61b5d178",
               "image": "verification/specimens/SPEC-0256.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0595",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "The supplied PP Card Game Shop image shows Thai Snorlax HP150, sc1D T 132/164, Rolling Tackle 80 and Heavy Impact 130. The exact Thai identity matches the existing release. The owner explicitly determines Non-Holo; printed pastel gradients do not establish foil. No original listing URL or physical ownership was supplied. This does not close the finish list.",
+              "contentHash": "5569f6401dc6077c26262ea76573f45cbd4181600c4271df20e1290da80451bd",
+              "image": "verification/specimens/SPEC-0595.png"
             }
           ]
         }
