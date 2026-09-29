@@ -1,6 +1,9 @@
 <!-- doc: role=owner-confirmed Japanese s2 Non-Holo photograph intake; stage=task -->
 # Japanese s2 077/096 Non-Holo — 2026-09-29
 
+**Snapshot at b264c91.** The later [sI100 342 Non-Holo intake](../owner-si342-nonholo-20260929/README.md)
+confirms 342 through SPEC-0592, leaving only sI100 341/414 in the Japanese tracked-field queue.
+
 The collection owner supplied this photograph with the exact statement **“non holo”**.
 [SPEC-0591](../../specimens/SPEC-0591.png) retains the unchanged original PNG at 1600×1600.
 Its original filename, SHA-256 and evidence classes are in [sources.json](sources.json);

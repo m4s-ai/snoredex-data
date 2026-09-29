@@ -57,12 +57,12 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 497,
-      "withOnlyMarketplaceClaim": 32,
+      "withConfirmedFinish": 498,
+      "withOnlyMarketplaceClaim": 31,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 313,
+      "withNonHolo": 314,
       "withHolo": 243,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
@@ -33602,20 +33602,55 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, printed 342/ and Illus. Asako Ito are visible. The crochet Snorlax artwork matches the exact existing sI100 342/414 V2 identity (U0656); the denominator is obscured by the clear display stand and is reference-matched, not newly transcribed. The image bears a Hobby shop Friend watermark; no original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0592.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0592"
+          ],
+          "image": "verification/specimens/SPEC-0592.png",
+          "printingId": "F0379-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -33633,7 +33668,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0379-P01"
+          "printingId": "F0379-P02"
         }
       ],
       "unresolved": [

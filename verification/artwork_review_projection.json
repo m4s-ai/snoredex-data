@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "2b876b894970921a96dd5eee373e80a1c183c6e5f437ff1282a891427dfa014f",
+  "projectionVersion": "d2f858c898c9f1d694836dbfdf77087b57a7de85752f2c95d33c857cf2718a7d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 787,
-    "sourceObservations": 3042
+    "physicalPrintings": 788,
+    "sourceObservations": 3045
   },
   "groups": [
     {
@@ -43742,13 +43742,52 @@
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d07b8a5060a598d5581d64a4",
+              "semanticPrintingId": "PRINTING:d07b8a5060a598d5581d64a4",
+              "cardReleaseId": "RELEASE:JP:Japanese:sI100:342:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0379",
+              "sourcePrintingId": "F0379-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d07b8a5060a598d5581d64a4",
+              "specimenIds": [
+                "SPEC-0592"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, printed 342/ and Illus. Asako Ito are visible. The crochet Snorlax artwork matches the exact existing sI100 342/414 V2 identity (U0656); the denominator is obscured by the clear display stand and is reference-matched, not newly transcribed. The image bears a Hobby shop Friend watermark; no original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0592.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Asako Ito",
             "variant": "V2",
             "finish": [
+              "non-holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -43778,9 +43817,38 @@
               "originalHash": "c38ee6e31057295683f4035280524409ef8a1660a85485b50e902d958c4b1d21",
               "previewSrc": "images/previews/SPEC-0216.png?v=f4a8a9922a71b53a9b05c38ee6a6202a8ffd5a5da4392cfcc85298f5dae83dc1",
               "thumbnailSrc": "images/thumbs/SPEC-0216.png?v=0c7527a9c10d3fa25430cc8612e762e9e8d9f044014a4949a6b8b66ebdfa7f52"
+            },
+            {
+              "src": "verification/specimens/SPEC-0592.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0592",
+              "contentHash": "cf231925c1d91d18031ff975a1d1f72a4e0b87440a6a35a7ff44ee59fb22b045",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "cf231925c1d91d18031ff975a1d1f72a4e0b87440a6a35a7ff44ee59fb22b045",
+              "previewSrc": "images/previews/SPEC-0592.png?v=663f950cd95f3816286f793825e2915c96ebffafd37ce966d91472a0f2a37f69",
+              "thumbnailSrc": "images/thumbs/SPEC-0592.png?v=bf022c54c8c11ad215aac99c69ba644c73f5d829148471163f8fd96e4f05887b"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0379-P01:0:ecac3b6e41d82ed6",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, printed 342/ and Illus. Asako Ito are visible. The crochet Snorlax artwork matches the exact existing sI100 342/414 V2 identity (U0656); the denominator is obscured by the clear display stand and is reference-matched, not newly transcribed. The image bears a Hobby shop Friend watermark; no original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0592.",
+              "contentHash": "62664e71e34a40623ee9d0162670f7d59b81cfe91deea0c53830f5c202ca90f8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0379-P01:1:eefb88f741cd114f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "01125c9698d65f62bcb57603ac569e7b8a95eda952bdf795637fd49536f42263",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0216",
               "kind": "specimen",
@@ -43789,6 +43857,15 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sI100 342 (V2). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
               "contentHash": "8448c7ebec94843af88ab3980a73fb8be662c22e2c562015649f30f35b0a6c79",
               "image": "verification/specimens/SPEC-0216.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0592",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, printed 342/ and Illus. Asako Ito are visible. The crochet Snorlax artwork matches the exact existing sI100 342/414 V2 identity (U0656); the denominator is obscured by the clear display stand and is reference-matched, not newly transcribed. The image bears a Hobby shop Friend watermark; no original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list.",
+              "contentHash": "455ee6bc7b324f6c2473d766d5528dd01de2cbeb0e24085d6b6a3237432e5bfe",
+              "image": "verification/specimens/SPEC-0592.png"
             },
             {
               "observationId": "unit:U0656",

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 591,
+  "count": 592,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12190,6 +12190,31 @@
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0531"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "cardSize": "standard",
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: non holo"
+      }
+    },
+    {
+      "specimenId": "SPEC-0592",
+      "setCode": "sI100",
+      "number": "342",
+      "variant": "V2",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph bearing Hobby shop Friend watermark; original image visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0592.png",
+      "photographSource": "user-supplied:codex-clipboard-fe3d02a2-8ba1-49e7-95b8-ae4169620c92.png",
+      "photographSha256": "sha256:cf231925c1d91d18031ff975a1d1f72a4e0b87440a6a35a7ff44ee59fb22b045",
+      "observed": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, printed 342/ and Illus. Asako Ito are visible. The crochet Snorlax artwork matches the exact existing sI100 342/414 V2 identity (U0656); the denominator is obscured by the clear display stand and is reference-matched, not newly transcribed. The image bears a Hobby shop Friend watermark; no original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "U0656"
       ],
       "physicalObservation": {
         "finish": "non-holo",
