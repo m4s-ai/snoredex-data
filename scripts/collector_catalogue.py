@@ -36,6 +36,7 @@ SOURCE_FIRST_PATH = ROOT / "verification" / "source_first_prints.json"
 SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
 COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
+ADJUDICATIONS_PATH = ROOT / "verification" / "owner_adjudications.json"
 
 CATALOGUE_PATH = ROOT / "collector_catalogue.json"
 SCHEMA_PATH = ROOT / "collector_catalogue.schema.json"
@@ -1027,6 +1028,40 @@ def legacy_work_names(legacy_items, legacy_release, releases, work_id_by_key) ->
     return names
 
 
+def source_first_finish_decisions(decisions, finish_units, releases, physicals):
+    """Close source-first lists only when their positive printings match the owner decision."""
+    legacy_keys = {(u["setCode"], u["number"], u["language"]) for u in finish_units}
+    lookup = release_lookup(list(releases.values()))
+    finishes = defaultdict(set)
+    for printing in physicals.values():
+        finishes[printing["cardReleaseId"]].add(printing.get("finish"))
+    result = {}
+    for decision in decisions:
+        key = (decision["setCode"], decision["number"], decision["language"])
+        if key in legacy_keys:
+            continue  # finishes.py owns decisions for legacy finish units.
+        targets = set(lookup.get((key[0], collector_number(key[1]), key[2]), []))
+        if len(targets) != 1:
+            raise ContractError(f"finish decision does not resolve exactly once: {key}")
+        release_id = targets.pop()
+        release = releases[release_id]
+        if (release.get("localSetCode"), release.get("localNumber"), release.get("language")) != key:
+            raise ContractError(f"finish decision must match the exact source-first identity: {key}")
+        if (decision.get("authority"), decision.get("decision")) != ("collection-owner", "finish-complete"):
+            raise ContractError(f"finish closure requires an owner decision: {key}")
+        expected = set(decision.get("availableFinishes") or [])
+        if finishes.get(release_id) != expected:
+            raise ContractError(f"finish decision differs from positive printings: {key}")
+        result[release_id] = decision
+    return result
+
+
+def item_completeness(decision, old, unit):
+    if decision:
+        return "owner-adjudicated"
+    return (old or {}).get("completenessStatus") or (unit or {}).get("completenessStatus") or "positive-evidence-only"
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     if graph.get("meta", {}).get("schemaVersion") != "1.1.0":
@@ -1044,6 +1079,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     editions = {row["setEditionId"]: row for row in entity_payloads(graph, "set-edition")}
     releases = {row["cardReleaseId"]: row for row in entity_payloads(graph, "card-release")}
     physicals = {row["physicalPrintingId"]: row for row in entity_payloads(graph, "physical-printing")}
+    finish_decisions = source_first_finish_decisions(
+        read_json(ADJUDICATIONS_PATH).get("finishDecisions", []), finish_units, releases, physicals,
+    )
     claims = {row["claimId"]: row for row in entity_payloads(graph, "candidate-claim")}
     works = entity_payloads(graph, "work")
     events = entity_payloads(graph, "release-event")
@@ -1281,6 +1319,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             )
         source_refs.update(release.get("sourceRecords") or [])
         source_refs.update(item_specimen_links(release, physical, citations, source_first, claims, specimens))
+        source_refs.update(finish_decisions.get(release_id, {}).get("evidenceRefs", []))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
             source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
@@ -1358,7 +1397,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "cardSize": card_size,
             "errorClass": error_class,
             "rarity": normalized_rarity(release_id, reference, rarity_by_release),
-            "completenessStatus": (old or {}).get("completenessStatus") or (unit or {}).get("completenessStatus") or "positive-evidence-only",
+            "completenessStatus": item_completeness(finish_decisions.get(release_id), old, unit),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,
             "releaseApproximate": release_approximate,

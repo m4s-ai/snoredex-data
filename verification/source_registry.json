@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1648,
-   "uniqueUrls": 1641,
+   "evidenceRecords": 1651,
+   "uniqueUrls": 1644,
    "nonUrlEvidenceClasses": 7,
-   "claimsAttributed": 6353
+   "claimsAttributed": 6369
   }
  },
  "providers": [
@@ -254,16 +254,17 @@
    "coverage": "named grading varieties for graded specimens",
    "supportsAbsence": false,
    "usedFor": [
-    "finish"
+    "finish",
+    "identity"
    ],
-   "attribution": "Grading variety names from PSA.",
-   "notes": "Population counts and omissions are never used as negative evidence.",
+   "attribution": "Grading variety names and identified slab photographs from PSA.",
+   "notes": "Retained slab photographs support their visible card/certificate identity; named grading varieties supply finish. Population counts and omissions are never negative evidence.",
    "hosts": [
     "www.psacard.com",
     "psacard.com"
    ],
-   "uniqueSources": 1,
-   "claimsSupported": 2
+   "uniqueSources": 4,
+   "claimsSupported": 16
   },
   {
    "providerId": "cgc",
@@ -745,7 +746,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 197
+   "claimsSupported": 199
   },
   {
    "providerId": "inspected-specimen",
@@ -13683,7 +13684,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 175,
+   "stableIdCount": 176,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0009-P01",
@@ -13816,6 +13817,7 @@
     "SPEC-0473",
     "SPEC-0474",
     "SPEC-0480",
+    "SPEC-0514",
     "SPEC-0521",
     "SPEC-0522",
     "SPEC-0524",
@@ -13862,7 +13864,7 @@
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
    "retrievedAt": "2026-09-29",
-   "usageCount": 195
+   "usageCount": 197
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -18085,7 +18087,7 @@
     "JP:M6a:095/103:base",
     "SPEC-0514"
    ],
-   "retrievedAt": "2026-09-10",
+   "retrievedAt": "2026-09-29",
    "usageCount": 3
   },
   {
@@ -18107,7 +18109,7 @@
     "SET-SRC-30C-DATE-JP",
     "SPEC-0514"
    ],
-   "retrievedAt": "2026-09-10",
+   "retrievedAt": "2026-09-29",
    "usageCount": 4
   },
   {
@@ -24328,6 +24330,44 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/CzSO1iwUME6JHN7u1BEdTQ.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "psa",
+   "sourceTypes": [
+    "Original PSA-linked slab photograph; manual visual inspection; local Tesseract OCR unavailable"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0471-P01",
+    "SPEC-0580",
+    "U0305"
+   ],
+   "retrievedAt": "2026-09-29",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/Ss7_CN_6i0OEi2qnRMtIKA.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "psa",
+   "sourceTypes": [
+    "Original PSA-linked slab photograph; manual visual inspection; local Tesseract OCR unavailable"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0471-P01",
+    "SPEC-0579",
+    "U0305"
+   ],
+   "retrievedAt": "2026-09-29",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
    "nonUrlEvidenceId": null,
    "providerId": "psa",
@@ -24345,6 +24385,30 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+   "nonUrlEvidenceId": null,
+   "providerId": "psa",
+   "sourceTypes": [
+    "Original PSA-linked slab photograph; manual visual inspection; local Tesseract OCR unavailable",
+    "PSA named grading variety; certificate 94474867"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override",
+    "identity"
+   ],
+   "stableIdCount": 5,
+   "stableIds": [
+    "F0471-P01",
+    "SPEC-0579",
+    "SPEC-0580",
+    "U0305",
+    "override:psa-sv4a-145-reverse-holo-20260929"
+   ],
+   "retrievedAt": "2026-09-29",
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://antiquestore.com.mx/event/pokemon-tcg-journey-together-prerelease",

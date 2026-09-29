@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-09-28",
+    "generated": "2026-09-29",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 486,
-      "withOnlyMarketplaceClaim": 43,
+      "withConfirmedFinish": 487,
+      "withOnlyMarketplaceClaim": 42,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
@@ -40320,11 +40320,11 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -40338,12 +40338,21 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+              "sourceType": "PSA named grading variety; certificate 94474867",
+              "authorityTier": "grading-registry",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-09-29",
+              "evidence": "The exact Japanese sv4a 145/190 Snorlax is explicitly classified as Reverse Holo in the PSA gallery row and certificate 94474867. SPEC-0579/SPEC-0580 retain the matching slab front/back for identity and certification. The named PSA variety supplies the finish determination; the static photographs do not independently establish foil. Exact row and hashes: verification/evidence/jp-finish-20260929-modern/sources.json. This positive finish confirmation preserves the existing F0471-P01 identity and variant mapping; no exact foil pattern, new edition, absence or finish-list closure is asserted."
             }
           ],
           "printingId": "F0471-P01"

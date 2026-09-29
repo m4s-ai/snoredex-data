@@ -271,6 +271,12 @@ completeness decision is recorded in
 | `pending` | no positive finish evidence yet |
 | `not-applicable` | every underlying product-language claim is contradicted |
 
+Source-first releases without a legacy finish unit use the same `finishDecisions` store,
+keyed by their exact local set code, full local number and language. The collector generator
+validates the unique release and its nonempty positive physical-finish list before projecting
+`owner-adjudicated`; it never creates a printing from that decision. Japanese M6a 095/103
+is the first such closure, supported separately by the owner's SPEC-0514 Holo determination.
+
 `E13` holds the owner decision to what it may do. It must name exactly the finishes the evidence
 already found, so it can never introduce one. It may not apply to a unit with no printings at all.
 

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "daa34a72efd8b40d7de0c627ef396b5fde8cebef203d0a64b00e4cb33b19b409",
+  "projectionVersion": "72580a4bb72b9200798323e3b0fe9f5270cbedbc4cc8e23889c5f832e666095a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 774,
-    "sourceObservations": 2999
+    "physicalPrintings": 776,
+    "sourceObservations": 3003
   },
   "groups": [
     {
@@ -30751,13 +30751,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0514",
+              "cardReleaseId": "RELEASE:JP:Japanese:M6a:095/103:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: m6a ist nicht offen das bild zeigt eindeutig holo, es gibt keine reverse/mirror variante",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0514",
+              "specimenIds": [
+                "SPEC-0514"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "カビゴン",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30799,8 +30821,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://www.30th.pokemon-card.com/product/m6a",
-              "evidence": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "ce501b9f45dc5b66531a710d6ce84438c19db305739cd7bec48bf51163e9808f",
+              "evidence": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. On 2026-09-29 the collection owner explicitly identifies the pictured treatment as Holo. The finish is recorded as owner attestation; the retained publisher render continues to establish exact Japanese card identity. Finish-list closure is a separate owner decision.",
+              "contentHash": "a4b9d122ecbc26a1002e1fccf9cb4fe1283e80b0f36fcb0004a2ba2a132160d0",
               "image": "verification/specimens/SPEC-0514.png"
             }
           ]
@@ -92779,7 +92801,40 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f0a74ab4ae8e4ef7c823595d",
+              "semanticPrintingId": "PRINTING:f0a74ab4ae8e4ef7c823595d",
+              "cardReleaseId": "RELEASE:JP:Japanese:sv4a:145:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0471",
+              "sourcePrintingId": "F0471-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f0a74ab4ae8e4ef7c823595d",
+              "sources": [
+                {
+                  "url": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+                  "sourceType": "PSA named grading variety; certificate 94474867",
+                  "authorityTier": "grading-registry",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The exact Japanese sv4a 145/190 Snorlax is explicitly classified as Reverse Holo in the PSA gallery row and certificate 94474867. SPEC-0579/SPEC-0580 retain the matching slab front/back for identity and certification. The named PSA variety supplies the finish determination; the static photographs do not independently establish foil. Exact row and hashes: verification/evidence/jp-finish-20260929-modern/sources.json. This positive finish confirmation preserves the existing F0471-P01 identity and variant mapping; no exact foil pattern, new edition, absence or finish-list closure is asserted."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
@@ -92826,9 +92881,49 @@
               "originalHash": "599c24019ba5fb94bda7f55bb782f596be076266336e37600c34838a6cf2dc6a",
               "previewSrc": "images/previews/SPEC-0575.png?v=7198d66d88d012c79ca5a0e2c6b2934e8e89f66b8979499eb29c4bdb1c69a838",
               "thumbnailSrc": "images/thumbs/SPEC-0575.png?v=a23c2fab27ca7ae09bdfd48ba5804bceec18b010877941c51afa7047a9a1b5a2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0579.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0579",
+              "contentHash": "cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+              "previewSrc": "images/previews/SPEC-0579.png?v=83589988bf076f426768f0e1df29e93a808df31d79c7f4ff046e321ff2df4d83",
+              "thumbnailSrc": "images/thumbs/SPEC-0579.png?v=25a867ab6f273e6aff16e6c148bf642f60c335b7ce9d44a931846f5b55fc511e"
+            },
+            {
+              "src": "verification/specimens/SPEC-0580.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0580",
+              "contentHash": "bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+              "previewSrc": "images/previews/SPEC-0580.png?v=2f7953dee5d73c019f05d916b74a90dc674db69c77b426f481c59e77a33a116d",
+              "thumbnailSrc": "images/thumbs/SPEC-0580.png?v=da6ce80bb9bf6e49c1c0fdeda7b8e68857f733149616cfc3419bad6e3fff4571"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0471-P01:0:3ad1aaa9e5cbb5b4",
+              "kind": "finish",
+              "provider": "PSA named grading variety; certificate 94474867",
+              "url": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+              "evidence": "The exact Japanese sv4a 145/190 Snorlax is explicitly classified as Reverse Holo in the PSA gallery row and certificate 94474867. SPEC-0579/SPEC-0580 retain the matching slab front/back for identity and certification. The named PSA variety supplies the finish determination; the static photographs do not independently establish foil. Exact row and hashes: verification/evidence/jp-finish-20260929-modern/sources.json. This positive finish confirmation preserves the existing F0471-P01 identity and variant mapping; no exact foil pattern, new edition, absence or finish-list closure is asserted.",
+              "contentHash": "d7957811d6d374d571a493b93f208e79c9dadd4a11284d7a9dbef98f821ebc29",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0471-P01:1:758d51dd1a45a8d5",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "3e73711ea6a47a1f37eb91d1e75dabece5534baca5ce84b185f1add60905b704",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0219",
               "kind": "specimen",
@@ -92846,6 +92941,24 @@
               "evidence": "Physical Japanese Snorlax HP150, sv4a G 145/190, HYOGONOSUKE, くいいじ and バッタンプレス 130. This sleeved flat view identifies the card but does not establish non-holo or reverse-holo treatment. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
               "contentHash": "ec927fe5c6aeef590370538e3ada9738b04822b9bc9915c93f986d70add22830",
               "image": "verification/specimens/SPEC-0575.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0579",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+              "evidence": "The slab front shows Japanese Snorlax HP150, sv4a G 145/190, Illus. HYOGONOSUKE, and PSA certificate 94474867. The PSA label explicitly names REVERSE HOLO. The photograph supports exact card and certification identity; the finish determination is attributed separately to the retained PSA named-variety source, not inferred from the static surface or rarity. No exact foil pattern, edition, distribution or exhaustive finish inventory is asserted.",
+              "contentHash": "7ee4f4529459438480e9a6e61845c221c8c061dcd31e50a29fc30f5f8a117f4c",
+              "image": "verification/specimens/SPEC-0579.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0580",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+              "evidence": "The slab back shows the Japanese card back and PSA certificate 94474867, matching the slab front in SPEC-0579. Card identity comes from that positively paired front, not from a collector number visible on this back. This view does not independently establish finish, foil pattern, edition, distribution or finish-list completeness.",
+              "contentHash": "4696546f5f5e7d1b013799b4b36297695cceb2dbbce2c671928723bf9e1ea5b7",
+              "image": "verification/specimens/SPEC-0580.jpg"
             },
             {
               "observationId": "unit:U0305",

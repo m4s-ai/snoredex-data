@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:02d359a75f00e14b7b536c230a556a38792cc6279146487158b01889236ee781",
+    "fromFingerprint": "sha256:d4748df89e33f75ec1af7d828f90d9aa56ac831a9610e69ff9ac87587ceecff9",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:01791f368da8964a801744e534c16722f93bce30dedb19937b7e15b4990b6086",
+    "toFingerprint": "sha256:71ccee35ca3cb87867de5a7897f5e5c041eecd2b78e872569579fc57f13aa5de",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:01791f368da8964a801744e534c16722f93bce30dedb19937b7e15b4990b6086",
+      "toFingerprint": "sha256:71ccee35ca3cb87867de5a7897f5e5c041eecd2b78e872569579fc57f13aa5de",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12431,7 +12431,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:01791f368da8964a801744e534c16722f93bce30dedb19937b7e15b4990b6086",
+      "toFingerprint": "sha256:71ccee35ca3cb87867de5a7897f5e5c041eecd2b78e872569579fc57f13aa5de",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30324,6 +30324,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-6dfba13b-91da-586b-b9a2-c79a21895c55",
+      "toItemIds": [
+        "item-76767731-0c55-58c8-81cb-365030224a82"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-742bdb3f-ff62-5b73-9831-de8d9a8eefe0",
       "toItemIds": [
         "item-d6202bd1-6110-528f-abcf-2a47928d4eb8"
@@ -38888,7 +38897,7 @@
         "cardReleaseId": "RELEASE:JP:Japanese:M6a:095/103:Snorlax-Good-Sleep-Collapse",
         "disposition": "projected",
         "targetItemIds": [
-          "item-6dfba13b-91da-586b-b9a2-c79a21895c55"
+          "item-76767731-0c55-58c8-81cb-365030224a82"
         ],
         "reason": null
       },
@@ -47097,6 +47106,11 @@
         "targetItemId": "item-2328a86d-7b37-5de2-91c9-adbae5ff8a8c"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:f0a74ab4ae8e4ef7c823595d",
+        "disposition": "projected",
+        "targetItemId": "item-f7167a5e-ef9e-5eb9-8173-8197fde4cbbb"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:f10b18e760d3bc832c60f77e",
         "disposition": "projected",
         "targetItemId": "item-9917b05f-7f34-5061-a486-376660605929"
@@ -47317,6 +47331,11 @@
         "targetItemId": "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0514",
+        "disposition": "projected",
+        "targetItemId": "item-76767731-0c55-58c8-81cb-365030224a82"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0526",
         "disposition": "projected",
         "targetItemId": "item-13830d70-8c87-59e5-8c26-7b220bce0dbe"
@@ -47395,7 +47414,7 @@
     "summary": {
       "legacyChecklistRows": 899,
       "cardReleases": 633,
-      "physicalPrintings": 774,
+      "physicalPrintings": 776,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 578,
+  "count": 580,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -10543,11 +10543,18 @@
       "photograph": "SPEC-0514.png",
       "photographSource": "https://www.30th.pokemon-card.com/images/m6a/cards/m6a_095_dl0fwwpi.png",
       "photographSha256": "sha256:aa7e719122b3e2839dfcd3b46a0454ceab0fb6b04cc0d98763446136c5130aef",
-      "observed": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-      "recordedAt": "2026-09-10",
+      "observed": "Official localized publisher gallery and retained SPEC-0514 identify カビゴン, M6a 095/103, HP 160, グッドスリープ and たおれこむ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. On 2026-09-29 the collection owner explicitly identifies the pictured treatment as Holo. The finish is recorded as owner attestation; the retained publisher render continues to establish exact Japanese card identity. Finish-list closure is a separate owner decision.",
+      "recordedAt": "2026-09-29",
       "citedBy": [
         "JP:M6a:095/103:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination on 2026-09-29: m6a ist nicht offen das bild zeigt eindeutig holo, es gibt keine reverse/mirror variante",
+        "ownerAttestedFields": [
+          "finish"
+        ]
+      },
       "listingUrl": "https://www.30th.pokemon-card.com/product/m6a"
     },
     {
@@ -11870,6 +11877,48 @@
         "TW:svQP F:012/023:base"
       ],
       "listingUrl": "https://shopee.tw/product/27756288/55863618270"
+    },
+    {
+      "specimenId": "SPEC-0579",
+      "setCode": "sv4a",
+      "number": "145/190",
+      "variant": "V1",
+      "language": "Japanese",
+      "heldBy": "third-party collector; PSA certificate 94474867",
+      "inspectedFrom": "Original PSA-linked slab photograph; manual visual inspection; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0579.jpg",
+      "photographSource": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/Ss7_CN_6i0OEi2qnRMtIKA.jpg",
+      "photographSha256": "sha256:cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+      "observed": "The slab front shows Japanese Snorlax HP150, sv4a G 145/190, Illus. HYOGONOSUKE, and PSA certificate 94474867. The PSA label explicitly names REVERSE HOLO. The photograph supports exact card and certification identity; the finish determination is attributed separately to the retained PSA named-variety source, not inferred from the static surface or rarity. No exact foil pattern, edition, distribution or exhaustive finish inventory is asserted.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "U0305",
+        "F0471-P01"
+      ],
+      "listingUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231"
+    },
+    {
+      "specimenId": "SPEC-0580",
+      "setCode": "sv4a",
+      "number": "145/190",
+      "variant": "V1",
+      "language": "Japanese",
+      "heldBy": "third-party collector; PSA certificate 94474867",
+      "inspectedFrom": "Original PSA-linked slab photograph; manual visual inspection; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0580.jpg",
+      "photographSource": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/CzSO1iwUME6JHN7u1BEdTQ.jpg",
+      "photographSha256": "sha256:bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+      "observed": "The slab back shows the Japanese card back and PSA certificate 94474867, matching the slab front in SPEC-0579. Card identity comes from that positively paired front, not from a collector number visible on this back. This view does not independently establish finish, foil pattern, edition, distribution or finish-list completeness.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "U0305",
+        "F0471-P01"
+      ],
+      "sameCardAs": {
+        "specimenId": "SPEC-0579",
+        "basis": "Both original views are paired by the PSA gallery and show the same unique slab certificate number 94474867."
+      },
+      "listingUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231"
     }
   ]
 }

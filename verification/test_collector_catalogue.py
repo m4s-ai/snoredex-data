@@ -152,7 +152,42 @@ def reinspection_regressions() -> None:
     assert bridged_indonesian_promo[0]["imageScope"] == "exact-printing"
 
 
+def source_first_finish_decision_regressions() -> None:
+    release = {"cardReleaseId": "R", "localSetCode": "M6a", "localNumber": "095/103", "language": "Japanese"}
+    decision = {"setCode": "M6a", "number": "095/103", "language": "Japanese",
+                "authority": "collection-owner", "decision": "finish-complete", "availableFinishes": ["holo"]}
+    printing = {"cardReleaseId": "R", "finish": "holo"}
+    resolve = collector.source_first_finish_decisions
+    assert resolve([decision], [], {"R": release}, {"P": printing}) == {"R": decision}
+    assert collector.item_completeness(decision, None, None) == "owner-adjudicated"
+    assert collector.item_completeness(None, None, None) == "positive-evidence-only"
+    assert collector.item_completeness(None, None, {"completenessStatus": "pending"}) == "pending"
+    assert resolve([], [], {"R": release}, {"P": printing}) == {}
+    assert resolve([decision], [decision], {"R": release}, {}) == {}
+    for decisions, releases, printings in (
+        ([decision], {"R": release}, {}),
+        ([{**decision, "availableFinishes": []}], {"R": release}, {}),
+        ([decision], {"R": release}, {"P": printing, "Q": {**printing, "finish": "reverse-holo"}}),
+        ([decision], {"R": release}, {"P": {**printing, "finish": None}}),
+        ([{**decision, "authority": "external-source"}], {"R": release}, {"P": printing}),
+        ([{**decision, "number": "095/105"}], {"R": release}, {"P": printing}),
+        ([decision], {}, {"P": printing}),
+    ):
+        try:
+            resolve(decisions, [], releases, printings)
+        except collector.ContractError:
+            pass
+        else:
+            raise AssertionError("unsupported source-first finish closure was accepted")
+
+
 def main() -> None:
+    source_first_finish_decision_regressions()
+    m6a = [row for row in read("collector_catalogue.json")["items"]
+           if row["localSetCode"] == "M6a" and row["localizationId"] == "LOCALIZATION:JP:ja"]
+    assert len(m6a) == 1
+    assert (m6a[0]["finish"], m6a[0]["completenessStatus"], m6a[0]["itemKind"]) == (
+        "holo", "owner-adjudicated", "verified-printing")
     for value in (None, 7, "owner upload", "https:///missing-host", "javascript:alert(1)",
                   "https://example.org/a b", "https://[broken", "https://example.org:invalid"):
         assert collector.provenance_url(value) is None, value

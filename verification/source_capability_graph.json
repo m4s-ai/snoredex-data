@@ -19,8 +19,8 @@
       "surfaces": 58,
       "coverageEdges": 61,
       "absenceEdges": 0,
-      "observations": 66,
-      "resolvedVerdictSources": 1648
+      "observations": 67,
+      "resolvedVerdictSources": 1651
     },
     "surfaceStates": {
       "active": 28,
@@ -810,8 +810,8 @@
       "failureState": null,
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Capture certification/registry id and compare a scan when the concrete specimen is promoted.",
+      "lastCheckedAt": "2026-09-29",
+      "freshnessPolicy": "Capture the exact named registry row or certification and compare retained linked slab photographs before promoting the concrete specimen. A card-face image supplies identity only; finish requires the named grading variety.",
       "query": {
         "method": "GET",
         "endpoint": "https://www.psacard.com/psacert/{certificationId}",
@@ -3462,7 +3462,8 @@
       "positiveEvidenceCapabilities": [
         "finish",
         "specimen-existence",
-        "named-variety"
+        "named-variety",
+        "identity"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -3471,12 +3472,13 @@
         "exactScopes": [],
         "rationale": "Population counts and registry omissions never establish non-existence."
       },
-      "knownPositiveObservationId": "obs-psa",
+      "knownPositiveObservationId": "obs-psa-sv4a-145-cert-94474867",
       "boundary": {
         "outsideScope": [
           "ungraded cards",
           "missing registry rows",
-          "varieties not named by the concrete record"
+          "varieties not named by the concrete record",
+          "finish inferred solely from a static slab photograph or from an omitted variety name"
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A missing PSA entry says only that no matching retained registry record was found."
@@ -7216,7 +7218,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:7217454240eb0f89b4e102caf00cf286c927b0f5e6156107e3e9430aa05b8474",
+      "rawRecordHash": "sha256:1e9be903a27a6fe1d68322dcc31c075061224834c349dbfad36b43a0a41b18fe",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7240,7 +7242,7 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 175,
+        "stableIdCount": 176,
         "stableIds": [
           "CN:CS2aC:086/115:base",
           "F0009-P01",
@@ -7373,6 +7375,7 @@
           "SPEC-0473",
           "SPEC-0474",
           "SPEC-0480",
+          "SPEC-0514",
           "SPEC-0521",
           "SPEC-0522",
           "SPEC-0524",
@@ -7419,7 +7422,7 @@
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
         "retrievedAt": "2026-09-29",
-        "usageCount": 195
+        "usageCount": 197
       }
     },
     {
@@ -9613,6 +9616,52 @@
           "rarity": "Common",
           "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
         }
+      }
+    },
+    {
+      "observationId": "obs-psa-sv4a-145-cert-94474867",
+      "surfaceId": "psa-registry",
+      "kind": "known-positive",
+      "queryUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+      "queryParameters": {
+        "certificateNumber": "94474867"
+      },
+      "retrievedAt": "2026-09-29",
+      "expectedIdentifiers": [
+        "94474867",
+        "sv4a",
+        "145/190",
+        "SPEC-0579",
+        "SPEC-0580",
+        "REVERSE HOLO"
+      ],
+      "validatesEdges": [
+        "psa-positive-specimen"
+      ],
+      "outcome": "The retained front establishes Japanese sv4a 145/190 and certificate 94474867; the paired back repeats that unique certificate. Only the explicit PSA named variety establishes reverse-holo. No foil pattern, ungraded-card coverage, negative conclusion or finish-list closure follows.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:d771938066410eb73c469f3eee1279f7f3e64cf4900ae2b7f71890b61cb5d807",
+      "rawRecord": {
+        "certificateNumber": "94474867",
+        "specimenIds": [
+          "SPEC-0579",
+          "SPEC-0580"
+        ],
+        "frontSha256": "sha256:cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+        "backSha256": "sha256:bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+        "language": "Japanese",
+        "localSetCode": "sv4a",
+        "collectorNumber": "145/190",
+        "namedVariety": "REVERSE HOLO",
+        "rowExcerptSha256": "sha256:ca7e57cba07ffbf094b4bd2ff2ae5d39edf61ff53203875cf595b2f5c32361e7",
+        "retainedSource": "verification/evidence/jp-finish-20260929-modern/sources.json",
+        "photographClaimFields": [
+          "identity"
+        ],
+        "registryClaimFields": [
+          "finish"
+        ],
+        "absenceCapability": false
       }
     }
   ],
@@ -23830,6 +23879,30 @@
       ]
     },
     {
+      "sourceKey": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/CzSO1iwUME6JHN7u1BEdTQ.jpg",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/Ss7_CN_6i0OEi2qnRMtIKA.jpg",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
       "providerId": "psa",
       "surfaceId": "psa-registry",
@@ -23840,6 +23913,20 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "identity"
       ]
     },
     {

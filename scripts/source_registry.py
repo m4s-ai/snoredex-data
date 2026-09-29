@@ -194,9 +194,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 2,
         "coverage": "named grading varieties for graded specimens",
         "supportsAbsence": False,
-        "usedFor": ["finish"],
-        "attribution": "Grading variety names from PSA.",
-        "notes": "Population counts and omissions are never used as negative evidence.",
+        "usedFor": ["finish", "identity"],
+        "attribution": "Grading variety names and identified slab photographs from PSA.",
+        "notes": "Retained slab photographs support their visible card/certificate identity; named grading varieties supply finish. Population counts and omissions are never negative evidence.",
     },
     {
         "providerId": "cgc",

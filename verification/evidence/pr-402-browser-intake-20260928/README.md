@@ -67,8 +67,11 @@ The claim is tier-2 `owner-attestation`, separate from the publisher's SPEC-0514
 render. It does not assert a Japanese printed circle, an official Japanese rarity field,
 a physical finish, or rarity for another language.
 
-This closes the draft's last Japanese rarity gap. After the UNP numbering correction below,
-Japan has **14 releases with open research**, including M6a's unresolved physical finish.
+This closes the draft's last Japanese rarity gap. At that pre-finish-research snapshot,
+after the UNP numbering correction below, Japan had **14 releases with open research**.
+The later [Japanese finish round](../jp-finish-20260929/README.md) confirms M6a as
+owner-attested Holo with an owner-closed finish list, and sv4a 145 as PSA Reverse Holo;
+the draft now has **12 remaining Japanese releases**. M6a is no longer an open finish task.
 Main retains one Japanese rarity gap until this draft is merged.
 
 ## PJU and EXS numbering follow-up — 2026-09-29
