@@ -1,3 +1,4 @@
+<!-- doc: role=retained Thai and Indonesian evidence intake; stage=task -->
 # Thai and Indonesian owner evidence — 2026-09-29
 
 Scoped follow-up to merged PR #402, for issues #262 and #258. The owner supplied two
