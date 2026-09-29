@@ -1,6 +1,9 @@
 <!-- doc: role=owner-confirmed Japanese sI100 342 Non-Holo photograph intake; stage=task -->
 # Japanese sI100 342/414 Non-Holo — 2026-09-29
 
+Snapshot at c8a5545: the one remaining Japanese gap below was subsequently resolved by
+the [separate sI100 341 intake](../owner-si341-nonholo-20260929/README.md).
+
 The collection owner supplied this photograph with the exact statement **“non holo”**.
 [SPEC-0592](../../specimens/SPEC-0592.png) retains the unchanged original PNG at 1200×1600.
 The [source ledger](sources.json) records its filename, hash and field evidence classes;

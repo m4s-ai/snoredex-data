@@ -57,12 +57,12 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 498,
-      "withOnlyMarketplaceClaim": 31,
+      "withConfirmedFinish": 499,
+      "withOnlyMarketplaceClaim": 30,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 314,
+      "withNonHolo": 315,
       "withHolo": 243,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
@@ -33354,20 +33354,55 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, complete printed number 341/414 and Illus. Oswaldo KATO are visible. The Snorlax resting among apples artwork matches existing sI100 341 V1 (U0652). No original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0593.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0593"
+          ],
+          "image": "verification/specimens/SPEC-0593.png",
+          "printingId": "F0375-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -33385,7 +33420,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0375-P01"
+          "printingId": "F0375-P02"
         }
       ],
       "unresolved": [

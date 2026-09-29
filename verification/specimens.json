@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 592,
+  "count": 593,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12215,6 +12215,31 @@
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0656"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "cardSize": "standard",
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: non holo"
+      }
+    },
+    {
+      "specimenId": "SPEC-0593",
+      "setCode": "sI100",
+      "number": "341",
+      "variant": "V1",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph; original image visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0593.png",
+      "photographSource": "user-supplied:codex-clipboard-23320f54-d88d-42a8-8b5f-a3a6c4f12e0c.png",
+      "photographSha256": "sha256:6a0e73e75581ba24d8566ae4e39e2045a40ade6933adf6285ea72a2cd2a40255",
+      "observed": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, complete printed number 341/414 and Illus. Oswaldo KATO are visible. The Snorlax resting among apples artwork matches existing sI100 341 V1 (U0652). No original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "U0652"
       ],
       "physicalObservation": {
         "finish": "non-holo",

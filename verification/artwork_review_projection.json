@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "d2f858c898c9f1d694836dbfdf77087b57a7de85752f2c95d33c857cf2718a7d",
+  "projectionVersion": "0449f7a8a090a611c6c5cd63bd0e373e0a46739ad41726e891ebe7a9cd74a754",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 788,
-    "sourceObservations": 3045
+    "physicalPrintings": 789,
+    "sourceObservations": 3048
   },
   "groups": [
     {
@@ -42586,13 +42586,52 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7c94784ac860820a0eb37933",
+              "semanticPrintingId": "PRINTING:7c94784ac860820a0eb37933",
+              "cardReleaseId": "RELEASE:JP:Japanese:sI100:341:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0375",
+              "sourcePrintingId": "F0375-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7c94784ac860820a0eb37933",
+              "specimenIds": [
+                "SPEC-0593"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, complete printed number 341/414 and Illus. Oswaldo KATO are visible. The Snorlax resting among apples artwork matches existing sI100 341 V1 (U0652). No original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0593.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Oswaldo KATO",
             "variant": "V1",
             "finish": [
+              "non-holo",
               "reverse-holo"
             ],
             "foilPattern": [],
@@ -42622,9 +42661,38 @@
               "originalHash": "47f338e90322f4102b49b3c33b83b97dd753557c37061284f1bd475bf1e09b80",
               "previewSrc": "images/previews/SPEC-0215.png?v=a44acfdc04169dd940e3ef2a55170be4d67b28278dac04a90b934f3ed0021e77",
               "thumbnailSrc": "images/thumbs/SPEC-0215.png?v=4a5662d50765f840bf9d5a749087df466e6b29576a1393ef7d7dcdb919c1f7f3"
+            },
+            {
+              "src": "verification/specimens/SPEC-0593.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0593",
+              "contentHash": "6a0e73e75581ba24d8566ae4e39e2045a40ade6933adf6285ea72a2cd2a40255",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6a0e73e75581ba24d8566ae4e39e2045a40ade6933adf6285ea72a2cd2a40255",
+              "previewSrc": "images/previews/SPEC-0593.png?v=4517ed63c6dc3755535fe8309c452c96312471bae7f94e9213e3191dbab9e139",
+              "thumbnailSrc": "images/thumbs/SPEC-0593.png?v=ff9180b630e0f1dd28267642b6e2da8de43306eb10e5f3702df65608a9655e36"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0375-P01:0:7651ef1cb89b57ad",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, complete printed number 341/414 and Illus. Oswaldo KATO are visible. The Snorlax resting among apples artwork matches existing sI100 341 V1 (U0652). No original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list. Retained as SPEC-0593.",
+              "contentHash": "aff5ce87bb01df40137d4286ecef501556004a9aa4c5a7efd1abb55e7c0cf136",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0375-P01:1:eefb88f741cd114f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "4596f513faffe0f3b0daf4f361e8f0dd3bbbe321af4ba3f2682e1bc64479aa2a",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0215",
               "kind": "specimen",
@@ -42633,6 +42701,15 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sI100 341 (V1). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
               "contentHash": "313151c311eabec00e98f06d870a913953e9dce845a3ed16e2c39e9620f289a2",
               "image": "verification/specimens/SPEC-0215.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0593",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Japanese カビゴン HP160, ヘビーインパクト 80, SI set symbol, regulation E, complete printed number 341/414 and Illus. Oswaldo KATO are visible. The Snorlax resting among apples artwork matches existing sI100 341 V1 (U0652). No original listing URL or physical ownership was supplied. The collection owner explicitly confirms Non-Holo. This positive confirmation does not close the finish list.",
+              "contentHash": "3481e8667a23c78825126fcb08a9e553f50edda4f88ee812d26a57315a642f86",
+              "image": "verification/specimens/SPEC-0593.png"
             },
             {
               "observationId": "unit:U0652",
