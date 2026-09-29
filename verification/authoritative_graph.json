@@ -11420,6 +11420,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:57cc111e836f4561a66b8abc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:57cc111e836f4561a66b8abc",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0506-P01",
+        "semanticPrintingId": "PRINTING:57cc111e836f4561a66b8abc",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+        "materializedTargetId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0534"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:58782ebaef7ad3047bcc4bdf",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -35454,6 +35474,23 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0533",
         "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:sc1a T:127/154:Snorlax-Collect-Collapse",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0533"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0534",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0534",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0534",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:57cc111e836f4561a66b8abc, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc"
       }
     },
     {
@@ -96978,6 +97015,30 @@
         "sourceFinishUnitId": "F0546",
         "sourcePrintingId": "F0546-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:57b8517f7d44672a3e940f69"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+        "semanticPrintingId": "PRINTING:57cc111e836f4561a66b8abc",
+        "cardReleaseId": "RELEASE:TH:Thai:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0506",
+        "sourcePrintingId": "F0506-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:57cc111e836f4561a66b8abc",
+        "specimenIds": [
+          "SPEC-0534"
+        ]
       }
     },
     {
@@ -173936,6 +173997,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:57cc111e836f4561a66b8abc",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:58782ebaef7ad3047bcc4bdf",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -186754,6 +186825,16 @@
       "toId": "PHYSICAL:specimen:SPEC-0533",
       "provenance": {
         "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0534",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "provenance": {
+        "specimenId": "SPEC-0534"
       }
     },
     {
@@ -233467,6 +233548,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:TEU:120:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:57cc111e836f4561a66b8abc",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "provenance": {}
     },
     {
@@ -282554,6 +282651,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0506-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:57cc111e836f4561a66b8abc",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0507-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0507-P01",
@@ -299297,6 +299401,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0534",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:57cc111e836f4561a66b8abc, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0538",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -299549,14 +299660,14 @@
     }
   ],
   "summary": {
-    "entities": 8273,
-    "edges": 12303,
-    "migrationInputs": 2911,
+    "entities": 8276,
+    "edges": 12307,
+    "migrationInputs": 2913,
     "migrationDispositions": {
       "bounded-contradicted": 92,
-      "candidate-needs-evidence": 306,
+      "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1613,
+      "established-and-mapped": 1614,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299564,9 +299675,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2085,
+    "candidateClaims": 2087,
     "cardReleases": 633,
-    "physicalPrintings": 796,
+    "physicalPrintings": 797,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

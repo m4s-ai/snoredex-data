@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 500,
+      "withConfirmedFinish": 501,
       "withOnlyMarketplaceClaim": 29,
-      "pendingFinish": 32,
+      "pendingFinish": 31,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 315,
+      "withNonHolo": 316,
       "withHolo": 244,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 57,
-      "withUnresolvedProductMapping": 58,
-      "withAnyUnresolvedDetail": 136,
+      "withUnresolvedProductMapping": 57,
+      "withAnyUnresolvedDetail": 135,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -42616,23 +42616,58 @@
           "image": "images/svM_094_Snorlax_ex_801337.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://down-th.img.susercontent.com/file/th-11134207-7rasc-m5zlwj1xn4jafd@resize_w450_nl.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Retained Magic Poke Shop product depiction shows Thai Snorlax ex HP260, printed svM T 094/175. The image supports identity. On 2026-09-29 the collection owner explicitly confirms this exact card as Non-Holo according to the picture; the finish is separately owner-attested. The original photograph bytes and provenance remain unchanged. This positive observation does not close the finish list. Retained as SPEC-0534.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0534"
+          ],
+          "image": "verification/specimens/SPEC-0534.png",
+          "printingId": "F0506-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0507",
