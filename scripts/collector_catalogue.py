@@ -311,6 +311,7 @@ def legacy_match_for_physical(
     reviewed_release_rekeys: set[tuple[str, str]],
     legacy_by_semantic: dict[bytes, dict[str, Any]],
     legacy_by_core: dict[bytes, list[dict[str, Any]]],
+    physical_semantics: frozenset[bytes] = frozenset(),
 ) -> dict[str, Any] | None:
     """Match predecessor state semantically; never let an ordinal id steal a row."""
     release_id = str(physical.get("cardReleaseId") or "")
@@ -318,13 +319,8 @@ def legacy_match_for_physical(
         physical, legacy_by_source.get(physical.get("sourcePrintingId")),
         reviewed_release_rekeys,
     )
-    if source_match:
-        return source_match
-    semantic = legacy_by_semantic.get(
-        printing_semantic_key(release_id, physical)
-    )
-    if semantic:
-        return semantic
+    physical_key = printing_semantic_key(release_id, physical)
+    match = source_match or legacy_by_semantic.get(physical_key)
     candidates = legacy_by_core.get(
         printing_semantic_core_key(release_id, physical), []
     )
@@ -333,7 +329,24 @@ def legacy_match_for_physical(
         if physical.get("edition") is None
         or row.get("edition") in (None, "—", physical.get("edition"))
     ]
-    return compatible[0] if len(compatible) == 1 else None
+    if match is None and len(compatible) == 1:
+        match = compatible[0]
+    # Reserve an exact edition match before considering edition-agnostic evidence.
+    # Collect all physical keys up front so iteration order cannot steal the row.
+    if match:
+        legacy_key = printing_semantic_key(release_id, match)
+        if legacy_key != physical_key and legacy_key in physical_semantics:
+            return None
+    return match
+
+
+def physical_printing_indexes(physicals):
+    by_source, semantics = {}, set()
+    for row in physicals.values():
+        semantics.add(printing_semantic_key(row["cardReleaseId"], row))
+        if row.get("sourcePrintingId"):
+            by_source[row["sourcePrintingId"]] = row
+    return by_source, frozenset(semantics)
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -1122,9 +1135,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             unit_by_printing[printing["printingId"]] = unit
             printing_by_id[printing["printingId"]] = printing
 
-    physical_by_source = {
-        row["sourcePrintingId"]: row for row in physicals.values() if row.get("sourcePrintingId")
-    }
+    physical_by_source, physical_semantics = physical_printing_indexes(physicals)
     candidate_by_source = {
         row["sourceId"]: row for row in claims.values()
         if row.get("sourceKind") == "finish-printing-record"
@@ -1416,7 +1427,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         source_printing_id = physical.get("sourcePrintingId")
         old = legacy_match_for_physical(
             physical, legacy_by_source, release_rekeys,
-            legacy_by_semantic, legacy_by_core
+            legacy_by_semantic, legacy_by_core, physical_semantics
         )
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]

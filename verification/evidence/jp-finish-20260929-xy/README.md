@@ -2,6 +2,10 @@
 
 # Japanese XY-era Snorlax finish research — 2026-09-29
 
+**Historical research snapshot before the owner photo batch.** All four targets below later gained
+[owner-confirmed Non-Holo evidence](../owner-nonholo-20260929/README.md). Unresolved outcomes below
+describe only this search round and are not current requests for finish evidence.
+
 This reference records a bounded search for positive physical-finish evidence for four Japanese
 Snorlax printings in issue 259. The exact card identity and finish-unit mappings below were checked
 against `verification/units.json` and `verification/finish_units.json` on 2026-09-29. Every current

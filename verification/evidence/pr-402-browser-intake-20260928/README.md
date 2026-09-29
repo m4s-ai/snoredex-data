@@ -96,7 +96,7 @@ UNP therefore has no remaining tracked-field gap. Its former number task was an 
 
 The collection owner explicitly confirms: “Rocket’s Snorlax – G2 also unnumbered im japanischen wie PJU”. The retained [SPEC-0194](../../specimens/SPEC-0194.jpg) shows the complete Japanese Rocket's Snorlax face with Pokédex No.143 and no set collector number. The existing `RELEASE:JP:Japanese:G2:unnumbered:Rockets-Snorlax-Restless-Sleep-Collapse` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`; its null collector-number fields are correct.
 
-The G2 numbering task is complete. Its physical-printing candidate `F0132-P01` remains `marketplace-claimed`, so the separate finish-evidence task stays open. No canonical identity, card number, finish or stable ID changes. Unique remaining-release counts do not fall because G2 still needs physical evidence.
+The G2 numbering task is complete. At this numbering-review snapshot its physical-printing candidate `F0132-P01` remained `marketplace-claimed`. The later [owner Non-Holo intake](../owner-nonholo-20260929/README.md) confirms the finish through SPEC-0590; G2 now has no remaining tracked-field gap. The numbering review itself changed no canonical identity, number or finish.
 
 ## DP1 numbering follow-up — 2026-09-29
 
@@ -104,7 +104,7 @@ The owner supplied the [Diamond & Pearl Battle Pokédex explanation](https://bul
 
 The existing `RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector number is correct; neither 174 nor 143 replaces it. The dated 2026-09-28 intake observations in the manifest, link record and SPEC-0570 describe the collector-number question as unresolved. This follow-up supersedes that pre-review uncertainty and closes the numbering task. Canonical identity, stable IDs and number fields need no change.
 
-Both projected DP1 items remain research placeholders without a verified physical finish. All five Japanese numbering reviews are now complete; Japanese numbering gaps fall from one to zero and parent numbering gaps from six to five. The separate DP1 finish task remains open, so the unique remaining-release counts stay unchanged.
+At this numbering-review snapshot both projected DP1 items remained research placeholders. All five Japanese numbering reviews were complete, with Japanese numbering gaps falling from one to zero and parent numbering gaps from six to five. The later [owner Non-Holo intake](../owner-nonholo-20260929/README.md) confirms DP1's finish through SPEC-0581; DP1 now has no remaining tracked-field gap. The snapshot counts below predate that finish determination.
 
 The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-DP1-follow-up draft head `4e8bcd6b74309142d975359637aeac7f7de1df64`, is:
 

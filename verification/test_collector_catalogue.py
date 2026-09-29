@@ -380,6 +380,21 @@ def main() -> None:
         {(old_release, rekeyed_release["cardReleaseId"])}, {}, {}
     ) is legacy_row
 
+    # GH 33: a generic API printing must not borrow the checklist row that an
+    # independently observed 1st Edition printing already matches exactly.
+    scope = shifted_physical["cardReleaseId"]
+    generic = {**shifted_physical, "edition": None, "sourcePrintingId": "generic"}
+    exact_key = collector.printing_semantic_key(scope, shifted_physical)
+    for order in permutations([generic, shifted_physical]):
+        physical_keys = {collector.printing_semantic_key(scope, row) for row in order}
+        matches = [collector.legacy_match_for_physical(
+            row, {}, set(), {exact_key: legacy_row},
+            {collector.printing_semantic_core_key(scope, legacy_row): [legacy_row]},
+            frozenset(physical_keys),
+        ) for row in order]
+        assert sum(row is legacy_row for row in matches) == 1
+        assert matches[order.index(generic)] is None
+
     graph = read("verification/authoritative_graph.json")
     catalogue = read("collector_catalogue.json")
     migrations = read("collector_migrations.json")

@@ -66,6 +66,10 @@ The retained owner source is `owner-jungle-number-finish-20260910` in
 
 ### Recording what a scan shows (#150)
 
+Ordinary surface glare and printed pastel gradients are not positive holo features. The owner's
+[20th 047/072 correction and Non-Holo intake](evidence/owner-nonholo-20260929/README.md)
+retains the explicit determination separately from those image features.
+
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
 had no finish field, so what the photograph showed could only be written as prose that no check
 reads. A specimen may now carry an optional `physicalObservation`:

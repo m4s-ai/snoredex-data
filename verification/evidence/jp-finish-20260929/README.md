@@ -1,6 +1,10 @@
 <!-- doc: role=retained Japanese finish research and acceptance; stage=task -->
 # Japanese finish research — 2026-09-29
 
+**Research snapshot at 5ab43d1, before the later owner photo batch.** Its 12 remaining targets
+were reduced to three by the [Non-Holo intake](../owner-nonholo-20260929/README.md).
+The dated search outcomes below describe this earlier round, not the current remaining-work list.
+
 Three `gpt-6-luna` subagents, each with `max` reasoning, researched the 14 Japanese
 releases with unresolved physical finishes. The parent reviewed the positive evidence
 and applied it to draft PR #402. This is a bounded research round, not a complete finish inventory.

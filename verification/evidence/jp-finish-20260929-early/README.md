@@ -1,6 +1,10 @@
 <!-- doc: role=bounded Japanese finish research record; stage=task -->
 # Japanese Snorlax finish research — 2026-09-29 (early round)
 
+**Historical research snapshot before the owner photo batch.** All five targets below later gained
+[owner-confirmed Non-Holo evidence](../owner-nonholo-20260929/README.md). Unresolved outcomes below
+describe only this search round and are not current requests for finish evidence.
+
 This bundle records a bounded review of five unresolved Japanese printings. The sources below
 establish card identity where stated, but this round found no source that positively establishes a
 physical finish. Marketplace labels, silent grading labels, absent glare and image alt text were not

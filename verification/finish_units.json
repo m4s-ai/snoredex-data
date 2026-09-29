@@ -57,12 +57,12 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 487,
-      "withOnlyMarketplaceClaim": 42,
+      "withConfirmedFinish": 496,
+      "withOnlyMarketplaceClaim": 33,
       "pendingFinish": 32,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 311,
+      "withNonHolo": 313,
       "withHolo": 243,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
@@ -275,20 +275,55 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP130, にどね and たおれこみプレス 120; 20th 047/072 and Mitsuhiro Arita. The broad white surface reflection is not a holo feature. The earlier assistant inference of a possible holo finish from that reflection is withdrawn; the owner explicitly corrects it and confirms Non-Holo. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0588.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0588"
+          ],
+          "image": "verification/specimens/SPEC-0588.png",
+          "printingId": "F0002-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -306,7 +341,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0002-P01"
+          "printingId": "F0002-P02"
         }
       ],
       "unresolved": [
@@ -2558,13 +2593,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -2575,17 +2610,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0583.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0583"
+          ],
+          "image": "verification/specimens/SPEC-0583.png",
           "printingId": "F0028-P01"
         }
       ],
@@ -9198,13 +9253,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -9215,17 +9270,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0581.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0581"
+          ],
+          "image": "verification/specimens/SPEC-0581.png",
           "printingId": "F0101-P01"
         }
       ],
@@ -9334,13 +9409,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -9351,17 +9426,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0584.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0584"
+          ],
+          "image": "verification/specimens/SPEC-0584.png",
           "printingId": "F0104-P01"
         }
       ],
@@ -12375,13 +12470,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -12392,17 +12487,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Challenge-from-the-Darkness/Rockets-Snorlax-CFTD",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese R団のカビゴン Lv.40 HP90, わるいねぞう and たおれこむ 20, GYM symbol and Shin-ichi Yoshida. No.143 at the lower right is the National Pokédex identifier; the Japanese G2 card has no printed collector number. This is the Japanese image supplied after the English comparison. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0590.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0590"
+          ],
+          "image": "verification/specimens/SPEC-0590.png",
           "printingId": "F0132-P01"
         }
       ],
@@ -13196,6 +13311,42 @@
             }
           ],
           "printingId": "F0142-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "English Rocket's Snorlax HP90, Restless Sleep and Collapse 20; Gym Heroes 33/132. A 1st Edition stamp is visible below the illustration. This English card is separate from Japanese G2 and supplies no Japanese finish evidence. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0585.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity",
+                "edition"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0585"
+          ],
+          "edition": "1st Edition",
+          "image": "verification/specimens/SPEC-0585.png",
+          "printingId": "F0142-P02"
         }
       ],
       "unresolved": []
@@ -27206,13 +27357,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -27223,17 +27374,37 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0582.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0582"
+          ],
+          "image": "verification/specimens/SPEC-0582.png",
           "printingId": "F0301-P01"
         },
         {
@@ -52825,20 +52996,61 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "distribution-promo",
+              "text": "丸美屋"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP120, ふくよかボディ and はねとばす 50+, printed 149/XY-P and Kouki Saitou. The red 丸美屋 distribution mark is visible at lower left. The plastic sleeve is distinct from the card surface. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0587.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0587"
+          ],
+          "image": "verification/specimens/SPEC-0587.png",
+          "printingId": "F0619-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -52856,7 +53068,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0619-P01"
+          "printingId": "F0619-P02"
         }
       ],
       "unresolved": [
@@ -53153,13 +53365,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -53182,6 +53394,42 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0625-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP140, ねがえり 30+ and のみこむ 50; XY10 057/078 C, Tomokazu Komiya and visible 1st Edition mark at lower left. Pastel background colors do not establish foil. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0589.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity",
+                "edition"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0589"
+          ],
+          "edition": "1st Edition",
+          "image": "verification/specimens/SPEC-0589.png",
+          "printingId": "F0625-P02"
         }
       ],
       "unresolved": []
@@ -53311,13 +53559,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -53340,6 +53588,42 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0628-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Japanese カビゴン HP130, にどね and たおれこみプレス 120; XY2 066/080 U, Mitsuhiro Arita and visible 1st Edition mark at lower left. Pastel background colors are not treated as foil evidence. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0586.",
+              "retrievedAt": "2026-09-29",
+              "claimFields": [
+                "identity",
+                "edition"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-29",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0586"
+          ],
+          "edition": "1st Edition",
+          "image": "verification/specimens/SPEC-0586.png",
+          "printingId": "F0628-P02"
         }
       ],
       "unresolved": []
