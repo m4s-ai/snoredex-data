@@ -67,9 +67,9 @@ The claim is tier-2 `owner-attestation`, separate from the publisher's SPEC-0514
 render. It does not assert a Japanese printed circle, an official Japanese rarity field,
 a physical finish, or rarity for another language.
 
-This closes the draft's last Japanese rarity gap. Japan still has **15 releases with open
-research**, because M6a's physical finish remains unresolved. Main retains one Japanese
-rarity gap until this draft is merged.
+This closes the draft's last Japanese rarity gap. After the UNP numbering correction below,
+Japan has **14 releases with open research**, including M6a's unresolved physical finish.
+Main retains one Japanese rarity gap until this draft is merged.
 
 ## PJU and EXS numbering follow-up — 2026-09-29
 
@@ -81,13 +81,19 @@ The same correction applies to EXS Snorlax. The supplied [Elite Fourum discussio
 
 The existing `RELEASE:JP:Japanese:EXS:unnumbered:Snorlax-Guard-Roll-Over` also has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`. Its null collector-number fields remain correct, and the two existing physical printings `F0107-P01` and `F0107-P02` remain distinct. No canonical identity, number, rarity or finish is changed by this research correction.
 
-The research audit accepts these two positively reviewed unnumbered identities instead of counting their null numbers as missing. This is specific to PJU and EXS; other empty numbers still require their own evidence and reconciliation. It establishes no additional finish or exhaustive finish list.
+The research audit accepts the positively reviewed unnumbered identities PJU, EXS and UNP (below) instead of counting their null numbers as missing. Other empty numbers still require their own evidence and reconciliation. This establishes no additional finish or exhaustive finish list.
 
-The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-EXS-follow-up draft head `5a29a674edff53acd68eb52ad24f8b3bdd5aa0cc`, is:
+## UNP numbering follow-up — 2026-09-29
+
+The collection owner explicitly confirms: “Hungry Snorlax – UNP auch unnumbered wie die anderen PJU und EXS”. The retained [SPEC-0193](../../specimens/SPEC-0193.jpg) shows the complete Japanese Hungry Snorlax card face without a collector number. The existing `RELEASE:JP:Japanese:UNP:unnumbered:None` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"`; its collector-number fields correctly remain null. Its mapped Hungry Snorlax Work, Promo rarity, 1997-12-10 date, retained image and verified speckled Holo printing `F0575-P01` are already present on main and the draft.
+
+UNP therefore has no remaining tracked-field gap. Its former number task was an audit error, not a missing canonical identity or a request for another photograph. The stable release/item/printing IDs and canonical stores need no change.
+
+The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-UNP-follow-up draft head `9a6574d82097ca492bd4075f40b11e81040eeffb`, is:
 
 | Scope | Main gap-free / remaining | Including draft #402 gap-free / remaining |
 |---|---:|---:|
-| Japanese, 67 releases | 52 / 15 | 52 / 15 |
-| Parent research, 633 releases | 509 / 124 | 512 / 121 |
+| Japanese, 67 releases | 53 / 14 | 53 / 14 |
+| Parent research, 633 releases | 510 / 123 | 513 / 120 |
 
-The seven open issue bodies and private TODO are reconciled with this rule. PJU's and EXS's numbering tasks are complete; the three other Japanese numbering reviews remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
+The seven open issue bodies and private TODO are reconciled with this rule. PJU's, EXS's and UNP's numbering tasks are complete; the two other Japanese numbering reviews (G2 and DP1) remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
