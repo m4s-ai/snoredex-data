@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "135c4b2baedd2b687e4e47a9beb5b5891efebf908d35db2d5576559a7dcffeea",
+  "projectionVersion": "d55153fde13e2cf0205547f3b9235ff40c18f1ea76acb085ba3bc3706212ef1a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -80698,21 +80698,21 @@
               ],
               "sources": [
                 {
-                  "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
-                  "sourceType": "Inspected physical specimen photograph",
-                  "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
-                  "retrievedAt": "2026-08-28",
-                  "claimFields": [
-                    "identity"
-                  ]
-                },
-                {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
                     "finish"
                   ],
                   "retrievedAt": "2026-09-29",
-                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties."
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained official pokémon asia thai card-detail render supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+                  "sourceType": "official Pokémon Asia Thai card-detail render",
+                  "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
+                  "retrievedAt": "2026-08-28",
+                  "claimFields": [
+                    "identity"
+                  ]
                 }
               ]
             }
@@ -80764,21 +80764,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0328-P02:0:28a0169e7b996c36",
-              "kind": "finish",
-              "provider": "Inspected physical specimen photograph",
-              "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
-              "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
-              "contentHash": "8431fcf5aa4b238b9f982385305dd7deee9b81e6af2cdb771dbb70631af9af61",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0328-P02:1:8cdf1af92ead6746",
+              "observationId": "finish:F0328-P02:0:9b4b881a62eeafb2",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
-              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected physical specimen photograph supports card identity and any independently visible properties.",
-              "contentHash": "8a6818eb7d0336a0edee6dd7624e5768bb562cfbe898978721463146156f090e",
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained official pokémon asia thai card-detail render supports card identity and any independently visible properties.",
+              "contentHash": "c0fcc0315ea51338cea6229c6042f407f84835df6b734541272bbc1d2613a0a0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0328-P02:1:bfb364d1d4638632",
+              "kind": "finish",
+              "provider": "official Pokémon Asia Thai card-detail render",
+              "url": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
+              "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates. Retained as SPEC-0264.",
+              "contentHash": "91dc481b98fcdc1c85881e39f857ee0cf23f99dd2c7b325d586db40221ca0fed",
               "image": null
             },
             {

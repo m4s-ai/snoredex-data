@@ -32,6 +32,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Callable
+from specimen_groups import owner_attestation_date
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1016,7 +1017,7 @@ def record_specimen_claim(url, source_type, provider, dimension, stable_id, retr
         if not physical.get(field):
             continue
         if field in (physical.get("ownerAttestedFields") or []):
-            record(None, "Owner attestation", field, stable_id, physical.get("ownerAttestedAt", retrieved),
+            record(None, "Owner attestation", field, stable_id, owner_attestation_date(physical, retrieved),
                    provider_id="owner-attestation")
             continue
         inspected = surface_supports_observed_property(url, provider, surfaces, field)

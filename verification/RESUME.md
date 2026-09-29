@@ -57,7 +57,8 @@ and never repair missing projections.
 
 Keep a reviewed JSON manifest for each intake batch and link it to the owning issue. Each row names `setCode`, `number`, `variant`,
 `language`, `heldBy`, `inspectedFrom`, `observed`, and `recordedAt`; seller rows also need
-`listingUrl`. For image-based findings, add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
+a `listingUrl` or a retained direct HTTP(S) source-image URL in `photographSource`. Preserve a known
+listing URL, but never invent one when only the image URL is available. For image-based findings, add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
 when the retained image positively establishes a physical treatment. An identity-legible database
 scan may omit `physicalObservation` entirely when it establishes the localized card but not its
 finish, edition, marking, distribution, or size; omission is never evidence of non-holo. An optional

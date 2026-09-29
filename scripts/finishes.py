@@ -28,7 +28,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from source_registry import provenance_url, specimen_markings
-from specimen_groups import group_specimens, photographed_fields
+from specimen_groups import group_specimens, photographed_fields, owner_attestation_date
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -551,6 +551,8 @@ def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
         source_type = "Retail listing"
     elif "third-party scan archive" in holder:
         source_type = "Third-party scan archive"
+    elif holder in {"publisher or database", "official publisher"}:
+        source_type = specimen.get("inspectedFrom") or "Publisher/database reference image"
     elif "owner" in holder:
         source_type = "Owner-supplied physical card photograph"
     else:
@@ -585,9 +587,9 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
         sources.append({
             "sourceType": "Owner attestation (domain expert)",
             "claimFields": owner_fields,
-            "retrievedAt": observation.get("ownerAttestedAt", specimen.get("recordedAt")),
+            "retrievedAt": owner_attestation_date(observation, specimen.get("recordedAt")),
             "evidence": (
-                f"The collection owner's explicit {observation.get('ownerAttestedAt', specimen.get('recordedAt', ''))} confirmation "
+                f"The collection owner's explicit {owner_attestation_date(observation, specimen.get('recordedAt', ''))} confirmation "
                 f"establishes the specimen's {established}; the retained {photograph_label} "
                 "supports card identity and any independently visible properties."
             ),

@@ -10,6 +10,10 @@ PHYSICAL_FIELDS = ("finish", "edition", "foilPattern", "markings", "markingRole"
                    "distribution", "cardSize")
 
 
+def owner_attestation_date(observation, recorded_at):
+    return observation.get("ownerAttestedAt") or recorded_at
+
+
 def specimen_identity(record):
     return (record.get("setCode"), str(record.get("number", "")).split("/", 1)[0],
             record.get("variant") or "base", record.get("language"))

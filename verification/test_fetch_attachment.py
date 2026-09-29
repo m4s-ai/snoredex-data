@@ -503,6 +503,23 @@ def main() -> None:
     assert [(a[2], a[4], kw["provider_id"]) for a, kw in calls] == [
         ("identity", "2026-08-24", "seller-listing-photo"),
         ("finish", "2026-09-29", "owner-attestation")]
+    null_date = {**direct["physicalObservation"], "ownerAttestedAt": None}
+    fetch_attachment.validate_observation(null_date, "SPEC-9998")
+    null_sources = finishes.specimen_sources(direct, null_date)
+    assert null_sources[1]["retrievedAt"] == direct["recordedAt"]
+    assert "None" not in null_sources[1]["evidence"]
+    null_calls = []
+    source_registry.record_specimen_sources(direct, [], sources[0]["sourceType"], null_date,
+        lambda *a, **kw: null_calls.append(a), source_registry.specimen_surfaces())
+    assert all(a[4] == direct["recordedAt"] for a in null_calls)
+    for holder, label in (("publisher or database", "official Pokémon Asia Thai card-detail render"),
+                          ("publisher or database", "database scan"),
+                          ("official publisher", "Official localized card-gallery render")):
+        render = {**direct, "heldBy": holder, "inspectedFrom": label}
+        render_sources = finishes.specimen_sources(render, null_date)
+        assert render_sources[0]["sourceType"] == label
+        assert render_sources[0]["claimFields"] == ["identity"]
+        assert render_sources[1]["claimFields"] == ["finish"]
     for bad in ("2026-02-30", "20260929", 20260929):
         expect_failure(lambda: fetch_attachment.validate_observation(
             {**later["physicalObservation"], "ownerAttestedAt": bad}, "SPEC-9998"))
