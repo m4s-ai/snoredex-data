@@ -34101,6 +34101,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0259",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0259",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0259",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0259",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0259",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0259"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0319",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -102584,6 +102601,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0257",
         "specimenIds": [
           "SPEC-0257"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0259",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0259",
+        "cardReleaseId": "RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29: scA T 084/135 ist non-holo auf dem bild zu erkennen.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0259",
+        "specimenIds": [
+          "SPEC-0259"
         ]
       }
     },
@@ -186060,6 +186101,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0259",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0259",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0319",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -237231,6 +237282,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:sc1D T:133/164:Snorlax-V-Swallow-Falling-Down",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0259",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0259",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0259",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
     },
     {
@@ -298901,6 +298968,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0259",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0259",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0319",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -299734,14 +299808,14 @@
     }
   ],
   "summary": {
-    "entities": 8278,
-    "edges": 12310,
-    "migrationInputs": 2914,
+    "entities": 8280,
+    "edges": 12313,
+    "migrationInputs": 2915,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1615,
+      "established-and-mapped": 1616,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299749,9 +299823,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2088,
+    "candidateClaims": 2089,
     "cardReleases": 633,
-    "physicalPrintings": 798,
+    "physicalPrintings": 799,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

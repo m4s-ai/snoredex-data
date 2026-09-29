@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:75f49c51a38c6f38e35f68036217f1e76516b57cc89c47cb8378eca4de712074",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
+    "toFingerprint": "sha256:bc787517f1e4a33d4c725e47e2090d02d0bcd6fe386aee005a9c9abb27c83305",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
+      "toFingerprint": "sha256:bc787517f1e4a33d4c725e47e2090d02d0bcd6fe386aee005a9c9abb27c83305",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12395,7 +12395,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
+      "toFingerprint": "sha256:bc787517f1e4a33d4c725e47e2090d02d0bcd6fe386aee005a9c9abb27c83305",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30483,6 +30483,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-e045670e-5b5a-56df-bc92-48e108a31264",
+      "toItemIds": [
+        "item-2b492c1a-987c-5e4b-9804-71b830b426ab"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-ca8048a9-24a4-57b4-ab29-fda38e2b2d92",
       "toItemIds": [
         "item-ab69113c-b6ca-5c68-9240-5b89f5131184"
@@ -40063,7 +40072,7 @@
         "cardReleaseId": "RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
         "disposition": "projected",
         "targetItemIds": [
-          "item-e045670e-5b5a-56df-bc92-48e108a31264"
+          "item-2b492c1a-987c-5e4b-9804-71b830b426ab"
         ],
         "reason": null
       },
@@ -47426,6 +47435,11 @@
         "targetItemId": "item-21e80c6f-7b93-53fc-b448-27cc38e6d547"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0259",
+        "disposition": "projected",
+        "targetItemId": "item-2b492c1a-987c-5e4b-9804-71b830b426ab"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0323",
         "disposition": "projected",
         "targetItemId": "item-0381b02e-5db5-5c08-9a00-6a0abaf88dbe"
@@ -47599,7 +47613,7 @@
     "summary": {
       "legacyChecklistRows": 904,
       "cardReleases": 633,
-      "physicalPrintings": 798,
+      "physicalPrintings": 799,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

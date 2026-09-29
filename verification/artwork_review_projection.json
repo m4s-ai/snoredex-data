@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "86cd5cc0d4fa499a45245170a71b65389777c0ce9eca2920a140fdfd2ff0585f",
+  "projectionVersion": "97ba45568ea98b0611ba0ffe90992759434a77b102bb34f20e7e8e5884f70f3d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 798,
+    "physicalPrintings": 799,
     "sourceObservations": 3057
   },
   "groups": [
@@ -34992,13 +34992,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0259",
+              "cardReleaseId": "RELEASE:TH:Thai:scA T:084/135:Snorlax-Gormandize-Body-Slam",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: scA T 084/135 ist non-holo auf dem bild zu erkennen.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0259",
+              "specimenIds": [
+                "SPEC-0259"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -35040,8 +35062,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/card-search/detail/1806/",
-              "evidence": "Complete official Thai render for Snorlax scA T 084/135 (base). The printed Thai name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "327f32e167c87d9dd00c4b057233b683e6ce2c9c34a4ccaf183405c3f35b7217",
+              "evidence": "Retained official Thai render shows Snorlax scA T 084/135. Printed Thai text, collector identity and attacks establish the exact card; no printed rarity symbol is present. On 2026-09-29 the collection owner explicitly confirms this card as Non-Holo from the picture. The publisher render remains identity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list.",
+              "contentHash": "56dcff8b667f65f0d6497fa8a8f6a1f7e92009ecb927d44fa24fd1314d0b0ba1",
               "image": "verification/specimens/SPEC-0259.png"
             }
           ]
