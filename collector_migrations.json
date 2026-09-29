@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:75f49c51a38c6f38e35f68036217f1e76516b57cc89c47cb8378eca4de712074",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:5350bd11b740ccf1d2cd51da42e4922af6f08f4a8929a7d3facfc4490079c1ab",
+    "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:5350bd11b740ccf1d2cd51da42e4922af6f08f4a8929a7d3facfc4490079c1ab",
+      "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12395,7 +12395,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:5350bd11b740ccf1d2cd51da42e4922af6f08f4a8929a7d3facfc4490079c1ab",
+      "toFingerprint": "sha256:9c2ecc92d9a12b6dbcabc13855ed07aa1122c44604a3f9bfa3bbe7e048e344d6",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30384,6 +30384,15 @@
       "reconciliation": "requires-user-resolution"
     },
     {
+      "fromItemId": "item-741a2ea7-752f-577f-9d2f-dbcb9bdfd127",
+      "toItemIds": [
+        "item-1ce1e9c8-8049-597e-a2c6-4cd4704ebbbc"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-4559aadc-4cff-54e2-9dbc-84338cc99164",
       "toItemIds": [
         "item-d524bb45-af9a-5a9a-ba66-5e47d5d32c6e"
@@ -39914,7 +39923,7 @@
         "cardReleaseId": "RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over",
         "disposition": "projected",
         "targetItemIds": [
-          "item-741a2ea7-752f-577f-9d2f-dbcb9bdfd127"
+          "item-1ce1e9c8-8049-597e-a2c6-4cd4704ebbbc"
         ],
         "reason": null
       },
@@ -47512,6 +47521,11 @@
         "targetItemId": "item-a7f289f6-4bdf-56e2-8a3b-15a1eb5a7838"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0537",
+        "disposition": "projected",
+        "targetItemId": "item-1ce1e9c8-8049-597e-a2c6-4cd4704ebbbc"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0540",
         "disposition": "projected",
         "targetItemId": "item-79f3d102-e582-586d-8b04-9e834dec0eb8"
@@ -47585,7 +47599,7 @@
     "summary": {
       "legacyChecklistRows": 904,
       "cardReleases": 633,
-      "physicalPrintings": 797,
+      "physicalPrintings": 798,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

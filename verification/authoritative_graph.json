@@ -35495,6 +35495,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0537",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0537",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0537",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0537",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0537",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0537"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0538",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -103046,6 +103063,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0533",
         "specimenIds": [
           "SPEC-0533"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0537",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0537",
+        "cardReleaseId": "RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection-owner determination on 2026-09-29: MA4 T 091/123 ist non-holo auf dem bild zu erkennen.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0537",
+        "specimenIds": [
+          "SPEC-0537"
         ]
       }
     },
@@ -186839,6 +186880,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0537",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0537",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0538",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -237484,6 +237535,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:sc1a T:127/154:Snorlax-Collect-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0537",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0537",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0537",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over",
       "provenance": {}
     },
     {
@@ -299408,6 +299475,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0537",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0537",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0538",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -299660,14 +299734,14 @@
     }
   ],
   "summary": {
-    "entities": 8276,
-    "edges": 12307,
-    "migrationInputs": 2913,
+    "entities": 8278,
+    "edges": 12310,
+    "migrationInputs": 2914,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1614,
+      "established-and-mapped": 1615,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299675,9 +299749,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2087,
+    "candidateClaims": 2088,
     "cardReleases": 633,
-    "physicalPrintings": 797,
+    "physicalPrintings": 798,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

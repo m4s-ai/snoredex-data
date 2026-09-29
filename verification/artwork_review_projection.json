@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "869fd5e0f42630a52befd0494d31e05f9cc9aeec8a427a25b32218081d0fdee8",
+  "projectionVersion": "86cd5cc0d4fa499a45245170a71b65389777c0ce9eca2920a140fdfd2ff0585f",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 797,
+    "physicalPrintings": 798,
     "sourceObservations": 3057
   },
   "groups": [
@@ -30449,13 +30449,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0537",
+              "cardReleaseId": "RELEASE:TH:Thai:MA4:091/123:Snorlax-Glutton-Topple-Over",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination on 2026-09-29: MA4 T 091/123 ist non-holo auf dem bild zu erkennen.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0537",
+              "specimenIds": [
+                "SPEC-0537"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30517,8 +30539,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://shopee.co.th/product/136710401/41979577897",
-              "evidence": "User-supplied Magic Poke Shop product depiction shows Thai Snorlax HP160, MA4 T J 091/123 C and illustrator Toshinao Aoki. Printed identity and rarity are readable; physical finish is unresolved. Store watermark is not a card marking.",
-              "contentHash": "fb1ea00079d40713eb0c3e212183d17b7733bbf460900cdf7692792510e60d2b",
+              "evidence": "Retained Magic Poke Shop product depiction shows Thai Snorlax HP160, printed MA4 T, regulation J, 091/123 C, illustrator Toshinao Aoki. The image supports identity and printed rarity; the store watermark is not a card marking. On 2026-09-29 the collection owner explicitly confirms this exact Thai card as Non-Holo from the picture. Finish is separately owner-attested. Original image bytes and provenance are unchanged; this positive confirmation does not close the finish list.",
+              "contentHash": "dfbdabd56c8c8e4f3f9dd2ea1182b3d76c4b5833f30e24652e1c048015c6a304",
               "image": "verification/specimens/SPEC-0537.png"
             }
           ]
