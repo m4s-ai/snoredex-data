@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:861cf2035204249c71e0056bc31efd3b795e8447ffc1692cd1617006707c087e",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
+    "toFingerprint": "sha256:2a4473c8f1f30e8bbf812a60c4ea5c8559373ec3522372b534098fb34fd12194",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
+      "toFingerprint": "sha256:2a4473c8f1f30e8bbf812a60c4ea5c8559373ec3522372b534098fb34fd12194",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12395,7 +12395,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:98e6dddc4f20d2a0bbdd9ee3b61c01cdc9b954aa89da4dd2d1490c9d50a3e6b3",
+      "toFingerprint": "sha256:2a4473c8f1f30e8bbf812a60c4ea5c8559373ec3522372b534098fb34fd12194",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30365,6 +30365,15 @@
       "reconciliation": "requires-user-resolution"
     },
     {
+      "fromItemId": "item-48a560ad-e894-5a45-a9f5-3b425dfde615",
+      "toItemIds": [
+        "item-289aec93-d07d-5c42-9d42-267adb52f5ce"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-ebcea368-26ca-51d4-9940-33b0f10cfc20",
       "toItemIds": [
         "item-8df9a5d6-8803-52c5-a25d-4ab8f911b13f",
@@ -39878,7 +39887,7 @@
         "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-48a560ad-e894-5a45-a9f5-3b425dfde615"
+          "item-289aec93-d07d-5c42-9d42-267adb52f5ce"
         ],
         "reason": null
       },
@@ -47561,12 +47570,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0596",
         "disposition": "projected",
         "targetItemId": "item-2d4914fd-3739-54ee-b2b9-a28a46974a2d"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0598",
+        "disposition": "projected",
+        "targetItemId": "item-289aec93-d07d-5c42-9d42-267adb52f5ce"
       }
     ],
     "summary": {
       "legacyChecklistRows": 904,
       "cardReleases": 633,
-      "physicalPrintings": 795,
+      "physicalPrintings": 796,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

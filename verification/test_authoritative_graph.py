@@ -213,6 +213,7 @@ def verify_source_first_asset_authority(prints, evidence, registry):
         assert not calls, (row['printId'], 'listing duplicates retained photo identity')
         identities = [source for source in evidence
                       if row['printId'] in source.get('stableIds', [])
+                      and row['specimenId'] in source.get('stableIds', [])
                       and source['providerId'] == 'seller-listing-photo'
                       and 'identity' in source['dimensions']]
         assert len(identities) == 1, (row['printId'], identities)

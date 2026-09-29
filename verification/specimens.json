@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 597,
+  "count": 598,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12363,6 +12363,31 @@
         ],
         "basis": "Colored foil bands visibly appear along the silver border. Collection-owner determination on 2026-09-29 for this exact image: eindeutig holo."
       }
+    },
+    {
+      "specimenId": "SPEC-0598",
+      "setCode": "AS1b",
+      "number": "112/150",
+      "variant": "base",
+      "language": "Thai",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original eBay front photograph visually inspected; local Tesseract unavailable",
+      "photograph": "SPEC-0598.png",
+      "photographSource": "https://i.ebayimg.com/images/g/t40AAeSwwhdqdfRJ/s-l1600.webp",
+      "photographSha256": "sha256:0355dff54259330b9f1d31b30b07e44ff5a2f3cfb90c2ab889a289269d0af0a7",
+      "observed": "Thai Snorlax GX HP190, printed AS1b, regulation A, 112/150 RR, Illus. 5ban Graphics. Colored foil reflections are visible on the border and card face; the owner confirms Holo. Listing metadata claiming 157/150, Kodama, Promo and Sushiro is inconsistent with the pictured card and is not adopted. The printed copyright year is not used as the release date. Positive Holo evidence only, with no finish-list closure.",
+      "recordedAt": "2026-09-29",
+      "citedBy": [
+        "TH:AS1b:112/150:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "basis": "Visible colored foil sheen on the retained exact Thai card. Owner statement: shows holo shine for as1b."
+      },
+      "listingUrl": "https://www.ebay.de/itm/128015559167"
     }
   ]
 }

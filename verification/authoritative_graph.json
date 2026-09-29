@@ -36052,6 +36052,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0598",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0598",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0598",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0598",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0598",
+        "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0598"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -103288,6 +103305,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0596",
         "specimenIds": [
           "SPEC-0596"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0598",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0598",
+        "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Visible colored foil sheen on the retained exact Thai card. Owner statement: shows holo shine for as1b.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0598",
+        "specimenIds": [
+          "SPEC-0598"
         ]
       }
     },
@@ -187066,6 +187107,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0598",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0598",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -237544,6 +237595,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:SH:026/038:Snorlax-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0598",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0598",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0598",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "provenance": {}
     },
     {
@@ -299472,17 +299539,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:7fd59662283b4330f7383105, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0598",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0598",
+      "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
     }
   ],
   "summary": {
-    "entities": 8271,
-    "edges": 12300,
-    "migrationInputs": 2910,
+    "entities": 8273,
+    "edges": 12303,
+    "migrationInputs": 2911,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 306,
       "carried": 68,
-      "established-and-mapped": 1612,
+      "established-and-mapped": 1613,
       "linked-local-counterpart": 125,
       "mapped": 356,
       "needs-evidence": 125,
@@ -299490,9 +299564,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2084,
+    "candidateClaims": 2085,
     "cardReleases": 633,
-    "physicalPrintings": 795,
+    "physicalPrintings": 796,
     "setSourceRecords": 484,
     "setSourceDispositions": 484,
     "localizations": 16

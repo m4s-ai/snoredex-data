@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-09-29",
-  "projectionVersion": "0af2e9becb9d352205d879175b4000592eb0c543ae561b1d14b901a2fc0038ee",
+  "projectionVersion": "442b52d4d123bc82fd9a3c8a669873abebd820671e2f283e081ec52ff64a76e3",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 795,
-    "sourceObservations": 3054
+    "physicalPrintings": 796,
+    "sourceObservations": 3055
   },
   "groups": [
     {
@@ -29348,13 +29348,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0598",
+              "cardReleaseId": "RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Visible colored foil sheen on the retained exact Thai card. Owner statement: shows holo shine for as1b.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0598",
+              "specimenIds": [
+                "SPEC-0598"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "คาบิกอน GX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -29371,6 +29393,17 @@
               "originalHash": "7a19c4031b4d72d116400f9b73119755d39f724a0754a4070d6b73ba3eb07677",
               "previewSrc": "images/previews/SPEC-0543.png?v=b5aa45307064f8e2f23a11dc252e79449103df41773d57f4d7ae4915ea248b2b",
               "thumbnailSrc": "images/thumbs/SPEC-0543.png?v=fd1f885fe5dfb0908ca4e0017f8174083f734230a393be71d322fb976fbd1a24"
+            },
+            {
+              "src": "verification/specimens/SPEC-0598.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0598",
+              "contentHash": "0355dff54259330b9f1d31b30b07e44ff5a2f3cfb90c2ab889a289269d0af0a7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0355dff54259330b9f1d31b30b07e44ff5a2f3cfb90c2ab889a289269d0af0a7",
+              "previewSrc": "images/previews/SPEC-0598.png?v=e94679204f66e029578ef3f4912cf86a97230d6c54f0dba09938bf8c66364bb4",
+              "thumbnailSrc": "images/thumbs/SPEC-0598.png?v=aa38232917cd5cbc2437d52e4e90c80ca958150ae7b29d1894a1c9837d874eea"
             }
           ],
           "observations": [
@@ -29391,6 +29424,15 @@
               "evidence": "Retained SPEC-0543 visibly establishes Thai AS1b A 112/150 RR, Snorlax GX HP190, 5ban Graphics, Collapse 80, Thunderous Snore 180 and Pulverizing Pancake GX 210. Printed attacks and card traits establish Work equivalence. Identity and printed rarity only; physical finish and release date remain unresolved.",
               "contentHash": "8fca1837f2b8d6e595bff74d4e9963572042a6130d44c68993fdba3f939be5ce",
               "image": "verification/specimens/SPEC-0543.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0598",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/128015559167",
+              "evidence": "Thai Snorlax GX HP190, printed AS1b, regulation A, 112/150 RR, Illus. 5ban Graphics. Colored foil reflections are visible on the border and card face; the owner confirms Holo. Listing metadata claiming 157/150, Kodama, Promo and Sushiro is inconsistent with the pictured card and is not adopted. The printed copyright year is not used as the release date. Positive Holo evidence only, with no finish-list closure.",
+              "contentHash": "ae97fd26c7fb1ef79075a6be4e46dfefb5554724ca00115ffb463a66dd52b5fd",
+              "image": "verification/specimens/SPEC-0598.png"
             }
           ]
         }
