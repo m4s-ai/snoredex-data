@@ -1,4 +1,4 @@
-<!-- doc: role=retained seller image intake and acceptance record; stage=task -->
+<!-- doc: role=retained research evidence and image intake acceptance record; stage=task -->
 
 # Browser image intake — 2026-09-28
 
@@ -56,3 +56,20 @@ All 21 new IDs occur in the regenerated source registry and artwork projection; 
 That consumer review exposed a projector defect: each standalone specimen created a new printing even when its complete semantic printing key matched another specimen. The existing semantic-key helper now shares one printing and retains every specimen's provenance. This combines SPEC-0566/0567, attaches SPEC-0560/0569 to the already observed Indonesian/Thai printings, and removes the pre-existing duplicate SPEC-0324 printing in favor of SPEC-0323 without deleting either photograph. Distinct finishes remain separate, input order is immaterial, and replay is stable; the regression covers those boundaries. Unknown physical dimensions remain unknown and no same-card relationship or independent-provider corroboration is invented.
 
 Final validation: all canonical regeneration steps completed, followed by the full `regen.py --check` gate and both retained-source `--check --full-refresh` checks. A local, uncommitted runner retried only transient Windows file-open/temporary-directory locks; no checks were skipped. The corrected browser projection renders sc1b F 119/153 as one physical printing with both SPEC-0566/0567 previews loaded. The final pre-push collision check found unchanged main/PR ownership through SPEC-0557.
+
+## PJU numbering follow-up — 2026-09-29
+
+The missing collector-number flag for Japanese Jungle Snorlax in [#259](https://github.com/m4s-ai/snoredex-data/issues/259) was an audit error. [Pokellector's Japanese Jungle checklist](https://jp.pokellector.com/Pokemon-Jungle-Expansion/) explicitly describes the set as unnumbered and lists 48 cards. The retained tier-2 product image [SPEC-0204](../../specimens/SPEC-0204.jpg) shows Pokédex No.143. [TCGcollector's Snorlax entry](https://www.tcgcollector.com/cards/29983/snorlax-pokemon-jungle-no-047) separately lists checklist position No.047 and Pokédex #0143. The external checklists provide research context for interpreting the existing identity; no new provider-backed language or finish claim is introduced.
+
+The existing release `RELEASE:JP:Japanese:PJU:unnumbered:Snorlax-Thick-Skinned-Body-Slam` already has `localIdentifierKnown: true`, `localNumber: ""` and `state: "identified"` in the authoritative graph. Its collector projection correctly retains null `collectorNumber` and `collectorNumberDenominator`. Neither checklist position 47, Pokédex number 143 nor set size 48 is a printed collector-number field. The release, physical-printing IDs and canonical stores therefore require no change.
+
+The research audit accepts this positively reviewed unnumbered identity instead of counting its null number as missing. This is specific to the reviewed PJU card; other empty numbers still require their own evidence and reconciliation. It establishes no additional finish or exhaustive finish list.
+
+The corrected tracker snapshot, reviewed against main `d1dc29368decb967141b99b7a6c95103cda70191` and pre-follow-up draft head `540c20ec0edf41ac28aa2cb8db4f366303714d74`, is:
+
+| Scope | Main gap-free / remaining | Including draft #402 gap-free / remaining |
+|---|---:|---:|
+| Japanese, 67 releases | 51 / 16 | 51 / 16 |
+| Parent research, 633 releases | 508 / 125 | 511 / 122 |
+
+The seven open issue bodies and private TODO were reconciled with this rule. PJU's numbering task is complete; the other Japanese numbering reviews remain open. These are reviewed research counts, not changes to the generated catalogue or claims of catalogue completeness.
