@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-25",
+    "generated": "2026-09-29",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -19,8 +19,8 @@
       "surfaces": 58,
       "coverageEdges": 61,
       "absenceEdges": 0,
-      "observations": 65,
-      "resolvedVerdictSources": 1619
+      "observations": 67,
+      "resolvedVerdictSources": 1651
     },
     "surfaceStates": {
       "active": 28,
@@ -810,8 +810,8 @@
       "failureState": null,
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Capture certification/registry id and compare a scan when the concrete specimen is promoted.",
+      "lastCheckedAt": "2026-09-29",
+      "freshnessPolicy": "Capture the exact named registry row or certification and compare retained linked slab photographs before promoting the concrete specimen. A card-face image supplies identity only; finish requires the named grading variety.",
       "query": {
         "method": "GET",
         "endpoint": "https://www.psacard.com/psacert/{certificationId}",
@@ -1362,7 +1362,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-29",
       "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
       "query": {
         "method": "NON_URL",
@@ -3462,7 +3462,8 @@
       "positiveEvidenceCapabilities": [
         "finish",
         "specimen-existence",
-        "named-variety"
+        "named-variety",
+        "identity"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -3471,12 +3472,13 @@
         "exactScopes": [],
         "rationale": "Population counts and registry omissions never establish non-existence."
       },
-      "knownPositiveObservationId": "obs-psa",
+      "knownPositiveObservationId": "obs-psa-sv4a-145-cert-94474867",
       "boundary": {
         "outsideScope": [
           "ungraded cards",
           "missing registry rows",
-          "varieties not named by the concrete record"
+          "varieties not named by the concrete record",
+          "finish inferred solely from a static slab photograph or from an omitted variety name"
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A missing PSA entry says only that no matching retained registry record was found."
@@ -4243,7 +4245,8 @@
       "positiveEvidenceCapabilities": [
         "language",
         "finish",
-        "edition"
+        "edition",
+        "rarity"
       ],
       "exhaustive": false,
       "absenceCapability": {
@@ -4257,7 +4260,8 @@
         "outsideScope": [
           "cards not named",
           "unstated finishes/languages",
-          "collection completeness"
+          "collection completeness",
+          "rarities not explicitly determined by the owner"
         ],
         "zeroResultMeans": "unknown",
         "challenge": "Silence in an attestation cannot be read as a negative claim."
@@ -7214,7 +7218,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:ce1cabdfda216fc780f8a22f42df7b1b3b23883f9e6f807d160a503d8db844df",
+      "rawRecordHash": "sha256:8a82b726bacc6041a2b3a4bd7262407af2b283f8ebda5d642d93f86e86c98d96",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7228,19 +7232,23 @@
           "Owner attestation (domain expert) + set release schedule",
           "Owner attestation (domain expert); localized product image",
           "Owner attestation plus downloaded scan review",
+          "Positive source-native rarity record",
           "Referenced product render (context only); Owner attestation (domain expert); localized product image"
         ],
         "dimensions": [
           "edition",
           "finish",
           "finish-override",
-          "language"
+          "language",
+          "rarity"
         ],
-        "stableIdCount": 174,
+        "stableIdCount": 215,
         "stableIds": [
           "CN:CS2aC:086/115:base",
+          "F0002-P01",
           "F0009-P01",
           "F0025-P01",
+          "F0028-P01",
           "F0057-P01",
           "F0057-P02",
           "F0067-P03",
@@ -7249,8 +7257,12 @@
           "F0072-P01",
           "F0072-P02",
           "F0093-P01",
+          "F0101-P01",
+          "F0104-P01",
+          "F0132-P01",
           "F0138-P01",
           "F0140-P01",
+          "F0142-P02",
           "F0146-P01",
           "F0148-P01",
           "F0161-P01",
@@ -7277,7 +7289,11 @@
           "F0174-P02",
           "F0221-P01",
           "F0289-P02",
+          "F0301-P01",
           "F0332-P01",
+          "F0351-P01",
+          "F0375-P01",
+          "F0379-P01",
           "F0402-P02",
           "F0403-P02",
           "F0456-P01",
@@ -7327,8 +7343,12 @@
           "F0615-P03",
           "F0616-P01",
           "F0616-P02",
+          "F0619-P01",
+          "F0625-P02",
+          "F0628-P02",
           "ID:AC3a:145/205:base",
           "ID:s10a I:077/071:base",
+          "JP:M6a:095/103:base",
           "SPEC-0022",
           "SPEC-0023",
           "SPEC-0053",
@@ -7368,12 +7388,26 @@
           "SPEC-0473",
           "SPEC-0474",
           "SPEC-0480",
+          "SPEC-0514",
           "SPEC-0521",
           "SPEC-0522",
           "SPEC-0524",
           "SPEC-0525",
           "SPEC-0533",
           "SPEC-0555",
+          "SPEC-0581",
+          "SPEC-0582",
+          "SPEC-0583",
+          "SPEC-0584",
+          "SPEC-0585",
+          "SPEC-0586",
+          "SPEC-0587",
+          "SPEC-0588",
+          "SPEC-0589",
+          "SPEC-0590",
+          "SPEC-0591",
+          "SPEC-0592",
+          "SPEC-0593",
           "TH:AS5a:142/184:base",
           "TH:sc1a T:127/154:base",
           "TW:AS5a:142:base",
@@ -7385,21 +7419,34 @@
           "U0170",
           "U0246",
           "U0255",
+          "U0285",
           "U0297",
           "U0311",
           "U0312",
           "U0313",
           "U0314",
+          "U0427",
           "U0433",
           "U0467",
+          "U0476",
           "U0503",
+          "U0531",
+          "U0540",
+          "U0560",
           "U0575",
+          "U0578",
+          "U0605",
           "U0616",
           "U0617",
           "U0618",
           "U0619",
           "U0620",
           "U0621",
+          "U0652",
+          "U0656",
+          "U0660",
+          "U0679",
+          "U0751",
           "U0785",
           "U0786",
           "U0787",
@@ -7413,8 +7460,8 @@
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-09-24",
-        "usageCount": 194
+        "retrievedAt": "2026-09-29",
+        "usageCount": 236
       }
     },
     {
@@ -7435,7 +7482,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:cbf97301ad00ea672d4d1e8f51b73ead02cc27f4b61dd225e28c99df9e6e9de8",
+      "rawRecordHash": "sha256:c106dfa46af3b1f30120f206d5cb4a8294fdbe7381019298d8ae10508dfbc4e2",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -7453,18 +7500,29 @@
           "retained Cardmarket product scan"
         ],
         "dimensions": [
+          "edition",
           "finish",
           "identity",
           "language"
         ],
-        "stableIdCount": 213,
+        "stableIdCount": 240,
         "stableIds": [
+          "F0002-P01",
+          "F0028-P01",
           "F0054-P01",
           "F0094-P02",
+          "F0101-P01",
+          "F0104-P01",
           "F0125-P02",
+          "F0132-P01",
+          "F0142-P02",
           "F0247-P02",
           "F0291-P02",
           "F0294-P02",
+          "F0301-P01",
+          "F0351-P01",
+          "F0375-P01",
+          "F0379-P01",
           "F0441-P01",
           "F0456-P01",
           "F0456-P02",
@@ -7475,6 +7533,9 @@
           "F0530-P01",
           "F0534-P01",
           "F0615-P03",
+          "F0619-P01",
+          "F0625-P02",
+          "F0628-P02",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
           "KR:SM-P:140:base",
@@ -7591,6 +7652,19 @@
           "SPEC-0479",
           "SPEC-0489",
           "SPEC-0505",
+          "SPEC-0581",
+          "SPEC-0582",
+          "SPEC-0583",
+          "SPEC-0584",
+          "SPEC-0585",
+          "SPEC-0586",
+          "SPEC-0587",
+          "SPEC-0588",
+          "SPEC-0589",
+          "SPEC-0590",
+          "SPEC-0591",
+          "SPEC-0592",
+          "SPEC-0593",
           "TW:SM-P:053:base",
           "TW:s5a F:093/070:base",
           "TW:sc1D F:133/164:base",
@@ -7608,6 +7682,7 @@
           "U0230",
           "U0231",
           "U0271",
+          "U0285",
           "U0286",
           "U0290",
           "U0294",
@@ -7673,8 +7748,8 @@
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-09-10",
-        "usageCount": 361
+        "retrievedAt": "2026-09-29",
+        "usageCount": 403
       }
     },
     {
@@ -9554,6 +9629,107 @@
         "retrievedAt": "2026-09-15",
         "usageCount": 2
       }
+    },
+    {
+      "observationId": "obs-owner-m6a-rarity-20260929",
+      "surfaceId": "owner-attestations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:owner-attestation"
+      },
+      "retrievedAt": "2026-09-29",
+      "expectedIdentifiers": [
+        "JP:M6a:095/103:base",
+        "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "Common"
+      ],
+      "validatesEdges": [
+        "owner-attestation-positive"
+      ],
+      "outcome": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:2331c56bb7cd053d1edf95a91b167e270c7de337238cf45b5bd2ba8e37c64baa",
+      "rawRecord": {
+        "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+        "retrieved": "2026-09-29",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "M6a",
+          "locality": "JP",
+          "languages": [
+            "Japanese"
+          ],
+          "scripts": [
+            "Jpan"
+          ],
+          "printIds": [
+            "JP:M6a:095/103:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "observedCollectorNumbers": [
+            "095/103"
+          ],
+          "observedCoverage": "owner rarity determination for one exact card",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-09-29",
+          "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+          "rarity": "Common",
+          "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+        }
+      }
+    },
+    {
+      "observationId": "obs-psa-sv4a-145-cert-94474867",
+      "surfaceId": "psa-registry",
+      "kind": "known-positive",
+      "queryUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+      "queryParameters": {
+        "certificateNumber": "94474867"
+      },
+      "retrievedAt": "2026-09-29",
+      "expectedIdentifiers": [
+        "94474867",
+        "sv4a",
+        "145/190",
+        "SPEC-0579",
+        "SPEC-0580",
+        "REVERSE HOLO"
+      ],
+      "validatesEdges": [
+        "psa-positive-specimen"
+      ],
+      "outcome": "The retained front establishes Japanese sv4a 145/190 and certificate 94474867; the paired back repeats that unique certificate. Only the explicit PSA named variety establishes reverse-holo. No foil pattern, ungraded-card coverage, negative conclusion or finish-list closure follows.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:d771938066410eb73c469f3eee1279f7f3e64cf4900ae2b7f71890b61cb5d807",
+      "rawRecord": {
+        "certificateNumber": "94474867",
+        "specimenIds": [
+          "SPEC-0579",
+          "SPEC-0580"
+        ],
+        "frontSha256": "sha256:cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+        "backSha256": "sha256:bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+        "language": "Japanese",
+        "localSetCode": "sv4a",
+        "collectorNumber": "145/190",
+        "namedVariety": "REVERSE HOLO",
+        "rowExcerptSha256": "sha256:ca7e57cba07ffbf094b4bd2ff2ae5d39edf61ff53203875cf595b2f5c32361e7",
+        "retainedSource": "verification/evidence/jp-finish-20260929-modern/sources.json",
+        "photographClaimFields": [
+          "identity"
+        ],
+        "registryClaimFields": [
+          "finish"
+        ],
+        "absenceCapability": false
+      }
     }
   ],
   "sourceResolution": [
@@ -9756,6 +9932,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -16335,6 +16524,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "edition",
         "finish",
         "identity",
         "language"
@@ -17215,7 +17405,8 @@
         "edition",
         "finish",
         "finish-override",
-        "language"
+        "language",
+        "rarity"
       ]
     },
     {
@@ -23756,6 +23947,30 @@
       ]
     },
     {
+      "sourceKey": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/CzSO1iwUME6JHN7u1BEdTQ.jpg",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/Ss7_CN_6i0OEi2qnRMtIKA.jpg",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.psacard.com/psasetregistry/tcg/famous-figures/pokemon-snorlax-master-set/composition/21636",
       "providerId": "psa",
       "surfaceId": "psa-registry",
@@ -23766,6 +23981,20 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+      "providerId": "psa",
+      "surfaceId": "psa-registry",
+      "capabilityEdgeIds": [
+        "psa-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override",
+        "identity"
       ]
     },
     {
@@ -23877,6 +24106,78 @@
       ]
     },
     {
+      "sourceKey": "https://cardtell.id/images/products/14558.png?v=1784128890",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cardtell.id/images/products/14971.png?v=1789136562",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cardtell.id/shop/WSY98QA7ZR",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cardtell.id/shop/Z8C6C7SSPW",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-822wn-mnjbkwwf1hxg6b@resize_w450_nl.webp",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-sg.img.susercontent.com/file/my-11134207-820lc-mfz9g48vsbgo45@resize_w450_nl.webp",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers",
       "providerId": "retailer-listing",
       "surfaceId": "retailer-listings",
@@ -23887,6 +24188,30 @@
       "dimensions": [
         "finish",
         "finish-override"
+      ]
+    },
+    {
+      "sourceKey": "https://gcs.rimg.com.tw/g2/a/d3/70/22025695525744_415.jpg",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://gcs.rimg.com.tw/g2/b/41/0c/22631288388876_746.png",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
       ]
     },
     {
@@ -24022,6 +24347,42 @@
       ]
     },
     {
+      "sourceKey": "https://shopee.co.id/Snorlax-SV6S-136-167-U-Kartu-Pokemon-ID-i.194362844.57859531443",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://shopee.sg/PTCG-POKEMON-CARD-VER.2014-Snorlax-%E5%8D%A1%E6%AF%94%E5%85%BD-XY2-066-080-NON-HOLO-Japanese-GEN'-90--i.319212762.28393131888",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://shopee.tw/product/27756288/55863618270",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
       "providerId": "retailer-listing",
       "surfaceId": "retailer-listings",
@@ -24110,6 +24471,30 @@
     },
     {
       "sourceKey": "https://www.pokipair.com/vivid-portrayals-set-list-cs2a",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ruten.com.tw/item/22025695525744",
+      "providerId": "retailer-listing",
+      "surfaceId": "retailer-listings",
+      "capabilityEdgeIds": [
+        "retailer-positive-specimen"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ruten.com.tw/item/22631288388876",
       "providerId": "retailer-listing",
       "surfaceId": "retailer-listings",
       "capabilityEdgeIds": [
@@ -24237,6 +24622,18 @@
       ]
     },
     {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134201-7rasa-m5d6w400oy3h48@resize_w450_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24247,6 +24644,19 @@
       "dimensions": [
         "identity",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-7r98s-lt6dfj067fr1cc@resize_w450_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
       ]
     },
     {
@@ -24467,6 +24877,19 @@
       ]
     },
     {
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7qul2-lih0wtr511z624@resize_w450_nl.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7r98u-ltf6xwg189lnb9",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24480,6 +24903,18 @@
     },
     {
       "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-7rbk9-ma5nc55vl2mq48",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-820l6-mqeo52bwoikt0c@resize_w450_nl.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -24624,6 +25059,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/-CMAAeSwIqVqH55x/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/1vUAAeSw5Jpp7Xrg/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -24676,6 +25123,18 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/71cAAeSwYjtqrCHF/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/9-8AAeSwLvJqoJh3/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -25211,6 +25670,19 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/kycAAeSw5zJqKml1/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25220,6 +25692,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/mUwAAeSw3jFqVPvq/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -25263,6 +25747,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/prAAAeSwZeRp8Wo1/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/pzMAAOSwvMtnXwMG/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25284,6 +25780,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/qkwAAOSw8ttl4WTJ/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -25387,6 +25895,30 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://img.tradera.net/large-fit/310/628093310_8406dfc7-4321-48f8-bfc1-c49a50f8df31.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://img.tradera.net/large-fit/409/654652409_d73a7e37-484b-4677-b619-3e845ce19b0c.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -25715,6 +26247,44 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.karousell.com/media/photos/products/2026/7/6/ptcg__sc1b__v_119153_rr_1783325811_c8a9fd6b_progressive.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.karousell.com/media/photos/products/2026/7/6/ptcg__sc1b__v_119153_rr_1783325811_f03cbbb8_progressive.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.karousell.com/media/photos/products/2026/8/20/_snorlax_pt2_070090_1787239138_97379c1b_progressive.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

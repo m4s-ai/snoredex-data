@@ -194,9 +194,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "authorityTier": 2,
         "coverage": "named grading varieties for graded specimens",
         "supportsAbsence": False,
-        "usedFor": ["finish"],
-        "attribution": "Grading variety names from PSA.",
-        "notes": "Population counts and omissions are never used as negative evidence.",
+        "usedFor": ["finish", "identity"],
+        "attribution": "Grading variety names and identified slab photographs from PSA.",
+        "notes": "Retained slab photographs support their visible card/certificate identity; named grading varieties supply finish. Population counts and omissions are never negative evidence.",
     },
     {
         "providerId": "cgc",
@@ -548,9 +548,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Contributed to this project; published as an anonymous evidence class.",
         "category": "non-url-evidence",
         "authorityTier": 2,
-        "coverage": "specimens physically held or inspected by the collection owner",
+        "coverage": "specimens physically held or inspected by the collection owner and explicit field-scoped owner determinations",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "edition"],
+        "usedFor": ["language", "finish", "edition", "rarity"],
         "attribution": "Owner attestation (domain expert), recorded anonymously.",
         "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
     },
@@ -1230,9 +1230,9 @@ def main() -> int:
     specimens_by_id = {str(s.get("specimenId")): s for s in specimens}
     for entry in source_first["prints"]:
         record_source_first_identity(entry, record, surfaces, specimens_by_id)
-        if entry.get("raritySourceUrl"):
+        if entry.get("raritySourceUrl") or entry.get("rarityProviderId"):
             record(
-                entry["raritySourceUrl"], "Positive source-native rarity record", "rarity",
+                entry.get("raritySourceUrl"), "Positive source-native rarity record", "rarity",
                 entry["printId"], entry.get("rarityRetrievedAt"),
                 provider_id=entry.get("rarityProviderId"),
             )

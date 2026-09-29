@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 479,
+      "sourceRecords": 481,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 144,
-      "releaseDateRecords": 72,
+      "sourceFirstLocalSets": 145,
+      "releaseDateRecords": 73,
       "editionAvailabilityRecords": 2,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -1356,6 +1356,30 @@
         ],
         "marketScopeBasis": "single frozen provider context for this raw code",
         "note": null
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-DATE-TH-AS1B-FIRST-IMPACT",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "https://bulbapedia.bulbagarden.net/wiki/AS1a#release-date:TH:AS1b",
+      "retrieved": "2026-09-28",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/AS1a",
+      "raw": {
+        "localCode": "AS1b",
+        "page": "First Impact (ATCG)",
+        "field": "Thai release date",
+        "date": "2019-02-01",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "locality": "TH",
+        "languageScope": "Thai",
+        "marketScopes": [
+          "TH"
+        ],
+        "marketScopeBasis": "The article explicitly states Thailand's First Impact release date and identifies Set A and Set B as the two components; this record maps the date only to the Thai AS1b Set B local set.",
+        "note": "Bulbapedia reports First Impact and its GX Starter Deck released in Thailand on February 1, 2019. Indonesian AS1b is a separate locality and retains its separately sourced August 8, 2019 date."
       }
     },
     {
@@ -8026,6 +8050,40 @@
         "sha256": "9c89eb71c8bfc8a395071fe5ad38774ff915e611868e92c33b144092cf401020",
         "captureMethod": "Selected publisher text fragments joined with a semicolon; hash covers retained excerpt only",
         "note": "Reviewed exact-locality product name matched to the existing set edition; regular launch date only. Physical finish, rarity and other local editions are outside scope. Separate card-shop advance sale announced for 2025-03-15; retained as context only. March 28 product 740 is a different battle enhancement box."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "owner-attestation",
+      "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+      "retrieved": "2026-09-29",
+      "sourceUrl": null,
+      "raw": {
+        "localCode": "M6a",
+        "locality": "JP",
+        "languages": [
+          "Japanese"
+        ],
+        "scripts": [
+          "Jpan"
+        ],
+        "printIds": [
+          "JP:M6a:095/103:base"
+        ],
+        "providers": [
+          "owner-attestation"
+        ],
+        "sourceUrls": [],
+        "observedCollectorNumbers": [
+          "095/103"
+        ],
+        "observedCoverage": "owner rarity determination for one exact card",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-09-29",
+        "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+        "rarity": "Common",
+        "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
       }
     },
     {

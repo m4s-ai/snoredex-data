@@ -1561,8 +1561,8 @@
       "failureState": null,
       "accessMode": "browser",
       "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Capture certification/registry id and compare a scan when the concrete specimen is promoted.",
+      "lastCheckedAt": "2026-09-29",
+      "freshnessPolicy": "Capture the exact named registry row or certification and compare retained linked slab photographs before promoting the concrete specimen. A card-face image supplies identity only; finish requires the named grading variety.",
       "query": {
         "method": "GET",
         "endpoint": "https://www.psacard.com/psacert/{certificationId}",
@@ -1610,7 +1610,8 @@
           "positiveEvidenceCapabilities": [
             "finish",
             "specimen-existence",
-            "named-variety"
+            "named-variety",
+            "identity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -1619,12 +1620,13 @@
             "exactScopes": [],
             "rationale": "Population counts and registry omissions never establish non-existence."
           },
-          "knownPositiveObservationId": "obs-psa",
+          "knownPositiveObservationId": "obs-psa-sv4a-145-cert-94474867",
           "boundary": {
             "outsideScope": [
               "ungraded cards",
               "missing registry rows",
-              "varieties not named by the concrete record"
+              "varieties not named by the concrete record",
+              "finish inferred solely from a static slab photograph or from an omitted variety name"
             ],
             "zeroResultMeans": "unknown",
             "challenge": "A missing PSA entry says only that no matching retained registry record was found."
@@ -2845,7 +2847,7 @@
       "failureState": null,
       "accessMode": "non-url",
       "adapterState": "not-applicable",
-      "lastCheckedAt": "2026-08-09",
+      "lastCheckedAt": "2026-09-29",
       "freshnessPolicy": "Retain the exact statement, date and reviewer; corroborate or re-review before widening it.",
       "query": {
         "method": "NON_URL",
@@ -2895,7 +2897,8 @@
           "positiveEvidenceCapabilities": [
             "language",
             "finish",
-            "edition"
+            "edition",
+            "rarity"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -2909,7 +2912,8 @@
             "outsideScope": [
               "cards not named",
               "unstated finishes/languages",
-              "collection completeness"
+              "collection completeness",
+              "rarities not explicitly determined by the owner"
             ],
             "zeroResultMeans": "unknown",
             "challenge": "Silence in an attestation cannot be read as a negative claim."
@@ -8119,6 +8123,109 @@
         "asia-tw-archive-positive"
       ],
       "outcome": "Exact Taiwan AS5a 204/184 positive row is retained as an excerpt from the equivalent official Taiwan archive PDF."
+    },
+    {
+      "observationId": "obs-owner-m6a-rarity-20260929",
+      "surfaceId": "owner-attestations",
+      "kind": "known-positive",
+      "queryUrl": null,
+      "queryParameters": {
+        "evidenceClass": "evidence:owner-attestation"
+      },
+      "retrievedAt": "2026-09-29",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceRecordId": "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+          "sourceKind": "source-first-local-set-profile",
+          "provider": "owner-attestation",
+          "providerRecordKey": "RARITYCLAIM:owner:JP:M6a:095/103:20260929",
+          "retrieved": "2026-09-29",
+          "sourceUrl": null,
+          "raw": {
+            "localCode": "M6a",
+            "locality": "JP",
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "printIds": [
+              "JP:M6a:095/103:base"
+            ],
+            "providers": [
+              "owner-attestation"
+            ],
+            "sourceUrls": [],
+            "observedCollectorNumbers": [
+              "095/103"
+            ],
+            "observedCoverage": "owner rarity determination for one exact card",
+            "assertedBy": "collection owner",
+            "assertedAt": "2026-09-29",
+            "statement": "for m6a Snorlax in case of this set it's nearly the same in all languages, in english/western it's rarity is common (the circle next to the number) we take that for japanese as well",
+            "rarity": "Common",
+            "basis": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "JP:M6a:095/103:base",
+        "SET-SRC-OWNER-M6A-095-RARITY-20260929",
+        "Common"
+      ],
+      "validatesEdges": [
+        "owner-attestation-positive"
+      ],
+      "outcome": "The collection owner explicitly classifies Japanese M6a Snorlax 095/103 as Common using the western counterpart as the rationale. This is an owner determination, not a rarity symbol observed on the Japanese render or an official Japanese rarity statement. It applies only to this release; no finish or other language classification is inferred."
+    },
+    {
+      "observationId": "obs-psa-sv4a-145-cert-94474867",
+      "surfaceId": "psa-registry",
+      "kind": "known-positive",
+      "queryUrl": "https://www.psacard.com/psasetregistry/tcg/pokemon-sets/pokemon-snorlax-master-set/imagegallery/495231",
+      "queryParameters": {
+        "certificateNumber": "94474867"
+      },
+      "retrievedAt": "2026-09-29",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "certificateNumber": "94474867",
+          "specimenIds": [
+            "SPEC-0579",
+            "SPEC-0580"
+          ],
+          "frontSha256": "sha256:cc91cce1ac937875325cff638e56c3c988f1cdd0797aa7319ef5fd911d1bc1ef",
+          "backSha256": "sha256:bc030219cbd9d0fe41529e843238f55833da4cdd24542d3060f383fcec9a4fda",
+          "language": "Japanese",
+          "localSetCode": "sv4a",
+          "collectorNumber": "145/190",
+          "namedVariety": "REVERSE HOLO",
+          "rowExcerptSha256": "sha256:ca7e57cba07ffbf094b4bd2ff2ae5d39edf61ff53203875cf595b2f5c32361e7",
+          "retainedSource": "verification/evidence/jp-finish-20260929-modern/sources.json",
+          "photographClaimFields": [
+            "identity"
+          ],
+          "registryClaimFields": [
+            "finish"
+          ],
+          "absenceCapability": false
+        }
+      },
+      "expectedIdentifiers": [
+        "94474867",
+        "sv4a",
+        "145/190",
+        "SPEC-0579",
+        "SPEC-0580",
+        "REVERSE HOLO"
+      ],
+      "validatesEdges": [
+        "psa-positive-specimen"
+      ],
+      "outcome": "The retained front establishes Japanese sv4a 145/190 and certificate 94474867; the paired back repeats that unique certificate. Only the explicit PSA named variety establishes reverse-holo. No foil pattern, ungraded-card coverage, negative conclusion or finish-list closure follows."
     }
   ]
 }

@@ -66,6 +66,10 @@ The retained owner source is `owner-jungle-number-finish-20260910` in
 
 ### Recording what a scan shows (#150)
 
+Ordinary surface glare and printed pastel gradients are not positive holo features. The owner's
+[20th 047/072 correction and Non-Holo intake](evidence/owner-nonholo-20260929/README.md)
+retains the explicit determination separately from those image features.
+
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
 had no finish field, so what the photograph showed could only be written as prose that no check
 reads. A specimen may now carry an optional `physicalObservation`:
@@ -270,6 +274,12 @@ completeness decision is recorded in
 | `positive-evidence-only` | finishes found, with every unlisted alternative still unknown |
 | `pending` | no positive finish evidence yet |
 | `not-applicable` | every underlying product-language claim is contradicted |
+
+Source-first releases without a legacy finish unit use the same `finishDecisions` store,
+keyed by their exact local set code, full local number and language. The collector generator
+validates the unique release and its nonempty positive physical-finish list before projecting
+`owner-adjudicated`; it never creates a printing from that decision. Japanese M6a 095/103
+is the first such closure, supported separately by the owner's SPEC-0514 Holo determination.
 
 `E13` holds the owner decision to what it may do. It must name exactly the finishes the evidence
 already found, so it can never introduce one. It may not apply to a unit with no printings at all.

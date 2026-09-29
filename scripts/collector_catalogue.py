@@ -36,6 +36,7 @@ SOURCE_FIRST_PATH = ROOT / "verification" / "source_first_prints.json"
 SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
 COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
+ADJUDICATIONS_PATH = ROOT / "verification" / "owner_adjudications.json"
 
 CATALOGUE_PATH = ROOT / "collector_catalogue.json"
 SCHEMA_PATH = ROOT / "collector_catalogue.schema.json"
@@ -310,6 +311,7 @@ def legacy_match_for_physical(
     reviewed_release_rekeys: set[tuple[str, str]],
     legacy_by_semantic: dict[bytes, dict[str, Any]],
     legacy_by_core: dict[bytes, list[dict[str, Any]]],
+    physical_semantics: frozenset[bytes] = frozenset(),
 ) -> dict[str, Any] | None:
     """Match predecessor state semantically; never let an ordinal id steal a row."""
     release_id = str(physical.get("cardReleaseId") or "")
@@ -317,13 +319,8 @@ def legacy_match_for_physical(
         physical, legacy_by_source.get(physical.get("sourcePrintingId")),
         reviewed_release_rekeys,
     )
-    if source_match:
-        return source_match
-    semantic = legacy_by_semantic.get(
-        printing_semantic_key(release_id, physical)
-    )
-    if semantic:
-        return semantic
+    physical_key = printing_semantic_key(release_id, physical)
+    match = source_match or legacy_by_semantic.get(physical_key)
     candidates = legacy_by_core.get(
         printing_semantic_core_key(release_id, physical), []
     )
@@ -332,7 +329,24 @@ def legacy_match_for_physical(
         if physical.get("edition") is None
         or row.get("edition") in (None, "—", physical.get("edition"))
     ]
-    return compatible[0] if len(compatible) == 1 else None
+    if match is None and len(compatible) == 1:
+        match = compatible[0]
+    # Reserve an exact edition match before considering edition-agnostic evidence.
+    # Collect all physical keys up front so iteration order cannot steal the row.
+    if match:
+        legacy_key = printing_semantic_key(release_id, match)
+        if legacy_key != physical_key and legacy_key in physical_semantics:
+            return None
+    return match
+
+
+def physical_printing_indexes(physicals):
+    by_source, semantics = {}, set()
+    for row in physicals.values():
+        semantics.add(printing_semantic_key(row["cardReleaseId"], row))
+        if row.get("sourcePrintingId"):
+            by_source[row["sourcePrintingId"]] = row
+    return by_source, frozenset(semantics)
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -879,6 +893,15 @@ def schema_document() -> dict[str, Any]:
             },
         },
         "completenessStatus": {"type": "string"},
+        "completenessEvidence": {
+            "type": "object", "additionalProperties": False,
+            "description": "Owner finish-list decision and its unfiltered references; repository paths and specimen references are not URLs.",
+            "required": ["adjudicationId", "evidenceRefs"],
+            "properties": {
+                "adjudicationId": {"type": "string", "minLength": 1},
+                "evidenceRefs": string_array,
+            },
+        },
         "releaseDate": nullable_string,
         "releaseDatePrecision": nullable_string,
         "releaseApproximate": {"type": "boolean"},
@@ -898,9 +921,13 @@ def schema_document() -> dict[str, Any]:
     item_schema = {
         "type": "object",
         "additionalProperties": False,
-        "required": list(item_properties),
+        "required": [key for key in item_properties if key != "completenessEvidence"],
         "properties": item_properties,
         "allOf": [
+            {
+                "if": {"properties": {"completenessStatus": {"const": "owner-adjudicated"}}},
+                "then": {"required": ["completenessEvidence"]},
+            },
             {
                 "if": {"properties": {"workMappingState": {"enum": sorted(WORK_REQUIRED_STATES)}}},
                 "then": {"properties": {"workId": {"type": "string"}}},
@@ -1027,6 +1054,52 @@ def legacy_work_names(legacy_items, legacy_release, releases, work_id_by_key) ->
     return names
 
 
+def source_first_finish_decisions(decisions, finish_units, releases, physicals):
+    """Close source-first lists only when their positive printings match the owner decision."""
+    legacy_keys = {(u["setCode"], u["number"], u["language"]) for u in finish_units}
+    lookup = release_lookup(list(releases.values()))
+    finishes = defaultdict(set)
+    for printing in physicals.values():
+        finishes[printing["cardReleaseId"]].add(printing.get("finish"))
+    result = {}
+    for decision in decisions:
+        key = (decision["setCode"], decision["number"], decision["language"])
+        if key in legacy_keys:
+            continue  # finishes.py owns decisions for legacy finish units.
+        targets = set(lookup.get((key[0], collector_number(key[1]), key[2]), []))
+        if len(targets) != 1:
+            raise ContractError(f"finish decision does not resolve exactly once: {key}")
+        release_id = targets.pop()
+        release = releases[release_id]
+        if (release.get("localSetCode"), release.get("localNumber"), release.get("language")) != key:
+            raise ContractError(f"finish decision must match the exact source-first identity: {key}")
+        if (decision.get("authority"), decision.get("decision")) != ("collection-owner", "finish-complete"):
+            raise ContractError(f"finish closure requires an owner decision: {key}")
+        expected = set(decision.get("availableFinishes") or [])
+        if finishes.get(release_id) != expected:
+            raise ContractError(f"finish decision differs from positive printings: {key}")
+        result[release_id] = decision
+    return result
+
+
+def item_completeness(decision, old, unit):
+    if decision:
+        return "owner-adjudicated"
+    return (old or {}).get("completenessStatus") or (unit or {}).get("completenessStatus") or "positive-evidence-only"
+
+
+def completeness_fields(status, decision):
+    result = {"completenessStatus": status}
+    if status == "owner-adjudicated":
+        if not decision:
+            raise ContractError("owner-adjudicated item has no finish decision")
+        result["completenessEvidence"] = {
+            "adjudicationId": decision["adjudicationId"],
+            "evidenceRefs": sorted(set(decision.get("evidenceRefs") or [])),
+        }
+    return result
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     if graph.get("meta", {}).get("schemaVersion") != "1.1.0":
@@ -1044,6 +1117,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     editions = {row["setEditionId"]: row for row in entity_payloads(graph, "set-edition")}
     releases = {row["cardReleaseId"]: row for row in entity_payloads(graph, "card-release")}
     physicals = {row["physicalPrintingId"]: row for row in entity_payloads(graph, "physical-printing")}
+    owner_finish_decisions = {
+        (row["setCode"], row["number"], row["language"]): row
+        for row in read_json(ADJUDICATIONS_PATH).get("finishDecisions", [])
+    }
+    finish_decisions = source_first_finish_decisions(
+        owner_finish_decisions.values(), finish_units, releases, physicals,
+    )
+    legacy_finish_decisions = {}
     claims = {row["claimId"]: row for row in entity_payloads(graph, "candidate-claim")}
     works = entity_payloads(graph, "work")
     events = entity_payloads(graph, "release-event")
@@ -1080,13 +1161,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     unit_by_printing: dict[str, dict[str, Any]] = {}
     printing_by_id: dict[str, dict[str, Any]] = {}
     for unit in finish_units:
+        legacy_finish_decisions[unit["finishUnitId"]] = owner_finish_decisions.get(
+            (unit["setCode"], unit["number"], unit["language"])
+        )
         for printing in unit.get("printings", []):
             unit_by_printing[printing["printingId"]] = unit
             printing_by_id[printing["printingId"]] = printing
 
-    physical_by_source = {
-        row["sourcePrintingId"]: row for row in physicals.values() if row.get("sourcePrintingId")
-    }
+    physical_by_source, physical_semantics = physical_printing_indexes(physicals)
     candidate_by_source = {
         row["sourceId"]: row for row in claims.values()
         if row.get("sourceKind") == "finish-printing-record"
@@ -1281,6 +1363,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             )
         source_refs.update(release.get("sourceRecords") or [])
         source_refs.update(item_specimen_links(release, physical, citations, source_first, claims, specimens))
+        finish_decision = finish_decisions.get(release_id) or legacy_finish_decisions.get(
+            (unit or old or {}).get("finishUnitId")
+        )
+        source_refs.update((finish_decision or {}).get("evidenceRefs", []))
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
             source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
@@ -1358,7 +1444,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "cardSize": card_size,
             "errorClass": error_class,
             "rarity": normalized_rarity(release_id, reference, rarity_by_release),
-            "completenessStatus": (old or {}).get("completenessStatus") or (unit or {}).get("completenessStatus") or "positive-evidence-only",
+            **completeness_fields(item_completeness(finish_decisions.get(release_id), old, unit), finish_decision),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,
             "releaseApproximate": release_approximate,
@@ -1377,7 +1463,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         source_printing_id = physical.get("sourcePrintingId")
         old = legacy_match_for_physical(
             physical, legacy_by_source, release_rekeys,
-            legacy_by_semantic, legacy_by_core
+            legacy_by_semantic, legacy_by_core, physical_semantics
         )
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]

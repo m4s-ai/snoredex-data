@@ -152,7 +152,67 @@ def reinspection_regressions() -> None:
     assert bridged_indonesian_promo[0]["imageScope"] == "exact-printing"
 
 
+def source_first_finish_decision_regressions() -> None:
+    release = {"cardReleaseId": "R", "localSetCode": "M6a", "localNumber": "095/103", "language": "Japanese"}
+    decision = {"setCode": "M6a", "number": "095/103", "language": "Japanese",
+                "authority": "collection-owner", "decision": "finish-complete", "availableFinishes": ["holo"]}
+    printing = {"cardReleaseId": "R", "finish": "holo"}
+    resolve = collector.source_first_finish_decisions
+    assert resolve([decision], [], {"R": release}, {"P": printing}) == {"R": decision}
+    assert collector.item_completeness(decision, None, None) == "owner-adjudicated"
+    assert collector.item_completeness(None, None, None) == "positive-evidence-only"
+    assert collector.item_completeness(None, None, {"completenessStatus": "pending"}) == "pending"
+    assert collector.completeness_fields("positive-evidence-only", decision) == {
+        "completenessStatus": "positive-evidence-only"}
+    try:
+        collector.completeness_fields("owner-adjudicated", None)
+    except collector.ContractError:
+        pass
+    else:
+        raise AssertionError("owner closure without its decision was accepted")
+    assert resolve([], [], {"R": release}, {"P": printing}) == {}
+    assert resolve([decision], [decision], {"R": release}, {}) == {}
+    for decisions, releases, printings in (
+        ([decision], {"R": release}, {}),
+        ([{**decision, "availableFinishes": []}], {"R": release}, {}),
+        ([decision], {"R": release}, {"P": printing, "Q": {**printing, "finish": "reverse-holo"}}),
+        ([decision], {"R": release}, {"P": {**printing, "finish": None}}),
+        ([{**decision, "authority": "external-source"}], {"R": release}, {"P": printing}),
+        ([{**decision, "number": "095/105"}], {"R": release}, {"P": printing}),
+        ([decision], {}, {"P": printing}),
+    ):
+        try:
+            resolve(decisions, [], releases, printings)
+        except collector.ContractError:
+            pass
+        else:
+            raise AssertionError("unsupported source-first finish closure was accepted")
+
+
 def main() -> None:
+    source_first_finish_decision_regressions()
+    m6a = [row for row in read("collector_catalogue.json")["items"]
+           if row["localSetCode"] == "M6a" and row["localizationId"] == "LOCALIZATION:JP:ja"]
+    assert len(m6a) == 1
+    assert (m6a[0]["finish"], m6a[0]["completenessStatus"], m6a[0]["itemKind"]) == (
+        "holo", "owner-adjudicated", "verified-printing")
+    decisions = {row["adjudicationId"]: row for row in read("verification/owner_adjudications.json")["finishDecisions"]}
+    finish_units = {row["finishUnitId"]: row for row in read("verification/finish_units.json")["units"]}
+    closed_items = [row for row in read("collector_catalogue.json")["items"]
+                    if row["completenessStatus"] == "owner-adjudicated"]
+    assert any(row["finishUnitId"] for row in closed_items), "exercise the legacy closure path too"
+    for row in closed_items:
+        evidence = row["completenessEvidence"]
+        decision = decisions[evidence["adjudicationId"]]
+        if row["finishUnitId"]:
+            unit = finish_units[row["finishUnitId"]]
+            assert all(decision[key] == unit[key] for key in ("setCode", "number", "language"))
+        assert evidence["evidenceRefs"] == sorted(set(decision["evidenceRefs"]))
+        assert all(link.startswith(("http://", "https://")) for link in row["evidenceLinks"])
+    assert m6a[0]["completenessEvidence"]["adjudicationId"] == "OAF-20260929-M6a-095-ja"
+    assert "verification/evidence/jp-finish-20260929/m6a-owner-determination.json" in m6a[0]["completenessEvidence"]["evidenceRefs"]
+    assert all("completenessEvidence" not in row for row in read("collector_catalogue.json")["items"]
+               if row["completenessStatus"] != "owner-adjudicated"), "positive evidence alone cannot imply closure"
     for value in (None, 7, "owner upload", "https:///missing-host", "javascript:alert(1)",
                   "https://example.org/a b", "https://[broken", "https://example.org:invalid"):
         assert collector.provenance_url(value) is None, value
@@ -344,6 +404,21 @@ def main() -> None:
         rekeyed_release, source_candidate,
         {(old_release, rekeyed_release["cardReleaseId"])}, {}, {}
     ) is legacy_row
+
+    # GH 33: a generic API printing must not borrow the checklist row that an
+    # independently observed 1st Edition printing already matches exactly.
+    scope = shifted_physical["cardReleaseId"]
+    generic = {**shifted_physical, "edition": None, "sourcePrintingId": "generic"}
+    exact_key = collector.printing_semantic_key(scope, shifted_physical)
+    for order in permutations([generic, shifted_physical]):
+        physical_keys = {collector.printing_semantic_key(scope, row) for row in order}
+        matches = [collector.legacy_match_for_physical(
+            row, {}, set(), {exact_key: legacy_row},
+            {collector.printing_semantic_core_key(scope, legacy_row): [legacy_row]},
+            frozenset(physical_keys),
+        ) for row in order]
+        assert sum(row is legacy_row for row in matches) == 1
+        assert matches[order.index(generic)] is None
 
     graph = read("verification/authoritative_graph.json")
     catalogue = read("collector_catalogue.json")
