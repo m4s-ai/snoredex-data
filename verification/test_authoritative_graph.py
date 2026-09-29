@@ -296,7 +296,9 @@ def verify_observed_finish_attribution(specimens, registry):
         finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
         assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
         if 'finish' in physical.get('ownerAttestedFields', []):
-            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation' for a, kw in finish)
+            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation'
+                       and a[4] == physical.get('ownerAttestedAt', specimen.get('recordedAt'))
+                       for a, kw in finish)
             continue
         image = registry.provenance_url(specimen.get('photographSource')) or registry.provenance_url(specimen.get('listingUrl'))
         primary = [(a, kw) for a, kw in calls if a[0] == image and a[2] != 'finish']

@@ -585,9 +585,9 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
         sources.append({
             "sourceType": "Owner attestation (domain expert)",
             "claimFields": owner_fields,
-            "retrievedAt": specimen.get("recordedAt"),
+            "retrievedAt": observation.get("ownerAttestedAt", specimen.get("recordedAt")),
             "evidence": (
-                f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
+                f"The collection owner's explicit {observation.get('ownerAttestedAt', specimen.get('recordedAt', ''))} confirmation "
                 f"establishes the specimen's {established}; the retained {photograph_label} "
                 "supports card identity and any independently visible properties."
             ),

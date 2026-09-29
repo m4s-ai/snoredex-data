@@ -486,6 +486,29 @@ def main() -> None:
         listing_url="https://seller.example/listing/11",
     )
     assert seller_record["listingUrl"] == "https://seller.example/listing/11"
+    later = {**seller_record, "physicalObservation": {
+        "finish": "holo", "basis": "later owner determination",
+        "ownerAttestedFields": ["finish"], "ownerAttestedAt": "2026-09-29"}}
+    direct = fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://i.ebayimg.com/example.png", digest)
+    assert "listingUrl" not in direct
+    sources = finishes.specimen_sources(direct, direct["physicalObservation"])
+    assert [source["retrievedAt"] for source in sources] == ["2026-08-24", "2026-09-29"]
+    assert sources[0]["sourceType"] == "Seller listing photograph"
+    assert source_registry.specimen_provider(sources[0]["url"], sources[0]["sourceType"]) == "seller-listing-photo"
+    calls = []
+    source_registry.record_specimen_sources(direct, [], sources[0]["sourceType"],
+        direct["physicalObservation"], lambda *a, **kw: calls.append((a, kw)),
+        source_registry.specimen_surfaces())
+    assert [(a[2], a[4], kw["provider_id"]) for a, kw in calls] == [
+        ("identity", "2026-08-24", "seller-listing-photo"),
+        ("finish", "2026-09-29", "owner-attestation")]
+    for bad in ("2026-02-30", "20260929", 20260929):
+        expect_failure(lambda: fetch_attachment.validate_observation(
+            {**later["physicalObservation"], "ownerAttestedAt": bad}, "SPEC-9998"))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "photo", "ownerAttestedAt": "2026-09-29"}, "SPEC-9998"))
+
     allowed_small = fetch_attachment.build_specimen(
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",

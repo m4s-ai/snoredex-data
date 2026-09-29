@@ -95,7 +95,10 @@ the finish or edition determination, record that split explicitly as
 as supporting identity evidence and adds owner attestation as the claim-carrying source for those
 named properties. Its generated sources carry `claimFields`, which the source registry projects as
 separate identity, finish, and edition dimensions; it must not attribute an owner-confirmed property
-to the listing photograph.
+to the listing photograph. Preserve the original photograph `recordedAt` when adding a later
+determination; record its date as `physicalObservation.ownerAttestedAt` (ISO YYYY-MM-DD).
+Older observations without that field retain their same-day `recordedAt` fallback. A seller image
+with no known listing page retains its direct source-image URL; never invent a listing URL.
 
 When a retained photograph establishes only identity and a curated external source establishes the
 finish, an `evidenceOnlyForSpecimen` override may set `specimenPhotographClaimFields: ["identity"]`

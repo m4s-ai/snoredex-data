@@ -1016,7 +1016,7 @@ def record_specimen_claim(url, source_type, provider, dimension, stable_id, retr
         if not physical.get(field):
             continue
         if field in (physical.get("ownerAttestedFields") or []):
-            record(None, "Owner attestation", field, stable_id, retrieved,
+            record(None, "Owner attestation", field, stable_id, physical.get("ownerAttestedAt", retrieved),
                    provider_id="owner-attestation")
             continue
         inspected = surface_supports_observed_property(url, provider, surfaces, field)

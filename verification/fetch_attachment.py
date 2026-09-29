@@ -85,6 +85,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse, unquote
+from datetime import date
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -448,6 +449,18 @@ def validate_observed_finish(finish, specimen_id, defer_finish):
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.finish")
 
 
+def validate_attestation_date(physical, specimen_id):
+    value = physical.get("ownerAttestedAt")
+    if value is None:
+        return
+    try:
+        valid = date.fromisoformat(value).isoformat() == value
+    except (ValueError, TypeError):
+        valid = False
+    if not valid or not physical.get("ownerAttestedFields"):
+        fail(f"{specimen_id}: ownerAttestedAt needs an ISO date and ownerAttestedFields")
+
+
 def validate_observation(
     physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None,
     *, defer_finish: bool = False,
@@ -472,6 +485,7 @@ def validate_observation(
             f"manifest row for {specimen_id} has invalid "
             "physicalObservation.ownerAttestedFields"
         )
+    validate_attestation_date(physical, specimen_id)
     foil_pattern = physical.get("foilPattern")
     if foil_pattern is not None and not isinstance(foil_pattern, str):
         fail(f"manifest row for {specimen_id} needs text physicalObservation.foilPattern")
@@ -712,8 +726,9 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
     if physical is not None:
         # Group context is checked on the complete proposed registry before any write.
         physical = validate_observation(physical, specimen_id, known_specimen_ids, defer_finish=True)
-    if item.get("heldBy") == "third-party seller" and not listing_url:
-        fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
+    if (item.get("heldBy") == "third-party seller" and not listing_url
+            and not (urlparse(provenance).scheme in {"http", "https"} and urlparse(provenance).netloc)):
+        fail(f"manifest row for {specimen_id} needs a listingUrl or source image URL for third-party seller evidence")
     record = {
         "specimenId": specimen_id,
         "setCode": item["setCode"],
