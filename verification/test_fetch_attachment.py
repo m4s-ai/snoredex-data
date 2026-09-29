@@ -490,7 +490,7 @@ def main() -> None:
         "finish": "holo", "basis": "later owner determination",
         "ownerAttestedFields": ["finish"], "ownerAttestedAt": "2026-09-29"}}
     direct = fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
-        "https://i.ebayimg.com/example.png", digest)
+        "https://i.ebayimg.com/example.png", digest, acquired_from="https://i.ebayimg.com/example.png")
     assert "listingUrl" not in direct
     sources = finishes.specimen_sources(direct, direct["physicalObservation"])
     assert [source["retrievedAt"] for source in sources] == ["2026-08-24", "2026-09-29"]
@@ -503,6 +503,22 @@ def main() -> None:
     assert [(a[2], a[4], kw["provider_id"]) for a, kw in calls] == [
         ("identity", "2026-08-24", "seller-listing-photo"),
         ("finish", "2026-09-29", "owner-attestation")]
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://example.org/unrelated-page", digest, acquired_from="local.png"))
+    replay = fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        direct["photographSource"], digest, acquired_from="local.png", current=direct)
+    assert replay["photographSha256"] == digest
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        direct["photographSource"], "sha256:changed", acquired_from="local.png", current=direct))
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://example.org/changed-source", digest, acquired_from="local.png", current=direct))
+    expect_failure(lambda: fetch_attachment.build_specimen(
+        {**later, "recordedAt": "not-a-date"}, "SPEC-9998", "SPEC-9998.png", "source", digest,
+        listing_url="https://seller.example/listing/11"))
+    expect_failure(lambda: fetch_attachment.commit_import(
+        {"specimens": [direct]}, [], [{**direct, "recordedAt": "2026-09-30"}]))
+    assert finishes.specimen_source({**direct, "heldBy": "invented owner category",
+        "inspectedFrom": "physical photograph"})["sourceType"] == "Unclassified specimen source"
     null_date = {**direct["physicalObservation"], "ownerAttestedAt": None}
     fetch_attachment.validate_observation(null_date, "SPEC-9998")
     null_sources = finishes.specimen_sources(direct, null_date)
@@ -517,9 +533,18 @@ def main() -> None:
                           ("official publisher", "Official localized card-gallery render")):
         render = {**direct, "heldBy": holder, "inspectedFrom": label}
         render_sources = finishes.specimen_sources(render, null_date)
-        assert render_sources[0]["sourceType"] == label
+        assert render_sources[0]["sourceType"] == source_registry.specimen_source_type(render)
         assert render_sources[0]["claimFields"] == ["identity"]
         assert render_sources[1]["claimFields"] == ["finish"]
+    for holder in ("third-party retailer", "not established; retailer image supplied by collection owner"):
+        retailer = {**direct, "heldBy": holder}
+        label = finishes.specimen_source(retailer)["sourceType"]
+        assert label == source_registry.specimen_source_type(retailer) == "Retail listing"
+        assert source_registry.specimen_provider(None, label) == "retailer-listing"
+    assert finishes.specimen_source({**direct, "heldBy": "unknown", "inspectedFrom": ""})["sourceType"] == "Unclassified specimen source"
+    specimens = json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"]
+    for specimen in specimens:
+        assert finishes.specimen_source(specimen)["sourceType"] == source_registry.specimen_source_type(specimen)
     for bad in ("2026-02-30", "20260929", 20260929):
         expect_failure(lambda: fetch_attachment.validate_observation(
             {**later["physicalObservation"], "ownerAttestedAt": bad}, "SPEC-9998"))

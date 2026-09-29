@@ -28,7 +28,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from source_registry import provenance_url, specimen_markings
-from specimen_groups import group_specimens, photographed_fields, owner_attestation_date
+from specimen_groups import group_specimens, photographed_fields, owner_attestation_date, specimen_source_type
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -544,19 +544,7 @@ def normalize_foil_pattern(value: object) -> object:
 
 
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
-    holder = str(specimen.get("heldBy", "")).casefold()
-    if "third-party seller" in holder:
-        source_type = "Seller listing photograph"
-    elif "third-party retailer" in holder:
-        source_type = "Retail listing"
-    elif "third-party scan archive" in holder:
-        source_type = "Third-party scan archive"
-    elif holder in {"publisher or database", "official publisher"}:
-        source_type = specimen.get("inspectedFrom") or "Publisher/database reference image"
-    elif "owner" in holder:
-        source_type = "Owner-supplied physical card photograph"
-    else:
-        source_type = "Inspected physical specimen photograph"
+    source_type = specimen_source_type(specimen)
     source = exact_source(
         provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl")),
         source_type,

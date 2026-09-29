@@ -715,20 +715,38 @@ def validate_manifest_fields(item: dict, specimen_id: str) -> None:
                or (field != "number" and not item[field])]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
+    try:
+        valid_date = date.fromisoformat(item["recordedAt"]).isoformat() == item["recordedAt"]
+    except ValueError:
+        valid_date = False
+    if not valid_date:
+        fail(f"{specimen_id}: recordedAt must be an ISO date")
+
+
+
+def validate_seller_provenance(item, provenance, digest, listing_url, acquired_from, current):
+    if item.get("heldBy") != "third-party seller" or listing_url:
+        return
+    parsed = urlparse(provenance)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        fail("seller evidence needs a listing URL or an acquired source image URL")
+    if acquired_from == provenance:
+        return  # Acquisition already decoded and hashed this exact endpoint's image bytes.
+    if current and (current.get("photographSource"), current.get("photographSha256")) == (provenance, digest):
+        return  # Offline replay of the retained source/image association.
+    fail("local seller image needs listingUrl; a new provenance URL must be the acquired image endpoint")
 
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
                    digest: str, *, listing_url: str | None = None,
                    allow_small: bool = False, cited_by: list | None = None,
-                   known_specimen_ids: set[str] | None = None) -> dict:
+                   known_specimen_ids: set[str] | None = None, acquired_from=None, current=None) -> dict:
     validate_manifest_fields(item, specimen_id)
     physical = item.get("physicalObservation")
     if physical is not None:
         # Group context is checked on the complete proposed registry before any write.
         physical = validate_observation(physical, specimen_id, known_specimen_ids, defer_finish=True)
-    if (item.get("heldBy") == "third-party seller" and not listing_url
-            and not (urlparse(provenance).scheme in {"http", "https"} and urlparse(provenance).netloc)):
-        fail(f"manifest row for {specimen_id} needs a listingUrl or source image URL for third-party seller evidence")
+    validate_seller_provenance(item, provenance, digest, listing_url, acquired_from, current)
     record = {
         "specimenId": specimen_id,
         "setCode": item["setCode"],
@@ -761,6 +779,12 @@ def add_specimen_options(record, item, physical, listing_url, allow_small):
         record["photographAllowSmall"] = True
 
 
+def ensure_photograph_date(previous, record):
+    if (previous.get("photographSha256") == record.get("photographSha256")
+            and previous.get("recordedAt") != record.get("recordedAt")):
+        fail(f"{record['specimenId']}: unchanged image must retain recordedAt; date later owner statements separately")
+
+
 def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
     """Commit every image and the registry together, restoring the prior state on failure."""
     validate_import_groups(doc, records)
@@ -776,6 +800,7 @@ def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[d
     superseded: set[Path] = set()
     for record in records:
         previous = current_by_id.get(record["specimenId"], {})
+        ensure_photograph_date(previous, record)
         old_name = previous.get("photograph")
         new_name = record.get("photograph")
         if not old_name or not new_name or old_name == new_name:
@@ -978,7 +1003,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         record = build_specimen(
             item, specimen_id, filename, provenance, digest, listing_url=listing_url,
             allow_small=args.allow_small, cited_by=cited_by,
-            known_specimen_ids=known_observed_specimen_ids,
+            known_specimen_ids=known_observed_specimen_ids, acquired_from=source_label, current=current,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()

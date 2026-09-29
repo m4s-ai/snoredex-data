@@ -10,6 +10,36 @@ PHYSICAL_FIELDS = ("finish", "edition", "foilPattern", "markings", "markingRole"
                    "distribution", "cardSize")
 
 
+SPECIMEN_SOURCE_TYPES = {
+    "owner": "Owner-supplied physical card photograph",
+    "collection owner": "Owner-supplied physical card photograph",
+    "collection-owner supplied source image": "Owner-supplied physical card photograph",
+    "not established; retailer image supplied by collection owner": "Retail listing",
+    "third-party retailer": "Retail listing",
+    "third-party seller": "Seller listing photograph",
+    "third-party scan archive": "Third-party scan archive",
+    "third-party collector": "Third-party collector photograph",
+    "publisher or database": "Inspected reference photograph; original provider unspecified",
+    "not established; retailer reference image": "Retail listing",
+    "not established; owner supplied seller image url": "Seller listing photograph",
+    "not established; image supplied by collection owner": "Inspected card photograph; external origin unknown",
+}
+
+def specimen_source_type(specimen):
+    holder = str(specimen.get("heldBy", "")).casefold()
+    description = str(specimen.get("inspectedFrom") or "")
+    if holder == "official publisher" or (holder == "publisher or database" and "official" in description.casefold()):
+        return description or "Publisher reference image"
+    if holder in SPECIMEN_SOURCE_TYPES:
+        return SPECIMEN_SOURCE_TYPES[holder]
+    if holder in {"third-party database", "marketplace catalogue", "publisher or marketplace seller",
+                  "not established; published reference image", "publisher or retailer",
+                  "tcgdex digital card image", "third-party collector; psa certificate 94474867",
+                  "not established; shopee seller listing photograph"}:
+        return description or "Unclassified specimen source"
+    return "Unclassified specimen source"
+
+
 def owner_attestation_date(observation, recorded_at):
     return observation.get("ownerAttestedAt") or recorded_at
 

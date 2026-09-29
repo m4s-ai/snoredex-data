@@ -32,7 +32,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Callable
-from specimen_groups import owner_attestation_date
+from specimen_groups import owner_attestation_date, specimen_source_type, SPECIMEN_SOURCE_TYPES
 from urllib.parse import quote, unquote, urlsplit, urlunsplit
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -838,18 +838,7 @@ def resolve_evidence_provider(
     return resolve_provider(url, source_type)
 
 
-SPECIMEN_SOURCE_TYPES = {
-    "collection owner": "Owner-supplied physical card photograph",
-    "collection-owner supplied source image": "Owner-supplied physical card photograph",
-    "third-party retailer": "Retail listing",
-    "third-party seller": "Seller listing photograph",
-    "third-party scan archive": "Third-party scan archive",
-    "third-party collector": "Third-party collector photograph",
-    "publisher or database": "Inspected reference photograph; original provider unspecified",
-    "not established; retailer reference image": "Retail listing",
-    "not established; owner supplied seller image url": "Seller listing photograph",
-    "not established; image supplied by collection owner": "Inspected card photograph; external origin unknown",
-}
+
 
 
 def reviewed_candidate_claims(graph):
@@ -940,10 +929,7 @@ def record_linked_specimens(
             continue
         if record_product_render_context(specimen, unit_ids, units_by_id, record):
             continue
-        source_type = SPECIMEN_SOURCE_TYPES.get(
-            str(specimen.get("heldBy", "")).casefold(),
-            str(specimen.get("inspectedFrom") or "Inspected physical specimen photograph"),
-        )
+        source_type = specimen_source_type(specimen)
         fields = ("finish", "edition") if specimen["specimenId"] in grouped else ("finish",)
         record_specimen_sources(specimen, unit_ids, source_type, physical, record, surfaces, fields=fields)
 
@@ -1056,10 +1042,7 @@ def _specimen_indexed_directly(entry: dict, specimens_by_id: dict | None) -> boo
     spec = (specimens_by_id or {}).get(str(entry.get("specimenId")))
     if not spec:
         return False
-    source_type = SPECIMEN_SOURCE_TYPES.get(
-        str(spec.get("heldBy", "")).casefold(),
-        str(spec.get("inspectedFrom") or "Inspected physical specimen photograph"),
-    )
+    source_type = specimen_source_type(spec)
     candidate_urls = {
         provenance_url(spec.get("photographSource")),
         provenance_url(spec.get("listingUrl")),
