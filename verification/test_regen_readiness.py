@@ -115,10 +115,12 @@ def check_writes(scratch: pathlib.Path) -> None:
     (scratch / "staged.txt").write_text("staged before")
     subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
     hidden_write = "p=Path('clean.txt'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))"
+    resolve_undo = "subprocess.run(['git', 'update-index', '--clear-resolve-undo'], check=True)"
     index_mutations = [
         "subprocess.run(['git', 'add', 'tracked.txt'], check=True)",
         "subprocess.run(['git', 'restore', '--staged', 'staged.txt'], check=True)",
         "subprocess.run(['git', 'update-index', '--chmod=+x', 'clean.txt'], check=True)",
+        resolve_undo,
     ]
     mutations = [
         "p=Path('tracked.txt'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
@@ -143,6 +145,12 @@ def check_writes(scratch: pathlib.Path) -> None:
         before = regen_module.tree_state()
         assert invoke()[0] == 0
         assert regen_module.tree_state() == before
+        subprocess.run(["git", "update-index", "--split-index"], cwd=scratch, check=True)
+        before = regen_module.tree_state()
+        assert len(before[2]) == 2
+        assert invoke()[0] == 0
+        assert regen_module.tree_state() == before
+        subprocess.run(["git", "update-index", "--no-split-index"], cwd=scratch, check=True)
         for phase in ("CHECK", "TESTS"):
             for mutation in mutations:
                 for exit_code in (0, 1):
@@ -154,6 +162,14 @@ def check_writes(scratch: pathlib.Path) -> None:
                     subprocess.run(["git", "restore", "--staged", "--source=HEAD", "--",
                                     "tracked.txt", "clean.txt"], cwd=scratch, check=True)
                     subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
+                    if mutation == resolve_undo:
+                        blob = subprocess.check_output(["git", "rev-parse", "HEAD:clean.txt"], cwd=scratch).strip().decode()
+                        entries = "0 " + "0" * len(blob) + "\tclean.txt\n" + "".join(
+                            f"100644 {blob} {stage}\tclean.txt\n" for stage in (1, 2, 3))
+                        subprocess.run(["git", "update-index", "--index-info"], cwd=scratch,
+                                       input=entries.encode(), check=True)
+                        subprocess.run(["git", "add", "clean.txt"], cwd=scratch, check=True)
+                        assert subprocess.check_output(["git", "ls-files", "--resolve-undo"], cwd=scratch)
                     (scratch / "new.txt").unlink(missing_ok=True)
                     (scratch / "cache" / "new.json").unlink(missing_ok=True)
                     command = ["-c", "import os, subprocess; from pathlib import Path; "

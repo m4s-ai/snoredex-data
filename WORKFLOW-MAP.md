@@ -282,6 +282,16 @@ The envelope has four distinct responsibilities:
 - cross-artifact and publication consistency;
 - determinism/readiness of the central build command.
 
+Writing test fixtures belong in temporary directories outside the checkout. `regen.py` observes
+file contents/existence/metadata and complete Git index bytes across CHECK and TESTS, including
+failure exits; workflow delta reports intentionally use a narrower dirty-path view.
+Git's optional index refresh is disabled; Git supplies the active and shared index paths.
+Delta observation also disables Git diff's automatic stat refresh while retaining content-based
+path selection.
+`ponytail: The guard compares end states and cannot see a write fully restored before its final
+snapshot; isolate writing fixtures now, add process-level write restrictions if enforcement of
+every intermediate write is required.` SQLite content remains covered by logical validation.
+
 The normative gate/impact data lives in `verification/workflow_gate_matrix.json`; its stdlib-only
 regression is owned by `scripts/regen.py`.
 

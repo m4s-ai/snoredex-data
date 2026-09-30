@@ -55,7 +55,7 @@ def main() -> int:
         assert not _staging_matches_inputs(
             stale_meta, canonical, "contract-1", "capability-1", "graph-1"
         )
-    with tempfile.TemporaryDirectory(dir=ROOT) as raw_records:
+    with tempfile.TemporaryDirectory() as raw_records:
         records_path = Path(raw_records) / "records.jsonl"
         records_bytes = b'{"recordId":"record-1"}\n'
         records_path.write_bytes(records_bytes)
@@ -363,7 +363,7 @@ def main() -> int:
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
 
-    with tempfile.TemporaryDirectory(dir=ROOT) as raw_root:
+    with tempfile.TemporaryDirectory() as raw_root:
         runs = Path(raw_root)
         older = runs / "20260101T000000Z"
         newer = runs / "20260102T000000Z"

@@ -28,6 +28,8 @@ import sys
 import time
 
 sys.dont_write_bytecode = True
+# Read-only Git commands must not refresh the index as a side effect.
+os.environ["GIT_OPTIONAL_LOCKS"] = "0"
 try:
     from scripts.workflow_observation import tree_snapshot
 except ModuleNotFoundError:
@@ -146,7 +148,7 @@ def run(cmd: list[str], label: str) -> bool:
     return proc.returncode == 0
 
 
-def tree_state() -> tuple[dict, dict, tuple[bytes, ...]]:
+def tree_state() -> tuple[dict, dict, dict]:
     """Observe contents and metadata without comparing non-portable SQLite bytes."""
     paths = subprocess.run(
         ["git", "ls-files", "--cached", "--others", "-z"], cwd=ROOT,
@@ -159,13 +161,13 @@ def tree_state() -> tuple[dict, dict, tuple[bytes, ...]]:
             metadata[relative] = (info.st_size, info.st_mtime_ns, info.st_mode)
         except FileNotFoundError:
             metadata[relative] = None
-    git_state = tuple(subprocess.run(
-        ["git", *arguments], cwd=ROOT, check=True, stdout=subprocess.PIPE,
-    ).stdout for arguments in (
-        ["ls-files", "--stage", "-v", "-z"],
-        ["status", "--porcelain=v1", "-z", "--untracked-files=all"],
-    ))
-    return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata, git_state
+    index_paths = subprocess.run(
+        ["git", "rev-parse", "--git-path", "index", "--shared-index-path"], cwd=ROOT,
+        check=True, stdout=subprocess.PIPE,
+    ).stdout.splitlines()
+    indexes = [ROOT / os.fsdecode(path) for path in index_paths]
+    index_state = {path: path.read_bytes() if path.exists() else None for path in indexes}
+    return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata, index_state
 
 
 def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:
