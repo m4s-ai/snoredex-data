@@ -394,6 +394,23 @@ def main() -> int:
         fail("projection is stale; run python scripts/artwork_review.py")
     if projection.get("schemaVersion") != "1.2.0" or projection.get("proposalSchemaVersion") != "1.2.0":
         fail("unexpected projection or proposal schema version")
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        output = root / "projection.json"
+        with patch.object(artwork_review, "ROOT", root), patch.object(artwork_review, "OUT", output), \
+                patch.object(artwork_review, "build", return_value=projection), \
+                patch.object(artwork_derivatives, "ensure_for_sources"), \
+                patch.object(sys, "argv", ["artwork_review.py"]):
+            assert artwork_review.main() == 0
+            assert list(root.iterdir()) == [output] and json.loads(output.read_text(encoding="utf-8")) == projection
+            before = (output.read_bytes(), output.stat().st_mtime_ns)
+            with patch.object(sys, "argv", ["artwork_review.py", "--check"]):
+                assert artwork_review.main() == 0
+                assert (output.read_bytes(), output.stat().st_mtime_ns) == before
+                output.write_text("{}\n", encoding="utf-8")
+                assert artwork_review.main() == 1
+                output.unlink()
+                assert artwork_review.main() == 1
     verify_derivative_writer()
     verify_specimen_reference_routes()
 

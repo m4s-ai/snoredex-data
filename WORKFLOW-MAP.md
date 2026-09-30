@@ -213,9 +213,10 @@ documents the standalone consumer; its isolated regression reads only the three 
 files. Publication remains a separate gate through the existing allowlisted publisher.
 
 The artwork review is a deliberately bounded consumer of the graph. `scripts/artwork_review.py`
-writes both the canonical JSON projection and an equivalent generated JavaScript fallback. The
-site embeds only a 924-byte metadata envelope; HTTP pages fetch the JSON on demand and offline
-`file://` pages load the fallback script. The review section also preloads when it approaches the
+writes one JSON projection. The site embeds only a versioned metadata envelope and fetches JSON
+on demand through HTTP, including project subpaths. Direct `file://` artwork review is no longer
+supported (#412); serve a checkout with `python -m http.server 8000`. Failed loads remain visible
+and can be retried. The review section also preloads when it approaches the
 viewport, keeps search/filter evaluation in memory, and emits at most 20 groups per batch with an
 explicit “Load more” action. Browser proposals still carry the same projection and schema versions.
 

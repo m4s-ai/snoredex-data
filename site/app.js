@@ -1,10 +1,8 @@
 /* Snoredex review view: table filtering and sorting, evidence and artwork proposals.
  *
  * Vanilla JS, no dependencies, and no third-party network calls. Row data are embedded in the page
- * as JSON script blocks rather than fetched, because `fetch` of a sibling file is blocked under
- * file:// and the page must work from a local checkout as well as from GitHub Pages. The large
- * artwork review projection is the one deliberate exception: it is loaded on demand and has a
- * generated script fallback for file://.
+ * as JSON script blocks. The large artwork review projection loads on demand through HTTP,
+ * including a locally served checkout and the GitHub Pages project path.
  *
  * Two invariants hold throughout:
  *   - a row is identified by its stable `rowId`, never by its position, so sorting and filtering
@@ -26,28 +24,14 @@
   // literal drifted the moment #121 added a column.
   const DETAIL_SPAN = 18 + LANGS.length + 2;
 
-  function loadArtworkProjection(meta) {
-    if (window.__SNOREDEX_ARTWORK_REVIEW__) {
-      return Promise.resolve(window.__SNOREDEX_ARTWORK_REVIEW__);
+  async function loadArtworkProjection(meta) {
+    // ponytail: artwork needs HTTP; add offline packaging only for a proven server-free workflow.
+    if (window.location.protocol === "file:") {
+      throw new Error("serve the checkout with python -m http.server 8000");
     }
-    const loadFallback = () => new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = meta.fallback;
-      script.onload = () => window.__SNOREDEX_ARTWORK_REVIEW__
-        ? resolve(window.__SNOREDEX_ARTWORK_REVIEW__)
-        : reject(new Error("artwork fallback did not define a projection"));
-      script.onerror = () => reject(new Error("artwork projection could not be loaded"));
-      document.head.appendChild(script);
-    });
-    return fetch(meta.source, { cache: "force-cache" })
-      .then((response) => {
-        if (!response.ok) throw new Error("artwork projection returned HTTP " + response.status);
-        return response.json().then((projection) => {
-          window.__SNOREDEX_ARTWORK_REVIEW__ = projection;
-          return projection;
-        });
-      })
-      .catch(() => loadFallback());
+    const response = await fetch(meta.source, { cache: "force-cache" });
+    if (!response.ok) throw new Error("artwork projection returned HTTP " + response.status);
+    return response.json();
   }
 
   const FINISH_LABELS = {

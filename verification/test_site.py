@@ -5,7 +5,7 @@ These drive the real page in Chromium rather than asserting on the generator's o
 the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, print and review
 proposal downloads — only exist at runtime.
 
-Run against the local file, exactly as a reader with a checkout would:
+Run against a temporary local HTTP server, as for a served checkout:
 
     python verification/test_site.py
 
@@ -21,7 +21,12 @@ import re
 import shutil
 import sys
 import tempfile
+from contextlib import contextmanager
+from functools import partial
+from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+from threading import Thread
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
@@ -143,6 +148,22 @@ def contrast_ratio(foreground: str, background: str) -> float:
     return (max(first, second) + 0.05) / (min(first, second) + 0.05)
 
 
+@contextmanager
+def serve_site(directory: Path = ROOT):
+    class Handler(SimpleHTTPRequestHandler):
+        def log_message(self, format, *args):
+            pass
+
+    with ThreadingHTTPServer(("127.0.0.1", 0), partial(Handler, directory=str(directory))) as server:
+        thread = Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        try:
+            yield f"http://127.0.0.1:{server.server_port}"
+        finally:
+            server.shutdown()
+            thread.join()
+
+
 def main() -> int:
     try:
         from playwright.sync_api import sync_playwright
@@ -150,8 +171,8 @@ def main() -> int:
         print("playwright is not installed; run: pip install -r requirements.txt", file=sys.stderr)
         return 1
 
-    url = INDEX.as_uri()
-    with sync_playwright() as p:
+    with serve_site() as origin, sync_playwright() as p:
+        url = origin + "/index.html"
         try:
             # Playwright resolves both its default cache and PLAYWRIGHT_BROWSERS_PATH itself.
             # Contributors may instead select an installed Playwright channel (for example
@@ -175,7 +196,6 @@ def main() -> int:
             button = target.locator("#ar-load")
             if button.count() and button.is_visible() and button.is_enabled():
                 button.click()
-            target.wait_for_function("window.__SNOREDEX_ARTWORK_REVIEW__ !== undefined")
             target.wait_for_selector("#ar-groups .artwork-member")
 
         # Column and language filters live in collapsed <details>; open them as a user would.
@@ -197,8 +217,9 @@ def main() -> int:
         check("artwork review starts without rendering review cards",
               initial_artwork_members == 0 and page.locator("#ar-load").is_visible(),
               f"initial members={initial_artwork_members}")
-        load_artwork(page)
-        artwork_projection = page.evaluate("() => window.__SNOREDEX_ARTWORK_REVIEW__")
+        with page.expect_response("**/verification/artwork_review_projection.json?*") as projection_response:
+            load_artwork(page)
+        artwork_projection = projection_response.value.json()
         check("artwork projection fetch URL is versioned",
               artwork_meta["source"] == "verification/artwork_review_projection.json?v=" +
               artwork_projection["projectionVersion"], artwork_meta["source"])
@@ -674,9 +695,7 @@ def main() -> int:
 
         # A proposal from the immediately preceding 1.2 shape (same version, missing typed
         # identity fields) must also be classified stale rather than accepted as current.
-        current_projection = stale_page.evaluate(
-            "() => window.__SNOREDEX_ARTWORK_REVIEW__.projectionVersion"
-        )
+        current_projection = artwork_projection["projectionVersion"]
         stale_page.evaluate("""(projectionVersion) => {
           localStorage.setItem('snoredex-artwork-review-proposals-v1', JSON.stringify({
             'CARD:TYPED-FIXTURE': {
@@ -748,14 +767,14 @@ def main() -> int:
               artwork_download.value.suggested_filename == "snoredex-artwork-review-proposals.json",
               artwork_download.value.suggested_filename)
 
-        multi_image_member = page.evaluate("""() => {
-          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
+        multi_image_member = page.evaluate("""(projection) => {
+          for (const group of projection.groups) {
             const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.images && candidate.images.length > 1);
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
           return null;
-        }""")
+        }""", artwork_projection)
         if multi_image_member:
             page.fill("#ar-search", multi_image_member["id"])
             page.wait_for_timeout(80)
@@ -769,8 +788,8 @@ def main() -> int:
         else:
             check("artwork review renders every associated image", False, "projection has no multi-image member")
 
-        structured_member = page.evaluate("""() => {
-          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
+        structured_member = page.evaluate("""(projection) => {
+          for (const group of projection.groups) {
             const member = group.members.find(candidate => group.groupKind === 'image-group'
               && candidate.detection && candidate.detection.artist
               && candidate.images && candidate.images.length && candidate.physicalPrintings
@@ -779,7 +798,7 @@ def main() -> int:
               printingIds: member.physicalPrintings.map(item => item.physicalPrintingId)};
           }
           return null;
-        }""")
+        }""", artwork_projection)
         if structured_member:
             page.fill("#ar-search", structured_member["id"])
             page.wait_for_timeout(80)
@@ -827,13 +846,13 @@ def main() -> int:
 
         page.select_option("#ar-scope", "all")
         page.wait_for_timeout(80)
-        no_image_member = page.evaluate("""() => {
-          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
+        no_image_member = page.evaluate("""(projection) => {
+          for (const group of projection.groups) {
             const member = group.members.find(candidate => !candidate.images || !candidate.images.length);
             if (member) return member.cardReleaseId;
           }
           return null;
-        }""")
+        }""", artwork_projection)
         if no_image_member:
             page.fill("#ar-search", no_image_member)
             page.wait_for_timeout(80)
@@ -860,14 +879,14 @@ def main() -> int:
             check("artwork review permits only an unclear proposal without an image", False,
                   "projection has no mapped member without an image")
 
-        unverified_image_member = page.evaluate("""() => {
-          for (const group of window.__SNOREDEX_ARTWORK_REVIEW__.groups) {
+        unverified_image_member = page.evaluate("""(projection) => {
+          for (const group of projection.groups) {
             const member = group.members.find(candidate => candidate.images
               && candidate.images.some(image => !image.reviewable || !image.contentHash));
             if (member) return {id: member.cardReleaseId, count: member.images.length};
           }
           return null;
-        }""")
+        }""", artwork_projection)
         if unverified_image_member:
             page.fill("#ar-search", unverified_image_member["id"])
             page.wait_for_timeout(80)
@@ -1738,8 +1757,7 @@ def main() -> int:
 
         # Reassign proposals must point at a currently projected artwork group, and the hint must
         # use the current IMAGE-GROUP/RELEASE-GROUP identity vocabulary.
-        reassign_target = page.evaluate("""() => {
-          const projection = window.__SNOREDEX_ARTWORK_REVIEW__;
+        reassign_target = page.evaluate("""(projection) => {
           const member = projection.groups.flatMap(group => group.members.map(candidate => ({
             id: candidate.cardReleaseId,
             groupId: group.groupId,
@@ -1747,7 +1765,7 @@ def main() -> int:
           }))).find(candidate => candidate.reviewable);
           const target = projection.groups.find(group => group.groupId !== member.groupId);
           return member && target ? {id: member.id, target: target.groupId} : null;
-        }""")
+        }""", artwork_projection)
         if reassign_target:
             page.fill("#ar-search", reassign_target["id"])
             page.wait_for_timeout(80)
@@ -1785,6 +1803,72 @@ def main() -> int:
                   "projection has no reviewable image member with a distinct target group")
             check("reassign rejects unknown artwork group ids", False, "reassign fixture unavailable")
             check("reassign accepts a projected artwork group id", False, "reassign fixture unavailable")
+
+        # Failed delivery must never look like an empty catalogue or silently load a script.
+        projection_pattern = "**/verification/artwork_review_projection.json?*"
+        for failure in ("network", "http", "json", "version"):
+            context = browser.new_context()
+            target = context.new_page()
+            def reject_projection(route):
+                if failure == "network":
+                    route.abort()
+                elif failure == "http":
+                    route.fulfill(status=503, body="unavailable")
+                else:
+                    payload = dict(artwork_projection, projectionVersion="stale")
+                    route.fulfill(content_type="application/json",
+                                  body="{invalid" if failure == "json" else json.dumps(payload))
+            target.route(projection_pattern, reject_projection)
+            target.goto(url)
+            target.click("#ar-load")
+            target.wait_for_function("document.querySelector('#ar-load-status').textContent.startsWith('Artwork review could not be loaded:')")
+            check(f"artwork {failure} failure stays visible and retryable",
+                  target.locator("#ar-load-status").is_visible()
+                  and target.locator("#ar-load").is_enabled()
+                  and not target.locator(".artwork-controls").is_visible()
+                  and target.locator("#ar-groups .artwork-member").count() == 0
+                  and "fallback" not in artwork_meta)
+            target.unroute(projection_pattern)
+            load_artwork(target)
+            check(f"artwork recovers after {failure} failure",
+                  target.locator(".artwork-controls").is_visible()
+                  and not target.locator("#ar-load-state").is_visible())
+            context.close()
+
+        with serve_site(ROOT.parent) as parent_origin:
+            context = browser.new_context()
+            target = context.new_page()
+            base = parent_origin + "/" + quote(ROOT.name) + "/"
+            target.goto(base + "index.html")
+            with target.expect_response(projection_pattern) as subpath_response:
+                load_artwork(target)
+            image = target.locator("figure.artwork-image img").first
+            image.scroll_into_view_if_needed()
+            target.wait_for_function("document.querySelector('figure.artwork-image img').naturalWidth > 0")
+            original = target.locator("figure.artwork-image a").first.evaluate("el => el.href")
+            release_id = target.locator(".artwork-member").first.get_attribute("data-release-id")
+            member = next(member for group in artwork_projection["groups"] for member in group["members"]
+                          if member["cardReleaseId"] == release_id)
+            source = next(observation["url"] for observation in member["observations"] if observation.get("url"))
+            check("project subpath loads identical JSON and relative images/originals",
+                  subpath_response.value.url.startswith(base + artwork_meta["source"])
+                  and subpath_response.value.json() == artwork_projection
+                  and image.evaluate("el => el.src").startswith(base)
+                  and original.startswith(base)
+                  and target.locator(".artwork-member .artwork-evidence a").first.get_attribute("href") == source
+                  and context.request.get(original).ok)
+            context.close()
+
+        context = browser.new_context()
+        target = context.new_page()
+        target.goto(INDEX.as_uri())
+        target.click("#ar-load")
+        target.wait_for_function("document.querySelector('#ar-load-status').textContent.includes('python -m http.server 8000')")
+        check("file artwork review reports the HTTP requirement",
+              target.locator("#ar-load-status").is_visible()
+              and target.locator("#ar-load").is_enabled()
+              and target.locator("#ar-groups .artwork-member").count() == 0)
+        context.close()
 
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
