@@ -146,7 +146,7 @@ def run(cmd: list[str], label: str) -> bool:
     return proc.returncode == 0
 
 
-def tree_state() -> tuple[dict, dict]:
+def tree_state() -> tuple[dict, dict, tuple[bytes, ...]]:
     """Observe contents and metadata without comparing non-portable SQLite bytes."""
     paths = subprocess.run(
         ["git", "ls-files", "--cached", "--others", "-z"], cwd=ROOT,
@@ -159,7 +159,13 @@ def tree_state() -> tuple[dict, dict]:
             metadata[relative] = (info.st_size, info.st_mtime_ns, info.st_mode)
         except FileNotFoundError:
             metadata[relative] = None
-    return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata
+    git_state = tuple(subprocess.run(
+        ["git", *arguments], cwd=ROOT, check=True, stdout=subprocess.PIPE,
+    ).stdout for arguments in (
+        ["ls-files", "--stage", "-v", "-z"],
+        ["status", "--porcelain=v1", "-z", "--untracked-files=all"],
+    ))
+    return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata, git_state
 
 
 def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:
@@ -223,7 +229,7 @@ def main() -> int:
     finally:
         changed = tree_state() != before_check
         if changed:
-            print("\nRead-only gate changed working-tree files or metadata.", file=sys.stderr)
+            print("\nRead-only gate changed working-tree files, metadata or Git index.", file=sys.stderr)
     if changed or not valid:
         return 1
 

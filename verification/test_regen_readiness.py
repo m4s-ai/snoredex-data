@@ -112,7 +112,14 @@ def check_writes(scratch: pathlib.Path) -> None:
     subprocess.run(["git", "add", "clean.txt"], cwd=scratch, check=True)
     subprocess.run(["git", "-c", "user.name=workflow-test", "-c", "user.email=workflow-test.invalid",
                     "commit", "-qm", "fixture"], cwd=scratch, check=True)
+    (scratch / "staged.txt").write_text("staged before")
+    subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
     hidden_write = "p=Path('clean.txt'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))"
+    index_mutations = [
+        "subprocess.run(['git', 'add', 'tracked.txt'], check=True)",
+        "subprocess.run(['git', 'restore', '--staged', 'staged.txt'], check=True)",
+        "subprocess.run(['git', 'update-index', '--chmod=+x', 'clean.txt'], check=True)",
+    ]
     mutations = [
         "p=Path('tracked.txt'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
         "Path('untracked.txt').write_text('after')",
@@ -123,6 +130,7 @@ def check_writes(scratch: pathlib.Path) -> None:
         "p=Path('cache/candidate.json'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
         "p=Path('cache/candidate.json'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))",
         hidden_write,
+        *index_mutations,
     ]
     with patch.multiple(regen_module, ROOT=scratch, REGEN=[], CHECK=[], TESTS=[]), \
             patch.object(sys, "argv", ["regen.py", "--check"]):
@@ -143,12 +151,18 @@ def check_writes(scratch: pathlib.Path) -> None:
                     ignored.write_text("before")
                     clean.write_text("before")
                     os.utime(clean, (1000000000, 1000000000))
+                    subprocess.run(["git", "restore", "--staged", "--source=HEAD", "--",
+                                    "tracked.txt", "clean.txt"], cwd=scratch, check=True)
+                    subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
                     (scratch / "new.txt").unlink(missing_ok=True)
                     (scratch / "cache" / "new.json").unlink(missing_ok=True)
-                    command = ["-c", "import os; from pathlib import Path; "
+                    command = ["-c", "import os, subprocess; from pathlib import Path; "
                                + mutation + f"; raise SystemExit({exit_code})"]
+                    before = regen_module.tree_state()
                     with patch.object(regen_module, phase, [command]):
                         code, output = invoke()
+                    if mutation in index_mutations:
+                        assert regen_module.tree_state()[:2] == before[:2]
                     if mutation == hidden_write:
                         assert not subprocess.check_output(["git", "diff", "--name-only", "--", "clean.txt"], cwd=scratch)
                     assert code == 1 and "Read-only gate changed" in output, (phase, mutation, output)
