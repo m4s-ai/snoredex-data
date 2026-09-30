@@ -1003,34 +1003,80 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         signed_registry.unlink(missing_ok=True)
         (scratch / "SPEC-0099.png").unlink(missing_ok=True)
 
-    # Replacing a photograph must remove the superseded extension atomically.
-    old_photo = scratch / "SPEC-0001.jpg"
-    new_photo = scratch / "SPEC-0001.png"
-    replace_registry = scratch / ".fetch-attachment-test-replace.json"
-    old_photo.write_bytes(b"old image")
-    new_photo.write_bytes(b"new image")
-    replace_registry.write_text(json.dumps({
-        "count": 1,
-        "specimens": [{"specimenId": "SPEC-0001", "photograph": old_photo.name}],
-    }), encoding="utf-8")
-    original_registry = fetch_attachment.SPECIMENS_JSON
-    original_specimen_dir = fetch_attachment.SPECIMEN_DIR
-    fetch_attachment.SPECIMENS_JSON = replace_registry
-    fetch_attachment.SPECIMEN_DIR = scratch
-    try:
-        fetch_attachment.commit_import(
-            {"count": 1, "specimens": [{"specimenId": "SPEC-0001", "photograph": old_photo.name}]},
-            [(new_photo, b"replacement")],
-            [{"specimenId": "SPEC-0001", "photograph": new_photo.name}],
-        )
-        assert not old_photo.exists()
-        assert new_photo.read_bytes() == b"replacement"
-    finally:
-        fetch_attachment.SPECIMENS_JSON = original_registry
-        fetch_attachment.SPECIMEN_DIR = original_specimen_dir
-        replace_registry.unlink(missing_ok=True)
-        old_photo.unlink(missing_ok=True)
-        new_photo.unlink(missing_ok=True)
+    verify_direct_imports(scratch, image)
+
+
+def verify_direct_imports(scratch: Path, image: bytes) -> None:
+    identity = {"setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
+                "heldBy": "owner", "inspectedFrom": "synthetic storage fixture",
+                "observed": "synthetic grouped views", "recordedAt": "2026-09-30"}
+    for extension in ("png", "jpg"):
+        folder = scratch / f"direct-{extension}"
+        photos = folder / "photos"
+        photos.mkdir(parents=True)
+        source = folder / "input.png"
+        source.write_bytes(image)
+        primary = {**identity, "specimenId": "SPEC-0002", "photograph": "SPEC-0002.jpg",
+                   "photographSha256": fetch_attachment.content_hash(b"primary view"),
+                   "physicalObservation": {"finish": "holo", "basis": "synthetic storage fixture"}}
+        (photos / primary["photograph"]).write_bytes(b"primary view")
+        previous = {**identity, "specimenId": "SPEC-0001", "photograph": f"SPEC-0001.{extension}",
+                    "photographSha256": fetch_attachment.content_hash(b"previous view"),
+                    "photographSource": "https://example.test/previous", "citedBy": ["F0167-P01"],
+                    "sameCardAs": {"specimenId": "SPEC-0002", "basis": "synthetic same-card assertion"},
+                    "physicalObservation": {"edition": "1st Edition", "basis": "synthetic storage fixture"}}
+        (photos / previous["photograph"]).write_bytes(b"previous view")
+        registry = folder / "specimens.json"
+        registry.write_text(json.dumps({"count": 2, "specimens": [previous, primary]}), encoding="utf-8")
+        args = SimpleNamespace(specimen="SPEC-0001", source=str(source),
+                               attachment_url="https://example.test/replacement",
+                               replace=True, allow_small=False, dry_run=False)
+        with patch.multiple(fetch_attachment, ROOT=folder, SPECIMENS_JSON=registry, SPECIMEN_DIR=photos):
+            before = {path: path.read_bytes() for path in folder.rglob("*") if path.is_file()}
+
+            def failed_write(doc):
+                registry.write_bytes(b"partial registry")
+                raise OSError("injected registry write failure")
+
+            with patch.object(fetch_attachment, "write_registry", side_effect=failed_write):
+                try:
+                    fetch_attachment.command_file(fetch_attachment.load_registry(), args)
+                except OSError:
+                    pass
+                else:
+                    raise AssertionError("expected registry write failure")
+            assert before == {path: path.read_bytes() for path in folder.rglob("*") if path.is_file()}
+
+            args.dry_run = True
+            before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                      for path in folder.rglob("*") if path.is_file()}
+            document = fetch_attachment.load_registry()
+            original = deepcopy(document)
+            assert fetch_attachment.command_file(document, args) == 0
+            assert document == original
+            document["specimens"][0]["sameCardAs"]["specimenId"] = "SPEC-9999"
+            expect_failure(lambda: fetch_attachment.command_file(document, args))
+            assert before == {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                              for path in folder.rglob("*") if path.is_file()}
+
+            args.dry_run = False
+            assert fetch_attachment.command_file(fetch_attachment.load_registry(), args) == 0
+            updated = fetch_attachment.load_registry()["specimens"][0]
+            assert updated == {**previous, "photograph": "SPEC-0001.png",
+                               "photographSource": args.attachment_url,
+                               "photographSha256": fetch_attachment.content_hash(image)}
+            assert {path.name for path in photos.iterdir()} == {"SPEC-0001.png", "SPEC-0002.jpg"}
+            assert (photos / "SPEC-0001.png").read_bytes() == image
+            before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                      for path in folder.rglob("*") if path.is_file()}
+            args.replace = False
+            assert fetch_attachment.command_file(fetch_attachment.load_registry(), args) == 0
+            args.dry_run = True
+            document = fetch_attachment.load_registry()
+            document["specimens"][0]["sameCardAs"]["specimenId"] = "SPEC-9999"
+            expect_failure(lambda: fetch_attachment.command_file(document, args))
+            assert before == {path: (path.read_bytes(), path.stat().st_mtime_ns)
+                              for path in folder.rglob("*") if path.is_file()}
 
 
 

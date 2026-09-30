@@ -639,6 +639,7 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
     existing = specimen.get("photograph")
     if existing and not args.replace:
         if existing == filename and destination.is_file() and destination.read_bytes() == blob:
+            validate_import_groups(doc, [])
             print(f"{specimen['specimenId']} already carries these exact bytes as {existing} — "
                   f"nothing to do")
             return 0
@@ -648,7 +649,9 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
     digest = content_hash(blob)
     photo_hash_owners = existing_photo_hash_owners(doc)
     ensure_unique_photo_hash(photo_hash_owners, digest, specimen["specimenId"])
+    record = with_photograph(specimen, filename, provenance, digest, allow_small=args.allow_small)
     if args.dry_run:
+        validate_import_groups(doc, [record])
         print(f"DRY RUN — would write {destination.relative_to(ROOT)} "
               f"({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
         print(f"DRY RUN — would set {specimen['specimenId']}.photograph = {filename!r}")
@@ -656,27 +659,13 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
         print(f"DRY RUN — would set {specimen['specimenId']}.photographSha256 = {digest!r}")
         return 0
 
-    SPECIMEN_DIR.mkdir(parents=True, exist_ok=True)
-    destination.write_bytes(blob)
-
-    stale = existing and existing != filename
-    index = doc["specimens"].index(specimen)
-    doc["specimens"][index] = with_photograph(
-        specimen, filename, provenance, digest, allow_small=args.allow_small
-    )
-    write_registry(doc)
+    commit_import(doc, [(destination, blob)], [record])
 
     print(f"wrote {destination.relative_to(ROOT)} ({len(blob):,} bytes, {size[0]}x{size[1]} {ext})")
     print(f"set {specimen['specimenId']}.photograph = {filename}")
     print(f"set {specimen['specimenId']}.photographSource = {provenance}")
     print(f"set {specimen['specimenId']}.photographSha256 = {digest}")
-    if stale:
-        print(f"NOTE: {existing} is now unreferenced — delete it or S10 will fail")
-    print("\nnext:")
-    print("  python verification/review_findings.py   # S9/S10 cover the file you just added")
-    print("  python scripts/database.py               # specimens.json is an input to the database")
-    print("  # first photograph in the repository? scripts/source_registry.py carries a note about")
-    print("  # renaming `inspected-specimen` back to `photographed-specimen` once images land.")
+    print("next: python scripts/regen.py && python verification/fetch_attachment.py --evidence-check")
     return 0
 
 
@@ -788,6 +777,7 @@ def ensure_photograph_date(previous, record):
 
 def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
     """Commit every image and the registry together, restoring the prior state on failure."""
+    # ponytail: Caught failures only; add a journal if process-crash recovery is required.
     validate_import_groups(doc, records)
     registry_before = SPECIMENS_JSON.read_bytes()
     prepared_destinations = {destination for destination, _ in prepared}
