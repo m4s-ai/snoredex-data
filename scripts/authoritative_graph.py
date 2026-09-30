@@ -13,15 +13,13 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import os
 import re
-import stat
-import tempfile
 from copy import deepcopy
 from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from atomic_write import atomic_write
 from source_registry import specimen_markings
 from specimen_groups import projected_specimens, photographed_fields
 from specimen_links import release_specimens, specimen_reference_index
@@ -567,27 +565,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
 
 def write_graph(graph: dict[str, Any]) -> None:
     body = json.dumps(graph, ensure_ascii=False, indent=2) + "\n"
-    temporary: str | None = None
-    try:
-        with tempfile.NamedTemporaryFile(
-            mode="w", encoding="utf-8", newline="\n", dir=OUTPUT.parent,
-            prefix=f".{OUTPUT.name}.", suffix=".tmp", delete=False,
-        ) as handle:
-            temporary = handle.name
-            handle.write(body)
-            handle.flush()
-            os.fsync(handle.fileno())
-        output_mode = (
-            stat.S_IMODE(OUTPUT.stat().st_mode)
-            if OUTPUT.exists()
-            else 0o644
-        )
-        os.chmod(temporary, output_mode)
-        os.replace(temporary, OUTPUT)
-        temporary = None
-    finally:
-        if temporary:
-            Path(temporary).unlink(missing_ok=True)
+    atomic_write(OUTPUT, body)
 
 
 def identity_view(graph: dict[str, Any] | None = None) -> dict[str, Any]:

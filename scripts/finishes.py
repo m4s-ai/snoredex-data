@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from atomic_write import atomic_write
 from source_registry import provenance_url, specimen_markings
 from specimen_groups import group_specimens, photographed_fields, owner_attestation_date, specimen_source_type
 
@@ -82,9 +83,7 @@ def read_json(path: Path) -> Any:
 
 
 def write_json(path: Path, value: Any) -> None:
-    with path.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(value, handle, ensure_ascii=False, indent=2)
-        handle.write("\n")
+    atomic_write(path, rendered_json(value))
 
 
 def rendered_json(value: Any) -> str:
@@ -1868,7 +1867,7 @@ def _render_finish_outputs(
 
 def _write_finish_outputs(outputs: dict[Path, str]) -> None:
     for path, body in outputs.items():
-        path.write_text(body, encoding="utf-8", newline="\n")
+        atomic_write(path, body)
 
 def _finish_summary(
     counts: dict[str, int],

@@ -1038,14 +1038,18 @@ def verify_direct_imports(scratch: Path, image: bytes) -> None:
                 registry.write_bytes(b"partial registry")
                 raise OSError("injected registry write failure")
 
-            with patch.object(fetch_attachment, "write_registry", side_effect=failed_write):
-                try:
-                    fetch_attachment.command_file(fetch_attachment.load_registry(), args)
-                except OSError:
-                    pass
-                else:
-                    raise AssertionError("expected registry write failure")
-            assert before == {path: path.read_bytes() for path in folder.rglob("*") if path.is_file()}
+            for failure in (
+                patch.object(fetch_attachment, "write_registry", side_effect=failed_write),
+                patch("os.replace", side_effect=OSError("injected replace failure")),
+            ):
+                with failure:
+                    try:
+                        fetch_attachment.command_file(fetch_attachment.load_registry(), args)
+                    except OSError:
+                        pass
+                    else:
+                        raise AssertionError("expected registry write failure")
+                assert before == {path: path.read_bytes() for path in folder.rglob("*") if path.is_file()}
 
             args.dry_run = True
             before = {path: (path.read_bytes(), path.stat().st_mtime_ns)
