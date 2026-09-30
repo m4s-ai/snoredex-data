@@ -23,7 +23,7 @@ import sys
 from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = ROOT / "verification" / "source_capabilities.json"
@@ -55,6 +55,57 @@ def canonical_json(value: Any) -> str:
 
 def record_hash(value: Any) -> str:
     return "sha256:" + hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
+
+
+def capability_pin(capability: Any, surface_ids: Iterable[str] | None = None) -> str:
+    return record_hash(capability_slice(capability, surface_ids))
+
+
+def capability_slice(capability: Any, surface_ids: Iterable[str] | None) -> dict[str, Any]:
+    """None preserves legacy whole-graph pins; scoped pins retain the original row order."""
+    document = {key: value for key, value in capability.items() if key != "sourceResolution"}
+    document["meta"] = {
+        key: value for key, value in document.get("meta", {}).items() if key != "generated"
+    }
+    if surface_ids is None:
+        return document
+
+    # Global tallies must not expire a run when an unused surface changes.
+    document["meta"] = {
+        key: value for key, value in document.get("meta", {}).items()
+        if key in ("schema", "schemaVersion")
+    }
+    wanted = set(surface_ids)
+    surfaces = [row for row in document.get("surfaces", []) if row["surfaceId"] in wanted]
+    missing = wanted - {row["surfaceId"] for row in surfaces}
+    if missing:
+        raise ContractError(
+            f"run cites surfaces the capability graph does not declare: {sorted(missing)}"
+        )
+    providers = {row["providerId"] for row in surfaces}
+    document["surfaces"] = surfaces
+    document["providers"] = [
+        row for row in document.get("providers", []) if row["providerId"] in providers
+    ]
+    document["coverageEdges"] = [
+        row for row in document.get("coverageEdges", []) if row["surfaceId"] in wanted
+    ]
+    document["observations"] = [
+        row for row in document.get("observations", []) if row["surfaceId"] in wanted
+    ]
+    return document
+
+
+def manifest_surfaces(manifest: dict[str, Any]) -> list[str] | None:
+    """An absent scope keeps the manifest's legacy whole-graph interpretation."""
+    recorded = manifest.get("capabilityGraphSurfaces")
+    if recorded is None:
+        return None
+    return sorted(recorded)
+
+
+def surfaces_used(requests: Iterable[dict[str, Any]]) -> list[str]:
+    return sorted({row["surfaceId"] for row in requests if row.get("surfaceId")})
 
 
 def json_type_matches(value: Any, expected: str) -> bool:

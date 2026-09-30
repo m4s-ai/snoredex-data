@@ -39,7 +39,10 @@ try:
     from .projection_runs import select_projection_run_ids
 except ImportError:  # direct execution from scripts/
     from projection_runs import select_projection_run_ids
-from source_capabilities import schema_errors
+from source_capabilities import (
+    ContractError, capability_pin as _capability_pin, capability_slice as _capability_slice,
+    manifest_surfaces, schema_errors, surfaces_used,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 CONTRACT_PATH = ROOT / "verification" / "card_discovery_adapters.json"
@@ -270,90 +273,17 @@ def pagination_complete(pages: list[dict[str, Any]]) -> bool:
 
 
 def capability_pin(capability: Any, surface_ids: Iterable[str] | None = None) -> str:
-    """Hash the capability graph's *capabilities*, not the day it was written.
-
-    The pin used the whole document, and the document carries `meta.generated`. So a retained run
-    stopped validating the moment anyone regenerated the graph on a later date — no capability
-    changed, only the calendar. Because a change to `units.json` flows into the source registry and
-    from there into the graph, this fired on any ordinary write pass made the day after the graph
-    was last written, and the documented command order regenerates the graph every time.
-
-    Two things are dropped, and both are dropped for the same reason: they are not capabilities.
-
-    `meta.generated` is the day the file was written. `sourceResolution` is the routing of whatever
-    evidence rows the source registry happens to hold right now — one row per URL — so adding a
-    single citation to any unit rewrote it and expired every retained run. A run was captured under
-    a set of capabilities; which URLs exist today is not part of that set, and pinning it made
-    ordinary evidence work impossible rather than making provenance stronger.
-
-    What remains pinned is the contract itself: providers, surfaces, coverage edges, observations,
-    and `meta.schemaVersion`. A surface, edge, boundary or absence scope that moves still changes
-    this hash, which is the whole point of having one.
-    """
-    document = capability_slice(capability, surface_ids)
-    return content_hash(document)
+    try:
+        return _capability_pin(capability, surface_ids)
+    except ContractError as error:
+        raise DiscoveryError(str(error)) from error
 
 
 def capability_slice(capability: Any, surface_ids: Iterable[str] | None) -> dict[str, Any]:
-    """The part of the capability graph a run depends on.
-
-    `surface_ids` of `None` means the whole graph, which is what the pin meant before it was
-    scoped. It is kept so a manifest written under the old rule can still be read and explained,
-    never so a new run can be written that way.
-    """
-    document = {key: value for key, value in capability.items() if key != "sourceResolution"}
-    document["meta"] = {
-        key: value for key, value in document.get("meta", {}).items() if key != "generated"
-    }
-    if surface_ids is None:
-        return document
-
-    # `meta` carries global tallies — `counts`, `surfaceStates` — that move whenever any provider
-    # gains a surface. Keeping them would have re-introduced the very coupling this scoping removes,
-    # by a quieter route: the slice's own rows would be identical and the hash would still change.
-    # Only the contract's identity survives into a scoped pin.
-    document["meta"] = {
-        key: value for key, value in document.get("meta", {}).items()
-        if key in ("schema", "schemaVersion")
-    }
-
-    wanted = set(surface_ids)
-    surfaces = [row for row in document.get("surfaces", []) if row["surfaceId"] in wanted]
-    missing = wanted - {row["surfaceId"] for row in surfaces}
-    if missing:
-        raise DiscoveryError(
-            f"run cites surfaces the capability graph does not declare: {sorted(missing)}"
-        )
-    providers = {row["providerId"] for row in surfaces}
-    document["surfaces"] = surfaces
-    document["providers"] = [
-        row for row in document.get("providers", []) if row["providerId"] in providers
-    ]
-    document["coverageEdges"] = [
-        row for row in document.get("coverageEdges", []) if row["surfaceId"] in wanted
-    ]
-    document["observations"] = [
-        row for row in document.get("observations", []) if row["surfaceId"] in wanted
-    ]
-    return document
-
-
-def manifest_surfaces(manifest: dict[str, Any]) -> list[str] | None:
-    """Which surfaces a manifest was pinned against.
-
-    Recorded explicitly since the pin was scoped. A manifest without the field predates the change
-    and was pinned against the whole graph; `None` preserves that reading rather than silently
-    re-scoping a hash somebody else computed.
-    """
-    recorded = manifest.get("capabilityGraphSurfaces")
-    if recorded is None:
-        return None
-    return sorted(recorded)
-
-
-def surfaces_used(requests: Iterable[dict[str, Any]]) -> list[str]:
-    return sorted({row["surfaceId"] for row in requests if row.get("surfaceId")})
-
+    try:
+        return _capability_slice(capability, surface_ids)
+    except ContractError as error:
+        raise DiscoveryError(str(error)) from error
 
 
 def write_json(path: Path, value: Any) -> None:
