@@ -286,8 +286,8 @@ Writing test fixtures belong in temporary directories outside the checkout. `reg
 file contents/existence/metadata and complete Git index bytes across CHECK and TESTS, including
 failure exits; workflow delta reports intentionally use a narrower dirty-path view.
 Git's optional index refresh is disabled; Git supplies the active and shared index paths.
-Delta observation also disables Git diff's automatic stat refresh while retaining content-based
-path selection.
+Delta observation also disables Git diff's automatic stat refresh. Native numstat output selects
+content changes on older Git versions too; rename detection is disabled to retain both paths.
 `ponytail: The guard compares end states and cannot see a write fully restored before its final
 snapshot; isolate writing fixtures now, add process-level write restrictions if enforcement of
 every intermediate write is required.` SQLite content remains covered by logical validation.

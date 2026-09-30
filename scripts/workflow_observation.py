@@ -15,11 +15,9 @@ def _git_output(root: Path, *args: str) -> list[str]:
     result = subprocess.run(
         ["git", "--no-optional-locks", "-c", "diff.autoRefreshIndex=false", *args],
         cwd=root, text=True, encoding="utf-8",
-        stdout=subprocess.PIPE,
+        stdout=subprocess.PIPE, check=True,
     )
-    if result.returncode and not (args[0] == "diff" and result.returncode == 1):
-        result.check_returncode()
-    return [line for line in result.stdout.splitlines() if line]
+    return [record for record in result.stdout.split("\0") if record]
 
 
 def _normalise(paths: list[str]) -> set[str]:
@@ -32,10 +30,11 @@ def _normalise(paths: list[str]) -> set[str]:
 
 def tree_paths(root: Path) -> set[str]:
     """Return dirty non-SQLite paths from staged, unstaged, and untracked state."""
-    staged = _git_output(root, "diff", "--exit-code", "--cached", "--name-only", "--", ".")
-    unstaged = _git_output(root, "diff", "--exit-code", "--name-only", "--", ".")
-    untracked = _git_output(root, "ls-files", "--others", "--exclude-standard")
-    return _normalise(staged + unstaged + untracked)
+    # Numstat reads contents even on Git versions that list stat-only name changes.
+    staged = _git_output(root, "diff", "--cached", "--numstat", "--no-renames", "-z", "--", ".")
+    unstaged = _git_output(root, "diff", "--numstat", "--no-renames", "-z", "--", ".")
+    untracked = _git_output(root, "ls-files", "--others", "--exclude-standard", "-z")
+    return _normalise([record.split("\t", 2)[2] for record in staged + unstaged] + untracked)
 
 
 def tree_snapshot(root: Path, *, paths: list[str] | None = None) -> dict[str, str]:
