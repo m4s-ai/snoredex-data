@@ -54,8 +54,10 @@ Two rules hold everywhere in the data, the tooling and the site copy:
 
 ### Browse the collection
 
-Serve the repository and open the generated single-page browser: sorting, filtering, a printable
-checklist, the evidence behind each row, and a correction link on every claim.
+Serve the repository and open the generated review view: sorting, filtering, evidence and correction
+links, artwork review proposals, TSV export and browser printing of the filtered table. The color
+scheme follows the system preference. The canonical checklist remains a separate data export;
+the view does not build ownership-checklist HTML.
 
 ```console
 python -m http.server 8000

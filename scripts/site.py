@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate the public root index.html (#7), with the filterable table (#10) and checklist UI (#9).
+"""Generate index.html with the filterable evidence table and artwork review.
 
 Design constraints, all from the epic:
 
@@ -356,38 +356,6 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return rows
 
 
-def build_checklist(items: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Compact projection of the canonical export — only what the builder UI needs."""
-    compact = []
-    for item in items:
-        markings = []
-        for entry in item.get("markings") or []:
-            if isinstance(entry, dict) and entry.get("text"):
-                markings.append(entry["text"])
-        compact.append({
-            "checklistId": item["checklistId"],
-            "rowId": item.get("rowId"),
-            "cardName": item["cardName"],
-            "setCode": item["setCode"],
-            "setName": item["setName"],
-            "number": item["number"],
-            "language": item["language"],
-            "edition": item["edition"],
-            "finish": item["finish"],
-            "finishFamily": item["finishFamily"],
-            "finishGroupId": item["finishGroupId"],
-            "printingId": item.get("printingId"),
-            "foilPattern": item.get("foilPattern"),
-            "marking": markings[0] if markings else None,
-            "markings": markings,
-            "distribution": item.get("distribution"),
-            "cardSize": item.get("cardSize"),
-            "releaseDate": item.get("releaseDate"),
-            "image": item.get("image"),
-        })
-    return compact
-
-
 def json_block(element_id: str, payload: Any) -> str:
     # `</script>` inside JSON would terminate the block early; escaping the slash is the
     # standard defence and stays valid JSON.
@@ -440,7 +408,6 @@ def main() -> int:
     )
 
     rows = build_rows(releases_doc["variants"])
-    checklist = build_checklist(checklist_doc["items"])
     verification = dataset["meta"]["verification"]
     # Only owner adjudication settles a language or printing absence.
     not_printed = sum(len(c.get("languagesNotPrinted") or []) for c in dataset["cards"])
@@ -509,25 +476,6 @@ def main() -> int:
         for lang in LANG_ORDER
     )
 
-    providers_rows = "\n".join(
-        f"<tr><td><strong>{html.escape(p['displayName'])}</strong></td>"
-        f"<td>{html.escape(p['category'])}</td><td>{p['authorityTier']}</td>"
-        "<td>positive only</td>"
-        f"<td>{p['uniqueSources']}</td><td>{p['claimsSupported']}</td>"
-        f"<td>{html.escape(p['coverage'])}</td></tr>"
-        for p in sorted(registry["providers"], key=lambda p: (p["authorityTier"], p["displayName"]))
-    )
-
-    source_items = "\n".join(
-        f'<li><a href="{html.escape(e["canonicalUrl"])}" target="_blank" rel="noopener nofollow">'
-        f'{html.escape(e["canonicalUrl"])}</a> <small>({html.escape(e["providerId"])}, '
-        f'{e["usageCount"]}×)</small></li>'
-        if e["canonicalUrl"] else
-        f'<li><em>{html.escape(e["nonUrlEvidenceId"])}</em> <small>({html.escape(e["providerId"])}, '
-        f'{e["usageCount"]}×)</small></li>'
-        for e in registry["evidence"]
-    )
-
     open_units = sum(1 for u in units if u["status"] in ("pending", "needs-manual-review"))
     # A scope limit is a warning about what the reader must not assume. With the language queue
     # closed this rendered as "0 claims remain open. They are shown as unresolved rather than
@@ -548,17 +496,6 @@ def main() -> int:
 <title>Snoredex — documented Snorlax TCG printings</title>
 <meta name="description" content="An auditable view of current-known physical Snorlax Pokemon TCG printings descended from a historical Cardmarket candidate universe. It is not an all-locality print manifest.">
 <link rel="describedby" href="llms.txt">
-<script>
-(function () {{
-  var root = document.documentElement;
-  var saved = null;
-  try {{ saved = localStorage.getItem("snoredex-theme"); }} catch (error) {{ /* storage may be unavailable */ }}
-  var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-  var theme = saved === "light" || saved === "dark" ? saved : (systemDark ? "dark" : "light");
-  root.dataset.theme = theme;
-  root.style.colorScheme = theme;
-}})();
-</script>
 <link rel="stylesheet" href="site/app.css">
 <style>.sr{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}}</style>
 </head>
@@ -573,11 +510,6 @@ def main() -> int:
         size. Verified printings carry positive evidence; marketplace candidates and unresolved
         claims remain explicitly separate.</p>
       </div>
-      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false"
-        aria-label="Change color theme">
-        <span class="theme-toggle-icon" aria-hidden="true">&#9680;</span>
-        <span class="theme-toggle-text">Theme</span>
-      </button>
     </div>
     <nav class="sections" id="section-nav" aria-label="Sections">
       <details id="section-nav-disclosure" open>
@@ -589,8 +521,7 @@ def main() -> int:
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
         <li><a href="#artwork-review">Artwork review</a></li>
-        <li><a href="#checklist">Checklist</a></li>
-        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#methodology">Data exports</a></li>
         <li><a href="#contribute">Help correct this</a></li>
         <li><a href="#sources">Sources</a></li>
         <li><a href="#license">License</a></li>
@@ -609,11 +540,6 @@ def main() -> int:
   plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
   legacy claim it answers a narrower question: <em>does a source outside Cardmarket confirm this
   printing actually exists?</em></p>
-  <p>The goal is to let a collector tell three things apart that catalogues routinely blur:
-  <strong>documented printings</strong>, <strong>unresolved claims</strong>, and
-  <strong>final application absence decisions</strong>, and to keep every one of them auditable
-  back to its evidence and decision authority.</p>
-
   <div class="stats">
     {"".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>' for n, k in stats)}
   </div>
@@ -621,39 +547,18 @@ def main() -> int:
   <div class="callout">
     <strong>Scope limits — read these before relying on anything here.</strong>
     <ul>
-      <li><strong>Legacy candidate universe.</strong> Every current row descends from one historical
-      Cardmarket search captured on {html.escape(baseline['source']['retrieved'])}. Cardmarket is a
-      provider, not the discovery boundary. The bounded source-first rebuild completed under
-      <a href="https://github.com/m4s-ai/snoredex-data/issues/132">issue #132</a>; explicit source
-      and locality gaps remain.</li>
-      <li><strong>Physical cards only.</strong> Online and live code cards are excluded.</li>
-      <li><strong>A marketplace filter is not a print manifest.</strong> Cardmarket's language
-      filter over-claims: {verification['contradicted']} claims here are contradicted by outside
-      sources. The clearest is <code>KSS 26</code>, advertised in 17 languages for an expansion
-      printed in 7.</li>
-      <li><strong>A raw confirmation is not automatically a card record.</strong>
-      {needs_evidence} repository-confirmed claims rest only on a product/set statement or a
-      sibling printing whose evidence cannot reach this exact card. Their observations stay in the
-      data as <code>needs-evidence</code>, but they do not enter this table or the checklist. The
-      remaining {established} claims are established within the permitted evidence granularity.</li>
-      <li><strong>Contradicted is not the same as proven absent.</strong> Only
-      {not_printed} of those claims are settled by explicit collection-owner adjudications after
-      review of the bounded evidence. The other {disputed} are <strong>disputed</strong>: a source
-      disagrees and nothing has settled it. They are excluded from the checklist so that nobody
-      hunts a card the evidence points away from, but they are not a claim that the card does not
-      exist, and a photograph of one would overturn the row.</li>
-      <li><strong>Pending means unresolved, never absent.</strong> No finish is ever marked
-      unavailable because a catalogue failed to list it.</li>
-      <li><strong>Finish evidence is positive only.</strong> An official source confirms the finishes
-      it names for its matching language and region. It does not establish that unlisted finishes
-      were never released. The collection owner has closed {finish_counts['withOwnerAdjudication']}
-      reviewed finish units.</li>
-      <li><strong>Every &ldquo;Spanish&rdquo; row here is European Spanish.</strong> Latin-American
-      Spanish is a physically distinct edition from Journey Together (2025) onward. It came into
-      scope on 2026-08-09; three official <code>LA</code> releases are retained as a complete
-      positive slice, with <code>xJTG</code> still an evidence gap. Read no European row as covering it.</li>
+      <li><strong>Physical cards only.</strong> Code cards are excluded. Language and finish
+      evidence are separate; a language confirmation never establishes a finish.</li>
+      <li><strong>Pending means unresolved, never absent.</strong> Missing source entries are gaps.
+      Only an explicit collection-owner adjudication settles absence; otherwise contradictions remain disputed.</li>
+      <li><strong>Every &ldquo;Spanish&rdquo; row in this legacy table is European Spanish.</strong>
+      LATAM (<code>es-419</code>) is a separate physical edition in the locality graph, never implied
+      by European Spanish (<code>es-ES</code>) or a Cardmarket filter.</li>
+      <li><strong>Evidence must reach the exact card.</strong> {needs_evidence} claims remain
+      <code>needs-evidence</code> and do not enter the chronological table or canonical checklist.</li>
       {open_claims_note}
     </ul>
+    <p><a href="README.md">Scope, evidence grades and methodology</a></p>
   </div>
 </section>
 
@@ -675,6 +580,7 @@ def main() -> int:
       <div class="field"><label for="f-langMax">Max langs</label><input id="f-langMax" type="number" min="0" max="17"></div>
       <button type="button" class="ghost" id="reset">Reset all</button>
       <button type="button" class="ghost" id="export-tsv">Export TSV</button>
+      <button type="button" class="ghost" onclick="window.print()">Print filtered view</button>
     </div>
     <details class="morefilters">
       <summary>Column filters</summary>
@@ -724,27 +630,14 @@ def main() -> int:
   </p>
 
   <div class="tableframe" id="collection-table-frame">
-    <div class="table-scroll-tools" id="collection-scroll-tools" hidden>
-      <span class="scroll-hint" id="collection-scroll-hint" aria-live="polite">
-        <span class="scroll-icon" aria-hidden="true">&#8596;</span><span class="scroll-hint-text">More columns are available</span>
-      </span>
-      <span class="scroll-actions">
-        <button type="button" class="scroll-button" id="collection-scroll-left"
-          aria-controls="collection-table-scroll" aria-label="Scroll collection table left">&#8592;</button>
-        <button type="button" class="scroll-button" id="collection-scroll-right"
-          aria-controls="collection-table-scroll" aria-label="Scroll collection table right">&#8594;</button>
-      </span>
-    </div>
-    <span class="table-edge left" aria-hidden="true"></span>
     <div class="tablewrap" id="collection-table-scroll" tabindex="0"
-      aria-describedby="collection-scroll-hint collection-table-legend">
+      aria-describedby="collection-table-legend">
       <table id="collection-table">
         <caption class="sr">Chronological list of documented Snorlax card printings</caption>
         <thead><tr>{"".join(head_cells)}</tr></thead>
         <tbody id="rows"></tbody>
       </table>
     </div>
-    <span class="table-edge right" aria-hidden="true"></span>
   </div>
 </section>
 
@@ -804,90 +697,8 @@ def main() -> int:
   </div>
 </section>
 
-<section id="checklist">
-  <h2>Checklist</h2>
-  <p>Generate a printable ownership checklist from the canonical export. It lists what has been
-  <em>documented</em>, and marks items whose finish is unresolved so they cannot be mistaken for
-  confirmed physical versions. Patterned reverse and mirror treatments are grouped under
-  <strong>Reverse Holo</strong>, while each distinct physical treatment keeps its own checkbox.</p>
-  <div class="builder">
-    <div class="row">
-      <div class="field"><label for="cl-scope">Scope</label>
-        <select id="cl-scope">
-          <option value="all">All documented items</option>
-          <option value="filtered">Current filtered rows only</option>
-        </select></div>
-      <div class="field"><label for="cl-langs">Languages</label>
-        <select id="cl-langs" multiple size="4" aria-label="Checklist languages"></select></div>
-      <div class="field"><label for="cl-editions">Editions</label>
-        <select id="cl-editions" multiple size="4" aria-label="Checklist editions"></select></div>
-      <div class="field"><label for="cl-finishes">Finishes</label>
-        <select id="cl-finishes" multiple size="4" aria-label="Checklist finishes"></select></div>
-      <div class="field"><label for="cl-group">Group by</label>
-        <select id="cl-group">
-          <option value="release">Release</option><option value="set">Set</option>
-          <option value="card">Card</option><option value="language">Language</option>
-        </select></div>
-      <div class="field"><label for="cl-layout">Layout</label>
-        <select id="cl-layout">
-          <option value="compact">Compact (text only)</option>
-          <option value="images">With images</option>
-        </select></div>
-      <div class="field"><label for="cl-paper">Paper</label>
-        <select id="cl-paper">
-          <option value="A4">A4</option>
-          <option value="Letter">US Letter</option>
-        </select></div>
-      <div class="field"><label for="cl-unresolved">Unresolved</label>
-        <span><input type="checkbox" id="cl-unresolved" checked> include placeholders</span></div>
-    </div>
-    <div class="preview" id="cl-preview"></div>
-    <p style="margin-top:12px">
-      <button type="button" class="primary" id="cl-download">Generate checklist</button>
-      <small style="margin-left:8px">Downloads a standalone HTML file that works offline and prints
-      to A4 or US Letter. Use your browser's <em>Save as PDF</em> from its print dialog.</small>
-    </p>
-  </div>
-</section>
-
 <section id="methodology">
-  <h2>Methodology</h2>
-  <p>Every card &times; language &times; variant claim is checked against a source
-  <em>outside</em> the marketplace that made the claim. A seller's photograph of a physical card is
-    evidence. The marketplace's own language filter is not.</p>
-  <h3>Evidence is graded, and absence requires owner adjudication</h3>
-  <ul>
-    <li>Source strength is recorded in the generated registry: official records and inspected
-    specimens occupy the strongest tier. Owner attestations, listing photographs and named
-    reference pages are supporting evidence. Market datasets are weaker. The inherited Cardmarket
-    catalogue and sibling-derived attributes are not external evidence.</li>
-    <li><strong>Absence is never established by omission.</strong> An official Pok&eacute;mon source
-    can confirm that a card or finish was released for its matching language and region. It does not
-    establish that an unlisted card or finish was never released.</li>
-    <li>Only an explicit collection-owner adjudication makes a final absence decision after review
-    of the cited evidence. Every external contradiction remains source disagreement until then.</li>
-  </ul>
-  <h3>Finish family, treatment, marking, distribution and size are separate dimensions</h3>
-  <p>The collector-facing <strong>Reverse Holo</strong> family includes technical
-  <code>reverse-holo</code> and <code>mirror-holo</code> printings. Exact treatments such as
-  Pok&eacute; Ball, Master Ball, energy patterns and EX-era set-logo reverse treatments stay visible
-  and independently traceable. Printed identity features such as rarity symbols and contest
-  credits use <code>print-identity</code>. A later prerelease, Staff, retailer or Pok&eacute;mon
-  Center <code>distribution-promo</code> stamp does not imply a reverse-holo finish.</p>
-  <h3>Two evidence scopes, deliberately</h3>
-  <p>A card row shows what evidence attributes to <em>that Cardmarket product</em>. The finish store
-  records what is known for the <em>set number and language</em>, whichever product carries it.
-  Product attribution is necessarily the weaker view, so a finish can read <code>unmapped</code>
-  (known, but not yet attributable to this listing) or <code>other-product</code> (attributed to a
-  different listing) rather than being silently downgraded to <code>pending</code>. When one
-  Cardmarket product contains multiple physical printings with distinct release dates, the
-  chronological table gives each printing its own dated variant row.</p>
-  <h3>Release dates follow the matching market</h3>
-  <p>Bulbapedia commonly records English and Japanese counterpart releases on the same article.
-  The set's published or translated name selects <code>enrelease</code> or <code>jarelease</code>;
-  the article title alone does not. Reviewed Bulbapedia dates take precedence over the generic API
-  fallback, and linked dates in the table open the exact source page used.</p>
-  <h3>Data downloads</h3>
+  <h2>Data exports</h2>
   <ul>
     <li><a href="snoredex.sqlite">snoredex.sqlite</a> — normalized current-state application database</li>
     <li><a href="snoredex-tracker-template.sqlite">snoredex-tracker-template.sqlite</a> — blank have/have-not tracker</li>
@@ -917,32 +728,11 @@ def main() -> int:
 
 <section id="contribute">
   <h2>Help correct this</h2>
-  <p>Every row above ends in a <strong>Correction?</strong> link. It opens a pre-filled form with
-  the row identity and everything this page currently records, so reporting an error is usually a
-  matter of ticking a box and saying what is wrong. You need no account beyond GitHub, and no
-  knowledge of how any of this is built.</p>
-
-  <div class="callout">
-    <strong>One rule decides whether a report can be acted on: positive evidence only.</strong>
-    <ul>
-      <li><strong>A card in your hands counts.</strong> Say so. It is recorded as an owner
-      attestation and graded accordingly.</li>
-      <li><strong>A photo, a listing, or an official checklist entry counts.</strong></li>
-      <li><strong>&ldquo;It is not listed anywhere&rdquo; does not.</strong> A source failing to
-      mention a printing is a gap in that source, not proof of absence. An absence argument once
-      produced a false correction here that had to be reverted.</li>
-      <li><strong>Nothing to correct on a <span class="pill pending">pending</span> finish</strong>
-      unless you have seen the printing. Pending means not yet established, never unavailable.</li>
-    </ul>
-  </div>
-
-  <p>Corrections are graded against the source ladder in
-  <a href="verification/FINISH_SOURCES.md">FINISH_SOURCES.md</a>, applied with their source recorded
-  in the evidence registry, or closed with the reason stated in the issue. Specimen reports have
-  already overturned three databases at once here.</p>
-  <p><a href="https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml">Report
-  a printing correction</a> · <a href="CONTRIBUTING.md">How contributions are handled</a> ·
-  <a href="verification/open-items.html">Open questions we would most like answered</a></p>
+  <p>Use the row&rsquo;s <strong>Correction?</strong> link to report positive evidence for that
+  printing. A missing source entry is not proof of absence; pending means unresolved, never
+  unavailable. <a href="CONTRIBUTING.md">Contribution guide</a> ·
+  <a href="verification/FINISH_SOURCES.md">Evidence ladder</a> ·
+  <a href="verification/open-items.html">Open questions</a></p>
 </section>
 
 <section id="sources">
@@ -950,22 +740,7 @@ def main() -> int:
   <p>{registry['meta']['counts']['claimsAttributed']} claims are attributed across
   {registry['meta']['counts']['evidenceRecords']} distinct sources
   ({registry['meta']['counts']['uniqueUrls']} unique URLs and
-  {registry['meta']['counts']['nonUrlEvidenceClasses']} non-URL evidence classes). This section is
-  generated from the registry, so it cannot drift from the evidence stores.</p>
-  <p><strong>All providers are positive only.</strong> A source confirms the release it names for the
-  corresponding language and region. A missing row is a coverage gap and never proof of absence.</p>
-  <div class="tablewrap">
-    <table class="sources">
-      <thead><tr><th scope="col">Provider</th><th scope="col">Category</th><th scope="col">Tier</th>
-      <th scope="col">Evidence mode</th><th scope="col">Sources</th><th scope="col">Claims</th>
-      <th scope="col">Coverage</th></tr></thead>
-      <tbody>{providers_rows}</tbody>
-    </table>
-  </div>
-  <details class="sourcelist">
-    <summary>Every individual source ({registry['meta']['counts']['evidenceRecords']})</summary>
-    <ol>{source_items}</ol>
-  </details>
+  {registry['meta']['counts']['nonUrlEvidenceClasses']} non-URL evidence classes). Providers confirm only what they name; omission never establishes absence.</p>
   <p><a href="verification/source_registry.json">Download the machine-readable registry</a> ·
   <a href="verification/SOURCES.md">Readable provider summary</a></p>
 </section>
@@ -1004,12 +779,13 @@ def main() -> int:
   <p>Generated {generated} from the current-known repository data under legacy baseline
   <code>{html.escape(baseline['meta']['baselineId'])}</code>. No analytics, no cookies, no trackers,
   no runtime API dependency — this page works offline once loaded.</p>
+  <p>Data attribution: {html.escape(licensor)} · CC BY-NC-SA 4.0 (grants {grants_state}).
+  Card artwork and other third-party material are excluded; see <a href="LICENSE.md">licensing scope</a>.</p>
 </footer>
 
 </main>
 
 {json_block("data-rows", rows)}
-{json_block("data-checklist", checklist)}
 {json_block("data-artwork-review-meta", artwork_review_meta)}
 {json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
@@ -1049,7 +825,7 @@ def main() -> int:
         handle.write(page)
     with ALIAS_PATH.open("w", encoding="utf-8", newline="\n") as handle:
         handle.write(alias)
-    print(f"index.html: {len(rows)} rows, {len(checklist)} checklist items, "
+    print(f"index.html: {len(rows)} rows, "
           f"{registry['meta']['counts']['evidenceRecords']} sources "
           f"({INDEX_PATH.stat().st_size // 1024} KB)")
     print("verification/confirmed-releases.html: redirect to the site root")

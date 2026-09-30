@@ -1,6 +1,6 @@
-/* Snoredex public site behaviour: table filtering and sorting (#10), checklist builder (#9).
+/* Snoredex review view: table filtering and sorting, evidence and artwork proposals.
  *
- * Vanilla JS, no dependencies, and no third-party network calls. Row and checklist data are embedded in the page
+ * Vanilla JS, no dependencies, and no third-party network calls. Row data are embedded in the page
  * as JSON script blocks rather than fetched, because `fetch` of a sibling file is blocked under
  * file:// and the page must work from a local checkout as well as from GitHub Pages. The large
  * artwork review projection is the one deliberate exception: it is loaded on demand and has a
@@ -8,7 +8,7 @@
  *
  * Two invariants hold throughout:
  *   - a row is identified by its stable `rowId`, never by its position, so sorting and filtering
- *     cannot retarget a correction link or a checklist scope;
+ *     cannot retarget a correction link;
  *   - nothing here infers data. The page shows what the export says, including the difference
  *     between "no evidence" and "not attributable to this product".
  */
@@ -17,7 +17,6 @@
 
   const readJSON = (id) => JSON.parse(document.getElementById(id).textContent);
   const ROWS = readJSON("data-rows");
-  const CHECKLIST = readJSON("data-checklist");
   const ARTWORK_META = readJSON("data-artwork-review-meta");
   let ARTWORK_REVIEW = null;
   const META = readJSON("data-meta");
@@ -74,47 +73,6 @@
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
 
 
-  function initTheme() {
-    const root = document.documentElement;
-    const button = $("#theme-toggle");
-    const icon = $(".theme-toggle-icon", button);
-    const label = $(".theme-toggle-text", button);
-    const media = window.matchMedia("(prefers-color-scheme: dark)");
-    let saved = null;
-
-    try { saved = window.localStorage.getItem("snoredex-theme"); }
-    catch (error) { /* Storage can be unavailable for local files or hardened browsers. */ }
-
-    let explicitChoice = saved === "light" || saved === "dark";
-
-    const apply = (theme, persist) => {
-      const dark = theme === "dark";
-      root.dataset.theme = dark ? "dark" : "light";
-      root.style.colorScheme = dark ? "dark" : "light";
-      button.setAttribute("aria-pressed", String(dark));
-      button.setAttribute("aria-label", "Color theme: " + (dark ? "dark" : "light") +
-        ". Switch to " + (dark ? "light" : "dark") + " mode");
-      label.textContent = dark ? "Dark mode" : "Light mode";
-      icon.textContent = dark ? "☾" : "☀";
-      if (persist) {
-        explicitChoice = true;
-        try { window.localStorage.setItem("snoredex-theme", dark ? "dark" : "light"); }
-        catch (error) { /* The selected theme still applies for the current page. */ }
-      }
-      window.dispatchEvent(new CustomEvent("snoredex:themechange", { detail: { theme } }));
-    };
-
-    apply(root.dataset.theme || (media.matches ? "dark" : "light"), false);
-    button.addEventListener("click", () => {
-      apply(root.dataset.theme === "dark" ? "light" : "dark", true);
-    });
-    const followSystem = (event) => {
-      if (!explicitChoice) apply(event.matches ? "dark" : "light", false);
-    };
-    if (media.addEventListener) media.addEventListener("change", followSystem);
-    else if (media.addListener) media.addListener(followSystem);
-  }
-
   function escapeHTML(value) {
     return String(value == null ? "" : value)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
@@ -124,8 +82,6 @@
   const finishLabel = (value) => FINISH_LABELS[value] || value;
   const patternLabel = (value) => PATTERN_LABELS[value] ||
     String(value || "").replace(/-/g, " ").replace(/^./, (c) => c.toUpperCase());
-  const collectorFinish = (item) => item.finishFamily ||
-    (item.finish === "mirror-holo" ? "reverse-holo" : item.finish);
 
 
   // Collector numbers are not lexicographic: "9" sorts before "10", and "TG10" before "TG2"
@@ -381,8 +337,6 @@
       render();
     });
 
-    // Delegated rather than bound per button: the sticky heading is a clone of this row, and a
-    // clone carries no listeners. Delegation keeps the visible copy and the real one in step.
     document.addEventListener("click", (event) => {
       const button = event.target.closest && event.target.closest("button.sort");
       if (!button) return;
@@ -623,11 +577,8 @@
     $("#count").textContent = "Showing " + visibleRows.length + " of " + ROWS.length + " rows";
     renderChips();
     writeURL();
-    updateChecklistPreview();
     window.requestAnimationFrame(() => {
-      refreshTableOverflow();
       refreshClippedCells();
-      refreshStickyHeader();
       refreshLanguageEvidence();
     });
   }
@@ -677,11 +628,7 @@
       cell.setAttribute("role", "button");
       cell.setAttribute("aria-expanded", String(expanded));
       cell.setAttribute("aria-label", text + (expanded ? ". Hide full value" : ". Show full value"));
-      window.requestAnimationFrame(() => {
-        refreshTableOverflow();
-        refreshStickyHeader();
-        if (!expanded) update();
-      });
+      if (!expanded) window.requestAnimationFrame(update);
     };
 
     document.addEventListener("click", (event) => {
@@ -802,154 +749,6 @@
   }
 
 
-  let refreshTableOverflow = () => {};
-
-  function initTableOverflow() {
-    const frame = $("#collection-table-frame");
-    const scroller = $("#collection-table-scroll");
-    const tools = $("#collection-scroll-tools");
-    const hint = $(".scroll-hint-text", tools);
-    const left = $("#collection-scroll-left");
-    const right = $("#collection-scroll-right");
-
-    const update = () => {
-      const max = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
-      const overflowing = max > 2;
-      const canLeft = overflowing && scroller.scrollLeft > 2;
-      const canRight = overflowing && scroller.scrollLeft < max - 2;
-
-      tools.hidden = !overflowing;
-      frame.classList.toggle("is-overflowing", overflowing);
-      frame.classList.toggle("can-scroll-left", canLeft);
-      frame.classList.toggle("can-scroll-right", canRight);
-      left.disabled = !canLeft;
-      right.disabled = !canRight;
-
-      if (canLeft && canRight) hint.textContent = "More columns on both sides";
-      else if (canLeft) hint.textContent = "More columns to the left";
-      else hint.textContent = "More columns to the right — scroll horizontally";
-    };
-
-    const scrollByPage = (direction) => {
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      scroller.scrollBy({
-        left: direction * Math.max(280, Math.round(scroller.clientWidth * 0.72)),
-        behavior: reducedMotion ? "auto" : "smooth",
-      });
-    };
-
-    left.addEventListener("click", () => scrollByPage(-1));
-    right.addEventListener("click", () => scrollByPage(1));
-    scroller.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    if (window.ResizeObserver) new ResizeObserver(update).observe(scroller);
-    update();
-    return update;
-  }
-
-
-  let refreshStickyHeader = () => {};
-
-  function initStickyTableHeader() {
-    const scroller = $("#collection-table-scroll");
-    const tools = $("#collection-scroll-tools");
-    const table = $("#collection-table");
-    const sourceHead = $("thead", table);
-    const overlay = document.createElement("div");
-    overlay.id = "collection-sticky-header";
-    overlay.className = "table-sticky-header";
-    overlay.setAttribute("aria-hidden", "true");
-
-    const cloneTable = document.createElement("table");
-    const colgroup = document.createElement("colgroup");
-    const cloneHead = sourceHead.cloneNode(true);
-    $$("button.sort", cloneHead).forEach((button) => {
-      const label = document.createElement("span");
-      label.className = "sort-clone-label";
-      label.textContent = button.textContent;
-      button.replaceWith(label);
-    });
-    cloneTable.append(colgroup, cloneHead);
-
-    const correction = document.createElement("div");
-    correction.className = "table-sticky-correction";
-    correction.textContent = $("th.corr", sourceHead).textContent.trim();
-    overlay.append(cloneTable, correction);
-    document.body.appendChild(overlay);
-
-    let scheduled = 0;
-
-    const sync = () => {
-      scheduled = 0;
-      if (window.matchMedia("print").matches) {
-        overlay.classList.remove("is-visible");
-        return;
-      }
-
-      const sourceCells = $$("th", sourceHead);
-      const cloneCells = $$("th", cloneHead);
-      const widths = sourceCells.map((cell) => cell.getBoundingClientRect().width);
-      colgroup.innerHTML = widths.map((width) => '<col style="width:' + width + 'px">').join("");
-      cloneCells.forEach((cell, index) => {
-        cell.setAttribute("aria-sort", sourceCells[index].getAttribute("aria-sort") || "none");
-      });
-
-      const scrollerBox = scroller.getBoundingClientRect();
-      const headBox = sourceHead.getBoundingClientRect();
-      const tableBox = table.getBoundingClientRect();
-      const toolOffset = tools.hidden ? 0 : tools.getBoundingClientRect().height;
-      const headerHeight = headBox.height;
-      const correctionWidth = widths[widths.length - 1];
-      const visible = headBox.top <= toolOffset && scrollerBox.bottom > toolOffset + headerHeight;
-
-      // Everything focusable inside the table scrolls clear of this band; see app.css.
-      document.documentElement.style.setProperty(
-        "--sticky-head-offset", Math.ceil(toolOffset + headerHeight) + "px");
-
-      overlay.style.left = Math.round(scrollerBox.left) + "px";
-      overlay.style.top = Math.round(toolOffset) + "px";
-      overlay.style.width = Math.round(scrollerBox.width) + "px";
-      overlay.style.height = Math.ceil(headerHeight) + "px";
-      cloneTable.style.width = Math.ceil(tableBox.width) + "px";
-      cloneTable.style.height = Math.ceil(headerHeight) + "px";
-      cloneTable.style.transform = "translateX(" + Math.round(-scroller.scrollLeft) + "px)";
-      correction.style.width = Math.ceil(correctionWidth) + "px";
-      correction.style.height = Math.ceil(headerHeight) + "px";
-      overlay.classList.toggle("is-visible", visible);
-    };
-
-    const schedule = () => {
-      if (!scheduled) scheduled = window.requestAnimationFrame(sync);
-    };
-
-    // The overlay covers the real heading, so it has to answer for the interactions it hides.
-    // Its visual sort labels activate the same sort routine; a click that misses one must stop here
-    // rather than fall through to whichever row happens to be scrolling past underneath.
-    overlay.addEventListener("mousedown", (event) => {
-      // Focus stays out of an aria-hidden subtree; the real heading remains the keyboard target.
-      event.preventDefault();
-    });
-    overlay.addEventListener("click", (event) => {
-      const heading = event.target.closest && event.target.closest("th[data-key]");
-      if (heading) activateSort(heading.dataset.key);
-    });
-    overlay.addEventListener("wheel", (event) => {
-      if (!event.deltaX) return;
-      scroller.scrollLeft += event.deltaX;
-      event.preventDefault();
-      schedule();
-    }, { passive: false });
-
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    window.addEventListener("snoredex:themechange", schedule);
-    scroller.addEventListener("scroll", schedule, { passive: true });
-    if (window.ResizeObserver) new ResizeObserver(schedule).observe(scroller);
-    sync();
-    return sync;
-  }
-
-
   function initCardPreview() {
     const preview = document.createElement("figure");
     preview.className = "card-preview";
@@ -1036,197 +835,6 @@
     previewImage.addEventListener("load", position);
     window.addEventListener("resize", position);
     window.addEventListener("scroll", position, { passive: true });
-  }
-
-
-  function checklistSelection() {
-    const scope = $("#cl-scope").value;
-    const langs = Array.from($("#cl-langs").selectedOptions).map((o) => o.value);
-    const editions = Array.from($("#cl-editions").selectedOptions).map((o) => o.value);
-    const finishes = Array.from($("#cl-finishes").selectedOptions).map((o) => o.value);
-    const includeUnresolved = $("#cl-unresolved").checked;
-
-    let allowedChecklistKeys = null;
-    if (scope === "filtered") {
-      // A catalogue product can project to several dated physical rows. Keep filtered checklist
-      // scope attached to the selected physical printing without changing the canonical row ID.
-      allowedChecklistKeys = new Set();
-      visibleRows.forEach((row) => {
-        const sourceRowId = row.sourceRowId || row.rowId;
-        if (row.splitPhysicalPrinting && row.printingIds.length) {
-          row.printingIds.forEach((printingId) => {
-            allowedChecklistKeys.add(sourceRowId + "|" + printingId);
-          });
-        } else {
-          allowedChecklistKeys.add(sourceRowId + "|*");
-        }
-      });
-    }
-
-    return CHECKLIST.filter((item) => {
-      if (allowedChecklistKeys
-          && !allowedChecklistKeys.has(item.rowId + "|*")
-          && !allowedChecklistKeys.has(item.rowId + "|" + item.printingId)) return false;
-      if (langs.length && !langs.includes(item.language)) return false;
-      if (editions.length && !editions.includes(item.edition)) return false;
-      if (item.finish === "unresolved") return includeUnresolved;
-      if (finishes.length && !finishes.includes(collectorFinish(item))) return false;
-      return true;
-    });
-  }
-
-  function updateChecklistPreview() {
-    const items = checklistSelection();
-    const unresolved = items.filter((i) => i.finish === "unresolved").length;
-    const reverseItems = items.filter((i) => collectorFinish(i) === "reverse-holo");
-    const reverseGroups = new Set(reverseItems.map((i) => i.finishGroupId)).size;
-    $("#cl-preview").innerHTML =
-      "<strong>" + items.length + "</strong> checklist items — " +
-      (items.length - unresolved) + " documented printings, " +
-      unresolved + " with unresolved finish. " + reverseItems.length +
-      " Reverse Holo treatments in " + reverseGroups + " finish groups.";
-  }
-
-  function groupKey(item, mode) {
-    if (mode === "set") return item.setCode + " — " + item.setName;
-    if (mode === "card") return item.cardName + " (" + item.setCode + " " + (item.number || "—") + ")";
-    if (mode === "language") return item.language;
-    return (item.releaseDate || "undated") + " — " + item.setName;
-  }
-
-  function buildChecklistDocument() {
-    const items = checklistSelection();
-    const mode = $("#cl-group").value;
-    const compact = $("#cl-layout").value === "compact";
-    const paper = $("#cl-paper").value === "Letter" ? "Letter" : "A4";
-    const today = new Date().toISOString().slice(0, 10);
-
-    const groups = new Map();
-    items.forEach((item) => {
-      const key = groupKey(item, mode);
-      if (!groups.has(key)) groups.set(key, []);
-      groups.get(key).push(item);
-    });
-
-    const sections = Array.from(groups.entries()).map(([heading, list]) => {
-      const rows = list.map((item) => {
-        const family = collectorFinish(item);
-        const markingText = (item.markings || []).join(", ") || item.marking;
-        const distributionText = item.distribution && [
-          item.distribution.name || item.distribution.kind,
-          item.distribution.region,
-        ].filter(Boolean).join(" — ");
-        const detail = [
-          escapeHTML(item.language),
-          item.edition !== "—" ? escapeHTML(item.edition) : null,
-          item.finish === "unresolved"
-            ? "<em>finish unresolved — not a confirmed version</em>"
-            : "<strong>" + escapeHTML(finishLabel(family)) + "</strong>",
-          item.foilPattern ? "treatment: " + escapeHTML(patternLabel(item.foilPattern)) : null,
-          markingText ? "markings: " + escapeHTML(markingText) : null,
-          distributionText ? "distribution: " + escapeHTML(distributionText) : null,
-          item.cardSize && item.cardSize !== "standard" ? escapeHTML(item.cardSize) : null,
-        ].filter(Boolean).join(" · ");
-        const image = !compact && item.image
-          ? '<img src="' + escapeHTML(item.image) + '" alt="">' : "";
-        return '<tr data-checklist-id="' + escapeHTML(item.checklistId) +
-          '" data-finish-group-id="' + escapeHTML(item.finishGroupId) + '" class="' +
-          (item.finish === "unresolved" ? "unresolved" : "") + '">' +
-          '<td class="box"><span class="cb"></span></td>' +
-          (compact ? "" : '<td class="thumb">' + image + "</td>") +
-          "<td><strong>" + escapeHTML(item.cardName) + "</strong> — " +
-          escapeHTML(item.setCode) + " " + escapeHTML(item.number || "—") +
-          "<br><small>" + detail + "</small></td>" +
-          '<td class="id"><code>' + escapeHTML(item.checklistId) + "</code></td>" +
-          "</tr>";
-      }).join("");
-      return "<section><h2>" + escapeHTML(heading) + "</h2><table><thead><tr>" +
-        "<th>Owned</th>" + (compact ? "" : "<th>Image</th>") +
-        "<th>Printing</th><th>Checklist ID</th></tr></thead><tbody>" + rows +
-        "</tbody></table></section>";
-    }).join("");
-
-    const unresolved = items.filter((i) => i.finish === "unresolved").length;
-    const scopeLabel = $("#cl-scope").value === "filtered"
-      ? "current filtered table rows" : "all documented items";
-
-    return "<!doctype html>\n<html lang=\"en\"><head><meta charset=\"utf-8\">" +
-      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
-      "<title>Snoredex checklist " + today + "</title><style>" +
-      "@page{size:" + paper + ";margin:14mm}" +
-      "body{font:11pt/1.4 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;" +
-      "color:#000;background:#fff;margin:0;padding:16px}" +
-      "h1{font-size:17pt;margin:0 0 4px}h2{font-size:12pt;margin:16px 0 4px;border-bottom:1px solid #000;" +
-      "page-break-after:avoid}" +
-      ".meta{font-size:9pt;color:#333;margin-bottom:12px}" +
-      "table{width:100%;border-collapse:collapse}" +
-      "tr{page-break-inside:avoid;break-inside:avoid}" +
-      "th,td{padding:3px 4px;border-bottom:1px solid #bbb;vertical-align:top;text-align:left}" +
-      "thead{display:table-header-group}th{font-size:8pt}" +
-      "td.box{width:20px}td.thumb{width:42px}td.thumb img{width:38px;height:auto}" +
-      "td.id{width:24%;font-size:7pt;overflow-wrap:anywhere}" +
-      ".cb{display:inline-block;width:12px;height:12px;border:1.4px solid #000;border-radius:2px}" +
-      "tr.unresolved td{background:#f0f0f0}" +
-      "small{color:#333}" +
-      ".notice{font-size:8.5pt;color:#333;margin-top:18px;border-top:1px solid #000;padding-top:8px}" +
-      "@media print{.noprint{display:none}}" +
-      "@media screen{.sheet{max-width:820px;margin:0 auto}}" +
-      "</style></head><body><div class=\"sheet\">" +
-      '<button class="noprint" onclick="window.print()" style="float:right;padding:8px 14px;font:inherit">' +
-      "Print / Save as PDF</button>" +
-      "<h1>Snorlax collection checklist</h1>" +
-      '<div class="meta">Generated ' + today + " · scope: " + scopeLabel +
-      " · " + items.length + " items (" + unresolved + " with unresolved finish)" +
-      " · paper: " + paper + "</div>" +
-      sections +
-      '<div class="notice"><strong>Positive evidence only.</strong> This lists printings this ' +
-      "project has documented, not everything that exists. An item marked <em>finish unresolved" +
-      "</em> is a card whose finish has not been established — it is not a confirmed physical " +
-      "version, and must not be treated as one. Absence from this list means no evidence has been " +
-      "found, never that a printing does not exist.<br><br>" +
-      "Intended data terms: CC BY-NC-SA 4.0; the verbatim text is included in the project, but " +
-      "the grant is not operative until the owner records publication approval. Pokémon card " +
-      "artwork, images, names and trademarks " +
-      "are excluded and remain © Pokémon / Nintendo / Creatures / GAME FREAK. " +
-      "Unofficial fan project, not affiliated with or endorsed by any rights holder." +
-      "</div></div></body></html>";
-  }
-
-  function initChecklist() {
-    const languages = Array.from(new Set(CHECKLIST.map((i) => i.language))).sort();
-    const editions = Array.from(new Set(CHECKLIST.map((i) => i.edition))).sort();
-    const finishes = Array.from(new Set(CHECKLIST.map((i) => collectorFinish(i))))
-      .filter((f) => f !== "unresolved").sort();
-    const fill = (id, values, labeler) => {
-      const select = document.getElementById(id);
-      values.forEach((value) => {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = labeler ? labeler(value) : value;
-        select.appendChild(option);
-      });
-      select.addEventListener("change", updateChecklistPreview);
-    };
-    fill("cl-langs", languages);
-    fill("cl-editions", editions);
-    fill("cl-finishes", finishes, finishLabel);
-    ["cl-scope", "cl-group", "cl-layout", "cl-paper"].forEach((id) => {
-      document.getElementById(id).addEventListener("change", updateChecklistPreview);
-    });
-    $("#cl-unresolved").addEventListener("change", updateChecklistPreview);
-
-    $("#cl-download").addEventListener("click", () => {
-      const html = buildChecklistDocument();
-      const blob = new Blob([html], { type: "text/html;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "snoredex-checklist-" + new Date().toISOString().slice(0, 10) + ".html";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      setTimeout(() => URL.revokeObjectURL(url), 2000);
-    });
   }
 
 
@@ -2017,17 +1625,13 @@
   }
 
 
-  initTheme();
   initSectionNav();
   initRowDetails();
   initExport();
   readURL();
   buildControls();
-  initChecklist();
   initArtworkReviewLoader();
-  refreshTableOverflow = initTableOverflow();
   refreshClippedCells = initClippedCells();
-  refreshStickyHeader = initStickyTableHeader();
   refreshLanguageEvidence = initLanguageEvidence();
   initCardPreview();
   syncControls();

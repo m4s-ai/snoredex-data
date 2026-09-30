@@ -420,6 +420,10 @@ distribution, and card size. It is not derived from list order.
 
 ## 7. Boundaries
 
+- `scripts/site.py` and `site/app.js` own the generated data/evidence review view (#411).
+  System color preference, native table overflow and browser printing replace manual theme,
+  cloned headers, scroll buttons and ownership-checklist HTML. Canonical checklist/collector
+  exports, stable evidence/correction IDs and local artwork proposals remain separate contracts.
 - Scoped execution is an optional local optimization; it never replaces the L3 merge gate.
 - Test-suite ownership lives in the versioned ownership manifest, not a copied prose list.
 - Pages/CI behavior is documented in the gate-mode table above and enforced by the workflows.

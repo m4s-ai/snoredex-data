@@ -2,8 +2,8 @@
 """Browser tests for the public site (#7, #9, #10).
 
 These drive the real page in Chromium rather than asserting on the generator's output, because
-the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, checklist
-download — only exist at runtime.
+the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, print and review
+proposal downloads — only exist at runtime.
 
 Run against the local file, exactly as a reader with a checkout would:
 
@@ -39,16 +39,10 @@ EXPECTED_ROWS = 204
 # identifies a component or a state, and raising every divider to 3:1 would draw a heavy grid over a
 # 204-row table. A chip is identified by its text and fill, a row by its content.
 #
-# The dividing line is whether the edge bounds something floating over content the reader cannot
-# predict. The frozen-pane edge qualifies — it tells the reader the column is pinned rather than cut
-# — and so do the sticky heading overlay, its own pinned-column edge, and the card preview, each of
-# which is positioned over arbitrary rows or card art. Those four are listed and take the control
-# line; their box-shadows reinforce the separation but are not relied on to carry it.
+# Floating previews and pinned columns need visible boundaries against the content beneath them.
 THEME_SURFACES = [
     ("masthead heading", ".masthead h1", "color", "text", 4.5),
     ("masthead tagline", ".masthead .tagline", "color", "text", 4.5),
-    ("theme toggle label", "#theme-toggle", "color", "text", 4.5),
-    ("theme toggle border", "#theme-toggle", "borderTopColor", "boundary", 3.0),
     ("navigation link", "nav.sections a", "color", "text", 4.5),
     ("section heading", "#about h2", "color", "text", 4.5),
     ("body text", "#about p", "color", "text", 4.5),
@@ -69,10 +63,6 @@ THEME_SURFACES = [
     ("ghost button text", "button.ghost", "color", "text", 4.5),
     ("ghost button edge", "button.ghost", "borderTopColor", "boundary", 3.0),
     ("result count", "#count", "color", "text", 4.5),
-    ("scroll hint", "#collection-scroll-hint", "color", "text", 4.5),
-    ("scroll hint icon", ".scroll-hint .scroll-icon", "color", "text", 3.0),
-    ("scroll button glyph", "#collection-scroll-right", "color", "text", 4.5),
-    ("scroll button edge", "#collection-scroll-right", "borderTopColor", "boundary", 3.0),
     ("column heading", "#collection-table thead th button.sort", "color", "text", 4.5),
     ("table cell", "#rows tr td:nth-child(3)", "color", "text", 4.5),
     ("clipped cell", "#rows .cell-clip", "color", "text", 4.5),
@@ -80,8 +70,6 @@ THEME_SURFACES = [
     ("frozen column heading", "#collection-table th.corr", "color", "text", 4.5),
     ("frozen column link", "#rows td.corr a", "color", "text", 4.5),
     ("frozen column edge", "#rows td.corr", "borderLeftColor", "boundary", 3.0),
-    ("sticky heading edge", "#collection-sticky-header", "borderTopColor", "boundary", 3.0),
-    ("sticky heading frozen edge", ".table-sticky-correction", "borderLeftColor", "boundary", 3.0),
     ("card preview edge", ".card-preview", "borderTopColor", "boundary", 3.0),
     ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
     ("marketplace pill", ".pill.marketplace-claimed", "color", "text", 4.5),
@@ -94,15 +82,11 @@ THEME_SURFACES = [
     ("legend text", ".language-legend", "color", "text", 4.5),
     ("legend present state", ".language-legend .yes", "color", "text", 4.5),
     ("legend absent state", ".language-legend .no", "color", "text", 4.5),
-    ("checklist preview", ".builder .preview", "color", "text", 4.5),
-    ("sources table text", "table.sources td", "color", "text", 4.5),
-    ("sources list link", "details.sourcelist li a", "color", "text", 4.5),
+    ("sources link", "#sources a", "color", "text", 4.5),
     ("footer text", "footer.sitefoot", "color", "text", 4.5),
 ]
 
-# Computed backgrounds are frequently transparent or semi-transparent — the overflow toolbar uses
-# color-mix over the panel — so the backdrop is composited down to an opaque rgb() rather than
-# handing a partially transparent colour to the ratio calculation.
+# Composite transparent backgrounds before measuring contrast.
 MEASURE_SURFACES = """(surfaces) => {
   const parse = (value) => {
     const parts = (value.match(/[\\d.]+/g) || []).map(Number);
@@ -281,6 +265,18 @@ def main() -> int:
               and "reviewedAppearanceId" in saved_proposal["before"]
               and saved_proposal["sourceContentHashes"],
               str(saved_proposal))
+
+        page.emulate_media(color_scheme="dark")
+        page.reload()
+        load_artwork(page)
+        restored_proposal = page.evaluate("""() => Object.values(JSON.parse(
+          localStorage.getItem('snoredex-artwork-review-proposals-v1')))[0]""")
+        check("review proposals survive reload and system color changes",
+              restored_proposal == saved_proposal
+              and first_review_member.locator(".ar-action").input_value() == "confirm")
+        page.emulate_media(color_scheme="light")
+        page.fill("#ar-reviewer", "Browser test reviewer")
+        page.eval_on_selector_all("details.morefilters", "els => els.forEach(d => d.open = true)")
 
         unsaved_card = page.locator("#ar-groups .artwork-member").nth(1)
         unsaved_id = unsaved_card.get_attribute("data-release-id")
@@ -897,17 +893,17 @@ def main() -> int:
               f"EXS rows: {exs_rows}")
 
         # --- complete light/dark themes (#43) ---
-        source_html = INDEX.read_text(encoding="utf-8")
-        check("theme selection runs before the stylesheet loads",
-              source_html.find('localStorage.getItem("snoredex-theme")')
-              < source_html.find('<link rel="stylesheet"'),
-              "the theme bootstrap must precede CSS to avoid an opposite-theme flash")
+        check("removed UI features leave no controls or embedded checklist",
+              page.locator('#theme-toggle, #cl-download, #data-checklist, '
+                           '#collection-sticky-header, #collection-scroll-tools').count() == 0)
 
         for scheme in ("light", "dark"):
             theme_context = browser.new_context(color_scheme=scheme)
+            prior_scheme = "dark" if scheme == "light" else "light"
+            theme_context.add_init_script(f"localStorage.setItem('snoredex-theme', '{prior_scheme}');")
             theme_context.add_init_script("""
               window.__snoredexThemeAtFirstFrame = new Promise((resolve) => {
-                requestAnimationFrame(() => resolve(document.documentElement.dataset.theme));
+                requestAnimationFrame(() => resolve(getComputedStyle(document.documentElement).colorScheme));
               });
             """)
             theme_page = theme_context.new_page()
@@ -925,15 +921,8 @@ def main() -> int:
               const panel = getComputedStyle(document.querySelector('.controls'));
               const absent = getComputedStyle(document.querySelector('td.langcell.no'));
               const body = getComputedStyle(document.body);
-              const toggle = document.querySelector('#theme-toggle');
-              const toggleBox = toggle.getBoundingClientRect();
               return {
-                theme: document.documentElement.dataset.theme,
                 colorScheme: getComputedStyle(document.documentElement).colorScheme,
-                pressed: toggle.getAttribute('aria-pressed'),
-                label: toggle.getAttribute('aria-label'),
-                toggleWidth: toggleBox.width,
-                toggleHeight: toggleBox.height,
                 primaryForeground: primary.color,
                 primaryBackground: primary.backgroundColor,
                 controlBorder: control.borderTopColor,
@@ -943,7 +932,7 @@ def main() -> int:
               };
             }""")
             check(f"{scheme} mode follows the initial system preference before first paint",
-                  theme_metrics["theme"] == scheme and first_frame_theme == scheme
+                  first_frame_theme == scheme
                   and theme_metrics["colorScheme"] == scheme,
                   f"firstFrame={first_frame_theme} metrics={theme_metrics}")
             check(f"{scheme} mode meets representative WCAG contrast thresholds",
@@ -972,69 +961,20 @@ def main() -> int:
                   f"{len(surface_failures)}/{len(THEME_SURFACES)} failing: "
                   f"{'; '.join(surface_failures[:6])}")
 
-            # 2.4.11: a focus ring that lands under the sticky furniture is not visible focus.
-            # The filtered table is too short to scroll into, so restore the full list first.
             theme_page.fill("#f-q", "")
             theme_page.wait_for_timeout(150)
-            theme_page.evaluate("""() => {
-              document.querySelector('#collection-table-frame').scrollIntoView();
-              scrollBy(0, 600);
+            focus_target = theme_page.locator("#rows td.corr a").nth(20)
+            focus_target.focus()
+            focus_geometry = focus_target.evaluate("""element => {
+              const box = element.getBoundingClientRect();
+              return {focused: document.activeElement === element,
+                      visible: box.top >= 0 && box.bottom <= innerHeight};
             }""")
-            theme_page.wait_for_timeout(150)
-            obscured = theme_page.evaluate("""() => {
-              const overlay = document.querySelector('#collection-sticky-header');
-              const tools = document.querySelector('#collection-scroll-tools');
-              const band = overlay.classList.contains('is-visible')
-                ? overlay.getBoundingClientRect()
-                : tools.getBoundingClientRect();
-              const covers = (box) => box.top < band.bottom && box.bottom > band.top;
-              const targets = [...document.querySelectorAll(
-                '#rows td.corr a, #rows .cell-clip[data-clipped="true"]')];
-              // Start from something the furniture is already covering, so the assertion measures
-              // the scroll adjustment rather than a row that happened to sit clear of it.
-              const start = targets.find((element) => covers(element.getBoundingClientRect()));
-              if (!start) return {missing: true};
-              start.focus();
-              const box = start.getBoundingClientRect();
-              return {
-                covered: covers(box),
-                inViewport: box.top >= 0 && box.bottom <= innerHeight,
-                focusTop: box.top, bandTop: band.top, bandBottom: band.bottom,
-              };
-            }""")
-            check(f"keyboard focus in the table clears the sticky furniture in {scheme} mode",
-                  not obscured.get("missing")
-                  and not obscured["covered"] and obscured["inViewport"],
-                  str(obscured))
-            theme_page.evaluate("scrollTo(0, 0)")
-
-            check(f"theme toggle exposes state and an adequate target in {scheme} mode",
-                  theme_metrics["pressed"] == str(scheme == "dark").lower()
-                  and scheme in theme_metrics["label"]
-                  and theme_metrics["toggleWidth"] >= 44
-                  and theme_metrics["toggleHeight"] >= 44,
-                  str(theme_metrics))
-
-            if scheme == "dark":
-                toggle = theme_page.locator("#theme-toggle")
-                toggle.focus()
-                toggle.press("Enter")
-                toggled = theme_page.evaluate("""() => ({
-                  theme: document.documentElement.dataset.theme,
-                  saved: localStorage.getItem('snoredex-theme'),
-                  pressed: document.querySelector('#theme-toggle').getAttribute('aria-pressed'),
-                })""")
-                restored_page = theme_context.new_page()
-                restored_page.goto(url)
-                restored = restored_page.evaluate("""() => ({
-                  theme: document.documentElement.dataset.theme,
-                  saved: localStorage.getItem('snoredex-theme'),
-                })""")
-                check("keyboard theme toggle persists an explicit user preference",
-                      toggled == {"theme": "light", "saved": "light", "pressed": "false"}
-                      and restored == {"theme": "light", "saved": "light"},
-                      f"toggled={toggled} restored={restored}")
-                restored_page.close()
+            check(f"keyboard focus in the table is visible in {scheme} mode",
+                  focus_geometry["focused"] and focus_geometry["visible"], str(focus_geometry))
+            theme_page.emulate_media(color_scheme="dark" if scheme == "light" else "light")
+            check("system preference changes apply without a persisted override",
+                  theme_page.evaluate("getComputedStyle(document.documentElement).colorScheme") != scheme)
             theme_context.close()
 
         # Sort affordances must render as glyphs, not as the literal CSS escape text. A
@@ -1059,30 +999,19 @@ def main() -> int:
         # needed 3,711px. A wide display must now be used, and the compact column treatment should
         # fit the complete matrix at 2560px without manufacturing a horizontal-scroll problem.
         page.set_viewport_size({"width": 2560, "height": 1000})
-        # Wait for the toolbar to agree with the layout rather than for a fixed 120ms. The script
-        # sets `hidden` from a resize handler, so a measurement taken mid-relayout could catch the
-        # flag still describing the previous width — an intermittent "overflow=0 toolsHidden=False".
-        # This waits for consistency only; what the check asserts is unchanged.
-        page.wait_for_function("""() => {
-          const scroller = document.querySelector('#collection-table-scroll');
-          const tools = document.querySelector('#collection-scroll-tools');
-          return tools.hidden === !((scroller.scrollWidth - scroller.clientWidth) > 2);
-        }""", timeout=5000)
         wide_layout = page.evaluate("""() => {
           const wrap = document.querySelector('.wrap');
           const scroller = document.querySelector('#collection-table-scroll');
-          const tools = document.querySelector('#collection-scroll-tools');
           return {
             wrap: Math.round(wrap.getBoundingClientRect().width),
             overflow: scroller.scrollWidth - scroller.clientWidth,
-            toolsHidden: tools.hidden,
           };
         }""")
         check("wide monitors use the available viewport width", wide_layout["wrap"] >= 2500,
               f"content shell is only {wide_layout['wrap']}px at a 2560px viewport")
         check("the complete collection matrix fits a 2560px viewport",
-              wide_layout["overflow"] <= 1 and wide_layout["toolsHidden"],
-              f"overflow={wide_layout['overflow']} toolsHidden={wide_layout['toolsHidden']}")
+              wide_layout["overflow"] <= 1,
+              f"overflow={wide_layout['overflow']}")
 
         page.set_viewport_size({"width": 3072, "height": 1200})
         page.wait_for_timeout(120)
@@ -1135,129 +1064,14 @@ def main() -> int:
               and disclosure.get_attribute("aria-expanded") == "false",
               f"collapsed={collapsed_height} expanded={expanded_state}")
 
-        # At narrower widths some overflow is unavoidable. It must be announced at the top of the
-        # table, with working controls, instead of exposing only a scrollbar after 203 rows.
         page.set_viewport_size({"width": 1280, "height": 900})
-        page.wait_for_timeout(120)
-        overflow_start = page.evaluate("""() => ({
-          overflow: document.querySelector('#collection-table-scroll').scrollWidth
-            - document.querySelector('#collection-table-scroll').clientWidth,
-          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
-          rightDisabled: document.querySelector('#collection-scroll-right').disabled,
-          hint: document.querySelector('.scroll-hint-text').textContent,
-        })""")
-        check("horizontal overflow is clearly indicated above the table",
-              overflow_start["overflow"] > 0 and not overflow_start["toolsHidden"]
-              and not overflow_start["rightDisabled"] and "right" in overflow_start["hint"],
-              str(overflow_start))
-        page.click("#collection-scroll-right")
-        page.wait_for_timeout(500)
-        overflow_after_click = page.evaluate("""() => ({
-          left: document.querySelector('#collection-table-scroll').scrollLeft,
-          leftDisabled: document.querySelector('#collection-scroll-left').disabled,
-        })""")
-        check("overflow controls scroll the table in both directions",
-              overflow_after_click["left"] > 0 and not overflow_after_click["leftDisabled"],
-              str(overflow_after_click))
-        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
-        page.wait_for_timeout(80)
-
-        page.set_viewport_size({"width": 1440, "height": 900})
-        table_start = page.eval_on_selector(
-            "#collection-table-frame", "element => element.getBoundingClientRect().top + scrollY"
-        )
-        page.evaluate("position => scrollTo(0, position + 180)", table_start)
-        page.wait_for_timeout(120)
-        sticky_header = page.evaluate("""() => {
-          const overlay = document.querySelector('#collection-sticky-header');
-          const overlayBox = overlay.getBoundingClientRect();
-          const toolbarBox = document.querySelector('#collection-scroll-tools').getBoundingClientRect();
-          const scrollerBox = document.querySelector('#collection-table-scroll').getBoundingClientRect();
-          return {
-            visible: getComputedStyle(overlay).display !== 'none',
-            top: overlayBox.top,
-            bottom: overlayBox.bottom,
-            left: overlayBox.left,
-            right: overlayBox.right,
-            toolbarBottom: toolbarBox.bottom,
-            scrollerLeft: scrollerBox.left,
-            scrollerRight: scrollerBox.right,
-            release: overlay.querySelector('th:nth-child(2)').innerText.trim(),
-          };
-        }""")
-        check("collection headers remain visible below the sticky overflow toolbar",
-              sticky_header["visible"]
-              and abs(sticky_header["top"] - sticky_header["toolbarBottom"]) <= 1
-              and abs(sticky_header["left"] - sticky_header["scrollerLeft"]) <= 1
-              and abs(sticky_header["right"] - sticky_header["scrollerRight"]) <= 1
-              and sticky_header["release"] == "Release",
-              str(sticky_header))
-        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 500; }")
-        page.wait_for_timeout(80)
-        sticky_scroll = page.evaluate("""() => ({
-          transform: getComputedStyle(document.querySelector('#collection-sticky-header table')).transform,
-          reportRight: document.querySelector('.table-sticky-correction').getBoundingClientRect().right,
-          overlayRight: document.querySelector('#collection-sticky-header').getBoundingClientRect().right,
-        })""")
-        check("sticky headings follow horizontal scrolling and retain the Report heading",
-              "-500" in sticky_scroll["transform"]
-              and abs(sticky_scroll["reportRight"] - sticky_scroll["overlayRight"]) <= 1,
-              str(sticky_scroll))
-        hidden_clone = page.evaluate("""() => {
-          const overlay = document.querySelector('#collection-sticky-header');
-          return {
-            hidden: overlay.getAttribute('aria-hidden') === 'true',
-            focusable: [...overlay.querySelectorAll('button, a, input, select, textarea, [tabindex]')]
-              .filter((element) => element.tabIndex >= 0).length,
-          };
-        }""")
-        check("sticky header clone has no focusable controls in its hidden tree",
-              hidden_clone["hidden"] and hidden_clone["focusable"] == 0,
-              str(hidden_clone))
-        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
-        page.wait_for_timeout(80)
-
-        # A heading that covers the table owes the user the interactions it hides. Sorting from the
-        # sticky copy must sort, and a click anywhere on it must not reach the row underneath —
-        # otherwise aiming at a column heading expands a cell or opens a card preview instead.
-        sticky_sort = page.evaluate("""() => {
-          const overlay = document.querySelector('#collection-sticky-header');
-          const button = overlay.querySelector('th[data-key="name"] .sort-clone-label');
-          const box = button.getBoundingClientRect();
-          const point = document.elementFromPoint(box.x + box.width / 2, box.y + box.height / 2);
-          return {
-            reaches: overlay.contains(point),
-            x: box.x + box.width / 2,
-            y: box.y + box.height / 2,
-            hit: point ? point.tagName + '.' + point.className : null,
-          };
-        }""")
-        check("sticky headings receive their own clicks instead of passing them through",
-              sticky_sort["reaches"], str(sticky_sort))
-        page.mouse.click(sticky_sort["x"], sticky_sort["y"])
-        page.wait_for_timeout(120)
-        sticky_sorted = page.evaluate("""() => ({
-          aria: document.querySelector('#collection-table thead th[data-key="name"]')
-            .getAttribute('aria-sort'),
-          overlayAria: document.querySelector('#collection-sticky-header th[data-key="name"]')
-            .getAttribute('aria-sort'),
-          names: [...document.querySelectorAll('#rows tr td:nth-child(3)')]
-            .slice(0, 12).map((cell) => cell.innerText.trim()),
-          expanded: document.querySelectorAll('.cell-clip.is-expanded').length,
-          preview: !document.querySelector('.card-preview').hidden,
-        })""")
-        check("sorting from the sticky heading sorts the table and mirrors its state",
-              sticky_sorted["aria"] == "ascending"
-              and sticky_sorted["overlayAria"] == "ascending"
-              and sticky_sorted["names"] == sorted(sticky_sorted["names"], key=str.lower)
-              and sticky_sorted["expanded"] == 0
-              and not sticky_sorted["preview"],
-              str(sticky_sorted))
-        page.click('th[data-key="release"] button.sort')
-        page.wait_for_timeout(120)
-        page.evaluate("scrollTo(0, 0)")
-        page.eval_on_selector("#collection-table-scroll", "element => { element.scrollLeft = 0; }")
-        page.wait_for_timeout(80)
+        scroller = page.locator("#collection-table-scroll")
+        scroller.focus()
+        scroller.press("ArrowRight")
+        page.wait_for_timeout(150)
+        check("native table overflow is keyboard-scrollable",
+              scroller.evaluate("element => element.scrollLeft") > 0)
+        scroller.evaluate("element => { element.scrollLeft = 0; }")
 
         # Thumbnails visibly react and render their large preview outside the clipped table.
         image_trigger = page.locator(".card-preview-trigger").first
@@ -1443,7 +1257,8 @@ def main() -> int:
 
         evidence_trigger = page.locator(".lang-evidence-trigger").first
         evidence_label = evidence_trigger.get_attribute("aria-label") or ""
-        evidence_trigger.click()
+        evidence_trigger.focus()
+        evidence_trigger.press("Enter")
         page.wait_for_timeout(80)
         evidence_popover = page.evaluate("""() => {
           const popover = document.querySelector('#collection-language-evidence');
@@ -1476,7 +1291,7 @@ def main() -> int:
         check("sorting sets aria-sort", aria == "ascending", f"aria-sort={aria}")
 
         numbers = page.eval_on_selector_all(
-            "#rows tr:not(.yearsep) td:nth-child(6)", "els => els.map(e => e.textContent)")
+            "#rows tr:not(.yearsep) .col-number", "els => els.map(e => e.textContent)")
         numeric = [n for n in numbers if n.isdigit()]
         check("collector numbers sort naturally, not lexicographically",
               numeric == sorted(numeric, key=int),
@@ -1508,7 +1323,26 @@ def main() -> int:
 
         # --- URL round-trip ---
         page.select_option("#f-edition", ["1st Edition"])
+        page.click('th[data-key="name"] button.sort')
         page.wait_for_timeout(150)
+        identity_mismatches = page.evaluate("""() => {
+          const rows = new Map(JSON.parse(document.querySelector('#data-rows').textContent)
+            .map(row => [row.rowId, row]));
+          const languages = JSON.parse(document.querySelector('#data-meta').textContent).languages;
+          return [...document.querySelectorAll('#rows tr:not(.yearsep)')].filter(element => {
+            const row = rows.get(element.querySelector('.rowmore').dataset.rowId);
+            return !row || element.querySelector('.col-card').textContent !== row.name
+              || element.querySelector('.col-number').textContent !== (row.number || '—')
+              || element.querySelector('td.corr a').getAttribute('href') !== row.correctionUrl
+              || [...element.querySelectorAll('.langcell')].some((cell, i) =>
+                cell.classList.contains('yes') !== row.langCodes.includes(languages[i].code)
+                || (cell.dataset.tier && Number(cell.dataset.tier)
+                  !== row.langEvidence[languages[i].code].tier));
+          }).length;
+        }""")
+        check("filtered and sorted rows keep their correction and language evidence identity",
+              identity_mismatches == 0 and page.locator('#rows .rowmore').count() > 0,
+              f"{identity_mismatches} mismatched rows")
         before = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
         shared_url = page.url
         check("filter state is written to the URL", "edition=" in shared_url, shared_url[-80:])
@@ -1543,132 +1377,31 @@ def main() -> int:
               all("row-id=" in href for href in links),
               "correction links must carry rowId, not the generated row number")
 
-        # --- the contribute section is the front door for public reviewers ---
-        check("a contribute section explains how to report a correction",
-              page.locator("#contribute").count() == 1
-              and page.locator('nav.sections a[href="#contribute"]').count() == 1,
-              "the site must state how corrections are reported, not only link them per row")
-        contribute_text = (page.text_content("#contribute") or "").lower()
-        check("the contribute section states the positive-evidence rule",
-              "positive evidence" in contribute_text
-              and "not proof of absence" in contribute_text
-              and "never unavailable" in contribute_text,
-              "a reviewer must learn the evidence rule before filing, not after being rejected")
+        # Short guidance links the authoritative contracts instead of duplicating them.
+        contribute_text = " ".join((page.text_content("#contribute") or "").lower().split())
         contribute_links = page.eval_on_selector_all(
             "#contribute a", "els => els.map(e => e.getAttribute('href'))")
-        check("the contribute section links the guide, the ladder and the open questions",
-              {"CONTRIBUTING.md", "verification/FINISH_SOURCES.md",
-               "verification/open-items.html"} <= set(contribute_links),
-              f"contribute links: {contribute_links}")
+        check("correction guidance retains the positive-evidence boundary and domain links",
+              "positive evidence" in contribute_text and "not proof of absence" in contribute_text
+              and "never unavailable" in contribute_text
+              and {"CONTRIBUTING.md", "verification/FINISH_SOURCES.md",
+                   "verification/open-items.html"} <= set(contribute_links), contribute_text)
 
-        # --- checklist builder ---
-        preview = page.text_content("#cl-preview")
-        check("checklist preview reports an item count", "checklist items" in (preview or ""),
-              preview or "")
-        checklist_finish_options = page.eval_on_selector_all(
-            "#cl-finishes option", "els => els.map(e => [e.value, e.textContent])")
-        check("checklist selector aggregates mirror treatments under Reverse Holo",
-              ["reverse-holo", "Reverse Holo"] in checklist_finish_options
-              and not any(value == "mirror-holo" for value, _ in checklist_finish_options)
-              and "Reverse Holo treatments" in (preview or ""),
-              f"options={checklist_finish_options}; preview={preview}")
-
-        # A filtered physical variant must select only its own checklist item, even though both
-        # EXS versions share one canonical Cardmarket product row.
+        # Native printing uses the current filter without building another document.
         page.fill("#f-q", "EXS")
-        page.select_option("#f-marking", ["Uncommon rarity symbol"])
-        page.select_option("#cl-scope", "filtered")
         page.wait_for_timeout(150)
-        exs_scoped = page.text_content("#cl-preview") or ""
-        check("filtered EXS V1 scope selects only its physical checklist item",
-              int(exs_scoped.split()[0]) == 1, exs_scoped)
-        page.click("#reset")
-        page.select_option("#cl-scope", "all")
-        page.wait_for_timeout(150)
-
-        # Scope must follow the *filtered* rows, so filter first, then switch scope.
-        page.select_option("#f-edition", ["1st Edition"])
-        page.wait_for_timeout(150)
-        page.select_option("#cl-scope", "filtered")
-        page.wait_for_timeout(150)
-        scoped = page.text_content("#cl-preview")
-        scoped_n = int(scoped.split()[0].replace(",", ""))
-        all_n = int(preview.split()[0].replace(",", ""))
-        check("checklist scope follows the filtered rows", 0 < scoped_n < all_n,
-              f"all={all_n} filtered={scoped_n}")
-
-        # And it must key on stable row IDs, so sorting the table cannot change the selection.
-        page.click('th[data-key="name"] button.sort')
-        page.wait_for_timeout(150)
-        after_sort = page.text_content("#cl-preview")
-        check("checklist scope is unaffected by sorting", after_sort == scoped,
-              f"before={scoped!r} after={after_sort!r}")
-
-        page.click("#reset")
-        page.wait_for_timeout(150)
-        page.select_option("#cl-scope", "all")
-        page.wait_for_timeout(150)
-
-        with page.expect_download() as download_info:
-            page.click("#cl-download")
-        download = download_info.value
-        scratch = Path(tempfile.mkdtemp(prefix="snoredex-site-test-"))
-        target = scratch / "checklist-A4.html"
-        download.save_as(target)
-        content = target.read_text(encoding="utf-8")
-        check("checklist downloads with a dated filename",
-              download.suggested_filename.startswith("snoredex-checklist-"),
-              download.suggested_filename)
-        check("checklist is standalone with no external requests",
-              "http://" not in content.replace("http://www.w3.org", "")
-              and "<script src" not in content,
-              "generated checklist must work offline")
-        check("checklist marks unresolved items as not confirmed",
-              "finish unresolved" in content, "unresolved placeholders must be visibly marked")
-        check("checklist carries the licence and evidence caveat",
-              "CC BY-NC-SA" in content and "not operative" in content
-              and "never that a printing does not exist" in content,
-              "notice block missing")
-        checkbox_count = content.count('class="cb"')
-        check("checklist has an ownership checkbox per item",
-              checkbox_count > 100, f"{checkbox_count} checkboxes")
-        checklist_id_count = content.count('data-checklist-id="')
-        check("every printed line carries its stable checklist ID",
-              checklist_id_count == checkbox_count,
-              f"{checklist_id_count} IDs for {checkbox_count} checkboxes")
-        check("downloaded checklist labels patterned mirror treatments as Reverse Holo",
-              "Reverse Holo" in content and "Poké Ball" in content and "Master Ball" in content,
-              "Reverse Holo family or its named treatments are missing")
-        check("downloaded checklist retains deterministic finish-family grouping",
-              content.count('data-finish-group-id="') == checkbox_count,
-              "every physical line must keep both its stable item ID and family group ID")
-        check("checklist repeats semantic headings when printing",
-              "<thead>" in content and "Checklist ID</th>" in content
-              and "thead{display:table-header-group}" in content,
-              "repeatable table headings missing")
-        check("checklist sets the selected A4 page size",
-              "@page{size:A4;" in content, "A4 print CSS missing")
-
-        page.select_option("#cl-paper", "Letter")
-        with page.expect_download() as letter_download_info:
-            page.click("#cl-download")
-        letter_download = letter_download_info.value
-        letter_target = scratch / "checklist-Letter.html"
-        letter_download.save_as(letter_target)
-        letter_content = letter_target.read_text(encoding="utf-8")
-        check("checklist sets the selected US Letter page size",
-              "@page{size:Letter;" in letter_content, "Letter print CSS missing")
+        page.evaluate("window.print = () => { window.__printRequested = true; }")
+        page.get_by_role("button", name="Print filtered view").click()
+        check("print action uses the browser on the current filtered view",
+              page.evaluate("window.__printRequested === true")
+              and page.locator("#rows tr:not(.yearsep)").count() == 2)
 
         # --- print smoke tests on both paper sizes ---
         # A4 is 794 CSS px at 96dpi, US Letter 816. Emulating print media and clamping the
         # viewport to the paper width is what catches a table that silently truncates on paper.
         PAPER = {"A4": 794, "Letter": 816}
         for paper, width in PAPER.items():
-            page.evaluate("""() => {
-              document.documentElement.dataset.theme = 'dark';
-              document.documentElement.style.colorScheme = 'dark';
-            }""")
-            page.emulate_media(media="print")
+            page.emulate_media(media="print", color_scheme="dark")
             page.set_viewport_size({"width": width, "height": 1000})
             page.wait_for_timeout(120)
             overflow = page.evaluate(
@@ -1703,20 +1436,9 @@ def main() -> int:
                   and print_geometry["bodyColor"] == "rgb(0, 0, 0)",
                   str(print_geometry))
 
-        for paper, width in PAPER.items():
-            checklist_page = browser.new_page()
-            checklist_page.goto((target if paper == "A4" else letter_target).as_uri())
-            checklist_page.emulate_media(media="print")
-            checklist_page.set_viewport_size({"width": width, "height": 1000})
-            checklist_page.wait_for_timeout(120)
-            overflow = checklist_page.evaluate(
-                "() => document.documentElement.scrollWidth - document.documentElement.clientWidth")
-            check(f"downloaded checklist prints without horizontal overflow ({paper})",
-                  overflow <= 1, f"overflow {overflow}px at {width}px")
-            checklist_page.close()
-
         # Adversarial fixture: future source text must remain text, never active markup or an
         # attribute breakout. This drives the generated page with the production JavaScript.
+        scratch = Path(tempfile.mkdtemp(prefix="snoredex-site-test-"))
         hostile_root = scratch / "hostile"
         hostile_root.mkdir()
         shutil.copytree(ROOT / "site", hostile_root / "site")
@@ -1735,24 +1457,6 @@ def main() -> int:
         hostile_html = pattern.sub(
             lambda found: found.group(1) + encoded + found.group(3), hostile_html, count=1
         )
-        checklist_pattern = re.compile(
-            r'(<script type="application/json" id="data-checklist">)(.*?)(</script>)', re.S
-        )
-        checklist_match = checklist_pattern.search(hostile_html)
-        hostile_checklist = json.loads(checklist_match.group(2)) if checklist_match else []
-        checklist_payload = (
-            '<img id="xss-checklist-probe" src=x onerror="window.__snoredexXss=1">'
-        )
-        hostile_checklist[0]["edition"] = checklist_payload
-        hostile_checklist[0]["image"] = 'x" onerror="window.__snoredexXss=1'
-        checklist_encoded = json.dumps(
-            hostile_checklist, ensure_ascii=False, separators=(",", ":")
-        ).replace("</", "<\\/")
-        hostile_html = checklist_pattern.sub(
-            lambda found: found.group(1) + checklist_encoded + found.group(3),
-            hostile_html,
-            count=1,
-        )
         (hostile_root / "index.html").write_text(hostile_html, encoding="utf-8")
         hostile_page = browser.new_page()
         hostile_page.goto((hostile_root / "index.html").as_uri())
@@ -1763,25 +1467,11 @@ def main() -> int:
               not hostile_executed and hostile_markup == 0,
               f"executed={hostile_executed} injected_nodes={hostile_markup}")
 
-        with hostile_page.expect_download() as hostile_download_info:
-            hostile_page.click("#cl-download")
-        hostile_target = scratch / "hostile-checklist.html"
-        hostile_download_info.value.save_as(hostile_target)
-        hostile_checklist_page = browser.new_page()
-        hostile_checklist_page.goto(hostile_target.as_uri())
-        checklist_executed = hostile_checklist_page.evaluate("window.__snoredexXss === 1")
-        checklist_markup = hostile_checklist_page.locator("#xss-checklist-probe").count()
-        check("source-derived checklist values cannot inject DOM markup",
-              not checklist_executed and checklist_markup == 0,
-              f"executed={checklist_executed} injected_nodes={checklist_markup}")
-        hostile_checklist_page.close()
         hostile_page.close()
 
-        page.emulate_media(media="screen")
-        page.evaluate("""() => {
-          document.documentElement.dataset.theme = 'light';
-          document.documentElement.style.colorScheme = 'light';
-        }""")
+        page.emulate_media(media="screen", color_scheme="light")
+        page.click("#reset")
+        page.wait_for_timeout(150)
         page.set_viewport_size({"width": 1280, "height": 900})
 
         # --- mobile layout ---
@@ -1805,27 +1495,17 @@ def main() -> int:
             - document.documentElement.clientWidth,
           tableOverflow: document.querySelector('#collection-table-scroll').scrollWidth
             - document.querySelector('#collection-table-scroll').clientWidth,
-          toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
           cardDisplay: getComputedStyle(document.querySelector('#rows tr:not(.yearsep)')).display,
           sortDisplay: getComputedStyle(document.querySelector('#collection-mobile-sort')).display,
-          toggleWidth: document.querySelector('#theme-toggle').getBoundingClientRect().width,
-          toggleHeight: document.querySelector('#theme-toggle').getBoundingClientRect().height,
         })""")
         check("320px layout replaces the table with cards without horizontal overflow",
               narrow_mobile["bodyOverflow"] <= 1
               and narrow_mobile["tableOverflow"] <= 1
-              and narrow_mobile["toolsHidden"]
               and narrow_mobile["cardDisplay"] == "grid"
-              and narrow_mobile["sortDisplay"] == "flex"
-              and narrow_mobile["toggleWidth"] >= 44
-              and narrow_mobile["toggleHeight"] >= 44,
+              and narrow_mobile["sortDisplay"] == "flex",
               str(narrow_mobile))
 
         page.set_viewport_size({"width": 390, "height": 844})
-        # The scroll indication below describes a table the reader has not scrolled yet, so start it
-        # there. Earlier cases in this suite leave a horizontal offset behind, and the assertion used
-        # to pass only because that leftover happened to clamp to zero at this width — a column-order
-        # change in #124 was enough to land it mid-table and read "both sides" instead.
         page.evaluate("() => { document.querySelector('#collection-table-scroll').scrollLeft = 0; }")
         page.wait_for_timeout(120)
         body_overflow = page.evaluate(
@@ -1955,7 +1635,7 @@ def main() -> int:
               }"""),
               "the panel stayed open after the second press")
 
-        # --- #122/#128: filters stack; the card layout no longer needs scroll tools ---
+        # --- #122/#128: filters stack on a phone ---
         page.evaluate("scrollTo(0, 0)")
         page.wait_for_timeout(120)
         narrow_controls = page.evaluate("""() => {
@@ -1966,15 +1646,11 @@ def main() -> int:
             // Stacked means every field starts at the same x and none share a line.
             sameLeft: boxes.every((box) => Math.abs(box.left - boxes[0].left) <= 1),
             distinctRows: new Set(boxes.map((box) => Math.round(box.top))).size === boxes.length,
-            toolsHidden: document.querySelector('#collection-scroll-tools').hidden,
           };
         }""")
         check("narrow viewport stacks the collection filter fields",
               narrow_controls["fields"] > 1 and narrow_controls["sameLeft"]
               and narrow_controls["distinctRows"], str(narrow_controls))
-        check("mobile cards do not expose obsolete horizontal-scroll controls",
-              narrow_controls["toolsHidden"], str(narrow_controls))
-
         # --- #123: section navigation collapses behind a disclosure on a phone ---
         nav_collapsed = page.evaluate("""() => ({
           toggleShown: getComputedStyle(document.querySelector('#nav-toggle')).display !== 'none',
@@ -1994,7 +1670,7 @@ def main() -> int:
         check("the section-navigation toggle opens the list and reports its state",
               nav_opened["listShown"] and nav_opened["open"], str(nav_opened))
 
-        page.locator('#section-nav-list a[href="#checklist"]').click()
+        page.locator('#section-nav-list a[href="#methodology"]').click()
         page.wait_for_timeout(80)
         check("following a section link closes the navigation again",
               page.evaluate(
@@ -2014,7 +1690,7 @@ def main() -> int:
         })""")
         check("a wide viewport restores the full section navigation",
               not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["open"]
-              and nav_wide["links"] == 8,
+              and nav_wide["links"] == 7,
               str(nav_wide))
 
         page.locator('#section-nav-list a[href="#about"]').click()
