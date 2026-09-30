@@ -35,13 +35,10 @@ def tree_paths(root: Path) -> set[str]:
     return _normalise(staged + unstaged + untracked)
 
 
-def tree_snapshot(root: Path, *, include_ignored: bool = False) -> dict[str, str]:
-    """Hash the current bytes of every dirty path, including pre-existing dirty files."""
-    paths = tree_paths(root)
-    if include_ignored:
-        paths |= _normalise(_git_output(root, "ls-files", "--others", "--ignored", "--exclude-standard"))
+def tree_snapshot(root: Path, *, paths: list[str] | None = None) -> dict[str, str]:
+    """Hash explicit paths, or the workflow's dirty paths, excluding SQLite bytes."""
     snapshot: dict[str, str] = {}
-    for relative in paths:
+    for relative in tree_paths(root) if paths is None else _normalise(paths):
         path = root / PurePosixPath(relative)
         try:
             snapshot[relative] = "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()

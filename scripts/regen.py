@@ -159,7 +159,7 @@ def tree_state() -> tuple[dict, dict]:
             metadata[relative] = (info.st_size, info.st_mtime_ns, info.st_mode)
         except FileNotFoundError:
             metadata[relative] = None
-    return tree_snapshot(ROOT, include_ignored=True), metadata
+    return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata
 
 
 def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:
