@@ -42,6 +42,8 @@ from collections import defaultdict
 from pathlib import Path
 from typing import Any
 
+from atomic_write import atomic_write
+
 ROOT = Path(__file__).resolve().parent.parent
 CARDS_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
@@ -80,7 +82,7 @@ def write_or_check(cards_document: dict[str, Any]) -> None:
             raise ValueError("snorlax_cards.json language status is stale")
         print("snorlax_cards.json language status is current")
         return
-    CARDS_PATH.write_text(rendered, encoding="utf-8", newline="\n")
+    atomic_write(CARDS_PATH, rendered)
 
 
 def main() -> None:

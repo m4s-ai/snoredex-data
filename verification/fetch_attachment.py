@@ -89,6 +89,7 @@ from datetime import date
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
+from atomic_write import atomic_write
 from specimen_groups import group_specimens
 
 VERIFICATION = ROOT / "verification"
@@ -581,8 +582,7 @@ def load_source_first_releases() -> list[dict]:
 def write_registry(doc: dict) -> None:
     # indent=2, ensure_ascii=False and a trailing newline round-trip the committed file exactly, so
     # filing a photograph produces a one-record diff rather than a reformat of the whole store.
-    SPECIMENS_JSON.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n",
-                              encoding="utf-8", newline="\n")
+    atomic_write(SPECIMENS_JSON, json.dumps(doc, indent=2, ensure_ascii=False) + "\n")
 
 
 def with_photograph(
@@ -782,11 +782,11 @@ def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[d
     registry_before = SPECIMENS_JSON.read_bytes()
     prepared_destinations = {destination for destination, _ in prepared}
     current_by_id = {row["specimenId"]: row for row in doc["specimens"]}
+    by_id = current_by_id | {record["specimenId"]: record for record in records}
     still_referenced = {
-        str(row.get("photograph"))
-        for row in doc["specimens"]
+        str(row["photograph"])
+        for row in by_id.values()
         if row.get("photograph")
-        and row.get("specimenId") not in {record["specimenId"] for record in records}
     }
     superseded: set[Path] = set()
     for record in records:
@@ -814,14 +814,12 @@ def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[d
             destination.write_bytes(blob)
         for old_path in superseded:
             old_path.unlink(missing_ok=True)
-        by_id = {row["specimenId"]: row for row in doc["specimens"]}
-        for record in records:
-            by_id[record["specimenId"]] = record
         doc["specimens"] = sorted(by_id.values(), key=lambda row: row["specimenId"])
         doc["count"] = len(doc["specimens"])
         write_registry(doc)
     except Exception:
-        SPECIMENS_JSON.write_bytes(registry_before)
+        if not SPECIMENS_JSON.is_file() or SPECIMENS_JSON.read_bytes() != registry_before:
+            atomic_write(SPECIMENS_JSON, registry_before)
         for destination, previous in files_before.items():
             if previous is None:
                 if destination.exists():

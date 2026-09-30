@@ -1485,23 +1485,35 @@ def main() -> None:
                 graph_module.OUTPUT = original_output
             assert stat.S_IMODE(mode_output.stat().st_mode) == 0o640
 
-        original_replace = graph_module.os.replace
-        graph_module.OUTPUT = output
-        graph_module.os.replace = lambda *_args, **_kwargs: (_ for _ in ()).throw(
-            OSError("simulated replace failure")
-        )
-        try:
+        for operation in ("fsync", "replace"):
+            with patch.object(graph_module, "OUTPUT", output), patch(
+                f"atomic_write.os.{operation}", side_effect=OSError("simulated write failure"),
+            ):
+                try:
+                    graph_module.write_graph(graph)
+                except OSError:
+                    pass
+                else:
+                    raise AssertionError("write failure must propagate")
+            assert output.read_bytes() == before
+            assert not list(temporary_root.glob(".authoritative_graph.json.*.tmp"))
+        with patch.object(graph_module, "OUTPUT", output):
+            graph_module.write_graph(graph)
+        assert output.read_bytes() == (json.dumps(graph, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+        if os.name == "nt":
+            os.chmod(output, 0o444)
             try:
-                graph_module.write_graph(graph)
-            except OSError:
-                pass
-            else:
-                raise AssertionError("replace failure must propagate")
-        finally:
-            graph_module.os.replace = original_replace
-            graph_module.OUTPUT = original_output
-        assert output.read_bytes() == before
-        assert not list(temporary_root.glob(".authoritative_graph.json.*.tmp"))
+                with patch.object(graph_module, "OUTPUT", output):
+                    try:
+                        graph_module.write_graph(graph)
+                    except PermissionError:
+                        pass
+                    else:
+                        raise AssertionError("read-only replacement must fail on Windows")
+                assert output.read_bytes() == (json.dumps(graph, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+                assert not list(temporary_root.glob(".authoritative_graph.json.*.tmp"))
+            finally:
+                os.chmod(output, 0o600)
     print(
         "authoritative graph regression passed: "
         f"{len(entities)} entities, {len(edges)} edges, "

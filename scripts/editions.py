@@ -19,6 +19,7 @@ including SwSh/SM-era cards that never had a 1st edition, so it is unreliable.
 """
 import json, io, os, sys
 from pathlib import Path
+from atomic_write import atomic_write
 
 B = Path(__file__).resolve().parent.parent
 data = json.load(io.open(os.path.join(B, "snorlax_cards.json"), encoding="utf-8"))
@@ -94,7 +95,7 @@ if "--check" in sys.argv:
     print("snorlax_cards.json editions are current")
     sys.exit(0)
 
-output_path.write_text(rendered, encoding="utf-8", newline="\n")
+atomic_write(output_path, rendered)
 
 for k, v in summary.items():
     print(f"\n{k} ({len(v)}):")
