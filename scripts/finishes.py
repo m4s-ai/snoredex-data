@@ -28,7 +28,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from source_registry import provenance_url, specimen_markings
-from specimen_groups import group_specimens, photographed_fields
+from specimen_groups import group_specimens, photographed_fields, owner_attestation_date, specimen_source_type
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -544,17 +544,7 @@ def normalize_foil_pattern(value: object) -> object:
 
 
 def specimen_source(specimen: dict[str, Any]) -> dict[str, Any]:
-    holder = str(specimen.get("heldBy", "")).casefold()
-    if "third-party seller" in holder:
-        source_type = "Seller listing photograph"
-    elif "third-party retailer" in holder:
-        source_type = "Retail listing"
-    elif "third-party scan archive" in holder:
-        source_type = "Third-party scan archive"
-    elif "owner" in holder:
-        source_type = "Owner-supplied physical card photograph"
-    else:
-        source_type = "Inspected physical specimen photograph"
+    source_type = specimen_source_type(specimen)
     source = exact_source(
         provenance_url(specimen.get("photographSource")) or provenance_url(specimen.get("listingUrl")),
         source_type,
@@ -585,9 +575,9 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
         sources.append({
             "sourceType": "Owner attestation (domain expert)",
             "claimFields": owner_fields,
-            "retrievedAt": specimen.get("recordedAt"),
+            "retrievedAt": owner_attestation_date(observation, specimen.get("recordedAt")),
             "evidence": (
-                f"The collection owner's explicit {specimen.get('recordedAt', '')} confirmation "
+                f"The collection owner's explicit {owner_attestation_date(observation, specimen.get('recordedAt', ''))} confirmation "
                 f"establishes the specimen's {established}; the retained {photograph_label} "
                 "supports card identity and any independently visible properties."
             ),
@@ -595,7 +585,7 @@ def specimen_sources(specimen: dict[str, Any], observation: dict[str, Any]) -> l
     return sources
 
 
-def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
+def specimen_printing(specimen: dict[str, Any], present_variants=None) -> dict[str, Any] | None:
     observation = specimen.get("physicalObservation")
     if not isinstance(observation, dict) or not observation.get("finish"):
         return None
@@ -621,6 +611,8 @@ def specimen_printing(specimen: dict[str, Any]) -> dict[str, Any] | None:
     if photograph:
         candidate["image"] = f"verification/specimens/{photograph}"
     apply_specimen_group_sources(candidate, specimen)
+    if present_variants is not None:
+        candidate["mappedVariants"] = sorted(set(candidate["mappedVariants"]) & present_variants)
     return candidate
 
 
@@ -1315,7 +1307,7 @@ def _build_finish_unit(
     def _build_finish_unit_part6():
         nonlocal candidate, field, manual, override
         for specimen in specimens_by_group.get((set_code, number, language), []):
-            candidate = specimen_printing(specimen)
+            candidate = specimen_printing(specimen, present_variants)
             if candidate is not None:
                 add_reverse_specimen_conflicts(candidate, str(specimen["specimenId"]), reverse_conflicts)
                 for override in applicable_overrides:
@@ -1396,7 +1388,7 @@ def _build_finish_unit(
                         if printing["finish"] == finish and (
                             printing.get("_origin") == "auto" or observed_variants
                         ):
-                            printing["mappedVariants"] = sorted(set(usable) | observed_variants)
+                            printing["mappedVariants"] = sorted((set(usable) | observed_variants) & present_variants)
                             if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                                 printing["cardSize"] = next(iter(mapped_sizes))
 

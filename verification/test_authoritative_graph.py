@@ -213,6 +213,7 @@ def verify_source_first_asset_authority(prints, evidence, registry):
         assert not calls, (row['printId'], 'listing duplicates retained photo identity')
         identities = [source for source in evidence
                       if row['printId'] in source.get('stableIds', [])
+                      and row['specimenId'] in source.get('stableIds', [])
                       and source['providerId'] == 'seller-listing-photo'
                       and 'identity' in source['dimensions']]
         assert len(identities) == 1, (row['printId'], identities)
@@ -295,7 +296,9 @@ def verify_observed_finish_attribution(specimens, registry):
         finish = [(a, kw) for a, kw in calls if a[2] == 'finish']
         assert len(finish) == 2, 'one finish observation per specimen/claim, not one per context URL'
         if 'finish' in physical.get('ownerAttestedFields', []):
-            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation' for a, kw in finish)
+            assert all(a[0] is None and kw['provider_id'] == 'owner-attestation'
+                       and a[4] == (physical.get('ownerAttestedAt') or specimen.get('recordedAt'))
+                       for a, kw in finish)
             continue
         image = registry.provenance_url(specimen.get('photographSource')) or registry.provenance_url(specimen.get('listingUrl'))
         primary = [(a, kw) for a, kw in calls if a[0] == image and a[2] != 'finish']

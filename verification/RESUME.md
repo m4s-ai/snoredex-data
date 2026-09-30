@@ -57,7 +57,13 @@ and never repair missing projections.
 
 Keep a reviewed JSON manifest for each intake batch and link it to the owning issue. Each row names `setCode`, `number`, `variant`,
 `language`, `heldBy`, `inspectedFrom`, `observed`, and `recordedAt`; seller rows also need
-`listingUrl`. For image-based findings, add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
+a `listingUrl` or a retained direct HTTP(S) source-image URL in `photographSource`. Preserve a known
+listing URL, but never invent one when only the image URL is available. Without a listing URL,
+the source-image URL must be the endpoint acquired by this import, or the unchanged URL/hash
+association of the existing specimen for offline replay; an arbitrary URL beside a local file
+is not evidence of origin. Local converted seller images with a new source association need a
+reviewed listing URL. Unchanged image bytes retain their original ISO `recordedAt`; later owner
+statements use `physicalObservation.ownerAttestedAt`. For image-based findings, add `physicalObservation.finish` and the quoted `physicalObservation.basis` only
 when the retained image positively establishes a physical treatment. An identity-legible database
 scan may omit `physicalObservation` entirely when it establishes the localized card but not its
 finish, edition, marking, distribution, or size; omission is never evidence of non-holo. An optional

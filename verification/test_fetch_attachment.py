@@ -135,6 +135,38 @@ def verify_unnumbered_manifest() -> None:
             expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
 
 
+def verify_dry_run_preserves_photograph_date() -> None:
+    """The unchanged-image date invariant must run before dry-run exits without writing."""
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        registry, manifest = scratch / "specimens.json", scratch / "manifest.json"
+        doc = json.loads(fetch_attachment.SPECIMENS_JSON.read_text(encoding="utf-8"))
+        current = next(row for row in doc["specimens"] if row.get("photograph")
+                       and row.get("heldBy") != "third-party seller")
+        image = (fetch_attachment.SPECIMEN_DIR / current["photograph"]).read_bytes()
+        registry.write_text(json.dumps({"count": 1, "specimens": [current]}), encoding="utf-8")
+        manifest.write_text(json.dumps({"observations": [{
+            "specimenId": current["specimenId"], "setCode": current["setCode"],
+            "number": current["number"], "variant": current["variant"],
+            "language": current["language"], "heldBy": current["heldBy"],
+            "inspectedFrom": current["inspectedFrom"], "observed": current["observed"],
+            "recordedAt": "2026-09-29" if current["recordedAt"] != "2026-09-29" else "2026-09-28",
+            **({"physicalObservation": current["physicalObservation"]}
+               if "physicalObservation" in current else {}),
+        }]}), encoding="utf-8")
+        args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
+                               allow_small=False, replace=True, dry_run=True)
+        with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
+                            SPECIMEN_DIR=scratch / "photos"), patch.object(
+                                fetch_attachment, "acquire_manifest_image",
+                                return_value=(image, current["photographSource"],
+                                              current["photographSource"], "retained image")):
+            before = registry.read_bytes()
+            expect_failure(lambda: fetch_attachment.command_issue(doc, args))
+            assert registry.read_bytes() == before
+            assert not (scratch / "photos").exists()
+
+
 def verify_multiple_views() -> None:
     for reverse in (False, True):
         for secondary_finish in (False, True):
@@ -486,6 +518,71 @@ def main() -> None:
         listing_url="https://seller.example/listing/11",
     )
     assert seller_record["listingUrl"] == "https://seller.example/listing/11"
+    later = {**seller_record, "physicalObservation": {
+        "finish": "holo", "basis": "later owner determination",
+        "ownerAttestedFields": ["finish"], "ownerAttestedAt": "2026-09-29"}}
+    direct = fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://i.ebayimg.com/example.png", digest, acquired_from="https://i.ebayimg.com/example.png")
+    assert "listingUrl" not in direct
+    sources = finishes.specimen_sources(direct, direct["physicalObservation"])
+    assert [source["retrievedAt"] for source in sources] == ["2026-08-24", "2026-09-29"]
+    assert sources[0]["sourceType"] == "Seller listing photograph"
+    assert source_registry.specimen_provider(sources[0]["url"], sources[0]["sourceType"]) == "seller-listing-photo"
+    calls = []
+    source_registry.record_specimen_sources(direct, [], sources[0]["sourceType"],
+        direct["physicalObservation"], lambda *a, **kw: calls.append((a, kw)),
+        source_registry.specimen_surfaces())
+    assert [(a[2], a[4], kw["provider_id"]) for a, kw in calls] == [
+        ("identity", "2026-08-24", "seller-listing-photo"),
+        ("finish", "2026-09-29", "owner-attestation")]
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://example.org/unrelated-page", digest, acquired_from="local.png"))
+    replay = fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        direct["photographSource"], digest, acquired_from="local.png", current=direct)
+    assert replay["photographSha256"] == digest
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        direct["photographSource"], "sha256:changed", acquired_from="local.png", current=direct))
+    expect_failure(lambda: fetch_attachment.build_specimen(later, "SPEC-9998", "SPEC-9998.png",
+        "https://example.org/changed-source", digest, acquired_from="local.png", current=direct))
+    expect_failure(lambda: fetch_attachment.build_specimen(
+        {**later, "recordedAt": "not-a-date"}, "SPEC-9998", "SPEC-9998.png", "source", digest,
+        listing_url="https://seller.example/listing/11"))
+    expect_failure(lambda: fetch_attachment.commit_import(
+        {"specimens": [direct]}, [], [{**direct, "recordedAt": "2026-09-30"}]))
+    assert finishes.specimen_source({**direct, "heldBy": "invented owner category",
+        "inspectedFrom": "physical photograph"})["sourceType"] == "Unclassified specimen source"
+    null_date = {**direct["physicalObservation"], "ownerAttestedAt": None}
+    fetch_attachment.validate_observation(null_date, "SPEC-9998")
+    null_sources = finishes.specimen_sources(direct, null_date)
+    assert null_sources[1]["retrievedAt"] == direct["recordedAt"]
+    assert "None" not in null_sources[1]["evidence"]
+    null_calls = []
+    source_registry.record_specimen_sources(direct, [], sources[0]["sourceType"], null_date,
+        lambda *a, **kw: null_calls.append(a), source_registry.specimen_surfaces())
+    assert all(a[4] == direct["recordedAt"] for a in null_calls)
+    for holder, label in (("publisher or database", "official Pokémon Asia Thai card-detail render"),
+                          ("publisher or database", "database scan"),
+                          ("official publisher", "Official localized card-gallery render")):
+        render = {**direct, "heldBy": holder, "inspectedFrom": label}
+        render_sources = finishes.specimen_sources(render, null_date)
+        assert render_sources[0]["sourceType"] == source_registry.specimen_source_type(render)
+        assert render_sources[0]["claimFields"] == ["identity"]
+        assert render_sources[1]["claimFields"] == ["finish"]
+    for holder in ("third-party retailer", "not established; retailer image supplied by collection owner"):
+        retailer = {**direct, "heldBy": holder}
+        label = finishes.specimen_source(retailer)["sourceType"]
+        assert label == source_registry.specimen_source_type(retailer) == "Retail listing"
+        assert source_registry.specimen_provider(None, label) == "retailer-listing"
+    assert finishes.specimen_source({**direct, "heldBy": "unknown", "inspectedFrom": ""})["sourceType"] == "Unclassified specimen source"
+    specimens = json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"]
+    for specimen in specimens:
+        assert finishes.specimen_source(specimen)["sourceType"] == source_registry.specimen_source_type(specimen)
+    for bad in ("2026-02-30", "20260929", 20260929):
+        expect_failure(lambda: fetch_attachment.validate_observation(
+            {**later["physicalObservation"], "ownerAttestedAt": bad}, "SPEC-9998"))
+    expect_failure(lambda: fetch_attachment.validate_observation(
+        {"finish": "holo", "basis": "photo", "ownerAttestedAt": "2026-09-29"}, "SPEC-9998"))
+
     allowed_small = fetch_attachment.build_specimen(
         {
             "setCode": "JU", "number": "11", "variant": "V1", "language": "Dutch",
@@ -733,6 +830,32 @@ def main() -> None:
             ),
         ) == 0
         assert source_first_doc["specimens"][0]["setCode"] == "S-P"
+        # A legacy V-token must not shadow the exact source-first base release.
+        source_first_units.write_text(json.dumps({"units": [{
+            "setCode": "S-P", "number": "145", "language": "T-Chinese",
+            "products": [{"variant": "V1", "claimStatus": "confirmed"}],
+        }]}), encoding="utf-8")
+        assert fetch_attachment.command_issue(
+            source_first_doc,
+            SimpleNamespace(issue=999, issue_html=str(source_first_issue),
+                            manifest=str(source_first_manifest), allow_small=False,
+                            replace=False, dry_run=False),
+        ) == 0
+        source_first_units.write_text(json.dumps({"units": [{
+            "setCode": "S-P", "number": "145", "language": "T-Chinese",
+            "products": [{"variant": "base", "claimStatus": "contradicted"}],
+        }]}), encoding="utf-8")
+        try:
+            fetch_attachment.command_issue(
+                source_first_doc,
+                SimpleNamespace(issue=999, issue_html=str(source_first_issue),
+                                manifest=str(source_first_manifest), allow_small=False,
+                                replace=False, dry_run=False),
+            )
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("source-first fallback must not bypass a contradicted product")
     finally:
         fetch_attachment.SPECIMENS_JSON = original_registry
         fetch_attachment.SPECIMEN_DIR = original_specimen_dir
@@ -899,6 +1022,7 @@ def main() -> None:
     verify_multiple_views()
     verify_duplicate_photo_batch()
     verify_unnumbered_manifest()
+    verify_dry_run_preserves_photograph_date()
     print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 

@@ -85,6 +85,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from urllib.parse import urlparse, unquote
+from datetime import date
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -448,6 +449,18 @@ def validate_observed_finish(finish, specimen_id, defer_finish):
         fail(f"manifest row for {specimen_id} has invalid physicalObservation.finish")
 
 
+def validate_attestation_date(physical, specimen_id):
+    value = physical.get("ownerAttestedAt")
+    if value is None:
+        return
+    try:
+        valid = date.fromisoformat(value).isoformat() == value
+    except (ValueError, TypeError):
+        valid = False
+    if not valid or not physical.get("ownerAttestedFields"):
+        fail(f"{specimen_id}: ownerAttestedAt needs an ISO date and ownerAttestedFields")
+
+
 def validate_observation(
     physical: object, specimen_id: str, known_specimen_ids: set[str] | None = None,
     *, defer_finish: bool = False,
@@ -472,6 +485,7 @@ def validate_observation(
             f"manifest row for {specimen_id} has invalid "
             "physicalObservation.ownerAttestedFields"
         )
+    validate_attestation_date(physical, specimen_id)
     foil_pattern = physical.get("foilPattern")
     if foil_pattern is not None and not isinstance(foil_pattern, str):
         fail(f"manifest row for {specimen_id} needs text physicalObservation.foilPattern")
@@ -701,19 +715,38 @@ def validate_manifest_fields(item: dict, specimen_id: str) -> None:
                or (field != "number" and not item[field])]
     if missing:
         fail(f"manifest row for {specimen_id} is missing: {', '.join(missing)}")
+    try:
+        valid_date = date.fromisoformat(item["recordedAt"]).isoformat() == item["recordedAt"]
+    except ValueError:
+        valid_date = False
+    if not valid_date:
+        fail(f"{specimen_id}: recordedAt must be an ISO date")
+
+
+
+def validate_seller_provenance(item, provenance, digest, listing_url, acquired_from, current):
+    if item.get("heldBy") != "third-party seller" or listing_url:
+        return
+    parsed = urlparse(provenance)
+    if parsed.scheme not in {"http", "https"} or not parsed.netloc:
+        fail("seller evidence needs a listing URL or an acquired source image URL")
+    if acquired_from == provenance:
+        return  # Acquisition already decoded and hashed this exact endpoint's image bytes.
+    if current and (current.get("photographSource"), current.get("photographSha256")) == (provenance, digest):
+        return  # Offline replay of the retained source/image association.
+    fail("local seller image needs listingUrl; a new provenance URL must be the acquired image endpoint")
 
 
 def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
                    digest: str, *, listing_url: str | None = None,
                    allow_small: bool = False, cited_by: list | None = None,
-                   known_specimen_ids: set[str] | None = None) -> dict:
+                   known_specimen_ids: set[str] | None = None, acquired_from=None, current=None) -> dict:
     validate_manifest_fields(item, specimen_id)
     physical = item.get("physicalObservation")
     if physical is not None:
         # Group context is checked on the complete proposed registry before any write.
         physical = validate_observation(physical, specimen_id, known_specimen_ids, defer_finish=True)
-    if item.get("heldBy") == "third-party seller" and not listing_url:
-        fail(f"manifest row for {specimen_id} needs listingUrl for third-party seller evidence")
+    validate_seller_provenance(item, provenance, digest, listing_url, acquired_from, current)
     record = {
         "specimenId": specimen_id,
         "setCode": item["setCode"],
@@ -730,6 +763,7 @@ def build_specimen(item: dict, specimen_id: str, filename: str, provenance: str,
         "citedBy": list(item.get("citedBy") or []) if cited_by is None else list(cited_by),
     }
     add_specimen_options(record, item, physical, listing_url, allow_small)
+    ensure_photograph_date(current or {}, record)
     return record
 
 
@@ -744,6 +778,12 @@ def add_specimen_options(record, item, physical, listing_url, allow_small):
         record["listingUrl"] = listing_url
     if allow_small:
         record["photographAllowSmall"] = True
+
+
+def ensure_photograph_date(previous, record):
+    if (previous.get("photographSha256") == record.get("photographSha256")
+            and previous.get("recordedAt") != record.get("recordedAt")):
+        fail(f"{record['specimenId']}: unchanged image must retain recordedAt; date later owner statements separately")
 
 
 def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[dict]) -> None:
@@ -761,6 +801,7 @@ def commit_import(doc: dict, prepared: list[tuple[Path, bytes]], records: list[d
     superseded: set[Path] = set()
     for record in records:
         previous = current_by_id.get(record["specimenId"], {})
+        ensure_photograph_date(previous, record)
         old_name = previous.get("photograph")
         new_name = record.get("photograph")
         if not old_name or not new_name or old_name == new_name:
@@ -852,6 +893,13 @@ def manifest_target_exists(source_first_release: dict | None, variant: str, item
     )
 
 
+def validate_source_first_base_product(source_first_release, variant, products, specimen_id):
+    """A source-first base may coexist with V-tokens, but not override a base product."""
+    if (variant != "base" or source_first_release is None
+            or any(str(product.get("variant")) == variant for product in products)):
+        fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
+
+
 def unprojected_finish_is_missing(specimen: dict, source_first_release: dict | None) -> bool:
     """Return whether an observed specimen should already have a projected finish unit."""
     return source_first_release is None and specimen.get("allowUnprojected") is not True
@@ -928,7 +976,12 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         elif not any(str(product.get("variant")) == variant
                      and product.get("claimStatus") != "contradicted"
                      for product in finish_unit.get("products", [])):
-            fail(f"manifest row for {specimen_id} has no canonical product variant {variant}")
+            source_first_release = source_first_release_for(
+                source_first_releases, item.get("setCode"), number, item.get("language")
+            )
+            # A source-first base identity need not use a legacy marketplace V-token.
+            validate_source_first_base_product(
+                source_first_release, variant, finish_unit.get("products", []), specimen_id)
         current = next((row for row in doc["specimens"] if row["specimenId"] == specimen_id), None)
         ensure_cited_identity(current, item)
 
@@ -951,7 +1004,7 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
         record = build_specimen(
             item, specimen_id, filename, provenance, digest, listing_url=listing_url,
             allow_small=args.allow_small, cited_by=cited_by,
-            known_specimen_ids=known_observed_specimen_ids,
+            known_specimen_ids=known_observed_specimen_ids, acquired_from=source_label, current=current,
         )
         if current and not args.replace:
             existing_without_photo = {key: value for key, value in current.items()

@@ -23387,29 +23387,45 @@
      "language": "Thai",
      "claimStatus": "confirmed",
      "availableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "unitAvailableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0367",
      "productMappingStatus": "confirmed",
      "printings": [
       {
        "printingId": "F0367-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0597.png",
+       "specimenIds": [
+        "SPEC-0597"
+       ]
+      },
+      {
+       "printingId": "F0367-P02",
        "finish": "reverse-holo",
        "foilPattern": null,
        "markings": null,
@@ -24345,17 +24361,18 @@
      ],
      "unitAvailableFinishes": [
       "non-holo",
+      "holo",
       "reverse-holo"
      ],
      "finishStatus": {
       "non-holo": "marketplace-claimed",
-      "holo": "pending",
+      "holo": "unmapped",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "marketplace-claimed",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
@@ -24374,7 +24391,7 @@
        "productMapping": "mapped"
       },
       {
-       "printingId": "F0328-P02",
+       "printingId": "F0328-P03",
        "finish": "reverse-holo",
        "foilPattern": null,
        "markings": null,
@@ -24382,6 +24399,20 @@
        "cardSize": "standard",
        "verificationStatus": "marketplace-claimed",
        "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0328-P02",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "unresolved",
+       "image": "verification/specimens/SPEC-0264.png",
+       "specimenIds": [
+        "SPEC-0264"
+       ]
       }
      ]
     }
@@ -35939,24 +35970,43 @@
     {
      "language": "Thai",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "non-holo"
+     ],
+     "unitAvailableFinishes": [
+      "non-holo"
+     ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0506",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0506-P01",
+       "finish": "non-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0534.png",
+       "specimenIds": [
+        "SPEC-0534"
+       ]
+      }
+     ]
     }
    ],
    "finishCompletenessByLanguage": {
@@ -35964,7 +36014,7 @@
     "Korean": "pending",
     "T-Chinese": "pending",
     "Indonesian": "pending",
-    "Thai": "pending"
+    "Thai": "positive-evidence-only"
    },
    "languageEvidence": {
     "Japanese": {
