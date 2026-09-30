@@ -28,7 +28,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
+  :root {
     color-scheme: dark;
     --bg: #0f1216;
     --fg: #f3f4f6;
@@ -47,27 +47,6 @@
     --chip: #29313c;
     --focus: #8ab4ff;
   }
-}
-
-:root[data-theme="light"] { color-scheme: light; }
-:root[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0f1216;
-  --fg: #f3f4f6;
-  --muted: #b6c0cc;
-  --line: #3d4652;
-  --control-line: #6e7886;
-  --panel: #191f27;
-  --accent: #8ab4ff;
-  --primary-bg: #8ab4ff;
-  --primary-fg: #07111f;
-  --confirmed: #6ee7a8;
-  --marketplace: #ffd166;
-  --pending: #c4cbd4;
-  --contradicted: #ff8b8e;
-  --absent: #8a96a5;
-  --chip: #29313c;
-  --focus: #8ab4ff;
 }
 
 * { box-sizing: border-box; }
@@ -94,15 +73,6 @@ header.masthead .wrap { padding-top: 20px; padding-bottom: 0; }
 .masthead-copy { min-width: 0; }
 h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -0.01em; }
 .tagline { color: var(--muted); margin: 0 0 14px; max-width: 68ch; }
-.theme-toggle {
-  flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
-  min-width: 7.5rem; min-height: 44px; padding: 8px 12px;
-  border: 1px solid var(--control-line); border-radius: 999px;
-  background: var(--bg); color: var(--fg); font: inherit; font-weight: 650; cursor: pointer;
-}
-.theme-toggle:hover { border-color: var(--accent); }
-.theme-toggle-icon { font-size: 17px; line-height: 1; }
-
 nav.sections details > ul { display: flex; flex-wrap: wrap; gap: 4px; list-style: none; margin: 0; padding: 0; }
 nav.sections summary { list-style: none; }
 nav.sections summary::-webkit-details-marker { display: none; }
@@ -177,62 +147,10 @@ button.ghost {
 .count { color: var(--muted); font-size: 13px; margin-top: 8px; }
 
 .tableframe { position: relative; }
-.table-scroll-tools {
-  position: sticky; top: 0; z-index: 6;
-  display: flex; align-items: center; gap: 8px;
-  min-height: 38px; padding: 5px 7px 5px 10px;
-  background: var(--panel);
-  background: color-mix(in srgb, var(--panel) 94%, transparent);
-  border: 1px solid var(--line); border-bottom: 0; border-radius: 8px 8px 0 0;
-  box-shadow: 0 5px 12px -12px rgba(0, 0, 0, .65);
-  backdrop-filter: blur(8px);
-}
-.table-scroll-tools[hidden] { display: none; }
-.scroll-hint { min-width: 0; color: var(--muted); font-size: 12px; }
-.scroll-hint .scroll-icon { color: var(--accent); font-size: 15px; margin-right: 5px; }
-.scroll-actions { display: flex; gap: 4px; margin-left: auto; }
-.scroll-button {
-  display: inline-grid; place-items: center; width: 30px; height: 27px;
-  padding: 0; border: 1px solid var(--control-line); border-radius: 5px;
-  background: var(--bg); color: var(--fg); font: inherit; font-size: 16px;
-  font-weight: 700; line-height: 1; cursor: pointer;
-}
-.scroll-button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
-.scroll-button:disabled { color: var(--muted); cursor: default; opacity: .38; }
-.table-edge {
-  position: absolute; top: 38px; bottom: 0; z-index: 4; width: 24px;
-  opacity: 0; pointer-events: none; transition: opacity 120ms ease;
-}
-.table-edge.left { left: 1px; background: linear-gradient(90deg, rgba(0, 0, 0, .18), transparent); }
-.table-edge.right { right: 1px; background: linear-gradient(270deg, rgba(0, 0, 0, .18), transparent); }
-.tableframe.can-scroll-left .table-edge.left,
-.tableframe.can-scroll-right .table-edge.right { opacity: 1; }
-
 .tablewrap {
   overflow-x: auto; border: 1px solid var(--line); border-radius: 8px;
   overscroll-behavior-x: contain;
 }
-/* Floating overlays: this panel is fixed over whatever happens to be scrolling beneath it, so its
- * edge is the only thing saying where the heading stops and the rows resume. That makes it meaning
- * rather than decoration, and it takes the control line like the frozen-pane edge below. The
- * box-shadow reinforces the separation but cannot be relied on to carry it alone. */
-.table-sticky-header {
-  position: fixed; z-index: 5; display: none; overflow: hidden;
-  border: 1px solid var(--control-line); background: var(--panel);
-  box-shadow: 0 5px 12px -10px rgba(0, 0, 0, .7);
-}
-.table-sticky-header.is-visible { display: block; }
-.table-sticky-header table {
-  position: absolute; inset: 0 auto auto 0; margin: 0; table-layout: fixed;
-  transform: translateX(0); will-change: transform;
-}
-.table-sticky-header th { position: static; background: var(--panel); }
-.table-sticky-correction {
-  position: absolute; top: 0; right: 0; display: flex; align-items: flex-start;
-  padding: 4px 5px; border-left: 1px solid var(--control-line); background: var(--panel);
-  box-shadow: -7px 0 8px -7px rgba(0, 0, 0, .3); font-weight: 650;
-}
-.tableframe.is-overflowing .tablewrap { border-radius: 0 0 8px 8px; }
 table { border-collapse: collapse; width: 100%; font-size: 12px; }
 th, td {
   padding: 4px 5px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top;
@@ -244,15 +162,9 @@ th button.sort {
   background: none; border: 0; color: inherit; font: inherit; font-weight: 650;
   cursor: pointer; padding: 0; display: inline-flex; gap: 4px; align-items: center;
 }
-.table-sticky-header .sort-clone-label {
-  display: inline-flex; gap: 4px; align-items: center; font-weight: 650; cursor: pointer;
-}
 th[aria-sort="ascending"] button.sort::after { content: "\2191"; }
 th[aria-sort="descending"] button.sort::after { content: "\2193"; }
 th[aria-sort="none"] button.sort::after { content: "\2195"; opacity: .35; }
-.table-sticky-header th[aria-sort="ascending"] .sort-clone-label::after { content: "\2191"; }
-.table-sticky-header th[aria-sort="descending"] .sort-clone-label::after { content: "\2193"; }
-.table-sticky-header th[aria-sort="none"] .sort-clone-label::after { content: "\2195"; opacity: .35; }
 
 tbody tr:hover { background: var(--panel); }
 tr.yearsep td {
@@ -274,13 +186,6 @@ tr.yearsep td {
 }
 .col-size { width: calc(4.5rem + 10px); min-width: calc(4.5rem + 10px); }
 .col-evidence { width: calc(10rem + 10px); min-width: calc(10rem + 10px); }
-/* The overflow toolbar and the sticky heading cover the top of the table, and a browser scrolls a
- * focused element only as far as the viewport edge. Without this reservation, tabbing to a cell
- * disclosure or a correction link lands the focus ring underneath that furniture (WCAG 2.2
- * 2.4.11). The JS keeps --sticky-head-offset at the measured height of both. */
-#rows .cell-clip, #rows a, #rows button, tr.yearsep td {
-  scroll-margin-top: calc(var(--sticky-head-offset, 66px) + 6px);
-}
 .cell-clip[data-clipped="true"] { cursor: zoom-in; }
 .cell-clip[data-clipped="true"]:hover { text-decoration: underline dotted; text-underline-offset: 2px; }
 .cell-clip.is-expanded {
@@ -443,11 +348,6 @@ tbody tr:hover td.corr { background: var(--panel); }
 
 .empty { padding: 28px; text-align: center; color: var(--muted); }
 
-.builder { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }
-.builder .row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
-.builder .preview { margin-top: 12px; font-size: 14px; }
-.builder .preview strong { font-size: 18px; }
-
 .artwork-review { display: grid; gap: 12px; }
 .artwork-load { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
 .artwork-load p { margin: 0; flex: 1 1 280px; }
@@ -491,12 +391,6 @@ tbody tr:hover td.corr { background: var(--panel); }
 .artwork-save-status { min-height: 1.2em; color: var(--muted); font-size: 12px; }
 .artwork-muted { color: var(--muted); }
 
-table.sources { font-size: 13px; }
-details.sourcelist { margin-top: 12px; }
-details.sourcelist > summary { cursor: pointer; font-weight: 600; }
-details.sourcelist ol { max-height: 420px; overflow-y: auto; font-size: 12px; padding-left: 22px; }
-details.sourcelist li { margin-bottom: 3px; word-break: break-all; }
-
 #methodology a { overflow-wrap: anywhere; }
 footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 16px; color: var(--muted); font-size: 13px; }
 
@@ -520,12 +414,7 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
 
 @media (max-width: 720px) {
   .wrap { padding: 0 10px 48px; }
-  .masthead-row { align-items: flex-start; gap: 10px; }
-  .theme-toggle { min-width: 44px; width: 44px; padding-inline: 0; }
-  .theme-toggle-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   h1 { font-size: 21px; }
-  .table-scroll-tools { top: 0; }
-  .scroll-hint { font-size: 11px; }
   .card-preview-trigger img { width: 34px; max-height: 48px; }
   .field input, .field select { min-width: 110px; }
 
@@ -554,11 +443,9 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   nav.sections details[open] a { padding: 10px 4px; border-bottom: 1px solid var(--line); }
 }
 
-/* Dedicated narrow breakpoint (#122). Below ~480px the filter row's flex-wrap leaves controls at
- * inconsistent widths, and the scroll tools — hint on the left, buttons pushed right by
- * margin-left:auto — no longer fit one 38px line. */
+/* Stack filter fields on narrow screens. */
 @media (max-width: 480px) {
-  .controls .row, .builder .row { flex-direction: column; align-items: stretch; gap: 8px; }
+  .controls .row { flex-direction: column; align-items: stretch; gap: 8px; }
   .field { width: 100%; }
   .field input, .field select { width: 100%; min-width: 0; }
   .field input[type="number"] { width: 100%; }
@@ -567,12 +454,11 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
 
   /* #128 — on a phone the reduced table becomes one card per physical printing. The existing row
    * remains the only DOM/data surface: rearranging its cells keeps sorting, correction links,
-   * checklist scope and lazy detail panels on the same stable row IDs. */
+   * filters and lazy detail panels on the same stable row IDs. */
   .mobile-sort { display: flex; align-items: flex-end; gap: 8px; margin-top: 10px; }
   .mobile-sort .field { flex: 1 1 auto; }
   .mobile-sort .ghost { flex: 0 0 auto; min-height: 38px; }
-  .table-scroll-tools, .table-edge, .table-sticky-header { display: none !important; }
-  .tableframe.is-overflowing #collection-table-scroll, #collection-table-scroll {
+  #collection-table-scroll {
     overflow: visible; border: 0; border-radius: 0;
   }
   #collection-table, #collection-table tbody { display: block; width: 100%; }
@@ -637,13 +523,13 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .table-edge, .card-preview-trigger img { transition: none; }
+  .card-preview-trigger img { transition: none; }
 }
 
 @media print {
   @page { size: A4; margin: 12mm; }
 
-  :root, :root[data-theme="dark"] {
+  :root {
     color-scheme: light;
     --bg: #fff; --fg: #000; --muted: #333; --line: #777; --control-line: #555;
     --panel: #f3f4f6; --accent: #000; --primary-bg: #000; --primary-fg: #fff;
@@ -651,18 +537,15 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
     --absent: #333; --chip: #eee; --focus: #000;
   }
 
-  /* 34 columns cannot fit A4 or US Letter. Rather than overflow the sheet and silently
-   * truncate the right-hand side, print drops the language matrix, the secondary columns and
-   * the interactive furniture, leaving a legible chronological summary. The full matrix stays
-   * available on screen and in the downloadable checklist. */
-  nav.sections, .theme-toggle, .controls, .builder, .artwork-review, .stats, details, .table-scroll-tools,
-  .table-sticky-header, .table-edge, .card-preview, .lang-evidence-popover, .language-legend,
+  /* ponytail: print is a seven-column summary; use TSV for the full matrix.
+   * Add a dedicated print layout only if a full paper audit is needed. */
+  header.masthead, main > section:not(#collection), .controls, details,
+  .card-preview, .lang-evidence-popover, .language-legend,
   td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
 
   body { background: #fff; color: #000; font-size: 9pt; }
   .wrap { max-width: none; padding: 0; }
   .tablewrap { overflow: visible; border: 0; }
-  .tableframe.is-overflowing .tablewrap { border-radius: 0; }
   table { table-layout: auto; width: 100%; font-size: 8.5pt; }
   #collection-table th:nth-child(2) { width: 13%; }
   #collection-table th:nth-child(3) { width: 22%; }
