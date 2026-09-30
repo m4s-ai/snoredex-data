@@ -5,19 +5,13 @@ from __future__ import annotations
 import json
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "verification" / "scoped_pipeline_manifest.json"
 MATRIX = ROOT / "verification" / "workflow_gate_matrix.json"
-
-
-def remove_empty(path: Path) -> None:
-    try:
-        path.rmdir()
-    except OSError:
-        pass
 
 
 def main() -> int:
@@ -65,9 +59,8 @@ def main() -> int:
             if step.get("network"):
                 assert "--refresh" in step["command"]
 
-    report_path = ROOT / "verification" / "cache" / "scoped-test-lane.json"
-    report_path.unlink(missing_ok=True)
-    try:
+    with tempfile.TemporaryDirectory() as directory:
+        report_path = Path(directory) / "scoped-test-lane.json"
         command = [
             sys.executable, str(ROOT / "scripts" / "scoped_regen.py"),
             "--lane", "finish-refresh", "--dry-run", "--run-id", "test-scoped-lane",
@@ -89,10 +82,6 @@ def main() -> int:
         first_report.pop("generatedAt")
         second_report.pop("generatedAt")
         assert first_report == second_report, "same pinned scoped run must be idempotent"
-    finally:
-        report_path.unlink(missing_ok=True)
-        remove_empty(report_path.parent)
-        remove_empty(report_path.parent.parent)
 
     print(f"scoped regen contract passed: {len(lanes)} lanes, {sum(len(lane['steps']) for lane in lanes.values())} steps")
     return 0

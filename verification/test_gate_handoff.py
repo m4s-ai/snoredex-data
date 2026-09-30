@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import subprocess
+import tempfile
 from pathlib import Path
 
 from gate_manifest import MALIE_FILES, build_manifest, manifest_fingerprint, validate_directory, validate_manifest
@@ -14,9 +15,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def main() -> int:
     commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
-    temp = ROOT / "verification" / "cache" / "gate-handoff-test"
-    temp.mkdir(parents=True, exist_ok=True)
-    try:
+    with tempfile.TemporaryDirectory() as directory:
+        temp = Path(directory)
         committed_catalogue = temp / "collector_catalogue.json"
         committed_catalogue.write_bytes(subprocess.check_output(
             ["git", "show", f"{commit}:collector_catalogue.json"], cwd=ROOT,
@@ -67,23 +67,6 @@ def main() -> int:
         card_path.unlink()
         assert any("could not verify Malie" in error for error in validate_manifest(
             linux, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4"))
-    finally:
-        for path in temp.glob("gate-manifest-*.json"):
-            path.unlink(missing_ok=True)
-        (temp / "collector_catalogue.json").unlink(missing_ok=True)
-        for name in MALIE_FILES:
-            (temp / name).unlink(missing_ok=True)
-        for directory in (temp / "exports/malie", temp / "exports"):
-            if directory.is_dir():
-                directory.rmdir()
-        try:
-            temp.rmdir()
-        except OSError:
-            pass
-        try:
-            temp.parent.rmdir()
-        except OSError:
-            pass
 
     release = (ROOT / ".github" / "workflows" / "release-gate.yml").read_text(encoding="utf-8")
     pages = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")

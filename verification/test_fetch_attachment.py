@@ -647,11 +647,24 @@ def main() -> None:
     assert fetch_attachment.validate_specimen_id("SPEC-9999") == "SPEC-9999"
     expect_failure(lambda: fetch_attachment.validate_specimen_id("../../outside"))
 
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = Path(directory)
+        with patch.object(fetch_attachment, "ROOT", scratch):
+            verify_import_files(scratch, image, digest, signed_only)
+
+    verify_multiple_views()
+    verify_duplicate_photo_batch()
+    verify_unnumbered_manifest()
+    verify_dry_run_preserves_photograph_date()
+    print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
+
+
+def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: str) -> None:
     # Direct --specimen imports must reject bytes already filed under another specimen too.
-    source = ROOT / ".fetch-attachment-test-card.png"
+    source = scratch / ".fetch-attachment-test-card.png"
     source.write_bytes(image)
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     try:
         expect_failure(lambda: fetch_attachment.command_file(
             {"specimens": [
@@ -668,7 +681,7 @@ def main() -> None:
         source.unlink(missing_ok=True)
 
     # Hash validation covers photographs even when they are not finish projections.
-    photo_paths = [ROOT / name for name in (
+    photo_paths = [scratch / name for name in (
         ".fetch-attachment-test-plain.png",
         ".fetch-attachment-test-multiple.png",
         ".fetch-attachment-test-tmp.png",
@@ -686,11 +699,11 @@ def main() -> None:
          "photographSource": "/tmp/old.png",
          "physicalObservation": {"finish": "holo", "basis": "observed card surface"}},
     ]
-    registry = ROOT / ".fetch-attachment-test-specimens.json"
+    registry = scratch / ".fetch-attachment-test-specimens.json"
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     fetch_attachment.SPECIMENS_JSON = registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     registry.write_text(json.dumps({"count": len(records), "specimens": records}), encoding="utf-8")
     try:
         seen_allow_small = []
@@ -719,25 +732,25 @@ def main() -> None:
             path.unlink(missing_ok=True)
 
     # Issue imports validate their bytes immediately, but defer projection checks until regen.py.
-    issue_html = ROOT / ".fetch-attachment-test-issue.html"
+    issue_html = scratch / ".fetch-attachment-test-issue.html"
     issue_html.write_text(
         '<a href="https://github.com/user-attachments/assets/stable">'
         '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
     )
-    manifest = ROOT / ".fetch-attachment-test-manifest.json"
+    manifest = scratch / ".fetch-attachment-test-manifest.json"
     manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachmentIndex": 1, "setCode": "JU", "number": "11/64", "variant": "V1",
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
-    registry = ROOT / ".fetch-attachment-test-import.json"
+    registry = scratch / ".fetch-attachment-test-import.json"
     registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_download_candidates = fetch_attachment.download_candidates
     fetch_attachment.SPECIMENS_JSON = registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     fetch_attachment.download_candidates = lambda candidates: image
     try:
         assert fetch_attachment.command_issue(
@@ -754,12 +767,12 @@ def main() -> None:
         issue_html.unlink(missing_ok=True)
         manifest.unlink(missing_ok=True)
         registry.unlink(missing_ok=True)
-        (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+        (scratch / "SPEC-0001.png").unlink(missing_ok=True)
 
     # The same manifest path accepts owner-supplied local or reachable images without an issue.
-    direct_source = ROOT / ".fetch-attachment-test-direct-source.png"
+    direct_source = scratch / ".fetch-attachment-test-direct-source.png"
     direct_source.write_bytes(image)
-    direct_manifest = ROOT / ".fetch-attachment-test-direct-manifest.json"
+    direct_manifest = scratch / ".fetch-attachment-test-direct-manifest.json"
     direct_manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachment": str(direct_source),
         "photographSource": "https://drive.example.test/file/card/view",
@@ -769,12 +782,12 @@ def main() -> None:
         "allowUnprojected": True,
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
-    direct_registry = ROOT / ".fetch-attachment-test-direct-registry.json"
+    direct_registry = scratch / ".fetch-attachment-test-direct-registry.json"
     direct_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     fetch_attachment.SPECIMENS_JSON = direct_registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     try:
         direct_doc = {"count": 0, "specimens": []}
         assert fetch_attachment.command_issue(
@@ -793,31 +806,31 @@ def main() -> None:
         direct_source.unlink(missing_ok=True)
         direct_manifest.unlink(missing_ok=True)
         direct_registry.unlink(missing_ok=True)
-        (ROOT / "SPEC-0001.png").unlink(missing_ok=True)
+        (scratch / "SPEC-0001.png").unlink(missing_ok=True)
 
     # Source-first releases without a legacy finish unit use the authoritative card-release index.
-    source_first_issue = ROOT / ".fetch-attachment-test-source-first.html"
+    source_first_issue = scratch / ".fetch-attachment-test-source-first.html"
     source_first_issue.write_text(
         '<a href="https://github.com/user-attachments/assets/source-first">'
         '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
     )
-    source_first_manifest = ROOT / ".fetch-attachment-test-source-first-manifest.json"
+    source_first_manifest = scratch / ".fetch-attachment-test-source-first-manifest.json"
     source_first_manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachmentIndex": 1, "specimenId": "SPEC-0098", "setCode": "S-P", "number": "145",
         "variant": "base", "language": "T-Chinese", "heldBy": "owner",
         "inspectedFrom": "photo", "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "mirror-holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
-    source_first_units = ROOT / ".fetch-attachment-test-source-first-units.json"
+    source_first_units = scratch / ".fetch-attachment-test-source-first-units.json"
     source_first_units.write_text(json.dumps({"units": []}), encoding="utf-8")
-    source_first_registry = ROOT / ".fetch-attachment-test-source-first-registry.json"
+    source_first_registry = scratch / ".fetch-attachment-test-source-first-registry.json"
     source_first_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_finish_units = fetch_attachment.FINISH_UNITS
     original_download_candidates = fetch_attachment.download_candidates
     fetch_attachment.SPECIMENS_JSON = source_first_registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     fetch_attachment.FINISH_UNITS = source_first_units
     fetch_attachment.download_candidates = lambda candidates: image
     try:
@@ -865,22 +878,22 @@ def main() -> None:
         source_first_manifest.unlink(missing_ok=True)
         source_first_units.unlink(missing_ok=True)
         source_first_registry.unlink(missing_ok=True)
-        (ROOT / "SPEC-0098.png").unlink(missing_ok=True)
+        (scratch / "SPEC-0098.png").unlink(missing_ok=True)
 
     # Identical bytes must still surface corrected metadata instead of returning an early no-op.
-    metadata_issue = ROOT / ".fetch-attachment-test-metadata.html"
+    metadata_issue = scratch / ".fetch-attachment-test-metadata.html"
     metadata_issue.write_text(
         '<a href="https://github.com/user-attachments/assets/metadata">'
         '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
     )
-    metadata_manifest = ROOT / ".fetch-attachment-test-metadata-manifest.json"
+    metadata_manifest = scratch / ".fetch-attachment-test-metadata-manifest.json"
     metadata_manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachmentIndex": 1, "specimenId": "SPEC-0098", "setCode": "JU", "number": "11",
         "variant": "V1", "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "corrected basis"},
     }]}), encoding="utf-8")
-    metadata_registry = ROOT / ".fetch-attachment-test-metadata-registry.json"
+    metadata_registry = scratch / ".fetch-attachment-test-metadata-registry.json"
     metadata_registry.write_text(json.dumps({"count": 1, "specimens": [{
         "specimenId": "SPEC-0098", "setCode": "JU", "number": "11", "variant": "V1",
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo", "observed": "positive",
@@ -890,13 +903,13 @@ def main() -> None:
         "photographSource": "https://github.com/user-attachments/assets/metadata",
         "photographSha256": digest,
     }]}), encoding="utf-8")
-    metadata_photo = ROOT / "SPEC-0098.png"
+    metadata_photo = scratch / "SPEC-0098.png"
     metadata_photo.write_bytes(image)
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_download_candidates = fetch_attachment.download_candidates
     fetch_attachment.SPECIMENS_JSON = metadata_registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     fetch_attachment.download_candidates = lambda candidates: image
     try:
         expect_failure(lambda: fetch_attachment.command_issue(
@@ -916,20 +929,20 @@ def main() -> None:
         metadata_photo.unlink(missing_ok=True)
 
     # Signed-only issue HTML must match the stable issue provenance from a prior run.
-    signed_issue_html = ROOT / ".fetch-attachment-test-signed-only.html"
+    signed_issue_html = scratch / ".fetch-attachment-test-signed-only.html"
     signed_issue_html.write_text(
         '<a href="https://github.com/user-attachments/assets/ordinary">'
         '<img src="https://cdn.example.test/ordinary.png"></a>' + signed_only,
         encoding="utf-8"
     )
-    signed_manifest = ROOT / ".fetch-attachment-test-signed-only-manifest.json"
+    signed_manifest = scratch / ".fetch-attachment-test-signed-only-manifest.json"
     signed_manifest.write_text(json.dumps({"issue": 999, "observations": [{
         "attachmentIndex": 2, "setCode": "JU", "number": "11/64", "variant": "V1",
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
     }]}), encoding="utf-8")
-    signed_registry = ROOT / ".fetch-attachment-test-signed-only-registry.json"
+    signed_registry = scratch / ".fetch-attachment-test-signed-only-registry.json"
     signed_registry.write_text(json.dumps({"count": 1, "specimens": [{
         "specimenId": "SPEC-0099",
         "setCode": "JU", "number": "11/64", "variant": "V1", "language": "Dutch",
@@ -942,7 +955,7 @@ def main() -> None:
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_download_candidates = fetch_attachment.download_candidates
     fetch_attachment.SPECIMENS_JSON = signed_registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     fetch_attachment.download_candidates = lambda candidates: image
     signed_doc = json.loads(signed_registry.read_text(encoding="utf-8"))
     try:
@@ -957,14 +970,14 @@ def main() -> None:
         assert signed_doc["specimens"][0]["citedBy"] == ["F0167-P01"]
         # A later render may wrap the same image in a stable GitHub link.  It must
         # resolve to the existing issue-scoped specimen, not allocate a duplicate.
-        wrapped_issue_html = ROOT / ".fetch-attachment-test-wrapped.html"
+        wrapped_issue_html = scratch / ".fetch-attachment-test-wrapped.html"
         wrapped_issue_html.write_text(
             '<a href="https://github.com/user-attachments/assets/ordinary">'
             '<img src="https://cdn.example.test/ordinary.png"></a>'
             '<a href="https://github.com/user-attachments/assets/wrapped">'
             '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
         )
-        wrapped_manifest = ROOT / ".fetch-attachment-test-wrapped-manifest.json"
+        wrapped_manifest = scratch / ".fetch-attachment-test-wrapped-manifest.json"
         wrapped_manifest.write_text(json.dumps({"issue": 999, "observations": [{
             "attachmentIndex": 2, "setCode": "JU", "number": "11/64", "variant": "V1",
             "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
@@ -985,15 +998,15 @@ def main() -> None:
         fetch_attachment.download_candidates = original_download_candidates
         signed_issue_html.unlink(missing_ok=True)
         signed_manifest.unlink(missing_ok=True)
-        (ROOT / ".fetch-attachment-test-wrapped.html").unlink(missing_ok=True)
-        (ROOT / ".fetch-attachment-test-wrapped-manifest.json").unlink(missing_ok=True)
+        (scratch / ".fetch-attachment-test-wrapped.html").unlink(missing_ok=True)
+        (scratch / ".fetch-attachment-test-wrapped-manifest.json").unlink(missing_ok=True)
         signed_registry.unlink(missing_ok=True)
-        (ROOT / "SPEC-0099.png").unlink(missing_ok=True)
+        (scratch / "SPEC-0099.png").unlink(missing_ok=True)
 
     # Replacing a photograph must remove the superseded extension atomically.
-    old_photo = ROOT / "SPEC-0001.jpg"
-    new_photo = ROOT / "SPEC-0001.png"
-    replace_registry = ROOT / ".fetch-attachment-test-replace.json"
+    old_photo = scratch / "SPEC-0001.jpg"
+    new_photo = scratch / "SPEC-0001.png"
+    replace_registry = scratch / ".fetch-attachment-test-replace.json"
     old_photo.write_bytes(b"old image")
     new_photo.write_bytes(b"new image")
     replace_registry.write_text(json.dumps({
@@ -1003,7 +1016,7 @@ def main() -> None:
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     fetch_attachment.SPECIMENS_JSON = replace_registry
-    fetch_attachment.SPECIMEN_DIR = ROOT
+    fetch_attachment.SPECIMEN_DIR = scratch
     try:
         fetch_attachment.commit_import(
             {"count": 1, "specimens": [{"specimenId": "SPEC-0001", "photograph": old_photo.name}]},
@@ -1019,11 +1032,6 @@ def main() -> None:
         old_photo.unlink(missing_ok=True)
         new_photo.unlink(missing_ok=True)
 
-    verify_multiple_views()
-    verify_duplicate_photo_batch()
-    verify_unnumbered_manifest()
-    verify_dry_run_preserves_photograph_date()
-    print("fetch_attachment validation, hash, fallback and multiple-view regressions passed")
 
 
 if __name__ == "__main__":

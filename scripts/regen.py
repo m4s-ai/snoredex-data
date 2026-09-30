@@ -27,6 +27,12 @@ import subprocess
 import sys
 import time
 
+sys.dont_write_bytecode = True
+try:
+    from scripts.workflow_observation import tree_snapshot
+except ModuleNotFoundError:
+    from workflow_observation import tree_snapshot
+
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
 REGEN = [
@@ -129,7 +135,7 @@ TESTS = [
 CHILD_ENV = os.environ.copy()
 CHILD_ENV["PYTHONUTF8"] = "1"
 CHILD_ENV["PYTHONIOENCODING"] = "utf-8"
-DIFF_PATHS = ["--", ".", ":(exclude)*.sqlite"]
+CHILD_ENV["PYTHONDONTWRITEBYTECODE"] = "1"
 
 
 def run(cmd: list[str], label: str) -> bool:
@@ -140,17 +146,50 @@ def run(cmd: list[str], label: str) -> bool:
     return proc.returncode == 0
 
 
-def tree_state() -> tuple[bytes, bytes]:
-    """Return generated-file state while ignoring non-portable SQLite bytes."""
-    diff = subprocess.run(
-        ["git", "diff", "--binary", *DIFF_PATHS], cwd=ROOT,
+def tree_state() -> tuple[dict, dict]:
+    """Observe contents and metadata without comparing non-portable SQLite bytes."""
+    paths = subprocess.run(
+        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"], cwd=ROOT,
         check=True, stdout=subprocess.PIPE,
-    ).stdout
-    untracked = subprocess.run(
-        ["git", "ls-files", "--others", "--exclude-standard"], cwd=ROOT,
-        check=True, stdout=subprocess.PIPE,
-    ).stdout.splitlines()
-    return diff, b"\n".join(path for path in untracked if not path.endswith(b".sqlite"))
+    ).stdout.split(b"\0")
+    metadata = {}
+    for relative in filter(None, paths):
+        try:
+            info = (ROOT / os.fsdecode(relative)).lstat()
+            metadata[relative] = (info.st_size, info.st_mtime_ns, info.st_mode)
+        except FileNotFoundError:
+            metadata[relative] = None
+    return tree_snapshot(ROOT), metadata
+
+
+def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:
+    determinism_failures = [
+        cmd for cmd in check_commands
+        if not run([sys.executable, *cmd], " ".join(cmd))
+    ]
+    if determinism_failures:
+        print("\nFAILED determinism checks:", file=sys.stderr)
+        for cmd in determinism_failures:
+            print(f"  - {' '.join(cmd)}", file=sys.stderr)
+        return False
+
+    for test in tests:
+        if test[0].endswith("review_findings.py"):
+            label = " ".join(test)
+            print(f"\n=== {label} ===", flush=True)
+            started = time.perf_counter()
+            proc = subprocess.run([sys.executable, *test], cwd=ROOT, text=True,
+                                  encoding="utf-8", env=CHILD_ENV,
+                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
+            if proc.returncode != 0:
+                print(proc.stdout)
+                print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
+                return False
+        elif not run([sys.executable, *test], " ".join(test)):
+            print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
+            return False
+    return True
 
 
 def main() -> int:
@@ -179,40 +218,14 @@ def main() -> int:
                 return 1
 
     before_check = tree_state()
-    determinism_failures: list[list[str]] = []
-    for cmd in check_commands:
-        if not run([sys.executable, *cmd], " ".join(cmd)):
-            determinism_failures.append(cmd)
-    if determinism_failures:
-        print("\nFAILED determinism checks:", file=sys.stderr)
-        for cmd in determinism_failures:
-            print(f"  - {' '.join(cmd)}", file=sys.stderr)
+    try:
+        valid = verify(check_commands, [] if args.check_only else TESTS)
+    finally:
+        changed = tree_state() != before_check
+        if changed:
+            print("\nRead-only gate changed working-tree files or metadata.", file=sys.stderr)
+    if changed or not valid:
         return 1
-
-    if tree_state() != before_check:
-        print("\nStale artifacts: checking changed generated output. Run "
-              "`python scripts/regen.py` and commit the result.",
-              file=sys.stderr)
-        return 1
-
-    for test in ([] if args.check_only else TESTS):
-        if test[0].endswith("review_findings.py"):
-            label = " ".join(test)
-            print(f"\n=== {label} ===", flush=True)
-            started = time.perf_counter()
-            proc = subprocess.run([sys.executable, *test], cwd=ROOT, text=True,
-                                  encoding="utf-8", env=CHILD_ENV,
-                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
-            failed = proc.returncode != 0
-            if failed:
-                print(proc.stdout)
-                print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
-                return 1
-            continue
-        if not run([sys.executable, *test], " ".join(test)):
-            print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
-            return 1
 
     status = subprocess.run(
         ["git", "status", "--short"], cwd=ROOT, text=True, encoding="utf-8",
