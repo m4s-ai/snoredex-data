@@ -54,32 +54,32 @@ def main() -> None:
         {"same": {"contentHash": "sha256:a"}, "removed": {"contentHash": "sha256:b"}},
         {"same": {"contentHash": "sha256:c"}, "added": {"contentHash": "sha256:d"}},
     ) == (["same"], ["added"], ["removed"])
-    candidate_path = ROOT / ".tcgdex-refresh-candidate-test.json"
-    original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
-    original_cache_dir = finishes.CACHE_DIR
-    finishes.REFRESH_CANDIDATE_PATH = candidate_path
-    # Keep the refresh-candidate regression out of the production fetch cache.  The release
-    # gate deliberately rejects cache directories left behind by any test or generator.
-    finishes.CACHE_DIR = candidate_path.parent
-    try:
-        staged = {"https://api.tcgdex.net/test": {
-            "contentHash": finishes.json_hash({"id": "test-card"}),
-            "payload": {"id": "test-card"},
-        }}
-        finishes.write_refresh_candidate(staged)
-        assert finishes.load_refresh_candidate(set(staged)) == staged
-        candidate_path.write_text(candidate_path.read_text(encoding="utf-8")
-                                  .replace("test-card", "tampered"), encoding="utf-8")
+    with tempfile.TemporaryDirectory() as temporary:
+        candidate_path = Path(temporary) / "candidate.json"
+        original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
+        original_cache_dir = finishes.CACHE_DIR
+        finishes.REFRESH_CANDIDATE_PATH = candidate_path
+        # Keep the refresh-candidate regression out of the production fetch cache.  The release
+        # gate deliberately rejects cache directories left behind by any test or generator.
+        finishes.CACHE_DIR = candidate_path.parent
         try:
-            finishes.load_refresh_candidate(set(staged))
-        except ValueError:
-            pass
-        else:
-            raise AssertionError("tampered refresh candidate must fail closed")
-    finally:
-        finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
-        finishes.CACHE_DIR = original_cache_dir
-        candidate_path.unlink(missing_ok=True)
+            staged = {"https://api.tcgdex.net/test": {
+                "contentHash": finishes.json_hash({"id": "test-card"}),
+                "payload": {"id": "test-card"},
+            }}
+            finishes.write_refresh_candidate(staged)
+            assert finishes.load_refresh_candidate(set(staged)) == staged
+            candidate_path.write_text(candidate_path.read_text(encoding="utf-8")
+                                      .replace("test-card", "tampered"), encoding="utf-8")
+            try:
+                finishes.load_refresh_candidate(set(staged))
+            except ValueError:
+                pass
+            else:
+                raise AssertionError("tampered refresh candidate must fail closed")
+        finally:
+            finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
+            finishes.CACHE_DIR = original_cache_dir
     with tempfile.TemporaryDirectory() as temporary:
         temporary_root = Path(temporary)
         snapshot_path = temporary_root / "snapshot.json"

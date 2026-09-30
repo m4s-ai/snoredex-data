@@ -3,17 +3,20 @@
 Regression for #213: the whole point of the single command is that a stale
 derived artifact is caught before merge, not after three CI restarts. This test
 stales two regenerated artifacts, asserts the selected `regen.py --check-only`
-determinism pass catches both, then restores them. The complete L3 suite is
-covered by the normal `regen.py --check` invocation; this meta-test does not
+determinism pass catches both in an isolated temporary directory. The complete L3
+suite is covered by the normal `regen.py --check` invocation; this meta-test does not
 start that suite a second time.
 """
 from __future__ import annotations
 
 import contextlib
 import io
+import os
 import pathlib
 import subprocess
 import sys
+import tempfile
+from unittest.mock import patch
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 REGEN = pathlib.Path("scripts/regen.py")
@@ -28,18 +31,6 @@ TARGETS = [
     (ROOT / "verification" / "authoritative_graph.json",
      b'"schemaVersion": "1.1.0"', b'"schemaVersion": "0.0.0"'),
 ]
-INPUT_DATE_MARKERS = {
-    ROOT / "scripts" / "source_registry.py": "generated = latest_input_date(",
-    ROOT / "scripts" / "source_capabilities.py": 'str(manifest["meta"]["reviewedAt"])[:10]',
-    ROOT / "scripts" / "evidence_semantics.py": "generated = max(",
-    ROOT / "scripts" / "checklist.py": "generated = max(",
-    ROOT / "scripts" / "finishes.py": "generated_date = latest_input_date(",
-}
-
-
-def run(cmd: list[str]) -> subprocess.CompletedProcess:
-    return subprocess.run(cmd, cwd=ROOT, text=True, encoding="utf-8",
-                          stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 
 def run_aggregation_regressions() -> None:
@@ -103,45 +94,157 @@ def run_aggregation_regressions() -> None:
         sys.argv = original_argv
 
 
-def main() -> int:
-    run_aggregation_regressions()
-    for path, marker in INPUT_DATE_MARKERS.items():
-        source = path.read_text(encoding="utf-8")
-        if "date.today()" in source or marker not in source:
-            print(f"FAIL: {path.relative_to(ROOT)} does not derive its write date from inputs")
-            return 1
-    if not all(path.is_file() for path, _, _ in TARGETS):
-        print("SKIP: a readiness target is missing")
-        return 0
+def check_writes(scratch: pathlib.Path) -> None:
+    tracked = scratch / "tracked.txt"
+    tracked.write_text("original")
+    subprocess.run(["git", "add", "tracked.txt"], cwd=scratch, check=True)
+    tracked.write_text("pre-existing dirty edit")
+    untracked = scratch / "untracked.txt"
+    untracked.write_text("before")
+    (scratch / ".gitignore").write_text("cache/\n")
+    (scratch / "cache").mkdir()
+    ignored = scratch / "cache" / "candidate.json"
+    ignored.write_text("before")
+    clean = scratch / "clean.txt"
+    clean.write_text("before")
+    os.utime(clean, (1000000000, 1000000000))
+    subprocess.run(["git", "config", "core.trustctime", "false"], cwd=scratch, check=True)
+    subprocess.run(["git", "add", "clean.txt"], cwd=scratch, check=True)
+    subprocess.run(["git", "-c", "user.name=workflow-test", "-c", "user.email=workflow-test.invalid",
+                    "commit", "-qm", "fixture"], cwd=scratch, check=True)
+    (scratch / "staged.txt").write_text("staged before")
+    subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
+    hidden_write = "p=Path('clean.txt'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))"
+    resolve_undo = "subprocess.run(['git', 'update-index', '--clear-resolve-undo'], check=True)"
+    index_mutations = [
+        "subprocess.run(['git', 'add', 'tracked.txt'], check=True)",
+        "subprocess.run(['git', 'restore', '--staged', 'staged.txt'], check=True)",
+        "subprocess.run(['git', 'update-index', '--chmod=+x', 'clean.txt'], check=True)",
+        resolve_undo,
+    ]
+    mutations = [
+        "p=Path('tracked.txt'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
+        "Path('untracked.txt').write_text('after')",
+        "Path('new.txt').write_text('created')",
+        "Path('tracked.txt').unlink()",
+        "Path('cache/new.json').write_text('{}')",
+        "Path('cache/candidate.json').unlink()",
+        "p=Path('cache/candidate.json'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
+        "p=Path('cache/candidate.json'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))",
+        hidden_write,
+        *index_mutations,
+    ]
+    with patch.multiple(regen_module, ROOT=scratch, REGEN=[], CHECK=[], TESTS=[]), \
+            patch.object(sys, "argv", ["regen.py", "--check"]):
+        def invoke() -> tuple[int, str]:
+            output = io.StringIO()
+            with contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
+                code = regen_module.main()
+            return code, output.getvalue()
 
-    originals = [(path, path.read_bytes()) for path, _, _ in TARGETS]
-    try:
-        for (path, marker, replacement), (_, original) in zip(TARGETS, originals):
-            corrupted = original.replace(marker, replacement, 1)
-            if corrupted == original:
-                print(f"SKIP: could not find marker in {path}")
-                return 0
-            path.write_bytes(corrupted)
-        proc = run([
-            sys.executable, str(REGEN), "--check",
-            "--check-only", "scripts/evidence_semantics.py",
-            "--check-only", "scripts/authoritative_graph.py",
-        ])
-        expected_header = "FAILED determinism checks:"
-        expected_commands = (
-            "scripts/evidence_semantics.py --check",
-            "scripts/authoritative_graph.py --check",
+        before = regen_module.tree_state()
+        assert invoke()[0] == 0
+        assert regen_module.tree_state() == before
+        subprocess.run(["git", "update-index", "--split-index"], cwd=scratch, check=True)
+        before = regen_module.tree_state()
+        assert len(before[2]) == 2
+        assert invoke()[0] == 0
+        assert regen_module.tree_state() == before
+        subprocess.run(["git", "update-index", "--no-split-index"], cwd=scratch, check=True)
+        for phase in ("CHECK", "TESTS"):
+            for mutation in mutations:
+                for exit_code in (0, 1):
+                    tracked.write_text("pre-existing dirty edit")
+                    untracked.write_text("before")
+                    ignored.write_text("before")
+                    clean.write_text("before")
+                    os.utime(clean, (1000000000, 1000000000))
+                    subprocess.run(["git", "restore", "--staged", "--source=HEAD", "--",
+                                    "tracked.txt", "clean.txt"], cwd=scratch, check=True)
+                    subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
+                    if mutation == resolve_undo:
+                        blob = subprocess.check_output(["git", "rev-parse", "HEAD:clean.txt"], cwd=scratch).strip().decode()
+                        entries = "0 " + "0" * len(blob) + "\tclean.txt\n" + "".join(
+                            f"100644 {blob} {stage}\tclean.txt\n" for stage in (1, 2, 3))
+                        subprocess.run(["git", "update-index", "--index-info"], cwd=scratch,
+                                       input=entries.encode(), check=True)
+                        subprocess.run(["git", "add", "clean.txt"], cwd=scratch, check=True)
+                        assert subprocess.check_output(["git", "ls-files", "--resolve-undo"], cwd=scratch)
+                    (scratch / "new.txt").unlink(missing_ok=True)
+                    (scratch / "cache" / "new.json").unlink(missing_ok=True)
+                    command = ["-c", "import os, subprocess; from pathlib import Path; "
+                               + mutation + f"; raise SystemExit({exit_code})"]
+                    before = regen_module.tree_state()
+                    with patch.object(regen_module, phase, [command]):
+                        code, output = invoke()
+                    if mutation in index_mutations:
+                        assert regen_module.tree_state()[:2] == before[:2]
+                    if mutation == hidden_write:
+                        assert not subprocess.check_output(["git", "diff", "--name-only", "--", "clean.txt"], cwd=scratch)
+                    assert code == 1 and "Read-only gate changed" in output, (phase, mutation, output)
+                    assert "regen.py: OK" not in output
+
+
+def check_stale_artifacts(scratch: pathlib.Path) -> None:
+    targets = {
+        "scripts/evidence_semantics.py": ("OUTPUT_PATH", "evidence_semantics.json"),
+        "scripts/authoritative_graph.py": ("OUTPUT", "authoritative_graph.json"),
+    }
+    originals = [(path, path.read_bytes(), path.stat().st_mtime_ns) for path, _, _ in TARGETS]
+    for path, original, _ in originals:
+        (scratch / path.name).write_bytes(original)
+    original_run = regen_module.run
+
+    def isolated_run(cmd: list[str], label: str) -> bool:
+        attribute, name = targets[cmd[1]]
+        script = (
+            "import pathlib, sys; "
+            f"sys.path.insert(0, {str(ROOT / 'scripts')!r}); "
+            f"import {pathlib.Path(cmd[1]).stem} as module; "
+            f"module.{attribute} = pathlib.Path({str(scratch / name)!r}); "
+            "sys.argv = [sys.argv[0], '--check']; raise SystemExit(module.main())"
         )
-        if proc.returncode == 0 or expected_header not in proc.stdout \
-                or any(command not in proc.stdout for command in expected_commands):
-            print("FAIL: regen.py --check did not identify all stale artifacts")
-            print(proc.stdout)
-            return 1
-        print(f"OK: regen.py --check rejected both stale artifacts (exit {proc.returncode})")
-        return 0
-    finally:
-        for path, original in originals:
-            path.write_bytes(original)
+        return original_run([sys.executable, "-c", script], label)
+
+    with patch.multiple(regen_module, ROOT=scratch, TESTS=[]), \
+            patch.object(regen_module, "run", isolated_run), \
+            patch.object(sys, "argv", ["regen.py", "--check", "--check-only",
+                                      "scripts/evidence_semantics.py", "--check-only",
+                                      "scripts/authoritative_graph.py"]):
+        assert regen_module.main() == 0
+        for path, marker, replacement in TARGETS:
+            target = scratch / path.name
+            original = target.read_bytes()
+            corrupted = original.replace(marker, replacement, 1)
+            assert corrupted != original, f"stale-artifact marker missing in {path}"
+            target.write_bytes(corrupted)
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output), contextlib.redirect_stderr(output):
+            code = regen_module.main()
+        assert code == 1 and "FAILED determinism checks:" in output.getvalue()
+        assert all(f"{script} --check" in output.getvalue() for script in targets)
+        assert "Read-only gate changed" not in output.getvalue()
+    assert all((path.read_bytes(), path.stat().st_mtime_ns) == (original, mtime)
+               for path, original, mtime in originals)
+
+    # Input-derived dates are a behavior, not a required spelling in generator source.
+    import evidence_semantics
+    for date in ("2001-01-01", "2099-12-31"):
+        report = evidence_semantics.build([], [], {"decisions": [], "meta": {"generated": date}},
+                                          {"sourceRecords": []})
+        assert report["meta"]["generated"] == date
+
+
+def main() -> int:
+    with tempfile.TemporaryDirectory() as directory:
+        scratch = pathlib.Path(directory)
+        subprocess.run(["git", "init", "-q"], cwd=scratch, check=True)
+        with patch.object(regen_module, "ROOT", scratch):
+            run_aggregation_regressions()
+        check_writes(scratch)
+        check_stale_artifacts(scratch)
+    print("regen readiness passed: stale artifacts, child failures and read-only CHECK/TESTS")
+    return 0
 
 
 if __name__ == "__main__":

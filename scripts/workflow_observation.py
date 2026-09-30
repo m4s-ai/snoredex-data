@@ -13,10 +13,11 @@ MISSING_DIGEST = "missing"
 
 def _git_output(root: Path, *args: str) -> list[str]:
     result = subprocess.run(
-        ["git", *args], cwd=root, check=True, text=True, encoding="utf-8",
-        stdout=subprocess.PIPE,
+        ["git", "--no-optional-locks", "-c", "diff.autoRefreshIndex=false", *args],
+        cwd=root, text=True, encoding="utf-8",
+        stdout=subprocess.PIPE, check=True,
     )
-    return [line for line in result.stdout.splitlines() if line]
+    return [record for record in result.stdout.split("\0") if record]
 
 
 def _normalise(paths: list[str]) -> set[str]:
@@ -29,16 +30,17 @@ def _normalise(paths: list[str]) -> set[str]:
 
 def tree_paths(root: Path) -> set[str]:
     """Return dirty non-SQLite paths from staged, unstaged, and untracked state."""
-    staged = _git_output(root, "diff", "--cached", "--name-only", "--", ".")
-    unstaged = _git_output(root, "diff", "--name-only", "--", ".")
-    untracked = _git_output(root, "ls-files", "--others", "--exclude-standard")
-    return _normalise(staged + unstaged + untracked)
+    # Numstat reads contents even on Git versions that list stat-only name changes.
+    staged = _git_output(root, "diff", "--cached", "--numstat", "--no-renames", "-z", "--", ".")
+    unstaged = _git_output(root, "diff", "--numstat", "--no-renames", "-z", "--", ".")
+    untracked = _git_output(root, "ls-files", "--others", "--exclude-standard", "-z")
+    return _normalise([record.split("\t", 2)[2] for record in staged + unstaged] + untracked)
 
 
-def tree_snapshot(root: Path) -> dict[str, str]:
-    """Hash the current bytes of every dirty path, including pre-existing dirty files."""
+def tree_snapshot(root: Path, *, paths: list[str] | None = None) -> dict[str, str]:
+    """Hash explicit paths, or the workflow's dirty paths, excluding SQLite bytes."""
     snapshot: dict[str, str] = {}
-    for relative in tree_paths(root):
+    for relative in tree_paths(root) if paths is None else _normalise(paths):
         path = root / PurePosixPath(relative)
         try:
             snapshot[relative] = "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()

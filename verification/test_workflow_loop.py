@@ -29,13 +29,6 @@ from scripts.workflow_loop import (  # noqa: E402
 )
 
 
-def remove_empty(path: Path) -> None:
-    try:
-        path.rmdir()
-    except OSError:
-        pass
-
-
 def main() -> int:
     document = json.loads(MANIFEST.read_text(encoding="utf-8"))
     loops = {loop["id"]: loop for loop in document["loops"]}
@@ -62,7 +55,7 @@ def main() -> int:
         assert not _staging_matches_inputs(
             stale_meta, canonical, "contract-1", "capability-1", "graph-1"
         )
-    with tempfile.TemporaryDirectory(dir=ROOT) as raw_records:
+    with tempfile.TemporaryDirectory() as raw_records:
         records_path = Path(raw_records) / "records.jsonl"
         records_bytes = b'{"recordId":"record-1"}\n'
         records_path.write_bytes(records_bytes)
@@ -370,7 +363,7 @@ def main() -> int:
         "--replay-from-run", "20260909T171255Z", "--run-id"
     ]
 
-    with tempfile.TemporaryDirectory(dir=ROOT) as raw_root:
+    with tempfile.TemporaryDirectory() as raw_root:
         runs = Path(raw_root)
         older = runs / "20260101T000000Z"
         newer = runs / "20260102T000000Z"
@@ -407,15 +400,9 @@ def main() -> int:
     for loop_id in loops:
         visit(loop_id)
 
-    reports = [
-        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-evidence.json",
-        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-tcgdex.json",
-        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-physical.json",
-        ROOT / "verification" / "cache" / "workflow-loops" / "test-loop-discovery.json",
-    ]
-    for report in reports:
-        report.unlink(missing_ok=True)
-    try:
+    with tempfile.TemporaryDirectory() as directory:
+        reports = [Path(directory) / f"test-loop-{name}.json"
+                   for name in ("evidence", "tcgdex", "physical", "discovery")]
         evidence = subprocess.run([
             sys.executable, str(LOOP), "--loop", "evidence", "--run-id", "test-loop-evidence",
             "--out", str(reports[0]),
@@ -465,11 +452,6 @@ def main() -> int:
         if progress["blockedGaps"] and progress["needsSourceGaps"]:
             assert discovery_report["cycleCount"] == 1
             assert discovery_report["cycles"][0]["lane"]["reason"] == "dry-run"
-    finally:
-        for report in reports:
-            report.unlink(missing_ok=True)
-        remove_empty(reports[0].parent)
-        remove_empty(reports[0].parent.parent)
 
     print(f"workflow loop contract passed: {len(loops)} loops, bounded stop semantics and positive-evidence guard")
     return 0

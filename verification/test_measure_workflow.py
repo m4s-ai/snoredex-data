@@ -2,6 +2,7 @@
 """Regression checks for portable workflow-runtime diagnostics."""
 from __future__ import annotations
 
+import os
 import sys
 import subprocess
 import tempfile
@@ -31,7 +32,7 @@ def main() -> int:
     assert str(ROOT) not in command
     assert "r4nd0m" not in output
 
-    with tempfile.TemporaryDirectory(dir=ROOT) as raw_root:
+    with tempfile.TemporaryDirectory() as raw_root:
         repo = Path(raw_root)
 
         def git(*args: str) -> None:
@@ -45,17 +46,36 @@ def main() -> int:
         git("config", "user.name", "workflow-test")
         (repo / "tracked.txt").write_text("base", encoding="utf-8")
         (repo / "ignored.sqlite").write_bytes(b"base")
+        (repo / "binary.dat").write_bytes(b"\0before")
+        (repo / "deleted.txt").write_bytes(b"deleted")
+        (repo / "rename from.txt").write_bytes(b"renamed")
+        cached = repo / "cached.txt"
+        cached.write_bytes(b"same\n")
+        os.utime(cached, (1000000000, 1000000000))
         git("add", ".")
         git("commit", "--quiet", "-m", "base")
+
+        os.utime(cached, (1000000010, 1000000010))
+        index = repo / ".git" / "index"
+        original_index = index.read_bytes()
+        assert "cached.txt" not in tree_snapshot(repo)
+        assert index.read_bytes() == original_index
 
         # A pre-existing unstaged edit must still be observed when the measured step edits it.
         (repo / "tracked.txt").write_text("dirty before", encoding="utf-8")
         before = tree_snapshot(repo)
         (repo / "tracked.txt").write_text("dirty after", encoding="utf-8")
         (repo / "new.txt").write_text("created", encoding="utf-8")
+        (repo / "binary.dat").write_bytes(b"\0after")
+        (repo / "deleted.txt").unlink()
+        git("mv", "rename from.txt", "renamed ü.txt")
+        original_index = index.read_bytes()
         after = tree_snapshot(repo)
-        assert "tracked.txt" in changed_paths(before, after)
-        assert "new.txt" in changed_paths(before, after)
+        assert {
+            "tracked.txt", "new.txt", "binary.dat", "deleted.txt", "rename from.txt", "renamed ü.txt",
+        } <= changed_paths(before, after)
+        assert after["deleted.txt"] == after["rename from.txt"] == "missing"
+        assert index.read_bytes() == original_index
         assert "ignored.sqlite" not in before and "ignored.sqlite" not in after
 
         # Staged paths are part of the same observed tree and are compared by bytes, not status.
