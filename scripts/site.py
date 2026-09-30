@@ -7,9 +7,8 @@ Design constraints, all from the epic:
   rather than a second page maintained in parallel.
 * **Static and dependency-free.** No CDN, no analytics, no cookies, no runtime API. The page is
   usable if every external source site is down; only the outbound evidence links would fail.
-* **Works from `file://` and from `/snoredex-data/`.** All asset paths are project-relative, and
-  row data is embedded as JSON rather than fetched, because `fetch` of a sibling file is blocked
-  under `file://`.
+* **HTTP at any project path.** Assets are project-relative; row data is embedded, and artwork
+  review loads the generated JSON on demand. Serve a local checkout with `python -m http.server`.
 * **Statistics are generated**, never typed into prose, so the page cannot drift from the data
   the way the README did.
 
@@ -387,7 +386,6 @@ def main() -> int:
         # Bind the fetch URL to the semantic snapshot so force-cache cannot replay an older
         # projection after a generated artifact changes.
         "source": "verification/artwork_review_projection.json?v=" + artwork_review["projectionVersion"],
-        "fallback": "verification/artwork_review_projection.js",
     }
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
@@ -718,7 +716,6 @@ def main() -> int:
     <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
     <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
     <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — generated graph projection for the artwork review UI</li>
-    <li><a href="verification/artwork_review_projection.js">verification/artwork_review_projection.js</a> — offline fallback used when file:// blocks JSON fetches</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·

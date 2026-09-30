@@ -3,8 +3,7 @@
  * Extracted from scripts/confirmed_releases.py, which embedded ~500 lines of CSS in a Python
  * string literal. Kept as a real stylesheet so it can be edited, diffed and linted.
  *
- * Only project-relative paths are used, so the page works identically from file:// and from the
- * /snoredex-data/ project path on GitHub Pages.
+ * Project-relative paths support locally served checkouts and the GitHub Pages project path.
  */
 
 :root {
@@ -350,6 +349,7 @@ tbody tr:hover td.corr { background: var(--panel); }
 
 .artwork-review { display: grid; gap: 12px; }
 .artwork-load { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding: 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+.artwork-load[hidden] { display: none; }
 .artwork-load p { margin: 0; flex: 1 1 280px; }
 .artwork-load-more { display: block; justify-self: center; }
 .artwork-group { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px; }

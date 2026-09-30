@@ -4,13 +4,14 @@
 - **Status:** Accepted and implemented as a static review/proposal surface
 - **Date:** 2026-08-11
 - **Issue:** #120
+- **Delivery contract updated:** #412 (2026-09-30), HTTP JSON only; direct `file://` artwork review removed
 - **Implemented against:** ADR-0001 identity grains (#134) and the authoritative graph outputs from #140
 
 ## Context
 
 #120 required an interface for reviewing artwork groups and automatic detection beside the exact
-source image. The repository is a static, dependency-free data site that works from both
-`file://` and GitHub Pages. Its authoritative state is changed by reviewed passes and rebuilt by
+source image. The repository is a static, dependency-free data site served through HTTP, locally
+or through GitHub Pages. Its authoritative state is changed by reviewed passes and rebuilt by
 generators; the browser has no authenticated write API.
 
 The interface must not bind itself to today's Cardmarket-derived row keys. One shared artwork may
@@ -24,9 +25,10 @@ equivalence edge.
 The review interface is an embedded client-side view in this data repository. It ships with the
 existing static site and reads `verification/artwork_review_projection.json`, generated from the
 authoritative graph produced by #140. The page embeds only a versioned metadata envelope; the
-large projection loads on demand through HTTP and uses the generated
-`verification/artwork_review_projection.js` fallback for `file://` checkouts. It is not a separate
-app/repository and introduces no backend.
+large projection loads on demand through HTTP, including Pages project subpaths. Failed requests
+or invalid JSON remain visible and retryable. Local checkouts use `python -m http.server 8000`;
+the former script fallback and direct `file://` artwork review were removed in #412. This is not
+a separate app/repository and introduces no backend.
 
 The projection and UI use stable graph identifiers, never table positions or legacy product/unit
 keys. New sets, localities and source observations enter through regenerated data, so the client
@@ -67,7 +69,7 @@ graph identifiers, content hashes, and before-values instead of silently rebasin
 
 ## Consequences
 
-The implementation remains static, offline-capable and dependency-free. It has one generated data
+The implementation remains static and dependency-free. It has one generated data
 projection and one browser review path, and new graph data enters through regeneration rather than
 hard-coded UI catalogue entries. The browser loads review data only when requested or when the
 review section approaches the viewport, renders bounded group batches, and uses generated preview
@@ -88,3 +90,6 @@ affect authoritative data.
 
 A backend should be reconsidered only if measured review throughput makes proposal handoff the
 constraint and the project has an explicit authentication and write-authority model.
+
+`ponytail: Artwork review requires HTTP; add offline packaging only when a concrete workflow
+needs review without a local server.`

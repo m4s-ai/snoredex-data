@@ -57,7 +57,8 @@ Two rules hold everywhere in the data, the tooling and the site copy:
 Serve the repository and open the generated review view: sorting, filtering, evidence and correction
 links, artwork review proposals, TSV export and browser printing of the filtered table. The color
 scheme follows the system preference. The canonical checklist remains a separate data export;
-the view does not build ownership-checklist HTML.
+the view does not build ownership-checklist HTML. Artwork review requires HTTP; opening
+`index.html` directly with `file://` reports the local-server command instead of loading artwork.
 
 ```console
 python -m http.server 8000
