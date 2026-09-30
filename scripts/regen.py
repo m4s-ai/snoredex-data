@@ -149,7 +149,7 @@ def run(cmd: list[str], label: str) -> bool:
 def tree_state() -> tuple[dict, dict]:
     """Observe contents and metadata without comparing non-portable SQLite bytes."""
     paths = subprocess.run(
-        ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"], cwd=ROOT,
+        ["git", "ls-files", "--cached", "--others", "-z"], cwd=ROOT,
         check=True, stdout=subprocess.PIPE,
     ).stdout.split(b"\0")
     metadata = {}
@@ -159,7 +159,7 @@ def tree_state() -> tuple[dict, dict]:
             metadata[relative] = (info.st_size, info.st_mtime_ns, info.st_mode)
         except FileNotFoundError:
             metadata[relative] = None
-    return tree_snapshot(ROOT), metadata
+    return tree_snapshot(ROOT, include_ignored=True), metadata
 
 
 def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:

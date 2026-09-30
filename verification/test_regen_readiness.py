@@ -100,11 +100,19 @@ def check_writes(scratch: pathlib.Path) -> None:
     tracked.write_text("pre-existing dirty edit")
     untracked = scratch / "untracked.txt"
     untracked.write_text("before")
+    (scratch / ".gitignore").write_text("cache/\n")
+    (scratch / "cache").mkdir()
+    ignored = scratch / "cache" / "candidate.json"
+    ignored.write_text("before")
     mutations = [
         "p=Path('tracked.txt'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
         "Path('untracked.txt').write_text('after')",
         "Path('new.txt').write_text('created')",
         "Path('tracked.txt').unlink()",
+        "Path('cache/new.json').write_text('{}')",
+        "Path('cache/candidate.json').unlink()",
+        "p=Path('cache/candidate.json'); s=p.stat(); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns+2000000000))",
+        "p=Path('cache/candidate.json'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))",
     ]
     with patch.multiple(regen_module, ROOT=scratch, REGEN=[], CHECK=[], TESTS=[]), \
             patch.object(sys, "argv", ["regen.py", "--check"]):
@@ -122,7 +130,9 @@ def check_writes(scratch: pathlib.Path) -> None:
                 for exit_code in (0, 1):
                     tracked.write_text("pre-existing dirty edit")
                     untracked.write_text("before")
+                    ignored.write_text("before")
                     (scratch / "new.txt").unlink(missing_ok=True)
+                    (scratch / "cache" / "new.json").unlink(missing_ok=True)
                     command = ["-c", "import os; from pathlib import Path; "
                                + mutation + f"; raise SystemExit({exit_code})"]
                     with patch.object(regen_module, phase, [command]):
