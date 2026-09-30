@@ -17,7 +17,7 @@ import math
 import struct
 import zlib
 from pathlib import Path
-from typing import Iterable
+from typing import Callable, Iterable
 
 ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_WIDTH = 360
@@ -769,6 +769,12 @@ def derivative_path(source: Path, kind: str) -> Path:
     return root / f"{source.stem}.png"
 
 
+def file_digest(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def _source_key(source: Path) -> str:
     return source.resolve().relative_to(ROOT.resolve()).as_posix()
 
@@ -798,7 +804,8 @@ def _manifest_entry(source: Path) -> dict[str, object] | None:
     return entry if isinstance(entry, dict) else None
 
 
-def _valid_record(record: object, source_hash: str) -> Path | None:
+def _valid_record(record: object, source_hash: str,
+                  hash_file: Callable[[Path], str | None]) -> Path | None:
     if not isinstance(record, dict) or record.get("sourceHash") != source_hash:
         return None
     path_value = record.get("path")
@@ -808,15 +815,16 @@ def _valid_record(record: object, source_hash: str) -> Path | None:
     path = ROOT / path_value
     if path.suffix == ".png" and record.get("encoderVersion") != PNG_ENCODER_VERSION:
         return None
-    if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != expected:
+    if not path.is_file() or hash_file(path) != expected:
         return None
     return path
 
 
-def _manifest_derivatives(entry: dict[str, object], source_hash: str) -> dict[str, Path]:
+def _manifest_derivatives(entry: dict[str, object], source_hash: str,
+                          hash_file: Callable[[Path], str | None]) -> dict[str, Path]:
     result = {}
     for kind in ("preview", "thumbnail"):
-        path = _valid_record(entry.get(kind), source_hash)
+        path = _valid_record(entry.get(kind), source_hash, hash_file)
         if path:
             result[kind] = path
     return result
@@ -835,7 +843,8 @@ def _legacy_derivatives(source: Path) -> dict[str, Path]:
     return result
 
 
-def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
+def current_derivatives(source: Path, source_hash: str, *,
+                        hash_file: Callable[[Path], str | None] = file_digest) -> dict[str, Path]:
     """Return derivatives proven to match the current source bytes.
 
     Existing checkouts predate the manifest, so legacy JPEG derivatives are accepted once and
@@ -847,7 +856,7 @@ def current_derivatives(source: Path, source_hash: str) -> dict[str, Path]:
         raise ImageError("derivative manifest sources is not an object")
     entry = _manifest_entry(source)
     if entry is not None:
-        return _manifest_derivatives(entry, source_hash)
+        return _manifest_derivatives(entry, source_hash, hash_file)
     if manifest_sources:
         return {}
     return _legacy_derivatives(source)
@@ -924,5 +933,5 @@ def ensure_for_sources(sources: Iterable[Path]) -> None:
     _MANIFEST_CACHE = manifest
 
 
-__all__ = ["ImageError", "ensure_for_sources", "ensure_derivative", "current_derivatives",
+__all__ = ["ImageError", "ensure_for_sources", "ensure_derivative", "current_derivatives", "file_digest",
            "decode", "derivative_path", "encode_png"]

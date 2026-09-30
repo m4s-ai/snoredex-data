@@ -18,10 +18,12 @@ import json
 import re
 import sys
 from collections import defaultdict
+from functools import cache, partial
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import artwork_derivatives
+from artwork_derivatives import file_digest
 from source_registry import provenance_url
 from specimen_links import release_specimens, specimen_reference_index
 
@@ -40,21 +42,17 @@ def digest(value: Any) -> str:
     return hashlib.sha256(raw.encode("utf-8")).hexdigest()
 
 
-def file_digest(path: Path) -> str | None:
-    if not path.is_file():
-        return None
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def image_derivatives(src: str, content_hash: str | None) -> dict[str, str]:
+def image_derivatives(src: str, content_hash: str | None, *,
+                      hash_file: Callable[[Path], str | None] = file_digest) -> dict[str, str]:
     if not content_hash:
         return {}
     result = {"originalHash": content_hash}
+    current = artwork_derivatives.current_derivatives(ROOT / src, content_hash, hash_file=hash_file)
     for key, kind in (("previewSrc", "preview"), ("thumbnailSrc", "thumbnail")):
-        candidate = artwork_derivatives.current_derivatives(ROOT / src, content_hash).get(kind)
+        candidate = current.get(kind)
         if candidate:
             path = candidate.resolve().relative_to(ROOT.resolve()).as_posix()
-            result[key] = f"{path}?v={file_digest(candidate)}"
+            result[key] = f"{path}?v={hash_file(candidate)}"
     return result
 
 
@@ -207,6 +205,9 @@ def build_groups(releases_projection: list[dict[str, Any]]) -> dict[str, dict[st
 
 
 def build() -> dict[str, Any]:
+    # ponytail: reuse only within a build; persistent caching needs content-based invalidation.
+    hash_file = cache(file_digest)
+    derivatives = cache(partial(image_derivatives, hash_file=hash_file))
     graph = load(ROOT / "verification" / "authoritative_graph.json")
     units = load(ROOT / "verification" / "units.json")
     finishes = load(ROOT / "verification" / "finish_units.json")["units"]
@@ -258,7 +259,7 @@ def build() -> dict[str, Any]:
         if any(item["src"] == src for item in images):
             return
         local = ROOT / src if not re.match(r"^https?://", src) else None
-        content_hash = file_digest(local) if local else None
+        content_hash = hash_file(local) if local else None
         image = {
             "src": src,
             "label": label,
@@ -268,7 +269,7 @@ def build() -> dict[str, Any]:
             "reviewable": bool(content_hash),
         }
         if local:
-            image.update(image_derivatives(src, content_hash))
+            image.update(derivatives(src, content_hash))
         images.append(image)
 
     def add_specimen(specimen_id: str, observations: list, images: list) -> None:

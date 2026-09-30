@@ -11,7 +11,9 @@ import sys
 import tempfile
 import zlib
 from copy import deepcopy
+from collections import Counter
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
@@ -292,11 +294,65 @@ def verify_derivative_writer() -> None:
                 fail("extension replacement reused a legacy derivative")
             if (test_root / extension_entry["preview"]["path"]).read_bytes() == first_bytes:
                 fail("extension replacement copied stale derivative bytes")
+            verify_build_image_reads(source)
     finally:
         artwork_review.ROOT = original_review_root
         artwork_derivatives.ROOT = original_root
         artwork_derivatives.MANIFEST = original_manifest
         artwork_derivatives._MANIFEST_CACHE = original_cache
+
+
+def verify_build_image_reads(source: Path) -> None:
+    key = source.relative_to(artwork_review.ROOT).as_posix()
+    inputs = {
+        "authoritative_graph.json": {"meta": {}, "edges": [], "entities": [
+            {"entityId": f"R{i}", "entityType": "card-release",
+             "payload": {"claimIds": [f"CLAIM:legacy:U{i}"]}} for i in (1, 2)]},
+        "units.json": [{"unitId": f"U{i}", "image": key,
+                        "sourceRef": f"specimen:S{i}"} for i in (1, 2)],
+        "specimens.json": {"specimens": [
+            {"specimenId": f"S{i}", "photograph": key, "observed": f"view {i}"} for i in (1, 2)]},
+        "finish_units.json": {"units": []},
+        "analysis_confirmed_releases.json": {"variants": []},
+        "source_first_prints.json": {"prints": []},
+    }
+    original_read = Path.read_bytes
+
+    def build():
+        reads = Counter()
+        def read(path):
+            reads[path] += 1
+            return original_read(path)
+        with patch.object(artwork_review, "load", lambda path: deepcopy(inputs[path.name])), \
+                patch.object(Path, "read_bytes", read):
+            projection = artwork_review.build()
+        assert all(count == 1 for count in reads.values()), reads
+        members = [member for group in projection["groups"] for member in group["members"]]
+        assert len(members) == 2
+        for member in members:
+            index = member["cardReleaseId"][1:]
+            assert {row["observationId"] for row in member["observations"]} == {
+                f"unit:U{index}", f"specimen:S{index}"}
+        return projection, [member["images"][0] for member in members]
+
+    first, images = build()
+    assert all(image.get("previewSrc") and image.get("thumbnailSrc") for image in images)
+    source.unlink()
+    missing, images = build()
+    assert all(not image["reviewable"] for image in images)
+    source.write_bytes(artwork_derivatives.encode_png(4, 2, [(20, 220, 20)] * 8))
+    changed, images = build()
+    assert changed["projectionVersion"] != first["projectionVersion"] != missing["projectionVersion"]
+    assert all(image["reviewable"] and "previewSrc" not in image and "thumbnailSrc" not in image
+               for image in images)
+    artwork_derivatives.ensure_for_sources([source])
+    refreshed, images = build()
+    assert refreshed["projectionVersion"] == changed["projectionVersion"]
+    assert all(image.get("previewSrc") and image.get("thumbnailSrc") for image in images)
+    preview = artwork_review.ROOT / images[0]["previewSrc"].split("?", 1)[0]
+    preview.write_bytes(b"corrupt derivative")
+    _, images = build()
+    assert all("previewSrc" not in image and image.get("thumbnailSrc") for image in images)
 
 
 def verify_specimen_reference_routes():
