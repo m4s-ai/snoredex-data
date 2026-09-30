@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import source_adapters as adapters  # noqa: E402
+import card_discovery as discovery  # noqa: E402
 from bulbapedia_historical import parse_historical_index  # noqa: E402
 
 
@@ -503,6 +504,20 @@ class CapabilityPinScope(unittest.TestCase):
         graph["meta"]["counts"] = {"surfaces": 3}
         return graph
 
+    def test_legacy_scoped_and_empty_pins_keep_their_bytes(self):
+        expected = (
+            (None, "abc10f39be02874649483dd39c183f6788657cff61f338242ca433d3cf4fe527"),
+            ([], "f63dd445652c0d6fb62067d85ad62bac497bde06c7f1a64b82ef948111268787"),
+            (["used-surface"], "d89ad82f22849e112ea8d97877c718ee338f96eda99f8ec56a4f549df6785b57"),
+            (["other-surface", "used-surface"], "fb52783537c75e17034950e93b5ef6b9a41df918c10dcf2500ac565b7e82749d"),
+        )
+        before = json.dumps(self.GRAPH)
+        for module in (adapters, discovery):
+            for scope, digest in expected:
+                with self.subTest(module=module.__name__, scope=scope):
+                    self.assertEqual(module.capability_pin(self.GRAPH, scope), "sha256:" + digest)
+        self.assertEqual(json.dumps(self.GRAPH), before)
+
     def test_an_unrelated_surface_does_not_expire_a_run(self):
         self.assertEqual(
             adapters.capability_pin(self.GRAPH, ["used-surface"]),
@@ -545,8 +560,13 @@ class CapabilityPinScope(unittest.TestCase):
         self.assertNotIn("sourceResolution", sliced)
 
     def test_a_run_citing_an_undeclared_surface_is_an_error(self):
-        with self.assertRaises(adapters.AdapterError):
-            adapters.capability_slice(self.GRAPH, ["surface-that-was-withdrawn"])
+        for module, error in ((adapters, adapters.AdapterError), (discovery, discovery.DiscoveryError)):
+            for operation in (module.capability_pin, module.capability_slice):
+                with self.subTest(module=module.__name__, operation=operation.__name__):
+                    with self.assertRaises(error) as caught:
+                        operation(self.GRAPH, ["missing-b", "missing-a"])
+                    self.assertEqual(str(caught.exception),
+                                     "run cites surfaces the capability graph does not declare: ['missing-a', 'missing-b']")
 
     def test_surfaces_used_reads_the_requests(self):
         self.assertEqual(
