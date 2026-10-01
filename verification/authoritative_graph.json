@@ -36435,6 +36435,40 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0603",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0603",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0603",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0603",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0603",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0603"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0604",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0604",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0604",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0603",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:specimen:SPEC-0603, already established from another specimen",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0603"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -104242,6 +104276,31 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0602",
         "specimenIds": [
           "SPEC-0602"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0603",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0603",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0603",
+        "specimenIds": [
+          "SPEC-0603",
+          "SPEC-0604"
         ]
       }
     },
@@ -189090,6 +189149,26 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0603",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0603",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0604",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0603",
+      "provenance": {
+        "specimenId": "SPEC-0604"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -239919,6 +239998,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:sc1a F:127/154:Snorlax-Collect-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0603",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0603",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0603",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
       "provenance": {}
     },
     {
@@ -302327,17 +302422,31 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0602",
       "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1a F:127/154:Snorlax-Collect-Collapse"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0603",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0603",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0604",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:specimen:SPEC-0603, already established from another specimen"
     }
   ],
   "summary": {
-    "entities": 8350,
-    "edges": 12394,
-    "migrationInputs": 2944,
+    "entities": 8353,
+    "edges": 12398,
+    "migrationInputs": 2946,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 307,
+      "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1632,
+      "established-and-mapped": 1633,
       "linked-local-counterpart": 125,
       "mapped": 368,
       "needs-evidence": 125,
@@ -302345,9 +302454,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2106,
+    "candidateClaims": 2108,
     "cardReleases": 633,
-    "physicalPrintings": 815,
+    "physicalPrintings": 816,
     "setSourceRecords": 496,
     "setSourceDispositions": 496,
     "localizations": 16

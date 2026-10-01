@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 602,
+  "count": 604,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12601,6 +12601,56 @@
         "ownerAttestedAt": "2026-10-01",
         "cardSize": "standard",
         "basis": "The collection owner explicitly identifies the photographed SC1a F 127/154 card as Non-Holo. Image inspection establishes the exact Traditional Chinese card identity."
+      }
+    },
+    {
+      "specimenId": "SPEC-0603",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Physical card photographed in a rigid holder, held in a hand; original listing URL not supplied; visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0603.png",
+      "photographSource": "user-supplied:codex-clipboard-d9984f30-4854-4ff6-918e-124701ca5e5b.png",
+      "photographSha256": "sha256:147555a1537a40bb3d583348c9e302e8d9246d9f9891d55e11db14eb78e5319a",
+      "observed": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Physical card photographed in a rigid holder, held in a hand. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment."
+      }
+    },
+    {
+      "specimenId": "SPEC-0604",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Freestanding card-face depiction with depicted holographic highlights; physical photography versus digital rendering is not established; original listing URL not supplied; visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0604.png",
+      "photographSource": "user-supplied:codex-clipboard-299a0871-70d8-4b82-ad0e-3045f248eb1e.png",
+      "photographSha256": "sha256:7d690657d4b166bb6db0ff01e290e19a25a3508852c37c02dcedb0c6e0b261b6",
+      "observed": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Freestanding card-face depiction with depicted holographic highlights; physical photography versus digital rendering is not established. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment."
       }
     }
   ]

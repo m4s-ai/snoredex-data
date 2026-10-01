@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
+    "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
+      "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
+      "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30615,6 +30615,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-42a5ba94-a233-552d-8bb7-b46fe06952e4",
+      "toItemIds": [
+        "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-0464d3f7-163a-53df-ac87-ecbf0b59e60c",
       "toItemIds": [
         "item-31d2fee3-40dd-587a-9f18-a531f17c0f45"
@@ -40547,7 +40556,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
         "disposition": "projected",
         "targetItemIds": [
-          "item-42a5ba94-a233-552d-8bb7-b46fe06952e4"
+          "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"
         ],
         "reason": null
       },
@@ -47790,6 +47799,11 @@
         "targetItemId": "item-17b15e38-60af-55ac-89a0-c1cf6c2aef1a"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0603",
+        "disposition": "projected",
+        "targetItemId": "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"
+      },
+      {
         "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
         "disposition": "projected",
         "targetItemId": "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
@@ -47798,7 +47812,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 815,
+      "physicalPrintings": 816,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "413ba360224013f7b3e5d84132fc1b126a6c911b52fd3cb1696e8569115bd920",
+  "projectionVersion": "58c51fd77d2f87e20a0f53b12841ce18527739e8bda88e745b222cb336873f27",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 815,
-    "sourceObservations": 3063
+    "physicalPrintings": 816,
+    "sourceObservations": 3065
   },
   "groups": [
     {
@@ -90894,13 +90894,36 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0603",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0603",
+              "specimenIds": [
+                "SPEC-0604",
+                "SPEC-0603"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸VMAX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -90947,6 +90970,28 @@
               "originalHash": "84019598cb04f7891378e8428bf2b4a1b2a6b54e962734f3c51c75780decb6bd",
               "previewSrc": "images/previews/SPEC-0506.png?v=6951af40d25233c15ec9193bb0e47e99978f56cd6f3b11966751ba3dc33cb2aa",
               "thumbnailSrc": "images/thumbs/SPEC-0506.png?v=e11d35b4d7a56f1290ca1720294725722cfbb0b5d2341422216eebb63af8183f"
+            },
+            {
+              "src": "verification/specimens/SPEC-0603.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0603",
+              "contentHash": "147555a1537a40bb3d583348c9e302e8d9246d9f9891d55e11db14eb78e5319a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "147555a1537a40bb3d583348c9e302e8d9246d9f9891d55e11db14eb78e5319a",
+              "previewSrc": "images/previews/SPEC-0603.png?v=fdbeb86a5406858c2549517e225b64b4c36f116924cc4228b965407a5e90e116",
+              "thumbnailSrc": "images/thumbs/SPEC-0603.png?v=3fafb49f18065f4538e1c75ff997402e6606d6e6b6df37e009b5fe4231885888"
+            },
+            {
+              "src": "verification/specimens/SPEC-0604.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0604",
+              "contentHash": "7d690657d4b166bb6db0ff01e290e19a25a3508852c37c02dcedb0c6e0b261b6",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7d690657d4b166bb6db0ff01e290e19a25a3508852c37c02dcedb0c6e0b261b6",
+              "previewSrc": "images/previews/SPEC-0604.png?v=ea4e80661a300df36690d70f56d359c6ea799827da73fb94880574cda632f7c0",
+              "thumbnailSrc": "images/thumbs/SPEC-0604.png?v=ce8779e8a57c6a2a5501b8dce97d3cfa59f75e7230a3c72e9549f877a0cf8fd6"
             }
           ],
           "observations": [
@@ -90985,6 +91030,24 @@
               "evidence": "Visible Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, Illus. 5ban Graphics. Printed set is sc1b F, resolving the earlier listing-title sc2b ambiguity. Larger JPEG original retrieved from same CDN image ID and visually matched to owner-supplied resized WebP. Technical finish and physical custody are not asserted.",
               "contentHash": "93c74e37a9c10ef3cd8821fa968db610152010a318ec5885cc70c44cb70f2bfe",
               "image": "verification/specimens/SPEC-0506.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0603",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Physical card photographed in a rigid holder, held in a hand. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+              "contentHash": "52bb3e232734a3637fad272401642b70f714210912d97c3ceda8ee81386c33da",
+              "image": "verification/specimens/SPEC-0603.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0604",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Freestanding card-face depiction with depicted holographic highlights; physical photography versus digital rendering is not established. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+              "contentHash": "c601c608ac43ead4549853ed3544a9817f9c8796d375fe24f0ccaee080f7b565",
+              "image": "verification/specimens/SPEC-0604.png"
             }
           ]
         }
