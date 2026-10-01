@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
+    "toFingerprint": "sha256:b5a1af0b37611a506a8c121b02815d1fd5221d584507dc1990e35033034a39a4",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
+      "toFingerprint": "sha256:b5a1af0b37611a506a8c121b02815d1fd5221d584507dc1990e35033034a39a4",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -9185,11 +9185,11 @@
             "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7"
           ],
           "toItemIds": [
-            "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7"
+            "item-1ea82fc0-20c4-5da9-816e-11edb7c76496"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-c703b5f2-de23-54f6-8897-5e9fe21d9a4d",
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
+      "toFingerprint": "sha256:b5a1af0b37611a506a8c121b02815d1fd5221d584507dc1990e35033034a39a4",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -20640,11 +20640,11 @@
             "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7"
           ],
           "toItemIds": [
-            "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7"
+            "item-1ea82fc0-20c4-5da9-816e-11edb7c76496"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-c703b5f2-de23-54f6-8897-5e9fe21d9a4d",
@@ -30533,6 +30533,15 @@
       "reconciliation": "requires-user-resolution"
     },
     {
+      "fromItemId": "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7",
+      "toItemIds": [
+        "item-1ea82fc0-20c4-5da9-816e-11edb7c76496"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-d9527985-41c9-5072-bf7a-a262f2c2327b",
       "toItemIds": [
         "item-24d791f5-8ec7-5ede-9510-a91e596c4fc6"
@@ -40255,7 +40264,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:203/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-c6c45cfc-09d5-54a6-a60c-b96a68a6e3e7"
+          "item-1ea82fc0-20c4-5da9-816e-11edb7c76496"
         ],
         "reason": null
       },
@@ -47489,6 +47498,11 @@
         "targetItemId": "item-24d791f5-8ec7-5ede-9510-a91e596c4fc6"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0039",
+        "disposition": "projected",
+        "targetItemId": "item-1ea82fc0-20c4-5da9-816e-11edb7c76496"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0083",
         "disposition": "projected",
         "targetItemId": "item-1e7619b0-6c1c-5248-a0c1-2e870ea005d0"
@@ -47742,7 +47756,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 811,
+      "physicalPrintings": 812,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
