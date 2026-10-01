@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-09-29",
-  "projectionVersion": "22d1336c062102ffdfd6af965dd9753cbc0eb564eead62279448bd0c8f70846f",
+  "generated": "2026-10-01",
+  "projectionVersion": "c25cbe2076860d22585313a4e9e4728ad411ceff03a17b711c3ae70945360549",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 3,
     "cardReleases": 633,
-    "physicalPrintings": 801,
+    "physicalPrintings": 809,
     "sourceObservations": 3059
   },
   "groups": [
@@ -30733,13 +30733,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0509",
+              "cardReleaseId": "RELEASE:WEST:French:30C FR:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0509",
+              "specimenIds": [
+                "SPEC-0509"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Ronflex",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30772,8 +30794,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "af9c539b55d98f6080402acccd49449e9e8d584d765ab95f4d2ce0edb0eaa1d6",
+              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "434aec2ec2b28201c2ab117b91bf582c0dfe9d3d4c83a65e789072159d3047bc",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/fr-fr/2M6P_FR_119-2x.png"
             },
             {
@@ -30781,8 +30803,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "a86b0e12f8f0b159cd3a670578af401be7155767b4db2862379580febd4425ef",
+              "evidence": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "62c7174cf6d46c126f75efa77f8e3f28a0c2b588c14610e1ad897d77712a1495",
               "image": "verification/specimens/SPEC-0509.png"
             }
           ]
@@ -30823,13 +30845,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0507",
+              "cardReleaseId": "RELEASE:WEST:English:30C EN:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0507",
+              "specimenIds": [
+                "SPEC-0507"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30862,8 +30906,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/en-us/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "b9f05b2137bdb98229d366851577fcfde5470340a1548b671490077a81ceb0a1",
+              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "a48f6dfd197995f5f9ea97a8752d11218e05a20e7eb8d0593e1858747384bd95",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/en-us/2M6P_EN_119-2x.png"
             },
             {
@@ -30871,8 +30915,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/en-us/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "af3a222d21f905619e719dcdfca88626c5da0571798a314e336a60ab0aac7346",
+              "evidence": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "b2d40f35f16cc23c8d7fb90309ffdb9d673396671e5e73ed5cdfa7c2748c7f2f",
               "image": "verification/specimens/SPEC-0507.png"
             }
           ]
@@ -30913,13 +30957,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0515",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:M6a F:095/103:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0515",
+              "specimenIds": [
+                "SPEC-0515"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30952,8 +31018,8 @@
               "kind": "source-first",
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. The card face has no separate rarity symbol. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No rarity category or physical finish is inferred. Inspected 2026-09-10.",
-              "contentHash": "257cd091010b3f44d903a5490f525c305ed210af7a41a2a1ef21504b31b4fc6b",
+              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. The card face has no separate rarity symbol. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No rarity category or physical finish is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the JP:M6a:095/103:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "268862ccfdc3a51805c7fcbd7091895aa0a39289c90abd5345d156530cfe4e7d",
               "image": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png"
             },
             {
@@ -30961,8 +31027,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "796cafcdc9826f89c07d5ce1218bf13255de0164c8209d3950664d42c5a3bfd7",
+              "evidence": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "1a2fdc08108f8abc901f868c5bbac77c244fd169601237221bf2e13faf3b459e",
               "image": "verification/specimens/SPEC-0515.png"
             }
           ]
@@ -31003,13 +31069,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0510",
+              "cardReleaseId": "RELEASE:WEST:Italian:30C IT:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0510",
+              "specimenIds": [
+                "SPEC-0510"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31042,8 +31130,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/it-it/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "f6a7e7fa28994f40b0ad6cfc763c65a6470b6215ce66521fcfc27c2bc2c87c01",
+              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "e10da6669f70878db8f215c76b972d1e0a52e5cab36a4286e74d31e843c08f65",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/it-it/2M6P_IT_119-2x.png"
             },
             {
@@ -31051,8 +31139,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/it-it/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "a31a09fc30d6effe2453755926abb5b013e840d5fa136dc11c4e0eab25178d01",
+              "evidence": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "077a534b6a45c0a285fcfbe08f46ee6be5f1fd5c18bb657a37a8fdc0a2f75d06",
               "image": "verification/specimens/SPEC-0510.png"
             }
           ]
@@ -31093,13 +31181,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0508",
+              "cardReleaseId": "RELEASE:WEST:German:30C DE:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0508",
+              "specimenIds": [
+                "SPEC-0508"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Relaxo",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31132,8 +31242,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/de-de/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "b980d3a48086178bf240d45677d3e5dbf17c0a27e01f5473ebec54fb60158c96",
+              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "4e9aaba5c96cfccaba4314c9492bbd8e957c2a25d19ac55acc1e712c2cdb39aa",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/de-de/2M6P_DE_119-2x.png"
             },
             {
@@ -31141,8 +31251,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/de-de/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "fce52101147b3ca093e7d26462b1694e52619f16b7a296dd434f8b33302216e7",
+              "evidence": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "b5f65b6853a8d1127305442b81765d6f2fd5e23db9c1cdfefa8ad25d835c3f90",
               "image": "verification/specimens/SPEC-0508.png"
             }
           ]
@@ -31295,13 +31405,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0511",
+              "cardReleaseId": "RELEASE:WEST:Spanish:30C ES:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0511",
+              "specimenIds": [
+                "SPEC-0511"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31334,8 +31466,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/es-es/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. The card face shows a solid black rarity dot after 119/128. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No physical finish is inferred. Inspected 2026-09-10.",
-              "contentHash": "607198c39eb2357f7e8250ebd363d6e50dcd82e4412068cc017777c8f5f12721",
+              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. The card face shows a solid black rarity dot after 119/128. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No physical finish is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "72bff838cd349dfa27f0bcb23136a9d3915744ae67126c123d48f7974eb230e1",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-es/2M6P_ES_119-2x.png"
             },
             {
@@ -31343,8 +31475,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/es-es/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "0379416c06a44e11accf4fa0c0bd0b667c9abcb0d89fa7bbc9d19d67c1453455",
+              "evidence": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "a8b62048122b0010bd89ae668a00bf1ea641e9ac615ffd0324794c669af60461",
               "image": "verification/specimens/SPEC-0511.png"
             }
           ]
@@ -31497,13 +31629,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0513",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:30C PT:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0513",
+              "specimenIds": [
+                "SPEC-0513"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31536,8 +31690,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "12b561939df809db621f71553a72cc266aca3f80022c343b83fba2751706e6c8",
+              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "ca8c36c58b3e541e9b33647a4c175193eeac4b5c071c617fc9ceef6bdec314b2",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/pt-br/2M6P_PTBR_119-2x.png"
             },
             {
@@ -31545,8 +31699,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "92f45e21e8e8e14b5a8f57fefb70689ecaa77162db8722169593934f75162114",
+              "evidence": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "1b49f8579c01a6effa5aa9539d8f38c2e79d9f954f565e41e979b89b70d76b7c",
               "image": "verification/specimens/SPEC-0513.png"
             }
           ]
@@ -31587,13 +31741,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0512",
+              "cardReleaseId": "RELEASE:LATAM:Spanish:30C LA:119/128:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0512",
+              "specimenIds": [
+                "SPEC-0512"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -31626,8 +31802,8 @@
               "kind": "source-first",
               "provider": "pokemon-official",
               "url": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "db2160d7f1f48c17cd693875330a810b715174bc3c6849a48a389a36dde8d875",
+              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: this exact 30th Celebration release has Common rarity, adopting the WEST:30C EN:119/128:base classification under the explicit owner instruction. This is owner attestation, not a printed-symbol observation or an official localized rarity claim. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "ace36e66fa193047ced370105d5960d4e7eaf3011f4da68c950118695bebb1ad",
               "image": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-mx/2M6P_LA_119-2x.png"
             },
             {
@@ -31635,8 +31811,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration/",
-              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
-              "contentHash": "a898e1dd692cf721ad6a0fab3d287772739a0837189bac84ae2044f6c31c4b82",
+              "evidence": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
+              "contentHash": "1d79484e96a15ec81660617e54e5c1d8343d3be6943e465586009e64ba91ef60",
               "image": "verification/specimens/SPEC-0512.png"
             }
           ]
