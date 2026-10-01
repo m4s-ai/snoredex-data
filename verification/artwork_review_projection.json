@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "a3e7f1269a519b23b4f19303bfdfc7f17803f770e6071b4c3fad04d3532bbc79",
+  "projectionVersion": "6089791a436ce8063fc66931856c25fbcf54d45637f285b6101c886fff0c3135",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 818,
+    "physicalPrintings": 819,
     "sourceObservations": 3066
   },
   "groups": [
@@ -67635,13 +67635,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "specimenIds": [],
+              "physicalPrintingId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "sourceRecordIds": [
+                "SET-SRC-BP-scD F-FINISH-TW-20261001"
+              ],
+              "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001"
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,

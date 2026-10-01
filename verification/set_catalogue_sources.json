@@ -7,11 +7,11 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 497,
+      "sourceRecords": 498,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
       "releaseDateRecords": 73,
-      "editionAvailabilityRecords": 5,
+      "editionAvailabilityRecords": 6,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
     }
@@ -15187,6 +15187,49 @@
           "positiveOnly": true,
           "completenessClaim": false,
           "basis": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
+        }
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Strength_V_Starter_Deck_(ATCG)#Information:TW:scD F",
+      "retrieved": "2026-10-01",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+      "raw": {
+        "localCode": "scD F",
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "finishProfileText": "those from the deck also lack rarity symbols and Holofoil patterns.",
+        "finishProfileSection": "Information",
+        "finishProfileRevision": "4298592",
+        "finishProfileClauses": [
+          {
+            "verbatim": "those from the deck also lack rarity symbols and Holofoil patterns.",
+            "disposition": "mapped",
+            "finish": "non-holo",
+            "scope": "all Strength V Starter Deck cards"
+          }
+        ],
+        "finishProfileUnparsedText": "",
+        "evidenceBundle": "verification/evidence/scd-non-holo-20261001",
+        "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+          "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+          "finish": "non-holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "specimenIds": [],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "The article explicitly states that deck cards lack Holofoil patterns. Its setlist names Snorlax 111/159; the existing official Traditional Chinese identity establishes the exact scD F release."
         }
       }
     }

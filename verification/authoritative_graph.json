@@ -28894,6 +28894,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "claimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001",
+        "claimKind": "physical-printing",
+        "sourceKind": "reviewed-positive-evidence",
+        "sourceId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+        "materializedTargetId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+        "specimenIds": [],
+        "reason": "The article explicitly states that deck cards lack Holofoil patterns. Its setlist names Snorlax 111/159; the existing official Traditional Chinese identity establishes the exact scD F release."
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:CN:30th C:095/103:base",
       "origin": "reviewed-30th-cn-20261001",
       "payload": {
@@ -48194,7 +48212,8 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/2220/"
+          "https://asia.pokemon-card.com/tw/card-search/detail/2220/",
+          "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)"
         ],
         "sourceFirstRecordIds": [
           "TW:scD F:111/159:base"
@@ -75168,6 +75187,38 @@
               "localSetCode": "sc1D F"
             },
             "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "finish-profile",
+      "entityId": "FINISHPROFILE:scD F:TW:non-holo",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "finishProfileId": "FINISHPROFILE:scD F:TW:non-holo",
+        "localSetId": "LOCALSET:TW:scD%20F",
+        "setEditionIds": [
+          "EDITION:TW:T-Chinese:scD F"
+        ],
+        "languageScope": [
+          "T-Chinese"
+        ],
+        "scopePrecision": "scoped",
+        "closedWithinScope": false,
+        "evidenceScope": "all ordinary cards in the named deck",
+        "sourceRecordId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+        "sourceStatement": "those from the deck also lack rarity symbols and Holofoil patterns.",
+        "rules": [
+          {
+            "finishProfileRuleId": "FINISHPROFILE:scD F:TW:non-holo:all",
+            "priority": 10,
+            "effect": "include",
+            "finish": "non-holo",
+            "condition": {
+              "localSetCode": "scD F"
+            },
+            "sourceRecordId": "SET-SRC-BP-scD F-FINISH-TW-20261001"
           }
         ]
       }
@@ -104447,6 +104498,30 @@
       }
     },
     {
+      "entityType": "physical-printing",
+      "entityId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "specimenIds": [],
+        "physicalPrintingId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "sourceRecordIds": [
+          "SET-SRC-BP-scD F-FINISH-TW-20261001"
+        ],
+        "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001"
+      }
+    },
+    {
       "entityType": "profile-finish-claim",
       "entityId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "origin": "authoritative-set-catalogue-migration",
@@ -104519,6 +104594,19 @@
         "profileFinishClaimId": "PROFILEFINISHCLAIM:sc1D F:TW:133/164:non-holo",
         "finishProfileId": "FINISHPROFILE:sc1D F:TW:non-holo",
         "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+        "finish": "non-holo",
+        "state": "established-by-profile",
+        "closesCompleteFinishList": false
+      }
+    },
+    {
+      "entityType": "profile-finish-claim",
+      "entityId": "PROFILEFINISHCLAIM:scD F:TW:111/159:non-holo",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "profileFinishClaimId": "PROFILEFINISHCLAIM:scD F:TW:111/159:non-holo",
+        "finishProfileId": "FINISHPROFILE:scD F:TW:non-holo",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
         "finish": "non-holo",
         "state": "established-by-profile",
         "closesCompleteFinishList": false
@@ -138553,6 +138641,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TW:scD%20F",
+        "reason": "Exact positive deck article and the retained image-based code establish this local set and finish scope."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-CM-0243DE5FBFC0",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -145122,6 +145221,54 @@
             "positiveOnly": true,
             "completenessClaim": false,
             "basis": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
+          }
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "origin": "reviewed-scd-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+        "sourceKind": "edition-availability-record",
+        "provider": "bulbapedia",
+        "providerRecordKey": "Strength_V_Starter_Deck_(ATCG)#Information:TW:scD F",
+        "retrieved": "2026-10-01",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+        "raw": {
+          "localCode": "scD F",
+          "locality": "TW",
+          "languages": [
+            "T-Chinese"
+          ],
+          "finishProfileText": "those from the deck also lack rarity symbols and Holofoil patterns.",
+          "finishProfileSection": "Information",
+          "finishProfileRevision": "4298592",
+          "finishProfileClauses": [
+            {
+              "verbatim": "those from the deck also lack rarity symbols and Holofoil patterns.",
+              "disposition": "mapped",
+              "finish": "non-holo",
+              "scope": "all Strength V Starter Deck cards"
+            }
+          ],
+          "finishProfileUnparsedText": "",
+          "evidenceBundle": "verification/evidence/scd-non-holo-20261001",
+          "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+          "physicalPrintingEvidence": {
+            "cardReleaseId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+            "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+            "finish": "non-holo",
+            "edition": null,
+            "foilPattern": null,
+            "markings": [],
+            "distribution": null,
+            "cardSize": "unknown",
+            "specimenIds": [],
+            "positiveOnly": true,
+            "completenessClaim": false,
+            "basis": "The article explicitly states that deck cards lack Holofoil patterns. Its setlist names Snorlax 111/159; the existing official Traditional Chinese identity establishes the exact scD F release."
           }
         }
       }
@@ -184963,6 +185110,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:CN:30th C:095/103:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -219706,6 +219861,22 @@
       "provenance": {}
     },
     {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:scD F:TW:non-holo",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:scD F",
+      "provenance": {}
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:scD F:TW:non-holo",
+      "relation": "supported-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
       "fromType": "legacy-cardmarket-product",
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143",
       "relation": "maps-to",
@@ -240302,6 +240473,22 @@
       "provenance": {}
     },
     {
+      "fromType": "physical-printing",
+      "fromId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "provenance": {}
+    },
+    {
       "fromType": "profile-finish-claim",
       "fromId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "relation": "asserts-finish-for",
@@ -240395,6 +240582,22 @@
       "relation": "uses-profile",
       "toType": "finish-profile",
       "toId": "FINISHPROFILE:sc1D F:TW:non-holo",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:scD F:TW:111/159:non-holo",
+      "relation": "asserts-finish-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:scD F:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:scD F:TW:111/159:non-holo",
+      "relation": "uses-profile",
+      "toType": "finish-profile",
+      "toId": "FINISHPROFILE:scD F:TW:non-holo",
       "provenance": {}
     },
     {
@@ -296153,6 +296356,13 @@
     },
     {
       "sourceKind": "reviewed-positive-evidence",
+      "sourceId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "disposition": "established-and-mapped",
+      "targetRef": "PRINTING:7f18569ea4bfd3d295e5b4e9",
+      "reason": "The article explicitly states that deck cards lack Holofoil patterns. Its setlist names Snorlax 111/159; the existing official Traditional Chinese identity establishes the exact scD F release."
+    },
+    {
+      "sourceKind": "reviewed-positive-evidence",
       "sourceId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:d6b6feeffd3d1268",
@@ -296604,6 +296814,13 @@
       "sourceId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TW:sc1D%20F",
+      "reason": "Reviewed positive deck article finish rule."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-BP-scD F-FINISH-TW-20261001",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TW:scD%20F",
       "reason": "Reviewed positive deck article finish rule."
     },
     {
@@ -302761,26 +302978,26 @@
     }
   ],
   "summary": {
-    "entities": 8362,
-    "edges": 12410,
-    "migrationInputs": 2949,
+    "entities": 8368,
+    "edges": 12417,
+    "migrationInputs": 2951,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1635,
+      "established-and-mapped": 1636,
       "linked-local-counterpart": 125,
-      "mapped": 369,
+      "mapped": 370,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2110,
+    "candidateClaims": 2111,
     "cardReleases": 633,
-    "physicalPrintings": 818,
-    "setSourceRecords": 497,
-    "setSourceDispositions": 497,
+    "physicalPrintings": 819,
+    "setSourceRecords": 498,
+    "setSourceDispositions": 498,
     "localizations": 16
   }
 }
