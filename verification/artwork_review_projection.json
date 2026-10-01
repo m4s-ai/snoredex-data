@@ -4,22 +4,126 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "ad6fd31f27fdd6134cb023111f5f37aba2d06a3ac1f0c74981c0f137764783c9",
+  "projectionVersion": "d4fc3087acdd419da94794b69218e1dd3f8e00dd6a6859c6bd7c25ea95e4f199",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
     "groups": 251,
     "mappedWorks": 42,
-    "imageGroups": 248,
+    "imageGroups": 249,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
-    "unmappedReleases": 3,
+    "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 812,
-    "sourceObservations": 3061
+    "physicalPrintings": 813,
+    "sourceObservations": 3062
   },
   "groups": [
+    {
+      "groupId": "IMAGE-GROUP:0a2dfa65d03069bbc435e86b",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:0a2dfa65d03069bbc435e86b",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+      ],
+      "cardKeys": [
+        "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+      ],
+      "label": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:0a2dfa65d03069bbc435e86b",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "TW",
+          "language": "T-Chinese",
+          "script": "Hant",
+          "setEditionId": "EDITION:TW:T-Chinese:AS5a",
+          "localSetCode": "AS5a",
+          "localNumber": "204/184",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0601",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "The collection owner identifies the photographed card as Holo, recognizable at its border.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0601",
+              "specimenIds": [
+                "SPEC-0601"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "伊布&卡比獸GX",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "verification/specimens/SPEC-0601.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0601",
+              "contentHash": "0a2dfa65d03069bbc435e86b652fdfe5cbe403cd7e1cd8d606d9eecffddcdba7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0a2dfa65d03069bbc435e86b652fdfe5cbe403cd7e1cd8d606d9eecffddcdba7",
+              "previewSrc": "images/previews/SPEC-0601.png?v=a93528db96e266f57144c1a1fa07734b18cf6b82886a3e98fe69515cbe5c653e",
+              "thumbnailSrc": "images/thumbs/SPEC-0601.png?v=d2939abaf81c49707a5614f2608c07a79c83bba1cefa2f87fa72c9f09389a3fc"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:TW:AS5a:204/184:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-asia",
+              "url": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
+              "evidence": "The official Taiwan AS5a archive card list, page 23 (retained crop zh-as5a-204.png), positively identifies 伊布&卡比獸GX as 204/184 SR and shows its printed card face and attacks. This establishes the exact Traditional-Chinese release and its Work mapping; it does not claim the archived list is historically complete, and it supplies no physical finish evidence.",
+              "contentHash": "e4810bf2f9ccbf3214cd1f9249443595622236e2421eabfc19d2b49e4699409e",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0601",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Traditional Chinese Eevee & Snorlax GX, 伊布&卡比獸GX, HP270, AS5a C 204/184 SR, Illus. Tomokazu Komiya, copyright 2020. The supplied image shows the card in a transparent sleeve and a KIWI watermark. The printed collector number is 204/184, without an a suffix. The collection owner identifies the photographed card as Holo, recognizable at its border. Physical custody and the original external image/listing URL are not established. No named foil pattern or exhaustive finish inventory is asserted.",
+              "contentHash": "e4d0e939f0ca033a3016d2f6f06147b58556c918113d68719a520edff5b66df7",
+              "image": "verification/specimens/SPEC-0601.png"
+            }
+          ]
+        }
+      ]
+    },
     {
       "groupId": "IMAGE-GROUP:2409a34528aaa9d39f70bc35",
       "groupKind": "image-group",
@@ -100178,67 +100282,6 @@
               "evidence": "Owner (domain expert) confirms Prismatic Evolutions: Additionals Snorlax ex (xPRE 076) exists in Spanish. Confirmed languages: French, German, Italian and European Spanish. NOTE the owner explicitly does NOT confirm Portuguese or Latin-American Spanish; Cardmarket \"Spanish\" is European Spanish (the confirmed one). English was already documented from the Prismatic Evolutions set list.",
               "contentHash": "641394d1f6b995bdff640562022aeec96ad38e3fd5f5c8b444b87f51c5d698b3",
               "image": "images/xPRE_076_Snorlax_ex_V2_841279.jpg"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "RELEASE-GROUP:RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "groupKind": "unmapped-release",
-      "reviewedAppearanceId": null,
-      "imageGroupId": null,
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
-      ],
-      "cardKeys": [
-        "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
-      ],
-      "label": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "workId": "WORK:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "cardKey": "Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-          "reviewedAppearanceId": null,
-          "imageGroupId": null,
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "TW",
-          "language": "T-Chinese",
-          "script": "Hant",
-          "setEditionId": "EDITION:TW:T-Chinese:AS5a",
-          "localSetCode": "AS5a",
-          "localNumber": "204/184",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "伊布&卡比獸GX",
-            "artist": null,
-            "variant": "base",
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:TW:AS5a:204/184:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-asia",
-              "url": "https://asia.pokemon-card.com/tw/archive/card/pdf/AS5a.pdf",
-              "evidence": "The official Taiwan AS5a archive card list, page 23 (retained crop zh-as5a-204.png), positively identifies 伊布&卡比獸GX as 204/184 SR and shows its printed card face and attacks. This establishes the exact Traditional-Chinese release and its Work mapping; it does not claim the archived list is historically complete, and it supplies no physical finish evidence.",
-              "contentHash": "e4810bf2f9ccbf3214cd1f9249443595622236e2421eabfc19d2b49e4699409e",
-              "image": null
             }
           ]
         }

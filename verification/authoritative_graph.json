@@ -36383,6 +36383,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0601",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0601",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0601",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0601",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0601",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0601"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -104062,6 +104079,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0600",
         "specimenIds": [
           "SPEC-0600"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0601",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0601",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "The collection owner identifies the photographed card as Holo, recognizable at its border.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0601",
+        "specimenIds": [
+          "SPEC-0601"
         ]
       }
     },
@@ -188741,6 +188782,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0601",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0601",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -239506,6 +239557,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0601",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0601",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0601",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "provenance": {}
     },
     {
@@ -301847,17 +301914,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0600",
       "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0601",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0601",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:AS5a:204/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
     }
   ],
   "summary": {
-    "entities": 8336,
-    "edges": 12379,
-    "migrationInputs": 2939,
+    "entities": 8338,
+    "edges": 12382,
+    "migrationInputs": 2940,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1629,
+      "established-and-mapped": 1630,
       "linked-local-counterpart": 125,
       "mapped": 366,
       "needs-evidence": 125,
@@ -301865,9 +301939,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2103,
+    "candidateClaims": 2104,
     "cardReleases": 633,
-    "physicalPrintings": 812,
+    "physicalPrintings": 813,
     "setSourceRecords": 494,
     "setSourceDispositions": 494,
     "localizations": 16
