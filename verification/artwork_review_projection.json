@@ -4,20 +4,20 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "c25cbe2076860d22585313a4e9e4728ad411ceff03a17b711c3ae70945360549",
+  "projectionVersion": "41e9557698d37c8bbe2e9e380f4ef877914315af78cc2a317c636c5f0f786b83",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 250,
+    "groups": 251,
     "mappedWorks": 42,
-    "imageGroups": 247,
+    "imageGroups": 248,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 3,
-    "cardReleases": 633,
-    "physicalPrintings": 809,
-    "sourceObservations": 3059
+    "cardReleases": 634,
+    "physicalPrintings": 810,
+    "sourceObservations": 3061
   },
   "groups": [
     {
@@ -31590,6 +31590,126 @@
               "evidence": "Official localized publisher gallery and retained SPEC-0516 identify คาบิกอน, MA6 T 121/130, HP 160, กู้ดสลีป and ล้มทับ 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. On 2026-09-29 the collection owner explicitly extends the Japanese M6a determination to this exact MA6 localized release: Common and Holo, with no reverse/mirror variant. The publisher image establishes identity; the owner supplies rarity, positive finish and the separately recorded finish-list closure.",
               "contentHash": "5d79db0de6796c8f4cc917d74b9f4053c2d25165c75de647784d420bdc243e85",
               "image": "verification/specimens/SPEC-0516.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:e6355fe3e8d3e172bd3d9183",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:e6355fe3e8d3e172bd3d9183",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Good-Sleep-Collapse"
+      ],
+      "cardKeys": [
+        "Snorlax-Good-Sleep-Collapse"
+      ],
+      "label": "Snorlax-Good-Sleep-Collapse",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+          "workId": "WORK:Snorlax-Good-Sleep-Collapse",
+          "cardKey": "Snorlax-Good-Sleep-Collapse",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:e6355fe3e8d3e172bd3d9183",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "setEditionId": "EDITION:CN:S-Chinese:30th C",
+          "localSetCode": "30th C",
+          "localNumber": "095/103",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [
+            "base"
+          ],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0600",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [
+                {
+                  "kind": "observed-marking",
+                  "role": "print-identity",
+                  "text": "yellow Pikachu 30th anniversary logo"
+                }
+              ],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "Holographic reflection is visible on this photographed physical card. Yellow Pikachu 30th anniversary logo is printed on the card face. No specific foil-pattern taxonomy is assigned.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0600",
+              "specimenIds": [
+                "SPEC-0600"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "卡比兽",
+            "artist": null,
+            "variant": "base",
+            "finish": [
+              "holo"
+            ],
+            "foilPattern": [],
+            "markings": [
+              "yellow Pikachu 30th anniversary logo"
+            ],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+              "label": "publisher card image",
+              "observationId": "source-first:CN:30th C:095/103:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0600.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0600",
+              "contentHash": "e6355fe3e8d3e172bd3d9183b46138dfd1ed0167f9a4771bfc9fa272203e096d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e6355fe3e8d3e172bd3d9183b46138dfd1ed0167f9a4771bfc9fa272203e096d",
+              "previewSrc": "images/previews/SPEC-0600.png?v=f524ff7615a974e7beeb70951bd20a7ca9310619166fbc03d375a1eb1e289cb9",
+              "thumbnailSrc": "images/thumbs/SPEC-0600.png?v=404b351c857e447a04b0a2e2d6b1d3f24e318b74f3416c12df7c4e1ac09fb0cf"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:CN:30th C:095/103:base",
+              "kind": "source-first",
+              "provider": "seller-listing-photo",
+              "url": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+              "evidence": "Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, 30th C 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. Owner states this release is already released; no exact launch date, foil-pattern taxonomy or complete finish inventory is asserted.",
+              "contentHash": "bc076a1cb994039918db8255504ab9e46baceff2cb644b96ffe76605cb614dfb",
+              "image": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0600",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+              "evidence": "Simplified Chinese 卡比兽, HP160, 安眠, attack130, Illus. Aya Kusube, J, printed 30th C 095/103 C; visible holo on physical card; yellow Pikachu 30th anniversary logo",
+              "contentHash": "1f286fc1504f6bb9cf95aab9728c7353d65b40462acea1c19cf97261b5f688c8",
+              "image": "verification/specimens/SPEC-0600.png"
             }
           ]
         }

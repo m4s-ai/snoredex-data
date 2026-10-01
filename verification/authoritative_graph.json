@@ -28874,6 +28874,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:CN:30th C:095/103:base",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "claimId": "CLAIM:source-first:CN:30th C:095/103:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "CN:30th C:095/103:base",
+        "sourceRecord": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+        "retrievedAt": "2026-10-01",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "materializedTargetId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "reason": "Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, 30th C 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. Owner states this release is already released; no exact launch date, foil-pattern taxonomy or complete finish inventory is asserted."
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:CN:CS2DaC:038/053:base",
       "origin": "reviewed-evidence-issue-257",
       "payload": {
@@ -36330,6 +36348,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0600",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0600",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0600",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0600",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0600",
+        "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0600"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -36399,6 +36434,48 @@
         "sourceRecords": [
           "https://bulbapedia.bulbagarden.net/wiki/Collection_151_(ATCG)"
         ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "setEditionId": "EDITION:CN:S-Chinese:30th C",
+        "locality": "CN",
+        "language": "S-Chinese",
+        "script": "Hans",
+        "localSetCode": "30th C",
+        "localNumber": "095/103",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-Good-Sleep-Collapse",
+        "workMappingState": "mapped",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:CN:30th C:095/103:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:CN:30th C:095/103:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [
+          "base"
+        ],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png"
+        ],
+        "sourceFirstRecordIds": [
+          "CN:30th C:095/103:base"
+        ],
+        "legacyCounterpartUnitIds": [],
+        "releaseDate": null,
+        "releaseDatePrecision": null,
+        "releaseApproximate": false,
+        "releaseStatus": "released"
       }
     },
     {
@@ -64853,6 +64930,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "setEditionId": "EDITION:CN:S-Chinese:30th C",
+        "collectorNumber": "095/103",
+        "origin": "reviewed-30th-cn-20261001"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:CN:S-Chinese:CS1DC:152:Snorlax-Collect-Collapse",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -79015,6 +79103,24 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-CM-A89856411220"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:CN:30th%20C",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "localSetId": "LOCALSET:CN:30th%20C",
+        "locality": "CN",
+        "localCode": "30th C",
+        "observedNames": [
+          "30th Celebration"
+        ],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-CN-30TH-C-095-20261001",
+          "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY"
         ]
       }
     },
@@ -103906,6 +104012,36 @@
       }
     },
     {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0600",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0600",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [
+          {
+            "kind": "observed-marking",
+            "role": "print-identity",
+            "text": "yellow Pikachu 30th anniversary logo"
+          }
+        ],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "Holographic reflection is visible on this photographed physical card. Yellow Pikachu 30th anniversary logo is printed on the card face. No specific foil-pattern taxonomy is assigned.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0600",
+        "specimenIds": [
+          "SPEC-0600"
+        ]
+      }
+    },
+    {
       "entityType": "profile-finish-claim",
       "entityId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "origin": "authoritative-set-catalogue-migration",
@@ -114097,6 +114233,23 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "sourceRecordId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+        "sourceProvider": "owner-attestation",
+        "sourceVocabulary": "owner-classification",
+        "sourceNativeValue": "Common",
+        "normalizedRarityId": "common",
+        "sourceProductKey": "CN:30th C:095/103:base:owner-rarity",
+        "retrievedAt": "2026-10-01",
+        "evidence": "Owner explicitly extends Japanese M6a Common classification to Asian 30th counterparts; SPEC-0600 establishes exact CN identity and visible printed C."
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
       "origin": "reviewed-thai-ma6-evidence-20260929",
       "payload": {
@@ -116197,6 +116350,41 @@
           "establishingEvidenceIds": [
             "CLAIM:legacy:U0193",
             "CLAIM:legacy:U0266"
+          ],
+          "localizationId": "LOCALIZATION:CN:zh-Hans"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:CN:S-Chinese:30th C",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "setEditionId": "EDITION:CN:S-Chinese:30th C",
+        "identity": {
+          "setEditionId": "EDITION:CN:S-Chinese:30th C",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "localSetCode": "30th C",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:CN:30th C:095/103:base"
+          ],
+          "localizationId": "LOCALIZATION:CN:zh-Hans"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:CN:S-Chinese:30th C",
+          "localSetId": "LOCALSET:CN:30th%20C",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "localCode": "30th C",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-CN-30TH-C-095-20261001"
           ],
           "localizationId": "LOCALIZATION:CN:zh-Hans"
         }
@@ -139388,6 +139576,28 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-CN-30TH-C-095-20261001",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-CN-30TH-C-095-20261001",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:CN:30th%20C",
+        "reason": "Exact photographed 30th C localized identity and field-specific owner rarity determination."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:CN:30th%20C",
+        "reason": "Exact photographed 30th C localized identity and field-specific owner rarity determination."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-ID-DATE-S10A-I-20260921",
       "origin": "reviewed-product-dates-issue-256-20260921",
       "payload": {
@@ -148739,6 +148949,101 @@
               "market": "Western",
               "isCodeCard": false
             }
+          ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-CN-30TH-C-095-20261001",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-CN-30TH-C-095-20261001",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "seller-listing-photo",
+        "providerRecordKey": "CN:30th C:095/103:base",
+        "retrieved": "2026-10-01",
+        "sourceUrl": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+        "raw": {
+          "localCode": "30th C",
+          "localName": "30th Celebration",
+          "locality": "CN",
+          "languages": [
+            "S-Chinese"
+          ],
+          "scripts": [
+            "Hans"
+          ],
+          "printIds": [
+            "CN:30th C:095/103:base"
+          ],
+          "providers": [
+            "seller-listing-photo"
+          ],
+          "sourceUrls": [
+            "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png"
+          ],
+          "printedSetSize": 103,
+          "printedSetSizeBasis": "denominator printed on retained SPEC-0600",
+          "observedCollectorNumbers": [
+            "095/103"
+          ],
+          "observedCoverage": "one exact seller photograph; not a complete inventory",
+          "cardImageUrls": [
+            "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png"
+          ],
+          "specimenId": "SPEC-0600",
+          "printedRarity": "C"
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "origin": "reviewed-30th-cn-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "owner-attestation",
+        "providerRecordKey": "CN:30th C:095/103:base:owner-rarity",
+        "retrieved": "2026-10-01",
+        "sourceUrl": null,
+        "raw": {
+          "localCode": "30th C",
+          "localName": "30th Celebration",
+          "locality": "CN",
+          "languages": [
+            "S-Chinese"
+          ],
+          "scripts": [
+            "Hans"
+          ],
+          "printIds": [
+            "CN:30th C:095/103:base"
+          ],
+          "providers": [
+            "owner-attestation"
+          ],
+          "sourceUrls": [],
+          "printedSetSize": 103,
+          "printedSetSizeBasis": "denominator printed on retained SPEC-0600",
+          "observedCollectorNumbers": [
+            "095/103"
+          ],
+          "observedCoverage": "one exact seller photograph; not a complete inventory",
+          "cardImageUrls": [
+            "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png"
+          ],
+          "specimenId": "SPEC-0600",
+          "printedRarity": "C",
+          "rarity": "Common",
+          "assertedBy": "collection owner",
+          "assertedAt": "2026-10-01",
+          "statement": "für alle asiatischen sprachen übernehme das japanisch wenn noch offen",
+          "basis": "Owner explicitly extends Japanese M6a Common classification to Asian 30th counterparts; SPEC-0600 establishes exact CN identity and visible printed C.",
+          "evidenceRefs": [
+            "verification/evidence/30th-cn-20261001/sources.json",
+            "verification/evidence/30th-owner-20261001/owner-determination.json"
           ]
         }
       }
@@ -184077,6 +184382,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:CN:30th C:095/103:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:CN:CS2DaC:038/053:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -188416,6 +188729,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0600",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0600",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -188449,6 +188772,33 @@
       "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "state": "mapped"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:30th C",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Good-Sleep-Collapse",
+      "provenance": {
+        "assertionId": "ASSERT:30th-same-work:cn",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+        "toId": "WORK:Snorlax-Good-Sleep-Collapse",
+        "sourceFirstRecordId": "CN:30th C:095/103:base",
+        "assertedBy": "repository source and image review",
+        "assertedAt": "2026-10-01",
+        "evidenceUrl": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+        "evidence": "Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, 30th C 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. Owner states this release is already released; no exact launch date, foil-pattern taxonomy or complete finish inventory is asserted.",
+        "destructiveMergeAllowed": false
       }
     },
     {
@@ -203576,6 +203926,22 @@
       "relation": "references",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:151C:169:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:30th C",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
       "provenance": {}
     },
     {
@@ -223962,6 +224328,22 @@
     },
     {
       "fromType": "local-set",
+      "fromId": "LOCALSET:CN:30th%20C",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-CN-30TH-C-095-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:CN:30th%20C",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
       "fromId": "LOCALSET:CN:CS1DC",
       "relation": "observed-by",
       "toType": "set-source-record",
@@ -239121,6 +239503,22 @@
       "provenance": {}
     },
     {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0600",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0600",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0600",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
       "fromType": "profile-finish-claim",
       "fromId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "relation": "asserts-finish-for",
@@ -250194,6 +250592,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:owner:ID:MA6 I:121/130:20260929",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -251665,6 +252079,25 @@
       "provenance": {
         "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
         "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:CN:S-Chinese:30th C",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:CN:30th%20C",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:CN:S-Chinese:30th C",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:CN:zh-Hans",
+      "provenance": {
+        "reviewedAt": "2026-10-01",
+        "basis": "Simplified Chinese card text in SPEC-0600"
       }
     },
     {
@@ -264108,6 +264541,22 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-CM-FBE1F9094A45",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-CN-30TH-C-095-20261001",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-CN-30TH-C-095-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
       "provenance": {}
     },
     {
@@ -296278,6 +296727,20 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-CN-30TH-C-095-20261001",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:CN:30th%20C",
+      "reason": "Exact photographed 30th C localized identity and field-specific owner rarity determination."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-CN-30TH-C-095-20261001-OWNER-RARITY",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:CN:30th%20C",
+      "reason": "Exact photographed 30th C localized identity and field-specific owner rarity determination."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-ID-DATE-S10A-I-20260921",
       "disposition": "mapped",
       "targetRef": "EVENT:ID:s10a I:regular-launch-20260921",
@@ -298361,6 +298824,13 @@
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:MA6%20T",
       "reason": "Exact Thai MA6 T 121/130 rarity evidence."
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "CN:30th C:095/103:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse",
+      "reason": "Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, 30th C 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. Owner states this release is already released; no exact launch date, foil-pattern taxonomy or complete finish inventory is asserted."
     },
     {
       "sourceKind": "source-first-record",
@@ -301406,29 +301876,36 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0598",
       "reason": "physical observation establishes standalone printing for RELEASE:TH:Thai:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0600",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0600",
+      "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse"
     }
   ],
   "summary": {
-    "entities": 8325,
-    "edges": 12368,
-    "migrationInputs": 2934,
+    "entities": 8337,
+    "edges": 12384,
+    "migrationInputs": 2938,
     "migrationDispositions": {
       "bounded-contradicted": 92,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1626,
+      "established-and-mapped": 1628,
       "linked-local-counterpart": 125,
-      "mapped": 364,
+      "mapped": 366,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2100,
-    "cardReleases": 633,
-    "physicalPrintings": 809,
-    "setSourceRecords": 492,
-    "setSourceDispositions": 492,
+    "candidateClaims": 2102,
+    "cardReleases": 634,
+    "physicalPrintings": 810,
+    "setSourceRecords": 494,
+    "setSourceDispositions": 494,
     "localizations": 16
   }
 }
