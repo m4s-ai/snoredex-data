@@ -98,6 +98,17 @@ def verify_source_first_specimen_registry():
         if not 494 <= number <= 506:
             continue
         matches = [row for row in evidence if specimen['specimenId'] in row['stableIds']]
+        owner_matches = [row for row in matches if row['providerId'] == 'owner-attestation']
+        attested = specimen.get('physicalObservation', {}).get('ownerAttestedFields', [])
+        if attested:
+            assert owner_matches, specimen['specimenId']
+            for field in attested:
+                assert any(field in row['dimensions'] for row in owner_matches)
+            assert all(row['retrievedAt'] >= specimen['physicalObservation']['ownerAttestedAt']
+                       for row in owner_matches)
+        else:
+            assert not owner_matches, specimen['specimenId']
+        matches = [row for row in matches if row['providerId'] != 'owner-attestation']
         assert matches, specimen['specimenId']
         assert all('identity' in row['dimensions'] for row in matches)
         assert all(row['retrievedAt'] >= '2026-09-09' for row in matches)

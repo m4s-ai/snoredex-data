@@ -35333,6 +35333,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0500",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0500",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0500",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0500",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0500",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sv4a F:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0500"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0507",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -103590,6 +103607,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0496",
         "specimenIds": [
           "SPEC-0496"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0500",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0500",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sv4a F:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection owner explicitly identifies sv4a F 145/190 as clearly Non-Holo on 2026-10-01. SPEC-0500 retains the exact retailer card reference image; physical custody remains unestablished.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0500",
+        "specimenIds": [
+          "SPEC-0500"
         ]
       }
     },
@@ -188846,6 +188887,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0500",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0500",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0507",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -239878,6 +239929,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0500",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0500",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0500",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sv4a F:145/190:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {}
     },
     {
@@ -302488,6 +302555,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0500",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0500",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sv4a F:145/190:Snorlax-Voraciousness-Thudding-Press"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0507",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0507",
@@ -302978,14 +303052,14 @@
     }
   ],
   "summary": {
-    "entities": 8368,
-    "edges": 12417,
-    "migrationInputs": 2951,
+    "entities": 8370,
+    "edges": 12420,
+    "migrationInputs": 2952,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1636,
+      "established-and-mapped": 1637,
       "linked-local-counterpart": 125,
       "mapped": 370,
       "needs-evidence": 125,
@@ -302993,9 +303067,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2111,
+    "candidateClaims": 2112,
     "cardReleases": 633,
-    "physicalPrintings": 819,
+    "physicalPrintings": 820,
     "setSourceRecords": 498,
     "setSourceDispositions": 498,
     "localizations": 16

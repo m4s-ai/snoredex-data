@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "6089791a436ce8063fc66931856c25fbcf54d45637f285b6101c886fff0c3135",
+  "projectionVersion": "f0eb35362d26e1dc5124afeadcf5964d69a037b6ef990117a706cb4ae4b350b1",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 819,
+    "physicalPrintings": 820,
     "sourceObservations": 3066
   },
   "groups": [
@@ -95390,13 +95390,35 @@
             "V1",
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0500",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sv4a F:145/190:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies sv4a F 145/190 as clearly Non-Holo on 2026-10-01. SPEC-0500 retains the exact retailer card reference image; physical custody remains unestablished.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0500",
+              "specimenIds": [
+                "SPEC-0500"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "V1, base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -95469,8 +95491,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8",
-              "evidence": "Visible Traditional Chinese Snorlax, HP150, sv4a F, regulation G, 145/190, ability 貪嘴, attack 養肥壓制 130, Illus. HYOGONOSUKE. Exact retailer reference image supports local identity; physical custody and technical finish are not asserted.",
-              "contentHash": "316633578b577dd5b4a5afbceb774e6854c3c61753fbb19e0a0b306531120dc2",
+              "evidence": "Visible Traditional Chinese Snorlax, HP150, sv4a F, regulation G, 145/190, ability 貪嘴, attack 養肥壓制 130, Illus. HYOGONOSUKE. Retained retailer reference image establishes exact card identity, not physical custody. On 2026-10-01 the collection owner explicitly confirms this card as Non-Holo. Finish rests on that separate owner determination, not an inferred absence of reflections in a reference image. No named foil pattern or exhaustive finish inventory is asserted.",
+              "contentHash": "cbdcfd81ca37d8c569d7db2436f8328065bec7262e718b026db3cee8e5346b67",
               "image": "verification/specimens/SPEC-0500.png"
             },
             {
