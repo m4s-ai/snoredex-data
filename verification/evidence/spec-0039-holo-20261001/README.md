@@ -1,6 +1,8 @@
 <!-- doc: role=retained specimen observation; stage=history -->
 # SPEC-0039: Traditional Chinese AS5a 203/184 Holo
 
+Historical record — observation reviewed on 2026-10-01; current status is in the canonical stores.
+
 The collection owner stated on 2026-10-01: "SPEC-0039.png zeigt eindeutig holo".
 Visual reinspection of the [unchanged original photograph](../../specimens/SPEC-0039.png)
 confirms multicoloured foil reflections across the card face, including the background,
