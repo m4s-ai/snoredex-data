@@ -7,11 +7,11 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 496,
+      "sourceRecords": 497,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
       "releaseDateRecords": 73,
-      "editionAvailabilityRecords": 4,
+      "editionAvailabilityRecords": 5,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
     }
@@ -15144,6 +15144,49 @@
           "positiveOnly": true,
           "completenessClaim": false,
           "basis": "The article explicitly makes all cards in this Traditional Chinese and Thai deck Non Holofoil; its set list identifies Eevee & Snorlax 118/169. Existing official card identity establishes the exact AS5D release."
+        }
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Sword_%26_Shield_V_Starter_Deck_(ATCG)#Information:TW:sc1D F",
+      "retrieved": "2026-10-01",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+      "raw": {
+        "localCode": "sc1D F",
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "finishProfileText": "Cards from the deck also lack rarity symbols and any Holofoil patterns, including Pokémon V.",
+        "finishProfileSection": "Information",
+        "finishProfileRevision": "4298601",
+        "finishProfileClauses": [
+          {
+            "verbatim": "Cards from the deck also lack rarity symbols and any Holofoil patterns, including Pokémon V.",
+            "disposition": "mapped",
+            "finish": "non-holo",
+            "scope": "all Sword & Shield V Starter Deck cards"
+          }
+        ],
+        "finishProfileUnparsedText": "",
+        "evidenceBundle": "verification/evidence/sc1df-non-holo-20261001",
+        "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+          "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+          "finish": "non-holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "specimenIds": [],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
         }
       }
     }

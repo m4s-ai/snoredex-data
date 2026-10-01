@@ -28876,6 +28876,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "claimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+        "claimKind": "physical-printing",
+        "sourceKind": "reviewed-positive-evidence",
+        "sourceId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PRINTING:0a32104ed4e6c8d521c3c535",
+        "materializedTargetId": "PRINTING:0a32104ed4e6c8d521c3c535",
+        "specimenIds": [],
+        "reason": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:CN:30th C:095/103:base",
       "origin": "reviewed-30th-cn-20261001",
       "payload": {
@@ -47880,7 +47898,8 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/2707/"
+          "https://asia.pokemon-card.com/tw/card-search/detail/2707/",
+          "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)"
         ],
         "sourceFirstRecordIds": [
           "TW:sc1D F:132/164:base"
@@ -47922,7 +47941,8 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/2708/"
+          "https://asia.pokemon-card.com/tw/card-search/detail/2708/",
+          "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)"
         ],
         "sourceFirstRecordIds": [
           "TW:sc1D F:133/164:base"
@@ -75115,6 +75135,39 @@
               "collectorNumberNotPrefix": "H/"
             },
             "sourceRecordId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "finish-profile",
+      "entityId": "FINISHPROFILE:sc1D F:TW:non-holo",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "finishProfileId": "FINISHPROFILE:sc1D F:TW:non-holo",
+        "localSetId": "LOCALSET:TW:sc1D%20F",
+        "setEditionIds": [
+          "EDITION:TW:T-Chinese:sc1D F",
+          "EDITION:TW:T-Chinese:sc1D F"
+        ],
+        "languageScope": [
+          "T-Chinese"
+        ],
+        "scopePrecision": "scoped",
+        "closedWithinScope": false,
+        "evidenceScope": "all ordinary cards in the named deck",
+        "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+        "sourceStatement": "Cards from the deck also lack rarity symbols and any Holofoil patterns, including Pokémon V.",
+        "rules": [
+          {
+            "finishProfileRuleId": "FINISHPROFILE:sc1D F:TW:non-holo:all",
+            "priority": 10,
+            "effect": "include",
+            "finish": "non-holo",
+            "condition": {
+              "localSetCode": "sc1D F"
+            },
+            "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001"
           }
         ]
       }
@@ -104347,6 +104400,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PRINTING:0a32104ed4e6c8d521c3c535",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "specimenIds": [],
+        "physicalPrintingId": "PRINTING:0a32104ed4e6c8d521c3c535",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "sourceRecordIds": [
+          "SET-SRC-BP-sc1D F-FINISH-TW-20261001"
+        ],
+        "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001"
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PRINTING:301137e80f94be59374a828a",
       "origin": "reviewed-as5d-finish-20261001",
       "payload": {
@@ -104416,6 +104493,32 @@
         "profileFinishClaimId": "PROFILEFINISHCLAIM:AS5D:TW:118:non-holo",
         "finishProfileId": "FINISHPROFILE:AS5D:TW:non-holo",
         "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "non-holo",
+        "state": "established-by-profile",
+        "closesCompleteFinishList": false
+      }
+    },
+    {
+      "entityType": "profile-finish-claim",
+      "entityId": "PROFILEFINISHCLAIM:sc1D F:TW:132/164:non-holo",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "profileFinishClaimId": "PROFILEFINISHCLAIM:sc1D F:TW:132/164:non-holo",
+        "finishProfileId": "FINISHPROFILE:sc1D F:TW:non-holo",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "finish": "non-holo",
+        "state": "established-by-profile",
+        "closesCompleteFinishList": false
+      }
+    },
+    {
+      "entityType": "profile-finish-claim",
+      "entityId": "PROFILEFINISHCLAIM:sc1D F:TW:133/164:non-holo",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "profileFinishClaimId": "PROFILEFINISHCLAIM:sc1D F:TW:133/164:non-holo",
+        "finishProfileId": "FINISHPROFILE:sc1D F:TW:non-holo",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
         "finish": "non-holo",
         "state": "established-by-profile",
         "closesCompleteFinishList": false
@@ -138439,6 +138542,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TW:sc1D%20F",
+        "reason": "Exact positive deck article and the retained image-based code establish this local set and finish scope."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-CM-0243DE5FBFC0",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -144961,6 +145075,54 @@
           ],
           "marketScopeBasis": "The article explicitly states Thailand's First Impact release date and identifies Set A and Set B as the two components; this record maps the date only to the Thai AS1b Set B local set.",
           "note": "Bulbapedia reports First Impact and its GX Starter Deck released in Thailand on February 1, 2019. Indonesian AS1b is a separate locality and retains its separately sourced August 8, 2019 date."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "origin": "reviewed-sc1df-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+        "sourceKind": "edition-availability-record",
+        "provider": "bulbapedia",
+        "providerRecordKey": "Sword_%26_Shield_V_Starter_Deck_(ATCG)#Information:TW:sc1D F",
+        "retrieved": "2026-10-01",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+        "raw": {
+          "localCode": "sc1D F",
+          "locality": "TW",
+          "languages": [
+            "T-Chinese"
+          ],
+          "finishProfileText": "Cards from the deck also lack rarity symbols and any Holofoil patterns, including Pokémon V.",
+          "finishProfileSection": "Information",
+          "finishProfileRevision": "4298601",
+          "finishProfileClauses": [
+            {
+              "verbatim": "Cards from the deck also lack rarity symbols and any Holofoil patterns, including Pokémon V.",
+              "disposition": "mapped",
+              "finish": "non-holo",
+              "scope": "all Sword & Shield V Starter Deck cards"
+            }
+          ],
+          "finishProfileUnparsedText": "",
+          "evidenceBundle": "verification/evidence/sc1df-non-holo-20261001",
+          "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+          "physicalPrintingEvidence": {
+            "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+            "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+            "finish": "non-holo",
+            "edition": null,
+            "foilPattern": null,
+            "markings": [],
+            "distribution": null,
+            "cardSize": "unknown",
+            "specimenIds": [],
+            "positiveOnly": true,
+            "completenessClaim": false,
+            "basis": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
+          }
         }
       }
     },
@@ -184793,6 +184955,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PRINTING:0a32104ed4e6c8d521c3c535",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:CN:30th C:095/103:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -219520,6 +219690,22 @@
       "provenance": {}
     },
     {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:sc1D F:TW:non-holo",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:sc1D F",
+      "provenance": {}
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:sc1D F:TW:non-holo",
+      "relation": "supported-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
       "fromType": "legacy-cardmarket-product",
       "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/151/Snorlax-MEW143",
       "relation": "maps-to",
@@ -240085,6 +240271,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PRINTING:0a32104ed4e6c8d521c3c535",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PRINTING:0a32104ed4e6c8d521c3c535",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PRINTING:301137e80f94be59374a828a",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -240161,6 +240363,38 @@
       "relation": "uses-profile",
       "toType": "finish-profile",
       "toId": "FINISHPROFILE:AS5D:TW:non-holo",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:sc1D F:TW:132/164:non-holo",
+      "relation": "asserts-finish-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:sc1D F:TW:132/164:non-holo",
+      "relation": "uses-profile",
+      "toType": "finish-profile",
+      "toId": "FINISHPROFILE:sc1D F:TW:non-holo",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:sc1D F:TW:133/164:non-holo",
+      "relation": "asserts-finish-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:sc1D F:TW:133/164:non-holo",
+      "relation": "uses-profile",
+      "toType": "finish-profile",
+      "toId": "FINISHPROFILE:sc1D F:TW:non-holo",
       "provenance": {}
     },
     {
@@ -295912,6 +296146,13 @@
     },
     {
       "sourceKind": "reviewed-positive-evidence",
+      "sourceId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "disposition": "established-and-mapped",
+      "targetRef": "PRINTING:0a32104ed4e6c8d521c3c535",
+      "reason": "The article explicitly states that deck cards lack any Holofoil patterns, including Pokémon V. Its setlist names Snorlax V 133/164; the existing official Traditional Chinese identity establishes the exact sc1D F release."
+    },
+    {
+      "sourceKind": "reviewed-positive-evidence",
       "sourceId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:d6b6feeffd3d1268",
@@ -296357,6 +296598,13 @@
       "disposition": "mapped",
       "targetRef": "EVENT:TH:AS1b:First-Impact-launch-2019-02-01",
       "reason": "The source explicitly dates the Thai First Impact launch; its Set A/Set B description scopes the date to the Thai AS1b edition without transferring it to Indonesian AS1b."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-BP-sc1D F-FINISH-TW-20261001",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TW:sc1D%20F",
+      "reason": "Reviewed positive deck article finish rule."
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -302513,26 +302761,26 @@
     }
   ],
   "summary": {
-    "entities": 8355,
-    "edges": 12401,
-    "migrationInputs": 2947,
+    "entities": 8362,
+    "edges": 12410,
+    "migrationInputs": 2949,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1634,
+      "established-and-mapped": 1635,
       "linked-local-counterpart": 125,
-      "mapped": 368,
+      "mapped": 369,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2109,
+    "candidateClaims": 2110,
     "cardReleases": 633,
-    "physicalPrintings": 817,
-    "setSourceRecords": 496,
-    "setSourceDispositions": 496,
+    "physicalPrintings": 818,
+    "setSourceRecords": 497,
+    "setSourceDispositions": 497,
     "localizations": 16
   }
 }

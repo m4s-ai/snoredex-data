@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "9de71dee9602cbf0c4a028d96c8c1cb6a24c238f4fb96bb2c25217ada4ba8dd5",
+  "projectionVersion": "a3e7f1269a519b23b4f19303bfdfc7f17803f770e6071b4c3fad04d3532bbc79",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 817,
+    "physicalPrintings": 818,
     "sourceObservations": 3066
   },
   "groups": [
@@ -84746,13 +84746,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:133/164:Snorlax-V-Swallow-Falling-Down",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "specimenIds": [],
+              "physicalPrintingId": "PRINTING:0a32104ed4e6c8d521c3c535",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "sourceRecordIds": [
+                "SET-SRC-BP-sc1D F-FINISH-TW-20261001"
+              ],
+              "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-sc1D F-FINISH-TW-20261001"
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸V",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
