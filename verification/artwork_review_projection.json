@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "d4fc3087acdd419da94794b69218e1dd3f8e00dd6a6859c6bd7c25ea95e4f199",
+  "projectionVersion": "a1bb4b64da80040df193fa5115e0950abf05b357f1eaa3b42647b2ca261b0126",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 813,
+    "physicalPrintings": 814,
     "sourceObservations": 3062
   },
   "groups": [
@@ -2907,13 +2907,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "specimenIds": [],
+              "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "sourceRecordIds": [
+                "SET-SRC-BP-AS5D-FINISH-TW-20261001"
+              ],
+              "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001"
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "伊布&卡比獸GX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,

@@ -7,11 +7,11 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 494,
+      "sourceRecords": 496,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
       "releaseDateRecords": 73,
-      "editionAvailabilityRecords": 2,
+      "editionAvailabilityRecords": 4,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
     }
@@ -15073,6 +15073,78 @@
           "verification/evidence/30th-cn-20261001/sources.json",
           "verification/evidence/30th-owner-20261001/owner-determination.json"
         ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Double_Burst_GX_Starter_Deck_(ATCG)#Information:TH:AS5D",
+      "retrieved": "2026-10-01",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+      "raw": {
+        "localCode": "AS5D",
+        "locality": "TH",
+        "languages": [
+          "Thai"
+        ],
+        "finishProfileText": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+        "finishProfileSection": "Information",
+        "finishProfileRevision": "4298564",
+        "finishProfileClauses": [
+          {
+            "verbatim": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+            "disposition": "mapped",
+            "finish": "non-holo",
+            "scope": "all Double Burst GX Starter Deck cards"
+          }
+        ],
+        "finishProfileUnparsedText": "",
+        "evidenceBundle": "verification/evidence/as5d-non-holo-20261001",
+        "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "sourceKind": "edition-availability-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "Double_Burst_GX_Starter_Deck_(ATCG)#Information:TW:AS5D",
+      "retrieved": "2026-10-01",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+      "raw": {
+        "localCode": "AS5D",
+        "locality": "TW",
+        "languages": [
+          "T-Chinese"
+        ],
+        "finishProfileText": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+        "finishProfileSection": "Information",
+        "finishProfileRevision": "4298564",
+        "finishProfileClauses": [
+          {
+            "verbatim": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+            "disposition": "mapped",
+            "finish": "non-holo",
+            "scope": "all Double Burst GX Starter Deck cards"
+          }
+        ],
+        "finishProfileUnparsedText": "",
+        "evidenceBundle": "verification/evidence/as5d-non-holo-20261001",
+        "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+          "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+          "finish": "non-holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "specimenIds": [],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "The article explicitly makes all cards in this Traditional Chinese and Thai deck Non Holofoil; its set list identifies Eevee & Snorlax 118/169. Existing official card identity establishes the exact AS5D release."
+        }
       }
     }
   ]

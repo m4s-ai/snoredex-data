@@ -28858,6 +28858,24 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "claimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001",
+        "claimKind": "physical-printing",
+        "sourceKind": "reviewed-positive-evidence",
+        "sourceId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PRINTING:301137e80f94be59374a828a",
+        "materializedTargetId": "PRINTING:301137e80f94be59374a828a",
+        "specimenIds": [],
+        "reason": "The article explicitly makes all cards in this Traditional Chinese and Thai deck Non Holofoil; its set list identifies Eevee & Snorlax 118/169. Existing official card identity establishes the exact AS5D release."
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:CN:30th C:095/103:base",
       "origin": "reviewed-30th-cn-20261001",
       "payload": {
@@ -46245,7 +46263,8 @@
         ],
         "legacyProducts": [],
         "sourceRecords": [
-          "https://asia.pokemon-card.com/tw/card-search/detail/3553/"
+          "https://asia.pokemon-card.com/tw/card-search/detail/3553/",
+          "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)"
         ],
         "sourceFirstRecordIds": [
           "TW:AS5D:118/169:base"
@@ -74923,6 +74942,68 @@
     },
     {
       "entityType": "finish-profile",
+      "entityId": "FINISHPROFILE:AS5D:TH:non-holo",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "finishProfileId": "FINISHPROFILE:AS5D:TH:non-holo",
+        "localSetId": "LOCALSET:TH:AS5D",
+        "setEditionIds": [],
+        "languageScope": [
+          "Thai"
+        ],
+        "scopePrecision": "scoped",
+        "closedWithinScope": false,
+        "evidenceScope": "all ordinary cards in the named deck",
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+        "sourceStatement": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+        "rules": [
+          {
+            "finishProfileRuleId": "FINISHPROFILE:AS5D:TH:non-holo:all",
+            "priority": 10,
+            "effect": "include",
+            "finish": "non-holo",
+            "condition": {
+              "localSetCode": "AS5D"
+            },
+            "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TH-20261001"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "finish-profile",
+      "entityId": "FINISHPROFILE:AS5D:TW:non-holo",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "finishProfileId": "FINISHPROFILE:AS5D:TW:non-holo",
+        "localSetId": "LOCALSET:TW:AS5D",
+        "setEditionIds": [
+          "EDITION:TW:T-Chinese:AS5D"
+        ],
+        "languageScope": [
+          "T-Chinese"
+        ],
+        "scopePrecision": "scoped",
+        "closedWithinScope": false,
+        "evidenceScope": "all ordinary cards in the named deck",
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+        "sourceStatement": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+        "rules": [
+          {
+            "finishProfileRuleId": "FINISHPROFILE:AS5D:TW:non-holo:all",
+            "priority": 10,
+            "effect": "include",
+            "finish": "non-holo",
+            "condition": {
+              "localSetCode": "AS5D"
+            },
+            "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TW-20261001"
+          }
+        ]
+      }
+    },
+    {
+      "entityType": "finish-profile",
       "entityId": "FINISHPROFILE:c5409001913b9c35",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -81610,6 +81691,23 @@
         "sourceRecordIds": [
           "SET-SRC-IDX-756A53FA32A7",
           "SET-SRC-SF-756A53FA32A7"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:TH:AS5D",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "localSetId": "LOCALSET:TH:AS5D",
+        "locality": "TH",
+        "localCode": "AS5D",
+        "observedNames": [
+          "Double Burst GX Starter Deck"
+        ],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-BP-AS5D-FINISH-TH-20261001"
         ]
       }
     },
@@ -104107,6 +104205,30 @@
       }
     },
     {
+      "entityType": "physical-printing",
+      "entityId": "PRINTING:301137e80f94be59374a828a",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "specimenIds": [],
+        "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "sourceRecordIds": [
+          "SET-SRC-BP-AS5D-FINISH-TW-20261001"
+        ],
+        "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001"
+      }
+    },
+    {
       "entityType": "profile-finish-claim",
       "entityId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "origin": "authoritative-set-catalogue-migration",
@@ -104141,6 +104263,19 @@
         "finishProfileId": "FINISHPROFILE:c5409001913b9c35",
         "cardReleaseId": "RELEASE:WEST:English:SK:100:Snorlax-Lolling-About-Continuous-Tumble",
         "finish": "reverse-holo",
+        "state": "established-by-profile",
+        "closesCompleteFinishList": false
+      }
+    },
+    {
+      "entityType": "profile-finish-claim",
+      "entityId": "PROFILEFINISHCLAIM:AS5D:TW:118:non-holo",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "profileFinishClaimId": "PROFILEFINISHCLAIM:AS5D:TW:118:non-holo",
+        "finishProfileId": "FINISHPROFILE:AS5D:TW:non-holo",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "finish": "non-holo",
         "state": "established-by-profile",
         "closesCompleteFinishList": false
       }
@@ -137613,6 +137748,28 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:AS5D",
+        "reason": "Exact positive deck article and the retained image-based code establish this local set and finish scope."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TW:AS5D",
+        "reason": "Exact positive deck article and the retained image-based code establish this local set and finish scope."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-BP-AVAIL-1E3BBC48CFC6",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -143229,6 +143386,88 @@
           ],
           "marketScopeBasis": "exact localized official product page",
           "note": "Announcement date; not tournament legality. Other products may have different launch dates."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+        "sourceKind": "edition-availability-record",
+        "provider": "bulbapedia",
+        "providerRecordKey": "Double_Burst_GX_Starter_Deck_(ATCG)#Information:TH:AS5D",
+        "retrieved": "2026-10-01",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+        "raw": {
+          "localCode": "AS5D",
+          "locality": "TH",
+          "languages": [
+            "Thai"
+          ],
+          "finishProfileText": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+          "finishProfileSection": "Information",
+          "finishProfileRevision": "4298564",
+          "finishProfileClauses": [
+            {
+              "verbatim": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+              "disposition": "mapped",
+              "finish": "non-holo",
+              "scope": "all Double Burst GX Starter Deck cards"
+            }
+          ],
+          "finishProfileUnparsedText": "",
+          "evidenceBundle": "verification/evidence/as5d-non-holo-20261001",
+          "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "origin": "reviewed-as5d-finish-20261001",
+      "payload": {
+        "sourceRecordId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+        "sourceKind": "edition-availability-record",
+        "provider": "bulbapedia",
+        "providerRecordKey": "Double_Burst_GX_Starter_Deck_(ATCG)#Information:TW:AS5D",
+        "retrieved": "2026-10-01",
+        "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+        "raw": {
+          "localCode": "AS5D",
+          "locality": "TW",
+          "languages": [
+            "T-Chinese"
+          ],
+          "finishProfileText": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+          "finishProfileSection": "Information",
+          "finishProfileRevision": "4298564",
+          "finishProfileClauses": [
+            {
+              "verbatim": "Many of the cards included in the deck can also be found in the Double Burst expansion but differ by featuring their own collection number and symbol, no rarity symbols, and are all Non Holofoil.",
+              "disposition": "mapped",
+              "finish": "non-holo",
+              "scope": "all Double Burst GX Starter Deck cards"
+            }
+          ],
+          "finishProfileUnparsedText": "",
+          "evidenceBundle": "verification/evidence/as5d-non-holo-20261001",
+          "scopeBoundary": "Positive ordinary deck finish only; no closure or absence. No rarity correction from this finish-only observation.",
+          "physicalPrintingEvidence": {
+            "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+            "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+            "finish": "non-holo",
+            "edition": null,
+            "foilPattern": null,
+            "markings": [],
+            "distribution": null,
+            "cardSize": "unknown",
+            "specimenIds": [],
+            "positiveOnly": true,
+            "completenessClaim": false,
+            "basis": "The article explicitly makes all cards in this Traditional Chinese and Thai deck Non Holofoil; its set list identifies Eevee & Snorlax 118/169. Existing official card identity establishes the exact AS5D release."
+          }
         }
       }
     },
@@ -184405,6 +184644,14 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PRINTING:301137e80f94be59374a828a",
+      "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:CN:30th C:095/103:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -219021,6 +219268,30 @@
     },
     {
       "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:AS5D:TH:non-holo",
+      "relation": "supported-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:AS5D:TW:non-holo",
+      "relation": "scoped-to",
+      "toType": "set-edition",
+      "toId": "EDITION:TW:T-Chinese:AS5D",
+      "provenance": {}
+    },
+    {
+      "fromType": "finish-profile",
+      "fromId": "FINISHPROFILE:AS5D:TW:non-holo",
+      "relation": "supported-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "finish-profile",
       "fromId": "FINISHPROFILE:c5409001913b9c35",
       "relation": "scoped-to",
       "toType": "local-set",
@@ -225629,6 +225900,14 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-756A53FA32A7",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TH:AS5D",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
       "provenance": {}
     },
     {
@@ -239576,6 +239855,22 @@
       "provenance": {}
     },
     {
+      "fromType": "physical-printing",
+      "fromId": "PRINTING:301137e80f94be59374a828a",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:reviewed-positive-evidence:SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PRINTING:301137e80f94be59374a828a",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
       "fromType": "profile-finish-claim",
       "fromId": "PROFILEFINISHCLAIM:28b63bcba404a0a2",
       "relation": "asserts-finish-for",
@@ -239621,6 +239916,22 @@
       "relation": "uses-profile",
       "toType": "finish-profile",
       "toId": "FINISHPROFILE:c5409001913b9c35",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:AS5D:TW:118:non-holo",
+      "relation": "asserts-finish-for",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "profile-finish-claim",
+      "fromId": "PROFILEFINISHCLAIM:AS5D:TW:118:non-holo",
+      "relation": "uses-profile",
+      "toType": "finish-profile",
+      "toId": "FINISHPROFILE:AS5D:TW:non-holo",
       "provenance": {}
     },
     {
@@ -295365,6 +295676,13 @@
     },
     {
       "sourceKind": "reviewed-positive-evidence",
+      "sourceId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "disposition": "established-and-mapped",
+      "targetRef": "PRINTING:301137e80f94be59374a828a",
+      "reason": "The article explicitly makes all cards in this Traditional Chinese and Thai deck Non Holofoil; its set list identifies Eevee & Snorlax 118/169. Existing official card identity establishes the exact AS5D release."
+    },
+    {
+      "sourceKind": "reviewed-positive-evidence",
       "sourceId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:d6b6feeffd3d1268",
@@ -295460,6 +295778,20 @@
       "disposition": "mapped",
       "targetRef": "EVENT:30th-2026-tw",
       "reason": "Explicit release date on the matching localized publisher product page."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-BP-AS5D-FINISH-TH-20261001",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:AS5D",
+      "reason": "Reviewed positive deck article finish rule."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TW:AS5D",
+      "reason": "Reviewed positive deck article finish rule."
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -301924,26 +302256,26 @@
     }
   ],
   "summary": {
-    "entities": 8338,
-    "edges": 12382,
-    "migrationInputs": 2940,
+    "entities": 8348,
+    "edges": 12391,
+    "migrationInputs": 2943,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1630,
+      "established-and-mapped": 1631,
       "linked-local-counterpart": 125,
-      "mapped": 366,
+      "mapped": 368,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2104,
+    "candidateClaims": 2105,
     "cardReleases": 633,
-    "physicalPrintings": 813,
-    "setSourceRecords": 494,
-    "setSourceDispositions": 494,
+    "physicalPrintings": 814,
+    "setSourceRecords": 496,
+    "setSourceDispositions": 496,
     "localizations": 16
   }
 }

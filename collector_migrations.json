@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:b925616396f94ee5677ecd2b64280c4755d58d8e0753bfd04cc558b16fcbab12",
+    "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b925616396f94ee5677ecd2b64280c4755d58d8e0753bfd04cc558b16fcbab12",
+      "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:b925616396f94ee5677ecd2b64280c4755d58d8e0753bfd04cc558b16fcbab12",
+      "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30514,6 +30514,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-1479a0e3-8d9c-5a99-9e55-f83e7d8c1891",
+      "toItemIds": [
+        "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-c0de9f26-e31b-5695-99dc-d78d87ec3ac9",
       "toItemIds": [
         "item-7016abb1-8876-5fcf-a684-26ebf7554c08"
@@ -40248,7 +40257,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-1479a0e3-8d9c-5a99-9e55-f83e7d8c1891"
+          "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
         ],
         "reason": null
       },
@@ -47765,12 +47774,17 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0601",
         "disposition": "projected",
         "targetItemId": "item-33591f6c-0431-5903-a55d-51cd8d25df5e"
+      },
+      {
+        "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
+        "disposition": "projected",
+        "targetItemId": "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
       }
     ],
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 813,
+      "physicalPrintings": 814,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
