@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 502,
+      "withConfirmedFinish": 503,
       "withOnlyMarketplaceClaim": 28,
-      "pendingFinish": 31,
+      "pendingFinish": 30,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 316,
-      "withHolo": 245,
+      "withHolo": 246,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 58,
-      "withUnresolvedProductMapping": 57,
-      "withAnyUnresolvedDetail": 135,
+      "withUnresolvedProductMapping": 56,
+      "withAnyUnresolvedDetail": 134,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -54206,23 +54206,53 @@
           "image": "images/XYPR_179_Snorlax_295168.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "black-star promo symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Photograph of a physical Spanish XY Black Star Promo Snorlax XY179. The Spanish card text, XY179 number and black-star promo symbol establish identity. Multicolored circles and star-like foil across the artwork establish a Cosmos Holo finish. Retained as SPEC-0599.",
+              "retrievedAt": "2026-10-01"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0599"
+          ],
+          "image": "verification/specimens/SPEC-0599.png",
+          "printingId": "F0635-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0636",

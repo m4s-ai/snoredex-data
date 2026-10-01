@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 599,
+  "count": 600,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12495,6 +12495,32 @@
         "basis": "Visible colored foil sheen on the retained exact Thai card. Owner statement: shows holo shine for as1b."
       },
       "listingUrl": "https://www.ebay.de/itm/128015559167"
+    },
+    {
+      "specimenId": "SPEC-0599",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Cardmarket marketplace seller photograph (article 1388626109; user-supplied image copy)",
+      "photograph": "SPEC-0599.png",
+      "photographSource": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+      "photographSha256": "sha256:fc36a8cca9f6e8125b5111572d848588d4114e1aaa6277bbb8de649b4f00674b",
+      "observed": "Photograph of a physical Spanish XY Black Star Promo Snorlax XY179. The Spanish card text, XY179 number and black-star promo symbol establish identity. Multicolored circles and star-like foil across the artwork establish a Cosmos Holo finish.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "U0229"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The retained seller photograph shows multicolored circles and star-like foil reflections across the exact Spanish XY179 card face, establishing a Cosmos Holo finish."
+      },
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Black-Star-Promos/Snorlax-XYPR179"
     },
     {
       "specimenId": "SPEC-0600",

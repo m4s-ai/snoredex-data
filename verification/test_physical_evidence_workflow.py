@@ -758,7 +758,7 @@ def main() -> None:
         "F0139": "confirmed",
         "F0172": "confirmed",
         "F0179": "marketplace-claimed",
-        "F0635": "pending",
+        "F0635": "confirmed",
     }
     spanish_swsh032 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0529")
     assert spanish_swsh032["availabilityStatus"] == "confirmed"

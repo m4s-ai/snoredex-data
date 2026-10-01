@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:ec4342d7a0a26f2d1a73a3e02aefc0875b367c347389d9a0beae5e483228a1c5",
+    "fromFingerprint": "sha256:098fc689af40095a5b887788a5090bdf542146bad78941a13b434d78462c6271",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:ec52fbfda8203d71f190e4a64368d8947f53066ae995b72ee98de509b9750f29",
+    "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:ec52fbfda8203d71f190e4a64368d8947f53066ae995b72ee98de509b9750f29",
+      "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -1612,11 +1612,11 @@
             "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
           ],
           "toItemIds": [
-            "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
+            "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-0ef55b8b-4716-5304-84c7-9f106708148d",
@@ -12396,7 +12396,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:ec52fbfda8203d71f190e4a64368d8947f53066ae995b72ee98de509b9750f29",
+      "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -13084,11 +13084,11 @@
             "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
           ],
           "toItemIds": [
-            "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
+            "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-0ef55b8b-4716-5304-84c7-9f106708148d",
@@ -30222,9 +30222,9 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "xypr-179-spanish-none-unresolved-unknown",
+      "fromItemId": "xypr-179-spanish-none-holo-cosmos-observed-marking-black-star-promo-symbol",
       "toItemIds": [
-        "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
+        "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -38267,10 +38267,10 @@
         ]
       },
       {
-        "legacyChecklistId": "xypr-179-spanish-none-unresolved-unknown",
+        "legacyChecklistId": "xypr-179-spanish-none-holo-cosmos-observed-marking-black-star-promo-symbol",
         "disposition": "projected",
         "targetItemIds": [
-          "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
+          "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
         ]
       }
     ],
@@ -43715,7 +43715,7 @@
         "cardReleaseId": "RELEASE:WEST:Spanish:XYPR:179:Snorlax-Thick-Skinned-Body-Slam",
         "disposition": "projected",
         "targetItemIds": [
-          "item-0ebbdd8f-f6c8-52ff-950c-02d5b5bd95c2"
+          "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
         ],
         "reason": null
       },
@@ -47086,6 +47086,11 @@
         "targetItemId": "item-d3648904-22d7-5710-8594-feb16bed3618"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:bafb152c8d1cf95450cc0766",
+        "disposition": "projected",
+        "targetItemId": "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:bc0d883c97eb0d03d0fbbc48",
         "disposition": "projected",
         "targetItemId": "item-5b3bf265-4715-577a-927b-2168b61b0f08"
@@ -47784,7 +47789,7 @@
     "summary": {
       "legacyChecklistRows": 905,
       "cardReleases": 634,
-      "physicalPrintings": 810,
+      "physicalPrintings": 811,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

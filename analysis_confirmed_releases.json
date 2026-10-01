@@ -12962,24 +12962,49 @@
     {
      "language": "Spanish",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0635",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0635-P01",
+       "finish": "holo",
+       "foilPattern": "cosmos",
+       "markings": [
+        {
+         "kind": "observed-marking",
+         "role": "print-identity",
+         "text": "black-star promo symbol"
+        }
+       ],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0599.png",
+       "specimenIds": [
+        "SPEC-0599"
+       ]
+      }
+     ]
     },
     {
      "language": "Italian",
@@ -13081,7 +13106,7 @@
     "French": "positive-evidence-only",
     "German": "positive-evidence-only",
     "Italian": "positive-evidence-only",
-    "Spanish": "pending",
+    "Spanish": "positive-evidence-only",
     "Portuguese": "positive-evidence-only"
    },
    "languageEvidence": {

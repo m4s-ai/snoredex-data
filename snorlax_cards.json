@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-10-01",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 502,
+      "withConfirmedFinish": 503,
       "withOnlyMarketplaceClaim": 28,
-      "pendingFinish": 31,
+      "pendingFinish": 30,
       "notApplicableFinish": 76,
       "withOwnerAdjudication": 9,
       "withNonHolo": 316,
-      "withHolo": 245,
+      "withHolo": 246,
       "withReverseHolo": 227,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 58,
-      "withUnresolvedProductMapping": 57,
-      "withAnyUnresolvedDetail": 135,
+      "withUnresolvedProductMapping": 56,
+      "withAnyUnresolvedDetail": 134,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -14745,7 +14745,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "holo"
@@ -14879,24 +14879,49 @@
           {
             "language": "Spanish",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0635",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0635-P01",
+                "finish": "holo",
+                "foilPattern": "cosmos",
+                "markings": [
+                  {
+                    "kind": "observed-marking",
+                    "role": "print-identity",
+                    "text": "black-star promo symbol"
+                  }
+                ],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0599.png",
+                "specimenIds": [
+                  "SPEC-0599"
+                ]
+              }
+            ]
           },
           {
             "language": "Italian",
