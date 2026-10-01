@@ -1,4 +1,4 @@
-"""Admit the supplied physical 30th C 095/103 seller photograph, without a launch-date claim."""
+"""Admit the supplied physical 30thC 095/103 seller photograph, without a launch-date claim."""
 import copy
 import json
 import sys
@@ -10,15 +10,16 @@ from admit_issue257_simplified_chinese_20260827 import upsert_entity, upsert_edg
 
 V = ROOT / 'verification'
 DATE = '2026-10-01'
-CODE = '30th C'
-PID = 'CN:30th C:095/103:base'
+CODE = '30thC'
+PID = 'CN:30thC:095/103:base'
+# Preserve allocated graph IDs when correcting the printed code of the same photographed card.
 RID = 'RELEASE:CN:S-Chinese:30th C:095/103:Snorlax-Good-Sleep-Collapse'
 SID = 'SET-SRC-CN-30TH-C-095-20261001'
 URL = 'https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png'
 ORIGIN = 'reviewed-30th-cn-20261001'
 BUNDLE = 'verification/evidence/30th-cn-20261001'
 EVIDENCE = ('Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, '
-            '30th C 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J '
+            '30thC 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J '
             'and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration '
             'establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. '
             'Owner states this release is already released; no exact launch date, foil-pattern taxonomy '
@@ -36,7 +37,13 @@ def main():
     prints = read('source_first_prints.json')
     sources = read('set_catalogue_sources.json')
     rarity = read('rarity_catalogue.json')
-    assert any(s['specimenId']=='SPEC-0600' for s in read('specimens.json')['specimens'])
+    specimens = read('specimens.json')
+    specimen = next(s for s in specimens['specimens'] if s['specimenId']=='SPEC-0600')
+    assert specimen['setCode'] in ('30th C', CODE)
+    specimen['setCode'] = CODE
+    specimen['citedBy'] = [PID if ref=='CN:30th C:095/103:base' else ref for ref in specimen['citedBy']]
+    specimen['observed'] = specimen['observed'].replace('30th C 095/103', '30thC 095/103')
+    graph['migrationDispositions'] = [r for r in graph['migrationDispositions'] if not (r['sourceKind']=='source-first-record' and r['sourceId']=='CN:30th C:095/103:base')]
     row = dict(printId=PID,locality='CN',localSetCode=CODE,localNumber='095/103',language='S-Chinese',
                script='Hans',name='卡比兽',cardName='Snorlax',specimenId='SPEC-0600',
                providerId='seller-listing-photo',sourceUrl=URL,cardImageUrl=URL,retrievedAt=DATE,
@@ -44,7 +51,7 @@ def main():
                releaseStatus='released',artist='Aya Kusube',variant='base',catchUpOf=None,
                corroborated=False,markAssetUrl=None,evidence=EVIDENCE,work='Snorlax-Good-Sleep-Collapse',
                raritySourceUrl=None,rarityProviderId='owner-attestation',rarityRetrievedAt=DATE)
-    prints['prints'] = sorted([r for r in prints['prints'] if r['printId']!=PID]+[row],key=lambda r:r['printId'])
+    prints['prints'] = sorted([r for r in prints['prints'] if r['printId'] not in (PID,'CN:30th C:095/103:base')]+[row],key=lambda r:r['printId'])
     prints['meta']['counts']['admitted']=len(prints['prints'])
     profile = dict(sourceRecordId=SID,sourceKind='source-first-local-set-profile',provider='seller-listing-photo',
                    providerRecordKey=PID,retrieved=DATE,sourceUrl=URL,
@@ -68,7 +75,7 @@ def main():
     edition='EDITION:CN:S-Chinese:30th C'
     template=next(e['payload'] for e in graph['entities'] if e['entityType']=='set-edition' and e['entityId']=='EDITION:TW:T-Chinese:M6a F')
     payload=copy.deepcopy(template)
-    claim='CLAIM:source-first:'+PID
+    claim='CLAIM:source-first:CN:30th C:095/103:base'
     payload['setEditionId']=edition
     for part in ['identity','catalogue']:
         payload[part].update(setEditionId=edition,locality='CN',language='S-Chinese',script='Hans',localizationId='LOCALIZATION:CN:zh-Hans')
@@ -81,7 +88,7 @@ def main():
     for source in [profile,owner]:
         sid=source['sourceRecordId']
         entity('set-source-record',sid,source)
-        disposition=dict(sourceRecordId=sid,disposition='mapped',targetRef=local,reason='Exact photographed 30th C localized identity and field-specific owner rarity determination.')
+        disposition=dict(sourceRecordId=sid,disposition='mapped',targetRef=local,reason='Exact photographed 30thC localized identity and field-specific owner rarity determination.')
         entity('set-source-disposition',sid,disposition)
         upsert_edge(graph,'set-source-disposition',sid,'disposes','set-source-record',sid)
         upsert_edge(graph,'local-set',local,'observed-by','set-source-record',sid)
@@ -100,7 +107,7 @@ def main():
     entity('catalogue-card-release-ref',RID,dict(cardReleaseId=RID,setEditionId=edition,collectorNumber='095/103',origin=ORIGIN))
     upsert_edge(graph,'catalogue-card-release-ref',RID,'belongs-to','set-edition',edition)
     upsert_edge(graph,'catalogue-card-release-ref',RID,'references','card-release',RID)
-    rc='RARITYCLAIM:owner:'+PID+':20261001'
+    rc='RARITYCLAIM:owner:CN:30th C:095/103:base:20261001'
     entity('rarity-claim',rc,dict(rarityClaimId=rc,cardReleaseId=RID,sourceRecordId=owner_sid,sourceProvider='owner-attestation',
            sourceVocabulary='owner-classification',sourceNativeValue='Common',normalizedRarityId='common',sourceProductKey=PID+':owner-rarity',retrievedAt=DATE,evidence=owner['raw']['basis']))
     upsert_edge(graph,'rarity-claim',rc,'asserts-rarity-for','card-release',RID)
@@ -111,7 +118,7 @@ def main():
     sources['meta']['counts']['sourceFirstLocalSets']=sum(r['sourceKind']=='source-first-local-set-profile' for r in sources['sourceRecords'])
     after = {(e['entityType'],e['entityId']):e for e in graph['entities']}
     assert all(after[key]==value for key,value in existing.items()), 'Admission must preserve every existing graph entity'
-    for name,data in [('authoritative_graph.json',graph),('source_first_prints.json',prints),('set_catalogue_sources.json',sources),('rarity_catalogue.json',rarity)]:write(name,data)
-    print('Admitted CN:30th C:095/103:base via SPEC-0600; exact release date remains unknown')
+    for name,data in [('authoritative_graph.json',graph),('source_first_prints.json',prints),('set_catalogue_sources.json',sources),('rarity_catalogue.json',rarity),('specimens.json',specimens)]:write(name,data)
+    print('Admitted CN:30thC:095/103:base via SPEC-0600; exact release date remains unknown')
 
 if __name__=='__main__':main()
