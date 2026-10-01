@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "f0eb35362d26e1dc5124afeadcf5964d69a037b6ef990117a706cb4ae4b350b1",
+  "projectionVersion": "56527647ccc78443025dbe2121924e77a2a79e60ec947c238086def202b0b9e0",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 820,
+    "physicalPrintings": 821,
     "sourceObservations": 3066
   },
   "groups": [
@@ -53915,13 +53915,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0305",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies SVI F 046/066 as Non-Holo on 2026-10-01. SPEC-0305 retains the exact publisher reference image; physical custody remains unestablished.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0305",
+              "specimenIds": [
+                "SPEC-0305"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -53963,8 +53985,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/tw/card-search/detail/11337/",
-              "evidence": "Complete retained image for Traditional Chinese Snorlax SVI F 046/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "0187d06e815ec230789f91c41e40c8bf4c9088186296c9d846c105e0abe3968f",
+              "evidence": "Complete retained publisher image for Traditional Chinese Snorlax SVI F 046/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The collection owner explicitly identifies this printing as Non-Holo on 2026-10-01; finish rests on that separate owner determination, not an inference from the publisher render.",
+              "contentHash": "ed4408a1b26378d001b65d198d8121c4405b02280583ddaf36cc4aeacd8ec104",
               "image": "verification/specimens/SPEC-0305.png"
             }
           ]

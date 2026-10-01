@@ -34245,6 +34245,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0305",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0305",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0305",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0305",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0305",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0305"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0319",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -103297,6 +103314,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0260",
         "specimenIds": [
           "SPEC-0260"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0305",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0305",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection owner explicitly identifies SVI F 046/066 as Non-Holo on 2026-10-01. SPEC-0305 retains the exact publisher reference image; physical custody remains unestablished.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0305",
+        "specimenIds": [
+          "SPEC-0305"
         ]
       }
     },
@@ -188247,6 +188288,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0305",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0305",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0319",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -239737,6 +239788,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TH:Thai:scD T:111/159:Snorlax-Slap-Push-Single-Strike-Tackle",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0305",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0305",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0305",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
       "provenance": {}
     },
     {
@@ -302107,6 +302174,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0305",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0305",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0319",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -303052,14 +303126,14 @@
     }
   ],
   "summary": {
-    "entities": 8370,
-    "edges": 12420,
-    "migrationInputs": 2952,
+    "entities": 8372,
+    "edges": 12423,
+    "migrationInputs": 2953,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1637,
+      "established-and-mapped": 1638,
       "linked-local-counterpart": 125,
       "mapped": 370,
       "needs-evidence": 125,
@@ -303067,9 +303141,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2112,
+    "candidateClaims": 2113,
     "cardReleases": 633,
-    "physicalPrintings": 820,
+    "physicalPrintings": 821,
     "setSourceRecords": 498,
     "setSourceDispositions": 498,
     "localizations": 16

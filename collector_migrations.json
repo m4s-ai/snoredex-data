@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:db5bd83810030be14dbdb57dc7e3201594b61b569f0ff693bc54356ebb1c3d26",
+    "toFingerprint": "sha256:50e4b244beb71797346c51e7045442eb2b643bf1cd9a798a75323fa81d41227e",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:db5bd83810030be14dbdb57dc7e3201594b61b569f0ff693bc54356ebb1c3d26",
+      "toFingerprint": "sha256:50e4b244beb71797346c51e7045442eb2b643bf1cd9a798a75323fa81d41227e",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:db5bd83810030be14dbdb57dc7e3201594b61b569f0ff693bc54356ebb1c3d26",
+      "toFingerprint": "sha256:50e4b244beb71797346c51e7045442eb2b643bf1cd9a798a75323fa81d41227e",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30597,6 +30597,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-6ff5ba80-046b-5717-a9d6-2083c810c78a",
+      "toItemIds": [
+        "item-29be28c8-1769-5f85-bcaa-66b12b0da225"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-b24391b1-20d9-5b5e-8288-e5cbf63e19d2",
       "toItemIds": [
         "item-c1a5ce6a-cf4f-5989-b5e6-32e93f860a67"
@@ -40518,7 +40527,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:SVI F:046/066:Snorlax-Lazy-Press",
         "disposition": "projected",
         "targetItemIds": [
-          "item-6ff5ba80-046b-5717-a9d6-2083c810c78a"
+          "item-29be28c8-1769-5f85-bcaa-66b12b0da225"
         ],
         "reason": null
       },
@@ -47602,6 +47611,11 @@
         "targetItemId": "item-48c12358-ac0e-5c87-beaa-08bb14f54834"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0305",
+        "disposition": "projected",
+        "targetItemId": "item-29be28c8-1769-5f85-bcaa-66b12b0da225"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0323",
         "disposition": "projected",
         "targetItemId": "item-0381b02e-5db5-5c08-9a00-6a0abaf88dbe"
@@ -47860,7 +47874,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 820,
+      "physicalPrintings": 821,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
