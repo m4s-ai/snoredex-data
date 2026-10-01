@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
+    "toFingerprint": "sha256:6e8ccb9be2cdbf7375899b594cabf8ec2c594db1f98f21f6b1e21b310fe3a76f",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
+      "toFingerprint": "sha256:6e8ccb9be2cdbf7375899b594cabf8ec2c594db1f98f21f6b1e21b310fe3a76f",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:bf446e636591df70e556df8f2cbe0458009062345364d43f8ca4a11aab89b21b",
+      "toFingerprint": "sha256:6e8ccb9be2cdbf7375899b594cabf8ec2c594db1f98f21f6b1e21b310fe3a76f",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30597,6 +30597,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-b24391b1-20d9-5b5e-8288-e5cbf63e19d2",
+      "toItemIds": [
+        "item-c1a5ce6a-cf4f-5989-b5e6-32e93f860a67"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-3e857a3a-ac86-5b7a-aae7-87b6d965f292",
       "toItemIds": [
         "item-17b15e38-60af-55ac-89a0-c1cf6c2aef1a"
@@ -40524,7 +40533,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-b24391b1-20d9-5b5e-8288-e5cbf63e19d2"
+          "item-c1a5ce6a-cf4f-5989-b5e6-32e93f860a67"
         ],
         "reason": null
       },
@@ -47804,6 +47813,11 @@
         "targetItemId": "item-9fd9f124-e143-550d-bc3c-27e26ca0bdb7"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0605",
+        "disposition": "projected",
+        "targetItemId": "item-c1a5ce6a-cf4f-5989-b5e6-32e93f860a67"
+      },
+      {
         "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
         "disposition": "projected",
         "targetItemId": "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
@@ -47812,7 +47826,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 816,
+      "physicalPrintings": 817,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

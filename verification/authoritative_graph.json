@@ -36469,6 +36469,23 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0605",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0605",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0605",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0605",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0605",
+        "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0605"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -104301,6 +104318,30 @@
         "specimenIds": [
           "SPEC-0603",
           "SPEC-0604"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0605",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0605",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "The collection owner explicitly identifies the pictured sc1D F 132/164 card as Non-Holo; visual inspection establishes its exact Traditional Chinese card identity.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0605",
+        "specimenIds": [
+          "SPEC-0605"
         ]
       }
     },
@@ -189169,6 +189210,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0605",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0605",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -240014,6 +240065,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:sc1b F:120/153:Snorlax-VMAX-G-Max-Fall",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0605",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0605",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0605",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
       "provenance": {}
     },
     {
@@ -302436,17 +302503,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:specimen:SPEC-0603, already established from another specimen"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0605",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0605",
+      "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact"
     }
   ],
   "summary": {
-    "entities": 8353,
-    "edges": 12398,
-    "migrationInputs": 2946,
+    "entities": 8355,
+    "edges": 12401,
+    "migrationInputs": 2947,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 308,
       "carried": 68,
-      "established-and-mapped": 1633,
+      "established-and-mapped": 1634,
       "linked-local-counterpart": 125,
       "mapped": 368,
       "needs-evidence": 125,
@@ -302454,9 +302528,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2108,
+    "candidateClaims": 2109,
     "cardReleases": 633,
-    "physicalPrintings": 816,
+    "physicalPrintings": 817,
     "setSourceRecords": 496,
     "setSourceDispositions": 496,
     "localizations": 16

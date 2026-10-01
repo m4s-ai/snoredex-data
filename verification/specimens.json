@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 604,
+  "count": 605,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12652,6 +12652,32 @@
         "ownerAttestedAt": "2026-10-01",
         "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment."
       }
+    },
+    {
+      "specimenId": "SPEC-0605",
+      "setCode": "sc1D F",
+      "number": "132/164",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "User-supplied seller card photograph attributed by the collection owner to eBay item 377371294743; visual inspection; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0605.png",
+      "photographSource": "user-supplied:codex-clipboard-fd2279ca-68c8-4372-a65b-c2c28d414b8c.png",
+      "photographSha256": "sha256:142fa38c308b0d33c6f82e47822b85759e1a303ac19db7cb20dc0c0534cd5abd",
+      "observed": "Traditional Chinese 卡比獸, HP150, sc1D F, regulation D, 132/164, Illus. chibi, copyright 2020. Printed attacks 滾動衝撞 80 and 重磅衝擊 130 establish the exact known release. The collection owner identifies the pictured card as Non-Holo and supplies the eBay listing URL. The listing itself could not be fetched in this session; the image-to-listing association rests on the user-supplied provenance. No physical ownership, rarity symbol, named foil pattern or complete finish inventory is inferred.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1D F:132/164:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "The collection owner explicitly identifies the pictured sc1D F 132/164 card as Non-Holo; visual inspection establishes its exact Traditional Chinese card identity."
+      },
+      "listingUrl": "https://www.ebay.com/itm/377371294743"
     }
   ]
 }

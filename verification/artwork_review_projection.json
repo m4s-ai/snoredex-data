@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "58c51fd77d2f87e20a0f53b12841ce18527739e8bda88e745b222cb336873f27",
+  "projectionVersion": "9de71dee9602cbf0c4a028d96c8c1cb6a24c238f4fb96bb2c25217ada4ba8dd5",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 816,
-    "sourceObservations": 3065
+    "physicalPrintings": 817,
+    "sourceObservations": 3066
   },
   "groups": [
     {
@@ -66538,13 +66538,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0605",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "The collection owner explicitly identifies the pictured sc1D F 132/164 card as Non-Holo; visual inspection establishes its exact Traditional Chinese card identity.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0605",
+              "specimenIds": [
+                "SPEC-0605"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -66569,6 +66591,17 @@
               "originalHash": "eed04e8ebab8cea709690eb4d05f67b6981f535f833f5e2af77933cc02224ca9",
               "previewSrc": "images/previews/SPEC-0285.png?v=5447c90db8ccbe93ded29511af7bdf2d19e3aa61edcdd006573724b35d497202",
               "thumbnailSrc": "images/thumbs/SPEC-0285.png?v=847767702aafeabcae1a5acfe04bc0f3471119a17a069e3b63dbc78095e69d5e"
+            },
+            {
+              "src": "verification/specimens/SPEC-0605.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0605",
+              "contentHash": "142fa38c308b0d33c6f82e47822b85759e1a303ac19db7cb20dc0c0534cd5abd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "142fa38c308b0d33c6f82e47822b85759e1a303ac19db7cb20dc0c0534cd5abd",
+              "previewSrc": "images/previews/SPEC-0605.png?v=bd340f16885de8f0e3cd8a4cecf695dcb16a24836374431bdf3e6fcb5179af0e",
+              "thumbnailSrc": "images/thumbs/SPEC-0605.png?v=ff9cfe5c23fe4979249ab28887c5d58a7a329ae86b787363d9ed118c20437a80"
             }
           ],
           "observations": [
@@ -66589,6 +66622,15 @@
               "evidence": "Complete retained image for Traditional Chinese Snorlax sc1D F 132/164 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "9b39ac42f337c6a96b871b3f411630585a8a67ddca45c1489bdff76f28b0b621",
               "image": "verification/specimens/SPEC-0285.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0605",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/377371294743",
+              "evidence": "Traditional Chinese 卡比獸, HP150, sc1D F, regulation D, 132/164, Illus. chibi, copyright 2020. Printed attacks 滾動衝撞 80 and 重磅衝擊 130 establish the exact known release. The collection owner identifies the pictured card as Non-Holo and supplies the eBay listing URL. The listing itself could not be fetched in this session; the image-to-listing association rests on the user-supplied provenance. No physical ownership, rarity symbol, named foil pattern or complete finish inventory is inferred.",
+              "contentHash": "d51b31bdef0b232adedc2eda546fbd7a2fb1e4f236d086834e50667d2d2a95bf",
+              "image": "verification/specimens/SPEC-0605.png"
             }
           ]
         }
