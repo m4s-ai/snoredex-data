@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 601,
+  "count": 602,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12575,6 +12575,32 @@
         "ownerAttestedAt": "2026-10-01",
         "cardSize": "standard",
         "basis": "The collection owner identifies the photographed card as Holo, recognizable at its border."
+      }
+    },
+    {
+      "specimenId": "SPEC-0602",
+      "setCode": "sc1a F",
+      "number": "127/154",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied photograph of a sleeved physical card; visually inspected; local Tesseract OCR unavailable; original listing URL not supplied",
+      "photograph": "SPEC-0602.png",
+      "photographSource": "user-supplied:codex-clipboard-8a0d04e1-6412-4bb4-b871-4b608c829ecb.png",
+      "photographSha256": "sha256:aadd95de81ebb681a932b3890e0a3961285a5a61bc152133fef6ec191d68ecfd",
+      "observed": "Traditional Chinese 卡比獸, HP150, sc1a F, regulation D, 127/154 U, Illus. Eri Yamaki, copyright 2020. Printed attacks 呼喚 and 倒下 120 match the established card identity. The photographed card is in a green sleeve beside a seller label W11111; neither label nor sleeve establishes custody or distribution. Collection owner identifies this pictured copy as Non-Holo. No named foil pattern, other finish or complete finish inventory is asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1a F:127/154:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "cardSize": "standard",
+        "basis": "The collection owner explicitly identifies the photographed SC1a F 127/154 card as Non-Holo. Image inspection establishes the exact Traditional Chinese card identity."
       }
     }
   ]

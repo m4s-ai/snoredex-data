@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
+    "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
+      "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12392,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d0f459852fe3a8f144821e21798cc06a6dfd4d28bcc1221994eff79037704b73",
+      "toFingerprint": "sha256:a5523f9fd9ab27e104fc230752b3e002a0de2fe6c5b5dda52a72f77210798af8",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30597,6 +30597,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-3e857a3a-ac86-5b7a-aae7-87b6d965f292",
+      "toItemIds": [
+        "item-17b15e38-60af-55ac-89a0-c1cf6c2aef1a"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-fe853318-0097-544b-9ad1-7014b63d7254",
       "toItemIds": [
         "item-ea3f62ca-0c01-57e2-a5ce-ed1cb0cb7e22"
@@ -40522,7 +40531,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:sc1a F:127/154:Snorlax-Collect-Collapse",
         "disposition": "projected",
         "targetItemIds": [
-          "item-3e857a3a-ac86-5b7a-aae7-87b6d965f292"
+          "item-17b15e38-60af-55ac-89a0-c1cf6c2aef1a"
         ],
         "reason": null
       },
@@ -47776,6 +47785,11 @@
         "targetItemId": "item-33591f6c-0431-5903-a55d-51cd8d25df5e"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0602",
+        "disposition": "projected",
+        "targetItemId": "item-17b15e38-60af-55ac-89a0-c1cf6c2aef1a"
+      },
+      {
         "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
         "disposition": "projected",
         "targetItemId": "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
@@ -47784,7 +47798,7 @@
     "summary": {
       "legacyChecklistRows": 903,
       "cardReleases": 633,
-      "physicalPrintings": 814,
+      "physicalPrintings": 815,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "a1bb4b64da80040df193fa5115e0950abf05b357f1eaa3b42647b2ca261b0126",
+  "projectionVersion": "413ba360224013f7b3e5d84132fc1b126a6c911b52fd3cb1696e8569115bd920",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 814,
-    "sourceObservations": 3062
+    "physicalPrintings": 815,
+    "sourceObservations": 3063
   },
   "groups": [
     {
@@ -22716,13 +22716,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0602",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:sc1a F:127/154:Snorlax-Collect-Collapse",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "The collection owner explicitly identifies the photographed SC1a F 127/154 card as Non-Holo. Image inspection establishes the exact Traditional Chinese card identity.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0602",
+              "specimenIds": [
+                "SPEC-0602"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -22780,6 +22802,17 @@
               "originalHash": "772551f768bb1109a38b8f99d18ad8dcdfa733f7854f6de9c75f61047e1910a9",
               "previewSrc": "images/previews/SPEC-0565.png?v=fc2a83893cef2de042b5e5d046f182e0253149c04782b932cdce5c3b59227b9c",
               "thumbnailSrc": "images/thumbs/SPEC-0565.png?v=57c4f39286b8f1e4234301f319813ba876bc43db9911d6bd3998338b0013c0fc"
+            },
+            {
+              "src": "verification/specimens/SPEC-0602.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0602",
+              "contentHash": "aadd95de81ebb681a932b3890e0a3961285a5a61bc152133fef6ec191d68ecfd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "aadd95de81ebb681a932b3890e0a3961285a5a61bc152133fef6ec191d68ecfd",
+              "previewSrc": "images/previews/SPEC-0602.png?v=6e9b6cdfb7ab012586d7ea40c45946623bf0fac55bbbe9bd1bf71d8eb9f4cdaa",
+              "thumbnailSrc": "images/thumbs/SPEC-0602.png?v=327ab0c640fdad4a14afb796215f09fb69b5f324a4729829f5e7c46c237c35a1"
             }
           ],
           "observations": [
@@ -22827,6 +22860,15 @@
               "evidence": "SAMPLE-watermarked digital depiction of Traditional Chinese Snorlax, HP150, sc1a F D 127/154 U, Eri Yamaki, 呼喚 and 倒下 120. Identity only; the watermark is not a card marking and no physical finish is asserted. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
               "contentHash": "523a3ec94daed3f686827a72b714f59a0f274a3cb6667c816aeacfb0dfbc3bfb",
               "image": "verification/specimens/SPEC-0565.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0602",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Traditional Chinese 卡比獸, HP150, sc1a F, regulation D, 127/154 U, Illus. Eri Yamaki, copyright 2020. Printed attacks 呼喚 and 倒下 120 match the established card identity. The photographed card is in a green sleeve beside a seller label W11111; neither label nor sleeve establishes custody or distribution. Collection owner identifies this pictured copy as Non-Holo. No named foil pattern, other finish or complete finish inventory is asserted.",
+              "contentHash": "3aa31b65ac911820fca00105a518ae7b812b90a97ec3e80a64630ab01c9b6620",
+              "image": "verification/specimens/SPEC-0602.png"
             }
           ]
         }
