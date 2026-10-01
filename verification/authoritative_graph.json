@@ -10852,24 +10852,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:4a3b702f16d31fa8b48bc95b",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:4a3b702f16d31fa8b48bc95b",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0179-P02",
-        "semanticPrintingId": "PRINTING:4a3b702f16d31fa8b48bc95b",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:4a4581875b1ce9231cd57c74",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -11364,24 +11346,6 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:JP:Japanese:sI100:341:Snorlax-Heavy-Impact"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:559471338566037c0c7d7430",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:559471338566037c0c7d7430",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0179-P01",
-        "semanticPrintingId": "PRINTING:559471338566037c0c7d7430",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength"
       }
     },
     {
@@ -24811,12 +24775,12 @@
         "claimKind": "card-release",
         "sourceKind": "legacy-language-unit",
         "sourceId": "U0482",
-        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "materializedTargetId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "reason": "Western language under Western distribution"
+        "sourceRecord": null,
+        "evidenceStatus": "contradicted",
+        "disposition": "bounded-contradicted",
+        "proposedTargetId": null,
+        "materializedTargetId": null,
+        "reason": "The collection owner accepted WikiDex's explicit statement that Bienvenidos a Kalos was released in Spanish only in Pokemon TCG Online, not physically, and requested correction on 2026-10-01. Its card list includes Snorlax 26/39. SPEC-0132 is a digital localized render, not corroboration of a physical printing. The previous general Bulbapedia language-list inference is superseded. Final not-printed status rests on the collection-owner adjudication; the external statement supplies its rationale."
       }
     },
     {
@@ -60117,42 +60081,6 @@
     },
     {
       "entityType": "card-release",
-      "entityId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "origin": "authoritative-locality-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "setEditionId": "EDITION:WEST:Spanish:KSS",
-        "locality": "WEST",
-        "language": "Spanish",
-        "script": "Latn",
-        "localSetCode": "KSS",
-        "localNumber": "26",
-        "localIdentifierKnown": true,
-        "state": "identified",
-        "work": "Snorlax-Rock-Smash-Strength",
-        "workMappingState": "mapped",
-        "viaLegacySetCode": "KSS",
-        "viaLegacyNumber": "26",
-        "claimIds": [
-          "CLAIM:legacy:U0482"
-        ],
-        "establishingClaimIds": [
-          "CLAIM:legacy:U0482"
-        ],
-        "nonEstablishingClaimIds": [],
-        "legacyVariants": [
-          "base"
-        ],
-        "legacyProducts": [
-          "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26"
-        ],
-        "sourceRecords": [
-          "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"
-        ]
-      }
-    },
-    {
-      "entityType": "card-release",
       "entityId": "RELEASE:WEST:Spanish:LOR:143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "origin": "authoritative-locality-migration",
       "payload": {
@@ -71457,17 +71385,6 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
-      "entityId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "origin": "authoritative-set-catalogue-migration",
-      "payload": {
-        "cardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "setEditionId": "EDITION:WEST:Spanish:KSS",
-        "collectorNumber": "26",
-        "origin": "print-identity-dryrun"
-      }
-    },
-    {
-      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:WEST:Spanish:LOR:143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -79082,8 +78999,7 @@
           "RELEASE:WEST:German:KSS:26:Snorlax-Rock-Smash-Strength",
           "RELEASE:WEST:Italian:KSS:26:Snorlax-Rock-Smash-Strength",
           "RELEASE:WEST:Portuguese:KSS:26:Snorlax-Rock-Smash-Strength",
-          "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength",
-          "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength"
+          "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength"
         ],
         "reason": "7 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26"
@@ -108435,21 +108351,6 @@
         "sourceNativeValue": "Rare",
         "normalizedRarityId": "rare",
         "sourceProductKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V1-RR33"
-      }
-    },
-    {
-      "entityType": "rarity-claim",
-      "entityId": "RARITYCLAIM:889242fc11a1d286",
-      "origin": "authoritative-set-catalogue-migration",
-      "payload": {
-        "rarityClaimId": "RARITYCLAIM:889242fc11a1d286",
-        "cardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "sourceRecordId": "SET-SRC-CM-1EDC9AA3D4B9",
-        "sourceProvider": "cardmarket",
-        "sourceVocabulary": "cardmarket-2026-07-21",
-        "sourceNativeValue": "Common",
-        "normalizedRarityId": "common",
-        "sourceProductKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26"
       }
     },
     {
@@ -169040,17 +168941,6 @@
     },
     {
       "entityType": "source-assertion",
-      "entityId": "SOURCEASSERTION:f5428c8d92feecb1",
-      "origin": "authoritative-set-catalogue-migration",
-      "payload": {
-        "sourceAssertionId": "SOURCEASSERTION:f5428c8d92feecb1",
-        "sourceRecordId": "SET-SRC-CM-1EDC9AA3D4B9",
-        "assertionKind": "asserts-rarity-claim",
-        "rarityClaimId": "RARITYCLAIM:889242fc11a1d286"
-      }
-    },
-    {
-      "entityType": "source-assertion",
       "entityId": "SOURCEASSERTION:f598f5ee62e14a70",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -175167,14 +175057,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:4a3b702f16d31fa8b48bc95b",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:4a4581875b1ce9231cd57c74",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -175425,14 +175307,6 @@
       "relation": "proposes-for",
       "toType": "card-release",
       "toId": "RELEASE:JP:Japanese:sI100:341:Snorlax-Heavy-Impact",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:559471338566037c0c7d7430",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
       "provenance": {}
     },
     {
@@ -182683,16 +182557,6 @@
       "relation": "materializes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:German:KSS:26:Snorlax-Rock-Smash-Strength",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:legacy:U0482",
-      "relation": "materializes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -199863,24 +199727,6 @@
     },
     {
       "fromType": "card-release",
-      "fromId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:WEST:Spanish:KSS",
-      "provenance": {}
-    },
-    {
-      "fromType": "card-release",
-      "fromId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "relation": "implements",
-      "toType": "work",
-      "toId": "WORK:Snorlax-Rock-Smash-Strength",
-      "provenance": {
-        "state": "mapped"
-      }
-    },
-    {
-      "fromType": "card-release",
       "fromId": "RELEASE:WEST:Spanish:LOR:143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -213457,22 +213303,6 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
-      "fromId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "relation": "belongs-to",
-      "toType": "set-edition",
-      "toId": "EDITION:WEST:Spanish:KSS",
-      "provenance": {}
-    },
-    {
-      "fromType": "catalogue-card-release-ref",
-      "fromId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "relation": "references",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "provenance": {}
-    },
-    {
-      "fromType": "catalogue-card-release-ref",
       "fromId": "RELEASE:WEST:Spanish:LOR:143:Snorlax-Unfazed-Fat-Thumping-Snore",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -224371,16 +224201,6 @@
       "relation": "maps-to",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength",
-      "provenance": {
-        "disposition": "split"
-      }
-    },
-    {
-      "fromType": "legacy-cardmarket-product",
-      "fromId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-      "relation": "maps-to",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
       "provenance": {
         "disposition": "split"
       }
@@ -244243,22 +244063,6 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-CM-D42CB71D56A2",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:889242fc11a1d286",
-      "relation": "asserts-rarity-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "provenance": {}
-    },
-    {
-      "fromType": "rarity-claim",
-      "fromId": "RARITYCLAIM:889242fc11a1d286",
-      "relation": "observed-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-CM-1EDC9AA3D4B9",
       "provenance": {}
     },
     {
@@ -279608,22 +279412,6 @@
     },
     {
       "fromType": "source-assertion",
-      "fromId": "SOURCEASSERTION:f5428c8d92feecb1",
-      "relation": "asserted-by",
-      "toType": "set-source-record",
-      "toId": "SET-SRC-CM-1EDC9AA3D4B9",
-      "provenance": {}
-    },
-    {
-      "fromType": "source-assertion",
-      "fromId": "SOURCEASSERTION:f5428c8d92feecb1",
-      "relation": "asserts-rarity-claim",
-      "toType": "rarity-claim",
-      "toId": "RARITYCLAIM:889242fc11a1d286",
-      "provenance": {}
-    },
-    {
-      "fromType": "source-assertion",
       "fromId": "SOURCEASSERTION:f598f5ee62e14a70",
       "relation": "asserted-by",
       "toType": "set-source-record",
@@ -281908,20 +281696,6 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0178-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0179-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0179-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -288469,10 +288243,9 @@
         "RELEASE:WEST:German:KSS:26:Snorlax-Rock-Smash-Strength",
         "RELEASE:WEST:Italian:KSS:26:Snorlax-Rock-Smash-Strength",
         "RELEASE:WEST:Portuguese:KSS:26:Snorlax-Rock-Smash-Strength",
-        "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength",
-        "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength"
+        "RELEASE:WEST:Russian:KSS:26:Snorlax-Rock-Smash-Strength"
       ],
-      "reason": "7 established language-bearing card release(s)"
+      "reason": "6 established language-bearing card release(s)"
     },
     {
       "sourceKind": "legacy-cardmarket-product",
@@ -293800,9 +293573,9 @@
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0482",
-      "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-      "reason": "Western language under Western distribution"
+      "disposition": "bounded-contradicted",
+      "targetRef": null,
+      "reason": "The collection owner accepted WikiDex's explicit statement that Bienvenidos a Kalos was released in Spanish only in Pokemon TCG Online, not physically, and requested correction on 2026-10-01. Its card list includes Snorlax 26/39. SPEC-0132 is a digital localized render, not corroboration of a physical printing. The previous general Bulbapedia language-list inference is superseded. Final not-printed status rests on the collection-owner adjudication; the external statement supplies its rationale."
     },
     {
       "sourceKind": "legacy-language-unit",
@@ -302003,14 +301776,14 @@
     }
   ],
   "summary": {
-    "entities": 8340,
-    "edges": 12388,
-    "migrationInputs": 2940,
+    "entities": 8334,
+    "edges": 12376,
+    "migrationInputs": 2938,
     "migrationDispositions": {
-      "bounded-contradicted": 92,
-      "candidate-needs-evidence": 309,
+      "bounded-contradicted": 93,
+      "candidate-needs-evidence": 307,
       "carried": 68,
-      "established-and-mapped": 1629,
+      "established-and-mapped": 1628,
       "linked-local-counterpart": 125,
       "mapped": 366,
       "needs-evidence": 125,
@@ -302018,8 +301791,8 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2104,
-    "cardReleases": 634,
+    "candidateClaims": 2102,
+    "cardReleases": 633,
     "physicalPrintings": 811,
     "setSourceRecords": 494,
     "setSourceDispositions": 494,

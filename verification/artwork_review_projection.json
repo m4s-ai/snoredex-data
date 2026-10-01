@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "9dda028b5f2ad2f3b5d9065418fe571e819e7110cc295c211731b23a3b7051a9",
+  "projectionVersion": "4aab6eb86c252bf9b8f94353b92c14d69af254033cc5e16e12be357d16016f7f",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -15,9 +15,9 @@
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 3,
-    "cardReleases": 634,
+    "cardReleases": 633,
     "physicalPrintings": 811,
-    "sourceObservations": 3063
+    "sourceObservations": 3061
   },
   "groups": [
     {
@@ -62990,88 +62990,6 @@
               "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
               "evidence": "Kalos Starter Set listed in the Russian column as \"Startovyy Nabor Kalosa\"",
               "contentHash": "ac400da77a5990b881ea77ebbec671881f47ebaa867932c457c2cd95246d3b3f",
-              "image": "images/KSS_26_Snorlax_281292.jpg"
-            }
-          ]
-        },
-        {
-          "cardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-          "workId": "WORK:Snorlax-Rock-Smash-Strength",
-          "cardKey": "Snorlax-Rock-Smash-Strength",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:db68982642b076927d9b9617",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "WEST",
-          "language": "Spanish",
-          "script": "Latn",
-          "setEditionId": "EDITION:WEST:Spanish:KSS",
-          "localSetCode": "KSS",
-          "localNumber": "26",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax",
-            "artist": "Naoki Saito",
-            "variant": "base",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
-            "foilPattern": [
-              "type-symbol-background"
-            ],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/KSS_26_Snorlax_281292.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0482",
-              "contentHash": "db68982642b076927d9b961763d9cd3d6001ee7571f24fc2f0f72640b028e432",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "db68982642b076927d9b961763d9cd3d6001ee7571f24fc2f0f72640b028e432",
-              "previewSrc": "images/previews/KSS_26_Snorlax_281292.jpg?v=189a54ce1f2947165fba7f4961e7ecdf6ff3002546dae97af8cfaf262e0237a9",
-              "thumbnailSrc": "images/thumbs/KSS_26_Snorlax_281292.jpg?v=0f90cdb893883e1294baf1a969224e572c2f8df4dcfd8c677c5c9ae9052fac50"
-            },
-            {
-              "src": "verification/specimens/SPEC-0132.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0132",
-              "contentHash": "03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
-              "previewSrc": "images/previews/SPEC-0132.png?v=0b6a59bbe4bfcb62134b431b138a46efca34a7fac65a687efac8e3f209409739",
-              "thumbnailSrc": "images/thumbs/SPEC-0132.png?v=8fef71785fa730d3b5a7f45eba1b2e7df6dbf38434048b6d0695bef07b297e05"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "specimen:SPEC-0132",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
-              "evidence": "Spanish database scan of Kalos Starter Set Snorlax 26/39. Pokémon Básico, Golpe Roca, Fuerza and 26/39 establish the localized card identity. No physical finish is inferred from this database render.",
-              "contentHash": "2c15ff3801273b8c04788868cd369998d554ad193be0953a98dbffb307198dd4",
-              "image": "verification/specimens/SPEC-0132.png"
-            },
-            {
-              "observationId": "unit:U0482",
-              "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)",
-              "evidence": "Kalos Starter Set print languages, stated exhaustively: English, German, French, Italian, Spanish, Portuguese and Russian Independent positive card-image evidence retained as SPEC-0132 shows the same localized card identity and corroborates this unit without replacing its primary provider.",
-              "contentHash": "1e95b73f6da6f0077698ccd8c243dca5cfe1c0df0c51f36585d20cb669219939",
               "image": "images/KSS_26_Snorlax_281292.jpg"
             }
           ]

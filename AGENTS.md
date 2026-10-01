@@ -22,7 +22,8 @@ explicit source and locality gaps rather than claiming discovery completeness.
 
 The layer exists because Cardmarket's language filter reports **marketplace availability, not a
 print manifest**, and it over-claims. The worked example is `KSS 26`: advertised in 17 languages,
-actually printed in 7. Every language claim therefore needs an outside source.
+currently confirmed physically in 6; the Spanish image is digital-only (OA-20261001-U0482).
+Every language claim therefore needs an outside source.
 
 The owner (`Scarrty` in git, `M4S.Collection` as licensor) directs scope and supplies physical
 specimens. Owner statements are authoritative but are still graded explicitly as evidence.
@@ -78,7 +79,7 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **20 units rest on owner attestation alone**; the
+   A single non-URL source may confirm a unit: **21 units rest on owner attestation alone**; the
    current `E6` output reports how many rest on an inspected specimen alone. The owner holds
    those cards and no database records them, so refusing the evidence buys a false "open" count
    rather than better evidence.
@@ -88,7 +89,7 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    itself, and 3 resolved units do — never report a lone tier-3 source as a rule violation, and
    never state the tiers more strictly than this ([LESSONS](LESSONS.md#a-rule-stated-more-strictly-than-the-check-enforces)).
    `E4` fails when the attestation count stops matching the data. Prefer corroboration where it
-   exists — it covers 96 of 719 units, so it usually does not.
+   exists — it covers 95 of 719 units, so it usually does not.
 
    **Grade a claim by what it rests on, never by the strongest thing beside it.** `providerId` is
    the source the unit would fall over without; corroboration from a neighbouring unit belongs in

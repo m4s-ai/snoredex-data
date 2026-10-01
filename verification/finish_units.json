@@ -58,13 +58,13 @@
     "counts": {
       "totalFinishUnits": 637,
       "withConfirmedFinish": 503,
-      "withOnlyMarketplaceClaim": 28,
+      "withOnlyMarketplaceClaim": 27,
       "pendingFinish": 30,
-      "notApplicableFinish": 76,
+      "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 316,
+      "withNonHolo": 315,
       "withHolo": 246,
-      "withReverseHolo": 227,
+      "withReverseHolo": 226,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 58,
       "withUnresolvedProductMapping": 56,
@@ -16588,7 +16588,7 @@
       "products": [
         {
           "variant": "base",
-          "claimStatus": "confirmed",
+          "claimStatus": "contradicted",
           "rarity": "Common",
           "variantName": null,
           "variantNameSource": null,
@@ -16600,67 +16600,19 @@
           "image": "images/KSS_26_Snorlax_281292.jpg"
         }
       ],
-      "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
-      ],
+      "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "non-holo": "not-applicable",
+        "holo": "not-applicable",
+        "reverse-holo": "not-applicable",
+        "mirror-holo": "not-applicable"
       },
-      "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
-      "printings": [
-        {
-          "finish": "non-holo",
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0179-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0179-P02"
-        }
-      ],
+      "applicabilityStatus": "not-applicable",
+      "availabilityStatus": "not-applicable",
+      "completenessStatus": "not-applicable",
+      "productMappingStatus": "not-applicable",
+      "patternStatus": "not-applicable",
+      "printings": [],
       "unresolved": []
     },
     {

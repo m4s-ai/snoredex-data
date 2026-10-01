@@ -317,7 +317,7 @@ All three databases point the same way, and all three are wrong:
 
 Six specimens were photographed and their card text read off — `Relaxo` / `Ronflex` / `Snorlax`, ability `Immunität` / `Vaccin` / `Immunità` / `Inmunidad` / `Imunidade`, all bearing `XY179`, Ken Sugimori and ©2016. Had the absence-argument been applied here as it was for the Asian promos, it would have produced four false contradictions.
 
-**Grade physical evidence explicitly, and by what the claim rests on.** `sourceType` distinguishes *photographed specimen* from *owner attestation*, and `providerId` must name the source the unit would fall over without — not the strongest source standing near it. **20 units rest on owner attestation alone**; the current `E6` output reports how many rest on a photographed specimen alone, each citing its `SPEC-nnnn` record. Check `E4` holds the owner-attestation count to the data, so correct that sentence here rather than letting it drift (it read "currently 0" for weeks while the real figure was 16, then 30). The specimen count is not asserted as a fixed figure here: `S14` requires a specimen-backed unit to cite its specimen, and `S13` requires `sourceRef` to hold a reference or nothing, never prose.
+**Grade physical evidence explicitly, and by what the claim rests on.** `sourceType` distinguishes *photographed specimen* from *owner attestation*, and `providerId` must name the source the unit would fall over without — not the strongest source standing near it. **21 units rest on owner attestation alone**; the current `E6` output reports how many rest on a photographed specimen alone, each citing its `SPEC-nnnn` record. Check `E4` holds the owner-attestation count to the data, so correct that sentence here rather than letting it drift (it read "currently 0" for weeks while the real figure was 16, then 30). The specimen count is not asserted as a fixed figure here: `S14` requires a specimen-backed unit to cite its specimen, and `S13` requires `sourceRef` to hold a reference or nothing, never prose.
 
 At this checkpoint, every card had at least one confirmed language. The then-25 open units were
 all *additional* language claims on cards that were otherwise evidenced.
@@ -977,9 +977,12 @@ or pokemontcg.io — never inferred.
 
 ### `KSS 26` — the worked example of the Cardmarket artefact
 
-Cardmarket advertises 17 languages. The expansion article positively names seven languages: EN,
-DE, FR, IT, ES, PT, and RU. Those seven are confirmed. The other ten raw claims remain recorded as
-contradictions, with final `not-printed` status coming only from collection-owner adjudication. Use
+Cardmarket advertises 17 languages. Six physical languages remain confirmed: EN, DE, FR, IT,
+PT, and RU. The former Spanish confirmation incorrectly treated a general language list and
+the digital SPEC-0132 render as physical-release evidence. WikiDex explicitly states that the
+Spanish expansion appeared only in Pokémon TCG Online; the owner accepted that correction on
+2026-10-01 (OA-20261001-U0482). The eleven raw contradictions remain recorded, with final
+`not-printed` status coming only from collection-owner adjudication. Use
 this card when explaining why a marketplace language filter needs independent evidence.
 
 ### Two structural limits on what is still open

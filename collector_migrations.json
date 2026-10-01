@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:098fc689af40095a5b887788a5090bdf542146bad78941a13b434d78462c6271",
+    "fromFingerprint": "sha256:9cf3831f9643fed84f39a1705c18e143981842054cd10066b6fe4b427d06b321",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
+    "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
+      "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -1356,12 +1356,10 @@
           "fromItemIds": [
             "item-0752f103-2d75-5295-b38a-878a78b24b4e"
           ],
-          "toItemIds": [
-            "item-0752f103-2d75-5295-b38a-878a78b24b4e"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-085cc903-cdff-5f64-bd30-7b51e16d1c47",
@@ -7757,12 +7755,10 @@
           "fromItemIds": [
             "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
           ],
-          "toItemIds": [
-            "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-a0f3da23-6181-5133-a9b9-d13e86f1c27a",
@@ -12396,7 +12392,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:4fbf962c99dcc7cebded29f6028e1ab4086e7f5c38fa04c3f947e9001b86f476",
+      "toFingerprint": "sha256:79ba7b9fc19fa10263d38c4f8b9466a3d8fd8ee67e6994aa7e410e1fce1afa29",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -12828,12 +12824,10 @@
           "fromItemIds": [
             "item-0752f103-2d75-5295-b38a-878a78b24b4e"
           ],
-          "toItemIds": [
-            "item-0752f103-2d75-5295-b38a-878a78b24b4e"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-085cc903-cdff-5f64-bd30-7b51e16d1c47",
@@ -19204,12 +19198,10 @@
           "fromItemIds": [
             "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
           ],
-          "toItemIds": [
-            "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "toItemIds": [],
+          "changeKind": "retired-1:0",
+          "automaticStateAction": "none",
+          "reconciliation": "retire-to-orphan"
         },
         {
           "fromItemId": "item-a0f3da23-6181-5133-a9b9-d13e86f1c27a",
@@ -25281,22 +25273,6 @@
       "fromItemId": "kss-26-russian-none-non-holo",
       "toItemIds": [
         "item-ae1e6cc2-03ea-557b-a677-970cbee300bc"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "kss-26-spanish-none-non-holo",
-      "toItemIds": [
-        "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "kss-26-spanish-none-reverse-holo-type-symbol-background",
-      "toItemIds": [
-        "item-0752f103-2d75-5295-b38a-878a78b24b4e"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -33945,20 +33921,6 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-ae1e6cc2-03ea-557b-a677-970cbee300bc"
-        ]
-      },
-      {
-        "legacyChecklistId": "kss-26-spanish-none-non-holo",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
-        ]
-      },
-      {
-        "legacyChecklistId": "kss-26-spanish-none-reverse-holo-type-symbol-background",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-0752f103-2d75-5295-b38a-878a78b24b4e"
         ]
       },
       {
@@ -43407,15 +43369,6 @@
         "reason": null
       },
       {
-        "cardReleaseId": "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-0752f103-2d75-5295-b38a-878a78b24b4e",
-          "item-a0d02573-fd0b-507b-a364-001a2a599f0a"
-        ],
-        "reason": null
-      },
-      {
         "cardReleaseId": "RELEASE:WEST:Spanish:LOR:143:Snorlax-Unfazed-Fat-Thumping-Snore",
         "disposition": "projected",
         "targetItemIds": [
@@ -47787,8 +47740,8 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 905,
-      "cardReleases": 634,
+      "legacyChecklistRows": 903,
+      "cardReleases": 633,
       "physicalPrintings": 811,
       "cardReleasesWithoutCollectorItem": 0
     }
