@@ -66,6 +66,27 @@ Stop a round when requested fields are supported, promising independent routes a
 or a specific image/clarification is needed. Record the next useful lead. Zero results and missing
 photos are search limitations, never evidence that a printing does not exist.
 
+## Search coverage before reporting remaining gaps
+
+Keep one row per current target and missing field, with attempted routes, inspected evidence,
+access blockers and the next useful lead. Reviewing supplied seller links is a link-intake batch,
+not coverage of every open card. Distinguish an unsearched route from a searched route with no
+usable evidence; neither proves absence.
+
+For a finish gap, inspect the matching localized product article's explanatory text as well as
+its exact card row. An explicit deck finish statement may support a named target when language,
+product, set symbol and full number match; do not transfer another language's finish or close an
+inventory from source silence. Preserve the source wording and its scope separately.
+
+Search native product/distribution aliases and broad multi-variant offers when titles omit card
+numbers. Search relevant regional marketplace domains too: an Indonesian card can be sold
+elsewhere. Verify the printed language, not the seller's country. Inspect relevant selectors and
+carousel images; record when access prevents that inspection. Compare retrieved image hashes
+with retained renders before reporting a new photograph or independent corroboration.
+
+When investigating a missed offer, separate demonstrated search-coverage gaps from unknown
+historical availability. A listing found today does not prove it was indexed during an earlier run.
+
 ## Card-search evidence decisions
 
 Match the visible card face: language/locality markers, set code, numerator **and denominator**,

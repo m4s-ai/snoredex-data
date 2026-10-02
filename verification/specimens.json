@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 605,
+  "count": 606,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12766,6 +12766,33 @@
         "basis": "The collection owner explicitly identifies the pictured sc1D F 132/164 card as Non-Holo; visual inspection establishes its exact Traditional Chinese card identity."
       },
       "listingUrl": "https://www.ebay.com/itm/377371294743"
+    },
+    {
+      "specimenId": "SPEC-0606",
+      "setCode": "AS1b",
+      "number": "112/150",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Shopee Indonesia seller photograph, visually inspected at original downloaded 450x450 resolution; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0606.png",
+      "photographSource": "https://down-id.img.susercontent.com/file/id-11134207-822wk-mo0qzw6395om9d",
+      "photographSha256": "sha256:b327ae7ebb7147edb6d51cd5d77ddd806cb0db8d3d372f45f37cba858daec565",
+      "observed": "Physical Indonesian Snorlax GX HP190, AS1b regulation A, 112/150 RR, Illus. 5ban Graphics. Visible Indonesian attacks Tumbang 80, Dengkuran Nyaring 180 and Bangun GX 210 establish the exact existing release. Multicolored foil reflections are visible along the left border and card face. The collection owner explicitly confirms Holo on 2026-10-02. Listing category and brand metadata are unrelated to the card and not adopted. No named foil pattern, physical ownership or complete finish inventory is asserted.",
+      "recordedAt": "2026-10-02",
+      "citedBy": [
+        "ID:AS1b:112/150:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "cardSize": "standard",
+        "basis": "The owner explicitly identifies Holo on this exact Indonesian AS1b 112/150 seller photograph; visible card text establishes identity."
+      },
+      "listingUrl": "https://shopee.co.id/Snorlax-GX-112-150-RR-(as1b)-TCG-Pokemon-Bahasa-Indonesia-2019-i.1343192572.45360222413"
     }
   ]
 }

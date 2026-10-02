@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-10-01",
+    "generated": "2026-10-02",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -36768,6 +36768,23 @@
         "materializedTargetId": "PHYSICAL:specimen:SPEC-0605",
         "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
         "provenanceTargetId": "PHYSICAL:specimen:SPEC-0605"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0606",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0606",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0606",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0606",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0606",
+        "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0606"
       }
     },
     {
@@ -104959,6 +104976,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0605",
         "specimenIds": [
           "SPEC-0605"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0606",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0606",
+        "cardReleaseId": "RELEASE:ID:Indonesian:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "basis": "The owner explicitly identifies Holo on this exact Indonesian AS1b 112/150 seller photograph; visible card text establishes identity.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0606",
+        "specimenIds": [
+          "SPEC-0606"
         ]
       }
     },
@@ -190163,6 +190204,16 @@
       }
     },
     {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0606",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0606",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
       "fromType": "card-release",
       "fromId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "relation": "belongs-to",
@@ -241232,6 +241283,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0606",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0606",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0606",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:ID:Indonesian:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "provenance": {}
     },
     {
@@ -303848,17 +303915,24 @@
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:specimen:SPEC-0605",
       "reason": "physical observation establishes standalone printing for RELEASE:TW:T-Chinese:sc1D F:132/164:Snorlax-Rolling-Tackle-Heavy-Impact"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0606",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0606",
+      "reason": "physical observation establishes standalone printing for RELEASE:ID:Indonesian:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
     }
   ],
   "summary": {
-    "entities": 8392,
-    "edges": 12451,
-    "migrationInputs": 2965,
+    "entities": 8394,
+    "edges": 12454,
+    "migrationInputs": 2966,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 311,
       "carried": 68,
-      "established-and-mapped": 1647,
+      "established-and-mapped": 1648,
       "linked-local-counterpart": 125,
       "mapped": 370,
       "needs-evidence": 125,
@@ -303866,9 +303940,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2125,
+    "candidateClaims": 2126,
     "cardReleases": 633,
-    "physicalPrintings": 830,
+    "physicalPrintings": 831,
     "setSourceRecords": 498,
     "setSourceDispositions": 498,
     "localizations": 16

@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-01",
-  "projectionVersion": "c8aac9249fdb9d1d1403b17131a9aca46bc412ccb277510d0524949db96a33f0",
+  "generated": "2026-10-02",
+  "projectionVersion": "c066157382abf1f6989399b79548285f586ec63d3a3958cf970fa0e00d93fdcb",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 830,
-    "sourceObservations": 3075
+    "physicalPrintings": 831,
+    "sourceObservations": 3076
   },
   "groups": [
     {
@@ -30658,13 +30658,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0606",
+              "cardReleaseId": "RELEASE:ID:Indonesian:AS1b:112/150:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "basis": "The owner explicitly identifies Holo on this exact Indonesian AS1b 112/150 seller photograph; visible card text establishes identity.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0606",
+              "specimenIds": [
+                "SPEC-0606"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "SnorlaxGX",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -30689,6 +30711,17 @@
               "originalHash": "b7f7f605a7e28876e430f0df82e223b14f34fb4e576792900f291d7b62b5a6e6",
               "previewSrc": "images/previews/SPEC-0162.png?v=f6be01e1a3590b49e836bbc44c5ce749a80c62c5174dd682dc52cda58564da8f",
               "thumbnailSrc": "images/thumbs/SPEC-0162.png?v=ff75a95bf7bebda4398aa86dfda2f8b64588f32f9511c0e42c5b531ee3437341"
+            },
+            {
+              "src": "verification/specimens/SPEC-0606.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0606",
+              "contentHash": "b327ae7ebb7147edb6d51cd5d77ddd806cb0db8d3d372f45f37cba858daec565",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b327ae7ebb7147edb6d51cd5d77ddd806cb0db8d3d372f45f37cba858daec565",
+              "previewSrc": "images/previews/SPEC-0606.png?v=09510fcd0f0925257e519dcd4f789fb295afb339df1e2a94a498bced51b5c25e",
+              "thumbnailSrc": "images/thumbs/SPEC-0606.png?v=25852f6c1b88a2a8946f2fdca637207e192e0c9494b3e18bd1c491ed186891c3"
             }
           ],
           "observations": [
@@ -30718,6 +30751,15 @@
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax GX card at carousel image 1/6, row 1, column 2 crop. The visible artwork, printed language, set identity AS1b and collector identity 112/150 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
               "contentHash": "2a7535cc59fe0f1dfd931fb718bad3d208287d5f21fba971c96e2191550f8bc3",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0606",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://shopee.co.id/Snorlax-GX-112-150-RR-(as1b)-TCG-Pokemon-Bahasa-Indonesia-2019-i.1343192572.45360222413",
+              "evidence": "Physical Indonesian Snorlax GX HP190, AS1b regulation A, 112/150 RR, Illus. 5ban Graphics. Visible Indonesian attacks Tumbang 80, Dengkuran Nyaring 180 and Bangun GX 210 establish the exact existing release. Multicolored foil reflections are visible along the left border and card face. The collection owner explicitly confirms Holo on 2026-10-02. Listing category and brand metadata are unrelated to the card and not adopted. No named foil pattern, physical ownership or complete finish inventory is asserted.",
+              "contentHash": "3c100f1ac2b3481a46cc4279d494c30e269607b97b4a11e57be16cd93d3334db",
+              "image": "verification/specimens/SPEC-0606.png"
             }
           ]
         }
