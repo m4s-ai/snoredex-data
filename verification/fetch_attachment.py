@@ -58,7 +58,7 @@ USAGE
     python verification/fetch_attachment.py --list
     python verification/fetch_attachment.py --issue 269 --manifest verification/evidence/issue-269.json
     python verification/fetch_attachment.py --manifest verification/evidence/owner-photos.json
-    python scripts/regen.py
+    python scripts/scoped_regen.py --lane physical-evidence
     python verification/fetch_attachment.py --evidence-check
     python verification/fetch_attachment.py --specimen SPEC-0001 --from ~/SPEC-0001.jpg \
         --attachment-url https://github.com/user-attachments/assets/<uuid>
@@ -66,6 +66,8 @@ USAGE
 
 Idempotent in the sense that matters: re-filing identical bytes for a specimen that already
 declares them is a no-op, and replacing a different photograph requires `--replace`.
+Accumulate related imports before the checkpoint; it includes --evidence-check. The complete
+regen.py gate belongs to package delivery under WORKFLOW-MAP.md's batch execution contract.
 
 Exit codes: 0 success or no-op, 1 usage or validation failure, 2 the source could not be reached
 (matching `verify_finish_sources.py` and `finishes.py` — the artifacts are not wrong, the upstream
@@ -665,7 +667,8 @@ def command_file(doc: dict, args: argparse.Namespace) -> int:
     print(f"set {specimen['specimenId']}.photograph = {filename}")
     print(f"set {specimen['specimenId']}.photographSource = {provenance}")
     print(f"set {specimen['specimenId']}.photographSha256 = {digest}")
-    print("next: python scripts/regen.py && python verification/fetch_attachment.py --evidence-check")
+    print("next checkpoint: python scripts/scoped_regen.py --lane physical-evidence; "
+          "batch delivery: python scripts/regen.py (once for the complete batch)")
     return 0
 
 
@@ -1020,8 +1023,8 @@ def command_issue(doc: dict, args: argparse.Namespace) -> int:
     print(f"imported {len(records)} specimen(s) from {source_description}")
     result = command_evidence_check(check_projection=False)
     if result == 0:
-        print("next: python scripts/regen.py && "
-              "python verification/fetch_attachment.py --evidence-check")
+        print("next checkpoint: python scripts/scoped_regen.py --lane physical-evidence; "
+              "batch delivery: python scripts/regen.py (once for the complete batch)")
     return result
 
 

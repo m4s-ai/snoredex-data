@@ -381,9 +381,12 @@ Commands work from any current directory because scripts resolve the repository 
 locations. The examples below assume the repository root only for readability.
 
 ```console
-python scripts/regen.py
-python verification/verify_finish_sources.py
+python scripts/scoped_regen.py --lane correction
 ```
+
+Use this checkpoint after accumulated curated finish changes. The
+[batch execution contract](../WORKFLOW-MAP.md#batch-execution-contract) puts the full regen at
+delivery; live finish-source verification belongs to the explicit live/release boundary.
 
 For a curated case:
 

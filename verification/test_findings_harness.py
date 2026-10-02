@@ -73,6 +73,23 @@ def main() -> int:
     ):
         rf.collect()
     expect("collect() visits every section in order", called, families)
+    called.clear()
+    with mock.patch.multiple(
+        rf, **{name: mock.Mock(side_effect=lambda state, name=name: fixture_section(state, name))
+               for name in families}
+    ):
+        rf.collect("publication")
+    expect("post-push scope runs publication/history only", called, ["_collect_g8"])
+    # A partial verdict must still fail on P6/P7; CLI defaults must retain the full gate.
+    from contextlib import redirect_stdout
+    import io
+    for argv, scope in ((["review_findings.py"], "full"),
+                        (["review_findings.py", "--scope", "publication"], "publication")):
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(rf, "suite", Suite()), \
+                mock.patch.object(rf, "collect") as collect, redirect_stdout(io.StringIO()):
+            collect.side_effect = lambda scope: rf.check("P6", "history failure", "FAIL", False, "fixture")
+            expect(f"{scope} propagates history failure", rf.main(), 1)
+            collect.assert_called_once_with(scope)
     source = (Path(__file__).resolve().parent / "review_findings.py").read_text(encoding="utf-8")
     for ident in ("E3", "E4", "R7", "S15", "X3"):
         expect(f"{ident} is declared", f'"{ident}"' in source, True)

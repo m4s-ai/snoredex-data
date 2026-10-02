@@ -17,12 +17,12 @@ Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.m
 
 1. Confirm the complete requested scope and existing session authorization. For work spanning several targets, start the completion record below. Use [issue triage](../snoredex-issue-triage/SKILL.md) when the task is choosing or reconciling issues. Do not infer permission to merge, publish or expand the scope; carry out already-authorized issue maintenance without asking again.
 2. Fetch `origin` and start from current `origin/main`. Reuse an existing branch only when it belongs exclusively to this issue and its work is understood; otherwise create one isolated issue branch.
-3. Run `python scripts/regen.py --check` before editing. Preserve and report any pre-existing failure instead of folding it into the issue.
+3. Establish or reuse the baseline under the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract). Preserve pre-existing failures; do not repeat a full baseline for each import or continuation message.
 4. Trace the issue from canonical input through graph edges, projections, consumers, and gates using `WORKFLOW-MAP.md`. Identify generated and archived files that must not be edited.
 5. Implement the smallest complete change at the canonical owner. Add the narrowest meaningful regression check when behavior changes.
 6. Use `python scripts/scoped_regen.py --lane <lane>` for fast feedback when a manifest lane matches. Treat its Run-ID and skipped checks as partial evidence only.
 7. Reconcile the completion record before the final gate. For canonical-input or generator changes run `python scripts/regen.py`; for other changes use `python scripts/regen.py --check`. Inspect the complete diff and preserve unrelated user changes. L3 remains required before merge.
-8. Commit and push only when authorized. After any commit and push, rerun `python verification/review_findings.py` so the history-sensitive checks see the actual commit.
+8. Commit and push only when authorized. After the batch's commit and push, run `python verification/review_findings.py --scope publication` so history-sensitive checks see the actual commit without repeating unrelated checks.
 9. Create or update the requested pull request. Rewrite its title and description around the final scope, link the issue, and report canonical inputs, graph impact and verification accurately. For authorized issue maintenance, synchronize the title, checkboxes and related references from the same completion record; close only when the issue's criteria are met.
 
 Finish with the issue state, branch or PR, files changed, verification results, known pre-existing failures, and any required owner or source input. Merge only on explicit instruction.
