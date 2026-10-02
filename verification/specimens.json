@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 598,
+  "count": 605,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -768,12 +768,17 @@
       "inspectedFrom": "owner photograph",
       "photograph": "SPEC-0039.png",
       "photographSource": "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e300898c854f4dba71eaff7ec5a4ac192bf7be85/verification/specimens/SPEC-0039.png",
-      "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner and supplied through issue #84: the card reads 伊布&卡比獸GX, carries the AS5a set mark and collector number 203/184, and is the SR local counterpart of legacy U0634.",
+      "photographSha256": "sha256:ae74abf7d7a9d3f45777e75232277a5f3c99ecb2c67af422415e1f4d582ea5e7",
+      "observed": "Traditional Chinese Eevee & Snorlax-GX photographed by the owner and supplied through issue #84: the card reads 伊布&卡比獸GX, carries the AS5a set mark and collector number 203/184, and is the SR local counterpart of legacy U0634. Reinspection on 2026-10-01 positively shows multicoloured foil reflections across the card face, including the background, text area and border: Holo. The owner explicitly identified the retained photograph as clearly Holo. No named foil pattern or exhaustive finish inventory is asserted.",
       "recordedAt": "2026-08-21",
       "citedBy": [
         "TW:AS5a:203/184:base"
       ],
-      "photographSha256": "sha256:ae74abf7d7a9d3f45777e75232277a5f3c99ecb2c67af422415e1f4d582ea5e7",
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "standard",
+        "basis": "Reinspection on 2026-10-01 positively shows multicoloured foil reflections across the card face, including the background, text area and border: Holo."
+      },
       "listingUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89"
     },
     {
@@ -2976,7 +2981,7 @@
       "photograph": "SPEC-0132.png",
       "photographSource": "https://images.wikidexcdn.net/mwuploads/wikidex/8/88/latest/20171026051045/Snorlax_%28Bienvenidos_a_Kalos_TCG%29.png",
       "photographSha256": "sha256:03a8eae0d5f43283333d7336323d566cbb5520ed05de100fa8f47a85fef7eb94",
-      "observed": "Spanish database scan of Kalos Starter Set Snorlax 26/39. Pokémon Básico, Golpe Roca, Fuerza and 26/39 establish the localized card identity. No physical finish is inferred from this database render.",
+      "observed": "Spanish digital card render of Kalos Starter Set Snorlax 26/39, released in Pokemon TCG Online only. Pokemon Basico, Golpe Roca, Fuerza and 26/39 identify the localized digital card. WikiDex explicitly excludes a Spanish physical release; the owner adjudicated U0482 not printed on 2026-10-01. This image establishes no physical finish.",
       "recordedAt": "2026-08-27",
       "citedBy": [
         "U0482"
@@ -6234,12 +6239,20 @@
       "photograph": "SPEC-0294.png",
       "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00005969.png",
       "photographSha256": "sha256:5cd0c0cb4045bd07c2a03e398f09c77c37f239bc948db259e147f3f99b2ad4e9",
-      "observed": "Complete retained image for Traditional Chinese Snorlax SI F 342/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "Complete retained image for Traditional Chinese Snorlax SI F 342/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:SI F:342/414:base",
         "U0658"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies SI F 342/414 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished."
+      },
       "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5969/"
     },
     {
@@ -6442,11 +6455,19 @@
       "photograph": "SPEC-0305.png",
       "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00011337.png",
       "photographSha256": "sha256:e68429a68757fc06a5abc4fc9af9fbb82c2c891cf6a0e161a15c55509a5b1565",
-      "observed": "Complete retained image for Traditional Chinese Snorlax SVI F 046/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "Complete retained publisher image for Traditional Chinese Snorlax SVI F 046/066 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The collection owner explicitly identifies this printing as Non-Holo on 2026-10-01; finish rests on that separate owner determination, not an inference from the publisher render.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:SVI F:046/066:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner explicitly identifies SVI F 046/066 as Non-Holo on 2026-10-01. SPEC-0305 retains the exact publisher reference image; physical custody remains unestablished."
+      },
       "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/11337/"
     },
     {
@@ -6460,12 +6481,20 @@
       "photograph": "SPEC-0306.png",
       "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
       "photographSha256": "sha256:847f95bd38d5793ed9c50c52f7a7cad56503008a2f6b496a6135eb50ad4a0484",
-      "observed": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; physical custody and finish inventory completeness remain unestablished.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:SVM F:094/175:base",
         "U0403"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies SVM F 094/175 as Holo on 2026-10-02. The retained publisher reference image establishes exact identity; physical custody remains unestablished."
+      },
       "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12164/"
     },
     {
@@ -6668,12 +6697,20 @@
       "photograph": "SPEC-0317.png",
       "photographSource": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
       "photographSha256": "sha256:1e37e72e3141bc81355848148595a4405ed6ddcef76730446b0a7575ab59de35",
-      "observed": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
+      "observed": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
       "recordedAt": "2026-08-28",
       "citedBy": [
         "TW:M3 F:062/080:base",
         "U0258"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies M3 F 062/080 as Non-Holo on 2026-10-02. The retained publisher reference image supports exact identity; ownership is not inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/tw/card-search/detail/18039/"
     },
     {
@@ -10289,11 +10326,19 @@
       "photograph": "SPEC-0498.png",
       "photographSource": "https://rocketcoll.com/cdn/shop/files/377577.png?v=1767884934",
       "photographSha256": "sha256:395c53f9dc20c74c2e580ffaa7375cfff39282a4fdcbd87dd50f5015ad6f837d",
-      "observed": "Visible Traditional Chinese Snorlax, HP130, SCA F, regulation D, 084/135, Gormandize ability and Body Slam 100, Illus. Atsuko Nishida. Retailer reference image supports exact local identity. Technical finish and physical custody are not asserted.",
+      "observed": "Visible Traditional Chinese Snorlax, HP130, SCA F, regulation D, 084/135, Gormandize ability and Body Slam 100, Illus. Atsuko Nishida. Retailer reference image supports exact local identity. The original image review asserted neither technical finish nor physical custody. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:SCA F:084/135:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies SCA F 084/135 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished."
+      },
       "listingUrl": "https://rocketcoll.com/products/sca-084-135-%E5%8D%A1%E6%AF%94%E7%8D%B8"
     },
     {
@@ -10307,11 +10352,19 @@
       "photograph": "SPEC-0499.png",
       "photographSource": "https://rocketcoll.com/cdn/shop/files/381827.png?v=1767887802",
       "photographSha256": "sha256:cee1578abcc7526d670fc4d65e6e31fc2f7407e6da43738a637c07d161b79212",
-      "observed": "Visible Traditional Chinese Snorlax, HP160, SI F, regulation E, 341/414, Heavy Impact 80, Illus. Oswaldo KATO. Retailer title explicitly says 鏡面閃版 (mirror version); the reference render shows a pale patterned text field. Retain the title as a retailer finish lead, not a physically inspected finish assertion from this static render. Exact local identity is supported; physical custody and technical finish remain unasserted.",
+      "observed": "Visible Traditional Chinese Snorlax, HP160, SI F, regulation E, 341/414, Heavy Impact 80, Illus. Oswaldo KATO. Retailer title explicitly says 鏡面閃版 (mirror version); the reference render shows a pale patterned text field. Retain the title as a retailer finish lead, not a physically inspected finish assertion from this static render. Exact local identity is supported; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:SI F:341/414:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies SI F 341/414 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished."
+      },
       "listingUrl": "https://rocketcoll.com/products/%E9%8F%A1%E9%9D%A2%E9%96%83%E7%89%88sif-341-414"
     },
     {
@@ -10325,11 +10378,19 @@
       "photograph": "SPEC-0500.png",
       "photographSource": "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965",
       "photographSha256": "sha256:b15b91d291e38e0fb4f4a44153b1f4fa3720705e73c906b01acb6983cf07a789",
-      "observed": "Visible Traditional Chinese Snorlax, HP150, sv4a F, regulation G, 145/190, ability 貪嘴, attack 養肥壓制 130, Illus. HYOGONOSUKE. Exact retailer reference image supports local identity; physical custody and technical finish are not asserted.",
+      "observed": "Visible Traditional Chinese Snorlax, HP150, sv4a F, regulation G, 145/190, ability 貪嘴, attack 養肥壓制 130, Illus. HYOGONOSUKE. Retained retailer reference image establishes exact card identity, not physical custody. On 2026-10-01 the collection owner explicitly confirms this card as Non-Holo. Finish rests on that separate owner determination, not an inferred absence of reflections in a reference image. No named foil pattern or exhaustive finish inventory is asserted.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:sv4a F:145/190:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner explicitly identifies sv4a F 145/190 as clearly Non-Holo on 2026-10-01. SPEC-0500 retains the exact retailer card reference image; physical custody remains unestablished."
+      },
       "listingUrl": "https://rocketcoll.com/products/sv4af-145-190-%E5%8D%A1%E6%AF%94%E7%8D%B8"
     },
     {
@@ -10343,11 +10404,19 @@
       "photograph": "SPEC-0501.jpg",
       "photographSource": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
       "photographSha256": "sha256:e52f2758edc726e2944a9182d19a8243ecb4bfcd50334df31703873313c3e1a5",
-      "observed": "Seller photograph visibly shows Traditional Chinese 卡比獸, HP150, PROMO, 215/SV-P, regulation H, Illus. Ounishi, and LIGHT CONNECT ALL / 2025桃園主辦台灣燈會紀念 event marking in artwork. Card is pictured inside sealed transparent packaging. Exact identity and visible event marking are supported; technical finish is not asserted because packaging and lighting confound surface inspection.",
+      "observed": "Seller photograph visibly shows Traditional Chinese 卡比獸, HP150, PROMO, 215/SV-P, regulation H, Illus. Ounishi, and LIGHT CONNECT ALL / 2025桃園主辦台灣燈會紀念 event marking in artwork. Card is pictured inside sealed transparent packaging. Exact identity and visible event marking are supported; the original image review did not assert technical finish because packaging and lighting confound surface inspection. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:SV-P:215:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies SV-P 215 as Non-Holo on 2026-10-02. The retained image supports exact identity; ownership is not inferred."
+      },
       "listingUrl": "https://www.ebay.de/itm/168013799605"
     },
     {
@@ -10361,11 +10430,19 @@
       "photograph": "SPEC-0502.png",
       "photographSource": "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600",
       "photographSha256": "sha256:f5f9ed1b5c368e585c645099e575e43414ffba4af580e9b8b0f766642e4dfd53",
-      "observed": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; physical custody and technical finish are not asserted.",
+      "observed": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. No finish inventory closure is asserted.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:MC F:567/742:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies MC F 567/742 as Non-Holo on 2026-10-02. The retained reference image supports exact identity; ownership is not inferred."
+      },
       "listingUrl": "https://beehivetcg.com/products/mcf-567-742-%E5%8D%A1%E6%AF%94%E7%8D%B8"
     },
     {
@@ -10397,11 +10474,19 @@
       "photograph": "SPEC-0504.png",
       "photographSource": "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
       "photographSha256": "sha256:9add5a786dbccd97eccb42237e0fb03e4e7aa58c952614f38447438fe0f390ee",
-      "observed": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; physical custody and technical finish are not asserted.",
+      "observed": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
       "recordedAt": "2026-09-09",
       "citedBy": [
         "TW:MC F:569/742:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies MC F 569/742 as Non-Holo on 2026-10-02. The retained reference image supports exact identity; ownership is not inferred."
+      },
       "listingUrl": "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8"
     },
     {
@@ -10449,11 +10534,19 @@
       "photograph": "SPEC-0507.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/en-us/2M6P_EN_119-2x.png",
       "photographSha256": "sha256:39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd",
-      "observed": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0507 identify Snorlax, 30C EN 119/128, HP 160, Good Sleep and Collapse 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C EN:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/en-us/galleries/30th-celebration/"
     },
     {
@@ -10467,11 +10560,19 @@
       "photograph": "SPEC-0508.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/de-de/2M6P_DE_119-2x.png",
       "photographSha256": "sha256:71e112bcee942776cbbeb16fe675b10444d5d46127512c60e01dbb63175bba5e",
-      "observed": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0508 identify Relaxo, 30C DE 119/128, HP 160, Guter Schlaf and Kollaps 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C DE:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/de-de/galleries/30th-celebration/"
     },
     {
@@ -10485,11 +10586,19 @@
       "photograph": "SPEC-0509.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/fr-fr/2M6P_FR_119-2x.png",
       "photographSha256": "sha256:2f8637bef19f5c155423ea1f8bc05fbc6ecb071a447b9bc72cd493da00a72139",
-      "observed": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0509 identify Ronflex, 30C FR 119/128, HP 160, Doux Dodo and Effondrement 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C FR:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/fr-fr/galleries/30th-celebration/"
     },
     {
@@ -10503,11 +10612,19 @@
       "photograph": "SPEC-0510.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/it-it/2M6P_IT_119-2x.png",
       "photographSha256": "sha256:7129c73403f0c5c9882da7e27ef170672b40529c06cf87f6bd48a1c244e59aff",
-      "observed": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0510 identify Snorlax, 30C IT 119/128, HP 160, Sogni d’Oro and Collassare 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C IT:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/it-it/galleries/30th-celebration/"
     },
     {
@@ -10521,11 +10638,19 @@
       "photograph": "SPEC-0511.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-es/2M6P_ES_119-2x.png",
       "photographSha256": "sha256:b2600ec666d0c8e8bdbe3e1d23ce808c7f96edf2a8880e3b746e0fbabd471507",
-      "observed": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0511 identify Snorlax, 30C ES 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C ES:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/es-es/galleries/30th-celebration/"
     },
     {
@@ -10539,11 +10664,19 @@
       "photograph": "SPEC-0512.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/es-mx/2M6P_LA_119-2x.png",
       "photographSha256": "sha256:f916055bd99b61ecde44e50129250183e65e1eca729144112b2b902ea5ffee72",
-      "observed": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0512 identify Snorlax, 30C LA 119/128, HP 160, Sueño de los Dormilones and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "LATAM:30C LA:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/es-mx/galleries/30th-celebration/"
     },
     {
@@ -10557,11 +10690,19 @@
       "photograph": "SPEC-0513.png",
       "photographSource": "https://dz3we2x72f7ol.cloudfront.net/expansions/30th-celebration/pt-br/2M6P_PTBR_119-2x.png",
       "photographSha256": "sha256:edbe6ba6eded294ddd655eb14a8d646b223c05e8ed723a6c96a6fab6b99c8c56",
-      "observed": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0513 identify Snorlax, 30C PT 119/128, HP 160, Soninho Bom and Colapso 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "WEST:30C PT:119/128:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://tcg.pokemon.com/pt-br/galleries/30th-celebration/"
     },
     {
@@ -10600,11 +10741,19 @@
       "photograph": "SPEC-0515.png",
       "photographSource": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/images/locale/tw/cards/m6a_095gkwstb2j.png",
       "photographSha256": "sha256:5e9e391d9ff0c3c91208c8a287f9a9479a06640827e708154930b88fadae0e59",
-      "observed": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10.",
+      "observed": "Official localized publisher gallery and retained SPEC-0515 identify 卡比獸, M6a F 095/103, HP 160, 好眠 and 倒下 130, Aya Kusube, regulation J and the 30th anniversary logo. Local product page announces 2026-09-16. This is a pre-release publisher render, not an owner-held card. The shared printed ability, attack, HP and illustration support the reviewed Good Sleep / Collapse work mapping. No additional finish, distribution or locality is inferred. Inspected 2026-09-10. Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish. See verification/evidence/30th-owner-20261001/owner-determination.json.",
       "recordedAt": "2026-09-10",
       "citedBy": [
         "TW:M6a F:095/103:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Collection-owner determination 2026-10-01: Common and Holo for this exact 30th Celebration counterpart. Initial instruction: übernimm für 30c es unid 30c LA die gleichen Angaben wie für english was rarity und finish angeht generell für alle westlichen sprachen und für alle asiatischen sprachen übernehme das japanisch wenn noch offen. Western clarification: auch Common und Holo. Publisher render supports identity; owner attestation supplies finish.",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01"
+      },
       "listingUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a/"
     },
     {
@@ -11935,11 +12084,19 @@
       "photograph": "SPEC-0578.png",
       "photographSource": "https://down-tw.img.susercontent.com/file/tw-11134207-820l6-mqeo52bwoikt0c@resize_w450_nl.webp",
       "photographSha256": "sha256:5cf1309e6510ae5b2f5a06e337ea7074eae40f3940591eb02d6bc687d0caa249",
-      "observed": "Digital depiction of Traditional Chinese Snorlax HP150, svQP F H 012/023, Oswaldo KATO, 扣殺抽出 20 and 百萬噸重拳 100. The 450-pixel derivative supports local identity only; no physical finish is established. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Digital depiction of Traditional Chinese Snorlax HP150, svQP F H 012/023, Oswaldo KATO, 扣殺抽出 20 and 百萬噸重拳 100. The 450-pixel derivative supports local identity only; the image alone establishes no physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "TW:svQP F:012/023:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-02",
+        "basis": "Collection owner explicitly identifies svQP F 012/023 as Non-Holo on 2026-10-02. The retained image supports exact identity; ownership is not inferred."
+      },
       "listingUrl": "https://shopee.tw/product/27756288/55863618270"
     },
     {
@@ -12431,6 +12588,184 @@
         "basis": "Visible colored foil sheen on the retained exact Thai card. Owner statement: shows holo shine for as1b."
       },
       "listingUrl": "https://www.ebay.de/itm/128015559167"
+    },
+    {
+      "specimenId": "SPEC-0599",
+      "setCode": "XYPR",
+      "number": "179",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Cardmarket marketplace seller photograph (article 1388626109; user-supplied image copy)",
+      "photograph": "SPEC-0599.png",
+      "photographSource": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+      "photographSha256": "sha256:fc36a8cca9f6e8125b5111572d848588d4114e1aaa6277bbb8de649b4f00674b",
+      "observed": "Photograph of a physical Spanish XY Black Star Promo Snorlax XY179. The Spanish card text, XY179 number and black-star promo symbol establish identity. Multicolored circles and star-like foil across the artwork establish a Cosmos Holo finish.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "U0229"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "foilPattern": "cosmos",
+        "markings": "black-star promo symbol",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The retained seller photograph shows multicolored circles and star-like foil reflections across the exact Spanish XY179 card face, establishing a Cosmos Holo finish."
+      },
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Black-Star-Promos/Snorlax-XYPR179"
+    },
+    {
+      "specimenId": "SPEC-0600",
+      "setCode": "30thC",
+      "number": "095/103",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Retained owner-supplied image; original holder and marketplace listing unknown",
+      "photograph": "SPEC-0600.png",
+      "photographSource": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+      "photographSha256": "sha256:e6355fe3e8d3e172bd3d9183b46138dfd1ed0167f9a4771bfc9fa272203e096d",
+      "observed": "Simplified Chinese 卡比兽, HP160, 安眠, attack130, Illus. Aya Kusube, J, printed 30thC 095/103 C; visible holo on physical card; yellow Pikachu 30th anniversary logo",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "CN:30thC:095/103:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "standard",
+        "markings": "yellow Pikachu 30th anniversary logo",
+        "basis": "Holographic reflection is visible on this photographed physical card. Yellow Pikachu 30th anniversary logo is printed on the card face. No specific foil-pattern taxonomy is assigned.",
+        "markingRole": "print-identity"
+      }
+    },
+    {
+      "specimenId": "SPEC-0601",
+      "setCode": "AS5a",
+      "number": "204/184",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied image of a sleeved physical card; KIWI watermark; original listing not supplied; visually inspected, local Tesseract OCR unavailable",
+      "photograph": "SPEC-0601.png",
+      "photographSource": "user-supplied:codex-clipboard-754be191-96b0-48b0-9567-1db2081cbfc0.png",
+      "photographSha256": "sha256:0a2dfa65d03069bbc435e86b652fdfe5cbe403cd7e1cd8d606d9eecffddcdba7",
+      "observed": "Traditional Chinese Eevee & Snorlax GX, 伊布&卡比獸GX, HP270, AS5a C 204/184 SR, Illus. Tomokazu Komiya, copyright 2020. The supplied image shows the card in a transparent sleeve and a KIWI watermark. The printed collector number is 204/184, without an a suffix. The collection owner identifies the photographed card as Holo, recognizable at its border. Physical custody and the original external image/listing URL are not established. No named foil pattern or exhaustive finish inventory is asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:AS5a:204/184:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "cardSize": "standard",
+        "basis": "The collection owner identifies the photographed card as Holo, recognizable at its border."
+      }
+    },
+    {
+      "specimenId": "SPEC-0602",
+      "setCode": "sc1a F",
+      "number": "127/154",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied photograph of a sleeved physical card; visually inspected; local Tesseract OCR unavailable; original listing URL not supplied",
+      "photograph": "SPEC-0602.png",
+      "photographSource": "user-supplied:codex-clipboard-8a0d04e1-6412-4bb4-b871-4b608c829ecb.png",
+      "photographSha256": "sha256:aadd95de81ebb681a932b3890e0a3961285a5a61bc152133fef6ec191d68ecfd",
+      "observed": "Traditional Chinese 卡比獸, HP150, sc1a F, regulation D, 127/154 U, Illus. Eri Yamaki, copyright 2020. Printed attacks 呼喚 and 倒下 120 match the established card identity. The photographed card is in a green sleeve beside a seller label W11111; neither label nor sleeve establishes custody or distribution. Collection owner identifies this pictured copy as Non-Holo. No named foil pattern, other finish or complete finish inventory is asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1a F:127/154:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "cardSize": "standard",
+        "basis": "The collection owner explicitly identifies the photographed SC1a F 127/154 card as Non-Holo. Image inspection establishes the exact Traditional Chinese card identity."
+      }
+    },
+    {
+      "specimenId": "SPEC-0603",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Physical card photographed in a rigid holder, held in a hand; original listing URL not supplied; visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0603.png",
+      "photographSource": "user-supplied:codex-clipboard-d9984f30-4854-4ff6-918e-124701ca5e5b.png",
+      "photographSha256": "sha256:147555a1537a40bb3d583348c9e302e8d9246d9f9891d55e11db14eb78e5319a",
+      "observed": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Physical card photographed in a rigid holder, held in a hand. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment."
+      }
+    },
+    {
+      "specimenId": "SPEC-0604",
+      "setCode": "sc1b F",
+      "number": "120/153",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Freestanding card-face depiction with depicted holographic highlights; physical photography versus digital rendering is not established; original listing URL not supplied; visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0604.png",
+      "photographSource": "user-supplied:codex-clipboard-299a0871-70d8-4b82-ad0e-3045f248eb1e.png",
+      "photographSha256": "sha256:7d690657d4b166bb6db0ff01e290e19a25a3508852c37c02dcedb0c6e0b261b6",
+      "observed": "Traditional Chinese 卡比獸VMAX, HP340, sc1b F, regulation D, 120/153 RRR, attack 超極巨自由墜落 60+, copyright 2020. Freestanding card-face depiction with depicted holographic highlights; physical photography versus digital rendering is not established. The collection owner explicitly identifies this image as showing the Holo printing. Finish is attributed to that owner determination; image origin, physical custody, a named foil pattern, a same-card relationship and finish-list completeness are not asserted.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1b F:120/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "Collection owner states sc1b F 120/153 is Holo on both supplied images. Exact Traditional Chinese identity is visually established; the second depiction alone is not proof of a physical foil treatment."
+      }
+    },
+    {
+      "specimenId": "SPEC-0605",
+      "setCode": "sc1D F",
+      "number": "132/164",
+      "variant": "base",
+      "language": "T-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "User-supplied seller card photograph attributed by the collection owner to eBay item 377371294743; visual inspection; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0605.png",
+      "photographSource": "user-supplied:codex-clipboard-fd2279ca-68c8-4372-a65b-c2c28d414b8c.png",
+      "photographSha256": "sha256:142fa38c308b0d33c6f82e47822b85759e1a303ac19db7cb20dc0c0534cd5abd",
+      "observed": "Traditional Chinese 卡比獸, HP150, sc1D F, regulation D, 132/164, Illus. chibi, copyright 2020. Printed attacks 滾動衝撞 80 and 重磅衝擊 130 establish the exact known release. The collection owner identifies the pictured card as Non-Holo and supplies the eBay listing URL. The listing itself could not be fetched in this session; the image-to-listing association rests on the user-supplied provenance. No physical ownership, rarity symbol, named foil pattern or complete finish inventory is inferred.",
+      "recordedAt": "2026-10-01",
+      "citedBy": [
+        "TW:sc1D F:132/164:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-01",
+        "basis": "The collection owner explicitly identifies the pictured sc1D F 132/164 card as Non-Holo; visual inspection establishes its exact Traditional Chinese card identity."
+      },
+      "listingUrl": "https://www.ebay.com/itm/377371294743"
     }
   ]
 }

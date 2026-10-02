@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-09-29",
+  "generated": "2026-10-02",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1656,
-   "uniqueUrls": 1648,
+   "evidenceRecords": 1659,
+   "uniqueUrls": 1651,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6498
+   "claimsAttributed": 6584
   }
  },
  "providers": [
@@ -119,7 +119,7 @@
     "asia.pokemon-card.com"
    ],
    "uniqueSources": 204,
-   "claimsSupported": 736
+   "claimsSupported": 738
   },
   {
    "providerId": "pokemon-card-korea",
@@ -218,7 +218,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 90,
-   "claimsSupported": 693
+   "claimsSupported": 691
   },
   {
    "providerId": "tcgcsv",
@@ -580,7 +580,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 348,
-   "claimsSupported": 959
+   "claimsSupported": 957
   },
   {
    "providerId": "cardmarket-product-image",
@@ -705,7 +705,7 @@
     "rocketcoll.com"
    ],
    "uniqueSources": 43,
-   "claimsSupported": 131
+   "claimsSupported": 133
   },
   {
    "providerId": "internal-derivation",
@@ -746,7 +746,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 270
+   "claimsSupported": 335
   },
   {
    "providerId": "inspected-specimen",
@@ -767,8 +767,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
-   "uniqueSources": 67,
-   "claimsSupported": 779
+   "uniqueSources": 68,
+   "claimsSupported": 793
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -789,8 +789,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 8,
-   "claimsSupported": 38
+   "uniqueSources": 9,
+   "claimsSupported": 43
   },
   {
    "providerId": "seller-listing-photo",
@@ -813,8 +813,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 153,
-   "claimsSupported": 624
+   "uniqueSources": 154,
+   "claimsSupported": 626
   }
  ],
  "evidence": [
@@ -1952,7 +1952,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 171,
+   "stableIdCount": 170,
    "stableIds": [
     "F0012-P02",
     "F0013-P02",
@@ -2032,7 +2032,6 @@
     "F0176-P02",
     "F0177-P02",
     "F0178-P02",
-    "F0179-P02",
     "F0180-P02",
     "F0192-P02",
     "F0196-P02",
@@ -2127,7 +2126,7 @@
     "override:holofoil-patterns"
    ],
    "retrievedAt": null,
-   "usageCount": 171
+   "usageCount": 170
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Hungry_Snorlax_(Nintendo_64_promo)",
@@ -2241,12 +2240,11 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 14,
+   "stableIdCount": 13,
    "stableIds": [
     "HXY",
     "KR:FXY:026/036:base",
     "SET-SRC-BP-DATE-04918A893A9C",
-    "U0482",
     "U0484",
     "U0485",
     "U0488",
@@ -2259,7 +2257,7 @@
     "U0495"
    ],
    "retrievedAt": "2026-08-10",
-   "usageCount": 14
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
@@ -10099,7 +10097,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 14,
+   "stableIdCount": 12,
    "stableIds": [
     "F0175-P01",
     "F0175-P02",
@@ -10109,15 +10107,13 @@
     "F0177-P02",
     "F0178-P01",
     "F0178-P02",
-    "F0179-P01",
-    "F0179-P02",
     "F0180-P01",
     "F0180-P02",
     "F0183-P01",
     "KSS 26 base"
    ],
    "retrievedAt": null,
-   "usageCount": 14
+   "usageCount": 12
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
@@ -10165,6 +10161,26 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0635-P01",
+    "SPEC-0599",
+    "U0229"
+   ],
+   "retrievedAt": "2026-10-01",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
@@ -11918,7 +11934,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 240,
+   "stableIdCount": 247,
    "stableIds": [
     "F0002-P01",
     "F0028-P01",
@@ -12078,9 +12094,16 @@
     "SPEC-0591",
     "SPEC-0592",
     "SPEC-0593",
+    "SPEC-0601",
+    "SPEC-0602",
+    "SPEC-0603",
+    "SPEC-0604",
+    "TW:AS5a:204/184:base",
     "TW:SM-P:053:base",
     "TW:s5a F:093/070:base",
     "TW:sc1D F:133/164:base",
+    "TW:sc1a F:127/154:base",
+    "TW:sc1b F:120/153:base",
     "U0100",
     "U0110",
     "U0116",
@@ -12161,8 +12184,8 @@
     "U0775",
     "U0780"
    ],
-   "retrievedAt": "2026-09-29",
-   "usageCount": 403
+   "retrievedAt": "2026-10-01",
+   "usageCount": 411
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -12980,6 +13003,25 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected card photograph; external origin unknown"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CN:30thC:095/103:base",
+    "SPEC-0600"
+   ],
+   "retrievedAt": "2026-10-01",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://images.pikaqian.com/cs4dac/fa648ddc-e3fa-40cf-9c5f-446d70f22568.webp",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -13028,6 +13070,7 @@
     "Owner-supplied physical card photograph"
    ],
    "dimensions": [
+    "finish",
     "identity"
    ],
    "stableIdCount": 2,
@@ -13036,7 +13079,7 @@
     "TW:AS5a:203/184:base"
    ],
    "retrievedAt": "2026-08-21",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://raw.githubusercontent.com/m4s-ai/snoredex-data/e8fdc2d8cdf3017b1f4ff6436546dcc63930e378/verification/specimens/SPEC-0038.png",
@@ -13715,8 +13758,9 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 244,
+   "stableIdCount": 300,
    "stableIds": [
+    "CN:30thC:095/103:base",
     "CN:CS2aC:086/115:base",
     "F0002-P01",
     "F0009-P01",
@@ -13760,7 +13804,10 @@
     "F0173-P01",
     "F0174-P01",
     "F0174-P02",
+    "F0215-P01",
+    "F0218-P01",
     "F0221-P01",
+    "F0224-P01",
     "F0289-P02",
     "F0301-P01",
     "F0328-P02",
@@ -13774,6 +13821,7 @@
     "F0456-P01",
     "F0456-P02",
     "F0456-P03",
+    "F0504-P01",
     "F0506-P01",
     "F0520-P01",
     "F0520-P02",
@@ -13826,6 +13874,7 @@
     "ID:MA6 I:121/130:base",
     "ID:s10a I:077/071:base",
     "JP:M6a:095/103:base",
+    "LATAM:30C LA:119/128:base",
     "SPEC-0022",
     "SPEC-0023",
     "SPEC-0053",
@@ -13837,6 +13886,10 @@
     "SPEC-0259",
     "SPEC-0260",
     "SPEC-0264",
+    "SPEC-0294",
+    "SPEC-0305",
+    "SPEC-0306",
+    "SPEC-0317",
     "SPEC-0412",
     "SPEC-0413",
     "SPEC-0414",
@@ -13869,7 +13922,21 @@
     "SPEC-0473",
     "SPEC-0474",
     "SPEC-0480",
+    "SPEC-0498",
+    "SPEC-0499",
+    "SPEC-0500",
+    "SPEC-0501",
+    "SPEC-0502",
+    "SPEC-0504",
+    "SPEC-0507",
+    "SPEC-0508",
+    "SPEC-0509",
+    "SPEC-0510",
+    "SPEC-0511",
+    "SPEC-0512",
+    "SPEC-0513",
     "SPEC-0514",
+    "SPEC-0515",
     "SPEC-0516",
     "SPEC-0517",
     "SPEC-0521",
@@ -13880,6 +13947,7 @@
     "SPEC-0534",
     "SPEC-0537",
     "SPEC-0555",
+    "SPEC-0578",
     "SPEC-0581",
     "SPEC-0582",
     "SPEC-0583",
@@ -13897,6 +13965,11 @@
     "SPEC-0596",
     "SPEC-0597",
     "SPEC-0598",
+    "SPEC-0601",
+    "SPEC-0602",
+    "SPEC-0603",
+    "SPEC-0604",
+    "SPEC-0605",
     "TH:AS1b:112/150:base",
     "TH:AS5a:142/184:base",
     "TH:MA4:091/123:base",
@@ -13911,7 +13984,23 @@
     "TH:scD T:111/159:base",
     "TH:svM:094/175:base",
     "TW:AS5a:142:base",
+    "TW:AS5a:204/184:base",
+    "TW:M3 F:062/080:base",
+    "TW:M6a F:095/103:base",
+    "TW:MC F:567/742:base",
     "TW:MC F:568/742:base",
+    "TW:MC F:569/742:base",
+    "TW:SCA F:084/135:base",
+    "TW:SI F:341/414:base",
+    "TW:SI F:342/414:base",
+    "TW:SV-P:215:base",
+    "TW:SVI F:046/066:base",
+    "TW:SVM F:094/175:base",
+    "TW:sc1D F:132/164:base",
+    "TW:sc1a F:127/154:base",
+    "TW:sc1b F:120/153:base",
+    "TW:sv4a F:145/190:base",
+    "TW:svQP F:012/023:base",
     "U0092",
     "U0097",
     "U0098",
@@ -13920,6 +14009,7 @@
     "U0176",
     "U0246",
     "U0255",
+    "U0258",
     "U0285",
     "U0297",
     "U0311",
@@ -13927,10 +14017,12 @@
     "U0313",
     "U0314",
     "U0347",
+    "U0403",
     "U0427",
     "U0433",
     "U0467",
     "U0476",
+    "U0482",
     "U0503",
     "U0531",
     "U0540",
@@ -13946,6 +14038,7 @@
     "U0621",
     "U0652",
     "U0656",
+    "U0658",
     "U0660",
     "U0679",
     "U0751",
@@ -13957,13 +14050,19 @@
     "U0791",
     "U0792",
     "U0793",
+    "WEST:30C DE:119/128:base",
+    "WEST:30C EN:119/128:base",
+    "WEST:30C ES:119/128:base",
+    "WEST:30C FR:119/128:base",
+    "WEST:30C IT:119/128:base",
+    "WEST:30C PT:119/128:base",
     "override:owner-jungle-number-finish-20260910",
     "override:owner-scan-review",
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-09-29",
-   "usageCount": 268
+   "retrievedAt": "2026-10-02",
+   "usageCount": 333
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -17046,14 +17145,15 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0504-P01",
     "SPEC-0306",
     "TW:SVM F:094/175:base",
     "U0403"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00012268.png",
@@ -17264,14 +17364,15 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0215-P01",
     "SPEC-0317",
     "TW:M3 F:062/080:base",
     "U0258"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00018292.png",
@@ -24575,13 +24676,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0218-P01",
     "SPEC-0502",
     "TW:MC F:567/742:base"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
@@ -24593,13 +24695,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0224-P01",
     "SPEC-0504",
     "TW:MC F:569/742:base"
    ],
    "retrievedAt": "2026-09-09",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://beehivetcg.com/cdn/shop/products/aef8c9b3a05d7062fe9d2fc81d7718a1.png?v=1661778006&width=600",
@@ -28226,6 +28329,24 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://www.ebay.com/itm/377371294743",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0605",
+    "TW:sc1D F:132/164:base"
+   ],
+   "retrievedAt": "2026-10-01",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",

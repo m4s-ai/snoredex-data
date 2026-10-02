@@ -737,12 +737,22 @@ def main() -> None:
         "U0244": "2026-07-21T16:41:51", "U0417": "2026-07-21T14:59:21",
         "U0434": "2026-07-22T11:00:43", "U0228": "2026-07-22T17:04:58",
         "U0122": "2026-07-21T16:41:51", "U0245": "2026-07-21T16:41:51",
-        "U0482": "2026-07-21T16:56:33", "U0092": "2026-09-10",
+        "U0092": "2026-09-10",
         "U0229": "2026-07-22T17:04:58", "U0418": "2026-07-21T14:59:21",
         "U0416": "2026-07-21T14:59:21", "U0527": "2026-07-21T14:59:21",
         "U0452": "2026-07-22T00:41:51", "U0294": "2026-07-22T09:26:20",
     }
     for unit_id, specimen_ids in corroboration.items():
+        if unit_id == "U0482":
+            assert units[unit_id]["status"] == "contradicted"
+            assert units[unit_id]["corroborated"] is False
+            assert units[unit_id]["providerId"] == "owner-attestation"
+            assert "digital" in specimen_by_id["SPEC-0132"]["observed"]
+            assert not any(row["entityType"] == "card-release" and
+                           row["payload"].get("localSetCode") == "KSS" and
+                           row["payload"].get("language") == "Spanish"
+                           for row in read("authoritative_graph.json")["entities"])
+            continue
         assert units[unit_id]["corroborated"] is True
         assert units[unit_id]["checkedAt"] == primary_checked_at[unit_id]
         assert all(unit_id in specimen_by_id[specimen_id]["citedBy"]
@@ -757,8 +767,8 @@ def main() -> None:
     assert archive_only_finish_statuses == {
         "F0139": "confirmed",
         "F0172": "confirmed",
-        "F0179": "marketplace-claimed",
-        "F0635": "pending",
+        "F0179": "not-applicable",
+        "F0635": "confirmed",
     }
     spanish_swsh032 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0529")
     assert spanish_swsh032["availabilityStatus"] == "confirmed"

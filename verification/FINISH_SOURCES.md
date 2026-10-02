@@ -46,6 +46,16 @@ any visibly demonstrated finish. A product/language filter combination is not ev
 localized card exists under that collector number; the selected language cannot be projected onto
 a card image printed in another language. Neither filters nor missing images establish absence.
 
+### Localized deck articles and image-based set codes
+
+Before reporting a physical finish gap, inspect the exact localized deck article's Information,
+set list, and language sections as well as its set-symbol images. A text-only extraction can omit
+the printed set code. AS5D is the worked example: Bulbapedia explicitly calls all Double Burst GX
+Starter Deck cards Non Holofoil in Traditional Chinese and Thai. The retained observation and
+official AS5D mark are in [as5d-non-holo-20261001](evidence/as5d-non-holo-20261001/observation.json).
+Retain a positive finish profile for each named locality and apply it to established exact card
+releases; a finish profile does not close the inventory or supply a missing card identity.
+
 ### Western Jungle Snorlax: number identifies finish
 
 A number-to-finish rule confirms a property of existing printings; it does not establish an

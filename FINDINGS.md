@@ -46,7 +46,8 @@ Two genuine outliers, both worth knowing about:
 
 - **`KSS 26` (XY Kalos Starter Set) — 17 languages**, including Czech and Hungarian. Starter-set
   products were distributed far wider than booster sets. This is also the worked example of
-  Cardmarket over-claiming: the expansion was printed in 7.
+  Cardmarket over-claiming: physical printings are currently confirmed in 6; Spanish is
+  digital-only (owner adjudication OA-20261001-U0482).
 - **`SVP 051` splits.** Cardmarket carries two products for the same promo number: one with the
   full 6 Western languages, one **English-only** (`-V2`, 20 listings). Same card, different
   distribution — a real drift case, not a data error.

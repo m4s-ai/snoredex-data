@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-09-29",
+    "generated": "2026-10-02",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 61,
       "absenceEdges": 0,
       "observations": 67,
-      "resolvedVerdictSources": 1656
+      "resolvedVerdictSources": 1659
     },
     "surfaceStates": {
       "active": 28,
@@ -7217,7 +7217,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:cc5437dcbcf924f1bcc1fc20cb96401247aac38f1fbf6b4be717ec7ea5cd2452",
+      "rawRecordHash": "sha256:8e0cd8f4c3ae5ba07a43ec3c08c13005f3aa507d7ebd992a05d1261d67436037",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7241,8 +7241,9 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 244,
+        "stableIdCount": 300,
         "stableIds": [
+          "CN:30thC:095/103:base",
           "CN:CS2aC:086/115:base",
           "F0002-P01",
           "F0009-P01",
@@ -7286,7 +7287,10 @@
           "F0173-P01",
           "F0174-P01",
           "F0174-P02",
+          "F0215-P01",
+          "F0218-P01",
           "F0221-P01",
+          "F0224-P01",
           "F0289-P02",
           "F0301-P01",
           "F0328-P02",
@@ -7300,6 +7304,7 @@
           "F0456-P01",
           "F0456-P02",
           "F0456-P03",
+          "F0504-P01",
           "F0506-P01",
           "F0520-P01",
           "F0520-P02",
@@ -7352,6 +7357,7 @@
           "ID:MA6 I:121/130:base",
           "ID:s10a I:077/071:base",
           "JP:M6a:095/103:base",
+          "LATAM:30C LA:119/128:base",
           "SPEC-0022",
           "SPEC-0023",
           "SPEC-0053",
@@ -7363,6 +7369,10 @@
           "SPEC-0259",
           "SPEC-0260",
           "SPEC-0264",
+          "SPEC-0294",
+          "SPEC-0305",
+          "SPEC-0306",
+          "SPEC-0317",
           "SPEC-0412",
           "SPEC-0413",
           "SPEC-0414",
@@ -7395,7 +7405,21 @@
           "SPEC-0473",
           "SPEC-0474",
           "SPEC-0480",
+          "SPEC-0498",
+          "SPEC-0499",
+          "SPEC-0500",
+          "SPEC-0501",
+          "SPEC-0502",
+          "SPEC-0504",
+          "SPEC-0507",
+          "SPEC-0508",
+          "SPEC-0509",
+          "SPEC-0510",
+          "SPEC-0511",
+          "SPEC-0512",
+          "SPEC-0513",
           "SPEC-0514",
+          "SPEC-0515",
           "SPEC-0516",
           "SPEC-0517",
           "SPEC-0521",
@@ -7406,6 +7430,7 @@
           "SPEC-0534",
           "SPEC-0537",
           "SPEC-0555",
+          "SPEC-0578",
           "SPEC-0581",
           "SPEC-0582",
           "SPEC-0583",
@@ -7423,6 +7448,11 @@
           "SPEC-0596",
           "SPEC-0597",
           "SPEC-0598",
+          "SPEC-0601",
+          "SPEC-0602",
+          "SPEC-0603",
+          "SPEC-0604",
+          "SPEC-0605",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -7437,7 +7467,23 @@
           "TH:scD T:111/159:base",
           "TH:svM:094/175:base",
           "TW:AS5a:142:base",
+          "TW:AS5a:204/184:base",
+          "TW:M3 F:062/080:base",
+          "TW:M6a F:095/103:base",
+          "TW:MC F:567/742:base",
           "TW:MC F:568/742:base",
+          "TW:MC F:569/742:base",
+          "TW:SCA F:084/135:base",
+          "TW:SI F:341/414:base",
+          "TW:SI F:342/414:base",
+          "TW:SV-P:215:base",
+          "TW:SVI F:046/066:base",
+          "TW:SVM F:094/175:base",
+          "TW:sc1D F:132/164:base",
+          "TW:sc1a F:127/154:base",
+          "TW:sc1b F:120/153:base",
+          "TW:sv4a F:145/190:base",
+          "TW:svQP F:012/023:base",
           "U0092",
           "U0097",
           "U0098",
@@ -7446,6 +7492,7 @@
           "U0176",
           "U0246",
           "U0255",
+          "U0258",
           "U0285",
           "U0297",
           "U0311",
@@ -7453,10 +7500,12 @@
           "U0313",
           "U0314",
           "U0347",
+          "U0403",
           "U0427",
           "U0433",
           "U0467",
           "U0476",
+          "U0482",
           "U0503",
           "U0531",
           "U0540",
@@ -7472,6 +7521,7 @@
           "U0621",
           "U0652",
           "U0656",
+          "U0658",
           "U0660",
           "U0679",
           "U0751",
@@ -7483,13 +7533,19 @@
           "U0791",
           "U0792",
           "U0793",
+          "WEST:30C DE:119/128:base",
+          "WEST:30C EN:119/128:base",
+          "WEST:30C ES:119/128:base",
+          "WEST:30C FR:119/128:base",
+          "WEST:30C IT:119/128:base",
+          "WEST:30C PT:119/128:base",
           "override:owner-jungle-number-finish-20260910",
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-09-29",
-        "usageCount": 268
+        "retrievedAt": "2026-10-02",
+        "usageCount": 333
       }
     },
     {
@@ -7510,7 +7566,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:dec484456aa7f68e977421762aa4730312192f29d0be81d7a7dc3b4f87fef210",
+      "rawRecordHash": "sha256:567327aaab73cdbeb1cbb5bd12006f0fbb0aa5a33f1f7fb6df798b1bc40449d1",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -7532,7 +7588,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 240,
+        "stableIdCount": 247,
         "stableIds": [
           "F0002-P01",
           "F0028-P01",
@@ -7692,9 +7748,16 @@
           "SPEC-0591",
           "SPEC-0592",
           "SPEC-0593",
+          "SPEC-0601",
+          "SPEC-0602",
+          "SPEC-0603",
+          "SPEC-0604",
+          "TW:AS5a:204/184:base",
           "TW:SM-P:053:base",
           "TW:s5a F:093/070:base",
           "TW:sc1D F:133/164:base",
+          "TW:sc1a F:127/154:base",
+          "TW:sc1b F:120/153:base",
           "U0100",
           "U0110",
           "U0116",
@@ -7775,8 +7838,8 @@
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-09-29",
-        "usageCount": 403
+        "retrievedAt": "2026-10-01",
+        "usageCount": 411
       }
     },
     {
@@ -15449,6 +15512,19 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/1993695317/1993695317.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -17099,6 +17175,19 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://images.pikaqian.com/cs4dac/fa648ddc-e3fa-40cf-9c5f-446d70f22568.webp",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -17132,6 +17221,7 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -26475,6 +26565,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/377371294743",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

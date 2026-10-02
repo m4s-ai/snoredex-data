@@ -20,6 +20,8 @@ import authoritative_graph as graph_module  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
 import map_bs2_space_time_work_20260901 as bs2_work_pass  # noqa: E402
+import admit_30th_cn_20261001 as admission_30th  # noqa: E402
+import correct_kss_spanish_digital_only_20261001 as kss_correction  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -36,6 +38,206 @@ def issue263_rebuilt_graph() -> dict:
     issue263_pass.remove_superseded_graph_records(graph)
     rebuilt, _ = issue263_pass.apply_graph(graph, profiles, rows, units)
     return rebuilt
+
+
+def verify_30th_admission_replay():
+    names = ["authoritative_graph.json", "source_first_prints.json",
+             "set_catalogue_sources.json", "rarity_catalogue.json", "specimens.json"]
+    for mode in ("unchanged", "changed", "missing"):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            verification = root / "verification"
+            verification.mkdir()
+            for name in names:
+                (verification / name).write_bytes((ROOT / "verification" / name).read_bytes())
+            path = verification / "set_catalogue_sources.json"
+            sources = json.loads(path.read_text(encoding="utf-8"))
+            ids = {admission_30th.SID, admission_30th.SID + "-OWNER-RARITY"}
+            original_order = [r["sourceRecordId"] for r in sources["sourceRecords"]]
+            unrelated = [r for r in sources["sourceRecords"] if r["sourceRecordId"] not in ids]
+            if mode == "changed":
+                next(r for r in sources["sourceRecords"]
+                     if r["sourceRecordId"] == admission_30th.SID)["raw"]["printedRarity"] = "stale"
+            if mode == "missing":
+                sources["sourceRecords"] = unrelated
+            kss_correction.write(path, sources)
+            before = {name: (verification / name).read_bytes() for name in names}
+            with patch.object(admission_30th, "ROOT", root), patch.object(admission_30th, "V", verification):
+                admission_30th.main()
+                after = {name: (verification / name).read_bytes() for name in names}
+                specimen = next(r for r in json.loads(after['specimens.json'])['specimens']
+                                if r['specimenId'] == 'SPEC-0600')
+                assert specimen['heldBy'] == 'not established; image supplied by collection owner'
+                import source_registry as registry
+                assert registry.specimen_provider(specimen['photographSource'],
+                    registry.specimen_source_type(specimen)) == 'inspected-specimen'
+                admitted = next(r for r in json.loads(after['source_first_prints.json'])['prints']
+                                if r['printId'] == admission_30th.PID)
+                assert admitted['providerId'] == 'inspected-specimen'
+                original = next(r for r in json.loads(before['specimens.json'])['specimens']
+                                if r['specimenId'] == 'SPEC-0600')
+                for field in ('photographSha256', 'recordedAt', 'physicalObservation', 'citedBy'):
+                    assert specimen[field] == original[field]
+                if mode == "unchanged":
+                    assert after == before, "unchanged admission replay must be byte-idempotent"
+                records = json.loads(path.read_text(encoding="utf-8"))["sourceRecords"]
+                assert [r for r in records if r["sourceRecordId"] not in ids] == unrelated
+                assert len([r for r in records if r["sourceRecordId"] in ids]) == 2
+                if mode != "missing":
+                    assert [r["sourceRecordId"] for r in records] == original_order
+                admission_30th.main()
+                assert {name: (verification / name).read_bytes() for name in names} == after
+
+
+def verify_kss_retirement_replay():
+    names = ["verification/units.json", "verification/specimens.json",
+             "verification/owner_adjudications.json", "verification/authoritative_graph.json",
+             "verification/evidence.jsonl", "verification/evidence/issue-266-spanish-evidence.json",
+             "snorlax_cards.json"]
+    journal = [json.loads(line) for line in (ROOT / "verification/evidence.jsonl")
+               .read_text(encoding="utf-8").splitlines() if line.strip()]
+    original_evidence = {r["unitId"]: r["evidence"] for entry in journal
+                        for r in entry.get("supersededSiblingObservations", [])
+                        if r["setCode"] == "KSS" and kss_correction.OLD_LANGUAGES in r["evidence"]
+                        and kss_correction.LIST_CORRECTION not in r["evidence"]}
+    assert set(original_evidence) == {"U0484", "U0485", "U0488", "U0489", "U0490", "U0494", "U0495"}
+    graph = kss_correction.read(ROOT / "verification/authoritative_graph.json")
+    retired = {e["entityId"]: e for row in journal for e in row.get("supersededGraphEntities", [])
+               if e["entityId"] in kss_correction.RETIRED_IDS}
+    retired.update({e["entityId"]: e for e in graph["entities"]
+                    if e["entityId"] in kss_correction.RETIRED_IDS})
+    assert set(retired) == kss_correction.RETIRED_IDS
+    for mode in ("initial", "partial", "already-retired", "after-units",
+                 "after-specimen", "after-adjudication", "stale-adjudication"):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            for name in names:
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((ROOT / name).read_bytes())
+            restored = deepcopy(graph)
+            if mode != "already-retired":
+                restored["entities"] = [e for e in restored["entities"]
+                                        if e["entityId"] not in retired] + list(retired.values())
+                restored["edges"].append(dict(fromId=kss_correction.EDITION, toId="LOCALSET:WEST:KSS",
+                    fromType="set-edition", toType="local-set", relation="belongs-to", provenance={}))
+            product = next(e for e in restored["entities"]
+                           if e["entityType"] == "legacy-cardmarket-product"
+                           and kss_correction.CLAIM in e["payload"]["claimIds"])
+            product["payload"]["reason"] = "7 established language-bearing card release(s)"
+            if mode == "initial":
+                product["payload"]["cardReleaseIds"].append(kss_correction.RELEASE)
+                claim = next(e["payload"] for e in restored["entities"]
+                             if e["entityId"] == kss_correction.CLAIM)
+                claim.update(evidenceStatus="confirmed", disposition="established-and-mapped",
+                             proposedTargetId=kss_correction.RELEASE,
+                             materializedTargetId=kss_correction.RELEASE)
+                restored["edges"].append(dict(fromType="candidate-claim", fromId=kss_correction.CLAIM,
+                    relation="materializes", toType="card-release", toId=kss_correction.RELEASE, provenance={}))
+                unit_migration = next(r for r in restored["migrationDispositions"]
+                                      if r["sourceKind"] == "legacy-language-unit" and r["sourceId"] == "U0482")
+                unit_migration.update(disposition="established-and-mapped", targetRef=kss_correction.RELEASE)
+                migration = next(r for r in restored["migrationDispositions"]
+                                 if r["sourceKind"] == "legacy-cardmarket-product"
+                                 and r["sourceId"] == product["payload"]["sourceId"])
+                migration["targetRefs"].append(kss_correction.RELEASE)
+                migration["reason"] = product["payload"]["reason"]
+            kss_correction.write(root / "verification/authoritative_graph.json", restored)
+            if mode == "initial":
+                units = kss_correction.read(root / "verification/units.json")
+                prior = next(row["supersededObservation"] for row in journal
+                             if row.get("unitId") == "U0482" and "supersededObservation" in row)
+                units = [prior if row["unitId"] == "U0482" else row for row in units]
+                kss_correction.write(root / "verification/units.json", units)
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
+                kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            if mode in {"initial", "after-units"}:
+                specimens = kss_correction.read(root / "verification/specimens.json")
+                prior_spec = next(row["supersededSpecimenObservation"] for row in journal
+                                  if "supersededSpecimenObservation" in row)
+                specimens["specimens"] = [prior_spec if row["specimenId"] == "SPEC-0132" else row
+                                          for row in specimens["specimens"]]
+                kss_correction.write(root / "verification/specimens.json", specimens)
+            if mode in {"after-units", "after-specimen", "stale-adjudication"}:
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                if mode == "stale-adjudication":
+                    next(r for r in adjudications["decisions"] if r["unitId"] == "U0482")["rationale"] = "stale"
+                else:
+                    adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
+                kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            units = kss_correction.read(root / "verification/units.json")
+            for row in units:
+                if row["unitId"] in original_evidence and mode in {"initial", "already-retired"}:
+                    row["evidence"] = original_evidence[row["unitId"]]
+                    if mode == "already-retired":
+                        row["evidence"] = row["evidence"].replace(kss_correction.OLD_LANGUAGES,
+                            kss_correction.PHYSICAL_LANGUAGES) + " " + kss_correction.LIST_CORRECTION
+            hxy = next(r for r in units if r["unitId"] == "U0586")
+            hxy["evidence"] = hxy["evidence"].replace(kss_correction.HISTORICAL_QUOTE, "Quote:")
+            kss_correction.write(root / "verification/units.json", units)
+            adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+            next(r for r in adjudications["decisions"] if r["unitId"] == "U0484")["rationale"] = kss_correction.OLD_RATIONALE
+            kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            with patch.object(kss_correction, "ROOT", root), patch.object(kss_correction, "V", root / "verification"):
+                kss_correction.main()
+                units = kss_correction.read(root / "verification/units.json")
+                for row in units:
+                    if row["unitId"] in original_evidence:
+                        assert row["evidence"] == (kss_correction.HISTORICAL_EVIDENCE
+                            + original_evidence[row["unitId"]] + " " + kss_correction.LIST_CORRECTION)
+                assert kss_correction.HISTORICAL_QUOTE in next(r for r in units if r["unitId"] == "U0586")["evidence"]
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                assert len([r for r in adjudications["decisions"] if r["unitId"] == "U0482"]) == 1
+                decision = next(r for r in adjudications["decisions"] if r["unitId"] == "U0482")
+                assert decision["decision"] == "not-printed" and decision["rationale"] == kss_correction.EVIDENCE
+                assert not any(kss_correction.OLD_RATIONALE in r["rationale"] for r in adjudications["decisions"])
+                spec = next(r for r in kss_correction.read(root / "verification/specimens.json")["specimens"]
+                            if r["specimenId"] == "SPEC-0132")
+                assert spec["observed"] == kss_correction.SPECIMEN_OBSERVATION
+                assert "physicalObservation" not in spec
+                original_spec = next(r for r in kss_correction.read(ROOT / "verification/specimens.json")["specimens"]
+                                     if r["specimenId"] == "SPEC-0132")
+                assert spec["photographSha256"] == original_spec["photographSha256"]
+                assert spec["recordedAt"] == original_spec["recordedAt"]
+                manifest = kss_correction.read(root / "verification/evidence/issue-266-spanish-evidence.json")
+                assert next(r for r in manifest["observations"] if r["specimenId"] == "SPEC-0132")["observed"] == spec["observed"]
+                result = kss_correction.read(root / "verification/authoritative_graph.json")
+                untouched = lambda g: [e for e in g["entities"] if e["entityId"] not in retired
+                                      and e["entityId"] not in {product["entityId"], kss_correction.CLAIM}]
+                assert untouched(result) == untouched(restored)
+                corrected = next(e["payload"] for e in result["entities"] if e["entityId"] == product["entityId"])
+                assert len(corrected["cardReleaseIds"]) == 6
+                assert corrected["reason"] == "6 established language-bearing card release(s)"
+                migration = next(r for r in result["migrationDispositions"]
+                                 if r["sourceKind"] == "legacy-cardmarket-product"
+                                 and r["sourceId"] == corrected["sourceId"])
+                assert migration["targetRefs"] == corrected["cardReleaseIds"]
+                assert migration["reason"] == corrected["reason"]
+                claim = next(e["payload"] for e in result["entities"] if e["entityId"] == kss_correction.CLAIM)
+                assert claim["evidenceStatus"] == "contradicted" and claim["materializedTargetId"] is None
+                assert not any(ref in json.dumps(result) for ref in retired)
+                assert not any("release-count reason mismatch" in error for error in validate(result))
+                assert result["edges"] == [e for e in restored["edges"]
+                    if e["fromId"] not in retired and e["toId"] not in retired]
+                assert not any(row["setEditionId"] == kss_correction.EDITION
+                               for row in identity_view(result)["setEditions"])
+                before = {name: (root / name).read_bytes() for name in names}
+                kss_correction.main()
+                assert before == {name: (root / name).read_bytes() for name in names}
+
+
+def verify_release_count_reason_guard(graph):
+    for kind in ("product", "migration"):
+        tampered = deepcopy(graph)
+        if kind == "product":
+            row = next(e["payload"] for e in tampered["entities"]
+                       if e["entityType"] == "legacy-cardmarket-product")
+        else:
+            row = next(r for r in tampered["migrationDispositions"]
+                       if r["sourceKind"] == "legacy-cardmarket-product")
+        row["reason"] = "999 established language-bearing card release(s)"
+        assert any("release-count reason mismatch" in error for error in validate(tampered))
 
 
 def verify_source_first_specimen_registry():
@@ -98,6 +300,17 @@ def verify_source_first_specimen_registry():
         if not 494 <= number <= 506:
             continue
         matches = [row for row in evidence if specimen['specimenId'] in row['stableIds']]
+        owner_matches = [row for row in matches if row['providerId'] == 'owner-attestation']
+        attested = specimen.get('physicalObservation', {}).get('ownerAttestedFields', [])
+        if attested:
+            assert owner_matches, specimen['specimenId']
+            for field in attested:
+                assert any(field in row['dimensions'] for row in owner_matches)
+            assert all(row['retrievedAt'] >= specimen['physicalObservation']['ownerAttestedAt']
+                       for row in owner_matches)
+        else:
+            assert not owner_matches, specimen['specimenId']
+        matches = [row for row in matches if row['providerId'] != 'owner-attestation']
         assert matches, specimen['specimenId']
         assert all('identity' in row['dimensions'] for row in matches)
         assert all(row['retrievedAt'] >= '2026-09-09' for row in matches)
@@ -397,7 +610,13 @@ def main() -> None:
     specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
     assert specimen["physicalObservation"]["finish"] == "holo"
     flat_render = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0294")
-    assert "physicalObservation" not in flat_render
+    # A publisher render cannot establish finish; an explicit owner determination can.
+    physical = flat_render.get("physicalObservation", {})
+    assert not physical or (
+        physical.get("ownerAttestedFields") == ["finish"]
+        and physical.get("ownerAttestedAt")
+        and physical.get("basis")
+    )
     for uid, code, number in [("U0051", "SV2a I", "181/165"), ("U0603", "s5a I", "093/070"), ("U0171", "s10a T", "077/071")]:
         claim = next(e["payload"] for e in graph["entities"] if e["entityType"] == "candidate-claim" and e["payload"].get("sourceId") == uid)
         release = next(e["payload"] for e in graph["entities"] if e["entityType"] == "card-release" and e["entityId"] == claim["materializedTargetId"])
@@ -723,6 +942,9 @@ def main() -> None:
         )
         assert row["sourceUrl"] in release["sourceRecords"]
     verify_source_first_specimen_registry()
+    verify_30th_admission_replay()
+    verify_kss_retirement_replay()
+    verify_release_count_reason_guard(graph)
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")

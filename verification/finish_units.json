@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-09-29",
+    "generated": "2026-10-01",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 502,
-      "withOnlyMarketplaceClaim": 28,
-      "pendingFinish": 31,
-      "notApplicableFinish": 76,
+      "withConfirmedFinish": 507,
+      "withOnlyMarketplaceClaim": 26,
+      "pendingFinish": 27,
+      "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 316,
-      "withHolo": 245,
-      "withReverseHolo": 227,
+      "withNonHolo": 317,
+      "withHolo": 247,
+      "withReverseHolo": 226,
       "withMirrorHolo": 20,
       "withBothNonHoloAndHolo": 58,
-      "withUnresolvedProductMapping": 57,
-      "withAnyUnresolvedDetail": 135,
+      "withUnresolvedProductMapping": 53,
+      "withAnyUnresolvedDetail": 131,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -16588,7 +16588,7 @@
       "products": [
         {
           "variant": "base",
-          "claimStatus": "confirmed",
+          "claimStatus": "contradicted",
           "rarity": "Common",
           "variantName": null,
           "variantNameSource": null,
@@ -16600,67 +16600,19 @@
           "image": "images/KSS_26_Snorlax_281292.jpg"
         }
       ],
-      "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
-      ],
+      "availableFinishes": [],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "non-holo": "not-applicable",
+        "holo": "not-applicable",
+        "reverse-holo": "not-applicable",
+        "mirror-holo": "not-applicable"
       },
-      "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
-      "printings": [
-        {
-          "finish": "non-holo",
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0179-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0179-P02"
-        }
-      ],
+      "applicabilityStatus": "not-applicable",
+      "availabilityStatus": "not-applicable",
+      "completenessStatus": "not-applicable",
+      "productMappingStatus": "not-applicable",
+      "patternStatus": "not-applicable",
+      "printings": [],
       "unresolved": []
     },
     {
@@ -19230,13 +19182,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -19247,17 +19199,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
+              "sourceType": "retained positive card image",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0317.",
+              "retrievedAt": "2026-08-28",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-02",
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0317"
+          ],
+          "image": "verification/specimens/SPEC-0317.png",
           "printingId": "F0215-P01"
         }
       ],
@@ -19387,23 +19360,58 @@
           "image": "images/mC_567_Snorlax_863869.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600",
+              "sourceType": "Retail listing",
+              "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. No finish inventory closure is asserted. Retained as SPEC-0502.",
+              "retrievedAt": "2026-09-09",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-02",
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0502"
+          ],
+          "image": "verification/specimens/SPEC-0502.png",
+          "printingId": "F0218-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0219",
@@ -19756,23 +19764,58 @@
           "image": "images/mC_569_Hop_s_Snorlax_863871.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
+              "sourceType": "Retail listing",
+              "evidence": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0504.",
+              "retrievedAt": "2026-09-09",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-02",
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0504"
+          ],
+          "image": "verification/specimens/SPEC-0504.png",
+          "printingId": "F0224-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0225",
@@ -42568,23 +42611,58 @@
           "image": "images/svM_094_Snorlax_ex_801337.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
+              "sourceType": "retained positive card image",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; physical custody and finish inventory completeness remain unestablished. Retained as SPEC-0306.",
+              "retrievedAt": "2026-08-28",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-02",
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0306"
+          ],
+          "image": "verification/specimens/SPEC-0306.png",
+          "printingId": "F0504-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0505",
@@ -54206,23 +54284,53 @@
           "image": "images/XYPR_179_Snorlax_295168.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "print-identity",
+              "text": "black-star promo symbol"
+            }
+          ],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/1388626109/1388626109.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Photograph of a physical Spanish XY Black Star Promo Snorlax XY179. The Spanish card text, XY179 number and black-star promo symbol establish identity. Multicolored circles and star-like foil across the artwork establish a Cosmos Holo finish. Retained as SPEC-0599.",
+              "retrievedAt": "2026-10-01"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0599"
+          ],
+          "image": "verification/specimens/SPEC-0599.png",
+          "printingId": "F0635-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0636",
