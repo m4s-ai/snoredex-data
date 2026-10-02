@@ -20,6 +20,8 @@ import authoritative_graph as graph_module  # noqa: E402
 import admit_issue263_traditional_chinese_20260828 as issue263_pass  # noqa: E402
 import admit_pokemon_korea_catalogue_20260901 as korean_catalogue_pass  # noqa: E402
 import map_bs2_space_time_work_20260901 as bs2_work_pass  # noqa: E402
+import admit_30th_cn_20261001 as admission_30th  # noqa: E402
+import correct_kss_spanish_digital_only_20261001 as kss_correction  # noqa: E402
 from authoritative_graph import identity_view, project_physical_evidence, validate  # noqa: E402
 
 
@@ -36,6 +38,90 @@ def issue263_rebuilt_graph() -> dict:
     issue263_pass.remove_superseded_graph_records(graph)
     rebuilt, _ = issue263_pass.apply_graph(graph, profiles, rows, units)
     return rebuilt
+
+
+def verify_30th_admission_replay():
+    names = ["authoritative_graph.json", "source_first_prints.json",
+             "set_catalogue_sources.json", "rarity_catalogue.json", "specimens.json"]
+    for mode in ("unchanged", "changed", "missing"):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            verification = root / "verification"
+            verification.mkdir()
+            for name in names:
+                (verification / name).write_bytes((ROOT / "verification" / name).read_bytes())
+            path = verification / "set_catalogue_sources.json"
+            sources = json.loads(path.read_text(encoding="utf-8"))
+            ids = {admission_30th.SID, admission_30th.SID + "-OWNER-RARITY"}
+            original_order = [r["sourceRecordId"] for r in sources["sourceRecords"]]
+            unrelated = [r for r in sources["sourceRecords"] if r["sourceRecordId"] not in ids]
+            if mode == "changed":
+                next(r for r in sources["sourceRecords"]
+                     if r["sourceRecordId"] == admission_30th.SID)["raw"]["printedRarity"] = "stale"
+            if mode == "missing":
+                sources["sourceRecords"] = unrelated
+            kss_correction.write(path, sources)
+            before = {name: (verification / name).read_bytes() for name in names}
+            with patch.object(admission_30th, "ROOT", root), patch.object(admission_30th, "V", verification):
+                admission_30th.main()
+                after = {name: (verification / name).read_bytes() for name in names}
+                if mode == "unchanged":
+                    assert after == before, "unchanged admission replay must be byte-idempotent"
+                records = json.loads(path.read_text(encoding="utf-8"))["sourceRecords"]
+                assert [r for r in records if r["sourceRecordId"] not in ids] == unrelated
+                assert len([r for r in records if r["sourceRecordId"] in ids]) == 2
+                if mode != "missing":
+                    assert [r["sourceRecordId"] for r in records] == original_order
+                admission_30th.main()
+                assert {name: (verification / name).read_bytes() for name in names} == after
+
+
+def verify_kss_retirement_replay():
+    names = ["verification/units.json", "verification/specimens.json",
+             "verification/owner_adjudications.json", "verification/authoritative_graph.json",
+             "verification/evidence.jsonl", "verification/evidence/issue-266-spanish-evidence.json",
+             "snorlax_cards.json"]
+    journal = [json.loads(line) for line in (ROOT / "verification/evidence.jsonl")
+               .read_text(encoding="utf-8").splitlines() if line.strip()]
+    graph = kss_correction.read(ROOT / "verification/authoritative_graph.json")
+    retired = {e["entityId"]: e for row in journal for e in row.get("supersededGraphEntities", [])
+               if e["entityId"] in kss_correction.RETIRED_IDS}
+    retired.update({e["entityId"]: e for e in graph["entities"]
+                    if e["entityId"] in kss_correction.RETIRED_IDS})
+    assert set(retired) == kss_correction.RETIRED_IDS
+    for first_adjudication in (False, True):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            for name in names:
+                path = root / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes((ROOT / name).read_bytes())
+            restored = deepcopy(graph)
+            restored["entities"] = [e for e in restored["entities"]
+                                    if e["entityId"] not in retired] + list(retired.values())
+            restored["edges"].append(dict(fromId=kss_correction.EDITION, toId="LOCALSET:WEST:KSS",
+                fromType="set-edition", toType="local-set", relation="belongs-to", provenance={}))
+            kss_correction.write(root / "verification/authoritative_graph.json", restored)
+            if first_adjudication:
+                units = kss_correction.read(root / "verification/units.json")
+                prior = next(row["supersededObservation"] for row in journal
+                             if row.get("unitId") == "U0482" and "supersededObservation" in row)
+                units = [prior if row["unitId"] == "U0482" else row for row in units]
+                kss_correction.write(root / "verification/units.json", units)
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
+                kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            with patch.object(kss_correction, "ROOT", root), patch.object(kss_correction, "V", root / "verification"):
+                kss_correction.main()
+                result = kss_correction.read(root / "verification/authoritative_graph.json")
+                assert result["entities"] == [e for e in restored["entities"] if e["entityId"] not in retired]
+                assert result["edges"] == [e for e in restored["edges"]
+                    if e["fromId"] not in retired and e["toId"] not in retired]
+                assert not any(row["setEditionId"] == kss_correction.EDITION
+                               for row in identity_view(result)["setEditions"])
+                before = {name: (root / name).read_bytes() for name in names}
+                kss_correction.main()
+                assert before == {name: (root / name).read_bytes() for name in names}
 
 
 def verify_source_first_specimen_registry():
@@ -740,6 +826,8 @@ def main() -> None:
         )
         assert row["sourceUrl"] in release["sourceRecords"]
     verify_source_first_specimen_registry()
+    verify_30th_admission_replay()
+    verify_kss_retirement_replay()
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")

@@ -27,7 +27,8 @@ all-locality catalogue.**
 
 A marketplace filter answers *"can I buy this here?"*, not *"was this printed?"* — and collectors
 read it as the second question. Ask Cardmarket about `KSS 26` (XY Kalos Starter Set) and it offers
-**17 languages**; the expansion was printed in **7**. For some products the filter falls back to a
+**17 languages**; physical printings are currently confirmed in **6**. Spanish is digital-only
+(owner adjudication OA-20261001-U0482). For some products the filter falls back to a
 global language list entirely. Build a collection goal from that and you will hunt cards that were
 never made.
 

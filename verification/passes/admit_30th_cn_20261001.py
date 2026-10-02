@@ -67,8 +67,12 @@ def main():
                         assertedAt=DATE,statement='für alle asiatischen sprachen übernehme das japanisch wenn noch offen',
                         basis='Owner explicitly extends Japanese M6a Common classification to Asian 30th counterparts; SPEC-0600 establishes exact CN identity and visible printed C.',
                         evidenceRefs=[BUNDLE+'/sources.json','verification/evidence/30th-owner-20261001/owner-determination.json'])
-    for source in [profile,owner]:
-        sources['sourceRecords']=[r for r in sources['sourceRecords'] if r['sourceRecordId']!=source['sourceRecordId']]+[source]
+    replacements = {r['sourceRecordId']: r for r in [profile, owner]}
+    existing_ids = {r['sourceRecordId'] for r in sources['sourceRecords']}
+    sources['sourceRecords'] = [replacements.get(r['sourceRecordId'], r)
+                                for r in sources['sourceRecords']]
+    sources['sourceRecords'].extend(r for r in [profile, owner]
+                                    if r['sourceRecordId'] not in existing_ids)
     def entity(kind,identity,payload):
         upsert_entity(graph,kind,identity,payload,origin=ORIGIN)
     local='LOCALSET:CN:30th%20C'

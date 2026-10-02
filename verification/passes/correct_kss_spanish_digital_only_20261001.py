@@ -10,6 +10,8 @@ DATE = "2026-10-01"
 URL = "https://www.wikidex.net/index.php?title=XY_(TCG):_Bienvenidos_a_Kalos&oldid=3402059"
 RELEASE = "RELEASE:WEST:Spanish:KSS:26:Snorlax-Rock-Smash-Strength"
 CLAIM = "CLAIM:legacy:U0482"
+EDITION = "EDITION:WEST:Spanish:KSS"
+RETIRED_IDS = {RELEASE, EDITION, "RARITYCLAIM:889242fc11a1d286", "SOURCEASSERTION:f5428c8d92feecb1"}
 EVIDENCE = (
     "The collection owner accepted WikiDex's explicit statement that Bienvenidos a Kalos "
     "was released in Spanish only in Pokemon TCG Online, not physically, and requested "
@@ -25,24 +27,32 @@ def write(path, payload):
                     encoding="utf-8", newline="\n")
 
 
-def retire_dependent_assertion():
-    """This catalogue-migration assertion is reviewed base, not a projected field."""
+def retirement_entities(graph):
+    """Retire only the physical identity established exclusively by U0482."""
+    retired = [e for e in graph["entities"] if e["entityId"] in RETIRED_IDS]
+    for row in retired:
+        if row["entityId"] == EDITION:
+            assert row["payload"]["identity"]["establishingClaimIds"] == [CLAIM]
+            assert not any(e["entityType"] == "card-release" and e["entityId"] != RELEASE
+                           and e["payload"].get("setEditionId") == EDITION
+                           for e in graph["entities"])
+    return retired
+
+
+def retire_dependent_entities():
+    """These catalogue-migration identities are reviewed base, not projected fields."""
     path = V / "authoritative_graph.json"
     graph = read(path)
-    assertion_id = "SOURCEASSERTION:f5428c8d92feecb1"
-    retired = [e for e in graph["entities"] if e["entityId"] == assertion_id]
+    retired = retirement_entities(graph)
     if not retired:
         return
-    assert retired[0]["payload"]["rarityClaimId"] == "RARITYCLAIM:889242fc11a1d286"
-    assert not any(e["entityType"] == "card-release" and e["entityId"] == RELEASE
-                   for e in graph["entities"])
     with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
         handle.write(json.dumps(dict(unitId="U0482", at=DATE, status="contradicted",
             source="Owner attestation (domain expert)", evidence=EVIDENCE,
             supersededGraphEntities=retired), ensure_ascii=False) + "\n")
-    graph["entities"] = [e for e in graph["entities"] if e["entityId"] != assertion_id]
+    graph["entities"] = [e for e in graph["entities"] if e["entityId"] not in RETIRED_IDS]
     graph["edges"] = [e for e in graph["edges"]
-                      if e["fromId"] != assertion_id and e["toId"] != assertion_id]
+                      if e["fromId"] not in RETIRED_IDS and e["toId"] not in RETIRED_IDS]
     write(path, graph)
 
 
@@ -61,7 +71,7 @@ def main():
     if unit["providerId"] == "owner-attestation" and unit["evidence"] == EVIDENCE:
         unit["sourceType"] = "Collection owner attestation (not-printed adjudication)"
         write(V / "units.json", units)
-        retire_dependent_assertion()
+        retire_dependent_entities()
         for filename in ["units.json", "specimens.json", "owner_adjudications.json"]:
             write(V / filename, read(V / filename))
         synchronize_manifest()
@@ -69,8 +79,8 @@ def main():
     assert (unit["setCode"], unit["number"], unit["language"]) == ("KSS", "26", "Spanish")
     prior = deepcopy(unit)
     graph = read(V / "authoritative_graph.json")
-    removed = {RELEASE, "RARITYCLAIM:889242fc11a1d286", "SOURCEASSERTION:f5428c8d92feecb1"}
-    retired = [row for row in graph["entities"] if row["entityId"] in removed]
+    removed = RETIRED_IDS
+    retired = retirement_entities(graph)
     unit.update(status="contradicted", providerId="owner-attestation", sourceUrl=None,
                 sourceRef=None, sourceType="Collection owner attestation (not-printed adjudication)",
                 corroborated=False, evidence=EVIDENCE, checkedAt=DATE + "T00:00:00",

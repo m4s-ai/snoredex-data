@@ -137472,43 +137472,6 @@
     },
     {
       "entityType": "set-edition",
-      "entityId": "EDITION:WEST:Spanish:KSS",
-      "origin": "authoritative-locality-and-catalogue-migration",
-      "payload": {
-        "setEditionId": "EDITION:WEST:Spanish:KSS",
-        "identity": {
-          "setEditionId": "EDITION:WEST:Spanish:KSS",
-          "locality": "WEST",
-          "language": "Spanish",
-          "script": "Latn",
-          "localSetCode": "KSS",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "viaLegacySetCodes": [
-            "KSS"
-          ],
-          "establishingClaimIds": [
-            "CLAIM:legacy:U0482"
-          ],
-          "localizationId": "LOCALIZATION:WEST:es-ES"
-        },
-        "catalogue": {
-          "setEditionId": "EDITION:WEST:Spanish:KSS",
-          "localSetId": "LOCALSET:WEST:KSS",
-          "locality": "WEST",
-          "language": "Spanish",
-          "script": "Latn",
-          "localCode": "KSS",
-          "state": "identified",
-          "establishingEvidenceIds": [
-            "CLAIM:legacy:U0482"
-          ],
-          "localizationId": "LOCALIZATION:WEST:es-ES"
-        }
-      }
-    },
-    {
-      "entityType": "set-edition",
       "entityId": "EDITION:WEST:Spanish:LOR",
       "origin": "authoritative-locality-and-catalogue-migration",
       "payload": {
@@ -264356,25 +264319,6 @@
     },
     {
       "fromType": "set-edition",
-      "fromId": "EDITION:WEST:Spanish:KSS",
-      "relation": "belongs-to",
-      "toType": "local-set",
-      "toId": "LOCALSET:WEST:KSS",
-      "provenance": {}
-    },
-    {
-      "fromType": "set-edition",
-      "fromId": "EDITION:WEST:Spanish:KSS",
-      "relation": "localized-as",
-      "toType": "localization",
-      "toId": "LOCALIZATION:WEST:es-ES",
-      "provenance": {
-        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
-        "reviewedAt": "2026-08-24"
-      }
-    },
-    {
-      "fromType": "set-edition",
       "fromId": "EDITION:WEST:Spanish:LOR",
       "relation": "belongs-to",
       "toType": "local-set",
@@ -303907,8 +303851,8 @@
     }
   ],
   "summary": {
-    "entities": 8393,
-    "edges": 12453,
+    "entities": 8392,
+    "edges": 12451,
     "migrationInputs": 2965,
     "migrationDispositions": {
       "bounded-contradicted": 93,

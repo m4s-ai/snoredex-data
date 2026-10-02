@@ -1093,7 +1093,7 @@ exhaustive. The original owner guidance that bounded the work was:
 
 ### The `contradicted` status
 
-Rare-language checks turned up something more useful than a gap: for 7 units an external source **actively refutes** Cardmarket's language claim. This confirms the caveat in the main README — Cardmarket's language filter reflects seller listings and, for some products, appears to fall back to a full global language list rather than actual print availability. `KSS 26` is the clearest case: Cardmarket shows 17 languages, Bulbapedia documents 7. See `CONTRADICTED.json`.
+Rare-language checks turned up something more useful than a gap: for 7 units an external source **actively refutes** Cardmarket's language claim. This confirms the caveat in the main README — Cardmarket's language filter reflects seller listings and, for some products, appears to fall back to a full global language list rather than actual print availability. `KSS 26` is the clearest case: Cardmarket shows 17 languages; six physical languages remain confirmed after the owner reclassified Spanish as digital-only (OA-20261001-U0482), superseding the earlier seven-language inference. See `CONTRADICTED.json`.
 
 Historical passes are checkpointed and retained as immutable runs. Current regeneration uses
 committed stores and versioned snapshots offline; gitignored caches are transport state, not a
