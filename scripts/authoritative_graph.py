@@ -2025,6 +2025,19 @@ def _validate_summary(
         if summary.get(summary_key) != sum(row["entityType"] == entity_type for row in entities):
             errors.append(f"graph summary does not match {entity_type} count")
 
+def _validate_release_count_reasons(errors, by_type, dispositions):
+    """A stored numerical rationale must agree with its own release references."""
+    rows = [(key, payload, "cardReleaseIds")
+            for key, payload in by_type["legacy-cardmarket-product"].items()]
+    rows.extend((row.get("sourceId"), row, "targetRefs") for row in dispositions
+                if row.get("sourceKind") == "legacy-cardmarket-product")
+    for key, row, field in rows:
+        match = re.fullmatch(r"(\d+) established language-bearing card release\(s\)",
+                             row.get("reason", ""))
+        if match and int(match[1]) != len(row.get(field, [])):
+            errors.append(f"legacy product release-count reason mismatch: {key} ({field})")
+
+
 def validate(
     graph: dict[str, Any],
     source_registry: dict[str, Any] | None = None,
@@ -2041,6 +2054,7 @@ def validate(
     entities, entity_set, by_type, edges, edge_keys, relations, dispositions = _validate_shape(
         graph, errors
     )
+    _validate_release_count_reasons(errors, by_type, dispositions)
     claims, releases, printings = _validate_claims(errors, by_type, relations)
     _validate_releases(errors, by_type, relations, claims, releases)
     migration_by_key = _validate_printings_and_migrations(

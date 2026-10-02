@@ -39,20 +39,44 @@ def retirement_entities(graph):
     return retired
 
 
+def correct_graph(graph):
+    """Apply the whole reviewed KSS correction on initial and partial replays."""
+    retired = retirement_entities(graph)
+    graph["entities"] = [e for e in graph["entities"] if e["entityId"] not in RETIRED_IDS]
+    graph["edges"] = [e for e in graph["edges"]
+                      if e["fromId"] not in RETIRED_IDS and e["toId"] not in RETIRED_IDS]
+    products = set()
+    for row in graph["entities"]:
+        p = row["payload"]
+        if row["entityId"] == CLAIM:
+            p.update(evidenceStatus="contradicted", disposition="bounded-contradicted",
+                     proposedTargetId=None, materializedTargetId=None, reason=EVIDENCE)
+        if p.get("proposedCardReleaseId") == RELEASE:
+            p.pop("proposedCardReleaseId")
+        if row["entityType"] == "legacy-cardmarket-product" and CLAIM in p.get("claimIds", []):
+            p["cardReleaseIds"] = [r for r in p.get("cardReleaseIds", []) if r != RELEASE]
+            p["reason"] = f"{len(p['cardReleaseIds'])} established language-bearing card release(s)"
+            products.add(p["sourceId"])
+    for row in graph["migrationDispositions"]:
+        if row["sourceKind"] == "legacy-language-unit" and row["sourceId"] == "U0482":
+            row.update(disposition="bounded-contradicted", targetRef=None, reason=EVIDENCE)
+        if row["sourceKind"] == "legacy-cardmarket-product" and row["sourceId"] in products:
+            row["targetRefs"] = [r for r in row["targetRefs"] if r != RELEASE]
+            row["targetRef"] = row["targetRefs"][0] if row["targetRefs"] else None
+            row["reason"] = f"{len(row['targetRefs'])} established language-bearing card release(s)"
+    return retired
+
+
 def retire_dependent_entities():
     """These catalogue-migration identities are reviewed base, not projected fields."""
     path = V / "authoritative_graph.json"
     graph = read(path)
-    retired = retirement_entities(graph)
-    if not retired:
-        return
-    with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
-        handle.write(json.dumps(dict(unitId="U0482", at=DATE, status="contradicted",
-            source="Owner attestation (domain expert)", evidence=EVIDENCE,
-            supersededGraphEntities=retired), ensure_ascii=False) + "\n")
-    graph["entities"] = [e for e in graph["entities"] if e["entityId"] not in RETIRED_IDS]
-    graph["edges"] = [e for e in graph["edges"]
-                      if e["fromId"] not in RETIRED_IDS and e["toId"] not in RETIRED_IDS]
+    retired = correct_graph(graph)
+    if retired:
+        with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
+            handle.write(json.dumps(dict(unitId="U0482", at=DATE, status="contradicted",
+                source="Owner attestation (domain expert)", evidence=EVIDENCE,
+                supersededGraphEntities=retired), ensure_ascii=False) + "\n")
     write(path, graph)
 
 
@@ -79,8 +103,7 @@ def main():
     assert (unit["setCode"], unit["number"], unit["language"]) == ("KSS", "26", "Spanish")
     prior = deepcopy(unit)
     graph = read(V / "authoritative_graph.json")
-    removed = RETIRED_IDS
-    retired = retirement_entities(graph)
+    retired = correct_graph(graph)
     unit.update(status="contradicted", providerId="owner-attestation", sourceUrl=None,
                 sourceRef=None, sourceType="Collection owner attestation (not-printed adjudication)",
                 corroborated=False, evidence=EVIDENCE, checkedAt=DATE + "T00:00:00",
@@ -112,25 +135,6 @@ def main():
     adj["decisions"].sort(key=lambda row: row["unitId"])
     adj["meta"]["generated"] = DATE
     write(V / "owner_adjudications.json", adj)
-    graph["entities"] = [row for row in graph["entities"] if row["entityId"] not in removed]
-    for row in graph["entities"]:
-        p = row["payload"]
-        if row["entityId"] == CLAIM:
-            p.update(evidenceStatus="contradicted", disposition="bounded-contradicted",
-                     proposedTargetId=None, materializedTargetId=None, reason=EVIDENCE)
-        if p.get("proposedCardReleaseId") == RELEASE:
-            p.pop("proposedCardReleaseId")
-        if row["entityType"] == "legacy-cardmarket-product":
-            p["cardReleaseIds"] = [r for r in p.get("cardReleaseIds", []) if r != RELEASE]
-    graph["edges"] = [row for row in graph["edges"]
-                       if row["fromId"] not in removed and row["toId"] not in removed]
-    for row in graph["migrationDispositions"]:
-        if row["sourceKind"] == "legacy-language-unit" and row["sourceId"] == "U0482":
-            row.update(disposition="bounded-contradicted", targetRef=None, reason=EVIDENCE)
-        if RELEASE in row.get("targetRefs", []):
-            row["targetRefs"].remove(RELEASE)
-            row["targetRef"] = row["targetRefs"][0] if row["targetRefs"] else None
-            row["reason"] = f"{len(row['targetRefs'])} established language-bearing card release(s)"
     write(V / "authoritative_graph.json", graph)
     data = read(ROOT / "snorlax_cards.json")
     data["meta"]["verification"].update(confirmed=sum(u["status"] == "confirmed" for u in units),

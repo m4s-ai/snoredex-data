@@ -89,7 +89,7 @@ def verify_kss_retirement_replay():
     retired.update({e["entityId"]: e for e in graph["entities"]
                     if e["entityId"] in kss_correction.RETIRED_IDS})
     assert set(retired) == kss_correction.RETIRED_IDS
-    for first_adjudication in (False, True):
+    for mode in ("initial", "partial", "already-retired"):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             for name in names:
@@ -97,12 +97,34 @@ def verify_kss_retirement_replay():
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_bytes((ROOT / name).read_bytes())
             restored = deepcopy(graph)
-            restored["entities"] = [e for e in restored["entities"]
-                                    if e["entityId"] not in retired] + list(retired.values())
-            restored["edges"].append(dict(fromId=kss_correction.EDITION, toId="LOCALSET:WEST:KSS",
-                fromType="set-edition", toType="local-set", relation="belongs-to", provenance={}))
+            if mode != "already-retired":
+                restored["entities"] = [e for e in restored["entities"]
+                                        if e["entityId"] not in retired] + list(retired.values())
+                restored["edges"].append(dict(fromId=kss_correction.EDITION, toId="LOCALSET:WEST:KSS",
+                    fromType="set-edition", toType="local-set", relation="belongs-to", provenance={}))
+            product = next(e for e in restored["entities"]
+                           if e["entityType"] == "legacy-cardmarket-product"
+                           and kss_correction.CLAIM in e["payload"]["claimIds"])
+            product["payload"]["reason"] = "7 established language-bearing card release(s)"
+            if mode == "initial":
+                product["payload"]["cardReleaseIds"].append(kss_correction.RELEASE)
+                claim = next(e["payload"] for e in restored["entities"]
+                             if e["entityId"] == kss_correction.CLAIM)
+                claim.update(evidenceStatus="confirmed", disposition="established-and-mapped",
+                             proposedTargetId=kss_correction.RELEASE,
+                             materializedTargetId=kss_correction.RELEASE)
+                restored["edges"].append(dict(fromType="candidate-claim", fromId=kss_correction.CLAIM,
+                    relation="materializes", toType="card-release", toId=kss_correction.RELEASE, provenance={}))
+                unit_migration = next(r for r in restored["migrationDispositions"]
+                                      if r["sourceKind"] == "legacy-language-unit" and r["sourceId"] == "U0482")
+                unit_migration.update(disposition="established-and-mapped", targetRef=kss_correction.RELEASE)
+                migration = next(r for r in restored["migrationDispositions"]
+                                 if r["sourceKind"] == "legacy-cardmarket-product"
+                                 and r["sourceId"] == product["payload"]["sourceId"])
+                migration["targetRefs"].append(kss_correction.RELEASE)
+                migration["reason"] = product["payload"]["reason"]
             kss_correction.write(root / "verification/authoritative_graph.json", restored)
-            if first_adjudication:
+            if mode == "initial":
                 units = kss_correction.read(root / "verification/units.json")
                 prior = next(row["supersededObservation"] for row in journal
                              if row.get("unitId") == "U0482" and "supersededObservation" in row)
@@ -114,7 +136,21 @@ def verify_kss_retirement_replay():
             with patch.object(kss_correction, "ROOT", root), patch.object(kss_correction, "V", root / "verification"):
                 kss_correction.main()
                 result = kss_correction.read(root / "verification/authoritative_graph.json")
-                assert result["entities"] == [e for e in restored["entities"] if e["entityId"] not in retired]
+                untouched = lambda g: [e for e in g["entities"] if e["entityId"] not in retired
+                                      and e["entityId"] not in {product["entityId"], kss_correction.CLAIM}]
+                assert untouched(result) == untouched(restored)
+                corrected = next(e["payload"] for e in result["entities"] if e["entityId"] == product["entityId"])
+                assert len(corrected["cardReleaseIds"]) == 6
+                assert corrected["reason"] == "6 established language-bearing card release(s)"
+                migration = next(r for r in result["migrationDispositions"]
+                                 if r["sourceKind"] == "legacy-cardmarket-product"
+                                 and r["sourceId"] == corrected["sourceId"])
+                assert migration["targetRefs"] == corrected["cardReleaseIds"]
+                assert migration["reason"] == corrected["reason"]
+                claim = next(e["payload"] for e in result["entities"] if e["entityId"] == kss_correction.CLAIM)
+                assert claim["evidenceStatus"] == "contradicted" and claim["materializedTargetId"] is None
+                assert not any(ref in json.dumps(result) for ref in retired)
+                assert not any("release-count reason mismatch" in error for error in validate(result))
                 assert result["edges"] == [e for e in restored["edges"]
                     if e["fromId"] not in retired and e["toId"] not in retired]
                 assert not any(row["setEditionId"] == kss_correction.EDITION
@@ -122,6 +158,19 @@ def verify_kss_retirement_replay():
                 before = {name: (root / name).read_bytes() for name in names}
                 kss_correction.main()
                 assert before == {name: (root / name).read_bytes() for name in names}
+
+
+def verify_release_count_reason_guard(graph):
+    for kind in ("product", "migration"):
+        tampered = deepcopy(graph)
+        if kind == "product":
+            row = next(e["payload"] for e in tampered["entities"]
+                       if e["entityType"] == "legacy-cardmarket-product")
+        else:
+            row = next(r for r in tampered["migrationDispositions"]
+                       if r["sourceKind"] == "legacy-cardmarket-product")
+        row["reason"] = "999 established language-bearing card release(s)"
+        assert any("release-count reason mismatch" in error for error in validate(tampered))
 
 
 def verify_source_first_specimen_registry():
@@ -828,6 +877,7 @@ def main() -> None:
     verify_source_first_specimen_registry()
     verify_30th_admission_replay()
     verify_kss_retirement_replay()
+    verify_release_count_reason_guard(graph)
     source_registry = {
         row["canonicalUrl"]: row for row in json.loads(
             (ROOT / "verification/source_registry.json").read_text(encoding="utf-8")
