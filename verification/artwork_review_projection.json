@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-01",
-  "projectionVersion": "56527647ccc78443025dbe2121924e77a2a79e60ec947c238086def202b0b9e0",
+  "projectionVersion": "3f87e3455e20487aab1b19c05aff2362686b286b3f76289eb801fe2c67de9917",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 821,
-    "sourceObservations": 3066
+    "physicalPrintings": 830,
+    "sourceObservations": 3075
   },
   "groups": [
     {
@@ -9192,13 +9192,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f5e0e27c0f714dc468668f86",
+              "semanticPrintingId": "PRINTING:f5e0e27c0f714dc468668f86",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:MC F:569/742:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0224",
+              "sourcePrintingId": "F0224-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f5e0e27c0f714dc468668f86",
+              "specimenIds": [
+                "SPEC-0504"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-02",
+                  "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
+                  "sourceType": "Retail listing",
+                  "evidence": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0504.",
+                  "retrievedAt": "2026-09-09",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Hop's Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -9249,6 +9290,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0224-P01:0:b09b95202368cb1c",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "aeb67cb0bd5d88133b32dda940d5d6225c1e7fcd2ea4f54e4231f2b6f618edc1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0224-P01:1:d05608871ffd4805",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://beehivetcg.com/cdn/shop/files/a4d7747a89cd4bef975b51825b395262.png?v=1768747019&width=600",
+              "evidence": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0504.",
+              "contentHash": "6bec93bec3c354ae4e8fdd6e739f1355bd672c3943d9412ac1c6b79beaaeddfb",
+              "image": null
+            },
+            {
               "observationId": "source-first:TW:MC F:569/742:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
@@ -9271,8 +9330,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://beehivetcg.com/products/mcf-569-742-%E8%B5%AB%E6%99%AE%E7%9A%84%E5%8D%A1%E6%AF%94%E7%8D%B8",
-              "evidence": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; physical custody and technical finish are not asserted.",
-              "contentHash": "d789b9653f31a8357bde016526aa14bc627e4e713868a506b863c41b9412a9ff",
+              "evidence": "Visible Traditional Chinese 赫普的卡比獸 (Hop's Snorlax), HP150, MC F, regulation I, 569/742, ability 大方, attack 極限壓制 140, Hop portrait, Illus. GOSSAN. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
+              "contentHash": "dfbc6350db6fd2f2000fba3bfe15fba7ea09be88541677b680936e950022fe12",
               "image": "verification/specimens/SPEC-0504.png"
             },
             {
@@ -19774,13 +19833,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:acc5339a1fcb8523f6412e7f",
+              "semanticPrintingId": "PRINTING:acc5339a1fcb8523f6412e7f",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:MC F:567/742:Snorlax-But-First-Food-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0218",
+              "sourcePrintingId": "F0218-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:acc5339a1fcb8523f6412e7f",
+              "specimenIds": [
+                "SPEC-0502"
+              ],
+              "sources": [
+                {
+                  "url": "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600",
+                  "sourceType": "Retail listing",
+                  "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. No finish inventory closure is asserted. Retained as SPEC-0502.",
+                  "retrievedAt": "2026-09-09",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-02",
+                  "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -19842,6 +19942,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0218-P01:0:9ef467907a5ee968",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://beehivetcg.com/cdn/shop/files/5b3f899c69c1dc426181c616c69411ff.png?v=1768747010&width=600",
+              "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. No finish inventory closure is asserted. Retained as SPEC-0502.",
+              "contentHash": "890b411c04c7aa410ce2819d1fb241f389518f219a32661b1e3758d78c1f21e0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0218-P01:1:b09b95202368cb1c",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "8915030462236c87fa756bb5427106c1d5e435ec1da1e6b54e471b56bcec6a20",
+              "image": null
+            },
+            {
               "observationId": "source-first:TW:MC F:567/742:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
@@ -19864,8 +19982,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://beehivetcg.com/products/mcf-567-742-%E5%8D%A1%E6%AF%94%E7%8D%B8",
-              "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; physical custody and technical finish are not asserted.",
-              "contentHash": "a9877fed498e4585c04def8dcb3299c62c5fa1d81ef4c479303047e85513c9e1",
+              "evidence": "Visible Traditional Chinese 卡比獸, HP160, MC F, regulation H, 567/742, attacks 吃飽先 and 重磅衝擊 160, Illus. Souichirou Gunjima. Exact reference image supports local identity; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. No finish inventory closure is asserted.",
+              "contentHash": "738cd1e8c0276d81adb1a3fba8b7646042f707a614a5b1b8eaf1279059591532",
               "image": "verification/specimens/SPEC-0502.png"
             },
             {
@@ -34743,13 +34861,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0498",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SCA F:084/135:Snorlax-Gormandize-Body-Slam",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies SCA F 084/135 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0498",
+              "specimenIds": [
+                "SPEC-0498"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -34811,8 +34951,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://rocketcoll.com/products/sca-084-135-%E5%8D%A1%E6%AF%94%E7%8D%B8",
-              "evidence": "Visible Traditional Chinese Snorlax, HP130, SCA F, regulation D, 084/135, Gormandize ability and Body Slam 100, Illus. Atsuko Nishida. Retailer reference image supports exact local identity. Technical finish and physical custody are not asserted.",
-              "contentHash": "25615256837573ef1c02c96fdcac6e132b7655032a7e4b0330effd011dce17e4",
+              "evidence": "Visible Traditional Chinese Snorlax, HP130, SCA F, regulation D, 084/135, Gormandize ability and Body Slam 100, Illus. Atsuko Nishida. Retailer reference image supports exact local identity. The original image review asserted neither technical finish nor physical custody. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
+              "contentHash": "e1ba05add5de7e34281a2d9a97a033126181f6c5e33d09a0f2d0f00d8958f96c",
               "image": "verification/specimens/SPEC-0498.png"
             }
           ]
@@ -39606,13 +39746,59 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:65f854aa7886c41ca4cc43aa",
+              "semanticPrintingId": "PRINTING:65f854aa7886c41ca4cc43aa",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:M3 F:062/080:Snorlax-Gormandizer-Collapse",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0215",
+              "sourcePrintingId": "F0215-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:65f854aa7886c41ca4cc43aa",
+              "specimenIds": [
+                "SPEC-0317"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-02",
+                  "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
+                  "sourceType": "retained positive card image",
+                  "evidence": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0317.",
+                  "retrievedAt": "2026-08-28",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -39652,6 +39838,33 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0215-P01:0:8ca898cfe9e7150f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties.",
+              "contentHash": "bfe97c85e02271d96b3bfd25917537ef63e520720987001a66d45b8f1a32e7fc",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0215-P01:1:ab6b69976c76b844",
+              "kind": "finish",
+              "provider": "retained positive card image",
+              "url": "https://asia.pokemon-card.com/tw/card-img/tw00018039.png",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted. Retained as SPEC-0317.",
+              "contentHash": "9b035a8409d5513e645a382510eb3d73e1d794fed7f451cf73a6d7babafbb02a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0215-P01:2:e8b4bf9611cfe202",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "f7b4f50ea80cd73257c00d444d86461c7032aedc15631dc3366380e18e8f9d40",
+              "image": null
+            },
+            {
               "observationId": "source-first:TW:M3 F:062/080:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
@@ -39665,8 +39878,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/tw/card-search/detail/18039/",
-              "evidence": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "f04a2df529f57de53c618f65da16138e271625234d8eebf69db9ffdb5a3dccb0",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax M3 F 062/080 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
+              "contentHash": "12c1ac41aacd3007390c35859bf187bcac4259ca8893aa038625c56a075bf8e6",
               "image": "verification/specimens/SPEC-0317.png"
             },
             {
@@ -43537,13 +43750,35 @@
             "V1",
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0499",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SI F:341/414:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies SI F 341/414 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0499",
+              "specimenIds": [
+                "SPEC-0499"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "V1, base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -43616,8 +43851,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://rocketcoll.com/products/%E9%8F%A1%E9%9D%A2%E9%96%83%E7%89%88sif-341-414",
-              "evidence": "Visible Traditional Chinese Snorlax, HP160, SI F, regulation E, 341/414, Heavy Impact 80, Illus. Oswaldo KATO. Retailer title explicitly says 鏡面閃版 (mirror version); the reference render shows a pale patterned text field. Retain the title as a retailer finish lead, not a physically inspected finish assertion from this static render. Exact local identity is supported; physical custody and technical finish remain unasserted.",
-              "contentHash": "4e06b6fc49823e0552696e13380eb0ed68fefe578a223faaa889056dfb2297e8",
+              "evidence": "Visible Traditional Chinese Snorlax, HP160, SI F, regulation E, 341/414, Heavy Impact 80, Illus. Oswaldo KATO. Retailer title explicitly says 鏡面閃版 (mirror version); the reference render shows a pale patterned text field. Retain the title as a retailer finish lead, not a physically inspected finish assertion from this static render. Exact local identity is supported; the original image review asserted neither physical custody nor technical finish. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
+              "contentHash": "a69eeacdf43d3dc0ea87c3c11370c5fd42bd85f9058dc5a9ee746250027c1179",
               "image": "verification/specimens/SPEC-0499.png"
             },
             {
@@ -44820,13 +45055,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0294",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SI F:342/414:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies SI F 342/414 as Non-Holo on 2026-10-02. The retained reference image establishes exact identity; physical custody remains unestablished.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0294",
+              "specimenIds": [
+                "SPEC-0294"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base, V2",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -44879,8 +45136,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/tw/card-search/detail/5969/",
-              "evidence": "Complete retained image for Traditional Chinese Snorlax SI F 342/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "a4eb0db4300a1a80b12214d615fc4959ca8ad346764a1d4bd4776e13f376a53e",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax SI F 342/414 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; the image remains reference evidence and does not establish physical custody or finish inventory completeness.",
+              "contentHash": "87441f6ac6ac15b2bde4516959b38b988583656b9a19f1d5dbe6790ba6aa9c9b",
               "image": "verification/specimens/SPEC-0294.png"
             },
             {
@@ -68759,13 +69016,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0501",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SV-P:215:Snorlax-Spike-Draw-Mega-Punch",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies SV-P 215 as Non-Holo on 2026-10-02. The retained image supports exact identity; ownership is not inferred.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0501",
+              "specimenIds": [
+                "SPEC-0501"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -68827,8 +69106,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://www.ebay.de/itm/168013799605",
-              "evidence": "Seller photograph visibly shows Traditional Chinese 卡比獸, HP150, PROMO, 215/SV-P, regulation H, Illus. Ounishi, and LIGHT CONNECT ALL / 2025桃園主辦台灣燈會紀念 event marking in artwork. Card is pictured inside sealed transparent packaging. Exact identity and visible event marking are supported; technical finish is not asserted because packaging and lighting confound surface inspection.",
-              "contentHash": "e9682c08def30af2210eb29824c50e960fb45efc51cb2f95f5967ddd4aa90c11",
+              "evidence": "Seller photograph visibly shows Traditional Chinese 卡比獸, HP150, PROMO, 215/SV-P, regulation H, Illus. Ounishi, and LIGHT CONNECT ALL / 2025桃園主辦台灣燈會紀念 event marking in artwork. Card is pictured inside sealed transparent packaging. Exact identity and visible event marking are supported; the original image review did not assert technical finish because packaging and lighting confound surface inspection. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
+              "contentHash": "7b00313d425a24322f179374f1d90d6ac7e4921e6e2a33b6f953b82442c551f2",
               "image": "verification/specimens/SPEC-0501.jpg"
             }
           ]
@@ -69026,13 +69305,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0578",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:svQP F:012/023:Snorlax-Spike-Draw-Mega-Punch",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies svQP F 012/023 as Non-Holo on 2026-10-02. The retained image supports exact identity; ownership is not inferred.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0578",
+              "specimenIds": [
+                "SPEC-0578"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比獸",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -69094,8 +69395,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://shopee.tw/product/27756288/55863618270",
-              "evidence": "Digital depiction of Traditional Chinese Snorlax HP150, svQP F H 012/023, Oswaldo KATO, 扣殺抽出 20 and 百萬噸重拳 100. The 450-pixel derivative supports local identity only; no physical finish is established. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
-              "contentHash": "9ef1560e2105fb65fc83321ae1f088a71fcf1183b4e9ebb66a6bab7ce1566d8c",
+              "evidence": "Digital depiction of Traditional Chinese Snorlax HP150, svQP F H 012/023, Oswaldo KATO, 扣殺抽出 20 and 百萬噸重拳 100. The 450-pixel derivative supports local identity only; the image alone establishes no physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection owner explicitly confirms Non-Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; no finish inventory closure is asserted.",
+              "contentHash": "6abaa6ff8f171cb5eb9cdfcd5c8b85c55703d6fed82a9532fa6eadd0d7828e14",
               "image": "verification/specimens/SPEC-0578.png"
             }
           ]
@@ -98453,13 +98754,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f4dd0c28c5bc853222485e6a",
+              "semanticPrintingId": "PRINTING:f4dd0c28c5bc853222485e6a",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:SVM F:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0504",
+              "sourcePrintingId": "F0504-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f4dd0c28c5bc853222485e6a",
+              "specimenIds": [
+                "SPEC-0306"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-02",
+                  "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
+                  "sourceType": "retained positive card image",
+                  "evidence": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; physical custody and finish inventory completeness remain unestablished. Retained as SPEC-0306.",
+                  "retrievedAt": "2026-08-28",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax ex",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -98499,6 +98841,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0504-P01:0:8ca898cfe9e7150f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-02 confirmation establishes the specimen's finish; the retained retained positive card image supports card identity and any independently visible properties.",
+              "contentHash": "485e4ca27a84913374405d2196cf5c4b4013380cae248a4a3668ed6f5f0b5dfa",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0504-P01:1:d673eb9b707334eb",
+              "kind": "finish",
+              "provider": "retained positive card image",
+              "url": "https://asia.pokemon-card.com/tw/card-img/tw00012164.png",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; physical custody and finish inventory completeness remain unestablished. Retained as SPEC-0306.",
+              "contentHash": "06d047593edd13174a54d1d8487ca037de7caf4cb2190939f20406ea5b3dba69",
+              "image": null
+            },
+            {
               "observationId": "source-first:TW:SVM F:094/175:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
@@ -98512,8 +98872,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://asia.pokemon-card.com/tw/card-search/detail/12164/",
-              "evidence": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "2d018d3604d9aa5f9208559a8689e37b50a61f1469ff800b3d8c89f759e251f0",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax ex SVM F 094/175 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred. Collection owner explicitly confirms Holo for this exact printing on 2026-10-02. Finish rests on this separately dated owner determination; physical custody and finish inventory completeness remain unestablished.",
+              "contentHash": "1fcd12d83400b2b2fbf19ea6552a17d30855b25f2745801192b7448305f237af",
               "image": "verification/specimens/SPEC-0306.png"
             },
             {

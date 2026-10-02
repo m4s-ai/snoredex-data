@@ -408,7 +408,13 @@ def main() -> None:
     specimen = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0489")
     assert specimen["physicalObservation"]["finish"] == "holo"
     flat_render = next(r for r in json.loads((ROOT / "verification/specimens.json").read_text(encoding="utf-8"))["specimens"] if r["specimenId"] == "SPEC-0294")
-    assert "physicalObservation" not in flat_render
+    # A publisher render cannot establish finish; an explicit owner determination can.
+    physical = flat_render.get("physicalObservation", {})
+    assert not physical or (
+        physical.get("ownerAttestedFields") == ["finish"]
+        and physical.get("ownerAttestedAt")
+        and physical.get("basis")
+    )
     for uid, code, number in [("U0051", "SV2a I", "181/165"), ("U0603", "s5a I", "093/070"), ("U0171", "s10a T", "077/071")]:
         claim = next(e["payload"] for e in graph["entities"] if e["entityType"] == "candidate-claim" and e["payload"].get("sourceId") == uid)
         release = next(e["payload"] for e in graph["entities"] if e["entityType"] == "card-release" and e["entityId"] == claim["materializedTargetId"])
