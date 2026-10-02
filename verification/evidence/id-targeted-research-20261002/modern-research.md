@@ -1,3 +1,4 @@
+<!-- doc: role=retained Indonesian research evidence and search limitations; stage=reference -->
 # Exact Indonesian modern-card research — 2026-10-02
 
 Research only. No canonical writes, SPEC allocation, finish acceptance, or absence inference. All five downloaded images were inspected manually. Search snippets are leads; their Holo words are not physical observations.

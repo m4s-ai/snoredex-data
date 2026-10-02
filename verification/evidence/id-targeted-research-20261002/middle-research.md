@@ -1,3 +1,4 @@
+<!-- doc: role=retained Indonesian research evidence and search limitations; stage=reference -->
 # Indonesian middle-card research, 2026-10-02
 Research only. No canonical writes, no SPEC allocation, no new finish conclusion.
 

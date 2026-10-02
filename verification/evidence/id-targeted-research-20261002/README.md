@@ -1,3 +1,4 @@
+<!-- doc: role=retained Indonesian research evidence and search limitations; stage=reference -->
 # Indonesian finish research — 2026-10-02
 
 Research covers the 18 Indonesian finish gaps remaining after SPEC-0606 (AS1b 112/150 Holo).

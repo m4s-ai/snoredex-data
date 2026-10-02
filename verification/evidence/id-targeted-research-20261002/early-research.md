@@ -1,3 +1,4 @@
+<!-- doc: role=retained Indonesian research evidence and search limitations; stage=reference -->
 # Indonesian early-card research, 2026-10-02
 
 Research only. No canonical stores changed, no SPEC IDs allocated. Public image downloads required network escalation after sandbox urllib returned WinError10061. Web-tool image fetch Cache miss did not mean the source was inaccessible: ordinary approved HTTP downloaded the originals.
