@@ -22,6 +22,10 @@ EVIDENCE = (
 )
 OLD_LANGUAGES = "English, German, French, Italian, Spanish, Portuguese and Russian"
 PHYSICAL_LANGUAGES = "English, German, French, Italian, Portuguese and Russian"
+HISTORICAL_EVIDENCE = (
+    "Historical Bulbapedia language statement and prior inference (the source includes "
+    "digital-only Spanish; it is not a physical-print manifest or absence evidence): "
+)
 HISTORICAL_QUOTE = (
     "Historical quote (its KSS language list includes digital-only Spanish, not a "
     "physical-print manifest; owner correction 2026-10-01):"
@@ -98,6 +102,14 @@ def synchronize_manifest():
     write(path, manifest)
 
 
+def qualify_language_evidence(evidence):
+    """Preserve the source statement separately from the later owner conclusion."""
+    historical = evidence.removeprefix(HISTORICAL_EVIDENCE).removesuffix(" " + LIST_CORRECTION)
+    # Recover the source list overwritten by the previous correction, before its owner suffix.
+    historical = historical.replace(PHYSICAL_LANGUAGES, OLD_LANGUAGES)
+    return HISTORICAL_EVIDENCE + historical + " " + LIST_CORRECTION
+
+
 def main():
     units = read(V / "units.json")
     unit = next(row for row in units if row["unitId"] == "U0482")
@@ -111,9 +123,12 @@ def main():
                 evidenceGranularity="product-or-set", evidenceIncludesCardList=True)
     prior_siblings = []
     for row in units:
-        if row["setCode"] == "KSS" and OLD_LANGUAGES in row["evidence"]:
-            prior_siblings.append(deepcopy(row))
-            row["evidence"] = row["evidence"].replace(OLD_LANGUAGES, PHYSICAL_LANGUAGES) + " " + LIST_CORRECTION
+        if row["setCode"] == "KSS" and (OLD_LANGUAGES in row["evidence"]
+                or (LIST_CORRECTION in row["evidence"] and PHYSICAL_LANGUAGES in row["evidence"])):
+            qualified = qualify_language_evidence(row["evidence"])
+            if qualified != row["evidence"]:
+                prior_siblings.append(deepcopy(row))
+                row["evidence"] = qualified
         elif row["unitId"] == "U0586" and OLD_LANGUAGES in row["evidence"] \
                 and "products. Quote:" in row["evidence"]:
             prior_siblings.append(deepcopy(row))

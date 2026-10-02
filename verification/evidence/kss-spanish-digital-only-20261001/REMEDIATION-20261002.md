@@ -15,7 +15,7 @@ The decision concerns KSS 26/39 European Spanish only.
 
 The expected physical KSS release languages are English, French, German, Italian,
 Portuguese and Russian. All other KSS language verdicts remain unchanged. Their current evidence and owner
-rationales must also omit the superseded Spanish physical-language inference. Removing Spanish must reconcile its claim, release, edition, dependent
+rationales must distinguish the historical source statement from the superseding owner physical-language conclusion. Removing Spanish must reconcile its claim, release, edition, dependent
 rarity/assertion, incident edges, product references and migration references.
 
 ## Failure chain
@@ -92,3 +92,24 @@ positive inspected photograph evidence under the existing unknown-origin, owner-
 image route. Its holder and listing remain unknown; the source-first admission, source
 profile and replay manifest use that same boundary. Hash, acquisition date, printed
 identity, owner rarity decision and visible Holo observation remain unchanged.
+
+## Source-preservation correction after review 5392341219
+
+Finding 4166150640 exposed a second narrative error at `c8be22f`: replacing the
+seven-language list inside the original Bulbapedia evidence fabricated a six-language
+source statement. The test incorrectly required the source list to disappear. The
+physical conclusion was correct, but the evidence attribution was not.
+
+The seven affected KSS observations now retain their complete original statement
+and prior inference, explicitly qualified *before* that text as historical,
+digital-inclusive and unsuitable as a physical-print manifest or absence evidence.
+The later six-language owner conclusion follows separately. The pass recovers the
+previously overwritten list without changing the owner suffix. U0586 already retained
+its source quote correctly; owner rationales state the owner conclusion without
+attributing a six-language list to Bulbapedia.
+
+Regression expectations compare all seven complete original observations retained
+in the journal, including the differently worded Dutch row. Initial, previously
+misrewritten and already-qualified states must produce the same qualified result,
+with byte-identical replay. Consumer exports are regenerated. Verdicts, source
+grading, dates, physical identities, specimen bytes and finishes do not change.

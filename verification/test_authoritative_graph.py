@@ -96,6 +96,11 @@ def verify_kss_retirement_replay():
              "snorlax_cards.json"]
     journal = [json.loads(line) for line in (ROOT / "verification/evidence.jsonl")
                .read_text(encoding="utf-8").splitlines() if line.strip()]
+    original_evidence = {r["unitId"]: r["evidence"] for entry in journal
+                        for r in entry.get("supersededSiblingObservations", [])
+                        if r["setCode"] == "KSS" and kss_correction.OLD_LANGUAGES in r["evidence"]
+                        and kss_correction.LIST_CORRECTION not in r["evidence"]}
+    assert set(original_evidence) == {"U0484", "U0485", "U0488", "U0489", "U0490", "U0494", "U0495"}
     graph = kss_correction.read(ROOT / "verification/authoritative_graph.json")
     retired = {e["entityId"]: e for row in journal for e in row.get("supersededGraphEntities", [])
                if e["entityId"] in kss_correction.RETIRED_IDS}
@@ -162,7 +167,12 @@ def verify_kss_retirement_replay():
                     adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
                 kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
             units = kss_correction.read(root / "verification/units.json")
-            next(r for r in units if r["unitId"] == "U0484")["evidence"] = kss_correction.OLD_LANGUAGES
+            for row in units:
+                if row["unitId"] in original_evidence and mode in {"initial", "already-retired"}:
+                    row["evidence"] = original_evidence[row["unitId"]]
+                    if mode == "already-retired":
+                        row["evidence"] = row["evidence"].replace(kss_correction.OLD_LANGUAGES,
+                            kss_correction.PHYSICAL_LANGUAGES) + " " + kss_correction.LIST_CORRECTION
             hxy = next(r for r in units if r["unitId"] == "U0586")
             hxy["evidence"] = hxy["evidence"].replace(kss_correction.HISTORICAL_QUOTE, "Quote:")
             kss_correction.write(root / "verification/units.json", units)
@@ -172,8 +182,10 @@ def verify_kss_retirement_replay():
             with patch.object(kss_correction, "ROOT", root), patch.object(kss_correction, "V", root / "verification"):
                 kss_correction.main()
                 units = kss_correction.read(root / "verification/units.json")
-                assert not any(kss_correction.OLD_LANGUAGES in r["evidence"]
-                               for r in units if r["setCode"] == "KSS")
+                for row in units:
+                    if row["unitId"] in original_evidence:
+                        assert row["evidence"] == (kss_correction.HISTORICAL_EVIDENCE
+                            + original_evidence[row["unitId"]] + " " + kss_correction.LIST_CORRECTION)
                 assert kss_correction.HISTORICAL_QUOTE in next(r for r in units if r["unitId"] == "U0586")["evidence"]
                 adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
                 assert len([r for r in adjudications["decisions"] if r["unitId"] == "U0482"]) == 1
