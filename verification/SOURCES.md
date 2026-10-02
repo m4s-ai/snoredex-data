@@ -12,7 +12,7 @@ in `verification/owner_adjudications.json`.
 
 | Provider | Category | Tier | Evidence mode | Sources | Claims | Used for |
 |---|---|---:|:---:|---:|---:|---|
-| **Inspected physical specimen** | non-url-evidence | 1 | positive only | 67 | 789 | language, identity, finish, edition |
+| **Inspected physical specimen** | non-url-evidence | 1 | positive only | 68 | 793 | language, identity, finish, edition |
 | **Play! Pokémon rewards gallery** | official-publisher | 1 | positive only | 1 | 32 | finish, product |
 | **Pokémon Card official database (Asia)** | official-publisher | 1 | positive only | 204 | 738 | language, card-existence, local-set-identifier, rarity, date |
 | **Pokémon Card official database (Japan)** | official-publisher | 1 | positive only | 39 | 90 | language, artist, date |
@@ -29,7 +29,7 @@ in `verification/owner_adjudications.json`.
 | **Malie TCGL reference** | open-database | 2 | positive only | 2 | 7 | card-content, size, back, foil |
 | **PSA certification and registry** | grading-registry | 2 | positive only | 4 | 16 | finish, identity |
 | **SNKRDUNK** | marketplace | 2 | positive only | 1 | 5 | finish, language |
-| **Seller listing photograph** | marketplace-photo | 2 | positive only | 155 | 630 | language, identity, finish, edition |
+| **Seller listing photograph** | marketplace-photo | 2 | positive only | 154 | 626 | language, identity, finish, edition |
 | **TCGdex** | open-database | 2 | positive only | 310 | 785 | language, finish, card-content |
 | **pokemontcg.io** | open-database | 2 | positive only | 1 | 123 | artist, date |
 | **Collectory** | collector-database | 3 | positive only | 22 | 48 | identity, rarity |

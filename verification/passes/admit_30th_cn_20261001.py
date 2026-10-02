@@ -1,4 +1,4 @@
-"""Admit the supplied physical 30thC 095/103 seller photograph, without a launch-date claim."""
+"""Admit the owner-supplied 30thC photograph, without listing or launch-date claims."""
 import copy
 import json
 import sys
@@ -18,7 +18,7 @@ SID = 'SET-SRC-CN-30TH-C-095-20261001'
 URL = 'https://i.ebayimg.com/images/g/RlwAAeSwjuhqumG-/s-l1600.png'
 ORIGIN = 'reviewed-30th-cn-20261001'
 BUNDLE = 'verification/evidence/30th-cn-20261001'
-EVIDENCE = ('Retained seller photograph SPEC-0600 visibly identifies Simplified Chinese 卡比兽, '
+EVIDENCE = ('Owner-supplied photograph SPEC-0600, with original holder and listing unknown, visibly identifies Simplified Chinese 卡比兽, '
             '30thC 095/103 C, HP160, 安眠, the 130-damage sleep attack, Aya Kusube, regulation J '
             'and the yellow Pikachu 30th anniversary logo. Matching printed rules and illustration '
             'establish Snorlax-Good-Sleep-Collapse. Holographic reflection is visible on the physical card. '
@@ -41,24 +41,26 @@ def main():
     specimen = next(s for s in specimens['specimens'] if s['specimenId']=='SPEC-0600')
     assert specimen['setCode'] in ('30th C', CODE)
     specimen['setCode'] = CODE
+    specimen['heldBy'] = 'not established; image supplied by collection owner'
+    specimen['inspectedFrom'] = 'Retained owner-supplied image; original holder and marketplace listing unknown'
     specimen['citedBy'] = [PID if ref=='CN:30th C:095/103:base' else ref for ref in specimen['citedBy']]
     specimen['observed'] = specimen['observed'].replace('30th C 095/103', '30thC 095/103')
     graph['migrationDispositions'] = [r for r in graph['migrationDispositions'] if not (r['sourceKind']=='source-first-record' and r['sourceId']=='CN:30th C:095/103:base')]
     row = dict(printId=PID,locality='CN',localSetCode=CODE,localNumber='095/103',language='S-Chinese',
                script='Hans',name='卡比兽',cardName='Snorlax',specimenId='SPEC-0600',
-               providerId='seller-listing-photo',sourceUrl=URL,cardImageUrl=URL,retrievedAt=DATE,
+               providerId='inspected-specimen',sourceUrl=URL,cardImageUrl=URL,retrievedAt=DATE,
                releaseDate=None,releaseDatePrecision=None,releaseApproximate=False,
                releaseStatus='released',artist='Aya Kusube',variant='base',catchUpOf=None,
                corroborated=False,markAssetUrl=None,evidence=EVIDENCE,work='Snorlax-Good-Sleep-Collapse',
                raritySourceUrl=None,rarityProviderId='owner-attestation',rarityRetrievedAt=DATE)
     prints['prints'] = sorted([r for r in prints['prints'] if r['printId'] not in (PID,'CN:30th C:095/103:base')]+[row],key=lambda r:r['printId'])
     prints['meta']['counts']['admitted']=len(prints['prints'])
-    profile = dict(sourceRecordId=SID,sourceKind='source-first-local-set-profile',provider='seller-listing-photo',
+    profile = dict(sourceRecordId=SID,sourceKind='source-first-local-set-profile',provider='inspected-specimen',
                    providerRecordKey=PID,retrieved=DATE,sourceUrl=URL,
                    raw=dict(localCode=CODE,localName='30th Celebration',locality='CN',languages=['S-Chinese'],
-                            scripts=['Hans'],printIds=[PID],providers=['seller-listing-photo'],sourceUrls=[URL],
+                            scripts=['Hans'],printIds=[PID],providers=['inspected-specimen'],sourceUrls=[URL],
                             printedSetSize=103,printedSetSizeBasis='denominator printed on retained SPEC-0600',
-                            observedCollectorNumbers=['095/103'],observedCoverage='one exact seller photograph; not a complete inventory',
+                            observedCollectorNumbers=['095/103'],observedCoverage='one owner-supplied photograph; holder and listing unknown; not a complete inventory',
                             cardImageUrls=[URL],specimenId='SPEC-0600',printedRarity='C'))
     owner_sid=SID+'-OWNER-RARITY'
     owner=copy.deepcopy(profile)

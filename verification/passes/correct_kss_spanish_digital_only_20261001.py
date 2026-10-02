@@ -20,6 +20,28 @@ EVIDENCE = (
     "Bulbapedia language-list inference is superseded. Final not-printed status rests on "
     "the collection-owner adjudication; the external statement supplies its rationale."
 )
+OLD_LANGUAGES = "English, German, French, Italian, Spanish, Portuguese and Russian"
+PHYSICAL_LANGUAGES = "English, German, French, Italian, Portuguese and Russian"
+HISTORICAL_QUOTE = (
+    "Historical quote (its KSS language list includes digital-only Spanish, not a "
+    "physical-print manifest; owner correction 2026-10-01):"
+)
+LIST_CORRECTION = (
+    "The collection owner's 2026-10-01 correction supersedes the previous seven-language "
+    "inference: the physical KSS languages are English, German, French, Italian, Portuguese "
+    "and Russian. Spanish was released digitally only. The existing owner decision for "
+    "this unit is unchanged."
+)
+OLD_RATIONALE = (
+    "That matches Bulbapedia's article, which states the print languages as a closed list "
+    "of seven — " + OLD_LANGUAGES + " — all seven of which are confirmed here."
+)
+SPECIMEN_OBSERVATION = (
+    "Spanish digital card render of Kalos Starter Set Snorlax 26/39, released in Pokemon "
+    "TCG Online only. Pokemon Basico, Golpe Roca, Fuerza and 26/39 identify the localized "
+    "digital card. WikiDex explicitly excludes a Spanish physical release; the owner "
+    "adjudicated U0482 not printed on 2026-10-01. This image establishes no physical finish."
+)
 
 
 def write(path, payload):
@@ -67,19 +89,6 @@ def correct_graph(graph):
     return retired
 
 
-def retire_dependent_entities():
-    """These catalogue-migration identities are reviewed base, not projected fields."""
-    path = V / "authoritative_graph.json"
-    graph = read(path)
-    retired = correct_graph(graph)
-    if retired:
-        with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
-            handle.write(json.dumps(dict(unitId="U0482", at=DATE, status="contradicted",
-                source="Owner attestation (domain expert)", evidence=EVIDENCE,
-                supersededGraphEntities=retired), ensure_ascii=False) + "\n")
-    write(path, graph)
-
-
 def synchronize_manifest():
     path = V / "evidence" / "issue-266-spanish-evidence.json"
     manifest = read(path)
@@ -92,14 +101,6 @@ def synchronize_manifest():
 def main():
     units = read(V / "units.json")
     unit = next(row for row in units if row["unitId"] == "U0482")
-    if unit["providerId"] == "owner-attestation" and unit["evidence"] == EVIDENCE:
-        unit["sourceType"] = "Collection owner attestation (not-printed adjudication)"
-        write(V / "units.json", units)
-        retire_dependent_entities()
-        for filename in ["units.json", "specimens.json", "owner_adjudications.json"]:
-            write(V / filename, read(V / filename))
-        synchronize_manifest()
-        return
     assert (unit["setCode"], unit["number"], unit["language"]) == ("KSS", "26", "Spanish")
     prior = deepcopy(unit)
     graph = read(V / "authoritative_graph.json")
@@ -108,34 +109,52 @@ def main():
                 sourceRef=None, sourceType="Collection owner attestation (not-printed adjudication)",
                 corroborated=False, evidence=EVIDENCE, checkedAt=DATE + "T00:00:00",
                 evidenceGranularity="product-or-set", evidenceIncludesCardList=True)
-    write(V / "units.json", units)
+    prior_siblings = []
+    for row in units:
+        if row["setCode"] == "KSS" and OLD_LANGUAGES in row["evidence"]:
+            prior_siblings.append(deepcopy(row))
+            row["evidence"] = row["evidence"].replace(OLD_LANGUAGES, PHYSICAL_LANGUAGES) + " " + LIST_CORRECTION
+        elif row["unitId"] == "U0586" and OLD_LANGUAGES in row["evidence"] \
+                and "products. Quote:" in row["evidence"]:
+            prior_siblings.append(deepcopy(row))
+            row["evidence"] = row["evidence"].replace("products. Quote:", "products. " + HISTORICAL_QUOTE)
     specimens = read(V / "specimens.json")
     spec = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0132")
     prior_spec = deepcopy(spec)
-    spec["observed"] = (
-        "Spanish digital card render of Kalos Starter Set Snorlax 26/39, released in Pokemon "
-        "TCG Online only. Pokemon Basico, Golpe Roca, Fuerza and 26/39 identify the localized "
-        "digital card. WikiDex explicitly excludes a Spanish physical release; the owner "
-        "adjudicated U0482 not printed on 2026-10-01. This image establishes no physical finish."
-    )
-    write(V / "specimens.json", specimens)
-    synchronize_manifest()
-    with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
-        for row in [dict(unitId="U0482", at=DATE, status=prior["status"], source=prior["sourceUrl"],
-                         evidence=prior["evidence"], supersededObservation=prior,
-                         supersededSpecimenObservation=prior_spec, supersededGraphEntities=retired),
-                    dict(unitId="U0482", at=DATE, status="contradicted", source="Owner attestation (domain expert)",
-                         evidence=EVIDENCE, rationaleSource=URL)]:
-            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+    spec["observed"] = SPECIMEN_OBSERVATION
+    spec.pop("physicalObservation", None)
     adj = read(V / "owner_adjudications.json")
-    assert not any(row["unitId"] == "U0482" for row in adj["decisions"])
-    adj["decisions"].append(dict(adjudicationId="OA-20261001-U0482", unitId="U0482",
+    prior_adj = deepcopy(adj["decisions"])
+    decision = dict(adjudicationId="OA-20261001-U0482", unitId="U0482",
         decision="not-printed", authority="collection-owner", basis="multi-source-adjudication",
-        decidedAt=DATE, rationale=EVIDENCE, evidenceRefs=[URL, "unit:U0482", "specimen:SPEC-0132"]))
+        decidedAt=DATE, rationale=EVIDENCE, evidenceRefs=[URL, "unit:U0482", "specimen:SPEC-0132"])
+    existing = next((row for row in adj["decisions"] if row["unitId"] == "U0482"), None)
+    if existing is None:
+        adj["decisions"].append(decision)
+    else:
+        existing.clear()
+        existing.update(decision)
+    for row in adj["decisions"]:
+        if row["unitId"] in {u["unitId"] for u in units if u["setCode"] == "KSS"} \
+                and OLD_RATIONALE in row["rationale"]:
+            row["rationale"] = row["rationale"].replace(OLD_RATIONALE, LIST_CORRECTION)
+            if URL not in row["evidenceRefs"]:
+                row["evidenceRefs"].append(URL)
     adj["decisions"].sort(key=lambda row: row["unitId"])
     adj["meta"]["generated"] = DATE
+    if prior != unit or prior_spec != spec or retired or prior_siblings or prior_adj != adj["decisions"]:
+        with (V / "evidence.jsonl").open("a", encoding="utf-8", newline="\n") as handle:
+            handle.write(json.dumps(dict(unitId="U0482", at=DATE, status="contradicted",
+                source="Owner attestation (domain expert)", evidence=EVIDENCE, rationaleSource=URL,
+                supersededObservation=prior, supersededSpecimenObservation=prior_spec,
+                supersededGraphEntities=retired, supersededSiblingObservations=prior_siblings,
+                supersededAdjudications=[r for r in prior_adj if r not in adj["decisions"]]),
+                ensure_ascii=False) + "\n")
+    write(V / "units.json", units)
+    write(V / "specimens.json", specimens)
     write(V / "owner_adjudications.json", adj)
     write(V / "authoritative_graph.json", graph)
+    synchronize_manifest()
     data = read(ROOT / "snorlax_cards.json")
     data["meta"]["verification"].update(confirmed=sum(u["status"] == "confirmed" for u in units),
         contradicted=sum(u["status"] == "contradicted" for u in units), lastUpdated=DATE)

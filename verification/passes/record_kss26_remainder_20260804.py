@@ -9,7 +9,8 @@ are — `HXY` and `FXY` — and then, on 2026-08-04, closed the rest in one line
 That covers the eight still disputed. They are recorded separately from U0485/U0488 because the
 *reason* differs and the record should say which one applies. Japanese and Korean exist under
 another set code; these eight do not exist at all, which is what the Bulbapedia article's closed
-list of seven print languages says.
+list was previously interpreted to say. That seven-language inference was superseded by the
+owner's 2026-10-01 Spanish digital-only correction; the remaining decisions still stand.
 
 Idempotent: re-running adds nothing.
 """
@@ -18,6 +19,7 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
+from correct_kss_spanish_digital_only_20261001 import LIST_CORRECTION, URL
 
 ROOT = Path(__file__).resolve().parents[2]
 VERIFICATION = ROOT / "verification"
@@ -30,15 +32,13 @@ RATIONALE = (
     "The collection owner closed the remaining Kalos Starter Set languages in one line: \"All "
     "other languages were not printed.\" This is the second half of the #86 decision and carries a "
     "different reason from the first: U0485 (Japanese) and U0488 (Korean) exist as their own "
-    "products under the HXY and FXY codes, whereas these eight were not printed at all. That "
-    "matches Bulbapedia's article, which states the print languages as a closed list of seven — "
-    "English, German, French, Italian, Spanish, Portuguese and Russian — all seven of which are "
-    "confirmed here. Czech, Hungarian and Polish are additionally implausible on market grounds: "
+    "products under the HXY and FXY codes, whereas these eight were not printed at all. "
+    + LIST_CORRECTION + " Czech, Hungarian and Polish are additionally implausible on market grounds: "
     "no documented Pokemon TCG expansion exists in Czech or Hungarian, and the Polish run covers "
     "only Diamond & Pearl and Mysterious Treasures."
 )
 
-EVIDENCE_REFS = [ISSUE, "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)"]
+EVIDENCE_REFS = [ISSUE, "https://bulbapedia.bulbagarden.net/wiki/Kalos_Starter_Set_(TCG)", URL]
 
 
 def read(path: Path):

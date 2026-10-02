@@ -65,6 +65,19 @@ def verify_30th_admission_replay():
             with patch.object(admission_30th, "ROOT", root), patch.object(admission_30th, "V", verification):
                 admission_30th.main()
                 after = {name: (verification / name).read_bytes() for name in names}
+                specimen = next(r for r in json.loads(after['specimens.json'])['specimens']
+                                if r['specimenId'] == 'SPEC-0600')
+                assert specimen['heldBy'] == 'not established; image supplied by collection owner'
+                import source_registry as registry
+                assert registry.specimen_provider(specimen['photographSource'],
+                    registry.specimen_source_type(specimen)) == 'inspected-specimen'
+                admitted = next(r for r in json.loads(after['source_first_prints.json'])['prints']
+                                if r['printId'] == admission_30th.PID)
+                assert admitted['providerId'] == 'inspected-specimen'
+                original = next(r for r in json.loads(before['specimens.json'])['specimens']
+                                if r['specimenId'] == 'SPEC-0600')
+                for field in ('photographSha256', 'recordedAt', 'physicalObservation', 'citedBy'):
+                    assert specimen[field] == original[field]
                 if mode == "unchanged":
                     assert after == before, "unchanged admission replay must be byte-idempotent"
                 records = json.loads(path.read_text(encoding="utf-8"))["sourceRecords"]
@@ -89,7 +102,8 @@ def verify_kss_retirement_replay():
     retired.update({e["entityId"]: e for e in graph["entities"]
                     if e["entityId"] in kss_correction.RETIRED_IDS})
     assert set(retired) == kss_correction.RETIRED_IDS
-    for mode in ("initial", "partial", "already-retired"):
+    for mode in ("initial", "partial", "already-retired", "after-units",
+                 "after-specimen", "after-adjudication", "stale-adjudication"):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             for name in names:
@@ -133,8 +147,49 @@ def verify_kss_retirement_replay():
                 adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
                 adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
                 kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            if mode in {"initial", "after-units"}:
+                specimens = kss_correction.read(root / "verification/specimens.json")
+                prior_spec = next(row["supersededSpecimenObservation"] for row in journal
+                                  if "supersededSpecimenObservation" in row)
+                specimens["specimens"] = [prior_spec if row["specimenId"] == "SPEC-0132" else row
+                                          for row in specimens["specimens"]]
+                kss_correction.write(root / "verification/specimens.json", specimens)
+            if mode in {"after-units", "after-specimen", "stale-adjudication"}:
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                if mode == "stale-adjudication":
+                    next(r for r in adjudications["decisions"] if r["unitId"] == "U0482")["rationale"] = "stale"
+                else:
+                    adjudications["decisions"] = [r for r in adjudications["decisions"] if r["unitId"] != "U0482"]
+                kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
+            units = kss_correction.read(root / "verification/units.json")
+            next(r for r in units if r["unitId"] == "U0484")["evidence"] = kss_correction.OLD_LANGUAGES
+            hxy = next(r for r in units if r["unitId"] == "U0586")
+            hxy["evidence"] = hxy["evidence"].replace(kss_correction.HISTORICAL_QUOTE, "Quote:")
+            kss_correction.write(root / "verification/units.json", units)
+            adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+            next(r for r in adjudications["decisions"] if r["unitId"] == "U0484")["rationale"] = kss_correction.OLD_RATIONALE
+            kss_correction.write(root / "verification/owner_adjudications.json", adjudications)
             with patch.object(kss_correction, "ROOT", root), patch.object(kss_correction, "V", root / "verification"):
                 kss_correction.main()
+                units = kss_correction.read(root / "verification/units.json")
+                assert not any(kss_correction.OLD_LANGUAGES in r["evidence"]
+                               for r in units if r["setCode"] == "KSS")
+                assert kss_correction.HISTORICAL_QUOTE in next(r for r in units if r["unitId"] == "U0586")["evidence"]
+                adjudications = kss_correction.read(root / "verification/owner_adjudications.json")
+                assert len([r for r in adjudications["decisions"] if r["unitId"] == "U0482"]) == 1
+                decision = next(r for r in adjudications["decisions"] if r["unitId"] == "U0482")
+                assert decision["decision"] == "not-printed" and decision["rationale"] == kss_correction.EVIDENCE
+                assert not any(kss_correction.OLD_RATIONALE in r["rationale"] for r in adjudications["decisions"])
+                spec = next(r for r in kss_correction.read(root / "verification/specimens.json")["specimens"]
+                            if r["specimenId"] == "SPEC-0132")
+                assert spec["observed"] == kss_correction.SPECIMEN_OBSERVATION
+                assert "physicalObservation" not in spec
+                original_spec = next(r for r in kss_correction.read(ROOT / "verification/specimens.json")["specimens"]
+                                     if r["specimenId"] == "SPEC-0132")
+                assert spec["photographSha256"] == original_spec["photographSha256"]
+                assert spec["recordedAt"] == original_spec["recordedAt"]
+                manifest = kss_correction.read(root / "verification/evidence/issue-266-spanish-evidence.json")
+                assert next(r for r in manifest["observations"] if r["specimenId"] == "SPEC-0132")["observed"] == spec["observed"]
                 result = kss_correction.read(root / "verification/authoritative_graph.json")
                 untouched = lambda g: [e for e in g["entities"] if e["entityId"] not in retired
                                       and e["entityId"] not in {product["entityId"], kss_correction.CLAIM}]

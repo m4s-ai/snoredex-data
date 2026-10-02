@@ -14,8 +14,8 @@ digital render; its original image hash and acquisition date must not change.
 The decision concerns KSS 26/39 European Spanish only.
 
 The expected physical KSS release languages are English, French, German, Italian,
-Portuguese and Russian. All other KSS language verdicts and their evidence remain
-unchanged. Removing Spanish must reconcile its claim, release, edition, dependent
+Portuguese and Russian. All other KSS language verdicts remain unchanged. Their current evidence and owner
+rationales must also omit the superseded Spanish physical-language inference. Removing Spanish must reconcile its claim, release, edition, dependent
 rarity/assertion, incident edges, product references and migration references.
 
 ## Failure chain
@@ -61,3 +61,34 @@ no printings and all finishes not applicable. The Spanish release/edition IDs an
 SPEC-0132 were absent from physical collector, checklist and artwork projections.
 The digital image remains in the specimen registry and historical evidence.
 Regenerated SQLite and consumer views must carry the corrected six-release reason.
+
+## Expanded diagnosis after review 5391987130
+
+The graph-only replay repair was incomplete. The pass still used the final U0482
+provider/evidence as a completion flag for every store and returned before repairing
+the specimen, owner decision and card metadata. A crash after the units write could
+therefore survive every later replay. There is now one full correction path: each
+store is independently reconciled, the owner decision is upserted, and the digital
+observation is restored before synchronizing the replay manifest. Journal entries
+retain superseded observations and decisions; a completed second replay is byte-identical.
+
+The narrative audit also found the old physical-language list in seven KSS units
+(including Dutch beyond the six review examples) and eight owner rationales. They
+are reconciled to the owner's six-language physical decision while retaining the
+existing verdicts, decision dates and original source grading. The earlier runnable
+owner-decision pass now uses the corrected rationale too; it cannot reintroduce the
+old list when restoring a missing decision. Historical text survives in the journal. U0586 also quotes the old KSS sentence
+as context for a separate Korean HXY claim; the quote is retained verbatim but
+explicitly labelled historical/digital-inclusive before the quoted text.
+
+Regressions now include interruptions after units, after specimen, after adjudication,
+a stale existing adjudication, and the previous graph states. They assert the owner
+decision, digital-only specimen, manifest, six releases and all-store replay, rather
+than assuming graph recovery proves store recovery.
+
+The independent SPEC-0600 finding is a provenance classification error: an eBay CDN
+host identifies transport, not a seller or an offer. The retained image remains
+positive inspected photograph evidence under the existing unknown-origin, owner-supplied
+image route. Its holder and listing remain unknown; the source-first admission, source
+profile and replay manifest use that same boundary. Hash, acquisition date, printed
+identity, owner rarity decision and visible Holo observation remain unchanged.

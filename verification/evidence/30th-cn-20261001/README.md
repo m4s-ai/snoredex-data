@@ -3,7 +3,10 @@
 
 The owner supplied the eBay WebP image retained as `source.webp`. The independently acquired PNG
 endpoint for the same image key is retained unchanged as `verification/specimens/SPEC-0600.png`.
-Both were inspected. `sources.json` distinguishes the supplied WebP, its tested temporary lossless
+Both were inspected. The original holder and marketplace listing are unknown.
+The image is retained under the existing inspected-specimen class, using the owner-supplied
+unknown-origin photograph route; the eBay CDN host does not establish seller ownership
+or listing provenance. `sources.json` distinguishes the supplied WebP, its tested temporary lossless
 decoding and the separately acquired PNG bytes; it does not claim equality between the two server
 formats. Local Tesseract was unavailable, so text was inspected visually.
 
