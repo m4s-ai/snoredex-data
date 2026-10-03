@@ -24,8 +24,8 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), [WORK
 3. Verify request/checkpoint manifests, raw bytes, hashes, provider errors, pagination, and source-capability boundaries before interpreting records.
 4. Review every added, changed, disappeared, re-keyed, ambiguous, unmapped, `needsEvidence`, and gap record. Preserve provider-native locality and identifiers.
 5. Reconcile each `new-candidate` to a canonical release with a reviewed mapping, or positively exclude it only when retained source evidence establishes another identity. The contract has no separate unresolved-disposition record: if neither outcome is supported, leave it as `new-candidate`; it stays counted and `workflow_loop.py --loop discovery` stays at `needs-reconciliation`. A balanced run is not a reconciled run. When reconciliation admits a specimen-backed print, apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract) so retained evidence reaches the admitted identity. A candidate cannot directly mutate language, finish, set, or absence verdicts.
-6. Run `python scripts/workflow_loop.py --loop discovery --max-cycles 3` and `python scripts/scoped_regen.py --lane source-discovery`. Stop when the source or owner input named by the runner is required.
-7. Run `python scripts/regen.py`, inspect completeness and graph changes, and report run IDs, hashes, provider failures, reconciliation counts, explicit gaps, and remaining blockers.
+6. Checkpoint accumulated reconciliations with `python scripts/scoped_regen.py --lane source-discovery`. For state/stop diagnosis use the discovery workflow loop instead; it already runs the lane. Stop dependent work when a specific source or owner input is required.
+7. Follow the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract): inspect completeness and graph changes at checkpoints, and run the full gate once at package delivery. Report run IDs, hashes, provider failures, reconciliation counts, retained versus integrated evidence, explicit gaps and remaining blockers.
 
 ## Source-refresh bot-gated retrieval
 

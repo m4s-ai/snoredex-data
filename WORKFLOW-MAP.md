@@ -6,7 +6,7 @@ reviewed claim, a graph edge, a projection, and finally a release artifact. It d
 replace the data stores, and it does not authorize hand-editing generated projections.
 
 `scripts/regen.py` remains the executable L3 full-build order; the scoped lanes from issue #290
-are bounded L0-L2 shortcuts and never replace it. This document is the contract that gate and
+are the normal L0-L2 intake checkpoints and never replace delivery validation. This document is the contract that gate and
 impact work must use.
 
 The active orchestration has one executable source of truth: `scripts/regen.py` owns the ordered
@@ -14,6 +14,45 @@ The active orchestration has one executable source of truth: `scripts/regen.py` 
 mode and adds only explicit environment/publication checks. `.github/workflows/pages.yml` calls
 that reusable gate first and consumes its commit-bound artifact handoff. README, CLAUDE, and
 HANDOVER link here instead of maintaining another command sequence.
+
+## Batch execution contract
+
+A batch is related evidence on one isolated task branch. Several photos, source captures and
+chat messages may belong to it. An import or a chat reply does **not** close the batch. Keep the
+existing manifest/completion record current; do not create another queue or reservation service.
+
+| Boundary | Work and verification | Completion claim |
+|---|---|---|
+| Start | Fetch current main, check collisions, prepare image/OCR/decoder tools. Establish L3 once before mutation, or reuse a recorded successful full gate for the exact unchanged base/tree. Record pre-existing failures. | Known starting state, not a gate per image. |
+| Intake | Inspect and retain all supplied inputs, use one reviewed manifest for related photos, and validate through the canonical importer. Apply claims/provider mappings only within their evidence contracts. | Retained and validated; consumer integration may still be pending. |
+| Checkpoint | Run the owning `scoped_regen.py --lane …` once after accumulated edits, or when the updated consumers are needed. Check exact references and unresolved candidates. | Affected evidence consumers current; L3 still pending. |
+| Delivery | Before handing off a completed package/PR for merge or export, run `python scripts/regen.py` once and review the complete diff. Use `--check` instead only if all projections are already current. | Full local L3; CI still checks the actual PR head. |
+| After commit/push | Run `python verification/review_findings.py --scope publication` once for the new history. | Publication/history checks only; no deployment authorization. |
+
+`regen.py` already runs CHECK and TESTS after its writes. Do not immediately repeat `regen.py
+--check` on unchanged state. Repeat only for changed inputs, a failed gate, a rebase or a concrete
+new concern. During a batch, keep database, tracker, site, README/export regeneration, full-history
+scans, browser tests and live canaries out of individual imports. L3/L4 remain required at their
+existing delivery/release boundaries. A checkpoint is not permission to merge stale artifacts.
+
+Use `physical-evidence` for photos, `correction` for known claims (also covers physical evidence),
+`absence` for owner adjudications, `source-discovery` for source/provider changes and admissions
+(also covers the evidence projections), and `finish-refresh` after explicit snapshot acceptance.
+For a mixed batch, use the encompassing lane once. These checkpoints rebuild registry, graph,
+artwork, capability, checklist and collector references in the dependency order owned by `regen.py`;
+source changes additionally rebuild discovery/completeness projections. They do not acquire
+or accept live data. Unknown identities remain explicit candidates, never silently completed.
+
+`workflow_loop.py` already invokes its lane. Use it **instead of** the direct checkpoint only
+when its reconciliation/stop diagnosis is useful; do not run both on the same unchanged inputs.
+Perform tool installation, downloads and conversions before a full gate. While it runs, do not
+edit files, import evidence, write logs into the checkout (including ignored caches), or mutate
+the Git index. Keep test fixtures and command logs outside the checkout. A Windows temporary-file
+permission error is an execution-environment failure; correct the permission context before retrying.
+
+For continuation, hand off the branch/HEAD, retained manifest, accepted fields, integrated IDs,
+unresolved inputs, last successful checkpoint/full gate and next action in the existing completion
+record. Read unchanged contracts once per task and resume from those facts, not the entire chat.
 
 ## 1. Terms and invariants
 

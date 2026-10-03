@@ -151,8 +151,10 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    Preserve their reviewed base and use the field owners in
    [WORKFLOW-MAP.md](WORKFLOW-MAP.md#hybrid-ownership-and-recovery); regeneration cannot replace
    a lost harvest or reviewed graph migration.
-8. **Run the checks after every write pass** — see [Commands](#commands). Silent data corruption
-   has happened here and only the audit caught it.
+8. **Validate at the matching boundary** — importer checks during intake, scoped checks after
+   accumulated edits, and the full gate at batch delivery. Follow the
+   [batch execution contract](WORKFLOW-MAP.md#batch-execution-contract); do not run a full regen
+   after every image or claim. Silent data corruption must still fail the delivery gate.
 
 ## Data-model traps
 
@@ -247,11 +249,11 @@ Run from the repository root. The normative dependency order and core suite live
 pipeline source of truth. The graph/data boundary and the deliberate Pages lane are described in
 [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md). Do not copy that list into another document or workflow.
 
-For a data change, run `python scripts/regen.py --check` before editing to establish a clean
-baseline, make the change in its canonical store, then run `python scripts/regen.py` and review the
-diff. This runs the complete write/check/test sequence, including the within-store
-`review_integrity.py` checks and cross-artifact `review_findings.py` checks. A scoped lane may add
-cheaper L0–L2 checks, but it never replaces the L3 `regen.py --check` before merge.
+Use the [batch execution contract](WORKFLOW-MAP.md#batch-execution-contract): establish a baseline
+once, collect related imports, checkpoint their affected projections, and run `python scripts/regen.py`
+once at delivery. It includes the complete write/check/test sequence, including integrity and
+cross-artifact checks. A successful run needs no immediate duplicate `--check`. A scoped checkpoint
+never replaces L3 before merge; a chat reply alone does not close an intake batch.
 
 The pre-PR gate, matching CI:
 
@@ -261,15 +263,16 @@ pip install -r requirements.txt
 python -m playwright install chromium
 
 python scripts/regen.py                          # write every derived artifact, then run the core gate
-python scripts/regen.py --check                  # skip the write phase; this is what CI calls
+python scripts/regen.py --check                  # ALTERNATIVE when already generated; also what CI calls
 # Deeper L4 validation of every retained source/card discovery run.
 python scripts/source_adapters.py --check --full-refresh
 python scripts/card_discovery.py --check --full-refresh
 # Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
 python scripts/regen.py --check --check-only scripts/evidence_semantics.py
 
-# Scoped L0–L2 lane; report includes Run-ID, graph impact, and skipped checks. L3 is still required.
+# Normal intake checkpoint; report includes Run-ID, graph impact, and skipped checks.
 python scripts/scoped_regen.py --lane physical-evidence
+# ALTERNATIVE for stop/reconciliation diagnosis; this already invokes the scoped lane.
 python scripts/workflow_loop.py --loop physical --max-cycles 3
 # Other bounded loops: evidence, discovery, news-promo, tcgdex, absence, cardmarket.
 
@@ -301,7 +304,7 @@ is committed ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot
 
 `P6` scans full git history, so it fails on a shallow clone — `git fetch --unshallow` once.
 
-**`P6` and `P7` read git history, so run `review_findings.py` once more after committing and pushing.**
+**`P6` and `P7` read git history: run `review_findings.py --scope publication` after the batch's commit/push.**
 Everything else in this gate reads the working tree, and a green run before the commit says nothing about
 the commit itself. Run it before the commit for the tree, and again after the push for the history
 ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).

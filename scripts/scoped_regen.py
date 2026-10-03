@@ -89,7 +89,7 @@ def make_run_id(lane: str, manifest: dict[str, Any], commit: str) -> str:
 
 
 def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
-             dry_run: bool, before: dict[str, str]) -> dict[str, Any]:
+             dry_run: bool) -> dict[str, Any]:
     command = step["command"]
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "durationMs": 0.0}
@@ -101,17 +101,43 @@ def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
     started = time.perf_counter()
     process = subprocess.run(
         [sys.executable, *command], cwd=ROOT,
-        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"},
+        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8",
+             "PYTHONDONTWRITEBYTECODE": "1", "GIT_OPTIONAL_LOCKS": "0"},
         text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
     )
-    after = tree_snapshot(ROOT)
     return {
         "status": "passed" if process.returncode == 0 else "failed",
         "returnCode": process.returncode,
         "durationMs": round((time.perf_counter() - started) * 1000, 1),
-        "observedChangedPaths": sorted(observed_changed_paths(before, after)),
         "outputTail": process.stdout[-2000:],
     }
+
+
+def execute_lane(lane: dict[str, Any], args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[str]]:
+    results: list[dict[str, Any]] = []
+    skipped = list(lane["skippedChecks"])
+    previous_failed = False
+    before = tree_snapshot(ROOT) if not args.dry_run else {}
+    for step in lane["steps"]:
+        if previous_failed:
+            result = {"status": "not-run", "reason": "previous step failed", "durationMs": 0.0}
+        else:
+            result = run_step(step, args.include_live, args.include_browser, args.dry_run)
+        if result["status"] != "not-run":
+            after = tree_snapshot(ROOT)
+            result["observedChangedPaths"] = sorted(observed_changed_paths(before, after))
+            before = after
+        if result["status"] == "not-run":
+            skipped.append(f"{step['id']}: {result['reason']}")
+        if result["status"] == "failed":
+            previous_failed = True
+        results.append({
+            "id": step["id"], "command": step["command"], "gateLevel": step["gateLevel"],
+            "network": step.get("network", False), "browser": step.get("browser", False),
+            "declaredWrites": step.get("writes", []), **result,
+        })
+
+    return results, skipped
 
 
 def main() -> int:
@@ -135,24 +161,8 @@ def main() -> int:
         parser.error("--run-id contains unsupported characters")
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
 
-    results: list[dict[str, Any]] = []
-    skipped = list(lane["skippedChecks"])
-    previous_failed = False
-    for step in lane["steps"]:
-        before = tree_snapshot(ROOT)
-        if previous_failed:
-            result = {"status": "not-run", "reason": "previous step failed", "durationMs": 0.0}
-        else:
-            result = run_step(step, args.include_live, args.include_browser, args.dry_run, before)
-        if result["status"] == "not-run":
-            skipped.append(f"{step['id']}: {result['reason']}")
-        if result["status"] == "failed":
-            previous_failed = True
-        results.append({
-            "id": step["id"], "command": step["command"], "gateLevel": step["gateLevel"],
-            "network": step.get("network", False), "browser": step.get("browser", False),
-            "declaredWrites": step.get("writes", []), **result,
-        })
+    started = time.perf_counter()
+    results, skipped = execute_lane(lane, args)
 
     counts = collections.Counter(result["status"] for result in results)
     report = {
@@ -176,12 +186,13 @@ def main() -> int:
             "notRun": counts["not-run"], "durationMs": round(sum(row.get("durationMs", 0) for row in results), 1),
         },
         "steps": results,
+        "wallDurationMs": round((time.perf_counter() - started) * 1000, 1),
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"scoped workflow: runId={run_id} lane={lane['id']} "
           f"{counts['passed']} passed, {counts['not-run']} not-run, {counts['failed']} failed; "
-          f"report={report_path.relative_to(ROOT) if report_path.is_relative_to(ROOT) else report_path}")
+          f"report={report_path.relative_to(ROOT) if report_path.is_relative_to(ROOT) else report_path}; L3 not run")
     return 1 if counts["failed"] else 0
 
 

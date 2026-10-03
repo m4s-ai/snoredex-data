@@ -189,7 +189,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "${GITHUB_SHA}"
           echo "commit=${GITHUB_SHA} gate=P6/P7 result=running"
           set +e
-          python verification/review_findings.py 2>&1 | tee post-push-findings.log
+          python verification/review_findings.py --scope publication 2>&1 | tee post-push-findings.log
           status=${PIPESTATUS[0]}
           set -e
           grep -F "[ ok ] P6" post-push-findings.log

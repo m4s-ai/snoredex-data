@@ -7,11 +7,14 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from unittest import mock
 
 
 ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "verification" / "scoped_pipeline_manifest.json"
 MATRIX = ROOT / "verification" / "workflow_gate_matrix.json"
+sys.path.insert(0, str(ROOT))
+from scripts import regen, scoped_regen
 
 
 def main() -> int:
@@ -21,15 +24,19 @@ def main() -> int:
     assert set(lanes) == {"physical-evidence", "source-discovery", "finish-refresh", "correction", "absence"}
     assert manifest["fullGate"] == ["python", "scripts/regen.py", "--check"]
     assert manifest["runContract"]["defaultNetwork"] is False
-    source_steps = {step["id"] for step in lanes["source-discovery"]["steps"]}
-    assert {"source-registry-check", "source-capabilities-check"} <= source_steps
-    assert [step["command"] for step in lanes["physical-evidence"]["steps"]] == [
-        ["scripts/finishes.py", "--offline"],
-        ["scripts/authoritative_graph.py", "--write"],
-        ["scripts/checklist.py"],
-        ["scripts/collector_catalogue.py"],
-        ["verification/fetch_attachment.py", "--evidence-check"],
-    ]
+    # A checkpoint must materialize the reference consumers that used to require a full build.
+    consumers = {"source_registry", "source_capabilities", "authoritative_graph", "artwork_review", "checklist", "collector_catalogue"}
+    for lane in lanes.values():
+        commands = [step["command"] for step in lane["steps"]]
+        assert consumers <= {Path(cmd[0]).stem for cmd in commands}
+        writes = [cmd for cmd in commands if cmd in regen.REGEN]
+        assert writes == [cmd for cmd in regen.REGEN if cmd in writes], "reuse the normative dependency order"
+        assert len({tuple(cmd) for cmd in commands}) == len(commands), "one execution per checkpoint"
+        assert not any(Path(cmd[0]).stem in {"regen", "review_findings", "database", "site", "tracker"}
+                       or "--refresh" in cmd for cmd in commands), "delivery/network work is not intake"
+    source_commands = [step["command"] for step in lanes["source-discovery"]["steps"]]
+    assert ["scripts/source_capabilities.py"] in source_commands
+    assert ["scripts/card_discovery.py"] in source_commands
 
     # Lane dependencies are a DAG, and every command is an existing repository-owned script.
     visiting: set[str] = set()
@@ -76,12 +83,25 @@ def main() -> int:
         second_report = json.loads(report_path.read_text(encoding="utf-8"))
         for report in (first_report, second_report):
             assert report["runId"] == "test-scoped-lane"
-            assert report["summary"] == {"steps": 4, "passed": 0, "failed": 0, "notRun": 4, "durationMs": 0.0}
+            count = len(lanes["finish-refresh"]["steps"])
+            assert report["summary"] == {"steps": count, "passed": 0, "failed": 0, "notRun": count, "durationMs": 0.0}
             assert report["fullGate"] == manifest["fullGate"]
             assert any("dry-run" in reason for reason in report["skippedChecks"])
         first_report.pop("generatedAt")
         second_report.pop("generatedAt")
+        first_report.pop("wallDurationMs")
+        second_report.pop("wallDurationMs")
         assert first_report == second_report, "same pinned scoped run must be idempotent"
+
+        # A failed projection may not be concealed by green checks or consumers built afterward.
+        with mock.patch.object(sys, "argv", ["scoped_regen.py", "--lane", "physical-evidence", "--out", str(report_path)]), \
+                mock.patch.object(scoped_regen, "run_step", return_value={"status": "failed", "returnCode": 7}) as run, \
+                mock.patch.object(scoped_regen, "tree_snapshot", return_value={}):
+            assert scoped_regen.main() == 1
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+        assert run.call_count == 1
+        assert report["summary"]["failed"] == 1
+        assert all(row["reason"] == "previous step failed" for row in report["steps"][1:])
 
     print(f"scoped regen contract passed: {len(lanes)} lanes, {sum(len(lane['steps']) for lane in lanes.values())} steps")
     return 0

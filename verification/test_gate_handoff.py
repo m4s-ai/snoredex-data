@@ -79,6 +79,7 @@ def main() -> int:
     assert "matrix:\n        os: [ubuntu-latest, windows-latest]" in release
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "post-push" in release and "P6/P7" in release
+    assert "python verification/review_findings.py --scope publication 2>&1" in release
     assert "verification/gate_manifest.py" in release
     assert "actions/upload-artifact@v4" in release
     assert "name: pages-artifact\n          path: _site\n          include-hidden-files: true" in release

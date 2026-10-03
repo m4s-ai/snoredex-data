@@ -17,18 +17,18 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the c
 
 1. Inspect the original image at sufficient resolution. Identify only visible facts: card identity, printed language/locality markers, finish or foil pattern, stamps or markings, distribution marks, and size cues.
 2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow, following the collision check below. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.
-3. For repository issue attachments, prepare one reviewed observation manifest and run `python verification/fetch_attachment.py --issue <number> --manifest <path>`. For a local or already reachable image, use the documented `--specimen ... --from ...` form.
+3. Collect related photos in one reviewed observation manifest. For issue attachments run `python verification/fetch_attachment.py --issue <number> --manifest <path>`; for local inputs use `--manifest <path>` without `--issue`. The direct `--specimen ... --from ...` form remains available for an existing record.
 4. Preserve the stable issue or listing URL as provenance and the imported byte hash as integrity evidence. File seller photographs as third-party-held specimens, never as a bare marketplace link.
 5. Record visible physical properties under `physicalObservation`. For explicit owner determinations, preserve the field-specific attribution described in `FINISH_SOURCES.md`; unclear image properties remain unset without that separate evidence.
-6. Run `python scripts/workflow_loop.py --loop physical --max-cycles 3` and inspect its stop reason. Then run `python scripts/scoped_regen.py --lane physical-evidence`.
-7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and the affected registry, artwork and collector views. Run `python scripts/regen.py`, review the complete artifact diff and publication-allowlist effects, and report any evidence still missing.
+6. Follow the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract): after accumulated imports, run `python scripts/scoped_regen.py --lane physical-evidence` once when consumers are needed. Use the physical workflow loop instead only for stop/reconciliation diagnosis; it already runs that lane.
+7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and registry, artwork and collector views. Report retained, integrated and unresolved evidence separately. Keep L3 pending during intake; run the full gate once at package delivery, not after each photo or chat message.
 
 ### WebP source photographs
 
 If a seller or browser image is WebP, keep the original and use the established WebP-to-PNG intake; do not ask the user to supply another format when the original bytes are reachable. The canonical importer and image-integrity gate accept PNG/JPEG, so WebP cannot be the committed `SPEC` photograph.
 
 1. Determine the actual format from the bytes, not the URL suffix or HTTP content type. Retain the untouched original WebP in the batch's `verification/evidence/...` bundle.
-2. Decode it to PNG with an available image library. Do not crop, resize, enhance, or otherwise transform it. Compare decoded source pixels with pixels reopened from the PNG in the same mode (RGB or RGBA); require exact equality before import.
+2. Prepare an available image decoder before the batch gate, then decode to PNG. Do not crop, resize, enhance, or otherwise transform it. Compare decoded source pixels with pixels reopened from the PNG in the same mode (RGB or RGBA); require exact equality before import. Reuse the prepared tool for subsequent photos.
 3. Record the original URL, retrieval date, MIME type, byte size, dimensions and SHA-256, plus the filed PNG path and SHA-256, decoder/library version, conversion method and pixel-equality result in `sources.json`.
 4. Import the PNG through the canonical manifest importer. Keep the manifest replayable from a retained PNG path, normally `verification/specimens/SPEC-nnnn.png` after successful import. Preserve the original WebP and conversion record beside the manifest.
 5. Inspect the original at sufficient resolution for identity and finish. The lossless conversion preserves pixels; it does not make seller metadata authoritative or establish more than the photographed copy shows.

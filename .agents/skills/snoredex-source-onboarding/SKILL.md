@@ -33,7 +33,8 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md),
    Equally, approval does not manufacture fields: preserve native values, keep unreviewed
    normalized mappings null and never transfer language, rarity or finish between releases.
    An external provider cannot establish absence or close a finish list.
-4. Before authorized writes, establish `python scripts/regen.py --check`. Update the canonical
+4. Before authorized writes, establish or reuse the baseline under the
+   [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract). Update the canonical
    `PROVIDERS` declarations in [source_registry.py](../../../scripts/source_registry.py) and the
    reviewed [source capabilities](../../../verification/source_capabilities.json) as needed.
    The generated `verification/source_registry.json` and `verification/SOURCES.md` are outputs.
@@ -49,8 +50,8 @@ Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md),
    [source reconciliation](../snoredex-source-refresh/SKILL.md) and verify its affected consumers.
    Otherwise validate the contract without accepting a claim. A native rarity label alone cannot
    establish a physical finish; a missing language row cannot disprove a printing.
-7. Run the relevant scoped source-discovery checks while iterating, then `python scripts/regen.py`
-   and the required L3 check before delivery. Inspect source grading, provenance and consumer
+7. Run `python scripts/scoped_regen.py --lane source-discovery` after accumulated provider/source
+   changes. Run the full gate once at package delivery; it already includes L3. Inspect grading, provenance and consumer
    changes. Follow [issue delivery](../snoredex-issue-delivery/SKILL.md) for the authorized PR work.
 
 Report the provider/surface, supported fields and explicit limits, retained examples, manual versus
