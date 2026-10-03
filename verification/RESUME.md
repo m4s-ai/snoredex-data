@@ -15,11 +15,11 @@ relative to the repository root.
 
 ## Before opening a PR: one command (#213)
 
-After any change to source data, run the single entrypoint instead of guessing which
-generator each change needs:
+During intake use the [batch execution contract](../WORKFLOW-MAP.md#batch-execution-contract).
+At package delivery, run one of these alternatives, not both consecutively:
 
     python scripts/regen.py          # regenerate every derived artifact, then verify
-    python scripts/regen.py --check  # skip the write phase and verify (what CI calls)
+    python scripts/regen.py --check  # alternative when already generated (what CI calls)
 
 `regen.py` runs all generators in dependency order, then the determinism check, the cross-artifact
 gate, and every core regression suite. Browser, live-source and publish canaries stay in CI because
@@ -39,7 +39,6 @@ TCGdex change is relevant to the work:
 python scripts/finishes.py --refresh                         # stage candidate and print drift
 python scripts/finishes.py --refresh --accept-refresh         # accept that exact candidate
 python scripts/regen.py                                      # regenerate from that snapshot
-python scripts/regen.py --check                              # verify the committed result
 ```
 
 `--refresh` reports changed, added, and removed card URLs and stages the exact payloads in
@@ -73,13 +72,14 @@ finish, edition, marking, distribution, or size; omission is never evidence of n
 ```console
 python verification/fetch_attachment.py --issue 269 --manifest path/to/issue-269.json
 python verification/fetch_attachment.py --manifest path/to/owner-photos.json
-python scripts/regen.py
-python verification/fetch_attachment.py --evidence-check
+python scripts/scoped_regen.py --lane physical-evidence
 ```
 
 The importer parses the issue HTML, downloads the signed image candidate, validates PNG/JPEG
 bytes, records `photographSha256`, writes `specimens.json` plus `verification/specimens/`, and
 keeps the stable issue URL as provenance. A second run is a no-op for identical bytes.
+The two import commands above are alternative input forms. Accumulate related imports before
+the checkpoint; it includes evidence validation. Run the full gate once when delivering the batch.
 The direct manifest form reads each row's `attachment` path or URL and keeps its optional
 `photographSource` as stable provenance. If an exact owner photograph predates its canonical
 source-first release, the reviewed row may set `allowUnprojected: true`; the specimen is retained
@@ -106,6 +106,8 @@ in `finish_overrides.json` or in a one-off pass.
 Retaining an image and connecting its evidence are separate operations. Apply this contract when
 adding a photograph, admitting a source-first card, adding corroboration, or changing an identity.
 The importer does not turn a citation into a reviewed confirmation or independent corroboration.
+Mark intake as retained until its checkpoint verifies the affected consumers; an unresolved
+candidate stays explicit. Full package delivery additionally requires L3 under the batch contract.
 An explicit owner determination may establish a property the photograph does not show; record
 that distinction through `ownerAttestedFields` as described in [FINISH_SOURCES.md](FINISH_SOURCES.md#recording-what-a-scan-shows-150).
 
@@ -210,7 +212,8 @@ stores into [`DATA-HANDOFF-AUDIT.md`](DATA-HANDOFF-AUDIT.md) by `python scripts/
 open items into `verification/open-items.html`. A table typed here would be a second copy that
 drifts — the one this replaced claimed 634 confirmed and 85 contradicted, against a real 635 and 84.
 
-Run `verification/review_integrity.py` after any write pass.
+Validate accumulated writes through the owning checkpoint; it includes `review_integrity.py`.
+Use the [batch execution contract](../WORKFLOW-MAP.md#batch-execution-contract) for delivery.
 
 
 ### Finish verification is a separate positive-evidence layer
@@ -326,7 +329,7 @@ all *additional* language claims on cards that were otherwise evidenced.
 
 `$EV` (evidence text) and `$ev` (log array) are **the same variable**. Declaring `$ev=@()` after `$EV='...'` silently wipes the text, and units get written with an empty or array-typed `evidence` while still being marked `confirmed`. It does not throw. Same class of bug as `$R`/`$r` earlier.
 
-`review_integrity.py` checks every resolved unit for a non-trivial string evidence field — **run it after every write pass**. This invariant caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier.
+`review_integrity.py` checks every resolved unit for a non-trivial string evidence field. This invariant caught two corrupted units (`s5a` Indonesian/Thai) that had gone unnoticed several phases earlier. The current batch contract runs it in each evidence checkpoint and in the full delivery gate.
 
 ### Traditional Chinese prints can live under a different set entirely
 

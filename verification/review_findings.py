@@ -6,10 +6,10 @@ Complements `verification/review_integrity.py`. That script validates invariants
 the derived artifacts that consumers and the future public site actually read.
 
 Most checks correspond to a finding in `verification/history/REVIEW-2026-07-25.md`; later checks protect
-the release, portability, and transparency contracts added during remediation. Run it after any
-write pass, and re-run it to confirm a fix:
+the release, portability, and transparency contracts added during remediation. The full suite
+runs at batch delivery through regen.py. After commit/push, check the actual publication history:
 
-    python verification/review_findings.py
+    python verification/review_findings.py --scope publication
 
 Exit code 0 when no FAIL-severity check fires, 1 otherwise. Checks marked INFO
 report drift without failing, so legitimate progress does not turn the suite red.
@@ -19,6 +19,7 @@ Runs on Python 3.9+ with no third-party dependencies and no network access.
 
 from __future__ import annotations
 
+import argparse
 import json
 import hashlib
 import importlib.util
@@ -3506,8 +3507,13 @@ def _collect_g14(state: dict[str, Any]) -> dict[str, Any]:
 # --------------------------------------------------------------------------- #
     return updates
 
-def collect() -> None:
+def collect(scope: str = "full") -> None:
     """Run each guarded check family in its historical order."""
+    if scope == "publication":
+        _collect_g8({})
+        return
+    if scope != "full":
+        raise ValueError(f"unknown findings scope: {scope}")
     state: dict[str, Any] = {}
     state.update(_collect_g0(state))
     state.update(_collect_g0b(state))
@@ -3542,6 +3548,10 @@ def emit(result: Check | Note) -> None:
 
 
 def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--scope", choices=("full", "publication"), default="full",
+                        help="publication checks the tree/history boundary only; not a full gate")
+    args = parser.parse_args()
     # A crash used to take the whole run with it: the body executed at import, so a key error in
     # one check's data loading killed the process before a single result reached stdout, and the
     # forty checks that had already passed were never seen. Collecting first and rendering after
@@ -3550,7 +3560,7 @@ def main() -> int:
     # stopped. Full per-check isolation needs the section split tracked in #82.
     crashed: Exception | None = None
     try:
-        collect()
+        collect(args.scope)
     except Exception as error:  # noqa: BLE001 - any failure here must still render what ran
         crashed = error
         check("X0", "The suite ran to completion", "FAIL", False,
@@ -3558,7 +3568,7 @@ def main() -> int:
     suite.render(emit)
     total = len(suite.checks)
     failures = len(suite.failed)
-    print(f"\n{total - failures}/{total} checks passed, {failures} failing.")
+    print(f"\n{total - failures}/{total} checks passed, {failures} failing (scope={args.scope}).")
     if crashed is not None:
         traceback.print_exception(type(crashed), crashed, crashed.__traceback__)
     return 1 if failures else 0

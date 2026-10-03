@@ -1,6 +1,6 @@
 {
   "schema": "snoredex-scoped-pipeline",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "fullGate": ["python", "scripts/regen.py", "--check"],
   "runContract": {
     "runId": "UTC timestamp plus lane/manifest/commit fingerprint; caller may pin --run-id",
@@ -8,7 +8,8 @@
     "defaultNetwork": false,
     "defaultBrowser": false,
     "idempotence": "lane steps may rewrite only their declared projections; repeated offline runs must leave non-SQLite tree bytes unchanged",
-    "mergeBoundary": "every lane report is partial evidence; L3 fullGate remains required before merge"
+    "mergeBoundary": "every lane report is partial evidence; L3 fullGate remains required before merge",
+    "batchBoundary": "Import all reviewed rows, checkpoint the affected lane once, then run regen.py once at batch delivery; a successful regen.py already includes the full check."
   },
   "lanes": [
     {
@@ -22,13 +23,18 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "finish-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
-        {"id": "graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "finishes-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "confirmed-releases-projection", "command": ["scripts/confirmed_releases.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_confirmed_releases.json", "analysis_confirmed_releases.csv"]},
+        {"id": "source-registry-projection", "command": ["scripts/source_registry.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_registry.json", "verification/SOURCES.md"]},
+        {"id": "source-capabilities-projection", "command": ["scripts/source_capabilities.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_capability_graph.json"]},
+        {"id": "authoritative-graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "artwork-review-projection", "command": ["scripts/artwork_review.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/artwork_review_projection.json", "verification/artwork_derivative_manifest.json", "images/previews/", "images/thumbs/"]},
         {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
-        {"id": "collector-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json"]},
-        {"id": "attachment-integrity", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []}
+        {"id": "collector-catalogue-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json", "collector_catalogue.schema.json", "collector_migrations.json", "collector_catalogue.fixture.json"]},
+        {"id": "review-integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "fetch-attachment-check", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []}
       ],
-      "skippedChecks": ["full L3 regen.py gate", "browser acceptance", "live finish-source verification", "publish/deployment"]
+      "skippedChecks": ["full L3 regen.py gate and cross-artifact audit", "database, tracker, site and export projections", "browser acceptance", "live source retrieval and snapshot acceptance", "publication/history audit and deployment"]
     },
     {
       "id": "source-discovery",
@@ -41,14 +47,27 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "source-registry-check", "command": ["scripts/source_registry.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "source-capabilities-check", "command": ["scripts/source_capabilities.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "set-adapter-check", "command": ["scripts/source_adapters.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "card-discovery-check", "command": ["scripts/card_discovery.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "completeness-check", "command": ["scripts/completeness_gate.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
-        {"id": "graph-check", "command": ["scripts/authoritative_graph.py", "--check"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+        {"id": "evidence-semantics-projection", "command": ["scripts/evidence_semantics.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/evidence_semantics.json"]},
+        {"id": "editions-projection", "command": ["scripts/editions.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "finishes-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "language-status-projection", "command": ["scripts/language_status.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "confirmed-releases-projection", "command": ["scripts/confirmed_releases.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_confirmed_releases.json", "analysis_confirmed_releases.csv"]},
+        {"id": "report-projection", "command": ["verification/report.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/confirmed_sources.json", "verification/CONTRADICTED.json", "verification/UNCONFIRMED.json"]},
+        {"id": "source-registry-projection", "command": ["scripts/source_registry.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_registry.json", "verification/SOURCES.md"]},
+        {"id": "source-capabilities-projection", "command": ["scripts/source_capabilities.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_capability_graph.json"]},
+        {"id": "source-adapters-projection", "command": ["scripts/source_adapters.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_adapter_staging.json", "verification/source_adapter_records.jsonl"]},
+        {"id": "authoritative-graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "artwork-review-projection", "command": ["scripts/artwork_review.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/artwork_review_projection.json", "verification/artwork_derivative_manifest.json", "images/previews/", "images/thumbs/"]},
+        {"id": "card-discovery-projection", "command": ["scripts/card_discovery.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/card_discovery_staging.json", "verification/card_discovery_records.jsonl"]},
+        {"id": "asia-locality-matrix-projection", "command": ["scripts/asia_locality_matrix.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/ASIA-LOCALITY-MATRIX.md"]},
+        {"id": "locality-matrix-projection", "command": ["scripts/locality_matrix.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/LOCALITY-ERA-MATRIX.md"]},
+        {"id": "completeness-gate-projection", "command": ["scripts/completeness_gate.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/completeness_gate.json"]},
+        {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
+        {"id": "collector-catalogue-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json", "collector_catalogue.schema.json", "collector_migrations.json", "collector_catalogue.fixture.json"]},
+        {"id": "review-integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "fetch-attachment-check", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []}
       ],
-      "skippedChecks": ["live discovery refresh", "full L3 regen.py gate", "browser acceptance", "publish/deployment"]
+      "skippedChecks": ["full L3 regen.py gate and cross-artifact audit", "database, tracker, site and export projections", "browser acceptance", "live source retrieval and snapshot acceptance", "publication/history audit and deployment"]
     },
     {
       "id": "finish-refresh",
@@ -61,12 +80,19 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "snapshot-check", "command": ["verification/test_tcgdex_snapshot.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "offline-finish-check", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
-        {"id": "refresh-candidate", "command": ["scripts/finishes.py", "--refresh"], "gateLevel": "L1", "network": true, "browser": false, "writes": ["verification/cache/finish-tcgdex/"]},
-        {"id": "finish-projection", "command": ["scripts/finishes.py", "--reproject"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]}
+        {"id": "test-tcgdex-snapshot-check", "command": ["verification/test_tcgdex_snapshot.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "finishes-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "confirmed-releases-projection", "command": ["scripts/confirmed_releases.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_confirmed_releases.json", "analysis_confirmed_releases.csv"]},
+        {"id": "source-registry-projection", "command": ["scripts/source_registry.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_registry.json", "verification/SOURCES.md"]},
+        {"id": "source-capabilities-projection", "command": ["scripts/source_capabilities.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_capability_graph.json"]},
+        {"id": "authoritative-graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "artwork-review-projection", "command": ["scripts/artwork_review.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/artwork_review_projection.json", "verification/artwork_derivative_manifest.json", "images/previews/", "images/thumbs/"]},
+        {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
+        {"id": "collector-catalogue-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json", "collector_catalogue.schema.json", "collector_migrations.json", "collector_catalogue.fixture.json"]},
+        {"id": "review-integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "fetch-attachment-check", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []}
       ],
-      "skippedChecks": ["refresh candidate is skipped without --include-live", "snapshot acceptance remains an explicit owner action", "full L3 regen.py gate", "browser acceptance", "publish/deployment"]
+      "skippedChecks": ["full L3 regen.py gate and cross-artifact audit", "database, tracker, site and export projections", "browser acceptance", "live source retrieval and snapshot acceptance", "publication/history audit and deployment"]
     },
     {
       "id": "correction",
@@ -79,12 +105,23 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "semantics-check", "command": ["scripts/evidence_semantics.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "application-check", "command": ["verification/test_evidence_application.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
-        {"id": "cross-artifact-check", "command": ["verification/review_findings.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+        {"id": "evidence-semantics-projection", "command": ["scripts/evidence_semantics.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/evidence_semantics.json"]},
+        {"id": "editions-projection", "command": ["scripts/editions.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "finishes-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "language-status-projection", "command": ["scripts/language_status.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "confirmed-releases-projection", "command": ["scripts/confirmed_releases.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_confirmed_releases.json", "analysis_confirmed_releases.csv"]},
+        {"id": "report-projection", "command": ["verification/report.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/confirmed_sources.json", "verification/CONTRADICTED.json", "verification/UNCONFIRMED.json"]},
+        {"id": "source-registry-projection", "command": ["scripts/source_registry.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_registry.json", "verification/SOURCES.md"]},
+        {"id": "source-capabilities-projection", "command": ["scripts/source_capabilities.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_capability_graph.json"]},
+        {"id": "authoritative-graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "artwork-review-projection", "command": ["scripts/artwork_review.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/artwork_review_projection.json", "verification/artwork_derivative_manifest.json", "images/previews/", "images/thumbs/"]},
+        {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
+        {"id": "collector-catalogue-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json", "collector_catalogue.schema.json", "collector_migrations.json", "collector_catalogue.fixture.json"]},
+        {"id": "review-integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "fetch-attachment-check", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []},
+        {"id": "test-evidence-application-check", "command": ["verification/test_evidence_application.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []}
       ],
-      "skippedChecks": ["unrelated projection families", "full L3 regen.py gate", "browser acceptance", "live source verification", "publish/deployment"]
+      "skippedChecks": ["full L3 regen.py gate and cross-artifact audit", "database, tracker, site and export projections", "browser acceptance", "live source retrieval and snapshot acceptance", "publication/history audit and deployment"]
     },
     {
       "id": "absence",
@@ -97,12 +134,24 @@
       "mergeGate": "L3",
       "releaseGate": "L4",
       "steps": [
-        {"id": "semantics-check", "command": ["scripts/evidence_semantics.py", "--check"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "adjudication-check", "command": ["verification/test_owner_adjudications.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
-        {"id": "report-check", "command": ["verification/report.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/CONTRADICTED.json", "verification/UNCONFIRMED.json"]},
-        {"id": "cross-artifact-check", "command": ["verification/review_findings.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []}
+        {"id": "evidence-semantics-projection", "command": ["scripts/evidence_semantics.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/evidence_semantics.json"]},
+        {"id": "editions-projection", "command": ["scripts/editions.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "finishes-projection", "command": ["scripts/finishes.py", "--offline"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/finish_units.json", "verification/FINISH_REVIEW.json", "verification/FINISH_REVIEW.csv", "analysis_finishes.json", "snorlax_cards.json"]},
+        {"id": "language-status-projection", "command": ["scripts/language_status.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["snorlax_cards.json"]},
+        {"id": "confirmed-releases-projection", "command": ["scripts/confirmed_releases.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_confirmed_releases.json", "analysis_confirmed_releases.csv"]},
+        {"id": "report-projection", "command": ["verification/report.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/confirmed_sources.json", "verification/CONTRADICTED.json", "verification/UNCONFIRMED.json"]},
+        {"id": "source-registry-projection", "command": ["scripts/source_registry.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_registry.json", "verification/SOURCES.md"]},
+        {"id": "source-capabilities-projection", "command": ["scripts/source_capabilities.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/source_capability_graph.json"]},
+        {"id": "authoritative-graph-projection", "command": ["scripts/authoritative_graph.py", "--write"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/authoritative_graph.json"]},
+        {"id": "artwork-review-projection", "command": ["scripts/artwork_review.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["verification/artwork_review_projection.json", "verification/artwork_derivative_manifest.json", "images/previews/", "images/thumbs/"]},
+        {"id": "checklist-projection", "command": ["scripts/checklist.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["analysis_checklist.json"]},
+        {"id": "collector-catalogue-projection", "command": ["scripts/collector_catalogue.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": ["collector_catalogue.json", "collector_catalogue.schema.json", "collector_migrations.json", "collector_catalogue.fixture.json"]},
+        {"id": "review-integrity-check", "command": ["verification/review_integrity.py"], "gateLevel": "L2", "network": false, "browser": false, "writes": []},
+        {"id": "fetch-attachment-check", "command": ["verification/fetch_attachment.py", "--evidence-check"], "gateLevel": "L0", "network": false, "browser": false, "writes": []},
+        {"id": "test-evidence-application-check", "command": ["verification/test_evidence_application.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []},
+        {"id": "test-owner-adjudications-check", "command": ["verification/test_owner_adjudications.py"], "gateLevel": "L1", "network": false, "browser": false, "writes": []}
       ],
-      "skippedChecks": ["zero-result inference", "unrelated projection families", "full L3 regen.py gate", "browser acceptance", "live source verification", "publish/deployment"]
+      "skippedChecks": ["full L3 regen.py gate and cross-artifact audit", "database, tracker, site and export projections", "browser acceptance", "live source retrieval and snapshot acceptance", "publication/history audit and deployment"]
     }
   ]
 }

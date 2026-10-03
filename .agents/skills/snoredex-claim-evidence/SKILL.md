@@ -16,16 +16,16 @@ Work from the repository root. Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.m
 ## Claim-evidence workflow
 
 1. Identify the exact `(setCode, number, variant, language)` unit and separate language existence, locality, finish, edition, and distribution claims.
-2. Establish a clean baseline with `python scripts/regen.py --check`. Record any pre-existing failure; do not hide it in the evidence change.
+2. Establish or reuse the batch baseline under the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract). Record pre-existing failures; do not rerun a full baseline per claim.
 3. Classify what the source positively establishes. Provider silence, missing rows, zero results, and TCGdex `false` are not negative evidence.
 4. Resolve the provider and its capability in the reviewed source registry. Attribute the claim to the source it would fail without; mark corroboration only when a second provider supports this same unit.
 5. Follow `RESUME.md` to update the canonical store and append the observation journal. For specimen-backed claims or changed references, apply its [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract). Never edit generated projections, reuse a neighbour's evidence, or invent a source reference.
 6. Treat an explicit collection-owner absence decision as adjudication input. A scoped source may support the rationale but cannot itself produce `not-printed`; otherwise leave the claim pending or disputed.
-7. Run the smallest relevant check while iterating:
+7. Checkpoint accumulated changes with the smallest relevant lane:
    - ordinary claim change: `python scripts/scoped_regen.py --lane correction`
    - owner absence adjudication: `python scripts/scoped_regen.py --lane absence`
-   - state-machine diagnosis: `python scripts/workflow_loop.py --loop evidence --max-cycles 3` or `--loop absence`
-8. Run `python scripts/regen.py`, review every changed canonical and generated artifact, and report the evidence, provider, status transition, graph impact, and remaining uncertainty.
+   - state-machine diagnosis, instead of the lane above: `python scripts/workflow_loop.py --loop evidence --max-cycles 3` or `--loop absence`
+8. Report evidence, provider, status transition, graph impact and remaining uncertainty at the checkpoint. Run the full gate once at package delivery under the batch contract and review the complete diff; a single accepted claim does not automatically close the batch.
 
 ## Claim-evidence source-recovery
 

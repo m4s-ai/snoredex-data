@@ -139,16 +139,16 @@ target/evidence record and handoff. Reconcile every accepted target before calli
 Respect session authorization, including “always put accepted findings in the PR” or draft-only
 instructions when applicable; do not copy publication decisions from an unrelated research round.
 
-1. Establish the full-check baseline before data mutation. Reuse only a branch dedicated to the
-   current task; otherwise start from freshly fetched `origin/main`.
-2. Run the owning intake/claim/discovery lane, then `python scripts/regen.py`. Review all canonical
-   and generated changes, stable IDs, photo hashes, field support and unrelated-data conservation.
-   Never hand-edit projections or rerun archived passes.
-3. Run `python scripts/regen.py --check` before delivery. Stage reviewed captures, images,
+1. Follow the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract) for
+   one baseline and related imports on an isolated branch from current `origin/main`.
+2. Checkpoint accumulated findings through the owning intake/claim/discovery lane once. Review
+   stable IDs, photo hashes, supported fields and affected consumer references. Never hand-edit
+   projections or rerun archived passes. Do not close a batch just because one card was found.
+3. Run the full gate once at package delivery; `regen.py` already includes its checks. Stage reviewed captures, images,
    manifests, canonical changes and resulting artifacts together. Inspect staged paths and diff;
    avoid blanket staging of unrelated research.
 4. When authorized, commit with the repository's required trailer and push/update the scoped PR.
-   After commit and push, run `python verification/review_findings.py` for history-sensitive checks.
+   After commit and push, run `python verification/review_findings.py --scope publication` for history-sensitive checks.
 5. Report each target's supported fields, source/image links, SPEC/reference IDs, remaining gaps,
    validation and actual commit/PR status. Synchronize relevant issues/PRs when authorized; one
    resolved field does not complete a card's entire research task.

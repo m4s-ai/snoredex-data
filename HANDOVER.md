@@ -214,7 +214,8 @@ verification/
                               distinct from the signed download URL). Then
                               the importer also records `photographSha256` so later checks can
                               detect byte drift. Follow the specimen and reference acceptance
-                              contract in RESUME.md and the full scripts/regen.py gate.
+                              contract in RESUME.md and the batch execution contract in WORKFLOW-MAP.md:
+                              scoped checkpoints during intake, one full gate at package delivery.
                               Checks S7-S12 cover
                               it; publish.py already allowlists the directory and LICENSE.md
                               decision 4 covers the category, so no approval is needed per image.
