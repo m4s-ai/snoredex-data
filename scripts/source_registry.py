@@ -1093,22 +1093,39 @@ def record_printing_source(source, printing_id, dimensions, record, surfaces):
                printing_id, source.get("retrievedAt"))
 
 
-def record_set_dates(document: dict, record: Callable) -> dict[str, list[str]]:
-    """Index canonical date provenance without inferring other card properties."""
+def record_physical_printing(entry: dict, record: Callable, retrieved: str | None) -> str | None:
+    physical = (entry.get("raw") or {}).get("physicalPrintingEvidence")
+    if not physical or not physical.get("finish"):
+        return None
+    # Authority follows the printing observation, not an adjacent identity source.
+    url = physical["sourceUrl"]
+    provider = resolve_provider(url, None)
+    record(url, "Reviewed positive physical-printing evidence", "finish",
+           entry["sourceRecordId"], retrieved, provider_id=provider)
+    return provider
+
+
+def record_set_evidence(document: dict, record: Callable) -> dict[str, list[str]]:
+    """Index explicit date and printing evidence, never infer fields from membership."""
     dimensions = {}
     for entry in document["sourceRecords"]:
+        raw = entry.get("raw") or {}
+        retrieved = raw.get("retrievedAt") or entry.get("retrieved")
+        provider = record_physical_printing(entry, record, retrieved)
+        if provider:
+            dimensions.setdefault(provider, []).append("finish")
         if entry["sourceKind"] != "release-date-record":
             continue
-        url = entry.get("sourceUrl") or entry.get("raw", {}).get("sourceUrl")
+        url = entry.get("sourceUrl") or raw.get("sourceUrl")
         if not url and entry["provider"] == "bulbapedia":
             url = "https://bulbapedia.bulbagarden.net/wiki/" + entry["raw"]["page"].replace(" ", "_")
         if not url:
             raise ValueError(f"Release-date source lacks a URL: {entry['sourceRecordId']}")
         record(url, "Localized set/product release-date record", "date",
-               entry["sourceRecordId"], entry.get("raw", {}).get("retrievedAt") or entry.get("retrieved"),
+               entry["sourceRecordId"], retrieved,
                provider_id=entry["provider"])
 
-        dimensions[entry["provider"]] = ["date"]
+        dimensions.setdefault(entry["provider"], []).append("date")
     return dimensions
 
 
@@ -1268,7 +1285,7 @@ def main() -> int:
                entry["setCode"], entry.get("retrievedAt") or bulbapedia_dates["generated"])
 
     content_dimensions = record_card_content(content, record)
-    date_dimensions = record_set_dates(set_dates, record)
+    date_dimensions = record_set_evidence(set_dates, record)
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
         row = {

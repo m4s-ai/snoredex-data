@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 606,
+  "count": 607,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -12793,6 +12793,29 @@
         "basis": "The owner explicitly identifies Holo on this exact Indonesian AS1b 112/150 seller photograph; visible card text establishes identity."
       },
       "listingUrl": "https://shopee.co.id/Snorlax-GX-112-150-RR-(as1b)-TCG-Pokemon-Bahasa-Indonesia-2019-i.1343192572.45360222413"
+    },
+    {
+      "specimenId": "SPEC-0607",
+      "setCode": "sc1b I",
+      "number": "119/153",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Shopee Malaysia seller photograph of an Indonesian card, visually inspected at original 900x900 resolution on 2026-10-02 and rechecked on 2026-10-05; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0607.jpg",
+      "photographSource": "https://down-my.img.susercontent.com/file/id-11134207-7r98t-lzrosoy95pad0a",
+      "photographSha256": "sha256:4446e79e2dd204ff9d54602e0600c92991c7b756bc8ea00903b63b5a4c5fa106",
+      "observed": "Physical Indonesian Snorlax V HP220, sc1b I, regulation D, 119/153 RR, Illus. Masakazu Fukuda. Menelan 60, Falling Down 170 and Indonesian rule text establish the exact existing release. Cyan and green foil reflections are visible across the upper illustration, right border and lower rule bar. The photograph establishes Holo; no named foil pattern, owner custody, same-card link or complete finish inventory is asserted.",
+      "recordedAt": "2026-10-02",
+      "citedBy": [
+        "ID:sc1b I:119/153:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "standard",
+        "basis": "Visible cyan and green foil reflections across the upper illustration, right border and lower rule bar establish Holo on the photographed Indonesian sc1b I 119/153 card."
+      },
+      "listingUrl": "https://shopee.com.my/Snorlax-V-RR-sc1b-Pokemon-TCG-Indonesia-foil-holo-i.1383074464.29914412874"
     }
   ]
 }

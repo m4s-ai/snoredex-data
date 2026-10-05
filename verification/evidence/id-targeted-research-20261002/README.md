@@ -3,8 +3,13 @@
 
 Research covers the 18 Indonesian finish gaps remaining after SPEC-0606 (AS1b 112/150 Holo).
 Three authorized gpt-6.1-sol medium agents searched six targets each; the root inspected the
-sc1b original and two additional localized deck articles. These seven findings are retained
-research proposals, not canonical finish updates or newly allocated SPECs.
+sc1b original and two additional localized deck articles. The seven findings were accepted on
+2026-10-05 and now establish canonical physical printings. The six deck statements remain
+attributed to Bulbapedia; the seller photograph is retained as SPEC-0607. The original proposal
+JSON files describe the research snapshot of 2026-10-02, before this acceptance.
+
+The current Indonesian catalogue has 26 of 37 releases without recorded gaps and 11 remaining
+physical-finish gaps. See [integration and preservation checks](INTEGRATION-20261005.md).
 
 | Exact Indonesian target | Finding | Supporting source |
 |---|---|---|
