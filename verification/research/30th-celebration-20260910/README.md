@@ -1,6 +1,8 @@
 <!-- doc: role=retained release research and evidence boundaries; stage=reference -->
 # 30th Celebration — retained research, 2026-09-10
 
+**Historical checkpoint:** release timing and missing identities below describe the research on 2026-09-10. The [Simplified Chinese intake of 2026-10-01](../../evidence/30th-cn-20261001/README.md) later established that exact localized Snorlax identity as SPEC-0600. Current admitted identities and their evidence are in [source_first_prints.json](../../source_first_prints.json).
+
 Eleven localized Snorlax renders are retained as SPEC-0507–SPEC-0517. Local product pages announce 2026-09-16; these are announced releases, not already-released inventory.
 
 Every source and its scope is recorded in `sources.json`. Exact card observations and image hashes are in `observations.json`; `intake.json` uses durable repository images. `retained-pages.json` indexes the saved raw responses. Browser-only observations are explicitly recorded as reviewed fields, not represented as downloaded page bytes.

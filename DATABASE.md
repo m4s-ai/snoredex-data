@@ -60,8 +60,8 @@ publisher's own locale databases answer, are recorded as card-level.
 
 Which verdict each granularity may support on its own is now declared rather than implied, in
 `verdictTransitions` in `verification/evidence_semantics.json`. In short, a card-level record
-establishes a printing. Every external provider is positive only. A product-level statement reaches
-the card only when the step above holds, and never denies one. An
+establishes a localized card release, not a physical finish. Every external provider is positive
+only. A product-level statement reaches the card only when the step above holds, and never denies one. An
 era argument and a sibling's record establish nothing on their own. An owner adjudication settles a
 contradiction whatever sits beneath it, because it is the only mechanism that can settle an absence.
 `verdictsBeyondTheirGranularity` in `verification/evidence_semantics.json` reports the current raw
@@ -71,12 +71,17 @@ materializes an existence or absence claim beyond its permitted transition.
 `needs-set-size` is a third answer, not a softer `does-not-carry`: it is the report declining to
 classify. When `printedSetSize` records the denominator printed beside the collector number, a card
 is inside the numbered run when its number is within that size, in its own numbering. That fact
-outranks the rarity word in both directions, which is what Cardmarket's era-dependent `Ultra Rare`
-needed: the same word covers the modern Full Art, secret in some locales, and the EX-era `ex` and
-DP-era LV.X cards numbered inside the set. The state remains available when a set size is missing.
+outranks the rarity word in both directions **except for distribution rarities**: `Promo`,
+`Prize Pack Series`, `Oversized`, `World Championship Deck`, and `Online Code Card` remain outside
+the numbered run. A separately distributed promo may reuse a run card's number without belonging
+to that run. For ordinary run cards, the size rule resolves the ambiguity of Cardmarket's
+era-dependent `Ultra Rare` label: it covers modern Full Art cards, secret in some locales, and
+the EX-era `ex` and DP-era LV.X cards numbered inside the set. The state remains available when
+a set size is missing.
 
 The same columns explain the other statuses. Every `not-printed` row is `owner-adjudicated` and none
 is source-derived. Every `disputed` row retains `source-disagreement` as its evidence inference.
+
 - `owner_adjudications` records the collection owner's final decision after reviewing all cited
   claims and evidence. It is not a claim that any one provider proved absence.
 - `application_status='disputed'` preserves a repository contradiction without an owner

@@ -2,7 +2,7 @@
 # Snoredex Data
 
 **A frozen 2026-07-21 Cardmarket-derived Snorlax candidate universe whose inherited language claims
-were re-checked outside Cardmarket, plus a separately sourced finish layer — not a complete
+were re-checked against positive evidence beyond marketplace metadata, plus a separately sourced finish layer — not a complete
 all-locality catalogue.**
 
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
@@ -18,9 +18,9 @@ all-locality catalogue.**
 > [!IMPORTANT]
 > The licence grants are **in force**, granted by `M4S.Collection`. Publication was approved on 2026-07-31: the repository is **public** and the site may be deployed. Deployment stays a manual workflow run — merging never publishes. See
 > [`publication-decisions.json`](publication-decisions.json), [`LICENSE.md`](LICENSE.md), and
-> [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).
+> [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md#6-gate-mode-boundaries-292).
 >
-> **Data coverage:** `cardmarket-search-2026-07-21` is a frozen historical Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. Current totals describe only known rows descended from that baseline. The bounded source-first rebuild completed under [#132](https://github.com/m4s-ai/snoredex-data/issues/132); the completeness gate retains explicit source and locality gaps.
+> **Data coverage:** `cardmarket-search-2026-07-21` is a frozen historical Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. Current collector projections also include separately evidenced source-first admissions. The bounded source-first rebuild completed under [#132](https://github.com/m4s-ai/snoredex-data/issues/132); the completeness gate retains explicit source and locality gaps.
 <!-- /generated:status -->
 
 ## Why this exists
@@ -32,8 +32,9 @@ read it as the second question. Ask Cardmarket about `KSS 26` (XY Kalos Starter 
 global language list entirely. Build a collection goal from that and you will hunt cards that were
 never made.
 
-So every inherited language claim is re-checked against evidence *outside* Cardmarket — an official
-database, a photographed card, a fan wiki, or a seller's photo of the actual specimen — and each
+So every inherited language claim is re-checked against positive evidence — an official
+database, an inspected card, a fan wiki, or an exact card photograph, including one retained from
+Cardmarket when the visible card itself establishes the claim — and each
 piece of evidence is named, ranked and dated. Finish evidence is tracked in a separate
 positive-evidence layer; marketplace-only finish claims remain labelled as such. Where an outside
 source disagrees with the marketplace, both survive: the raw claim, and the verdict beside it. The
@@ -124,7 +125,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-10-02**. Its candidate denominator is the immutable legacy baseline `cardmarket-search-2026-07-21`; these totals do not claim all-locality discovery completeness.
+Current-known status snapshot: **2026-10-05**. Legacy claim counts refer to `cardmarket-search-2026-07-21`; collector projections also include accepted source-first admissions. Neither claims all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
@@ -133,7 +134,7 @@ Current-known status snapshot: **2026-10-02**. Its candidate denominator is the 
 | Evidence-safe application status | **621 established**, **6 needs evidence**, **88 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **903 items** across 174 cards and 15 languages: 843 documented printings plus 60 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 507 externally confirmed, 26 marketplace-only positives, 27 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 131 units. |
-| Evidence registry | **33 providers**, 1659 evidence records, 1651 unique URLs, and 6,584 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Evidence registry | **33 providers**, 1672 evidence records, 1664 unique URLs, and 6,635 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -165,14 +166,13 @@ Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker r
 <!-- /generated:authority-tiers -->
 
 **A single source may carry a claim, and usually does.** The rule check `E3` enforces is
-*checkable or strong*: evidence with **no URL** — the owner's word, a card inspected in hand — must
+*checkable or strong*: uncorroborated evidence with **no URL** — the owner's word, a card inspected in hand — must
 come from tier 1 or 2, because nobody else can go and look at it. A tier-3 page anyone can open may
-stand alone, and hundreds of claims do. That line is deliberate: a Bulbapedia set list is weaker
-than an official database but it is not unverifiable, whereas an unlinkable claim from a weak source
-is neither strong nor checkable.
+stand alone; the generated table below reports how often that happens. An unlinkable claim from
+a weak source is neither strong nor checkable.
 
 So read the tier beside a claim rather than assuming corroboration. Corroboration is preferred
-throughout this project and is genuinely uncommon:
+throughout this project and is uncommon:
 
 <!-- generated:evidence-strength — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | How the claim is sourced | Resolved claims |
@@ -181,12 +181,13 @@ throughout this project and is genuinely uncommon:
 | Single tier 1-2 source | 621 |
 | Single tier 3 source | 3 |
 
-624 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 26 claims with no URL come from tier 1 or 2, where the evidence is the owner's own cards.
+624 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 3 do. What it forbids is a claim that is neither — all 26 uncorroborated claims with no URL come from tier 1 or 2; their inspections, attestations or owner adjudications are retained in the repository.
 <!-- /generated:evidence-strength -->
 
-The physical cards behind the non-URL claims have stable ids in
-[`verification/specimens.json`](verification/specimens.json) and are cited, never re-described in
-prose — and only a *cited* specimen may claim specimen authority (check `S14`).
+Specimen-backed claims cite stable ids in
+[`verification/specimens.json`](verification/specimens.json); only a *cited* specimen may claim
+specimen authority (check `S14`). Owner attestations and absence adjudications retain their own
+evidence and do not imply a photographed or physically held card.
 
 **Language truth and finish truth are separate layers.** `units.json` answers "was this printed in
 this language?"; `finish_units.json` answers "which finishes exist for this set number and
@@ -196,7 +197,7 @@ language?" They have separate backlogs, and a confirmed language claim never imp
 physical evidence uses the canonical observation-manifest importer. A new Python pass under
 `verification/` is reserved for migration, bulk repair, or a data-model change. Then the generators
 and checks are re-run; `units.json` and `finish_units.json` are never hand-edited.
-[`AGENTS.md`](AGENTS.md) has the required command order.
+[`scripts/regen.py`](scripts/regen.py) owns the command order; [`AGENTS.md`](AGENTS.md) explains when to run it.
 The [specimen and reference acceptance contract](verification/RESUME.md#specimen-and-reference-acceptance-contract)
 explains how retained images must remain connected to their claims and consumer views.
 
@@ -209,8 +210,9 @@ Cardmarket result pages and hand `snorlax_cards.json` to everything downstream. 
 not in the repository and are **not reproducible**: they are a scrape of a live marketplace from
 2026-07-21, and the same search today returns different products, prices and language filters.
 Re-scraping would not rebuild this dataset, it would produce a different one. **`snorlax_cards.json`
-is therefore an input to this repository, not an output of it** — the evidence layer is what is
-maintained here. `mkunits` is in the same category and destructive besides: it rebuilds
+is therefore a retained input with generator-owned fields, not a disposable output** —
+[hybrid field ownership](WORKFLOW-MAP.md#hybrid-ownership-and-recovery) defines which parts may be
+regenerated. `mkunits` is in the same category and destructive besides: it rebuilds
 `verification/units.json` with fresh ids, discarding every verification verdict. It is not part of
 any rebuild.
 
@@ -221,7 +223,7 @@ discovery boundary. The bounded source-first rebuild completed under
 [#132](https://github.com/m4s-ai/snoredex-data/issues/132); its terminal result accounts for the
 reviewed inputs and keeps remaining source/locality gaps explicit.
 
-**Everything downstream regenerates from what is committed.** The executable pipeline source of
+**Derived artifacts regenerate from the committed retained stores.** The executable pipeline source of
 truth is [`scripts/regen.py`](scripts/regen.py), which owns the ordered `REGEN`, `CHECK`, and
 `TESTS` lists. Run `python scripts/regen.py` to rebuild and verify the derived artifacts, or
 `python scripts/regen.py --check` for the CI-equivalent deterministic gate. The complete input →
@@ -254,8 +256,9 @@ workflow run and deploys the already verified artifact without a second projecti
   and nothing has settled it. Current counts are in the generated status block above. Both are
   excluded from the checklist, so
   that nobody is sent hunting a printing the evidence points away from, but only the first is a
-  claim that the card does not exist. A photograph would overturn a disputed row.
-- **Every "Spanish" claim here means European Spanish.** From Journey Together (2025), LATAM-ES is
+  claim that the card does not exist. An exact photograph establishing the disputed property can
+  resolve a disputed row.
+- **Legacy Cardmarket-derived "Spanish" claims mean European Spanish.** From Journey Together (2025), LATAM-ES is
   a physically distinct edition for regular sets — different attack translations, set name and set
   code (specimen-verified on `SVP 184`). Cardmarket does not carry it, so it is absent from this
   legacy candidate universe; that absence is not evidence that the printing does not exist.
@@ -268,8 +271,8 @@ workflow run and deploys the already verified artifact without a second projecti
   the re-illustrated reprints were found — but never read it as art identity.
 - **Artist coverage is partial.** Illustrators come from pokemontcg.io/limitlesstcg
   (English-market), the official pokemon-card.com database (Japanese-market) and exact release
-  histories. Mostly Korean and Chinese deck products publish no illustrator credit, so `artist`
-  stays `null` there rather than being guessed; use `cardKey` to find a sibling that has one.
+  histories. Where no reviewed credit is available, `artist` stays `null`. A sibling's `cardKey`
+  alone does not justify transferring its credit: establish the actual artwork and supporting source.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two
   finish layers answer different questions: `finishAvailability` on a card says what evidence
   attributes to *this Cardmarket product*, while `finish_units.json` says what is known for the
@@ -343,8 +346,8 @@ Refreshing that snapshot is an explicit review flow: stage with
 ## Findings
 
 [`FINDINGS.md`](FINDINGS.md) collects what the catalogue turned up: where language coverage departs
-from the regional baselines, the 38 cards printed in more than one release and which of them were
-re-illustrated, what each Cardmarket variant cluster turned out to be, and how the one-off harvest
+from the regional baselines, Cardmarket product groups sharing a `cardKey`, what each variant
+cluster turned out to be, and how the one-off harvest
 was run against a Cloudflare-protected marketplace.
 
 ## Repository map
@@ -355,20 +358,20 @@ All paths are relative to the repository root.
 |---|---|
 | [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json) | Immutable source commit, hashes, counts and membership of the historical Cardmarket candidate universe. |
 | [`snorlax_cards.json`](snorlax_cards.json) | Main product dataset — one record per Cardmarket single. |
-| [`snoredex.sqlite`](snoredex.sqlite) · [`DATABASE.md`](DATABASE.md) | Normalized current-state application handoff, with no evidence journal or migration history. |
+| [`snoredex.sqlite`](snoredex.sqlite) · [`DATABASE.md`](DATABASE.md) | Normalized current-state application handoff, including retained graph migration dispositions but no append-only evidence journal. |
 | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | Blank, refreshable ownership tracker with `have`, `wanted`, quantity and notes. |
 | [`analysis_checklist.json`](analysis_checklist.json) | Canonical physical checklist, documented printings and explicit placeholders alike. |
-| [`index.html`](index.html) | The generated collection browser. The only public page; `verification/confirmed-releases.html` redirects to it. |
+| [`index.html`](index.html) | Main generated review page; `verification/confirmed-releases.html` redirects to it. |
 | [`images/`](images/) | Third-party card images used for identification; excluded from this project's licence grants. |
 | [`verification/`](verification/) | The evidence layer: state stores (`units.json`, `finish_units.json`), specimens, the check suites, and the write passes that produced the data. |
-| [`verification/source_adapter_staging.json`](verification/source_adapter_staging.json) | Source-first local-set staging feed: 12 locale slices, raw provenance/accounting and explicit unresolved source tracks; proposals only, never verdicts. |
+| [`verification/source_adapter_staging.json`](verification/source_adapter_staging.json) | Source-first local-set staging feed: configured locale slices, raw provenance/accounting and explicit unresolved source tracks; proposals only, never verdicts. |
 | [`scripts/`](scripts/) | The generators — data, finish model, checklist, chronology, issue templates, site and publication artifact. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
-| [`AGENTS.md`](AGENTS.md) · [`CLAUDE.md`](CLAUDE.md) | Working rules for an agent: non-negotiables, data-model traps, command order. |
+| [`AGENTS.md`](AGENTS.md) · [`CLAUDE.md`](CLAUDE.md) | Canonical agent rules and the Claude import shim that loads them. |
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and repository map; priorities live in the issue tracker. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Verification playbook — source techniques, corrections, dead ends. |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction and how it is graded. |
-| [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md) | Ordered steps to take the site public, and what each approval attests. |
+| [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md) | Historical launch record; current publication commands and gates are in `WORKFLOW-MAP.md`. |
 
 ## Licence, attribution and AI transparency
 

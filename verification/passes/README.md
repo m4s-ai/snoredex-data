@@ -6,9 +6,11 @@ workflow. A routine physical-card addition extends the canonical specimen manife
 
 ```console
 python verification/fetch_attachment.py --issue NUMBER --manifest PATH
-python scripts/regen.py
-python verification/fetch_attachment.py --evidence-check
 ```
+
+Follow the [batch execution contract](../../WORKFLOW-MAP.md#batch-execution-contract) for importer
+checks, accumulated scoped checkpoints and the complete delivery gate. That gate already includes
+the evidence checks; this directory does not define a separate per-specimen regeneration sequence.
 
 The maintained replacements are the manifest importer, finish projector, authoritative graph
 projector, targeted checks, and `scripts/regen.py`. A new Python pass is justified only for a

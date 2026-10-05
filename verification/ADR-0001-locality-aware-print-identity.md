@@ -44,7 +44,7 @@ Use three different grains.
 A **candidate claim** is one assertion from one immutable input record. It may propose a card
 release or a physical printing, but it is never itself proof that the proposed object exists.
 
-Every input stays visible:
+Every input stays visible. The original 0.2.0 migration snapshot accounted for:
 
 - all 719 legacy language units;
 - all 693 recorded finish-printing claims;
@@ -52,9 +52,9 @@ Every input stays visible:
 - all 75 positively excluded code-card units.
 
 The permitted dispositions are `established-and-mapped`, `candidate-needs-evidence`,
-`bounded-contradicted`, and `positively-excluded`. `bounded-contradicted` preserves the 85 existing
-verdicts as non-materializing claims; this model makes no new contradiction. Evidence-inference
-rules were implemented separately under #137.
+`bounded-contradicted`, and `positively-excluded`. `bounded-contradicted` preserved the 85
+contradictions in that snapshot as non-materializing claims; this model makes no new contradiction.
+Evidence-inference rules were implemented separately under #137.
 
 ### Card release
 
@@ -89,9 +89,10 @@ Cardmarket product image may instead establish facts directly visible on the pic
 English card, including finish. The image does not project a language filter onto a localized
 release or collector number, and neither the filter nor a missing image establishes absence.
 
-## Measured result
+## Historical 0.2.0 dry-run result
 
-The 0.2.0 dry-run maps the current stores to:
+The original 0.2.0 dry-run mapped its input snapshot to the following counts. Current graph and
+consumer totals live in [`DATA-HANDOFF-AUDIT.md`](DATA-HANDOFF-AUDIT.md).
 
 | | Count |
 |---|---:|
@@ -164,7 +165,7 @@ Migration remains reversible and dry-run first.
 - Consumer migration and the graph's SQLite boundary landed in #140. The schema records the
   constraints so later projections cannot weaken the identity boundary.
 
-## What does not change
+## What the original design migration did not change
 
 - Authority tiers, providers, corroboration, absence scopes, and owner adjudications.
 - The positive-evidence rule and the meaning of `pending`.
@@ -174,23 +175,26 @@ Migration remains reversible and dry-run first.
 
 ## Source-first records
 
-The eight records in [`source_first_prints.json`](source_first_prints.json) positively establish
-local card releases that Cardmarket never listed. Their historical `printId` values remain raw
-record identifiers/aliases for migration compatibility; the dry-run maps them to card-release ids.
+The initial eight records in [`source_first_prints.json`](source_first_prints.json) positively
+established local card releases outside the Cardmarket harvest. The store has since grown; its
+admitted records and the authoritative graph own current membership. Historical `printId` values
+remain raw record identifiers/aliases for migration compatibility and map to card-release ids.
 
-Their work equivalence stays explicit. `S-P 101`, for example, establishes a Korean local release
-while its relationship to the work currently represented by `S-P 156` remains unresolved. The
-model no longer forces a work guess merely to record the physical local card.
+Their work equivalence stays explicit. Korean `S-P 101` was admitted before its relationship to
+the work represented by Japanese `S-P 156` was resolved. The accepted 2026-09-01 mapping now lives
+in `legacy_issue_rekeys.json`; it preserves both local release identities. The model does not
+force a work guess merely to record a positively evidenced local card.
 
 Reviewed migration decisions live separately in `legacy_issue_rekeys.json`. A
 `same-work-decision` may attach a source-first local release to an existing work while keeping both
 local release identities and both raw identifiers intact. The first accepted edge is the owner-
-identified `sm10 076` / `TW:AS5a:142` relationship from #84; the other twenty #84 questions remain
-explicitly `needs-positive-local-identity`, which is not an absence conclusion.
+identified `sm10 076` / `TW:AS5a:142` relationship from #84. Later mappings are retained in the same
+store. Unmapped questions remain explicitly `needs-positive-local-identity`, which is not an
+absence conclusion; the original unresolved count is not a current backlog.
 
-All eight cited specimens have a release claim, so the orphan count is zero. This corrects the
-stale intermediate wording in the original ADR that still said two records were held after both
-were resolved later on 2026-08-09.
+All eight initially cited specimens had a release claim, so that snapshot's orphan count was zero.
+This corrects the stale intermediate wording in the original ADR that still said two records were
+held after both were resolved later on 2026-08-09.
 
 ## Owner decisions retained
 

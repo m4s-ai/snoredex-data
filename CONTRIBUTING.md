@@ -32,7 +32,8 @@ had to be reverted.
 
 Concretely:
 
-- **"I have this card in hand"** is a contribution. It is recorded as an owner attestation.
+- **"I have this card in hand"** is a contribution. Record who inspected it and what they observed;
+  a contributor report does not automatically become a collection-owner attestation.
 - **"Here is a photo / a listing / an official checklist entry"** is a contribution.
 - **"It isn't on <site>, so it must not exist"** is not, and will be closed.
 
@@ -48,9 +49,9 @@ Evidence is ranked, and the ranking is public: see
 [`verification/source_registry.json`](verification/source_registry.json). Tiers 1-3 grade external
 evidence, strongest first; tier 5 marks what is *not* external evidence.
 
-**A card in your hand is tier 1.** A photograph of the actual card ranks alongside an official
-publisher database and above every independent catalogue — this page used to say the opposite, and
-it was wrong. Specimen reports have already overturned three databases at once here: TCGdex,
+**An inspected physical specimen is tier 1.** Exact seller or catalogue photographs and
+collection-owner attestations are tier 2. A photograph supports only details actually visible on
+the card, not unverified listing metadata. Specimen reports have overturned three databases at once here: TCGdex,
 pokumon and Bulbapedia all recorded `XYPR 179` as English-only until photographs of the German,
 Italian, Spanish and Portuguese cards proved otherwise.
 
@@ -97,8 +98,8 @@ python -m playwright install chromium
 python scripts/regen.py --check
 ```
 
-That is the deterministic offline merge gate. Browser, live-source, and publication checks are
-separate release-lane canaries because they depend on the environment or network.
+That is the deterministic offline merge gate. UI-relevant pull requests also run the Chromium
+browser contract. The manual release lane adds browser, live-source and publication checks.
 
 ## Licensing of contributions
 

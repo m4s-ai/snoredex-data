@@ -380,6 +380,23 @@ def verify_source_first_specimen_registry():
 
 
 def verify_standalone_registry_observations(registry):
+    calls = []
+    registry.record_set_evidence({'sourceRecords': [
+        {'sourceRecordId': 'mixed', 'sourceKind': 'edition-availability-record',
+         'provider': 'mixed-positive-evidence', 'retrieved': '2026-10-02',
+         'raw': {'physicalPrintingEvidence': {'sourceUrl': 'https://www.pokemon.com/us/news/example',
+                                              'finish': 'holo'}}},
+        {'sourceRecordId': 'identity-only', 'sourceKind': 'edition-availability-record',
+         'provider': 'bulbapedia', 'raw': {}}]},
+        lambda *args, **kw: calls.append((args, kw)))
+    assert len(calls) == 1 and calls[0][0][2:5] == ('finish', 'mixed', '2026-10-02')
+    assert calls[0][1]['provider_id'] == 'pokemon-official'
+    indexed = json.loads((ROOT / 'verification/source_registry.json').read_text(encoding='utf-8'))['evidence']
+    for source in json.loads((ROOT / 'verification/set_catalogue_sources.json').read_text(encoding='utf-8'))['sourceRecords']:
+        physical = (source.get('raw') or {}).get('physicalPrintingEvidence')
+        if physical and physical.get('finish'):
+            assert any(source['sourceRecordId'] in row['stableIds'] and 'finish' in row['dimensions']
+                       for row in indexed), source['sourceRecordId']
     direct = registry.direct_specimen_claims(
         [{'unitId': 'U1', 'sourceRef': 'specimen:S1'}],
         [{'printId': 'SF1', 'specimenId': 'S2', 'corroboratingSpecimenIds': ['S3']}],

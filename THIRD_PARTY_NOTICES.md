@@ -10,9 +10,10 @@ Pokémon names, characters, artwork, logos, trademarks, and trading card designs
 respective rights holders. This project is unofficial and makes no ownership claim over that
 material.
 
-Files under `images/` are retained Cardmarket product images used for identification. Their source
-does not establish that Cardmarket owns every underlying photograph or depicted work. No repository
-licence grant applies to them.
+Files under `images/` include retained Cardmarket product images and generated previews and
+thumbnails of catalogue or specimen images. Derivatives retain the original source's rights and
+provenance; a Cardmarket source does not establish ownership of the photograph or depicted work.
+No repository licence grant applies to this material.
 
 ## Specimen evidence
 
@@ -39,7 +40,8 @@ material in the repository licences.
 `verification/source_registry.json` is the machine-readable inventory. They record stable provider
 IDs, attribution wording, terms links, coverage limits, and evidence use.
 
-All providers are positive-evidence sources. An official Pokémon page or checklist confirms only
+External evidence is positive only; marketplace metadata and internal derivations are separately
+labelled and do not become independent verification. An official Pokémon page or checklist confirms only
 the release it names for the corresponding language and region. An omitted card, language, region,
 or finish remains unknown. No provider can establish non-release by omission.
 

@@ -1,9 +1,11 @@
-<!-- doc: role=bounded Japanese modern finish research record; stage=task -->
+<!-- doc: role=dated Japanese modern finish research record; stage=reference -->
 # Japanese finish research: modern targets — 2026-09-29
 
 This packet records the bounded exact-card search for five Japanese Snorlax finish targets in issue #259. Finish names below are limited to what a source positively states; missing labels and static-looking images do not establish non-holo.
 
-| Target | Result | Current evidence boundary |
+**Later evidence on 2026-09-29:** the three open targets below received owner-supplied Non-Holo evidence in the [s2 077 intake](../owner-s2-nonholo-20260929/README.md) (SPEC-0591), [sI100 341 intake](../owner-si341-nonholo-20260929/README.md) (SPEC-0593) and [sI100 342 intake](../owner-si342-nonholo-20260929/README.md) (SPEC-0592). The research results and proposed next steps below preserve the earlier checkpoint; they are not the current finish backlog.
+
+| Target | Result | Evidence boundary at this research checkpoint |
 |---|---|---|
 | `s2 077/096` (`U0531`, `F0351`) | Open | Exact Japanese identity is established elsewhere; no opened source positively names its finish. Existing non-holo/reverse-holo candidates remain unverified. |
 | `sI100 341/414` (`U0652`, `F0375`) | Open | Exact identity is established elsewhere; no opened source positively establishes the finish. The existing reverse-holo candidate remains unverified. |

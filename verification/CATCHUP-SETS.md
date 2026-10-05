@@ -1,4 +1,4 @@
-<!-- doc: role=catch-up-set scope expansion plan and evidence index; stage=reference -->
+<!-- doc: role=dated catch-up-set scope expansion plan and evidence index; stage=reference -->
 # Catch-up-set scope expansion (Traditional Chinese & related)
 
 Owner-directed scope expansion (issues #84, 2026-08-03/04; auditor follow-up 2026-08-05).
@@ -6,6 +6,8 @@ This document tracks the *decision* to treat T-Chinese (and related) **catch-up-
 their own products**, not as a `language` claim on the Japanese/English set-slot the marketplace
 lists them under. It is a plan plus the evidence index for each code; it is **not** a second copy
 of the data.
+
+**Historical scope:** this plan and its remaining-decision list record the 2026-08-03–09 checkpoints. Later admissions live in [source_first_prints.json](source_first_prints.json), including Korean `FXY 026/036`; current work is tracked in the [issues](https://github.com/m4s-ai/snoredex-data/issues). The evidence index below preserves the original decision context.
 
 ## Why this exists
 
@@ -21,8 +23,8 @@ catch-up reprint `not-printed`, and the correct model is a separate product/unit
 
 - A catch-up reprint is a **distinct product** (`own set code + own number`), confirmed by its own
   evidence — not a `language` attribute of the overseas slot.
-- Absence rules unchanged: no catch-up code is assumed `not-printed` without positive evidence or an
-  explicit owner adjudication; `pending` = unresolved, never absent.
+- Only an explicit collection-owner adjudication establishes `not-printed`. External sources
+  provide positive evidence for named printings; `pending` = unresolved, never absent.
 - `snorlax_cards.json` is a historical harvest (input, not reproducible). This plan does **not**
   invent products there; it records the codes and their specimens so a real product pass can pick
   them up with machine identity, or an owner can adjudicate per code.
@@ -70,10 +72,11 @@ mark. **All eight specimens are admitted; none is an orphan.** The technique is 
 The trailing `F` marks the Traditional Chinese release of a code that also appears in other
 languages (owner), so it is part of the identifier rather than decoration.
 
-Codes with no specimen of their own — the Simplified-Chinese `sc1a`/`sc1b` rows reachable through
-52poke, and `FXY` — were not covered by D1 and remain open below.
+The Simplified-Chinese `sc1a`/`sc1b` rows reachable through 52poke and Korean `FXY` were recorded
+as outside D1 and left for the decisions below at this checkpoint. `FXY` already had SPEC-0018,
+as listed in the evidence index; its later canonical admission is linked above.
 
-## Open owner decisions (per code)
+## Owner decisions still open at the 2026-08-09 checkpoint
 
 For the codes not settled by D1, the owner decides whether to:
 1. **Add it as its own product** (new `snorlax_cards.json`-adjacent entry + units + checklist),
@@ -82,5 +85,5 @@ For the codes not settled by D1, the owner decides whether to:
    without a new catalogue product), which moves the claim off `disputed`/`not-printed` without a
    catalogue change.
 
-This document is the handoff point: it names the codes, the evidence, and the two ways to land it.
-Nothing in it is data to be regenerated.
+This document records the proposed handoff at that checkpoint: the codes, evidence and two
+options considered. It is not the current admission queue or data to be regenerated.

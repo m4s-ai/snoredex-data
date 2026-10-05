@@ -5,8 +5,7 @@
     "generated": "2026-09-25",
     "adr": "verification/ADR-0001-locality-aware-print-identity.md",
     "decision": "ADR-0001 D1 (owner, 2026-08-09) for specimen-backed codes; ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, language and identity only",
-    "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity, deliberately not by a Cardmarket product: these cards were never listed there.",
-    "notYetProjected": "These are not in snorlax_cards.json, the checklist or the SQLite handoff. Owner decision D2 makes them collector-visible when the identity model goes into force in #140; until then they are recorded, cited and countable, not published.",
+    "description": "Printings admitted on their own evidence rather than inherited from the Cardmarket harvest. Keyed by the ADR-0001 print identity rather than a Cardmarket product. Accepted admissions feed the authoritative graph and its collector projections.",
     "counts": {
       "admitted": 190,
       "held": 0

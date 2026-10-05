@@ -14,8 +14,8 @@ each trap — read it when a rule looks arbitrary.
 
 The current data is a **legacy Cardmarket-derived candidate universe** captured on 2026-07-21,
 plus an independent **source-verification layer**: for each inherited card × language × variant,
-does a source *outside Cardmarket* confirm that printing actually exists? It is not a complete
-all-locality catalogue; the immutable boundary is recorded in
+does positive evidence beyond marketplace availability confirm that printing actually exists?
+It is not a complete all-locality catalogue; the immutable boundary is recorded in
 [`legacy-cardmarket-baseline.json`](legacy-cardmarket-baseline.json). The bounded source-first
 rebuild completed under #132; its terminal state accounts for the reviewed inputs while retaining
 explicit source and locality gaps rather than claiming discovery completeness.
@@ -23,7 +23,7 @@ explicit source and locality gaps rather than claiming discovery completeness.
 The layer exists because Cardmarket's language filter reports **marketplace availability, not a
 print manifest**, and it over-claims. The worked example is `KSS 26`: advertised in 17 languages,
 currently confirmed physically in 6; the Spanish image is digital-only (OA-20261001-U0482).
-Every language claim therefore needs an outside source.
+Every language claim therefore needs positive evidence beyond the marketplace filter.
 
 The owner (`Scarrty` in git, `M4S.Collection` as licensor) directs scope and supplies physical
 specimens. Owner statements are authoritative but are still graded explicitly as evidence.
@@ -174,7 +174,8 @@ These are the things that have actually caused mistakes. Full treatment is in
   `units.json`, finish truth in `finish_units.json`; the two backlogs are separate. **Never infer
   a physical finish from a confirmed language claim.**
 - **V-tokens are opaque and set-specific.** `xsv2a` V1 = Poké Ball mirror / V2 = Master Ball
-  mirror, but `xm2a` flips that order; `PPS8` V1 = Non-Holo / V2 = Holo; `xJTG` V1/V2/V3 are
+  mirror; `xm2a` V1 = Colorless Energy star mirror / V2 = Poké Ball mirror.
+  `PPS8` V1 = Non-Holo / V2 = Holo; `xJTG` V1/V2/V3 are
   stamps. Never assume a V-token means the same thing across sets — read `variantName`. Inferring
   one set's order from another has already been right by luck, which is not the same as evidence
   ([LESSONS](LESSONS.md#v-tokens-are-set-specific-and-the-guess-is-sometimes-right)).
@@ -264,7 +265,7 @@ python -m playwright install chromium
 
 python scripts/regen.py                          # write every derived artifact, then run the core gate
 python scripts/regen.py --check                  # ALTERNATIVE when already generated; also what CI calls
-# Deeper L4 validation of every retained source/card discovery run.
+# Full retained-run validation: L4 and PRs changing discovery inputs.
 python scripts/source_adapters.py --check --full-refresh
 python scripts/card_discovery.py --check --full-refresh
 # Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
@@ -280,8 +281,8 @@ python scripts/workflow_loop.py --loop physical --max-cycles 3
 python verification/test_site.py                 # browser acceptance tests
 python verification/verify_finish_sources.py     # live TCGCSV assertions
 python scripts/publish.py --out _site             # build the artifact, THEN verify it
-python scripts/publish.py --out _site --verify    # --verify, not --check; exits 1 without --out
-git diff --exit-code -- . ':(exclude)*.sqlite'   # equivalent scope enforced inside regen.py
+python scripts/publish.py --out _site --verify    # --verify, not --check; requires a built artifact
+git diff --exit-code -- . ':(exclude)*.sqlite'    # optional clean-tree check after committing
 ```
 
 Every `--check` mode is observational: it may not create or replace files, update timestamps, or
@@ -305,8 +306,8 @@ is committed ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot
 `P6` scans full git history, so it fails on a shallow clone — `git fetch --unshallow` once.
 
 **`P6` and `P7` read git history: run `review_findings.py --scope publication` after the batch's commit/push.**
-Everything else in this gate reads the working tree, and a green run before the commit says nothing about
-the commit itself. Run it before the commit for the tree, and again after the push for the history
+A green run before the commit cannot validate the new commit itself. The full gate covers the
+working tree; repeat the publication scope after the push so it also sees the new history
 ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
 `python scripts/finishes.py --reproject` redoes only the card projection from the committed store
@@ -338,7 +339,7 @@ wrong, so retry the refresh rather than investigate absence. The evidence rules 
 [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md).
 
 Serve the site locally with `python -m http.server 8000`, then open <http://localhost:8000/>.
-`index.html` is the single public page; `verification/confirmed-releases.html` redirects to it.
+`index.html` is the main public review page; `verification/confirmed-releases.html` redirects to it.
 
 ### Check codes
 

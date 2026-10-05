@@ -536,8 +536,8 @@ def main() -> int:
   <p>This view projects the historical Cardmarket candidate universe frozen as
   <a href="legacy-cardmarket-baseline.json"><code>{html.escape(baseline['meta']['baselineId'])}</code></a>,
   plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
-  legacy claim it answers a narrower question: <em>does a source outside Cardmarket confirm this
-  printing actually exists?</em></p>
+  legacy claim it answers a narrower question: <em>does positive evidence beyond marketplace
+  metadata confirm this printing actually exists?</em></p>
   <div class="stats">
     {"".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>' for n, k in stats)}
   </div>
@@ -603,7 +603,7 @@ def main() -> int:
       </div>
     </details>
     <details class="morefilters">
-      <summary>Language filters (any / present / absent)</summary>
+      <summary>Language filters (any / confirmed / not confirmed)</summary>
       <div class="langgrid" id="langfilters"></div>
     </details>
     <div class="chips" id="chips"></div>
@@ -620,9 +620,9 @@ def main() -> int:
 
   <p class="language-legend" id="collection-table-legend">
     <strong>Language availability:</strong>
-    <span><span class="yes" aria-hidden="true">&#10003;</span> present</span>
-    <span><span class="no" aria-hidden="true">&mdash;</span> absent</span>
-    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> present, but on a
+    <span><span class="yes" aria-hidden="true">&#10003;</span> confirmed</span>
+    <span><span class="no" aria-hidden="true">&mdash;</span> not confirmed in this row; not proof of absence</span>
+    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> confirmed, but on a
       single source with no public URL &mdash; hover any tick for its provider and evidence tier</span>
     <span>Ellipsized values can be selected to expand.</span>
   </p>
@@ -760,8 +760,8 @@ def main() -> int:
   illustrator credits and the underlying illustrations, quoted provider content, and third-party
   photographs. The licences above grant nothing in respect of any of it.</p>
   <p>Pok&eacute;mon and all related names are trademarks of Nintendo, Creatures Inc. and GAME FREAK
-  inc. &copy; Pok&eacute;mon / Nintendo / Creatures / GAME FREAK. Card images are served from
-  Cardmarket and are included for identification only.</p>
+  inc. &copy; Pok&eacute;mon / Nintendo / Creatures / GAME FREAK. Retained card images come from the
+  sources named in the evidence registry and are included for identification and review.</p>
   <p><strong>This is an unofficial fan project.</strong> It is not affiliated with, endorsed by,
   sponsored by, or associated with Nintendo, Creatures Inc., GAME FREAK inc., The Pok&eacute;mon
   Company, Cardmarket, or any other rights holder or data provider named here.</p>
@@ -775,7 +775,7 @@ def main() -> int:
 <footer class="sitefoot">
   <p>Generated {generated} from the current-known repository data under legacy baseline
   <code>{html.escape(baseline['meta']['baselineId'])}</code>. No analytics, no cookies, no trackers,
-  no runtime API dependency — this page works offline once loaded.</p>
+  no runtime third-party API dependency. Artwork data and images load from this HTTP site.</p>
   <p>Data attribution: {html.escape(licensor)} · CC BY-NC-SA 4.0 (grants {grants_state}).
   Card artwork and other third-party material are excluded; see <a href="LICENSE.md">licensing scope</a>.</p>
 </footer>

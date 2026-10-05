@@ -76,10 +76,10 @@ verification/ADR-0007-embedded-artwork-review-ui.md
                               detection review stores versioned proposals in the browser and exports
                               them for review; it never writes authoritative data directly.
 verification/ADR-0008-reviewed-catalogue-basis-lists.md
-                              ACCEPTED canonical-data boundary (#187): languages, local sets,
-                              editions/events, typed set relations, artwork identities/appearances
-                              and physical printings are manually reviewed registries. Generators
-                              emit disposable hashed views and never write truth back into them.
+                              ACCEPTED registry design (#187). Separate reviewed artwork registries
+                              and full separation of the graph base from physical materialization
+                              remain design work. Current retained hybrids and their field writers
+                              are documented in WORKFLOW-MAP.md section 2.
 snoredex.sqlite               NORMALIZED HANDOFF: current products, language verdicts, editions,
                               releases, finishes, checklist and providers in one SQLite database.
                               No evidence journal or pass history. Owner adjudications are linked
@@ -234,8 +234,7 @@ verification/
   MANUAL_REVIEW.csv / .json   The units handed to the user to decide.
   UNCONFIRMED.json            The open units, grouped by card.
   open-items.html             Browsable page of open + manual-review items (an Artifact).
-  confirmed-releases.html     Browsable visual collection with images, chronology, editions,
-                              confirmed languages, finish/treatment badges and filters (an Artifact).
+  confirmed-releases.html     Compatibility redirect to the main review page at ../index.html.
   finish_units.json           FINISH STATE STORE. Set number×language units with physical printings,
                               finish/pattern/marking/size, sources and Cardmarket-product mappings.
   finish_tcgdex_snapshot.json VERSIONED TCGdex input for the finish generator. Normal regeneration
@@ -249,7 +248,7 @@ verification/
                               endpoints and the repeatable research workflow.
   FINISH_REVIEW.json / .csv   The remaining finish, pattern and product-mapping review queue.
   RESUME.md                   The verification playbook (read before editing evidence).
-  state.json                  Last completed phase.
+  state.json                  Historical phase checkpoint from 2026-08-02, not current task state.
   source_registry.json        Generated provider/evidence index. Counts live in README's
                                generated block; don't restate them here.
   source_capability_schema.json
@@ -309,11 +308,12 @@ verification/
                               broken file. `--list` shows which specimens still lack one.
   verify_finish_sources.py    Rechecks exact TCGCSV product IDs and expected positive subtypes.
                               Replayable offline against fixtures/tcgcsv_finish_sources.json.
-  review_integrity.py         Structural checks WITHIN each store — run after every write pass.
+  review_integrity.py         Structural checks WITHIN each store, included in scoped checkpoints
+                              and the full delivery gate under the batch execution contract.
   review_findings.py          Cross-artifact consistency BETWEEN the stores and what consumers
                               read, plus publication readiness. Stdlib only, no network.
   checks.py                   The check protocol shared by the two suites above. Counts are
-                              reported, never asserted (see §7).
+                              reported against directional baselines (see AGENTS.md's count rules).
   publication_gate.py         Blocks deployment until publication-decisions.json records the
                               approvals; the Pages workflow feeds it the real repo visibility.
   gate_manifest.py            Runtime-only CI/Pages handoff: binds L3/L4 success to commit/tree/
@@ -337,8 +337,8 @@ verification/
                               reproducible.
 ```
 
-`.gitignore` excludes transport/scratch data under `verification/cache/` and local image crops under
-`verification/zoom/`. Everything else is committed.
+`.gitignore` defines the local-only files, including transport caches, image crops, generated Pages
+artifacts, temporary handoffs and personal collection databases. Review it before staging files.
 
 
 ## 2. Where to go next

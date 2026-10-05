@@ -1,6 +1,8 @@
 <!-- doc: role=issue-258 Indonesian physical evidence; stage=reference -->
 # Indonesian AC3b 239/204 seller photograph — 2026-09-24
 
+**Later admission — 2026-09-25:** the [reconciliation record](../OPEN-ISSUES-RESEARCH-20260924.md#reconciliation-on-2026-09-25--positive-rows-are-evidence) records the canonical Indonesian AC3b release and its retained seller evidence. The unprojected status and remaining integration below describe the original 2026-09-24 intake checkpoint.
+
 SPEC-0556 retains the exact seller photograph supplied for review: Indonesian Eevee & Snorlax GX, AC3b C 239/204 SR. The card face visibly shows Indonesian text, the number and rarity, and reflective foil across the face and border. The observation records `holo`; it does not assign a specific foil pattern or close the finish inventory.
 
 The image endpoint returned WebP. The original 1080×1080 WebP and SHA-256 are kept in `sources.json`; the canonical specimen importer stores a PNG because it accepts PNG/JPEG only. Pillow 12.3.0 decoded the WebP to PNG with no crop, resize or enhancement. Reopening the PNG and comparing RGBA pixel bytes verified exact equality with the decoded WebP. The importer hash for the PNG and original WebP hash are both recorded.

@@ -236,8 +236,10 @@ def main() -> int:
     )
     assert "scripts/regen.py" in texts[ROOT / "HANDOVER.md"]
     active_text = "\n".join(texts[path] for path in ACTIVE_MARKDOWN)
-    assert "prioritised backlog" not in active_text
-    assert "current backlog" not in active_text
+    assert not re.search(
+        r"^#{1,6}\s+(?:\d+\.\s*)?(?:prioritised|current) backlog\b",
+        active_text, re.MULTILINE | re.IGNORECASE,
+    ), "Live backlog sections belong in the issue tracker, not documentation"
     assert "source-first rebuild is tracked" not in active_text
     assert "no rows are recorded yet" not in active_text.lower()
     assert "verification/test_evidence_application.py" not in workflow_map

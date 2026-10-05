@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-10-02",
+    "generated": "2026-10-05",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -16,14 +16,14 @@
     ],
     "counts": {
       "providers": 33,
-      "surfaces": 58,
-      "coverageEdges": 61,
+      "surfaces": 59,
+      "coverageEdges": 62,
       "absenceEdges": 0,
-      "observations": 67,
-      "resolvedVerdictSources": 1659
+      "observations": 69,
+      "resolvedVerdictSources": 1672
     },
     "surfaceStates": {
-      "active": 28,
+      "active": 29,
       "blocked-by-browser": 3,
       "incomplete": 21,
       "internal": 1,
@@ -191,7 +191,7 @@
       "providerId": "cardmarket-product-image",
       "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
       "authorityTier": 2,
-      "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+      "licenseOrTerms": "Site terms. Photographs and depicted artwork remain subject to their respective rights holders; the hosting source does not establish ownership.",
       "rawRetention": "Retain the exact product image, product id, capture date and SHA-256 when accepted as a stable specimen."
     },
     {
@@ -2613,6 +2613,44 @@
       },
       "coverageEdgeIds": [
         "malie-mew143-reference-positive"
+      ]
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "providerId": "pokemon-official",
+      "label": "Exact official Journey Together Build & Battle foil-promo statement",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-02",
+      "freshnessPolicy": "Retain the dated exact product statement before using a new observation; this historical fixture does not claim current page accessibility.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+        "parameters": [],
+        "pagination": "One exact retained product article; no general news coverage.",
+        "expectedIdentifiers": [
+          "Hop's Snorlax",
+          "one of four unique foil promo cards"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "foil promo cards"
+        ],
+        "publicationForm": "explicit named product-content statement",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "tpci-journey-together-build-battle-foil"
       ]
     }
   ],
@@ -5721,6 +5759,57 @@
         "zeroResultMeans": "unknown",
         "challenge": "Digital-game records are not physical existence evidence; an omitted foil object alone never means Non-Holo."
       }
+    },
+    {
+      "edgeId": "tpci-journey-together-build-battle-foil",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-journey-together-build-battle",
+      "coverage": {
+        "localities": [
+          "WEST",
+          "LATAM"
+        ],
+        "languages": [
+          "English",
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "prerelease-product"
+        ],
+        "timeRange": {
+          "start": "2025-03",
+          "end": "2025-03",
+          "basis": "The named Journey Together Build & Battle product only; locality identity and market date require separate evidence."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "finish"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A positive named foil statement never establishes absence or closes a finish list."
+      },
+      "knownPositiveObservationId": "obs-tpci-journey-together-build-battle",
+      "boundary": {
+        "outsideScope": [
+          "other articles",
+          "unnamed cards or finishes",
+          "locality identity",
+          "LATAM market dates",
+          "Staff treatment",
+          "foil patterns",
+          "complete finish inventory"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "Named product foil prose cannot identify a regional release or establish Staff, patterns or unlisted finishes."
+      },
+      "outOfScopeChallengeObservationId": "obs-tpci-journey-together-build-battle-boundary"
     }
   ],
   "observations": [
@@ -7217,7 +7306,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:8e0cd8f4c3ae5ba07a43ec3c08c13005f3aa507d7ebd992a05d1261d67436037",
+      "rawRecordHash": "sha256:8011740359d2aaa8766f3610142b7980273d6e51316970f987f1edaf96a40a73",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7241,7 +7330,7 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 300,
+        "stableIdCount": 327,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2aC:086/115:base",
@@ -7354,8 +7443,19 @@
           "F0625-P02",
           "F0628-P02",
           "ID:AC3a:145/205:base",
+          "ID:AS1b:112/150:base",
           "ID:MA6 I:121/130:base",
+          "ID:S-P:030:base",
+          "ID:S-P:100:base",
+          "ID:S-P:356:base",
+          "ID:S8b I:126/184:base",
+          "ID:SV4a I:145/190:base",
+          "ID:SV4s I:118/132:base",
+          "ID:SV6s I:136/167:base",
+          "ID:SV9s I:109/139:base",
           "ID:s10a I:077/071:base",
+          "ID:sc1a I:127/154:base",
+          "ID:sc3b I:126/158:base",
           "JP:M6a:095/103:base",
           "LATAM:30C LA:119/128:base",
           "SPEC-0022",
@@ -7365,6 +7465,11 @@
           "SPEC-0056",
           "SPEC-0105",
           "SPEC-0108",
+          "SPEC-0167",
+          "SPEC-0169",
+          "SPEC-0178",
+          "SPEC-0179",
+          "SPEC-0183",
           "SPEC-0257",
           "SPEC-0259",
           "SPEC-0260",
@@ -7430,6 +7535,11 @@
           "SPEC-0534",
           "SPEC-0537",
           "SPEC-0555",
+          "SPEC-0558",
+          "SPEC-0559",
+          "SPEC-0561",
+          "SPEC-0562",
+          "SPEC-0564",
           "SPEC-0578",
           "SPEC-0581",
           "SPEC-0582",
@@ -7453,6 +7563,9 @@
           "SPEC-0603",
           "SPEC-0604",
           "SPEC-0605",
+          "SPEC-0606",
+          "SPEC-0608",
+          "SPEC-0609",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -7489,18 +7602,21 @@
           "U0098",
           "U0099",
           "U0170",
+          "U0175",
           "U0176",
           "U0246",
           "U0255",
           "U0258",
           "U0285",
           "U0297",
+          "U0308",
           "U0311",
           "U0312",
           "U0313",
           "U0314",
           "U0347",
           "U0403",
+          "U0404",
           "U0427",
           "U0433",
           "U0467",
@@ -7544,8 +7660,8 @@
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-10-02",
-        "usageCount": 333
+        "retrievedAt": "2026-10-05",
+        "usageCount": 362
       }
     },
     {
@@ -9819,6 +9935,67 @@
         ],
         "absenceCapability": false
       }
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "queryUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-02",
+      "validatesEdges": [
+        "tpci-journey-together-build-battle-foil"
+      ],
+      "observationId": "obs-tpci-journey-together-build-battle",
+      "kind": "known-positive",
+      "expectedIdentifiers": [
+        "Hop's Snorlax",
+        "foil promo cards"
+      ],
+      "outcome": "The retained publisher statement positively names the card as a foil promo in this exact product; existing independently established localized identity remains required.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:625e528aef42975fb8fc1bd0af39b2fb33b6e29c686067715de232d6975ffa38",
+      "rawRecord": {
+        "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
+        "sourceUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+        "retainedAt": "2026-09-02",
+        "productFacts": {
+          "articlePublished": "2025-03-10",
+          "globalPrereleaseStart": "2025-03-15",
+          "officialSetLaunch": "2025-03-28",
+          "product": "Scarlet & Violet-Journey Together Build & Battle Box",
+          "namedCard": "Hop's Snorlax",
+          "classification": "one of four unique foil promo cards"
+        },
+        "sourceNativeFinish": "one of four unique foil promo cards",
+        "normalizedFinish": "holo",
+        "scopeBoundary": "The LA asset establishes the localized card. The product article establishes Hop's Snorlax as a foil promo, but does not itself date a LATAM market wave."
+      }
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "queryUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-02",
+      "validatesEdges": [
+        "tpci-journey-together-build-battle-foil"
+      ],
+      "observationId": "obs-tpci-journey-together-build-battle-boundary",
+      "kind": "out-of-scope-challenge",
+      "expectedIdentifiers": [
+        "unsupportedClaims"
+      ],
+      "outcome": "The English product statement supplies none of these properties; separate positive evidence is required.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:89174d0750349f3f4e0f5372dcee1420f0b21b1acc2538241fd6470169a94fe0",
+      "rawRecord": {
+        "sourceUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+        "unsupportedClaims": [
+          "LATAM release date",
+          "Staff",
+          "named foil pattern",
+          "finish inventory"
+        ],
+        "expectedState": "unknown"
+      }
     }
   ],
   "sourceResolution": [
@@ -10227,6 +10404,19 @@
       ]
     },
     {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
@@ -10331,6 +10521,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/First_Impact_GX_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
@@ -10605,6 +10808,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Partners_V_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
@@ -11107,6 +11323,19 @@
       ]
     },
     {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Strength_V_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_Family_Pok%C3%A9mon_Card_Game_(TCG)",
       "providerId": "bulbapedia",
       "surfaceId": "bulbapedia-mediawiki",
@@ -11131,6 +11360,32 @@
       "dimensions": [
         "language",
         "rarity"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://bulbapedia.bulbagarden.net/wiki/Tag_Team_Collection_GX_Starter_Deck_(ATCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
@@ -23840,6 +24095,30 @@
       ]
     },
     {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/jtg_web_cardlist_latam.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/pdf/trading-card-game/checklist/por_web_cardlist_latam.pdf",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-checklists",
+      "capabilityEdgeIds": [
+        "tpci-exact-checklist-finish"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokemon.com/static-assets/content-assets/cms2-fr-fr/pdf/trading-card-game/checklist/prize_pack_series_1_web_cardlist_fr.pdf",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-checklists",
@@ -23921,6 +24200,18 @@
         "finish",
         "finish-override",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+      "providerId": "pokemon-official",
+      "surfaceId": "tpci-journey-together-build-battle",
+      "capabilityEdgeIds": [
+        "tpci-journey-together-build-battle-foil"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
@@ -24864,7 +25155,32 @@
       ]
     },
     {
+      "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-822wk-mo0qzw6395om9d",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://down-id.img.susercontent.com/file/id-11134207-822wq-mp0bd8g68sgb06",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://down-my.img.susercontent.com/file/id-11134207-7r98t-lzrosoy95pad0a",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -25671,6 +25987,18 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/bTsAAeSw8NRqkCsN/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -25849,6 +26177,18 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/mUwAAeSw3jFqVPvq/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/nCsAAeSwE~JpLmTC/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [

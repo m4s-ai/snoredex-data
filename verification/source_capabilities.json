@@ -171,7 +171,7 @@
       "providerId": "cardmarket-product-image",
       "operator": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
       "authorityTier": 2,
-      "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+      "licenseOrTerms": "Site terms. Photographs and depicted artwork remain subject to their respective rights holders; the hosting source does not establish ownership.",
       "rawRetention": "Retain the exact product image, product id, capture date and SHA-256 when accepted as a stable specimen."
     },
     {
@@ -5516,6 +5516,92 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "providerId": "pokemon-official",
+      "label": "Exact official Journey Together Build & Battle foil-promo statement",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-09-02",
+      "freshnessPolicy": "Retain the dated exact product statement before using a new observation; this historical fixture does not claim current page accessibility.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+        "parameters": [],
+        "pagination": "One exact retained product article; no general news coverage.",
+        "expectedIdentifiers": [
+          "Hop's Snorlax",
+          "one of four unique foil promo cards"
+        ]
+      },
+      "finishCapability": {
+        "mode": "set-profile",
+        "vocabulary": [
+          "foil promo cards"
+        ],
+        "publicationForm": "explicit named product-content statement",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tpci-journey-together-build-battle-foil",
+          "coverage": {
+            "localities": [
+              "WEST",
+              "LATAM"
+            ],
+            "languages": [
+              "English",
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "prerelease-product"
+            ],
+            "timeRange": {
+              "start": "2025-03",
+              "end": "2025-03",
+              "basis": "The named Journey Together Build & Battle product only; locality identity and market date require separate evidence."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "finish"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A positive named foil statement never establishes absence or closes a finish list."
+          },
+          "knownPositiveObservationId": "obs-tpci-journey-together-build-battle",
+          "boundary": {
+            "outsideScope": [
+              "other articles",
+              "unnamed cards or finishes",
+              "locality identity",
+              "LATAM market dates",
+              "Staff treatment",
+              "foil patterns",
+              "complete finish inventory"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Named product foil prose cannot identify a regional release or establish Staff, patterns or unlisted finishes."
+          },
+          "outOfScopeChallengeObservationId": "obs-tpci-journey-together-build-battle-boundary"
+        }
+      ]
     }
   ],
   "observations": [
@@ -8226,6 +8312,69 @@
         "psa-positive-specimen"
       ],
       "outcome": "The retained front establishes Japanese sv4a 145/190 and certificate 94474867; the paired back repeats that unique certificate. Only the explicit PSA named variety establishes reverse-holo. No foil pattern, ungraded-card coverage, negative conclusion or finish-list closure follows."
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "queryUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-02",
+      "validatesEdges": [
+        "tpci-journey-together-build-battle-foil"
+      ],
+      "observationId": "obs-tpci-journey-together-build-battle",
+      "kind": "known-positive",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceRecordId": "SET-SRC-POKEMON-SF:5fd21ee23dadfd0c",
+          "sourceUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+          "retainedAt": "2026-09-02",
+          "productFacts": {
+            "articlePublished": "2025-03-10",
+            "globalPrereleaseStart": "2025-03-15",
+            "officialSetLaunch": "2025-03-28",
+            "product": "Scarlet & Violet-Journey Together Build & Battle Box",
+            "namedCard": "Hop's Snorlax",
+            "classification": "one of four unique foil promo cards"
+          },
+          "sourceNativeFinish": "one of four unique foil promo cards",
+          "normalizedFinish": "holo",
+          "scopeBoundary": "The LA asset establishes the localized card. The product article establishes Hop's Snorlax as a foil promo, but does not itself date a LATAM market wave."
+        }
+      },
+      "expectedIdentifiers": [
+        "Hop's Snorlax",
+        "foil promo cards"
+      ],
+      "outcome": "The retained publisher statement positively names the card as a foil promo in this exact product; existing independently established localized identity remains required."
+    },
+    {
+      "surfaceId": "tpci-journey-together-build-battle",
+      "queryUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+      "queryParameters": {},
+      "retrievedAt": "2026-09-02",
+      "validatesEdges": [
+        "tpci-journey-together-build-battle-foil"
+      ],
+      "observationId": "obs-tpci-journey-together-build-battle-boundary",
+      "kind": "out-of-scope-challenge",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceUrl": "https://www.pokemon.com/us/news/get-the-pokemon-tcg-scarlet-violet-journey-together-build-battle-box-early",
+          "unsupportedClaims": [
+            "LATAM release date",
+            "Staff",
+            "named foil pattern",
+            "finish inventory"
+          ],
+          "expectedState": "unknown"
+        }
+      },
+      "expectedIdentifiers": [
+        "unsupportedClaims"
+      ],
+      "outcome": "The English product statement supplies none of these properties; separate positive evidence is required."
     }
   ]
 }

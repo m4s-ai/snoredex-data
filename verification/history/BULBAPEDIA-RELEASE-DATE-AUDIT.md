@@ -2,7 +2,7 @@
 # Bulbapedia release-date audit — 2026-07-31
 
 > [!NOTE]
-> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree at the recorded checkpoint. For current guidance see [HANDOVER.md](../../HANDOVER.md), [AGENTS.md](../../AGENTS.md) and the generated [handoff audit](../DATA-HANDOFF-AUDIT.md).
 
 
 The read-only audit fetched all 214 pages in Bulbapedia's Pokémon TCG expansion category, then
@@ -16,7 +16,9 @@ represented set-code/name pairs by article title, `setname`, `transsetname`, and
 - 21 represented entries have no directly corresponding Bulbapedia set-release page; these are
   chiefly promo series, Cardmarket “Additionals” groupings, and card-specific campaigns.
 
-Run `python verification/archive/passes/audit_bulbapedia_release_dates.py` to repeat the live comparison.
+The original comparison used `verification/archive/passes/audit_bulbapedia_release_dates.py`.
+That one-shot pass is now archived and must not be rerun; current source work follows the
+[workflow map](../../WORKFLOW-MAP.md#4-use-case-contracts).
 The reviewed source records consumed by the generator are in
 `verification/bulbapedia_release_dates.json`.
 

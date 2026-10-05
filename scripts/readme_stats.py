@@ -107,7 +107,7 @@ def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]
 
     The README used to claim "a single *weaker* source may not [stand alone], and a check enforces
     it". No check enforced that: `E3` requires an uncorroborated claim to be *checkable* or
-    *strong*, so a tier-3 source with a URL may carry a claim alone — and hundreds do. Stating the
+    *strong*, so a tier-3 source with a URL may carry a claim alone. Stating the
     stricter rule made the data look better sourced than it is.
 
     The honest version is a count, so it is generated rather than typed. It is deliberately
@@ -135,8 +135,8 @@ def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]
         f"{len(single)} of {len(resolved)} resolved claims rest on one provider. Check `E3` does "
         f"not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so "
         f"a tier-3 page anyone can open may carry one alone, and {len(weak)} do. What it forbids "
-        f"is a claim that is neither — all {len(unlinkable)} claims with no URL come from tier 1 "
-        f"or 2, where the evidence is the owner's own cards."
+        f"is a claim that is neither — all {len(unlinkable)} uncorroborated claims with no URL come from tier 1 "
+        f"or 2; their inspections, attestations or owner adjudications are retained in the repository."
     )
     return "\n".join(lines)
 
@@ -202,9 +202,9 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         else "inactive pending owner approval and licensor selection"
     )
     lines = [
-        f"Current-known status snapshot: **{snapshot}**. Its candidate denominator is the immutable "
-        f"legacy baseline `{baseline['meta']['baselineId']}`; these totals do not claim all-locality "
-        "discovery completeness.",
+        f"Current-known status snapshot: **{snapshot}**. Legacy claim counts refer to "
+        f"`{baseline['meta']['baselineId']}`; collector projections also include accepted "
+        "source-first admissions. Neither claims all-locality discovery completeness.",
         "",
         "| Area | Current state |",
         "|---|---|",
@@ -318,11 +318,11 @@ def status_block(decisions: dict[str, Any], baseline: dict[str, Any]) -> str:
         f"> {licence} {publication} See",
         "> [`publication-decisions.json`](publication-decisions.json), "
         "[`LICENSE.md`](LICENSE.md), and",
-        "> [`verification/history/LAUNCH-RUNBOOK.md`](verification/history/LAUNCH-RUNBOOK.md).",
+        "> [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md#6-gate-mode-boundaries-292).",
         ">",
         f"> **Data coverage:** `{baseline['meta']['baselineId']}` is a frozen historical "
         "Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. "
-        "Current totals describe only known rows descended from that baseline. The bounded "
+        "Current collector projections also include separately evidenced source-first admissions. The bounded "
         "source-first rebuild completed under [#132](https://github.com/m4s-ai/snoredex-data/issues/132); "
         "the completeness gate retains explicit source and locality gaps.",
     ])

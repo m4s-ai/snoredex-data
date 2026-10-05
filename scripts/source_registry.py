@@ -87,7 +87,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "artist", "date"],
         "attribution": "Japanese card data © The Pokémon Company.",
-        "notes": "Never returns Japanese secret/rainbow prints; their absence is not evidence.",
+        "notes": "The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence.",
     },
     {
         "providerId": "pokemon-card-asia",
@@ -377,7 +377,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "finish"],
         "attribution": "Korean printing data from koreanpokemoncards.com.",
-        "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.",
+        "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Review its positive category coverage before use; silence never establishes absence, regardless of coverage.",
     },
     {
         "providerId": "elitefourum",
@@ -435,7 +435,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
         "homepage": "https://www.cardmarket.com",
         "hosts": [],
-        "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+        "licenseOrTerms": "Site terms. Photographs and depicted artwork remain subject to their respective rights holders; the hosting source does not establish ownership.",
         "category": "marketplace-photo",
         "authorityTier": 2,
         "coverage": "individual cards whose printed text, identity or finish is visible in an exact retained product image",
@@ -1093,22 +1093,39 @@ def record_printing_source(source, printing_id, dimensions, record, surfaces):
                printing_id, source.get("retrievedAt"))
 
 
-def record_set_dates(document: dict, record: Callable) -> dict[str, list[str]]:
-    """Index canonical date provenance without inferring other card properties."""
+def record_physical_printing(entry: dict, record: Callable, retrieved: str | None) -> str | None:
+    physical = (entry.get("raw") or {}).get("physicalPrintingEvidence")
+    if not physical or not physical.get("finish"):
+        return None
+    # Authority follows the printing observation, not an adjacent identity source.
+    url = physical["sourceUrl"]
+    provider = resolve_provider(url, None)
+    record(url, "Reviewed positive physical-printing evidence", "finish",
+           entry["sourceRecordId"], retrieved, provider_id=provider)
+    return provider
+
+
+def record_set_evidence(document: dict, record: Callable) -> dict[str, list[str]]:
+    """Index explicit date and printing evidence, never infer fields from membership."""
     dimensions = {}
     for entry in document["sourceRecords"]:
+        raw = entry.get("raw") or {}
+        retrieved = raw.get("retrievedAt") or entry.get("retrieved")
+        provider = record_physical_printing(entry, record, retrieved)
+        if provider:
+            dimensions.setdefault(provider, []).append("finish")
         if entry["sourceKind"] != "release-date-record":
             continue
-        url = entry.get("sourceUrl") or entry.get("raw", {}).get("sourceUrl")
+        url = entry.get("sourceUrl") or raw.get("sourceUrl")
         if not url and entry["provider"] == "bulbapedia":
             url = "https://bulbapedia.bulbagarden.net/wiki/" + entry["raw"]["page"].replace(" ", "_")
         if not url:
             raise ValueError(f"Release-date source lacks a URL: {entry['sourceRecordId']}")
         record(url, "Localized set/product release-date record", "date",
-               entry["sourceRecordId"], entry.get("raw", {}).get("retrievedAt") or entry.get("retrieved"),
+               entry["sourceRecordId"], retrieved,
                provider_id=entry["provider"])
 
-        dimensions[entry["provider"]] = ["date"]
+        dimensions.setdefault(entry["provider"], []).append("date")
     return dimensions
 
 
@@ -1268,7 +1285,7 @@ def main() -> int:
                entry["setCode"], entry.get("retrievedAt") or bulbapedia_dates["generated"])
 
     content_dimensions = record_card_content(content, record)
-    date_dimensions = record_set_dates(set_dates, record)
+    date_dimensions = record_set_evidence(set_dates, record)
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
         row = {
