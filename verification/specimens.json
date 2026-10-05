@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 607,
+  "count": 609,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -3708,9 +3708,19 @@
       "photograph": "SPEC-0167.png",
       "photographSource": "https://asia.pokemon-card.com/id/card-img/id00003982.png",
       "photographSha256": "sha256:386915b3c9f979024bb3903f740095456225b19fe126baa332c24f7d35dc96f4",
-      "observed": "Complete official Indonesian render for Snorlax sc3b I 126/158 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+      "observed": "Complete official Indonesian render for Snorlax sc3b I 126/158 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: sc3b I 126/158 holo erkennbar. The retained publisher render supports exact identity; Holo is attributed separately to the explicit owner determination, not treated as a physical photograph or a complete finish inventory.",
       "recordedAt": "2026-08-28",
-      "citedBy": [],
+      "citedBy": [
+        "ID:sc3b I:126/158:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Holo for exact Indonesian sc3b I 126/158 on 2026-10-05 (holo erkennbar). SPEC-0167 retains its official identity render. Publisher artwork is not asserted as a physical photograph; no named foil pattern, other finish or inventory completeness is inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/id/card-search/detail/3982/"
     },
     {
@@ -3740,11 +3750,20 @@
       "photograph": "SPEC-0169.png",
       "photographSource": "https://asia.pokemon-card.com/id/card-img/id00004795.png",
       "photographSha256": "sha256:9e90d9b7ef73a17b593d6f9b0760dbc92ae6deafc0a96ccc0117a29a293598c3",
-      "observed": "Complete official Indonesian render for Snorlax S8b I 126/184 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+      "observed": "Complete official Indonesian render for Snorlax S8b I 126/184 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: S8b I 126/184 holo erkennbar. The retained publisher render establishes identity; Holo is separately attributed to the explicit owner determination. This does not assert a physical photograph, named foil pattern or complete finish inventory.",
       "recordedAt": "2026-08-28",
       "citedBy": [
-        "U0175"
+        "U0175",
+        "ID:S8b I:126/184:base"
       ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Holo for exact Indonesian S8b I 126/184 on 2026-10-05 (holo erkennbar). SPEC-0169 retains its official identity render; no physical photograph, named foil pattern, parallel finish or inventory completeness is inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/id/card-search/detail/4795/"
     },
     {
@@ -3894,9 +3913,19 @@
       "photograph": "SPEC-0178.png",
       "photographSource": "https://asia.pokemon-card.com/id/card-img/id00009774.png",
       "photographSha256": "sha256:0af3e211ae1ef0cda3b54ace83ab38e89d7212ad7884ffbfdb6355525186dd15",
-      "observed": "Complete official Indonesian render for Boneka Snorlax SV4s I 118/132 (base). The printed name, set code, collector number, attacks and rarity U establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+      "observed": "Complete official Indonesian render for Boneka Snorlax SV4s I 118/132 (base). The printed name, set code, collector number, attacks and rarity U establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: SV4s I 118/132 non-holo erkennbar. The publisher render supports exact identity; Non-Holo rests separately on the explicit owner determination, not inferred physical photography. No complete finish inventory is asserted.",
       "recordedAt": "2026-08-28",
-      "citedBy": [],
+      "citedBy": [
+        "ID:SV4s I:118/132:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Non-Holo for exact Indonesian Snorlax Doll SV4s I 118/132 on 2026-10-05 (non-holo erkennbar). SPEC-0178 retains its official identity render. No physical photograph, other finish or inventory completeness is inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/id/card-search/detail/9774/"
     },
     {
@@ -3910,11 +3939,20 @@
       "photograph": "SPEC-0179.png",
       "photographSource": "https://asia.pokemon-card.com/id/card-img/id00010045.png",
       "photographSha256": "sha256:11eb002a103ed14b49c692b0dee71d00a9ca8911fbfa762f3dced2c6391af3a3",
-      "observed": "Complete official Indonesian render for Snorlax SV4a I 145/190 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+      "observed": "Complete official Indonesian render for Snorlax SV4a I 145/190 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Non-Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted.",
       "recordedAt": "2026-08-28",
       "citedBy": [
-        "U0308"
+        "U0308",
+        "ID:SV4a I:145/190:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly assigns Non-Holo to SPEC-0179 for Indonesian SV4a I 145/190 on 2026-10-05. The retained digital reference supports identity; finish rests on this field-specific owner determination. No physical-photo provenance, named foil pattern, same-card association or complete inventory is inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045/"
     },
     {
@@ -3980,9 +4018,19 @@
       "photograph": "SPEC-0183.png",
       "photographSource": "https://asia.pokemon-card.com/id/card-img/id00015784.png",
       "photographSha256": "sha256:eef94d407651802eeb91cb3d1fb4ee2c1528783b67675efadc467901516fd633",
-      "observed": "Complete official Indonesian render for Snorlax <Hop> SV9s I 109/139 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
+      "observed": "Complete official Indonesian render for Snorlax <Hop> SV9s I 109/139 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: SV9s I 109/139 holo erkennbar. The official publisher render supports exact identity; Holo rests separately on the explicit owner determination. No physical photographic provenance, named foil pattern or complete finish inventory is asserted.",
       "recordedAt": "2026-08-28",
-      "citedBy": [],
+      "citedBy": [
+        "ID:SV9s I:109/139:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Holo for Indonesian Hop's Snorlax SV9s I 109/139 on 2026-10-05 (holo erkennbar). SPEC-0183 retains the official identity render. No physical photograph, named foil pattern, parallel finish or finish-list closure is inferred."
+      },
       "listingUrl": "https://asia.pokemon-card.com/id/card-search/detail/15784/"
     },
     {
@@ -11701,11 +11749,19 @@
       "photograph": "SPEC-0558.png",
       "photographSource": "https://i.ebayimg.com/images/g/qkwAAOSw8ttl4WTJ/s-l1600.webp",
       "photographSha256": "sha256:a0eca5162add94d5a7012386295f5128dcf156ddf27b79b0931eb9d8c90e8d5e",
-      "observed": "Physical Indonesian Snorlax HP160, PROMO E 356/S-P, Oswaldo KATO and Heavy Impact 80. Purple Chatime distribution logo is visible at the lower right of the illustration. The single flat front view establishes identity and the logo; the technical finish remains unresolved. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Physical Indonesian Snorlax HP160, PROMO E 356/S-P, Oswaldo KATO and Heavy Impact 80. Purple Chatime distribution logo is visible at the lower right of the illustration. The original 2026-09-28 inspection established identity and the logo only. Collection-owner determination 2026-10-05: S-P 356 non holo erkennbar. The retained photograph supports identity and Chatime distribution; Non-Holo is separately attributed to the explicit owner determination. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "ID:S-P:356:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Non-Holo for Indonesian S-P 356 Chatime on 2026-10-05 (non holo erkennbar). SPEC-0558 retains the exact identity photograph. No finish is transferred to other pictured copies; no parallel finish, named foil pattern or inventory completeness is asserted."
+      },
       "listingUrl": "https://www.ebay.com/itm/315191942798"
     },
     {
@@ -11719,11 +11775,19 @@
       "photograph": "SPEC-0559.png",
       "photographSource": "https://down-id.img.susercontent.com/file/id-11134201-7rasa-m5d6w400oy3h48@resize_w450_nl.webp",
       "photographSha256": "sha256:94224cc2dab4b1ed7f194514ed74a33556997352efb0dcfa5abf3f5612605e9c",
-      "observed": "Physical Indonesian Snorlax HP150, sc1a I D 127/154 U and Eri Yamaki, photographed on a playmat. Printed Mengumpulkan and Tumbang 120 are visible. The 450-pixel listing derivative supports identity; it does not establish a physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Physical Indonesian Snorlax HP150, sc1a I D 127/154 U and Eri Yamaki, photographed on a playmat. Printed Mengumpulkan and Tumbang 120 are visible. The original 2026-09-28 inspection used the 450-pixel listing derivative for identity only. Collection-owner determination 2026-10-05: sc1a I 127/154 non-holo erkennbar. The photograph supports exact identity; the field-specific owner determination establishes Non-Holo. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "ID:sc1a I:127/154:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly identifies the exact pictured Indonesian sc1a I 127/154 card as Non-Holo on 2026-10-05 (non-holo erkennbar). SPEC-0559 supplies the retained identity photograph. No parallel finishes or inventory completeness are asserted."
+      },
       "listingUrl": "https://shopee.co.id/pokemon-%28ID%29-snorlax-SC1a-127-154-U-i.164644304.29074483660"
     },
     {
@@ -11760,11 +11824,19 @@
       "photograph": "SPEC-0561.png",
       "photographSource": "https://down-id.img.susercontent.com/file/id-11134207-822wn-mnjbkwwf1hxg6b@resize_w450_nl.webp",
       "photographSha256": "sha256:5879532ea36b9d349827d4744ea37d53be63ad6d2193dcbb6727e6096cc5729b",
-      "observed": "Isolated digital depiction of Indonesian Snorlax HP160, sv6s I H 136/167 U, Mengisi Perut, Heavy Impact 160 and Illus. Souichirou Gunjima. Identity only; no physical finish is inferred from this render. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Isolated digital depiction of Indonesian Snorlax HP160, sv6s I H 136/167 U, Mengisi Perut, Heavy Impact 160 and Illus. Souichirou Gunjima. Identity only; no physical finish is inferred from this render. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection-owner determination 2026-10-05: SV6s I 136/167 non-holo erkennbar, explicitly referencing SPEC-0561. The retained retailer depiction supports identity; Non-Holo rests separately on the owner determination. No physical photographic provenance or finish-list closure is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "ID:SV6s I:136/167:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly identifies SPEC-0561 for Indonesian SV6s I 136/167 as Non-Holo on 2026-10-05 (non-holo erkennbar). The retained retailer depiction remains identity evidence; no physical photograph, named foil pattern, parallel finish or complete inventory is inferred."
+      },
       "listingUrl": "https://shopee.co.id/Snorlax-SV6S-136-167-U-Kartu-Pokemon-ID-i.194362844.57859531443"
     },
     {
@@ -11778,12 +11850,20 @@
       "photograph": "SPEC-0562.png",
       "photographSource": "https://cardtell.id/images/products/14558.png?v=1784128890",
       "photographSha256": "sha256:f75e9bd1d4d86f01b66e3a2274a482464715e21ab11bbc01a4ffaec69e0361a8",
-      "observed": "Digital depiction of Indonesian Snorlax HP150, sv4a I G 145/190, Kemaruk, Tekan Gedebuk 130 and HYOGONOSUKE. The product title says Reverse Holo and the depiction includes sparkle effects, but neither establishes an observed physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Digital depiction of Indonesian Snorlax HP150, sv4a I G 145/190, Kemaruk, Tekan Gedebuk 130 and HYOGONOSUKE. The product title says Reverse Holo and the depiction includes sparkle effects, but neither establishes an observed physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Reverse Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "U0308",
         "ID:SV4a I:145/190:base"
       ],
+      "physicalObservation": {
+        "finish": "reverse-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly assigns Reverse Holo to SPEC-0562 for Indonesian SV4a I 145/190 on 2026-10-05. The retained digital reference supports identity; finish rests on this field-specific owner determination. No physical-photo provenance, named foil pattern, same-card association or complete inventory is inferred."
+      },
       "listingUrl": "https://cardtell.id/shop/Z8C6C7SSPW"
     },
     {
@@ -11815,11 +11895,19 @@
       "photograph": "SPEC-0564.png",
       "photographSource": "https://i.ebayimg.com/images/g/prAAAeSwZeRp8Wo1/s-l1600.webp",
       "photographSha256": "sha256:2ee22d35c4bf1172e3d4128b23235f73547a70149335f6e62523f26e49a4d1eb",
-      "observed": "Physical Indonesian Snorlax HP150, PROMO D 100/S-P, Tubrukan Menggelinding 80, Hantaman Berat 130 and chibi. The INACO logo is visible at the lower right of the illustration. Identity and logo only; the technical finish remains unresolved. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
+      "observed": "Physical Indonesian Snorlax HP150, PROMO D 100/S-P, Tubrukan Menggelinding 80, Hantaman Berat 130 and chibi. The INACO logo is visible at the lower right of the illustration. The original 2026-09-28 inspection established identity and logo only. Collection-owner determination 2026-10-05: S-P 100 non-holo erkennbar. The retained photograph supports identity and INACO distribution; Non-Holo rests on the explicit owner determination. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
       "recordedAt": "2026-09-28",
       "citedBy": [
         "ID:S-P:100:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection owner explicitly determines Non-Holo for the pictured Indonesian S-P 100 INACO card on 2026-10-05 (non-holo erkennbar). SPEC-0564 retains the seller photograph. No other finish or inventory completeness is inferred."
+      },
       "listingUrl": "https://www.ebay.com/itm/298271538592"
     },
     {
@@ -12816,6 +12904,58 @@
         "basis": "Visible cyan and green foil reflections across the upper illustration, right border and lower rule bar establish Holo on the photographed Indonesian sc1b I 119/153 card."
       },
       "listingUrl": "https://shopee.com.my/Snorlax-V-RR-sc1b-Pokemon-TCG-Indonesia-foil-holo-i.1383074464.29914412874"
+    },
+    {
+      "specimenId": "SPEC-0608",
+      "setCode": "S-P",
+      "number": "030",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original eBay seller photograph inspected at 873x1162; local Tesseract OCR unavailable; original WebP retained and losslessly decoded to PNG with exact pixel equality",
+      "photograph": "SPEC-0608.png",
+      "photographSource": "https://i.ebayimg.com/images/g/bTsAAeSw8NRqkCsN/s-l1600.webp",
+      "photographSha256": "sha256:928f294e67518e69d2c39ba47bfc5c391961b76e3f97045a219a7e71924f0071",
+      "observed": "Physical Indonesian Snorlax V HP220, PROMO D 030/S-P, Menelan 60, Falling Down 170, Illus. Masakazu Fukuda, copyright 2020. Indonesian card text establishes exact identity. Printed Pedang & Perisai logo appears at the lower right of the illustration. The listing title and description state Non Holo, and the finish field says Regular. Collection owner explicitly confirms Non-Holo for this offer and photograph on 2026-10-05. Absence of visible foil reflections alone is not treated as proof. No owner custody, named foil pattern, complete finish inventory or absence of parallel finishes is asserted.",
+      "recordedAt": "2026-10-05",
+      "citedBy": [
+        "ID:S-P:030:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection-owner determination 2026-10-05 for eBay listing 318787324238: describes it as non-holo and the image confirms, no holo reflection. Seller title/description explicitly say Non Holo; inspected card face independently establishes Indonesian 030/S-P identity. Non-Holo is owner-attributed, not inferred solely from missing reflections."
+      },
+      "listingUrl": "https://www.ebay.de/itm/318787324238"
+    },
+    {
+      "specimenId": "SPEC-0609",
+      "setCode": "SVM I",
+      "number": "094/175",
+      "variant": "base",
+      "language": "Indonesian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Original eBay seller photograph visually inspected at 1200x1600; local Tesseract OCR unavailable; original WebP retained and losslessly decoded to PNG with exact pixel equality",
+      "photograph": "SPEC-0609.png",
+      "photographSource": "https://i.ebayimg.com/images/g/nCsAAeSwE~JpLmTC/s-l1600.webp",
+      "photographSha256": "sha256:60fccf539fac997b5c3649951c63acb8e49a3a9cedc9011291a43a4c76f2f362",
+      "observed": "Physical sleeved Indonesian Snorlax ex HP260 on dark background. Printed SVM I 094/175, Tenaga Super 80 and Tekanan Balik Badan 120x establish exact identity. Collection owner confirms Holo for this photograph on 2026-10-05. Seller metadata also says Holo but contains mismatched year and rarity fields, which are not accepted. No named foil pattern, owner custody or complete finish inventory is asserted.",
+      "recordedAt": "2026-10-05",
+      "citedBy": [
+        "U0404"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-05",
+        "basis": "Collection-owner determination on 2026-10-05 after viewing this exact seller photograph: ja sieht nach Holo aus übernimm es. Finish is owner-attributed; printed Indonesian identity independently inspected."
+      },
+      "listingUrl": "https://www.ebay.com/itm/297810678369"
     }
   ]
 }

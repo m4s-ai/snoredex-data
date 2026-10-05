@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-02",
+  "generated": "2026-10-05",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1670,
-   "uniqueUrls": 1662,
+   "evidenceRecords": 1672,
+   "uniqueUrls": 1664,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6604
+   "claimsAttributed": 6635
   }
  },
  "providers": [
@@ -746,7 +746,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 337
+   "claimsSupported": 364
   },
   {
    "providerId": "inspected-specimen",
@@ -813,8 +813,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 156,
-   "claimsSupported": 632
+   "uniqueSources": 158,
+   "claimsSupported": 636
   }
  ],
  "evidence": [
@@ -13863,7 +13863,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 302,
+   "stableIdCount": 327,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2aC:086/115:base",
@@ -13978,7 +13978,17 @@
     "ID:AC3a:145/205:base",
     "ID:AS1b:112/150:base",
     "ID:MA6 I:121/130:base",
+    "ID:S-P:030:base",
+    "ID:S-P:100:base",
+    "ID:S-P:356:base",
+    "ID:S8b I:126/184:base",
+    "ID:SV4a I:145/190:base",
+    "ID:SV4s I:118/132:base",
+    "ID:SV6s I:136/167:base",
+    "ID:SV9s I:109/139:base",
     "ID:s10a I:077/071:base",
+    "ID:sc1a I:127/154:base",
+    "ID:sc3b I:126/158:base",
     "JP:M6a:095/103:base",
     "LATAM:30C LA:119/128:base",
     "SPEC-0022",
@@ -13988,6 +13998,11 @@
     "SPEC-0056",
     "SPEC-0105",
     "SPEC-0108",
+    "SPEC-0167",
+    "SPEC-0169",
+    "SPEC-0178",
+    "SPEC-0179",
+    "SPEC-0183",
     "SPEC-0257",
     "SPEC-0259",
     "SPEC-0260",
@@ -14053,6 +14068,11 @@
     "SPEC-0534",
     "SPEC-0537",
     "SPEC-0555",
+    "SPEC-0558",
+    "SPEC-0559",
+    "SPEC-0561",
+    "SPEC-0562",
+    "SPEC-0564",
     "SPEC-0578",
     "SPEC-0581",
     "SPEC-0582",
@@ -14077,6 +14097,8 @@
     "SPEC-0604",
     "SPEC-0605",
     "SPEC-0606",
+    "SPEC-0608",
+    "SPEC-0609",
     "TH:AS1b:112/150:base",
     "TH:AS5a:142/184:base",
     "TH:MA4:091/123:base",
@@ -14113,18 +14135,21 @@
     "U0098",
     "U0099",
     "U0170",
+    "U0175",
     "U0176",
     "U0246",
     "U0255",
     "U0258",
     "U0285",
     "U0297",
+    "U0308",
     "U0311",
     "U0312",
     "U0313",
     "U0314",
     "U0347",
     "U0403",
+    "U0404",
     "U0427",
     "U0433",
     "U0467",
@@ -14168,8 +14193,8 @@
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-10-02",
-   "usageCount": 335
+   "retrievedAt": "2026-10-05",
+   "usageCount": 362
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -27159,6 +27184,24 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/bTsAAeSw8NRqkCsN/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "ID:S-P:030:base",
+    "SPEC-0608"
+   ],
+   "retrievedAt": "2026-10-05",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/cVYAAeSwU9Bp~M9S/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27444,6 +27487,24 @@
     "U0531"
    ],
    "retrievedAt": "2026-09-28",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/nCsAAeSwE~JpLmTC/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0609",
+    "U0404"
+   ],
+   "retrievedAt": "2026-10-05",
    "usageCount": 2
   },
   {

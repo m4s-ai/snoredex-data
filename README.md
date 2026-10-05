@@ -125,7 +125,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-10-02**. Legacy claim counts refer to `cardmarket-search-2026-07-21`; collector projections also include accepted source-first admissions. Neither claims all-locality discovery completeness.
+Current-known status snapshot: **2026-10-05**. Legacy claim counts refer to `cardmarket-search-2026-07-21`; collector projections also include accepted source-first admissions. Neither claims all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
@@ -134,7 +134,7 @@ Current-known status snapshot: **2026-10-02**. Legacy claim counts refer to `car
 | Evidence-safe application status | **621 established**, **6 needs evidence**, **88 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **903 items** across 174 cards and 15 languages: 843 documented printings plus 60 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 507 externally confirmed, 26 marketplace-only positives, 27 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 131 units. |
-| Evidence registry | **33 providers**, 1670 evidence records, 1662 unique URLs, and 6,604 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Evidence registry | **33 providers**, 1672 evidence records, 1664 unique URLs, and 6,635 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
