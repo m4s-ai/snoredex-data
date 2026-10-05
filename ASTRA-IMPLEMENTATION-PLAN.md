@@ -1,4 +1,4 @@
-<!-- doc: role=ASTRA remediation execution plan; stage=task -->
+<!-- doc: role=dated ASTRA remediation execution plan; stage=reference -->
 <!-- graph-dependency
 parent: none
 depends_on: none
@@ -11,6 +11,8 @@ graph_nodes: ASTRA.md findings and linked GitHub issues
 Stand: 2026-09-06
 Quelle: [ASTRA.md](ASTRA.md), unabhängiger Read-only-Audit auf `origin/main`
 Tracking: GitHub-Issue [#347](https://github.com/m4s-ai/snoredex-data/issues/347)
+
+**Historischer Plan vom 2026-09-06:** Die folgenden Ausführungsschritte und Prüfungen gehören zu diesem Planungsstand. Spätere Entscheidungen stehen in [ASTRA-CLOSURE.md](verification/ASTRA-CLOSURE.md); aktuelle Abläufe und Prüfumfänge bestimmt [WORKFLOW-MAP.md](WORKFLOW-MAP.md). Der verlinkte Issue-Graph führt den aktuellen Arbeitsstand.
 
 Dieses Dokument plant die Umsetzung der in ASTRA.md reproduzierten Fehler. Es nimmt keine
 Implementierung vor. Jede Änderung erfolgt später in einem eigenen, abhängigen GitHub-Issue.

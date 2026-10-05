@@ -1,4 +1,7 @@
 <!-- doc: role=draft pull request description for issue 262; stage=reference -->
+
+**Historical draft description — 2026-09-15.** The draft status, counts and instructions below belong to the [implementation checkpoint](IMPLEMENTATION.md). Consult [issue #262](https://github.com/m4s-ai/snoredex-data/issues/262) and its linked pull requests for subsequent work and current status.
+
 Thai research for #262 found two missing official release dates, an existing promo finish override that did not match its legacy number, and two usable seller images. This draft applies those findings: the current Thai release audit improves from 8/28 to 13/28 without claiming a complete finish inventory.
 
 - Add separate official Thai release events for s5a T (2021-04-30) and s10a T (2022-07-29), with retained source captures and narrowly scoped date capabilities.

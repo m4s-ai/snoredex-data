@@ -39,7 +39,8 @@ No named foil pattern, same-card identity or inventory closure is asserted.
 - SV9s I 109/139: exact two-image Holo offer found; original photos not inspected due access limits.
 
 Per-target queries, original URLs, prior SPECs, access limitations and next leads are retained in
-early-research.md, middle-research.md and modern-research.md. Root browser fallback reached
+[early-research.md](early-research.md), [middle-research.md](middle-research.md) and
+[modern-research.md](modern-research.md). Root browser fallback reached
 the multi-language Shopee offer but its visible Indonesian variant was 136, not the middle
 targets. CAPTCHA prevented further inspection; no claim rests on that inaccessible gallery.
 The SV9s browser fallback likewise did not yield inspected original bytes.
@@ -63,6 +64,6 @@ finish text, native aliases, regional offers, carousel/selector inspection and e
 No new importer, framework or universal query quota was introduced. These search requirements
 preserve the existing separation between research proposals and accepted canonical evidence.
 
-Original research images are retained unchanged, with SHA-256 hashes in retained-image-hashes.json.
+Original research images are retained unchanged, with SHA-256 hashes in [retained-image-hashes.json](retained-image-hashes.json).
 Article captures are excerpts; their hashes are not complete-response hashes. No verdict, owner
 decision, existing specimen or photo date was changed by this research round.

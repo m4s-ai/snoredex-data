@@ -1,6 +1,6 @@
 <!-- doc:
-role=documentation audit and remediation ledger
-stage=task
+role=dated documentation audit and remediation ledger
+stage=reference
 -->
 # Documentation and comment audit
 
@@ -11,6 +11,8 @@ Implementation updated: 2026-08-30
 Scope: all tracked repository documentation, public explanatory surfaces, machine-readable contracts, generated reports, source comments, test comments, workflow comments, archived script comments, and the dependency paths between them.
 
 This file is the audit, remediation plan, implementation record, and progress ledger. Audit findings remain written in their original context. The implementation status and change ledger record what was corrected after the audit.
+
+This is the 2026-08-29/30 ledger. Its phase statuses, commands and retry blockers describe those checkpoints, not the current backlog. Use [HANDOVER.md](HANDOVER.md), [AGENTS.md](AGENTS.md), the [workflow map](WORKFLOW-MAP.md) and the [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) for current work; current data status is generated in the [handoff audit](verification/DATA-HANDOFF-AUDIT.md).
 
 ## Progress
 

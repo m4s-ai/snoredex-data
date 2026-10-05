@@ -45,9 +45,10 @@ contracts.
   specimen-to-collector projection regression.
 - Publication allowlists and workflow permissions are security/deployment boundaries. Making them
   infer themselves from the artifacts they constrain would weaken the boundary.
-- IDs and values in `verification/passes/` are immutable, one-shot historical evidence/admission
+- IDs and values in `verification/passes/` are retained, one-shot historical evidence/admission
   records. They document what a specific reviewed pass accepted; they are not live generator
-  overrides. `X3` protects their hashes.
+  overrides. Only files under `verification/archive/` are hash-pinned by its `MANIFEST.json`
+  and protected by `X3`; those archived records are immutable.
 - Tests may name a semantic card, release, or invariant when that identity is the regression under
   test. They must not pin generated asset IDs where the contract is shared behavior; #397 corrected
   that case.

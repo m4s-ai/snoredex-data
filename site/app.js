@@ -55,6 +55,7 @@
 
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+  const LANGUAGE_STATES = { present: "confirmed", absent: "not confirmed" };
 
 
   function escapeHTML(value) {
@@ -283,7 +284,7 @@
       label.textContent = lang.code;
       const select = document.createElement("select");
       select.id = id;
-      [["", "any"], ["present", "present"], ["absent", "absent"]].forEach(([value, text]) => {
+      [["", "any"], ...Object.entries(LANGUAGE_STATES)].forEach(([value, text]) => {
         const option = document.createElement("option");
         option.value = value;
         option.textContent = text;
@@ -384,7 +385,7 @@
     if (state.langMin !== "") add("min langs " + state.langMin, () => { state.langMin = ""; });
     if (state.langMax !== "") add("max langs " + state.langMax, () => { state.langMax = ""; });
     Object.entries(state.lang).forEach(([code, mode]) => {
-      if (mode) add(code + " " + mode, () => { state.lang[code] = ""; });
+      if (mode) add(code + " " + LANGUAGE_STATES[mode], () => { state.lang[code] = ""; });
     });
   }
 
@@ -455,7 +456,7 @@
       const note = has ? evidenceNote(row, lang.code) : null;
       // Keep the cell label to the compact state used across the 17-column matrix. The evidence
       // control carries the full accessible label and opens a touch/keyboard detail popover.
-      const label = lang.name + ": " + state;
+      const label = lang.name + ": " + LANGUAGE_STATES[state];
       const attrs = note
         ? ' data-tier="' + note.tier + '"' + (note.weak ? ' data-unverifiable="true"' : "")
         : "";

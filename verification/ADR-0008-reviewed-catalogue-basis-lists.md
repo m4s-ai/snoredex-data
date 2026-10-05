@@ -1,8 +1,9 @@
 <!-- doc: role=architecture decision record for manually reviewed catalogue basis lists; stage=reference -->
 # ADR-0008 — Reviewed catalogue basis lists
 
-**Status:** accepted design; population belongs to the authoritative migration in
-[#140](https://github.com/m4s-ai/snoredex-data/issues/140)
+**Status:** accepted design; locality identities are retained in the authoritative graph from
+[#140](https://github.com/m4s-ai/snoredex-data/issues/140), while separate reviewed artwork
+registries remain design scope
 
 **Issue:** [#187](https://github.com/m4s-ai/snoredex-data/issues/187)
 
@@ -17,7 +18,7 @@ design scope; automatic image groups are proposals. See
 
 ## Context
 
-The repository currently proves proposed graph shapes with generated dry runs. Those projections
+Before #140, the repository proved proposed graph shapes with generated dry runs. Those projections
 are useful migration audits, but they are the wrong authority for facts that a collector expects to
 edit deliberately: which languages and local sets exist, how localized sets relate, which artwork
 an appearance uses, and which physical variations have positive evidence. A generator must not
@@ -29,9 +30,10 @@ registries and produce replaceable views; they never write back to them.
 
 ## Decision
 
-#140's authoritative graph will expose these manually reviewed registries. File names are the
-logical contract; #140 may store them as separate JSON files or normalized database tables as long
-as the same grains and foreign keys survive.
+The design calls for the following manually reviewed registries. These names are the logical
+contract, not a claim that each exists as a separate populated file today. The retained locality
+graph implements the current identity boundary; any later registry split must preserve the same
+grains, foreign keys and reviewed base.
 
 | Registry | One row means | Stable identity |
 |---|---|---|
@@ -149,7 +151,7 @@ Omission from a basis list is unknown, not proof of absence.
 
 ## Migration acceptance criteria
 
-#140 may make these lists authoritative only when all of the following hold:
+Any migration that makes the remaining designed registries authoritative must satisfy these criteria:
 
 1. a clean rebuild leaves every canonical registry byte-identical;
 2. every generated row back-references its canonical ids and input hashes;
@@ -166,6 +168,6 @@ Omission from a basis list is unknown, not proof of absence.
 
 The canonical layer changes only through intentional reviewed edits, so adding a source, rerunning
 an adapter, or changing presentation order cannot rewrite catalogue truth. The cost is explicit
-migration and review work in #140, particularly for artwork grouping. That cost is preferable to
+migration and review work, particularly for the still-designed artwork grouping registries. That cost is preferable to
 giving an automatically inferred group the authority to merge localized releases or manufacture
 collectible variations.

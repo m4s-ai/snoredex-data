@@ -14,7 +14,7 @@ Research only. No canonical stores changed, no SPEC IDs allocated. Public image 
 
 ## Accepted research proposals
 
-deck-finish-proposals.json retains manually transcribed scoped excerpts, source URLs, retrieval date and individual excerpt hashes for AS1D,AC3D,sc1D I. proposed-source-records.json gives proposed existing-lane shape only. Review/capability resolution and authoritative integration remain root work. Excerpts are not raw HTML or complete-response captures; do not relabel their hashes.
+[deck-finish-proposals.json](deck-finish-proposals.json) retains manually transcribed scoped excerpts, source URLs, retrieval date and individual excerpt hashes for AS1D,AC3D,sc1D I. The scratch proposal named `proposed-source-records.json` was not included in this retained package; the linked proposal file is the retained research record. Review/capability resolution and authoritative integration remained root work at this checkpoint. Excerpts are not raw HTML or complete-response captures; do not relabel their hashes.
 
 sc1b-lead.image (original JPEG900x900,179754bytes):
 - Listing: https://shopee.com.my/Snorlax-V-RR-sc1b-Pokemon-TCG-Indonesia-foil-holo-i.1383074464.29914412874
@@ -37,7 +37,7 @@ lead-1.image,lead-2.image,lead-3.image: https://down-id.img.susercontent.com/fil
 
 promo-lead.image: https://down-id.img.susercontent.com/file/id-11134207-7ra0p-mcwy3dvq0c6w23 from https://shopee.co.id/Kartu-Pokemon-Indonesia-Snorlax-V-Promo-Pedang-Perisai-i.435120010.40111236289 . Physical Indonesian030/S-P Snorlax V220 with Pedang&Perisai stamp; broad white glare alone does not establish Holo. Shared with middle agent/root because target belongs to their scope.
 
-All original byte hashes in image-hashes.json. Files retain .image suffix only in ignored cache; magic bytes are JPEG. No crops, conversions or altered originals.
+The retained originals and their byte hashes are listed in [retained-image-hashes.json](retained-image-hashes.json). The `.image` files listed there are committed JPEG originals; the other inspected leads above were scratch research files and are not part of this package. No crops, conversions or altered originals were applied to the retained images.
 
 ## Process diagnosis
 

@@ -92,10 +92,10 @@ Official detail `13148` is the mandatory counterexample: raw expansion key `SVQP
 therefore a visible `new-candidate`, not an inferred match to Japanese `mP1 012/023` and not a
 Traditional-Chinese contradiction.
 
-The remaining Japanese, Indonesian, Thai, Korean, Simplified-Chinese, non-English Western/LATAM,
-and specialist tracks remain explicit `needs-evidence` or `blocked-by-source` gaps. #138/#139 own
-their locality slices and reconciliation decisions; adding them extends this contract and reruns
-the same accounting loop.
+At that first-run checkpoint, the Japanese, Indonesian, Thai, Korean, Simplified-Chinese,
+non-English Western/LATAM and specialist tracks remained explicit `needs-evidence` or
+`blocked-by-source` gaps. Later #138/#139 slices extended the same accounting loop. Current
+frontiers and remaining gaps live in the adapter inventory, staging and locality matrices.
 
 ## Western-English run result
 
@@ -219,11 +219,11 @@ and expose new/ambiguous records without changing evidence verdicts. If one unre
 blocks a resumed refresh, `--reuse-unfinished-from-run` may carry forward only exact unchanged
 requests from a complete immutable run. The carried request keeps its original retrieval timestamp
 and records its source run; changed acquisition fields, partial raw data, incomplete source runs,
-and a source superseded by a newer exact complete request are rejected. The remaining 32-candidate
-Taiwan queue is intentionally not auto-merged: resolving local set-symbol aliases, local
-collector-number equivalence, TW/HK relationships, and shared works belongs to the locality
-reconciliation loops. Likewise, the Italian filter's twelve matches, the shared Western locale
-slices, and the Portuguese positive frontiers cannot close eras, physical regions, or official
+and a source superseded by a newer exact complete request are rejected. The original 32-candidate
+Taiwan queue was deliberately not auto-merged: local set-symbol aliases, local collector-number
+equivalence, TW/HK relationships and shared works require reviewed locality reconciliation.
+Current staging owns the remaining queue. Likewise, the historical Italian matches, shared Western
+locale slices and Portuguese positive frontiers cannot close eras, physical regions or official
 archives that their retained responses do not cover.
 
 `scripts/card_discovery.py --check`, its regression tests, independent review checks N14/N15, and

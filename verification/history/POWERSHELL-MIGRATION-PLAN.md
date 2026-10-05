@@ -2,7 +2,7 @@
 # Consolidating the toolchain on Python — plan
 
 > [!NOTE]
-> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree at the recorded checkpoint. For current guidance see [HANDOVER.md](../../HANDOVER.md), [AGENTS.md](../../AGENTS.md) and the generated [handoff audit](../DATA-HANDOFF-AUDIT.md).
 
 Status: **executed, one item open.** Waves 0–3 and most of Wave 4 shipped in #52–#56. All five
 live `.ps1` scripts are ported and deleted, CI is cut over — no `pwsh` step remains in either
@@ -23,7 +23,7 @@ language interpreter instead of two, and so that a rule about the data has one p
 instead of two.
 
 The objective is deliberately not "translate every `.ps1` file". Those are different goals, and
-the second one is mostly waste — see [What must not be ported](#what-must-not-be-ported).
+the second one is mostly waste — see [What must not be ported](#3-what-must-not-be-ported).
 
 ## 1. The graph
 
@@ -181,7 +181,7 @@ actually runs. Neither mutates canonical state, so the failure mode of a bad por
 verdict, caught by the golden capture.
 
 `review_integrity.ps1` is the one node where a 1:1 translation is the wrong shape — see
-[Consolidation decision](#5-consolidation-decision).
+[Consolidation decision](#5-consolidation).
 
 **Exit:** the two Python entry points reproduce every check name, verdict and drift metric of the
 originals against current `main`, in the same order; CI runs Python; the `.ps1` files are deleted

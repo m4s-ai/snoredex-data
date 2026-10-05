@@ -2,7 +2,7 @@
 # Launch runbook
 
 > [!NOTE]
-> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree at the recorded checkpoint. For current guidance see [HANDOVER.md](../../HANDOVER.md), [AGENTS.md](../../AGENTS.md) and the generated [handoff audit](../DATA-HANDOFF-AUDIT.md).
 
 
 Everything that has to happen to take the site public, in order. Written to be followed once, by

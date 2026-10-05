@@ -28,7 +28,8 @@ The English reverse-holo version exercises a separate physical variant. English
 SVP 051 regular and Pokémon Center variants exercise distribution/stamp identity
 and incomplete foil mapping. A German Jungle research row exercises unresolved
 identity and era exclusions. Exact existing IDs are in `malie_profile.json`.
-Selection is not export approval: #386 must supply the field-level evidence.
+Selection is not export approval: every exported field needs the qualified evidence supplied by
+the accepted #386 inputs.
 Never remove a blocked mandatory target silently. A substitution requires a versioned
 selection change recording the old ID, replacement ID and evidence-based reason.
 
@@ -70,7 +71,7 @@ Reuse the shared specimen/source reference resolution, not a new identity algori
 
 Neither the graph's release/work payload nor the finish snapshot is a complete
 printed-card-content store. The snapshot intentionally retains finish flags only.
-For that bounded gap, `verification/card_content_observations.json` will contain
+For that bounded gap, `verification/card_content_observations.json` contains
 reviewed observations keyed to existing release/printing IDs. It is not another
 catalogue: no independent membership, existence verdict, identity or collector state.
 Release-scoped printed content can be shared by physical variants only through an
@@ -177,7 +178,8 @@ deliberately follows the written required-field rule rather than silently inheri
 that omission. The German references also lack artist credits, copyright and flavor
 text. Those are data gaps to resolve from the printed card, not permission to omit
 applicable fields. The reference's explicit `FLAT_SILVER`/`REVERSE` pair is a lead
-for the reverse target's mapping and needs qualified evidence acceptance in #386.
+for the reverse target's mapping. The accepted #386 observations qualify the specific mapping
+described below; the reference alone does not authorize other physical variants.
 The reference includes `images` and `ext`, but this profile retains their useful
 identity/source information in the companion instead of treating unfinished draft
 sections as a stable payload contract.

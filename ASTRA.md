@@ -5,6 +5,8 @@
 
 Dieser Bericht dokumentiert Beobachtungen und vorgeschlagene Änderungen. Er setzt nichts davon um und ersetzt weder `CLAUDE.md` noch einen Datenvertrag. Alle Befunde beziehen sich auf den unten festgehaltenen Stand. Die ursprüngliche Aufgabenstellung wurde aus dem ersten Commit und den maßgeblichen Issues rekonstruiert; ein vollständiges ursprüngliches Chatprotokoll liegt im Repository nicht vor.
 
+**Historischer Prüfstand:** Die [Umsetzungsentscheidungen](verification/ASTRA-CLOSURE.md) dokumentieren spätere Reparaturen. Aktuelle Arbeitsregeln stehen in [AGENTS.md](AGENTS.md) und [WORKFLOW-MAP.md](WORKFLOW-MAP.md); offene Arbeit steht im [Issue-Tracker](https://github.com/m4s-ai/snoredex-data/issues). Auch die unten vorgeschlagene `file://`-Unterstützung ist historisch: Seit #412 wird die Artwork-Prüfung über HTTP aufgerufen, wie im [aktuellen Browservertrag](WORKFLOW-MAP.md#c-consumer-projections-and-publication-inputs) beschrieben.
+
 ## 1. Gesamturteil
 
 **Die fachliche Grundlage ist gut, die Umsetzung hat jedoch erhebliche Schwächen an ihren Schnittstellen.** Das Repository bewahrt Quellen, trennt Sprache und Finish, unterscheidet Widerspruch von entschiedener Abwesenheit und lässt offene Fragen sichtbar. Diese Komplexität ist überwiegend durch reale Eigenschaften der Karten und durch konkrete frühere Fehler begründet.

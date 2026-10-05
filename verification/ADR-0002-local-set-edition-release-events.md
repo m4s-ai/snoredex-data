@@ -47,8 +47,8 @@ set would make the catalogue unable to discover what it was built to find.
   candidates; they do not imply cross-locality equivalence.
 
 The SQL contract uses foreign keys, uniqueness checks and scoped value checks for these nodes and
-edges. It also prevents updates or deletes of a loaded source record. #140 may choose a different
-physical layout, but it must preserve the same boundaries and constraints.
+edges. It also prevents updates or deletes of a loaded source record. The #140 graph migration's
+physical layout must preserve the same boundaries and constraints.
 
 ## Evidence rules
 
@@ -86,8 +86,9 @@ when every input is accounted for, all foreign keys hold and all adversarial fix
 
 ## Historical compatibility projection
 
-Current consumers may continue to read their existing `setCode`, `setName`, language and scalar
-date fields until #140. That projection is explicitly lossy:
+The compatibility fields `setCode`, `setName`, language and scalar date remain available after
+#140, while new locality-aware consumers use the authoritative graph. The compatibility projection
+is explicitly lossy:
 
 - a raw code without locality can collide;
 - one language list hides distinct language/script editions and regional Spanish releases;
@@ -106,6 +107,6 @@ Shared events and set concepts remain possible through explicit edges. AS5a can 
 source material without becoming an `sm10` language; identical `sv10` strings in several markets
 remain separate; and releases in different waves keep their own dates.
 
-Authoritative ids and graph consumer tables are materialized by #140. Catalogue ingestion and source
-coverage can proceed in #147, and alias/equivalence review can proceed in #148, against this
-versioned boundary without waiting for that migration.
+Authoritative ids and graph consumer tables were materialized by #140. Catalogue ingestion,
+source coverage and alias/equivalence review use this versioned boundary; they no longer await
+the migration described by the original issue dependencies.

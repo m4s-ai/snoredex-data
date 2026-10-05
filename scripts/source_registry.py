@@ -87,7 +87,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "artist", "date"],
         "attribution": "Japanese card data © The Pokémon Company.",
-        "notes": "Never returns Japanese secret/rainbow prints; their absence is not evidence.",
+        "notes": "The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence.",
     },
     {
         "providerId": "pokemon-card-asia",
@@ -377,7 +377,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "finish"],
         "attribution": "Korean printing data from koreanpokemoncards.com.",
-        "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.",
+        "notes": "Declared before any claim cites it, so the research it is meant to start has a place to land. Review its positive category coverage before use; silence never establishes absence, regardless of coverage.",
     },
     {
         "providerId": "elitefourum",
@@ -435,7 +435,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "organization": "Cardmarket (Sammelkartenmarkt GmbH & Co. KG)",
         "homepage": "https://www.cardmarket.com",
         "hosts": [],
-        "licenseOrTerms": "Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.",
+        "licenseOrTerms": "Site terms. Photographs and depicted artwork remain subject to their respective rights holders; the hosting source does not establish ownership.",
         "category": "marketplace-photo",
         "authorityTier": 2,
         "coverage": "individual cards whose printed text, identity or finish is visible in an exact retained product image",

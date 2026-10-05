@@ -2,7 +2,7 @@
 # Open-issue status check — 2026-07-31
 
 > [!NOTE]
-> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree as it was on the date above. For what is true now see `HANDOVER.md`, `CLAUDE.md` and the check suites.
+> **Historical record — a snapshot, not the current state.** It is kept because it explains how a decision was reached, and it is not maintained: figures and file paths in it describe the tree at the recorded checkpoint. For current guidance see [HANDOVER.md](../../HANDOVER.md), [AGENTS.md](../../AGENTS.md) and the generated [handoff audit](../DATA-HANDOFF-AUDIT.md).
 
 > **Partly superseded.** The PowerShell-to-Python consolidation (#50, merged as #52–#56 on
 > 2026-08-01) landed after this snapshot and moves four of the findings below:

@@ -1240,14 +1240,14 @@ def main() -> int:
         page.select_option("#f-name", [])
         page.wait_for_timeout(120)
 
-        # Language tri-state: absent must be the complement of present.
+        # URL values stay compatible; the complement of confirmed does not assert absence.
         page.select_option("#f-lang-JA", "present")
         page.wait_for_timeout(120)
         present = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
         page.select_option("#f-lang-JA", "absent")
         page.wait_for_timeout(120)
         absent = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("language tri-state present/absent partitions the rows",
+        check("language confirmation filter partitions the rows",
               present + absent == EXPECTED_ROWS and present > 0 and absent > 0,
               f"present={present} absent={absent} total={EXPECTED_ROWS}")
 
@@ -1263,15 +1263,16 @@ def main() -> int:
             "absentSnapshot": absent_cell.aria_snapshot(),
             "legend": page.locator("#collection-table-legend").inner_text(),
         }
-        check("language cells expose named present and absent states",
-              language_accessibility["presentLabel"].endswith(": present")
-              and language_accessibility["absentLabel"].endswith(": absent")
-              and "present" in language_accessibility["presentSnapshot"]
-              and "absent" in language_accessibility["absentSnapshot"],
+        check("language cells expose confirmation without asserting absence",
+              language_accessibility["presentLabel"].endswith(": confirmed")
+              and language_accessibility["absentLabel"].endswith(": not confirmed")
+              and "confirmed" in language_accessibility["presentSnapshot"]
+              and "not confirmed" in language_accessibility["absentSnapshot"],
               str(language_accessibility))
         check("language symbols have a visible non-color legend",
-              "✓ present" in language_accessibility["legend"]
-              and "— absent" in language_accessibility["legend"],
+              "✓ confirmed" in language_accessibility["legend"]
+              and "— not confirmed" in language_accessibility["legend"]
+              and "not proof of absence" in language_accessibility["legend"],
               language_accessibility["legend"])
 
         evidence_trigger = page.locator(".lang-evidence-trigger").first

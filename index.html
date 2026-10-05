@@ -49,8 +49,8 @@
   <p>This view projects the historical Cardmarket candidate universe frozen as
   <a href="legacy-cardmarket-baseline.json"><code>cardmarket-search-2026-07-21</code></a>,
   plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
-  legacy claim it answers a narrower question: <em>does a source outside Cardmarket confirm this
-  printing actually exists?</em></p>
+  legacy claim it answers a narrower question: <em>does positive evidence beyond marketplace
+  metadata confirm this printing actually exists?</em></p>
   <div class="stats">
     <div class="stat"><span class="n">204</span><span class="k">current-known card-variant rows</span></div><div class="stat"><span class="n">621</span><span class="k">established legacy language claims</span></div><div class="stat"><span class="n">6</span><span class="k">language claims needing evidence</span></div><div class="stat"><span class="n">88</span><span class="k">adjudicated not printed</span></div><div class="stat"><span class="n">4</span><span class="k">disputed claims</span></div><div class="stat"><span class="n">637</span><span class="k">current-known finish units</span></div><div class="stat"><span class="n">507</span><span class="k">current-known confirmed finishes</span></div><div class="stat"><span class="n">903</span><span class="k">current-known checklist items</span></div><div class="stat"><span class="n">1660</span><span class="k">distinct sources</span></div><div class="stat"><span class="n">621</span><span class="k">confirmed legacy card×language pairs</span></div>
   </div>
@@ -116,7 +116,7 @@
       </div>
     </details>
     <details class="morefilters">
-      <summary>Language filters (any / present / absent)</summary>
+      <summary>Language filters (any / confirmed / not confirmed)</summary>
       <div class="langgrid" id="langfilters"></div>
     </details>
     <div class="chips" id="chips"></div>
@@ -133,9 +133,9 @@
 
   <p class="language-legend" id="collection-table-legend">
     <strong>Language availability:</strong>
-    <span><span class="yes" aria-hidden="true">&#10003;</span> present</span>
-    <span><span class="no" aria-hidden="true">&mdash;</span> absent</span>
-    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> present, but on a
+    <span><span class="yes" aria-hidden="true">&#10003;</span> confirmed</span>
+    <span><span class="no" aria-hidden="true">&mdash;</span> not confirmed in this row; not proof of absence</span>
+    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> confirmed, but on a
       single source with no public URL &mdash; hover any tick for its provider and evidence tier</span>
     <span>Ellipsized values can be selected to expand.</span>
   </p>
@@ -273,8 +273,8 @@
   illustrator credits and the underlying illustrations, quoted provider content, and third-party
   photographs. The licences above grant nothing in respect of any of it.</p>
   <p>Pok&eacute;mon and all related names are trademarks of Nintendo, Creatures Inc. and GAME FREAK
-  inc. &copy; Pok&eacute;mon / Nintendo / Creatures / GAME FREAK. Card images are served from
-  Cardmarket and are included for identification only.</p>
+  inc. &copy; Pok&eacute;mon / Nintendo / Creatures / GAME FREAK. Retained card images come from the
+  sources named in the evidence registry and are included for identification and review.</p>
   <p><strong>This is an unofficial fan project.</strong> It is not affiliated with, endorsed by,
   sponsored by, or associated with Nintendo, Creatures Inc., GAME FREAK inc., The Pok&eacute;mon
   Company, Cardmarket, or any other rights holder or data provider named here.</p>
@@ -288,7 +288,7 @@
 <footer class="sitefoot">
   <p>Generated 2026-10-02 from the current-known repository data under legacy baseline
   <code>cardmarket-search-2026-07-21</code>. No analytics, no cookies, no trackers,
-  no runtime API dependency — this page works offline once loaded.</p>
+  no runtime third-party API dependency. Artwork data and images load from this HTTP site.</p>
   <p>Data attribution: M4S.Collection · CC BY-NC-SA 4.0 (grants <strong>in force</strong>, granted by M4S.Collection).
   Card artwork and other third-party material are excluded; see <a href="LICENSE.md">licensing scope</a>.</p>
 </footer>

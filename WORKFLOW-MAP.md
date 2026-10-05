@@ -261,7 +261,7 @@ explicit “Load more” action. Browser proposals still carry the same projecti
 
 Issue #356 recorded these DOM measurements in a fresh Chromium context at 1000px height:
 
-| Viewport | Previous initial DOM / artwork cards | Current initial DOM / artwork cards |
+| Viewport | Previous initial DOM / artwork cards | Post-#356 initial DOM / artwork cards |
 |---:|---:|---:|
 | 320 px | 73,292 / 559 | 20,395 / 0 |
 | 375 px | 73,292 / 559 | 20,395 / 0 |
@@ -272,10 +272,11 @@ Issue #356 recorded these DOM measurements in a fresh Chromium context at 1000px
 The static `index.html` file is 1,237,743 bytes at the #357 documentation update; serialized
 browser DOM sizes are not the file transfer size.
 
-The previous run embedded 2,965,989 artwork JSON characters and built 933 image elements. The
-current initial page embeds 924 metadata characters and no artwork images. After loading, the
-first batch contains 20 groups, 65 members and 97 images; the remaining groups are reachable via
-the button. Local originals remain under `images/`; `images/previews/` and `images/thumbs/` hold
+In that #356 snapshot, the previous run embedded 2,965,989 artwork JSON characters and built 933
+image elements; the changed initial page embedded 924 metadata characters and no artwork images.
+Its first loaded batch contained 20 groups, 65 members and 97 images. These are historical
+measurements, not current page sizes. The remaining groups are reachable via the button.
+Local originals remain under `images/`; `images/previews/` and `images/thumbs/` hold
 generated preview/thumbnail derivatives (360px and 120px maximum widths). The projection retains
 each original path and SHA-256, and the UI links both the derivative preview and the original
 download. During a normal `python scripts/regen.py` write, `scripts/artwork_review.py` calls the
@@ -299,11 +300,12 @@ release-gate.yml (workflow_call, Linux + Windows)
   -> deploy-pages
 ```
 
-The reusable gate is mode-sensitive: draft PRs skip the job, ready PRs run deterministic L3 only,
-and workflow-call/manual release paths run L4 live/browser/publication checks. A push to `main`
-also runs the explicit full retained source/card-discovery history checks; a pull request that
-changes retained-run or projection-input paths runs that same history lane before merge. The
-pull-request workflow does not install browser dependencies; UI-relevant paths select
+The reusable gate is mode-sensitive: draft PRs skip its gate job, ready PRs run deterministic L3,
+and workflow-call/manual release paths run L4 live/browser/publication checks. The full retained
+source/card-discovery history checks run on Linux for L4 and for ready pull requests changing
+retained-run or projection-input paths. A push to `main` runs only the separate publication/history
+audit, including P6/P7. The reusable pull-request gate does not install browser dependencies;
+UI-relevant paths, including on draft PRs, select
 `.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
 downloads the artifact produced after the L4 gate and rejects missing, stale, or
 fingerprint-disagreeing handoffs before deployment. The explicit lists are deployment and UI
@@ -311,7 +313,7 @@ boundaries, not a second full-build order.
 
 ### E. Verification envelope
 
-The ordered `TESTS` tuple in `scripts/regen.py` is the sole executable inventory. Do not copy that
+The ordered `TESTS` list in `scripts/regen.py` is the sole executable inventory. Do not copy that
 list into documentation: adding a test would immediately make the prose stale. The ownership and
 gate-matrix stores below map each current test to its contract and execution boundary.
 
@@ -453,9 +455,9 @@ distribution, and card size. It is not derived from list order.
 
 | Event | Gate | Expensive checks | Artifact behavior |
 |---|---|---|---|
-| Draft PR | none | none | no release artifact |
-| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows; UI paths add Chromium behavior lane | gate manifest only |
-| Push to `main` | P6/P7 | full retained discovery history and publication audit at `GITHUB_SHA` | no second build |
+| Draft PR | reusable L3 gate skipped | UI paths still run the Chromium behavior lane | no release artifact |
+| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows; discovery-input paths add full retained-run validation on Linux; UI paths add Chromium behavior lane | gate manifest only |
+| Push to `main` | publication/history audit, including P6/P7 | sensitive-history and commit-identity checks at `GITHUB_SHA` | no second build |
 | Manual Pages run | L4 | live finish sources, Linux browser, allowlist, publication approval | download the already verified `pages-artifact` |
 
 ## 7. Boundaries

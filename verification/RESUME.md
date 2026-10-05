@@ -279,14 +279,17 @@ An earlier version of this file argued that a Japan-only distribution channel po
 
 Each market ran its own food-company tie-in. Bulbapedia redirects both `Snorlax (XY-P Promo 149)` and `Snorlax (XY-P Promo 167)` to one article, `Snorlax (BREAKthrough 118)`, and the illustrator (Kouki Saitou) matches on both.
 
-**Use the redirect target as the identity test.** Two promo numbers that redirect to the same card article are the same card; that is the cheapest reliable check for cross-language promo matching, better than numbers or names.
+**Use the redirect target as a same-work lead.** A shared article can connect localized releases,
+but the exact local set, number and language still require positive evidence and a reviewed
+mapping. The releases remain separate; a redirect is not an automatic identity merge.
 
-The channel argument survives only as *supporting* evidence. The remaining contradictions built on it rest primarily on other grounds:
+The historical pass also recorded the following context for its contradictions. Campaign geography
+and omitted promo rows do not establish absence; only a separate owner adjudication can settle it:
 
-| Card | Channel | Independent support |
+| Card | Channel | Recorded context and limit |
 |---|---|---|
-| `BW-P 207` | CoroCoro Ichiban! magazine insert | Korean BW promo list (65 cards) has no Snorlax |
-| `DP-P 126` | Domino's Pizza Japan campaign | Korean list carries the sibling Lv.X as `006`, so the era is in scope — and the user confirmed it |
+| `BW-P 207` | CoroCoro Ichiban! magazine insert | The inspected Korean BW promo list omitted Snorlax; this is a source gap. |
+| `DP-P 126` | Domino's Pizza Japan campaign | The inspected Korean list named the sibling Lv.X as `006`; the owner also supplied a determination. The sibling row does not establish this card's status. |
 
 Korean promo articles are `{{incomplete}}`-tagged and short (22 and 65 rows), so never contradict on absence alone.
 
@@ -308,13 +311,13 @@ not absence authority.
 
 **But its Western coverage is one row per card, not one per language.** It lists a single `Snorlax (XY179 English Promo)` — yet physical copies of that promo exist in **French, German, Italian, Spanish and Portuguese**, all inspected from photographs. Searching `ronflex` returns nothing at all, so the database indexes English names only. **Never use a pokumon absence to contradict a Western language.** The asymmetry is real: per-market rows for Asian printings, a single lumped row for the West.
 
-### `XYPR 179` — the case that proves the databases wrong
+### `XYPR 179` — the case that exposes database coverage gaps
 
-All three databases point the same way, and all three are wrong:
+The inspected sources exposed fewer localized records than the physical evidence established:
 
-| Source | What it says | Reality |
+| Source | What the lookup exposed | Physical evidence |
 |---|---|---|
-| TCGdex | only `en` and `fr` exist for `xyp-XY179` | six Western languages exist |
+| TCGdex | only `en` and `fr` records found for `xyp-XY179` | six Western languages exist |
 | pokumon | one row, "XY179 **English** Promo" | ditto |
 | Bulbapedia | distributed "in the **English** Snorlax-GX Box" | localized Europe-wide |
 
@@ -412,14 +415,17 @@ One more filename trap, which the badge does not fix: **the code is not always t
 (`th_ma3t_exp`, `idn_ma3i_exp`) for what the number, card name and regulation mark all say is one
 card. Identify by number + denominator + card name + regulation mark.
 
-Twenty of these are admitted as printings under ADR-0001 **D5** (owner, 2026-08-10), which extends
-D1 to a catch-up code evidenced by a tier-1 publisher record, for language and identity only.
-Finish stays `pending`: a database page cannot be turned over.
+At the 2026-08-10 checkpoint, twenty of these were admitted as card releases under ADR-0001
+**D5**, which extends D1 to a catch-up code evidenced by a tier-1 publisher record, for language
+and identity only. Finish remained `pending` until separate positive evidence could establish it.
 
 ### Two page types worth reaching for earlier next time
 
 - **`Snorlax (TCG)`** — a master list for the species, one block per card with every release as `jpset=` / `enset=` pairs. It resolves Japanese↔English correspondence for all 40 cards in one fetch. It does **not** carry Korean or Chinese, so it only helps Japanese units.
-- **Individual card articles** carry a `Release information` paragraph that often states the originating Japanese set in prose, which is the only route to Japanese secret/rainbow prints — the official `pokemon-card.com` search never returns them and the expansion article lists English numbering only. `s1H 70` was settled that way.
+- **Individual card articles** carry a `Release information` paragraph that often states the
+  originating Japanese set in prose. It settled `s1H 70` when the inspected official search did not
+  return the target. Read the Japanese numbering as well as the English numbering in shared
+  expansion articles; neither that search result nor the successful article defines exclusive coverage.
 
 ### Sources researched and access outcomes for the Korean/Chinese tail
 
@@ -448,7 +454,10 @@ Also new suffix: **`(SCTCG)`** = Simplified Chinese promo series (`S-P Promotion
 
 ### An empty Langtable parameter is not the same as an absent one
 
-`Start Deck 100 Battle Collection` fills `ko=` and both `zh_` slots but lists `fr= de= it= es= pt_br= id= th=` **present and empty**. That is a deliberate "not released here", unlike an article that simply omits the parameters. Worth distinguishing before treating a blank as evidence either way — the same trap as the cross-language index columns.
+The inspected `Start Deck 100 Battle Collection` article filled `ko=` and both `zh_` slots but
+listed `fr= de= it= es= pt_br= id= th=` **present and empty**. Retain that structural distinction
+when parsing, but neither an empty parameter nor an omitted parameter proves non-release.
+Only the positive named releases can support a claim.
 
 ### Bulbapedia keeps one article per language — the naming scheme
 
@@ -475,10 +484,17 @@ https://www.elitefourum.com/search.json?q=<query>
 https://www.elitefourum.com/t/<topicId>.json
 ```
 
-Two threads settled cases that had no wiki route at all:
+Two threads supplied context for cases that had no wiki route in the original research:
 
-- **`Black Star Promos - languages` (36573)** — a per-card table of the Wizards promos with language flags. Row *49 Snorlax* carries **only the US flag**, which contradicts Cardmarket's five European languages. Crucially the reading is verifiable: rows *8 Mew* and *20 Psyduck* both show `us/de/fr/it/es/pt`, so a lone US flag is a positive statement rather than a gap. Always sanity-check a table like this against a row you can independently confirm before trusting its blanks.
-- **`Modern World Championships Decks languages` (55804)** — establishes that Worlds decks were English-only historically and gained French/Italian/German from 2022. Combined with localized 2023 retail listings this closed EN/DE/FR/IT; Spanish and Portuguese were subsequently contradicted after no localized Colorless Lugia listings were found.
+- **`Black Star Promos - languages` (36573)** — the inspected table showed only the US flag for
+  *49 Snorlax*, while *8 Mew* and *20 Psyduck* showed `us/de/fr/it/es/pt`. Those controls help parse
+  positive flags; they do not turn missing flags into proof against Cardmarket's other claims.
+  Final absence decisions belong to the owner-adjudication store.
+- **`Modern World Championships Decks languages` (55804)** — recorded the reported language
+  history. Together with exact localized 2023 retail listings it supplied positive EN/DE/FR/IT
+  evidence. The original pass also contradicted Spanish and Portuguese after finding no localized
+  Colorless Lugia listings; that omission is not an accepted absence inference. Consult the
+  separate owner decisions for final application status.
 
 Note the table is emoji-based: parse `title=":xx:"` out of the flag `<img>` tags, not the visible text.
 
@@ -495,13 +511,20 @@ Pokémon GO               |ko=Pokémon GO
 
 Same trick works for `pt_br=`, `it=`, `fr=`, `de=`, `es=`.
 
-Titles that cost a search to find: the Battle Academy article is a disambiguation page; the product is **`Battle Academy 2020 (TCG)`**. There is no `World Championship Deck` article at all, and `Wizards Black Star Promos (TCG)` records the Snorlax promo (Pokémon League, August 2002) but states no languages — so `WCD23` and `WP` have no documentary route and are candidates for manual review.
+Titles that cost a search to find: the Battle Academy article was a disambiguation page; the
+product was **`Battle Academy 2020 (TCG)`**. The original search did not find a `World Championship
+Deck` article, and the inspected `Wizards Black Star Promos (TCG)` text supplied no language list.
+Those were limitations of that lookup, not permanent evidence gaps. Current units and their
+sources determine whether `WCD23` or `WP` needs more research.
 
 ### Two API details that silently return nothing
 
 **Always pass `redirects=1`.** Japanese set names are redirects to the English article, and without the flag the API returns the redirect stub (34 bytes) rather than the target — which looks exactly like "this set has no Snorlax". Resolved pairs: Tag Bolt → *Team Up*, Matchless Fighters → *Peerless Fighters*, Pokémon Jungle → *Jungle*, Challenge from the Darkness → *Gym Challenge*, Shield → *Sword & Shield*.
 
-**The articles carry both numberings.** `{{Setlist/nmentry|...}}` rows use the English collector number, `{{Setlist/entry|...}}` rows the Japanese one. Tag Bolt 115/095 (HR) exists only in the Japanese rows — the official `pokemon-card.com` search does not return Rainbow Rares at all, so this is the only route to them.
+**The articles carry both numberings.** `{{Setlist/nmentry|...}}` rows use the English collector
+number, `{{Setlist/entry|...}}` rows the Japanese one. The inspected Tag Bolt list placed 115/095
+(HR) in its Japanese rows. This provided a positive route when the official search did not return
+that target; it is not a provider-wide claim that Rainbow Rares can never be found there.
 
 **JP promo pages need exact-name matching**, not substring: `カビゴンGX` is contained in `イーブイ&カビゴンGX`, so a `-like` match makes both SM-P promos look ambiguous and silently skips them.
 
@@ -596,7 +619,8 @@ run *did* use still expires it, which is the property worth keeping.
 The multi-surface routing requirement is now enforced in the manifest: the four exact checklist
 URLs resolve only to `tpci-checklists`, while Italian archive detail URLs resolve only to
 `tpci-localized-card-archive`. Each surface retains its own boundary. In particular, the archive
-inherits none of the checklist surface's absence or finish closure.
+inherits no finish capability from the checklist surface. Neither surface has absence authority
+or can close a finish list.
 
 ### The #139 locality/era matrix is now the discovery boundary
 
@@ -643,9 +667,10 @@ the three reviewed TG10 mappings; four source-identified Pokémon TCG Pocket row
 positively excluded. Across all six active slices final run `20260811T113148Z` accounts for 207
 records: 157 matched, 32 Taiwan candidates and eighteen positive exclusions, with no run error.
 
-The TCGdex `es` locale carries no physical Europe-versus-LATAM discriminator. Its matches are
-therefore constrained to pre-existing `WEST/es-ES` releases and cannot create or populate
-`LATAM/es-419`. The French, German, and European-Spanish official archive routes remain explicit
+The historical run initially matched generic TCGdex `es` rows to pre-existing `WEST/es-ES`
+releases. That policy was corrected in run `20260813T115958Z`: an unqualified Spanish record
+cannot select or populate **either** WEST or LATAM without an independent regional physical
+identifier. The French, German, and European-Spanish official archive routes remain explicit
 `needs-evidence` gaps. `west-fr`, `west-de`, and `west-es-eu` are terminal only as complete
 positive slices, never as complete historical catalogues.
 
@@ -744,7 +769,7 @@ frontiers, not complete promo, product, or historical catalogues.
 The Indonesian response positively rediscovers the three #138 minimum regressions: `SV6s I
 136/167`, `SV9s I 109/139`, and `SV4s I 118/132`. Pass
 `admit_indonesia_minimum_regressions_20260820.py` promotes those exact retained details to local
-physical-print nodes. The publisher detail establishes the card and number; the independent
+card-release nodes. The publisher detail establishes the card and number; the independent
 Indonesian locality set index supplies the printed `I`-bearing product code. Finish and
 cross-language work equivalence remain unresolved. Replay `20260820T125000Z` maps the three raw
 details to those nodes, leaving six Indonesian and ten Thai positive records as visible new
@@ -854,11 +879,12 @@ Cardmarket's Chinese set names are translations of the Chinese titles; Bulbapedi
 
 Japanese sets rename too — resolve them via `redirects=1` rather than guessing: Tag Bolt → *Team Up*, Matchless Fighters → *Peerless Fighters*, **Shocking Volt Tackle → *Amazing Volt Tackle***, Challenge from the Darkness → *Gym Challenge*, XY Beginning Set → *Kalos Starter Set*, BREAK Starter Pack → *Generations*.
 
-### The Asian set code is in the set symbol *image*, never in the page text
+### When the Asian set code is missing from text, inspect the symbol image
 
-Bulbapedia does not write Asian set codes anywhere in its wikitext. `Sword & Shield (ATCG)`
-contains the string `sc1` exactly zero times: it calls the two halves **Set A** and **Set B**, and
-the code lives in the set symbol image the setlist header points at. Fetch and read the image.
+The inspected `Sword & Shield (ATCG)` wikitext contained the string `sc1` zero times: it called
+the two halves **Set A** and **Set B**, while the code appeared in the set symbol image linked
+by the setlist header. Fetch and read the exact image when the text lacks the identifier; this
+observation is not a rule that every Asian code is absent from page text.
 
 ```console
 curl -sG https://bulbapedia.bulbagarden.net/w/api.php \
@@ -886,17 +912,25 @@ Related trap: a card's own glyph may look illegible at the resolution you happen
 SPEC-0015's photograph is 3508×2480 and reads `scD F` cleanly once cropped to the corner. Check
 the stored resolution before recording a glyph as unreadable.
 
-### Market-history rule — the highest-yield technique for Asian languages
+### Market-history research — context, not an absence rule
 
 Bulbapedia's country articles carry a TCG section that dates when a language market opened. The
 dates provide positive market context without proving that any unlisted card was never released
 (`verification/archive/passes/verify_market_history.ps1`, an archived one-shot that must not be
 rerun):
 
-- **Traditional Chinese** launched **October 2019** with *All Stars Collection*. Before the Sun & Moon era only Base Set plus EX Legend Maker / EX Trainer Kit 2 were ever printed in Traditional Chinese; between 2006 and 2019 Taiwan received English-language product. Any Japanese set older than Oct 2019 therefore has **no** Traditional Chinese printing.
-- **Korean**: before the DP era only Base Set and ADV Expansion Pack (plus the Treecko/Torchic/Mudkip decks) were printed in Korean. From DP through HGSS, Korean sets were *unique recombinations* — "none of the sets themselves corresponding to existing sets". Only from Black & White do Korean sets track the Japanese ones.
+- **Traditional Chinese:** the inspected history described the October 2019 *All Stars Collection*
+  launch, earlier Base Set / EX Legend Maker / EX Trainer Kit 2 releases, and English-language
+  product in Taiwan between those periods. Those dates do not rule out a localized counterpart
+  or a later catch-up release of an older Japanese card.
+- **Korean:** the inspected history named Base Set and ADV Expansion Pack plus the starter decks
+  before DP, and described DP–HGSS products as recombinations — "none of the sets themselves
+  corresponding to existing sets". These relationships guide local-identity research; they do not
+  exclude unlisted cards or replace exact localized evidence.
 
-This contradicted 23 units in one pass. **Caveat recorded in the evidence text:** the *card* may still exist in Traditional Chinese through a later catch-up set — what is excluded is a Traditional Chinese printing *of that set*.
+The historical pass contradicted 23 units using this reasoning. That outcome is retained as
+research history, not a permitted absence rule. The card may exist under a later catch-up identity;
+even a claimed absence of a particular set edition requires owner adjudication, not chronology alone.
 
 ### What the `x…` and `PPS…` codes actually mean — this unlocked 39 units
 
@@ -905,7 +939,10 @@ User-supplied domain knowledge, and it overturned an earlier conclusion of mine:
 - **`x<SET>`** = special editions of cards from `<SET>` — mirror-holo ball patterns or retail stamps. **Not** a Cardmarket invention, so they *are* documentable.
 - **`PPS<n> <SET>`** = Play! Pokémon Prize Pack Series `<n>`, reprint of a card from `<SET>` carrying the Play! stamp.
 
-Resolved from that:
+The original pass recorded the following findings. These are historical outcomes, not current
+per-language verdicts; exact later evidence can revise individual rows. In particular, French
+`xJTG 117 V2` is now specimen-confirmed. Read `units.json` and the separate owner decisions for
+current status, and never treat the distribution list below as proof against unlisted languages.
 
 | Card | Finding | Source |
 |---|---|---|
@@ -929,8 +966,9 @@ but 25 records for `คาบิกอน` (`verification/archive/passes/asia_fe
 that must not be rerun). Traditional Chinese likewise needs `卡比獸`. Only Indonesian answers to
 the English name.
 
-Yield per action is now 1–3 units. All bulk sources are exhausted; future additions will need one
-lookup per card.
+At that checkpoint, the attempted bulk queries had been exhausted and typical actions yielded
+1–3 units. That measured those queries only. New source surfaces, localized checklists and
+source-first discovery can supply further batches; current queues determine the next research step.
 
 ### Correction applied — read this before adding contradictions
 
@@ -990,9 +1028,17 @@ this card when explaining why a marketplace language filter needs independent ev
 
 ### Two structural limits on what is still open
 
-**Blank cells in the cross-language index are not evidence of non-release.** For Western-language columns a blank usually means the localized set name equals the English one. The index leaves Jungle/Portuguese blank while the Jungle *article* states Portuguese was released. Only positive cells are used as confirmation; blanks stay open. (For Dutch/Polish/Russian the index *is* reliable, because those languages have few releases and the page documents them explicitly — corroborated by the `KSS 26` article.)
+**Blank cells in the cross-language index are not evidence of non-release.** For Western-language
+columns a blank can mean the localized set name equals the English one. The inspected index left
+Jungle/Portuguese blank while the Jungle article positively named Portuguese. Only positive cells
+are used as confirmation; blanks stay unknown for Dutch, Polish and Russian too.
 
-**Prize Packs and "Additionals" may be structurally unprovable per language.** The Bulbapedia Prize Pack Series articles list the exact card — which evidences the printing — but state nothing about distribution languages. So `PPS1 VIV 131` and `PPS3 LOR 143` are confirmed for English only; the other five Western languages have no documentary source. The same applies to the `x…` Additionals sets, which are Cardmarket's own product grouping. Closing those ~60 units would require marketplace listings per language (eBay, CardTrader), which the user has accepted as evidence but which no card database will ever carry.
+**Prize Packs and "Additionals" require their own localized evidence.** The original Bulbapedia
+lookups did not establish every distribution language. Later retained official checklists confirm
+`PPS1 VIV 131` and `PPS3 LOR 143` in English, French, German, Italian and European Spanish;
+Portuguese has separate owner-adjudicated decisions. The exact sources are in `units.json` and
+[FINISH_SOURCES.md](FINISH_SOURCES.md#confirmed-and-narrowed-cases). An `x…` printing still needs
+its own positive evidence; neither a base-card record nor a gap in a particular database settles it.
 
 ### Simplified Chinese — the route that works, and its limit
 
@@ -1019,10 +1065,10 @@ Phases: `tcgdex` → `tcgdex-full` → `asia-official` → `exclude-codecards` �
 
 At this checkpoint, 12 of the then-19 contradictions were Traditional Chinese on **pre-2021
 Japanese sets** — Tag Bolt, Double Blaze, Wild Blaze, Plasma Gale, Rebellion Crash, Shield,
-Awakening Psychic King. The Traditional Chinese TCG only launched around 2020/21, so those sets
-never had a Traditional Chinese printing, yet Cardmarket offers the language filter for them.
-This is the same artefact as `KSS 26`: the filter reflects Cardmarket's global language list,
-not print reality. Thirty T-Chinese units on old sets were still open at that stage.
+Awakening Psychic King. The pass incorrectly treated an assumed market start around 2020/21 as
+proof against those printings. That inference is superseded: market history cannot settle absence,
+and local catch-up releases must be checked independently. Thirty T-Chinese units on old sets
+were still open at that stage; these figures describe the historical checkpoint only.
 
 Side benefit at this stage: the official Japanese database also publishes illustrators, so artist
 coverage in the **main dataset rose from 79/198 to 108/198**. See `artists_official_jp.json` and
@@ -1164,11 +1210,13 @@ obtained.
 
 ## Resume procedure
 
-The command order lives in `AGENTS.md` — one copy, kept beside the rules that depend on it.
-This file no longer restates it.
+The executable command order lives in `scripts/regen.py`; `WORKFLOW-MAP.md` explains its ownership
+and batch boundaries, and `AGENTS.md` supplies the operating rules. This file does not duplicate
+the pipeline list.
 
-Safe to interrupt at any point: `units.json` is rewritten only after a full pass, and
-`evidence.jsonl` is appended per confirmation.
+Resume an interrupted batch by checking the retained inputs and the owning command's completion
+state before replay. The evidence journal is append-only and does not reconstruct `units.json`;
+an interrupted intake is not delivered until its consumer checks and final gate pass.
 
 ## Sources used so far
 
@@ -1185,7 +1233,9 @@ transfer a number, language, release date, or finish pattern from another region
 announcement-only pages as research sources without promoting them to individual card proof.
 Tournament legality and later accessory-product dates are separate from the booster release.
 
-| Source | Scriptable | Covers | Yield |
+The following yields describe the early source passes, not current provider coverage or totals:
+
+| Source | Scriptable at that checkpoint | Queried scope | Historical yield |
 |---|---|---|---|
 | **TCGdex API** (`api.tcgdex.net`) | yes | en, fr, de, es, it, pt, ja, zh-tw, id, th | 352 |
 | **Official Pokémon Asia** (`asia.pokemon-card.com`) | yes | tw, id, th, sg — gives expansion code + collector number + illustrator | 12 |
@@ -1201,7 +1251,7 @@ Tournament legality and later accessory-product dates are separate from the boos
   English Thai keyword returned none; neither result establishes database coverage. Native-name,
   product-type and locality enumeration belongs to the source-first work in #138.
 - **HTTP 403 to scripts:** Bulbapedia, tcgcollector, eBay. Browser tool only.
-- **Working but unintegrated:** `pokellector` (incl. `jp.` subdomain), `yuyu-tei` (JP shop listings), `pokemon-card.com` detail pages (JS-driven search, but direct `details.php/card/{id}` works), serebii, pkmncards.
+- **Working but unintegrated at that checkpoint:** `pokellector` (incl. `jp.` subdomain), `yuyu-tei` (JP shop listings), `pokemon-card.com` detail pages (JS-driven search, but direct `details.php/card/{id}` worked), serebii, pkmncards. Current routing and integration are recorded in the capability and adapter manifests.
 
 ## Historical checkpoint — where the then-remaining 442 sat
 
@@ -1216,7 +1266,7 @@ Tournament legality and later accessory-product dates are separate from the boos
 
 ## Historical policy question — resolved
 
-The "Additionals" and Prize-Pack rows are the **same physical card** as a printing that is already
-confirmed — Cardmarket just files them as separate products. Inheriting the base card's evidence
-was considered here, but the owner later resolved the policy: Prize Packs and `x…` Additionals
-must be verified independently. See **Scope decisions (user)** above.
+The original proposal treated "Additionals" and Prize-Pack rows as the same physical card as an
+already-confirmed base printing and considered inheriting its evidence. The owner rejected that
+shortcut: Prize Packs and `x…` Additionals must be verified independently. See **Scope decisions
+(user)** above.

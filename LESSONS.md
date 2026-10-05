@@ -306,8 +306,9 @@ application decision after evidence review.
 
 **Trap:** *Never assume a V-token means the same thing across sets — read `variantName`.*
 
-`xsv2a` uses V1 for the Poké Ball mirror and V2 for the Master Ball. `xm2a` reverses exactly that
-pair. `PPS8` V1 is Non-Holo and V2 Holo; `xJTG` V1/V2/V3 are distribution stamps.
+`xsv2a` uses V1 for the Poké Ball mirror and V2 for the Master Ball. The current `xm2a`
+identifications are V1 Colorless Energy star mirror and V2 Poké Ball mirror.
+`PPS8` V1 is Non-Holo and V2 Holo; `xJTG` V1/V2/V3 are distribution stamps.
 
 When `SV-P/ID 117` needed its two mirror variants identified, neither unit recorded a
 `variantName` and both rested on the same Bulbapedia set-list row, which does not distinguish them.
@@ -384,16 +385,18 @@ the reason written beside them. A file can move; its blobs cannot.
 
 ## The eight-generator loop is not the gate
 
-**Trap:** *Run `scripts/tracker.py check-template` too — and note it exits 0 while printing failure.*
+**Trap:** *A hand-picked generator loop can omit the tracker check; use the canonical gate.*
 
 Emitting a header from `scripts/database.py` rebuilt the database, which left the tracker template's
 catalogue fingerprint stale. The local check loop ran the eight `--check` generators and treated
 that as the generator gate; `check-template` is a separate step and the only thing that reads the
 template, so it never ran. CI caught it.
 
-The detail that makes this a trap rather than an oversight: **`check-template` prints its failure
-and exits 0.** A `|| echo FAIL` wrapper around it stays silent. The workflow catches it only because
-it runs as its own step under `-e`.
+The earlier incident note also claimed that `check-template` exited 0 on failure and that shell
+`-e` caught it. That explanation was wrong: `-e` cannot detect a successful exit. The maintained
+`scripts/tracker.py` returns 1 when template validation fails, and `scripts/regen.py` includes
+`check-template` in the canonical gate. Check the whole gate's exit status rather than rebuilding
+a partial command list.
 
 *PR #106.*
 

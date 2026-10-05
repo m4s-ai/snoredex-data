@@ -1,6 +1,8 @@
 <!-- doc: role=issue-258 Indonesian physical evidence; stage=reference -->
 # Indonesian AC3b 238/204 seller photograph — 2026-09-24
 
+**Later admission — 2026-09-25:** the [reconciliation record](../OPEN-ISSUES-RESEARCH-20260924.md#reconciliation-on-2026-09-25--positive-rows-are-evidence) records the canonical Indonesian AC3b release and its retained seller evidence. The unprojected status and remaining integration below describe the original 2026-09-24 intake checkpoint.
+
 SPEC-0557 retains the exact Shopee seller photograph supplied for review: Indonesian Eevee & Snorlax GX, AC3b C 238/204 SR. The card face shows Indonesian text, the exact collector number and rarity, and reflective foil across the face and border. The observation records `holo`; it does not assign a specific foil pattern or close the finish inventory.
 
 The original 1024×1024 JPEG is retained and imported unchanged. Its SHA-256, byte size, MIME type, dimensions and provenance are recorded in `sources.json`.

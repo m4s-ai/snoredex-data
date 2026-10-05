@@ -82,7 +82,7 @@ in `verification/owner_adjudications.json`.
 - **Coverage:** Japanese-market cards and illustrators
 - **Evidence mode:** positive only
 - **Attribution:** Japanese card data © The Pokémon Company.
-- **Notes:** Never returns Japanese secret/rainbow prints; their absence is not evidence.
+- **Notes:** The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence.
 
 ### Pokémon Card official database and rules (Korea) — <https://pokemoncard.co.kr>
 
@@ -141,7 +141,7 @@ in `verification/owner_adjudications.json`.
 ### Cardmarket exact product image — <https://www.cardmarket.com>
 
 - **Organization:** Cardmarket (Sammelkartenmarkt GmbH & Co. KG)
-- **Terms:** Site terms. Product images remain Cardmarket's; artwork remains the rights holders'.
+- **Terms:** Site terms. Photographs and depicted artwork remain subject to their respective rights holders; the hosting source does not establish ownership.
 - **Coverage:** individual cards whose printed text, identity or finish is visible in an exact retained product image
 - **Evidence mode:** positive only
 - **Attribution:** Exact retained product image via Cardmarket.
@@ -316,7 +316,7 @@ in `verification/owner_adjudications.json`.
 - **Coverage:** Korean-market set and promo listings
 - **Evidence mode:** positive only
 - **Attribution:** Korean printing data from koreanpokemoncards.com.
-- **Notes:** Declared before any claim cites it, so the research it is meant to start has a place to land. Prove it covers a category before reading its silence as evidence: rule 3 applies here as it does to pokumon, whose Western coverage is one lumped English row.
+- **Notes:** Declared before any claim cites it, so the research it is meant to start has a place to land. Review its positive category coverage before use; silence never establishes absence, regardless of coverage.
 
 ### pokumon.com — <https://pokumon.com>
 

@@ -60,14 +60,15 @@ The market split across all 198 legacy Cardmarket singles: Western 87 · Japanes
 `languages` beside it. It is independent of what the product *is*: that is `isCodeCard`, derived
 from the product name, and the code cards are spread across markets rather than forming one.
 
-## Shared art across releases
+## Shared card text across products
 
-38 cards appear in more than one release. The interesting split is between *reprints that kept the
-art* and *reprints that commissioned new art*.
+`analysis_shared_cards.json` groups Cardmarket products by `cardKey`, which identifies shared card
+text. Its `printings` count means product rows, not physical printings or reviewed artwork identities.
+The groups expose known illustrator differences; artwork equivalence requires a separate image review.
 
-**Same card, genuinely new artwork** — these are the ones to know:
+**Shared card text with multiple known illustrators:**
 
-| Card | Printings | Artists |
+| Card | Cardmarket products | Known artists |
 |---|---|---|
 | Snorlax — *Voraciousness / Thudding Press* | 17 across 11 sets | **HYOGONOSUKE** (`MEW 143`) · **GOSSAN** (`SVP 051`) · **Shigenori Negishi** (`PAF 202` Shiny) |
 | Eevee & Snorlax GX | 12 across 6 sets | **Mitsuhiro Arita** (`TEU 120`) · **5ban Graphics** (`TEU 171/191`) · **Tomokazu Komiya** (`SM 169`) |
@@ -78,14 +79,14 @@ art* and *reprints that commissioned new art*.
 | Snorlax V — *Swallow / Falling Down* | 7 across 4 sets | **Masakazu Fukuda** (`SSH 141`) · **aky CG Works** (`SSH 197` alt) |
 | Snorlax — *Rolling Tackle / Heavy Impact* | 5 across 5 sets | **chibi** (`SSH 140`) · **Tika Matsuno** (`SWSH 032`) |
 
-**Same art reused across releases** (single artist across every printing) — notably
-`Snorlax-Thick-Skinned-Body-Slam` (7 printings, all **Ken Sugimori**, Jungle → Base Set 2 →
-Legendary Collection → XY promos → JP Pokémon Jungle), `Snorlax-VMAX-G-Max-Fall` (7, all
-**aky CG Works**), `Snorlax-But-First-Food-Heavy-Impact` (6, all **Souichirou Gunjima**),
-`Snorlax-Collect-Collapse` (6, all **Eri Yamaki**).
+**Groups with one known illustrator** include `Snorlax-Thick-Skinned-Body-Slam`
+(**Ken Sugimori**), `Snorlax-VMAX-G-Max-Fall` (**aky CG Works**),
+`Snorlax-But-First-Food-Heavy-Impact` (**Souichirou Gunjima**), and
+`Snorlax-Collect-Collapse` (**Eri Yamaki**). Missing credits remain unknown; one known artist
+does not establish that every product shares one artwork.
 
-**Most-used illustrators:** Ken Sugimori (7 English printings), 5ban Graphics (4),
-Mitsuhiro Arita (4), Kouki Saitou (3), aky CG Works (3).
+The current illustrator ranking is in [`analysis_artists.json`](analysis_artists.json).
+It counts attributed product rows across the dataset, not just English or distinct artworks.
 
 Remember that `cardKey` groups by card *text* — name plus attack names — so a reprint with brand
 new art shares the key. That is what makes the table above findable, and why `cardKey` must never
