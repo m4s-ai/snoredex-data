@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-07",
-  "projectionVersion": "0e574980891663a6c0fdbe592a2941402cb2aaf87e236300974b27c6affd454b",
+  "projectionVersion": "359d77b6dac5053335c6211d12e6758207971d1f23d56f9b3160770ad1a28d3c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 2,
     "cardReleases": 633,
-    "physicalPrintings": 851,
-    "sourceObservations": 3091
+    "physicalPrintings": 854,
+    "sourceObservations": 3097
   },
   "groups": [
     {
@@ -2471,13 +2471,43 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:f55259a3862f92ee1177485c",
+              "semanticPrintingId": "PRINTING:f55259a3862f92ee1177485c",
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0409",
+              "sourcePrintingId": "F0409-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f55259a3862f92ee1177485c",
+              "specimenIds": [
+                "SPEC-0621"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/4s8AAeSwsXNqR8oD/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean 이브이&잠만보 GX sm9 C 106/095 SR. Textured surface with cyan, pink and gold reflective foil across illustration and frame. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0621.",
+                  "retrievedAt": "2026-10-07"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -2524,9 +2554,29 @@
               "originalHash": "2c9831537c5f142db96945274542e422713a63691cce5b42f6610d4874e1f1a0",
               "previewSrc": "images/previews/SPEC-0450.png?v=d2042cd29b8f7f21d265c29f23c001dd55557c7a67295b18ea3f3b5d95c857fb",
               "thumbnailSrc": "images/thumbs/SPEC-0450.png?v=7ac162c39a3db742391ba8ee5c96d0e8ddf450667a036d18dcb3ef2c4f992f18"
+            },
+            {
+              "src": "verification/specimens/SPEC-0621.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0621",
+              "contentHash": "4b6ef7badcd629eb0283fff31325d6d235c08411e5fb69ad762cd43c191f65a0",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4b6ef7badcd629eb0283fff31325d6d235c08411e5fb69ad762cd43c191f65a0",
+              "previewSrc": "images/previews/SPEC-0621.png?v=05d364d4cc315624768af7aa87e0f88cc2b28e1df693cc0f400f61ce0c8a12f8",
+              "thumbnailSrc": "images/thumbs/SPEC-0621.png?v=ac7e745863cb1e35f6e653d3b4f3d9a4e0f16cb3f8f64b20b82ef2dcaba12c65"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0409-P01:0:f25c3f16fb23dc6a",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/4s8AAeSwsXNqR8oD/s-l1600.webp",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 106/095 SR. Textured surface with cyan, pink and gold reflective foil across illustration and frame. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0621.",
+              "contentHash": "321273cc6af5ce8f94aaee32233479c0eaaa7dfd6b6fab512f46de8590fc9630",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sm9:106/095:base",
               "kind": "source-first",
@@ -2553,6 +2603,15 @@
               "evidence": "Complete seller photograph of Korean Eevee & Snorlax GX. The Hangul name and rules text and printed sm9 106/095 SR identity establish the exact localized full-art V2 card. No finish is inferred from this lighting.",
               "contentHash": "607c713cfc80ec4bec1a1a6facbe3917efb553d24f952ad313f50bff8302b33c",
               "image": "verification/specimens/SPEC-0450.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0621",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/407045854712",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 106/095 SR. Textured surface with cyan, pink and gold reflective foil across illustration and frame. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+              "contentHash": "8fbc83c5cbc52df7a884f2cbe5f2d75c4273f8c1f78ea87455eadb97b8902ea5",
+              "image": "verification/specimens/SPEC-0621.png"
             },
             {
               "observationId": "unit:U0633",
@@ -2721,13 +2780,43 @@
           "legacyVariants": [
             "V3"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:65118aae2b3d2f0b734c8674",
+              "semanticPrintingId": "PRINTING:65118aae2b3d2f0b734c8674",
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:115/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0412",
+              "sourcePrintingId": "F0412-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:65118aae2b3d2f0b734c8674",
+              "specimenIds": [
+                "SPEC-0622"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/QuwAAeSwEdRpmWPo/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean 이브이&잠만보 GX sm9 C 115/095 HR. Strong rainbow foil and surface texture positively visible across the actual card face. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0622.",
+                  "retrievedAt": "2026-10-07"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": null,
             "variant": "V3",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -2744,9 +2833,29 @@
               "originalHash": "81422b574542a4dbb898667d7778259dd1a1767836a8026cc5093dd09aa566eb",
               "previewSrc": "images/previews/sm9_115_Eevee___Snorlax_GX_V3_558490.jpg?v=eff2313a43600ef29730dcff1b03df2f90ab185f052a12d39ca9ffb5dc1db044",
               "thumbnailSrc": "images/thumbs/sm9_115_Eevee___Snorlax_GX_V3_558490.jpg?v=18cb2f1cbe4c9bf5ffe6058484fab8769ad82f40730ad4e6cbb0c39ff0d0f016"
+            },
+            {
+              "src": "verification/specimens/SPEC-0622.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0622",
+              "contentHash": "f6c00bfe4441a4c8c6508c513f586dddc081eb0f5d5573a43ab256714096402d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f6c00bfe4441a4c8c6508c513f586dddc081eb0f5d5573a43ab256714096402d",
+              "previewSrc": "images/previews/SPEC-0622.png?v=cd3f833faa4d604ab904a4cc1e84f47a7e2c35726f493906ff89204bf9006c80",
+              "thumbnailSrc": "images/thumbs/SPEC-0622.png?v=4e61657e8d47e5fe3539c213d7a3c575ed711866e243f87a1715b19cb4f93203"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0412-P01:0:df53b100eba49135",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/QuwAAeSwEdRpmWPo/s-l1600.webp",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 115/095 HR. Strong rainbow foil and surface texture positively visible across the actual card face. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0622.",
+              "contentHash": "46d4e4df8e3becc5385798888eb1f410a9516026b53b8a4b5d69e356a3e50de9",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sm9:115/095:base",
               "kind": "source-first",
@@ -2755,6 +2864,15 @@
               "evidence": "The retained positive bulbapedia record identifies Korean sm9 115/095 for Eevee & Snorlax GX and states rarity HR. This establishes local identity and the explicit Work mapping while keeping the Korean release distinct. This is catalogue/set-list evidence only; no physical finish or appearance is inferred.",
               "contentHash": "e9761ff77a49eeab429f6a6ecb7fd8e5684f1ba74da5396ad841602a9173c22b",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0622",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/317906441518",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 115/095 HR. Strong rainbow foil and surface texture positively visible across the actual card face. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+              "contentHash": "5a35a160cfe0bcb864bdbeaf4366b4e0b38698b5d68d7f295fe3d5ca85961c3c",
+              "image": "verification/specimens/SPEC-0622.png"
             },
             {
               "observationId": "unit:U0557",
@@ -5148,13 +5266,43 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:60b9b2c7b531f02d235dbb29",
+              "semanticPrintingId": "PRINTING:60b9b2c7b531f02d235dbb29",
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:066/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0406",
+              "sourcePrintingId": "F0406-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:60b9b2c7b531f02d235dbb29",
+              "specimenIds": [
+                "SPEC-0620"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/Qx4AAeSwIXFpyPpM/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean 이브이&잠만보 GX sm9 C 066/095 RR. Rainbow foil visibly reflects green and pink along the lower card frame and illustration edges. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0620.",
+                  "retrievedAt": "2026-10-07"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Eevee & Snorlax GX",
             "artist": "Mitsuhiro Arita",
             "variant": "V1",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -5190,9 +5338,29 @@
               "originalHash": "5114af5958aa04af4c2a67436a0bccba3be5e2214c069930ad16ae8d65094f0b",
               "previewSrc": "images/previews/SPEC-0449.png?v=24926a9a4e98ac0ce416f70553c2493db69e33439b9477ae490ef00f95522663",
               "thumbnailSrc": "images/thumbs/SPEC-0449.png?v=6cf1c700bd2a629e67abcd72b4422f67b163e4e1b2229fc96500743503224371"
+            },
+            {
+              "src": "verification/specimens/SPEC-0620.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0620",
+              "contentHash": "22e03efbc7d9843793b6ea1a36bf070186fce8d970a92be93e9c872401eda24e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "22e03efbc7d9843793b6ea1a36bf070186fce8d970a92be93e9c872401eda24e",
+              "previewSrc": "images/previews/SPEC-0620.png?v=7537a16d71dc6e698a30e5eaf6dba84add0b1654ffb1962ca15f022bc7787897",
+              "thumbnailSrc": "images/thumbs/SPEC-0620.png?v=ee898b81964fde6ebaa3d8949c6c1acbd6f115d00ef8a1a4d14182bca98269ca"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0406-P01:0:b18245ebb872dd78",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/Qx4AAeSwIXFpyPpM/s-l1600.webp",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 066/095 RR. Rainbow foil visibly reflects green and pink along the lower card frame and illustration edges. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted. Retained as SPEC-0620.",
+              "contentHash": "160e105e6cf1ba49e2b169d7a5b7a98c56312b700da107aad5c0f308accfb8cd",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sm9:066/095:base",
               "kind": "source-first",
@@ -5210,6 +5378,15 @@
               "evidence": "Complete seller photograph of Korean Eevee & Snorlax GX. The Hangul name and rules text and printed sm9 066/095 RR identity establish the exact localized V1 card. No finish is inferred from this lighting.",
               "contentHash": "4e321bf750c3cb467cc7cd1a3847a82a489f1f41b1a59f00d58b1addb6dd8bd9",
               "image": "verification/specimens/SPEC-0449.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0620",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/377070897709",
+              "evidence": "Korean 이브이&잠만보 GX sm9 C 066/095 RR. Rainbow foil visibly reflects green and pink along the lower card frame and illustration edges. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+              "contentHash": "ff26f030fc580a63b434334d2b5c17bbed1fe50bde0045f16d0660c903d0f766",
+              "image": "verification/specimens/SPEC-0620.png"
             },
             {
               "observationId": "unit:U0413",
