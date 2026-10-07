@@ -10241,6 +10241,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0472-P02",
+        "semanticPrintingId": "PRINTING:35a8a7bf05e1a9e89644dc63",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "materializedTargetId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0624"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -13287,6 +13307,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:94248347a8e0743b090b24cc",
         "materializedTargetId": "PHYSICAL:PRINTING:94248347a8e0743b090b24cc",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0503-P01",
+        "semanticPrintingId": "PRINTING:948dbb105a69e5401715ca91",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+        "materializedTargetId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0626"
+        ]
       }
     },
     {
@@ -37362,6 +37402,57 @@
       }
     },
     {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0624",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0624",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0624",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0625",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0625",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0625",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0625",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0625",
+        "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0625"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0626",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0626",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0626",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:948dbb105a69e5401715ca91, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91"
+      }
+    },
+    {
       "entityType": "card-release",
       "entityId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
       "origin": "authoritative-locality-migration",
@@ -37726,7 +37817,10 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0639"
-        ]
+        ],
+        "releaseDate": "2023-11-17",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -43818,7 +43912,10 @@
         ],
         "legacyCounterpartUnitIds": [
           "U0561"
-        ]
+        ],
+        "releaseDate": "2014-05-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -97544,6 +97641,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "semanticPrintingId": "PRINTING:35a8a7bf05e1a9e89644dc63",
+        "cardReleaseId": "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+        "finish": "mirror-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0472",
+        "sourcePrintingId": "F0472-P02",
+        "establishingClaimId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+        "specimenIds": [
+          "SPEC-0624"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -100603,6 +100724,30 @@
         "sourceFinishUnitId": "F0253",
         "sourcePrintingId": "F0253-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:94248347a8e0743b090b24cc"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+        "semanticPrintingId": "PRINTING:948dbb105a69e5401715ca91",
+        "cardReleaseId": "RELEASE:KR:Korean:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0503",
+        "sourcePrintingId": "F0503-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+        "specimenIds": [
+          "SPEC-0626"
+        ]
       }
     },
     {
@@ -106214,6 +106359,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0609",
         "specimenIds": [
           "SPEC-0609"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0625",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0625",
+        "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0625",
+        "specimenIds": [
+          "SPEC-0625"
         ]
       }
     },
@@ -114444,6 +114613,80 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue256:CS2DaC:038/053:Snorlax-Heavy-Impact",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue256:CS2DaC:038/053:Snorlax-Heavy-Impact",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+        "sourceRecordId": "SET-SRC-SF-F63CCC6113DB",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Simplified-Chinese-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://www.ebay.com/itm/198560806619",
+        "supportingSourceUrls": [
+          "https://www.pokemon.cn/tcg/product/16063.html"
+        ],
+        "retrievedAt": "2026-10-07",
+        "specimenIds": [
+          "SPEC-0623"
+        ],
+        "evidence": "SPEC-0623 positively shows the exact Simplified-Chinese CS2DaC 038/053 card with no printed rarity symbol and the Pikachu silhouette print-identity mark. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+        "evidenceBundle": "verification/evidence/all-open-research-20261007"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue256:CS4DaC:341/414:Snorlax-Heavy-Impact",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue256:CS4DaC:341/414:Snorlax-Heavy-Impact",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
+        "sourceRecordId": "SET-SRC-SF-1C0C0B8B65FF",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Simplified-Chinese-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+        "supportingSourceUrls": [
+          "https://www.pokemon.cn/tcg/product/15882.html",
+          "https://www.pokemon.cn/tcg/other/17160.html"
+        ],
+        "retrievedAt": "2026-10-07",
+        "specimenIds": [
+          "SPEC-0155"
+        ],
+        "evidence": "SPEC-0155 positively shows the exact Simplified-Chinese CS4DaC 341/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+        "evidenceBundle": "verification/evidence/all-open-research-20261007"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue256:CS4DaC:342/414:Snorlax-Heavy-Impact",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue256:CS4DaC:342/414:Snorlax-Heavy-Impact",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
+        "sourceRecordId": "SET-SRC-SF-1C0C0B8B65FF",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Simplified-Chinese-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://www.ebay.com/itm/356156650452",
+        "supportingSourceUrls": [
+          "https://www.pokemon.cn/tcg/product/15882.html",
+          "https://www.pokemon.cn/tcg/other/17160.html"
+        ],
+        "retrievedAt": "2026-10-07",
+        "specimenIds": [
+          "SPEC-0156"
+        ],
+        "evidence": "SPEC-0156 positively shows the exact Simplified-Chinese CS4DaC 342/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+        "evidenceBundle": "verification/evidence/all-open-research-20261007"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue258:AC3D:120/172:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -118025,6 +118268,30 @@
     },
     {
       "entityType": "release-event",
+      "entityId": "EVENT:CN:CS2DaC:launch-2023-11-17",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "releaseEventId": "EVENT:CN:CS2DaC:launch-2023-11-17",
+        "localSetId": "LOCALSET:CN:CS2DaC",
+        "setEditionIds": [
+          "EDITION:CN:S-Chinese:CS2DaC"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2023-11-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+        "linkBasis": "Exact established local set and publisher product."
+      }
+    },
+    {
+      "entityType": "release-event",
       "entityId": "EVENT:CN:CS4DaC:launch-2024-05-17",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -118188,6 +118455,30 @@
         ],
         "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
         "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007",
+        "linkBasis": "Exact established local set and publisher product."
+      }
+    },
+    {
+      "entityType": "release-event",
+      "entityId": "EVENT:KR:XY2:launch-2014-05-01",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "releaseEventId": "EVENT:KR:XY2:launch-2014-05-01",
+        "localSetId": "LOCALSET:KR:XY2",
+        "setEditionIds": [
+          "EDITION:KR:Korean:XY2"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2014-05-01",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "KR"
+        ],
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
         "linkBasis": "Exact established local set and publisher product."
       }
     },
@@ -144288,6 +144579,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+        "disposition": "mapped",
+        "targetRef": "EVENT:CN:CS2DaC:launch-2023-11-17",
+        "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -144349,6 +144651,17 @@
         "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007",
         "disposition": "mapped",
         "targetRef": "EVENT:KR:SM30A:launch-2019-12-24",
+        "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+        "disposition": "mapped",
+        "targetRef": "EVENT:KR:XY2:launch-2014-05-01",
         "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
       }
     },
@@ -157127,6 +157440,33 @@
     },
     {
       "entityType": "set-source-record",
+      "entityId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+        "sourceKind": "release-date-record",
+        "provider": "pokemon-cn-official",
+        "providerRecordKey": "https://www.pokemon.cn/tcg/product/16063.html#launch:CN:CS2DaC",
+        "retrieved": "2026-10-07",
+        "sourceUrl": "https://www.pokemon.cn/tcg/product/16063.html",
+        "raw": {
+          "localCode": "CS2DaC",
+          "locality": "CN",
+          "languageScope": "S-Chinese",
+          "marketScopes": [
+            "CN"
+          ],
+          "date": "2023-11-17",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+          "note": "Localized product launch; prerelease and later reprints not asserted."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
       "entityId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -157279,6 +157619,33 @@
             "KR"
           ],
           "date": "2019-12-24",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+          "note": "Localized product launch; prerelease and later reprints not asserted."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+        "sourceKind": "release-date-record",
+        "provider": "pokemon-card-korea",
+        "providerRecordKey": "https://pokemoncard.co.kr/card/33#launch:KR:XY2",
+        "retrieved": "2026-10-07",
+        "sourceUrl": "https://pokemoncard.co.kr/card/33",
+        "raw": {
+          "localCode": "XY2",
+          "locality": "KR",
+          "languageScope": "Korean",
+          "marketScopes": [
+            "KR"
+          ],
+          "date": "2014-05-01",
           "datePrecision": "day",
           "approximate": false,
           "status": "released",
@@ -158650,7 +159017,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-SF-1C0C0B8B65FF",
-      "origin": "reviewed-evidence-issue-257",
+      "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-1C0C0B8B65FF",
         "sourceKind": "source-first-local-set-profile",
@@ -158672,10 +159039,17 @@
             "CN:CS4DaC:342/414:base"
           ],
           "providers": [
-            "bulbapedia"
+            "bulbapedia",
+            "pokemon-cn-official",
+            "retailer-listing",
+            "seller-listing-photo"
           ],
           "sourceUrls": [
-            "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)"
+            "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+            "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+            "https://www.ebay.com/itm/356156650452",
+            "https://www.pokemon.cn/tcg/other/17160.html",
+            "https://www.pokemon.cn/tcg/product/15882.html"
           ],
           "printedSetSize": 414,
           "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
@@ -158686,7 +159060,33 @@
           ],
           "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
           "markAssetUrls": [],
-          "cardImageUrls": []
+          "cardImageUrls": [],
+          "rarityEvidenceByPrintId": {
+            "CN:CS4DaC:341/414:base": {
+              "specimenId": "SPEC-0155",
+              "observedNativeValue": "no printed rarity symbol",
+              "observationSourceUrl": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+              "productSourceUrls": [
+                "https://www.pokemon.cn/tcg/product/15882.html",
+                "https://www.pokemon.cn/tcg/other/17160.html"
+              ],
+              "retrievedAt": "2026-10-07",
+              "basis": "SPEC-0155 positively shows the exact Simplified-Chinese CS4DaC 341/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+              "evidenceBundle": "verification/evidence/all-open-research-20261007"
+            },
+            "CN:CS4DaC:342/414:base": {
+              "specimenId": "SPEC-0156",
+              "observedNativeValue": "no printed rarity symbol",
+              "observationSourceUrl": "https://www.ebay.com/itm/356156650452",
+              "productSourceUrls": [
+                "https://www.pokemon.cn/tcg/product/15882.html",
+                "https://www.pokemon.cn/tcg/other/17160.html"
+              ],
+              "retrievedAt": "2026-10-07",
+              "basis": "SPEC-0156 positively shows the exact Simplified-Chinese CS4DaC 342/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+              "evidenceBundle": "verification/evidence/all-open-research-20261007"
+            }
+          }
         }
       }
     },
@@ -164242,7 +164642,7 @@
     {
       "entityType": "set-source-record",
       "entityId": "SET-SRC-SF-F63CCC6113DB",
-      "origin": "reviewed-evidence-issue-257",
+      "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
         "sourceRecordId": "SET-SRC-SF-F63CCC6113DB",
         "sourceKind": "source-first-local-set-profile",
@@ -164263,10 +164663,14 @@
             "CN:CS2DaC:038/053:base"
           ],
           "providers": [
-            "bulbapedia"
+            "bulbapedia",
+            "pokemon-cn-official",
+            "seller-listing-photo"
           ],
           "sourceUrls": [
-            "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)"
+            "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+            "https://www.ebay.com/itm/198560806619",
+            "https://www.pokemon.cn/tcg/product/16063.html"
           ],
           "printedSetSize": 53,
           "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
@@ -164276,7 +164680,20 @@
           ],
           "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
           "markAssetUrls": [],
-          "cardImageUrls": []
+          "cardImageUrls": [],
+          "rarityEvidenceByPrintId": {
+            "CN:CS2DaC:038/053:base": {
+              "specimenId": "SPEC-0623",
+              "observedNativeValue": "no printed rarity symbol",
+              "observationSourceUrl": "https://www.ebay.com/itm/198560806619",
+              "productSourceUrls": [
+                "https://www.pokemon.cn/tcg/product/16063.html"
+              ],
+              "retrievedAt": "2026-10-07",
+              "basis": "SPEC-0623 positively shows the exact Simplified-Chinese CS2DaC 038/053 card with no printed rarity symbol and the Pikachu silhouette print-identity mark. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+              "evidenceBundle": "verification/evidence/all-open-research-20261007"
+            }
+          }
         }
       }
     },
@@ -179391,6 +179808,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -180969,6 +181396,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:94248347a8e0743b090b24cc",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -193885,6 +194322,36 @@
       "toId": "PHYSICAL:PRINTING:65118aae2b3d2f0b734c8674",
       "provenance": {
         "specimenId": "SPEC-0622"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0624",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "provenance": {
+        "specimenId": "SPEC-0624"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0625",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0625",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0626",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+      "provenance": {
+        "specimenId": "SPEC-0626"
       }
     },
     {
@@ -239665,6 +240132,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:366f02062d82aa50ce525a27",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -241645,6 +242128,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Spanish:PGO:055:Snorlax-Block-Collapse",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
       "provenance": {}
     },
     {
@@ -245309,6 +245808,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0625",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0625",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0625",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "provenance": {}
     },
     {
@@ -254017,6 +254532,54 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS2DaC:038/053:Snorlax-Heavy-Impact",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS2DaC:038/053:Snorlax-Heavy-Impact",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-F63CCC6113DB",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS4DaC:341/414:Snorlax-Heavy-Impact",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS4DaC:341/414:Snorlax-Heavy-Impact",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-1C0C0B8B65FF",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS4DaC:342/414:Snorlax-Heavy-Impact",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CS4DaC:342/414:Snorlax-Heavy-Impact",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-1C0C0B8B65FF",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue258:AC3D:120/172:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -257617,6 +258180,22 @@
     },
     {
       "fromType": "release-event",
+      "fromId": "EVENT:CN:CS2DaC:launch-2023-11-17",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:CN:CS2DaC",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:CN:CS2DaC:launch-2023-11-17",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:CS2DaC",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
       "fromId": "EVENT:CN:CS4DaC:launch-2024-05-17",
       "relation": "belongs-to",
       "toType": "local-set",
@@ -257725,6 +258304,22 @@
       "relation": "supports",
       "toType": "set-edition",
       "toId": "EDITION:KR:Korean:SM30A",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:KR:XY2:launch-2014-05-01",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:KR:XY2",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:KR:XY2:launch-2014-05-01",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:KR:Korean:XY2",
       "provenance": {}
     },
     {
@@ -272127,6 +272722,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -272171,6 +272774,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
       "provenance": {}
     },
     {
@@ -273719,6 +274330,14 @@
     },
     {
       "fromType": "set-source-record",
+      "fromId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:CN:CS2DaC:launch-2023-11-17",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-record",
       "fromId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
       "relation": "asserts-release-event",
       "toType": "release-event",
@@ -273763,6 +274382,14 @@
       "relation": "asserts-release-event",
       "toType": "release-event",
       "toId": "EVENT:KR:SM30A:launch-2019-12-24",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-record",
+      "fromId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:KR:XY2:launch-2014-05-01",
       "provenance": {}
     },
     {
@@ -291401,6 +292028,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0472-P02",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0473-P01",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -291572,6 +292206,13 @@
       "sourceId": "F0502-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:7cc2c77a17de75506edf0896",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0503-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
@@ -304727,6 +305368,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "disposition": "mapped",
+      "targetRef": "EVENT:CN:CS2DaC:launch-2023-11-17",
+      "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
       "disposition": "mapped",
       "targetRef": "EVENT:CN:CS4DaC:launch-2024-05-17",
@@ -304765,6 +305413,13 @@
       "sourceId": "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007",
       "disposition": "mapped",
       "targetRef": "EVENT:KR:SM30A:launch-2019-12-24",
+      "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "disposition": "mapped",
+      "targetRef": "EVENT:KR:XY2:launch-2014-05-01",
       "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
     },
     {
@@ -309365,29 +310020,50 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:65118aae2b3d2f0b734c8674, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0624",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0625",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0625",
+      "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0626",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:948dbb105a69e5401715ca91, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 8546,
-    "edges": 12652,
-    "migrationInputs": 3029,
+    "entities": 8563,
+    "edges": 12677,
+    "migrationInputs": 3036,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 320,
+      "candidate-needs-evidence": 322,
       "carried": 68,
-      "established-and-mapped": 1671,
+      "established-and-mapped": 1674,
       "linked-local-counterpart": 125,
-      "mapped": 401,
+      "mapped": 403,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2158,
+    "candidateClaims": 2163,
     "cardReleases": 633,
-    "physicalPrintings": 854,
-    "setSourceRecords": 529,
-    "setSourceDispositions": 529,
+    "physicalPrintings": 857,
+    "setSourceRecords": 531,
+    "setSourceDispositions": 531,
     "localizations": 16
   }
 }

@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 512,
-      "withOnlyMarketplaceClaim": 25,
-      "pendingFinish": 23,
+      "withConfirmedFinish": 514,
+      "withOnlyMarketplaceClaim": 24,
+      "pendingFinish": 22,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
       "withNonHolo": 314,
-      "withHolo": 252,
+      "withHolo": 253,
       "withReverseHolo": 226,
-      "withMirrorHolo": 21,
+      "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 49,
-      "withAnyUnresolvedDetail": 128,
+      "withUnresolvedProductMapping": 48,
+      "withAnyUnresolvedDetail": 127,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -40769,16 +40769,17 @@
         }
       ],
       "availableFinishes": [
-        "reverse-holo"
+        "reverse-holo",
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -40801,6 +40802,30 @@
             }
           ],
           "printingId": "F0472-P01"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/436062147_1_1790773716_w900.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0624.",
+              "retrievedAt": "2026-10-07"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0624"
+          ],
+          "image": "verification/specimens/SPEC-0624.png",
+          "printingId": "F0472-P02"
         }
       ],
       "unresolved": [
@@ -42628,23 +42653,47 @@
           "image": "images/svM_094_Snorlax_ex_801337.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/0EsAAeSwdy5oZUKd/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0626.",
+              "retrievedAt": "2026-10-07"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0626"
+          ],
+          "image": "verification/specimens/SPEC-0626.png",
+          "printingId": "F0503-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0504",

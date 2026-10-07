@@ -1,3 +1,7 @@
+<!-- doc: role=retained per-card research report; stage=history -->
+
+> Historical record — research snapshot from 2026-10-07; current gaps are determined by canonical stores.
+
 # Korean exact-card follow-up — 2026-10-07
 
 Research only. No canonical stores, Git state, specimen allocation or gates changed.

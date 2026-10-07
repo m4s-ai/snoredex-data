@@ -19,6 +19,18 @@ from admit_issue262_thai_as1b_release_date_20260928 import write_json
 
 BUNDLE = ROOT / "verification/evidence/rarity-finish-research-20261006"
 ORIGIN = "reviewed-evidence-issue-256-20261007"
+ALL_OPEN_BUNDLE = "verification/evidence/all-open-research-20261007"
+CN_DECK_RARITIES = (
+    ("CS2DaC", "038/053", "SPEC-0623", "SET-SRC-SF-F63CCC6113DB",
+     "https://www.ebay.com/itm/198560806619", "seller-listing-photo",
+     "https://www.pokemon.cn/tcg/product/16063.html"),
+    ("CS4DaC", "341/414", "SPEC-0155", "SET-SRC-SF-1C0C0B8B65FF",
+     "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568", "retailer-listing",
+     "https://www.pokemon.cn/tcg/product/15882.html"),
+    ("CS4DaC", "342/414", "SPEC-0156", "SET-SRC-SF-1C0C0B8B65FF",
+     "https://www.ebay.com/itm/356156650452", "seller-listing-photo",
+     "https://www.pokemon.cn/tcg/product/15882.html"),
+)
 
 
 def read(name):
@@ -94,6 +106,57 @@ def admit_date(graph, catalogue, releases, prints, release_id, value, url, retri
                    releaseDateSourceUrl=url, releaseDateProviderId=record["provider"],
                    releaseDateRetrievedAt=retrieved, releaseDateSourceRecordId=sid)
     release.update(releaseDate=value, releaseDatePrecision="day", releaseApproximate=False)
+
+
+def admit_cn_deck_rarities(graph, catalogue, prints):
+    """Combine exact observed markings with scoped positive deck-product context."""
+    for code, number, specimen, sid, photo_url, provider, product_url in CN_DECK_RARITIES:
+        rid = f"RELEASE:CN:S-Chinese:{code}:{number}:Snorlax-Heavy-Impact"
+        row = next(row for row in prints["prints"] if row["printId"] == f"CN:{code}:{number}:base")
+        supporting = [product_url]
+        if code == "CS4DaC":
+            supporting.append("https://www.pokemon.cn/tcg/other/17160.html")
+        basis = (f"{specimen} positively shows the exact Simplified-Chinese {code} {number} "
+                 "card with no printed rarity symbol" +
+                 (" and the Pikachu silhouette print-identity mark. " if code == "CS2DaC" else ". ") +
+                 "The localized publisher product establishes fixed constructed-deck contents; "
+                 "the card/list binding establishes membership. Fixed is the reviewed normalization "
+                 "of these combined facts, not a rarity word stated by the publisher or a finish inference.")
+        row.update(rarity=["no printed rarity symbol", "fixed"], rarityProviderId=provider,
+                   raritySourceUrl=photo_url, rarityRetrievedAt="2026-10-07",
+                   raritySupportingSourceUrls=supporting, rarityEvidence=basis)
+        if code == "CS2DaC":
+            row["specimenId"] = specimen
+        profile = next(record for record in catalogue["sourceRecords"] if record["sourceRecordId"] == sid)
+        raw = profile["raw"]
+        raw["sourceUrls"] = sorted(set(raw.get("sourceUrls", []) + [photo_url, *supporting]))
+        raw["providers"] = sorted(set(raw.get("providers", []) + [provider, "pokemon-cn-official"]))
+        raw.setdefault("rarityEvidenceByPrintId", {})[row["printId"]] = {
+            "specimenId": specimen, "observedNativeValue": row["rarity"][0],
+            "observationSourceUrl": photo_url, "productSourceUrls": supporting,
+            "retrievedAt": "2026-10-07", "basis": basis, "evidenceBundle": ALL_OPEN_BUNDLE,
+        }
+        upsert_entity(graph, "set-source-record", sid, profile, origin=ORIGIN)
+        cid = f"RARITYCLAIM:issue256:{code}:{number}:Snorlax-Heavy-Impact"
+        claim = dict(rarityClaimId=cid, cardReleaseId=rid, sourceRecordId=sid,
+                     sourceProvider=profile["provider"], sourceVocabulary="printed-Simplified-Chinese-card",
+                     sourceNativeValue=row["rarity"][0], normalizedRarityId="fixed",
+                     sourceProductKey=photo_url, supportingSourceUrls=supporting,
+                     retrievedAt="2026-10-07", specimenIds=[specimen], evidence=basis,
+                     evidenceBundle=ALL_OPEN_BUNDLE)
+        upsert_entity(graph, "rarity-claim", cid, claim, origin=ORIGIN)
+        upsert_edge(graph, "rarity-claim", cid, "asserts-rarity-for", "card-release", rid)
+        upsert_edge(graph, "rarity-claim", cid, "observed-by", "set-source-record", sid)
+
+
+def admit_cn_followup(graph, catalogue, prints):
+    """Shared bounded follow-up for both initial integration and CN admission replay."""
+    admit_cn_deck_rarities(graph, catalogue, prints)
+    releases = {row["entityId"]: row["payload"] for row in graph["entities"]
+                if row["entityType"] == "card-release"}
+    rid = "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact"
+    admit_date(graph, catalogue, releases, prints, rid, "2023-11-17",
+               "https://www.pokemon.cn/tcg/product/16063.html", "2026-10-07")
 
 
 def apply(documents):
@@ -199,6 +262,13 @@ def apply(documents):
                 admit_date(graph, catalogue, releases, prints, rid, observation["date"], observation["sourceUrl"], "2026-10-05")
     from admit_issue257_simplified_chinese_20260827 import correct_happy_set_pack_scopes
     correct_happy_set_pack_scopes(overrides)
+    admit_cn_followup(graph, catalogue, prints)
+    for locality, code, date, url in (
+        ("KR", "XY2", "2014-05-01", "https://pokemoncard.co.kr/card/33"),
+    ):
+        rid = next(key for key, release in releases.items()
+                   if release.get("locality") == locality and release.get("localSetCode") == code)
+        admit_date(graph, catalogue, releases, prints, rid, date, url, "2026-10-07")
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

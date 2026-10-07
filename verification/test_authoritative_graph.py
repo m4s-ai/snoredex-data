@@ -595,7 +595,12 @@ def verify_research_correction() -> None:
               if row["entityType"] == "rarity-claim"
               and row["payload"].get("sourceNativeValue") == "no printed rarity symbol"]
     fixed = [row for row in claims if row.get("normalizedRarityId") == "fixed"]
-    assert len(fixed) == 18, "retain all positively scoped deck mappings"
+    assert len(fixed) == 21, "retain all positively scoped deck mappings"
+    cn_fixed = {row["cardReleaseId"] for row in fixed if row["cardReleaseId"].startswith("RELEASE:CN:")}
+    expected_cn = {f"RELEASE:CN:S-Chinese:{code}:{number}:Snorlax-Heavy-Impact"
+                   for code, number, *_ in correction.CN_DECK_RARITIES}
+    assert cn_fixed == expected_cn, "only the three positively bound CN deck cards normalize to Fixed"
+    assert not any("CSVH" in rid for rid in cn_fixed), "random modification packs are not Fixed"
     unresolved = [row for row in claims if row.get("normalizedRarityId") is None
                   and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")]
     assert len(unresolved) == 5, "five booster rarities remain native, not invented Fixed/Common"
@@ -604,6 +609,40 @@ def verify_research_correction() -> None:
     correction.apply(documents)
     assert documents == before, "repair every sibling booster, preserving unrelated stores"
     graph, catalogue, prints, rekeys, overrides = documents
+    for code, number, specimen, *_ in correction.CN_DECK_RARITIES:
+        print_row = next(row for row in prints["prints"] if row["printId"] == f"CN:{code}:{number}:base")
+        assert print_row["rarity"] == ["no printed rarity symbol", "fixed"]
+        assert print_row["specimenId"] == specimen
+        assert print_row["rarityRetrievedAt"] == "2026-10-07"
+        assert print_row["releaseDate"] == ("2023-11-17" if code == "CS2DaC" else "2024-05-17")
+    xy2 = next(row for row in prints["prints"] if row["printId"] == "KR:XY2:066/080:base")
+    assert xy2["releaseDate"] == "2014-05-01"
+    assert xy2["releaseDateRetrievedAt"] == "2026-10-07"
+    assert xy2["releaseDateSourceUrl"] == "https://pokemoncard.co.kr/card/33"
+    # The bounded CN helper cannot alter finishes, aliases or unrelated source-first rows.
+    bounded_before = deepcopy(documents)
+    correction.admit_cn_followup(graph, catalogue, prints)
+    assert documents == bounded_before
+    import admit_issue257_simplified_chinese_20260827 as cn_admission
+    replay_prints = deepcopy(prints)
+    cn_admission.apply_source_first_prints(replay_prints)
+    correction.admit_cn_followup(graph, catalogue, replay_prints)
+    assert replay_prints == prints, "CN identity admission preserves SPEC, image followrefs and later fields"
+    replay_graph, replay_catalogue = deepcopy(graph), deepcopy(catalogue)
+    profiles = cn_admission.apply_set_sources(replay_catalogue)
+    replay_graph = cn_admission.apply_graph(replay_graph, profiles)
+    correction.admit_cn_followup(replay_graph, replay_catalogue, replay_prints)
+    for entity_type in ("rarity-claim", "card-release"):
+        scoped = lambda document: {e["entityId"]: e["payload"] for e in document["entities"]
+                                    if e["entityType"] == entity_type
+                                    and (e["payload"].get("cardReleaseId") in expected_cn)}
+        assert scoped(replay_graph) == scoped(graph), "CN graph replay retains follow-up fields"
+    for code in ("CS2DaC", "CS4DaC"):
+        get_profile = lambda document: next(row for row in document["sourceRecords"]
+                         if row["sourceKind"] == "source-first-local-set-profile"
+                         and row["raw"]["localCode"] == code)
+        assert get_profile(replay_catalogue) == get_profile(catalogue)
+    assert overrides == bounded_before[-1], "CN replay cannot infer or alter finishes"
     classic = next(row for row in prints["prints"] if row["printId"] == "KR:CLF:016/032:base")
     assert classic["specimenId"] == "SPEC-0616" and classic["retrievedAt"] == "2026-10-07"
     assert not any("KR:CLF:016/034" in row["printId"] for row in prints["prints"])

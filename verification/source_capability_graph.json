@@ -17,10 +17,10 @@
     "counts": {
       "providers": 33,
       "surfaces": 60,
-      "coverageEdges": 66,
+      "coverageEdges": 70,
       "absenceEdges": 0,
-      "observations": 73,
-      "resolvedVerdictSources": 1707
+      "observations": 77,
+      "resolvedVerdictSources": 1716
     },
     "surfaceStates": {
       "active": 30,
@@ -310,7 +310,8 @@
       },
       "coverageEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ]
     },
     {
@@ -676,7 +677,8 @@
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "pokemon-card-korea-bs2010002030-positive"
+        "pokemon-card-korea-bs2010002030-positive",
+        "obs-kr-xy2-date-followup-20261007-positive"
       ]
     },
     {
@@ -1429,7 +1431,8 @@
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ]
     },
     {
@@ -1502,7 +1505,8 @@
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ]
     },
     {
@@ -2821,6 +2825,55 @@
       }
     },
     {
+      "edgeId": "obs-cn-fixed-decks-followup-20261007-positive",
+      "providerId": "pokemon-cn-official",
+      "surfaceId": "pokemon-cn-product-pages",
+      "coverage": {
+        "localities": [
+          "CN"
+        ],
+        "languages": [
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Hans"
+        ],
+        "productCategories": [
+          "deck",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only the retained Family product16063 and Start Deck100 product15882/code17160 statements; exact photograph/list identities separately bind the three cards."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "set-membership",
+        "date",
+        "release-event"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Exact positive localized product statements do not establish absence or completeness."
+      },
+      "knownPositiveObservationId": "obs-cn-fixed-decks-followup-20261007",
+      "boundary": {
+        "outsideScope": [
+          "unretained products",
+          "other localities",
+          "source-native rarity from publisher silence",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "Product membership and launch date require exact positive localized binding. Photographs independently support the observed no-rarity-symbol value; the publisher prose is not itself a Fixed-rarity assertion."
+      }
+    },
+    {
       "edgeId": "tpci-exact-checklist-finish",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-checklists",
@@ -3310,6 +3363,54 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "The live historical endpoint is gone while the exact retained positive record remains independently corroborated."
+      }
+    },
+    {
+      "edgeId": "obs-kr-xy2-date-followup-20261007-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "set",
+          "product"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only the exact Korean Wild Blaze product33 release-date statement and established XY2 card binding."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-event"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Exact positive localized product statements do not establish absence or completeness."
+      },
+      "knownPositiveObservationId": "obs-kr-xy2-date-followup-20261007",
+      "boundary": {
+        "outsideScope": [
+          "unretained products",
+          "other localities",
+          "source-native rarity from publisher silence",
+          "physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "Product membership and launch date require exact positive localized binding. Photographs independently support the observed no-rarity-symbol value; the publisher prose is not itself a Fixed-rarity assertion."
       }
     },
     {
@@ -4467,6 +4568,51 @@
       }
     },
     {
+      "edgeId": "obs-cn-inspected-native-rarity-20261007-positive",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "coverage": {
+        "localities": [
+          "CN"
+        ],
+        "languages": [
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Hans"
+        ],
+        "productCategories": [
+          "inspected-card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only exact retained SPEC-0155 native printed rarity observations reviewed 2026-10-07."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "rarity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A visible card marking establishes only the exact native printed value; it cannot establish absence or completeness."
+      },
+      "knownPositiveObservationId": "obs-cn-inspected-native-rarity-20261007",
+      "boundary": {
+        "outsideScope": [
+          "uninspected card faces",
+          "Fixed normalization without positive product context",
+          "physical finish from no glare",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "No printed rarity symbol is an inspected native value; separate exact constructed-product membership is necessary for Fixed normalization."
+      }
+    },
+    {
       "edgeId": "cardmarket-listing-photo-positive",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -4566,6 +4712,51 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A retained seller photograph cannot prove that no other language, edition or treatment exists."
+      }
+    },
+    {
+      "edgeId": "obs-cn-seller-native-rarity-20261007-positive",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "coverage": {
+        "localities": [
+          "CN"
+        ],
+        "languages": [
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Hans"
+        ],
+        "productCategories": [
+          "inspected-card"
+        ],
+        "timeRange": {
+          "start": null,
+          "end": null,
+          "basis": "Only exact retained SPEC-0156, SPEC-0623 native printed rarity observations reviewed 2026-10-07."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "rarity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "A visible card marking establishes only the exact native printed value; it cannot establish absence or completeness."
+      },
+      "knownPositiveObservationId": "obs-cn-seller-native-rarity-20261007",
+      "boundary": {
+        "outsideScope": [
+          "uninspected card faces",
+          "Fixed normalization without positive product context",
+          "physical finish from no glare",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "No printed rarity symbol is an inspected native value; separate exact constructed-product membership is necessary for Fixed normalization."
       }
     },
     {
@@ -10678,6 +10869,151 @@
         "normalizedRarity": "uncommon",
         "language": "Korean",
         "retainedExcerpt": "verification/evidence/rarity-finish-research-20261006/korean-results.json"
+      }
+    },
+    {
+      "observationId": "obs-cn-fixed-decks-followup-20261007",
+      "surfaceId": "pokemon-cn-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.cn/tcg/product/16063.html",
+      "queryParameters": {
+        "scope": "Exact positively bound localized fields"
+      },
+      "retrievedAt": "2026-10-07",
+      "expectedIdentifiers": [
+        "CS2DaC",
+        "CS4DaC",
+        "2023-11-17"
+      ],
+      "validatesEdges": [
+        "obs-cn-fixed-decks-followup-20261007-positive"
+      ],
+      "outcome": "Exact localized product membership and date only. Inspected photographs supply the native no-rarity-symbol observation; mixed positive evidence supports the separately scoped Fixed normalization. Modification packs remain outside this scope.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:04d6e0bd718b1b92db3266f5337353f9322663692b6d23548f20157ea78fa486",
+      "rawRecord": {
+        "fields": [
+          {
+            "field": "fixed-deck-product-membership",
+            "cardReleaseIds": [
+              "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact"
+            ],
+            "sourceUrl": "https://www.pokemon.cn/tcg/product/16063.html",
+            "basis": "Family section explicitly identifies three constructed 60-card decks; SPEC-0623 binds the exact CS2DaC038/053 Pikachu-deck card. Booster treatment wording elsewhere on the page is outside this claim."
+          },
+          {
+            "field": "fixed-deck-product-membership",
+            "cardReleaseIds": [
+              "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
+              "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact"
+            ],
+            "sourceUrl": "https://www.pokemon.cn/tcg/product/15882.html",
+            "identitySourceUrl": "https://www.pokemon.cn/tcg/other/17160.html",
+            "basis": "Start Deck 100 fixed numbered constructed decks; official regulation text positively binds CS4DaC. SPEC-0155 and SPEC-0156 establish exact printed identities. Official product text does not itself state a rarity value."
+          },
+          {
+            "field": "release-date",
+            "cardReleaseIds": [
+              "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact"
+            ],
+            "value": "2023-11-17",
+            "sourceUrl": "https://www.pokemon.cn/tcg/product/16063.html",
+            "basis": "Family product section exact release date plus qualified CN card/list code binding, not unrelated booster or foreign-locality date."
+          }
+        ],
+        "retainedExcerpt": "verification/evidence/all-open-research-20261007",
+        "limits": "Positive named fields only; no physical finish, completeness, absence or counterpart merge."
+      }
+    },
+    {
+      "observationId": "obs-kr-xy2-date-followup-20261007",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/33",
+      "queryParameters": {
+        "scope": "Exact positively bound localized fields"
+      },
+      "retrievedAt": "2026-10-07",
+      "expectedIdentifiers": [
+        "2014-05-01",
+        "XY2"
+      ],
+      "validatesEdges": [
+        "obs-kr-xy2-date-followup-20261007-positive"
+      ],
+      "outcome": "Exact Korean product launch date only; no finish or rarity inference.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:4c4e757d2a52ce11d176e799adbd8163a38c041fbfdc532bdd78ee1e6532fc95",
+      "rawRecord": {
+        "fields": [
+          {
+            "field": "release-date",
+            "cardReleaseId": "RELEASE:KR:Korean:XY2:066/080:Snorlax-Heavy-Impact",
+            "value": "2014-05-01",
+            "sourceUrl": "https://pokemoncard.co.kr/card/33",
+            "basis": "Exact Korean Wild Blaze product date matched to the retained official XY2 066/080 card identity; no transfer from Japanese or international dates."
+          }
+        ],
+        "retainedExcerpt": "verification/evidence/all-open-research-20261007",
+        "limits": "Positive named fields only; no physical finish, completeness, absence or counterpart merge."
+      }
+    },
+    {
+      "observationId": "obs-cn-inspected-native-rarity-20261007",
+      "surfaceId": "inspected-specimens",
+      "kind": "known-positive",
+      "queryUrl": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+      "queryParameters": {
+        "scope": "Exact retained Simplified Chinese card faces"
+      },
+      "retrievedAt": "2026-10-07",
+      "expectedIdentifiers": [
+        "SPEC-0155",
+        "no printed rarity symbol"
+      ],
+      "validatesEdges": [
+        "obs-cn-inspected-native-rarity-20261007-positive"
+      ],
+      "outcome": "Positive native printed value only, with no finish, absence or product-wide extrapolation.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:781ffaef267e4c0f8dd5e8b800d56961711f1bb3ccac1fe48fb14d5226244d00",
+      "rawRecord": {
+        "specimenIds": [
+          "SPEC-0155"
+        ],
+        "sourceNativeValue": "no printed rarity symbol",
+        "retainedExcerpt": "verification/evidence/all-open-research-20261007",
+        "basis": "Exact retained Simplified Chinese face inspection. SPEC-0623 also shows the Pikachu silhouette. These observations establish the native value only; official product context separately supports scoped normalization."
+      }
+    },
+    {
+      "observationId": "obs-cn-seller-native-rarity-20261007",
+      "surfaceId": "seller-listing-photos",
+      "kind": "known-positive",
+      "queryUrl": "https://www.ebay.com/itm/198560806619",
+      "queryParameters": {
+        "scope": "Exact retained Simplified Chinese card faces"
+      },
+      "retrievedAt": "2026-10-07",
+      "expectedIdentifiers": [
+        "SPEC-0156",
+        "SPEC-0623",
+        "no printed rarity symbol"
+      ],
+      "validatesEdges": [
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "outcome": "Positive native printed value only, with no finish, absence or product-wide extrapolation.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:9993e0fae6ca273b4b5cf1c91cddf6edd746d2604acf5065306a1ec738ad8924",
+      "rawRecord": {
+        "specimenIds": [
+          "SPEC-0156",
+          "SPEC-0623"
+        ],
+        "sourceNativeValue": "no printed rarity symbol",
+        "retainedExcerpt": "verification/evidence/all-open-research-20261007",
+        "basis": "Exact retained Simplified Chinese face inspection. SPEC-0623 also shows the Pikachu silhouette. These observations establish the native value only; official product context separately supports scoped normalization."
       }
     }
   ],
@@ -17560,7 +17896,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17575,7 +17912,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17588,7 +17926,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17600,7 +17939,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17612,7 +17952,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17624,7 +17965,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17636,7 +17978,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17648,7 +17991,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17660,7 +18004,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17672,7 +18017,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17684,7 +18030,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17696,7 +18043,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17708,7 +18056,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17720,7 +18069,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17732,7 +18082,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17744,7 +18095,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17756,7 +18108,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17768,7 +18121,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17780,7 +18134,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17792,7 +18147,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17804,7 +18160,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17816,7 +18173,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17828,7 +18186,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17840,7 +18199,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17852,7 +18212,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17864,7 +18225,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17876,7 +18238,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17889,7 +18252,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17902,7 +18266,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17914,7 +18279,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17926,7 +18292,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17938,7 +18305,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17952,7 +18320,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17964,7 +18333,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17977,7 +18347,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -17990,7 +18361,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18003,7 +18375,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18015,7 +18388,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18027,7 +18401,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18040,7 +18415,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18053,7 +18429,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18066,7 +18443,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18079,7 +18457,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18091,7 +18470,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18104,7 +18484,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18117,7 +18498,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18130,7 +18512,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18143,11 +18526,13 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "identity"
+        "identity",
+        "rarity"
       ]
     },
     {
@@ -18155,7 +18540,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18168,7 +18554,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18181,7 +18568,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18194,7 +18582,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18206,7 +18595,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18218,7 +18608,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18230,7 +18621,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18242,7 +18634,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18254,7 +18647,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18266,7 +18660,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18278,7 +18673,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18291,7 +18687,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18303,7 +18700,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18315,7 +18713,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18327,7 +18726,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18339,7 +18739,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18351,7 +18752,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18363,7 +18765,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18375,7 +18778,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18387,7 +18791,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -18399,7 +18804,8 @@
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
-        "inspected-specimen-positive"
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -22242,6 +22648,19 @@
       ]
     },
     {
+      "sourceKey": "https://pokemoncard.co.kr/card/33",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-bs2010002030-positive",
+        "obs-kr-xy2-date-followup-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://pokemoncard.co.kr/card/333",
       "providerId": "pokemon-card-korea",
       "surfaceId": "kr-reviewed-product-dates-20260921-round2",
@@ -23116,12 +23535,27 @@
       ]
     },
     {
+      "sourceKey": "https://www.pokemon.cn/tcg/other/17160.html",
+      "providerId": "pokemon-cn-official",
+      "surfaceId": "pokemon-cn-product-pages",
+      "capabilityEdgeIds": [
+        "pokemon-cn-product-positive",
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "set-membership"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokemon.cn/tcg/product/15499.html",
       "providerId": "pokemon-cn-official",
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23135,7 +23569,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23148,7 +23583,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23162,11 +23598,13 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "date"
+        "date",
+        "set-membership"
       ]
     },
     {
@@ -23175,7 +23613,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23184,12 +23623,28 @@
       ]
     },
     {
+      "sourceKey": "https://www.pokemon.cn/tcg/product/16063.html",
+      "providerId": "pokemon-cn-official",
+      "surfaceId": "pokemon-cn-product-pages",
+      "capabilityEdgeIds": [
+        "pokemon-cn-product-positive",
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date",
+        "set-membership"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokemon.cn/tcg/product/16070.html",
       "providerId": "pokemon-cn-official",
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23203,7 +23658,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23217,7 +23673,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23232,7 +23689,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23246,7 +23704,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23260,7 +23719,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -23274,7 +23734,8 @@
       "surfaceId": "pokemon-cn-product-pages",
       "capabilityEdgeIds": [
         "pokemon-cn-product-positive",
-        "obs-cn-research-dates-20261007-positive"
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -25939,7 +26400,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -25952,7 +26414,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -25965,7 +26428,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -25978,7 +26442,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -25991,7 +26456,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26004,7 +26470,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26017,7 +26484,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26030,7 +26498,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26042,7 +26511,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26054,7 +26524,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26067,7 +26538,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26080,7 +26552,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26093,7 +26566,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26106,7 +26580,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26119,7 +26594,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26132,7 +26608,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26144,7 +26621,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26157,7 +26635,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26170,7 +26649,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26184,7 +26664,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26196,7 +26677,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26208,7 +26690,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26221,7 +26704,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26234,7 +26718,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26247,7 +26732,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26260,7 +26746,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26272,7 +26759,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26285,7 +26773,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26297,7 +26786,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26310,7 +26800,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26322,7 +26813,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26335,7 +26827,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26347,7 +26840,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26359,7 +26853,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26371,7 +26866,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26383,7 +26879,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26395,7 +26892,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26408,7 +26906,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26420,7 +26919,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26432,7 +26932,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26444,7 +26945,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26456,7 +26958,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26468,7 +26971,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26480,7 +26984,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26492,7 +26997,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26504,10 +27010,25 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/0EsAAeSwdy5oZUKd/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -26516,7 +27037,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26529,7 +27051,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26542,7 +27065,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26555,7 +27079,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26568,7 +27093,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26581,7 +27107,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26594,7 +27121,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26606,7 +27134,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26618,7 +27147,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26630,7 +27160,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26643,7 +27174,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26655,7 +27187,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26668,7 +27201,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26681,7 +27215,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26694,7 +27229,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26707,7 +27243,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26719,7 +27256,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26732,7 +27270,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26745,7 +27284,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26758,7 +27298,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26771,7 +27312,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26783,7 +27325,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26796,7 +27339,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26809,7 +27353,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26822,7 +27367,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26835,7 +27381,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26847,7 +27394,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26860,7 +27408,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26873,7 +27422,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26886,7 +27436,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26895,11 +27446,39 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/N~kAAeSw3DNqeagA/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/P28AAeSwNdZoEsYZ/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26912,7 +27491,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26925,7 +27505,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26938,7 +27519,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26951,7 +27533,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26964,7 +27547,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26977,7 +27561,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -26990,7 +27575,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27003,7 +27589,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27016,7 +27603,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27029,7 +27617,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27042,7 +27631,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27054,7 +27644,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27067,7 +27658,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27079,7 +27671,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27092,7 +27685,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27105,7 +27699,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27118,7 +27713,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27130,7 +27726,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27143,7 +27740,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27155,7 +27753,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27167,7 +27766,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27179,7 +27779,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27191,7 +27792,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27204,7 +27806,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27217,7 +27820,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27230,7 +27834,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27243,7 +27848,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27255,7 +27861,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27268,7 +27875,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27281,7 +27889,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27293,7 +27902,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27305,7 +27915,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27318,7 +27929,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27331,7 +27943,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27344,7 +27957,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27356,7 +27970,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27368,7 +27983,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27381,7 +27997,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27393,7 +28010,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27406,7 +28024,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27419,7 +28038,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27431,7 +28051,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27444,7 +28065,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27457,7 +28079,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27470,7 +28093,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27482,7 +28106,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27495,7 +28120,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27507,7 +28133,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27520,7 +28147,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27532,7 +28160,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27544,7 +28173,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27557,7 +28187,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27570,7 +28201,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27582,7 +28214,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27594,7 +28227,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27607,7 +28241,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27619,7 +28254,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27632,7 +28268,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27644,7 +28281,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27657,7 +28295,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27670,7 +28309,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27682,7 +28322,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27694,7 +28335,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27707,7 +28349,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27720,7 +28363,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27733,7 +28377,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27745,7 +28390,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27758,7 +28404,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27771,7 +28418,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27784,7 +28432,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27796,7 +28445,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27808,7 +28458,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27820,7 +28471,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27833,7 +28485,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27846,7 +28499,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27859,7 +28513,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27872,7 +28527,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27885,7 +28541,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27897,10 +28554,25 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/436062147_1_1790773716_w900.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -27909,7 +28581,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27922,7 +28595,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27935,7 +28609,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27947,7 +28622,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27961,7 +28637,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27974,7 +28651,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27986,7 +28664,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -27999,7 +28678,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28012,7 +28692,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28025,7 +28706,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28038,7 +28720,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28047,11 +28730,38 @@
       ]
     },
     {
+      "sourceKey": "https://www.ebay.com/itm/198560806619",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "rarity"
+      ]
+    },
+    {
+      "sourceKey": "https://www.ebay.com/itm/356156650452",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "rarity"
+      ]
+    },
+    {
       "sourceKey": "https://www.ebay.com/itm/377371294743",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28063,7 +28773,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28076,7 +28787,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28089,7 +28801,8 @@
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
-        "seller-listing-photo-positive"
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [

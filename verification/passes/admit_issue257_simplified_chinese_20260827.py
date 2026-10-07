@@ -460,6 +460,13 @@ def apply_set_sources(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
         grouped.setdefault(row["localSetCode"], []).append(row)
     profiles = {code: source_profile(group) for code, group in grouped.items()}
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
+    for code in ("CS2DaC", "CS4DaC"):
+        profile = profiles[code]
+        previous = by_id.get(profile["sourceRecordId"], {})
+        prior_raw = previous.get("raw", {})
+        profile["raw"] = {**prior_raw, **profile["raw"]}
+        for key in ("providers", "sourceUrls", "cardImageUrls", "markAssetUrls"):
+            profile["raw"][key] = sorted(set(prior_raw.get(key, []) + profile["raw"].get(key, [])))
     by_id.update({row["sourceRecordId"]: row for row in profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])
     document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
@@ -750,6 +757,22 @@ def correct_happy_set_pack_scopes(finish: dict) -> None:
     finish["sources"]["pokemon-cn-happy-set-4-reward-pack"] = SOURCES["pokemon-cn-happy-set-4-reward-pack"]
 
 
+def apply_source_first_prints(prints: dict[str, Any]) -> None:
+    prints_by_id = {row["printId"]: row for row in prints["prints"]}
+    prints_by_id.pop("CN:CS2aC:086:base", None)
+    prints_by_id.pop("CN:CS2aC:142:base", None)
+    for row in SOURCE_FIRST_PRINTS:
+        # This admission owns identity; later reviewed field observations survive replay.
+        previous = prints_by_id.get(row["printId"], {})
+        prints_by_id[row["printId"]] = {
+            **previous, **{key: value for key, value in row.items()
+                           if value is not None or previous.get(key) is None},
+        }
+    prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
+    prints["meta"]["generated"] = max(prints["meta"].get("generated", ""), "2026-09-02")
+    prints["meta"]["counts"]["admitted"] = len(prints["prints"])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -776,13 +799,7 @@ def main() -> int:
 
     prints = read(PRINTS)
     before_prints = json.dumps(prints, sort_keys=True, ensure_ascii=False)
-    prints_by_id = {row["printId"]: row for row in prints["prints"]}
-    prints_by_id.pop("CN:CS2aC:086:base", None)
-    prints_by_id.pop("CN:CS2aC:142:base", None)
-    prints_by_id.update({row["printId"]: row for row in SOURCE_FIRST_PRINTS})
-    prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
-    prints["meta"]["generated"] = "2026-09-02"
-    prints["meta"]["counts"]["admitted"] = len(prints["prints"])
+    apply_source_first_prints(prints)
 
     rekeys = read(REKEYS)
     before_rekeys = json.dumps(rekeys, sort_keys=True, ensure_ascii=False)
@@ -798,6 +815,10 @@ def main() -> int:
     before_graph = encoded(graph)
     graph = rekey_graph_values(graph)
     graph = apply_graph(graph, profiles)
+    # Keep the bounded later CN rarity/date observations in the same admission path.
+    # Import locally because the follow-up reuses this module's graph helpers.
+    from integrate_rarity_finish_research_20261007 import admit_cn_followup
+    admit_cn_followup(graph, set_sources, prints)
 
     specimens = {row["specimenId"]: row for row in read(SPECIMENS)["specimens"]}
     for specimen_id in (

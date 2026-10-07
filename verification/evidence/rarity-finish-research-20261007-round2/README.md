@@ -1,4 +1,7 @@
-<!-- doc: role=retained research evidence and intake report; stage=historical -->
+<!-- doc: role=retained research evidence and intake report; stage=history -->
+
+> Historical record — research snapshot from 2026-10-07; current gaps are determined by canonical stores.
+
 # Targeted research follow-up — 2026-10-07
 
 SPEC-0620–0622 retain independently inspected Korean sm9 066/095 RR, 106/095 SR and 115/095 HR seller photographs. All three show positive reflective Holo treatment. Original WebP files and exact lossless conversions are documented in sources.json; manifest replay uses the filed PNGs. OCR was unavailable, so Korean face, full collector number and treatment were read visually. No inventory completeness or seller ownership assertion is made.

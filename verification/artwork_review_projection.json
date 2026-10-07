@@ -4,20 +4,20 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-07",
-  "projectionVersion": "359d77b6dac5053335c6211d12e6758207971d1f23d56f9b3160770ad1a28d3c",
+  "projectionVersion": "e6db00a9aedf3e1056d3a931c9e010ca9bcd6c77363863e968719c0755df8610",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
     "groups": 251,
     "mappedWorks": 42,
-    "imageGroups": 249,
+    "imageGroups": 250,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
-    "unmappedReleases": 2,
+    "unmappedReleases": 1,
     "cardReleases": 633,
-    "physicalPrintings": 854,
-    "sourceObservations": 3097
+    "physicalPrintings": 857,
+    "sourceObservations": 3103
   },
   "groups": [
     {
@@ -29553,13 +29553,35 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0625",
+              "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0625",
+              "specimenIds": [
+                "SPEC-0625"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -29595,6 +29617,17 @@
               "originalHash": "f899fd7d7ba80d16052365f95344becef50be8f9632294ccc3dfa91aea4933b4",
               "previewSrc": "images/previews/SPEC-0439.png?v=19a9c551150f2e2f3471d7422b5ba9b38c2ebd196e90e227e7f890ccc11206fa",
               "thumbnailSrc": "images/thumbs/SPEC-0439.png?v=0e68e16980131b06263104068209ac1af05b68e616a21234f677883246d4757b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0625.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0625",
+              "contentHash": "105b88e15768dda4c7080d5595f116033335b9149fa2b2c40753ba33a0bdd55d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "105b88e15768dda4c7080d5595f116033335b9149fa2b2c40753ba33a0bdd55d",
+              "previewSrc": "images/previews/SPEC-0625.png?v=73fb191ec284c135798edafc6ac437e6c338c225f8eb02a9cf0dca72b6ad1ab7",
+              "thumbnailSrc": "images/thumbs/SPEC-0625.png?v=93b53909994388e5efdbe463fe0a911fa35e1563d0a8c5f6d87109c9b5ba3b9d"
             }
           ],
           "observations": [
@@ -29615,6 +29648,15 @@
               "evidence": "Complete Korean catalogue render of Snorlax GX. The Hangul name and rules text and printed 017/SM-P collector identity establish the Korean local promo corresponding to the legacy SM-P 1 claim. A catalogue render is identity evidence only; no physical finish is inferred.",
               "contentHash": "d2c37317ba579d1a83fa1a42a98cf1dc0c09b1d862388f64214079e0737b17c8",
               "image": "verification/specimens/SPEC-0439.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0625",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/197271566975",
+              "evidence": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation. Manual visual extraction. No exhaustive finish inventory asserted.",
+              "contentHash": "5d8eeb909450a8c7837a725bef716af693d63c9bd1e9c6260adcd74ba776b5a9",
+              "image": "verification/specimens/SPEC-0625.png"
             },
             {
               "observationId": "unit:U0379",
@@ -45057,7 +45099,7 @@
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
               "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 341/414 Snorlax; SPEC-0155 independently shows the exact printed CS4DaC 341/414 identity and reverse-holo treatment. This establishes the distinct local counterpart of legacy sI100 341.",
-              "contentHash": "2e700fe96147f99504f84e75342420515523d67eb6f4fe4599bbdf2c31caa0d4",
+              "contentHash": "e867731221a8f8919413b0cfd1128491b8c106b4a80ba2463cb5d886d1faa444",
               "image": null
             },
             {
@@ -45161,7 +45203,7 @@
               "provider": "bulbapedia",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
               "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 342/414 Snorlax; SPEC-0156 independently shows the exact printed CS4DaC 342/414 identity and the exact seller listing identifies it as Holo. This establishes the distinct local counterpart of legacy sI100 342.",
-              "contentHash": "52880c27d02ae197cf70a13a758eb37a04563b1bb209608fdd81022b566f4872",
+              "contentHash": "5cd71f4192ac5cd4a9ce68189a60eb438366a0c8884189b7f15700d77ee532b7",
               "image": null
             },
             {
@@ -45757,6 +45799,88 @@
               "evidence": "Simplified Chinese set article; deck list row: Snorlax|97, Colorless (Cardmarket \"Brave Stars\" = Bulbapedia \"Gallant Galaxy\"). CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|097/153|E|{{TCG ID|Gallant Galaxy V Starter Deck|Snorlax|97}}|Colorless}}\". The cited article is this edition's own article, so its card list is a card list in this language; the row reaches the card directly, with no inference about the set in between. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
               "contentHash": "3ae2360038d00d6a08d564979b62f39f7b4662b2863146c3e7f06aea6cec7589",
               "image": "images/CS5DC_097_Snorlax_V1_882375.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Heavy-Impact"
+      ],
+      "cardKeys": [
+        "Snorlax-Heavy-Impact"
+      ],
+      "label": "Snorlax-Heavy-Impact",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+          "workId": "WORK:Snorlax-Heavy-Impact",
+          "cardKey": "Snorlax-Heavy-Impact",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "setEditionId": "EDITION:CN:S-Chinese:CS2DaC",
+          "localSetCode": "CS2DaC",
+          "localNumber": "038/053",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0639"
+          ],
+          "legacyVariants": [],
+          "physicalPrintings": [],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "卡比兽",
+            "artist": null,
+            "variant": null,
+            "finish": [],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "verification/specimens/SPEC-0623.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0623",
+              "contentHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
+              "previewSrc": "images/previews/SPEC-0623.png?v=2c985bbdcc36045a79bb2275c61350aacf51b4fe800c5c36333c6fefd556132e",
+              "thumbnailSrc": "images/thumbs/SPEC-0623.png?v=9f75fe9cba33720645663323e1ced9b8e456032460a5cb2c5684185a33eb7ef7"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:CN:CS2DaC:038/053:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+              "evidence": "The Family Pokémon Card Game article positively records the Mainland China release and its closed product card list includes Snorlax 038/053. PokemonLore's Simplified-Chinese CS2DaC set list independently identifies 038/053. This establishes the distinct local counterpart of legacy sH 038; no finish is inferred.",
+              "contentHash": "b700ec12a938ed085470b57c3c12de09a5e22723878454e98f96ce39b08dc61b",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0623",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/198560806619",
+              "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted.",
+              "contentHash": "9a31a606a93f6403c2eeeeab57de769315de0acdb7a3ccca7949ff54b3ade4fc",
+              "image": "verification/specimens/SPEC-0623.png"
             }
           ]
         }
@@ -74034,7 +74158,7 @@
               "provider": "pokemon-card-korea",
               "url": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 XY2 066/080 in XY 확장팩 제2탄 「와일드 블레이즈」, with illustrator Mitsuhiro Arita and HP130. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
-              "contentHash": "666c00abf91c2bc085a53acc0bdf8ee0f8e2ba7b086e7d6cb57f411f725ae866",
+              "contentHash": "693d01ab27e8dd348709911d9debd4f0a3f45d570ed8a04d82f118508911f9c7",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/XY/XY2/XY2_066.jpg?w=512"
             },
             {
@@ -96261,13 +96385,43 @@
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:35a8a7bf05e1a9e89644dc63",
+              "semanticPrintingId": "PRINTING:35a8a7bf05e1a9e89644dc63",
+              "cardReleaseId": "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "mirror-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0472",
+              "sourcePrintingId": "F0472-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
+              "specimenIds": [
+                "SPEC-0624"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/436062147_1_1790773716_w900.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0624.",
+                  "retrievedAt": "2026-10-07"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "HYOGONOSUKE",
             "variant": "V1",
-            "finish": [],
+            "finish": [
+              "mirror-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -96292,9 +96446,29 @@
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0624.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0624",
+              "contentHash": "0e214f91d43a84ccff2967897a56e04ea2c7239d10b7fd1c3658f55f9d853597",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0e214f91d43a84ccff2967897a56e04ea2c7239d10b7fd1c3658f55f9d853597",
+              "previewSrc": "images/previews/SPEC-0624.png?v=10d1af41867197b72790f6b571e8b65a6e31ab045f3cc0d5caad2ddb6dcf3c6b",
+              "thumbnailSrc": "images/thumbs/SPEC-0624.png?v=3796470e6f300656502533777d43f6afb133c5b06cb0fce74ebfee986ab96dde"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0472-P02:0:5d151986cc77844a",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/436062147_1_1790773716_w900.jpg",
+              "evidence": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0624.",
+              "contentHash": "2234b7097d1508aba5d47e12b8467da6a72002a1d2edc72bb567032d0ecaeb80",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sv4a:145/190:base",
               "kind": "source-first",
@@ -96303,6 +96477,15 @@
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv4a 145/190 in 스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」, with illustrator HYOGONOSUKE and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
               "contentHash": "0fb6de90ecbef62cb8eb7ecd7e86c2d103fa3fd9e7c0cbb8244e0c4142c629eb",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV4a/SV4a_145.png?w=512"
+            },
+            {
+              "observationId": "specimen:SPEC-0624",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/436062147",
+              "evidence": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted.",
+              "contentHash": "adbf51434982c329cd78b183e7dc648cde274d6923deecd356edd069a17551cc",
+              "image": "verification/specimens/SPEC-0624.png"
             },
             {
               "observationId": "unit:U0306",
@@ -99424,13 +99607,43 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
+              "semanticPrintingId": "PRINTING:948dbb105a69e5401715ca91",
+              "cardReleaseId": "RELEASE:KR:Korean:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0503",
+              "sourcePrintingId": "F0503-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:948dbb105a69e5401715ca91",
+              "specimenIds": [
+                "SPEC-0626"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/0EsAAeSwdy5oZUKd/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0626.",
+                  "retrievedAt": "2026-10-07"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax ex",
             "artist": "N-DESIGN Inc.",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -99466,9 +99679,29 @@
               "originalHash": "3cfd51a7b7b619e8bf1a4b9cb57a0b964fb18695bcb3fea6e4913432e4d5d868",
               "previewSrc": "images/previews/SPEC-0464.png?v=b85f7f31721d73684474a10843f8469dc3c3b55d52e5261f56b54318c9899163",
               "thumbnailSrc": "images/thumbs/SPEC-0464.png?v=f554967a777a2422f5dc8acb4010212018e056727b9141cb6159ab7a78d9536b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0626.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0626",
+              "contentHash": "8ac8b26ffcc9dc011f07b2fcd1483592784bd3bd4133d1c8981ef396787a1bb7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8ac8b26ffcc9dc011f07b2fcd1483592784bd3bd4133d1c8981ef396787a1bb7",
+              "previewSrc": "images/previews/SPEC-0626.png?v=39fcb605fc899bf8310e75dc8c9ce5e9bc160201f69778f82e48725a2ef345bf",
+              "thumbnailSrc": "images/thumbs/SPEC-0626.png?v=acf37ea1f8cdc678d0b80e2de5c8dbe7f32a0f650dfa1c2c10012057dd3a7056"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0503-P01:0:7ea07c001fa99897",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/0EsAAeSwdy5oZUKd/s-l1600.webp",
+              "evidence": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0626.",
+              "contentHash": "cb7c28ff7c790ce409898cde6a696e94300df33c106d211ed2ca3eed67cbc18a",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:svM:094/175:base",
               "kind": "source-first",
@@ -99486,6 +99719,15 @@
               "evidence": "Complete Korean database render of Snorlax ex from Random Start Deck Generations. The Hangul name and rules text, printed svM set mark and collector number 094/175 establish the exact localized card. The printed rarity is U. A digital render is identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "02839a2004b01c758b92d081530cc809e1f75d9d70fe82c8b183c47b900fb7c4",
               "image": "verification/specimens/SPEC-0464.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0626",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/286684964904",
+              "evidence": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown. Manual visual extraction. No exhaustive finish inventory asserted.",
+              "contentHash": "e122c384e9b3abe555c2b47b57f035e558b815ab6f1eca3cf5e90dd5e9d19040",
+              "image": "verification/specimens/SPEC-0626.png"
             },
             {
               "observationId": "unit:U0402",
@@ -101806,67 +102048,6 @@
               "evidence": "Owner (domain expert) confirms Prismatic Evolutions: Additionals Snorlax ex (xPRE 076) exists in Spanish. Confirmed languages: French, German, Italian and European Spanish. NOTE the owner explicitly does NOT confirm Portuguese or Latin-American Spanish; Cardmarket \"Spanish\" is European Spanish (the confirmed one). English was already documented from the Prismatic Evolutions set list.",
               "contentHash": "641394d1f6b995bdff640562022aeec96ad38e3fd5f5c8b444b87f51c5d698b3",
               "image": "images/xPRE_076_Snorlax_ex_V2_841279.jpg"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "RELEASE-GROUP:RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
-      "groupKind": "unmapped-release",
-      "reviewedAppearanceId": null,
-      "imageGroupId": null,
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "reviewedAppearanceId": null,
-          "imageGroupId": null,
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:CS2DaC",
-          "localSetCode": "CS2DaC",
-          "localNumber": "038/053",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0639"
-          ],
-          "legacyVariants": [],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "卡比兽",
-            "artist": null,
-            "variant": null,
-            "finish": [],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [],
-          "observations": [
-            {
-              "observationId": "source-first:CN:CS2DaC:038/053:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
-              "evidence": "The Family Pokémon Card Game article positively records the Mainland China release and its closed product card list includes Snorlax 038/053. PokemonLore's Simplified-Chinese CS2DaC set list independently identifies 038/053. This establishes the distinct local counterpart of legacy sH 038; no finish is inferred.",
-              "contentHash": "c75b31d2820a4f016c396d1d408d864559f59c7ee0658a13fef26bc6ecefb8f4",
-              "image": null
             }
           ]
         }

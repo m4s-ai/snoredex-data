@@ -1,3 +1,7 @@
+<!-- doc: role=retained per-card research report; stage=history -->
+
+> Historical record — research snapshot from 2026-10-07; current gaps are determined by canonical stores.
+
 # Chinese exact-card research, 2026-10-07
 
 Research only; no canonical changes. This round searched exact codes, native names and pack aliases, plus eBay, Pikaqian and SimplifiedTCG routes. No new physical photograph or positive modification-pack finish observation was obtained.

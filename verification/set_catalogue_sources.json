@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 529,
+      "sourceRecords": 531,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 97,
+      "releaseDateRecords": 99,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -9036,10 +9036,17 @@
           "CN:CS4DaC:342/414:base"
         ],
         "providers": [
-          "bulbapedia"
+          "bulbapedia",
+          "pokemon-cn-official",
+          "retailer-listing",
+          "seller-listing-photo"
         ],
         "sourceUrls": [
-          "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)"
+          "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+          "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+          "https://www.ebay.com/itm/356156650452",
+          "https://www.pokemon.cn/tcg/other/17160.html",
+          "https://www.pokemon.cn/tcg/product/15882.html"
         ],
         "printedSetSize": 414,
         "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
@@ -9050,7 +9057,33 @@
         ],
         "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
         "markAssetUrls": [],
-        "cardImageUrls": []
+        "cardImageUrls": [],
+        "rarityEvidenceByPrintId": {
+          "CN:CS4DaC:341/414:base": {
+            "specimenId": "SPEC-0155",
+            "observedNativeValue": "no printed rarity symbol",
+            "observationSourceUrl": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
+            "productSourceUrls": [
+              "https://www.pokemon.cn/tcg/product/15882.html",
+              "https://www.pokemon.cn/tcg/other/17160.html"
+            ],
+            "retrievedAt": "2026-10-07",
+            "basis": "SPEC-0155 positively shows the exact Simplified-Chinese CS4DaC 341/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+            "evidenceBundle": "verification/evidence/all-open-research-20261007"
+          },
+          "CN:CS4DaC:342/414:base": {
+            "specimenId": "SPEC-0156",
+            "observedNativeValue": "no printed rarity symbol",
+            "observationSourceUrl": "https://www.ebay.com/itm/356156650452",
+            "productSourceUrls": [
+              "https://www.pokemon.cn/tcg/product/15882.html",
+              "https://www.pokemon.cn/tcg/other/17160.html"
+            ],
+            "retrievedAt": "2026-10-07",
+            "basis": "SPEC-0156 positively shows the exact Simplified-Chinese CS4DaC 342/414 card with no printed rarity symbol. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+            "evidenceBundle": "verification/evidence/all-open-research-20261007"
+          }
+        }
       }
     },
     {
@@ -14042,10 +14075,14 @@
           "CN:CS2DaC:038/053:base"
         ],
         "providers": [
-          "bulbapedia"
+          "bulbapedia",
+          "pokemon-cn-official",
+          "seller-listing-photo"
         ],
         "sourceUrls": [
-          "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)"
+          "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+          "https://www.ebay.com/itm/198560806619",
+          "https://www.pokemon.cn/tcg/product/16063.html"
         ],
         "printedSetSize": 53,
         "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
@@ -14055,7 +14092,20 @@
         ],
         "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
         "markAssetUrls": [],
-        "cardImageUrls": []
+        "cardImageUrls": [],
+        "rarityEvidenceByPrintId": {
+          "CN:CS2DaC:038/053:base": {
+            "specimenId": "SPEC-0623",
+            "observedNativeValue": "no printed rarity symbol",
+            "observationSourceUrl": "https://www.ebay.com/itm/198560806619",
+            "productSourceUrls": [
+              "https://www.pokemon.cn/tcg/product/16063.html"
+            ],
+            "retrievedAt": "2026-10-07",
+            "basis": "SPEC-0623 positively shows the exact Simplified-Chinese CS2DaC 038/053 card with no printed rarity symbol and the Pikachu silhouette print-identity mark. The localized publisher product establishes fixed constructed-deck contents; the card/list binding establishes membership. Fixed is the reviewed normalization of these combined facts, not a rarity word stated by the publisher or a finish inference.",
+            "evidenceBundle": "verification/evidence/all-open-research-20261007"
+          }
+        }
       }
     },
     {
@@ -16070,6 +16120,50 @@
           "KR"
         ],
         "date": "2023-07-28",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CS2DaC-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "https://www.pokemon.cn/tcg/product/16063.html#launch:CN:CS2DaC",
+      "retrieved": "2026-10-07",
+      "sourceUrl": "https://www.pokemon.cn/tcg/product/16063.html",
+      "raw": {
+        "localCode": "CS2DaC",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "date": "2023-11-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-XY2-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/33#launch:KR:XY2",
+      "retrieved": "2026-10-07",
+      "sourceUrl": "https://pokemoncard.co.kr/card/33",
+      "raw": {
+        "localCode": "XY2",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2014-05-01",
         "datePrecision": "day",
         "approximate": false,
         "status": "released",
