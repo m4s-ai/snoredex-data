@@ -75,7 +75,7 @@ SOURCE_NATIVE_MAPPINGS = [
         "sourceVocabulary": "printed-Indonesian-card-render",
         "basis": "Reviewed official Indonesian card-render mappings admitted under issue #258.",
         "values": {
-            "AR": "illustration-rare", "C": "common", "no printed rarity symbol": "fixed",
+            "AR": "illustration-rare", "C": "common",
             "PROMO": "promo", "R": "rare", "RR": "double-rare", "S": "shiny-rare",
             "U": "uncommon",
         },
@@ -89,7 +89,7 @@ SOURCE_NATIVE_MAPPINGS = [
         ),
         "values": {
             "AR": "illustration-rare", "C": "common", "fixed product": "fixed",
-            "no printed rarity symbol": "fixed", "PROMO": "promo",
+            "PROMO": "promo",
             "R": "rare", "RR": "double-rare", "S": "shiny-rare", "U": "uncommon",
         },
     },
@@ -98,7 +98,7 @@ SOURCE_NATIVE_MAPPINGS = [
         "sourceVocabulary": "printed-Thai-card",
         "basis": "Reviewed official Thai card mappings admitted under issue #262.",
         "values": {
-            "AR": "illustration-rare", "C": "common", "no printed rarity symbol": "fixed",
+            "AR": "illustration-rare", "C": "common",
             "PROMO": "promo", "R": "rare", "RR": "double-rare", "S": "shiny-rare",
             "U": "uncommon",
         },
@@ -167,7 +167,10 @@ def main() -> int:
     catalogue = {
         "meta": catalogue["meta"],
         "localeVocabularies": catalogue["localeVocabularies"],
-        "sourceNativeMappings": SOURCE_NATIVE_MAPPINGS,
+        "sourceNativeMappings": SOURCE_NATIVE_MAPPINGS + [
+            scope for scope in catalogue.get("sourceNativeMappings", [])
+            if scope.get("cardReleaseIds")
+        ],
         "rarities": catalogue["rarities"],
         "editionAvailability": catalogue["editionAvailability"],
     }

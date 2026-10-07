@@ -1213,7 +1213,9 @@ def main() -> int:
 
         page.select_option("#f-finish", ["reverse-holo"])
         page.wait_for_timeout(120)
-        mirror_family_rows = page.locator("#rows tr:not(.yearsep)").filter(has_text="xsv2a")
+        mirror_family_rows = page.locator("#rows tr:not(.yearsep)").filter(
+            has=page.locator('.rowmore[data-row-id="xsv2a-143-v1-none"], '+
+                             '.rowmore[data-row-id="xsv2a-143-v2-none"]'))
         check("Reverse Holo filter includes Poké Ball and Master Ball product rows",
               mirror_family_rows.count() == 2
               and all("Reverse Holo" in text for text in mirror_family_rows.all_text_contents()),

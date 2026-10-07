@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-05",
+  "generated": "2026-10-07",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1672,
-   "uniqueUrls": 1664,
+   "evidenceRecords": 1704,
+   "uniqueUrls": 1696,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6635
+   "claimsAttributed": 6698
   }
  },
  "providers": [
@@ -58,7 +58,8 @@
    "usedFor": [
     "language",
     "finish",
-    "product"
+    "product",
+    "date"
    ],
    "attribution": "Mainland Chinese card and product data © Pokémon (Shanghai) Toys Co., Ltd.",
    "notes": "Only explicit retained publisher statements and card renders are positive evidence; missing products, pages, cards or unstated finishes remain unknown.",
@@ -67,8 +68,8 @@
     "pokemon.cn",
     "image.pokemon.com.cn"
    ],
-   "uniqueSources": 11,
-   "claimsSupported": 48
+   "uniqueSources": 13,
+   "claimsSupported": 46
   },
   {
    "providerId": "pokemon-card-jp",
@@ -134,7 +135,8 @@
    "usedFor": [
     "language",
     "product",
-    "date"
+    "date",
+    "finish"
    ],
    "attribution": "Korean card and product data © Pokémon Korea.",
    "notes": "Historical card-detail endpoints may return HTTP 410; retained exact positive observations remain card evidence, while endpoint silence proves nothing.",
@@ -144,8 +146,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 104,
-   "claimsSupported": 247
+   "uniqueSources": 124,
+   "claimsSupported": 273
   },
   {
    "providerId": "tcgdex",
@@ -218,7 +220,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 96,
-   "claimsSupported": 700
+   "claimsSupported": 699
   },
   {
    "providerId": "tcgcsv",
@@ -813,8 +815,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 158,
-   "claimsSupported": 636
+   "uniqueSources": 168,
+   "claimsSupported": 676
   }
  ],
  "evidence": [
@@ -2614,7 +2616,6 @@
    "sourceTypes": [
     "Bulbapedia (fan wiki), product article, \"In other languages\" table, card list row",
     "Bulbapedia (fan wiki), product article, deck list",
-    "Positive source-first card record",
     "Positive source-native rarity record"
    ],
    "dimensions": [
@@ -2623,14 +2624,14 @@
    ],
    "stableIdCount": 5,
    "stableIds": [
-    "KR:CLF:016/034:base",
+    "KR:CLF:016/032:base",
     "U0394",
     "U0439",
     "U0440",
     "U0441"
    ],
    "retrievedAt": "2026-08-30",
-   "usageCount": 6
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_South_Korea",
@@ -20019,20 +20020,111 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/105",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-SM-P-017-SM-P-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/156",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-sm9-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/180",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-sm10-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/186",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-smL-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/card/277",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-native rarity record"
+    "Localized set/product release-date record",
+    "Positive source-native rarity record",
+    "Reviewed positive physical-printing evidence"
    ],
    "dimensions": [
+    "date",
+    "finish",
     "rarity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "KR:SM30A:060/080:base",
+    "SET-SRC-KR-SM30A-060-080-FINISH-20261007",
+    "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/282",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
    ],
    "stableIdCount": 1,
    "stableIds": [
-    "KR:SM30A:060/080:base"
+    "SET-SRC-RESEARCH-DATE-KR-sA-launch-20261007"
    ],
-   "retrievedAt": "2026-09-01",
+   "retrievedAt": "2026-10-06",
    "usageCount": 1
   },
   {
@@ -20070,6 +20162,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/30",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-FXY-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/card/333",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -20102,6 +20211,62 @@
    ],
    "retrievedAt": "2026-09-21",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/394",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-sH-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/416",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-sI-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/436",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record",
+    "Official Korean localized product treatment specification"
+   ],
+   "dimensions": [
+    "date",
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0418-P01",
+    "SET-SRC-RESEARCH-DATE-KR-sN-launch-20261007",
+    "override:pokemon-kr-research-sN"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/card/439",
@@ -20138,6 +20303,91 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/551",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-xsv2a-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/579",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-sv4K-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/583",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-svG-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/590",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-CLF-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-07",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/628",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-svI-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/card/636",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -20152,6 +20402,40 @@
     "SET-SRC-KR-DATE-SV5A-20260921"
    ],
    "retrievedAt": "2026-09-21",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/665",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-svLN-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/692",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-svM-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
    "usageCount": 1
   },
   {
@@ -20172,21 +20456,92 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/859",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-m2a-launch-20261007",
+    "SET-SRC-RESEARCH-DATE-KR-xm2a-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/864",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-mC-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/869",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-m3-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/9",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-BW7-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
-    "Positive source-first card record"
+    "Positive source-first card record",
+    "Positive source-native rarity record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "rarity"
    ],
    "stableIdCount": 1,
    "stableIds": [
     "KR:BS2:30/40:base"
    ],
-   "retrievedAt": "2026-09-01",
-   "usageCount": 1
+   "retrievedAt": "2026-10-06",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2013001055",
@@ -21166,17 +21521,14 @@
     "Official Mainland China Simplified Chinese product specification"
    ],
    "dimensions": [
-    "finish",
     "finish-override"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 1,
    "stableIds": [
-    "F0079-P01",
-    "F0079-P02",
     "override:pokemon-cn-happy-set-1-decks"
    ],
-   "retrievedAt": "2026-08-27",
-   "usageCount": 3
+   "retrievedAt": null,
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15831.html",
@@ -21197,6 +21549,23 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15882.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-05",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15951.html",
@@ -21340,22 +21709,38 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-cn-official",
    "sourceTypes": [
+    "Official Mainland China Simplified Chinese Reward Pack specification",
     "Official Mainland China Simplified Chinese product specification"
    ],
    "dimensions": [
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0080-P01",
-    "F0080-P02",
     "F0081-P01",
-    "F0081-P02",
-    "override:pokemon-cn-happy-set-4-decks"
+    "override:pokemon-cn-happy-set-4-decks",
+    "override:pokemon-cn-happy-set-4-reward-pack"
    ],
-   "retrievedAt": "2026-08-27",
-   "usageCount": 5
+   "retrievedAt": "2026-10-06",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/22237.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-CN-30thC-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-05",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://assets.pokemon.com/assets/cms/pdf/tcg/checklists/dragonfrontiers_checklist.pdf",
@@ -26508,6 +26893,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0462-P02",
+    "KR:sv2a:143/165:base",
+    "SPEC-0617"
+   ],
+   "retrievedAt": "2026-10-07",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/1vUAAeSw5Jpp7Xrg/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -26546,6 +26951,27 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/4J8AAeSw4ulo1MUk/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
+    "F0036-P01",
+    "KR:CLF:016/032:base",
+    "SPEC-0616",
+    "U0440"
+   ],
+   "retrievedAt": "2026-10-07",
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/69EAAeSwPqBofez7/s-l1600.jpg",
@@ -26735,6 +27161,44 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0619",
+    "U0612"
+   ],
+   "retrievedAt": "2026-10-07",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/GeEAAeSwgBVqJilx/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0476-P02",
+    "SPEC-0611",
+    "U0383"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/GlsAAOSwCkFlTZzd/s-l1600.jpg",
@@ -27087,6 +27551,26 @@
    "usageCount": 5
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/T8wAAeSwvPRqCVLg/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0477-P01",
+    "SPEC-0613",
+    "U0384"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/U7sAAeSwZPZowgKA/s-l500.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27373,6 +27857,26 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/huwAAeSwq-JqwLtp/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0363-P01",
+    "SPEC-0610",
+    "U0172"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/iMAAAeSwQIpp678y/s-l1600.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27431,6 +27935,24 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/kfsAAeSw93Np22TF/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0618",
+    "U0541"
+   ],
+   "retrievedAt": "2026-10-07",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/kycAAeSw5zJqKml1/s-l1600.webp",
@@ -28373,6 +28895,62 @@
    ],
    "retrievedAt": "2026-09-21",
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/433161764_1_1789832224_w640.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0615-P03",
+    "SPEC-0612",
+    "U0780"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:mC:568/742:base",
+    "SPEC-0614"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://media.bunjang.co.kr/product/433165345_3_1789833088_w640.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "KR:mC:568/742:base",
+    "SPEC-0615"
+   ],
+   "retrievedAt": "2026-10-06",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://media.karousell.com/media/photos/products/2026/7/6/ptcg__sc1b__v_119153_rr_1783325811_c8a9fd6b_progressive.jpg",

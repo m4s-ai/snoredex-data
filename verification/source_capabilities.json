@@ -340,6 +340,52 @@
             "zeroResultMeans": "unknown",
             "challenge": "A missing page, card or finish statement cannot refute a Simplified Chinese printing."
           }
+        },
+        {
+          "edgeId": "obs-cn-research-dates-20261007-positive",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "card",
+              "set",
+              "deck",
+              "product"
+            ],
+            "timeRange": {
+              "start": "2022-09",
+              "end": null,
+              "basis": "explicit retained official Simplified Chinese pages only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-event"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained product or manufacturing page establishes only what it explicitly states; silence is not a complete catalogue or finish manifest."
+          },
+          "knownPositiveObservationId": "obs-cn-research-dates-20261007",
+          "boundary": {
+            "outsideScope": [
+              "unretained fields",
+              "other localities",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Only exact positive statements apply; no transfer to other products or rarity/finish inference."
+          }
         }
       ]
     },
@@ -3820,7 +3866,6 @@
       "label": "Pokémon Korea bounded exact Korean card-name catalogue",
       "match": {
         "urlPrefixes": [
-          "https://pokemoncard.co.kr/cards/detail/BS2010002030",
           "https://pokemoncard.co.kr/cards/detail/BS2016020057",
           "https://pokemoncard.co.kr/cards/detail/BS2019001066",
           "https://pokemoncard.co.kr/cards/detail/BS2019001106",
@@ -3958,7 +4003,8 @@
       "match": {
         "urlPrefixes": [
           "https://pokemoncard.co.kr/card/277",
-          "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1"
+          "https://pokemoncard.co.kr/cards?s=%EB%A6%AC%EC%9E%90%EB%AA%BD%20GX%2030%EC%9E%A5%EB%8D%B1",
+          "https://pokemoncard.co.kr/card/436"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -3980,9 +4026,12 @@
         ]
       },
       "finishCapability": {
-        "mode": "none",
-        "vocabulary": [],
-        "publicationForm": "official product statement and bounded deck membership, not a physical finish record",
+        "mode": "set-profile",
+        "vocabulary": [
+          "non-holo",
+          "holo"
+        ],
+        "publicationForm": "Explicit localized product treatment prose for two matched decks",
         "closedWithinScope": false
       },
       "coverageEdges": [
@@ -4030,6 +4079,52 @@
             "zeroResultMeans": "unknown",
             "challenge": "The fixed classification depends on the retained product statement plus positive named-deck membership, not provider silence."
           }
+        },
+        {
+          "edgeId": "kr-reviewed-research-finishes-20261007-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Exact retained statements for Korean products 277 and 436 only."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-event",
+            "finish"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product date statements cannot establish absence or catalogue completeness."
+          },
+          "knownPositiveObservationId": "obs-kr-reviewed-research-finishes-20261007",
+          "boundary": {
+            "outsideScope": [
+              "unretained products",
+              "other localities",
+              "unstated finishes and foil patterns",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A product date or missing rarity does not imply any card finish; explicit treatment prose covers only matched product members."
+          }
         }
       ]
     },
@@ -4044,7 +4139,8 @@
           "https://pokemoncard.co.kr/cards/detail/BS2023014143",
           "https://pokemoncard.co.kr/cards/detail/BS2023014181",
           "https://pokemoncard.co.kr/cards/detail/BS2024007051",
-          "https://pokemoncard.co.kr/cards/detail/SP000000101"
+          "https://pokemoncard.co.kr/cards/detail/SP000000101",
+          "https://pokemoncard.co.kr/cards/detail/BS2010002030"
         ],
         "nonUrlEvidenceIds": []
       },
@@ -4095,17 +4191,17 @@
             }
           },
           "positiveEvidenceCapabilities": [
-            "identity",
-            "image",
-            "language",
             "card-existence",
             "card-release",
-            "local-set-identifier",
             "collector-number",
-            "rarity",
-            "set-membership",
+            "identity",
+            "illustrator",
+            "image",
+            "language",
+            "local-set-identifier",
             "product-membership",
-            "illustrator"
+            "rarity",
+            "set-membership"
           ],
           "exhaustive": false,
           "absenceCapability": {
@@ -4124,6 +4220,48 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "Field-level rarity provenance is narrower than the bounded name-search response."
+          }
+        },
+        {
+          "edgeId": "obs-kr-bs2-rarity-20261007-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "the exact retained field observations only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "rarity"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Each retained detail proves only its observed positive fields; other rows and unavailable routes remain unknown."
+          },
+          "knownPositiveObservationId": "obs-kr-bs2-rarity-20261007",
+          "boundary": {
+            "outsideScope": [
+              "unretained fields",
+              "other localities",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "Only exact positive statements apply; no transfer to other products or rarity/finish inference."
           }
         }
       ]
@@ -5600,6 +5738,106 @@
             "challenge": "Named product foil prose cannot identify a regional release or establish Staff, patterns or unlisted finishes."
           },
           "outOfScopeChallengeObservationId": "obs-tpci-journey-together-build-battle-boundary"
+        }
+      ]
+    },
+    {
+      "surfaceId": "kr-reviewed-research-dates-20261007",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed exact Korean dates statements (#256)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/card/105",
+          "https://pokemoncard.co.kr/card/156",
+          "https://pokemoncard.co.kr/card/180",
+          "https://pokemoncard.co.kr/card/186",
+          "https://pokemoncard.co.kr/card/282",
+          "https://pokemoncard.co.kr/card/30",
+          "https://pokemoncard.co.kr/card/394",
+          "https://pokemoncard.co.kr/card/416",
+          "https://pokemoncard.co.kr/card/551",
+          "https://pokemoncard.co.kr/card/579",
+          "https://pokemoncard.co.kr/card/583",
+          "https://pokemoncard.co.kr/card/590",
+          "https://pokemoncard.co.kr/card/628",
+          "https://pokemoncard.co.kr/card/665",
+          "https://pokemoncard.co.kr/card/692",
+          "https://pokemoncard.co.kr/card/859",
+          "https://pokemoncard.co.kr/card/864",
+          "https://pokemoncard.co.kr/card/869",
+          "https://pokemoncard.co.kr/card/9"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "browser",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-07",
+      "freshnessPolicy": "Retain exact dated statements; only named fields and releases are supported. No absence, inventory closure or cross-locality inference.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://pokemoncard.co.kr/card/9",
+        "parameters": [
+          "exact reviewed product URL"
+        ],
+        "pagination": "Only the explicitly retained product date statements.",
+        "expectedIdentifiers": [
+          "Korean product name",
+          "regular release date"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "kr-reviewed-research-dates-20261007-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "set",
+              "product"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only the retained product statements for this batch."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "release-event",
+            "date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Product date statements cannot establish absence or catalogue completeness."
+          },
+          "knownPositiveObservationId": "obs-kr-reviewed-research-dates-20261007",
+          "boundary": {
+            "outsideScope": [
+              "unretained products",
+              "other localities",
+              "unstated finishes and foil patterns",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A product date or missing rarity does not imply any card finish; explicit treatment prose covers only matched product members."
+          }
         }
       ]
     }
@@ -8375,6 +8613,443 @@
         "unsupportedClaims"
       ],
       "outcome": "The English product statement supplies none of these properties; separate positive evidence is required."
+    },
+    {
+      "observationId": "obs-kr-reviewed-research-dates-20261007",
+      "surfaceId": "kr-reviewed-research-dates-20261007",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/9",
+      "queryParameters": {
+        "scope": "Exact retained positive statements"
+      },
+      "retrievedAt": "2026-10-07",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "fields": [
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:BW7:055/070:Snorlax-Block-Teampact",
+              "field": "release-date",
+              "value": "2013-03-01",
+              "sourceUrl": "https://pokemoncard.co.kr/card/9",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:FXY:026/036:Snorlax-Rock-Smash-Strength",
+              "field": "release-date",
+              "value": "2014-03-04",
+              "sourceUrl": "https://pokemoncard.co.kr/card/30",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "field": "release-date",
+              "value": "2026-01-23",
+              "sourceUrl": "https://pokemoncard.co.kr/card/859",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:m3:062/080:Snorlax-Gormandizer-Collapse",
+              "field": "release-date",
+              "value": "2026-03-13",
+              "sourceUrl": "https://pokemoncard.co.kr/card/869",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:mC:567/742:Snorlax-But-First-Food-Heavy-Impact",
+              "field": "release-date",
+              "value": "2026-02-13",
+              "sourceUrl": "https://pokemoncard.co.kr/card/864",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:mC:568/742:Snorlax-Lazy-Press",
+              "field": "release-date",
+              "value": "2026-02-13",
+              "sourceUrl": "https://pokemoncard.co.kr/card/864",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:mC:569/742:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "field": "release-date",
+              "value": "2026-02-13",
+              "sourceUrl": "https://pokemoncard.co.kr/card/864",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sA:010/023:Snorlax-Rolling-Tackle-Heavy-Impact",
+              "field": "release-date",
+              "value": "2020-01-10",
+              "sourceUrl": "https://pokemoncard.co.kr/card/282",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sH:038/053:Snorlax-Heavy-Impact",
+              "field": "release-date",
+              "value": "2021-11-27",
+              "sourceUrl": "https://pokemoncard.co.kr/card/394",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sI:341/414:Snorlax-Heavy-Impact",
+              "field": "release-date",
+              "value": "2022-04-23",
+              "sourceUrl": "https://pokemoncard.co.kr/card/416",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sI:342/414:Snorlax-Heavy-Impact",
+              "field": "release-date",
+              "value": "2022-04-23",
+              "sourceUrl": "https://pokemoncard.co.kr/card/416",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "field": "release-date",
+              "value": "2017-04-07",
+              "sourceUrl": "https://pokemoncard.co.kr/card/105",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:066/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "field": "release-date",
+              "value": "2019-01-16",
+              "sourceUrl": "https://pokemoncard.co.kr/card/156",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:106/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "field": "release-date",
+              "value": "2019-01-16",
+              "sourceUrl": "https://pokemoncard.co.kr/card/156",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sm9:115/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+              "field": "release-date",
+              "value": "2019-01-16",
+              "sourceUrl": "https://pokemoncard.co.kr/card/156",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sm10:076/095:Snorlax-Lazy-Eating-Big-Counter",
+              "field": "release-date",
+              "value": "2019-05-10",
+              "sourceUrl": "https://pokemoncard.co.kr/card/180",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+              "field": "release-date",
+              "value": "2019-12-24",
+              "sourceUrl": "https://pokemoncard.co.kr/card/277",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:smL:038/051:Snorlax-Incredible-Snore",
+              "field": "release-date",
+              "value": "2019-05-03",
+              "sourceUrl": "https://pokemoncard.co.kr/card/186",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sN:008/024:Snorlax-Heavy-Impact",
+              "field": "release-date",
+              "value": "2022-05-27",
+              "sourceUrl": "https://pokemoncard.co.kr/card/436",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
+              "field": "release-date",
+              "value": "2023-11-30",
+              "sourceUrl": "https://pokemoncard.co.kr/card/579",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:svG:021/049:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "field": "release-date",
+              "value": "2023-12-13",
+              "sourceUrl": "https://pokemoncard.co.kr/card/583",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
+              "field": "release-date",
+              "value": "2024-04-20",
+              "sourceUrl": "https://pokemoncard.co.kr/card/628",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:svLN:010/022:Snorlax-Spike-Draw-Mega-Punch",
+              "field": "release-date",
+              "value": "2024-10-02",
+              "sourceUrl": "https://pokemoncard.co.kr/card/665",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:svM:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+              "field": "release-date",
+              "value": "2024-12-20",
+              "sourceUrl": "https://pokemoncard.co.kr/card/692",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "field": "release-date",
+              "value": "2026-01-23",
+              "sourceUrl": "https://pokemoncard.co.kr/card/859",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
+              "field": "release-date",
+              "value": "2023-07-28",
+              "sourceUrl": "https://pokemoncard.co.kr/card/551",
+              "status": "official product page opened this round; matched against retained Korean exact card/product identity",
+              "novelty": "missing in target canonical projection; original source may already have retained capture elsewhere",
+              "limits": "general product release, not every reprint; prerelease dates separate"
+            },
+            {
+              "field": "release-date",
+              "cardReleaseId": "RELEASE:KR:Korean:CLF:016/032:Snorlax-Heavy-Impact",
+              "value": "2023-12-16",
+              "sourceUrl": "https://pokemoncard.co.kr/card/590",
+              "basis": "Exact Korean specimen SPEC-0616 binds 016/032 to the localized Classic release."
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "2013-03-01",
+        "2014-03-04",
+        "2017-04-07",
+        "2019-01-16",
+        "2019-05-03",
+        "2019-05-10",
+        "2019-12-24",
+        "2020-01-10",
+        "2021-11-27",
+        "2022-04-23",
+        "2022-05-27",
+        "2023-07-28",
+        "2023-11-30",
+        "2023-12-13",
+        "2023-12-16",
+        "2024-04-20",
+        "2024-10-02",
+        "2024-12-20",
+        "2026-01-23",
+        "2026-02-13",
+        "2026-03-13"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-research-dates-20261007-positive"
+      ],
+      "outcome": "Positive named fields only; original publisher excerpts retained in rarity-finish-research-20261006. Unstated alternatives remain unknown."
+    },
+    {
+      "observationId": "obs-kr-reviewed-research-finishes-20261007",
+      "surfaceId": "pokemon-card-korea-fixed-product",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/card/277",
+      "queryParameters": {
+        "scope": "Exact retained positive statements"
+      },
+      "retrievedAt": "2026-10-07",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "fields": [
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+              "field": "finish",
+              "value": "non-holo",
+              "nativeStatement": "본 제품에는 홀로 카드가 들어있지 않습니다.",
+              "sourceUrl": "https://pokemoncard.co.kr/card/277",
+              "basis": "Explicit localized product treatment statement; exact Korean060/080 source and retained official identity match Random30-cardDeck.",
+              "status": "positive supported; no exhaustive finish inventory asserted"
+            },
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:sN:008/024:Snorlax-Heavy-Impact",
+              "field": "finish-family",
+              "value": "Holo",
+              "nativeStatement": "60장 덱 (전종 홀로)",
+              "sourceUrl": "https://pokemoncard.co.kr/card/436",
+              "basis": "Explicit Korean product all-card Holo statement, matched sN008/024 retained card record",
+              "limits": "Native holo does not identify technical mirror treatment or foil pattern. Do not automatically use Japanese mirror-holo."
+            }
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "non-holo",
+        "Holo"
+      ],
+      "validatesEdges": [
+        "kr-reviewed-research-finishes-20261007-positive"
+      ],
+      "outcome": "Positive named fields only; original publisher excerpts retained in rarity-finish-research-20261006. Unstated alternatives remain unknown."
+    },
+    {
+      "observationId": "obs-cn-research-dates-20261007",
+      "surfaceId": "pokemon-cn-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.cn/tcg/product/15882.html",
+      "queryParameters": {
+        "scope": "Exact retained fields"
+      },
+      "retrievedAt": "2026-10-07",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "retrieved": "2026-10-05",
+          "status": "reviewed-positive-evidence-awaiting-canonical-admission",
+          "providerId": "pokemon-cn-official",
+          "surfaceId": "pokemon-cn-product-pages",
+          "observations": [
+            {
+              "localSetCode": "30thC",
+              "numbers": [
+                "095/103"
+              ],
+              "localSetId": "LOCALSET:CN:30th%20C",
+              "setEditionId": "EDITION:CN:S-Chinese:30th C",
+              "date": "2026-09-16",
+              "datePrecision": "day",
+              "marketScopes": [
+                "CN"
+              ],
+              "sourceUrl": "https://www.pokemon.cn/tcg/product/22237.html",
+              "nativeProductName": "宝可梦集换式卡牌游戏 补充包 30周年庆典",
+              "nativeField": "发售日期",
+              "nativeValue": "2026年9月16日（周三）",
+              "basis": "China's product specifications explicitly date this product, independently of the article's qualified worldwide launch statement. Existing SPEC-0600 and source-first identity establish this local printing. No transfer from Japanese or Traditional-Chinese editions."
+            },
+            {
+              "localSetCode": "CS4DaC",
+              "numbers": [
+                "341/414",
+                "342/414"
+              ],
+              "localSetId": "LOCALSET:CN:CS4DaC",
+              "setEditionId": "EDITION:CN:S-Chinese:CS4DaC",
+              "date": "2024-05-17",
+              "datePrecision": "day",
+              "marketScopes": [
+                "CN"
+              ],
+              "sourceUrl": "https://www.pokemon.cn/tcg/product/15882.html",
+              "nativeProductName": "起始卡组100",
+              "nativeField": "发售时间",
+              "nativeValue": "2024年5月17日",
+              "identitySourceUrl": "https://www.pokemon.cn/tcg/other/17160.html",
+              "identityQuote": "商品编号为“CS4DaC”的卡牌，因未正式发售，于2024年5月17日前暂无法在各种赛制中使用。",
+              "basis": "The product specification supplies the launch date. The separate publisher regulation article links product code CS4DaC to Start Deck 100; its legality date is not used as the launch-date authority. Existing SPEC-0155 and SPEC-0156 identify the exact local cards."
+            }
+          ],
+          "rarity": {
+            "status": "unknown",
+            "numbers": [
+              "341/414",
+              "342/414"
+            ],
+            "inspectedUrls": [
+              "https://www.tcgcollector.com/cards/60220/snorlax-start-deck-100-341-414",
+              "https://www.tcgcollector.com/cards/60221/snorlax-start-deck-100-342-414"
+            ],
+            "note": "Both exact pages show Rarity —. This is silence, not evidence for Common, Fixed or absence. A search-index seller Common title for 342/414 could not be recovered in the opened original page and remains an unaccepted lead."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "2024-05-17",
+        "2026-09-16"
+      ],
+      "validatesEdges": [
+        "obs-cn-research-dates-20261007-positive"
+      ],
+      "outcome": "Retained exact publisher values, no completeness or finish inference."
+    },
+    {
+      "observationId": "obs-kr-bs2-rarity-20261007",
+      "surfaceId": "pokemon-card-korea-retained-rarity-details",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+      "queryParameters": {
+        "scope": "Exact retained fields"
+      },
+      "retrievedAt": "2026-10-07",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2010002030",
+          "collectorNumber": "30/40",
+          "sourceNativeRarity": "U",
+          "normalizedRarity": "uncommon",
+          "language": "Korean",
+          "retainedExcerpt": "verification/evidence/rarity-finish-research-20261006/korean-results.json"
+        }
+      },
+      "expectedIdentifiers": [
+        "30/40",
+        "U"
+      ],
+      "validatesEdges": [
+        "obs-kr-bs2-rarity-20261007-positive"
+      ],
+      "outcome": "Retained exact publisher values, no completeness or finish inference."
     }
   ]
 }

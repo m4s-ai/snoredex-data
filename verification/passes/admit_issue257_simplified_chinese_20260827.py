@@ -92,6 +92,13 @@ SOURCES = {
         "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing.",
         tier="official-primary",
     ),
+    "pokemon-cn-happy-set-4-reward-pack": {
+        **source("https://www.pokemon.cn/tcg/product/21022.html",
+                 "Official Mainland China Simplified Chinese Reward Pack specification",
+                 "The fourteen Reward Pack cards are explicitly foil cards. This positive statement applies to p006/006, not to the separately described Modification Pack or paired decks.",
+                 tier="official-primary", coverage="positive-only"),
+        "retrievedAt": "2026-10-06",
+    },
     "pokemon-cn-departure-special-pack": source(
         "https://www.pokemon.cn/tcg/product/15499.html",
         "Official Mainland China Simplified Chinese product specification",
@@ -196,25 +203,8 @@ OVERRIDES = [
         "printings": [printing("non-holo", "pokemon-cn-battle-party-dream-decks", distribution={"kind": "fixed-deck", "name": "Battle Party Shining Dream flat-card deck"})],
     },
     {
-        "setCode": "CSVH1C", "number": "a001", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-1-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 1 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-1-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 1 foil deck"}),
-        ],
-    },
-    {
-        "setCode": "CSVH4C", "number": "a003", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 foil deck"}),
-        ],
-    },
-    {
         "setCode": "CSVH4C", "number": "p006", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 foil deck"}),
-        ],
+        "printings": [printing("holo", "pokemon-cn-happy-set-4-reward-pack", distribution={"kind": "special-pack", "name": "Happy Set 4 Reward Pack"})],
     },
     {
         "setCode": "CSVL1C", "number": "109", "languages": ["S-Chinese"],
@@ -738,6 +728,28 @@ def write(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
+def correct_happy_set_pack_scopes(finish: dict) -> None:
+    retired = {("CSVH1C", "a001"), ("CSVH4C", "a003")}
+    reward = next(row for row in OVERRIDES
+                  if row["setCode"] == "CSVH4C" and row["number"] == "p006")
+    result = []
+    found = False
+    for row in finish["overrides"]:
+        key = (row["setCode"], row["number"])
+        if key in retired:
+            continue
+        if key == ("CSVH4C", "p006"):
+            if found:
+                continue
+            row = reward
+            found = True
+        result.append(row)
+    if not found:
+        result.append(reward)
+    finish["overrides"] = result
+    finish["sources"]["pokemon-cn-happy-set-4-reward-pack"] = SOURCES["pokemon-cn-happy-set-4-reward-pack"]
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -759,6 +771,7 @@ def main() -> int:
             continue
         updated_overrides.append(issue_rows.pop(key, row))
     finish["overrides"] = updated_overrides + list(issue_rows.values())
+    correct_happy_set_pack_scopes(finish)
     finish["meta"]["lastUpdated"] = "2026-09-02"
 
     prints = read(PRINTS)

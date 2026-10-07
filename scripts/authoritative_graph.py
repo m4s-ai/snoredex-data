@@ -1875,10 +1875,11 @@ def _validate_refs(
             errors.append(f"catalogue release edition edge is missing: {ref_id}")
 
 # Source-native rarity claims.
-def _rarity_native_mappings(catalogue: dict[str, Any]) -> dict[tuple[str, str, str], str]:
+def _rarity_native_mappings(catalogue: dict[str, Any]) -> dict[tuple[str, str, str, str | None], str]:
     return {
-        (scope["locality"], scope["sourceVocabulary"], native): rarity_id
+        (scope["locality"], scope["sourceVocabulary"], native, release_id): rarity_id
         for scope in catalogue.get("sourceNativeMappings", [])
+        for release_id in scope.get("cardReleaseIds", [None])
         for native, rarity_id in scope.get("values", {}).items()
     }
 
@@ -1888,16 +1889,20 @@ def _validate_rarity_catalogue_refs(
     rarities: dict[str, dict[str, Any]],
     releases: dict[str, dict[str, Any]],
     rarity_ids: set[str],
-    native_mappings: dict[tuple[str, str, str], str],
+    native_mappings: dict[tuple[str, str, str, str | None], str],
 ) -> None:
     for rarity_id, rarity in rarities.items():
         normalized_id = rarity.get("normalizedRarityId")
         release = releases.get(rarity.get("cardReleaseId"))
-        expected_id = native_mappings.get((
+        native_key = (
             release.get("locality"),
             rarity.get("sourceVocabulary"),
             rarity.get("sourceNativeValue"),
-        )) if release else None
+        ) if release else None
+        expected_id = native_mappings.get(
+            (*native_key, rarity.get("cardReleaseId")),
+            native_mappings.get((*native_key, None)),
+        ) if native_key else None
         if normalized_id is None:
             if expected_id is not None:
                 errors.append(

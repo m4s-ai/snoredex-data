@@ -76,7 +76,7 @@ OFFICIAL = [
     card("SPEC-0238", "s10b", "056/071", "Snorlax-Block-Collapse", "U0202", ("R", "rare"), "S/S10b/S10b_056.png", provider_record="BS2022010056"),
     card("SPEC-0239", "s2", "077/096", "Snorlax-Collect-Collapse", "U0532", ("U", "uncommon"), "S/S2/S2_077.png"),
     card("SPEC-0240", "s4", "084/100", "Snorlax-Gormandize-Body-Slam", "U0291", ("R", "rare"), "S/S4/S4_084.png", provider_record="BS2020014084"),
-    card("SPEC-0241", "s8b", "126/184", "Snorlax-Gormandize-Body-Slam", "U0173", ("no printed rarity symbol", "fixed"), "S/S8b/S8b_126.png", provider_record="BS2022001126"),
+    card("SPEC-0241", "s8b", "126/184", "Snorlax-Gormandize-Body-Slam", "U0173", ("no printed rarity symbol", None), "S/S8b/S8b_126.png", provider_record="BS2022001126"),
     card("SPEC-0242", "sI", "341/414", "Snorlax-Heavy-Impact", "U0653", ("no printed rarity symbol", "fixed"), "S/SI/SI_341.png"),
     card("SPEC-0243", "sI", "342/414", "Snorlax-Heavy-Impact", "U0657", ("no printed rarity symbol", "fixed"), "S/SI/SI_342.png"),
     card("SPEC-0244", "s1H", "045/060", "Snorlax-V-Swallow-Falling-Down", "U0511", ("RR", "double-rare"), "S/S1H/S1H_045.png", card_name="Snorlax V"),

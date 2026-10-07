@@ -580,7 +580,44 @@ def verify_standalone_printing_identity() -> None:
                and row["toId"] == holo["physicalPrintingId"] for row in result["edges"])
 
 
+def verify_research_correction() -> None:
+    sys.path.insert(0, str(ROOT / "verification/passes"))
+    import integrate_rarity_finish_research_20261007 as correction
+    names = ["authoritative_graph.json", "set_catalogue_sources.json", "source_first_prints.json", "legacy_issue_rekeys.json", "finish_overrides.json"]
+    documents = [correction.read(name) for name in names]
+    before = deepcopy(documents)
+    correction.apply(documents)
+    assert documents == before, "canonical correction replay must be unchanged"
+    mappings = graph_module._rarity_native_mappings(correction.read("rarity_catalogue.json"))
+    assert all(key[3] is not None for key in mappings
+               if key[2] == "no printed rarity symbol"), "no generic symbol-to-Fixed mapping"
+    claims = [row["payload"] for row in documents[0]["entities"]
+              if row["entityType"] == "rarity-claim"
+              and row["payload"].get("sourceNativeValue") == "no printed rarity symbol"]
+    fixed = [row for row in claims if row.get("normalizedRarityId") == "fixed"]
+    assert len(fixed) == 18, "retain all positively scoped deck mappings"
+    unresolved = [row for row in claims if row.get("normalizedRarityId") is None
+                  and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")]
+    assert len(unresolved) == 5, "five booster rarities remain native, not invented Fixed/Common"
+    for row in unresolved:
+        row["normalizedRarityId"] = "fixed"
+    correction.apply(documents)
+    assert documents == before, "repair every sibling booster, preserving unrelated stores"
+    graph, catalogue, prints, rekeys, overrides = documents
+    classic = next(row for row in prints["prints"] if row["printId"] == "KR:CLF:016/032:base")
+    assert classic["specimenId"] == "SPEC-0616" and classic["retrievedAt"] == "2026-10-07"
+    assert not any("KR:CLF:016/034" in row["printId"] for row in prints["prints"])
+    keys = {(row["setCode"], row["number"]): row for row in overrides["overrides"]}
+    assert ("CSVH1C", "a001") not in keys and ("CSVH4C", "a003") not in keys
+    reward = keys[("CSVH4C", "p006")]["printings"]
+    assert len(reward) == 1 and reward[0]["finish"] == "holo"
+    assert reward[0]["distribution"]["kind"] == "special-pack"
+    assert not any(row["payload"].get("localSetCode") == "SM-P"
+                   for row in graph["entities"] if row["entityType"] == "release-event")
+
+
 def main() -> None:
+    verify_research_correction()
     verify_standalone_printing_identity()
     # A retained legacy specimen may follow its reviewed local re-key, but not a neighbour.
     specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
@@ -715,7 +752,7 @@ def main() -> None:
         )["prints"]
     }
     unmatched_korean = {
-        "KR:CLF:016/034:base", "KR:s1H:070/060:base", "KR:sm9:115/095:base",
+        "KR:s1H:070/060:base", "KR:sm9:115/095:base",
         "KR:s5a:093/070:base", "KR:20th:047/072:base",
         "KR:xsv2a:143/165:base", "KR:xm2a:136/193:base",
     }
@@ -792,7 +829,7 @@ def main() -> None:
     )
     assert len(catalogue_rows) == 52
     assert {row["printId"] for row in catalogue_rows} == (
-        official_korean | unmatched_korean
+        official_korean | unmatched_korean | {"KR:CLF:016/032:base"}
     )
     assert {
         row["printId"] for row in catalogue_rows if not row.get("work")
@@ -988,7 +1025,7 @@ def main() -> None:
     product_url = sm30a_row["raritySourceUrl"]
     detail_url, membership_url = sm30a_row["raritySupportingSourceUrls"]
     assert source_registry[product_url]["providerId"] == "pokemon-card-korea"
-    assert source_registry[product_url]["dimensions"] == ["rarity"]
+    assert {"rarity", "date", "finish"} <= set(source_registry[product_url]["dimensions"])
     assert sm30a_row["printId"] in source_registry[product_url]["stableIds"]
     assert "set-membership" in source_registry[detail_url]["dimensions"]
     assert source_registry[membership_url]["dimensions"] == ["set-membership"]
@@ -1036,7 +1073,7 @@ def main() -> None:
     same_work_assertions = [
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "equivalence-assertion"
-        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean
+        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean | {"KR:CLF:016/032:base"}
     ]
     unmatched_assertions = [
         row for row in same_work_assertions

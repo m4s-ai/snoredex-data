@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-10-05",
+ "generated": "2026-10-07",
  "note": "One row per card-variant-edition. confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order. Use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -23218,7 +23218,8 @@
        "productMapping": "mapped",
        "image": "verification/specimens/SPEC-0212.jpg",
        "specimenIds": [
-        "SPEC-0212"
+        "SPEC-0212",
+        "SPEC-0610"
        ]
       },
       {
@@ -24001,24 +24002,42 @@
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0418",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0418-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": null,
+       "distribution": {
+        "kind": "fixed-deck",
+        "name": "Korean localized sN deck"
+       },
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped"
+      }
+     ]
     },
     {
      "language": "T-Chinese",
@@ -24060,7 +24079,7 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
-    "Korean": "pending",
+    "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
    },
    "languageEvidence": {
@@ -29683,19 +29702,20 @@
       "non-holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo"
+      "non-holo",
+      "mirror-holo"
      ],
      "finishStatus": {
       "non-holo": "marketplace-claimed",
       "holo": "pending",
       "reverse-holo": "pending",
-      "mirror-holo": "pending"
+      "mirror-holo": "unmapped"
      },
      "unitFinishStatus": {
       "non-holo": "marketplace-claimed",
       "holo": "pending",
       "reverse-holo": "pending",
-      "mirror-holo": "pending"
+      "mirror-holo": "confirmed"
      },
      "status": "marketplace-claimed",
      "finishUnitId": "F0462",
@@ -29710,6 +29730,20 @@
        "cardSize": "standard",
        "verificationStatus": "marketplace-claimed",
        "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0462-P02",
+       "finish": "mirror-holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "unresolved",
+       "image": "verification/specimens/SPEC-0617.png",
+       "specimenIds": [
+        "SPEC-0617"
+       ]
       }
      ]
     },
@@ -30275,7 +30309,8 @@
        "productMapping": "mapped",
        "image": "verification/specimens/SPEC-0061.jpg",
        "specimenIds": [
-        "SPEC-0061"
+        "SPEC-0061",
+        "SPEC-0612"
        ]
       }
      ]
@@ -31550,24 +31585,43 @@
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0036",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0036-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0616.png",
+       "specimenIds": [
+        "SPEC-0616"
+       ]
+      }
+     ]
     },
     {
      "language": "T-Chinese",
@@ -31616,7 +31670,7 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
-    "Korean": "pending",
+    "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only"
    },
    "languageEvidence": {
@@ -32917,20 +32971,22 @@
      "language": "Japanese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo"
+      "non-holo",
+      "holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo"
+      "non-holo",
+      "holo"
      ],
      "finishStatus": {
       "non-holo": "confirmed",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "confirmed",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
@@ -32947,30 +33003,63 @@
        "cardSize": "standard",
        "verificationStatus": "confirmed",
        "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0476-P02",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0611.png",
+       "specimenIds": [
+        "SPEC-0611"
+       ]
       }
      ]
     },
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0477",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0477-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "unknown",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0613.png",
+       "specimenIds": [
+        "SPEC-0613"
+       ]
+      }
+     ]
     },
     {
      "language": "T-Chinese",
@@ -33090,7 +33179,7 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
-    "Korean": "pending",
+    "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
@@ -35320,7 +35409,7 @@
         {
          "kind": "observed-marking",
          "role": "print-identity",
-         "text": "F rarity symbol"
+         "text": "F regulation mark"
         }
        ],
        "distribution": null,
@@ -35797,7 +35886,7 @@
         {
          "kind": "observed-marking",
          "role": "print-identity",
-         "text": "F rarity symbol"
+         "text": "F regulation mark"
         }
        ],
        "distribution": null,
@@ -36381,61 +36470,28 @@
     {
      "language": "S-Chinese",
      "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "holo"
-     ],
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
      "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "confirmed",
+      "non-holo": "pending",
+      "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "confirmed",
+      "non-holo": "pending",
+      "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "confirmed",
+     "status": "pending",
      "finishUnitId": "F0079",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0079-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 1 ordinary deck"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0079-P02",
-       "finish": "holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 1 foil deck"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
+     "productMappingStatus": "pending",
+     "printings": []
     }
    ],
    "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
+    "S-Chinese": "pending"
    },
    "languageEvidence": {
     "S-Chinese": {
@@ -42831,61 +42887,28 @@
     {
      "language": "S-Chinese",
      "claimStatus": "confirmed",
-     "availableFinishes": [
-      "non-holo",
-      "holo"
-     ],
-     "unitAvailableFinishes": [
-      "non-holo",
-      "holo"
-     ],
+     "availableFinishes": [],
+     "unitAvailableFinishes": [],
      "finishStatus": {
-      "non-holo": "confirmed",
-      "holo": "confirmed",
+      "non-holo": "pending",
+      "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "confirmed",
-      "holo": "confirmed",
+      "non-holo": "pending",
+      "holo": "pending",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "confirmed",
+     "status": "pending",
      "finishUnitId": "F0080",
-     "productMappingStatus": "confirmed",
-     "printings": [
-      {
-       "printingId": "F0080-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 4 ordinary deck"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0080-P02",
-       "finish": "holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 4 foil deck"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      }
-     ]
+     "productMappingStatus": "pending",
+     "printings": []
     }
    ],
    "finishCompletenessByLanguage": {
-    "S-Chinese": "positive-evidence-only"
+    "S-Chinese": "pending"
    },
    "languageEvidence": {
     "S-Chinese": {
@@ -42930,21 +42953,19 @@
      "language": "S-Chinese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo",
       "holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo",
       "holo"
      ],
      "finishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
@@ -42955,25 +42976,12 @@
      "printings": [
       {
        "printingId": "F0081-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 4 ordinary deck"
-       },
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0081-P02",
        "finish": "holo",
        "foilPattern": null,
        "markings": null,
        "distribution": {
-        "kind": "fixed-deck",
-        "name": "Happy Set 4 foil deck"
+        "kind": "special-pack",
+        "name": "Happy Set 4 Reward Pack"
        },
        "cardSize": "standard",
        "verificationStatus": "confirmed",

@@ -7,11 +7,11 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 504,
+      "sourceRecords": 529,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 73,
-      "editionAvailabilityRecords": 12,
+      "releaseDateRecords": 97,
+      "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
     }
@@ -9119,22 +9119,23 @@
           "Hang"
         ],
         "printIds": [
-          "KR:CLF:016/034:base"
+          "KR:CLF:016/032:base"
         ],
         "providers": [
           "bulbapedia"
         ],
         "sourceUrls": [
-          "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)"
+          "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)",
+          "https://www.ebay.com/itm/197250301809"
         ],
         "retrievedByPrintId": {
-          "KR:CLF:016/034:base": "2026-08-30"
+          "KR:CLF:016/032:base": "2026-10-07"
         },
-        "printedSetSize": 34,
-        "printedSetSizeBasis": "the denominator printed on every observed card",
+        "printedSetSize": 32,
+        "printedSetSizeBasis": "Korean original photograph SPEC-0616; earlier foreign /034 inference superseded.",
         "localeSuffix": null,
         "observedCollectorNumbers": [
-          "016/034"
+          "016/032"
         ],
         "observedCoverage": "exact positive Korean Snorlax cards reviewed for issue #260, not a set enumeration",
         "markAssetUrls": [],
@@ -15516,6 +15517,564 @@
           "completenessClaim": false,
           "basis": "The retained article explicitly names the Indonesian deck and 111/159, and states its cards lack Holofoil treatment. Existing official identity specimens establish the printed scD I code. Positive finish only."
         }
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-KR-SM30A-060-080-FINISH-20261007",
+      "sourceKind": "edition-availability-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/277#SM30A:060/080:finish",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/277",
+      "raw": {
+        "localCode": "SM30A",
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "physicalPrintingEvidence": {
+          "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+          "sourceUrl": "https://pokemoncard.co.kr/card/277",
+          "finish": "non-holo",
+          "edition": null,
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "specimenIds": [],
+          "positiveOnly": true,
+          "completenessClaim": false,
+          "basis": "The exact Korean Random 30-card Deck explicitly has no Holo cards; retained official SM30A 060/080 detail establishes product membership. Positive Non-Holo only; no complete finish list."
+        },
+        "evidenceBundle": "verification/evidence/rarity-finish-research-20261006"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-30thC-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "https://www.pokemon.cn/tcg/product/22237.html#launch:CN:30thC",
+      "retrieved": "2026-10-05",
+      "sourceUrl": "https://www.pokemon.cn/tcg/product/22237.html",
+      "raw": {
+        "localCode": "30thC",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "date": "2026-09-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CS4DaC-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "https://www.pokemon.cn/tcg/product/15882.html#launch:CN:CS4DaC",
+      "retrieved": "2026-10-05",
+      "sourceUrl": "https://www.pokemon.cn/tcg/product/15882.html",
+      "raw": {
+        "localCode": "CS4DaC",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "date": "2024-05-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-BW7-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/9#launch:KR:BW7",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/9",
+      "raw": {
+        "localCode": "BW7",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2013-03-01",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-CLF-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/590#launch:KR:CLF",
+      "retrieved": "2026-10-07",
+      "sourceUrl": "https://pokemoncard.co.kr/card/590",
+      "raw": {
+        "localCode": "CLF",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2023-12-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-FXY-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/30#launch:KR:FXY",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/30",
+      "raw": {
+        "localCode": "FXY",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2014-03-04",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-SM-P-017-SM-P-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/105#017-SM-P:KR:SM-P",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/105",
+      "raw": {
+        "localCode": "SM-P",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2017-04-07",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Exact named promo only; not the whole promo sequence."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-SM30A-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/277#launch:KR:SM30A",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/277",
+      "raw": {
+        "localCode": "SM30A",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2019-12-24",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-m2a-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/859#launch:KR:m2a",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/859",
+      "raw": {
+        "localCode": "m2a",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2026-01-23",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-m3-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/869#launch:KR:m3",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/869",
+      "raw": {
+        "localCode": "m3",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2026-03-13",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-mC-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/864#launch:KR:mC",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/864",
+      "raw": {
+        "localCode": "mC",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2026-02-13",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sA-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/282#launch:KR:sA",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/282",
+      "raw": {
+        "localCode": "sA",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2020-01-10",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sH-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/394#launch:KR:sH",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/394",
+      "raw": {
+        "localCode": "sH",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2021-11-27",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sI-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/416#launch:KR:sI",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/416",
+      "raw": {
+        "localCode": "sI",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2022-04-23",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sN-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/436#launch:KR:sN",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/436",
+      "raw": {
+        "localCode": "sN",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2022-05-27",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sm10-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/180#launch:KR:sm10",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/180",
+      "raw": {
+        "localCode": "sm10",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2019-05-10",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sm9-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/156#launch:KR:sm9",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/156",
+      "raw": {
+        "localCode": "sm9",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2019-01-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-smL-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/186#launch:KR:smL",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/186",
+      "raw": {
+        "localCode": "smL",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2019-05-03",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-sv4K-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/579#launch:KR:sv4K",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/579",
+      "raw": {
+        "localCode": "sv4K",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2023-11-30",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-svG-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/583#launch:KR:svG",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/583",
+      "raw": {
+        "localCode": "svG",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2023-12-13",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-svI-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/628#launch:KR:svI",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/628",
+      "raw": {
+        "localCode": "svI",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2024-04-20",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-svLN-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/665#launch:KR:svLN",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/665",
+      "raw": {
+        "localCode": "svLN",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2024-10-02",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-svM-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/692#launch:KR:svM",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/692",
+      "raw": {
+        "localCode": "svM",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2024-12-20",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-xm2a-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/859#launch:KR:xm2a",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/859",
+      "raw": {
+        "localCode": "xm2a",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2026-01-23",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-xsv2a-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/551#launch:KR:xsv2a",
+      "retrieved": "2026-10-06",
+      "sourceUrl": "https://pokemoncard.co.kr/card/551",
+      "raw": {
+        "localCode": "xsv2a",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2023-07-28",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
       }
     }
   ]
