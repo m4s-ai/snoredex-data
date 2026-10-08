@@ -633,6 +633,17 @@ def verify_research_correction() -> None:
     assert source["provider"] == "bulbapedia"
     assert source["sourceUrl"] == bs2["releaseDateSourceUrl"]
     assert event["marketScopes"] == ["KR"]
+    xy10 = next(row for row in prints["prints"] if row["printId"] == "KR:XY10:057/078:base")
+    assert xy10["releaseDate"] == "2016-03-24"
+    assert xy10["releaseDateProviderId"] == "pokemon-card-korea"
+    assert xy10["releaseDateRetrievedAt"] == "2026-10-08"
+    assert xy10["releaseDateSourceUrl"] == "https://pokemoncard.co.kr/card/65"
+    date_record = next(row for row in catalogue["sourceRecords"]
+                       if row["sourceRecordId"] == xy10["releaseDateSourceRecordId"])
+    assert date_record["raw"]["conflictingHeaderDate"] == "2016-03-01"
+    assert date_record["raw"]["assertionDate"] == "2017-03-29"
+    assert date_record["raw"]["corroboratingAnnouncement"]["publishedAt"].startswith("2016-03-11")
+    assert date_record["raw"]["corroboratingAnnouncement"]["ownStockArrivalDate"] == "explicitly unknown"
     # The bounded CN helper cannot alter finishes, aliases or unrelated source-first rows.
     bounded_before = deepcopy(documents)
     correction.admit_cn_followup(graph, catalogue, prints)

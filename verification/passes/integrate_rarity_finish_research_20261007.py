@@ -280,6 +280,22 @@ def apply(documents):
     admit_date(graph, catalogue, releases, prints, rid, bs2_date["releaseDate"],
                bs2_date["sourceUrl"], bs2_date["retrieved"], provider=bs2_date["providerId"],
                source_basis=bs2_date["identityBasis"])
+    xy10_date = json.loads((ROOT / "verification/evidence/xy10-korean-release-date-20261008/research.json").read_text(encoding="utf-8"))
+    rid = next(key for key, release in releases.items()
+               if release.get("locality") == "KR" and release.get("localSetCode") == "XY10"
+               and release.get("localNumber") == "057/078")
+    releases[rid]["sourceRecords"] = sorted(set(releases[rid].get("sourceRecords", []) + [xy10_date["officialSourceUrl"]]))
+    admit_date(graph, catalogue, releases, prints, rid, xy10_date["supportedReleaseDate"],
+               xy10_date["officialSourceUrl"], xy10_date["retrievedAt"], provider="pokemon-card-korea",
+               source_basis=xy10_date["determination"])
+    date_record = next(row for row in catalogue["sourceRecords"]
+                       if row["sourceRecordId"] == "SET-SRC-RESEARCH-DATE-KR-XY10-launch-20261007")
+    date_record["raw"].update(
+        assertionDate=xy10_date["officialObservation"]["errataAddedAt"],
+        conflictingHeaderDate=xy10_date["officialObservation"]["conflictingHeaderDate"],
+        evidenceBundle="verification/evidence/xy10-korean-release-date-20261008",
+        corroboratingAnnouncement=xy10_date["contemporaneousSource"])
+    source_record(graph, catalogue, date_record, "EVENT:KR:XY10:launch-2016-03-24", "release-event")
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

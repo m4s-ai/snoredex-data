@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 532,
+      "sourceRecords": 533,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 100,
+      "releaseDateRecords": 101,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -16191,6 +16191,39 @@
         "status": "released",
         "marketScopeBasis": "The article explicitly names the Korean 40-card expansion and Snorlax 30/40; retained SPEC-0037 and reviewed KR:BS2:30/40:base bind that exact release to local code BS2.",
         "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-XY10-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemoncard.co.kr/card/65#launch:KR:XY10",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://pokemoncard.co.kr/card/65",
+      "raw": {
+        "localCode": "XY10",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2016-03-24",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "March 24 is supported by explicit official retrospective launch wording and a pre-launch March 11 retailer announcement. The March 1 header conflict remains retained; no foreign market date substituted.",
+        "note": "Localized product launch; prerelease and later reprints not asserted.",
+        "assertionDate": "2017-03-29",
+        "conflictingHeaderDate": "2016-03-01",
+        "evidenceBundle": "verification/evidence/xy10-korean-release-date-20261008",
+        "corroboratingAnnouncement": {
+          "url": "https://tcgbox.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/24/",
+          "publishedAt": "2016-03-11T21:54:18+09:00",
+          "expectedReleaseDate": "2016-03-24",
+          "ownStockArrivalDate": "explicitly unknown",
+          "retainedArticle": "tcgbox-announcement.json",
+          "originalSha256": "8c408079a892ff2e65c2e8ecb014096033b33e7e0c50868da5331ecf92d819e4"
+        }
       }
     }
   ]
