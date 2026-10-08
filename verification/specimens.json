@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 626,
+  "count": 627,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -13311,6 +13311,24 @@
         "basis": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown."
       },
       "listingUrl": "https://www.ebay.com/itm/286684964904"
+    },
+    {
+      "specimenId": "SPEC-0627",
+      "setCode": "SM30A",
+      "number": "060/080",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Original publisher digital render; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0627.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
+      "photographSha256": "sha256:150865c994251fb8b96e5b0e8fd8afb48f7ac1400485c337030eae1c4e8ebee2",
+      "observed": "Publisher digital render visibly Korean 잠만보, SM30A C060/080, HP150, Akira Komayama. Exact localized identity and retained image only. Digital imagery is not physical finish evidence; existing separate product-text finish evidence is unchanged.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:SM30A:060/080:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060"
     }
   ]
 }

@@ -100,7 +100,7 @@ def new_rows() -> list[dict[str, Any]]:
         ],
         "rarityProviderId": "pokemon-card-korea",
         "rarityRetrievedAt": REVIEWED_AT,
-        "specimenId": None,
+        "specimenId": "SPEC-0627",
         "cardName": "Snorlax",
         "providerId": "pokemon-card-korea",
         "providerRecordId": "BS2019018060",

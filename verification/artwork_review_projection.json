@@ -3,21 +3,21 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-07",
-  "projectionVersion": "e6db00a9aedf3e1056d3a931c9e010ca9bcd6c77363863e968719c0755df8610",
+  "generated": "2026-10-08",
+  "projectionVersion": "deca585d325e36313151a1c7b966a7e686b1066fc744878abab853efc2459034",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
     "groups": 251,
     "mappedWorks": 42,
-    "imageGroups": 250,
+    "imageGroups": 251,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
-    "unmappedReleases": 1,
+    "unmappedReleases": 0,
     "cardReleases": 633,
     "physicalPrintings": 857,
-    "sourceObservations": 3103
+    "sourceObservations": 3104
   },
   "groups": [
     {
@@ -47137,6 +47137,116 @@
               "evidence": "es card 'Snorlax' id=swsh8-206 localId=206",
               "contentHash": "4cb52d53e760d25c8a9387427c3b94f3e4c48e52ec6375fbf12a92dc6024c7fc",
               "image": "images/FST_206_Snorlax_582903.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "groupId": "IMAGE-GROUP:150865c994251fb8b96e5b0e",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:150865c994251fb8b96e5b0e",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Incredible-Snore"
+      ],
+      "cardKeys": [
+        "Snorlax-Incredible-Snore"
+      ],
+      "label": "Snorlax-Incredible-Snore",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+          "workId": "WORK:Snorlax-Incredible-Snore",
+          "cardKey": "Snorlax-Incredible-Snore",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:150865c994251fb8b96e5b0e",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "KR",
+          "language": "Korean",
+          "script": "Hang",
+          "setEditionId": "EDITION:KR:Korean:SM30A",
+          "localSetCode": "SM30A",
+          "localNumber": "060/080",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped",
+          "legacyCounterpartUnitIds": [],
+          "legacyVariants": [],
+          "physicalPrintings": [
+            {
+              "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "specimenIds": [],
+              "physicalPrintingId": "PRINTING:129220905116c11d540a2406",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "sourceRecordIds": [
+                "SET-SRC-KR-SM30A-060-080-FINISH-20261007"
+              ],
+              "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-KR-SM30A-060-080-FINISH-20261007"
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "잠만보",
+            "artist": null,
+            "variant": null,
+            "finish": [
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
+              "label": "publisher card image",
+              "observationId": "source-first:KR:SM30A:060/080:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0627.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0627",
+              "contentHash": "150865c994251fb8b96e5b0e8fd8afb48f7ac1400485c337030eae1c4e8ebee2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "150865c994251fb8b96e5b0e8fd8afb48f7ac1400485c337030eae1c4e8ebee2",
+              "previewSrc": "images/previews/SPEC-0627.png?v=0a262bc7ab78c762bcf8ec06ec79515630c72d432e4977b283fb82c374ad7448",
+              "thumbnailSrc": "images/thumbs/SPEC-0627.png?v=9e808e7aa8799220d44f28b7e5b039dfeba4927fac3c6303e7a599ad5877c22e"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:KR:SM30A:060/080:base",
+              "kind": "source-first",
+              "provider": "pokemon-card-korea",
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 SM30A 060/080 in 썬&문 「랜덤30장덱」, with illustrator Akira Komayama and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
+              "contentHash": "b4320d1e0eb828bd7b63cf486899c77fadaeed91268a694f1eb31bec8f21564f",
+              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512"
+            },
+            {
+              "observationId": "specimen:SPEC-0627",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+              "evidence": "Publisher digital render visibly Korean 잠만보, SM30A C060/080, HP150, Akira Komayama. Exact localized identity and retained image only. Digital imagery is not physical finish evidence; existing separate product-text finish evidence is unchanged.",
+              "contentHash": "c5e8544451ed011c094b2d0cd18f15f31b4a85b465153b000e9699c3a8270c83",
+              "image": "verification/specimens/SPEC-0627.png"
             }
           ]
         }
@@ -102048,96 +102158,6 @@
               "evidence": "Owner (domain expert) confirms Prismatic Evolutions: Additionals Snorlax ex (xPRE 076) exists in Spanish. Confirmed languages: French, German, Italian and European Spanish. NOTE the owner explicitly does NOT confirm Portuguese or Latin-American Spanish; Cardmarket \"Spanish\" is European Spanish (the confirmed one). English was already documented from the Prismatic Evolutions set list.",
               "contentHash": "641394d1f6b995bdff640562022aeec96ad38e3fd5f5c8b444b87f51c5d698b3",
               "image": "images/xPRE_076_Snorlax_ex_V2_841279.jpg"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "RELEASE-GROUP:RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
-      "groupKind": "unmapped-release",
-      "reviewedAppearanceId": null,
-      "imageGroupId": null,
-      "appearanceIdentityState": "unresolved-release",
-      "workIds": [
-        "WORK:Snorlax-Incredible-Snore"
-      ],
-      "cardKeys": [
-        "Snorlax-Incredible-Snore"
-      ],
-      "label": "Snorlax-Incredible-Snore",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
-          "workId": "WORK:Snorlax-Incredible-Snore",
-          "cardKey": "Snorlax-Incredible-Snore",
-          "reviewedAppearanceId": null,
-          "imageGroupId": null,
-          "appearanceIdentityState": "unresolved-release",
-          "locality": "KR",
-          "language": "Korean",
-          "script": "Hang",
-          "setEditionId": "EDITION:KR:Korean:SM30A",
-          "localSetCode": "SM30A",
-          "localNumber": "060/080",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [],
-          "physicalPrintings": [
-            {
-              "cardReleaseId": "RELEASE:KR:Korean:SM30A:060/080:Snorlax-Incredible-Snore",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "unknown",
-              "specimenIds": [],
-              "physicalPrintingId": "PRINTING:129220905116c11d540a2406",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "sourceRecordIds": [
-                "SET-SRC-KR-SM30A-060-080-FINISH-20261007"
-              ],
-              "establishingClaimId": "CLAIM:reviewed-positive-evidence:SET-SRC-KR-SM30A-060-080-FINISH-20261007"
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "잠만보",
-            "artist": null,
-            "variant": null,
-            "finish": [
-              "non-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
-              "label": "publisher card image",
-              "observationId": "source-first:KR:SM30A:060/080:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:KR:SM30A:060/080:base",
-              "kind": "source-first",
-              "provider": "pokemon-card-korea",
-              "url": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
-              "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 SM30A 060/080 in 썬&문 「랜덤30장덱」, with illustrator Akira Komayama and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
-              "contentHash": "3943411dc4667439a47a8edee4e5459f850e9bd2c9f99f17dd9dcf49471cbc56",
-              "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512"
             }
           ]
         }

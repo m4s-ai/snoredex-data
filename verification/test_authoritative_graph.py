@@ -609,6 +609,8 @@ def verify_research_correction() -> None:
     correction.apply(documents)
     assert documents == before, "repair every sibling booster, preserving unrelated stores"
     graph, catalogue, prints, rekeys, overrides = documents
+    sm30a = next(row for row in prints["prints"] if row["printId"] == "KR:SM30A:060/080:base")
+    assert sm30a["specimenId"] == "SPEC-0627", "retain the exact publisher image through admission replay"
     for code, number, specimen, *_ in correction.CN_DECK_RARITIES:
         print_row = next(row for row in prints["prints"] if row["printId"] == f"CN:{code}:{number}:base")
         assert print_row["rarity"] == ["no printed rarity symbol", "fixed"]

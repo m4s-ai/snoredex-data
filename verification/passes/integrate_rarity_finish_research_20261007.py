@@ -161,6 +161,8 @@ def admit_cn_followup(graph, catalogue, prints):
 
 def apply(documents):
     graph, catalogue, prints, rekeys, overrides = documents
+    # Retained publisher render supports this exact image, not a physical finish.
+    next(row for row in prints["prints"] if row["printId"] == "KR:SM30A:060/080:base")["specimenId"] = "SPEC-0627"
     # The old denominator came from a shared foreign-language set list. Rekey the
     # coordinated identity graph, never unrelated localities or historical captures.
     replacements = [("KR:CLF:016/034", "KR:CLF:016/032"),

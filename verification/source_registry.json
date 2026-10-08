@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-07",
+  "generated": "2026-10-08",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -13,7 +13,7 @@
    "evidenceRecords": 1716,
    "uniqueUrls": 1708,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6739
+   "claimsAttributed": 6743
   }
  },
  "providers": [
@@ -147,7 +147,7 @@
     "www.pokemonkorea.co.kr"
    ],
    "uniqueSources": 125,
-   "claimsSupported": 274
+   "claimsSupported": 278
   },
   {
    "providerId": "tcgdex",
@@ -19613,17 +19613,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified",
     "Positive source-first card record"
    ],
    "dimensions": [
-    "card-release"
+    "card-release",
+    "identity"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:SM30A:060/080:base"
+    "KR:SM30A:060/080:base",
+    "SPEC-0627"
    ],
-   "retrievedAt": "2026-09-01",
-   "usageCount": 1
+   "retrievedAt": "2026-10-08",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM9/SM9_066.png?w=512",
@@ -20714,19 +20717,22 @@
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
    "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified",
     "Positive fixed-product membership record",
     "Positive source-first card record"
    ],
    "dimensions": [
     "card-release",
+    "identity",
     "set-membership"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "KR:SM30A:060/080:base"
+    "KR:SM30A:060/080:base",
+    "SPEC-0627"
    ],
-   "retrievedAt": "2026-09-01",
-   "usageCount": 2
+   "retrievedAt": "2026-10-08",
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
