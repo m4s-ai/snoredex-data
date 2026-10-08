@@ -2199,6 +2199,51 @@
             "zeroResultMeans": "unknown",
             "challenge": "A dated product containing DP006 does not date the entire promo series."
           }
+        },
+        {
+          "edgeId": "52poke-cn-battle-academy-membership",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "battle-academy"
+            ],
+            "timeRange": {
+              "start": "2026-01-16",
+              "end": "2026-01-16",
+              "basis": "Exact SVI Simplified Chinese card row and linked Battle Academy product only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "set-membership",
+            "card-release",
+            "identity"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Missing rows or images never prove absence."
+          },
+          "knownPositiveObservationId": "obs-52poke-cn-battle-academy-membership",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "Japanese portable deck finish statements",
+              "whole-set completeness",
+              "other card rows not inspected"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The exact Chinese046/066 row does not transfer Japanese finish or enumerate all local releases."
+          }
         }
       ]
     },
@@ -9464,6 +9509,38 @@
         "52poke-kr-special-set-2-date"
       ],
       "outcome": "Exact product date and positive card inclusion only."
+    },
+    {
+      "observationId": "obs-52poke-cn-battle-academy-membership",
+      "surfaceId": "52poke-wiki",
+      "kind": "known-positive",
+      "queryUrl": "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+      "queryParameters": {
+        "revision": "2536339"
+      },
+      "retrievedAt": "2026-10-08",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "language": "S-Chinese",
+          "localSetCode": "CSVSC",
+          "wikiShortcut": "CSVS",
+          "collectorNumber": "046/066",
+          "product": "对战学院",
+          "artist": "Po-Suzuki",
+          "sourceExcerpt": "对战学院 2026-01-16 — 046/066 Po-Suzuki",
+          "evidenceBundle": "verification/evidence/52poke-cn-local-identities-20261008"
+        }
+      },
+      "expectedIdentifiers": [
+        "046/066",
+        "对战学院",
+        "Po-Suzuki"
+      ],
+      "validatesEdges": [
+        "52poke-cn-battle-academy-membership"
+      ],
+      "outcome": "Exact positive localized card/product membership only; printed full code independently inspected in SPEC-0631."
     }
   ]
 }

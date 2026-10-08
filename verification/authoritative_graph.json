@@ -8681,6 +8681,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0080-P01",
+        "semanticPrintingId": "PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "materializedTargetId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0630"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:0e2eb04321e1400b948df754",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -9451,6 +9471,26 @@
         "proposedTargetId": "PHYSICAL:PRINTING:1f657eb323a64df95270b351",
         "materializedTargetId": "PHYSICAL:PRINTING:1f657eb323a64df95270b351",
         "reason": "finish printing record carries positive evidence"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0079-P01",
+        "semanticPrintingId": "PRINTING:1ff1064e744984b42a4648bd",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+        "materializedTargetId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0619"
+        ]
       }
     },
     {
@@ -29510,6 +29550,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:source-first:CN:CSVSC:046/066:base",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "claimId": "CLAIM:source-first:CN:CSVSC:046/066:base",
+        "claimKind": "card-release",
+        "sourceKind": "source-first-record",
+        "sourceId": "CN:CSVSC:046/066:base",
+        "sourceRecord": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "materializedTargetId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "reason": "positive source-first specimen/card record"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:source-first:ID:AC3D:120/172:base",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -37902,6 +37959,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0619",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0619",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0619",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:1ff1064e744984b42a4648bd, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0620",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -38051,6 +38125,40 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:b19651591491a38822d75cd2, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:b19651591491a38822d75cd2"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0630",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0630",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0630",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0631",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0631",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0631",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0631",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0631",
+        "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0631"
       }
     },
     {
@@ -39457,6 +39565,48 @@
         "sourceRecords": [
           "https://bulbapedia.bulbagarden.net/wiki/Journey_Theme_Pack_(ATCG)"
         ]
+      }
+    },
+    {
+      "entityType": "card-release",
+      "entityId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+        "locality": "CN",
+        "language": "S-Chinese",
+        "script": "Hans",
+        "localSetCode": "CSVSC",
+        "localNumber": "046/066",
+        "localIdentifierKnown": true,
+        "state": "identified",
+        "work": "Snorlax-Lazy-Press",
+        "workMappingState": "mapped-by-explicit-equivalence",
+        "viaLegacySetCode": null,
+        "viaLegacyNumber": null,
+        "claimIds": [
+          "CLAIM:source-first:CN:CSVSC:046/066:base"
+        ],
+        "establishingClaimIds": [
+          "CLAIM:source-first:CN:CSVSC:046/066:base"
+        ],
+        "nonEstablishingClaimIds": [],
+        "legacyVariants": [],
+        "legacyProducts": [],
+        "sourceRecords": [
+          "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+          "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+        ],
+        "sourceFirstRecordIds": [
+          "CN:CSVSC:046/066:base"
+        ],
+        "legacyCounterpartUnitIds": [
+          "U0646"
+        ],
+        "releaseDate": "2026-01-16",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -67101,6 +67251,17 @@
     },
     {
       "entityType": "catalogue-card-release-ref",
+      "entityId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+        "collectorNumber": "046/066",
+        "origin": "issue-257-source-first-evidence"
+      }
+    },
+    {
+      "entityType": "catalogue-card-release-ref",
       "entityId": "RELEASE:CN:S-Chinese:CSZC:018:Snorlax-Unfazed-Fat-Thumping-Snore",
       "origin": "authoritative-set-catalogue-migration",
       "payload": {
@@ -76105,6 +76266,24 @@
     },
     {
       "entityType": "equivalence-assertion",
+      "entityId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "assertionId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "toId": "WORK:Snorlax-Lazy-Press",
+        "legacyUnitId": "U0646",
+        "sourceFirstRecordId": "CN:CSVSC:046/066:base",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-10-08",
+        "evidenceUrl": "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+        "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "entityType": "equivalence-assertion",
       "entityId": "ASSERT:same-work:U0648:KR:svI:046/066:base",
       "origin": "reviewed-evidence-issue-260",
       "payload": {
@@ -81593,6 +81772,21 @@
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
           "SET-SRC-CM-E1F7302D2348"
+        ]
+      }
+    },
+    {
+      "entityType": "local-set",
+      "entityId": "LOCALSET:CN:CSVSC",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "localSetId": "LOCALSET:CN:CSVSC",
+        "locality": "CN",
+        "localCode": "CSVSC",
+        "observedNames": [],
+        "productKind": "physical-card-set-or-product",
+        "sourceRecordIds": [
+          "SET-SRC-SF-9655F3BBDFFD"
         ]
       }
     },
@@ -96795,6 +96989,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "semanticPrintingId": "PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH4C:a003:Snorlax-But-First-Food-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0080",
+        "sourcePrintingId": "F0080-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+        "specimenIds": [
+          "SPEC-0630"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:0e2eb04321e1400b948df754",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -97615,6 +97833,30 @@
         "sourceFinishUnitId": "F0012",
         "sourcePrintingId": "F0012-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:1f657eb323a64df95270b351"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+        "semanticPrintingId": "PRINTING:1ff1064e744984b42a4648bd",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH1C:a001:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0079",
+        "sourcePrintingId": "F0079-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+        "specimenIds": [
+          "SPEC-0619"
+        ]
       }
     },
     {
@@ -107560,6 +107802,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0631",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0631",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0631",
+        "specimenIds": [
+          "SPEC-0631"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PRINTING:06f03f3e74d6cfd3fb219a2e",
       "origin": "reviewed-id-deck-finish-20261005",
       "payload": {
@@ -115859,6 +116125,30 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "sourceRecordId": "SET-SRC-SF-9655F3BBDFFD",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Simplified-Chinese-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": "fixed",
+        "sourceProductKey": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+        "retrievedAt": "2026-10-08",
+        "specimenIds": [
+          "SPEC-0631"
+        ],
+        "evidence": "SPEC-0631 shows the exact Simplified-Chinese CSVSC046/066 face without a printed rarity symbol. 52poke names this card in the Lucario deck; the localized Pokemon China product specifies four fixed constructed decks. Fixed is the exact-release normalization of these combined positive facts, not a finish inference or a generic no-symbol rule.",
+        "supportingSourceUrls": [
+          "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+          "https://www.pokemon.cn/tcg/product/15476.html"
+        ]
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:issue258:AC3D:120/172:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "origin": "reviewed-evidence-issue-258",
       "payload": {
@@ -119488,6 +119778,30 @@
     },
     {
       "entityType": "release-event",
+      "entityId": "EVENT:CN:CSVSC:launch-2026-01-16",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "releaseEventId": "EVENT:CN:CSVSC:launch-2026-01-16",
+        "localSetId": "LOCALSET:CN:CSVSC",
+        "setEditionIds": [
+          "EDITION:CN:S-Chinese:CSVSC"
+        ],
+        "eventKind": "launch",
+        "dateValue": "2026-01-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "timezone": null,
+        "marketScopes": [
+          "CN"
+        ],
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+        "linkBasis": "Exact established local set and publisher product."
+      }
+    },
+    {
+      "entityType": "release-event",
       "entityId": "EVENT:ID:s10a I:regular-launch-20260921",
       "origin": "reviewed-product-dates-issue-256-20260921",
       "payload": {
@@ -121982,6 +122296,41 @@
           "establishingEvidenceIds": [
             "CLAIM:legacy:U0588",
             "SET-SRC-BP-DATE-DC17692669A8"
+          ],
+          "localizationId": "LOCALIZATION:CN:zh-Hans"
+        }
+      }
+    },
+    {
+      "entityType": "set-edition",
+      "entityId": "EDITION:CN:S-Chinese:CSVSC",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+        "identity": {
+          "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "localSetCode": "CSVSC",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "viaLegacySetCodes": [],
+          "establishingClaimIds": [
+            "CLAIM:source-first:CN:CSVSC:046/066:base"
+          ],
+          "localizationId": "LOCALIZATION:CN:zh-Hans"
+        },
+        "catalogue": {
+          "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+          "localSetId": "LOCALSET:CN:CSVSC",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "localCode": "CSVSC",
+          "state": "identified",
+          "establishingEvidenceIds": [
+            "SET-SRC-SF-9655F3BBDFFD"
           ],
           "localizationId": "LOCALIZATION:CN:zh-Hans"
         }
@@ -145845,6 +146194,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+        "disposition": "mapped",
+        "targetRef": "EVENT:CN:CSVSC:launch-2026-01-16",
+        "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -147007,6 +147367,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:TH:sv5a",
         "reason": "positive Thai source-first records establish this local set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SF-9655F3BBDFFD",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-9655F3BBDFFD",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:CN:CSVSC",
+        "reason": "provider locality and raw local code identify this local-set node"
       }
     },
     {
@@ -158782,6 +159153,33 @@
     },
     {
       "entityType": "set-source-record",
+      "entityId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+        "sourceKind": "release-date-record",
+        "provider": "pokemon-cn-official",
+        "providerRecordKey": "https://www.pokemon.cn/tcg/product/15476.html#launch:CN:CSVSC",
+        "retrieved": "2026-10-08",
+        "sourceUrl": "https://www.pokemon.cn/tcg/product/15476.html",
+        "raw": {
+          "localCode": "CSVSC",
+          "locality": "CN",
+          "languageScope": "S-Chinese",
+          "marketScopes": [
+            "CN"
+          ],
+          "date": "2026-01-16",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+          "note": "Localized product launch; prerelease and later reprints not asserted."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
       "entityId": "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -163322,6 +163720,56 @@
           "cardImageUrls": [
             "https://asia.pokemon-card.com/th/card-img/th00008167.png"
           ]
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SF-9655F3BBDFFD",
+      "origin": "reviewed-evidence-issue-257",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SF-9655F3BBDFFD",
+        "sourceKind": "source-first-local-set-profile",
+        "provider": "mixed-positive-evidence",
+        "providerRecordKey": "CN\u001fCSVSC",
+        "retrieved": "2026-10-08",
+        "raw": {
+          "localCode": "CSVSC",
+          "localName": null,
+          "locality": "CN",
+          "languages": [
+            "S-Chinese"
+          ],
+          "scripts": [
+            "Hans"
+          ],
+          "printIds": [
+            "CN:CSVSC:046/066:base"
+          ],
+          "providers": [
+            "inspected-specimen"
+          ],
+          "sourceUrls": [
+            "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+            "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+            "https://wiki.52poke.com/wiki/对战学院（TCG）"
+          ],
+          "printedSetSize": 66,
+          "printedSetSizeBasis": "SPEC-0631 visibly printed CSVSC 046/066.",
+          "localeSuffix": null,
+          "observedCollectorNumbers": [
+            "046/066"
+          ],
+          "observedCoverage": "One exact Snorlax row; no whole-set harvest.",
+          "markAssetUrls": [],
+          "cardImageUrls": [
+            "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+          ],
+          "wikiShortcut": "CSVS",
+          "specimenIds": [
+            "SPEC-0631"
+          ],
+          "evidenceBundle": "verification/evidence/52poke-cn-local-identities-20261008"
         }
       }
     },
@@ -180418,6 +180866,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:0e2eb04321e1400b948df754",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -180818,6 +181276,16 @@
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:PRINTING:1f657eb323a64df95270b351",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -191130,6 +191598,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:source-first:CN:CSVSC:046/066:base",
+      "relation": "materializes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:source-first:ID:AC3D:120/172:base",
       "relation": "materializes",
       "toType": "card-release",
@@ -196020,6 +196498,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0619",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "provenance": {
+        "specimenId": "SPEC-0619"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0620",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -196106,6 +196594,26 @@
       "toId": "PHYSICAL:PRINTING:b19651591491a38822d75cd2",
       "provenance": {
         "specimenId": "SPEC-0629"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0630",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "provenance": {
+        "specimenId": "SPEC-0630"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0631",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0631",
+      "provenance": {
+        "disposition": "established-and-mapped"
       }
     },
     {
@@ -196799,6 +197307,24 @@
       "toId": "WORK:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {
         "state": "mapped"
+      }
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:CSVSC",
+      "provenance": {}
+    },
+    {
+      "fromType": "card-release",
+      "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "implements",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Lazy-Press",
+      "provenance": {
+        "state": "mapped-by-explicit-equivalence"
       }
     },
     {
@@ -211858,6 +212384,22 @@
     },
     {
       "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "belongs-to",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:CSVSC",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
+      "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "references",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "catalogue-card-release-ref",
       "fromId": "RELEASE:CN:S-Chinese:CSZC:018:Snorlax-Unfazed-Fat-Thumping-Snore",
       "relation": "belongs-to",
       "toType": "set-edition",
@@ -225018,6 +225560,46 @@
     },
     {
       "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+      "relation": "relates",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "toId": "WORK:Snorlax-Lazy-Press",
+        "legacyUnitId": "U0646",
+        "sourceFirstRecordId": "CN:CSVSC:046/066:base",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-10-08",
+        "evidenceUrl": "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+        "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
+      "fromId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+      "relation": "relates",
+      "toType": "work",
+      "toId": "WORK:Snorlax-Lazy-Press",
+      "provenance": {
+        "assertionId": "ASSERT:same-work:U0646:CN:CSVSC:046/066:base",
+        "assertionType": "same-work-decision",
+        "fromId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+        "toId": "WORK:Snorlax-Lazy-Press",
+        "legacyUnitId": "U0646",
+        "sourceFirstRecordId": "CN:CSVSC:046/066:base",
+        "assertedBy": "repository verification pass",
+        "assertedAt": "2026-10-08",
+        "evidenceUrl": "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+        "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
+        "destructiveMergeAllowed": false
+      }
+    },
+    {
+      "fromType": "equivalence-assertion",
       "fromId": "ASSERT:same-work:U0648:KR:svI:046/066:base",
       "relation": "relates",
       "toType": "card-release",
@@ -232010,6 +232592,14 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-CM-E1F7302D2348",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:CN:CSVSC",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-9655F3BBDFFD",
       "provenance": {}
     },
     {
@@ -240910,6 +241500,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVH4C:a003:Snorlax-But-First-Food-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:0e2eb04321e1400b948df754",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -241466,6 +242072,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:English:BCR:109:Snorlax-Double-Lariat-Rollout",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVH1C:a001:Snorlax-Unfazed-Fat-Thumping-Snore",
       "provenance": {}
     },
     {
@@ -247946,6 +248568,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0631",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0631",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0631",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
       "provenance": {}
     },
     {
@@ -256702,6 +257340,22 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-9655F3BBDFFD",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:issue258:AC3D:120/172:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -260334,6 +260988,22 @@
     },
     {
       "fromType": "release-event",
+      "fromId": "EVENT:CN:CSVSC:launch-2026-01-16",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:CN:CSVSC",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
+      "fromId": "EVENT:CN:CSVSC:launch-2026-01-16",
+      "relation": "supports",
+      "toType": "set-edition",
+      "toId": "EDITION:CN:S-Chinese:CSVSC",
+      "provenance": {}
+    },
+    {
+      "fromType": "release-event",
       "fromId": "EVENT:ID:s10a I:regular-launch-20260921",
       "relation": "belongs-to",
       "toType": "local-set",
@@ -261813,6 +262483,25 @@
     {
       "fromType": "set-edition",
       "fromId": "EDITION:CN:S-Chinese:CSVL1C",
+      "relation": "localized-as",
+      "toType": "localization",
+      "toId": "LOCALIZATION:CN:zh-Hans",
+      "provenance": {
+        "decisionRef": "https://github.com/m4s-ai/snoredex-data/issues/254",
+        "reviewedAt": "2026-08-24"
+      }
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:CN:S-Chinese:CSVSC",
+      "relation": "belongs-to",
+      "toType": "local-set",
+      "toId": "LOCALSET:CN:CSVSC",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-edition",
+      "fromId": "EDITION:CN:S-Chinese:CSVSC",
       "relation": "localized-as",
       "toType": "localization",
       "toId": "LOCALIZATION:CN:zh-Hans",
@@ -274908,6 +275597,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -275756,6 +276453,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SF-9655F3BBDFFD",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-9655F3BBDFFD",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-SF-966729E67AE5",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -276544,6 +277249,14 @@
       "relation": "asserts-release-event",
       "toType": "release-event",
       "toId": "EVENT:CN:CS4DaC:launch-2024-05-17",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-record",
+      "fromId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "relation": "asserts-release-event",
+      "toType": "release-event",
+      "toId": "EVENT:CN:CSVSC:launch-2026-01-16",
       "provenance": {}
     },
     {
@@ -290454,6 +291167,20 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0079-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0080-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0081-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:51fde0474f00dc9a7b0f9969",
@@ -299772,9 +300499,11 @@
     {
       "sourceKind": "legacy-issue-rekey",
       "sourceId": "U0646",
-      "disposition": "needs-positive-local-identity",
-      "targetRef": null,
-      "targetRefs": [],
+      "disposition": "linked-local-counterpart",
+      "targetRef": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "targetRefs": [
+        "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press"
+      ],
       "reason": "issue #257 re-key"
     },
     {
@@ -307679,6 +308408,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "disposition": "mapped",
+      "targetRef": "EVENT:CN:CSVSC:launch-2026-01-16",
+      "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007",
       "disposition": "mapped",
       "targetRef": "EVENT:KR:20th:launch-2016-02-27",
@@ -308421,6 +309157,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SF-9655F3BBDFFD",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:CN:CSVSC",
+      "reason": "provider locality and raw local code identify this local-set node"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-SF-966729E67AE5",
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:SM-P",
@@ -309040,6 +309783,13 @@
       "sourceId": "CN:CS4DaC:342/414:base",
       "disposition": "established-and-mapped",
       "targetRef": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
+      "reason": "positive source-first specimen/card record"
+    },
+    {
+      "sourceKind": "source-first-record",
+      "sourceId": "CN:CSVSC:046/066:base",
+      "disposition": "established-and-mapped",
+      "targetRef": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
       "reason": "positive source-first specimen/card record"
     },
     {
@@ -312474,6 +313224,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0619",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:1ff1064e744984b42a4648bd, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0620",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -312534,29 +313291,43 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:b19651591491a38822d75cd2, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0630",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0631",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0631",
+      "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press"
     }
   ],
   "summary": {
-    "entities": 8630,
-    "edges": 12770,
-    "migrationInputs": 3073,
+    "entities": 8650,
+    "edges": 12798,
+    "migrationInputs": 3081,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 332,
+      "candidate-needs-evidence": 334,
       "carried": 68,
-      "established-and-mapped": 1697,
-      "linked-local-counterpart": 125,
-      "mapped": 407,
+      "established-and-mapped": 1701,
+      "linked-local-counterpart": 126,
+      "mapped": 409,
       "needs-evidence": 125,
-      "needs-positive-local-identity": 19,
+      "needs-positive-local-identity": 18,
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2196,
-    "cardReleases": 633,
-    "physicalPrintings": 880,
-    "setSourceRecords": 535,
-    "setSourceDispositions": 535,
+    "candidateClaims": 2202,
+    "cardReleases": 634,
+    "physicalPrintings": 883,
+    "setSourceRecords": 537,
+    "setSourceDispositions": 537,
     "localizations": 16
   }
 }

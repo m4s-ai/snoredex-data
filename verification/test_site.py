@@ -853,10 +853,26 @@ def main() -> int:
           }
           return null;
         }""", artwork_projection)
+        no_image_page = page
+        missing_image_context = None
+        if not no_image_member:
+            # Keep the missing-image boundary testable when real research fills every image.
+            fixture = json.loads(json.dumps(artwork_projection))
+            member = fixture["groups"][0]["members"][0]
+            member["images"] = []
+            no_image_member = member["cardReleaseId"]
+            missing_image_context = browser.new_context()
+            no_image_page = missing_image_context.new_page()
+            no_image_page.route("**/verification/artwork_review_projection.json?*",
+                                lambda route: route.fulfill(content_type="application/json", body=json.dumps(fixture)))
+            no_image_page.goto(url)
+            load_artwork(no_image_page)
+            no_image_page.select_option("#ar-scope", "all")
+            no_image_page.fill("#ar-reviewer", "Missing-image fixture reviewer")
         if no_image_member:
-            page.fill("#ar-search", no_image_member)
-            page.wait_for_timeout(80)
-            no_image_card = page.locator("#ar-groups .artwork-member").filter(has_text=no_image_member).first
+            no_image_page.fill("#ar-search", no_image_member)
+            no_image_page.wait_for_timeout(80)
+            no_image_card = no_image_page.locator("#ar-groups .artwork-member").filter(has_text=no_image_member).first
             check("artwork review blocks image-dependent actions without an image",
                   no_image_card.locator(".artwork-images .missing").count() == 1
                   and no_image_card.locator("option[value='confirm']").get_attribute("disabled") is not None
@@ -864,8 +880,8 @@ def main() -> int:
                   "missing-image action guard not rendered")
             no_image_card.locator(".ar-action").select_option("unclear")
             no_image_card.locator(".ar-save").click()
-            page.wait_for_timeout(80)
-            unclear_saved = page.evaluate("""(releaseId) => {
+            no_image_page.wait_for_timeout(80)
+            unclear_saved = no_image_page.evaluate("""(releaseId) => {
               const raw = localStorage.getItem('snoredex-artwork-review-proposals-v1');
               const saved = raw ? JSON.parse(raw) : {};
               return saved[releaseId] || null;
@@ -873,11 +889,8 @@ def main() -> int:
             check("artwork review permits only an unclear proposal without an image",
                   unclear_saved is not None and unclear_saved["action"] == "unclear"
                   and unclear_saved["imageHashes"] == [], str(unclear_saved))
-        else:
-            check("artwork review blocks image-dependent actions without an image", False,
-                  "projection has no mapped member without an image")
-            check("artwork review permits only an unclear proposal without an image", False,
-                  "projection has no mapped member without an image")
+        if missing_image_context:
+            missing_image_context.close()
 
         unverified_image_member = page.evaluate("""(projection) => {
           for (const group of projection.groups) {

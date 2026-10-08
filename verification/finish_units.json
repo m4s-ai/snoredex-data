@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 529,
+      "withConfirmedFinish": 531,
       "withOnlyMarketplaceClaim": 16,
-      "pendingFinish": 15,
+      "pendingFinish": 13,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 323,
+      "withNonHolo": 325,
       "withHolo": 253,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 41,
-      "withAnyUnresolvedDetail": 120,
+      "withUnresolvedProductMapping": 39,
+      "withAnyUnresolvedDetail": 118,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -7316,23 +7316,58 @@
           "image": "images/CSVH1C_a001_Snorlax_860966.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Physical Simplified Chinese 卡比兽001/023 identity visible. Printed code is small in this view; listing supplies CSVH1aC lead, retained exact sources remain the identity cross-check. No positive foil or Common rarity accepted from polluted metadata. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0619.",
+              "retrievedAt": "2026-10-07",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0619"
+          ],
+          "image": "verification/specimens/SPEC-0619.png",
+          "printingId": "F0079-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0080",
@@ -7357,23 +7392,58 @@
           "image": "images/CSVH4C_a003_Snorlax_888115.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation. Retained as SPEC-0630.",
+              "retrievedAt": "2026-10-08",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0630"
+          ],
+          "image": "verification/specimens/SPEC-0630.png",
+          "printingId": "F0080-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0081",

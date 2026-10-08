@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1723,
-   "uniqueUrls": 1715,
+   "evidenceRecords": 1726,
+   "uniqueUrls": 1718,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6848
+   "claimsAttributed": 6870
   }
  },
  "providers": [
@@ -68,8 +68,8 @@
     "pokemon.cn",
     "image.pokemon.com.cn"
    ],
-   "uniqueSources": 15,
-   "claimsSupported": 52
+   "uniqueSources": 16,
+   "claimsSupported": 54
   },
   {
    "providerId": "pokemon-card-jp",
@@ -488,8 +488,8 @@
     "s2.52poke.com",
     "media.52poke.com"
    ],
-   "uniqueSources": 14,
-   "claimsSupported": 35
+   "uniqueSources": 15,
+   "claimsSupported": 36
   },
   {
    "providerId": "koreanpokemoncards",
@@ -582,8 +582,8 @@
     "cardmarket.com",
     "product-images.s3.cardmarket.com"
    ],
-   "uniqueSources": 348,
-   "claimsSupported": 957
+   "uniqueSources": 347,
+   "claimsSupported": 958
   },
   {
    "providerId": "cardmarket-product-image",
@@ -605,8 +605,8 @@
    "attribution": "Exact retained product image via Cardmarket.",
    "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
    "hosts": [],
-   "uniqueSources": 48,
-   "claimsSupported": 217
+   "uniqueSources": 49,
+   "claimsSupported": 221
   },
   {
    "providerId": "pokemontcgio",
@@ -749,7 +749,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 444
+   "claimsSupported": 452
   },
   {
    "providerId": "inspected-specimen",
@@ -770,8 +770,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
-   "uniqueSources": 70,
-   "claimsSupported": 799
+   "uniqueSources": 71,
+   "claimsSupported": 804
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -817,7 +817,7 @@
     "down-tw.img.susercontent.com"
    ],
    "uniqueSources": 178,
-   "claimsSupported": 720
+   "claimsSupported": 721
   }
  ],
  "evidence": [
@@ -988,6 +988,23 @@
     "CN:CS2aC:086/115:base"
    ],
    "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SVI%EF%BC%89",
+   "nonUrlEvidenceId": null,
+   "providerId": "52poke",
+   "sourceTypes": [
+    "Positive fixed-product membership record"
+   ],
+   "dimensions": [
+    "set-membership"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "CN:CSVSC:046/066:base"
+   ],
+   "retrievedAt": "2026-10-08",
    "usageCount": 1
   },
   {
@@ -4222,23 +4239,6 @@
    "usageCount": 1
   },
   {
-   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
-   "nonUrlEvidenceId": null,
-   "providerId": "cardmarket",
-   "sourceTypes": [
-    "Cardmarket product image"
-   ],
-   "dimensions": [
-    "image"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "CSVH4C a003 base"
-   ],
-   "retrievedAt": null,
-   "usageCount": 1
-  },
-  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CSVL1C/839842/839842.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
@@ -7348,17 +7348,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket product page"
+    "Cardmarket product page",
+    "Inspected reference photograph; original provider unspecified"
    ],
    "dimensions": [
     "product"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 3,
    "stableIds": [
-    "CSVH4C a003 base"
+    "CSVH4C a003 base",
+    "SPEC-0630",
+    "U0768"
    ],
-   "retrievedAt": null,
-   "usageCount": 1
+   "retrievedAt": "2026-10-08",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-ex-CSVH4Cp006",
@@ -10564,6 +10567,28 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket product image",
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "identity",
+    "image"
+   ],
+   "stableIdCount": 4,
+   "stableIds": [
+    "CSVH4C a003 base",
+    "F0080-P01",
+    "SPEC-0630",
+    "U0768"
+   ],
+   "retrievedAt": "2026-10-08",
+   "usageCount": 4
+  },
+  {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-product-image",
@@ -12064,6 +12089,7 @@
    "sourceTypes": [
     "Inspected card photograph; external origin unknown",
     "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
+    "Inspected reference photograph; original provider unspecified",
     "Owner-supplied physical card photograph",
     "Physical card, photographed sealed product",
     "Physical card, photographed sealed specimen",
@@ -12078,7 +12104,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 247,
+   "stableIdCount": 249,
    "stableIds": [
     "F0002-P01",
     "F0028-P01",
@@ -12242,6 +12268,7 @@
     "SPEC-0602",
     "SPEC-0603",
     "SPEC-0604",
+    "SPEC-0630",
     "TW:AS5a:204/184:base",
     "TW:SM-P:053:base",
     "TW:s5a F:093/070:base",
@@ -12322,14 +12349,15 @@
     "U0679",
     "U0751",
     "U0752",
+    "U0768",
     "U0769",
     "U0771",
     "U0772",
     "U0775",
     "U0780"
    ],
-   "retrievedAt": "2026-10-01",
-   "usageCount": 411
+   "retrievedAt": "2026-10-08",
+   "usageCount": 413
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -13284,6 +13312,26 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "inspected-specimen",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified",
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "identity",
+    "rarity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CN:CSVSC:046/066:base",
+    "SPEC-0631"
+   ],
+   "retrievedAt": "2026-10-08",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -13941,11 +13989,12 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 405,
+   "stableIdCount": 413,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
     "CN:CS2aC:086/115:base",
+    "CN:CSVSC:046/066:base",
     "F0002-P01",
     "F0003-P01",
     "F0009-P01",
@@ -13959,6 +14008,8 @@
     "F0071-P01",
     "F0072-P01",
     "F0072-P02",
+    "F0079-P01",
+    "F0080-P01",
     "F0093-P01",
     "F0101-P01",
     "F0104-P01",
@@ -14234,9 +14285,12 @@
     "SPEC-0609",
     "SPEC-0614",
     "SPEC-0618",
+    "SPEC-0619",
     "SPEC-0623",
     "SPEC-0628",
     "SPEC-0629",
+    "SPEC-0630",
+    "SPEC-0631",
     "TH:AS1b:112/150:base",
     "TH:AS5a:142/184:base",
     "TH:MA4:091/123:base",
@@ -14312,6 +14366,7 @@
     "U0586",
     "U0605",
     "U0610",
+    "U0612",
     "U0616",
     "U0617",
     "U0618",
@@ -14330,6 +14385,7 @@
     "U0683",
     "U0751",
     "U0763",
+    "U0768",
     "U0785",
     "U0786",
     "U0787",
@@ -14350,7 +14406,7 @@
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
    "retrievedAt": "2026-10-08",
-   "usageCount": 442
+   "usageCount": 450
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -21727,6 +21783,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/product/15476.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Localized set/product release-date record",
+    "Positive fixed-product membership record"
+   ],
+   "dimensions": [
+    "date",
+    "set-membership"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "CN:CSVSC:046/066:base",
+    "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007"
+   ],
+   "retrievedAt": "2026-10-08",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15499.html",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-cn-official",
@@ -27468,13 +27544,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
+    "F0079-P01",
     "SPEC-0619",
     "U0612"
    ],
    "retrievedAt": "2026-10-07",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/GeEAAeSwgBVqJilx/s-l1600.webp",

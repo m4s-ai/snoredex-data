@@ -479,7 +479,11 @@ def apply_set_sources(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def apply_graph(
     graph: dict[str, Any], profiles: dict[str, dict[str, Any]],
+    *, source_first_prints=None, releases=None, question_set=None,
 ) -> dict[str, Any]:
+    SOURCE_FIRST_PRINTS = source_first_prints if source_first_prints is not None else globals()["SOURCE_FIRST_PRINTS"]
+    RELEASES = releases if releases is not None else globals()["RELEASES"]
+    QUESTION_SET = question_set if question_set is not None else globals()["QUESTION_SET"]
     localization_id = "LOCALIZATION:CN:zh-Hans"
 
     for local_code, profile in profiles.items():
@@ -817,8 +821,9 @@ def main() -> int:
     graph = apply_graph(graph, profiles)
     # Keep the bounded later CN rarity/date observations in the same admission path.
     # Import locally because the follow-up reuses this module's graph helpers.
-    from integrate_rarity_finish_research_20261007 import admit_cn_followup
+    from integrate_rarity_finish_research_20261007 import admit_cn_followup, admit_csvs
     admit_cn_followup(graph, set_sources, prints)
+    admit_csvs(graph, set_sources, prints, rekeys)
 
     specimens = {row["specimenId"]: row for row in read(SPECIMENS)["specimens"]}
     for specimen_id in (

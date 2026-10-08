@@ -17,10 +17,10 @@
     "counts": {
       "providers": 33,
       "surfaces": 60,
-      "coverageEdges": 71,
+      "coverageEdges": 72,
       "absenceEdges": 0,
-      "observations": 78,
-      "resolvedVerdictSources": 1723
+      "observations": 79,
+      "resolvedVerdictSources": 1726
     },
     "surfaceStates": {
       "active": 30,
@@ -983,7 +983,8 @@
       },
       "coverageEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ]
     },
     {
@@ -4035,6 +4036,53 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "A dated product containing DP006 does not date the entire promo series."
+      }
+    },
+    {
+      "edgeId": "52poke-cn-battle-academy-membership",
+      "providerId": "52poke",
+      "surfaceId": "52poke-wiki",
+      "coverage": {
+        "localities": [
+          "CN"
+        ],
+        "languages": [
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Hans"
+        ],
+        "productCategories": [
+          "battle-academy"
+        ],
+        "timeRange": {
+          "start": "2026-01-16",
+          "end": "2026-01-16",
+          "basis": "Exact SVI Simplified Chinese card row and linked Battle Academy product only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "set-membership",
+        "card-release",
+        "identity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Missing rows or images never prove absence."
+      },
+      "knownPositiveObservationId": "obs-52poke-cn-battle-academy-membership",
+      "boundary": {
+        "outsideScope": [
+          "physical finish",
+          "Japanese portable deck finish statements",
+          "whole-set completeness",
+          "other card rows not inspected"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The exact Chinese046/066 row does not transfer Japanese finish or enumerate all local releases."
       }
     },
     {
@@ -7794,7 +7842,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:64a7e4c078e24bc9b255a4c03c9ab0a5eca858bb5ce4070e8eec77dde8d8aa41",
+      "rawRecordHash": "sha256:245da26ad404370f1c649cc695b87706797228cfca5af5a68532ab3ad5c30c9c",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7818,11 +7866,12 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 405,
+        "stableIdCount": 413,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2DaC:038/053:base",
           "CN:CS2aC:086/115:base",
+          "CN:CSVSC:046/066:base",
           "F0002-P01",
           "F0003-P01",
           "F0009-P01",
@@ -7836,6 +7885,8 @@
           "F0071-P01",
           "F0072-P01",
           "F0072-P02",
+          "F0079-P01",
+          "F0080-P01",
           "F0093-P01",
           "F0101-P01",
           "F0104-P01",
@@ -8111,9 +8162,12 @@
           "SPEC-0609",
           "SPEC-0614",
           "SPEC-0618",
+          "SPEC-0619",
           "SPEC-0623",
           "SPEC-0628",
           "SPEC-0629",
+          "SPEC-0630",
+          "SPEC-0631",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -8189,6 +8243,7 @@
           "U0586",
           "U0605",
           "U0610",
+          "U0612",
           "U0616",
           "U0617",
           "U0618",
@@ -8207,6 +8262,7 @@
           "U0683",
           "U0751",
           "U0763",
+          "U0768",
           "U0785",
           "U0786",
           "U0787",
@@ -8227,7 +8283,7 @@
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
         "retrievedAt": "2026-10-08",
-        "usageCount": 442
+        "usageCount": 450
       }
     },
     {
@@ -8248,7 +8304,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:567327aaab73cdbeb1cbb5bd12006f0fbb0aa5a33f1f7fb6df798b1bc40449d1",
+      "rawRecordHash": "sha256:5705b1b9232bdee68de50dbb716a8b1220866b47cb05a2e43feee6f8eb589d3d",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -8256,6 +8312,7 @@
         "sourceTypes": [
           "Inspected card photograph; external origin unknown",
           "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
+          "Inspected reference photograph; original provider unspecified",
           "Owner-supplied physical card photograph",
           "Physical card, photographed sealed product",
           "Physical card, photographed sealed specimen",
@@ -8270,7 +8327,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 247,
+        "stableIdCount": 249,
         "stableIds": [
           "F0002-P01",
           "F0028-P01",
@@ -8434,6 +8491,7 @@
           "SPEC-0602",
           "SPEC-0603",
           "SPEC-0604",
+          "SPEC-0630",
           "TW:AS5a:204/184:base",
           "TW:SM-P:053:base",
           "TW:s5a F:093/070:base",
@@ -8514,14 +8572,15 @@
           "U0679",
           "U0751",
           "U0752",
+          "U0768",
           "U0769",
           "U0771",
           "U0772",
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-10-01",
-        "usageCount": 411
+        "retrievedAt": "2026-10-08",
+        "usageCount": 413
       }
     },
     {
@@ -11181,6 +11240,37 @@
         "scope": "Exact Korean DP006 availability through Special Set 2; not a date for the entire DP promo series.",
         "canonicalIntegration": "accepted positive product release date"
       }
+    },
+    {
+      "observationId": "obs-52poke-cn-battle-academy-membership",
+      "surfaceId": "52poke-wiki",
+      "kind": "known-positive",
+      "queryUrl": "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+      "queryParameters": {
+        "revision": "2536339"
+      },
+      "retrievedAt": "2026-10-08",
+      "expectedIdentifiers": [
+        "046/066",
+        "对战学院",
+        "Po-Suzuki"
+      ],
+      "validatesEdges": [
+        "52poke-cn-battle-academy-membership"
+      ],
+      "outcome": "Exact positive localized card/product membership only; printed full code independently inspected in SPEC-0631.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:233eb1b1ccddd37c799d52450ed8cfb82a0c42594478b1b08ff950f6a995fb64",
+      "rawRecord": {
+        "language": "S-Chinese",
+        "localSetCode": "CSVSC",
+        "wikiShortcut": "CSVS",
+        "collectorNumber": "046/066",
+        "product": "对战学院",
+        "artist": "Po-Suzuki",
+        "sourceExcerpt": "对战学院 2026-01-16 — 046/066 Po-Suzuki",
+        "evidenceBundle": "verification/evidence/52poke-cn-local-identities-20261008"
+      }
     }
   ],
   "sourceResolution": [
@@ -11190,7 +11280,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11203,7 +11294,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11216,7 +11308,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11229,7 +11322,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11242,7 +11336,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11257,7 +11352,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11270,7 +11366,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11284,7 +11381,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11297,11 +11395,26 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
         "card-release"
+      ]
+    },
+    {
+      "sourceKey": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SVI%EF%BC%89",
+      "providerId": "52poke",
+      "surfaceId": "52poke-wiki",
+      "capabilityEdgeIds": [
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "set-membership"
       ]
     },
     {
@@ -11310,7 +11423,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11323,7 +11437,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11336,7 +11451,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11349,7 +11465,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11362,7 +11479,8 @@
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
         "52poke-positive-record",
-        "52poke-kr-special-set-2-date"
+        "52poke-kr-special-set-2-date",
+        "52poke-cn-battle-academy-membership"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -13199,18 +13317,6 @@
     },
     {
       "sourceKey": "https://product-images.s3.cardmarket.com/51/CSVH4C/888095/888095.jpg",
-      "providerId": "cardmarket",
-      "surfaceId": "cardmarket-products",
-      "capabilityEdgeIds": [
-        "cardmarket-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "image"
-      ]
-    },
-    {
-      "sourceKey": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
       "providerId": "cardmarket",
       "surfaceId": "cardmarket-products",
       "capabilityEdgeIds": [
@@ -17159,6 +17265,19 @@
       ]
     },
     {
+      "sourceKey": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+      "providerId": "cardmarket-product-image",
+      "surfaceId": "cardmarket-product-images",
+      "capabilityEdgeIds": [
+        "cardmarket-product-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity",
+        "image"
+      ]
+    },
+    {
       "sourceKey": "https://product-images.s3.cardmarket.com/51/DP-P/566757/566757.jpg",
       "providerId": "cardmarket-product-image",
       "surfaceId": "cardmarket-product-images",
@@ -18792,6 +18911,20 @@
       "dimensions": [
         "finish",
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity",
+        "rarity"
       ]
     },
     {
@@ -23804,6 +23937,21 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "set-membership"
+      ]
+    },
+    {
+      "sourceKey": "https://www.pokemon.cn/tcg/product/15476.html",
+      "providerId": "pokemon-cn-official",
+      "surfaceId": "pokemon-cn-product-pages",
+      "capabilityEdgeIds": [
+        "pokemon-cn-product-positive",
+        "obs-cn-research-dates-20261007-positive",
+        "obs-cn-fixed-decks-followup-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date",
         "set-membership"
       ]
     },

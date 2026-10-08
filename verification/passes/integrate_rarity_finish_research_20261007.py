@@ -160,6 +160,83 @@ def admit_cn_followup(graph, catalogue, prints):
                "https://www.pokemon.cn/tcg/product/16063.html", "2026-10-07")
 
 
+def admit_csvs(graph, catalogue, prints, rekeys):
+    """Admit the localized wiki row and retained CSVSC face through the CN owner."""
+    import admit_issue257_simplified_chinese_20260827 as admission
+    url = "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+    image_url = "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+    pid = "CN:CSVSC:046/066:base"
+    rid = "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press"
+    basis = ("52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, "
+             "Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS "
+             "and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC "
+             "046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. "
+             "Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.")
+    record = dict(printId=pid, locality="CN", localSetCode="CSVSC", localNumber="046/066",
+                  variant="base", language="S-Chinese", script="Hans", name="卡比兽",
+                  cardName="Snorlax", specimenId="SPEC-0631", providerId="inspected-specimen", sourceUrl=image_url,
+                  retrievedAt="2026-10-08", corroborated=False, cardImageUrl=image_url,
+                  markAssetUrl=None, evidence=basis,
+                  catchUpOf="legacy Japanese svIba 046 Snorlax-Lazy-Press")
+    existing = next((row for row in prints["prints"] if row["printId"] == pid), None)
+    if existing is None:
+        prints["prints"].append(record)
+    else:
+        existing.update(record)
+        record = existing
+    profile = admission.source_profile([record])
+    profile["retrieved"] = "2026-10-08"
+    profile["raw"].update(printedSetSizeBasis="SPEC-0631 visibly printed CSVSC 046/066.",
+                          sourceUrls=[url, image_url, "https://wiki.52poke.com/wiki/对战学院（TCG）"],
+                          wikiShortcut="CSVS", specimenIds=["SPEC-0631"],
+                          observedCoverage="One exact Snorlax row; no whole-set harvest.",
+                          evidenceBundle="verification/evidence/52poke-cn-local-identities-20261008")
+    sid = profile["sourceRecordId"]
+    previous = next((row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == sid), None)
+    if previous is None:
+        catalogue["sourceRecords"].append(profile)
+    else:
+        previous.update(profile)
+    mapping = dict(legacyUnitId="U0646", sourceFirstRecordId=pid,
+                   assertionType="same-work-decision", assertedBy="repository verification pass",
+                   assertedAt="2026-10-08", evidenceUrl=url, evidence=basis)
+    question = next(row for row in rekeys["questionSets"] if row["issueNumber"] == 257)
+    prior_mapping = next((row for row in question["mappings"] if row["sourceFirstRecordId"] == pid), None)
+    if prior_mapping is None:
+        question["mappings"].append(mapping)
+    else:
+        prior_mapping.update(mapping)
+    projected = admission.apply_graph(graph, {"CSVSC": profile}, source_first_prints=[record],
+        releases={pid: dict(releaseId=rid, work="Snorlax-Lazy-Press", legacyUnitId="U0646")},
+        question_set={**question, "legacyUnitIds": ["U0646"], "mappings": [mapping]})
+    if projected is not graph:
+        graph.clear()
+        graph.update(projected)
+    releases = {row["entityId"]: row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"}
+    admit_date(graph, catalogue, releases, prints, rid, "2026-01-16",
+               "https://www.pokemon.cn/tcg/product/15476.html", "2026-10-08")
+    rarity_basis = ("SPEC-0631 shows the exact Simplified-Chinese CSVSC046/066 face without a printed rarity symbol. "
+                    "52poke names this card in the Lucario deck; the localized Pokemon China product specifies "
+                    "four fixed constructed decks. Fixed is the exact-release normalization of these combined "
+                    "positive facts, not a finish inference or a generic no-symbol rule.")
+    record.update(rarity=["no printed rarity symbol", "fixed"], rarityProviderId="inspected-specimen",
+                  raritySourceUrl=image_url, rarityRetrievedAt="2026-10-08",
+                  rarityEvidence=rarity_basis, raritySupportingSourceUrls=[url, "https://www.pokemon.cn/tcg/product/15476.html"])
+    cid = "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press"
+    claim = dict(rarityClaimId=cid, cardReleaseId=rid, sourceRecordId=sid,
+                 sourceProvider=profile["provider"], sourceVocabulary="printed-Simplified-Chinese-card",
+                 sourceNativeValue="no printed rarity symbol", normalizedRarityId="fixed",
+                 sourceProductKey=image_url, retrievedAt="2026-10-08", specimenIds=["SPEC-0631"],
+                 evidence=rarity_basis, supportingSourceUrls=record["raritySupportingSourceUrls"])
+    upsert_entity(graph, "rarity-claim", cid, claim, origin=ORIGIN)
+    upsert_edge(graph, "rarity-claim", cid, "asserts-rarity-for", "card-release", rid)
+    upsert_edge(graph, "rarity-claim", cid, "observed-by", "set-source-record", sid)
+    prints["meta"]["counts"]["admitted"] = len(prints["prints"])
+    prints["prints"].sort(key=lambda row: row["printId"])
+    catalogue["meta"]["counts"]["sourceFirstLocalSets"] = sum(
+        row["sourceKind"] == "source-first-local-set-profile" for row in catalogue["sourceRecords"])
+
+
 def apply(documents):
     graph, catalogue, prints, rekeys, overrides = documents
     # Retained publisher render supports this exact image, not a physical finish.
@@ -337,6 +414,7 @@ def apply(documents):
     date_record["raw"].update(conflictingHeaderDate="2016-02-01", publisherPage=twenty_date["publisherUrl"],
                               sourceNativeDate="2월 27일 대발매!", evidenceBundle="verification/evidence/20th-korean-047-071-20261008")
     source_record(graph, catalogue, date_record, "EVENT:KR:20th:launch-2016-02-27", "release-event")
+    admit_csvs(graph, catalogue, prints, rekeys)
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

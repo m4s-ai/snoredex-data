@@ -5,7 +5,7 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "sourceRepository": "https://github.com/m4s-ai/snoredex-data",
     "dataAsOf": "2026-10-08",
-    "catalogueFingerprint": "sha256:fb133ea746d708a9d14427a323ca15077a21ece9aab5ca7cd5611b1befa8ff31",
+    "catalogueFingerprint": "sha256:f1c14327aed6c2956dae9826271022c4c87d857c9c5cc69e76e8b2f7cddcf52c",
     "previousFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
     "assetBaseUrl": "https://m4s-ai.github.io/snoredex-data/",
     "scope": {
@@ -506,6 +506,18 @@
         "SET-SRC-CM-E1F7302D2348"
       ],
       "sortKey": "CN|csvl000000000001c|adventure special pack|LOCALSET:CN:CSVL1C"
+    },
+    {
+      "localSetId": "LOCALSET:CN:CSVSC",
+      "locality": "CN",
+      "localSetCode": "CSVSC",
+      "localSetName": null,
+      "productKind": "physical-card-set-or-product",
+      "identityState": "identified",
+      "sourceRefs": [
+        "SET-SRC-SF-9655F3BBDFFD"
+      ],
+      "sortKey": "CN|csvsc||LOCALSET:CN:CSVSC"
     },
     {
       "localSetId": "LOCALSET:CN:CSZC",
@@ -5587,6 +5599,19 @@
       "releaseApproximate": false,
       "releaseEventId": "EVENT:356fd63c0a03dcd0",
       "sortKey": "2026-01-16|CN|csv000000000007c|EDITION:CN:S-Chinese:CSV7C"
+    },
+    {
+      "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+      "localSetId": "LOCALSET:CN:CSVSC",
+      "localizationId": "LOCALIZATION:CN:zh-Hans",
+      "localSetCode": "CSVSC",
+      "localSetName": null,
+      "identityState": "identified",
+      "releaseDate": "2026-01-16",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseEventId": "EVENT:CN:CSVSC:launch-2026-01-16",
+      "sortKey": "2026-01-16|CN|csvsc|EDITION:CN:S-Chinese:CSVSC"
     },
     {
       "setEditionId": "EDITION:JP:Japanese:m3",
@@ -70264,22 +70289,23 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+151C+%E2%80%94+Collect+151+169+%28verified-printing%29&row-id=item-b0a1b89d-e978-5d14-8906-cd209c1bb0fd&card-name=Snorlax&set-code=151C+%E2%80%94+Collect+151&card-number=169&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-845114f7-1f34-547d-a471-3c4663bb8a12",
+      "itemId": "item-0811e0c1-4948-5788-b94c-c28ce8aeb8b7",
       "legacyChecklistIds": [
-        "csvh1c-a001-s-chinese-none-unresolved-unknown"
+        "csvh1c-a001-s-chinese-none-non-holo-unknown"
       ],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
       "workMappingState": "mapped",
       "setEditionId": "EDITION:CN:S-Chinese:CSVH1C",
       "localSetId": "LOCALSET:CN:CSVH1C",
       "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH1C:a001:Snorlax-Unfazed-Fat-Thumping-Snore",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+      "sourcePrintingId": "F0079-P01",
       "finishUnitId": "F0079",
       "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
         "CLAIM:legacy:U0612"
       ],
       "localizationId": "LOCALIZATION:CN:zh-Hans",
@@ -70292,10 +70318,10 @@
       "collectorNumberSortKey": "a000000000001",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-4ff3aa87-af73-5b5d-8d67-1505f8290c4e",
+      "finishVerificationStatus": "confirmed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-1de58220-5828-5153-8794-d95da179ee7b",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
@@ -70309,13 +70335,13 @@
           "RARITYCLAIM:bbabcf7911c54de8"
         ]
       },
-      "completenessStatus": "pending",
+      "completenessStatus": "positive-evidence-only",
       "releaseDate": "2025-01-17",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2025-01-17|LOCALIZATION:CN:zh-Hans|csvh000000000001c|a000000000001|research:legacy-checklist:csvh1c-a001-s-chinese-none-unresolved-unknown",
-      "imageAssetId": "asset-c287830a-c3dc-5363-bff2-2ad3037fe8ab",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2025-01-17|LOCALIZATION:CN:zh-Hans|csvh000000000001c|a000000000001|claim:CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+      "imageAssetId": "asset-b7565982-64b1-52ad-8fe2-6a44689cbcc5",
+      "imageScope": "exact-printing",
       "sourceLinks": [
         "https://bulbapedia.bulbagarden.net/wiki/Pikachu_%26_Clefairy_%26_Turtwig_%26_Gimmighoul_Happy_Set_(ATCG)",
         "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
@@ -70326,7 +70352,7 @@
         "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
         "https://www.ebay.com/itm/198438640357"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSVH1C+%E2%80%94+Happy+Set+Pikachu+%26+Clefairy+%26+Turtwig+%26+Gimmighoul+a001+%28research-placeholder%29&row-id=item-845114f7-1f34-547d-a471-3c4663bb8a12&card-name=Snorlax&set-code=CSVH1C+%E2%80%94+Happy+Set+Pikachu+%26+Clefairy+%26+Turtwig+%26+Gimmighoul&card-number=a001&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSVH1C+%E2%80%94+Happy+Set+Pikachu+%26+Clefairy+%26+Turtwig+%26+Gimmighoul+a001+%28verified-printing%29&row-id=item-0811e0c1-4948-5788-b94c-c28ce8aeb8b7&card-name=Snorlax&set-code=CSVH1C+%E2%80%94+Happy+Set+Pikachu+%26+Clefairy+%26+Turtwig+%26+Gimmighoul&card-number=a001&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-bb1c732b-d372-5217-b534-698ff936d321",
@@ -77489,6 +77515,68 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSV7C+%E2%80%94+Blade+Awakening+158+%28finish-candidate%29&row-id=item-e98b65ce-5025-5cb8-8f69-3235700d7fa9&card-name=Snorlax&set-code=CSV7C+%E2%80%94+Blade+Awakening&card-number=158&current-state=Item+kind%3A+finish-candidate+Progress%3A+research+Evidence+state%3A+marketplace-claimed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
+      "itemId": "item-9120c748-d92c-581c-8a88-ec6c61002567",
+      "legacyChecklistIds": [],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-Lazy-Press",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+      "localSetId": "LOCALSET:CN:CSVSC",
+      "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0631",
+      "sourcePrintingId": null,
+      "finishUnitId": null,
+      "sourceClaimRefs": [
+        "CLAIM:source-first:CN:CSVSC:046/066:base",
+        "CLAIM:specimen:SPEC-0631"
+      ],
+      "localizationId": "LOCALIZATION:CN:zh-Hans",
+      "cardName": "Snorlax",
+      "localCardName": "卡比兽",
+      "localSetCode": "CSVSC",
+      "localSetName": null,
+      "collectorNumber": "046",
+      "collectorNumberDenominator": "066",
+      "collectorNumberSortKey": "000000000046",
+      "edition": null,
+      "editionAssignmentStatus": "unresolved",
+      "finishVerificationStatus": "observed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-7384ea7c-3193-52fe-8f81-8941f3ebf0e9",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "unknown",
+      "errorClass": null,
+      "rarity": {
+        "display": "no printed rarity symbol",
+        "normalizedId": "fixed",
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue256:CSVSC:046/066:Snorlax-Lazy-Press"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2026-01-16",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2026-01-16|LOCALIZATION:CN:zh-Hans|csvsc|000000000046|claim:CLAIM:specimen:SPEC-0631",
+      "imageAssetId": "asset-70842c30-b2ca-5f24-bfd2-f1d14f43c3be",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+        "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+      ],
+      "evidenceLinks": [
+        "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+        "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSVSC+046+%28verified-printing%29&row-id=item-9120c748-d92c-581c-8a88-ec6c61002567&card-name=Snorlax&set-code=CSVSC&card-number=046&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+unresolved+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+    },
+    {
       "itemId": "item-e87c9e86-899e-522c-b0c1-42005a51c26e",
       "legacyChecklistIds": [
         "xm2a-136-thai-none-mirror-holo-colorless-energy-star"
@@ -79886,22 +79974,23 @@
       "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+POR+%E2%80%94+Perfect+Order+063+%28verified-printing%29&row-id=item-efa253c5-c64d-5de6-b33b-6772d8c90ea4&card-name=Snorlax&set-code=POR+%E2%80%94+Perfect+Order&card-number=063&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+reverse-holo+Finish+family%3A+reverse-holo+Foil+pattern%3A+plain-foil-background+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
     },
     {
-      "itemId": "item-7ad8413c-84b9-5569-8b22-99d0de0893a4",
+      "itemId": "item-99d47970-df5d-56d2-9cc0-ba6991930d3d",
       "legacyChecklistIds": [
-        "csvh4c-a003-s-chinese-none-unresolved-unknown"
+        "csvh4c-a003-s-chinese-none-non-holo-unknown"
       ],
       "active": true,
-      "itemKind": "research-placeholder",
-      "progressClass": "research",
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
       "workId": "WORK:Snorlax-But-First-Food-Heavy-Impact",
       "workMappingState": "mapped",
       "setEditionId": "EDITION:CN:S-Chinese:CSVH4C",
       "localSetId": "LOCALSET:CN:CSVH4C",
       "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH4C:a003:Snorlax-But-First-Food-Heavy-Impact",
-      "physicalPrintingId": null,
-      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "sourcePrintingId": "F0080-P01",
       "finishUnitId": "F0080",
       "sourceClaimRefs": [
+        "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
         "CLAIM:legacy:U0768"
       ],
       "localizationId": "LOCALIZATION:CN:zh-Hans",
@@ -79914,10 +80003,10 @@
       "collectorNumberSortKey": "a000000000003",
       "edition": null,
       "editionAssignmentStatus": "not-applicable",
-      "finishVerificationStatus": "pending",
-      "finish": null,
-      "finishFamily": null,
-      "finishGroupId": "finish-group-f6c94e86-3d71-51f5-af6c-add7280a0403",
+      "finishVerificationStatus": "confirmed",
+      "finish": "non-holo",
+      "finishFamily": "non-holo",
+      "finishGroupId": "finish-group-f8bd5b70-94f5-55d4-a31e-6183a40ef583",
       "foilPattern": null,
       "markings": [],
       "distribution": null,
@@ -79931,20 +80020,24 @@
           "RARITYCLAIM:29816cc78e04a3db"
         ]
       },
-      "completenessStatus": "pending",
+      "completenessStatus": "positive-evidence-only",
       "releaseDate": "2026-04-10",
       "releaseDatePrecision": "day",
       "releaseApproximate": false,
-      "releaseSortKey": "2026-04-10|LOCALIZATION:CN:zh-Hans|csvh000000000004c|a000000000003|research:legacy-checklist:csvh4c-a003-s-chinese-none-unresolved-unknown",
-      "imageAssetId": "asset-99325437-5c4d-5503-829c-295acde9385c",
-      "imageScope": "legacy-product",
+      "releaseSortKey": "2026-04-10|LOCALIZATION:CN:zh-Hans|csvh000000000004c|a000000000003|claim:CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+      "imageAssetId": "asset-bf08312b-db3c-52b7-8eb7-dd3d116411e9",
+      "imageScope": "exact-printing",
       "sourceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_(ATCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_(ATCG)",
+        "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003"
       ],
       "evidenceLinks": [
-        "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_(ATCG)"
+        "https://bulbapedia.bulbagarden.net/wiki/Decidueye_%26_Melmetal_%26_Koraidon_%26_Miraidon_Happy_Set_(ATCG)",
+        "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+        "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003"
       ],
-      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSVH4C+%E2%80%94+Happy+Set+Decidueye+%26+Melmetal+%26+Koraidon+%26+Miraidon+a003+%28research-placeholder%29&row-id=item-7ad8413c-84b9-5569-8b22-99d0de0893a4&card-name=Snorlax&set-code=CSVH4C+%E2%80%94+Happy+Set+Decidueye+%26+Melmetal+%26+Koraidon+%26+Miraidon&card-number=a003&current-state=Item+kind%3A+research-placeholder+Progress%3A+research+Evidence+state%3A+pending+Completeness%3A+pending+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+unknown+Finish+family%3A+unknown+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+CSVH4C+%E2%80%94+Happy+Set+Decidueye+%26+Melmetal+%26+Koraidon+%26+Miraidon+a003+%28verified-printing%29&row-id=item-99d47970-df5d-56d2-9cc0-ba6991930d3d&card-name=Snorlax&set-code=CSVH4C+%E2%80%94+Happy+Set+Decidueye+%26+Melmetal+%26+Koraidon+%26+Miraidon&card-number=a003&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+confirmed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+non-holo+Finish+family%3A+non-holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+unknown"
     },
     {
       "itemId": "item-3a14a193-3e5b-504e-959f-4ea5c30ee03b",
@@ -84719,6 +84812,20 @@
       }
     },
     {
+      "assetId": "asset-70842c30-b2ca-5f24-bfd2-f1d14f43c3be",
+      "path": "verification/specimens/SPEC-0631.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0631.png",
+      "sha256": "sha256:9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — CSVSC; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-71bc96a6-7c8f-59e3-9438-09804cde2110",
       "path": "verification/specimens/SPEC-0051.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0051.jpg",
@@ -85685,20 +85792,6 @@
       }
     },
     {
-      "assetId": "asset-99325437-5c4d-5503-829c-295acde9385c",
-      "path": "images/CSVH4C_a003_Snorlax_888115.png",
-      "url": "https://m4s-ai.github.io/snoredex-data/images/CSVH4C_a003_Snorlax_888115.png",
-      "sha256": "sha256:9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
-      "mimeType": "image/png",
-      "imageScope": "legacy-product",
-      "altTextBasis": "Snorlax — Happy Set Decidueye & Melmetal & Koraidon & Miraidon; legacy-product",
-      "attribution": {
-        "rightsStatus": "third-party-rights-excluded-from-project-grants",
-        "licenceRef": "LICENSE.md",
-        "noticeRef": "THIRD_PARTY_NOTICES.md"
-      }
-    },
-    {
       "assetId": "asset-997f3476-e047-5fac-86a1-7c0fffcf0397",
       "path": "verification/specimens/SPEC-0055.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0055.jpg",
@@ -86595,6 +86688,20 @@
       }
     },
     {
+      "assetId": "asset-b7565982-64b1-52ad-8fe2-6a44689cbcc5",
+      "path": "verification/specimens/SPEC-0619.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0619.png",
+      "sha256": "sha256:3d0a3eaff988ac3b2be3d0cf406905b6b506d6e7d23de27fc563a3e254c16df9",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Happy Set Pikachu & Clefairy & Turtwig & Gimmighoul; exact-printing",
+      "attribution": {
+        "rightsStatus": "third-party-rights-excluded-from-project-grants",
+        "licenceRef": "LICENSE.md",
+        "noticeRef": "THIRD_PARTY_NOTICES.md"
+      }
+    },
+    {
       "assetId": "asset-b7a369ce-ae83-5603-9571-1a5b0c7c4fb6",
       "path": "images/SK_100_Snorlax_275358.jpg",
       "url": "https://m4s-ai.github.io/snoredex-data/images/SK_100_Snorlax_275358.jpg",
@@ -86875,13 +86982,13 @@
       }
     },
     {
-      "assetId": "asset-bfa1cff7-4dda-5d25-b72f-f5553f552f65",
-      "path": "images/PRE_076_Snorlax_ex_805466.jpg",
-      "url": "https://m4s-ai.github.io/snoredex-data/images/PRE_076_Snorlax_ex_805466.jpg",
-      "sha256": "sha256:ddd186af2796655b68c992859d83de28e51a737df5d6ee7e6d9b271949711945",
-      "mimeType": "image/jpeg",
-      "imageScope": "legacy-product",
-      "altTextBasis": "Snorlax ex — Prismatic Evolutions; legacy-product",
+      "assetId": "asset-bf08312b-db3c-52b7-8eb7-dd3d116411e9",
+      "path": "verification/specimens/SPEC-0630.png",
+      "url": "https://m4s-ai.github.io/snoredex-data/verification/specimens/SPEC-0630.png",
+      "sha256": "sha256:9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
+      "mimeType": "image/png",
+      "imageScope": "exact-printing",
+      "altTextBasis": "Snorlax — Happy Set Decidueye & Melmetal & Koraidon & Miraidon; exact-printing",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -86889,13 +86996,13 @@
       }
     },
     {
-      "assetId": "asset-c287830a-c3dc-5363-bff2-2ad3037fe8ab",
-      "path": "images/CSVH1C_a001_Snorlax_860966.png",
-      "url": "https://m4s-ai.github.io/snoredex-data/images/CSVH1C_a001_Snorlax_860966.png",
-      "sha256": "sha256:f456c858de4333379b728ab7d34c5943218fecbb8a2ce742f438f286cb065a75",
-      "mimeType": "image/png",
+      "assetId": "asset-bfa1cff7-4dda-5d25-b72f-f5553f552f65",
+      "path": "images/PRE_076_Snorlax_ex_805466.jpg",
+      "url": "https://m4s-ai.github.io/snoredex-data/images/PRE_076_Snorlax_ex_805466.jpg",
+      "sha256": "sha256:ddd186af2796655b68c992859d83de28e51a737df5d6ee7e6d9b271949711945",
+      "mimeType": "image/jpeg",
       "imageScope": "legacy-product",
-      "altTextBasis": "Snorlax — Happy Set Pikachu & Clefairy & Turtwig & Gimmighoul; legacy-product",
+      "altTextBasis": "Snorlax ex — Prismatic Evolutions; legacy-product",
       "attribution": {
         "rightsStatus": "third-party-rights-excluded-from-project-grants",
         "licenceRef": "LICENSE.md",
@@ -88458,23 +88565,23 @@
     }
   ],
   "qualitySummary": {
-    "authoritativeGraphFingerprint": "sha256:82eb4849c069ae3d8bd96dc383bdf128571823f9b1fbb8ca2a59723acc955769",
+    "authoritativeGraphFingerprint": "sha256:8383309fc9fe9e621b82f46872c52057e3e8a7e3c52f92533d9f06d6b6085435",
     "authoritativeGraphSchemaVersion": "1.1.0",
     "discoveryTerminalState": "complete",
     "setDiscoveryRun": "20260910T160000Z",
-    "cardDiscoveryRun": "20261008T120000Z",
+    "cardDiscoveryRun": "20261008T220000Z",
     "counts": {
       "localizations": 16,
-      "localSets": 357,
-      "setEditions": 562,
+      "localSets": 358,
+      "setEditions": 563,
       "works": 42,
-      "items": 1029,
-      "verifiedPrintings": 880,
+      "items": 1030,
+      "verifiedPrintings": 883,
       "finishCandidates": 100,
-      "researchPlaceholders": 49,
-      "currentKnown": 880,
-      "research": 149,
-      "assets": 487
+      "researchPlaceholders": 47,
+      "currentKnown": 883,
+      "research": 147,
+      "assets": 488
     },
     "predecessor": {
       "schema": "snoredex-checklist",
@@ -88482,8 +88589,8 @@
       "rows": 905
     },
     "graphAccounting": {
-      "cardReleases": 633,
-      "physicalPrintings": 880
+      "cardReleases": 634,
+      "physicalPrintings": 883
     },
     "candidateProgressPolicy": {
       "progressClass": "research",
@@ -88507,11 +88614,11 @@
       },
       "counts": {
         "legacyRows": 905,
-        "verifiedPrintings": 756,
+        "verifiedPrintings": 758,
         "finishCandidates": 100,
-        "researchPlaceholders": 49,
-        "currentKnown": 756,
-        "research": 149
+        "researchPlaceholders": 47,
+        "currentKnown": 758,
+        "research": 147
       }
     }
   }

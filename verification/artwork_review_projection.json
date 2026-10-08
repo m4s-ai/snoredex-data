@@ -4,20 +4,20 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-08",
-  "projectionVersion": "6f983f768b48c9ba8a5f350bf4c3f6be6f30370c734453cbfea91b9c4a495cad",
+  "projectionVersion": "28bd48398cf8118ace8fe29294b061da158b8e1cf43c7714157b9a45242c5f20",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 251,
+    "groups": 252,
     "mappedWorks": 42,
-    "imageGroups": 251,
+    "imageGroups": 252,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 0,
-    "cardReleases": 633,
-    "physicalPrintings": 880,
-    "sourceObservations": 3143
+    "cardReleases": 634,
+    "physicalPrintings": 883,
+    "sourceObservations": 3150
   },
   "groups": [
     {
@@ -22378,13 +22378,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:0dc14a6e9c6b7e428e5a7412",
+              "semanticPrintingId": "PRINTING:0dc14a6e9c6b7e428e5a7412",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH4C:a003:Snorlax-But-First-Food-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0080",
+              "sourcePrintingId": "F0080-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0dc14a6e9c6b7e428e5a7412",
+              "specimenIds": [
+                "SPEC-0630"
+              ],
+              "sources": [
+                {
+                  "url": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation. Retained as SPEC-0630.",
+                  "retrievedAt": "2026-10-08",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -22401,9 +22442,47 @@
               "originalHash": "9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
               "previewSrc": "images/previews/CSVH4C_a003_Snorlax_888115.jpg?v=aae17a744bac7991eba0b4fe7ed7393ca8a0772ec5353547b58fe563700d80ef",
               "thumbnailSrc": "images/thumbs/CSVH4C_a003_Snorlax_888115.jpg?v=8cf3cc8f9544a76281b2b6e5a4a6239d4c2fd2a651b51a3557ba1d727fce4927"
+            },
+            {
+              "src": "verification/specimens/SPEC-0630.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0630",
+              "contentHash": "9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
+              "previewSrc": "images/previews/SPEC-0630.png?v=848bb78d0f28c0cce70af29edc30b287394f32cdbf5b3a6f6f86e968f3ee9277",
+              "thumbnailSrc": "images/thumbs/SPEC-0630.png?v=d24c646665652666d56eb9b6ad8fc8a4a173d49fe7a2dfef6d7570ab5fdbe0b8"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0080-P01:0:d0912bb117896b52",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+              "evidence": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation. Retained as SPEC-0630.",
+              "contentHash": "36d29dde815b0af3626cb83b43cd44381dfe6a6a415537bdf625e1a7449245b0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0080-P01:1:ec7f62f948905524",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties.",
+              "contentHash": "333d887b40ee7f98262ca60e4886d6b2705bd50bd0a455a93bc81d8b4c647951",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0630",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
+              "evidence": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation.",
+              "contentHash": "d2b4a6005b14f78eb2c359f9a73ea39aa88ef4c10f86e8a5da93cecc04c90a6b",
+              "image": "verification/specimens/SPEC-0630.png"
+            },
             {
               "observationId": "unit:U0768",
               "kind": "unit",
@@ -55640,6 +55719,118 @@
       ]
     },
     {
+      "groupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
+      "groupKind": "image-group",
+      "reviewedAppearanceId": null,
+      "imageGroupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
+      "appearanceIdentityState": "unreviewed-image-group",
+      "workIds": [
+        "WORK:Snorlax-Lazy-Press"
+      ],
+      "cardKeys": [
+        "Snorlax-Lazy-Press"
+      ],
+      "label": "Snorlax-Lazy-Press",
+      "members": [
+        {
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+          "workId": "WORK:Snorlax-Lazy-Press",
+          "cardKey": "Snorlax-Lazy-Press",
+          "reviewedAppearanceId": null,
+          "imageGroupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
+          "appearanceIdentityState": "unreviewed-image-group",
+          "locality": "CN",
+          "language": "S-Chinese",
+          "script": "Hans",
+          "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+          "localSetCode": "CSVSC",
+          "localNumber": "046/066",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0646"
+          ],
+          "legacyVariants": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0631",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0631",
+              "specimenIds": [
+                "SPEC-0631"
+              ]
+            }
+          ],
+          "detection": {
+            "state": "catalogue-derived",
+            "cardName": "卡比兽",
+            "artist": null,
+            "variant": null,
+            "finish": [
+              "non-holo"
+            ],
+            "foilPattern": [],
+            "markings": [],
+            "confidence": null,
+            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
+          },
+          "images": [
+            {
+              "src": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "label": "publisher card image",
+              "observationId": "source-first:CN:CSVSC:046/066:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0631.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0631",
+              "contentHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+              "previewSrc": "images/previews/SPEC-0631.png?v=4065d642f1a46489ce9e3d2bccca33e55a8a69b3a47dd1a0efb08abdaaa38e60",
+              "thumbnailSrc": "images/thumbs/SPEC-0631.png?v=2f49eb6e0e9fb7808c9767c32e48f666d7f2d65922a5658ac3f4fa0337fc30a4"
+            }
+          ],
+          "observations": [
+            {
+              "observationId": "source-first:CN:CSVSC:046/066:base",
+              "kind": "source-first",
+              "provider": "inspected-specimen",
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
+              "contentHash": "3e883358267f4023301121404bc838b22a7e5ad0007e1589bf69d399b89b063d",
+              "image": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+            },
+            {
+              "observationId": "specimen:SPEC-0631",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown.",
+              "contentHash": "19020383239f0183c0d4f048c8747e96dd2e80556c58c125c63d9dc94a262df4",
+              "image": "verification/specimens/SPEC-0631.png"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "groupId": "IMAGE-GROUP:e68429a68757fc06a5abc4fc",
       "groupKind": "image-group",
       "reviewedAppearanceId": null,
@@ -86990,13 +87181,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1ff1064e744984b42a4648bd",
+              "semanticPrintingId": "PRINTING:1ff1064e744984b42a4648bd",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CSVH1C:a001:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0079",
+              "sourcePrintingId": "F0079-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1ff1064e744984b42a4648bd",
+              "specimenIds": [
+                "SPEC-0619"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical Simplified Chinese 卡比兽001/023 identity visible. Printed code is small in this view; listing supplies CSVH1aC lead, retained exact sources remain the identity cross-check. No positive foil or Common rarity accepted from polluted metadata. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0619.",
+                  "retrievedAt": "2026-10-07",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -87028,12 +87260,30 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0079-P01:0:1dab8533a108fb1a",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "efd694b6ccb6662570eb8ba1d2aec2ea1455b14ed14b6e17c672a0d941af239d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0079-P01:1:89a0998605df400d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
+              "evidence": "Physical Simplified Chinese 卡比兽001/023 identity visible. Printed code is small in this view; listing supplies CSVH1aC lead, retained exact sources remain the identity cross-check. No positive foil or Common rarity accepted from polluted metadata. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0619.",
+              "contentHash": "b5c9f66b210b7f5608a18aaa7feeb25f126f84854fbd07a281895b828d70cd25",
+              "image": null
+            },
+            {
               "observationId": "specimen:SPEC-0619",
               "kind": "specimen",
               "provider": null,
               "url": "https://www.ebay.com/itm/198438640357",
               "evidence": "Physical Simplified Chinese 卡比兽001/023 identity visible. Printed code is small in this view; listing supplies CSVH1aC lead, retained exact sources remain the identity cross-check. No positive foil or Common rarity accepted from polluted metadata. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
-              "contentHash": "b39e40e9f1702bd6c3703a4697d7fb1acab876805f0e356bcf478a7820708239",
+              "contentHash": "78cd58fac4d8fb574fc476e763e50a19baef6f410a7a3d531e94c1cecdb1e996",
               "image": "verification/specimens/SPEC-0619.png"
             },
             {

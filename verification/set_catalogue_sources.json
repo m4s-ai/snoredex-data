@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 535,
+      "sourceRecords": 537,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 103,
+      "sourceFirstLocalSets": 159,
+      "releaseDateRecords": 104,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -16273,6 +16273,73 @@
         "publisherPage": "https://pokemoncard.co.kr/card/64",
         "sourceNativeDate": "2월 27일 대발매!",
         "evidenceBundle": "verification/evidence/20th-korean-047-071-20261008"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SF-9655F3BBDFFD",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "mixed-positive-evidence",
+      "providerRecordKey": "CN\u001fCSVSC",
+      "retrieved": "2026-10-08",
+      "raw": {
+        "localCode": "CSVSC",
+        "localName": null,
+        "locality": "CN",
+        "languages": [
+          "S-Chinese"
+        ],
+        "scripts": [
+          "Hans"
+        ],
+        "printIds": [
+          "CN:CSVSC:046/066:base"
+        ],
+        "providers": [
+          "inspected-specimen"
+        ],
+        "sourceUrls": [
+          "https://wiki.52poke.com/wiki/卡比兽（SVI）",
+          "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+          "https://wiki.52poke.com/wiki/对战学院（TCG）"
+        ],
+        "printedSetSize": 66,
+        "printedSetSizeBasis": "SPEC-0631 visibly printed CSVSC 046/066.",
+        "localeSuffix": null,
+        "observedCollectorNumbers": [
+          "046/066"
+        ],
+        "observedCoverage": "One exact Snorlax row; no whole-set harvest.",
+        "markAssetUrls": [],
+        "cardImageUrls": [
+          "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+        ],
+        "wikiShortcut": "CSVS",
+        "specimenIds": [
+          "SPEC-0631"
+        ],
+        "evidenceBundle": "verification/evidence/52poke-cn-local-identities-20261008"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-CN-CSVSC-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "https://www.pokemon.cn/tcg/product/15476.html#launch:CN:CSVSC",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://www.pokemon.cn/tcg/product/15476.html",
+      "raw": {
+        "localCode": "CSVSC",
+        "locality": "CN",
+        "languageScope": "S-Chinese",
+        "marketScopes": [
+          "CN"
+        ],
+        "date": "2026-01-16",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
       }
     }
   ]

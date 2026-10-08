@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 629,
+  "count": 631,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -13328,6 +13328,14 @@
       "citedBy": [
         "U0612"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for retained photograph SPEC-0619 on 2026-10-08. Printed identity and photograph provenance are preserved; no exhaustive finish inventory or physical ownership is asserted."
+      },
       "listingUrl": "https://www.ebay.com/itm/198438640357"
     },
     {
@@ -13557,6 +13565,58 @@
         "basis": "Collection owner explicitly confirms Non-Holo for the displayed TCGBOX Korean 20th 047/071 image on 2026-10-08. No ownership or exhaustive finish inventory is asserted."
       },
       "listingUrl": "https://tcgbox.co.kr/product/detail.html?product_no=2092"
+    },
+    {
+      "specimenId": "SPEC-0630",
+      "setCode": "CSVH4C",
+      "number": "a003",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Previously retained exact Cardmarket product image; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0630.png",
+      "photographSource": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+      "photographSha256": "sha256:9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
+      "observed": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "U0768"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for CSVH4C a003 and supplies its exact Cardmarket product image URL on 2026-10-08. No ownership or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003"
+    },
+    {
+      "specimenId": "SPEC-0631",
+      "setCode": "CSVSC",
+      "number": "046/066",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Retained TCGCollector card image manually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0631.png",
+      "photographSource": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+      "photographSha256": "sha256:9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+      "observed": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "CN:CSVSC:046/066:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted."
+      },
+      "listingUrl": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
     }
   ]
 }

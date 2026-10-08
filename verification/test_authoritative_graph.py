@@ -588,6 +588,10 @@ def verify_research_correction() -> None:
     before = deepcopy(documents)
     correction.apply(documents)
     assert documents == before, "canonical correction replay must be unchanged"
+    csvs = next(r for r in documents[2]["prints"] if r["printId"] == "CN:CSVSC:046/066:base")
+    assert csvs["localNumber"] == "046/066" and csvs["specimenId"] == "SPEC-0631"
+    assert csvs["releaseDate"] == "2026-01-16" and csvs["rarity"] == ["no printed rarity symbol", "fixed"]
+    assert not any(r["printId"] == "CN:CSVS:046/066:base" for r in documents[2]["prints"])
     mappings = graph_module._rarity_native_mappings(correction.read("rarity_catalogue.json"))
     assert all(key[3] is not None for key in mappings
                if key[2] == "no printed rarity symbol"), "no generic symbol-to-Fixed mapping"
@@ -595,11 +599,12 @@ def verify_research_correction() -> None:
               if row["entityType"] == "rarity-claim"
               and row["payload"].get("sourceNativeValue") == "no printed rarity symbol"]
     fixed = [row for row in claims if row.get("normalizedRarityId") == "fixed"]
-    assert len(fixed) == 21, "retain all positively scoped deck mappings"
+    assert len(fixed) == 22, "retain 21 reviewed deck mappings plus the exact CSVSC deck card"
     cn_fixed = {row["cardReleaseId"] for row in fixed if row["cardReleaseId"].startswith("RELEASE:CN:")}
     expected_cn = {f"RELEASE:CN:S-Chinese:{code}:{number}:Snorlax-Heavy-Impact"
                    for code, number, *_ in correction.CN_DECK_RARITIES}
-    assert cn_fixed == expected_cn, "only the three positively bound CN deck cards normalize to Fixed"
+    expected_cn.add("RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press")
+    assert cn_fixed == expected_cn, "only positively bound CN deck cards normalize to Fixed"
     assert not any("CSVH" in rid for rid in cn_fixed), "random modification packs are not Fixed"
     unresolved = [row for row in claims if row.get("normalizedRarityId") is None
                   and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")]
