@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-08",
-  "projectionVersion": "ae2f00748c3307f8e70f8cf3ae6802a4248db5237e1ba30f9fc5e3fc23e4219b",
+  "projectionVersion": "0a475216c74ab3d488809c8291b3512be2c150b8582b70ffc9ada2c84d8a3487",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 633,
-    "physicalPrintings": 878,
-    "sourceObservations": 3137
+    "physicalPrintings": 879,
+    "sourceObservations": 3140
   },
   "groups": [
     {
@@ -42696,13 +42696,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+              "semanticPrintingId": "PRINTING:dac66fa9a5cc87198585a05a",
+              "cardReleaseId": "RELEASE:KR:Korean:sH:038/053:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0372",
+              "sourcePrintingId": "F0372-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+              "specimenIds": [
+                "SPEC-0628"
+              ],
+              "sources": [
+                {
+                  "url": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown. Retained as SPEC-0628.",
+                  "retrievedAt": "2026-10-08",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Oswaldo KATO",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -42727,9 +42768,38 @@
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0628.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0628",
+              "contentHash": "b57a013d7a2975e6729e91e3947b260103645bcd51972e470ed9e83108a4c40a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b57a013d7a2975e6729e91e3947b260103645bcd51972e470ed9e83108a4c40a",
+              "previewSrc": "images/previews/SPEC-0628.png?v=ff9e3bc1bee7d5fa54d4f41663d17fee2e65d9e0c3a02115cbd9a71b12e95757",
+              "thumbnailSrc": "images/thumbs/SPEC-0628.png?v=5db31979828f1f0095d0c6337a20ee1867cb9f543209418d837a8a455189261f"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0372-P01:0:21eed50ce6e931f9",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
+              "evidence": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown. Retained as SPEC-0628.",
+              "contentHash": "d19ddf952c6cf3d2c8f18def653045e8252882d2fbe5ca5ea539f9f96d1647d1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0372-P01:1:ec7f62f948905524",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties.",
+              "contentHash": "d91179894fd8b460b2fcbedd41ba6d755e8e584276e1e6670c5305ab469a2092",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sH:038/053:base",
               "kind": "source-first",
@@ -42738,6 +42808,15 @@
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sH 038/053 in 소드&실드 「패밀리 포켓몬 카드 게임」, with illustrator Oswaldo KATO and HP160. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
               "contentHash": "2d6fb5a18dc9147be191b3cc64c1e7d96dab0a0144166f0ccf4835a60df32e0e",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SH/SH_013_L.png?w=512"
+            },
+            {
+              "observationId": "specimen:SPEC-0628",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://kream.co.kr/products/933056",
+              "evidence": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown.",
+              "contentHash": "b453aa11618c7cc60ad1215478e60a1b9ceb451e9bc55f2bd088caff7b4fcb36",
+              "image": "verification/specimens/SPEC-0628.png"
             },
             {
               "observationId": "unit:U0641",

@@ -15620,6 +15620,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0372-P01",
+        "semanticPrintingId": "PRINTING:dac66fa9a5cc87198585a05a",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+        "materializedTargetId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0628"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:dad67f52c6aff73963d38fa0",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -37977,6 +37997,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:948dbb105a69e5401715ca91, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0628",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0628",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0628",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a"
       }
     },
     {
@@ -103694,6 +103731,30 @@
         "sourceFinishUnitId": "F0522",
         "sourcePrintingId": "F0522-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:d9c191bcb125c60aff7574bb"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+        "semanticPrintingId": "PRINTING:dac66fa9a5cc87198585a05a",
+        "cardReleaseId": "RELEASE:KR:Korean:sH:038/053:Snorlax-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0372",
+        "sourcePrintingId": "F0372-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+        "specimenIds": [
+          "SPEC-0628"
+        ]
       }
     },
     {
@@ -183821,6 +183882,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:dad67f52c6aff73963d38fa0",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -195871,6 +195942,16 @@
       "toId": "PHYSICAL:PRINTING:948dbb105a69e5401715ca91",
       "provenance": {
         "specimenId": "SPEC-0626"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0628",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "provenance": {
+        "specimenId": "SPEC-0628"
       }
     },
     {
@@ -245267,6 +245348,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:dac66fa9a5cc87198585a05a",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:sH:038/053:Snorlax-Heavy-Impact",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:daffb58a5a51aa442407bf25",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -293123,6 +293220,13 @@
     },
     {
       "sourceKind": "finish-printing-record",
+      "sourceId": "F0372-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
       "sourceId": "F0373-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:6939d1e25f33084f09568df2",
@@ -312200,17 +312304,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:948dbb105a69e5401715ca91, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0628",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:dac66fa9a5cc87198585a05a, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 8621,
-    "edges": 12758,
-    "migrationInputs": 3068,
+    "entities": 8624,
+    "edges": 12762,
+    "migrationInputs": 3070,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 330,
+      "candidate-needs-evidence": 331,
       "carried": 68,
-      "established-and-mapped": 1695,
+      "established-and-mapped": 1696,
       "linked-local-counterpart": 125,
       "mapped": 406,
       "needs-evidence": 125,
@@ -312218,9 +312329,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2192,
+    "candidateClaims": 2194,
     "cardReleases": 633,
-    "physicalPrintings": 878,
+    "physicalPrintings": 879,
     "setSourceRecords": 534,
     "setSourceDispositions": 534,
     "localizations": 16

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 627,
+  "count": 628,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -13505,6 +13505,32 @@
         "KR:SM30A:060/080:base"
       ],
       "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060"
+    },
+    {
+      "specimenId": "SPEC-0628",
+      "setCode": "sH",
+      "number": "038/053",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "KREAM catalogue card image; visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0628.png",
+      "photographSource": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
+      "photographSha256": "sha256:b57a013d7a2975e6729e91e3947b260103645bcd51972e470ed9e83108a4c40a",
+      "observed": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:sH:038/053:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for the displayed Korean sH 038/053 KREAM image on 2026-10-08. No physical custody or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://kream.co.kr/products/933056"
     }
   ]
 }

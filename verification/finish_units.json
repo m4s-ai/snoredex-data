@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 527,
+      "withConfirmedFinish": 528,
       "withOnlyMarketplaceClaim": 17,
-      "pendingFinish": 16,
+      "pendingFinish": 15,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 321,
+      "withNonHolo": 322,
       "withHolo": 253,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 42,
-      "withAnyUnresolvedDetail": 121,
+      "withUnresolvedProductMapping": 41,
+      "withAnyUnresolvedDetail": 120,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -33411,23 +33411,58 @@
           "image": "images/sH_038_Snorlax_564222.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown. Retained as SPEC-0628.",
+              "retrievedAt": "2026-10-08",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0628"
+          ],
+          "image": "verification/specimens/SPEC-0628.png",
+          "printingId": "F0372-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0373",
