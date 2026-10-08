@@ -20,7 +20,7 @@
       "coverageEdges": 71,
       "absenceEdges": 0,
       "observations": 78,
-      "resolvedVerdictSources": 1721
+      "resolvedVerdictSources": 1723
     },
     "surfaceStates": {
       "active": 30,
@@ -7794,7 +7794,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:b01a65c997099559310b4c1a98116cda6064942c5e392bb35a04dc7fe8cecaea",
+      "rawRecordHash": "sha256:64a7e4c078e24bc9b255a4c03c9ab0a5eca858bb5ce4070e8eec77dde8d8aa41",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -7818,12 +7818,13 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 402,
+        "stableIdCount": 405,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2DaC:038/053:base",
           "CN:CS2aC:086/115:base",
           "F0002-P01",
+          "F0003-P01",
           "F0009-P01",
           "F0025-P01",
           "F0028-P01",
@@ -7960,6 +7961,7 @@
           "ID:sc1a I:127/154:base",
           "ID:sc3b I:126/158:base",
           "JP:M6a:095/103:base",
+          "KR:20th:047/071:base",
           "KR:BS2:30/40:base",
           "KR:BW7:055/070:base",
           "KR:XY10:057/078:base",
@@ -8111,6 +8113,7 @@
           "SPEC-0618",
           "SPEC-0623",
           "SPEC-0628",
+          "SPEC-0629",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -8224,7 +8227,7 @@
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
         "retrievedAt": "2026-10-08",
-        "usageCount": 439
+        "usageCount": 442
       }
     },
     {
@@ -23766,6 +23769,19 @@
       ]
     },
     {
+      "sourceKey": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-historical-detail",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-bs2010002030-positive",
+        "obs-kr-xy2-date-followup-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://image.pokemon.com.cn/wp-content/uploads/2025/09/68b581bfc64965fa84605ef01034e7714c1fb3a3.png?auth_key=1787864011-c3c391b112e24f00be4b06179d924d51-0-7f39f61eab18c34a7b56d314d38a10ad",
       "providerId": "pokemon-cn-official",
       "surfaceId": "pokemon-cn-card-image",
@@ -28969,6 +28985,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://tcgbox.co.kr/web/product/big/160330trainers/20th%20047.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

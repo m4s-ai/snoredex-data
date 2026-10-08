@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 628,
+  "count": 629,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -13531,6 +13531,32 @@
         "basis": "Collection owner explicitly confirms Non-Holo for the displayed Korean sH 038/053 KREAM image on 2026-10-08. No physical custody or exhaustive finish inventory is asserted."
       },
       "listingUrl": "https://kream.co.kr/products/933056"
+    },
+    {
+      "specimenId": "SPEC-0629",
+      "setCode": "20th",
+      "number": "047/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "TCGBOX exact product card scan; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0629.jpg",
+      "photographSource": "https://tcgbox.co.kr/web/product/big/160330trainers/20th%20047.jpg",
+      "photographSha256": "sha256:1bff6999340d89b6d0d0a069e07ba26c10e1f1e354330a8c7ac5df798e4e961a",
+      "observed": "The retained TCGBOX card scan visibly identifies Korean Snorlax, HP130, printed 20th 047/071, Stir and Snooze / Sleepy Press 120, Illus. Mitsuhiro Arita and a TCGBOX watermark. Printed denominator is 071. Identity and printed fields are observed; finish rests separately on the collection owner confirmation. Original physical holder is not identified.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:20th:047/071:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for the displayed TCGBOX Korean 20th 047/071 image on 2026-10-08. No ownership or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://tcgbox.co.kr/product/detail.html?product_no=2092"
     }
   ]
 }

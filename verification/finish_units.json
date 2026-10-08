@@ -57,12 +57,12 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 528,
-      "withOnlyMarketplaceClaim": 17,
+      "withConfirmedFinish": 529,
+      "withOnlyMarketplaceClaim": 16,
       "pendingFinish": 15,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 322,
+      "withNonHolo": 323,
       "withHolo": 253,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
@@ -372,20 +372,56 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://tcgbox.co.kr/web/product/big/160330trainers/20th%20047.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "The retained TCGBOX card scan visibly identifies Korean Snorlax, HP130, printed 20th 047/071, Stir and Snooze / Sleepy Press 120, Illus. Mitsuhiro Arita and a TCGBOX watermark. Printed denominator is 071. Identity and printed fields are observed; finish rests separately on the collection owner confirmation. Original physical holder is not identified. Retained as SPEC-0629.",
+              "retrievedAt": "2026-10-08",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0629"
+          ],
+          "image": "verification/specimens/SPEC-0629.jpg",
+          "printingId": "F0003-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -403,7 +439,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0003-P01"
+          "printingId": "F0003-P02"
         }
       ],
       "unresolved": [

@@ -168,7 +168,10 @@ def apply(documents):
     # coordinated identity graph, never unrelated localities or historical captures.
     replacements = [("KR:CLF:016/034", "KR:CLF:016/032"),
                     ("KR:Korean:CLF:016/034", "KR:Korean:CLF:016/032"),
-                    ("RARITYCLAIM:issue260:CLF:016/034", "RARITYCLAIM:issue260:CLF:016/032")]
+                    ("RARITYCLAIM:issue260:CLF:016/034", "RARITYCLAIM:issue260:CLF:016/032"),
+                    ("KR:20th:047/072", "KR:20th:047/071"),
+                    ("KR:Korean:20th:047/072", "KR:Korean:20th:047/071"),
+                    ("RARITYCLAIM:issue260:20th:047/072", "RARITYCLAIM:issue260:20th:047/071")]
     for document in (graph, catalogue, prints, rekeys):
         corrected = replace_identity(document, replacements)
         document.clear()
@@ -194,6 +197,28 @@ def apply(documents):
     profile["raw"]["retrievedByPrintId"][classic["printId"]] = "2026-10-07"
     upsert_entity(graph, "set-source-record", profile["sourceRecordId"], profile, origin=ORIGIN)
     releases = {row["entityId"]: row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"}
+
+    twenty = next(row for row in prints["prints"] if row["printId"] == "KR:20th:047/071:base")
+    twenty.update(localNumber="047/071", specimenId="SPEC-0629", providerId="seller-listing-photo",
+                  sourceUrl="https://tcgbox.co.kr/product/detail.html?product_no=2092", retrievedAt="2026-10-08",
+                  cardImageUrl="https://tcgbox.co.kr/web/product/big/160330trainers/20th%20047.jpg",
+                  evidence="SPEC-0629 positively shows Korean 20th 047/071, HP130 and the exact artwork/attacks. "
+                           "The collection owner separately confirms Non-Holo. No exhaustive finish inventory is inferred.")
+    for row in graph["entities"]:
+        payload = row["payload"]
+        if row["entityType"] == "card-release" and payload.get("locality") == "KR" and payload.get("localSetCode") == "20th":
+            payload["localNumber"] = "047/071"
+            payload["sourceRecords"] = sorted(set(payload.get("sourceRecords", []) + [twenty["sourceUrl"]]))
+        if row["entityType"] == "catalogue-card-release-ref" and row["entityId"].startswith("RELEASE:KR:Korean:20th:"):
+            payload["collectorNumber"] = "047/071"
+        if payload.get("sourceKind") == "source-first-record" and payload.get("sourceId") == twenty["printId"]:
+            payload.update(sourceRecord=twenty["sourceUrl"], retrievedAt="2026-10-08")
+    profile = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == "SET-SRC-SF-443327CEB86E")
+    profile["raw"].update(printedSetSize=71, observedCollectorNumbers=["047/071"],
+                          printedSetSizeBasis="Exact Korean card scan SPEC-0629 positively shows denominator 071.")
+    profile["raw"]["sourceUrls"] = sorted(set(profile["raw"]["sourceUrls"] + [twenty["sourceUrl"]]))
+    profile["raw"]["retrievedByPrintId"][twenty["printId"]] = "2026-10-08"
+    upsert_entity(graph, "set-source-record", profile["sourceRecordId"], profile, origin=ORIGIN)
 
     rarity_catalogue = read("rarity_catalogue.json")
     from authoritative_graph import _rarity_native_mappings
@@ -302,6 +327,16 @@ def apply(documents):
     admit_date(graph, catalogue, releases, prints, rid, dp_date["supportedProductReleaseDate"],
                dp_date["sourceUrl"], dp_date["retrievedAt"], card_only=True,
                provider=dp_date["providerId"], source_basis=dp_date["identityBasis"])
+    twenty_date = json.loads((ROOT / "verification/evidence/20th-korean-047-071-20261008/research.json").read_text(encoding="utf-8"))
+    rid = "RELEASE:KR:Korean:20th:047/071:Snorlax-Stir-and-Snooze-Sleepy-Press"
+    releases[rid]["sourceRecords"] = sorted(set(releases[rid].get("sourceRecords", []) + [twenty_date["publisherUrl"], twenty_date["advertisementUrl"]]))
+    admit_date(graph, catalogue, releases, prints, rid, twenty_date["supportedReleaseDate"],
+               twenty_date["advertisementUrl"], twenty_date["retrievedAt"], provider="pokemon-card-korea",
+               source_basis="Exact Korean Trainer Set 20th Anniversary advertisement states February 27; 2016 product/copyright context supplies the year.")
+    date_record = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007")
+    date_record["raw"].update(conflictingHeaderDate="2016-02-01", publisherPage=twenty_date["publisherUrl"],
+                              sourceNativeDate="2월 27일 대발매!", evidenceBundle="verification/evidence/20th-korean-047-071-20261008")
+    source_record(graph, catalogue, date_record, "EVENT:KR:20th:launch-2016-02-27", "release-event")
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 534,
+      "sourceRecords": 535,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 102,
+      "releaseDateRecords": 103,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -9848,22 +9848,23 @@
           "Hang"
         ],
         "printIds": [
-          "KR:20th:047/072:base"
+          "KR:20th:047/071:base"
         ],
         "providers": [
           "bulbapedia"
         ],
         "sourceUrls": [
-          "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)"
+          "https://bulbapedia.bulbagarden.net/wiki/Generations_(TCG)",
+          "https://tcgbox.co.kr/product/detail.html?product_no=2092"
         ],
         "retrievedByPrintId": {
-          "KR:20th:047/072:base": "2026-08-30"
+          "KR:20th:047/071:base": "2026-10-08"
         },
-        "printedSetSize": 72,
-        "printedSetSizeBasis": "the denominator printed on every observed card",
+        "printedSetSize": 71,
+        "printedSetSizeBasis": "Exact Korean card scan SPEC-0629 positively shows denominator 071.",
         "localeSuffix": null,
         "observedCollectorNumbers": [
-          "047/072"
+          "047/071"
         ],
         "observedCoverage": "exact positive Korean Snorlax cards reviewed for issue #260, not a set enumeration",
         "markAssetUrls": [],
@@ -16246,6 +16247,32 @@
         "status": "released",
         "marketScopeBasis": "The Korean PCG Special Set 2 section explicitly dates this product and includes one Snorlax LV.X card; exact DP006 identity is retained in the existing card release.",
         "note": "Exact named promo only; not the whole promo sequence."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-20th-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg#launch:KR:20th",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg",
+      "raw": {
+        "localCode": "20th",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2016-02-27",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "Exact Korean Trainer Set 20th Anniversary advertisement states February 27; 2016 product/copyright context supplies the year.",
+        "note": "Localized product launch; prerelease and later reprints not asserted.",
+        "conflictingHeaderDate": "2016-02-01",
+        "publisherPage": "https://pokemoncard.co.kr/card/64",
+        "sourceNativeDate": "2월 27일 대발매!",
+        "evidenceBundle": "verification/evidence/20th-korean-047-071-20261008"
       }
     }
   ]

@@ -650,6 +650,15 @@ def verify_research_correction() -> None:
     dp_source = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == dp006["releaseDateSourceRecordId"])
     assert dp_source["raw"]["note"] == "Exact named promo only; not the whole promo sequence."
     assert not any(row["entityType"] == "release-event" and row["entityId"] == "EVENT:KR:DP:launch-2010-08-26" for row in graph["entities"])
+    twenty = next(row for row in prints["prints"] if row["printId"] == "KR:20th:047/071:base")
+    assert twenty["localNumber"] == "047/071" and twenty["specimenId"] == "SPEC-0629"
+    assert twenty["releaseDate"] == "2016-02-27" and twenty["releaseDateProviderId"] == "pokemon-card-korea"
+    date_source = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == twenty["releaseDateSourceRecordId"])
+    assert date_source["raw"]["conflictingHeaderDate"] == "2016-02-01"
+    assert not any(row["printId"] in {"KR:20th:047/072:base", "KR:20th:047/077:base"} for row in prints["prints"])
+    twenty_profile = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == "SET-SRC-SF-443327CEB86E")
+    assert twenty_profile["raw"]["printedSetSize"] == 71
+    assert twenty_profile["raw"]["observedCollectorNumbers"] == ["047/071"]
     # The bounded CN helper cannot alter finishes, aliases or unrelated source-first rows.
     bounded_before = deepcopy(documents)
     correction.admit_cn_followup(graph, catalogue, prints)
@@ -823,7 +832,7 @@ def main() -> None:
     }
     unmatched_korean = {
         "KR:s1H:070/060:base", "KR:sm9:115/095:base",
-        "KR:s5a:093/070:base", "KR:20th:047/072:base",
+        "KR:s5a:093/070:base",
         "KR:xsv2a:143/165:base", "KR:xm2a:136/193:base",
     }
     assert {
@@ -899,7 +908,7 @@ def main() -> None:
     )
     assert len(catalogue_rows) == 52
     assert {row["printId"] for row in catalogue_rows} == (
-        official_korean | unmatched_korean | {"KR:CLF:016/032:base"}
+        official_korean | unmatched_korean | {"KR:CLF:016/032:base", "KR:20th:047/072:base"}
     )
     assert {
         row["printId"] for row in catalogue_rows if not row.get("work")
@@ -1010,7 +1019,9 @@ def main() -> None:
     }
     for row in catalogue_rows:
         if row.get("rarity") is not None:
-            persisted = source_first_rows[row["printId"]]
+            # This historical replay predates the exact Korean /071 scan.
+            current_id = {"KR:20th:047/072:base": "KR:20th:047/071:base"}.get(row["printId"], row["printId"])
+            persisted = source_first_rows[current_id]
             assert persisted["raritySourceUrl"] == row["raritySourceUrl"]
             assert persisted["rarityProviderId"] == row["rarityProviderId"]
             assert persisted["rarityRetrievedAt"] == row["rarityRetrievedAt"]
@@ -1143,7 +1154,7 @@ def main() -> None:
     same_work_assertions = [
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "equivalence-assertion"
-        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean | {"KR:CLF:016/032:base"}
+        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean | {"KR:CLF:016/032:base", "KR:20th:047/071:base"}
     ]
     unmatched_assertions = [
         row for row in same_work_assertions
