@@ -57,12 +57,12 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 514,
-      "withOnlyMarketplaceClaim": 24,
+      "withConfirmedFinish": 515,
+      "withOnlyMarketplaceClaim": 23,
       "pendingFinish": 22,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 314,
+      "withNonHolo": 315,
       "withHolo": 253,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
@@ -19395,20 +19395,56 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Physical Korean 잠만보 mC 568/742 identity is visible. Seller Holo title and surface glare do not independently establish finish. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0614.",
+              "retrievedAt": "2026-10-06",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0614"
+          ],
+          "image": "verification/specimens/SPEC-0614.png",
+          "printingId": "F0220-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -19426,7 +19462,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0220-P01"
+          "printingId": "F0220-P02"
         }
       ],
       "unresolved": [

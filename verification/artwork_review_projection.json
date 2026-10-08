@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-08",
-  "projectionVersion": "deca585d325e36313151a1c7b966a7e686b1066fc744878abab853efc2459034",
+  "projectionVersion": "106a8bf22ae473deb9fc2eb605ce2e1a306cf6620f1e7f87dc417fe22f02c0f4",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 633,
-    "physicalPrintings": 857,
-    "sourceObservations": 3104
+    "physicalPrintings": 858,
+    "sourceObservations": 3106
   },
   "groups": [
     {
@@ -54558,13 +54558,54 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e54a6b597c48874626983bb0",
+              "semanticPrintingId": "PRINTING:e54a6b597c48874626983bb0",
+              "cardReleaseId": "RELEASE:KR:Korean:mC:568/742:Snorlax-Lazy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0220",
+              "sourcePrintingId": "F0220-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e54a6b597c48874626983bb0",
+              "specimenIds": [
+                "SPEC-0614"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical Korean 잠만보 mC 568/742 identity is visible. Seller Holo title and surface glare do not independently establish finish. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0614.",
+                  "retrievedAt": "2026-10-06",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "Po-Suzuki",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -54626,6 +54667,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0220-P01:0:1dab8533a108fb1a",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "4b8b963403c55ddb41bea4d22f336da5bca060307b8e29dff372cf69007c07fd",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0220-P01:1:734072a047b3f27c",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+              "evidence": "Physical Korean 잠만보 mC 568/742 identity is visible. Seller Holo title and surface glare do not independently establish finish. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0614.",
+              "contentHash": "8e825c51fcd5883117de4baadb6366aef339cbf203c1e4e47366a550a83cbdca",
+              "image": null
+            },
+            {
               "observationId": "source-first:KR:mC:568/742:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
@@ -54649,7 +54708,7 @@
               "provider": null,
               "url": "https://m.bunjang.co.kr/products/433165345",
               "evidence": "Physical Korean 잠만보 mC 568/742 identity is visible. Seller Holo title and surface glare do not independently establish finish. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
-              "contentHash": "0b3faf5ff5d7fff73a21c80f28d1b0290dd928b8a6b41034fc3816eb44ce7e60",
+              "contentHash": "e4e57d9823ee28e7eaaa617b6df977a92660129d21ba0c0379145c1331001670",
               "image": "verification/specimens/SPEC-0614.png"
             },
             {
