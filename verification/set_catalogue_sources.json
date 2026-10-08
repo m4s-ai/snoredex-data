@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 533,
+      "sourceRecords": 534,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 101,
+      "releaseDateRecords": 102,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -16224,6 +16224,28 @@
           "retainedArticle": "tcgbox-announcement.json",
           "originalSha256": "8c408079a892ff2e65c2e8ecb014096033b33e7e0c50868da5331ecf92d819e4"
         }
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "52poke",
+      "providerRecordKey": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）#006:KR:DP",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+      "raw": {
+        "localCode": "DP",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2010-08-26",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "The Korean PCG Special Set 2 section explicitly dates this product and includes one Snorlax LV.X card; exact DP006 identity is retained in the existing card release.",
+        "note": "Exact named promo only; not the whole promo sequence."
       }
     }
   ]

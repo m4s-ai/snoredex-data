@@ -2155,6 +2155,50 @@
             "zeroResultMeans": "unknown",
             "challenge": "The retained AS5a image proves that card only; it cannot close the surrounding set or another locality."
           }
+        },
+        {
+          "edgeId": "52poke-kr-special-set-2-date",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "special-set"
+            ],
+            "timeRange": {
+              "start": "2010-08-26",
+              "end": "2010-08-26",
+              "basis": "Exact Korean Special Set 2 section, revision 2241492 only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "card-release",
+            "identity"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "Article or image absence is not catalogue closure."
+          },
+          "knownPositiveObservationId": "obs-52poke-kr-special-set-2-date",
+          "boundary": {
+            "outsideScope": [
+              "other Korean products",
+              "whole DP promo series dates",
+              "finish fields"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A dated product containing DP006 does not date the entire promo series."
+          }
         }
       ]
     },
@@ -9378,6 +9422,48 @@
         "obs-cn-seller-native-rarity-20261007-positive"
       ],
       "outcome": "Positive native printed value only, with no finish, absence or product-wide extrapolation."
+    },
+    {
+      "observationId": "obs-52poke-kr-special-set-2-date",
+      "surfaceId": "52poke-wiki",
+      "kind": "known-positive",
+      "queryUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+      "queryParameters": {
+        "revision": "2241492"
+      },
+      "retrievedAt": "2026-10-08",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "retrievedAt": "2026-10-08",
+          "target": {
+            "locality": "KR",
+            "language": "Korean",
+            "localSetCode": "DP",
+            "localNumber": "006",
+            "cardName": "Snorlax LV.X"
+          },
+          "supportedProductReleaseDate": "2010-08-26",
+          "supportedProduct": "포켓몬 카드 게임 스페셜 세트 제2탄 / PCG Special Set 2",
+          "sourceUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+          "providerId": "52poke",
+          "revisionId": "2241492",
+          "sourceNativeDate": "2010年8月26日",
+          "sourceNativeContents": "1枚卡比兽LV.X卡",
+          "identityBasis": "The Korean PCG Special Set 2 section explicitly dates this product and includes one Snorlax LV.X card; exact DP006 identity is retained in the existing card release.",
+          "scope": "Exact Korean DP006 availability through Special Set 2; not a date for the entire DP promo series.",
+          "canonicalIntegration": "accepted positive product release date"
+        }
+      },
+      "expectedIdentifiers": [
+        "Special Set 2",
+        "2010年8月26日",
+        "卡比兽LV.X"
+      ],
+      "validatesEdges": [
+        "52poke-kr-special-set-2-date"
+      ],
+      "outcome": "Exact product date and positive card inclusion only."
     }
   ]
 }

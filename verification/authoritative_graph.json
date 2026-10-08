@@ -44041,7 +44041,8 @@
         ],
         "sourceRecords": [
           "https://globalbunjang.com/product/386929037",
-          "https://pokemoncard.co.kr/cards/detail/PR2010001006"
+          "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+          "https://wiki.52poke.com/wiki/PCG特别套装（TCG）"
         ],
         "sourceFirstRecordIds": [
           "KR:DP:006:base"
@@ -44054,7 +44055,10 @@
             "DP-P",
             "127"
           ]
-        ]
+        ],
+        "releaseDate": "2010-08-26",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false
       }
     },
     {
@@ -145722,6 +145726,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+        "disposition": "mapped",
+        "targetRef": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+        "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-RESEARCH-DATE-KR-FXY-launch-20261007",
       "origin": "reviewed-evidence-issue-256-20261007",
       "payload": {
@@ -158680,6 +158695,33 @@
           "status": "released",
           "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
           "note": "Localized product launch; prerelease and later reprints not asserted."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "origin": "reviewed-evidence-issue-256-20261007",
+      "payload": {
+        "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+        "sourceKind": "release-date-record",
+        "provider": "52poke",
+        "providerRecordKey": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）#006:KR:DP",
+        "retrieved": "2026-10-08",
+        "sourceUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+        "raw": {
+          "localCode": "DP",
+          "locality": "KR",
+          "languageScope": "Korean",
+          "marketScopes": [
+            "KR"
+          ],
+          "date": "2010-08-26",
+          "datePrecision": "day",
+          "approximate": false,
+          "status": "released",
+          "marketScopeBasis": "The Korean PCG Special Set 2 section explicitly dates this product and includes one Snorlax LV.X card; exact DP006 identity is retained in the existing card release.",
+          "note": "Exact named promo only; not the whole promo sequence."
         }
       }
     },
@@ -274607,6 +274649,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-RESEARCH-DATE-KR-FXY-launch-20261007",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -276227,6 +276277,14 @@
       "relation": "asserts-release-event",
       "toType": "release-event",
       "toId": "EVENT:KR:CLF:launch-2023-12-16",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-record",
+      "fromId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "relation": "observed-by",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
       "provenance": {}
     },
     {
@@ -307329,6 +307387,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007",
+      "disposition": "mapped",
+      "targetRef": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
+      "reason": "Positive retained evidence scoped to the exact localized product/card; no absence or finish inference."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-RESEARCH-DATE-KR-FXY-launch-20261007",
       "disposition": "mapped",
       "targetRef": "EVENT:KR:FXY:launch-2014-03-04",
@@ -312138,16 +312203,16 @@
     }
   ],
   "summary": {
-    "entities": 8619,
-    "edges": 12756,
-    "migrationInputs": 3067,
+    "entities": 8621,
+    "edges": 12758,
+    "migrationInputs": 3068,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 330,
       "carried": 68,
       "established-and-mapped": 1695,
       "linked-local-counterpart": 125,
-      "mapped": 405,
+      "mapped": 406,
       "needs-evidence": 125,
       "needs-positive-local-identity": 19,
       "positively-excluded": 84,
@@ -312156,8 +312221,8 @@
     "candidateClaims": 2192,
     "cardReleases": 633,
     "physicalPrintings": 878,
-    "setSourceRecords": 533,
-    "setSourceDispositions": 533,
+    "setSourceRecords": 534,
+    "setSourceDispositions": 534,
     "localizations": 16
   }
 }

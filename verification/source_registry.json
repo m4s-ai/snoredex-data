@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 33,
-   "evidenceRecords": 1718,
-   "uniqueUrls": 1710,
+   "evidenceRecords": 1719,
+   "uniqueUrls": 1711,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6833
+   "claimsAttributed": 6834
   }
  },
  "providers": [
@@ -471,13 +471,14 @@
    "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
    "category": "collector-database",
    "authorityTier": 2,
-   "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data (卡比獸/Munchlax-family and set composition)",
+   "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data; exact Korean PCG Special Set 2 product date and contents (reviewed 2026-10-08)",
    "supportsAbsence": false,
    "usedFor": [
     "language",
     "artist",
     "edition",
-    "finish"
+    "finish",
+    "date"
    ],
    "attribution": "T-Chinese/S-Chinese card data from 52poke Wiki.",
    "notes": "Added on the owner's recommendation (#84, 2026-08-04) as the trustworthy source for T-Chinese products. Category coverage: dedicated Chinese-market wiki. Absence-capable scopes are NOT declared, so silence here never contradicts a T-Chinese claim on its own — positive evidence only. Static image host s1.52poke.com is reachable without bot protection; the wiki pages themselves sit behind a JS challenge.",
@@ -487,8 +488,8 @@
     "s2.52poke.com",
     "media.52poke.com"
    ],
-   "uniqueSources": 13,
-   "claimsSupported": 34
+   "uniqueSources": 14,
+   "claimsSupported": 35
   },
   {
    "providerId": "koreanpokemoncards",
@@ -1042,6 +1043,23 @@
    ],
    "retrievedAt": "2026-09-09",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://wiki.52poke.com/wiki/PCG%E7%89%B9%E5%88%AB%E5%A5%97%E8%A3%85%EF%BC%88TCG%EF%BC%89",
+   "nonUrlEvidenceId": null,
+   "providerId": "52poke",
+   "sourceTypes": [
+    "Localized set/product release-date record"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "SET-SRC-RESEARCH-DATE-KR-DP-006-20261007"
+   ],
+   "retrievedAt": "2026-10-08",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",

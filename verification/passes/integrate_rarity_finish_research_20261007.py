@@ -296,6 +296,12 @@ def apply(documents):
         evidenceBundle="verification/evidence/xy10-korean-release-date-20261008",
         corroboratingAnnouncement=xy10_date["contemporaneousSource"])
     source_record(graph, catalogue, date_record, "EVENT:KR:XY10:launch-2016-03-24", "release-event")
+    dp_date = json.loads((ROOT / "verification/evidence/dp006-korean-distribution-research-20261008/research.json").read_text(encoding="utf-8"))
+    rid = "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise"
+    releases[rid]["sourceRecords"] = sorted(set(releases[rid].get("sourceRecords", []) + [dp_date["sourceUrl"]]))
+    admit_date(graph, catalogue, releases, prints, rid, dp_date["supportedProductReleaseDate"],
+               dp_date["sourceUrl"], dp_date["retrievedAt"], card_only=True,
+               provider=dp_date["providerId"], source_basis=dp_date["identityBasis"])
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

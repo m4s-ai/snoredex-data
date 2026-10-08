@@ -17,10 +17,10 @@
     "counts": {
       "providers": 33,
       "surfaces": 60,
-      "coverageEdges": 70,
+      "coverageEdges": 71,
       "absenceEdges": 0,
-      "observations": 77,
-      "resolvedVerdictSources": 1718
+      "observations": 78,
+      "resolvedVerdictSources": 1719
     },
     "surfaceStates": {
       "active": 30,
@@ -982,7 +982,8 @@
         "closedWithinScope": false
       },
       "coverageEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ]
     },
     {
@@ -3988,6 +3989,52 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "The retained AS5a image proves that card only; it cannot close the surrounding set or another locality."
+      }
+    },
+    {
+      "edgeId": "52poke-kr-special-set-2-date",
+      "providerId": "52poke",
+      "surfaceId": "52poke-wiki",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "special-set"
+        ],
+        "timeRange": {
+          "start": "2010-08-26",
+          "end": "2010-08-26",
+          "basis": "Exact Korean Special Set 2 section, revision 2241492 only"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "card-release",
+        "identity"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Article or image absence is not catalogue closure."
+      },
+      "knownPositiveObservationId": "obs-52poke-kr-special-set-2-date",
+      "boundary": {
+        "outsideScope": [
+          "other Korean products",
+          "whole DP promo series dates",
+          "finish fields"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A dated product containing DP006 does not date the entire promo series."
       }
     },
     {
@@ -11087,6 +11134,47 @@
         "retainedExcerpt": "verification/evidence/all-open-research-20261007",
         "basis": "Exact retained Simplified Chinese face inspection. SPEC-0623 also shows the Pikachu silhouette. These observations establish the native value only; official product context separately supports scoped normalization."
       }
+    },
+    {
+      "observationId": "obs-52poke-kr-special-set-2-date",
+      "surfaceId": "52poke-wiki",
+      "kind": "known-positive",
+      "queryUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+      "queryParameters": {
+        "revision": "2241492"
+      },
+      "retrievedAt": "2026-10-08",
+      "expectedIdentifiers": [
+        "Special Set 2",
+        "2010年8月26日",
+        "卡比兽LV.X"
+      ],
+      "validatesEdges": [
+        "52poke-kr-special-set-2-date"
+      ],
+      "outcome": "Exact product date and positive card inclusion only.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:b745c03d9846d706fa2f66c55873b94ba3c3184a98e5d88056477de45b8182ad",
+      "rawRecord": {
+        "retrievedAt": "2026-10-08",
+        "target": {
+          "locality": "KR",
+          "language": "Korean",
+          "localSetCode": "DP",
+          "localNumber": "006",
+          "cardName": "Snorlax LV.X"
+        },
+        "supportedProductReleaseDate": "2010-08-26",
+        "supportedProduct": "포켓몬 카드 게임 스페셜 세트 제2탄 / PCG Special Set 2",
+        "sourceUrl": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+        "providerId": "52poke",
+        "revisionId": "2241492",
+        "sourceNativeDate": "2010年8月26日",
+        "sourceNativeContents": "1枚卡比兽LV.X卡",
+        "identityBasis": "The Korean PCG Special Set 2 section explicitly dates this product and includes one Snorlax LV.X card; exact DP006 identity is retained in the existing card release.",
+        "scope": "Exact Korean DP006 availability through Special Set 2; not a date for the entire DP promo series.",
+        "canonicalIntegration": "accepted positive product release date"
+      }
     }
   ],
   "sourceResolution": [
@@ -11095,7 +11183,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11107,7 +11196,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11119,7 +11209,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11131,7 +11222,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11143,7 +11235,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11157,7 +11250,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11169,7 +11263,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11182,7 +11277,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11194,7 +11290,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11206,7 +11303,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11218,7 +11316,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11230,7 +11329,8 @@
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -11238,11 +11338,25 @@
       ]
     },
     {
+      "sourceKey": "https://wiki.52poke.com/wiki/PCG%E7%89%B9%E5%88%AB%E5%A5%97%E8%A3%85%EF%BC%88TCG%EF%BC%89",
+      "providerId": "52poke",
+      "surfaceId": "52poke-wiki",
+      "capabilityEdgeIds": [
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://wiki.52poke.com/zh-hant/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E7%8D%B8GX%EF%BC%88SM9%EF%BC%89",
       "providerId": "52poke",
       "surfaceId": "52poke-wiki",
       "capabilityEdgeIds": [
-        "52poke-positive-record"
+        "52poke-positive-record",
+        "52poke-kr-special-set-2-date"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
