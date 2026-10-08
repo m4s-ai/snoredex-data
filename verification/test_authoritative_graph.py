@@ -592,7 +592,14 @@ def verify_research_correction() -> None:
     assert csvs["localNumber"] == "046/066" and csvs["specimenId"] == "SPEC-0631"
     assert csvs["releaseDate"] == "2026-01-16" and csvs["rarity"] == ["no printed rarity symbol", "fixed"]
     assert not any(r["printId"] == "CN:CSVS:046/066:base" for r in documents[2]["prints"])
-    mappings = graph_module._rarity_native_mappings(correction.read("rarity_catalogue.json"))
+    rarity_catalogue = correction.read("rarity_catalogue.json")
+    csvsc_mapping = next(row for row in rarity_catalogue["sourceNativeMappings"]
+                         if "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press" in row.get("cardReleaseIds", []))
+    assert csvsc_mapping["cardReleaseIds"] == ["RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press"]
+    assert all(source in csvsc_mapping["basis"] for source in
+               ("SPEC-0631", "Lucario", "https://www.pokemon.cn/tcg/product/15476.html",
+                "verification/evidence/52poke-cn-local-identities-20261008")), "exact normalization needs its own reviewed basis"
+    mappings = graph_module._rarity_native_mappings(rarity_catalogue)
     assert all(key[3] is not None for key in mappings
                if key[2] == "no printed rarity symbol"), "no generic symbol-to-Fixed mapping"
     claims = [row["payload"] for row in documents[0]["entities"]
