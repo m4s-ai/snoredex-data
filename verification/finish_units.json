@@ -57,8 +57,8 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 515,
-      "withOnlyMarketplaceClaim": 23,
+      "withConfirmedFinish": 516,
+      "withOnlyMarketplaceClaim": 22,
       "pendingFinish": 22,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
@@ -2673,13 +2673,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -2690,17 +2690,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/404911233_1_1777515904_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph of two complete Korean Team Plasma Snorlax cards. The Hangul name and rules text, Team Plasma print design and printed BW7 055/070 identity establish the exact localized card. No finish is inferred from the intrinsic Team Plasma design. Retained as SPEC-0442.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0442"
+          ],
+          "image": "verification/specimens/SPEC-0442.png",
           "printingId": "F0029-P01"
         }
       ],

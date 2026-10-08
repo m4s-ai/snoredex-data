@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-08",
-  "projectionVersion": "92dea5653bf43917d8c1551fa0967cd1036909dea42185726ef8a6d016c2591a",
+  "projectionVersion": "dcf1ac4b1e7ab37c141759fdc78855163edee1227884ebdd893ed106e5720303",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 633,
-    "physicalPrintings": 859,
-    "sourceObservations": 3106
+    "physicalPrintings": 860,
+    "sourceObservations": 3109
   },
   "groups": [
     {
@@ -18456,13 +18456,59 @@
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:71b12844d1874b31ced22772",
+              "semanticPrintingId": "PRINTING:71b12844d1874b31ced22772",
+              "cardReleaseId": "RELEASE:KR:Korean:BW7:055/070:Snorlax-Block-Teampact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0029",
+              "sourcePrintingId": "F0029-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:71b12844d1874b31ced22772",
+              "specimenIds": [
+                "SPEC-0442"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://media.bunjang.co.kr/product/404911233_1_1777515904_w480.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Seller photograph of two complete Korean Team Plasma Snorlax cards. The Hangul name and rules text, Team Plasma print design and printed BW7 055/070 identity establish the exact localized card. No finish is inferred from the intrinsic Team Plasma design. Retained as SPEC-0442.",
+                  "retrievedAt": "2026-08-30",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": "5ban Graphics",
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -18502,6 +18548,33 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0029-P01:0:1dab8533a108fb1a",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "8430e03aaf2c605f465327d55b1ffc38a44127472ca550e9d048a744a6478abd",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0029-P01:1:3628b99ebba31944",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/404911233_1_1777515904_w480.jpg",
+              "evidence": "Seller photograph of two complete Korean Team Plasma Snorlax cards. The Hangul name and rules text, Team Plasma print design and printed BW7 055/070 identity establish the exact localized card. No finish is inferred from the intrinsic Team Plasma design. Retained as SPEC-0442.",
+              "contentHash": "a8f23dd1e17e6aabfcf78fe48fbb5f42147032cc2800d0e9b8f134b90cca3bdb",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0029-P01:2:75495adf8503c36c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "712285672decad677b488453f6e130282d80e939a1473180c6062eeec20a09d7",
+              "image": null
+            },
+            {
               "observationId": "source-first:KR:BW7:055/070:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
@@ -18516,7 +18589,7 @@
               "provider": null,
               "url": "https://globalbunjang.com/product/404911233",
               "evidence": "Seller photograph of two complete Korean Team Plasma Snorlax cards. The Hangul name and rules text, Team Plasma print design and printed BW7 055/070 identity establish the exact localized card. No finish is inferred from the intrinsic Team Plasma design.",
-              "contentHash": "0abf5132005695e345698ade098c2fba36a11839389d6e3abe4549b02f9737cf",
+              "contentHash": "3b6f35f1f613bee415b4702ce690664aa5a56948b309f6312302fab66881a90e",
               "image": "verification/specimens/SPEC-0442.png"
             },
             {

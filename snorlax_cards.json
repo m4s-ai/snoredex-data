@@ -39,8 +39,8 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-10-08",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 515,
-      "withOnlyMarketplaceClaim": 23,
+      "withConfirmedFinish": 516,
+      "withOnlyMarketplaceClaim": 22,
       "pendingFinish": 22,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
@@ -37599,7 +37599,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo"
         ],
@@ -37658,18 +37658,18 @@
               "non-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0029",
             "productMappingStatus": "confirmed",
             "printings": [
@@ -37680,8 +37680,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0442.png",
+                "specimenIds": [
+                  "SPEC-0442"
+                ]
               }
             ]
           },
