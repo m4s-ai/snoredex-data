@@ -70,7 +70,8 @@ def source_record(graph, catalogue, record, target, target_type):
                 target_type, target)
 
 
-def admit_date(graph, catalogue, releases, prints, release_id, value, url, retrieved, *, card_only=False):
+def admit_date(graph, catalogue, releases, prints, release_id, value, url, retrieved, *, card_only=False,
+               provider=None, source_basis=None):
     release = releases[release_id]
     code, locality = release["localSetCode"], release["locality"]
     edition = release["setEditionId"]
@@ -81,13 +82,13 @@ def admit_date(graph, catalogue, releases, prints, release_id, value, url, retri
     sid = f"SET-SRC-RESEARCH-DATE-{locality}-{code}-{suffix}-20261007"
     target = release_id if card_only else f"EVENT:{locality}:{code}:launch-{value}"
     record = {"sourceRecordId": sid, "sourceKind": "release-date-record",
-              "provider": "pokemon-card-korea" if locality == "KR" else "pokemon-cn-official",
+              "provider": provider or ("pokemon-card-korea" if locality == "KR" else "pokemon-cn-official"),
               "providerRecordKey": url + "#" + suffix + ":" + locality + ":" + code,
               "retrieved": retrieved, "sourceUrl": url,
               "raw": {"localCode": code, "locality": locality, "languageScope": release["language"],
                       "marketScopes": [locality], "date": value, "datePrecision": "day",
                       "approximate": False, "status": "released",
-                      "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+                      "marketScopeBasis": source_basis or "Exact localized publisher product matched to retained card identity.",
                       "note": "Exact named promo only; not the whole promo sequence." if card_only
                               else "Localized product launch; prerelease and later reprints not asserted."}}
     source_record(graph, catalogue, record, target, "card-release" if card_only else "release-event")
@@ -96,7 +97,7 @@ def admit_date(graph, catalogue, releases, prints, release_id, value, url, retri
                  "eventKind": "launch", "dateValue": value, "datePrecision": "day",
                  "approximate": False, "status": "released", "timezone": None,
                  "marketScopes": [locality], "marketScopeBasis": record["raw"]["marketScopeBasis"],
-                 "sourceRecordId": sid, "linkBasis": "Exact established local set and publisher product."}
+                 "sourceRecordId": sid, "linkBasis": source_basis or "Exact established local set and publisher product."}
         upsert_entity(graph, "release-event", target, event, origin=ORIGIN)
         upsert_edge(graph, "release-event", target, "belongs-to", "local-set", local_set)
         upsert_edge(graph, "release-event", target, "supports", "set-edition", edition)
@@ -271,6 +272,14 @@ def apply(documents):
         rid = next(key for key, release in releases.items()
                    if release.get("locality") == locality and release.get("localSetCode") == code)
         admit_date(graph, catalogue, releases, prints, rid, date, url, "2026-10-07")
+    bs2_date = json.loads((ROOT / "verification/evidence/owner-bs2-30-non-holo-20261008/release-date-research.json").read_text(encoding="utf-8"))
+    rid = next(key for key, release in releases.items()
+               if release.get("locality") == "KR" and release.get("localSetCode") == "BS2"
+               and release.get("localNumber") == "30/40")
+    releases[rid]["sourceRecords"] = sorted(set(releases[rid].get("sourceRecords", []) + [bs2_date["sourceUrl"]]))
+    admit_date(graph, catalogue, releases, prints, rid, bs2_date["releaseDate"],
+               bs2_date["sourceUrl"], bs2_date["retrieved"], provider=bs2_date["providerId"],
+               source_basis=bs2_date["identityBasis"])
     catalogue["meta"]["counts"]["sourceRecords"] = len(catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["editionAvailabilityRecords"] = sum(row["sourceKind"] == "edition-availability-record" for row in catalogue["sourceRecords"])
     catalogue["meta"]["counts"]["releaseDateRecords"] = sum(row["sourceKind"] == "release-date-record" for row in catalogue["sourceRecords"])

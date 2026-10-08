@@ -7,10 +7,10 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 531,
+      "sourceRecords": 532,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 158,
-      "releaseDateRecords": 99,
+      "releaseDateRecords": 100,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 14
@@ -16168,6 +16168,28 @@
         "approximate": false,
         "status": "released",
         "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
+        "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-RESEARCH-DATE-KR-BS2-launch-20261007",
+      "sourceKind": "release-date-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "https://bulbapedia.bulbagarden.net/wiki/Burning_Confrontation_(KTCG)#launch:KR:BS2",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Burning_Confrontation_(KTCG)",
+      "raw": {
+        "localCode": "BS2",
+        "locality": "KR",
+        "languageScope": "Korean",
+        "marketScopes": [
+          "KR"
+        ],
+        "date": "2010-06-17",
+        "datePrecision": "day",
+        "approximate": false,
+        "status": "released",
+        "marketScopeBasis": "The article explicitly names the Korean 40-card expansion and Snorlax 30/40; retained SPEC-0037 and reviewed KR:BS2:30/40:base bind that exact release to local code BS2.",
         "note": "Localized product launch; prerelease and later reprints not asserted."
       }
     }

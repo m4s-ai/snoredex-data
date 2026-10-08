@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 516,
-      "withOnlyMarketplaceClaim": 22,
-      "pendingFinish": 22,
+      "withConfirmedFinish": 527,
+      "withOnlyMarketplaceClaim": 17,
+      "pendingFinish": 16,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 315,
+      "withNonHolo": 321,
       "withHolo": 253,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 48,
-      "withAnyUnresolvedDetail": 127,
+      "withUnresolvedProductMapping": 42,
+      "withAnyUnresolvedDetail": 121,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -14200,23 +14200,58 @@
           "image": "images/HXY_026_Snorlax_564579.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cdn.collectory.cc/cards/kr/ST2014001/026_036.webp",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Complete Korean database render of Snorlax from the XY Chespin First Set. The Hangul name and rules text, printed HXY set mark and collector number 026/036 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0461.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0461"
+          ],
+          "image": "verification/specimens/SPEC-0461.png",
+          "printingId": "F0153-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0154",
@@ -19019,13 +19054,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -19036,17 +19071,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Nihil-Zero/Snorlax-m3062",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/411963518_1_1781756877_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph containing a complete Korean Snorlax. The Hangul name and rules text and printed m3 062/080 C identity establish the exact localized card. No finish is inferred. Retained as SPEC-0443.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0443"
+          ],
+          "image": "verification/specimens/SPEC-0443.png",
           "printingId": "F0214-P01"
         }
       ],
@@ -19216,23 +19272,58 @@
           "image": "images/mC_567_Snorlax_863869.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cdn.collectory.cc/cards/kr/BS2026001/567_742.webp",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Complete Korean database render of Snorlax. The Hangul name and rules text, printed mC set mark and collector number 567/742 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0458.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0458"
+          ],
+          "image": "verification/specimens/SPEC-0458.png",
+          "printingId": "F0217-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0218",
@@ -19656,23 +19747,58 @@
           "image": "images/mC_569_Hop_s_Snorlax_863871.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cdn.collectory.cc/cards/kr/BS2026001/569_742.webp",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Complete Korean database render of Hop's Snorlax. The Hangul name and rules text, Hop portrait, printed mC set mark and collector number 569/742 establish the exact localized card. The printed rarity is N. A digital render is identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0460.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0460"
+          ],
+          "image": "verification/specimens/SPEC-0460.png",
+          "printingId": "F0223-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0224",
@@ -31705,13 +31831,13 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -31722,17 +31848,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/427352825_1_1788084118_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s2 077/096 U identity establish the exact localized card. Sleeve glare is not treated as finish evidence. Retained as SPEC-0455.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0455"
+          ],
+          "image": "verification/specimens/SPEC-0455.png",
           "printingId": "F0352-P01"
         },
         {
@@ -36168,23 +36315,58 @@
           "image": "images/smL_038_Snorlax_564732.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SML/SML_038.png?w=512",
+              "sourceType": "official Pokémon Korea card render",
+              "evidence": "Complete official Korean render for Snorlax smL 038/051. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0249.",
+              "retrievedAt": "2026-08-28",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained official pokémon korea card render supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0249"
+          ],
+          "image": "verification/specimens/SPEC-0249.png",
+          "printingId": "F0415-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0416",
@@ -41767,13 +41949,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -41784,17 +41966,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Crimson-Haze/Snorlax-sv5a051",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/416373605_1_1782484118_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph of two complete Korean Snorlax cards. The Hangul name and rules text and printed sv5a 051/066 identity establish the exact localized card. No finish is inferred. Retained as SPEC-0441.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0441"
+          ],
+          "image": "verification/specimens/SPEC-0441.png",
           "printingId": "F0486-P01"
         }
       ],
@@ -42233,23 +42436,58 @@
           "image": "images/svG_021_Snorlax_744984.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SVG/SVG_021.png?w=512",
+              "sourceType": "official Pokémon Korea card render",
+              "evidence": "Complete official Korean render for Snorlax svG 021/049. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0252.",
+              "retrievedAt": "2026-08-28",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained official pokémon korea card render supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0252"
+          ],
+          "image": "verification/specimens/SPEC-0252.png",
+          "printingId": "F0493-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0494",
@@ -42566,23 +42804,58 @@
           "image": "images/svLN_010_Snorlax_785477.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/426224532_1_1787819127_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed svLN 010/022 identity establish the exact localized card. No finish is inferred. Retained as SPEC-0438.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0438"
+          ],
+          "image": "verification/specimens/SPEC-0438.png",
+          "printingId": "F0500-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0501",
@@ -53905,13 +54178,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -53922,17 +54195,48 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/421867656_1_1787253313_w480.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Seller photograph of multiple copies of Korean Snorlax. The Hangul name and rules text and printed XY10 057/078 C identity establish the exact localized card. No finish is inferred. Retained as SPEC-0457.",
+              "retrievedAt": "2026-08-30",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/kfsAAeSw93Np22TF/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Physical Korean057/078 matches target. No obvious foil reflection in this view; seller Non-Holo claim not independently established by absence of glare. Conflicting item specifics rejected. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0618.",
+              "retrievedAt": "2026-10-07",
+              "claimFields": [
+                "identity"
+              ]
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0457",
+            "SPEC-0618"
+          ],
+          "image": "verification/specimens/SPEC-0457.png",
           "printingId": "F0626-P01"
         }
       ],
@@ -54099,13 +54403,13 @@
         "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
@@ -54116,17 +54420,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2087744043/2087744043.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete Cardmarket seller photograph of Korean Wild Blaze Snorlax 066/080. The visible Hangul name and rules text, XY2 set mark and collector number 066/080 establish the exact localized card identity. No finish is inferred from the photograph or from the marketplace language filter. Retained as SPEC-0411.",
+              "retrievedAt": "2026-08-28",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0411"
+          ],
+          "image": "verification/specimens/SPEC-0411.jpg",
           "printingId": "F0629-P01"
         }
       ],
