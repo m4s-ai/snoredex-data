@@ -37440,6 +37440,23 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0623",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0623",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0623",
+        "evidenceStatus": "observed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:specimen:SPEC-0623",
+        "materializedTargetId": "PHYSICAL:specimen:SPEC-0623",
+        "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0623"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:specimen:SPEC-0624",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -106420,6 +106437,30 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0609",
         "specimenIds": [
           "SPEC-0609"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0623",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0623",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0623 Simplified Chinese CS2DaC038/053 photograph. The seller photograph supports identity; absence of glare does not independently carry the finish claim. No inventory completeness asserted.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0623",
+        "specimenIds": [
+          "SPEC-0623"
         ]
       }
     },
@@ -194407,6 +194448,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0623",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:specimen:SPEC-0623",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0624",
       "relation": "provenance",
       "toType": "physical-printing",
@@ -245905,6 +245956,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0623",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:specimen:SPEC-0623",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:specimen:SPEC-0623",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
       "provenance": {}
     },
     {
@@ -310134,6 +310201,13 @@
     },
     {
       "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0623",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:specimen:SPEC-0623",
+      "reason": "physical observation establishes standalone printing for RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact"
+    },
+    {
+      "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0624",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
@@ -310155,14 +310229,14 @@
     }
   ],
   "summary": {
-    "entities": 8566,
-    "edges": 12681,
-    "migrationInputs": 3038,
+    "entities": 8568,
+    "edges": 12684,
+    "migrationInputs": 3039,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 323,
       "carried": 68,
-      "established-and-mapped": 1675,
+      "established-and-mapped": 1676,
       "linked-local-counterpart": 125,
       "mapped": 403,
       "needs-evidence": 125,
@@ -310170,9 +310244,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2165,
+    "candidateClaims": 2166,
     "cardReleases": 633,
-    "physicalPrintings": 858,
+    "physicalPrintings": 859,
     "setSourceRecords": 531,
     "setSourceDispositions": 531,
     "localizations": 16

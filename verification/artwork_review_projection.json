@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-08",
-  "projectionVersion": "106a8bf22ae473deb9fc2eb605ce2e1a306cf6620f1e7f87dc417fe22f02c0f4",
+  "projectionVersion": "92dea5653bf43917d8c1551fa0967cd1036909dea42185726ef8a6d016c2591a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,7 +16,7 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 633,
-    "physicalPrintings": 858,
+    "physicalPrintings": 859,
     "sourceObservations": 3106
   },
   "groups": [
@@ -45838,13 +45838,35 @@
             "U0639"
           ],
           "legacyVariants": [],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0623",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0623 Simplified Chinese CS2DaC038/053 photograph. The seller photograph supports identity; absence of glare does not independently carry the finish claim. No inventory completeness asserted.",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": null,
+              "sourcePrintingId": null,
+              "establishingClaimId": "CLAIM:specimen:SPEC-0623",
+              "specimenIds": [
+                "SPEC-0623"
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "卡比兽",
             "artist": null,
             "variant": null,
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -45879,7 +45901,7 @@
               "provider": null,
               "url": "https://www.ebay.com/itm/198560806619",
               "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted.",
-              "contentHash": "9a31a606a93f6403c2eeeeab57de769315de0acdb7a3ccca7949ff54b3ade4fc",
+              "contentHash": "125ca1b3af7dc7c54159f45a6e4c9753776a828a64618ca04d25eff5f72bc47a",
               "image": "verification/specimens/SPEC-0623.png"
             }
           ]

@@ -8,7 +8,7 @@
     "fromFingerprint": "sha256:eed038fa9fccfbdac26ecda9747d9b4ebfb27c5f91855b8f364e91e4eab7f31b",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:136895db5b19579e8b4d0fe25e5392f1bfc8e5fc3861e250d611bfb284b8e377",
+    "toFingerprint": "sha256:f892b777e427cc0ac55ae620d75134461cf0e1cb28ff8281c4e0494cfbf1cba2",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:136895db5b19579e8b4d0fe25e5392f1bfc8e5fc3861e250d611bfb284b8e377",
+      "toFingerprint": "sha256:f892b777e427cc0ac55ae620d75134461cf0e1cb28ff8281c4e0494cfbf1cba2",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -12390,7 +12390,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:136895db5b19579e8b4d0fe25e5392f1bfc8e5fc3861e250d611bfb284b8e377",
+      "toFingerprint": "sha256:f892b777e427cc0ac55ae620d75134461cf0e1cb28ff8281c4e0494cfbf1cba2",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -30219,6 +30219,15 @@
       "reconciliation": "one-to-one-preserve"
     },
     {
+      "fromItemId": "item-1c8d3078-0570-5e0e-bbd7-96a59beefc53",
+      "toItemIds": [
+        "item-651fc626-3fb4-5354-893a-3c8dfc504459"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve",
+      "reconciliation": "one-to-one-preserve"
+    },
+    {
       "fromItemId": "item-f3f886ac-858f-520d-b781-8f50931762b6",
       "toItemIds": [
         "item-48536dbb-d39e-5f6b-84f7-2be30c6ea5be"
@@ -38598,7 +38607,7 @@
         "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-1c8d3078-0570-5e0e-bbd7-96a59beefc53"
+          "item-651fc626-3fb4-5354-893a-3c8dfc504459"
         ],
         "reason": null
       },
@@ -48209,6 +48218,11 @@
         "targetItemId": "item-7fcae0db-f886-5992-80ef-abf735d4a560"
       },
       {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0623",
+        "disposition": "projected",
+        "targetItemId": "item-651fc626-3fb4-5354-893a-3c8dfc504459"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0625",
         "disposition": "projected",
         "targetItemId": "item-f5b3557d-9a0a-5660-bf99-b29da4e54181"
@@ -48267,7 +48281,7 @@
     "summary": {
       "legacyChecklistRows": 904,
       "cardReleases": 633,
-      "physicalPrintings": 858,
+      "physicalPrintings": 859,
       "cardReleasesWithoutCollectorItem": 0
     }
   }
