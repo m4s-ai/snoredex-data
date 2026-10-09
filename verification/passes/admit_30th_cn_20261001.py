@@ -53,6 +53,9 @@ def main():
                releaseStatus='released',artist='Aya Kusube',variant='base',catchUpOf=None,
                corroborated=False,markAssetUrl=None,evidence=EVIDENCE,work='Snorlax-Good-Sleep-Collapse',
                raritySourceUrl=None,rarityProviderId='owner-attestation',rarityRetrievedAt=DATE)
+    previous_print = next((r for r in prints['prints'] if r['printId'] == PID), {})
+    row.update({key: value for key, value in previous_print.items()
+                if key.startswith('releaseDate') or key == 'releaseApproximate'})
     prints['prints'] = sorted([r for r in prints['prints'] if r['printId'] not in (PID,'CN:30th C:095/103:base')]+[row],key=lambda r:r['printId'])
     prints['meta']['counts']['admitted']=len(prints['prints'])
     profile = dict(sourceRecordId=SID,sourceKind='source-first-local-set-profile',provider='inspected-specimen',
@@ -103,6 +106,10 @@ def main():
     release.update(cardReleaseId=RID,setEditionId=edition,locality='CN',language='S-Chinese',script='Hans',localSetCode=CODE,
                    claimIds=[claim],establishingClaimIds=[claim],sourceRecords=[URL],sourceFirstRecordIds=[PID],
                    releaseDate=None,releaseDatePrecision=None,releaseApproximate=False,releaseStatus='released')
+    previous_release = next((e['payload'] for e in graph['entities']
+                             if e['entityType'] == 'card-release' and e['entityId'] == RID), {})
+    release.update({key: value for key, value in previous_release.items()
+                    if key.startswith('releaseDate') or key == 'releaseApproximate'})
     entity('card-release',RID,release)
     entity('candidate-claim',claim,dict(claimId=claim,claimKind='card-release',sourceKind='source-first-record',sourceId=PID,
            sourceRecord=URL,retrievedAt=DATE,evidenceStatus='confirmed',disposition='established-and-mapped',proposedTargetId=RID,materializedTargetId=RID,reason=EVIDENCE))
@@ -125,6 +132,6 @@ def main():
     after = {(e['entityType'],e['entityId']):e for e in graph['entities']}
     assert all(after[key]==value for key,value in existing.items()), 'Admission must preserve every existing graph entity'
     for name,data in [('authoritative_graph.json',graph),('source_first_prints.json',prints),('set_catalogue_sources.json',sources),('rarity_catalogue.json',rarity),('specimens.json',specimens)]:write(name,data)
-    print('Admitted CN:30thC:095/103:base via SPEC-0600; exact release date remains unknown')
+    print('Admitted CN:30thC:095/103:base via SPEC-0600; preserved release date:', row.get('releaseDate'))
 
 if __name__=='__main__':main()

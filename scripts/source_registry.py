@@ -354,7 +354,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Wiki content; attribution per CC BY-NC-SA.",
         "category": "collector-database",
         "authorityTier": 2,
-        "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data (卡比獸/Munchlax-family and set composition)",
+        "coverage": "Traditional-Chinese / Simplified-Chinese market card and set data; exact Korean PCG Special Set 2 product date and contents (reviewed 2026-10-08)",
         "supportsAbsence": False,
         "usedFor": ["language", "artist", "edition", "finish"],
         "attribution": "T-Chinese/S-Chinese card data from 52poke Wiki.",

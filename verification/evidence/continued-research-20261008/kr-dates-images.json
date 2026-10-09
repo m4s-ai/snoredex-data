@@ -1,0 +1,287 @@
+{
+  "retrievedAt": "2026-10-08",
+  "scope": "Current Korean date/image gaps; research only",
+  "canonicalMutations": false,
+  "currentStore": "collector_catalogue.json",
+  "identityCorrections": [
+    "SM30A060/060 lead resolves to060/080",
+    "BS2030/090 lead resolves to30/40",
+    "DP006/096 lead resolves to006 without denominator"
+  ],
+  "results": [
+    {
+      "target": "KR SM30A060/080",
+      "missingFields": [
+        "retained image"
+      ],
+      "queries": [
+        "\"잠만보_SM30A_060_KOR.png\"",
+        "site:pokemoncard.co.kr \"BS2019018060\"",
+        "\"잠만보\" \"060/080\" SM30A",
+        "\"Snorlax\" \"SM30A\" Korean",
+        "\"잠만보\" \"SM30A\" site:tcgbox.co.kr",
+        "\"잠만보\" \"060/080\" site:bunjang.co.kr",
+        "\"잠만보\" \"SM30A\" site:ebay.com",
+        "\"Snorlax\" \"Random Half Deck\" Korean"
+      ],
+      "inspectedURLs": [
+        {
+          "url": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+          "status": "Fresh original web request unavailable; indexed060/080 exact row and retained raw detail checked"
+        },
+        {
+          "url": "https://k-tcgpanda.com/cardimg/SM/SM30A/",
+          "status": "Indexed directory lists exact filename; original web Internal Error"
+        },
+        {
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Random_Half_Deck_(KTCG)",
+          "status": "Indexed matching product exact060/080 row; no new photograph"
+        }
+      ],
+      "imageLeads": [
+        {
+          "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
+          "kind": "publisher render",
+          "provenance": "Exposed actual cardImageUrl in verification/runs/card-discovery/20261007T144700Z/raw/pokemon-korea-snorlax-positive/details/KR_SM30A_060_080_base.json",
+          "pixelsInspected": false
+        },
+        {
+          "url": "https://k-tcgpanda.com/cardimg/SM/SM30A/잠만보_SM30A_060_KOR.png",
+          "kind": "shop image; depiction unresolved",
+          "provenance": "Resolved from indexed directory and exposed filename; fetch attempted and unavailable",
+          "pixelsInspected": false
+        }
+      ],
+      "result": "Recovered publisher exact render URL from current retained raw detail; no bytes downloaded or image accepted by this agent.",
+      "nextLead": "Root browser retrieve publisher512px image; inspect Korean face/full060/080 and compare hashes. Alternate shopURL can be shown to owner if unreadable."
+    },
+    {
+      "target": "KR20th047/072",
+      "missingFields": [
+        "release date"
+      ],
+      "queries": [
+        "\"트레이너 세트 20th\" \"잠만보\"",
+        "포켓몬 \"트레이너 세트\" \"2016년 2월 1일\"",
+        "\"20th\" \"047/072\" \"Korean\"",
+        "\"트레이너 세트 20th Anniversary\" \"047\"",
+        "\"잠만보\" \"20th\" site:bunjang.co.kr",
+        "\"잠만보\" \"047/071\"",
+        "\"20th Anniversary\" site:pokemoncard.co.kr \"트레이너\""
+      ],
+      "inspectedURLs": [
+        {
+          "url": "https://pokemoncard.co.kr/card/64",
+          "status": "Original opened; KoreanTrainerSet20th title,date2016-02-01; product image links exposed"
+        },
+        {
+          "url": "https://wiki.52poke.com/wiki/宝可梦集换式卡牌游戏_起始包（TCG）",
+          "status": "Original opened with separate Japanese/Korean tables; KoreanSnorlax047/071 and Koreanlaunch2016-02-27, JapaneseSnorlax047/072"
+        }
+      ],
+      "imageLeads": [
+        {
+          "url": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg",
+          "kind": "official product infographic",
+          "provenance": "Actual/card64 image link14 clicked",
+          "pixelsInspected": false
+        },
+        {
+          "url": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/release01.png",
+          "kind": "official product infographic",
+          "provenance": "Actual/card64 image link15 clicked",
+          "pixelsInspected": false
+        },
+        {
+          "url": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/release02.png",
+          "kind": "official product infographic",
+          "provenance": "Actual/card64 image link16 clicked",
+          "pixelsInspected": false
+        }
+      ],
+      "conflictingStatements": [
+        {
+          "source": "official/card64",
+          "value": "2016-02-01",
+          "scope": "KoreanTrainerSet20th product"
+        },
+        {
+          "source": "52poke StarterPack",
+          "value": "2016-02-27",
+          "scope": "Koreanproduct row"
+        },
+        {
+          "source": "52poke Korean table",
+          "value": "047/071",
+          "scope": "Snorlax; current store047/072"
+        }
+      ],
+      "result": "New exact-number discrepancy prevents confident launch-date assignment. No date accepted; do not silently change current denominator.",
+      "nextLead": "Root inspect official infographics and readable physical KoreanSnorlax47 to determine denominator/product. Owner may adjudicate identity using photographed number."
+    },
+    {
+      "target": "KR BS2 30/40",
+      "missingFields": [
+        "release date"
+      ],
+      "queries": [
+        "\"불꽃 튀는 대결\" \"2010년 6월 17일\"",
+        "\"불꽃 튀는 대결\" \"출시\" -site:namu.moe -site:collectory.cc",
+        "포켓몬 \"불꽃 튀는 대결\" \"발매일\"",
+        "\"불꽃 튀는 대결\" site:pokemonkorea.co.kr",
+        "\"불꽃 튀는 대결\" \"2010.06.17\"",
+        "\"불꽃 튀는 대결\" 포켓몬 site:blog.naver.com",
+        "\"불꽃튀는대결\" 발매"
+      ],
+      "inspectedURLs": [
+        {
+          "url": "https://pokemon.fandom.com/ko/wiki/불꽃_튀는_대결",
+          "status": "Indexed contents2010-06-17; original web unavailable"
+        },
+        {
+          "url": "https://m.namu.moe/w/불꽃%20튀는%20대결",
+          "status": "Indexed2010-06-17 exactBS2 named40-card product; derivative mirrors not independent"
+        },
+        {
+          "url": "https://pokemonkorea.co.kr/templates/default/special_site/Wcs2014/battle_p.pdf",
+          "status": "Indexed official product positive identity but no2010 launchdate"
+        },
+        {
+          "url": "https://pokemonkorea.co.kr/templates/default/korea/book/0226_battle.pdf",
+          "status": "Indexed official product positive identity but no2010 launchdate"
+        },
+        {
+          "url": "https://setory.site/sets/dp-sparks-fly-kr",
+          "status": "Indexed says officialKoreanlaunch not established; no positive date"
+        }
+      ],
+      "imageLeads": [
+        {
+          "url": "https://globalbunjang.com/product/410131264",
+          "kind": "sealedBS2packs+bonus seller",
+          "pixelsInspected": false
+        },
+        {
+          "url": "https://web.joongna.com/product/185698007",
+          "kind": "sealedBS2seller",
+          "pixelsInspected": false
+        }
+      ],
+      "conflictingStatements": [
+        {
+          "source": "Fandom/nativeNamuwiki",
+          "value": "2010-06-17"
+        },
+        {
+          "source": "Collectory",
+          "value": "2010-03",
+          "scope": "Month precision"
+        },
+        {
+          "source": "mt-trading-llc",
+          "value": "2010-06-01",
+          "scope": "Unreviewed catalogue, previousround"
+        }
+      ],
+      "result": "No independent official exact launch record found; existing conflict preserved. Package photographs are new contextual leads and cannot make manufacturingdate into launchdate.",
+      "nextLead": "Inspect sellerpack backs/official original ads, seek contemporaneous Koreanlaunch announcement; Naverblog blocked robots in web."
+    },
+    {
+      "target": "KR DP006",
+      "missingFields": [
+        "release date"
+      ],
+      "queries": [
+        "\"스페셜 세트\" \"잠만보\" \"발매\"",
+        "포켓몬 \"스페셜 세트\" \"2010년 8월 26일\"",
+        "\"스페셜 세트\" \"잠만보\" site:pokemonkorea.co.kr",
+        "\"잠만보 LV.X\" \"스페셜\" \"2010\" -site:ebay.com -site:collectory.cc",
+        "\"스페셜 세트 2탄\" 포켓몬 2010",
+        "\"잠만보\" \"스페셜 세트\" 2010 출시",
+        "\"포켓몬 카드 게임 스페셜 세트 제2탄\""
+      ],
+      "inspectedURLs": [
+        {
+          "url": "https://pokemon.fandom.com/ko/wiki/스페셜_세트_(TCG)",
+          "status": "Indexed exact6SnorlaxLV.X underSpecialSet2 dated2010-08-26; original web unavailable"
+        },
+        {
+          "url": "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+          "status": "NEW original opened; KoreanSpecialSet2 title/date2010-08-26; expresslycontainsSnorlaxLV.X"
+        },
+        {
+          "url": "https://www.elitefourum.com/t/korean-promo-cards-database-update-2017-2018-winter-korean-league-promos/58796",
+          "status": "NEW original opened exactDP006SnorlaxLV.X ThemeDecks&BoxSets; no exactdate"
+        },
+        {
+          "url": "https://koreanpokemoncards.weebly.com/",
+          "status": "Original unavailable"
+        }
+      ],
+      "candidateFields": [
+        {
+          "field": "release date",
+          "value": "2010-08-26",
+          "status": "Secondarypositivecandidate;52pokeKoreanprovidercapability/dependency review needed before canonicalacceptance",
+          "basis": "Opened52pokeSpecialSet2 positively names SnorlaxLV.Xandlaunch; priorFandom exact6 row corroboratesdate; copying/dependencynot established"
+        }
+      ],
+      "result": "Secondary positive date support strengthened; no primary record found. No new date accepted by this research-only agent.",
+      "nextLead": "Root review52pokeKorean product authority or retrieve contemporaneous officialSpecialSet2launch record; provenance independence remains unknown."
+    },
+    {
+      "target": "KR XY10 057/078",
+      "missingFields": [
+        "release date"
+      ],
+      "queries": [
+        "\"초능력의 제왕\" \"2016년 3월 24일\"",
+        "\"초능력의 제왕\" \"발매\" \"2016\" -site:namu.moe -site:pokemoncard.co.kr",
+        "\"초능력의 제왕\" \"3월\" \"2016\" 발매",
+        "포켓몬 \"초능력의 제왕\" \"발매\"",
+        "\"초능력의 제왕\" site:facebook.com",
+        "\"초능력의 제왕\" \"2016.03.24\"",
+        "\"초능력의 제왕\" \"2016-03-24\"",
+        "\"초능력의 제왕\" 발매 site:blog.naver.com",
+        "\"초능력의제왕\" 발매 2016"
+      ],
+      "inspectedURLs": [
+        {
+          "url": "https://pokemoncard.co.kr/card/65",
+          "status": "Original reopened; officialheader2016-03-01 and2017-03-29erratanamesrelease2016-03-24"
+        },
+        {
+          "url": "https://www.namu.moe/w/초능력의%20제왕",
+          "status": "Indexedexplicitfootnoteacknowledgesconflictandinfersheadererror; inferencecannotsettleconflict"
+        },
+        {
+          "url": "https://tcgmaruhit.com/",
+          "status": "Indexeddates2016-03-01reusesofficialproductbasis; not independent"
+        }
+      ],
+      "conflictingStatements": [
+        {
+          "source": "official/card65 header",
+          "value": "2016-03-01"
+        },
+        {
+          "source": "official/card65 dated2017-03-29errata",
+          "value": "2016-03-24"
+        },
+        {
+          "source": "nativeNamuwiki",
+          "value": "2016-03-24",
+          "scope": "Explicit inference from sameofficialconflict"
+        }
+      ],
+      "result": "No independent original launch announcement recovered. Both publisherstatements preserved; modern mirrors add noindependentcorroboration.",
+      "nextLead": "Seek contemporaneous2016nativepress/officialsocialannouncement ordatedpackagead; Naverblogsearchblockedrobots, noaccesscontrolbypass."
+    }
+  ],
+  "limits": [
+    "Researchonly; no canonical/git/index/gates changed.",
+    "Unavailable pixels not claimed inspected; all imageLeads forwarded to root.",
+    "No launchdate inferred from sale, manufacture, absence or anotherlanguage.",
+    "Remaining unsearched: private/login sources, contemporaneous unindexed Koreanarchives, fullbrowseroriginalphotographs handled byroot."
+  ]
+}

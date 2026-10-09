@@ -105,14 +105,14 @@ OFFICIAL = [
     card("6363", "SPEC-0266", "sv2a", "181/165", "Snorlax-Voraciousness-Thudding-Press", ("AR", "illustration-rare"), "U0052"),
     card("6835", "SPEC-0267", "SV-P", "082/SV-P", "Snorlax-Voraciousness-Thudding-Press", ("PROMO", "promo"), "U0753", date=("2023-11-07", "day")),
     card("7440", "SPEC-0268", "sv4K", "059/066", "Snorlax-Doll", ("U", "uncommon"), "U0262", card_name="Snorlax Doll"),
-    card("7755", "SPEC-0269", "sv4a", "145/190", "Snorlax-Voraciousness-Thudding-Press", ("no printed rarity symbol", "fixed"), "U0309"),
+    card("7755", "SPEC-0269", "sv4a", "145/190", "Snorlax-Voraciousness-Thudding-Press", ("no printed rarity symbol", None), "U0309"),
     card("8167", "SPEC-0270", "sv5a", "051/066", "Snorlax-But-First-Food-Heavy-Impact", ("U", "uncommon"), "U0235"),
     card("8631", "SPEC-0271", "sv4a", "310/190", "Snorlax-Voraciousness-Thudding-Press", ("S", "shiny-rare"), "U0387"),
     card("10595", "SPEC-0272", "svM", "094/175", "Snorlax-ex-Strength-Toss-and-Turn-Press", ("no printed rarity symbol", "fixed"), "U0405", card_name="Snorlax ex"),
     card("11193", "SPEC-0273", "SV9s", "109/139", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("R", "rare"), card_name="Hop's Snorlax"),
-    card("13046", "SPEC-0274", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", "fixed"), "U0130", card_name="Hop's Snorlax"),
-    card("13749", "SPEC-0275", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", "fixed"), "U0788", variant="V1", card_name="Hop's Snorlax"),
-    card("13750", "SPEC-0276", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", "fixed"), "U0793", variant="V2", card_name="Hop's Snorlax"),
+    card("13046", "SPEC-0274", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", None), "U0130", card_name="Hop's Snorlax"),
+    card("13749", "SPEC-0275", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", None), "U0788", variant="V1", card_name="Hop's Snorlax"),
+    card("13750", "SPEC-0276", "MA3", "136/193", "Hops-Snorlax-Extra-Helpings-Dynamic-Press", ("no printed rarity symbol", None), "U0793", variant="V2", card_name="Hop's Snorlax"),
     card("13857", "SPEC-0277", "MA4", "091/123", "Snorlax-Glutton-Topple-Over", ("C", "common")),
 ]
 

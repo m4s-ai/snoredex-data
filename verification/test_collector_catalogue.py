@@ -532,7 +532,12 @@ def main() -> None:
                 }
     deployed_route = routes[collector.DEPLOYED_CATALOGUE_FINGERPRINT]
     old_bs2 = "item-aedf859e-be3c-5774-8750-b675f1ddd84d"
-    new_bs2 = "item-20cf798c-be66-58e6-bf68-f3cc437822c4"
+    current_bs2 = next(row for row in catalogue["items"]
+                       if row["cardReleaseId"] == "RELEASE:KR:Korean:BS2:30/40:Snorlax-Lv35-Block-Ease-Up"
+                       and row["active"] and row["finish"] == "non-holo")
+    assert current_bs2["itemKind"] == "verified-printing"
+    assert current_bs2["releaseDate"] == "2010-06-17"
+    new_bs2 = current_bs2["itemId"]
     for route in routes.values():
         bs2 = next(
             row for row in route["transitions"] if old_bs2 in row["fromItemIds"]
@@ -999,14 +1004,27 @@ def main() -> None:
 
     # An established graph release may have no physical printing or predecessor
     # row yet, but it must still remain visible as a neutral research item.
-    tampered = copy.deepcopy(catalogue)
+    placeholder_graph = copy.deepcopy(graph)
+    placeholder_graph["entities"] = [
+        row for row in placeholder_graph["entities"]
+        if not (row["entityType"] == "physical-printing"
+                and row["payload"].get("cardReleaseId") == current_bs2["cardReleaseId"])
+    ]
+    original_read = collector.read_json
+    with patch.object(collector, "read_json", side_effect=lambda path:
+                      placeholder_graph if path == collector.GRAPH_PATH else original_read(path)):
+        placeholder_catalogue, _ = collector.build_catalogue()
+    tampered = copy.deepcopy(placeholder_catalogue)
     release_placeholder = next(
         row for row in tampered["items"]
-        if row["itemKind"] == "research-placeholder" and not row["legacyChecklistIds"]
+        if row["itemKind"] == "research-placeholder"
+        and row["cardReleaseId"] == current_bs2["cardReleaseId"]
     )
+    assert not release_placeholder["legacyChecklistIds"]
+    assert release_placeholder["progressClass"] == "research"
     tampered["items"].remove(release_placeholder)
     assert any("card-release accounting" in error for error in collector.validate_catalogue(
-        tampered, graph, check_asset_bytes=False
+        tampered, placeholder_graph, check_asset_bytes=False
     ))
 
     # Locality is identity: changing the LATAM record into WEST cannot leave a

@@ -119,10 +119,18 @@ def main() -> None:
     assert cardmarket_catalogue_specimens
     assert {
         row["language"] for row in cardmarket_catalogue_specimens
+        if row["specimenId"] in expected_manifest_specimens
     } <= {"Japanese", "English"}, (
-        "Cardmarket product images may support pictured Japanese or English cards only; "
-        "catalogue language filters do not establish another localized release"
+        "the historical PR #323 product faces are Japanese or English; "
+        "their catalogue language filters do not establish another localized release"
     )
+    # A later inspected localized face is evidence; the marketplace filter is not.
+    chinese_face = specimen_by_id["SPEC-0630"]
+    assert chinese_face["language"] == "S-Chinese" and chinese_face["setCode"] == "CSVH4C"
+    assert chinese_face["number"] == "a003" and "printed 003/023" in chinese_face["observed"]
+    assert chinese_face["physicalObservation"]["ownerAttestedFields"] == ["finish"]
+    assert (ROOT / "verification/specimens/SPEC-0630.png").read_bytes() == (
+        ROOT / "images/CSVH4C_a003_Snorlax_888115.png").read_bytes()
     manifest_fields = {
         "setCode", "number", "variant", "language", "heldBy", "inspectedFrom",
         "observed", "recordedAt", "citedBy", "physicalObservation", "listingUrl",

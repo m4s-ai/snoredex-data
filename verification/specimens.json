@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 609,
+  "count": 631,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -723,13 +723,21 @@
       "inspectedFrom": "photograph",
       "photograph": "SPEC-0037.png",
       "photographSource": "https://github.com/user-attachments/assets/27f7d3f3-f5db-4ce2-a7a3-98e0a6e054a1",
+      "photographSha256": "sha256:2221b4be31aa4caca6a52daaa9809f607ea74be6e0d3226352e43d7a3ead9b01",
       "observed": "Korean Burning Confrontation Series 2 Snorlax Lv.35 (30/40), photographed by the owner and supplied in issue #88 (2026-08-11): the Korean counterpart of the DP1 Snorlax Lv.35 that Cardmarket lists against DP1. The owner identified it by eye as 'Snorlax lv. 35 was part of korean series 2 the burning confrontation according to bulbapedia'. Low-resolution image; OCR recovered only partial fragments, so the identity rests on the owner's identification plus the Burning Confrontation set/number context, not on fully legible card text. RESOLVED 2026-08-20 (#240): the reviewed positive evidence snapshot binds this exact Korean 30/40 card to local catalogue code BS2, official card record BS2010002030 and catalogue id BS2010002-kr. These identifiers remain distinct. The photograph still establishes no finish and no Japanese DP1 work equivalence.",
       "recordedAt": "2026-08-12",
       "citedBy": [
         "U0477",
         "KR:BS2:30/40:base"
       ],
-      "photographSha256": "sha256:2221b4be31aa4caca6a52daaa9809f607ea74be6e0d3226352e43d7a3ead9b01"
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0037, Korean BS2 30/40. Finish rests only on this field-specific owner determination. No complete finish inventory asserted."
+      }
     },
     {
       "specimenId": "SPEC-0038",
@@ -3370,7 +3378,7 @@
       "photograph": "SPEC-0149.jpg",
       "photographSource": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
       "photographSha256": "sha256:e348ae42132f2bf04b936bc10937fde9e7ee35992717c7483e52632e14cb6387",
-      "observed": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F rarity and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo.",
+      "observed": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F regulation mark and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo.",
       "recordedAt": "2026-08-27",
       "citedBy": [
         "F0083-P01",
@@ -3379,7 +3387,7 @@
       "physicalObservation": {
         "finish": "reverse-holo",
         "foilPattern": "multicolour sparkle across artwork and frame",
-        "markings": "F rarity symbol",
+        "markings": "F regulation mark",
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The exact CSZC 018/066 card is fully visible with dense multicoloured reflective flecks across the artwork and card frame; the exact seller listing independently designates the pictured card Special Holo."
@@ -3456,15 +3464,15 @@
       "citedBy": [
         "U0513"
       ],
-      "listingUrl": "https://www.ebay.com/itm/167729662724",
       "physicalObservation": {
         "finish": "holo",
         "foilPattern": null,
-        "markings": "F rarity symbol",
+        "markings": "F regulation mark",
         "markingRole": "print-identity",
         "cardSize": "standard",
         "basis": "The exact seller listing identifies the pictured Simplified Chinese CSUC 010/012 card as CHR rarity with Holo finish."
-      }
+      },
+      "listingUrl": "https://www.ebay.com/itm/167729662724"
     },
     {
       "specimenId": "SPEC-0154",
@@ -5236,6 +5244,14 @@
         "U0532",
         "KR:s2:077/096:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for Korean s2 077/096, selecting SPEC-0239 and SPEC-0455. Each retained image supports identity; finish rests only on the owner determination. No same-card association or complete finish inventory asserted."
+      },
       "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512"
     },
     {
@@ -5293,6 +5309,14 @@
         "U0653",
         "KR:sI:341/414:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0242, Korean sI 341/414. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_341.png?w=512"
     },
     {
@@ -5312,6 +5336,14 @@
         "U0657",
         "KR:sI:342/414:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0243, Korean sI 342/414. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/SI/SI_342.png?w=512"
     },
     {
@@ -5426,6 +5458,14 @@
         "U0583",
         "KR:smL:038/051:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0249, Korean smL 038/051. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059"
     },
     {
@@ -5483,6 +5523,14 @@
         "U0466",
         "KR:svG:021/049:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0252, Korean svG 021/049. Retained official render supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021"
     },
     {
@@ -8384,6 +8432,14 @@
         "U0561",
         "KR:XY2:066/080:base"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0411, Korean XY2 066/080. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066"
     },
     {
@@ -9000,6 +9056,14 @@
       "citedBy": [
         "U0677"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0438, Korean svLN 010/022. Retained seller photograph supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/426224532"
     },
     {
@@ -9062,6 +9126,14 @@
       "citedBy": [
         "U0233"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0441, Korean sv5a 051/066. Retained seller photograph supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/416373605"
     },
     {
@@ -9080,6 +9152,14 @@
       "citedBy": [
         "U0579"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0442 Korean BW7 055/070 printing. The seller photograph supports exact identity and shows two copies of that identity; the owner supplies the finish determination. No physical quantity, intrinsic Team Plasma foil inference or exhaustive finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/404911233"
     },
     {
@@ -9098,6 +9178,14 @@
       "citedBy": [
         "U0257"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0443, Korean m3 062/080. Retained seller photograph supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/411963518"
     },
     {
@@ -9140,6 +9228,14 @@
       "citedBy": [
         "U0260"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0445, Korean sv4K 060/066 Snorlax Doll. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "allowUnprojected": true,
       "listingUrl": "https://globalbunjang.com/product/407721760"
     },
@@ -9369,6 +9465,14 @@
       "citedBy": [
         "U0532"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for Korean s2 077/096, selecting SPEC-0239 and SPEC-0455. Each retained image supports identity; finish rests only on the owner determination. No same-card association or complete finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/427352825"
     },
     {
@@ -9413,6 +9517,14 @@
       "citedBy": [
         "U0541"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0457, Korean XY10 057/078. Retained seller photograph supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://globalbunjang.com/product/421867656"
     },
     {
@@ -9431,6 +9543,14 @@
       "citedBy": [
         "U0683"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0458, Korean mC 567/742. Retained database render supports identity and printed rarity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://collectory.cc/cards/a504064b-e9ee-44ee-9e6e-329a3b81974d?lang=en"
     },
     {
@@ -9467,6 +9587,14 @@
       "citedBy": [
         "U0763"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0460, Korean mC 569/742 Hop's Snorlax. Retained database render supports identity and printed rarity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "listingUrl": "https://collectory.cc/cards/5c9ad620-27b1-4a36-a7fb-1d50394b1fec?lang=en"
     },
     {
@@ -9485,6 +9613,14 @@
       "citedBy": [
         "U0586"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0461, the Korean HXY026/036 identity referenced by the FXY026/036 catalogue release. The retained database render establishes identity, not physical foil. Finish rests only on the owner determination; no complete finish inventory asserted."
+      },
       "listingUrl": "https://collectory.cc/cards/f0ae72d3-a5da-4535-bd33-585d2938cd6a?lang=en"
     },
     {
@@ -9503,6 +9639,14 @@
       "citedBy": [
         "U0610"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0462, Korean sA 010/023. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "allowUnprojected": true,
       "listingUrl": "https://collectory.cc/cards/481d9b00-6a36-4954-bb67-c5b411d5fe39?lang=en"
     },
@@ -9522,6 +9666,14 @@
       "citedBy": [
         "U0648"
       ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0463, Korean svI 046/066. Retained database render supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
       "allowUnprojected": true,
       "listingUrl": "https://collectory.cc/cards/73c55006-427b-45ae-9a58-f7facd855820?lang=en"
     },
@@ -12956,6 +13108,515 @@
         "basis": "Collection-owner determination on 2026-10-05 after viewing this exact seller photograph: ja sieht nach Holo aus übernimm es. Finish is owner-attributed; printed Indonesian identity independently inspected."
       },
       "listingUrl": "https://www.ebay.com/itm/297810678369"
+    },
+    {
+      "specimenId": "SPEC-0610",
+      "setCode": "s8b",
+      "number": "126/184",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0610.png",
+      "photographSource": "https://i.ebayimg.com/images/g/huwAAeSwq-JqwLtp/s-l1600.webp",
+      "photographSha256": "sha256:faa8018f8884f3d35223c8c2bf37a08368d23559c1711e6725b2c37eafc3bb0a",
+      "observed": "Original image inspected in browser. Japanese s8b D126/184, vertical iridescent foil on illustration and frame, no rarity symbol after collector number. Holo positively visible. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "U0172"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Original image inspected in browser. Japanese s8b D126/184, vertical iridescent foil on illustration and frame, no rarity symbol after collector number. Holo positively visible."
+      },
+      "listingUrl": "https://www.ebay.com/itm/267768135944"
+    },
+    {
+      "specimenId": "SPEC-0611",
+      "setCode": "sv4a",
+      "number": "310/190",
+      "variant": "V2",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0611.png",
+      "photographSource": "https://i.ebayimg.com/images/g/GeEAAeSwgBVqJilx/s-l1600.webp",
+      "photographSha256": "sha256:8ba84bfca0d5f3e601fe555d388d61b428e7b39ace31b32f64e9ecaf5b80e265",
+      "observed": "Original slab photo inspected in browser. Japanese sv4a G310/190 S, rainbow foil visible in illustration; CGC label explicitly Shiny Rare - Holo. Supports Holo; does not disprove any nonholo printing. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "U0383"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Original slab photo inspected in browser. Japanese sv4a G310/190 S, rainbow foil visible in illustration; CGC label explicitly Shiny Rare - Holo. Supports Holo; does not disprove any nonholo printing."
+      },
+      "listingUrl": "https://www.ebay.com/itm/306989235694"
+    },
+    {
+      "specimenId": "SPEC-0612",
+      "setCode": "xsv2a",
+      "number": "143/165",
+      "variant": "V1",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0612.png",
+      "photographSource": "https://media.bunjang.co.kr/product/433161764_1_1789832224_w640.jpg",
+      "photographSha256": "sha256:1be6c7836336dce2cd88940acaf88e9269f436dd43b5fca516bce8771ee5c589",
+      "observed": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "U0780"
+      ],
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "basis": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed.",
+        "foilPattern": "Poké Ball mirror"
+      },
+      "listingUrl": "https://m.bunjang.co.kr/products/433161764"
+    },
+    {
+      "specimenId": "SPEC-0613",
+      "setCode": "sv4a",
+      "number": "310/190",
+      "variant": "V2",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0613.png",
+      "photographSource": "https://i.ebayimg.com/images/g/T8wAAeSwvPRqCVLg/s-l1600.webp",
+      "photographSha256": "sha256:60ca3f753d2f93c15a0ea91943d0b55f0dc5def1a9daa9283f6f790c692ad628",
+      "observed": "Korean 잠만보 sv4a G 310/190 S. Grainy reflective foil across illustration and frame positively establishes Holo. Ended-listing metadata is not authority. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "U0384"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean 잠만보 sv4a G 310/190 S. Grainy reflective foil across illustration and frame positively establishes Holo. Ended-listing metadata is not authority."
+      },
+      "listingUrl": "https://www.ebay.com/itm/377190024507"
+    },
+    {
+      "specimenId": "SPEC-0614",
+      "setCode": "mC",
+      "number": "568/742",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0614.png",
+      "photographSource": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+      "photographSha256": "sha256:06dcc7d68cafea4009f4cb6fc53eed4ccdea530ff464a2daf0204f308cef7b02",
+      "observed": "Physical Korean 잠만보 mC 568/742 identity is visible. Seller Holo title and surface glare do not independently establish finish. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "KR:mC:568/742:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0614 Korean mC568/742 photograph. The seller photograph supports identity; its glare and seller Holo title do not carry the finish claim. No inventory completeness asserted."
+      },
+      "listingUrl": "https://m.bunjang.co.kr/products/433165345"
+    },
+    {
+      "specimenId": "SPEC-0615",
+      "setCode": "mC",
+      "number": "568/742",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0615.png",
+      "photographSource": "https://media.bunjang.co.kr/product/433165345_3_1789833088_w640.jpg",
+      "photographSha256": "sha256:28bc638035d507b983fc80f8c1ef1529b168b1680832dbc5ee0ca4ecf28afc44",
+      "observed": "Detailed Korean mC H 568/742 card face. Identity-only observation; no physical finish or same-card grouping inferred merely from shared listing/artwork. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-06",
+      "citedBy": [
+        "KR:mC:568/742:base"
+      ],
+      "listingUrl": "https://m.bunjang.co.kr/products/433165345"
+    },
+    {
+      "specimenId": "SPEC-0616",
+      "setCode": "CLF",
+      "number": "016/032",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0616.png",
+      "photographSource": "https://i.ebayimg.com/images/g/4J8AAeSw4ulo1MUk/s-l1600.webp",
+      "photographSha256": "sha256:77607d3dabb23600ffbf6582ad74a8d6ccf24013e50c309016118a39856c43c7",
+      "observed": "Korean card text, CLF016/032, reflective foil visible across illustration and text. Holo supported; exact foil pattern not normalized. Corrects the researched /034 denominator. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0440"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean card text, CLF016/032, reflective foil visible across illustration and text. Holo supported; exact foil pattern not normalized. Corrects the researched /034 denominator."
+      },
+      "listingUrl": "https://www.ebay.com/itm/197250301809"
+    },
+    {
+      "specimenId": "SPEC-0617",
+      "setCode": "sv2a",
+      "number": "143/165",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0617.png",
+      "photographSource": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+      "photographSha256": "sha256:5f8383663842d941c8a47c40f6736323a1d0a344d405c0bf503c71a4bc1217c7",
+      "observed": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "KR:sv2a:143/165:base"
+      ],
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "basis": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate."
+      },
+      "listingUrl": "https://www.ebay.com/itm/287288757860"
+    },
+    {
+      "specimenId": "SPEC-0618",
+      "setCode": "XY10",
+      "number": "057/078",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0618.png",
+      "photographSource": "https://i.ebayimg.com/images/g/kfsAAeSw93Np22TF/s-l1600.webp",
+      "photographSha256": "sha256:353e758694f10bb70c1bb0e24e99bf19d9f85b83f1994ff6751cc0045eab975e",
+      "observed": "Physical Korean057/078 matches target. No obvious foil reflection in this view; seller Non-Holo claim not independently established by absence of glare. Conflicting item specifics rejected. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0541"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0618, Korean XY10 057/078. Retained seller photograph supports identity; finish rests only on this owner determination. No complete finish inventory asserted."
+      },
+      "listingUrl": "https://www.ebay.com/itm/137219628456"
+    },
+    {
+      "specimenId": "SPEC-0619",
+      "setCode": "CSVH1C",
+      "number": "a001/023",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0619.png",
+      "photographSource": "https://i.ebayimg.com/images/g/Fz4AAeSwQhRqNN-k/s-l1600.webp",
+      "photographSha256": "sha256:3d0a3eaff988ac3b2be3d0cf406905b6b506d6e7d23de27fc563a3e254c16df9",
+      "observed": "Physical Simplified Chinese 卡比兽001/023 identity visible. Printed code is small in this view; listing supplies CSVH1aC lead, retained exact sources remain the identity cross-check. No positive foil or Common rarity accepted from polluted metadata. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0612"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for retained photograph SPEC-0619 on 2026-10-08. Printed identity and photograph provenance are preserved; no exhaustive finish inventory or physical ownership is asserted."
+      },
+      "listingUrl": "https://www.ebay.com/itm/198438640357"
+    },
+    {
+      "specimenId": "SPEC-0620",
+      "setCode": "sm9",
+      "number": "066/095",
+      "variant": "V1",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0620.png",
+      "photographSource": "https://i.ebayimg.com/images/g/Qx4AAeSwIXFpyPpM/s-l1600.webp",
+      "photographSha256": "sha256:22e03efbc7d9843793b6ea1a36bf070186fce8d970a92be93e9c872401eda24e",
+      "observed": "Korean 이브이&잠만보 GX sm9 C 066/095 RR. Rainbow foil visibly reflects green and pink along the lower card frame and illustration edges. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0413"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean 이브이&잠만보 GX sm9 C 066/095 RR. Rainbow foil visibly reflects green and pink along the lower card frame and illustration edges."
+      },
+      "listingUrl": "https://www.ebay.com/itm/377070897709"
+    },
+    {
+      "specimenId": "SPEC-0621",
+      "setCode": "sm9",
+      "number": "106/095",
+      "variant": "V2",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0621.png",
+      "photographSource": "https://i.ebayimg.com/images/g/4s8AAeSwsXNqR8oD/s-l1600.webp",
+      "photographSha256": "sha256:4b6ef7badcd629eb0283fff31325d6d235c08411e5fb69ad762cd43c191f65a0",
+      "observed": "Korean 이브이&잠만보 GX sm9 C 106/095 SR. Textured surface with cyan, pink and gold reflective foil across illustration and frame. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0633"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean 이브이&잠만보 GX sm9 C 106/095 SR. Textured surface with cyan, pink and gold reflective foil across illustration and frame."
+      },
+      "listingUrl": "https://www.ebay.com/itm/407045854712"
+    },
+    {
+      "specimenId": "SPEC-0622",
+      "setCode": "sm9",
+      "number": "115/095",
+      "variant": "V3",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0622.png",
+      "photographSource": "https://i.ebayimg.com/images/g/QuwAAeSwEdRpmWPo/s-l1600.webp",
+      "photographSha256": "sha256:f6c00bfe4441a4c8c6508c513f586dddc081eb0f5d5573a43ab256714096402d",
+      "observed": "Korean 이브이&잠만보 GX sm9 C 115/095 HR. Strong rainbow foil and surface texture positively visible across the actual card face. Manual visual extraction; seller metadata is not field authority. No finish inventory closure asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0557"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Korean 이브이&잠만보 GX sm9 C 115/095 HR. Strong rainbow foil and surface texture positively visible across the actual card face."
+      },
+      "listingUrl": "https://www.ebay.com/itm/317906441518"
+    },
+    {
+      "specimenId": "SPEC-0623",
+      "setCode": "CS2DaC",
+      "number": "038/053",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0623.png",
+      "photographSource": "https://i.ebayimg.com/images/g/N~kAAeSw3DNqeagA/s-l1600.webp",
+      "photographSha256": "sha256:f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
+      "observed": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "CN:CS2DaC:038/053:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0623 Simplified Chinese CS2DaC038/053 photograph. The seller photograph supports identity; absence of glare does not independently carry the finish claim. No inventory completeness asserted."
+      },
+      "listingUrl": "https://www.ebay.com/itm/198560806619"
+    },
+    {
+      "specimenId": "SPEC-0624",
+      "setCode": "sv4a",
+      "number": "145/190",
+      "variant": "V1",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0624.png",
+      "photographSource": "https://media.bunjang.co.kr/product/436062147_1_1790773716_w900.jpg",
+      "photographSha256": "sha256:0e214f91d43a84ccff2967897a56e04ea2c7239d10b7fd1c3658f55f9d853597",
+      "observed": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "U0306"
+      ],
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "basis": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown."
+      },
+      "listingUrl": "https://m.bunjang.co.kr/products/436062147"
+    },
+    {
+      "specimenId": "SPEC-0625",
+      "setCode": "SM-P",
+      "number": "017/SM-P",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0625.png",
+      "photographSource": "https://i.ebayimg.com/images/g/P28AAeSwNdZoEsYZ/s-l1600.webp",
+      "photographSha256": "sha256:105b88e15768dda4c7080d5595f116033335b9149fa2b2c40753ba33a0bdd55d",
+      "observed": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation. Manual visual extraction. No exhaustive finish inventory asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "KR:SM-P:017/SM-P:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation."
+      },
+      "listingUrl": "https://www.ebay.com/itm/197271566975"
+    },
+    {
+      "specimenId": "SPEC-0626",
+      "setCode": "svM",
+      "number": "094/175",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0626.png",
+      "photographSource": "https://i.ebayimg.com/images/g/0EsAAeSwdy5oZUKd/s-l1600.webp",
+      "photographSha256": "sha256:8ac8b26ffcc9dc011f07b2fcd1483592784bd3bd4133d1c8981ef396787a1bb7",
+      "observed": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown. Manual visual extraction. No exhaustive finish inventory asserted.",
+      "recordedAt": "2026-10-07",
+      "citedBy": [
+        "KR:svM:094/175:base"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "basis": "Original physical Korean 잠만보 ex SVM H094/175. Iridescent cyan-green-pink reflection on silver frame and lower panel with reflective star treatment visible on the card face positively supports Holo. Seller Japanese metadata rejected; pattern identity and finish inventory remain unknown."
+      },
+      "listingUrl": "https://www.ebay.com/itm/286684964904"
+    },
+    {
+      "specimenId": "SPEC-0627",
+      "setCode": "SM30A",
+      "number": "060/080",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Original publisher digital render; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0627.png",
+      "photographSource": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SM/SM30A/SM30A_060.png?w=512",
+      "photographSha256": "sha256:150865c994251fb8b96e5b0e8fd8afb48f7ac1400485c337030eae1c4e8ebee2",
+      "observed": "Publisher digital render visibly Korean 잠만보, SM30A C060/080, HP150, Akira Komayama. Exact localized identity and retained image only. Digital imagery is not physical finish evidence; existing separate product-text finish evidence is unchanged.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:SM30A:060/080:base"
+      ],
+      "listingUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060"
+    },
+    {
+      "specimenId": "SPEC-0628",
+      "setCode": "sH",
+      "number": "038/053",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "KREAM catalogue card image; visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0628.png",
+      "photographSource": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
+      "photographSha256": "sha256:b57a013d7a2975e6729e91e3947b260103645bcd51972e470ed9e83108a4c40a",
+      "observed": "The retained KREAM catalogue image visibly identifies Korean Snorlax, sH 038/053, regulation E, HP160, Heavy Impact 80, Illus. Oswaldo KATO and the yellow Pikachu deck silhouette. Image supports identity only; the collection owner separately confirms Non-Holo. Original physical holder and capture method are unknown.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:sH:038/053:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for the displayed Korean sH 038/053 KREAM image on 2026-10-08. No physical custody or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://kream.co.kr/products/933056"
+    },
+    {
+      "specimenId": "SPEC-0629",
+      "setCode": "20th",
+      "number": "047/071",
+      "variant": "base",
+      "language": "Korean",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "TCGBOX exact product card scan; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0629.jpg",
+      "photographSource": "https://tcgbox.co.kr/web/product/big/160330trainers/20th%20047.jpg",
+      "photographSha256": "sha256:1bff6999340d89b6d0d0a069e07ba26c10e1f1e354330a8c7ac5df798e4e961a",
+      "observed": "The retained TCGBOX card scan visibly identifies Korean Snorlax, HP130, printed 20th 047/071, Stir and Snooze / Sleepy Press 120, Illus. Mitsuhiro Arita and a TCGBOX watermark. Printed denominator is 071. Identity and printed fields are observed; finish rests separately on the collection owner confirmation. Original physical holder is not identified.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "KR:20th:047/071:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for the displayed TCGBOX Korean 20th 047/071 image on 2026-10-08. No ownership or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://tcgbox.co.kr/product/detail.html?product_no=2092"
+    },
+    {
+      "specimenId": "SPEC-0630",
+      "setCode": "CSVH4C",
+      "number": "a003",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Previously retained exact Cardmarket product image; manual visual inspection, local OCR unavailable",
+      "photograph": "SPEC-0630.png",
+      "photographSource": "https://product-images.s3.cardmarket.com/51/CSVH4C/888115/888115.jpg",
+      "photographSha256": "sha256:9986b5dea518a12491106c9ae6e84e61bee8d7f78d5cf2b1bf2d16d7b5010369",
+      "observed": "Retained Cardmarket product image visibly identifies Simplified Chinese Snorlax, HP160, But First Food and Heavy Impact 160, Illus. Souichirou Gunjima, and printed 003/023. The catalogue a-prefix denotes the Modification Pack, not a printed number prefix. Current direct-image retrieval returned HTTP 403; this observation reuses the existing retained image rather than claiming a new network capture. Identity is visually inspected; finish rests separately on the collection owner confirmation.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "U0768"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly confirms Non-Holo for CSVH4C a003 and supplies its exact Cardmarket product image URL on 2026-10-08. No ownership or exhaustive finish inventory is asserted."
+      },
+      "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003"
+    },
+    {
+      "specimenId": "SPEC-0631",
+      "setCode": "CSVSC",
+      "number": "046/066",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "publisher or database",
+      "inspectedFrom": "Retained TCGCollector card image manually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0631.png",
+      "photographSource": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+      "photographSha256": "sha256:9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+      "observed": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown.",
+      "recordedAt": "2026-10-08",
+      "citedBy": [
+        "CN:CSVSC:046/066:base"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-08",
+        "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted."
+      },
+      "listingUrl": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
     }
   ]
 }

@@ -580,7 +580,135 @@ def verify_standalone_printing_identity() -> None:
                and row["toId"] == holo["physicalPrintingId"] for row in result["edges"])
 
 
+def verify_research_correction() -> None:
+    sys.path.insert(0, str(ROOT / "verification/passes"))
+    import integrate_rarity_finish_research_20261007 as correction
+    names = ["authoritative_graph.json", "set_catalogue_sources.json", "source_first_prints.json", "legacy_issue_rekeys.json", "finish_overrides.json"]
+    documents = [correction.read(name) for name in names]
+    before = deepcopy(documents)
+    correction.apply(documents)
+    assert documents == before, "canonical correction replay must be unchanged"
+    csvs = next(r for r in documents[2]["prints"] if r["printId"] == "CN:CSVSC:046/066:base")
+    assert csvs["localNumber"] == "046/066" and csvs["specimenId"] == "SPEC-0631"
+    assert csvs["releaseDate"] == "2026-01-16" and csvs["rarity"] == ["no printed rarity symbol", "fixed"]
+    assert not any(r["printId"] == "CN:CSVS:046/066:base" for r in documents[2]["prints"])
+    rarity_catalogue = correction.read("rarity_catalogue.json")
+    csvsc_mapping = next(row for row in rarity_catalogue["sourceNativeMappings"]
+                         if "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press" in row.get("cardReleaseIds", []))
+    assert csvsc_mapping["cardReleaseIds"] == ["RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press"]
+    assert all(source in csvsc_mapping["basis"] for source in
+               ("SPEC-0631", "Lucario", "https://www.pokemon.cn/tcg/product/15476.html",
+                "verification/evidence/52poke-cn-local-identities-20261008")), "exact normalization needs its own reviewed basis"
+    mappings = graph_module._rarity_native_mappings(rarity_catalogue)
+    assert all(key[3] is not None for key in mappings
+               if key[2] == "no printed rarity symbol"), "no generic symbol-to-Fixed mapping"
+    claims = [row["payload"] for row in documents[0]["entities"]
+              if row["entityType"] == "rarity-claim"
+              and row["payload"].get("sourceNativeValue") == "no printed rarity symbol"]
+    fixed = [row for row in claims if row.get("normalizedRarityId") == "fixed"]
+    assert len(fixed) == 22, "retain 21 reviewed deck mappings plus the exact CSVSC deck card"
+    cn_fixed = {row["cardReleaseId"] for row in fixed if row["cardReleaseId"].startswith("RELEASE:CN:")}
+    expected_cn = {f"RELEASE:CN:S-Chinese:{code}:{number}:Snorlax-Heavy-Impact"
+                   for code, number, *_ in correction.CN_DECK_RARITIES}
+    expected_cn.add("RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press")
+    assert cn_fixed == expected_cn, "only positively bound CN deck cards normalize to Fixed"
+    assert not any("CSVH" in rid for rid in cn_fixed), "random modification packs are not Fixed"
+    unresolved = [row for row in claims if row.get("normalizedRarityId") is None
+                  and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")]
+    assert len(unresolved) == 5, "five booster rarities remain native, not invented Fixed/Common"
+    for row in unresolved:
+        row["normalizedRarityId"] = "fixed"
+    correction.apply(documents)
+    assert documents == before, "repair every sibling booster, preserving unrelated stores"
+    graph, catalogue, prints, rekeys, overrides = documents
+    sm30a = next(row for row in prints["prints"] if row["printId"] == "KR:SM30A:060/080:base")
+    assert sm30a["specimenId"] == "SPEC-0627", "retain the exact publisher image through admission replay"
+    for code, number, specimen, *_ in correction.CN_DECK_RARITIES:
+        print_row = next(row for row in prints["prints"] if row["printId"] == f"CN:{code}:{number}:base")
+        assert print_row["rarity"] == ["no printed rarity symbol", "fixed"]
+        assert print_row["specimenId"] == specimen
+        assert print_row["rarityRetrievedAt"] == "2026-10-07"
+        assert print_row["releaseDate"] == ("2023-11-17" if code == "CS2DaC" else "2024-05-17")
+    xy2 = next(row for row in prints["prints"] if row["printId"] == "KR:XY2:066/080:base")
+    assert xy2["releaseDate"] == "2014-05-01"
+    assert xy2["releaseDateRetrievedAt"] == "2026-10-07"
+    assert xy2["releaseDateSourceUrl"] == "https://pokemoncard.co.kr/card/33"
+    bs2 = next(row for row in prints["prints"] if row["printId"] == "KR:BS2:30/40:base")
+    assert bs2["releaseDate"] == "2010-06-17"
+    assert bs2["releaseDateProviderId"] == "bulbapedia"
+    assert bs2["releaseDateRetrievedAt"] == "2026-10-08"
+    event = next(row["payload"] for row in graph["entities"]
+                 if row["entityType"] == "release-event"
+                 and row["entityId"] == "EVENT:KR:BS2:launch-2010-06-17")
+    source = next(row for row in catalogue["sourceRecords"]
+                  if row["sourceRecordId"] == event["sourceRecordId"])
+    assert source["provider"] == "bulbapedia"
+    assert source["sourceUrl"] == bs2["releaseDateSourceUrl"]
+    assert event["marketScopes"] == ["KR"]
+    xy10 = next(row for row in prints["prints"] if row["printId"] == "KR:XY10:057/078:base")
+    assert xy10["releaseDate"] == "2016-03-24"
+    assert xy10["releaseDateProviderId"] == "pokemon-card-korea"
+    assert xy10["releaseDateRetrievedAt"] == "2026-10-08"
+    assert xy10["releaseDateSourceUrl"] == "https://pokemoncard.co.kr/card/65"
+    date_record = next(row for row in catalogue["sourceRecords"]
+                       if row["sourceRecordId"] == xy10["releaseDateSourceRecordId"])
+    assert date_record["raw"]["conflictingHeaderDate"] == "2016-03-01"
+    assert date_record["raw"]["assertionDate"] == "2017-03-29"
+    assert date_record["raw"]["corroboratingAnnouncement"]["publishedAt"].startswith("2016-03-11")
+    assert date_record["raw"]["corroboratingAnnouncement"]["ownStockArrivalDate"] == "explicitly unknown"
+    dp006 = next(row for row in prints["prints"] if row["printId"] == "KR:DP:006:base")
+    assert dp006["releaseDate"] == "2010-08-26"
+    assert dp006["releaseDateProviderId"] == "52poke"
+    dp_source = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == dp006["releaseDateSourceRecordId"])
+    assert dp_source["raw"]["note"] == "Exact named promo only; not the whole promo sequence."
+    assert not any(row["entityType"] == "release-event" and row["entityId"] == "EVENT:KR:DP:launch-2010-08-26" for row in graph["entities"])
+    twenty = next(row for row in prints["prints"] if row["printId"] == "KR:20th:047/071:base")
+    assert twenty["localNumber"] == "047/071" and twenty["specimenId"] == "SPEC-0629"
+    assert twenty["releaseDate"] == "2016-02-27" and twenty["releaseDateProviderId"] == "pokemon-card-korea"
+    date_source = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == twenty["releaseDateSourceRecordId"])
+    assert date_source["raw"]["conflictingHeaderDate"] == "2016-02-01"
+    assert not any(row["printId"] in {"KR:20th:047/072:base", "KR:20th:047/077:base"} for row in prints["prints"])
+    twenty_profile = next(row for row in catalogue["sourceRecords"] if row["sourceRecordId"] == "SET-SRC-SF-443327CEB86E")
+    assert twenty_profile["raw"]["printedSetSize"] == 71
+    assert twenty_profile["raw"]["observedCollectorNumbers"] == ["047/071"]
+    # The bounded CN helper cannot alter finishes, aliases or unrelated source-first rows.
+    bounded_before = deepcopy(documents)
+    correction.admit_cn_followup(graph, catalogue, prints)
+    assert documents == bounded_before
+    import admit_issue257_simplified_chinese_20260827 as cn_admission
+    replay_prints = deepcopy(prints)
+    cn_admission.apply_source_first_prints(replay_prints)
+    correction.admit_cn_followup(graph, catalogue, replay_prints)
+    assert replay_prints == prints, "CN identity admission preserves SPEC, image followrefs and later fields"
+    replay_graph, replay_catalogue = deepcopy(graph), deepcopy(catalogue)
+    profiles = cn_admission.apply_set_sources(replay_catalogue)
+    replay_graph = cn_admission.apply_graph(replay_graph, profiles)
+    correction.admit_cn_followup(replay_graph, replay_catalogue, replay_prints)
+    for entity_type in ("rarity-claim", "card-release"):
+        scoped = lambda document: {e["entityId"]: e["payload"] for e in document["entities"]
+                                    if e["entityType"] == entity_type
+                                    and (e["payload"].get("cardReleaseId") in expected_cn)}
+        assert scoped(replay_graph) == scoped(graph), "CN graph replay retains follow-up fields"
+    for code in ("CS2DaC", "CS4DaC"):
+        get_profile = lambda document: next(row for row in document["sourceRecords"]
+                         if row["sourceKind"] == "source-first-local-set-profile"
+                         and row["raw"]["localCode"] == code)
+        assert get_profile(replay_catalogue) == get_profile(catalogue)
+    assert overrides == bounded_before[-1], "CN replay cannot infer or alter finishes"
+    classic = next(row for row in prints["prints"] if row["printId"] == "KR:CLF:016/032:base")
+    assert classic["specimenId"] == "SPEC-0616" and classic["retrievedAt"] == "2026-10-07"
+    assert not any("KR:CLF:016/034" in row["printId"] for row in prints["prints"])
+    keys = {(row["setCode"], row["number"]): row for row in overrides["overrides"]}
+    assert ("CSVH1C", "a001") not in keys and ("CSVH4C", "a003") not in keys
+    reward = keys[("CSVH4C", "p006")]["printings"]
+    assert len(reward) == 1 and reward[0]["finish"] == "holo"
+    assert reward[0]["distribution"]["kind"] == "special-pack"
+    assert not any(row["payload"].get("localSetCode") == "SM-P"
+                   for row in graph["entities"] if row["entityType"] == "release-event")
+
+
 def main() -> None:
+    verify_research_correction()
     verify_standalone_printing_identity()
     # A retained legacy specimen may follow its reviewed local re-key, but not a neighbour.
     specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
@@ -715,8 +843,8 @@ def main() -> None:
         )["prints"]
     }
     unmatched_korean = {
-        "KR:CLF:016/034:base", "KR:s1H:070/060:base", "KR:sm9:115/095:base",
-        "KR:s5a:093/070:base", "KR:20th:047/072:base",
+        "KR:s1H:070/060:base", "KR:sm9:115/095:base",
+        "KR:s5a:093/070:base",
         "KR:xsv2a:143/165:base", "KR:xm2a:136/193:base",
     }
     assert {
@@ -792,7 +920,7 @@ def main() -> None:
     )
     assert len(catalogue_rows) == 52
     assert {row["printId"] for row in catalogue_rows} == (
-        official_korean | unmatched_korean
+        official_korean | unmatched_korean | {"KR:CLF:016/032:base", "KR:20th:047/072:base"}
     )
     assert {
         row["printId"] for row in catalogue_rows if not row.get("work")
@@ -903,7 +1031,9 @@ def main() -> None:
     }
     for row in catalogue_rows:
         if row.get("rarity") is not None:
-            persisted = source_first_rows[row["printId"]]
+            # This historical replay predates the exact Korean /071 scan.
+            current_id = {"KR:20th:047/072:base": "KR:20th:047/071:base"}.get(row["printId"], row["printId"])
+            persisted = source_first_rows[current_id]
             assert persisted["raritySourceUrl"] == row["raritySourceUrl"]
             assert persisted["rarityProviderId"] == row["rarityProviderId"]
             assert persisted["rarityRetrievedAt"] == row["rarityRetrievedAt"]
@@ -988,7 +1118,7 @@ def main() -> None:
     product_url = sm30a_row["raritySourceUrl"]
     detail_url, membership_url = sm30a_row["raritySupportingSourceUrls"]
     assert source_registry[product_url]["providerId"] == "pokemon-card-korea"
-    assert source_registry[product_url]["dimensions"] == ["rarity"]
+    assert {"rarity", "date", "finish"} <= set(source_registry[product_url]["dimensions"])
     assert sm30a_row["printId"] in source_registry[product_url]["stableIds"]
     assert "set-membership" in source_registry[detail_url]["dimensions"]
     assert source_registry[membership_url]["dimensions"] == ["set-membership"]
@@ -1036,7 +1166,7 @@ def main() -> None:
     same_work_assertions = [
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "equivalence-assertion"
-        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean
+        and row["payload"].get("sourceFirstRecordId") in official_korean | unmatched_korean | {"KR:CLF:016/032:base", "KR:20th:047/071:base"}
     ]
     unmatched_assertions = [
         row for row in same_work_assertions

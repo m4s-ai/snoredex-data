@@ -92,6 +92,13 @@ SOURCES = {
         "The official fourth Happy Set specification positively describes ordinary and foil versions with the same constructed-deck contents and different processing.",
         tier="official-primary",
     ),
+    "pokemon-cn-happy-set-4-reward-pack": {
+        **source("https://www.pokemon.cn/tcg/product/21022.html",
+                 "Official Mainland China Simplified Chinese Reward Pack specification",
+                 "The fourteen Reward Pack cards are explicitly foil cards. This positive statement applies to p006/006, not to the separately described Modification Pack or paired decks.",
+                 tier="official-primary", coverage="positive-only"),
+        "retrievedAt": "2026-10-06",
+    },
     "pokemon-cn-departure-special-pack": source(
         "https://www.pokemon.cn/tcg/product/15499.html",
         "Official Mainland China Simplified Chinese product specification",
@@ -196,25 +203,8 @@ OVERRIDES = [
         "printings": [printing("non-holo", "pokemon-cn-battle-party-dream-decks", distribution={"kind": "fixed-deck", "name": "Battle Party Shining Dream flat-card deck"})],
     },
     {
-        "setCode": "CSVH1C", "number": "a001", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-1-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 1 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-1-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 1 foil deck"}),
-        ],
-    },
-    {
-        "setCode": "CSVH4C", "number": "a003", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 foil deck"}),
-        ],
-    },
-    {
         "setCode": "CSVH4C", "number": "p006", "languages": ["S-Chinese"],
-        "printings": [
-            printing("non-holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 ordinary deck"}),
-            printing("holo", "pokemon-cn-happy-set-4-decks", distribution={"kind": "fixed-deck", "name": "Happy Set 4 foil deck"}),
-        ],
+        "printings": [printing("holo", "pokemon-cn-happy-set-4-reward-pack", distribution={"kind": "special-pack", "name": "Happy Set 4 Reward Pack"})],
     },
     {
         "setCode": "CSVL1C", "number": "109", "languages": ["S-Chinese"],
@@ -470,6 +460,13 @@ def apply_set_sources(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
         grouped.setdefault(row["localSetCode"], []).append(row)
     profiles = {code: source_profile(group) for code, group in grouped.items()}
     by_id = {row["sourceRecordId"]: row for row in document["sourceRecords"]}
+    for code in ("CS2DaC", "CS4DaC"):
+        profile = profiles[code]
+        previous = by_id.get(profile["sourceRecordId"], {})
+        prior_raw = previous.get("raw", {})
+        profile["raw"] = {**prior_raw, **profile["raw"]}
+        for key in ("providers", "sourceUrls", "cardImageUrls", "markAssetUrls"):
+            profile["raw"][key] = sorted(set(prior_raw.get(key, []) + profile["raw"].get(key, [])))
     by_id.update({row["sourceRecordId"]: row for row in profiles.values()})
     document["sourceRecords"] = sorted(by_id.values(), key=lambda row: row["sourceRecordId"])
     document["meta"]["counts"]["sourceRecords"] = len(document["sourceRecords"])
@@ -482,7 +479,11 @@ def apply_set_sources(document: dict[str, Any]) -> dict[str, dict[str, Any]]:
 
 def apply_graph(
     graph: dict[str, Any], profiles: dict[str, dict[str, Any]],
+    *, source_first_prints=None, releases=None, question_set=None,
 ) -> dict[str, Any]:
+    SOURCE_FIRST_PRINTS = source_first_prints if source_first_prints is not None else globals()["SOURCE_FIRST_PRINTS"]
+    RELEASES = releases if releases is not None else globals()["RELEASES"]
+    QUESTION_SET = question_set if question_set is not None else globals()["QUESTION_SET"]
     localization_id = "LOCALIZATION:CN:zh-Hans"
 
     for local_code, profile in profiles.items():
@@ -738,6 +739,44 @@ def write(path: Path, payload: dict) -> None:
     path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
+def correct_happy_set_pack_scopes(finish: dict) -> None:
+    retired = {("CSVH1C", "a001"), ("CSVH4C", "a003")}
+    reward = next(row for row in OVERRIDES
+                  if row["setCode"] == "CSVH4C" and row["number"] == "p006")
+    result = []
+    found = False
+    for row in finish["overrides"]:
+        key = (row["setCode"], row["number"])
+        if key in retired:
+            continue
+        if key == ("CSVH4C", "p006"):
+            if found:
+                continue
+            row = reward
+            found = True
+        result.append(row)
+    if not found:
+        result.append(reward)
+    finish["overrides"] = result
+    finish["sources"]["pokemon-cn-happy-set-4-reward-pack"] = SOURCES["pokemon-cn-happy-set-4-reward-pack"]
+
+
+def apply_source_first_prints(prints: dict[str, Any]) -> None:
+    prints_by_id = {row["printId"]: row for row in prints["prints"]}
+    prints_by_id.pop("CN:CS2aC:086:base", None)
+    prints_by_id.pop("CN:CS2aC:142:base", None)
+    for row in SOURCE_FIRST_PRINTS:
+        # This admission owns identity; later reviewed field observations survive replay.
+        previous = prints_by_id.get(row["printId"], {})
+        prints_by_id[row["printId"]] = {
+            **previous, **{key: value for key, value in row.items()
+                           if value is not None or previous.get(key) is None},
+        }
+    prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
+    prints["meta"]["generated"] = max(prints["meta"].get("generated", ""), "2026-09-02")
+    prints["meta"]["counts"]["admitted"] = len(prints["prints"])
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--check", action="store_true")
@@ -759,17 +798,12 @@ def main() -> int:
             continue
         updated_overrides.append(issue_rows.pop(key, row))
     finish["overrides"] = updated_overrides + list(issue_rows.values())
+    correct_happy_set_pack_scopes(finish)
     finish["meta"]["lastUpdated"] = "2026-09-02"
 
     prints = read(PRINTS)
     before_prints = json.dumps(prints, sort_keys=True, ensure_ascii=False)
-    prints_by_id = {row["printId"]: row for row in prints["prints"]}
-    prints_by_id.pop("CN:CS2aC:086:base", None)
-    prints_by_id.pop("CN:CS2aC:142:base", None)
-    prints_by_id.update({row["printId"]: row for row in SOURCE_FIRST_PRINTS})
-    prints["prints"] = sorted(prints_by_id.values(), key=lambda row: row["printId"])
-    prints["meta"]["generated"] = "2026-09-02"
-    prints["meta"]["counts"]["admitted"] = len(prints["prints"])
+    apply_source_first_prints(prints)
 
     rekeys = read(REKEYS)
     before_rekeys = json.dumps(rekeys, sort_keys=True, ensure_ascii=False)
@@ -785,6 +819,11 @@ def main() -> int:
     before_graph = encoded(graph)
     graph = rekey_graph_values(graph)
     graph = apply_graph(graph, profiles)
+    # Keep the bounded later CN rarity/date observations in the same admission path.
+    # Import locally because the follow-up reuses this module's graph helpers.
+    from integrate_rarity_finish_research_20261007 import admit_cn_followup, admit_csvs
+    admit_cn_followup(graph, set_sources, prints)
+    admit_csvs(graph, set_sources, prints, rekeys)
 
     specimens = {row["specimenId"]: row for row in read(SPECIMENS)["specimens"]}
     for specimen_id in (

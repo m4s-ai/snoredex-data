@@ -124,7 +124,7 @@ RESEARCH_ROWS = [
     research("U0379", "SM-P", "017/SM-P", ("PROMO", "promo"), "https://bulbapedia.bulbagarden.net/wiki/SM-P_Promotional_cards_(KTCG)", "bulbapedia", specimen_id="SPEC-0439", corroborating=["https://tcgbox.co.kr/product/%EC%9E%A0%EB%A7%8C%EB%B3%B4gx/3966/"]),
     research("U0402", "svM", "094/175", ("U", "uncommon"), "https://collectory.cc/cards/6ff1ddb5-e091-42e4-8581-90cebe2d3b5f", "collectory", specimen_id="SPEC-0464"),
     research("U0413", "sm9", "066/095", ("RR", "double-rare"), "https://collectory.cc/cards/46ece022-2213-48b9-bb7d-6504f5e3a4eb", "collectory", specimen_id="SPEC-0449"),
-    research("U0440", "CLF", "016/034", ("fixed product", "fixed"), "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)", "bulbapedia"),
+    research("U0440", "CLF", "016/032", ("fixed product", "fixed"), "https://www.ebay.com/itm/197250301809", "seller-listing-photo", specimen_id="SPEC-0616"),
     research("U0508", "s1H", "070/060", ("HR", "hyper-rare"), "https://bulbapedia.bulbagarden.net/wiki/Shield_(TCG)", "bulbapedia"),
     research("U0541", "XY10", "057/078", ("C", "common"), "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)", "bulbapedia", specimen_id="SPEC-0457"),
     research("U0557", "sm9", "115/095", ("HR", "hyper-rare"), "https://bulbapedia.bulbagarden.net/wiki/Eevee_%26_Snorlax-GX_(Team_Up_120)", "bulbapedia", corroborating=["https://collectory.cc/cards/d3bcbd09-e544-468a-a596-7745da852bba"]),
@@ -143,6 +143,13 @@ RESEARCH_ROWS = [
     research("U0780", "xsv2a", "143/165", None, "https://bulbapedia.bulbagarden.net/wiki/151_(TCG)", "bulbapedia", specimen_id="SPEC-0061", legacy=["U0775", "U0780"]),
     research("U0785", "xm2a", "136/193", None, "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136", "cardmarket-listing-photo", specimen_id="SPEC-0410", corroborating=["https://globalbunjang.com/product/420832203"], legacy=["U0785", "U0790"]),
 ]
+
+for row in RESEARCH_ROWS:
+    if row["printId"] == "KR:CLF:016/032:base":
+        row["retrievedAt"] = "2026-10-07"
+        row["raritySourceUrl"] = "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)"
+        row["rarityProviderId"] = "bulbapedia"
+        row["rarityRetrievedAt"] = "2026-08-30"
 
 
 def korean_name(card_name: str) -> str:

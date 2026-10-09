@@ -68,14 +68,14 @@ OFFICIAL: dict[str, dict[str, Any]] = {
     "8554": {"print": "ID:SV2a I:143/165:base", "code": "SV2a I", "number": "143/165", "work": "Snorlax-Voraciousness-Thudding-Press", "rarity": ("U", "uncommon"), "legacy": ["U0105"]},
     "8760": {"print": "ID:SV2a I:181/165:base", "code": "SV2a I", "number": "181/165", "work": "Snorlax-Voraciousness-Thudding-Press", "rarity": ("AR", "illustration-rare"), "legacy": ["U0051"]},
     "9774": {"print": "ID:SV4s I:118/132:base", "code": "SV4s I", "number": "118/132", "work": "Snorlax-Doll", "rarity": ("U", "uncommon")},
-    "10045": {"print": "ID:SV4a I:145/190:base", "code": "SV4a I", "number": "145/190", "work": "Snorlax-Voraciousness-Thudding-Press", "rarity": ("no printed rarity symbol", "fixed"), "legacy": ["U0308"]},
+    "10045": {"print": "ID:SV4a I:145/190:base", "code": "SV4a I", "number": "145/190", "work": "Snorlax-Voraciousness-Thudding-Press", "rarity": ("no printed rarity symbol", None), "legacy": ["U0308"]},
     "10239": {"print": "ID:SV4a I:310/190:base", "code": "SV4a I", "number": "310/190", "work": "Snorlax-Voraciousness-Thudding-Press", "rarity": ("S", "shiny-rare"), "legacy": ["U0386"]},
     "13757": {"print": "ID:SV6s I:136/167:base", "code": "SV6s I", "number": "136/167", "work": "Snorlax-But-First-Food-Heavy-Impact", "rarity": ("U", "uncommon")},
     "15253": {"print": "ID:SVM I:094/175:base", "code": "SVM I", "number": "094/175", "work": "Snorlax-ex-Strength-Toss-and-Turn-Press", "rarity": ("no printed rarity symbol", "fixed"), "legacy": ["U0404"]},
     "15784": {"print": "ID:SV9s I:109/139:base", "code": "SV9s I", "number": "109/139", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("R", "rare")},
-    "17374": {"print": "ID:MA3 I:136/193:base", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", "fixed"), "legacy": ["U0129"]},
-    "17792": {"print": "ID:MA3 I:136/193:V1", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", "fixed"), "legacy": ["U0787"]},
-    "17793": {"print": "ID:MA3 I:136/193:V2", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", "fixed"), "legacy": ["U0792"]},
+    "17374": {"print": "ID:MA3 I:136/193:base", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", None), "legacy": ["U0129"]},
+    "17792": {"print": "ID:MA3 I:136/193:V1", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", None), "legacy": ["U0787"]},
+    "17793": {"print": "ID:MA3 I:136/193:V2", "code": "MA3 I", "number": "136/193", "work": "Hops-Snorlax-Extra-Helpings-Dynamic-Press", "rarity": ("no printed rarity symbol", None), "legacy": ["U0792"]},
 }
 
 

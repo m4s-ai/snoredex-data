@@ -1,0 +1,314 @@
+{
+  "schema": "snoredex-card-research-only-followup",
+  "retrievedAt": "2026-10-07",
+  "language": "Korean",
+  "canonicalMutations": false,
+  "priorReport": "korean-results.json",
+  "summary": {
+    "followupTargets": 7,
+    "newPositivePhysicalFindings": 2,
+    "distinctNewFoilPatternsConfirmed": 0,
+    "positiveIdentityCorrections": 1,
+    "unresolvedPhysicalFinishTargets": 4,
+    "unresolvedDateConflicts": 1,
+    "newIdentityMatchedSellerPhotos": 3
+  },
+  "limits": [
+    "Bounded research, not exhaustive coverage or absence evidence.",
+    "No canonical changes or SPEC allocation.",
+    "Root inspected original browser images where identified; subagent web image retrieval was blocked.",
+    "Search snippets and seller metadata remain leads unless originals were inspected.",
+    "No seller sale/update timestamp is used as a release date."
+  ],
+  "results": [
+    {
+      "target": "sv2a 143/165 alternate treatment",
+      "productClass": "booster",
+      "queries": [
+        "\"Snorlax\" \"143/165\" \"Korean\" \"Masterball\"",
+        "\"잠만보\" \"143\" \"마스터볼\" \"한글\"",
+        "\"잠만보\" \"143/165\" \"일반\""
+      ],
+      "previousEvidence": "KR-sv2a143-PokeBall-seller.jpg previously supports Poké Ball mirror.",
+      "sources": [
+        {
+          "url": "https://www.ebay.com/itm/287288757860",
+          "status": "original listing and gallery inspected by root",
+          "images": [
+            {
+              "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+              "inspection": "Root original browser inspection: Korean sv2a143/165 and reflective repeated ball outlines visible; distinguishing M too small to read."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/0oAAAeSwE2Fp6Yww/s-l1600.webp",
+              "inspection": "Root original browser inspection: card BACK, no front foil support."
+            }
+          ],
+          "sellerClaim": "Masterball",
+          "supportedFields": [
+            {
+              "field": "finish",
+              "value": "mirror-holo",
+              "foilPattern": null,
+              "basis": "Positive reflective repeated ball outlines on matching Korean card."
+            }
+          ],
+          "unsupportedFields": [
+            "master-ball foil pattern"
+          ],
+          "publishedOrUpdatedAt": null
+        },
+        {
+          "url": "https://www.ebay.de/itm/287301250409",
+          "status": "search lead; original unavailable",
+          "sellerClaim": "Master Ball reverse"
+        },
+        {
+          "url": "https://www.ebay.com/itm/376682706298",
+          "status": "original listing text retrieved, gallery not inspected",
+          "sellerClaim": "143 Master Ball + 181 AR Korean set"
+        },
+        {
+          "url": "https://m.bunjang.co.kr/products/436713721",
+          "status": "search lead; regular-treatment candidate uninspected"
+        }
+      ],
+      "remaining": "Need sufficiently close Korean card face to distinguish Master Ball M from Poké Ball; regular-treatment physical finish also unresolved.",
+      "nextLead": "Zoom front original or new photograph showing readable M symbols; title alone insufficient."
+    },
+    {
+      "target": "mC 567/742",
+      "productClass": "deck-family; native N preserved",
+      "queries": [
+        "\"잠만보\" \"567/742\" 한글",
+        "site:ebay.com \"Korean\" \"Snorlax\" \"567/742\"",
+        "site:bunjang.co.kr \"잠만보\" \"스타트덱\" \"567\"",
+        "\"잠만보\" \"567\" \"배틀컬렉션\""
+      ],
+      "previousEvidence": "SPEC-0458 Korean Collectory render establishes identity, no physical finish.",
+      "sources": [
+        {
+          "url": "https://daldagury.com/tcg/pokemon/card/13180",
+          "status": "search lead; render/secondary exact-card record",
+          "releaseDateClaim": "2026-02-13"
+        },
+        {
+          "url": "https://pokemoncard.co.kr/card/864",
+          "status": "official product date previously supported in Oct 6 report",
+          "releaseDateClaim": "2026-02-13"
+        }
+      ],
+      "supportedFields": [],
+      "remaining": "No original exact Korean seller photograph found in bounded queries; finish unknown. Native N remains unmapped, not automatically Fixed.",
+      "nextLead": "Native broad Start Deck/Battle Collection sellers with selectors or card lots; original Korean 567/742 photo."
+    },
+    {
+      "target": "mC 568/742",
+      "productClass": "deck-family; native N preserved",
+      "queries": [
+        "site:ebay.com \"Korean\" \"Snorlax\" \"568/742\"",
+        "site:bunjang.co.kr \"잠만보\" \"568/742\" 한글판",
+        "\"잠만보\" \"568\" 홀로"
+      ],
+      "previousEvidence": "KR-mC568-seller-front.jpg and KR-mC568-seller-detail.jpg re-inspected by subagent; exact Korean MC568/742 readable, diffuse glare/gray surface and colored border reflection do not establish specific foil.",
+      "sources": [
+        {
+          "url": "https://m.bunjang.co.kr/products/433165345",
+          "status": "previous original images retained and re-inspected",
+          "imageUrl": "https://media.bunjang.co.kr/product/433165345_1_1789833088_w640.jpg",
+          "sellerClaim": "Holo",
+          "supportedFields": [
+            "Korean identity MC568/742"
+          ],
+          "physicalFinishSupport": false
+        },
+        {
+          "url": "https://m.bunjang.co.kr/products/429503725",
+          "status": "Root browser original reports deleted product; images unavailable despite indexed title. Card language unverified.",
+          "sellerClaim": "mirror"
+        }
+      ],
+      "supportedFields": [],
+      "remaining": "Holo title remains separate seller claim; actual technical finish not positively established.",
+      "nextLead": "Original 429503725 card face and detailed angles showing positive foil pattern."
+    },
+    {
+      "target": "mC 569/742",
+      "productClass": "deck-family; native N preserved",
+      "queries": [
+        "\"잠만보\" \"569/742\" 미러",
+        "site:ebay.com \"Korean\" \"Snorlax\" \"569/742\"",
+        "site:bunjang.co.kr \"호브의 잠만보\" \"569/742\"",
+        "\"호브의 잠만보\" \"569\" 홀로"
+      ],
+      "previousEvidence": "SPEC-0460 Korean Collectory render, no physical finish.",
+      "sources": [
+        {
+          "url": "https://m.bunjang.co.kr/products/433169940",
+          "status": "exact Korean seller-title lead retained from Oct 6; original unavailable, images not inspected"
+        },
+        {
+          "url": "https://daldagury.com/tcg/pokemon/card/13182",
+          "status": "secondary/render search lead",
+          "releaseDateClaim": "2026-02-13"
+        }
+      ],
+      "supportedFields": [],
+      "remaining": "No original positive finish photograph in bounded routes.",
+      "nextLead": "Original seller 433169940 gallery or native broad multi-card offers."
+    },
+    {
+      "target": "20th 047/072",
+      "productClass": "random constructed deck product; exact card-product binding unresolved",
+      "queries": [
+        "\"잠만보\" \"047/072\" 한글",
+        "site:ebay.com \"Korean\" \"Snorlax\" \"20th\" \"047\"",
+        "\"잠만보\" \"20th\" \"트레이너 세트\"",
+        "\"잠만보\" \"047/072\" \"한국판\"",
+        "\"잠만보\" \"20th\" \"047\" 한국",
+        "\"잠만보\" \"20주년\" \"트레이너\" 카드",
+        "\"잠만보\" \"047/072\" 번개장터"
+      ],
+      "sources": [
+        {
+          "url": "https://pokemoncard.co.kr/card/64",
+          "status": "official product text opened Oct 7",
+          "productDate": "2016-02-01",
+          "productDescription": "Random constructed 60-card deck, includes five holo cards.",
+          "scopeLimit": "Does not identify Korean Snorlax 047/072 or its finish. Random deck is not evidence of one fixed product list.",
+          "uninspectedExposedImages": [
+            "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg",
+            "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/release01.png",
+            "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/release02.png"
+          ]
+        }
+      ],
+      "supportedFields": [],
+      "remaining": "Exact Korean 047/072 identity still unproven by these routes; no date or finish transferred. Prior report deck-context Fixed language is too broad and superseded by this qualification.",
+      "nextLead": "Readable Korean card face or exact localized card-list row; audit current Fixed assignment with actual product rules."
+    },
+    {
+      "target": "CLF 016/034 canonical candidate",
+      "observedTarget": "CLF 016/032",
+      "productClass": "Classic fixed deck product",
+      "queries": [
+        "\"Snorlax\" \"CLF\" \"Korean\"",
+        "\"잠만보\" \"016/032\" \"한글\"",
+        "\"Snorlax\" \"Classic\" \"Korean\" \"016\""
+      ],
+      "sources": [
+        {
+          "url": "https://www.ebay.com/itm/197250301809",
+          "status": "original listing opened; originals inspected by root",
+          "seller": "Reliable_KRshop",
+          "listingUpdatedAt": "2026-07-26T16:31:51-07:00",
+          "images": [
+            {
+              "url": "https://i.ebayimg.com/images/g/4J8AAeSw4ulo1MUk/s-l1600.webp",
+              "inspection": "Root original browser inspection: Korean 잠만보, printed CLF016/032 clear; star-like reflective foil across text/artwork visible."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/hcMAAeSwqBpo1MUj/s-l1600.webp",
+              "inspection": "Root original browser inspection: matching full front, weaker foil evidence."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/~3oAAeSwGQ9o1MUi/s-l1600.webp",
+              "inspection": "exposed, not inspected by subagent"
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/ApgAAeSwouVo1MUk/s-l1600.webp",
+              "inspection": "exposed, not inspected by subagent"
+            }
+          ],
+          "supportedFields": [
+            {
+              "field": "collectorNumber",
+              "value": "016/032",
+              "basis": "Exact Korean printed face; contradicts existing /034 candidate denominator."
+            },
+            {
+              "field": "finish",
+              "value": "holo",
+              "foilPattern": null,
+              "basis": "Positive star-like reflective foil on matching Korean physical card."
+            }
+          ],
+          "unsupportedFields": [
+            "seller Rare normalized rarity",
+            "technical foil pattern"
+          ]
+        },
+        {
+          "url": "https://collectablevoyage.net/products/pokemon-card-classic-collection-multiple-single-list-clf-cll-clk-korean",
+          "status": "selector search lead names CLF016/032; original unavailable"
+        },
+        {
+          "url": "https://www.ebay.com.hk/itm/166592216049",
+          "status": "same selector source lead; not independent corroboration"
+        },
+        {
+          "url": "https://pokemoncard.co.kr/card/590",
+          "status": "official Classic product date previously supported; exact card identity now independently pictured",
+          "productDate": "2023-12-16"
+        }
+      ],
+      "remaining": "Canonical denominator correction and specimen intake required; no changes performed. No Rare mapping from seller dropdown.",
+      "nextLead": "Integrate through source-reconciliation/graph identity writer and canonical specimen importer; audit dependent identity references before projection."
+    },
+    {
+      "target": "XY10 057/078",
+      "productClass": "booster",
+      "queries": [
+        "\"초능력의 제왕\" \"2016\" \"3월 24일\"",
+        "\"초능력의 제왕\" \"2016\" \"3월 1일\"",
+        "\"Snorlax\" \"057/078\" \"Korean\"",
+        "\"잠만보\" \"057/078\" 홀로"
+      ],
+      "sources": [
+        {
+          "url": "https://pokemoncard.co.kr/card/65",
+          "status": "official original text re-opened Oct 7",
+          "releaseDateHeader": "2016-03-01",
+          "errataPostedAt": "2017-03-29",
+          "releaseDateInErrata": "2016-03-24",
+          "scopeLimit": "Conflict retained; not silently resolved."
+        },
+        {
+          "url": "https://tcgbox.co.kr/article/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/1/24/",
+          "status": "contemporary retailer search snippet only; original unavailable",
+          "publishedAt": "2016-03-11T21:54:18",
+          "claim": "XY10 slated for March 24 release.",
+          "attemptedAliases": [
+            "https://tcgbox.co.kr/article/notice/1/24/",
+            "https://tcgbox.co.kr/board/free/read.html?no=24&board_no=1"
+          ],
+          "scopeLimit": "Strengthens March 24 chronology as a lead, but original validation still needed."
+        },
+        {
+          "url": "https://www.ebay.com/itm/137219628456",
+          "status": "Original listing text opened; original front image inspected by root",
+          "imageUrl": "https://i.ebayimg.com/images/g/kfsAAeSw93Np22TF/s-l1600.webp",
+          "sellerClaim": "Korean XY10 057/078 Non-Holo",
+          "listingUpdatedAt": "2026-04-20T02:07:12-07:00",
+          "metadataConflict": "Item specifics instead say 066/080 and year 2014; no metadata accepted as identity or finish.",
+          "inspection": "Root original browser inspection: actual physical Korean 잠만보057/078 on wood, exact target matched. No visible foil in this single view; absence of reflections does not prove Non-Holo.",
+          "supportedFields": [
+            "exact Korean card identity"
+          ],
+          "physicalFinishSupport": false
+        },
+        {
+          "url": "https://www.ebay.com/itm/318869752995",
+          "status": "exact Korean seller-title lead; original unavailable"
+        },
+        {
+          "url": "https://www.mercari.com/us/item/m84773896567/",
+          "status": "exact Korean seller-title lead; images not inspected"
+        }
+      ],
+      "supportedFields": [],
+      "remaining": "Date conflict unresolved; no new positive physical finish. Seller Non-Holo claim can be retained separately after original photo identity inspection.",
+      "nextLead": "Validate contemporary retailer notice; readable original seller angles or explicit owner finish determination."
+    }
+  ]
+}
