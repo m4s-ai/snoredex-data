@@ -254,7 +254,7 @@ def catalogue_date_source(item, record, predecessors):
 def catalogue_release(item, assets, localizations, records, artists, predecessors, strengths):
     """Adapt one canonical item to the existing table renderer without merging identities."""
     localization = localizations[item["localizationId"]]
-    record = next((records[ref] for ref in item["sourceClaimRefs"] if ref in records), {})
+    record = next((records[ref] for ref in sorted(item["sourceClaimRefs"]) if ref in records), {})
     image = assets.get(item["imageAssetId"], {}).get("path")
     language_fields = catalogue_language(item, localization, strengths)
     language = language_fields["language"]
@@ -266,7 +266,7 @@ def catalogue_release(item, assets, localizations, records, artists, predecessor
     return dict(rowId=item["itemId"], sourceRowId=item["itemId"], printingIds=list(filter(None, [item["physicalPrintingId"]])),
         name=item["cardName"], setCode=item["localSetCode"] or "Unknown", setName=item["localSetName"] or "Unknown",
         number=number, variant=item["finish"] or "unresolved", variantName=f'{localization["locality"]} · {language}',
-        rarity=item["rarity"]["display"], artist=record.get("artist", artists.get(image)),
+        rarity=item["rarity"]["display"], artist=catalogue_artist(record, image, artists),
         edition=item["edition"] or {"not-applicable":"none"}.get(item["editionAssignmentStatus"], "unknown"),
         date=date, dateExact=not item["releaseApproximate"],
         dateApproximate=item["releaseApproximate"], datePrecision=item["releaseDatePrecision"], dateSort=release_sort(date),
@@ -280,40 +280,88 @@ def catalogue_release(item, assets, localizations, records, artists, predecessor
             "finishStatus":{item["finish"]:item["finishVerificationStatus"]}}])
 
 
+def catalogue_artist(record, image, artists):
+    return record.get("illustrator") or record.get("artist") or artists.get(image)
+
+
+def catalogue_grades(item, language, strengths):
+    predecessor_refs = ["CHECKLIST:"+ref for ref in item["legacyChecklistIds"]
+                        if "CHECKLIST:"+ref in strengths]
+    # A finish graph can carry sibling V-token claims; the exact predecessor owns its grade.
+    references = predecessor_refs + [ref for ref in item["sourceClaimRefs"]
+        if not ref.startswith("CLAIM:legacy:") or not predecessor_refs]
+    return [strengths[ref] for ref in sorted(set(references), key=lambda ref: (not ref.startswith("CHECKLIST:"), ref))
+            if ref in strengths and strengths[ref]["language"] == language]
+
+
 def catalogue_language(item, localization, strengths):
     language = {"LATAM":"Spanish (Latin America)"}.get(localization["locality"], localization["language"])
-    references = item["sourceClaimRefs"] + ["CHECKLIST:"+ref for ref in item["legacyChecklistIds"]]
-    strength = next((strengths[ref] for ref in references
-                     if ref in strengths and strengths[ref]["language"] == localization["language"]), None)
-    verified = item["itemKind"] == "verified-printing" or strength is not None
+    grades = catalogue_grades(item, localization["language"], strengths)
+    strength = dict(grades[0], corroborated=any(g["corroborated"] for g in grades)) if grades else None
+    if item["itemKind"] == "verified-printing" and strength is None:
+        raise ValueError(f'Verified item has no resolved evidence grade: {item["itemId"]}')
+    verified = strength is not None
     return dict(language=language, confirmedLanguages=[language] if verified else [],
                 languageEvidence={language:strength} if strength else {})
 
 
-def catalogue_language_evidence(records, checklist, releases):
+def catalogue_source_records(graph, source_first):
+    """Resolve retained claim aliases through their canonical source identity."""
+    prints = {row["printId"]:row for row in source_first["prints"]}
+    return {entity["entityId"]:prints[payload["sourceId"]] for entity in graph["entities"]
+            if (payload := entity["payload"]).get("sourceKind") == "source-first-record"
+            and payload["sourceId"] in prints}
+
+
+def catalogue_source_grade(row, providers):
+    provider = providers[row["providerId"]]
+    return dict(language=row["language"], provider=provider["displayName"],
+                authorityTier=provider["authorityTier"], corroborated=bool(row.get("corroborated")),
+                checkable=bool(row.get("sourceUrl")))
+
+
+def catalogue_registered_grade(row, registry, providers):
+    observations = [entry for entry in registry["evidence"]
+        if row["printId"] in entry["stableIds"]
+        and set(entry["dimensions"]) & {"identity", "card-release", "card-existence", "language"}
+        and providers[entry["providerId"]]["authorityTier"] < 5]
+    if observations:
+        observation = min(observations, key=lambda entry: (
+            entry["providerId"] != row["providerId"], entry["canonicalUrl"] or ""))
+        return catalogue_source_grade(dict(row, providerId=observation["providerId"],
+            sourceUrl=observation["canonicalUrl"]), providers)
+    raise ValueError(f'Source-first record has no registered identity evidence: {row["printId"]}')
+
+
+def catalogue_language_evidence(records, checklist, releases, graph):
     """Use the exact product predecessor, never a sibling variant's evidence grade."""
-    providers = {p["providerId"]:p for p in read_json(ROOT / "verification/source_registry.json")["providers"]}
+    registry = read_json(ROOT / "verification/source_registry.json")
+    providers = {p["providerId"]:p for p in registry["providers"]}
     grades = {row["rowId"]:row.get("languageEvidence", {}) for row in releases["variants"]}
     strengths = {"CHECKLIST:"+row["checklistId"]:dict(language=row["language"], **grade)
                  for row in checklist["items"]
                  if (grade := grades.get(row["rowId"], {}).get(row["language"]))}
-    strengths.update({ref:dict(language=row["language"],
-                    provider=providers.get(row.get("providerId"), {}).get("displayName"),
-                    authorityTier=providers.get(row.get("providerId"), {}).get("authorityTier"),
-                    corroborated=bool(row.get("corroborated")), checkable=bool(row.get("sourceUrl")))
-            for ref, row in records.items()})
+    strengths.update({ref:catalogue_registered_grade(row, registry, providers) for ref, row in records.items()})
+    exists = {row["unitId"] for row in read_json(ROOT / "verification/evidence_semantics.json")["units"]
+              if row["applicationStatus"] == "exists"}
+    units = {row["unitId"]:row for row in read_json(ROOT / "verification/units.json")}
+    strengths.update({entity["entityId"]:catalogue_source_grade(units[payload["sourceId"]], providers)
+        for entity in graph["entities"]
+        if (payload := entity["payload"]).get("sourceKind") == "legacy-language-unit"
+        and payload["sourceId"] in exists})
     return strengths
 
 
 def catalogue_releases(catalogue, source_first, dataset, checklist, releases):
     assets = {a["assetId"]:a for a in catalogue["assets"]}
     localizations = {l["localizationId"]:l for l in catalogue["localizations"]}
-    records = {"CLAIM:source-first:"+r["printId"]:r for r in source_first["prints"]}
+    graph = read_json(ROOT / "verification/authoritative_graph.json")
+    records = catalogue_source_records(graph, source_first)
     artists = {c["imageFile"]:c.get("artist") for c in dataset["cards"]}
     predecessors = {row["checklistId"]: row for row in checklist["items"]}
-    strengths = catalogue_language_evidence(records, checklist, releases)
+    strengths = catalogue_language_evidence(records, checklist, releases, graph)
     return [catalogue_release(item, assets, localizations, records, artists, predecessors, strengths)
-            for item in catalogue["items"] if item["active"]]
+            for item in catalogue["items"] if item["active"] and item["itemKind"] == "verified-printing"]
 
 
 def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -485,7 +533,7 @@ def main() -> int:
                           if r["edition"] != "1st Edition")
 
     stats = [
-        (f"{len(rows)}", "active canonical printing / research rows"),
+        (f"{len(rows)}", "current confirmed physical printings"),
         (f"{established}", "established legacy language claims"),
         (f"{needs_evidence}", "language claims needing evidence"),
         (f"{not_printed}", "adjudicated not printed"),
@@ -568,8 +616,7 @@ def main() -> int:
         <h1>Snoredex — documented Snorlax TCG printings</h1>
         <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
         printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
-        size. Verified printings carry positive evidence; marketplace candidates and unresolved
-        claims remain explicitly separate.</p>
+        size. This table shows the current confirmed result of the retained research.</p>
       </div>
     </div>
     <nav class="sections" id="section-nav" aria-label="Sections">
@@ -595,9 +642,9 @@ def main() -> int:
 
 <section id="about">
   <h2>What this is</h2>
-  <p>This view shows the current canonical catalogue: every active localized printing or research
-  candidate in <a href="collector_catalogue.json"><code>collector_catalogue.json</code></a>, with
-  its evidence state and sources. It combines reviewed legacy candidates with positively documented
+  <p>This view shows every active confirmed physical printing in
+  <a href="collector_catalogue.json"><code>collector_catalogue.json</code></a>, with its current
+  field values and sources. It combines verified legacy printings with positively documented
   source-first releases. <strong>It is not a complete all-locality catalogue.</strong>
   The <a href="legacy-cardmarket-baseline.json">historical Cardmarket baseline</a> remains
   provenance, not the table's membership boundary.</p>
@@ -616,7 +663,7 @@ def main() -> int:
       LATAM (<code>es-419</code>) is a separate physical edition in the locality graph, never implied
       by European Spanish (<code>es-ES</code>) or a Cardmarket filter.</li>
       <li><strong>Evidence must reach the exact card.</strong> {needs_evidence} claims remain
-      <code>needs-evidence</code>; unresolved candidates stay labelled as research, never verified printings.</li>
+      <code>needs-evidence</code> in the data exports; unresolved candidates are excluded from this table.</li>
       {open_claims_note}
     </ul>
     <p><a href="README.md">Scope, evidence grades and methodology</a></p>

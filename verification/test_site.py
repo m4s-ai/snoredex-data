@@ -16,6 +16,7 @@ test failure: a release gate that silently skips its browser contract is not a r
 from __future__ import annotations
 
 import json
+import importlib.util
 import os
 import re
 import shutil
@@ -29,7 +30,8 @@ from threading import Thread
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
-CANONICAL_ITEMS = [item for item in json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["items"] if item["active"]]
+CANONICAL_ITEMS = [item for item in json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["items"]
+                   if item["active"] and item["itemKind"] == "verified-printing"]
 EXPECTED_ROWS = len(CANONICAL_ITEMS)
 
 # Every surface #43 enumerates, measured in both themes: (label, selector, property, mode,
@@ -75,8 +77,6 @@ THEME_SURFACES = [
     ("frozen column edge", "#rows td.corr", "borderLeftColor", "boundary", 3.0),
     ("card preview edge", ".card-preview", "borderTopColor", "boundary", 3.0),
     ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
-    ("marketplace pill", ".pill.marketplace-claimed", "color", "text", 4.5),
-    ("pending pill", ".pill.pending", "color", "text", 4.5),
     ("not-applicable pill", ".pill.not-applicable", "color", "text", 4.5),
     ("treatment badge", "#rows .treatment", "color", "text", 4.5),
     ("language present", "td.langcell.yes", "color", "text", 4.5),
@@ -130,6 +130,62 @@ results: list[tuple[str, bool, str]] = []
 
 def check(name: str, ok: bool, detail: str = "") -> None:
     results.append((name, ok, detail))
+
+
+def check_catalogue_evidence(embedded):
+    spec = importlib.util.spec_from_file_location("site_projection", ROOT / "scripts/site.py")
+    projection = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(projection)
+    load = lambda path: json.loads((ROOT / path).read_text(encoding="utf-8"))
+    graph = load("verification/authoritative_graph.json")
+    records = projection.catalogue_source_records(graph, load("verification/source_first_prints.json"))
+    strengths = projection.catalogue_language_evidence(records, load("analysis_checklist.json"),
+        load("analysis_confirmed_releases.json"), graph)
+    localizations = {row["localizationId"]:row for row in load("collector_catalogue.json")["localizations"]}
+    check("every confirmed table language has a registered provider and authority tier",
+          all(row["langEvidence"][code]["provider"] and row["langEvidence"][code]["tier"] in (1, 2, 3)
+              for row in embedded for code in row["langCodes"]))
+    check("claim and predecessor ordering cannot change language evidence",
+          all(projection.catalogue_language(item, localizations[item["localizationId"]], strengths) ==
+              projection.catalogue_language(dict(item, sourceClaimRefs=list(reversed(item["sourceClaimRefs"])),
+                  legacyChecklistIds=list(reversed(item["legacyChecklistIds"]))),
+                  localizations[item["localizationId"]], strengths) for item in CANONICAL_ITEMS))
+    expected_artists = {item["itemId"]:records[ref]["illustrator"] for item in CANONICAL_ITEMS
+                        for ref in item["sourceClaimRefs"] if records.get(ref, {}).get("illustrator")}
+    check("source-native illustrator credits survive for every supported table item",
+          all(row["artist"] == expected_artists.get(row["rowId"], row["artist"]) for row in embedded))
+    check_catalogue_boundaries(embedded, projection, localizations, strengths, load("collector_catalogue.json"))
+
+
+def check_catalogue_boundaries(rows, projection, localizations, strengths, catalogue):
+    chinese = next(row for row in rows if row["setCode"] == "30thC" and row["number"] == "095/103")
+    check("historical source-first alias resolves to registered photograph authority",
+          chinese["langEvidence"]["ZH-S"]["tier"] == 1
+          and chinese["langEvidence"]["ZH-S"]["provider"] == "Inspected physical specimen")
+    indonesian = next(row for row in rows if row["setCode"] == "S8b I" and row["number"] == "126/184")
+    check("exact predecessor corroboration survives source-first attachment",
+          indonesian["langEvidence"]["ID"]["corroborated"])
+    promo = next(item for item in catalogue["items"] if item["localSetCode"] == "FLF"
+                 and any(mark.get("text") == "Build-A-Bear Workshop" for mark in item["markings"]))
+    grade = projection.catalogue_language(promo, localizations[promo["localizationId"]], strengths)
+    check("retailer candidate keeps its own grade without borrowing a sibling variant",
+          grade["languageEvidence"]["English"]["provider"] == "Cardmarket exact product image"
+          and not grade["languageEvidence"]["English"]["corroborated"])
+    check("unconfirmed retailer finish stays outside the table while its positive date is retained",
+          promo["releaseDate"] == "2019-08-29" and promo["itemId"] not in {row["rowId"] for row in rows})
+
+
+def check_desktop_sources(page):
+    for width in (1280, 2560):
+        page.set_viewport_size({"width": width, "height": 900})
+        button = page.locator("#rows .rowmore").first
+        button.click()
+        panel = page.locator("#" + button.get_attribute("aria-controls"))
+        check(f"row sources are reachable on desktop at {width}px",
+              panel.is_visible() and panel.locator("dt", has_text="Sources").count() == 1
+              and panel.locator("a[href]").count() > 0)
+        button.click()
+    page.set_viewport_size({"width": 1280, "height": 900})
 
 
 def contrast_ratio(foreground: str, background: str) -> float:
@@ -198,6 +254,7 @@ def main() -> int:
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
         check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
         embedded = page.evaluate("() => JSON.parse(document.getElementById('data-rows').textContent)")
+        check_catalogue_evidence(embedded)
         expected = {item["itemId"]: item for item in CANONICAL_ITEMS}
         check("main table represents every active canonical item exactly once",
               len(embedded) == len(expected) and {row["rowId"] for row in embedded} == set(expected),
@@ -498,16 +555,6 @@ def main() -> int:
         page.fill("#f-q", "")
         page.wait_for_timeout(120)
 
-        build_a_bear = page.evaluate("""() => JSON.parse(
-          document.getElementById('data-rows').textContent
-        ).find(row => row.setCode === 'FLF' && row.markings.includes('Build-A-Bear Workshop'))""")
-        check("retailer promo uses its own evidenced distribution date",
-              build_a_bear is not None
-              and build_a_bear["dateStatus"] == "exact"
-              and build_a_bear["dateSort"] == "2019-08-29"
-              and build_a_bear["langEvidence"]["EN"]["provider"] == "Cardmarket exact product image"
-              and "marketplace-claimed" in build_a_bear["evidence"],
-              f"Build-A-Bear row: {build_a_bear}")
         localized = page.evaluate("""() => JSON.parse(document.getElementById('data-rows').textContent)
           .filter(row => ['30C EN','30C LA','30thC','M6a'].includes(row.setCode))""")
         check("source-first anniversary releases reach the main table with distinct localities",
@@ -1041,6 +1088,7 @@ def main() -> int:
 
         # Leaving the breakpoint must restore the plain list — the toggle is display:none there and
         # could not undo a collapsed state.
+        check_desktop_sources(page)
         page.set_viewport_size({"width": 1280, "height": 900})
         page.wait_for_timeout(120)
         nav_wide = page.evaluate("""() => ({

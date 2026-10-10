@@ -342,11 +342,13 @@ tbody tr:hover td.corr { background: var(--panel); }
 #methodology a { overflow-wrap: anywhere; }
 footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-top: 16px; color: var(--muted); font-size: 13px; }
 
-/* Narrow-screen column reduction (#121). Above the breakpoint the disclosure column and its panels
- * are not rendered at all — every value they carry is already a column on screen. */
-.col-more, tr.rowdetail { display: none; }
+/* Evidence sources remain reachable through the same row disclosure at every viewport width. */
+.col-more { display: table-cell; }
+tr.rowdetail { display: none; }
+tr.rowdetail:not([hidden]) { display: table-row; }
+tr.rowdetail > td { white-space: normal; background: var(--panel); }
 .rowmore {
-  padding: 4px 8px; border: 1px solid var(--control-line); border-radius: 5px;
+  padding: 4px 5px; border: 1px solid var(--control-line); border-radius: 5px;
   background: var(--bg); color: var(--fg); font: inherit; font-size: 11px; font-weight: 600;
   white-space: nowrap; cursor: pointer;
 }
@@ -373,9 +375,6 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
   .col-release, .col-expansion, .col-rarity, .col-artist, .col-edition,
   .col-pattern, .col-marking, .col-marking-role, .col-size, .col-distribution,
   .langcount, .langcell { display: none; }
-  .col-more { display: table-cell; }
-  tr.rowdetail:not([hidden]) { display: table-row; }
-  tr.rowdetail > td { white-space: normal; background: var(--panel); }
   /* The retained columns keep the fixed widths meant for a 34-column desktop matrix, which alone
    * overflowed a phone by ~530px. Here they wrap to the space available instead. */
   .col-card, .col-variant, .col-evidence, .col-finish {
@@ -483,7 +482,8 @@ footer.sitefoot { border-top: 1px solid var(--line); margin-top: 40px; padding-t
    * Add a dedicated print layout only if a full paper audit is needed. */
   header.masthead, main > section:not(#collection), .controls, details,
   .card-preview, .lang-evidence-popover, .language-legend,
-  td.corr, th.corr, .langcell, .secondary, td.img, th.img { display: none !important; }
+  td.corr, th.corr, .langcell, .secondary, td.img, th.img,
+  .col-more, tr.rowdetail { display: none !important; }
 
   body { background: #fff; color: #000; font-size: 9pt; }
   .wrap { max-width: none; padding: 0; }
