@@ -816,6 +816,9 @@ def main() -> int:
               and "never unavailable" in contribute_text
               and {"CONTRIBUTING.md", "verification/FINISH_SOURCES.md",
                    "verification/open-items.html"} <= set(contribute_links), contribute_text)
+        check("entries outside the confirmed table have a visible general correction route",
+              page.locator('#contribute a[href="https://github.com/m4s-ai/snoredex-data/issues/new/choose"]').is_visible()
+              and "blank_issues_enabled: true" in (ROOT / ".github/ISSUE_TEMPLATE/config.yml").read_text(encoding="utf-8"))
 
         # Native printing uses the current filter without building another document.
         page.fill("#f-q", "EXS")

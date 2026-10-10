@@ -63,8 +63,8 @@ printing identity and evidence, including source-first releases outside the lega
 Unconfirmed finish candidates and research placeholders remain in the data exports and are excluded
 from the table. The color
 scheme follows the system preference. The canonical checklist remains a separate data export;
-the view does not build ownership-checklist HTML. Corrections are submitted through the linked
-GitHub issue form; the embedded artwork/proposal review was retired on 2026-10-10.
+the view does not build ownership-checklist HTML. Corrections use the row's GitHub issue link or the
+general correction link for entries outside the table; the embedded artwork/proposal review was retired on 2026-10-10.
 
 ```console
 python -m http.server 8000
