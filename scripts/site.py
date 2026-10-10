@@ -34,6 +34,7 @@ LANG_CODE = {
     "English": "EN", "French": "FR", "German": "DE", "Italian": "IT", "Spanish": "ES",
     "Portuguese": "PT", "Dutch": "NL", "Polish": "PL", "Russian": "RU", "Japanese": "JA",
     "Korean": "KO", "T-Chinese": "ZH-T", "S-Chinese": "ZH-S", "Indonesian": "ID", "Thai": "TH",
+    "Spanish (Latin America)": "ES-LA",
 }
 LANG_ORDER = list(LANG_CODE)
 
@@ -91,7 +92,7 @@ def current_state_summary(row: dict[str, Any]) -> str:
     stamps: set[str] = set()
     sizes: set[str] = set()
     rank = {"pending": 0, "other-product": 1, "unmapped": 2,
-            "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
+            "marketplace-claimed": 3, "owner-attested": 4, "observed": 5, "confirmed": 5}
     for cell in row.get("finishByLanguage") or []:
         for technical_finish, status in (cell.get("finishStatus") or {}).items():
             if status in ("pending", "not-applicable"):
@@ -154,7 +155,7 @@ def display_date(row: dict[str, Any]) -> str:
     if str(row.get("dateSort") or "").startswith("9999"):
         return "Undated"
     if row.get("dateApproximate"):
-        return "~" + str(row["date"])[:4]
+        return "~" + str(row["date"])
     return str(row["date"])
 
 
@@ -242,6 +243,80 @@ def expand_dated_printings(row: dict[str, Any]) -> list[dict[str, Any]]:
     return expanded
 
 
+def catalogue_date_source(item, record, predecessors):
+    source_url = record.get("releaseDateSourceUrl") or record.get("releaseSourceUrl")
+    if source_url and record.get("releaseDate") == item["releaseDate"]:
+        return {"url": source_url, "provider": record.get("releaseDateProviderId", record.get("providerId"))}
+    old = (predecessors.get(ref, {}) for ref in item["legacyChecklistIds"])
+    return next((row.get("releaseDateSource") for row in old if row.get("releaseDate") == item["releaseDate"]
+                 and row.get("releaseDateSource")), None)
+
+
+def catalogue_release(item, assets, localizations, records, artists, predecessors, strengths):
+    """Adapt one canonical item to the existing table renderer without merging identities."""
+    localization = localizations[item["localizationId"]]
+    record = next((records[ref] for ref in item["sourceClaimRefs"] if ref in records), {})
+    image = assets.get(item["imageAssetId"], {}).get("path")
+    language_fields = catalogue_language(item, localization, strengths)
+    language = language_fields["language"]
+    date = item["releaseDate"] or "9999"
+    printing = dict(item, printingId=item["physicalPrintingId"], verificationStatus=item["finishVerificationStatus"])
+    number = item["collectorNumber"] or ""
+    if item["collectorNumberDenominator"]:
+        number += "/" + item["collectorNumberDenominator"]
+    return dict(rowId=item["itemId"], sourceRowId=item["itemId"], printingIds=list(filter(None, [item["physicalPrintingId"]])),
+        name=item["cardName"], setCode=item["localSetCode"] or "Unknown", setName=item["localSetName"] or "Unknown",
+        number=number, variant=item["finish"] or "unresolved", variantName=f'{localization["locality"]} · {language}',
+        rarity=item["rarity"]["display"], artist=record.get("artist", artists.get(image)),
+        edition=item["edition"] or {"not-applicable":"none"}.get(item["editionAssignmentStatus"], "unknown"),
+        date=date, dateExact=not item["releaseApproximate"],
+        dateApproximate=item["releaseApproximate"], datePrecision=item["releaseDatePrecision"], dateSort=release_sort(date),
+        dateSource=catalogue_date_source(item, record, predecessors),
+        image=image, cardmarketUrl="", correctionUrl=item["correctionLink"], itemKind=item["itemKind"],
+        sourceLinks=item["sourceLinks"], localizationId=item["localizationId"],
+        confirmedLanguages=language_fields["confirmedLanguages"],
+        languageEvidence=language_fields["languageEvidence"],
+        finishCompletenessByLanguage={language:item["completenessStatus"]},
+        finishByLanguage=[{"language":language, "status":item["finishVerificationStatus"], "printings":[printing],
+            "finishStatus":{item["finish"]:item["finishVerificationStatus"]}}])
+
+
+def catalogue_language(item, localization, strengths):
+    language = {"LATAM":"Spanish (Latin America)"}.get(localization["locality"], localization["language"])
+    references = item["sourceClaimRefs"] + ["CHECKLIST:"+ref for ref in item["legacyChecklistIds"]]
+    strength = next((strengths[ref] for ref in references
+                     if ref in strengths and strengths[ref]["language"] == localization["language"]), None)
+    verified = item["itemKind"] == "verified-printing" or strength is not None
+    return dict(language=language, confirmedLanguages=[language] if verified else [],
+                languageEvidence={language:strength} if strength else {})
+
+
+def catalogue_language_evidence(records, checklist, releases):
+    """Use the exact product predecessor, never a sibling variant's evidence grade."""
+    providers = {p["providerId"]:p for p in read_json(ROOT / "verification/source_registry.json")["providers"]}
+    grades = {row["rowId"]:row.get("languageEvidence", {}) for row in releases["variants"]}
+    strengths = {"CHECKLIST:"+row["checklistId"]:dict(language=row["language"], **grade)
+                 for row in checklist["items"]
+                 if (grade := grades.get(row["rowId"], {}).get(row["language"]))}
+    strengths.update({ref:dict(language=row["language"],
+                    provider=providers.get(row.get("providerId"), {}).get("displayName"),
+                    authorityTier=providers.get(row.get("providerId"), {}).get("authorityTier"),
+                    corroborated=bool(row.get("corroborated")), checkable=bool(row.get("sourceUrl")))
+            for ref, row in records.items()})
+    return strengths
+
+
+def catalogue_releases(catalogue, source_first, dataset, checklist, releases):
+    assets = {a["assetId"]:a for a in catalogue["assets"]}
+    localizations = {l["localizationId"]:l for l in catalogue["localizations"]}
+    records = {"CLAIM:source-first:"+r["printId"]:r for r in source_first["prints"]}
+    artists = {c["imageFile"]:c.get("artist") for c in dataset["cards"]}
+    predecessors = {row["checklistId"]: row for row in checklist["items"]}
+    strengths = catalogue_language_evidence(records, checklist, releases)
+    return [catalogue_release(item, assets, localizations, records, artists, predecessors, strengths)
+            for item in catalogue["items"] if item["active"]]
+
+
 def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     expanded_releases = [
@@ -260,7 +335,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         # evidence is rather than merely that something exists.
         best: dict[str, str] = {}
         rank = {"pending": 0, "other-product": 1, "unmapped": 2,
-                "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
+                "marketplace-claimed": 3, "owner-attested": 4, "observed": 5, "confirmed": 5}
         for cell in row.get("finishByLanguage") or []:
             for technical_finish, status in (cell.get("finishStatus") or {}).items():
                 if status in ("pending", "not-applicable"):
@@ -291,6 +366,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
         completeness = set((row.get("finishCompletenessByLanguage") or {}).values())
         evidence |= completeness
+        evidence.add(row.get("itemKind", "legacy"))
 
         lang_codes = [LANG_CODE[l] for l in row["confirmedLanguages"] if l in LANG_CODE]
         # Evidence strength per confirmed language, keyed by the same code the cells use so
@@ -317,6 +393,9 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "sourceRowId": row.get("sourceRowId", row["rowId"]),
             "printingIds": row.get("printingIds", []),
             "splitPhysicalPrinting": bool(row.get("splitPhysicalPrinting")),
+            "itemKind": row.get("itemKind"),
+            "localizationId": row.get("localizationId"),
+            "sourceLinks": row.get("sourceLinks", []),
             "name": row["name"],
             "setCode": row["setCode"],
             "setName": row["setName"],
@@ -349,7 +428,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "confirmedLanguages": row["confirmedLanguages"],
             "langCodes": lang_codes,
             "langEvidence": lang_evidence,
-            "correctionUrl": correction_url(row),
+            "correctionUrl": row.get("correctionUrl", correction_url(row)),
             "search": search,
         })
     return rows
@@ -405,7 +484,8 @@ def main() -> int:
         else "<strong>not yet operative</strong> until the owner records approval"
     )
 
-    rows = build_rows(releases_doc["variants"])
+    catalogue = read_json(ROOT / "collector_catalogue.json")
+    rows = build_rows(catalogue_releases(catalogue, read_json(ROOT / "verification/source_first_prints.json"), dataset, checklist_doc, releases_doc))
     verification = dataset["meta"]["verification"]
     # Only owner adjudication settles a language or printing absence.
     not_printed = sum(len(c.get("languagesNotPrinted") or []) for c in dataset["cards"])
@@ -422,7 +502,7 @@ def main() -> int:
                           if r["edition"] != "1st Edition")
 
     stats = [
-        (f"{len(rows)}", "current-known card-variant rows"),
+        (f"{len(rows)}", "active canonical printing / research rows"),
         (f"{established}", "established legacy language claims"),
         (f"{needs_evidence}", "language claims needing evidence"),
         (f"{not_printed}", "adjudicated not printed"),
@@ -533,11 +613,12 @@ def main() -> int:
 
 <section id="about">
   <h2>What this is</h2>
-  <p>This view projects the historical Cardmarket candidate universe frozen as
-  <a href="legacy-cardmarket-baseline.json"><code>{html.escape(baseline['meta']['baselineId'])}</code></a>,
-  plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
-  legacy claim it answers a narrower question: <em>does positive evidence beyond marketplace
-  metadata confirm this printing actually exists?</em></p>
+  <p>This view shows the current canonical catalogue: every active localized printing or research
+  candidate in <a href="collector_catalogue.json"><code>collector_catalogue.json</code></a>, with
+  its evidence state and sources. It combines reviewed legacy candidates with positively documented
+  source-first releases. <strong>It is not a complete all-locality catalogue.</strong>
+  The <a href="legacy-cardmarket-baseline.json">historical Cardmarket baseline</a> remains
+  provenance, not the table's membership boundary.</p>
   <div class="stats">
     {"".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>' for n, k in stats)}
   </div>
@@ -549,11 +630,11 @@ def main() -> int:
       evidence are separate; a language confirmation never establishes a finish.</li>
       <li><strong>Pending means unresolved, never absent.</strong> Missing source entries are gaps.
       Only an explicit collection-owner adjudication settles absence; otherwise contradictions remain disputed.</li>
-      <li><strong>Every &ldquo;Spanish&rdquo; row in this legacy table is European Spanish.</strong>
+      <li><strong>ES is European Spanish; ES-LA is Latin American Spanish.</strong> Localized source-first releases retain their own set codes and numbers.
       LATAM (<code>es-419</code>) is a separate physical edition in the locality graph, never implied
       by European Spanish (<code>es-ES</code>) or a Cardmarket filter.</li>
       <li><strong>Evidence must reach the exact card.</strong> {needs_evidence} claims remain
-      <code>needs-evidence</code> and do not enter the chronological table or canonical checklist.</li>
+      <code>needs-evidence</code>; unresolved candidates stay labelled as research, never verified printings.</li>
       {open_claims_note}
     </ul>
     <p><a href="README.md">Scope, evidence grades and methodology</a></p>

@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "Curated finish, foil-pattern, marking, distribution, release-date, size, and Cardmarket-product mappings that cannot be represented by TCGdex's group-level normal/holo/reverse flags.",
-    "lastUpdated": "2026-09-25",
+    "lastUpdated": "2026-10-10",
     "policy": [
       "A physical stamp is recorded in markings; the way a card was distributed is recorded separately in distribution.",
       "Printed identity features such as a rarity symbol or contest credit use role=print-identity; they do not imply a finish.",
@@ -2248,6 +2248,13 @@
       ],
       "retrievedAt": "2026-10-06",
       "evidence": "Exact Korean product states 60장 덱 (전종 홀로). Matched sN 008/024. The statement does not identify mirror treatment or foil pattern."
+    },
+    "bulbapedia-build-a-bear-launch": {
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Build-A-Bear_Workshop_collection",
+      "sourceType": "Bulbapedia exact Snorlax bundle release date and contents",
+      "evidence": "Regular Snorlax online bundle released August 29, 2019 and includes the Snorlax TCG card. November 2019 is the later Jumbo plush bundle. Contemporary August 29 Nintendo Everything and Nintendo Wire reports explicitly include the exclusive Snorlax card in the available $57 bundle.",
+      "retrieved": "2026-10-10",
+      "supportsAbsence": false
     }
   },
   "overrides": [
@@ -2825,7 +2832,7 @@
             "kind": "retailer-promo",
             "name": "Build-A-Bear Workshop"
           },
-          "releaseDate": null,
+          "releaseDate": "2019-08-29",
           "cardSize": "standard",
           "mappedVariants": [
             "V2"
@@ -2835,8 +2842,14 @@
             "tcgplayer-build-a-bear-snorlax",
             "tcgcsv-docs",
             "tcgcsv-build-a-bear-snorlax",
-            "cardmarket-stock-image"
-          ]
+            "cardmarket-stock-image",
+            "bulbapedia-build-a-bear-launch"
+          ],
+          "releaseDateSource": {
+            "provider": "Bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Build-A-Bear_Workshop_collection",
+            "field": "Regular Snorlax Online Exclusive Bundle release date and Snorlax TCG card contents"
+          }
         }
       ]
     },

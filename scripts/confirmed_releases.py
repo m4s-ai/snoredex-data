@@ -128,7 +128,11 @@ for c in cards:
         for printing in cell.get("printings") or []
         if printing.get("productMapping") == "mapped"
     ]
-    if product_printings and all(
+    printing_dates = {printing.get("releaseDate") for printing in product_printings}
+    if product_printings and len(printing_dates) == 1 and None not in printing_dates:
+        d, exact = next(iter(printing_dates)), True
+        date_source = product_printings[0].get("releaseDateSource")
+    elif product_printings and all(
         "releaseDate" in printing and printing.get("releaseDate") is None
         for printing in product_printings
     ):

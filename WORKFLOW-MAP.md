@@ -463,6 +463,8 @@ distribution, and card size. It is not derived from list order.
 ## 7. Boundaries
 
 - `scripts/site.py` and `site/app.js` own the generated data/evidence review view (#411).
+  Its main table projects every active `collector_catalogue.json` item once, preserving canonical
+  locality, evidence state and correction identity; the legacy chronology export is not its membership input.
   System color preference, native table overflow and browser printing replace manual theme,
   cloned headers, scroll buttons and ownership-checklist HTML. Canonical checklist/collector
   exports, stable evidence/correction IDs and local artwork proposals remain separate contracts.

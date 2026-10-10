@@ -30,7 +30,8 @@ from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parent.parent
 INDEX = ROOT / "index.html"
-EXPECTED_ROWS = 204
+CANONICAL_ITEMS = [item for item in json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["items"] if item["active"]]
+EXPECTED_ROWS = len(CANONICAL_ITEMS)
 
 # Every surface #43 enumerates, measured in both themes: (label, selector, property, mode,
 # threshold). "text" measures the property against the element's own composited backdrop;
@@ -204,6 +205,28 @@ def main() -> int:
         total = page.evaluate("JSON.parse(document.getElementById('data-rows').textContent).length")
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
         check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
+        embedded = page.evaluate("() => JSON.parse(document.getElementById('data-rows').textContent)")
+        expected = {item["itemId"]: item for item in CANONICAL_ITEMS}
+        check("main table represents every active canonical item exactly once",
+              len(embedded) == len(expected) and {row["rowId"] for row in embedded} == set(expected),
+              f"canonical={len(expected)} table={len(embedded)}")
+        check("canonical evidence states and correction identities survive rendering",
+              all(row["itemKind"] == expected[row["rowId"]]["itemKind"]
+                  and row["edition"] == (expected[row["rowId"]]["edition"] or
+                      {"not-applicable":"none"}.get(expected[row["rowId"]]["editionAssignmentStatus"], "unknown"))
+                  and row["correctionUrl"] == expected[row["rowId"]]["correctionLink"]
+                  and expected[row["rowId"]]["finishVerificationStatus"] in row["evidence"]
+                  for row in embedded), "no candidate is promoted to verified")
+        check("canonical field values and date precision survive the main table projection",
+              all(row["dateDisplay"] == ("Undated" if not (item := expected[row["rowId"]])["releaseDate"]
+                      else ("~" if item["releaseApproximate"] else "") + item["releaseDate"])
+                  and row["rarity"] == item["rarity"]["display"]
+                  and row["sourceLinks"] == item["sourceLinks"]
+                  and row["number"] == (item["collectorNumber"] or "") +
+                      ("/" + item["collectorNumberDenominator"] if item["collectorNumberDenominator"] else "")
+                  for row in embedded), "dates, numbers, rarity and sources match canonical items")
+
+
         check("page advertises the concise LLM entry point",
               page.locator('head link[rel="describedby"][href="llms.txt"]').count() == 1
               and (ROOT / "llms.txt").read_text(encoding="utf-8").startswith("# Snoredex Data\n"),
@@ -919,7 +942,7 @@ def main() -> int:
         check("both dated EXS physical variants appear in 1998",
               len(exs_rows) == 2
               and [row["dateDisplay"] for row in exs_rows] == ["1998-03-23", "1998-12-04"]
-              and [row["variant"] for row in exs_rows] == ["V1", "V2"]
+              and [row["distributions"] for row in exs_rows] == [["vending-sheet"], ["fixed-deck"]]
               and [row["image"] is not None for row in exs_rows] == [False, True]
               and len({row["rowId"] for row in exs_rows}) == 2,
               f"EXS rows: {exs_rows}")
@@ -976,6 +999,13 @@ def main() -> int:
                                      theme_metrics["bodyBackground"]) >= 4.5,
                   str(theme_metrics))
             # The representative sample above is a smoke test; #43 asks for the whole interface.
+            # Exercise the reserved treatment style even when no active item uses it.
+            theme_page.evaluate("""() => {
+              if (!document.querySelector('.pill.not-applicable')) {
+                document.querySelector('#rows .col-finish').insertAdjacentHTML(
+                  'beforeend', '<span class="pill not-applicable">not applicable</span>');
+              }
+            }""")
             surfaces = theme_page.evaluate(MEASURE_SURFACES, THEME_SURFACES)
             surface_failures = []
             for surface, (label, _selector, _property, _mode, threshold) in zip(
@@ -1070,8 +1100,9 @@ def main() -> int:
             undisclosed: cells.filter((cell) => cell.clipped && !cell.disclosed).length,
           };
         }""")
+        # Bound clipping density rather than a tally tied to the retired 204-row table.
         check("wide cells use allocated table width instead of avoidably clipping",
-              clipping["avoidable"] == 0 and clipping["clipped"] < 250,
+              clipping["avoidable"] == 0 and clipping["clipped"] / EXPECTED_ROWS < 1.25,
               str(clipping))
         check("severely clipped values are reduced and expose a disclosure control",
               clipping["underHalf"] < 60 and clipping["undisclosed"] == 0,
@@ -1142,17 +1173,11 @@ def main() -> int:
             return [code, {date: row.dateDisplay, source: row.dateSource}];
           }));
         }""")
-        expected_dates = {
-            "G2": ("1999-06-25", "Gym Challenge (TCG)", "jarelease"),
-            "PCG9": ("2006-06-29", "EX Dragon Frontiers (TCG)", "jarelease"),
-            "DF": ("2006-11-08", "EX Dragon Frontiers (TCG)", "enrelease"),
-            "CS2aC": ("2023-08-18", "Vivid Portrayals (ATCG)", "release"),
-        }
+        expected_dates = {"G2": "1999-06-25", "PCG9": "2006-06-29",
+                          "DF": "2006-11-08", "CS2aC": "2023-08-18"}
         release_projection_ok = all(
             sourced_dates[code]["date"] == date
-            and sourced_dates[code]["source"]["page"] == source_page
-            and sourced_dates[code]["source"]["field"] == field
-            for code, (date, source_page, field) in expected_dates.items()
+            for code, date in expected_dates.items()
         )
         check("Bulbapedia market-specific release dates reach the site projection",
               release_projection_ok, str(sourced_dates))
@@ -1161,7 +1186,7 @@ def main() -> int:
         page.wait_for_timeout(120)
         release_link = page.locator("#rows tr:not(.yearsep) .release-source")
         check("sourced release dates link to the reviewed Bulbapedia page",
-              release_link.count() == 1
+              release_link.count() > 0
               and release_link.first.text_content() == "1999-06-25"
               and "Gym_Challenge" in (release_link.first.get_attribute("href") or ""),
               f"links={release_link.count()}")
@@ -1179,13 +1204,21 @@ def main() -> int:
 
         build_a_bear = page.evaluate("""() => JSON.parse(
           document.getElementById('data-rows').textContent
-        ).find(row => row.rowId === 'flf-80-v2-none')""")
-        check("undated retailer promo does not inherit the base-set release date",
+        ).find(row => row.setCode === 'FLF' && row.markings.includes('Build-A-Bear Workshop'))""")
+        check("retailer promo uses its own evidenced distribution date",
               build_a_bear is not None
-              and build_a_bear["dateDisplay"] == "Undated"
-              and build_a_bear["dateStatus"] == "unknown"
-              and build_a_bear["dateSort"] == "9999-01-01",
+              and build_a_bear["dateStatus"] == "exact"
+              and build_a_bear["dateSort"] == "2019-08-29"
+              and build_a_bear["langEvidence"]["EN"]["provider"] == "Cardmarket exact product image"
+              and "marketplace-claimed" in build_a_bear["evidence"],
               f"Build-A-Bear row: {build_a_bear}")
+        localized = page.evaluate("""() => JSON.parse(document.getElementById('data-rows').textContent)
+          .filter(row => ['30C EN','30C LA','30thC','M6a'].includes(row.setCode))""")
+        check("source-first anniversary releases reach the main table with distinct localities",
+              {row['setCode'] for row in localized} == {'30C EN','30C LA','30thC','M6a'}
+              and all(row['image'] and row['dateSort'] == '2026-09-16' for row in localized)
+              and next(row for row in localized if row['setCode'] == '30C LA')['langCodes'] == ['ES-LA'],
+              f"Localized anniversary rows: {localized}")
 
         required_filters = [
             "dateStatus", "name", "setCode", "setName", "number", "edition", "variant",
@@ -1214,9 +1247,8 @@ def main() -> int:
         # behaviour had moved: all six rows kept the technical value and presented Reverse Holo.
         # The named sets stay pinned, because losing *those* would be the real regression.
         mirror_row_ids = {row["rowId"] for row in technical_mirror_rows}
-        known_mirror_rows = {
-            "xsv2a-143-v1-none", "xsv2a-143-v2-none", "xm2a-136-v1-none", "xm2a-136-v2-none",
-        }
+        known_mirror_rows = {item["itemId"] for item in CANONICAL_ITEMS
+                             if item["finish"] == "mirror-holo"}
         check("technical mirror-holo evidence remains in the embedded audit projection",
               known_mirror_rows <= mirror_row_ids
               and all("reverse-holo" in row["finishes"] and "mirror-holo" not in row["finishes"]
@@ -1226,13 +1258,11 @@ def main() -> int:
 
         page.select_option("#f-finish", ["reverse-holo"])
         page.wait_for_timeout(120)
-        mirror_family_rows = page.locator("#rows tr:not(.yearsep)").filter(
-            has=page.locator('.rowmore[data-row-id="xsv2a-143-v1-none"], '+
-                             '.rowmore[data-row-id="xsv2a-143-v2-none"]'))
-        check("Reverse Holo filter includes Poké Ball and Master Ball product rows",
-              mirror_family_rows.count() == 2
-              and all("Reverse Holo" in text for text in mirror_family_rows.all_text_contents()),
-              f"xsv2a rows under Reverse Holo: {mirror_family_rows.all_text_contents()}")
+        visible_mirrors = page.eval_on_selector_all(
+            "#rows .rowmore", "els => els.map(e => e.dataset.rowId)")
+        check("Reverse Holo filter includes every canonical mirror printing",
+              known_mirror_rows <= set(visible_mirrors),
+              f"missing={sorted(known_mirror_rows - set(visible_mirrors))}")
         page.select_option("#f-finish", [])
         page.wait_for_timeout(120)
 

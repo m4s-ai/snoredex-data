@@ -434,13 +434,14 @@ def main() -> None:
             "flf-80-english-none-non-holo-retailer-build-a-bear-workshop"
         )
     )
-    assert build_a_bear_predecessor["releaseDate"] is None
+    assert build_a_bear_predecessor["releaseDate"] == "2019-08-29"
     build_a_bear_release = next(
         row for row in releases["variants"]
         if row["setCode"] == "FLF" and row["number"] == "80" and row["variant"] == "V2"
     )
-    assert build_a_bear_release["date"] == "9999"
-    assert build_a_bear_release["dateSort"] == "9999-01-01"
+    assert build_a_bear_release["date"] == "2019-08-29"
+    assert build_a_bear_release["dateSort"] == "2019-08-29"
+    assert "Build-A-Bear_Workshop_collection" in build_a_bear_release["dateSource"]["url"]
 
     assert not collector.validate_catalogue(catalogue, graph)
     assert not collector.validate_migrations(migrations, catalogue, graph, predecessor)
@@ -760,11 +761,11 @@ def main() -> None:
 
     build_a_bear_item = next(
         row for row in catalogue["items"]
-        if row.get("sourcePrintingId") == "F0119-P01"
+        if row.get("localSetCode") == "FLF"
         and (row.get("distribution") or {}).get("name") == "Build-A-Bear Workshop"
     )
-    assert build_a_bear_item["releaseDate"] is None
-    assert build_a_bear_item["releaseDatePrecision"] is None
+    assert build_a_bear_item["releaseDate"] == "2019-08-29"
+    assert build_a_bear_item["releaseDatePrecision"] == "day"
     dutch_printings = {
         row["physicalPrintingId"]: row
         for row in catalogue["items"]

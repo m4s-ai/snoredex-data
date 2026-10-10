@@ -439,6 +439,9 @@
       ["Marking role", escapeHTML(row.markingRoles.join(", ") || "—")],
       ["Size", escapeHTML(row.sizes.join(", ") || "—")],
       ["Distribution", escapeHTML(row.distributions.join(", ") || "—")],
+      ["Evidence", escapeHTML(row.evidence.join(", ") || "—")],
+      ["Sources", (row.sourceLinks || []).map(url => '<a href="' + escapeHTML(url) +
+        '" target="_blank" rel="noopener">' + escapeHTML(url) + '</a>').join('<br>') || "—"],
       ["Confirmed languages", row.confirmedLanguages.length
         ? escapeHTML(row.confirmedLanguages.join(", ")) +
           ' <span class="detail-count">(' + row.confirmedLanguages.length + ")</span>"
@@ -485,7 +488,7 @@
     const release = row.dateSource && row.dateSource.url
       ? '<a class="release-source" href="' + escapeHTML(row.dateSource.url) +
         '" target="_blank" rel="noopener" title="' +
-        escapeHTML("Source: " + row.dateSource.page + " (" + row.dateSource.field + ")") + '">' +
+        escapeHTML("Source: " + (row.dateSource.page || row.dateSource.provider || "Reviewed source")) + '">' +
         escapeHTML(row.dateDisplay) + "</a>"
       : escapeHTML(row.dateDisplay);
     return (

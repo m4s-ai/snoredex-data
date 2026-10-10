@@ -57,7 +57,10 @@ Two rules hold everywhere in the data, the tooling and the site copy:
 ### Browse the collection
 
 Serve the repository and open the generated review view: sorting, filtering, evidence and correction
-links, artwork review proposals, TSV export and browser printing of the filtered table. The color
+links, artwork review proposals, TSV export and browser printing of the filtered table. Every active
+item in `collector_catalogue.json` appears once, with its locality, printing identity and evidence
+state, including source-first releases outside the legacy Cardmarket universe. Research candidates
+remain explicitly labelled. The color
 scheme follows the system preference. The canonical checklist remains a separate data export;
 the view does not build ownership-checklist HTML. Artwork review requires HTTP; opening
 `index.html` directly with `file://` reports the local-server command instead of loading artwork.
@@ -125,7 +128,7 @@ contradiction — it records the source techniques and the dead ends already pai
 ## What the project currently holds
 
 <!-- generated:current-state — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-Current-known status snapshot: **2026-10-08**. Legacy claim counts refer to `cardmarket-search-2026-07-21`; collector projections also include accepted source-first admissions. Neither claims all-locality discovery completeness.
+Current-known status snapshot: **2026-10-10**. Legacy claim counts refer to `cardmarket-search-2026-07-21`; collector projections also include accepted source-first admissions. Neither claims all-locality discovery completeness.
 
 | Area | Current state |
 |---|---|
@@ -134,7 +137,7 @@ Current-known status snapshot: **2026-10-08**. Legacy claim counts refer to `car
 | Evidence-safe application status | **621 established**, **6 needs evidence**, **88 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **905 items** across 174 cards and 15 languages: 858 documented printings plus 47 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 531 externally confirmed, 16 marketplace-only positives, 13 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 118 units. |
-| Evidence registry | **33 providers**, 1726 evidence records, 1718 unique URLs, and 6,870 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Evidence registry | **33 providers**, 1727 evidence records, 1719 unique URLs, and 6,872 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |

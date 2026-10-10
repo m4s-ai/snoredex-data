@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-10-08",
+    "generated": "2026-10-10",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -10876,6 +10876,43 @@
         {
           "finish": "non-holo",
           "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://api.tcgdex.net/v2/en/cards/xy2-80",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
+              "sourceType": "Official Pokémon localized expansion checklist",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "English"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            }
+          ],
+          "printingId": "F0119-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
           "markings": [
             {
               "kind": "retailer",
@@ -10934,46 +10971,21 @@
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
               "supportsAbsence": false,
               "image": "images/FLF_80_Snorlax_V2_886906.png"
-            }
-          ],
-          "releaseDate": null,
-          "printingId": "F0119-P01"
-        },
-        {
-          "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/en/cards/xy2-80",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "xy2-80 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
-              "url": "https://assets.pokemon.com/assets/cms2/pdf/trading-card-game/checklist/xy2_web_cardlist_en.pdf",
-              "sourceType": "Official Pokémon localized expansion checklist",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "English"
-              ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The complete localized Flashfire checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 80 Snorlax: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "evidenceScope": "standard-set"
-            },
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Flashfire/Snorlax-V1-FLF80",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Build-A-Bear_Workshop_collection",
+              "sourceType": "Bulbapedia exact Snorlax bundle release date and contents",
+              "evidence": "Regular Snorlax online bundle released August 29, 2019 and includes the Snorlax TCG card. November 2019 is the later Jumbo plush bundle. Contemporary August 29 Nintendo Everything and Nintendo Wire reports explicitly include the exclusive Snorlax card in the available $57 bundle.",
+              "retrieved": "2026-10-10",
+              "supportsAbsence": false
             }
           ],
+          "releaseDate": "2019-08-29",
+          "releaseDateSource": {
+            "provider": "Bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Build-A-Bear_Workshop_collection",
+            "field": "Regular Snorlax Online Exclusive Bundle release date and Snorlax TCG card contents"
+          },
           "printingId": "F0119-P02"
         },
         {
