@@ -266,7 +266,7 @@ def catalogue_release(item, assets, localizations, records, artists, predecessor
     return dict(rowId=item["itemId"], sourceRowId=item["itemId"], printingIds=list(filter(None, [item["physicalPrintingId"]])),
         name=item["cardName"], setCode=item["localSetCode"] or "Unknown", setName=item["localSetName"] or "Unknown",
         number=number, variant=item["finish"] or "unresolved", variantName=f'{localization["locality"]} · {language}',
-        rarity=item["rarity"]["display"], artist=catalogue_artist(record, image, artists),
+        rarity=item["rarity"]["display"], artist=catalogue_artist(item, record, image, artists, predecessors),
         edition=item["edition"] or {"not-applicable":"none"}.get(item["editionAssignmentStatus"], "unknown"),
         date=date, dateExact=not item["releaseApproximate"],
         dateApproximate=item["releaseApproximate"], datePrecision=item["releaseDatePrecision"], dateSort=release_sort(date),
@@ -280,8 +280,18 @@ def catalogue_release(item, assets, localizations, records, artists, predecessor
             "finishStatus":{item["finish"]:item["finishVerificationStatus"]}}])
 
 
-def catalogue_artist(record, image, artists):
-    return record.get("illustrator") or record.get("artist") or artists.get(image)
+def catalogue_artist(item, record, image, artists, predecessors):
+    source_artist = record.get("illustrator") or record.get("artist")
+    if source_artist:
+        return source_artist
+    references = item["legacyChecklistIds"] + item.get("sourceClaimRefs", [])
+    exact = {predecessors[ref].get("artist") for ref in references if ref in predecessors
+             and predecessors[ref].get("cardReleaseId", item.get("cardReleaseId")) == item.get("cardReleaseId")}
+    exact.discard(None)
+    exact.discard("")
+    if len(exact) > 1:
+        raise ValueError(f'Conflicting exact predecessor artists: {item["itemId"]}')
+    return next(iter(exact), artists.get(image))
 
 
 def catalogue_grades(item, language, strengths):
@@ -312,6 +322,17 @@ def catalogue_source_records(graph, source_first):
     return {entity["entityId"]:prints[payload["sourceId"]] for entity in graph["entities"]
             if (payload := entity["payload"]).get("sourceKind") == "source-first-record"
             and payload["sourceId"] in prints}
+
+
+def catalogue_predecessors(graph, checklist):
+    """Retained artist metadata follows exact printing/claim identity, not image storage."""
+    predecessors = {row["checklistId"]:row for row in checklist["items"]}
+    units = {row["unitId"]:row for row in read_json(ROOT / "verification/units.json")}
+    predecessors.update({entity["entityId"]:dict(units[payload["sourceId"]],
+        cardReleaseId=payload["materializedTargetId"]) for entity in graph["entities"]
+        if (payload := entity["payload"]).get("sourceKind") == "legacy-language-unit"
+        and payload["sourceId"] in units and payload.get("materializedTargetId")})
+    return predecessors
 
 
 def catalogue_source_grade(row, providers):
@@ -359,7 +380,7 @@ def catalogue_releases(catalogue, source_first, dataset, checklist, releases):
     graph = read_json(ROOT / "verification/authoritative_graph.json")
     records = catalogue_source_records(graph, source_first)
     artists = {c["imageFile"]:c.get("artist") for c in dataset["cards"]}
-    predecessors = {row["checklistId"]: row for row in checklist["items"]}
+    predecessors = catalogue_predecessors(graph, checklist)
     strengths = catalogue_language_evidence(records, checklist, releases, graph)
     return [catalogue_release(item, assets, localizations, records, artists, predecessors, strengths)
             for item in catalogue["items"] if item["active"] and item["itemKind"] == "verified-printing"]

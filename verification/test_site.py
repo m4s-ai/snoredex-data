@@ -156,6 +156,7 @@ def check_catalogue_evidence(embedded):
           all(row["artist"] == expected_artists.get(row["rowId"], row["artist"]) for row in embedded))
     check_catalogue_boundaries(embedded, projection, localizations, strengths, load("collector_catalogue.json"))
     check_exact_provider_agreement(embedded, projection)
+    check_predecessor_artists(embedded, projection, records, load("analysis_checklist.json"), graph)
 
 
 def check_catalogue_boundaries(rows, projection, localizations, strengths, catalogue):
@@ -174,6 +175,36 @@ def check_catalogue_boundaries(rows, projection, localizations, strengths, catal
           and not grade["languageEvidence"]["English"]["corroborated"])
     check("unconfirmed retailer finish stays outside the table while its positive date is retained",
           promo["releaseDate"] == "2019-08-29" and promo["itemId"] not in {row["rowId"] for row in rows})
+
+
+def check_predecessor_artists(rows, projection, records, checklist, graph):
+    predecessors = projection.catalogue_predecessors(graph, checklist)
+    expected = {item["itemId"]:predecessors[ref]["artist"] for item in CANONICAL_ITEMS
+                for ref in item["legacyChecklistIds"] + item["sourceClaimRefs"]
+                if predecessors.get(ref, {}).get("artist")
+                and predecessors[ref].get("cardReleaseId", item["cardReleaseId"]) == item["cardReleaseId"]
+                and not any(records.get(claim, {}).get("illustrator") or records.get(claim, {}).get("artist")
+                            for claim in item["sourceClaimRefs"])}
+    check("every exact predecessor artist survives a changed image asset",
+          all(row["artist"] == expected.get(row["rowId"], row["artist"]) for row in rows))
+    check("Spanish Jungle 27 retains its exact predecessor illustrator",
+          next(row for row in rows if row["setCode"] == "JU" and row["number"] == "27" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
+    check("Spanish Jungle 11 retains its exact graph claim illustrator without a checklist predecessor",
+          next(row for row in rows if row["setCode"] == "JU" and row["number"] == "11" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
+    item = dict(itemId="sample", legacyChecklistIds=["one", "two"])
+    old = {"one":{"artist":"Old credit"}, "two":{"artist":"Other credit"}}
+    check("positive source-native artist outranks conflicting legacy fallback",
+          projection.catalogue_artist(item, {"illustrator":"Source credit"}, "image", {}, old) == "Source credit")
+    try:
+        projection.catalogue_artist(item, {}, "image", {"image":"Fallback"}, old)
+    except ValueError:
+        check("ambiguous exact predecessor artists fail instead of borrowing an image credit", True)
+    else:
+        check("ambiguous exact predecessor artists fail instead of borrowing an image credit", False)
+    unrelated = dict(itemId="sample", cardReleaseId="release", legacyChecklistIds=[], sourceClaimRefs=["claim"])
+    check("a graph claim for another release cannot supply the artist",
+          projection.catalogue_artist(unrelated, {}, "image", {},
+              {"claim":{"artist":"Neighbour credit", "cardReleaseId":"another-release"}}) is None)
 
 
 def check_exact_provider_agreement(rows, projection):
