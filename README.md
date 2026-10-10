@@ -57,13 +57,13 @@ Two rules hold everywhere in the data, the tooling and the site copy:
 ### Browse the collection
 
 Serve the repository and open the generated review view: sorting, filtering, evidence and correction
-links, artwork review proposals, TSV export and browser printing of the filtered table. Every active
+links, TSV export and browser printing of the filtered table. Every active
 item in `collector_catalogue.json` appears once, with its locality, printing identity and evidence
 state, including source-first releases outside the legacy Cardmarket universe. Research candidates
 remain explicitly labelled. The color
 scheme follows the system preference. The canonical checklist remains a separate data export;
-the view does not build ownership-checklist HTML. Artwork review requires HTTP; opening
-`index.html` directly with `file://` reports the local-server command instead of loading artwork.
+the view does not build ownership-checklist HTML. Corrections are submitted through the linked
+GitHub issue form; the embedded artwork/proposal review was retired on 2026-10-10.
 
 ```console
 python -m http.server 8000

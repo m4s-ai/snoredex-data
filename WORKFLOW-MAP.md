@@ -251,13 +251,10 @@ same L3 path runs on Linux and Windows. The [package guide](exports/malie/README
 documents the standalone consumer; its isolated regression reads only the three bundle
 files. Publication remains a separate gate through the existing allowlisted publisher.
 
-The artwork review is a deliberately bounded consumer of the graph. `scripts/artwork_review.py`
-writes one JSON projection. The site embeds only a versioned metadata envelope and fetches JSON
-on demand through HTTP, including project subpaths. Direct `file://` artwork review is no longer
-supported (#412); serve a checkout with `python -m http.server 8000`. Failed loads remain visible
-and can be retried. The review section also preloads when it approaches the
-viewport, keeps search/filter evaluation in memory, and emits at most 20 groups per batch with an
-explicit “Load more” action. Browser proposals still carry the same projection and schema versions.
+The embedded artwork/proposal review was retired at the owner's request on 2026-10-10.
+Corrections use the site's per-item issue links. `scripts/artwork_review.py` still produces the
+retained graph/image projection; removing its browser interface changes no canonical evidence.
+Previously saved browser proposals are left untouched. The measurements below describe the retired UI.
 
 Issue #356 recorded these DOM measurements in a fresh Chromium context at 1000px height:
 
@@ -275,7 +272,7 @@ browser DOM sizes are not the file transfer size.
 In that #356 snapshot, the previous run embedded 2,965,989 artwork JSON characters and built 933
 image elements; the changed initial page embedded 924 metadata characters and no artwork images.
 Its first loaded batch contained 20 groups, 65 members and 97 images. These are historical
-measurements, not current page sizes. The remaining groups are reachable via the button.
+measurements, not current page sizes. The retired interface exposed remaining groups through a button.
 Local originals remain under `images/`; `images/previews/` and `images/thumbs/` hold
 generated preview/thumbnail derivatives (360px and 120px maximum widths). The projection retains
 each original path and SHA-256, and the UI links both the derivative preview and the original
@@ -407,7 +404,7 @@ manifests.
 | Inspect a Cardmarket page or image | `workflow:cardmarket-lead` | Metadata: [state audit](.agents/skills/snoredex-state-audit/SKILL.md); retained image: [specimen intake](.agents/skills/snoredex-specimen-intake/SKILL.md) | Historical candidate metadata, or the physical-image route above for visible-card evidence from a retained exact product image or seller photo | Candidate provenance or physical observation | Filters, offers and counts never verify a localized card or expand the frozen baseline automatically |
 | Refresh TCGdex finish data / Finish-Daten aktualisieren | `workflow:tcgdex-refresh` / `lane:finish-refresh` | [finish refresh](.agents/skills/snoredex-finish-refresh/SKILL.md) | [Finish owner](scripts/finishes.py) and [finish-source contract](verification/FINISH_SOURCES.md); candidate snapshot → review → authorized accept | Finish candidate/profile edges | Hash/URL diff and review before accepting the exact staged snapshot; no card discovery |
 | Assess a contradiction or owner absence decision | `workflow:absence-adjudication` / `lane:absence` | [claim evidence](.agents/skills/snoredex-claim-evidence/SKILL.md) | [Evidence playbook](verification/RESUME.md), [absence model](scripts/absence_model.py) and [application semantics](scripts/evidence_semantics.py) | `contradicts` or bounded absence/adjudication edges | Only owner adjudication settles absence; no zero-result inference; unresolved stays disputed/pending |
-| Review artwork groups, detections or export browser proposals | `workflow:artwork-review` | [UI / artwork review](.agents/skills/snoredex-ui-audit/SKILL.md) — artwork proposal procedure | [Artwork projection](scripts/artwork_review.py) and [browser review contract](verification/ADR-0007-embedded-artwork-review-ui.md) | Artwork/work/image observation edges | Browser proposals never write catalogue truth directly |
+| Audit site behavior or inspect retained artwork projection (browser proposal UI retired) | `workflow:artwork-review` | [UI / artwork review](.agents/skills/snoredex-ui-audit/SKILL.md) — static-UI audit procedure | [Artwork projection](scripts/artwork_review.py) and [browser review contract](verification/ADR-0007-embedded-artwork-review-ui.md) | Artwork/work/image observation edges | Browser proposals never write catalogue truth directly |
 | Audit state only, change nothing / Datenzustand nur prüfen | — | [state audit](.agents/skills/snoredex-state-audit/SKILL.md) | [Current handoff audit](verification/DATA-HANDOFF-AUDIT.md); relevant observational checks, or [full gate](scripts/regen.py) with `--check` | Observation only | No repair, import, refresh or snapshot acceptance; scoped lanes can write and are not automatically read-only |
 
 The [documentation check](verification/test_pipeline_documentation.py) validates row-local
@@ -467,7 +464,8 @@ distribution, and card size. It is not derived from list order.
   locality, evidence state and correction identity; the legacy chronology export is not its membership input.
   System color preference, native table overflow and browser printing replace manual theme,
   cloned headers, scroll buttons and ownership-checklist HTML. Canonical checklist/collector
-  exports, stable evidence/correction IDs and local artwork proposals remain separate contracts.
+  exports and stable evidence/correction IDs remain separate contracts. The embedded artwork UI
+  is retired; existing local proposal storage is not deleted.
 - Scoped execution is an optional local optimization; it never replaces the L3 merge gate.
 - Test-suite ownership lives in the versioned ownership manifest, not a copied prose list.
 - Pages/CI behavior is documented in the gate-mode table above and enforced by the workflows.

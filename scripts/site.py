@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate index.html with the filterable evidence table and artwork review.
+"""Generate index.html with the filterable evidence table and correction links.
 
 Design constraints, all from the epic:
 
@@ -7,8 +7,7 @@ Design constraints, all from the epic:
   rather than a second page maintained in parallel.
 * **Static and dependency-free.** No CDN, no analytics, no cookies, no runtime API. The page is
   usable if every external source site is down; only the outbound evidence links would fail.
-* **HTTP at any project path.** Assets are project-relative; row data is embedded, and artwork
-  review loads the generated JSON on demand. Serve a local checkout with `python -m http.server`.
+* **Project-relative assets.** Row data is embedded; correction links open the issue form.
 * **Statistics are generated**, never typed into prose, so the page cannot drift from the data
   the way the README did.
 
@@ -451,21 +450,6 @@ def multiselect(field: str, label: str) -> str:
 def main() -> int:
     releases_doc = read_json(ROOT / "analysis_confirmed_releases.json")
     checklist_doc = read_json(ROOT / "analysis_checklist.json")
-    artwork_review = read_json(ROOT / "verification" / "artwork_review_projection.json")
-    artwork_review_meta = {
-        "schema": artwork_review["schema"],
-        "schemaVersion": artwork_review["schemaVersion"],
-        "proposalSchema": artwork_review["proposalSchema"],
-        "proposalSchemaVersion": artwork_review["proposalSchemaVersion"],
-        "projectionVersion": artwork_review["projectionVersion"],
-        "identitySource": artwork_review["identitySource"],
-        "appearanceIdentity": artwork_review["appearanceIdentity"],
-        "reviewBoundary": artwork_review["reviewBoundary"],
-        "summary": artwork_review["summary"],
-        # Bind the fetch URL to the semantic snapshot so force-cache cannot replay an older
-        # projection after a generated artifact changes.
-        "source": "verification/artwork_review_projection.json?v=" + artwork_review["projectionVersion"],
-    }
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
@@ -493,9 +477,8 @@ def main() -> int:
     established = sum(len(c.get("languagesConfirmed") or []) for c in dataset["cards"])
     needs_evidence = sum(len(c.get("languagesNeedsEvidence") or []) for c in dataset["cards"])
     # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
-    # stale as soon as CI ran in a different timezone or on the next day. Include the graph-backed
-    # artwork snapshot so newly reviewed evidence cannot leave the page date behind.
-    generated = max(checklist_doc["meta"]["generated"], artwork_review["generated"],
+    # stale as soon as CI ran in a different timezone or on the next day.
+    generated = max(checklist_doc["meta"]["generated"], catalogue["meta"]["dataAsOf"],
                     releases_doc["generated"], verification["lastUpdated"])
 
     confirmed_pairs = sum(len(r["confirmedLanguages"]) for r in releases_doc["variants"]
@@ -598,7 +581,6 @@ def main() -> int:
         <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
-        <li><a href="#artwork-review">Artwork review</a></li>
         <li><a href="#methodology">Data exports</a></li>
         <li><a href="#contribute">Help correct this</a></li>
         <li><a href="#sources">Sources</a></li>
@@ -720,62 +702,6 @@ def main() -> int:
   </div>
 </section>
 
-<section id="artwork-review">
-  <h2>Artwork &amp; detection review</h2>
-  <p>This client-side review surface reads the generated projection of the authoritative locality
-  graph. It keeps an automatically derived image group separate from each physical local release, shows the
-  current catalogue-derived detection fields beside the recorded image and evidence, and emits
-  downloadable review proposals. These image groups are suggestions only; a reviewed artwork
-  identity is assigned only by an explicit human decision. It never writes the catalogue from the browser.</p>
-  <div class="callout">
-    <strong>Review boundary.</strong> Proposals carry stable graph IDs, before-values, source
-    observation hashes and the projection version. A reviewed import must validate them against the
-    current graph before any generator can change catalogue truth. The projection currently covers
-    {artwork_review['summary']['cardReleases']} card releases in
-    {artwork_review['summary']['imageGroups']} automatic image groups plus
-    {artwork_review['summary']['unmappedReleases']} unmapped source-first releases; no reviewed
-    artwork appearances are materialized here.
-    <a href="verification/artwork_review_projection.json">Download the projection</a>.
-  </div>
-  <div class="artwork-review" id="artwork-review-app">
-    <div class="artwork-load" id="ar-load-state">
-      <p>Artwork review data is loaded only when requested, so the normal collection view stays light.</p>
-      <button type="button" class="primary" id="ar-load">Load artwork review</button>
-      <span id="ar-load-status" role="status" aria-live="polite"></span>
-    </div>
-    <div class="controls artwork-controls" hidden>
-      <div class="row">
-        <div class="field" style="flex:1 1 260px">
-          <label for="ar-search">Search groups and releases</label>
-          <input id="ar-search" type="search" placeholder="card, set, locality, language, ID…" style="width:100%">
-        </div>
-        <div class="field"><label for="ar-scope">Show</label>
-          <select id="ar-scope">
-            <option value="image-groups">Automatic image groups (review suggestions)</option>
-            <option value="all">All groups</option>
-            <option value="unmapped">Unmapped releases</option>
-          </select>
-        </div>
-        <div class="field"><label for="ar-proposal-filter">Proposal state</label>
-          <select id="ar-proposal-filter">
-            <option value="all">All</option>
-            <option value="unreviewed">Unreviewed</option>
-            <option value="reviewed">Has local proposal</option>
-          </select>
-        </div>
-        <div class="field" style="flex:1 1 220px">
-          <label for="ar-reviewer">Reviewer name</label>
-          <input id="ar-reviewer" type="text" autocomplete="name" placeholder="Required for proposals" style="width:100%">
-        </div>
-        <button type="button" class="primary" id="ar-download">Download proposals</button>
-        <button type="button" class="ghost" id="ar-clear">Clear local drafts</button>
-      </div>
-      <div class="count" id="ar-summary" role="status" aria-live="polite"></div>
-    </div>
-    <div id="ar-groups"></div>
-  </div>
-</section>
-
 <section id="methodology">
   <h2>Data exports</h2>
   <ul>
@@ -796,7 +722,7 @@ def main() -> int:
     <li><a href="verification/source_capability_graph.json">verification/source_capability_graph.json</a> — bounded provider/surface coverage graph with hashed fixtures</li>
     <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
     <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
-    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — generated graph projection for the artwork review UI</li>
+    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — retained graph/image projection</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
@@ -864,7 +790,6 @@ def main() -> int:
 </main>
 
 {json_block("data-rows", rows)}
-{json_block("data-artwork-review-meta", artwork_review_meta)}
 {json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
 <script src="site/app.js"></script>

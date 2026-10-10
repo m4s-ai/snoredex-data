@@ -1,7 +1,8 @@
 <!-- doc: role=architecture decision record for artwork grouping and detection review; stage=reference -->
 # ADR-0007: embedded artwork-grouping and detection-review interface
 
-- **Status:** Accepted and implemented as a static review/proposal surface
+- **Status:** Browser interface retired by owner instruction on 2026-10-10; corrections use issue links.
+  The remaining document records the former interface. Retained graph projections and evidence remain in force.
 - **Date:** 2026-08-11
 - **Issue:** #120
 - **Delivery contract updated:** #412 (2026-09-30), HTTP JSON only; direct `file://` artwork review removed
