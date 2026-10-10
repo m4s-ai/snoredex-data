@@ -505,7 +505,7 @@
       '<button type="button" class="rowmore" aria-expanded="false" aria-controls="' + detailId + '" ' +
       'data-row-id="' + escapeHTML(row.rowId) + '" data-detail-id="' + detailId + '" ' +
       'aria-label="More details for ' +
-      escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) + '">More info</button>' +
+      escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) + '">Info</button>' +
       "</td>" +
       '<td class="corr"><a href="' + escapeHTML(row.correctionUrl) + '" target="_blank" rel="noopener" ' +
       'aria-label="Report a correction for ' + escapeHTML(row.name + " " + row.setCode + " " + (row.number || "")) +
