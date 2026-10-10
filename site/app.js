@@ -861,7 +861,6 @@
 
       const open = button.getAttribute("aria-expanded") === "true";
       button.setAttribute("aria-expanded", open ? "false" : "true");
-      button.textContent = open ? "More info" : "Less";
       panel.hidden = open;
     });
   }

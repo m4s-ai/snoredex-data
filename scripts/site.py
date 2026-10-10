@@ -297,7 +297,8 @@ def catalogue_grades(item, language, strengths):
 def catalogue_language(item, localization, strengths):
     language = {"LATAM":"Spanish (Latin America)"}.get(localization["locality"], localization["language"])
     grades = catalogue_grades(item, localization["language"], strengths)
-    strength = dict(grades[0], corroborated=any(g["corroborated"] for g in grades)) if grades else None
+    strength = dict(grades[0], corroborated=any(g["corroborated"] for g in grades)
+                    or len({g["provider"] for g in grades}) > 1) if grades else None
     if item["itemKind"] == "verified-printing" and strength is None:
         raise ValueError(f'Verified item has no resolved evidence grade: {item["itemId"]}')
     verified = strength is not None

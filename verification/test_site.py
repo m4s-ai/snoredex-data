@@ -155,6 +155,7 @@ def check_catalogue_evidence(embedded):
     check("source-native illustrator credits survive for every supported table item",
           all(row["artist"] == expected_artists.get(row["rowId"], row["artist"]) for row in embedded))
     check_catalogue_boundaries(embedded, projection, localizations, strengths, load("collector_catalogue.json"))
+    check_exact_provider_agreement(embedded, projection)
 
 
 def check_catalogue_boundaries(rows, projection, localizations, strengths, catalogue):
@@ -175,16 +176,37 @@ def check_catalogue_boundaries(rows, projection, localizations, strengths, catal
           promo["releaseDate"] == "2019-08-29" and promo["itemId"] not in {row["rowId"] for row in rows})
 
 
+def check_exact_provider_agreement(rows, projection):
+    korean = next(row for row in rows if row["setCode"] == "20th" and "KO" in row["langCodes"])
+    check("independent exact Korean checklist and photograph evidence is corroborated",
+          korean["langEvidence"]["KO"]["corroborated"])
+    item = dict(sourceClaimRefs=["one", "two"], legacyChecklistIds=[], itemKind="verified-printing")
+    localization = dict(language="Korean", locality="KR")
+    grade = dict(language="Korean", provider="Bulbapedia", authorityTier=3, corroborated=False, checkable=True)
+    fields = projection.catalogue_language(item, localization, {"one":grade, "two":dict(grade)})
+    check("two references to the same provider are not independent corroboration",
+          not fields["languageEvidence"]["Korean"]["corroborated"])
+
+
 def check_desktop_sources(page):
     for width in (1280, 2560):
         page.set_viewport_size({"width": width, "height": 900})
         button = page.locator("#rows .rowmore").first
         button.click()
+        open_label = button.inner_text()
+        open_overflow = page.locator("#collection-table-scroll").evaluate("e => e.scrollWidth - e.clientWidth")
         panel = page.locator("#" + button.get_attribute("aria-controls"))
         check(f"row sources are reachable on desktop at {width}px",
               panel.is_visible() and panel.locator("dt", has_text="Sources").count() == 1
               and panel.locator("a[href]").count() > 0)
         button.click()
+        check(f"row disclosure retains its compact label after toggling at {width}px",
+              button.inner_text() == open_label == "Info")
+        if width == 2560:
+            closed_overflow = page.locator("#collection-table-scroll").evaluate("e => e.scrollWidth - e.clientWidth")
+            check("desktop source disclosure fits before and after closing",
+                  open_overflow <= 1 and closed_overflow <= 1,
+                  f"open={open_overflow}, closed={closed_overflow}")
     page.set_viewport_size({"width": 1280, "height": 900})
 
 
