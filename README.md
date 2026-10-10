@@ -57,10 +57,11 @@ Two rules hold everywhere in the data, the tooling and the site copy:
 ### Browse the collection
 
 Serve the repository and open the generated review view: sorting, filtering, evidence and correction
-links, TSV export and browser printing of the filtered table. Every active
-item in `collector_catalogue.json` appears once, with its locality, printing identity and evidence
-state, including source-first releases outside the legacy Cardmarket universe. Research candidates
-remain explicitly labelled. The color
+links, TSV export and browser printing of the filtered table. Every active confirmed physical
+printing (`verified-printing`) in `collector_catalogue.json` appears once, with its current locality,
+printing identity and evidence, including source-first releases outside the legacy Cardmarket universe.
+Unconfirmed finish candidates and research placeholders remain in the data exports and are excluded
+from the table. The color
 scheme follows the system preference. The canonical checklist remains a separate data export;
 the view does not build ownership-checklist HTML. Corrections are submitted through the linked
 GitHub issue form; the embedded artwork/proposal review was retired on 2026-10-10.
