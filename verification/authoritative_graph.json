@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-10-08",
+    "generated": "2026-10-10",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -2239,7 +2239,7 @@
         "claimId": "CLAIM:finish:F0119-P01",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0119-P02",
+        "sourceId": "F0119-P01",
         "semanticPrintingId": "PRINTING:4aa2e85a3807e5219b8eafe4",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -10017,7 +10017,7 @@
         "claimId": "CLAIM:finish:PRINTING:2d27e979039eda2fc8ce0505",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0119-P01",
+        "sourceId": "F0119-P02",
         "semanticPrintingId": "PRINTING:2d27e979039eda2fc8ce0505",
         "evidenceStatus": "marketplace-claimed",
         "disposition": "candidate-needs-evidence",
@@ -88974,7 +88974,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0119",
-        "sourcePrintingId": "F0119-P02",
+        "sourcePrintingId": "F0119-P01",
         "establishingClaimId": "CLAIM:finish:F0119-P01"
       }
     },
@@ -291546,15 +291546,15 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0119-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:F0119-P01",
       "reason": "finish printing record carries positive evidence"
     },
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0119-P02",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:F0119-P01",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
       "reason": "finish printing record carries positive evidence"
     },
     {

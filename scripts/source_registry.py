@@ -1093,6 +1093,16 @@ def record_printing_source(source, printing_id, dimensions, record, surfaces):
                printing_id, source.get("retrievedAt"))
 
 
+def record_override_source(name, source, record):
+    """An override's storage lane does not confer finish authority on its sources."""
+    dimensions = source.get("claimFields") or ["finish-override"]
+    if not isinstance(dimensions, list) or any(field not in {"identity", "finish", "edition", "date", "finish-override"} for field in dimensions):
+        raise ValueError(f"Invalid override claimFields: {name}")
+    for dimension in dimensions:
+        record(source.get("url"), source.get("sourceType"), dimension,
+               f"override:{name}", source.get("retrievedAt"))
+
+
 def record_physical_printing(entry: dict, record: Callable, retrieved: str | None) -> str | None:
     physical = (entry.get("raw") or {}).get("physicalPrintingEvidence")
     if not physical or not physical.get("finish"):
@@ -1250,7 +1260,7 @@ def main() -> int:
                 if (
                     not isinstance(dimensions, list)
                     or not dimensions
-                    or any(field not in {"identity", "finish", "edition"} for field in dimensions)
+                    or any(field not in {"identity", "finish", "edition", "date"} for field in dimensions)
                 ):
                     unresolved.append(
                         f"claimFields:{printing['printingId']} value={dimensions!r}"
@@ -1259,7 +1269,7 @@ def main() -> int:
                 record_printing_source(source, printing["printingId"], dimensions, record, surfaces)
 
     for name, source in (overrides.get("sources") or {}).items():
-        record(source.get("url"), source.get("sourceType"), "finish-override", f"override:{name}")
+        record_override_source(name, source, record)
 
     for card in cards:
         stable = f"{card['setCode']} {card.get('number') or ''} {card.get('variantToken') or 'base'}".strip()

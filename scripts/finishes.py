@@ -750,6 +750,8 @@ def compact_printing(printing: dict[str, Any], product_mapping: str = "mapped") 
         compact["edition"] = printing["edition"]
     if "releaseDate" in printing:
         compact["releaseDate"] = printing.get("releaseDate")
+    if "releaseDateSource" in printing:
+        compact["releaseDateSource"] = printing["releaseDateSource"]
     # An explicit null suppresses a Cardmarket product image for a physical printing whose
     # pictured version is different. Preserve the key as well as a concrete image path so the
     # public projection can make that distinction.
@@ -1415,12 +1417,9 @@ def _build_finish_unit(
                         "_origin": "manual",
                         "_refinesAuto": manual.get("refinesAuto", False),
                     }
-                    if "edition" in manual:
-                        candidate["edition"] = manual["edition"]
-                    if "releaseDate" in manual:
-                        candidate["releaseDate"] = manual["releaseDate"]
-                    if "image" in manual:
-                        candidate["image"] = manual["image"]
+                    for field in ("edition", "releaseDate", "releaseDateSource", "image"):
+                        if field in manual:
+                            candidate[field] = manual[field]
                     apply_manual_printing(printings, candidate, manual)
 
         _build_finish_unit_part7_suppression()

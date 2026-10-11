@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate index.html with the filterable evidence table and artwork review.
+"""Generate index.html with the filterable evidence table and correction links.
 
 Design constraints, all from the epic:
 
@@ -7,8 +7,7 @@ Design constraints, all from the epic:
   rather than a second page maintained in parallel.
 * **Static and dependency-free.** No CDN, no analytics, no cookies, no runtime API. The page is
   usable if every external source site is down; only the outbound evidence links would fail.
-* **HTTP at any project path.** Assets are project-relative; row data is embedded, and artwork
-  review loads the generated JSON on demand. Serve a local checkout with `python -m http.server`.
+* **Project-relative assets.** Row data is embedded; correction links open the issue form.
 * **Statistics are generated**, never typed into prose, so the page cannot drift from the data
   the way the README did.
 
@@ -34,6 +33,7 @@ LANG_CODE = {
     "English": "EN", "French": "FR", "German": "DE", "Italian": "IT", "Spanish": "ES",
     "Portuguese": "PT", "Dutch": "NL", "Polish": "PL", "Russian": "RU", "Japanese": "JA",
     "Korean": "KO", "T-Chinese": "ZH-T", "S-Chinese": "ZH-S", "Indonesian": "ID", "Thai": "TH",
+    "Spanish (Latin America)": "ES-LA",
 }
 LANG_ORDER = list(LANG_CODE)
 
@@ -91,7 +91,7 @@ def current_state_summary(row: dict[str, Any]) -> str:
     stamps: set[str] = set()
     sizes: set[str] = set()
     rank = {"pending": 0, "other-product": 1, "unmapped": 2,
-            "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
+            "marketplace-claimed": 3, "owner-attested": 4, "observed": 5, "confirmed": 5}
     for cell in row.get("finishByLanguage") or []:
         for technical_finish, status in (cell.get("finishStatus") or {}).items():
             if status in ("pending", "not-applicable"):
@@ -154,7 +154,7 @@ def display_date(row: dict[str, Any]) -> str:
     if str(row.get("dateSort") or "").startswith("9999"):
         return "Undated"
     if row.get("dateApproximate"):
-        return "~" + str(row["date"])[:4]
+        return "~" + str(row["date"])
     return str(row["date"])
 
 
@@ -242,6 +242,150 @@ def expand_dated_printings(row: dict[str, Any]) -> list[dict[str, Any]]:
     return expanded
 
 
+def catalogue_date_source(item, record, predecessors):
+    source_url = record.get("releaseDateSourceUrl") or record.get("releaseSourceUrl")
+    if source_url and record.get("releaseDate") == item["releaseDate"]:
+        return {"url": source_url, "provider": record.get("releaseDateProviderId", record.get("providerId"))}
+    old = (predecessors.get(ref, {}) for ref in item["legacyChecklistIds"])
+    return next((row.get("releaseDateSource") for row in old if row.get("releaseDate") == item["releaseDate"]
+                 and row.get("releaseDateSource")), None)
+
+
+def catalogue_release(item, assets, localizations, records, artists, predecessors, strengths):
+    """Adapt one canonical item to the existing table renderer without merging identities."""
+    localization = localizations[item["localizationId"]]
+    record = next((records[ref] for ref in sorted(item["sourceClaimRefs"]) if ref in records), {})
+    image = assets.get(item["imageAssetId"], {}).get("path")
+    language_fields = catalogue_language(item, localization, strengths)
+    language = language_fields["language"]
+    date = item["releaseDate"] or "9999"
+    printing = dict(item, printingId=item["physicalPrintingId"], verificationStatus=item["finishVerificationStatus"])
+    number = item["collectorNumber"] or ""
+    if item["collectorNumberDenominator"]:
+        number += "/" + item["collectorNumberDenominator"]
+    return dict(rowId=item["itemId"], sourceRowId=item["itemId"], printingIds=list(filter(None, [item["physicalPrintingId"]])),
+        name=item["cardName"], setCode=item["localSetCode"] or "Unknown", setName=item["localSetName"] or "Unknown",
+        number=number, variant=item["finish"] or "unresolved", variantName=f'{localization["locality"]} · {language}',
+        rarity=item["rarity"]["display"], artist=catalogue_artist(item, record, image, artists, predecessors),
+        edition=item["edition"] or {"not-applicable":"none"}.get(item["editionAssignmentStatus"], "unknown"),
+        date=date, dateExact=not item["releaseApproximate"],
+        dateApproximate=item["releaseApproximate"], datePrecision=item["releaseDatePrecision"], dateSort=release_sort(date),
+        dateSource=catalogue_date_source(item, record, predecessors),
+        image=image, cardmarketUrl="", correctionUrl=item["correctionLink"], itemKind=item["itemKind"],
+        sourceLinks=item["sourceLinks"], localizationId=item["localizationId"],
+        confirmedLanguages=language_fields["confirmedLanguages"],
+        languageEvidence=language_fields["languageEvidence"],
+        finishCompletenessByLanguage={language:item["completenessStatus"]},
+        finishByLanguage=[{"language":language, "status":item["finishVerificationStatus"], "printings":[printing],
+            "finishStatus":{item["finish"]:item["finishVerificationStatus"]}}])
+
+
+def catalogue_artist(item, record, image, artists, predecessors):
+    source_artist = record.get("illustrator") or record.get("artist")
+    if source_artist:
+        return source_artist
+    references = item["legacyChecklistIds"] + item.get("sourceClaimRefs", [])
+    exact = {predecessors[ref].get("artist") for ref in references if ref in predecessors
+             and predecessors[ref].get("cardReleaseId", item.get("cardReleaseId")) == item.get("cardReleaseId")}
+    exact.discard(None)
+    exact.discard("")
+    if len(exact) > 1:
+        raise ValueError(f'Conflicting exact predecessor artists: {item["itemId"]}')
+    return next(iter(exact), artists.get(image))
+
+
+def catalogue_grades(item, language, strengths):
+    predecessor_refs = ["CHECKLIST:"+ref for ref in item["legacyChecklistIds"]
+                        if "CHECKLIST:"+ref in strengths]
+    # A finish graph can carry sibling V-token claims; the exact predecessor owns its grade.
+    references = predecessor_refs + [ref for ref in item["sourceClaimRefs"]
+        if not ref.startswith("CLAIM:legacy:") or not predecessor_refs]
+    return [strengths[ref] for ref in sorted(set(references), key=lambda ref: (not ref.startswith("CHECKLIST:"), ref))
+            if ref in strengths and strengths[ref]["language"] == language]
+
+
+def catalogue_language(item, localization, strengths):
+    language = {"LATAM":"Spanish (Latin America)"}.get(localization["locality"], localization["language"])
+    grades = catalogue_grades(item, localization["language"], strengths)
+    strength = dict(grades[0], corroborated=any(g["corroborated"] for g in grades)
+                    or len({g["provider"] for g in grades}) > 1) if grades else None
+    if item["itemKind"] == "verified-printing" and strength is None:
+        raise ValueError(f'Verified item has no resolved evidence grade: {item["itemId"]}')
+    verified = strength is not None
+    return dict(language=language, confirmedLanguages=[language] if verified else [],
+                languageEvidence={language:strength} if strength else {})
+
+
+def catalogue_source_records(graph, source_first):
+    """Resolve retained claim aliases through their canonical source identity."""
+    prints = {row["printId"]:row for row in source_first["prints"]}
+    return {entity["entityId"]:prints[payload["sourceId"]] for entity in graph["entities"]
+            if (payload := entity["payload"]).get("sourceKind") == "source-first-record"
+            and payload["sourceId"] in prints}
+
+
+def catalogue_predecessors(graph, checklist):
+    """Retained artist metadata follows exact printing/claim identity, not image storage."""
+    predecessors = {row["checklistId"]:row for row in checklist["items"]}
+    units = {row["unitId"]:row for row in read_json(ROOT / "verification/units.json")}
+    predecessors.update({entity["entityId"]:dict(units[payload["sourceId"]],
+        cardReleaseId=payload["materializedTargetId"]) for entity in graph["entities"]
+        if (payload := entity["payload"]).get("sourceKind") == "legacy-language-unit"
+        and payload["sourceId"] in units and payload.get("materializedTargetId")})
+    return predecessors
+
+
+def catalogue_source_grade(row, providers):
+    provider = providers[row["providerId"]]
+    return dict(language=row["language"], provider=provider["displayName"],
+                authorityTier=provider["authorityTier"], corroborated=bool(row.get("corroborated")),
+                checkable=bool(row.get("sourceUrl")))
+
+
+def catalogue_registered_grade(row, registry, providers):
+    observations = [entry for entry in registry["evidence"]
+        if row["printId"] in entry["stableIds"]
+        and set(entry["dimensions"]) & {"identity", "card-release", "card-existence", "language"}
+        and providers[entry["providerId"]]["authorityTier"] < 5]
+    if observations:
+        observation = min(observations, key=lambda entry: (
+            entry["providerId"] != row["providerId"], entry["canonicalUrl"] or ""))
+        return catalogue_source_grade(dict(row, providerId=observation["providerId"],
+            sourceUrl=observation["canonicalUrl"]), providers)
+    raise ValueError(f'Source-first record has no registered identity evidence: {row["printId"]}')
+
+
+def catalogue_language_evidence(records, checklist, releases, graph):
+    """Use the exact product predecessor, never a sibling variant's evidence grade."""
+    registry = read_json(ROOT / "verification/source_registry.json")
+    providers = {p["providerId"]:p for p in registry["providers"]}
+    grades = {row["rowId"]:row.get("languageEvidence", {}) for row in releases["variants"]}
+    strengths = {"CHECKLIST:"+row["checklistId"]:dict(language=row["language"], **grade)
+                 for row in checklist["items"]
+                 if (grade := grades.get(row["rowId"], {}).get(row["language"]))}
+    strengths.update({ref:catalogue_registered_grade(row, registry, providers) for ref, row in records.items()})
+    exists = {row["unitId"] for row in read_json(ROOT / "verification/evidence_semantics.json")["units"]
+              if row["applicationStatus"] == "exists"}
+    units = {row["unitId"]:row for row in read_json(ROOT / "verification/units.json")}
+    strengths.update({entity["entityId"]:catalogue_source_grade(units[payload["sourceId"]], providers)
+        for entity in graph["entities"]
+        if (payload := entity["payload"]).get("sourceKind") == "legacy-language-unit"
+        and payload["sourceId"] in exists})
+    return strengths
+
+
+def catalogue_releases(catalogue, source_first, dataset, checklist, releases):
+    assets = {a["assetId"]:a for a in catalogue["assets"]}
+    localizations = {l["localizationId"]:l for l in catalogue["localizations"]}
+    graph = read_json(ROOT / "verification/authoritative_graph.json")
+    records = catalogue_source_records(graph, source_first)
+    artists = {c["imageFile"]:c.get("artist") for c in dataset["cards"]}
+    predecessors = catalogue_predecessors(graph, checklist)
+    strengths = catalogue_language_evidence(records, checklist, releases, graph)
+    return [catalogue_release(item, assets, localizations, records, artists, predecessors, strengths)
+            for item in catalogue["items"] if item["active"] and item["itemKind"] == "verified-printing"]
+
+
 def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
     rows = []
     expanded_releases = [
@@ -260,7 +404,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         # evidence is rather than merely that something exists.
         best: dict[str, str] = {}
         rank = {"pending": 0, "other-product": 1, "unmapped": 2,
-                "marketplace-claimed": 3, "owner-attested": 4, "confirmed": 5}
+                "marketplace-claimed": 3, "owner-attested": 4, "observed": 5, "confirmed": 5}
         for cell in row.get("finishByLanguage") or []:
             for technical_finish, status in (cell.get("finishStatus") or {}).items():
                 if status in ("pending", "not-applicable"):
@@ -291,6 +435,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
         completeness = set((row.get("finishCompletenessByLanguage") or {}).values())
         evidence |= completeness
+        evidence.add(row.get("itemKind", "legacy"))
 
         lang_codes = [LANG_CODE[l] for l in row["confirmedLanguages"] if l in LANG_CODE]
         # Evidence strength per confirmed language, keyed by the same code the cells use so
@@ -317,6 +462,9 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "sourceRowId": row.get("sourceRowId", row["rowId"]),
             "printingIds": row.get("printingIds", []),
             "splitPhysicalPrinting": bool(row.get("splitPhysicalPrinting")),
+            "itemKind": row.get("itemKind"),
+            "localizationId": row.get("localizationId"),
+            "sourceLinks": row.get("sourceLinks", []),
             "name": row["name"],
             "setCode": row["setCode"],
             "setName": row["setName"],
@@ -349,7 +497,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "confirmedLanguages": row["confirmedLanguages"],
             "langCodes": lang_codes,
             "langEvidence": lang_evidence,
-            "correctionUrl": correction_url(row),
+            "correctionUrl": row.get("correctionUrl", correction_url(row)),
             "search": search,
         })
     return rows
@@ -372,21 +520,6 @@ def multiselect(field: str, label: str) -> str:
 def main() -> int:
     releases_doc = read_json(ROOT / "analysis_confirmed_releases.json")
     checklist_doc = read_json(ROOT / "analysis_checklist.json")
-    artwork_review = read_json(ROOT / "verification" / "artwork_review_projection.json")
-    artwork_review_meta = {
-        "schema": artwork_review["schema"],
-        "schemaVersion": artwork_review["schemaVersion"],
-        "proposalSchema": artwork_review["proposalSchema"],
-        "proposalSchemaVersion": artwork_review["proposalSchemaVersion"],
-        "projectionVersion": artwork_review["projectionVersion"],
-        "identitySource": artwork_review["identitySource"],
-        "appearanceIdentity": artwork_review["appearanceIdentity"],
-        "reviewBoundary": artwork_review["reviewBoundary"],
-        "summary": artwork_review["summary"],
-        # Bind the fetch URL to the semantic snapshot so force-cache cannot replay an older
-        # projection after a generated artifact changes.
-        "source": "verification/artwork_review_projection.json?v=" + artwork_review["projectionVersion"],
-    }
     finish_counts = read_json(ROOT / "analysis_finishes.json")["counts"]
     dataset = read_json(ROOT / "snorlax_cards.json")
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
@@ -405,7 +538,8 @@ def main() -> int:
         else "<strong>not yet operative</strong> until the owner records approval"
     )
 
-    rows = build_rows(releases_doc["variants"])
+    catalogue = read_json(ROOT / "collector_catalogue.json")
+    rows = build_rows(catalogue_releases(catalogue, read_json(ROOT / "verification/source_first_prints.json"), dataset, checklist_doc, releases_doc))
     verification = dataset["meta"]["verification"]
     # Only owner adjudication settles a language or printing absence.
     not_printed = sum(len(c.get("languagesNotPrinted") or []) for c in dataset["cards"])
@@ -413,16 +547,15 @@ def main() -> int:
     established = sum(len(c.get("languagesConfirmed") or []) for c in dataset["cards"])
     needs_evidence = sum(len(c.get("languagesNeedsEvidence") or []) for c in dataset["cards"])
     # The page is a projection of committed inputs. A wall-clock date made an unchanged checkout
-    # stale as soon as CI ran in a different timezone or on the next day. Include the graph-backed
-    # artwork snapshot so newly reviewed evidence cannot leave the page date behind.
-    generated = max(checklist_doc["meta"]["generated"], artwork_review["generated"],
+    # stale as soon as CI ran in a different timezone or on the next day.
+    generated = max(checklist_doc["meta"]["generated"], catalogue["meta"]["dataAsOf"],
                     releases_doc["generated"], verification["lastUpdated"])
 
     confirmed_pairs = sum(len(r["confirmedLanguages"]) for r in releases_doc["variants"]
                           if r["edition"] != "1st Edition")
 
     stats = [
-        (f"{len(rows)}", "current-known card-variant rows"),
+        (f"{len(rows)}", "current confirmed physical printings"),
         (f"{established}", "established legacy language claims"),
         (f"{needs_evidence}", "language claims needing evidence"),
         (f"{not_printed}", "adjudicated not printed"),
@@ -505,8 +638,7 @@ def main() -> int:
         <h1>Snoredex — documented Snorlax TCG printings</h1>
         <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
         printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
-        size. Verified printings carry positive evidence; marketplace candidates and unresolved
-        claims remain explicitly separate.</p>
+        size. This table shows the current confirmed result of the retained research.</p>
       </div>
     </div>
     <nav class="sections" id="section-nav" aria-label="Sections">
@@ -518,7 +650,6 @@ def main() -> int:
         <ul id="section-nav-list">
         <li><a href="#about">About</a></li>
         <li><a href="#collection">Collection</a></li>
-        <li><a href="#artwork-review">Artwork review</a></li>
         <li><a href="#methodology">Data exports</a></li>
         <li><a href="#contribute">Help correct this</a></li>
         <li><a href="#sources">Sources</a></li>
@@ -533,11 +664,12 @@ def main() -> int:
 
 <section id="about">
   <h2>What this is</h2>
-  <p>This view projects the historical Cardmarket candidate universe frozen as
-  <a href="legacy-cardmarket-baseline.json"><code>{html.escape(baseline['meta']['baselineId'])}</code></a>,
-  plus its verification layer. <strong>It is not a complete all-locality catalogue.</strong> For each
-  legacy claim it answers a narrower question: <em>does positive evidence beyond marketplace
-  metadata confirm this printing actually exists?</em></p>
+  <p>This view shows every active confirmed physical printing in
+  <a href="collector_catalogue.json"><code>collector_catalogue.json</code></a>, with its current
+  field values and sources. It combines verified legacy printings with positively documented
+  source-first releases. <strong>It is not a complete all-locality catalogue.</strong>
+  The <a href="legacy-cardmarket-baseline.json">historical Cardmarket baseline</a> remains
+  provenance, not the table's membership boundary.</p>
   <div class="stats">
     {"".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>' for n, k in stats)}
   </div>
@@ -549,11 +681,11 @@ def main() -> int:
       evidence are separate; a language confirmation never establishes a finish.</li>
       <li><strong>Pending means unresolved, never absent.</strong> Missing source entries are gaps.
       Only an explicit collection-owner adjudication settles absence; otherwise contradictions remain disputed.</li>
-      <li><strong>Every &ldquo;Spanish&rdquo; row in this legacy table is European Spanish.</strong>
+      <li><strong>ES is European Spanish; ES-LA is Latin American Spanish.</strong> Localized source-first releases retain their own set codes and numbers.
       LATAM (<code>es-419</code>) is a separate physical edition in the locality graph, never implied
       by European Spanish (<code>es-ES</code>) or a Cardmarket filter.</li>
       <li><strong>Evidence must reach the exact card.</strong> {needs_evidence} claims remain
-      <code>needs-evidence</code> and do not enter the chronological table or canonical checklist.</li>
+      <code>needs-evidence</code> in the data exports; unresolved candidates are excluded from this table.</li>
       {open_claims_note}
     </ul>
     <p><a href="README.md">Scope, evidence grades and methodology</a></p>
@@ -639,62 +771,6 @@ def main() -> int:
   </div>
 </section>
 
-<section id="artwork-review">
-  <h2>Artwork &amp; detection review</h2>
-  <p>This client-side review surface reads the generated projection of the authoritative locality
-  graph. It keeps an automatically derived image group separate from each physical local release, shows the
-  current catalogue-derived detection fields beside the recorded image and evidence, and emits
-  downloadable review proposals. These image groups are suggestions only; a reviewed artwork
-  identity is assigned only by an explicit human decision. It never writes the catalogue from the browser.</p>
-  <div class="callout">
-    <strong>Review boundary.</strong> Proposals carry stable graph IDs, before-values, source
-    observation hashes and the projection version. A reviewed import must validate them against the
-    current graph before any generator can change catalogue truth. The projection currently covers
-    {artwork_review['summary']['cardReleases']} card releases in
-    {artwork_review['summary']['imageGroups']} automatic image groups plus
-    {artwork_review['summary']['unmappedReleases']} unmapped source-first releases; no reviewed
-    artwork appearances are materialized here.
-    <a href="verification/artwork_review_projection.json">Download the projection</a>.
-  </div>
-  <div class="artwork-review" id="artwork-review-app">
-    <div class="artwork-load" id="ar-load-state">
-      <p>Artwork review data is loaded only when requested, so the normal collection view stays light.</p>
-      <button type="button" class="primary" id="ar-load">Load artwork review</button>
-      <span id="ar-load-status" role="status" aria-live="polite"></span>
-    </div>
-    <div class="controls artwork-controls" hidden>
-      <div class="row">
-        <div class="field" style="flex:1 1 260px">
-          <label for="ar-search">Search groups and releases</label>
-          <input id="ar-search" type="search" placeholder="card, set, locality, language, ID…" style="width:100%">
-        </div>
-        <div class="field"><label for="ar-scope">Show</label>
-          <select id="ar-scope">
-            <option value="image-groups">Automatic image groups (review suggestions)</option>
-            <option value="all">All groups</option>
-            <option value="unmapped">Unmapped releases</option>
-          </select>
-        </div>
-        <div class="field"><label for="ar-proposal-filter">Proposal state</label>
-          <select id="ar-proposal-filter">
-            <option value="all">All</option>
-            <option value="unreviewed">Unreviewed</option>
-            <option value="reviewed">Has local proposal</option>
-          </select>
-        </div>
-        <div class="field" style="flex:1 1 220px">
-          <label for="ar-reviewer">Reviewer name</label>
-          <input id="ar-reviewer" type="text" autocomplete="name" placeholder="Required for proposals" style="width:100%">
-        </div>
-        <button type="button" class="primary" id="ar-download">Download proposals</button>
-        <button type="button" class="ghost" id="ar-clear">Clear local drafts</button>
-      </div>
-      <div class="count" id="ar-summary" role="status" aria-live="polite"></div>
-    </div>
-    <div id="ar-groups"></div>
-  </div>
-</section>
-
 <section id="methodology">
   <h2>Data exports</h2>
   <ul>
@@ -715,7 +791,7 @@ def main() -> int:
     <li><a href="verification/source_capability_graph.json">verification/source_capability_graph.json</a> — bounded provider/surface coverage graph with hashed fixtures</li>
     <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
     <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
-    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — generated graph projection for the artwork review UI</li>
+    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — retained graph/image projection</li>
   </ul>
   <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
   <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
@@ -726,7 +802,9 @@ def main() -> int:
 <section id="contribute">
   <h2>Help correct this</h2>
   <p>Use the row&rsquo;s <strong>Correction?</strong> link to report positive evidence for that
-  printing. A missing source entry is not proof of absence; pending means unresolved, never
+  printing. For artwork or a printing outside this table,
+  <a href="https://github.com/m4s-ai/snoredex-data/issues/new/choose">open a correction issue</a>
+  and identify the card with supporting sources or images. A missing source entry is not proof of absence; pending means unresolved, never
   unavailable. <a href="CONTRIBUTING.md">Contribution guide</a> ·
   <a href="verification/FINISH_SOURCES.md">Evidence ladder</a> ·
   <a href="verification/open-items.html">Open questions</a></p>
@@ -783,7 +861,6 @@ def main() -> int:
 </main>
 
 {json_block("data-rows", rows)}
-{json_block("data-artwork-review-meta", artwork_review_meta)}
 {json_block("data-coverage", coverage)}
 {json_block("data-meta", {"languages": languages_meta, "generated": generated})}
 <script src="site/app.js"></script>

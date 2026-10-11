@@ -1,9 +1,9 @@
 ---
 name: snoredex-ui-audit
-description: Review Snoredex artwork groups and export browser proposals, or audit the generated static UI for responsive layout, accessibility, interaction, dark mode, print and image behavior. Use for artwork proposal review or reproducible UI findings; not for applying proposals to canonical data, data-verdict research or redesign without a request.
+description: Audit the generated static Snoredex UI for responsive layout, accessibility, interaction, dark mode, print and image behavior, or inspect retained artwork projections for issue-based corrections. The embedded browser proposal interface is retired.
 ---
 
-<!-- doc: role=browser artwork proposal review and static-UI audit workflow skill; stage=task -->
+<!-- doc: role=static-UI audit and artwork correction handoff workflow skill; stage=task -->
 
 # Snoredex UI audit
 
@@ -13,17 +13,12 @@ Review artwork proposals or produce a reproducible review of the static site's b
 
 Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), and the site/consumer paths in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md). `index.html` is generated: trace defects to the owning generator, styles, templates, or canonical data instead of editing it directly.
 
-For artwork grouping, detection or proposal export, use the artwork procedure below. For layout,
-accessibility or browser behavior, use the UI-audit procedure. Selecting an artwork route does not
-request a responsive-layout audit.
-
-## Artwork proposal review procedure
-
-1. Read [ADR-0007](../../../verification/ADR-0007-embedded-artwork-review-ui.md). Open the local generated page or an explicitly selected deployment and load its artwork-review section. Record the projection version and identify the requested release/group using stable graph IDs. If the browser or source image is unavailable, report that limit rather than inventing an observation.
-2. Inspect the retained source image, its content hash and the affected localized releases and physical prints. Automatic image groups are unreviewed anchors, not accepted artwork identities. Keep language, finish and identity claims separate.
-3. When the request authorizes preparing proposals, choose the supported action that matches the observation: confirm, correct, reassign, split, unclear or propose-variant. Supply reviewer details and before/proposed-after values. Reassignment uses an existing artwork-group ID from the current projection: either an `IMAGE-GROUP:*` or a `RELEASE-GROUP:*` target. Uncertainty stays unclear. Respect the image guards and do not infer invisible properties.
-4. Save the proposal locally and check the saved/unsaved status. Download the versioned proposal JSON for handoff; preserve stale drafts separately and report storage failures. For inspection-only requests, report findings without saving proposals or changing browser storage.
-5. Report the selected IDs, projection/schema versions, source observations/hashes, action and export location. The browser writes only local drafts/exports. No reviewed proposal importer or decision store exists yet: the export is review material, and this procedure never applies it to authoritative data or deploys changes.
+The embedded artwork/proposal interface was retired by owner instruction on 2026-10-10.
+For artwork or detection findings, inspect the retained projection and cite exact canonical IDs,
+source observations and images in the site's linked correction issue form. Do not offer the retired
+browser editor or proposal export. Existing browser draft storage must not be deleted.
+Corrections still require positive evidence and reviewed canonical integration; the browser never
+writes catalogue truth. For ordinary site behavior, use the UI-audit procedure below.
 
 ## UI-audit workflow
 

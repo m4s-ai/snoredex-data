@@ -554,6 +554,28 @@ def verify_observed_finish_attribution(specimens, registry):
     assert not registry.surface_supports_observed_finish('https://example.org/card.jpg', 'new-photo-provider', synthetic)
 
 
+def verify_override_field_provenance() -> None:
+    import source_registry as registry
+    source = {"url": "https://example.org/launch", "sourceType": "Dated product launch",
+              "claimFields": ["date"], "retrievedAt": "2026-10-10"}
+    calls = []
+    record = lambda *args, **kwargs: calls.append(args)
+    registry.record_printing_source(source, "printing", ["date"], record, {})
+    registry.record_override_source("launch", source, record)
+    assert [(call[2], call[4]) for call in calls] == [("date", "2026-10-10")] * 2
+    calls.clear()
+    registry.record_override_source("legacy", {"url": "https://example.org/finish"}, record)
+    assert calls[0][2] == "finish-override"
+    overrides = json.loads((ROOT / "verification/finish_overrides.json").read_text(encoding="utf-8"))
+    for name, entry in overrides["sources"].items():
+        calls.clear()
+        registry.record_override_source(name, entry, record)
+        assert all(call[4] == entry.get("retrievedAt") for call in calls), name
+    evidence = json.loads((ROOT / "verification/source_registry.json").read_text(encoding="utf-8"))["evidence"]
+    launch = next(row for row in evidence if "override:bulbapedia-build-a-bear-launch" in row["stableIds"])
+    assert launch["dimensions"] == ["date"] and launch["retrievedAt"] == "2026-10-10"
+
+
 def verify_standalone_printing_identity() -> None:
     graph = {"meta": {}, "entities": [{"entityType": "card-release", "entityId": "release",
              "payload": {"cardReleaseId": "release", "localSetCode": "TEST",
@@ -1089,6 +1111,7 @@ def main() -> None:
         )
         assert row["sourceUrl"] in release["sourceRecords"]
     verify_source_first_specimen_registry()
+    verify_override_field_provenance()
     verify_30th_admission_replay()
     verify_kss_retirement_replay()
     verify_release_count_reason_guard(graph)
