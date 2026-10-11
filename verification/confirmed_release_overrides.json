@@ -1,9 +1,11 @@
 {
   "meta": {
     "schema": "snoredex-confirmed-release-overrides",
-    "schemaVersion": "1.0.0",
+    "schemaVersion": "1.1.0",
     "transferredAt": "2026-09-25",
-    "origin": "Legacy fallback tables in scripts/confirmed_releases.py; values carried forward unchanged. See verification/HARDCODED-DATA-AUDIT.md."
+    "origin": "Legacy fallback tables in scripts/confirmed_releases.py; values carried forward unchanged. See verification/HARDCODED-DATA-AUDIT.md.",
+    "reviewedAt": "2026-10-11",
+    "reviewedItemsScope": "Date-only observations for existing guarded collector identities; precedence over source-first and legacy fallback date metadata only. No card, language, finish, edition, regional distribution or completeness claim is admitted by these records. legacyChecklistIds map only the same physical identity into the compatibility export."
   },
   "setNameAliases": {
     "151": "151",
@@ -597,6 +599,1383 @@
         "number": "277",
         "date": "2025",
         "exact": false
+      }
+    ],
+    "reviewedItems": [
+      {
+        "itemId": "item-0106f682-b985-523b-8a3a-53fc115c003d",
+        "cardReleaseId": "RELEASE:JP:Japanese:BW-P:207:Snorlax-Block-Teampact",
+        "physicalPrintingId": "PHYSICAL:PRINTING:b7c98fd1f3d006edce932cf7",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0025-P01",
+        "legacyChecklistIds": [
+          "bw-p-207-japanese-none-holo-unknown"
+        ],
+        "releaseDate": "2013-01-21",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "March 2013 is the magazine issue label; actual release was 2013-01-21. Correct current erroneous 2013-02; original Plasma Gale expansion launch is a different event.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Plasma_Storm_101)",
+            "retrievedAt": "2026-10-11T10:33:40.399532Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-bwp"
+          }
+        ]
+      },
+      {
+        "itemId": "item-03efeb89-0dfe-5e9e-a4aa-a457f9ece9fa",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:sv4K F:059/066:Snorlax-Doll",
+        "physicalPrintingId": "PHYSICAL:PRINTING:12327fedf217d834ab36ff26",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": "F0483-P01",
+        "legacyChecklistIds": [
+          "sv4k-059-t-chinese-none-non-holo"
+        ],
+        "releaseDate": "2023-11-10",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "pokemon-card-asia",
+            "url": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:sv4K F:059/066:Snorlax-Doll"
+          }
+        ]
+      },
+      {
+        "itemId": "item-04e06921-a939-57c7-91d8-756329963c79",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:svQP F:012/023:Snorlax-Spike-Draw-Mega-Punch",
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0578",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2025-07-18",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Ex_Starter_Deck_Pikachu_(ATCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:svQP F:012/023:Snorlax-Spike-Draw-Mega-Punch"
+          }
+        ]
+      },
+      {
+        "itemId": "item-0b25f883-edfa-5e53-94fb-fb13ae7e386b",
+        "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0611-P01",
+        "localizationId": "LOCALIZATION:WEST:it",
+        "sourcePrintingId": "F0611-P01",
+        "legacyChecklistIds": [
+          "xpre-076-italian-none-holo-set-logo-prismatic-evolutions-special-collection-snorlax-ex-blissey-ex-special-collection"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-0e65767a-04b6-5fe0-9d02-9b6e64f53149",
+        "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0609-P02",
+        "localizationId": "LOCALIZATION:WEST:fr",
+        "sourcePrintingId": "F0609-P02",
+        "legacyChecklistIds": [
+          "xpre-076-french-none-holo-special-collection-snorlax-ex-blissey-ex-special-collection-jumbo"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-0f9fb4ce-0ec9-5c4c-9d3a-08bae6a97eb7",
+        "cardReleaseId": "RELEASE:WEST:English:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "physicalPrintingId": "PHYSICAL:F0519-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0519-P01",
+        "legacyChecklistIds": [
+          "svp-184-english-none-holo-set-logo-journey-together-prerelease-journey-together-prerelease"
+        ],
+        "releaseDate": "2025-03-15",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SVP:184:Hops-Snorlax-Extra-Helpings-Dynamic-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: English Western product distribution; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_Build_%26_Battle_Box_%28TCG%29",
+            "retrievedAt": "2026-10-11T10:34:42.312510+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SVP184"
+          }
+        ]
+      },
+      {
+        "itemId": "item-103c5d1c-2b05-51c3-92e6-848d45f96b86",
+        "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0610-P02",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0610-P02",
+        "legacyChecklistIds": [
+          "xpre-076-german-none-holo-special-collection-snorlax-ex-blissey-ex-special-collection-jumbo"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-134d7cff-5acc-53a0-b171-a0e11019fc6d",
+        "cardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+        "localizationId": "LOCALIZATION:WEST:es-ES",
+        "sourcePrintingId": "F0165-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000",
+        "releaseDatePrecision": "year",
+        "releaseApproximate": false,
+        "basis": "WikiDex explicitly scopes Spanish Jungla to Spain year2000, HispanicAmerica unknown, US 1999-06-16. No Spain-specific month/day. Bulbapedia blanket February2000 is unreliable across non-English localities; do not silently select it. Spain (ES), not Hispanic America (HA); expansion debut only, not an individual physical printing or reprint-wave production date",
+        "sources": [
+          {
+            "providerId": "wikidex",
+            "url": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+            "retrievedAt": "2026-10-11T10:34:41Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "wikidex-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-18e4d71b-7c41-5238-a380-f288da49751b",
+        "cardReleaseId": "RELEASE:WEST:English:SWSH:068:Snorlax-Gormandize-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0531-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0531-P01",
+        "legacyChecklistIds": [
+          "swsh-068-english-none-holo"
+        ],
+        "releaseDate": "2020-10-31",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SWSH:068:Snorlax-Gormandize-Body-Slam matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: English Western product distribution; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_Build_%26_Battle_Box_%28TCG%29",
+            "retrievedAt": "2026-10-11T10:34:41.230698+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SWSH068"
+          }
+        ]
+      },
+      {
+        "itemId": "item-18f233d7-5522-5d17-9efb-8f8372226d31",
+        "cardReleaseId": "RELEASE:WEST:Spanish:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0511-P01",
+        "localizationId": "LOCALIZATION:WEST:es-ES",
+        "sourcePrintingId": "F0511-P01",
+        "legacyChecklistIds": [
+          "svp-051-spanish-none-holo"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:Spanish:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: ES; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
+            "retrievedAt": "2026-10-11T10:39:25.524822+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-es-ES"
+          }
+        ]
+      },
+      {
+        "itemId": "item-1a3fe967-1e33-5730-ba23-bf35b99cbebe",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:S10b F:056/071:Snorlax-Block-Collapse",
+        "physicalPrintingId": "PHYSICAL:PRINTING:f7aed41a151b2184f8d835e7",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": "F0336-P01",
+        "legacyChecklistIds": [
+          "s10b-056-t-chinese-none-non-holo"
+        ],
+        "releaseDate": "2022-06-17",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:S10b F:056/071:Snorlax-Block-Collapse"
+          }
+        ]
+      },
+      {
+        "itemId": "item-1ae61864-2562-5080-966f-cd6421e6d525",
+        "cardReleaseId": "RELEASE:JP:Japanese:CLF:016:Snorlax-Collect-Collapse",
+        "physicalPrintingId": "PHYSICAL:PRINTING:6b4a10829d31abee1072c43b",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0035-P01",
+        "legacyChecklistIds": [
+          "clf-016-japanese-none-holo-speckled-full-face"
+        ],
+        "releaseDate": "2023-10",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Official first-wave date late October 2023 or later, corroborated by Bulbapedia Japanese release field; correct current November Western fallback. No common fixed day. Lottery entry Oct23 is not a release date; later March/Aug2024 shipment waves are separate.",
+        "sources": [
+          {
+            "providerId": "pokemon-card-jp",
+            "url": "https://www.pokemon-card.com/ex/classic/index.html",
+            "retrievedAt": "2026-10-11T10:34:30.946818Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-classic-official"
+          }
+        ]
+      },
+      {
+        "itemId": "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "physicalPrintingId": "PRINTING:301137e80f94be59374a828a",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2020-02-18",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer. Also corrects an inherited year inconsistent with the localized product release.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Double_Burst_GX_Starter_Deck_(ATCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:AS5D:118/169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX"
+          }
+        ]
+      },
+      {
+        "itemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
+        "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "physicalPrintingId": "PHYSICAL:F0597-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0597-P01",
+        "legacyChecklistIds": [
+          "xjtg-117-english-none-holo-cosmos-retailer-eb-games-gift-with-purchase-australia-new-zealand"
+        ],
+        "releaseDate": "2025-03-28",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign. ",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+            "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "hop-official-archive"
+          }
+        ]
+      },
+      {
+        "itemId": "item-226f7cb1-f045-57e1-a96c-3598cc0278c5",
+        "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0612-P02",
+        "localizationId": "LOCALIZATION:WEST:es-ES",
+        "sourcePrintingId": "F0612-P02",
+        "legacyChecklistIds": [
+          "xpre-076-spanish-none-holo-special-collection-snorlax-ex-blissey-ex-special-collection-jumbo"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-2969946c-64a3-5ac8-b2d2-1944604d0d1e",
+        "cardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "physicalPrintingId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0584-P01",
+        "legacyChecklistIds": [
+          "wcd23-lor-lor-143-english-none-non-holo-championship-signature-gabriel-fernandez-world-championship-deck-2023-colorless-lugia"
+        ],
+        "releaseDate": "2024-03-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "2023 Colorless Lugia championship replica-deck retail launch, not world event. ",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+            "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "wcd-official-archive"
+          }
+        ]
+      },
+      {
+        "itemId": "item-315a2de4-ab38-50ad-aa87-a2868d209d96",
+        "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0608-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0608-P01",
+        "legacyChecklistIds": [
+          "xpre-076-english-none-holo-set-logo-prismatic-evolutions-special-collection-snorlax-ex-blissey-ex-special-collection"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-31f9ae0c-0e3e-5d1e-a51b-948b237e401a",
+        "cardReleaseId": "RELEASE:WEST:English:GH:33:Rockets-Snorlax-Restless-Sleep-Collapse",
+        "physicalPrintingId": "PHYSICAL:F0142-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0142-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000-08-14",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "English Gym Heroes enrelease 2000-08-14; exact list member Rocket's Snorlax 33/132 corroborated by archived original publisher checklist. Applies to launch of its existing language-qualified release, not separate production runs. existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Gym_Heroes_(TCG)&prop=wikitext&format=json&redirects=1",
+            "retrievedAt": "2026-10-11T10:37:53Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "bulbapedia-api-gym"
+          }
+        ]
+      },
+      {
+        "itemId": "item-38a86735-745f-506f-894c-25ab590308c0",
+        "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0608-P02",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0608-P02",
+        "legacyChecklistIds": [
+          "xpre-076-english-none-holo-special-collection-snorlax-ex-blissey-ex-special-collection-jumbo"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-399ffa2b-b7e9-5122-babe-16e58fc08226",
+        "cardReleaseId": "RELEASE:WEST:English:SVP:122:Snorlax-Lazy-Press",
+        "physicalPrintingId": "PHYSICAL:F0513-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0513-P01",
+        "legacyChecklistIds": [
+          "svp-122-english-none-holo"
+        ],
+        "releaseDate": "2024-05-24",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SVP:122:Snorlax-Lazy-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: English Western product distribution; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28SVP_Promo_122%29",
+            "retrievedAt": "2026-10-11T10:33:41.494816+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SVP122"
+          }
+        ]
+      },
+      {
+        "itemId": "item-3a558899-680c-55ea-a50b-2bd247fe7c13",
+        "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0512-P01",
+        "localizationId": "LOCALIZATION:WEST:pt",
+        "sourcePrintingId": "F0512-P01",
+        "legacyChecklistIds": [
+          "svp-051-portuguese-none-holo"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:Portuguese:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: BR; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://press.pokemon.com/pt-BR/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+            "retrievedAt": "2026-10-11T10:39:23.554039+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-pt"
+          }
+        ]
+      },
+      {
+        "itemId": "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
+        "cardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
+        "physicalPrintingId": "PHYSICAL:PRINTING:65ef67fb1eb82d0db0fdab58",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0619-P01",
+        "legacyChecklistIds": [
+          "xy-p-149-japanese-none-non-holo-observed-marking"
+        ],
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Original source explicitly early July 2015. No exact day established; do not substitute July 1 or transfer other promotional cards/batches.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
+            "retrievedAt": "2026-10-11T10:33:14.996679Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-breakthrough"
+          }
+        ]
+      },
+      {
+        "itemId": "item-466fef23-3569-5c26-b37f-a1c38c25dba6",
+        "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "physicalPrintingId": "PHYSICAL:F0597-P03",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0597-P03",
+        "legacyChecklistIds": [
+          "xjtg-117-english-none-holo-cosmos-set-logo-journey-together-gift-with-purchase-malaysia-philippines-singapore"
+        ],
+        "releaseDate": "2025-03-28",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign. ",
+        "sources": [
+          {
+            "providerId": "pokemon-card-asia",
+            "url": "https://asia.pokemon-card.com/sg/archives/6689/",
+            "retrievedAt": "2026-10-11T10:35:16.881779+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "hop-official-sg"
+          }
+        ]
+      },
+      {
+        "itemId": "item-4f32febf-27a6-5378-8d66-d3088acad72f",
+        "cardReleaseId": "RELEASE:JP:Japanese:DP-P:127:None",
+        "physicalPrintingId": "PHYSICAL:PRINTING:27f7305d8849e092d8ae6325",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0098-P01",
+        "legacyChecklistIds": [
+          "dp-p-127-japanese-none-holo-sparkle"
+        ],
+        "releaseDate": "2008-12-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Campaign start date for matching 127/DP-P; campaign ended 2009-01-15. Not 126/DP-P campaign or English expansion launch.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_LV.X_(Rising_Rivals_111)",
+            "retrievedAt": "2026-10-11T10:33:40.447486Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-rr111"
+          }
+        ]
+      },
+      {
+        "itemId": "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa",
+        "cardReleaseId": "RELEASE:WEST:English:WP:49:Snorlax-Guard-Roll-Over",
+        "physicalPrintingId": "PHYSICAL:F0590-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0590-P01",
+        "legacyChecklistIds": [
+          "wp-49-english-none-non-holo"
+        ],
+        "releaseDate": "2002-08",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Exact WP49 English distribution is Pokémon League, August 2002. Independent exact promo record agrees. Campaign opening and archive snapshots cannot supply a card-specific day. existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+            "retrievedAt": "2026-10-11T10:37:53Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "bulbapedia-api-wp49"
+          }
+        ]
+      },
+      {
+        "itemId": "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56",
+        "cardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
+        "physicalPrintingId": null,
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0619-P02",
+        "legacyChecklistIds": [
+          "xy-p-149-japanese-none-reverse-holo"
+        ],
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Original source explicitly early July 2015. No exact day established; do not substitute July 1 or transfer other promotional cards/batches.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
+            "retrievedAt": "2026-10-11T10:33:14.996679Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-breakthrough"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6754a89d-5fe0-5779-a495-378b2b19a5e0",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:CLF:016/032:Snorlax-Collect-Collapse",
+        "physicalPrintingId": "PHYSICAL:PRINTING:6638ebddef62af5b63c20024",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": "F0037-P01",
+        "legacyChecklistIds": [
+          "clf-016-t-chinese-none-mirror-holo"
+        ],
+        "releaseDate": "2023-11-10",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "pokemon-card-asia",
+            "url": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:CLF:016/032:Snorlax-Collect-Collapse"
+          }
+        ]
+      },
+      {
+        "itemId": "item-68d7d699-9681-53ff-8cb2-0c80fd693324",
+        "cardReleaseId": "RELEASE:JP:Japanese:SM-P:1:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "physicalPrintingId": "PHYSICAL:PRINTING:116e8754c102283dac38e162",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0398-P01",
+        "legacyChecklistIds": [
+          "sm-p-1-japanese-none-holo-full-art"
+        ],
+        "releaseDate": "2016-11-18",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Japanese 001/SM-P was a Sun/Moon game preorder insert on 2016-11-18, distinct from English Snorlax-GX box SM05 release 2016-12-14. Correct erroneous December month.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax-GX_(SM_Promo_5)",
+            "retrievedAt": "2026-10-11T10:33:40.197658Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-sm001"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6a9008c4-08da-5da6-9acf-7a426f24de55",
+        "cardReleaseId": "RELEASE:WEST:English:SWSH:119:Snorlax-Slap-Push-Single-Strike-Tackle",
+        "physicalPrintingId": "PHYSICAL:F0537-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0537-P01",
+        "legacyChecklistIds": [
+          "swsh-119-english-none-holo"
+        ],
+        "releaseDate": "2021-06-18",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SWSH:119:Snorlax-Slap-Push-Single-Strike-Tackle matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: English Western product distribution; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_%28SWSH_Promo_119%29",
+            "retrievedAt": "2026-10-11T10:33:38.679272+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SWSH119"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6bf73acf-2d3d-5208-8fdf-ce2196a6f1d1",
+        "cardReleaseId": "RELEASE:WEST:Italian:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0510-P01",
+        "localizationId": "LOCALIZATION:WEST:it",
+        "sourcePrintingId": "F0510-P01",
+        "legacyChecklistIds": [
+          "svp-051-italian-none-holo"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:Italian:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: IT; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+            "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-it"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6d01abe3-a756-5273-b9e3-8939266718bf",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "physicalPrintingId": "PHYSICAL:PRINTING:ed04dbd0d5f4ea56e91a8c9e",
+        "localizationId": "LOCALIZATION:CN:zh-Hans",
+        "sourcePrintingId": "F0456-P01",
+        "legacyChecklistIds": [
+          "sv-p-cs-277-s-chinese-none-non-holo"
+        ],
+        "releaseDate": "2026-05-15",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact Mainland China 277/SV-P row identifies Activity Special Pack Part3. The official announcement expressly dates that exact pack to2026-05-15; all3 linked galleries visibly include277/SV-P 卡比兽 HP150. This corrects inherited approximate2025. Announcement2026-04-27 and later coupon redemption2026-06-01 are separate dates.",
+        "sources": [
+          {
+            "providerId": "pokemon-cn-official",
+            "url": "https://www.pokemon.cn/tcg/other/21726.html",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6e132be0-6a80-5803-a97a-cbf30666a3d6",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SCA F:084/135:Snorlax-Gormandize-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0498",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2020-11-27",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer. Also corrects an inherited year inconsistent with the localized product release.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Partners_V_Starter_Deck_(ATCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:SCA F:084/135:Snorlax-Gormandize-Body-Slam"
+          }
+        ]
+      },
+      {
+        "itemId": "item-6ff040a0-558c-5a4e-b15b-c8692a5d46a6",
+        "cardReleaseId": "RELEASE:WEST:German:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0509-P01",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0509-P01",
+        "legacyChecklistIds": [
+          "svp-051-german-none-holo"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:German:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: DE; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Die-Erweiterung-Karmesin-Purpur-151-des-Pokemon-Samme",
+            "retrievedAt": "2026-10-11T10:39:24.662526+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-de"
+          }
+        ]
+      },
+      {
+        "itemId": "item-7434769f-81a6-50cf-9008-cf431cf4eaae",
+        "cardReleaseId": "RELEASE:WEST:German:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "physicalPrintingId": "PHYSICAL:PRINTING:3f4b42965da9f810daf7fc54",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0279-P01",
+        "legacyChecklistIds": [
+          "pps3-lor-lor-143-german-none-non-holo-program-logo-play-pokemon-prize-pack-play-pokemon-prize-pack-series-three"
+        ],
+        "releaseDate": "2023-08-14",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing. German native official announcement directly dates this series; no base Lost Origin or English-market date inheritance.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+            "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "pps3-official-de-archive"
+          }
+        ]
+      },
+      {
+        "itemId": "item-7781cd47-058d-5f7b-b269-974b71689c26",
+        "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0609-P01",
+        "localizationId": "LOCALIZATION:WEST:fr",
+        "sourcePrintingId": "F0609-P01",
+        "legacyChecklistIds": [
+          "xpre-076-french-none-holo-set-logo-prismatic-evolutions-special-collection-snorlax-ex-blissey-ex-special-collection"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-7be7cb28-ca03-5e69-8d94-272fd90e198a",
+        "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0611-P02",
+        "localizationId": "LOCALIZATION:WEST:it",
+        "sourcePrintingId": "F0611-P02",
+        "legacyChecklistIds": [
+          "xpre-076-italian-none-holo-special-collection-snorlax-ex-blissey-ex-special-collection-jumbo"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-7ee88eb1-4221-59e9-914e-8480901e0754",
+        "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "physicalPrintingId": "PHYSICAL:F0597-P02",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0597-P02",
+        "legacyChecklistIds": [
+          "xjtg-117-english-none-holo-cosmos-retailer-gamestop-gift-with-purchase-usa-canada"
+        ],
+        "releaseDate": "2025-03-28",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign. ",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+            "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "hop-official-archive"
+          }
+        ]
+      },
+      {
+        "itemId": "item-85d569de-bd2a-51f6-a00e-7d870e35b60f",
+        "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0507-P02",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0507-P02",
+        "legacyChecklistIds": [
+          "svp-051-english-none-holo-pokemon-center-pokemon-center-pokemon-center-elite-trainer-box-pokemon-center-151-elite-trainer-box"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: US/CA/UK; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+            "retrievedAt": "2026-10-11T10:39:23.553195+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-en"
+          }
+        ]
+      },
+      {
+        "itemId": "item-8889f9aa-bf7e-5893-9303-d106ac37d7f7",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SV-P:215:Snorlax-Spike-Draw-Mega-Punch",
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0501",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2025-02-21",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/SV-P_Promotional_cards_(TCTCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:SV-P:215:Snorlax-Spike-Draw-Mega-Punch"
+          }
+        ]
+      },
+      {
+        "itemId": "item-9a8d92a4-5559-5008-8009-1fdb8b128dff",
+        "cardReleaseId": "RELEASE:ID:Indonesian:S-P:356:Snorlax-Heavy-Impact",
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0558",
+        "localizationId": "LOCALIZATION:ID:id",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2022-12-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Official Pokémon Asia campaign explicitly says Periode / Mulai12Desember2022. Exact Bulbapedia Indonesian356/S-P row names Chatime, and official Pokémon portal names Snorlax among the same six promos.",
+        "sources": [
+          {
+            "providerId": "pokemon-card-asia",
+            "url": "https://asia.pokemon-card.com/id/archives/2854/",
+            "retrievedAt": "2026-10-11T10:36:14.799408+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/korea-indonesia-thailand.json",
+            "sourceRef": "official-id-chatime"
+          }
+        ]
+      },
+      {
+        "itemId": "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "physicalPrintingId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+        "localizationId": "LOCALIZATION:CN:zh-Hans",
+        "sourcePrintingId": "F0456-P02",
+        "legacyChecklistIds": [
+          "sv-p-cs-277-s-chinese-none-mirror-holo-master-ball"
+        ],
+        "releaseDate": "2026-05-15",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact Mainland China 277/SV-P row identifies Activity Special Pack Part3. The official announcement expressly dates that exact pack to2026-05-15; all3 linked galleries visibly include277/SV-P 卡比兽 HP150. This corrects inherited approximate2025. Announcement2026-04-27 and later coupon redemption2026-06-01 are separate dates.",
+        "sources": [
+          {
+            "providerId": "pokemon-cn-official",
+            "url": "https://www.pokemon.cn/tcg/other/21726.html",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch"
+          }
+        ]
+      },
+      {
+        "itemId": "item-ab69113c-b6ca-5c68-9240-5b89f5131184",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:AC1b:118/158:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0577",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": null,
+        "legacyChecklistIds": [],
+        "releaseDate": "2019-10-09",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/All_Stars_Collection_(ATCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:AC1b:118/158:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX"
+          }
+        ]
+      },
+      {
+        "itemId": "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
+        "cardReleaseId": "RELEASE:WEST:German:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0163-P01",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0163-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000-06",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Exact German Dschungel article dates the set to Juni 2000 and lists Relaxo 11/64. Bulbapedia says all non-English languages February2000. The exact native local-language field is now registered as bounded tier-3 manual positive date evidence. German-language expansion debut; country Germany is not independently named by this field; expansion debut only, not an individual physical printing or reprint-wave production date",
+        "sources": [
+          {
+            "providerId": "pokewiki",
+            "url": "https://www.pokewiki.de/Dschungel_(TCG)",
+            "retrievedAt": "2026-10-11T10:33:41Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "pokewiki-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-b6e814c3-046d-564d-8f92-6bc53c19bb1d",
+        "cardReleaseId": "RELEASE:TW:T-Chinese:SN F:008/024:Snorlax-Heavy-Impact",
+        "physicalPrintingId": "PHYSICAL:PRINTING:1854b0c3049b1910a5fee077",
+        "localizationId": "LOCALIZATION:TW:zh-Hant",
+        "sourcePrintingId": "F0419-P01",
+        "legacyChecklistIds": [
+          "sn-008-t-chinese-none-non-holo"
+        ],
+        "releaseDate": "2022-10-02",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact matched localized product/date; existing card-release and source-first identity retained. No Japanese date transfer.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:TW:T-Chinese:SN F:008/024:Snorlax-Heavy-Impact"
+          }
+        ]
+      },
+      {
+        "itemId": "item-b6fdf806-2265-5097-b3c1-2614e7bf805a",
+        "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0610-P01",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0610-P01",
+        "legacyChecklistIds": [
+          "xpre-076-german-none-holo-set-logo-prismatic-evolutions-special-collection-snorlax-ex-blissey-ex-special-collection"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-b81fe1f5-4b3d-5d28-a4be-e02b50879e83",
+        "cardReleaseId": "RELEASE:WEST:English:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0161-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0161-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "1999-06-16",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "English Jungle enrelease 1999-06-16; exact numbered-run Snorlax 11/64. Archived publisher checklist agrees about numbered member. Applies to existing language-qualified launch, not another printing wave. existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+            "retrievedAt": "2026-10-11T10:36:52Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "bulbapedia-api-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-bf2b9073-8aeb-5e49-98ed-d0d6cc92bbbc",
+        "cardReleaseId": "RELEASE:WEST:German:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0170-P01",
+        "localizationId": "LOCALIZATION:WEST:de",
+        "sourcePrintingId": "F0170-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000-06",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Exact German Dschungel article dates the set to Juni 2000 and lists Relaxo 27/64. Bulbapedia says all non-English languages February2000. The exact native local-language field is now registered as bounded tier-3 manual positive date evidence. German-language expansion debut; country Germany is not independently named by this field; expansion debut only, not an individual physical printing or reprint-wave production date",
+        "sources": [
+          {
+            "providerId": "pokewiki",
+            "url": "https://www.pokewiki.de/Dschungel_(TCG)",
+            "retrievedAt": "2026-10-11T10:33:41Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "pokewiki-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-c7eec9be-fb9a-5be1-a093-39b147541339",
+        "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
+        "physicalPrintingId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
+        "localizationId": "LOCALIZATION:CN:zh-Hans",
+        "sourcePrintingId": "F0456-P03",
+        "legacyChecklistIds": [
+          "sv-p-cs-277-s-chinese-none-mirror-holo-poke-ball"
+        ],
+        "releaseDate": "2026-05-15",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Exact Mainland China 277/SV-P row identifies Activity Special Pack Part3. The official announcement expressly dates that exact pack to2026-05-15; all3 linked galleries visibly include277/SV-P 卡比兽 HP150. This corrects inherited approximate2025. Announcement2026-04-27 and later coupon redemption2026-06-01 are separate dates.",
+        "sources": [
+          {
+            "providerId": "pokemon-cn-official",
+            "url": "https://www.pokemon.cn/tcg/other/21726.html",
+            "retrievedAt": "2026-10-11",
+            "evidencePath": "verification/evidence/release-dates-20261011/taiwan-china.json",
+            "sourceRef": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch"
+          }
+        ]
+      },
+      {
+        "itemId": "item-c88bb2db-5774-53d3-9d48-905c38aa5de9",
+        "cardReleaseId": "RELEASE:JP:Japanese:sN:008:Snorlax-Heavy-Impact",
+        "physicalPrintingId": "PHYSICAL:PRINTING:44987d5fe8d7e8c2cc81138b",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0417-P01",
+        "legacyChecklistIds": [
+          "sn-008-japanese-none-holo-diagonal-rainbow"
+        ],
+        "releaseDate": "2022-03",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false,
+        "basis": "Earliest deliveries in late March 2022, followed by delayed April shipments and later waves. Publication/order/lottery dates are not deck receipt dates; no uniform exact day established.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
+            "retrievedAt": "2026-10-11T10:33:40.477773Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-sn"
+          }
+        ]
+      },
+      {
+        "itemId": "item-cd6a082f-82c6-59fb-b268-3b9a5df9ace7",
+        "cardReleaseId": "RELEASE:JP:Japanese:DP-P:126:None",
+        "physicalPrintingId": "PHYSICAL:PRINTING:0f0140cf50598a7e4923254c",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0095-P01",
+        "legacyChecklistIds": [
+          "dp-p-126-japanese-none-holo-sparkle"
+        ],
+        "releaseDate": "2008-10-31",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Campaign start date for the matching 126/DP-P; not English Rising Rivals launch or the later Rival Season reprint.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Rising_Rivals_33)",
+            "retrievedAt": "2026-10-11T10:33:40.383510Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-rr33"
+          }
+        ]
+      },
+      {
+        "itemId": "item-cfa2ff16-5c86-5732-bc59-739356ca6aa3",
+        "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+        "physicalPrintingId": "PHYSICAL:F0612-P01",
+        "localizationId": "LOCALIZATION:WEST:es-ES",
+        "sourcePrintingId": "F0612-P01",
+        "legacyChecklistIds": [
+          "xpre-076-spanish-none-holo-set-logo-prismatic-evolutions-special-collection-snorlax-ex-blissey-ex-special-collection"
+        ],
+        "releaseDate": "2025-09-12",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076. Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+            "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "snorlax-special-card"
+          }
+        ]
+      },
+      {
+        "itemId": "item-d7b63ec6-bafb-5bab-9b63-63798de7f06e",
+        "cardReleaseId": "RELEASE:WEST:English:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact",
+        "physicalPrintingId": "PHYSICAL:F0525-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0525-P01",
+        "legacyChecklistIds": [
+          "swsh-032-english-none-holo-collection-promo-snorlax-pin-collection"
+        ],
+        "releaseDate": "2020-04-03",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SWSH:032:Snorlax-Rolling-Tackle-Heavy-Impact matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: US, CA; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_TCG_Series_merchandise",
+            "retrievedAt": "2026-10-11T10:33:47.854385+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SWSH032"
+          }
+        ]
+      },
+      {
+        "itemId": "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085",
+        "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0507-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0507-P01",
+        "legacyChecklistIds": [
+          "svp-051-english-none-holo-elite-trainer-box-pokemon-151-elite-trainer-box"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: US/CA/UK; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+            "retrievedAt": "2026-10-11T10:39:23.553195+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-en"
+          }
+        ]
+      },
+      {
+        "itemId": "item-db82b0ce-1aa7-5b0b-9ac0-95d0d518c8f1",
+        "cardReleaseId": "RELEASE:WEST:English:SM:169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "physicalPrintingId": "PHYSICAL:F0392-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0392-P01",
+        "legacyChecklistIds": [
+          "sm-169-english-none-non-holo"
+        ],
+        "releaseDate": "2019-03-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:English:SM:169:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. Date scope: English Western product distribution; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_TCG_Series_merchandise",
+            "retrievedAt": "2026-10-11T10:33:46.727721+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "B-SM169"
+          }
+        ]
+      },
+      {
+        "itemId": "item-e0ed177d-8f12-50b7-a00d-2eee0e101c20",
+        "cardReleaseId": "RELEASE:WEST:French:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0162-P01",
+        "localizationId": "LOCALIZATION:WEST:fr",
+        "sourcePrintingId": "F0162-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000-07-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Poképédia Jungle states France 01 juillet 2000 and lists exact Ronflex 11/64. This is not the North America 16juin1999 field. Bulbapedia blanket February2000 disagrees. The exact France field is now registered as bounded tier-3 manual positive date evidence. France only; no Canada, Belgium, Switzerland or other French-speaking market inferred; expansion debut only, not an individual physical printing or reprint-wave production date",
+        "sources": [
+          {
+            "providerId": "pokepedia",
+            "url": "https://www.pokepedia.fr/Jungle_(JCC)",
+            "retrievedAt": "2026-10-11T10:34:41Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "pokepedia-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-e7910b9c-d973-5cb3-8a33-8195f6283035",
+        "cardReleaseId": "RELEASE:WEST:French:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+        "physicalPrintingId": "PHYSICAL:F0508-P01",
+        "localizationId": "LOCALIZATION:WEST:fr",
+        "sourcePrintingId": "F0508-P01",
+        "legacyChecklistIds": [
+          "svp-051-french-none-holo"
+        ],
+        "releaseDate": "2023-09-22",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Already admitted RELEASE:WEST:French:SVP:051:Snorlax-Voraciousness-Thudding-Press matched to exact Bulbapedia promo-card number and named product; no printing existence or finish inference. The matching official localized article names this illustration-rare Snorlax ETB promo, not the regular 151 expansion card. Date scope: FR; first-supported-product-availability.",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-lextension-Ecarlate-et-Violet-151-du-Jeu-de-Cartes-a-Colle",
+            "retrievedAt": "2026-10-11T10:39:24.714982+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/western-promos.json",
+            "sourceRef": "O-SVP051-fr"
+          }
+        ]
+      },
+      {
+        "itemId": "item-e7b546df-41e3-5692-9517-ff00bf6b34e7",
+        "cardReleaseId": "RELEASE:WEST:English:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+        "physicalPrintingId": "PHYSICAL:F0277-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0277-P01",
+        "legacyChecklistIds": [
+          "pps3-lor-lor-143-english-none-non-holo-program-logo-play-pokemon-prize-pack-play-pokemon-prize-pack-series-three"
+        ],
+        "releaseDate": "2023-08-14",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing. ",
+        "sources": [
+          {
+            "providerId": "pokemon-official",
+            "url": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+            "retrievedAt": "2026-10-11T10:38:15.769189+00:00",
+            "evidencePath": "verification/evidence/release-dates-20261011/special-products.json",
+            "sourceRef": "prize3-official-archive"
+          }
+        ]
+      },
+      {
+        "itemId": "item-ec142827-16de-575a-aebc-265df36cf588",
+        "cardReleaseId": "RELEASE:WEST:French:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0169-P01",
+        "localizationId": "LOCALIZATION:WEST:fr",
+        "sourcePrintingId": "F0169-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "2000-07-01",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Poképédia Jungle states France 01 juillet 2000 and lists exact Ronflex 27/64. This is not the North America 16juin1999 field. Bulbapedia blanket February2000 disagrees. The exact France field is now registered as bounded tier-3 manual positive date evidence. France only; no Canada, Belgium, Switzerland or other French-speaking market inferred; expansion debut only, not an individual physical printing or reprint-wave production date",
+        "sources": [
+          {
+            "providerId": "pokepedia",
+            "url": "https://www.pokepedia.fr/Jungle_(JCC)",
+            "retrievedAt": "2026-10-11T10:34:41Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "pokepedia-jungle"
+          }
+        ]
+      },
+      {
+        "itemId": "item-ee62219c-7039-5a75-b715-c7d4de186d11",
+        "cardReleaseId": "RELEASE:JP:Japanese:SM-P:297:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+        "physicalPrintingId": "PHYSICAL:PRINTING:2604825c4d3fb1b83a8f23b6",
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0400-P01",
+        "legacyChecklistIds": [
+          "sm-p-297-japanese-none-holo-full-art"
+        ],
+        "releaseDate": "2018-12-07",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "Official Japanese Tag Bolt purchase campaign starts 2018-12-07 and is matched to 297/SM-P by exact Bulbapedia promo identity. Not English Team Up set/tin release.",
+        "sources": [
+          {
+            "providerId": "pokemon-card-jp",
+            "url": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+            "retrievedAt": "2026-10-11T10:35:03.260221Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-sm297-campaign"
+          }
+        ]
+      },
+      {
+        "itemId": "item-f408a049-2582-589d-a685-f3f814070819",
+        "cardReleaseId": "RELEASE:JP:Japanese:BW-P:207:Snorlax-Block-Teampact",
+        "physicalPrintingId": null,
+        "localizationId": "LOCALIZATION:JP:ja",
+        "sourcePrintingId": "F0025-P02",
+        "legacyChecklistIds": [
+          "bw-p-207-japanese-none-reverse-holo"
+        ],
+        "releaseDate": "2013-01-21",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "March 2013 is the magazine issue label; actual release was 2013-01-21. Correct current erroneous 2013-02; original Plasma Gale expansion launch is a different event.",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Plasma_Storm_101)",
+            "retrievedAt": "2026-10-11T10:33:40.399532Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/japanese-promos.json",
+            "sourceRef": "JP-DATE-bwp"
+          }
+        ]
+      },
+      {
+        "itemId": "item-f5a9b94f-31a6-593f-aa37-e15f51d92926",
+        "cardReleaseId": "RELEASE:WEST:English:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+        "physicalPrintingId": "PHYSICAL:F0168-P01",
+        "localizationId": "LOCALIZATION:WEST:en",
+        "sourcePrintingId": "F0168-P01",
+        "legacyChecklistIds": [],
+        "releaseDate": "1999-06-16",
+        "releaseDatePrecision": "day",
+        "releaseApproximate": false,
+        "basis": "English Jungle enrelease 1999-06-16; exact numbered-run Snorlax 27/64. Archived publisher checklist agrees about numbered member. Applies to existing language-qualified launch, not another printing wave. existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+        "sources": [
+          {
+            "providerId": "bulbapedia",
+            "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+            "retrievedAt": "2026-10-11T10:36:52Z",
+            "evidencePath": "verification/evidence/release-dates-20261011/historical-sets.json",
+            "sourceRef": "bulbapedia-api-jungle"
+          }
+        ]
       }
     ]
   }

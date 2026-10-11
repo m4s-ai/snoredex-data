@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-manifest",
     "schemaVersion": "2.0.0",
-    "reviewedAt": "2026-09-25",
+    "reviewedAt": "2026-10-11",
     "policies": [
       "External providers record positive evidence only. A missing page, row, field, result, language, region, card, or finish remains unknown.",
       "Authority tier and card-existence capability never imply finish completeness or absence authority.",
@@ -122,7 +122,7 @@
       "providerId": "wikidex",
       "operator": "WikiDex",
       "authorityTier": 3,
-      "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+      "licenseOrTerms": "CC BY-SA 3.0 for retained article excerpts; hosted scan images are used for identification and verification only.",
       "rawRetention": "Retain the exact hosted scan bytes, database URL, retrieval date, specimen id and SHA-256."
     },
     {
@@ -243,6 +243,20 @@
       "authorityTier": 2,
       "licenseOrTerms": "Public TCGL-derived reference data; no separate licence grant inferred. See https://malie.io.",
       "rawRetention": "Retain exact selected records with source URL, full-response SHA-256, array index and excerpt digest."
+    },
+    {
+      "providerId": "pokewiki",
+      "operator": "PokéWiki community",
+      "authorityTier": 3,
+      "licenseOrTerms": "CC BY-SA 3.0 DE; attribution and ShareAlike apply to retained article excerpts.",
+      "rawRetention": "Retain the exact localized release field, its source-native language or market qualifier and precision, article revision, canonical URL, retrieval timestamp, response SHA-256 and UTF-8 excerpt SHA-256. Manual positive date evidence only."
+    },
+    {
+      "providerId": "pokepedia",
+      "operator": "Poképédia community",
+      "authorityTier": 3,
+      "licenseOrTerms": "CC BY-NC-SA 3.0; attribution, NonCommercial and ShareAlike apply to retained article excerpts.",
+      "rawRetention": "Retain the exact localized release field, its source-native language or market qualifier and precision, article revision, canonical URL, retrieval timestamp, response SHA-256 and UTF-8 excerpt SHA-256. Manual positive date evidence only."
     }
   ],
   "surfaces": [
@@ -962,6 +976,53 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "A product without a page remains needs-evidence and cannot inherit another product's finish profile."
+          }
+        },
+        {
+          "edgeId": "jp-product-pages-classic-first-wave-date-positive",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-10",
+              "end": "2023-10",
+              "basis": "Only this exact retained native source field: only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-jp-product-pages-classic-first-wave-date",
+          "outOfScopeChallengeObservationId": "obs-jp-product-pages-classic-first-wave-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The same retained Japanese Classic excerpt distinguishes lottery entry 2023年2月28日～3月10日, winner notification 2023年4月26日以降, and shipment/release 2023年10月下旬以降予定. No lottery-entry or notification date is a release, no exact October day is supported, and no Western November or Taiwanese November date is imported."
           }
         }
       ]
@@ -6108,6 +6169,1118 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pokewiki-jungle-de-release-date",
+      "providerId": "pokewiki",
+      "label": "PokéWiki Dschungel: exact German-language release month",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokewiki.de/Dschungel_(TCG)"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Historical date statements are retained manually with exact source-native qualifiers, precision, retrieval metadata and separate response/excerpt SHA-256. Re-review any changed article or expanded scope; no live adapter or completeness inference.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.pokewiki.de/Dschungel_(TCG)",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained exact article fields",
+        "expectedIdentifiers": [
+          "Jungle",
+          "Deutsch",
+          "2000-06"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained localized release-date excerpt; no independent physical finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokewiki-jungle-de-release-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "German"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "set"
+            ],
+            "timeRange": {
+              "start": "2000-06",
+              "end": "2000-06",
+              "basis": "Only this retained Jungle article field: German-language expansion debut; country Germany is not independently named by this field"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokewiki-jungle-de-release-date",
+          "outOfScopeChallengeObservationId": "obs-pokewiki-jungle-de-release-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other language or market fields",
+              "unsupported finer date precision",
+              "separate first-edition/unlimited/reprint waves",
+              "unretained articles and expansions",
+              "card existence or set membership",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The same retained infobox states Englisch: 16.06.1999. That separate English date cannot supply a German day or replace Deutsch: Juni 2000. Deutsch is a native language qualifier, not an independently stated Germany-only distribution field."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokepedia-jungle-fr-release-date",
+      "providerId": "pokepedia",
+      "label": "Poképédia Jungle: exact France release day",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokepedia.fr/Jungle_(JCC)"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Historical date statements are retained manually with exact source-native qualifiers, precision, retrieval metadata and separate response/excerpt SHA-256. Re-review any changed article or expanded scope; no live adapter or completeness inference.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.pokepedia.fr/Jungle_(JCC)",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained exact article fields",
+        "expectedIdentifiers": [
+          "Jungle",
+          "France",
+          "2000-07-01"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained localized release-date excerpt; no independent physical finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokepedia-jungle-fr-release-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "French"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "set"
+            ],
+            "timeRange": {
+              "start": "2000-07-01",
+              "end": "2000-07-01",
+              "basis": "Only this retained Jungle article field: France only; no Canada, Belgium, Switzerland or other French-speaking market inferred"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokepedia-jungle-fr-release-date",
+          "outOfScopeChallengeObservationId": "obs-pokepedia-jungle-fr-release-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other language or market fields",
+              "unsupported finer date precision",
+              "separate first-edition/unlimited/reprint waves",
+              "unretained articles and expansions",
+              "card existence or set membership",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The same retained infobox distinguishes Amérique du Nord 16 juin 1999 from France 01 juillet 2000. The North America field cannot date France or another French-speaking market; no separate first-edition or unlimited wave is dated."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "wikidex-jungle-es-release-date",
+      "providerId": "wikidex",
+      "label": "WikiDex Jungla: exact Spain release year",
+      "match": {
+        "urlPrefixes": [
+          "https://www.wikidex.net/wiki/Jungla_(TCG)"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Historical date statements are retained manually with exact source-native qualifiers, precision, retrieval metadata and separate response/excerpt SHA-256. Re-review any changed article or expanded scope; no live adapter or completeness inference.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained exact article fields",
+        "expectedIdentifiers": [
+          "Jungle",
+          "ES",
+          "2000"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained localized release-date excerpt; no independent physical finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "wikidex-jungle-es-release-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "set"
+            ],
+            "timeRange": {
+              "start": "2000",
+              "end": "2000",
+              "basis": "Only this retained Jungle article field: Spain (ES), not Hispanic America (HA)"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-wikidex-jungle-es-release-date",
+          "outOfScopeChallengeObservationId": "obs-wikidex-jungle-es-release-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other language or market fields",
+              "unsupported finer date precision",
+              "separate first-edition/unlimited/reprint waves",
+              "unretained articles and expansions",
+              "card existence or set membership",
+              "physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The same retained field states 2000 (ES), Desconocida (HA), and 16 de junio de 1999 (EE.UU.). Neither the United States day nor a month from another source can be substituted for the Spain year. HA unknown cannot establish absence or a Spain/Latin America launch date."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "providerId": "pokemon-official",
+      "label": "Official localized press: named Snorlax 151 ETB product release dates",
+      "match": {
+        "urlPrefixes": [
+          "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+          "https://press.pokemon.com/pt-BR/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+          "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Die-Erweiterung-Karmesin-Purpur-151-des-Pokemon-Samme",
+          "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-lextension-Ecarlate-et-Violet-151-du-Jeu-de-Cartes-a-Colle",
+          "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+          "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Historical date statements are retained manually with exact source-native qualifiers, precision, retrieval metadata and separate response/excerpt SHA-256. Re-review any changed article or expanded scope; no live adapter or completeness inference.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained exact article fields",
+        "expectedIdentifiers": [
+          "Scarlet & Violet—151",
+          "named localized Elite Trainer Box containing Snorlax",
+          "2023-09-22"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained localized release-date excerpt; no independent physical finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-en-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article en (English article names U.S., Canada and U.K. for Pokémon Center ETB); existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-en",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        },
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-pt-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Portuguese"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article pt-BR (Brazilian Portuguese article; no Portugal-specific claim); existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-pt",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        },
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-de-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "German"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article de; existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-de",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        },
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-fr-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "French"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article fr; existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-fr",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        },
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-it-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Italian"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article it; existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-it",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        },
+        {
+          "edgeId": "pokemon-official-151-etb-press-dates-es-es-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "Spanish"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-09-22",
+              "end": "2023-09-22",
+              "basis": "Only the named Snorlax 151 ETB in retained localized article es (European Spanish portal; no Hispanic America transfer); existing WEST localization binding retained separately."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicitly retained positive date field establishes only its named release scope. Missing fields, precision, products, languages and markets remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokemon-official-151-etb-press-dates-es-es",
+          "outOfScopeChallengeObservationId": "obs-pokemon-official-151-etb-press-product-boundary",
+          "boundary": {
+            "outsideScope": [
+              "separate 151 Ultra-Premium Collection or other products",
+              "unretained articles or languages",
+              "additional markets or inferred printing waves",
+              "collector number or card existence",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained Italian article dates the Snorlax Set Allenatore Fuoriclasse to 22 settembre 2023 and separately dates Collezione ultra premium to 6 ottobre 2023. A common expansion name cannot transfer the ETB date to another product."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "jp-tag-bolt-campaign-release-date",
+      "providerId": "pokemon-card-jp",
+      "label": "Japan official Tag Bolt gift campaign: exact first-availability date",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon-card.com/info/2018/20181130_001515.html"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Manual exact historical product-date excerpts only, with retained response and excerpt SHA-256, native market qualifier and precision. Re-review any changed source or expanded scope; missing pages or fields remain unknown.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained named product or campaign fields",
+        "expectedIdentifiers": [
+          "named product or campaign",
+          "native availability field",
+          "native market qualifier"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained named product or campaign date excerpt, no physical-finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "jp-tag-bolt-campaign-release-date-sm297-date-positive",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2018-12-07",
+              "end": "2018-12-07",
+              "basis": "Only this exact retained native source field: Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-jp-tag-bolt-campaign-release-date-sm297-date",
+          "outOfScopeChallengeObservationId": "obs-jp-tag-bolt-campaign-release-date-sm297-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The native campaign period is 2018年12月7日（金）～なくなり次第終了. While-supplies-last is not a fixed end date or a date for English Team Up tins; プレミアムキラ wording is retained context and this edge claims no finish."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "providerId": "pokemon-card-asia",
+      "label": "Asia official retained Taiwan, Indonesia and Singapore product/campaign date fields",
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/tw/archive/special/card/sv4",
+          "https://asia.pokemon-card.com/tw/archive/special/card/classic",
+          "https://asia.pokemon-card.com/id/archives/2854",
+          "https://asia.pokemon-card.com/sg/archives/6689"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Manual exact historical product-date excerpts only, with retained response and excerpt SHA-256, native market qualifier and precision. Re-review any changed source or expanded scope; missing pages or fields remain unknown.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained named product or campaign fields",
+        "expectedIdentifiers": [
+          "named product or campaign",
+          "native availability field",
+          "native market qualifier"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained named product or campaign date excerpt, no physical-finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-selected-product-campaign-release-dates-tw-sv4k-date-positive",
+          "coverage": {
+            "localities": [
+              "TW"
+            ],
+            "languages": [
+              "T-Chinese"
+            ],
+            "scripts": [
+              "Hant"
+            ],
+            "productCategories": [
+              "set"
+            ],
+            "timeRange": {
+              "start": "2023-11-10",
+              "end": "2023-11-10",
+              "basis": "Only this exact retained native source field: Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date",
+          "outOfScopeChallengeObservationId": "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained native product field names 古代咆哮 and says 內含5張卡 ※卡牌為隨機封入. Its launch date cannot establish presence, absence, rarity or finish of any individual random card, nor date a Japanese product."
+          }
+        },
+        {
+          "edgeId": "asia-selected-product-campaign-release-dates-tw-classic-date-positive",
+          "coverage": {
+            "localities": [
+              "TW"
+            ],
+            "languages": [
+              "T-Chinese"
+            ],
+            "scripts": [
+              "Hant"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-11-10",
+              "end": "2023-11-10",
+              "basis": "Only this exact retained native source field: Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-asia-selected-product-campaign-release-dates-tw-classic-date",
+          "outOfScopeChallengeObservationId": "obs-asia-selected-product-campaign-release-dates-tw-classic-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The source-native Classic section distinguishes 預約開始日：10/12（四） from 取貨日：11/10（五）發售之後 and ●發售日：2023年11月10日. Prebooking 10/12 cannot date retail release or the Japanese lottery shipments."
+          }
+        },
+        {
+          "edgeId": "asia-selected-product-campaign-release-dates-id-chatime-date-positive",
+          "coverage": {
+            "localities": [
+              "ID"
+            ],
+            "languages": [
+              "Indonesian"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2022-12-12",
+              "end": "2022-12-12",
+              "basis": "Only this exact retained native source field: Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-asia-selected-product-campaign-release-dates-id-chatime-date",
+          "outOfScopeChallengeObservationId": "obs-asia-selected-product-campaign-release-dates-id-chatime-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained native article says Mulai 12 Desember 2022 and Distribusi kartu promo berakhir begitu stok habis, with random packs of six card types. This cannot supply a fixed end date, nationwide allocation-wave date, individual finish, or first date for another Indonesian campaign."
+          }
+        },
+        {
+          "edgeId": "asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-positive",
+          "coverage": {
+            "localities": [
+              "SEA"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2025-03-28",
+              "end": "2025-03-28",
+              "basis": "Only this exact retained native source field: Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference The source-native campaign asset path contains /2025/02/; the exact-card Bulbapedia campaign history independently identifies the same 2025 Journey Together event. The visible March 28 wording is not itself a standalone year statement."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date",
+          "outOfScopeChallengeObservationId": "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The exact Singapore excerpt says redemption from March 28 with a minimum purchase of $25 and while stocks last. It cannot date US $15 GameStop/Best Buy, Australia EB Games, Malaysia or Philippines campaigns or provide a fixed end date; year is separately contextualized rather than invented from the visible month/day."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "providerId": "pokemon-official",
+      "label": "Official archived named campaign and product release-date fields",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+          "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+          "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-11",
+      "freshnessPolicy": "Manual exact historical product-date excerpts only, with retained response and excerpt SHA-256, native market qualifier and precision. Re-review any changed source or expanded scope; missing pages or fields remain unknown.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+        "parameters": [],
+        "pagination": "not paginated; only individually retained named product or campaign fields",
+        "expectedIdentifiers": [
+          "named product or campaign",
+          "native availability field",
+          "native market qualifier"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "retained named product or campaign date excerpt, no physical-finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "tpci-selected-archived-product-release-dates-hop-retailer-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2025-03-28",
+              "end": "2025-03-28",
+              "basis": "Only this exact retained native source field: explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-tpci-selected-archived-product-release-dates-hop-retailer-date",
+          "outOfScopeChallengeObservationId": "obs-tpci-selected-archived-product-release-dates-hop-retailer-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained article is headed March 14, 2025 but explicitly starts the campaign March 28, 2025. It separately names Hop’s Dubwool at US Best Buy and Hop’s Snorlax at GameStop/EB Games; publication date and a different promo/card retailer cannot substitute for this exact campaign scope."
+          }
+        },
+        {
+          "edgeId": "tpci-selected-archived-product-release-dates-prize3-en-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-08-14",
+              "end": "2023-08-14",
+              "basis": "Only this exact retained native source field: US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-tpci-selected-archived-product-release-dates-prize3-en-date",
+          "outOfScopeChallengeObservationId": "obs-tpci-selected-archived-product-release-dates-prize3-en-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained article is dated August 07, 2023, gives Series Three availability starting August 14, 2023, and separately dates Series Four to February 2024. Neither publication date nor another series/date can date Series Three; the US article alone does not date German or other localized markets."
+          }
+        },
+        {
+          "edgeId": "tpci-selected-archived-product-release-dates-wcd2023-en-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2024-03-01",
+              "end": "2024-03-01",
+              "basis": "Only this exact retained native source field: US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date",
+          "outOfScopeChallengeObservationId": "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The exact retained product is named 2023 Pokémon TCG World Championships Decks but explicitly Launch: March 01, 2024. The tournament/deck-name year 2023 and archive capture timestamp cannot substitute for the retail product launch; localized European launch dates are not established."
+          }
+        },
+        {
+          "edgeId": "tpci-selected-archived-product-release-dates-prize3-de-date-positive",
+          "coverage": {
+            "localities": [
+              "WEST"
+            ],
+            "languages": [
+              "German"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2023-08-14",
+              "end": "2023-08-14",
+              "basis": "Only this exact retained native source field: native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained native date is positive evidence for its exact named product or campaign only; omissions cannot establish absence or completeness."
+          },
+          "knownPositiveObservationId": "obs-tpci-selected-archived-product-release-dates-prize3-de-date",
+          "outOfScopeChallengeObservationId": "obs-tpci-selected-archived-product-release-dates-prize3-de-date-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other articles, products or campaigns",
+              "other markets or languages",
+              "unsupported finer date precision or individual printing waves",
+              "card identity or existence",
+              "set membership, rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained native article is dated 07. August 2023, explicitly says Serie-3-Preispack ab dem 14. August 2023, and separates Serie 4 im Februar 2024. Publication and later-series dates cannot date Serie 3, and US English date inheritance is unnecessary."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -9541,6 +10714,1402 @@
         "52poke-cn-battle-academy-membership"
       ],
       "outcome": "Exact positive localized card/product membership only; printed full code independently inspected in SPEC-0631."
+    },
+    {
+      "observationId": "obs-pokewiki-jungle-de-release-date",
+      "surfaceId": "pokewiki-jungle-de-release-date",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+      "queryParameters": {
+        "field": "localized release date",
+        "nativeQualifier": "Deutsch"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pokewiki-jungle",
+          "sourceUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "articleRevisionId": 2700986,
+          "responseSha256": "0af70831e46096f68171ed2ba1406c6b9bcc234fa1f943a85319d08834cb1d9a",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Dschungel Englisch Jungle Erscheinungstermin Deutsch: Juni 2000 Englisch: 16.06.1999",
+          "excerptSha256": "f6459fa177dc3e1c6870c6415dc2d7fe8849e0565a201621d8aef552eff27db5",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "nativeQualifier": "Deutsch",
+          "date": "2000-06",
+          "precision": "month",
+          "approximate": false,
+          "scope": "German-language expansion debut; country Germany is not independently named by this field",
+          "field": "releaseDate",
+          "authorityTier": 3,
+          "limits": "Exact named expansion debut only. No card existence, set membership, finish, absence or completeness capability; no individual printing or reprint-wave date inferred. The blanket Bulbapedia non-English February 2000 statement remains disputed rather than silently overwritten.",
+          "licenseEvidence": {
+            "excerpt": "https://creativecommons.org/licenses/by-sa/3.0/de/",
+            "excerptSha256": "16133b47c19595f8507ed1b924ee72ceba60096d84e5effaf3c5db989684bc30",
+            "hashScope": "UTF-8 footer link/text excerpt only"
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "Deutsch",
+        "2000-06"
+      ],
+      "validatesEdges": [
+        "pokewiki-jungle-de-release-date-positive"
+      ],
+      "outcome": "The retained native localized field supports only 2000-06 at month precision for German-language expansion debut; country Germany is not independently named by this field."
+    },
+    {
+      "observationId": "obs-pokewiki-jungle-de-release-date-boundary",
+      "surfaceId": "pokewiki-jungle-de-release-date",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+      "queryParameters": {
+        "challenge": "cross-field date transfer and unsupported finer precision"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pokewiki-jungle",
+          "sourceUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "articleRevisionId": 2700986,
+          "responseSha256": "0af70831e46096f68171ed2ba1406c6b9bcc234fa1f943a85319d08834cb1d9a",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Dschungel Englisch Jungle Erscheinungstermin Deutsch: Juni 2000 Englisch: 16.06.1999",
+          "excerptSha256": "f6459fa177dc3e1c6870c6415dc2d7fe8849e0565a201621d8aef552eff27db5",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "unsupportedInference": "The same retained infobox states Englisch: 16.06.1999. That separate English date cannot supply a German day or replace Deutsch: Juni 2000. Deutsch is a native language qualifier, not an independently stated Germany-only distribution field."
+        }
+      },
+      "expectedIdentifiers": [
+        "Deutsch",
+        "1999"
+      ],
+      "validatesEdges": [
+        "pokewiki-jungle-de-release-date-positive"
+      ],
+      "outcome": "The same retained infobox states Englisch: 16.06.1999. That separate English date cannot supply a German day or replace Deutsch: Juni 2000. Deutsch is a native language qualifier, not an independently stated Germany-only distribution field."
+    },
+    {
+      "observationId": "obs-pokepedia-jungle-fr-release-date",
+      "surfaceId": "pokepedia-jungle-fr-release-date",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+      "queryParameters": {
+        "field": "localized release date",
+        "nativeQualifier": "France"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pokepedia-jungle",
+          "sourceUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "articleRevisionId": 3158209,
+          "responseSha256": "135f4fc4816b0070ee30521b3cd5ae890cc885498fe2181d3800b7c7f4e8de95",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Sortie Amérique du Nord 16 juin 1999 France 01 juillet 2000",
+          "excerptSha256": "8fb109c005e6f6c9230460bb467c653b4b0b374aadee92fc86961371974aa20e",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "nativeQualifier": "France",
+          "date": "2000-07-01",
+          "precision": "day",
+          "approximate": false,
+          "scope": "France only; no Canada, Belgium, Switzerland or other French-speaking market inferred",
+          "field": "releaseDate",
+          "authorityTier": 3,
+          "limits": "Exact named expansion debut only. No card existence, set membership, finish, absence or completeness capability; no individual printing or reprint-wave date inferred. The blanket Bulbapedia non-English February 2000 statement remains disputed rather than silently overwritten.",
+          "licenseEvidence": {
+            "excerpt": "https://creativecommons.org/licenses/by-nc-sa/3.0/",
+            "excerptSha256": "973192afbb0fa154eae3b25fb5dd550d1ea2f994df57a45cf93396fdead208b3",
+            "hashScope": "UTF-8 footer link/text excerpt only"
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "France",
+        "2000-07-01"
+      ],
+      "validatesEdges": [
+        "pokepedia-jungle-fr-release-date-positive"
+      ],
+      "outcome": "The retained native localized field supports only 2000-07-01 at day precision for France only; no Canada, Belgium, Switzerland or other French-speaking market inferred."
+    },
+    {
+      "observationId": "obs-pokepedia-jungle-fr-release-date-boundary",
+      "surfaceId": "pokepedia-jungle-fr-release-date",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+      "queryParameters": {
+        "challenge": "cross-field date transfer and unsupported finer precision"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pokepedia-jungle",
+          "sourceUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "articleRevisionId": 3158209,
+          "responseSha256": "135f4fc4816b0070ee30521b3cd5ae890cc885498fe2181d3800b7c7f4e8de95",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Sortie Amérique du Nord 16 juin 1999 France 01 juillet 2000",
+          "excerptSha256": "8fb109c005e6f6c9230460bb467c653b4b0b374aadee92fc86961371974aa20e",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "unsupportedInference": "The same retained infobox distinguishes Amérique du Nord 16 juin 1999 from France 01 juillet 2000. The North America field cannot date France or another French-speaking market; no separate first-edition or unlimited wave is dated."
+        }
+      },
+      "expectedIdentifiers": [
+        "France",
+        "1999"
+      ],
+      "validatesEdges": [
+        "pokepedia-jungle-fr-release-date-positive"
+      ],
+      "outcome": "The same retained infobox distinguishes Amérique du Nord 16 juin 1999 from France 01 juillet 2000. The North America field cannot date France or another French-speaking market; no separate first-edition or unlimited wave is dated."
+    },
+    {
+      "observationId": "obs-wikidex-jungle-es-release-date",
+      "surfaceId": "wikidex-jungle-es-release-date",
+      "kind": "known-positive",
+      "queryUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+      "queryParameters": {
+        "field": "localized release date",
+        "nativeQualifier": "ES"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "wikidex-jungle",
+          "sourceUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "articleRevisionId": 3490374,
+          "responseSha256": "2896dafdc206f989c6c166316f47ea72773813c0efd154ccf80a9dda6612de1f",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Fecha de lanzamiento: 2000 (ES) Desconocida (HA) 16 de junio de 1999 (EE.UU.) 5 de marzo de 1997 (JA)",
+          "excerptSha256": "9004ccd069ba6969b35518cba396bd69df03893b8452c180565211afdcd9c7b5",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "nativeQualifier": "ES",
+          "date": "2000",
+          "precision": "year",
+          "approximate": false,
+          "scope": "Spain (ES), not Hispanic America (HA)",
+          "field": "releaseDate",
+          "authorityTier": 3,
+          "limits": "Exact named expansion debut only. No card existence, set membership, finish, absence or completeness capability; no individual printing or reprint-wave date inferred. The blanket Bulbapedia non-English February 2000 statement remains disputed rather than silently overwritten.",
+          "licenseEvidence": {
+            "excerpt": "El contenido está disponible bajo la licencia Creative Commons Reconocimiento-Compartir bajo la misma licencia 3.0 (Unported) (CC-BY-SA) a menos que se indique lo contrario.",
+            "excerptSha256": "87888f0362c09e6913883587d60bd6afe49cfab171bb27c243f021eabb6d5ad2",
+            "hashScope": "UTF-8 footer link/text excerpt only"
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "ES",
+        "2000"
+      ],
+      "validatesEdges": [
+        "wikidex-jungle-es-release-date-positive"
+      ],
+      "outcome": "The retained native localized field supports only 2000 at year precision for Spain (ES), not Hispanic America (HA)."
+    },
+    {
+      "observationId": "obs-wikidex-jungle-es-release-date-boundary",
+      "surfaceId": "wikidex-jungle-es-release-date",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+      "queryParameters": {
+        "challenge": "cross-field date transfer and unsupported finer precision"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "wikidex-jungle",
+          "sourceUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "articleRevisionId": 3490374,
+          "responseSha256": "2896dafdc206f989c6c166316f47ea72773813c0efd154ccf80a9dda6612de1f",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Fecha de lanzamiento: 2000 (ES) Desconocida (HA) 16 de junio de 1999 (EE.UU.) 5 de marzo de 1997 (JA)",
+          "excerptSha256": "9004ccd069ba6969b35518cba396bd69df03893b8452c180565211afdcd9c7b5",
+          "excerptHashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "unsupportedInference": "The same retained field states 2000 (ES), Desconocida (HA), and 16 de junio de 1999 (EE.UU.). Neither the United States day nor a month from another source can be substituted for the Spain year. HA unknown cannot establish absence or a Spain/Latin America launch date."
+        }
+      },
+      "expectedIdentifiers": [
+        "ES",
+        "1999"
+      ],
+      "validatesEdges": [
+        "wikidex-jungle-es-release-date-positive"
+      ],
+      "outcome": "The same retained field states 2000 (ES), Desconocida (HA), and 16 de junio de 1999 (EE.UU.). Neither the United States day nor a month from another source can be substituted for the Spain year. HA unknown cannot establish absence or a Spain/Latin America launch date."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-en",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "en (English article names U.S., Canada and U.K. for Pokémon Center ETB)"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-en",
+          "sourceUrl": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+          "retrievedAt": "2026-10-11T10:39:23.553195+00:00",
+          "responseSha256": "5cb3353e3e9c06f912bdcdbb6f3c950a62d816400ddcf840f80584695c973a66",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Sept. 22, 2023 —\nThe Pokémon Company International has released the latest expansion for the bestselling Pokémon Trading Card Game (TCG),\nScarlet & Violet—151\n, available worldwide beginning today at participating retailers, including Pokémon Center, the premier online destination for official Pokémon merchandise in the\nU.S.\n,\nCanada\nand the\nU.K.\nAs a first for the Pokémon TCG,\nScarlet & Violet—151\nfeatures all\noriginal 151 Pokémon from the Kanto region newly reimagined in Paldea, allowing Trainers a chance to collect and battle with some of the brand’s most iconic Pokémon through the lens of the\nScarlet & Violet\nSeries. The expansion features cards in Pokédex order and includes a variety of illustration rare and special illustration rare alternate art to showcase a new side of these Pokémon.\nThe following\nScarlet & Violet—151\nproducts are now available:\nScarlet & Violet—151\nPokémon Center Elite Trainer Box (exclusively at Pokémon Center in the\nU.S.\n,\nCanada\nand the\nU.K.\n):\nIncludes 11\nScarlet & Violet—151\nbooster packs; two copies of an illustration rare-style promo card featuring Snorlax, with one showcasing the Pokémon Center logo; and various gameplay accessories\nScarlet & Violet—151\nElite Trainer Box:\nIncludes nine\nScarlet & Violet—151\nbooster packs, one illustration rare-style promo card featuring Snorlax and various gameplay accessories\nScarlet & Violet—151",
+          "excerptSha256": "a1bcdc701c16fc458f1e670cd59dafdf76308626c430e65f487feba472157e4e",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "en (English article names U.S., Canada and U.K. for Pokémon Center ETB)",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085",
+              "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:en",
+              "setCode": "SVP",
+              "number": "051"
+            },
+            {
+              "itemId": "item-85d569de-bd2a-51f6-a00e-7d870e35b60f",
+              "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:en",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability.",
+          "publisherProvenance": {
+            "sourceUrl": "https://press.pokemon.com/en",
+            "retrievedAt": "2026-10-11T10:36:08.122540+00:00",
+            "responseSha256": "99df1503abd993934553312b06dfca11324dfacaa16159d2afed7afe325b47b9",
+            "excerpt": "<title>The Pok&#233;mon Company North America Official Press Site</title>\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/\" hreflang=\"en-gb\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/pl/\" hreflang=\"pl\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/fr-BE/\" hreflang=\"fr-be\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/fr/\" hreflang=\"fr\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/de/\" hreflang=\"de\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/it/\" hreflang=\"it\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/nl/\" hreflang=\"nl\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/pt/\" hreflang=\"pt\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/ru/\" hreflang=\"ru\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/es/\" hreflang=\"es\" />\n<link rel=\"alternate\" href=\"https://pokemon.gamespress.com/se/\" hreflang=\"se\" />\n<a href=\"https://pokemon.gamespress.com/\">",
+            "excerptSha256": "a27123f46d76bf6c361f8e7caaa8a759fdcd4a651e5b07317ed9ca5e3838bf1f",
+            "hashScope": "UTF-8 title/link excerpt only",
+            "limits": "Public publisher press portal names its site and links European localized official press portals. No credential/session content retained."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Snorlax",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-en-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-pt",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://press.pokemon.com/pt-BR/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "pt-BR (Brazilian Portuguese article; no Portugal-specific claim)"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-pt",
+          "sourceUrl": "https://press.pokemon.com/pt-BR/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+          "retrievedAt": "2026-10-11T10:39:23.554039+00:00",
+          "responseSha256": "e3f9cd4cbf7be0544de5a43101a6f63cb0fa10231c7ccc515f24c41accefcda8",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "22 de setembro de 2023.\nA The Pokémon Company International lançou hoje a mais nova expansão do sucesso de vendas Pokémon Estampas Ilustradas,\nEscarlate e Violeta — 151\n, disponível em lojas participantes do mundo todo.\nPela primeira vez no Pokémon Estampas Ilustradas,\nEscarlate e Violeta — 151\nconta com todos os 151 Pokémon originais da região de Kanto, com um toque de Paldea, permitindo aos Treinadores a chance de colecionar e batalhar com alguns dos Pokémon mais icônicos da marca através das lentes da série\nEscarlate e Violeta\n. A expansão apresenta cartas na ordem do Pokédex e inclui uma variedade de cartas Ilustração Rara e Ilustração Rara Especial com estilos de arte alternativos para mostrar um novo lado dos Pokémon.\nConfira os seguintes produtos de Escarlate e Violeta — 151:\nColeção Treinador Avançado de\nEscarlate e Violeta — 151\n:\ninclui 20 pacotes de booster de\nEscarlate e Violeta — 151\n, uma carta Ilustração Rara promocional de Snorlax e vários acessórios de jogo",
+          "excerptSha256": "b2bcc952d4766bd9c4a70048e2ab05ed84e0c7ffdf1c84d2c964e3aa75a61313",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "pt-BR (Brazilian Portuguese article; no Portugal-specific claim)",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-3a558899-680c-55ea-a50b-2bd247fe7c13",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:pt",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability."
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Snorlax",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-pt-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-de",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Die-Erweiterung-Karmesin-Purpur-151-des-Pokemon-Samme",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "de"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-de",
+          "sourceUrl": "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Die-Erweiterung-Karmesin-Purpur-151-des-Pokemon-Samme",
+          "retrievedAt": "2026-10-11T10:39:24.662526+00:00",
+          "responseSha256": "a35785b7547918bf8d7e993901176bff361e79767a9b63722edf2649ed0ccdf7",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "22. September 2023\n: The Pokémon Company International hat die neueste Erweiterung,\nKarmesin & Purpur – 151\n, des beliebten Pokémon-Sammelkartenspiels veröffentlicht. Sie ist ab heute weltweit bei teilnehmenden Einzelhändlern erhältlich.\nZum ersten Mal im Pokémon-Sammelkartenspiel enthält\nKarmesin & Purpur – 151\nalle ursprünglichen 151 Pokémon aus der Kanto-Region, die in Paldea neu interpretiert werden. Sie gibt Trainern die Möglichkeit, einige der kultigsten Pokémon der Marke aus dem Blickwinkel der Serie\nKarmesin & Purpur\nzu sammeln und mit ihnen zu kämpfen. Die Erweiterung enthält Karten in Pokédex-Reihenfolge und eine Vielzahl von alternativen Illustrationen der Seltenheiten „selten, Illustration“ und „selten, besondere Illustration“, um eine neue Seite jener Pokémon zu zeigen.\nFolgende Produkte der Erweiterung\nKarmesin & Purpur – 151\nsind jetzt erhältlich:\nTop-Trainer-Box\nKarmesin & Purpur – 151\n:\nEnthält 9 Boosterpacks der Erweiterung\nKarmesin & Purpur – 151\n, 1 Relaxo-Promokarte mit der Seltenheit „selten, Illustration“ und diverses Spielzubehör.\nPoster-Kollektion",
+          "excerptSha256": "7d5c88c1be572349ab1ac9cea4ff83e53111425991e1fbc62eb6122c4673d40c",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "de",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-6ff040a0-558c-5a4e-b15b-c8692a5d46a6",
+              "cardReleaseId": "RELEASE:WEST:German:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:de",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability."
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Relaxo",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-de-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-fr",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-lextension-Ecarlate-et-Violet-151-du-Jeu-de-Cartes-a-Colle",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "fr"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-fr",
+          "sourceUrl": "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-lextension-Ecarlate-et-Violet-151-du-Jeu-de-Cartes-a-Colle",
+          "retrievedAt": "2026-10-11T10:39:24.714982+00:00",
+          "responseSha256": "ca021524b9d60291b6d1f0ed223c8e5834edf24e19db18e95fcb53bf51f59bb2",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Le 22 septembre 2023.\nThe Pokémon Company International vient de sortir sa nouvelle extension\nÉcarlate et Violet – 151\ndu célèbre Jeu de Cartes à Collectionner Pokémon (JCC). Celle-ci est disponible dès aujourd’hui dans les magasins participants du monde entier.\nPour la première fois dans le JCC Pokémon,\nÉcarlate et Violet – 151\nmet à l’honneur les 151 tout premiers Pokémon de la région de Kanto nouvellement fraîchement réinventés dans Paldea, permettant aux Dresseurs et Dresseuses de collectionner et de combattre avec certains des Pokémon les plus célèbres de la marque par le biais de la série\nÉcarlate et Violet\n. L’extension présente des cartes dans l’ordre du Pokédex et comprend une variété de cartes aux illustrations alternatives « illustration rare » et « illustration spéciale rare » qui montrent une nouvelle facette de ces Pokémon.\nLes produits Écarlate et Violet – 151 ci-dessous sont maintenant disponibles.\nCoffret Dresseur d’élite\nÉcarlate et Violet – 151\ncontenant 9 boosters\nÉcarlate et Violet – 151\n, une carte promo de Ronflex « illustration rare » et de nombreux accessoires de jeu.",
+          "excerptSha256": "1d9b2ac02d4f6e8f419711e0e111f1013ce1976f6a19fe267db7c60037f85eab",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "fr",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-e7910b9c-d973-5cb3-8a33-8195f6283035",
+              "cardReleaseId": "RELEASE:WEST:French:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:fr",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability."
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Ronflex",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-fr-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-it",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "it"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-it",
+          "sourceUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+          "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+          "responseSha256": "05f2bc46424f415d6468fd06aff1f1800d3ae9991c1d67f31ddee7f6163af55f",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Scarlatto e Violetto - 151\n, che verrà pubblicata in tutto il mondo il 22 settembre 2023, e che ha come protagonisti gli iconici Pokémon della regione di Kanto, tra cui Bulbasaur, Charmander, Squirtle, Snorlax, Mew e altri.\nIn arrivo l’espansione\nScarlatto e Violetto - 151\ndel GCC Pokémon\nPer la prima volta nel GCC Pokémon,\nScarlatto e Violetto - 151\nincluderà tutti i primissimi 151 Pokémon della regione di Kanto, riproposti in chiave attuale nella regione di Paldea, dando agli Allenatori la possibilità di collezionare e lottare con alcuni dei Pokémon più iconici del marchio nella serie\nScarlatto e Violetto\n. L’espansione propone carte che seguono l’ordine del Pokédex e include una varietà di carte rare illustrazione e rare illustrazione speciale per mostrare un volto inedito di questi Pokémon.\nTra le carte degne di nota di questa espansione compaiono:\n12 Pokémon-ex\n16 carte rare illustrazione e sette carte rare illustrazione speciale (Pokémon e carte Aiuto)\n16 carte ultrarare a figura intera impresse in modo speciale (Pokémon e carte Aiuto)\nTre carte rare iper dorate impresse in modo speciale\nLe carte dell’espansione\nScarlatto e Violetto - 151\nsaranno disponibili nei seguenti prodotti:\nSet Allenatore Fuoriclasse dell’espansione\nScarlatto e Violetto - 151\n(disponibile il 22 settembre 2023)\nche include nove buste di questa espansione, una carta promozionale rara illustrazione di Snorlax e vari accessori di gioco.\nCollezione con poster dell’espansione\nScarlatto e Violetto - 151\n(disponibile il 22 settembre 2023)\nche include tre buste di questa espansione, tre carte promozionali con protagonisti i primi compagni d’avventura della regione di Kanto e un poster stampato su entrambi i lati con i primissimi 151 Pokémon e le carte relative a ogni Pokémon dell’espansione.\nCollezione con raccoglitore dell’espansione\nScarlatto e Violetto - 151",
+          "excerptSha256": "f0b5e952f6bce90ecef9096c40e57ce25cec9b8db6313f1e757ab5ea5fe77fef",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "it",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-6bf73acf-2d3d-5208-8fdf-ce2196a6f1d1",
+              "cardReleaseId": "RELEASE:WEST:Italian:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:it",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability."
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Snorlax",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-it-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-dates-es-es",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
+      "queryParameters": {
+        "field": "named ETB product release date",
+        "nativeLocale": "es (European Spanish portal; no Hispanic America transfer)"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-es-ES",
+          "sourceUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
+          "retrievedAt": "2026-10-11T10:39:25.524822+00:00",
+          "responseSha256": "60b11a282b07bb6db41bec581ccbff449aa42d6035f18b804ff899dbbdbe7cde",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "22 de septiembre de 2023.\nThe Pokémon Company International acaba de lanzar la nueva expansión del Juego de Cartas Coleccionables Pokémon (JCC Pokémon),\nEscarlata y Púrpura-151\n, disponible desde hoy en todo el mundo en los puntos de venta habituales.\nPor primera vez en JCC Pokémon, la nueva expansión\nEscarlata y Púrpura-151\nestá protagonizada por los\n151 Pokémon originales de la región de Kanto, ahora reinventados en Paldea, ofreciendo a los Entrenadores la oportunidad de coleccionar y combatir con algunos de los Pokémon más icónicos de la marca, reinterpretados desde la perspectiva de la serie Escarlata y Púrpura. Las cartas de la expansión siguen el orden de la Pokédex e incluyen una variedad de ilustraciones alternativas de rareza Rara Ilustración y Rara Ilustración Especial que revelan una nueva dimensión de estos Pokémon.\nYa están disponibles los siguientes productos de Escarlata y Púrpura-151:\nCaja de Entrenador Élite de\nEscarlata y Púrpura-151\n:\nIncluye nueve paquetes de mejora de\nEscarlata y Púrpura-151\n, una carta de promoción con ilustración alternativa de Snorlax y varios accesorios del juego.\nColección con póster de\nEscarlata y Púrpura-151\n:\nIncluye tres paquetes de mejora de\nEscarlata y Púrpura-151",
+          "excerptSha256": "b9f88258b52a4f779d1170ebad87c67dd10d702d9a21dd0bf8319d903622da8d",
+          "excerptHashScope": "UTF-8 excerpt bytes",
+          "nativeLocale": "es (European Spanish portal; no Hispanic America transfer)",
+          "field": "releaseDate",
+          "date": "2023-09-22",
+          "precision": "day",
+          "approximate": false,
+          "matchedExistingTargets": [
+            {
+              "itemId": "item-18f233d7-5522-5d17-9efb-8f8372226d31",
+              "cardReleaseId": "RELEASE:WEST:Spanish:SVP:051:Snorlax-Voraciousness-Thudding-Press",
+              "localizationId": "LOCALIZATION:WEST:es-ES",
+              "setCode": "SVP",
+              "number": "051"
+            }
+          ],
+          "limits": "Date-only named ETB product statement. Existing cardReleaseId/locale identity binding is independently retained; the press article does not print collector number 051. No card existence, finish, rarity, printing-wave, completeness or absence capability."
+        }
+      },
+      "expectedIdentifiers": [
+        "151",
+        "Snorlax",
+        "2023-09-22"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-es-es-positive"
+      ],
+      "outcome": "The exact localized official article explicitly dates its named Snorlax 151 ETB product to 2023-09-22; only this date field is supported."
+    },
+    {
+      "observationId": "obs-pokemon-official-151-etb-press-product-boundary",
+      "surfaceId": "pokemon-official-151-etb-press-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+      "queryParameters": {
+        "challenge": "same expansion, different named product"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "O-SVP051-it",
+          "sourceUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+          "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+          "responseSha256": "05f2bc46424f415d6468fd06aff1f1800d3ae9991c1d67f31ddee7f6163af55f",
+          "responseHashScope": "original HTTP response bytes",
+          "excerpt": "Collezione ultra premium\ndell’espansione\nScarlatto e Violetto - 151\n(disponibile il 6 ottobre 2023)\nche include 16 buste di questa espansione, una carta in metallo rara iper di Mew-ex, una carta promozionale rara illustrazione speciale di Mew-ex, una carta promozionale rara illustrazione di Mewtwo, un tabellone di gioco con bordi impunturati di Mew, un portamazzo, una moneta di Mew e vari accessori di gioco.",
+          "excerptSha256": "0a32922f690abec145043102ce1540f90b826e88548042f5b9e1a6f4ebf0de3c",
+          "excerptHashScope": "UTF-8 retained visible-text excerpt bytes",
+          "nativeProduct": "Collezione ultra premium dell’espansione Scarlatto e Violetto - 151",
+          "nativeDate": "6 ottobre 2023",
+          "unsupportedInference": "Assigning the Snorlax ETB 2023-09-22 date to the separately named Ultra-Premium Collection or its different promos."
+        }
+      },
+      "expectedIdentifiers": [
+        "Collezione ultra premium",
+        "6 ottobre 2023"
+      ],
+      "validatesEdges": [
+        "pokemon-official-151-etb-press-dates-en-positive",
+        "pokemon-official-151-etb-press-dates-pt-positive",
+        "pokemon-official-151-etb-press-dates-de-positive",
+        "pokemon-official-151-etb-press-dates-fr-positive",
+        "pokemon-official-151-etb-press-dates-it-positive",
+        "pokemon-official-151-etb-press-dates-es-es-positive"
+      ],
+      "outcome": "The real retained Italian product list gives the separate Ultra-Premium Collection 2023-10-06. The 151 expansion label therefore cannot justify applying the ETB 2023-09-22 date to another product, card or wave."
+    },
+    {
+      "observationId": "obs-jp-tag-bolt-campaign-release-date-sm297-date",
+      "surfaceId": "jp-tag-bolt-campaign-release-date",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "JP-DATE-sm297-campaign",
+          "sourceUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+          "retrievedAt": "2026-10-11T10:35:03.260221Z",
+          "responseSha256": "a49c6bd4626b73c806bc3d5f410be6707dcecd2867f3a57e67979ee46fb66c82",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "拡張パック「タッグボルト」1BOX購入で、1枚もらえる！\nプロモカード 「イーブイ＆カビゴンGX」（プレミアムキラ）\n「おうえん」でエネルギーを一気につけて、「ダンププレス」で大ダメージ！\nここでしか手に入らない、プレミアムキラのスペシャルアート仕様！\nポケモンカードジムとは？\nポケモンカードゲームのバトルを楽しめる、全国の公認店舗が「ポケモンカードジム」。公認大会や、ポケモンカードジム限定のキャンペーン、限定商品の販売を行っているよ。\n実施概要\nキャンペーン実施期間\n2018年12月7日（金）～なくなり次第終了\nキャンペーン実施店\nキャンペーンの\n実施店はこちら\n一部キャンペーンを実施していないお店もございます。キャンペーンの実施状況は、お店へお問い合わせください。\n対象商品\n拡張パック「タッグボルト」\nプレゼント\nポケモンカードジム限定プロモカード「イーブイ＆カビゴンGX」（プレミアムキラ） １枚\n＜拡張パック「タッグボルト」を1BOX（30パック）以上ご購入＞\n購入特典は、数に限りがございます。なくなり次第終了となりますので、あらかじめご了承ください。\nパックでお買い上げの場合は、一度に30パック以上お買い上げで購入特典をプレゼントいたします。",
+          "excerptSha256": "c5a3eda9d85a7a3dd350071756ff1f945ff4fd20c516698e1fd266a8c682c6a7",
+          "excerptHashScope": "UTF-8 bytes of retained relevant excerpt, not full response",
+          "nativeDateScope": "Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only",
+          "date": "2018-12-07",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "Python stdlib urllib HTTPS through inherited proxy; HTML parsed with stdlib html.parser into readable text; TLS verification enabled",
+          "excerptComposition": "contiguous exact substring of retained stdlib HTML-parser readable text"
+        }
+      },
+      "expectedIdentifiers": [
+        "2018-12-07",
+        "Japanese"
+      ],
+      "validatesEdges": [
+        "jp-tag-bolt-campaign-release-date-sm297-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2018-12-07 at day precision for Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only."
+    },
+    {
+      "observationId": "obs-jp-tag-bolt-campaign-release-date-sm297-date-boundary",
+      "surfaceId": "jp-tag-bolt-campaign-release-date",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "JP-DATE-sm297-campaign",
+          "sourceUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+          "retrievedAt": "2026-10-11T10:35:03.260221Z",
+          "responseSha256": "a49c6bd4626b73c806bc3d5f410be6707dcecd2867f3a57e67979ee46fb66c82",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "拡張パック「タッグボルト」1BOX購入で、1枚もらえる！\nプロモカード 「イーブイ＆カビゴンGX」（プレミアムキラ）\n「おうえん」でエネルギーを一気につけて、「ダンププレス」で大ダメージ！\nここでしか手に入らない、プレミアムキラのスペシャルアート仕様！\nポケモンカードジムとは？\nポケモンカードゲームのバトルを楽しめる、全国の公認店舗が「ポケモンカードジム」。公認大会や、ポケモンカードジム限定のキャンペーン、限定商品の販売を行っているよ。\n実施概要\nキャンペーン実施期間\n2018年12月7日（金）～なくなり次第終了\nキャンペーン実施店\nキャンペーンの\n実施店はこちら\n一部キャンペーンを実施していないお店もございます。キャンペーンの実施状況は、お店へお問い合わせください。\n対象商品\n拡張パック「タッグボルト」\nプレゼント\nポケモンカードジム限定プロモカード「イーブイ＆カビゴンGX」（プレミアムキラ） １枚\n＜拡張パック「タッグボルト」を1BOX（30パック）以上ご購入＞\n購入特典は、数に限りがございます。なくなり次第終了となりますので、あらかじめご了承ください。\nパックでお買い上げの場合は、一度に30パック以上お買い上げで購入特典をプレゼントいたします。",
+          "excerptSha256": "c5a3eda9d85a7a3dd350071756ff1f945ff4fd20c516698e1fd266a8c682c6a7",
+          "excerptHashScope": "UTF-8 bytes of retained relevant excerpt, not full response",
+          "nativeDateScope": "Japan Tag Bolt 1BOX purchase gift campaign for イーブイ＆カビゴンGX, campaign start only",
+          "date": "2018-12-07",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "Python stdlib urllib HTTPS through inherited proxy; HTML parsed with stdlib html.parser into readable text; TLS verification enabled",
+          "excerptComposition": "contiguous exact substring of retained stdlib HTML-parser readable text",
+          "unsupportedInference": "The native campaign period is 2018年12月7日（金）～なくなり次第終了. While-supplies-last is not a fixed end date or a date for English Team Up tins; プレミアムキラ wording is retained context and this edge claims no finish."
+        }
+      },
+      "expectedIdentifiers": [
+        "2018-12-07",
+        "Japanese"
+      ],
+      "validatesEdges": [
+        "jp-tag-bolt-campaign-release-date-sm297-date-positive"
+      ],
+      "outcome": "The native campaign period is 2018年12月7日（金）～なくなり次第終了. While-supplies-last is not a fixed end date or a date for English Team Up tins; プレミアムキラ wording is retained context and this edge claims no finish."
+    },
+    {
+      "observationId": "obs-jp-product-pages-classic-first-wave-date",
+      "surfaceId": "jp-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "JP-DATE-classic-official",
+          "sourceUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+          "retrievedAt": "2026-10-11T10:34:30.946818Z",
+          "responseSha256": "9817e3866ca676f8e5459dd916f8b637d1e11d30860e52bc576ae25569456181",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "【2月28日（火）追記】\n受付期間　2023年2月28日（火）10時00分～3月10日（金）23時59分\n当選発表　2023年4月26日（水）以降予定\n発送時期　2023年10月下旬以降予定\n商品情報\n●商品名：ポケモンカードゲーム Classic\n●希望小売価格：35,000円（税込）\n●内容物：\n・デッキ（カード60枚）…3個\n※構築デッキの性質上、同じカードが複数入っています。\n・プレイマット一体型ケース…1個\n・フリップデッキケース…3個\n・デッキシールド（64枚入り）…3セット\n・ツールボックス…1個\n・ダメカン…64個(10ダメカン…36個、50ダメカン…18個、100ダメカン…10個)\n・どく・やけどマーカー…各2個\n・銀球…2個\n●発売日：2023年10月下旬以降予定",
+          "excerptSha256": "5e99a88e2e34e5eb8c48776b0995111bc0869c756067d2532f5f716efbf0fbe5",
+          "excerptHashScope": "UTF-8 bytes of retained relevant excerpt, not full response",
+          "nativeDateScope": "only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave",
+          "date": "2023-10",
+          "precision": "month",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "Python stdlib urllib HTTPS through inherited proxy; HTML parsed with stdlib html.parser into readable text; TLS verification enabled",
+          "excerptComposition": "contiguous exact substring of retained stdlib HTML-parser readable text"
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-10",
+        "Japanese"
+      ],
+      "validatesEdges": [
+        "jp-product-pages-classic-first-wave-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2023-10 at month precision for only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave."
+    },
+    {
+      "observationId": "obs-jp-product-pages-classic-first-wave-date-boundary",
+      "surfaceId": "jp-product-pages",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "JP-DATE-classic-official",
+          "sourceUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+          "retrievedAt": "2026-10-11T10:34:30.946818Z",
+          "responseSha256": "9817e3866ca676f8e5459dd916f8b637d1e11d30860e52bc576ae25569456181",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "【2月28日（火）追記】\n受付期間　2023年2月28日（火）10時00分～3月10日（金）23時59分\n当選発表　2023年4月26日（水）以降予定\n発送時期　2023年10月下旬以降予定\n商品情報\n●商品名：ポケモンカードゲーム Classic\n●希望小売価格：35,000円（税込）\n●内容物：\n・デッキ（カード60枚）…3個\n※構築デッキの性質上、同じカードが複数入っています。\n・プレイマット一体型ケース…1個\n・フリップデッキケース…3個\n・デッキシールド（64枚入り）…3セット\n・ツールボックス…1個\n・ダメカン…64個(10ダメカン…36個、50ダメカン…18個、100ダメカン…10個)\n・どく・やけどマーカー…各2個\n・銀球…2個\n●発売日：2023年10月下旬以降予定",
+          "excerptSha256": "5e99a88e2e34e5eb8c48776b0995111bc0869c756067d2532f5f716efbf0fbe5",
+          "excerptHashScope": "UTF-8 bytes of retained relevant excerpt, not full response",
+          "nativeDateScope": "only Japanese Classic initial late-October-2023-or-later availability field on https://www.pokemon-card.com/ex/classic/index.html; no exact day and no later wave",
+          "date": "2023-10",
+          "precision": "month",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "Python stdlib urllib HTTPS through inherited proxy; HTML parsed with stdlib html.parser into readable text; TLS verification enabled",
+          "excerptComposition": "contiguous exact substring of retained stdlib HTML-parser readable text",
+          "unsupportedInference": "The same retained Japanese Classic excerpt distinguishes lottery entry 2023年2月28日～3月10日, winner notification 2023年4月26日以降, and shipment/release 2023年10月下旬以降予定. No lottery-entry or notification date is a release, no exact October day is supported, and no Western November or Taiwanese November date is imported."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-10",
+        "Japanese"
+      ],
+      "validatesEdges": [
+        "jp-product-pages-classic-first-wave-date-positive"
+      ],
+      "outcome": "The same retained Japanese Classic excerpt distinguishes lottery entry 2023年2月28日～3月10日, winner notification 2023年4月26日以降, and shipment/release 2023年10月下旬以降予定. No lottery-entry or notification date is a release, no exact October day is supported, and no Western November or Taiwanese November date is imported."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+          "sourceUrl": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+          "retrievedAt": "2026-10-11",
+          "responseSha256": "5aa883daf1238041d18bb7c55eacf7c71d9304e51552ef24a57b46f32dae6ad8",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "寶可夢集換式卡牌遊戲 朱&紫 擴充包「古代咆哮」 建議售價 49元 內容物 內含5張卡 ※卡牌為隨機封入。 發售日 2023年11月10日（五）",
+          "excerptSha256": "501e521a83f182ecf55156cec6de7a6f80c5fb6db4e8e04af8ea6c32907799f0",
+          "excerptHashScope": "UTF-8 retained excerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer",
+          "date": "2023-11-10",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "HTTP GET HTML through inherited session proxy",
+          "field": "releaseDate",
+          "fieldLimits": "Only the specified Traditional Chinese Taiwan/Hong Kong product; no other locality, finish, edition, or completeness asserted."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-11-10",
+        "T-Chinese"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-tw-sv4k-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2023-11-10 at day precision for Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date-boundary",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+          "sourceUrl": "https://asia.pokemon-card.com/tw/archive/special/card/sv4/",
+          "retrievedAt": "2026-10-11",
+          "responseSha256": "5aa883daf1238041d18bb7c55eacf7c71d9304e51552ef24a57b46f32dae6ad8",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "寶可夢集換式卡牌遊戲 朱&紫 擴充包「古代咆哮」 建議售價 49元 內容物 內含5張卡 ※卡牌為隨機封入。 發售日 2023年11月10日（五）",
+          "excerptSha256": "501e521a83f182ecf55156cec6de7a6f80c5fb6db4e8e04af8ea6c32907799f0",
+          "excerptHashScope": "UTF-8 retained excerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Taiwan Traditional Chinese 古代咆哮 exact native product launch; no Japan release-date transfer",
+          "date": "2023-11-10",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "HTTP GET HTML through inherited session proxy",
+          "field": "releaseDate",
+          "fieldLimits": "Only the specified Traditional Chinese Taiwan/Hong Kong product; no other locality, finish, edition, or completeness asserted.",
+          "unsupportedInference": "The retained native product field names 古代咆哮 and says 內含5張卡 ※卡牌為隨機封入. Its launch date cannot establish presence, absence, rarity or finish of any individual random card, nor date a Japanese product."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-11-10",
+        "T-Chinese"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-tw-sv4k-date-positive"
+      ],
+      "outcome": "The retained native product field names 古代咆哮 and says 內含5張卡 ※卡牌為隨機封入. Its launch date cannot establish presence, absence, rarity or finish of any individual random card, nor date a Japanese product."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-tw-classic-date",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+          "sourceUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+          "retrievedAt": "2026-10-11",
+          "responseSha256": "878176439dc402b08b97d77e38f8f280d47703aa03c3c3f232fbb98abbd5bd86",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "●發售日：2023年11月10日",
+          "excerptSha256": "5919304ad54c2b80e4967f11f1e30f63ae530b4ce55a9facc32551657ee1f03a",
+          "excerptHashScope": "UTF-8 retained excerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer",
+          "date": "2023-11-10",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "HTTP GET HTML through inherited session proxy",
+          "field": "releaseDate",
+          "fieldLimits": "Explicit Traditional Chinese product launch 2023-11-10. Presale booking 10/12 is not the release; no Japanese lottery shipping date transfer.",
+          "nativeContextExcerpt": "預約開始日：10/12（四）\n取貨日：　　11/10（五）發售之後",
+          "nativeContextExcerptSha256": "fcead2e484a1f39f4142022c7d46c570f38f0433021366919953f12a48420a48",
+          "nativeContextHashScope": "UTF-8 exact retained supplemental HTML/text excerpt only"
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-11-10",
+        "T-Chinese"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-tw-classic-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2023-11-10 at day precision for Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-tw-classic-date-boundary",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+          "sourceUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+          "retrievedAt": "2026-10-11",
+          "responseSha256": "878176439dc402b08b97d77e38f8f280d47703aa03c3c3f232fbb98abbd5bd86",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "●發售日：2023年11月10日",
+          "excerptSha256": "5919304ad54c2b80e4967f11f1e30f63ae530b4ce55a9facc32551657ee1f03a",
+          "excerptHashScope": "UTF-8 retained excerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Taiwan Traditional Chinese Classic native ●發售日 field; no Japanese shipping-wave transfer",
+          "date": "2023-11-10",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "HTTP GET HTML through inherited session proxy",
+          "field": "releaseDate",
+          "fieldLimits": "Explicit Traditional Chinese product launch 2023-11-10. Presale booking 10/12 is not the release; no Japanese lottery shipping date transfer.",
+          "nativeContextExcerpt": "預約開始日：10/12（四）\n取貨日：　　11/10（五）發售之後",
+          "nativeContextExcerptSha256": "fcead2e484a1f39f4142022c7d46c570f38f0433021366919953f12a48420a48",
+          "nativeContextHashScope": "UTF-8 exact retained supplemental HTML/text excerpt only",
+          "unsupportedInference": "The source-native Classic section distinguishes 預約開始日：10/12（四） from 取貨日：11/10（五）發售之後 and ●發售日：2023年11月10日. Prebooking 10/12 cannot date retail release or the Japanese lottery shipments."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-11-10",
+        "T-Chinese"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-tw-classic-date-positive"
+      ],
+      "outcome": "The source-native Classic section distinguishes 預約開始日：10/12（四） from 取貨日：11/10（五）發售之後 and ●發售日：2023年11月10日. Prebooking 10/12 cannot date retail release or the Japanese lottery shipments."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-id-chatime-date",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/id/archives/2854/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "official-id-chatime",
+          "sourceUrl": "https://asia.pokemon-card.com/id/archives/2854/",
+          "retrievedAt": "2026-10-11T10:36:14.799408+00:00",
+          "responseSha256": "7bd84c836fcb857c441e1fcf63b0ccf824e8c6f99d6a85d78d4ddea9885497e0",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Promosi Pokémon Game Kartu Koleksi di Chatime\nKali ini, bersamaan dengan dirilisnya menu Pokémon di Chatime, akan ada promosi kartu promo Pokémon Game Kartu Koleksi yang dapat Anda koleksi!\nPeriode\nMulai 12 Desember 2022\n*Distribusi kartu promo berakhir begitu stok habis. Silakan cek ke masing-masing toko untuk ketersediaan.\nSyarat\nAda dua cara mendapatkan kartu promo Chatime kali ini.\nDapatkan 1 pak kartu promo untuk setiap pembelian 2 minuman dari menu Pokémon.\nTukarkan 100 Pointea dengan 2 minuman dari menu Pokémon dengan Topping dan 1 pak kartu promo.\n*Kartu promo dimasukkan secara acak. Total ada 6 jenis kartu promo.\n",
+          "excerptSha256": "d867d23c423cb3939424481b729634dd30e659ce8f89bbdc0a5880288ac1b260",
+          "excerptHashScope": "UTF-8 retainedContent only, not full response",
+          "nativeDateScope": "Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established",
+          "date": "2022-12-12",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "public HTTPS via inherited environment proxy; scoped text extracted from HTML without scripts/styles",
+          "fieldLimits": [
+            "Campaign explicitly starts12December2022. No February2023 portal publication date or nationwide16Decemberwave is substituted for first availability. Random6-card pack identity linked through exact356/S-P localized row and publisher portal naming Snorlax."
+          ]
+        }
+      },
+      "expectedIdentifiers": [
+        "2022-12-12",
+        "Indonesian"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-id-chatime-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2022-12-12 at day precision for Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-id-chatime-date-boundary",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://asia.pokemon-card.com/id/archives/2854/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "official-id-chatime",
+          "sourceUrl": "https://asia.pokemon-card.com/id/archives/2854/",
+          "retrievedAt": "2026-10-11T10:36:14.799408+00:00",
+          "responseSha256": "7bd84c836fcb857c441e1fcf63b0ccf824e8c6f99d6a85d78d4ddea9885497e0",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Promosi Pokémon Game Kartu Koleksi di Chatime\nKali ini, bersamaan dengan dirilisnya menu Pokémon di Chatime, akan ada promosi kartu promo Pokémon Game Kartu Koleksi yang dapat Anda koleksi!\nPeriode\nMulai 12 Desember 2022\n*Distribusi kartu promo berakhir begitu stok habis. Silakan cek ke masing-masing toko untuk ketersediaan.\nSyarat\nAda dua cara mendapatkan kartu promo Chatime kali ini.\nDapatkan 1 pak kartu promo untuk setiap pembelian 2 minuman dari menu Pokémon.\nTukarkan 100 Pointea dengan 2 minuman dari menu Pokémon dengan Topping dan 1 pak kartu promo.\n*Kartu promo dimasukkan secara acak. Total ada 6 jenis kartu promo.\n",
+          "excerptSha256": "d867d23c423cb3939424481b729634dd30e659ce8f89bbdc0a5880288ac1b260",
+          "excerptHashScope": "UTF-8 retainedContent only, not full response",
+          "nativeDateScope": "Indonesia Chatime Pokémon random promo-pack campaign Mulai 12 Desember 2022; existing 356/S-P identity separately established",
+          "date": "2022-12-12",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "public HTTPS via inherited environment proxy; scoped text extracted from HTML without scripts/styles",
+          "fieldLimits": [
+            "Campaign explicitly starts12December2022. No February2023 portal publication date or nationwide16Decemberwave is substituted for first availability. Random6-card pack identity linked through exact356/S-P localized row and publisher portal naming Snorlax."
+          ],
+          "unsupportedInference": "The retained native article says Mulai 12 Desember 2022 and Distribusi kartu promo berakhir begitu stok habis, with random packs of six card types. This cannot supply a fixed end date, nationwide allocation-wave date, individual finish, or first date for another Indonesian campaign."
+        }
+      },
+      "expectedIdentifiers": [
+        "2022-12-12",
+        "Indonesian"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-id-chatime-date-positive"
+      ],
+      "outcome": "The retained native article says Mulai 12 Desember 2022 and Distribusi kartu promo berakhir begitu stok habis, with random packs of six card types. This cannot supply a fixed end date, nationwide allocation-wave date, individual finish, or first date for another Indonesian campaign."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "hop-official-sg",
+          "sourceUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+          "retrievedAt": "2026-10-11T10:35:16.881779+00:00",
+          "responseSha256": "e261ffea4d3d7067492f4ced369b86ec36d177a4fa5d653d893e6b14ec9972f6",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Hi trainers, Scarlet & Violet — Journey Together will arrive March 28! To celebrate its release, 1 Hop’s Snorlax promo card can be redeemed from card shops from March 28 with a minimum purchase of $25 of Scarlet & Violet — Journey Together products.\nGet ready to team up with Trainer’s Pokémon and discover the unstoppable power of friendship in the Pokémon TCG: Scarlet & Violet — Journey Together expansion!\n*Available at card shops while stocks last\n",
+          "excerptSha256": "711d2f957c59f1e34c2019c00e815f2307a63e78bb33ceef70896fc282beacd5",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference",
+          "date": "2025-03-28",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official regional Hop’s Snorlax campaign explicitly says card redemption starts March 28. Year 2025 is corroborated by exact-card Bulbapedia campaign history and /2025/02/ official campaign asset path; no dates transferred between regions.",
+          "retrievalUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+          "nativeContextExcerpt": "<img decoding=\"async\" alt=\"sg_SV09_top_banner\" src=\"/sg/wp-content/uploads/sites/6/2025/02/eng_top_banner_SV09_promo.jpg\">",
+          "nativeContextExcerptSha256": "6c882089c7843e775280652dce2ca62e5403efa56feea8bb599cc7d11b97c92f",
+          "nativeContextHashScope": "UTF-8 exact retained supplemental HTML/text excerpt only"
+        }
+      },
+      "expectedIdentifiers": [
+        "2025-03-28",
+        "English"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2025-03-28 at day precision for Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference."
+    },
+    {
+      "observationId": "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-boundary",
+      "surfaceId": "asia-selected-product-campaign-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "hop-official-sg",
+          "sourceUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+          "retrievedAt": "2026-10-11T10:35:16.881779+00:00",
+          "responseSha256": "e261ffea4d3d7067492f4ced369b86ec36d177a4fa5d653d893e6b14ec9972f6",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Hi trainers, Scarlet & Violet — Journey Together will arrive March 28! To celebrate its release, 1 Hop’s Snorlax promo card can be redeemed from card shops from March 28 with a minimum purchase of $25 of Scarlet & Violet — Journey Together products.\nGet ready to team up with Trainer’s Pokémon and discover the unstoppable power of friendship in the Pokémon TCG: Scarlet & Violet — Journey Together expansion!\n*Available at card shops while stocks last\n",
+          "excerptSha256": "711d2f957c59f1e34c2019c00e815f2307a63e78bb33ceef70896fc282beacd5",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "Singapore English-language Journey Together Hop’s Snorlax redemption campaign beginning March 28; year corroborated by exact 2025 campaign context, no other market inference",
+          "date": "2025-03-28",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official regional Hop’s Snorlax campaign explicitly says card redemption starts March 28. Year 2025 is corroborated by exact-card Bulbapedia campaign history and /2025/02/ official campaign asset path; no dates transferred between regions.",
+          "retrievalUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+          "nativeContextExcerpt": "<img decoding=\"async\" alt=\"sg_SV09_top_banner\" src=\"/sg/wp-content/uploads/sites/6/2025/02/eng_top_banner_SV09_promo.jpg\">",
+          "nativeContextExcerptSha256": "6c882089c7843e775280652dce2ca62e5403efa56feea8bb599cc7d11b97c92f",
+          "nativeContextHashScope": "UTF-8 exact retained supplemental HTML/text excerpt only",
+          "unsupportedInference": "The exact Singapore excerpt says redemption from March 28 with a minimum purchase of $25 and while stocks last. It cannot date US $15 GameStop/Best Buy, Australia EB Games, Malaysia or Philippines campaigns or provide a fixed end date; year is separately contextualized rather than invented from the visible month/day."
+        }
+      },
+      "expectedIdentifiers": [
+        "2025-03-28",
+        "English"
+      ],
+      "validatesEdges": [
+        "asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-positive"
+      ],
+      "outcome": "The exact Singapore excerpt says redemption from March 28 with a minimum purchase of $25 and while stocks last. It cannot date US $15 GameStop/Best Buy, Australia EB Games, Malaysia or Philippines campaigns or provide a fixed end date; year is separately contextualized rather than invented from the visible month/day."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-hop-retailer-date",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "hop-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+          "responseSha256": "5646050b9ce870553c57615db200ad9b1ce65eec9ce7a015cc7af7849573dce4",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "March 14, 2025\nHop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool\nGet promo cards featuring Hop’s Pokémon at select retailers.\nJourney to your favorite Pokémon TCG retailers to pick up promo cards featuring Hop’s Dubwool and Hop’s Snorlax. To celebrate the release of the Pokémon TCG: Scarlet & Violet—Journey Together adventure, starting March 28, 2025, and while supplies last, players in the United States who purchase $15 worth of Pokémon TCG products at Best Buy will receive a Hop’s Dubwool promo card.\nPick up $15 worth of Pokémon TCG products at GameStop to bring home a Hop’s Snorlax promo card. Australian players who purchase $15 worth of Pokémon TCG products at EB Games will receive a Hop’s Snorlax promo card.\nAnd Canadians can buy $15 worth of Pokémon TCG products at GameStop to receive a Hop’s Snorlax promo card. Purchases can be made in-store or online.\n",
+          "excerptSha256": "5d1841c3afe191c9a732e8091ea86647e62a38c56759be1b7d04380b3b606c18",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim",
+          "date": "2025-03-28",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived TPCi campaign announcement dated March 14, 2025: campaign begins March 28, 2025, names US/Canada GameStop and Australia EB Games. Does not separately name New Zealand or French-language Canada cards; Bulbapedia supplies NZ campaign identity and retained specimens French identity.",
+          "archiveCaptureTimestamp": "20250314225915",
+          "retrievalUrl": "https://web.archive.org/web/20250314225915id_/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool"
+        }
+      },
+      "expectedIdentifiers": [
+        "2025-03-28",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-hop-retailer-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2025-03-28 at day precision for explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-hop-retailer-date-boundary",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "hop-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+          "responseSha256": "5646050b9ce870553c57615db200ad9b1ce65eec9ce7a015cc7af7849573dce4",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "March 14, 2025\nHop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool\nGet promo cards featuring Hop’s Pokémon at select retailers.\nJourney to your favorite Pokémon TCG retailers to pick up promo cards featuring Hop’s Dubwool and Hop’s Snorlax. To celebrate the release of the Pokémon TCG: Scarlet & Violet—Journey Together adventure, starting March 28, 2025, and while supplies last, players in the United States who purchase $15 worth of Pokémon TCG products at Best Buy will receive a Hop’s Dubwool promo card.\nPick up $15 worth of Pokémon TCG products at GameStop to bring home a Hop’s Snorlax promo card. Australian players who purchase $15 worth of Pokémon TCG products at EB Games will receive a Hop’s Snorlax promo card.\nAnd Canadians can buy $15 worth of Pokémon TCG products at GameStop to receive a Hop’s Snorlax promo card. Purchases can be made in-store or online.\n",
+          "excerptSha256": "5d1841c3afe191c9a732e8091ea86647e62a38c56759be1b7d04380b3b606c18",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "explicit US/Canada GameStop and Australia EB Games Hop’s Snorlax campaign beginning March 28; no independent New Zealand or French-Canada claim",
+          "date": "2025-03-28",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived TPCi campaign announcement dated March 14, 2025: campaign begins March 28, 2025, names US/Canada GameStop and Australia EB Games. Does not separately name New Zealand or French-language Canada cards; Bulbapedia supplies NZ campaign identity and retained specimens French identity.",
+          "archiveCaptureTimestamp": "20250314225915",
+          "retrievalUrl": "https://web.archive.org/web/20250314225915id_/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "unsupportedInference": "The retained article is headed March 14, 2025 but explicitly starts the campaign March 28, 2025. It separately names Hop’s Dubwool at US Best Buy and Hop’s Snorlax at GameStop/EB Games; publication date and a different promo/card retailer cannot substitute for this exact campaign scope."
+        }
+      },
+      "expectedIdentifiers": [
+        "2025-03-28",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-hop-retailer-date-positive"
+      ],
+      "outcome": "The retained article is headed March 14, 2025 but explicitly starts the campaign March 28, 2025. It separately names Hop’s Dubwool at US Best Buy and Hop’s Snorlax at GameStop/EB Games; publication date and a different promo/card retailer cannot substitute for this exact campaign scope."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-prize3-en-date",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "prize3-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+          "retrievedAt": "2026-10-11T10:38:15.769189+00:00",
+          "responseSha256": "4653e839f3df0bc59e7448330803b6284f0f1807b9430694cfa2ae259a51373e",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "August 07, 2023\nVisit Your Local Game Store to Receive Play! Pokémon Prize Packs\nEarn Prize Packs by participating in events at your local League during the 2023 Pokémon World Championships.\nIn-store events provide exciting opportunities to socialize (and battle!) with fellow Pokémon enthusiasts. And promotional Prize Packs distributed at Play! Pokémon events—including Leagues, League Challenges, League Cups, and more—add to the fun. Just in time for 2023 Pokémon World Championships Series Celebration Tournaments, the Prize Pack Series Three will be available starting August 14, 2023, at participating retail locations.\nEach Prize Pack contains six cards taken from a pool of about 200—all of which are legal in the Standard format. They include everything from popular Pokémon to exclusive foil upgrades of tournament staples, all featuring the special Play! Pokémon logo. Here are just some of the exciting cards you can expect to find in Series Three:\nGardevoir ex\nLugia VSTAR\nArceus VSTAR\nRadiant Greninja\nNest Ball (exclusive foil version)\nPrize Pack Series Three has a limited duration as Series Four will become available in February 2024. For both competitive and casual Trainers, Prize Packs offer an exclusive path to build your collection while making the most of Play! Pokémon events at your local game store. How Prize Packs are distributed varies from location to location. The more active your events are, the more Prize Packs will be available, so be sure to attend as many events as possible.\n",
+          "excerptSha256": "801cfb68f798f6d158698dadff15864c9b1004053108365268381929187e28c9",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established",
+          "date": "2023-08-14",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived Series Three announcement: August 14, 2023 distribution start. US English page does not explicitly date each localized language market.",
+          "archiveCaptureTimestamp": "20230808054200",
+          "retrievalUrl": "https://web.archive.org/web/20230808054200id_/https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs"
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-08-14",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-prize3-en-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2023-08-14 at day precision for US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-prize3-en-date-boundary",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "prize3-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+          "retrievedAt": "2026-10-11T10:38:15.769189+00:00",
+          "responseSha256": "4653e839f3df0bc59e7448330803b6284f0f1807b9430694cfa2ae259a51373e",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "August 07, 2023\nVisit Your Local Game Store to Receive Play! Pokémon Prize Packs\nEarn Prize Packs by participating in events at your local League during the 2023 Pokémon World Championships.\nIn-store events provide exciting opportunities to socialize (and battle!) with fellow Pokémon enthusiasts. And promotional Prize Packs distributed at Play! Pokémon events—including Leagues, League Challenges, League Cups, and more—add to the fun. Just in time for 2023 Pokémon World Championships Series Celebration Tournaments, the Prize Pack Series Three will be available starting August 14, 2023, at participating retail locations.\nEach Prize Pack contains six cards taken from a pool of about 200—all of which are legal in the Standard format. They include everything from popular Pokémon to exclusive foil upgrades of tournament staples, all featuring the special Play! Pokémon logo. Here are just some of the exciting cards you can expect to find in Series Three:\nGardevoir ex\nLugia VSTAR\nArceus VSTAR\nRadiant Greninja\nNest Ball (exclusive foil version)\nPrize Pack Series Three has a limited duration as Series Four will become available in February 2024. For both competitive and casual Trainers, Prize Packs offer an exclusive path to build your collection while making the most of Play! Pokémon events at your local game store. How Prize Packs are distributed varies from location to location. The more active your events are, the more Prize Packs will be available, so be sure to attend as many events as possible.\n",
+          "excerptSha256": "801cfb68f798f6d158698dadff15864c9b1004053108365268381929187e28c9",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "US English official Prize Pack Series Three distribution start at participating shops; exact card identity and other localized dates separately established",
+          "date": "2023-08-14",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived Series Three announcement: August 14, 2023 distribution start. US English page does not explicitly date each localized language market.",
+          "archiveCaptureTimestamp": "20230808054200",
+          "retrievalUrl": "https://web.archive.org/web/20230808054200id_/https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+          "unsupportedInference": "The retained article is dated August 07, 2023, gives Series Three availability starting August 14, 2023, and separately dates Series Four to February 2024. Neither publication date nor another series/date can date Series Three; the US article alone does not date German or other localized markets."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-08-14",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-prize3-en-date-positive"
+      ],
+      "outcome": "The retained article is dated August 07, 2023, gives Series Three availability starting August 14, 2023, and separately dates Series Four to February 2024. Neither publication date nor another series/date can date Series Three; the US article alone does not date German or other localized markets."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "wcd-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+          "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+          "responseSha256": "0e48898049a4d57e76c11d274492ff7d0d5f412369a83d9bfdac947dc25d0955",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Launch: March 01, 2024\nGrab a World Championships deck and play like a champion! Choose one of four powerful decks, each a card-for-card replica of an actual title-contender’s deck from the 2023 Pokémon Trading Card Game World Championships!\nEach 2023 Pokémon TCG World Championships Deck includes:\n60-card World Championships Deck\n2023 World Championships booklet\nSpecial 2023 World Championships pin\n2023 World Championships coin\n2023 World Championships deck box\nA playmat and poster\nA code card for Pokémon Trading Card Game Live\nThe 2023 Pokémon TCG World Championships Decks will be available on March 1, 2024, at the Pokémon Center and where Pokémon TCG products are sold.\nReturn to Gallery\nReturn to Gallery\n",
+          "excerptSha256": "c2933d9cd897744f6dd53a4ac161d5098fe20d28814efef6262f225023a6c3a3",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established",
+          "date": "2024-03-01",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived English US product launch March 1, 2024 for 2023 deck replicas. Does not independently prove localized European release dates.",
+          "archiveCaptureTimestamp": "20240119001740",
+          "decodedSourceSha256": "6afc18b580325c3a4417d14c0db5d1d49cbda02ca10e100d990a5b5068028673",
+          "sourceEncoding": "gzip",
+          "retrievalUrl": "https://web.archive.org/web/20240119001740id_/https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks"
+        }
+      },
+      "expectedIdentifiers": [
+        "2024-03-01",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-wcd2023-en-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2024-03-01 at day precision for US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date-boundary",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "wcd-official-archive",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+          "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+          "responseSha256": "0e48898049a4d57e76c11d274492ff7d0d5f412369a83d9bfdac947dc25d0955",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "Launch: March 01, 2024\nGrab a World Championships deck and play like a champion! Choose one of four powerful decks, each a card-for-card replica of an actual title-contender’s deck from the 2023 Pokémon Trading Card Game World Championships!\nEach 2023 Pokémon TCG World Championships Deck includes:\n60-card World Championships Deck\n2023 World Championships booklet\nSpecial 2023 World Championships pin\n2023 World Championships coin\n2023 World Championships deck box\nA playmat and poster\nA code card for Pokémon Trading Card Game Live\nThe 2023 Pokémon TCG World Championships Decks will be available on March 1, 2024, at the Pokémon Center and where Pokémon TCG products are sold.\nReturn to Gallery\nReturn to Gallery\n",
+          "excerptSha256": "c2933d9cd897744f6dd53a4ac161d5098fe20d28814efef6262f225023a6c3a3",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "US English 2023 World Championships replica-deck product launch; exact Colorless Lugia membership separately established",
+          "date": "2024-03-01",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "Official archived English US product launch March 1, 2024 for 2023 deck replicas. Does not independently prove localized European release dates.",
+          "archiveCaptureTimestamp": "20240119001740",
+          "decodedSourceSha256": "6afc18b580325c3a4417d14c0db5d1d49cbda02ca10e100d990a5b5068028673",
+          "sourceEncoding": "gzip",
+          "retrievalUrl": "https://web.archive.org/web/20240119001740id_/https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+          "unsupportedInference": "The exact retained product is named 2023 Pokémon TCG World Championships Decks but explicitly Launch: March 01, 2024. The tournament/deck-name year 2023 and archive capture timestamp cannot substitute for the retail product launch; localized European launch dates are not established."
+        }
+      },
+      "expectedIdentifiers": [
+        "2024-03-01",
+        "English"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-wcd2023-en-date-positive"
+      ],
+      "outcome": "The exact retained product is named 2023 Pokémon TCG World Championships Decks but explicitly Launch: March 01, 2024. The tournament/deck-name year 2023 and archive capture timestamp cannot substitute for the retail product launch; localized European launch dates are not established."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-prize3-de-date",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pps3-official-de-archive",
+          "sourceUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+          "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+          "responseSha256": "15b48b25626db72ef590ae58ce28bb6f7b6fc39f2175883eb192392e9ec37759",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "07. August 2023\nBesuche dein lokales Spielfachgeschäft, um Play! Pokémon-Preispacks zu erhalten\nVerdiene dir Preispacks, indem du während der Pokémon-Weltmeisterschaften 2023 an Events in deiner lokalen Liga teilnimmst.\nDie Events in den Geschäften bieten dir die Möglichkeit, andere Pokémon-Fans zu treffen (und herauszufordern!). Und die Preispacks, die bei Play! Pokémon-Events verteilt werden – darunter Ligen, Liga-Herausforderungen, Liga-Cups und mehr – sorgen für noch mehr Spaß. Pünktlich zur Feier der Pokémon-Weltmeisterschaften 2023 wird das Serie-3-Preispack ab dem 14. August 2023 in teilnehmenden Geschäften erhältlich sein.\nJedes Preispack enthält sechs Karten aus einer Auswahl von etwa 200 Karten, die alle im Standardformat zugelassen sind. Sie enthalten alles von beliebten Pokémon bis hin zu exklusiven holografischen Upgrades von turniergängigen Karten, die alle mit dem speziellen Play! Pokémon-Logo versehen sind. Hier sind nur einige der aufregenden Karten, die dich in Serie 3 erwarten:\nGuardevoir-ex\nLugia-VSTAR\nArceus-VSTAR\nStrahlendes Quajutsu\nNestball (exklusive holografische Version)\nSerie-3-Preispacks haben eine begrenzte Laufzeit, da Serie 4 bereits im Februar 2024 erhältlich sein wird. Sowohl für Wettkampf- als auch für Gelegenheitstrainer bieten die Preispacks eine exklusive Möglichkeit, ihre Sammlung aufzubauen und gleichzeitig das Meiste aus den Play! Pokémon-Events in ihrem örtlichen Spielfachgeschäft herauszuholen. Wie die Preispacks verteilt werden, ist von Ort zu Ort unterschiedlich. Je lebhafter die Events sind, desto mehr Preispacks gibt es, also solltest du so viele Events wie möglich aufsuchen.\n",
+          "excerptSha256": "e6d362b70b47ab639b734a63da953192a0694511fbdcbb44342786b1b1528e04",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained",
+          "date": "2023-08-14",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "German official announcement explicitly dates Serie-3-Preispack distribution to August 14, 2023 in participating shops; exact German Snorlax membership is already established by the retained official German Series Three checklist.",
+          "archiveCaptureTimestamp": "20230809101653",
+          "decodedSourceSha256": "56789f37552edb37a48fe6c8dbdff2f2c9fed92a0cf132ab9af49fe75f11b483",
+          "sourceEncoding": "gzip",
+          "retrievalUrl": "https://web.archive.org/web/20230809101653id_/https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten"
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-08-14",
+        "German"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-prize3-de-date-positive"
+      ],
+      "outcome": "The exact retained native availability field supports 2023-08-14 at day precision for native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-prize3-de-date-boundary",
+      "surfaceId": "tpci-selected-archived-product-release-dates",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+      "queryParameters": {
+        "field": "named native product/campaign availability",
+        "scope": "native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained"
+      },
+      "retrievedAt": "2026-10-11",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "pps3-official-de-archive",
+          "sourceUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+          "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+          "responseSha256": "15b48b25626db72ef590ae58ce28bb6f7b6fc39f2175883eb192392e9ec37759",
+          "responseHashScope": "original fetched HTTP response bytes",
+          "excerpt": "07. August 2023\nBesuche dein lokales Spielfachgeschäft, um Play! Pokémon-Preispacks zu erhalten\nVerdiene dir Preispacks, indem du während der Pokémon-Weltmeisterschaften 2023 an Events in deiner lokalen Liga teilnimmst.\nDie Events in den Geschäften bieten dir die Möglichkeit, andere Pokémon-Fans zu treffen (und herauszufordern!). Und die Preispacks, die bei Play! Pokémon-Events verteilt werden – darunter Ligen, Liga-Herausforderungen, Liga-Cups und mehr – sorgen für noch mehr Spaß. Pünktlich zur Feier der Pokémon-Weltmeisterschaften 2023 wird das Serie-3-Preispack ab dem 14. August 2023 in teilnehmenden Geschäften erhältlich sein.\nJedes Preispack enthält sechs Karten aus einer Auswahl von etwa 200 Karten, die alle im Standardformat zugelassen sind. Sie enthalten alles von beliebten Pokémon bis hin zu exklusiven holografischen Upgrades von turniergängigen Karten, die alle mit dem speziellen Play! Pokémon-Logo versehen sind. Hier sind nur einige der aufregenden Karten, die dich in Serie 3 erwarten:\nGuardevoir-ex\nLugia-VSTAR\nArceus-VSTAR\nStrahlendes Quajutsu\nNestball (exklusive holografische Version)\nSerie-3-Preispacks haben eine begrenzte Laufzeit, da Serie 4 bereits im Februar 2024 erhältlich sein wird. Sowohl für Wettkampf- als auch für Gelegenheitstrainer bieten die Preispacks eine exklusive Möglichkeit, ihre Sammlung aufzubauen und gleichzeitig das Meiste aus den Play! Pokémon-Events in ihrem örtlichen Spielfachgeschäft herauszuholen. Wie die Preispacks verteilt werden, ist von Ort zu Ort unterschiedlich. Je lebhafter die Events sind, desto mehr Preispacks gibt es, also solltest du so viele Events wie möglich aufsuchen.\n",
+          "excerptSha256": "e6d362b70b47ab639b734a63da953192a0694511fbdcbb44342786b1b1528e04",
+          "excerptHashScope": "UTF-8 retained relevantExcerpt only; response hash separately records original fetched bytes",
+          "nativeDateScope": "native German Serie-3-Preispack distribution announcement, exact German checklist identity separately retained",
+          "date": "2023-08-14",
+          "precision": "day",
+          "limits": "Date-only positive statement. Existing exact card-release identity is independently established. No card existence, finish, rarity, reprint-wave, absence or completeness claim.",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "fieldLimits": "German official announcement explicitly dates Serie-3-Preispack distribution to August 14, 2023 in participating shops; exact German Snorlax membership is already established by the retained official German Series Three checklist.",
+          "archiveCaptureTimestamp": "20230809101653",
+          "decodedSourceSha256": "56789f37552edb37a48fe6c8dbdff2f2c9fed92a0cf132ab9af49fe75f11b483",
+          "sourceEncoding": "gzip",
+          "retrievalUrl": "https://web.archive.org/web/20230809101653id_/https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+          "unsupportedInference": "The retained native article is dated 07. August 2023, explicitly says Serie-3-Preispack ab dem 14. August 2023, and separates Serie 4 im Februar 2024. Publication and later-series dates cannot date Serie 3, and US English date inheritance is unnecessary."
+        }
+      },
+      "expectedIdentifiers": [
+        "2023-08-14",
+        "German"
+      ],
+      "validatesEdges": [
+        "tpci-selected-archived-product-release-dates-prize3-de-date-positive"
+      ],
+      "outcome": "The retained native article is dated 07. August 2023, explicitly says Serie-3-Preispack ab dem 14. August 2023, and separates Serie 4 im Februar 2024. Publication and later-series dates cannot date Serie 3, and US English date inheritance is unnecessary."
     }
   ]
 }

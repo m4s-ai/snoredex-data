@@ -24,8 +24,10 @@ import sys
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlencode
+from reviewed_release_dates import date_source, guard_item, load_reviewed_dates
 
 ROOT = Path(__file__).resolve().parent.parent
+_, REVIEWED_DATES, _ = load_reviewed_dates()
 INDEX_PATH = ROOT / "index.html"
 ALIAS_PATH = ROOT / "verification" / "confirmed-releases.html"
 
@@ -243,6 +245,10 @@ def expand_dated_printings(row: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def catalogue_date_source(item, record, predecessors):
+    reviewed = REVIEWED_DATES.get(item["itemId"])
+    if reviewed:
+        guard_item(reviewed, item)
+        return date_source(reviewed)
     source_url = record.get("releaseDateSourceUrl") or record.get("releaseSourceUrl")
     if source_url and record.get("releaseDate") == item["releaseDate"]:
         return {"url": source_url, "provider": record.get("releaseDateProviderId", record.get("providerId"))}

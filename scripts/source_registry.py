@@ -47,16 +47,22 @@ PROVIDERS: list[dict[str, Any]] = [
         "organization": "The Pokémon Company International",
         "homepage": "https://www.pokemon.com",
         "hosts": ["assets.pokemon.com", "d1wx537rtdixyy.cloudfront.net", "www.pokemon.com",
-                  "tcg.pokemon.com", "dz3we2x72f7ol.cloudfront.net"],
+                  "tcg.pokemon.com", "dz3we2x72f7ol.cloudfront.net", "press.pokemon.com",
+                  "pokemon.gamespress.com"],
         "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "positive localized card pages and listed checklist entries",
+        "coverage": "positive localized card pages, listed checklist entries, and explicit named product or campaign dates on individually reviewed official press and archived articles",
         "supportsAbsence": False,
-        "usedFor": ["language", "finish", "product"],
+        "usedFor": ["language", "finish", "product", "date"],
         "attribution": "Official card pages and product checklists © The Pokémon Company International.",
         "notes": ("Localized pages and checklists confirm only the cards, languages, regions, "
-                  "and finishes they explicitly list. Missing entries remain unknown."),
+                  "and finishes they explicitly list. The separately reviewed official press "
+                  "surface supplies only the named Snorlax 151 ETB product dates in its six "
+                  "retained localized articles. Individually retained archived articles also "
+                  "supply only the named Hop retailer campaign, English/German Series Three "
+                  "Prize Pack distribution and English 2023 championship-deck product dates. "
+                  "Missing entries remain unknown."),
     },
     {
         "providerId": "pokemon-cn-official",
@@ -98,14 +104,17 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "recent localized card details and exact rows from individually inspected archived Asian card lists",
+        "coverage": "recent localized card details, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields",
         "supportsAbsence": False,
-        "usedFor": ["language", "card-existence", "local-set-identifier", "rarity"],
+        "usedFor": ["language", "card-existence", "local-set-identifier", "rarity", "date"],
         "attribution": "Asian card data © The Pokémon Company.",
         "notes": ("The searchable card database is recent and does not cover all older printings. "
                   "Individually inspected archived card-list rows positively support only the exact "
                   "cards they show; the archive is not assumed historically complete and omissions "
-                  "remain unknown. Neither surface establishes physical finish."),
+                  "remain unknown. Separately reviewed manual date fields are limited to Taiwan "
+                  "Classic/Ancient Roar, Indonesia Chatime and Singapore Journey Together Hop's "
+                  "Snorlax campaigns; they confer no card-existence, finish or completeness "
+                  "authority. No surface establishes physical finish."),
     },
     {
         "providerId": "pokemon-card-korea",
@@ -168,6 +177,40 @@ PROVIDERS: list[dict[str, Any]] = [
         "usedFor": ["language", "edition", "date", "finish"],
         "attribution": "Content from Bulbapedia, licensed CC BY-NC-SA 2.5.",
         "notes": "Tier 2 by owner decision, 2026-08-03. It sat at tier 3 beside retailer listings while carrying 247 of the 252 claims that rested on a single tier-3 source — more of this dataset than anything but TCGdex. The tier is meant to record dependability, and its contributors are dedicated researchers, so the rank now says what the project actually does with their work. Preferred for set release dates when the article identifies the matching market field. Korean and Chinese promo articles are {{incomplete}}-tagged; never contradict on their silence.",
+    },
+    {
+        "providerId": "pokewiki",
+        "displayName": "PokéWiki reviewed localized release fields",
+        "organization": "PokéWiki community",
+        "homepage": "https://www.pokewiki.de",
+        "hosts": ["www.pokewiki.de", "pokewiki.de"],
+        "licenseOrTerms": "CC BY-SA 3.0 DE; attribution and ShareAlike apply to retained article excerpts.",
+        "category": "fan-wiki",
+        "authorityTier": 3,
+        "coverage": "explicit German-language Jungle release-date field in the individually reviewed Dschungel article",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized release field from PokéWiki, licensed CC BY-SA 3.0 DE.",
+        "notes": ("Manual positive date evidence only. Preserve the source-native Deutsch qualifier "
+                  "and month precision; the field names a language, not a separate country or "
+                  "printing wave. It establishes no card existence, finish, absence or completeness."),
+    },
+    {
+        "providerId": "pokepedia",
+        "displayName": "Poképédia reviewed localized release fields",
+        "organization": "Poképédia community",
+        "homepage": "https://www.pokepedia.fr",
+        "hosts": ["www.pokepedia.fr", "pokepedia.fr"],
+        "licenseOrTerms": "CC BY-NC-SA 3.0; attribution, NonCommercial and ShareAlike apply to retained article excerpts.",
+        "category": "fan-wiki",
+        "authorityTier": 3,
+        "coverage": "explicit France-qualified Jungle release-date field in the individually reviewed Jungle article",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized release field from Poképédia, licensed CC BY-NC-SA 3.0.",
+        "notes": ("Manual positive date evidence only. The France field is distinct from the "
+                  "North America and Japan fields; preserve its stated precision and conflicts. "
+                  "It establishes no card existence, finish, absence or completeness."),
     },
     {
         "providerId": "tcgcsv",
@@ -307,15 +350,17 @@ PROVIDERS: list[dict[str, Any]] = [
         "organization": "WikiDex",
         "homepage": "https://www.wikidex.net",
         "hosts": ["wikidex.net", "www.wikidex.net", "wikidexcdn.net", "images.wikidexcdn.net"],
-        "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+        "licenseOrTerms": "CC BY-SA 3.0 for retained article excerpts; hosted scan images are used for identification and verification only.",
         "category": "collector-database",
         "authorityTier": 3,
-        "coverage": "positive localized card identity shown by retained database scans",
+        "coverage": "positive localized card identity shown by retained scans and explicit Spain-qualified Jungle release-date field",
         "supportsAbsence": False,
-        "usedFor": ["identity", "language"],
-        "attribution": "Card scans from WikiDex.",
+        "usedFor": ["identity", "language", "date"],
+        "attribution": "Card scans and localized release field from WikiDex; article excerpts licensed CC BY-SA 3.0.",
         "notes": "A retained database scan establishes only the visible card identity. Missing "
-                 "cards, variants, or languages never establish absence or completeness.",
+                 "cards, variants, or languages never establish absence or completeness. "
+                 "The separately reviewed Jungla article contributes only its explicit ES year; "
+                 "the HA unknown and EE.UU. date are separate fields, never transferred to Spain.",
     },
     {
         # Added on the owner's evidence in #119: a Japanese secondhand marketplace whose listings
@@ -1157,6 +1202,14 @@ def record_card_content(content: dict, record: Callable) -> dict[str, list[str]]
     return {provider: sorted(values) for provider, values in dimensions.items()}
 
 
+def record_reviewed_dates(document: dict, record: Callable, dimensions: dict) -> None:
+    for entry in document["releaseDates"].get("reviewedItems", []):
+        for source in entry["sources"]:
+            record(source["url"], "Reviewed item-scoped release date", "date",
+                   entry["itemId"], source["retrievedAt"], source["providerId"])
+            dimensions.setdefault(source["providerId"], []).append("date")
+
+
 def main() -> int:
     units = read_json(ROOT / "verification" / "units.json")
     finish_document = read_json(ROOT / "verification" / "finish_units.json")
@@ -1171,6 +1224,7 @@ def main() -> int:
         ROOT / "verification" / "bulbapedia_release_dates.json"
     )
     set_dates = read_json(ROOT / "verification" / "set_catalogue_sources.json")
+    reviewed_dates = read_json(ROOT / "verification" / "confirmed_release_overrides.json")
     content = read_json(ROOT / "verification" / "card_content_observations.json")
     generated = latest_input_date(
         units,
@@ -1182,6 +1236,7 @@ def main() -> int:
         source_first,
         bulbapedia_dates,
         set_dates,
+        reviewed_dates,
         content,
     )
     retained_cardmarket_images = retained_cardmarket_product_image_urls(specimens)
@@ -1296,6 +1351,7 @@ def main() -> int:
 
     content_dimensions = record_card_content(content, record)
     date_dimensions = record_set_evidence(set_dates, record)
+    record_reviewed_dates(reviewed_dates, record, date_dimensions)
     rows = []
     for entry in sorted(evidence.values(), key=lambda e: (e["providerId"], e["canonicalUrl"] or "")):
         row = {

@@ -1,0 +1,79 @@
+{
+  "changedCanonicalFiles": [
+    "scripts/source_registry.py PROVIDERS block only",
+    "verification/source_capabilities.json"
+  ],
+  "surfaceIds": [
+    "pokewiki-jungle-de-release-date",
+    "pokepedia-jungle-fr-release-date",
+    "wikidex-jungle-es-release-date",
+    "pokemon-official-151-etb-press-dates",
+    "jp-tag-bolt-campaign-release-date",
+    "asia-selected-product-campaign-release-dates",
+    "tpci-selected-archived-product-release-dates"
+  ],
+  "observationIds": [
+    "obs-pokewiki-jungle-de-release-date",
+    "obs-pokewiki-jungle-de-release-date-boundary",
+    "obs-pokepedia-jungle-fr-release-date",
+    "obs-pokepedia-jungle-fr-release-date-boundary",
+    "obs-wikidex-jungle-es-release-date",
+    "obs-wikidex-jungle-es-release-date-boundary",
+    "obs-pokemon-official-151-etb-press-dates-en",
+    "obs-pokemon-official-151-etb-press-dates-pt",
+    "obs-pokemon-official-151-etb-press-dates-de",
+    "obs-pokemon-official-151-etb-press-dates-fr",
+    "obs-pokemon-official-151-etb-press-dates-it",
+    "obs-pokemon-official-151-etb-press-dates-es-es",
+    "obs-pokemon-official-151-etb-press-product-boundary",
+    "obs-jp-tag-bolt-campaign-release-date-sm297-date",
+    "obs-jp-tag-bolt-campaign-release-date-sm297-date-boundary",
+    "obs-jp-product-pages-classic-first-wave-date",
+    "obs-jp-product-pages-classic-first-wave-date-boundary",
+    "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date",
+    "obs-asia-selected-product-campaign-release-dates-tw-sv4k-date-boundary",
+    "obs-asia-selected-product-campaign-release-dates-tw-classic-date",
+    "obs-asia-selected-product-campaign-release-dates-tw-classic-date-boundary",
+    "obs-asia-selected-product-campaign-release-dates-id-chatime-date",
+    "obs-asia-selected-product-campaign-release-dates-id-chatime-date-boundary",
+    "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date",
+    "obs-asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-boundary",
+    "obs-tpci-selected-archived-product-release-dates-hop-retailer-date",
+    "obs-tpci-selected-archived-product-release-dates-hop-retailer-date-boundary",
+    "obs-tpci-selected-archived-product-release-dates-prize3-en-date",
+    "obs-tpci-selected-archived-product-release-dates-prize3-en-date-boundary",
+    "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date",
+    "obs-tpci-selected-archived-product-release-dates-wcd2023-en-date-boundary",
+    "obs-tpci-selected-archived-product-release-dates-prize3-de-date",
+    "obs-tpci-selected-archived-product-release-dates-prize3-de-date-boundary"
+  ],
+  "newProviders": [
+    "pokewiki",
+    "pokepedia"
+  ],
+  "tier": 3,
+  "historicalResearchReport": "/tmp/research-dates-historical-sets.json",
+  "officialPressResearchReport": "/tmp/research-dates-western-promos.json",
+  "officialPressProvenance": "/tmp/research-western-press-provenance.json",
+  "positiveOnly": true,
+  "adapterAdded": false,
+  "gatesRun": false,
+  "additionalDateEdgeIds": [
+    "jp-tag-bolt-campaign-release-date-sm297-date-positive",
+    "jp-product-pages-classic-first-wave-date-positive",
+    "asia-selected-product-campaign-release-dates-tw-sv4k-date-positive",
+    "asia-selected-product-campaign-release-dates-tw-classic-date-positive",
+    "asia-selected-product-campaign-release-dates-id-chatime-date-positive",
+    "asia-selected-product-campaign-release-dates-sg-hop-snorlax-date-positive",
+    "tpci-selected-archived-product-release-dates-hop-retailer-date-positive",
+    "tpci-selected-archived-product-release-dates-prize3-en-date-positive",
+    "tpci-selected-archived-product-release-dates-wcd2023-en-date-positive",
+    "tpci-selected-archived-product-release-dates-prize3-de-date-positive"
+  ],
+  "existingSurfaceBoundedDateAddition": "jp-product-pages gains one exact Classic 2023-10 first-wave date edge with native positive and lottery-boundary fixtures; broad product edge is unchanged.",
+  "alreadyCoveredDateSurface": "CN21726 is already routed to pokemon-cn-product-pages with explicit CN/S-Chinese date coverage; no unnecessary new surface.",
+  "integrationNotes": [
+    "The new Asia date URL prefixes use canonical URL form without trailing slash, matching source-registry normalization.",
+    "Existing provider rawRetention declarations remain unchanged; field-specific excerpt retention is declared on the new manual date surfaces so unrelated retained adapter run capability pins stay compatible."
+  ]
+}

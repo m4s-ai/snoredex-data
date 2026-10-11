@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-10",
+  "generated": "2026-10-11",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 33,
-   "evidenceRecords": 1727,
-   "uniqueUrls": 1719,
+   "providers": 35,
+   "evidenceRecords": 1765,
+   "uniqueUrls": 1757,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6872
+   "claimsAttributed": 6933
   }
  },
  "providers": [
@@ -25,7 +25,7 @@
    "licenseOrTerms": "Publisher's own terms; used for identification and verification only.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "positive localized card pages and listed checklist entries",
+   "coverage": "positive localized card pages, listed checklist entries, and explicit named product or campaign dates on individually reviewed official press and archived articles",
    "supportsAbsence": false,
    "usedFor": [
     "language",
@@ -34,16 +34,18 @@
     "date"
    ],
    "attribution": "Official card pages and product checklists © The Pokémon Company International.",
-   "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. Missing entries remain unknown.",
+   "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. The separately reviewed official press surface supplies only the named Snorlax 151 ETB product dates in its six retained localized articles. Individually retained archived articles also supply only the named Hop retailer campaign, English/German Series Three Prize Pack distribution and English 2023 championship-deck product dates. Missing entries remain unknown.",
    "hosts": [
     "assets.pokemon.com",
     "d1wx537rtdixyy.cloudfront.net",
     "www.pokemon.com",
     "tcg.pokemon.com",
-    "dz3we2x72f7ol.cloudfront.net"
+    "dz3we2x72f7ol.cloudfront.net",
+    "press.pokemon.com",
+    "pokemon.gamespress.com"
    ],
-   "uniqueSources": 147,
-   "claimsSupported": 482
+   "uniqueSources": 157,
+   "claimsSupported": 494
   },
   {
    "providerId": "pokemon-cn-official",
@@ -68,8 +70,8 @@
     "pokemon.cn",
     "image.pokemon.com.cn"
    ],
-   "uniqueSources": 16,
-   "claimsSupported": 54
+   "uniqueSources": 17,
+   "claimsSupported": 57
   },
   {
    "providerId": "pokemon-card-jp",
@@ -94,8 +96,8 @@
     "www.30th.pokemon-card.com",
     "30th.pokemon-card.com"
    ],
-   "uniqueSources": 39,
-   "claimsSupported": 90
+   "uniqueSources": 41,
+   "claimsSupported": 92
   },
   {
    "providerId": "pokemon-card-asia",
@@ -105,7 +107,7 @@
    "licenseOrTerms": "Publisher's own terms.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "recent localized card details and exact rows from individually inspected archived Asian card lists",
+   "coverage": "recent localized card details, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields",
    "supportsAbsence": false,
    "usedFor": [
     "language",
@@ -115,12 +117,12 @@
     "date"
    ],
    "attribution": "Asian card data © The Pokémon Company.",
-   "notes": "The searchable card database is recent and does not cover all older printings. Individually inspected archived card-list rows positively support only the exact cards they show; the archive is not assumed historically complete and omissions remain unknown. Neither surface establishes physical finish.",
+   "notes": "The searchable card database is recent and does not cover all older printings. Individually inspected archived card-list rows positively support only the exact cards they show; the archive is not assumed historically complete and omissions remain unknown. Separately reviewed manual date fields are limited to Taiwan Classic/Ancient Roar, Indonesia Chatime and Singapore Journey Together Hop's Snorlax campaigns; they confer no card-existence, finish or completeness authority. No surface establishes physical finish.",
    "hosts": [
     "asia.pokemon-card.com"
    ],
-   "uniqueSources": 204,
-   "claimsSupported": 738
+   "uniqueSources": 208,
+   "claimsSupported": 742
   },
   {
    "providerId": "pokemon-card-korea",
@@ -219,8 +221,52 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 98,
-   "claimsSupported": 701
+   "uniqueSources": 116,
+   "claimsSupported": 736
+  },
+  {
+   "providerId": "pokewiki",
+   "displayName": "PokéWiki reviewed localized release fields",
+   "organization": "PokéWiki community",
+   "homepage": "https://www.pokewiki.de",
+   "licenseOrTerms": "CC BY-SA 3.0 DE; attribution and ShareAlike apply to retained article excerpts.",
+   "category": "fan-wiki",
+   "authorityTier": 3,
+   "coverage": "explicit German-language Jungle release-date field in the individually reviewed Dschungel article",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized release field from PokéWiki, licensed CC BY-SA 3.0 DE.",
+   "notes": "Manual positive date evidence only. Preserve the source-native Deutsch qualifier and month precision; the field names a language, not a separate country or printing wave. It establishes no card existence, finish, absence or completeness.",
+   "hosts": [
+    "www.pokewiki.de",
+    "pokewiki.de"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
+  },
+  {
+   "providerId": "pokepedia",
+   "displayName": "Poképédia reviewed localized release fields",
+   "organization": "Poképédia community",
+   "homepage": "https://www.pokepedia.fr",
+   "licenseOrTerms": "CC BY-NC-SA 3.0; attribution, NonCommercial and ShareAlike apply to retained article excerpts.",
+   "category": "fan-wiki",
+   "authorityTier": 3,
+   "coverage": "explicit France-qualified Jungle release-date field in the individually reviewed Jungle article",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized release field from Poképédia, licensed CC BY-NC-SA 3.0.",
+   "notes": "Manual positive date evidence only. The France field is distinct from the North America and Japan fields; preserve its stated precision and conflicts. It establishes no card existence, finish, absence or completeness.",
+   "hosts": [
+    "www.pokepedia.fr",
+    "pokepedia.fr"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 2
   },
   {
    "providerId": "tcgcsv",
@@ -420,25 +466,26 @@
    "displayName": "WikiDex",
    "organization": "WikiDex",
    "homepage": "https://www.wikidex.net",
-   "licenseOrTerms": "Site terms; hosted scan images are used for identification and verification only.",
+   "licenseOrTerms": "CC BY-SA 3.0 for retained article excerpts; hosted scan images are used for identification and verification only.",
    "category": "collector-database",
    "authorityTier": 3,
-   "coverage": "positive localized card identity shown by retained database scans",
+   "coverage": "positive localized card identity shown by retained scans and explicit Spain-qualified Jungle release-date field",
    "supportsAbsence": false,
    "usedFor": [
     "identity",
-    "language"
+    "language",
+    "date"
    ],
-   "attribution": "Card scans from WikiDex.",
-   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness.",
+   "attribution": "Card scans and localized release field from WikiDex; article excerpts licensed CC BY-SA 3.0.",
+   "notes": "A retained database scan establishes only the visible card identity. Missing cards, variants, or languages never establish absence or completeness. The separately reviewed Jungla article contributes only its explicit ES year; the HA unknown and EE.UU. date are separate fields, never transferred to Spain.",
    "hosts": [
     "wikidex.net",
     "www.wikidex.net",
     "wikidexcdn.net",
     "images.wikidexcdn.net"
    ],
-   "uniqueSources": 5,
-   "claimsSupported": 11
+   "uniqueSources": 6,
+   "claimsSupported": 12
   },
   {
    "providerId": "snkrdunk",
@@ -1315,6 +1362,58 @@
    "usageCount": 199
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Gym_Heroes_(TCG)&prop=wikitext&format=json&redirects=1",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-31f9ae0c-0e3e-5d1e-a51b-948b237e401a"
+   ],
+   "retrievedAt": "2026-10-11T10:37:53Z",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-b81fe1f5-4b3d-5d28-a4be-e02b50879e83",
+    "item-f5a9b94f-31a6-593f-aa37-e15f51d92926"
+   ],
+   "retrievedAt": "2026-10-11T10:36:52Z",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa"
+   ],
+   "retrievedAt": "2026-10-11T10:37:53Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -1392,6 +1491,23 @@
     "TH:AS5a:142/184:base"
    ],
    "retrievedAt": null,
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/All_Stars_Collection_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-ab69113c-b6ca-5c68-9240-5b89f5131184"
+   ],
+   "retrievedAt": "2026-10-11",
    "usageCount": 1
   },
   {
@@ -1698,17 +1814,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
+    "Reviewed item-scoped release date",
     "Reviewed positive physical-printing evidence"
    ],
    "dimensions": [
+    "date",
     "finish"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "SET-SRC-BP-AS5D-FINISH-TW-20261001"
+    "SET-SRC-BP-AS5D-FINISH-TW-20261001",
+    "item-1d40f4ba-2764-5a83-b82b-912d2e3a4c33"
    ],
-   "retrievedAt": "2026-10-01",
-   "usageCount": 1
+   "retrievedAt": "2026-10-11",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
@@ -1857,6 +1976,23 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Ex_Starter_Deck_Pikachu_(ATCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-04e06921-a939-57c7-91d8-756329963c79"
+   ],
+   "retrievedAt": "2026-10-11",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Fates_Collide_(TCG)",
@@ -2302,6 +2438,23 @@
    "usageCount": 12
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_Build_%26_Battle_Box_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-0f9fb4ce-0ec9-5c4c-9d3a-08bae6a97eb7"
+   ],
+   "retrievedAt": "2026-10-11T10:34:42.312510+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -2541,17 +2694,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
+    "Reviewed item-scoped release date",
     "Reviewed positive physical-printing evidence"
    ],
    "dimensions": [
+    "date",
     "finish"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "SET-SRC-BP-scA I-084-135-FINISH-ID-20261005"
+    "SET-SRC-BP-scA I-084-135-FINISH-ID-20261005",
+    "item-6e132be0-6a80-5803-a97a-cbf30666a3d6"
    ],
-   "retrievedAt": "2026-10-02",
-   "usageCount": 1
+   "retrievedAt": "2026-10-11",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Peerless_Fighters_(TCG)",
@@ -2675,6 +2831,23 @@
    ],
    "retrievedAt": "2026-08-02",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_GO_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-1a3fe967-1e33-5730-ba23-bf35b99cbebe"
+   ],
+   "retrievedAt": "2026-10-11",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)",
@@ -2950,17 +3123,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Traditional Chinese promo series article and starter-set article"
+    "Bulbapedia (fan wiki), Traditional Chinese promo series article and starter-set article",
+    "Reviewed item-scoped release date"
    ],
    "dimensions": [
+    "date",
     "language"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "U0678"
+    "U0678",
+    "item-8889f9aa-bf7e-5893-9303-d106ac37d7f7"
    ],
-   "retrievedAt": "2026-08-08",
-   "usageCount": 1
+   "retrievedAt": "2026-10-11",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/SVP_Black_Star_Promos_(TCG)",
@@ -3129,6 +3305,41 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax-GX_(SM_Promo_5)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-68d7d699-9681-53ff-8cb2-0c80fd693324"
+   ],
+   "retrievedAt": "2026-10-11T10:33:40.197658Z",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
+    "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56"
+   ],
+   "retrievedAt": "2026-10-11T10:33:14.996679Z",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Call_of_Legends_33)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -3149,23 +3360,78 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Plasma_Storm_101)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-0106f682-b985-523b-8a3a-53fc115c003d",
+    "item-f408a049-2582-589d-a685-f3f814070819"
+   ],
+   "retrievedAt": "2026-10-11T10:33:40.399532Z",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Rising_Rivals_33)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia card release history"
+    "Bulbapedia card release history",
+    "Reviewed item-scoped release date"
    ],
    "dimensions": [
+    "date",
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "F0308-P02",
+    "item-cd6a082f-82c6-59fb-b268-3b9a5df9ace7",
     "override:rising-rivals-snorlax"
    ],
-   "retrievedAt": null,
-   "usageCount": 2
+   "retrievedAt": "2026-10-11T10:33:40.383510Z",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(SVP_Promo_122)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-399ffa2b-b7e9-5122-babe-16e58fc08226"
+   ],
+   "retrievedAt": "2026-10-11T10:33:41.494816+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(SWSH_Promo_119)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-6a9008c4-08da-5da6-9acf-7a426f24de55"
+   ],
+   "retrievedAt": "2026-10-11T10:33:38.679272+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
@@ -3191,6 +3457,23 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_LV.X_(Rising_Rivals_111)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-4f32febf-27a6-5378-8d66-d3088acad72f"
+   ],
+   "retrievedAt": "2026-10-11T10:33:40.447486Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_VMAX_(Sword_%26_Shield_142)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -3206,6 +3489,32 @@
    ],
    "retrievedAt": "2026-07-22",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 10,
+   "stableIds": [
+    "item-0b25f883-edfa-5e53-94fb-fb13ae7e386b",
+    "item-0e65767a-04b6-5fe0-9d02-9b6e64f53149",
+    "item-103c5d1c-2b05-51c3-92e6-848d45f96b86",
+    "item-226f7cb1-f045-57e1-a96c-3598cc0278c5",
+    "item-315a2de4-ab38-50ad-aa87-a2868d209d96",
+    "item-38a86735-745f-506f-894c-25ab590308c0",
+    "item-7781cd47-058d-5f7b-b269-974b71689c26",
+    "item-7be7cb28-ca03-5e69-8d94-272fd90e198a",
+    "item-b6fdf806-2265-5097-b3c1-2614e7bf805a",
+    "item-cfa2ff16-5c86-5732-bc59-739356ca6aa3"
+   ],
+   "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+   "usageCount": 10
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
@@ -3264,6 +3573,24 @@
     "U0674"
    ],
    "retrievedAt": "2026-08-02",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_CoroCoro_Comic_Version_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-b6e814c3-046d-564d-8f92-6bc53c19bb1d",
+    "item-c88bb2db-5774-53d3-9d48-905c38aa5de9"
+   ],
+   "retrievedAt": "2026-10-11T10:33:40.477773Z",
    "usageCount": 2
   },
   {
@@ -3345,6 +3672,23 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_TCG_Series_merchandise",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-db82b0ce-1aa7-5b0b-9ac0-95d0d518c8f1"
+   ],
+   "retrievedAt": "2026-10-11T10:33:46.727721+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
@@ -3365,6 +3709,23 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_TCG_Series_merchandise",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-d7b63ec6-bafb-5bab-9b63-63798de7f06e"
+   ],
+   "retrievedAt": "2026-10-11T10:33:47.854385+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_V_Starter_Deck_(ATCG)",
@@ -3504,6 +3865,23 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Voltage_Build_%26_Battle_Box_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-18e4d71b-7c41-5238-a380-f288da49751b"
+   ],
+   "retrievedAt": "2026-10-11T10:34:41.230698+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/XY-P_Promotional_cards_(TCG)",
@@ -14610,6 +14988,23 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/id/archives/2854",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-9a8d92a4-5559-5008-8009-1fdb8b128dff"
+   ],
+   "retrievedAt": "2026-10-11T10:36:14.799408+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/id/card-img/id00000454.png",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -15818,6 +16213,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/sg/archives/6689",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-466fef23-3569-5c26-b37f-a1c38c25dba6"
+   ],
+   "retrievedAt": "2026-10-11T10:35:16.881779+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/th/archive/special/card/ma6",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -16905,6 +17317,23 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-6754a89d-5fe0-5779-a495-378b2b19a5e0"
+   ],
+   "retrievedAt": "2026-10-11",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/m6a",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-asia",
@@ -16944,6 +17373,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://asia.pokemon-card.com/tw/archive/special/card/sv4",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-asia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-03efeb89-0dfe-5e9e-a4aa-a457f9ece9fa"
+   ],
+   "retrievedAt": "2026-10-11",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://asia.pokemon-card.com/tw/card-img/tw00000375.png",
@@ -19286,6 +19732,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-jp",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-1ae61864-2562-5080-966f-cd6421e6d525"
+   ],
+   "retrievedAt": "2026-10-11T10:34:30.946818Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokemon-card.com/ex/m2a/index.html",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-jp",
@@ -19312,6 +19775,23 @@
    ],
    "retrievedAt": "2026-07-23",
    "usageCount": 11
+  },
+  {
+   "canonicalUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-jp",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-ee62219c-7039-5a75-b715-c7d4de186d11"
+   ],
+   "retrievedAt": "2026-10-11T10:35:03.260221Z",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/BW/BW7/bw7_055.jpg?w=512",
@@ -21797,6 +22277,25 @@
    ],
    "retrievedAt": "2026-10-07",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/other/21726.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "item-6d01abe3-a756-5273-b9e3-8939266718bf",
+    "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8",
+    "item-c7eec9be-fb9a-5be1-a093-39b147541339"
+   ],
+   "retrievedAt": "2026-10-11",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/15476.html",
@@ -24537,6 +25036,109 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Die-Erweiterung-Karmesin-Purpur-151-des-Pokemon-Samme",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-6ff040a0-558c-5a4e-b15b-c8692a5d46a6"
+   ],
+   "retrievedAt": "2026-10-11T10:39:24.662526+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-18f233d7-5522-5d17-9efb-8f8372226d31"
+   ],
+   "retrievedAt": "2026-10-11T10:39:25.524822+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-lextension-Ecarlate-et-Violet-151-du-Jeu-de-Cartes-a-Colle",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-e7910b9c-d973-5cb3-8a33-8195f6283035"
+   ],
+   "retrievedAt": "2026-10-11T10:39:24.714982+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-6bf73acf-2d3d-5208-8fdf-ce2196a6f1d1"
+   ],
+   "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://press.pokemon.com/en/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-85d569de-bd2a-51f6-a00e-7d870e35b60f",
+    "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085"
+   ],
+   "retrievedAt": "2026-10-11T10:39:23.553195+00:00",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://press.pokemon.com/pt-BR/releases/MEDIA-ALERT-Pokemon-Trading-Card-Game-Scarlet-Violet151-Expansion-Laun",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-3a558899-680c-55ea-a50b-2bd247fe7c13"
+   ],
+   "retrievedAt": "2026-10-11T10:39:23.554039+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://tcg.pokemon.com/de-de/expansions/30th-celebration",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -24787,6 +25389,23 @@
    ],
    "retrievedAt": "2026-09-10",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-7434769f-81a6-50cf-9008-cf431cf4eaae"
+   ],
+   "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
@@ -25087,6 +25706,58 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-213351eb-ed62-543f-a937-cb165d507bb2",
+    "item-7ee88eb1-4221-59e9-914e-8480901e0754"
+   ],
+   "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-e7b546df-41e3-5692-9517-ff00bf6b34e7"
+   ],
+   "retrievedAt": "2026-10-11T10:38:15.769189+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-2969946c-64a3-5ac8-b2d2-1944604d0d1e"
+   ],
+   "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": null,
    "nonUrlEvidenceId": "evidence:pokemontcgio",
    "providerId": "pokemontcgio",
@@ -25240,6 +25911,42 @@
    ],
    "retrievedAt": null,
    "usageCount": 57
+  },
+  {
+   "canonicalUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokepedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-e0ed177d-8f12-50b7-a00d-2eee0e101c20",
+    "item-ec142827-16de-575a-aebc-265df36cf588"
+   ],
+   "retrievedAt": "2026-10-11T10:34:41Z",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokewiki",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
+    "item-bf2b9073-8aeb-5e49-98ed-d0d6cc92bbbc"
+   ],
+   "retrievedAt": "2026-10-11T10:33:41Z",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokumon.com/?s=snorlax+s-p",
@@ -36433,6 +37140,23 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "wikidex",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-134d7cff-5acc-53a0-b171-a0e11019fc6d"
+   ],
+   "retrievedAt": "2026-10-11T10:34:41Z",
+   "usageCount": 1
   }
  ]
 }

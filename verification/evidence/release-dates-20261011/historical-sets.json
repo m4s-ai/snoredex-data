@@ -1,0 +1,1235 @@
+{
+  "task": "Historical-set/card incomplete release-date research",
+  "recordedAt": "2026-10-11T10:40:14.505237+00:00",
+  "assignedTargets": 10,
+  "trackedEdits": [
+    "scripts/source_registry.py PROVIDERS block only",
+    "verification/source_capabilities.json manual date-only surfaces and retained fixtures"
+  ],
+  "networkNote": "Initial sandbox access denied and proxy tunnel403; fresh requests after meaningful policy change succeeded. All source HTTP fetches used inherited proxy and TLS verification. No access-control bypass.",
+  "scopeRules": [
+    "No tracked repository edits made; proposals require root integration through the correct owning lane.",
+    "Use exact setEditionId/cardReleaseId scope; no transfer to another language, market, first-edition wave, unlimited reprint, stamped product, or print-error subtype.",
+    "collector_catalogue.release_date_values intentionally keeps a present source-first unknown date unknown unless its own reviewed release event supplies a date; legacy product dates must not be copied back."
+  ],
+  "sources": [
+    {
+      "key": "bulbapedia-api-jungle",
+      "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+      "retrievedAt": "2026-10-11T10:36:52Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+      "byteLength": 15406,
+      "responseSha256": "da9ceb5cd2130b69f1bf39acdf2a3f522169f03236eabb4183480081c4032aeb",
+      "pageTitle": null,
+      "textLength": 15386,
+      "sourceId": "bulbapedia-api-jungle",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/bulbapedia-api-jungle.html",
+      "excerpts": [
+        {
+          "content": "|enrelease=June 16, 1999",
+          "excerptSha256": "56d3ab1712344beb75848c09e63579003bdca690a898d5ba3e44e9c11196e226",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        },
+        {
+          "content": "{{Setlist/nmentry|11/64|{{TCG ID|Jungle|Snorlax|11}}|Colorless||Rare Holo}}",
+          "excerptSha256": "9b987bbafc02a5a9b7085ce70f6726c15575b5f5dffa7b0e946536c5371cb5de",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        },
+        {
+          "content": "{{Setlist/nmentry|27/64|{{TCG ID|Jungle|Snorlax|27}}|Colorless||Rare}}",
+          "excerptSha256": "ca1bf42748c6611b50917cf79267fd413642b120d37257191f58c426e8be48cf",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        },
+        {
+          "content": "Subsequently all other language releases for Jungle were February of 2000.",
+          "excerptSha256": "f1b773b3b3b0fe88068fbfab7f0629cfc95fa891813d6ec21db5768f8bd04d51",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        },
+        {
+          "content": "The Jungle set is released in English, Dutch, German, French, Italian, Spanish, and Portuguese in both 1st and unlimited edition.",
+          "excerptSha256": "bd0ba551d844feb0cd26d90aed6454bd4a2a8b5e3cd7044985deee113efd4522",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        }
+      ],
+      "fieldLimits": [
+        "enrelease is explicitly English; jarelease is Japanese and must not be selected.",
+        "No individual first-edition/unlimited wave dates are stated.",
+        "Blanket non-English February 2000 statement conflicts with localized German and French articles; it is retained as a disputed lead, not accepted as a blanket local date."
+      ]
+    },
+    {
+      "key": "bulbapedia-api-gym",
+      "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Gym_Heroes_(TCG)&prop=wikitext&format=json&redirects=1",
+      "retrievedAt": "2026-10-11T10:37:53Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Gym_Heroes_(TCG)&prop=wikitext&format=json&redirects=1",
+      "byteLength": 25737,
+      "responseSha256": "6abf0a40252d3308732d043093417ffdfa2f2886542819896f2709a99fa401e6",
+      "pageTitle": null,
+      "textLength": 25723,
+      "sourceId": "bulbapedia-api-gym",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/bulbapedia-api-gym.html",
+      "excerpts": [
+        {
+          "content": "|enrelease=August 14, 2000",
+          "excerptSha256": "eb397a3db79ec2087ba2063d5984ea6f39a10208ee5fbfada500c46f3e84eda5",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        },
+        {
+          "content": "{{Setlist/nmentry|33/132|{{TCG ID|Gym Heroes|Rocket's Snorlax|33}}|Colorless||Rare}}",
+          "excerptSha256": "36c5d83ce7051a9914e7bd56a5a1a19492b52e097822616a315425892f2c6bdf",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        }
+      ],
+      "fieldLimits": [
+        "Date supports the English expansion launch and its numbered-run GH33 member.",
+        "It does not establish separate unlimited-production or regional rerelease dates."
+      ]
+    },
+    {
+      "key": "bulbapedia-api-wp49",
+      "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+      "retrievedAt": "2026-10-11T10:37:53Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+      "byteLength": 5168,
+      "responseSha256": "380ac2cb86216f967a5bd2f707a3a2aed384a4c4208410a24dda15da991f20e3",
+      "pageTitle": null,
+      "textLength": 5159,
+      "sourceId": "bulbapedia-api-wp49",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/bulbapedia-api-wp49.html",
+      "excerpts": [
+        {
+          "content": "It was released in English as a {{TCG|Wizards Black Star Promos|Wizards Black Star Promo}} and was available through the {{TCG|Pokémon League}} in August 2002, with English-exclusive artwork.",
+          "excerptSha256": "1912b45f7d544b383e8cd82b963d1c9c71d07b8b1eae16e8a67c2d8e69502612",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        }
+      ],
+      "fieldLimits": [
+        "Only month precision is asserted; no day.",
+        "The Japanese Expansion Sheet/Quick Starter versions on this shared work page are distinct releases."
+      ]
+    },
+    {
+      "key": "wizards-promos",
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Wizards_Black_Star_Promos_(TCG)",
+      "retrievedAt": "2026-10-11T10:33:40Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/wiki/Wizards_Black_Star_Promos_(TCG)",
+      "byteLength": 171956,
+      "responseSha256": "3e93bd8eb7232da2d7b90d55c2caa76dd6ecdd688d5106faef0e2b12e32ffeca",
+      "pageTitle": "Wizards Black Star Promos (TCG) - Bulbapedia, the community-driven Pokémon encyclopedia",
+      "textLength": 8035,
+      "revisionId": 4611969,
+      "sourceId": "wizards-promos",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/wizards-promos.html",
+      "excerpts": [
+        {
+          "content": "49 Snorlax — Pokémon League (August 2002)",
+          "excerptSha256": "c71932851837a311249b526b571da2ba2dde4f0c40506a726fdf0ece60e7032f",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Same provider as exact-card article, not independent corroboration."
+      ]
+    },
+    {
+      "key": "snorlax-jungle",
+      "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Jungle_11)",
+      "retrievedAt": "2026-10-11T10:33:40Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Jungle_11)",
+      "byteLength": 130123,
+      "responseSha256": "ebfbb1cbad752f0407bac1c37a931d2618fead2e9862d66ad57da6cf560a64d9",
+      "pageTitle": "Snorlax (Jungle 11) - Bulbapedia, the community-driven Pokémon encyclopedia",
+      "textLength": 6181,
+      "revisionId": 4631193,
+      "sourceId": "snorlax-jungle",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/snorlax-jungle.html",
+      "excerpts": [
+        {
+          "content": "This card was included in the Jungle expansion as both a Holofoil and Non Holofoil card, first released in the Japanese Pokémon Jungle expansion as only a Holofoil card.",
+          "excerptSha256": "55d3da72d467085817539456f2138281244919db277090ad650a2b020ac514d3",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Shared work article separates later Base Set 2 and Legendary Collection reprints from Jungle."
+      ]
+    },
+    {
+      "key": "official-jungle-checklist-archive",
+      "url": "https://web.archive.org/web/20030726012754/http://www.wizards.com/default.asp?x=pokemon/junglechecklists",
+      "retrievedAt": "2026-10-11T10:34:41Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://web.archive.org/web/20030726012754/http://www.wizards.com/default.asp?x=pokemon/junglechecklists",
+      "byteLength": 27906,
+      "responseSha256": "cdc06b87027eef224dee7c2a448f2b31639a87773f551c9f30fc6756d52666c8",
+      "textLength": 2080,
+      "decodeEncoding": "windows-1252",
+      "sourceId": "official-jungle-checklist-archive",
+      "providerId": "wizards-of-the-coast",
+      "providerReviewStatus": "publisher-origin archived checklist; provider/surface review needed",
+      "responsePath": "/tmp/snoredex-historical-research/official-jungle-checklist-archive.html",
+      "excerpts": [
+        {
+          "content": "11 Snorlax Rare-Holo",
+          "excerptSha256": "74eb89b780aae703d030eebb70cd94cb757f407a9871158c0e0d2b128c1898fd",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "27 Snorlax Rare",
+          "excerptSha256": "e647a0008d630f8ae468a835358c8430a02dc67e1127e7d9f5f9dc49d17db80c",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Original Wizards checklist preserves exact English numbered membership.",
+        "The checklist does not state a release date; do not promote its 2003 archive timestamp to a release date."
+      ]
+    },
+    {
+      "key": "official-gym-checklist-archive",
+      "url": "https://web.archive.org/web/20030726012632/http://www.wizards.com/default.asp?x=pokemon/gymheroeschecklists",
+      "retrievedAt": "2026-10-11T10:34:41Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://web.archive.org/web/20030726012632/http://www.wizards.com/default.asp?x=pokemon/gymheroeschecklists",
+      "byteLength": 33066,
+      "responseSha256": "532ef57e6ee77c1944f6ef06b00a5bce324d59aa44819f4d07db22a6a9678871",
+      "textLength": 4727,
+      "decodeEncoding": "windows-1252",
+      "sourceId": "official-gym-checklist-archive",
+      "providerId": "wizards-of-the-coast",
+      "providerReviewStatus": "publisher-origin archived checklist; provider/surface review needed",
+      "responsePath": "/tmp/snoredex-historical-research/official-gym-checklist-archive.html",
+      "excerpts": [
+        {
+          "content": "33 Rocket's Snorlax Rare",
+          "excerptSha256": "77c955cfbd9bdcdb123c05385d741eeb813990ceed8cfe6d48c339ba4b004580",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Supports exact English GH33 numbered member; no release date on this checklist."
+      ]
+    },
+    {
+      "key": "pokewiki-jungle",
+      "url": "https://www.pokewiki.de/Dschungel_(TCG)",
+      "retrievedAt": "2026-10-11T10:33:41Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
+      "byteLength": 137841,
+      "responseSha256": "0af70831e46096f68171ed2ba1406c6b9bcc234fa1f943a85319d08834cb1d9a",
+      "pageTitle": "Dschungel (TCG) – PokéWiki",
+      "textLength": 7720,
+      "revisionId": 2700986,
+      "sourceId": "pokewiki-jungle",
+      "providerId": "pokewiki",
+      "providerReviewStatus": "registered tier-3 manual positive date surface; exact localized field only",
+      "responsePath": "/tmp/snoredex-historical-research/pokewiki-jungle.html",
+      "excerpts": [
+        {
+          "content": "Dschungel Englisch Jungle Erscheinungstermin Deutsch: Juni 2000 Englisch: 16.06.1999",
+          "excerptSha256": "f6459fa177dc3e1c6870c6415dc2d7fe8849e0565a201621d8aef552eff27db5",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "11/64 Relaxo 20",
+          "excerptSha256": "c4dd94e1790d9f04060c1957827e722310a12340933a86c9fa999f2ce7c27078",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "27/64 Relaxo 20",
+          "excerptSha256": "7e8c984c6cbc45f12c43f63dbca2b85edf193f9b49d30409f4a0e0c8162b5ee4",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Explicit German Dschungel month; no day.",
+        "Conflicts with Bulbapedia blanket February 2000; needs source reconciliation, not automatic transfer of EN 1999-06-16.",
+        "German-language expansion debut; country Germany is not independently named by this field"
+      ],
+      "capabilitySurfaceId": "pokewiki-jungle-de-release-date",
+      "capabilityEdgeId": "pokewiki-jungle-de-release-date-positive"
+    },
+    {
+      "key": "pokepedia-jungle",
+      "url": "https://www.pokepedia.fr/Jungle_(JCC)",
+      "retrievedAt": "2026-10-11T10:34:41Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
+      "byteLength": 471305,
+      "responseSha256": "135f4fc4816b0070ee30521b3cd5ae890cc885498fe2181d3800b7c7f4e8de95",
+      "pageTitle": "Jungle (JCC) — Poképédia",
+      "textLength": 12983,
+      "revisionId": 3158209,
+      "sourceId": "pokepedia-jungle",
+      "providerId": "pokepedia",
+      "providerReviewStatus": "registered tier-3 manual positive date surface; exact localized field only",
+      "responsePath": "/tmp/snoredex-historical-research/pokepedia-jungle.html",
+      "excerpts": [
+        {
+          "content": "Sortie Amérique du Nord 16 juin 1999 France 01 juillet 2000",
+          "excerptSha256": "8fb109c005e6f6c9230460bb467c653b4b0b374aadee92fc86961371974aa20e",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "11 /64 Ronflex",
+          "excerptSha256": "98d3823d9dfb59cb7a6a053ab9a57302f17ddef7da8af6c181dd42e29c47af9b",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "27 /64 Ronflex Version non-holographique de Ronflex (Jungle 11)",
+          "excerptSha256": "6c611dd343b415c5308bbcc81c55ad7ee3250135ddc16517ae87296b901888c2",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "France-localized set launch is explicit 2000-07-01.",
+        "Source disagrees with blanket Bulbapedia February 2000; do not erase the conflict or label EN 1999-06-16 French.",
+        "Exact first-edition/unlimited wave dates not independently specified.",
+        "France only; no Canada, Belgium, Switzerland or other French-speaking market inferred"
+      ],
+      "capabilitySurfaceId": "pokepedia-jungle-fr-release-date",
+      "capabilityEdgeId": "pokepedia-jungle-fr-release-date-positive"
+    },
+    {
+      "key": "wikidex-jungle",
+      "url": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+      "retrievedAt": "2026-10-11T10:34:41Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+      "byteLength": 105098,
+      "responseSha256": "2896dafdc206f989c6c166316f47ea72773813c0efd154ccf80a9dda6612de1f",
+      "pageTitle": "Jungla (TCG) - WikiDex, la enciclopedia Pokémon",
+      "textLength": 4991,
+      "revisionId": 3490374,
+      "sourceId": "wikidex-jungle",
+      "providerId": "wikidex",
+      "providerReviewStatus": "registered tier-3 manual positive date surface; exact localized field only",
+      "responsePath": "/tmp/snoredex-historical-research/wikidex-jungle.html",
+      "excerpts": [
+        {
+          "content": "Fecha de lanzamiento: 2000 (ES) Desconocida (HA) 16 de junio de 1999 (EE.UU.) 5 de marzo de 1997 (JA)",
+          "excerptSha256": "9004ccd069ba6969b35518cba396bd69df03893b8452c180565211afdcd9c7b5",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Spain is explicitly year 2000; Hispanic America unknown.",
+        "Full EN date is explicitly EE.UU., not Spanish.",
+        "No Spanish month/day specified; blanket Bulbapedia month remains disputed.",
+        "Spain (ES), not Hispanic America (HA)"
+      ],
+      "capabilitySurfaceId": "wikidex-jungle-es-release-date",
+      "capabilityEdgeId": "wikidex-jungle-es-release-date-positive"
+    },
+    {
+      "key": "pokumon-wp49-detail",
+      "url": "https://pokumon.com/card/snorlax-49-wizards-black-star-english-promo/",
+      "retrievedAt": "2026-10-11T10:36:52Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://pokumon.com/card/snorlax-49-wizards-black-star-english-promo/",
+      "byteLength": 780928,
+      "responseSha256": "1eb7bbe5e26a16acf0074f180bd68adfe85a41e023ba4ec8f6213c803e8efcfd",
+      "pageTitle": "Snorlax (49/Wizards Black Star English Promo) - Pokumon",
+      "textLength": 118402,
+      "sourceId": "pokumon-wp49-detail",
+      "providerId": "pokumon",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/pokumon-wp49-detail.html",
+      "excerpts": [
+        {
+          "content": "Snorlax (49/Wizards Black Star English Promo) Pokémon League (August 2002)",
+          "excerptSha256": "de94039207d7fc3ba8c5dcd6ad3d7577953e4627b4c7ab5f0abf4c6e884ec921",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Independent provider agrees on exact English WP49 and month; no day."
+      ]
+    },
+    {
+      "key": "pokumon-league-year3",
+      "url": "https://pokumon.com/wizards-pokemon-league-year-3-energize-your-game/",
+      "retrievedAt": "2026-10-11T10:37:53Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://pokumon.com/wizards-pokemon-league-year-3-energize-your-game/",
+      "byteLength": 841416,
+      "responseSha256": "2ec4591dfba9c46066bf812aef10a615dc22b3dd896c7e789a58776a7ad0a5db",
+      "pageTitle": "Wizards Pokemon League Year 3: Energize Your Game - Pokumon",
+      "textLength": 122868,
+      "sourceId": "pokumon-league-year3",
+      "providerId": "pokumon",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/pokumon-league-year3.html",
+      "excerpts": [
+        {
+          "content": "Year 3’s season started on January 6, 2002, and lasted until October 2002.",
+          "excerptSha256": "74e6c172e1818ee7a68752e7149ed1c52cb8c5fa401a16251f47da75994d8ed6",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        },
+        {
+          "content": "Season 8 (Colorless) Colorless License Classic Promo Mewtwo (3/Wizards Black Star English Promo) New Promo Snorlax (49/Wizards Black Star English Promo)",
+          "excerptSha256": "91f3ffa2f0eb0b73046a3232b43319ce5d5b828a65a8f5783902381bf2f1a4cd",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Year/campaign opening 2002-01-06 is not the WP49 release date.",
+        "Season8 membership does not provide its first-distribution day."
+      ]
+    },
+    {
+      "key": "official-league-year3-intro",
+      "url": "https://web.archive.org/web/20020202083751/http://www.wizards.com/default.asp?x=pokemon/league/year3Intro",
+      "retrievedAt": "2026-10-11T10:38:21Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://web.archive.org/web/20020202083751/http://www.wizards.com/default.asp?x=pokemon/league/year3Intro",
+      "byteLength": 23780,
+      "responseSha256": "6c0fa7a333a6be156ed9cd5cc4198beb7fd5626d531f8de8dcc0fe82d39d64cd",
+      "pageTitle": "Pokémon TCG League: What's New in 2002?",
+      "textLength": 2076,
+      "sourceId": "official-league-year3-intro",
+      "providerId": "wizards-of-the-coast",
+      "providerReviewStatus": "publisher-origin archived article; provider/surface review needed",
+      "responsePath": "/tmp/snoredex-historical-research/official-league-year3-intro.html",
+      "excerpts": [
+        {
+          "content": "The first 4 weeks of each season give you the opportunity to play and test your deck while earning Classic Promo cards and new unique mechanic cards while working toward your placement for the exciting season-ending tournament!",
+          "excerptSha256": "94db40cec0019cbfca238b35b3f2c69b06f7a8363e205a38a0ab2bc2009de102",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "HTML text extraction; original response retained separately"
+        }
+      ],
+      "fieldLimits": [
+        "Supports League reward mechanism, no WP49-specific day.",
+        "Archive capture 2002-02-02 is not WP49 distribution date."
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "itemId": "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa",
+      "cardReleaseId": "RELEASE:WEST:English:WP:49:Snorlax-Guard-Roll-Over",
+      "setEditionId": "EDITION:WEST:English:WP",
+      "physicalPrintingId": "PHYSICAL:F0590-P01",
+      "sourcePrintingId": "F0590-P01",
+      "finishUnitId": "F0590",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "WP",
+      "collectorNumber": "49",
+      "edition": null,
+      "releaseDate": "2002-08",
+      "releaseDatePrecision": "month",
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "existing-month-confirmed-no-supported-day",
+      "proposedDate": "2002-08",
+      "proposedPrecision": "month",
+      "integrate": false,
+      "sourceIds": [
+        "bulbapedia-api-wp49",
+        "wizards-promos",
+        "pokumon-wp49-detail",
+        "pokumon-league-year3",
+        "official-league-year3-intro"
+      ],
+      "finding": "Exact WP49 English distribution is Pokémon League, August 2002. Independent exact promo record agrees. Campaign opening and archive snapshots cannot supply a card-specific day.",
+      "nextLead": "Original Wizards Season 8 League reward/schedule notice, or dated distributor allocation record, explicitly linking WP49 to its first availability.",
+      "releaseDateScope": "existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "snorlax-wp49",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "wizards-promos",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Wizards_Black_Star_Promos_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "pokemon-league",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_League_(TCG)",
+          "retrievedAt": "2026-10-11T10:35:39Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "pokumon-search",
+          "url": "https://pokumon.com/?s=snorlax+49",
+          "retrievedAt": "2026-10-11T10:35:39Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "pokumon-wp49-detail",
+          "url": "https://pokumon.com/card/snorlax-49-wizards-black-star-english-promo/",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "pokumon-league-year3",
+          "url": "https://pokumon.com/wizards-pokemon-league-year-3-energize-your-game/",
+          "retrievedAt": "2026-10-11T10:37:53Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "official-league-year3-intro",
+          "url": "https://web.archive.org/web/20020202083751/http://www.wizards.com/default.asp?x=pokemon/league/year3Intro",
+          "retrievedAt": "2026-10-11T10:38:21Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "virginia-league-history",
+          "url": "https://sites.google.com/site/virginiapokemon/league/history/energize",
+          "retrievedAt": "2026-10-11T10:38:21Z",
+          "httpStatus": 200,
+          "outcome": "Redirected to Google sign-in; private/unavailable historical content not inspected."
+        },
+        {
+          "sourceKey": "pojo-wizards-chat-122101",
+          "url": "https://www.pojo.com/Features/0801/122101WotcChat.html",
+          "retrievedAt": "2026-10-11T10:38:21Z",
+          "httpStatus": null,
+          "outcome": "HTTPError: HTTP Error 403: Forbidden"
+        },
+        {
+          "sourceKey": "google-wp49",
+          "url": "https://www.google.com/search?q=Snorlax+49+Wizards+Pokemon+League+August+2002+release+date",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-wp49",
+          "url": "https://www.bing.com/search?q=Snorlax+49+Wizards+Pokemon+League+August+2002+release+date",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ]
+    },
+    {
+      "itemId": "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
+      "cardReleaseId": "RELEASE:WEST:German:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:German:JU",
+      "physicalPrintingId": "PHYSICAL:F0163-P01",
+      "sourcePrintingId": "F0163-P01",
+      "finishUnitId": "F0163",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "JU",
+      "collectorNumber": "11",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-tier-3-native-localized-expansion-date",
+      "proposedDate": "2000-06",
+      "proposedPrecision": "month",
+      "integrate": true,
+      "sourceIds": [
+        "pokewiki-jungle",
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "Exact German Dschungel article dates the set to Juni 2000 and lists Relaxo 11/64. Bulbapedia says all non-English languages February2000. The exact native local-language field is now registered as bounded tier-3 manual positive date evidence.",
+      "nextLead": "Historical AMIGO/Wizards German distributor Dschungel launch notice or magazine advertisement; preserve the February-vs-June conflict.",
+      "releaseDateScope": "German-language expansion debut; country Germany is not independently named by this field; expansion debut only, not an individual physical printing or reprint-wave production date",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-germany",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_Germany",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "pokewiki-jungle",
+          "url": "https://www.pokewiki.de/Dschungel_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "google-jungle-de",
+          "url": "https://www.google.com/search?q=Pok%C3%A9mon+Dschungel+Erweiterung+Juni+2000+Erscheinung",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-de",
+          "url": "https://www.bing.com/search?q=Pok%C3%A9mon+Dschungel+Erweiterung+Juni+2000+Erscheinung",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ],
+      "capabilitySurfaceId": "pokewiki-jungle-de-release-date",
+      "sourceNativeQualifier": "Deutsch",
+      "conflictResolution": "Prefer the individually reviewed native localized field to the disputed blanket non-English February 2000 sentence. Retain both statements and their exact scopes; authority tiers alone do not reconcile the conflict."
+    },
+    {
+      "itemId": "item-bf2b9073-8aeb-5e49-98ed-d0d6cc92bbbc",
+      "cardReleaseId": "RELEASE:WEST:German:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:German:JU",
+      "physicalPrintingId": "PHYSICAL:F0170-P01",
+      "sourcePrintingId": "F0170-P01",
+      "finishUnitId": "F0170",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "JU",
+      "collectorNumber": "27",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-tier-3-native-localized-expansion-date",
+      "proposedDate": "2000-06",
+      "proposedPrecision": "month",
+      "integrate": true,
+      "sourceIds": [
+        "pokewiki-jungle",
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "Exact German Dschungel article dates the set to Juni 2000 and lists Relaxo 27/64. Bulbapedia says all non-English languages February2000. The exact native local-language field is now registered as bounded tier-3 manual positive date evidence.",
+      "nextLead": "Historical AMIGO/Wizards German distributor Dschungel launch notice or magazine advertisement; preserve the February-vs-June conflict.",
+      "releaseDateScope": "German-language expansion debut; country Germany is not independently named by this field; expansion debut only, not an individual physical printing or reprint-wave production date",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-germany",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_Germany",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "pokewiki-jungle",
+          "url": "https://www.pokewiki.de/Dschungel_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "google-jungle-de",
+          "url": "https://www.google.com/search?q=Pok%C3%A9mon+Dschungel+Erweiterung+Juni+2000+Erscheinung",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-de",
+          "url": "https://www.bing.com/search?q=Pok%C3%A9mon+Dschungel+Erweiterung+Juni+2000+Erscheinung",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ],
+      "capabilitySurfaceId": "pokewiki-jungle-de-release-date",
+      "sourceNativeQualifier": "Deutsch",
+      "conflictResolution": "Prefer the individually reviewed native localized field to the disputed blanket non-English February 2000 sentence. Retain both statements and their exact scopes; authority tiers alone do not reconcile the conflict."
+    },
+    {
+      "itemId": "item-31f9ae0c-0e3e-5d1e-a51b-948b237e401a",
+      "cardReleaseId": "RELEASE:WEST:English:GH:33:Rockets-Snorlax-Restless-Sleep-Collapse",
+      "setEditionId": "EDITION:WEST:English:GH",
+      "physicalPrintingId": "PHYSICAL:F0142-P01",
+      "sourcePrintingId": "F0142-P01",
+      "finishUnitId": "F0142",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "GH",
+      "collectorNumber": "33",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-language-qualified-expansion-launch",
+      "proposedDate": "2000-08-14",
+      "proposedPrecision": "day",
+      "integrate": true,
+      "sourceIds": [
+        "bulbapedia-api-gym",
+        "official-gym-checklist-archive"
+      ],
+      "finding": "English Gym Heroes enrelease 2000-08-14; exact list member Rocket's Snorlax 33/132 corroborated by archived original publisher checklist. Applies to launch of its existing language-qualified release, not separate production runs.",
+      "nextLead": null,
+      "releaseDateScope": "existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "gym",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Gym_Heroes_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "rocket-snorlax",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Rocket%27s_Snorlax_(Gym_Heroes_33)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-gym",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Gym_Heroes_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:37:53Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "official-gym-checklist-archive",
+          "url": "https://web.archive.org/web/20030726012632/http://www.wizards.com/default.asp?x=pokemon/gymheroeschecklists",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        }
+      ]
+    },
+    {
+      "itemId": "item-b81fe1f5-4b3d-5d28-a4be-e02b50879e83",
+      "cardReleaseId": "RELEASE:WEST:English:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:English:JU",
+      "physicalPrintingId": "PHYSICAL:F0161-P01",
+      "sourcePrintingId": "F0161-P01",
+      "finishUnitId": "F0161",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "JU",
+      "collectorNumber": "11",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-language-qualified-expansion-launch",
+      "proposedDate": "1999-06-16",
+      "proposedPrecision": "day",
+      "integrate": true,
+      "sourceIds": [
+        "bulbapedia-api-jungle",
+        "snorlax-jungle",
+        "official-jungle-checklist-archive"
+      ],
+      "finding": "English Jungle enrelease 1999-06-16; exact numbered-run Snorlax 11/64. Archived publisher checklist agrees about numbered member. Applies to existing language-qualified launch, not another printing wave.",
+      "nextLead": null,
+      "releaseDateScope": "existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "snorlax-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Jungle_11)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "official-jungle-checklist-archive",
+          "url": "https://web.archive.org/web/20030726012754/http://www.wizards.com/default.asp?x=pokemon/junglechecklists",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        }
+      ]
+    },
+    {
+      "itemId": "item-f5a9b94f-31a6-593f-aa37-e15f51d92926",
+      "cardReleaseId": "RELEASE:WEST:English:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:English:JU",
+      "physicalPrintingId": "PHYSICAL:F0168-P01",
+      "sourcePrintingId": "F0168-P01",
+      "finishUnitId": "F0168",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "JU",
+      "collectorNumber": "27",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-language-qualified-expansion-launch",
+      "proposedDate": "1999-06-16",
+      "proposedPrecision": "day",
+      "integrate": true,
+      "sourceIds": [
+        "bulbapedia-api-jungle",
+        "snorlax-jungle",
+        "official-jungle-checklist-archive"
+      ],
+      "finding": "English Jungle enrelease 1999-06-16; exact numbered-run Snorlax 27/64. Archived publisher checklist agrees about numbered member. Applies to existing language-qualified launch, not another printing wave.",
+      "nextLead": null,
+      "releaseDateScope": "existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "snorlax-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Jungle_11)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "official-jungle-checklist-archive",
+          "url": "https://web.archive.org/web/20030726012754/http://www.wizards.com/default.asp?x=pokemon/junglechecklists",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        }
+      ]
+    },
+    {
+      "itemId": "item-134d7cff-5acc-53a0-b171-a0e11019fc6d",
+      "cardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:Spanish:JU",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
+      "sourcePrintingId": "F0165-P01",
+      "finishUnitId": "F0165",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "JU",
+      "collectorNumber": "11",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-tier-3-native-localized-expansion-date",
+      "proposedDate": "2000",
+      "proposedPrecision": "year",
+      "integrate": true,
+      "sourceIds": [
+        "wikidex-jungle",
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "WikiDex explicitly scopes Spanish Jungla to Spain year2000, HispanicAmerica unknown, US 1999-06-16. No Spain-specific month/day. Bulbapedia blanket February2000 is unreliable across non-English localities; do not silently select it.",
+      "nextLead": "Historical Devir/Wizards Spanish launch calendar; WikiDex page history/source note for its ES year and exact release.",
+      "releaseDateScope": "Spain (ES), not Hispanic America (HA); expansion debut only, not an individual physical printing or reprint-wave production date",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-spain",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_Spain",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "wikidex-jungle",
+          "url": "https://www.wikidex.net/wiki/Jungla_(TCG)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "google-jungle-es",
+          "url": "https://www.google.com/search?q=Jungla+TCG+fecha+lanzamiento+Espa%C3%B1a+2000",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-es",
+          "url": "https://www.bing.com/search?q=Jungla+TCG+fecha+lanzamiento+Espa%C3%B1a+2000",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ],
+      "capabilitySurfaceId": "wikidex-jungle-es-release-date",
+      "sourceNativeQualifier": "ES",
+      "conflictResolution": "Prefer the individually reviewed native localized field to the disputed blanket non-English February 2000 sentence. Retain both statements and their exact scopes; authority tiers alone do not reconcile the conflict."
+    },
+    {
+      "itemId": "item-e0ed177d-8f12-50b7-a00d-2eee0e101c20",
+      "cardReleaseId": "RELEASE:WEST:French:JU:11:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:French:JU",
+      "physicalPrintingId": "PHYSICAL:F0162-P01",
+      "sourcePrintingId": "F0162-P01",
+      "finishUnitId": "F0162",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "JU",
+      "collectorNumber": "11",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-tier-3-native-localized-expansion-date",
+      "proposedDate": "2000-07-01",
+      "proposedPrecision": "day",
+      "integrate": true,
+      "sourceIds": [
+        "pokepedia-jungle",
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "Poképédia Jungle states France 01 juillet 2000 and lists exact Ronflex 11/64. This is not the North America 16juin1999 field. Bulbapedia blanket February2000 disagrees. The exact France field is now registered as bounded tier-3 manual positive date evidence.",
+      "nextLead": "Original French Wizards/distributor launch calendar or contemporary product advertisement to corroborate 2000-07-01.",
+      "releaseDateScope": "France only; no Canada, Belgium, Switzerland or other French-speaking market inferred; expansion debut only, not an individual physical printing or reprint-wave production date",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-france",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_France",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "pokepedia-jungle",
+          "url": "https://www.pokepedia.fr/Jungle_(JCC)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "google-jungle-fr",
+          "url": "https://www.google.com/search?q=Jungle+JCC+date+sortie+fran%C3%A7ais+2000",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-fr",
+          "url": "https://www.bing.com/search?q=Jungle+JCC+date+sortie+fran%C3%A7ais+2000",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ],
+      "capabilitySurfaceId": "pokepedia-jungle-fr-release-date",
+      "sourceNativeQualifier": "France",
+      "conflictResolution": "Prefer the individually reviewed native localized field to the disputed blanket non-English February 2000 sentence. Retain both statements and their exact scopes; authority tiers alone do not reconcile the conflict."
+    },
+    {
+      "itemId": "item-ec142827-16de-575a-aebc-265df36cf588",
+      "cardReleaseId": "RELEASE:WEST:French:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:French:JU",
+      "physicalPrintingId": "PHYSICAL:F0169-P01",
+      "sourcePrintingId": "F0169-P01",
+      "finishUnitId": "F0169",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "JU",
+      "collectorNumber": "27",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "supported-tier-3-native-localized-expansion-date",
+      "proposedDate": "2000-07-01",
+      "proposedPrecision": "day",
+      "integrate": true,
+      "sourceIds": [
+        "pokepedia-jungle",
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "Poképédia Jungle states France 01 juillet 2000 and lists exact Ronflex 27/64. This is not the North America 16juin1999 field. Bulbapedia blanket February2000 disagrees. The exact France field is now registered as bounded tier-3 manual positive date evidence.",
+      "nextLead": "Original French Wizards/distributor launch calendar or contemporary product advertisement to corroborate 2000-07-01.",
+      "releaseDateScope": "France only; no Canada, Belgium, Switzerland or other French-speaking market inferred; expansion debut only, not an individual physical printing or reprint-wave production date",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-france",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_France",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "pokepedia-jungle",
+          "url": "https://www.pokepedia.fr/Jungle_(JCC)",
+          "retrievedAt": "2026-10-11T10:34:41Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "google-jungle-fr",
+          "url": "https://www.google.com/search?q=Jungle+JCC+date+sortie+fran%C3%A7ais+2000",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-fr",
+          "url": "https://www.bing.com/search?q=Jungle+JCC+date+sortie+fran%C3%A7ais+2000",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ],
+      "capabilitySurfaceId": "pokepedia-jungle-fr-release-date",
+      "sourceNativeQualifier": "France",
+      "conflictResolution": "Prefer the individually reviewed native localized field to the disputed blanket non-English February 2000 sentence. Retain both statements and their exact scopes; authority tiers alone do not reconcile the conflict."
+    },
+    {
+      "itemId": "item-ae2013d0-c90a-5b69-83be-2f93c17d31da",
+      "cardReleaseId": "RELEASE:WEST:Portuguese:JU:27:Snorlax-Thick-Skinned-Body-Slam",
+      "setEditionId": "EDITION:WEST:Portuguese:JU",
+      "physicalPrintingId": "PHYSICAL:PRINTING:a4fd7a57dcc14611a79cb9e5",
+      "sourcePrintingId": "F0173-P01",
+      "finishUnitId": "F0173",
+      "localizationId": "LOCALIZATION:WEST:pt",
+      "localSetCode": "JU",
+      "collectorNumber": "27",
+      "edition": null,
+      "releaseDate": null,
+      "releaseDatePrecision": null,
+      "field": "releaseDate",
+      "approximate": false,
+      "status": "unresolved-localized-date-no-reliable-month-day",
+      "proposedDate": null,
+      "proposedPrecision": null,
+      "integrate": false,
+      "sourceIds": [
+        "bulbapedia-api-jungle"
+      ],
+      "finding": "Bulbapedia names Portuguese Selva and says all non-English Jungle releases February2000, but direct German/French contradictions prevent treating the blanket statement as a reliable Portuguese launch. Brazil country article confirms historical Portuguese Jungle context without a date. No separately localized positive release date found.",
+      "nextLead": "Contemporary Devir Portuguese/Brazil Selva launch announcement or dated licensed magazine distributor notice; preserve source-native market rather than assume modern Copag scope.",
+      "releaseDateScope": "existing language-qualified expansion debut / product distribution only; no physical printing production date inferred",
+      "attemptedRoutes": [
+        {
+          "sourceKey": "jungle",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+          "retrievedAt": "2026-10-11T10:33:40Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "bulbapedia-api-jungle",
+          "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
+          "retrievedAt": "2026-10-11T10:36:52Z",
+          "httpStatus": 200,
+          "outcome": "Original page/fields inspected."
+        },
+        {
+          "sourceKey": "expansions-other-languages",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Exact Jungle native-language names inspected; index has no date field for these Western rows."
+        },
+        {
+          "sourceKey": "pokemon-brazil",
+          "url": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_in_Brazil",
+          "retrievedAt": "2026-10-11T10:33:41Z",
+          "httpStatus": 200,
+          "outcome": "Country TCG section inspected; market history/general product context, no exact Jungle card date."
+        },
+        {
+          "sourceKey": "google-jungle-pt",
+          "url": "https://www.google.com/search?q=Pok%C3%A9mon+Selva+lan%C3%A7amento+2000+fevereiro",
+          "retrievedAt": "2026-10-11T10:34:42Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but JavaScript-dependent response, stripped content168 chars; no usable search results."
+        },
+        {
+          "sourceKey": "bing-jungle-pt",
+          "url": "https://www.bing.com/search?q=Pok%C3%A9mon+Selva+lan%C3%A7amento+2000+fevereiro",
+          "retrievedAt": "2026-10-11T10:35:38Z",
+          "httpStatus": 200,
+          "outcome": "HTTP200 but compound query returned irrelevant generic results; no useful target-specific lead accepted."
+        }
+      ]
+    }
+  ],
+  "extraFindings": [
+    "Predecessor/compatibility rows already display 1999-06-16 for DE/FR/ES/PT Jungle editions, while their new physical-printing rows are correctly unknown; those existing compatibility dates should not be used as independent localized evidence.",
+    "Poképédia French full date and PokéWiki German month are localized positive leads that conflict with Bulbapedia generic paragraph; draft should retain all finds and disagreements even if canonical adoption waits for provider review.",
+    "WP49 month2002-08 is confirmed at the fullest currently evidenced precision; replacing it with August1 or campaign January6 would invent a day."
+  ],
+  "sourceOnboarding": {
+    "baselineGate": "L3 already passed at 0dccf9be; /tmp/snoredex-gate.log (provided by root)",
+    "authority": "PokéWiki, Poképédia and WikiDex remain tier 3; no new tier-2 owner decision",
+    "capabilitySurfaceIds": [
+      "pokewiki-jungle-de-release-date",
+      "pokepedia-jungle-fr-release-date",
+      "wikidex-jungle-es-release-date"
+    ],
+    "gateStatus": "No tests, gate or regeneration run by this agent; root performs the final integration gate once."
+  },
+  "retention": "This file retains inspected excerpts and their independently verifiable UTF-8 hashes. Full-response hashes describe fetched original bytes; scratch paths are acquisition logs, not committed raw responses. Public publisher delivery signatures are omitted. No browser session, credentials, or transient press HTML is retained."
+}
