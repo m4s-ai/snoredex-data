@@ -1,0 +1,386 @@
+{
+  "task": "Release-date round2 source onboarding",
+  "date": "2026-10-12",
+  "canonicalWriters": [
+    "scripts/source_registry.py PROVIDERS only",
+    "verification/source_capabilities.json"
+  ],
+  "newProviders": [
+    "marumiya-official",
+    "pokemoncentral",
+    "wog"
+  ],
+  "newSurfaces": [
+    "marumiya-2015-jp-campaign-date",
+    "jp-corocoro-start-deck-100-first-delivery-date",
+    "pokepedia-selected-french-promo-product-dates",
+    "pokemoncentral-italian-pps3-date",
+    "pokewiki-europe-tag-team-tin-date",
+    "wog-swiss-german-snorlax-pin-product-date",
+    "tpci-journey-together-localized-prerelease-dates"
+  ],
+  "newObservations": [
+    "obs-marumiya-2015-jp-campaign-date-early-july",
+    "obs-marumiya-2015-jp-campaign-date-early-july-boundary",
+    "obs-jp-corocoro-start-deck-100-first-delivery-date-first-delivery",
+    "obs-jp-corocoro-start-deck-100-first-delivery-date-first-delivery-boundary",
+    "obs-pokepedia-selected-french-promo-product-dates-swsh032",
+    "obs-pokepedia-selected-french-promo-product-dates-swsh032-boundary",
+    "obs-pokepedia-selected-french-promo-product-dates-swsh119",
+    "obs-pokepedia-selected-french-promo-product-dates-swsh119-boundary",
+    "obs-pokepedia-selected-french-promo-product-dates-svp122",
+    "obs-pokepedia-selected-french-promo-product-dates-svp122-boundary",
+    "obs-pokepedia-selected-french-promo-product-dates-pps3",
+    "obs-pokepedia-selected-french-promo-product-dates-pps3-boundary",
+    "obs-pokemoncentral-italian-pps3-date-pps3",
+    "obs-pokemoncentral-italian-pps3-date-pps3-boundary",
+    "obs-pokewiki-europe-tag-team-tin-date-sm169-trio",
+    "obs-pokewiki-europe-tag-team-tin-date-sm169-trio-boundary",
+    "obs-wog-swiss-german-snorlax-pin-product-date-swsh032",
+    "obs-wog-swiss-german-snorlax-pin-product-date-swsh032-boundary",
+    "obs-tpci-selected-archived-product-release-dates-en-tag-team-tins",
+    "obs-tpci-selected-archived-product-release-dates-en-tag-team-tins-boundary",
+    "obs-tpci-journey-together-localized-prerelease-dates-de-ordinary184",
+    "obs-tpci-journey-together-localized-prerelease-dates-de-ordinary184-boundary",
+    "obs-tpci-journey-together-localized-prerelease-dates-it-ordinary184",
+    "obs-tpci-journey-together-localized-prerelease-dates-it-ordinary184-boundary",
+    "obs-tpci-journey-together-localized-prerelease-dates-fr-ordinary184",
+    "obs-tpci-journey-together-localized-prerelease-dates-fr-ordinary184-boundary"
+  ],
+  "fields": [
+    "date",
+    "release-date"
+  ],
+  "rawRecords": [
+    {
+      "observationId": "obs-marumiya-2015-jp-campaign-date-early-july",
+      "sourceIds": [
+        "R2-JP-marumiya-campaign"
+      ],
+      "rawRecordHash": "sha256:aa1ec5bd642c0bb0de42bb1d733e772ad987c54038a817f1ec5967640b46ef67",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only the campaign availability month; retail stores vary. Copyright year and campaign URL identify the retained 2015 campaign context; the manufacturer-authored press statement separately explicitly names early July2015. No card identity, finish or other manufacturer campaign authority."
+    },
+    {
+      "observationId": "obs-marumiya-2015-jp-campaign-date-early-july-boundary",
+      "sourceIds": [
+        "R2-JP-marumiya-campaign"
+      ],
+      "rawRecordHash": "sha256:04b2b1a0966c5711fe201493862ce455f774751d35815d67c7c8737cbc298d29",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only the campaign availability month; retail stores vary. Copyright year and campaign URL identify the retained 2015 campaign context; the manufacturer-authored press statement separately explicitly names early July2015. No card identity, finish or other manufacturer campaign authority."
+    },
+    {
+      "observationId": "obs-jp-corocoro-start-deck-100-first-delivery-date-first-delivery",
+      "sourceIds": [
+        "R2-JP-sn-official"
+      ],
+      "rawRecordHash": "sha256:f74dcf0850564bf91d869e8cf92d9f455b8f057b7f793d2fd0ae1d9914b7aeec",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The same announcement distinguishes advertised/application date approximately Jan15 from first delivery lateMarch and a separate lateAugust batch. It supplies no common first-dispatch or receipt day and no new card/finish fact."
+    },
+    {
+      "observationId": "obs-jp-corocoro-start-deck-100-first-delivery-date-first-delivery-boundary",
+      "sourceIds": [
+        "R2-JP-sn-official"
+      ],
+      "rawRecordHash": "sha256:9dc7e7a8d6e13aca0e407e208ea8e08c2bd676a9ed6512904e8d648ba59f15e2",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The same announcement distinguishes advertised/application date approximately Jan15 from first delivery lateMarch and a separate lateAugust batch. It supplies no common first-dispatch or receipt day and no new card/finish fact."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-swsh032",
+      "sourceIds": [
+        "R2-FR-SWSH032-product",
+        "R2-FR-SWSH032-card"
+      ],
+      "rawRecordHash": "sha256:906fecc7571800d512f2ab14326a283bbefc8dc58bc3124c55526e48101f613e",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "NorthAmerica April3 is explicitly separate. Same-provider exact French card page repeats June17 and names the product; it does not provide independent corroboration or add identity/finish authority."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-swsh032-boundary",
+      "sourceIds": [
+        "R2-FR-SWSH032-product",
+        "R2-FR-SWSH032-card"
+      ],
+      "rawRecordHash": "sha256:0e8adb1cb7fd8244c6d0573f11df1ff96cf3e3fc93271e9e5c9de9305597f775",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "NorthAmerica April3 is explicitly separate. Same-provider exact French card page repeats June17 and names the product; it does not provide independent corroboration or add identity/finish authority."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-swsh119",
+      "sourceIds": [
+        "wiki-fr-product119"
+      ],
+      "rawRecordHash": "sha256:ef603ae1af767db81b13dad8fe6f58e4a6755b7defa148b338e4de23423c6f14",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only retained date-france for this ordinary tripack. Separately printed date-amnord and the base expansion cannot date Staff cards, another locality or a distinct printing wave."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-swsh119-boundary",
+      "sourceIds": [
+        "wiki-fr-product119"
+      ],
+      "rawRecordHash": "sha256:cb25f6eadc61674e4f54f925a21d7358cc9817e89cd526f2898716ced166c10d",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only retained date-france for this ordinary tripack. Separately printed date-amnord and the base expansion cannot date Staff cards, another locality or a distinct printing wave."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-svp122",
+      "sourceIds": [
+        "wiki-fr-product122"
+      ],
+      "rawRecordHash": "sha256:d0fd1627a05c28b2afe6e827bff765ee9781234a5ab1c10ee01e53ac067fb9fc",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only retained date-france for the exact ordinary promo product, no card membership/finish authority. Staff giveaways and other locales are outside this date edge."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-svp122-boundary",
+      "sourceIds": [
+        "wiki-fr-product122"
+      ],
+      "rawRecordHash": "sha256:c320254816ae26c8614ad450470ac4cb4e66d66ec6bef977ecb780ad262e115f",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only retained date-france for the exact ordinary promo product, no card membership/finish authority. Staff giveaways and other locales are outside this date edge."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-pps3",
+      "sourceIds": [
+        "round2-special-native-fr-pps3-pinned"
+      ],
+      "rawRecordHash": "sha256:015e6f76695b02de44b3dc5ce968afcdc34f492878d4b1ec1e92cded9b55aa38",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The date-france and date-amnord values are independently stated. No new card identity, rarity or finish is imported from the adjacent list, and later series dates remain separate."
+    },
+    {
+      "observationId": "obs-pokepedia-selected-french-promo-product-dates-pps3-boundary",
+      "sourceIds": [
+        "round2-special-native-fr-pps3-pinned"
+      ],
+      "rawRecordHash": "sha256:4f8f54804573bb18c996f2f06126d0869b439b600ab5c2ba5cd2bb4cdf344a6b",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The date-france and date-amnord values are independently stated. No new card identity, rarity or finish is imported from the adjacent list, and later series dates remain separate."
+    },
+    {
+      "observationId": "obs-pokemoncentral-italian-pps3-date-pps3",
+      "sourceIds": [
+        "round2-special-native-it-pps3-index-pinned"
+      ],
+      "rawRecordHash": "sha256:55385ea8cb4599076d814f52411215dc3835672d15874efd7c32988e04ff178e",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The exact Snorlax card is already separately admitted through the official Italian checklist. The index cell supplies only this product date; other expansion rows, English fields, physical finish and individual printing waves remain outside scope."
+    },
+    {
+      "observationId": "obs-pokemoncentral-italian-pps3-date-pps3-boundary",
+      "sourceIds": [
+        "round2-special-native-it-pps3-index-pinned"
+      ],
+      "rawRecordHash": "sha256:5bbcfd45eb1abdf77c54f801a4634cfb6ff0d6e247ad10423d8fa4a353505b7d",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The exact Snorlax card is already separately admitted through the official Italian checklist. The index cell supplies only this product date; other expansion rows, English fields, physical finish and individual printing waves remain outside scope."
+    },
+    {
+      "observationId": "obs-pokewiki-europe-tag-team-tin-date-sm169-trio",
+      "sourceIds": [
+        "R2-DE-SM169-europe-tins"
+      ],
+      "rawRecordHash": "sha256:449af339a634c500310a326c16c2e50f24d3d405a566a5009fad33d4bd540374",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The same native product row explicitly dates EuropeMarch29 and USAMarch15. The accepted source is the tin event, not an English date copied to Europe. German SM169/card artwork binding is retained elsewhere and receives no new identity/finish authority."
+    },
+    {
+      "observationId": "obs-pokewiki-europe-tag-team-tin-date-sm169-trio-boundary",
+      "sourceIds": [
+        "R2-DE-SM169-europe-tins"
+      ],
+      "rawRecordHash": "sha256:0f9e63365f830b5deea044e2ecf2e06adeff36dabcdc16f650dd562064008147",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "The same native product row explicitly dates EuropeMarch29 and USAMarch15. The accepted source is the tin event, not an English date copied to Europe. German SM169/card artwork binding is retained elsewhere and receives no new identity/finish authority."
+    },
+    {
+      "observationId": "obs-wog-swiss-german-snorlax-pin-product-date-swsh032",
+      "sourceIds": [
+        "R2-DE-SWSH032-wog"
+      ],
+      "rawRecordHash": "sha256:2bbfa8f188d647a01c8aca767ec60297492628e8add243b7260d38fb6bf80bbe",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only the exact retained Swiss retailer product-date and German-language fields. This does not establish an exhaustive German release history, a German-country national date, retailer stock arrival, card membership or physical finish."
+    },
+    {
+      "observationId": "obs-wog-swiss-german-snorlax-pin-product-date-swsh032-boundary",
+      "sourceIds": [
+        "R2-DE-SWSH032-wog"
+      ],
+      "rawRecordHash": "sha256:64dc08585701f7bc62275db8744b6b9208e2369fe6e7e4bffaf72c9e79b4542a",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Only the exact retained Swiss retailer product-date and German-language fields. This does not establish an exhaustive German release history, a German-country national date, retailer stock arrival, card membership or physical finish."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-en-tag-team-tins",
+      "sourceIds": [
+        "R2-O-EN-SM169-tins"
+      ],
+      "rawRecordHash": "sha256:e6a13b9ea2842a44d1730a04086a885511197b823d1bac57989744d052513964",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Archive timestamp identifies capture, not launch. The retained original publisher Launch field is primary date evidence for this US English product. EuropeMarch29 and other localized dates are separate. No card membership, foil or print existence is added."
+    },
+    {
+      "observationId": "obs-tpci-selected-archived-product-release-dates-en-tag-team-tins-boundary",
+      "sourceIds": [
+        "R2-O-EN-SM169-tins"
+      ],
+      "rawRecordHash": "sha256:1d1e6a101cec1d8752cf425993d2136dd7472ed7d796e1b519854b204200aa37",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Archive timestamp identifies capture, not launch. The retained original publisher Launch field is primary date evidence for this US English product. EuropeMarch29 and other localized dates are separate. No card membership, foil or print existence is added."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-de-ordinary184",
+      "sourceIds": [
+        "official-journey-prerelease-de"
+      ],
+      "rawRecordHash": "sha256:c6dbd96ea9920e6ba70110ea3b3a091c605f5729775d9386fed83fca07c8d049",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-de-ordinary184-boundary",
+      "sourceIds": [
+        "official-journey-prerelease-de"
+      ],
+      "rawRecordHash": "sha256:a8870b47112165f3930679f2a24335caab5271bd1d546d93ff68c27deb76ed42",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-it-ordinary184",
+      "sourceIds": [
+        "official-journey-prerelease-it"
+      ],
+      "rawRecordHash": "sha256:e1bc97ed0f454030879bf6b138088a18b2c61c4fc36b2ed3fabe07bc377241d1",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-it-ordinary184-boundary",
+      "sourceIds": [
+        "official-journey-prerelease-it"
+      ],
+      "rawRecordHash": "sha256:9e9bd9048abfb29f48921c3f7e24434b84637d51a970b9c803c3e9c141a3d037",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-fr-ordinary184",
+      "sourceIds": [
+        "official-journey-prerelease-fr"
+      ],
+      "rawRecordHash": "sha256:2fe3f7f78adeb4d35f50f1c63e62a764c3486b2246ab262036e6c27f5dac8cec",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    },
+    {
+      "observationId": "obs-tpci-journey-together-localized-prerelease-dates-fr-ordinary184-boundary",
+      "sourceIds": [
+        "official-journey-prerelease-fr"
+      ],
+      "rawRecordHash": "sha256:df7ab4b2dfdb0d989e504ca1a150d4684150c8ed0735ac0395225c3c3de1abf8",
+      "capabilities": [
+        "date",
+        "release-date"
+      ],
+      "fieldLimits": "Native January9 2025 publisher header supplies year; explicit prerelease start supplies March15. Separate retailMarch28 and digitalMarch27 fields are not card prerelease dates. Existing admitted ordinary promo identity/role is the applicability guard; no Staff allocation, specific store delivery, new card, identity or finish authority."
+    }
+  ],
+  "checks": {
+    "manifestSchema": "passed after final additions",
+    "inMemorySemanticContractAgainstExistingEvidence": "passed after all additions; new provider declarations supplied in memory, no regeneration",
+    "exactURLRouting": "passed all new/extended exact normalized URL prefixes, without trailing slashes",
+    "previousProviderSurfaceAndObservationPreservation": "passed: all prior provider properties/rawRetention and observations unchanged; authorized archived-product manual surface only gained an exact URL/edge and last-check date",
+    "noFinishIdentityAbsenceOrCompletenessAuthority": "passed all new surfaces/edges"
+  },
+  "publicationStatus": "Root owns canonical date application, scoped/global regeneration, tests, commit and draft PR update.",
+  "extendedManualSurfaces": [
+    "tpci-selected-archived-product-release-dates"
+  ],
+  "yearScopeNotes": [
+    "Marumiya own campaign only: existing Bulbapedia remains primary for year/month, exact manufacturer campaign adds earlyJuly/storevariable date corroboration. PR TIMES manufacturer year-qualified statement remains retained context only, no generic PR TIMES provider or host claim.",
+    "Localized JourneyTogether ordinary184 date uses native prerelease-program March15 plus already admitted owner-confirmed role; no Staff or new identity acceptance.",
+    "WOG named German product is Swiss retail scope via same-response country=Switzerland metadata, not every German-speaking territory."
+  ]
+}

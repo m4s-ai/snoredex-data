@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-11",
+  "generated": "2026-10-12",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 35,
-   "evidenceRecords": 1765,
-   "uniqueUrls": 1757,
+   "providers": 38,
+   "evidenceRecords": 1777,
+   "uniqueUrls": 1769,
    "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6933
+   "claimsAttributed": 6945
   }
  },
  "providers": [
@@ -34,7 +34,7 @@
     "date"
    ],
    "attribution": "Official card pages and product checklists © The Pokémon Company International.",
-   "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. The separately reviewed official press surface supplies only the named Snorlax 151 ETB product dates in its six retained localized articles. Individually retained archived articles also supply only the named Hop retailer campaign, English/German Series Three Prize Pack distribution and English 2023 championship-deck product dates. Missing entries remain unknown.",
+   "notes": "Localized pages and checklists confirm only the cards, languages, regions, and finishes they explicitly list. The separately reviewed official press surface supplies only the named Snorlax 151 ETB product dates in its six retained localized articles. Individually retained archived articles also supply only the named Hop retailer campaign, English/German Series Three Prize Pack distribution and English 2023 championship-deck product dates. The retained US TAG TEAM tin page supplies its own launch date, distinct from the European tin date. Separate exact German, Italian and French Journey Together press articles date the localized prerelease program only; they grant no Staff, card identity or finish authority. Missing entries remain unknown.",
    "hosts": [
     "assets.pokemon.com",
     "d1wx537rtdixyy.cloudfront.net",
@@ -44,8 +44,8 @@
     "press.pokemon.com",
     "pokemon.gamespress.com"
    ],
-   "uniqueSources": 157,
-   "claimsSupported": 494
+   "uniqueSources": 161,
+   "claimsSupported": 498
   },
   {
    "providerId": "pokemon-cn-official",
@@ -81,7 +81,7 @@
    "licenseOrTerms": "Publisher's own terms.",
    "category": "official-publisher",
    "authorityTier": 1,
-   "coverage": "Japanese-market cards and illustrators",
+   "coverage": "Japanese-market cards and illustrators, plus individually reviewed Japanese campaign and delivery date fields",
    "supportsAbsence": false,
    "usedFor": [
     "language",
@@ -89,15 +89,15 @@
     "date"
    ],
    "attribution": "Japanese card data © The Pokémon Company.",
-   "notes": "The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence.",
+   "notes": "The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence. The separate CoroCoro Start Deck 100 announcement date surface establishes only its first physical delivery month, distinct from application opening and later delivery waves; it grants no identity or finish authority.",
    "hosts": [
     "www.pokemon-card.com",
     "pokemon-card.com",
     "www.30th.pokemon-card.com",
     "30th.pokemon-card.com"
    ],
-   "uniqueSources": 41,
-   "claimsSupported": 92
+   "uniqueSources": 42,
+   "claimsSupported": 93
   },
   {
    "providerId": "pokemon-card-asia",
@@ -221,8 +221,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 116,
-   "claimsSupported": 736
+   "uniqueSources": 115,
+   "claimsSupported": 734
   },
   {
    "providerId": "pokewiki",
@@ -232,19 +232,19 @@
    "licenseOrTerms": "CC BY-SA 3.0 DE; attribution and ShareAlike apply to retained article excerpts.",
    "category": "fan-wiki",
    "authorityTier": 3,
-   "coverage": "explicit German-language Jungle release-date field in the individually reviewed Dschungel article",
+   "coverage": "explicit German-language Jungle release field and the retained Europe-qualified 2019 TAG TEAM tin date",
    "supportsAbsence": false,
    "usedFor": [
     "date"
    ],
    "attribution": "Localized release field from PokéWiki, licensed CC BY-SA 3.0 DE.",
-   "notes": "Manual positive date evidence only. Preserve the source-native Deutsch qualifier and month precision; the field names a language, not a separate country or printing wave. It establishes no card existence, finish, absence or completeness.",
+   "notes": "Manual positive date evidence only. Preserve the source-native Deutsch qualifier and month precision; the field names a language, not a separate country or printing wave. The separately retained Tin-Boxen row distinguishes the European TAG TEAM tin date from the US date; only that matched European product event is used. It establishes no card existence, finish, absence or completeness.",
    "hosts": [
     "www.pokewiki.de",
     "pokewiki.de"
    ],
-   "uniqueSources": 1,
-   "claimsSupported": 2
+   "uniqueSources": 2,
+   "claimsSupported": 3
   },
   {
    "providerId": "pokepedia",
@@ -254,19 +254,82 @@
    "licenseOrTerms": "CC BY-NC-SA 3.0; attribution, NonCommercial and ShareAlike apply to retained article excerpts.",
    "category": "fan-wiki",
    "authorityTier": 3,
-   "coverage": "explicit France-qualified Jungle release-date field in the individually reviewed Jungle article",
+   "coverage": "explicit France-qualified release fields in the reviewed Jungle article and selected Snorlax promo/product articles",
    "supportsAbsence": false,
    "usedFor": [
     "date"
    ],
-   "attribution": "Localized release field from Poképédia, licensed CC BY-NC-SA 3.0.",
-   "notes": "Manual positive date evidence only. The France field is distinct from the North America and Japan fields; preserve its stated precision and conflicts. It establishes no card existence, finish, absence or completeness.",
+   "attribution": "Localized release fields from Poképédia, licensed CC BY-NC-SA 3.0.",
+   "notes": "Manual positive date evidence only. The France field is distinct from the North America and Japan fields; preserve its stated precision and conflicts. Selected Snorlax pin collection, EB06/EV06 tripack and Series Three Prize Pack articles supply only the explicitly retained France-qualified dates; existing card membership is separate. It establishes no card existence, finish, absence or completeness.",
    "hosts": [
     "www.pokepedia.fr",
     "pokepedia.fr"
    ],
+   "uniqueSources": 5,
+   "claimsSupported": 6
+  },
+  {
+   "providerId": "marumiya-official",
+   "displayName": "Marumiya original Japanese promotional campaign",
+   "organization": "Marumiya Corporation",
+   "homepage": "https://www.marumiya.co.jp/",
+   "licenseOrTerms": "Manufacturer's own terms; retained excerpts are used for identification and date verification only.",
+   "category": "official-publisher",
+   "authorityTier": 1,
+   "coverage": "only the original 2015 Japanese Pokémon furikake/curry card campaign's early-July availability wording",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Original campaign date statement © Marumiya Corporation.",
+   "notes": "Marumiya is the campaign manufacturer, not a general card publisher. The exact retained kids2015 campaign states early July and explicitly varies store arrival. It supplies no common day, card identity, finish, other market date, absence or completeness.",
+   "hosts": [
+    "cp.marumiya.co.jp"
+   ],
    "uniqueSources": 1,
    "claimsSupported": 2
+  },
+  {
+   "providerId": "pokemoncentral",
+   "displayName": "Pokémon Central Wiki reviewed Italian product date",
+   "organization": "Pokémon Central Wiki community",
+   "homepage": "https://wiki.pokemoncentral.it/",
+   "licenseOrTerms": "CC BY-NC-SA 3.0 Unported; https://creativecommons.org/licenses/by-nc-sa/3.0/deed.it",
+   "category": "fan-wiki",
+   "authorityTier": 3,
+   "coverage": "only the retained Italian-qualified PPS3 publication-date cell in the expansion index",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product date from Pokémon Central Wiki, licensed CC BY-NC-SA 3.0 Unported.",
+   "notes": "Manual positive date evidence only. The exact PPS3 index row prints Italiano and Inglese separately; only its Italian field is used. Snorlax membership is already established by the official Italian checklist. No card identity, finish, other release wave, absence or completeness authority is granted.",
+   "hosts": [
+    "wiki.pokemoncentral.it"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "wog",
+   "displayName": "World of Games reviewed Swiss German product date",
+   "organization": "World of Games",
+   "homepage": "https://www.wog.ch/",
+   "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+   "category": "retail-listing",
+   "authorityTier": 3,
+   "coverage": "only the exact German Morpeko and Snorlax pin-collection release field in the retained Swiss retailer product page",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product date from World of Games.",
+   "notes": "Manual positive date evidence only. The exact page states Deutsch, Erschienen am and EAN 0820650452499, with Switzerland country metadata. The field dates that retailer's named German product, not every German market or an exhaustive first-distribution history. Product prose lends no card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "www.wog.ch"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
   },
   {
    "providerId": "tcgcsv",
@@ -3585,13 +3648,12 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "item-b6e814c3-046d-564d-8f92-6bc53c19bb1d",
-    "item-c88bb2db-5774-53d3-9d48-905c38aa5de9"
+    "item-b6e814c3-046d-564d-8f92-6bc53c19bb1d"
    ],
-   "retrievedAt": "2026-10-11T10:33:40.477773Z",
-   "usageCount": 2
+   "retrievedAt": "2026-10-11",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Stellar_Tera_Type_Starter_Sets_(TCG)",
@@ -3670,23 +3732,6 @@
    ],
    "retrievedAt": "2026-07-31",
    "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sun_%26_Moon_TCG_Series_merchandise",
-   "nonUrlEvidenceId": null,
-   "providerId": "bulbapedia",
-   "sourceTypes": [
-    "Reviewed item-scoped release date"
-   ],
-   "dimensions": [
-    "date"
-   ],
-   "stableIdCount": 1,
-   "stableIds": [
-    "item-db82b0ce-1aa7-5b0b-9ac0-95d0d518c8f1"
-   ],
-   "retrievedAt": "2026-10-11T10:33:46.727721+00:00",
-   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
@@ -14361,6 +14406,24 @@
    "usageCount": 4
   },
   {
+   "canonicalUrl": "https://cp.marumiya.co.jp/kids2015",
+   "nonUrlEvidenceId": null,
+   "providerId": "marumiya-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
+    "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56"
+   ],
+   "retrievedAt": "2026-10-12T19:21:32.148154Z",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": null,
    "nonUrlEvidenceId": "evidence:owner-attestation",
    "providerId": "owner-attestation",
@@ -19777,6 +19840,23 @@
    "usageCount": 11
   },
   {
+   "canonicalUrl": "https://www.pokemon-card.com/info/003230.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-jp",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-c88bb2db-5774-53d3-9d48-905c38aa5de9"
+   ],
+   "retrievedAt": "2026-10-12T19:21:32.955259Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokemon-card.com/info/2018/20181130_001515.html",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-jp",
@@ -25053,6 +25133,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemon.gamespress.com/de/Neue-Pokemon-Sammelkartenspiel-Erweiterung-Karmesin-Purpur-Reisegefahr",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-bc182fd3-78fa-57c0-ad4c-79f72d55c233"
+   ],
+   "retrievedAt": "2026-10-12T19:32:53.552369+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -25087,6 +25184,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemon.gamespress.com/fr/La-nouvelle-extension-Ecarlate-et-Violet-Aventures-Ensemble-du-Jeu-de-",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-11375cd9-b8c5-572a-a7f7-95f6c51f3ca4"
+   ],
+   "retrievedAt": "2026-10-12T19:35:40.657300+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-Gli-Allenatori-sono-invitati-a-scoprire-i-primissimi-151",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -25101,6 +25215,23 @@
     "item-6bf73acf-2d3d-5208-8fdf-ce2196a6f1d1"
    ],
    "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/it/La-nuova-espansione-Scarlatto-e-Violetto---Avventure-Insieme-del-Gioco",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-8d6e57be-b6e1-5545-ad7e-49d3d6d38f72"
+   ],
+   "retrievedAt": "2026-10-12T19:32:47.916392+00:00",
    "usageCount": 1
   },
   {
@@ -25758,6 +25889,40 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/tag-team-tins",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-db82b0ce-1aa7-5b0b-9ac0-95d0d518c8f1"
+   ],
+   "retrievedAt": "2026-10-12T19:31:23.055678+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://wiki.pokemoncentral.it/Elenco_delle_espansioni_del_Gioco_di_Carte_Collezionabili_Pok%C3%A9mon",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemoncentral",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-f3840e90-e74b-538d-b7c8-e1886129d2a0"
+   ],
+   "retrievedAt": "2026-10-12T19:28:11.357570+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": null,
    "nonUrlEvidenceId": "evidence:pokemontcgio",
    "providerId": "pokemontcgio",
@@ -25913,6 +26078,23 @@
    "usageCount": 57
   },
   {
+   "canonicalUrl": "https://www.pokepedia.fr/Collection_avec_pin's_Ronflex",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokepedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-131b1acb-7f84-5e42-a59d-cb7cbabd6e7c"
+   ],
+   "retrievedAt": "2026-10-12T19:23:48.490359+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokepedia.fr/Jungle_(JCC)",
    "nonUrlEvidenceId": null,
    "providerId": "pokepedia",
@@ -25931,6 +26113,57 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://www.pokepedia.fr/Pack_R%C3%A9compense_Play!_Pok%C3%A9mon_S%C3%A9rie_3",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokepedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-11d75ee5-2f21-5592-bb19-21f5c60a9978"
+   ],
+   "retrievedAt": "2026-10-12T19:28:13.438116+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.pokepedia.fr/Tripack_EB06_Ronflex",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokepedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-2e2b6419-9fbb-5ae0-9eac-27eb952aa2f5"
+   ],
+   "retrievedAt": "2026-10-12T19:26:29.184349+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.pokepedia.fr/Tripack_EV06_Ronflex",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokepedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-5a46766b-c21c-585d-965d-a511bb4af382"
+   ],
+   "retrievedAt": "2026-10-12T19:26:28.022639+00:00",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokewiki.de/Dschungel_(TCG)",
    "nonUrlEvidenceId": null,
    "providerId": "pokewiki",
@@ -25947,6 +26180,23 @@
    ],
    "retrievedAt": "2026-10-11T10:33:41Z",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.pokewiki.de/Tin-Boxen",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokewiki",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-e45f1f8a-c374-5f5c-abf9-bc97944a1cf4"
+   ],
+   "retrievedAt": "2026-10-12T19:27:45.930301+00:00",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://pokumon.com/?s=snorlax+s-p",
@@ -37156,6 +37406,23 @@
     "item-134d7cff-5acc-53a0-b171-a0e11019fc6d"
    ],
    "retrievedAt": "2026-10-11T10:34:41Z",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.wog.ch/de/index.cfm/details/product/95982-Pokemon-Morpeko-Relaxo-Pin-Kollektion",
+   "nonUrlEvidenceId": null,
+   "providerId": "wog",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-db78f3cd-b2ae-587f-8c5c-6af14f7558c2"
+   ],
+   "retrievedAt": "2026-10-12T19:27:08.014494+00:00",
    "usageCount": 1
   }
  ]

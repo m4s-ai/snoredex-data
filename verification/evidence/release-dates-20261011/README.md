@@ -1,3 +1,4 @@
+<!-- doc: role=retained release-date research and first-batch delivery evidence; stage=reference -->
 # Release-date research — 2026-10-11
 
 All **116** incomplete or approximate active collector items were researched by six agents. The existing date-override owner now contains **61** guarded observations: **57** values/precision flags change, including **53** full dates. **55** items receive no accepted date observation. In total **63** items remain below reliable day precision, including **8** retained/refined month or year observations.

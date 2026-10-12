@@ -1,0 +1,559 @@
+{
+  "schema": "snoredex.release-date-research.round2.v1",
+  "scope": "Three remaining incomplete release-date targets: TaiwanSM-P053, MainlandChinaS-P/CS061, FrenchGameStopxJTG117. Date research only; no canonical or tracked edits.",
+  "recordedAt": "2026-10-12T19:31:24.547974+00:00",
+  "capturedDirectory": "/tmp/twcnfr-round2",
+  "findings": [
+    {
+      "itemId": "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9",
+      "cardReleaseId": "RELEASE:TW:T-Chinese:SM-P:053:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
+      "setEditionId": "EDITION:TW:T-Chinese:SM-P",
+      "localizationId": "LOCALIZATION:TW:zh-Hant",
+      "localSetCode": "SM-P",
+      "collectorNumber": "053",
+      "sourcePrintingId": null,
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0496",
+      "itemIds": [
+        "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
+      ],
+      "currentDate": "2020",
+      "currentPrecision": "year",
+      "currentApproximate": false,
+      "status": "unresolved-first-release-date",
+      "proposal": null,
+      "sources": [
+        {
+          "sourceUrl": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+          "retrievedAt": "2026-10-12T19:25:42.805623+00:00",
+          "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification; rendered DOM and visible body text captured after normal page load",
+          "status": 200,
+          "finalUrl": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+          "bytes": 545802,
+          "renderedDomSha256": "7f093501f1ff6e6d8546fec72e638a47daa7093370a8776e0de6e8bea3c5e61f",
+          "hashScope": "renderedDomSha256 hashes captured UTF-8 rendered DOM bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": "52poke",
+          "field": "distribution-identity",
+          "excerpt": "053/SM-P 伊布&卡比兽GX 雙倍爆擊 寶可夢卡牌日",
+          "excerptSha256": "a13aa06d59dae3ba6f74e42ad961b24cac3e965d70ecfd7c64706361120a33d0",
+          "fieldLimits": "Exact Traditional Chinese SM-P053 distribution/campaign row; it gives no day/month date. The named campaign is Double Burst Pokémon Card Day, not the annual Pokémon Day holiday. A qualified campaign identity is not a release-date assertion.",
+          "rawCapturePath": "/tmp/twcnfr-round2/browser-tw-52poke.html",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        },
+        {
+          "sourceUrl": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
+          "retrievedAt": "2026-10-12T19:27:23.007321+00:00",
+          "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification; rendered DOM and visible body text captured after normal page load",
+          "status": 200,
+          "finalUrl": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
+          "bytes": 835381,
+          "renderedDomSha256": "b73b3fa64c372232bbada3a93aea17b661a5c50bffefba221a25f7c523acf2df",
+          "hashScope": "renderedDomSha256 hashes captured UTF-8 rendered DOM bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": "52poke",
+          "field": "adjacent-product-context",
+          "excerpt": "双倍爆击 SET A 太阳&月亮系列 2020-02-18 RR 117/184 — Mitsuhiro Arita",
+          "excerptSha256": "9581495e65690cdb0c3dddc7f0beea2758fbdd79885acd88a69ed23549d1b144",
+          "fieldLimits": "This is the Traditional Chinese Double Burst SET A regular117/184 card release, not the Gym-stamped053/SM-P promo. Do not transfer2020-02-18 to the promo. Exact053 campaign table names Double Burst but supplies no campaign start; Pokumon2019 taxonomy conflict remains unresolved.",
+          "rawCapturePath": "/tmp/twcnfr-round2/browser-tw-card.html",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        }
+      ],
+      "nativeCampaign": "雙倍爆擊 寶可夢卡牌日",
+      "remainingGaps": [
+        "Earliest Taiwan Double Burst Pokémon Card Day/Gym Season3 promo distribution date expressly linked to053/SM-P. Official current event list has no2020 campaign history;2019–2020 official archive index returned503. Native exact promo table identifies the campaign but is silent on date."
+      ],
+      "nextUsefulLead": "A retained2020 Taiwan Double Burst Pokémon Card Day notice with its first event day and promo prize gallery including053/SM-P. Do not use the regular Double Burst expansion/deck street date.",
+      "retainedBaselineReference": "verification/evidence/release-dates-20261011/taiwan-china.json — SM-P053 exact Bulbapedia GymSeason3 row, original retrieval2026-10-11; Pokumon2019 tag is undated campaign metadata.",
+      "newAttemptKeys": [
+        "tw-season3-native-search",
+        "tw-season3-official",
+        "tw-52poke-promos",
+        "tw-gym-archive-index",
+        "tw-gym-events-native",
+        "browser-tw-season3",
+        "browser-tw-card",
+        "browser-tw-52poke"
+      ],
+      "coverage": "Two bounded native research rounds with one installed-browser check and direct review of promising exact-card/campaign leads; all assigned targets searched. Source omissions/access blocks leave fields unknown."
+    },
+    {
+      "itemId": "item-bbea2621-c8f4-5647-b576-e309aa29d24a",
+      "cardReleaseId": "RELEASE:CN:S-Chinese:S-P/CS:061:Snorlax-Rolling-Tackle-Heavy-Impact",
+      "setEditionId": "EDITION:CN:S-Chinese:S-P/CS",
+      "localizationId": "LOCALIZATION:CN:zh-Hans",
+      "localSetCode": "S-P/CS",
+      "collectorNumber": "061",
+      "sourcePrintingId": "F0323-P01",
+      "physicalPrintingId": "PHYSICAL:PRINTING:a291c0d3f335fbe80695e10c",
+      "itemIds": [
+        "item-bbea2621-c8f4-5647-b576-e309aa29d24a"
+      ],
+      "currentDate": "2023",
+      "currentPrecision": "year",
+      "currentApproximate": true,
+      "status": "unresolved-first-release-date",
+      "proposal": null,
+      "sources": [
+        {
+          "sourceUrl": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+          "retrievedAt": "2026-10-12T19:25:42.795121+00:00",
+          "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification; rendered DOM and visible body text captured after normal page load",
+          "status": 200,
+          "finalUrl": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+          "bytes": 845041,
+          "renderedDomSha256": "df010e2d4e600cb063540c360026adc6926732da3609383c7567d72cb1e3ca8e",
+          "hashScope": "renderedDomSha256 hashes captured UTF-8 rendered DOM bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": "52poke",
+          "field": "distribution-identity",
+          "excerpt": "061/S-P 卡比兽 “大有可玩”线下活动第二弹、超级赛·西安活动特别包、训练家之旅主题快闪店",
+          "excerptSha256": "dbd421a2acf42347bc608b2719c5592119439bbcbb39ec05a7c1fc3ca806d842",
+          "fieldLimits": "Exact Mainland China061/S-P row names three distribution campaigns but dates none. Shenyang/深圳 names in the Google excerpt belong to neighboring063–065 rows, not this row. This source is not used to contradict the earlier Shenyang Pokumon lead or the positively inspected official Shenzhen061 gallery.",
+          "rawCapturePath": "/tmp/twcnfr-round2/browser-cn-52poke.html",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        },
+        {
+          "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SA%EF%BC%89",
+          "retrievedAt": "2026-10-12T19:28:23.306757+00:00",
+          "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification; rendered DOM and visible body text captured after normal page load",
+          "status": 200,
+          "finalUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SA%EF%BC%89",
+          "bytes": 405090,
+          "renderedDomSha256": "210b4b762e8a921f3e14259f31157157f5002aa7704b79becbd146881c1a6c71",
+          "hashScope": "renderedDomSha256 hashes captured UTF-8 rendered DOM bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": "52poke",
+          "field": "card-identity-date-gap",
+          "excerpt": "S-P简体中文版特典卡 剑&盾系列 — 061/S-P V起始牌组 剑&盾 剑&盾系列 2020-06-19 — 132/164 chibi",
+          "excerptSha256": "eb5ec1f6bd9cc3b9681609f4be79494d4082cb3c43be5effe7627fcb1ca94e03",
+          "fieldLimits": "Exact Simplified Chinese061/S-P card identity, HP150, rolling tackle80/heavy impact130, illustratorchibi. Its native time cell is empty.2020-06-19 belongs to adjacent Traditional Chinese132/164 and cannot date the Chinese promo.",
+          "rawCapturePath": "/tmp/twcnfr-round2/browser-cn-exact-card.html",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        },
+        {
+          "sourceUrl": "https://www.pokemon.cn/tcg/event/16145.html",
+          "retrievedAt": "2026-10-12",
+          "captureMethod": "HTTP GET HTML through inherited session proxy",
+          "finalUrl": "https://www.pokemon.cn/tcg/event/16145.html",
+          "status": 200,
+          "responseSha256": "e05a7fbc4cfcb2415b19daeda5a3051ecaa5b8eb0d2532a6be4efdbd8bca9472",
+          "bytes": 74432,
+          "hashScope": "responseSha256 hashes captured HTTP response bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": "pokemon-cn-official",
+          "field": "eventDate",
+          "excerpt": "“2023宝可梦卡牌超级赛·沈阳”(以下简称“超级赛·沈阳”)即将于8月27日（本周日）正式打响，请所有参赛训练家做好最后的准备。",
+          "excerptSha256": "418b71a6d4fd3a242a9298988d0fc693eebf7704979d353b43b1c1c3423b1171",
+          "fieldLimits": "Same Mainland China Shenyang tournament date2023-08-27, refetched2026-10-12. Official announcement still gives a generic side-event pack without exact061/S-P contents; no canonical first-release proposal is created.",
+          "rawCapturePath": "/tmp/twcnfr-round2/cn-shenyang-opening-new.html",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        }
+      ],
+      "nativeCampaigns": [
+        "“大有可玩”线下活动第二弹",
+        "超级赛·西安活动特别包",
+        "训练家之旅主题快闪店"
+      ],
+      "retainedDocumentedDistributions": [
+        {
+          "date": "2023-09-16",
+          "through": "2023-09-17",
+          "event": "2023 Shenzhen Masters",
+          "certainty": "primary-source exact card and event"
+        },
+        {
+          "date": "2023-08-27",
+          "event": "2023 Shenyang Great Tournament",
+          "certainty": "secondary exact card lead; primary confirms event date and generic pack only"
+        }
+      ],
+      "retainedBaselineReference": "verification/evidence/release-dates-20261011/taiwan-china.json — original2026-10-11 ShenzhenSep16–17 official window+inspected061/S-P image; ShenyangAug27 Pokumon card lead. These retrieval dates remain2026-10-11.",
+      "remainingGaps": [
+        "First Mainland China Event Promo Pack A Vol.2 distribution date with exact061/S-P identity. New native table exposes potentially earlier 大有可玩第二弹, but the official search returned503 and browser source timed out. Shenzhen2023-09-16–17 is an exact confirmed distribution; do not relabel it first release while earlier campaigns remain unlocated."
+      ],
+      "nextUsefulLead": "Official 大有可玩第二弹 announcement or campaign leaflet identifying051–062 promo gallery and first distribution day, then compare with Shenyang2023-08-27. Existing ordinary card article卡比兽(S4) was inspected and rejected: different work(HP130/BodySlam), not061/S-P.",
+      "newAttemptKeys": [
+        "cn-shenyang-native-search",
+        "cn-shenyang-cn-official",
+        "cn-dayout-native-campaign-search",
+        "cn-52poke-promos",
+        "cn-shenyang-opening-new",
+        "cn-shenyang-details-new",
+        "browser-cn-shenyang",
+        "browser-cn-card",
+        "browser-cn-exact-card",
+        "browser-cn-native-campaign",
+        "browser-cn-52poke"
+      ],
+      "coverage": "Two bounded native research rounds with one installed-browser check and direct review of promising exact-card/campaign leads; all assigned targets searched. Source omissions/access blocks leave fields unknown."
+    },
+    {
+      "itemId": "item-dd155c60-358f-5750-b519-47d4e588f0b8",
+      "cardReleaseId": "RELEASE:WEST:French:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "setEditionId": "EDITION:WEST:French:xJTG",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xJTG",
+      "collectorNumber": "117",
+      "sourcePrintingId": "F0598-P01",
+      "physicalPrintingId": "PHYSICAL:F0598-P01",
+      "itemIds": [
+        "item-dd155c60-358f-5750-b519-47d4e588f0b8"
+      ],
+      "currentDate": "2025-04",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "status": "unresolved-first-release-date",
+      "proposal": null,
+      "sources": [
+        {
+          "sourceUrl": "https://www.gamestop.ca/pokemon",
+          "retrievalUrl": "https://web.archive.org/web/20250328id_/https://www.gamestop.ca/pokemon",
+          "finalUrl": "https://web.archive.org/web/20250803093929id_/https://www.ebgames.ca/pokemon",
+          "retrievedAt": "2026-10-12",
+          "captureMethod": "HTTP GET through inherited proxy; retrieved gzip bytes decoded locally without a second fetch",
+          "status": 200,
+          "responseSha256": "513b739bb498f505f7567cba208cf5700a3a6ab7d13ac271dbd2e7206a14701e",
+          "decodedSha256": "d41ca3dd5a2f532351ddfcccc2b9def600d720a19e98ec5341fcb8163fb19764",
+          "rawCapturePath": "/tmp/twcnfr-round2/fr-gamestop-archive-20250328.html",
+          "decodedCapturePath": "/tmp/twcnfr-round2/fr-gamestop-archive-20250328.decoded.html",
+          "archiveCaptureTimestamp": "20250803093929",
+          "observation": "French language selector exists, but this page is a February27 Play&Trade store event listing. It does not identify Hop Snorlax117 or its March28 promo start.",
+          "hashScope": "responseSha256 hashes captured HTTP response bytes; excerptSha256 hashes normalized relevant excerpt only",
+          "providerId": null,
+          "field": "rejected-campaign-mismatch",
+          "excerpt": "Pokémon Play & Trade Event 6PM - 9PM - Thursday February 27 This page is subject to change up to the event.",
+          "excerptSha256": "d24f626897979b0ca73078670719042896626661f08b23bdf2f706a91f1875c2",
+          "fieldLimits": "Retailer archive route redirected to an EB Games Canada2025-08-03 capture. It contains a French language selector and a February27 Play&Trade store-event list, not Hop Snorlax117 giveaway or its start. Unregistered retailer source remains a lead; no positive date/identity field accepted.",
+          "excerptNormalization": "HTML/entity-decoded visible body text with Unicode whitespace collapsed"
+        }
+      ],
+      "candidateDate": "2025-03-28",
+      "candidatePrecision": "day",
+      "retainedSpecimenIds": [
+        "SPEC-0016",
+        "SPEC-0144"
+      ],
+      "retainedBaselineSources": [
+        {
+          "sourceId": "hop",
+          "providerId": "bulbapedia",
+          "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)",
+          "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Hop%27s+Snorlax+%28Journey+Together+117%29",
+          "retrievedAt": "2026-10-11T10:34:28.547312+00:00",
+          "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+          "sourceResponseFile": "/tmp/special-hop.json",
+          "sourceResponseSha256": "171f0ef54438937d25bc0cec17fee6716f4bec15fd67f6e257bb7a1d5122f809",
+          "relevantExcerpt": "Three Cosmos Holofoil versions of the Regular print with different stamps in the bottom left corner of the artwork were given away with eligible [[Pokémon Trading Card Game]] purchases at participating retailers in various countries starting March 28, 2025. Variants featuring a red {{wp|GameStop}} logo were available in-store or online from GameStop in {{pmin|the United States}} and {{pmin|Canada}} with a $15 minimum purchase. Variants featuring an {{wp|EB Games}} logo were distributed in {{pmin|Australia}} and {{pmin|New Zealand}} with purchases worth at least $15 at EB Games stores or through their online shop.<ref>[https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool ''Hop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool'' | Pokémon.com] ([https://web.archive.org/web/20250314225915/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool archived])</ref> Variants featuring the Journey Together expansion logo were available at participating stores in {{pmin|Singapore}}, {{pmin|Malaysia}}, {{pmin|the Philippines}} with purchases worth at least S$25, RM80, and ₱1,030, respectively.<ref>[https://asia.pokemon-card.com/sg/archives/6689/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Singapore] ([https://web.archive.org/web/20250322123658/https://asia.pokemon-card.com/sg/archives/6689/ archived])</ref><ref>[https://asia.pokemon-card.com/my/archives/6693/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Malaysia] ([https://web.archive.org/web/20250307191040/https://asia.pokemon-card.com/my/archives/6693/ archived])</ref><ref>[https://asia.pokemon-card.com/ph/archives/6695/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Philippines] ([https://web.archive.org/web/20250322123552/https://asia.pokemon-card.com/ph/archives/6695/ archived])</ref>",
+          "excerptSha256": "3cd2141ae0e0f82af0d3b9953805e6bdb642c7892968f6572b7d1c3a34961d98",
+          "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+          "fieldLimits": "Explicit March 28, 2025 start date for three stamped Regular-print gift-with-purchase campaigns, specifying GameStop US/Canada, EB Games AU/NZ and Journey Together SG/MY/PH. French language is not named; its existing French GameStop identity is established independently in SPEC-0016/SPEC-0144, and same Canadian campaign date needs reviewed equivalence."
+        },
+        {
+          "sourceId": "hop-official-archive",
+          "providerId": "pokemon-official",
+          "sourceUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "retrievalUrl": "https://web.archive.org/web/20250314225915id_/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+          "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+          "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+          "sourceResponseFile": "/tmp/special-hop-official-archive.html",
+          "sourceResponseSha256": "5646050b9ce870553c57615db200ad9b1ce65eec9ce7a015cc7af7849573dce4",
+          "relevantExcerpt": "March 14, 2025\nHop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool\nGet promo cards featuring Hop’s Pokémon at select retailers.\nJourney to your favorite Pokémon TCG retailers to pick up promo cards featuring Hop’s Dubwool and Hop’s Snorlax. To celebrate the release of the Pokémon TCG: Scarlet & Violet—Journey Together adventure, starting March 28, 2025, and while supplies last, players in the United States who purchase $15 worth of Pokémon TCG products at Best Buy will receive a Hop’s Dubwool promo card.\nPick up $15 worth of Pokémon TCG products at GameStop to bring home a Hop’s Snorlax promo card. Australian players who purchase $15 worth of Pokémon TCG products at EB Games will receive a Hop’s Snorlax promo card.\nAnd Canadians can buy $15 worth of Pokémon TCG products at GameStop to receive a Hop’s Snorlax promo card. Purchases can be made in-store or online.\n",
+          "excerptSha256": "5d1841c3afe191c9a732e8091ea86647e62a38c56759be1b7d04380b3b606c18",
+          "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+          "fieldLimits": "Official archived TPCi campaign announcement dated March 14, 2025: campaign begins March 28, 2025, names US/Canada GameStop and Australia EB Games. Does not separately name New Zealand or French-language Canada cards; Bulbapedia supplies NZ campaign identity and retained specimens French identity.",
+          "archiveCaptureTimestamp": "20250314225915"
+        }
+      ],
+      "retainedBaselineReference": "verification/evidence/release-dates-20261011/special-products.json — official2025-03-28 US/Canada GameStop campaign candidate and existing French specimen identity; original retrieval dates2026-10-11 preserved.",
+      "remainingGaps": [
+        "Canadian bilingual/French GameStop campaign notice or launch-day prize gallery explicitly tying French Ronflex de Nabil117 to2025-03-28. French Google search hit anti-bot validation; Bing ignored qualifiers and returned generic GameStop links; liveGameStop.ca route was proxy403; French Pokémon archive index503; retrieved retailer archive is a different event."
+      ],
+      "nextUsefulLead": "A saved GameStop Canada French/bilingual March2025 promotional banner or launch circular showing Ronflex de NabilGameStop with dated offer terms. Do not reuse French base expansion date or assume every French stamped specimen belongs to the English nationwide announcement date.",
+      "newAttemptKeys": [
+        "fr-gamestop-bing-search",
+        "fr-gamestop-google-search",
+        "fr-official-bing-search",
+        "fr-gamestop-current",
+        "fr-pokemon-news-archive-index",
+        "fr-gamestop-archive-20250328",
+        "browser-fr-campaign",
+        "fr-gamestop-archive-decoded"
+      ],
+      "coverage": "Two bounded native research rounds with one installed-browser check and direct review of promising exact-card/campaign leads; all assigned targets searched. Source omissions/access blocks leave fields unknown."
+    }
+  ],
+  "attempts": [
+    {
+      "key": "fr-gamestop-bing-search",
+      "sourceUrl": "https://www.bing.com/search?q=GameStop+Canada+Ronflex+Nabil+28+mars+2025",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.bing.com/search?q=GameStop+Canada+Ronflex+Nabil+28+mars+2025",
+      "status": 200,
+      "responseSha256": "a1eb4fbacb499bfff21c0a11c31eecb0045d22eff77d5bb9ee843b9f698464a3",
+      "bytes": 122742
+    },
+    {
+      "key": "fr-gamestop-google-search",
+      "sourceUrl": "https://www.google.com/search?q=GameStop+Canada+Ronflex+Nabil+28+mars+2025",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.google.com/search?q=GameStop+Canada+Ronflex+Nabil+28+mars+2025",
+      "status": 200,
+      "responseSha256": "8e4d4670458fa3838fd360880fdf7d90ba687c553a1e2a1d33c3441f19a38109",
+      "bytes": 93432
+    },
+    {
+      "key": "fr-official-bing-search",
+      "sourceUrl": "https://www.bing.com/search?q=site%3Apokemon.com%2Ffr+GameStop+Nabil",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.bing.com/search?q=site%3Apokemon.com%2Ffr+GameStop+Nabil",
+      "status": 200,
+      "responseSha256": "cecba8425359f86dbed6557c6a86d6345876cea8b0da47cebd91ccf2a4c06ff5",
+      "bytes": 120352
+    },
+    {
+      "key": "cn-shenyang-native-search",
+      "sourceUrl": "https://www.baidu.com/s?wd=%E6%B2%88%E9%98%B3+%E5%8D%A1%E6%AF%94%E5%85%BD+%E6%B4%BB%E5%8A%A8%E7%89%B9%E5%88%AB%E5%8C%85+2023",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://wappass.baidu.com/static/captcha/tuxing_v2.html?&logid=10661146692009731728&ak=c27bbc89afca0463650ac9bde68ebe06&backurl=https%3A%2F%2Fwww.baidu.com%2Fs%3Fwd%3D%25E6%25B2%2588%25E9%2598%25B3%2B%25E5%258D%25A1%25E6%25AF%2594%25E5%2585%25BD%2B%25E6%25B4%25BB%25E5%258A%25A8%25E7%2589%25B9%25E5%2588%25AB%25E5%258C%2585%2B2023&ext=x9G9QDmMXq%2FNo87gjGO0P40nRcu%2FzZpemFtSTZcm%2FjEYlU5PkiYt8z80Ez5p7UmpUgqUK9LXd1cIlztrhMwiv5UD8stiaRiXZE5L1NRKbsLN27TG8uvv8SLCyIOEZ97r&signature=f4449a17b9e4d6c82d893eeb30be8dad&timestamp=1791832918",
+      "status": 200,
+      "responseSha256": "15259fc79487b40f63821b33577fed32f0c490c885cc87d191ed407248e75d0a",
+      "bytes": 1488
+    },
+    {
+      "key": "cn-shenyang-cn-official",
+      "sourceUrl": "https://www.pokemon.cn/tcg/?keyword=%E6%B2%88%E9%98%B3&queryYear=2023",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "tw-season3-native-search",
+      "sourceUrl": "https://www.google.com/search?q=%E5%AF%B6%E5%8F%AF%E5%A4%A2+%E9%81%93%E9%A4%A8+%E7%AC%AC%E4%B8%89%E5%AD%A3+053+2020",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.google.com/search?q=%E5%AF%B6%E5%8F%AF%E5%A4%A2+%E9%81%93%E9%A4%A8+%E7%AC%AC%E4%B8%89%E5%AD%A3+053+2020",
+      "status": 200,
+      "responseSha256": "4d25ab59e213ea5f719b0d013417eaa1e2a227df535667c5765933d23b59624f",
+      "bytes": 93648
+    },
+    {
+      "key": "tw-season3-official",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/event/",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://asia.pokemon-card.com/tw/event/",
+      "status": 200,
+      "responseSha256": "e6c6694dcd802c3ff434ce73c82d95a5f82fc8a7f8c77e65934f94a74b91573e",
+      "bytes": 88606
+    },
+    {
+      "key": "fr-gamestop-current",
+      "sourceUrl": "https://www.gamestop.ca/pokemon",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "key": "cn-dayout-native-campaign-search",
+      "sourceUrl": "https://www.pokemon.cn/tcg/?keyword=%E5%A4%A7%E6%9C%89%E5%8F%AF%E7%8E%A9&queryYear=2023",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "cn-52poke-promos",
+      "sourceUrl": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "tw-52poke-promos",
+      "sourceUrl": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 403: Forbidden"
+    },
+    {
+      "key": "fr-pokemon-news-archive-index",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Fpokemon-news%2F*nabil*&output=json&filter=statuscode%3A200&filter=mimetype%3Atext%2Fhtml&collapse=urlkey",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "fr-gamestop-archive-20250328",
+      "sourceUrl": "https://web.archive.org/web/20250328id_/https://www.gamestop.ca/pokemon",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://web.archive.org/web/20250803093929id_/https://www.ebgames.ca/pokemon",
+      "status": 200,
+      "error": "'utf-8' codec can't decode byte 0x8b in position 1: invalid start byte"
+    },
+    {
+      "key": "tw-gym-archive-index",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=asia.pokemon-card.com%2Ftw%2Fevent%2Flist%2F*&from=2019&to=2020&output=json&filter=statuscode%3A200&collapse=timestamp%3A6",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "cn-shenyang-opening-new",
+      "sourceUrl": "https://www.pokemon.cn/tcg/event/16145.html",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.pokemon.cn/tcg/event/16145.html",
+      "status": 200,
+      "responseSha256": "e05a7fbc4cfcb2415b19daeda5a3051ecaa5b8eb0d2532a6be4efdbd8bca9472",
+      "bytes": 74432
+    },
+    {
+      "key": "cn-shenyang-details-new",
+      "sourceUrl": "https://www.pokemon.cn/tcg/event/16158.html",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://www.pokemon.cn/tcg/event/16158.html",
+      "status": 200,
+      "responseSha256": "f0240afcec4e7464325d4c75955185dfce18f191b2c2f58eca527e127bd3d340",
+      "bytes": 77357
+    },
+    {
+      "key": "tw-gym-events-native",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/event/list/index.html",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET HTML through inherited session proxy",
+      "finalUrl": "https://asia.pokemon-card.com/tw/event/list/index.html",
+      "status": 200,
+      "responseSha256": "a3f97d7e26077c8e164d0090518643a73ee884d58ab87a917665e6b754e0a670",
+      "bytes": 113353
+    },
+    {
+      "key": "browser-fr-campaign",
+      "sourceUrl": "https://www.google.com/search?q=%22Ronflex+de+Nabil%22+%22GameStop%22+%22mars%22",
+      "query": "\"Ronflex de Nabil\" \"GameStop\" \"mars\"",
+      "retrievedAt": "2026-10-12T19:23:33.368201+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3D%2522Ronflex%2Bde%2BNabil%2522%2B%2522GameStop%2522%2B%2522mars%2522%26sei%3DtTPNasHQIJq0ruEPmbLtqQs&q=EgRaYLT6GLXntNYGIjC7oDAfvx2ITMFrcHuqo4eB43uf7LLS1vlw81KqbuR4dEHJ1DsJ_ieWAa7Rl9TzrWgyAVJaAUNgha268K3g2e1A",
+      "bytes": 6736,
+      "responseSha256": "b4d77a609d0a20ecff4b0f6c573543db64f846b09dd7c721f4dda551897f4fd1"
+    },
+    {
+      "key": "browser-tw-season3",
+      "sourceUrl": "https://www.google.com/search?q=%22%E5%AF%B6%E5%8F%AF%E5%A4%A2%E6%97%A5%22+%22%E7%AC%AC%E4%B8%89%E5%AD%A3%22+%222020%22",
+      "query": "\"寶可夢日\" \"第三季\" \"2020\"",
+      "retrievedAt": "2026-10-12T19:23:33.400689+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.google.com/sorry/index?continue=https://www.google.com/search%3Fq%3D%2522%25E5%25AF%25B6%25E5%258F%25AF%25E5%25A4%25A2%25E6%2597%25A5%2522%2B%2522%25E7%25AC%25AC%25E4%25B8%2589%25E5%25AD%25A3%2522%2B%25222020%2522%26sei%3DtTPNauzgH4aUmLQP4p2RgAQ&q=EgRaYLT6GLXntNYGIjDL5j95K_sS1Jtu5fDd5qx4K2GFfqGt2yI1EDaiPJWOhYXJdPqZUT0Hc4b4qtVZZUUyAVJaAUNg3Z2RwZjDnLlp",
+      "bytes": 6836,
+      "responseSha256": "0e42d8ee0e0023eece6cc63bc5335122193cfdb5cf517d16df4a7f1d4a8bf9ce"
+    },
+    {
+      "key": "browser-cn-shenyang",
+      "sourceUrl": "https://www.google.com/search?q=%22%E6%B2%88%E9%98%B3%22+%22061%2FS-P%22",
+      "query": "\"沈阳\" \"061/S-P\"",
+      "retrievedAt": "2026-10-12T19:23:33.373310+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://www.google.com/search?q=%22%E6%B2%88%E9%98%B3%22+%22061%2FS-P%22&sei=tTPNarrWIazSruEP56Xa0Qk",
+      "bytes": 400747,
+      "responseSha256": "c7c57e5badca32d2703324f34ae7cb381ef8e623866fa7fe12aca118d3c07c27"
+    },
+    {
+      "key": "browser-cn-card",
+      "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
+      "query": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
+      "retrievedAt": "2026-10-12T19:27:22.977163+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88S4%EF%BC%89",
+      "bytes": 420416,
+      "responseSha256": "282ee1deac9214f87714600ee2d7974ed9f50d98e82eb29fa2c17fe7bc9a372e"
+    },
+    {
+      "key": "browser-tw-card",
+      "sourceUrl": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
+      "query": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
+      "retrievedAt": "2026-10-12T19:27:23.007321+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://wiki.52poke.com/wiki/%E4%BC%8A%E5%B8%83%26%E5%8D%A1%E6%AF%94%E5%85%BDGX%EF%BC%88SM9%EF%BC%89",
+      "bytes": 835381,
+      "responseSha256": "b73b3fa64c372232bbada3a93aea17b661a5c50bffefba221a25f7c523acf2df"
+    },
+    {
+      "key": "browser-cn-exact-card",
+      "sourceUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SA%EF%BC%89",
+      "query": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SA%EF%BC%89",
+      "retrievedAt": "2026-10-12T19:28:23.306757+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://wiki.52poke.com/wiki/%E5%8D%A1%E6%AF%94%E5%85%BD%EF%BC%88SA%EF%BC%89",
+      "bytes": 405090,
+      "responseSha256": "210b4b762e8a921f3e14259f31157157f5002aa7704b79becbd146881c1a6c71"
+    },
+    {
+      "key": "browser-cn-native-campaign",
+      "sourceUrl": "https://www.pokemon.cn/tcg/?keyword=%E5%A4%A7%E6%9C%89%E5%8F%AF%E7%8E%A9&queryYear=2023",
+      "query": "https://www.pokemon.cn/tcg/?keyword=%E5%A4%A7%E6%9C%89%E5%8F%AF%E7%8E%A9&queryYear=2023",
+      "retrievedAt": "2026-10-12T19:28:23.325369+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 503,
+      "finalUrl": "https://www.pokemon.cn/tcg/?keyword=%E5%A4%A7%E6%9C%89%E5%8F%AF%E7%8E%A9&queryYear=2023",
+      "bytes": 242,
+      "responseSha256": "201036e301c1c046ff48551e3c03d98ad5808b48c06d23bf5eb9abdc261a13ec"
+    },
+    {
+      "key": "browser-cn-52poke",
+      "sourceUrl": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "query": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "retrievedAt": "2026-10-12T19:25:42.795121+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://wiki.52poke.com/wiki/S-P%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "bytes": 845041,
+      "responseSha256": "df010e2d4e600cb063540c360026adc6926732da3609383c7567d72cb1e3ca8e"
+    },
+    {
+      "key": "browser-tw-52poke",
+      "sourceUrl": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "query": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "retrievedAt": "2026-10-12T19:25:42.805623+00:00",
+      "captureMethod": "Playwright Chromium public browser through inherited proxy with normal TLS verification",
+      "status": 200,
+      "finalUrl": "https://wiki.52poke.com/wiki/SM-P%E7%B9%81%E4%BD%93%E4%B8%AD%E6%96%87%E7%89%88%E7%89%B9%E5%85%B8%E5%8D%A1%EF%BC%88TCG%EF%BC%89",
+      "bytes": 545802,
+      "responseSha256": "7f093501f1ff6e6d8546fec72e638a47daa7093370a8776e0de6e8bea3c5e61f"
+    },
+    {
+      "key": "fr-gamestop-archive-decoded",
+      "sourceUrl": "https://www.gamestop.ca/pokemon",
+      "retrievalUrl": "https://web.archive.org/web/20250328id_/https://www.gamestop.ca/pokemon",
+      "finalUrl": "https://web.archive.org/web/20250803093929id_/https://www.ebgames.ca/pokemon",
+      "retrievedAt": "2026-10-12",
+      "captureMethod": "HTTP GET through inherited proxy; retrieved gzip bytes decoded locally without a second fetch",
+      "status": 200,
+      "responseSha256": "513b739bb498f505f7567cba208cf5700a3a6ab7d13ac271dbd2e7206a14701e",
+      "decodedSha256": "d41ca3dd5a2f532351ddfcccc2b9def600d720a19e98ec5341fcb8163fb19764",
+      "rawCapturePath": "/tmp/twcnfr-round2/fr-gamestop-archive-20250328.html",
+      "decodedCapturePath": "/tmp/twcnfr-round2/fr-gamestop-archive-20250328.decoded.html",
+      "archiveCaptureTimestamp": "20250803093929",
+      "observation": "French language selector exists, but this page is a February27 Play&Trade store event listing. It does not identify Hop Snorlax117 or its March28 promo start."
+    }
+  ],
+  "summary": {
+    "collectorItems": 3,
+    "distinctReleases": 3,
+    "supportedDateRefinements": 0,
+    "unresolvedFirstReleaseDates": 3,
+    "newExactNativeCampaignIdentityRows": 2
+  },
+  "limits": [
+    "Original2026-10-11 observations retain their original dates; all new attempts actually retrieved2026-10-12UTC.",
+    "Browser hashes represent captured renderedDOM bytes, not original wire response bytes; excerpt hashes are independent normalizedUTF-8 text hashes.",
+    "No neighboring-row, cross-locality, adjacent-product or announcement-day transfer; no printing/finish/edition assertions added.",
+    "No signed delivery URL query parameters are retained in this report; raw transient web captures remain under/tmp."
+  ],
+  "retention": "Inspected excerpts and their UTF-8 hashes are retained here. Full-response/DOM hashes describe acquired original bytes in scratch, not committed raw responses. Prior captures keep their original retrieval dates. Publisher delivery signatures and transient press-session HTML are omitted."
+}

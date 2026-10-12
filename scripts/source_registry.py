@@ -62,6 +62,10 @@ PROVIDERS: list[dict[str, Any]] = [
                   "retained localized articles. Individually retained archived articles also "
                   "supply only the named Hop retailer campaign, English/German Series Three "
                   "Prize Pack distribution and English 2023 championship-deck product dates. "
+                  "The retained US TAG TEAM tin page supplies its own launch date, distinct "
+                  "from the European tin date. Separate exact German, Italian and French "
+                  "Journey Together press articles date the localized prerelease program "
+                  "only; they grant no Staff, card identity or finish authority. "
                   "Missing entries remain unknown."),
     },
     {
@@ -89,11 +93,15 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "Japanese-market cards and illustrators",
+        "coverage": "Japanese-market cards and illustrators, plus individually reviewed Japanese campaign and delivery date fields",
         "supportsAbsence": False,
         "usedFor": ["language", "artist", "date"],
         "attribution": "Japanese card data © The Pokémon Company.",
-        "notes": "The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence.",
+        "notes": ("The reviewed search surface has secret/rainbow coverage gaps. Exact positive "
+                  "detail pages remain evidence; missing results never establish absence. "
+                  "The separate CoroCoro Start Deck 100 announcement date surface establishes "
+                  "only its first physical delivery month, distinct from application opening "
+                  "and later delivery waves; it grants no identity or finish authority."),
     },
     {
         "providerId": "pokemon-card-asia",
@@ -187,13 +195,16 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "CC BY-SA 3.0 DE; attribution and ShareAlike apply to retained article excerpts.",
         "category": "fan-wiki",
         "authorityTier": 3,
-        "coverage": "explicit German-language Jungle release-date field in the individually reviewed Dschungel article",
+        "coverage": "explicit German-language Jungle release field and the retained Europe-qualified 2019 TAG TEAM tin date",
         "supportsAbsence": False,
         "usedFor": ["date"],
         "attribution": "Localized release field from PokéWiki, licensed CC BY-SA 3.0 DE.",
         "notes": ("Manual positive date evidence only. Preserve the source-native Deutsch qualifier "
                   "and month precision; the field names a language, not a separate country or "
-                  "printing wave. It establishes no card existence, finish, absence or completeness."),
+                  "printing wave. The separately retained Tin-Boxen row distinguishes the "
+                  "European TAG TEAM tin date from the US date; only that matched European "
+                  "product event is used. It establishes no card existence, finish, absence "
+                  "or completeness."),
     },
     {
         "providerId": "pokepedia",
@@ -204,13 +215,72 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "CC BY-NC-SA 3.0; attribution, NonCommercial and ShareAlike apply to retained article excerpts.",
         "category": "fan-wiki",
         "authorityTier": 3,
-        "coverage": "explicit France-qualified Jungle release-date field in the individually reviewed Jungle article",
+        "coverage": "explicit France-qualified release fields in the reviewed Jungle article and selected Snorlax promo/product articles",
         "supportsAbsence": False,
         "usedFor": ["date"],
-        "attribution": "Localized release field from Poképédia, licensed CC BY-NC-SA 3.0.",
+        "attribution": "Localized release fields from Poképédia, licensed CC BY-NC-SA 3.0.",
         "notes": ("Manual positive date evidence only. The France field is distinct from the "
                   "North America and Japan fields; preserve its stated precision and conflicts. "
-                  "It establishes no card existence, finish, absence or completeness."),
+                  "Selected Snorlax pin collection, EB06/EV06 tripack and Series Three "
+                  "Prize Pack articles supply only the explicitly retained France-qualified "
+                  "dates; existing card membership is separate. It establishes no card "
+                  "existence, finish, absence or completeness."),
+    },
+    {
+        "providerId": "marumiya-official",
+        "displayName": "Marumiya original Japanese promotional campaign",
+        "organization": "Marumiya Corporation",
+        "homepage": "https://www.marumiya.co.jp/",
+        "hosts": ["cp.marumiya.co.jp"],
+        "licenseOrTerms": "Manufacturer's own terms; retained excerpts are used for identification and date verification only.",
+        "category": "official-publisher",
+        "authorityTier": 1,
+        "coverage": "only the original 2015 Japanese Pokémon furikake/curry card campaign's early-July availability wording",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Original campaign date statement © Marumiya Corporation.",
+        "notes": ("Marumiya is the campaign manufacturer, not a general card publisher. "
+                  "The exact retained kids2015 campaign states early July and explicitly "
+                  "varies store arrival. It supplies no common day, card identity, finish, "
+                  "other market date, absence or completeness."),
+    },
+    {
+        "providerId": "pokemoncentral",
+        "displayName": "Pokémon Central Wiki reviewed Italian product date",
+        "organization": "Pokémon Central Wiki community",
+        "homepage": "https://wiki.pokemoncentral.it/",
+        "hosts": ["wiki.pokemoncentral.it"],
+        "licenseOrTerms": "CC BY-NC-SA 3.0 Unported; https://creativecommons.org/licenses/by-nc-sa/3.0/deed.it",
+        "category": "fan-wiki",
+        "authorityTier": 3,
+        "coverage": "only the retained Italian-qualified PPS3 publication-date cell in the expansion index",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product date from Pokémon Central Wiki, licensed CC BY-NC-SA 3.0 Unported.",
+        "notes": ("Manual positive date evidence only. The exact PPS3 index row prints "
+                  "Italiano and Inglese separately; only its Italian field is used. "
+                  "Snorlax membership is already established by the official Italian "
+                  "checklist. No card identity, finish, other release wave, absence or "
+                  "completeness authority is granted."),
+    },
+    {
+        "providerId": "wog",
+        "displayName": "World of Games reviewed Swiss German product date",
+        "organization": "World of Games",
+        "homepage": "https://www.wog.ch/",
+        "hosts": ["www.wog.ch"],
+        "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+        "category": "retail-listing",
+        "authorityTier": 3,
+        "coverage": "only the exact German Morpeko and Snorlax pin-collection release field in the retained Swiss retailer product page",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product date from World of Games.",
+        "notes": ("Manual positive date evidence only. The exact page states Deutsch, "
+                  "Erschienen am and EAN 0820650452499, with Switzerland country metadata. "
+                  "The field dates that retailer's named German product, not every German "
+                  "market or an exhaustive first-distribution history. Product prose lends "
+                  "no card identity, finish, absence or completeness authority."),
     },
     {
         "providerId": "tcgcsv",
