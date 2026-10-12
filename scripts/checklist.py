@@ -36,6 +36,7 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
+from reviewed_release_dates import apply_predecessor_dates, load_reviewed_dates
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PATH = ROOT / "analysis_checklist.json"
@@ -127,6 +128,7 @@ def printing_editions(printing: dict[str, Any]) -> set[str]:
 
 
 def main() -> int:
+    date_document, _, reviewed_dates = load_reviewed_dates()
     cards = read_json(ROOT / "snorlax_cards.json")["cards"]
     baseline = read_json(ROOT / "legacy-cardmarket-baseline.json")
     finish_document = read_json(ROOT / "verification" / "finish_units.json")
@@ -134,6 +136,7 @@ def main() -> int:
     release_document = read_json(ROOT / "analysis_confirmed_releases.json")
     releases = release_document["variants"]
     generated = max(
+        date_document["meta"].get("reviewedAt", ""),
         str(baseline["meta"]["frozenAt"])[:10],
         str(finish_document["meta"]["generated"])[:10],
         str(release_document["generated"])[:10],
@@ -246,6 +249,8 @@ def main() -> int:
                                printing=printing, edition_scope=edition_scope,
                                release=release_by_key)
                 )
+
+    apply_predecessor_dates(items, reviewed_dates, release_sort)
 
     # Rule 6 relies on the ID carrying every physical dimension; a collision means two genuinely
     # different physical things were about to be merged, so fail rather than silently dedupe.

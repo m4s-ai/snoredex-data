@@ -4,6 +4,8 @@
 from __future__ import annotations
 
 import copy
+import hashlib
+import importlib.util
 import json
 import sys
 from itertools import permutations
@@ -17,10 +19,107 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import collector_catalogue as collector  # noqa: E402
 import collector_deployment as deployment  # noqa: E402
 import authoritative_graph as graph_module  # noqa: E402
+import reviewed_release_dates as dates  # noqa: E402
+import source_registry as registry_module  # noqa: E402
 
 
 def read(name: str) -> dict:
     return json.loads((ROOT / name).read_text(encoding="utf-8"))
+
+
+def reviewed_release_date_regressions() -> None:
+    evidence = "verification/evidence/release-dates-20261011/"
+    completion = read(evidence + "completion.json")
+    document, reviewed, legacy_dates = dates.load_reviewed_dates()
+    catalogue = read("collector_catalogue.json")
+    items = {row["itemId"]: row for row in catalogue["items"]}
+    legacy = {row["checklistId"]: row for row in read("analysis_checklist.json")["items"]}
+    dates.check_reviewed_targets(catalogue["items"], reviewed)
+    assert len(completion["items"]) == 116
+    assert len({row["itemId"] for row in completion["items"]}) == 116
+    # Compare the overlay against the same current canonical inputs. The frozen
+    # research baseline is delivery evidence, not a veto on future card intake.
+    with patch.object(collector, "load_reviewed_dates", return_value=(document, {}, {})):
+        without_dates, _ = collector.build_catalogue()
+    base_items = {row["itemId"]: row for row in without_dates["items"]}
+    assert set(items) == set(base_items), "date evidence cannot admit or remove items"
+    excluded = {"releaseDate", "releaseDatePrecision", "releaseApproximate", "releaseSortKey", "sourceLinks", "evidenceLinks"}
+    for item_id, item in items.items():
+        assert {key: value for key, value in item.items() if key not in excluded} == {
+            key: value for key, value in base_items[item_id].items() if key not in excluded
+        }, "date evidence cannot change identity, finish or evidence state"
+        if item_id not in reviewed:
+            assert item == base_items[item_id], "an unreviewed neighbor cannot inherit a date"
+    spec = importlib.util.spec_from_file_location("release_dates_site_owner", ROOT / "scripts/site.py")
+    site = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(site)
+    for item_id, row in reviewed.items():
+        item = items[item_id]
+        assert {key: item[key] for key in dates.DATE_FIELDS} == {key: row[key] for key in dates.DATE_FIELDS}
+        assert item["releaseSortKey"].split("|", 1)[0] == row["releaseDate"]
+        dates.guard_item(row, item)
+        assert site.catalogue_date_source(item, {}, {}) == dates.date_source(row)
+        for source in row["sources"]:
+            assert (ROOT / source["evidencePath"]).is_file()
+            assert source["url"] in item["sourceLinks"]
+        for predecessor_id in row["legacyChecklistIds"]:
+            assert {key: legacy[predecessor_id][key] for key in dates.DATE_FIELDS} == {key: row[key] for key in dates.DATE_FIELDS}
+            assert legacy[predecessor_id]["releaseDateSource"] == dates.date_source(row)
+    # The new registrations grant date metadata only, even on an official host.
+    calls = []
+    registry_module.record_reviewed_dates(document, lambda *args, **kwargs: calls.append((args, kwargs)), {})
+    assert calls and all(args[2] == "date" for args, kwargs in calls)
+    example = next(iter(reviewed.values()))
+    for field in dates.IDENTITY_FIELDS:
+        tampered = {**items[example["itemId"]], field: "different-identity"}
+        try:
+            dates.apply_item_date(tampered, reviewed)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("date evidence must fail when its guarded identity changes")
+    for value, precision in (("2025-02-29", "day"), ("2025-13", "month"), ("2025-06", "day")):
+        try:
+            dates.validate_date({**example, "releaseDate": value, "releaseDatePrecision": precision})
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("invalid calendar dates or precision must fail")
+    try:
+        dates.check_reviewed_targets([], reviewed)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("stale reviewed item targets must fail")
+    invalid = copy.deepcopy(document)
+    invalid["releaseDates"]["reviewedItems"].append(example)
+    with patch.object(dates.json, "loads", return_value=invalid):
+        try:
+            dates.load_reviewed_dates()
+        except ValueError:
+            pass
+        else:
+            raise AssertionError("duplicate reviewed date targets must fail")
+    # Retained excerpts are independently verifiable; full-response hashes are
+    # explicitly acquisition metadata, not hashes of these excerpt-only files.
+    pairs = (("excerptSha256", "excerpt"), ("excerptSha256", "relevantExcerpt"),
+             ("excerptSha256", "content"), ("retainedExcerptSha256", "retainedContent"),
+             ("identityExcerptSha256", "identityExcerpt"))
+    checked = 0
+    stack = [read(evidence + name + ".json") for name in (
+        "japanese-promos", "taiwan-china", "korea-indonesia-thailand",
+        "western-promos", "special-products", "historical-sets", "official-press-provenance")]
+    while stack:
+        value = stack.pop()
+        if isinstance(value, list):
+            stack.extend(value)
+        elif isinstance(value, dict):
+            for hash_key, text_key in pairs:
+                if isinstance(value.get(hash_key), str) and isinstance(value.get(text_key), str):
+                    assert hashlib.sha256(value[text_key].encode()).hexdigest() == value[hash_key]
+                    checked += 1
+            stack.extend(value.values())
+    assert checked >= 100
 
 
 def printing_identity_regressions() -> None:
@@ -190,6 +289,7 @@ def source_first_finish_decision_regressions() -> None:
 
 
 def main() -> None:
+    reviewed_release_date_regressions()
     source_first_finish_decision_regressions()
     m6a = [row for row in read("collector_catalogue.json")["items"]
            if row["localSetCode"] == "M6a" and row["localizationId"] == "LOCALIZATION:JP:ja"]

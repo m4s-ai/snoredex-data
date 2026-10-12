@@ -1,0 +1,34 @@
+{
+  "checkedAt": "2026-10-11T11:14:49.113996+00:00",
+  "coreGate": {
+    "command": "python scripts/regen.py --check",
+    "result": "passed",
+    "workingTreeContentMetadataAndGitIndexUnchanged": true
+  },
+  "browser": {
+    "command": "python verification/test_site.py",
+    "result": "passed",
+    "checks": 111,
+    "playwrightVersion": "1.61.0"
+  },
+  "retainedSourceRuns": {
+    "command": "python scripts/source_adapters.py --check --full-refresh",
+    "result": "passed",
+    "records": 1629,
+    "slices": 15
+  },
+  "retainedCardRuns": {
+    "command": "python scripts/card_discovery.py --check --full-refresh",
+    "result": "passed",
+    "records": 399,
+    "slices": 15
+  },
+  "siteArtifact": {
+    "build": "python scripts/publish.py --out _site-release-dates",
+    "verify": "python scripts/publish.py --out _site-release-dates --verify",
+    "result": "passed",
+    "files": 2242
+  },
+  "deliveryComparison": "delivery-proof.json",
+  "publicationHistoryScope": "Run after commit/push and record outcome in draft PR."
+}

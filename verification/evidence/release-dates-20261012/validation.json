@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-12",
+  "workingTreeBaseCommit": "28d2056bcd0c9d5184a2fb793149dc75426af6eb",
+  "core": {
+    "regenerated": true,
+    "command": "python scripts/regen.py --check",
+    "status": "passed",
+    "readOnlyWorkingTreeContentMetadataAndIndex": true,
+    "note": "The initial write/check/test run found the previous batch README missing its documentation role header. After adding role headers to both batch READMEs and tracking the new evidence files, the full gate passed."
+  },
+  "additionalChecks": [
+    {
+      "command": "python scripts/source_adapters.py --check --full-refresh",
+      "status": "passed",
+      "records": 1629,
+      "slices": 15,
+      "explicitGaps": 10
+    },
+    {
+      "command": "python scripts/card_discovery.py --check --full-refresh",
+      "status": "passed",
+      "records": 399,
+      "slices": 15,
+      "explicitGaps": 13
+    },
+    {
+      "command": "python verification/test_site.py",
+      "status": "passed",
+      "checks": 111,
+      "browser": "pinned Playwright Chromium",
+      "environmentNote": "Local loopback test server required the authorized escalated execution context."
+    },
+    {
+      "command": "python scripts/publish.py --out _site-release-dates-round2",
+      "status": "passed",
+      "files": 2242,
+      "kilobytes": 938751
+    },
+    {
+      "command": "python scripts/publish.py --out _site-release-dates-round2 --verify",
+      "status": "passed",
+      "scope": "local artifact only"
+    }
+  ],
+  "oneTimeEvidenceChecks": {
+    "researchExcerptHashesVerified": 59,
+    "mismatches": 0,
+    "all63ResearchTargetsAccountedExactlyOnce": true,
+    "existingProviderRetentionPoliciesUnchanged": 35,
+    "existingCapabilityObservationsUnchanged": 112,
+    "newPositiveAndBoundaryObservations": 26,
+    "nonDateDeliveryProof": "delivery-proof.json"
+  },
+  "publicationHistoryCheck": "Run review_findings.py --scope publication after the delivery commit/push; record its actual result in draft PR426."
+}

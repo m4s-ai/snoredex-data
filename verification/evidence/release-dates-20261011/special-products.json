@@ -1,0 +1,2367 @@
+{
+  "schema": "snoredex-release-date-research",
+  "researchBatch": "special-products",
+  "recordedAt": "2026-10-11T10:44:58.370175+00:00",
+  "status": "live-research-completed-with-explicit-locality-limits",
+  "scope": "23 current incomplete collector items: PPS3 LOR, WCD23 LOR, xJTG and xPRE; research only, no canonical edits.",
+  "networkAttempts": [
+    {
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "attemptedAt": "2026-10-11T10:31:21+00:00",
+      "captureMethod": "urllib over inherited HTTPS proxy with TLS verification; sandbox escalation",
+      "outcome": "blocked",
+      "error": "Tunnel connection failed: 403 Forbidden; actual runtime network disabled/restricted empty."
+    },
+    {
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "attemptedAt": "2026-10-11T10:31:21+00:00",
+      "captureMethod": "urllib over inherited HTTPS proxy with TLS verification; sandbox escalation",
+      "outcome": "blocked",
+      "error": "Tunnel connection failed: 403 Forbidden; actual runtime network disabled/restricted empty."
+    }
+  ],
+  "retainedReviews": [
+    {
+      "path": "verification/confirmed_release_overrides.json",
+      "reviewedAt": "2026-10-11",
+      "fileSha256": "4ec9f222dc2ba1db101b6cbe639af7fdf71676658ad3931c2ce326646a996ec8",
+      "finding": "Current set overrides are approximate and contain no inspected date source excerpt for assigned products."
+    },
+    {
+      "path": "verification/RESUME.md",
+      "reviewedAt": "2026-10-11",
+      "fileSha256": "d6d7463bc31bc1438fad791ff43df966806c371a5d37829b2bdb91df4269d724",
+      "finding": "Historical research provides distribution/variant identity but no supported exact product launch date."
+    },
+    {
+      "path": "verification/FINISH_SOURCES.md",
+      "reviewedAt": "2026-10-11",
+      "fileSha256": "df387ae9bd8ddc59b937a07f46ef0ce386192d8a89aeb4fd1e1c6dfb7d8abc2c",
+      "finding": "Localized PPS3 official checklists establish the card and standard finish, not launch dates; xPRE source establishes sealed special collection product and foil contents, not launch date."
+    }
+  ],
+  "findings": [
+    {
+      "itemId": "item-7434769f-81a6-50cf-9008-cf431cf4eaae",
+      "cardReleaseId": "RELEASE:WEST:German:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:3f4b42965da9f810daf7fc54",
+      "sourcePrintingId": "F0279-P01",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "PPS3 LOR",
+      "currentDate": "2023-06",
+      "proposedDate": "2023-08-14",
+      "candidateDate": "2023-08-14",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive",
+        "pps3-official-de-archive",
+        "pps3-official-de-archive"
+      ],
+      "dateScope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing",
+      "limits": "German native official announcement directly dates this series; no base Lost Origin or English-market date inheritance."
+    },
+    {
+      "itemId": "item-e7b546df-41e3-5692-9517-ff00bf6b34e7",
+      "cardReleaseId": "RELEASE:WEST:English:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:F0277-P01",
+      "sourcePrintingId": "F0277-P01",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "PPS3 LOR",
+      "currentDate": "2023-06",
+      "proposedDate": "2023-08-14",
+      "candidateDate": "2023-08-14",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "dateScope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing",
+      "limits": ""
+    },
+    {
+      "itemId": "item-125e07bd-3b39-5544-9e22-8bcfbd7c2957",
+      "cardReleaseId": "RELEASE:WEST:Spanish:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
+      "sourcePrintingId": "F0281-P01",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "PPS3 LOR",
+      "currentDate": "2023-06",
+      "proposedDate": null,
+      "candidateDate": "2023-08-14",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "dateScope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing",
+      "limits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-11d75ee5-2f21-5592-bb19-21f5c60a9978",
+      "cardReleaseId": "RELEASE:WEST:French:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2e48c98bd8a510551ddda590",
+      "sourcePrintingId": "F0278-P01",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "PPS3 LOR",
+      "currentDate": "2023-06",
+      "proposedDate": null,
+      "candidateDate": "2023-08-14",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "dateScope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing",
+      "limits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-f3840e90-e74b-538d-b7c8-e1886129d2a0",
+      "cardReleaseId": "RELEASE:WEST:Italian:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:3491fa83950129e9cfddf63d",
+      "sourcePrintingId": "F0280-P01",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "PPS3 LOR",
+      "currentDate": "2023-06",
+      "proposedDate": null,
+      "candidateDate": "2023-08-14",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "dateScope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing",
+      "limits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-39613eb1-2cea-5014-bdec-17a00c8c3e0d",
+      "cardReleaseId": "RELEASE:WEST:German:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2b7b3e2cd4941cdf6a55a403",
+      "sourcePrintingId": "F0586-P01",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "WCD23 LOR",
+      "currentDate": "2023-11",
+      "proposedDate": null,
+      "candidateDate": "2024-03-01",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "dateScope": "2023 Colorless Lugia championship replica-deck retail launch, not world event",
+      "limits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-2969946c-64a3-5ac8-b2d2-1944604d0d1e",
+      "cardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "sourcePrintingId": "F0584-P01",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "WCD23 LOR",
+      "currentDate": "2023-11",
+      "proposedDate": "2024-03-01",
+      "candidateDate": "2024-03-01",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "dateScope": "2023 Colorless Lugia championship replica-deck retail launch, not world event",
+      "limits": ""
+    },
+    {
+      "itemId": "item-80cf95fe-46dc-570b-9f5c-dfdcd38a6745",
+      "cardReleaseId": "RELEASE:WEST:French:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "sourcePrintingId": "F0585-P01",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "WCD23 LOR",
+      "currentDate": "2023-11",
+      "proposedDate": null,
+      "candidateDate": "2024-03-01",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "dateScope": "2023 Colorless Lugia championship replica-deck retail launch, not world event",
+      "limits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-fe55f905-c6c0-5cec-9e89-8b08936aab75",
+      "cardReleaseId": "RELEASE:WEST:Italian:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:54557822298699d280c0beb7",
+      "sourcePrintingId": "F0587-P01",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "WCD23 LOR",
+      "currentDate": "2023-11",
+      "proposedDate": null,
+      "candidateDate": "2024-03-01",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "dateScope": "2023 Colorless Lugia championship replica-deck retail launch, not world event",
+      "limits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence."
+    },
+    {
+      "itemId": "item-b6fdf806-2265-5097-b3c1-2614e7bf805a",
+      "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0610-P01",
+      "sourcePrintingId": "F0610-P01",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-103c5d1c-2b05-51c3-92e6-848d45f96b86",
+      "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0610-P02",
+      "sourcePrintingId": "F0610-P02",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-315a2de4-ab38-50ad-aa87-a2868d209d96",
+      "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0608-P01",
+      "sourcePrintingId": "F0608-P01",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-38a86735-745f-506f-894c-25ab590308c0",
+      "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0608-P02",
+      "sourcePrintingId": "F0608-P02",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-cfa2ff16-5c86-5732-bc59-739356ca6aa3",
+      "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0612-P01",
+      "sourcePrintingId": "F0612-P01",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-226f7cb1-f045-57e1-a96c-3598cc0278c5",
+      "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0612-P02",
+      "sourcePrintingId": "F0612-P02",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-7781cd47-058d-5f7b-b269-974b71689c26",
+      "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0609-P01",
+      "sourcePrintingId": "F0609-P01",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-0e65767a-04b6-5fe0-9d02-9b6e64f53149",
+      "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0609-P02",
+      "sourcePrintingId": "F0609-P02",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-0b25f883-edfa-5e53-94fb-fb13ae7e386b",
+      "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0611-P01",
+      "sourcePrintingId": "F0611-P01",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-7be7cb28-ca03-5e69-8d94-272fd90e198a",
+      "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0611-P02",
+      "sourcePrintingId": "F0611-P02",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "xPRE",
+      "currentDate": "2025-02",
+      "proposedDate": "2025-09-12",
+      "candidateDate": "2025-09-12",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "dateScope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076",
+      "limits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded."
+    },
+    {
+      "itemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P01",
+      "sourcePrintingId": "F0597-P01",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "currentDate": "2025-04",
+      "proposedDate": "2025-03-28",
+      "candidateDate": "2025-03-28",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "dateScope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign",
+      "limits": ""
+    },
+    {
+      "itemId": "item-7ee88eb1-4221-59e9-914e-8480901e0754",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P02",
+      "sourcePrintingId": "F0597-P02",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "currentDate": "2025-04",
+      "proposedDate": "2025-03-28",
+      "candidateDate": "2025-03-28",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "dateScope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign",
+      "limits": ""
+    },
+    {
+      "itemId": "item-466fef23-3569-5c26-b37f-a1c38c25dba6",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P03",
+      "sourcePrintingId": "F0597-P03",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "currentDate": "2025-04",
+      "proposedDate": "2025-03-28",
+      "candidateDate": "2025-03-28",
+      "precision": "day",
+      "approximate": false,
+      "status": "supported",
+      "sourceIds": [
+        "hop",
+        "hop-official-sg",
+        "hop-official-my",
+        "hop-official-ph"
+      ],
+      "dateScope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign",
+      "limits": ""
+    },
+    {
+      "itemId": "item-dd155c60-358f-5750-b519-47d4e588f0b8",
+      "cardReleaseId": "RELEASE:WEST:French:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0598-P01",
+      "sourcePrintingId": "F0598-P01",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xJTG",
+      "currentDate": "2025-04",
+      "proposedDate": null,
+      "candidateDate": "2025-03-28",
+      "precision": "day",
+      "approximate": false,
+      "status": "candidate-needs-localized-date-equivalence",
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "dateScope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign",
+      "limits": "Official US article explicitly names Canadian GameStop campaign date; existing French GameStop card established by retained specimen, but announcement does not explicitly name French-language distribution. Apply only after reviewed same-campaign equivalence, not because French base card shares expansion date."
+    }
+  ],
+  "targets": [
+    {
+      "itemId": "item-7434769f-81a6-50cf-9008-cf431cf4eaae",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "PPS3 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:German:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:3f4b42965da9f810daf7fc54",
+      "sourcePrintingId": "F0279-P01",
+      "finishUnitId": "F0279",
+      "markings": [
+        {
+          "kind": "program-logo",
+          "text": "Play! Pokemon",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "prize-pack",
+        "name": "Play! Pokemon Prize Pack Series Three"
+      },
+      "currentDate": "2023-06",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2023-08-14",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "fieldLimits": "German native official announcement directly dates this series; no base Lost Origin or English-market date inheritance.",
+      "candidateDate": "2023-08-14",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive",
+        "pps3-official-de-archive",
+        "pps3-official-de-archive"
+      ],
+      "scope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing"
+    },
+    {
+      "itemId": "item-e7b546df-41e3-5692-9517-ff00bf6b34e7",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "PPS3 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:English:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:F0277-P01",
+      "sourcePrintingId": "F0277-P01",
+      "finishUnitId": "F0277",
+      "markings": [
+        {
+          "kind": "program-logo",
+          "text": "Play! Pokemon",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "prize-pack",
+        "name": "Play! Pokemon Prize Pack Series Three"
+      },
+      "currentDate": "2023-06",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2023-08-14",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "fieldLimits": "Must date Prize Pack Series Three distribution, not Lost Origin base-card date; localized official Series Three checklists establish card identity but not exact date.",
+      "candidateDate": "2023-08-14",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "scope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing"
+    },
+    {
+      "itemId": "item-125e07bd-3b39-5544-9e22-8bcfbd7c2957",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "PPS3 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:Spanish:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:1a7e140cd50a6fb97f7e03f5",
+      "sourcePrintingId": "F0281-P01",
+      "finishUnitId": "F0281",
+      "markings": [
+        {
+          "kind": "program-logo",
+          "text": "Play! Pokemon",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "prize-pack",
+        "name": "Play! Pokemon Prize Pack Series Three"
+      },
+      "currentDate": "2023-06",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "fieldLimits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2023-08-14",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "scope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing"
+    },
+    {
+      "itemId": "item-11d75ee5-2f21-5592-bb19-21f5c60a9978",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "PPS3 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:French:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2e48c98bd8a510551ddda590",
+      "sourcePrintingId": "F0278-P01",
+      "finishUnitId": "F0278",
+      "markings": [
+        {
+          "kind": "program-logo",
+          "text": "Play! Pokemon",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "prize-pack",
+        "name": "Play! Pokemon Prize Pack Series Three"
+      },
+      "currentDate": "2023-06",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "fieldLimits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2023-08-14",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "scope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing"
+    },
+    {
+      "itemId": "item-f3840e90-e74b-538d-b7c8-e1886129d2a0",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "PPS3 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:Italian:PPS3 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:3491fa83950129e9cfddf63d",
+      "sourcePrintingId": "F0280-P01",
+      "finishUnitId": "F0280",
+      "markings": [
+        {
+          "kind": "program-logo",
+          "text": "Play! Pokemon",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "prize-pack",
+        "name": "Play! Pokemon Prize Pack Series Three"
+      },
+      "currentDate": "2023-06",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "fieldLimits": "Exact product date and localized product names available; source does not explicitly date each localized edition. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2023-08-14",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "prize3",
+        "prize3-official-archive"
+      ],
+      "scope": "Play! Pokémon Prize Pack Series Three distribution start; exact LOR 143 Standard Set printing"
+    },
+    {
+      "itemId": "item-39613eb1-2cea-5014-bdec-17a00c8c3e0d",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "WCD23 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:German:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:2b7b3e2cd4941cdf6a55a403",
+      "sourcePrintingId": "F0586-P01",
+      "finishUnitId": "F0586",
+      "markings": [
+        {
+          "kind": "championship-signature",
+          "role": "distribution-promo",
+          "text": "Gabriel Fernandez"
+        }
+      ],
+      "distribution": {
+        "kind": "world-championship-deck",
+        "name": "2023 Colorless Lugia"
+      },
+      "currentDate": "2023-11",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+        "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+      "fieldLimits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2024-03-01",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "scope": "2023 Colorless Lugia championship replica-deck retail launch, not world event"
+    },
+    {
+      "itemId": "item-2969946c-64a3-5ac8-b2d2-1944604d0d1e",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "WCD23 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:English:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:ffc9ab2517a7b6e09bdfd4df",
+      "sourcePrintingId": "F0584-P01",
+      "finishUnitId": "F0584",
+      "markings": [
+        {
+          "kind": "championship-signature",
+          "role": "distribution-promo",
+          "text": "Gabriel Fernandez"
+        }
+      ],
+      "distribution": {
+        "kind": "world-championship-deck",
+        "name": "2023 Colorless Lugia"
+      },
+      "currentDate": "2023-11",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2024-03-01",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+        "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+      "fieldLimits": "Must use 2023 championship replica-deck product launch, not 2023 championship event or original Lost Origin launch. Localized deck existence is retained; each official locale date must be inspected.",
+      "candidateDate": "2024-03-01",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "scope": "2023 Colorless Lugia championship replica-deck retail launch, not world event"
+    },
+    {
+      "itemId": "item-80cf95fe-46dc-570b-9f5c-dfdcd38a6745",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "WCD23 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:French:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:b2f2ecdd65e9dba9b836f5b2",
+      "sourcePrintingId": "F0585-P01",
+      "finishUnitId": "F0585",
+      "markings": [
+        {
+          "kind": "championship-signature",
+          "role": "distribution-promo",
+          "text": "Gabriel Fernandez"
+        }
+      ],
+      "distribution": {
+        "kind": "world-championship-deck",
+        "name": "2023 Colorless Lugia"
+      },
+      "currentDate": "2023-11",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+        "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+      "fieldLimits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2024-03-01",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "scope": "2023 Colorless Lugia championship replica-deck retail launch, not world event"
+    },
+    {
+      "itemId": "item-fe55f905-c6c0-5cec-9e89-8b08936aab75",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "WCD23 LOR",
+      "collectorNumber": "LOR 143",
+      "cardReleaseId": "RELEASE:WEST:Italian:WCD23 LOR:LOR 143:Snorlax-Unfazed-Fat-Thumping-Snore",
+      "physicalPrintingId": "PHYSICAL:PRINTING:54557822298699d280c0beb7",
+      "sourcePrintingId": "F0587-P01",
+      "finishUnitId": "F0587",
+      "markings": [
+        {
+          "kind": "championship-signature",
+          "role": "distribution-promo",
+          "text": "Gabriel Fernandez"
+        }
+      ],
+      "distribution": {
+        "kind": "world-championship-deck",
+        "name": "2023 Colorless Lugia"
+      },
+      "currentDate": "2023-11",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+        "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+      "fieldLimits": "Existing localized deck identity confirmed, but fetched exact-date sources do not date the German/French/Italian edition separately. No language-specific acceptance without reviewed common-event equivalence.",
+      "candidateDate": "2024-03-01",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "colorless",
+        "wcd-official-archive"
+      ],
+      "scope": "2023 Colorless Lugia championship replica-deck retail launch, not world event"
+    },
+    {
+      "itemId": "item-b6fdf806-2265-5097-b3c1-2614e7bf805a",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0610-P01",
+      "sourcePrintingId": "F0610-P01",
+      "finishUnitId": "F0610",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Prismatic Evolutions",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-103c5d1c-2b05-51c3-92e6-848d45f96b86",
+      "localizationId": "LOCALIZATION:WEST:de",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:German:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0610-P02",
+      "sourcePrintingId": "F0610-P02",
+      "finishUnitId": "F0610",
+      "markings": [],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-315a2de4-ab38-50ad-aa87-a2868d209d96",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0608-P01",
+      "sourcePrintingId": "F0608-P01",
+      "finishUnitId": "F0608",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Prismatic Evolutions",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-38a86735-745f-506f-894c-25ab590308c0",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:English:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0608-P02",
+      "sourcePrintingId": "F0608-P02",
+      "finishUnitId": "F0608",
+      "markings": [],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-cfa2ff16-5c86-5732-bc59-739356ca6aa3",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0612-P01",
+      "sourcePrintingId": "F0612-P01",
+      "finishUnitId": "F0612",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Prismatic Evolutions",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-226f7cb1-f045-57e1-a96c-3598cc0278c5",
+      "localizationId": "LOCALIZATION:WEST:es-ES",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:Spanish:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0612-P02",
+      "sourcePrintingId": "F0612-P02",
+      "finishUnitId": "F0612",
+      "markings": [],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-7781cd47-058d-5f7b-b269-974b71689c26",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0609-P01",
+      "sourcePrintingId": "F0609-P01",
+      "finishUnitId": "F0609",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Prismatic Evolutions",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-0e65767a-04b6-5fe0-9d02-9b6e64f53149",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:French:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0609-P02",
+      "sourcePrintingId": "F0609-P02",
+      "finishUnitId": "F0609",
+      "markings": [],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-0b25f883-edfa-5e53-94fb-fb13ae7e386b",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0611-P01",
+      "sourcePrintingId": "F0611-P01",
+      "finishUnitId": "F0611",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Prismatic Evolutions",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-7be7cb28-ca03-5e69-8d94-272fd90e198a",
+      "localizationId": "LOCALIZATION:WEST:it",
+      "localSetCode": "xPRE",
+      "collectorNumber": "076",
+      "cardReleaseId": "RELEASE:WEST:Italian:xPRE:076:Snorlax-ex-Strength-Toss-and-Turn-Press",
+      "physicalPrintingId": "PHYSICAL:F0611-P02",
+      "sourcePrintingId": "F0611-P02",
+      "finishUnitId": "F0611",
+      "markings": [],
+      "distribution": {
+        "kind": "special-collection",
+        "name": "Snorlax ex & Blissey ex Special Collection"
+      },
+      "currentDate": "2025-02",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-09-12",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Prismatic_Evolutions_(TCG)",
+      "fieldLimits": "Existing exact product/printing identities retained. European-market product launch only; US Target dates excluded.",
+      "candidateDate": "2025-09-12",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "snorlax-special-card",
+        "merch"
+      ],
+      "scope": "European-market Snorlax ex & Blissey ex Special Collection, both regular stamped and jumbo stamped Snorlax ex 076"
+    },
+    {
+      "itemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "collectorNumber": "117",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P01",
+      "sourcePrintingId": "F0597-P01",
+      "finishUnitId": "F0597",
+      "markings": [
+        {
+          "kind": "retailer",
+          "text": "EB Games",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "gift-with-purchase",
+        "region": "Australia/New Zealand"
+      },
+      "currentDate": "2025-04",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-03-28",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+      "fieldLimits": "The EB Games AU/NZ, GameStop US/Canada and Journey Together MY/PH/SG stamp printings have separate campaign scope; base expansion launch cannot supply each distribution date. French GameStop identity is supported by SPEC-0016/SPEC-0144, but Canada campaign date must identify bilingual/French distribution.",
+      "candidateDate": "2025-03-28",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "scope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign"
+    },
+    {
+      "itemId": "item-7ee88eb1-4221-59e9-914e-8480901e0754",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "collectorNumber": "117",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P02",
+      "sourcePrintingId": "F0597-P02",
+      "finishUnitId": "F0597",
+      "markings": [
+        {
+          "kind": "retailer",
+          "text": "GameStop",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "gift-with-purchase",
+        "region": "USA/Canada"
+      },
+      "currentDate": "2025-04",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-03-28",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+      "fieldLimits": "The EB Games AU/NZ, GameStop US/Canada and Journey Together MY/PH/SG stamp printings have separate campaign scope; base expansion launch cannot supply each distribution date. French GameStop identity is supported by SPEC-0016/SPEC-0144, but Canada campaign date must identify bilingual/French distribution.",
+      "candidateDate": "2025-03-28",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "scope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign"
+    },
+    {
+      "itemId": "item-466fef23-3569-5c26-b37f-a1c38c25dba6",
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localSetCode": "xJTG",
+      "collectorNumber": "117",
+      "cardReleaseId": "RELEASE:WEST:English:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0597-P03",
+      "sourcePrintingId": "F0597-P03",
+      "finishUnitId": "F0597",
+      "markings": [
+        {
+          "kind": "set-logo",
+          "text": "Journey Together",
+          "role": "distribution-promo"
+        }
+      ],
+      "distribution": {
+        "kind": "gift-with-purchase",
+        "region": "Malaysia/Philippines/Singapore"
+      },
+      "currentDate": "2025-04",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": "2025-03-28",
+      "outcome": "supported",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+      "fieldLimits": "The EB Games AU/NZ, GameStop US/Canada and Journey Together MY/PH/SG stamp printings have separate campaign scope; base expansion launch cannot supply each distribution date. French GameStop identity is supported by SPEC-0016/SPEC-0144, but Canada campaign date must identify bilingual/French distribution.",
+      "candidateDate": "2025-03-28",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "hop",
+        "hop-official-sg",
+        "hop-official-my",
+        "hop-official-ph"
+      ],
+      "scope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign"
+    },
+    {
+      "itemId": "item-dd155c60-358f-5750-b519-47d4e588f0b8",
+      "localizationId": "LOCALIZATION:WEST:fr",
+      "localSetCode": "xJTG",
+      "collectorNumber": "117",
+      "cardReleaseId": "RELEASE:WEST:French:xJTG:117:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "physicalPrintingId": "PHYSICAL:F0598-P01",
+      "sourcePrintingId": "F0598-P01",
+      "finishUnitId": "F0598",
+      "markings": [
+        {
+          "kind": "observed-marking",
+          "role": "distribution-promo",
+          "text": "GameStop logo stamped in red over the lower left of the illustration"
+        }
+      ],
+      "distribution": null,
+      "currentDate": "2025-04",
+      "currentPrecision": "month",
+      "currentApproximate": true,
+      "proposedDate": null,
+      "outcome": "candidate-needs-localized-date-equivalence",
+      "attemptedRoutes": [
+        "retained canonical release override review",
+        "retained RESUME/FINISH_SOURCES product-identity review",
+        "live publisher/Bulbapedia origin retrieval blocked at proxy",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)",
+        "Bulbapedia exact product and card wikitext inspected",
+        "official publisher current source (bot-gated for www.pokemon.com; successful for Asia campaign)",
+        "archived official publisher announcement inspected",
+        "native-language official source search (Google JS-only, no findings accepted)"
+      ],
+      "sourceUrls": [
+        "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+        "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)"
+      ],
+      "nextUsefulLead": "https://bulbapedia.bulbagarden.net/wiki/Journey_Together_(TCG)",
+      "fieldLimits": "Official US article explicitly names Canadian GameStop campaign date; existing French GameStop card established by retained specimen, but announcement does not explicitly name French-language distribution. Apply only after reviewed same-campaign equivalence, not because French base card shares expansion date.",
+      "candidateDate": "2025-03-28",
+      "datePrecision": "day",
+      "approximate": false,
+      "sourceIds": [
+        "hop",
+        "hop-official-archive"
+      ],
+      "scope": "Stamped Hop’s Snorlax JTG 117 gift-with-purchase campaign"
+    }
+  ],
+  "sources": [
+    {
+      "sourceId": "prize3",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Play!_Pok%C3%A9mon_Prize_Pack_Series_Three_(TCG)",
+      "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Play%21+Pok%C3%A9mon+Prize+Pack+Series+Three+%28TCG%29",
+      "retrievedAt": "2026-10-11T10:33:45.277102+00:00",
+      "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+      "sourceResponseFile": "/tmp/special-prize3.json",
+      "sourceResponseSha256": "30440bc436b3e670545b9b47b60d8caa5addf7c2c86af46395cecb1ef4bcda05",
+      "relevantExcerpt": "{{ExpansionPrevNext | prev=Play! Pokémon Prize Pack Series Two | next=Play! Pokémon Prize Pack Series Four}}\n{{TCGPromoInfobox\n|setname=Play! Pokémon Prize Pack Series Three\n|symbol=no\n|cards=163 (198 variants)\n|period=August 14, 2023\n|logo=Play! Pokémon Prize Pack Series Three logo.png\n}}\n\n'''Play! Pokémon Prize Pack Series Three''' is a series of promotional cards released on August 14, 2023 through [[Play! Pokémon|Pokémon Organized Play]] events or affiliated products. This set features 163 specifically selected cards from the {{TCG|Brilliant Stars}} expansion through {{TCG|Scarlet & Violet}}, in addition to {{TCG|SVP Black Star Promos|SVP Black Star Promotional cards}} and regulation F Prints of {{TCG|Energy card|Basic Energy cards}} that initially debuted in {{TCG|Brilliant Stars}}. All cards retained their original set number, but are marked with the Play! Pokémon logo. Each Booster pack contains 6 cards. Foil cards in this set have Cosmos Holofoil except for {{TCG|Pokémon V}} {{TCG|Pokémon V|Pokémon VMAX}}, {{TCG|Pokémon V|Pokémon VSTAR}}, {{TCG|Pokémon ex}} and {{TCG|Radiant Pokémon}} which retain their regular foil patterns.\n\n{{Setlist/entry|[[Image:SetSymbolLost Origin.png|18px|link=Lost Origin (TCG)]] 143/196|F|{{TCG ID|Lost Origin|Snorlax|143}}|Colorless||Rare Holo|Standard Set}}\n\n==In other languages==\n{{Langtable|color={{Tcg colorless color}}|bordercolor={{Tcg water color}}\n|fr=Play! Pokémon Packs Récompense Troisième Série\n|de=Play! Pokémon Preispack Serie 3\n|it=Play! Pokémon Buste Premio Terza Serie\n|es=Play! Pokémon Paquetes de Premio Serie 3\n}}\n\n",
+      "excerptSha256": "f3231682340f0f103e998de1761dbd27779e9bc9f8c31aa1583455ecef3abe11",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Exact Series Three release date and exact Snorlax 143/196 Standard Set row. Langtable names the French/German/Italian/Spanish localized series but does not explicitly say their market launch date; a language-specific day date remains a reviewed equivalence question. No base Lost Origin launch inherited."
+    },
+    {
+      "sourceId": "colorless",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
+      "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Colorless+Lugia+%28TCG%29",
+      "retrievedAt": "2026-10-11T10:33:45.869791+00:00",
+      "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+      "sourceResponseFile": "/tmp/special-colorless.json",
+      "sourceResponseSha256": "b52fe91ee508805362fae12b4b01779baf63bbb5db8ffd888f7212b75cde27a7",
+      "relevantExcerpt": "{{DeckInfobox\n|title=Colorless Lugia\n|image=WCS2023 Colorless Lugia.jpg\n|caption=Box art\n|release=March 1, 2024\n|types={{e|Colorless}}\n}}\n\n'''Colorless Lugia''' is the name of the deck used by Gabriel Fernandez, the Seniors Division champion at the [[2023 Pokémon World Championships]]. It is one of the 2023 World Championship Decks released March 1, 2024. Each deck comes with a playmat, poster, booklet about the event, [[Pokémon Trading Card Game Live|TCGL]] code card, and a special Worlds 2023 deck box, pin, and {{TCG|coin}}. The cards included in the deck are not the exact prints used by Fernandez, but are the most recent, lowest-rarity print with any Holofoil removed. Each card has a unique card back (thus making them ineligible for tournaments) and Fernandez's signature.\n\n\n{{decklist/entry|2|{{TCG ID|Lost Origin|Snorlax|143}}|Colorless||Rare Holo}}",
+      "excerptSha256": "7366c84ec47db0e3a693bc343c57382c33435dbf5dd5c6001479194aaa9712ed",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Exact Colorless Lugia 2023 replica-deck product release March 1, 2024 and Snorlax row. This is not the August 2023 world event. The page does not separately date localized German/French/Italian market versions."
+    },
+    {
+      "sourceId": "snorlax-special-card",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_ex_(Prismatic_Evolutions_76)",
+      "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Snorlax+ex+%28Prismatic+Evolutions+76%29",
+      "retrievedAt": "2026-10-11T10:38:54.604503+00:00",
+      "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+      "sourceResponseFile": "/tmp/special-snorlax-special-card.json",
+      "sourceResponseSha256": "00063d004fbfd6640349e9a8aab2044a8a7b39b0e7ed02a8563fbffc153a6edf",
+      "relevantExcerpt": "==Release information==\nThis card was released in the English {{TCG|Prismatic Evolutions}} expansion, first released in the Japanese {{TCG|Generations Start Deck Pikachu ex & Snorlax ex}} product. It was reprinted bearing the Prismatic Evolutions expansion logo stamp as both a regular-sized and {{TCG|Jumbo cards|oversized}} card in the {{TCGMerch|Scarlet & Violet|Series|Snorlax ex & Blissey ex Special Collection}} sold exclusively on European markets from September 12, 2025.\n\n",
+      "excerptSha256": "a7baacb551cd590814539d9d1fa5ac5267b79e344798bd8651ee2fd5628008fa",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Explicit European-market September 12, 2025 release of stamped standard and oversized Snorlax ex 076. Date applies to the European Special Collection positively identified by existing collector items, not base Prismatic Evolutions, US Target or other products. Existing localized print identities are reused; no languages/finishes/sizes are newly inferred."
+    },
+    {
+      "sourceId": "merch",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Scarlet_%26_Violet_TCG_Series_merchandise#Snorlax_ex_%26_Blissey_ex_Special_Collection",
+      "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Scarlet+%26+Violet+TCG+Series+merchandise",
+      "retrievedAt": "2026-10-11T10:33:46.378847+00:00",
+      "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+      "sourceResponseFile": "/tmp/special-merch.json",
+      "sourceResponseSha256": "9dc3bf1dd53d83f994d17f31b181348d115385bda22511fa8b4d826831cfc0d5",
+      "relevantExcerpt": "==Snorlax ex & Blissey ex Special Collection==\nThe '''Snorlax ex & Blissey ex Special Collection''' was one of the boxed products available exclusively on the European market, released on September 12, 2025. It contained stamped reprints of {{p|Blissey}} ex from {{TCG|Twilight Masquerade}} and {{p|Snorlax}} ex from {{TCG|Prismatic Evolutions}}. The Snorlax ex card was available as both a regular card and an [[Jumbo cards (TCG)#Scarlet & Violet Series|oversized]] card. The product came with a [[Pokémon TCG Live]] code card and a selection of eight booster packs (typically two {{TCG|Twilight Masquerade}}, two {{TCG|Surging Sparks}}, two {{TCG|Journey Together}} and two {{TCG|Destined Rivals}}).\n\n'''Promotional cards:'''\n*{{TCG ID|Twilight Masquerade|Blissey ex|134|Blissey}}{{ex}} ({{TCG|Twilight Masquerade}} 134; Twilight Masquerade expansion logo stamp)\n*{{TCG ID|Prismatic Evolutions|Snorlax ex|76|Snorlax}}{{ex}} ({{TCG|Prismatic Evolutions}} 76; Prismatic Evolutions expansion logo stamp)\n*{{TCG ID|Prismatic Evolutions|Snorlax ex|76|Snorlax}}{{ex}} (Prismatic Evolutions 76; Prismatic Evolutions  expansion logo stamp [[Jumbo cards (TCG)#Scarlet & Violet Series|Jumbo]])\n\n'''Product image:'''\n{{TCGMerchGallery\n|background={{Scarlet color}}\n|border={{Violet color}}\n|image1=Snorlax ex Blissey ex Special Collection.png\n|caption1=Snorlax ex & Blissey ex<br>Special Collection\n|size1=200px\n}}\n",
+      "excerptSha256": "c31210cebfa0b8dbdca9e3540ccf4078695507e01ae0c6dbb66d292cd0c3216a",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Specific European-market product section; named stamped standard and jumbo contents. Same provider as card history, not independent corroboration."
+    },
+    {
+      "sourceId": "hop",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Hop%27s_Snorlax_(Journey_Together_117)",
+      "retrievalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Hop%27s+Snorlax+%28Journey+Together+117%29",
+      "retrievedAt": "2026-10-11T10:34:28.547312+00:00",
+      "captureMethod": "MediaWiki API parse/wikitext over inherited HTTPS proxy, TLS verification",
+      "sourceResponseFile": "/tmp/special-hop.json",
+      "sourceResponseSha256": "171f0ef54438937d25bc0cec17fee6716f4bec15fd67f6e257bb7a1d5122f809",
+      "relevantExcerpt": "Three Cosmos Holofoil versions of the Regular print with different stamps in the bottom left corner of the artwork were given away with eligible [[Pokémon Trading Card Game]] purchases at participating retailers in various countries starting March 28, 2025. Variants featuring a red {{wp|GameStop}} logo were available in-store or online from GameStop in {{pmin|the United States}} and {{pmin|Canada}} with a $15 minimum purchase. Variants featuring an {{wp|EB Games}} logo were distributed in {{pmin|Australia}} and {{pmin|New Zealand}} with purchases worth at least $15 at EB Games stores or through their online shop.<ref>[https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool ''Hop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool'' | Pokémon.com] ([https://web.archive.org/web/20250314225915/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool archived])</ref> Variants featuring the Journey Together expansion logo were available at participating stores in {{pmin|Singapore}}, {{pmin|Malaysia}}, {{pmin|the Philippines}} with purchases worth at least S$25, RM80, and ₱1,030, respectively.<ref>[https://asia.pokemon-card.com/sg/archives/6689/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Singapore] ([https://web.archive.org/web/20250322123658/https://asia.pokemon-card.com/sg/archives/6689/ archived])</ref><ref>[https://asia.pokemon-card.com/my/archives/6693/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Malaysia] ([https://web.archive.org/web/20250307191040/https://asia.pokemon-card.com/my/archives/6693/ archived])</ref><ref>[https://asia.pokemon-card.com/ph/archives/6695/ ''Scarlet & Violet — Journey Together Release Promo Card'' | Pokémon Card Game Trainers Website Philippines] ([https://web.archive.org/web/20250322123552/https://asia.pokemon-card.com/ph/archives/6695/ archived])</ref>",
+      "excerptSha256": "3cd2141ae0e0f82af0d3b9953805e6bdb642c7892968f6572b7d1c3a34961d98",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Explicit March 28, 2025 start date for three stamped Regular-print gift-with-purchase campaigns, specifying GameStop US/Canada, EB Games AU/NZ and Journey Together SG/MY/PH. French language is not named; its existing French GameStop identity is established independently in SPEC-0016/SPEC-0144, and same Canadian campaign date needs reviewed equivalence."
+    },
+    {
+      "sourceId": "hop-official-archive",
+      "providerId": "pokemon-official",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "retrievalUrl": "https://web.archive.org/web/20250314225915id_/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "retrievedAt": "2026-10-11T10:38:13.845868+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-hop-official-archive.html",
+      "sourceResponseSha256": "5646050b9ce870553c57615db200ad9b1ce65eec9ce7a015cc7af7849573dce4",
+      "relevantExcerpt": "March 14, 2025\nHop into Pokémon TCG: Scarlet & Violet—Journey Together with Hop’s Snorlax and Hop’s Dubwool\nGet promo cards featuring Hop’s Pokémon at select retailers.\nJourney to your favorite Pokémon TCG retailers to pick up promo cards featuring Hop’s Dubwool and Hop’s Snorlax. To celebrate the release of the Pokémon TCG: Scarlet & Violet—Journey Together adventure, starting March 28, 2025, and while supplies last, players in the United States who purchase $15 worth of Pokémon TCG products at Best Buy will receive a Hop’s Dubwool promo card.\nPick up $15 worth of Pokémon TCG products at GameStop to bring home a Hop’s Snorlax promo card. Australian players who purchase $15 worth of Pokémon TCG products at EB Games will receive a Hop’s Snorlax promo card.\nAnd Canadians can buy $15 worth of Pokémon TCG products at GameStop to receive a Hop’s Snorlax promo card. Purchases can be made in-store or online.\n",
+      "excerptSha256": "5d1841c3afe191c9a732e8091ea86647e62a38c56759be1b7d04380b3b606c18",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official archived TPCi campaign announcement dated March 14, 2025: campaign begins March 28, 2025, names US/Canada GameStop and Australia EB Games. Does not separately name New Zealand or French-language Canada cards; Bulbapedia supplies NZ campaign identity and retained specimens French identity.",
+      "archiveCaptureTimestamp": "20250314225915"
+    },
+    {
+      "sourceId": "prize3-official-archive",
+      "providerId": "pokemon-official",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "retrievalUrl": "https://web.archive.org/web/20230808054200id_/https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "retrievedAt": "2026-10-11T10:38:15.769189+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-prize3-official-archive.html",
+      "sourceResponseSha256": "4653e839f3df0bc59e7448330803b6284f0f1807b9430694cfa2ae259a51373e",
+      "relevantExcerpt": "August 07, 2023\nVisit Your Local Game Store to Receive Play! Pokémon Prize Packs\nEarn Prize Packs by participating in events at your local League during the 2023 Pokémon World Championships.\nIn-store events provide exciting opportunities to socialize (and battle!) with fellow Pokémon enthusiasts. And promotional Prize Packs distributed at Play! Pokémon events—including Leagues, League Challenges, League Cups, and more—add to the fun. Just in time for 2023 Pokémon World Championships Series Celebration Tournaments, the Prize Pack Series Three will be available starting August 14, 2023, at participating retail locations.\nEach Prize Pack contains six cards taken from a pool of about 200—all of which are legal in the Standard format. They include everything from popular Pokémon to exclusive foil upgrades of tournament staples, all featuring the special Play! Pokémon logo. Here are just some of the exciting cards you can expect to find in Series Three:\nGardevoir ex\nLugia VSTAR\nArceus VSTAR\nRadiant Greninja\nNest Ball (exclusive foil version)\nPrize Pack Series Three has a limited duration as Series Four will become available in February 2024. For both competitive and casual Trainers, Prize Packs offer an exclusive path to build your collection while making the most of Play! Pokémon events at your local game store. How Prize Packs are distributed varies from location to location. The more active your events are, the more Prize Packs will be available, so be sure to attend as many events as possible.\n",
+      "excerptSha256": "801cfb68f798f6d158698dadff15864c9b1004053108365268381929187e28c9",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official archived Series Three announcement: August 14, 2023 distribution start. US English page does not explicitly date each localized language market.",
+      "archiveCaptureTimestamp": "20230808054200"
+    },
+    {
+      "sourceId": "hop-official-sg",
+      "providerId": "pokemon-card-asia",
+      "sourceUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+      "retrievalUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+      "retrievedAt": "2026-10-11T10:35:16.881779+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-hop-official-sg.html",
+      "sourceResponseSha256": "e261ffea4d3d7067492f4ced369b86ec36d177a4fa5d653d893e6b14ec9972f6",
+      "relevantExcerpt": "Hi trainers, Scarlet & Violet — Journey Together will arrive March 28! To celebrate its release, 1 Hop’s Snorlax promo card can be redeemed from card shops from March 28 with a minimum purchase of $25 of Scarlet & Violet — Journey Together products.\nGet ready to team up with Trainer’s Pokémon and discover the unstoppable power of friendship in the Pokémon TCG: Scarlet & Violet — Journey Together expansion!\n*Available at card shops while stocks last\n",
+      "excerptSha256": "711d2f957c59f1e34c2019c00e815f2307a63e78bb33ceef70896fc282beacd5",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official regional Hop’s Snorlax campaign explicitly says card redemption starts March 28. Year 2025 is corroborated by exact-card Bulbapedia campaign history and /2025/02/ official campaign asset path; no dates transferred between regions."
+    },
+    {
+      "sourceId": "hop-official-my",
+      "providerId": "pokemon-card-asia",
+      "sourceUrl": "https://asia.pokemon-card.com/my/archives/6693/",
+      "retrievalUrl": "https://asia.pokemon-card.com/my/archives/6693/",
+      "retrievedAt": "2026-10-11T10:35:17.298931+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-hop-official-my.html",
+      "sourceResponseSha256": "2002c383a2aba9e40f384395643de6a42b151216bd3777c87fe82c4ef8be56c3",
+      "relevantExcerpt": "Hi trainers, Scarlet & Violet — Journey Together will arrive March 28! To celebrate its release, 1 Hop’s Snorlax promo card can be redeemed from card shops from March 28 with a minimum purchase of RM80 of Scarlet & Violet — Journey Together products.\nGet ready to team up with Trainer’s Pokémon and discover the unstoppable power of friendship in the Pokémon TCG: Scarlet & Violet — Journey Together expansion!\n*Available at card shops while stocks last\n",
+      "excerptSha256": "38f2e896f4887f93e0aaf76e41285fa65768588f766f1a0e4d6a29609c2a578a",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official regional Hop’s Snorlax campaign explicitly says card redemption starts March 28. Year 2025 is corroborated by exact-card Bulbapedia campaign history and /2025/02/ official campaign asset path; no dates transferred between regions."
+    },
+    {
+      "sourceId": "hop-official-ph",
+      "providerId": "pokemon-card-asia",
+      "sourceUrl": "https://asia.pokemon-card.com/ph/archives/6695/",
+      "retrievalUrl": "https://asia.pokemon-card.com/ph/archives/6695/",
+      "retrievedAt": "2026-10-11T10:35:17.442908+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-hop-official-ph.html",
+      "sourceResponseSha256": "8f8367ed8822fe3d3b2a34ab73fdbba4b3d241213f5f00ca6e80fbcba183b4a3",
+      "relevantExcerpt": "Hi trainers, Scarlet & Violet — Journey Together will arrive March 28! To celebrate its release, 1 Hop’s Snorlax promo card can be redeemed from card shops from March 28 with a minimum purchase of ₱1030 of Scarlet & Violet — Journey Together products.\nGet ready to team up with Trainer’s Pokémon and discover the unstoppable power of friendship in the Pokémon TCG: Scarlet & Violet — Journey Together expansion!\n*Available at card shops while stocks last\n",
+      "excerptSha256": "6cba24d0320ecbeae2919c68572e893cf727f4fc6e8507245fc83642f7718b17",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official regional Hop’s Snorlax campaign explicitly says card redemption starts March 28. Year 2025 is corroborated by exact-card Bulbapedia campaign history and /2025/02/ official campaign asset path; no dates transferred between regions."
+    },
+    {
+      "sourceId": "wcd-official-archive",
+      "providerId": "pokemon-official",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "retrievalUrl": "https://web.archive.org/web/20240119001740id_/https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-wcd-official-archive.html",
+      "sourceResponseSha256": "0e48898049a4d57e76c11d274492ff7d0d5f412369a83d9bfdac947dc25d0955",
+      "relevantExcerpt": "Launch: March 01, 2024\nGrab a World Championships deck and play like a champion! Choose one of four powerful decks, each a card-for-card replica of an actual title-contender’s deck from the 2023 Pokémon Trading Card Game World Championships!\nEach 2023 Pokémon TCG World Championships Deck includes:\n60-card World Championships Deck\n2023 World Championships booklet\nSpecial 2023 World Championships pin\n2023 World Championships coin\n2023 World Championships deck box\nA playmat and poster\nA code card for Pokémon Trading Card Game Live\nThe 2023 Pokémon TCG World Championships Decks will be available on March 1, 2024, at the Pokémon Center and where Pokémon TCG products are sold.\nReturn to Gallery\nReturn to Gallery\n",
+      "excerptSha256": "c2933d9cd897744f6dd53a4ac161d5098fe20d28814efef6262f225023a6c3a3",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "Official archived English US product launch March 1, 2024 for 2023 deck replicas. Does not independently prove localized European release dates.",
+      "archiveCaptureTimestamp": "20240119001740",
+      "decodedSourceFile": "/tmp/special-wcd-official-archive.decoded.html",
+      "decodedSourceSha256": "6afc18b580325c3a4417d14c0db5d1d49cbda02ca10e100d990a5b5068028673",
+      "sourceEncoding": "gzip"
+    },
+    {
+      "sourceId": "pps3-official-de-archive",
+      "providerId": "pokemon-official",
+      "sourceUrl": "https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+      "retrievalUrl": "https://web.archive.org/web/20230809101653id_/https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+      "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+      "captureMethod": "urllib HTTPS retrieval over inherited proxy, TLS verification; HTML text extraction",
+      "sourceResponseFile": "/tmp/special-pps3-official-de-archive.html",
+      "sourceResponseSha256": "15b48b25626db72ef590ae58ce28bb6f7b6fc39f2175883eb192392e9ec37759",
+      "relevantExcerpt": "07. August 2023\nBesuche dein lokales Spielfachgeschäft, um Play! Pokémon-Preispacks zu erhalten\nVerdiene dir Preispacks, indem du während der Pokémon-Weltmeisterschaften 2023 an Events in deiner lokalen Liga teilnimmst.\nDie Events in den Geschäften bieten dir die Möglichkeit, andere Pokémon-Fans zu treffen (und herauszufordern!). Und die Preispacks, die bei Play! Pokémon-Events verteilt werden – darunter Ligen, Liga-Herausforderungen, Liga-Cups und mehr – sorgen für noch mehr Spaß. Pünktlich zur Feier der Pokémon-Weltmeisterschaften 2023 wird das Serie-3-Preispack ab dem 14. August 2023 in teilnehmenden Geschäften erhältlich sein.\nJedes Preispack enthält sechs Karten aus einer Auswahl von etwa 200 Karten, die alle im Standardformat zugelassen sind. Sie enthalten alles von beliebten Pokémon bis hin zu exklusiven holografischen Upgrades von turniergängigen Karten, die alle mit dem speziellen Play! Pokémon-Logo versehen sind. Hier sind nur einige der aufregenden Karten, die dich in Serie 3 erwarten:\nGuardevoir-ex\nLugia-VSTAR\nArceus-VSTAR\nStrahlendes Quajutsu\nNestball (exklusive holografische Version)\nSerie-3-Preispacks haben eine begrenzte Laufzeit, da Serie 4 bereits im Februar 2024 erhältlich sein wird. Sowohl für Wettkampf- als auch für Gelegenheitstrainer bieten die Preispacks eine exklusive Möglichkeit, ihre Sammlung aufzubauen und gleichzeitig das Meiste aus den Play! Pokémon-Events in ihrem örtlichen Spielfachgeschäft herauszuholen. Wie die Preispacks verteilt werden, ist von Ort zu Ort unterschiedlich. Je lebhafter die Events sind, desto mehr Preispacks gibt es, also solltest du so viele Events wie möglich aufsuchen.\n",
+      "excerptSha256": "e6d362b70b47ab639b734a63da953192a0694511fbdcbb44342786b1b1528e04",
+      "hashScope": "sourceResponseSha256 hashes fetched response bytes; excerptSha256 hashes UTF-8 retained relevantExcerpt only",
+      "fieldLimits": "German official announcement explicitly dates Serie-3-Preispack distribution to August 14, 2023 in participating shops; exact German Snorlax membership is already established by the retained official German Series Three checklist.",
+      "archiveCaptureTimestamp": "20230809101653",
+      "decodedSourceFile": "/tmp/special-pps3-official-de-archive.decoded.html",
+      "decodedSourceSha256": "56789f37552edb37a48fe6c8dbdff2f2c9fed92a0cf132ab9af49fe75f11b483",
+      "sourceEncoding": "gzip"
+    }
+  ],
+  "liveRetrievalAttempts": [
+    {
+      "key": "prize3",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Play%21+Pok%C3%A9mon+Prize+Pack+Series+Three+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:33:45.129340+00:00",
+      "status": 200,
+      "byteLength": 37185,
+      "filePath": "/tmp/special-prize3.json",
+      "sha256": "30440bc436b3e670545b9b47b60d8caa5addf7c2c86af46395cecb1ef4bcda05",
+      "retrievedAt": "2026-10-11T10:33:45.277102+00:00"
+    },
+    {
+      "key": "colorless",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Colorless+Lugia+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:33:45.277327+00:00",
+      "status": 200,
+      "byteLength": 4668,
+      "filePath": "/tmp/special-colorless.json",
+      "sha256": "b52fe91ee508805362fae12b4b01779baf63bbb5db8ffd888f7212b75cde27a7",
+      "retrievedAt": "2026-10-11T10:33:45.869791+00:00"
+    },
+    {
+      "key": "journey",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Journey+Together+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:33:45.869906+00:00",
+      "status": 200,
+      "byteLength": 28075,
+      "filePath": "/tmp/special-journey.json",
+      "sha256": "ba0b91464a849d84fdb0bd7bcc16f40c20c80d822ccfe91a2b1e7bcab4191283",
+      "retrievedAt": "2026-10-11T10:33:46.003499+00:00"
+    },
+    {
+      "key": "prismatic",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Prismatic+Evolutions+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:33:46.003691+00:00",
+      "status": 200,
+      "byteLength": 29209,
+      "filePath": "/tmp/special-prismatic.json",
+      "sha256": "fe2e243593e8f5e74f99fe9fbc083305338bcd1a141c8f012c7556a1bfe4988d",
+      "retrievedAt": "2026-10-11T10:33:46.135907+00:00"
+    },
+    {
+      "key": "merch",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Scarlet+%26+Violet+TCG+Series+merchandise",
+      "attemptedAt": "2026-10-11T10:33:46.136108+00:00",
+      "status": 200,
+      "byteLength": 485410,
+      "filePath": "/tmp/special-merch.json",
+      "sha256": "9dc3bf1dd53d83f994d17f31b181348d115385bda22511fa8b4d826831cfc0d5",
+      "retrievedAt": "2026-10-11T10:33:46.378847+00:00"
+    },
+    {
+      "key": "wcd",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "attemptedAt": "2026-10-11T10:33:46.380574+00:00",
+      "status": 200,
+      "byteLength": 1048,
+      "filePath": "/tmp/special-wcd.html",
+      "sha256": "d4e43aa55527a32ff121de1deeb024aec17ab1fc44ac1662fab4d6db105dae15",
+      "retrievedAt": "2026-10-11T10:33:46.672653+00:00"
+    },
+    {
+      "key": "hop",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Hop%27s+Snorlax+%28Journey+Together+117%29",
+      "attemptedAt": "2026-10-11T10:34:28.323380+00:00",
+      "status": 200,
+      "byteLength": 6810,
+      "filePath": "/tmp/special-hop.json",
+      "sha256": "171f0ef54438937d25bc0cec17fee6716f4bec15fd67f6e257bb7a1d5122f809",
+      "retrievedAt": "2026-10-11T10:34:28.547312+00:00"
+    },
+    {
+      "key": "wcd2023",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=World+Championships+Decks+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:34:28.324219+00:00",
+      "status": 200,
+      "byteLength": 355,
+      "filePath": "/tmp/special-wcd2023.json",
+      "sha256": "f41f4b2287a36b1c378e86cfae34d70b144c93b9fe23372256a8cf6daab8cb30",
+      "retrievedAt": "2026-10-11T10:34:28.573698+00:00"
+    },
+    {
+      "key": "snorlaxex",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Snorlax+ex+%28Scarlet+%26+Violet+Promo+49%29",
+      "attemptedAt": "2026-10-11T10:34:28.324641+00:00",
+      "status": 200,
+      "byteLength": 355,
+      "filePath": "/tmp/special-snorlaxex.json",
+      "sha256": "f41f4b2287a36b1c378e86cfae34d70b144c93b9fe23372256a8cf6daab8cb30",
+      "retrievedAt": "2026-10-11T10:34:28.471495+00:00"
+    },
+    {
+      "key": "prize-official-en",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "attemptedAt": "2026-10-11T10:34:28.471610+00:00",
+      "status": 200,
+      "byteLength": 926,
+      "filePath": "/tmp/special-prize-official-en.html",
+      "sha256": "24f656ed8e6d15a32157419f38522e9972111ed2c2ee9af67edcd35605be56a3",
+      "retrievedAt": "2026-10-11T10:34:28.726549+00:00"
+    },
+    {
+      "key": "prize-official-de",
+      "sourceUrl": "https://www.pokemon.com/de/pokemon-news/besuche-deinen-oertlichen-fachhaendler-und-erhalte-play-pokemon-preispacks",
+      "attemptedAt": "2026-10-11T10:34:28.547458+00:00",
+      "status": 200,
+      "byteLength": 930,
+      "filePath": "/tmp/special-prize-official-de.html",
+      "sha256": "3748e88d481a189378c480d541987edaaa82463be51597cd3d7ddda7f7e1cc6b",
+      "retrievedAt": "2026-10-11T10:34:28.750515+00:00"
+    },
+    {
+      "key": "wcd-gallery-en",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "attemptedAt": "2026-10-11T10:34:28.573796+00:00",
+      "status": 200,
+      "byteLength": 925,
+      "filePath": "/tmp/special-wcd-gallery-en.html",
+      "sha256": "3a7ee305c1068fe70300c74772c17f0e556e3e16c24960808dad34d076817095",
+      "retrievedAt": "2026-10-11T10:34:28.814133+00:00"
+    },
+    {
+      "key": "hop-official-en",
+      "sourceUrl": "https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "attemptedAt": "2026-10-11T10:35:16.344011+00:00",
+      "status": 200,
+      "byteLength": 930,
+      "filePath": "/tmp/special-hop-official-en.html",
+      "sha256": "6e24b76a644a5c2dd8c91d05d6c437530fa23ab63b5453ca3637633b38b7c1b6",
+      "retrievedAt": "2026-10-11T10:35:16.551204+00:00"
+    },
+    {
+      "key": "hop-official-sg",
+      "sourceUrl": "https://asia.pokemon-card.com/sg/archives/6689/",
+      "attemptedAt": "2026-10-11T10:35:16.344599+00:00",
+      "status": 200,
+      "byteLength": 138577,
+      "filePath": "/tmp/special-hop-official-sg.html",
+      "sha256": "e261ffea4d3d7067492f4ced369b86ec36d177a4fa5d653d893e6b14ec9972f6",
+      "retrievedAt": "2026-10-11T10:35:16.881779+00:00"
+    },
+    {
+      "key": "hop-official-my",
+      "sourceUrl": "https://asia.pokemon-card.com/my/archives/6693/",
+      "attemptedAt": "2026-10-11T10:35:16.345007+00:00",
+      "status": 200,
+      "byteLength": 146719,
+      "filePath": "/tmp/special-hop-official-my.html",
+      "sha256": "2002c383a2aba9e40f384395643de6a42b151216bd3777c87fe82c4ef8be56c3",
+      "retrievedAt": "2026-10-11T10:35:17.298931+00:00"
+    },
+    {
+      "key": "hop-official-ph",
+      "sourceUrl": "https://asia.pokemon-card.com/ph/archives/6695/",
+      "attemptedAt": "2026-10-11T10:35:16.551272+00:00",
+      "status": 200,
+      "byteLength": 132949,
+      "filePath": "/tmp/special-hop-official-ph.html",
+      "sha256": "8f8367ed8822fe3d3b2a34ab73fdbba4b3d241213f5f00ca6e80fbcba183b4a3",
+      "retrievedAt": "2026-10-11T10:35:17.442908+00:00"
+    },
+    {
+      "key": "snorlax-ex-card",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Snorlax+ex+%28SVP+Promo+49%29",
+      "attemptedAt": "2026-10-11T10:35:16.881981+00:00",
+      "status": 200,
+      "byteLength": 355,
+      "filePath": "/tmp/special-snorlax-ex-card.json",
+      "sha256": "f41f4b2287a36b1c378e86cfae34d70b144c93b9fe23372256a8cf6daab8cb30",
+      "retrievedAt": "2026-10-11T10:35:17.082641+00:00"
+    },
+    {
+      "key": "worlds2023merch",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=2023+World+Championships+Decks+%28TCG%29",
+      "attemptedAt": "2026-10-11T10:35:17.082754+00:00",
+      "status": 200,
+      "byteLength": 355,
+      "filePath": "/tmp/special-worlds2023merch.json",
+      "sha256": "f41f4b2287a36b1c378e86cfae34d70b144c93b9fe23372256a8cf6daab8cb30",
+      "retrievedAt": "2026-10-11T10:35:17.212147+00:00"
+    },
+    {
+      "key": "hop-official-archive",
+      "sourceUrl": "https://web.archive.org/web/20250314225915id_/https://www.pokemon.com/us/pokemon-news/hop-into-pokemon-tcg-scarlet-violet-journey-together-with-hops-snorlax-and-hops-dubwool",
+      "attemptedAt": "2026-10-11T10:38:13.038173+00:00",
+      "status": 200,
+      "byteLength": 48360,
+      "filePath": "/tmp/special-hop-official-archive.html",
+      "sha256": "5646050b9ce870553c57615db200ad9b1ce65eec9ce7a015cc7af7849573dce4",
+      "retrievedAt": "2026-10-11T10:38:13.845868+00:00"
+    },
+    {
+      "key": "prize3-official-archive",
+      "sourceUrl": "https://web.archive.org/web/20230808054200id_/https://www.pokemon.com/us/pokemon-news/visit-your-local-game-store-to-receive-play-pokemon-prize-packs",
+      "attemptedAt": "2026-10-11T10:38:13.038739+00:00",
+      "status": 200,
+      "byteLength": 40088,
+      "filePath": "/tmp/special-prize3-official-archive.html",
+      "sha256": "4653e839f3df0bc59e7448330803b6284f0f1807b9430694cfa2ae259a51373e",
+      "retrievedAt": "2026-10-11T10:38:15.769189+00:00"
+    },
+    {
+      "key": "wcd-archive-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fus%2Fpokemon-tcg%2Fproduct-gallery%2F2023-pokemon-tcg-world-championships-decks&output=json&filter=statuscode%3A200&collapse=timestamp%3A6&from=2024&to=2024&limit=3",
+      "attemptedAt": "2026-10-11T10:38:13.039121+00:00",
+      "status": 200,
+      "byteLength": 884,
+      "filePath": "/tmp/special-wcd-archive-cdx.json",
+      "sha256": "10edcb399fa065b9556b759e4129491394c4bed57dc32be5a74686b95aeabfa5",
+      "retrievedAt": "2026-10-11T10:38:22.994712+00:00"
+    },
+    {
+      "key": "wcd-archive-de-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fde%2Fpokemon-sammelkartenspiel%2Fproduktgalerie%2F%2Aweltmeisterschaftsdecks%2A2023%2A&output=json&filter=statuscode%3A200&from=2024&to=2024&limit=3",
+      "attemptedAt": "2026-10-11T10:38:13.845982+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "snorlax-special-card",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Snorlax+ex+%28Prismatic+Evolutions+76%29",
+      "attemptedAt": "2026-10-11T10:38:54.310983+00:00",
+      "status": 200,
+      "byteLength": 2565,
+      "filePath": "/tmp/special-snorlax-special-card.json",
+      "sha256": "00063d004fbfd6640349e9a8aab2044a8a7b39b0e7ed02a8563fbffc153a6edf",
+      "retrievedAt": "2026-10-11T10:38:54.604503+00:00"
+    },
+    {
+      "key": "lor-snorlax",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Snorlax+%28Lost+Origin+143%29",
+      "attemptedAt": "2026-10-11T10:38:54.604558+00:00",
+      "status": 200,
+      "byteLength": 4396,
+      "filePath": "/tmp/special-lor-snorlax.json",
+      "sha256": "ddcb6fda862d52d598f39b01d9763b63563ee0f50e4a0e7413c54dc9c590c0a9",
+      "retrievedAt": "2026-10-11T10:38:54.751732+00:00"
+    },
+    {
+      "key": "blissey-special-card",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&prop=wikitext&redirects=1&format=json&page=Blissey+ex+%28Twilight+Masquerade+134%29",
+      "attemptedAt": "2026-10-11T10:38:54.751794+00:00",
+      "status": 200,
+      "byteLength": 3779,
+      "filePath": "/tmp/special-blissey-special-card.json",
+      "sha256": "728437ddaeb45061688c1c3ef9721da74681465f2ab42dc1643c152e1b06f4ee",
+      "retrievedAt": "2026-10-11T10:38:54.975628+00:00"
+    },
+    {
+      "key": "wcd-official-archive",
+      "sourceUrl": "https://web.archive.org/web/20240119001740id_/https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks",
+      "attemptedAt": "2026-10-11T10:39:29.299583+00:00",
+      "status": 200,
+      "byteLength": 8227,
+      "filePath": "/tmp/special-wcd-official-archive.html",
+      "sha256": "0e48898049a4d57e76c11d274492ff7d0d5f412369a83d9bfdac947dc25d0955",
+      "retrievedAt": "2026-10-11T10:39:30.124832+00:00",
+      "contentEncoding": "gzip",
+      "decodedFilePath": "/tmp/special-wcd-official-archive.decoded.html",
+      "decodedSha256": "6afc18b580325c3a4417d14c0db5d1d49cbda02ca10e100d990a5b5068028673"
+    },
+    {
+      "key": "pps3-de-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fde%2Fpokemon-news%2Fbesuche%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:15.791869+00:00",
+      "status": 200,
+      "byteLength": 1281,
+      "filePath": "/tmp/special-pps3-de-cdx.json",
+      "sha256": "652eda35e0dd204688eeaec23f9eb97ec545e2cd36d9ab0c174872ef1a329045",
+      "retrievedAt": "2026-10-11T10:42:23.563617+00:00"
+    },
+    {
+      "key": "pps3-fr-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Factus-pokemon%2Fvisitez%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:15.792695+00:00",
+      "status": 200,
+      "byteLength": 660,
+      "filePath": "/tmp/special-pps3-fr-cdx.json",
+      "sha256": "b1b22514c178d9f313e16831a8869c50a77406b890af1aa17cf3570a427a8a18",
+      "retrievedAt": "2026-10-11T10:42:31.382721+00:00"
+    },
+    {
+      "key": "pps3-it-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fit%2Fnotizie-pokemon%2Fvisita%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:15.793307+00:00",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "pps3-es-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fes%2Fnoticias-pokemon%2Fvisita%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:21.126608+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "wcd-de-exact-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fde%2Fpokemon-sammelkartenspiel%2Fproduktgalerie%2Fpokemon-sammelkartenspiel-weltmeisterschaftsdecks-2023&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:23.563712+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "wcd-fr-exact-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Fjcc-pokemon%2Fgalerie-produit%2Fdecks-des-championnats-du-monde-2023-du-jcc-pokemon&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:31.382928+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "wcd-it-exact-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fit%2Fgcc%2Fgaleria-prodotti%2Fmazzi-dei-campionati-mondiali-2023-del-gcc-pokemon&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=6",
+      "attemptedAt": "2026-10-11T10:42:41.185864+00:00",
+      "status": 200,
+      "byteLength": 3,
+      "filePath": "/tmp/special-wcd-it-exact-cdx.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "retrievedAt": "2026-10-11T10:42:50.566695+00:00"
+    },
+    {
+      "key": "pps3-official-de-archive",
+      "sourceUrl": "https://web.archive.org/web/20230809101653id_/https://www.pokemon.com/de/pokemon-news/besuche-dein-lokales-spielfachgeschaeft-um-play-pokemon-preispacks-zu-erhalten",
+      "attemptedAt": "2026-10-11T10:43:56.080206+00:00",
+      "status": 200,
+      "byteLength": 8344,
+      "filePath": "/tmp/special-pps3-official-de-archive.html",
+      "sha256": "15b48b25626db72ef590ae58ce28bb6f7b6fc39f2175883eb192392e9ec37759",
+      "retrievedAt": "2026-10-11T10:43:56.969689+00:00",
+      "contentEncoding": "gzip",
+      "decodedFilePath": "/tmp/special-pps3-official-de-archive.decoded.html",
+      "decodedSha256": "56789f37552edb37a48fe6c8dbdff2f2c9fed92a0cf132ab9af49fe75f11b483"
+    },
+    {
+      "key": "pps3-fr-rendez-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Factus-pokemon%2Frendez%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:43:56.080610+00:00",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "pps3-es-store-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fes%2Fnoticias-pokemon%2Fvisita-tu-tienda%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:43:56.081002+00:00",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "pps3-it-store-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fit%2Fnotizie-pokemon%2Fvisita-il-tuo%2A&output=json&filter=statuscode%3A200&from=2023&to=2023&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:43:56.970072+00:00",
+      "error": "The read operation timed out"
+    },
+    {
+      "key": "wcd-de-year-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fde%2Fpokemon-sammelkartenspiel%2Fproduktgalerie%2F%2A2023%2A&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:44:01.386569+00:00",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "key": "wcd-fr-year-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Fjcc-pokemon%2Fgalerie-produit%2F%2A2023%2A&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:44:01.444507+00:00",
+      "status": 200,
+      "byteLength": 3,
+      "filePath": "/tmp/special-wcd-fr-year-cdx.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "retrievedAt": "2026-10-11T10:44:10.236108+00:00"
+    },
+    {
+      "key": "wcd-it-year-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Fit%2Fgcc%2Fgaleria-prodotti%2F%2A2023%2A&output=json&filter=statuscode%3A200&from=2024&to=2024&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:44:06.563938+00:00",
+      "status": 200,
+      "byteLength": 3,
+      "filePath": "/tmp/special-wcd-it-year-cdx.json",
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "retrievedAt": "2026-10-11T10:44:22.320634+00:00"
+    },
+    {
+      "key": "hop-fr-cdx",
+      "sourceUrl": "https://web.archive.org/cdx/search/cdx?url=www.pokemon.com%2Ffr%2Factus-pokemon%2F%2Aronflex-de-nabil%2A&output=json&filter=statuscode%3A200&from=2025&to=2025&collapse=urlkey&limit=10",
+      "attemptedAt": "2026-10-11T10:44:10.236158+00:00",
+      "error": "The read operation timed out"
+    }
+  ],
+  "searchAttempts": [
+    {
+      "key": "wcd-de",
+      "query": "\"Pokémon\" \"2023\" \"Weltmeisterschaftsdecks\" \"1. März 2024\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%222023%22+%22Weltmeisterschaftsdecks%22+%221.+M%C3%A4rz+2024%22",
+      "attemptedAt": "2026-10-11T10:36:56.423874+00:00",
+      "filePath": "/tmp/special-search-wcd-de.html",
+      "sha256": "ec9d503c57b575b17675a0e15b2893a1226f74a33cbbdcb0f41aa0a1bbb05e3a",
+      "byteLength": 92562,
+      "retrievedAt": "2026-10-11T10:36:56.627466+00:00"
+    },
+    {
+      "key": "wcd-fr",
+      "query": "\"Pokémon\" \"Decks des Championnats du Monde 2023\" \"1\" \"mars\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Decks+des+Championnats+du+Monde+2023%22+%221%22+%22mars%22",
+      "attemptedAt": "2026-10-11T10:36:56.424504+00:00",
+      "filePath": "/tmp/special-search-wcd-fr.html",
+      "sha256": "8197f58a55394e10022247a2e1fd4a862519ea6d129485eb1ff3af8b61539b37",
+      "byteLength": 92503,
+      "retrievedAt": "2026-10-11T10:36:56.609343+00:00"
+    },
+    {
+      "key": "wcd-it",
+      "query": "\"Pokémon\" \"mazzi dei Campionati Mondiali 2023\" \"1\" \"marzo\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22mazzi+dei+Campionati+Mondiali+2023%22+%221%22+%22marzo%22",
+      "attemptedAt": "2026-10-11T10:36:56.424919+00:00",
+      "filePath": "/tmp/special-search-wcd-it.html",
+      "sha256": "7adb5ee040d648a1c2bcc9877cfcc8b1579cc6ed15e918accae07de7447809f6",
+      "byteLength": 92413,
+      "retrievedAt": "2026-10-11T10:36:56.615633+00:00"
+    },
+    {
+      "key": "xpre-de",
+      "query": "\"Pokémon\" \"Relaxo-ex\" \"Heiteira-ex\" \"12. September\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Relaxo-ex%22+%22Heiteira-ex%22+%2212.+September%22",
+      "attemptedAt": "2026-10-11T10:36:56.609415+00:00",
+      "filePath": "/tmp/special-search-xpre-de.html",
+      "sha256": "602f7fabf89f9db64479347a284ac3d25d690dfd234e05a5f4f3bf2869e7b7c0",
+      "byteLength": 92551,
+      "retrievedAt": "2026-10-11T10:36:56.888048+00:00"
+    },
+    {
+      "key": "xpre-fr",
+      "query": "\"Pokémon\" \"Ronflex-ex\" \"Leuphorie-ex\" \"12 septembre\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Ronflex-ex%22+%22Leuphorie-ex%22+%2212+septembre%22",
+      "attemptedAt": "2026-10-11T10:36:56.615672+00:00",
+      "filePath": "/tmp/special-search-xpre-fr.html",
+      "sha256": "665f7b3583db5a4e8bf6ba46020efcb8cf63b90ee11c349451884409f59a8c4f",
+      "byteLength": 92655,
+      "retrievedAt": "2026-10-11T10:36:56.858946+00:00"
+    },
+    {
+      "key": "xpre-it",
+      "query": "\"Pokémon\" \"Snorlax ex\" \"Blissey ex\" \"12 settembre\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Snorlax+ex%22+%22Blissey+ex%22+%2212+settembre%22",
+      "attemptedAt": "2026-10-11T10:36:56.627526+00:00",
+      "filePath": "/tmp/special-search-xpre-it.html",
+      "sha256": "230fdfb2f9f78c5e06842146202df3dd68d403da5c793a2298c3e8afeebb8c27",
+      "byteLength": 92418,
+      "retrievedAt": "2026-10-11T10:36:56.863742+00:00"
+    },
+    {
+      "key": "xpre-es",
+      "query": "\"Pokémon\" \"Snorlax ex\" \"Blissey ex\" \"12 de septiembre\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Snorlax+ex%22+%22Blissey+ex%22+%2212+de+septiembre%22",
+      "attemptedAt": "2026-10-11T10:36:56.859040+00:00",
+      "filePath": "/tmp/special-search-xpre-es.html",
+      "sha256": "39dbfda94e281dd04fddd242d9f8ad060240ed1efa023e531ac97145ebfe0902",
+      "byteLength": 92457,
+      "retrievedAt": "2026-10-11T10:36:57.060471+00:00"
+    },
+    {
+      "key": "pps3-de",
+      "query": "\"Pokémon\" \"Preispack\" \"Serie 3\" \"14. August\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Preispack%22+%22Serie+3%22+%2214.+August%22",
+      "attemptedAt": "2026-10-11T10:36:56.863784+00:00",
+      "filePath": "/tmp/special-search-pps3-de.html",
+      "sha256": "882d38880777cf24a87a626ef599143e27b9100d237609c65a9c0a5af57fc719",
+      "byteLength": 92512,
+      "retrievedAt": "2026-10-11T10:36:57.031140+00:00"
+    },
+    {
+      "key": "pps3-fr",
+      "query": "\"Pokémon\" \"Troisième Série\" \"14 août 2023\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Troisi%C3%A8me+S%C3%A9rie%22+%2214+ao%C3%BBt+2023%22",
+      "attemptedAt": "2026-10-11T10:36:56.888116+00:00",
+      "filePath": "/tmp/special-search-pps3-fr.html",
+      "sha256": "6110c24a554df08bb9a59aba8452717f057efd89c392e632617b0c16cc578ea2",
+      "byteLength": 92439,
+      "retrievedAt": "2026-10-11T10:36:57.077044+00:00"
+    },
+    {
+      "key": "pps3-it",
+      "query": "\"Pokémon\" \"Terza Serie\" \"14 agosto 2023\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Terza+Serie%22+%2214+agosto+2023%22",
+      "attemptedAt": "2026-10-11T10:36:57.031207+00:00",
+      "filePath": "/tmp/special-search-pps3-it.html",
+      "sha256": "2bc7e0effa7174de33dd0d87a503158239ecb1551fcc17f029a969753e8a602b",
+      "byteLength": 92484,
+      "retrievedAt": "2026-10-11T10:36:57.205223+00:00"
+    },
+    {
+      "key": "pps3-es",
+      "query": "\"Pokémon\" \"Serie 3\" \"14 de agosto de 2023\"",
+      "sourceUrl": "https://www.google.com/search?q=%22Pok%C3%A9mon%22+%22Serie+3%22+%2214+de+agosto+de+2023%22",
+      "attemptedAt": "2026-10-11T10:36:57.060559+00:00",
+      "filePath": "/tmp/special-search-pps3-es.html",
+      "sha256": "cf3653e36cf90f4a45e493bf54425b9e56105741c8a128a6eb7a3ee681a6658a",
+      "byteLength": 92869,
+      "retrievedAt": "2026-10-11T10:36:57.245140+00:00"
+    }
+  ],
+  "retention": "This file retains inspected excerpts and their independently verifiable UTF-8 hashes. Full-response hashes describe fetched original bytes; scratch paths are acquisition logs, not committed raw responses. Public publisher delivery signatures are omitted. No browser session, credentials, or transient press HTML is retained."
+}
