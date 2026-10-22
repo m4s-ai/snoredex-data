@@ -26,6 +26,7 @@ from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
 from source_registry import provenance_url
+from reviewed_release_dates import apply_item_date, check_reviewed_targets, load_reviewed_dates
 from specimen_links import item_specimen_links, physical_specimen_ids, specimen_reference_index, specimen_provenance_links
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -1143,6 +1144,7 @@ def completeness_fields(status, decision):
 
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
+    date_document, reviewed_dates, _ = load_reviewed_dates()
     if graph.get("meta", {}).get("schemaVersion") != "1.1.0":
         raise ContractError("collector catalogue requires authoritative graph schema 1.1.0")
     predecessor = read_json(CHECKLIST_PATH)
@@ -1498,7 +1500,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "correctionLink": "",
         }
         item["correctionLink"] = correction_link(item)
-        return item
+        return apply_item_date(item, reviewed_dates)
 
     items: list[dict[str, Any]] = []
     for physical in physicals.values():
@@ -1593,7 +1595,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "schemaVersion": SCHEMA_VERSION,
             "datasetId": DATASET_ID,
             "sourceRepository": SOURCE_REPOSITORY,
-            "dataAsOf": graph["meta"]["generated"],
+            "dataAsOf": max(graph["meta"]["generated"], date_document["meta"].get("reviewedAt", "")),
             "catalogueFingerprint": "",
             "previousFingerprint": PREVIOUS_CATALOGUE_FINGERPRINT,
             "assetBaseUrl": ASSET_BASE_URL,
@@ -2306,6 +2308,7 @@ def validate_migrations(
 
 def build_all() -> dict[Path, Any]:
     catalogue, migrations = build_catalogue()
+    check_reviewed_targets(catalogue["items"], load_reviewed_dates()[1])
     graph = read_json(GRAPH_PATH)
     errors = validate_catalogue(catalogue, graph)
     errors.extend(validate_migrations(migrations, catalogue, graph, read_json(CHECKLIST_PATH)))

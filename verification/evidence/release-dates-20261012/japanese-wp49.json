@@ -1,0 +1,759 @@
+{
+  "schemaVersion": "1.0",
+  "kind": "research-only-release-dates-second-round",
+  "researchedAt": "2026-10-12",
+  "taskScope": "All four Japanese month-precision items plus English WP49 from remaining63 inventory; five exact collector items. No tracked edits or regeneration.",
+  "summary": {
+    "collectorItemsCovered": 5,
+    "releaseIdentitiesCovered": 4,
+    "supportedNewDayDates": 0,
+    "changedDateValues": 0,
+    "newOriginalPrimaryDateCorroborationItems": 3,
+    "nativeQueryRounds": 2
+  },
+  "sources": [
+    {
+      "sourceId": "R2-JP-marumiya-campaign",
+      "providerId": "marumiya-official",
+      "sourceUrl": "https://cp.marumiya.co.jp/kids2015/",
+      "finalUrl": "https://cp.marumiya.co.jp/kids2015/",
+      "retrievedAt": "2026-10-12T19:21:32.148154Z",
+      "httpStatus": 200,
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy, TLS verification enabled; readable text extracted with stdlib HTMLParser",
+      "fullResponseSha256": "52da186a19591d5fb14c052eccb52c2a7c7a0414cdaa1b7b8b16ea154f11b2af",
+      "fullResponseHashScope": "original acquired HTTP response bytes, not excerpt",
+      "rawPath": "/tmp/jp-date-round2/marumiya-campaign.raw",
+      "excerpts": [
+        {
+          "excerpt": "ポケモンふりかけ\nミニパック (20袋入)\nポケモンカレー\n< ポーク&コーン甘口 >",
+          "excerptSha256": "5b82e703923751ef13038009f518bf0489ddf403176ab55d2c1f0f73859b41a5",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "※ 当該商品は７月上旬頃店頭に並ぶ予定ですが、時期やお取扱い状況は店舗によって異なります。",
+          "excerptSha256": "a56b9c7873f1a7ed06fceb9b11057cdd78110bec2434542399e9643a93484cbd",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "©2015 Pokémon.",
+          "excerptSha256": "a832d072f9b7b357d43b3a2570572e6661a1dd743b3d527b6afaf112be140663",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        }
+      ],
+      "fieldLimits": [
+        "Manufacturer original 2015 campaign names the same Pokémon furikake/curry products as the retained exact 149/XY-P article. Original product text establishes early-July retail arrival with explicit per-store variation, not a universal day.",
+        "The copyright year is contextual identity support only; the separate dated manufacturer press release explicitly establishes launch year 2015. Existing Japanese Marumiya 149/XY-P identity is preserved. No new membership or finish assertion."
+      ],
+      "providerReviewStatus": "New original manufacturer provider candidate: root must onboard a strictly scoped date-only Marumiya 2015 campaign surface before adding accepted provenance."
+    },
+    {
+      "sourceId": "R2-JP-marumiya-prtimes",
+      "providerId": "marumiya-official",
+      "sourceUrl": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+      "finalUrl": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+      "retrievedAt": "2026-10-12T19:21:32.171499Z",
+      "httpStatus": 200,
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy, TLS verification enabled; readable text extracted with stdlib HTMLParser",
+      "fullResponseSha256": "cf9b97727dcb067624b446ec742771af6e2701a94eaaf0616d96d117fa501957",
+      "fullResponseHashScope": "original acquired HTTP response bytes, not excerpt",
+      "rawPath": "/tmp/jp-date-round2/marumiya-prtimes.raw",
+      "excerpts": [
+        {
+          "excerpt": "2015年7月上旬から数量限定発売。今だけ限定カードが付いてくる！",
+          "excerptSha256": "f0f3bc12efe80cd2f56d1c5687f97e8893f98c57267721dab573d71b53514975",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "丸美屋食品工業株式会社\n2015年6月12日 10時00分",
+          "excerptSha256": "ea292e901a2ab30e39fa9d6c6a1c92f37c8f9b116cc8a8883b5433a469b64e61",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "＜ポケモンシリーズ＞2品共通\n・今だけ限定で、丸美屋ロゴ入り「ポケモンのカード」（全5種）が１枚入っています。",
+          "excerptSha256": "8dcd78411ec4eeb0b61f5993406b2a6e43b1f23c6dc92bfb604e19d15a543d2a",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "※当該商品は7月上旬頃店頭に並ぶ予定ですが、時期やお取扱い状況は店舗によって異なります。",
+          "excerptSha256": "66cc5977a0de46cec555dc5fcbc166d492543a7e833acc249a09a39f8654fd43",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        }
+      ],
+      "fieldLimits": [
+        "PR TIMES is the distribution host; the assertion is explicitly authored/published by 丸美屋食品工業株式会社. The 2015-06-12 timestamp is announcement publication, not card release.",
+        "Product launch explicitly early July 2015, with retailer-dependent arrival. Do not create 2015-07-01, 2015-07-10 or another invented common day."
+      ],
+      "providerReviewStatus": "New manufacturer-authored press surface candidate hosted at exact PR TIMES URL; root must onboard date-only provenance, not general PR TIMES authority."
+    },
+    {
+      "sourceId": "R2-JP-sn-official",
+      "providerId": "pokemon-card-jp",
+      "sourceUrl": "https://www.pokemon-card.com/info/003230.html",
+      "finalUrl": "https://www.pokemon-card.com/info/003230.html",
+      "retrievedAt": "2026-10-12T19:21:32.955259Z",
+      "httpStatus": 200,
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy, TLS verification enabled; readable text extracted with stdlib HTMLParser",
+      "fullResponseSha256": "438c23e39fc42d1b10e519971372043faeb416d8799de5eaeea1cea2a5ed0ae9",
+      "fullResponseHashScope": "original acquired HTTP response bytes, not excerpt",
+      "rawPath": "/tmp/jp-date-round2/sn-official.raw",
+      "excerpts": [
+        {
+          "excerpt": "商品名\nポケモンカードゲーム ソード＆シールド「スタートデッキ100 コロコロコミックver.」\n発売日\n2022年1月15日頃\nお買い求め方法\n月刊コロコロコミック応募者10万人特別サービスにて、お求めいただけます。",
+          "excerptSha256": "05d75c2aaf86423bb6462b2b4e249352d14f0c49f65e2ae20f1be66879949143",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "お届け時期\n第1回：2022年3月下旬頃\n第2回：2022年8月下旬頃",
+          "excerptSha256": "f7d168a97e1fe6ff9ff1b1772747fcd172ed791b7cd634a91d928b2ded43cff8",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "お届け時期について\n2022年3月下旬頃あるいは8月下旬頃のいずれかとなります。お申込み後、お買い求めいただける方にはお届け時期が記載された購入通知メールが届きますので、そちらでご確認いただけます。",
+          "excerptSha256": "2355bcad0d9acc4ba7a452b2207471b03db8ddfb8899ffce3813b7bbcd1ce89b",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        }
+      ],
+      "fieldLimits": [
+        "Native original publisher distinguishes ordering/application release advertised approximately Jan15 from physical delivery batches approximately lateMarch/lateAugust. March is the retained first physical availability; Jan15 is not a demonstrated shipment day.",
+        "Official page only states delivery windows and customer-specific email assignments; no common exact day. Bulbapedia previously retained detailed later shipment adjustments; these are not contradicted by the older announcement timetable.",
+        "Existing Japanese sN 008 deck membership is preserved; this find grants only date/provenance scope."
+      ],
+      "providerReviewStatus": "Existing reviewed provider/surface; final scoped capability acceptance belongs to root"
+    },
+    {
+      "sourceId": "R2-JP-classic-official",
+      "providerId": "pokemon-card-jp",
+      "sourceUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+      "finalUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+      "retrievedAt": "2026-10-12T19:20:43.464856Z",
+      "httpStatus": 200,
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy, TLS verification enabled; readable text extracted with stdlib HTMLParser",
+      "fullResponseSha256": "9817e3866ca676f8e5459dd916f8b637d1e11d30860e52bc576ae25569456181",
+      "fullResponseHashScope": "original acquired HTTP response bytes, not excerpt",
+      "rawPath": "/tmp/jp-date-round2/classic-official.raw",
+      "excerpts": [
+        {
+          "excerpt": "【2月28日（火）追記】\n受付期間　2023年2月28日（火）10時00分～3月10日（金）23時59分\n当選発表　2023年4月26日（水）以降予定\n発送時期　2023年10月下旬以降予定",
+          "excerptSha256": "9c994e92f04ff526e464ceaa00c3e06b7f3b199fdd43fd6481bd7ce027b846fb",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "●発売日：2023年10月下旬以降予定",
+          "excerptSha256": "23ba75a34ee497748396165d6979421d8cfae6ae27cb4cb3f665bb7919ff8f8f",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        },
+        {
+          "excerpt": "受付期間　2023年10月23日（月）15時～10月27日（金）14時59分\n当選発表　2023年11月中旬以降予定\n発送時期　2024年8月上旬以降予定",
+          "excerptSha256": "dc48af38a050d8ba04309226240870bb2072cec2d1488c9759e6b753d91d08bc",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        }
+      ],
+      "fieldLimits": [
+        "Re-read original official source: first-wave shipping/product-release window remains lateOctober2023 or later. It publishes no common day.",
+        "Oct23-27 is a later lottery entry window for August2024 shipments. Treating Oct23 as the 2023 physical release would conflate separate events.",
+        "Existing exact Japanese CLF016/032 product membership is retained; do not inherit English November17 launch."
+      ],
+      "providerReviewStatus": "Existing reviewed provider/surface; final scoped capability acceptance belongs to root"
+    },
+    {
+      "sourceId": "R2-JP-wp49-biography",
+      "providerId": null,
+      "sourceUrl": "https://pocketmonsters.net/staff/view/7112",
+      "finalUrl": "https://pocketmonsters.net/staff/view/7112",
+      "retrievedAt": "2026-10-12T19:21:33.016392Z",
+      "httpStatus": 200,
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy, TLS verification enabled; readable text extracted with stdlib HTMLParser",
+      "fullResponseSha256": "84d515768c753672dee3096ce8f9b12e3d808f78da63431195788d67f4bd7396",
+      "fullResponseHashScope": "original acquired HTTP response bytes, not excerpt",
+      "rawPath": "/tmp/jp-date-round2/wp49-biography.raw",
+      "excerpts": [
+        {
+          "excerpt": "The winning entry would be produced as an official Pokémon promo card and given out to all Pokémon TCG League participants in its eighth season.",
+          "excerptSha256": "7ed49ecfab5bc788b7eb4526b10e45afbc0c9e9d2d60d3d06f81955bd5c76f93",
+          "hashScope": "UTF-8 retained exact HTML-parser text excerpt"
+        }
+      ],
+      "fieldLimits": [
+        "Unregistered secondary biography is retained as a season-identification lead only. It neither establishes a card-specific release day nor independently supplies August.",
+        "Contest and voting dates in this source date the illustration competition, not WP49 distribution. Linked firsthand interview was inaccessible; do not promote unseen contents."
+      ],
+      "providerReviewStatus": "Research lead only, not accepted date evidence; do not onboard merely to repeat already known season8 context."
+    },
+    {
+      "key": "bulbapedia-api-wp49",
+      "url": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+      "retrievedAt": "2026-10-11T10:37:53Z",
+      "captureMethod": "Python urllib through inherited proxy with TLS verification",
+      "status": 200,
+      "finalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
+      "byteLength": 5168,
+      "responseSha256": "380ac2cb86216f967a5bd2f707a3a2aed384a4c4208410a24dda15da991f20e3",
+      "pageTitle": null,
+      "textLength": 5159,
+      "sourceId": "R2-PRIOR-BULBAPEDIA-WP49",
+      "providerId": "bulbapedia",
+      "providerReviewStatus": "registered provider",
+      "responsePath": "/tmp/snoredex-historical-research/bulbapedia-api-wp49.html",
+      "excerpts": [
+        {
+          "content": "It was released in English as a {{TCG|Wizards Black Star Promos|Wizards Black Star Promo}} and was available through the {{TCG|Pokémon League}} in August 2002, with English-exclusive artwork.",
+          "excerptSha256": "1912b45f7d544b383e8cd82b963d1c9c71d07b8b1eae16e8a67c2d8e69502612",
+          "hashScope": "exact UTF-8 excerpt only, not full HTTP response",
+          "extraction": "source-native wikitext"
+        }
+      ],
+      "fieldLimits": [
+        "Only month precision is asserted; no day.",
+        "The Japanese Expansion Sheet/Quick Starter versions on this shared work page are distinct releases."
+      ],
+      "reusedFrom": "verification/evidence/release-dates-20261011/historical-sets.json",
+      "reuseNote": "Original 2026-10-11 retrieval date and response/excerpt hashes preserved; re-read offline 2026-10-12, not newly fetched."
+    },
+    {
+      "sourceId": "R2-PRIOR-BULBAPEDIA-XY149",
+      "providerId": "bulbapedia",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(BREAKthrough_118)",
+      "retrievedAt": "2026-10-11T10:33:14.996679Z",
+      "captureMethod": "Python stdlib urllib HTTPS through inherited proxy; MediaWiki parse wikitext; TLS verification enabled",
+      "rawPath": "/tmp/jp-date-captures/breakthrough.raw",
+      "fullResponseSha256": "ac0447d1bc70817c7c8d1c9705b0c3612e05942cd71c618347edd590c0b3609e",
+      "excerpt": "==Release information==\nThis card was included in the {{TCG|BREAKthrough}} expansion. In Japan, this card was one of five promotional cards released as part of a cross promotion with the food company Marumiya in early July 2015. The cards were included in Pokémon {{wp|Furikake}} Mini Packs and Pokémon Curry <Pork & Corn Sweet> packs. This print has the Marumiya logo in the bottom left corner of the card.",
+      "excerptSha256": "53086d81e80b561554b0fcf58997ef56ec16fb4ab203dd601faaefaabd85db88",
+      "excerptHashScope": "UTF-8 bytes of retained relevant excerpt, not full response",
+      "identityExcerpt": "{{PokémoncardInfobox/Expansion|type=Colorless|expansion={{TCG|BREAKthrough}}|rarity={{rar|Uncommon}}|cardno=118/162|jpexpansion={{TCG|XY-P Promotional cards}}|jpcardno=149/XY-P}}",
+      "identityExcerptSha256": "04dbcabc4e5217eb0ec64e97f2d51b322fe590c479cbc19374327a5d9a1db7cf",
+      "requestUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax+%28BREAKthrough+118%29&prop=wikitext&redirects=1&format=json",
+      "excerptComposition": "single exact source section or row",
+      "reusedFrom": "verification/evidence/release-dates-20261011/japanese-promos.json",
+      "reuseNote": "Original 2026-10-11 exact 149/XY-P identity and release section preserved; matching manufacturer campaign only, not new language/finish truth."
+    }
+  ],
+  "findings": [
+    {
+      "itemId": "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa",
+      "itemIds": [
+        "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa"
+      ],
+      "cardReleaseId": "RELEASE:WEST:English:WP:49:Snorlax-Guard-Roll-Over",
+      "physicalPrintingId": "PHYSICAL:F0590-P01",
+      "sourcePrintingId": "F0590-P01",
+      "legacyChecklistIds": [
+        "wp-49-english-none-non-holo"
+      ],
+      "localizationId": "LOCALIZATION:WEST:en",
+      "localityId": "WEST",
+      "localSetCode": "WP",
+      "collectorNumber": "49",
+      "before": {
+        "releaseDate": "2002-08",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "proposal": {
+        "releaseDate": "2002-08",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "changed": false,
+      "researchOutcome": "searched-no-supported-day",
+      "dateSourceIds": [
+        "R2-PRIOR-BULBAPEDIA-WP49"
+      ],
+      "leadSourceIds": [
+        "R2-JP-wp49-biography"
+      ],
+      "basis": "No new day-supported date. Retained exact-card article establishes August2002; newly inspected season8 biography does not specify a day. The original Wizards Year3 archive was found through the existing Pokumon article but returned503; related league history redirects to login.",
+      "fieldLimits": [
+        "No new card membership, localization, finish, edition, rarity or distribution verdict is established. Existing exact release identity is preserved.",
+        "Only supported first-availability windows are kept; announcement, ordering, lottery and later-wave dates are not substituted for card release."
+      ],
+      "attemptedRoutes": [
+        {
+          "attemptId": "wp49-wizards-r1",
+          "url": "https://html.duckduckgo.com/html/?q=Wizards+Pokemon+League+Season+8+August+2002+Snorlax+start+date",
+          "query": "Wizards Pokemon League Season 8 August 2002 Snorlax start date",
+          "retrievedAt": "2026-10-12T19:20:43.366187Z",
+          "status": 200,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=Wizards+Pokemon+League+Season+8+August+2002+Snorlax+start+date",
+          "byteCount": 34625,
+          "fullResponseSha256": "5644dae87efebbbb1f8b70350ca60ebb4631097cf7a3ac5812869fdcf42e003d",
+          "textPath": "/tmp/jp-date-round2/wp49-wizards-r1.text",
+          "rawPath": "/tmp/jp-date-round2/wp49-wizards-r1.raw",
+          "result": "Readable search results used only to route original-source reads; snippets never accepted as dates."
+        },
+        {
+          "attemptId": "wp49-wizards-r2",
+          "url": "https://html.duckduckgo.com/html/?q=%22Pokemon+League%22+%222002%22+%22Season+8%22+%22August%22",
+          "query": "\"Pokemon League\" \"2002\" \"Season 8\" \"August\"",
+          "retrievedAt": "2026-10-12T19:21:32.023003Z",
+          "status": 202,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%22Pokemon+League%22+%222002%22+%22Season+8%22+%22August%22",
+          "byteCount": 14295,
+          "fullResponseSha256": "baa03c0f24ad2bc2894318b8e7ca11194c5bb986b6e00d33738fc7f849e2b479",
+          "textPath": "/tmp/jp-date-round2/wp49-wizards-r2.text",
+          "rawPath": "/tmp/jp-date-round2/wp49-wizards-r2.raw",
+          "result": "Bot challenge, no source evidence; no CAPTCHA solved or bypass attempted."
+        },
+        {
+          "attemptId": "wp49-biography",
+          "url": "https://pocketmonsters.net/staff/view/7112",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:33.016392Z",
+          "status": 200,
+          "finalUrl": "https://pocketmonsters.net/staff/view/7112",
+          "byteCount": 35814,
+          "fullResponseSha256": "84d515768c753672dee3096ce8f9b12e3d808f78da63431195788d67f4bd7396",
+          "textPath": "/tmp/jp-date-round2/wp49-biography.text",
+          "rawPath": "/tmp/jp-date-round2/wp49-biography.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "wp49-artist-interview",
+          "url": "https://johto.substack.com/p/interview-with-craig-turvey-snorlax-promo-card",
+          "retrievedAt": "2026-10-12T19:22:47.289952Z",
+          "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+          "result": "Retrieval failed; no content inspected, no negative evidence."
+        },
+        {
+          "attemptId": "wp49-pokegym-timeline",
+          "url": "https://pokegym.net/community/index.php?threads/pokemon-tcg-and-pokemon-organized-play-timeline.14926/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:33.225378Z",
+          "error": "HTTP Error 403: Forbidden",
+          "result": "Retrieval failed; no content inspected, no negative evidence."
+        },
+        {
+          "attemptId": "wp49-wizards-year3-archive",
+          "url": "https://web.archive.org/web/20020202083751/http://www.wizards.com/default.asp?x=pokemon/league/year3Intro",
+          "retrievedAt": "2026-10-12T19:23:47.245205Z",
+          "error": "HTTP Error 503: Service Unavailable",
+          "result": "Retrieval failed; no content inspected, no negative evidence."
+        },
+        {
+          "attemptId": "wp49-virginia-history",
+          "url": "https://sites.google.com/site/virginiapokemon/league/history/energize",
+          "retrievedAt": "2026-10-12T19:23:47.245782Z",
+          "status": 200,
+          "finalUrl": "https://accounts.google.com/v3/signin/identifier?continue=https://sites.google.com/site/virginiapokemon/league/history/energize&followup=https://sites.google.com/site/virginiapokemon/league/history/energize&osid=1&passive=1209600&service=wise&flowName=WebLiteSignIn&flowEntry=ServiceLogin&dsh=S-1356734247:1791833027573698",
+          "byteCount": 944466,
+          "fullResponseSha256": "bb301be6b857777ccfe821c33d1d11f0b3ef9f4ad9fbfa35589fad9c35386a5e",
+          "textPath": "/tmp/jp-date-round2/wp49-virginia-history.text",
+          "rawPath": "/tmp/jp-date-round2/wp49-virginia-history.raw",
+          "result": "HTTP200 redirected to Google Drive sign-in, no league-history content; credentials not requested or bypassed."
+        }
+      ],
+      "nextUsefulLead": "Original Wizards Season8 availability/supply notice naming Snorlax49 and a first-distribution day, or a retained operator capture of that notice. Do not derive a day from seasonal arithmetic, contest/voting dates, or archive snapshot timestamp."
+    },
+    {
+      "itemId": "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56",
+      "itemIds": [
+        "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56"
+      ],
+      "cardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
+      "physicalPrintingId": null,
+      "sourcePrintingId": "F0619-P02",
+      "legacyChecklistIds": [
+        "xy-p-149-japanese-none-reverse-holo"
+      ],
+      "localizationId": "LOCALIZATION:JP:ja",
+      "localityId": "JP",
+      "localSetCode": "XY-P",
+      "collectorNumber": "149",
+      "before": {
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "proposal": {
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "changed": false,
+      "researchOutcome": "new-primary-corroboration-month-only",
+      "dateSourceIds": [
+        "R2-JP-marumiya-campaign",
+        "R2-JP-marumiya-prtimes",
+        "R2-PRIOR-BULBAPEDIA-XY149"
+      ],
+      "leadSourceIds": [],
+      "basis": "New original manufacturer date corroboration: earlyJuly2015, explicitly retailer-dependent arrival. No common fixed day exists in the inspected campaign/press statements. Keep 2015-07 at month precision; strengthen source/basis after scoped manufacturer onboarding.",
+      "fieldLimits": [
+        "No new card membership, localization, finish, edition, rarity or distribution verdict is established. Existing exact release identity is preserved.",
+        "Only supported first-availability windows are kept; announcement, ordering, lottery and later-wave dates are not substituted for card release."
+      ],
+      "attemptedRoutes": [
+        {
+          "attemptId": "xy149-native-r1",
+          "url": "https://html.duckduckgo.com/html/?q=%E4%B8%B8%E7%BE%8E%E5%B1%8B+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%82%AB%E3%83%BC%E3%83%89+2015+7%E6%9C%88%E4%B8%8A%E6%97%AC+%E7%99%BA%E5%A3%B2+%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+          "query": "丸美屋 ポケモン カード 2015 7月上旬 発売 ニュース",
+          "retrievedAt": "2026-10-12T19:20:42.700327Z",
+          "status": 200,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%E4%B8%B8%E7%BE%8E%E5%B1%8B+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%82%AB%E3%83%BC%E3%83%89+2015+7%E6%9C%88%E4%B8%8A%E6%97%AC+%E7%99%BA%E5%A3%B2+%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+          "byteCount": 34296,
+          "fullResponseSha256": "b9baee62391e21dee8ed9d61bd429e7a0ac4dd7080bef00e7abd2d59816e26de",
+          "textPath": "/tmp/jp-date-round2/xy149-native-r1.text",
+          "rawPath": "/tmp/jp-date-round2/xy149-native-r1.raw",
+          "result": "Readable search results used only to route original-source reads; snippets never accepted as dates."
+        },
+        {
+          "attemptId": "marumiya-root",
+          "url": "https://www.marumiya.co.jp/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:20:43.389655Z",
+          "status": 200,
+          "finalUrl": "https://www.marumiya.co.jp/",
+          "byteCount": 29282,
+          "fullResponseSha256": "4b1a440d6056410009e4cb001d4d02cb1af801b3b6506cb495814568e9ce1dfd",
+          "textPath": "/tmp/jp-date-round2/marumiya-root.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-root.raw",
+          "result": "Homepage discovery/read; no more precise target date."
+        },
+        {
+          "attemptId": "marumiya-campaign",
+          "url": "https://cp.marumiya.co.jp/kids2015/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.148154Z",
+          "status": 200,
+          "finalUrl": "https://cp.marumiya.co.jp/kids2015/",
+          "byteCount": 8660,
+          "fullResponseSha256": "52da186a19591d5fb14c052eccb52c2a7c7a0414cdaa1b7b8b16ea154f11b2af",
+          "textPath": "/tmp/jp-date-round2/marumiya-campaign.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-campaign.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "marumiya-campaign-sp",
+          "url": "https://cp.marumiya.co.jp/sp/kids2015/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.150852Z",
+          "status": 200,
+          "finalUrl": "https://cp.marumiya.co.jp/sp/kids2015/",
+          "byteCount": 16916,
+          "fullResponseSha256": "4681bfd978f5dbfd8b5cdc0b7c664037d1a8a4d904d5c3670c765cb24999f99c",
+          "textPath": "/tmp/jp-date-round2/marumiya-campaign-sp.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-campaign-sp.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "marumiya-prtimes",
+          "url": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.171499Z",
+          "status": 200,
+          "finalUrl": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+          "byteCount": 254829,
+          "fullResponseSha256": "cf9b97727dcb067624b446ec742771af6e2701a94eaaf0616d96d117fa501957",
+          "textPath": "/tmp/jp-date-round2/marumiya-prtimes.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-prtimes.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        }
+      ],
+      "nextUsefulLead": "A target-specific later manufacturer dispatch notice naming an actual launch day, if one exists; store arrival variability already limits universal day precision."
+    },
+    {
+      "itemId": "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
+      "itemIds": [
+        "item-4320a985-66ec-52e9-8149-bce9099f4c1b"
+      ],
+      "cardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
+      "physicalPrintingId": "PHYSICAL:PRINTING:65ef67fb1eb82d0db0fdab58",
+      "sourcePrintingId": "F0619-P01",
+      "legacyChecklistIds": [
+        "xy-p-149-japanese-none-non-holo-observed-marking"
+      ],
+      "localizationId": "LOCALIZATION:JP:ja",
+      "localityId": "JP",
+      "localSetCode": "XY-P",
+      "collectorNumber": "149",
+      "before": {
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "proposal": {
+        "releaseDate": "2015-07",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "changed": false,
+      "researchOutcome": "new-primary-corroboration-month-only",
+      "dateSourceIds": [
+        "R2-JP-marumiya-campaign",
+        "R2-JP-marumiya-prtimes",
+        "R2-PRIOR-BULBAPEDIA-XY149"
+      ],
+      "leadSourceIds": [],
+      "basis": "New original manufacturer date corroboration: earlyJuly2015, explicitly retailer-dependent arrival. No common fixed day exists in the inspected campaign/press statements. Keep 2015-07 at month precision; strengthen source/basis after scoped manufacturer onboarding.",
+      "fieldLimits": [
+        "No new card membership, localization, finish, edition, rarity or distribution verdict is established. Existing exact release identity is preserved.",
+        "Only supported first-availability windows are kept; announcement, ordering, lottery and later-wave dates are not substituted for card release."
+      ],
+      "attemptedRoutes": [
+        {
+          "attemptId": "xy149-native-r1",
+          "url": "https://html.duckduckgo.com/html/?q=%E4%B8%B8%E7%BE%8E%E5%B1%8B+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%82%AB%E3%83%BC%E3%83%89+2015+7%E6%9C%88%E4%B8%8A%E6%97%AC+%E7%99%BA%E5%A3%B2+%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+          "query": "丸美屋 ポケモン カード 2015 7月上旬 発売 ニュース",
+          "retrievedAt": "2026-10-12T19:20:42.700327Z",
+          "status": 200,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%E4%B8%B8%E7%BE%8E%E5%B1%8B+%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%82%AB%E3%83%BC%E3%83%89+2015+7%E6%9C%88%E4%B8%8A%E6%97%AC+%E7%99%BA%E5%A3%B2+%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%B9",
+          "byteCount": 34296,
+          "fullResponseSha256": "b9baee62391e21dee8ed9d61bd429e7a0ac4dd7080bef00e7abd2d59816e26de",
+          "textPath": "/tmp/jp-date-round2/xy149-native-r1.text",
+          "rawPath": "/tmp/jp-date-round2/xy149-native-r1.raw",
+          "result": "Readable search results used only to route original-source reads; snippets never accepted as dates."
+        },
+        {
+          "attemptId": "marumiya-root",
+          "url": "https://www.marumiya.co.jp/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:20:43.389655Z",
+          "status": 200,
+          "finalUrl": "https://www.marumiya.co.jp/",
+          "byteCount": 29282,
+          "fullResponseSha256": "4b1a440d6056410009e4cb001d4d02cb1af801b3b6506cb495814568e9ce1dfd",
+          "textPath": "/tmp/jp-date-round2/marumiya-root.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-root.raw",
+          "result": "Homepage discovery/read; no more precise target date."
+        },
+        {
+          "attemptId": "marumiya-campaign",
+          "url": "https://cp.marumiya.co.jp/kids2015/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.148154Z",
+          "status": 200,
+          "finalUrl": "https://cp.marumiya.co.jp/kids2015/",
+          "byteCount": 8660,
+          "fullResponseSha256": "52da186a19591d5fb14c052eccb52c2a7c7a0414cdaa1b7b8b16ea154f11b2af",
+          "textPath": "/tmp/jp-date-round2/marumiya-campaign.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-campaign.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "marumiya-campaign-sp",
+          "url": "https://cp.marumiya.co.jp/sp/kids2015/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.150852Z",
+          "status": 200,
+          "finalUrl": "https://cp.marumiya.co.jp/sp/kids2015/",
+          "byteCount": 16916,
+          "fullResponseSha256": "4681bfd978f5dbfd8b5cdc0b7c664037d1a8a4d904d5c3670c765cb24999f99c",
+          "textPath": "/tmp/jp-date-round2/marumiya-campaign-sp.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-campaign-sp.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "marumiya-prtimes",
+          "url": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.171499Z",
+          "status": 200,
+          "finalUrl": "https://prtimes.jp/main/html/rd/p/000000087.000010538.html",
+          "byteCount": 254829,
+          "fullResponseSha256": "cf9b97727dcb067624b446ec742771af6e2701a94eaaf0616d96d117fa501957",
+          "textPath": "/tmp/jp-date-round2/marumiya-prtimes.text",
+          "rawPath": "/tmp/jp-date-round2/marumiya-prtimes.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        }
+      ],
+      "nextUsefulLead": "A target-specific later manufacturer dispatch notice naming an actual launch day, if one exists; store arrival variability already limits universal day precision."
+    },
+    {
+      "itemId": "item-c88bb2db-5774-53d3-9d48-905c38aa5de9",
+      "itemIds": [
+        "item-c88bb2db-5774-53d3-9d48-905c38aa5de9"
+      ],
+      "cardReleaseId": "RELEASE:JP:Japanese:sN:008:Snorlax-Heavy-Impact",
+      "physicalPrintingId": "PHYSICAL:PRINTING:44987d5fe8d7e8c2cc81138b",
+      "sourcePrintingId": "F0417-P01",
+      "legacyChecklistIds": [
+        "sn-008-japanese-none-holo-diagonal-rainbow"
+      ],
+      "localizationId": "LOCALIZATION:JP:ja",
+      "localityId": "JP",
+      "localSetCode": "sN",
+      "collectorNumber": "008",
+      "before": {
+        "releaseDate": "2022-03",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "proposal": {
+        "releaseDate": "2022-03",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "changed": false,
+      "researchOutcome": "new-primary-corroboration-month-only",
+      "dateSourceIds": [
+        "R2-JP-sn-official"
+      ],
+      "leadSourceIds": [],
+      "basis": "New original publisher source confirms first physical delivery approximately lateMarch2022, with a separate later batch and customer-specific delivery emails. The advertised ordering release approximately Jan15 is separate. Keep 2022-03.",
+      "fieldLimits": [
+        "No new card membership, localization, finish, edition, rarity or distribution verdict is established. Existing exact release identity is preserved.",
+        "Only supported first-availability windows are kept; announcement, ordering, lottery and later-wave dates are not substituted for card release."
+      ],
+      "attemptedRoutes": [
+        {
+          "attemptId": "sn-shipping-r1",
+          "url": "https://html.duckduckgo.com/html/?q=%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%AD+%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%87%E3%83%83%E3%82%AD100+2022+%E7%99%BA%E9%80%81+3%E6%9C%88+%E5%85%AC%E5%BC%8F",
+          "query": "コロコロ スタートデッキ100 2022 発送 3月 公式",
+          "retrievedAt": "2026-10-12T19:20:42.701618Z",
+          "status": 200,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%AD+%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E3%83%87%E3%83%83%E3%82%AD100+2022+%E7%99%BA%E9%80%81+3%E6%9C%88+%E5%85%AC%E5%BC%8F",
+          "byteCount": 33632,
+          "fullResponseSha256": "efcf724f8a3a9b71f5476018a29f580991ad6bf71b3d91ad33283e80312adfec",
+          "textPath": "/tmp/jp-date-round2/sn-shipping-r1.text",
+          "rawPath": "/tmp/jp-date-round2/sn-shipping-r1.raw",
+          "result": "Readable search results used only to route original-source reads; snippets never accepted as dates."
+        },
+        {
+          "attemptId": "sn-shogakukan-r2",
+          "url": "https://html.duckduckgo.com/html/?q=%22%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AFver%22+%22%E7%99%BA%E9%80%81%22+%223%E6%9C%88%22+2022+%E5%B0%8F%E5%AD%A6%E9%A4%A8",
+          "query": "\"コロコロコミックver\" \"発送\" \"3月\" 2022 小学館",
+          "retrievedAt": "2026-10-12T19:21:32.022518Z",
+          "status": 202,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%22%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%AD%E3%82%B3%E3%83%9F%E3%83%83%E3%82%AFver%22+%22%E7%99%BA%E9%80%81%22+%223%E6%9C%88%22+2022+%E5%B0%8F%E5%AD%A6%E9%A4%A8",
+          "byteCount": 14363,
+          "fullResponseSha256": "a346274ca8c2c673aa8f7aa0855099a061c219cabe4fa80b7bfa86c46aa20af7",
+          "textPath": "/tmp/jp-date-round2/sn-shogakukan-r2.text",
+          "rawPath": "/tmp/jp-date-round2/sn-shogakukan-r2.raw",
+          "result": "Bot challenge, no source evidence; no CAPTCHA solved or bypass attempted."
+        },
+        {
+          "attemptId": "coro-root",
+          "url": "https://corocoro.jp/",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:20:43.820349Z",
+          "status": 200,
+          "finalUrl": "https://www.corocoro.jp/",
+          "byteCount": 32318,
+          "fullResponseSha256": "c0fda5a95ff43ef202edb7cfd09d064e5ce8985b61223a9232606d9c8e953ba4",
+          "textPath": "/tmp/jp-date-round2/coro-root.text",
+          "rawPath": "/tmp/jp-date-round2/coro-root.raw",
+          "result": "Homepage discovery/read; no more precise target date."
+        },
+        {
+          "attemptId": "sn-official",
+          "url": "https://www.pokemon-card.com/info/003230.html",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:21:32.955259Z",
+          "status": 200,
+          "finalUrl": "https://www.pokemon-card.com/info/003230.html",
+          "byteCount": 36819,
+          "fullResponseSha256": "438c23e39fc42d1b10e519971372043faeb416d8799de5eaeea1cea2a5ed0ae9",
+          "textPath": "/tmp/jp-date-round2/sn-official.text",
+          "rawPath": "/tmp/jp-date-round2/sn-official.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        }
+      ],
+      "nextUsefulLead": "A publicly retained Shogakukan first-dispatch notice; individual customer email may evidence that order only and cannot establish a common card day."
+    },
+    {
+      "itemId": "item-1ae61864-2562-5080-966f-cd6421e6d525",
+      "itemIds": [
+        "item-1ae61864-2562-5080-966f-cd6421e6d525"
+      ],
+      "cardReleaseId": "RELEASE:JP:Japanese:CLF:016:Snorlax-Collect-Collapse",
+      "physicalPrintingId": "PHYSICAL:PRINTING:6b4a10829d31abee1072c43b",
+      "sourcePrintingId": "F0035-P01",
+      "legacyChecklistIds": [
+        "clf-016-japanese-none-holo-speckled-full-face"
+      ],
+      "localizationId": "LOCALIZATION:JP:ja",
+      "localityId": "JP",
+      "localSetCode": "CLF",
+      "collectorNumber": "016",
+      "before": {
+        "releaseDate": "2023-10",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "proposal": {
+        "releaseDate": "2023-10",
+        "releaseDatePrecision": "month",
+        "releaseApproximate": false
+      },
+      "changed": false,
+      "researchOutcome": "searched-no-supported-day",
+      "dateSourceIds": [
+        "R2-JP-classic-official"
+      ],
+      "leadSourceIds": [],
+      "basis": "Original publisher remains lateOctober2023 or later; no finer first-wave day found. The exact Oct23 lottery opening belongs to a later shipment wave. Keep 2023-10.",
+      "fieldLimits": [
+        "No new card membership, localization, finish, edition, rarity or distribution verdict is established. Existing exact release identity is preserved.",
+        "Only supported first-availability windows are kept; announcement, ordering, lottery and later-wave dates are not substituted for card release."
+      ],
+      "attemptedRoutes": [
+        {
+          "attemptId": "clf-shipping-r1",
+          "url": "https://html.duckduckgo.com/html/?q=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+Classic+2023+10%E6%9C%88+%E7%99%BA%E9%80%81+23%E6%97%A5+%E5%85%AC%E5%BC%8F",
+          "query": "ポケモンカード Classic 2023 10月 発送 23日 公式",
+          "retrievedAt": "2026-10-12T19:20:42.701163Z",
+          "status": 200,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89+Classic+2023+10%E6%9C%88+%E7%99%BA%E9%80%81+23%E6%97%A5+%E5%85%AC%E5%BC%8F",
+          "byteCount": 33993,
+          "fullResponseSha256": "61dcf3df57d63bd8b9dd24ce93daed4a8838281c8e90e3e007843f9bb5a5a5b6",
+          "textPath": "/tmp/jp-date-round2/clf-shipping-r1.text",
+          "rawPath": "/tmp/jp-date-round2/clf-shipping-r1.raw",
+          "result": "Readable search results used only to route original-source reads; snippets never accepted as dates."
+        },
+        {
+          "attemptId": "clf-nendo-r2",
+          "url": "https://html.duckduckgo.com/html/?q=%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+Classic%22+%2210%E6%9C%88%22+%22%E7%99%BA%E9%80%81%22+%222023%22+nendo",
+          "query": "\"ポケモンカードゲーム Classic\" \"10月\" \"発送\" \"2023\" nendo",
+          "retrievedAt": "2026-10-12T19:21:32.021918Z",
+          "status": 202,
+          "finalUrl": "https://html.duckduckgo.com/html/?q=%22%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%89%E3%82%B2%E3%83%BC%E3%83%A0+Classic%22+%2210%E6%9C%88%22+%22%E7%99%BA%E9%80%81%22+%222023%22+nendo",
+          "byteCount": 14361,
+          "fullResponseSha256": "dcc0350829ea76a74822b1b8b05c481b9fe279e4769ad717689cd55d6e12ec1e",
+          "textPath": "/tmp/jp-date-round2/clf-nendo-r2.text",
+          "rawPath": "/tmp/jp-date-round2/clf-nendo-r2.raw",
+          "result": "Bot challenge, no source evidence; no CAPTCHA solved or bypass attempted."
+        },
+        {
+          "attemptId": "classic-official",
+          "url": "https://www.pokemon-card.com/ex/classic/index.html",
+          "query": null,
+          "retrievedAt": "2026-10-12T19:20:43.464856Z",
+          "status": 200,
+          "finalUrl": "https://www.pokemon-card.com/ex/classic/index.html",
+          "byteCount": 35886,
+          "fullResponseSha256": "9817e3866ca676f8e5459dd916f8b637d1e11d30860e52bc576ae25569456181",
+          "textPath": "/tmp/jp-date-round2/classic-official.text",
+          "rawPath": "/tmp/jp-date-round2/classic-official.raw",
+          "result": "HTTP200 original source content retrieved and inspected; limits recorded per source."
+        },
+        {
+          "attemptId": "clf-nendo-official",
+          "url": "https://www.nendo.jp/en/works/pokemon-card-game-classic/",
+          "retrievedAt": "2026-10-12T19:22:47.290583Z",
+          "error": "HTTP Error 404: Not Found",
+          "result": "Retrieval failed; no content inspected, no negative evidence."
+        },
+        {
+          "attemptId": "clf-nendo-house-root",
+          "url": "https://house.nendo.jp/",
+          "retrievedAt": "2026-10-12T19:22:47.290984Z",
+          "status": 200,
+          "finalUrl": "https://house.nendo.jp/",
+          "byteCount": 678,
+          "fullResponseSha256": "f2c7ceae31f70bc590097467a839e8da4137e18069fec9d52695304074f25432",
+          "textPath": "/tmp/jp-date-round2/clf-nendo-house-root.text",
+          "rawPath": "/tmp/jp-date-round2/clf-nendo-house-root.raw",
+          "result": "HTTP200 invalid-URL notice, no product/shipping content."
+        }
+      ],
+      "nextUsefulLead": "An official first-wave dispatch notice that explicitly fixes first physical availability; preserve individual shipment vs general release distinctions."
+    }
+  ],
+  "notes": [
+    "Native search round1 returned readable leads; round2 searches encountered bot challenges and were not retried or bypassed. Followed bounded original-source leaf links only.",
+    "New manufacturer sources are candidates until root applies scoped provider/surface onboarding. Do not attribute original Marumiya statements to Bulbapedia or lend general PR TIMES authority.",
+    "Original response hashes and UTF-8 excerpt hashes have distinct scopes; actual retrieval timestamps are recorded for live captures. Prior source captures preserve their earlier timestamps.",
+    "Source availability failures prove no absence. A month may be the most concrete truthful release field when the publisher supplies a shipping/retail window."
+  ],
+  "retention": "Inspected excerpts and their UTF-8 hashes are retained here. Full-response/DOM hashes describe acquired original bytes in scratch, not committed raw responses. Prior captures keep their original retrieval dates. Publisher delivery signatures and transient press-session HTML are omitted."
+}

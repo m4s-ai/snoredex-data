@@ -29,6 +29,7 @@ from pathlib import Path
 from threading import Thread
 
 ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT / "scripts"))
 INDEX = ROOT / "index.html"
 CANONICAL_ITEMS = [item for item in json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["items"]
                    if item["active"] and item["itemKind"] == "verified-printing"]
