@@ -448,6 +448,29 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
 EDITION_PAIR = frozenset({"1st Edition", "Unlimited"})
 
 
+def _edition_siblings(printing: dict[str, Any], printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    variants = set(printing.get("mappedVariants") or [])
+    return [
+        other for other in printings
+        if other is not printing
+        and other["finish"] == printing["finish"]
+        and other.get("edition") in EDITION_PAIR
+        and set(other.get("mappedVariants") or []) >= variants
+        and all(other.get(field) == printing.get(field) for field in ("foilPattern", "distribution"))
+    ]
+
+
+def _is_card_level_finish_evidence(printing: dict[str, Any]) -> bool:
+    return not any(printing.get(field) for field in ("edition", "specimenIds", "conflictsWith", "markings"))
+
+
+def _fold_sources(target: dict[str, Any], printing: dict[str, Any]) -> None:
+    seen = {source_signature(source) for source in target["sources"]}
+    target["sources"].extend(source for source in printing["sources"] if source_signature(source) not in seen)
+    if STATUS_RANK[printing["verificationStatus"]] > STATUS_RANK[target["verificationStatus"]]:
+        target["verificationStatus"] = printing["verificationStatus"]
+
+
 def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Fold card-level finish evidence into complete per-edition printings.
 
@@ -458,26 +481,12 @@ def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[
     """
     kept = []
     for printing in printings:
-        siblings = [
-            other for other in printings
-            if other is not printing
-            and other["finish"] == printing["finish"]
-            and other.get("edition") in EDITION_PAIR
-            and set(other.get("mappedVariants") or []) >= set(printing.get("mappedVariants") or [])
-            and all(other.get(field) == printing.get(field) for field in ("foilPattern", "distribution"))
-        ]
-        if (printing.get("edition") is not None or printing.get("specimenIds")
-                or printing.get("conflictsWith") or printing.get("markings")
-                or {other["edition"] for other in siblings} != EDITION_PAIR):
+        siblings = _edition_siblings(printing, printings)
+        if not _is_card_level_finish_evidence(printing) or {o["edition"] for o in siblings} != EDITION_PAIR:
             kept.append(printing)
             continue
         for other in siblings:
-            seen = {source_signature(source) for source in other["sources"]}
-            other["sources"].extend(
-                source for source in printing["sources"] if source_signature(source) not in seen
-            )
-            if STATUS_RANK[printing["verificationStatus"]] > STATUS_RANK[other["verificationStatus"]]:
-                other["verificationStatus"] = printing["verificationStatus"]
+            _fold_sources(other, printing)
     return kept
 
 

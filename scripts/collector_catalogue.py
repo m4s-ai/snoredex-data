@@ -709,6 +709,11 @@ def normalized_markings(value: Any) -> list[dict[str, str]]:
     return [dict(row) for row in value]
 
 
+def release_collector_number(release: dict[str, Any]) -> Any:
+    """The printed local number, or a reviewed collector identifier for an unnumbered card."""
+    return release.get("localNumber") or (release.get("numberingBasis") or {}).get("collectorNumber")
+
+
 def split_collector_number(value: Any) -> tuple[str | None, str | None]:
     text = str(value or "").strip()
     if not text:
@@ -1337,9 +1342,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             (source_first_row or {}).get("name"),
         )
         local_set_name = next(iter(local_set.get("observedNames") or []), None)
-        number, denominator = split_collector_number(
-            release.get("localNumber") or (release.get("numberingBasis") or {}).get("collectorNumber")
-        )
+        number, denominator = split_collector_number(release_collector_number(release))
         event = event_by_edition.get(release["setEditionId"], {})
         return {
             "release": release,
