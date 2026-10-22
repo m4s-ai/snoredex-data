@@ -69,6 +69,9 @@ def merge(graph, uid, old_id, rid):
     for field in ("claimIds", "establishingClaimIds", "nonEstablishingClaimIds",
                   "legacyVariants", "legacyProducts", "sourceRecords"):
         append_unique(release.setdefault(field, []), *old.get(field, []))
+    for field in ("claimIds", "establishingClaimIds", "sourceRecords"):
+        # Admission replays (e.g. integrate_rarity_finish_research_20261007) rebuild these sorted.
+        release[field] = sorted(release[field])
     append_unique(release.setdefault("legacyCounterpartUnitIds", []), uid)
     alias = [old["viaLegacySetCode"], old["viaLegacyNumber"]]
     if alias not in release.setdefault("legacyIdentityAliases", []):
@@ -133,6 +136,23 @@ def write_bridges(overrides, bridges):
     OVERRIDES.write_text(text, encoding="utf-8", newline="\n")
 
 
+def sort_merged_lists(graph, rekeys):
+    """Release ids already merged by this pass whose claim/source lists are not yet sorted."""
+    question = next(q for q in rekeys["questionSets"] if q["issueNumber"] == ISSUE)
+    sources = {f"CLAIM:source-first:{m['sourceFirstRecordId']}" for m in question["mappings"]}
+    claims = {e["entityId"]: e["payload"] for e in graph["entities"] if e["entityId"] in sources}
+    ids = {c.get("materializedTargetId") for c in claims.values()}
+    pending = []
+    for entity in graph["entities"]:
+        payload = entity["payload"]
+        merged = entity["entityType"] == "card-release" and entity["entityId"] in ids \
+            and payload.get("legacyIdentityAliases")
+        if merged and any(payload.get(f, []) != sorted(payload.get(f, []))
+                          for f in ("claimIds", "establishingClaimIds", "sourceRecords")):
+            pending.append(payload)
+    return pending
+
+
 def route(old_id, rid):
     return {"from": old_id, "to": rid, "reason": f"Issue #{ISSUE} re-key; {DECISION}."}
 
@@ -143,17 +163,23 @@ def main(argv):
     overrides = read(OVERRIDES)
     bridges = pending_bridges(overrides)
     targets = list(merge_targets(graph, rekeys))
+    unsorted = sort_merged_lists(graph, rekeys)
     pending_routes = [(o, r) for _, o, r in targets if not any(x["from"] == o for x in routes["cardReleaseRekeys"])]
     if check:
         for uid, old_id, rid in targets:
             print(f"pending: {uid} {old_id} -> {rid}")
         for bridge in bridges:
             print("pending finish bridge:", *bridge)
-        return 1 if targets or pending_routes or bridges else 0
+        if unsorted:
+            print("pending: unsorted merged release lists")
+        return 1 if targets or pending_routes or bridges or unsorted else 0
     for uid, old_id, rid in targets:
         merge(graph, uid, old_id, rid)
         print(uid, old_id, "->", rid)
-    if targets:
+    for payload in unsorted:
+        for field in ("claimIds", "establishingClaimIds", "sourceRecords"):
+            payload[field] = sorted(payload.get(field, []))
+    if targets or unsorted:
         refresh_summary(graph)
         write(V / "authoritative_graph.json", graph)
     if pending_routes:
