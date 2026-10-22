@@ -403,7 +403,9 @@ For a curated case:
 
 `verify_finish_sources.py` reads the exact product IDs and expected positive subtypes from the
 source registry, fetches the current TCGCSV product and price exports, and fails if any assertion no
-longer matches. It does not infer negatives from missing subtypes.
+longer matches. It does not infer negatives from missing subtypes. A product that still exists but
+has no current price row at all is reported as `[NODATA]` without failing: the price export only
+lists products with current market data, so that silence leaves the retained observation standing.
 
 TCGCSV is a reproducible TCGplayer export. Its group endpoints used here are:
 
