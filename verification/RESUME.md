@@ -213,8 +213,9 @@ composition is the same artwork (owner, 2026-10-22): the base illustration and i
 unchanged. The illustrator is an attribute of the artwork, not of a physical printing — a card
 planned but never printed still has its illustrator — so a credit read from a retained harvested
 product image under `images/` is accepted without a SPEC record; the SPEC requirement of AGENTS
-rule 1 governs physical-printing claims. A propagated credit is graded as `internal-derivation`;
-the anchor print keeps its own source.
+rule 1 governs physical-printing claims. A propagated legacy product credit (`artistSource`) is
+graded as `internal-derivation`; a source-first print records `method: artwork-propagation`, the
+anchor release and the comparison in `illustratorEvidence`. The anchor print keeps its own source.
 
 The credit printed on the card is the card's own statement. Read it from an exact-print image
 ("Illus." line) where one exists; it beats a database text field — the official TW page for
