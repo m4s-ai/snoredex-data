@@ -152,6 +152,32 @@ def main() -> None:
         assert fixture.read_bytes() == old_fixture
         assert not fixture.with_name(fixture.name + ".tmp").exists()
 
+        # A product with no current price row is the export's silence, not a mismatch; a price
+        # row without the expected subtype, or a vanished product, still fails.
+        identity = {"success": True, "error": None,
+                    "results": [{"productId": 1, "name": "Snorlax"}]}
+        cases = (
+            ([], True, 0),
+            ([{"productId": 1, "subTypeName": "Holofoil"}], True, 1),
+            ([], False, 1),
+        )
+        for price_rows, product_listed, expected_exit in cases:
+            products = identity if product_listed else {**identity, "results": []}
+            fixture.write_text(json.dumps({"responses": {
+                "https://example.test/identity": products,
+                "https://example.test/prices": {"success": True, "error": None,
+                                                "results": price_rows},
+            }}), encoding="utf-8")
+            verifier.VERIFICATION = verification
+            verifier.FIXTURE = fixture
+            try:
+                sys.argv = ["verify_finish_sources.py", "--replay"]
+                assert verifier.main() == expected_exit, (price_rows, product_listed)
+            finally:
+                sys.argv = original_arguments
+                verifier.VERIFICATION = original_verification
+                verifier.FIXTURE = original_fixture
+
     original_arguments = sys.argv
     try:
         sys.argv = ["finishes.py", "--offline", "--check", "--reproject"]

@@ -13,6 +13,11 @@ Exit codes are the PowerShell's and the gate depends on them: 0 when every asser
 a data mismatch, 2 when an endpoint could not be reached. The distinction matters — a mismatch
 means the claim is wrong and someone must look, an unreachable endpoint means try again later.
 
+A product that still exists but has no current price row at all is reported as `[NODATA]` and
+does not fail: the price export only lists products with current market data, so its silence is a
+gap, never a contradiction of the retained observation (AGENTS rule 3). A missing product, or a
+price row present without the expected subtype, still fails.
+
 The fixture exists so the *logic* can be proved when TCGCSV is down, slow, or drifting. It keeps
 only the rows these assertions look up, projected to the two fields they read, so it is a
 projection rather than a recording: four kilobytes instead of a megabyte of somebody else's
@@ -74,6 +79,15 @@ def project(results: list[dict], fields: tuple[str, ...]) -> list[dict]:
     return [{field: row.get(field) for field in fields} for row in results]
 
 
+def product_subtypes(prices: list[dict], product_id: int) -> list[str]:
+    """The distinct price subtypes TCGCSV currently reports for one product, in export order."""
+    actual: list[str] = []
+    for row in prices:
+        if row.get("productId") == product_id and row.get("subTypeName") not in actual:
+            actual.append(row.get("subTypeName"))
+    return actual
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -94,6 +108,7 @@ def main() -> int:
     responses = Responses(replay)
 
     failures: list[str] = []
+    no_price_data: list[str] = []
     checked_sources = 0
     checked_products = 0
     wanted_rows: dict[str, tuple[tuple[str, ...], set[int]]] = {}
@@ -131,11 +146,14 @@ def main() -> int:
                 failures.append(f"{name} product {product_id} is absent from {identity_url}")
                 continue
 
-            actual = []
-            for row in prices:
-                if row.get("productId") == product_id and row.get("subTypeName") not in actual:
-                    actual.append(row.get("subTypeName"))
+            actual = product_subtypes(prices, product_id)
             expected_subtypes = list(expected)
+            if not actual:
+                # The product still exists but has no current price row at all. That is the
+                # export's silence, not a disagreement: the retained observation stands (rule 3).
+                no_price_data.append(f"{name} product {product_id} ({product.get('name')}) "
+                                     f"has no current price row; expected {', '.join(expected_subtypes)}")
+                continue
             missing = [subtype for subtype in expected_subtypes if subtype not in actual]
             if missing:
                 failures.append(f"{name} product {product_id} ({product.get('name')}) "
@@ -143,6 +161,9 @@ def main() -> int:
                 continue
 
             print(f"[OK  ] {name} product {product_id}: {' + '.join(expected_subtypes)}")
+
+    for notice in no_price_data:
+        print(f"[NODATA] {notice}")
 
     if failures:
         for failure in failures:
@@ -178,7 +199,8 @@ def main() -> int:
         return 0
 
     print()
-    print(f"Verified {checked_products} TCGCSV products across {checked_sources} source records.")
+    print(f"Verified {checked_products - len(no_price_data)} TCGCSV products across "
+          f"{checked_sources} source records; {len(no_price_data)} without a current price row.")
     return 0
 
 
