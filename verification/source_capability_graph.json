@@ -20,7 +20,7 @@
       "coverageEdges": 108,
       "absenceEdges": 0,
       "observations": 146,
-      "resolvedVerdictSources": 1783
+      "resolvedVerdictSources": 1784
     },
     "surfaceStates": {
       "active": 45,
@@ -9114,26 +9114,30 @@
       ],
       "outcome": "A localized API row positively establishes the returned card and positive flags.",
       "rawRecordRef": "verification/source_registry.json:https://api.tcgdex.net/v2/en/cards/base2-11",
-      "rawRecordHash": "sha256:3de4f16494ca64f5cab020a5adc2d63fff2643b54144b7bfe5ff748272641f3a",
+      "rawRecordHash": "sha256:79d6a32974b036ad7d54fa4cfc974cbcbfcbe4f489064d509984ebbe495222a8",
       "rawRecord": {
         "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/base2-11",
         "nonUrlEvidenceId": null,
         "providerId": "tcgdex",
         "sourceTypes": [
           "TCGdex API (open card database)",
+          "TCGdex API card variant detail",
           "TCGdex API card variants"
         ],
         "dimensions": [
           "finish",
+          "finish-override",
           "language"
         ],
-        "stableIdCount": 2,
+        "stableIdCount": 4,
         "stableIds": [
           "F0161-P01",
-          "U0119"
+          "F0161-P02",
+          "U0119",
+          "override:tcgdex-edition-en-base2-11-20261022"
         ],
-        "retrievedAt": "2026-07-21",
-        "usageCount": 2
+        "retrievedAt": "2026-10-22",
+        "usageCount": 6
       }
     },
     {
@@ -10243,7 +10247,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:dc313e78ddd2dd217ceb8371041223b21cb87098b3801fede647050941d5de05",
+      "rawRecordHash": "sha256:cb5df35d6158794f42b3c122412ca2293551176935c5f753c18e141d16524525",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -10267,7 +10271,7 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 415,
+        "stableIdCount": 433,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2DaC:038/053:base",
@@ -10291,33 +10295,44 @@
           "F0093-P01",
           "F0101-P01",
           "F0104-P01",
+          "F0104-P02",
+          "F0104-P03",
           "F0132-P01",
           "F0138-P01",
           "F0140-P01",
+          "F0142-P01",
           "F0142-P02",
           "F0146-P01",
           "F0148-P01",
           "F0153-P01",
           "F0161-P01",
+          "F0161-P02",
           "F0162-P01",
+          "F0162-P02",
           "F0163-P01",
+          "F0163-P02",
           "F0164-P01",
           "F0164-P02",
-          "F0164-P03",
           "F0165-P01",
+          "F0165-P02",
+          "F0165-P03",
           "F0166-P01",
           "F0166-P02",
           "F0167-P01",
           "F0167-P02",
           "F0168-P01",
+          "F0168-P02",
           "F0169-P01",
+          "F0169-P02",
           "F0170-P01",
+          "F0170-P02",
           "F0171-P01",
           "F0171-P02",
           "F0172-P01",
           "F0172-P02",
-          "F0172-P03",
           "F0173-P01",
+          "F0173-P02",
+          "F0173-P03",
           "F0174-P01",
           "F0174-P02",
           "F0214-P01",
@@ -10328,6 +10343,12 @@
           "F0221-P01",
           "F0223-P01",
           "F0224-P01",
+          "F0246-P01",
+          "F0246-P02",
+          "F0247-P01",
+          "F0247-P02",
+          "F0248-P01",
+          "F0248-P02",
           "F0289-P02",
           "F0301-P01",
           "F0328-P02",
@@ -10680,13 +10701,14 @@
           "WEST:30C FR:119/128:base",
           "WEST:30C IT:119/128:base",
           "WEST:30C PT:119/128:base",
+          "override:owner-edition-split-20261022",
           "override:owner-jungle-number-finish-20260910",
           "override:owner-scan-review",
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-10-08",
-        "usageCount": 452
+        "retrievedAt": "2026-10-22",
+        "usageCount": 484
       }
     },
     {
@@ -10707,7 +10729,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:55b40ac24b3c856ad2500e19ea9d37fc8dba898e6c0d5053495eec09dfd55ec3",
+      "rawRecordHash": "sha256:a5c068e0b2c6f781fe4a91e96b10a341e94b77d17c66eedce9683333a6a30baa",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -10741,7 +10763,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 259,
+        "stableIdCount": 260,
         "stableIds": [
           "CS1aC 188 V2",
           "CSM2.1C 054 base",
@@ -10758,8 +10780,9 @@
           "F0104-P01",
           "F0125-P02",
           "F0132-P01",
-          "F0142-P02",
+          "F0142-P01",
           "F0247-P02",
+          "F0247-P03",
           "F0291-P02",
           "F0294-P02",
           "F0301-P01",
@@ -12047,7 +12070,7 @@
       ],
       "outcome": "SPEC-0524 (first-edition stamp) and SPEC-0525 (Unlimited) establish the edition capability of the inspected-specimen-positive edge.",
       "rawRecordRef": "verification/source_registry.json:https://github.com/m4s-ai/snoredex-data/issues/266",
-      "rawRecordHash": "sha256:7e3ef70ee70b0a6af91081db8d1af4c679dabf4564df74ad9a7f68ee5e20c15e",
+      "rawRecordHash": "sha256:d39c14b46bc6d41d1653ec3e1c013688043ae199c1c3a56548befbf16b602dca",
       "rawRecord": {
         "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/266",
         "nonUrlEvidenceId": null,
@@ -12061,8 +12084,8 @@
         ],
         "stableIdCount": 5,
         "stableIds": [
+          "F0172-P01",
           "F0172-P02",
-          "F0172-P03",
           "SPEC-0524",
           "SPEC-0525",
           "U0092"
@@ -24679,19 +24702,6 @@
       ]
     },
     {
-      "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=13",
-      "providerId": "inspected-specimen",
-      "surfaceId": "inspected-specimens",
-      "capabilityEdgeIds": [
-        "inspected-specimen-positive",
-        "obs-cn-inspected-native-rarity-20261007-positive"
-      ],
-      "absenceEdgeIds": [],
-      "dimensions": [
-        "identity"
-      ]
-    },
-    {
       "sourceKey": "https://www.instagram.com/p/DWWTniCFMGW?img_index=17",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
@@ -35469,6 +35479,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -35483,6 +35494,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -36154,6 +36166,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -36168,6 +36181,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -36336,6 +36350,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -37479,6 +37494,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -37493,6 +37509,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -38224,6 +38241,20 @@
       ]
     },
     {
+      "sourceKey": "https://api.tcgdex.net/v2/it/cards/base2-27",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "capabilityEdgeIds": [
+        "tcgdex-west-positive",
+        "tcgdex-asia-thin-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://api.tcgdex.net/v2/it/cards/bw7-109",
       "providerId": "tcgdex",
       "surfaceId": "tcgdex-api",
@@ -38769,6 +38800,20 @@
       ]
     },
     {
+      "sourceKey": "https://api.tcgdex.net/v2/ja/cards/E5-062",
+      "providerId": "tcgdex",
+      "surfaceId": "tcgdex-api",
+      "capabilityEdgeIds": [
+        "tcgdex-west-positive",
+        "tcgdex-asia-thin-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "finish-override"
+      ]
+    },
+    {
       "sourceKey": "https://api.tcgdex.net/v2/ja/cards/M2a-136",
       "providerId": "tcgdex",
       "surfaceId": "tcgdex-api",
@@ -38849,6 +38894,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -38863,6 +38909,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },
@@ -38877,6 +38924,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "finish-override",
         "language"
       ]
     },

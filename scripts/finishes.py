@@ -445,6 +445,42 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         existing["image"] = candidate["image"]
 
 
+EDITION_PAIR = frozenset({"1st Edition", "Unlimited"})
+
+
+def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Fold card-level finish evidence into complete per-edition printings.
+
+    TCGdex flags and similar group-level records say a finish exists for the card, not for one
+    edition. Once both editions of that finish have their own printing, such an editionless
+    record is evidence for each of them rather than a third collectible. A printing backed by a
+    specimen or a conflict is a physical observation of one unknown edition and stays as is.
+    """
+    kept = []
+    for printing in printings:
+        siblings = [
+            other for other in printings
+            if other is not printing
+            and other["finish"] == printing["finish"]
+            and other.get("edition") in EDITION_PAIR
+            and set(other.get("mappedVariants") or []) >= set(printing.get("mappedVariants") or [])
+            and all(other.get(field) == printing.get(field) for field in ("foilPattern", "distribution"))
+        ]
+        if (printing.get("edition") is not None or printing.get("specimenIds")
+                or printing.get("conflictsWith") or printing.get("markings")
+                or {other["edition"] for other in siblings} != EDITION_PAIR):
+            kept.append(printing)
+            continue
+        for other in siblings:
+            seen = {source_signature(source) for source in other["sources"]}
+            other["sources"].extend(
+                source for source in printing["sources"] if source_signature(source) not in seen
+            )
+            if STATUS_RANK[printing["verificationStatus"]] > STATUS_RANK[other["verificationStatus"]]:
+                other["verificationStatus"] = printing["verificationStatus"]
+    return kept
+
+
 def merge_specimen_field_sources(existing, candidate):
     for field, ids in candidate.get("specimenFieldSources", {}).items():
         sources = existing.setdefault("specimenFieldSources", {})
@@ -1433,7 +1469,9 @@ def _build_finish_unit(
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)
-        printings = [] if all_claims_contradicted else deduplicated_printings
+        printings = [] if all_claims_contradicted else absorb_editionless_finish_evidence(
+            deduplicated_printings
+        )
         printings.sort(
             key=lambda item: (
                 FINISHES.index(item["finish"]) if item["finish"] in FINISHES else 99,
