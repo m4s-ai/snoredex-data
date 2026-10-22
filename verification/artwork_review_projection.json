@@ -4,20 +4,20 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-22",
-  "projectionVersion": "a0f2edd1fe05400733e7bd2e2dd4b79d6f691ddc04b2a8080d7bfdea048d44c8",
+  "projectionVersion": "70ea2c7ef3cacc0b485a229398ec81cc53923fbd5a570d5c3b196f86b71cb868",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
   "summary": {
-    "groups": 252,
+    "groups": 248,
     "mappedWorks": 42,
-    "imageGroups": 252,
+    "imageGroups": 248,
     "reviewedAppearances": 0,
     "mappedAppearances": 0,
     "unmappedReleases": 0,
-    "cardReleases": 634,
+    "cardReleases": 629,
     "physicalPrintings": 883,
-    "sourceObservations": 3150
+    "sourceObservations": 3155
   },
   "groups": [
     {
@@ -38465,7 +38465,8 @@
             "U0289"
           ],
           "legacyVariants": [
-            "V1"
+            "V1",
+            "base"
           ],
           "physicalPrintings": [
             {
@@ -38549,7 +38550,7 @@
             "state": "catalogue-derived",
             "cardName": "Snorlax",
             "artist": null,
-            "variant": "V1",
+            "variant": "V1, base",
             "finish": [
               "holo",
               "reverse-holo"
@@ -38572,6 +38573,17 @@
               "originalHash": "db5d50dc5bdb12e1c5448be0ae51a0d54e2eb33dfa87b50ecb4cb99d7ece57eb",
               "previewSrc": "images/previews/CS2aC_086_Snorlax_V1_845033.jpg?v=bb043f6efacf4e4eb50803f9bff3250be61ef78d854b6bdb0f0c53148fb094f7",
               "thumbnailSrc": "images/thumbs/CS2aC_086_Snorlax_V1_845033.jpg?v=3e075a3cad88e87eb7f2f8eca619ecf425429542ebc1ccc8be9f09cf0840a83a"
+            },
+            {
+              "src": "images/s4_84_Snorlax_499775.jpg",
+              "label": "legacy product image",
+              "observationId": "unit:U0289",
+              "contentHash": "e19ce360f01e1914a71721fb5c57f55e5174eb78256eb92454fed28dfc625b79",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e19ce360f01e1914a71721fb5c57f55e5174eb78256eb92454fed28dfc625b79",
+              "previewSrc": "images/previews/s4_84_Snorlax_499775.jpg?v=a5d2d6b950a788736c44c7430c5474235d0bfac23c5e2afd6636283750355019",
+              "thumbnailSrc": "images/thumbs/s4_84_Snorlax_499775.jpg?v=76f7d2ce599c7b63190a369922370c8796d98cd0d591f62943cd2c0b075b9602"
             },
             {
               "src": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
@@ -38676,6 +38688,15 @@
               "evidence": "Simplified Chinese set article; set list row: Snorlax|86, Colorless, Rare",
               "contentHash": "d13243e9987107017fb84bb1256e3c9caf9f850fc42db7a2db16804c9e8ca0fc",
               "image": "images/CS2aC_086_Snorlax_V1_845033.png"
+            },
+            {
+              "observationId": "unit:U0289",
+              "kind": "unit",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
+              "evidence": "Simplified Chinese printing exists under a different set. The Simplified Chinese market receives catch-up sets rather than translations of Japanese main expansions, and this card appears there as Vivid Portrayals - Obsidian (CS2aC) 086, confirmed from the ATCG set list row \"Snorlax|86, Colorless, Rare\". Identity is established by the shared Cardmarket cardKey \"Snorlax-Gormandize-Body-Slam\", which links s4 84, Vivid Voltage 131 and CS2aC 086/142. NOTE: there is no Simplified Chinese edition of the Japanese set itself; Cardmarket files the language against the Japanese product.",
+              "contentHash": "e2039c2f2607c24b7c9b6fee9476f6f6f30d1e7f457aaec2cf6b08f91f7b1d30",
+              "image": "images/s4_84_Snorlax_499775.jpg"
             }
           ]
         }
@@ -38695,66 +38716,6 @@
       ],
       "label": "Snorlax-Gormandize-Body-Slam",
       "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:via-s4:unknown-local-set:via-84:Snorlax-Gormandize-Body-Slam:unknown-local-id",
-          "workId": "WORK:Snorlax-Gormandize-Body-Slam",
-          "cardKey": "Snorlax-Gormandize-Body-Slam",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:e19ce360f01e1914a71721fb",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:via-s4:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
-          "legacyVariants": [
-            "base"
-          ],
-          "physicalPrintings": [],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "Snorlax",
-            "artist": "Atsuko Nishida",
-            "variant": "base",
-            "finish": [
-              "non-holo",
-              "reverse-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "images/s4_84_Snorlax_499775.jpg",
-              "label": "legacy product image",
-              "observationId": "unit:U0289",
-              "contentHash": "e19ce360f01e1914a71721fb5c57f55e5174eb78256eb92454fed28dfc625b79",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "e19ce360f01e1914a71721fb5c57f55e5174eb78256eb92454fed28dfc625b79",
-              "previewSrc": "images/previews/s4_84_Snorlax_499775.jpg?v=a5d2d6b950a788736c44c7430c5474235d0bfac23c5e2afd6636283750355019",
-              "thumbnailSrc": "images/thumbs/s4_84_Snorlax_499775.jpg?v=76f7d2ce599c7b63190a369922370c8796d98cd0d591f62943cd2c0b075b9602"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "unit:U0289",
-              "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Vivid_Portrayals_(ATCG)",
-              "evidence": "Simplified Chinese printing exists under a different set. The Simplified Chinese market receives catch-up sets rather than translations of Japanese main expansions, and this card appears there as Vivid Portrayals - Obsidian (CS2aC) 086, confirmed from the ATCG set list row \"Snorlax|86, Colorless, Rare\". Identity is established by the shared Cardmarket cardKey \"Snorlax-Gormandize-Body-Slam\", which links s4 84, Vivid Voltage 131 and CS2aC 086/142. NOTE: there is no Simplified Chinese edition of the Japanese set itself; Cardmarket files the language against the Japanese product.",
-              "contentHash": "e2039c2f2607c24b7c9b6fee9476f6f6f30d1e7f457aaec2cf6b08f91f7b1d30",
-              "image": "images/s4_84_Snorlax_499775.jpg"
-            }
-          ]
-        },
         {
           "cardReleaseId": "RELEASE:JP:Japanese:s4:84:Snorlax-Gormandize-Body-Slam",
           "workId": "WORK:Snorlax-Gormandize-Body-Slam",
@@ -42550,7 +42511,7 @@
       "label": "Snorlax-Heavy-Impact",
       "members": [
         {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:via-sH:unknown-local-set:via-038:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "reviewedAppearanceId": null,
@@ -42559,23 +42520,66 @@
           "locality": "CN",
           "language": "S-Chinese",
           "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:via-sH:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:CN:S-Chinese:CS2DaC",
+          "localSetCode": "CS2DaC",
+          "localNumber": "038/053",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0639"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:7f03293b4e34bad7185da91a",
+              "semanticPrintingId": "PRINTING:7f03293b4e34bad7185da91a",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0374",
+              "sourcePrintingId": "F0374-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7f03293b4e34bad7185da91a",
+              "specimenIds": [
+                "SPEC-0623"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/N~kAAeSw3DNqeagA/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0623.",
+                  "retrievedAt": "2026-10-07",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Oswaldo KATO",
+            "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -42592,9 +42596,56 @@
               "originalHash": "2b0932810746ba554d46970bda99b559ae94e8fed87f50448c0faed554b99730",
               "previewSrc": "images/previews/sH_038_Snorlax_564222.jpg?v=9f4e04b4c913259651c0a56b27e3bd4071be651b761e5b579e9de6501ad9a80b",
               "thumbnailSrc": "images/thumbs/sH_038_Snorlax_564222.jpg?v=bd3e9eb316fbe6cad81288a71e8f087f5c2d9d87eae6d559c07138853b187233"
+            },
+            {
+              "src": "verification/specimens/SPEC-0623.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0623",
+              "contentHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
+              "previewSrc": "images/previews/SPEC-0623.png?v=2c985bbdcc36045a79bb2275c61350aacf51b4fe800c5c36333c6fefd556132e",
+              "thumbnailSrc": "images/thumbs/SPEC-0623.png?v=9f75fe9cba33720645663323e1ced9b8e456032460a5cb2c5684185a33eb7ef7"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0374-P01:0:1dab8533a108fb1a",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "a25878c6c0544bcb386afc3a254681aeabdf2fd047dad316ef093ec6fafd734d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0374-P01:1:ceaf6008430407cb",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/N~kAAeSw3DNqeagA/s-l1600.webp",
+              "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0623.",
+              "contentHash": "36822792578253d4edfed589a4cfc771f5096a348d7133b847b16e97b979910b",
+              "image": null
+            },
+            {
+              "observationId": "source-first:CN:CS2DaC:038/053:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
+              "evidence": "The Family Pokémon Card Game article positively records the Mainland China release and its closed product card list includes Snorlax 038/053. PokemonLore's Simplified-Chinese CS2DaC set list independently identifies 038/053. This establishes the distinct local counterpart of legacy sH 038; no finish is inferred.",
+              "contentHash": "73d4e9e5f8d728bd8e82e426efeba8fcfd76ba3fa50fa445599ece118fe4c0c2",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0623",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/198560806619",
+              "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted.",
+              "contentHash": "125ca1b3af7dc7c54159f45a6e4c9753776a828a64618ca04d25eff5f72bc47a",
+              "image": "verification/specimens/SPEC-0623.png"
+            },
             {
               "observationId": "unit:U0639",
               "kind": "unit",
@@ -44493,7 +44544,7 @@
       "label": "Snorlax-Heavy-Impact",
       "members": [
         {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:via-sI100:unknown-local-set:via-341:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "reviewedAppearanceId": null,
@@ -44502,21 +44553,56 @@
           "locality": "CN",
           "language": "S-Chinese",
           "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:via-sI100:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:CN:S-Chinese:CS4DaC",
+          "localSetCode": "CS4DaC",
+          "localNumber": "341/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0651"
+          ],
           "legacyVariants": [
             "V1"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:fb9a8bfa3298872b9eb5460a",
+              "semanticPrintingId": "PRINTING:fb9a8bfa3298872b9eb5460a",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0378",
+              "sourcePrintingId": "F0378-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:fb9a8bfa3298872b9eb5460a",
+              "specimenIds": [
+                "SPEC-0155"
+              ],
+              "sources": [
+                {
+                  "url": "https://images.pikaqian.com/cs4dac/fa648ddc-e3fa-40cf-9c5f-446d70f22568.webp",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "Complete listing image of Simplified Chinese Snorlax CS4DaC 341/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact specialist listing identifies this printing as Reverse Holo and the reflective card body is directly visible. Retained as SPEC-0155.",
+                  "retrievedAt": "2026-08-27"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Oswaldo KATO",
+            "artist": null,
             "variant": "V1",
             "finish": [
               "reverse-holo"
@@ -44551,6 +44637,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0378-P01:0:5fb5ae7deb759c89",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://images.pikaqian.com/cs4dac/fa648ddc-e3fa-40cf-9c5f-446d70f22568.webp",
+              "evidence": "Complete listing image of Simplified Chinese Snorlax CS4DaC 341/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact specialist listing identifies this printing as Reverse Holo and the reflective card body is directly visible. Retained as SPEC-0155.",
+              "contentHash": "47da402b97e245fc0349bcf12ce76b70edee12f967570bae6cf366182368d880",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0378-P01:1:704cdb2744edd2ae",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "7004be0c714f6fa2876a7ddd403b7cd8f810c29c809ae44cd4f97e13b53562ae",
+              "image": null
+            },
+            {
+              "observationId": "source-first:CN:CS4DaC:341/414:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+              "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 341/414 Snorlax; SPEC-0155 independently shows the exact printed CS4DaC 341/414 identity and reverse-holo treatment. This establishes the distinct local counterpart of legacy sI100 341.",
+              "contentHash": "97f64b905b28ad4f796aed7ae1a4083fc0636cb477f384b54e01152a828e9aa6",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0155",
               "kind": "specimen",
@@ -45643,214 +45756,6 @@
       ]
     },
     {
-      "groupId": "IMAGE-GROUP:9a70bbd50945320cb06ebe0c",
-      "groupKind": "image-group",
-      "reviewedAppearanceId": null,
-      "imageGroupId": "IMAGE-GROUP:9a70bbd50945320cb06ebe0c",
-      "appearanceIdentityState": "unreviewed-image-group",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:9a70bbd50945320cb06ebe0c",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:CS4DaC",
-          "localSetCode": "CS4DaC",
-          "localNumber": "341/414",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0651"
-          ],
-          "legacyVariants": [],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0155",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:341/414:Snorlax-Heavy-Impact",
-              "finish": "reverse-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "The exact CS4DaC 341/414 image visibly reflects across the card body and the exact specialist listing independently labels this printing Reverse Holo.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0155",
-              "specimenIds": [
-                "SPEC-0155"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "卡比兽",
-            "artist": null,
-            "variant": null,
-            "finish": [
-              "reverse-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "verification/specimens/SPEC-0155.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0155",
-              "contentHash": "9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "9a70bbd50945320cb06ebe0c6ca94fc2825a97497e6158506de5fba58900a27a",
-              "previewSrc": "images/previews/SPEC-0155.png?v=224503893cc6497433b4477c1c4a9f66a815d8d4724033655b670c543c3648a1",
-              "thumbnailSrc": "images/thumbs/SPEC-0155.png?v=abc03874928f4c43d1855b4c0cdb5fe06c1cba2883cc4e3e0d23b1965aa08ba4"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:CN:CS4DaC:341/414:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
-              "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 341/414 Snorlax; SPEC-0155 independently shows the exact printed CS4DaC 341/414 identity and reverse-holo treatment. This establishes the distinct local counterpart of legacy sI100 341.",
-              "contentHash": "97f64b905b28ad4f796aed7ae1a4083fc0636cb477f384b54e01152a828e9aa6",
-              "image": null
-            },
-            {
-              "observationId": "specimen:SPEC-0155",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://pikaqian.com/cards/fa648ddc-e3fa-40cf-9c5f-446d70f22568",
-              "evidence": "Complete listing image of Simplified Chinese Snorlax CS4DaC 341/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact specialist listing identifies this printing as Reverse Holo and the reflective card body is directly visible.",
-              "contentHash": "5a446413ac62df10f519409fb1544dd846c505361163824029b7b887a7e85d18",
-              "image": "verification/specimens/SPEC-0155.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "IMAGE-GROUP:aad67c096a62b548c7821445",
-      "groupKind": "image-group",
-      "reviewedAppearanceId": null,
-      "imageGroupId": "IMAGE-GROUP:aad67c096a62b548c7821445",
-      "appearanceIdentityState": "unreviewed-image-group",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:aad67c096a62b548c7821445",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:CS4DaC",
-          "localSetCode": "CS4DaC",
-          "localNumber": "342/414",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0655"
-          ],
-          "legacyVariants": [],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0156",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "The exact seller listing title identifies the pictured Simplified Chinese CS4DaC 342/414 card as Holo.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0156",
-              "specimenIds": [
-                "SPEC-0156"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "卡比兽",
-            "artist": null,
-            "variant": null,
-            "finish": [
-              "holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "verification/specimens/SPEC-0156.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0156",
-              "contentHash": "aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "aad67c096a62b548c782144553c27ce26d5b8454692a20ec6b113c0087a86b44",
-              "previewSrc": "images/previews/SPEC-0156.png?v=0bd1c34d438c537d1e5e2754352b2c6865921bb015ca992f81074bad97698896",
-              "thumbnailSrc": "images/thumbs/SPEC-0156.png?v=67063848a1c94750432f732348e43f323325ed8d3f927f7d39d10a4fbdce3b17"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:CN:CS4DaC:342/414:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
-              "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 342/414 Snorlax; SPEC-0156 independently shows the exact printed CS4DaC 342/414 identity and the exact seller listing identifies it as Holo. This establishes the distinct local counterpart of legacy sI100 342.",
-              "contentHash": "7dc7edeb892ef54746f911d890aed63f58786460f3e852cdb9d803bfe942cdd0",
-              "image": null
-            },
-            {
-              "observationId": "specimen:SPEC-0156",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.ebay.com/itm/356156650452",
-              "evidence": "Complete seller photograph of Simplified Chinese Snorlax CS4DaC 342/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact listing title identifies the pictured printing as Holo.",
-              "contentHash": "f7bec3f87eaac9e04e23eb7789a12e759359de7976d9def26733d967ae00b8c4",
-              "image": "verification/specimens/SPEC-0156.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
       "groupId": "IMAGE-GROUP:c38ee6e31057295683f40352",
       "groupKind": "image-group",
       "reviewedAppearanceId": null,
@@ -45865,7 +45770,7 @@
       "label": "Snorlax-Heavy-Impact",
       "members": [
         {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:via-sI100:unknown-local-set:via-342:Snorlax-Heavy-Impact:unknown-local-id",
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
           "workId": "WORK:Snorlax-Heavy-Impact",
           "cardKey": "Snorlax-Heavy-Impact",
           "reviewedAppearanceId": null,
@@ -45874,24 +45779,54 @@
           "locality": "CN",
           "language": "S-Chinese",
           "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:via-sI100:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:CN:S-Chinese:CS4DaC",
+          "localSetCode": "CS4DaC",
+          "localNumber": "342/414",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0655"
+          ],
           "legacyVariants": [
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:12fd40d737e5bfbfe9fc9168",
+              "semanticPrintingId": "PRINTING:12fd40d737e5bfbfe9fc9168",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS4DaC:342/414:Snorlax-Heavy-Impact",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0382",
+              "sourcePrintingId": "F0382-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:12fd40d737e5bfbfe9fc9168",
+              "specimenIds": [
+                "SPEC-0156"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/VSAAAOSwV6pnD7GI/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Simplified Chinese Snorlax CS4DaC 342/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact listing title identifies the pictured printing as Holo. Retained as SPEC-0156.",
+                  "retrievedAt": "2026-08-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Asako Ito",
+            "artist": null,
             "variant": "V2",
             "finish": [
-              "reverse-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -45923,6 +45858,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0382-P01:0:72841bf49cbb2b55",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/VSAAAOSwV6pnD7GI/s-l1600.webp",
+              "evidence": "Complete seller photograph of Simplified Chinese Snorlax CS4DaC 342/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact listing title identifies the pictured printing as Holo. Retained as SPEC-0156.",
+              "contentHash": "5121dc44ac921414e44abd38a4478d94aa90049ce5abd43c1fd70d83ed733e71",
+              "image": null
+            },
+            {
+              "observationId": "source-first:CN:CS4DaC:342/414:base",
+              "kind": "source-first",
+              "provider": "bulbapedia",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Start_Deck_100_(TCG)",
+              "evidence": "The Start Deck 100 list identifies the Simplified-Chinese 342/414 Snorlax; SPEC-0156 independently shows the exact printed CS4DaC 342/414 identity and the exact seller listing identifies it as Holo. This establishes the distinct local counterpart of legacy sI100 342.",
+              "contentHash": "7dc7edeb892ef54746f911d890aed63f58786460f3e852cdb9d803bfe942cdd0",
+              "image": null
+            },
             {
               "observationId": "specimen:SPEC-0156",
               "kind": "specimen",
@@ -46452,110 +46405,6 @@
               "evidence": "Simplified Chinese set article; deck list row: Snorlax|97, Colorless (Cardmarket \"Brave Stars\" = Bulbapedia \"Gallant Galaxy\"). CARD LIST 2026-08-10: the cited page carries a closed card list containing this card — \"{{Setlist/entry|097/153|E|{{TCG ID|Gallant Galaxy V Starter Deck|Snorlax|97}}|Colorless}}\". The cited article is this edition's own article, so its card list is a card list in this language; the row reaches the card directly, with no inference about the set in between. Read from the article already cited; no new source, no change of provider, and the verdict is unchanged.",
               "contentHash": "3ae2360038d00d6a08d564979b62f39f7b4662b2863146c3e7f06aea6cec7589",
               "image": "images/CS5DC_097_Snorlax_V1_882375.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
-      "groupKind": "image-group",
-      "reviewedAppearanceId": null,
-      "imageGroupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
-      "appearanceIdentityState": "unreviewed-image-group",
-      "workIds": [
-        "WORK:Snorlax-Heavy-Impact"
-      ],
-      "cardKeys": [
-        "Snorlax-Heavy-Impact"
-      ],
-      "label": "Snorlax-Heavy-Impact",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
-          "workId": "WORK:Snorlax-Heavy-Impact",
-          "cardKey": "Snorlax-Heavy-Impact",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:f83b57d9da61d8bea53409c6",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:CS2DaC",
-          "localSetCode": "CS2DaC",
-          "localNumber": "038/053",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0639"
-          ],
-          "legacyVariants": [],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0623",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:CS2DaC:038/053:Snorlax-Heavy-Impact",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for the presented SPEC-0623 Simplified Chinese CS2DaC038/053 photograph. The seller photograph supports identity; absence of glare does not independently carry the finish claim. No inventory completeness asserted.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0623",
-              "specimenIds": [
-                "SPEC-0623"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "卡比兽",
-            "artist": null,
-            "variant": null,
-            "finish": [
-              "non-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "verification/specimens/SPEC-0623.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0623",
-              "contentHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "f83b57d9da61d8bea53409c6fa3486b6f150b26ebd841833e5628aea2c23f2da",
-              "previewSrc": "images/previews/SPEC-0623.png?v=2c985bbdcc36045a79bb2275c61350aacf51b4fe800c5c36333c6fefd556132e",
-              "thumbnailSrc": "images/thumbs/SPEC-0623.png?v=9f75fe9cba33720645663323e1ced9b8e456032460a5cb2c5684185a33eb7ef7"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:CN:CS2DaC:038/053:base",
-              "kind": "source-first",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Sword_%26_Shield_Family_Pok%C3%A9mon_Card_Game_(TCG)",
-              "evidence": "The Family Pokémon Card Game article positively records the Mainland China release and its closed product card list includes Snorlax 038/053. PokemonLore's Simplified-Chinese CS2DaC set list independently identifies 038/053. This establishes the distinct local counterpart of legacy sH 038; no finish is inferred.",
-              "contentHash": "73d4e9e5f8d728bd8e82e426efeba8fcfd76ba3fa50fa445599ece118fe4c0c2",
-              "image": null
-            },
-            {
-              "observationId": "specimen:SPEC-0623",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.ebay.com/itm/198560806619",
-              "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted.",
-              "contentHash": "125ca1b3af7dc7c54159f45a6e4c9753776a828a64618ca04d25eff5f72bc47a",
-              "image": "verification/specimens/SPEC-0623.png"
             }
           ]
         }
@@ -54862,7 +54711,7 @@
       "label": "Snorlax-Lazy-Press",
       "members": [
         {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:via-svIba:unknown-local-set:via-046:Snorlax-Lazy-Press:unknown-local-id",
+          "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
           "workId": "WORK:Snorlax-Lazy-Press",
           "cardKey": "Snorlax-Lazy-Press",
           "reviewedAppearanceId": null,
@@ -54871,23 +54720,66 @@
           "locality": "CN",
           "language": "S-Chinese",
           "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:via-svIba:unknown-local-set",
-          "localSetCode": null,
-          "localNumber": null,
-          "localIdentifierKnown": false,
-          "state": "needs-local-identifier",
-          "workMappingState": "mapped",
-          "legacyCounterpartUnitIds": [],
+          "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
+          "localSetCode": "CSVSC",
+          "localNumber": "046/066",
+          "localIdentifierKnown": true,
+          "state": "identified",
+          "workMappingState": "mapped-by-explicit-equivalence",
+          "legacyCounterpartUnitIds": [
+            "U0646"
+          ],
           "legacyVariants": [
             "base"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:40366fe549650955fc974d2d",
+              "semanticPrintingId": "PRINTING:40366fe549650955fc974d2d",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "unknown",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0498",
+              "sourcePrintingId": "F0498-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:40366fe549650955fc974d2d",
+              "specimenIds": [
+                "SPEC-0631"
+              ],
+              "sources": [
+                {
+                  "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown. Retained as SPEC-0631.",
+                  "retrievedAt": "2026-10-08",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax",
-            "artist": "Po-Suzuki",
+            "artist": null,
             "variant": "base",
-            "finish": [],
+            "finish": [
+              "non-holo"
+            ],
             "foilPattern": [],
             "markings": [],
             "confidence": null,
@@ -54904,9 +54796,64 @@
               "originalHash": "192b23d48e87938111c288ee93273337f89c12741346443ffd8bcaea695c3797",
               "previewSrc": "images/previews/svIba_046_Snorlax_761066.jpg?v=e03987a8497fdcb37025e3d9533d67df962095da9a1cdf99c28142b26e6909be",
               "thumbnailSrc": "images/thumbs/svIba_046_Snorlax_761066.jpg?v=615d4cda3529af62d3beab62a2671cf02ca9de365ba5590a9bda3fa79c7f91f6"
+            },
+            {
+              "src": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "label": "publisher card image",
+              "observationId": "source-first:CN:CSVSC:046/066:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
+            },
+            {
+              "src": "verification/specimens/SPEC-0631.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0631",
+              "contentHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
+              "previewSrc": "images/previews/SPEC-0631.png?v=4065d642f1a46489ce9e3d2bccca33e55a8a69b3a47dd1a0efb08abdaaa38e60",
+              "thumbnailSrc": "images/thumbs/SPEC-0631.png?v=2f49eb6e0e9fb7808c9767c32e48f666d7f2d65922a5658ac3f4fa0337fc30a4"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0498-P01:0:7a837fbde961bf14",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown. Retained as SPEC-0631.",
+              "contentHash": "3a0fa6def821a3756010a7a7f7d31d32bdd7a04e70cdb143d6338fde70525d20",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0498-P01:1:ec7f62f948905524",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties.",
+              "contentHash": "de023fff341fa79e213752d869214aa74017269713cb3f3ec0695fad1fd399b4",
+              "image": null
+            },
+            {
+              "observationId": "source-first:CN:CSVSC:046/066:base",
+              "kind": "source-first",
+              "provider": "inspected-specimen",
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
+              "contentHash": "0586ce0ed319decc80b884a0b25fe680b3d28b10c938fc590b8b8e4d72a913a7",
+              "image": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+            },
+            {
+              "observationId": "specimen:SPEC-0631",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown.",
+              "contentHash": "19020383239f0183c0d4f048c8747e96dd2e80556c58c125c63d9dc94a262df4",
+              "image": "verification/specimens/SPEC-0631.png"
+            },
             {
               "observationId": "unit:U0646",
               "kind": "unit",
@@ -55713,118 +55660,6 @@
               "evidence": "official tw entry, expansion=MC collectorNumber=568",
               "contentHash": "fbb64131c5a634da5adc57178f873af0673b2ef470f744023b9ae02e8e814087",
               "image": "images/mC_568_Snorlax_863870.png"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "groupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
-      "groupKind": "image-group",
-      "reviewedAppearanceId": null,
-      "imageGroupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
-      "appearanceIdentityState": "unreviewed-image-group",
-      "workIds": [
-        "WORK:Snorlax-Lazy-Press"
-      ],
-      "cardKeys": [
-        "Snorlax-Lazy-Press"
-      ],
-      "label": "Snorlax-Lazy-Press",
-      "members": [
-        {
-          "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
-          "workId": "WORK:Snorlax-Lazy-Press",
-          "cardKey": "Snorlax-Lazy-Press",
-          "reviewedAppearanceId": null,
-          "imageGroupId": "IMAGE-GROUP:9838c5e667984f94c4c6e8f5",
-          "appearanceIdentityState": "unreviewed-image-group",
-          "locality": "CN",
-          "language": "S-Chinese",
-          "script": "Hans",
-          "setEditionId": "EDITION:CN:S-Chinese:CSVSC",
-          "localSetCode": "CSVSC",
-          "localNumber": "046/066",
-          "localIdentifierKnown": true,
-          "state": "identified",
-          "workMappingState": "mapped-by-explicit-equivalence",
-          "legacyCounterpartUnitIds": [
-            "U0646"
-          ],
-          "legacyVariants": [],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0631",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0631",
-              "specimenIds": [
-                "SPEC-0631"
-              ]
-            }
-          ],
-          "detection": {
-            "state": "catalogue-derived",
-            "cardName": "卡比兽",
-            "artist": null,
-            "variant": null,
-            "finish": [
-              "non-holo"
-            ],
-            "foilPattern": [],
-            "markings": [],
-            "confidence": null,
-            "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
-          },
-          "images": [
-            {
-              "src": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
-              "label": "publisher card image",
-              "observationId": "source-first:CN:CSVSC:046/066:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            },
-            {
-              "src": "verification/specimens/SPEC-0631.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0631",
-              "contentHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "9838c5e667984f94c4c6e8f5cd861a8d3d6f2470d2cf2fa51632de7a17baa872",
-              "previewSrc": "images/previews/SPEC-0631.png?v=4065d642f1a46489ce9e3d2bccca33e55a8a69b3a47dd1a0efb08abdaaa38e60",
-              "thumbnailSrc": "images/thumbs/SPEC-0631.png?v=2f49eb6e0e9fb7808c9767c32e48f666d7f2d65922a5658ac3f4fa0337fc30a4"
-            }
-          ],
-          "observations": [
-            {
-              "observationId": "source-first:CN:CSVSC:046/066:base",
-              "kind": "source-first",
-              "provider": "inspected-specimen",
-              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
-              "evidence": "52poke's exact Simplified-Chinese SVI card row names Battle Academy 046/066, Po-Suzuki and 2026-01-16. Its linked product article exposes shortcut CSVS and includes Snorlax in the Lucario deck. SPEC-0631 positively shows printed CSVSC 046/066, Simplified Chinese, Po-Suzuki and Lucario print-identity mark. Pokemon China confirms the product launch date. The owner separately confirms Non-Holo.",
-              "contentHash": "0586ce0ed319decc80b884a0b25fe680b3d28b10c938fc590b8b8e4d72a913a7",
-              "image": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
-            },
-            {
-              "observationId": "specimen:SPEC-0631",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
-              "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown.",
-              "contentHash": "19020383239f0183c0d4f048c8747e96dd2e80556c58c125c63d9dc94a262df4",
-              "image": "verification/specimens/SPEC-0631.png"
             }
           ]
         }

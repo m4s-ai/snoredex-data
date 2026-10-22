@@ -855,8 +855,10 @@ def _finish_product_variants(cards):
 def _add_release_code_aliases(specimens_by_group, specimen, specimen_key,
                               release_code_aliases, valid_product_variants):
     for override in release_code_aliases.get((specimen_key[0], specimen_key[1]), []):
+        # A bridged release code has its own variant vocabulary; the override names the
+        # legacy product's V-token when the two differ.
         product_key = (str(override["setCode"]), specimen_key[1],
-                       str(specimen.get("variant") or "base"))
+                       str(override.get("variant") or specimen.get("variant") or "base"))
         if product_key not in valid_product_variants:
             continue
         if override.get("languages") and specimen_key[2] not in override["languages"]:

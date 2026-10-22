@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 531,
-      "withOnlyMarketplaceClaim": 16,
-      "pendingFinish": 13,
+      "withConfirmedFinish": 535,
+      "withOnlyMarketplaceClaim": 14,
+      "pendingFinish": 11,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 9,
-      "withNonHolo": 325,
-      "withHolo": 253,
+      "withNonHolo": 327,
+      "withHolo": 254,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 39,
-      "withAnyUnresolvedDetail": 118,
+      "withUnresolvedProductMapping": 37,
+      "withAnyUnresolvedDetail": 116,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -33649,7 +33649,7 @@
       "finishUnitId": "F0374",
       "cardName": "Snorlax",
       "setCode": "sH",
-      "releaseSetCode": null,
+      "releaseSetCode": "CS2DaC",
       "setName": "Sword & Shield Family Pokémon Card Game",
       "number": "038",
       "language": "S-Chinese",
@@ -33668,23 +33668,58 @@
           "image": "images/sH_038_Snorlax_564222.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/N~kAAeSw3DNqeagA/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Original physical Simplified-Chinese 卡比兽 card visibly CS2DaC E038/053, Oswaldo KATO, with yellow Pikachu silhouette. Exact identity and image only; no finish inferred from lack of glare. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0623.",
+              "retrievedAt": "2026-10-07",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0623"
+          ],
+          "image": "verification/specimens/SPEC-0623.png",
+          "printingId": "F0374-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0375",
@@ -33911,7 +33946,7 @@
       "finishUnitId": "F0378",
       "cardName": "Snorlax",
       "setCode": "sI100",
-      "releaseSetCode": null,
+      "releaseSetCode": "CS4DaC",
       "setName": "Start Deck 100",
       "number": "341",
       "language": "S-Chinese",
@@ -33936,11 +33971,11 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
@@ -33954,14 +33989,24 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100/Snorlax-V1-sI100341",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://images.pikaqian.com/cs4dac/fa648ddc-e3fa-40cf-9c5f-446d70f22568.webp",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Complete listing image of Simplified Chinese Snorlax CS4DaC 341/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact specialist listing identifies this printing as Reverse Holo and the reflective card body is directly visible. Retained as SPEC-0155.",
+              "retrievedAt": "2026-08-27"
             }
           ],
+          "specimenIds": [
+            "SPEC-0155"
+          ],
+          "image": "verification/specimens/SPEC-0155.png",
           "printingId": "F0378-P01"
         }
       ],
@@ -34194,7 +34239,7 @@
       "finishUnitId": "F0382",
       "cardName": "Snorlax",
       "setCode": "sI100",
-      "releaseSetCode": null,
+      "releaseSetCode": "CS4DaC",
       "setName": "Start Deck 100",
       "number": "342",
       "language": "S-Chinese",
@@ -34214,20 +34259,43 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/VSAAAOSwV6pnD7GI/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete seller photograph of Simplified Chinese Snorlax CS4DaC 342/414. The Simplified Chinese text, printed CS4DaC set code and collector number establish the exact Start Deck 100 card; the exact listing title identifies the pictured printing as Holo. Retained as SPEC-0156.",
+              "retrievedAt": "2026-08-27"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0156"
+          ],
+          "image": "verification/specimens/SPEC-0156.png",
+          "printingId": "F0382-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -34245,7 +34313,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0382-P01"
+          "printingId": "F0382-P02"
         }
       ],
       "unresolved": [
@@ -42840,7 +42908,7 @@
       "finishUnitId": "F0498",
       "cardName": "Snorlax",
       "setCode": "svIba",
-      "releaseSetCode": null,
+      "releaseSetCode": "CSVSC",
       "setName": "Scarlet & Violet Battle Academy",
       "number": "046",
       "language": "S-Chinese",
@@ -42859,23 +42927,58 @@
           "image": "images/svIba_046_Snorlax_761066.jpg"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "non-holo"
+      ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "unknown",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp",
+              "sourceType": "Inspected reference photograph; original provider unspecified",
+              "evidence": "Simplified Chinese Snorlax HP160, Lazy Press 120, Illus. Po-Suzuki, printed CSVSC H 046/066 and Lucario print-identity mark. No printed rarity symbol visible. The database image establishes face identity; Non-Holo rests on the separate collection owner confirmation, not lack of glare. Original physical holder/capture context unknown. Retained as SPEC-0631.",
+              "retrievedAt": "2026-10-08",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-08",
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0631"
+          ],
+          "image": "verification/specimens/SPEC-0631.png",
+          "printingId": "F0498-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0499",
