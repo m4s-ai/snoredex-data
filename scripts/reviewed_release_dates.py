@@ -57,13 +57,14 @@ def date_source(row):
             "scope": row["basis"]}
 
 
-def apply_item_date(item, reviewed_dates):
+def apply_item_date(item, reviewed_dates, link=str):
+    """Overlay one reviewed date; `link` maps each source URL to the emitted link form (#429)."""
     row = reviewed_dates.get(item["itemId"])
     if row:
         guard_item(row, item)
         item.update({key: row[key] for key in DATE_FIELDS})
         item["releaseSortKey"] = row["releaseDate"] + "|" + item["releaseSortKey"].split("|", 1)[1]
-        links = sorted(set(item["sourceLinks"]) | {source["url"] for source in row["sources"]})
+        links = sorted(set(item["sourceLinks"]) | {link(source["url"]) for source in row["sources"]})
         item["sourceLinks"] = item["evidenceLinks"] = links
     return item
 

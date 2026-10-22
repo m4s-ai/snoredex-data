@@ -61,10 +61,31 @@ def reviewed_release_date_regressions() -> None:
         assert site.catalogue_date_source(item, {}, {}) == dates.date_source(row)
         for source in row["sources"]:
             assert (ROOT / source["evidencePath"]).is_file()
-            assert source["url"] in item["sourceLinks"]
+            assert collector.schema_uri(source["url"]) in item["sourceLinks"]
         for predecessor_id in row["legacyChecklistIds"]:
             assert {key: legacy[predecessor_id][key] for key in dates.DATE_FIELDS} == {key: row[key] for key in dates.DATE_FIELDS}
             assert legacy[predecessor_id]["releaseDateSource"] == dates.date_source(row)
+    # #429: a reviewed date sourced from a Unicode page emits an RFC 3986 link and keeps the
+    # stored observation URL as the source identity.
+    sample_id, sample_row = next(iter(reviewed.items()))
+    iri = "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+    unicode_row = copy.deepcopy(sample_row)
+    unicode_row["sources"][0]["url"] = iri
+    overlaid = dates.apply_item_date(
+        copy.deepcopy(base_items[sample_id]), {sample_id: unicode_row}, link=collector.schema_uri
+    )
+    emitted = [value for value in overlaid["sourceLinks"] if unquote(value) == iri]
+    assert len(emitted) == 1 and collector.RFC3986_URI.match(emitted[0]), overlaid["sourceLinks"]
+    assert overlaid["evidenceLinks"] == overlaid["sourceLinks"]
+    assert unicode_row["sources"][0]["url"] == iri
+    broken = copy.deepcopy(catalogue)
+    broken_items = {row["itemId"]: row for row in broken["items"]}
+    broken_items[sample_id].update(
+        dates.apply_item_date(copy.deepcopy(base_items[sample_id]), {sample_id: unicode_row})
+    )
+    broken["meta"]["catalogueFingerprint"] = collector.semantic_fingerprint(broken)
+    assert any("RFC 3986" in error for error in collector.catalogue_uri_errors(broken)), \
+        "an unencoded reviewed source link must still fail the producer gate"
     # The new registrations grant date metadata only, even on an official host.
     calls = []
     registry_module.record_reviewed_dates(document, lambda *args, **kwargs: calls.append((args, kwargs)), {})

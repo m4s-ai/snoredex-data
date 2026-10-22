@@ -1500,7 +1500,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "correctionLink": "",
         }
         item["correctionLink"] = correction_link(item)
-        return apply_item_date(item, reviewed_dates)
+        return apply_item_date(item, reviewed_dates, link=schema_uri)
 
     items: list[dict[str, Any]] = []
     for physical in physicals.values():
