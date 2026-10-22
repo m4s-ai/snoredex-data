@@ -379,6 +379,36 @@ def apply_reviewed_dates(overrides: dict, catalogue: dict, report: dict) -> None
                                       "confidence": finding["confidence"]})
 
 
+# Owner decision 2026-10-22: a DP-era Japanese card without a printed set number takes the DP
+# Battle Pokédex identifier the official database lists as its collector number.
+APPROVED_IDENTIFIER_NUMBERS = {"DPBP#174"}
+
+
+def apply_collector_numbers(graph: dict, catalogue: dict, report: dict) -> None:
+    items = {row["itemId"]: row for row in catalogue["items"]}
+    releases = {row["entityId"]: row["payload"] for row in graph["entities"] if row["entityType"] == "card-release"}
+    for stream, finding in findings("collectorNumber", ("numbers-images",)):
+        if finding["value"] not in APPROVED_IDENTIFIER_NUMBERS:
+            continue
+        for release_id in sorted({items[t]["cardReleaseId"] for t in finding["targetIds"] if t in items}):
+            release = releases[release_id]
+            # localNumber stays empty: it is the finish-unit join key for an unnumbered card.
+            if release.get("localNumber") not in ("", None):
+                raise ValueError(f"release already has a printed local number: {release_id}")
+            if (release.get("numberingBasis") or {}).get("collectorNumber") == finding["value"]:
+                continue
+            release["numberingBasis"] = {
+                "kind": "dp-battle-pokedex-identifier",
+                "collectorNumber": finding["value"],
+                "note": "No set collector number is printed; the official database lists this "
+                        "DP Battle Pokédex identifier, used as the collector number by owner decision "
+                        "of 2026-10-22.",
+                **provenance(stream, finding),
+            }
+            report["applied"].append({"target": release_id, "field": "collectorNumber",
+                                      "value": finding["value"], "confidence": finding["confidence"]})
+
+
 VIVID_SURFACE = "tpci-vivid-voltage-build-battle-dates"
 VIVID_LANGUAGES = {"/fr/": "French", "/de/": "German", "/it/": "Italian", "/es/": "Spanish"}
 VIVID_IDENTIFIERS = {
@@ -560,6 +590,7 @@ def main(argv: list[str] | None = None) -> int:
                        read("verification/units.json"), report)
     apply_reviewed_dates(documents["overrides"], read("collector_catalogue.json"), report)
     register_vivid_voltage_surface(documents["capabilities"])
+    apply_collector_numbers(documents["graph"], read("collector_catalogue.json"), report)
     paths["names"] = "verification/local_card_names.json"
     names_path = ROOT / paths["names"]
     before["names"] = names_path.read_text(encoding="utf-8") if names_path.exists() else ""

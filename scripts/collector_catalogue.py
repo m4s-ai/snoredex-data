@@ -1337,7 +1337,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             (source_first_row or {}).get("name"),
         )
         local_set_name = next(iter(local_set.get("observedNames") or []), None)
-        number, denominator = split_collector_number(release.get("localNumber"))
+        number, denominator = split_collector_number(
+            release.get("localNumber") or (release.get("numberingBasis") or {}).get("collectorNumber")
+        )
         event = event_by_edition.get(release["setEditionId"], {})
         return {
             "release": release,

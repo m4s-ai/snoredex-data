@@ -379,7 +379,20 @@ def local_card_name_regressions() -> None:
                 or item["cardName"] not in names["meta"]["derivedPatternCardNames"], item["itemId"]
 
 
+def numbering_basis_regressions() -> None:
+    # Owner decision 2026-10-22: an unnumbered DP1 card shows its DP Battle Pokédex identifier as
+    # collector number, while the empty localNumber stays the finish-unit join key.
+    graph = read("verification/authoritative_graph.json")
+    release = next(row for row in collector.entity_payloads(graph, "card-release")
+                   if row["cardReleaseId"] == "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up")
+    assert release["localNumber"] == "" and release["numberingBasis"]["collectorNumber"] == "DPBP#174"
+    items = [row for row in read("collector_catalogue.json")["items"] if row["cardReleaseId"] == release["cardReleaseId"]]
+    assert items and all((row["collectorNumber"], row["collectorNumberDenominator"]) == ("DPBP#174", None)
+                         for row in items)
+
+
 def main() -> None:
+    numbering_basis_regressions()
     local_card_name_regressions()
     reviewed_release_date_regressions()
     unicode_source_uri_regressions()
