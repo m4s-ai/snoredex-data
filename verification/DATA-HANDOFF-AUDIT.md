@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-10-22** · SQLite schema: **1.7.0** · source fingerprint:
-`7b84e45863c88dc8…`
+`7576a3ce26b0b4f5…`
 
 ## Outcome
 
@@ -25,7 +25,7 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Current-known physical checklist | 905 (858 documented · 47 unresolved placeholders) |
 | Collector compatibility projection | 758 current-known · 100 finish candidates · 47 research placeholders (147 research rows) |
 | Release rows without row-level source | 140 / 203 |
-| Products without established artist | 29 |
+| Products without established artist | 16 |
 | Opaque V-token products without a physical variant name | 58 |
 | Authoritative graph entities / typed edges | 8892 / 13040 |
 | Graph migration inputs with dispositions | 3202 (658 raw set records) |

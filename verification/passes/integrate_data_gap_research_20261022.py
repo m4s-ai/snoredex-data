@@ -334,12 +334,12 @@ def apply_illustrators(graph, prints, cards, checklist, catalogue, units, report
                                           "confidence": finding["confidence"]})
 
 
-# The SWSH068 dates name the Build & Battle box; the owner still confirms that these four items are
-# that promo and not the separate Cosmos-holo store giveaway.
-HELD_DATE_ITEMS = {
-    "item-46088019-c3b9-55d5-a41a-8089d110da0b", "item-b119074a-c89f-5a60-a63b-f2bcdb419712",
-    "item-5268bc9b-6a60-56d7-946b-e05018f43f1d", "item-939a0c46-ce08-5aa9-b77a-030f76fac62d",
-}
+# Owner decision 2026-10-22: SWSH068 is the Vivid Voltage prerelease promo sold in the Build &
+# Battle Box, which the official press releases date 2020-10-31. These four items are its ordinary
+# unmarked print. The gold "Staff" stamp is a variant of the same prerelease promo distributed in
+# the Prerelease Program, and the Cosmos-holo store giveaway is a separate printing; neither is
+# dated here.
+HELD_DATE_ITEMS: set[str] = set()
 
 
 def apply_reviewed_dates(overrides: dict, catalogue: dict, report: dict) -> None:
