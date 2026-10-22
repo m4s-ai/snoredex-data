@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import importlib.util
+import io
 import json
 import sys
 import tempfile
@@ -177,6 +178,29 @@ def main() -> None:
                 sys.argv = original_arguments
                 verifier.VERIFICATION = original_verification
                 verifier.FIXTURE = original_fixture
+
+        # A price gap must never overwrite the fixture's positive rows through --record.
+        live_payloads = {
+            "https://example.test/identity": {"results": identity["results"]},
+            "https://example.test/prices": {"results": []},
+        }
+
+        def gap_only(request, **_kwargs):
+            return io.BytesIO(json.dumps(live_payloads[request.full_url]).encode("utf-8"))
+
+        recorded_fixture = fixture.read_bytes()
+        verifier.VERIFICATION = verification
+        verifier.FIXTURE = fixture
+        verifier.urllib.request.urlopen = gap_only
+        try:
+            sys.argv = ["verify_finish_sources.py", "--record"]
+            assert verifier.main() == 2
+        finally:
+            sys.argv = original_arguments
+            verifier.urllib.request.urlopen = original_urlopen
+            verifier.VERIFICATION = original_verification
+            verifier.FIXTURE = original_fixture
+        assert fixture.read_bytes() == recorded_fixture
 
     original_arguments = sys.argv
     try:

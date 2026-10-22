@@ -16,7 +16,8 @@ means the claim is wrong and someone must look, an unreachable endpoint means tr
 A product that still exists but has no current price row at all is reported as `[NODATA]` and
 does not fail: the price export only lists products with current market data, so its silence is a
 gap, never a contradiction of the retained observation (AGENTS rule 3). A missing product, or a
-price row present without the expected subtype, still fails.
+price row present without the expected subtype, still fails. `--record` refuses (exit 2) while any
+product has no price row, so a gap can never overwrite the fixture's positive rows.
 
 The fixture exists so the *logic* can be proved when TCGCSV is down, slow, or drifting. It keeps
 only the rows these assertions look up, projected to the two fields they read, so it is a
@@ -88,6 +89,34 @@ def product_subtypes(prices: list[dict], product_id: int) -> list[str]:
     return actual
 
 
+def blocking_exit(failures: list[str], no_price_data: list[str],
+                  network_failures: list[str], recording: bool) -> int | None:
+    """Report the outcome and return the exit code that stops the run, or None to continue."""
+    for notice in no_price_data:
+        print(f"[NODATA] {notice}")
+
+    if failures:
+        for failure in failures:
+            print(f"[FAIL] {failure}")
+        print(f"Finish-source DATA MISMATCH for {len(failures)} assertion(s).", file=sys.stderr)
+        return 1
+
+    if network_failures:
+        for failure in network_failures:
+            print(f"[RETRY] {failure}")
+        print(f"Finish-source verification could not reach {len(network_failures)} "
+              "endpoint(s); this is a transient network failure, not a data mismatch.",
+              file=sys.stderr)
+        return 2
+
+    if recording and no_price_data:
+        # Recording now would replace the fixture's last positive rows with the export's gap.
+        print("Refusing to record the fixture while a product has no current price row; "
+              "retry after the next TCGCSV update.", file=sys.stderr)
+        return 2
+    return None
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -152,7 +181,8 @@ def main() -> int:
                 # The product still exists but has no current price row at all. That is the
                 # export's silence, not a disagreement: the retained observation stands (rule 3).
                 no_price_data.append(f"{name} product {product_id} ({product.get('name')}) "
-                                     f"has no current price row; expected {', '.join(expected_subtypes)}")
+                                     "has no current price row; expected "
+                                     f"{', '.join(expected_subtypes)}")
                 continue
             missing = [subtype for subtype in expected_subtypes if subtype not in actual]
             if missing:
@@ -162,22 +192,9 @@ def main() -> int:
 
             print(f"[OK  ] {name} product {product_id}: {' + '.join(expected_subtypes)}")
 
-    for notice in no_price_data:
-        print(f"[NODATA] {notice}")
-
-    if failures:
-        for failure in failures:
-            print(f"[FAIL] {failure}")
-        print(f"Finish-source DATA MISMATCH for {len(failures)} assertion(s).", file=sys.stderr)
-        return 1
-
-    if responses.network_failures:
-        for failure in responses.network_failures:
-            print(f"[RETRY] {failure}")
-        print(f"Finish-source verification could not reach {len(responses.network_failures)} "
-              "endpoint(s); this is a transient network failure, not a data mismatch.",
-              file=sys.stderr)
-        return 2
+    stop = blocking_exit(failures, no_price_data, responses.network_failures, args.record)
+    if stop is not None:
+        return stop
 
     if args.record:
         recorded = {
