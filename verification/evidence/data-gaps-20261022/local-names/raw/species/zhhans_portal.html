@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-cmn-Hans-CN">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+    <script>
+      window.POKEDEX = { env: 'production', isTest: false, region: 'cn', isMigrate2025: false };
+    </script>
+    <script>
+      (function () {
+        var blockedHosts = { "www.pokemon.cn": 1 };
+        function isBlocked(raw) {
+          try {
+            var u = new URL(String(raw || ""), window.location.href);
+            return !!blockedHosts[u.host];
+          } catch {
+            return false;
+          }
+        }
+        function safeNoopResponse() {
+          try {
+            return Promise.resolve(new Response("", { status: 204 }));
+          } catch {
+            return Promise.resolve();
+          }
+        }
+        try {
+          var origFetch = window.fetch;
+          if (origFetch) {
+            window.fetch = function (input, init) {
+              try {
+                var raw = typeof input === "string" ? input : input && input.url ? input.url : "";
+                if (isBlocked(raw)) return safeNoopResponse();
+              } catch {}
+              return origFetch.apply(this, arguments);
+            };
+          }
+        } catch {}
+        try {
+          var origOpen = XMLHttpRequest.prototype.open;
+          XMLHttpRequest.prototype.open = function (method, url) {
+            try {
+              if (isBlocked(url)) return;
+            } catch {}
+            return origOpen.apply(this, arguments);
+          };
+        } catch {}
+        try {
+          var origAssign = window.location.assign;
+          window.location.assign = function (url) {
+            try {
+              if (isBlocked(url)) return;
+            } catch {}
+            return origAssign.call(window.location, url);
+          };
+        } catch {}
+        try {
+          var origReplace = window.location.replace;
+          window.location.replace = function (url) {
+            try {
+              if (isBlocked(url)) return;
+            } catch {}
+            return origReplace.call(window.location, url);
+          };
+        } catch {}
+        try {
+          var origOpenWin = window.open;
+          window.open = function (url) {
+            try {
+              if (isBlocked(url)) return null;
+            } catch {}
+            return origOpenWin.apply(this, arguments);
+          };
+        } catch {}
+        function patchAttr(proto, attr) {
+          try {
+            var origSet = proto.setAttribute;
+            proto.setAttribute = function (name, value) {
+              try {
+                if (String(name).toLowerCase() === attr && isBlocked(value)) return;
+              } catch {}
+              return origSet.apply(this, arguments);
+            };
+          } catch {}
+        }
+        patchAttr(HTMLImageElement.prototype, "src");
+        patchAttr(HTMLScriptElement.prototype, "src");
+        patchAttr(HTMLIFrameElement.prototype, "src");
+        patchAttr(HTMLLinkElement.prototype, "href");
+        function patchProp(proto, prop) {
+          try {
+            var d = Object.getOwnPropertyDescriptor(proto, prop);
+            if (!d || !d.set) return;
+            Object.defineProperty(proto, prop, {
+              get: d.get,
+              set: function (value) {
+                try {
+                  if (isBlocked(value)) return;
+                } catch {}
+                return d.set.call(this, value);
+              },
+            });
+          } catch {}
+        }
+        patchProp(HTMLImageElement.prototype, "src");
+        patchProp(HTMLScriptElement.prototype, "src");
+        patchProp(HTMLIFrameElement.prototype, "src");
+        patchProp(HTMLLinkElement.prototype, "href");
+        try {
+          patchProp(Location.prototype, "href");
+        } catch {}
+        try {
+          var origBeacon = navigator.sendBeacon;
+          if (origBeacon) {
+            navigator.sendBeacon = function (url) {
+              try {
+                if (isBlocked(url)) return true;
+              } catch {}
+              return origBeacon.apply(this, arguments);
+            };
+          }
+        } catch {}
+      })();
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; img-src 'self' data: https://image.pokemon.com.cn; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' 'unsafe-eval'; connect-src 'self'">
+    <meta name="csrf-token" content="">
+    <title>0143 卡比兽 | The official Pokémon Website in China</title>
+    <meta name="keywords" content="宝可梦,宝可梦,Pokemon,宝可梦图鉴">
+    <meta name="description" content="宝可梦图鉴正式开放！ 快来查询你最喜欢的宝可梦情报吧！">
+    <meta property="og:title" content="0143 卡比兽 | The official Pokémon Website in China">
+    <meta property="og:description" content="宝可梦图鉴正式开放！ 快来查询你最喜欢的宝可梦情报吧！">
+    <meta property="og:image" content="/play/resources/pokedex/img/pokemon_bg.png">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="The official Pokémon Website in China">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="canonical" href="http://c993cdf3d676:3000/play/pokedex/0143">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/play/resources/pokedex/css/app.css?20230716">
+    <style>header.global-header, .global-header, header[class*="global"], .header-global, .site-header, nav.header, header.header { display: none !important; } @media screen and (min-width:768px){ .contents.pokemon-detail-contents[data-zukanid="0133"] .pokemon_evolutionlevel__biggerStyleRow{display:flex !important;flex-wrap:wrap !important;align-items:flex-start !important;justify-content:flex-start !important} .contents.pokemon-detail-contents[data-zukanid="0133"] .pokemon_evolutionlevel__biggerStyleRow>.pokemon-evolution-itembox__nonfloat.biggerflow{flex:0 0 25% !important;max-width:25% !important;width:25% !important;box-sizing:border-box !important;margin:0 !important;margin-right:0 !important;padding:0 !important;display:block !important} }</style>
+  </head>
+  <body data-region="cn">
+    <div class="contents pokemon-detail-contents" data-max-status="15" data-zukanid="0143" data-zukansubid="0">
+      <div class="pokemon-detail">
+        <div class="pokemon-detail__header">
+          <div class="pokemon-detail__header__inner">
+            <span class="size-20"><a class="pokemon-detail__header__back-to-top" href="/play/pokedex">宝可梦图鉴</a></span>
+          </div>
+        </div>
+        <div class="pokemon-detail__slider">
+          <div class="pokemon-slider">
+            <div class="pokemon-slider__wrapper pokemon-slider__wrapper--left"><a href="/play/pokedex/0142_1"><img class="pokemon-slider__arrow pokemon-slider__arrow--left hover_image" src="/play/resources/pokedex/img/arrow_left_btn.png"></a><span class="pokemon-slider__sub-no pokemon-slider__sub-no--left size-14">0142</span><span class="pokemon-slider__sub-name pokemon-slider__sub-name--left size-15">超级化石翼龙</span></div>
+            <div class="pokemon-slider__main">
+              <p class="pokemon-slider__main-no size-28">0143</p>
+              <p class="pokemon-slider__main-name size-35">卡比兽</p>
+              <p class="pokemon-slider__main-subname size-20"></p>
+            </div>
+            <div class="pokemon-slider__wrapper pokemon-slider__wrapper--right"><a href="/play/pokedex/0143_1"><img class="pokemon-slider__arrow pokemon-slider__arrow--right hover_image" src="/play/resources/pokedex/img/arrow_right_btn.png"></a><span class="pokemon-slider__sub-name pokemon-slider__sub-name--right size-15">卡比兽</span><span class="pokemon-slider__sub-no pokemon-slider__sub-no--right size-14">0143</span></div>
+          </div>
+        </div>
+        <div class="pokemon-detail__profile">
+          <div class="pokemon-main">
+            <div class="pokemon-main__center">
+              <div class="pokemon-img">
+                <img class="pokemon-img__back" src="/play/resources/pokedex/img/pokemon_bg.png">
+                <img class="pokemon-img__blur" src="/play/resources/pokedex/img/pokemon_circle_bg.png">
+                <img class="pokemon-img__front" src="https://image.pokemon.com.cn/Pokedex/image/0143.png?auth_key=1792683572-0-0-f373b371c2885f617b191cd568dd930c">
+              </div>
+            </div>
+            <div class="pokemon-main__upper-left">
+              <div class="pokemon-type__title size-20">属性</div><div class="pokemon-type"><div class="pokemon-type__type pokemon-type__type--normal size-14"><a href="/play/pokedex/normal#result"><span>一般</span></a></div></div>
+            </div>
+            <div class="pokemon-main__bottom-left">
+              <div class="pokemon-weakness__title size-20">弱点</div><div class="pokemon-weakness"><div class="pokemon-weakness__items"><div class="pokemon-weakness__btn pokemon-weakness__btn--fighting size-14"><a href="/play/pokedex/fighting#result"><span>格斗</span></a></div></div></div>
+            </div>
+            <div class="pokemon-main__right">
+              <div class="pokemon-info" v-cloak><transition name="pokemon-info__fade"><div class="pokemon-info--inner" v-if="!ability_info_f && !ability_info_s && !ability_info_t"><div class="pokemon-info__height"><span class="pokemon-info__title size-14">身高</span><span class="pokemon-info__value size-14">2.1 m</span></div><div class="pokemon-info__category"><span class="pokemon-info__title size-14">分类</span><span class="pokemon-info__value size-14"><span>瞌睡宝可梦</span></span></div><div class="pokemon-info__weight"><span class="pokemon-info__title size-14">体重</span><span class="pokemon-info__value size-14">460.0 kg</span></div><div class="pokemon-info__gender"><span class="pokemon-info__title size-14">性别</span><span class="pokemon-info__value size-14"><img class="pokemon-info__gender-icon" src="/play/resources/pokedex/img/icon_male.png" alt=""><span class="pokemon-info__gender-separator">/</span><img class="pokemon-info__gender-icon" src="/play/resources/pokedex/img/icon_female.png" alt=""></span></div><div class="pokemon-info__abilities"><span class="pokemon-info__title size-14">特性</span><span class="pokemon-info__value size-14"> 免疫 <img class="pokemon-info__question-icon" src="/play/resources/pokedex/img/icon_question.png" v-on:click="showAbilityText(0, true)"> </span><span class="pokemon-info__value size-14"> 厚脂肪 <img class="pokemon-info__question-icon" src="/play/resources/pokedex/img/icon_question.png" v-on:click="showAbilityText(1, true)"> </span></div></div></transition><transition name="pokemon-info__fade"><div class="pokemon-info__ability_info" v-if="ability_info_f" v-show="id === 0"><span class="pokemon-info__title size-14">特性</span><img class="pokemon-info__ability_info--close_btn" src="/play/resources/pokedex/img/close_btn.png" v-on:click="showAbilityText(0, false)"><span class="pokemon-info__value pokemon-info__value--title size-18">免疫</span><span class="pokemon-info__value pokemon-info__value--body size-14"><span>因为体内拥有免疫能力，不会变为中毒状态。</span></span></div></transition><transition name="pokemon-info__fade"><div class="pokemon-info__ability_info" v-if="ability_info_s" v-show="id === 1"><span class="pokemon-info__title size-14">特性</span><img class="pokemon-info__ability_info--close_btn" src="/play/resources/pokedex/img/close_btn.png" v-on:click="showAbilityText(1, false)"><span class="pokemon-info__value pokemon-info__value--title size-18">厚脂肪</span><span class="pokemon-info__value pokemon-info__value--body size-14"><span>因为被厚厚的脂肪保护着，会让火属性和冰属性的招式伤害减半。</span></span></div></transition></div>
+            </div>
+          </div>
+        </div>
+        <div class="pokemon-detail__stats">
+          <div class="pokemon-stats">
+            <div class="pokemon-stats__story-wrapper"><div class="pokemon-stats__story-inner"><div class="pokemon-story" v-cloak data-init-disp-story="1"><div class="pokemon-story__header"><span class="pokemon-story__title size-20">图鉴版本</span><div class="pokemon-story__icon-wrapper"><img class="pokemon-story__icon" :src="ballImage1" alt="" @click="setStory(1)"><img class="pokemon-story__icon" :src="ballImage2" alt="" @click="setStory(2)"><img class="pokemon-story__icon" :src="ballImage3" alt="" @click="setStory(3)"></div></div><p class="pokemon-story__body size-14" v-if="storyNumber === 1"><span>是个睡觉之外的时间都在吃个不停的大胃王。１天能吃光４００公斤的食物。</span></p><p class="pokemon-story__body size-14" v-if="storyNumber === 2"><span>胃里的消化液能消化掉任何毒。即使吃了掉在地上的东西也没有问题。</span></p><p class="pokemon-story__body size-14" v-if="storyNumber === 3"><span>这个大胃王会突然出现在村庄里，并在转眼间将米仓一扫而空。此种行为自古被视为天灾的一种。</span></p></div></div></div>
+            <div class="pokemon-stats__status-wrapper"><div class="pokemon-stats__title size-20"><span>能力</span></div><div class="pokemon-stats__wrapper-status"><div class="pokemon-status__block"><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d10" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d9" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d8" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d7" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d6" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d5" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d4" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d3" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>HP</span></div></div><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d7" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d6" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d5" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d4" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d3" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>攻击</span></div></div><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d4" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d3" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>防御</span></div></div></div><div class="pokemon-status__block"><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d4" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d3" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>特攻</span></div></div><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d7" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d6" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d5" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d4" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d3" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>特防</span></div></div><div class="pokemon-status"><div class="pokemon-status__scale-box"><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale"></span><span class="pokemon-status__scale d2" v-bind:class="{ appear: isAppear }"></span><span class="pokemon-status__scale d1" v-bind:class="{ appear: isAppear }"></span></div><div class="pokemon-status__title size-10"><span>速度</span></div></div></div></div></div>
+          </div>
+        </div>
+        <div class="pokemon-detail__style">
+          <div class="pokemon-style__title size-20"><span>样子</span></div>
+          <div class="pokemon-style"><div class="pokemon-style__boxes-wrapper"><div class="pokemon-style__boxes"><div class="pokemon-style__boxes-inner"><div class="pokemon-style-box"><a href="/play/pokedex/0143"><img class="pokemon-style-box__img" src="https://image.pokemon.com.cn/Pokedex/image/0143.png?auth_key=1792683572-0-0-f373b371c2885f617b191cd568dd930c"><span class="pokemon-style-box__no size-16">0143</span><span class="pokemon-style-box__name size-16">卡比兽</span><span class="pokemon-style-box__subname size-14"></span><div class="pokemon-style-box__types"><div class="pokemon-style-box__type pokemon-style-box__type--normal size-12"><div><span>一般</span></div></div></div></a></div><div class="pokemon-style-box"><a href="/play/pokedex/0143_1"><img class="pokemon-style-box__img" src="https://image.pokemon.com.cn/Pokedex/image/0143-1.png?auth_key=1792683572-0-0-cf72cee1a15aa6c6545856165c3df81e"><span class="pokemon-style-box__no size-16">0143</span><span class="pokemon-style-box__name size-16">卡比兽</span><span class="pokemon-style-box__subname size-14">超极巨化</span><div class="pokemon-style-box__types"><div class="pokemon-style-box__type pokemon-style-box__type--normal size-12"><div><span>一般</span></div></div></div></a></div></div></div></div></div>
+        </div>
+        <div class="pokemon-detail__evolutions">
+          <div class="pokemon-evolution bg-x-22 pokemon-evolution--2 pokemon-evolution--h" data-evolutionid="1">
+            <div class="pokemon-evolution__inner innerNormalStyle innerSimpleStyle">
+              <div class="pokemon-evolution__title size-20"><span>进化</span></div>
+              <div class="pokemon-evolution-contents">
+                <div class="pokemon-evolution-contents_flow"><div class="pokemon-evolutionlevel"><div class="pokemon-evolution-itembox"><a href="/play/pokedex/0446"><div class="pokemon-evolution-item__image"><img class="pokemon-evolution-box__image" src="https://image.pokemon.com.cn/Pokedex/image/0446.png?auth_key=1792683572-0-0-fb8cdd749597fa97e57c339be4eb94ac"></div><div class="pokemon-evolution-item__info"><p class="pokemon-evolution-box__no size-14">0446</p><p class="pokemon-evolution-item__info-name size-14">小卡比兽</p><p class="pokemon-evolution-item__info-subname size-10"></p><div class="pokemon-evolution-box__types"><div class="pokemon-evolution-item__info-type pokemon-evolution-box__type--normal size-12"><div><span>一般</span></div></div></div></div></a><div class="pokemon-evolution-item__narrow" data-label-evolutionless="不会进化"><div class="pokemon-evolution__arrow-wrapper"><img class="pokemon-evolution__arrow" src="/play/resources/pokedex/img/arrow_down.png"></div></div></div></div><div class="pokemon-evolutionlevel"><div class="pokemon-evolution-itembox"><a href="/play/pokedex/0143"><div class="pokemon-evolution-item__image"><img class="pokemon-evolution-box__image" src="https://image.pokemon.com.cn/Pokedex/image/0143.png?auth_key=1792683572-0-0-f373b371c2885f617b191cd568dd930c"></div><div class="pokemon-evolution-item__info"><p class="pokemon-evolution-box__no size-14">0143</p><p class="pokemon-evolution-item__info-name size-14">卡比兽</p><p class="pokemon-evolution-item__info-subname size-10"></p><div class="pokemon-evolution-box__types"><div class="pokemon-evolution-item__info-type pokemon-evolution-box__type--normal size-12"><div><span>一般</span></div></div></div></div></a></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pokemon-detail__sns">
+          <div class="article-sns">
+            <ul class="article-sns__body">
+              <li class="article-sns__element">
+                <a href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fc993cdf3d676%3A3000%2Fplay%2Fpokedex%2F0143&title=%E5%AE%9D%E5%8F%AF%E6%A2%A6%E5%9B%BE%E9%89%B4+%7C+The+official+Pok%C3%A9mon+Website+in+China&searchPic=false" target="_blank">
+                  <img src="/play/resources/pokedex/img/icon_share-weibo.png" width="30" alt="weibo">
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer"></div>
+    <script src="/play/resources/pokedex/js/app.js?20220707"></script>
+    <script src="/play/resources/pokedex/js/pokemon-detail.js?20220707"></script>
+    <script src="/js/baser.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/script_common.js"></script>
+  </body>
+</html>

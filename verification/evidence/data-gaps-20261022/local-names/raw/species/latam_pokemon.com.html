@@ -1,0 +1,1408 @@
+
+<!DOCTYPE html>
+<html lang="es-xl">
+
+<head><script src="/d-Headiction-our-How-and-ther-Lord-That-manly-sp" async></script>
+        <title>Snorlax | Pokédex</title>
+    <meta name="pkm-id" content="143" />
+
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-V9L7');</script>
+<!-- End Google Tag Manager -->
+
+
+<link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico"/>
+<link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/main.css"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css" />
+
+<script src="https://assets.pokemon.com/static2/_ui/js/vendor/modernizr.custom.js"></script>
+    <script src="https://www.recaptcha.net/recaptcha/enterprise.js?render=6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO&hl=es-xl"></script>
+
+
+<script>
+    // TODO: this should be moved to a better place in the application
+    // needed for image deferred loading in sliders
+    window.addEventListener('load', function () {
+        window.loaded = true;
+    });
+</script>
+
+
+<script>
+    window.token = "4irb2DZnTqszXC3dKKW48KmSgGELh60QcW3VrBbRAo5bgwFIfDdCFypAvQvwR2SK";
+    window.mockAPI = false;
+    window.loginURL = 'https://trainer.pokemon.com/profile';
+    window.pokemonUI = window.pokemonUI || {};
+    window.staticAssetsVersionNumber = 'r1.1.8';
+
+
+    window.pokemonUI.recaptcha_key = "6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO";
+    window.pokemonUI.email_signup_api = "https://api.emo.pokemon.com/";
+    window.pokemonUI.countryCode = 'el';
+    window.pokemonUI.api = {
+        'user-details': 'https://www.pokemon.com/api/users/details',
+        'base-url-secure': 'https://www.pokemon.com',
+
+        'gsa': '/us/search/api/'
+
+    };
+
+    window.pokemonUI.config = {
+        'collection': 'production_pokemon_collection'
+    };
+
+    window.pokemonUI.modals = window.pokemonUI.modals || {};
+    window.pokemonUI.modals = {
+        "season": "Temporada",
+        "episode": "Episodio",
+        "legal": "Aviso: Si haces clic en el video de YouTube arriba, saldrás del sitio web de Pokémon. The Pokémon Company International no se responsabiliza del contenido de ningún sitio web vinculado que no esté administrado por The Pokémon Company International. Las políticas de privacidad y las prácticas de seguridad de estos sitios web pueden no seguir las normas de The Pokémon Company International.",
+
+        "twitchlegal": "Aviso: Si haces clic en el video de Twitch arriba, saldrás del sitio web de Pokémon. The Pokémon Company International no se responsabiliza del contenido de ningún sitio web vinculado que no esté administrado por The Pokémon Company International. Las políticas de privacidad y las prácticas de seguridad de estos sitios web pueden no seguir las normas de The Pokémon Company International.",
+    };
+    window.pokemonUI.dictionary = window.pokemonUI.dictionary || {};
+    window.pokemonUI.dictionary.dashboard = {
+        "youRecentlyPurchased": "Canjeado recientemente por ti",
+        "shopMore": "Comprar más"
+    };
+    window.pokemonUI.global_dictionary = window.pokemonUI.global_dictionary || {};
+    window.pokemonUI.global_dictionary.search = {
+        'searchUrl': '/el/busqueda',
+        'GSALanguageCode': 'el',
+        'sortBy': 'Ordenar por:',
+        'filterBy': 'Filtrar por:',
+        'selectCategory': 'Ver todos',
+        'mostRelevant': 'Más relevante',
+        'mostRecent': 'Más reciente',
+        'returnedResults': 'Se encontraron XXXX resultados.',
+        'shortQuery': 'Tu búsqueda es demasiado corta.',
+        'recommendedResults': 'Resultados recomendados',
+        'playGame': 'Jugar',
+        'all': {title: 'Ver todos'},
+        'pokedex': {title: 'Pokédex'},
+        'videogames': {title: 'Videojuego'},
+        'tcg': {title: 'Juego de Cartas Coleccionables'},
+        'funzone': {title: 'Online Game'},
+        'animation': {title: 'Dibujos animados'},
+        'news': {title: 'Noticias'},
+        'events': {title: 'Eventos'},
+        'strategy': {title: 'Estrategia'},
+
+        "numberPrefix": "N.º&nbsp;"
+    };
+    window.pokemonUI.global_dictionary.datatables = {
+        'search': 'Buscar',
+        'previous': 'Anterior',
+        'next': 'Siguiente',
+        'emptyTable': "No hay datos disponibles.",
+        'zeroRecords': "No se encontraron registros coincidentes."
+    };
+    window.pokemonUI.global_dictionary.errorMessages = {
+        'dataError': 'No disponible actualmente. Vuelve a intentarlo más tarde.'
+    };
+    window.pokemonUI['ui-path'] = 'https://assets.pokemon.com/static2/_ui/'
+
+    window.pokemonUI.global_api = {
+
+        'gsa': '/us/search/api/',
+
+        'status-indicators': {
+            'game-server-status': '/api/tcg/game_server_status',
+            'tcgo-in-maintenance': '/api/tcg/in_maintenance_status',
+            'notifications': 'https://www.pokemon.com/api/user/notifications/config'
+        }
+    };
+
+    window.pokemonUI.site_search_api = {
+        'url': 'https://api.search.prod.pokemon.com/v1/search'
+    }
+
+    window.pokemonUI.cookie = {
+        set: function (name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            } else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        get: function (name) {
+            var nameEQ = name + '=',
+                ca = document.cookie.split(';'),
+                c, i = 0, ii = 0;
+
+            for (i = 0, ii = ca.length; i < ii; i++) {
+                c = ca[i];
+
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1, c.length);
+                }
+
+                if (c.indexOf(nameEQ) === 0) {
+                    var value = c.substring(nameEQ.length, c.length);
+                    if (value.charAt(0) == '"' && value.charAt(value.length - 1) == '"') {
+                        value = value.substring(1, value.length - 1);
+                    }
+                    return value;
+                }
+            }
+            return null;
+        }
+    };
+
+    window.enableDashboard = true;
+
+</script>
+
+<script type="module" src="/static-assets/app/static3/pcom-next-footer/pcom-next-footer.js?v=r1.1.8"></script>
+
+                <link rel="alternate" hreflang="en" href="https://www.pokemon.com/us/pokedex/snorlax" />
+                <link rel="alternate" hreflang="en-gb" href="https://www.pokemon.com/uk/pokedex/snorlax" />
+                <link rel="alternate" hreflang="fr" href="https://www.pokemon.com/fr/pokedex/ronflex" />
+                <link rel="alternate" hreflang="it" href="https://www.pokemon.com/it/pokedex/snorlax" />
+                <link rel="alternate" hreflang="de" href="https://www.pokemon.com/de/pokedex/relaxo" />
+                <link rel="alternate" hreflang="es" href="https://www.pokemon.com/es/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-xl" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-do" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-py" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-cl" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-gt" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-mx" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-hn" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-uy" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-bo" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-ar" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-cr" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-pe" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-co" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-pa" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="es-sv" href="https://www.pokemon.com/el/pokedex/snorlax" />
+                <link rel="alternate" hreflang="pt-br" href="https://www.pokemon.com/br/pokedex/snorlax" />
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv="Content-Language" content="es-xl"/>
+<meta name="language" content="es-xl"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="twitter:card" content="summary" />
+
+    <meta name="pkm-title" content="Snorlax" />
+    <meta property="og:title" content="Snorlax | Pokédex | More at Pokemon.com" />
+<meta name="twitter:title" content="Snorlax" />
+
+        <meta name="pkm-image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/site_search/143.png"/>
+<meta property="og:image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143.png" />
+<meta name="twitter:image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143.png" />
+
+    <meta name="pkm-category" content="pokedex" />
+
+
+    <meta property="og:description" content="Este Pokémon es un glotón que lo único que hace, aparte de comer, es dormir. Puede ingerir hasta 400 kg de comida en un solo día." />
+    <meta name="twitter:description" content="Este Pokémon es un glotón que lo único que hace, aparte de comer, es dormir. Puede ingerir hasta 400 kg de comida en un solo día." />
+    <meta name="pkm-description" content="Este Pokémon es un glotón que lo único que hace, aparte de comer, es dormir. Puede ingerir hasta 400 kg de comida en un solo día." />
+
+    <meta name="pkm-modified-date" content="20241002" />
+
+    <link rel="canonical" href="https://www.pokemon.com/el/pokedex/snorlax" />
+
+<link rel="stylesheet" type="text/css" media="all" href="/static-assets/app/static3/pcom-next-footer/pcom-next-footer-reset.css?v=r1.1.8" />
+
+<script>
+    window.pokemonUI.api = window.pokemonUI.api || {};
+    window.pokemonUI.api["user-details"] = "https://www.pokemon.com/api/users/details";
+
+    window.pokemonUI.api["pokedex"] = "/api/1/el/kalos/";
+    window.pokemonUI.dictionary = window.pokemonUI.dictionary || {};
+    window.pokemonUI.dictionary["show"] = "Mostrar búsqueda avanzada";
+    window.pokemonUI.dictionary["hide"] = "Ocultar búsqueda avanzada";
+    window.pokemonUI.dictionary["numberPrefix"] = "N.º&nbsp;";
+    window.pokemonUI.dictionary.type = {
+        "ghost": "Fantasma",
+        "dark": "Siniestro",
+        "electric": "Eléctrico",
+        "normal": "Normal",
+        "fire": "Fuego",
+        "psychic": "Psíquico",
+        "flying": "Volador",
+        "steel": "Acero",
+        "poison": "Veneno",
+        "dragon": "Dragón",
+        "water": "Agua",
+        "ice": "Hielo",
+        "rock": "Roca",
+        "fighting": "Lucha",
+        "grass": "Planta",
+        "bug": "Insecto",
+        "ground": "Tierra",
+        "fairy": "Hada",
+    };
+    window.pokemonUI.dictionary.filters = {
+        "ability": "Habilidad",
+        "height": "Altura",
+        "numrange": "Secuencia",
+        "type": "Tipo",
+        "weakness": "Debilidad",
+        "weight": "Peso"
+    }
+</script>
+<script>
+    window.pokemonUI = window.pokemonUI || {};
+    window.pokemonUI.collectibles = window.pokemonUI.collectibles || {};
+    window.pokemonUI.collectibles.toggles = {
+        addToCollection: "Add to My Collection",
+        addToWishlist: "Add to My Wish List",
+        addToTradelist: "Add to My Trade List",
+        friendsHaveThis: "0 friends have this",
+        friendsWantThis: "0 friends want this",
+        friendsTradeThis: "0 friends want to trade this"
+    };
+    window.pokemonUI.collectibles.friends = {
+        tradeWithFriends: "Trade with Friends",
+        canTrade: "You can trade this collectible with these friends:",
+        cannotTrade: "If you add this collectible to your collection, wish list, or trade list, you can trade it with your friends!",
+        noFriends: "None of your friends can trade this with you."
+    };
+    window.pokemonUI.collectibles.compare = {
+        yourCollectibles: "Your Collectibles",
+        friendCollectibles: "Collectibles"
+    };
+    window.pokemonUI.collectibles.search = {
+
+        zeroResults: "No results were found using these filters."
+    }
+</script>
+
+    <link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/pokedex.css" />
+        <link rel="image_src" href="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143.png"/>
+        <link rel="image_src" href="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143.png"/>
+</head>
+
+<body class="el fluid custom-form-elements">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-V9L7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="main-filler"></div>
+
+
+<nav class="main">
+
+    <div class="blocker"></div>
+
+    <div class="content-wrapper">
+
+        <div class="nav-bar" style="display: none;">
+            <a href="#" class="nav-toggle"><span
+                    class="icon icon_hamburger"></span></a>
+
+            <ul class="dashboard-open visible-mobile">
+                <li class="visible-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                 src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-avatar.png"
+                                 alt="Ver perfil"/>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="visible-not-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-signup.png"
+                                alt="Iniciar sesión/Registrarse"/>
+                        </div>
+                        <div class="sign-in-text-wrapper sign-in-text-wrapper-mobile">
+                            Iniciar sesión
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</nav>
+
+<div class="container">
+
+<section class="section pokedex-pokemon-header overflow-visible">
+    <div class="pokedex-pokemon-pagination">
+        <a href="aerodactyl" class="previous">
+            <div class="pokedex-pokemon-pagination-wrapper">
+                <span class="icon icon_arrow_sm_left"></span>
+                <span class="pokemon-number">N.º&nbsp;0142</span>
+                <span class="pokemon-name hidden-mobile">Aerodactyl</span>
+            </div>
+        </a>
+
+        <a href="articuno" class="next">
+            <div class="pokedex-pokemon-pagination-wrapper">
+                <span class="icon icon_arrow_sm_right"></span>
+                <span class="pokemon-number">N.º&nbsp;0144</span>
+                <span class="pokemon-name hidden-mobile">Articuno</span>
+            </div>
+        </a>
+    </div>
+    <div class="pokedex-pokemon-pagination-title">
+        <div>
+            Snorlax
+            <span class="pokemon-number">N.º&nbsp;0143</span>
+        </div>
+    </div>
+</section>
+<section class="section pokedex-pokemon-form">
+    <div class="column-12 push-1">
+        <div class="styled-select button-black right">
+                <select id="formes" name="formes" >
+                        <option value="0">Snorlax</option>
+                        <option value="1">Snorlax Gigamax</option>
+                </select>
+                <i class="icon icon_arrow_sm_down"></i>
+        </div>
+    </div>
+</section>
+<section class="section pokedex-pokemon-details">
+    <div class="column-6 push-1">
+        <div class="pokedex-pokemon-profile">
+            <div class="profile-images">
+                    <img
+                        class="active"
+                        src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143.png" alt="Snorlax" />
+                    <img
+                        
+                        src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/143_f2.png" alt="Snorlax Gigamax" />
+            </div>
+        </div>
+            <div class="pokemon-stats-info active">
+                <h3>Puntos de base</h3>
+                    <ul>
+                        <li class="first">
+                            <ul class="gauge">
+                                <li data-value="10" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>PS</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="7" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Ataque</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="4" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Defensa</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="4" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Ataque Especial</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="7" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Defensa Especial</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="2" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Velocidad</span>
+                        </li>
+                    </ul>
+            </div>
+            <div class="pokemon-stats-info ">
+                <h3>Puntos de base</h3>
+                    <ul>
+                        <li class="first">
+                            <ul class="gauge">
+                                <li data-value="10" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>PS</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="7" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Ataque</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="4" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Defensa</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="4" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Ataque Especial</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="7" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Defensa Especial</span>
+                        </li>
+
+                        <li>
+                            <ul class="gauge">
+                                <li data-value="2" class="meter"></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                            <span>Velocidad</span>
+                        </li>
+                    </ul>
+            </div>
+    </div> <!-- column-6 push-1 -->
+
+    <div class="column-6 push-7">
+        <div class="pokedex-pokemon-details-right">
+            <div class="version-descriptions active">
+                        <p class="version-y
+                                    ">
+                            Sus jugos gástricos pueden digerir cualquier toxina, lo que le permite comer sin problema todo lo que encuentra por el suelo.
+                        </p>
+                        <p class="version-x
+                                    active">
+                            Este Pokémon es un glotón que lo único que hace, aparte de comer, es dormir. Puede ingerir hasta 400 kg de comida en un solo día.
+                        </p>
+            </div>
+            <div class="version-descriptions ">
+                        <p class="version-y
+                                    ">
+                            Posee una fuerza aterradora. Su imponente aspecto y proverbial indolencia hacen que sea fácil confundirlo con una montaña.
+                        </p>
+                        <p class="version-x
+                                    active">
+                            La energía del fenómeno Gigamax hizo que las semillas y las piedras enredadas en los pelos de su panza alcancen grandes dimensiones.
+                        </p>
+            </div>
+
+            <h3>Versiones:</h3>
+            <div class="version-labels">
+                <span class="version-label version-x active"><i class="icon icon_pokeball"></i></span>
+                <span class="version-label version-y"><i class="icon icon_pokeball"></i></span>
+            </div>
+
+            <div class="info match-height-tablet">
+
+                    <div class="pokemon-ability-info color-bg color-lightblue match active">
+
+                        <div class="column-7">
+                            <div class="left-column">
+                                <ul>
+                                    <li>
+                                        <span class="attribute-title">Altura</span>
+                                        <span class="attribute-value">2.1 m</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="attribute-title">Peso</span>
+                                        <span class="attribute-value">460.0 kg</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="attribute-title">Género</span>
+                                            <span class="attribute-value">
+                                                    <i class="icon icon_male_symbol"></i>
+                                                <i class="icon icon_female_symbol"></i>
+                                                </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="column-7 push-4">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <span class="attribute-title">Categoría</span>
+                                        <span class="attribute-value">Dormilón</span>
+                                    </li>
+                                        <li>
+                                            <span class="attribute-title">Habilidad</span>
+
+                                            <ul class="attribute-list">
+                                                    <li>
+                                                        <a href="" class="moreInfo">
+                                                            <span class="attribute-value">Inmunidad</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="" class="moreInfo">
+                                                            <span class="attribute-value">Sebo</span>
+                                                        </a>
+                                                    </li>
+                                            </ul>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                            <div class="pokemon-ability-info-detail match">
+                                    <span class="button-close">
+                                        <i class="icon icon_multiply"></i>Cerrar</span>
+                                <span class="title">Información sobre habilidad</span>
+                                <h3>Inmunidad</h3>
+                                <p>Su sistema inmunitario evita el envenenamiento.</p>
+                            </div>
+                            <div class="pokemon-ability-info-detail match">
+                                    <span class="button-close">
+                                        <i class="icon icon_multiply"></i>Cerrar</span>
+                                <span class="title">Información sobre habilidad</span>
+                                <h3>Sebo</h3>
+                                <p>Gracias a la gruesa capa de grasa que lo protege, reduce a la mitad el daño que recibe de ataques de tipo Fuego o Hielo.</p>
+                            </div>
+
+                    </div> <!-- pokemon-ability-info color-bg color-lightblue match -->
+
+                    <div class="pokedex-pokemon-attributes active">
+                        <div class="dtm-type">
+                            <h3>Tipo</h3>
+                            <ul>
+                                <li class="background-color-normal">
+                                    <a href="/el/pokedex?type=normal">Normal</a>
+                                </li>
+                            </ul>
+                        </div> <!-- dtm-type -->
+
+                        <div class="dtm-weaknesses">
+                            <h3>Debilidad</h3>
+                            <ul>
+                                        <li class="background-color-fighting first">
+                                            <a href="/el/pokedex?weakness=fighting">
+                                                <span>Lucha
+                                                </span>
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div> <!-- dtm-weaknesses -->
+                    </div> <!-- pokedex-pokemon-attributes -->
+
+                
+                    <div class="pokemon-ability-info color-bg color-lightblue match ">
+
+                        <div class="column-7">
+                            <div class="left-column">
+                                <ul>
+                                    <li>
+                                        <span class="attribute-title">Altura</span>
+                                        <span class="attribute-value">+35.0 m</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="attribute-title">Peso</span>
+                                        <span class="attribute-value">???.? kg</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="attribute-title">Género</span>
+                                            <span class="attribute-value">
+                                                    <i class="icon icon_male_symbol"></i>
+                                                <i class="icon icon_female_symbol"></i>
+                                                </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="column-7 push-4">
+                            <div class="right-column">
+                                <ul>
+                                    <li>
+                                        <span class="attribute-title">Categoría</span>
+                                        <span class="attribute-value">-</span>
+                                    </li>
+                                        <li>
+                                            <span class="attribute-title">Habilidad</span>
+
+                                            <ul class="attribute-list">
+                                                    <li>
+                                                        <a href="" class="moreInfo">
+                                                            <span class="attribute-value">Inmunidad</span>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="" class="moreInfo">
+                                                            <span class="attribute-value">Sebo</span>
+                                                        </a>
+                                                    </li>
+                                            </ul>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                            <div class="pokemon-ability-info-detail match">
+                                    <span class="button-close">
+                                        <i class="icon icon_multiply"></i>Cerrar</span>
+                                <span class="title">Información sobre habilidad</span>
+                                <h3>Inmunidad</h3>
+                                <p>Su sistema inmunitario evita el envenenamiento.</p>
+                            </div>
+                            <div class="pokemon-ability-info-detail match">
+                                    <span class="button-close">
+                                        <i class="icon icon_multiply"></i>Cerrar</span>
+                                <span class="title">Información sobre habilidad</span>
+                                <h3>Sebo</h3>
+                                <p>Gracias a la gruesa capa de grasa que lo protege, reduce a la mitad el daño que recibe de ataques de tipo Fuego o Hielo.</p>
+                            </div>
+
+                    </div> <!-- pokemon-ability-info color-bg color-lightblue match -->
+
+                    <div class="pokedex-pokemon-attributes ">
+                        <div class="dtm-type">
+                            <h3>Tipo</h3>
+                            <ul>
+                                <li class="background-color-normal">
+                                    <a href="/el/pokedex?type=normal">Normal</a>
+                                </li>
+                            </ul>
+                        </div> <!-- dtm-type -->
+
+                        <div class="dtm-weaknesses">
+                            <h3>Debilidad</h3>
+                            <ul>
+                                        <li class="background-color-fighting first">
+                                            <a href="/el/pokedex?weakness=fighting">
+                                                <span>Lucha
+                                                </span>
+                                            </a>
+                                        </li>
+                            </ul>
+                        </div> <!-- dtm-weaknesses -->
+                    </div> <!-- pokedex-pokemon-attributes -->
+
+                  
+            </div> <!-- info match-height-tablet -->
+
+            <div class="collectibles-detail-friends"></div>
+        </div>
+    </div>
+</section>
+<section class="section pokedex-pokemon-evolution">
+    <div class="column-12 push-1 dog-ear-bl">
+
+        <h2>Evoluciones</h2>
+
+<ul class="evolution-profile evolution-two match-height-tablet">
+        <li class="first">
+
+<a href="/el/pokedex/munchlax">
+    <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/446.png"
+    alt="Munchlax" />
+    <h3 class="match">
+        Munchlax
+        <span class="pokemon-number">
+            N.º&nbsp;0446
+        </span>
+    </h3>
+    <ul class="evolution-attributes match-height">
+        <li class="background-color-normal match">Normal</li>
+    </ul>
+</a>        </li>
+        <li class="last">
+
+<a href="/el/pokedex/snorlax">
+    <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/143.png"
+    alt="Snorlax" />
+    <h3 class="match">
+        Snorlax
+        <span class="pokemon-number">
+            N.º&nbsp;0143
+        </span>
+    </h3>
+    <ul class="evolution-attributes match-height">
+        <li class="background-color-normal match">Normal</li>
+    </ul>
+</a>        </li>
+</ul>    </div>
+</section>
+<section class="section pokedex-pokemon-share no-padding-top">
+
+    <div class="column-12 push-1">
+
+        <div class="content-block content-block-half-first">
+
+
+        </div>
+
+        <div class="content-block content-block-half">
+            <a href="/el/pokedex" class="button button-orange right">Ir a la Pokédex</a>
+        </div>
+    </div>
+
+</section><section
+    id="trading-card-slider"
+    class="slider-widget generic-slider slider-option-enable-when-all-content-visible-true preload-images
+    
+    
+    slider-option-hasfixedwidthitems-false
+
+    
+    "
+    >
+
+        <div class="slider-title">
+            <div class="column-12 push-1">
+                <h3 class="pokemon-character-slider-title">
+                    <span class="notch-left-top-outer"></span>
+                        <span class="icon icon_cards"></span>
+                    Cartas de Snorlax</h3>
+            </div>
+        </div>
+
+
+    <div class="slider-wrapper">
+        <ul class="slider">
+<li data-analytics-label="Snorlax | svp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/51/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_51.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">51</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | svp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/122/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_122.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">122</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax de Paul | svp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/184/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png"
+                 alt="Snorlax de Paul"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax de Paul</h5>
+            <span class="card-number">184</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH032/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH032.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH032</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH068/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH068.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH068</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH119/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH119.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH119</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swsh1 | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/140/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_140.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">140</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swsh1-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax V | swsh1 | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/141/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_141.png"
+                 alt="Snorlax V"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax V</h5>
+            <span class="card-number">141</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swsh1-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax VMAX | swsh1 | https://www.pokemon.com/el/pokedex/snorlax"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/142/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_142.png"
+                 alt="Snorlax VMAX"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax VMAX</h5>
+            <span class="card-number">142</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-es-xl/img/trading-card-game/_symbols/expansion_symbol_25x25/swsh1-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+        </ul>
+    </div>
+
+
+        <div class="slider-more-button">
+            <div class="column-12 push-1">
+                <div class="content-block content-block-full">
+
+                    <a class="button button-black right" href="/el/jcc-pokemon/cartas-pokemon?cardName=Snorlax">Explorar más cartas</a>
+                </div>
+            </div>
+        </div>
+
+    <noscript>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/51/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_51.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/122/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_122.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/svp/184/">
+        <h5>Snorlax de Paul</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SVP/SVP_LA_184.png" alt="Snorlax de Paul" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH032/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH032.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH068/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH068.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swshp/SWSH119/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSHP/SWSHP_LA_SWSH119.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/140/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_140.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/141/">
+        <h5>Snorlax V</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_141.png" alt="Snorlax V" />
+    </a>
+</div>
+
+<div>
+    <a href="/el/jcc-pokemon/cartas-pokemon/series/swsh1/142/">
+        <h5>Snorlax VMAX</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-es-xl/img/cards/web/SWSH1/SWSH1_LA_142.png" alt="Snorlax VMAX" />
+    </a>
+</div>
+    </noscript>
+
+</section>
+</div>
+
+
+  <div id="back-to-top" class="visible-mobile">
+    <span class="offscreen">Regresar al inicio</span>
+  </div>
+
+  <footer class="global-footer">
+  </footer>
+
+<div id="modal" class="popup">
+    <div class="externalLink">
+        <h6>
+
+            Estás a punto de salir de un sitio web operado por The Pokémon Company International, Inc.
+
+        </h6>
+        <p>
+
+            The Pokémon Company International no se responsabiliza del contenido de ningún sitio web vinculado que no esté administrado por The Pokémon Company International. Las políticas de privacidad y las prácticas de seguridad de estos sitios web pueden no seguir las normas de The Pokémon Company International.
+
+        </p>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Continuar
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn">
+
+                Cancelar
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="pokemon-center-modal" class="popup">
+    <div class="externalLink centerLink">
+        <h6>
+            Haz clic en "Continuar" para visitar PokemonCenter.com, nuestra tienda en línea oficial.
+        </h6>
+        <h6>
+            Las políticas de privacidad y las prácticas de seguridad son diferentes.
+        </h6>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Continuar
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn" target="_blank">
+
+                Cancelar
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="site-search-modal" class="popup">
+
+	<form id="site-search-widget" class="form-analytics" name="site-search-modal">
+		<span class="search"><input type="search" placeholder="Buscar" name="search" id="site-search-widget-term" autocomplete="off" /></span>
+		<span class="submit icon icon_search"><input type="submit" value="" id="site-search-widget-submit"/></span>
+        <div id="modal-search-results"></div>
+	</form>
+</div>
+
+<div id='report-screen-name-success-modal' class='popup'>
+  <h6>Informar sobre un apodo inapropiado</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    Los administradores de Pokemon.com recibieron tu reporte y revisarán el apodo para comprobar si se ajusta a los términos de uso.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Cerrar
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='report-screen-name-failure-modal' class='popup'>
+  <h6>Informar sobre un apodo inapropiado</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    No se pudo procesar tu petición. Inténtalo de nuevo. Si no se soluciona el problema, ponte en contacto con el Servicio de Atención al Cliente.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Cerrar
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='popupScreen' class="popupScreen"></div>
+
+
+  
+    
+<div id="video-modal" class="popup">
+<span class="watch-token-info"><span class="token_icon"></span><p class="token_verbal">¡Conseguiste <span class="token_amount">0</span> Ficha(s) de Entrenador por ver TV Pokémon!</p></span>
+    <div class="video-modal-wrapper">
+
+        <header class="video-header">
+            <h4 id="episodeInfo">
+
+            </h4>
+            <!-- HEADLINE -->
+            <h1 id="episodeTitle"></h1>
+        </header>
+
+        <div class="video-container">
+        </div>
+
+        <p class="legal" style="padding-top: 10px"></p>
+
+        <p class="video-summary">
+
+        </p>
+
+        
+
+        <a href="#" class="closeBtn button button-orange no-arrow right"><i class="icon icon_multiply"></i> Cerrar</a>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    // define waitSeconds above require script tag
+    // to override the default, until main.js loads
+    window.requirejs = {
+        waitSeconds: 30 // when loaded, main.js also sets waitSeconds to 30
+    };
+</script>
+<script data-main="https://assets.pokemon.com/static2/_ui/js/pokemon-detail.js"
+        src="https://assets.pokemon.com/static2/_ui/js/vendor/require.js"></script>
+
+<script type="text/javascript">
+if (typeof _satellite !== "undefined") {
+  _satellite.pageBottom();
+}
+</script> 
+</body>
+</html>
