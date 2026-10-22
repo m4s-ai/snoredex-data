@@ -379,6 +379,106 @@ def apply_reviewed_dates(overrides: dict, catalogue: dict, report: dict) -> None
                                       "confidence": finding["confidence"]})
 
 
+VIVID_SURFACE = "tpci-vivid-voltage-build-battle-dates"
+VIVID_LANGUAGES = {"/fr/": "French", "/de/": "German", "/it/": "Italian", "/es/": "Spanish"}
+VIVID_IDENTIFIERS = {
+    "French": ["Boîtier Stratégies et Combats", "31 octobre"],
+    "German": ["Build & Battle-Box", "31. Oktober"],
+    "Italian": ["kit Sfida Strategica", "31 ottobre"],
+    "Spanish": ["caja de Combina y Combate", "31 de octubre"],
+}
+
+
+def register_vivid_voltage_surface(capabilities: dict) -> None:
+    """Declare the four localized Build & Battle press releases for their date field only."""
+    edges, observations = [], []
+    for _stream, finding in findings("releaseDate", ("dates",)):
+        url = finding["sourceUrl"]
+        if "gamespress.com" not in url:
+            continue
+        language = next(name for marker, name in VIVID_LANGUAGES.items() if marker in url)
+        slug = language.lower()
+        edge_id = f"{VIVID_SURFACE}-{slug}-swsh068-positive"
+        scope = (f"Only the native {language} Vivid Voltage Build & Battle Box availability from "
+                 "2020-10-31, applied to the ordinary unmarked SWSH068 prerelease promo the owner "
+                 "identified as that box's promo (2026-10-22).")
+        record = {
+            "sourceId": f"official-vivid-voltage-build-battle-{slug}",
+            "sourceUrl": url,
+            "retrievedAt": finding["retrievedAt"],
+            "captureMethod": "Public official localized press release over the inherited HTTPS proxy; exact visible text excerpt",
+            "responseSha256": (finding.get("originalSha256") or [finding["sha256"]])[0],
+            "responseHashScope": "original acquired HTTP response bytes, not excerpt",
+            "excerpt": finding["excerpt"],
+            "excerptSha256": hashlib.sha256(finding["excerpt"].encode("utf-8")).hexdigest(),
+            "excerptHashScope": "UTF-8 bytes of the excerpt",
+            "fieldLimits": "date only",
+            "nativeQualifier": f"{language}-language Build & Battle Box availability",
+            "date": finding["value"], "precision": finding["precision"], "approximate": False,
+            "field": "source-native availability date", "scope": scope,
+            "limits": "Staff-stamped prerelease variant, Cosmos-holo giveaway, other languages and finishes are outside scope.",
+            "retainedContext": finding["retainedPath"],
+        }
+        base = {"surfaceId": VIVID_SURFACE, "queryUrl": url, "retrievedAt": finding["retrievedAt"][:10],
+                "fixtureRef": {"kind": "inline-record", "record": record}}
+        observations += [
+            {"observationId": f"obs-{VIVID_SURFACE}-{slug}", **base, "kind": "known-positive",
+             "queryParameters": {"field": "source-native availability date",
+                                 "nativeQualifier": record["nativeQualifier"]},
+             "expectedIdentifiers": VIVID_IDENTIFIERS[language], "validatesEdges": [edge_id], "outcome": scope},
+            {"observationId": f"obs-{VIVID_SURFACE}-{slug}-boundary", **base, "kind": "out-of-scope-challenge",
+             "queryParameters": {"challenge": "unsupported date/precision/locality transfer"},
+             "expectedIdentifiers": VIVID_IDENTIFIERS[language], "validatesEdges": [edge_id],
+             "outcome": ("The release dates the Build & Battle Box only; it neither names Snorlax nor dates "
+                         "the Staff-stamped prerelease variant or the separate Cosmos-holo store giveaway.")},
+        ]
+        edges.append({
+            "edgeId": edge_id,
+            "coverage": {"localities": ["WEST"], "languages": [language], "scripts": ["Latn"],
+                         "productCategories": ["product"],
+                         "timeRange": {"start": finding["value"], "end": finding["value"],
+                                       "basis": "Only the exact retained source-native date at its stated precision: " + scope}},
+            "positiveEvidenceCapabilities": ["date", "release-date"],
+            "exhaustive": False,
+            "absenceCapability": {"enabled": False, "dimensions": [], "exactScopes": [],
+                                  "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."},
+            "knownPositiveObservationId": f"obs-{VIVID_SURFACE}-{slug}",
+            "outOfScopeChallengeObservationId": f"obs-{VIVID_SURFACE}-{slug}-boundary",
+            "boundary": {
+                "outsideScope": ["other pages, products or campaigns", "other markets or languages",
+                                 "unsupported finer precision or other shipment/reprint waves",
+                                 "card existence, identity or membership", "rarity or physical finish",
+                                 "absence or completeness"],
+                "zeroResultMeans": "unknown",
+                "challenge": "The release dates the Build & Battle Box only; it neither names Snorlax nor dates the Staff-stamped prerelease variant or the separate Cosmos-holo store giveaway.",
+            },
+        })
+    surface = {
+        "surfaceId": VIVID_SURFACE, "providerId": "pokemon-official",
+        "label": "Official French, German, Italian and Spanish Vivid Voltage Build & Battle Box dates",
+        "match": {"urlPrefixes": sorted(edge["knownPositiveObservationId"] and
+                                        next(o["queryUrl"] for o in observations if o["observationId"] == edge["knownPositiveObservationId"])
+                                        for edge in edges),
+                  "nonUrlEvidenceIds": []},
+        "state": "active", "failureState": None, "accessMode": "manual", "adapterState": "not-applicable",
+        "lastCheckedAt": "2026-10-22",
+        "freshnessPolicy": "Only individually retained native date fields, original acquisition metadata and separate response/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+        "query": {"method": "MANUAL", "endpoint": observations[0]["queryUrl"], "parameters": [],
+                  "pagination": "not paginated; individually reviewed source fields only",
+                  "expectedIdentifiers": ["exact named product or campaign",
+                                          "source-native locality/language qualifier",
+                                          "source-native availability field"]},
+        "finishCapability": {"mode": "none", "vocabulary": [],
+                             "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+                             "closedWithinScope": False},
+        "coverageEdges": edges,
+    }
+    upsert(capabilities["surfaces"], VIVID_SURFACE, surface, lambda row: row["surfaceId"] == VIVID_SURFACE)
+    for observation in observations:
+        upsert(capabilities["observations"], observation["observationId"], observation,
+               lambda row, oid=observation["observationId"]: row.get("observationId") == oid)
+
+
 SPECIES_KEYS = {
     "English": ("English", "WEST"), "German": ("German", "WEST"), "French": ("French", "WEST"),
     "Italian": ("Italian", "WEST"), "Spanish (Europe)": ("Spanish", "WEST"),
@@ -444,6 +544,7 @@ def main(argv: list[str] | None = None) -> int:
         "prints": "verification/source_first_prints.json",
         "cards": "snorlax_cards.json",
         "overrides": "verification/confirmed_release_overrides.json",
+        "capabilities": "verification/source_capabilities.json",
     }
     documents = {name: read(path) for name, path in paths.items()}
     before = {name: render(document) for name, document in documents.items()}
@@ -453,6 +554,7 @@ def main(argv: list[str] | None = None) -> int:
                        read("analysis_checklist.json"), read("collector_catalogue.json"),
                        read("verification/units.json"), report)
     apply_reviewed_dates(documents["overrides"], read("collector_catalogue.json"), report)
+    register_vivid_voltage_surface(documents["capabilities"])
     paths["names"] = "verification/local_card_names.json"
     names_path = ROOT / paths["names"]
     before["names"] = names_path.read_text(encoding="utf-8") if names_path.exists() else ""
