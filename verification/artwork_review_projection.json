@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-22",
-  "projectionVersion": "77709dd673e4e7dff08b344b3ddf4ba7f6977bde22fad8dccacb1c1439f05f77",
+  "projectionVersion": "9d90fcdbfa7ab03175dd56644b4050b0f6cc831e312936c81b1b5df226548af0",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 895,
-    "sourceObservations": 3230
+    "physicalPrintings": 894,
+    "sourceObservations": 3236
   },
   "groups": [
     {
@@ -15786,11 +15786,11 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:978f689a82d7a80e5d302e1b",
-              "semanticPrintingId": "PRINTING:978f689a82d7a80e5d302e1b",
+              "physicalPrintingId": "PHYSICAL:PRINTING:1ea263c61bc26ce5236181e8",
+              "semanticPrintingId": "PRINTING:1ea263c61bc26ce5236181e8",
               "cardReleaseId": "RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
               "finish": "holo",
-              "edition": null,
+              "edition": "Unlimited",
               "foilPattern": "sparkle holo across artwork and frame",
               "markings": [],
               "distribution": null,
@@ -15799,27 +15799,79 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0247",
               "sourcePrintingId": "F0247-P03",
-              "establishingClaimId": "CLAIM:finish:PRINTING:978f689a82d7a80e5d302e1b",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1ea263c61bc26ce5236181e8",
               "specimenIds": [
                 "SPEC-0097",
                 "SPEC-0095",
                 "SPEC-0096"
               ],
+              "specimenFieldSources": {
+                "cardSize": [
+                  "SPEC-0095",
+                  "SPEC-0096",
+                  "SPEC-0097"
+                ],
+                "edition": [
+                  "SPEC-0095"
+                ],
+                "finish": [
+                  "SPEC-0097",
+                  "SPEC-0095",
+                  "SPEC-0096"
+                ],
+                "foilPattern": [
+                  "SPEC-0097",
+                  "SPEC-0095",
+                  "SPEC-0096"
+                ]
+              },
               "sources": [
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
-                  "retrievedAt": "2026-08-26"
+                  "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
+                  "retrievedAt": "2026-08-26",
+                  "claimFields": [
+                    "finish",
+                    "identity",
+                    "edition"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "edition",
+                    "finish",
+                    "foilPattern"
+                  ],
+                  "specimenId": "SPEC-0095"
                 },
                 {
                   "sourceType": "Owner-supplied physical card photograph",
                   "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
-                  "retrievedAt": "2026-08-26"
+                  "retrievedAt": "2026-08-26",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish",
+                    "foilPattern"
+                  ],
+                  "specimenId": "SPEC-0097"
                 },
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. Retained as SPEC-0095.",
-                  "retrievedAt": "2026-08-26"
+                  "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
+                  "retrievedAt": "2026-08-26",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish",
+                    "foilPattern"
+                  ],
+                  "specimenId": "SPEC-0096"
                 }
               ]
             },
@@ -16022,30 +16074,30 @@
               "image": null
             },
             {
-              "observationId": "finish:F0247-P03:0:05ba75cdc2229ef4",
+              "observationId": "finish:F0247-P03:0:05143e3cf8e0ef12",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
-              "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
-              "contentHash": "27a9d99dc42de0815dbe17f82990146b856f0a41858d5af8deaabe18f5f7fcb2",
+              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
+              "contentHash": "7679b06c2890bad45b3418ddcc94cc35723af6f1a95e5f1f3c921c398be026f5",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P03:1:257ec29b10588de9",
+              "observationId": "finish:F0247-P03:1:bd5901d6183ac8ab",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
-              "contentHash": "5952ab702a9394c4216d37c904fade1cfc77288dd5290b2a2bd2e4df19852195",
+              "contentHash": "0d262557eb1eb69984fa7838f59e78cce33e823be505865a24f5bc4802a83add",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P03:2:9bf845f4e7eda5b5",
+              "observationId": "finish:F0247-P03:2:fb57ce80d122a015",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
-              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. Retained as SPEC-0095.",
-              "contentHash": "9af197250704fb7d38bcc950cbdf48c63eecd783ee907fb9639e5972025a59f0",
+              "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
+              "contentHash": "05c7b20b45be2a84937aad8ad4c7eccfcbbc21dfbdc2bdee67510ba382a31371",
               "image": null
             },
             {
@@ -16053,8 +16105,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card.",
-              "contentHash": "fef11b8c30895733210d1b399b140260608c9b3ecd17cff969e124fd21d55be5",
+              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22).",
+              "contentHash": "a9d55aca4ee02e1b7381c7e558c98f5cb83fc56b1a532dcc5e3aac11314770fa",
               "image": "verification/specimens/SPEC-0095.jpg"
             },
             {
@@ -16063,7 +16115,7 @@
               "provider": null,
               "url": null,
               "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame.",
-              "contentHash": "0d6fec92e8dc12430f6db3911713e920e173b76f97bdb2e81fe006dfe2987355",
+              "contentHash": "04b28fdd34ec939501d01ef214d73fe566ddb1382e3c50b57b28dcfcb6b90a5e",
               "image": "verification/specimens/SPEC-0096.jpg"
             },
             {
@@ -16072,7 +16124,7 @@
               "provider": null,
               "url": null,
               "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred.",
-              "contentHash": "2b0aaff5716840884ede3bed1e60edef691537b1c584f214191d175f2bffd50d",
+              "contentHash": "0d36bf1b0292411f4ffe1855217c238445239f3092ff80706dcf7110bb4aff96",
               "image": "verification/specimens/SPEC-0097.jpg"
             },
             {
@@ -18491,35 +18543,31 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:de39d71a590106e065864af5",
-              "semanticPrintingId": "PRINTING:de39d71a590106e065864af5",
+              "physicalPrintingId": "PHYSICAL:PRINTING:16b9f674f86547fa2247b735",
+              "semanticPrintingId": "PRINTING:16b9f674f86547fa2247b735",
               "cardReleaseId": "RELEASE:JP:Japanese:BW7:055:Snorlax-Block-Teampact",
               "finish": "non-holo",
-              "edition": null,
+              "edition": "1st Edition",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0028",
-              "sourcePrintingId": "F0028-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:de39d71a590106e065864af5",
+              "sourcePrintingId": "F0028-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:16b9f674f86547fa2247b735",
               "specimenIds": [
                 "SPEC-0583"
               ],
               "sources": [
                 {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-                },
-                {
                   "sourceType": "Inspected card photograph; external origin unknown",
-                  "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0583.",
+                  "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0583.",
                   "retrievedAt": "2026-09-29",
                   "claimFields": [
-                    "identity"
+                    "identity",
+                    "edition"
                   ]
                 },
                 {
@@ -18594,30 +18642,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0028-P01:0:75495adf8503c36c",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "58c0226f495afcddaef493f116452fe9e726847908b0188a3ab81ba7942d79e7",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0028-P01:1:929ed5cf56b2e334",
+              "observationId": "finish:F0028-P02:0:8f89a9bc4f2e4a94",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
-              "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0583.",
-              "contentHash": "b56a7f750f63ec93fa1224be0776e7c02bf1eb97a2442ef353cecabd91b9315f",
+              "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0583.",
+              "contentHash": "75693ef51e28662deddbdf7f92b244dcceeba30a995cb6ffa87fd2b450435f2c",
               "image": null
             },
             {
-              "observationId": "finish:F0028-P01:2:fad842ebdbe91c29",
+              "observationId": "finish:F0028-P02:1:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "2a1a280353625a78af377be85025f4e1bf52d614aa5285480c839bcc094161af",
+              "contentHash": "a62a8e0a22dcb5a93cb29a2f8da80d5bf22fa71a7038f60f2f8ed17d83c65899",
               "image": null
             },
             {
@@ -18643,8 +18682,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
-              "contentHash": "345c9cbf469c88a5e152941c61cc7109c7d066545c56aab13410f6df644af13a",
+              "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
+              "contentHash": "05340caa797be705eb47515f8b83ad5cd8409c25741c8a142d553915bba34be2",
               "image": "verification/specimens/SPEC-0583.png"
             },
             {
@@ -56668,14 +56707,18 @@
               "finish": "non-holo",
               "edition": "1st Edition",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0104",
-              "sourcePrintingId": "F0104-P02",
+              "sourcePrintingId": "F0104-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:158b4479e21d570f0eb94b1b",
+              "specimenIds": [
+                "SPEC-0584",
+                "SPEC-0633"
+              ],
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/ja/cards/E5-062",
@@ -56687,12 +56730,51 @@
                   "evidence": "TCGdex E5-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st Edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-E5-062.json (sha256 2948cb8830fa58142269709f94c89c6ea06e7b866b29b3d80b3a91b0143fe669)."
                 },
                 {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A mark stands between the retreat cost and the e-Card 5 set symbol, the position of the printed 1st EDITION mark on the owner-supplied high-resolution 1st Edition photograph SPEC-0633; it is absent there on the Unlimited photograph SPEC-0632. This establishes the 1st Edition printing. Retained as SPEC-0584.",
+                  "retrievedAt": "2026-09-29",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                },
+                {
                   "sourceType": "Owner attestation (domain expert)",
                   "authorityTier": "owner-attestation",
                   "coverage": "positive-only",
                   "supportsAbsence": false,
                   "retrievedAt": "2026-10-22",
                   "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-22",
+                  "evidence": "The collection owner's explicit 2026-10-22 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. A printed 1st EDITION mark stands beside the set symbol. The collection owner identifies this card as the 1st Edition printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare. Retained as SPEC-0633.",
+                  "retrievedAt": "2026-10-22",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
                 }
               ]
             },
@@ -56703,14 +56785,17 @@
               "finish": "non-holo",
               "edition": "Unlimited",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0104",
-              "sourcePrintingId": "F0104-P03",
+              "sourcePrintingId": "F0104-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:4d547e4644aadc503e901c11",
+              "specimenIds": [
+                "SPEC-0632"
+              ],
               "sources": [
                 {
                   "url": "https://api.tcgdex.net/v2/ja/cards/E5-062",
@@ -56728,35 +56813,6 @@
                   "supportsAbsence": false,
                   "retrievedAt": "2026-10-22",
                   "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:80ec157c5f61b36538013715",
-              "semanticPrintingId": "PRINTING:80ec157c5f61b36538013715",
-              "cardReleaseId": "RELEASE:JP:Japanese:EC5:062:Snorlax-Lolling-About-Continuous-Tumble",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0104",
-              "sourcePrintingId": "F0104-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:80ec157c5f61b36538013715",
-              "specimenIds": [
-                "SPEC-0584"
-              ],
-              "sources": [
-                {
-                  "sourceType": "Inspected card photograph; external origin unknown",
-                  "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0584.",
-                  "retrievedAt": "2026-09-29",
-                  "claimFields": [
-                    "identity"
-                  ]
                 },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
@@ -56766,10 +56822,19 @@
                 {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
-                    "finish"
+                    "finish",
+                    "edition"
                   ],
-                  "retrievedAt": "2026-09-29",
-                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                  "retrievedAt": "2026-10-22",
+                  "evidence": "The collection owner's explicit 2026-10-22 confirmation establishes the specimen's finish, edition; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                },
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied front-and-back photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. No 1st EDITION mark is printed beside the set symbol. The collection owner identifies this card as the Unlimited printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare. Retained as SPEC-0632.",
+                  "retrievedAt": "2026-10-22",
+                  "claimFields": [
+                    "identity"
+                  ]
                 }
               ]
             }
@@ -56831,34 +56896,92 @@
               "originalHash": "3ade7c9c5200e78db2506fb1e4179c0c69f54e2e9195146d4b6e56927a8968ac",
               "previewSrc": "images/previews/SPEC-0584.png?v=5019c0e62815d4996c1e4706c0da3310619205eb2658e6422c8a763fd4febc18",
               "thumbnailSrc": "images/thumbs/SPEC-0584.png?v=0ef8c7352f9138498edd2aae2eaff69679636bbefc3c37d4d4b82af6f4add219"
+            },
+            {
+              "src": "verification/specimens/SPEC-0632.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0632",
+              "contentHash": "3f98caf6008b71bb3793b7a7118064615efb55f2864ea449639b33e72d7e0276",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3f98caf6008b71bb3793b7a7118064615efb55f2864ea449639b33e72d7e0276",
+              "previewSrc": "images/previews/SPEC-0632.png?v=94533e7bf302a9c4569ff3c66ae824dbfc6482bfc5acdb2720490f070bcf909d",
+              "thumbnailSrc": "images/thumbs/SPEC-0632.png?v=453b54eb31d8cbe035e72aedd801a7214ac794467d028a87ddc9ff61217a137e"
+            },
+            {
+              "src": "verification/specimens/SPEC-0633.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0633",
+              "contentHash": "7b7050cbd079117953055436deae3bd614957da2398e89a3dc3a7febbba4afe6",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7b7050cbd079117953055436deae3bd614957da2398e89a3dc3a7febbba4afe6",
+              "previewSrc": "images/previews/SPEC-0633.png?v=5364c0a12b17a6f913b97936b404f23cf18245aec0f86f9ca32129bdc0cbf117",
+              "thumbnailSrc": "images/thumbs/SPEC-0633.png?v=c49da9f587762a58b2bbe6b6e91cfd2f51c4d88c9b2ee2100cc258f1d5e35fd5"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0104-P01:0:07ebdbfdf8b1e3a0",
+              "observationId": "finish:F0104-P01:0:4aed1221f4fc0a90",
               "kind": "finish",
-              "provider": "Inspected card photograph; external origin unknown",
-              "url": null,
-              "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0584.",
-              "contentHash": "d3598ac7f520efcf57e8c46419d2a1f76fed92738ff13e95abe526b68e51bc62",
+              "provider": "TCGdex API card variant detail",
+              "url": "https://api.tcgdex.net/v2/ja/cards/E5-062",
+              "evidence": "TCGdex E5-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st Edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-E5-062.json (sha256 2948cb8830fa58142269709f94c89c6ea06e7b866b29b3d80b3a91b0143fe669).",
+              "contentHash": "3ddf51ba88d879ea9b849791c818afeeae23f3e2046397c2f28e22af9139b65e",
               "image": null
             },
             {
-              "observationId": "finish:F0104-P01:1:9e77460c87e6cb2b",
+              "observationId": "finish:F0104-P01:1:4ce204ebcd8cc0da",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A mark stands between the retreat cost and the e-Card 5 set symbol, the position of the printed 1st EDITION mark on the owner-supplied high-resolution 1st Edition photograph SPEC-0633; it is absent there on the Unlimited photograph SPEC-0632. This establishes the 1st Edition printing. Retained as SPEC-0584.",
+              "contentHash": "53eb081746381b040c5e7cced3f62bc34a8128ea00a85e353a02817898f0106d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0104-P01:2:74d730e5119c5f0d",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
+              "contentHash": "0fe32bc4a1215e4b9b9f2b7e696600ffb3c3820cf919fc1ba28fb0db3df894b8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0104-P01:3:83f01774eec87a55",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-22 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
+              "contentHash": "cb6389f292a7a359c4503d7171ca730428e00bf9fa5185ed02e1998f5c6f49a3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0104-P01:4:9e77460c87e6cb2b",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "0c2a9fb8ddc9f04dabf0fa225a5867fc664ef2b24807fd76440f75a170de85e9",
+              "contentHash": "8e9fc87fcc5f5132a0fea40f528609627428649db3ac25b266aa2eb8c427d620",
               "image": null
             },
             {
-              "observationId": "finish:F0104-P01:2:fad842ebdbe91c29",
+              "observationId": "finish:F0104-P01:5:f5fb0e9650598a0a",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Owner-supplied photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. A printed 1st EDITION mark stands beside the set symbol. The collection owner identifies this card as the 1st Edition printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare. Retained as SPEC-0633.",
+              "contentHash": "326bead195a583c3698d5d43df8eea1cf6ebfed1da79b96bcb62fa69f13b99fc",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0104-P01:6:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "0905267a89b8e1737f8a9e048981f24dce266747b7da504502a8a3b1fc8113e6",
+              "contentHash": "2d5c2cac44a04819573073fe59987c30d9c90421c0d4628609397db25059916a",
               "image": null
             },
             {
@@ -56867,7 +56990,7 @@
               "provider": "TCGdex API card variant detail",
               "url": "https://api.tcgdex.net/v2/ja/cards/E5-062",
               "evidence": "TCGdex E5-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st Edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-E5-062.json (sha256 2948cb8830fa58142269709f94c89c6ea06e7b866b29b3d80b3a91b0143fe669).",
-              "contentHash": "003e78e2071cbf915006fd56b4674c0ea0465e8c9ff2b05755b540fcad2632c7",
+              "contentHash": "5aaaff36c7e6d50d3d79eb4f4fb9e93f6899747378b22f8c241029ada67d5c8e",
               "image": null
             },
             {
@@ -56876,25 +56999,34 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
-              "contentHash": "e5f2094b384e532574e658196c6c498f25e175532a0b6030fdb91207049c52e7",
+              "contentHash": "8cc131eb034d4fa0e9375c143b117dd671d332a51676148d0b984322e4a49b34",
               "image": null
             },
             {
-              "observationId": "finish:F0104-P03:0:4aed1221f4fc0a90",
+              "observationId": "finish:F0104-P02:2:9e77460c87e6cb2b",
               "kind": "finish",
-              "provider": "TCGdex API card variant detail",
-              "url": "https://api.tcgdex.net/v2/ja/cards/E5-062",
-              "evidence": "TCGdex E5-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st Edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-E5-062.json (sha256 2948cb8830fa58142269709f94c89c6ea06e7b866b29b3d80b3a91b0143fe669).",
-              "contentHash": "94236b33a11678279fb04474551bb3c5e9df9c684e1a2fb0984ccedb7d6de15e",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Mysterious-Mountains/Snorlax-EC5062",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "e9c54e3806516f148ff6199512b36f4dfb4314255ef880b9d0b382fe4656b3ef",
               "image": null
             },
             {
-              "observationId": "finish:F0104-P03:1:74d730e5119c5f0d",
+              "observationId": "finish:F0104-P02:3:ac12c745a14fdd19",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
-              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
-              "contentHash": "635757780c19521c20218d74930c92786690c19576de770f1f412a39b7e07c7f",
+              "evidence": "The collection owner's explicit 2026-10-22 confirmation establishes the specimen's finish, edition; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
+              "contentHash": "4f92918d10f1087e4df108672ca9b8cb7bd09fe76607b76dd65a203d8549c6b7",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0104-P02:4:ceb8c3b92e340414",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Owner-supplied front-and-back photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. No 1st EDITION mark is printed beside the set symbol. The collection owner identifies this card as the Unlimited printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare. Retained as SPEC-0632.",
+              "contentHash": "2d2fe3da11f8374ff7373c0e757aefe95fd1df286d8d41b95517c674f2635240",
               "image": null
             },
             {
@@ -56920,9 +57052,27 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
-              "contentHash": "27f4916abb30971277fd4948fad5b4ac5dbbc91a432884418e3db1924c4525c7",
+              "evidence": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A mark stands between the retreat cost and the e-Card 5 set symbol, the position of the printed 1st EDITION mark on the owner-supplied high-resolution 1st Edition photograph SPEC-0633; it is absent there on the Unlimited photograph SPEC-0632. This establishes the 1st Edition printing.",
+              "contentHash": "76d21ab9f47f4168b16e445a1a40fbbf567b5c835f85f634b3ecc09bb992bca9",
               "image": "verification/specimens/SPEC-0584.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0632",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner-supplied front-and-back photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. No 1st EDITION mark is printed beside the set symbol. The collection owner identifies this card as the Unlimited printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare.",
+              "contentHash": "dc451fa5edbbcc86cbe8ba5a19c6f551a1ef2a6a6301744ae039d3d519dfa1fc",
+              "image": "verification/specimens/SPEC-0632.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0633",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner-supplied photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. A printed 1st EDITION mark stands beside the set symbol. The collection owner identifies this card as the 1st Edition printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare.",
+              "contentHash": "a6ecf65a3e6e34a20dba71a28d8eec8855f4ad8cd96c5eb9d42951f839bb7448",
+              "image": "verification/specimens/SPEC-0633.png"
             },
             {
               "observationId": "unit:U0605",
@@ -59058,36 +59208,32 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:c37da3d99bb384d8bffb439f",
-              "semanticPrintingId": "PRINTING:c37da3d99bb384d8bffb439f",
+              "physicalPrintingId": "PHYSICAL:PRINTING:e3b276bac1a032edc1d7a201",
+              "semanticPrintingId": "PRINTING:e3b276bac1a032edc1d7a201",
               "cardReleaseId": "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up",
               "finish": "non-holo",
-              "edition": null,
+              "edition": "Unlimited",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0101",
-              "sourcePrintingId": "F0101-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:c37da3d99bb384d8bffb439f",
+              "sourcePrintingId": "F0101-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e3b276bac1a032edc1d7a201",
               "specimenIds": [
                 "SPEC-0581"
               ],
               "sources": [
                 {
                   "sourceType": "Inspected card photograph; external origin unknown",
-                  "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0581.",
+                  "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0581.",
                   "retrievedAt": "2026-09-29",
                   "claimFields": [
-                    "identity"
+                    "identity",
+                    "edition"
                   ]
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
                   "sourceType": "Owner attestation (domain expert)",
@@ -59161,30 +59307,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0101-P01:0:0d3f35513c3d4610",
+              "observationId": "finish:F0101-P02:0:9690344cf9444d57",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
-              "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0581.",
-              "contentHash": "14f367341ffa51914cc7707bccbf2242d9c865b421934cbc4fbeb7afe557cfe1",
+              "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0581.",
+              "contentHash": "31739e026b8f942eda355142a42aae73878b99daa8323fced812838b68681fa6",
               "image": null
             },
             {
-              "observationId": "finish:F0101-P01:1:ac166b43837b6bcc",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "8c0bcdc9d992cd5fe7696a50744257a35d85589c4692e4736cd77beb3468ba4c",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0101-P01:2:fad842ebdbe91c29",
+              "observationId": "finish:F0101-P02:1:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "9d3ba3e3f5c24f7c97991bf0b27665a8261bdac13baed0bbb4cacca3516edaa3",
+              "contentHash": "a8ae57543deea1169c1b779edcd521e1421290b19de6a30ff1cc495c49cc1c6b",
               "image": null
             },
             {
@@ -59210,8 +59347,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
-              "contentHash": "a2d8f98a218a8a66206eab30c38b31f7d6ce79bad9974dddc39c320470cba8a4",
+              "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+              "contentHash": "861ebe8fe40970b35c442549707d2cba112a84257d24d5a50dd191941a37e8ab",
               "image": "verification/specimens/SPEC-0581.png"
             },
             {
@@ -60418,35 +60555,31 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:735f434d95e9664923f3c510",
-              "semanticPrintingId": "PRINTING:735f434d95e9664923f3c510",
+              "physicalPrintingId": "PHYSICAL:PRINTING:c43ae0cd932b316541d0d02c",
+              "semanticPrintingId": "PRINTING:c43ae0cd932b316541d0d02c",
               "cardReleaseId": "RELEASE:JP:Japanese:Pt2:070:Snorlax-Lv40-Bad-Sleeping-Habits-Toss-and-Turn-Heavy-Press",
               "finish": "non-holo",
-              "edition": null,
+              "edition": "1st Edition",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0301",
-              "sourcePrintingId": "F0301-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:735f434d95e9664923f3c510",
+              "sourcePrintingId": "F0301-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:c43ae0cd932b316541d0d02c",
               "specimenIds": [
                 "SPEC-0582"
               ],
               "sources": [
                 {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
-                  "sourceType": "Cardmarket catalogue hint (not external verification)",
-                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-                },
-                {
                   "sourceType": "Inspected card photograph; external origin unknown",
-                  "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0582.",
+                  "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0582.",
                   "retrievedAt": "2026-09-29",
                   "claimFields": [
-                    "identity"
+                    "identity",
+                    "edition"
                   ]
                 },
                 {
@@ -60522,30 +60655,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0301-P01:0:13f2b89cb0fb232b",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "c0d98fe4c3d45d6b76c7cca270e95b66794bc990db2571e95a7de79bd8cea2c6",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0301-P01:1:b0a73363cf9940ba",
+              "observationId": "finish:F0301-P02:0:bbd67c82f242a553",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
-              "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0582.",
-              "contentHash": "a522d0208c5ffe49f152a971ee552f8d80a1884f2a8ee14aef685004e6d6f473",
+              "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0582.",
+              "contentHash": "9e7a5d68866c1b81692b5567cfbe35d6dc85d9da0351d0796d84a647cb1232ce",
               "image": null
             },
             {
-              "observationId": "finish:F0301-P01:2:fad842ebdbe91c29",
+              "observationId": "finish:F0301-P02:1:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "f3a6cee2445bde7274905ca1f3dd6a8ef296b1174219c3a83777dd2c64053634",
+              "contentHash": "68c4ab2e8cd8cf5a6f67d3c32c5cc975b9aa62eb2e3ae41a7ff1820612c36fce",
               "image": null
             },
             {
@@ -60571,8 +60695,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
-              "contentHash": "df8c52d44d1ad25e3476f663585b5cbbea6e44b3f64733498be5e546a05a763d",
+              "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
+              "contentHash": "0c71b981a53632d0b9406fd5a105d8941ea614b8e9141be548d0052ef4cd65de",
               "image": "verification/specimens/SPEC-0582.png"
             },
             {
@@ -77131,20 +77255,20 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:a4fd7a57dcc14611a79cb9e5",
-              "semanticPrintingId": "PRINTING:a4fd7a57dcc14611a79cb9e5",
+              "physicalPrintingId": "PHYSICAL:PRINTING:d8eb8cd092029e3809b57d44",
+              "semanticPrintingId": "PRINTING:d8eb8cd092029e3809b57d44",
               "cardReleaseId": "RELEASE:WEST:Portuguese:JU:27:Snorlax-Thick-Skinned-Body-Slam",
               "finish": "non-holo",
-              "edition": null,
+              "edition": "Unlimited",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0173",
-              "sourcePrintingId": "F0173-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:a4fd7a57dcc14611a79cb9e5",
+              "sourcePrintingId": "F0173-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d8eb8cd092029e3809b57d44",
               "specimenIds": [
                 "SPEC-0120"
               ],
@@ -77157,7 +77281,7 @@
                 {
                   "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
                   "sourceType": "Seller listing photograph",
-                  "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120.",
+                  "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0120.",
                   "retrievedAt": "2026-08-27"
                 },
                 {
@@ -77165,6 +77289,14 @@
                   "retrievedAt": "2026-09-10",
                   "supportsAbsence": false,
                   "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-10-22",
+                  "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
                 }
               ]
             }
@@ -77208,30 +77340,39 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0173-P01:0:080249249eec4b7b",
+              "observationId": "finish:F0173-P02:0:080249249eec4b7b",
               "kind": "finish",
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "46eb4e01601d6d67d142a95325b8a4847ba086c15a392cb5542ee9e9b8719d6c",
+              "contentHash": "0709aab5f056853b9b67e79f8eb4ed54fe01ea4ff8eef6456652d9f08ef909a5",
               "image": null
             },
             {
-              "observationId": "finish:F0173-P01:1:28e362558b4dcee2",
+              "observationId": "finish:F0173-P02:1:20bb1358b9056dbd",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
-              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. Retained as SPEC-0120.",
-              "contentHash": "e1a9f154d8b43f575e093fff166d546fd34fd039943ae4744183e7e78af96164",
+              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0120.",
+              "contentHash": "354a7b1bd44967c2d9c4a9b411b873746ad3e7ee248c490cc5eb90cbf885861a",
               "image": null
             },
             {
-              "observationId": "finish:F0173-P01:2:4e07d9549012a8ae",
+              "observationId": "finish:F0173-P02:2:4e07d9549012a8ae",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
-              "contentHash": "3e9aed2162f356fc92b78c21700c0c66680fcb1708026de16480290b3235f5a8",
+              "contentHash": "d2e061c306bcdae34b4cfc7959cc5b0a5dbc0b6f35717798f5aaed0554d48e07",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0173-P02:3:74d730e5119c5f0d",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
+              "contentHash": "26d27c3f04c4771b3287eb6b05f2e4a837159837d09dfa264606001820a708d4",
               "image": null
             },
             {
@@ -77239,8 +77380,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://www.ebay.com/itm/177940547168",
-              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64.",
-              "contentHash": "6bd26591d96546e2effc0cdaf6f3a02f85d3577df6d81543a1a18cb17f758958",
+              "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+              "contentHash": "701d5087b04ac2034fae71e1f933b729bf59fa6c07ff88413cd79fa871035fe8",
               "image": "verification/specimens/SPEC-0120.jpg"
             },
             {
@@ -79141,25 +79282,70 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:2ea0186aedbd7154da75ef5c",
-              "semanticPrintingId": "PRINTING:2ea0186aedbd7154da75ef5c",
+              "physicalPrintingId": "PHYSICAL:PRINTING:46ebc1772b8d647f74ba988a",
+              "semanticPrintingId": "PRINTING:46ebc1772b8d647f74ba988a",
               "cardReleaseId": "RELEASE:WEST:Spanish:JU:11:Snorlax-Thick-Skinned-Body-Slam",
               "finish": "holo",
-              "edition": null,
+              "edition": "Unlimited",
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0165",
-              "sourcePrintingId": "F0165-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:2ea0186aedbd7154da75ef5c",
+              "sourcePrintingId": "F0165-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:46ebc1772b8d647f74ba988a",
               "specimenIds": [
                 "SPEC-0130",
                 "SPEC-0129"
               ],
+              "specimenFieldSources": {
+                "cardSize": [
+                  "SPEC-0129",
+                  "SPEC-0130"
+                ],
+                "edition": [
+                  "SPEC-0129"
+                ],
+                "finish": [
+                  "SPEC-0130",
+                  "SPEC-0129"
+                ]
+              },
               "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment. Retained as SPEC-0130.",
+                  "retrievedAt": "2026-08-27",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0130"
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0129.",
+                  "retrievedAt": "2026-08-27",
+                  "claimFields": [
+                    "finish",
+                    "identity",
+                    "edition"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "edition",
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0129"
+                },
                 {
                   "sourceType": "Owner attestation (domain expert)",
                   "retrievedAt": "2026-09-10",
@@ -79167,21 +79353,17 @@
                   "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition."
                 },
                 {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "authorityTier": "owner-attestation",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-10-22",
+                  "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
+                },
+                {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
                   "sourceType": "Cardmarket catalogue hint (not external verification)",
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-                },
-                {
-                  "url": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. Retained as SPEC-0129.",
-                  "retrievedAt": "2026-08-27"
-                },
-                {
-                  "url": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment. Retained as SPEC-0130.",
-                  "retrievedAt": "2026-08-27"
                 }
               ]
             }
@@ -79247,39 +79429,48 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0165-P01:0:4e07d9549012a8ae",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
-              "contentHash": "cd7fbc46576ec28c8e16285b9bc34c0c03b0892c47109da15dfd6be959c47ee0",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0165-P01:1:94ee23d7ace7c1cc",
-              "kind": "finish",
-              "provider": "Cardmarket catalogue hint (not external verification)",
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "41e22db9e12f08d567edaa1191ef0822deaccb6fcd19ba4c4572ddad502aa298",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0165-P01:2:a3f0da68aedf7433",
-              "kind": "finish",
-              "provider": "Seller listing photograph",
-              "url": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
-              "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. Retained as SPEC-0129.",
-              "contentHash": "bfd21a2bb1142a69245a2dff63e53cb880e1f18f22163c7fdb65d4d04013e348",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0165-P01:3:c6fe954118dfcf0e",
+              "observationId": "finish:F0165-P02:0:11b748fd4c165b6a",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
               "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment. Retained as SPEC-0130.",
-              "contentHash": "c780201aeeb784df3d9b98187fc0e489154d003118d6d9be2de2380d05e86582",
+              "contentHash": "08ff168f44e775cef99d84482ca1b841f971a5cc8e035830e41dacc2db70fe0b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0165-P02:1:3ee34cd1c75beda4",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
+              "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0129.",
+              "contentHash": "042129aec8a061ce0273f8e30c05b43e4f0e63f0b3e0c3d02aa6615cd9c0288f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0165-P02:2:4e07d9549012a8ae",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner explicitly confirms for ALL Western languages: Snorlax Jungle 11/64 is Holo; Jungle 27/64 is Non-Holo. This number-to-finish identity applies independently of 1st Edition or Unlimited. A readable exact identity needs no additional reflection photograph. This does not establish an otherwise unknown language or edition.",
+              "contentHash": "a61b9f86e7b91a670256c02a0d4a59c593d7c71b2fbfce7adb0d9346e4c67a61",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0165-P02:3:74d730e5119c5f0d",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
+              "contentHash": "5b245ae40d96bc12f545a8ad80ae66ac588c60f63f20e47e680fac62df877b28",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0165-P02:4:94ee23d7ace7c1cc",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "09017b1d555367068a939cd4084d3881dc90e32c28752e6083931ecc28a33ce0",
               "image": null
             },
             {
@@ -79287,8 +79478,8 @@
               "kind": "specimen",
               "provider": null,
               "url": "https://www.ebay.com/itm/137311196693",
-              "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130.",
-              "contentHash": "b1907346afd3c5e6e7f68eafd2cce200a69e368b082cdfa6272e1c403cb7cd01",
+              "evidence": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+              "contentHash": "41a760f44ac1ce46e562ae73a4e8ae440948aac15024ea057e13ed61383eacb5",
               "image": "verification/specimens/SPEC-0129.jpg"
             },
             {
@@ -79297,7 +79488,7 @@
               "provider": null,
               "url": "https://www.ebay.com/itm/137311196693",
               "evidence": "Back photograph from the same eBay listing and physical Spanish Jungle Snorlax as SPEC-0129. The ordinary western Pokémon back is retained separately so every available photograph remains part of the data specification; the paired front establishes the Spanish 11/64 identity and holo treatment.",
-              "contentHash": "68b62351a706a56790aef7e039496f27f9195cc17c63a1f8776e6d79ce5ba4f2",
+              "contentHash": "1b539ee9f18345aef471f5608dd1ec360fd7fef63a95d763d406fce5af8c85fe",
               "image": "verification/specimens/SPEC-0130.jpg"
             },
             {

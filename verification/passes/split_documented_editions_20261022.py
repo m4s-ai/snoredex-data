@@ -131,29 +131,44 @@ def write(overrides):
 
 
 def retargeted_dates(document):
-    """Replace date rows whose editionless printing was folded into an edition pair."""
+    """Replace date rows whose editionless printing was folded into an edition pair.
+
+    An owner-attested edition printing is a finish candidate, not a materialized physical
+    printing, so the edition pair is read from the finish claims rather than the physical layer.
+    """
     graph = read(V / "authoritative_graph.json")
-    physical = {e["entityId"]: e["payload"] for e in graph["entities"] if e["entityType"] == "physical-printing"}
+    payloads = [e["payload"] for e in graph["entities"]]
+    physical = {p["physicalPrintingId"]: p for p in payloads if "physicalPrintingId" in p}
+    printing_by_id = {p["printingId"]: p for u in read(V / "finish_units.json")["units"] for p in u["printings"]}
+    claims = [p for p in payloads if p.get("sourceKind") == "finish-printing-record"]
     checklist = {row["printingId"]: row["checklistId"] for row in read(ROOT / "analysis_checklist.json")["items"]
                  if row.get("printingId")}
-    targets = {(t[0], t[1], t[2]) for t in TARGETS}
     finishes = {(t[0], t[1], t[2]): t[3] for t in TARGETS}
     rows, changed = [], False
     for row in document["releaseDates"]["reviewedItems"]:
         release = row["cardReleaseId"].split(":")
         key = (release[3], release[4].split("/")[0], release[2])
-        if row["physicalPrintingId"] in physical or key not in targets:
+        settled = row["physicalPrintingId"] in physical or (
+            row["physicalPrintingId"] is None
+            and printing_by_id.get(row["sourcePrintingId"], {}).get("edition") in (FIRST, UNLIMITED))
+        if settled or key not in finishes:
             rows.append(row)
             continue
-        editions = [p for pid, p in sorted(physical.items()) if p["cardReleaseId"] == row["cardReleaseId"]
-                    and p["finish"] == finishes[key] and p.get("edition") in (FIRST, UNLIMITED)]
-        if {p["edition"] for p in editions} != {FIRST, UNLIMITED}:
+        pair = []
+        for claim in sorted(claims, key=lambda c: c["claimId"]):
+            target = physical.get(claim.get("materializedTargetId") or "")
+            release_id = target["cardReleaseId"] if target else claim.get("proposedCardReleaseId")
+            printing = printing_by_id.get(claim["sourceId"], {})
+            if release_id == row["cardReleaseId"] and printing.get("finish") == finishes[key] \
+                    and printing.get("edition") in (FIRST, UNLIMITED):
+                pair.append((claim, target, printing))
+        if {printing["edition"] for _, _, printing in pair} != {FIRST, UNLIMITED}:
             raise ValueError(f"no complete edition pair for reviewed date {row['itemId']}")
-        for printing in editions:
-            rows.append({**row, "itemId": item_id("claim:" + printing["establishingClaimId"]),
-                         "physicalPrintingId": printing["physicalPrintingId"],
-                         "sourcePrintingId": printing["sourcePrintingId"],
-                         "legacyChecklistIds": [checklist[printing["sourcePrintingId"]]],
+        for claim, target, printing in pair:
+            rows.append({**row, "itemId": item_id("claim:" + claim["claimId"]),
+                         "physicalPrintingId": target["physicalPrintingId"] if target else None,
+                         "sourcePrintingId": printing["printingId"],
+                         "legacyChecklistIds": [checklist[printing["printingId"]]],
                          "basis": row["basis"] + f"; applies to the {printing['edition']} printing of that launch"})
         changed = True
     return rows if changed else None

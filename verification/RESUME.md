@@ -244,8 +244,14 @@ Unlimited is one item per edition (`split_documented_editions_20261022.py`). TCG
 `variants_detailed` separates an edition-stamped from an unstamped variant per language, but its
 stamp labels are database translations; never record them as printed marking text. Card-level
 finish evidence with no edition (a TCGdex flag) folds into a complete edition pair
-(`finishes.absorb_editionless_finish_evidence`); an editionless specimen photograph stays
-edition-unknown. A finish-override source that names `languages` is merged into same-language
+(`finishes.absorb_editionless_finish_evidence`).
+
+**A legible card face establishes its edition (owner rule 2026-10-22).** For a set printed in both
+editions, a visible 1st Edition mark establishes 1st Edition, and the mark's position visibly
+empty on a complete, legible card face establishes Unlimited. This is a positive observation of the
+pictured card, not an absence argument about a source; rule 3 is about sources that omit a
+printing. Only a crop that hides the mark position, or an image too small to read it, leaves the
+edition unknown. Localities without an edition system (Korean, Chinese, SEA) never get one. A finish-override source that names `languages` is merged into same-language
 specimens as curated identity, so an edition source must not carry them.
 
 **S-Chinese via-releases (owner decision 2026-10-22).** A legacy S-Chinese unit harvested under a

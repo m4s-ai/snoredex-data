@@ -77,7 +77,9 @@ The five questions raised by this research were decided by the collection owner:
 5. **Edition-documented cards are split** into one item per edition by
    [`split_documented_editions_20261022.py`](../../passes/split_documented_editions_20261022.py):
    Jungle 11/27 in all seven Western languages, Gym Heroes 33 (English) and the Japanese PCG1 074,
-   PCG3 062, PCG9 001 and e-Card 5 062. A specimen photograph that shows no readable edition
-   stays edition-unknown (ES Jungle 11, PT Jungle 27, e-Card 5 062).
+   PCG3 062, PCG9 001 and e-Card 5 062. Specimen photographs record the edition their face shows
+   (owner rule: a visible 1st Edition mark, or a visibly empty mark position); see
+   [edition-marks-20261022](../edition-marks-20261022/intake-manifest.json) and the owner's e-Card 5
+   photographs SPEC-0632/SPEC-0633.
 
 Image and collector-number findings without a decision are retained for the next intake.
