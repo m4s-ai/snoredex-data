@@ -1,14 +1,17 @@
 {
   "schemaVersion": "1.0.0",
   "meta": {
-    "description": "Reviewed localized printed card names. An exact-print observation of a card release wins; otherwise a card whose English name is only the species takes the localization's official species name. Mechanic and trainer-owned names (ex, GX, V, VMAX, LV.X, Hop's, Team Rocket's, Eevee & Snorlax, Doll) are never derived; their patterns are retained as reference only.",
+    "description": "Reviewed localized printed card names. An exact-print observation of a card release wins; otherwise a card whose English name is only the species takes the localization's official species name. A pattern listed in derivedPatternCardNames is applied per localization by owner decision; every other mechanic or trainer-owned name (ex, GX, V, VMAX, LV.X, Team Rocket's, Eevee & Snorlax, Doll) is never derived and its pattern is retained as reference only.",
     "evidenceBundle": "verification/evidence/data-gaps-20261022/local-names/findings.json",
     "speciesOnlyCardNames": [
       "Snorlax",
       "Snorlax Lv.35",
       "Snorlax Lv.37",
       "Snorlax Lv.40"
-    ]
+    ],
+    "derivedPatternCardNames": {
+      "Hop's Snorlax": "owner decision 2026-10-22"
+    }
   },
   "speciesNames": {
     "LOCALIZATION:CN:zh-Hans": {

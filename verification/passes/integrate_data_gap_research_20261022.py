@@ -490,6 +490,9 @@ SPECIES_KEYS = {
 }
 # Card names that print only the species name; the level is printed apart from the name.
 SPECIES_ONLY_CARD_NAMES = ["Snorlax", "Snorlax Lv.35", "Snorlax Lv.37", "Snorlax Lv.40"]
+# Owner decision 2026-10-22: these mechanic/trainer names may take their evidenced per-localization
+# pattern when no exact-print name exists.
+DERIVED_PATTERN_CARD_NAMES = {"Hop's Snorlax": "owner decision 2026-10-22"}
 
 
 def build_local_names(catalogue: dict) -> dict:
@@ -521,11 +524,13 @@ def build_local_names(catalogue: dict) -> dict:
             "description": (
                 "Reviewed localized printed card names. An exact-print observation of a card "
                 "release wins; otherwise a card whose English name is only the species takes the "
-                "localization's official species name. Mechanic and trainer-owned names (ex, GX, V, "
-                "VMAX, LV.X, Hop's, Team Rocket's, Eevee & Snorlax, Doll) are never derived; their "
-                "patterns are retained as reference only."),
+                "localization's official species name. A pattern listed in derivedPatternCardNames "
+                "is applied per localization by owner decision; every other mechanic or "
+                "trainer-owned name (ex, GX, V, VMAX, LV.X, Team Rocket's, Eevee & Snorlax, Doll) is "
+                "never derived and its pattern is retained as reference only."),
             "evidenceBundle": f"{BUNDLE}/local-names/findings.json",
             "speciesOnlyCardNames": SPECIES_ONLY_CARD_NAMES,
+            "derivedPatternCardNames": DERIVED_PATTERN_CARD_NAMES,
         },
         "speciesNames": dict(sorted(species.items())),
         "releases": dict(sorted(releases.items())),

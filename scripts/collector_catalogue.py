@@ -1147,7 +1147,7 @@ def local_card_name(
     names: dict[str, Any], release_id: str, localization_id: str, card_name: str,
     source_native: str | None,
 ) -> str | None:
-    """Printed local name: source-native record, exact-print observation, then species rule."""
+    """Printed local name: source-native record, exact-print observation, then reviewed rule."""
     if source_native:
         return source_native
     exact = names["releases"].get(release_id)
@@ -1155,6 +1155,8 @@ def local_card_name(
         return exact["value"]
     if card_name in names["meta"]["speciesOnlyCardNames"]:
         return (names["speciesNames"].get(localization_id) or {}).get("value")
+    if card_name in names["meta"].get("derivedPatternCardNames", {}):
+        return (names["patterns"].get(card_name, {}).get(localization_id) or {}).get("value")
     return None
 
 

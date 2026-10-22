@@ -360,7 +360,12 @@ def local_card_name_regressions() -> None:
     assert resolve(sample, "R", "L:de", "Hop's Snorlax", "Native") == "Native"
     assert resolve(sample, "R", "L:de", "Hop's Snorlax", None) == "Hops Relaxo"
     assert resolve(sample, "X", "L:de", "Snorlax", None) == "Relaxo"
-    assert resolve(sample, "X", "L:de", "Hop's Snorlax", None) is None, "mechanic names are never derived"
+    assert resolve(sample, "X", "L:de", "Hop's Snorlax", None) is None, "unlisted patterns are never derived"
+    approved = {**sample, "meta": {**sample["meta"], "derivedPatternCardNames": {"Hop's Snorlax": "owner"}},
+                "patterns": {"Hop's Snorlax": {"L:de": {"value": "Hops Relaxo"}}}}
+    assert resolve(approved, "X", "L:de", "Hop's Snorlax", None) == "Hops Relaxo"
+    assert resolve(approved, "X", "L:de", "Snorlax ex", None) is None
+    assert resolve(approved, "R2", "L:fr", "Hop's Snorlax", None) is None
     assert resolve(sample, "X", "L:fr", "Snorlax", None) is None
     sources = {row["printId"]: row.get("name") for row in read("verification/source_first_prints.json")["prints"]}
     for item in read("collector_catalogue.json")["items"]:
@@ -370,6 +375,8 @@ def local_card_name_regressions() -> None:
         if item["localCardName"] is None:
             assert item["cardName"] not in names["meta"]["speciesOnlyCardNames"] \
                 or item["localizationId"] not in names["speciesNames"], item["itemId"]
+            assert item["localizationId"] not in names["patterns"].get(item["cardName"], {}) \
+                or item["cardName"] not in names["meta"]["derivedPatternCardNames"], item["itemId"]
 
 
 def main() -> None:
