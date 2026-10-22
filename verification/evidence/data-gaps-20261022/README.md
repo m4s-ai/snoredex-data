@@ -60,18 +60,24 @@ applies the unambiguous fields through their existing owners;
   `tpci-vivid-voltage-build-battle-dates`). The Staff-stamped prerelease variant and the separate
   Cosmos-holo giveaway are not dated.
 
-## Open owner decisions
+## Owner decisions (2026-10-22)
 
-1. Whether the Hop's Snorlax pattern names (e.g. "Hops Relaxo", "Ronflex de Nabil",
-   "Snorlax de Paul", "Snorlax do Lupo") may be derived for the 18 remaining items.
-2. Possible duplicate local sets (ID `S10a I`/`s10a I`, TH `s10a`/`s10a T`) and the S-Chinese
-   `via-…:unknown-local-set` releases that appear to duplicate identified CN releases and carry
-   Japanese release dates.
-3. Seller photographs that show a different finish from a marketplace-only candidate
-   (see [finish/findings.json](finish/findings.json) `unresolved`).
-4. Whether a DP Battle Pokédex identifier (`DPBP#174`) may be stored as a collector number.
-5. Whether items whose card is positively documented in both 1st Edition and Unlimited are split
-   into one item per edition.
+The five questions raised by this research were decided by the collection owner:
 
-Edition, finish, image and collector-number findings are retained for those decisions and for the
-next intake; they are not applied here.
+1. **Hop's Snorlax names** are derived from the reviewed patterns (`derivedPatternCardNames`).
+2. **Duplicate ID/TH s10a local sets** are analysed and proposed in issue #431; no data change.
+   The **S-Chinese `via-…` releases** are merged into the identified CN prints by
+   [`merge_cn_via_releases_20261022.py`](../../passes/merge_cn_via_releases_20261022.py); items
+   now carry the CN set, number and date instead of the Japanese harvest date.
+3. **Seller finish photographs** are filed as SPEC records; every photograph in
+   [finish/findings.json](finish/findings.json) was already retained under its source URL
+   (for example SPEC-0444, SPEC-0453, SPEC-0454, SPEC-0456), so no new record was needed.
+   Marketplace-only candidates stay unchanged.
+4. **`DPBP#174`** is shown as the DP1 Snorlax Lv.35 collector number.
+5. **Edition-documented cards are split** into one item per edition by
+   [`split_documented_editions_20261022.py`](../../passes/split_documented_editions_20261022.py):
+   Jungle 11/27 in all seven Western languages, Gym Heroes 33 (English) and the Japanese PCG1 074,
+   PCG3 062, PCG9 001 and e-Card 5 062. A specimen photograph that shows no readable edition
+   stays edition-unknown (ES Jungle 11, PT Jungle 27, e-Card 5 062).
+
+Image and collector-number findings without a decision are retained for the next intake.

@@ -233,9 +233,25 @@ names come from the product link on an exact card page or the product filter of 
 record them verbatim, including prefixes such as 擴充包. Localized printed card names come
 first from TCGdex per-language card records, the official JP/Asia databases and specimen photos;
 `verification/local_card_names.json` keeps them per card release, with the official species name
-per localization as the fallback for species-only cards. Never derive mechanic or trainer-owned
-names: Hop is "Nabil" in French, "Paul" in Spanish and "Lupo" in Portuguese. In this environment
-the agent proxy reset every Wayback Machine request and pokemon.com card pages returned 403.
+per localization as the fallback for species-only cards. Mechanic and trainer-owned names are
+never derived by default: Hop is "Nabil" in French, "Paul" in Spanish and "Lupo" in Portuguese.
+The owner approved one exception on 2026-10-22: Hop's Snorlax takes the reviewed per-language
+pattern (`meta.derivedPatternCardNames`). In this environment the agent proxy reset every Wayback
+Machine request and pokemon.com card pages returned 403.
+
+**Editions (owner decision 2026-10-22).** A card positively documented in both 1st Edition and
+Unlimited is one item per edition (`split_documented_editions_20261022.py`). TCGdex
+`variants_detailed` separates an edition-stamped from an unstamped variant per language, but its
+stamp labels are database translations; never record them as printed marking text. Card-level
+finish evidence with no edition (a TCGdex flag) folds into a complete edition pair
+(`finishes.absorb_editionless_finish_evidence`); an editionless specimen photograph stays
+edition-unknown. A finish-override source that names `languages` is merged into same-language
+specimens as curated identity, so an edition source must not carry them.
+
+**S-Chinese via-releases (owner decision 2026-10-22).** A legacy S-Chinese unit harvested under a
+Japanese set code is the identified CN print once issue #257 maps it; the via-release is merged
+into that print (`merge_cn_via_releases_20261022.py`) and a `releaseSetCode` bridge, with the legacy
+V-token in `variant` where the codes differ, lets the CN specimens join the legacy finish unit.
 
 ## What this file is
 
