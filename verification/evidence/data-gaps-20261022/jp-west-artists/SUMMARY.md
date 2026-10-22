@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # jp-west-artists — illustrator research (2026-10-22)
 
 Targets: 80 card releases (42 JP + 38 WEST/LATAM). **Found 79, unresolved 1.**

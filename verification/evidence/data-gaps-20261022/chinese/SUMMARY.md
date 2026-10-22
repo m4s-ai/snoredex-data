@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # Chinese workstream (TW + CN) — 2026-10-22
 
 Counts: 74 findings, 9 unresolved (every target covered).

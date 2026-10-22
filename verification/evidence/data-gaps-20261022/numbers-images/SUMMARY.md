@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # numbers-images — summary (2026-10-22)
 
 Targets: 15 collectorNumber rows (14 distinct items) + 11 image rows. findings.json: 17 findings, 4 unresolved groups. Every target appears.

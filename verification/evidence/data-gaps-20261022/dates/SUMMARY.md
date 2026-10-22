@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # Dates workstream: summary (2026-10-22)
 
 Targets: 53 items (48 card releases). **Found: 5 items with a new day-precision date. Unresolved: 48 items** (in 25 groups, plus the Italian Staff item c3adb9ce). Every target appears in `findings.json`.

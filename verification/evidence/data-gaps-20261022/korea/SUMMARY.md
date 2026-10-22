@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # Workstream "korea": summary (2026-10-22)
 
 ## Counts

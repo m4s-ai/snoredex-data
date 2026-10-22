@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # asia-artists: summary (2026-10-22)
 
 Targets: 101 card releases (TW Traditional Chinese, ID Indonesian, TH Thai) with no illustrator.

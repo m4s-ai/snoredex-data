@@ -35,12 +35,9 @@ ORIGIN = "reviewed-evidence-data-gaps-20261022"
 SET_NAME_STREAMS = ("id-th-sets", "korea", "chinese")
 ILLUSTRATOR_STREAMS = ("korea", "chinese", "asia-artists", "jp-west-artists")
 
-# Rainbow/hyper-rare recolours of an SR composition: whether a recolour counts as the same
-# artwork is an open owner decision, so these propagations are not applied yet.
-HELD_FOR_OWNER = {
-    "RELEASE:KR:Korean:sm9:115/095:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-    "RELEASE:TW:T-Chinese:AS5a:222/184:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-}
+# Owner decision 2026-10-22: a rainbow/hyper-rare recolour of the same composition is the same
+# artwork (the base illustration and its illustrator are unchanged), so no propagation is held.
+HELD_FOR_OWNER: set[str] = set()
 # The official TW database text names Masakazu Fukuda, but the card image on the same official
 # page prints "Illus.aky CG Works", as does the identical-artwork CN print (SPEC-0098). The printed
 # credit is the card's own statement and wins over the database text field.
@@ -291,20 +288,6 @@ def apply_illustrators(graph, prints, cards, checklist, catalogue, units, report
                 report["skipped"].append({"target": release_id, "field": "illustrator",
                                           "reason": "card release not in the graph"})
                 continue
-            if evidence["providerId"] == "cardmarket-product-image":
-                # A harvested product image is tier-2 evidence only once retained as a SPEC record
-                # (AGENTS rule 1). Ground the credit on the official anchor of the same artwork.
-                if not finding.get("anchorSourceUrl"):
-                    report["held"].append({"target": release_id, "field": "illustrator", "value": value,
-                                           "reason": "read from a harvested product image without an official "
-                                                     "anchor; needs a SPEC intake of that image"})
-                    continue
-                transcription = {key: evidence[key] for key in ("sourceRef", "sha256") if key in evidence}
-                anchor = {"sourceUrl": finding["anchorSourceUrl"], "retainedPath": ""}
-                evidence = {**evidence, "sourceUrl": finding["anchorSourceUrl"],
-                            "providerId": provider_for(anchor), "method": "artwork-propagation",
-                            "productImageTranscription": transcription}
-                evidence.pop("sourceRef", None)
             sf_ids = [pid for pid in release.get("sourceFirstRecordIds") or [] if pid in print_rows]
             if sf_ids:
                 for print_id in sf_ids:

@@ -71,7 +71,9 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    text or treatment was actually inspected. File an accepted image as a `SPEC-nnnn` record with
    its image and listing/product provenance, never as a bare link: pages and listings change, and
    the observation has to outlive them. Tier 2 rather than 1 because the pictured card cannot be
-   re-examined physically and catalogue or seller metadata may be wrong. There is no open API;
+   re-examined physically and catalogue or seller metadata may be wrong. The SPEC requirement
+   governs claims about a physical printing; an illustrator credit read from a retained product
+   image attests the artwork and needs no SPEC record (owner, 2026-10-22). There is no open API;
    collection is by hand or a browser session, and the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier` —

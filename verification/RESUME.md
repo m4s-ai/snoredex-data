@@ -208,8 +208,13 @@ artwork — all languages, printings, finishes and variants — has the same ill
 changed or different artwork can differ. A credit may therefore be carried from one exact print to
 another, but only after the two images are compared and show the same illustration. `workId` and
 `cardKey` mean the same card *text*, not the same artwork, and the automatic image groups in
-`artwork_review_projection.json` are suggestions. Whether a rainbow/hyper-rare recolour counts as
-the same artwork is still open; do not propagate across one until the owner decides.
+`artwork_review_projection.json` are suggestions. A rainbow/hyper-rare recolour of the same
+composition is the same artwork (owner, 2026-10-22): the base illustration and its illustrator are
+unchanged. The illustrator is an attribute of the artwork, not of a physical printing — a card
+planned but never printed still has its illustrator — so a credit read from a retained harvested
+product image under `images/` is accepted without a SPEC record; the SPEC requirement of AGENTS
+rule 1 governs physical-printing claims. A propagated credit is graded as `internal-derivation`;
+the anchor print keeps its own source.
 
 The credit printed on the card is the card's own statement. Read it from an exact-print image
 ("Illus." line) where one exists; it beats a database text field — the official TW page for

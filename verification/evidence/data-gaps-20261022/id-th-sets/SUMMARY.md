@@ -1,5 +1,7 @@
 <!-- doc: role=retained research workstream report; stage=history -->
 
+> Historical record — research snapshot from 2026-10-22; current gaps are determined by canonical stores.
+
 # id-th-sets — localSetName for Indonesian + Thai local sets (2026-10-22)
 
 Targets: 50 (26 ID, 24 TH). Found: 48. Unresolved: 2 (ID SM-P, TH SM-P).
