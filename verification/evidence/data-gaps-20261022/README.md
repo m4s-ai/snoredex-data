@@ -36,36 +36,41 @@ applies the unambiguous fields through their existing owners;
 [integration-report.json](integration-report.json) accounts for every established value.
 
 - **Local set names** — 121 local sets gain their source-native official name (Hangul, Thai,
-  Chinese and Indonesian verbatim; translations are marked as such).
-- **Illustrators** — 142 source-first prints and 66 legacy Cardmarket products. Methods: official
-  database credit, transcription from an image of the exact print, or propagation along a visually
-  confirmed identical artwork. The owner stated on 2026-10-22 that an illustrator belongs to the
-  artwork: every print of the same artwork in every language and variant shares it; only a changed
-  or different artwork can differ. The credit printed on the card wins over a database text field
-  (TW sc1b 165/153). The credit printed "0313" is displayed in that form where two Asian databases
-  render "313"; the source-native value is retained.
+  Chinese and Indonesian verbatim; translations are marked as such) as appended
+  `local-set-name-record` entries, so older admission passes that rebuild their own profile records
+  on replay cannot erase them. Items with a local set name: 796 → 1,021 of 1,030.
+- **Illustrators** — 144 source-first prints and 66 legacy Cardmarket products (site rows with an
+  artist: 878 of 883). Methods: official database credit, transcription from an image of the exact
+  print, or propagation along a visually confirmed identical artwork. Owner decisions of
+  2026-10-22: an illustrator belongs to the artwork, so every print of the same artwork shares it;
+  a rainbow/hyper-rare recolour of the same composition is the same artwork; and a credit read
+  from a retained product image needs no SPEC record because it attests the artwork, not a
+  physical printing. Propagated product credits are graded `internal-derivation`. The credit
+  printed on the card wins over a database text field (TW sc1b 165/153). "0313" is displayed as
+  printed where two Asian databases render "313"; the source-native value is retained.
 - **Localized card names** — the new reviewed registry
   [`verification/local_card_names.json`](../../local_card_names.json) holds 16 official species
   names, 553 exact-print release names and 122 reference name patterns. An exact-print name wins;
   otherwise a card whose English name is only the species takes the species name. Mechanic and
   trainer-owned names are never derived. Filled `localCardName`: 248 → 1,010 of 1,030.
-- **Release date** — CN S-P/CS 061 gains 2023-08-19 from the official event page.
+- **Release dates** — CN S-P/CS 061 gains 2023-08-19 from the official event page. The four
+  ordinary SWSH068 prints in French, German, Italian and Spanish gain 2020-10-31: the owner
+  identified SWSH068 as the Vivid Voltage prerelease promo of the Build & Battle Box, which the
+  localized TPCi press releases date to that day (declared as
+  `tpci-vivid-voltage-build-battle-dates`). The Staff-stamped prerelease variant and the separate
+  Cosmos-holo giveaway are not dated.
 
-## Held for owner decision
+## Open owner decisions
 
-1. Whether a rainbow/hyper-rare recolour of an SR composition counts as the same artwork
-   (KR sm9 115/095 HR, TW AS5a 222/184 HR propagations).
-2. Whether the four SWSH068 Build & Battle items (FR, DE, IT, ES) are that promo rather than the
-   separate Cosmos-holo store giveaway; the official press releases date the box 2020-10-31.
-3. Whether the Hop's Snorlax pattern names (e.g. "Hops Relaxo", "Ronflex de Nabil",
+1. Whether the Hop's Snorlax pattern names (e.g. "Hops Relaxo", "Ronflex de Nabil",
    "Snorlax de Paul", "Snorlax do Lupo") may be derived for the 18 remaining items.
-4. Possible duplicate local sets (ID `S10a I`/`s10a I`, TH `s10a`/`s10a T`) and the S-Chinese
+2. Possible duplicate local sets (ID `S10a I`/`s10a I`, TH `s10a`/`s10a T`) and the S-Chinese
    `via-…:unknown-local-set` releases that appear to duplicate identified CN releases and carry
    Japanese release dates.
-5. Seller photographs that show a different finish from a marketplace-only candidate
+3. Seller photographs that show a different finish from a marketplace-only candidate
    (see [finish/findings.json](finish/findings.json) `unresolved`).
-6. Whether a DP Battle Pokédex identifier (`DPBP#174`) may be stored as a collector number.
-7. Whether items whose card is positively documented in both 1st Edition and Unlimited are split
+4. Whether a DP Battle Pokédex identifier (`DPBP#174`) may be stored as a collector number.
+5. Whether items whose card is positively documented in both 1st Edition and Unlimited are split
    into one item per edition.
 
 Edition, finish, image and collector-number findings are retained for those decisions and for the
