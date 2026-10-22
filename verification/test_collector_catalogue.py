@@ -189,7 +189,46 @@ def source_first_finish_decision_regressions() -> None:
             raise AssertionError("unsupported source-first finish closure was accepted")
 
 
+def unicode_source_uri_regressions() -> None:
+    # #424: Unicode source IRIs must leave the producer as schema-valid URIs that
+    # still name the same resource, and the gate must reject a raw IRI.
+    for iri in (
+        "https://wiki.52poke.com/wiki/PCG特别套装（TCG）",
+        "https://wiki.52poke.com/index.php?title=卡比兽（S4）&oldid=2150661",
+        "https://ojamacard.com/product/28693/056-071-คาบิกอน-r-s10bt",
+        "https://example.com/a b#frag ment",
+    ):
+        uri = collector.schema_uri(iri)
+        assert collector.RFC3986_URI.match(uri) and uri.isascii(), uri
+        assert unquote(uri) == iri, (uri, iri)
+        assert collector.schema_uri(uri) == uri
+    for conforming in (
+        "https://pokumon.com/card/snorlax-082-sv-p-thai-promo/",
+        "https://example.com/x%20y?q=%E5%8D%A1&r=1#top",
+    ):
+        assert collector.schema_uri(conforming) == conforming
+    assert collector.schema_uri("https://bücher.example/kabigon") == "https://xn--bcher-kva.example/kabigon"
+
+    catalogue = read("collector_catalogue.json")
+    for row in catalogue["items"]:
+        for link in (*row["sourceLinks"], *row["evidenceLinks"]):
+            assert collector.RFC3986_URI.match(link), (row["itemId"], link)
+    broken = copy.deepcopy(catalogue)
+    broken["items"][0]["evidenceLinks"] = ["https://wiki.52poke.com/wiki/卡比兽（SVI）"]
+    broken["meta"]["catalogueFingerprint"] = collector.semantic_fingerprint(broken)
+    assert any("RFC 3986" in error for error in collector.validate_catalogue(broken, check_asset_bytes=False))
+
+    # #424: the catalogue snoredex-checklist actually deploys has a complete route.
+    routes = {row["fromFingerprint"]: row for row in read("collector_migrations.json")["catalogueTransitions"]}
+    live = routes[collector.LIVE_CONSUMER_CATALOGUE_FINGERPRINT]
+    assert live["sourceArtifactCommit"] == "98700119700523ee4939b7539103f7ba61ab03e6"
+    assert live["toFingerprint"] == catalogue["meta"]["catalogueFingerprint"]
+    covered = [item for row in live["transitions"] for item in row["fromItemIds"]]
+    assert sorted(covered) == live["sourceItemIds"], "every deployed item needs exactly one route"
+
+
 def main() -> None:
+    unicode_source_uri_regressions()
     source_first_finish_decision_regressions()
     m6a = [row for row in read("collector_catalogue.json")["items"]
            if row["localSetCode"] == "M6a" and row["localizationId"] == "LOCALIZATION:JP:ja"]
@@ -539,7 +578,17 @@ def main() -> None:
     assert current_bs2["itemKind"] == "verified-printing"
     assert current_bs2["releaseDate"] == "2010-06-17"
     new_bs2 = current_bs2["itemId"]
-    for route in routes.values():
+    # The pre-#342 publications carry the original item ids; the live consumer
+    # catalogue (#424) already holds BS2 as a research placeholder and both mirrors.
+    historical_routes = [
+        routes[collector.PREVIOUS_CATALOGUE_FINGERPRINT], deployed_route,
+    ]
+    live_route = routes[collector.LIVE_CONSUMER_CATALOGUE_FINGERPRINT]
+    live_bs2 = next(row for row in live_route["transitions"]
+                    if row["fromItemIds"] == ["item-20cf798c-be66-58e6-bf68-f3cc437822c4"])
+    assert (live_bs2["toItemIds"], live_bs2["changeKind"], live_bs2["automaticStateAction"]) == (
+        [new_bs2], "rekey-1:1", "preserve")
+    for route in historical_routes:
         bs2 = next(
             row for row in route["transitions"] if old_bs2 in row["fromItemIds"]
         )
@@ -552,7 +601,10 @@ def main() -> None:
         "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8",
         "item-c7eec9be-fb9a-5be1-a093-39b147541339",
     }
-    for route in routes.values():
+    for target in promo_mirror_targets:
+        assert next(row for row in live_route["transitions"] if row["fromItemIds"] == [target])[
+            "changeKind"] == "retained"
+    for route in historical_routes:
         promo_reverse = next(
             row for row in route["transitions"]
             if old_promo_reverse in row["fromItemIds"]
