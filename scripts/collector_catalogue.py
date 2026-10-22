@@ -54,6 +54,10 @@ PREVIOUS_CATALOGUE_FINGERPRINT = (
 DEPLOYED_CATALOGUE_FINGERPRINT = (
     "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15"
 )
+# The catalogue snoredex-checklist actually deploys (#424, consumer m4s-ai/snoredex-checklist#125).
+LIVE_CONSUMER_CATALOGUE_FINGERPRINT = (
+    "sha256:7f88c3c6dffc4b1fe73c868cd6be1baaa36116129b5217eaa1f17d590bd47d81"
+)
 PUBLISHED_CATALOGUE_SOURCES = (
     (
         "ff045df123f05f107cc86ce3c5fdc32bc5f24cd9",
@@ -62,6 +66,10 @@ PUBLISHED_CATALOGUE_SOURCES = (
     (
         "44d72b0a33125efc595309592afbf24d4eb210c1",
         DEPLOYED_CATALOGUE_FINGERPRINT,
+    ),
+    (
+        "98700119700523ee4939b7539103f7ba61ab03e6",
+        LIVE_CONSUMER_CATALOGUE_FINGERPRINT,
     ),
 )
 DATASET_ID = "snoredex-data/snorlax-current-known"
@@ -188,6 +196,39 @@ def correction_state_summary(item: dict[str, Any]) -> str:
 
 def _encode_correction_link(params: dict[str, str]) -> str:
     return CORRECTION_FORM_URL + "?" + urlencode(params)
+
+
+# RFC 3986 URI-reference characters; the schema's `format: uri` rejects anything else.
+RFC3986_URI = re.compile(r"^[A-Za-z][A-Za-z0-9+.\-]*:[A-Za-z0-9\-._~:/?#@!$&'()*+,;=%]*$")
+_URI_SAFE = "-._~!$&'()*+,;=:@%"
+
+
+def schema_uri(value: str) -> str:
+    """Map a source IRI to its RFC 3986 URI without changing the resource it names.
+
+    Non-ASCII and other disallowed characters are UTF-8 percent-encoded (RFC 3987 §3.1)
+    and an internationalized host becomes its IDNA form. Existing escapes are kept, so an
+    already conforming URI is returned unchanged and the mapping is idempotent.
+    """
+    if RFC3986_URI.match(value):
+        return value
+    split = urlsplit(value)
+    host = split.hostname or ""
+    netloc = split.netloc
+    if host and not host.isascii():
+        netloc = netloc.replace(host, host.encode("idna").decode("ascii"))
+    netloc = quote(netloc, safe=_URI_SAFE + "[]")
+    path = quote(split.path, safe=_URI_SAFE + "/")
+    query = quote(split.query, safe=_URI_SAFE + "/?")
+    fragment = quote(split.fragment, safe=_URI_SAFE + "/?")
+    uri = f"{split.scheme}://{netloc}{path}"
+    if query or value.split("#", 1)[0].endswith("?"):
+        uri += "?" + query
+    if fragment or value.endswith("#"):
+        uri += "#" + fragment
+    if not RFC3986_URI.match(uri):
+        raise ContractError(f"source link cannot be expressed as an RFC 3986 URI: {value!r}")
+    return uri
 
 
 def _shorten(value: str) -> str:
@@ -1372,9 +1413,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         if source_first_row and source_first_row.get("sourceUrl"):
             source_refs.add(source_first_row["sourceUrl"])
             source_refs.update(source_first_row.get("corroboratingSourceUrls", []))
-        source_links = sorted(
-            value for value in source_refs if isinstance(value, str) and re.match(r"https?://", value)
-        )
+        source_links = sorted({
+            schema_uri(value) for value in source_refs
+            if isinstance(value, str) and re.match(r"https?://", value)
+        })
 
         image_path = (old or {}).get("image")
         image_scope = "legacy-product" if image_path else "unknown"
@@ -1961,6 +2003,23 @@ def fixture_document() -> dict[str, Any]:
     }
 
 
+def catalogue_uri_errors(document: dict[str, Any]) -> list[str]:
+    """Hold the producer to its own `format: uri` fields before a consumer has to (#424)."""
+    def invalid(value: Any) -> bool:
+        return not isinstance(value, str) or not RFC3986_URI.match(value)
+
+    errors = [
+        f"item source/evidence link is not an RFC 3986 URI: {item.get('itemId')}"
+        for item in document.get("items", [])
+        if any(map(invalid, (*(item.get("sourceLinks") or []), *(item.get("evidenceLinks") or []))))
+    ]
+    errors.extend(
+        f"asset url is not an RFC 3986 URI: {asset.get('assetId')}"
+        for asset in document.get("assets", []) if invalid(asset.get("url"))
+    )
+    return errors
+
+
 def validate_catalogue(
     document: dict[str, Any], graph: dict[str, Any] | None = None, *, check_asset_bytes: bool = True
 ) -> list[str]:
@@ -2129,6 +2188,7 @@ def validate_catalogue(
     } != set(graph_releases):
         errors.append("catalogue card-release accounting differs from the graph")
 
+    errors.extend(catalogue_uri_errors(document))
     for aid, asset in assets.items():
         path = ROOT / str(asset.get("path") or "")
         if check_asset_bytes and (
