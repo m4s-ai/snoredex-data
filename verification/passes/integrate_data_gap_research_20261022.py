@@ -19,6 +19,7 @@ sha256 of the retained bytes or of the cited repository file). Nothing is inferr
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import sys
 from collections import defaultdict
@@ -143,40 +144,103 @@ def findings(field: str, streams: tuple[str, ...]):
                 yield stream, finding
 
 
+def upsert(rows: list, key: str, value: dict, match) -> None:
+    found = [row for row in rows if match(row)]
+    if len(found) > 1:
+        raise ValueError(f"ambiguous {key}")
+    if found:
+        found[0].clear()
+        found[0].update(value)
+    else:
+        rows.append(value)
+
+
 def apply_set_names(graph: dict, catalogue: dict, report: dict) -> None:
-    records = {row["sourceRecordId"]: row for row in catalogue["sourceRecords"]}
-    entities = {(row["entityType"], row["entityId"]): row for row in graph["entities"]}
+    """Append one name record per local set; existing provider records stay untouched.
+
+    The registry is append-only and older admission passes rebuild their own profile records on
+    replay, so a researched name lives in its own `local-set-name-record`, mapped to the local set.
+    """
+    entities = graph["entities"]
+    local_sets = {row["entityId"]: row["payload"] for row in entities if row["entityType"] == "local-set"}
+    added = 0
     for stream, finding in findings("localSetName", SET_NAME_STREAMS):
         for local_set_id in finding["targetIds"]:
-            local_set = entities[("local-set", local_set_id)]["payload"]
-            if local_set.get("observedNames"):
-                report["skipped"].append({"target": local_set_id, "field": "localSetName",
-                                          "reason": "local set already has an observed name"})
-                continue
-            profiles = [records[sid] for sid in local_set["sourceRecordIds"]
-                        if records[sid]["sourceKind"] == "source-first-local-set-profile"]
-            if not profiles:
-                report["skipped"].append({"target": local_set_id, "field": "localSetName",
-                                          "reason": "no source-first profile owns this local set"})
-                continue
+            local_set = local_sets[local_set_id]
             evidence = provenance(stream, finding)
-            retained_names = []
-            for profile in profiles:
-                raw = profile["raw"]
-                if raw.get("localName") not in (None, finding["value"]):
-                    # Keep an earlier retained rendering; the source-native name is added beside it.
-                    retained_names.append(raw["localName"])
-                    raw["nativeLocalName"] = finding["value"]
-                else:
-                    raw["localName"] = finding["value"]
-                raw["localNameEvidence"] = evidence
-                if "sourceUrl" in evidence:
-                    raw["sourceUrls"] = sorted(set(raw.get("sourceUrls") or []) | {evidence["sourceUrl"]})
-                raw["providers"] = sorted(set(raw.get("providers") or []) | {evidence["providerId"]})
-                entities[("set-source-record", profile["sourceRecordId"])]["payload"] = profile
-            local_set["observedNames"] = [finding["value"], *dict.fromkeys(retained_names)]
-            report["applied"].append({"target": local_set_id, "field": "localSetName",
-                                      "value": finding["value"], "confidence": finding["confidence"]})
+            digest = hashlib.sha256(f"{local_set_id}\x1f{finding['value']}".encode()).hexdigest()[:12].upper()
+            sid = f"SET-SRC-NAME-{digest}"
+            record = {
+                "sourceRecordId": sid,
+                "sourceKind": "local-set-name-record",
+                "provider": evidence["providerId"],
+                "providerRecordKey": f"{local_set['locality']}\x1f{local_set['localCode']}\x1fname",
+                "retrieved": evidence["retrievedAt"][:10],
+                **({"sourceUrl": evidence["sourceUrl"]} if "sourceUrl" in evidence else {}),
+                "raw": {"localCode": local_set["localCode"], "locality": local_set["locality"],
+                        "localName": finding["value"], **{k: v for k, v in evidence.items()
+                                                          if k not in ("sourceUrl", "providerId", "retrievedAt")}},
+            }
+            reason = "Researched official local set name for this exact local set; name only, no membership."
+            upsert(catalogue["sourceRecords"], sid, record, lambda row: row["sourceRecordId"] == sid)
+            for entity_type, payload in (
+                ("set-source-record", record),
+                ("set-source-disposition", {"sourceRecordId": sid, "disposition": "mapped",
+                                            "targetRef": local_set_id, "reason": reason}),
+            ):
+                upsert(entities, sid, {"entityType": entity_type, "entityId": sid, "origin": ORIGIN,
+                                       "payload": payload},
+                       lambda row, t=entity_type: (row["entityType"], row["entityId"]) == (t, sid))
+            for edge in (("set-source-disposition", sid, "disposes", "set-source-record", sid),
+                         ("local-set", local_set_id, "observed-by", "set-source-record", sid)):
+                upsert(graph["edges"], sid, dict(zip(("fromType", "fromId", "relation", "toType", "toId"), edge),
+                                                 provenance={}),
+                       lambda row, e=edge: tuple(row[k] for k in ("fromType", "fromId", "relation", "toType", "toId")) == e)
+            upsert(graph["migrationDispositions"], sid,
+                   {"sourceKind": "set-catalogue-source", "sourceId": sid, "disposition": "mapped",
+                    "targetRef": local_set_id, "reason": reason},
+                   lambda row: (row.get("sourceKind"), row.get("sourceId")) == ("set-catalogue-source", sid))
+            if sid not in local_set["sourceRecordIds"]:
+                local_set["sourceRecordIds"] = sorted(local_set["sourceRecordIds"] + [sid])
+                added += 1
+                report["applied"].append({"target": local_set_id, "field": "localSetName",
+                                          "value": finding["value"], "confidence": finding["confidence"]})
+            names = local_set.get("observedNames") or []
+            local_set["observedNames"] = [finding["value"], *[name for name in names if name != finding["value"]]]
+    counts = catalogue["meta"]["counts"]
+    counts["sourceRecords"] = len(catalogue["sourceRecords"])
+    counts["localSetNameRecords"] = sum(row["sourceKind"] == "local-set-name-record"
+                                        for row in catalogue["sourceRecords"])
+
+
+# Wording source_registry.resolve_provider maps back to the same provider (checked at runtime).
+ARTIST_SOURCE_WORDING = {
+    "pokemon-card-jp": "Official Pokemon Japan card database (pokemon-card.com)",
+    "inspected-specimen": "Inspected physical specimen photograph",
+    "cardmarket-product-image": "Cardmarket exact product image",
+    "tcgdex": "TCGdex",
+    "pokemon-card-asia": "Official Pokemon Asia card database (asia.pokemon-card.com)",
+}
+
+
+def artist_source(evidence: dict, release_id: str, stream: str) -> str:
+    from source_registry import resolve_provider
+
+    if evidence.get("method") == "artwork-propagation":
+        # Carried along an identical artwork: graded as this project's derivation, never as the
+        # anchor's own source (the anchor print keeps that grade).
+        provider = "internal-derivation"
+        text = (f"sibling print of the same artwork as {evidence['anchorCardReleaseId']} "
+                f"(artwork-propagation, owner rule 2026-10-22); anchor credit from "
+                f"{ARTIST_SOURCE_WORDING[evidence['providerId']]}; target {release_id} "
+                f"({BUNDLE}/{stream}/findings.json)")
+    else:
+        provider = evidence["providerId"]
+        text = (f"{ARTIST_SOURCE_WORDING[provider]}: {evidence.get('method', 'database-credit')}, exact print "
+                f"{release_id} ({BUNDLE}/{stream}/findings.json)")
+    if resolve_provider(None, text) != provider:
+        raise ValueError(f"artistSource wording does not resolve to {provider}: {text}")
+    return text
 
 
 def legacy_products(catalogue_items: dict, checklist: dict, cards: list) -> dict:
@@ -227,10 +291,26 @@ def apply_illustrators(graph, prints, cards, checklist, catalogue, units, report
                 report["skipped"].append({"target": release_id, "field": "illustrator",
                                           "reason": "card release not in the graph"})
                 continue
+            if evidence["providerId"] == "cardmarket-product-image":
+                # A harvested product image is tier-2 evidence only once retained as a SPEC record
+                # (AGENTS rule 1). Ground the credit on the official anchor of the same artwork.
+                if not finding.get("anchorSourceUrl"):
+                    report["held"].append({"target": release_id, "field": "illustrator", "value": value,
+                                           "reason": "read from a harvested product image without an official "
+                                                     "anchor; needs a SPEC intake of that image"})
+                    continue
+                transcription = {key: evidence[key] for key in ("sourceRef", "sha256") if key in evidence}
+                anchor = {"sourceUrl": finding["anchorSourceUrl"], "retainedPath": ""}
+                evidence = {**evidence, "sourceUrl": finding["anchorSourceUrl"],
+                            "providerId": provider_for(anchor), "method": "artwork-propagation",
+                            "productImageTranscription": transcription}
+                evidence.pop("sourceRef", None)
             sf_ids = [pid for pid in release.get("sourceFirstRecordIds") or [] if pid in print_rows]
             if sf_ids:
                 for print_id in sf_ids:
                     row = print_rows[print_id]
+                    if row.get("illustrator") == value and row.get("illustratorEvidence") == evidence:
+                        continue  # already applied by an earlier run
                     if row.get("illustrator") not in (None, "", value):
                         report["skipped"].append({"target": print_id, "field": "illustrator",
                                                   "reason": f"existing credit {row['illustrator']!r} kept"})
@@ -261,13 +341,113 @@ def apply_illustrators(graph, prints, cards, checklist, catalogue, units, report
                     continue
                 pending_product[key] = value
                 if product.get("artist") == value:
+                    if BUNDLE in (product.get("artistSource") or ""):
+                        product["artistSource"] = artist_source(evidence, release_id, stream)
                     continue
                 product["artist"] = value
-                product["artistSource"] = (f"{evidence['providerId']} ({evidence.get('method', 'database-credit')}, "
-                                           f"exact print {release_id}; {BUNDLE}/{stream}/findings.json)")
+                product["artistSource"] = artist_source(evidence, release_id, stream)
                 report["applied"].append({"target": key, "field": "illustrator", "value": value,
                                           "release": release_id, "method": evidence.get("method"),
                                           "confidence": finding["confidence"]})
+
+
+# The SWSH068 dates name the Build & Battle box; the owner still confirms that these four items are
+# that promo and not the separate Cosmos-holo store giveaway.
+HELD_DATE_ITEMS = {
+    "item-46088019-c3b9-55d5-a41a-8089d110da0b", "item-b119074a-c89f-5a60-a63b-f2bcdb419712",
+    "item-5268bc9b-6a60-56d7-946b-e05018f43f1d", "item-939a0c46-ce08-5aa9-b77a-030f76fac62d",
+}
+
+
+def apply_reviewed_dates(overrides: dict, catalogue: dict, report: dict) -> None:
+    """Append exact item-scoped date observations to the existing reviewed-date owner."""
+    items = {row["itemId"]: row for row in catalogue["items"]}
+    reviewed = overrides["releaseDates"]["reviewedItems"]
+    existing = {row["itemId"] for row in reviewed}
+    for _stream, finding in findings("releaseDate", ("dates",)):
+        for item_id in finding["targetIds"]:
+            if item_id in HELD_DATE_ITEMS:
+                report["held"].append({"target": item_id, "field": "releaseDate", "value": finding["value"],
+                                       "reason": "owner confirms Build & Battle promo vs Cosmos giveaway"})
+                continue
+            if item_id in existing:
+                continue
+            item = items[item_id]
+            reviewed.append({
+                "itemId": item_id,
+                "cardReleaseId": item["cardReleaseId"],
+                "physicalPrintingId": item["physicalPrintingId"],
+                "localizationId": item["localizationId"],
+                "sourcePrintingId": item["sourcePrintingId"],
+                "legacyChecklistIds": item["legacyChecklistIds"],
+                "releaseDate": finding["value"],
+                "releaseDatePrecision": finding["precision"],
+                "releaseApproximate": False,
+                "basis": finding["identityMatch"],
+                "sources": [{
+                    "providerId": provider_for(finding),
+                    "url": finding["sourceUrl"],
+                    "retrievedAt": finding["retrievedAt"],
+                    "evidencePath": f"{BUNDLE}/dates/findings.json",
+                    "sourceRef": finding["retainedPath"],
+                }],
+            })
+            report["applied"].append({"target": item_id, "field": "releaseDate", "value": finding["value"],
+                                      "confidence": finding["confidence"]})
+
+
+SPECIES_KEYS = {
+    "English": ("English", "WEST"), "German": ("German", "WEST"), "French": ("French", "WEST"),
+    "Italian": ("Italian", "WEST"), "Spanish (Europe)": ("Spanish", "WEST"),
+    "Spanish (Latin America)": ("Spanish", "LATAM"), "Portuguese": ("Portuguese", "WEST"),
+    "Dutch": ("Dutch", "WEST"), "Polish": ("Polish", "WEST"), "Russian": ("Russian", "WEST"),
+    "Japanese": ("Japanese", "JP"), "Korean": ("Korean", "KR"),
+    "Traditional Chinese": ("T-Chinese", "TW"), "Simplified Chinese": ("S-Chinese", "CN"),
+    "Thai": ("Thai", "TH"), "Indonesian": ("Indonesian", "ID"),
+}
+# Card names that print only the species name; the level is printed apart from the name.
+SPECIES_ONLY_CARD_NAMES = ["Snorlax", "Snorlax Lv.35", "Snorlax Lv.37", "Snorlax Lv.40"]
+
+
+def build_local_names(catalogue: dict) -> dict:
+    """Assemble the reviewed localized card-name registry from the local-names workstream."""
+    localization = {(row["language"], row["locality"]): row["localizationId"]
+                    for row in catalogue["localizations"]}
+    items = {row["itemId"]: row for row in catalogue["items"]}
+    species, patterns, releases = {}, defaultdict(dict), {}
+    for _stream, finding in findings("localCardName", ("local-names",)):
+        target = finding["targetIds"][0]
+        evidence = provenance("local-names", finding)
+        if target.startswith("species:"):
+            species[localization[SPECIES_KEYS[target.split(":", 1)[1]]]] = {
+                "value": finding["value"], "evidence": evidence}
+        elif target.startswith("pattern:"):
+            _, english, language = target.split(":", 2)
+            key = localization.get(SPECIES_KEYS.get(language, (None, None)))
+            patterns[english][key or language] = {"value": finding["value"], "evidence": evidence}
+        for item_id in (t for t in finding["targetIds"] if t in items):
+            release_id = items[item_id]["cardReleaseId"]
+            entry = releases.setdefault(release_id, {"value": finding["value"], "evidence": []})
+            if entry["value"] != finding["value"]:
+                raise ValueError(f"conflicting exact-print names for {release_id}")
+            if evidence not in entry["evidence"]:
+                entry["evidence"].append(evidence)
+    return {
+        "schemaVersion": "1.0.0",
+        "meta": {
+            "description": (
+                "Reviewed localized printed card names. An exact-print observation of a card "
+                "release wins; otherwise a card whose English name is only the species takes the "
+                "localization's official species name. Mechanic and trainer-owned names (ex, GX, V, "
+                "VMAX, LV.X, Hop's, Team Rocket's, Eevee & Snorlax, Doll) are never derived; their "
+                "patterns are retained as reference only."),
+            "evidenceBundle": f"{BUNDLE}/local-names/findings.json",
+            "speciesOnlyCardNames": SPECIES_ONLY_CARD_NAMES,
+        },
+        "speciesNames": dict(sorted(species.items())),
+        "releases": dict(sorted(releases.items())),
+        "patterns": {name: dict(sorted(rows.items())) for name, rows in sorted(patterns.items())},
+    }
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -280,6 +460,7 @@ def main(argv: list[str] | None = None) -> int:
         "catalogue": "verification/set_catalogue_sources.json",
         "prints": "verification/source_first_prints.json",
         "cards": "snorlax_cards.json",
+        "overrides": "verification/confirmed_release_overrides.json",
     }
     documents = {name: read(path) for name, path in paths.items()}
     before = {name: render(document) for name, document in documents.items()}
@@ -288,6 +469,11 @@ def main(argv: list[str] | None = None) -> int:
     apply_illustrators(documents["graph"], documents["prints"], documents["cards"]["cards"],
                        read("analysis_checklist.json"), read("collector_catalogue.json"),
                        read("verification/units.json"), report)
+    apply_reviewed_dates(documents["overrides"], read("collector_catalogue.json"), report)
+    paths["names"] = "verification/local_card_names.json"
+    names_path = ROOT / paths["names"]
+    before["names"] = names_path.read_text(encoding="utf-8") if names_path.exists() else ""
+    documents["names"] = build_local_names(read("collector_catalogue.json"))
     changed = [name for name, document in documents.items() if render(document) != before[name]]
     summary = defaultdict(int)
     for row in report["applied"]:
@@ -298,8 +484,35 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     for name in changed:
         atomic_write(ROOT / paths[name], render(documents[name]))
-    atomic_write(ROOT / BUNDLE / "integration-report.json", render(report))
+    atomic_write(ROOT / BUNDLE / "integration-report.json", render(state_report(documents, report)))
     return 0
+
+
+def state_report(documents: dict, run: dict) -> dict:
+    """Account for everything this bundle established in the stores, independent of run order."""
+    marker = BUNDLE + "/"
+    name_records = [row for row in documents["catalogue"]["sourceRecords"]
+                    if row["sourceKind"] == "local-set-name-record"
+                    and marker in (row["raw"].get("evidenceBundle") or "")]
+    prints = [row for row in documents["prints"]["prints"]
+              if marker in json.dumps(row.get("illustratorEvidence") or {})]
+    products = [row for row in documents["cards"]["cards"] if marker in (row.get("artistSource") or "")]
+    dates = [row for row in documents["overrides"]["releaseDates"]["reviewedItems"]
+             if any(marker in source.get("evidencePath", "") for source in row["sources"])]
+    names = documents["names"]
+    return {
+        "bundle": BUNDLE,
+        "established": {
+            "localSetNameRecords": sorted(row["sourceRecordId"] for row in name_records),
+            "sourceFirstIllustrators": sorted(row["printId"] for row in prints),
+            "legacyProductArtists": sorted(row["imageFile"] for row in products),
+            "reviewedReleaseDates": sorted(row["itemId"] for row in dates),
+            "localCardNameReleases": len(names["releases"]),
+            "speciesNames": sorted(names["speciesNames"]),
+        },
+        "held": run["held"],
+        "skipped": run["skipped"],
+    }
 
 
 if __name__ == "__main__":

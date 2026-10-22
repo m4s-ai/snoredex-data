@@ -347,7 +347,33 @@ def unicode_source_uri_regressions() -> None:
     assert sorted(covered) == live["sourceItemIds"], "every deployed item needs exactly one route"
 
 
+def local_card_name_regressions() -> None:
+    names = read("verification/local_card_names.json")
+    graph = read("verification/authoritative_graph.json")
+    releases = {row["cardReleaseId"] for row in collector.entity_payloads(graph, "card-release")}
+    assert set(names["releases"]) <= releases, "local names must target existing card releases"
+    assert all(row["value"] and row["evidence"] for row in names["releases"].values())
+    assert all(row["value"] and row["evidence"] for row in names["speciesNames"].values())
+    sample = {"meta": {"speciesOnlyCardNames": ["Snorlax"]},
+              "speciesNames": {"L:de": {"value": "Relaxo"}}, "releases": {"R": {"value": "Hops Relaxo"}}}
+    resolve = collector.local_card_name
+    assert resolve(sample, "R", "L:de", "Hop's Snorlax", "Native") == "Native"
+    assert resolve(sample, "R", "L:de", "Hop's Snorlax", None) == "Hops Relaxo"
+    assert resolve(sample, "X", "L:de", "Snorlax", None) == "Relaxo"
+    assert resolve(sample, "X", "L:de", "Hop's Snorlax", None) is None, "mechanic names are never derived"
+    assert resolve(sample, "X", "L:fr", "Snorlax", None) is None
+    sources = {row["printId"]: row.get("name") for row in read("verification/source_first_prints.json")["prints"]}
+    for item in read("collector_catalogue.json")["items"]:
+        exact = names["releases"].get(item["cardReleaseId"])
+        if exact and item["localCardName"] not in sources.values():
+            assert item["localCardName"] == exact["value"], item["itemId"]
+        if item["localCardName"] is None:
+            assert item["cardName"] not in names["meta"]["speciesOnlyCardNames"] \
+                or item["localizationId"] not in names["speciesNames"], item["itemId"]
+
+
 def main() -> None:
+    local_card_name_regressions()
     reviewed_release_date_regressions()
     unicode_source_uri_regressions()
     source_first_finish_decision_regressions()

@@ -201,6 +201,36 @@ coverage at the violated contract, rather than only the newly reported SPEC IDs.
 unresolved association explicitly, and answer each addressed PR finding in its original thread
 with the applicable fix and verification result.
 
+### Illustrators, local set names and localized card names (2026-10-22)
+
+**Owner rule (2026-10-22): an illustrator belongs to the artwork.** Every print of the same
+artwork — all languages, printings, finishes and variants — has the same illustrator; only a
+changed or different artwork can differ. A credit may therefore be carried from one exact print to
+another, but only after the two images are compared and show the same illustration. `workId` and
+`cardKey` mean the same card *text*, not the same artwork, and the automatic image groups in
+`artwork_review_projection.json` are suggestions. Whether a rainbow/hyper-rare recolour counts as
+the same artwork is still open; do not propagate across one until the owner decides.
+
+The credit printed on the card is the card's own statement. Read it from an exact-print image
+("Illus." line) where one exists; it beats a database text field — the official TW page for
+sc1b 165/153 names Masakazu Fukuda while its own card image prints aky CG Works. Record the
+method (`database-credit`, `image-transcription`, `artwork-propagation`) and, for propagation, the
+anchor release and the comparison basis.
+
+Routes that worked (evidence in `verification/evidence/data-gaps-20261022`):
+`asia.pokemon-card.com/{tw,id,th}/card-search/detail/<n>/` gives local set code, number, product
+link and illustrator per print, but omits secret rares above the printed set size, Thai
+AS1b/AS5a and most SM-P; search with the local name (卡比獸, คาบิกอน, Snorlax). The full-size
+official Korean images on `cards.image.pokemonkorea.co.kr` are reachable while
+`pokemoncard.co.kr` answers 503, and their "Illus." lines match the catalogue credits. Local set
+names come from the product link on an exact card page or the product filter of the card search;
+record them verbatim, including prefixes such as 擴充包. Localized printed card names come
+first from TCGdex per-language card records, the official JP/Asia databases and specimen photos;
+`verification/local_card_names.json` keeps them per card release, with the official species name
+per localization as the fallback for species-only cards. Never derive mechanic or trainer-owned
+names: Hop is "Nabil" in French, "Paul" in Spanish and "Lupo" in Portuguese. In this environment
+the agent proxy reset every Wayback Machine request and pokemon.com card pages returned 403.
+
 ## What this file is
 
 The verification playbook and the research log behind it: every source technique that worked, every
