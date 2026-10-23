@@ -314,6 +314,57 @@ def edition_system_absent(localization_id: str, set_code: str | None, release_da
     return set_code not in listed and release_date > EDITION_RULES["westernLastFirstEditionRelease"]
 
 
+SET_SOURCES_PATH = ROOT / "verification" / "set_catalogue_sources.json"
+NUMBERING_BY_REGION = {"WEST": "western", "JP": "japanese", "CN": "simplified-chinese",
+                       "TW": "traditional-chinese"}
+# A promo, prize-pack, jumbo or championship-deck card reprints a run card's number; the run's
+# printed size is not this card's denominator (same guard as evidence_semantics).
+UNSIZED_RARITIES = {"Promo", "PROMO", "promo card", "Prize Pack Series", "Oversized",
+                    "World Championship Deck"}
+
+
+def apply_set_facts(items: list[dict[str, Any]]) -> None:
+    """Apply set facts to every item, whatever source created it."""
+    apply_default_card_size(items)
+    apply_printed_set_size(items)
+
+
+def apply_default_card_size(items: list[dict[str, Any]]) -> None:
+    """Card size defaults to standard (owner decision 2026-10-23: jumbo cards are rare and
+    researched explicitly).
+
+    An unknown-size item stays unknown when its otherwise identical sibling is already standard
+    (size is then the only thing distinguishing the two printings) or when the same card and
+    finish is sold as an Oversized product in any language.
+    """
+    def identity(row: dict[str, Any]) -> str:
+        return json.dumps([row[key] for key in ("cardReleaseId", "finish", "edition", "foilPattern",
+                                                "markings", "distribution")], sort_keys=True)
+    standard = {identity(row) for row in items if row["cardSize"] == "standard"}
+    oversized = {(row["localSetCode"], row["collectorNumber"], row["finish"]) for row in items
+                 if (row["rarity"] or {}).get("display") == "Oversized"}
+    for row in items:
+        if row["cardSize"] == "unknown" and identity(row) not in standard \
+                and (row["localSetCode"], row["collectorNumber"], row["finish"]) not in oversized:
+            row["cardSize"] = "standard"
+
+
+def apply_printed_set_size(items: list[dict[str, Any]]) -> None:
+    """The printed set size becomes the denominator in the item's own regional numbering."""
+    sizes = {
+        (row["raw"]["numbering"], row["raw"]["legacySetCode"]): row["raw"]["printedSetSize"]
+        for row in read_json(SET_SOURCES_PATH)["sourceRecords"]
+        if row["sourceKind"] == "printed-set-size-record"
+    }
+    for row in items:
+        number = row["collectorNumber"] or ""
+        region, set_code = row["cardReleaseId"].split(":")[1], row["cardReleaseId"].split(":")[3]
+        size = sizes.get((NUMBERING_BY_REGION.get(region), set_code))
+        if size and not row["collectorNumberDenominator"] and number.isdigit() \
+                and (row["rarity"] or {}).get("display") not in UNSIZED_RARITIES:
+            row["collectorNumberDenominator"] = str(size).zfill(len(number) if number.startswith("0") else 0)
+
+
 def item_edition(physical: dict[str, Any] | None, old: dict[str, Any] | None, localization_id: str,
                  set_code: str | None, release_date: str | None) -> tuple[str | None, str]:
     """Return the item's edition and assignment status; set facts apply whatever the item's origin."""
@@ -1614,6 +1665,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     if len(ids) != len(set(ids)):
         raise ContractError("collector item ids are not unique")
     items.sort(key=lambda row: (row["releaseSortKey"], row["itemId"]))
+    apply_set_facts(items)
 
     item_name_by_work: dict[str, str] = {}
     for row in items:

@@ -404,6 +404,15 @@ def edition_rule_regressions() -> None:
     rule_free = [row["itemId"] for row in items if row["editionAssignmentStatus"] == "unresolved"
                  and absent(row["localizationId"], row["localSetCode"], row["releaseDate"])]
     assert not rule_free, rule_free
+    # The printed set size reaches every item of the set in its own regional numbering.
+    by_card = {(row["localizationId"], row["localSetCode"], row["collectorNumber"]): row for row in items}
+    assert by_card[("LOCALIZATION:WEST:de", "FCO", "77")]["collectorNumberDenominator"] == "124"
+    assert by_card[("LOCALIZATION:JP:ja", "XY10", "057")]["collectorNumberDenominator"] == "078"
+    assert by_card[("LOCALIZATION:JP:ja", "20th", "047")]["collectorNumberDenominator"] == "072"
+    assert by_card[("LOCALIZATION:KR:ko", "20th", "047")]["collectorNumberDenominator"] == "071"
+    # Card size defaults to standard (owner, 2026-10-23); a possible jumbo twin stays unknown.
+    unknown = [row for row in items if row["cardSize"] == "unknown"]
+    assert len(unknown) < 30 and any(row["localSetCode"] == "SSH" for row in unknown), len(unknown)
 
 
 def main() -> None:

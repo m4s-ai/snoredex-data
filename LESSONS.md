@@ -29,7 +29,9 @@ asked why a set fact depended on where an item came from; it never should have.
 **Now guarded by** `collector_catalogue.edition_system_absent()`, which reads the same rules (with
 their era boundaries recorded as dates) for every item, and `edition_rule_regressions` in
 `verification/test_collector_catalogue.py`, which fails if any item the rules place outside an
-edition system is still unresolved.
+edition system is still unresolved. The same audit found the printed set size reaching only 14
+sets and card size defaulting to "unknown" outside the marketplace rows; `apply_set_facts` now
+applies both to every item.
 
 *PR #433.*
 

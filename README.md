@@ -291,6 +291,11 @@ workflow run and deploys the already verified artifact without a second projecti
   position on a set printed in both editions. Card-level finish flags (TCGdex) attach to both
   edition items rather than forming a third, editionless one. Whether a set has an edition system
   at all comes from `verification/edition_rules.json` for every item, whatever source created it.
+- **Set facts reach every item.** A recorded printed set size (`printed-set-size-record` in
+  `verification/set_catalogue_sources.json`) supplies the collector-number denominator in the
+  item's own regional numbering; promo, prize-pack, jumbo and championship-deck rows take none.
+  Card size defaults to standard (owner decision 2026-10-23); it stays unknown only where the item
+  may be the jumbo twin of an otherwise identical standard printing.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two
   finish layers answer different questions: `finishAvailability` on a card says what evidence
   attributes to *this Cardmarket product*, while `finish_units.json` says what is known for the
