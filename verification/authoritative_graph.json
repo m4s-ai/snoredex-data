@@ -150876,6 +150876,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+      "origin": "reviewed-printed-set-sizes-20261023",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+        "disposition": "needs-evidence",
+        "targetRef": null,
+        "reason": "printed set size; a set fact applied by numbering to every item of the set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-SIZE-6133C9ED7AC7",
       "origin": "reviewed-printed-set-sizes-20261023",
       "payload": {
@@ -173455,6 +173466,24 @@
           "printedSetSize": 100,
           "numbering": "japanese",
           "basis": "TCGdex ja set S4 cardCount.official 100, the denominator printed beside the collector number; retained set list verification/evidence/printed-set-sizes-20261023/sets-ja.json (sha256 7f6a4c31dfd3344523f9565796a39fe01f98033acfd5dfb1b7498255131b0770). Not inferred from a rarity, a name or a card count."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+      "origin": "reviewed-printed-set-sizes-20261023",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+        "sourceKind": "printed-set-size-record",
+        "provider": "inspected-specimen",
+        "providerRecordKey": "Pt2",
+        "retrieved": "2026-10-23",
+        "raw": {
+          "legacySetCode": "Pt2",
+          "printedSetSize": 90,
+          "numbering": "japanese",
+          "basis": "The denominator 90 printed beside the collector number on retained cards of this set and numbering: SPEC-0571, SPEC-0582, SPEC-0635, SPEC-0636. TCGdex does not list the set. Not inferred from a rarity, a name or a card count."
         }
       }
     },
@@ -286642,6 +286671,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-SIZE-6133C9ED7AC7",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -320702,6 +320739,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SIZE-5E6D6FCB0EC3",
+      "disposition": "needs-evidence",
+      "targetRef": null,
+      "reason": "printed set size; a set fact applied by numbering to every item of the set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-SIZE-6133C9ED7AC7",
       "disposition": "needs-evidence",
       "targetRef": null,
@@ -324671,9 +324715,9 @@
     }
   ],
   "summary": {
-    "entities": 9048,
-    "edges": 13139,
-    "migrationInputs": 3291,
+    "entities": 9050,
+    "edges": 13140,
+    "migrationInputs": 3292,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 347,
@@ -324681,7 +324725,7 @@
       "established-and-mapped": 1715,
       "linked-local-counterpart": 126,
       "mapped": 526,
-      "needs-evidence": 191,
+      "needs-evidence": 192,
       "needs-positive-local-identity": 18,
       "positively-excluded": 84,
       "split": 123
@@ -324689,8 +324733,8 @@
     "candidateClaims": 2229,
     "cardReleases": 629,
     "physicalPrintings": 897,
-    "setSourceRecords": 720,
-    "setSourceDispositions": 720,
+    "setSourceRecords": 721,
+    "setSourceDispositions": 721,
     "localizations": 16
   }
 }

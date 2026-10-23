@@ -410,6 +410,9 @@ def edition_rule_regressions() -> None:
     assert by_card[("LOCALIZATION:JP:ja", "XY10", "057")]["collectorNumberDenominator"] == "078"
     assert by_card[("LOCALIZATION:JP:ja", "20th", "047")]["collectorNumberDenominator"] == "072"
     assert by_card[("LOCALIZATION:KR:ko", "20th", "047")]["collectorNumberDenominator"] == "071"
+    assert by_card[("LOCALIZATION:JP:ja", "Pt2", "070")]["collectorNumberDenominator"] == "090"
+    # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
+    assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
     # Card size defaults to standard (owner, 2026-10-23); a possible jumbo twin stays unknown.
     unknown = [row for row in items if row["cardSize"] == "unknown"]
     assert len(unknown) < 30 and any(row["localSetCode"] == "SSH" for row in unknown), len(unknown)

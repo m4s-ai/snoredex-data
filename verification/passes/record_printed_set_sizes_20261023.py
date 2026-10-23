@@ -15,7 +15,9 @@ each remaining numbered set, in the format of `extend_printed_set_sizes_20260810
 Numbering is regional: the Japanese 20th set prints /072 where Korean prints /071, and HXY /039
 where Korean prints /036. Each record names its numbering, and the catalogue applies a size only
 to the matching region. Promo, prize-pack, championship-deck and reprint sets have no printed run
-size and are not recorded; sets with no source stay without a size.
+size and are not recorded; sets with no source stay without a size. The unnumbered Japanese
+releases (DP1, EXS, G2, PJU, UNP; their card-release ids say `unnumbered`) print no denominator
+and take none.
 
 Idempotent; `--check` reports pending records without writing.
 """
@@ -54,6 +56,7 @@ SIZES = [
     ("PCG1", 82, "JP", "PCG1", []),
     ("PCG3", 84, "JP", "PCG3", ["SPEC-0095", "SPEC-0096", "SPEC-0097", "SPEC-0639"]),
     ("PCG9", 68, "JP", "PCG9", []),
+    ("Pt2", 90, "JP", None, ["SPEC-0571", "SPEC-0582", "SPEC-0635", "SPEC-0636"]),
     ("XY10", 78, "JP", "XY10", ["SPEC-0104", "SPEC-0589", "SPEC-0642"]),
     ("XY2", 80, "JP", "XY2", ["SPEC-0573", "SPEC-0586"]),
     ("m3", 80, "JP", "M3", []),
