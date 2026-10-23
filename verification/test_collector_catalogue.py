@@ -508,7 +508,16 @@ def main() -> None:
     cs2ac_086_items = [
         row for row in catalogue["items"] if row["cardReleaseId"] == cs2ac_086_release
     ]
-    assert {row["finish"] for row in cs2ac_086_items} == {"holo", "reverse-holo"}
+    # Owner decision 2026-10-22: the s4 84 via-release is merged into CS2aC 086. Its marketplace
+    # finish candidates stay candidates; only the reviewed finishes are verified printings.
+    assert {row["finish"] for row in cs2ac_086_items if row["itemKind"] == "verified-printing"} \
+        == {"holo", "reverse-holo"}
+    assert {(row["finish"], tuple(row["legacyChecklistIds"])) for row in cs2ac_086_items
+            if row["itemKind"] == "finish-candidate"} == {
+        ("non-holo", ("s4-84-s-chinese-none-non-holo",)),
+        ("reverse-holo", ("s4-84-s-chinese-none-reverse-holo",)),
+    }
+    cs2ac_086_items = [row for row in cs2ac_086_items if row["itemKind"] == "verified-printing"]
     assert all(
         row["collectorNumber"] == "086" and row["collectorNumberDenominator"] == "115"
         for row in cs2ac_086_items
