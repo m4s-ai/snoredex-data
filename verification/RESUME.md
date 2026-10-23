@@ -251,7 +251,12 @@ editions, a visible 1st Edition mark establishes 1st Edition, and the mark's pos
 empty on a complete, legible card face establishes Unlimited. This is a positive observation of the
 pictured card, not an absence argument about a source; rule 3 is about sources that omit a
 printing. Only a crop that hides the mark position, or an image too small to read it, leaves the
-edition unknown. Localities without an edition system (Korean, Chinese, SEA) never get one. A finish-override source that names `languages` is merged into same-language
+edition unknown. Localities without an edition system (Korean, Chinese, SEA) never get one.
+Check the mark where the era prints it: lower left beside the copyright line (DP, Pt), lower left
+left of にげる (BW), lower left immediately left of the ZM7-… code (PCG), beside the set symbol at the
+lower right (e-Card), and left under the artwork (WotC). Closed Yahoo! Auctions and Yahoo!フリマ
+listings (`auctions.c.yimg.jp` originals) were the productive source for Japanese editions on
+2026-10-23; eBay item pages answered 403 and aucfan 503. A finish-override source that names `languages` is merged into same-language
 specimens as curated identity, so an edition source must not carry them.
 
 **S-Chinese via-releases (owner decision 2026-10-22).** A legacy S-Chinese unit harvested under a

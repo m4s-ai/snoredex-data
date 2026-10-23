@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-23",
-  "projectionVersion": "a3a70acbf751f40d16a17ca549b9d5ee12adf27d13c06457d28b46588ce6c100",
+  "projectionVersion": "3f2a1a61e196279ae1df799680766803e45a956ed70c6851f1fedbeb99d05109",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 892,
-    "sourceObservations": 3232
+    "physicalPrintings": 896,
+    "sourceObservations": 3258
   },
   "groups": [
     {
@@ -15798,7 +15798,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0247",
-              "sourcePrintingId": "F0247-P01",
+              "sourcePrintingId": "F0247-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:1ea263c61bc26ce5236181e8",
               "specimenIds": [
                 "SPEC-0097",
@@ -15828,7 +15828,22 @@
               "sources": [
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
+                  "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
+                  "retrievedAt": "2026-08-26",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish",
+                    "foilPattern"
+                  ],
+                  "specimenId": "SPEC-0097"
+                },
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. The 1 EDITION mark position left of ZM7-1S9-JGF at the lower left is visibly empty on the complete, legible card face (position confirmed against 1st Edition copies SPEC-0640/0641), which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
                   "retrievedAt": "2026-08-26",
                   "claimFields": [
                     "finish",
@@ -15845,21 +15860,6 @@
                 },
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
-                  "retrievedAt": "2026-08-26",
-                  "claimFields": [
-                    "finish",
-                    "identity"
-                  ],
-                  "observedFields": [
-                    "cardSize",
-                    "finish",
-                    "foilPattern"
-                  ],
-                  "specimenId": "SPEC-0097"
-                },
-                {
-                  "sourceType": "Owner-supplied physical card photograph",
                   "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
                   "retrievedAt": "2026-08-26",
                   "claimFields": [
@@ -15872,6 +15872,80 @@
                     "foilPattern"
                   ],
                   "specimenId": "SPEC-0096"
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:4d1525ba8b97500dea11933e",
+              "semanticPrintingId": "PRINTING:4d1525ba8b97500dea11933e",
+              "cardReleaseId": "RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
+              "finish": "holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0247",
+              "sourcePrintingId": "F0247-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4d1525ba8b97500dea11933e",
+              "specimenIds": [
+                "SPEC-0641",
+                "SPEC-0639",
+                "SPEC-0640"
+              ],
+              "specimenFieldSources": {
+                "cardSize": [
+                  "SPEC-0639",
+                  "SPEC-0640"
+                ],
+                "edition": [
+                  "SPEC-0640"
+                ],
+                "finish": [
+                  "SPEC-0639",
+                  "SPEC-0640"
+                ]
+              },
+              "sources": [
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/721f3e57d6617ed1e8c34d830b4a515d747dcd2df45d221bb515578d22af286e/i-img1200x1200-179066129141461zyu0w268187.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of a second Japanese R団のカビゴンex 062/084 copy (Illus.Mitsuhiro Arita, holo sparkle). The dark 1 EDITION mark stands at the lower left immediately left of ZM7-1S9-JGF. Listing title: 'ポケモンカード 062/084 ★ 1ED R団のカビゴンex (31)'. Retained as SPEC-0641.",
+                  "retrievedAt": "2026-10-23"
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-17889077475043orzcom36.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Close-up of the lower left of the same R団のカビゴンex from the same listing: 弱点 with the fighting icon, ZM7-1S9-JGF and the holo border; a printed 1 EDITION mark stands immediately left of ZM7-1S9-JGF. Retained as SPEC-0640.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "finish",
+                    "identity",
+                    "edition"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "edition",
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0640"
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-1788907877248541ty6b32488.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Japanese R団のカビゴンex HP100, ダークヒーラー, どくのつめ 20 and たおれこむ 60, Illus.Mitsuhiro Arita, printed 062/084 with the R set mark. Holographic sparkle crosses the artwork and frame. Listing title: '[1EDあり] ポケモンカード R団のカビゴンex (062/084) / ロケット団の逆襲'. Retained as SPEC-0639.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0639"
                 }
               ]
             }
@@ -15935,34 +16009,94 @@
               "originalHash": "0a4ce188cd88ceec776482f3d87350792428eb7b82b6c14021e800f932c996e7",
               "previewSrc": "images/previews/SPEC-0097.png?v=a197aeba85174d7c8a91aa7e16c194532468c41b6c16cb3b84e7f81cab672cf1",
               "thumbnailSrc": "images/thumbs/SPEC-0097.png?v=3ac9d7d82ba921b90ec3c9abde19142e39db0f5cbe947cc5891509cf6a030881"
+            },
+            {
+              "src": "verification/specimens/SPEC-0639.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0639",
+              "contentHash": "797a93906f0897b09ace6ff04946944a93607f57547f76a6300410db035bbf78",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "797a93906f0897b09ace6ff04946944a93607f57547f76a6300410db035bbf78",
+              "previewSrc": "images/previews/SPEC-0639.png?v=e7d0e77ad8e09645a2c3edc72567095601c59728e9e54bd09d62afd1625374ab",
+              "thumbnailSrc": "images/thumbs/SPEC-0639.png?v=a8ce54c3b0058764658cf4be4582aa1bc187149890764da37a22bce86c105952"
+            },
+            {
+              "src": "verification/specimens/SPEC-0640.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0640",
+              "contentHash": "a355e687d9d763556ca73fac11e853fb401008de59cb72279e53d3040c5c98a8",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "a355e687d9d763556ca73fac11e853fb401008de59cb72279e53d3040c5c98a8",
+              "previewSrc": "images/previews/SPEC-0640.png?v=b80dc5d8c187b618668a7db5f33a022855273c92b640c2346412414d8438e96e",
+              "thumbnailSrc": "images/thumbs/SPEC-0640.png?v=87553ffdade3545188e2f72c2c50589de0fa4e77ea4404d7519474fd27cf3bf6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0641.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0641",
+              "contentHash": "980e9e4cf1a3c329582223018f8d721124f9b374be35f7b805e19b8834c54338",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "980e9e4cf1a3c329582223018f8d721124f9b374be35f7b805e19b8834c54338",
+              "previewSrc": "images/previews/SPEC-0641.png?v=8b390b3f49dcdc5155a636173458390e423b60d764b6ab4877a745aad4625417",
+              "thumbnailSrc": "images/thumbs/SPEC-0641.png?v=a0814004e7f0559a3283b4033d28f18e248dfa35b0f2bb4c1260d673b0346f01"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0247-P01:0:05143e3cf8e0ef12",
+              "observationId": "finish:F0247-P01:0:02f4e89666d56f7f",
               "kind": "finish",
-              "provider": "Owner-supplied physical card photograph",
-              "url": null,
-              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
-              "contentHash": "b3b6d771c82033be8e8e3a621215ac88c8896747297a7d904a6bb2012cd5542a",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/721f3e57d6617ed1e8c34d830b4a515d747dcd2df45d221bb515578d22af286e/i-img1200x1200-179066129141461zyu0w268187.jpg",
+              "evidence": "Complete seller photograph of a second Japanese R団のカビゴンex 062/084 copy (Illus.Mitsuhiro Arita, holo sparkle). The dark 1 EDITION mark stands at the lower left immediately left of ZM7-1S9-JGF. Listing title: 'ポケモンカード 062/084 ★ 1ED R団のカビゴンex (31)'. Retained as SPEC-0641.",
+              "contentHash": "d5a733c7e53164a7942d1fe0307e7df481d74e53e3e58985999d72aba9b26116",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P01:1:bd5901d6183ac8ab",
+              "observationId": "finish:F0247-P01:1:658d0e4bd86b9f01",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-17889077475043orzcom36.jpg",
+              "evidence": "Close-up of the lower left of the same R団のカビゴンex from the same listing: 弱点 with the fighting icon, ZM7-1S9-JGF and the holo border; a printed 1 EDITION mark stands immediately left of ZM7-1S9-JGF. Retained as SPEC-0640.",
+              "contentHash": "a10b77c0dce38cc2d027afb0dc4f4231134b539f60a491e72481f04245647583",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P01:2:df7bb13e8b2e7047",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-1788907877248541ty6b32488.jpg",
+              "evidence": "Complete seller photograph of Japanese R団のカビゴンex HP100, ダークヒーラー, どくのつめ 20 and たおれこむ 60, Illus.Mitsuhiro Arita, printed 062/084 with the R set mark. Holographic sparkle crosses the artwork and frame. Listing title: '[1EDあり] ポケモンカード R団のカビゴンex (062/084) / ロケット団の逆襲'. Retained as SPEC-0639.",
+              "contentHash": "3560b679459abb12231810a90db3163e94901c0d181cb4e4a1ac22380327e70a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P02:0:bd5901d6183ac8ab",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
-              "contentHash": "fd74d8196b577777286242ba9972452e5912f17571d11e987fb4bef116944279",
+              "contentHash": "bdb9391c10cc3f1dceec53d3136d8bc508c91494834a3d6e4c007533d0d85b4e",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P01:2:fb57ce80d122a015",
+              "observationId": "finish:F0247-P02:1:e2cd5f32003a8de2",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. The 1 EDITION mark position left of ZM7-1S9-JGF at the lower left is visibly empty on the complete, legible card face (position confirmed against 1st Edition copies SPEC-0640/0641), which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
+              "contentHash": "ac20ca34abd6b605487cb2970d3c335f9241e89ed8a48ec22f134055dd3cad59",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0247-P02:2:fb57ce80d122a015",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
-              "contentHash": "616cbe357ad3ce10d504b3133b7ee2efc8ccac56c0afae271f15e2f5cdc74ffe",
+              "contentHash": "2e9bf56cc20d24364ae613452e9bde5d7be9844426ef9ec19f25ccf4763bb3b5",
               "image": null
             },
             {
@@ -15970,8 +16104,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22).",
-              "contentHash": "a9d55aca4ee02e1b7381c7e558c98f5cb83fc56b1a532dcc5e3aac11314770fa",
+              "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. The 1 EDITION mark position left of ZM7-1S9-JGF at the lower left is visibly empty on the complete, legible card face (position confirmed against 1st Edition copies SPEC-0640/0641), which establishes the Unlimited printing (owner rule 2026-10-22).",
+              "contentHash": "49666ef8274cb0b01d795e6ad21429eacebcf08528a107e00d36e762dcddbb6c",
               "image": "verification/specimens/SPEC-0095.jpg"
             },
             {
@@ -15991,6 +16125,33 @@
               "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred.",
               "contentHash": "0d36bf1b0292411f4ffe1855217c238445239f3092ff80706dcf7110bb4aff96",
               "image": "verification/specimens/SPEC-0097.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0639",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://auctions.yahoo.co.jp/jp/auction/b1243851484",
+              "evidence": "Complete seller photograph of Japanese R団のカビゴンex HP100, ダークヒーラー, どくのつめ 20 and たおれこむ 60, Illus.Mitsuhiro Arita, printed 062/084 with the R set mark. Holographic sparkle crosses the artwork and frame. Listing title: '[1EDあり] ポケモンカード R団のカビゴンex (062/084) / ロケット団の逆襲'.",
+              "contentHash": "9d31a34dde04c217e4e9425ece59dc2b0fa834c8f90f33df0f82983f00a766e8",
+              "image": "verification/specimens/SPEC-0639.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0640",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://auctions.yahoo.co.jp/jp/auction/b1243851484",
+              "evidence": "Close-up of the lower left of the same R団のカビゴンex from the same listing: 弱点 with the fighting icon, ZM7-1S9-JGF and the holo border; a printed 1 EDITION mark stands immediately left of ZM7-1S9-JGF.",
+              "contentHash": "c43bf2d381d91faee856de30486a54c2a33dba79b14198258e208b481bd53464",
+              "image": "verification/specimens/SPEC-0640.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0641",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://auctions.yahoo.co.jp/jp/auction/w1246351597",
+              "evidence": "Complete seller photograph of a second Japanese R団のカビゴンex 062/084 copy (Illus.Mitsuhiro Arita, holo sparkle). The dark 1 EDITION mark stands at the lower left immediately left of ZM7-1S9-JGF. Listing title: 'ポケモンカード 062/084 ★ 1ED R団のカビゴンex (31)'.",
+              "contentHash": "3ccfb557e76d5418f0c3b7be2f0c51490da94d3294952540274a16efcddc1d83",
+              "image": "verification/specimens/SPEC-0641.jpg"
             },
             {
               "observationId": "unit:U0628",
@@ -18420,12 +18581,17 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0028",
-              "sourcePrintingId": "F0028-P02",
+              "sourcePrintingId": "F0028-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:16b9f674f86547fa2247b735",
               "specimenIds": [
                 "SPEC-0583"
               ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
                 {
                   "sourceType": "Inspected card photograph; external origin unknown",
                   "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0583.",
@@ -18442,6 +18608,61 @@
                   ],
                   "retrievedAt": "2026-09-29",
                   "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:840bc9eece24efb9a3fdc1d1",
+              "semanticPrintingId": "PRINTING:840bc9eece24efb9a3fdc1d1",
+              "cardReleaseId": "RELEASE:JP:Japanese:BW7:055:Snorlax-Block-Teampact",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0028",
+              "sourcePrintingId": "F0028-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:840bc9eece24efb9a3fdc1d1",
+              "specimenIds": [
+                "SPEC-0637",
+                "SPEC-0638"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/a76aae9897b0f1049af84b54c75892e768ddb49b/i-img900x1200-1791891211612ogfsau.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Japanese カビゴン HP130 プラズマ団, とおせんぼ and チームインパクト 30×, Illus.5ban Graphics, ©2012, printed 055/070 U BW7. The 1st EDITION mark position left of にげる at the lower left is visibly empty on the complete, legible face. Retained as SPEC-0637.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/e3d937271f415148481443126e9c82c5a6338761/i-img675x674-1791253536559ctq4h4.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of a second Japanese カビゴン プラズマ団 055/070 U BW7 copy; the listing title calls it アンリミ. The 1st EDITION mark position left of にげる is visibly empty. Retained as SPEC-0638.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
                 }
               ]
             }
@@ -18503,25 +18724,92 @@
               "originalHash": "f81a193162f4b8e293c93d623bb6429f815fe6fd2d441681233b19e4c1e1b765",
               "previewSrc": "images/previews/SPEC-0583.png?v=544c45386233f5db60294ec77dd7fcbccf5df7a4e75987ebee00e149d8e0292d",
               "thumbnailSrc": "images/thumbs/SPEC-0583.png?v=b408306b56f181844d2faf700bc3c0b8e528550139b4a5b23c1189662565cb7a"
+            },
+            {
+              "src": "verification/specimens/SPEC-0637.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0637",
+              "contentHash": "8a7fc43debc0d2c75480f296f0c63b01541e484718b8e56ca2d65f4212fd870f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8a7fc43debc0d2c75480f296f0c63b01541e484718b8e56ca2d65f4212fd870f",
+              "previewSrc": "images/previews/SPEC-0637.png?v=ecc5def4c0299a9bf7599a2a9096be07b60fcb806b9a0b83af79f76fdbeff302",
+              "thumbnailSrc": "images/thumbs/SPEC-0637.png?v=b97d3e9625fdac5721979623202eee9216d1f457464985fafdc513047280c11c"
+            },
+            {
+              "src": "verification/specimens/SPEC-0638.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0638",
+              "contentHash": "63b79fb0b7a5362452947b8d3be60c4bc94a0fc28288193500cb8d9986202c95",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "63b79fb0b7a5362452947b8d3be60c4bc94a0fc28288193500cb8d9986202c95",
+              "previewSrc": "images/previews/SPEC-0638.png?v=74d7565ed49253ff07667a8f5c3394e730752cc75026d1c376a9e2e98aa005c4",
+              "thumbnailSrc": "images/thumbs/SPEC-0638.png?v=f1503d55a74cd013bb6e882055fd7d1c3bb30801589ebd1bec332e035919f2f6"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0028-P02:0:8f89a9bc4f2e4a94",
+              "observationId": "finish:F0028-P01:0:75495adf8503c36c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "b5eebbe8b7125a885f382eecd074237840fa5e8d2c90d7a71ac92a4611bd9c94",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0028-P01:1:8f89a9bc4f2e4a94",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0583.",
-              "contentHash": "75693ef51e28662deddbdf7f92b244dcceeba30a995cb6ffa87fd2b450435f2c",
+              "contentHash": "00ddc4b6ec961112fc0696ada6078140bb7047df1f92bb6590bab2814be30648",
               "image": null
             },
             {
-              "observationId": "finish:F0028-P02:1:fad842ebdbe91c29",
+              "observationId": "finish:F0028-P01:2:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "a62a8e0a22dcb5a93cb29a2f8da80d5bf22fa71a7038f60f2f8ed17d83c65899",
+              "contentHash": "a4c59d6511607c9f44d137a32d5ddc8074b0ae18f919f92fa1f4f13ba83370fe",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0028-P02:0:356f19ace3f2dce9",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "525ce9191184e532e824f49034c5a4ee88054d037bcbfa0a51f476630f35c6d8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0028-P02:1:54d80200dd1f1838",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/a76aae9897b0f1049af84b54c75892e768ddb49b/i-img900x1200-1791891211612ogfsau.jpg",
+              "evidence": "Complete seller photograph of Japanese カビゴン HP130 プラズマ団, とおせんぼ and チームインパクト 30×, Illus.5ban Graphics, ©2012, printed 055/070 U BW7. The 1st EDITION mark position left of にげる at the lower left is visibly empty on the complete, legible face. Retained as SPEC-0637.",
+              "contentHash": "f0c4042cc9afe43227cc98891d9d147e6731347a498723d68591ca62d04f0da6",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0028-P02:2:75495adf8503c36c",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Gale/Snorlax-BW7055",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "356a5040569be227b0215aad9b3beb579bc8cd715c10aa5a6ffad91b55dc0546",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0028-P02:3:922c7b99c650b71d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/e3d937271f415148481443126e9c82c5a6338761/i-img675x674-1791253536559ctq4h4.jpg",
+              "evidence": "Complete seller photograph of a second Japanese カビゴン プラズマ団 055/070 U BW7 copy; the listing title calls it アンリミ. The 1st EDITION mark position left of にげる is visibly empty. Retained as SPEC-0638.",
+              "contentHash": "37d199633e32cf380a3b4017f6aa9ed79fe7b4744838cad9bd95eebfe94ca680",
               "image": null
             },
             {
@@ -18550,6 +18838,24 @@
               "evidence": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
               "contentHash": "05340caa797be705eb47515f8b83ad5cd8409c25741c8a142d553915bba34be2",
               "image": "verification/specimens/SPEC-0583.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0637",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://paypayfleamarket.yahoo.co.jp/item/z703749390",
+              "evidence": "Complete seller photograph of Japanese カビゴン HP130 プラズマ団, とおせんぼ and チームインパクト 30×, Illus.5ban Graphics, ©2012, printed 055/070 U BW7. The 1st EDITION mark position left of にげる at the lower left is visibly empty on the complete, legible face.",
+              "contentHash": "55be7dbd181c90c9fe6e5d4075d40138755a9c76a65228efaa460cba560d56fd",
+              "image": "verification/specimens/SPEC-0637.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0638",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://paypayfleamarket.yahoo.co.jp/item/z699583124",
+              "evidence": "Complete seller photograph of a second Japanese カビゴン プラズマ団 055/070 U BW7 copy; the listing title calls it アンリミ. The 1st EDITION mark position left of にげる is visibly empty.",
+              "contentHash": "cec2fea5549dbaf9286c366f1ed68f1d636a497c8fa67a98b348201ead0d7b42",
+              "image": "verification/specimens/SPEC-0638.jpg"
             },
             {
               "observationId": "unit:U0578",
@@ -59073,6 +59379,50 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:019b0c44c8620c325f9d0243",
+              "semanticPrintingId": "PRINTING:019b0c44c8620c325f9d0243",
+              "cardReleaseId": "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up",
+              "finish": "non-holo",
+              "edition": "1st Edition",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0101",
+              "sourcePrintingId": "F0101-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:019b0c44c8620c325f9d0243",
+              "specimenIds": [
+                "SPEC-0634"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Japanese カビゴン LV.35 HP100, とおせんぼ and ねころがる 40+, Illus.Ken Sugimori, ©2006, printed DPBP#174◆ DP1. A printed 1 EDITION mark stands at the lower left of the face beside the weakness box. Listing title: 'ポケモンカードゲーム/◆/ノーマル/DP1 時空の創造DPBP#174[◆]：カビゴン LV.35 1ED'. Retained as SPEC-0634.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:e3b276bac1a032edc1d7a201",
               "semanticPrintingId": "PRINTING:e3b276bac1a032edc1d7a201",
               "cardReleaseId": "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up",
@@ -59099,6 +59449,11 @@
                     "identity",
                     "edition"
                   ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
                   "sourceType": "Owner attestation (domain expert)",
@@ -59168,25 +59523,72 @@
               "originalHash": "43f557bd5d67774b41e15963310d8920869318ac4550e371c4e63ba63f762475",
               "previewSrc": "images/previews/SPEC-0581.png?v=08eda2ce639372ac487092420556b44ce706c481d82e5892cd0815968c339b77",
               "thumbnailSrc": "images/thumbs/SPEC-0581.png?v=7db4506c287f4aa295a082dfbfb849ca786d9be9865c99e5d32ba9d9906a90d1"
+            },
+            {
+              "src": "verification/specimens/SPEC-0634.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0634",
+              "contentHash": "55e8069e87a43e8801a279b21ae675f68ee43583d730fed52bb1d5a19f9ff488",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "55e8069e87a43e8801a279b21ae675f68ee43583d730fed52bb1d5a19f9ff488",
+              "previewSrc": "images/previews/SPEC-0634.png?v=820f3fd14d8e4ac87e58985ca39583c97e40e9dd1d7091a92084772191d41643",
+              "thumbnailSrc": "images/thumbs/SPEC-0634.png?v=481a3e15cf2fd1b5dc4fb8bf1ab6b404250a33164489285538d7d0e0e0e7a4c1"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0101-P01:0:356f19ace3f2dce9",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "e26d2f0d4d655d8008e7f4eacd4bca044fb4793e36403b707455bed1c4d86c62",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0101-P01:1:5beb9355844f2000",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+              "evidence": "Complete seller photograph of Japanese カビゴン LV.35 HP100, とおせんぼ and ねころがる 40+, Illus.Ken Sugimori, ©2006, printed DPBP#174◆ DP1. A printed 1 EDITION mark stands at the lower left of the face beside the weakness box. Listing title: 'ポケモンカードゲーム/◆/ノーマル/DP1 時空の創造DPBP#174[◆]：カビゴン LV.35 1ED'. Retained as SPEC-0634.",
+              "contentHash": "a5542d36e1f634ad516e8fe06146e305bedcb7c68a257fd6e12e4418632efbc0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0101-P01:2:ac166b43837b6bcc",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "39b9fde707bc948f10caa0a81b9e9eab6e4a20a160a5995a95e83c7d27fd856c",
+              "image": null
+            },
             {
               "observationId": "finish:F0101-P02:0:9690344cf9444d57",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0581.",
-              "contentHash": "31739e026b8f942eda355142a42aae73878b99daa8323fced812838b68681fa6",
+              "contentHash": "eb740f345145c73f795584d2845306ad5ab08757a264ec99382d777a5cbcb51d",
               "image": null
             },
             {
-              "observationId": "finish:F0101-P02:1:fad842ebdbe91c29",
+              "observationId": "finish:F0101-P02:1:ac166b43837b6bcc",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Space-Time-Creation/Snorlax-Lv35-DP1",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "60d576a5f18e496dbaf47c0fc5376ae58cdfd1f18e4a6f71361dc6c9cfe6b54f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0101-P02:2:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "a8ae57543deea1169c1b779edcd521e1421290b19de6a30ff1cc495c49cc1c6b",
+              "contentHash": "9efc34299097d93c17beb0dee2992210e6f9137a83d1dd662a40593b0c71b429",
               "image": null
             },
             {
@@ -59215,6 +59617,15 @@
               "evidence": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
               "contentHash": "861ebe8fe40970b35c442549707d2cba112a84257d24d5a50dd191941a37e8ab",
               "image": "verification/specimens/SPEC-0581.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0634",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://auctions.yahoo.co.jp/jp/auction/r1223260718",
+              "evidence": "Complete seller photograph of Japanese カビゴン LV.35 HP100, とおせんぼ and ねころがる 40+, Illus.Ken Sugimori, ©2006, printed DPBP#174◆ DP1. A printed 1 EDITION mark stands at the lower left of the face beside the weakness box. Listing title: 'ポケモンカードゲーム/◆/ノーマル/DP1 時空の創造DPBP#174[◆]：カビゴン LV.35 1ED'.",
+              "contentHash": "5ec1fedf85120debc9761ba04cb52cd1a43ff675b8f65411d6106963475e3f5c",
+              "image": "verification/specimens/SPEC-0634.jpg"
             },
             {
               "observationId": "unit:U0476",
@@ -60420,6 +60831,95 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:42e8bb55dd0639ef911179e9",
+              "semanticPrintingId": "PRINTING:42e8bb55dd0639ef911179e9",
+              "cardReleaseId": "RELEASE:JP:Japanese:Pt2:070:Snorlax-Lv40-Bad-Sleeping-Habits-Toss-and-Turn-Heavy-Press",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0301",
+              "sourcePrintingId": "F0301-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:42e8bb55dd0639ef911179e9",
+              "specimenIds": [
+                "SPEC-0635",
+                "SPEC-0636"
+              ],
+              "specimenFieldSources": {
+                "cardSize": [
+                  "SPEC-0635",
+                  "SPEC-0636"
+                ],
+                "edition": [
+                  "SPEC-0635",
+                  "SPEC-0636"
+                ],
+                "finish": [
+                  "SPEC-0635",
+                  "SPEC-0636"
+                ]
+              },
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Close-up of the lower left of the same Pt2 070/090 カビゴン from the same listing: weakness +20 and the ©2008 line are sharp, and the 1 EDITION mark position is empty. Retained as SPEC-0636.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "edition"
+                  ],
+                  "specimenId": "SPEC-0636"
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+                  "specimenId": "SPEC-0635"
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-29",
+                  "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+                  "specimenId": "SPEC-0636"
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Japanese カビゴン LV.40 HP100, めいわくねぞう, ねがえり 20+ and ヘビープレス 40+, Illus.Kouki Saitou, ©2008, printed 070/090● Pt2. The 1 EDITION mark position at the lower left beside the copyright line is visibly empty on the complete, legible face. Retained as SPEC-0635.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity",
+                    "edition"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "edition"
+                  ],
+                  "specimenId": "SPEC-0635"
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:c43ae0cd932b316541d0d02c",
               "semanticPrintingId": "PRINTING:c43ae0cd932b316541d0d02c",
               "cardReleaseId": "RELEASE:JP:Japanese:Pt2:070:Snorlax-Lv40-Bad-Sleeping-Habits-Toss-and-Turn-Heavy-Press",
@@ -60432,12 +60932,17 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0301",
-              "sourcePrintingId": "F0301-P02",
+              "sourcePrintingId": "F0301-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:c43ae0cd932b316541d0d02c",
               "specimenIds": [
                 "SPEC-0582"
               ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
                 {
                   "sourceType": "Inspected card photograph; external origin unknown",
                   "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0582.",
@@ -60516,25 +61021,101 @@
               "originalHash": "092d8dfeb2b78fb03728dc2f8e07e2ffd7393fdf4630479d2818fc9173c29cc1",
               "previewSrc": "images/previews/SPEC-0582.png?v=d0c48732a3896f0af861c5e768c8428548d64ea43e5131c5cd8f96be8877df04",
               "thumbnailSrc": "images/thumbs/SPEC-0582.png?v=a528732849d9f86c3a94d41d1d4d986daaf1f9da43bf0ec58aec539277016612"
+            },
+            {
+              "src": "verification/specimens/SPEC-0635.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0635",
+              "contentHash": "030b5974dbf42d8f08623b9fca56f974281fcbb6dd53d7996cad537cb2ce7ee9",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "030b5974dbf42d8f08623b9fca56f974281fcbb6dd53d7996cad537cb2ce7ee9",
+              "previewSrc": "images/previews/SPEC-0635.png?v=a00ebc75def1baced1afae2f03ddc10e1a3885314b8e36c4d0081941707aae29",
+              "thumbnailSrc": "images/thumbs/SPEC-0635.png?v=91bec6f9b9a1687de9b56795da5ff7c5ae4bc887110fa2094df9e463175fc785"
+            },
+            {
+              "src": "verification/specimens/SPEC-0636.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0636",
+              "contentHash": "51ea406e095fa53395416d1ce4e0fece6bbc2f299620385e2b6dc880db0a9616",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "51ea406e095fa53395416d1ce4e0fece6bbc2f299620385e2b6dc880db0a9616",
+              "previewSrc": "images/previews/SPEC-0636.png?v=1060180ddbfb38f2bc32b02e8348b83410b08790d5b9916ef3db03f2f3ba1d54",
+              "thumbnailSrc": "images/thumbs/SPEC-0636.png?v=91cf1bec17a4d00a2cb3a0fdcdc88e8899d4dd282abb5f95d9086cae3b2fc148"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0301-P02:0:bbd67c82f242a553",
+              "observationId": "finish:F0301-P01:0:13f2b89cb0fb232b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "6c03f654eb91a1241b1cecc2977a886f3e76bba12185696549c7c96cedd9ecbb",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P01:1:bbd67c82f242a553",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing. Retained as SPEC-0582.",
-              "contentHash": "9e7a5d68866c1b81692b5567cfbe35d6dc85d9da0351d0796d84a647cb1232ce",
+              "contentHash": "6009492926259ad247adb37cba505cd021fff7c6cfef3ad5032bd55f84621020",
               "image": null
             },
             {
-              "observationId": "finish:F0301-P02:1:fad842ebdbe91c29",
+              "observationId": "finish:F0301-P01:2:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "68c4ab2e8cd8cf5a6f67d3c32c5cc975b9aa62eb2e3ae41a7ff1820612c36fce",
+              "contentHash": "52f14e46f05cac637cf6dddf131856e7422049af93023e822a0aa54d154576dc",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P02:0:13f2b89cb0fb232b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Bonds-to-the-End-of-Time/Snorlax-Lv40-Pt2070",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "e05406235463ec1b9dad1d2f8ca537a7b95492a52a62939fb48ecff3b06cb0e8",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P02:1:17e9b73f778e025c",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+              "evidence": "Close-up of the lower left of the same Pt2 070/090 カビゴン from the same listing: weakness +20 and the ©2008 line are sharp, and the 1 EDITION mark position is empty. Retained as SPEC-0636.",
+              "contentHash": "096a51919563a9a6cbb5110f29894a686103d0a6974bef07aa875bc3640de555",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P02:2:4a13ca99d389b40f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "b9ea29c64b2966f728aa8fa1c3a2e67c6a3330cca9b17f375d898664341ddde2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P02:3:b26b110ad3294d25",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "55af1b77810e0a49e12624ba7f78be83b22916d0103d6e7766a2de9c8f77c4b3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0301-P02:4:e25c28484e5470fa",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+              "evidence": "Complete seller photograph of Japanese カビゴン LV.40 HP100, めいわくねぞう, ねがえり 20+ and ヘビープレス 40+, Illus.Kouki Saitou, ©2008, printed 070/090● Pt2. The 1 EDITION mark position at the lower left beside the copyright line is visibly empty on the complete, legible face. Retained as SPEC-0635.",
+              "contentHash": "ef1a8c6b266d8f6cb67ad4250db778953e4cd958141d4650f933d83ed01f1296",
               "image": null
             },
             {
@@ -60563,6 +61144,24 @@
               "evidence": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
               "contentHash": "0c71b981a53632d0b9406fd5a105d8941ea614b8e9141be548d0052ef4cd65de",
               "image": "verification/specimens/SPEC-0582.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0635",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://paypayfleamarket.yahoo.co.jp/item/z701753624",
+              "evidence": "Complete seller photograph of Japanese カビゴン LV.40 HP100, めいわくねぞう, ねがえり 20+ and ヘビープレス 40+, Illus.Kouki Saitou, ©2008, printed 070/090● Pt2. The 1 EDITION mark position at the lower left beside the copyright line is visibly empty on the complete, legible face.",
+              "contentHash": "ba6f879fbbc6c1822e6007dffc73d2f67adf5748007b45f15e111467d5a4513a",
+              "image": "verification/specimens/SPEC-0635.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0636",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://paypayfleamarket.yahoo.co.jp/item/z701753624",
+              "evidence": "Close-up of the lower left of the same Pt2 070/090 カビゴン from the same listing: weakness +20 and the ©2008 line are sharp, and the 1 EDITION mark position is empty.",
+              "contentHash": "72fc66a4dd4363421dfc3bff8efc3a6cc91ad1f37d272e4da06f82d56c3a30ed",
+              "image": "verification/specimens/SPEC-0636.jpg"
             },
             {
               "observationId": "unit:U0751",
