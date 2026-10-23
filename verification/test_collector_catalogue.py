@@ -972,7 +972,9 @@ def main() -> None:
         ("s10a T", "2022-07-29", "https://asia.pokemon-card.com/th/archives/1596/"),
     ):
         rows = [row for row in thai if row["localSetCode"] == code]
-        assert rows and all(row["releaseDate"] == date and url in row["sourceLinks"] for row in rows)
+        # Since the #431 merge, s10a T also holds 058/071, dated by its own source-first row.
+        assert rows and all(row["releaseDate"] == date for row in rows)
+        assert any(url in row["sourceLinks"] for row in rows)
     for release_fragment, finish, image_url in (
         (":sc3b T:126/158:", "holo", "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7"),
         (":sv4a:145/190:", "reverse-holo", "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg"),
