@@ -289,7 +289,8 @@ workflow run and deploys the already verified artifact without a second projecti
   Unlimited, the collector catalogue carries one item for each. A photograph establishes its own
   edition only when the face is legible: a visible 1st Edition mark, or a visibly empty mark
   position on a set printed in both editions. Card-level finish flags (TCGdex) attach to both
-  edition items rather than forming a third, editionless one.
+  edition items rather than forming a third, editionless one. Whether a set has an edition system
+  at all comes from `verification/edition_rules.json` for every item, whatever source created it.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two
   finish layers answer different questions: `finishAvailability` on a card says what evidence
   attributes to *this Cardmarket product*, while `finish_units.json` says what is known for the

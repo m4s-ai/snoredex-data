@@ -15,6 +15,26 @@ Newest first.
 
 ---
 
+## A set rule that only reached the marketplace rows
+
+**Trap:** *Set facts apply to every item of that set, whichever source created the item.*
+
+The reviewed edition rules (`edition_rules.json`: no 1st Edition after Neo Destiny in the West or
+from the Sun & Moon era in Japan, never in KR/CN/TW/ID/TH) were applied by `editions.py` to
+`snorlax_cards.json`, the Cardmarket harvest. The collector catalogue inherited the verdict through
+the legacy checklist row, so 102 items admitted from official databases or specimens, with no
+Cardmarket row, fell through to "edition unresolved" although the rule answered them. The owner
+asked why a set fact depended on where an item came from; it never should have.
+
+**Now guarded by** `collector_catalogue.edition_system_absent()`, which reads the same rules (with
+their era boundaries recorded as dates) for every item, and `edition_rule_regressions` in
+`verification/test_collector_catalogue.py`, which fails if any item the rules place outside an
+edition system is still unresolved.
+
+*PR #433.*
+
+---
+
 ## One specimen's caution became a rule nobody had made
 
 **Trap:** *A legible card face establishes its edition: a visible 1st Edition mark, or a visibly empty mark position on a set printed in both editions.*

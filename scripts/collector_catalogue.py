@@ -297,6 +297,36 @@ def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+EDITION_RULES = read_json(ROOT / "verification" / "edition_rules.json")
+
+
+def edition_system_absent(localization_id: str, set_code: str | None, release_date: str | None) -> bool:
+    """Whether the reviewed edition rules place this set outside any 1st Edition system."""
+    region = localization_id.split(":")[1]
+    if region in EDITION_RULES["noEditionSystemLocalities"]:
+        return True
+    if not release_date:
+        return False
+    if region == "JP":
+        listed = set(EDITION_RULES["japaneseFirstEditionSetCodes"]) | set(EDITION_RULES["japaneseUnlimitedOnlySetCodes"])
+        return set_code not in listed and release_date >= EDITION_RULES["japaneseFirstEditionEndsBefore"]
+    listed = set(EDITION_RULES["westernFirstEditionSetCodes"]) | set(EDITION_RULES["westernUnlimitedOnlySetCodes"])
+    return set_code not in listed and release_date > EDITION_RULES["westernLastFirstEditionRelease"]
+
+
+def item_edition(physical: dict[str, Any] | None, old: dict[str, Any] | None, localization_id: str,
+                 set_code: str | None, release_date: str | None) -> tuple[str | None, str]:
+    """Return the item's edition and assignment status; set facts apply whatever the item's origin."""
+    if physical and physical.get("edition"):
+        return physical["edition"], "assigned"
+    if old and old.get("edition") not in (None, "—"):
+        return old["edition"], "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
+    if (old and old.get("editionScope") == "no-edition-system") or edition_system_absent(
+            localization_id, set_code, release_date):
+        return None, "not-applicable"
+    return None, "unresolved"
+
+
 def canonical_bytes(value: Any) -> bytes:
     return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
@@ -1397,18 +1427,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             error_class = None
             verification_status = "pending"
 
-        if physical and physical.get("edition"):
-            edition_value = physical["edition"]
-            edition_status = "assigned"
-        elif old and old.get("edition") not in (None, "—"):
-            edition_value = old["edition"]
-            edition_status = "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
-        elif old and old.get("editionScope") == "no-edition-system":
-            edition_value = None
-            edition_status = "not-applicable"
-        else:
-            edition_value = None
-            edition_status = "unresolved"
+        edition_value, edition_status = item_edition(
+            physical, old, context["identity"]["localizationId"],
+            context["catalogue"].get("localCode"), context["event"].get("releaseDate"),
+        )
 
         finish_family = FINISH_FAMILY.get(finish) if finish is not None else None
         finish_group = group_id("|".join((

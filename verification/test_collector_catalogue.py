@@ -391,7 +391,23 @@ def numbering_basis_regressions() -> None:
                          for row in items)
 
 
+def edition_rule_regressions() -> None:
+    # Set facts decide whether an edition system exists, whatever source created the item.
+    absent = collector.edition_system_absent
+    assert absent("LOCALIZATION:KR:ko", "XY10", "2016-03-24")
+    assert absent("LOCALIZATION:WEST:de", "30C DE", "2026-09-16")
+    assert absent("LOCALIZATION:JP:ja", "M6a", "2026-09-16")
+    assert not absent("LOCALIZATION:JP:ja", "XY10", "2016-03-18")
+    assert not absent("LOCALIZATION:WEST:en", "JU", "1999-06-16")
+    assert not absent("LOCALIZATION:JP:ja", "PJU", None)
+    items = read("collector_catalogue.json")["items"]
+    rule_free = [row["itemId"] for row in items if row["editionAssignmentStatus"] == "unresolved"
+                 and absent(row["localizationId"], row["localSetCode"], row["releaseDate"])]
+    assert not rule_free, rule_free
+
+
 def main() -> None:
+    edition_rule_regressions()
     numbering_basis_regressions()
     local_card_name_regressions()
     reviewed_release_date_regressions()
