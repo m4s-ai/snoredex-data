@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 43,
-   "evidenceRecords": 1801,
-   "uniqueUrls": 1792,
+   "providers": 45,
+   "evidenceRecords": 1803,
+   "uniqueUrls": 1794,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7219
+   "claimsAttributed": 7218
   }
  },
  "providers": [
@@ -222,7 +222,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 115,
-   "claimsSupported": 737
+   "claimsSupported": 736
   },
   {
    "providerId": "pokewiki",
@@ -287,7 +287,7 @@
     "cp.marumiya.co.jp"
    ],
    "uniqueSources": 1,
-   "claimsSupported": 2
+   "claimsSupported": 1
   },
   {
    "providerId": "pokemoncentral",
@@ -327,6 +327,50 @@
    "notes": "Manual positive date evidence only. The exact page states Deutsch, Erschienen am and EAN 0820650452499, with Switzerland country metadata. The field dates that retailer's named German product, not every German market or an exhaustive first-distribution history. Product prose lends no card identity, finish, absence or completeness authority.",
    "hosts": [
     "www.wog.ch"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "newsworks",
+   "displayName": "Newsworks reviewed Korean product-launch report",
+   "organization": "Newsworks",
+   "homepage": "https://www.newsworks.co.kr/",
+   "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+   "category": "news",
+   "authorityTier": 3,
+   "coverage": "only the 2016-10-13 report of the Lotte Foods Kisstick Pokémon launch with a Pokémon card in the 500 g pack",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Product-launch date from Newsworks.",
+   "notes": "Manual positive date evidence only. The article names no card; the link to 167/XY-P rests on the owner's decision of 2026-10-23 and the Kisstick card-pack attribution. No card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "www.newsworks.co.kr",
+    "newsworks.co.kr"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "edaily",
+   "displayName": "Edaily reviewed Korean product-launch report",
+   "organization": "Edaily",
+   "homepage": "https://www.edaily.co.kr/",
+   "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+   "category": "news",
+   "authorityTier": 3,
+   "coverage": "only the 2016-10-13 report of the Lotte Foods Kisstick Pokémon launch in 75 g and 500 g packs",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Product-launch date from Edaily.",
+   "notes": "Manual positive date evidence only; corroborates the Newsworks launch report. No card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "www.edaily.co.kr",
+    "edaily.co.kr"
    ],
    "uniqueSources": 1,
    "claimsSupported": 1
@@ -529,7 +573,7 @@
     "www.pokumon.com"
    ],
    "uniqueSources": 10,
-   "claimsSupported": 33
+   "claimsSupported": 34
   },
   {
    "providerId": "pokecottage",
@@ -801,7 +845,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 347,
-   "claimsSupported": 977
+   "claimsSupported": 975
   },
   {
    "providerId": "cardmarket-product-image",
@@ -3505,13 +3549,12 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
-    "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56"
+    "item-4320a985-66ec-52e9-8149-bce9099f4c1b"
    ],
    "retrievedAt": "2026-10-11T10:33:14.996679Z",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Call_of_Legends_33)",
@@ -10832,24 +10875,20 @@
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket",
    "sourceTypes": [
-    "Cardmarket catalogue hint (not external verification)",
     "Cardmarket product page",
     "retained Cardmarket product scan"
    ],
    "dimensions": [
-    "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 3,
    "stableIds": [
-    "F0619-P02",
-    "F0620-P01",
     "SPEC-0222",
     "U0660",
     "XY-P 149 V1"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V2-XY-P261",
@@ -12624,6 +12663,23 @@
    ],
    "retrievedAt": "2026-08-30",
    "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+   "nonUrlEvidenceId": null,
+   "providerId": "edaily",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-65823040-bf6b-5462-a910-93b88a00d5da"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.elitefourum.com/t/black-star-promos-languages/36573",
@@ -14662,13 +14718,12 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
-    "item-5f6fb249-fc93-523c-bcb7-c21c86c05e56"
+    "item-4320a985-66ec-52e9-8149-bce9099f4c1b"
    ],
    "retrievedAt": "2026-10-12T19:21:32.148154Z",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
@@ -14717,6 +14772,23 @@
    "stableIdCount": 1,
    "stableIds": [
     "item-27c7591e-7c91-5c4c-a420-b0491d05c0f2"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+   "nonUrlEvidenceId": null,
+   "providerId": "newsworks",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-65823040-bf6b-5462-a910-93b88a00d5da"
    ],
    "retrievedAt": "2026-10-23",
    "usageCount": 1
@@ -26849,16 +26921,18 @@
    ],
    "dimensions": [
     "card-existence",
+    "finish",
     "rarity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0620-P01",
     "KR:XY-P:167:base",
     "SPEC-0031",
     "U0661"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://pokumon.com/card/snorlax-278-sv-p-indonesian-promo",

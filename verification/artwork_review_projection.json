@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-23",
-  "projectionVersion": "abd895ca78565fa94e3bdf68f753f6c01ea495c9022cb8cb1888e2d9a59a54bb",
+  "projectionVersion": "31dde0dce7db779d72ff77e424597daf3ea62b4f563547100e32eadc797b9b1b",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 897,
-    "sourceObservations": 3259
+    "sourceObservations": 3260
   },
   "groups": [
     {
@@ -62815,8 +62815,7 @@
             "artist": "Kouki Saitou",
             "variant": "V1",
             "finish": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
             "foilPattern": [],
             "markings": [
@@ -62933,7 +62932,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
+              "physicalPrintingId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+              "semanticPrintingId": "PRINTING:cb71cb0f0a310945b6fc504e",
               "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
               "finish": "non-holo",
               "edition": null,
@@ -62941,14 +62941,21 @@
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
-              "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0031",
+              "sourceFinishUnitId": "F0620",
+              "sourcePrintingId": "F0620-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
               "specimenIds": [
                 "SPEC-0031"
+              ],
+              "sources": [
+                {
+                  "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0031.",
+                  "retrievedAt": "2026-08-10"
+                }
               ]
             }
           ],
@@ -62998,6 +63005,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0620-P01:0:33f28ad3c06e26f4",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+              "evidence": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0031.",
+              "contentHash": "a6eeb6532e4ca6b56799ebe60faa2b6804b02eb55588a08f3121981b73c2fe55",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:XY-P:167:base",
               "kind": "source-first",

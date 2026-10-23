@@ -8311,24 +8311,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:0336e888841192b092652819",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:0336e888841192b092652819",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0620-P01",
-        "semanticPrintingId": "PRINTING:0336e888841192b092652819",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:03c3cb134ec8801a6c1c0b51",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -8655,24 +8637,6 @@
         "proposedTargetId": "PHYSICAL:PRINTING:1005c8fe66454d83b7c15e3d",
         "materializedTargetId": "PHYSICAL:PRINTING:1005c8fe66454d83b7c15e3d",
         "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:1167a08e6546faf2808f4a49",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:1167a08e6546faf2808f4a49",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0619-P02",
-        "semanticPrintingId": "PRINTING:1167a08e6546faf2808f4a49",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away"
       }
     },
     {
@@ -15536,6 +15500,26 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0620-P01",
+        "semanticPrintingId": "PRINTING:cb71cb0f0a310945b6fc504e",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+        "materializedTargetId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0031"
+        ]
       }
     },
     {
@@ -33277,11 +33261,11 @@
         "sourceKind": "specimen-observation",
         "sourceId": "SPEC-0031",
         "evidenceStatus": "observed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:specimen:SPEC-0031",
-        "materializedTargetId": "PHYSICAL:specimen:SPEC-0031",
-        "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-        "provenanceTargetId": "PHYSICAL:specimen:SPEC-0031"
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e"
       }
     },
     {
@@ -104870,6 +104854,30 @@
     },
     {
       "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+        "semanticPrintingId": "PRINTING:cb71cb0f0a310945b6fc504e",
+        "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+        "finish": "non-holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0620",
+        "sourcePrintingId": "F0620-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
+        "specimenIds": [
+          "SPEC-0031"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -106945,30 +106953,6 @@
         "establishingClaimId": "CLAIM:specimen:SPEC-0030",
         "specimenIds": [
           "SPEC-0030"
-        ]
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:specimen:SPEC-0031",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
-        "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-        "finish": "non-holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": [],
-        "distribution": null,
-        "cardSize": "standard",
-        "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": null,
-        "sourcePrintingId": null,
-        "establishingClaimId": "CLAIM:specimen:SPEC-0031",
-        "specimenIds": [
-          "SPEC-0031"
         ]
       }
     },
@@ -188578,14 +188562,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:0336e888841192b092652819",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:03c3cb134ec8801a6c1c0b51",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -188757,14 +188733,6 @@
       "provenance": {
         "disposition": "established-and-mapped"
       }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:1167a08e6546faf2808f4a49",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
-      "provenance": {}
     },
     {
       "fromType": "candidate-claim",
@@ -192341,6 +192309,16 @@
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CS2aC:086/115:Snorlax-Gormandize-Body-Slam",
       "provenance": {}
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -201639,11 +201617,11 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:specimen:SPEC-0031",
-      "relation": "materializes",
+      "relation": "provenance",
       "toType": "physical-printing",
-      "toId": "PHYSICAL:specimen:SPEC-0031",
+      "toId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
       "provenance": {
-        "disposition": "established-and-mapped"
+        "specimenId": "SPEC-0031"
       }
     },
     {
@@ -255176,6 +255154,22 @@
     },
     {
       "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -256516,22 +256510,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:TW:T-Chinese:S-P:145:Snorlax-Rolling-Tackle-Heavy-Impact",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:specimen:SPEC-0031",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:specimen:SPEC-0031",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:specimen:SPEC-0031",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
       "provenance": {}
     },
     {
@@ -307431,17 +307409,10 @@
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0619-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
       "sourceId": "F0620-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -323651,9 +323622,9 @@
     {
       "sourceKind": "specimen-observation",
       "sourceId": "SPEC-0031",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:specimen:SPEC-0031",
-      "reason": "physical observation establishes standalone printing for RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away"
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e, already established from the finish store"
     },
     {
       "sourceKind": "specimen-observation",
@@ -325869,12 +325840,12 @@
     }
   ],
   "summary": {
-    "entities": 9102,
-    "edges": 13166,
-    "migrationInputs": 3318,
+    "entities": 9101,
+    "edges": 13165,
+    "migrationInputs": 3317,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 347,
+      "candidate-needs-evidence": 346,
       "carried": 68,
       "established-and-mapped": 1715,
       "linked-local-counterpart": 126,
@@ -325884,7 +325855,7 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2229,
+    "candidateClaims": 2228,
     "cardReleases": 629,
     "physicalPrintings": 897,
     "setSourceRecords": 747,

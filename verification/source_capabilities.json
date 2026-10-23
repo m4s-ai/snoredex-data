@@ -313,6 +313,20 @@
       "authorityTier": 3,
       "licenseOrTerms": "Distributor's own terms; exact dated product fields retained for date verification only.",
       "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "edaily",
+      "operator": "Edaily",
+      "authorityTier": 3,
+      "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "newsworks",
+      "operator": "Newsworks",
+      "authorityTier": 3,
+      "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
     }
   ],
   "surfaces": [
@@ -9160,6 +9174,172 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "providerId": "edaily",
+      "label": "Reviewed day/month release dates of 2026-10-23 (edaily)",
+      "match": {
+        "urlPrefixes": [
+          "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "edaily-reviewed-dates-20261023-65823040-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2016-10",
+              "end": "2016-10",
+              "basis": "Only the exact retained source-native date at its stated precision: Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+          },
+          "knownPositiveObservationId": "obs-edaily-reviewed-dates-20261023-65823040",
+          "outOfScopeChallengeObservationId": "obs-edaily-reviewed-dates-20261023-65823040-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other pages, products or campaigns",
+              "other markets or languages",
+              "unsupported finer precision or other shipment/reprint waves",
+              "card existence, identity or membership",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "providerId": "newsworks",
+      "label": "Reviewed day/month release dates of 2026-10-23 (newsworks)",
+      "match": {
+        "urlPrefixes": [
+          "https://www.newsworks.co.kr/news/articleView.html?idxno=87040"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "newsworks-reviewed-dates-20261023-65823040-positive",
+          "coverage": {
+            "localities": [
+              "KR"
+            ],
+            "languages": [
+              "Korean"
+            ],
+            "scripts": [
+              "Hang"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2016-10",
+              "end": "2016-10",
+              "basis": "Only the exact retained source-native date at its stated precision: Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "date",
+            "release-date"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+          },
+          "knownPositiveObservationId": "obs-newsworks-reviewed-dates-20261023-65823040",
+          "outOfScopeChallengeObservationId": "obs-newsworks-reviewed-dates-20261023-65823040-boundary",
+          "boundary": {
+            "outsideScope": [
+              "other pages, products or campaigns",
+              "other markets or languages",
+              "unsupported finer precision or other shipment/reprint waves",
+              "card existence, identity or membership",
+              "rarity or physical finish",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -16377,6 +16557,168 @@
         "sodip-reviewed-dates-20261023-fe55f905-positive"
       ],
       "outcome": "The source dates Italian newsstand release of the four 2023 World Championships decks only; it transfers to no other market, language, channel, finish or finer precision."
+    },
+    {
+      "observationId": "obs-edaily-reviewed-dates-20261023-65823040",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "queryUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+      "retrievedAt": "2026-10-23",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "edaily-reviewed-dates-20261023-65823040",
+          "sourceUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+          "retrievedAt": "2026-10-23",
+          "captureMethod": "HTTP response bytes",
+          "responseSha256": "11d3d7240734f00e64f25ec346fd4dac5ae1ec01b63f872698f22a026a7383f2",
+          "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+          "retainedSha256": "69ac6e4f83a0aa0a981b1bede12e6562fcb2fcf254c488b3dcc6af6e76aceca9",
+          "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-edaily-lottefood-kisstick-pokemon-20161013.html",
+          "excerpt": "롯데푸드(002270) 는 인기 캐릭터 포켓몬을 패키지에 적용한 미니 소시지 ‘키스틱 포켓몬’을 출시했다고 13일 밝혔다.",
+          "excerptSha256": "deb145169003564cd9e120b5593b1a1737d0bdbee38efd19a7358c4d6f2292aa",
+          "excerptHashScope": "UTF-8 bytes of the excerpt",
+          "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+          "date": "2016-10",
+          "precision": "month",
+          "approximate": false,
+          "field": "source-native availability date",
+          "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+          "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+        }
+      },
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+    },
+    {
+      "observationId": "obs-edaily-reviewed-dates-20261023-65823040-boundary",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "queryUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+      "retrievedAt": "2026-10-23",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "edaily-reviewed-dates-20261023-65823040",
+          "sourceUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+          "retrievedAt": "2026-10-23",
+          "captureMethod": "HTTP response bytes",
+          "responseSha256": "11d3d7240734f00e64f25ec346fd4dac5ae1ec01b63f872698f22a026a7383f2",
+          "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+          "retainedSha256": "69ac6e4f83a0aa0a981b1bede12e6562fcb2fcf254c488b3dcc6af6e76aceca9",
+          "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-edaily-lottefood-kisstick-pokemon-20161013.html",
+          "excerpt": "롯데푸드(002270) 는 인기 캐릭터 포켓몬을 패키지에 적용한 미니 소시지 ‘키스틱 포켓몬’을 출시했다고 13일 밝혔다.",
+          "excerptSha256": "deb145169003564cd9e120b5593b1a1737d0bdbee38efd19a7358c4d6f2292aa",
+          "excerptHashScope": "UTF-8 bytes of the excerpt",
+          "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+          "date": "2016-10",
+          "precision": "month",
+          "approximate": false,
+          "field": "source-native availability date",
+          "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+          "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+        }
+      },
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+    },
+    {
+      "observationId": "obs-newsworks-reviewed-dates-20261023-65823040",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "queryUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+      "retrievedAt": "2026-10-23",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "newsworks-reviewed-dates-20261023-65823040",
+          "sourceUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+          "retrievedAt": "2026-10-23",
+          "captureMethod": "HTTP response bytes",
+          "responseSha256": "181d19c78e83163f61ad4ffd82116ca84059bb042840bbfb3c4910411cb5e01c",
+          "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+          "retainedSha256": "83e01cd2aeeafea208c89200c16f1413222cc4f6d9dbaaf885bb63424e9ac33e",
+          "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-newsworks-87040-lottefood-kisstick-pokemon-20161013.html",
+          "excerpt": "롯데푸드는 최근 다시 열풍이 불고 있는 포켓몬의 인기에 발 맞춰 미니 소시지 ‘키스틱 포켓몬’ 2종을 출시했다고 13일 밝혔다.신제품은 75g과 500g 2종으로 출시됐으며 패키지 디자인에 인기 포켓몬의 모습을 넣어 주목도를 높이고 75g 제품에는 ‘포켓몬 스티커’, 500g 제품에는 ‘포켓몬 카드’를 넣어",
+          "excerptSha256": "6cd7989f19fffc36bef5ba654e9fd6dcfeb8356f7f0cf83bf7ac36570a1d1ac2",
+          "excerptHashScope": "UTF-8 bytes of the excerpt",
+          "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+          "date": "2016-10",
+          "precision": "month",
+          "approximate": false,
+          "field": "source-native availability date",
+          "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+          "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+        }
+      },
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+    },
+    {
+      "observationId": "obs-newsworks-reviewed-dates-20261023-65823040-boundary",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "queryUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+      "retrievedAt": "2026-10-23",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "sourceId": "newsworks-reviewed-dates-20261023-65823040",
+          "sourceUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+          "retrievedAt": "2026-10-23",
+          "captureMethod": "HTTP response bytes",
+          "responseSha256": "181d19c78e83163f61ad4ffd82116ca84059bb042840bbfb3c4910411cb5e01c",
+          "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+          "retainedSha256": "83e01cd2aeeafea208c89200c16f1413222cc4f6d9dbaaf885bb63424e9ac33e",
+          "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-newsworks-87040-lottefood-kisstick-pokemon-20161013.html",
+          "excerpt": "롯데푸드는 최근 다시 열풍이 불고 있는 포켓몬의 인기에 발 맞춰 미니 소시지 ‘키스틱 포켓몬’ 2종을 출시했다고 13일 밝혔다.신제품은 75g과 500g 2종으로 출시됐으며 패키지 디자인에 인기 포켓몬의 모습을 넣어 주목도를 높이고 75g 제품에는 ‘포켓몬 스티커’, 500g 제품에는 ‘포켓몬 카드’를 넣어",
+          "excerptSha256": "6cd7989f19fffc36bef5ba654e9fd6dcfeb8356f7f0cf83bf7ac36570a1d1ac2",
+          "excerptHashScope": "UTF-8 bytes of the excerpt",
+          "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+          "date": "2016-10",
+          "precision": "month",
+          "approximate": false,
+          "field": "source-native availability date",
+          "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+          "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+        }
+      },
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
     }
   ]
 }

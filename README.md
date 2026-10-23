@@ -8,7 +8,7 @@ all-locality catalogue.**
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
 [![Legacy cards](https://img.shields.io/badge/legacy_cards-198-2563eb)](legacy-cardmarket-baseline.json)
-[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-907_items-2563eb)](analysis_checklist.json)
+[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-906_items-2563eb)](analysis_checklist.json)
 [![Publication](https://img.shields.io/badge/publication-approved-2ea44f)](publication-decisions.json)
 [![Licence](https://img.shields.io/badge/licence-grants_in_force-2ea44f)](LICENSE.md)
 [![AI-DECLARATION: copilot](https://img.shields.io/badge/%E4%B7%BC%20AI--DECLARATION-copilot-fee2e2?labelColor=fee2e2)](AI-DECLARATION.md)
@@ -136,9 +136,9 @@ Current-known status snapshot: **2026-10-23**. Legacy claim counts refer to `car
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 627 externally confirmed, 92 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
 | Evidence-safe application status | **621 established**, **6 needs evidence**, **88 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
-| Current-known physical checklist | **907 items** across 174 cards and 15 languages: 896 documented printings plus 11 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 536 externally confirmed, 13 marketplace-only positives, 11 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 116 units. |
-| Evidence registry | **43 providers**, 1801 evidence records, 1792 unique URLs, and 7,219 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
+| Current-known physical checklist | **906 items** across 174 cards and 15 languages: 895 documented printings plus 11 explicit unresolved placeholders. |
+| Current-known finish evidence | **637 card-number × language units**: 537 externally confirmed, 12 marketplace-only positives, 11 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 115 units. |
+| Evidence registry | **45 providers**, 1803 evidence records, 1794 unique URLs, and 7,218 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
 | Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present and hash-verified. The intended mixed-work grants are active under the recorded owner approvals. |
@@ -163,7 +163,7 @@ agreed independently, and `verification/source_registry.json` records the author
 |---|---|
 | 1 | Inspected physical specimen · Marumiya original Japanese promotional campaign · Play! Pokémon rewards gallery · Pokémon Card official database (Asia) · Pokémon Card official database (Japan) · Pokémon Card official database and rules (Korea) · Pokémon official website (Mainland China) · The Pokémon Company official cards and checklists |
 | 2 | 52poke (Wiki) · Bulbapedia · CGC certification and registry · Cardmarket exact product image · Cardmarket seller listing photograph · Collection owner attestation · Elite Fourum · Malie TCGL reference · PSA certification and registry · SNKRDUNK · Seller listing photograph · TCGdex · pokemontcg.io |
-| 3 | Collectory · Kartenbasis reviewed German product date · LigaPokemon · Limitless TCG · Micromania reviewed French product date · MyComics reviewed Italian product dates · PKParaiso · PokéCardex · PokéCottage · PokéWiki reviewed localized release fields · PokéZentrum reviewed German release calendar · Pokémon Central Wiki reviewed Italian product date · Poképédia reviewed localized release fields · Retailer and specialist card listings · Sodip reviewed Italian newsstand release date · TCGCSV (TCGplayer product data) · WikiDex · World of Games reviewed Swiss German product date · koreanpokemoncards.com · pokumon.com |
+| 3 | Collectory · Edaily reviewed Korean product-launch report · Kartenbasis reviewed German product date · LigaPokemon · Limitless TCG · Micromania reviewed French product date · MyComics reviewed Italian product dates · Newsworks reviewed Korean product-launch report · PKParaiso · PokéCardex · PokéCottage · PokéWiki reviewed localized release fields · PokéZentrum reviewed German release calendar · Pokémon Central Wiki reviewed Italian product date · Poképédia reviewed localized release fields · Retailer and specialist card listings · Sodip reviewed Italian newsstand release date · TCGCSV (TCGplayer product data) · WikiDex · World of Games reviewed Swiss German product date · koreanpokemoncards.com · pokumon.com |
 | 5 | Cardmarket · Internal derivation from a sibling record |
 
 Tiers 1, 2, 3 grade external evidence, strongest first. Tier 5 is not a weaker rung: it marks what is **not** external evidence — the marketplace catalogue this project exists to check, and attributes carried across from a sibling printing of the same card. There is deliberately no tier 4.
@@ -337,9 +337,9 @@ finish decision may close a unit after review, and that decision never introduce
 <!-- generated:finish-coverage — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
 | Known available finish | Set-number-language units |
 |---|---:|
-| Non-Holo | 326 |
+| Non-Holo | 327 |
 | Holo | 255 |
-| Reverse Holo family | 239 |
+| Reverse Holo family | 237 |
 | Both Non-Holo and Holo | 56 |
 <!-- /generated:finish-coverage -->
 

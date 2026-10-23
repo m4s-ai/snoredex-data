@@ -10425,23 +10425,21 @@
      "language": "Japanese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo",
-      "reverse-holo"
+      "non-holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo",
-      "reverse-holo"
+      "non-holo"
      ],
      "finishStatus": {
       "non-holo": "confirmed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "confirmed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "status": "confirmed",
@@ -10467,53 +10465,45 @@
        "specimenIds": [
         "SPEC-0587"
        ]
-      },
-      {
-       "printingId": "F0619-P02",
-       "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
       }
      ]
     },
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [
-      "reverse-holo"
-     ],
+     "availableFinishes": [],
      "unitAvailableFinishes": [
-      "reverse-holo"
+      "non-holo"
      ],
      "finishStatus": {
-      "non-holo": "pending",
+      "non-holo": "unmapped",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "pending",
+      "non-holo": "confirmed",
       "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "pending",
      "finishUnitId": "F0620",
-     "productMappingStatus": "confirmed",
+     "productMappingStatus": "pending",
      "printings": [
       {
        "printingId": "F0620-P01",
-       "finish": "reverse-holo",
+       "finish": "non-holo",
        "foilPattern": null,
-       "markings": null,
+       "markings": [],
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
+       "verificationStatus": "confirmed",
+       "productMapping": "unresolved",
+       "image": "verification/specimens/SPEC-0031.png",
+       "specimenIds": [
+        "SPEC-0031"
+       ]
       }
      ]
     },
@@ -10541,8 +10531,8 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only",
-    "Korean": "positive-evidence-only"
+    "Japanese": "owner-adjudicated",
+    "Korean": "owner-adjudicated"
    },
    "languageEvidence": {
     "Japanese": {
