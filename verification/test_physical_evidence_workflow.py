@@ -505,7 +505,9 @@ def main() -> None:
     portuguese_ju27 = next(row for row in specimens if row["specimenId"] == "SPEC-0120")
     portuguese_ju27_printing = projector.specimen_printing(portuguese_ju27)
     assert portuguese_ju27_printing["finish"] == "non-holo"
-    assert "edition" not in portuguese_ju27_printing
+    # Owner rule 2026-10-22: the visibly empty 1st Edition mark position on this complete,
+    # legible Jungle face establishes Unlimited; it is an observation, not a source absence.
+    assert portuguese_ju27_printing["edition"] == "Unlimited"
     assert portuguese_ju27_printing["sources"][0]["sourceType"] == "Seller listing photograph"
     portuguese_ju27_source = next(
         source for source in source_registry
@@ -631,7 +633,8 @@ def main() -> None:
                                 if unit["setCode"] == "JU" and unit["number"] == "27"
                                 and unit["language"] == "Portuguese")
     assert portuguese_ju27_unit["availabilityStatus"] == "confirmed"
-    assert portuguese_ju27_unit["printings"][0]["specimenIds"] == ["SPEC-0120"]
+    unlimited = next(p for p in portuguese_ju27_unit["printings"] if p.get("edition") == "Unlimited")
+    assert unlimited["specimenIds"] == ["SPEC-0120"]
     italian_wcd = next(unit for unit in finish_units
                        if unit["setCode"] == "WCD23 LOR" and unit["number"] == "LOR 143"
                        and unit["language"] == "Italian")
@@ -690,7 +693,8 @@ def main() -> None:
     spanish_ju11_holo = next(p for p in spanish_ju11["printings"]
                             if p.get("specimenIds") == ["SPEC-0129", "SPEC-0130"])
     assert spanish_ju11_holo["finish"] == "holo"
-    assert "edition" not in spanish_ju11_holo
+    # Owner rule 2026-10-22: the visibly empty 1st Edition mark position establishes Unlimited.
+    assert spanish_ju11_holo["edition"] == "Unlimited"
     assert spanish_ju11_holo["specimenIds"] == ["SPEC-0129", "SPEC-0130"]
     spanish_archive = {
         row["specimenId"]: row for row in specimens
