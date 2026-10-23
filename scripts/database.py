@@ -32,6 +32,7 @@ DATABASE = ROOT / "snoredex.sqlite"
 AUDIT = ROOT / "verification" / "DATA-HANDOFF-AUDIT.md"
 SCHEMA_VERSION = "1.7.0"
 GRAPH_SCHEMA_VERSION = "1.1.0"
+OWNER_ADJUDICATIONS_SCHEMA_VERSION = "1.2.0"
 DATABASE_USER_VERSION = 10007
 COLLECTOR_COMPATIBILITY_SCHEMA_VERSION = "1.0.0"
 COLLECTOR_ITEM_KINDS = {
@@ -752,8 +753,8 @@ def build_database(target: Path) -> dict[str, int | str]:
     # column. The guard is pinned rather than ranged so a future field addition stops here again.
     # 1.2.0 added optional `rejectedFinishes` on a finish decision; it also reaches the database
     # only through the projected finish units.
-    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.2.0":
-        raise ValueError("owner adjudications schemaVersion must be 1.2.0")
+    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != OWNER_ADJUDICATIONS_SCHEMA_VERSION:
+        raise ValueError(f"owner adjudications schemaVersion must be {OWNER_ADJUDICATIONS_SCHEMA_VERSION}")
 
     temporary = target.with_name(target.name + ".tmp")
     if temporary.exists():
@@ -1383,7 +1384,7 @@ def validate_database(target: Path) -> list[str]:
         owner_schema = connection.execute(
             "SELECT value FROM metadata WHERE key='owner_adjudications_schema_version'"
         ).fetchone()
-        if not owner_schema or owner_schema[0] != "1.1.0":
+        if not owner_schema or owner_schema[0] != OWNER_ADJUDICATIONS_SCHEMA_VERSION:
             problems.append("owner adjudications schema version is missing or unsupported")
         expected = {
             "products": len(load("snorlax_cards.json")["cards"]),
