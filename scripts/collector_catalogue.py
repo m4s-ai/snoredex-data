@@ -349,20 +349,41 @@ def apply_default_card_size(items: list[dict[str, Any]]) -> None:
             row["cardSize"] = "standard"
 
 
-def apply_printed_set_size(items: list[dict[str, Any]]) -> None:
-    """The printed set size becomes the denominator in the item's own regional numbering."""
-    sizes = {
+def printed_sizes() -> dict[tuple[str, ...], int]:
+    """Printed run sizes by (numbering, set code) and gallery subset sizes by (numbering, set code, prefix)."""
+    records = read_json(SET_SOURCES_PATH)["sourceRecords"]
+    sizes: dict[tuple[str, ...], int] = {
         (row["raw"]["numbering"], row["raw"]["legacySetCode"]): row["raw"]["printedSetSize"]
-        for row in read_json(SET_SOURCES_PATH)["sourceRecords"]
-        if row["sourceKind"] == "printed-set-size-record"
+        for row in records if row["sourceKind"] == "printed-set-size-record"
     }
+    sizes.update({
+        (row["raw"]["numbering"], row["raw"]["legacySetCode"], row["raw"]["subsetPrefix"]):
+            row["raw"]["printedSubsetSize"]
+        for row in records if row["sourceKind"] == "printed-subset-size-record"
+    })
+    return sizes
+
+
+def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], int]) -> str | None:
+    """The denominator printed beside this item's number, in its own regional numbering."""
+    number = row["collectorNumber"] or ""
+    prefix = number.rstrip("0123456789")
+    digits = number[len(prefix):]
+    if not digits or (row["rarity"] or {}).get("display") in UNSIZED_RARITIES:
+        return None
+    region, set_code = row["cardReleaseId"].split(":")[1], row["cardReleaseId"].split(":")[3]
+    size = sizes.get((NUMBERING_BY_REGION.get(region), set_code, *([prefix] if prefix else [])))
+    if not size:
+        return None
+    return prefix + str(size).zfill(len(digits) if digits.startswith("0") else 0)
+
+
+def apply_printed_set_size(items: list[dict[str, Any]]) -> None:
+    """The printed set (or gallery subset) size becomes the item's denominator."""
+    sizes = printed_sizes()
     for row in items:
-        number = row["collectorNumber"] or ""
-        region, set_code = row["cardReleaseId"].split(":")[1], row["cardReleaseId"].split(":")[3]
-        size = sizes.get((NUMBERING_BY_REGION.get(region), set_code))
-        if size and not row["collectorNumberDenominator"] and number.isdigit() \
-                and (row["rarity"] or {}).get("display") not in UNSIZED_RARITIES:
-            row["collectorNumberDenominator"] = str(size).zfill(len(number) if number.startswith("0") else 0)
+        if not row["collectorNumberDenominator"]:
+            row["collectorNumberDenominator"] = printed_denominator(row, sizes)
 
 
 def item_edition(physical: dict[str, Any] | None, old: dict[str, Any] | None, localization_id: str,

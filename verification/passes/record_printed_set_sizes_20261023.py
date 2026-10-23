@@ -108,6 +108,12 @@ SIZES = [
     ("UNB", 214, "WEST", "sm10", ["SPEC-0412", "SPEC-0413", "SPEC-0416", "SPEC-0417"]),
     ("VIV", 185, "WEST", "swsh4", ["SPEC-0087", "SPEC-0088"]),
 ]
+# Gallery subsets ship inside their main set and print their own run (TG10/TG30). They are a
+# separate record kind so the main set's size, which decides run membership, stays untouched.
+# (legacy set code, subset prefix, printed subset size, region, TCGdex subset id)
+SUBSETS = [
+    ("LOR", "TG", 30, "WEST", "swsh11tg"),
+]
 
 
 def read(path: Path):
@@ -151,6 +157,28 @@ def record(code: str, size: int, region: str, set_id: str | None, printed: list[
     }
 
 
+def subset_record(code: str, prefix: str, size: int, region: str, set_id: str) -> dict:
+    numbering, language = NUMBERING[region]
+    path = f"{BUNDLE}/sets-{language}.json"
+    if tcgdex_count(language, set_id) != size:
+        raise ValueError(f"{code} {prefix}: retained TCGdex count differs from {size}")
+    sha = hashlib.sha256((ROOT / path).read_bytes()).hexdigest()
+    return {
+        "sourceRecordId": stable_id("SET-SRC-SUBSET", code, prefix),
+        "sourceKind": "printed-subset-size-record",
+        "provider": "tcgdex",
+        "providerRecordKey": f"{code}\x1f{prefix}",
+        "retrieved": RETRIEVED,
+        "sourceUrl": f"https://api.tcgdex.net/v2/{language}/sets/{set_id}",
+        "raw": {"legacySetCode": code, "subsetPrefix": prefix, "printedSubsetSize": size,
+                "numbering": numbering,
+                "basis": (f"TCGdex {language} subset {set_id} cardCount.official {size}: the gallery subset "
+                          f"ships inside {code} and prints {prefix}nn/{prefix}{size}; retained set list "
+                          f"{path} (sha256 {sha}). The owner confirmed on 2026-10-23 that galleries are "
+                          f"subsets delivered with their main set.")},
+    }
+
+
 def mirror(graph: dict, row: dict) -> bool:
     sid = row["sourceRecordId"]
     present = {(e["entityType"], e["entityId"]) for e in graph["entities"]}
@@ -176,11 +204,14 @@ def main(argv=None) -> int:
     document, graph = read(SOURCES), read(GRAPH)
     records = document["sourceRecords"]
     existing = {row["providerRecordKey"] for row in records if row["sourceKind"] == "printed-set-size-record"}
+    present = {row["sourceRecordId"] for row in records}
     added = [record(*entry) for entry in SIZES if entry[0] not in existing]
-    mirrored = [row for row in [*added, *(r for r in records if r["sourceRecordId"].startswith("SET-SRC-SIZE"))]
+    added += [row for row in (subset_record(*entry) for entry in SUBSETS) if row["sourceRecordId"] not in present]
+    mirrored = [row for row in [*added, *(r for r in records if r["sourceRecordId"].startswith(("SET-SRC-SIZE", "SET-SRC-SUBSET")))]
                 if mirror(graph, row)]
     for row in added:
-        print(("pending: " if args.check else "") + f"{row['providerRecordKey']} {row['raw']['printedSetSize']}")
+        size = row["raw"].get("printedSetSize") or row["raw"]["printedSubsetSize"]
+        print(("pending: " if args.check else "") + f"{row['providerRecordKey']} {size}")
     if args.check:
         return 1 if added or mirrored else 0
     if not added:
@@ -189,6 +220,7 @@ def main(argv=None) -> int:
     counts = document["meta"]["counts"]
     counts["sourceRecords"] = len(records)
     counts["printedSetSizeRecords"] = sum(row["sourceKind"] == "printed-set-size-record" for row in records)
+    counts["printedSubsetSizeRecords"] = sum(row["sourceKind"] == "printed-subset-size-record" for row in records)
     graph["summary"]["entities"], graph["summary"]["edges"] = len(graph["entities"]), len(graph["edges"])
     SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     GRAPH.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")

@@ -151360,6 +151360,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "origin": "reviewed-printed-set-sizes-20261023",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SUBSET-C58D5CFDF79A",
+        "disposition": "needs-evidence",
+        "targetRef": null,
+        "reason": "printed set size; a set fact applied by numbering to every item of the set"
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
       "origin": "reviewed-thai-ma6-evidence-20260929",
       "payload": {
@@ -174296,6 +174307,26 @@
           "printedSetSize": 184,
           "numbering": "japanese",
           "basis": "The denominator printed beside the collector number, read from the article's set list: the set list numbers every row out of 184. Not inferred from a rarity, a name or a card count — a card is inside the numbered run when its number is within this size in its own numbering, and Bulbapedia carries both numberings on one page."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "origin": "reviewed-printed-set-sizes-20261023",
+      "payload": {
+        "sourceRecordId": "SET-SRC-SUBSET-C58D5CFDF79A",
+        "sourceKind": "printed-subset-size-record",
+        "provider": "tcgdex",
+        "providerRecordKey": "LOR\u001fTG",
+        "retrieved": "2026-10-23",
+        "sourceUrl": "https://api.tcgdex.net/v2/en/sets/swsh11tg",
+        "raw": {
+          "legacySetCode": "LOR",
+          "subsetPrefix": "TG",
+          "printedSubsetSize": 30,
+          "numbering": "western",
+          "basis": "TCGdex en subset swsh11tg cardCount.official 30: the gallery subset ships inside LOR and prints TGnn/TG30; retained set list verification/evidence/printed-set-sizes-20261023/sets-en.json (sha256 5d1d49cc20ff35b5b93bd14226d80e9298b6ab33ce086ab128fbb6bd8cb5c79a). The owner confirmed on 2026-10-23 that galleries are subsets delivered with their main set."
         }
       }
     },
@@ -287023,6 +287054,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -321047,6 +321086,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "disposition": "needs-evidence",
+      "targetRef": null,
+      "reason": "printed set size; a set fact applied by numbering to every item of the set"
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-TH-AS5A-142-RARITY-20260929",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:AS5a",
@@ -324715,9 +324761,9 @@
     }
   ],
   "summary": {
-    "entities": 9050,
-    "edges": 13140,
-    "migrationInputs": 3292,
+    "entities": 9052,
+    "edges": 13141,
+    "migrationInputs": 3293,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 347,
@@ -324725,7 +324771,7 @@
       "established-and-mapped": 1715,
       "linked-local-counterpart": 126,
       "mapped": 526,
-      "needs-evidence": 192,
+      "needs-evidence": 193,
       "needs-positive-local-identity": 18,
       "positively-excluded": 84,
       "split": 123
@@ -324733,8 +324779,8 @@
     "candidateClaims": 2229,
     "cardReleases": 629,
     "physicalPrintings": 897,
-    "setSourceRecords": 721,
-    "setSourceDispositions": 721,
+    "setSourceRecords": 722,
+    "setSourceDispositions": 722,
     "localizations": 16
   }
 }

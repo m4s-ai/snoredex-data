@@ -7,14 +7,15 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 721,
+      "sourceRecords": 722,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 157,
       "releaseDateRecords": 104,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 81,
-      "localSetNameRecords": 119
+      "localSetNameRecords": 119,
+      "printedSubsetSizeRecords": 1
     }
   },
   "sourceRecords": [
@@ -19462,6 +19463,21 @@
         "printedSetSize": 90,
         "numbering": "japanese",
         "basis": "The denominator 90 printed beside the collector number on retained cards of this set and numbering: SPEC-0571, SPEC-0582, SPEC-0635, SPEC-0636. TCGdex does not list the set. Not inferred from a rarity, a name or a card count."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-SUBSET-C58D5CFDF79A",
+      "sourceKind": "printed-subset-size-record",
+      "provider": "tcgdex",
+      "providerRecordKey": "LOR\u001fTG",
+      "retrieved": "2026-10-23",
+      "sourceUrl": "https://api.tcgdex.net/v2/en/sets/swsh11tg",
+      "raw": {
+        "legacySetCode": "LOR",
+        "subsetPrefix": "TG",
+        "printedSubsetSize": 30,
+        "numbering": "western",
+        "basis": "TCGdex en subset swsh11tg cardCount.official 30: the gallery subset ships inside LOR and prints TGnn/TG30; retained set list verification/evidence/printed-set-sizes-20261023/sets-en.json (sha256 5d1d49cc20ff35b5b93bd14226d80e9298b6ab33ce086ab128fbb6bd8cb5c79a). The owner confirmed on 2026-10-23 that galleries are subsets delivered with their main set."
       }
     }
   ]

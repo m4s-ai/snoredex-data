@@ -294,6 +294,8 @@ workflow run and deploys the already verified artifact without a second projecti
 - **Set facts reach every item.** A recorded printed set size (`printed-set-size-record` in
   `verification/set_catalogue_sources.json`) supplies the collector-number denominator in the
   item's own regional numbering; promo, prize-pack, jumbo and championship-deck rows take none.
+  A gallery subset (Trainer Gallery `TG10/TG30`) ships inside its main set and has its own
+  `printed-subset-size-record`; unnumbered Japanese releases take no denominator.
   Card size defaults to standard (owner decision 2026-10-23); it stays unknown only where the item
   may be the jumbo twin of an otherwise identical standard printing.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two
