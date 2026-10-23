@@ -909,7 +909,9 @@ def _finish_release_code_aliases(overrides):
     release_code_aliases: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for override in overrides:
         if release_code := override.get("releaseSetCode"):
-            release_code_aliases[(str(release_code), str(override.get("number") or ""))].append(override)
+            # `releaseNumber` bridges a release whose own number differs from the legacy product's.
+            release_number = override.get("releaseNumber") or override.get("number") or ""
+            release_code_aliases[(str(release_code), str(release_number))].append(override)
 
     return release_code_aliases
 
@@ -926,15 +928,14 @@ def _add_release_code_aliases(specimens_by_group, specimen, specimen_key,
     for override in release_code_aliases.get((specimen_key[0], specimen_key[1]), []):
         # A bridged release code has its own variant vocabulary; the override names the
         # legacy product's V-token when the two differ.
-        product_key = (str(override["setCode"]), specimen_key[1],
+        number = str(override.get("number") or specimen_key[1])
+        product_key = (str(override["setCode"]), number,
                        str(override.get("variant") or specimen.get("variant") or "base"))
         if product_key not in valid_product_variants:
             continue
         if override.get("languages") and specimen_key[2] not in override["languages"]:
             continue
-        specimens_by_group[
-            (str(override["setCode"]), specimen_key[1], specimen_key[2])
-        ].append(specimen)
+        specimens_by_group[(str(override["setCode"]), number, specimen_key[2])].append(specimen)
 
 
 def _finish_specimens_by_group(specimens, overrides, cards):

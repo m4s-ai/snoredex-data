@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 641,
+  "count": 642,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -13889,6 +13889,34 @@
         "basis": "The 1 EDITION mark shape left of ZM7-1S9-JGF, at the same place as on SPEC-0640, establishes the 1st Edition printing; holographic sparkle is visible on the face."
       },
       "listingUrl": "https://auctions.yahoo.co.jp/jp/auction/w1246351597"
+    },
+    {
+      "specimenId": "SPEC-0642",
+      "setCode": "XY10",
+      "number": "057/078",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph (356x485 PNG); original image visually inspected and compared with SPEC-0589; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0642.png",
+      "photographSource": "user-supplied:claude-session-20261023-xy10-057-unlimited.png",
+      "photographSha256": "sha256:e7ca704a13eda91624e09fa3c32cc6dfe5a9459a2d80ea00d504343d4836b470",
+      "observed": "Owner-supplied photograph of Japanese カビゴン HP140, ねがえり 30+, のみこむ 50, Illus. Tomokazu Komiya, printed 057/078 C. The 1st Edition mark position left of にげる, where SPEC-0589 shows the mark, is empty on this face. The collection owner identifies this card as the Unlimited non-holo printing (2026-10-23).",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0540"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "ownerAttestedFields": [
+          "finish",
+          "edition"
+        ],
+        "ownerAttestedAt": "2026-10-23",
+        "cardSize": "standard",
+        "basis": "The collection owner explicitly identified this pictured card as the Unlimited non-holo printing on 2026-10-23; the photograph shows the exact XY10 057/078 identity and an empty 1st Edition mark position left of にげる (compare SPEC-0589). The low resolution is why edition and finish rest on the owner's statement."
+      }
     }
   ]
 }

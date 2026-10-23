@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-23",
-  "projectionVersion": "10e70abddb8b1ed638380f237e5b8b369561b6c8626628874e3ccf12833734fa",
+  "projectionVersion": "31dde0dce7db779d72ff77e424597daf3ea62b4f563547100e32eadc797b9b1b",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 896,
-    "sourceObservations": 3254
+    "physicalPrintings": 897,
+    "sourceObservations": 3260
   },
   "groups": [
     {
@@ -62815,8 +62815,7 @@
             "artist": "Kouki Saitou",
             "variant": "V1",
             "finish": [
-              "non-holo",
-              "reverse-holo"
+              "non-holo"
             ],
             "foilPattern": [],
             "markings": [
@@ -62933,7 +62932,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0031",
+              "physicalPrintingId": "PHYSICAL:PRINTING:cb71cb0f0a310945b6fc504e",
+              "semanticPrintingId": "PRINTING:cb71cb0f0a310945b6fc504e",
               "cardReleaseId": "RELEASE:KR:Korean:XY-P:167:Snorlax-Plump-Body-Knock-Away",
               "finish": "non-holo",
               "edition": null,
@@ -62941,14 +62941,21 @@
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
-              "basis": "Pokumon's exact Korean 167/XY-P Kisstick promotion record positively classifies the card as Non-holo.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0031",
+              "sourceFinishUnitId": "F0620",
+              "sourcePrintingId": "F0620-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:cb71cb0f0a310945b6fc504e",
               "specimenIds": [
                 "SPEC-0031"
+              ],
+              "sources": [
+                {
+                  "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0031.",
+                  "retrievedAt": "2026-08-10"
+                }
               ]
             }
           ],
@@ -62998,6 +63005,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0620-P01:0:33f28ad3c06e26f4",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+              "evidence": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0031.",
+              "contentHash": "a6eeb6532e4ca6b56799ebe60faa2b6804b02eb55588a08f3121981b73c2fe55",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:XY-P:167:base",
               "kind": "source-first",
@@ -82311,7 +82327,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0625",
-              "sourcePrintingId": "F0625-P02",
+              "sourcePrintingId": "F0625-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:5da3c8d30f206b8186de274d",
               "specimenIds": [
                 "SPEC-0589"
@@ -82327,12 +82343,60 @@
                   ]
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
                     "finish"
                   ],
                   "retrievedAt": "2026-09-29",
                   "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:edee18e1abfcccb93a7926c6",
+              "semanticPrintingId": "PRINTING:edee18e1abfcccb93a7926c6",
+              "cardReleaseId": "RELEASE:JP:Japanese:XY10:057:Snorlax-Toss-and-Turn-Swallow",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0625",
+              "sourcePrintingId": "F0625-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:edee18e1abfcccb93a7926c6",
+              "specimenIds": [
+                "SPEC-0642"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish",
+                    "edition"
+                  ],
+                  "retrievedAt": "2026-10-23",
+                  "evidence": "The collection owner's explicit 2026-10-23 confirmation establishes the specimen's finish, edition; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+                },
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied photograph of Japanese カビゴン HP140, ねがえり 30+, のみこむ 50, Illus. Tomokazu Komiya, printed 057/078 C. The 1st Edition mark position left of にげる, where SPEC-0589 shows the mark, is empty on this face. The collection owner identifies this card as the Unlimited non-holo printing (2026-10-23). Retained as SPEC-0642.",
+                  "retrievedAt": "2026-10-23",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             }
@@ -82405,25 +82469,72 @@
               "originalHash": "394fe0e9f00b6981d857d16569d99b6b206a88cb67ad4bc4eab5567cf7dd2c02",
               "previewSrc": "images/previews/SPEC-0589.png?v=72ec8e8b2501c73eb81e3381f7d9555514cb723a61a640bcfcc08314b1a2c110",
               "thumbnailSrc": "images/thumbs/SPEC-0589.png?v=fc7474e93a73604d4e42aa7ce90e9c3ccaf35098345c85424deac767d41da1f5"
+            },
+            {
+              "src": "verification/specimens/SPEC-0642.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0642",
+              "contentHash": "e7ca704a13eda91624e09fa3c32cc6dfe5a9459a2d80ea00d504343d4836b470",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e7ca704a13eda91624e09fa3c32cc6dfe5a9459a2d80ea00d504343d4836b470",
+              "previewSrc": "images/previews/SPEC-0642.png?v=7492cb0089f7b8610f12482c0d9d693a5643c4d006551c569154ff8085ca656e",
+              "thumbnailSrc": "images/thumbs/SPEC-0642.png?v=f5b94823e61da7769658339c9ff75eb908381fc9c963dacfa7c8d9f0925ead96"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0625-P02:0:9479dc49b0511797",
+              "observationId": "finish:F0625-P01:0:9479dc49b0511797",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Japanese カビゴン HP140, ねがえり 30+ and のみこむ 50; XY10 057/078 C, Tomokazu Komiya and visible 1st Edition mark at lower left. Pastel background colors do not establish foil. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0589.",
-              "contentHash": "8c853abc14ebe1af1c5360584217897b2f9f046d9130d398ab44ac15c80729a0",
+              "contentHash": "8c577c2967928ffc672f34fb13afd4180ff4a65794e882c25c1f00f2b275112b",
               "image": null
             },
             {
-              "observationId": "finish:F0625-P02:1:fad842ebdbe91c29",
+              "observationId": "finish:F0625-P01:1:c6a2e0280a27b3af",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "f6b26f4778b108568f3ff0a6070aa3ea923f727ded40cb705fe31060d02e82b9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0625-P01:2:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "564abb76e1a7d132dc1ece63aab706cb14fcad78ea214300fc54e5162c4480d8",
+              "contentHash": "431a065ca497d6d09d18e47748988eb7857c387c5a6759ad2890af215b90a7ff",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0625-P02:0:3d08e32b3b38a846",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-23 confirmation establishes the specimen's finish, edition; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
+              "contentHash": "6b8c10f4fb01136ebe2587920e7e3ff47baf772d7b77dd7521d0d406c2b9455f",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0625-P02:1:a98b794c0a48c27c",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Owner-supplied photograph of Japanese カビゴン HP140, ねがえり 30+, のみこむ 50, Illus. Tomokazu Komiya, printed 057/078 C. The 1st Edition mark position left of にげる, where SPEC-0589 shows the mark, is empty on this face. The collection owner identifies this card as the Unlimited non-holo printing (2026-10-23). Retained as SPEC-0642.",
+              "contentHash": "8b163639ecb4c09c33cbec937c147558442ff046e2ec15a8fa171a04f0311aad",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0625-P02:2:c6a2e0280a27b3af",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "9648e161b8355ed1fad72f51d055f3e71c2b234a5726678b0eb35bca9d3f5bfc",
               "image": null
             },
             {
@@ -82461,6 +82572,15 @@
               "evidence": "Japanese カビゴン HP140, ねがえり 30+ and のみこむ 50; XY10 057/078 C, Tomokazu Komiya and visible 1st Edition mark at lower left. Pastel background colors do not establish foil. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
               "contentHash": "9e8e41b9994f6fbf4dd307cc41442f0e34b2df6e0b264ebcba34fdf12dda96cb",
               "image": "verification/specimens/SPEC-0589.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0642",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner-supplied photograph of Japanese カビゴン HP140, ねがえり 30+, のみこむ 50, Illus. Tomokazu Komiya, printed 057/078 C. The 1st Edition mark position left of にげる, where SPEC-0589 shows the mark, is empty on this face. The collection owner identifies this card as the Unlimited non-holo printing (2026-10-23).",
+              "contentHash": "28bf7350bf8131dfe0816d74ef2c936b9e5bea9f9e0e5b4a27dc7c9346543fd8",
+              "image": "verification/specimens/SPEC-0642.png"
             },
             {
               "observationId": "unit:U0540",

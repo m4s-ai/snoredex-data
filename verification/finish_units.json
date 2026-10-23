@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 536,
-      "withOnlyMarketplaceClaim": 13,
+      "withConfirmedFinish": 537,
+      "withOnlyMarketplaceClaim": 12,
       "pendingFinish": 11,
       "notApplicableFinish": 77,
-      "withOwnerAdjudication": 10,
-      "withNonHolo": 326,
+      "withOwnerAdjudication": 12,
+      "withNonHolo": 327,
       "withHolo": 255,
-      "withReverseHolo": 226,
+      "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 37,
-      "withAnyUnresolvedDetail": 116,
+      "withUnresolvedProductMapping": 38,
+      "withAnyUnresolvedDetail": 115,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -55013,20 +55013,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -55067,36 +55066,15 @@
           ],
           "image": "verification/specimens/SPEC-0587.png",
           "printingId": "F0619-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0619-P02"
         }
       ],
-      "unresolved": [
-        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0620",
       "cardName": "Snorlax",
       "setCode": "XY-P",
-      "releaseSetCode": null,
+      "releaseSetCode": "XY-P",
       "setName": "XY Promos",
       "number": "149",
       "language": "Korean",
@@ -55116,42 +55094,45 @@
         }
       ],
       "availableFinishes": [
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "pending",
+      "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "reverse-holo",
+          "finish": "non-holo",
           "foilPattern": null,
-          "markings": null,
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "marketplace-claimed",
+          "mappedVariants": [],
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Promos/Snorlax-V1-XY-P149",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://pokumon.com/card/snorlax-167-xy-p-korean-promo/",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "Korean Snorlax photographed by the owner through issue #166: \"잠만보\", 기본 (Basic), HP 120, Colorless; ability 특성 포동포동바디, attack 띄워날리기 50+; 전국도감 NO.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; black star promo, \"167/XY-P\", Illus. Kouki Saitou, ©2016 Pokémon. This is the Kisstick sausages printing RESUME.md has described since the XY-P 149 correction, and the illustrator matches the identity test that correction rested on. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0031.",
+              "retrievedAt": "2026-08-10"
             }
           ],
+          "specimenIds": [
+            "SPEC-0031"
+          ],
+          "image": "verification/specimens/SPEC-0031.png",
           "printingId": "F0620-P01"
         }
       ],
       "unresolved": [
-        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
+        "One or more Cardmarket product variants are not mapped to a logical printing: V1"
       ]
     },
     {
@@ -55395,25 +55376,6 @@
       "printings": [
         {
           "finish": "non-holo",
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0625-P01"
-        },
-        {
-          "finish": "non-holo",
           "foilPattern": null,
           "markings": [],
           "distribution": null,
@@ -55439,6 +55401,11 @@
               ],
               "retrievedAt": "2026-09-29",
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "specimenIds": [
@@ -55446,6 +55413,47 @@
           ],
           "edition": "1st Edition",
           "image": "verification/specimens/SPEC-0589.png",
+          "printingId": "F0625-P01"
+        },
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "sourceType": "Inspected card photograph; external origin unknown",
+              "evidence": "Owner-supplied photograph of Japanese カビゴン HP140, ねがえり 30+, のみこむ 50, Illus. Tomokazu Komiya, printed 057/078 C. The 1st Edition mark position left of にげる, where SPEC-0589 shows the mark, is empty on this face. The collection owner identifies this card as the Unlimited non-holo printing (2026-10-23). Retained as SPEC-0642.",
+              "retrievedAt": "2026-10-23",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish",
+                "edition"
+              ],
+              "retrievedAt": "2026-10-23",
+              "evidence": "The collection owner's explicit 2026-10-23 confirmation establishes the specimen's finish, edition; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Awakening-Psychic-King/Snorlax",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0642"
+          ],
+          "edition": "Unlimited",
+          "image": "verification/specimens/SPEC-0642.png",
           "printingId": "F0625-P02"
         }
       ],
