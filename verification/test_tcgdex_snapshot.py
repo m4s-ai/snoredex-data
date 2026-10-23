@@ -216,6 +216,9 @@ def main() -> None:
     assert all(row["verificationStatus"] == "confirmed" and len(row["sources"]) == 2 for row in folded)
     observed = printing(None, specimenIds=["SPEC-9999"])
     assert observed in finishes.absorb_editionless_finish_evidence([observed, *pair])
+    jumbo = printing(None, cardSize="jumbo")
+    assert jumbo in finishes.absorb_editionless_finish_evidence(
+        [jumbo, *[{**row, "cardSize": "standard"} for row in pair]])
     half = [printing(None), printing("Unlimited")]
     assert len(finishes.absorb_editionless_finish_evidence(half)) == 2
 

@@ -456,8 +456,15 @@ def _edition_siblings(printing: dict[str, Any], printings: list[dict[str, Any]])
         and other["finish"] == printing["finish"]
         and other.get("edition") in EDITION_PAIR
         and set(other.get("mappedVariants") or []) >= variants
-        and all(other.get(field) == printing.get(field) for field in ("foilPattern", "distribution"))
+        and all(other.get(field) == printing.get(field)
+                for field in ("foilPattern", "distribution", "releaseDate"))
+        and _compatible_card_size(other, printing)
     ]
+
+
+def _compatible_card_size(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    sizes = {left.get("cardSize"), right.get("cardSize")} - {None, "unknown"}
+    return len(sizes) <= 1
 
 
 def _is_card_level_finish_evidence(printing: dict[str, Any]) -> bool:
