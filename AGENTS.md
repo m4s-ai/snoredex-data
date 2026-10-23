@@ -138,7 +138,10 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    **`not-printed` means no regular release.** A proof copy or an error card is a different
    category and does not falsify the decision.
 
-   TCGdex `true` confirms a printing; TCGdex `false` does not refute one.
+   TCGdex `true` confirms a printing; TCGdex `false` does not refute one. Only the owner may
+   overrule a positive source flag: a finish decision may name `rejectedFinishes` (schema 1.2.0),
+   `finishes.py` removes them, a photographed copy of a rejected finish stops the build, and `E13`
+   fails if one remains. PCG3 062 (holo only, TCGdex `normal`) is the first case.
 5. **`pending` means not yet established, never proven absent.** This holds in the data, the
    site copy, and anything you write.
 6. **Routine physical evidence goes through the canonical manifest importer,** then the finish/
