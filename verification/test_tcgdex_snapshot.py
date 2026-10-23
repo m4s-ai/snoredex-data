@@ -219,6 +219,15 @@ def main() -> None:
     jumbo = printing(None, cardSize="jumbo")
     assert jumbo in finishes.absorb_editionless_finish_evidence(
         [jumbo, *[{**row, "cardSize": "standard"} for row in pair]])
+    decision = {"adjudicationId": "OAF-test", "rejectedFinishes": ["non-holo"]}
+    normal = {**printing(None), "finish": "non-holo"}
+    assert finishes.drop_owner_rejected_finishes([normal, *pair], decision) == pair
+    try:
+        finishes.drop_owner_rejected_finishes([{**normal, "specimenIds": ["SPEC-9999"]}], decision)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a photographed rejected finish must stop the build")
     half = [printing(None), printing("Unlimited")]
     assert len(finishes.absorb_editionless_finish_evidence(half)) == 2
 

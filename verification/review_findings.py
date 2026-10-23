@@ -1804,6 +1804,10 @@ def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
                         f"{unit['finishUnitId']} {key}: decision names "
                         f"{sorted(decision.get('availableFinishes') or [])}, unit has "
                         f"{sorted(unit.get('availableFinishes') or [])}")
+            rejected = set((decision or {}).get("rejectedFinishes") or [])
+            if rejected & (set(decision.get("availableFinishes") or []) | set(unit.get("availableFinishes") or [])):
+                adjudicated_finish_problems.append(
+                    f"{unit['finishUnitId']} {key}: rejected finish {sorted(rejected)} is still available")
             if decision and not (unit.get("printings") or []):
                 adjudicated_finish_problems.append(
                     f"{unit['finishUnitId']} {key}: adjudicated with no printing evidence at all")

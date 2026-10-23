@@ -37,18 +37,18 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-10-22",
+      "lastUpdated": "2026-10-23",
       "totalFinishUnits": 637,
       "withConfirmedFinish": 535,
       "withOnlyMarketplaceClaim": 14,
       "pendingFinish": 11,
       "notApplicableFinish": 77,
-      "withOwnerAdjudication": 9,
-      "withNonHolo": 327,
+      "withOwnerAdjudication": 10,
+      "withNonHolo": 326,
       "withHolo": 254,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
-      "withBothNonHoloAndHolo": 56,
+      "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 37,
       "withAnyUnresolvedDetail": 116,
       "tcgdexUrlsRequested": 308,
@@ -41429,11 +41429,9 @@
         },
         "status": "confirmed",
         "availableFinishes": [
-          "non-holo",
           "holo"
         ],
         "unitAvailableFinishes": [
-          "non-holo",
           "holo"
         ],
         "byLanguage": [
@@ -41441,21 +41439,19 @@
             "language": "Japanese",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
               "holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
               "holo"
             ],
             "finishStatus": {
-              "non-holo": "confirmed",
+              "non-holo": "pending",
               "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "confirmed",
+              "non-holo": "pending",
               "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
@@ -41466,28 +41462,6 @@
             "printings": [
               {
                 "printingId": "F0247-P01",
-                "finish": "non-holo",
-                "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped",
-                "edition": "1st Edition"
-              },
-              {
-                "printingId": "F0247-P02",
-                "finish": "non-holo",
-                "foilPattern": null,
-                "markings": null,
-                "distribution": null,
-                "cardSize": "standard",
-                "verificationStatus": "confirmed",
-                "productMapping": "mapped",
-                "edition": "Unlimited"
-              },
-              {
-                "printingId": "F0247-P03",
                 "finish": "holo",
                 "foilPattern": "sparkle holo across artwork and frame",
                 "markings": [],

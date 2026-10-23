@@ -306,7 +306,8 @@ def _check_finish_printings(suite: Suite, finish_units: list[dict]) -> None:
 
 
 def _check_tcgdex_positives(
-    suite: Suite, units: list[dict], finish_units: list[dict], tcgdex_snapshot: dict
+    suite: Suite, units: list[dict], finish_units: list[dict], tcgdex_snapshot: dict,
+    owner_rejected: set[tuple[str, str, str, str]] = frozenset(),
 ) -> None:
     finish_units_by_key = {
         (unit.get("setCode"), str(unit.get("number")), unit.get("language")): unit
@@ -325,6 +326,9 @@ def _check_tcgdex_positives(
             ("normal", "non-holo"), ("holo", "holo"), ("reverse", "reverse-holo")
         ):
             if variants.get(field) is not True:
+                continue
+            # Rule 4: only a recorded owner adjudication may overrule a positive source flag.
+            if (unit.get("setCode"), str(unit.get("number")), unit.get("language"), finish) in owner_rejected:
                 continue
             preserved = any(
                 printing.get("finish") == finish
@@ -554,7 +558,12 @@ def main() -> int:
     _check_finish_unknowns(suite, finish_units)
     _check_finish_scopes(suite, finish_units, finish_review)
     _check_finish_printings(suite, finish_units)
-    _check_tcgdex_positives(suite, units, finish_units, tcgdex_snapshot)
+    owner_rejected = {
+        (row["setCode"], row["number"], row["language"], finish)
+        for row in read_json(VERIFICATION / "owner_adjudications.json").get("finishDecisions", [])
+        for finish in row.get("rejectedFinishes") or []
+    }
+    _check_tcgdex_positives(suite, units, finish_units, tcgdex_snapshot, owner_rejected)
     _check_standard_set_mappings(suite, finish_units)
     _check_finish_overrides(suite, finish_units, finish_overrides)
     _check_special_finish_cases(suite, finish_units)

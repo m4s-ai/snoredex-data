@@ -750,8 +750,10 @@ def build_database(target: Path) -> dict[str, int | str]:
     # decisions read here are unchanged, and the finish half needs no table of its own — its whole
     # effect reaches the database through `finish_units.completeness_status`, which already has a
     # column. The guard is pinned rather than ranged so a future field addition stops here again.
-    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.1.0":
-        raise ValueError("owner adjudications schemaVersion must be 1.1.0")
+    # 1.2.0 added optional `rejectedFinishes` on a finish decision; it also reaches the database
+    # only through the projected finish units.
+    if owner_adjudications_doc.get("meta", {}).get("schemaVersion") != "1.2.0":
+        raise ValueError("owner adjudications schemaVersion must be 1.2.0")
 
     temporary = target.with_name(target.name + ".tmp")
     if temporary.exists():

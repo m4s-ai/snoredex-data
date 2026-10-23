@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-22",
-  "projectionVersion": "9d90fcdbfa7ab03175dd56644b4050b0f6cc831e312936c81b1b5df226548af0",
+  "generated": "2026-10-23",
+  "projectionVersion": "db1787dac3d400b6a9c75f988f0070e2351d8e48419ee6e13e644cbd466d8b87",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 894,
-    "sourceObservations": 3236
+    "physicalPrintings": 892,
+    "sourceObservations": 3230
   },
   "groups": [
     {
@@ -15798,7 +15798,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0247",
-              "sourcePrintingId": "F0247-P03",
+              "sourcePrintingId": "F0247-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:1ea263c61bc26ce5236181e8",
               "specimenIds": [
                 "SPEC-0097",
@@ -15874,86 +15874,6 @@
                   "specimenId": "SPEC-0096"
                 }
               ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:a73d251990b5ff16e7701632",
-              "semanticPrintingId": "PRINTING:a73d251990b5ff16e7701632",
-              "cardReleaseId": "RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
-              "finish": "non-holo",
-              "edition": "1st Edition",
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0247",
-              "sourcePrintingId": "F0247-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:a73d251990b5ff16e7701632",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-                  "sourceType": "TCGdex API card variant detail",
-                  "authorityTier": "specialist-reference",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-10-22",
-                  "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc)."
-                },
-                {
-                  "sourceType": "Owner attestation (domain expert)",
-                  "authorityTier": "owner-attestation",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-10-22",
-                  "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:ed3357a9b2cae00f20c15801",
-              "semanticPrintingId": "PRINTING:ed3357a9b2cae00f20c15801",
-              "cardReleaseId": "RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse",
-              "finish": "non-holo",
-              "edition": "Unlimited",
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0247",
-              "sourcePrintingId": "F0247-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:ed3357a9b2cae00f20c15801",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                },
-                {
-                  "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-                  "sourceType": "TCGdex API card variant detail",
-                  "authorityTier": "specialist-reference",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-10-22",
-                  "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc)."
-                },
-                {
-                  "sourceType": "Owner attestation (domain expert)",
-                  "authorityTier": "owner-attestation",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-10-22",
-                  "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
-                }
-              ]
             }
           ],
           "detection": {
@@ -15962,8 +15882,7 @@
             "artist": "Mitsuhiro Arita",
             "variant": "base",
             "finish": [
-              "holo",
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [
               "sparkle holo across artwork and frame"
@@ -16020,84 +15939,30 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0247-P01:0:449f7c22f66d6938",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "955a70a47a570bc0f260225e3bacd61801f9b1e3bc9f6f8f854a16afc2a657d5",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P01:1:6e24ef28c757ff0a",
-              "kind": "finish",
-              "provider": "TCGdex API card variant detail",
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc).",
-              "contentHash": "bcf599caf17eac2db82ec16788deccdcb23e22dd202e5a791647b05bcc36cd02",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P01:2:74d730e5119c5f0d",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
-              "contentHash": "d220dcae80e8b146fdf51296987dd80385dd006cb809bb85ec262a3160f5d6dd",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P02:0:449f7c22f66d6938",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "b5b45e72fec76decf1ebd47eda55311bfd4ce8d3c7d5dbf06823cd5538c76db0",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P02:1:6e24ef28c757ff0a",
-              "kind": "finish",
-              "provider": "TCGdex API card variant detail",
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc).",
-              "contentHash": "73b92cd4838e2683475453f1311b8e1800a1de0e569f14d88e7d58d1f6b4ab59",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P02:2:74d730e5119c5f0d",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
-              "contentHash": "800a8809284f0d594c6adc05a6cc4dd206a7d7477e253b22d7e2dd0bcd7b9578",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0247-P03:0:05143e3cf8e0ef12",
+              "observationId": "finish:F0247-P01:0:05143e3cf8e0ef12",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. No 1st EDITION mark is printed beside the set symbol on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22). Retained as SPEC-0095.",
-              "contentHash": "7679b06c2890bad45b3418ddcc94cc35723af6f1a95e5f1f3c921c398be026f5",
+              "contentHash": "b3b6d771c82033be8e8e3a621215ac88c8896747297a7d904a6bb2012cd5542a",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P03:1:bd5901d6183ac8ab",
+              "observationId": "finish:F0247-P01:1:bd5901d6183ac8ab",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Closer owner photograph captured 2025-05-24 of the same Japanese PCG3 062/084 Rocket's Snorlax ex. The name, number and holo sparkle are clear; no additional card is inferred. Retained as SPEC-0097.",
-              "contentHash": "0d262557eb1eb69984fa7838f59e78cce33e823be505865a24f5bc4802a83add",
+              "contentHash": "fd74d8196b577777286242ba9972452e5912f17571d11e987fb4bef116944279",
               "image": null
             },
             {
-              "observationId": "finish:F0247-P03:2:fb57ce80d122a015",
+              "observationId": "finish:F0247-P01:2:fb57ce80d122a015",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Second full owner photograph captured 2025-05-24 of the same Japanese R団のカビゴンex PCG3 062/084 card. Alternate lighting again shows sparkling holo points across the artwork and frame. Retained as SPEC-0096.",
-              "contentHash": "05c7b20b45be2a84937aad8ad4c7eccfcbbc21dfbdc2bdee67510ba382a31371",
+              "contentHash": "616cbe357ad3ce10d504b3133b7ee2efc8ccac56c0afae271f15e2f5cdc74ffe",
               "image": null
             },
             {

@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-10-22",
+ "generated": "2026-10-23",
  "note": "One row per card-variant-edition. confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order. Use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -3953,21 +3953,19 @@
      "language": "Japanese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo",
       "holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo",
       "holo"
      ],
      "finishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
@@ -3978,28 +3976,6 @@
      "printings": [
       {
        "printingId": "F0247-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "edition": "1st Edition"
-      },
-      {
-       "printingId": "F0247-P02",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "edition": "Unlimited"
-      },
-      {
-       "printingId": "F0247-P03",
        "finish": "holo",
        "foilPattern": "sparkle holo across artwork and frame",
        "markings": [],
@@ -4019,7 +3995,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
+    "Japanese": "owner-adjudicated"
    },
    "languageEvidence": {
     "Japanese": {
@@ -4064,21 +4040,19 @@
      "language": "Japanese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo",
       "holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo",
       "holo"
      ],
      "finishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "confirmed",
+      "non-holo": "pending",
       "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
@@ -4089,28 +4063,6 @@
      "printings": [
       {
        "printingId": "F0247-P01",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "edition": "1st Edition"
-      },
-      {
-       "printingId": "F0247-P02",
-       "finish": "non-holo",
-       "foilPattern": null,
-       "markings": null,
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "edition": "Unlimited"
-      },
-      {
-       "printingId": "F0247-P03",
        "finish": "holo",
        "foilPattern": "sparkle holo across artwork and frame",
        "markings": [],
@@ -4130,7 +4082,7 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
+    "Japanese": "owner-adjudicated"
    },
    "languageEvidence": {
     "Japanese": {

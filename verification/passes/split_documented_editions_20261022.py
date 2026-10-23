@@ -6,7 +6,8 @@ Edition and Unlimited is catalogued as one item per edition. Jungle 11/64 (Holo)
 edition rule (`edition_rules.json`, owner-confirmed for Jungle) and the owner's number-to-finish
 rule. Where TCGdex's `variants_detailed` lists the unstamped and the 1st-edition-stamped
 variant for the exact language, that retained record is cited as well. Gym Heroes 33 (English)
-and the Japanese PCG1 074, PCG3 062, PCG9 001 and e-Card 5 062 rest on those TCGdex records.
+and the Japanese PCG1 074, PCG9 001 and e-Card 5 062 rest on those TCGdex records. PCG3 062 is
+holo only (owner adjudication OAF-20261023-PCG3-062-ja); its TCGdex `normal` flag is not split.
 
 A printing is added only where no edition-specific printing for that edition exists yet, so
 specimen-backed printings (with their observed stamp text) are never duplicated. The stamp
@@ -45,7 +46,6 @@ TARGETS = [
     ("GH", "33", "English", "non-holo", "gym1-33", (UNLIMITED,)),
     ("EC5", "062", "Japanese", "non-holo", "E5-062", (FIRST, UNLIMITED)),
     ("PCG1", "074", "Japanese", "non-holo", "PCG1-074", (FIRST, UNLIMITED)),
-    ("PCG3", "062", "Japanese", "non-holo", "PCG3-062", (FIRST, UNLIMITED)),
     ("PCG9", "001", "Japanese", "holo", "PCG9-001", (FIRST, UNLIMITED)),
 ]
 OWNER_SOURCE = {

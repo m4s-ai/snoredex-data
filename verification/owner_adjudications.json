@@ -1,13 +1,14 @@
 {
   "meta": {
     "schema": "owner-adjudications",
-    "schemaVersion": "1.1.0",
+    "schemaVersion": "1.2.0",
     "generated": "2026-10-01",
     "policy": [
       "The collection owner records the final application decision after reviewing all cited claims and evidence.",
       "An owner adjudication does not attribute the absence decision to any single provider or source.",
       "The raw repository verdict and source evidence remain unchanged in verification/units.json.",
-      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish. Every finish it names must already rest on positive evidence, and external sources cannot close the list. It projects to completenessStatus=owner-adjudicated."
+      "A finish decision closes the finish list for one set-number-language unit. It never asserts a finish. Every finish it names must already rest on positive evidence, and external sources cannot close the list. It projects to completenessStatus=owner-adjudicated.",
+      "1.2.0: a finish decision may name rejectedFinishes. The owner rules that a finish a source claims was never printed for this unit; finishes.py removes it, a photographed copy of it stops the build, and E13 checks that no rejected finish remains or overlaps availableFinishes."
     ]
   },
   "decisions": [
@@ -1414,6 +1415,28 @@
       "evidenceRefs": [
         "specimen:SPEC-0517",
         "verification/evidence/issue-262-thai-ma6-20260929/owner-determination.json"
+      ]
+    },
+    {
+      "adjudicationId": "OAF-20261023-PCG3-062-ja",
+      "setCode": "PCG3",
+      "number": "062",
+      "language": "Japanese",
+      "decision": "finish-complete",
+      "availableFinishes": [
+        "holo"
+      ],
+      "rejectedFinishes": [
+        "non-holo"
+      ],
+      "authority": "collection-owner",
+      "basis": "owner-adjudication",
+      "decidedAt": "2026-10-23",
+      "rationale": "The collection owner ruled on 2026-10-23 that Japanese PCG3 062/084 (R団のカビゴンex, Team Rocket Returns) exists only as holo: \"PCG3 062 gibt es nur holo, non-holo entfernen\". TCGdex PCG3-062 reports variants normal=true / holo=false, which is wrong for this ex card; the owner's own copies SPEC-0095/0096/0097 show holographic sparkle across artwork and frame. Recorded as an owner decision, never attributed to a provider.",
+      "evidenceRefs": [
+        "specimen:SPEC-0095",
+        "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
+        "https://github.com/m4s-ai/snoredex-data/pull/430"
       ]
     }
   ]

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-22",
+  "generated": "2026-10-23",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -13,7 +13,7 @@
    "evidenceRecords": 1784,
    "uniqueUrls": 1775,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7150
+   "claimsAttributed": 7136
   }
  },
  "providers": [
@@ -174,7 +174,7 @@
     "tcgdex.dev"
    ],
    "uniqueSources": 312,
-   "claimsSupported": 829
+   "claimsSupported": 824
   },
   {
    "providerId": "malie",
@@ -859,7 +859,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 495
+   "claimsSupported": 493
   },
   {
    "providerId": "inspected-specimen",
@@ -881,7 +881,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 70,
-   "claimsSupported": 830
+   "claimsSupported": 823
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -12665,7 +12665,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 263,
+   "stableIdCount": 262,
    "stableIds": [
     "CS1aC 188 V2",
     "CSM2.1C 054 base",
@@ -12684,8 +12684,7 @@
     "F0125-P02",
     "F0132-P01",
     "F0142-P01",
-    "F0247-P02",
-    "F0247-P03",
+    "F0247-P01",
     "F0291-P02",
     "F0294-P02",
     "F0301-P02",
@@ -12932,7 +12931,7 @@
     "U0780"
    ],
    "retrievedAt": "2026-10-22",
-   "usageCount": 441
+   "usageCount": 434
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -14563,7 +14562,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 432,
+   "stableIdCount": 430,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
@@ -14634,8 +14633,6 @@
     "F0224-P01",
     "F0246-P01",
     "F0246-P02",
-    "F0247-P01",
-    "F0247-P02",
     "F0248-P01",
     "F0248-P02",
     "F0289-P02",
@@ -14999,7 +14996,7 @@
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
    "retrievedAt": "2026-10-22",
-   "usageCount": 493
+   "usageCount": 491
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -36240,24 +36237,17 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variant detail",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
-    "finish-override",
     "language"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 1,
    "stableIds": [
-    "F0247-P01",
-    "F0247-P02",
-    "U0628",
-    "override:tcgdex-edition-ja-PCG3-062-20261022"
+    "U0628"
    ],
-   "retrievedAt": "2026-10-22",
-   "usageCount": 6
+   "retrievedAt": "2026-07-21",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/PCG9-001",

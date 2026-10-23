@@ -497,6 +497,23 @@ def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[
     return kept
 
 
+def drop_owner_rejected_finishes(
+    printings: list[dict[str, Any]], decision: dict[str, Any] | None
+) -> list[dict[str, Any]]:
+    """Remove finishes the collection owner adjudicated as never printed (rule 4).
+
+    A source flag such as TCGdex `normal: true` can be wrong for one card; only the owner's
+    recorded decision removes it. A photographed copy of a rejected finish contradicts the
+    decision and stops the build instead of being dropped silently.
+    """
+    rejected = set((decision or {}).get("rejectedFinishes") or [])
+    if not rejected:
+        return printings
+    if any(p["finish"] in rejected and p.get("specimenIds") for p in printings):
+        raise ValueError(f"owner-rejected finish has specimen evidence: {decision['adjudicationId']}")
+    return [p for p in printings if p["finish"] not in rejected]
+
+
 def merge_specimen_field_sources(existing, candidate):
     for field, ids in candidate.get("specimenFieldSources", {}).items():
         sources = existing.setdefault("specimenFieldSources", {})
@@ -1485,8 +1502,9 @@ def _build_finish_unit(
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)
-        printings = [] if all_claims_contradicted else absorb_editionless_finish_evidence(
-            deduplicated_printings
+        printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
+            absorb_editionless_finish_evidence(deduplicated_printings),
+            owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(
             key=lambda item: (

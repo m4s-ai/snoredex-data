@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-10-22",
+    "generated": "2026-10-23",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -61,12 +61,12 @@
       "withOnlyMarketplaceClaim": 14,
       "pendingFinish": 11,
       "notApplicableFinish": 77,
-      "withOwnerAdjudication": 9,
-      "withNonHolo": 327,
+      "withOwnerAdjudication": 10,
+      "withNonHolo": 326,
       "withHolo": 254,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
-      "withBothNonHoloAndHolo": 56,
+      "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 37,
       "withAnyUnresolvedDetail": 116,
       "tcgdexUrlsRequested": 308,
@@ -22495,95 +22495,20 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
+        "non-holo": "pending",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
-        {
-          "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "sourceType": "Owner attestation (domain expert)",
-              "authorityTier": "owner-attestation",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "retrievedAt": "2026-10-22",
-              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
-            },
-            {
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "sourceType": "TCGdex API card variant detail",
-              "authorityTier": "specialist-reference",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "retrievedAt": "2026-10-22",
-              "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc)."
-            },
-            {
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "edition": "1st Edition",
-          "printingId": "F0247-P01"
-        },
-        {
-          "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "sourceType": "Owner attestation (domain expert)",
-              "authorityTier": "owner-attestation",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "retrievedAt": "2026-10-22",
-              "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
-            },
-            {
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "sourceType": "TCGdex API card variant detail",
-              "authorityTier": "specialist-reference",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "retrievedAt": "2026-10-22",
-              "evidence": "TCGdex PCG3-062 (Japanese) variants_detailed lists an edition-stamped variant and an unstamped or 'unlimited' variant: [[\"normal\", null, \"unlimited\"], [\"normal\", [\"1st edition\"], null]]. Retained as verification/evidence/data-gaps-20261022/edition/raw/tcgdex-ja-PCG3-062.json (sha256 9c3cfafeecc42acd196f71fe8965b88054fdf38077e28e7ca04e7371e52159fc)."
-            },
-            {
-              "url": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "PCG3-062 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "edition": "Unlimited",
-          "printingId": "F0247-P02"
-        },
         {
           "finish": "holo",
           "foilPattern": "sparkle holo across artwork and frame",
@@ -22670,7 +22595,7 @@
               "SPEC-0097"
             ]
           },
-          "printingId": "F0247-P03"
+          "printingId": "F0247-P01"
         }
       ],
       "unresolved": []
