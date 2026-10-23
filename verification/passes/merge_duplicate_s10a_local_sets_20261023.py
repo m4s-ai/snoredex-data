@@ -180,6 +180,22 @@ def mirror_sources(graph, sources):
                       and not (e["toType"].startswith("set-source") and e["toId"] not in ids)]
 
 
+def normalize_stores(sources, prints):
+    """Order and counts as the admission replays (e.g. integrate_rarity_finish_research_20261007) rebuild them."""
+    prints["prints"].sort(key=lambda row: row["printId"])
+    counts = sources["meta"]["counts"]
+    kinds = [row.get("sourceKind") for row in sources["sourceRecords"]]
+    counts["sourceRecords"] = len(kinds)
+    counts["sourceFirstLocalSets"] = kinds.count("source-first-local-set-profile")
+    counts["localSetNameRecords"] = kinds.count("local-set-name-record")
+
+
+def stores_normalized(sources, prints):
+    before = json.dumps([sources["meta"], [row["printId"] for row in prints["prints"]]])
+    normalize_stores(sources, prints)
+    return before == json.dumps([sources["meta"], [row["printId"] for row in prints["prints"]]])
+
+
 def refresh_summary(graph):
     summary = graph["summary"]
     summary["entities"], summary["edges"] = len(graph["entities"]), len(graph["edges"])
@@ -220,15 +236,21 @@ def main(argv):
     overrides_path = V / "finish_overrides.json"
     overrides = read(overrides_path)
     bridges = pending_bridges(overrides)
+    normalized = stores_normalized(docs["sources"], docs["prints"])
     if "--check" in argv:
+        if not normalized:
+            print("pending: source store order or counts")
         for merge in pending:
             print("pending local-set merge:", merge[0], merge[2], "->", merge[3])
         for bridge in bridges:
             print("pending finish bridge:", *bridge)
-        return 1 if pending or bridges else 0
+        return 1 if pending or bridges or not normalized else 0
     if bridges:
         write_bridges(overrides_path, overrides, bridges)
     if not pending:
+        if not normalized:
+            write(names["sources"], docs["sources"])
+            write(names["prints"], docs["prints"])
         return 0
     routes = []
     for locality, language, old, new, losing, canonical, kept_name, dropped_name in pending:
@@ -241,6 +263,7 @@ def main(argv):
         for key in ("graph", "prints", "rekeys", "specimens", "discovery"):
             docs[key] = contextual_codes(rename(docs[key], pairs), locality, old, new)
         docs["names"]["releases"] = {rename(k, pairs): v for k, v in docs["names"]["releases"].items()}
+    normalize_stores(docs["sources"], docs["prints"])
     dedupe_graph(docs["graph"])
     mirror_sources(docs["graph"], docs["sources"])
     refresh_summary(docs["graph"])
