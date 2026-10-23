@@ -26,8 +26,9 @@ The pilot has two mandatory positive targets: regular non-holo MEW 143 in Englis
 and German. Both already have physical identities and positive finish records.
 The English reverse-holo version exercises a separate physical variant. English
 SVP 051 regular and Pokémon Center variants exercise distribution/stamp identity
-and incomplete foil mapping. A German Jungle research row exercises unresolved
-identity and era exclusions. Exact existing IDs are in `malie_profile.json`.
+and incomplete foil mapping. A German Jungle 11 row exercises the era exclusion; since the
+2026-10-22 edition split (#430) it is the verified 1st Edition holo printing, still outside the SV
+profile. Exact existing IDs are in `malie_profile.json`.
 Selection is not export approval: every exported field needs the qualified evidence supplied by
 the accepted #386 inputs.
 Never remove a blocked mandatory target silently. A substitution requires a versioned
@@ -41,7 +42,8 @@ inputs and remaining cases are documented in the retained
 
 At selection base `899688cd40071095e502513c19e0430891b20da8`, the two mandatory
 MEW printings have confirmed non-holo identity and standard size in the collector
-join. Both have a null `localCardName`. The retained finish snapshot supplies
+join. Both had a null `localCardName` then; since #430 the reviewed name registry supplies
+Snorlax/Relaxo. The retained finish snapshot supplies
 positive normal/reverse flags, not complete printed content. Fresh read-only TCGdex
 probes on 2026-09-21 expose localized names, artist, HP, ability/attack text,
 weakness, retreat and regulation mark; these probes have not been accepted as
@@ -58,8 +60,9 @@ field proves an empty field on the card.
 For the reverse target, additionally qualify the foil layer and mask; an intricate
 pattern alone does not establish either. For both SVP targets, preserve the known
 distinct distribution/stamp identities while recording missing content and exact
-foil mapping. The Jungle placeholder remains a research/era boundary with no
-physical identity. All six stay in the selection and final accounting.
+foil mapping. The Jungle row remains an era boundary outside the profile (since #430 a verified
+1st Edition holo printing rather than a placeholder). All six stay in the selection and final
+accounting.
 
 ## Field ownership and observation gap
 
@@ -303,7 +306,7 @@ This contract check does not validate exported payloads or replace the later gat
 
 #388 registers the exporter/check/tests in the existing `regen.py` lists and test
 ownership/gate contracts. The committed pilot has three exported printings in two
-languages, two deferred SVP entries and one outside-profile Jungle research entry.
+languages, two deferred SVP entries and one outside-profile Jungle 11 1st Edition entry.
 `test_malie_integration.py` independently checks the real expected IDs, values and
 dispositions, corrupt bundles, and preserved canonical/output bytes and metadata.
 Full Linux and Windows gates must use identical input

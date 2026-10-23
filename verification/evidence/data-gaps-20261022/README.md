@@ -65,7 +65,9 @@ applies the unambiguous fields through their existing owners;
 The five questions raised by this research were decided by the collection owner:
 
 1. **Hop's Snorlax names** are derived from the reviewed patterns (`derivedPatternCardNames`).
-2. **Duplicate ID/TH s10a local sets** are analysed and proposed in issue #431; no data change.
+2. **Duplicate ID/TH s10a local sets** were proposed in issue #431 and, after the owner's
+   approval, merged into the printed codes `s10a I` / `s10a T`
+   ([`merge_duplicate_s10a_local_sets_20261023.py`](../../passes/merge_duplicate_s10a_local_sets_20261023.py)).
    The **S-Chinese `via-…` releases** are merged into the identified CN prints by
    [`merge_cn_via_releases_20261022.py`](../../passes/merge_cn_via_releases_20261022.py); items
    now carry the CN set, number and date instead of the Japanese harvest date.
@@ -81,5 +83,9 @@ The five questions raised by this research were decided by the collection owner:
    (owner rule: a visible 1st Edition mark, or a visibly empty mark position); see
    [edition-marks-20261022](../edition-marks-20261022/intake-manifest.json) and the owner's e-Card 5
    photographs SPEC-0632/SPEC-0633.
+
+Later decisions in the same PR: PCG3 062 is holo only (owner adjudication
+OAF-20261023-PCG3-062-ja), and the four editions without a photograph were found online and filed
+as SPEC-0634..0641 ([edition-photo-search-20261023](../edition-photo-search-20261023/sources.json)).
 
 Image and collector-number findings without a decision are retained for the next intake.

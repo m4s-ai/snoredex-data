@@ -224,6 +224,11 @@ These are the things that have actually caused mistakes. Full treatment is in
   matrix is reconciled, and three official `LA` releases are now retained as a complete positive
   slice; `xJTG` remains an explicit evidence gap. Never read a European confirmation as covering
   LATAM or a positive slice as historically exhaustive.
+- **A legible face establishes its edition.** For a set printed in both editions, a visible 1st
+  Edition mark is 1st Edition and a visibly empty mark position on a complete, legible face is
+  Unlimited — an observation of that copy, not an absence argument. Check the era's mark position
+  (`RESUME.md`); never give a third-party photo owner attribution the owner did not make
+  ([LESSONS](LESSONS.md#one-specimens-caution-became-a-rule-nobody-had-made)).
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. For

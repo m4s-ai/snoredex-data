@@ -274,9 +274,22 @@ workflow run and deploys the already verified artifact without a second projecti
   card name plus attack names, so a reprint with brand-new art shares the key. Useful — it is how
   the re-illustrated reprints were found — but never read it as art identity.
 - **Artist coverage is partial.** Illustrators come from pokemontcg.io/limitlesstcg
-  (English-market), the official pokemon-card.com database (Japanese-market) and exact release
-  histories. Where no reviewed credit is available, `artist` stays `null`. A sibling's `cardKey`
-  alone does not justify transferring its credit: establish the actual artwork and supporting source.
+  (English-market), the official pokemon-card.com and Asia databases, official Korean card images,
+  exact release histories and the credit printed on an exact-print image. Where no reviewed credit
+  is available, `artist` stays `null`. An illustrator belongs to the *artwork* (owner rule,
+  2026-10-22): every print of the same artwork — any language, edition or finish, including a
+  rainbow/hyper-rare recolour of the same composition — shares it, and the printed credit beats a
+  database field. A sibling's `cardKey` alone still does not justify transferring a credit: the two
+  images must show the same illustration, and a propagated credit is graded `internal-derivation`.
+- **Localized names are reviewed, not guessed.** `localCardName` comes from
+  [`verification/local_card_names.json`](verification/local_card_names.json): an exact-print name
+  first, then the official species name for species-only cards. Mechanic and trainer-owned names
+  are never derived, with one owner-approved exception (Hop's Snorlax per-language pattern).
+- **Editions are one item per edition.** Where a card is documented in both 1st Edition and
+  Unlimited, the collector catalogue carries one item for each. A photograph establishes its own
+  edition only when the face is legible: a visible 1st Edition mark, or a visibly empty mark
+  position on a set printed in both editions. Card-level finish flags (TCGdex) attach to both
+  edition items rather than forming a third, editionless one.
 - **`variantAxes` and `hasReverseHolo` are marketplace hints, not the finish manifest.** The two
   finish layers answer different questions: `finishAvailability` on a card says what evidence
   attributes to *this Cardmarket product*, while `finish_units.json` says what is known for the
@@ -286,7 +299,8 @@ workflow run and deploys the already verified artifact without a second projecti
   = the finish is known but not yet attributed to a product; `other-product` = attributed to a
   different listing of the same card. None of the three ever means "does not exist".
 - **A Cardmarket V-token is not a finish, and is set-specific.** TCGdex's `normal`/`holo`/`reverse`
-  flags apply to the set number and language; a `V1`/`V2`/`V3` mapping is recorded only where it is
+  flags apply to the set number and language (a `true` confirms a finish unless the collection owner
+  has rejected it — `PCG3 062` is holo only although TCGdex reports `normal`); a `V1`/`V2`/`V3` mapping is recorded only where it is
   unambiguous or independently identified. `xsv2a 143` uses Poké Ball and Master Ball mirror
   treatments. `xm2a 136` uses Colorless Energy star and Poké Ball mirror treatments. Always read
   `variantName`.
