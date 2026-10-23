@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 631,
+  "count": 641,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -2051,11 +2051,10 @@
       "photograph": "SPEC-0095.jpg",
       "photographSource": "D:\\OneDrive\\Bilder\\Eigene Aufnahmen\\2025\\05\\20250524_220825005_iOS.jpg",
       "photographSha256": "sha256:27ebde2ae3d77c05d4600062e5590227ec030f9d94ec8adcd9dba6883b99a468",
-      "observed": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card.",
+      "observed": "Full owner photograph captured 2025-05-24 of Japanese R団のカビゴンex PCG3 062/084, HP 100, in a clear magnetic holder. Sparkling holo points and coloured reflection are visible across the artwork and card frame. SPEC-0096 and SPEC-0097 are alternate views of this same card. The 1 EDITION mark position left of ZM7-1S9-JGF at the lower left is visibly empty on the complete, legible card face (position confirmed against 1st Edition copies SPEC-0640/0641), which establishes the Unlimited printing (owner rule 2026-10-22).",
       "recordedAt": "2026-08-26",
       "citedBy": [
-        "U0628",
-        "F0247-P02"
+        "U0628"
       ],
       "physicalObservation": {
         "finish": "holo",
@@ -2063,7 +2062,8 @@
         "markings": null,
         "markingRole": null,
         "cardSize": "standard",
-        "basis": "The full PCG3 062/084 card directly shows multicoloured sparkle points and reflective treatment across the artwork and frame."
+        "basis": "The full PCG3 062/084 card directly shows multicoloured sparkle points and reflective treatment across the artwork and frame. The 1 EDITION mark position left of ZM7-1S9-JGF at the lower left is visibly empty on the complete, legible card face (position confirmed against 1st Edition copies SPEC-0640/0641), which establishes the Unlimited printing (owner rule 2026-10-22).",
+        "edition": "Unlimited"
       }
     },
     {
@@ -2090,6 +2090,10 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The alternate full-card view directly shows multicoloured sparkle points and reflection across PCG3 062/084."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0095",
+        "basis": "The owner photographed the same physical PCG3 062/084 card in the same magnetic holder on 2025-05-24; SPEC-0096 is its second full view."
       }
     },
     {
@@ -2116,6 +2120,10 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "The close frame directly shows the PCG3 062/084 identity and multicoloured holographic sparkle."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0095",
+        "basis": "The owner photographed the same physical PCG3 062/084 card on 2025-05-24; SPEC-0097 is its close view."
       }
     },
     {
@@ -2665,7 +2673,7 @@
       "photograph": "SPEC-0120.jpg",
       "photographSource": "https://i.ebayimg.com/images/g/GmkAAeSwCONprcRp/s-l1600.jpg",
       "photographSha256": "sha256:908cb5ad2d9a440067280f7145a6489c35a7ee01edcb686ef4f4ff5a0b42f296",
-      "observed": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64.",
+      "observed": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
       "recordedAt": "2026-08-27",
       "citedBy": [
         "F0173-P01",
@@ -2677,7 +2685,8 @@
         "markings": null,
         "markingRole": null,
         "cardSize": "standard",
-        "basis": "The complete Portuguese 27/64 card face visibly shows the uniformly printed non-holographic artwork treatment; its localized text, Jungle symbol and collector number establish the exact printing. No edition is inferred from an absent stamp."
+        "basis": "The complete Portuguese 27/64 card face visibly shows the uniformly printed non-holographic artwork treatment; its localized text, Jungle symbol and collector number establish the exact printing. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+        "edition": "Unlimited"
       },
       "listingUrl": "https://www.ebay.com/itm/177940547168"
     },
@@ -2918,7 +2927,7 @@
       "photograph": "SPEC-0129.jpg",
       "photographSource": "https://i.ebayimg.com/images/g/mQIAAeSw10RqBmre/s-l1600.jpg",
       "photographSha256": "sha256:84ab65029f730f26d318f2921d8e8a55a1d850b50e08cb03de6245a4594f9a60",
-      "observed": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130.",
+      "observed": "Complete seller photograph of Spanish Jungle Snorlax 11/64. Pokémon Básico, Poder de Pokémon: Insensible, Golpe Cuerpo, the Jungle symbol and 11/64 establish the exact localized card. The reflective artwork field establishes the holo treatment. The paired ordinary Pokémon back is retained separately as SPEC-0130. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
       "recordedAt": "2026-08-27",
       "citedBy": [
         "F0165-P01",
@@ -2930,7 +2939,8 @@
         "markings": null,
         "markingRole": null,
         "cardSize": "standard",
-        "basis": "The complete Spanish 11/64 card directly shows a reflective holo artwork field; the exact seller listing independently identifies Spanish, Jungle 11/64 and Holo Rare."
+        "basis": "The complete Spanish 11/64 card directly shows a reflective holo artwork field; the exact seller listing independently identifies Spanish, Jungle 11/64 and Holo Rare. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+        "edition": "Unlimited"
       },
       "listingUrl": "https://www.ebay.com/itm/137311196693"
     },
@@ -2958,6 +2968,10 @@
         "markingRole": null,
         "cardSize": "standard",
         "basis": "This back is paired by the seller listing with the Spanish Jungle 11/64 holo front retained as SPEC-0129."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0129",
+        "basis": "The same eBay listing 137311196693 pairs this back with the Spanish Jungle 11/64 front retained as SPEC-0129."
       },
       "listingUrl": "https://www.ebay.com/itm/137311196693"
     },
@@ -3842,7 +3856,7 @@
     },
     {
       "specimenId": "SPEC-0174",
-      "setCode": "S10a I",
+      "setCode": "s10a I",
       "number": "058/071",
       "variant": "base",
       "language": "Indonesian",
@@ -5759,7 +5773,7 @@
     },
     {
       "specimenId": "SPEC-0264",
-      "setCode": "s10a",
+      "setCode": "s10a T",
       "number": "058/071",
       "variant": "base",
       "language": "Thai",
@@ -5771,7 +5785,7 @@
       "observed": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates.",
       "recordedAt": "2026-08-28",
       "citedBy": [
-        "TH:s10a:058/071:base",
+        "TH:s10a T:058/071:base",
         "U0347"
       ],
       "physicalObservation": {
@@ -7689,7 +7703,7 @@
     },
     {
       "specimenId": "SPEC-0368",
-      "setCode": "s10a",
+      "setCode": "s10a T",
       "number": "058/071",
       "variant": "base",
       "language": "Thai",
@@ -7700,13 +7714,13 @@
       "observed": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 4/6, row 2, column 2 crop. The visible artwork, printed language, set identity s10a and collector identity 058/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
       "recordedAt": "2026-08-28",
       "citedBy": [
-        "TH:s10a:058/071:base"
+        "TH:s10a T:058/071:base"
       ],
       "listingUrl": "https://www.instagram.com/p/DLKJu7Mvpap/"
     },
     {
       "specimenId": "SPEC-0369",
-      "setCode": "S10a I",
+      "setCode": "s10a I",
       "number": "058/071",
       "variant": "base",
       "language": "Indonesian",
@@ -7717,13 +7731,13 @@
       "observed": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 2, column 3 crop. The visible artwork, printed language, set identity S10a I and collector identity 058/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
       "recordedAt": "2026-08-28",
       "citedBy": [
-        "ID:S10a I:058/071:base"
+        "ID:s10a I:058/071:base"
       ],
       "listingUrl": "https://www.instagram.com/p/DLKJu7Mvpap/"
     },
     {
       "specimenId": "SPEC-0370",
-      "setCode": "s10a",
+      "setCode": "s10a T",
       "number": "077/071",
       "variant": "base",
       "language": "Thai",
@@ -7738,7 +7752,7 @@
     },
     {
       "specimenId": "SPEC-0371",
-      "setCode": "S10a I",
+      "setCode": "s10a I",
       "number": "077/071",
       "variant": "base",
       "language": "Indonesian",
@@ -11056,7 +11070,7 @@
     },
     {
       "specimenId": "SPEC-0520",
-      "setCode": "s10a",
+      "setCode": "s10a T",
       "number": "077/071",
       "variant": "V2",
       "language": "Thai",
@@ -11716,7 +11730,7 @@
     },
     {
       "specimenId": "SPEC-0550",
-      "setCode": "S10a I",
+      "setCode": "s10a I",
       "number": "058/071",
       "variant": "base",
       "language": "Indonesian",
@@ -11729,7 +11743,7 @@
       "recordedAt": "2026-09-21",
       "citedBy": [
         "U0346",
-        "ID:S10a I:058/071:base"
+        "ID:s10a I:058/071:base"
       ],
       "physicalObservation": {
         "finish": "holo",
@@ -11944,7 +11958,7 @@
     },
     {
       "specimenId": "SPEC-0560",
-      "setCode": "S10a I",
+      "setCode": "s10a I",
       "number": "058/071",
       "variant": "base",
       "language": "Indonesian",
@@ -11957,7 +11971,7 @@
       "recordedAt": "2026-09-28",
       "citedBy": [
         "U0346",
-        "ID:S10a I:058/071:base"
+        "ID:s10a I:058/071:base"
       ],
       "physicalObservation": {
         "finish": "holo",
@@ -12392,7 +12406,7 @@
       "photograph": "SPEC-0581.png",
       "photographSource": "user-supplied:codex-clipboard-8380907a-b506-4437-914a-0bd36b70422a.png",
       "photographSha256": "sha256:43f557bd5d67774b41e15963310d8920869318ac4550e371c4e63ba63f762475",
-      "observed": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
+      "observed": "Japanese カビゴン Lv.35 HP100; とおせんぼ and ねころがる 40+; DP1 symbol and DPBP#174. This card is unnumbered: DPBP#174 is a Battle Pokédex identifier and NO.143 the National Pokédex number. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0476"
@@ -12403,7 +12417,8 @@
           "finish"
         ],
         "cardSize": "standard",
-        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them)"
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them) The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited).",
+        "edition": "Unlimited"
       }
     },
     {
@@ -12417,7 +12432,7 @@
       "photograph": "SPEC-0582.png",
       "photographSource": "user-supplied:codex-clipboard-b7f11567-5f40-4ce9-abf2-29f3816e1c9a.png",
       "photographSha256": "sha256:092d8dfeb2b78fb03728dc2f8e07e2ffd7393fdf4630479d2818fc9173c29cc1",
-      "observed": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
+      "observed": "Japanese カビゴン Lv.40 HP100, わがまま 20+ and ヘビープレス 40+, Pt2 070/090; fruit-eating artwork. The 400-pixel source limits fine-print reading; the identity is consistent with the retained Pt2 target. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0751"
@@ -12428,7 +12443,8 @@
           "finish"
         ],
         "cardSize": "standard",
-        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them)"
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them) A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
+        "edition": "1st Edition"
       }
     },
     {
@@ -12442,7 +12458,7 @@
       "photograph": "SPEC-0583.png",
       "photographSource": "user-supplied:codex-clipboard-5cef24d8-d5ed-47f1-88fe-0628dbb9ec35.png",
       "photographSha256": "sha256:f81a193162f4b8e293c93d623bb6429f815fe6fd2d441681233b19e4c1e1b765",
-      "observed": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
+      "observed": "Japanese カビゴン HP130, とおせんぼ and チームインパクト 30×, BW7 055/070 U. Blue Team Plasma frame and emblem are printed design features, not a finish determination. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0578"
@@ -12453,7 +12469,8 @@
           "finish"
         ],
         "cardSize": "standard",
-        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them)"
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them) A printed 1st EDITION mark is visible at the lower left of the card face, which establishes the 1st Edition printing.",
+        "edition": "1st Edition"
       }
     },
     {
@@ -12467,7 +12484,7 @@
       "photograph": "SPEC-0584.png",
       "photographSource": "user-supplied:codex-clipboard-a71ac525-727f-4fe9-bec2-7dfbaefab98e.png",
       "photographSha256": "sha256:3ade7c9c5200e78db2506fb1e4179c0c69f54e2e9195146d4b6e56927a8968ac",
-      "observed": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
+      "observed": "Japanese カビゴン HP80 with ごろね and れんぞくころがり 30×, yellow e-Card border and sleeping Snorlax on a rocky mountain shore. The supplied 169×225 image matches the exact canonical EC5 062/088 reference images/EC5_062_Snorlax_654062.jpg in artwork and layout. Number and artist are reference-matched, not independently transcribed from the small supplied image. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. A mark stands between the retreat cost and the e-Card 5 set symbol, the position of the printed 1st EDITION mark on the owner-supplied high-resolution 1st Edition photograph SPEC-0633; it is absent there on the Unlimited photograph SPEC-0632. This establishes the 1st Edition printing.",
       "recordedAt": "2026-09-29",
       "citedBy": [
         "U0605"
@@ -12478,7 +12495,8 @@
           "finish"
         ],
         "cardSize": "standard",
-        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them)"
+        "basis": "Collection-owner finish determination on 2026-09-29 for this supplied image: test all pics for holo (hint: they're non holo all of them) A mark stands between the retreat cost and the e-Card 5 set symbol, the position of the printed 1st EDITION mark on the owner-supplied high-resolution 1st Edition photograph SPEC-0633; it is absent there on the Unlimited photograph SPEC-0632. This establishes the 1st Edition printing.",
+        "edition": "1st Edition"
       }
     },
     {
@@ -13617,6 +13635,260 @@
         "basis": "Collection owner explicitly identifies the supplied CSVSC046 image as Non-Holo on 2026-10-08. Database image supports face identity only; no physical ownership or exhaustive finish inventory asserted."
       },
       "listingUrl": "https://static.tcgcollector.com/content/images/d7/d5/ca/d7d5ca742ba218af835c865710aa8f450d9d068f2bf4ba64b24fae51dd520c61.webp"
+    },
+    {
+      "specimenId": "SPEC-0632",
+      "setCode": "EC5",
+      "number": "062/088",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph; original image visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0632.png",
+      "photographSource": "user-supplied:claude-session-20261022-ec5-062-unlimited.webp",
+      "photographSha256": "sha256:3f98caf6008b71bb3793b7a7118064615efb55f2864ea449639b33e72d7e0276",
+      "observed": "Owner-supplied front-and-back photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. No 1st EDITION mark is printed beside the set symbol. The collection owner identifies this card as the Unlimited printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare.",
+      "recordedAt": "2026-10-22",
+      "citedBy": [
+        "U0605"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "ownerAttestedFields": [
+          "finish",
+          "edition"
+        ],
+        "ownerAttestedAt": "2026-10-22",
+        "cardSize": "standard",
+        "basis": "The collection owner explicitly identified this pictured card as the Unlimited printing on 2026-10-22; the photograph shows the exact EC5 062/088 identity. Non-Holo follows the owner's EC5 062 determination of 2026-09-29."
+      }
+    },
+    {
+      "specimenId": "SPEC-0633",
+      "setCode": "EC5",
+      "number": "062/088",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Owner-supplied card photograph; original image visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0633.png",
+      "photographSource": "user-supplied:claude-session-20261022-ec5-062-1st-edition.webp",
+      "photographSha256": "sha256:7b7050cbd079117953055436deae3bd614957da2398e89a3dc3a7febbba4afe6",
+      "observed": "Owner-supplied photograph of Japanese カビゴン HP80, ごろね, れんぞくころがり 30×, Illus. Naoyo Kimura, printed 062/088 with the e-Card 5 set symbol and ID:F-33-#. A printed 1st EDITION mark stands beside the set symbol. The collection owner identifies this card as the 1st Edition printing (2026-10-22). Non-Holo rests on the owner's EC5 062 non-holo determination, not on lack of glare.",
+      "recordedAt": "2026-10-22",
+      "citedBy": [
+        "U0605"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "1st Edition",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-10-22",
+        "cardSize": "standard",
+        "basis": "The 1st EDITION mark is visibly printed beside the set symbol, and the collection owner identified this pictured card as 1st Edition on 2026-10-22. Non-Holo follows the owner's EC5 062 determination of 2026-09-29."
+      }
+    },
+    {
+      "specimenId": "SPEC-0634",
+      "setCode": "DP1",
+      "number": "",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0634.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+      "photographSha256": "sha256:55e8069e87a43e8801a279b21ae675f68ee43583d730fed52bb1d5a19f9ff488",
+      "observed": "Complete seller photograph of Japanese カビゴン LV.35 HP100, とおせんぼ and ねころがる 40+, Illus.Ken Sugimori, ©2006, printed DPBP#174◆ DP1. A printed 1 EDITION mark stands at the lower left of the face beside the weakness box. Listing title: 'ポケモンカードゲーム/◆/ノーマル/DP1 時空の創造DPBP#174[◆]：カビゴン LV.35 1ED'.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0476"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "1st Edition",
+        "cardSize": "standard",
+        "basis": "The printed 1 EDITION mark at the lower left of the complete face establishes the 1st Edition printing; the seller lists it as ノーマル. Non-Holo is the print-level finish already established for this card (owner determination on SPEC-0581/0582/0583); this photograph is evidence for the edition, not for the finish."
+      },
+      "listingUrl": "https://auctions.yahoo.co.jp/jp/auction/r1223260718"
+    },
+    {
+      "specimenId": "SPEC-0635",
+      "setCode": "Pt2",
+      "number": "070/090",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0635.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+      "photographSha256": "sha256:030b5974dbf42d8f08623b9fca56f974281fcbb6dd53d7996cad537cb2ce7ee9",
+      "observed": "Complete seller photograph of Japanese カビゴン LV.40 HP100, めいわくねぞう, ねがえり 20+ and ヘビープレス 40+, Illus.Kouki Saitou, ©2008, printed 070/090● Pt2. The 1 EDITION mark position at the lower left beside the copyright line is visibly empty on the complete, legible face.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0751"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "cardSize": "standard",
+        "basis": "The visibly empty 1 EDITION mark position on the complete, legible face establishes the Unlimited printing (owner rule 2026-10-22). Non-Holo is the print-level finish already established for this card (owner determination on SPEC-0581/0582/0583); this photograph is evidence for the edition, not for the finish."
+      },
+      "listingUrl": "https://paypayfleamarket.yahoo.co.jp/item/z701753624"
+    },
+    {
+      "specimenId": "SPEC-0636",
+      "setCode": "Pt2",
+      "number": "070/090",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0636.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+      "photographSha256": "sha256:51ea406e095fa53395416d1ce4e0fece6bbc2f299620385e2b6dc880db0a9616",
+      "observed": "Close-up of the lower left of the same Pt2 070/090 カビゴン from the same listing: weakness +20 and the ©2008 line are sharp, and the 1 EDITION mark position is empty.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0751"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "cardSize": "standard",
+        "basis": "The sharp close-up shows the 1 EDITION mark position empty. Non-Holo is the print-level finish already established for this card (owner determination on SPEC-0581/0582/0583); this photograph is evidence for the edition, not for the finish."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0635",
+        "basis": "Second photograph of the same card in the same Yahoo!フリマ listing z701753624."
+      },
+      "listingUrl": "https://paypayfleamarket.yahoo.co.jp/item/z701753624"
+    },
+    {
+      "specimenId": "SPEC-0637",
+      "setCode": "BW7",
+      "number": "055/070",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0637.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/a76aae9897b0f1049af84b54c75892e768ddb49b/i-img900x1200-1791891211612ogfsau.jpg",
+      "photographSha256": "sha256:8a7fc43debc0d2c75480f296f0c63b01541e484718b8e56ca2d65f4212fd870f",
+      "observed": "Complete seller photograph of Japanese カビゴン HP130 プラズマ団, とおせんぼ and チームインパクト 30×, Illus.5ban Graphics, ©2012, printed 055/070 U BW7. The 1st EDITION mark position left of にげる at the lower left is visibly empty on the complete, legible face.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0578"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "cardSize": "standard",
+        "basis": "The visibly empty 1st EDITION mark position left of にげる establishes the Unlimited printing (owner rule 2026-10-22). Non-Holo is the print-level finish already established for this card (owner determination on SPEC-0581/0582/0583); this photograph is evidence for the edition, not for the finish."
+      },
+      "listingUrl": "https://paypayfleamarket.yahoo.co.jp/item/z703749390"
+    },
+    {
+      "specimenId": "SPEC-0638",
+      "setCode": "BW7",
+      "number": "055/070",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0638.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/e3d937271f415148481443126e9c82c5a6338761/i-img675x674-1791253536559ctq4h4.jpg",
+      "photographSha256": "sha256:63b79fb0b7a5362452947b8d3be60c4bc94a0fc28288193500cb8d9986202c95",
+      "observed": "Complete seller photograph of a second Japanese カビゴン プラズマ団 055/070 U BW7 copy; the listing title calls it アンリミ. The 1st EDITION mark position left of にげる is visibly empty.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0578"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "Unlimited",
+        "cardSize": "standard",
+        "basis": "The visibly empty 1st EDITION mark position establishes the Unlimited printing; the seller labels it アンリミ. Non-Holo is the print-level finish already established for this card (owner determination on SPEC-0581/0582/0583); this photograph is evidence for the edition, not for the finish."
+      },
+      "listingUrl": "https://paypayfleamarket.yahoo.co.jp/item/z699583124"
+    },
+    {
+      "specimenId": "SPEC-0639",
+      "setCode": "PCG3",
+      "number": "062/084",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0639.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-1788907877248541ty6b32488.jpg",
+      "photographSha256": "sha256:797a93906f0897b09ace6ff04946944a93607f57547f76a6300410db035bbf78",
+      "observed": "Complete seller photograph of Japanese R団のカビゴンex HP100, ダークヒーラー, どくのつめ 20 and たおれこむ 60, Illus.Mitsuhiro Arita, printed 062/084 with the R set mark. Holographic sparkle crosses the artwork and frame. Listing title: '[1EDあり] ポケモンカード R団のカビゴンex (062/084) / ロケット団の逆襲'.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0628"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "standard",
+        "basis": "Holographic sparkle is visible across the artwork and frame of the complete face."
+      },
+      "listingUrl": "https://auctions.yahoo.co.jp/jp/auction/b1243851484"
+    },
+    {
+      "specimenId": "SPEC-0640",
+      "setCode": "PCG3",
+      "number": "062/084",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0640.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-17889077475043orzcom36.jpg",
+      "photographSha256": "sha256:a355e687d9d763556ca73fac11e853fb401008de59cb72279e53d3040c5c98a8",
+      "observed": "Close-up of the lower left of the same R団のカビゴンex from the same listing: 弱点 with the fighting icon, ZM7-1S9-JGF and the holo border; a printed 1 EDITION mark stands immediately left of ZM7-1S9-JGF.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0628"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "edition": "1st Edition",
+        "cardSize": "standard",
+        "basis": "The printed 1 EDITION mark left of ZM7-1S9-JGF establishes the 1st Edition printing; the holo border is visible."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0639",
+        "basis": "Close-up photograph of the same card in the same Yahoo! Auctions listing b1243851484, matching border and corner details."
+      },
+      "listingUrl": "https://auctions.yahoo.co.jp/jp/auction/b1243851484"
+    },
+    {
+      "specimenId": "SPEC-0641",
+      "setCode": "PCG3",
+      "number": "062/084",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained original seller photograph visually inspected; local Tesseract OCR unavailable",
+      "photograph": "SPEC-0641.jpg",
+      "photographSource": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/721f3e57d6617ed1e8c34d830b4a515d747dcd2df45d221bb515578d22af286e/i-img1200x1200-179066129141461zyu0w268187.jpg",
+      "photographSha256": "sha256:980e9e4cf1a3c329582223018f8d721124f9b374be35f7b805e19b8834c54338",
+      "observed": "Complete seller photograph of a second Japanese R団のカビゴンex 062/084 copy (Illus.Mitsuhiro Arita, holo sparkle). The dark 1 EDITION mark stands at the lower left immediately left of ZM7-1S9-JGF. Listing title: 'ポケモンカード 062/084 ★ 1ED R団のカビゴンex (31)'.",
+      "recordedAt": "2026-10-23",
+      "citedBy": [
+        "U0628"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "edition": "1st Edition",
+        "cardSize": "standard",
+        "basis": "The 1 EDITION mark shape left of ZM7-1S9-JGF, at the same place as on SPEC-0640, establishes the 1st Edition printing; holographic sparkle is visible on the face."
+      },
+      "listingUrl": "https://auctions.yahoo.co.jp/jp/auction/w1246351597"
     }
   ]
 }

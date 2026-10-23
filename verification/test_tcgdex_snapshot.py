@@ -202,6 +202,35 @@ def main() -> None:
             verifier.FIXTURE = original_fixture
         assert fixture.read_bytes() == recorded_fixture
 
+    # Card-level finish evidence folds into a complete edition pair; a specimen-backed or
+    # half-covered editionless printing stays a separate, edition-unknown observation.
+    def printing(edition, **extra):
+        return {"finish": "holo", "edition": edition, "foilPattern": None, "distribution": None,
+                "markings": None, "mappedVariants": ["V1"], "verificationStatus": "owner-attested",
+                "sources": [{"url": f"https://example.test/{edition}", "sourceType": "x", "evidence": "e"}],
+                **extra}
+    generic = printing(None, verificationStatus="confirmed")
+    pair = [printing("1st Edition"), printing("Unlimited")]
+    folded = finishes.absorb_editionless_finish_evidence([generic, *pair])
+    assert [row["edition"] for row in folded] == ["1st Edition", "Unlimited"]
+    assert all(row["verificationStatus"] == "confirmed" and len(row["sources"]) == 2 for row in folded)
+    observed = printing(None, specimenIds=["SPEC-9999"])
+    assert observed in finishes.absorb_editionless_finish_evidence([observed, *pair])
+    jumbo = printing(None, cardSize="jumbo")
+    assert jumbo in finishes.absorb_editionless_finish_evidence(
+        [jumbo, *[{**row, "cardSize": "standard"} for row in pair]])
+    decision = {"adjudicationId": "OAF-test", "rejectedFinishes": ["non-holo"]}
+    normal = {**printing(None), "finish": "non-holo"}
+    assert finishes.drop_owner_rejected_finishes([normal, *pair], decision) == pair
+    try:
+        finishes.drop_owner_rejected_finishes([{**normal, "specimenIds": ["SPEC-9999"]}], decision)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("a photographed rejected finish must stop the build")
+    half = [printing(None), printing("Unlimited")]
+    assert len(finishes.absorb_editionless_finish_evidence(half)) == 2
+
     original_arguments = sys.argv
     try:
         sys.argv = ["finishes.py", "--offline", "--check", "--reproject"]

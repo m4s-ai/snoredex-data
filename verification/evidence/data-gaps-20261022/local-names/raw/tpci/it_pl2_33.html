@@ -1,0 +1,938 @@
+
+<!DOCTYPE html>
+<html lang="it">
+
+<head><script src="/d-Headiction-our-How-and-ther-Lord-That-manly-sp" async></script>
+        <title>Snorlax | Platino - L’Ascesa dei Rivali | Archivio delle carte GCC</title>
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-V9L7');</script>
+<!-- End Google Tag Manager -->
+
+
+<link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico"/>
+<link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/main.css"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css" />
+
+<script src="https://assets.pokemon.com/static2/_ui/js/vendor/modernizr.custom.js"></script>
+    <script src="https://www.recaptcha.net/recaptcha/enterprise.js?render=6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO&hl=it"></script>
+
+
+<script>
+    // TODO: this should be moved to a better place in the application
+    // needed for image deferred loading in sliders
+    window.addEventListener('load', function () {
+        window.loaded = true;
+    });
+</script>
+
+
+<script>
+    window.token = "4irb2DZnTqszXC3dKKW48KmSgGELh60QcW3VrBbRAo5bgwFIfDdCFypAvQvwR2SK";
+    window.mockAPI = false;
+    window.loginURL = 'https://trainer.pokemon.com/profile';
+    window.pokemonUI = window.pokemonUI || {};
+    window.staticAssetsVersionNumber = 'r1.1.8';
+
+
+    window.pokemonUI.recaptcha_key = "6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO";
+    window.pokemonUI.email_signup_api = "https://api.emo.pokemon.com/";
+    window.pokemonUI.countryCode = 'it';
+    window.pokemonUI.api = {
+        'user-details': 'https://www.pokemon.com/api/users/details',
+        'base-url-secure': 'https://www.pokemon.com',
+
+        'gsa': '/us/search/api/'
+
+    };
+
+    window.pokemonUI.config = {
+        'collection': 'production_pokemon_collection'
+    };
+
+    window.pokemonUI.modals = window.pokemonUI.modals || {};
+    window.pokemonUI.modals = {
+        "season": "Stagione",
+        "episode": "Episodio",
+        "legal": "Attenzione! Se clicchi sul video di YouTube qui sopra, lascerai il sito www.pokemon.it. The Pokémon Company International declina ogni responsabilità per i contenuti di eventuali altri siti Web collegati non controllati da The Pokémon Company International. Le normative sulla privacy e le prassi relative alla sicurezza di questi siti Web possono essere diverse dagli standard di The Pokémon Company International.",
+
+        "twitchlegal": "Attenzione! Se clicchi sul video di Twitch qui sopra, lascerai il sito www.pokemon.it. The Pokémon Company International declina ogni responsabilità per i contenuti di eventuali altri siti Web collegati non controllati da The Pokémon Company International. Le normative sulla privacy e le prassi relative alla sicurezza di questi siti Web possono essere diverse dagli standard di The Pokémon Company International.",
+    };
+    window.pokemonUI.dictionary = window.pokemonUI.dictionary || {};
+    window.pokemonUI.dictionary.dashboard = {
+        "youRecentlyPurchased": "Acquisti recenti",
+        "shopMore": "Negozio Allenatori"
+    };
+    window.pokemonUI.global_dictionary = window.pokemonUI.global_dictionary || {};
+    window.pokemonUI.global_dictionary.search = {
+        'searchUrl': '/it/cerca',
+        'GSALanguageCode': 'it',
+        'sortBy': 'Ordina per:',
+        'filterBy': 'Filtra per:',
+        'selectCategory': 'Vedi tutto',
+        'mostRelevant': 'Più pertinenti',
+        'mostRecent': 'Più recenti',
+        'returnedResults': 'Risultati: XXXX',
+        'shortQuery': 'Il termine di ricerca è troppo corto.',
+        'recommendedResults': 'Risultati consigliati',
+        'playGame': 'Gioca al minigioco',
+        'all': {title: 'Vedi tutto'},
+        'pokedex': {title: 'Pokédex'},
+        'videogames': {title: 'Videogiochi'},
+        'tcg': {title: 'Gioco di Carte Collezionabili'},
+        'funzone': {title: 'Online Game'},
+        'animation': {title: 'Animazione'},
+        'news': {title: 'Novità'},
+        'events': {title: 'Eventi'},
+        'strategy': {title: 'Strategie'},
+
+        "numberPrefix": "N°&nbsp;"
+    };
+    window.pokemonUI.global_dictionary.datatables = {
+        'search': 'Cerca',
+        'previous': 'Indietro',
+        'next': 'Avanti',
+        'emptyTable': "Dati non disponibili",
+        'zeroRecords': "Non è stato possibile trovare dati corrispondenti alla ricerca."
+    };
+    window.pokemonUI.global_dictionary.errorMessages = {
+        'dataError': 'Non disponibile in questo momento. Riprova più tardi.'
+    };
+    window.pokemonUI['ui-path'] = 'https://assets.pokemon.com/static2/_ui/'
+
+    window.pokemonUI.global_api = {
+
+        'gsa': '/us/search/api/',
+
+        'status-indicators': {
+            'game-server-status': '/api/tcg/game_server_status',
+            'tcgo-in-maintenance': '/api/tcg/in_maintenance_status',
+            'notifications': 'https://www.pokemon.com/api/user/notifications/config'
+        }
+    };
+
+    window.pokemonUI.site_search_api = {
+        'url': 'https://api.search.prod.pokemon.com/v1/search'
+    }
+
+    window.pokemonUI.cookie = {
+        set: function (name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            } else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        get: function (name) {
+            var nameEQ = name + '=',
+                ca = document.cookie.split(';'),
+                c, i = 0, ii = 0;
+
+            for (i = 0, ii = ca.length; i < ii; i++) {
+                c = ca[i];
+
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1, c.length);
+                }
+
+                if (c.indexOf(nameEQ) === 0) {
+                    var value = c.substring(nameEQ.length, c.length);
+                    if (value.charAt(0) == '"' && value.charAt(value.length - 1) == '"') {
+                        value = value.substring(1, value.length - 1);
+                    }
+                    return value;
+                }
+            }
+            return null;
+        }
+    };
+
+    window.enableDashboard = true;
+
+</script>
+
+<script type="module" src="/static-assets/app/static3/pcom-next-footer/pcom-next-footer.js?v=r1.1.8"></script>
+
+                <link rel="alternate" hreflang="en" href="https://www.pokemon.com/us/pokemon-tcg/pokemon-cards/series/pl2/33/" />
+                <link rel="alternate" hreflang="en-gb" href="https://www.pokemon.com/uk/pokemon-tcg/pokemon-cards/series/pl2/33/" />
+                <link rel="alternate" hreflang="fr" href="https://www.pokemon.com/fr/jcc-pokemon/cartes-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="it" href="https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/" />
+                <link rel="alternate" hreflang="de" href="https://www.pokemon.com/de/pokemon-sammelkartenspiel/pokemon-karten/series/pl2/33/" />
+                <link rel="alternate" hreflang="es" href="https://www.pokemon.com/es/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-xl" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-do" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-py" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-cl" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-gt" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-mx" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-hn" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-uy" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-bo" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-ar" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-cr" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-pe" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-co" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-pa" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="es-sv" href="https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/pl2/33/" />
+                <link rel="alternate" hreflang="pt-br" href="https://www.pokemon.com/br/pokemon-estampas-ilustradas/cartas-de-pokemon/series/pl2/33/" />
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv="Content-Language" content="it"/>
+<meta name="language" content="it"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="twitter:card" content="summary" />
+
+    <meta name="pkm-title" content="Snorlax" />
+    <meta property="og:title" content="Snorlax" />
+<meta name="twitter:title" content="Snorlax" />
+
+        <meta name="pkm-image" content="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/site_search/PL2/PL2_IT_33.png"/>
+<meta property="og:image" content="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/PL2/PL2_IT_33.png" />
+<meta name="twitter:image" content="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/PL2/PL2_IT_33.png" />
+
+    <meta name="pkm-category" content="tcg" />
+
+    <meta name="pkm-subcategory" content="Platino - L’Ascesa dei Rivali" />
+
+    <meta property="og:description" content="Platino - L’Ascesa dei Rivali | Archivio delle carte GCC" />
+    <meta name="twitter:description" content="Platino - L’Ascesa dei Rivali | Archivio delle carte GCC" />
+    <meta name="pkm-description" content="Platino - L’Ascesa dei Rivali | Archivio delle carte GCC" />
+
+    <meta name="pkm-modified-date" content="20240801" />
+
+    <link rel="canonical" href="https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/" />
+
+<link rel="stylesheet" type="text/css" media="all" href="/static-assets/app/static3/pcom-next-footer/pcom-next-footer-reset.css?v=r1.1.8" />    <meta name="pkm-id" content="33/120" />
+
+    <link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/cards.css" />
+</head>
+
+<body class="it fluid custom-form-elements">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-V9L7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="main-filler"></div>
+
+
+<nav class="main">
+
+    <div class="blocker"></div>
+
+    <div class="content-wrapper">
+
+        <div class="nav-bar" style="display: none;">
+            <a href="#" class="nav-toggle"><span
+                    class="icon icon_hamburger"></span></a>
+
+            <ul class="dashboard-open visible-mobile">
+                <li class="visible-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                 src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-avatar.png"
+                                 alt="Visualizza profilo"/>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="visible-not-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-signup.png"
+                                alt="Iscriviti / Accedi"/>
+                        </div>
+                        <div class="sign-in-text-wrapper sign-in-text-wrapper-mobile">
+                            Accedi
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</nav>
+
+<div class="container">
+    <section class="mosaic section card-detail">
+        <div class="column-6 push-1">
+
+            <div class="content-block content-block-full card-image">
+                <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/PL2/PL2_IT_33.png"
+                     
+                     alt="Snorlax">
+            </div>
+
+            <div class="content-block content-block-full share-card hidden-mobile"></div>
+
+            <div class="content-block content-block content-block-full hidden-mobile">
+                <a id='pokedex-find' class="button-center" href="/it/pokedex/snorlax" data-pokemon-number='0143'>
+				    <span class="button button-orange">
+                        Trova Snorlax nel Pokédex
+                    </span>
+                </a>
+
+                <a id='explore-cards' class="button-center" href="/it/gcc/archivio-carte?">
+                    <span class="button button-orange">
+                        Esplora altre carte
+                    </span>
+                </a>
+            </div>
+        </div>
+
+        <div class="column-6 push-7">
+            <div class="content-block content-block-full full-card-information" data-card-id='pl2/33'>
+
+                <div class="card-description">
+                    <div class="color-block color-block-gray">
+                        <h1>Snorlax</h1>
+                    </div>
+                    <div class="card-basic-info">
+                        <div class="card-type">
+                            <h2>Pokémon Base</h2>
+                        </div>
+                        <div class="right">
+                            <a href="/it/gcc/archivio-carte?card-colorless=on"><i class="energy icon-colorless" rel="tooltip" title="Incolore"></i></a>
+                        </div>
+                    </div>
+                    <span class="notch-bottom-right"></span>
+                </div>
+
+                <div class="pokemon-abilities">
+
+
+                    <div class="ability">
+                            <ul class="left">
+                                    <li rel="tooltip" title="Non ha costo di ritirata.">
+                                    <a href="/it/gcc/archivio-carte?totalAttackCostMin=0&totalAttackCostMax=0&">
+                                        <i class="energy icon-free"></i>
+                                    </a>
+                                    </li>
+                            </ul>
+                                <h4 class="left label">Sceltaraccolta</h4>
+                                <pre>Cerca nella tua pila degli scarti fino a 4 carte Energia base, mostrale al tuo avversario, e aggiungile alle carte che hai in mano.</pre>
+                    </div>
+                    <div class="ability">
+                            <ul class="left">
+                                    <li rel="tooltip" title="Incolore">
+                                    <a href="/it/gcc/archivio-carte?attack-colorless=on" data-energy-type="Colorless">
+                                        <i class="energy icon-colorless"></i>
+                                    </a>
+                                    </li>
+                                    <li rel="tooltip" title="Incolore">
+                                    <a href="/it/gcc/archivio-carte?attack-colorless=on" data-energy-type="Colorless">
+                                        <i class="energy icon-colorless"></i>
+                                    </a>
+                                    </li>
+                                    <li rel="tooltip" title="Incolore">
+                                    <a href="/it/gcc/archivio-carte?attack-colorless=on" data-energy-type="Colorless">
+                                        <i class="energy icon-colorless"></i>
+                                    </a>
+                                    </li>
+                                    <li rel="tooltip" title="Incolore">
+                                    <a href="/it/gcc/archivio-carte?attack-colorless=on" data-energy-type="Colorless">
+                                        <i class="energy icon-colorless"></i>
+                                    </a>
+                                    </li>
+                            </ul>
+                                <h4 class="left label">Rigirarsi</h4>
+                                <span class="right plus">60</span>
+                                <pre>Lancia una moneta. Se esce testa, Snorlax e il Pokémon Difensore sono Addormentati. Se esce croce, Snorlax è Addormentato.</pre>
+                    </div>
+
+
+                </div>                 <div class="pokemon-stats">
+
+                    <div class="stat">
+                        <h4>Debolezza</h4>
+                        <ul class="card-energies">
+                            <li rel="tooltip" title="Lotta" style="font-size:200%">
+                                <a href="/it/gcc/archivio-carte?weakness-fighting=on">
+                                    <i class="energy icon-fighting"></i>
+                                </a>
+                                +20
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="stat">
+                        <h4>Resistenza</h4>
+                    </div>
+
+                    <div class="stat last">
+                        <h4>Costo di ritirata</h4>
+                        <ul class="card-energies">
+                            <li rel="tooltip" title="Incolore">
+                                <a href="/it/gcc/archivio-carte?retreatCostMin=4&retreatCostMax=4">
+                                    <i class="energy icon-colorless"></i>
+                                </a>
+                            </li>
+                            <li rel="tooltip" title="Incolore">
+                                <a href="/it/gcc/archivio-carte?retreatCostMin=4&retreatCostMax=4">
+                                    <i class="energy icon-colorless"></i>
+                                </a>
+                            </li>
+                            <li rel="tooltip" title="Incolore">
+                                <a href="/it/gcc/archivio-carte?retreatCostMin=4&retreatCostMax=4">
+                                    <i class="energy icon-colorless"></i>
+                                </a>
+                            </li>
+                            <li rel="tooltip" title="Incolore">
+                                <a href="/it/gcc/archivio-carte?retreatCostMin=4&retreatCostMax=4">
+                                    <i class="energy icon-colorless"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                    <div class="stats-footer">
+                        <h3>
+                        <a
+                                href="/it/gcc/archivio-carte?pl2=on"
+                        >
+                                Platino - L’Ascesa dei Rivali
+                            </a>
+                        </h3>
+
+                            <span>33/120 Rare</span>
+                    </div>
+                    <div class="expansion">
+                        <a
+                                href="/it/gcc/archivio-carte?pl2=on"
+                        >
+                            <i class="icon-bw7-expansion-symbol" style="background-image: url(https://www.pokemon.com/static-assets/content-assets/cms-it-it/img/tcg/expansion-symbols/_40x40/pl2-expansion-symbol.png);"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="content-block content-block content-block-full illustrator">
+                    <h4 class="highlight">Illustratore:
+                        <a href="/it/gcc/archivio-carte?particularArtist=Kagemaru Himeno">Kagemaru Himeno</a></h4>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="loader"></div>
+    </section>
+
+    <section class="section no-padding card-detail visible-mobile">
+
+        <div class="content-block content-block-full share-card">
+            <a class="button button-orange" href="/it/pokedex/snorlax">
+                Trova Snorlax nel Pokédex
+            </a>
+
+            <a class="button button-orange" href="/it/gcc/archivio-carte?">
+                Esplora altre carte
+            </a>
+        </div>
+
+    </section>
+
+<section
+    id="trading-card-slider"
+    class="slider-widget generic-slider slider-option-enable-when-all-content-visible-true preload-images
+    
+    slider-option-isinfinite-false
+    slider-option-hasfixedwidthitems-false
+
+    
+    "
+    >
+
+        <div class="slider-title">
+            <div class="column-12 push-1">
+                <h3 class="pokemon-character-slider-title">
+                    <span class="notch-left-top-outer"></span>
+Carte collegate</h3>
+            </div>
+        </div>
+
+
+    <div class="slider-wrapper">
+        <ul class="slider">
+<li data-analytics-label="Snorlax | svp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/svp/51/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_51.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">51</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | svp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/svp/122/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_122.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">122</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax di Hop | svp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/svp/184/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_184.png"
+                 alt="Snorlax di Hop"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax di Hop</h5>
+            <span class="card-number">184</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/svp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Eevee e Snorlax-GX | smp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/smp/SM169/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SMP/SMP_IT_SM169.png"
+                 alt="Eevee e Snorlax-GX"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Eevee e Snorlax-GX</h5>
+            <span class="card-number">SM169</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/smp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH032/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH032.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH032</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH068/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH068.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH068</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swshp | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH119/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH119.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">SWSH119</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/swshp-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | xy0 | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/xy0/26/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/XY0/XY0_IT_26.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">26</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/xy0-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax | swsh1 | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/swsh1/140/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSH1/SWSH1_IT_140.png"
+                 alt="Snorlax"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax</h5>
+            <span class="card-number">140</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/swsh1-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+<li data-analytics-label="Snorlax-V | swsh1 | https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/33/"
+    data-content-id="item-cards"
+    data-content-type="Slider"
+    data-content-variation="slideCenter"
+    data-content-location=""
+    data-content-category="Card"
+    data-content-download=""
+    >
+    <a href="/it/gcc/archivio-carte/series/swsh1/141/">
+        <div class="card-img">
+            <img data-preload-src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSH1/SWSH1_IT_141.png"
+                 alt="Snorlax-V"
+                 class="preload">
+        </div>
+        <div class="card-name">
+            <h5>Snorlax-V</h5>
+            <span class="card-number">141</span>
+            <br style="clear:both;">
+            <img class="card-expansion-symbol" width="25" height="25" src="https://www.pokemon.com/static-assets/content-assets/cms2-it-it/img/trading-card-game/_symbols/expansion_symbol_25x25/swsh1-expansion-symbol.png">
+            <span class="notch-bottom-center-small"></span>
+        </div>
+    </a>
+</li>
+        </ul>
+    </div>
+
+
+
+    <noscript>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/svp/51/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_51.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/svp/122/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_122.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/svp/184/">
+        <h5>Snorlax di Hop</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SVP/SVP_IT_184.png" alt="Snorlax di Hop" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/smp/SM169/">
+        <h5>Eevee e Snorlax-GX</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SMP/SMP_IT_SM169.png" alt="Eevee e Snorlax-GX" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH032/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH032.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH068/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH068.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/swshp/SWSH119/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSHP/SWSHP_IT_SWSH119.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/xy0/26/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/XY0/XY0_IT_26.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/swsh1/140/">
+        <h5>Snorlax</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSH1/SWSH1_IT_140.png" alt="Snorlax" />
+    </a>
+</div>
+
+<div>
+    <a href="/it/gcc/archivio-carte/series/swsh1/141/">
+        <h5>Snorlax-V</h5>
+        <img src="https://assets.pokemon.com/static-assets/content-assets/cms2-it-it/img/cards/web/SWSH1/SWSH1_IT_141.png" alt="Snorlax-V" />
+    </a>
+</div>
+    </noscript>
+
+</section>
+
+</div>
+
+
+  <div id="back-to-top" class="visible-mobile">
+    <span class="offscreen">Torna su</span>
+  </div>
+
+  <footer class="global-footer">
+  </footer>
+
+<div id="modal" class="popup">
+    <div class="externalLink">
+        <h6>
+
+            Stai per lasciare un sito gestito da The Pokémon Company International, Inc.
+
+        </h6>
+        <p>
+
+            The Pokémon Company International declina ogni responsabilità per i contenuti di eventuali altri siti Web collegati non controllati da The Pokémon Company International. Le normative sulla privacy e le prassi relative alla sicurezza di questi siti Web possono essere diverse dagli standard di The Pokémon Company International.
+
+        </p>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Avanti
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn">
+
+                Annulla
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="pokemon-center-modal" class="popup">
+    <div class="externalLink centerLink">
+        <h6>
+            Clicca su Continua per visitare il negozio Pokémon online ufficiale: www.pokemoncenter.com.
+        </h6>
+        <h6>
+            Le normative sulla privacy e le prassi relative alla sicurezza sono diverse.
+        </h6>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Avanti
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn" target="_blank">
+
+                Annulla
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="site-search-modal" class="popup">
+
+	<form id="site-search-widget" class="form-analytics" name="site-search-modal">
+		<span class="search"><input type="search" placeholder="Cerca" name="search" id="site-search-widget-term" autocomplete="off" /></span>
+		<span class="submit icon icon_search"><input type="submit" value="" id="site-search-widget-submit"/></span>
+        <div id="modal-search-results"></div>
+	</form>
+</div>
+
+<div id='report-screen-name-success-modal' class='popup'>
+  <h6>Segnala un nome a schermo inappropriato</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    Gli amministratori del sito www.pokemon.it hanno ricevuto la segnalazione e controlleranno che il nome a schermo soddisfi i termini di utilizzo.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Chiudi
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='report-screen-name-failure-modal' class='popup'>
+  <h6>Segnala un nome a schermo inappropriato</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    La tua richiesta non è andata a buon fine. Riprova. Se il problema si dovesse ripresentare, contatta il servizio clienti.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Chiudi
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='popupScreen' class="popupScreen"></div>
+
+
+  
+    
+<div id="video-modal" class="popup">
+<span class="watch-token-info"><span class="token_icon"></span><p class="token_verbal">Hai ottenuto gettoni Allenatore pari a <span class="token_amount">0</span> per aver guardato la TV Pokémon!</p></span>
+    <div class="video-modal-wrapper">
+
+        <header class="video-header">
+            <h4 id="episodeInfo">
+
+            </h4>
+            <!-- HEADLINE -->
+            <h1 id="episodeTitle"></h1>
+        </header>
+
+        <div class="video-container">
+        </div>
+
+        <p class="legal" style="padding-top: 10px"></p>
+
+        <p class="video-summary">
+
+        </p>
+
+        
+
+        <a href="#" class="closeBtn button button-orange no-arrow right"><i class="icon icon_multiply"></i> Chiudi</a>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    // define waitSeconds above require script tag
+    // to override the default, until main.js loads
+    window.requirejs = {
+        waitSeconds: 30 // when loaded, main.js also sets waitSeconds to 30
+    };
+</script>
+<script data-main="https://assets.pokemon.com/static2/_ui/js/main.js"
+        src="https://assets.pokemon.com/static2/_ui/js/vendor/require.js"></script>
+
+<script type="text/javascript">
+if (typeof _satellite !== "undefined") {
+  _satellite.pageBottom();
+}
+</script> 
+</body>
+</html>

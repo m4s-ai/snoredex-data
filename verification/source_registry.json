@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-12",
+  "generated": "2026-10-23",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 38,
-   "evidenceRecords": 1777,
-   "uniqueUrls": 1769,
-   "nonUrlEvidenceClasses": 8,
-   "claimsAttributed": 6945
+   "evidenceRecords": 1792,
+   "uniqueUrls": 1783,
+   "nonUrlEvidenceClasses": 9,
+   "claimsAttributed": 7201
   }
  },
  "providers": [
@@ -44,8 +44,8 @@
     "press.pokemon.com",
     "pokemon.gamespress.com"
    ],
-   "uniqueSources": 161,
-   "claimsSupported": 498
+   "uniqueSources": 165,
+   "claimsSupported": 502
   },
   {
    "providerId": "pokemon-cn-official",
@@ -70,8 +70,8 @@
     "pokemon.cn",
     "image.pokemon.com.cn"
    ],
-   "uniqueSources": 17,
-   "claimsSupported": 57
+   "uniqueSources": 18,
+   "claimsSupported": 58
   },
   {
    "providerId": "pokemon-card-jp",
@@ -97,7 +97,7 @@
     "30th.pokemon-card.com"
    ],
    "uniqueSources": 42,
-   "claimsSupported": 93
+   "claimsSupported": 109
   },
   {
    "providerId": "pokemon-card-asia",
@@ -173,8 +173,8 @@
     "tcgdex.net",
     "tcgdex.dev"
    ],
-   "uniqueSources": 310,
-   "claimsSupported": 785
+   "uniqueSources": 312,
+   "claimsSupported": 824
   },
   {
    "providerId": "malie",
@@ -222,7 +222,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 115,
-   "claimsSupported": 734
+   "claimsSupported": 737
   },
   {
    "providerId": "pokewiki",
@@ -244,7 +244,7 @@
     "pokewiki.de"
    ],
    "uniqueSources": 2,
-   "claimsSupported": 3
+   "claimsSupported": 5
   },
   {
    "providerId": "pokepedia",
@@ -266,7 +266,7 @@
     "pokepedia.fr"
    ],
    "uniqueSources": 5,
-   "claimsSupported": 6
+   "claimsSupported": 8
   },
   {
    "providerId": "marumiya-official",
@@ -548,7 +548,7 @@
     "images.wikidexcdn.net"
    ],
    "uniqueSources": 6,
-   "claimsSupported": 12
+   "claimsSupported": 13
   },
   {
    "providerId": "snkrdunk",
@@ -693,7 +693,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 347,
-   "claimsSupported": 958
+   "claimsSupported": 976
   },
   {
    "providerId": "cardmarket-product-image",
@@ -716,7 +716,7 @@
    "notes": "The image is positive evidence only for properties visible on the pictured card. The surrounding product page, selected language filter, offers and counts remain tier-5 catalogue metadata and never establish another localized release or absence. Retain accepted images as SPEC-nnnn records so the observation is reviewable.",
    "hosts": [],
    "uniqueSources": 49,
-   "claimsSupported": 221
+   "claimsSupported": 261
   },
   {
    "providerId": "pokemontcgio",
@@ -859,7 +859,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 452
+   "claimsSupported": 493
   },
   {
    "providerId": "inspected-specimen",
@@ -880,8 +880,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
-   "uniqueSources": 71,
-   "claimsSupported": 804
+   "uniqueSources": 70,
+   "claimsSupported": 830
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -926,8 +926,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 178,
-   "claimsSupported": 721
+   "uniqueSources": 186,
+   "claimsSupported": 784
   }
  ],
  "evidence": [
@@ -1434,12 +1434,13 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "item-31f9ae0c-0e3e-5d1e-a51b-948b237e401a"
+    "item-4c0961e9-4950-5261-80d2-856955b47a85",
+    "item-855c5886-e43b-5d27-bead-664b66634909"
    ],
    "retrievedAt": "2026-10-11T10:37:53Z",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Jungle_(TCG)&prop=wikitext&format=json&redirects=1",
@@ -1451,13 +1452,15 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
-    "item-b81fe1f5-4b3d-5d28-a4be-e02b50879e83",
-    "item-f5a9b94f-31a6-593f-aa37-e15f51d92926"
+    "item-4dc069e1-e3d7-5b83-9636-1559a8b3b262",
+    "item-4e9f5560-1b30-5274-bc92-f9a853cbf313",
+    "item-5ce65b63-1889-524e-a13b-01cc05d3b10c",
+    "item-b1542cca-9f6c-5862-be65-b18d4e791919"
    ],
    "retrievedAt": "2026-10-11T10:36:52Z",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/w/api.php?action=parse&page=Snorlax_(Wizards_Promo_49)&prop=wikitext&format=json&redirects=1",
@@ -6839,16 +6842,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 6,
    "stableIds": [
     "F0301-P01",
     "F0301-P02",
+    "F0301-P03",
     "Pt2 070 base",
     "SPEC-0230",
     "U0751"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Boundaries-Crossed/Snorlax-BCR109",
@@ -7241,7 +7245,7 @@
     "F0326-P01",
     "F0326-P02",
     "F0327-P01",
-    "F0327-P02",
+    "F0327-P03",
     "F0328-P01",
     "F0328-P03",
     "SPEC-0206",
@@ -7657,7 +7661,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0246-P02",
+    "F0246-P03",
     "PCG1 074 base"
    ],
    "retrievedAt": null,
@@ -7774,13 +7778,14 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "F0142-P01",
+    "F0142-P02",
     "GH 33 base"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Happy-Set-Decidueye-Melmetal-Koraidon-Miraidon/Snorlax-CSVH4Ca003",
@@ -7964,18 +7969,24 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 13,
    "stableIds": [
     "F0161-P01",
+    "F0161-P02",
     "F0162-P01",
+    "F0162-P02",
     "F0163-P01",
+    "F0163-P02",
     "F0164-P01",
+    "F0164-P02",
     "F0165-P01",
+    "F0165-P02",
     "F0166-P01",
+    "F0166-P02",
     "JU 11 V1"
    ],
    "retrievedAt": null,
-   "usageCount": 7
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
@@ -7989,18 +8000,24 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 7,
+   "stableIdCount": 13,
    "stableIds": [
     "F0168-P01",
+    "F0168-P02",
     "F0169-P01",
+    "F0169-P02",
     "F0170-P01",
+    "F0170-P02",
     "F0171-P01",
+    "F0171-P02",
     "F0172-P01",
+    "F0172-P02",
     "F0173-P01",
+    "F0173-P02",
     "JU 27 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 7
+   "usageCount": 13
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Legendary-Collection/Snorlax-LC64",
@@ -8274,15 +8291,16 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "EC5 062 base",
     "F0104-P01",
+    "F0104-P02",
     "SPEC-0199",
     "U0605"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/National-Pokedex-Beginning-Set/Snorlax",
@@ -8338,13 +8356,14 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "F0248-P01",
+    "F0248-P02",
     "PCG9 001 base"
    ],
    "retrievedAt": null,
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Paldean-Fates/Snorlax-PAF202",
@@ -8438,16 +8457,17 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 6,
    "stableIds": [
     "BW7 055 base",
     "F0028-P01",
+    "F0028-P02",
     "F0029-P01",
     "SPEC-0197",
     "U0578"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Storm/Snorlax-PLS101",
@@ -9783,15 +9803,16 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "DP1  base",
     "F0101-P01",
+    "F0101-P02",
     "SPEC-0228",
     "U0476"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100-CoroCoro-Comic-Version/Snorlax-sN008",
@@ -9857,7 +9878,7 @@
     "F0379-P02",
     "F0380-P01",
     "F0381-P01",
-    "F0382-P01",
+    "F0382-P02",
     "SPEC-0216",
     "U0656",
     "sI100 342 V2"
@@ -10918,6 +10939,99 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": null,
+   "nonUrlEvidenceId": "evidence:cardmarket-product-image",
+   "providerId": "cardmarket-product-image",
+   "sourceTypes": [
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:151C:169:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS1DC:152:Snorlax-Collect-Collapse (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS1aC:110:Snorlax-Collect-Collapse (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS1aC:111:Snorlax-V-Swallow-Falling-Down (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS1aC:112:Snorlax-VMAX-G-Max-Fall (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS1aC:207:Snorlax-VMAX-G-Max-Fall (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS3DC:117:Snorlax-Slap-Push-Single-Strike-Tackle (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS5DC:097:Snorlax-Heavy-Impact (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS5DC:098:Snorlax-Heavy-Impact (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS5aC:093:Snorlax-Block-Collapse (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CS6bC:113:Snorlax-Unfazed-Fat-Thumping-Snore (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSAC:009:Snorlax-V-Swallow-Falling-Down (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSM1cC:102:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2cC:103:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2cC:170:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2cC:171:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSV10C:175:Hops-Snorlax-Extra-Helpings-Dynamic-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSV5C:115:Snorlax-Doll (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSV7C:158:Snorlax-But-First-Food-Heavy-Impact (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSVE1C:093:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSVE2C:122:Snorlax-Unfazed-Fat-Thumping-Snore (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSVH4C:a003:Snorlax-But-First-Food-Heavy-Impact (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSVH4C:p006:Snorlax-ex-Strength-Toss-and-Turn-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSVL1C:109:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:CSZC:018:Snorlax-Unfazed-Fat-Thumping-Snore (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:CN:S-Chinese:S-P/CS:061:Snorlax-Rolling-Tackle-Heavy-Impact (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:CLF:016:Snorlax-Collect-Collapse (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:EC5:062:Snorlax-Lolling-About-Continuous-Tumble (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:PCG1:074:Snorlax-Rest-Up-Collapse-Toss-and-Turn (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:PCG9:001:Snorlax-Delta-Species-Bedhead-Dozing (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:PJU:unnumbered:Snorlax-Thick-Skinned-Body-Slam (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:s1H:70:Snorlax-VMAX-G-Max-Fall (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:s5a:93:Snorlax-Gormandize-Body-Slam (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:sm9:115:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:JP:Japanese:xsv2a:143:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Cardmarket exact product image: image-transcription, exact print RELEASE:WEST:English:CLV:016:Snorlax-Collect-Collapse (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)"
+   ],
+   "dimensions": [
+    "artist"
+   ],
+   "stableIdCount": 40,
+   "stableIds": [
+    "151C 143 V1",
+    "151C 169 V2",
+    "CLF 016 base",
+    "CLV 016 base",
+    "CS1DC 152 base",
+    "CS1aC 110 base",
+    "CS1aC 111 V1",
+    "CS1aC 112 V1",
+    "CS1aC 207 V2",
+    "CS3DC 117 base",
+    "CS5DC 097 V1",
+    "CS5DC 098 V2",
+    "CS5aC 093 base",
+    "CS6bC 113 base",
+    "CSAC 009 base",
+    "CSM1cC 102 base",
+    "CSM2cC 103 V1",
+    "CSM2cC 170 V2",
+    "CSM2cC 171 V3",
+    "CSV10C 175 base",
+    "CSV5C 115 base",
+    "CSV7C 158 base",
+    "CSVE1C 093 base",
+    "CSVE2C 122 base",
+    "CSVH4C a003 base",
+    "CSVH4C p006 base",
+    "CSVL1C 109 base",
+    "CSZC 018 base",
+    "EC5 062 base",
+    "PCG1 074 base",
+    "PCG9 001 base",
+    "PJU  base",
+    "S-P/CS 061 base",
+    "s1H 70 V2",
+    "s5a 93 base",
+    "sm9 115 V3",
+    "xm2a 136 V1",
+    "xm2a 136 V2",
+    "xsv2a 143 V1",
+    "xsv2a 143 V2"
+   ],
+   "retrievedAt": null,
+   "usageCount": 40
   },
   {
    "canonicalUrl": "https://product-images.s3.cardmarket.com/51/20th/563078/563078.jpg",
@@ -12528,6 +12642,16 @@
    "sourceTypes": [
     "Inspected card photograph; external origin unknown",
     "Inspected physical specimen (photograph of the sealed card); GameStop bilingual Canadian distribution",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CS1aC:188:Snorlax-V-Swallow-Falling-Down (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2.1C:054:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2DC:213:Snorlax-Lazy-Eating-Big-Counter (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSM2bC:124:Snorlax-Lazy-Eating-Big-Counter (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSMPC:h009:Snorlax-Lazy-Eating-Big-Counter (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSUC:010:Snorlax-Unfazed-Fat-Thumping-Snore (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:CSVH1C:a001:Snorlax-Unfazed-Fat-Thumping-Snore (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch (verification/evidence/data-gaps-20261022/chinese/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:JP:Japanese:G2:unnumbered:Rockets-Snorlax-Restless-Sleep-Collapse (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Inspected physical specimen photograph: image-transcription, exact print RELEASE:JP:Japanese:PCG3:062:Rockets-Snorlax-ex-Dark-Healer-Poison-Claws-Collapse (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
     "Inspected reference photograph; original provider unspecified",
     "Owner-supplied physical card photograph",
     "Physical card, photographed sealed product",
@@ -12538,22 +12662,31 @@
     "retained Cardmarket product scan"
    ],
    "dimensions": [
+    "artist",
     "edition",
     "finish",
     "identity",
     "language"
    ],
-   "stableIdCount": 249,
+   "stableIdCount": 262,
    "stableIds": [
+    "CS1aC 188 V2",
+    "CSM2.1C 054 base",
+    "CSM2DC 213 base",
+    "CSM2bC 124 base",
+    "CSMPC h009 base",
+    "CSUC 010 base",
+    "CSVH1C a001 base",
     "F0002-P01",
     "F0028-P01",
     "F0054-P01",
     "F0094-P02",
-    "F0101-P01",
+    "F0101-P02",
     "F0104-P01",
+    "F0104-P02",
     "F0125-P02",
     "F0132-P01",
-    "F0142-P02",
+    "F0142-P01",
     "F0247-P02",
     "F0291-P02",
     "F0294-P02",
@@ -12574,11 +12707,13 @@
     "F0619-P01",
     "F0625-P02",
     "F0628-P02",
+    "G2  base",
     "ID:SV-P:117:V1",
     "ID:SV-P:117:V2",
     "KR:SM-P:140:base",
     "KR:XY-P:167:base",
     "KR:xsv2a:143/165:base",
+    "PCG3 062 base",
     "SPEC-0001",
     "SPEC-0002",
     "SPEC-0003",
@@ -12708,6 +12843,9 @@
     "SPEC-0603",
     "SPEC-0604",
     "SPEC-0630",
+    "SPEC-0632",
+    "SPEC-0633",
+    "SV-P/CS 277 base",
     "TW:AS5a:204/184:base",
     "TW:SM-P:053:base",
     "TW:s5a F:093/070:base",
@@ -12795,8 +12933,8 @@
     "U0775",
     "U0780"
    ],
-   "retrievedAt": "2026-10-08",
-   "usageCount": 413
+   "retrievedAt": "2026-10-22",
+   "usageCount": 441
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -13396,8 +13534,8 @@
    ],
    "stableIdCount": 5,
    "stableIds": [
+    "F0172-P01",
     "F0172-P02",
-    "F0172-P03",
     "SPEC-0524",
     "SPEC-0525",
     "U0092"
@@ -13651,7 +13789,7 @@
     "U0651"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 8
+   "usageCount": 9
   },
   {
    "canonicalUrl": "https://kream-phinf.pstatic.net/MjAyNjA1MjBfMTIz/MDAxNzc5MjU1ODY1OTEy.5aacKsnqMy7z3yBkiCaJyrNW05DXFr-hA_SDYz7g5Kgg.iFZ3CTp9VIDxdTXBaBtCBVzaRL3R_cxIVMfbXdCzejcg.PNG/a_bcb820ca09d84402b5cb44e1f932cdcf.png",
@@ -13762,13 +13900,14 @@
     "identity",
     "rarity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CN:CSVSC:046/066:base",
+    "F0498-P01",
     "SPEC-0631"
    ],
    "retrievedAt": "2026-10-08",
-   "usageCount": 3
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.facebook.com/groups/1434540320772743/posts/2109480509945384",
@@ -13809,7 +13948,6 @@
     "ID:S-P:052:base",
     "ID:S-P:100:base",
     "ID:S-P:356:base",
-    "ID:S10a I:058/071:base",
     "ID:S10b I:056/071:base",
     "ID:S8b I:126/184:base",
     "ID:SM-P:166:base",
@@ -13820,6 +13958,7 @@
     "ID:SV4s I:118/132:base",
     "ID:SV6s I:136/167:base",
     "ID:SV9s I:109/139:base",
+    "ID:s10a I:058/071:base",
     "ID:sc1D I:132/164:base",
     "ID:sc1D I:133/164:base",
     "ID:sc1a I:127/154:base",
@@ -13877,7 +14016,7 @@
     "TH:SM-P:083:base",
     "TH:SV-P:082/SV-P:base",
     "TH:SV9s:109/139:base",
-    "TH:s10a:058/071:base",
+    "TH:s10a T:058/071:base",
     "TH:s10b:056/071:base",
     "TH:s8b:126/184:base",
     "TH:sc1a T:127/154:base",
@@ -14000,10 +14139,10 @@
    "stableIdCount": 22,
    "stableIds": [
     "ID:S-P:356:base",
-    "ID:S10a I:058/071:base",
     "ID:S10b I:056/071:base",
     "ID:SV2a I:143/165:base",
     "ID:SV2a I:181/165:base",
+    "ID:s10a I:058/071:base",
     "SPEC-0364",
     "SPEC-0365",
     "SPEC-0366",
@@ -14017,7 +14156,7 @@
     "SPEC-0376",
     "TH:SH:026/038:base",
     "TH:SV-P:082/SV-P:base",
-    "TH:s10a:058/071:base",
+    "TH:s10a T:058/071:base",
     "TH:s10b:056/071:base",
     "TH:sv2a:143/165:base",
     "TH:sv2a:181/165:base"
@@ -14111,10 +14250,9 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 12,
+   "stableIdCount": 10,
    "stableIds": [
     "F0164-P02",
-    "F0164-P03",
     "F0166-P02",
     "F0167-P01",
     "F0167-P02",
@@ -14123,11 +14261,10 @@
     "SPEC-0401",
     "SPEC-0402",
     "SPEC-0403",
-    "SPEC-0404",
     "SPEC-0408"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 12
+   "usageCount": 10
   },
   {
    "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=10",
@@ -14179,24 +14316,6 @@
    "stableIds": [
     "F0164-P02",
     "SPEC-0403"
-   ],
-   "retrievedAt": "2026-08-28",
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://www.instagram.com/p/DWWTniCFMGW?img_index=13",
-   "nonUrlEvidenceId": null,
-   "providerId": "inspected-specimen",
-   "sourceTypes": [
-    "Third-party collector photograph"
-   ],
-   "dimensions": [
-    "identity"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "F0164-P03",
-    "SPEC-0404"
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 2
@@ -14446,7 +14565,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 413,
+   "stableIdCount": 430,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
@@ -14468,35 +14587,43 @@
     "F0079-P01",
     "F0080-P01",
     "F0093-P01",
-    "F0101-P01",
+    "F0101-P02",
     "F0104-P01",
+    "F0104-P02",
     "F0132-P01",
     "F0138-P01",
     "F0140-P01",
+    "F0142-P01",
     "F0142-P02",
     "F0146-P01",
     "F0148-P01",
     "F0153-P01",
     "F0161-P01",
+    "F0161-P02",
     "F0162-P01",
+    "F0162-P02",
     "F0163-P01",
+    "F0163-P02",
     "F0164-P01",
     "F0164-P02",
-    "F0164-P03",
     "F0165-P01",
+    "F0165-P02",
     "F0166-P01",
     "F0166-P02",
     "F0167-P01",
     "F0167-P02",
     "F0168-P01",
+    "F0168-P02",
     "F0169-P01",
+    "F0169-P02",
     "F0170-P01",
+    "F0170-P02",
     "F0171-P01",
     "F0171-P02",
     "F0172-P01",
     "F0172-P02",
-    "F0172-P03",
     "F0173-P01",
+    "F0173-P02",
     "F0174-P01",
     "F0174-P02",
     "F0214-P01",
@@ -14507,6 +14634,10 @@
     "F0221-P01",
     "F0223-P01",
     "F0224-P01",
+    "F0246-P01",
+    "F0246-P02",
+    "F0248-P01",
+    "F0248-P02",
     "F0289-P02",
     "F0301-P01",
     "F0328-P02",
@@ -14515,6 +14646,7 @@
     "F0352-P01",
     "F0367-P01",
     "F0372-P01",
+    "F0374-P01",
     "F0375-P01",
     "F0379-P01",
     "F0402-P02",
@@ -14525,6 +14657,7 @@
     "F0456-P03",
     "F0486-P01",
     "F0493-P01",
+    "F0498-P01",
     "F0500-P01",
     "F0504-P01",
     "F0506-P01",
@@ -14748,12 +14881,14 @@
     "SPEC-0629",
     "SPEC-0630",
     "SPEC-0631",
+    "SPEC-0632",
+    "SPEC-0633",
     "TH:AS1b:112/150:base",
     "TH:AS5a:142/184:base",
     "TH:MA4:091/123:base",
     "TH:MA6 T:121/130:base",
     "TH:SH:026/038:base",
-    "TH:s10a:058/071:base",
+    "TH:s10a T:058/071:base",
     "TH:s8b:126/184:base",
     "TH:sc1D T:132/164:base",
     "TH:sc1D T:133/164:base",
@@ -14857,13 +14992,14 @@
     "WEST:30C FR:119/128:base",
     "WEST:30C IT:119/128:base",
     "WEST:30C PT:119/128:base",
+    "override:owner-edition-split-20261022",
     "override:owner-jungle-number-finish-20260910",
     "override:owner-scan-review",
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-10-08",
-   "usageCount": 450
+   "retrievedAt": "2026-10-22",
+   "usageCount": 491
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -15405,7 +15541,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "ID:S10a I:058/071:base",
+    "ID:s10a I:058/071:base",
     "SPEC-0174",
     "U0346"
    ],
@@ -16099,7 +16235,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "ID:S10a I:058/071:base",
+    "ID:s10a I:058/071:base",
     "SPEC-0174",
     "U0346"
    ],
@@ -16576,7 +16712,7 @@
    "stableIds": [
     "F0328-P02",
     "SPEC-0264",
-    "TH:s10a:058/071:base",
+    "TH:s10a T:058/071:base",
     "U0347"
    ],
    "retrievedAt": "2026-08-28",
@@ -17153,7 +17289,7 @@
    "stableIdCount": 3,
    "stableIds": [
     "SPEC-0264",
-    "TH:s10a:058/071:base",
+    "TH:s10a T:058/071:base",
     "U0347"
    ],
    "retrievedAt": "2026-08-28",
@@ -19094,12 +19230,28 @@
    "nonUrlEvidenceId": "evidence:pokemon-card-jp",
    "providerId": "pokemon-card-jp",
    "sourceTypes": [
-    "Official Pokemon Japan card database (pokemon-card.com)"
+    "Official Pokemon Japan card database (pokemon-card.com)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:XY-P:261:Snorlax-Thick-Skinned-Body-Slam (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:m2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:m3:062:Snorlax-Gormandizer-Collapse (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:mC:567:Snorlax-But-First-Food-Heavy-Impact (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:mC:568:Snorlax-Lazy-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:mC:569:Hops-Snorlax-Extra-Helpings-Dynamic-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sm10:076:Snorlax-Lazy-Eating-Big-Counter (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv2a:143:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv2a:181:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv4K:059:Snorlax-Doll (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv4a:310:Snorlax-Voraciousness-Thudding-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv5a:051:Snorlax-But-First-Food-Heavy-Impact (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:sv9:075:Hops-Snorlax-Extra-Helpings-Dynamic-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:svIba:046:Snorlax-Lazy-Press (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)",
+    "Official Pokemon Japan card database (pokemon-card.com): database-credit, exact print RELEASE:JP:Japanese:svLN:010:Snorlax-Spike-Draw-Mega-Punch (verification/evidence/data-gaps-20261022/jp-west-artists/findings.json)"
    ],
    "dimensions": [
     "artist"
    ],
-   "stableIdCount": 36,
+   "stableIdCount": 52,
    "stableIds": [
     "20th 047 base",
     "BW-P 207 base",
@@ -19114,8 +19266,15 @@
     "S-P 156 base",
     "SM-P 1 base",
     "SM-P 297 base",
+    "XY-P 149 V1",
+    "XY-P 261 V2",
     "XY10 057 base",
     "XY2 066 base",
+    "m2a 136 base",
+    "m3 062 base",
+    "mC 567 base",
+    "mC 568 base",
+    "mC 569 base",
     "mP1 012 base",
     "s10a 058 V1",
     "s10a 077 V2",
@@ -19131,15 +19290,24 @@
     "sI100 341 V1",
     "sI100 342 V2",
     "sN 008 base",
+    "sm10 076 base",
     "sm9 066 V1",
     "sm9 106 V2",
     "smL 038 base",
+    "sv2a 143 V1",
+    "sv2a 181 V2",
+    "sv4K 059 base",
     "sv4a 145 V1",
+    "sv4a 310 V2",
+    "sv5a 051 base",
+    "sv9 075 base",
     "svG 021 base",
+    "svIba 046 base",
+    "svLN 010 base",
     "svM 094 base"
    ],
    "retrievedAt": null,
-   "usageCount": 36
+   "usageCount": 52
   },
   {
    "canonicalUrl": "https://www.30th.pokemon-card.com/images/m6a/cards/m6a_095_dl0fwwpi.png",
@@ -22341,6 +22509,23 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://www.pokemon.cn/tcg/event/16155.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-cn-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-bbea2621-c8f4-5647-b576-e309aa29d24a"
+   ],
+   "retrievedAt": "2026-10-22T15:45:17Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokemon.cn/tcg/other/17160.html",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-cn-official",
@@ -25133,6 +25318,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemon.gamespress.com/de/MEDIENMITTEILUNG-Neueste-Pokemon-Sammelkartenspiel-Erweiterung-Schwert",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-b119074a-c89f-5a60-a63b-f2bcdb419712"
+   ],
+   "retrievedAt": "2026-10-22T14:50:16Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemon.gamespress.com/de/Neue-Pokemon-Sammelkartenspiel-Erweiterung-Karmesin-Purpur-Reisegefahr",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -25150,6 +25352,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-Espada-y-Escudo-Voltaje-Vivido-la-nueva-expansion-d",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-939a0c46-ce08-5aa9-b77a-030f76fac62d"
+   ],
+   "retrievedAt": "2026-10-22T14:50:53Z",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemon.gamespress.com/es/ALERTA-INFORMATIVA-La-expansion-Escarlata-y-Purpura-151-del-Juego-de-C",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -25164,6 +25383,23 @@
     "item-18f233d7-5522-5d17-9efb-8f8372226d31"
    ],
    "retrievedAt": "2026-10-11T10:39:25.524822+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/fr/AVIS-MEDIAS-decouvrez-le-Pokemon-fabuleux-Zarude-et-les-Pokemon-Magnif",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-46088019-c3b9-55d5-a41a-8089d110da0b"
+   ],
+   "retrievedAt": "2026-10-22T14:46:35Z",
    "usageCount": 1
   },
   {
@@ -25215,6 +25451,23 @@
     "item-6bf73acf-2d3d-5208-8fdf-ce2196a6f1d1"
    ],
    "retrievedAt": "2026-10-11T10:39:25.400417+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemon.gamespress.com/it/AVVISO-STAMPA-la-nuova-espansione-Spada-e-Scudo---Voltaggio-Sfolgorant",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-5268bc9b-6a60-56d7-946b-e05018f43f1d"
+   ],
+   "retrievedAt": "2026-10-22T14:50:43Z",
    "usageCount": 1
   },
   {
@@ -26104,13 +26357,15 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
-    "item-e0ed177d-8f12-50b7-a00d-2eee0e101c20",
-    "item-ec142827-16de-575a-aebc-265df36cf588"
+    "item-281888ef-db2a-5886-830a-f485df32c4bd",
+    "item-742c2d85-2e52-5c6c-81b7-75fc95d51f03",
+    "item-7cc28ff9-2266-5297-a7f9-d433dab728f7",
+    "item-d32f31ec-64ca-5092-8932-18fc0135424b"
    ],
    "retrievedAt": "2026-10-11T10:34:41Z",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.pokepedia.fr/Pack_R%C3%A9compense_Play!_Pok%C3%A9mon_S%C3%A9rie_3",
@@ -26173,13 +26428,15 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
-    "item-b0c87f7f-0158-5de5-8b26-14a43dbd5608",
-    "item-bf2b9073-8aeb-5e49-98ed-d0d6cc92bbbc"
+    "item-183b9f73-2802-5a4a-8b68-003a6f509730",
+    "item-96118bc1-3692-53bc-b602-f68f050de8c3",
+    "item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3",
+    "item-af566729-f617-5fb0-aad2-97332471f252"
    ],
    "retrievedAt": "2026-10-11T10:33:41Z",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.pokewiki.de/Tin-Boxen",
@@ -27344,6 +27601,169 @@
    "usageCount": 6
   },
   {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0101-P01",
+    "SPEC-0634",
+    "U0476"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-17889077475043orzcom36.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "edition",
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0247-P01",
+    "SPEC-0640",
+    "U0628"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 9
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/56b684047de8f4e8ae5bbc66bcabcbdb4c80bd8041d5fdeee5facc47a6be40a4/i-img600x600-1788907877248541ty6b32488.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0247-P01",
+    "SPEC-0639",
+    "U0628"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/user/721f3e57d6617ed1e8c34d830b4a515d747dcd2df45d221bb515578d22af286e/i-img1200x1200-179066129141461zyu0w268187.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0247-P01",
+    "SPEC-0641",
+    "U0628"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/a76aae9897b0f1049af84b54c75892e768ddb49b/i-img900x1200-1791891211612ogfsau.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0028-P02",
+    "SPEC-0637",
+    "U0578"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/e3d937271f415148481443126e9c82c5a6338761/i-img675x674-1791253536559ctq4h4.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0028-P02",
+    "SPEC-0638",
+    "U0578"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442cepgbn.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "edition",
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0301-P02",
+    "SPEC-0635",
+    "U0751"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 9
+  },
+  {
+   "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0210/users/f295095e039561e1989634aae3725083c076b7a3/i-img1200x1200-1791671439442gbspfq.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "edition",
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0301-P02",
+    "SPEC-0636",
+    "U0751"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 9
+  },
+  {
    "canonicalUrl": "https://cdn-vault.fanaticscollect.com/2025/10/24/rm4/large/v1677878_2020102307383127R_93.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -27533,14 +27953,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
-    "ID:S10a I:058/071:base",
+    "F0327-P02",
+    "ID:s10a I:058/071:base",
     "SPEC-0560",
     "U0346"
    ],
    "retrievedAt": "2026-09-28",
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://down-id.img.susercontent.com/file/id-11134207-7r98y-lwug818tswp969",
@@ -27553,14 +27974,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
-    "ID:S10a I:058/071:base",
+    "F0327-P02",
+    "ID:s10a I:058/071:base",
     "SPEC-0550",
     "U0346"
    ],
    "retrievedAt": "2026-09-21",
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://down-id.img.susercontent.com/file/id-11134207-81zto-mr3r2xnw3ny9e7",
@@ -28577,9 +28999,10 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0173-P01",
+    "F0173-P02",
     "SPEC-0120",
     "U0094"
    ],
@@ -28808,13 +29231,14 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 3,
    "stableIds": [
     "CN:CS2DaC:038/053:base",
+    "F0374-P01",
     "SPEC-0623"
    ],
    "retrievedAt": "2026-10-07",
-   "usageCount": 2
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/OHcAAeSwDzZpssMP/s-l1600.jpg",
@@ -29025,14 +29449,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "CN:CS4DaC:342/414:base",
+    "F0382-P01",
     "SPEC-0156",
     "U0655"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/VzAAAOSw-mhmJCok/s-l1600.jpg",
@@ -29405,17 +29830,19 @@
     "Seller listing photograph"
    ],
    "dimensions": [
+    "edition",
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0165-P01",
+    "F0165-P02",
     "SPEC-0129",
     "U0122"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7
+   "usageCount": 12
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/mUwAAeSw3jFqVPvq/s-l1600.webp",
@@ -29504,14 +29931,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0165-P01",
+    "F0165-P02",
     "SPEC-0130",
     "U0122"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 7
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/prAAAeSwZeRp8Wo1/s-l1600.webp",
@@ -29600,7 +30028,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0164-P02",
+    "F0164-P01",
     "SPEC-0111"
    ],
    "retrievedAt": "2026-08-27",
@@ -29696,7 +30124,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0164-P03",
+    "F0164-P02",
     "SPEC-0110"
    ],
    "retrievedAt": "2026-08-27",
@@ -30958,19 +31386,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0163-P01",
-    "U0121"
+    "F0163-P02",
+    "U0121",
+    "override:tcgdex-edition-de-base2-11-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/de/cards/base2-27",
@@ -30978,19 +31410,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0170-P01",
-    "U0091"
+    "F0170-P02",
+    "U0091",
+    "override:tcgdex-edition-de-base2-27-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/de/cards/bw7-109",
@@ -31960,19 +32396,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0161-P01",
-    "U0119"
+    "F0161-P02",
+    "U0119",
+    "override:tcgdex-edition-en-base2-11-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/base2-27",
@@ -31980,19 +32420,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0168-P01",
-    "U0089"
+    "F0168-P02",
+    "U0089",
+    "override:tcgdex-edition-en-base2-27-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/base4-30",
@@ -32223,19 +32667,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0142-P01",
-    "U0285"
+    "F0142-P02",
+    "U0285",
+    "override:tcgdex-edition-en-gym1-33-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/lc-64",
@@ -33889,19 +34337,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0162-P01",
-    "U0120"
+    "F0162-P02",
+    "U0120",
+    "override:tcgdex-edition-fr-base2-11-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/fr/cards/base2-27",
@@ -33909,19 +34361,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0169-P01",
-    "U0090"
+    "F0169-P02",
+    "U0090",
+    "override:tcgdex-edition-fr-base2-27-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/fr/cards/bw7-109",
@@ -34985,6 +35441,25 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://api.tcgdex.net/v2/it/cards/base2-27",
+   "nonUrlEvidenceId": null,
+   "providerId": "tcgdex",
+   "sourceTypes": [
+    "TCGdex API card variant detail"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "F0171-P01",
+    "override:tcgdex-edition-it-base2-27-20261022"
+   ],
+   "retrievedAt": "2026-10-22",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://api.tcgdex.net/v2/it/cards/bw7-109",
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
@@ -35781,6 +36256,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/E5-062",
+   "nonUrlEvidenceId": null,
+   "providerId": "tcgdex",
+   "sourceTypes": [
+    "TCGdex API card variant detail"
+   ],
+   "dimensions": [
+    "finish",
+    "finish-override"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0104-P01",
+    "F0104-P02",
+    "override:tcgdex-edition-ja-E5-062-20261022"
+   ],
+   "retrievedAt": "2026-10-22",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/M2a-136",
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
@@ -35887,39 +36382,40 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0246-P01",
-    "U0525"
+    "F0246-P02",
+    "U0525",
+    "override:tcgdex-edition-ja-PCG1-074-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/PCG3-062",
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "F0247-P01",
     "U0628"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/PCG9-001",
@@ -35927,19 +36423,23 @@
    "providerId": "tcgdex",
    "sourceTypes": [
     "TCGdex API (open card database)",
+    "TCGdex API card variant detail",
     "TCGdex API card variants"
    ],
    "dimensions": [
     "finish",
+    "finish-override",
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
     "F0248-P01",
-    "U0631"
+    "F0248-P02",
+    "U0631",
+    "override:tcgdex-edition-ja-PCG9-001-20261022"
    ],
-   "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "retrievedAt": "2026-10-22",
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/ja/cards/SM10-076",
@@ -37401,12 +37901,13 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 1,
+   "stableIdCount": 2,
    "stableIds": [
-    "item-134d7cff-5acc-53a0-b171-a0e11019fc6d"
+    "item-bffdd1fe-0a91-5c0f-936f-54388d38c0b8",
+    "item-d6220148-0686-51cd-9413-ccedf795abf8"
    ],
    "retrievedAt": "2026-10-11T10:34:41Z",
-   "usageCount": 1
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://www.wog.ch/de/index.cfm/details/product/95982-Pokemon-Morpeko-Relaxo-Pin-Kollektion",

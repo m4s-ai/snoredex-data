@@ -415,9 +415,15 @@ class CardDiscoveryTests(unittest.TestCase):
         tier_two_urls = {
             row["canonicalUrl"]
             for row in source_registry["evidence"]
-            if row["providerId"] == "cardmarket-product-image"
+            if row["providerId"] == "cardmarket-product-image" and row["canonicalUrl"]
         }
         self.assertEqual(tier_two_urls, retained_urls)
+        # A printed illustrator credit read from a retained harvested product image attests the
+        # artwork, not a physical printing, so it needs no SPEC record (owner, 2026-10-22). Such
+        # non-URL product-image evidence may carry nothing but the artist dimension.
+        for row in source_registry["evidence"]:
+            if row["providerId"] == "cardmarket-product-image" and not row["canonicalUrl"]:
+                self.assertEqual(row["dimensions"], ["artist"])
         unreviewed = next(
             row for row in source_registry["evidence"]
             if row["canonicalUrl"]

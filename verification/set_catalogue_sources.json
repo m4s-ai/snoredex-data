@@ -7,13 +7,14 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 537,
+      "sourceRecords": 654,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 159,
+      "sourceFirstLocalSets": 157,
       "releaseDateRecords": 104,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
-      "printedSetSizeRecords": 14
+      "printedSetSizeRecords": 14,
+      "localSetNameRecords": 119
     }
   },
   "sourceRecords": [
@@ -10879,46 +10880,6 @@
       }
     },
     {
-      "sourceRecordId": "SET-SRC-SF-74E1378DF787",
-      "sourceKind": "source-first-local-set-profile",
-      "provider": "mixed-positive-evidence",
-      "providerRecordKey": "TH\u001fs10a",
-      "retrieved": "2026-08-28",
-      "raw": {
-        "localCode": "s10a",
-        "localName": null,
-        "locality": "TH",
-        "languages": [
-          "Thai"
-        ],
-        "scripts": [
-          "Thai"
-        ],
-        "printIds": [
-          "TH:s10a:058/071:base"
-        ],
-        "providers": [
-          "pokemon-card-asia"
-        ],
-        "sourceUrls": [
-          "https://asia.pokemon-card.com/th/card-search/detail/3495/"
-        ],
-        "printedSetSize": 71,
-        "printedSetSizeBasis": "the denominator printed on every observed card",
-        "localeSuffix": null,
-        "observedCollectorNumbers": [
-          "058/071"
-        ],
-        "observedCoverage": "exact positive Thai cards reviewed for issue #262, not a set enumeration",
-        "markAssetUrls": [
-          "https://asia.pokemon-card.com/th/card-img/mark/S10a_T@4x.png"
-        ],
-        "cardImageUrls": [
-          "https://asia.pokemon-card.com/th/card-img/th00003495.png"
-        ]
-      }
-    },
-    {
       "sourceRecordId": "SET-SRC-SF-756A53FA32A7",
       "sourceKind": "source-first-local-set-profile",
       "provider": "mixed-positive-evidence",
@@ -11967,23 +11928,31 @@
           "Thai"
         ],
         "printIds": [
-          "TH:s10a T:077/071:base"
+          "TH:s10a T:077/071:base",
+          "TH:s10a T:058/071:base"
         ],
         "providers": [
+          "pokemon-card-asia",
           "seller-listing-photo"
         ],
         "sourceUrls": [
+          "https://asia.pokemon-card.com/th/card-search/detail/3495/",
           "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at"
         ],
         "printedSetSize": 71,
         "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
         "localeSuffix": null,
         "observedCollectorNumbers": [
+          "058/071",
           "077/071"
         ],
-        "observedCoverage": "Exact card identity retained as SPEC-0520; not an enumeration of the set",
-        "markAssetUrls": [],
-        "cardImageUrls": []
+        "observedCoverage": "Exact card identity retained as SPEC-0520; not an enumeration of the set; merged with SET-SRC-SF-74E1378DF787 (exact positive Thai cards reviewed for issue #262, not a set enumeration) after the owner-approved local-set merge https://github.com/m4s-ai/snoredex-data/issues/431",
+        "markAssetUrls": [
+          "https://asia.pokemon-card.com/th/card-img/mark/S10a_T@4x.png"
+        ],
+        "cardImageUrls": [
+          "https://asia.pokemon-card.com/th/card-img/th00003495.png"
+        ]
       }
     },
     {
@@ -13012,23 +12981,30 @@
           "Latn"
         ],
         "printIds": [
+          "ID:s10a I:058/071:base",
           "ID:s10a I:077/071:base"
         ],
         "providers": [
+          "pokemon-card-asia",
           "seller-listing-photo"
         ],
         "sourceUrls": [
+          "https://asia.pokemon-card.com/id/card-search/detail/6007/",
           "https://shopee.co.id/POKEMON-TCG-INDONESIA-SNORLAX-CHR-S10A-077-071-i.86818069.23776860072"
         ],
         "printedSetSize": 71,
         "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
         "localeSuffix": null,
         "observedCollectorNumbers": [
+          "058/071",
           "077/071"
         ],
-        "observedCoverage": "Exact card identity retained as SPEC-0522; not an enumeration of the set",
-        "markAssetUrls": [],
+        "observedCoverage": "Exact card identity retained as SPEC-0522; not an enumeration of the set; merged with SET-SRC-SF-FED4F4C57464 (cards returned by the issue #257 Snorlax research, not an enumeration of the set) after the owner-approved local-set merge https://github.com/m4s-ai/snoredex-data/issues/431",
+        "markAssetUrls": [
+          "https://asia.pokemon-card.com/id/card-img/mark/S10a_I@4x.png"
+        ],
         "cardImageUrls": [
+          "https://asia.pokemon-card.com/id/card-img/id00006007.png",
           "https://down-id.img.susercontent.com/file/id-11134207-7qul5-lkgtut47t4mx58@resize_w900_nl.webp"
         ]
       }
@@ -14274,46 +14250,6 @@
         ],
         "cardImageUrls": [
           "https://asia.pokemon-card.com/id/card-img/id00003466.png"
-        ]
-      }
-    },
-    {
-      "sourceRecordId": "SET-SRC-SF-FED4F4C57464",
-      "sourceKind": "source-first-local-set-profile",
-      "provider": "mixed-positive-evidence",
-      "providerRecordKey": "ID\u001fS10a I",
-      "retrieved": "2026-08-27",
-      "raw": {
-        "localCode": "S10a I",
-        "localName": null,
-        "locality": "ID",
-        "languages": [
-          "Indonesian"
-        ],
-        "scripts": [
-          "Latn"
-        ],
-        "printIds": [
-          "ID:S10a I:058/071:base"
-        ],
-        "providers": [
-          "pokemon-card-asia"
-        ],
-        "sourceUrls": [
-          "https://asia.pokemon-card.com/id/card-search/detail/6007/"
-        ],
-        "printedSetSize": 71,
-        "printedSetSizeBasis": "the denominator printed beside the collector number on every observed card",
-        "localeSuffix": null,
-        "observedCollectorNumbers": [
-          "058/071"
-        ],
-        "observedCoverage": "cards returned by the issue #257 Snorlax research, not an enumeration of the set",
-        "markAssetUrls": [
-          "https://asia.pokemon-card.com/id/card-img/mark/S10a_I@4x.png"
-        ],
-        "cardImageUrls": [
-          "https://asia.pokemon-card.com/id/card-img/id00006007.png"
         ]
       }
     },
@@ -16340,6 +16276,2265 @@
         "status": "released",
         "marketScopeBasis": "Exact localized publisher product matched to retained card identity.",
         "note": "Localized product launch; prerelease and later reprints not asserted."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-14E7DEE7E35F",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fAS1b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/1605/",
+      "raw": {
+        "localCode": "AS1b",
+        "locality": "ID",
+        "localName": "Booster Pack Hantaman Pertama Set B",
+        "excerpt": "SnorlaxGX | 112/150 | mark SM_expantion_mark_as1b.png | Ada di produk Booster Pack Hantaman Pertama Set B",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/1605.html",
+        "sha256": "e524fc241b93313cbb999443c3c61e2812785f7f973315dfb06e2f8cfb987638",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"First Impact\" Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2E0E967F14F5",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fAS1D\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/3466/",
+      "raw": {
+        "localCode": "AS1D",
+        "locality": "ID",
+        "localName": "Starter Deck GX Hantaman Pertama",
+        "excerpt": "SnorlaxGX | 108/140 | mark SM_expantion_mark_as1D.png | Ada di produk Starter Deck GX Hantaman Pertama",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/3466.html",
+        "sha256": "497f00904ce32674109660db6ef5913985e031563f1c82124b1c4cdf283801ba",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Starter Deck GX \"First Impact\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C79D6BCFF671",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fAC3a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/2129/",
+      "raw": {
+        "localCode": "AC3a",
+        "locality": "ID",
+        "localName": "Booster Pack Koleksi TAG TEAM Set A",
+        "excerpt": "Snorlax | 145/205 | mark SM_expantion_mark_aC3aOUT.png | Ada di produk Booster Pack Koleksi TAG TEAM Set A",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/2129.html",
+        "sha256": "d23f27fcc03c35e215ac71e82379846f7b8f262d62226d5b32852e704e37b626",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"TAG TEAM Collection\" Set A"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-0E3C38A6E37D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fAC3D\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/2501/",
+      "raw": {
+        "localCode": "AC3D",
+        "locality": "ID",
+        "localName": "Starter Deck GX Koleksi TAG TEAM",
+        "excerpt": "Eevee & Snorlax GX | 120/172 | mark SM_expantion_mark_ac3Dout.png | Ada di produk Starter Deck GX Koleksi TAG TEAM",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/2501.html",
+        "sha256": "fe06a21bffde802ee5b32fee83a73bd586113ea00ba43f55fda89cae5b45ded9",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Starter Deck GX \"TAG TEAM Collection\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-95B564C00DEE",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fsc1a I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/454/",
+      "raw": {
+        "localCode": "sc1a I",
+        "locality": "ID",
+        "localName": "Booster Pack Pedang & Perisai Set A",
+        "excerpt": "Snorlax | 127/154 | mark S_mark_Indonesia_SC1a.png | Ada di produk Booster Pack Pedang & Perisai Set A",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/454.html",
+        "sha256": "1858005f925046870ae108887b1f9bdefdde3f4e7e76705133b9227b65e66d52",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Sword & Shield\" Set A"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-91EE3740BF48",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fsc1b I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/600/",
+      "raw": {
+        "localCode": "sc1b I",
+        "locality": "ID",
+        "localName": "Booster Pack Pedang & Perisai Set B",
+        "excerpt": "Snorlax V | 119/153 | mark S_mark_Indonesia_SC1b.png | Ada di produk Booster Pack Pedang & Perisai Set B",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/600.html",
+        "sha256": "81ee18603a615700f2c1e827b9b96bd68bb60435ed095366b664f8224145f79e",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Sword & Shield\" Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-75853BF549E5",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fsc1D I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/764/",
+      "raw": {
+        "localCode": "sc1D I",
+        "locality": "ID",
+        "localName": "V Starter Deck Pedang & Perisai",
+        "excerpt": "Snorlax | 132/164 | mark S_mark_Indonesia_SC1D.png | Ada di produk V Starter Deck Pedang & Perisai",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/764.html",
+        "sha256": "fb27392c3d1b5235fde535df5e63b3cb7fc2ea7e8982e07756f3e78aaa68c618",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck \"Sword & Shield\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-AF80A9D57357",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fsc3b I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/3982/",
+      "raw": {
+        "localCode": "sc3b I",
+        "locality": "ID",
+        "localName": "Koleksi VMAX Berkilau Set B",
+        "excerpt": "Snorlax | 126/158 | mark S_mark_Indonesia_SC3b.png | Ada di produk Koleksi VMAX Berkilau Set B",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/3982.html",
+        "sha256": "e431f35d6b7bc257375e5db2b17005c290009f8d3d3c996c14549123bee473c2",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Shiny VMAX Collection Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-809F304A392B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fscA I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/2796/",
+      "raw": {
+        "localCode": "scA I",
+        "locality": "ID",
+        "localName": "V Starter Deck Teman",
+        "excerpt": "Snorlax | 084/135 | mark S_mark_Indonesia_SCA.png | Ada di produk V Starter Deck Teman",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/2796.html",
+        "sha256": "7e74e825b551f53a6f9c03e6f8ce041210e49b26054e8a32028f746311f13c7a",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck \"Buddy/Friend\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8EDF41280F07",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fS-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/5067/",
+      "raw": {
+        "localCode": "S-P",
+        "locality": "ID",
+        "localName": "Kartu Promo",
+        "excerpt": "Snorlax V | 030/S-P | mark /アセット /1@4x.png | Ada di produk Kartu Promo",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/5067.html",
+        "sha256": "904acb5ca772909a59a37e8029cf01d8b1c1a237e4380befd02a11d22e72ab70",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Promo Card(s)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-AB246EB480C7",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fS8b I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/4795/",
+      "raw": {
+        "localCode": "S8b I",
+        "locality": "ID",
+        "localName": "High Class Booster Pack VMAX Klimaks",
+        "excerpt": "Snorlax | 126/184 | mark S_mark_Indonesia_S8b.png | Ada di produk High Class Booster Pack VMAX Klimaks",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/4795.html",
+        "sha256": "cc2df1e3aa6ad1deff9a97f89dda3ffbf413696b4fa7f6f232b911c2503c4799",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: High Class Booster Pack \"VMAX Climax\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8D82F97344DA",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fscD I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/4527/",
+      "raw": {
+        "localCode": "scD I",
+        "locality": "ID",
+        "localName": "V Starter Deck Kekuatan",
+        "excerpt": "Snorlax | 111/159 | mark S_mark_Indonesia_SCD.png | Ada di produk V Starter Deck Kekuatan",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/4527.html",
+        "sha256": "3d20b10ee877c69e184c2090a17c7349afcb2ee0fe6ff36127b0916e1d7a3499",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck \"Power\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-6A756C2B20D6",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fS10b I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/5772/",
+      "raw": {
+        "localCode": "S10b I",
+        "locality": "ID",
+        "localName": "Enhanced Booster Pack \"Pokémon GO\"",
+        "excerpt": "Snorlax | 056/071 | mark S_mark_Indonesia_S10b.png | Ada di produk Enhanced Booster Pack \"Pokémon GO\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/5772.html",
+        "sha256": "b0a8b0f47b296ee661fcec2fe01076d52f0d30d69d16c5525320fe0114a636a6",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-07374799D127",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fs10a I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/6007/",
+      "raw": {
+        "localCode": "s10a I",
+        "locality": "ID",
+        "localName": "Enhanced Booster Pack “Fantom Kegelapan”",
+        "excerpt": "Snorlax | 058/071 | mark /S10a_I@4x.png | Ada di produk Enhanced Booster Pack “Fantom Kegelapan”",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/6007.html",
+        "sha256": "6f02600f0a017f84d3d86d0233d7d06e61f04ae2cbf341e7d3d874cdf3fdb276",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Enhanced Booster Pack \"Dark Phantasma\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9CC4A8F41A46",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV2a I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/8554/",
+      "raw": {
+        "localCode": "SV2a I",
+        "locality": "ID",
+        "localName": "Enhanced Booster Pack \"Kartu Pokémon 151\"",
+        "excerpt": "Snorlax | 143/165 | mark /SV2a /I@4x.png | Ada di produk Enhanced Booster Pack \"Kartu Pokémon 151\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/8554.html",
+        "sha256": "f1106e443254e88437b89469126f7ae87740b88668dee3a23decb2102e95d4e0",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Enhanced Booster Pack \"Pokémon Card 151\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-DD8321A98D76",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV4s I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/9774/",
+      "raw": {
+        "localCode": "SV4s I",
+        "locality": "ID",
+        "localName": "Pertemuan Paradoks",
+        "excerpt": "Boneka Snorlax | 118/132 | mark IDN_SV4s_exp.png | Ada di produk Pertemuan Paradoks",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/9774.html",
+        "sha256": "151a14a62297162914a2ec9f03ead14359eee13c3ecc992c1b8abd29b84ed1dd",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: \"Paradox Encounter\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-389CCF9F0FA8",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV4a I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/10045/",
+      "raw": {
+        "localCode": "SV4a I",
+        "locality": "ID",
+        "localName": "High Class Booster Pack \"Harta Berkilau ex\"",
+        "excerpt": "Snorlax | 145/190 | mark sv4a_id.png | Ada di produk High Class Booster Pack \"Harta Berkilau ex\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/10045.html",
+        "sha256": "ebe52e58248570a331e0e2ac3510e909267e1f3f1cca43d18d9d6d1c55ecfbc5",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: High Class Booster Pack \"Shiny Treasure ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-35DE6EDC2FA5",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV6s I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/13757/",
+      "raw": {
+        "localCode": "SV6s I",
+        "locality": "ID",
+        "localName": "Booster Pack \"Topeng Transfigurasi\"",
+        "excerpt": "Snorlax | 136/167 | mark exp_SV6s_I.png | Ada di produk Booster Pack \"Topeng Transfigurasi\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/13757.html",
+        "sha256": "ca35b22b92118d5ec494e1f4272469be57e4b45d9676eed8688e797b88404c3a",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Transfiguration Mask\" (Mask of Change)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-BA91E5FE14E9",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSVM I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/15253/",
+      "raw": {
+        "localCode": "SVM I",
+        "locality": "ID",
+        "localName": "Starter Deck ex Ganda \"Generations\"",
+        "excerpt": "Snorlax ex | 094/175 | mark IDN_SVMI_expansion mark.png | Ada di produk Starter Deck ex Ganda \"Generations\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/15253.html",
+        "sha256": "df93fba341c8e3ba692ecd3988e13eba3caf52d1da54f9c4b039d1349240cac8",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Double Starter Deck ex \"Generations\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9B4CB2FC3B31",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV9s I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/15784/",
+      "raw": {
+        "localCode": "SV9s I",
+        "locality": "ID",
+        "localName": "Booster Pack \"Ikatan Takdir\"",
+        "excerpt": "Snorlax <Hop> | 109/139 | mark idn_SV9s_exp.png | Ada di produk Booster Pack \"Ikatan Takdir\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/15784.html",
+        "sha256": "7ec1b9aeaa3b092698207db123140c2895e4e6be20df25a5ac974294147e073a",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Bonds of Destiny\" (Battle Partners)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-94DB49BA1374",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fMA3 I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/detail/17374/",
+      "raw": {
+        "localCode": "MA3 I",
+        "locality": "ID",
+        "localName": "High Class Booster Pack \"Evolusi Mega Impian ex\"",
+        "excerpt": "Snorlax <Hop> | 136/193 | mark idn_ma3i_exp.png | Ada di produk High Class Booster Pack \"Evolusi Mega Impian ex\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-id-snorlax/details/17374.html",
+        "sha256": "0a3d55035c7eda395dcbf6d3d099ec6aae0c883ffe4f0614d3344e391fe14934",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: High Class Booster Pack \"Mega Evolution Dream ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-3D8B18553491",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsc1a T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/127/",
+      "raw": {
+        "localCode": "sc1a T",
+        "locality": "TH",
+        "localName": "การ์ดเสริม \"ซอร์ด แอนด์ ชีลด์\" ชุด A",
+        "excerpt": "คาบิกอน | 127/154 | mark Sc1a.png | รวมอยู่ในชุด การ์ดเสริม \"ซอร์ด แอนด์ ชีลด์\" ชุด A",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/127.html",
+        "sha256": "1d8822f304febe263ee930aad4fad52524e8e976632c019a9f332058a2739740",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster \"Sword and Shield\" Set A"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-3E7C83432E53",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsc1b T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/273/",
+      "raw": {
+        "localCode": "sc1b T",
+        "locality": "TH",
+        "localName": "การ์ดเสริม \"ซอร์ด แอนด์ ชีลด์\" ชุด B",
+        "excerpt": "คาบิกอนV | 119/153 | mark Sc1b.png | รวมอยู่ในชุด การ์ดเสริม \"ซอร์ด แอนด์ ชีลด์\" ชุด B",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/273.html",
+        "sha256": "cbab06168ebbc8229522e346a6ab31a704fb42eaec875f3388b255bc8cc8bf09",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster \"Sword and Shield\" Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-EF5654C14586",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsc1D T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/439/",
+      "raw": {
+        "localCode": "sc1D T",
+        "locality": "TH",
+        "localName": "V Starter Deck \"ซอร์ด แอนด์ ชีลด์\"",
+        "excerpt": "คาบิกอน | 132/164 | mark SC1D.png | รวมอยู่ในชุด V Starter Deck \"ซอร์ด แอนด์ ชีลด์\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/439.html",
+        "sha256": "7486a7fffd7012fdbfbd5a74fcb54d3a5f7caee956e13c9bb66a92b50c971f4f",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck \"Sword and Shield\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8F1B4E33045E",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsc3b T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/1006/",
+      "raw": {
+        "localCode": "sc3b T",
+        "locality": "TH",
+        "localName": "ไชนี VMAX คอลเลกชัน ชุด B",
+        "excerpt": "คาบิกอน | 126/158 | mark Sc3b.png | รวมอยู่ในชุด ไชนี VMAX คอลเลกชัน ชุด B",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/1006.html",
+        "sha256": "5905c8a0d986955ce9099c05eab22f4677d532721f5f934ad1ffd124780f9378",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Shiny VMAX Collection Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-B54A564A7556",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fscA T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/1806/",
+      "raw": {
+        "localCode": "scA T",
+        "locality": "TH",
+        "localName": "V Starter Deck บัดดี้",
+        "excerpt": "คาบิกอน | 084/135 | mark SCA.png | รวมอยู่ในชุด V Starter Deck บัดดี้",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/1806.html",
+        "sha256": "44c83ecc63b08df2c1a4a96bad8e95485fcf182526f20a541b192e16ce60014a",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck Buddy"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-530324A6AE1A",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fSH\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/3343/",
+      "raw": {
+        "localCode": "SH",
+        "locality": "TH",
+        "localName": "โปเกมอนเทรดดิ้งการ์ดเกม ชุดแฟมิลีแฮปปี้",
+        "excerpt": "คาบิกอน | 026/038 | mark /SH@4x.png | รวมอยู่ในชุด โปเกมอนเทรดดิ้งการ์ดเกม ชุดแฟมิลีแฮปปี้",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/3343.html",
+        "sha256": "77c789015ea7f77eadb996365dcb1c126129f1e46e26017165c5f20ff3609168",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Pokémon Trading Card Game \"Family Happy\" set"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-3DB2E1D1AD0B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fs8b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/2468/",
+      "raw": {
+        "localCode": "s8b",
+        "locality": "TH",
+        "localName": "VMAX ไคลแมกซ์",
+        "excerpt": "คาบิกอน | 126/184 | mark /アセット /11@4x.png | รวมอยู่ในชุด VMAX ไคลแมกซ์",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/2468.html",
+        "sha256": "853e377113b29e914bd4683abe6cad1623a2980089afb0e2ccb7ebe996702c2d",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: VMAX Climax"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2CCE18EEB36D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fscD T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/2297/",
+      "raw": {
+        "localCode": "scD T",
+        "locality": "TH",
+        "localName": "V Starter Deck เกรทพาวเวอร์",
+        "excerpt": "คาบิกอน | 111/159 | mark /アセット /12@4x.png | รวมอยู่ในชุด V Starter Deck เกรทพาวเวอร์",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/2297.html",
+        "sha256": "fcda2cf44b03269cfba15abf184d39b12e240207edb230868e0ef1807b425074",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: V Starter Deck Great Power"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5EAC8996870A",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fs10b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/3281/",
+      "raw": {
+        "localCode": "s10b",
+        "locality": "TH",
+        "localName": "Pokémon GO",
+        "excerpt": "คาบิกอน | 056/071 | mark /S10bT@4x.png | รวมอยู่ในชุด Pokémon GO",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/3281.html",
+        "sha256": "5777969657e94aa9d2f07ba126e42fcb9682e8ee7b523ef38b2a6ea2df16d9a7",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-EC00FB858813",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fs10a T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/3495/",
+      "raw": {
+        "localCode": "s10a T",
+        "locality": "TH",
+        "localName": "อันธการลวงตา",
+        "excerpt": "คาบิกอน | 058/071 | mark /S10a_T@4x.png | รวมอยู่ในชุด อันธการลวงตา",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/3495.html",
+        "sha256": "9fb9f7ffdd0d27ae445437a3014e7f638b6dfd0ddcf93c6d5e742bf967593660",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: \"Illusory Darkness\" (Dark Phantasma)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-A2FC770C98E2",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsv2a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/6241/",
+      "raw": {
+        "localCode": "sv2a",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริมเพิ่มความแกร่ง \"โปเกมอนการ์ด 151\"",
+        "excerpt": "คาบิกอน | 143/165 | mark /SV2a /T@4x.png | รวมอยู่ในชุด การ์ดชุดเสริมเพิ่มความแกร่ง \"โปเกมอนการ์ด 151\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/6241.html",
+        "sha256": "3c2213e6b7a60b5eac84d0f7f06a6f9395b5d4783fd8ab81f7edc2b5ee2ab3b4",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Strength Expansion Pack \"Pokémon Card 151\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8FF81355527C",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fSV-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/6835/",
+      "raw": {
+        "localCode": "SV-P",
+        "locality": "TH",
+        "localName": "การ์ดโปรโม สการ์เล็ต แอนด์ ไวโอเล็ต",
+        "excerpt": "คาบิกอน | 082/SV-P | mark PROMO.MARK.png | รวมอยู่ในชุด การ์ดโปรโม สการ์เล็ต แอนด์ ไวโอเล็ต",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/6835.html",
+        "sha256": "64d8174b3839a0cf4a27aeb4504d41ad25579de75956a1083b42b23b65e62cfa",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Promo Cards Scarlet and Violet"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-DC1168096244",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsv4K\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/7440/",
+      "raw": {
+        "localCode": "sv4K",
+        "locality": "TH",
+        "localName": "เสียงคำรามจากอดีต",
+        "excerpt": "ตุ๊กตาคาบิกอน | 059/066 | mark th_SV4K_exp.png | รวมอยู่ในชุด เสียงคำรามจากอดีต",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/7440.html",
+        "sha256": "7350ff06d3b41da85056a6ecedbb85545bc7c5297c4153141d38ef2edd026fa2",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: \"Roar from the Past\" (Ancient Roar)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-CDC9FAE27A7B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsv4a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/7755/",
+      "raw": {
+        "localCode": "sv4a",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริมไฮคลาส \"ไชนีเทรเชอร์ex\"",
+        "excerpt": "คาบิกอน | 145/190 | mark sv4a_th.png | รวมอยู่ในชุด การ์ดชุดเสริมไฮคลาส \"ไชนีเทรเชอร์ex\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/7755.html",
+        "sha256": "9faa53c13ffecbcd3e49fd9f8e9a5cef825559cafd704a530557bf42980ceab7",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: High Class Booster Pack \"Shiny Treasure ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C37FFE6A41FF",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsv5a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/8167/",
+      "raw": {
+        "localCode": "sv5a",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริมเพิ่มความแกร่ง \"หมอกสีชาด\"",
+        "excerpt": "คาบิกอน | 051/066 | mark exp_sv5a_t.png | รวมอยู่ในชุด การ์ดชุดเสริมเพิ่มความแกร่ง \"หมอกสีชาด\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/8167.html",
+        "sha256": "4b1f7f81447b2f75906aa37679e8b30402b58364d497de53d2e154b9f849110f",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Strength Expansion Pack \"Crimson Haze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-7CCF7812836A",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fsvM\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/10595/",
+      "raw": {
+        "localCode": "svM",
+        "locality": "TH",
+        "localName": "Starter Deck ดับเบิลex Generations!",
+        "excerpt": "คาบิกอนex | 094/175 | mark SVMT_exp.png | รวมอยู่ในชุด Starter Deck ดับเบิลex Generations!",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/10595.html",
+        "sha256": "373149cf4d7dc17404bc30dc8600a7322ecc7b317d48581c9316415e126c13c8",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Starter Deck Double ex \"Generations!\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-BB012ECA5483",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fSV9s\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/11193/",
+      "raw": {
+        "localCode": "SV9s",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริม \"สายใยแห่งโชคชะตา\"",
+        "excerpt": "คาบิกอน <ของฮ็อป> | 109/139 | mark th_SV9s_exp.png | รวมอยู่ในชุด การ์ดชุดเสริม \"สายใยแห่งโชคชะตา\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/11193.html",
+        "sha256": "24fdfe80d4caed403a473082256d7b7326823c65267eecbf72460d43d7cb9ce2",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Bonds of Destiny\" (Battle Partners)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-A7D28C78B762",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fMA3\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/13046/",
+      "raw": {
+        "localCode": "MA3",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริมไฮคลาส \"วิวัฒนาการเมก้า ดรีมex\"",
+        "excerpt": "คาบิกอน <ของฮ็อป> | 136/193 | mark  th_ma3t_exp.png | รวมอยู่ในชุด การ์ดชุดเสริมไฮคลาส \"วิวัฒนาการเมก้า ดรีมex\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/13046.html",
+        "sha256": "8b683d93941aadbf5416fc49ba76deb3bf3597955b08447d8f85ab6f0123bf0e",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: High Class Booster Pack \"Mega Evolution Dream ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-7F118E9DEC2E",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fMA4\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/detail/13857/",
+      "raw": {
+        "localCode": "MA4",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริม \"วอยด์บลาสต์\"",
+        "excerpt": "คาบิกอน | 091/123 | mark th_ma4t_exp.png | รวมอยู่ในชุด การ์ดชุดเสริม \"วอยด์บลาสต์\"",
+        "evidencePath": "verification/runs/card-discovery/20260909T163334Z/raw/pokemon-asia-th-snorlax/details/13857.html",
+        "sha256": "d05570c8feee7f56a1a387165e68284e2c118a130ac398ef9b880e8352df5889",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Void Blast\" (Inferno X)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-4D1F2C374617",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fAC3b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/list/?keyword=Snorlax",
+      "raw": {
+        "localCode": "AC3b",
+        "locality": "ID",
+        "localName": "Booster Pack Koleksi TAG TEAM Set B",
+        "excerpt": "value=\"AC3b\" > <label for=\"checkbox30\">Booster Pack Koleksi TAG TEAM Set B</label>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/id-search-snorlax-p1.html",
+        "sha256": "6a93d31ebd15ef7248dfd7e4483cff7dc091d006e0945a9a7412a6e7d7820fa6",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"TAG TEAM Collection\" Set B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-6ADB512C5ECF",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fs5a I\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/list/?keyword=Snorlax",
+      "raw": {
+        "localCode": "s5a I",
+        "locality": "ID",
+        "localName": "Dua Pilar Petarung",
+        "excerpt": "value=\"S5a\" > <label for=\"checkbox10\">Dua Pilar Petarung</label>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/id-search-snorlax-p1.html",
+        "sha256": "6a93d31ebd15ef7248dfd7e4483cff7dc091d006e0945a9a7412a6e7d7820fa6",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: \"Two Pillar Fighters\" (Matchless Fighters)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-E5FA04DF9E8E",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "ID\u001fSV-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/id/card-search/list/?keyword=Snorlax",
+      "raw": {
+        "localCode": "SV-P",
+        "locality": "ID",
+        "localName": "Kartu Promo",
+        "excerpt": "value=\"SV-P\" > <label for=\"checkbox54\">Kartu Promo</label>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/id-search-snorlax-p1.html",
+        "sha256": "6a93d31ebd15ef7248dfd7e4483cff7dc091d006e0945a9a7412a6e7d7820fa6",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Promo Card(s)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-196EC40D2D2A",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fs5a T\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/card-search/list/?keyword=%E0%B8%84%E0%B8%B2%E0%B8%9A%E0%B8%B4%E0%B8%81%E0%B8%AD%E0%B8%99",
+      "raw": {
+        "localCode": "s5a T",
+        "locality": "TH",
+        "localName": "สองยอดนักสู้",
+        "excerpt": "value=\"S5a\" > <label for=\"checkbox10\">สองยอดนักสู้</label>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/th-search-kabigon-p1.html",
+        "sha256": "ed05069340e013f7f0c211e95ce45015f1e13e3a4bcb1630c98e195c73fb37a8",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: \"Two Top Fighters\" (Matchless Fighters)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-DAC5A4F325E4",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fAS1b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/post_3.html",
+      "raw": {
+        "localCode": "AS1b",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริม (ชุด B)",
+        "excerpt": "การ์ดเกม การ์ดชุดเสริม (ชุด B) นี่คือ การ์ดชุดเสริม ที่ถูกออกแบบมา เพื่อให้ผู้เล่นได้ค้นหาการ์ด อันเป็นตัวช่วยให้มุ่งสู่ชัยชนะ มาจัดสำรับต่อสู้อันทรงพลังที่ไม่มีใครเหมือนกันเถอะ! ในการ์ตชุดนี้จะได้พบกับ การ์ด Pokémon GX อันทรงพลังอย่าง คาบิกอน! ในการ์ดชุดเสริมนี้ จะมีเฉพาะโปเกมอนประเภท “พลังจิต” “ต่อสู้” “ความมืด” “โลหะ” “แฟรี่” และ “ไร้สี” เท่านั้น การ์ดชุดเสริม (Booster Pack) ประกอบไปด้วย การ์ดท",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/th-archive-sm-post_3.html",
+        "sha256": "ecdf2c8001ffaaab015842f84cd5014b3ed42f902b0525afcb37455549ec8262",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack (Set B)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C737316C1950",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TH\u001fAS5a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/th/archive/card/sun_moon_series/booster_pack_5a.html",
+      "raw": {
+        "localCode": "AS5a",
+        "locality": "TH",
+        "localName": "การ์ดชุดเสริม \"ดับเบิ้ลเบิร์ส\" (ชุด A)",
+        "excerpt": "การ์ดเกม การ์ดชุดเสริม \"ดับเบิ้ลเบิร์ส\" (ชุด A) พบกับโปเกมอนเทรดดิ้งการ์ดเกมชุดใหม่ล่าสุด พร้อมด้วยการ์ด TAG TEAM! การ์ดชุดเสริม \"ดับเบิ้ลเบิร์ส\" จะประกอบด้วยการ์ดคละประเภทแบบสุ่ม อีกทั้ง ยังมีการ์ด \"TAG TEAM\" ที่ทรงพลังอย่างมาก ให้ผู้เล่นสามารถวางกลยุทธ์เพื่อคว้าชัยชนะได้อย่างหลากหลายมากยิ่งขึ้น นอกจากนี้ ผู้เล่นยังสามารถนำการ์ดชุดนี้และสำรับการ์ด \"GX Starter Deck\" มาจัดชุดเป็นสำรับการ์ดที่ทรงพลั",
+        "evidencePath": "verification/evidence/data-gaps-20261022/id-th-sets/raw/th-archive-sm-booster_pack_5a.html",
+        "sha256": "9a066b8d74a7b809b8c4ba499275fa4d24e4e3bc592eb7c13f4bdd2d94d13384",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
+        "translation": "translation: Booster Pack \"Double Burst\" (Set A)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-82CB4EB24B24",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fDP\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/PR2010001006",
+      "raw": {
+        "localCode": "DP",
+        "locality": "KR",
+        "localName": "DP 프로모 카드",
+        "excerpt": "\"product\": \"DP 프로모 카드\" (identity DP 6 잠만보 LV.X)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) DP Promo Card"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-1A53692B0E88",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fBW7\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2013001055",
+      "raw": {
+        "localCode": "BW7",
+        "locality": "KR",
+        "localName": "BW 확장팩 제7탄 「플라스마게일」",
+        "excerpt": "\"product\": \"BW 확장팩 제7탄 「플라스마게일」\" (identity BW7 055/070 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) BW Expansion Pack 7 \"Plasma Gale\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-24DE93B0A594",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fFXY\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/ST2014001026",
+      "raw": {
+        "localCode": "FXY",
+        "locality": "KR",
+        "localName": "XY 퍼스트세트 「도치마론의 진화」",
+        "excerpt": "\"product\": \"XY 퍼스트세트 「도치마론의 진화」\" (identity FXY 026/036 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) XY First Set \"Chespin's Evolution\" (lit. 도치마론 = Chespin)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-CBE9CF4BD8E1",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fXY2\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2014002066",
+      "raw": {
+        "localCode": "XY2",
+        "locality": "KR",
+        "localName": "XY 확장팩 제2탄 「와일드 블레이즈」",
+        "excerpt": "\"product\": \"XY 확장팩 제2탄 「와일드 블레이즈」\" (identity XY2 066/080 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) XY Expansion Pack 2 \"Wild Blaze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5002E420830F",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001f20th\u001fname",
+      "retrieved": "2026-10-08",
+      "sourceUrl": "https://pokemonkorea.co.kr/templates/default/content_image/card/exp/20TH_teaser_B_2.jpg",
+      "raw": {
+        "localCode": "20th",
+        "locality": "KR",
+        "localName": "포켓몬 카드 게임 XY BREAK 트레이너 세트 20TH ANNIVERSARY",
+        "excerpt": "포켓몬 카드 게임 XY BREAK 트레이너 세트 / 20TH ANNIVERSARY ... POKÉMON CARDGAME TRAINERS SET 20th Anniversary ... 2월 27일 대발매!",
+        "evidencePath": "verification/evidence/continued-research-20261008/20th-teaser.jpg",
+        "sha256": "0d9526f5b5e99a3f76e1ed21c12b8cfa1e1a921d4a4eb3dad69fcf1861cef1c7",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Pokémon Card Game XY BREAK Trainer Set 20th Anniversary"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-01897CD2200B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fXY10\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2016020057",
+      "raw": {
+        "localCode": "XY10",
+        "locality": "KR",
+        "localName": "XY BREAK 확장팩 제10탄 「초능력의 제왕」",
+        "excerpt": "\"product\": \"XY BREAK 확장팩 제10탄 「초능력의 제왕」\" (identity XY10 057/078 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) XY BREAK Expansion Pack 10 \"Awakening Psychic King\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-D753EF979A26",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fSM-P\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/SMP0000000017",
+      "raw": {
+        "localCode": "SM-P",
+        "locality": "KR",
+        "localName": "썬&문 프로모 카드",
+        "excerpt": "\"product\": \"썬&문 프로모 카드 포켓몬 카드 게임 썬&문 카드 박스 세트 「잠만보 GX」\"",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sun & Moon Promo Card"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-80FB67F610FD",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fXY-P\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/PR2015001167",
+      "raw": {
+        "localCode": "XY-P",
+        "locality": "KR",
+        "localName": "XY 프로모 카드",
+        "excerpt": "\"product\": \"XY 프로모 카드\" (identity XY-P 167/XY-P 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) XY Promo Card"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-69308BA9D343",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsm9\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2019001066",
+      "raw": {
+        "localCode": "sm9",
+        "locality": "KR",
+        "localName": "썬&문 확장팩 「태그볼트」",
+        "excerpt": "\"product\": \"썬&문 확장팩 「태그볼트」\" (identity sm9 066/095 이브이&잠만보 GX)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sun & Moon Expansion Pack \"Tag Bolt\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-79B26FB0F710",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsmL\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2019006059",
+      "raw": {
+        "localCode": "smL",
+        "locality": "KR",
+        "localName": "패밀리 포켓몬 카드 게임 「뮤츠 GX 덱」",
+        "excerpt": "\"product\": \"패밀리 포켓몬 카드 게임 「뮤츠 GX 덱」\" (identity smL 038/051 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Family Pokémon Card Game \"Mewtwo GX Deck\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C864F0B08CBE",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsm10\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2019007076",
+      "raw": {
+        "localCode": "sm10",
+        "locality": "KR",
+        "localName": "썬&문 확장팩 「더블블레이즈」",
+        "excerpt": "\"product\": \"썬&문 확장팩 「더블블레이즈」\" (identity sm10 076/095 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sun & Moon Expansion Pack \"Double Blaze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-890418D79821",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fSM30A\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2019018060",
+      "raw": {
+        "localCode": "SM30A",
+        "locality": "KR",
+        "localName": "썬&문 「랜덤30장덱」",
+        "excerpt": "\"product\": \"썬&문 「랜덤30장덱」\" (identity SM30A 060/080 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sun & Moon \"Random 30-Card Deck\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-62D9A23904AA",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsA\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2020001010",
+      "raw": {
+        "localCode": "sA",
+        "locality": "KR",
+        "localName": "소드&실드 스타터 세트 V 풀",
+        "excerpt": "\"product\": \"소드&실드 스타터 세트 V 풀\" (identity sA 010/023 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Starter Set V Grass"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-CFD775BE8AA2",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs1H\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2020003045",
+      "raw": {
+        "localCode": "s1H",
+        "locality": "KR",
+        "localName": "소드&실드 확장팩 「실드」",
+        "excerpt": "\"product\": \"소드&실드 확장팩 「실드」\" (identity s1H 045/060 잠만보 V)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Expansion Pack \"Shield\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-BA24833D7DA0",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs2\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2020005077",
+      "raw": {
+        "localCode": "s2",
+        "locality": "KR",
+        "localName": "소드&실드 확장팩 「반역크래시」",
+        "excerpt": "\"product\": \"소드&실드 확장팩 「반역크래시」\" (identity s2 077/096 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Expansion Pack \"Rebellion Crash\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-E4BE7B9C482B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs4\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2020014084",
+      "raw": {
+        "localCode": "s4",
+        "locality": "KR",
+        "localName": "소드&실드 확장팩 「앙천의 볼트태클」",
+        "excerpt": "\"product\": \"소드&실드 확장팩 「앙천의 볼트태클」\" (identity s4 084/100 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Expansion Pack \"Amazing Volt Tackle\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-570417D845AA",
+      "sourceKind": "local-set-name-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "KR\u001fs5a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+      "raw": {
+        "localCode": "s5a",
+        "locality": "KR",
+        "localName": "쌍벽의 파이터",
+        "excerpt": "| 双璧のファイター\\n| {{TCG|Peerless Fighters}}\\n| 雙璧戰士\\n| Dua Pilar Petarung\\n| สองยอดนักสู้\\n| 쌍벽의 파이터",
+        "evidencePath": "verification/runs/card-discovery/20260813T082006Z/raw/bulbapedia-historical-nl-snorlax/index-revision-4567865.json",
+        "sha256": "e614174a7a86a47fcdaed918aa8f2692eef3fb3ce875a6cf85fd90cb5a04a8a8",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Peerless Fighters (lit. \"Fighters of the Twin Walls\")"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-BBB638F1D066",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsH\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2021013039",
+      "raw": {
+        "localCode": "sH",
+        "locality": "KR",
+        "localName": "소드&실드 「패밀리 포켓몬 카드 게임」",
+        "excerpt": "\"product\": \"소드&실드 「패밀리 포켓몬 카드 게임」\" (identity sH 038/053 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield \"Family Pokémon Card Game\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5950448260B7",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs8b\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2022001126",
+      "raw": {
+        "localCode": "s8b",
+        "locality": "KR",
+        "localName": "소드&실드 하이클래스팩 「VMAX 클라이맥스」",
+        "excerpt": "\"product\": \"소드&실드 하이클래스팩 「VMAX 클라이맥스」\" (identity s8b 126/184 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield High Class Pack \"VMAX Climax\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5C32380DBA62",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsI\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2022003341",
+      "raw": {
+        "localCode": "sI",
+        "locality": "KR",
+        "localName": "소드&실드 「스타트 덱 100」",
+        "excerpt": "\"product\": \"소드&실드 「스타트 덱 100」\" (identity sI 341/414 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield \"Start Deck 100\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-187FD7B3B0D0",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsN\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2022009008",
+      "raw": {
+        "localCode": "sN",
+        "locality": "KR",
+        "localName": "소드 & 실드 「스타트 덱 100 피카츄 V & 이브이 V」",
+        "excerpt": "\"product\": \"소드 & 실드 「스타트 덱 100 피카츄 V & 이브이 V」\" (identity sN 008/024 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield \"Start Deck 100 Pikachu V & Eevee V\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-B4A1DAE2EC42",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs10b\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2022010056",
+      "raw": {
+        "localCode": "s10b",
+        "locality": "KR",
+        "localName": "소드&실드 강화 확장팩 「Pokémon GO」",
+        "excerpt": "\"product\": \"소드&실드 강화 확장팩 「Pokémon GO」\" (identity s10b 056/071 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Enhanced Expansion Pack \"Pokémon GO\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-420D4799CACC",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fs10a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2022011097",
+      "raw": {
+        "localCode": "s10a",
+        "locality": "KR",
+        "localName": "소드&실드 강화 확장팩 「다크판타스마」",
+        "excerpt": "\"product\": \"소드&실드 강화 확장팩 「다크판타스마」\" (identity s10a 058/071 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Sword & Shield Enhanced Expansion Pack \"Dark Phantasma\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8D708E3C81B2",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsv2a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
+      "raw": {
+        "localCode": "sv2a",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」\" (identity sv2a 143/165 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Enhanced Expansion Pack \"Pokémon Card 151\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5FDC1A3DADD1",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fxsv2a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2023014143",
+      "raw": {
+        "localCode": "xsv2a",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」\" (identity sv2a 143/165 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Enhanced Expansion Pack \"Pokémon Card 151\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-55EB1B9C3688",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsv4K\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2023021060",
+      "raw": {
+        "localCode": "sv4K",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 확장팩 「고대의 포효」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 확장팩 「고대의 포효」\" (identity sv4K 060/066 잠만보인형)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Expansion Pack \"Ancient Roar\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8538D9424E0D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsvG\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2023023021",
+      "raw": {
+        "localCode": "svG",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」\" (identity svG 021/049 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Special Deck Set ex \"Venusaur · Charizard · Blastoise\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-7AE427D2146C",
+      "sourceKind": "local-set-name-record",
+      "provider": "bulbapedia",
+      "providerRecordKey": "KR\u001fCLF\u001fname",
+      "retrieved": "2026-07-22",
+      "sourceUrl": "https://bulbapedia.bulbagarden.net/wiki/Pok%C3%A9mon_Trading_Card_Game_Classic_(TCG)",
+      "raw": {
+        "localCode": "CLF",
+        "locality": "KR",
+        "localName": "포켓몬 카드 게임 Classic",
+        "excerpt": "Trading Card Game Classic localized product names include ko \"포켓몬 카드 게임 Classic\" and zh \"寶可夢集換式卡牌遊戲 Classic\", evidencing Korean and Chinese releases.",
+        "evidencePath": "verification/evidence/data-gaps-20261022/korea/raw/repo_confirmed_sources_U0440_CLF_KR.json",
+        "sha256": "773f85db98ac0c17e1dd2e8de950d7a334e99bea361cbe9471ef4e0b81177959",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Pokémon Card Game Classic"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2A46494DABC9",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsv4a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2024001145",
+      "raw": {
+        "localCode": "sv4a",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」\" (identity sv4a 145/190 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet High Class Pack \"Shiny Treasure ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-AB11FC56A4D9",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsvI\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2024006084",
+      "raw": {
+        "localCode": "svI",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 「배틀 아카데미」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 「배틀 아카데미」\" (identity svI 046/066 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet \"Battle Academy\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-1050F4A5DB91",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsv5a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2024007051",
+      "raw": {
+        "localCode": "sv5a",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」\" (identity sv5a 051/066 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Enhanced Expansion Pack \"Crimson Haze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-ECA6C55EC4DB",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsvLN\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2024014010",
+      "raw": {
+        "localCode": "svLN",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」\" (identity svLN 010/022 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Starter Set Terastal Type: Stellar \"Sylveon ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-E14F1E5A06BD",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsvM\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2024018094",
+      "raw": {
+        "localCode": "svM",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 랜덤 스타트 덱 Generations",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 랜덤 스타트 덱 Generations\" (identity svM 094/175 잠만보 ex)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Random Start Deck Generations"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2436B01EB75C",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fsv9\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2025001075",
+      "raw": {
+        "localCode": "sv9",
+        "locality": "KR",
+        "localName": "스칼렛&바이올렛 확장팩 「배틀파트너즈」",
+        "excerpt": "\"product\": \"스칼렛&바이올렛 확장팩 「배틀파트너즈」\" (identity sv9 075/100 호브의 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Expansion Pack \"Battle Partners\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-204961FC8B1B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fm2a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2025015136",
+      "raw": {
+        "localCode": "m2a",
+        "locality": "KR",
+        "localName": "MEGA 하이클래스팩 「MEGA 드림 ex」",
+        "excerpt": "\"product\": \"MEGA 하이클래스팩 「MEGA 드림 ex」\" (identity m2a 136/193 호브의 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) MEGA High Class Pack \"MEGA Dream ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-3D5C4652E0E3",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fxm2a\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2025015136",
+      "raw": {
+        "localCode": "xm2a",
+        "locality": "KR",
+        "localName": "MEGA 하이클래스팩 「MEGA 드림 ex」",
+        "excerpt": "\"product\": \"MEGA 하이클래스팩 「MEGA 드림 ex」\" (identity m2a 136/193 호브의 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) MEGA High Class Pack \"MEGA Dream ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-79DE6EEFA179",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fmC\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2026001568",
+      "raw": {
+        "localCode": "mC",
+        "locality": "KR",
+        "localName": "MEGA 「스타트 덱 100 배틀컬렉션」",
+        "excerpt": "\"product\": \"MEGA 「스타트 덱 100 배틀컬렉션」\" (identity mC 568/742 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) MEGA \"Start Deck 100 Battle Collection\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-85C01AC6BA0D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-korea",
+      "providerRecordKey": "KR\u001fm3\u001fname",
+      "retrieved": "2026-09-01",
+      "sourceUrl": "https://pokemoncard.co.kr/cards/detail/BS2026002062",
+      "raw": {
+        "localCode": "m3",
+        "locality": "KR",
+        "localName": "MEGA 확장팩 「니힐제로」",
+        "excerpt": "\"product\": \"MEGA 확장팩 「니힐제로」\" (identity m3 062/080 잠만보)",
+        "evidencePath": "verification/evidence/pokemon-korea-snorlax-catalogue-20260901.json",
+        "sha256": "407d63dc90417e47ac7324d13af6d38b7afc6be89ee8009d13e4b6abd9350634",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) MEGA Expansion Pack \"Nihil Zero\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-61F5A6FA70D4",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-official",
+      "providerRecordKey": "LATAM\u001fSVP LA\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://www.pokemon.com/el/jcc-pokemon/cartas-pokemon/series/svp/184/",
+      "raw": {
+        "localCode": "SVP LA",
+        "locality": "LATAM",
+        "localName": "Escarlata y Púrpura-Cartas promo",
+        "excerpt": "Expansión/Serie: \"Escarlata y Púrpura-Cartas promo\"; card \"Snorlax de Paul\", \"184/1 Promo\"",
+        "evidencePath": "verification/evidence/data-gaps-20261022/korea/raw/webfetch_pokemoncom_svp184_excerpts.txt",
+        "sha256": "494f19c2c1234b27184a0f4065fb6d59848086be7d31ab5433e77324ed156e92",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Promo Cards"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-834F40708CCF",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-official",
+      "providerRecordKey": "WEST\u001fSVP ES\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://www.pokemon.com/es/jcc-pokemon/cartas-pokemon/series/svp/184/",
+      "raw": {
+        "localCode": "SVP ES",
+        "locality": "WEST",
+        "localName": "Escarlata y Púrpura-Cartas promo",
+        "excerpt": "Expansión/Serie: \"Escarlata y Púrpura-Cartas promo\"; card \"Snorlax de Paul\", \"184/1 Promo\"",
+        "evidencePath": "verification/evidence/data-gaps-20261022/korea/raw/webfetch_pokemoncom_svp184_excerpts.txt",
+        "sha256": "494f19c2c1234b27184a0f4065fb6d59848086be7d31ab5433e77324ed156e92",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/korea/findings.json",
+        "translation": "(translation) Scarlet & Violet Promo Cards"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2441AF779C91",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fAC1b\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/4244/",
+      "raw": {
+        "localCode": "AC1b",
+        "locality": "TW",
+        "localName": "擴充包「眾星雲集組合篇」SET B",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=AC1b\"> 擴充包「眾星雲集組合篇」SET B </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/4244.html",
+        "sha256": "c8123e94ed675c4b6aa5757cd9b350c6babb925ea923d0df1c8dcf67c114b997",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"All Stars Collection\" SET B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-FA61B1D6E353",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fAS5a\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2881/",
+      "raw": {
+        "localCode": "AS5a",
+        "locality": "TW",
+        "localName": "擴充包「雙倍爆擊」SET A",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=AS5a\"> 擴充包「雙倍爆擊」SET A </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2881.html",
+        "sha256": "bf2671ca17ca6fdb1c9b12247e6a137db8041d0188c0111a353f9fb8455658ae",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Double Blaze\" SET A"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-29D643606D47",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fAS5D\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/3553/",
+      "raw": {
+        "localCode": "AS5D",
+        "locality": "TW",
+        "localName": "G超起始牌組「雙倍爆擊」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=AS5D\"> G超起始牌組「雙倍爆擊」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/3553.html",
+        "sha256": "a555b48b057a322f95823cee41f2dbd4ca3d699b9a003967752def57d28983e3",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) GX Starter Deck \"Double Blaze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-E44DD66056AC",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsc1a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2395/",
+      "raw": {
+        "localCode": "sc1a F",
+        "locality": "TW",
+        "localName": "擴充包「劍&盾」SET A",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SC1a\"> 擴充包「劍&盾」SET A </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2395.html",
+        "sha256": "fa5915665464f62fe237afc6e508f278b7f215b7e2889be4831096d22d2b0fdf",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Sword & Shield\" SET A"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-AC4E5400CFCB",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsc1b F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2541/",
+      "raw": {
+        "localCode": "sc1b F",
+        "locality": "TW",
+        "localName": "擴充包「劍&盾」SET B",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SC1b\"> 擴充包「劍&盾」SET B </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2541.html",
+        "sha256": "8acac50b4a846f339dbeaaa6a8eb4879aa4266a3b8b59d5130882579acac8382",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Sword & Shield\" SET B"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9536B390A2DB",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsc1D F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2707/",
+      "raw": {
+        "localCode": "sc1D F",
+        "locality": "TW",
+        "localName": "V起始牌組「劍&盾」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SC1D\"> V起始牌組「劍&盾」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2707.html",
+        "sha256": "35f51a9fa7f7cacee9d9a5efa1f9abfdf53320c006c46e90192d424e2f5b9550",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) V Starter Deck \"Sword & Shield\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-79CC1767FF2D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fS4 F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/375/",
+      "raw": {
+        "localCode": "S4 F",
+        "locality": "TW",
+        "localName": "擴充包『驚天伏特攻擊』",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=S4\"> 擴充包『驚天伏特攻擊』 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/375.html",
+        "sha256": "e828e73565bb6a92b0518a6c3ee67789fd448769745f49d07daa681e0dd72b39",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Amazing Volt Tackle\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-1746C578A133",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSCA F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/1474/",
+      "raw": {
+        "localCode": "SCA F",
+        "locality": "TW",
+        "localName": "V起始牌組 「搭檔」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SCA\"> V起始牌組 「搭檔」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/1474.html",
+        "sha256": "2cfdddb07f958f426c6fb0073530306844aff3077bc2d70727428d88966335e5",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) V Starter Deck \"Partner\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-0F47ACA2B944",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSM-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8112/",
+      "raw": {
+        "localCode": "SM-P",
+        "locality": "TW",
+        "localName": "特典卡 太陽&月亮",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SM-P\"> 特典卡 太陽&月亮 </a>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/chinese/raw/tw/detail_8112_SMP.html",
+        "sha256": "441912edb5d7301e029553b5ed3e4e5d4753dddf9f603a660b87ccb3e88f2d69",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Promo cards Sun & Moon"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-FA5559020F31",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fscD F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2220/",
+      "raw": {
+        "localCode": "scD F",
+        "locality": "TW",
+        "localName": "V起始牌組 「強大」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SCD\"> V起始牌組 「強大」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2220.html",
+        "sha256": "0fc67bf7f3a5a7ae1e0ed488a987b71b58300f239b8ff24eaaf9722db70a3423",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) V Starter Deck \"Strength\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-4E5F4C1461F8",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsH F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/2051/",
+      "raw": {
+        "localCode": "sH F",
+        "locality": "TW",
+        "localName": "寶可夢卡牌家庭組合",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SH\"> 寶可夢卡牌家庭組合 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/2051.html",
+        "sha256": "befc293db93841e943ab721bfd22b099440d9cb3a501aff7518d8d1652717fc3",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Pokémon Card Game Family Set"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-93AD16E406F5",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fS8b F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5314/",
+      "raw": {
+        "localCode": "S8b F",
+        "locality": "TW",
+        "localName": "高級擴充包「VMAX絕群壓軸」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=S8b\"> 高級擴充包「VMAX絕群壓軸」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/5314.html",
+        "sha256": "aef00e063977e9081446fa61883698c5d4be6c47e66ca14b3cfea8ab6b9d45c2",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) High Class Pack \"VMAX Climax\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9312161FFFAC",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSI F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5968/",
+      "raw": {
+        "localCode": "SI F",
+        "locality": "TW",
+        "localName": "初階牌組100",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SI\"> 初階牌組100 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/5968.html",
+        "sha256": "ab2b3de1f7311623ca83de1309582ff69932662813e8dc8c7e18642d3eb71d8f",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Start Deck 100"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2921362B525D",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fS10b F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/6589/",
+      "raw": {
+        "localCode": "S10b F",
+        "locality": "TW",
+        "localName": "強化擴充包「Pokémon GO」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=S10b\"> 強化擴充包「Pokémon GO」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/6589.html",
+        "sha256": "3152e8b35f164ec70537a9da15d18c667fe9c3d3f987db9d2f1a0b16df89c232",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Enhanced Expansion Pack \"Pokémon GO\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2BCD62FE678F",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fS10a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/6424/",
+      "raw": {
+        "localCode": "S10a F",
+        "locality": "TW",
+        "localName": "強化擴充包「黑暗亡靈」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=S10a\"> 強化擴充包「黑暗亡靈」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/6424.html",
+        "sha256": "16cd50ae973dab57d6078adbf557985882cc6c53c377bcf9f449d9bc1dfb5bed",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Enhanced Expansion Pack \"Dark Phantasma\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-724DCB6CABEA",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSN F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/7016/",
+      "raw": {
+        "localCode": "SN F",
+        "locality": "TW",
+        "localName": "初階牌組100 特別版",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SN\"> 初階牌組100 特別版 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/7016.html",
+        "sha256": "2b97cc65fd70acd38af7140fd5088240b6d9da11412fd101bb47601a5becef7d",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Start Deck 100 Special Edition"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-03EBEA668716",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fS-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/5618/",
+      "raw": {
+        "localCode": "S-P",
+        "locality": "TW",
+        "localName": "特典卡 劍&盾",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=S-P\"> 特典卡 劍&盾 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/5618.html",
+        "sha256": "390e794e222857f37e08f6c9f05868e08119ba1ff55b2d612a97c982fe6b400c",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Promo cards Sword & Shield"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C97BA7AB4C79",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsv2a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8266/",
+      "raw": {
+        "localCode": "sv2a F",
+        "locality": "TW",
+        "localName": "強化擴充包「寶可夢卡牌151」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV2a\"> 強化擴充包「寶可夢卡牌151」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/8266.html",
+        "sha256": "567a9fea274f1a83274ae87fb121dabf568bad3989281c7b5d649d5c746c007e",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Enhanced Expansion Pack \"Pokémon Card 151\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-10829602A0CE",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsv4K F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/8943/",
+      "raw": {
+        "localCode": "sv4K F",
+        "locality": "TW",
+        "localName": "擴充包「古代咆哮」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV4K\"> 擴充包「古代咆哮」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/8943.html",
+        "sha256": "25b209b6d6a6c7025d5f7eb2087f3395afae938c33f8f2bf05e1a717cdaa5bb0",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Ancient Roar\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-DE7EAB1AFEAC",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsv4a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/9173/",
+      "raw": {
+        "localCode": "sv4a F",
+        "locality": "TW",
+        "localName": "高級擴充包「閃色寶藏ex」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV4a\"> 高級擴充包「閃色寶藏ex」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/9173.html",
+        "sha256": "a5950a48c482c2d2b4980f3964501b8005fb798a42b5b29aebba82a634b2a120",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) High Class Pack \"Shiny Treasure ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-5AA351600219",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsv5a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/10298/",
+      "raw": {
+        "localCode": "sv5a F",
+        "locality": "TW",
+        "localName": "強化擴充包「緋紅薄霧」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV5a\"> 強化擴充包「緋紅薄霧」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/10298.html",
+        "sha256": "a9d4d06a9c458254c196a49729e8bdf915385857d56b2f3fe2c53ddca0765a59",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Enhanced Expansion Pack \"Crimson Haze\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-6BD28E278AA7",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSVI F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/11337/",
+      "raw": {
+        "localCode": "SVI F",
+        "locality": "TW",
+        "localName": "Trianers Camp",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SVI\"> Trianers Camp </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/11337.html",
+        "sha256": "7e484c9741dae264817d04afb515ec8de6bef80277ddc7c14b06dd892e360e82",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Trainers Camp (sic, \"Trianers Camp\" on source)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-2ADEF17DEB7B",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSVM F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12164/",
+      "raw": {
+        "localCode": "SVM F",
+        "locality": "TW",
+        "localName": "雙ex初階牌組 Generations",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SVM\"> 雙ex初階牌組 Generations </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/12164.html",
+        "sha256": "4c0202cfc543ef7856a62280e4e2e0087504ec907c5afb1f2cd2ec56218a70fc",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) ex Starter Deck Generations (dual ex)"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-EE072AF4F0F4",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSV9 F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12537/",
+      "raw": {
+        "localCode": "SV9 F",
+        "locality": "TW",
+        "localName": "擴充包「對戰搭檔」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV9\"> 擴充包「對戰搭檔」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/12537.html",
+        "sha256": "52af2749dbca2884cc6f5129566f213b67131c65ff88bb708db4a9185be767a1",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Battle Partners\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8A80B300CB94",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fSV-P\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/12268/",
+      "raw": {
+        "localCode": "SV-P",
+        "locality": "TW",
+        "localName": "特典卡 朱&紫",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SV-P\"> 特典卡 朱&紫 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/12268.html",
+        "sha256": "02e0184d7767255194920e891c8a458c6570ae9bb8a090d097c5cca4e7de9b02",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Promo cards Scarlet & Violet"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-8BB0E92C1AD1",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fsvQP F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/13148/",
+      "raw": {
+        "localCode": "svQP F",
+        "locality": "TW",
+        "localName": "ex初階牌組 皮卡丘",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=SVQP\"> ex初階牌組 皮卡丘 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/13148.html",
+        "sha256": "2fbd506d5988ca3fb2ef348bfe136055e826dc56bddfddd080e838f09202a280",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) ex Starter Deck Pikachu"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-0DC9B16A9B21",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fM2a F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/14796/",
+      "raw": {
+        "localCode": "M2a F",
+        "locality": "TW",
+        "localName": "高級擴充包「超級進化夢想ex」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=M2a\"> 高級擴充包「超級進化夢想ex」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/14796.html",
+        "sha256": "d7f0240d2c099db15b690325efac68b1d4e321d3c7bf61d912be83b7bf65738b",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) High Class Pack \"MEGA Dream ex\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-6B5A08DA59B3",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fMC F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/17038/",
+      "raw": {
+        "localCode": "MC F",
+        "locality": "TW",
+        "localName": "初階牌組 100對戰收藏",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=MC\"> 初階牌組 100對戰收藏 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/17038.html",
+        "sha256": "b1eacb00d2da75a6e10fdd319eec8e134dd7213ca30bea83657a5b93f2cd27b2",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Start Deck 100 Battle Collection"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9BE5E44DA9F2",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fM3 F\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/card-search/detail/18039/",
+      "raw": {
+        "localCode": "M3 F",
+        "locality": "TW",
+        "localName": "擴充包「虛無歸零」",
+        "excerpt": "<h3>收錄商品</h3> <a href=\"/tw/card-search/list/?expansionCodes=M3\"> 擴充包「虛無歸零」 </a>",
+        "evidencePath": "verification/runs/card-discovery/20260813T135800Z/raw/pokemon-asia-tw-snorlax/details/18039.html",
+        "sha256": "e0d5e5b42aeeb6e7a7fe5df8531f3e3fa60b1f217f685e141a9c90d2338f0f75",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Expansion Pack \"Nihil Zero\""
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-C3C7B1FD5575",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "CN\u001fCS2DaC\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://www.pokemon.cn/post_products/%e5%ae%9d%e5%8f%af%e6%a2%a6%e5%8d%a1%e7%89%8c-%e5%ae%b6%e5%ba%ad%e7%bb%84%e5%90%88",
+      "raw": {
+        "localCode": "CS2DaC",
+        "locality": "CN",
+        "localName": "宝可梦卡牌 家庭组合",
+        "excerpt": "<title>宝可梦卡牌 家庭组合 | The official Pokémon Website in China</title> ... <h?>宝可梦卡牌 家庭组合</h?>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/chinese/raw/cn/product_family.html",
+        "sha256": "50028dcbace849fb0306043be839fe3a7d964f89273daf38a36c6371481a8a4a",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Pokémon Card Family Set"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-9A804E936B92",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "CN\u001fCS4DaC\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://www.pokemon.cn/post_products/%e8%b5%b7%e5%a7%8b%e5%8d%a1%e7%bb%84100",
+      "raw": {
+        "localCode": "CS4DaC",
+        "locality": "CN",
+        "localName": "起始卡组100",
+        "excerpt": "<title>起始卡组100 | The official Pokémon Website in China</title> ... <h?>起始卡组100</h?>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/chinese/raw/cn/product_start100.html",
+        "sha256": "cf4446f351a4cf5af76ea436c31838bc9be5869a18f1749c7e40520a729990be",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Start Deck 100"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-EFC24BDABBB8",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-cn-official",
+      "providerRecordKey": "CN\u001fCSVSC\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://www.pokemon.cn/post_products/%e5%ae%9d%e5%8f%af%e6%a2%a6%e9%9b%86%e6%8d%a2%e5%bc%8f%e5%8d%a1%e7%89%8c%e6%b8%b8%e6%88%8f-%e6%9c%b1%e7%b4%ab-%e5%af%b9%e6%88%98%e5%ad%a6%e9%99%a2",
+      "raw": {
+        "localCode": "CSVSC",
+        "locality": "CN",
+        "localName": "宝可梦集换式卡牌游戏 朱&紫 对战学院",
+        "excerpt": "<title>宝可梦集换式卡牌游戏 朱&紫 对战学院 | The official Pokémon Website in China</title> ... <h?>宝可梦集换式卡牌游戏 朱&紫 对战学院</h?>",
+        "evidencePath": "verification/evidence/data-gaps-20261022/chinese/raw/cn/product_academy.html",
+        "sha256": "5b961167603d151ecabe851074b7f7504eaee59218f0669a84dfc0f0189cd8bc",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Pokémon Trading Card Game Scarlet & Violet Battle Academy"
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-1E25867146FC",
+      "sourceKind": "local-set-name-record",
+      "provider": "pokemon-card-asia",
+      "providerRecordKey": "TW\u001fCLF\u001fname",
+      "retrieved": "2026-10-22",
+      "sourceUrl": "https://asia.pokemon-card.com/tw/archive/special/card/classic/",
+      "raw": {
+        "localCode": "CLF",
+        "locality": "TW",
+        "localName": "寶可夢集換式卡牌遊戲 Classic",
+        "excerpt": "「寶可夢集換式卡牌遊戲 Classic」的繁體中文版，將於指定合作商店預約販售。 ... ●商品名稱：寶可夢集換式卡牌遊戲 Classic ... ●發售日：2023年11月10日",
+        "evidencePath": "verification/evidence/data-gaps-20261022/chinese/raw/tw/special_classic.html",
+        "sha256": "878176439dc402b08b97d77e38f8f280d47703aa03c3c3f232fbb98abbd5bd86",
+        "confidence": "medium",
+        "evidenceBundle": "verification/evidence/data-gaps-20261022/chinese/findings.json",
+        "translation": "(translation) Pokémon Trading Card Game Classic"
       }
     }
   ]

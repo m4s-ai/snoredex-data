@@ -21,7 +21,7 @@ EXPECTED = {
     "item-9781d666-3475-5612-86d6-0e0a3c9e0f96": ("PHYSICAL:F0227-P01", "de-DE", "Relaxo", None),
 }
 WITHHELD = {
-    "item-2645c53d-7c6e-5b47-ad37-51c2e959df6e": "outside-profile",
+    "item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3": "outside-profile",
     "item-85d569de-bd2a-51f6-a00e-7d870e35b60f": "needs-evidence",
     "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085": "needs-evidence",
 }
@@ -61,7 +61,8 @@ def check_real_values(cards, report):
     for iid, status in WITHHELD.items():
         assert entries[iid]["status"] == status and entries[iid]["reasons"]
         assert "cardIndex" not in entries[iid]
-    assert entries["item-2645c53d-7c6e-5b47-ad37-51c2e959df6e"]["physicalPrintingId"] is None
+    # The Jungle era-boundary item is the German 1st Edition holo since the 2026-10-22 edition split.
+    assert entries["item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3"]["physicalPrintingId"] == "PHYSICAL:PRINTING:28d92d271b352da03805259a"
     for iid in list(WITHHELD)[1:]:
         assert any(reason["field"] == "/identity/distribution" for reason in entries[iid]["reasons"])
 

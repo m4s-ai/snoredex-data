@@ -733,6 +733,9 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str | None]] = [
     # tie-break is earliest mention, and "Cardmarket seller ..." starts at the same offset as the
     # bare catalogue pattern, so list order decides it here.
     (re.compile(r"cardmarket seller", re.I), "cardmarket-listing-photo"),
+    # Same reasoning for an exact product image whose card face was read: tier-2 evidence, never
+    # the tier-5 catalogue that hosts it.
+    (re.compile(r"cardmarket exact product image", re.I), "cardmarket-product-image"),
     (re.compile(r"seller listing photograph|listing photograph", re.I),
      "seller-listing-photo"),
     (re.compile(r"pok[eé]cardex", re.I), "pokecardex"),

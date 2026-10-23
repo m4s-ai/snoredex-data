@@ -201,6 +201,69 @@ coverage at the violated contract, rather than only the newly reported SPEC IDs.
 unresolved association explicitly, and answer each addressed PR finding in its original thread
 with the applicable fix and verification result.
 
+### Illustrators, local set names and localized card names (2026-10-22)
+
+**Owner rule (2026-10-22): an illustrator belongs to the artwork.** Every print of the same
+artwork — all languages, printings, finishes and variants — has the same illustrator; only a
+changed or different artwork can differ. A credit may therefore be carried from one exact print to
+another, but only after the two images are compared and show the same illustration. `workId` and
+`cardKey` mean the same card *text*, not the same artwork, and the automatic image groups in
+`artwork_review_projection.json` are suggestions. A rainbow/hyper-rare recolour of the same
+composition is the same artwork (owner, 2026-10-22): the base illustration and its illustrator are
+unchanged. The illustrator is an attribute of the artwork, not of a physical printing — a card
+planned but never printed still has its illustrator — so a credit read from a retained harvested
+product image under `images/` is accepted without a SPEC record; the SPEC requirement of AGENTS
+rule 1 governs physical-printing claims. A propagated legacy product credit (`artistSource`) is
+graded as `internal-derivation`; a source-first print records `method: artwork-propagation`, the
+anchor release and the comparison in `illustratorEvidence`. The anchor print keeps its own source.
+
+The credit printed on the card is the card's own statement. Read it from an exact-print image
+("Illus." line) where one exists; it beats a database text field — the official TW page for
+sc1b 165/153 names Masakazu Fukuda while its own card image prints aky CG Works. Record the
+method (`database-credit`, `image-transcription`, `artwork-propagation`) and, for propagation, the
+anchor release and the comparison basis.
+
+Routes that worked (evidence in `verification/evidence/data-gaps-20261022`):
+`asia.pokemon-card.com/{tw,id,th}/card-search/detail/<n>/` gives local set code, number, product
+link and illustrator per print, but omits secret rares above the printed set size, Thai
+AS1b/AS5a and most SM-P; search with the local name (卡比獸, คาบิกอน, Snorlax). The full-size
+official Korean images on `cards.image.pokemonkorea.co.kr` are reachable while
+`pokemoncard.co.kr` answers 503, and their "Illus." lines match the catalogue credits. Local set
+names come from the product link on an exact card page or the product filter of the card search;
+record them verbatim, including prefixes such as 擴充包. Localized printed card names come
+first from TCGdex per-language card records, the official JP/Asia databases and specimen photos;
+`verification/local_card_names.json` keeps them per card release, with the official species name
+per localization as the fallback for species-only cards. Mechanic and trainer-owned names are
+never derived by default: Hop is "Nabil" in French, "Paul" in Spanish and "Lupo" in Portuguese.
+The owner approved one exception on 2026-10-22: Hop's Snorlax takes the reviewed per-language
+pattern (`meta.derivedPatternCardNames`). In this environment the agent proxy reset every Wayback
+Machine request and pokemon.com card pages returned 403.
+
+**Editions (owner decision 2026-10-22).** A card positively documented in both 1st Edition and
+Unlimited is one item per edition (`split_documented_editions_20261022.py`). TCGdex
+`variants_detailed` separates an edition-stamped from an unstamped variant per language, but its
+stamp labels are database translations; never record them as printed marking text. Card-level
+finish evidence with no edition (a TCGdex flag) folds into a complete edition pair
+(`finishes.absorb_editionless_finish_evidence`).
+
+**A legible card face establishes its edition (owner rule 2026-10-22).** For a set printed in both
+editions, a visible 1st Edition mark establishes 1st Edition, and the mark's position visibly
+empty on a complete, legible card face establishes Unlimited. This is a positive observation of the
+pictured card, not an absence argument about a source; rule 3 is about sources that omit a
+printing. Only a crop that hides the mark position, or an image too small to read it, leaves the
+edition unknown. Localities without an edition system (Korean, Chinese, SEA) never get one.
+Check the mark where the era prints it: lower left beside the copyright line (DP, Pt), lower left
+left of にげる (BW), lower left immediately left of the ZM7-… code (PCG), beside the set symbol at the
+lower right (e-Card), and left under the artwork (WotC). Closed Yahoo! Auctions and Yahoo!フリマ
+listings (`auctions.c.yimg.jp` originals) were the productive source for Japanese editions on
+2026-10-23; eBay item pages answered 403 and aucfan 503. A finish-override source that names `languages` is merged into same-language
+specimens as curated identity, so an edition source must not carry them.
+
+**S-Chinese via-releases (owner decision 2026-10-22).** A legacy S-Chinese unit harvested under a
+Japanese set code is the identified CN print once issue #257 maps it; the via-release is merged
+into that print (`merge_cn_via_releases_20261022.py`) and a `releaseSetCode` bridge, with the legacy
+V-token in `variant` where the codes differ, lets the CN specimens join the legacy finish unit.
+
 ## What this file is
 
 The verification playbook and the research log behind it: every source technique that worked, every

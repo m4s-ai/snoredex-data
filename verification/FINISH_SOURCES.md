@@ -291,6 +291,12 @@ completeness decision is recorded in
 | `pending` | no positive finish evidence yet |
 | `not-applicable` | every underlying product-language claim is contradicted |
 
+Since schema 1.2.0 a decision may also name `rejectedFinishes`: the owner rules that a finish a
+source positively claims was never printed for this unit. `finishes.py` removes that finish (even
+a TCGdex `true`), refuses to build when a specimen photographs it, and `E13` plus the TCGdex
+preservation check honour the decision. Japanese PCG3 062/084 is holo only although TCGdex
+reports `normal` (OAF-20261023-PCG3-062-ja).
+
 Source-first releases without a legacy finish unit use the same `finishDecisions` store,
 keyed by their exact local set code, full local number and language. The collector generator
 validates the unique release and its nonempty positive physical-finish list before projecting

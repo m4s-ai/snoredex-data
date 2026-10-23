@@ -34,6 +34,7 @@ GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
 CHECKLIST_PATH = ROOT / "analysis_checklist.json"
 FINISH_UNITS_PATH = ROOT / "verification" / "finish_units.json"
 SOURCE_FIRST_PATH = ROOT / "verification" / "source_first_prints.json"
+LOCAL_NAMES_PATH = ROOT / "verification" / "local_card_names.json"
 SPECIMENS_PATH = ROOT / "verification" / "specimens.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
 COMPLETENESS_PATH = ROOT / "verification" / "completeness_gate.json"
@@ -708,6 +709,11 @@ def normalized_markings(value: Any) -> list[dict[str, str]]:
     return [dict(row) for row in value]
 
 
+def release_collector_number(release: dict[str, Any]) -> Any:
+    """The printed local number, or a reviewed collector identifier for an unnumbered card."""
+    return release.get("localNumber") or (release.get("numberingBasis") or {}).get("collectorNumber")
+
+
 def split_collector_number(value: Any) -> tuple[str | None, str | None]:
     text = str(value or "").strip()
     if not text:
@@ -1142,6 +1148,23 @@ def completeness_fields(status, decision):
     return result
 
 
+def local_card_name(
+    names: dict[str, Any], release_id: str, localization_id: str, card_name: str,
+    source_native: str | None,
+) -> str | None:
+    """Printed local name: source-native record, exact-print observation, then reviewed rule."""
+    if source_native:
+        return source_native
+    exact = names["releases"].get(release_id)
+    if exact:
+        return exact["value"]
+    if card_name in names["meta"]["speciesOnlyCardNames"]:
+        return (names["speciesNames"].get(localization_id) or {}).get("value")
+    if card_name in names["meta"].get("derivedPatternCardNames", {}):
+        return (names["patterns"].get(card_name, {}).get(localization_id) or {}).get("value")
+    return None
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     date_document, reviewed_dates, _ = load_reviewed_dates()
@@ -1151,6 +1174,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     legacy_items = predecessor["items"]
     finish_units = read_json(FINISH_UNITS_PATH)["units"]
     source_first = {row["printId"]: row for row in read_json(SOURCE_FIRST_PATH)["prints"]}
+    local_names = read_json(LOCAL_NAMES_PATH)
     specimens = {row["specimenId"]: row for row in read_json(SPECIMENS_PATH)["specimens"]}
     citations = specimen_reference_index(specimens.values(), read_json(UNITS_PATH))
     completeness = read_json(COMPLETENESS_PATH)
@@ -1313,9 +1337,12 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             or (source_first_row or {}).get("cardName")
             or "Snorlax"
         )
-        local_name = (source_first_row or {}).get("name")
+        local_name = local_card_name(
+            local_names, release_id, identity["localizationId"], card_name,
+            (source_first_row or {}).get("name"),
+        )
         local_set_name = next(iter(local_set.get("observedNames") or []), None)
-        number, denominator = split_collector_number(release.get("localNumber"))
+        number, denominator = split_collector_number(release_collector_number(release))
         event = event_by_edition.get(release["setEditionId"], {})
         return {
             "release": release,
@@ -1500,7 +1527,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "correctionLink": "",
         }
         item["correctionLink"] = correction_link(item)
-        return apply_item_date(item, reviewed_dates)
+        return apply_item_date(item, reviewed_dates, link=schema_uri)
 
     items: list[dict[str, Any]] = []
     for physical in physicals.values():

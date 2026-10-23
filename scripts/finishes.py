@@ -445,6 +445,75 @@ def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> 
         existing["image"] = candidate["image"]
 
 
+EDITION_PAIR = frozenset({"1st Edition", "Unlimited"})
+
+
+def _edition_siblings(printing: dict[str, Any], printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    variants = set(printing.get("mappedVariants") or [])
+    return [
+        other for other in printings
+        if other is not printing
+        and other["finish"] == printing["finish"]
+        and other.get("edition") in EDITION_PAIR
+        and set(other.get("mappedVariants") or []) >= variants
+        and all(other.get(field) == printing.get(field)
+                for field in ("foilPattern", "distribution", "releaseDate"))
+        and _compatible_card_size(other, printing)
+    ]
+
+
+def _compatible_card_size(left: dict[str, Any], right: dict[str, Any]) -> bool:
+    sizes = {left.get("cardSize"), right.get("cardSize")} - {None, "unknown"}
+    return len(sizes) <= 1
+
+
+def _is_card_level_finish_evidence(printing: dict[str, Any]) -> bool:
+    return not any(printing.get(field) for field in ("edition", "specimenIds", "conflictsWith", "markings"))
+
+
+def _fold_sources(target: dict[str, Any], printing: dict[str, Any]) -> None:
+    seen = {source_signature(source) for source in target["sources"]}
+    target["sources"].extend(source for source in printing["sources"] if source_signature(source) not in seen)
+    if STATUS_RANK[printing["verificationStatus"]] > STATUS_RANK[target["verificationStatus"]]:
+        target["verificationStatus"] = printing["verificationStatus"]
+
+
+def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Fold card-level finish evidence into complete per-edition printings.
+
+    TCGdex flags and similar group-level records say a finish exists for the card, not for one
+    edition. Once both editions of that finish have their own printing, such an editionless
+    record is evidence for each of them rather than a third collectible. A printing backed by a
+    specimen or a conflict is a physical observation of one unknown edition and stays as is.
+    """
+    kept = []
+    for printing in printings:
+        siblings = _edition_siblings(printing, printings)
+        if not _is_card_level_finish_evidence(printing) or {o["edition"] for o in siblings} != EDITION_PAIR:
+            kept.append(printing)
+            continue
+        for other in siblings:
+            _fold_sources(other, printing)
+    return kept
+
+
+def drop_owner_rejected_finishes(
+    printings: list[dict[str, Any]], decision: dict[str, Any] | None
+) -> list[dict[str, Any]]:
+    """Remove finishes the collection owner adjudicated as never printed (rule 4).
+
+    A source flag such as TCGdex `normal: true` can be wrong for one card; only the owner's
+    recorded decision removes it. A photographed copy of a rejected finish contradicts the
+    decision and stops the build instead of being dropped silently.
+    """
+    rejected = set((decision or {}).get("rejectedFinishes") or [])
+    if not rejected:
+        return printings
+    if any(p["finish"] in rejected and p.get("specimenIds") for p in printings):
+        raise ValueError(f"owner-rejected finish has specimen evidence: {decision['adjudicationId']}")
+    return [p for p in printings if p["finish"] not in rejected]
+
+
 def merge_specimen_field_sources(existing, candidate):
     for field, ids in candidate.get("specimenFieldSources", {}).items():
         sources = existing.setdefault("specimenFieldSources", {})
@@ -855,8 +924,10 @@ def _finish_product_variants(cards):
 def _add_release_code_aliases(specimens_by_group, specimen, specimen_key,
                               release_code_aliases, valid_product_variants):
     for override in release_code_aliases.get((specimen_key[0], specimen_key[1]), []):
+        # A bridged release code has its own variant vocabulary; the override names the
+        # legacy product's V-token when the two differ.
         product_key = (str(override["setCode"]), specimen_key[1],
-                       str(specimen.get("variant") or "base"))
+                       str(override.get("variant") or specimen.get("variant") or "base"))
         if product_key not in valid_product_variants:
             continue
         if override.get("languages") and specimen_key[2] not in override["languages"]:
@@ -1431,7 +1502,10 @@ def _build_finish_unit(
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)
-        printings = [] if all_claims_contradicted else deduplicated_printings
+        printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
+            absorb_editionless_finish_evidence(deduplicated_printings),
+            owner_finish_decisions.get((set_code, number, language)),
+        )
         printings.sort(
             key=lambda item: (
                 FINISHES.index(item["finish"]) if item["finish"] in FINISHES else 99,

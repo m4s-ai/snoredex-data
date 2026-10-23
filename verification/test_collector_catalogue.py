@@ -61,10 +61,31 @@ def reviewed_release_date_regressions() -> None:
         assert site.catalogue_date_source(item, {}, {}) == dates.date_source(row)
         for source in row["sources"]:
             assert (ROOT / source["evidencePath"]).is_file()
-            assert source["url"] in item["sourceLinks"]
+            assert collector.schema_uri(source["url"]) in item["sourceLinks"]
         for predecessor_id in row["legacyChecklistIds"]:
             assert {key: legacy[predecessor_id][key] for key in dates.DATE_FIELDS} == {key: row[key] for key in dates.DATE_FIELDS}
             assert legacy[predecessor_id]["releaseDateSource"] == dates.date_source(row)
+    # #429: a reviewed date sourced from a Unicode page emits an RFC 3986 link and keeps the
+    # stored observation URL as the source identity.
+    sample_id, sample_row = next(iter(reviewed.items()))
+    iri = "https://wiki.52poke.com/wiki/卡比兽（SVI）"
+    unicode_row = copy.deepcopy(sample_row)
+    unicode_row["sources"][0]["url"] = iri
+    overlaid = dates.apply_item_date(
+        copy.deepcopy(base_items[sample_id]), {sample_id: unicode_row}, link=collector.schema_uri
+    )
+    emitted = [value for value in overlaid["sourceLinks"] if unquote(value) == iri]
+    assert len(emitted) == 1 and collector.RFC3986_URI.match(emitted[0]), overlaid["sourceLinks"]
+    assert overlaid["evidenceLinks"] == overlaid["sourceLinks"]
+    assert unicode_row["sources"][0]["url"] == iri
+    broken = copy.deepcopy(catalogue)
+    broken_items = {row["itemId"]: row for row in broken["items"]}
+    broken_items[sample_id].update(
+        dates.apply_item_date(copy.deepcopy(base_items[sample_id]), {sample_id: unicode_row})
+    )
+    broken["meta"]["catalogueFingerprint"] = collector.semantic_fingerprint(broken)
+    assert any("RFC 3986" in error for error in collector.catalogue_uri_errors(broken)), \
+        "an unencoded reviewed source link must still fail the producer gate"
     # The new registrations grant date metadata only, even on an official host.
     calls = []
     registry_module.record_reviewed_dates(document, lambda *args, **kwargs: calls.append((args, kwargs)), {})
@@ -326,7 +347,53 @@ def unicode_source_uri_regressions() -> None:
     assert sorted(covered) == live["sourceItemIds"], "every deployed item needs exactly one route"
 
 
+def local_card_name_regressions() -> None:
+    names = read("verification/local_card_names.json")
+    graph = read("verification/authoritative_graph.json")
+    releases = {row["cardReleaseId"] for row in collector.entity_payloads(graph, "card-release")}
+    assert set(names["releases"]) <= releases, "local names must target existing card releases"
+    assert all(row["value"] and row["evidence"] for row in names["releases"].values())
+    assert all(row["value"] and row["evidence"] for row in names["speciesNames"].values())
+    sample = {"meta": {"speciesOnlyCardNames": ["Snorlax"]},
+              "speciesNames": {"L:de": {"value": "Relaxo"}}, "releases": {"R": {"value": "Hops Relaxo"}}}
+    resolve = collector.local_card_name
+    assert resolve(sample, "R", "L:de", "Hop's Snorlax", "Native") == "Native"
+    assert resolve(sample, "R", "L:de", "Hop's Snorlax", None) == "Hops Relaxo"
+    assert resolve(sample, "X", "L:de", "Snorlax", None) == "Relaxo"
+    assert resolve(sample, "X", "L:de", "Hop's Snorlax", None) is None, "unlisted patterns are never derived"
+    approved = {**sample, "meta": {**sample["meta"], "derivedPatternCardNames": {"Hop's Snorlax": "owner"}},
+                "patterns": {"Hop's Snorlax": {"L:de": {"value": "Hops Relaxo"}}}}
+    assert resolve(approved, "X", "L:de", "Hop's Snorlax", None) == "Hops Relaxo"
+    assert resolve(approved, "X", "L:de", "Snorlax ex", None) is None
+    assert resolve(approved, "R2", "L:fr", "Hop's Snorlax", None) is None
+    assert resolve(sample, "X", "L:fr", "Snorlax", None) is None
+    sources = {row["printId"]: row.get("name") for row in read("verification/source_first_prints.json")["prints"]}
+    for item in read("collector_catalogue.json")["items"]:
+        exact = names["releases"].get(item["cardReleaseId"])
+        if exact and item["localCardName"] not in sources.values():
+            assert item["localCardName"] == exact["value"], item["itemId"]
+        if item["localCardName"] is None:
+            assert item["cardName"] not in names["meta"]["speciesOnlyCardNames"] \
+                or item["localizationId"] not in names["speciesNames"], item["itemId"]
+            assert item["localizationId"] not in names["patterns"].get(item["cardName"], {}) \
+                or item["cardName"] not in names["meta"]["derivedPatternCardNames"], item["itemId"]
+
+
+def numbering_basis_regressions() -> None:
+    # Owner decision 2026-10-22: an unnumbered DP1 card shows its DP Battle Pokédex identifier as
+    # collector number, while the empty localNumber stays the finish-unit join key.
+    graph = read("verification/authoritative_graph.json")
+    release = next(row for row in collector.entity_payloads(graph, "card-release")
+                   if row["cardReleaseId"] == "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up")
+    assert release["localNumber"] == "" and release["numberingBasis"]["collectorNumber"] == "DPBP#174"
+    items = [row for row in read("collector_catalogue.json")["items"] if row["cardReleaseId"] == release["cardReleaseId"]]
+    assert items and all((row["collectorNumber"], row["collectorNumberDenominator"]) == ("DPBP#174", None)
+                         for row in items)
+
+
 def main() -> None:
+    numbering_basis_regressions()
+    local_card_name_regressions()
     reviewed_release_date_regressions()
     unicode_source_uri_regressions()
     source_first_finish_decision_regressions()
@@ -441,7 +508,16 @@ def main() -> None:
     cs2ac_086_items = [
         row for row in catalogue["items"] if row["cardReleaseId"] == cs2ac_086_release
     ]
-    assert {row["finish"] for row in cs2ac_086_items} == {"holo", "reverse-holo"}
+    # Owner decision 2026-10-22: the s4 84 via-release is merged into CS2aC 086. Its marketplace
+    # finish candidates stay candidates; only the reviewed finishes are verified printings.
+    assert {row["finish"] for row in cs2ac_086_items if row["itemKind"] == "verified-printing"} \
+        == {"holo", "reverse-holo"}
+    assert {(row["finish"], tuple(row["legacyChecklistIds"])) for row in cs2ac_086_items
+            if row["itemKind"] == "finish-candidate"} == {
+        ("non-holo", ("s4-84-s-chinese-none-non-holo",)),
+        ("reverse-holo", ("s4-84-s-chinese-none-reverse-holo",)),
+    }
+    cs2ac_086_items = [row for row in cs2ac_086_items if row["itemKind"] == "verified-printing"]
     assert all(
         row["collectorNumber"] == "086" and row["collectorNumberDenominator"] == "115"
         for row in cs2ac_086_items
@@ -896,7 +972,9 @@ def main() -> None:
         ("s10a T", "2022-07-29", "https://asia.pokemon-card.com/th/archives/1596/"),
     ):
         rows = [row for row in thai if row["localSetCode"] == code]
-        assert rows and all(row["releaseDate"] == date and url in row["sourceLinks"] for row in rows)
+        # Since the #431 merge, s10a T also holds 058/071, dated by its own source-first row.
+        assert rows and all(row["releaseDate"] == date for row in rows)
+        assert any(url in row["sourceLinks"] for row in rows)
     for release_fragment, finish, image_url in (
         (":sc3b T:126/158:", "holo", "https://down-th.img.susercontent.com/file/th-11134207-7rash-m5u9t0xfqxstb7"),
         (":sv4a:145/190:", "reverse-holo", "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg"),
