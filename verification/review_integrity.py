@@ -305,6 +305,14 @@ def _check_finish_printings(suite: Suite, finish_units: list[dict]) -> None:
     suite.check("stamp roles valid and finish-safe", not bad_roles, ",".join(first(bad_roles)))
 
 
+def _tcgdex_finish_preserved(finish_unit: dict | None, finish: str, url: str) -> bool:
+    return any(
+        printing.get("finish") == finish
+        and any(source.get("url") == url for source in (printing.get("sources") or []))
+        for printing in (finish_unit or {}).get("printings", [])
+    )
+
+
 def _check_tcgdex_positives(
     suite: Suite, units: list[dict], finish_units: list[dict], tcgdex_snapshot: dict,
     owner_rejected: set[tuple[str, str, str, str]] = frozenset(),
@@ -330,12 +338,7 @@ def _check_tcgdex_positives(
             # Rule 4: only a recorded owner adjudication may overrule a positive source flag.
             if (unit.get("setCode"), str(unit.get("number")), unit.get("language"), finish) in owner_rejected:
                 continue
-            preserved = any(
-                printing.get("finish") == finish
-                and any(source.get("url") == url for source in (printing.get("sources") or []))
-                for printing in (finish_unit or {}).get("printings", [])
-            )
-            if not preserved:
+            if not _tcgdex_finish_preserved(finish_unit, finish, url):
                 missing_tcgdex_positives.append(
                     f"{unit.get('setCode')} {unit.get('number')} {unit.get('language')} {finish}"
                 )

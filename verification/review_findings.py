@@ -1737,6 +1737,39 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
         updates.update({"resolved_units": resolved_units, "by_provider": by_provider, "single_source": single_source, "single_source_units": single_source_units, "weak_single": weak_single, "corroborated_units": corroborated_units})
     return updates
 
+def _adjudicated_list_problem(unit, key, decision) -> str | None:
+    available = sorted(unit.get("availableFinishes") or [])
+    if unit.get("completenessStatus") != "owner-adjudicated":
+        return None
+    if not decision:
+        return f"{unit['finishUnitId']} {key}: owner-adjudicated with no recorded decision"
+    named = sorted(decision.get("availableFinishes") or [])
+    if named != available:
+        return f"{unit['finishUnitId']} {key}: decision names {named}, unit has {available}"
+    return None
+
+
+def _rejected_finish_problem(unit, key, decision) -> str | None:
+    rejected = set(decision.get("rejectedFinishes") or [])
+    if rejected & (set(decision.get("availableFinishes") or []) | set(unit.get("availableFinishes") or [])):
+        return f"{unit['finishUnitId']} {key}: rejected finish {sorted(rejected)} is still available"
+    if not (unit.get("printings") or []):
+        return f"{unit['finishUnitId']} {key}: adjudicated with no printing evidence at all"
+    return None
+
+
+def owner_finish_decision_problems(finish_units, finish_decisions) -> list[str]:
+    """E13: an owner finish decision closes only an established list and rejects nothing still present."""
+    problems: list[str] = []
+    for unit in finish_units:
+        key = (unit["setCode"], unit["number"], unit["language"])
+        decision = finish_decisions.get(key)
+        problems.append(_adjudicated_list_problem(unit, key, decision))
+        if decision:
+            problems.append(_rejected_finish_problem(unit, key, decision))
+    return [problem for problem in problems if problem]
+
+
 def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     with guarded("G5", "finish store consistency"):
@@ -1790,27 +1823,7 @@ def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
             (d["setCode"], d["number"], d["language"]): d
             for d in load("verification/owner_adjudications.json").get("finishDecisions", [])
         }
-        adjudicated_finish_problems: list[str] = []
-        for unit in finish_units:
-            key = (unit["setCode"], unit["number"], unit["language"])
-            decision = finish_decisions.get(key)
-            if unit.get("completenessStatus") == "owner-adjudicated":
-                if not decision:
-                    adjudicated_finish_problems.append(
-                        f"{unit['finishUnitId']} {key}: owner-adjudicated with no recorded decision")
-                elif sorted(decision.get("availableFinishes") or []) != sorted(
-                        unit.get("availableFinishes") or []):
-                    adjudicated_finish_problems.append(
-                        f"{unit['finishUnitId']} {key}: decision names "
-                        f"{sorted(decision.get('availableFinishes') or [])}, unit has "
-                        f"{sorted(unit.get('availableFinishes') or [])}")
-            rejected = set((decision or {}).get("rejectedFinishes") or [])
-            if rejected & (set(decision.get("availableFinishes") or []) | set(unit.get("availableFinishes") or [])):
-                adjudicated_finish_problems.append(
-                    f"{unit['finishUnitId']} {key}: rejected finish {sorted(rejected)} is still available")
-            if decision and not (unit.get("printings") or []):
-                adjudicated_finish_problems.append(
-                    f"{unit['finishUnitId']} {key}: adjudicated with no printing evidence at all")
+        adjudicated_finish_problems = owner_finish_decision_problems(finish_units, finish_decisions)
         check(
             "E13",
             "Every owner-adjudicated finish closes a list the evidence already established",
