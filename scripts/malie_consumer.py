@@ -17,8 +17,8 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 PROFILE = "snoredex-malie-sv-pilot/1"
-PROFILE_CONTRACT_SHA256 = "2d91b30ef97256247d70976b6369be283156398b0ca9d228ec28ca4c7170b645"
-PILOT_SEMANTICS_SHA256 = "e11d92f662d3cdf8a1cfd979076596ef6ded633b75746ee5e7d9b883c0a642e9"
+PROFILE_CONTRACT_SHA256 = "e98482854bd24c9c4b075e58a69a1cb71d6232d1863ad28866bda5b733b40b1d"
+PILOT_SEMANTICS_SHA256 = "b615e8839dcdc5d59556d83051b4981913f91f92a4ef92df5524cc9e1bc6834b"
 SEMANTIC_FIELDS = ("itemId", "cardReleaseId", "physicalPrintingId", "localizationId", "localSetId",
                    "setEditionId", "edition", "finish", "foilPattern", "markings", "distribution",
                    "cardSize", "errorClass", "sourcePrintingId", "finishUnitId", "itemKind")

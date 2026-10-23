@@ -42,8 +42,10 @@ def expected_pilot(result):
     assert german["copyright"]["text"] == "©2023 Pokémon/Nintendo/Creatures/GAME FREAK"
     assert german["text"][1]["name"] == "Prallpresse" and german["text"][1]["damage"]["amount"] == 130
     withheld = {row["physicalPrintingId"]: row for row in result["items"] if "card" not in row}
-    assert set(withheld) == {None, "PHYSICAL:F0507-P01", "PHYSICAL:F0507-P02"}
-    assert withheld[None]["status"] == "outside-profile"
+    # The Jungle era-boundary item is the German 1st Edition holo since the 2026-10-22 edition split.
+    jungle = "PHYSICAL:PRINTING:28d92d271b352da03805259a"
+    assert set(withheld) == {jungle, "PHYSICAL:F0507-P01", "PHYSICAL:F0507-P02"}
+    assert withheld[jungle]["status"] == "outside-profile"
     assert withheld["PHYSICAL:F0507-P01"]["identity"]["distribution"]["kind"] == "elite-trainer-box"
     assert withheld["PHYSICAL:F0507-P02"]["identity"]["distribution"]["kind"] == "pokemon-center-elite-trainer-box"
     assert withheld["PHYSICAL:F0507-P02"]["identity"]["markings"][0]["role"] == "distribution-promo"
@@ -53,16 +55,16 @@ def expected_pilot(result):
 def corruptions(script, bundle, original):
     mutations = [
         lambda d: d["report.json"]["entries"].pop(),
-        lambda d: d["report.json"]["entries"][1].update(physicalPrintingId="PHYSICAL:F0227-P01"),
+        lambda d: d["report.json"]["entries"][0].update(physicalPrintingId="PHYSICAL:F0227-P01"),
         lambda d: d["profile.json"].update(profileId="stale-profile"),
         lambda d: d["cards.json"][1].pop("foil"),
-        lambda d: d["report.json"]["entries"][0].pop("identity"),
-        lambda d: d["report.json"]["entries"][0]["identity"].update(localizationId="LOCALIZATION:WEST:en"),
-        lambda d: d["report.json"]["entries"][0].pop("fieldSources"),
-        lambda d: d["report.json"]["entries"][0].update(reasons=[{"status": "outside-profile"}]),
-        lambda d: d["report.json"]["entries"][2].update(identity=d["report.json"]["entries"][5]["identity"]),
-        lambda d: d["report.json"]["entries"][1]["identity"].update(localSetId="LOCALSET:WEST:SVP"),
-        lambda d: d["report.json"]["entries"][2]["identity"].update(physicalSources=[]),
+        lambda d: d["report.json"]["entries"][4].pop("identity"),
+        lambda d: d["report.json"]["entries"][4]["identity"].update(localizationId="LOCALIZATION:WEST:en"),
+        lambda d: d["report.json"]["entries"][4].pop("fieldSources"),
+        lambda d: d["report.json"]["entries"][4].update(reasons=[{"status": "outside-profile"}]),
+        lambda d: d["report.json"]["entries"][1].update(identity=d["report.json"]["entries"][5]["identity"]),
+        lambda d: d["report.json"]["entries"][0]["identity"].update(localSetId="LOCALSET:WEST:SVP"),
+        lambda d: d["report.json"]["entries"][1]["identity"].update(physicalSources=[]),
     ]
     for mutate in mutations:
         docs = {name: json.loads(raw) for name, raw in original.items()}
@@ -112,8 +114,8 @@ def semantic_corruptions(script, bundle, original):
         replace_pilot_identity,
         replace_printing_semantics,
         replace_source_eligibility,
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(authorityTier=5),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(url="https://example.invalid/evidence"),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["sources"][0].update(authorityTier=5),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["sources"][0].update(url="https://example.invalid/evidence"),
         lambda d: d["profile.json"]["languages"].update({"LOCALIZATION:WEST:en": "de-DE"}),
         lambda d: d["report.json"].update(inputs={"collector_catalogue.json": "0" * 64}),
         lambda d: d["cards.json"][0].pop("name"),
@@ -128,13 +130,13 @@ def semantic_corruptions(script, bundle, original):
         lambda d: d["cards.json"][0]["collector_number"].update(numeric=42),
         lambda d: d["cards.json"][0]["rarity"].update(icon="SOLID_STAR"),
         lambda d: d["cards.json"][0]["copyright"].update(year=1999),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"].update(
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"].update(
             observations=[], sources=[], covers=[]),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(sourceIds=["missing"]),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(state="not-a-state"),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0]["scope"].update(physicalPrintingIds=[]),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["sources"][0].update(sha256="bad"),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/text"].update(covers=[]),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["observations"][0].update(sourceIds=["missing"]),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["observations"][0].update(state="not-a-state"),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["sources"][0]["scope"].update(physicalPrintingIds=[]),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["sources"][0].update(sha256="bad"),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/text"].update(covers=[]),
     ]
     for mutate in mutations:
         docs = {name: json.loads(raw) for name, raw in original.items()}
@@ -160,8 +162,8 @@ def value_corruptions(script, bundle, original):
     mutations = [
         lambda d: d["cards.json"][0].update(name="Pikachu"),
         lambda d: d["cards.json"][0]["text"][1]["damage"].update(amount=140),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].pop("value"),
-        lambda d: d["report.json"]["entries"][1]["fieldSources"]["/name"]["observations"][0].update(value="Pikachu"),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["observations"][0].pop("value"),
+        lambda d: d["report.json"]["entries"][0]["fieldSources"]["/name"]["observations"][0].update(value="Pikachu"),
         replace_foil_mapping,
     ]
     for mutate in mutations:
@@ -184,7 +186,7 @@ def value_corruptions(script, bundle, original):
 def replace_foil_mapping(documents):
     documents["cards.json"][1]["foil"]["type"] = "COSMOS"
     # Also change the observation so the independent physical mapping must reject it.
-    for row in documents["report.json"]["entries"][3]["fieldSources"]["/foil"]["observations"]:
+    for row in documents["report.json"]["entries"][2]["fieldSources"]["/foil"]["observations"]:
         if row["state"] == "known":
             row["value"]["type"] = "COSMOS"
 
@@ -214,7 +216,7 @@ def replace_pilot_identity(documents):
 def remove_name_contract(documents):
     documents["cards.json"][0].pop("name")
     documents["profile.json"]["payloadSchema"]["required"].remove("name")
-    field = documents["report.json"]["entries"][1]["fieldSources"]["/name"]
+    field = documents["report.json"]["entries"][0]["fieldSources"]["/name"]
     field["covers"] = []
     for observation in field["observations"]:
         observation["state"] = "not-applicable"
