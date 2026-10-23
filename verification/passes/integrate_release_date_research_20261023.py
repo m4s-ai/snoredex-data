@@ -96,7 +96,7 @@ def observation_pair(surface_id, finding, source, edge_id):
         "retrievedAt": source["retrievedAt"],
         "captureMethod": source["captureForm"],
         "responseSha256": source["originalSha256"],
-        "responseHashScope": "file as fetched, before line-ending normalization",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
         "retainedSha256": source["sha256"],
         "retainedPath": f"{BUNDLE}/{source['retainedPath']}",
         "excerpt": source["excerpt"],

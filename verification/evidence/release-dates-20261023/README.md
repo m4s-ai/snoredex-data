@@ -47,5 +47,5 @@ Five tier-3 date-only providers are new: `kartenbasis`, `mycomics`, `micromania`
 ## Retention
 
 `findings.json` lists every retained file in its `retention` block, with `sha256` of the committed bytes.
-For 23 HTML pages, line endings were normalized to LF to satisfy check `X1`. Those entries also keep the `originalSha256` of the file as fetched.
+For 23 HTML pages, line endings were normalized to LF to satisfy check `X1`. In 25 pages, contact e-mail addresses and credential-like words (login-form labels, script keys) were replaced by `[redacted-email]` / `[redacted]` to satisfy checks `P4`/`P6`; no dated excerpt was touched. Every changed entry keeps the `originalSha256` of the file as fetched and names its change in `normalization`.
 Where a CDN blocked plain fetches, `captureForm` records that the file is the DOM serialized by headless Chromium.
