@@ -1,0 +1,495 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head><script src="/d-Headiction-our-How-and-ther-Lord-That-manly-sp" async></script>
+
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-V9L7');</script>
+<!-- End Google Tag Manager -->
+
+
+<link rel="shortcut icon" href="https://assets.pokemon.com/static2/_ui/img/favicon.ico"/>
+<link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/main.css"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400;1,500&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700&subset=latin-ext&display=swap" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css" />
+
+<script src="https://assets.pokemon.com/static2/_ui/js/vendor/modernizr.custom.js"></script>
+    <script src="https://www.recaptcha.net/recaptcha/enterprise.js?render=6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO&hl=en"></script>
+
+
+<script>
+    // TODO: this should be moved to a better place in the application
+    // needed for image deferred loading in sliders
+    window.addEventListener('load', function () {
+        window.loaded = true;
+    });
+</script>
+
+
+<script>
+    window.token = "4irb2DZnTqszXC3dKKW48KmSgGELh60QcW3VrBbRAo5bgwFIfDdCFypAvQvwR2SK";
+    window.mockAPI = false;
+    window.loginURL = 'https://trainer.pokemon.com/profile';
+    window.pokemonUI = window.pokemonUI || {};
+    window.staticAssetsVersionNumber = 'r1.1.8';
+
+
+    window.pokemonUI.recaptcha_key = "6Lc4P0MoAAAAAAhyCYBhoVfHZUF3HMvFdXSRZ-kO";
+    window.pokemonUI.email_signup_api = "https://api.emo.pokemon.com/";
+    window.pokemonUI.countryCode = 'us';
+    window.pokemonUI.api = {
+        'user-details': 'https://www.pokemon.com/api/users/details',
+        'base-url-secure': 'https://www.pokemon.com',
+
+        'gsa': '/us/search/api/'
+
+    };
+
+    window.pokemonUI.config = {
+        'collection': 'production_pokemon_collection'
+    };
+
+    window.pokemonUI.modals = window.pokemonUI.modals || {};
+    window.pokemonUI.modals = {
+        "season": "Season",
+        "episode": "Episode",
+        "legal": "Notice: If you click on the YouTube video above, you will leave Pokemon.com. The Pokémon Company International is not responsible for the content of any linked website that is not operated by The Pokémon Company International. Please note that these websites' privacy policies and security practices may differ from The Pokémon Company International's standards.",
+
+        "twitchlegal": "Notice: If you click on the Twitch video above, you will leave Pokemon.com. The Pokémon Company International is not responsible for the content of any linked website that is not operated by The Pokémon Company International. Please note that these websites' privacy policies and security practices may differ from The Pokémon Company International's standards.",
+    };
+    window.pokemonUI.dictionary = window.pokemonUI.dictionary || {};
+    window.pokemonUI.dictionary.dashboard = {
+        "youRecentlyPurchased": "You Recently Redeemed",
+        "shopMore": "Shop More"
+    };
+    window.pokemonUI.global_dictionary = window.pokemonUI.global_dictionary || {};
+    window.pokemonUI.global_dictionary.search = {
+        'searchUrl': '/us/search',
+        'GSALanguageCode': 'us',
+        'sortBy': 'Sort by:',
+        'filterBy': 'Filter by:',
+        'selectCategory': 'View All',
+        'mostRelevant': 'Most Relevant',
+        'mostRecent': 'Most Recent',
+        'returnedResults': 'Returned XXXX Results',
+        'shortQuery': 'Your search term is too short.',
+        'recommendedResults': 'Recommended Results',
+        'playGame': 'Play Game',
+        'all': {title: 'View All'},
+        'pokedex': {title: 'Pokédex'},
+        'videogames': {title: 'Video Game'},
+        'tcg': {title: 'Trading Card Game'},
+        'funzone': {title: 'Online Game'},
+        'animation': {title: 'Animation'},
+        'news': {title: 'News'},
+        'events': {title: 'Events'},
+        'strategy': {title: 'Strategy'},
+
+        "numberPrefix": "#"
+    };
+    window.pokemonUI.global_dictionary.datatables = {
+        'search': 'Search:',
+        'previous': 'Previous',
+        'next': 'Next',
+        'emptyTable': "No data is available.",
+        'zeroRecords': "No matching records found."
+    };
+    window.pokemonUI.global_dictionary.errorMessages = {
+        'dataError': 'Currently unavailable. Please try again.'
+    };
+    window.pokemonUI['ui-path'] = 'https://assets.pokemon.com/static2/_ui/'
+
+    window.pokemonUI.global_api = {
+
+        'gsa': '/us/search/api/',
+
+        'status-indicators': {
+            'game-server-status': '/api/tcg/game_server_status',
+            'tcgo-in-maintenance': '/api/tcg/in_maintenance_status',
+            'notifications': 'https://www.pokemon.com/api/user/notifications/config'
+        }
+    };
+
+    window.pokemonUI.site_search_api = {
+        'url': 'https://api.search.prod.pokemon.com/v1/search'
+    }
+
+    window.pokemonUI.cookie = {
+        set: function (name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            } else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        },
+
+        get: function (name) {
+            var nameEQ = name + '=',
+                ca = document.cookie.split(';'),
+                c, i = 0, ii = 0;
+
+            for (i = 0, ii = ca.length; i < ii; i++) {
+                c = ca[i];
+
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1, c.length);
+                }
+
+                if (c.indexOf(nameEQ) === 0) {
+                    var value = c.substring(nameEQ.length, c.length);
+                    if (value.charAt(0) == '"' && value.charAt(value.length - 1) == '"') {
+                        value = value.substring(1, value.length - 1);
+                    }
+                    return value;
+                }
+            }
+            return null;
+        }
+    };
+
+    window.enableDashboard = true;
+
+</script>
+
+<script type="module" src="/static-assets/app/static3/pcom-next-footer/pcom-next-footer.js?v=r1.1.8"></script>
+
+                <link rel="alternate" hreflang="it" href="https://www.pokemon.com/it/gcc/galleria-prodotti/mazzi-dei-campionati-mondiali-2023" />
+                <link rel="alternate" hreflang="en-gb" href="https://www.pokemon.com/uk/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks" />
+                <link rel="alternate" hreflang="en" href="https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks" />
+                <link rel="alternate" hreflang="de" href="https://www.pokemon.com/de/pokemon-sammelkartenspiel/Produktgalerie/weltmeisterschaftsdecks-2023" />
+
+<meta charset="utf-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv="Content-Language" content="en"/>
+<meta name="language" content="en"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta name="twitter:card" content="summary" />
+
+    <meta name="pkm-title" content="2023 Pokémon&amp;nbsp;TCG World Championships Decks" />
+    <meta property="og:title" content="2023 Pokémon&amp;nbsp;TCG World Championships Decks" />
+<meta name="twitter:title" content="2023 Pokémon&amp;nbsp;TCG World Championships Decks" />
+
+        <meta name="pkm-image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/trading-card-game/series/incrementals/2024/2023-wcs-decks/2023-wcs-decks-169-en.png"/>
+<meta property="og:image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/trading-card-game/series/incrementals/2024/2023-wcs-decks/2023-wcs-decks-169-en.png" />
+<meta name="twitter:image" content="https://www.pokemon.com/static-assets/content-assets/cms2/img/trading-card-game/series/incrementals/2024/2023-wcs-decks/2023-wcs-decks-169-en.png" />
+
+
+
+    <meta name="description" content="Hone your skills with decks that some of the game’s top players used in the 2023 Pokémon World Championships." />
+    <meta property="og:description" content="Hone your skills with decks that some of the game’s top players used in the 2023 Pokémon World Championships." />
+    <meta name="twitter:description" content="Hone your skills with decks that some of the game’s top players used in the 2023 Pokémon World Championships." />
+    <meta name="pkm-description" content="Hone your skills with decks that some of the game’s top players used in the 2023 Pokémon World Championships." />
+
+    <meta name="keywords" content="2023, Pokémon TCG, World, Championships, Decks" />
+    <meta name="pkm-modified-date" content="20240229" />
+
+    <link rel="canonical" href="https://www.pokemon.com/us/pokemon-tcg/product-gallery/2023-pokemon-tcg-world-championships-decks" />
+
+<link rel="stylesheet" type="text/css" media="all" href="/static-assets/app/static3/pcom-next-footer/pcom-next-footer-reset.css?v=r1.1.8" />
+        <link rel="stylesheet" href="https://assets.pokemon.com/static2/_ui/css/template-d.css" />
+        <link rel="stylesheet" href="/static-assets/app/static3/css/iframe-embed.css" />
+
+        <title>2023 Pokémon&nbsp;TCG World Championships Decks | Pokemon.com</title>
+	</head>
+	<body class="us fluid custom-form-elements">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-V9L7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+<div class="main-filler"></div>
+
+
+<nav class="main">
+
+    <div class="blocker"></div>
+
+    <div class="content-wrapper">
+
+        <div class="nav-bar" style="display: none;">
+            <a href="#" class="nav-toggle"><span
+                    class="icon icon_hamburger"></span></a>
+
+            <ul class="dashboard-open visible-mobile">
+                <li class="visible-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                 src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-avatar.png"
+                                 alt="View Profile"/>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="visible-not-signed-in">
+                    <a href="https://trainer.pokemon.com/profile">
+                        <div class="avatar-icon-wrapper">
+                            <img class="avatar-icon avatar-icon-mobile"
+                                src="https://assets.pokemon.com/static2/_ui/img/chrome/profile-navigation/profile-nav-signup.png"
+                                alt="Log In / Sign Up"/>
+                        </div>
+                        <div class="sign-in-text-wrapper sign-in-text-wrapper-mobile">
+                            Log In
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+
+    </div>
+
+</nav>
+
+        <div class="container">
+
+<section id="template-d-hero">
+    <div class="hero-wrapper">
+        <div >
+                <div class="single-image-wrapper">
+                            <img src="/static-assets/content-assets/cms2/img/trading-card-game/series/incrementals/2024/2023-wcs-decks/2023-wcs-decks-169-en.png" alt="2023 Pokémon TCG World Championships Decks" />
+                </div>
+                <span class="notch-bottom-left hidden-mobile"></span>
+        </div>
+    </div>
+</section>
+	        <section class="mosaic section template-d">
+                <div class="column-8 push-1">
+                    <article class="full-article">
+                        <div class="content-block content-block-full">
+
+                            <h1 class="us-title" >2023 Pokémon&nbsp;TCG World Championships Decks</h1>
+
+                                <div class="date generic-date" >
+                                    Launch: March 01, 2024
+                                </div>
+
+                            <div class="full-article-body" >
+                                        <p>Grab a World Championships deck and play like a champion! Choose one of four powerful decks, each a card-for-card replica of an actual title-contender&rsquo;s deck from the 2023 Pok&eacute;mon Trading Card Game World Championships!</p>
+<p>Each 2023 Pok&eacute;mon TCG World Championships Deck includes:</p>
+<ul class="list">
+<li>
+<p>60-card World Championships Deck</p>
+</li>
+<li>
+<p>2023 World Championships booklet</p>
+</li>
+<li>
+<p>Special 2023 World Championships pin</p>
+</li>
+<li>
+<p>2023 World Championships coin</p>
+</li>
+<li>
+<p>2023 World Championships deck box</p>
+</li>
+<li>
+<p>A playmat and poster</p>
+</li>
+<li>
+<p>A code card for <a href="https://tcg.pokemon.com/tcgl">Pok&eacute;mon Trading Card Game Live</a></p>
+</li>
+</ul>
+<p>The 2023 Pok&eacute;mon TCG World Championships Decks are available at the Pok&eacute;mon Center and where Pok&eacute;mon TCG products are sold.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <div class="hidden-mobile">
+<div class="column-4 push-9" >
+    <div class="content-block content-block-full more-cards-block">
+        <a class="button button-lightblue" href="/us/pokemon-tcg/product-gallery/">Return to Gallery</a>
+    </div>
+
+    <div class="content-block content-block-full more-cards-block">
+        <a class="button button-green pokemon-center-link" target="_blank" href="https://www.pokemoncenter.com/category/trading-card-game/?utm_source=p&utm_campaign=ProductGallery&utm_medium=referral&utm_term=TCGCards">Shop Pok&eacute;mon Center</a>
+    </div>
+
+
+</div>
+                </div>
+
+                <div class="loader"></div>
+            </section>
+
+            <div class="visible-mobile">
+<div class="column-4 push-9" >
+    <div class="content-block content-block-full more-cards-block">
+        <a class="button button-lightblue" href="/us/pokemon-tcg/product-gallery/">Return to Gallery</a>
+    </div>
+
+    <div class="content-block content-block-full more-cards-block">
+        <a class="button button-green pokemon-center-link" target="_blank" href="https://www.pokemoncenter.com/category/trading-card-game/?utm_source=p&utm_campaign=ProductGallery&utm_medium=referral&utm_term=TCGCards">Shop Pok&eacute;mon Center</a>
+    </div>
+
+
+</div>
+            </div>
+
+        </div>
+
+
+  <div id="back-to-top" class="visible-mobile">
+    <span class="offscreen">Back to Top</span>
+  </div>
+
+  <footer class="global-footer">
+  </footer>
+
+<div id="modal" class="popup">
+    <div class="externalLink">
+        <h6>
+
+            You are about to leave a site operated by The Pokémon Company International, Inc.
+
+        </h6>
+        <p>
+
+            The Pokémon Company International is not responsible for the content of any linked website that is not operated by The Pokémon Company International. Please note that these websites' privacy policies and security practices may differ from The Pokémon Company International's standards.
+
+        </p>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Continue
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn">
+
+                Cancel
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="pokemon-center-modal" class="popup">
+    <div class="externalLink centerLink">
+        <h6>
+            Click Continue to visit PokemonCenter.com, our official online shop.
+        </h6>
+        <h6>
+            The privacy and security policies differ.
+        </h6>
+        <div class="buttons-wrapper">
+            <a href="#" class="button button-green arrow-right continueBtn">
+
+                Continue
+
+            </a>
+            <a href="#" class="button button-darkgray arrow-left closeBtn" target="_blank">
+
+                Cancel
+
+            </a>
+        </div>
+    </div>
+</div>
+
+<div id="site-search-modal" class="popup">
+
+	<form id="site-search-widget" class="form-analytics" name="site-search-modal">
+		<span class="search"><input type="search" placeholder="Search" name="search" id="site-search-widget-term" autocomplete="off" /></span>
+		<span class="submit icon icon_search"><input type="submit" value="" id="site-search-widget-submit"/></span>
+        <div id="modal-search-results"></div>
+	</form>
+</div>
+
+<div id='report-screen-name-success-modal' class='popup'>
+  <h6>Report Inappropriate Screen Name</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    Pokemon.com administrators have been notified and will review the screen name for compliance with the Terms of Use.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Close
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='report-screen-name-failure-modal' class='popup'>
+  <h6>Report Inappropriate Screen Name</h6>
+
+  <div class='modalBox'>
+    <img src="https://assets.pokemon.com/static2/_ui/img/chrome/external_link_bumper.png" alt="" class="hidden-mobile" />
+
+    <p>
+    Your request could not be completed. Please try again. If the problem persists, please contact Customer Support.
+    </p>
+
+    <div class='buttons-wrapper'>
+      <a href='#' class='button button-orange closeBtn'>
+        Close
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id='popupScreen' class="popupScreen"></div>
+
+
+  
+    
+<div id="video-modal" class="popup">
+<span class="watch-token-info"><span class="token_icon"></span><p class="token_verbal">You've been awarded <span class="token_amount">0</span> Token(s) for watching Pokémon TV!</p></span>
+    <div class="video-modal-wrapper">
+
+        <header class="video-header">
+            <h4 id="episodeInfo">
+
+            </h4>
+            <!-- HEADLINE -->
+            <h1 id="episodeTitle"></h1>
+        </header>
+
+        <div class="video-container">
+        </div>
+
+        <p class="legal" style="padding-top: 10px"></p>
+
+        <p class="video-summary">
+
+        </p>
+
+        
+
+        <a href="#" class="closeBtn button button-orange no-arrow right"><i class="icon icon_multiply"></i> Close</a>
+
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+    // define waitSeconds above require script tag
+    // to override the default, until main.js loads
+    window.requirejs = {
+        waitSeconds: 30 // when loaded, main.js also sets waitSeconds to 30
+    };
+</script>
+<script data-main="https://assets.pokemon.com/static2/_ui/js/template-d.js"
+        src="https://assets.pokemon.com/static2/_ui/js/vendor/require.js"></script>
+
+<script type="text/javascript">
+if (typeof _satellite !== "undefined") {
+  _satellite.pageBottom();
+}
+</script> 	<script type="text/javascript" src="/_Incapsula_Resource?SWJIYLWA=719d34d31c8e3a6e6fffd425f7e032f3&ns=1&cb=614717012" async></script></body>
+</html>

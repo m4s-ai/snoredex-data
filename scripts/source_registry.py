@@ -283,6 +283,96 @@ PROVIDERS: list[dict[str, Any]] = [
                   "no card identity, finish, absence or completeness authority."),
     },
     {
+        "providerId": "kartenbasis",
+        "displayName": "Kartenbasis reviewed German product date",
+        "organization": "Kartenbasis",
+        "homepage": "https://kartenbasis.de/",
+        "hosts": ["kartenbasis.de"],
+        "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+        "category": "retail-listing",
+        "authorityTier": 3,
+        "coverage": "only the exact German Twilight Masquerade 3-pack blister release field in the retained retailer product page",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product date from Kartenbasis.",
+        "notes": ("Manual positive date evidence only. The retained page names the German "
+                  "3-pack blister with its Relaxo variant and a Releasedatum field. It dates "
+                  "that retailer's named product, not every German market. Product prose lends "
+                  "no card identity, finish, absence or completeness authority."),
+    },
+    {
+        "providerId": "mycomics",
+        "displayName": "MyComics reviewed Italian product dates",
+        "organization": "MyComics",
+        "homepage": "https://mycomics.it/",
+        "hosts": ["mycomics.it", "www.mycomics.it"],
+        "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+        "category": "retail-listing",
+        "authorityTier": 3,
+        "coverage": "only the exact Italian Snorlax pin collection and Twilight Masquerade Snorlax blister release fields in retained retailer product pages",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product dates from MyComics.",
+        "notes": ("Manual positive date evidence only. Each retained page states Lingua Italiano, "
+                  "Data Uscita and the product EAN. It dates that retailer's named product, not "
+                  "an exhaustive first-distribution history. Product prose lends no card "
+                  "identity, finish, absence or completeness authority."),
+    },
+    {
+        "providerId": "micromania",
+        "displayName": "Micromania reviewed French product date",
+        "organization": "Micromania",
+        "homepage": "https://www.micromania.fr/",
+        "hosts": ["www.micromania.fr", "micromania.fr"],
+        "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+        "category": "retail-listing",
+        "authorityTier": 3,
+        "coverage": "only the exact French 2023 World Championships deck product release field in the retained retailer product page",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product date from Micromania.",
+        "notes": ("Manual positive date evidence only. The retained page dates the random-model "
+                  "French 2023 World Championships deck product (four decks, one EAN); it does "
+                  "not name the individual deck. No card identity, finish, absence or "
+                  "completeness authority."),
+    },
+    {
+        "providerId": "sodip",
+        "displayName": "Sodip reviewed Italian newsstand release month",
+        "organization": "Sodip",
+        "homepage": "https://lamiacopia.sodip.it/",
+        "hosts": ["lamiacopia.sodip.it"],
+        "licenseOrTerms": "Distributor's own terms; exact dated product fields retained for date verification only.",
+        "category": "retail-listing",
+        "authorityTier": 3,
+        "coverage": "only the exact Italian 2023 World Championships decks newsstand release month in the retained distributor product page",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized product release month from Sodip.",
+        "notes": ("Manual positive date evidence only. The retained page states Mese di uscita "
+                  "MARZO and a planned day; only the month is used because another Italian "
+                  "retailer gives a different day. No card identity, finish, absence or "
+                  "completeness authority."),
+    },
+    {
+        "providerId": "pokezentrum",
+        "displayName": "PokéZentrum reviewed German release calendar",
+        "organization": "PokéZentrum",
+        "homepage": "https://pokezentrum.de/",
+        "hosts": ["pokezentrum.de", "www.pokezentrum.de"],
+        "licenseOrTerms": "Publisher's own terms; exact dated calendar entries retained for date verification only.",
+        "category": "fan-news",
+        "authorityTier": 3,
+        "coverage": "only the German-language 2023 World Championships decks entry of the retained 2024 release calendar",
+        "supportsAbsence": False,
+        "usedFor": ["date"],
+        "attribution": "Localized release date from PokéZentrum.",
+        "notes": ("Manual positive date evidence only. The entry names Sprache Deutsch and says "
+                  "the decks appeared on 1 March 2024, inside the official Q1 2024 window. It "
+                  "does not name the individual deck. No card identity, finish, absence or "
+                  "completeness authority."),
+    },
+    {
         "providerId": "tcgcsv",
         "displayName": "TCGCSV (TCGplayer product data)",
         "organization": "TCGCSV",

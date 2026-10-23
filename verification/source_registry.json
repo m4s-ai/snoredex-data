@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 38,
-   "evidenceRecords": 1792,
-   "uniqueUrls": 1783,
+   "providers": 43,
+   "evidenceRecords": 1801,
+   "uniqueUrls": 1792,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7201
+   "claimsAttributed": 7211
   }
  },
  "providers": [
@@ -44,8 +44,8 @@
     "press.pokemon.com",
     "pokemon.gamespress.com"
    ],
-   "uniqueSources": 165,
-   "claimsSupported": 502
+   "uniqueSources": 166,
+   "claimsSupported": 503
   },
   {
    "providerId": "pokemon-cn-official",
@@ -148,8 +148,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 127,
-   "claimsSupported": 282
+   "uniqueSources": 129,
+   "claimsSupported": 285
   },
   {
    "providerId": "tcgdex",
@@ -327,6 +327,114 @@
    "notes": "Manual positive date evidence only. The exact page states Deutsch, Erschienen am and EAN 0820650452499, with Switzerland country metadata. The field dates that retailer's named German product, not every German market or an exhaustive first-distribution history. Product prose lends no card identity, finish, absence or completeness authority.",
    "hosts": [
     "www.wog.ch"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "kartenbasis",
+   "displayName": "Kartenbasis reviewed German product date",
+   "organization": "Kartenbasis",
+   "homepage": "https://kartenbasis.de/",
+   "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+   "category": "retail-listing",
+   "authorityTier": 3,
+   "coverage": "only the exact German Twilight Masquerade 3-pack blister release field in the retained retailer product page",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product date from Kartenbasis.",
+   "notes": "Manual positive date evidence only. The retained page names the German 3-pack blister with its Relaxo variant and a Releasedatum field. It dates that retailer's named product, not every German market. Product prose lends no card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "kartenbasis.de"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "mycomics",
+   "displayName": "MyComics reviewed Italian product dates",
+   "organization": "MyComics",
+   "homepage": "https://mycomics.it/",
+   "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+   "category": "retail-listing",
+   "authorityTier": 3,
+   "coverage": "only the exact Italian Snorlax pin collection and Twilight Masquerade Snorlax blister release fields in retained retailer product pages",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product dates from MyComics.",
+   "notes": "Manual positive date evidence only. Each retained page states Lingua Italiano, Data Uscita and the product EAN. It dates that retailer's named product, not an exhaustive first-distribution history. Product prose lends no card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "mycomics.it",
+    "www.mycomics.it"
+   ],
+   "uniqueSources": 2,
+   "claimsSupported": 2
+  },
+  {
+   "providerId": "micromania",
+   "displayName": "Micromania reviewed French product date",
+   "organization": "Micromania",
+   "homepage": "https://www.micromania.fr/",
+   "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+   "category": "retail-listing",
+   "authorityTier": 3,
+   "coverage": "only the exact French 2023 World Championships deck product release field in the retained retailer product page",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product date from Micromania.",
+   "notes": "Manual positive date evidence only. The retained page dates the random-model French 2023 World Championships deck product (four decks, one EAN); it does not name the individual deck. No card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "www.micromania.fr",
+    "micromania.fr"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "sodip",
+   "displayName": "Sodip reviewed Italian newsstand release month",
+   "organization": "Sodip",
+   "homepage": "https://lamiacopia.sodip.it/",
+   "licenseOrTerms": "Distributor's own terms; exact dated product fields retained for date verification only.",
+   "category": "retail-listing",
+   "authorityTier": 3,
+   "coverage": "only the exact Italian 2023 World Championships decks newsstand release month in the retained distributor product page",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized product release month from Sodip.",
+   "notes": "Manual positive date evidence only. The retained page states Mese di uscita MARZO and a planned day; only the month is used because another Italian retailer gives a different day. No card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "lamiacopia.sodip.it"
+   ],
+   "uniqueSources": 1,
+   "claimsSupported": 1
+  },
+  {
+   "providerId": "pokezentrum",
+   "displayName": "PokéZentrum reviewed German release calendar",
+   "organization": "PokéZentrum",
+   "homepage": "https://pokezentrum.de/",
+   "licenseOrTerms": "Publisher's own terms; exact dated calendar entries retained for date verification only.",
+   "category": "fan-news",
+   "authorityTier": 3,
+   "coverage": "only the German-language 2023 World Championships decks entry of the retained 2024 release calendar",
+   "supportsAbsence": false,
+   "usedFor": [
+    "date"
+   ],
+   "attribution": "Localized release date from PokéZentrum.",
+   "notes": "Manual positive date evidence only. The entry names Sprache Deutsch and says the decks appeared on 1 March 2024, inside the official Q1 2024 window. It does not name the individual deck. No card identity, finish, absence or completeness authority.",
+   "hosts": [
+    "pokezentrum.de",
+    "www.pokezentrum.de"
    ],
    "uniqueSources": 1,
    "claimsSupported": 1
@@ -14446,6 +14554,23 @@
    "usageCount": 13
   },
   {
+   "canonicalUrl": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+   "nonUrlEvidenceId": null,
+   "providerId": "kartenbasis",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-e716bb22-3016-5c2d-899a-7fdd8501a7d0"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.ligapokemon.com.br/?view=cards/card&card=Hop%27s%20Snorlax%20(117%2F096)&ed=PPPS7&num=117",
    "nonUrlEvidenceId": null,
    "providerId": "ligapokemon",
@@ -14541,6 +14666,57 @@
    ],
    "retrievedAt": "2026-10-12T19:21:32.148154Z",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+   "nonUrlEvidenceId": null,
+   "providerId": "micromania",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-80cf95fe-46dc-570b-9f5c-dfdcd38a6745"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+   "nonUrlEvidenceId": null,
+   "providerId": "mycomics",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-19865833-61f6-52cd-bfb5-b8d0beefb2be"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+   "nonUrlEvidenceId": null,
+   "providerId": "mycomics",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-27c7591e-7c91-5c4c-a420-b0491d05c0f2"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
   },
   {
    "canonicalUrl": null,
@@ -20980,6 +21156,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://pokemoncard.co.kr/_news?id=10333",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-d6202bd1-6110-528f-abcf-2a47928d4eb8"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://pokemoncard.co.kr/card/105",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-card-korea",
@@ -21012,6 +21205,24 @@
    ],
    "retrievedAt": "2026-10-06",
    "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokemoncard.co.kr/card/166",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
+    "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://pokemoncard.co.kr/card/180",
@@ -25792,6 +26003,23 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-official",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-125e07bd-3b39-5544-9e22-8bcfbd7c2957"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
+  },
+  {
    "canonicalUrl": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
    "nonUrlEvidenceId": null,
    "providerId": "pokemon-official",
@@ -26453,6 +26681,23 @@
     "item-e45f1f8a-c374-5f5c-abf9-bc97944a1cf4"
    ],
    "retrievedAt": "2026-10-12T19:27:45.930301+00:00",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokezentrum",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-39613eb1-2cea-5014-bdec-17a00c8c3e0d"
+   ],
+   "retrievedAt": "2026-10-23",
    "usageCount": 1
   },
   {
@@ -31194,6 +31439,23 @@
    ],
    "retrievedAt": "2026-08-08",
    "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270",
+   "nonUrlEvidenceId": null,
+   "providerId": "sodip",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "item-fe55f905-c6c0-5cec-9e89-8b08936aab75"
+   ],
+   "retrievedAt": "2026-10-23",
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://tcgcsv.com/docs",
