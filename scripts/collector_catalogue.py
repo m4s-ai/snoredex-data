@@ -349,7 +349,7 @@ def apply_default_card_size(items: list[dict[str, Any]]) -> None:
             row["cardSize"] = "standard"
 
 
-def printed_sizes() -> dict[tuple[str, ...], int]:
+def printed_sizes() -> dict[tuple[str, ...], Any]:
     """Printed run sizes by (numbering, set code) and gallery subset sizes by (numbering, set code, prefix)."""
     records = read_json(SET_SOURCES_PATH)["sourceRecords"]
     sizes: dict[tuple[str, ...], int] = {
@@ -358,13 +358,13 @@ def printed_sizes() -> dict[tuple[str, ...], int]:
     }
     sizes.update({
         (row["raw"]["numbering"], row["raw"]["legacySetCode"], row["raw"]["subsetPrefix"]):
-            row["raw"]["printedSubsetSize"]
+            (row["raw"].get("denominatorPrefix", row["raw"]["subsetPrefix"]), row["raw"]["printedSubsetSize"])
         for row in records if row["sourceKind"] == "printed-subset-size-record"
     })
     return sizes
 
 
-def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], int]) -> str | None:
+def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], Any]) -> str | None:
     """The denominator printed beside this item's number, in its own regional numbering."""
     number = row["collectorNumber"] or ""
     prefix = number.rstrip("0123456789")
@@ -375,7 +375,8 @@ def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], int]) 
     size = sizes.get((NUMBERING_BY_REGION.get(region), set_code, *([prefix] if prefix else [])))
     if not size:
         return None
-    return prefix + str(size).zfill(len(digits) if digits.startswith("0") else 0)
+    printed_prefix, size = size if isinstance(size, tuple) else ("", size)
+    return printed_prefix + str(size).zfill(len(digits) if digits.startswith("0") else 0)
 
 
 def apply_printed_set_size(items: list[dict[str, Any]]) -> None:

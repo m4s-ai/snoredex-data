@@ -414,6 +414,8 @@ def edition_rule_regressions() -> None:
     # A gallery subset ships inside its main set and prints its own run (owner, 2026-10-23).
     assert by_card[("LOCALIZATION:WEST:de", "LOR", "TG10")]["collectorNumberDenominator"] == "TG30"
     assert by_card[("LOCALIZATION:WEST:de", "LOR", "143")]["collectorNumberDenominator"] == "196"
+    # A database prefix the card does not print stays off the denominator (a003 prints 003/023).
+    assert by_card[("LOCALIZATION:CN:zh-Hans", "CSVH4C", "a003")]["collectorNumberDenominator"] == "023"
     # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
     assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
     # Card size defaults to standard (owner, 2026-10-23); a possible jumbo twin stays unknown.

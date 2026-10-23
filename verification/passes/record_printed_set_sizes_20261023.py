@@ -114,6 +114,49 @@ SIZES = [
 SUBSETS = [
     ("LOR", "TG", 30, "WEST", "swsh11tg"),
 ]
+# Read from the printed face of the catalogue's own retained card images (owner request,
+# 2026-10-23: check the cards of the sets still without a denominator). A product image attests
+# the printed text, like an illustrator credit; no physical-printing claim is made.
+# (legacy set code, printed size, region, printed evidence)
+PRINTED = [
+    ("sI100", 414, "JP", ["images/sI100_341_Snorlax_V1_588051.jpg", "images/sI100_342_Snorlax_V2_588052.jpg"]),
+    ("sA", 23, "JP", ["SPEC-0462"]),
+    ("sN", 24, "JP", ["SPEC-0058", "SPEC-0059", "SPEC-0060", "SPEC-0063"]),
+    ("CLF", 32, "JP", ["SPEC-0319", "SPEC-0320", "SPEC-0321"]),
+    ("svM", 175, "JP", ["SPEC-0272", "SPEC-0389", "SPEC-0464"]),
+    ("mP1", 23, "JP", ["SPEC-0025"]),
+    ("xsv2a", 165, "JP", ["SPEC-0061", "SPEC-0612"]),
+    ("xm2a", 193, "JP", ["SPEC-0410", "SPEC-0437"]),
+    ("CLV", 34, "WEST", ["images/CLV_016_Snorlax_745674.jpg"]),
+    ("CS1DC", 207, "CN", ["images/CS1DC_152_Snorlax_887087.png"]),
+    ("CSAC", 24, "CN", ["images/CSAC_009_Snorlax_V_882263.png"]),
+    ("CSM2.1C", 45, "CN", ["SPEC-0147"]),
+    ("CS3DC", 170, "CN", ["images/CS3DC_117_Snorlax_882597.png"]),
+    ("CS5DC", 153, "CN", ["images/CS5DC_097_Snorlax_V1_882375.png", "images/CS5DC_098_Snorlax_V2_882376.png"]),
+    ("CSUC", 12, "CN", ["SPEC-0153"]),
+    ("CSZC", 66, "CN", ["images/CSZC_018_Snorlax_854381.png"]),
+    ("151C", 151, "CN", ["images/151C_143_Snorlax_V1_819209.jpg", "images/151C_169_Snorlax_V2_819235.jpg"]),
+    ("CSVE1C", 177, "CN", ["images/CSVE1C_093_Snorlax_877905.png"]),
+    ("CSVL1C", 49, "CN", ["SPEC-0154"]),
+    ("CSVE2C", 207, "CN", ["images/CSVE2C_122_Snorlax_887279.png"]),
+    ("CSV10C", 222, "CN", ["images/CSV10C_175_Hop_s_Snorlax_897733.png"]),
+]
+# Database-prefixed numbers whose card prints the bare number: a001 prints 001/023.
+# (legacy set code, catalogue prefix, printed size, region, printed evidence)
+PRINTED_SUBSETS = [
+    ("CSMPC", "h", 24, "CN", ["SPEC-0431", "SPEC-0432"]),
+    ("CSVH1C", "a", 23, "CN", ["SPEC-0619"]),
+    ("CSVH4C", "a", 23, "CN", ["SPEC-0630"]),
+    ("CSVH4C", "p", 6, "CN", ["images/CSVH4C_p006_Snorlax_ex_888095.png"]),
+]
+
+
+def printed_basis(refs: list[str]) -> tuple[str, str]:
+    """Provider and basis for a size read from retained card faces."""
+    cited = [ref if ref.startswith("SPEC-") else
+             f"{ref} (sha256 {hashlib.sha256((ROOT / ref).read_bytes()).hexdigest()})" for ref in refs]
+    provider = "inspected-specimen" if any(ref.startswith("SPEC-") for ref in refs) else "cardmarket-product-image"
+    return provider, f"Read from the printed face of retained card images: {', '.join(cited)}."
 
 
 def read(path: Path):
@@ -128,6 +171,34 @@ def stable_id(prefix: str, *parts: str) -> str:
 def tcgdex_count(language: str, set_id: str) -> int:
     rows = read(ROOT / BUNDLE / f"sets-{language}.json")
     return next(row["cardCount"]["official"] for row in rows if row["id"] == set_id)
+
+
+def printed_record(code: str, size: int, region: str, refs: list[str]) -> dict:
+    provider, basis = printed_basis(refs)
+    return {
+        "sourceRecordId": stable_id("SET-SRC-SIZE", code),
+        "sourceKind": "printed-set-size-record",
+        "provider": provider,
+        "providerRecordKey": code,
+        "retrieved": RETRIEVED,
+        "raw": {"legacySetCode": code, "printedSetSize": size, "numbering": NUMBERING[region][0],
+                "basis": f"The denominator {size} printed beside the collector number. {basis}"},
+    }
+
+
+def printed_subset_record(code: str, prefix: str, size: int, region: str, refs: list[str]) -> dict:
+    provider, basis = printed_basis(refs)
+    return {
+        "sourceRecordId": stable_id("SET-SRC-SUBSET", code, prefix),
+        "sourceKind": "printed-subset-size-record",
+        "provider": provider,
+        "providerRecordKey": f"{code}\x1f{prefix}",
+        "retrieved": RETRIEVED,
+        "raw": {"legacySetCode": code, "subsetPrefix": prefix, "printedSubsetSize": size,
+                "denominatorPrefix": "", "numbering": NUMBERING[region][0],
+                "basis": (f"The catalogue number carries the database prefix {prefix!r}; the card prints "
+                          f"the bare number over {size:03d}. {basis}")},
+    }
 
 
 def record(code: str, size: int, region: str, set_id: str | None, printed: list[str]) -> dict:
@@ -206,7 +277,10 @@ def main(argv=None) -> int:
     existing = {row["providerRecordKey"] for row in records if row["sourceKind"] == "printed-set-size-record"}
     present = {row["sourceRecordId"] for row in records}
     added = [record(*entry) for entry in SIZES if entry[0] not in existing]
-    added += [row for row in (subset_record(*entry) for entry in SUBSETS) if row["sourceRecordId"] not in present]
+    added += [printed_record(*entry) for entry in PRINTED if entry[0] not in existing]
+    added += [row for row in [*(subset_record(*entry) for entry in SUBSETS),
+                              *(printed_subset_record(*entry) for entry in PRINTED_SUBSETS)]
+              if row["sourceRecordId"] not in present]
     mirrored = [row for row in [*added, *(r for r in records if r["sourceRecordId"].startswith(("SET-SRC-SIZE", "SET-SRC-SUBSET")))]
                 if mirror(graph, row)]
     for row in added:
