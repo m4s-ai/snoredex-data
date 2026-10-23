@@ -39,16 +39,16 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-10-23",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 535,
-      "withOnlyMarketplaceClaim": 14,
+      "withConfirmedFinish": 536,
+      "withOnlyMarketplaceClaim": 13,
       "pendingFinish": 11,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 10,
       "withNonHolo": 326,
-      "withHolo": 254,
+      "withHolo": 255,
       "withReverseHolo": 226,
       "withMirrorHolo": 22,
-      "withBothNonHoloAndHolo": 55,
+      "withBothNonHoloAndHolo": 56,
       "withUnresolvedProductMapping": 37,
       "withAnyUnresolvedDetail": 116,
       "tcgdexUrlsRequested": 308,
@@ -22995,17 +22995,18 @@
             ],
             "unitAvailableFinishes": [
               "non-holo",
+              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "marketplace-claimed",
-              "holo": "pending",
+              "holo": "unmapped",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "marketplace-claimed",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
@@ -23024,7 +23025,7 @@
                 "productMapping": "mapped"
               },
               {
-                "printingId": "F0327-P02",
+                "printingId": "F0327-P03",
                 "finish": "reverse-holo",
                 "foilPattern": null,
                 "markings": null,
@@ -23032,6 +23033,21 @@
                 "cardSize": "standard",
                 "verificationStatus": "marketplace-claimed",
                 "productMapping": "mapped"
+              },
+              {
+                "printingId": "F0327-P02",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "unknown",
+                "verificationStatus": "confirmed",
+                "productMapping": "unresolved",
+                "image": "verification/specimens/SPEC-0550.jpg",
+                "specimenIds": [
+                  "SPEC-0550",
+                  "SPEC-0560"
+                ]
               }
             ]
           },

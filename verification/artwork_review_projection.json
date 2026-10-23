@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-23",
-  "projectionVersion": "db1787dac3d400b6a9c75f988f0070e2351d8e48419ee6e13e644cbd466d8b87",
+  "projectionVersion": "a3a70acbf751f40d16a17ca549b9d5ee12adf27d13c06457d28b46588ce6c100",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 892,
-    "sourceObservations": 3230
+    "sourceObservations": 3232
   },
   "groups": [
     {
@@ -84586,7 +84586,7 @@
       "label": "Snorlax-Unfazed-Fat-Thumping-Snore",
       "members": [
         {
-          "cardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+          "cardReleaseId": "RELEASE:ID:Indonesian:s10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "reviewedAppearanceId": null,
@@ -84595,8 +84595,8 @@
           "locality": "ID",
           "language": "Indonesian",
           "script": "Latn",
-          "setEditionId": "EDITION:ID:Indonesian:S10a I",
-          "localSetCode": "S10a I",
+          "setEditionId": "EDITION:ID:Indonesian:s10a I",
+          "localSetCode": "s10a I",
           "localNumber": "058/071",
           "localIdentifierKnown": true,
           "state": "identified",
@@ -84609,23 +84609,37 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0550",
-              "cardReleaseId": "RELEASE:ID:Indonesian:S10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "physicalPrintingId": "PHYSICAL:PRINTING:7631ff245b90f5773daaeb52",
+              "semanticPrintingId": "PRINTING:7631ff245b90f5773daaeb52",
+              "cardReleaseId": "RELEASE:ID:Indonesian:s10a I:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
               "cardSize": "unknown",
-              "basis": "Physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180 readable. Colored vertical foil reflections cross the illustration and silver border.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0550",
+              "sourceFinishUnitId": "F0327",
+              "sourcePrintingId": "F0327-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:7631ff245b90f5773daaeb52",
               "specimenIds": [
                 "SPEC-0550",
                 "SPEC-0560"
+              ],
+              "sources": [
+                {
+                  "url": "https://down-id.img.susercontent.com/file/id-11134207-7r98y-lwug818tswp969",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180 readable. Colored vertical foil reflections cross the illustration and silver border. No exact foil-pattern taxonomy or exhaustive variant inventory asserted. Retained as SPEC-0550.",
+                  "retrievedAt": "2026-09-21"
+                },
+                {
+                  "url": "https://down-id.img.susercontent.com/file/id-11134207-7r98s-lt6dfj067fr1cc@resize_w450_nl.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Angled physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180. Multicolored vertical foil reflections cross the illustration and silver outer border. The seller watermark is not a printed card marking. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0560.",
+                  "retrievedAt": "2026-09-28"
+                }
               ]
             }
           ],
@@ -84657,7 +84671,7 @@
             {
               "src": "https://asia.pokemon-card.com/id/card-img/id00006007.png",
               "label": "publisher card image",
-              "observationId": "source-first:ID:S10a I:058/071:base",
+              "observationId": "source-first:ID:s10a I:058/071:base",
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
@@ -84698,12 +84712,30 @@
           ],
           "observations": [
             {
-              "observationId": "source-first:ID:S10a I:058/071:base",
+              "observationId": "finish:F0327-P02:0:14e0855f404223a2",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-id.img.susercontent.com/file/id-11134207-7r98y-lwug818tswp969",
+              "evidence": "Physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180 readable. Colored vertical foil reflections cross the illustration and silver border. No exact foil-pattern taxonomy or exhaustive variant inventory asserted. Retained as SPEC-0550.",
+              "contentHash": "9f88d143f3db37961a075bd5eb9d42a00924a2b8ed62a859355ecf2024d17d25",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0327-P02:1:f3e80122ccd0094e",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://down-id.img.susercontent.com/file/id-11134207-7r98s-lt6dfj067fr1cc@resize_w450_nl.webp",
+              "evidence": "Angled physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180. Multicolored vertical foil reflections cross the illustration and silver outer border. The seller watermark is not a printed card marking. No complete finish inventory or exact foil-pattern taxonomy is asserted. Retained as SPEC-0560.",
+              "contentHash": "fb5ff93c2ce6d6e9d0d885836eb8d9e738fc527900e369daf8b10b0ecb3b61a7",
+              "image": null
+            },
+            {
+              "observationId": "source-first:ID:s10a I:058/071:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/id/card-search/detail/6007/",
               "evidence": "The retained official Indonesian card detail 6007 and SPEC-0174 show Snorlax 058/071 in S10a I, including the printed attacks used for the explicit Work mapping. The exact render prints rarity R. The image is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "15809ce1935b6d73f09915dbfe6bfc2ddade2144187d2da30a6e18065811e45c",
+              "contentHash": "1f3e7ccb19cbc6e3178f19255115931323d09de266dcde2b973536ffc610c46c",
               "image": "https://asia.pokemon-card.com/id/card-img/id00006007.png"
             },
             {
@@ -84712,7 +84744,7 @@
               "provider": null,
               "url": "https://asia.pokemon-card.com/id/card-search/detail/6007/",
               "evidence": "Complete official Indonesian render for Snorlax S10a I 058/071 (base). The printed name, set code, collector number, attacks and rarity R establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred.",
-              "contentHash": "bee11df84b88d79ea3d648412ff823b3cbffc962078d7ef5904ce75016ac232d",
+              "contentHash": "f0a0d8be6a9565c3fb740638d34351dfc963f72d442b7c434366b43215db53d6",
               "image": "verification/specimens/SPEC-0174.png"
             },
             {
@@ -84721,7 +84753,7 @@
               "provider": null,
               "url": "https://www.instagram.com/p/DLKJu7Mvpap/",
               "evidence": "The public Instagram collector carousel shows one physical Indonesian Snorlax card at carousel image 4/6, row 2, column 3 crop. The visible artwork, printed language, set identity S10a I and collector identity 058/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
-              "contentHash": "d84b6a9a1b8c7cf05ac0cd40fd008a899b77770a6d94791089a9be48e3983471",
+              "contentHash": "7eb9257f76e2d8d1656192318c1a385bae3b0e1812c59f273b71a3891e3a73dc",
               "image": null
             },
             {
@@ -84730,7 +84762,7 @@
               "provider": null,
               "url": "https://shopee.co.id/product/282074879/26553522985",
               "evidence": "Physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180 readable. Colored vertical foil reflections cross the illustration and silver border. No exact foil-pattern taxonomy or exhaustive variant inventory asserted.",
-              "contentHash": "27d61751cc0ee6b699c683b184490ea94e9db1d3a514e8646600d8de7a1fd00d",
+              "contentHash": "c98740f42d7786fe8a6f7a9979554226b0bbca17e115d575f84fe23992973dea",
               "image": "verification/specimens/SPEC-0550.jpg"
             },
             {
@@ -84739,7 +84771,7 @@
               "provider": null,
               "url": "https://shopee.co.id/Kartu-Pokemon-Card-SNORLAX-S10a-058-071-R-TCG-Indonesia-Original-i.906557.22989677118",
               "evidence": "Angled physical Indonesian Snorlax HP150, s10a I F 058/071 R, Lemak Tidak Bermasalah and Dentum Dengkur 180. Multicolored vertical foil reflections cross the illustration and silver outer border. The seller watermark is not a printed card marking. No complete finish inventory or exact foil-pattern taxonomy is asserted.",
-              "contentHash": "c39fa847093b95f41f03ac6dc1c59fe76e41158afdf0b8c3576d835a5cd81daf",
+              "contentHash": "e64fd961bb542ba4d4a807c6de69050e75daa4074f3e38ac9b7b06661a055c50",
               "image": "verification/specimens/SPEC-0560.png"
             },
             {
@@ -85030,7 +85062,7 @@
           ]
         },
         {
-          "cardReleaseId": "RELEASE:TH:Thai:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+          "cardReleaseId": "RELEASE:TH:Thai:s10a T:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
           "workId": "WORK:Snorlax-Unfazed-Fat-Thumping-Snore",
           "cardKey": "Snorlax-Unfazed-Fat-Thumping-Snore",
           "reviewedAppearanceId": null,
@@ -85039,8 +85071,8 @@
           "locality": "TH",
           "language": "Thai",
           "script": "Thai",
-          "setEditionId": "EDITION:TH:Thai:s10a",
-          "localSetCode": "s10a",
+          "setEditionId": "EDITION:TH:Thai:s10a T",
+          "localSetCode": "s10a T",
           "localNumber": "058/071",
           "localIdentifierKnown": true,
           "state": "identified",
@@ -85054,9 +85086,9 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:b5be07f38881661dc9c93517",
-              "semanticPrintingId": "PRINTING:b5be07f38881661dc9c93517",
-              "cardReleaseId": "RELEASE:TH:Thai:s10a:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
+              "physicalPrintingId": "PHYSICAL:PRINTING:4d06c67479fa55774a1ced4f",
+              "semanticPrintingId": "PRINTING:4d06c67479fa55774a1ced4f",
+              "cardReleaseId": "RELEASE:TH:Thai:s10a T:058/071:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
@@ -85067,7 +85099,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0328",
               "sourcePrintingId": "F0328-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:b5be07f38881661dc9c93517",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4d06c67479fa55774a1ced4f",
               "specimenIds": [
                 "SPEC-0264"
               ],
@@ -85120,7 +85152,7 @@
             {
               "src": "https://asia.pokemon-card.com/th/card-img/th00003495.png",
               "label": "publisher card image",
-              "observationId": "source-first:TH:s10a:058/071:base",
+              "observationId": "source-first:TH:s10a T:058/071:base",
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
@@ -85157,12 +85189,12 @@
               "image": null
             },
             {
-              "observationId": "source-first:TH:s10a:058/071:base",
+              "observationId": "source-first:TH:s10a T:058/071:base",
               "kind": "source-first",
               "provider": "pokemon-card-asia",
               "url": "https://asia.pokemon-card.com/th/card-search/detail/3495/",
               "evidence": "The retained official Thai detail 3495 and SPEC-0264 show คาบิกอน s10a 058/071, including the printed attacks used for the explicit Work mapping and rarity R. The publisher render is identity and rarity evidence only; no physical finish is inferred.",
-              "contentHash": "8316ea023bad608518d7f2e34e9a9a12bde413eb4c6f0ac4933b4bff44052c79",
+              "contentHash": "4a81993df8a552d78d165fc72090916e2d0fd7f83234080a301e3bfb392f6057",
               "image": "https://asia.pokemon-card.com/th/card-img/th00003495.png"
             },
             {
@@ -85171,7 +85203,7 @@
               "provider": null,
               "url": "https://asia.pokemon-card.com/th/card-search/detail/3495/",
               "evidence": "Retained official Thai render shows Snorlax s10a 058/071, printed rarity R. Printed Thai text, collector identity and attacks establish the exact card. On 2026-09-29 the collection owner explicitly confirms this card as Holo from the picture. The publisher render remains identity and rarity evidence; finish is separately owner-attested. Original image bytes and provenance remain unchanged. This positive confirmation does not close the finish list or refute other finish candidates.",
-              "contentHash": "8498a5e3701c46eef96d43102b2fc65acb92b33124c37654ae8728e17d5809db",
+              "contentHash": "0d725a8d1421164a3ffdfab48c05d223a5901e78e8e587f5366856d527db5082",
               "image": "verification/specimens/SPEC-0264.png"
             },
             {
@@ -85180,7 +85212,7 @@
               "provider": null,
               "url": "https://www.instagram.com/p/DLKJu7Mvpap/",
               "evidence": "The public Instagram collector carousel shows one physical Thai Snorlax card at carousel image 4/6, row 2, column 2 crop. The visible artwork, printed language, set identity s10a and collector identity 058/071 establish this specimen's card identity. Only metadata and source URLs are retained; no Instagram image bytes are stored or published. No finish, edition, size or unpictured alternative is inferred.",
-              "contentHash": "2bcaf0a3490800e6d8c712a26308a4ff797847c305992ce709c97af8a7b41eb5",
+              "contentHash": "6365f809f3d67ef85530182437819ad49fa5d0add6c33db383792d020269531d",
               "image": null
             },
             {
@@ -87006,7 +87038,7 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:814e660181051db01d8ac6ab",
+              "physicalPrintingId": "PHYSICAL:PRINTING:a835808aa558ec1f6aeb61fb",
               "semanticPrintingId": "PRINTING:a835808aa558ec1f6aeb61fb",
               "cardReleaseId": "RELEASE:TH:Thai:s10a T:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "holo",
@@ -87019,7 +87051,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0333",
               "sourcePrintingId": "F0333-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:814e660181051db01d8ac6ab",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a835808aa558ec1f6aeb61fb",
               "specimenIds": [
                 "SPEC-0520"
               ],
@@ -87095,7 +87127,7 @@
               "provider": null,
               "url": "https://ojamacard.com/product/29071/077-071-คาบิกอน-chr-s10at",
               "evidence": "Thai Snorlax HP150 in the eating scene; Thai name and rules text, s10a T, regulation F and 077/071 CHR are readable. Reflective multicoloured foil is visible across the artwork and silver border. OjamaCard is a seller watermark outside the card identity, not a distribution stamp.",
-              "contentHash": "963fd5cfce238636ed3c33acb04b68389a99349966299325c88739188b678ce2",
+              "contentHash": "a3d4ca18160d24ee74ab2832f90172fb703b4da331715dbd7fc6317c5d214236",
               "image": "verification/specimens/SPEC-0520.png"
             },
             {
