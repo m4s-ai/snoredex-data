@@ -47,7 +47,7 @@ in `verification/owner_adjudications.json`.
 | **Pokémon Central Wiki reviewed Italian product date** | fan-wiki | 3 | positive only | 1 | 1 | date |
 | **Poképédia reviewed localized release fields** | fan-wiki | 3 | positive only | 5 | 8 | date |
 | **Retailer and specialist card listings** | retail-listing | 3 | positive only | 43 | 133 | finish, product, language, date |
-| **Sodip reviewed Italian newsstand release month** | retail-listing | 3 | positive only | 1 | 1 | date |
+| **Sodip reviewed Italian newsstand release date** | retail-listing | 3 | positive only | 1 | 1 | date |
 | **TCGCSV (TCGplayer product data)** | marketplace-catalogue | 3 | positive only | 8 | 49 | finish, product |
 | **WikiDex** | collector-database | 3 | positive only | 6 | 13 | identity, language, date |
 | **World of Games reviewed Swiss German product date** | retail-listing | 3 | positive only | 1 | 1 | date |
@@ -373,14 +373,14 @@ in `verification/owner_adjudications.json`.
 - **Attribution:** Retail listings from independent sellers.
 - **Notes:** Grouped deliberately: these are one-off listings or retained retailer set-list images, not authoritative catalogues, so per-host provider entries would imply a coverage guarantee none of them offers. An image counts only when it identifies the printing.
 
-### Sodip reviewed Italian newsstand release month — <https://lamiacopia.sodip.it/>
+### Sodip reviewed Italian newsstand release date — <https://lamiacopia.sodip.it/>
 
 - **Organization:** Sodip
 - **Terms:** Distributor's own terms; exact dated product fields retained for date verification only.
-- **Coverage:** only the exact Italian 2023 World Championships decks newsstand release month in the retained distributor product page
+- **Coverage:** only the exact Italian 2023 World Championships decks newsstand release fields in the retained distributor product page
 - **Evidence mode:** positive only
-- **Attribution:** Localized product release month from Sodip.
-- **Notes:** Manual positive date evidence only. The retained page states Mese di uscita MARZO and a planned day; only the month is used because another Italian retailer gives a different day. No card identity, finish, absence or completeness authority.
+- **Attribution:** Localized product release date from Sodip.
+- **Notes:** Manual positive date evidence only. The retained page states Mese di uscita MARZO and Uscita prevista 01/03/2024; another Italian retailer gives 3 March, and the collection owner decided on 2026-10-23 to apply 1 March. No card identity, finish, absence or completeness authority.
 
 ### TCGCSV (TCGplayer product data) — <https://tcgcsv.com>
 

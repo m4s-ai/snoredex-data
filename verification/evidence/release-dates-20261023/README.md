@@ -11,8 +11,7 @@ An unsuccessful search establishes no absence.
 
 | Outcome | Items |
 |---|---:|
-| Day date applied | 9 |
-| Month corrected (no day established) | 1 |
+| Day date applied | 10 |
 | Unresolved, current value kept | 40 |
 
 A date is applied only for the market its source names. It must be the availability or debut date that source states. It is never borrowed from another language, channel or edition, and it is never a production date.
@@ -31,7 +30,7 @@ A date is applied only for the market its source names. It must be the availabil
 | IT SWSH 032 | 2020-05 | 2020-06-05 | MyComics release field for the Snorlax pin collection. |
 | FR WCD23 LOR 143 | 2023-11 | 2024-03-01 | Micromania release field. |
 | DE WCD23 LOR 143 | 2023-11 | 2024-03-01 | PokéZentrum German release calendar. |
-| IT WCD23 LOR 143 | 2023-11 | 2024-03 | Sodip gives the month. Its planned day conflicts with AndyCards. |
+| IT WCD23 LOR 143 | 2023-11 | 2024-03-01 | Sodip planned day; AndyCards gives 3 March. Owner decision 2026-10-23: 1 March, as for DE and FR. |
 
 **World Championships Decks 2023.** The official German, French and Italian product pages all date the four-deck line to Q1 2024. That contradicts the Cardmarket expansion month 2023-11, which the catalogue carried until now. The retained official pages are cited only as context, because a quarter is not a day.
 
