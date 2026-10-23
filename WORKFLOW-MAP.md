@@ -93,8 +93,8 @@ The following invariants apply to every path:
 | `verification/units.json` | reviewed evidence passes | Card × language × variant verification state | `supports`, `contradicts`, `established-by` |
 | `verification/evidence.jsonl` | append-only observation journal | What was observed and when; not replayable state | evidence provenance |
 | `verification/card_content_observations.json` | reviewed field observations, validated by `scripts/card_content.py` | Exact printed content and explicit source assertions for existing releases/printings; no independent membership or verdict | source registry and the bounded Malie export contract |
-| `verification/local_card_names.json` | reviewed input, read by `scripts/collector_catalogue.py` | Exact-print localized card names per card release and official species names per localization; mechanic and trainer-owned names are never derived | collector `localCardName` |
-| `verification/owner_adjudications.json` | collection-owner decision | Explicit final application/absence decision | scoped adjudication edges |
+| `verification/local_card_names.json` | reviewed input, read by `scripts/collector_catalogue.py` | Exact-print localized card names per card release, official species names per localization and owner-approved name patterns (Hop's Snorlax, 2026-10-22); other mechanic and trainer-owned names are never derived | collector `localCardName` |
+| `verification/owner_adjudications.json` | collection-owner decision | Explicit final application/absence decision; finish decisions close a finish list and may name `rejectedFinishes` (schema 1.2.0) | scoped adjudication edges; finish completeness |
 | `verification/finish_units.json` | `scripts/finishes.py` from reviewed inputs | Set-number × language finish state and mappings | `asserts-finish-for`, `uses-profile`, `maps-to` |
 | `verification/finish_overrides.json` | reviewed special-printing input | Finish facts not expressible by group-level sources | finish/profile edges |
 | `verification/finish_tcgdex_snapshot.json` | explicit refresh/accept flow | Versioned offline TCGdex input | finish candidates; never direct verdicts |

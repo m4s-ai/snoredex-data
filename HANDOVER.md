@@ -157,7 +157,12 @@ verification/
                               derive an application status.
   owner_adjudications.json    COLLECTION-OWNER DECISIONS. Explicit final application decisions
                               after reviewing all cited claims; never rewrites units.json or
-                              attributes absence to a single provider.
+                              attributes absence to a single provider. finishDecisions close a
+                              unit's finish list and may reject a source-claimed finish
+                              (rejectedFinishes, schema 1.2.0).
+  local_card_names.json       REVIEWED LOCALIZED NAMES. Exact-print card names per card release,
+                              official species names per localization and owner-approved name
+                              patterns; read by collector_catalogue.py for localCardName.
   evidence.jsonl              Append-only journal of what was observed, and when. NOT a
                               projection of units.json and not replayable into one: entries are
                               appended as observations happen, corrections are appended rather

@@ -54,8 +54,8 @@ agreement with retained-source digests in every field reference.
 
 The expected pilot result is **6 selected, 3 exported, 2 needs-evidence and 1
 outside-profile**. The two SVP variants retain distinct printing/distribution/stamp
-identities and explicit evidence/mapping gaps. The German Jungle research entry
-has no fabricated physical ID. Missing evidence never means a card does not exist.
+identities and explicit evidence/mapping gaps. The German Jungle 11 entry is the
+verified 1st Edition holo printing (since the #430 edition split) and stays outside the SV profile. Missing evidence never means a card does not exist.
 
 ## Reproduce and bind a release
 

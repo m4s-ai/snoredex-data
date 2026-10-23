@@ -15,6 +15,49 @@ Newest first.
 
 ---
 
+## One specimen's caution became a rule nobody had made
+
+**Trap:** *A legible card face establishes its edition: a visible 1st Edition mark, or a visibly empty mark position on a set printed in both editions.*
+
+While splitting edition-documented cards (#430), three seller photographs of Spanish Jungle 11,
+Portuguese Jungle 27 and e-Card 5 062 were left "edition unknown". The reason given was a sentence
+in SPEC-0120's `basis` — *"No edition is inferred from an absent stamp"* — written by an earlier
+intake as a local precaution. It had been read as a repository rule. It was not one, and it conflated
+two different things: a *source* that omits a printing (rule 3, never evidence) and a *photographed
+card face* whose stamp position is visibly empty (a positive observation of that copy).
+
+The owner corrected it the same day. The fix re-observed the affected specimens through the
+importer, recorded the rule in `RESUME.md` and the specimen-intake skill, and updated the two
+regression assertions that had pinned the old wording. A first pass of the fix then checked PCG3 at
+the wrong place (the set symbol); the mark sits at the lower left beside `ZM7-1S9-JGF`, so
+`RESUME.md` now lists the mark position per era.
+
+**Now guarded by** `test_physical_evidence_workflow.py`, which expects Unlimited for both Jungle
+photographs, and the per-era mark positions in `RESUME.md`.
+
+*PR #430.*
+
+---
+
+## The owner's word about one photograph is not the owner's word about another
+
+**Trap:** *Owner attribution is field-level and copy-level: never stamp `ownerAttestedFields` on a photograph the owner did not judge.*
+
+Four editions found online on 2026-10-23 (#430) were filed with `finish: non-holo`,
+`ownerAttestedFields: ["finish"]` and the date of an earlier owner determination — which the owner
+had made for *their own* supplied photographs of the same prints. The finish was almost certainly
+right; the attribution was not. It made third-party seller photos read as owner-judged.
+
+The review pass caught it before merge. The specimens were re-filed without owner attribution and
+say that they evidence the edition only, while the non-holo finish stays the print-level fact
+resting on the owner's own specimens. It is the same shape as
+[the neighbour's evidence](#the-neighbours-evidence-is-not-this-units-evidence), one level down:
+the strongest statement beside a record is not that record's evidence.
+
+*PR #430.*
+
+---
+
 ## An incomplete archive can still prove the row it contains
 
 **Trap:** *A source does not need a historically complete list for one exact positive card row to count as evidence.*
