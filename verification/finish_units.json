@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-10-23",
+    "generated": "2026-10-24",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 537,
+      "withConfirmedFinish": 538,
       "withOnlyMarketplaceClaim": 12,
-      "pendingFinish": 11,
+      "pendingFinish": 10,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 12,
       "withNonHolo": 327,
-      "withHolo": 255,
+      "withHolo": 256,
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 38,
-      "withAnyUnresolvedDetail": 115,
+      "withUnresolvedProductMapping": 37,
+      "withAnyUnresolvedDetail": 114,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -19721,7 +19721,7 @@
       "finishUnitId": "F0211",
       "cardName": "Hop's Snorlax",
       "setCode": "m2a",
-      "releaseSetCode": null,
+      "releaseSetCode": "MA3 I",
       "setName": "MEGA Dream ex",
       "number": "136",
       "language": "Indonesian",
@@ -19740,23 +19740,58 @@
           "image": "images/m2a_136_Hop_s_Snorlax_861379.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: base"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.instagram.com/p/DXWbxTzjgY1/",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Indonesian Snorlax Hop MA3 136/193 standard printing, middle card of the wonderelic seller photograph SPEC-0643: HP 150, Ability Dermawan, Dynamic Press 140, Illus. OKACHEKE, (c)2026. Unsleeved; a rainbow foil sheen runs along the frame and through the artwork. Retained as SPEC-0644.",
+              "retrievedAt": "2026-10-24",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-10-24",
+              "evidence": "The collection owner's explicit 2026-10-24 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0644"
+          ],
+          "image": "verification/specimens/SPEC-0644.png",
+          "printingId": "F0211-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0212",

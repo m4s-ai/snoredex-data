@@ -37,20 +37,20 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-10-23",
+      "lastUpdated": "2026-10-24",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 537,
+      "withConfirmedFinish": 538,
       "withOnlyMarketplaceClaim": 12,
-      "pendingFinish": 11,
+      "pendingFinish": 10,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 12,
       "withNonHolo": 327,
-      "withHolo": 255,
+      "withHolo": 256,
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 56,
-      "withUnresolvedProductMapping": 38,
-      "withAnyUnresolvedDetail": 115,
+      "withUnresolvedProductMapping": 37,
+      "withAnyUnresolvedDetail": 114,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -8404,24 +8404,43 @@
           {
             "language": "Indonesian",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0211",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0211-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0644.png",
+                "specimenIds": [
+                  "SPEC-0644"
+                ]
+              }
+            ]
           },
           {
             "language": "Thai",
