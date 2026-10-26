@@ -25,13 +25,13 @@ in `verification/owner_adjudications.json`.
 | **CGC certification and registry** | grading-registry | 2 | positive only | 0 | 0 | finish, language |
 | **Cardmarket exact product image** | marketplace-photo | 2 | positive only | 49 | 261 | language, identity, finish, edition, image |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | positive only | 9 | 44 | language, identity, finish, edition |
-| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 500 | language, finish, edition, rarity |
+| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 506 | language, finish, edition, rarity |
 | **Elite Fourum** | collector-community | 2 | positive only | 6 | 21 | language, edition |
 | **Malie TCGL reference** | open-database | 2 | positive only | 2 | 7 | card-content, size, back, foil |
 | **PSA certification and registry** | grading-registry | 2 | positive only | 4 | 16 | finish, identity |
 | **SNKRDUNK** | marketplace | 2 | positive only | 1 | 5 | finish, language |
 | **Seller listing photograph** | marketplace-photo | 2 | positive only | 188 | 789 | language, identity, finish, edition |
-| **TCGdex** | open-database | 2 | positive only | 312 | 824 | language, finish, card-content |
+| **TCGdex** | open-database | 2 | positive only | 312 | 818 | language, finish, card-content |
 | **pokemontcg.io** | open-database | 2 | positive only | 1 | 123 | artist, date |
 | **Collectory** | collector-database | 3 | positive only | 22 | 51 | identity, rarity |
 | **Edaily reviewed Korean product-launch report** | news | 3 | positive only | 1 | 1 | date |

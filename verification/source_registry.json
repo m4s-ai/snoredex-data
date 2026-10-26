@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-24",
+  "generated": "2026-10-26",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -174,7 +174,7 @@
     "tcgdex.dev"
    ],
    "uniqueSources": 312,
-   "claimsSupported": 824
+   "claimsSupported": 818
   },
   {
    "providerId": "malie",
@@ -1011,7 +1011,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 500
+   "claimsSupported": 506
   },
   {
    "providerId": "inspected-specimen",
@@ -9352,7 +9352,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0386-P03",
+    "F0386-P02",
     "SM 05 base"
    ],
    "retrievedAt": null,
@@ -9372,7 +9372,7 @@
    ],
    "stableIdCount": 2,
    "stableIds": [
-    "F0386-P02",
+    "F0386-P01",
     "SM 05 V2"
    ],
    "retrievedAt": null,
@@ -14816,7 +14816,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 435,
+   "stableIdCount": 441,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
@@ -14901,6 +14901,11 @@
     "F0374-P01",
     "F0375-P01",
     "F0379-P01",
+    "F0387-P01",
+    "F0388-P01",
+    "F0389-P01",
+    "F0390-P01",
+    "F0391-P01",
     "F0402-P02",
     "F0403-P02",
     "F0415-P01",
@@ -15251,11 +15256,12 @@
     "override:owner-edition-split-20261022",
     "override:owner-jungle-number-finish-20260910",
     "override:owner-scan-review",
+    "override:owner-sm05-holo-20261026",
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-10-24",
-   "usageCount": 498
+   "retrievedAt": "2026-10-26",
+   "usageCount": 504
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -32121,21 +32127,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0388-P01",
     "U0275",
     "U0517"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/de/cards/smp-SM169",
@@ -33276,21 +33279,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0386-P01",
     "U0273",
     "U0515"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/en/cards/smp-SM169",
@@ -34082,21 +34082,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0390-P01",
     "U0276",
     "U0518"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/es/cards/smp-SM169",
@@ -35091,21 +35088,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0387-P01",
     "U0274",
     "U0516"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/fr/cards/smp-SM169",
@@ -35986,21 +35980,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0389-P01",
     "U0277",
     "U0519"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/it/cards/smp-SM169",
@@ -37128,21 +37119,18 @@
    "nonUrlEvidenceId": null,
    "providerId": "tcgdex",
    "sourceTypes": [
-    "TCGdex API (open card database)",
-    "TCGdex API card variants"
+    "TCGdex API (open card database)"
    ],
    "dimensions": [
-    "finish",
     "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
-    "F0391-P01",
     "U0278",
     "U0520"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://api.tcgdex.net/v2/pt/cards/smp-SM169",

@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-10-24",
+    "generated": "2026-10-26",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -57,16 +57,16 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 538,
+      "withConfirmedFinish": 533,
       "withOnlyMarketplaceClaim": 12,
       "pendingFinish": 10,
       "notApplicableFinish": 77,
-      "withOwnerAdjudication": 12,
-      "withNonHolo": 327,
-      "withHolo": 256,
+      "withOwnerAdjudication": 18,
+      "withNonHolo": 321,
+      "withHolo": 261,
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
-      "withBothNonHoloAndHolo": 56,
+      "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 37,
       "withAnyUnresolvedDetail": 114,
       "tcgdexUrlsRequested": 308,
@@ -35721,38 +35721,20 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
         "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
+        "non-holo": "pending",
         "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
-        {
-          "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/en/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "printingId": "F0386-P01"
-        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -35772,7 +35754,7 @@
               "image": "images/SM_05_Snorlax_GX_V2_363910.jpg"
             }
           ],
-          "printingId": "F0386-P02"
+          "printingId": "F0386-P01"
         },
         {
           "finish": "holo",
@@ -35793,7 +35775,7 @@
               "image": "images/SM_05_Snorlax_GX_295297.jpg"
             }
           ],
-          "printingId": "F0386-P03"
+          "printingId": "F0386-P02"
         }
       ],
       "unresolved": []
@@ -35835,40 +35817,45 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
-        "holo": "pending",
+        "non-holo": "pending",
+        "holo": "owner-attested",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "owner-attested",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/fr/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "sourceType": "Owner attestation (domain expert)",
+              "authorityTier": "owner-attestation",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-10-26",
+              "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
           "printingId": "F0387-P01"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2, base"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
     {
@@ -35908,40 +35895,45 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
-        "holo": "pending",
+        "non-holo": "pending",
+        "holo": "owner-attested",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "owner-attested",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/de/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "sourceType": "Owner attestation (domain expert)",
+              "authorityTier": "owner-attestation",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-10-26",
+              "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
           "printingId": "F0388-P01"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2, base"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
     {
@@ -35981,40 +35973,45 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
-        "holo": "pending",
+        "non-holo": "pending",
+        "holo": "owner-attested",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "owner-attested",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/it/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "sourceType": "Owner attestation (domain expert)",
+              "authorityTier": "owner-attestation",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-10-26",
+              "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
           "printingId": "F0389-P01"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2, base"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
     {
@@ -36054,40 +36051,45 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
-        "holo": "pending",
+        "non-holo": "pending",
+        "holo": "owner-attested",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "owner-attested",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/es/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "sourceType": "Owner attestation (domain expert)",
+              "authorityTier": "owner-attestation",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-10-26",
+              "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
           "printingId": "F0390-P01"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2, base"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
     {
@@ -36127,40 +36129,45 @@
         }
       ],
       "availableFinishes": [
-        "non-holo"
+        "holo"
       ],
       "finishStatus": {
-        "non-holo": "confirmed",
-        "holo": "pending",
+        "non-holo": "pending",
+        "holo": "owner-attested",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "owner-attested",
+      "completenessStatus": "owner-adjudicated",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "owner-attested",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/pt/cards/smp-SM05",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "sourceType": "Owner attestation (domain expert)",
+              "authorityTier": "owner-attestation",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "retrievedAt": "2026-10-26",
+              "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
           "printingId": "F0391-P01"
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2, base"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
       ]
     },
     {

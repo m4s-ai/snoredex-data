@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-24",
-  "projectionVersion": "ae88355991aa453fe5ea7d13796935973083068edb8d5e7be7011fadc17a54cb",
+  "generated": "2026-10-26",
+  "projectionVersion": "1b7a7147857023ec5dc36490aff83492ead768167080e1bc2a8dee521e1227ec",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 898,
-    "sourceObservations": 3264
+    "physicalPrintings": 892,
+    "sourceObservations": 3258
   },
   "groups": [
     {
@@ -31125,29 +31125,6 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0386-P01",
-              "semanticPrintingId": "PRINTING:2d754f84d2f174e523bd09f2",
-              "cardReleaseId": "RELEASE:WEST:English:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0386",
-              "sourcePrintingId": "F0386-P01",
-              "establishingClaimId": "CLAIM:finish:F0386-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/en/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            },
-            {
               "physicalPrintingId": "PHYSICAL:F0386-P02",
               "semanticPrintingId": "PRINTING:dfcbbab73ca3c1c141e837b5",
               "cardReleaseId": "RELEASE:WEST:English:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
@@ -31160,7 +31137,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0386",
-              "sourcePrintingId": "F0386-P02",
+              "sourcePrintingId": "F0386-P01",
               "establishingClaimId": "CLAIM:finish:F0386-P02",
               "sources": [
                 {
@@ -31185,7 +31162,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0386",
-              "sourcePrintingId": "F0386-P03",
+              "sourcePrintingId": "F0386-P02",
               "establishingClaimId": "CLAIM:finish:F0386-P03",
               "sources": [
                 {
@@ -31204,8 +31181,7 @@
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "holo",
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31238,30 +31214,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0386-P01:0:b0fd5bebc24117d8",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/en/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "616de5d0f7f7518a805c97d3e8ea90809028a1cd06243bddc6655a3f30a30da3",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0386-P02:0:bd9afd73c2cd1817",
+              "observationId": "finish:F0386-P01:0:bd9afd73c2cd1817",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-V2-SM05",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "19d5064540ffc65fa2248cb5427f81d5f8f2f591ea9bab516c124b3b6b6e3c1b",
+              "contentHash": "b55fdf4f631fdab0c038657a89a2986aee7ebbd4aa8240a3effd95a66d84beeb",
               "image": null
             },
             {
-              "observationId": "finish:F0386-P03:0:03b9e143a12ce29f",
+              "observationId": "finish:F0386-P02:0:03b9e143a12ce29f",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-SM05",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "4b52c23d3b5a60d5832f0fffde0ec0a85c17c1bd5453ad0bbec6a2bdd990bef5",
+              "contentHash": "f1e940db3817691cf7db0551ffaf1f9c76ff92648c08bae0c484aab574cae7f5",
               "image": null
             },
             {
@@ -31305,38 +31272,14 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0387-P01",
-              "semanticPrintingId": "PRINTING:79866c4e6afa9ba0dd920eb7",
-              "cardReleaseId": "RELEASE:WEST:French:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0387",
-              "sourcePrintingId": "F0387-P01",
-              "establishingClaimId": "CLAIM:finish:F0387-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/fr/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31368,15 +31311,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0387-P01:0:c90674c244430191",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/fr/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "f6fa2bd7c3b8f3cc6ebd4375f67b954d7e9e09e1bf2d29a044870c27716aefae",
-              "image": null
-            },
             {
               "observationId": "unit:U0274",
               "kind": "unit",
@@ -31418,38 +31352,14 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0388-P01",
-              "semanticPrintingId": "PRINTING:3a33b0abfd7ef77c82d48b4f",
-              "cardReleaseId": "RELEASE:WEST:German:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0388",
-              "sourcePrintingId": "F0388-P01",
-              "establishingClaimId": "CLAIM:finish:F0388-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/de/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31481,15 +31391,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0388-P01:0:c0a750760e81e3a7",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/de/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "2fb7592fcb0f3cada68e11476da7bf24ca1c6b82747a2eb4c89ab85e6260de64",
-              "image": null
-            },
             {
               "observationId": "unit:U0275",
               "kind": "unit",
@@ -31531,38 +31432,14 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0389-P01",
-              "semanticPrintingId": "PRINTING:60db94e20a261659ba6e4995",
-              "cardReleaseId": "RELEASE:WEST:Italian:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0389",
-              "sourcePrintingId": "F0389-P01",
-              "establishingClaimId": "CLAIM:finish:F0389-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/it/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31594,15 +31471,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0389-P01:0:37b4af6a7f164cf5",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/it/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "0b5c7da14032d74e0f25f2fe6fec94863cb56752acd6c6e61e6cc8c75c40e2e8",
-              "image": null
-            },
             {
               "observationId": "unit:U0277",
               "kind": "unit",
@@ -31644,38 +31512,14 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0391-P01",
-              "semanticPrintingId": "PRINTING:264cc958441c2f7f82895b6d",
-              "cardReleaseId": "RELEASE:WEST:Portuguese:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0391",
-              "sourcePrintingId": "F0391-P01",
-              "establishingClaimId": "CLAIM:finish:F0391-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/pt/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31707,15 +31551,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0391-P01:0:31076b033f19412d",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/pt/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "c051bbed407fd0ecb43a145d9ed9b7e405a2c4c4f7eb57542db731b7898a317a",
-              "image": null
-            },
             {
               "observationId": "unit:U0278",
               "kind": "unit",
@@ -31757,38 +31592,14 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [
-            {
-              "physicalPrintingId": "PHYSICAL:F0390-P01",
-              "semanticPrintingId": "PRINTING:a9912897451f029dd26415f7",
-              "cardReleaseId": "RELEASE:WEST:Spanish:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": null,
-              "distribution": null,
-              "cardSize": "unknown",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0390",
-              "sourcePrintingId": "F0390-P01",
-              "establishingClaimId": "CLAIM:finish:F0390-P01",
-              "sources": [
-                {
-                  "url": "https://api.tcgdex.net/v2/es/cards/smp-SM05",
-                  "sourceType": "TCGdex API card variants",
-                  "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-                }
-              ]
-            }
-          ],
+          "physicalPrintings": [],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
             "artist": "5ban Graphics",
             "variant": "base, V2",
             "finish": [
-              "non-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -31820,15 +31631,6 @@
             }
           ],
           "observations": [
-            {
-              "observationId": "finish:F0390-P01:0:6c8caf7a70486b78",
-              "kind": "finish",
-              "provider": "TCGdex API card variants",
-              "url": "https://api.tcgdex.net/v2/es/cards/smp-SM05",
-              "evidence": "smp-SM05 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
-              "contentHash": "1610b63fcfdd6dd4d49e330d9e71abc788031ace0e3d5e08511a63cb642d9e4a",
-              "image": null
-            },
             {
               "observationId": "unit:U0276",
               "kind": "unit",
