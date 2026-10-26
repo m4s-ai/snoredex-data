@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-26",
-  "projectionVersion": "1b7a7147857023ec5dc36490aff83492ead768167080e1bc2a8dee521e1227ec",
+  "projectionVersion": "bc44d5526a5a827b906a97fda6d2cbd1c7352075c066f3139a5cd965872ca7b0",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 892,
-    "sourceObservations": 3258
+    "sourceObservations": 3264
   },
   "groups": [
     {
@@ -31131,7 +31131,7 @@
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "jumbo",
               "errorClass": null,
@@ -31139,13 +31139,55 @@
               "sourceFinishUnitId": "F0386",
               "sourcePrintingId": "F0386-P01",
               "establishingClaimId": "CLAIM:finish:F0386-P02",
+              "specimenIds": [
+                "SPEC-0645",
+                "SPEC-0646"
+              ],
+              "specimenFieldSources": {
+                "cardSize": [
+                  "SPEC-0645"
+                ],
+                "finish": [
+                  "SPEC-0645",
+                  "SPEC-0646"
+                ]
+              },
               "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/gDsAAeSwgWJqottF/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Front view of the same English SM05 Snorlax-GX jumbo as SPEC-0645 from the same listing (identical card, same surface wear and background). Holofoil across artwork, text box and frame. Retained as SPEC-0646.",
+                  "retrievedAt": "2026-10-26",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0646"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-V2-SM05",
                   "sourceType": "Cardmarket stock image (visual evidence)",
                   "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
                   "supportsAbsence": false,
                   "image": "images/SM_05_Snorlax_GX_V2_363910.jpg"
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/ti0AAeSw32lqottG/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "English Snorlax-GX SM05 black star promo, HP 190, Collapse 80, Thunderous Snore 180, Pulverizing Pancake GX 210, Illus. 5ban Graphics, (c)2016, photographed above a standard-size Pokemon card back for comparison: the card is far larger than the standard card, i.e. the jumbo (oversized) printing. Holofoil across the artwork, text box and frame. Retained as SPEC-0645.",
+                  "retrievedAt": "2026-10-26",
+                  "claimFields": [
+                    "finish",
+                    "identity"
+                  ],
+                  "observedFields": [
+                    "cardSize",
+                    "finish"
+                  ],
+                  "specimenId": "SPEC-0645"
                 }
               ]
             },
@@ -31210,16 +31252,56 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0645.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0645",
+              "contentHash": "d6817a62421e092f2c64c343a7fc512c232b7b159bd801a50e8f11eac7dccdf2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d6817a62421e092f2c64c343a7fc512c232b7b159bd801a50e8f11eac7dccdf2",
+              "previewSrc": "images/previews/SPEC-0645.png?v=e945139b995745697dae06ddd89da32ff19032300eceb0056ed79cb49a25df39",
+              "thumbnailSrc": "images/thumbs/SPEC-0645.png?v=fffe5c09d07b95da91043de0e00d095845de143cab1385c2bc0a3ea4c729d36b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0646.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0646",
+              "contentHash": "82920bfce918ecdf0503dbd81c504304b68ee69bad1a6931f711bf00dfda62f2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "82920bfce918ecdf0503dbd81c504304b68ee69bad1a6931f711bf00dfda62f2",
+              "previewSrc": "images/previews/SPEC-0646.png?v=306c0aea4ed117f0d3a09c848d21de34521778df563498ca60da61dd9fecd956",
+              "thumbnailSrc": "images/thumbs/SPEC-0646.png?v=c18bfc5b5a995de9c086251f4c7c81e6afeff375ff2e7c75f5597a3c00f16aa5"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0386-P01:0:bd9afd73c2cd1817",
+              "observationId": "finish:F0386-P01:0:5d06e385ed37e958",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/gDsAAeSwgWJqottF/s-l1600.jpg",
+              "evidence": "Front view of the same English SM05 Snorlax-GX jumbo as SPEC-0645 from the same listing (identical card, same surface wear and background). Holofoil across artwork, text box and frame. Retained as SPEC-0646.",
+              "contentHash": "89b5cf3220a3672b49ba48dde960bc11bbb6d4935c9949a106f18929d699ad55",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0386-P01:1:bd9afd73c2cd1817",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/SM-Black-Star-Promos/Snorlax-GX-V2-SM05",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "b55fdf4f631fdab0c038657a89a2986aee7ebbd4aa8240a3effd95a66d84beeb",
+              "contentHash": "044d4c1817d7f53a153b1a49eb447f3174f26b5b9be48a37f6478ab0cd15d80d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0386-P01:2:e26eda25d5b1c515",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/ti0AAeSw32lqottG/s-l1600.jpg",
+              "evidence": "English Snorlax-GX SM05 black star promo, HP 190, Collapse 80, Thunderous Snore 180, Pulverizing Pancake GX 210, Illus. 5ban Graphics, (c)2016, photographed above a standard-size Pokemon card back for comparison: the card is far larger than the standard card, i.e. the jumbo (oversized) printing. Holofoil across the artwork, text box and frame. Retained as SPEC-0645.",
+              "contentHash": "8f12c1452cadbed256657fcc9ef5fb9d821b1cf5b64d5c408f629ae33246e7ef",
               "image": null
             },
             {
@@ -31230,6 +31312,24 @@
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
               "contentHash": "f1e940db3817691cf7db0551ffaf1f9c76ff92648c08bae0c484aab574cae7f5",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0645",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/227515663333",
+              "evidence": "English Snorlax-GX SM05 black star promo, HP 190, Collapse 80, Thunderous Snore 180, Pulverizing Pancake GX 210, Illus. 5ban Graphics, (c)2016, photographed above a standard-size Pokemon card back for comparison: the card is far larger than the standard card, i.e. the jumbo (oversized) printing. Holofoil across the artwork, text box and frame.",
+              "contentHash": "33f7e7cb071c99e6b508b18010bd8ebfd2c84f86ccb624a21d8f6e6a25769411",
+              "image": "verification/specimens/SPEC-0645.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0646",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/227515663333",
+              "evidence": "Front view of the same English SM05 Snorlax-GX jumbo as SPEC-0645 from the same listing (identical card, same surface wear and background). Holofoil across artwork, text box and frame.",
+              "contentHash": "fff25056272691a21e0c5414e00ad6f12d9c337a7c7c29d918b639e7e7867309",
+              "image": "verification/specimens/SPEC-0646.jpg"
             },
             {
               "observationId": "unit:U0273",
@@ -93264,7 +93364,7 @@
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "jumbo",
               "errorClass": null,
@@ -93272,7 +93372,16 @@
               "sourceFinishUnitId": "F0432",
               "sourcePrintingId": "F0432-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:739f764e312bd5ca77ed636d",
+              "specimenIds": [
+                "SPEC-0647"
+              ],
               "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/vakAAeSwaR9q3r6a/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "English Snorlax VMAX 142/202, HP 340, G-Max Fall 60+, Illus. aky CG Works, (c)2020, still sealed in its clear jumbo sleeve, with the SWORD & SHIELD expansion logo printed in the artwork, which marks the oversized promo version; full-card holofoil. Retained as SPEC-0647.",
+                  "retrievedAt": "2026-10-26"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-VMAX-V3-SSH142",
                   "sourceType": "Cardmarket stock image (visual evidence)",
@@ -93318,16 +93427,36 @@
               "originalHash": "0887ff69761f29222633bc5d1cf45c24283fd80448b41b4ddb95d41463d915d8",
               "previewSrc": "images/previews/SSH_142_Snorlax_VMAX_V3_687429.jpg?v=917da46a22dbd0f8be033bddefc6dc8d4d3cbd23ca8713a727817dd3f822c42f",
               "thumbnailSrc": "images/thumbs/SSH_142_Snorlax_VMAX_V3_687429.jpg?v=c8cdd32ed58bf9db0c7c0fb7887bb34f77d13f21642c80d471194d49e12fd9c6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0647.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0647",
+              "contentHash": "0c1c83c82e527494af6cac0ad16f506d3e3cb53e6554355a4592f451b128816e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0c1c83c82e527494af6cac0ad16f506d3e3cb53e6554355a4592f451b128816e",
+              "previewSrc": "images/previews/SPEC-0647.png?v=17fabebf362a82579a07a043941e37db38b7197f4ef41fc0c799bf93c5dd31a8",
+              "thumbnailSrc": "images/thumbs/SPEC-0647.png?v=3483016f983d78d1bc65f16bc0d6deaaf1630c3d32fca7870b3fe9e46264841e"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0432-P01:0:fac678b1e1e8595b",
+              "observationId": "finish:F0432-P01:0:5324003135fd67d8",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/vakAAeSwaR9q3r6a/s-l1600.jpg",
+              "evidence": "English Snorlax VMAX 142/202, HP 340, G-Max Fall 60+, Illus. aky CG Works, (c)2020, still sealed in its clear jumbo sleeve, with the SWORD & SHIELD expansion logo printed in the artwork, which marks the oversized promo version; full-card holofoil. Retained as SPEC-0647.",
+              "contentHash": "76985085417fefbf9825ee71e5b8346991824b41720773c80ce5004649fb5487",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0432-P01:1:fac678b1e1e8595b",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Sword-Shield/Snorlax-VMAX-V3-SSH142",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "a06ebd9090fb939e3fcda9c53ebb24230311e9c74c1e6c068e148cfb5bf58893",
+              "contentHash": "b88c824c6c99dbfdeba1f1ce05319d79ac971ee3b3592ba245da716f685d8e08",
               "image": null
             },
             {
@@ -93347,6 +93476,15 @@
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
               "contentHash": "924050f6797f3e790e54882ab5f2db74b82d03f7d265a601a88b2abfcaedaab7",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0647",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/137875411474",
+              "evidence": "English Snorlax VMAX 142/202, HP 340, G-Max Fall 60+, Illus. aky CG Works, (c)2020, still sealed in its clear jumbo sleeve, with the SWORD & SHIELD expansion logo printed in the artwork, which marks the oversized promo version; full-card holofoil.",
+              "contentHash": "c24ef8412bbdaef6ca61cdccaf49a103719c33a55d701afced6d8ff224fa725c",
+              "image": "verification/specimens/SPEC-0647.jpg"
             },
             {
               "observationId": "unit:U0177",
