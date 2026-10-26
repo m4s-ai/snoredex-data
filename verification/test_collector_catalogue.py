@@ -420,7 +420,9 @@ def edition_rule_regressions() -> None:
     assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
     # Card size defaults to standard (owner, 2026-10-23); a possible jumbo twin stays unknown.
     unknown = [row for row in items if row["cardSize"] == "unknown"]
-    assert len(unknown) < 30 and any(row["localSetCode"] == "SSH" for row in unknown), len(unknown)
+    assert len(unknown) < 30, len(unknown)
+    # TCGdex `holo: true` is the regular print, not a second, sizeless holo (2026-10-26).
+    assert not [row for row in unknown if row["localSetCode"] in {"VIV", "PGO", "SSH"}]
 
 
 def main() -> None:

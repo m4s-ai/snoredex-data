@@ -67,8 +67,8 @@
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 37,
-      "withAnyUnresolvedDetail": 114,
+      "withUnresolvedProductMapping": 32,
+      "withAnyUnresolvedDetail": 109,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -23085,11 +23085,14 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -23097,9 +23100,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh10.5-055",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/pgo_web_cardlist_fr.pdf",
@@ -23113,28 +23116,38 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "printingId": "F0250-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "cosmos",
+          "markings": [],
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1",
+            "V2"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/fr/cards/swsh10.5-055",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2079740614/2079740614.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "French Ronflex PV 150 (Pokemon GO 055/078), talent Barrage, Effondrement 150, front and back: cosmos sparkle across the artwork. Retained as SPEC-0652.",
+              "retrievedAt": "2026-10-26"
             }
           ],
+          "specimenIds": [
+            "SPEC-0652"
+          ],
+          "image": "verification/specimens/SPEC-0652.jpg",
           "printingId": "F0250-P02"
         },
         {
@@ -23181,9 +23194,7 @@
           "printingId": "F0250-P03"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0251",
@@ -23234,11 +23245,14 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -23246,9 +23260,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh10.5-055",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/pgo_web_cardlist_de.pdf",
@@ -23262,28 +23276,38 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "printingId": "F0251-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "cosmos",
+          "markings": [],
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1",
+            "V2"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/de/cards/swsh10.5-055",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2101800294/2101800294.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Close view of German Relaxo (Pokemon GO 055/078; German text 'Groesse: 2,1 m Gewicht: 460,0 kg' and 'Rueckentzug' visible): cosmos sparkle and a holo swirl across the artwork beside the Pokemon GO logo. Retained as SPEC-0651.",
+              "retrievedAt": "2026-10-26"
             }
           ],
+          "specimenIds": [
+            "SPEC-0651"
+          ],
+          "image": "verification/specimens/SPEC-0651.jpg",
           "printingId": "F0251-P02"
         },
         {
@@ -23330,9 +23354,7 @@
           "printingId": "F0251-P03"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0252",
@@ -23388,6 +23410,9 @@
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -23395,9 +23420,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh10.5-055",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/pgo_web_cardlist_it.pdf",
@@ -23411,29 +23436,14 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0252-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
-              "url": "https://api.tcgdex.net/v2/it/cards/swsh10.5-055",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0252-P02"
+          "printingId": "F0252-P01"
         },
         {
           "finish": "reverse-holo",
@@ -23476,7 +23486,7 @@
               "evidenceScope": "standard-set"
             }
           ],
-          "printingId": "F0252-P03"
+          "printingId": "F0252-P02"
         }
       ],
       "unresolved": [
@@ -23537,6 +23547,9 @@
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -23544,9 +23557,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh10.5-055",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/pgo_web_cardlist_es.pdf",
@@ -23560,29 +23573,14 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Pokémon GO checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 055 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0253-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
-              "url": "https://api.tcgdex.net/v2/es/cards/swsh10.5-055",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0253-P02"
+          "printingId": "F0253-P01"
         },
         {
           "finish": "reverse-holo",
@@ -23625,7 +23623,7 @@
               "evidenceScope": "standard-set"
             }
           ],
-          "printingId": "F0253-P03"
+          "printingId": "F0253-P02"
         }
       ],
       "unresolved": [
@@ -23686,39 +23684,27 @@
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0254-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
           "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://api.tcgdex.net/v2/pt/cards/swsh10.5-055",
               "sourceType": "TCGdex API card variants",
               "evidence": "swsh10.5-055 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V1-PGO055",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0254-P02"
+          "printingId": "F0254-P01"
         },
         {
           "finish": "reverse-holo",
@@ -23748,7 +23734,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0254-P03"
+          "printingId": "F0254-P02"
         }
       ],
       "unresolved": [
@@ -39140,6 +39126,7 @@
           "distribution": null,
           "cardSize": "jumbo",
           "mappedVariants": [
+            "V1",
             "V3"
           ],
           "verificationStatus": "confirmed",
@@ -39264,6 +39251,11 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh1_web_cardlist_fr.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -39278,23 +39270,6 @@
             }
           ],
           "printingId": "F0433-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/fr/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "printingId": "F0433-P02"
         }
       ],
       "unresolved": [
@@ -39364,6 +39339,11 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh1_web_cardlist_de.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -39378,23 +39358,6 @@
             }
           ],
           "printingId": "F0434-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/de/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "printingId": "F0434-P02"
         }
       ],
       "unresolved": [
@@ -39464,6 +39427,11 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh1_web_cardlist_it.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -39478,23 +39446,6 @@
             }
           ],
           "printingId": "F0435-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/it/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "printingId": "F0435-P02"
         }
       ],
       "unresolved": [
@@ -39564,6 +39515,11 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh1-142",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh1_web_cardlist_es.pdf",
               "sourceType": "Official Pokémon localized expansion checklist",
               "authorityTier": "official-primary",
@@ -39578,23 +39534,6 @@
             }
           ],
           "printingId": "F0436-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://api.tcgdex.net/v2/es/cards/swsh1-142",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh1-142 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
-            }
-          ],
-          "printingId": "F0436-P02"
         }
       ],
       "unresolved": [
@@ -39649,7 +39588,7 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "pending",
+      "productMappingStatus": "partial",
       "patternStatus": "not-applicable",
       "printings": [
         {
@@ -39657,8 +39596,10 @@
           "foilPattern": null,
           "markings": null,
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
@@ -39671,7 +39612,7 @@
         }
       ],
       "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V1, V3"
+        "One or more Cardmarket product variants are not mapped to a logical printing: V3"
       ]
     },
     {
@@ -51031,11 +50972,14 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -51043,9 +50987,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/fr/cards/swsh4-131",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-fr-fr/pdf/trading-card-game/checklist/swsh4_web_cardlist_fr.pdf",
@@ -51059,28 +51003,44 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "printingId": "F0579-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "distribution-promo",
+              "text": "Epee & Bouclier Voltage Eclatant set logo in artwork"
+            }
+          ],
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1",
+            "V2"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/fr/cards/swsh4-131",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2188224337/2188224337.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "French Ronflex PV 130, Goinfrerie / Plaquage 100, 131/185, sealed in its promo wrapper with the back label 'CARTE PROMO FR RONFLEX'; the 'Epee & Bouclier VOLTAGE ECLATANT' set logo is printed over the artwork, cosmos sparkle across the artwork. Retained as SPEC-0649.",
+              "retrievedAt": "2026-10-26"
             }
           ],
+          "specimenIds": [
+            "SPEC-0649"
+          ],
+          "image": "verification/specimens/SPEC-0649.jpg",
           "printingId": "F0579-P02"
         },
         {
@@ -51127,9 +51087,7 @@
           "printingId": "F0579-P03"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0580",
@@ -51180,11 +51138,14 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -51192,9 +51153,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/de/cards/swsh4-131",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-de-de/pdf/trading-card-game/checklist/swsh4_web_cardlist_de.pdf",
@@ -51208,28 +51169,44 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "printingId": "F0580-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "distribution-promo",
+              "text": "Schwert & Schild Farbenschock set logo in artwork"
+            }
+          ],
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1",
+            "V2"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/de/cards/swsh4-131",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2132953765/2132953765.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "German Relaxo HP 130, Schlemmen / Bodyslam 100, Illus. Atsuko Nishida, 131/185, (c)2020, held in a hand: the 'Schwert & Schild FARBENSCHOCK' set logo is printed over the artwork, and cosmos sparkle runs through the artwork. Standard card size against the hand. Retained as SPEC-0648.",
+              "retrievedAt": "2026-10-26"
             }
           ],
+          "specimenIds": [
+            "SPEC-0648"
+          ],
+          "image": "verification/specimens/SPEC-0648.jpg",
           "printingId": "F0580-P02"
         },
         {
@@ -51276,9 +51253,7 @@
           "printingId": "F0580-P03"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0581",
@@ -51329,11 +51304,14 @@
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -51341,9 +51319,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/it/cards/swsh4-131",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-it-it/pdf/trading-card-game/checklist/swsh4_web_cardlist_it.pdf",
@@ -51357,28 +51335,44 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
           "printingId": "F0581-P01"
         },
         {
           "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "cosmos",
+          "markings": [
+            {
+              "kind": "observed-marking",
+              "role": "distribution-promo",
+              "text": "Spada e Scudo Voltaggio Sfolgorante set logo in artwork"
+            }
+          ],
           "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1",
+            "V2"
+          ],
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://api.tcgdex.net/v2/it/cards/swsh4-131",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://marketplace-article-scans.s3.cardmarket.com/2185415228/2185415228.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Italian Snorlax PS 130, Rimpinzarsi / Corposcontro 100, 131/185, front and back: the 'Spada e Scudo VOLTAGGIO SFOLGORANTE' set logo is printed over the artwork, cosmos sparkle across the artwork. Retained as SPEC-0650.",
+              "retrievedAt": "2026-10-26"
             }
           ],
+          "specimenIds": [
+            "SPEC-0650"
+          ],
+          "image": "verification/specimens/SPEC-0650.jpg",
           "printingId": "F0581-P02"
         },
         {
@@ -51425,9 +51419,7 @@
           "printingId": "F0581-P03"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0582",
@@ -51483,6 +51475,9 @@
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
@@ -51490,9 +51485,9 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://api.tcgdex.net/v2/es/cards/swsh4-131",
+              "sourceType": "TCGdex API card variants",
+              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
             },
             {
               "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/swsh4_web_cardlist_es.pdf",
@@ -51506,29 +51501,14 @@
               "retrievedAt": "2026-08-27",
               "evidence": "The complete localized Vivid Voltage checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 131 Snorlax: Standard Set Foil/holo + Parallel Set/reverse-holo.",
               "evidenceScope": "standard-set"
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0582-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
-              "url": "https://api.tcgdex.net/v2/es/cards/swsh4-131",
-              "sourceType": "TCGdex API card variants",
-              "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0582-P02"
+          "printingId": "F0582-P01"
         },
         {
           "finish": "reverse-holo",
@@ -51571,7 +51551,7 @@
               "evidenceScope": "standard-set"
             }
           ],
-          "printingId": "F0582-P03"
+          "printingId": "F0582-P02"
         }
       ],
       "unresolved": [
@@ -51632,39 +51612,27 @@
       "printings": [
         {
           "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "printingId": "F0583-P01"
-        },
-        {
-          "finish": "holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "unknown",
-          "mappedVariants": [],
           "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://api.tcgdex.net/v2/pt/cards/swsh4-131",
               "sourceType": "TCGdex API card variants",
               "evidence": "swsh4-131 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Vivid-Voltage/Snorlax-V1-VIV131",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0583-P02"
+          "printingId": "F0583-P01"
         },
         {
           "finish": "reverse-holo",
@@ -51694,7 +51662,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0583-P03"
+          "printingId": "F0583-P02"
         }
       ],
       "unresolved": [

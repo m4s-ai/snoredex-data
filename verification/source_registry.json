@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 45,
-   "evidenceRecords": 1808,
-   "uniqueUrls": 1799,
+   "evidenceRecords": 1813,
+   "uniqueUrls": 1804,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7243
+   "claimsAttributed": 7268
   }
  },
  "providers": [
@@ -1054,8 +1054,8 @@
    "attribution": "Seller listing photograph via Cardmarket.",
    "notes": "Tier 2, below an owner-inspected specimen: the card text is legible, but it cannot be re-examined and the seller may have mislabelled the language. Record it as a SPEC-nnnn specimen with heldBy 'third-party seller' and the listing URL, never as a bare link — listings are deleted and the observation must outlive them. Positive evidence only: a listing's absence proves nothing, and the language filter above it is not evidence at all. No open API; collection is by hand or a browser session, subject to a rolling ~55-request quota before HTTP 429.",
    "hosts": [],
-   "uniqueSources": 9,
-   "claimsSupported": 44
+   "uniqueSources": 14,
+   "claimsSupported": 69
   },
   {
    "providerId": "seller-listing-photo",
@@ -2518,9 +2518,9 @@
     "F0249-P03",
     "F0250-P03",
     "F0251-P03",
-    "F0252-P03",
-    "F0253-P03",
-    "F0254-P03",
+    "F0252-P02",
+    "F0253-P02",
+    "F0254-P02",
     "F0259-P02",
     "F0260-P02",
     "F0261-P02",
@@ -2578,8 +2578,8 @@
     "F0579-P03",
     "F0580-P03",
     "F0581-P03",
-    "F0582-P03",
-    "F0583-P03",
+    "F0582-P02",
+    "F0583-P02",
     "override:holofoil-patterns"
    ],
    "retrievedAt": null,
@@ -8950,11 +8950,11 @@
     "F0251-P01",
     "F0251-P03",
     "F0252-P01",
-    "F0252-P03",
+    "F0252-P02",
     "F0253-P01",
-    "F0253-P03",
+    "F0253-P02",
     "F0254-P01",
-    "F0254-P03",
+    "F0254-P02",
     "PGO 055 V1"
    ],
    "retrievedAt": null,
@@ -10714,9 +10714,9 @@
     "F0581-P01",
     "F0581-P03",
     "F0582-P01",
-    "F0582-P03",
+    "F0582-P02",
     "F0583-P01",
-    "F0583-P03",
+    "F0583-P02",
     "VIV 131 V1"
    ],
    "retrievedAt": null,
@@ -10972,6 +10972,26 @@
    "usageCount": 5
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2079740614/2079740614.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0250-P02",
+    "SPEC-0652",
+    "U0156"
+   ],
+   "retrievedAt": "2026-10-26",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2087744043/2087744043.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -10990,6 +11010,26 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2101800294/2101800294.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0251-P02",
+    "SPEC-0651",
+    "U0157"
+   ],
+   "retrievedAt": "2026-10-26",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
@@ -11071,6 +11111,26 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2132953765/2132953765.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0580-P02",
+    "SPEC-0648",
+    "U0109"
+   ],
+   "retrievedAt": "2026-10-26",
+   "usageCount": 5
+  },
+  {
    "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2144873798/2144873798.jpg",
    "nonUrlEvidenceId": null,
    "providerId": "cardmarket-listing-photo",
@@ -11087,6 +11147,46 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2185415228/2185415228.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0581-P02",
+    "SPEC-0650",
+    "U0111"
+   ],
+   "retrievedAt": "2026-10-26",
+   "usageCount": 5
+  },
+  {
+   "canonicalUrl": "https://marketplace-article-scans.s3.cardmarket.com/2188224337/2188224337.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "cardmarket-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0579-P02",
+    "SPEC-0649",
+    "U0108"
+   ],
+   "retrievedAt": "2026-10-26",
+   "usageCount": 5
   },
   {
    "canonicalUrl": null,
@@ -23675,7 +23775,7 @@
    "stableIdCount": 3,
    "stableIds": [
     "F0253-P01",
-    "F0253-P03",
+    "F0253-P02",
     "override:pgo-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
@@ -23841,7 +23941,7 @@
    "stableIdCount": 3,
    "stableIds": [
     "F0582-P01",
-    "F0582-P03",
+    "F0582-P02",
     "override:viv-official-checklist-es"
    ],
    "retrievedAt": "2026-08-27",
@@ -24428,7 +24528,7 @@
    "stableIdCount": 3,
    "stableIds": [
     "F0252-P01",
-    "F0252-P03",
+    "F0252-P02",
     "override:pgo-official-checklist-it"
    ],
    "retrievedAt": "2026-08-27",
@@ -32481,7 +32581,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0434-P02",
+    "F0434-P01",
     "U0179",
     "U0668"
    ],
@@ -32542,7 +32642,7 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
-    "F0251-P02",
+    "F0251-P01",
     "F0251-P03",
     "U0061",
     "U0157"
@@ -32648,7 +32748,7 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
-    "F0580-P02",
+    "F0580-P01",
     "F0580-P03",
     "U0109",
     "U0139"
@@ -34436,7 +34536,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0436-P02",
+    "F0436-P01",
     "U0180",
     "U0669"
    ],
@@ -34497,8 +34597,8 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
+    "F0253-P01",
     "F0253-P02",
-    "F0253-P03",
     "U0062",
     "U0158"
    ],
@@ -34603,8 +34703,8 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
+    "F0582-P01",
     "F0582-P02",
-    "F0582-P03",
     "U0110",
     "U0140"
    ],
@@ -35442,7 +35542,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0433-P02",
+    "F0433-P01",
     "U0178",
     "U0667"
    ],
@@ -35503,7 +35603,7 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
-    "F0250-P02",
+    "F0250-P01",
     "F0250-P03",
     "U0060",
     "U0156"
@@ -35609,7 +35709,7 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
-    "F0579-P02",
+    "F0579-P01",
     "F0579-P03",
     "U0108",
     "U0138"
@@ -36334,7 +36434,7 @@
    ],
    "stableIdCount": 3,
    "stableIds": [
-    "F0435-P02",
+    "F0435-P01",
     "U0181",
     "U0670"
    ],
@@ -36395,8 +36495,8 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
+    "F0252-P01",
     "F0252-P02",
-    "F0252-P03",
     "U0063",
     "U0159"
    ],
@@ -36501,7 +36601,7 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
-    "F0581-P02",
+    "F0581-P01",
     "F0581-P03",
     "U0111",
     "U0141"
@@ -37534,8 +37634,8 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
+    "F0254-P01",
     "F0254-P02",
-    "F0254-P03",
     "U0064",
     "U0160"
    ],
@@ -37640,8 +37740,8 @@
    ],
    "stableIdCount": 4,
    "stableIds": [
+    "F0583-P01",
     "F0583-P02",
-    "F0583-P03",
     "U0112",
     "U0142"
    ],
