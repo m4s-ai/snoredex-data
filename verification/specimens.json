@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 656,
+  "count": 657,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14247,6 +14247,28 @@
         "basis": "The ruler beside the card shows a height of about 20 cm, the oversized size; holofoil across artwork and frame."
       },
       "listingUrl": "https://www.mercadolivre.com.br/carta-pokemon-snorlax-gx-sm05--2016/up/MLBU3828676596"
+    },
+    {
+      "specimenId": "SPEC-0657",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "Italian",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Video frame of the YouTube unboxing UklA52rTpkc (Italian SET SNORLAX GX box, still sealed), screenshot supplied by the collection owner; WebP decoded losslessly to PNG",
+      "photograph": "SPEC-0657.png",
+      "photographSource": "https://www.youtube.com/watch?v=UklA52rTpkc",
+      "photographSha256": "sha256:9931a83b9ac35dc4095630435f124eab26d64acaebb279e4030fbddac5848577",
+      "observed": "Sealed Italian 'SET SNORLAX GX' box: Italian booster packs ('GIOCO DI CARTE COLLEZIONABILI', '...ANTICHE'), a standard-size Snorlax (130 PS) and a standard-size Snorlax-GX card in the side windows, and in the top window a Snorlax-GX ('PS 190') far larger than the packs and the two standard cards beside them, i.e. the jumbo (oversized) printing of the Italian box. Holofoil visible in the window.",
+      "recordedAt": "2026-10-27",
+      "citedBy": [
+        "U0519"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "In the sealed Italian box the windowed Snorlax-GX is far larger than the booster packs and the two standard-size cards beside it; holofoil is visible."
+      }
     }
   ]
 }

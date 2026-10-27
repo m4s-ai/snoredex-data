@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-27",
-  "projectionVersion": "26578a6d5e1e464ad5470058597c271cd84783111ffc9672cc6d9de826ed566d",
+  "projectionVersion": "6fbd21981ede731a59e26b8a6eec1abd4533da990a34fa150f5e3901e3cf56fa",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 889,
-    "sourceObservations": 3284
+    "physicalPrintings": 890,
+    "sourceObservations": 3286
   },
   "groups": [
     {
@@ -31702,7 +31702,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+              "semanticPrintingId": "PRINTING:6a4492c0e710ad108b1f79d9",
+              "cardReleaseId": "RELEASE:WEST:Italian:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "jumbo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0389",
+              "sourcePrintingId": "F0389-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:6a4492c0e710ad108b1f79d9",
+              "specimenIds": [
+                "SPEC-0657"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.youtube.com/watch?v=UklA52rTpkc",
+                  "sourceType": "Third-party collector photograph",
+                  "evidence": "Sealed Italian 'SET SNORLAX GX' box: Italian booster packs ('GIOCO DI CARTE COLLEZIONABILI', '...ANTICHE'), a standard-size Snorlax (130 PS) and a standard-size Snorlax-GX card in the side windows, and in the top window a Snorlax-GX ('PS 190') far larger than the packs and the two standard cards beside them, i.e. the jumbo (oversized) printing of the Italian box. Holofoil visible in the window. Retained as SPEC-0657.",
+                  "retrievedAt": "2026-10-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
@@ -31738,9 +31766,38 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0657.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0657",
+              "contentHash": "9931a83b9ac35dc4095630435f124eab26d64acaebb279e4030fbddac5848577",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "9931a83b9ac35dc4095630435f124eab26d64acaebb279e4030fbddac5848577",
+              "previewSrc": "images/previews/SPEC-0657.png?v=5a261addef4242c678f06ae4c9b89c3f11d773298c6b22c73a3a509897d79469",
+              "thumbnailSrc": "images/thumbs/SPEC-0657.png?v=feb39eaa7129b9e7f3197506cfd46fa3e7f7dc7a8976e4a9ab95d08a4f676dfe"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0389-P01:0:8c29743b4bde0dce",
+              "kind": "finish",
+              "provider": "Third-party collector photograph",
+              "url": "https://www.youtube.com/watch?v=UklA52rTpkc",
+              "evidence": "Sealed Italian 'SET SNORLAX GX' box: Italian booster packs ('GIOCO DI CARTE COLLEZIONABILI', '...ANTICHE'), a standard-size Snorlax (130 PS) and a standard-size Snorlax-GX card in the side windows, and in the top window a Snorlax-GX ('PS 190') far larger than the packs and the two standard cards beside them, i.e. the jumbo (oversized) printing of the Italian box. Holofoil visible in the window. Retained as SPEC-0657.",
+              "contentHash": "ff0da9451cc47e8ceee81625804f787df1b7e743e230dbfad20a6dffb234b25a",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0657",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.youtube.com/watch?v=UklA52rTpkc",
+              "evidence": "Sealed Italian 'SET SNORLAX GX' box: Italian booster packs ('GIOCO DI CARTE COLLEZIONABILI', '...ANTICHE'), a standard-size Snorlax (130 PS) and a standard-size Snorlax-GX card in the side windows, and in the top window a Snorlax-GX ('PS 190') far larger than the packs and the two standard cards beside them, i.e. the jumbo (oversized) printing of the Italian box. Holofoil visible in the window.",
+              "contentHash": "a10175001ab2c64c9495f41e43f57d2908c5aa0b0646657223c58e8cfb03fd7a",
+              "image": "verification/specimens/SPEC-0657.png"
+            },
             {
               "observationId": "unit:U0277",
               "kind": "unit",
