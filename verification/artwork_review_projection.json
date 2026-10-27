@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-27",
-  "projectionVersion": "10d0a3ccab071fd771ef8c4fd5c83ae139c3a07c7deb927237f491ea32c726b6",
+  "projectionVersion": "e6812f2dd1bb1ca41030356d6b834d2b24db38cfb886199a59bf8f5634d35b82",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 886,
-    "sourceObservations": 3278
+    "physicalPrintings": 888,
+    "sourceObservations": 3282
   },
   "groups": [
     {
@@ -31428,7 +31428,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2a37d5cd9078d378d1173c3e",
+              "semanticPrintingId": "PRINTING:2a37d5cd9078d378d1173c3e",
+              "cardReleaseId": "RELEASE:WEST:French:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "jumbo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0387",
+              "sourcePrintingId": "F0387-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2a37d5cd9078d378d1173c3e",
+              "specimenIds": [
+                "SPEC-0654"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/t-4AAOSwhQJkA8lU/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "French Ronflex-GX SM05 black star promo, PV 190, Effondrement 80, Ronflement Tonitruant 180, Gare au Ronflex GX 210, Illus. 5ban Graphics, (c)2016, scanned beside a standard-size Pokemon card back: the card is about twice as tall and wide, i.e. the jumbo (oversized) printing. Holofoil swirl across artwork and frame. Listing title 'carte Pokémon SM05 Ronflex GX JUMBO Promo NEUF FR'. Retained as SPEC-0654.",
+                  "retrievedAt": "2026-10-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
@@ -31464,9 +31492,38 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0654.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0654",
+              "contentHash": "e7435ebafc7fc2163a7b1f523f55e57a350e6ac893f826fddbc15fa70c297696",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e7435ebafc7fc2163a7b1f523f55e57a350e6ac893f826fddbc15fa70c297696",
+              "previewSrc": "images/previews/SPEC-0654.png?v=b0e6fc03be20bd1929a860ba4633cefd0f521e16a3381cdb2b8a98360c074698",
+              "thumbnailSrc": "images/thumbs/SPEC-0654.png?v=85144fdbf1174c367a890faa783d9f4cd62e10a6557e451c4a4457c21dbc406e"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0387-P01:0:e5ba82e7e9c25527",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/t-4AAOSwhQJkA8lU/s-l1600.jpg",
+              "evidence": "French Ronflex-GX SM05 black star promo, PV 190, Effondrement 80, Ronflement Tonitruant 180, Gare au Ronflex GX 210, Illus. 5ban Graphics, (c)2016, scanned beside a standard-size Pokemon card back: the card is about twice as tall and wide, i.e. the jumbo (oversized) printing. Holofoil swirl across artwork and frame. Listing title 'carte Pokémon SM05 Ronflex GX JUMBO Promo NEUF FR'. Retained as SPEC-0654.",
+              "contentHash": "d9a1b1bfc7bb0f2b9c143ba410ab9ca7d12cef0b446ad654893b1447ac95bcfa",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0654",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.fr/itm/314443828036",
+              "evidence": "French Ronflex-GX SM05 black star promo, PV 190, Effondrement 80, Ronflement Tonitruant 180, Gare au Ronflex GX 210, Illus. 5ban Graphics, (c)2016, scanned beside a standard-size Pokemon card back: the card is about twice as tall and wide, i.e. the jumbo (oversized) printing. Holofoil swirl across artwork and frame. Listing title 'carte Pokémon SM05 Ronflex GX JUMBO Promo NEUF FR'.",
+              "contentHash": "f79376af0af47656f58ce93f92028a0dbb9ce6caae953d6e748bf4be16aa1f30",
+              "image": "verification/specimens/SPEC-0654.jpg"
+            },
             {
               "observationId": "unit:U0274",
               "kind": "unit",
@@ -31805,7 +31862,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:1d7a44a6c1f97c092841b8c0",
+              "semanticPrintingId": "PRINTING:1d7a44a6c1f97c092841b8c0",
+              "cardReleaseId": "RELEASE:WEST:Spanish:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "jumbo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0390",
+              "sourcePrintingId": "F0390-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1d7a44a6c1f97c092841b8c0",
+              "specimenIds": [
+                "SPEC-0655"
+              ],
+              "sources": [
+                {
+                  "url": "https://youtu.be/-tzXb0bKuE0?t=176",
+                  "sourceType": "Third-party collector photograph",
+                  "evidence": "Spanish Snorlax-GX SM05, PS 190, Colapso 80, Ronquido Atronador 180, Arrojo Intempestivo GX 210, unboxed from the Spanish Snorlax-GX box beside three Evoluciones booster packs, the box's standard-size Snorlax promo and a code card: the GX card is far larger than the packs and the standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame. Retained as SPEC-0655.",
+                  "retrievedAt": "2026-10-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
@@ -31841,9 +31926,38 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0655.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0655",
+              "contentHash": "4a1f146713ebae5fc905242d4db9f5b9945c5ca4cff530dd2b074dd89899fee2",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "4a1f146713ebae5fc905242d4db9f5b9945c5ca4cff530dd2b074dd89899fee2",
+              "previewSrc": "images/previews/SPEC-0655.png?v=bb708deb31c30af8e620a398e2a9692e3628847aebfef2ae1252da2a836f6ffd",
+              "thumbnailSrc": "images/thumbs/SPEC-0655.png?v=ceed995d01e799891637f7ee1f8daa9306f976a1d45f19ad6042a5c58e27c039"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0390-P01:0:7388476d36e25e89",
+              "kind": "finish",
+              "provider": "Third-party collector photograph",
+              "url": "https://youtu.be/-tzXb0bKuE0?t=176",
+              "evidence": "Spanish Snorlax-GX SM05, PS 190, Colapso 80, Ronquido Atronador 180, Arrojo Intempestivo GX 210, unboxed from the Spanish Snorlax-GX box beside three Evoluciones booster packs, the box's standard-size Snorlax promo and a code card: the GX card is far larger than the packs and the standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame. Retained as SPEC-0655.",
+              "contentHash": "c886700511a5c6fadd7cab37bd02661ad8465a957ddb7717e258df624c8af05a",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0655",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://youtu.be/-tzXb0bKuE0?t=176",
+              "evidence": "Spanish Snorlax-GX SM05, PS 190, Colapso 80, Ronquido Atronador 180, Arrojo Intempestivo GX 210, unboxed from the Spanish Snorlax-GX box beside three Evoluciones booster packs, the box's standard-size Snorlax promo and a code card: the GX card is far larger than the packs and the standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame.",
+              "contentHash": "969ea1353372e14171bc10998f9816e2b0657709acf6061c99369255e4b2fe8d",
+              "image": "verification/specimens/SPEC-0655.png"
+            },
             {
               "observationId": "unit:U0276",
               "kind": "unit",

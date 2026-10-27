@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 653,
+  "count": 655,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14179,6 +14179,51 @@
         "basis": "The photograph places the card beside a standard-size card back in a toploader, which shows the oversized size; holofoil is visible across the artwork and frame."
       },
       "listingUrl": "https://www.ebay.de/itm/398300179417"
+    },
+    {
+      "specimenId": "SPEC-0654",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "French",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller image (the listing's only image), 1600x1554 JPEG from i.ebayimg.com, read from the listing by the owner's local session and visually inspected",
+      "photograph": "SPEC-0654.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/t-4AAOSwhQJkA8lU/s-l1600.jpg",
+      "photographSha256": "sha256:e7435ebafc7fc2163a7b1f523f55e57a350e6ac893f826fddbc15fa70c297696",
+      "observed": "French Ronflex-GX SM05 black star promo, PV 190, Effondrement 80, Ronflement Tonitruant 180, Gare au Ronflex GX 210, Illus. 5ban Graphics, (c)2016, scanned beside a standard-size Pokemon card back: the card is about twice as tall and wide, i.e. the jumbo (oversized) printing. Holofoil swirl across artwork and frame. Listing title 'carte Pokémon SM05 Ronflex GX JUMBO Promo NEUF FR'.",
+      "recordedAt": "2026-10-27",
+      "citedBy": [
+        "U0516"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "The image places the card beside a standard-size card back, which shows the oversized size; holofoil across artwork and frame."
+      },
+      "listingUrl": "https://www.ebay.fr/itm/314443828036"
+    },
+    {
+      "specimenId": "SPEC-0655",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "Spanish",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Video frame at 2:56 of the YouTube unboxing 'Unboxing Caja Snorlax GX. (Evoluciones XY/Sol y Luna)', screenshot supplied by the collection owner; WebP decoded losslessly to PNG",
+      "photograph": "SPEC-0655.png",
+      "photographSource": "https://youtu.be/-tzXb0bKuE0?t=176",
+      "photographSha256": "sha256:4a1f146713ebae5fc905242d4db9f5b9945c5ca4cff530dd2b074dd89899fee2",
+      "observed": "Spanish Snorlax-GX SM05, PS 190, Colapso 80, Ronquido Atronador 180, Arrojo Intempestivo GX 210, unboxed from the Spanish Snorlax-GX box beside three Evoluciones booster packs, the box's standard-size Snorlax promo and a code card: the GX card is far larger than the packs and the standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame.",
+      "recordedAt": "2026-10-27",
+      "citedBy": [
+        "U0518"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "The frame shows the card beside booster packs and a standard-size card from the same box, which shows the oversized size; holofoil across artwork and frame."
+      }
     }
   ]
 }
