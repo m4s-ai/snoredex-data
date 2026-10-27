@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-26",
+  "generated": "2026-10-27",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 45,
-   "evidenceRecords": 1813,
-   "uniqueUrls": 1804,
+   "evidenceRecords": 1814,
+   "uniqueUrls": 1805,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7268
+   "claimsAttributed": 7273
   }
  },
  "providers": [
@@ -1078,8 +1078,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 191,
-   "claimsSupported": 806
+   "uniqueSources": 192,
+   "claimsSupported": 811
   }
  ],
  "evidence": [
@@ -15002,7 +15002,7 @@
     "F0375-P01",
     "F0379-P01",
     "F0387-P01",
-    "F0388-P01",
+    "F0388-P02",
     "F0389-P01",
     "F0390-P01",
     "F0391-P01",
@@ -30332,6 +30332,26 @@
    ],
    "retrievedAt": "2026-10-05",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0388-P01",
+    "SPEC-0653",
+    "U0517"
+   ],
+   "retrievedAt": "2026-10-27",
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",

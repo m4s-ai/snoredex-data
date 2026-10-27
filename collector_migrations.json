@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:f61bf035203045636a610b7d60affe879e1c006bbccfa1ca4e6cbab057626668",
+    "fromFingerprint": "sha256:1f13c544f384b430e540449a93aea13485a4b03e509835dacc00d8244bd82bfb",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:d357e3e4e1184566da8022d5961efd014b4453d6b8988c2082b6809baf6e2d46",
+    "toFingerprint": "sha256:f6f91d2fc53bb8134d6391e4dad575f0eafa2e1c08f4a7510a0395ea7b6f0671",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d357e3e4e1184566da8022d5961efd014b4453d6b8988c2082b6809baf6e2d46",
+      "toFingerprint": "sha256:f6f91d2fc53bb8134d6391e4dad575f0eafa2e1c08f4a7510a0395ea7b6f0671",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -8489,7 +8489,7 @@
             "item-b6d82cb7-2a73-5425-af4f-c64a3eb5ad90"
           ],
           "toItemIds": [
-            "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f"
+            "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
           ],
           "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
@@ -12092,7 +12092,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d357e3e4e1184566da8022d5961efd014b4453d6b8988c2082b6809baf6e2d46",
+      "toFingerprint": "sha256:f6f91d2fc53bb8134d6391e4dad575f0eafa2e1c08f4a7510a0395ea7b6f0671",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -19644,7 +19644,7 @@
             "item-b6d82cb7-2a73-5425-af4f-c64a3eb5ad90"
           ],
           "toItemIds": [
-            "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f"
+            "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
           ],
           "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
@@ -23346,7 +23346,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:d357e3e4e1184566da8022d5961efd014b4453d6b8988c2082b6809baf6e2d46",
+      "toFingerprint": "sha256:f6f91d2fc53bb8134d6391e4dad575f0eafa2e1c08f4a7510a0395ea7b6f0671",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:7f88c3c6dffc4b1fe73c868cd6be1baaa36116129b5217eaa1f17d590bd47d81",
       "cumulative": true,
@@ -31374,7 +31374,7 @@
             "item-b6d82cb7-2a73-5425-af4f-c64a3eb5ad90"
           ],
           "toItemIds": [
-            "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f"
+            "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
           ],
           "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
@@ -39222,6 +39222,14 @@
       "fromItemId": "sm-05-german-none-holo",
       "toItemIds": [
         "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
+      "fromItemId": "sm-05-german-none-holo-jumbo",
+      "toItemIds": [
+        "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -47784,6 +47792,13 @@
         ]
       },
       {
+        "legacyChecklistId": "sm-05-german-none-holo-jumbo",
+        "disposition": "projected",
+        "targetItemIds": [
+          "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
+        ]
+      },
+      {
         "legacyChecklistId": "sm-05-italian-none-holo",
         "disposition": "projected",
         "targetItemIds": [
@@ -53773,7 +53788,8 @@
         "cardReleaseId": "RELEASE:WEST:German:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f"
+          "item-027c5b7e-23e8-5d8b-b1e2-4c0eca017d3f",
+          "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
         ],
         "reason": null
       },
@@ -57365,6 +57381,11 @@
         "targetItemId": "item-87f7613b-daa3-549c-9c3a-e3ddd3f39c72"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:08a14f6837fcc8761ae6bfdf",
+        "disposition": "projected",
+        "targetItemId": "item-3d044199-4ab7-5152-b440-a816c2c8d6a1"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:09f26361995a28419ad8840f",
         "disposition": "projected",
         "targetItemId": "item-a27aa260-31b1-5fa4-a2f7-0f82a6b2386f"
@@ -59806,9 +59827,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 896,
+      "legacyChecklistRows": 897,
       "cardReleases": 629,
-      "physicalPrintings": 885,
+      "physicalPrintings": 886,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

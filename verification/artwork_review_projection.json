@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-26",
-  "projectionVersion": "5e9d3528e9fa5e1391ce4504d1bcb08270248633fb135db8cf6b633046695990",
+  "generated": "2026-10-27",
+  "projectionVersion": "10d0a3ccab071fd771ef8c4fd5c83ae139c3a07c7deb927237f491ea32c726b6",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 885,
-    "sourceObservations": 3276
+    "physicalPrintings": 886,
+    "sourceObservations": 3278
   },
   "groups": [
     {
@@ -31508,7 +31508,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:08a14f6837fcc8761ae6bfdf",
+              "semanticPrintingId": "PRINTING:08a14f6837fcc8761ae6bfdf",
+              "cardReleaseId": "RELEASE:WEST:German:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "jumbo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0388",
+              "sourcePrintingId": "F0388-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:08a14f6837fcc8761ae6bfdf",
+              "specimenIds": [
+                "SPEC-0653"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "German Relaxo-GX SM05 black star promo, KP 190, Kollaps 80, Donnerndes Schnarchen 180, Schluss mit lustig GX 210, Illustr. 5ban Graphics, (c)2016, photographed beside a standard-size Pokemon card back in a toploader: the card is far larger, i.e. the jumbo (oversized) printing. Holofoil across the artwork and frame. Retained as SPEC-0653.",
+                  "retrievedAt": "2026-10-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
@@ -31544,9 +31572,38 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0653.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0653",
+              "contentHash": "175497ed7739bd0b4ff4f7babe2740bb2d60747c56ec741ce7bade5546ff09fe",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "175497ed7739bd0b4ff4f7babe2740bb2d60747c56ec741ce7bade5546ff09fe",
+              "previewSrc": "images/previews/SPEC-0653.png?v=fae4b7181a4ff5c571aa5688ed879c50f445c8a27a6ca886addba38ccade419e",
+              "thumbnailSrc": "images/thumbs/SPEC-0653.png?v=733db23d7c315f8efa417037036041dd3ea726cc3464eb0efa4b058dad643080"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0388-P01:0:50d1d82dc84a684f",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+              "evidence": "German Relaxo-GX SM05 black star promo, KP 190, Kollaps 80, Donnerndes Schnarchen 180, Schluss mit lustig GX 210, Illustr. 5ban Graphics, (c)2016, photographed beside a standard-size Pokemon card back in a toploader: the card is far larger, i.e. the jumbo (oversized) printing. Holofoil across the artwork and frame. Retained as SPEC-0653.",
+              "contentHash": "65935e8773909ac34beca87386446debb3871dde85167f86f4bdfc864625f58d",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0653",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/398300179417",
+              "evidence": "German Relaxo-GX SM05 black star promo, KP 190, Kollaps 80, Donnerndes Schnarchen 180, Schluss mit lustig GX 210, Illustr. 5ban Graphics, (c)2016, photographed beside a standard-size Pokemon card back in a toploader: the card is far larger, i.e. the jumbo (oversized) printing. Holofoil across the artwork and frame.",
+              "contentHash": "29a6aa5cfca9af213802f503ecc4f963bd884bca77c4828fd3015e46e4ef9008",
+              "image": "verification/specimens/SPEC-0653.jpg"
+            },
             {
               "observationId": "unit:U0275",
               "kind": "unit",

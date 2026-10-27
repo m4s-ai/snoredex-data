@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 652,
+  "count": 653,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14156,6 +14156,29 @@
         "basis": "Cosmos sparkle is visible across the artwork."
       },
       "listingUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-GO/Snorlax-V2-PGO055?language=2"
+    },
+    {
+      "specimenId": "SPEC-0653",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "German",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "eBay seller photograph (main listing image), 1600x1600 JPEG from i.ebayimg.com, visually inspected",
+      "photograph": "SPEC-0653.jpg",
+      "photographSource": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+      "photographSha256": "sha256:175497ed7739bd0b4ff4f7babe2740bb2d60747c56ec741ce7bade5546ff09fe",
+      "observed": "German Relaxo-GX SM05 black star promo, KP 190, Kollaps 80, Donnerndes Schnarchen 180, Schluss mit lustig GX 210, Illustr. 5ban Graphics, (c)2016, photographed beside a standard-size Pokemon card back in a toploader: the card is far larger, i.e. the jumbo (oversized) printing. Holofoil across the artwork and frame.",
+      "recordedAt": "2026-10-27",
+      "citedBy": [
+        "U0517"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "The photograph places the card beside a standard-size card back in a toploader, which shows the oversized size; holofoil is visible across the artwork and frame."
+      },
+      "listingUrl": "https://www.ebay.de/itm/398300179417"
     }
   ]
 }

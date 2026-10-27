@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-10-26",
+    "generated": "2026-10-27",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 120,
       "absenceEdges": 0,
       "observations": 170,
-      "resolvedVerdictSources": 1813
+      "resolvedVerdictSources": 1814
     },
     "surfaceStates": {
       "active": 54,
@@ -11222,7 +11222,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:407cf025c4410c04a6b639a41762140369738bad57c78721be1dbd6429196d9e",
+      "rawRecordHash": "sha256:c4ad725fccc8ae780c8e2883c9e325c7d1bfac9680c3963b4988cd63d0abf325",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -11332,7 +11332,7 @@
           "F0375-P01",
           "F0379-P01",
           "F0387-P01",
-          "F0388-P01",
+          "F0388-P02",
           "F0389-P01",
           "F0390-P01",
           "F0391-P01",
@@ -36690,6 +36690,20 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
