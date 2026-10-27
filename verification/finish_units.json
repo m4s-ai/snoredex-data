@@ -57,7 +57,7 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 536,
+      "withConfirmedFinish": 537,
       "withOnlyMarketplaceClaim": 12,
       "pendingFinish": 10,
       "notApplicableFinish": 77,
@@ -67,8 +67,8 @@
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 29,
-      "withAnyUnresolvedDetail": 106,
+      "withUnresolvedProductMapping": 28,
+      "withAnyUnresolvedDetail": 105,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -36228,16 +36228,40 @@
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "owner-attested",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "owner-attested",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "owner-adjudicated",
-      "productMappingStatus": "partial",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "jumbo",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://http2.mlstatic.com/D_NQ_NP_2X_789575-MLB107387224822_032026-F-carta-pokemon-snorlax-gx-sm05--2016.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Portuguese Snorlax-GX SM05 black star promo, PS 190, Colapso 80, Ronco Estrondoso 180, Panqueca Pulverizadora GX 210, Ilust. 5ban Graphics, (c)2016, photographed beside a centimetre ruler: the card spans about 1 to 21 cm, roughly 20 cm tall against the 8.8 cm of a standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame. Retained as SPEC-0656.",
+              "retrievedAt": "2026-10-27"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0656"
+          ],
+          "image": "verification/specimens/SPEC-0656.png",
+          "printingId": "F0391-P01"
+        },
         {
           "finish": "holo",
           "foilPattern": null,
@@ -36258,12 +36282,10 @@
               "evidence": "The collection owner ruled on 2026-10-26 that SM05 Snorlax-GX exists only as holo: \"es gibt die jumbo nur in einer variante wenn die holo bestätigt ist müssen wir doch keine non-holo erfinden\". Recorded for the regular promo in each European language; no localized jumbo is asserted."
             }
           ],
-          "printingId": "F0391-P01"
+          "printingId": "F0391-P02"
         }
       ],
-      "unresolved": [
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0392",

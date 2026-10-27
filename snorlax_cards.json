@@ -39,7 +39,7 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-10-27",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 536,
+      "withConfirmedFinish": 537,
       "withOnlyMarketplaceClaim": 12,
       "pendingFinish": 10,
       "notApplicableFinish": 77,
@@ -49,8 +49,8 @@
       "withReverseHolo": 224,
       "withMirrorHolo": 22,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 29,
-      "withAnyUnresolvedDetail": 106,
+      "withUnresolvedProductMapping": 28,
+      "withAnyUnresolvedDetail": 105,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -18326,16 +18326,16 @@
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "owner-attested",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "status": "owner-attested",
             "finishUnitId": "F0391",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
-                "printingId": "F0391-P01",
+                "printingId": "F0391-P02",
                 "finish": "holo",
                 "foilPattern": null,
                 "markings": null,
@@ -33843,26 +33843,43 @@
           {
             "language": "Portuguese",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
             "unitAvailableFinishes": [
               "holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "other-product",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "owner-attested",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0391",
-            "productMappingStatus": "partial",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0391-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "jumbo",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0656.png",
+                "specimenIds": [
+                  "SPEC-0656"
+                ]
+              }
+            ]
           }
         ]
       },

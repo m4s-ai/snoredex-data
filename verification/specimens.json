@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 655,
+  "count": 656,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14224,6 +14224,29 @@
         "cardSize": "jumbo",
         "basis": "The frame shows the card beside booster packs and a standard-size card from the same box, which shows the oversized size; holofoil across artwork and frame."
       }
+    },
+    {
+      "specimenId": "SPEC-0656",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "Portuguese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Mercado Livre seller photograph, 900x1200 WebP from http2.mlstatic.com (image URL supplied by the collection owner), decoded losslessly to PNG and visually inspected",
+      "photograph": "SPEC-0656.png",
+      "photographSource": "https://http2.mlstatic.com/D_NQ_NP_2X_789575-MLB107387224822_032026-F-carta-pokemon-snorlax-gx-sm05--2016.webp",
+      "photographSha256": "sha256:d7766d63dd367b46fb54208c49576cbc75aa925f876ad2d17fa31a4a34a87263",
+      "observed": "Portuguese Snorlax-GX SM05 black star promo, PS 190, Colapso 80, Ronco Estrondoso 180, Panqueca Pulverizadora GX 210, Ilust. 5ban Graphics, (c)2016, photographed beside a centimetre ruler: the card spans about 1 to 21 cm, roughly 20 cm tall against the 8.8 cm of a standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame.",
+      "recordedAt": "2026-10-27",
+      "citedBy": [
+        "U0520"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "The ruler beside the card shows a height of about 20 cm, the oversized size; holofoil across artwork and frame."
+      },
+      "listingUrl": "https://www.mercadolivre.com.br/carta-pokemon-snorlax-gx-sm05--2016/up/MLBU3828676596"
     }
   ]
 }

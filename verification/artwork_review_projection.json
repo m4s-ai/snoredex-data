@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-27",
-  "projectionVersion": "e6812f2dd1bb1ca41030356d6b834d2b24db38cfb886199a59bf8f5634d35b82",
+  "projectionVersion": "26578a6d5e1e464ad5470058597c271cd84783111ffc9672cc6d9de826ed566d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 888,
-    "sourceObservations": 3282
+    "physicalPrintings": 889,
+    "sourceObservations": 3284
   },
   "groups": [
     {
@@ -31782,7 +31782,35 @@
             "base",
             "V2"
           ],
-          "physicalPrintings": [],
+          "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+              "semanticPrintingId": "PRINTING:191319c6f48a05dc7c65cf06",
+              "cardReleaseId": "RELEASE:WEST:Portuguese:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "jumbo",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0391",
+              "sourcePrintingId": "F0391-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+              "specimenIds": [
+                "SPEC-0656"
+              ],
+              "sources": [
+                {
+                  "url": "https://http2.mlstatic.com/D_NQ_NP_2X_789575-MLB107387224822_032026-F-carta-pokemon-snorlax-gx-sm05--2016.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Portuguese Snorlax-GX SM05 black star promo, PS 190, Colapso 80, Ronco Estrondoso 180, Panqueca Pulverizadora GX 210, Ilust. 5ban Graphics, (c)2016, photographed beside a centimetre ruler: the card spans about 1 to 21 cm, roughly 20 cm tall against the 8.8 cm of a standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame. Retained as SPEC-0656.",
+                  "retrievedAt": "2026-10-27"
+                }
+              ]
+            }
+          ],
           "detection": {
             "state": "catalogue-derived",
             "cardName": "Snorlax GX",
@@ -31818,9 +31846,38 @@
               "originalHash": "4745fc51146ba3c1770a3081d990a1ea58d6d94c5a572b52ee99686d8220351c",
               "previewSrc": "images/previews/SM_05_Snorlax_GX_V2_363910.jpg?v=d8c5338919f350577d233be1cad48be1a57f095b2fd1c0cf70d2c5e179d7f003",
               "thumbnailSrc": "images/thumbs/SM_05_Snorlax_GX_V2_363910.jpg?v=260c8f7c1e378cdab7cc4aa7e70c14101052af1c1b78a4a95cd82071b325bb3b"
+            },
+            {
+              "src": "verification/specimens/SPEC-0656.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0656",
+              "contentHash": "d7766d63dd367b46fb54208c49576cbc75aa925f876ad2d17fa31a4a34a87263",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d7766d63dd367b46fb54208c49576cbc75aa925f876ad2d17fa31a4a34a87263",
+              "previewSrc": "images/previews/SPEC-0656.png?v=1bf699a5a1d0a37893d01ec1eb2a3d5fdc3b8eccb63a756eddac68f974a07e0d",
+              "thumbnailSrc": "images/thumbs/SPEC-0656.png?v=30ee62aeff4cbf944e874ebbbad23b9731258d8f302e0b362ef40c20741f0e42"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0391-P01:0:b97a52fc83606108",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://http2.mlstatic.com/D_NQ_NP_2X_789575-MLB107387224822_032026-F-carta-pokemon-snorlax-gx-sm05--2016.webp",
+              "evidence": "Portuguese Snorlax-GX SM05 black star promo, PS 190, Colapso 80, Ronco Estrondoso 180, Panqueca Pulverizadora GX 210, Ilust. 5ban Graphics, (c)2016, photographed beside a centimetre ruler: the card spans about 1 to 21 cm, roughly 20 cm tall against the 8.8 cm of a standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame. Retained as SPEC-0656.",
+              "contentHash": "323e7ebacdc1d1fb0f665172147ca63e9af802fe3902ed9a453aa368832f0ae0",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0656",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.mercadolivre.com.br/carta-pokemon-snorlax-gx-sm05--2016/up/MLBU3828676596",
+              "evidence": "Portuguese Snorlax-GX SM05 black star promo, PS 190, Colapso 80, Ronco Estrondoso 180, Panqueca Pulverizadora GX 210, Ilust. 5ban Graphics, (c)2016, photographed beside a centimetre ruler: the card spans about 1 to 21 cm, roughly 20 cm tall against the 8.8 cm of a standard card, i.e. the jumbo (oversized) printing. Holofoil across artwork and frame.",
+              "contentHash": "89749f0606d7256e9bacc9f7c1e019a653474500556cec4ae1fb36d4152bf045",
+              "image": "verification/specimens/SPEC-0656.png"
+            },
             {
               "observationId": "unit:U0278",
               "kind": "unit",

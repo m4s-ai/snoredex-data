@@ -8738,6 +8738,26 @@
     },
     {
       "entityType": "candidate-claim",
+      "entityId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+        "claimKind": "physical-printing",
+        "sourceKind": "finish-printing-record",
+        "sourceId": "F0391-P01",
+        "semanticPrintingId": "PRINTING:191319c6f48a05dc7c65cf06",
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+        "materializedTargetId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0656"
+        ]
+      }
+    },
+    {
+      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:191d5e36650807db782521fc",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -12559,7 +12579,7 @@
         "claimId": "CLAIM:finish:PRINTING:77d87c8c758695ce22ca45b4",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0391-P01",
+        "sourceId": "F0391-P02",
         "semanticPrintingId": "PRINTING:77d87c8c758695ce22ca45b4",
         "evidenceStatus": "owner-attested",
         "disposition": "candidate-needs-evidence",
@@ -38850,6 +38870,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:1d7a44a6c1f97c092841b8c0, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:1d7a44a6c1f97c092841b8c0"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0656",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0656",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0656",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06"
       }
     },
     {
@@ -97932,6 +97969,30 @@
         "sourceFinishUnitId": "F0015",
         "sourcePrintingId": "F0015-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:18f446608f9f25154f211d2e"
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+        "semanticPrintingId": "PRINTING:191319c6f48a05dc7c65cf06",
+        "cardReleaseId": "RELEASE:WEST:Portuguese:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "jumbo",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0391",
+        "sourcePrintingId": "F0391-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+        "specimenIds": [
+          "SPEC-0656"
+        ]
       }
     },
     {
@@ -188782,6 +188843,16 @@
     },
     {
       "fromType": "candidate-claim",
+      "fromId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:191d5e36650807db782521fc",
       "relation": "proposes-for",
       "toType": "card-release",
@@ -204858,6 +204929,16 @@
       "toId": "PHYSICAL:PRINTING:1d7a44a6c1f97c092841b8c0",
       "provenance": {
         "specimenId": "SPEC-0655"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0656",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "provenance": {
+        "specimenId": "SPEC-0656"
       }
     },
     {
@@ -250554,6 +250635,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Italian:BCR:109:Snorlax-Double-Lariat-Rollout",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:191319c6f48a05dc7c65cf06",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Portuguese:SM:05:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
       "provenance": {}
     },
     {
@@ -305249,6 +305346,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0391-P01",
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
+    },
+    {
+      "sourceKind": "finish-printing-record",
+      "sourceId": "F0391-P02",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "finish printing record carries positive evidence"
@@ -325811,17 +325915,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:1d7a44a6c1f97c092841b8c0, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0656",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:191319c6f48a05dc7c65cf06, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 9098,
-    "edges": 13153,
-    "migrationInputs": 3323,
+    "entities": 9101,
+    "edges": 13157,
+    "migrationInputs": 3325,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 361,
+      "candidate-needs-evidence": 362,
       "carried": 68,
-      "established-and-mapped": 1706,
+      "established-and-mapped": 1707,
       "linked-local-counterpart": 126,
       "mapped": 526,
       "needs-evidence": 218,
@@ -325829,9 +325940,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2234,
+    "candidateClaims": 2236,
     "cardReleases": 629,
-    "physicalPrintings": 888,
+    "physicalPrintings": 889,
     "setSourceRecords": 747,
     "setSourceDispositions": 747,
     "localizations": 16
