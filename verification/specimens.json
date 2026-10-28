@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 657,
+  "count": 658,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14268,6 +14268,32 @@
         "finish": "holo",
         "cardSize": "jumbo",
         "basis": "In the sealed Italian box the windowed Snorlax-GX is far larger than the booster packs and the two standard-size cards beside it; holofoil is visible."
+      }
+    },
+    {
+      "specimenId": "SPEC-0658",
+      "setCode": "SM",
+      "number": "05",
+      "variant": "V2",
+      "language": "Italian",
+      "heldBy": "third-party collector",
+      "inspectedFrom": "Video frame of the YouTube unboxing UklA52rTpkc (the same Italian SET SNORLAX GX box, card unpacked), screenshot supplied by the collection owner; WebP decoded losslessly to PNG",
+      "photograph": "SPEC-0658.png",
+      "photographSource": "https://www.youtube.com/watch?v=UklA52rTpkc",
+      "photographSha256": "sha256:9519e8bf0d00647bf02af7045c9ba04d2225a5c5289a06399cb914f9dd88f257",
+      "observed": "The Italian Snorlax-GX ('PS 190') taken out of the box and held with both hands: attacks 'Collassare' ('Questo Pokémon viene addormentato.') and 'Russare Fragoroso', and the GX attack line below. The card spans the width between both hands, far larger than a standard card relative to the fingers. Holofoil across the artwork.",
+      "recordedAt": "2026-10-28",
+      "citedBy": [
+        "U0519"
+      ],
+      "physicalObservation": {
+        "finish": "holo",
+        "cardSize": "jumbo",
+        "basis": "Italian attack text is legible; the card spans both hands, far beyond a standard card's size relative to the fingers; holofoil is visible."
+      },
+      "sameCardAs": {
+        "specimenId": "SPEC-0657",
+        "basis": "same unboxing video UklA52rTpkc; the jumbo card from the sealed box in SPEC-0657 after unpacking"
       }
     }
   ]

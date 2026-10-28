@@ -3,7 +3,7 @@
     "schema": "snoredex-authoritative-locality-graph",
     "schemaVersion": "1.1.0",
     "status": "authoritative-migrated",
-    "generated": "2026-10-27",
+    "generated": "2026-10-28",
     "identitySource": "snoredex-authoritative-locality-migration",
     "catalogueSource": "snoredex-authoritative-set-catalogue-migration",
     "description": "Canonical locality graph after the reviewed #140 migration boundary. Raw source records, claims and dispositions remain reversible.",
@@ -12148,7 +12148,8 @@
         "materializedTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
         "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
         "specimenIds": [
-          "SPEC-0657"
+          "SPEC-0657",
+          "SPEC-0658"
         ]
       }
     },
@@ -38922,8 +38923,37 @@
         "disposition": "candidate-needs-evidence",
         "proposedTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
         "materializedTargetId": null,
-        "reason": "provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9, already established from the finish store",
-        "provenanceTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9"
+        "reason": "retained view of the same card provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+        "provenanceTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+        "observedFields": [
+          "cardSize",
+          "finish"
+        ],
+        "ownerAttestedFields": [],
+        "sameCardPrimaryId": "SPEC-0657"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0658",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0658",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0658",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+        "materializedTargetId": null,
+        "reason": "retained view of the same card provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+        "provenanceTargetId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+        "observedFields": [
+          "cardSize",
+          "finish"
+        ],
+        "ownerAttestedFields": [],
+        "sameCardPrimaryId": "SPEC-0657"
       }
     },
     {
@@ -101550,8 +101580,19 @@
         "sourcePrintingId": "F0389-P01",
         "establishingClaimId": "CLAIM:finish:PRINTING:6a4492c0e710ad108b1f79d9",
         "specimenIds": [
-          "SPEC-0657"
-        ]
+          "SPEC-0657",
+          "SPEC-0658"
+        ],
+        "specimenFieldSources": {
+          "cardSize": [
+            "SPEC-0657",
+            "SPEC-0658"
+          ],
+          "finish": [
+            "SPEC-0657",
+            "SPEC-0658"
+          ]
+        }
       }
     },
     {
@@ -205020,6 +205061,16 @@
       "toId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
       "provenance": {
         "specimenId": "SPEC-0657"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0658",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9",
+      "provenance": {
+        "specimenId": "SPEC-0658"
       }
     },
     {
@@ -326032,16 +326083,23 @@
       "sourceId": "SPEC-0657",
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
-      "reason": "provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9, already established from the finish store"
+      "reason": "retained view of the same card provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0658",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "retained view of the same card provides provenance for PHYSICAL:PRINTING:6a4492c0e710ad108b1f79d9"
     }
   ],
   "summary": {
-    "entities": 9104,
-    "edges": 13161,
-    "migrationInputs": 3327,
+    "entities": 9105,
+    "edges": 13162,
+    "migrationInputs": 3328,
     "migrationDispositions": {
       "bounded-contradicted": 93,
-      "candidate-needs-evidence": 363,
+      "candidate-needs-evidence": 364,
       "carried": 68,
       "established-and-mapped": 1708,
       "linked-local-counterpart": 126,
@@ -326051,7 +326109,7 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2238,
+    "candidateClaims": 2239,
     "cardReleases": 629,
     "physicalPrintings": 890,
     "setSourceRecords": 747,
