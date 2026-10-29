@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-28",
-  "projectionVersion": "365567349cff8dc47461c14a08f2c95fc50d6b758fc6397e7922af6921a59d4a",
+  "projectionVersion": "f62c924c19f2bf699e95e640d3b8d86e782effcfe4ebf68ef39980a5ca92f244",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 890,
-    "sourceObservations": 3288
+    "physicalPrintings": 889,
+    "sourceObservations": 3298
   },
   "groups": [
     {
@@ -26068,7 +26068,8 @@
               "sourcePrintingId": "F0352-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:17433d8ac55b45e5f0e4e91d",
               "specimenIds": [
-                "SPEC-0455"
+                "SPEC-0455",
+                "SPEC-0239"
               ],
               "sources": [
                 {
@@ -26085,6 +26086,23 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
+                  "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+                  "sourceType": "official Pokémon Korea card render",
+                  "evidence": "Complete official Korean render for Snorlax s2 077/096. The printed Korean name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0239.",
+                  "retrievedAt": "2026-08-28",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained official pokémon korea card render supports card identity and any independently visible properties."
+                },
+                {
                   "url": "https://media.bunjang.co.kr/product/427352825_1_1788084118_w480.jpg",
                   "sourceType": "Seller listing photograph",
                   "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s2 077/096 U identity establish the exact localized card. Sleeve glare is not treated as finish evidence. Retained as SPEC-0455.",
@@ -26093,25 +26111,6 @@
                     "identity"
                   ]
                 }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0239",
-              "cardReleaseId": "RELEASE:KR:Korean:s2:077/096:Snorlax-Collect-Collapse",
-              "finish": "non-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for Korean s2 077/096, selecting SPEC-0239 and SPEC-0455. Each retained image supports identity; finish rests only on the owner determination. No same-card association or complete finish inventory asserted.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0239",
-              "specimenIds": [
-                "SPEC-0239"
               ]
             }
           ],
@@ -26178,7 +26177,7 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
-              "contentHash": "8670cc1d5f8d157281ee9a8ea0b9c8e9588d3d9bbd42dc51a08a4427c8956823",
+              "contentHash": "09ceedbaa2338ee1047774a70ffc18bcf8e266803f7d4ef8c1aa8fdd464c5f29",
               "image": null
             },
             {
@@ -26187,16 +26186,34 @@
               "provider": "Cardmarket catalogue hint (not external verification)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rebellion-Crash/Snorlax-s277",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
-              "contentHash": "4ad53a2b244e1658f94b17293921a4eb985d63cbd1e8645496fb4fa33fdbd016",
+              "contentHash": "961c44a19ee5e862f817bd5de7ad2a64062ffc7e1d758901a91af95e93f970ad",
               "image": null
             },
             {
-              "observationId": "finish:F0352-P01:2:be67157c5c5a1507",
+              "observationId": "finish:F0352-P01:2:9a3dd3da14a2ec2b",
+              "kind": "finish",
+              "provider": "official Pokémon Korea card render",
+              "url": "https://cards.image.pokemonkorea.co.kr/data/wmimages/S/S2/S2_077.png?w=512",
+              "evidence": "Complete official Korean render for Snorlax s2 077/096. The printed Korean name, collector identity, attacks and rarity U establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred. Retained as SPEC-0239.",
+              "contentHash": "588fe4290d93f85ca2af8b26d316c9b645127c4c2f20fd66f79ed82df1a8d270",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0352-P01:3:a88dff91ed764d76",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained official pokémon korea card render supports card identity and any independently visible properties.",
+              "contentHash": "9d0356bc5d7950c2aafa4eee220ca4dedbff35fbf23e79e3b74eba2fcc56fb3d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0352-P01:4:be67157c5c5a1507",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://media.bunjang.co.kr/product/427352825_1_1788084118_w480.jpg",
               "evidence": "Complete seller photograph of Korean Snorlax. The Hangul name and rules text and printed s2 077/096 U identity establish the exact localized card. Sleeve glare is not treated as finish evidence. Retained as SPEC-0455.",
-              "contentHash": "c483bd8cc50cc56e8a9046525954216a58535e315d8d09c830ec34b73c94d327",
+              "contentHash": "fb27fab10b2224af90b5ae0ff443e627a159f4fddee48fd9e5fa093636e6eea4",
               "image": null
             },
             {
@@ -27482,22 +27499,46 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0445",
+              "physicalPrintingId": "PHYSICAL:PRINTING:4a5417dbaef2eec83c6c12d0",
+              "semanticPrintingId": "PRINTING:4a5417dbaef2eec83c6c12d0",
               "cardReleaseId": "RELEASE:KR:Korean:sv4K:060/066:Snorlax-Doll",
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [],
+              "markings": null,
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0445, Korean sv4K 060/066 Snorlax Doll. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0445",
+              "sourceFinishUnitId": "F0482",
+              "sourcePrintingId": "F0482-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:4a5417dbaef2eec83c6c12d0",
               "specimenIds": [
                 "SPEC-0445"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://media.bunjang.co.kr/product/407721760_1_1787157533_w480.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Korean Snorlax Doll. The Hangul name and item text and printed sv4K 060/066 U identity establish the exact local printing. This corrects the local collector identity implicit in the legacy sv4K 059 claim; no finish is inferred. Retained as SPEC-0445.",
+                  "retrievedAt": "2026-08-30",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
               ]
             }
           ],
@@ -27547,6 +27588,33 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0482-P01:0:1dab8533a108fb1a",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "f0f19cb7d56e16ee7c42c3dd48dcd264ee6d8d2f9faa95f819ae3ad694671d8e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0482-P01:1:a701f999e6ac645d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/407721760_1_1787157533_w480.jpg",
+              "evidence": "Complete seller photograph of Korean Snorlax Doll. The Hangul name and item text and printed sv4K 060/066 U identity establish the exact local printing. This corrects the local collector identity implicit in the legacy sv4K 059 claim; no finish is inferred. Retained as SPEC-0445.",
+              "contentHash": "022b60363ab34c57b6f14e942b0e7c26cf4a3e62fd5baad4802a9a23adfa5f00",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0482-P01:2:da003a5877402d68",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Ancient-Roar/Snorlax-Doll-sv4K059",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "452a3a5060a5a2c123b8bdd5c94cb25f105caae7212a22c5a4fc8a341641e41c",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sv4K:060/066:base",
               "kind": "source-first",
@@ -100093,7 +100161,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0179",
+              "physicalPrintingId": "PHYSICAL:PRINTING:659d5955fccfd0a5adabc4ce",
+              "semanticPrintingId": "PRINTING:659d5955fccfd0a5adabc4ce",
               "cardReleaseId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
               "finish": "non-holo",
               "edition": null,
@@ -100101,33 +100170,75 @@
               "markings": [],
               "distribution": null,
               "cardSize": "unknown",
-              "basis": "Collection owner explicitly assigns Non-Holo to SPEC-0179 for Indonesian SV4a I 145/190 on 2026-10-05. The retained digital reference supports identity; finish rests on this field-specific owner determination. No physical-photo provenance, named foil pattern, same-card association or complete inventory is inferred.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0179",
+              "sourceFinishUnitId": "F0474",
+              "sourcePrintingId": "F0474-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:659d5955fccfd0a5adabc4ce",
               "specimenIds": [
                 "SPEC-0179"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-05",
+                  "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained official pokémon asia indonesian card-detail render supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://asia.pokemon-card.com/id/card-img/id00010045.png",
+                  "sourceType": "official Pokémon Asia Indonesian card-detail render",
+                  "evidence": "Complete official Indonesian render for Snorlax SV4a I 145/190 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Non-Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted. Retained as SPEC-0179.",
+                  "retrievedAt": "2026-08-28",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0562",
+              "physicalPrintingId": "PHYSICAL:PRINTING:e2cf9900cbeba92a0ea91a72",
+              "semanticPrintingId": "PRINTING:e2cf9900cbeba92a0ea91a72",
               "cardReleaseId": "RELEASE:ID:Indonesian:SV4a I:145/190:Snorlax-Voraciousness-Thudding-Press",
               "finish": "reverse-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [],
+              "markings": null,
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly assigns Reverse Holo to SPEC-0562 for Indonesian SV4a I 145/190 on 2026-10-05. The retained digital reference supports identity; finish rests on this field-specific owner determination. No physical-photo provenance, named foil pattern, same-card association or complete inventory is inferred.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0562",
+              "sourceFinishUnitId": "F0474",
+              "sourcePrintingId": "F0474-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e2cf9900cbeba92a0ea91a72",
               "specimenIds": [
                 "SPEC-0562"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://cardtell.id/images/products/14558.png?v=1784128890",
+                  "sourceType": "Retail listing",
+                  "evidence": "Digital depiction of Indonesian Snorlax HP150, sv4a I G 145/190, Kemaruk, Tekan Gedebuk 130 and HYOGONOSUKE. The product title says Reverse Holo and the depiction includes sparkle effects, but neither establishes an observed physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Reverse Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted. Retained as SPEC-0562.",
+                  "retrievedAt": "2026-09-28",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-05",
+                  "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                }
               ]
             }
           ],
@@ -100189,6 +100300,51 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0474-P01:0:33f59f4629e6ab7b",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained official pokémon asia indonesian card-detail render supports card identity and any independently visible properties.",
+              "contentHash": "1189ba558ba14552652ce5f2c91f96b96c2bc554e421bc2bc2642a386f355e50",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0474-P01:1:4e134c83b20f62a6",
+              "kind": "finish",
+              "provider": "official Pokémon Asia Indonesian card-detail render",
+              "url": "https://asia.pokemon-card.com/id/card-img/id00010045.png",
+              "evidence": "Complete official Indonesian render for Snorlax SV4a I 145/190 (base). The printed name, set code, collector number, attacks and rarity no printed rarity symbol establish card-release identity, Work equivalence and rarity. Retained as identity evidence only; no physical finish is inferred. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Non-Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted. Retained as SPEC-0179.",
+              "contentHash": "e4b8511296ed1e646dd8df8333a6eb1f418494cc3d30ad1003e1acd54186d83d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0474-P02:0:758d51dd1a45a8d5",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "8e2449f512e54ca706033402c008856dba2bc792b7bba399e362d5fbc2ba2e2a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0474-P02:1:da2ed5da988bf4bc",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://cardtell.id/images/products/14558.png?v=1784128890",
+              "evidence": "Digital depiction of Indonesian Snorlax HP150, sv4a I G 145/190, Kemaruk, Tekan Gedebuk 130 and HYOGONOSUKE. The product title says Reverse Holo and the depiction includes sparkle effects, but neither establishes an observed physical finish. No complete finish inventory or exact foil-pattern taxonomy is asserted. Collection-owner determination 2026-10-05: SV4a I 145/190, SPEC-0179 identifies the regular Non-Holo printing; SPEC-0562 identifies the Reverse Holo printing. For this exact reference the owner confirms Reverse Holo. The original digital depiction and its identity authority remain; finish is separately owner-attributed. These are distinct printings, not two views of one physical copy. No named foil pattern or complete finish inventory is asserted. Retained as SPEC-0562.",
+              "contentHash": "5b0c2b350421d998f4f6dee86374f04062b6b74329a752cc77692b38e7bbd17a",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0474-P02:2:f811d5ad0d3790f8",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "2d47527c60d2383687f5ce496374f3dd338db51d8d7ac22b1d1c9dc184f0deb6",
+              "image": null
+            },
             {
               "observationId": "source-first:ID:SV4a I:145/190:base",
               "kind": "source-first",
