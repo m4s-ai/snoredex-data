@@ -234,7 +234,8 @@ tr.yearsep td {
 
   .col-expansion { width: calc(13rem + 10px); min-width: calc(13rem + 10px); }
   .col-variant { width: calc(11rem + 10px); min-width: calc(11rem + 10px); }
-  .col-rarity { width: calc(8rem + 10px); min-width: calc(8rem + 10px); }
+  /* Wide enough for "no printed rarity symbol", the most frequent long rarity value. */
+  .col-rarity { width: calc(9rem + 10px); min-width: calc(9rem + 10px); }
   .col-artist { width: calc(9rem + 10px); min-width: calc(9rem + 10px); }
   .col-pattern { width: calc(7rem + 10px); min-width: calc(7rem + 10px); }
   .col-marking, .col-marking-role, .col-distribution {
