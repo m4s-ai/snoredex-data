@@ -189,9 +189,9 @@ def check_predecessor_artists(rows, projection, records, checklist, graph):
     check("every exact predecessor artist survives a changed image asset",
           all(row["artist"] == expected.get(row["rowId"], row["artist"]) for row in rows))
     check("Spanish Jungle 27 retains its exact predecessor illustrator",
-          next(row for row in rows if row["setCode"] == "JU" and row["number"] == "27" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
+          next(row for row in rows if row["setCode"] == "JU" and row["number"].split("/")[0] == "27" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
     check("Spanish Jungle 11 retains its exact graph claim illustrator without a checklist predecessor",
-          next(row for row in rows if row["setCode"] == "JU" and row["number"] == "11" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
+          next(row for row in rows if row["setCode"] == "JU" and row["number"].split("/")[0] == "11" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
     item = dict(itemId="sample", legacyChecklistIds=["one", "two"])
     old = {"one":{"artist":"Old credit"}, "two":{"artist":"Other credit"}}
     check("positive source-native artist outranks conflicting legacy fallback",

@@ -327,6 +327,10 @@ NUMBERING_BY_REGION = {"WEST": "western", "JP": "japanese", "CN": "simplified-ch
 # printed size is not this card's denominator (same guard as evidence_semantics).
 UNSIZED_RARITIES = {"Promo", "PROMO", "promo card", "Prize Pack Series", "Oversized",
                     "World Championship Deck"}
+# Japanese and Chinese cards print three-digit numbers (106/095). Western cards do from Sword &
+# Shield on (202/091 in Paldean Fates); earlier Western sets print the plain size (27/64).
+PADDED_NUMBERING_REGIONS = {"JP", "CN", "TW"}
+WESTERN_PADDED_NUMBERING_FROM = "2020-02-07"
 
 
 def apply_set_facts(items: list[dict[str, Any]]) -> None:
@@ -370,6 +374,12 @@ def printed_sizes() -> dict[tuple[str, ...], Any]:
     return sizes
 
 
+def pads_numbering(region: str, release_date: str | None) -> bool:
+    """Whether this region's cards print three-digit collector numbers at that release."""
+    return region in PADDED_NUMBERING_REGIONS or (
+        region == "WEST" and (release_date or "") >= WESTERN_PADDED_NUMBERING_FROM)
+
+
 def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], Any]) -> str | None:
     """The denominator printed beside this item's number, in its own regional numbering."""
     number = row["collectorNumber"] or ""
@@ -382,7 +392,9 @@ def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], Any]) 
     if not size:
         return None
     printed_prefix, size = size if isinstance(size, tuple) else ("", size)
-    return printed_prefix + str(size).zfill(len(digits) if digits.startswith("0") else 0)
+    # A gallery subset prints its own prefix instead of padding (TG10/TG30).
+    padded = not printed_prefix and pads_numbering(region, row["releaseDate"])
+    return printed_prefix + str(size).zfill(3 if padded else 0)
 
 
 def apply_printed_set_size(items: list[dict[str, Any]]) -> None:

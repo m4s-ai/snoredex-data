@@ -416,6 +416,13 @@ def edition_rule_regressions() -> None:
     assert by_card[("LOCALIZATION:WEST:de", "LOR", "143")]["collectorNumberDenominator"] == "196"
     # A database prefix the card does not print stays off the denominator (a003 prints 003/023).
     assert by_card[("LOCALIZATION:CN:zh-Hans", "CSVH4C", "a003")]["collectorNumberDenominator"] == "023"
+    # Denominator padding follows the printed numbering, not the numerator: Japanese always
+    # prints three digits, Western from Sword & Shield on, earlier Western sets the plain size.
+    assert by_card[("LOCALIZATION:JP:ja", "sm9", "106")]["collectorNumberDenominator"] == "095"
+    assert by_card[("LOCALIZATION:JP:ja", "s1H", "45")]["collectorNumberDenominator"] == "060"
+    assert by_card[("LOCALIZATION:WEST:en", "PAF", "202")]["collectorNumberDenominator"] == "091"
+    assert by_card[("LOCALIZATION:WEST:en", "JU", "27")]["collectorNumberDenominator"] == "64"
+    assert by_card[("LOCALIZATION:WEST:en", "HIF", "50")]["collectorNumberDenominator"] == "68"
     # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
     assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
     # Standard is the defined card size (owner, 2026-10-23 and 2026-10-29); every consumer agrees.
