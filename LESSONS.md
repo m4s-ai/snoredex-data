@@ -33,6 +33,13 @@ edition system is still unresolved. The same audit found the printed set size re
 sets and card size defaulting to "unknown" outside the marketplace rows; `apply_set_facts` now
 applies both to every item.
 
+The first card-size fix repeated the mistake one layer down: it reached the collector catalogue
+but not the finish store or the checklist, so 58 checklist rows still read "unknown" while their
+catalogue items read standard. Standard is the defined Pokémon card size and any other size needs
+its own evidence, so `finishes.py` and `checklist.py` now default to it too. The retired
+`-unknown` checklist ids keep their collector items through `retainsItemId` routes in
+`collector_migration_routes.json`, and the graph keeps each printing's ids across the change.
+
 *PR #433.*
 
 ---

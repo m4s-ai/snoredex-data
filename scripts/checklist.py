@@ -393,7 +393,8 @@ def build_item(unit, reference, confirming, edition, edition_source, printing, e
     pattern = printing.get("foilPattern") if printing else None
     markings = printing.get("markings") if printing else None
     distribution = printing.get("distribution") if printing else None
-    card_size = (printing.get("cardSize") if printing else None) or "unknown"
+    # Standard is the defined Pokémon card size; a deviation needs its own evidence.
+    card_size = (printing.get("cardSize") if printing else None) or "standard"
 
     # Every physical dimension participates in the ID, so two items differing only by stamp,
     # pattern, channel or size cannot collide.

@@ -106,6 +106,12 @@ if _migration_routes.get("meta", {}).get("schema") != "snoredex-collector-migrat
 CUMULATIVE_CHECKLIST_REKEYS = {
     row["from"]: row["to"] for row in _migration_routes["cumulativeChecklistRekeys"]
 }
+# A research placeholder is anchored on its checklist id; a rekey marked `retainsItemId` only
+# renames the id (the card-size default), so the item keeps the anchor of its former id.
+RESEARCH_ANCHOR_BY_CHECKLIST_ID = {
+    row["to"]: row["from"] for row in _migration_routes["cumulativeChecklistRekeys"]
+    if row.get("retainsItemId") is True
+}
 REVIEWED_CARD_RELEASE_REKEYS = {
     row["from"]: row["to"] for row in _migration_routes["cardReleaseRekeys"]
 }
@@ -1660,7 +1666,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             continue
         release_id = legacy_release[old["checklistId"]]
         items.append(common_item(
-            anchor="research:legacy-checklist:" + old["checklistId"],
+            anchor="research:legacy-checklist:"
+            + RESEARCH_ANCHOR_BY_CHECKLIST_ID.get(old["checklistId"], old["checklistId"]),
             kind="research-placeholder", progress="research", release_id=release_id,
             physical=None, source_printing_id=None,
             unit=unit_by_id.get(old.get("finishUnitId")), old=old, claim=None,

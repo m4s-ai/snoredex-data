@@ -388,6 +388,14 @@ def refine_specimen_card_sizes(printings: list[dict[str, Any]]) -> None:
             specimen["cardSize"] = "standard"
 
 
+def apply_standard_card_size(printings: list[dict[str, Any]]) -> None:
+    """Pokémon cards have one defined standard size; only evidence such as an Oversized product
+    or a jumbo specimen sets another (owner decision 2026-10-29)."""
+    for printing in printings:
+        if printing.get("cardSize") in (None, "unknown"):
+            printing["cardSize"] = "standard"
+
+
 def add_printing(printings: list[dict[str, Any]], candidate: dict[str, Any]) -> None:
     candidate["foilPattern"] = normalize_foil_pattern(candidate.get("foilPattern"))
     candidate.setdefault("foilPattern", None)
@@ -1500,6 +1508,7 @@ def _build_finish_unit(
     def _build_finish_unit_part8():
         nonlocal available_finishes, finish, finish_status, finish_unit_id, printing, printings
         refine_specimen_card_sizes(printings)
+        apply_standard_card_size(printings)
         deduplicated_printings: list[dict[str, Any]] = []
         for printing in printings:
             add_printing(deduplicated_printings, printing)

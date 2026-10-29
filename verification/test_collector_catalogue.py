@@ -418,11 +418,15 @@ def edition_rule_regressions() -> None:
     assert by_card[("LOCALIZATION:CN:zh-Hans", "CSVH4C", "a003")]["collectorNumberDenominator"] == "023"
     # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
     assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
-    # Card size defaults to standard (owner, 2026-10-23); a possible jumbo twin stays unknown.
-    unknown = [row for row in items if row["cardSize"] == "unknown"]
-    assert len(unknown) < 30, len(unknown)
-    # TCGdex `holo: true` is the regular print, not a second, sizeless holo (2026-10-26).
-    assert not [row for row in unknown if row["localSetCode"] in {"VIV", "PGO", "SSH"}]
+    # Standard is the defined card size (owner, 2026-10-23 and 2026-10-29); every consumer agrees.
+    assert not [row["itemId"] for row in items if row["cardSize"] == "unknown"]
+    checklist = collector.read_json(collector.CHECKLIST_PATH)["items"]
+    assert not [row["checklistId"] for row in checklist if row["cardSize"] == "unknown"]
+    # The retired `-unknown` checklist ids keep their collector items through reviewed routes.
+    by_legacy = {legacy: row["itemId"] for row in items for legacy in row["legacyChecklistIds"]}
+    assert by_legacy["bw-p-207-japanese-none-holo"] == "item-0106f682-b985-523b-8a3a-53fc115c003d"
+    assert collector.CUMULATIVE_CHECKLIST_REKEYS["bw-p-207-japanese-none-holo-unknown"] == "bw-p-207-japanese-none-holo"
+    assert by_legacy["sm-p-297-korean-none-unresolved"] == "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
 
 
 def main() -> None:
