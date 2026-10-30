@@ -14,8 +14,9 @@ ROOT = Path(__file__).resolve().parent.parent
 MANIFEST = ROOT / "verification" / "asia_locality_matrix.json"
 OUTPUT = ROOT / "verification" / "ASIA-LOCALITY-MATRIX.md"
 
+# Hong Kong shares the Traditional-Chinese edition with Taiwan (ADR-0001 D6), so it has no track.
 REQUIRED_TRACKS = {
-    "asia-jp", "asia-tw", "asia-hk", "asia-cn", "asia-kr",
+    "asia-jp", "asia-tw", "asia-cn", "asia-kr",
     "asia-id", "asia-th", "asia-sea-en",
 }
 REQUIRED_REGRESSIONS = {
