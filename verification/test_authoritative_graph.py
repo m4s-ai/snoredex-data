@@ -637,7 +637,7 @@ def verify_research_correction() -> None:
     assert not any("CSVH" in rid for rid in cn_fixed), "random modification packs are not Fixed"
     # #437 admits its own high-class-pack observations after this correction; they stay native too.
     issue437 = [row for row in claims if row["rarityClaimId"].startswith("RARITYCLAIM:issue437:")]
-    assert len(issue437) == 2 and all(row["normalizedRarityId"] is None for row in issue437)
+    assert len(issue437) == 3 and all(row["normalizedRarityId"] is None for row in issue437)
     unresolved = [row for row in claims if row.get("normalizedRarityId") is None
                   and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")
                   and row not in issue437]

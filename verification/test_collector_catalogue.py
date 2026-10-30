@@ -443,12 +443,12 @@ def product_rarity_regressions() -> None:
               {"rarityClaimId": "b", "normalizedRarityId": "promo", "sourceNativeValue": "Promo",
                "sourceProductKey": "https://example.test/V2"}]
     products = {"https://example.test/V1", "https://example.test/V2"}
-    regular = collector.normalized_rarity("r", None, {"r": claims}, ({"https://example.test/V1"}, products))
+    regular = collector.normalized_rarity("r", None, {"r": claims}, ({"https://example.test/V1"}, products, None))
     assert (regular["display"], regular["evidenceStatus"], regular["claimRefs"]) == ("Holo Rare", "source-backed", ["a"])
     # A publisher claim about the release is never dropped by the marketplace product scope.
     official = {"rarityClaimId": "c", "normalizedRarityId": "holofoil-rare", "sourceNativeValue": "Holo Rare",
                 "sourceProductKey": "https://publisher.test/card"}
-    scoped = collector.normalized_rarity("r", None, {"r": claims + [official]}, ({"https://example.test/V1"}, products))
+    scoped = collector.normalized_rarity("r", None, {"r": claims + [official]}, ({"https://example.test/V1"}, products, None))
     assert scoped["claimRefs"] == ["a", "c"], scoped
     # An item that maps to no product of its own keeps the honest conflict.
     assert collector.normalized_rarity("r", None, {"r": claims})["evidenceStatus"] == "conflicting"
@@ -458,8 +458,10 @@ def product_rarity_regressions() -> None:
     assert rarity[("LOCALIZATION:WEST:en", "VIV", "131", "holo", ())] == "Holo Rare"
     assert rarity[("LOCALIZATION:WEST:en", "VIV", "131", "holo", ("Vivid Voltage",))] == "Promo"
     assert rarity[("LOCALIZATION:WEST:de", "VIV", "131", "holo", ("Farbenschock set logo",))] == "Promo"
-    conflicting = [row["itemId"] for row in items if row["rarity"]["evidenceStatus"] == "conflicting"]
-    assert len(conflicting) <= 1, conflicting  # CL 33 Staff has no marketplace product of its own.
+    assert all(row["rarity"]["evidenceStatus"] == "source-backed" for row in items)
+    # A distribution-scoped owner claim reaches the product-less CL 33 Staff promo, not the regular card.
+    assert rarity[("LOCALIZATION:WEST:en", "CL", "33", "holo", ("Staff",))] == "Promo"
+    assert rarity[("LOCALIZATION:WEST:en", "CL", "33", "non-holo", ())] == "Rare"
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.

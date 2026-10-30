@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-28",
-  "projectionVersion": "3e002223a97a49a4e04f143c3175aa07d7822a5d95562590d79600920f13b903",
+  "generated": "2026-10-30",
+  "projectionVersion": "c0ddb922960e00f0fb48cbe2e52801489611d5553638e627eeb087b91a256475",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 889,
-    "sourceObservations": 3298
+    "sourceObservations": 3303
   },
   "groups": [
     {
@@ -103076,7 +103076,7 @@
               "finish": "mirror-holo",
               "edition": null,
               "foilPattern": "master-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -103084,7 +103084,20 @@
               "sourceFinishUnitId": "F0615",
               "sourcePrintingId": "F0615-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:a3a1698dade6697f4fdbc497",
+              "specimenIds": [
+                "SPEC-0659"
+              ],
               "sources": [
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30). Retained as SPEC-0659.",
+                  "retrievedAt": "2026-10-30"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Master Ball mirror holo"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
                   "sourceType": "Cardmarket stock image (visual evidence)",
@@ -103116,6 +103129,7 @@
               "establishingClaimId": "CLAIM:finish:PRINTING:a68b9f50e4e10e59cee8b0eb",
               "specimenIds": [
                 "SPEC-0061",
+                "SPEC-0660",
                 "SPEC-0612"
               ],
               "sources": [
@@ -103136,6 +103150,11 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0612.",
                   "retrievedAt": "2026-10-06"
+                },
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Poké Ball silhouettes repeat across the card body (Poké Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. The collection owner identifies the card as the Korean sv2a Poké Ball reverse holo (2026-10-30). Retained as SPEC-0660.",
+                  "retrievedAt": "2026-10-30"
                 },
                 {
                   "sourceType": "Owner-supplied physical card photograph",
@@ -103254,25 +103273,65 @@
               "originalHash": "1be6c7836336dce2cd88940acaf88e9269f436dd43b5fca516bce8771ee5c589",
               "previewSrc": "images/previews/SPEC-0612.png?v=2018a36d8d70816a0953f8bb451d6e02e4e6f76dc07dbc2308393be551d5a200",
               "thumbnailSrc": "images/thumbs/SPEC-0612.png?v=2ac60be25b7a51e3cbf62e12e8f6e14bcde7ef9776da46f8799c534746843b94"
+            },
+            {
+              "src": "verification/specimens/SPEC-0659.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0659",
+              "contentHash": "d09e31cfe18884fd8b075245fbc4e26f117d30784500002ebbe7d9b7ae4a1288",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d09e31cfe18884fd8b075245fbc4e26f117d30784500002ebbe7d9b7ae4a1288",
+              "previewSrc": "images/previews/SPEC-0659.png?v=8fd179dea51caddc9dbf082e1b8e886a42ffb74adb019520eb33a3fee07f93d4",
+              "thumbnailSrc": "images/thumbs/SPEC-0659.png?v=1f27f1efe5719745da5ee4536ff42b1d9436be08d7d348523696dfbc6aa6ebe9"
+            },
+            {
+              "src": "verification/specimens/SPEC-0660.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0660",
+              "contentHash": "d9cb3a0a2eea67eb8e235e220ca598793c32186163c74c0db65d76dbe7632ec0",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d9cb3a0a2eea67eb8e235e220ca598793c32186163c74c0db65d76dbe7632ec0",
+              "previewSrc": "images/previews/SPEC-0660.png?v=be0d72eb57577d9c0e2c9f5f3b21096cd0ad75b903d912e344fab45968ed73bb",
+              "thumbnailSrc": "images/thumbs/SPEC-0660.png?v=1a3f7fa26645946520a3a6dc8a8b00ab10a25ce0a25a884248f7039b1ea88719"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0615-P02:0:adb029765fdd6a82",
+              "observationId": "finish:F0615-P02:0:881df249bb722b55",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30). Retained as SPEC-0659.",
+              "contentHash": "74913e0a625b27a14eef3c31e72b836e4247714afedb7751b6d43b45f12dde38",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P02:1:944c12b87f4bc83d",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "evidence": "Curated variant name: Master Ball mirror holo",
+              "contentHash": "0d9d2e111abed2d388d1f8f1de0b8b16495d723aee82f87af1163a882eaa20cd",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P02:2:adb029765fdd6a82",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "7cbec68bb6b3198dcdfeb2fdae7daa7e9f197fb86014a4c5828dc3f33f66deef",
+              "contentHash": "619b08698e61d4946d31e7b5b33a463f627407fbf4ec2dbb227eb077f64190da",
               "image": null
             },
             {
-              "observationId": "finish:F0615-P02:1:e73541456a7ba796",
+              "observationId": "finish:F0615-P02:3:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "b3eae61abd42aebfaafdd40cfa1936a8b8740f67e3721b5571cf3508f21a0d5c",
+              "contentHash": "5245f60d7346bf6e6aaac5701c205a95478c6a4a3d5e5ff11e3ec2967b34cf2c",
               "image": null
             },
             {
@@ -103281,7 +103340,7 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Curated variant name: Poké Ball mirror holo",
-              "contentHash": "1fdf939fa75137689e3357b5c32f16cd7672abbe5522fdb607480f04c92d4fc5",
+              "contentHash": "91af5ad213223c84e99e5ab937fd977a3020f5dc9e65a254dfbc31332c6a6bbc",
               "image": null
             },
             {
@@ -103290,7 +103349,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "a2443687a16a9d3013cd9ae4c9e8529fba412e82c76a4fc360467c71df5ee5db",
+              "contentHash": "d2a9252c142ad71de099f6eb7c17427aa9e4e7e117d9543fafb43089e1f264d8",
               "image": null
             },
             {
@@ -103299,25 +103358,34 @@
               "provider": "Seller listing photograph",
               "url": "https://media.bunjang.co.kr/product/433161764_1_1789832224_w640.jpg",
               "evidence": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0612.",
-              "contentHash": "ef65cdfd81ff4e04a5a1ba5a9f496aa356524c65987b28e2bc5575af51f83bc1",
+              "contentHash": "900d18fbe00734e7faed1bbb7672b7a97dc1bfeb7b698ad10e29c357740e05f1",
               "image": null
             },
             {
-              "observationId": "finish:F0615-P03:3:9b34914668ea91e3",
+              "observationId": "finish:F0615-P03:3:89b5f5d839899c27",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Poké Ball silhouettes repeat across the card body (Poké Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. The collection owner identifies the card as the Korean sv2a Poké Ball reverse holo (2026-10-30). Retained as SPEC-0660.",
+              "contentHash": "995f95c255f5f67532e263ef9925f4f735ce26d58b2dd1c0d22db30c74fd4102",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P03:4:9b34914668ea91e3",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Retained as SPEC-0061.",
-              "contentHash": "c6c3c68a478f63cc3bd7c8dfb99472ceb55421e247bb627d020ee6498684de64",
+              "contentHash": "96431046d77daf84846e35a50c37ddeccea4486bba20addb3dce070d870dcc9b",
               "image": null
             },
             {
-              "observationId": "finish:F0615-P03:4:e73541456a7ba796",
+              "observationId": "finish:F0615-P03:5:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "bdaea0e2deb501b8133fc57c554ea1c3bae8090a1b29331877e29e9369315084",
+              "contentHash": "352b3018edeb74e34201666fc55f2daac149bd2c6bb27ad1fa57a12f2f90e77b",
               "image": null
             },
             {
@@ -103382,6 +103450,24 @@
               "evidence": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
               "contentHash": "2b73a2103b9a2b24166a03733338dcc9641f7ed2e8d0d50cf2990a029825177b",
               "image": "verification/specimens/SPEC-0612.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0659",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30).",
+              "contentHash": "efa5e7911c3f972be5d308268d31e2050886969bece5e325deacec01074768ec",
+              "image": "verification/specimens/SPEC-0659.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0660",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Poké Ball silhouettes repeat across the card body (Poké Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. The collection owner identifies the card as the Korean sv2a Poké Ball reverse holo (2026-10-30).",
+              "contentHash": "cf5d85f1bf9d46b3023b08b6bcd3a8917b5c6b0d119c1861e2e5421a1497b817",
+              "image": "verification/specimens/SPEC-0660.png"
             },
             {
               "observationId": "unit:U0775",

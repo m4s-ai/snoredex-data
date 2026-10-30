@@ -987,33 +987,42 @@ def mapped_printing_variants(unit: dict[str, Any] | None, source_printing_id: st
     return set((printing or {}).get("mappedVariants") or [])
 
 
-def item_product_keys(unit: dict[str, Any] | None, source_printing_id: str | None) -> tuple[set[str], set[str]]:
-    """The item's own marketplace product URLs, and every product URL of its finish unit."""
+def item_product_keys(
+    unit: dict[str, Any] | None, source_printing_id: str | None, distribution: Any = None,
+) -> tuple[set[str], set[str], str | None]:
+    """The item's own marketplace product URLs, every product URL of its unit, and its channel."""
     products = [row for row in (unit or {}).get("products") or [] if row.get("cardmarketUrl")]
     variants = mapped_printing_variants(unit, source_printing_id)
     own = {row["cardmarketUrl"] for row in products if row.get("variant") in variants}
-    return own, {row["cardmarketUrl"] for row in products}
+    kind = distribution.get("kind") if isinstance(distribution, dict) else None
+    return own, {row["cardmarketUrl"] for row in products}, kind
 
 
-def product_scoped_claims(claims: list[dict[str, Any]], product_keys: tuple[set[str], set[str]]) -> list[dict[str, Any]]:
-    """Drop the claims about the unit's other products; keep everything said about the release.
+def product_scoped_claims(
+    claims: list[dict[str, Any]], scope: tuple[set[str], set[str], str | None],
+) -> list[dict[str, Any]]:
+    """Keep the claims about this item's own products, plus claims about the release as a whole.
 
     A release can hold a regular print and a stamped promo as separate marketplace products
     (VIV 131 V1 "Holo Rare", V2 "Promo"); each product's rarity belongs to its own printing.
-    A claim keyed to a publisher page or card image is about the release and always stays.
+    A claim keyed to a publisher page or card image is about the release; one that names
+    `distributionKinds` reaches only printings of those channels (CL 33 prerelease and Staff).
     """
-    own, unit_products = product_keys
-    scoped = [row for row in claims
-              if row.get("sourceProductKey") not in unit_products or row["sourceProductKey"] in own]
-    # Only an item without a product of its own falls back to every claim (and may conflict).
-    return scoped if own else claims
+    own, unit_products, distribution = scope
+    claims = [row for row in claims
+              if not row.get("distributionKinds") or distribution in row["distributionKinds"]]
+    release_level = [row for row in claims if row.get("sourceProductKey") not in unit_products]
+    if own:
+        return release_level + [row for row in claims if row.get("sourceProductKey") in own]
+    # Without a product of its own, other products' claims apply only when nothing else does.
+    return release_level or claims
 
 
 def normalized_rarity(
     release_id: str,
     old_item: dict[str, Any] | None,
     claims_by_release: dict[str, list[dict[str, Any]]],
-    product_keys: tuple[set[str], set[str]] = (set(), set()),
+    product_keys: tuple[set[str], set[str], str | None] = (set(), set(), None),
 ) -> dict[str, Any]:
     claims = product_scoped_claims(claims_by_release.get(release_id, []), product_keys)
     normalized = sorted({row.get("normalizedRarityId") for row in claims if row.get("normalizedRarityId")})
@@ -1678,7 +1687,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "cardSize": card_size,
             "errorClass": error_class,
             "rarity": normalized_rarity(release_id, reference, rarity_by_release,
-                                        item_product_keys(unit, source_printing_id)),
+                                        item_product_keys(unit, source_printing_id, distribution)),
             **completeness_fields(item_completeness(finish_decisions.get(release_id), old, unit), finish_decision),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,
