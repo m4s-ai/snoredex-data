@@ -423,6 +423,10 @@ def edition_rule_regressions() -> None:
     assert by_card[("LOCALIZATION:WEST:en", "PAF", "202")]["collectorNumberDenominator"] == "091"
     assert by_card[("LOCALIZATION:WEST:en", "JU", "27")]["collectorNumberDenominator"] == "64"
     assert by_card[("LOCALIZATION:WEST:en", "HIF", "50")]["collectorNumberDenominator"] == "68"
+    # Battle Academy 2020 prints the Hidden Fates number; the deck code MWT is only the join key (#435).
+    ba20 = [row for row in items if row["localSetCode"] == "BA20"]
+    assert len(ba20) == 4 and all((row["collectorNumber"], row["collectorNumberDenominator"]) == ("50", "68") for row in ba20)
+    assert all(row["legacyChecklistIds"][0].startswith("ba20-mwt-") for row in ba20)
     # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
     assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
     # Standard is the defined card size (owner, 2026-10-23 and 2026-10-29); every consumer agrees.
