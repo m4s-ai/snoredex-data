@@ -341,10 +341,10 @@ def edition_system_absent(localization_id: str, set_code: str | None, release_da
 SET_SOURCES_PATH = ROOT / "verification" / "set_catalogue_sources.json"
 NUMBERING_BY_REGION = {"WEST": "western", "JP": "japanese", "CN": "simplified-chinese",
                        "TW": "traditional-chinese"}
-# A promo, prize-pack, jumbo or championship-deck card reprints a run card's number; the run's
-# printed size is not this card's denominator (same guard as evidence_semantics).
-UNSIZED_RARITIES = {"Promo", "PROMO", "promo card", "Prize Pack Series", "Oversized",
-                    "World Championship Deck"}
+# A stamped promo or jumbo of a run card prints the run's number and denominator (PGO 055/078
+# Cosmos, SSH 142/202 jumbo, CL 33/95 prerelease; #445), so only these reprint lines are left
+# without one. Run membership is a different question (evidence_semantics keeps its own guard).
+UNSIZED_RARITIES = {"Prize Pack Series", "World Championship Deck"}
 # Japanese and Chinese cards print three-digit numbers (106/095). Western cards do from Sword &
 # Shield on (202/091 in Paldean Fates); earlier Western sets print the plain size (27/64).
 PADDED_NUMBERING_REGIONS = {"JP", "CN", "TW"}

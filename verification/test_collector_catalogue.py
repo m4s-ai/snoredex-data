@@ -462,6 +462,12 @@ def product_rarity_regressions() -> None:
     # A distribution-scoped owner claim reaches the product-less CL 33 Staff promo, not the regular card.
     assert rarity[("LOCALIZATION:WEST:en", "CL", "33", "holo", ("Staff",))] == "Promo"
     assert rarity[("LOCALIZATION:WEST:en", "CL", "33", "non-holo", ())] == "Rare"
+    # A stamped promo or jumbo of a run card keeps the denominator its face prints (#445).
+    stamped = {(row["localizationId"], row["localSetCode"], row["collectorNumber"], row["rarity"]["display"]):
+               row["collectorNumberDenominator"] for row in items}
+    assert stamped[("LOCALIZATION:WEST:de", "PGO", "055", "Promo")] == "078"
+    assert stamped[("LOCALIZATION:WEST:en", "SSH", "142", "Oversized")] == "202"
+    assert stamped[("LOCALIZATION:WEST:en", "FLF", "80", "Promo")] == "106"
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.
