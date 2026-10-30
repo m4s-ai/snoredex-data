@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-10-28** · SQLite schema: **1.7.0** · source fingerprint:
-`6e882da276ada59a…`
+`1288786041359b55…`
 
 ## Outcome
 
@@ -27,7 +27,7 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Release rows without row-level source | 140 / 203 |
 | Products without established artist | 16 |
 | Opaque V-token products without a physical variant name | 58 |
-| Authoritative graph entities / typed edges | 9105 / 13161 |
+| Authoritative graph entities / typed edges | 9107 / 13165 |
 | Graph migration inputs with dispositions | 3329 (747 raw set records) |
 
 ## The challenged data points

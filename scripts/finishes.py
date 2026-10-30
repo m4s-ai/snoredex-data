@@ -373,6 +373,12 @@ def printing_signature(printing: dict[str, Any]) -> str:
     return json.dumps(identity, ensure_ascii=False, sort_keys=True)
 
 
+def auto_mapped_variants(observed: set[str], mapped: list[str], present: set[str]) -> list[str]:
+    """A photographed product variant names the printing's product; a reviewed finish mapping
+    only fills printings no specimen pins (the VIV 131 V2 promo is V2, not V1 and V2)."""
+    return sorted((observed & present) or set(mapped))
+
+
 def refine_specimen_card_sizes(printings: list[dict[str, Any]]) -> None:
     """Resolve omitted specimen sizes after every printing candidate is known."""
     for specimen in printings:
@@ -1469,7 +1475,8 @@ def _build_finish_unit(
                         if printing["finish"] == finish and (
                             printing.get("_origin") == "auto" or observed_variants
                         ):
-                            printing["mappedVariants"] = sorted((set(usable) | observed_variants) & present_variants)
+                            printing["mappedVariants"] = auto_mapped_variants(
+                                observed_variants, usable, present_variants)
                             if printing.get("cardSize") == "unknown" and len(mapped_sizes) == 1:
                                 printing["cardSize"] = next(iter(mapped_sizes))
 

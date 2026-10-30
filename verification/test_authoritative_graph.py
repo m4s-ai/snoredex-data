@@ -635,8 +635,12 @@ def verify_research_correction() -> None:
     expected_cn.add("RELEASE:CN:S-Chinese:CSVSC:046/066:Snorlax-Lazy-Press")
     assert cn_fixed == expected_cn, "only positively bound CN deck cards normalize to Fixed"
     assert not any("CSVH" in rid for rid in cn_fixed), "random modification packs are not Fixed"
+    # #437 admits its own high-class-pack observations after this correction; they stay native too.
+    issue437 = [row for row in claims if row["rarityClaimId"].startswith("RARITYCLAIM:issue437:")]
+    assert len(issue437) == 2 and all(row["normalizedRarityId"] is None for row in issue437)
     unresolved = [row for row in claims if row.get("normalizedRarityId") is None
-                  and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")]
+                  and row["cardReleaseId"].split(":")[1] in ("ID", "KR", "TH")
+                  and row not in issue437]
     assert len(unresolved) == 5, "five booster rarities remain native, not invented Fixed/Common"
     for row in unresolved:
         row["normalizedRarityId"] = "fixed"
@@ -962,8 +966,10 @@ def main() -> None:
         row.get("rarity") is None
         for row in catalogue_rows if row["printId"] in unsupported_rarity_prints
     )
+    # The catalogue pass invented no rarity for them; #437 later admitted image-backed claims.
     assert not any(
         entity["entityType"] == "rarity-claim"
+        and entity.get("origin") != "reviewed-evidence-issue-437"
         and entity["payload"].get("cardReleaseId")
         == korean_catalogue_pass.base.release_id(row)
         for row in catalogue_rows if row["printId"] in unsupported_rarity_prints

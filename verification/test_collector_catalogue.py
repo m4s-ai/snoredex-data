@@ -436,8 +436,41 @@ def edition_rule_regressions() -> None:
     assert by_legacy["sm-p-297-korean-none-unresolved"] == "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
 
 
+def product_rarity_regressions() -> None:
+    """Each marketplace product's rarity reaches only the printing mapped to that product (#437)."""
+    claims = [{"rarityClaimId": "a", "normalizedRarityId": "holofoil-rare", "sourceNativeValue": "Holo Rare",
+               "sourceProductKey": "https://example.test/V1"},
+              {"rarityClaimId": "b", "normalizedRarityId": "promo", "sourceNativeValue": "Promo",
+               "sourceProductKey": "https://example.test/V2"}]
+    products = {"https://example.test/V1", "https://example.test/V2"}
+    regular = collector.normalized_rarity("r", None, {"r": claims}, ({"https://example.test/V1"}, products))
+    assert (regular["display"], regular["evidenceStatus"], regular["claimRefs"]) == ("Holo Rare", "source-backed", ["a"])
+    # A publisher claim about the release is never dropped by the marketplace product scope.
+    official = {"rarityClaimId": "c", "normalizedRarityId": "holofoil-rare", "sourceNativeValue": "Holo Rare",
+                "sourceProductKey": "https://publisher.test/card"}
+    scoped = collector.normalized_rarity("r", None, {"r": claims + [official]}, ({"https://example.test/V1"}, products))
+    assert scoped["claimRefs"] == ["a", "c"], scoped
+    # An item that maps to no product of its own keeps the honest conflict.
+    assert collector.normalized_rarity("r", None, {"r": claims})["evidenceStatus"] == "conflicting"
+    items = read("collector_catalogue.json")["items"]
+    rarity = {(row["localizationId"], row["localSetCode"], row["collectorNumber"], row["finish"],
+               tuple(mark.get("text") for mark in row["markings"])): row["rarity"]["display"] for row in items}
+    assert rarity[("LOCALIZATION:WEST:en", "VIV", "131", "holo", ())] == "Holo Rare"
+    assert rarity[("LOCALIZATION:WEST:en", "VIV", "131", "holo", ("Vivid Voltage",))] == "Promo"
+    assert rarity[("LOCALIZATION:WEST:de", "VIV", "131", "holo", ("Farbenschock set logo",))] == "Promo"
+    conflicting = [row["itemId"] for row in items if row["rarity"]["evidenceStatus"] == "conflicting"]
+    assert len(conflicting) <= 1, conflicting  # CL 33 Staff has no marketplace product of its own.
+    # The rarity of a jumbo is its Oversized product, never the standard card's.
+    assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
+    # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.
+    units = read("verification/finish_units.json")["units"]
+    german_viv = next(unit for unit in units if (unit["setCode"], unit["number"], unit["language"]) == ("VIV", "131", "German"))
+    assert [printing["mappedVariants"] for printing in german_viv["printings"] if printing.get("specimenIds")] == [["V2"]]
+
+
 def main() -> None:
     edition_rule_regressions()
+    product_rarity_regressions()
     numbering_basis_regressions()
     local_card_name_regressions()
     reviewed_release_date_regressions()

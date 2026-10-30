@@ -119809,6 +119809,48 @@
     },
     {
       "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue437:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "origin": "reviewed-evidence-issue-437",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue437:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "cardReleaseId": "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "sourceRecordId": "SET-SRC-SF-EBC661CA979D",
+        "sourceProductKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png",
+        "supportingSourceUrls": [
+          "https://pokemoncard.co.kr/cards/detail/BS2025015136"
+        ],
+        "evidence": "The official Pokémon Korea render of 호브의 잠만보 m2a 136/193 shows the complete collector line with no rarity symbol after the number. MEGA Dream ex is a high-class pack; no fixed-deck normalization applies.",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Korean-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": null,
+        "retrievedAt": "2026-10-30",
+        "evidenceBundle": "verification/evidence/kr-hop-snorlax-rarity-20261030"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
+      "entityId": "RARITYCLAIM:issue437:xm2a:136/193-V2:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "origin": "reviewed-evidence-issue-437",
+      "payload": {
+        "rarityClaimId": "RARITYCLAIM:issue437:xm2a:136/193-V2:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+        "sourceRecordId": "SET-SRC-SF-BE4749055DF1",
+        "sourceProductKey": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+        "specimenIds": [
+          "SPEC-0410"
+        ],
+        "evidence": "SPEC-0410, a complete seller photograph of the Korean xm2a V2 Poké Ball mirror product, shows the legible collector line 136/193 with no rarity symbol after it. Scoped to the V2 product; the V1 Colorless Energy mirror is not covered.",
+        "sourceProvider": "mixed-positive-evidence",
+        "sourceVocabulary": "printed-Korean-card",
+        "sourceNativeValue": "no printed rarity symbol",
+        "normalizedRarityId": null,
+        "retrievedAt": "2026-10-30",
+        "evidenceBundle": "verification/evidence/kr-hop-snorlax-rarity-20261030"
+      }
+    },
+    {
+      "entityType": "rarity-claim",
       "entityId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
       "origin": "reviewed-30th-cn-20261001",
       "payload": {
@@ -269459,6 +269501,38 @@
     },
     {
       "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue437:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue437:m2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-EBC661CA979D",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue437:xm2a:136/193-V2:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "relation": "asserts-rarity-for",
+      "toType": "card-release",
+      "toId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
+      "fromId": "RARITYCLAIM:issue437:xm2a:136/193-V2:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-SF-BE4749055DF1",
+      "provenance": {}
+    },
+    {
+      "fromType": "rarity-claim",
       "fromId": "RARITYCLAIM:owner:CN:30th C:095/103:base:20261001",
       "relation": "asserts-rarity-for",
       "toType": "card-release",
@@ -326101,8 +326175,8 @@
     }
   ],
   "summary": {
-    "entities": 9105,
-    "edges": 13161,
+    "entities": 9107,
+    "edges": 13165,
     "migrationInputs": 3329,
     "migrationDispositions": {
       "bounded-contradicted": 93,

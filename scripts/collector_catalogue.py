@@ -981,12 +981,41 @@ def _rarity_display(
     return (old_item or {}).get("rarity") or source_display
 
 
+def mapped_printing_variants(unit: dict[str, Any] | None, source_printing_id: str | None) -> set[str]:
+    printing = next((row for row in (unit or {}).get("printings") or []
+                     if row.get("printingId") == source_printing_id), None)
+    return set((printing or {}).get("mappedVariants") or [])
+
+
+def item_product_keys(unit: dict[str, Any] | None, source_printing_id: str | None) -> tuple[set[str], set[str]]:
+    """The item's own marketplace product URLs, and every product URL of its finish unit."""
+    products = [row for row in (unit or {}).get("products") or [] if row.get("cardmarketUrl")]
+    variants = mapped_printing_variants(unit, source_printing_id)
+    own = {row["cardmarketUrl"] for row in products if row.get("variant") in variants}
+    return own, {row["cardmarketUrl"] for row in products}
+
+
+def product_scoped_claims(claims: list[dict[str, Any]], product_keys: tuple[set[str], set[str]]) -> list[dict[str, Any]]:
+    """Drop the claims about the unit's other products; keep everything said about the release.
+
+    A release can hold a regular print and a stamped promo as separate marketplace products
+    (VIV 131 V1 "Holo Rare", V2 "Promo"); each product's rarity belongs to its own printing.
+    A claim keyed to a publisher page or card image is about the release and always stays.
+    """
+    own, unit_products = product_keys
+    scoped = [row for row in claims
+              if row.get("sourceProductKey") not in unit_products or row["sourceProductKey"] in own]
+    # Only an item without a product of its own falls back to every claim (and may conflict).
+    return scoped if own else claims
+
+
 def normalized_rarity(
     release_id: str,
     old_item: dict[str, Any] | None,
     claims_by_release: dict[str, list[dict[str, Any]]],
+    product_keys: tuple[set[str], set[str]] = (set(), set()),
 ) -> dict[str, Any]:
-    claims = claims_by_release.get(release_id, [])
+    claims = product_scoped_claims(claims_by_release.get(release_id, []), product_keys)
     normalized = sorted({row.get("normalizedRarityId") for row in claims if row.get("normalizedRarityId")})
     source_display = next(
         (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
@@ -1648,7 +1677,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "distribution": distribution,
             "cardSize": card_size,
             "errorClass": error_class,
-            "rarity": normalized_rarity(release_id, reference, rarity_by_release),
+            "rarity": normalized_rarity(release_id, reference, rarity_by_release,
+                                        item_product_keys(unit, source_printing_id)),
             **completeness_fields(item_completeness(finish_decisions.get(release_id), old, unit), finish_decision),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,
