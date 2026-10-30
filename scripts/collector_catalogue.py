@@ -283,6 +283,24 @@ def correction_link(item: dict[str, Any]) -> str:
     return link
 
 
+def item_correction_link_errors(item: dict[str, Any], iid: str, seen: set[str]) -> list[str]:
+    """The link must parse, be distinct, and describe the item as it is now published."""
+    link = item.get("correctionLink")
+    try:
+        link_params = correction_link_params(link)
+    except (ContractError, TypeError, ValueError):
+        return [f"item correction link is outside the producer contract: {iid}"]
+    errors = []
+    if link_params.get("row-id") != iid:
+        errors.append(f"item correction link row-id differs from itemId: {iid}")
+    elif link != correction_link(item):
+        errors.append(f"item correction link prefills a stale current state: {iid}")
+    if link in seen:
+        errors.append(f"correction link is not distinct: {iid}")
+    seen.add(link)
+    return errors
+
+
 def correction_link_params(link: str) -> dict[str, str]:
     """Parse and validate the public correction-link boundary."""
     split = urlsplit(link)
@@ -337,6 +355,9 @@ def apply_set_facts(items: list[dict[str, Any]]) -> None:
     """Apply set facts to every item, whatever source created it."""
     apply_default_card_size(items)
     apply_printed_set_size(items)
+    # The correction form prefills the current state, so it is built from the final item.
+    for row in items:
+        row["correctionLink"] = correction_link(row)
 
 
 def apply_default_card_size(items: list[dict[str, Any]]) -> None:
@@ -2244,17 +2265,7 @@ def validate_catalogue(
         if previous_mapping is not None and previous_mapping != current_mapping:
             errors.append(f"item Work mapping is inconsistent for card release: {item.get('cardReleaseId')}")
         mapping_by_release[item.get("cardReleaseId")] = current_mapping
-        link = item.get("correctionLink")
-        try:
-            link_params = correction_link_params(link)
-        except (ContractError, TypeError, ValueError):
-            errors.append(f"item correction link is outside the producer contract: {iid}")
-        else:
-            if link_params.get("row-id") != iid:
-                errors.append(f"item correction link row-id differs from itemId: {iid}")
-            if link in correction_links:
-                errors.append(f"correction link is not distinct: {iid}")
-            correction_links.add(link)
+        errors.extend(item_correction_link_errors(item, iid, correction_links))
         edition = editions.get(item.get("setEditionId"))
         if not edition:
             errors.append(f"item set edition does not resolve: {iid}")
