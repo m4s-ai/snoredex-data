@@ -106,6 +106,12 @@ if _migration_routes.get("meta", {}).get("schema") != "snoredex-collector-migrat
 CUMULATIVE_CHECKLIST_REKEYS = {
     row["from"]: row["to"] for row in _migration_routes["cumulativeChecklistRekeys"]
 }
+# A research placeholder is anchored on its checklist id; a rekey marked `retainsItemId` only
+# renames the id (the card-size default), so the item keeps the anchor of its former id.
+RESEARCH_ANCHOR_BY_CHECKLIST_ID = {
+    row["to"]: row["from"] for row in _migration_routes["cumulativeChecklistRekeys"]
+    if row.get("retainsItemId") is True
+}
 REVIEWED_CARD_RELEASE_REKEYS = {
     row["from"]: row["to"] for row in _migration_routes["cardReleaseRekeys"]
 }
@@ -277,6 +283,24 @@ def correction_link(item: dict[str, Any]) -> str:
     return link
 
 
+def item_correction_link_errors(item: dict[str, Any], iid: str, seen: set[str]) -> list[str]:
+    """The link must parse, be distinct, and describe the item as it is now published."""
+    link = item.get("correctionLink")
+    try:
+        link_params = correction_link_params(link)
+    except (ContractError, TypeError, ValueError):
+        return [f"item correction link is outside the producer contract: {iid}"]
+    errors = []
+    if link_params.get("row-id") != iid:
+        errors.append(f"item correction link row-id differs from itemId: {iid}")
+    elif link != correction_link(item):
+        errors.append(f"item correction link prefills a stale current state: {iid}")
+    if link in seen:
+        errors.append(f"correction link is not distinct: {iid}")
+    seen.add(link)
+    return errors
+
+
 def correction_link_params(link: str) -> dict[str, str]:
     """Parse and validate the public correction-link boundary."""
     split = urlsplit(link)
@@ -295,6 +319,124 @@ def correction_link_params(link: str) -> dict[str, str]:
 
 def read_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+EDITION_RULES = read_json(ROOT / "verification" / "edition_rules.json")
+
+
+def edition_system_absent(localization_id: str, set_code: str | None, release_date: str | None) -> bool:
+    """Whether the reviewed edition rules place this set outside any 1st Edition system."""
+    region = localization_id.split(":")[1]
+    if region in EDITION_RULES["noEditionSystemLocalities"]:
+        return True
+    if not release_date:
+        return False
+    if region == "JP":
+        listed = set(EDITION_RULES["japaneseFirstEditionSetCodes"]) | set(EDITION_RULES["japaneseUnlimitedOnlySetCodes"])
+        return set_code not in listed and release_date >= EDITION_RULES["japaneseFirstEditionEndsBefore"]
+    listed = set(EDITION_RULES["westernFirstEditionSetCodes"]) | set(EDITION_RULES["westernUnlimitedOnlySetCodes"])
+    return set_code not in listed and release_date > EDITION_RULES["westernLastFirstEditionRelease"]
+
+
+SET_SOURCES_PATH = ROOT / "verification" / "set_catalogue_sources.json"
+NUMBERING_BY_REGION = {"WEST": "western", "JP": "japanese", "CN": "simplified-chinese",
+                       "TW": "traditional-chinese"}
+# A promo, prize-pack, jumbo or championship-deck card reprints a run card's number; the run's
+# printed size is not this card's denominator (same guard as evidence_semantics).
+UNSIZED_RARITIES = {"Promo", "PROMO", "promo card", "Prize Pack Series", "Oversized",
+                    "World Championship Deck"}
+# Japanese and Chinese cards print three-digit numbers (106/095). Western cards do from Sword &
+# Shield on (202/091 in Paldean Fates); earlier Western sets print the plain size (27/64).
+PADDED_NUMBERING_REGIONS = {"JP", "CN", "TW"}
+WESTERN_PADDED_NUMBERING_FROM = "2020-02-07"
+
+
+def apply_set_facts(items: list[dict[str, Any]]) -> None:
+    """Apply set facts to every item, whatever source created it."""
+    apply_default_card_size(items)
+    apply_printed_set_size(items)
+    # The correction form prefills the current state, so it is built from the final item.
+    for row in items:
+        row["correctionLink"] = correction_link(row)
+
+
+def apply_default_card_size(items: list[dict[str, Any]]) -> None:
+    """Card size defaults to standard (owner decision 2026-10-23: jumbo cards are rare and
+    researched explicitly).
+
+    An unknown-size item stays unknown when its otherwise identical sibling is already standard
+    (size is then the only thing distinguishing the two printings) or when the same card and
+    finish is sold as an Oversized product in any language.
+    """
+    def identity(row: dict[str, Any]) -> str:
+        return json.dumps([row[key] for key in ("cardReleaseId", "finish", "edition", "foilPattern",
+                                                "markings", "distribution")], sort_keys=True)
+    standard = {identity(row) for row in items if row["cardSize"] == "standard"}
+    oversized = {(row["localSetCode"], row["collectorNumber"], row["finish"]) for row in items
+                 if (row["rarity"] or {}).get("display") == "Oversized"}
+    for row in items:
+        if row["cardSize"] == "unknown" and identity(row) not in standard \
+                and (row["localSetCode"], row["collectorNumber"], row["finish"]) not in oversized:
+            row["cardSize"] = "standard"
+
+
+def printed_sizes() -> dict[tuple[str, ...], Any]:
+    """Printed run sizes by (numbering, set code) and gallery subset sizes by (numbering, set code, prefix)."""
+    records = read_json(SET_SOURCES_PATH)["sourceRecords"]
+    sizes: dict[tuple[str, ...], int] = {
+        (row["raw"]["numbering"], row["raw"]["legacySetCode"]): row["raw"]["printedSetSize"]
+        for row in records if row["sourceKind"] == "printed-set-size-record"
+    }
+    sizes.update({
+        (row["raw"]["numbering"], row["raw"]["legacySetCode"], row["raw"]["subsetPrefix"]):
+            (row["raw"].get("denominatorPrefix", row["raw"]["subsetPrefix"]), row["raw"]["printedSubsetSize"])
+        for row in records if row["sourceKind"] == "printed-subset-size-record"
+    })
+    return sizes
+
+
+def pads_numbering(region: str, release_date: str | None) -> bool:
+    """Whether this region's cards print three-digit collector numbers at that release."""
+    return region in PADDED_NUMBERING_REGIONS or (
+        region == "WEST" and (release_date or "") >= WESTERN_PADDED_NUMBERING_FROM)
+
+
+def printed_denominator(row: dict[str, Any], sizes: dict[tuple[str, ...], Any]) -> str | None:
+    """The denominator printed beside this item's number, in its own regional numbering."""
+    number = row["collectorNumber"] or ""
+    prefix = number.rstrip("0123456789")
+    digits = number[len(prefix):]
+    if not digits or (row["rarity"] or {}).get("display") in UNSIZED_RARITIES:
+        return None
+    region, set_code = row["cardReleaseId"].split(":")[1], row["cardReleaseId"].split(":")[3]
+    size = sizes.get((NUMBERING_BY_REGION.get(region), set_code, *([prefix] if prefix else [])))
+    if not size:
+        return None
+    printed_prefix, size = size if isinstance(size, tuple) else ("", size)
+    # A gallery subset prints its own prefix instead of padding (TG10/TG30).
+    padded = not printed_prefix and pads_numbering(region, row["releaseDate"])
+    return printed_prefix + str(size).zfill(3 if padded else 0)
+
+
+def apply_printed_set_size(items: list[dict[str, Any]]) -> None:
+    """The printed set (or gallery subset) size becomes the item's denominator."""
+    sizes = printed_sizes()
+    for row in items:
+        if not row["collectorNumberDenominator"]:
+            row["collectorNumberDenominator"] = printed_denominator(row, sizes)
+
+
+def item_edition(physical: dict[str, Any] | None, old: dict[str, Any] | None, localization_id: str,
+                 set_code: str | None, release_date: str | None) -> tuple[str | None, str]:
+    """Return the item's edition and assignment status; set facts apply whatever the item's origin."""
+    if physical and physical.get("edition"):
+        return physical["edition"], "assigned"
+    if old and old.get("edition") not in (None, "—"):
+        return old["edition"], "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
+    if (old and old.get("editionScope") == "no-edition-system") or edition_system_absent(
+            localization_id, set_code, release_date):
+        return None, "not-applicable"
+    return None, "unresolved"
 
 
 def canonical_bytes(value: Any) -> bytes:
@@ -1397,18 +1539,10 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             error_class = None
             verification_status = "pending"
 
-        if physical and physical.get("edition"):
-            edition_value = physical["edition"]
-            edition_status = "assigned"
-        elif old and old.get("edition") not in (None, "—"):
-            edition_value = old["edition"]
-            edition_status = "assigned" if old.get("editionScope") != "unresolved" else "unresolved"
-        elif old and old.get("editionScope") == "no-edition-system":
-            edition_value = None
-            edition_status = "not-applicable"
-        else:
-            edition_value = None
-            edition_status = "unresolved"
+        edition_value, edition_status = item_edition(
+            physical, old, context["identity"]["localizationId"],
+            context["catalogue"].get("localCode"), context["event"].get("releaseDate"),
+        )
 
         finish_family = FINISH_FAMILY.get(finish) if finish is not None else None
         finish_group = group_id("|".join((
@@ -1565,7 +1699,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             continue
         release_id = legacy_release[old["checklistId"]]
         items.append(common_item(
-            anchor="research:legacy-checklist:" + old["checklistId"],
+            anchor="research:legacy-checklist:"
+            + RESEARCH_ANCHOR_BY_CHECKLIST_ID.get(old["checklistId"], old["checklistId"]),
             kind="research-placeholder", progress="research", release_id=release_id,
             physical=None, source_printing_id=None,
             unit=unit_by_id.get(old.get("finishUnitId")), old=old, claim=None,
@@ -1592,6 +1727,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     if len(ids) != len(set(ids)):
         raise ContractError("collector item ids are not unique")
     items.sort(key=lambda row: (row["releaseSortKey"], row["itemId"]))
+    apply_set_facts(items)
 
     item_name_by_work: dict[str, str] = {}
     for row in items:
@@ -2129,17 +2265,7 @@ def validate_catalogue(
         if previous_mapping is not None and previous_mapping != current_mapping:
             errors.append(f"item Work mapping is inconsistent for card release: {item.get('cardReleaseId')}")
         mapping_by_release[item.get("cardReleaseId")] = current_mapping
-        link = item.get("correctionLink")
-        try:
-            link_params = correction_link_params(link)
-        except (ContractError, TypeError, ValueError):
-            errors.append(f"item correction link is outside the producer contract: {iid}")
-        else:
-            if link_params.get("row-id") != iid:
-                errors.append(f"item correction link row-id differs from itemId: {iid}")
-            if link in correction_links:
-                errors.append(f"correction link is not distinct: {iid}")
-            correction_links.add(link)
+        errors.extend(item_correction_link_errors(item, iid, correction_links))
         edition = editions.get(item.get("setEditionId"))
         if not edition:
             errors.append(f"item set edition does not resolve: {iid}")

@@ -391,7 +391,53 @@ def numbering_basis_regressions() -> None:
                          for row in items)
 
 
+def edition_rule_regressions() -> None:
+    # Set facts decide whether an edition system exists, whatever source created the item.
+    absent = collector.edition_system_absent
+    assert absent("LOCALIZATION:KR:ko", "XY10", "2016-03-24")
+    assert absent("LOCALIZATION:WEST:de", "30C DE", "2026-09-16")
+    assert absent("LOCALIZATION:JP:ja", "M6a", "2026-09-16")
+    assert not absent("LOCALIZATION:JP:ja", "XY10", "2016-03-18")
+    assert not absent("LOCALIZATION:WEST:en", "JU", "1999-06-16")
+    assert not absent("LOCALIZATION:JP:ja", "PJU", None)
+    items = read("collector_catalogue.json")["items"]
+    rule_free = [row["itemId"] for row in items if row["editionAssignmentStatus"] == "unresolved"
+                 and absent(row["localizationId"], row["localSetCode"], row["releaseDate"])]
+    assert not rule_free, rule_free
+    # The printed set size reaches every item of the set in its own regional numbering.
+    by_card = {(row["localizationId"], row["localSetCode"], row["collectorNumber"]): row for row in items}
+    assert by_card[("LOCALIZATION:WEST:de", "FCO", "77")]["collectorNumberDenominator"] == "124"
+    assert by_card[("LOCALIZATION:JP:ja", "XY10", "057")]["collectorNumberDenominator"] == "078"
+    assert by_card[("LOCALIZATION:JP:ja", "20th", "047")]["collectorNumberDenominator"] == "072"
+    assert by_card[("LOCALIZATION:KR:ko", "20th", "047")]["collectorNumberDenominator"] == "071"
+    assert by_card[("LOCALIZATION:JP:ja", "Pt2", "070")]["collectorNumberDenominator"] == "090"
+    # A gallery subset ships inside its main set and prints its own run (owner, 2026-10-23).
+    assert by_card[("LOCALIZATION:WEST:de", "LOR", "TG10")]["collectorNumberDenominator"] == "TG30"
+    assert by_card[("LOCALIZATION:WEST:de", "LOR", "143")]["collectorNumberDenominator"] == "196"
+    # A database prefix the card does not print stays off the denominator (a003 prints 003/023).
+    assert by_card[("LOCALIZATION:CN:zh-Hans", "CSVH4C", "a003")]["collectorNumberDenominator"] == "023"
+    # Denominator padding follows the printed numbering, not the numerator: Japanese always
+    # prints three digits, Western from Sword & Shield on, earlier Western sets the plain size.
+    assert by_card[("LOCALIZATION:JP:ja", "sm9", "106")]["collectorNumberDenominator"] == "095"
+    assert by_card[("LOCALIZATION:JP:ja", "s1H", "45")]["collectorNumberDenominator"] == "060"
+    assert by_card[("LOCALIZATION:WEST:en", "PAF", "202")]["collectorNumberDenominator"] == "091"
+    assert by_card[("LOCALIZATION:WEST:en", "JU", "27")]["collectorNumberDenominator"] == "64"
+    assert by_card[("LOCALIZATION:WEST:en", "HIF", "50")]["collectorNumberDenominator"] == "68"
+    # Unnumbered Japanese releases print no denominator; that is a fact, not a gap.
+    assert all(row["collectorNumberDenominator"] is None for row in items if ":unnumbered:" in row["cardReleaseId"])
+    # Standard is the defined card size (owner, 2026-10-23 and 2026-10-29); every consumer agrees.
+    assert not [row["itemId"] for row in items if row["cardSize"] == "unknown"]
+    checklist = collector.read_json(collector.CHECKLIST_PATH)["items"]
+    assert not [row["checklistId"] for row in checklist if row["cardSize"] == "unknown"]
+    # The retired `-unknown` checklist ids keep their collector items through reviewed routes.
+    by_legacy = {legacy: row["itemId"] for row in items for legacy in row["legacyChecklistIds"]}
+    assert by_legacy["bw-p-207-japanese-none-holo"] == "item-0106f682-b985-523b-8a3a-53fc115c003d"
+    assert collector.CUMULATIVE_CHECKLIST_REKEYS["bw-p-207-japanese-none-holo-unknown"] == "bw-p-207-japanese-none-holo"
+    assert by_legacy["sm-p-297-korean-none-unresolved"] == "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+
+
 def main() -> None:
+    edition_rule_regressions()
     numbering_basis_regressions()
     local_card_name_regressions()
     reviewed_release_date_regressions()

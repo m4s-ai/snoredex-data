@@ -229,6 +229,9 @@ These are the things that have actually caused mistakes. Full treatment is in
   Unlimited — an observation of that copy, not an absence argument. Check the era's mark position
   (`RESUME.md`); never give a third-party photo owner attribution the owner did not make
   ([LESSONS](LESSONS.md#one-specimens-caution-became-a-rule-nobody-had-made)).
+- **Set facts are origin-independent.** A rule about a set (edition system, era, size) applies to
+  every item of that set, not only to items carried in from the Cardmarket harvest
+  ([LESSONS](LESSONS.md#a-set-rule-that-only-reached-the-marketplace-rows)).
 - **Code cards are excluded** — `verification/excluded_codecards.json`.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a unit references it as `sourceRef: "specimen:SPEC-0002"`. For

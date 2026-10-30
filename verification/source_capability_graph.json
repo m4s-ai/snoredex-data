@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-10-23",
+    "generated": "2026-10-28",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -15,15 +15,15 @@
       "An exact retained PokéCottage row is tier-3 positive confirmation for the facts it states. Facts demonstrably shared by an already identified matching Western release may corroborate that release when the equivalence basis is retained; omissions and unstated alternatives never establish absence or completeness."
     ],
     "counts": {
-      "providers": 38,
-      "surfaces": 75,
-      "coverageEdges": 108,
+      "providers": 45,
+      "surfaces": 84,
+      "coverageEdges": 120,
       "absenceEdges": 0,
-      "observations": 146,
-      "resolvedVerdictSources": 1792
+      "observations": 170,
+      "resolvedVerdictSources": 1818
     },
     "surfaceStates": {
-      "active": 45,
+      "active": 54,
       "blocked-by-browser": 3,
       "incomplete": 21,
       "internal": 1,
@@ -298,6 +298,55 @@
       "authorityTier": 3,
       "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
       "rawRetention": "Retain exact named German product, EAN, Erschienen am date and Deutsch field, explicit Switzerland metadata, acquisition URL/timestamp and separate response/excerpt SHA-256. Only this selected manual retailer surface is reviewed."
+    },
+    {
+      "providerId": "kartenbasis",
+      "operator": "Kartenbasis",
+      "authorityTier": 3,
+      "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "micromania",
+      "operator": "Micromania",
+      "authorityTier": 3,
+      "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "mycomics",
+      "operator": "MyComics",
+      "authorityTier": 3,
+      "licenseOrTerms": "Retailer's own terms; exact dated product fields retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "pokezentrum",
+      "operator": "PokéZentrum",
+      "authorityTier": 3,
+      "licenseOrTerms": "Publisher's own terms; exact dated calendar entries retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "sodip",
+      "operator": "Sodip",
+      "authorityTier": 3,
+      "licenseOrTerms": "Distributor's own terms; exact dated product fields retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "edaily",
+      "operator": "Edaily",
+      "authorityTier": 3,
+      "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "newsworks",
+      "operator": "Newsworks",
+      "authorityTier": 3,
+      "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
+      "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
     }
   ],
   "surfaces": [
@@ -3352,6 +3401,344 @@
         "tpci-vivid-voltage-build-battle-dates-german-swsh068-positive",
         "tpci-vivid-voltage-build-battle-dates-italian-swsh068-positive",
         "tpci-vivid-voltage-build-battle-dates-spanish-swsh068-positive"
+      ]
+    },
+    {
+      "surfaceId": "kartenbasis-reviewed-dates-20261023",
+      "providerId": "kartenbasis",
+      "label": "Reviewed day/month release dates of 2026-10-23 (kartenbasis)",
+      "match": {
+        "urlPrefixes": [
+          "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "kartenbasis-reviewed-dates-20261023-e716bb22-positive"
+      ]
+    },
+    {
+      "surfaceId": "micromania-reviewed-dates-20261023",
+      "providerId": "micromania",
+      "label": "Reviewed day/month release dates of 2026-10-23 (micromania)",
+      "match": {
+        "urlPrefixes": [
+          "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "micromania-reviewed-dates-20261023-80cf95fe-positive"
+      ]
+    },
+    {
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "providerId": "mycomics",
+      "label": "Reviewed day/month release dates of 2026-10-23 (mycomics)",
+      "match": {
+        "urlPrefixes": [
+          "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+          "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "mycomics-reviewed-dates-20261023-27c7591e-positive",
+        "mycomics-reviewed-dates-20261023-19865833-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "providerId": "pokemon-card-korea",
+      "label": "Reviewed day/month release dates of 2026-10-23 (pokemon-card-korea)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokemoncard.co.kr/_news?id=10333",
+          "https://pokemoncard.co.kr/card/166"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://pokemoncard.co.kr/_news?id=10333",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokemon-official-reviewed-dates-20261023",
+      "providerId": "pokemon-official",
+      "label": "Reviewed day/month release dates of 2026-10-23 (pokemon-official)",
+      "match": {
+        "urlPrefixes": [
+          "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokemon-official-reviewed-dates-20261023-125e07bd-positive"
+      ]
+    },
+    {
+      "surfaceId": "pokezentrum-reviewed-dates-20261023",
+      "providerId": "pokezentrum",
+      "label": "Reviewed day/month release dates of 2026-10-23 (pokezentrum)",
+      "match": {
+        "urlPrefixes": [
+          "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "pokezentrum-reviewed-dates-20261023-39613eb1-positive"
+      ]
+    },
+    {
+      "surfaceId": "sodip-reviewed-dates-20261023",
+      "providerId": "sodip",
+      "label": "Reviewed day/month release dates of 2026-10-23 (sodip)",
+      "match": {
+        "urlPrefixes": [
+          "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "sodip-reviewed-dates-20261023-fe55f905-positive"
+      ]
+    },
+    {
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "providerId": "edaily",
+      "label": "Reviewed day/month release dates of 2026-10-23 (edaily)",
+      "match": {
+        "urlPrefixes": [
+          "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ]
+    },
+    {
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "providerId": "newsworks",
+      "label": "Reviewed day/month release dates of 2026-10-23 (newsworks)",
+      "match": {
+        "urlPrefixes": [
+          "https://www.newsworks.co.kr/news/articleView.html?idxno=87040"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-23",
+      "freshnessPolicy": "Only individually retained native date fields, acquisition metadata and separate file/excerpt hashes. Re-review changed sources or expanded scope. No automatic acquisition adapter, completeness or finer precision is inferred.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+        "parameters": [],
+        "pagination": "not paginated; individually reviewed source fields only",
+        "expectedIdentifiers": [
+          "exact named product or campaign",
+          "source-native locality/language qualifier",
+          "source-native availability field"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "date excerpt only; adjacent card or finish vocabulary confers no capability",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
       ]
     }
   ],
@@ -8747,6 +9134,594 @@
         "zeroResultMeans": "unknown",
         "challenge": "The release dates the Build & Battle Box only; it neither names Snorlax nor dates the Staff-stamped prerelease variant or the separate Cosmos-holo store giveaway."
       }
+    },
+    {
+      "edgeId": "kartenbasis-reviewed-dates-20261023-e716bb22-positive",
+      "providerId": "kartenbasis",
+      "surfaceId": "kartenbasis-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "German"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2024-05-24",
+          "end": "2024-05-24",
+          "basis": "Only the exact retained source-native date at its stated precision: German retailer release field for the 3-pack blister whose Relaxo variant carries SVP 122; pokezentrum.de's product overview lists the Relaxo blister among products released with the set on 24 May 2024 (svp122-de-pokezentrum-twm-produktuebersicht.html)."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-kartenbasis-reviewed-dates-20261023-e716bb22",
+      "outOfScopeChallengeObservationId": "obs-kartenbasis-reviewed-dates-20261023-e716bb22-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates German 3-pack blister, Relaxo variant, Releasedatum only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "micromania-reviewed-dates-20261023-80cf95fe-positive",
+      "providerId": "micromania",
+      "surfaceId": "micromania-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "French"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2024-03-01",
+          "end": "2024-03-01",
+          "basis": "Only the exact retained source-native date at its stated precision: French retailer release field for the 2023 World Championships deck product line; the Gabriel Fernandez Lugia deck is one of its four decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-fr-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-micromania-reviewed-dates-20261023-80cf95fe",
+      "outOfScopeChallengeObservationId": "obs-micromania-reviewed-dates-20261023-80cf95fe-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates French 2023 World Championships deck (random model of four), EAN 0820650557484 only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "mycomics-reviewed-dates-20261023-27c7591e-positive",
+      "providerId": "mycomics",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Italian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2024-05-24",
+          "end": "2024-05-24",
+          "basis": "Only the exact retained source-native date at its stated precision: Italian retailer release field for the Snorlax promo blister; lppcollecting.it independently gives 24 Maggio 2024 for the same blister (svp122-it-lppcollecting-twm-series.html). A Gamelife search snippet giving 21/05/2024 was not retained."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-mycomics-reviewed-dates-20261023-27c7591e",
+      "outOfScopeChallengeObservationId": "obs-mycomics-reviewed-dates-20261023-27c7591e-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Italian Snorlax 3-pack blister, Data Uscita only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "mycomics-reviewed-dates-20261023-19865833-positive",
+      "providerId": "mycomics",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Italian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2020-06-05",
+          "end": "2020-06-05",
+          "basis": "Only the exact retained source-native date at its stated precision: Italian retailer release field for the Snorlax pin collection (EAN 0820650611162), whose promo is SWSH 032; this corrects the month 2020-05 and matches the separately sourced German 2020-06-05."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-mycomics-reviewed-dates-20261023-19865833",
+      "outOfScopeChallengeObservationId": "obs-mycomics-reviewed-dates-20261023-19865833-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Italian Snorlax pin collection, Data Uscita only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2021-05-01",
+          "end": "2021-05-01",
+          "basis": "Only the exact retained source-native date at its stated precision: Official Pokémon Korea notice for the online official-shop purchase campaign whose image shows 101/S-P Snorlax; card detail SP000000101 names the same campaign (kr-pokemoncard-card-detail-SP000000101.html). The campaign start is the card's Korean debut."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-d6202bd1",
+      "outOfScopeChallengeObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-d6202bd1-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Korean official online-shop promo campaign start only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2019-03-20",
+          "end": "2019-03-20",
+          "basis": "Only the exact retained source-native date at its stated precision: Official Korean Night Unison product page: buying one box each of Tag Bolt and Night Unison gives the Eevee & Snorlax-GX promo shown as 140/SM-P (card detail SMP000000191 names the same campaign). Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-f9a028a1",
+      "outOfScopeChallengeObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-f9a028a1-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2019-03-20",
+          "end": "2019-03-20",
+          "basis": "Only the exact retained source-native date at its stated precision: Same Korean card release as the holo row (identical cardReleaseId); the finish is unresolved, the campaign start dates the release. Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-21227d52",
+      "outOfScopeChallengeObservationId": "obs-pokemon-card-korea-reviewed-dates-20261023-21227d52-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "pokemon-official-reviewed-dates-20261023-125e07bd-positive",
+      "providerId": "pokemon-official",
+      "surfaceId": "pokemon-official-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2023-08-14",
+          "end": "2023-08-14",
+          "basis": "Only the exact retained source-native date at its stated precision: Official es-ES pokemon.com article (7 Aug 2023) dates Play! Pokémon Prize Pack Series 3 availability at participating stores; LOR 143 is a Series 3 card. The LATAM /el/ twin is retained only to tell the editions apart."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-pokemon-official-reviewed-dates-20261023-125e07bd",
+      "outOfScopeChallengeObservationId": "obs-pokemon-official-reviewed-dates-20261023-125e07bd-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates es-ES (hreflang) Play! Pokémon Prize Pack Series 3 availability only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "pokezentrum-reviewed-dates-20261023-39613eb1-positive",
+      "providerId": "pokezentrum",
+      "surfaceId": "pokezentrum-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "German"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2024-03-01",
+          "end": "2024-03-01",
+          "basis": "Only the exact retained source-native date at its stated precision: German fan release calendar entry for the German-language 2023 World Championships decks, inside the official window. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-de-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-pokezentrum-reviewed-dates-20261023-39613eb1",
+      "outOfScopeChallengeObservationId": "obs-pokezentrum-reviewed-dates-20261023-39613eb1-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates German-language 2023 World Championships decks release only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "sodip-reviewed-dates-20261023-fe55f905-positive",
+      "providerId": "sodip",
+      "surfaceId": "sodip-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "Italian"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2024-03-01",
+          "end": "2024-03-01",
+          "basis": "Only the exact retained source-native date at its stated precision: Italian distributor gives Mese di uscita MARZO and Uscita prevista 01/03/2024 for the four 2023 World Championships decks. AndyCards gives 03-03-2024 for the Fernandez deck (andycards-it-mazzo-campioni-mondiali-2023-gabriel-fernandez-it.html); the collection owner decided on 2026-10-23 to apply 1 March 2024, as for the German and French decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-it-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-sodip-reviewed-dates-20261023-fe55f905",
+      "outOfScopeChallengeObservationId": "obs-sodip-reviewed-dates-20261023-fe55f905-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Italian newsstand release of the four 2023 World Championships decks only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "edaily-reviewed-dates-20261023-65823040-positive",
+      "providerId": "edaily",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2016-10",
+          "end": "2016-10",
+          "basis": "Only the exact retained source-native date at its stated precision: Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-edaily-reviewed-dates-20261023-65823040",
+      "outOfScopeChallengeObservationId": "obs-edaily-reviewed-dates-20261023-65823040-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+      }
+    },
+    {
+      "edgeId": "newsworks-reviewed-dates-20261023-65823040-positive",
+      "providerId": "newsworks",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "coverage": {
+        "localities": [
+          "KR"
+        ],
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "productCategories": [
+          "product"
+        ],
+        "timeRange": {
+          "start": "2016-10",
+          "end": "2016-10",
+          "basis": "Only the exact retained source-native date at its stated precision: Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone."
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "date",
+        "release-date"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "An explicit retained native date establishes only its matching already-known release scope. Missing rows, fields, markets and finer precision remain unknown."
+      },
+      "knownPositiveObservationId": "obs-newsworks-reviewed-dates-20261023-65823040",
+      "outOfScopeChallengeObservationId": "obs-newsworks-reviewed-dates-20261023-65823040-boundary",
+      "boundary": {
+        "outsideScope": [
+          "other pages, products or campaigns",
+          "other markets or languages",
+          "unsupported finer precision or other shipment/reprint waves",
+          "card existence, identity or membership",
+          "rarity or physical finish",
+          "absence or completeness"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+      }
     }
   ],
   "observations": [
@@ -10247,7 +11222,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:1b5134f527f2df88b51e61e1d38b4f66f64510b3dfce7ef027518a145233cbfe",
+      "rawRecordHash": "sha256:67eb3ff7c2950a8f253c2fd638982090cde3daa5832cbd3781c381ffe982046d",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -10271,7 +11246,7 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 430,
+        "stableIdCount": 444,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2DaC:038/053:base",
@@ -10332,6 +11307,7 @@
           "F0173-P02",
           "F0174-P01",
           "F0174-P02",
+          "F0211-P01",
           "F0214-P01",
           "F0215-P01",
           "F0217-P01",
@@ -10355,12 +11331,20 @@
           "F0374-P01",
           "F0375-P01",
           "F0379-P01",
+          "F0387-P02",
+          "F0388-P02",
+          "F0389-P02",
+          "F0390-P02",
+          "F0391-P02",
           "F0402-P02",
           "F0403-P02",
           "F0415-P01",
           "F0456-P01",
           "F0456-P02",
           "F0456-P03",
+          "F0474-P01",
+          "F0474-P02",
+          "F0482-P01",
           "F0486-P01",
           "F0493-P01",
           "F0498-P01",
@@ -10412,6 +11396,7 @@
           "F0616-P01",
           "F0616-P02",
           "F0619-P01",
+          "F0625-P01",
           "F0625-P02",
           "F0626-P01",
           "F0628-P02",
@@ -10589,6 +11574,8 @@
           "SPEC-0631",
           "SPEC-0632",
           "SPEC-0633",
+          "SPEC-0642",
+          "SPEC-0644",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -10624,6 +11611,7 @@
           "U0097",
           "U0098",
           "U0099",
+          "U0129",
           "U0170",
           "U0175",
           "U0176",
@@ -10701,11 +11689,12 @@
           "override:owner-edition-split-20261022",
           "override:owner-jungle-number-finish-20260910",
           "override:owner-scan-review",
+          "override:owner-sm05-holo-20261026",
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-10-22",
-        "usageCount": 491
+        "retrievedAt": "2026-10-26",
+        "usageCount": 508
       }
     },
     {
@@ -10726,7 +11715,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:704272258fb74c8772d5ab24f7bad205ba961521cc84f8e09137695808dbe73e",
+      "rawRecordHash": "sha256:a589a6d650d03752af0585e4bc52b5ec686fe4d790afcaa6c063bb40ed8ce9ce",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -10760,7 +11749,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 262,
+        "stableIdCount": 264,
         "stableIds": [
           "CS1aC 188 V2",
           "CSM2.1C 054 base",
@@ -10797,6 +11786,7 @@
           "F0534-P01",
           "F0615-P03",
           "F0619-P01",
+          "F0625-P01",
           "F0625-P02",
           "F0628-P02",
           "G2  base",
@@ -10937,6 +11927,7 @@
           "SPEC-0630",
           "SPEC-0632",
           "SPEC-0633",
+          "SPEC-0642",
           "SV-P/CS 277 base",
           "TW:AS5a:204/184:base",
           "TW:SM-P:053:base",
@@ -11025,8 +12016,8 @@
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-10-22",
-        "usageCount": 441
+        "retrievedAt": "2026-10-23",
+        "usageCount": 444
       }
     },
     {
@@ -16623,6 +17614,954 @@
         "scope": "Only the native Spanish Vivid Voltage Build & Battle Box availability from 2020-10-31, applied to the ordinary unmarked SWSH068 prerelease promo the owner identified as that box's promo (2026-10-22).",
         "limits": "Staff-stamped prerelease variant, Cosmos-holo giveaway, other languages and finishes are outside scope.",
         "retainedContext": "verification/evidence/data-gaps-20261022/dates/raw/gp-es-viv-announce.html"
+      }
+    },
+    {
+      "observationId": "obs-kartenbasis-reviewed-dates-20261023-e716bb22",
+      "surfaceId": "kartenbasis-reviewed-dates-20261023",
+      "queryUrl": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "German 3-pack blister, Relaxo variant, Releasedatum"
+      },
+      "expectedIdentifiers": [
+        "2024-05-24"
+      ],
+      "validatesEdges": [
+        "kartenbasis-reviewed-dates-20261023-e716bb22-positive"
+      ],
+      "outcome": "German retailer release field for the 3-pack blister whose Relaxo variant carries SVP 122; pokezentrum.de's product overview lists the Relaxo blister among products released with the set on 24 May 2024 (svp122-de-pokezentrum-twm-produktuebersicht.html).",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:bb63a7e42235330b9342b0aa1356e83e4bbb2e948ba22b64fef272f3d8258c4c",
+      "rawRecord": {
+        "sourceId": "kartenbasis-reviewed-dates-20261023-e716bb22",
+        "sourceUrl": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "c75ccdad987f6dd51b536824546bc6fd46098dd09a86c6bd6c13a59f174d2a73",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "1122c3702917da6705dd6dc71cf3d6b8d589e3ed9098ef18be552568c8358e4d",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/svp122-de-kartenbasis-3er-blister-twm.html",
+        "excerpt": "Maskerade im Zwielicht 3er Blister [deutsch] … Relaxo … Releasedatum: 24.05.2024",
+        "excerptSha256": "ea8ba0c45345425c323aa75204157e153aed69f2ed3c09ebc4056885b02938be",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "German 3-pack blister, Relaxo variant, Releasedatum",
+        "date": "2024-05-24",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "German retailer release field for the 3-pack blister whose Relaxo variant carries SVP 122; pokezentrum.de's product overview lists the Relaxo blister among products released with the set on 24 May 2024 (svp122-de-pokezentrum-twm-produktuebersicht.html).",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-kartenbasis-reviewed-dates-20261023-e716bb22-boundary",
+      "surfaceId": "kartenbasis-reviewed-dates-20261023",
+      "queryUrl": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2024-05-24"
+      ],
+      "validatesEdges": [
+        "kartenbasis-reviewed-dates-20261023-e716bb22-positive"
+      ],
+      "outcome": "The source dates German 3-pack blister, Relaxo variant, Releasedatum only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:bb63a7e42235330b9342b0aa1356e83e4bbb2e948ba22b64fef272f3d8258c4c",
+      "rawRecord": {
+        "sourceId": "kartenbasis-reviewed-dates-20261023-e716bb22",
+        "sourceUrl": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "c75ccdad987f6dd51b536824546bc6fd46098dd09a86c6bd6c13a59f174d2a73",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "1122c3702917da6705dd6dc71cf3d6b8d589e3ed9098ef18be552568c8358e4d",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/svp122-de-kartenbasis-3er-blister-twm.html",
+        "excerpt": "Maskerade im Zwielicht 3er Blister [deutsch] … Relaxo … Releasedatum: 24.05.2024",
+        "excerptSha256": "ea8ba0c45345425c323aa75204157e153aed69f2ed3c09ebc4056885b02938be",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "German 3-pack blister, Relaxo variant, Releasedatum",
+        "date": "2024-05-24",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "German retailer release field for the 3-pack blister whose Relaxo variant carries SVP 122; pokezentrum.de's product overview lists the Relaxo blister among products released with the set on 24 May 2024 (svp122-de-pokezentrum-twm-produktuebersicht.html).",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-micromania-reviewed-dates-20261023-80cf95fe",
+      "surfaceId": "micromania-reviewed-dates-20261023",
+      "queryUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "French 2023 World Championships deck (random model of four), EAN 0820650557484"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "micromania-reviewed-dates-20261023-80cf95fe-positive"
+      ],
+      "outcome": "French retailer release field for the 2023 World Championships deck product line; the Gabriel Fernandez Lugia deck is one of its four decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-fr-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e6bbf650f28b286ff4b48226ab1d9bc8eb981c2073e66a9d1a215b7c6e2bfee7",
+      "rawRecord": {
+        "sourceId": "micromania-reviewed-dates-20261023-80cf95fe",
+        "sourceUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "102e27aa00d90b528cca884817098738b5d50842a505f9c1f4ec0da96b5d269a",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "102e27aa00d90b528cca884817098738b5d50842a505f9c1f4ec0da96b5d269a",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/micromania-fr-deck-championnats-du-monde-2023-ean0820650557484.html",
+        "excerpt": "Sortie le : 1 mars 2024 … DATE DE SORTIE 1 mars 2024",
+        "excerptSha256": "dc9ffbdc875fc5339fb2613e768ba07dbd98ec84587766e937903aafb56a6342",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "French 2023 World Championships deck (random model of four), EAN 0820650557484",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "French retailer release field for the 2023 World Championships deck product line; the Gabriel Fernandez Lugia deck is one of its four decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-fr-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-micromania-reviewed-dates-20261023-80cf95fe-boundary",
+      "surfaceId": "micromania-reviewed-dates-20261023",
+      "queryUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "micromania-reviewed-dates-20261023-80cf95fe-positive"
+      ],
+      "outcome": "The source dates French 2023 World Championships deck (random model of four), EAN 0820650557484 only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e6bbf650f28b286ff4b48226ab1d9bc8eb981c2073e66a9d1a215b7c6e2bfee7",
+      "rawRecord": {
+        "sourceId": "micromania-reviewed-dates-20261023-80cf95fe",
+        "sourceUrl": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "102e27aa00d90b528cca884817098738b5d50842a505f9c1f4ec0da96b5d269a",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "102e27aa00d90b528cca884817098738b5d50842a505f9c1f4ec0da96b5d269a",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/micromania-fr-deck-championnats-du-monde-2023-ean0820650557484.html",
+        "excerpt": "Sortie le : 1 mars 2024 … DATE DE SORTIE 1 mars 2024",
+        "excerptSha256": "dc9ffbdc875fc5339fb2613e768ba07dbd98ec84587766e937903aafb56a6342",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "French 2023 World Championships deck (random model of four), EAN 0820650557484",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "French retailer release field for the 2023 World Championships deck product line; the Gabriel Fernandez Lugia deck is one of its four decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-fr-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-mycomics-reviewed-dates-20261023-27c7591e",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "queryUrl": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Italian Snorlax 3-pack blister, Data Uscita"
+      },
+      "expectedIdentifiers": [
+        "2024-05-24"
+      ],
+      "validatesEdges": [
+        "mycomics-reviewed-dates-20261023-27c7591e-positive"
+      ],
+      "outcome": "Italian retailer release field for the Snorlax promo blister; lppcollecting.it independently gives 24 Maggio 2024 for the same blister (svp122-it-lppcollecting-twm-series.html). A Gamelife search snippet giving 21/05/2024 was not retained.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:badde83a5faf3cf3dfbb089b0577be73ef9f5ce54078628d59b042f075046e80",
+      "rawRecord": {
+        "sourceId": "mycomics-reviewed-dates-20261023-27c7591e",
+        "sourceUrl": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "9f5ec6030a1080681cac0a02287f23397a311d4295273965e48aa43e8c2a059a",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "6ed3386635a842fb3e7fc84367475c2a00fd09dd21a41c1911f9f4007a4ff0e8",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/svp122-it-mycomics-blister-snorlax-twm.html",
+        "excerpt": "Crepuscolo Mascherato - Blister 3 Buste con Carta Promo Snorlax … Lingua: : Italiano … Data Uscita : 24/05/2024 EAN : 0820650605031",
+        "excerptSha256": "80f4d8389a44207261565682bb40f84ac7ed6f74a9adc9451e1143d957dd54e0",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian Snorlax 3-pack blister, Data Uscita",
+        "date": "2024-05-24",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian retailer release field for the Snorlax promo blister; lppcollecting.it independently gives 24 Maggio 2024 for the same blister (svp122-it-lppcollecting-twm-series.html). A Gamelife search snippet giving 21/05/2024 was not retained.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-mycomics-reviewed-dates-20261023-27c7591e-boundary",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "queryUrl": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2024-05-24"
+      ],
+      "validatesEdges": [
+        "mycomics-reviewed-dates-20261023-27c7591e-positive"
+      ],
+      "outcome": "The source dates Italian Snorlax 3-pack blister, Data Uscita only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:badde83a5faf3cf3dfbb089b0577be73ef9f5ce54078628d59b042f075046e80",
+      "rawRecord": {
+        "sourceId": "mycomics-reviewed-dates-20261023-27c7591e",
+        "sourceUrl": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "9f5ec6030a1080681cac0a02287f23397a311d4295273965e48aa43e8c2a059a",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "6ed3386635a842fb3e7fc84367475c2a00fd09dd21a41c1911f9f4007a4ff0e8",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/svp122-it-mycomics-blister-snorlax-twm.html",
+        "excerpt": "Crepuscolo Mascherato - Blister 3 Buste con Carta Promo Snorlax … Lingua: : Italiano … Data Uscita : 24/05/2024 EAN : 0820650605031",
+        "excerptSha256": "80f4d8389a44207261565682bb40f84ac7ed6f74a9adc9451e1143d957dd54e0",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian Snorlax 3-pack blister, Data Uscita",
+        "date": "2024-05-24",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian retailer release field for the Snorlax promo blister; lppcollecting.it independently gives 24 Maggio 2024 for the same blister (svp122-it-lppcollecting-twm-series.html). A Gamelife search snippet giving 21/05/2024 was not retained.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-mycomics-reviewed-dates-20261023-19865833",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "queryUrl": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Italian Snorlax pin collection, Data Uscita"
+      },
+      "expectedIdentifiers": [
+        "2020-06-05"
+      ],
+      "validatesEdges": [
+        "mycomics-reviewed-dates-20261023-19865833-positive"
+      ],
+      "outcome": "Italian retailer release field for the Snorlax pin collection (EAN 0820650611162), whose promo is SWSH 032; this corrects the month 2020-05 and matches the separately sourced German 2020-06-05.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:a46a2b51d9a905fdd59bd43bd38af5db34ee14d9aef66914d1e75b5815cfa3c0",
+      "rawRecord": {
+        "sourceId": "mycomics-reviewed-dates-20261023-19865833",
+        "sourceUrl": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "a7d63b49bcef710df92f802d2932c65d20b9b3d2712c1e056edb0aff58611da8",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "4c96f5791b4c159de98374e62c88beeb5b4642f316b80818dfe78dc82f876c88",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/swsh032-it-mycomics-collezione-spilla-snorlax.html",
+        "excerpt": "Collezione con Spilla Pin Collection Snorlax … Lingua: : Italiano … Data Uscita : 05/06/2020 EAN : 0820650611162",
+        "excerptSha256": "06447f7500bd99f93fce97bb19fc7458fa320fa9210e3d8afacefa87e77abf34",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian Snorlax pin collection, Data Uscita",
+        "date": "2020-06-05",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian retailer release field for the Snorlax pin collection (EAN 0820650611162), whose promo is SWSH 032; this corrects the month 2020-05 and matches the separately sourced German 2020-06-05.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-mycomics-reviewed-dates-20261023-19865833-boundary",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "queryUrl": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2020-06-05"
+      ],
+      "validatesEdges": [
+        "mycomics-reviewed-dates-20261023-19865833-positive"
+      ],
+      "outcome": "The source dates Italian Snorlax pin collection, Data Uscita only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:a46a2b51d9a905fdd59bd43bd38af5db34ee14d9aef66914d1e75b5815cfa3c0",
+      "rawRecord": {
+        "sourceId": "mycomics-reviewed-dates-20261023-19865833",
+        "sourceUrl": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "a7d63b49bcef710df92f802d2932c65d20b9b3d2712c1e056edb0aff58611da8",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "4c96f5791b4c159de98374e62c88beeb5b4642f316b80818dfe78dc82f876c88",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-promos/swsh032-it-mycomics-collezione-spilla-snorlax.html",
+        "excerpt": "Collezione con Spilla Pin Collection Snorlax … Lingua: : Italiano … Data Uscita : 05/06/2020 EAN : 0820650611162",
+        "excerptSha256": "06447f7500bd99f93fce97bb19fc7458fa320fa9210e3d8afacefa87e77abf34",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian Snorlax pin collection, Data Uscita",
+        "date": "2020-06-05",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian retailer release field for the Snorlax pin collection (EAN 0820650611162), whose promo is SWSH 032; this corrects the month 2020-05 and matches the separately sourced German 2020-06-05.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-d6202bd1",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/_news?id=10333",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean official online-shop promo campaign start"
+      },
+      "expectedIdentifiers": [
+        "2021-05-01"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive"
+      ],
+      "outcome": "Official Pokémon Korea notice for the online official-shop purchase campaign whose image shows 101/S-P Snorlax; card detail SP000000101 names the same campaign (kr-pokemoncard-card-detail-SP000000101.html). The campaign start is the card's Korean debut.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:24d9a634fc253c71453cafefbe31a9756d0c317a9c066255b6b6e8f72be6601c",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-d6202bd1",
+        "sourceUrl": "https://pokemoncard.co.kr/_news?id=10333",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "7efb837f3ec89d07da2e7e72387661339ccebb7556027ce3c5d38336320a3d26",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e136f5d7dd9786088d59619203b855348547c3aa530f6beebe24a1e4ba147d01",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-news-10333-official-shop-promo-101-S-P.html",
+        "excerpt": "포켓몬 카드 게임 온라인 공식 인증샵 프로모 카드 증정 이벤트 … 일정 : 2021년 5월 1일(토) ~ 재고 소진 시 종료",
+        "excerptSha256": "6e291d948b35b6995da798f728d423c6f0bb37e113f9e5fbba5660abc998f2b1",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean official online-shop promo campaign start",
+        "date": "2021-05-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official Pokémon Korea notice for the online official-shop purchase campaign whose image shows 101/S-P Snorlax; card detail SP000000101 names the same campaign (kr-pokemoncard-card-detail-SP000000101.html). The campaign start is the card's Korean debut.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-d6202bd1-boundary",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/_news?id=10333",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2021-05-01"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive"
+      ],
+      "outcome": "The source dates Korean official online-shop promo campaign start only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:24d9a634fc253c71453cafefbe31a9756d0c317a9c066255b6b6e8f72be6601c",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-d6202bd1",
+        "sourceUrl": "https://pokemoncard.co.kr/_news?id=10333",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "7efb837f3ec89d07da2e7e72387661339ccebb7556027ce3c5d38336320a3d26",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e136f5d7dd9786088d59619203b855348547c3aa530f6beebe24a1e4ba147d01",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-news-10333-official-shop-promo-101-S-P.html",
+        "excerpt": "포켓몬 카드 게임 온라인 공식 인증샵 프로모 카드 증정 이벤트 … 일정 : 2021년 5월 1일(토) ~ 재고 소진 시 종료",
+        "excerptSha256": "6e291d948b35b6995da798f728d423c6f0bb37e113f9e5fbba5660abc998f2b1",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean official online-shop promo campaign start",
+        "date": "2021-05-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official Pokémon Korea notice for the online official-shop purchase campaign whose image shows 101/S-P Snorlax; card detail SP000000101 names the same campaign (kr-pokemoncard-card-detail-SP000000101.html). The campaign start is the card's Korean debut.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-f9a028a1",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/card/166",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start"
+      },
+      "expectedIdentifiers": [
+        "2019-03-20"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive"
+      ],
+      "outcome": "Official Korean Night Unison product page: buying one box each of Tag Bolt and Night Unison gives the Eevee & Snorlax-GX promo shown as 140/SM-P (card detail SMP000000191 names the same campaign). Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:b6de96514e12b725bbd8c9e2df98cb1bc06690f60b3d9c36493811c40c9f5d6e",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-f9a028a1",
+        "sourceUrl": "https://pokemoncard.co.kr/card/166",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "13f67ddd899806dabc5bc9bd28d88041fc3b72d97410a72e5ed209c824aa812b",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e16d6572df6ee0609e8baeb561396373782b897a8c427f8f13ad6a0e7b3acf85",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-product-166-night-unison-promo-schedule.html",
+        "excerpt": "발매일 2019-03-20 … -프로모 카드 증정 장소 안내- <카드샵> 3월 23일(토)부터 진행 … <포켓몬스토어온라인> 3월 20일(수)부터 진행",
+        "excerptSha256": "ddf4c80fd3de391764a5ec012749d48184a44cdaefce5a86b159051504199861",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start",
+        "date": "2019-03-20",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official Korean Night Unison product page: buying one box each of Tag Bolt and Night Unison gives the Eevee & Snorlax-GX promo shown as 140/SM-P (card detail SMP000000191 names the same campaign). Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-f9a028a1-boundary",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/card/166",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2019-03-20"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive"
+      ],
+      "outcome": "The source dates Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:b6de96514e12b725bbd8c9e2df98cb1bc06690f60b3d9c36493811c40c9f5d6e",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-f9a028a1",
+        "sourceUrl": "https://pokemoncard.co.kr/card/166",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "13f67ddd899806dabc5bc9bd28d88041fc3b72d97410a72e5ed209c824aa812b",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e16d6572df6ee0609e8baeb561396373782b897a8c427f8f13ad6a0e7b3acf85",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-product-166-night-unison-promo-schedule.html",
+        "excerpt": "발매일 2019-03-20 … -프로모 카드 증정 장소 안내- <카드샵> 3월 23일(토)부터 진행 … <포켓몬스토어온라인> 3월 20일(수)부터 진행",
+        "excerptSha256": "ddf4c80fd3de391764a5ec012749d48184a44cdaefce5a86b159051504199861",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start",
+        "date": "2019-03-20",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official Korean Night Unison product page: buying one box each of Tag Bolt and Night Unison gives the Eevee & Snorlax-GX promo shown as 140/SM-P (card detail SMP000000191 names the same campaign). Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-21227d52",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/card/166",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start"
+      },
+      "expectedIdentifiers": [
+        "2019-03-20"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive"
+      ],
+      "outcome": "Same Korean card release as the holo row (identical cardReleaseId); the finish is unresolved, the campaign start dates the release. Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:ec7dee187cb1377789c5d164391e6641ae8aa9d9e7be548a1138989c8251fd1c",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-21227d52",
+        "sourceUrl": "https://pokemoncard.co.kr/card/166",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "13f67ddd899806dabc5bc9bd28d88041fc3b72d97410a72e5ed209c824aa812b",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e16d6572df6ee0609e8baeb561396373782b897a8c427f8f13ad6a0e7b3acf85",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-product-166-night-unison-promo-schedule.html",
+        "excerpt": "발매일 2019-03-20 … -프로모 카드 증정 장소 안내- <카드샵> 3월 23일(토)부터 진행 … <포켓몬스토어온라인> 3월 20일(수)부터 진행",
+        "excerptSha256": "ddf4c80fd3de391764a5ec012749d48184a44cdaefce5a86b159051504199861",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start",
+        "date": "2019-03-20",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Same Korean card release as the holo row (identical cardReleaseId); the finish is unresolved, the campaign start dates the release. Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-card-korea-reviewed-dates-20261023-21227d52-boundary",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "queryUrl": "https://pokemoncard.co.kr/card/166",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2019-03-20"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive"
+      ],
+      "outcome": "The source dates Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:ec7dee187cb1377789c5d164391e6641ae8aa9d9e7be548a1138989c8251fd1c",
+      "rawRecord": {
+        "sourceId": "pokemon-card-korea-reviewed-dates-20261023-21227d52",
+        "sourceUrl": "https://pokemoncard.co.kr/card/166",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "13f67ddd899806dabc5bc9bd28d88041fc3b72d97410a72e5ed209c824aa812b",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "e16d6572df6ee0609e8baeb561396373782b897a8c427f8f13ad6a0e7b3acf85",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-pokemoncard-product-166-night-unison-promo-schedule.html",
+        "excerpt": "발매일 2019-03-20 … -프로모 카드 증정 장소 안내- <카드샵> 3월 23일(토)부터 진행 … <포켓몬스토어온라인> 3월 20일(수)부터 진행",
+        "excerptSha256": "ddf4c80fd3de391764a5ec012749d48184a44cdaefce5a86b159051504199861",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Tag Bolt / Night Unison two-box promo campaign; earliest channel start",
+        "date": "2019-03-20",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Same Korean card release as the holo row (identical cardReleaseId); the finish is unresolved, the campaign start dates the release. Earliest channel start, Pokémon Store Online 2019-03-20; card shops followed on 2019-03-23.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-official-reviewed-dates-20261023-125e07bd",
+      "surfaceId": "pokemon-official-reviewed-dates-20261023",
+      "queryUrl": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "es-ES (hreflang) Play! Pokémon Prize Pack Series 3 availability"
+      },
+      "expectedIdentifiers": [
+        "2023-08-14"
+      ],
+      "validatesEdges": [
+        "pokemon-official-reviewed-dates-20261023-125e07bd-positive"
+      ],
+      "outcome": "Official es-ES pokemon.com article (7 Aug 2023) dates Play! Pokémon Prize Pack Series 3 availability at participating stores; LOR 143 is a Series 3 card. The LATAM /el/ twin is retained only to tell the editions apart.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:4a48d3964cb544b7d50b677f8a127a2a69a5d3e9a0e919db50a47d25cccf43e0",
+      "rawRecord": {
+        "sourceId": "pokemon-official-reviewed-dates-20261023-125e07bd",
+        "sourceUrl": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "3c5c8ad86033d2bd7e6fd599f44e907fe4d7b76518a219a9436b24d2db760360",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "2b3dd2dcd5a4ef3cde7d998c4170d26ea71f4c7421307c537f7705a2644ac63e",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/pokemon-com-es-ES-prize-pack-series3-news-pasate-por-la-tienda.html",
+        "excerpt": "Para celebrar el Campeonato Mundial Pokémon 2023, la Serie 3 de los paquetes de premio estará disponible a partir del 14 de agosto de 2023 en los establecimientos participantes.",
+        "excerptSha256": "95568df2023d112590db10f1abb26fe229368d48e54fdd0e7118dc2bd2301f34",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "es-ES (hreflang) Play! Pokémon Prize Pack Series 3 availability",
+        "date": "2023-08-14",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official es-ES pokemon.com article (7 Aug 2023) dates Play! Pokémon Prize Pack Series 3 availability at participating stores; LOR 143 is a Series 3 card. The LATAM /el/ twin is retained only to tell the editions apart.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokemon-official-reviewed-dates-20261023-125e07bd-boundary",
+      "surfaceId": "pokemon-official-reviewed-dates-20261023",
+      "queryUrl": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2023-08-14"
+      ],
+      "validatesEdges": [
+        "pokemon-official-reviewed-dates-20261023-125e07bd-positive"
+      ],
+      "outcome": "The source dates es-ES (hreflang) Play! Pokémon Prize Pack Series 3 availability only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:4a48d3964cb544b7d50b677f8a127a2a69a5d3e9a0e919db50a47d25cccf43e0",
+      "rawRecord": {
+        "sourceId": "pokemon-official-reviewed-dates-20261023-125e07bd",
+        "sourceUrl": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "3c5c8ad86033d2bd7e6fd599f44e907fe4d7b76518a219a9436b24d2db760360",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "2b3dd2dcd5a4ef3cde7d998c4170d26ea71f4c7421307c537f7705a2644ac63e",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/pokemon-com-es-ES-prize-pack-series3-news-pasate-por-la-tienda.html",
+        "excerpt": "Para celebrar el Campeonato Mundial Pokémon 2023, la Serie 3 de los paquetes de premio estará disponible a partir del 14 de agosto de 2023 en los establecimientos participantes.",
+        "excerptSha256": "95568df2023d112590db10f1abb26fe229368d48e54fdd0e7118dc2bd2301f34",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "es-ES (hreflang) Play! Pokémon Prize Pack Series 3 availability",
+        "date": "2023-08-14",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Official es-ES pokemon.com article (7 Aug 2023) dates Play! Pokémon Prize Pack Series 3 availability at participating stores; LOR 143 is a Series 3 card. The LATAM /el/ twin is retained only to tell the editions apart.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokezentrum-reviewed-dates-20261023-39613eb1",
+      "surfaceId": "pokezentrum-reviewed-dates-20261023",
+      "queryUrl": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024/",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "German-language 2023 World Championships decks release"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "pokezentrum-reviewed-dates-20261023-39613eb1-positive"
+      ],
+      "outcome": "German fan release calendar entry for the German-language 2023 World Championships decks, inside the official window. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-de-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:d75cb9a3b43bcabdda61d789dbafc0e3a28932adce5a78ce3fec0e9a0c9ebafe",
+      "rawRecord": {
+        "sourceId": "pokezentrum-reviewed-dates-20261023-39613eb1",
+        "sourceUrl": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024/",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "dba3f7a0887ae0dbb608e189b16eb414fc844dbaa39712eb2deaa055ced3957d",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "d149dad0264d8af664d92b7758546d551bdc122b22e2318ae992157a567ba7e0",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/pokezentrum-de-release-kalender-2024.html",
+        "excerpt": "01.03.24 - Pokémon-Weltmeisterschaftsdecks 2023 Sprache: Deutsch Der neueste Satz Weltmeisterschaftsdecks ist am 01. März 2024 erschienen",
+        "excerptSha256": "12e10f609d7f56b9b026499705594510e5c0569283ff72cf48e0e38001b94ccb",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "German-language 2023 World Championships decks release",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "German fan release calendar entry for the German-language 2023 World Championships decks, inside the official window. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-de-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-pokezentrum-reviewed-dates-20261023-39613eb1-boundary",
+      "surfaceId": "pokezentrum-reviewed-dates-20261023",
+      "queryUrl": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024/",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "pokezentrum-reviewed-dates-20261023-39613eb1-positive"
+      ],
+      "outcome": "The source dates German-language 2023 World Championships decks release only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:d75cb9a3b43bcabdda61d789dbafc0e3a28932adce5a78ce3fec0e9a0c9ebafe",
+      "rawRecord": {
+        "sourceId": "pokezentrum-reviewed-dates-20261023-39613eb1",
+        "sourceUrl": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024/",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "dba3f7a0887ae0dbb608e189b16eb414fc844dbaa39712eb2deaa055ced3957d",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "d149dad0264d8af664d92b7758546d551bdc122b22e2318ae992157a567ba7e0",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/pokezentrum-de-release-kalender-2024.html",
+        "excerpt": "01.03.24 - Pokémon-Weltmeisterschaftsdecks 2023 Sprache: Deutsch Der neueste Satz Weltmeisterschaftsdecks ist am 01. März 2024 erschienen",
+        "excerptSha256": "12e10f609d7f56b9b026499705594510e5c0569283ff72cf48e0e38001b94ccb",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "German-language 2023 World Championships decks release",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "German fan release calendar entry for the German-language 2023 World Championships decks, inside the official window. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-de-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-sodip-reviewed-dates-20261023-fe55f905",
+      "surfaceId": "sodip-reviewed-dates-20261023",
+      "queryUrl": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270/",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Italian newsstand release of the four 2023 World Championships decks"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "sodip-reviewed-dates-20261023-fe55f905-positive"
+      ],
+      "outcome": "Italian distributor gives Mese di uscita MARZO and Uscita prevista 01/03/2024 for the four 2023 World Championships decks. AndyCards gives 03-03-2024 for the Fernandez deck (andycards-it-mazzo-campioni-mondiali-2023-gabriel-fernandez-it.html); the collection owner decided on 2026-10-23 to apply 1 March 2024, as for the German and French decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-it-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:a6e851118b57f2a5126cfc7344542ce0bf7d864e1a87fb5b383b614d0e303322",
+      "rawRecord": {
+        "sourceId": "sodip-reviewed-dates-20261023-fe55f905",
+        "sourceUrl": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270/",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "c3852adbeb053f1abc5578a7da727830cd0ac95353cf42d87a0fe47dbd71b31c",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "152674e96150328a686d29a417e6923d0005859ca24ef078e8d0adb4a4ef27cb",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/sodip-lamiacopia-it-gedis-scambia-gioca-mazzi-campionati-mondiali-2023.html",
+        "excerpt": "MAZZI DEI CAMPIONATI MONDIALI 2023 (4 SOGGETTI) – POKEMON … Editore: GEDIS SRL Mese di uscita: MARZO Uscita prevista: 01/03/2024",
+        "excerptSha256": "17913882ecc7488b167c2fadf7db2fcc6704fbdc93ba0c6ff8bfe8a0a0b039b2",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian newsstand release of the four 2023 World Championships decks",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian distributor gives Mese di uscita MARZO and Uscita prevista 01/03/2024 for the four 2023 World Championships decks. AndyCards gives 03-03-2024 for the Fernandez deck (andycards-it-mazzo-campioni-mondiali-2023-gabriel-fernandez-it.html); the collection owner decided on 2026-10-23 to apply 1 March 2024, as for the German and French decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-it-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-sodip-reviewed-dates-20261023-fe55f905-boundary",
+      "surfaceId": "sodip-reviewed-dates-20261023",
+      "queryUrl": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270/",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2024-03-01"
+      ],
+      "validatesEdges": [
+        "sodip-reviewed-dates-20261023-fe55f905-positive"
+      ],
+      "outcome": "The source dates Italian newsstand release of the four 2023 World Championships decks only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:a6e851118b57f2a5126cfc7344542ce0bf7d864e1a87fb5b383b614d0e303322",
+      "rawRecord": {
+        "sourceId": "sodip-reviewed-dates-20261023-fe55f905",
+        "sourceUrl": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270/",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "DOM serialized by headless Chromium (plain fetch blocked)",
+        "responseSha256": "c3852adbeb053f1abc5578a7da727830cd0ac95353cf42d87a0fe47dbd71b31c",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "152674e96150328a686d29a417e6923d0005859ca24ef078e8d0adb4a4ef27cb",
+        "retainedPath": "verification/evidence/release-dates-20261023/west-special/sodip-lamiacopia-it-gedis-scambia-gioca-mazzi-campionati-mondiali-2023.html",
+        "excerpt": "MAZZI DEI CAMPIONATI MONDIALI 2023 (4 SOGGETTI) – POKEMON … Editore: GEDIS SRL Mese di uscita: MARZO Uscita prevista: 01/03/2024",
+        "excerptSha256": "17913882ecc7488b167c2fadf7db2fcc6704fbdc93ba0c6ff8bfe8a0a0b039b2",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Italian newsstand release of the four 2023 World Championships decks",
+        "date": "2024-03-01",
+        "precision": "day",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Italian distributor gives Mese di uscita MARZO and Uscita prevista 01/03/2024 for the four 2023 World Championships decks. AndyCards gives 03-03-2024 for the Fernandez deck (andycards-it-mazzo-campioni-mondiali-2023-gabriel-fernandez-it.html); the collection owner decided on 2026-10-23 to apply 1 March 2024, as for the German and French decks. The official localized product page dates the four-deck line to Q1 2024 (pokemon-com-it-wcd2023-*.html), so the Cardmarket expansion month 2023-11 is superseded.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-edaily-reviewed-dates-20261023-65823040",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "queryUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e082ec49da6ce416b0850bbb31bc9015e881cad0b369efcbfa7d6681383ef6c6",
+      "rawRecord": {
+        "sourceId": "edaily-reviewed-dates-20261023-65823040",
+        "sourceUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "11d3d7240734f00e64f25ec346fd4dac5ae1ec01b63f872698f22a026a7383f2",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "69ac6e4f83a0aa0a981b1bede12e6562fcb2fcf254c488b3dcc6af6e76aceca9",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-edaily-lottefood-kisstick-pokemon-20161013.html",
+        "excerpt": "롯데푸드(002270) 는 인기 캐릭터 포켓몬을 패키지에 적용한 미니 소시지 ‘키스틱 포켓몬’을 출시했다고 13일 밝혔다.",
+        "excerptSha256": "deb145169003564cd9e120b5593b1a1737d0bdbee38efd19a7358c4d6f2292aa",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+        "date": "2016-10",
+        "precision": "month",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-edaily-reviewed-dates-20261023-65823040-boundary",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "queryUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e082ec49da6ce416b0850bbb31bc9015e881cad0b369efcbfa7d6681383ef6c6",
+      "rawRecord": {
+        "sourceId": "edaily-reviewed-dates-20261023-65823040",
+        "sourceUrl": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "11d3d7240734f00e64f25ec346fd4dac5ae1ec01b63f872698f22a026a7383f2",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "69ac6e4f83a0aa0a981b1bede12e6562fcb2fcf254c488b3dcc6af6e76aceca9",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-edaily-lottefood-kisstick-pokemon-20161013.html",
+        "excerpt": "롯데푸드(002270) 는 인기 캐릭터 포켓몬을 패키지에 적용한 미니 소시지 ‘키스틱 포켓몬’을 출시했다고 13일 밝혔다.",
+        "excerptSha256": "deb145169003564cd9e120b5593b1a1737d0bdbee38efd19a7358c4d6f2292aa",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+        "date": "2016-10",
+        "precision": "month",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-newsworks-reviewed-dates-20261023-65823040",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "queryUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+      "retrievedAt": "2026-10-23",
+      "kind": "known-positive",
+      "queryParameters": {
+        "field": "source-native availability date",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e1bba71907cf32d92b60fa1f1e5a5ad3bdf7e2dedd7e693c3a60bcb5fab00fec",
+      "rawRecord": {
+        "sourceId": "newsworks-reviewed-dates-20261023-65823040",
+        "sourceUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "181d19c78e83163f61ad4ffd82116ca84059bb042840bbfb3c4910411cb5e01c",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "83e01cd2aeeafea208c89200c16f1413222cc4f6d9dbaaf885bb63424e9ac33e",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-newsworks-87040-lottefood-kisstick-pokemon-20161013.html",
+        "excerpt": "롯데푸드는 최근 다시 열풍이 불고 있는 포켓몬의 인기에 발 맞춰 미니 소시지 ‘키스틱 포켓몬’ 2종을 출시했다고 13일 밝혔다.신제품은 75g과 500g 2종으로 출시됐으며 패키지 디자인에 인기 포켓몬의 모습을 넣어 주목도를 높이고 75g 제품에는 ‘포켓몬 스티커’, 500g 제품에는 ‘포켓몬 카드’를 넣어",
+        "excerptSha256": "6cd7989f19fffc36bef5ba654e9fd6dcfeb8356f7f0cf83bf7ac36570a1d1ac2",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+        "date": "2016-10",
+        "precision": "month",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
+      }
+    },
+    {
+      "observationId": "obs-newsworks-reviewed-dates-20261023-65823040-boundary",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "queryUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+      "retrievedAt": "2026-10-23",
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported date/precision/locality transfer"
+      },
+      "expectedIdentifiers": [
+        "2016-10"
+      ],
+      "validatesEdges": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
+      ],
+      "outcome": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision.",
+      "rawRecordRef": "inline-record",
+      "rawRecordHash": "sha256:e1bba71907cf32d92b60fa1f1e5a5ad3bdf7e2dedd7e693c3a60bcb5fab00fec",
+      "rawRecord": {
+        "sourceId": "newsworks-reviewed-dates-20261023-65823040",
+        "sourceUrl": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+        "retrievedAt": "2026-10-23",
+        "captureMethod": "HTTP response bytes",
+        "responseSha256": "181d19c78e83163f61ad4ffd82116ca84059bb042840bbfb3c4910411cb5e01c",
+        "responseHashScope": "file as fetched, before any line-ending normalization or redaction",
+        "retainedSha256": "83e01cd2aeeafea208c89200c16f1413222cc4f6d9dbaaf885bb63424e9ac33e",
+        "retainedPath": "verification/evidence/release-dates-20261023/asia-promos/kr-newsworks-87040-lottefood-kisstick-pokemon-20161013.html",
+        "excerpt": "롯데푸드는 최근 다시 열풍이 불고 있는 포켓몬의 인기에 발 맞춰 미니 소시지 ‘키스틱 포켓몬’ 2종을 출시했다고 13일 밝혔다.신제품은 75g과 500g 2종으로 출시됐으며 패키지 디자인에 인기 포켓몬의 모습을 넣어 주목도를 높이고 75g 제품에는 ‘포켓몬 스티커’, 500g 제품에는 ‘포켓몬 카드’를 넣어",
+        "excerptSha256": "6cd7989f19fffc36bef5ba654e9fd6dcfeb8356f7f0cf83bf7ac36570a1d1ac2",
+        "excerptHashScope": "UTF-8 bytes of the excerpt",
+        "nativeQualifier": "Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13)",
+        "date": "2016-10",
+        "precision": "month",
+        "approximate": false,
+        "field": "source-native availability date",
+        "scope": "Lotte Foods launched Kisstick Pokémon with a Pokémon card in the 500 g pack (reported 2016-10-13); Namu-wiki and Pokumon attribute 163-167/XY-P to the Kisstick card pack, the owner's photograph SPEC-0031 prints ©2016, and 160/XY-P dates the series to after 2016-07-26. The collection owner decided on 2026-10-23 to date the card 2016-10. The articles name no card, so only the month is applied; the former year 2017 came from Pokumon alone.",
+        "limits": "Date only, for the named market and product; other markets, channels, finishes and card identity are outside scope."
       }
     }
   ],
@@ -22668,7 +24607,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "product"
       ]
     },
@@ -22725,6 +24663,19 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2079740614/2079740614.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2087744043/2087744043.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -22733,6 +24684,19 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2101800294/2101800294.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -22789,6 +24753,19 @@
       ]
     },
     {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2132953765/2132953765.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2144873798/2144873798.jpg",
       "providerId": "cardmarket-listing-photo",
       "surfaceId": "cardmarket-listing-photos",
@@ -22797,6 +24774,32 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2185415228/2185415228.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://marketplace-article-scans.s3.cardmarket.com/2188224337/2188224337.jpg",
+      "providerId": "cardmarket-listing-photo",
+      "surfaceId": "cardmarket-listing-photos",
+      "capabilityEdgeIds": [
+        "cardmarket-listing-photo-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -23736,6 +25739,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://edaily.co.kr/News/Read?mediaCodeNo=257&newsId=01541606612812592",
+      "providerId": "edaily",
+      "surfaceId": "edaily-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "edaily-reviewed-dates-20261023-65823040-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -24753,7 +26768,35 @@
       ]
     },
     {
+      "sourceKey": "https://www.youtube.com/watch?v=UklA52rTpkc",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.youtube.com/watch?v=t0aMSK32ymQ&t=346s",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://youtu.be/-tzXb0bKuE0?t=176",
       "providerId": "inspected-specimen",
       "surfaceId": "inspected-specimens",
       "capabilityEdgeIds": [
@@ -24776,6 +26819,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "artist"
+      ]
+    },
+    {
+      "sourceKey": "https://kartenbasis.de/products/maskerade-im-zwielicht-3er-blister-deutsch",
+      "providerId": "kartenbasis",
+      "surfaceId": "kartenbasis-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "kartenbasis-reviewed-dates-20261023-e716bb22-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -24836,6 +26891,56 @@
       "surfaceId": "marumiya-2015-jp-campaign-date",
       "capabilityEdgeIds": [
         "marumiya-2015-jp-campaign-date-early-july-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://www.micromania.fr/p/deck-pokemon-deck-des-championnats-du-monde-2023-138539.html",
+      "providerId": "micromania",
+      "surfaceId": "micromania-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "micromania-reviewed-dates-20261023-80cf95fe-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://mycomics.it/shop/collezione-con-spilla-pin-collection-snorlax",
+      "providerId": "mycomics",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "mycomics-reviewed-dates-20261023-27c7591e-positive",
+        "mycomics-reviewed-dates-20261023-19865833-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://mycomics.it/shop/crepuscolo-mascherato-blister-3-buste-con-carta-promo-snorlax-pokemon-scarlatto-e-violetto-italiano",
+      "providerId": "mycomics",
+      "surfaceId": "mycomics-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "mycomics-reviewed-dates-20261023-27c7591e-positive",
+        "mycomics-reviewed-dates-20261023-19865833-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://www.newsworks.co.kr/news/articleView.html?idxno=87040",
+      "providerId": "newsworks",
+      "surfaceId": "newsworks-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "newsworks-reviewed-dates-20261023-65823040-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -28601,6 +30706,20 @@
       ]
     },
     {
+      "sourceKey": "https://pokemoncard.co.kr/_news?id=10333",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://pokemoncard.co.kr/card/105",
       "providerId": "pokemon-card-korea",
       "surfaceId": "kr-reviewed-research-dates-20261007",
@@ -28618,6 +30737,20 @@
       "surfaceId": "kr-reviewed-research-dates-20261007",
       "capabilityEdgeIds": [
         "kr-reviewed-research-dates-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
+      "sourceKey": "https://pokemoncard.co.kr/card/166",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-reviewed-dates-20261023-d6202bd1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-f9a028a1-positive",
+        "pokemon-card-korea-reviewed-dates-20261023-21227d52-positive"
       ],
       "absenceEdgeIds": [],
       "dimensions": [
@@ -31815,6 +33948,18 @@
       ]
     },
     {
+      "sourceKey": "https://www.pokemon.com/es/noticias/pasate-por-la-tienda-de-juegos-de-tu-zona-para-recibir-paquetes-de-premio-de-play-pokemon",
+      "providerId": "pokemon-official",
+      "surfaceId": "pokemon-official-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "pokemon-official-reviewed-dates-20261023-125e07bd-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://www.pokemon.com/it/gcc/archivio-carte/series/pl2/111",
       "providerId": "pokemon-official",
       "surfaceId": "tpci-localized-card-archive",
@@ -32199,6 +34344,18 @@
       ]
     },
     {
+      "sourceKey": "https://pokezentrum.de/pokemon-karten-news/pokemon-sammelkartenspiel-release-kalender-2024",
+      "providerId": "pokezentrum",
+      "surfaceId": "pokezentrum-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "pokezentrum-reviewed-dates-20261023-39613eb1-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
+      ]
+    },
+    {
       "sourceKey": "https://pokumon.com/?s=snorlax+s-p",
       "providerId": "pokumon",
       "surfaceId": "pokumon-search",
@@ -32304,6 +34461,7 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "card-existence",
+        "finish",
         "rarity"
       ]
     },
@@ -33647,6 +35805,20 @@
       ]
     },
     {
+      "sourceKey": "https://http2.mlstatic.com/D_NQ_NP_2X_789575-MLB107387224822_032026-F-carta-pokemon-snorlax-gx-sm05--2016.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/-CMAAeSwIqVqH55x/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -34390,6 +36562,20 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/gDsAAeSwgWJqottF/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/gNEAAeSwl1JpRHfS/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -34553,6 +36739,20 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/nJMAAeSwwTlqhGw3/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/nXkAAeSwXldp1TEr/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -34676,6 +36876,20 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/t-4AAOSwhQJkA8lU/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/t40AAeSwwhdqdfRJ/s-l1600.webp",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -34689,7 +36903,35 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/ti0AAeSw32lqottG/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/vGMAAeSwXyBqfGs1/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/vakAAeSwaR9q3r6a/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -35289,6 +37531,19 @@
       ]
     },
     {
+      "sourceKey": "https://scontent-fra5-1.cdninstagram.com/v/t51.82787-15/670622953_17995637768946386_5096497440346194128_n.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://shopee.co.th/product/136710401/41979577897",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -35424,6 +37679,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.instagram.com/p/DXWbxTzjgY1",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://www.lotticards.de/media/image/product/223694/lg/relaxo-generationen-58-83-rare-deutsch-nm.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -35477,6 +37745,18 @@
         "finish",
         "finish-override",
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://lamiacopia.sodip.it/prodotto/scambia-gioca-verde-mazzi-dei-campionati-mondiali-2023-4-soggetti-pokemon-n-0270",
+      "providerId": "sodip",
+      "surfaceId": "sodip-reviewed-dates-20261023",
+      "capabilityEdgeIds": [
+        "sodip-reviewed-dates-20261023-fe55f905-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {
@@ -35833,7 +38113,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -36619,7 +38898,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -37175,7 +39453,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -37862,7 +40139,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -38477,7 +40753,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -39261,7 +41536,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },

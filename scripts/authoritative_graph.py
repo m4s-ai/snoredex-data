@@ -234,6 +234,36 @@ def _standalone_printing_target(by_semantic, payload):
     return previous["physicalPrintingId"], None
 
 
+def _previous_finish_claims_by_semantic(graph: dict[str, Any]) -> dict[str, str]:
+    return {
+        str(row["payload"]["semanticPrintingId"]): str(row["entityId"])
+        for row in graph["entities"]
+        if row.get("entityType") == "candidate-claim"
+        and (row.get("payload") or {}).get("sourceKind") == "finish-printing-record"
+        and (row.get("payload") or {}).get("semanticPrintingId")
+    }
+
+
+def _retained_printing_ids(scope, printing, previous_physical, previous_claims, previous_claim_by_physical):
+    """Physical and claim ids, retained across the unknown -> standard card-size default.
+
+    Standard is the defined card size (owner decision 2026-10-29), so a printing whose size was
+    once recorded as unknown is the same printing now that it reads standard; it keeps its ids.
+    """
+    key = printing_semantic_key(scope, printing)
+    semantic_id = stable_printing_id(key)
+    if key not in previous_physical and semantic_id not in previous_claims \
+            and printing.get("cardSize") == "standard":
+        legacy_key = printing_semantic_key(scope, {**printing, "cardSize": "unknown"})
+        legacy_id = stable_printing_id(legacy_key)
+        if legacy_key in previous_physical or legacy_id in previous_claims:
+            key, semantic_id = legacy_key, legacy_id
+    physical_id = previous_physical.get(key, f"PHYSICAL:{semantic_id}")
+    claim_id = previous_claim_by_physical.get(physical_id) or previous_claims.get(semantic_id) \
+        or f"CLAIM:finish:{semantic_id}"
+    return physical_id, claim_id
+
+
 def _specimen_projection_reason(target, standalone_target, release_id):
     if standalone_target:
         return f"physical observation establishes standalone printing for {release_id}"
@@ -281,6 +311,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         and row.get("payload", {}).get("sourceKind") == "finish-printing-record"
         and row.get("payload", {}).get("semanticPrintingId")
     }
+    previous_finish_claims = _previous_finish_claims_by_semantic(graph)
     previous_physical_by_semantic: dict[str, str] = {}
     previous_claim_by_physical: dict[str, str] = {}
     for row in graph["entities"]:
@@ -315,9 +346,9 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
             semantic_key = printing_semantic_key(semantic_scope, printing)
             semantic_id = stable_printing_id(semantic_key)
-            physical_id = previous_physical_by_semantic.get(semantic_key, f"PHYSICAL:{semantic_id}")
-            claim_id = previous_claim_by_physical.get(
-                physical_id, f"CLAIM:finish:{semantic_id}"
+            physical_id, claim_id = _retained_printing_ids(
+                semantic_scope, printing, previous_physical_by_semantic,
+                previous_finish_claims, previous_claim_by_physical,
             )
             confirmed = printing.get("verificationStatus") == "confirmed"
             if confirmed and not release_id:

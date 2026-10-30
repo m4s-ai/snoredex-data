@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>포켓몬 카드 게임</title>
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+         <link href="/v2/css/bootstrap.css?v2" rel="stylesheet">
+        <link href="/v2/css/default.css" rel="stylesheet">
+        <link href="/v2/css/animate.css" rel="stylesheet">
+        <link href="/v2/css/style-magnific-popup.css" rel="stylesheet">
+        <link href="/v2/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/v2/css/fontium.css" rel="stylesheet">
+        <link href="/v2/css/style1.css?85" rel="stylesheet">
+        <link href="/v2/css/layerslider.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"
+              type="text/css">
+	    <link rel="stylesheet" href="/v3/css/commoncardsub.css?t=1792782713">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/v2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.magnific-popup.min.js"></script>
+
+                    <meta name="keywords" content="포켓몬">
+            <meta name="description" content="포켓몬 카드 게임 공식 사이트 입니다.">
+            <meta property="og:title" content="포켓몬 카드 게임"/>
+            <meta property="og:url" content="http://pokemoncard.co.kr"/>
+            <meta property="og:site_name" content="Pokémon Card Game"/>
+            <meta property="og:description" content="포켓몬 카드 게임의 한국 공식사이트, 신제품 소개 및 카드 정보, 포켓몬스쿨 일정, 대회 안내 제공">
+            <meta property="og:image"
+                  content="/s3.php?key=home%2Fdata%2Fdata1_www%2F2016%2F06%2F2016-06-20_00-44-39-61799-1466351079.jpg"/>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+
+    <script src="/v3/js/common.js"></script>
+         <script type="text/javascript" src="/v2/js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.scrollTo-min.js"></script>
+        <script type="text/javascript" src="/v2/js/SmoothScroll.js"></script>
+        <script type="text/javascript" src="/v2/js/wow.js"></script>
+        <script type="text/javascript" src="/v2/js/custom.js"></script>
+        <script type="text/javascript" src="/v2/js/plugins.js"></script>
+        <script type="text/javascript" src="/v2/js/greensock.js"></script>
+        <script type="text/javascript" src="/v2/js/layerslider.transitions.js"></script>
+        <script type="text/javascript" src="/v2/js/layerslider.kreaturamedia.jquery.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.sticky.js"></script>
+        <script type="text/javascript" src="/v2/js/cat_list.js?78"></script>
+        <script type="text/javascript" src="/v2/js/function.js"></script>
+        <script type="text/javascript" src="/v2/js/formData.js"></script>
+       <script type="text/javascript"
+                src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#social_rt").sticky({topSpacing: 100});
+
+                var cwpc = $("#carousel-indicators-pc").width();
+                var cwmo = $("#carousel-indicators-mobile").width();
+
+                $("#carousel-indicators-pc").css("margin-left","-" + (cwpc / 2) +"px");
+                $("#carousel-indicators-mobile").css("margin-left","-" + (cwmo / 2) +"px");
+
+                var ch = $("#carousel-example-index").height();
+
+                $(".carousel-control-right").css("top",( (ch + 76) / 2 * -1 ) );
+                $(".carousel-control-left").css("top",( (ch + 76) / 2 * -1 ) );
+
+                var ww = $(document).width() - 24;
+                var calcH = (ww * 298) / 408;
+                $(".myinfo-box-mobile .tab-content .tab-pane").height(calcH);
+
+            });
+        </script>
+                 
+        <!-- Facebook Pixel Code -->
+
+        <script>
+
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+
+                'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '2037312413208523');
+
+            fbq('track', 'PageView');
+
+        </script>
+
+        <noscript><img height="1" width="1" style="display:none"
+                       src="https://www.facebook.com/tr?id=2037312413208523&ev=PageView&noscript=1"/></noscript>
+
+        <!-- End Facebook Pixel Code -->
+
+        <meta name="google-site-verification" content="b-u0TiON-ceDw-l4NiwkleAGnrA0TGgRu-_YKJYliAY"/>
+        <meta name="naver-site-verification" content="3fb143ded9e75a67d2ed85842b89b35422496d58"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142581117-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-142581117-1');
+        </script>
+        <script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/kas/static/kp.js"></script>
+        <script type="text/javascript">kakaoPixel('327812162506475690').pageView();</script>
+        <!-- ADN Tracker[공통] start -->
+        <script src="//fin.rainbownine.net/js/across_adn_2.0.1.js" type="text/javascript"></script>
+        <!-- ADN Tracker[공통] end -->
+
+</head>
+
+<body>
+   <!-- ADN Tracker[방문자] start -->
+    <script type="text/javascript">
+    window.addEventListener('load', function() {
+        var across_adn_contain = new fn_across_adn_contain();
+        var across_adn_param = [];
+        across_adn_param = {"ut":"Home","ui":"108221"};
+        across_adn_contain.init(across_adn_param);
+    });
+    </script>
+    <!-- ADN Tracker[방문자] end -->
+    
+<div id="wrap">
+	<!-- header -->
+
+
+	<header id="hd" class="page-pokemon page-card">
+		<h1>
+			<a href="/main"><img src="/v3/img/card_main_logo.png" alt="pokemon 포켓몬 카드 게임"></a>
+		</h1>
+		<div class="container flex-justify-space">
+			<button type="button" class="js-mn no-style" title="메뉴열기/닫기">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<nav id="gnb">
+				<ul class="gnb">
+
+
+					<li class="my-news d-lg-none d-block">
+											<div>
+							<a href="/member/login?next=/cards/detail/SMP000000191" class="badge badge-muted2 badge-round">로그인</a>
+						</div>
+                           
+
+					</li>
+
+
+
+					<li>
+						<a href="/news"  >새소식</a>
+					</li>
+					<li>
+						<a href="/card/category/info1" >제품정보</a>
+					</li>												 
+					<li>
+						<a href="/card/play" >놀이방법</a>
+					</li>
+					<li>
+						<a href="/card/category/event" >이벤트</a>
+					</li>
+					<li>
+						<a href="/cards"  class="active">카드검색</a>
+					</li>
+					<li>
+						<a href="/recipe" >덱레시피</a>
+					</li>
+					<li>
+						<a href="/players" >플레이어즈</a>
+					</li>
+					<li>
+						<a href="https://pokemon-reservation.co.kr/home/selectReservStatusList.do">예약</a>
+					</li>
+
+					<li class="d-lg-none d-block">
+						<a href="https://www.pokemonkorea.co.kr/pokedex" target="_blank"><img src="/v3/img/modal_alet.jpg" alt="" class="mr-2">포켓몬 공식 사이트</a>
+					</li>
+					<li class="d-lg-none d-block">
+						<a href="http://www.pokemonstore.co.kr" target="_blank"><img src="/v3/img/icon/icon_poke.png" alt="" class="mr-2">포켓몬 스토어</a>
+					</li>
+
+
+				</ul>
+			</nav>
+
+			<ul id="acc">
+
+
+									<li>
+					<a href="/member/login?next=/cards/detail/SMP000000191"><i class="icon-login"></i>로그인</a>
+				</li>
+
+				
+				<li>
+					<button type="button" class="no-style collapsed" data-toggle="collapse" data-target="#search"><i class="icon-search"></i>카드검색</button>
+				</li>
+			</ul>
+ 
+ 
+		</div>
+		<div class="btn-store d-lg-flex d-none">
+			<a href="https://pokemonkorea.co.kr/" class="pokehome" target="_blank"><i class="icon-pokehome">포켓몬 공식 사이트</i></a>
+			<a href="http://www.pokemonstore.co.kr" class="pokestore" target="_blank"><i class="icon-pokestore">포켓몬 스토어</i></a>
+		</div>
+		<div id="search" class="collapse">
+		<form id="header-search-form" action="/cards" method="get">
+			<div class="search-wrp">
+				<input type="text" id="header-search-input"   name="s" placeholder="카드검색 (포켓몬 이름 혹은 텍스트를 입력하세요)" value="">
+				<button type="button" id="header-search_text_submit" class="no-style btn-search"><p class="sr-only">카드검색</p></button>
+				<button tabindex="button" data-toggle="collapse" data-target="#search" class="no-style btn-close"><p class="sr-only">닫기</p></button>
+			</div>
+		</form>
+		</div>
+	</header>
+    <script>
+        jQuery(window).load(function () {
+            var ww = $(document).width();
+
+            if(ww < 640){
+                $("#header-search-input").attr("placeholder","포켓몬 이름 혹은 텍스트를 입력하세요.");
+                if($("#search_text").length > 0){
+                    $("#search_text").attr("placeholder","포켓몬 이름 혹은 텍스트를 입력하세요.");
+                }
+            }
+            $(document).on("click", "button#header-search_text_submit", function (e) {
+                $("#header-search-form").submit();
+            });
+
+            $(document).on("click", "button#button-top-menu", function (e) {
+                if($("#navbar-search-box").hasClass("in") ){
+
+                    $("#button-top-search").click();
+
+                }
+
+            });
+
+        });
+
+    </script>
+ 
+
+<div id="ct" class="sub-card">
+	<script type="text/javascript" src="/v2/js/jquery.range-min.js"></script>  
+	<script type="text/javascript" src="/v2/js/select2.min.js"></script>
+	<link href="/v2/css/jquery.range.css" rel="stylesheet"> 
+	<link href="/v2/css/select2.min.css" rel="stylesheet" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" rel="stylesheet" />
+	
+	<link href="/v2/css/cards2.css?202610241" rel="stylesheet">
+	<style>
+		#no_wrap_by_admin .small_type_sm, #no_wrap_by_admin .tooltip {
+			display: none !important;
+		}
+		
+		.detail_wrap .header { 
+		    background-color: #D6D5D8; 
+		}	
+		.pokemon-info {
+		    background-color: #C1B6B1;
+		}
+		.pokemon-stats {
+		    background-color: #D6D5D8;
+		} 
+
+
+
+
+
+
+
+
+	</style>
+
+	<div id="heaer_top" class="container"> 
+	    <div class="row">	    
+			<div class="col-md-3 col-sm-4 txt_centre">
+
+ 
+				<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fwmimages%2FSM%2FPROMO%2FSMP_191.png&w=512" class="feature_image"> 
+				<div class="pre_info_wrap"> 
+			        <img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Fpromo.png"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2FC.png"><span class="p_num">140/SM-P<span id="no_wrap_by_admin">  </span> </span>				</div> 
+
+
+
+
+				<p class="illustrator">일러스트<br />Tomokazu Komiya</p>			</div>
+
+ 
+			<div class="col-md-9 col-sm-8">
+				<div class="detail_wrap">
+					<div class="header">
+						<div class="col-md-6 txt_left">
+					        <span class="card-hp title">이브이&잠만보 GX</span>
+					        <span class="card-hp level"></span>
+						</div>
+				        <div class="col-md-6 txt_right 11">
+					        					        <span class="card-hp">
+						        <span class="hp_num">HP270</span> 
+						        <img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색">					        </span>
+					        				        </div> 
+					</div>
+					<div class="clearfix"></div>
+
+
+					<div class="pokemon-info"> 카드 종류 : 기본 포켓몬 |  TAG TEAM GX</div>					<div class="clearfix"></div>
+										<div class="pokemon-abilities">
+																		<div class="ability mgt0">  
+														<div class="area-parent">
+								<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"> 
+								<h4 class="left label"><span class="skil_name">응원</span> </h4>
+							</div>
+							<p>자신의 패에 있는 에너지를 1장 자신의 포켓몬에게 붙인다.</p>													</div> 
+																								<div class="ability ">  
+														<div class="area-parent">
+								<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"> 
+								<h4 class="left label"><span class="skil_name">덤프프레스</span> <span class="plus">120+</span></h4>
+							</div>
+							<p>상대의 배틀 포켓몬이 진화 포켓몬이라면 120데미지를 추가한다.</p>													</div> 
+																								<div class="ability ">  
+														<div class="area-parent">
+								<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b" data-toggle="tooltip" data-placement="right" title="무색"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Fplus.png" class="type_b" data-toggle="tooltip" data-placement="right" title="플러스"> 
+								<h4 class="left label"><span class="skil_name">메가톤프렌즈 GX</span> <span class="plus">210</span></h4>
+							</div>
+							<p>에너지 1개가 추가로 붙어 있다면 자신의 패가 10장이 되도록 덱을 뽑는다. (대전 중 자신은 GX기술을 1번만 사용할 수 있다.)</p>													</div> 
+																								<div class="ability ">  
+														<div class="area-parent">
+																
+								<h4 class="left label"><span class="skil_name">TAG TEAM 룰</span> </h4>
+							</div>
+							<p>TAG TEAM이 기절한 경우
+상대는 프라이즈를 3장 가져간다.</p>													</div> 
+												 					
+					</div>
+					<div class="clearfix"></div> 
+					<div class="pokemon-stats">
+						<div class="stat">
+							<h4>약점</h4>
+							<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype6.png" class="type_b ptn" data-toggle="tooltip" data-placement="right" title="격투"> <span>×2</span>						
+						</div>
+						<div class="stat">
+							<h4>저항력</h4>
+							 						
+						</div>
+						<div class="stat" data-toggle="tooltip" data-placement="top" title="후퇴 : 4">
+							<h4>후퇴</h4>
+							<div class="card-energies">
+															<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b ptn">
+															<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b ptn">
+															<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b ptn">
+															<img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fimages%2Fsymbol%2Ftype9.png" class="type_b ptn">
+							 
+							</div>
+						</div>
+					</div>
+					  
+					<div class="pokemon-detail txt_centre">
+						<div class="col-xs-12">
+                            <div><a href="/cards?s=「태그볼트」 「나이트유니슨」 각 1BOX 구매자 프로모 카드" class="search_href">「태그볼트」 「나이트유니슨」 각 1BOX 구매자 프로모 카드</a></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+					</div>
+					<div class="pokemon-detail txt_centre">
+						<div class="col-md-4 col-xs-5">
+							<!---->
+																											</div>
+						<div class="col-md-8 col-xs-7 colsit">
+														
+							<div class="txt_centre">
+								<a href="https://www.pokemonkorea.co.kr/pokedex" class="btn btn-primary btn-sm">
+								<!--a href="https://www.pokemonkorea.co.kr/pokedex/single/" class="btn btn-primary btn-sm"-->
+									<i class="fa fa-share" aria-hidden="true"></i> 포켓몬 도감에서 알아보기
+								</a>
+							</div>
+														 
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+	    </div>		
+	</div>
+
+
+
+		<div id="detail_card_wrap" class="no_pd mgt30 ">
+		<div class="container">
+			<h1>관련카드</h1>
+			<div id="card-bottom-wrap">
+
+ 
+				<div class="card"><a href="/cards/detail/BS2019001106"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fwmimages%2FSM%2FSM9%2FSM9_106.png&w=300"></a></div><div class="card"><a href="/cards/detail/BS2019001066"><img src="/s3.php?key=home%2Fdata%2Fcards.image_www%2Fdata%2Fwmimages%2FSM%2FSM9%2FSM9_066.png&w=300"></a></div> 
+ 
+
+
+			</div>
+		</div>
+	</div>
+	
+<script>
+
+ 
+	$('[data-toggle="tooltip"]').tooltip();
+
+    var ww = $(document).width();
+
+    var no_columns = 4;
+    if(ww < 700) {
+        no_columns = 2;
+
+        $('#card-bottom-wrap').pinterest_grid({
+            no_columns: no_columns,
+            padding_x: 10,
+            padding_y: 10,
+            margin_bottom: 50,
+            single_column_breakpoint: 700
+        });
+
+    } else if( ww < 990){
+        no_columns = 4;
+
+        $('#card-bottom-wrap').pinterest_grid({
+            no_columns: no_columns,
+            padding_x: 10,
+            padding_y: 10,
+            margin_bottom: 50,
+            single_column_breakpoint: 700
+        });
+    }
+
+
+
+
+</script> 
+	</div>
+	
+	<footer id="ft" class="page-pokemon">
+		<div class="ft-top">
+			<div class="container flex-justify-space">
+				<a href="https://www.pokemonkorea.co.kr" target="_blank"><img src="/v3/img/ft_logo.png" alt="pokemon korea, inc."></a>
+				<ul class="list-split d-lg-block d-none">
+									<li><a href="https://www.pokemonkorea.co.kr/company" target="_blank">회사소개</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/business" target="_blank">사업내용</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/partner" target="_blank">제휴안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/terms" target="_blank">이용약관</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/privacy" target="_blank">개인정보처리방침</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/email" target="_blank">이메일무단수집거부</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/domestic_representative" target="_blank">대한민국 내 대리인 안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/faq" target="_blank">고객센터</a></li>
+								</ul>
+			</div>
+			<a href="" class="btn-top"><p class="sr-only">go top</p></a>
+		</div>
+		<div class="ft-mdl">
+			<div class="container flex-justify-space">
+				<div class="d-lg-block d-none">
+					<p>(주)포켓몬코리아&nbsp;&nbsp; 경기도 용인시 수지구 신수로 801, 4층 </p>
+					<ul class="list-split">
+						<li>대표이사:임재범</li>
+						<li>개인정보관리책임자:임재범</li>
+						<li>사업자등록번호:113-86-07676</li>
+					</ul>
+				</div>
+				<ul class="d-flex">
+					<li><a href="https://www.facebook.com/PokemonCoKr" target="_blank" class="icon-face">facebook</a></li>
+					<!-- <li><a href="https://story.kakao.com/ch/pokemonkorea" target="_blank" class="icon-kakao">kakakostory</a></li> -->
+					<li><a href="https://instagram.com/pokemon_korea_official?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" class="icon-insta">instagram</a></li>
+					<li><a href="https://www.youtube.com/playlist?list=PLi-MwfPpkXIK9BlTTdsy_7NwbNkJT_GCY" target="_blank" class="icon-youtube">youtube</a></li>
+					<li><a href="http://www.pokemonstore.co.kr" target="_blank" class="icon-pokemon">pokemon</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="ft-btm">
+			<div class="container">
+				<ul class="list-mn d-lg-none d-block">
+									<li><a href="https://www.pokemonkorea.co.kr/company">회사소개</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/business">사업내용</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/partner">제휴안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/terms">이용약관</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/privacy">개인정보처리방침</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/email">이메일무단수집거부</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/domestic_representative">대한민국 내 대리인 안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/faq">고객센터</a></li>
+								</ul>
+				<div class="row flex-lg-row-reverse flex-justify-space"> 
+									<div class="copylight">
+						<ul>
+							<li></li><li><font color="#ffffff"><br></font></li><li><span style="font-size: 14px;"><font color="#ffffff">©2026 Pokémon. ©1995-2026 Nintendo/Creatures Inc./GAME FREAK inc.</font></span></li><li><span style="font-size: 14px;"><font color="#ffffff">©Nintendo, Creatures, GAME FREAK, TV Tokyo, ShoPro, JR Kikaku. ©Pokémon. ©1998-2020 PIKACHU PROJECT.　&nbsp;&nbsp;</font></span></li><li><span style="font-size: 14px;"><font color="#ffffff">포켓몬스터, 포켓몬, Pokémon, 몬스터볼, Nintendo Switch, Nintendo 3DS, Nintendo DS는 Nintendo의 상표입니다.</font></span></li><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span></ul><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><p><font face="Noto Sans KR" style="" color="#ffffff"><span style="font-size: 14px;">본 사이트의 콘텐츠에 대한 무단 복제 및 도용을 금하며 </span><br class="d-lg-none d-block"><span style="font-size: 14px;">이를 어길 시 법적 조치를 받을 수 있습니다.</span></font></p><span style="font-size: 14px;"><font color="#ffffff">
+					</font></span></div><span style="font-size: 14px;"><font color="#ffffff">
+					</font></span><div class="customer"><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><div class="d-flex"><span style="font-size: 14px;">
+							</span><p><font face="Noto Sans KR" style="" color="#ffffff"><span style="font-size: 14px;">고객센</span><span style="font-size: 14px;">터</span></font></p><span style="font-size: 14px;">
+							</span><ul class="d-lg-block d-none"><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">운영시간 : 평일 15시 ~ 18시</span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">031-272-0108&nbsp;</span></font></li><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;"><br></span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">카드 게임 및 카드 게임 이벤트 : 1588-4273</span></font></li><li></li><li><font color="#ffffff" face="Noto Sans KR"><span style="font-size: 14px;">[redacted-email]</span></font></li><li><font color="#ffffff" face="Noto Sans KR"><span style="font-size: 14px;"><br></span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+							</font></span></ul><span style="font-size: 14px;">
+							</span><ul class="d-lg-none d-block"><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">운영시간 : 평일 15시 ~ 18시<br>031-272-0108</span></li><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">카드 게임 및 카드 게임 이벤트 : 1588-4273</span></li><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">[redacted-email]</span></li><span style="font-size: 14px;">
+							</span></ul><span style="font-size: 14px;">
+						</span></div><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><p><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">※당사에서는 Pokémon GO 관련 문의는 대응하지 않습니다.&nbsp;</span></font></p>
+					</div>				</div>
+			</div>
+		</div>
+	</footer>
+ 
+		</div>
+	</footer>
+	<div class="d-lg-block d-none">
+		<!-- ADN 클로징패널 PC 설치  start -->
+		<script type="text/javascript">
+		var adn_panel_param = adn_panel_param || [];
+		adn_panel_param.push([{
+		ui:'108221',	
+		ci:'1082210002',
+		gi:'113535'
+		}]);
+		</script>
+		<script type="text/javascript" async src="//fin.rainbownine.net/js/across_adn_closed_pc_ad_1.0.4.js"></script>
+		<!-- ADN 클로징패널 PC 설치 end -->
+	</div>
+	<div class="d-lg-none d-block">
+		<!-- ADN 클로징패널 MO 설치  start -->
+		<script type="text/javascript">
+		var adn_mobile_panel_param = adn_mobile_panel_param || [];
+		adn_mobile_panel_param.push([{
+		ui:'108221',	
+		ci:'1082210001',
+		gi:'113536'
+		}]);
+		</script>
+		<script type="text/javascript" async src="//fin.rainbownine.net/js/across_adn_closed_mobile_ad_1.0.4.js"></script>
+		<!-- ADN 클로징패널 MO 설치 end -->
+	</div>
+	
+<script>
+var swiperVisual = new Swiper('.sect-visual', {
+	loop: true,
+	centeredSlides: true,
+	slidesPerView: 1.4,
+	spaceBetween: 0,
+	loopedSlides: 7,
+	navigation: {
+		nextEl: '.sect-visual .swiper-button-next',
+		prevEl: '.sect-visual .swiper-button-prev',
+	},
+	breakpoints: {
+		991: {
+			slidesPerView: 1.2,
+		},
+	},
+});
+var swiperMov = new Swiper('.sect-mov-swiper .container', {
+	slidesPerView: 1.5,
+	spaceBetween: 150,
+	centeredSlides: true,
+	loop: true,
+	loopedSlides: 7,
+	navigation: {
+		nextEl: '.sect-mov-swiper .d-lg-block .swiper-button-next',
+		prevEl: '.sect-mov-swiper .d-lg-block .swiper-button-prev',
+	},
+	pagination: {
+        el: '.sect-mov-swiper .d-lg-none .swiper-pagination',
+      },
+	breakpoints: {
+		991: {
+			slidesPerView: 1,
+			spaceBetween: 0,
+		},
+	},
+});
+var sect1Menu = ['플레이어즈 랭킹', '코리안리그 랭킹']
+var swiperBanner = new Swiper('.sect-rank .swiper-container', {
+	slidesPerView:2,
+	breakpoints: {
+		991: {
+			slidesPerView: 1.1,
+			spaceBetween: 20,
+			pagination: {
+				el: '.sect-rank .swiper-pagination-name',
+				clickable: true,
+				renderBullet: function(index, className) {
+					return '<span class="' + className + '">' + '<span class="name">' + (sect1Menu[index]) + '</span>' + '</span>';
+				},
+			},
+		},
+	}
+});
+var swiper = new Swiper('.sect-info .swiper-container', {
+	slidesPerView:7,
+	spaceBetween: 10,
+	centeredSlides: true,
+	loopedSlides: 150,
+	loop: true,
+	navigation: {
+	nextEl: '.sect-info .swiper-button-next',
+	prevEl: '.sect-info .swiper-button-prev',
+	},
+	breakpoints: {
+		991: {
+			slidesPerView: 2.8,
+			spaceBetween: 15,
+		},
+	}
+});
+$(".slider01").ionRangeSlider({
+	type: "double",
+	min: 0,
+	max: 340,
+	from: 0,
+	to: 340,
+	});
+$(".slider02").ionRangeSlider({
+	type: "double",
+	grid: true,
+	grid_num: 5,
+	min: 0,
+	max: 5,
+	from: 0,
+	to: 5,
+	});
+$(document).ready(function(){
+	if($(window).width() < 991){
+		$('input.js-place01').attr('placeholder','카드 검색 (포켓몬 이름 혹은 텍스트)');
+	};
+});
+$(window).on('load',function(){
+   $('.btn-top').click(function(){
+      $('html, body').animate({'scrollTop': $('#ct').offset().top - $('#hd').outerHeight() }, 400);
+
+      return false;
+   });
+});
+
+</script>
+</div>
+</body>
+</html>
+
+ 
