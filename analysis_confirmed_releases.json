@@ -1,7 +1,7 @@
 {
  "schema": "snoredex-confirmed-releases",
  "schemaVersion": "1.0.0",
- "generated": "2026-10-28",
+ "generated": "2026-10-30",
  "note": "One row per card-variant-edition. confirmedLanguages holds only externally confirmed printings. finishByLanguage is product-mapped positive finish evidence and does not distinguish First Edition from Unlimited. Cards with a 1st-edition run appear twice (edition '1st Edition' then 'Unlimited'). rowId is the stable identity (setCode-number-variant-edition) and is independent of sort order. Use it for correction links, checklist scope and deep links, never the generated row number. datePrecision (year|month|day) is derived from the date value, dateApproximate says the value is not trusted at that precision, and dateSource identifies the reviewed source field when available. dateSort is the normalized full date for typed ordering. dateExact is retained as the deprecated inverse of dateApproximate. For '1st Edition' rows confirmedLanguages lists only the languages that received a 1st-edition run.",
  "variants": [
   {
@@ -18462,20 +18462,6 @@
      "productMappingStatus": "confirmed",
      "printings": [
       {
-       "printingId": "F0432-P01",
-       "finish": "holo",
-       "foilPattern": null,
-       "markings": [],
-       "distribution": null,
-       "cardSize": "jumbo",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0647.jpg",
-       "specimenIds": [
-        "SPEC-0647"
-       ]
-      },
-      {
        "printingId": "F0432-P02",
        "finish": "holo",
        "foilPattern": null,
@@ -21542,26 +21528,6 @@
        "productMapping": "mapped"
       },
       {
-       "printingId": "F0579-P02",
-       "finish": "holo",
-       "foilPattern": "cosmos",
-       "markings": [
-        {
-         "kind": "observed-marking",
-         "role": "distribution-promo",
-         "text": "Voltage Éclatant set logo"
-        }
-       ],
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0649.jpg",
-       "specimenIds": [
-        "SPEC-0649"
-       ]
-      },
-      {
        "printingId": "F0579-P03",
        "finish": "reverse-holo",
        "foilPattern": "tiled-type-symbol",
@@ -21609,26 +21575,6 @@
        "cardSize": "standard",
        "verificationStatus": "confirmed",
        "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0580-P02",
-       "finish": "holo",
-       "foilPattern": "cosmos",
-       "markings": [
-        {
-         "kind": "observed-marking",
-         "role": "distribution-promo",
-         "text": "Farbenschock set logo"
-        }
-       ],
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0648.jpg",
-       "specimenIds": [
-        "SPEC-0648"
-       ]
       },
       {
        "printingId": "F0580-P03",
@@ -21727,26 +21673,6 @@
        "cardSize": "standard",
        "verificationStatus": "confirmed",
        "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0581-P02",
-       "finish": "holo",
-       "foilPattern": "cosmos",
-       "markings": [
-        {
-         "kind": "observed-marking",
-         "role": "distribution-promo",
-         "text": "Voltaggio Sfolgorante set logo"
-        }
-       ],
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0650.jpg",
-       "specimenIds": [
-        "SPEC-0650"
-       ]
       },
       {
        "printingId": "F0581-P03",
@@ -25945,20 +25871,6 @@
        "productMapping": "mapped"
       },
       {
-       "printingId": "F0250-P02",
-       "finish": "holo",
-       "foilPattern": "cosmos",
-       "markings": [],
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0652.jpg",
-       "specimenIds": [
-        "SPEC-0652"
-       ]
-      },
-      {
        "printingId": "F0250-P03",
        "finish": "reverse-holo",
        "foilPattern": "tiled-type-symbol",
@@ -26006,20 +25918,6 @@
        "cardSize": "standard",
        "verificationStatus": "confirmed",
        "productMapping": "mapped"
-      },
-      {
-       "printingId": "F0251-P02",
-       "finish": "holo",
-       "foilPattern": "cosmos",
-       "markings": [],
-       "distribution": null,
-       "cardSize": "standard",
-       "verificationStatus": "confirmed",
-       "productMapping": "mapped",
-       "image": "verification/specimens/SPEC-0651.jpg",
-       "specimenIds": [
-        "SPEC-0651"
-       ]
       },
       {
        "printingId": "F0251-P03",
@@ -31051,7 +30949,8 @@
        "image": "verification/specimens/SPEC-0061.jpg",
        "specimenIds": [
         "SPEC-0061",
-        "SPEC-0612"
+        "SPEC-0612",
+        "SPEC-0660"
        ]
       }
      ]
@@ -31283,11 +31182,15 @@
        "printingId": "F0615-P02",
        "finish": "mirror-holo",
        "foilPattern": "master-ball",
-       "markings": [],
+       "markings": null,
        "distribution": null,
        "cardSize": "standard",
        "verificationStatus": "confirmed",
-       "productMapping": "mapped"
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0659.png",
+       "specimenIds": [
+        "SPEC-0659"
+       ]
       }
      ]
     },

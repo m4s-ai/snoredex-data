@@ -7,9 +7,9 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 747,
+      "sourceRecords": 749,
       "legacySetProfiles": 135,
-      "sourceFirstLocalSets": 157,
+      "sourceFirstLocalSets": 159,
       "releaseDateRecords": 104,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
@@ -19811,6 +19811,79 @@
         "denominatorPrefix": "",
         "numbering": "simplified-chinese",
         "basis": "The catalogue number carries the database prefix 'p'; the card prints the bare number over 006. Read from the printed face of retained card images: images/CSVH4C_p006_Snorlax_ex_888095.png (sha256 aca11478084f978196cad45a48bfc327f5a5987d14be2dc4d02cf41f81a9759c)."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-OWNER-XM2A-136-V1-RARITY-20261030",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "owner-attestation",
+      "providerRecordKey": "SET-SRC-OWNER-XM2A-136-V1-RARITY-20261030",
+      "retrieved": "2026-10-30",
+      "sourceUrl": null,
+      "raw": {
+        "localCode": "xm2a",
+        "locality": "KR",
+        "languages": [
+          "Korean"
+        ],
+        "scripts": [
+          "Hang"
+        ],
+        "printIds": [
+          "KR:xm2a:136/193:base"
+        ],
+        "providers": [
+          "owner-attestation"
+        ],
+        "sourceUrls": [],
+        "observedCollectorNumbers": [
+          "136/193"
+        ],
+        "observedCoverage": "owner rarity determination for one exact card",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-10-30",
+        "statement": "m2a 136 v1 ist bis auf die art des reverse holo komplett gleich also auch kein Symbol",
+        "rarity": "no printed rarity symbol",
+        "basis": "Owner attestation for the xm2a 136/193 V1 Colorless Energy mirror only.",
+        "evidenceRefs": [
+          "specimen:SPEC-0437",
+          "specimen:SPEC-0410"
+        ]
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-OWNER-CL-33-PROMO-RARITY-20261030",
+      "sourceKind": "source-first-local-set-profile",
+      "provider": "owner-attestation",
+      "providerRecordKey": "SET-SRC-OWNER-CL-33-PROMO-RARITY-20261030",
+      "retrieved": "2026-10-30",
+      "sourceUrl": null,
+      "raw": {
+        "localCode": "CL",
+        "locality": "WEST",
+        "languages": [
+          "English"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "printIds": [
+          "WEST:CL:33:base"
+        ],
+        "providers": [
+          "owner-attestation"
+        ],
+        "sourceUrls": [],
+        "observedCollectorNumbers": [
+          "33"
+        ],
+        "observedCoverage": "owner rarity determination for one exact card",
+        "assertedBy": "collection owner",
+        "assertedAt": "2026-10-30",
+        "statement": "und ja die CL 33 ist Promo in der Prerelease und Prerelease Staff Variante",
+        "rarity": "Promo",
+        "basis": "Owner classification of the CL 33 prerelease and prerelease Staff promos only.",
+        "evidenceRefs": []
       }
     }
   ]

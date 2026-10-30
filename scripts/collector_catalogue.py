@@ -341,10 +341,10 @@ def edition_system_absent(localization_id: str, set_code: str | None, release_da
 SET_SOURCES_PATH = ROOT / "verification" / "set_catalogue_sources.json"
 NUMBERING_BY_REGION = {"WEST": "western", "JP": "japanese", "CN": "simplified-chinese",
                        "TW": "traditional-chinese"}
-# A promo, prize-pack, jumbo or championship-deck card reprints a run card's number; the run's
-# printed size is not this card's denominator (same guard as evidence_semantics).
-UNSIZED_RARITIES = {"Promo", "PROMO", "promo card", "Prize Pack Series", "Oversized",
-                    "World Championship Deck"}
+# A stamped promo or jumbo of a run card prints the run's number and denominator (PGO 055/078
+# Cosmos, SSH 142/202 jumbo, CL 33/95 prerelease; #445), so only these reprint lines are left
+# without one. Run membership is a different question (evidence_semantics keeps its own guard).
+UNSIZED_RARITIES = {"Prize Pack Series", "World Championship Deck"}
 # Japanese and Chinese cards print three-digit numbers (106/095). Western cards do from Sword &
 # Shield on (202/091 in Paldean Fates); earlier Western sets print the plain size (27/64).
 PADDED_NUMBERING_REGIONS = {"JP", "CN", "TW"}
@@ -981,12 +981,50 @@ def _rarity_display(
     return (old_item or {}).get("rarity") or source_display
 
 
+def mapped_printing_variants(unit: dict[str, Any] | None, source_printing_id: str | None) -> set[str]:
+    printing = next((row for row in (unit or {}).get("printings") or []
+                     if row.get("printingId") == source_printing_id), None)
+    return set((printing or {}).get("mappedVariants") or [])
+
+
+def item_product_keys(
+    unit: dict[str, Any] | None, source_printing_id: str | None, distribution: Any = None,
+) -> tuple[set[str], set[str], str | None]:
+    """The item's own marketplace product URLs, every product URL of its unit, and its channel."""
+    products = [row for row in (unit or {}).get("products") or [] if row.get("cardmarketUrl")]
+    variants = mapped_printing_variants(unit, source_printing_id)
+    own = {row["cardmarketUrl"] for row in products if row.get("variant") in variants}
+    kind = distribution.get("kind") if isinstance(distribution, dict) else None
+    return own, {row["cardmarketUrl"] for row in products}, kind
+
+
+def product_scoped_claims(
+    claims: list[dict[str, Any]], scope: tuple[set[str], set[str], str | None],
+) -> list[dict[str, Any]]:
+    """Keep the claims about this item's own products, plus claims about the release as a whole.
+
+    A release can hold a regular print and a stamped promo as separate marketplace products
+    (VIV 131 V1 "Holo Rare", V2 "Promo"); each product's rarity belongs to its own printing.
+    A claim keyed to a publisher page or card image is about the release; one that names
+    `distributionKinds` reaches only printings of those channels (CL 33 prerelease and Staff).
+    """
+    own, unit_products, distribution = scope
+    claims = [row for row in claims
+              if not row.get("distributionKinds") or distribution in row["distributionKinds"]]
+    release_level = [row for row in claims if row.get("sourceProductKey") not in unit_products]
+    if own:
+        return release_level + [row for row in claims if row.get("sourceProductKey") in own]
+    # Without a product of its own, other products' claims apply only when nothing else does.
+    return release_level or claims
+
+
 def normalized_rarity(
     release_id: str,
     old_item: dict[str, Any] | None,
     claims_by_release: dict[str, list[dict[str, Any]]],
+    product_keys: tuple[set[str], set[str], str | None] = (set(), set(), None),
 ) -> dict[str, Any]:
-    claims = claims_by_release.get(release_id, [])
+    claims = product_scoped_claims(claims_by_release.get(release_id, []), product_keys)
     normalized = sorted({row.get("normalizedRarityId") for row in claims if row.get("normalizedRarityId")})
     source_display = next(
         (row.get("sourceNativeValue") for row in claims if row.get("sourceNativeValue")), None
@@ -1648,7 +1686,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "distribution": distribution,
             "cardSize": card_size,
             "errorClass": error_class,
-            "rarity": normalized_rarity(release_id, reference, rarity_by_release),
+            "rarity": normalized_rarity(release_id, reference, rarity_by_release,
+                                        item_product_keys(unit, source_printing_id, distribution)),
             **completeness_fields(item_completeness(finish_decisions.get(release_id), old, unit), finish_decision),
             "releaseDate": release_date,
             "releaseDatePrecision": release_precision,

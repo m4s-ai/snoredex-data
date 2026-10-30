@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-28",
+  "generated": "2026-10-30",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 45,
-   "evidenceRecords": 1818,
-   "uniqueUrls": 1809,
+   "evidenceRecords": 1819,
+   "uniqueUrls": 1810,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7308
+   "claimsAttributed": 7320
   }
  },
  "providers": [
@@ -148,8 +148,8 @@
     "pokemonkorea.co.kr",
     "www.pokemonkorea.co.kr"
    ],
-   "uniqueSources": 129,
-   "claimsSupported": 286
+   "uniqueSources": 130,
+   "claimsSupported": 287
   },
   {
    "providerId": "tcgdex",
@@ -845,7 +845,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 347,
-   "claimsSupported": 975
+   "claimsSupported": 976
   },
   {
    "providerId": "cardmarket-product-image",
@@ -1033,7 +1033,7 @@
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
    "uniqueSources": 72,
-   "claimsSupported": 850
+   "claimsSupported": 860
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -8805,7 +8805,8 @@
    "sourceTypes": [
     "Cardmarket catalogue hint (not external verification)",
     "Cardmarket product page",
-    "Cardmarket stock image (visual evidence)"
+    "Cardmarket stock image (visual evidence)",
+    "user"
    ],
    "dimensions": [
     "finish",
@@ -8821,7 +8822,7 @@
     "xsv2a 143 V2"
    ],
    "retrievedAt": null,
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
@@ -12933,7 +12934,7 @@
     "identity",
     "language"
    ],
-   "stableIdCount": 264,
+   "stableIdCount": 267,
    "stableIds": [
     "CS1aC 188 V2",
     "CSM2.1C 054 base",
@@ -12968,6 +12969,7 @@
     "F0519-P02",
     "F0530-P01",
     "F0534-P01",
+    "F0615-P02",
     "F0615-P03",
     "F0619-P01",
     "F0625-P01",
@@ -13112,6 +13114,8 @@
     "SPEC-0632",
     "SPEC-0633",
     "SPEC-0642",
+    "SPEC-0659",
+    "SPEC-0660",
     "SV-P/CS 277 base",
     "TW:AS5a:204/184:base",
     "TW:SM-P:053:base",
@@ -13200,8 +13204,8 @@
     "U0775",
     "U0780"
    ],
-   "retrievedAt": "2026-10-23",
-   "usageCount": 444
+   "retrievedAt": "2026-10-30",
+   "usageCount": 454
   },
   {
    "canonicalUrl": "https://diamentiperla.info/snorlax-polish.jpg",
@@ -20497,6 +20501,23 @@
     "KR:DP:006:base"
    ],
    "retrievedAt": "2026-09-01",
+   "usageCount": 1
+  },
+  {
+   "canonicalUrl": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokemon-card-korea",
+   "sourceTypes": [
+    "Positive source-native rarity record"
+   ],
+   "dimensions": [
+    "rarity"
+   ],
+   "stableIdCount": 1,
+   "stableIds": [
+    "KR:m2a:136/193:base"
+   ],
+   "retrievedAt": "2026-10-30",
    "usageCount": 1
   },
   {

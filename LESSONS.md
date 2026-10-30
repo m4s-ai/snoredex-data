@@ -15,6 +15,30 @@ Newest first.
 
 ---
 
+## A product's rarity was spread over every printing of its release
+
+**Trap:** *A marketplace fact belongs to the product it names; a product-level claim reaches only
+the printing mapped to that product.*
+
+Rarity claims were collected per card release. Cardmarket files a regular print and its stamped
+promo as two products of one release: VIV 131 V1 "Holo Rare" and V2 "Promo". Both values therefore
+reached every printing, and 64 items read as a source conflict that no source had made. Where the
+claims agreed, the displayed value was simply the first claim, so some jumbo cards showed "Promo"
+and some standard cards "Oversized".
+
+The same review found a mapping bug from #433. The reviewed `holo → V1` finish mapping was unioned
+with a photographed V2 promo's own variant, which mapped the promo to V1 and V2.
+
+**Now guarded by** `product_scoped_claims` in `collector_catalogue.py`, which keeps only the claims
+about the item's own products plus claims about the release as a whole. `auto_mapped_variants` in
+`finishes.py` lets a photographed variant pin its printing. `product_rarity_regressions` checks that
+a jumbo is exactly the Oversized product and that at most the product-less CL 33 Staff promo still
+conflicts.
+
+*#437.*
+
+---
+
 ## A set rule that only reached the marketplace rows
 
 **Trap:** *Set facts apply to every item of that set, whichever source created the item.*

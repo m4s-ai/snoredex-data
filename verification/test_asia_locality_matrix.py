@@ -27,6 +27,20 @@ class AsiaLocalityMatrixTests(unittest.TestCase):
         self.assertEqual(track["terminalState"], "complete")
         self.assertEqual(track["gapIds"], ["official-korean-historical-positive-frontier"])
 
+    def test_hong_kong_shares_the_taiwan_edition(self) -> None:
+        # ADR-0001 D6 (owner, 2026-10-30): one Traditional-Chinese edition serves both markets.
+        tracks = {row["trackId"]: row for row in self.manifest["tracks"]}
+        self.assertNotIn("asia-hk", tracks)
+        self.assertIn("Hong Kong", tracks["asia-tw"]["label"])
+        self.assertNotIn("official-asia-hk-market-provenance",
+                         {row["gapId"] for row in self.manifest["localGaps"]})
+        mutated = copy.deepcopy(self.manifest)
+        mutated["tracks"].append(dict(tracks["asia-tw"], trackId="asia-hk", locality="HK"))
+        self.assertTrue(any(
+            "track universe differs" in error
+            for error in matrix.validate(mutated, matrix.indexes(mutated))
+        ))
+
     def test_missing_track_is_rejected(self) -> None:
         mutated = copy.deepcopy(self.manifest)
         mutated["tracks"].pop()

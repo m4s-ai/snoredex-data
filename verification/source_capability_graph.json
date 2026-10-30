@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-10-28",
+    "generated": "2026-10-30",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 120,
       "absenceEdges": 0,
       "observations": 170,
-      "resolvedVerdictSources": 1818
+      "resolvedVerdictSources": 1819
     },
     "surfaceStates": {
       "active": 54,
@@ -11715,7 +11715,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:a589a6d650d03752af0585e4bc52b5ec686fe4d790afcaa6c063bb40ed8ce9ce",
+      "rawRecordHash": "sha256:9b7fd29d09e2250d69bb4643320bbc2ed5494842ec74126bd70a8ee118d44e99",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -11749,7 +11749,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 264,
+        "stableIdCount": 267,
         "stableIds": [
           "CS1aC 188 V2",
           "CSM2.1C 054 base",
@@ -11784,6 +11784,7 @@
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
+          "F0615-P02",
           "F0615-P03",
           "F0619-P01",
           "F0625-P01",
@@ -11928,6 +11929,8 @@
           "SPEC-0632",
           "SPEC-0633",
           "SPEC-0642",
+          "SPEC-0659",
+          "SPEC-0660",
           "SV-P/CS 277 base",
           "TW:AS5a:204/184:base",
           "TW:SM-P:053:base",
@@ -12016,8 +12019,8 @@
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-10-23",
-        "usageCount": 444
+        "retrievedAt": "2026-10-30",
+        "usageCount": 454
       }
     },
     {
@@ -30117,6 +30120,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "card-release"
+      ]
+    },
+    {
+      "sourceKey": "https://cards.image.pokemonkorea.co.kr/data/wmimages/MEGA/M2a/M2a_136.png",
+      "providerId": "pokemon-card-korea",
+      "surfaceId": "pokemon-card-korea-image",
+      "capabilityEdgeIds": [
+        "pokemon-card-korea-image-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "rarity"
       ]
     },
     {

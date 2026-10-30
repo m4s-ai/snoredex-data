@@ -10,8 +10,7 @@ A complete track means only that its bounded positive slice balances. Silence, z
 | Track | Terminal state | Bounded slice accounting | Explicit gaps |
 |---|---|---|---|
 | `asia-jp` Japan | `needs-evidence` | none | `official-japanese-card-search` |
-| `asia-tw` Traditional Chinese — Taiwan catalogue surface | `complete` | `pokemon-asia-tw-snorlax` 43/43 (0 new candidates); `52poke-tw-issue84-snorlax` 12/12 (10 new candidates) | none |
-| `asia-hk` Traditional Chinese — Hong Kong provenance | `needs-evidence` | none | `official-asia-hk-market-provenance` |
+| `asia-tw` Traditional Chinese — Taiwan and Hong Kong (shared edition) | `complete` | `pokemon-asia-tw-snorlax` 43/43 (0 new candidates); `52poke-tw-issue84-snorlax` 12/12 (10 new candidates) | none |
 | `asia-cn` Simplified Chinese — mainland China | `blocked-by-source` | none | `official-asia-cn` |
 | `asia-kr` Korean | `complete` | `pokemon-korea-snorlax-positive` 45/45 (0 new candidates) | `official-korean-historical-positive-frontier` |
 | `asia-id` Indonesian | `complete` | `pokemon-asia-id-snorlax` 31/31 (1 new candidates) | none |

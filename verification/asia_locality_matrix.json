@@ -9,12 +9,6 @@
   },
   "localGaps": [
     {
-      "gapId": "official-asia-hk-market-provenance",
-      "terminalState": "needs-evidence",
-      "reason": "The retained tw-locale results and TWHK set-symbol assets establish Traditional-Chinese card identities but do not distinguish Taiwan from Hong Kong distribution records.",
-      "retryCondition": "Register a positive Hong Kong product, distribution, or specimen record before assigning market provenance separately from the shared Traditional-Chinese edition."
-    },
-    {
       "gapId": "official-sea-english-card-discovery",
       "terminalState": "needs-evidence",
       "reason": "No retained source-first card or product index independently enumerates English-language physical products distributed in Southeast Asia.",
@@ -38,7 +32,7 @@
     },
     {
       "trackId": "asia-tw",
-      "label": "Traditional Chinese — Taiwan catalogue surface",
+      "label": "Traditional Chinese — Taiwan and Hong Kong (shared edition)",
       "locality": "TW",
       "language": "T-Chinese",
       "terminalState": "complete",
@@ -53,21 +47,7 @@
         "source-first:TW:SV-P:215:base",
         "source-first:TW:svQP F:012/023:base"
       ],
-      "retryCondition": "Rerun bounded positive slices for deltas and retain unmatched rows; do not infer missing cards or Hong Kong provenance."
-    },
-    {
-      "trackId": "asia-hk",
-      "label": "Traditional Chinese — Hong Kong provenance",
-      "locality": "HK",
-      "language": "T-Chinese",
-      "terminalState": "needs-evidence",
-      "scope": "Hong Kong distribution provenance for shared Traditional-Chinese card identities.",
-      "cardSliceIds": [],
-      "gapIds": [
-        "official-asia-hk-market-provenance"
-      ],
-      "evidenceRefs": [],
-      "retryCondition": "Add only positive Hong Kong product, distribution, or specimen records; a TWHK asset alone does not select a market."
+      "retryCondition": "Rerun bounded positive slices for deltas and retain unmatched rows; do not infer missing cards. Taiwan and Hong Kong share one Traditional-Chinese edition (owner, 2026-10-30), so no separate Hong Kong print identity is tracked."
     },
     {
       "trackId": "asia-cn",

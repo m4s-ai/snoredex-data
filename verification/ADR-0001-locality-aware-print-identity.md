@@ -218,6 +218,10 @@ held after both were resolved later on 2026-08-09.
   D5 is what makes source-first enumeration of the Asian localities a method rather than a plan
   (#138). It does not widen what counts as tier 1, and it does not touch rule 3: a publisher
   database that fails to list a printing still has a gap, not a proof.
+- **D6 (owner, 2026-10-30):** Taiwan and Hong Kong share the same Traditional-Chinese sets
+  ("HK und TW sind die selben Sets"). The `TW` locality is that one shared edition. Hong Kong has
+  no locality, track or provenance gap of its own, unlike LATAM Spanish under D3. The decision is
+  about market scope only: it confirms no card and settles no disputed Traditional-Chinese unit.
 
 ## Consequences
 
