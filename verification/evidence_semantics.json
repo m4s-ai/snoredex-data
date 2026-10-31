@@ -151,8 +151,7 @@
     "setLevelConfirmationsNeedingSetSize": 0,
     "setLevelConfirmationsNotReachingTheCard": 6,
     "contradictionsByBacking": {
-      "owner-adjudicated": 88,
-      "source-disagreement": 4
+      "owner-adjudicated": 92
     },
     "setLevelConfirmationsByRunBasis": {
       "printed-set-size": 53,
@@ -165,16 +164,14 @@
       "Character Rare": 1,
       "Secret Rare": 1
     },
-    "verdictsBeyondTheirGranularity": 10,
+    "verdictsBeyondTheirGranularity": 6,
     "verdictsBeyondTheirGranularityByRule": {
-      "step-from-product-to-card": 6,
-      "source-disagreement-does-not-establish-absence": 4
+      "step-from-product-to-card": 6
     },
     "applicationStatuses": {
       "exists": 621,
-      "not-printed": 88,
-      "needs-evidence": 6,
-      "disputed": 4
+      "not-printed": 92,
+      "needs-evidence": 6
     }
   },
   "verdictsBeyondTheirGranularity": [
@@ -196,44 +193,6 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
-    },
-    {
-      "unitId": "U0265",
-      "setCode": "sm10",
-      "number": "076",
-      "variant": "base",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Rare",
-      "insideNumberedRun": true,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 76 against the set's printed size 95, recorded in the set database: inside the numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
-    },
-    {
-      "unitId": "U0414",
-      "setCode": "sm9",
-      "number": "066",
-      "variant": "V1",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Double Rare",
-      "insideNumberedRun": true,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
     },
     {
       "unitId": "U0471",
@@ -312,25 +271,6 @@
       "applicationStatus": "needs-evidence"
     },
     {
-      "unitId": "U0558",
-      "setCode": "sm9",
-      "number": "115",
-      "variant": "V3",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Rainbow Rare",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
-      "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
-    },
-    {
       "unitId": "U0601",
       "setCode": "s5a",
       "number": "93",
@@ -348,25 +288,6 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
-    },
-    {
-      "unitId": "U0634",
-      "setCode": "sm9",
-      "number": "106",
-      "variant": "V2",
-      "language": "T-Chinese",
-      "status": "contradicted",
-      "providerId": "bulbapedia",
-      "granularity": "market-or-era",
-      "rarity": "Ultra Rare",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "printed-set-size",
-      "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
-      "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
     }
   ],
   "setLevelConfirmationsThatDoNotCarry": [
@@ -5536,10 +5457,10 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 76 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0266",
@@ -8367,10 +8288,10 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 66 against the set's printed size 95, recorded in the set database: inside the numbered run",
       "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0415",
@@ -11103,10 +11024,10 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 115 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0559",
@@ -12433,10 +12354,10 @@
       "runMembershipBasis": "printed-set-size",
       "runMembershipReason": "collector number 106 against the set's printed size 95, recorded in the set database: numbered above the printed size",
       "sourceCarriesCardList": false,
-      "inference": "source-disagreement",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "source-disagreement-does-not-establish-absence",
-      "applicationStatus": "disputed"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0635",

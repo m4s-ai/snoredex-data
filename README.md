@@ -135,7 +135,7 @@ Current-known status snapshot: **2026-10-31**. Legacy claim counts refer to `car
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
 | Legacy language-claim review | **719 claims**: 627 externally confirmed, 92 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Evidence-safe application status | **621 established**, **6 needs evidence**, **88 owner-adjudicated not printed**, and **4 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Evidence-safe application status | **621 established**, **6 needs evidence**, **92 owner-adjudicated not printed**, and **0 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **902 items** across 174 cards and 15 languages: 899 documented printings plus 3 explicit unresolved placeholders. |
 | Current-known finish evidence | **637 card-number × language units**: 547 externally confirmed, 10 marketplace-only positives, 3 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 98 units. |
 | Evidence registry | **45 providers**, 1821 evidence records, 1812 unique URLs, and 7,337 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
