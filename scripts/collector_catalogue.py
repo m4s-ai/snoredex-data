@@ -852,8 +852,12 @@ def normalized_markings(value: Any) -> list[dict[str, str]]:
 
 
 def release_collector_number(release: dict[str, Any]) -> Any:
-    """The printed local number, or a reviewed collector identifier for an unnumbered card."""
-    return release.get("localNumber") or (release.get("numberingBasis") or {}).get("collectorNumber")
+    """A reviewed printed number (BA20 50/68) or identifier (DP1 DPBP#174), else the local number.
+
+    `localNumber` stays the join key to the legacy and finish stores even where the marketplace
+    filed the card under a deck code (BA20 MWT), so the reviewed basis is read first.
+    """
+    return (release.get("numberingBasis") or {}).get("collectorNumber") or release.get("localNumber")
 
 
 def split_collector_number(value: Any) -> tuple[str | None, str | None]:
