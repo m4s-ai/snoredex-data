@@ -27,7 +27,7 @@ from urllib.parse import parse_qs, quote, urlencode, urlsplit
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
 from source_registry import provenance_url
 from reviewed_release_dates import apply_item_date, check_reviewed_targets, load_reviewed_dates
-from specimen_links import item_specimen_links, physical_specimen_ids, specimen_reference_index, specimen_provenance_links
+from specimen_links import item_specimen_links, physical_specimen_ids, specimen_reference_index, specimen_provenance_links, release_specimens
 
 ROOT = Path(__file__).resolve().parent.parent
 GRAPH_PATH = ROOT / "verification" / "authoritative_graph.json"
@@ -525,12 +525,17 @@ def legacy_match_for_physical(
     return match
 
 
+def share_physical_printing(index, left, right):
+    physical = index.get(left.get("printingId"))
+    return physical is not None and physical is index.get(right.get("printingId"))
+
+
 def physical_printing_indexes(physicals):
     by_source, semantics = {}, set()
     for row in physicals.values():
         semantics.add(printing_semantic_key(row["cardReleaseId"], row))
-        if row.get("sourcePrintingId"):
-            by_source[row["sourcePrintingId"]] = row
+        for source_id in set(row.get("sourcePrintingIds", [])) | {row.get("sourcePrintingId")} - {None}:
+            by_source[source_id] = row
     return by_source, frozenset(semantics)
 
 
@@ -902,16 +907,21 @@ def release_date_values(
     )
 
 
-def prefer_source_first_image(
+def prefer_retained_image(
     image_path: str | None,
     image_scope: str,
     source_first: dict[str, Any] | None,
     specimens: dict[str, dict[str, Any]],
+    reference_ids=(),
 ) -> tuple[str | None, str]:
-    specimen = specimens.get((source_first or {}).get("specimenId"), {})
-    photograph = specimen.get("photograph")
-    if photograph and IMAGE_SCOPE_RANK[image_scope] < IMAGE_SCOPE_RANK["card-release"]:
-        return "verification/specimens/" + photograph, "card-release"
+    if IMAGE_SCOPE_RANK[image_scope] < IMAGE_SCOPE_RANK["card-release"]:
+        # Identity-only references can replace product art without borrowing another finish's photo.
+        image_ids = [(source_first or {}).get("specimenId")]
+        image_ids.extend(sid for sid in reference_ids if not specimens.get(sid, {}).get("physicalObservation"))
+        for specimen_id in image_ids:
+            photograph = specimens.get(specimen_id, {}).get("photograph")
+            if photograph:
+                return "verification/specimens/" + photograph, "card-release"
     return image_path, image_scope
 
 
@@ -1386,6 +1396,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         row["checklistId"]: legacy_release_id(row, release_index) for row in legacy_items
     }
     release_rekeys = reviewed_release_rekeys(releases)
+    physical_by_source, physical_semantics = physical_printing_indexes(physicals)
     legacy_by_semantic: dict[bytes, dict[str, Any]] = {}
     legacy_by_source: dict[str, tuple[str, dict[str, Any]]] = {}
     legacy_by_core: defaultdict[bytes, list[dict[str, Any]]] = defaultdict(list)
@@ -1397,7 +1408,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         )
         key = printing_semantic_key(legacy_release[row["checklistId"]], row)
         previous = legacy_by_semantic.get(key)
-        if previous and previous["checklistId"] != row["checklistId"]:
+        if previous and not share_physical_printing(physical_by_source, row, previous):
             raise ContractError(
                 "legacy checklist has duplicate semantic printing identity: "
                 f"{row['checklistId']} and {previous['checklistId']}"
@@ -1419,7 +1430,6 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             unit_by_printing[printing["printingId"]] = unit
             printing_by_id[printing["printingId"]] = printing
 
-    physical_by_source, physical_semantics = physical_printing_indexes(physicals)
     candidate_by_source = {
         row["sourceId"]: row for row in claims.values()
         if row.get("sourceKind") == "finish-printing-record"
@@ -1554,6 +1564,14 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         release = context["release"]
         reference = context["reference"]
         legacy_ids = [old["checklistId"]] if old else []
+        if physical:
+            for source_id in physical.get("sourcePrintingIds", []):
+                predecessor = source_predecessor_match(
+                    physical, legacy_by_source.get(source_id), release_rekeys,
+                )
+                if predecessor:
+                    legacy_ids.append(predecessor["checklistId"])
+            legacy_ids = sorted(set(legacy_ids))
         source_first_row = context["sourceFirst"]
 
         if kind == "verified-printing":
@@ -1601,10 +1619,11 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         ))
 
         source_refs = set((old or {}).get("sourceIds") or [])
-        if source_printing_id and source_printing_id in printing_by_id:
+        source_printing_ids = set((physical or {}).get("sourcePrintingIds", [])) | {source_printing_id} - {None}
+        for source_id in sorted(source_printing_ids):
             source_refs.update(
                 source.get("url") or source.get("sourceType")
-                for source in printing_by_id[source_printing_id].get("sources") or []
+                for source in printing_by_id.get(source_id, {}).get("sources") or []
                 if source.get("url") or source.get("sourceType")
             )
         source_refs.update(release.get("sourceRecords") or [])
@@ -1642,8 +1661,9 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             if specimen_id:
                 image_path = "verification/specimens/" + specimens[specimen_id]["photograph"]
                 image_scope = "exact-printing"
-        image_path, image_scope = prefer_source_first_image(
-            image_path, image_scope, source_first_row, specimens
+        image_path, image_scope = prefer_retained_image(
+            image_path, image_scope, source_first_row, specimens,
+            release_specimens(release, [physical] if physical else [], citations, source_first, claims),
         )
         image_asset, actual_scope = register_asset(
             image_path,

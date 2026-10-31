@@ -42,14 +42,16 @@ def check_structured_evidence_boundary(units: list[dict], semantics_doc: dict) -
         if not isinstance(unit["evidenceIncludesCardList"], bool):
             raise AssertionError(f"{unit['unitId']} has a non-boolean card-list capability")
 
-    base = next(unit for unit in units if unit["unitId"] == "U0169")
-    if base["evidenceGranularity"] != "product-or-set":
-        raise AssertionError("U0169 no longer carries its reviewed set-level classification")
+    # A later photograph may legitimately upgrade any individual card's evidence.
+    base = next(unit for unit in units
+                if unit["evidenceGranularity"] == "product-or-set"
+                and evidence_semantics.legacy_granularity(unit) == "product-or-set")
+    test_id = base["unitId"]
     legacy = dict(base)
     legacy.pop("evidenceGranularity")
     legacy.pop("evidenceIncludesCardList")
     if evidence_semantics.legacy_granularity(legacy) != "product-or-set":
-        raise AssertionError("legacy migration no longer recognizes U0169's set evidence")
+        raise AssertionError("legacy migration no longer recognizes the selected unit's set evidence")
     if evidence_semantics.legacy_granularity({
         **legacy,
         "sourceType": "editorial note; specimen unavailable",
@@ -72,16 +74,16 @@ def check_structured_evidence_boundary(units: list[dict], semantics_doc: dict) -
     set_sources = load("verification/set_catalogue_sources.json")
     baseline = evidence_semantics.build(units, cards, adjudications, set_sources)
     mutated_units = [dict(unit) for unit in units]
-    mutated = next(unit for unit in mutated_units if unit["unitId"] == "U0169")
+    mutated = next(unit for unit in mutated_units if unit["unitId"] == test_id)
     mutated["sourceType"] += "; specimen unavailable; sibling card page; card list row"
     changed = evidence_semantics.build(mutated_units, cards, adjudications, set_sources)
-    baseline_row = next(row for row in baseline["units"] if row["unitId"] == "U0169")
-    changed_row = next(row for row in changed["units"] if row["unitId"] == "U0169")
+    baseline_row = next(row for row in baseline["units"] if row["unitId"] == test_id)
+    changed_row = next(row for row in changed["units"] if row["unitId"] == test_id)
     if changed_row != baseline_row:
-        raise AssertionError("sourceType text changed U0169's semantic projection")
-    published_row = next(row for row in semantics_doc["units"] if row["unitId"] == "U0169")
+        raise AssertionError("sourceType text changed the selected unit's semantic projection")
+    published_row = next(row for row in semantics_doc["units"] if row["unitId"] == test_id)
     if changed_row["applicationStatus"] != published_row["applicationStatus"]:
-        raise AssertionError("U0169's application status changed after a text-only correction")
+        raise AssertionError("the selected unit's application status changed after a text-only correction")
 
     positive = {
         **legacy,
@@ -103,7 +105,29 @@ def check_structured_evidence_boundary(units: list[dict], semantics_doc: dict) -
         raise AssertionError("unknown structured evidence was promoted to exists")
 
 
+def check_specimen_rekey_boundary():
+    from review_findings import reviewed_specimen_rekeys, specimen_matches_unit
+    mappings = [{"mappings": [{"legacyUnitId": "legacy", "sourceFirstRecordId": "local"}]}]
+    local = {"local": {"localSetCode": "Local", "localNumber": "077/071",
+                       "language": "T-Chinese", "variant": "base", "specimenId": None}}
+    photo = {"specimenId": "photo", "setCode": "Local", "number": "077/071",
+             "language": "T-Chinese", "variant": "base", "citedBy": ["local"]}
+    legacy = {"unitId": "legacy", "setCode": "Legacy", "number": "077",
+              "language": "T-Chinese", "variant": "V2"}
+    rekeys = reviewed_specimen_rekeys(mappings, local, {"photo": photo})
+    assert specimen_matches_unit(photo, legacy, rekeys)
+    for change in ({"setCode": "Neighbour"}, {"number": "078/071"}, {"number": "077/072"},
+                   {"variant": "V2"}, {"language": "Korean"}, {"citedBy": []}):
+        wrong = {**photo, **change}
+        assert not specimen_matches_unit(wrong, legacy, reviewed_specimen_rekeys(
+            mappings, local, {"photo": wrong},
+        ))
+    assert not specimen_matches_unit(photo, {**legacy, "unitId": "neighbour"}, rekeys)
+    assert not specimen_matches_unit(photo, {**legacy, "language": "Korean"}, rekeys)
+
+
 def main() -> int:
+    check_specimen_rekey_boundary()
     units = load("verification/units.json")
     semantics_doc = load("verification/evidence_semantics.json")
     check_structured_evidence_boundary(units, semantics_doc)

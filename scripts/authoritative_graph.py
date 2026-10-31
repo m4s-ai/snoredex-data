@@ -228,13 +228,18 @@ def _retain_field_sources(payload, sources):
         payload["specimenFieldSources"] = sources
 
 
-def _standalone_printing_target(by_semantic, payload):
+def _printing_target(by_semantic, payload):
     key = printing_semantic_key(payload["cardReleaseId"], payload)
     previous = by_semantic.setdefault(key, payload)
     if previous is payload:
         return payload["physicalPrintingId"], payload["physicalPrintingId"]
     # Separate copies support one printing without being asserted to be the same card.
-    previous["specimenIds"] = sorted(set(previous["specimenIds"] + payload["specimenIds"]))
+    previous["specimenIds"] = sorted(set(previous.get("specimenIds", []) + payload.get("specimenIds", [])))
+    if payload.get("sourcePrintingId"):
+        previous["sourcePrintingIds"] = sorted(set(
+            previous.get("sourcePrintingIds", [previous["sourcePrintingId"]])
+            + [payload["sourcePrintingId"]]
+        ))
     for field, ids in payload.get("specimenFieldSources", {}).items():
         sources = previous.setdefault("specimenFieldSources", {})
         sources[field] = sorted(set(sources.get(field, []) + ids))
@@ -242,13 +247,13 @@ def _standalone_printing_target(by_semantic, payload):
 
 
 def _previous_finish_claims_by_semantic(graph: dict[str, Any]) -> dict[str, str]:
-    return {
-        str(row["payload"]["semanticPrintingId"]): str(row["entityId"])
-        for row in graph["entities"]
-        if row.get("entityType") == "candidate-claim"
+    result = {}
+    for row in sorted(graph["entities"], key=lambda row: row["entityId"]):
+        if (row.get("entityType") == "candidate-claim"
         and (row.get("payload") or {}).get("sourceKind") == "finish-printing-record"
-        and (row.get("payload") or {}).get("semanticPrintingId")
-    }
+        and (row.get("payload") or {}).get("semanticPrintingId")):
+            result.setdefault(str(row["payload"]["semanticPrintingId"]), str(row["entityId"]))
+    return result
 
 
 def _retained_printing_ids(scope, printing, previous_physical, previous_claims, previous_claim_by_physical):
@@ -278,6 +283,15 @@ def _specimen_projection_reason(target, standalone_target, release_id):
         source = "another specimen" if target.startswith("PHYSICAL:specimen:") else "the finish store"
         return f"provides provenance for {target}, already established from {source}"
     return "physical observation has no matching projected printing"
+
+
+def _ordered_finish_rows(finish_units):
+    return sorted(
+        ((unit, printing) for unit in finish_units for printing in unit.get("printings", [])),
+        key=lambda pair: (pair[1].get("verificationStatus") != "confirmed",
+                          pair[0]["setCode"], str(pair[0]["number"]), pair[0]["language"],
+                          pair[1]["printingId"]),
+    )
 
 
 def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
@@ -345,114 +359,127 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         for specimen_id in printing.get("specimenIds") or []
     }
 
-    for unit in finish_units:
+    finish_by_semantic = {}
+    generated_claim_ids = set()
+    for unit, printing in _ordered_finish_rows(finish_units):
         unit_key = finish_unit_release_key(unit)
         release_id = finish_unit_release_id(unit, release_ids, release_aliases)
-        for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
-            printing_id = str(printing["printingId"])
-            semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
-            semantic_key = printing_semantic_key(semantic_scope, printing)
-            semantic_id = stable_printing_id(semantic_key)
-            physical_id, claim_id = _retained_printing_ids(
-                semantic_scope, printing, previous_physical_by_semantic,
-                previous_finish_claims, previous_claim_by_physical,
+        printing_id = str(printing["printingId"])
+        semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
+        semantic_key = printing_semantic_key(semantic_scope, printing)
+        semantic_id = stable_printing_id(semantic_key)
+        physical_id, claim_id = _retained_printing_ids(
+            semantic_scope, printing, previous_physical_by_semantic,
+            previous_finish_claims, previous_claim_by_physical,
+        )
+        # Distinct legacy finish records retain their own claims for one semantic printing.
+        if claim_id in generated_claim_ids:
+            unit_identity = "|".join(str(unit[field]) for field in ("setCode", "number", "language"))
+            claim_id += ":" + hashlib.sha256(unit_identity.encode()).hexdigest()[:16]
+        generated_claim_ids.add(claim_id)
+        confirmed = printing.get("verificationStatus") == "confirmed"
+        if confirmed and not release_id:
+            raise ValueError(f"confirmed finish unit has no card release: {unit_key}")
+        specimen_ids = sorted({str(value) for value in printing.get("specimenIds") or []})
+        specimen_ids = [value for value in specimen_ids if value in specimen_by_id]
+        claim_payload = {
+            "claimId": claim_id,
+            "claimKind": "physical-printing",
+            "sourceKind": "finish-printing-record",
+            "sourceId": printing_id,
+            "semanticPrintingId": semantic_id,
+            "evidenceStatus": printing.get("verificationStatus", "pending"),
+            "disposition": "established-and-mapped" if confirmed else "candidate-needs-evidence",
+            "proposedTargetId": physical_id if confirmed else None,
+            "materializedTargetId": physical_id if confirmed else None,
+            "reason": (
+                "explicit specimen conflict requires resolution before materialization"
+                if printing.get("conflictsWith") else
+                "canonical specimen observations and finish evidence establish the exact "
+                "finish and edition"
+                if specimen_ids else
+                "finish printing record carries positive evidence"
+            ),
+        }
+        if printing.get("conflictsWith"):
+            claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
+        if not confirmed:
+            proposal = (
+                release_id
+                or existing_finish_proposals_by_semantic.get(semantic_id)
+                or existing_finish_proposals.get(printing_id)
             )
-            confirmed = printing.get("verificationStatus") == "confirmed"
-            if confirmed and not release_id:
-                raise ValueError(f"confirmed finish unit has no card release: {unit_key}")
-            specimen_ids = sorted({str(value) for value in printing.get("specimenIds") or []})
-            specimen_ids = [value for value in specimen_ids if value in specimen_by_id]
-            claim_payload = {
-                "claimId": claim_id,
-                "claimKind": "physical-printing",
-                "sourceKind": "finish-printing-record",
-                "sourceId": printing_id,
-                "semanticPrintingId": semantic_id,
-                "evidenceStatus": printing.get("verificationStatus", "pending"),
-                "disposition": "established-and-mapped" if confirmed else "candidate-needs-evidence",
-                "proposedTargetId": physical_id if confirmed else None,
-                "materializedTargetId": physical_id if confirmed else None,
-                "reason": (
-                    "explicit specimen conflict requires resolution before materialization"
-                    if printing.get("conflictsWith") else
-                    "canonical specimen observations and finish evidence establish the exact "
-                    "finish and edition"
-                    if specimen_ids else
-                    "finish printing record carries positive evidence"
-                ),
-            }
-            if printing.get("conflictsWith"):
-                claim_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
-            if not confirmed:
-                proposal = (
-                    release_id
-                    or existing_finish_proposals_by_semantic.get(semantic_id)
-                    or existing_finish_proposals.get(printing_id)
-                )
-                if proposal:
-                    claim_payload["proposedCardReleaseId"] = proposal
-            if specimen_ids:
-                claim_payload["specimenIds"] = specimen_ids
-            generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
-            generated_dispositions.append({
-                "sourceKind": "finish-printing-record",
-                "sourceId": printing_id,
-                "disposition": claim_payload["disposition"],
-                "targetRef": physical_id if confirmed else None,
-                "reason": claim_payload["reason"],
-            })
-            if not confirmed:
-                proposal = claim_payload.get("proposedCardReleaseId")
-                if proposal:
-                    generated_edges.append({
-                        "fromType": "candidate-claim", "fromId": claim_id,
-                        "relation": "proposes-for", "toType": "card-release", "toId": proposal,
-                        "provenance": {},
-                    })
-                continue
-
-            physical_payload = {
-                "physicalPrintingId": physical_id,
-                "semanticPrintingId": semantic_id,
-                "cardReleaseId": release_id,
-                "finish": printing["finish"],
-                "edition": printing.get("edition"),
-                "foilPattern": printing.get("foilPattern"),
-                "markings": printing.get("markings"),
-                "distribution": printing.get("distribution"),
-                "cardSize": printing.get("cardSize"),
-                "errorClass": None,
-                "classificationState": "classified-from-positive-evidence",
-                "sourceFinishUnitId": unit["finishUnitId"],
-                "sourcePrintingId": printing_id,
-                "establishingClaimId": claim_id,
-            }
-            if specimen_ids:
-                physical_payload["specimenIds"] = specimen_ids
-            _retain_field_sources(physical_payload, printing.get("specimenFieldSources"))
-            if printing.get("conflictsWith"):
-                physical_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
-            generated_entities.append(_entity("physical-printing", physical_id, physical_payload))
-            generated_edges.extend([
-                {
+            if proposal:
+                claim_payload["proposedCardReleaseId"] = proposal
+        if specimen_ids:
+            claim_payload["specimenIds"] = specimen_ids
+        generated_entities.append(_entity("candidate-claim", claim_id, claim_payload))
+        generated_dispositions.append({
+            "sourceKind": "finish-printing-record",
+            "sourceId": printing_id,
+            "disposition": claim_payload["disposition"],
+            "targetRef": physical_id if confirmed else None,
+            "reason": claim_payload["reason"],
+        })
+        if not confirmed:
+            proposal = claim_payload.get("proposedCardReleaseId")
+            if proposal:
+                generated_edges.append({
                     "fromType": "candidate-claim", "fromId": claim_id,
-                    "relation": "materializes", "toType": "physical-printing", "toId": physical_id,
-                    "provenance": {"disposition": "established-and-mapped"},
-                },
-                {
-                    "fromType": "physical-printing", "fromId": physical_id,
-                    "relation": "established-by", "toType": "candidate-claim", "toId": claim_id,
+                    "relation": "proposes-for", "toType": "card-release", "toId": proposal,
                     "provenance": {},
-                },
-                {
-                    "fromType": "physical-printing", "fromId": physical_id,
-                    "relation": "realizes", "toType": "card-release", "toId": release_id,
-                    "provenance": {},
-                },
-            ])
-            for specimen_id in specimen_ids:
-                specimen_targets[specimen_id] = physical_id
+                })
+            continue
 
+        physical_payload = {
+            "physicalPrintingId": physical_id,
+            "semanticPrintingId": semantic_id,
+            "cardReleaseId": release_id,
+            "finish": printing["finish"],
+            "edition": printing.get("edition"),
+            "foilPattern": printing.get("foilPattern"),
+            "markings": printing.get("markings"),
+            "distribution": printing.get("distribution"),
+            "cardSize": printing.get("cardSize"),
+            "errorClass": None,
+            "classificationState": "classified-from-positive-evidence",
+            "sourceFinishUnitId": unit["finishUnitId"],
+            "sourcePrintingId": printing_id,
+            "establishingClaimId": claim_id,
+        }
+        if specimen_ids:
+            physical_payload["specimenIds"] = specimen_ids
+        _retain_field_sources(physical_payload, printing.get("specimenFieldSources"))
+        if printing.get("conflictsWith"):
+            physical_payload["conflictsWith"] = sorted(set(printing["conflictsWith"]))
+        target, new_target = _printing_target(finish_by_semantic, physical_payload)
+        for specimen_id in specimen_ids:
+            specimen_targets[specimen_id] = target
+        if not new_target:
+            generated_edges.append({
+                "fromType": "candidate-claim", "fromId": claim_id,
+                "relation": "materializes", "toType": "physical-printing", "toId": target,
+                "provenance": {"disposition": "established-and-mapped"},
+            })
+            continue
+        generated_entities.append(_entity("physical-printing", physical_id, physical_payload))
+        generated_edges.extend([
+            {
+                "fromType": "candidate-claim", "fromId": claim_id,
+                "relation": "materializes", "toType": "physical-printing", "toId": physical_id,
+                "provenance": {"disposition": "established-and-mapped"},
+            },
+            {
+                "fromType": "physical-printing", "fromId": physical_id,
+                "relation": "established-by", "toType": "candidate-claim", "toId": claim_id,
+                "provenance": {},
+            },
+            {
+                "fromType": "physical-printing", "fromId": physical_id,
+                "relation": "realizes", "toType": "card-release", "toId": release_id,
+                "provenance": {},
+            },
+        ])
     standalone_by_semantic = {}
     # Groups are ordered with their primary first, including when its ID sorts last.
     for specimen_id, specimen in specimen_by_id.items():
@@ -489,7 +516,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
                 "specimenIds": member_ids,
             }
             _retain_field_sources(physical_payload, group.get("_fieldSources"))
-            target, standalone_target = _standalone_printing_target(standalone_by_semantic, physical_payload)
+            target, standalone_target = _printing_target(standalone_by_semantic, physical_payload)
             for member_id in member_ids:
                 specimen_targets[member_id] = target
             if standalone_target:
@@ -1322,6 +1349,20 @@ def _identity_projection_field_matches(
 
 
 # Identity input projections stay aligned with graph nodes.
+def _validate_finish_aliases(errors, printings, claims_by_source, finish_printings):
+    for physical_id, physical in printings.items():
+        for source_id in physical.get("sourcePrintingIds", []):
+            claim = claims_by_source.get(("finish-printing-record", source_id), {})
+            if source_id not in finish_printings or claim.get("materializedTargetId") != physical_id:
+                errors.append(f"finish printing alias is stale: {physical_id}:{source_id}")
+
+
+def _finish_provenance_matches(physical, print_id, finish_unit_id):
+    if physical.get("sourcePrintingId") == print_id:
+        return physical.get("sourceFinishUnitId") == finish_unit_id
+    return print_id in physical.get("sourcePrintingIds", [])
+
+
 def _validate_identity_projections(
     errors: list[str],
     units: list[dict[str, Any]],
@@ -1332,6 +1373,7 @@ def _validate_identity_projections(
     source_first_prints: dict[str, dict[str, Any]],
 ) -> dict[str, dict[str, Any]]:
     units_by_id = {str(row.get("unitId")): row for row in units}
+    _validate_finish_aliases(errors, printings, claims_by_source, finish_printings)
     for unit_id, unit in units_by_id.items():
         claim = claims_by_source.get(("legacy-language-unit", unit_id))
         target_id = claim.get("materializedTargetId") if claim else None
@@ -1364,7 +1406,7 @@ def _validate_identity_projections(
         for field in ("finish", "edition", "foilPattern", "markings", "distribution", "cardSize"):
             if physical.get(field) != printing.get(field):
                 errors.append(f"finish printing is stale: {print_id}:{field}")
-        if physical.get("sourceFinishUnitId") != finish_unit_id or physical.get("sourcePrintingId") != print_id:
+        if not _finish_provenance_matches(physical, print_id, finish_unit_id):
             errors.append(f"finish printing provenance is stale: {print_id}")
 
     for print_id, row in source_first_prints.items():

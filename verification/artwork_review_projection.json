@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-31",
-  "projectionVersion": "dae4f391dd44cd756af5a35484e8ad773c0e6727febf7f2ec22fca5b04509c22",
+  "projectionVersion": "d6641eea87725ea03f81abca1561e1dc4f6eebe530e5a6d8e3fc36ffe4dd320c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 893,
-    "sourceObservations": 3327
+    "sourceObservations": 3344
   },
   "groups": [
     {
@@ -2894,10 +2894,10 @@
             {
               "observationId": "unit:U0557",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Tag Bolt (sm9) is listed with a Korean release as \"태그볼트\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "fa4e3e471f5133cd83f367db50d2d5286e931272593752bdd9fbae9a9e038cc7",
+              "provider": "seller-listing-photo",
+              "url": "https://i.ebayimg.com/images/g/QuwAAeSwEdRpmWPo/s-l1600.webp",
+              "evidence": "specimen:SPEC-0622 visibly identifies Korean sm9 115/095 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "a2fba375ad3ffd90173c033d72b339a182724106dd4b66132276b9932dab8719",
               "image": "images/sm9_115_Eevee___Snorlax_GX_V3_558490.jpg"
             }
           ]
@@ -6835,6 +6835,17 @@
               "originalHash": "39cb611eae56af090ae42f47a22179a7cd3c477f841b41e2c17d963ea3ce7b68",
               "previewSrc": "images/previews/CSV10C_175_Hop_s_Snorlax_897733.jpg?v=29982f2711d35db7818003a2e101dc672f0b20e1c6c7ae64301ffc5e16925869",
               "thumbnailSrc": "images/thumbs/CSV10C_175_Hop_s_Snorlax_897733.jpg?v=27f9a4118f1767ce6e4a625d724a4f8e18d9a022e76e5088582cf11a1196e028"
+            },
+            {
+              "src": "verification/specimens/SPEC-0666.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0666",
+              "contentHash": "ce1565ac1e010aba28dce9cce82a776ca499a31ddeb70bc463dc045b6328af8b",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "ce1565ac1e010aba28dce9cce82a776ca499a31ddeb70bc463dc045b6328af8b",
+              "previewSrc": "images/previews/SPEC-0666.png?v=c759287af186d47e702b24bf54e2df399f809b43209a7fffa4a0f1ab83f963ae",
+              "thumbnailSrc": "images/thumbs/SPEC-0666.png?v=0cc4de17f7f9014e5f0668702b5921d5edcc50e79e062826a19c34454e7b9fc9"
             }
           ],
           "observations": [
@@ -6848,12 +6859,21 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0666",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://excaliburtcg.co.uk/products/csv10c-175-foil-v1",
+              "evidence": "Simplified Chinese Hop's Snorlax, CSV10C 175/222 R, GOSSAN; large ball design depicted. Reference depiction, not a physical foil observation.",
+              "contentHash": "f56024a5b3fd9f5d226cbae7ffc0d838869b8a75181a0501c0bd38182a31d350",
+              "image": "verification/specimens/SPEC-0666.png"
+            },
+            {
               "observationId": "unit:U0761",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Together_in_Pursuit_of_Glory_(ATCG)",
-              "evidence": "Simplified Chinese set article; set list row: Snorlax|175, Colorless, Rare",
-              "contentHash": "ab350bbb1a3a20ab7178cef6d583ae840863a7a8d593316aaf999329c1e81cca",
+              "provider": "retailer-listing",
+              "url": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946",
+              "evidence": "specimen:SPEC-0666 visibly identifies S-Chinese CSV10C 175/222 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "ac3cd0feaefce7f7c4c23e42a52e71e36c1a13ee06b0f44fe55d9f4ebce6a7b7",
               "image": "images/CSV10C_175_Hop_s_Snorlax_897733.png"
             }
           ]
@@ -16316,6 +16336,45 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:6d588ee5d9fa7aaac56bea97",
+              "semanticPrintingId": "PRINTING:6d588ee5d9fa7aaac56bea97",
+              "cardReleaseId": "RELEASE:CN:S-Chinese:CS5aC:093:Snorlax-Block-Collapse",
+              "finish": "mirror-holo",
+              "edition": null,
+              "foilPattern": "vertical-line",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0060",
+              "sourcePrintingId": "F0060-P04",
+              "establishingClaimId": "CLAIM:finish:PRINTING:6d588ee5d9fa7aaac56bea97",
+              "specimenIds": [
+                "SPEC-0669"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border. This directly observed mirror-holo surface has a vertical-line foil pattern. No other finish or inventory completeness is established. Retained as SPEC-0669.",
+                  "retrievedAt": "2026-10-31"
+                },
+                {
+                  "url": "https://www.pokemon.cn/tcg/product/16377.html",
+                  "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+                  "authorityTier": "official-primary",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "S-Chinese"
+                  ],
+                  "retrievedAt": "2026-08-27",
+                  "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:fbfbd896a1f06b781605d51d",
               "semanticPrintingId": "PRINTING:fbfbd896a1f06b781605d51d",
               "cardReleaseId": "RELEASE:CN:S-Chinese:CS5aC:093:Snorlax-Block-Collapse",
@@ -16356,7 +16415,9 @@
               "reverse-holo",
               "mirror-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "vertical-line"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -16372,6 +16433,17 @@
               "originalHash": "9011fcc0eb684cb0544b7a14ef88d49e26f0a52e138165166cb7bf7e9ebd6320",
               "previewSrc": "images/previews/CS5aC_093_Snorlax_800137.jpg?v=0e991cdaa951ae39a33a1073f21350cc300937205e4a41debb425de0726ccb69",
               "thumbnailSrc": "images/thumbs/CS5aC_093_Snorlax_800137.jpg?v=5fff66a33c214836d261ffa366f5620d89ed8ab4ec2b74babc4903137be1dbc6"
+            },
+            {
+              "src": "verification/specimens/SPEC-0669.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0669",
+              "contentHash": "8e0e73d2247db9d639f08819fc2eaa708a65bbb43024a91abb36a73aa3d35dbd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8e0e73d2247db9d639f08819fc2eaa708a65bbb43024a91abb36a73aa3d35dbd",
+              "previewSrc": "images/previews/SPEC-0669.png?v=3f0d5a7ed613875d62c72318ac1e177156f829a94fb8b5436a60fbaa8ec0958d",
+              "thumbnailSrc": "images/thumbs/SPEC-0669.png?v=b51a2429c54d0ea7b0531102086bbb6285fdd6590a01a075438dbed86a7c2c13"
             }
           ],
           "observations": [
@@ -16385,12 +16457,39 @@
               "image": null
             },
             {
+              "observationId": "finish:F0060-P04:0:3f7b77c9c7e5e509",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+              "evidence": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border. This directly observed mirror-holo surface has a vertical-line foil pattern. No other finish or inventory completeness is established. Retained as SPEC-0669.",
+              "contentHash": "3fe6226d616593ac6dcf6890ec34caa5f9628af96e69fdbab47d5e6c54d17487",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0060-P04:1:d4c48dae59a72376",
+              "kind": "finish",
+              "provider": "Official Mainland China Simplified Chinese card-finish guide",
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
+              "contentHash": "f5ca510705bc4b3bacb412eb4bc9970612fbb2c301327e3928e772cee58760e6",
+              "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0669",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.co.uk/itm/127836388784",
+              "evidence": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border. This directly observed mirror-holo surface has a vertical-line foil pattern. No other finish or inventory completeness is established.",
+              "contentHash": "a83198c8b65eb560ea8eebcad5f6339f2154b485866b9c69850643ce28e7c380",
+              "image": "verification/specimens/SPEC-0669.png"
+            },
+            {
               "observationId": "unit:U0183",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_(ATCG)",
-              "evidence": "Simplified Chinese set article; set list row: Snorlax|93, Colorless, Rare",
-              "contentHash": "5e0e5c4f5631fbb740d71bc00c270f9d89e3418957cb307558985e5c2afa7780",
+              "provider": "seller-listing-photo",
+              "url": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+              "evidence": "specimen:SPEC-0669 visibly identifies S-Chinese CS5aC 093/127 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "744e513bf32a8f80676ab6e8f5957fa813befcce38dd479e4533e0fee04c127f",
               "image": "images/CS5aC_093_Snorlax_800137.png"
             }
           ]
@@ -25558,6 +25657,17 @@
               "originalHash": "d33a7019a7c0e0bff87359ee36697b2ecaad899e7f1d949058b39499436b198d",
               "previewSrc": "images/previews/CS1aC_110_Snorlax_846872.jpg?v=7d754dec6f8a8fcfdb9935b26acbe8848cc96a3283554082462d1b05252f9228",
               "thumbnailSrc": "images/thumbs/CS1aC_110_Snorlax_846872.jpg?v=00defbbbd4a7fe70c2bce004ff03f3c6423e5f3dab4cf12e2eb93287ba79c75e"
+            },
+            {
+              "src": "verification/specimens/SPEC-0664.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0664",
+              "contentHash": "6e89d0cd1fad0547d2a6d64df5ddc3c0e931841dbf8ac41c5c8c698fdc47a53a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "6e89d0cd1fad0547d2a6d64df5ddc3c0e931841dbf8ac41c5c8c698fdc47a53a",
+              "previewSrc": "images/previews/SPEC-0664.png?v=c22217d3298703cbd1919f9d8c74f5878e62bd3ba6e4de340f50a12a46a8aac5",
+              "thumbnailSrc": "images/thumbs/SPEC-0664.png?v=647d61326c8fa4a1a002458b37388c43426bcd88c543ff138ab47779d4999bc8"
             }
           ],
           "observations": [
@@ -25571,12 +25681,21 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0664",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pikaqian.com/cards/47f5e484-2acb-4492-a941-3cc9c5a5643d",
+              "evidence": "Simplified Chinese face, CS1aC F 110/135 U, Yuu Nishida; large stars depicted on card body. 300px reference image; source-native reverse-holo label and graphic pattern are leads pending physical-image verification and source-capability review.",
+              "contentHash": "e58649b5327ba43a4a6d0e4c06689a70e2a4c858c9cda23a28fb747cb16242e9",
+              "image": "verification/specimens/SPEC-0664.png"
+            },
+            {
               "observationId": "unit:U0599",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_(ATCG)",
-              "evidence": "Simplified Chinese set \"Dynamax Clash\" (Jian&Dun Ji Ju Zheng Feng), released 2023-05-19; set list row 110/135 Snorlax, Uncommon (Thunder subset CS1a)",
-              "contentHash": "697dbbdb70d94d54ea51962d142a672253ebee0e799ac7dbfdd5ade7787b54e1",
+              "provider": "pikaqian",
+              "url": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp",
+              "evidence": "specimen:SPEC-0664 visibly identifies S-Chinese CS1aC 110/135 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "a278868bb1451b0f0239fce33794a6673ae0f4142e941ecacc582e18d689a7f0",
               "image": "images/CS1aC_110_Snorlax_846872.png"
             }
           ]
@@ -28123,6 +28242,17 @@
               "originalHash": "c68dc2e4790c29099523d173eadcdc573629e15f1466125bb60ca494422f1a8b",
               "previewSrc": "images/previews/CSV5C_115_Snorlax_Doll_848605.jpg?v=6493baffde4d79b29c365948c0e8ca05c2468696ac4670d17d100c7b52722e75",
               "thumbnailSrc": "images/thumbs/CSV5C_115_Snorlax_Doll_848605.jpg?v=3ca00ca9814ce5b96e1bd1b3aaacf5661245f06a68ab4b0cdaef37f43068f12a"
+            },
+            {
+              "src": "verification/specimens/SPEC-0668.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0668",
+              "contentHash": "deae948d86af8a7ec8687231e098a84280ee14ac901d12d08ec4ac3c00bafaa9",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "deae948d86af8a7ec8687231e098a84280ee14ac901d12d08ec4ac3c00bafaa9",
+              "previewSrc": "images/previews/SPEC-0668.png?v=896d7ba4aec6a2e46810c3c03f3d1e098ba9eebd36ca95803b7691171be8bcd2",
+              "thumbnailSrc": "images/thumbs/SPEC-0668.png?v=d623bb7f06372d899ab735bf049a41488e50057839cf4729fc2c1bb9be7403c7"
             }
           ],
           "observations": [
@@ -28136,12 +28266,21 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0668",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/226993782091",
+              "evidence": "Two-front composite, Simplified Chinese Snorlax Doll, CSV5C 115/129 U, AYUMI ODASHIMA; Master Ball and Poke Ball designs depicted. Composite stock depiction. No physical finish or same-card link to generic back established.",
+              "contentHash": "b9073f32b4bbee7773da244733ee860659d6311dc8cce8541dc8651fa8311b5b",
+              "image": "verification/specimens/SPEC-0668.png"
+            },
+            {
               "observationId": "unit:U0521",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Ardent_Obsidian_(ATCG)",
-              "evidence": "Simplified Chinese set article; set list row: Snorlax Doll|115, Item, Uncommon (Cardmarket \"Dark Crystal Blaze\" = Bulbapedia \"Ardent Obsidian\")",
-              "contentHash": "73e31d6ca0d478ab24eab0831ccd305ecea88561164e9b52d394ea01ac142eea",
+              "provider": "seller-listing-photo",
+              "url": "https://i.ebayimg.com/images/g/dCcAAeSweONo1onO/s-l1600.webp",
+              "evidence": "specimen:SPEC-0668 visibly identifies S-Chinese CSV5C 115/129 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "5ba35ce133887d2c469e3a51ed993a232827b2c711899773207f33d365db60f9",
               "image": "images/CSV5C_115_Snorlax_Doll_848605.png"
             }
           ]
@@ -37272,22 +37411,30 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0552",
+              "physicalPrintingId": "PHYSICAL:PRINTING:5f8b28eb3ec44fb795de8264",
+              "semanticPrintingId": "PRINTING:5f8b28eb3ec44fb795de8264",
               "cardReleaseId": "RELEASE:KR:Korean:s5a:093/070:Snorlax-Gormandize-Body-Slam",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0552",
+              "sourceFinishUnitId": "F0359",
+              "sourcePrintingId": "F0359-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:5f8b28eb3ec44fb795de8264",
               "specimenIds": [
                 "SPEC-0552"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0552.",
+                  "retrievedAt": "2026-09-21"
+                }
               ]
             }
           ],
@@ -37330,6 +37477,15 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0359-P01:0:a83cf3c8aea68d5b",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+              "evidence": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0552.",
+              "contentHash": "eb3a2b42f43b232d6fd77001af0e54bf95588116795bd4e1669fe9fe69f77efd",
+              "image": null
+            },
+            {
               "observationId": "source-first:KR:s5a:093/070:base",
               "kind": "source-first",
               "provider": "bulbapedia",
@@ -37344,16 +37500,16 @@
               "provider": null,
               "url": "https://m.bunjang.co.kr/products/430221399",
               "evidence": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
-              "contentHash": "3bddae761d66c5c9d05d7faeb15c830f79476c97574ba32f4c285dab6135d285",
+              "contentHash": "293501b6e3149f47a26b4de5fd30d53e010e5b3210a187332e46500d74d0b65f",
               "image": "verification/specimens/SPEC-0552.png"
             },
             {
               "observationId": "unit:U0601",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Matchless Fighters (s5a) is listed with a Korean release as \"쌍벽의 파이터\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "614b4c7913c487134982a6ea6018ecdd2aeccdf5b51a080673a3e40156bc4b8b",
+              "provider": "seller-listing-photo",
+              "url": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+              "evidence": "specimen:SPEC-0552 visibly identifies Korean s5a 093/070 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "5587b68dc3a5e6dcce3f3c0a062852c0d1a15d98e0f4b331432c1d78d89b8ace",
               "image": "images/s5a_93_Snorlax_552704.jpg"
             }
           ]
@@ -39665,6 +39821,10 @@
               "specimenIds": [
                 "SPEC-0474"
               ],
+              "sourcePrintingIds": [
+                "F0057-P02",
+                "F0357-P02"
+              ],
               "sources": [
                 {
                   "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
@@ -39674,6 +39834,23 @@
                   "claimFields": [
                     "identity"
                   ]
+                },
+                {
+                  "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+                  "sourceType": "Retail listing",
+                  "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+                  "retrievedAt": "2026-09-02",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
                 },
                 {
                   "sourceType": "Owner attestation (domain expert)",
@@ -39703,6 +39880,10 @@
               "specimenIds": [
                 "SPEC-0473"
               ],
+              "sourcePrintingIds": [
+                "F0057-P01",
+                "F0357-P01"
+              ],
               "sources": [
                 {
                   "sourceType": "Owner attestation (domain expert)",
@@ -39711,6 +39892,23 @@
                   ],
                   "retrievedAt": "2026-09-02",
                   "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-02",
+                  "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+                  "sourceType": "Retail listing",
+                  "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+                  "retrievedAt": "2026-09-02",
+                  "claimFields": [
+                    "identity"
+                  ]
                 },
                 {
                   "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
@@ -39829,6 +40027,42 @@
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
               "contentHash": "cdf61f66bc399e445b568a31618f354c0483636aed9c815d9ae4a374caaf74f2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0357-P01:0:554f21fc7ccd350f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "a39a229963aa4ebfd9821b31cd27a1879753ed0b6b82d5194eaa49a81a743b8b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0357-P01:1:8f736b195144ade4",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+              "contentHash": "dd82222311abecf467c342554734b538439a4f80c1aefd7372b99d81fcc48c77",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0357-P02:0:27257f4c6463d62e",
+              "kind": "finish",
+              "provider": "Retail listing",
+              "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+              "contentHash": "f97c2d73197b09dce909acad497969ffde4a73dc8dee9750362c6b24a1a5e97c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0357-P02:1:554f21fc7ccd350f",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties.",
+              "contentHash": "1ccda84d25aeeb6f32d63cf2711ceaa65eefbb2daf703fad618ab8da5512986d",
               "image": null
             },
             {
@@ -56451,6 +56685,17 @@
               "originalHash": "3a680750c179a9aa242c293823641a06e3852812419bb89a8c23400359172de1",
               "previewSrc": "images/previews/mC_568_Snorlax_863870.jpg?v=c97abb79e77f8f3b668d062243b6a2d234e531ac355ab653967375ff432fe58b",
               "thumbnailSrc": "images/thumbs/mC_568_Snorlax_863870.jpg?v=8b839e749f0cfdd5c617535211ab9c35f68cba5bde4c6de6ee17b9ce31923720"
+            },
+            {
+              "src": "verification/specimens/SPEC-0663.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0663",
+              "contentHash": "1641dbb7ce1e5ff76159cffcd8185e9979a976cea6084673f38fa7cfdac4e31f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1641dbb7ce1e5ff76159cffcd8185e9979a976cea6084673f38fa7cfdac4e31f",
+              "previewSrc": "images/previews/SPEC-0663.png?v=29cb9d047d0bf06bf4ac852f056ecb61ad1774168e2591fbccfb7c01da7874e5",
+              "thumbnailSrc": "images/thumbs/SPEC-0663.png?v=2eb00e2de0f9991b758e7950fbe56de41017d90cc24520497d30071b9bd33383"
             }
           ],
           "observations": [
@@ -56462,6 +56707,15 @@
               "evidence": "MC-568 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "218cf052a1a888629a6771c89be5c7d2f87383dc63565abfb093bfd0fc85d97e",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0663",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pao-onlineshop.com/view/item/000000112928",
+              "evidence": "Japanese card face, mC H 568/742, HP160, Po-Suzuki visible. Identity image; physical finish and exact pattern not established by the stock scan or seller foil title.",
+              "contentHash": "7b7f405bd322ea665dcab4159f09a3f63f612e597c5719a2c39856387e8a8988",
+              "image": "verification/specimens/SPEC-0663.jpg"
             },
             {
               "observationId": "unit:U0589",
@@ -88900,6 +89154,10 @@
               "sourceFinishUnitId": "F0331",
               "sourcePrintingId": "F0331-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:c8c1cf069f5bf2b0515f9760",
+              "specimenIds": [
+                "SPEC-0323",
+                "SPEC-0324"
+              ],
               "sources": [
                 {
                   "url": "https://www.ruten.com.tw/item/22223353127192/",
@@ -88914,6 +89172,12 @@
                   "evidence": "Independent seller photograph of exact Traditional Chinese S10a F 077/071 CHR."
                 },
                 {
+                  "url": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0324.",
+                  "retrievedAt": "2026-08-28"
+                },
+                {
                   "url": "https://www.nacg.tw/product-details.php?id=149595",
                   "sourceType": "Specialist card listing with exact retained image",
                   "authorityTier": "specialist-reference",
@@ -88924,27 +89188,13 @@
                   ],
                   "retrievedAt": "2026-08-28",
                   "evidence": "Exact S10a F 077/071 CHR listing explicitly identifies the card as Foil."
+                },
+                {
+                  "url": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0323.",
+                  "retrievedAt": "2026-08-28"
                 }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0323",
-              "cardReleaseId": "RELEASE:TW:T-Chinese:S10a F:077/071:Snorlax-Unfazed-Fat-Thumping-Snore",
-              "finish": "holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "basis": "The exact specialist listing identifies the card as Foil and the physical listing photograph shows the same exact card.",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0323",
-              "specimenIds": [
-                "SPEC-0323",
-                "SPEC-0324"
               ]
             }
           ],
@@ -88974,14 +89224,6 @@
               "thumbnailSrc": "images/thumbs/s10a_077_Snorlax_V2_657056.jpg?v=0c723345e168b85dc6cd265f51fe7e906dc2f2caa9034f5298bff0c460c2c857"
             },
             {
-              "src": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
-              "label": "publisher card image",
-              "observationId": "source-first:TW:S10a F:077/071:base",
-              "contentHash": null,
-              "kind": "source-url",
-              "reviewable": false
-            },
-            {
               "src": "verification/specimens/SPEC-0323.jpg",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0323",
@@ -88991,6 +89233,14 @@
               "originalHash": "401c75ea5eca84db87776dd887a011d81f6c90ce03d97e97c216bb5aa5e9736c",
               "previewSrc": "images/previews/SPEC-0323.png?v=eb99f2492d521c09eabd59193e4796922610954505aec2c5faab8931edc87720",
               "thumbnailSrc": "images/thumbs/SPEC-0323.png?v=d69353e3d7911b0fda31048feb745db9e3ba0de7964d5e0d4b739952b35545ee"
+            },
+            {
+              "src": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
+              "label": "publisher card image",
+              "observationId": "source-first:TW:S10a F:077/071:base",
+              "contentHash": null,
+              "kind": "source-url",
+              "reviewable": false
             },
             {
               "src": "verification/specimens/SPEC-0324.jpeg",
@@ -89011,16 +89261,34 @@
               "provider": "Seller listing photograph",
               "url": "https://www.ruten.com.tw/item/22223353127192/",
               "evidence": "Independent seller photograph of exact Traditional Chinese S10a F 077/071 CHR.",
-              "contentHash": "447c9f0c2b146548f13c075c2d01241308d5741da2dd22111d927b68cfc7d017",
+              "contentHash": "9e81f795dd04f348f50355b29a19e0b6eb50767f5c3278af548b2d65fdf785aa",
               "image": null
             },
             {
-              "observationId": "finish:F0331-P01:1:8f8a7229dfe623b3",
+              "observationId": "finish:F0331-P01:1:411a2a0979634f91",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0324.",
+              "contentHash": "a63099f7c0821fe9f9e8cc10842ca59fece60a1bfeb45d49e81706a27ef84e7c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0331-P01:2:8f8a7229dfe623b3",
               "kind": "finish",
               "provider": "Specialist card listing with exact retained image",
               "url": "https://www.nacg.tw/product-details.php?id=149595",
               "evidence": "Exact S10a F 077/071 CHR listing explicitly identifies the card as Foil.",
-              "contentHash": "31c42d1654ebd4aa24b84bf9992489a69333d5eb222464fd4abff41b20390a3d",
+              "contentHash": "ee91cac650eac9d6772585385187dba41e1237b8f692ac7e7734bb68a30ed55c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0331-P01:3:e8263c41df05572f",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0323.",
+              "contentHash": "7487950afbc62b5814af5de3e9782784407232af78abade8e229843f699c71fd",
               "image": null
             },
             {
@@ -89053,10 +89321,10 @@
             {
               "observationId": "unit:U0169",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Dark Phantasma (s10a) is listed with a T-Chinese release in the cross-language expansion index (set-level evidence)",
-              "contentHash": "5a57a672c4b80900584fd8ac5078c2e45f1206bd63eb8e144207c119e9e517c5",
+              "provider": "seller-listing-photo",
+              "url": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
+              "evidence": "specimen:SPEC-0323 visibly identifies T-Chinese S10a F 077/071 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "e011fa497cb58ad404ce5e14510c60c7b154cb84d7f38fa70ca434887dfd2944",
               "image": "images/s10a_077_Snorlax_V2_657056.jpg"
             }
           ]
@@ -89155,6 +89423,17 @@
               "originalHash": "b109da8d94d6333c4b627c03dfdd3b648b75cdb39c53682f2052dfa7da948cbb",
               "previewSrc": "images/previews/CS6bC_113_Snorlax_841773.jpg?v=821fe4a6c610e4a5ecd46345999e718e8c79557eda811681ed9feb577b89b26d",
               "thumbnailSrc": "images/thumbs/CS6bC_113_Snorlax_841773.jpg?v=f359912491eb56c07786466f1aaf94cc25a71434dc2c97c0272d940a0f0eeb60"
+            },
+            {
+              "src": "verification/specimens/SPEC-0665.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0665",
+              "contentHash": "3a8c3314655cbf6c16980bf4230a480b624116fbab62824d09a18ac96b36afa5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3a8c3314655cbf6c16980bf4230a480b624116fbab62824d09a18ac96b36afa5",
+              "previewSrc": "images/previews/SPEC-0665.png?v=9f966649491e82afbdda541081bd2491889472934d66748e131f097322b0d4fe",
+              "thumbnailSrc": "images/thumbs/SPEC-0665.png?v=9c5a9087cf40d2e83b6d42a0fd0d9430012fc2eb2095b707a36c74f26a3816df"
             }
           ],
           "observations": [
@@ -89168,12 +89447,21 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0665",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pikaqian.com/cards/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e",
+              "evidence": "Simplified Chinese face, CS6bC H 113/131 R, Asako Ito; coloured vertical foil depiction in illustration. 300px reference image. No new physical finish or exact pattern accepted.",
+              "contentHash": "65415fa06fceccfa880b8d1572e502c9e675190c041a59ccd977aa7d5d2d388c",
+              "image": "verification/specimens/SPEC-0665.png"
+            },
+            {
               "observationId": "unit:U0213",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Marine_Shadow_(ATCG)",
-              "evidence": "Simplified Chinese set article; set list row: Snorlax|113, Colorless, Rare",
-              "contentHash": "6d4a1ce8ef66ca68efcbd2213c2a90dd871ec30d03a5c826aa105c8b0083342b",
+              "provider": "pikaqian",
+              "url": "https://images.pikaqian.com/cs6bc/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e.webp",
+              "evidence": "specimen:SPEC-0665 visibly identifies S-Chinese CS6bC 113/131 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "4bf5976bba113bce740e6b8171dbb0356fa04187dade03e07255a9f7b7523633",
               "image": "images/CS6bC_113_Snorlax_841773.png"
             }
           ]
@@ -95892,22 +96180,30 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0553",
+              "physicalPrintingId": "PHYSICAL:PRINTING:e0f44346f759c8605c92aad5",
+              "semanticPrintingId": "PRINTING:e0f44346f759c8605c92aad5",
               "cardReleaseId": "RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0553",
+              "sourceFinishUnitId": "F0349",
+              "sourcePrintingId": "F0349-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e0f44346f759c8605c92aad5",
               "specimenIds": [
                 "SPEC-0553"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0553.",
+                  "retrievedAt": "2026-09-21"
+                }
               ]
             }
           ],
@@ -95950,6 +96246,15 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0349-P01:0:220b3a7718278e68",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+              "evidence": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0553.",
+              "contentHash": "61bbc5187cb5a548eed0c85be51bedbcf25207ebc9336d16d089ba69f4d656c3",
+              "image": null
+            },
+            {
               "observationId": "source-first:KR:s1H:070/060:base",
               "kind": "source-first",
               "provider": "bulbapedia",
@@ -95964,16 +96269,16 @@
               "provider": null,
               "url": "https://m.bunjang.co.kr/products/430796194",
               "evidence": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
-              "contentHash": "d920aae6055228567f41c1fd696f0d155c26c2f4bef60b3bfecc531c0b5ccac8",
+              "contentHash": "e92c13ce46da76d6a3e8c6fe038ecd04fd3e41db0edf7941e1112f09fd777a4d",
               "image": "verification/specimens/SPEC-0553.png"
             },
             {
               "observationId": "unit:U0508",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-              "evidence": "expansion Shield (s1H) is listed with a Korean release as \"실드\" in the cross-language expansion index (set-level evidence)",
-              "contentHash": "06e6a0ab2da259968e15259430b397c53d0a072d5be02d64dabf469c0e681760",
+              "provider": "seller-listing-photo",
+              "url": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+              "evidence": "specimen:SPEC-0553 visibly identifies Korean s1H 070/060 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "a293ce49ed011241cc7a52e9d59917bd0b635581c9a05711f1fac4e054e3a60f",
               "image": "images/s1H_70_Snorlax_VMAX_V2_467629.png"
             }
           ]
@@ -103294,6 +103599,17 @@
               "originalHash": "d45d4b25d7b21bc5a5624339f52fbc1a72297bd19c8b12842a1072dedc98a229",
               "previewSrc": "images/previews/151C_143_Snorlax_V1_819209.jpg?v=2a836eaaa77b81f3ef0622b4df83939fbab4649afb58b50cbc9f44f1377ba2b6",
               "thumbnailSrc": "images/thumbs/151C_143_Snorlax_V1_819209.jpg?v=f7a3ae7b5a97bb3abf12a8e1481be57ade363bc0bd88ad353442cc1ac8227d92"
+            },
+            {
+              "src": "verification/specimens/SPEC-0667.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0667",
+              "contentHash": "eae0be919c923d86a16d1799f97f1bb59ff6b292d106dc206a2f20f59a12645c",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "eae0be919c923d86a16d1799f97f1bb59ff6b292d106dc206a2f20f59a12645c",
+              "previewSrc": "images/previews/SPEC-0667.png?v=8caa7889d076d1c41b9e7b4d3d346d098214744b13153379c0750e92ca0de51e",
+              "thumbnailSrc": "images/thumbs/SPEC-0667.png?v=87123dff6ef7c7a0f467ea4e2cb9703a33e266333174e7fd6d2db8f458d51675"
             }
           ],
           "observations": [
@@ -103307,12 +103623,21 @@
               "image": null
             },
             {
+              "observationId": "specimen:SPEC-0667",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/389905853131",
+              "evidence": "Simplified Chinese face, 151C G 143/151 U, HYOGONOSUKE; large Master Ball design depicted. Stock depiction. No actual physical surface observation or finish-list closure.",
+              "contentHash": "f1b97372fefec79298531cfdd0b8e8137558eed9ed1adf5ac7ccf16c05610e71",
+              "image": "verification/specimens/SPEC-0667.png"
+            },
+            {
               "observationId": "unit:U0266",
               "kind": "unit",
-              "provider": "bulbapedia",
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Collection_151_(ATCG)",
-              "evidence": "Simplified Chinese set \"Collection 151\" (Shou Ji La 151), released 2025-01-17; set list row 143/151 Snorlax, Uncommon",
-              "contentHash": "55f810e17574cb97c3400428e6261e74de0b16dada2e0aeef456b781ef3712a4",
+              "provider": "seller-listing-photo",
+              "url": "https://i.ebayimg.com/images/g/zdYAAeSwt4dpezFO/s-l1600.webp",
+              "evidence": "specimen:SPEC-0667 visibly identifies S-Chinese 151C 143/151 from its printed card face. The reviewed legacy/local identity mapping is preserved; this language observation asserts no additional physical finish or complete finish list.",
+              "contentHash": "3ddad0da3b68856c46fa5182c3bcb9592c0e1d502a362351153de805e699dbc4",
               "image": "images/151C_143_Snorlax_V1_819209.jpg"
             }
           ]

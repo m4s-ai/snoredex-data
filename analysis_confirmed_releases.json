@@ -14163,7 +14163,8 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
+    "Japanese": "positive-evidence-only",
+    "Korean": "positive-evidence-only"
    },
    "languageEvidence": {
     "Japanese": {
@@ -14172,12 +14173,20 @@
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
+    },
+    "Korean": {
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
-    "Japanese"
+    "Japanese",
+    "Korean"
    ],
    "rowId": "sm9-115-v3-none",
    "datePrecision": "day",
@@ -17755,24 +17764,43 @@
     {
      "language": "Korean",
      "claimStatus": "confirmed",
-     "availableFinishes": [],
-     "unitAvailableFinishes": [],
+     "availableFinishes": [
+      "holo"
+     ],
+     "unitAvailableFinishes": [
+      "holo"
+     ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "pending",
       "mirror-holo": "pending"
      },
-     "status": "pending",
+     "status": "confirmed",
      "finishUnitId": "F0349",
-     "productMappingStatus": "pending",
-     "printings": []
+     "productMappingStatus": "confirmed",
+     "printings": [
+      {
+       "printingId": "F0349-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0553.png",
+       "specimenIds": [
+        "SPEC-0553"
+       ]
+      }
+     ]
     },
     {
      "language": "T-Chinese",
@@ -17798,7 +17826,8 @@
     }
    ],
    "finishCompletenessByLanguage": {
-    "Japanese": "positive-evidence-only"
+    "Japanese": "positive-evidence-only",
+    "Korean": "positive-evidence-only"
    },
    "languageEvidence": {
     "Japanese": {
@@ -17807,12 +17836,20 @@
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
+    },
+    "Korean": {
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
     }
    },
    "edition": "—",
    "edord": 1,
    "confirmedLanguages": [
-    "Japanese"
+    "Japanese",
+    "Korean"
    ],
    "rowId": "s1h-70-v2-none",
    "datePrecision": "day",
@@ -20901,48 +20938,56 @@
      "language": "S-Chinese",
      "claimStatus": "confirmed",
      "availableFinishes": [
-      "non-holo",
+      "holo",
       "reverse-holo"
      ],
      "unitAvailableFinishes": [
-      "non-holo",
+      "holo",
       "reverse-holo"
      ],
      "finishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "non-holo": "pending",
+      "holo": "confirmed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
-      "non-holo": "marketplace-claimed",
-      "holo": "pending",
-      "reverse-holo": "marketplace-claimed",
+      "non-holo": "pending",
+      "holo": "confirmed",
+      "reverse-holo": "confirmed",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0357",
      "productMappingStatus": "confirmed",
      "printings": [
       {
        "printingId": "F0357-P01",
-       "finish": "non-holo",
+       "finish": "holo",
        "foilPattern": null,
-       "markings": null,
+       "markings": [],
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0473.png",
+       "specimenIds": [
+        "SPEC-0473"
+       ]
       },
       {
        "printingId": "F0357-P02",
        "finish": "reverse-holo",
-       "foilPattern": null,
-       "markings": null,
+       "foilPattern": "star",
+       "markings": [],
        "distribution": null,
        "cardSize": "standard",
-       "verificationStatus": "marketplace-claimed",
-       "productMapping": "mapped"
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0474.png",
+       "specimenIds": [
+        "SPEC-0474"
+       ]
       }
      ]
     },
@@ -22413,29 +22458,45 @@
      "language": "Korean",
      "claimStatus": "confirmed",
      "availableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "unitAvailableFinishes": [
+      "holo",
       "reverse-holo"
      ],
      "finishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
      "unitFinishStatus": {
       "non-holo": "pending",
-      "holo": "pending",
+      "holo": "confirmed",
       "reverse-holo": "marketplace-claimed",
       "mirror-holo": "pending"
      },
-     "status": "marketplace-claimed",
+     "status": "confirmed",
      "finishUnitId": "F0359",
      "productMappingStatus": "confirmed",
      "printings": [
       {
        "printingId": "F0359-P01",
+       "finish": "holo",
+       "foilPattern": null,
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0552.png",
+       "specimenIds": [
+        "SPEC-0552"
+       ]
+      },
+      {
+       "printingId": "F0359-P02",
        "finish": "reverse-holo",
        "foilPattern": null,
        "markings": null,
@@ -22592,6 +22653,7 @@
    ],
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
+    "Korean": "positive-evidence-only",
     "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
@@ -22600,6 +22662,13 @@
     "Japanese": {
      "providerId": "bulbapedia",
      "provider": "Bulbapedia",
+     "authorityTier": 2,
+     "corroborated": false,
+     "checkable": true
+    },
+    "Korean": {
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
@@ -22630,6 +22699,7 @@
    "edord": 1,
    "confirmedLanguages": [
     "Japanese",
+    "Korean",
     "T-Chinese",
     "Indonesian",
     "Thai"
@@ -25422,7 +25492,12 @@
        "distribution": null,
        "cardSize": "standard",
        "verificationStatus": "confirmed",
-       "productMapping": "mapped"
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0323.jpg",
+       "specimenIds": [
+        "SPEC-0323",
+        "SPEC-0324"
+       ]
       }
      ]
     },
@@ -25512,6 +25587,7 @@
    "finishCompletenessByLanguage": {
     "Japanese": "positive-evidence-only",
     "Korean": "positive-evidence-only",
+    "T-Chinese": "positive-evidence-only",
     "Indonesian": "positive-evidence-only",
     "Thai": "positive-evidence-only"
    },
@@ -25527,6 +25603,13 @@
      "providerId": "pokemon-card-korea",
      "provider": "Pokémon Card official database and rules (Korea)",
      "authorityTier": 1,
+     "corroborated": false,
+     "checkable": true
+    },
+    "T-Chinese": {
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
+     "authorityTier": 2,
      "corroborated": false,
      "checkable": true
     },
@@ -25550,6 +25633,7 @@
    "confirmedLanguages": [
     "Japanese",
     "Korean",
+    "T-Chinese",
     "Indonesian",
     "Thai"
    ],
@@ -29568,9 +29652,9 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
-     "authorityTier": 2,
+     "providerId": "pikaqian",
+     "provider": "PikaQian retained card images",
+     "authorityTier": 3,
      "corroborated": false,
      "checkable": true
     }
@@ -35612,6 +35696,20 @@
        "cardSize": "standard",
        "verificationStatus": "confirmed",
        "productMapping": "mapped"
+      },
+      {
+       "printingId": "F0060-P04",
+       "finish": "mirror-holo",
+       "foilPattern": "vertical-line",
+       "markings": [],
+       "distribution": null,
+       "cardSize": "standard",
+       "verificationStatus": "confirmed",
+       "productMapping": "mapped",
+       "image": "verification/specimens/SPEC-0669.png",
+       "specimenIds": [
+        "SPEC-0669"
+       ]
       }
      ]
     }
@@ -35621,8 +35719,8 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
@@ -36201,9 +36299,9 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
-     "authorityTier": 2,
+     "providerId": "pikaqian",
+     "provider": "PikaQian retained card images",
+     "authorityTier": 3,
      "corroborated": false,
      "checkable": true
     }
@@ -37255,8 +37353,8 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
@@ -40897,8 +40995,8 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
+     "providerId": "seller-listing-photo",
+     "provider": "Seller listing photograph",
      "authorityTier": 2,
      "corroborated": false,
      "checkable": true
@@ -44114,9 +44212,9 @@
    },
    "languageEvidence": {
     "S-Chinese": {
-     "providerId": "bulbapedia",
-     "provider": "Bulbapedia",
-     "authorityTier": 2,
+     "providerId": "retailer-listing",
+     "provider": "Retailer and specialist card listings",
+     "authorityTier": 3,
      "corroborated": false,
      "checkable": true
     }

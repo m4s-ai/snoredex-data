@@ -9,11 +9,11 @@
    "Duplicate URLs are canonicalized on scheme, host and path; query strings are preserved because several providers encode the language or card id there."
   ],
   "counts": {
-   "providers": 45,
-   "evidenceRecords": 1821,
-   "uniqueUrls": 1812,
+   "providers": 46,
+   "evidenceRecords": 1832,
+   "uniqueUrls": 1823,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7342
+   "claimsAttributed": 7378
   }
  },
  "providers": [
@@ -71,7 +71,7 @@
     "image.pokemon.com.cn"
    ],
    "uniqueSources": 18,
-   "claimsSupported": 58
+   "claimsSupported": 59
   },
   {
    "providerId": "pokemon-card-jp",
@@ -222,7 +222,7 @@
     "bulbapedia.bulbagarden.net"
    ],
    "uniqueSources": 115,
-   "claimsSupported": 740
+   "claimsSupported": 730
   },
   {
    "providerId": "pokewiki",
@@ -845,7 +845,7 @@
     "product-images.s3.cardmarket.com"
    ],
    "uniqueSources": 347,
-   "claimsSupported": 976
+   "claimsSupported": 974
   },
   {
    "providerId": "cardmarket-product-image",
@@ -967,10 +967,33 @@
     "coleka.com",
     "www.coleka.com",
     "beehivetcg.com",
-    "rocketcoll.com"
+    "rocketcoll.com",
+    "pao-onlineshop.com",
+    "makeshop-multi-images.akamaized.net",
+    "excaliburtcg.co.uk"
    ],
-   "uniqueSources": 43,
-   "claimsSupported": 134
+   "uniqueSources": 49,
+   "claimsSupported": 149
+  },
+  {
+   "providerId": "pikaqian",
+   "displayName": "PikaQian retained card images",
+   "organization": "PikaQian",
+   "homepage": "https://pikaqian.com",
+   "licenseOrTerms": "Site terms; retained images used for identification only.",
+   "category": "card-database",
+   "authorityTier": 3,
+   "coverage": "Printed identity of the exact retained Simplified Chinese card image only",
+   "supportsAbsence": false,
+   "usedFor": [
+    "identity",
+    "language"
+   ],
+   "attribution": "PikaQian card image; original card artwork remains its rights holders'.",
+   "notes": "Reference depictions do not establish a physical finish, absence or catalogue completeness.",
+   "hosts": [],
+   "uniqueSources": 4,
+   "claimsSupported": 10
   },
   {
    "providerId": "internal-derivation",
@@ -1011,7 +1034,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 513
+   "claimsSupported": 515
   },
   {
    "providerId": "inspected-specimen",
@@ -1032,8 +1055,8 @@
    "attribution": "Physical card, inspected specimen.",
    "notes": "Stable specimen records retain the observation and available photograph provenance. Each claim must cite the exact specimen it uses.",
    "hosts": [],
-   "uniqueSources": 72,
-   "claimsSupported": 866
+   "uniqueSources": 70,
+   "claimsSupported": 862
   },
   {
    "providerId": "cardmarket-listing-photo",
@@ -1078,8 +1101,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 194,
-   "claimsSupported": 825
+   "uniqueSources": 197,
+   "claimsSupported": 849
   }
  ],
  "evidence": [
@@ -1737,22 +1760,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia expansion/product release field",
     "Localized set/product release-date record"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "CSV5C",
-    "SET-SRC-BP-DATE-FFA626271A99",
-    "U0521"
+    "SET-SRC-BP-DATE-FFA626271A99"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Awakening_Psychic_King_(TCG)",
@@ -1937,19 +1957,17 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article, card list row"
    ],
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 1,
    "stableIds": [
-    "U0193",
-    "U0266"
+    "U0193"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 2
+   "usageCount": 1
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Colorless_Lugia_(TCG)",
@@ -2062,16 +2080,15 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 5,
+   "stableIdCount": 4,
    "stableIds": [
     "U0241",
     "U0446",
     "U0543",
-    "U0599",
     "U0608"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 5
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Dynamax_Clash_Deck_Building_Gift_Box_(ATCG)",
@@ -2276,22 +2293,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia expansion/product release field",
     "Localized set/product release-date record"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "CS5aC",
-    "SET-SRC-BP-DATE-2AC19BA9E6B1",
-    "U0183"
+    "SET-SRC-BP-DATE-2AC19BA9E6B1"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Gallant_Galaxy_V_Starter_Deck_(ATCG)",
@@ -2748,7 +2762,7 @@
    "dimensions": [
     "language"
    ],
-   "stableIdCount": 38,
+   "stableIdCount": 34,
    "stableIds": [
     "U0085",
     "U0086",
@@ -2756,7 +2770,6 @@
     "U0093",
     "U0122",
     "U0123",
-    "U0169",
     "U0200",
     "U0212",
     "U0239",
@@ -2779,18 +2792,15 @@
     "U0475",
     "U0487",
     "U0502",
-    "U0508",
     "U0509",
     "U0512",
     "U0529",
     "U0533",
     "U0549",
-    "U0557",
-    "U0601",
     "U0630"
    ],
    "retrievedAt": "2026-07-21",
-   "usageCount": 38
+   "usageCount": 34
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Lost_Link_(TCG)",
@@ -2834,22 +2844,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia expansion/product release field",
     "Localized set/product release-date record"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "CS6bC",
-    "SET-SRC-BP-DATE-54C51EA13E7F",
-    "U0213"
+    "SET-SRC-BP-DATE-54C51EA13E7F"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)",
@@ -3988,22 +3995,19 @@
    "nonUrlEvidenceId": null,
    "providerId": "bulbapedia",
    "sourceTypes": [
-    "Bulbapedia (fan wiki), Simplified Chinese (ATCG) set article",
     "Bulbapedia expansion/product release field",
     "Localized set/product release-date record"
    ],
    "dimensions": [
-    "date",
-    "language"
+    "date"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 2,
    "stableIds": [
     "CSV10C",
-    "SET-SRC-BP-DATE-B89AC04101B7",
-    "U0761"
+    "SET-SRC-BP-DATE-B89AC04101B7"
    ],
    "retrievedAt": "2026-07-31",
-   "usageCount": 3
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://bulbapedia.bulbagarden.net/wiki/V_Starter_Sets_(TCG)",
@@ -8423,7 +8427,7 @@
    "stableIdCount": 8,
    "stableIds": [
     "F0358-P02",
-    "F0359-P01",
+    "F0359-P02",
     "F0360-P01",
     "F0361-P02",
     "F0362-P02",
@@ -9905,7 +9909,7 @@
     "finish",
     "product"
    ],
-   "stableIdCount": 11,
+   "stableIdCount": 9,
    "stableIds": [
     "F0354-P01",
     "F0354-P03",
@@ -9913,14 +9917,12 @@
     "F0355-P03",
     "F0356-P01",
     "F0356-P02",
-    "F0357-P01",
-    "F0357-P02",
     "SPEC-0210",
     "U0290",
     "s4 84 base"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 11
+   "usageCount": 9
   },
   {
    "canonicalUrl": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
@@ -13726,42 +13728,6 @@
    "usageCount": 3
   },
   {
-   "canonicalUrl": "https://excaliburtcg.co.uk/cdn/shop/files/108_612bb9b0-6fe3-4557-8c5d-906ac9944efe.png?v=1784809179&width=533",
-   "nonUrlEvidenceId": null,
-   "providerId": "inspected-specimen",
-   "sourceTypes": [
-    "Inspected reference photograph; original provider unspecified"
-   ],
-   "dimensions": [
-    "identity"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "SPEC-0154",
-    "U0588"
-   ],
-   "retrievedAt": "2026-08-27",
-   "usageCount": 2
-  },
-  {
-   "canonicalUrl": "https://excaliburtcg.co.uk/collections/set-csvl1c",
-   "nonUrlEvidenceId": null,
-   "providerId": "inspected-specimen",
-   "sourceTypes": [
-    "Inspected reference photograph; original provider unspecified"
-   ],
-   "dimensions": [
-    "identity"
-   ],
-   "stableIdCount": 2,
-   "stableIds": [
-    "SPEC-0154",
-    "U0588"
-   ],
-   "retrievedAt": "2026-08-27",
-   "usageCount": 2
-  },
-  {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/262",
    "nonUrlEvidenceId": null,
    "providerId": "inspected-specimen",
@@ -14971,7 +14937,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 447,
+   "stableIdCount": 449,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
@@ -15051,6 +15017,8 @@
     "F0332-P01",
     "F0351-P01",
     "F0352-P01",
+    "F0357-P01",
+    "F0357-P02",
     "F0367-P01",
     "F0369-P01",
     "F0372-P01",
@@ -15422,7 +15390,7 @@
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
    "retrievedAt": "2026-10-26",
-   "usageCount": 511
+   "usageCount": 513
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -15441,6 +15409,80 @@
     "override:issue-268-owner-gen58-it"
    ],
    "retrievedAt": null,
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "pikaqian",
+   "sourceTypes": [
+    "PikaQian retained reference image; identity only"
+   ],
+   "dimensions": [
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0664",
+    "U0599"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://images.pikaqian.com/cs6bc/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "pikaqian",
+   "sourceTypes": [
+    "PikaQian retained reference image; identity only"
+   ],
+   "dimensions": [
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0665",
+    "U0213"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://pikaqian.com/cards/47f5e484-2acb-4492-a941-3cc9c5a5643d",
+   "nonUrlEvidenceId": null,
+   "providerId": "pikaqian",
+   "sourceTypes": [
+    "PikaQian retained reference image; identity only"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0664",
+    "U0599"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://pikaqian.com/cards/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e",
+   "nonUrlEvidenceId": null,
+   "providerId": "pikaqian",
+   "sourceTypes": [
+    "PikaQian retained reference image; identity only"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0665",
+    "U0213"
+   ],
+   "retrievedAt": "2026-10-31",
    "usageCount": 2
   },
   {
@@ -23248,7 +23290,7 @@
     "finish",
     "finish-override"
    ],
-   "stableIdCount": 18,
+   "stableIdCount": 19,
    "stableIds": [
     "F0000-P03",
     "F0001-P01",
@@ -23258,6 +23300,7 @@
     "F0055-P01",
     "F0058-P01",
     "F0060-P03",
+    "F0060-P04",
     "F0063-P03",
     "F0065-P01",
     "F0067-P04",
@@ -23270,7 +23313,7 @@
     "override:pokemon-cn-simplified-finish-rules"
    ],
    "retrievedAt": "2026-08-27",
-   "usageCount": 18
+   "usageCount": 19
   },
   {
    "canonicalUrl": "https://www.pokemon.cn/tcg/product/19640.html",
@@ -27586,6 +27629,79 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://excaliburtcg.co.uk/cdn/shop/files/108_612bb9b0-6fe3-4557-8c5d-906ac9944efe.png?v=1784809179&width=533",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0154",
+    "U0588"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0666",
+    "U0761"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 3
+  },
+  {
+   "canonicalUrl": "https://excaliburtcg.co.uk/collections/set-csvl1c",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Inspected reference photograph; original provider unspecified"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0154",
+    "U0588"
+   ],
+   "retrievedAt": "2026-08-27",
+   "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://excaliburtcg.co.uk/products/csv10c-175-foil-v1",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0666",
+    "U0761"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://exorgames.com/products/snorlax-10-101-delta-species-stamped-ex-dragon-frontiers",
    "nonUrlEvidenceId": null,
    "providerId": "retailer-listing",
@@ -27645,6 +27761,24 @@
    "usageCount": 3
   },
   {
+   "canonicalUrl": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0663",
+    "U0589"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
    "nonUrlEvidenceId": null,
    "providerId": "retailer-listing",
@@ -27654,15 +27788,16 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 4,
+   "stableIdCount": 5,
    "stableIds": [
     "CN:CS2aC:086/115:base",
     "F0057-P01",
+    "F0357-P01",
     "SPEC-0473",
     "U0255"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
@@ -27674,14 +27809,15 @@
    "dimensions": [
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
     "F0057-P02",
+    "F0357-P02",
     "SPEC-0474",
     "U0255"
    ],
    "retrievedAt": "2026-09-02",
-   "usageCount": 4
+   "usageCount": 5
   },
   {
    "canonicalUrl": "https://media.pokipair.com/2024/09/06025344/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-240.png",
@@ -27702,6 +27838,24 @@
    ],
    "retrievedAt": "2026-09-02",
    "usageCount": 4
+  },
+  {
+   "canonicalUrl": "https://pao-onlineshop.com/view/item/000000112928",
+   "nonUrlEvidenceId": null,
+   "providerId": "retailer-listing",
+   "sourceTypes": [
+    "Retail listing"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0663",
+    "U0589"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://rocketcoll.com/cdn/shop/files/372397.png?v=1767879965",
@@ -28142,14 +28296,15 @@
     "finish",
     "identity"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0331-P01",
     "SPEC-0324",
     "TW:S10a F:077/071:base",
     "U0169"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 7
   },
   {
    "canonicalUrl": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0203/user/866e84e8ba8f330fcb6c7d451138f6e341eb7de695a3ab3444d7359de6e6d30d/i-img900x1200-17737323452545wporbm397854.jpg",
@@ -29271,6 +29426,27 @@
    "usageCount": 5
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "finish",
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0060-P04",
+    "SPEC-0669",
+    "U0183"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 6
+  },
+  {
    "canonicalUrl": "https://i.ebayimg.com/images/g/4J8AAeSw4ulo1MUk/s-l1600.webp",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -29938,7 +30114,8 @@
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
    "stableIdCount": 3,
    "stableIds": [
@@ -29947,7 +30124,7 @@
     "U0557"
    ],
    "retrievedAt": "2026-10-07",
-   "usageCount": 5
+   "usageCount": 6
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/Qx4AAeSwIXFpyPpM/s-l1600.webp",
@@ -30143,6 +30320,25 @@
    ],
    "retrievedAt": "2026-08-27",
    "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/dCcAAeSweONo1onO/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0668",
+    "U0521"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://i.ebayimg.com/images/g/do0AAOSw~-RmRu8w/s-l1600.jpg",
@@ -30861,6 +31057,25 @@
    "usageCount": 2
   },
   {
+   "canonicalUrl": "https://i.ebayimg.com/images/g/zdYAAeSwt4dpezFO/s-l1600.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity",
+    "language"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0667",
+    "U0266"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 3
+  },
+  {
    "canonicalUrl": "https://images1.vinted.net/tc/06_0125c_YuCvs2w9fvPxPwPjdGLqjLBj/1782993792.jpeg?s=415eb6f4e151c0f27be5d6e9d8c7ba37a5cb68f6",
    "nonUrlEvidenceId": null,
    "providerId": "seller-listing-photo",
@@ -31380,15 +31595,18 @@
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0359-P01",
     "KR:s5a:093/070:base",
-    "SPEC-0552"
+    "SPEC-0552",
+    "U0601"
    ],
    "retrievedAt": "2026-09-21",
-   "usageCount": 4
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
@@ -31399,15 +31617,18 @@
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0349-P01",
     "KR:s1H:070/060:base",
-    "SPEC-0553"
+    "SPEC-0553",
+    "U0508"
    ],
    "retrievedAt": "2026-09-21",
-   "usageCount": 4
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://media.bunjang.co.kr/product/430875494_1_1789132446.jpg",
@@ -31855,16 +32076,18 @@
    ],
    "dimensions": [
     "finish",
-    "identity"
+    "identity",
+    "language"
    ],
-   "stableIdCount": 3,
+   "stableIdCount": 4,
    "stableIds": [
+    "F0331-P01",
     "SPEC-0323",
     "TW:S10a F:077/071:base",
     "U0169"
    ],
    "retrievedAt": "2026-08-28",
-   "usageCount": 6
+   "usageCount": 8
   },
   {
    "canonicalUrl": "https://www.ruten.com.tw/item/22223353127192",

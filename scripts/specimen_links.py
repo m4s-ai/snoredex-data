@@ -41,6 +41,7 @@ def release_reference_ids(release, physicals, claims) -> set[str]:
     claim_ids = set(release.get("claimIds") or []) | set(release.get("establishingClaimIds") or [])
     for physical in physicals:
         refs.add(physical.get("sourcePrintingId"))
+        refs.update(physical.get("sourcePrintingIds") or [])
         claim_ids.add(physical.get("establishingClaimId"))
     refs.update(claim_ids)
     for claim_id in claim_ids:

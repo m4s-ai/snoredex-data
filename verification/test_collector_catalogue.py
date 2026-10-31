@@ -495,6 +495,21 @@ def product_rarity_regressions() -> None:
 
 
 def main() -> None:
+    reference_images = {"identity": {"photograph": "identity.png"}}
+    assert collector.prefer_retained_image(
+        "legacy.jpg", "legacy-product", None, reference_images, ["identity"]
+    ) == ("verification/specimens/identity.png", "card-release")
+    assert collector.prefer_retained_image(
+        "physical.png", "exact-printing", None, reference_images, ["identity"]
+    ) == ("physical.png", "exact-printing")
+    assert collector.prefer_retained_image(
+        "legacy.jpg", "legacy-product", None, reference_images, ["unrelated"]
+    ) == ("legacy.jpg", "legacy-product")
+    assert collector.prefer_retained_image(
+        "legacy.jpg", "legacy-product", None,
+        {"other-finish": {"photograph": "foil.png", "physicalObservation": {"finish": "holo"}}},
+        ["other-finish"],
+    ) == ("legacy.jpg", "legacy-product")
     edition_rule_regressions()
     product_rarity_regressions()
     numbering_basis_regressions()
@@ -613,14 +628,13 @@ def main() -> None:
     cs2ac_086_items = [
         row for row in catalogue["items"] if row["cardReleaseId"] == cs2ac_086_release
     ]
-    # Owner decision 2026-10-22: the s4 84 via-release is merged into CS2aC 086. Its marketplace
-    # finish candidates stay candidates; only the reviewed finishes are verified printings.
+    # The reviewed bridge applies the existing CS2aC owner closure to its merged s4 alias.
     assert {row["finish"] for row in cs2ac_086_items if row["itemKind"] == "verified-printing"} \
         == {"holo", "reverse-holo"}
-    assert {(row["finish"], tuple(row["legacyChecklistIds"])) for row in cs2ac_086_items
-            if row["itemKind"] == "finish-candidate"} == {
-        ("non-holo", ("s4-84-s-chinese-none-non-holo",)),
-        ("reverse-holo", ("s4-84-s-chinese-none-reverse-holo",)),
+    assert len(cs2ac_086_items) == 2
+    assert {(row["finish"], tuple(row["legacyChecklistIds"])) for row in cs2ac_086_items} == {
+        ("holo", ("cs2ac-086-s-chinese-none-holo", "s4-84-s-chinese-none-holo")),
+        ("reverse-holo", ("cs2ac-086-s-chinese-none-reverse-holo-star", "s4-84-s-chinese-none-reverse-holo-star")),
     }
     cs2ac_086_items = [row for row in cs2ac_086_items if row["itemKind"] == "verified-printing"]
     assert all(
@@ -1023,8 +1037,10 @@ def main() -> None:
     legacy_compatibility = catalogue["qualitySummary"]["legacyCompatibility"]
     predecessor_items = predecessor["items"]
     graph_printing_ids = {
-        row["payload"].get("sourcePrintingId")
+        source_id
         for row in graph["entities"] if row["entityType"] == "physical-printing"
+        for source_id in set(row["payload"].get("sourcePrintingIds", []))
+        | {row["payload"].get("sourcePrintingId")} - {None}
     }
     graph_release_ids = {
         row["payload"]["cardReleaseId"]

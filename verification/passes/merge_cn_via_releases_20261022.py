@@ -22,7 +22,7 @@ ROUTES = V / "collector_migration_routes.json"
 OVERRIDES = V / "finish_overrides.json"
 # Finish units stay keyed by the legacy Cardmarket code. The reviewed releaseSetCode bridge lets
 # a specimen of the identified CN print join that unit instead of projecting a second printing.
-# s4 84 needs none: its counterpart CS2aC 086 is a finish unit of its own.
+# s4 84 shares the CS2aC 086 specimens through the reviewed 2026-10-31 finish bridge.
 FINISH_BRIDGES = [("sH", "038", "CS2DaC", None), ("sI100", "341", "CS4DaC", "V1"),
                   ("sI100", "342", "CS4DaC", "V2"), ("svIba", "046", "CSVSC", None)]
 

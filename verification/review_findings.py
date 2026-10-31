@@ -164,7 +164,32 @@ def specimen_matches_unit(
         and specimen["variant"] == (unit.get("variant") or "base")
         and specimen["language"] == unit["language"]
     )
-    return literal_match or (unit["unitId"], specimen["specimenId"]) in rekeyed_specimens
+    return specimen["language"] == unit["language"] and (
+        literal_match or (unit["unitId"], specimen["specimenId"]) in rekeyed_specimens
+    )
+
+
+def reviewed_specimen_rekeys(question_sets, source_first, specimens):
+    """Follow reviewed release mappings, including exactly matching cited secondary photos."""
+    result = set()
+    mappings = [row for question in question_sets for row in question["mappings"]]
+    for mapping in mappings:
+        print_id = mapping["sourceFirstRecordId"]
+        record = source_first.get(print_id)
+        if not record:
+            continue
+        if record.get("specimenId"):
+            result.add((mapping["legacyUnitId"], record["specimenId"]))
+        local_identity = {
+            "unitId": print_id, "setCode": record["localSetCode"], "number": record["localNumber"],
+            "variant": record.get("variant"), "language": record["language"],
+        }
+        for specimen in specimens.values():
+            if print_id in (specimen.get("citedBy") or []) and specimen_matches_unit(
+                specimen, local_identity, set(),
+            ):
+                result.add((mapping["legacyUnitId"], specimen["specimenId"]))
+    return result
 
 
 @contextlib.contextmanager
@@ -1921,13 +1946,10 @@ def _collect_g6(state: dict[str, Any]) -> dict[str, Any]:
                 row["printId"]: row
                 for row in load("verification/source_first_prints.json")["prints"]
             }
-            rekeyed_specimens = {
-                (mapping["legacyUnitId"], source_first_by_id[mapping["sourceFirstRecordId"]]["specimenId"])
-                for question_set in load("verification/legacy_issue_rekeys.json")["questionSets"]
-                for mapping in question_set["mappings"]
-                if mapping["sourceFirstRecordId"] in source_first_by_id
-                and source_first_by_id[mapping["sourceFirstRecordId"]].get("specimenId")
-            }
+            rekeyed_specimens = reviewed_specimen_rekeys(
+                load("verification/legacy_issue_rekeys.json")["questionSets"],
+                source_first_by_id, specimen_by_id,
+            )
             specimen_dir = ROOT / "verification" / "specimens"
             duplicate_specimens = [sid for sid, n in Counter(s["specimenId"] for s in specimens).items() if n > 1]
             check(

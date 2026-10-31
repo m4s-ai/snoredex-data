@@ -39,18 +39,18 @@
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
       "lastUpdated": "2026-10-31",
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 547,
-      "withOnlyMarketplaceClaim": 10,
-      "pendingFinish": 3,
+      "withConfirmedFinish": 550,
+      "withOnlyMarketplaceClaim": 8,
+      "pendingFinish": 2,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 18,
-      "withNonHolo": 324,
-      "withHolo": 265,
+      "withNonHolo": 323,
+      "withHolo": 268,
       "withReverseHolo": 224,
       "withMirrorHolo": 23,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 20,
-      "withAnyUnresolvedDetail": 98,
+      "withUnresolvedProductMapping": 19,
+      "withAnyUnresolvedDetail": 96,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -10793,7 +10793,12 @@
                 "distribution": null,
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped"
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0323.jpg",
+                "specimenIds": [
+                  "SPEC-0323",
+                  "SPEC-0324"
+                ]
               }
             ]
           },
@@ -10884,23 +10889,22 @@
       "languagesConfirmed": [
         "Japanese",
         "Korean",
+        "T-Chinese",
         "Indonesian",
         "Thai"
       ],
       "languagesContradicted": [],
-      "languagesUnresolved": [
-        "T-Chinese"
-      ],
+      "languagesUnresolved": [],
       "languageVerification": {
-        "status": "partial",
+        "status": "resolved",
         "claimed": 5,
         "repositoryConfirmed": 5,
-        "confirmed": 4,
+        "confirmed": 5,
         "contradicted": 0,
         "notPrinted": 0,
         "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
+        "needsEvidence": 0,
+        "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
       "languagesNotPrinted": [],
@@ -10912,9 +10916,7 @@
         "Indonesian",
         "Thai"
       ],
-      "languagesNeedsEvidence": [
-        "T-Chinese"
-      ]
+      "languagesNeedsEvidence": []
     },
     {
       "name": "Snorlax",
@@ -11710,6 +11712,20 @@
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
                 "productMapping": "mapped"
+              },
+              {
+                "printingId": "F0060-P04",
+                "finish": "mirror-holo",
+                "foilPattern": "vertical-line",
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0669.png",
+                "specimenIds": [
+                  "SPEC-0669"
+                ]
               }
             ]
           }
@@ -19035,7 +19051,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "non-holo",
           "holo",
@@ -19051,48 +19067,56 @@
             "language": "S-Chinese",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "non-holo",
+              "holo",
               "reverse-holo"
             ],
             "unitAvailableFinishes": [
-              "non-holo",
+              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
-              "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
-              "holo": "pending",
-              "reverse-holo": "marketplace-claimed",
+              "non-holo": "pending",
+              "holo": "confirmed",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0357",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0357-P01",
-                "finish": "non-holo",
+                "finish": "holo",
                 "foilPattern": null,
-                "markings": null,
+                "markings": [],
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0473.png",
+                "specimenIds": [
+                  "SPEC-0473"
+                ]
               },
               {
                 "printingId": "F0357-P02",
                 "finish": "reverse-holo",
-                "foilPattern": null,
-                "markings": null,
+                "foilPattern": "star",
+                "markings": [],
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0474.png",
+                "specimenIds": [
+                  "SPEC-0474"
+                ]
               }
             ]
           },
@@ -32975,7 +32999,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -33027,24 +33051,43 @@
           {
             "language": "Korean",
             "claimStatus": "confirmed",
-            "availableFinishes": [],
-            "unitAvailableFinishes": [],
+            "availableFinishes": [
+              "holo"
+            ],
+            "unitAvailableFinishes": [
+              "holo"
+            ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "pending",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "confirmed",
             "finishUnitId": "F0349",
-            "productMappingStatus": "pending",
-            "printings": []
+            "productMappingStatus": "confirmed",
+            "printings": [
+              {
+                "printingId": "F0349-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0553.png",
+                "specimenIds": [
+                  "SPEC-0553"
+                ]
+              }
+            ]
           },
           {
             "language": "T-Chinese",
@@ -33071,24 +33114,23 @@
         ]
       },
       "languagesConfirmed": [
-        "Japanese"
+        "Japanese",
+        "Korean"
       ],
       "languagesContradicted": [
         "T-Chinese"
       ],
-      "languagesUnresolved": [
-        "Korean"
-      ],
+      "languagesUnresolved": [],
       "languageVerification": {
-        "status": "partial",
+        "status": "resolved",
         "claimed": 3,
         "repositoryConfirmed": 2,
-        "confirmed": 1,
+        "confirmed": 2,
         "contradicted": 1,
         "notPrinted": 1,
         "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
+        "needsEvidence": 0,
+        "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
       "languagesNotPrinted": [
@@ -33099,9 +33141,7 @@
         "Japanese",
         "Korean"
       ],
-      "languagesNeedsEvidence": [
-        "Korean"
-      ]
+      "languagesNeedsEvidence": []
     },
     {
       "name": "Snorlax V",
@@ -36674,24 +36714,23 @@
         ]
       },
       "languagesConfirmed": [
-        "Japanese"
+        "Japanese",
+        "Korean"
       ],
       "languagesContradicted": [
         "T-Chinese"
       ],
-      "languagesUnresolved": [
-        "Korean"
-      ],
+      "languagesUnresolved": [],
       "languageVerification": {
-        "status": "partial",
+        "status": "resolved",
         "claimed": 3,
         "repositoryConfirmed": 2,
-        "confirmed": 1,
+        "confirmed": 2,
         "contradicted": 1,
         "notPrinted": 1,
         "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
+        "needsEvidence": 0,
+        "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
       "languagesNotPrinted": [
@@ -36702,9 +36741,7 @@
         "Japanese",
         "Korean"
       ],
-      "languagesNeedsEvidence": [
-        "Korean"
-      ]
+      "languagesNeedsEvidence": []
     },
     {
       "name": "Eevee & Snorlax GX",
@@ -39533,29 +39570,45 @@
             "language": "Korean",
             "claimStatus": "confirmed",
             "availableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "unitAvailableFinishes": [
+              "holo",
               "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "pending",
+              "holo": "confirmed",
               "reverse-holo": "marketplace-claimed",
               "mirror-holo": "pending"
             },
-            "status": "marketplace-claimed",
+            "status": "confirmed",
             "finishUnitId": "F0359",
             "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0359-P01",
+                "finish": "holo",
+                "foilPattern": null,
+                "markings": [],
+                "distribution": null,
+                "cardSize": "standard",
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0552.png",
+                "specimenIds": [
+                  "SPEC-0552"
+                ]
+              },
+              {
+                "printingId": "F0359-P02",
                 "finish": "reverse-holo",
                 "foilPattern": null,
                 "markings": null,
@@ -39713,24 +39766,23 @@
       },
       "languagesConfirmed": [
         "Japanese",
+        "Korean",
         "T-Chinese",
         "Indonesian",
         "Thai"
       ],
       "languagesContradicted": [],
-      "languagesUnresolved": [
-        "Korean"
-      ],
+      "languagesUnresolved": [],
       "languageVerification": {
-        "status": "partial",
+        "status": "resolved",
         "claimed": 5,
         "repositoryConfirmed": 5,
-        "confirmed": 4,
+        "confirmed": 5,
         "contradicted": 0,
         "notPrinted": 0,
         "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
+        "needsEvidence": 0,
+        "unresolved": 0,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
       "languagesNotPrinted": [],
@@ -39742,9 +39794,7 @@
         "Indonesian",
         "Thai"
       ],
-      "languagesNeedsEvidence": [
-        "Korean"
-      ]
+      "languagesNeedsEvidence": []
     },
     {
       "name": "Snorlax",

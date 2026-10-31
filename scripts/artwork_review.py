@@ -395,21 +395,25 @@ def build() -> dict[str, Any]:
             if not physical_entity:
                 continue
             printing = normalize_semantic(physical_entity["payload"])
-            finish_source = finish_by_printing.get(printing.get("sourcePrintingId") or printing.get("physicalPrintingId"))
-            if finish_source:
-                finish_unit = finish_source["finishUnit"]
-                source_printing = finish_source["printing"]
-                normalized_source_printing = normalize_semantic(source_printing)
-                normalized_sources = normalized_source_printing.get("sources") or []
-                printing["sources"] = normalized_sources
-                for source_index, source in enumerate(normalized_sources):
-                    source_tag = f"{source_index}:{semantic_digest(source)[:16]}"
-                    observations.append(source_observation(
-                        "finish", f"{printing.get('sourcePrintingId') or physical_id}:{source_tag}",
-                        {"finishUnitId": finish_unit.get("finishUnitId"),
-                         "printing": normalized_source_printing, "source": source},
-                        url=source.get("url"), evidence=source.get("evidence"), provider=source.get("sourceType"),
-                    ))
+            source_ids = sorted(set(printing.get("sourcePrintingIds", [])) | {
+                printing.get("sourcePrintingId") or printing.get("physicalPrintingId")
+            })
+            for source_id in source_ids:
+                finish_source = finish_by_printing.get(source_id)
+                if finish_source:
+                    finish_unit = finish_source["finishUnit"]
+                    source_printing = finish_source["printing"]
+                    normalized_source_printing = normalize_semantic(source_printing)
+                    normalized_sources = normalized_source_printing.get("sources") or []
+                    printing.setdefault("sources", []).extend(normalized_sources)
+                    for source_index, source in enumerate(normalized_sources):
+                        source_tag = f"{source_index}:{semantic_digest(source)[:16]}"
+                        observations.append(source_observation(
+                            "finish", f"{source_id}:{source_tag}",
+                            {"finishUnitId": finish_unit.get("finishUnitId"),
+                             "printing": normalized_source_printing, "source": source},
+                            url=source.get("url"), evidence=source.get("evidence"), provider=source.get("sourceType"),
+                        ))
             physical.append(printing)
             detection["finish"].append(printing.get("finish"))
             if printing.get("foilPattern"):
