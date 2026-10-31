@@ -10,7 +10,7 @@ A value is recorded only from a positive source that states it for the exact car
 
 | Gap | Value | Evidence |
 |---|---|---|
-| JP EXS Snorlax, Expansion Sheet 1 vending printing (1998-03-23): no image | SPEC-0661 | The pokumon.com image shows No. 143 with the diamond Uncommon symbol and no CoroCoro contest credit, which tells it apart from the Quick Starter Gift Set printing (SPEC-0200). Attached to the vending printing by [`attach_exs_vending_image_20261031.py`](../../passes/attach_exs_vending_image_20261031.py). [`register_pokumon_card_images_20261031.py`](../../passes/register_pokumon_card_images_20261031.py) registers pokumon's image CDN as an identity-only surface. |
+| JP EXS Snorlax, Expansion Sheet 1 vending printing (1998-03-23): no image | SPEC-0661 | The pokumon.com image shows No. 143 with the diamond Uncommon symbol and no CoroCoro contest credit, which tells it apart from the Quick Starter Gift Set printing (SPEC-0200). Named as the vending printing's `image` in its curated `finish_overrides.json` row, the documented curated-override path in `FINISH_SOURCES.md`; no separate pass. [`register_pokumon_card_images_20261031.py`](../../passes/register_pokumon_card_images_20261031.py) registers pokumon's image CDN as an identity-only surface. |
 
 The Cardmarket seller scan the EXS override already cited (`marketplace-article-scans …/2123921059.jpg`) returned HTTP 403 on 2026-10-31 and could not be retained.
 
