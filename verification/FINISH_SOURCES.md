@@ -80,6 +80,15 @@ Ordinary surface glare and printed pastel gradients are not positive holo featur
 [20th 047/072 correction and Non-Holo intake](evidence/owner-nonholo-20260929/README.md)
 retains the explicit determination separately from those image features.
 
+A visible distinguishing mark is a positive feature, and so is its visible absence. If a positive
+source documents exactly two versions of a card that differ by a printed mark, a complete,
+legible face establishes the version: the mark's presence identifies one version and its absence
+the other. Record it as the specimen's `physicalObservation` with that scope as its basis; do not
+ask the owner to confirm it. EX Dragon Frontiers cards 1–12 are the worked example: the official
+checklist gives two foil versions, and the reverse holo carries the set-logo stamp in the artwork
+field. SPEC-0662 (Italian DF 10, no stamp) is therefore the regular holo. Without a documented
+two-version scope, or with the mark position cropped or illegible, the finish stays unset.
+
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
 had no finish field, so what the photograph showed could only be written as prose that no check
 reads. A specimen may now carry an optional `physicalObservation`:

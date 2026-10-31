@@ -224,7 +224,8 @@ These are the things that have actually caused mistakes. Full treatment is in
   matrix is reconciled, and three official `LA` releases are now retained as a complete positive
   slice; `xJTG` remains an explicit evidence gap. Never read a European confirmation as covering
   LATAM or a positive slice as historically exhaustive.
-- **A legible face establishes its edition.** For a set printed in both editions, a visible 1st
+- **A legible face establishes its edition, and its finish when two documented versions differ by a
+  visible mark** (DF 1–12: the reverse holo carries the set-logo stamp; see `FINISH_SOURCES.md`). For a set printed in both editions, a visible 1st
   Edition mark is 1st Edition and a visibly empty mark position on a complete, legible face is
   Unlimited — an observation of that copy, not an absence argument. Check the era's mark position
   (`RESUME.md`); never give a third-party photo owner attribution the owner did not make
