@@ -9340,6 +9340,86 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "pokumon-card-images",
+      "providerId": "pokumon",
+      "label": "pokumon.com retained card images",
+      "match": {
+        "urlPrefixes": [
+          "https://cdn6966.templcdn.com/wp-content/uploads/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-31",
+      "freshnessPolicy": "Retain the exact image bytes, URL and SHA-256 as a SPEC record; each image establishes only itself.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "exact pokumon.com card-image URL",
+        "parameters": [],
+        "pagination": "not paginated; each retained image establishes only itself",
+        "expectedIdentifiers": [
+          "printed card name",
+          "collector number",
+          "printed rarity symbol"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "card image; no physical finish closure",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pokumon-card-images-exs-snorlax-positive",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": "1998-03",
+              "end": "1998-03",
+              "basis": "the retained Expansion Sheet 1 vending Snorlax image only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "card-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "One retained image establishes the pictured card only; missing images and other cards remain unknown."
+          },
+          "knownPositiveObservationId": "obs-pokumon-card-images-exs-snorlax",
+          "outOfScopeChallengeObservationId": "obs-pokumon-card-images-exs-snorlax-boundary",
+          "boundary": {
+            "outsideScope": [
+              "finish/treatment",
+              "other cards",
+              "complete set or era"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "A pokumon.com card image establishes only the pictured card's identity; finish, other cards, complete sets and missing images remain unknown."
+          }
+        }
+      ]
     }
   ],
   "observations": [
@@ -16719,6 +16799,52 @@
         "newsworks-reviewed-dates-20261023-65823040-positive"
       ],
       "outcome": "The source dates Korean Lotte Foods Kisstick Pokémon launch (published 2016-10-13) only; it transfers to no other market, language, channel, finish or finer precision."
+    },
+    {
+      "observationId": "obs-pokumon-card-images-exs-snorlax",
+      "surfaceId": "pokumon-card-images",
+      "queryUrl": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokumon",
+        "recordKey": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg"
+      },
+      "kind": "known-positive",
+      "queryParameters": {
+        "asset": "JP_034Vending.jpg"
+      },
+      "expectedIdentifiers": [
+        "カビゴン LV.35",
+        "No. 143",
+        "Uncommon rarity symbol"
+      ],
+      "validatesEdges": [
+        "pokumon-card-images-exs-snorlax-positive"
+      ],
+      "outcome": "The retained image (SPEC-0661) visibly identifies the Japanese Expansion Sheet 1 vending Snorlax."
+    },
+    {
+      "observationId": "obs-pokumon-card-images-exs-snorlax-boundary",
+      "surfaceId": "pokumon-card-images",
+      "queryUrl": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pokumon",
+        "recordKey": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg"
+      },
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "unsupported finish, set or neighbouring-card transfer"
+      },
+      "expectedIdentifiers": [
+        "カビゴン LV.35"
+      ],
+      "validatesEdges": [
+        "pokumon-card-images-exs-snorlax-positive"
+      ],
+      "outcome": "A pokumon.com card image establishes only the pictured card's identity; finish, other cards, complete sets and missing images remain unknown."
     }
   ]
 }

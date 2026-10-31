@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-10-30",
+  "generated": "2026-10-31",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 45,
-   "evidenceRecords": 1819,
-   "uniqueUrls": 1810,
+   "evidenceRecords": 1821,
+   "uniqueUrls": 1812,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7320
+   "claimsAttributed": 7324
   }
  },
  "providers": [
@@ -572,8 +572,8 @@
     "pokumon.com",
     "www.pokumon.com"
    ],
-   "uniqueSources": 10,
-   "claimsSupported": 34
+   "uniqueSources": 12,
+   "claimsSupported": 38
   },
   {
    "providerId": "pokecottage",
@@ -26954,6 +26954,24 @@
    "usageCount": 1
   },
   {
+   "canonicalUrl": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "pokumon.com card image (972x1378 JPEG), visually inspected"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0661",
+    "U0458"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
+  },
+  {
    "canonicalUrl": "https://pokumon.com/?s=snorlax+s-p",
    "nonUrlEvidenceId": null,
    "providerId": "pokumon",
@@ -27159,6 +27177,24 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 6
+  },
+  {
+   "canonicalUrl": "https://pokumon.com/card/snorlax-expansion-sheet-1-1998-vending",
+   "nonUrlEvidenceId": null,
+   "providerId": "pokumon",
+   "sourceTypes": [
+    "pokumon.com card image (972x1378 JPEG), visually inspected"
+   ],
+   "dimensions": [
+    "card-existence"
+   ],
+   "stableIdCount": 2,
+   "stableIds": [
+    "SPEC-0661",
+    "U0458"
+   ],
+   "retrievedAt": "2026-10-31",
+   "usageCount": 2
   },
   {
    "canonicalUrl": "https://d1htnxwo4o0jhw.cloudfront.net/cert/161962004/CzSO1iwUME6JHN7u1BEdTQ.jpg",

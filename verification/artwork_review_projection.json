@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-30",
-  "projectionVersion": "c0ddb922960e00f0fb48cbe2e52801489611d5553638e627eeb087b91a256475",
+  "generated": "2026-10-31",
+  "projectionVersion": "78a337d52c5dfec51915a12e6322f47cfc1e59d96ba2f0b3796905b3be5d02e3",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 889,
-    "sourceObservations": 3303
+    "sourceObservations": 3304
   },
   "groups": [
     {
@@ -43266,6 +43266,17 @@
               "originalHash": "7f336ef87d1865d413fe9e87235d1d5e9c30b235ab988868b681add1b2dda410",
               "previewSrc": "images/previews/SPEC-0200.png?v=81b7425831ece4748db0c2591039748bb6f4721aa38b30c5be45e7e7f98f2e7d",
               "thumbnailSrc": "images/thumbs/SPEC-0200.png?v=19d9dd7d535b58ad37538977537419bbc3f3dedf864782e9fd36e7a1540507fa"
+            },
+            {
+              "src": "verification/specimens/SPEC-0661.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0661",
+              "contentHash": "3121bf936365778be60fd331292341a1d60b52088c4382e7dc4cecc43c86da4f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "3121bf936365778be60fd331292341a1d60b52088c4382e7dc4cecc43c86da4f",
+              "previewSrc": "images/previews/SPEC-0661.png?v=e2a977ea18c6e24dd7944cb20b331ee6f46375d000c8dad42440de172e6a6479",
+              "thumbnailSrc": "images/thumbs/SPEC-0661.png?v=17f569955e2b9e12cf3a7e865f7e9490c610606d41bf7cf45302cb855473e55f"
             }
           ],
           "observations": [
@@ -43275,7 +43286,7 @@
               "provider": "Cardmarket marketplace article scan (physical specimen)",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/2123921059/2123921059.jpg",
               "evidence": "Physical-card scan supplied with issue #24 showing the Expansion Sheet 1 printing with its rarity symbol.",
-              "contentHash": "51673dee0e5ee581229796360d1577b0532d1e18041d984d100784a19228819c",
+              "contentHash": "9143ae83a6396540929c6877853764807fd22a285ac91017d4483c66456229ac",
               "image": null
             },
             {
@@ -43284,7 +43295,7 @@
               "provider": "Bulbapedia card release history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Snorlax_(Wizards_Promo_49)",
               "evidence": "Identifies Keita Takahashi as the illustrator and distinguishes the glossy Expansion Sheet 1 Sheet 16 printing with a rarity symbol from the non-glossy Quick Starter Gift Set Red Deck reprint; it also records the extra CoroCoro Comic Illust Contest text on the Quick Starter printing.",
-              "contentHash": "f86860420e474c30c63662345c17003686b7f50466c4d070514134c8f21770a0",
+              "contentHash": "d4041265b10601d3a2a2a1da94f174ee722067d75890ae9aed9d110978468bd4",
               "image": null
             },
             {
@@ -43293,7 +43304,7 @@
               "provider": "Bulbapedia expansion release history",
               "url": "https://bulbapedia.bulbagarden.net/wiki/Vending_Machine_cards_(TCG)",
               "evidence": "Records the Expansion Sheet 1 release date as March 23, 1998, describes the cards as glossy, lists Snorlax as Uncommon, and places it on Sheet 16.",
-              "contentHash": "6627f2c88a1dc6307240c463d4d3b96da97c6c936e9f2b70a7c381854a4c245e",
+              "contentHash": "5d5e58eb54b6ec0f3137e0ace8c5040e246365209862684c922ac53710df560f",
               "image": null
             },
             {
@@ -43331,6 +43342,15 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax EXS (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest.",
               "contentHash": "a2c9b7ce96d41d0fe7f226f9e9464b6a4dd70b62879573d15716bade963438ed",
               "image": "verification/specimens/SPEC-0200.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0661",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://pokumon.com/card/snorlax-expansion-sheet-1-1998-vending/",
+              "evidence": "Complete image of the Japanese Expansion Sheet 1 (vending) カビゴン LV.35 HP90, とおせんぼ and ねころぶ 30, Illus. Keita Takahashi, No. 143 followed by the diamond Uncommon rarity symbol. Unlike the Quick Starter Gift Set printing (SPEC-0200), the face carries no CoroCoro Comic Illust Contest credit. Retained as the image of the 1998-03-23 vending printing; no finish is inferred from it.",
+              "contentHash": "988735e2513941c7ec3729193e90522fc5f2d86d65a68bbacaf6d6756f961e9c",
+              "image": "verification/specimens/SPEC-0661.jpg"
             },
             {
               "observationId": "unit:U0458",
