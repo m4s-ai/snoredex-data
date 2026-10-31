@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-31",
-  "projectionVersion": "78a337d52c5dfec51915a12e6322f47cfc1e59d96ba2f0b3796905b3be5d02e3",
+  "projectionVersion": "ba6e11ad85b98ead8f85fcba22822c3d76e1a50f302b2243440c949e7da9d8e6",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 889,
-    "sourceObservations": 3304
+    "physicalPrintings": 892,
+    "sourceObservations": 3314
   },
   "groups": [
     {
@@ -75462,6 +75462,53 @@
                   "evidence": "g1-58 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:2fd2cfd7bf1592a5121c804a",
+              "semanticPrintingId": "PRINTING:2fd2cfd7bf1592a5121c804a",
+              "cardReleaseId": "RELEASE:WEST:English:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0135",
+              "sourcePrintingId": "F0135-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2fd2cfd7bf1592a5121c804a",
+              "sources": [
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+                  "sourceType": "Bulbapedia localized Generations finish description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "French",
+                    "English",
+                    "Italian"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-08",
+                  "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+                  "evidenceScope": "standard-set"
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+                  "supportsAbsence": false
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
             }
           ],
           "detection": {
@@ -75510,6 +75557,33 @@
               "url": "https://api.tcgdex.net/v2/en/cards/g1-58",
               "evidence": "g1-58 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "8658f6c5e3313c708618040aca6f8240edbeb36aee6fa4dfeff48e40efd2f60c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0135-P02:0:10ffcacd92c0c585",
+              "kind": "finish",
+              "provider": "Bulbapedia localized Generations finish description",
+              "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+              "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+              "contentHash": "eea43b57586f1a5ea6db2221adafef4d9285c2cf080fe9b1704fd1625be04441",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0135-P02:1:5c83ca3adad15293",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "c9a8b5d7950323e7929fe0b053be563a39465581f46a7e498aa05a0db8ea9eb3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0135-P02:2:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "f94eaf56c2cf83d0606a5e5ea46a787a62c87b52f3581198fa2dc679a872a8f3",
               "image": null
             },
             {
@@ -75571,6 +75645,53 @@
                   "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:880153b96ed5ce876bea563a",
+              "semanticPrintingId": "PRINTING:880153b96ed5ce876bea563a",
+              "cardReleaseId": "RELEASE:WEST:French:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0136",
+              "sourcePrintingId": "F0136-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:880153b96ed5ce876bea563a",
+              "sources": [
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+                  "sourceType": "Bulbapedia localized Generations finish description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "French",
+                    "English",
+                    "Italian"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-08",
+                  "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+                  "evidenceScope": "standard-set"
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+                  "supportsAbsence": false
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
             }
           ],
           "detection": {
@@ -75619,6 +75740,33 @@
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
               "contentHash": "be12a30c5afe924058a9fa19dea5ab0ee0b98fd98e92daec750065a6fb2eb3c3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0136-P02:0:10ffcacd92c0c585",
+              "kind": "finish",
+              "provider": "Bulbapedia localized Generations finish description",
+              "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+              "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+              "contentHash": "bef6b33d6ec965359d39454e82a169d474699a9041fa75bd647811cd323c4395",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0136-P02:1:5c83ca3adad15293",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "036e433a1c4ebd6a6d0a8fa08bd173fd417fbe8945714218491e5135c2bde94d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0136-P02:2:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "737e0a505a88c0227505c9709a5a98e8bac3b3dff9fb4f17a0b5a710a479af99",
               "image": null
             },
             {
@@ -75872,6 +76020,62 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:00137ff5e75857c9a4175a1a",
+              "semanticPrintingId": "PRINTING:00137ff5e75857c9a4175a1a",
+              "cardReleaseId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "type-symbol-background",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0138",
+              "sourcePrintingId": "F0138-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:00137ff5e75857c9a4175a1a",
+              "sources": [
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+                  "sourceType": "Bulbapedia localized Generations finish description",
+                  "authorityTier": "specialist-reference",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "French",
+                    "English",
+                    "Italian"
+                  ],
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-09-08",
+                  "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+                  "evidenceScope": "standard-set"
+                },
+                {
+                  "url": "https://github.com/m4s-ai/snoredex-data/issues/268#issuecomment-5490777316",
+                  "sourceType": "Collection owner attestation (finish)",
+                  "evidence": "On 2026-09-01 the collection owner explicitly confirmed that Italian Generations Snorlax 58/83 exists as reverse holo, while clarifying that SPEC-0465 pictures the separate non-holo printing. This confirms reverse-holo existence only and does not attribute it to that photograph or close the finish list.",
+                  "supportsAbsence": false,
+                  "languages": [
+                    "Italian"
+                  ]
+                },
+                {
+                  "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+                  "sourceType": "Bulbapedia holofoil pattern history",
+                  "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+                  "supportsAbsence": false
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:7ec04aea1f3c1eb520aec304",
               "semanticPrintingId": "PRINTING:7ec04aea1f3c1eb520aec304",
               "cardReleaseId": "RELEASE:WEST:Italian:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
@@ -75992,6 +76196,42 @@
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
               "contentHash": "a1fa149aef43f2b4c3ae94123fe2d4e17d31c94b2cfd0febd4c78dcba70d58d5",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0138-P02:0:10ffcacd92c0c585",
+              "kind": "finish",
+              "provider": "Bulbapedia localized Generations finish description",
+              "url": "https://bulbapedia.bulbagarden.net/w/index.php?title=Generations_(TCG)&oldid=4587656",
+              "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
+              "contentHash": "34d067b43718c88f513c3a42606507ff65155f5317c93049c19e50e2371d66c6",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0138-P02:1:1ef2d17854c31a08",
+              "kind": "finish",
+              "provider": "Collection owner attestation (finish)",
+              "url": "https://github.com/m4s-ai/snoredex-data/issues/268#issuecomment-5490777316",
+              "evidence": "On 2026-09-01 the collection owner explicitly confirmed that Italian Generations Snorlax 58/83 exists as reverse holo, while clarifying that SPEC-0465 pictures the separate non-holo printing. This confirms reverse-holo existence only and does not attribute it to that photograph or close the finish list.",
+              "contentHash": "9c7cbb83d09a3b7c663bb2a9b7b45b91c09bbf3ffe9bc785b89ef29150d406a6",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0138-P02:2:5c83ca3adad15293",
+              "kind": "finish",
+              "provider": "Bulbapedia holofoil pattern history",
+              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
+              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
+              "contentHash": "536b0edd4801020d5455442bb6baecfdd67288759486b810c7939f32a6b307d9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0138-P02:3:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "4d49b536f373ed9268b76171a3416f2a029cdc02069f907d6f93d96c31be9079",
               "image": null
             },
             {
