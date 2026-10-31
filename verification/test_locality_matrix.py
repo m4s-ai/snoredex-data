@@ -38,32 +38,40 @@ class LocalityMatrixTests(unittest.TestCase):
         })
         self.assertEqual(matrix.validate(manifest, indexes), [])
 
+    def contradicted_fixture(self) -> dict:
+        # A synthetic unit keeps these tests independent of which live units are still disputed.
+        indexes = copy.deepcopy(self.indexes)
+        indexes["unit"]["U9998"] = {
+            "unitId": "U9998", "language": "T-Chinese", "status": "contradicted"
+        }
+        return indexes
+
     def test_contradicted_claim_without_owner_decision_is_not_an_exclusion(self) -> None:
         manifest = copy.deepcopy(self.manifest)
         manifest["excludedLegacyClaims"].append({
-            "unitId": "U0265", "language": "T-Chinese",
+            "unitId": "U9998", "language": "T-Chinese",
             "reason": "A contradicted claim alone cannot settle absence.",
         })
         self.assertTrue(any(
             "needs a collection-owner not-printed adjudication" in error
-            and "U0265" in error
-            for error in matrix.validate(manifest, self.indexes)
+            and "U9998" in error
+            for error in matrix.validate(manifest, self.contradicted_fixture())
         ))
 
     def test_non_absence_owner_decision_does_not_settle_exclusion(self) -> None:
         manifest = copy.deepcopy(self.manifest)
-        indexes = copy.deepcopy(self.indexes)
-        indexes["adjudication"]["OA-TEST-U0265"] = {
-            "adjudicationId": "OA-TEST-U0265", "unitId": "U0265",
+        indexes = self.contradicted_fixture()
+        indexes["adjudication"]["OA-TEST-U9998"] = {
+            "adjudicationId": "OA-TEST-U9998", "unitId": "U9998",
             "decision": "disputed", "authority": "collection-owner",
         }
         manifest["excludedLegacyClaims"].append({
-            "unitId": "U0265", "language": "T-Chinese",
+            "unitId": "U9998", "language": "T-Chinese",
             "reason": "A non-absence decision is not enough.",
         })
         self.assertTrue(any(
             "needs a collection-owner not-printed adjudication" in error
-            and "U0265" in error
+            and "U9998" in error
             for error in matrix.validate(manifest, indexes)
         ))
 
