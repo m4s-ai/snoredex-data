@@ -350,7 +350,8 @@ def main() -> int:
               len(exs_rows) == 2
               and [row["dateDisplay"] for row in exs_rows] == ["1998-03-23", "1998-12-04"]
               and [row["distributions"] for row in exs_rows] == [["vending-sheet"], ["fixed-deck"]]
-              and [row["image"] is not None for row in exs_rows] == [False, True]
+              and [row["image"] for row in exs_rows][0] == "verification/specimens/SPEC-0661.jpg"
+              and exs_rows[1]["image"] is not None
               and len({row["rowId"] for row in exs_rows}) == 2,
               f"EXS rows: {exs_rows}")
 

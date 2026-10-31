@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 660,
+  "count": 661,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14340,6 +14340,24 @@
         "cardSize": "standard",
         "basis": "The photograph shows repeated ball silhouettes across the Korean sv2a 143/165 card body and the printed rarity mark U; the collection owner identifies the pattern as Poké Ball (2026-10-30)."
       }
+    },
+    {
+      "specimenId": "SPEC-0661",
+      "setCode": "EXS",
+      "number": "",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party database",
+      "inspectedFrom": "pokumon.com card image (972x1378 JPEG), visually inspected",
+      "photograph": "SPEC-0661.jpg",
+      "photographSource": "https://cdn6966.templcdn.com/wp-content/uploads/2021/03/JP_034Vending.jpg",
+      "photographSha256": "sha256:3121bf936365778be60fd331292341a1d60b52088c4382e7dc4cecc43c86da4f",
+      "observed": "Complete image of the Japanese Expansion Sheet 1 (vending) カビゴン LV.35 HP90, とおせんぼ and ねころぶ 30, Illus. Keita Takahashi, No. 143 followed by the diamond Uncommon rarity symbol. Unlike the Quick Starter Gift Set printing (SPEC-0200), the face carries no CoroCoro Comic Illust Contest credit. Retained as the image of the 1998-03-23 vending printing; no finish is inferred from it.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0458"
+      ],
+      "listingUrl": "https://pokumon.com/card/snorlax-expansion-sheet-1-1998-vending/"
     }
   ]
 }
