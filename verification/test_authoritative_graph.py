@@ -763,6 +763,32 @@ def verify_shared_finish_printings(graph):
     assert any("finish printing alias is stale" in error for error in validate(tampered))
 
 
+def verify_standalone_promotion(graph):
+    fixture = json.loads((ROOT / "verification/evidence/open-issue-picture-research-20261031/standalone-promotion-regression.json").read_text(encoding="utf-8"))
+    previous = {row["entityId"]: row for row in fixture["physicalEntities"]}
+    before = deepcopy(graph)
+    before["entities"] = [deepcopy(previous.get(row["entityId"], row)) for row in before["entities"]]
+    promoted = project_physical_evidence(deepcopy(before))
+    assert not validate(promoted)
+    assert project_physical_evidence(deepcopy(promoted)) == promoted
+    physicals = {row["entityId"]: row["payload"] for row in promoted["entities"]
+                 if row["entityType"] == "physical-printing"}
+    for physical_id in previous:
+        assert physicals[physical_id]["sourceFinishUnitId"]
+        assert physicals[physical_id]["finish"] == "holo"
+        assert physicals[physical_id]["cardSize"] == "standard"
+    physical_rows = [row for row in before["entities"] if row["entityType"] == "physical-printing"]
+    before["entities"] = [row for row in before["entities"] if row["entityType"] != "physical-printing"] + physical_rows[::-1]
+    assert project_physical_evidence(deepcopy(before)) == promoted
+    wrong = deepcopy(before)
+    for row in wrong["entities"]:
+        if row["entityId"] in previous:
+            row["payload"]["finish"] = "reverse-holo"
+    mismatched = project_physical_evidence(wrong)
+    assert not ({row["entityId"] for row in mismatched["entities"]} & previous.keys()), \
+        "an unrelated finish must not inherit a standalone printing ID"
+
+
 def main() -> None:
     verify_research_correction()
     verify_standalone_printing_identity()
@@ -781,6 +807,7 @@ def main() -> None:
     assert not graph_module._specimen_has_cited_legacy_identity({**specimen, "citedBy": ["neighbour"]}, merged, units_by_id)
     assert graph_module._specimen_has_cited_legacy_identity({**specimen, "setCode": "xs5a", "citedBy": ["neighbour"]}, merged, units_by_id)
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
+    verify_standalone_promotion(graph)
     verify_shared_finish_printings(graph)
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())

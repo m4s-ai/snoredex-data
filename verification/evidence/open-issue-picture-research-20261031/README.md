@@ -1,5 +1,7 @@
 <!-- doc: role=bounded open-issue picture research; stage=history -->
 
+> Historical record — research and integration snapshot of 2026-10-31/2026-11-01; canonical stores determine current values.
+
 # Open-issue picture research — 2026-10-31
 
 Historical research snapshot against main `2c6a8838` (full SHA in picture-inventory.json).
@@ -53,6 +55,15 @@ The pending/partial pattern queue contains **57 finish units** after this integr
 Reference depictions do not resolve physical pattern questions. The other bounded searches,
 blocked originals, LATAM xJTG remain open as recorded below.
 No issues are closed and no publication or merge is part of this intake.
+PR #454 review correction (2026-11-01): finish-bridge promotion retains the established
+`PHYSICAL:specimen:SPEC-0552` and `PHYSICAL:specimen:SPEC-0553` identities, including the
+owner-defined unknown-to-standard card-size default. Specimen and finish claims stay distinct.
+The two real pre-bridge records and collector items are retained in
+[standalone-promotion-regression.json](standalone-promotion-regression.json); replay, reversed input
+order, unrelated-finish rejection and exact one-target holo migrations are tested. Before recovery,
+the old projector applied to pinned main `db28300b` exactly equalled the PR graph, proving that the
+reviewed hybrid base was preserved; the corrected projector regenerated only its owned slice.
+
 Delivery validation is recorded separately in [integration-validation.json](integration-validation.json).
 
 ## What the SPEC check changed

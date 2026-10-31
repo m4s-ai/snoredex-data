@@ -264,23 +264,25 @@ def _retained_printing_ids(scope, printing, previous_physical, previous_claims, 
     """
     key = printing_semantic_key(scope, printing)
     semantic_id = stable_printing_id(key)
-    if key not in previous_physical and semantic_id not in previous_claims \
-            and printing.get("cardSize") == "standard":
+    preferred_claim_id = previous_claims.get(semantic_id)
+    if key not in previous_physical and printing.get("cardSize") == "standard":
         legacy_key = printing_semantic_key(scope, {**printing, "cardSize": "unknown"})
         legacy_id = stable_printing_id(legacy_key)
-        if legacy_key in previous_physical or legacy_id in previous_claims:
+        if legacy_key in previous_physical or (not preferred_claim_id and legacy_id in previous_claims):
             key, semantic_id = legacy_key, legacy_id
     physical_id = previous_physical.get(key, f"PHYSICAL:{semantic_id}")
-    claim_id = previous_claim_by_physical.get(physical_id) or previous_claims.get(semantic_id) \
+    claim_id = previous_claim_by_physical.get(physical_id) or preferred_claim_id or previous_claims.get(semantic_id) \
         or f"CLAIM:finish:{semantic_id}"
     return physical_id, claim_id
 
 
-def _specimen_projection_reason(target, standalone_target, release_id):
+def _specimen_projection_reason(target, standalone_target, release_id, finish_printings):
     if standalone_target:
         return f"physical observation establishes standalone printing for {release_id}"
     if target:
-        source = "another specimen" if target.startswith("PHYSICAL:specimen:") else "the finish store"
+        source = "the finish store" if any(
+            row["physicalPrintingId"] == target for row in finish_printings.values()
+        ) else "another specimen"
         return f"provides provenance for {target}, already established from {source}"
     return "physical observation has no matching projected printing"
 
@@ -335,17 +337,18 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     previous_finish_claims = _previous_finish_claims_by_semantic(graph)
     previous_physical_by_semantic: dict[str, str] = {}
     previous_claim_by_physical: dict[str, str] = {}
-    for row in graph["entities"]:
+    for row in sorted(graph["entities"], key=lambda row: row["entityId"]):
         if row.get("entityType") != "physical-printing":
             continue
         payload = row.get("payload") or {}
-        if not payload.get("sourceFinishUnitId"):
-            continue
         semantic_key = printing_semantic_key(payload.get("cardReleaseId"), payload)
-        previous_physical_by_semantic[semantic_key] = str(row["entityId"])
-        claim_id = payload.get("establishingClaimId")
-        if claim_id:
-            previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
+        # Retain standalone physical IDs without reusing their specimen claim as a finish claim.
+        previous_physical_by_semantic.setdefault(semantic_key, str(row["entityId"]))
+        if payload.get("sourceFinishUnitId"):
+            previous_physical_by_semantic[semantic_key] = str(row["entityId"])
+            claim_id = payload.get("establishingClaimId")
+            if claim_id:
+                previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
 
     generated_entities: list[dict[str, Any]] = []
     generated_edges: list[dict[str, Any]] = []
@@ -543,7 +546,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         # A specimen listed on a finish printing is the evidence used to derive that
         # printing, not an independent provider.  Keep the link as provenance so the
         # graph never counts an observation as corroborating its own projection.
-        reason = _specimen_projection_reason(target, standalone_target, release_id)
+        reason = _specimen_projection_reason(target, standalone_target, release_id, finish_by_semantic)
         claim_payload = {
             "claimId": claim_id,
             "claimKind": "physical-printing",

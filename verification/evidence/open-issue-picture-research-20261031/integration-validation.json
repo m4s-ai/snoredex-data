@@ -118,15 +118,17 @@
     "latestMainCollisionCheck": "passed; 662 pre-existing records; owner SPEC-0662 preserved byte-for-byte and record-for-record",
     "registryArtworkCollectorReferences": "passed on current main; exact legacy claim -> release -> artwork/collector image and provenance; identity-only images do not materialize physical nodes",
     "canonicalGeneratorWrites": "passed; full canonical REGEN array; no substantive failures bypassed",
-    "fullCIGate": "passed; complete scripts/regen.py --check, all deterministic outputs and core regressions, including full review_findings.py",
-    "browser": "passed; 111/111 on final functional and provider metadata state",
+    "fullCIGate": "passed after P1 and CI-D3 remediation; full regen.py --check, all deterministic outputs and core regressions",
+    "browser": "111/111 passed after physical-ID retention",
     "fullRetainedDiscovery": "passed after main reconciliation; 1629 adapter records / 399 card records; explicit gaps only",
-    "graphRegression": "passed; 9139 entities / 13203 edges / 3348 dispositions; order-independent semantic coalescing, replay and invalid aliases",
+    "graphRegression": "passed; standalone-to-finish promotion retains SPEC-0552/0553 physical IDs; unknown-to-standard, replay, order and wrong-finish boundary covered",
     "renderedImages": "passed; 7/7 new fronts and preserved owner SPEC-0662 load and open previews; representative physical and identity images visually inspected",
-    "collectorRegression": "passed; 992 items / 509 assets; all predecessor rows accounted",
+    "collectorRegression": "passed; both pre-bridge real holo items migrate to exactly one verified holo target; reverse candidate excluded",
     "evidenceApplicationRegression": "passed; 625 exists / 2 needs-evidence / 92 not-printed; exact local rekeys accepted, wrong language/number/denominator/variant/claim rejected",
-    "localArtifact": "passed after provider-order fix; 2356 files; build + --verify; allowlist only; no upload",
-    "providerGenerationOrder": "passed; core and five scoped lanes register new providers before confirmed-language metadata"
+    "localArtifact": "passed after standalone-ID preservation: build + --verify; 2356 files, allowlist only; no upload",
+    "providerGenerationOrder": "passed; core and five scoped lanes register new providers before confirmed-language metadata",
+    "standalonePromotion": "targeted pass; two real predecessor physicals, unknown-to-standard default, replay, input order, wrong finish, and unique holo migration targets",
+    "historyBanner": "D3 passed with required Historical record banner on tracked report"
   },
   "notRun": [
     "live TCGCSV canary; upstream finish inputs unchanged",
@@ -152,5 +154,6 @@
     "research": 99,
     "assets": 509
   },
-  "deliveryValidationDate": "2026-11-01"
+  "deliveryValidationDate": "2026-11-01",
+  "initialValidatedHead": "c6550e1f84e51932e61dc1c01a27bc857a3f62a6"
 }

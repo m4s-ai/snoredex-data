@@ -495,6 +495,17 @@ def product_rarity_regressions() -> None:
 
 
 def main() -> None:
+    promotion = read("verification/evidence/open-issue-picture-research-20261031/standalone-promotion-regression.json")
+    current_items = read("collector_catalogue.json")["items"]
+    item_by_id = {row["itemId"]: row for row in current_items}
+    index = collector.target_identity_index(current_items)
+    for previous in promotion["collectorItems"]:
+        targets = collector.migration_targets(previous, set(item_by_id), index)
+        assert len(targets) == 1, "a known holo must not migrate to the reverse candidate too"
+        target = item_by_id[next(iter(targets))]
+        assert target["physicalPrintingId"] == previous["physicalPrintingId"]
+        assert target["finish"] == previous["finish"] == "holo"
+        assert target["itemKind"] == "verified-printing"
     reference_images = {"identity": {"photograph": "identity.png"}}
     assert collector.prefer_retained_image(
         "legacy.jpg", "legacy-product", None, reference_images, ["identity"]
