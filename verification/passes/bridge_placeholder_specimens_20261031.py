@@ -65,6 +65,14 @@ BRIDGES = [
      "languages": ["Indonesian"], "printings": []},
 ]
 # The Traditional-Chinese unit already carries a releaseSetCode bridge; it lacked the printed number.
+# The photographed TW card had a specimen-scoped release id in earlier published catalogues
+# (ff045df1, 44d72b0a); once it joins the legacy unit that id disappears, so it needs a reviewed
+# release route or collection state on it would be orphaned.
+RELEASE_REKEY = {
+    "from": "RELEASE:TW:T-Chinese:S-P:145:unmapped-work:SPEC-0030",
+    "to": "RELEASE:TW:T-Chinese:S-P:145:Snorlax-Rolling-Tackle-Heavy-Impact",
+    "reason": "SPEC-0030 joined the legacy PKMTCH S-P 145 unit of the same printed 145/S-P card (#439).",
+}
 TW_ROW = {"setCode": "PKMTCH S-P", "releaseSetCode": "S-P", "number": "S-P 145",
           "languages": ["T-Chinese"], "printings": []}
 
@@ -84,6 +92,19 @@ def collapse_chains(text: str) -> str:
     return text
 
 
+def write_routes(text: str, routes: list, release_rekey: bool) -> None:
+    original = ROUTES.read_text(encoding="utf-8")
+    if routes:
+        lines = ",\n".join("    " + json.dumps(row, ensure_ascii=False) for row in routes)
+        marker = "\n  ],\n  \"cardReleaseRekeys\""
+        text = text.replace(marker, ",\n" + lines + marker, 1)
+    if release_rekey:
+        marker = "\n  ],\n  \"itemSplits\""
+        text = text.replace(marker, ",\n    " + json.dumps(RELEASE_REKEY, ensure_ascii=False) + marker, 1)
+    if text != original:
+        ROUTES.write_text(text, encoding="utf-8", newline="\n")
+
+
 def main(argv) -> int:
     document = json.loads(OVERRIDES.read_text(encoding="utf-8"))
     rows = document["overrides"]
@@ -94,6 +115,7 @@ def main(argv) -> int:
     present = {row["from"] for row in json.loads(routes_text)["cumulativeChecklistRekeys"]}
     chained = routes_text != ROUTES.read_text(encoding="utf-8")
     routes = [{"from": old, "to": new, "reason": REASON} for old, new in REKEYS.items() if old not in present]
+    release_rekey = RELEASE_REKEY not in json.loads(routes_text)["cardReleaseRekeys"]
     dates = json.loads(DATES.read_text(encoding="utf-8"))
     stale_date = any(row["itemId"] in (RETIRED_DATE_ITEM, RETARGET_DATE[0])
                      for row in dates["releaseDates"]["reviewedItems"])
@@ -108,13 +130,10 @@ def main(argv) -> int:
             print("pending: PKMTCH S-P 145 releaseNumber")
         if chained:
             print("pending: collapse routes that ended at a retired placeholder id")
-        return 1 if pending or tw_pending or routes or stale_date or chained else 0
-    if chained and not routes:
-        ROUTES.write_text(routes_text, encoding="utf-8", newline="\n")
-    if routes:
-        lines = ",\n".join("    " + json.dumps(row, ensure_ascii=False) for row in routes)
-        marker = "\n  ],\n  \"cardReleaseRekeys\""
-        ROUTES.write_text(routes_text.replace(marker, ",\n" + lines + marker, 1), encoding="utf-8", newline="\n")
+        if release_rekey:
+            print("pending: SPEC-0030 release route")
+        return 1 if pending or tw_pending or routes or stale_date or chained or release_rekey else 0
+    write_routes(routes_text, routes, release_rekey)
     if stale_date:
         dates["releaseDates"]["reviewedItems"] = [row for row in dates["releaseDates"]["reviewedItems"]
                                                   if row["itemId"] != RETIRED_DATE_ITEM]
