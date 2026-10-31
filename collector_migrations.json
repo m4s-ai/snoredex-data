@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:5e82b96765f417c05471703c79aeeb5beb2f39c6c4c5535a25f8e035b5b133d5",
+    "fromFingerprint": "sha256:41a7ccc6e0ae99a3fbd3db810d906c333341dca8c191b284961d02082c3292e8",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:861f8030bee10eb294c23a78ae3f63bb33c3d4417b8a4414870744691d4b7188",
+    "toFingerprint": "sha256:1b6f9abf00f4a4807258d259037b841ebde1197b4920be68af4187c9753923be",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:861f8030bee10eb294c23a78ae3f63bb33c3d4417b8a4414870744691d4b7188",
+      "toFingerprint": "sha256:1b6f9abf00f4a4807258d259037b841ebde1197b4920be68af4187c9753923be",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -1651,11 +1651,11 @@
             "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
           ],
           "toItemIds": [
-            "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+            "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-0f8a0f26-1e93-598b-ae03-a918bef1412e",
@@ -2131,11 +2131,11 @@
             "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
           ],
           "toItemIds": [
-            "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+            "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-1ae21503-92d5-5c4f-b22d-21ff5c175436",
@@ -2529,11 +2529,11 @@
             "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
           ],
           "toItemIds": [
-            "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+            "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
@@ -4651,11 +4651,11 @@
             "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
           ],
           "toItemIds": [
-            "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
+            "item-e131371a-4726-57a5-8af0-047b837eb572"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-58c53aa9-6ae4-5872-a925-15e6728515da",
@@ -6427,11 +6427,11 @@
             "item-839bcbad-dbce-5134-9a26-74420582a2f2"
           ],
           "toItemIds": [
-            "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+            "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-83d1ce76-4809-5fa8-b0bb-063bd7dabde3",
@@ -7046,11 +7046,11 @@
             "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
           ],
           "toItemIds": [
-            "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+            "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-937ee36d-2d1d-50d5-8232-a346fdd392b0",
@@ -7367,14 +7367,15 @@
         {
           "fromItemId": "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
           "fromItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
+            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
           ],
           "toItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
           ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "changeKind": "merge-N:1",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-99826850-6b41-59a9-9542-9d842b0ed654",
@@ -11036,18 +11037,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2",
-          "fromItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-          ],
-          "toItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-fcf9c06f-20ef-5460-83bf-2db1a4049969",
           "fromItemIds": [
             "item-fcf9c06f-20ef-5460-83bf-2db1a4049969"
@@ -12093,7 +12082,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:861f8030bee10eb294c23a78ae3f63bb33c3d4417b8a4414870744691d4b7188",
+      "toFingerprint": "sha256:1b6f9abf00f4a4807258d259037b841ebde1197b4920be68af4187c9753923be",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -12820,11 +12809,11 @@
             "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
           ],
           "toItemIds": [
-            "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+            "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-0f8a0f26-1e93-598b-ae03-a918bef1412e",
@@ -13300,11 +13289,11 @@
             "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
           ],
           "toItemIds": [
-            "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+            "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-1ae21503-92d5-5c4f-b22d-21ff5c175436",
@@ -13698,11 +13687,11 @@
             "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
           ],
           "toItemIds": [
-            "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+            "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
@@ -15808,11 +15797,11 @@
             "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
           ],
           "toItemIds": [
-            "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
+            "item-e131371a-4726-57a5-8af0-047b837eb572"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-57d736c6-f121-50d2-a28c-1696fe37dec1",
@@ -17584,11 +17573,11 @@
             "item-839bcbad-dbce-5134-9a26-74420582a2f2"
           ],
           "toItemIds": [
-            "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+            "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-83d1ce76-4809-5fa8-b0bb-063bd7dabde3",
@@ -18203,11 +18192,11 @@
             "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
           ],
           "toItemIds": [
-            "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+            "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-937ee36d-2d1d-50d5-8232-a346fdd392b0",
@@ -18524,14 +18513,15 @@
         {
           "fromItemId": "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
           "fromItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
+            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
           ],
           "toItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
           ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "changeKind": "merge-N:1",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-99826850-6b41-59a9-9542-9d842b0ed654",
@@ -22204,18 +22194,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2",
-          "fromItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-          ],
-          "toItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-fcf9c06f-20ef-5460-83bf-2db1a4049969",
           "fromItemIds": [
             "item-fcf9c06f-20ef-5460-83bf-2db1a4049969"
@@ -23348,7 +23326,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:861f8030bee10eb294c23a78ae3f63bb33c3d4417b8a4414870744691d4b7188",
+      "toFingerprint": "sha256:1b6f9abf00f4a4807258d259037b841ebde1197b4920be68af4187c9753923be",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:7f88c3c6dffc4b1fe73c868cd6be1baaa36116129b5217eaa1f17d590bd47d81",
       "cumulative": true,
@@ -24117,11 +24095,11 @@
             "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
           ],
           "toItemIds": [
-            "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+            "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-0f8a0f26-1e93-598b-ae03-a918bef1412e",
@@ -24312,14 +24290,15 @@
         {
           "fromItemId": "item-14290aa1-a43c-56ef-a455-084efdbe20a5",
           "fromItemIds": [
-            "item-14290aa1-a43c-56ef-a455-084efdbe20a5"
+            "item-14290aa1-a43c-56ef-a455-084efdbe20a5",
+            "item-839bcbad-dbce-5134-9a26-74420582a2f2"
           ],
           "toItemIds": [
-            "item-14290aa1-a43c-56ef-a455-084efdbe20a5"
+            "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
           ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "changeKind": "merge-N:1",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-1479a0e3-8d9c-5a99-9e55-f83e7d8c1891",
@@ -24668,11 +24647,11 @@
             "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
           ],
           "toItemIds": [
-            "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+            "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-1ae21503-92d5-5c4f-b22d-21ff5c175436",
@@ -25017,14 +24996,15 @@
         {
           "fromItemId": "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
           "fromItemIds": [
-            "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+            "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
+            "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
           ],
           "toItemIds": [
-            "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+            "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
           ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "changeKind": "merge-N:1",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-213351eb-ed62-543f-a937-cb165d507bb2",
@@ -25841,14 +25821,12 @@
             "item-343b846f-ba72-577c-86a6-3630794ac1b3",
             "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
           ],
-          "toItemIds": [],
-          "changeKind": "unresolved",
+          "toItemIds": [
+            "item-e131371a-4726-57a5-8af0-047b837eb572"
+          ],
+          "changeKind": "merge-N:1",
           "automaticStateAction": "none",
-          "reconciliation": "requires-user-resolution",
-          "candidateItemIds": [
-            "item-56aa8afa-a62c-5453-b31f-ee729195d8c2",
-            "item-7fcae0db-f886-5992-80ef-abf735d4a560"
-          ]
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-345ada2b-32ce-5fa1-8132-308cba7b3c54",
@@ -29424,18 +29402,6 @@
           "reconciliation": "requires-user-resolution"
         },
         {
-          "fromItemId": "item-839bcbad-dbce-5134-9a26-74420582a2f2",
-          "fromItemIds": [
-            "item-839bcbad-dbce-5134-9a26-74420582a2f2"
-          ],
-          "toItemIds": [
-            "item-839bcbad-dbce-5134-9a26-74420582a2f2"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-83fb03c4-5ca5-5cd6-b99b-098e079b65a1",
           "fromItemIds": [
             "item-83fb03c4-5ca5-5cd6-b99b-098e079b65a1"
@@ -29933,11 +29899,11 @@
             "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
           ],
           "toItemIds": [
-            "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+            "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
           ],
-          "changeKind": "retained",
+          "changeKind": "rekey-1:1",
           "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-939a0c46-ce08-5aa9-b77a-030f76fac62d",
@@ -30243,14 +30209,15 @@
         {
           "fromItemId": "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
           "fromItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
+            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
           ],
           "toItemIds": [
-            "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+            "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
           ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
+          "changeKind": "merge-N:1",
+          "automaticStateAction": "none",
+          "reconciliation": "requires-user-resolution"
         },
         {
           "fromItemId": "item-99ddfa4d-a95c-5334-8d8d-01eadece9feb",
@@ -34227,18 +34194,6 @@
           "reconciliation": "identity-retained"
         },
         {
-          "fromItemId": "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc",
-          "fromItemIds": [
-            "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
-          ],
-          "toItemIds": [
-            "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
           "fromItemId": "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb",
           "fromItemIds": [
             "item-f9b4d46b-ab25-5e35-95b8-b1d430b02ceb"
@@ -34306,18 +34261,6 @@
           ],
           "toItemIds": [
             "item-fc0421af-6b71-5b29-b89f-0dc0bb4eee5b"
-          ],
-          "changeKind": "retained",
-          "automaticStateAction": "preserve",
-          "reconciliation": "identity-retained"
-        },
-        {
-          "fromItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2",
-          "fromItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-          ],
-          "toItemIds": [
-            "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
           ],
           "changeKind": "retained",
           "automaticStateAction": "preserve",
@@ -35788,9 +35731,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "dp-p-127-korean-none-holo",
+      "toItemIds": [
+        "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "dp-p-127-korean-none-unresolved",
       "toItemIds": [
-        "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+        "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -35798,7 +35749,7 @@
     {
       "fromItemId": "dp-p-127-korean-none-unresolved-unknown",
       "toItemIds": [
-        "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+        "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -37828,9 +37779,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo",
+      "toItemIds": [
+        "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "pkmtch-s-p-s-p-145-t-chinese-none-unresolved",
       "toItemIds": [
-        "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+        "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -37838,7 +37797,7 @@
     {
       "fromItemId": "pkmtch-s-p-s-p-145-t-chinese-none-unresolved-unknown",
       "toItemIds": [
-        "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+        "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39236,9 +39195,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "sa-10-korean-none-non-holo",
+      "toItemIds": [
+        "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "sa-10-korean-none-unresolved",
       "toItemIds": [
-        "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+        "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39246,7 +39213,7 @@
     {
       "fromItemId": "sa-10-korean-none-unresolved-unknown",
       "toItemIds": [
-        "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+        "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39588,9 +39555,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "sm-p-1-korean-none-holo",
+      "toItemIds": [
+        "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "sm-p-1-korean-none-unresolved",
       "toItemIds": [
-        "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+        "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39598,7 +39573,7 @@
     {
       "fromItemId": "sm-p-1-korean-none-unresolved-unknown",
       "toItemIds": [
-        "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+        "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39612,9 +39587,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "sm-p-297-korean-none-holo-ripple",
+      "toItemIds": [
+        "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "sm-p-297-korean-none-unresolved",
       "toItemIds": [
-        "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+        "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -39622,7 +39605,7 @@
     {
       "fromItemId": "sm-p-297-korean-none-unresolved-unknown",
       "toItemIds": [
-        "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+        "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -40636,9 +40619,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "sviba-046-korean-none-non-holo",
+      "toItemIds": [
+        "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "sviba-046-korean-none-unresolved",
       "toItemIds": [
-        "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+        "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -40646,7 +40637,7 @@
     {
       "fromItemId": "sviba-046-korean-none-unresolved-unknown",
       "toItemIds": [
-        "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+        "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -40692,9 +40683,17 @@
       "automaticStateAction": "preserve"
     },
     {
+      "fromItemId": "svm-094-indonesian-none-holo",
+      "toItemIds": [
+        "item-e131371a-4726-57a5-8af0-047b837eb572"
+      ],
+      "changeKind": "rekey-1:1",
+      "automaticStateAction": "preserve"
+    },
+    {
       "fromItemId": "svm-094-indonesian-none-unresolved",
       "toItemIds": [
-        "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
+        "item-e131371a-4726-57a5-8af0-047b837eb572"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -40702,7 +40701,7 @@
     {
       "fromItemId": "svm-094-indonesian-none-unresolved-unknown",
       "toItemIds": [
-        "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
+        "item-e131371a-4726-57a5-8af0-047b837eb572"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -45273,10 +45272,10 @@
         ]
       },
       {
-        "legacyChecklistId": "dp-p-127-korean-none-unresolved",
+        "legacyChecklistId": "dp-p-127-korean-none-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+          "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
         ]
       },
       {
@@ -46953,10 +46952,10 @@
         ]
       },
       {
-        "legacyChecklistId": "pkmtch-s-p-s-p-145-t-chinese-none-unresolved",
+        "legacyChecklistId": "pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9981d0c4-d121-520d-82f2-41ae1a620c6a"
+          "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
         ]
       },
       {
@@ -48115,10 +48114,10 @@
         ]
       },
       {
-        "legacyChecklistId": "sa-10-korean-none-unresolved",
+        "legacyChecklistId": "sa-10-korean-none-non-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b"
+          "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
         ]
       },
       {
@@ -48402,10 +48401,10 @@
         ]
       },
       {
-        "legacyChecklistId": "sm-p-1-korean-none-unresolved",
+        "legacyChecklistId": "sm-p-1-korean-none-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3"
+          "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
         ]
       },
       {
@@ -48416,10 +48415,10 @@
         ]
       },
       {
-        "legacyChecklistId": "sm-p-297-korean-none-unresolved",
+        "legacyChecklistId": "sm-p-297-korean-none-holo-ripple",
         "disposition": "projected",
         "targetItemIds": [
-          "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+          "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
         ]
       },
       {
@@ -49214,10 +49213,10 @@
         ]
       },
       {
-        "legacyChecklistId": "sviba-046-korean-none-unresolved",
+        "legacyChecklistId": "sviba-046-korean-none-non-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301"
+          "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
         ]
       },
       {
@@ -49242,10 +49241,10 @@
         ]
       },
       {
-        "legacyChecklistId": "svm-094-indonesian-none-unresolved",
+        "legacyChecklistId": "svm-094-indonesian-none-holo",
         "disposition": "projected",
         "targetItemIds": [
-          "item-56aa8afa-a62c-5453-b31f-ee729195d8c2"
+          "item-e131371a-4726-57a5-8af0-047b837eb572"
         ]
       },
       {
@@ -51104,8 +51103,7 @@
         "cardReleaseId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
         "disposition": "projected",
         "targetItemIds": [
-          "item-56aa8afa-a62c-5453-b31f-ee729195d8c2",
-          "item-7fcae0db-f886-5992-80ef-abf735d4a560"
+          "item-e131371a-4726-57a5-8af0-047b837eb572"
         ],
         "reason": null
       },
@@ -51806,8 +51804,7 @@
         "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
         "disposition": "projected",
         "targetItemIds": [
-          "item-14290aa1-a43c-56ef-a455-084efdbe20a5",
-          "item-839bcbad-dbce-5134-9a26-74420582a2f2"
+          "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
         ],
         "reason": null
       },
@@ -51831,8 +51828,7 @@
         "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-1ad8d8e8-9959-52b8-b29a-99e13604c6a3",
-          "item-f5b3557d-9a0a-5660-bf99-b29da4e54181"
+          "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
         ],
         "reason": null
       },
@@ -51840,8 +51836,7 @@
         "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
         "disposition": "projected",
         "targetItemIds": [
-          "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4",
-          "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
+          "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
         ],
         "reason": null
       },
@@ -52017,8 +52012,7 @@
         "cardReleaseId": "RELEASE:KR:Korean:sA:010/023:Snorlax-Rolling-Tackle-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-0f2ca59d-5dc3-532a-8710-51c3a5c0ae5b",
-          "item-b77f5ba2-302f-5c1b-af78-69b201319678"
+          "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
         ],
         "reason": null
       },
@@ -52169,8 +52163,7 @@
         "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
         "disposition": "projected",
         "targetItemIds": [
-          "item-931885a3-52ab-56f0-97b3-b6c5bc0e3301",
-          "item-b9152bb6-2b05-528b-8d46-fcff15428117"
+          "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
         ],
         "reason": null
       },
@@ -52601,8 +52594,7 @@
         "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:Snorlax-Rolling-Tackle-Heavy-Impact",
         "disposition": "projected",
         "targetItemIds": [
-          "item-9981d0c4-d121-520d-82f2-41ae1a620c6a",
-          "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+          "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
         ],
         "reason": null
       },
@@ -57947,6 +57939,11 @@
         "targetItemId": "item-9379058b-1bb5-514a-9dc0-99fc1209ee47"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:0c44989770446c0be0afe718",
+        "disposition": "projected",
+        "targetItemId": "item-4716aad4-4a5f-5310-a558-6233ae4b9e49"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:0cc7d1d3e1e51b143100369c",
         "disposition": "projected",
         "targetItemId": "item-fd29aa81-9db8-5ce3-9d2f-20df44ea5a4d"
@@ -58122,6 +58119,16 @@
         "targetItemId": "item-73169bdb-868f-570c-96bc-cc853126e18a"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:1ace46fc14262589b4bcb2bc",
+        "disposition": "projected",
+        "targetItemId": "item-55db1b6d-db98-5e03-8465-46bdf1ee63c2"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:PRINTING:1b5ceea548455ea29fa5fc54",
+        "disposition": "projected",
+        "targetItemId": "item-6d1ec328-c952-52ca-bb6a-7c213a1eee99"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:1c2b8359c1b918fd8b753298",
         "disposition": "projected",
         "targetItemId": "item-fb5b6323-34ba-54f2-b89c-8f9a741871ff"
@@ -58150,6 +58157,11 @@
         "physicalPrintingId": "PHYSICAL:PRINTING:1da52dae5ba4efc96ed01685",
         "disposition": "projected",
         "targetItemId": "item-55f42c68-ccea-519e-83e0-737f87563b64"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:PRINTING:1e6206d800e45890f9428092",
+        "disposition": "projected",
+        "targetItemId": "item-b26dde3e-a29b-5cac-b31e-340ba35a726a"
       },
       {
         "physicalPrintingId": "PHYSICAL:PRINTING:1e9cb19cf39b2d7f755ab758",
@@ -58285,6 +58297,11 @@
         "physicalPrintingId": "PHYSICAL:PRINTING:2e48c98bd8a510551ddda590",
         "disposition": "projected",
         "targetItemId": "item-11d75ee5-2f21-5592-bb19-21f5c60a9978"
+      },
+      {
+        "physicalPrintingId": "PHYSICAL:PRINTING:2ee4e3a5effe4042948e4367",
+        "disposition": "projected",
+        "targetItemId": "item-8d57bf6e-7005-58ee-bdaf-9c3c3e95a2f0"
       },
       {
         "physicalPrintingId": "PHYSICAL:PRINTING:2f1189d907fa7f88a1df6b07",
@@ -59257,6 +59274,11 @@
         "targetItemId": "item-7a155126-efac-5080-8115-208a33450f25"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:a4c69a68e8d812cf40f3846e",
+        "disposition": "projected",
+        "targetItemId": "item-b9959ad4-f366-59e5-8f9a-925f83a59b82"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:a4dda39211ad1c2864b913fc",
         "disposition": "projected",
         "targetItemId": "item-b1ce4a75-fbb7-543f-a543-13f3eba1cf2a"
@@ -59817,6 +59839,11 @@
         "targetItemId": "item-df956301-6cfd-5cbb-8042-aedd24e73aa2"
       },
       {
+        "physicalPrintingId": "PHYSICAL:PRINTING:f324454a3681e1c56ec070b8",
+        "disposition": "projected",
+        "targetItemId": "item-e131371a-4726-57a5-8af0-047b837eb572"
+      },
+      {
         "physicalPrintingId": "PHYSICAL:PRINTING:f4dd0c28c5bc853222485e6a",
         "disposition": "projected",
         "targetItemId": "item-f9afdf82-0d84-5250-a3a3-117174d3d322"
@@ -59947,16 +59974,6 @@
         "targetItemId": "item-9516d59c-fc9b-56f1-bf0d-8e04ba9939a7"
       },
       {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0028",
-        "disposition": "projected",
-        "targetItemId": "item-f9a028a1-6b5a-5816-a3d5-1a28fc1b21bc"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
-        "disposition": "projected",
-        "targetItemId": "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
-      },
-      {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0037",
         "disposition": "projected",
         "targetItemId": "item-f34871ab-84e0-51ad-b3f4-506210aba834"
@@ -60065,21 +60082,6 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0430",
         "disposition": "projected",
         "targetItemId": "item-d9399ae5-c60e-5400-8939-97383d7bea30"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0440",
-        "disposition": "projected",
-        "targetItemId": "item-14290aa1-a43c-56ef-a455-084efdbe20a5"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0462",
-        "disposition": "projected",
-        "targetItemId": "item-b77f5ba2-302f-5c1b-af78-69b201319678"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0463",
-        "disposition": "projected",
-        "targetItemId": "item-b9152bb6-2b05-528b-8d46-fcff15428117"
       },
       {
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0477",
@@ -60335,16 +60337,6 @@
         "physicalPrintingId": "PHYSICAL:specimen:SPEC-0608",
         "disposition": "projected",
         "targetItemId": "item-b1d12dd9-ec75-5f62-a3b8-489e48fff148"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0609",
-        "disposition": "projected",
-        "targetItemId": "item-7fcae0db-f886-5992-80ef-abf735d4a560"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0625",
-        "disposition": "projected",
-        "targetItemId": "item-f5b3557d-9a0a-5660-bf99-b29da4e54181"
       },
       {
         "physicalPrintingId": "PRINTING:06f03f3e74d6cfd3fb219a2e",

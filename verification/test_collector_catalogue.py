@@ -437,7 +437,7 @@ def edition_rule_regressions() -> None:
     by_legacy = {legacy: row["itemId"] for row in items for legacy in row["legacyChecklistIds"]}
     assert by_legacy["bw-p-207-japanese-none-holo"] == "item-0106f682-b985-523b-8a3a-53fc115c003d"
     assert collector.CUMULATIVE_CHECKLIST_REKEYS["bw-p-207-japanese-none-holo-unknown"] == "bw-p-207-japanese-none-holo"
-    assert by_legacy["sm-p-297-korean-none-unresolved"] == "item-21227d52-c2c4-5c5c-a73f-b29329cb58e4"
+    assert by_legacy["m2a-136-t-chinese-none-unresolved"] == "item-e5b51865-71fe-5301-bcbc-31e60bef7952"
 
 
 def product_rarity_regressions() -> None:
@@ -472,6 +472,20 @@ def product_rarity_regressions() -> None:
     assert stamped[("LOCALIZATION:WEST:de", "PGO", "055", "Promo")] == "078"
     assert stamped[("LOCALIZATION:WEST:en", "SSH", "142", "Oversized")] == "202"
     assert stamped[("LOCALIZATION:WEST:en", "FLF", "80", "Promo")] == "106"
+    # Research placeholders whose card a specimen already established join that printing (#439).
+    by_legacy_all = {legacy: row for row in items for legacy in row["legacyChecklistIds"]}
+    for legacy in ("dp-p-127-korean-none-holo", "sm-p-1-korean-none-holo", "sm-p-297-korean-none-holo-ripple",
+                   "pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo", "sa-10-korean-none-non-holo",
+                   "sviba-046-korean-none-non-holo", "svm-094-indonesian-none-holo"):
+        assert by_legacy_all[legacy]["itemKind"] == "verified-printing", legacy
+    assert collector.CUMULATIVE_CHECKLIST_REKEYS["sm-p-297-korean-none-unresolved"] == "sm-p-297-korean-none-holo-ripple"
+    # Earlier catalogues keyed the photographed TW 145/S-P card by a SPEC-0030 release id; every
+    # transition must still carry it to the joined printing instead of orphaning its state.
+    spec_0030_item = "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+    spec_0030_routes = [route["toItemIds"] for transition in read("collector_migrations.json")["catalogueTransitions"]
+                        for route in transition["transitions"] if spec_0030_item in route["fromItemIds"]]
+    assert spec_0030_routes and all(route == [by_legacy_all["pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo"]["itemId"]]
+                                    for route in spec_0030_routes), spec_0030_routes
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.

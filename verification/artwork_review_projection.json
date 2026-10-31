@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-31",
-  "projectionVersion": "ba6e11ad85b98ead8f85fcba22822c3d76e1a50f302b2243440c949e7da9d8e6",
+  "projectionVersion": "408fe831e2d3e45405784c2a2e3b18c3777f4b965623d5f7b2bb9eab47b4ac15",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 892,
-    "sourceObservations": 3314
+    "sourceObservations": 3324
   },
   "groups": [
     {
@@ -2112,7 +2112,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0028",
+              "physicalPrintingId": "PHYSICAL:PRINTING:1ace46fc14262589b4bcb2bc",
+              "semanticPrintingId": "PRINTING:1ace46fc14262589b4bcb2bc",
               "cardReleaseId": "RELEASE:KR:Korean:SM-P:140:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
               "finish": "holo",
               "edition": null,
@@ -2120,14 +2121,21 @@
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
-              "basis": "Pokumon's exact Korean 140/SM-P record positively identifies the Full Art purchase promo with Ripple treatment.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0028",
+              "sourceFinishUnitId": "F0401",
+              "sourcePrintingId": "F0401-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1ace46fc14262589b4bcb2bc",
               "specimenIds": [
                 "SPEC-0028"
+              ],
+              "sources": [
+                {
+                  "url": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Korean Full Art Eevee & Snorlax-GX in a PSA holder, photographed by the owner and supplied through issue #166. The label reads \"2019 P.M. KOR. SM PROMO #140 / FA/EEVEE & SNORLAX GX / T.B/N.U. B.B.PURCHASE CP.\", GEM MT 10, cert 101016611. The card reads \"이브이&잠만보 GX\", 기본 (Basic), TAG TEAM, HP 270, Colorless; 응원, 덤프프레스 120+, 메가톤프렌즈GX 210; weakness Fighting x2, retreat 4; Illus. Tomokazu Komiya; PROMO, regulation mark C, \"140/SM-P\", ©2019 Pokémon. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0028.",
+                  "retrievedAt": "2026-08-10"
+                }
               ]
             }
           ],
@@ -2179,6 +2187,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0401-P01:0:8f5d10fa151e3525",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://pokumon.com/card/eevee-snorlax-tag-teamgx-140-sm-p-korean-promo/",
+              "evidence": "Korean Full Art Eevee & Snorlax-GX in a PSA holder, photographed by the owner and supplied through issue #166. The label reads \"2019 P.M. KOR. SM PROMO #140 / FA/EEVEE & SNORLAX GX / T.B/N.U. B.B.PURCHASE CP.\", GEM MT 10, cert 101016611. The card reads \"이브이&잠만보 GX\", 기본 (Basic), TAG TEAM, HP 270, Colorless; 응원, 덤프프레스 120+, 메가톤프렌즈GX 210; weakness Fighting x2, retreat 4; Illus. Tomokazu Komiya; PROMO, regulation mark C, \"140/SM-P\", ©2019 Pokémon. The exact card traits and cited positive record establish the Korean counterpart without merging its local release identity. Retained as SPEC-0028.",
+              "contentHash": "c6362ba464e7dbd5ecd76065e2c6542b91c0f517f182811a9a956e5719f4c2e8",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:SM-P:140:base",
               "kind": "source-first",
@@ -30699,22 +30716,30 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0625",
+              "physicalPrintingId": "PHYSICAL:PRINTING:0c44989770446c0be0afe718",
+              "semanticPrintingId": "PRINTING:0c44989770446c0be0afe718",
               "cardReleaseId": "RELEASE:KR:Korean:SM-P:017/SM-P:Snorlax-GX-Collapse-Thunderous-Snore-Pulverizing-Pancake-GX",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0625",
+              "sourceFinishUnitId": "F0399",
+              "sourcePrintingId": "F0399-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0c44989770446c0be0afe718",
               "specimenIds": [
                 "SPEC-0625"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/P28AAeSwNdZoEsYZ/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0625.",
+                  "retrievedAt": "2026-10-07"
+                }
               ]
             }
           ],
@@ -30775,6 +30800,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0399-P01:0:d8056898dae39095",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/P28AAeSwNdZoEsYZ/s-l1600.webp",
+              "evidence": "Physical Korean 잠만보 GX017/SM-P A, HP190. Reflective silver foil frame visible; the retained PSA label explicitly identifies this exact Korean SM Snorlax GX Box promo as SNORLAX GX-HOLO. Supports Holo only; grading label is an observed attribute, not owner attestation. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0625.",
+              "contentHash": "64872cc51ad49f8fb1f9ee1e75f8ae859b88e76e86d399d84053e504fa4a5b71",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:SM-P:017/SM-P:base",
               "kind": "source-first",
@@ -56131,22 +56165,41 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0463",
+              "physicalPrintingId": "PHYSICAL:PRINTING:a4c69a68e8d812cf40f3846e",
+              "semanticPrintingId": "PRINTING:a4c69a68e8d812cf40f3846e",
               "cardReleaseId": "RELEASE:KR:Korean:svI:046/066:Snorlax-Lazy-Press",
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0463, Korean svI 046/066. Retained database render supports identity; finish rests only on this owner determination. No complete finish inventory asserted.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0463",
+              "sourceFinishUnitId": "F0496",
+              "sourcePrintingId": "F0496-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a4c69a68e8d812cf40f3846e",
               "specimenIds": [
                 "SPEC-0463"
+              ],
+              "sources": [
+                {
+                  "url": "https://cdn.collectory.cc/cards/kr/BS2024006/046_066.webp",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "Complete Korean database render of the Battle Academy Snorlax. The Hangul name and rules text, Battle Academy deck mark, printed svI set mark and collector number 046/066 establish the exact localized card behind the legacy svIba alias. A digital render is identity evidence only; no physical finish is inferred. Retained as SPEC-0463.",
+                  "retrievedAt": "2026-08-30",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+                }
               ]
             }
           ],
@@ -56196,6 +56249,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0496-P01:0:44ee231342b08eed",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://cdn.collectory.cc/cards/kr/BS2024006/046_066.webp",
+              "evidence": "Complete Korean database render of the Battle Academy Snorlax. The Hangul name and rules text, Battle Academy deck mark, printed svI set mark and collector number 046/066 establish the exact localized card behind the legacy svIba alias. A digital render is identity evidence only; no physical finish is inferred. Retained as SPEC-0463.",
+              "contentHash": "fe7965c2f6eb8271adbe5046c4dd8186cafef81e68da78574d211f1b44f81c27",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0496-P01:1:ec7f62f948905524",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties.",
+              "contentHash": "2527b1f89580a45eb4ef12dab6812001df2dc95f6ce6fa96ca92bc06ca594e8e",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:svI:046/066:base",
               "kind": "source-first",
@@ -63263,7 +63334,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0440",
+              "physicalPrintingId": "PHYSICAL:PRINTING:2ee4e3a5effe4042948e4367",
+              "semanticPrintingId": "PRINTING:2ee4e3a5effe4042948e4367",
               "cardReleaseId": "RELEASE:KR:Korean:DP:006:Snorlax-LvX-Big-Appetite-Exercise",
               "finish": "holo",
               "edition": null,
@@ -63271,14 +63343,21 @@
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
-              "basis": "Reflective points are directly visible across the photographed Korean Lv.X card face.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0440",
+              "sourceFinishUnitId": "F0099",
+              "sourcePrintingId": "F0099-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:2ee4e3a5effe4042948e4367",
               "specimenIds": [
                 "SPEC-0440"
+              ],
+              "sources": [
+                {
+                  "url": "https://media.bunjang.co.kr/product/386929037_1_1777783357_w480.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete seller photograph of Korean Snorlax Lv.X. The Hangul name and rules text, DP-era promo layout and visible collector number 006 establish the Korean local promo corresponding to the legacy DP-P 127 claim. Reflective points are visible across the card face. Retained as SPEC-0440.",
+                  "retrievedAt": "2026-08-30"
+                }
               ]
             }
           ],
@@ -63328,6 +63407,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0099-P01:0:2e26c1f257bfb54d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/386929037_1_1777783357_w480.jpg",
+              "evidence": "Complete seller photograph of Korean Snorlax Lv.X. The Hangul name and rules text, DP-era promo layout and visible collector number 006 establish the Korean local promo corresponding to the legacy DP-P 127 claim. Reflective points are visible across the card face. Retained as SPEC-0440.",
+              "contentHash": "b6a7abcf46dda86967d4f590c370740011907cf6f7a8adc23a7e40a7c6c00073",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:DP:006:base",
               "kind": "source-first",
@@ -67014,7 +67102,8 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0030",
+              "physicalPrintingId": "PHYSICAL:PRINTING:1b5ceea548455ea29fa5fc54",
+              "semanticPrintingId": "PRINTING:1b5ceea548455ea29fa5fc54",
               "cardReleaseId": "RELEASE:TW:T-Chinese:S-P:145:Snorlax-Rolling-Tackle-Heavy-Impact",
               "finish": "mirror-holo",
               "edition": null,
@@ -67022,14 +67111,20 @@
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
-              "basis": "The owner labelled this photograph \"Mirror Finish\" when supplying it in issue #166, and the card face shows a textured foil across its whole surface including the artwork window. Recorded as the technical finish mirror-holo on the owner's identification; no foil pattern is named because none is legible from the photograph.",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0030",
+              "sourceFinishUnitId": "F0258",
+              "sourcePrintingId": "F0258-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1b5ceea548455ea29fa5fc54",
               "specimenIds": [
                 "SPEC-0030"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Owner-supplied physical card photograph",
+                  "evidence": "Traditional Chinese Snorlax photographed by the owner through issue #166: \"卡比獸\", 基礎 (Basic), HP 150, Colorless; 滾動衝撞 80 and 重磅衝擊 130; 全國圖鑑No.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; Illus. Tika Matsuno; PROMO, regulation mark D, \"145/S-P\", ©2022 Pokémon/Nintendo/Creatures/GAME FREAK. Retained as SPEC-0030.",
+                  "retrievedAt": "2026-08-10"
+                }
               ]
             }
           ],
@@ -67090,6 +67185,15 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0258-P01:0:c99ac5a1eceed64c",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": null,
+              "evidence": "Traditional Chinese Snorlax photographed by the owner through issue #166: \"卡比獸\", 基礎 (Basic), HP 150, Colorless; 滾動衝撞 80 and 重磅衝擊 130; 全國圖鑑No.143, 2.1m, 460.0kg; weakness Fighting x2, retreat 4; Illus. Tika Matsuno; PROMO, regulation mark D, \"145/S-P\", ©2022 Pokémon/Nintendo/Creatures/GAME FREAK. Retained as SPEC-0030.",
+              "contentHash": "5ca83f11233f8a8f488e9f78e1e1e4b5edf4baf30ad53cd2fe148a1ba6f7fc89",
+              "image": null
+            },
             {
               "observationId": "source-first:TW:S-P:145:base",
               "kind": "source-first",
@@ -67843,22 +67947,41 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0462",
+              "physicalPrintingId": "PHYSICAL:PRINTING:1e6206d800e45890f9428092",
+              "semanticPrintingId": "PRINTING:1e6206d800e45890f9428092",
               "cardReleaseId": "RELEASE:KR:Korean:sA:010/023:Snorlax-Rolling-Tackle-Heavy-Impact",
               "finish": "non-holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection owner explicitly determined Non-Holo on 2026-10-08 for SPEC-0462, Korean sA 010/023. Retained image supports identity; finish rests only on this owner determination. No complete finish inventory asserted.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0462",
+              "sourceFinishUnitId": "F0369",
+              "sourcePrintingId": "F0369-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:1e6206d800e45890f9428092",
               "specimenIds": [
                 "SPEC-0462"
+              ],
+              "sources": [
+                {
+                  "url": "https://cdn.collectory.cc/cards/kr/BS2020001/010_023.webp",
+                  "sourceType": "Inspected reference photograph; original provider unspecified",
+                  "evidence": "Complete Korean database render of Snorlax from the Sword & Shield Grass Starter Set V. The Hangul name and rules text, printed sA set mark and collector number 010/023 establish the exact localized card. A digital render is identity evidence only; no physical finish is inferred. Retained as SPEC-0462.",
+                  "retrievedAt": "2026-08-30",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-08",
+                  "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties."
+                }
               ]
             }
           ],
@@ -67908,6 +68031,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0369-P01:0:aabdec90a8d39c22",
+              "kind": "finish",
+              "provider": "Inspected reference photograph; original provider unspecified",
+              "url": "https://cdn.collectory.cc/cards/kr/BS2020001/010_023.webp",
+              "evidence": "Complete Korean database render of Snorlax from the Sword & Shield Grass Starter Set V. The Hangul name and rules text, printed sA set mark and collector number 010/023 establish the exact localized card. A digital render is identity evidence only; no physical finish is inferred. Retained as SPEC-0462.",
+              "contentHash": "8cdb3273aeb2d573ceea1b751816dfe45a28a9505c75680f107730d38250ab6b",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0369-P01:1:ec7f62f948905524",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-08 confirmation establishes the specimen's finish; the retained inspected reference photograph; original provider unspecified supports card identity and any independently visible properties.",
+              "contentHash": "cdde6b8c1dd99916cb6ee4f506e616b15de082fe245ba66ef0038c69643d36ab",
+              "image": null
+            },
             {
               "observationId": "source-first:KR:sA:010/023:base",
               "kind": "source-first",
@@ -103927,22 +104068,41 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0609",
+              "physicalPrintingId": "PHYSICAL:PRINTING:f324454a3681e1c56ec070b8",
+              "semanticPrintingId": "PRINTING:f324454a3681e1c56ec070b8",
               "cardReleaseId": "RELEASE:ID:Indonesian:SVM I:094/175:Snorlax-ex-Strength-Toss-and-Turn-Press",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
               "distribution": null,
-              "cardSize": "unknown",
-              "basis": "Collection-owner determination on 2026-10-05 after viewing this exact seller photograph: ja sieht nach Holo aus übernimm es. Finish is owner-attributed; printed Indonesian identity independently inspected.",
+              "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": null,
-              "sourcePrintingId": null,
-              "establishingClaimId": "CLAIM:specimen:SPEC-0609",
+              "sourceFinishUnitId": "F0505",
+              "sourcePrintingId": "F0505-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f324454a3681e1c56ec070b8",
               "specimenIds": [
                 "SPEC-0609"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/nCsAAeSwE~JpLmTC/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Physical sleeved Indonesian Snorlax ex HP260 on dark background. Printed SVM I 094/175, Tenaga Super 80 and Tekanan Balik Badan 120x establish exact identity. Collection owner confirms Holo for this photograph on 2026-10-05. Seller metadata also says Holo but contains mismatched year and rarity fields, which are not accepted. No named foil pattern, owner custody or complete finish inventory is asserted. Retained as SPEC-0609.",
+                  "retrievedAt": "2026-10-05",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-10-05",
+                  "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                }
               ]
             }
           ],
@@ -104003,6 +104163,24 @@
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0505-P01:0:64c436d29e15569d",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/nCsAAeSwE~JpLmTC/s-l1600.webp",
+              "evidence": "Physical sleeved Indonesian Snorlax ex HP260 on dark background. Printed SVM I 094/175, Tenaga Super 80 and Tekanan Balik Badan 120x establish exact identity. Collection owner confirms Holo for this photograph on 2026-10-05. Seller metadata also says Holo but contains mismatched year and rarity fields, which are not accepted. No named foil pattern, owner custody or complete finish inventory is asserted. Retained as SPEC-0609.",
+              "contentHash": "b97db32c7c1ce7476c03d4ffa5c038bd9fae5ea453bdf542c716c0c354598399",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0505-P01:1:f6942a9f9ed2c0f6",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-10-05 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "32af84fa9fd0c8894e3c5e155dbb51d5c5531f59196ff54e39046c448c6c9cf4",
+              "image": null
+            },
             {
               "observationId": "source-first:ID:SVM I:094/175:base",
               "kind": "source-first",

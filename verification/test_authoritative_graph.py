@@ -1573,23 +1573,24 @@ def main() -> None:
     )
     assert shifted_physical["sourcePrintingId"] == "F0167-P99"
     assert shifted_physical["establishingClaimId"] == "CLAIM:finish:F0167-P01"
+    # SPEC-0030 (TW S-P 145) joined its legacy finish unit in #439; SPEC-0014 stays standalone.
     standalone_claim = next(
         row["payload"] for row in graph["entities"]
         if row["entityType"] == "candidate-claim"
-        and row["payload"].get("sourceId") == "SPEC-0030"
+        and row["payload"].get("sourceId") == "SPEC-0014"
     )
     assert standalone_claim["disposition"] == "established-and-mapped"
-    assert standalone_claim["materializedTargetId"] == "PHYSICAL:specimen:SPEC-0030"
+    assert standalone_claim["materializedTargetId"] == "PHYSICAL:specimen:SPEC-0014"
     assert any(
         row["entityType"] == "physical-printing"
-        and row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        and row["entityId"] == "PHYSICAL:specimen:SPEC-0014"
         for row in graph["entities"]
     )
     specimens_with_denominator = json.loads(
         (ROOT / "verification/specimens.json").read_text(encoding="utf-8")
     )
     next(row for row in specimens_with_denominator["specimens"]
-         if row["specimenId"] == "SPEC-0030")["number"] = "145/999"
+         if row["specimenId"] == "SPEC-0014")["number"] = "101/999"
     assert not validate(graph, identity_inputs={"specimens": specimens_with_denominator})
     meta = graph["meta"]
     assert meta["schema"] == "snoredex-authoritative-locality-graph"
@@ -1795,7 +1796,7 @@ def main() -> None:
             for printing in unit.get("printings", [])
         )
         conflicted_printing["verificationStatus"] = "pending"
-        conflicted_printing["specimenIds"] = ["SPEC-0030"]
+        conflicted_printing["specimenIds"] = ["SPEC-0014"]
         conflicted_printing["conflictsWith"] = ["SPEC-0040"]
         finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
         specimens_path.write_text(
@@ -1814,12 +1815,12 @@ def main() -> None:
     conflict_specimen_claim = next(
         row["payload"] for row in conflict_projection["entities"]
         if row["entityType"] == "candidate-claim"
-        and row["payload"].get("sourceId") == "SPEC-0030"
+        and row["payload"].get("sourceId") == "SPEC-0014"
     )
     assert conflict_specimen_claim["disposition"] == "candidate-needs-evidence"
     assert conflict_specimen_claim["materializedTargetId"] is None
     assert not any(
-        row["entityId"] == "PHYSICAL:specimen:SPEC-0030"
+        row["entityId"] == "PHYSICAL:specimen:SPEC-0014"
         for row in conflict_projection["entities"]
     )
 

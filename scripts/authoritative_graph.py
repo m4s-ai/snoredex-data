@@ -164,6 +164,13 @@ def finish_unit_release_key(unit: dict[str, Any]) -> tuple[str, str, str]:
     )
 
 
+def finish_unit_release_id(unit, release_ids, release_aliases):
+    """The unit's card release; a bridged unit may still be reached by its own legacy key alias."""
+    unit_key = finish_unit_release_key(unit)
+    legacy_key = (str(unit.get("setCode") or ""), _number(unit.get("number")), str(unit.get("language") or ""))
+    return release_ids.get(unit_key) or release_aliases.get(unit_key) or release_aliases.get(legacy_key)
+
+
 def _release_index(graph: dict[str, Any]) -> dict[tuple[str, str, str], str]:
     """Index card releases by the typed local identity used by finish units."""
     index: dict[tuple[str, str, str], str] = {}
@@ -340,7 +347,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
 
     for unit in finish_units:
         unit_key = finish_unit_release_key(unit)
-        release_id = release_ids.get(unit_key) or release_aliases.get(unit_key)
+        release_id = finish_unit_release_id(unit, release_ids, release_aliases)
         for printing in sorted(unit.get("printings", []), key=lambda row: row.get("printingId", "")):
             printing_id = str(printing["printingId"])
             semantic_scope = release_id or "finish-unit:" + "|".join(unit_key)
