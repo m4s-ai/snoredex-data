@@ -15,6 +15,29 @@ Newest first.
 
 ---
 
+## A missing stamp was treated as a guess
+
+**Trap:** *When a card has exactly two documented versions that differ by a visible mark, a
+complete, legible face without that mark is an observation of the other version.*
+
+The owner supplied a photograph of the Italian DF 10/101. The official EX Dragon Frontiers
+checklist gives cards 1–12 exactly two foil versions: the regular holo, and the reverse holo with
+the EX Dragon Frontiers set-logo stamp in the artwork field. The photograph shows the complete
+face with no stamp. The agent still recorded no finish and asked the owner to confirm "holo". That
+cost a round trip and the owner's patience for a fact the photograph already showed.
+
+This is not an absence argument. Nothing is concluded about a card that was not photographed. The
+photographed copy is identified by a property that is visibly present on one version and visibly
+absent on the other, exactly as a legible face establishes its edition. The rule needs both halves:
+a documented two-version scope for the card, and a complete, legible mark position.
+
+**Now guarded by** the scan-recording rule in `FINISH_SOURCES.md`, and by the `AGENTS.md` trap that
+already covers editions.
+
+*#438.*
+
+---
+
 ## A product's rarity was spread over every printing of its release
 
 **Trap:** *A marketplace fact belongs to the product it names; a product-level claim reaches only

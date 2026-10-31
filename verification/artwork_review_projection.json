@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-31",
-  "projectionVersion": "a9e0ef50d22e085bf95cef2bc6e628823e8c94bb3ca20820fd43c38d44c4de2a",
+  "projectionVersion": "dae4f391dd44cd756af5a35484e8ad773c0e6727febf7f2ec22fca5b04509c22",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 892,
-    "sourceObservations": 3325
+    "physicalPrintings": 893,
+    "sourceObservations": 3327
   },
   "groups": [
     {
@@ -26939,6 +26939,37 @@
                   "supportsAbsence": false
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+              "semanticPrintingId": "PRINTING:363d651abf26003f81687244",
+              "cardReleaseId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0087",
+              "sourcePrintingId": "F0087-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
+              "specimenIds": [
+                "SPEC-0662"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. The artwork field carries no EX Dragon Frontiers set-logo stamp, so this is the regular holo, not the stamped reverse holo. Retained as SPEC-0662.",
+                  "retrievedAt": "2026-10-31"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                }
+              ]
             }
           ],
           "detection": {
@@ -26985,6 +27016,24 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0087-P01:0:42286cff3dcf58ff",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": null,
+              "evidence": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. The artwork field carries no EX Dragon Frontiers set-logo stamp, so this is the regular holo, not the stamped reverse holo. Retained as SPEC-0662.",
+              "contentHash": "052cfa7cc719ee20b1a8e62db9e4ffb3e2347433e7d5513dd767af3b2a500482",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0087-P01:1:700c345db9ad52c4",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-Dragon-Frontiers/Snorlax-Delta-Species-DF10",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "ecd6c1f4db42f1f72f59b8f1537877abf40750ab4d17d1efde25bf708d5ebe5f",
+              "image": null
+            },
+            {
               "observationId": "finish:F0087-P02:0:5c83ca3adad15293",
               "kind": "finish",
               "provider": "Bulbapedia holofoil pattern history",
@@ -27016,8 +27065,8 @@
               "kind": "specimen",
               "provider": null,
               "url": null,
-              "evidence": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. Establishes the Italian printing and its printed name only; no finish is recorded.",
-              "contentHash": "33c499cb14913228a507faa1a96c1cc58b08d0cc106f0a161dbb1a29c930b43a",
+              "evidence": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. The artwork field carries no EX Dragon Frontiers set-logo stamp, so this is the regular holo, not the stamped reverse holo.",
+              "contentHash": "d1b06061219c62fe54de7fbf2975358f7115d6a22baaf1f5ca14f5e783e23799",
               "image": "verification/specimens/SPEC-0662.png"
             },
             {

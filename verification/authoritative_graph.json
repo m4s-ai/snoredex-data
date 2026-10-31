@@ -10145,12 +10145,14 @@
         "sourceKind": "finish-printing-record",
         "sourceId": "F0087-P01",
         "semanticPrintingId": "PRINTING:363d651abf26003f81687244",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing"
+        "evidenceStatus": "confirmed",
+        "disposition": "established-and-mapped",
+        "proposedTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+        "materializedTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+        "reason": "canonical specimen observations and finish evidence establish the exact finish and edition",
+        "specimenIds": [
+          "SPEC-0662"
+        ]
       }
     },
     {
@@ -39154,6 +39156,23 @@
         "materializedTargetId": null,
         "reason": "provides provenance for PHYSICAL:PRINTING:a68b9f50e4e10e59cee8b0eb, already established from the finish store",
         "provenanceTargetId": "PHYSICAL:PRINTING:a68b9f50e4e10e59cee8b0eb"
+      }
+    },
+    {
+      "entityType": "candidate-claim",
+      "entityId": "CLAIM:specimen:SPEC-0662",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "claimId": "CLAIM:specimen:SPEC-0662",
+        "claimKind": "physical-printing",
+        "sourceKind": "specimen-observation",
+        "sourceId": "SPEC-0662",
+        "evidenceStatus": "observed",
+        "disposition": "candidate-needs-evidence",
+        "proposedTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+        "materializedTargetId": null,
+        "reason": "provides provenance for PHYSICAL:PRINTING:363d651abf26003f81687244, already established from the finish store",
+        "provenanceTargetId": "PHYSICAL:PRINTING:363d651abf26003f81687244"
       }
     },
     {
@@ -99766,6 +99785,30 @@
         "establishingClaimId": "CLAIM:finish:PRINTING:35a8a7bf05e1a9e89644dc63",
         "specimenIds": [
           "SPEC-0624"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+        "semanticPrintingId": "PRINTING:363d651abf26003f81687244",
+        "cardReleaseId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": null,
+        "distribution": null,
+        "cardSize": "standard",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": "F0087",
+        "sourcePrintingId": "F0087-P01",
+        "establishingClaimId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
+        "specimenIds": [
+          "SPEC-0662"
         ]
       }
     },
@@ -190296,10 +190339,12 @@
     {
       "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
-      "provenance": {}
+      "relation": "materializes",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "provenance": {
+        "disposition": "established-and-mapped"
+      }
     },
     {
       "fromType": "candidate-claim",
@@ -205811,6 +205856,16 @@
       "toId": "PHYSICAL:PRINTING:a68b9f50e4e10e59cee8b0eb",
       "provenance": {
         "specimenId": "SPEC-0660"
+      }
+    },
+    {
+      "fromType": "candidate-claim",
+      "fromId": "CLAIM:specimen:SPEC-0662",
+      "relation": "provenance",
+      "toType": "physical-printing",
+      "toId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "provenance": {
+        "specimenId": "SPEC-0662"
       }
     },
     {
@@ -252491,6 +252546,22 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:KR:Korean:sv4a:145/190:Snorlax-Voraciousness-Thudding-Press",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "relation": "established-by",
+      "toType": "candidate-claim",
+      "toId": "CLAIM:finish:PRINTING:363d651abf26003f81687244",
+      "provenance": {}
+    },
+    {
+      "fromType": "physical-printing",
+      "fromId": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "relation": "realizes",
+      "toType": "card-release",
+      "toId": "RELEASE:WEST:Italian:DF:10:Snorlax-Delta-Species-Bedhead-Dozing",
       "provenance": {}
     },
     {
@@ -303248,9 +303319,9 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0087-P01",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
+      "disposition": "established-and-mapped",
+      "targetRef": "PHYSICAL:PRINTING:363d651abf26003f81687244",
+      "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
@@ -327128,17 +327199,24 @@
       "disposition": "candidate-needs-evidence",
       "targetRef": null,
       "reason": "provides provenance for PHYSICAL:PRINTING:a68b9f50e4e10e59cee8b0eb, already established from the finish store"
+    },
+    {
+      "sourceKind": "specimen-observation",
+      "sourceId": "SPEC-0662",
+      "disposition": "candidate-needs-evidence",
+      "targetRef": null,
+      "reason": "provides provenance for PHYSICAL:PRINTING:363d651abf26003f81687244, already established from the finish store"
     }
   ],
   "summary": {
-    "entities": 9133,
-    "edges": 13196,
-    "migrationInputs": 3343,
+    "entities": 9135,
+    "edges": 13199,
+    "migrationInputs": 3344,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 372,
       "carried": 68,
-      "established-and-mapped": 1710,
+      "established-and-mapped": 1711,
       "linked-local-counterpart": 126,
       "mapped": 531,
       "needs-evidence": 218,
@@ -327146,9 +327224,9 @@
       "positively-excluded": 84,
       "split": 123
     },
-    "candidateClaims": 2249,
+    "candidateClaims": 2250,
     "cardReleases": 629,
-    "physicalPrintings": 892,
+    "physicalPrintings": 893,
     "setSourceRecords": 752,
     "setSourceDispositions": 752,
     "localizations": 16
