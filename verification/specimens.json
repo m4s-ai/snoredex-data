@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 661,
+  "count": 662,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14358,6 +14358,23 @@
         "U0458"
       ],
       "listingUrl": "https://pokumon.com/card/snorlax-expansion-sheet-1-1998-vending/"
+    },
+    {
+      "specimenId": "SPEC-0662",
+      "setCode": "DF",
+      "number": "10",
+      "variant": "base",
+      "language": "Italian",
+      "heldBy": "not established; image supplied by collection owner",
+      "inspectedFrom": "Photograph supplied by the collection owner on 2026-10-31 for issue #436 (WebP, DMCARDS display watermark), decoded losslessly to PNG",
+      "photograph": "SPEC-0662.png",
+      "photographSource": "Image supplied by the collection owner on 2026-10-31",
+      "photographSha256": "sha256:f619ce4df74d4b09ff408cb40ca8d4afcce4f567709e29e0e9062357952a9207",
+      "observed": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. Establishes the Italian printing and its printed name only; no finish is recorded.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0450"
+      ]
     }
   ]
 }

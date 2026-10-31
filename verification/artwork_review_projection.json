@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-10-31",
-  "projectionVersion": "408fe831e2d3e45405784c2a2e3b18c3777f4b965623d5f7b2bb9eab47b4ac15",
+  "projectionVersion": "a9e0ef50d22e085bf95cef2bc6e628823e8c94bb3ca20820fd43c38d44c4de2a",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 892,
-    "sourceObservations": 3324
+    "sourceObservations": 3325
   },
   "groups": [
     {
@@ -26970,6 +26970,17 @@
               "originalHash": "5450ef2043b862ad5b5e53ebcc16bdca6bcbd58934b4e41514658d85add19227",
               "previewSrc": "images/previews/DF_10_Snorlax___Delta_Species_277215.jpg?v=bd8fbbf33441ce9ce134f4a063dcbad94717d50da4497bd4ebf5f0fdc4d022b4",
               "thumbnailSrc": "images/thumbs/DF_10_Snorlax___Delta_Species_277215.jpg?v=018e4d622349ceddf5d16ca3816bbafaf3802c2b5ed0cda9863e7b8b60215304"
+            },
+            {
+              "src": "verification/specimens/SPEC-0662.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0662",
+              "contentHash": "f619ce4df74d4b09ff408cb40ca8d4afcce4f567709e29e0e9062357952a9207",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f619ce4df74d4b09ff408cb40ca8d4afcce4f567709e29e0e9062357952a9207",
+              "previewSrc": "images/previews/SPEC-0662.png?v=fa3db9b2892b42e997f5d248dfe9cbd4a9fbda126a4e075263465ea380f08bdd",
+              "thumbnailSrc": "images/thumbs/SPEC-0662.png?v=4f7bf4394fcebc91ac246937bfeb9d5b890eae799ec279cc379fe20db23eccb3"
             }
           ],
           "observations": [
@@ -26999,6 +27010,15 @@
               "evidence": "Identifies Snorlax 10/101 as the stamped EX Dragon Frontiers reverse-holo printing.",
               "contentHash": "b2ec30ce71fd2d80644d44b3e1b982d313b591e2365ed21159681fc1acd60df0",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0662",
+              "kind": "specimen",
+              "provider": null,
+              "url": null,
+              "evidence": "Complete legible face of the Italian EX Dragon Frontiers Snorlax: name bar 'Snorlax' with 'δ SPECIE DELTA', 80 PV, Poké-BODY 'Assonnato', Poké-POWER 'Ciondolare', Italian weakness/resistance/retreat labels 'debolezza', 'resistenza', 'costo di ritirata', Illus. Masakazu Fukuda, ©2007 Pokémon/Nintendo, 10/101 with the star rarity symbol. Establishes the Italian printing and its printed name only; no finish is recorded.",
+              "contentHash": "33c499cb14913228a507faa1a96c1cc58b08d0cc106f0a161dbb1a29c930b43a",
+              "image": "verification/specimens/SPEC-0662.png"
             },
             {
               "observationId": "unit:U0450",
