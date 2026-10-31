@@ -7,14 +7,14 @@
     "decision": "ADR-0002 D1",
     "description": "Provider records exist independently of Snorlax membership. Raw values are preserved here; mapping and disposition live in the authoritative locality graph.",
     "counts": {
-      "sourceRecords": 749,
+      "sourceRecords": 752,
       "legacySetProfiles": 135,
       "sourceFirstLocalSets": 159,
       "releaseDateRecords": 104,
       "editionAvailabilityRecords": 13,
       "localitySetIndexRecords": 112,
       "printedSetSizeRecords": 102,
-      "localSetNameRecords": 119,
+      "localSetNameRecords": 122,
       "printedSubsetSizeRecords": 5
     }
   },
@@ -19884,6 +19884,54 @@
         "rarity": "Promo",
         "basis": "Owner classification of the CL 33 prerelease and prerelease Staff promos only.",
         "evidenceRefs": []
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-28A61727F0BC",
+      "sourceKind": "local-set-name-record",
+      "provider": "owner-attestation",
+      "providerRecordKey": "ID\u001fSM-P\u001fname",
+      "retrieved": "2026-10-31",
+      "raw": {
+        "localCode": "SM-P",
+        "locality": "ID",
+        "localName": "Sun & Moon Indonesian Promos",
+        "excerpt": "Collection owner, 2026-10-31: \"Sun & Moon Indonesian Promos gibt halt nur den englsichen set namen\"",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+        "note": "The series carries an English name only; no localized set name exists."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-360A25766D7A",
+      "sourceKind": "local-set-name-record",
+      "provider": "owner-attestation",
+      "providerRecordKey": "TH\u001fSM-P\u001fname",
+      "retrieved": "2026-10-31",
+      "raw": {
+        "localCode": "SM-P",
+        "locality": "TH",
+        "localName": "Sun & Moon Thai Promos",
+        "excerpt": "Collection owner, 2026-10-31: \"das ist genauso Sun & moon thai Promos\"",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+        "note": "The series carries an English name only; no localized set name exists."
+      }
+    },
+    {
+      "sourceRecordId": "SET-SRC-NAME-DC853057FDFD",
+      "sourceKind": "local-set-name-record",
+      "provider": "owner-attestation",
+      "providerRecordKey": "KR\u001fS-P\u001fname",
+      "retrieved": "2026-10-31",
+      "raw": {
+        "localCode": "S-P",
+        "locality": "KR",
+        "localName": "Sword & Shield Era Promo",
+        "excerpt": "Collection owner, 2026-10-31: \"das ist Sword & Shield Era Promo in korean\"",
+        "confidence": "high",
+        "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+        "note": "The series carries an English name only; no localized set name exists."
       }
     }
   ]

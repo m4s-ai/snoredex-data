@@ -82975,9 +82975,12 @@
         "localSetId": "LOCALSET:ID:SM-P",
         "locality": "ID",
         "localCode": "SM-P",
-        "observedNames": [],
+        "observedNames": [
+          "Sun & Moon Indonesian Promos"
+        ],
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
+          "SET-SRC-NAME-28A61727F0BC",
           "SET-SRC-SF-966729E67AE5"
         ]
       }
@@ -84268,9 +84271,12 @@
         "localSetId": "LOCALSET:KR:S-P",
         "locality": "KR",
         "localCode": "S-P",
-        "observedNames": [],
+        "observedNames": [
+          "Sword & Shield Era Promo"
+        ],
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
+          "SET-SRC-NAME-DC853057FDFD",
           "SET-SRC-SF-0CE6692294C3"
         ]
       }
@@ -85107,9 +85113,12 @@
         "localSetId": "LOCALSET:TH:SM-P",
         "locality": "TH",
         "localCode": "SM-P",
-        "observedNames": [],
+        "observedNames": [
+          "Sun & Moon Thai Promos"
+        ],
         "productKind": "physical-card-set-or-product",
         "sourceRecordIds": [
+          "SET-SRC-NAME-360A25766D7A",
           "SET-SRC-SF-DC6F76EDE3F8"
         ]
       }
@@ -147923,6 +147932,17 @@
     },
     {
       "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-NAME-28A61727F0BC",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-28A61727F0BC",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:ID:SM-P",
+        "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
       "entityId": "SET-SRC-NAME-2921362B525D",
       "origin": "reviewed-evidence-data-gaps-20261022",
       "payload": {
@@ -148007,6 +148027,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:ID:SV6s%20I",
         "reason": "Researched official local set name for this exact local set; name only, no membership."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-NAME-360A25766D7A",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-360A25766D7A",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:TH:SM-P",
+        "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
       }
     },
     {
@@ -148887,6 +148918,17 @@
         "disposition": "mapped",
         "targetRef": "LOCALSET:TH:sv4K",
         "reason": "Researched official local set name for this exact local set; name only, no membership."
+      }
+    },
+    {
+      "entityType": "set-source-disposition",
+      "entityId": "SET-SRC-NAME-DC853057FDFD",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-DC853057FDFD",
+        "disposition": "mapped",
+        "targetRef": "LOCALSET:KR:S-P",
+        "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
       }
     },
     {
@@ -163030,6 +163072,27 @@
     },
     {
       "entityType": "set-source-record",
+      "entityId": "SET-SRC-NAME-28A61727F0BC",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-28A61727F0BC",
+        "sourceKind": "local-set-name-record",
+        "provider": "owner-attestation",
+        "providerRecordKey": "ID\u001fSM-P\u001fname",
+        "retrieved": "2026-10-31",
+        "raw": {
+          "localCode": "SM-P",
+          "locality": "ID",
+          "localName": "Sun & Moon Indonesian Promos",
+          "excerpt": "Collection owner, 2026-10-31: \"Sun & Moon Indonesian Promos gibt halt nur den englsichen set namen\"",
+          "confidence": "high",
+          "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+          "note": "The series carries an English name only; no localized set name exists."
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
       "entityId": "SET-SRC-NAME-2921362B525D",
       "origin": "reviewed-evidence-data-gaps-20261022",
       "payload": {
@@ -163217,6 +163280,27 @@
           "confidence": "high",
           "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
           "translation": "translation: Booster Pack \"Transfiguration Mask\" (Mask of Change)"
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-NAME-360A25766D7A",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-360A25766D7A",
+        "sourceKind": "local-set-name-record",
+        "provider": "owner-attestation",
+        "providerRecordKey": "TH\u001fSM-P\u001fname",
+        "retrieved": "2026-10-31",
+        "raw": {
+          "localCode": "SM-P",
+          "locality": "TH",
+          "localName": "Sun & Moon Thai Promos",
+          "excerpt": "Collection owner, 2026-10-31: \"das ist genauso Sun & moon thai Promos\"",
+          "confidence": "high",
+          "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+          "note": "The series carries an English name only; no localized set name exists."
         }
       }
     },
@@ -165135,6 +165219,27 @@
           "confidence": "high",
           "evidenceBundle": "verification/evidence/data-gaps-20261022/id-th-sets/findings.json",
           "translation": "translation: \"Roar from the Past\" (Ancient Roar)"
+        }
+      }
+    },
+    {
+      "entityType": "set-source-record",
+      "entityId": "SET-SRC-NAME-DC853057FDFD",
+      "origin": "reviewed-evidence-issue-436",
+      "payload": {
+        "sourceRecordId": "SET-SRC-NAME-DC853057FDFD",
+        "sourceKind": "local-set-name-record",
+        "provider": "owner-attestation",
+        "providerRecordKey": "KR\u001fS-P\u001fname",
+        "retrieved": "2026-10-31",
+        "raw": {
+          "localCode": "S-P",
+          "locality": "KR",
+          "localName": "Sword & Shield Era Promo",
+          "excerpt": "Collection owner, 2026-10-31: \"das ist Sword & Shield Era Promo in korean\"",
+          "confidence": "high",
+          "evidenceBundle": "verification/evidence/issue-436-owner-input-20261031",
+          "note": "The series carries an English name only; no localized set name exists."
         }
       }
     },
@@ -241825,6 +241930,14 @@
       "fromId": "LOCALSET:ID:SM-P",
       "relation": "observed-by",
       "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-28A61727F0BC",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:ID:SM-P",
+      "relation": "observed-by",
+      "toType": "set-source-record",
       "toId": "SET-SRC-SF-966729E67AE5",
       "provenance": {}
     },
@@ -242585,6 +242698,14 @@
       "fromId": "LOCALSET:KR:S-P",
       "relation": "observed-by",
       "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-DC853057FDFD",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:KR:S-P",
+      "relation": "observed-by",
+      "toType": "set-source-record",
       "toId": "SET-SRC-SF-0CE6692294C3",
       "provenance": {}
     },
@@ -243290,6 +243411,14 @@
       "relation": "observed-by",
       "toType": "set-source-record",
       "toId": "SET-SRC-SF-8341EF707B9E",
+      "provenance": {}
+    },
+    {
+      "fromType": "local-set",
+      "fromId": "LOCALSET:TH:SM-P",
+      "relation": "observed-by",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-360A25766D7A",
       "provenance": {}
     },
     {
@@ -285777,6 +285906,14 @@
     },
     {
       "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-NAME-28A61727F0BC",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-28A61727F0BC",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
       "fromId": "SET-SRC-NAME-2921362B525D",
       "relation": "disposes",
       "toType": "set-source-record",
@@ -285837,6 +285974,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-NAME-35DE6EDC2FA5",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-NAME-360A25766D7A",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-360A25766D7A",
       "provenance": {}
     },
     {
@@ -286477,6 +286622,14 @@
       "relation": "disposes",
       "toType": "set-source-record",
       "toId": "SET-SRC-NAME-DC1168096244",
+      "provenance": {}
+    },
+    {
+      "fromType": "set-source-disposition",
+      "fromId": "SET-SRC-NAME-DC853057FDFD",
+      "relation": "disposes",
+      "toType": "set-source-record",
+      "toId": "SET-SRC-NAME-DC853057FDFD",
       "provenance": {}
     },
     {
@@ -320412,6 +320565,13 @@
     },
     {
       "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-NAME-28A61727F0BC",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:ID:SM-P",
+      "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
       "sourceId": "SET-SRC-NAME-2921362B525D",
       "disposition": "mapped",
       "targetRef": "LOCALSET:TW:S10b%20F",
@@ -320465,6 +320625,13 @@
       "disposition": "mapped",
       "targetRef": "LOCALSET:ID:SV6s%20I",
       "reason": "Researched official local set name for this exact local set; name only, no membership."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-NAME-360A25766D7A",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:TH:SM-P",
+      "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -321025,6 +321192,13 @@
       "disposition": "mapped",
       "targetRef": "LOCALSET:TH:sv4K",
       "reason": "Researched official local set name for this exact local set; name only, no membership."
+    },
+    {
+      "sourceKind": "set-catalogue-source",
+      "sourceId": "SET-SRC-NAME-DC853057FDFD",
+      "disposition": "mapped",
+      "targetRef": "LOCALSET:KR:S-P",
+      "reason": "Owner-stated local set name for this exact local set; name only, no membership (#436)."
     },
     {
       "sourceKind": "set-catalogue-source",
@@ -326957,16 +327131,16 @@
     }
   ],
   "summary": {
-    "entities": 9127,
-    "edges": 13190,
-    "migrationInputs": 3340,
+    "entities": 9133,
+    "edges": 13196,
+    "migrationInputs": 3343,
     "migrationDispositions": {
       "bounded-contradicted": 93,
       "candidate-needs-evidence": 372,
       "carried": 68,
       "established-and-mapped": 1710,
       "linked-local-counterpart": 126,
-      "mapped": 528,
+      "mapped": 531,
       "needs-evidence": 218,
       "needs-positive-local-identity": 18,
       "positively-excluded": 84,
@@ -326975,8 +327149,8 @@
     "candidateClaims": 2249,
     "cardReleases": 629,
     "physicalPrintings": 892,
-    "setSourceRecords": 749,
-    "setSourceDispositions": 749,
+    "setSourceRecords": 752,
+    "setSourceDispositions": 752,
     "localizations": 16
   }
 }
