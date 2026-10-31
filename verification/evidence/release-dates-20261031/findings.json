@@ -1,0 +1,93 @@
+{
+  "researchedAt": "2026-10-31",
+  "scope": "Second pass for the 38 items of #442 whose release date has only month or year precision; follows release-dates-20261023.",
+  "rule": "A date applies only to the market and product its source names, and must be an availability or debut date. An unsuccessful search establishes no absence and changes no value.",
+  "predecessor": "verification/evidence/release-dates-20261023/findings.json",
+  "attempts": [
+    {
+      "items": [
+        "item-1ae61864-2562-5080-966f-cd6421e6d525"
+      ],
+      "label": "ja CLF 016 Snorlax holo",
+      "url": "https://www.pokemon-card.com/ex/classic/",
+      "httpStatus": 200,
+      "result": "The official Classic page gives the first lottery's shipping time as 発送時期 2023年10月下旬以降予定 (late October 2023 onward) and later lotteries as 2024年3月上旬以降 and 2024年8月上旬以降. No shipping day is stated, so the current month 2023-10 stays."
+    },
+    {
+      "items": [
+        "item-c88bb2db-5774-53d3-9d48-905c38aa5de9"
+      ],
+      "label": "ja sN 008 Snorlax holo",
+      "url": "https://www.pokemon-card.com/ex/sN/",
+      "httpStatus": 404,
+      "result": "No product page under /ex/sN/ or /ex/sn/; the month 2022-03 stays."
+    },
+    {
+      "items": [
+        "item-b1d12dd9-ec75-5f62-a3b8-489e48fff148",
+        "item-76fb4c4e-0167-5082-80cb-8eb646687de9",
+        "item-bc601b36-8a71-57d6-8a8f-511627c0e7fe",
+        "item-b814d5ad-7e47-5a4d-8248-5106f0944f1b",
+        "item-a79a9c99-056e-5c62-a123-d3bc00a93003",
+        "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9"
+      ],
+      "label": "ID S-P 030/052/100, ID SV-P 286, TH SM-P 083, TW SM-P 053",
+      "url": "https://asia.pokemon-card.com/id/info/",
+      "httpStatus": 200,
+      "result": "The ID, TH and TW info and event listings are rendered client-side; /<locale>/news/ returns 404 and /<locale>/wp-json/wp/v2/posts returns 404, so no dated campaign notice could be retrieved by script. The TW card search (keyword 卡比獸, 44 detail pages) carries no release dates."
+    },
+    {
+      "items": [
+        "(western retailer and pokemon.com leads)"
+      ],
+      "label": "DE/ES/IT/PT SWSH 119, SVP 122, SVP 184, SM 169, SWSH 032/068, xJTG 117, JU 11/27, WP 49",
+      "url": "https://www.pokemon.com/de/pokemon-news",
+      "httpStatus": 403,
+      "result": "pokemon.com news, PokéBeach and the Wayback Machine are not reachable from this environment (403 or no connection); the leads recorded in the predecessor bundle remain the next step."
+    }
+  ],
+  "outcome": {
+    "dated": 0,
+    "unchanged": 38
+  },
+  "unchangedItemIds": [
+    "item-0e8cb6ec-2228-5d4e-a28f-22944c298b12",
+    "item-183b9f73-2802-5a4a-8b68-003a6f509730",
+    "item-1ae61864-2562-5080-966f-cd6421e6d525",
+    "item-1c5ef0f5-9dd0-5803-9b9a-749d3252f829",
+    "item-1e39b455-d95a-5893-a02f-af522186baf6",
+    "item-26262693-1f3b-5560-9f31-be09480608b7",
+    "item-3f7a5b0d-68e4-54df-b516-9df615f16087",
+    "item-4320a985-66ec-52e9-8149-bce9099f4c1b",
+    "item-54e67d3a-bd70-56f4-bd8b-699581e95aaa",
+    "item-5bd35e01-ee21-58df-8be1-f41eb87ef7d4",
+    "item-5d391775-42dd-5cc2-9a90-73f3a257942c",
+    "item-5e9add1d-f421-5c75-85bc-72451027006c",
+    "item-63f6e7c6-8e30-509a-83e3-f903fe066ff9",
+    "item-64c94a34-2391-5b33-a997-0295527d4dce",
+    "item-65823040-bf6b-5462-a910-93b88a00d5da",
+    "item-76fb4c4e-0167-5082-80cb-8eb646687de9",
+    "item-82ddc278-d028-5965-b0e1-b74e2697b8a8",
+    "item-8f7cab80-9fc5-5bed-a7ff-9316b28473a5",
+    "item-96118bc1-3692-53bc-b602-f68f050de8c3",
+    "item-9b095eb9-c7c0-56f0-80fa-53ae2e852cf3",
+    "item-a11297e7-e415-559d-9f9c-c7ec92b12c24",
+    "item-a4d2b4c4-3e1c-5c33-bddb-b4955609f5b3",
+    "item-a79a9c99-056e-5c62-a123-d3bc00a93003",
+    "item-af566729-f617-5fb0-aad2-97332471f252",
+    "item-b1d12dd9-ec75-5f62-a3b8-489e48fff148",
+    "item-b814d5ad-7e47-5a4d-8248-5106f0944f1b",
+    "item-bc601b36-8a71-57d6-8a8f-511627c0e7fe",
+    "item-bffdd1fe-0a91-5c0f-936f-54388d38c0b8",
+    "item-c3adb9ce-df16-5c8b-a003-014beecdaeeb",
+    "item-c88bb2db-5774-53d3-9d48-905c38aa5de9",
+    "item-cd6df712-e8de-5e2b-8040-df37d48a5fb7",
+    "item-d6220148-0686-51cd-9413-ccedf795abf8",
+    "item-d97fd47f-ab02-51f6-ab20-d89ceea7e5aa",
+    "item-dd155c60-358f-5750-b519-47d4e588f0b8",
+    "item-e190c101-0d5b-5ba9-8d76-6f07cf1051e3",
+    "item-f5ff76ef-26f2-5245-be93-7a92684cbd40",
+    "item-f82c38cc-c331-5bbc-8d3a-79a90c06b142",
+    "item-fd5262b3-4deb-5fad-87dd-d57fa09111f7"
+  ]
+}

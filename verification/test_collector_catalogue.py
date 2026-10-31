@@ -479,6 +479,13 @@ def product_rarity_regressions() -> None:
                    "sviba-046-korean-none-non-holo", "svm-094-indonesian-none-holo"):
         assert by_legacy_all[legacy]["itemKind"] == "verified-printing", legacy
     assert collector.CUMULATIVE_CHECKLIST_REKEYS["sm-p-297-korean-none-unresolved"] == "sm-p-297-korean-none-holo-ripple"
+    # Earlier catalogues keyed the photographed TW 145/S-P card by a SPEC-0030 release id; every
+    # transition must still carry it to the joined printing instead of orphaning its state.
+    spec_0030_item = "item-fc4fdb0e-aaf7-5afe-9667-1e48c2a65cd2"
+    spec_0030_routes = [route["toItemIds"] for transition in read("collector_migrations.json")["catalogueTransitions"]
+                        for route in transition["transitions"] if spec_0030_item in route["fromItemIds"]]
+    assert spec_0030_routes and all(route == [by_legacy_all["pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo"]["itemId"]]
+                                    for route in spec_0030_routes), spec_0030_routes
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.
