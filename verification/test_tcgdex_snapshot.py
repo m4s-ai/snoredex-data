@@ -231,6 +231,18 @@ def main() -> None:
     half = [printing(None), printing("Unlimited")]
     assert len(finishes.absorb_editionless_finish_evidence(half)) == 2
 
+    # A pattern-less marketplace claim folds into its one photographed patterned printing (JP mC
+    # 568); with two patterned candidates, or when the claim is stronger evidence, nothing folds.
+    claim = {**printing(None), "finish": "reverse-holo", "verificationStatus": "marketplace-claimed"}
+    star = {**claim, "foilPattern": "star", "verificationStatus": "confirmed", "specimenIds": ["SPEC-9999"],
+            "sources": [{"url": "https://example.test/photo", "sourceType": "x", "evidence": "e"}]}
+    folded = finishes.absorb_patternless_marketplace_claims([claim, star])
+    assert folded == [star] and len(star["sources"]) == 2 and star["verificationStatus"] == "confirmed"
+    ball = {**star, "foilPattern": "poke-ball", "sources": list(star["sources"])}
+    assert len(finishes.absorb_patternless_marketplace_claims([claim, star, ball])) == 3
+    tcgdex = {**claim, "verificationStatus": "confirmed"}
+    assert tcgdex in finishes.absorb_patternless_marketplace_claims([tcgdex, star])
+
     original_arguments = sys.argv
     try:
         sys.argv = ["finishes.py", "--offline", "--check", "--reproject"]

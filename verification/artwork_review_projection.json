@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-01",
-  "projectionVersion": "407f6804b5d02a45660e4088f8601cfa7ec8b9d734d1615c80a4fa7fc0b642c4",
+  "projectionVersion": "3eaa4d138d66f00da788ec1df40f6918bd35a302e77a4d512a1ea28524adb724",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 896,
-    "sourceObservations": 3352
+    "physicalPrintings": 897,
+    "sourceObservations": 3356
   },
   "groups": [
     {
@@ -52901,7 +52901,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0067",
-              "sourcePrintingId": "F0067-P04",
+              "sourcePrintingId": "F0067-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
               "specimenIds": [
                 "SPEC-0433"
@@ -52951,12 +52951,17 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0067",
-              "sourcePrintingId": "F0067-P03",
+              "sourcePrintingId": "F0067-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:e573b3ea832d59cd6151bfe9",
               "specimenIds": [
                 "SPEC-0434"
               ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Supreme/Snorlax-CSM2bC124",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
                 {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
@@ -53031,48 +53036,57 @@
           ],
           "observations": [
             {
+              "observationId": "finish:F0067-P02:0:3058158eca92d0ff",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shining-Synergy-Supreme/Snorlax-CSM2bC124",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "f8459f4ed3309b1163a47a50daa110e12d811d5c18d4cc8e73e88e02dfa64ba7",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P02:1:31f59c63a2d61a47",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "a702d5ee2c9978f0d649d63f800062eea13c5abad5ad802e3e33320d56beccd5",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P02:2:ca6fbddc9d361302",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0434.",
+              "contentHash": "a2e5d0703c9445b0e88adf520820e620c300b0008ee91a9660781ff85a3b84d1",
+              "image": null
+            },
+            {
               "observationId": "finish:F0067-P03:0:31f59c63a2d61a47",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "6a2e5a305f0144239ee4931d60b023a240c82e874edf234c3569f682d79196c2",
+              "contentHash": "c611b098074acfed5351039c16144426b23321bb7d083f63801ef457f42bb6a4",
               "image": null
             },
             {
-              "observationId": "finish:F0067-P03:1:ca6fbddc9d361302",
-              "kind": "finish",
-              "provider": "Owner-supplied physical card photograph",
-              "url": "https://drive.google.com/file/d/1tYo9XFldI6rKRykKP_1EzE33_x9S4MLC/view",
-              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A large Colorless Energy symbol pattern is visible across the card body, and the collection-owner checklist labels this specimen Reverse Holo. Retained as SPEC-0434.",
-              "contentHash": "18fa705627099c559b0bb98f38f25fd092701fc745d7888eadaeb71b25b8c157",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0067-P04:0:31f59c63a2d61a47",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "40dbc962348c8a4931d83a6907be8b6faddee23c9a8088b3b004e209e1b4a182",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0067-P04:1:478bb509eba75baa",
+              "observationId": "finish:F0067-P03:1:478bb509eba75baa",
               "kind": "finish",
               "provider": "Owner-supplied physical card photograph",
               "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
               "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
-              "contentHash": "8132880c1f1f20bde7af34aafbab82102e4cf25d031a33f73218dea2f2c1c421",
+              "contentHash": "7c41134b6eb4d95d3e3bb4b0488eb6e125736af46daee7be1a60534485876c67",
               "image": null
             },
             {
-              "observationId": "finish:F0067-P04:2:d4c48dae59a72376",
+              "observationId": "finish:F0067-P03:2:d4c48dae59a72376",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings.",
-              "contentHash": "a94859efac48f88edb2dbf74b577b39faca65b2a8e1f8507ab72aee4b9d6f064",
+              "contentHash": "bd55360c155fd849f13a2833816fb7672196742413a7b6c5f2d05463a4f19edb",
               "image": null
             },
             {
@@ -56772,6 +56786,38 @@
                   "evidence": "MC-568 variants=true is positive evidence that the printing exists; false values are not used as contradiction."
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:e03a79aa0bb72b770b59a266",
+              "semanticPrintingId": "PRINTING:e03a79aa0bb72b770b59a266",
+              "cardReleaseId": "RELEASE:JP:Japanese:mC:568:Snorlax-Lazy-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "plain-foil-background",
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0219",
+              "sourcePrintingId": "F0219-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:e03a79aa0bb72b770b59a266",
+              "specimenIds": [
+                "SPEC-0673"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/users/4a603adca29c32d9a480e98c492beb94a7c26c2a/i-img1200x1200-1789257703241r5n0m9.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete legible face of the Japanese MEGA Start Deck 100 Snorlax: カビゴン HP160, attack ぐうたらプレス 120, Illus. Po-Suzuki, regulation H, mC 568/742, ©2025. The artwork field is matte while the whole card body around it, including the text box, reflects as a smooth metallic mirror foil without a motif. Retained as SPEC-0673.",
+                  "retrievedAt": "2026-11-01"
+                }
+              ]
             }
           ],
           "detection": {
@@ -56783,7 +56829,9 @@
               "non-holo",
               "reverse-holo"
             ],
-            "foilPattern": [],
+            "foilPattern": [
+              "plain-foil-background"
+            ],
             "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
@@ -56810,6 +56858,17 @@
               "originalHash": "1641dbb7ce1e5ff76159cffcd8185e9979a976cea6084673f38fa7cfdac4e31f",
               "previewSrc": "images/previews/SPEC-0663.png?v=29cb9d047d0bf06bf4ac852f056ecb61ad1774168e2591fbccfb7c01da7874e5",
               "thumbnailSrc": "images/thumbs/SPEC-0663.png?v=2eb00e2de0f9991b758e7950fbe56de41017d90cc24520497d30071b9bd33383"
+            },
+            {
+              "src": "verification/specimens/SPEC-0673.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0673",
+              "contentHash": "99961f38276e3087d82676f749c58e8239fd38dc6dd8f52cca8d90faa11eacf5",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "99961f38276e3087d82676f749c58e8239fd38dc6dd8f52cca8d90faa11eacf5",
+              "previewSrc": "images/previews/SPEC-0673.png?v=66765d15a465eea0a4477ea849a327bbf1d507384e8142908e31579470290378",
+              "thumbnailSrc": "images/thumbs/SPEC-0673.png?v=0c893ec3dd0c007e8a052f592874e318ae8d6d1730d4a7dd50936b1b7c1e1333"
             }
           ],
           "observations": [
@@ -56823,6 +56882,24 @@
               "image": null
             },
             {
+              "observationId": "finish:F0219-P02:0:23cb28d3f4e74769",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Start-Deck-100-Battle-Collection/Snorlax-mC568",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "e93ab0a588f760e2f20faefa1ecf24264c81c1ae01526273e6c77e1428476fca",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0219-P02:1:4be998a41cb2bbeb",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://auctions.c.yimg.jp/images.auctions.yahoo.co.jp/image/dr000/auc0209/users/4a603adca29c32d9a480e98c492beb94a7c26c2a/i-img1200x1200-1789257703241r5n0m9.jpg",
+              "evidence": "Complete legible face of the Japanese MEGA Start Deck 100 Snorlax: カビゴン HP160, attack ぐうたらプレス 120, Illus. Po-Suzuki, regulation H, mC 568/742, ©2025. The artwork field is matte while the whole card body around it, including the text box, reflects as a smooth metallic mirror foil without a motif. Retained as SPEC-0673.",
+              "contentHash": "e3ea351e5cc27d8ba3b9a88fb7ffd54754a7fd1f341610a894ca1157120701bc",
+              "image": null
+            },
+            {
               "observationId": "specimen:SPEC-0663",
               "kind": "specimen",
               "provider": null,
@@ -56830,6 +56907,15 @@
               "evidence": "Japanese card face, mC H 568/742, HP160, Po-Suzuki visible. Identity image; physical finish and exact pattern not established by the stock scan or seller foil title.",
               "contentHash": "7b7f405bd322ea665dcab4159f09a3f63f612e597c5719a2c39856387e8a8988",
               "image": "verification/specimens/SPEC-0663.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0673",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://paypayfleamarket.yahoo.co.jp/item/z681976292",
+              "evidence": "Complete legible face of the Japanese MEGA Start Deck 100 Snorlax: カビゴン HP160, attack ぐうたらプレス 120, Illus. Po-Suzuki, regulation H, mC 568/742, ©2025. The artwork field is matte while the whole card body around it, including the text box, reflects as a smooth metallic mirror foil without a motif.",
+              "contentHash": "78f6735dc9e3a333f9e80d442e3dbf9646e0a5bdd72cdad8ea5b2c1ebda2f5ba",
+              "image": "verification/specimens/SPEC-0673.jpg"
             },
             {
               "observationId": "unit:U0589",
@@ -79678,12 +79764,17 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0255",
-              "sourcePrintingId": "F0255-P02",
+              "sourcePrintingId": "F0255-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:0e2eb04321e1400b948df754",
               "specimenIds": [
                 "SPEC-0204"
               ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Jungle/Snorlax",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
                 {
                   "url": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
                   "sourceType": "retained Cardmarket product scan",
@@ -79734,12 +79825,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0255-P02:0:c286481f50fa3035",
+              "observationId": "finish:F0255-P01:0:16baacffcc0e00a6",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Jungle/Snorlax",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "f8e1875a33ab07f1f6bd2d786c8b9fc974d381701f85f9bc08c0f9355a5f33a0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0255-P01:1:c286481f50fa3035",
               "kind": "finish",
               "provider": "retained Cardmarket product scan",
               "url": "https://product-images.s3.cardmarket.com/51/PJU/584696/584696.jpg",
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax PJU (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Large stars and reflective circles are visible throughout the artwork window. Retained as SPEC-0204.",
-              "contentHash": "1866498be0bd52fb5503d93b6be2312a54e0fb97ea2f77013172223857b0608a",
+              "contentHash": "339b7796ebcfa1136eddefff2e25856fd7c565d90b20a7ff818d447de90bdb1f",
               "image": null
             },
             {
@@ -79750,15 +79850,6 @@
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax PJU (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Large stars and reflective circles are visible throughout the artwork window.",
               "contentHash": "6faf50ff0e7d6b6a66e6d14f34fedd3cdfdccfe1d54a7c9c0c7155ca283f51f9",
               "image": "verification/specimens/SPEC-0204.jpg"
-            },
-            {
-              "observationId": "specimen:SPEC-0396",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.instagram.com/p/DWWTniCFMGW/",
-              "evidence": "The public Instagram carousel image 5/17 shows one complete CGC-encapsulated Japanese Pokémon Jungle Snorlax Holo card. The CGC label reads \"Pokémon (1997) Japanese / Pokémon Jungle / Holo\" and assigns grade PRISTINE 10. The post caption explicitly identifies this carousel position as Japanese. The card face and grading label positively establish only the recorded identity, holo treatment, and any named edition or error classification. Only metadata and source URLs are retained; no Instagram image bytes are stored or published.",
-              "contentHash": "90a4c0c15a6f15b47b536fc7e13c9176193b219f6b8619b40a0b0899f6bc96b2",
-              "image": null
             },
             {
               "observationId": "unit:U0380",
