@@ -16,14 +16,14 @@
     ],
     "counts": {
       "providers": 46,
-      "surfaces": 87,
-      "coverageEdges": 125,
+      "surfaces": 88,
+      "coverageEdges": 126,
       "absenceEdges": 0,
-      "observations": 180,
-      "resolvedVerdictSources": 1836
+      "observations": 181,
+      "resolvedVerdictSources": 1837
     },
     "surfaceStates": {
-      "active": 57,
+      "active": 58,
       "blocked-by-browser": 3,
       "incomplete": 21,
       "internal": 1,
@@ -3863,6 +3863,48 @@
       "coverageEdgeIds": [
         "retailer-reference-images-jp-identity",
         "retailer-reference-images-cn-identity"
+      ]
+    },
+    {
+      "surfaceId": "elitefourum-quuador-sets-languages",
+      "providerId": "elitefourum",
+      "label": "Quuador's sets-and-languages compilation",
+      "match": {
+        "urlPrefixes": [
+          "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "scriptable",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-11-01",
+      "freshnessPolicy": "Retain the exact topic URL, the post-1 update date and the excerpted set sections; re-check the post before using a new set entry.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565.json",
+        "parameters": [],
+        "pagination": "topic post stream; the list is post 1",
+        "expectedIdentifiers": [
+          "topic/16565",
+          "post/1",
+          "Quuador"
+        ]
+      },
+      "finishCapability": {
+        "mode": "named-variety",
+        "vocabulary": [
+          "Reverse Holo",
+          "'Reverse' Holofoil",
+          "1st edition",
+          "UED"
+        ],
+        "publicationForm": "per-set list of the variants printed in each language",
+        "closedWithinScope": false
+      },
+      "coverageEdgeIds": [
+        "elitefourum-quuador-sets-languages-positive"
       ]
     }
   ],
@@ -10080,6 +10122,53 @@
         ],
         "zeroResultMeans": "unknown",
         "challenge": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+      }
+    },
+    {
+      "edgeId": "elitefourum-quuador-sets-languages-positive",
+      "providerId": "elitefourum",
+      "surfaceId": "elitefourum-quuador-sets-languages",
+      "coverage": {
+        "localities": [
+          "WEST"
+        ],
+        "languages": [
+          "German",
+          "Italian",
+          "Portuguese",
+          "Spanish"
+        ],
+        "scripts": [
+          "Latn"
+        ],
+        "productCategories": [
+          "set"
+        ],
+        "timeRange": {
+          "start": "1999-01-01",
+          "end": "2020-12-31",
+          "basis": "the list runs from Base Set to Vivid Voltage"
+        }
+      },
+      "positiveEvidenceCapabilities": [
+        "finish"
+      ],
+      "exhaustive": false,
+      "absenceCapability": {
+        "enabled": false,
+        "dimensions": [],
+        "exactScopes": [],
+        "rationale": "Only listed variants are used as positive evidence; an unlisted variant stays unknown."
+      },
+      "knownPositiveObservationId": "obs-elitefourum-quuador-sets-languages",
+      "boundary": {
+        "outsideScope": [
+          "sets after Vivid Voltage",
+          "promos and special releases",
+          "unlisted variants"
+        ],
+        "zeroResultMeans": "unknown",
+        "challenge": "A set entry supports the listed variants only; absence decisions stay with the owner."
       }
     }
   ],
@@ -19323,6 +19412,52 @@
         "retrievedAt": "2026-10-31",
         "usageCount": 6
       }
+    },
+    {
+      "observationId": "obs-elitefourum-quuador-sets-languages",
+      "surfaceId": "elitefourum-quuador-sets-languages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-01",
+      "expectedIdentifiers": [
+        "topic/16565",
+        "post/1",
+        "Quuador"
+      ],
+      "validatesEdges": [
+        "elitefourum-quuador-sets-languages-positive"
+      ],
+      "outcome": "Post 1 lists Hidden Fates \"Portuguese Reverse Holo\", EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and Jungle \"Spanish/Portuguese 1st edition\" among the printed variants.",
+      "rawRecordRef": "verification/source_registry.json:https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+      "rawRecordHash": "sha256:c151cc808ceecfbb907e0cacf2fd255558d254bfb0d404941901ccf60a0a08b7",
+      "rawRecord": {
+        "canonicalUrl": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+        "nonUrlEvidenceId": null,
+        "providerId": "elitefourum",
+        "sourceTypes": [
+          "Elite Fourum collector-community post"
+        ],
+        "dimensions": [
+          "finish"
+        ],
+        "stableIdCount": 11,
+        "stableIds": [
+          "F0117-P02",
+          "F0118-P01",
+          "F0148-P02",
+          "F0165-P01",
+          "F0165-P02",
+          "F0166-P01",
+          "F0166-P02",
+          "F0173-P01",
+          "F0173-P02",
+          "F0385-P01",
+          "override:elitefourum-quuador-sets-languages-20261101"
+        ],
+        "retrievedAt": "2026-11-01",
+        "usageCount": 11
+      }
     }
   ],
   "sourceResolution": [
@@ -26572,6 +26707,18 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+      "providerId": "elitefourum",
+      "surfaceId": "elitefourum-quuador-sets-languages",
+      "capabilityEdgeIds": [
+        "elitefourum-quuador-sets-languages-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish"
       ]
     },
     {
