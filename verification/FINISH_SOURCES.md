@@ -89,6 +89,13 @@ checklist gives two foil versions, and the reverse holo carries the set-logo sta
 field. SPEC-0662 (Italian DF 10, no stamp) is therefore the regular holo. Without a documented
 two-version scope, or with the mark position cropped or illegible, the finish stays unset.
 
+A Cardmarket finish axis names no pattern. When a photograph establishes exactly one printing of
+that finish with a visible pattern and otherwise identical identity, `finishes.py`
+(`absorb_patternless_marketplace_claims`) folds the pattern-less marketplace claim into it: it is
+the claimed printing, not a second collectible. With two or more patterned candidates of that
+finish (Poké Ball and Master Ball mirrors, for example), the claim stays unrefined. JP mC 568 (SPEC-0673,
+plain mirror) is the worked example.
+
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
 had no finish field, so what the photograph showed could only be written as prose that no check
 reads. A specimen may now carry an optional `physicalObservation`:

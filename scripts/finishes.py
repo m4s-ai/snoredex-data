@@ -511,6 +511,37 @@ def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[
     return kept
 
 
+def _patterned_siblings(printing: dict[str, Any], printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    variants = set(printing.get("mappedVariants") or [])
+    patternless = printing_signature(printing)
+    return [
+        other for other in printings
+        if other is not printing
+        and other.get("foilPattern")
+        and printing_signature({**other, "foilPattern": None}) == patternless
+        and set(other.get("mappedVariants") or []) >= variants
+    ]
+
+
+def absorb_patternless_marketplace_claims(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Fold a pattern-less marketplace finish claim into its one established patterned printing.
+
+    A Cardmarket reverse-holo axis says only that a reverse exists. When a photograph has since
+    established exactly one reverse of the same identity with a visible pattern, that printing
+    is the claimed reverse, not a second collectible. With two or more patterned candidates the
+    claim stays unrefined (reconciliation refines only when one compatible value remains).
+    """
+    kept = []
+    for printing in printings:
+        siblings = _patterned_siblings(printing, printings)
+        if (printing.get("foilPattern") or printing["verificationStatus"] != "marketplace-claimed"
+                or not _is_card_level_finish_evidence(printing) or len(siblings) != 1):
+            kept.append(printing)
+            continue
+        _fold_sources(siblings[0], printing)
+    return kept
+
+
 def drop_owner_rejected_finishes(
     printings: list[dict[str, Any]], decision: dict[str, Any] | None
 ) -> list[dict[str, Any]]:
@@ -1520,7 +1551,7 @@ def _build_finish_unit(
         for printing in printings:
             add_printing(deduplicated_printings, printing)
         printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
-            absorb_editionless_finish_evidence(deduplicated_printings),
+            absorb_patternless_marketplace_claims(absorb_editionless_finish_evidence(deduplicated_printings)),
             owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(
