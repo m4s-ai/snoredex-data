@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-10-31",
-  "projectionVersion": "aebb0607cdf2fdc8fbcd74a1930d8279e612047bd153eff5e7d03973562bb3cc",
+  "generated": "2026-11-01",
+  "projectionVersion": "1fcb1c36c58c272af9643af09ceb6a2ead1e897a3380baf006c0372115314a5d",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 893,
-    "sourceObservations": 3344
+    "physicalPrintings": 896,
+    "sourceObservations": 3352
   },
   "groups": [
     {
@@ -10925,6 +10925,33 @@
                   "supportsAbsence": false
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:specimen:SPEC-0671",
+              "semanticPrintingId": "PRINTING:79fc9ea143138e4d947d6cff",
+              "cardReleaseId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0212",
+              "sourcePrintingId": "F0212-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:79fc9ea143138e4d947d6cff",
+              "specimenIds": [
+                "SPEC-0671"
+              ],
+              "sources": [
+                {
+                  "url": "https://i.ebayimg.com/images/g/p8EAAeSw9bRq4cwz/s-l1600.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete legible face of the Thai Hop's Snorlax: คาบิกอน ของฮ็อป HP150, Ability ใจกว้าง, attack ไดนามิกเพรส 140, Illus. OKACHEKE, MA3 T, 136/193, regulation I. The regular card without a Poké Ball or Colorless Energy star mirror pattern; holographic foil sheen is visible across the artwork. Retained as SPEC-0671.",
+                  "retrievedAt": "2026-11-01"
+                }
+              ]
             }
           ],
           "detection": {
@@ -10933,6 +10960,7 @@
             "artist": null,
             "variant": "V1, base, V2",
             "finish": [
+              "holo",
               "mirror-holo"
             ],
             "foilPattern": [
@@ -11033,9 +11061,29 @@
               "originalHash": "a796e42074485c5452121b22abfb74279eff8105be3e58f0371e4fdc72488862",
               "previewSrc": "images/previews/SPEC-0276.png?v=e54a72caea8db52ada0c7e231d44f67ec574d220c2d445d70e0389bc9f89e859",
               "thumbnailSrc": "images/thumbs/SPEC-0276.png?v=d616b4e38f4891f2cc7703d8d1e9f0b0eabfe1fb1f101e75dce0715196125ab5"
+            },
+            {
+              "src": "verification/specimens/SPEC-0671.jpg",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0671",
+              "contentHash": "7bca3ca8f95a39075765c1f67624fa422891fc8957a385f27c2c637f63ba98cd",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "7bca3ca8f95a39075765c1f67624fa422891fc8957a385f27c2c637f63ba98cd",
+              "previewSrc": "images/previews/SPEC-0671.png?v=009094ef66254172257f5e61cc3b64b92a84feb56a3b840a5e5dbb56f43324ec",
+              "thumbnailSrc": "images/thumbs/SPEC-0671.png?v=157d0dffdefdd6a7a3082ab463ea54432b1487b8f649edaa524e31abb21e7640"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0212-P01:0:55be06770f950427",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/p8EAAeSw9bRq4cwz/s-l1600.jpg",
+              "evidence": "Complete legible face of the Thai Hop's Snorlax: คาบิกอน ของฮ็อป HP150, Ability ใจกว้าง, attack ไดนามิกเพรส 140, Illus. OKACHEKE, MA3 T, 136/193, regulation I. The regular card without a Poké Ball or Colorless Energy star mirror pattern; holographic foil sheen is visible across the artwork. Retained as SPEC-0671.",
+              "contentHash": "ae2747a0ca1b302bfdc88ef1401e8dc6228f8825f4ba125f58257ebf122d5f7a",
+              "image": null
+            },
             {
               "observationId": "finish:F0607-P01:0:4c8b53494a8680e8",
               "kind": "finish",
@@ -11163,6 +11211,15 @@
               "image": "verification/specimens/SPEC-0276.png"
             },
             {
+              "observationId": "specimen:SPEC-0671",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.co.uk/itm/117491594269",
+              "evidence": "Complete legible face of the Thai Hop's Snorlax: คาบิกอน ของฮ็อป HP150, Ability ใจกว้าง, attack ไดนามิกเพรส 140, Illus. OKACHEKE, MA3 T, 136/193, regulation I. The regular card without a Poké Ball or Colorless Energy star mirror pattern; holographic foil sheen is visible across the artwork.",
+              "contentHash": "c440948744cef3ab06094e6d2624bd4184119851d99c81bded87075e092f84a2",
+              "image": "verification/specimens/SPEC-0671.jpg"
+            },
+            {
               "observationId": "unit:U0130",
               "kind": "unit",
               "provider": "pokemon-card-asia",
@@ -11220,6 +11277,33 @@
             "colorless-energy-star-pattern"
           ],
           "physicalPrintings": [
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:8edc82f6b7151c3ad24b9cd5",
+              "semanticPrintingId": "PRINTING:8edc82f6b7151c3ad24b9cd5",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0210",
+              "sourcePrintingId": "F0210-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:8edc82f6b7151c3ad24b9cd5",
+              "specimenIds": [
+                "SPEC-0672"
+              ],
+              "sources": [
+                {
+                  "url": "https://down-tw.img.susercontent.com/file/tw-11134207-820lc-mud7dtgw6eps6e.webp",
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Complete legible face of the Traditional Chinese Hop's Snorlax: 赫普的卡比獸 HP150, Ability 大方, attack 極限壓制 140, Illus. OKACHEKE, M2a F, 136/193, regulation I, ©2025. The regular card without a Poké Ball or Colorless Energy star mirror pattern; rainbow holographic reflections show across the artwork and along the card edges. A photograph, not a render. Retained as SPEC-0672.",
+                  "retrievedAt": "2026-11-01"
+                }
+              ]
+            },
             {
               "physicalPrintingId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
               "semanticPrintingId": "PRINTING:cc2bdcc737584632ac55a1be",
@@ -11323,6 +11407,7 @@
             "artist": null,
             "variant": "V1, base, V2, poke-ball-pattern, colorless-energy-star-pattern",
             "finish": [
+              "holo",
               "mirror-holo"
             ],
             "foilPattern": [
@@ -11423,9 +11508,29 @@
               "originalHash": "41faea934420c066bc825426cc833fa9431d00ff595f7da60d56be50d47297c2",
               "previewSrc": "images/previews/SPEC-0313.png?v=ccbcee19bbe8f45c8a968369ab371b64879a15d88c621ae1aabca4f2c61ab343",
               "thumbnailSrc": "images/thumbs/SPEC-0313.png?v=2c5ab29ef5cb1382af57fe298d1ef56ed00be703d7a7f39b2102feada5b29684"
+            },
+            {
+              "src": "verification/specimens/SPEC-0672.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0672",
+              "contentHash": "60d6226ebfa1176a42f41d98ddf1ee247deba9a62db274e3f26687832e2d8f5d",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "60d6226ebfa1176a42f41d98ddf1ee247deba9a62db274e3f26687832e2d8f5d",
+              "previewSrc": "images/previews/SPEC-0672.png?v=d988104417080d57cb2f8bf8d22b07db84ec50be50f8ab491c923422d4d3ff60",
+              "thumbnailSrc": "images/thumbs/SPEC-0672.png?v=646b29b8f5bf09369ef0a18a69973ee372f39540953e583388fbeb7cb72121e7"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0210-P01:0:55f74da69fc27f26",
+              "kind": "finish",
+              "provider": "Inspected card photograph; external origin unknown",
+              "url": "https://down-tw.img.susercontent.com/file/tw-11134207-820lc-mud7dtgw6eps6e.webp",
+              "evidence": "Complete legible face of the Traditional Chinese Hop's Snorlax: 赫普的卡比獸 HP150, Ability 大方, attack 極限壓制 140, Illus. OKACHEKE, M2a F, 136/193, regulation I, ©2025. The regular card without a Poké Ball or Colorless Energy star mirror pattern; rainbow holographic reflections show across the artwork and along the card edges. A photograph, not a render. Retained as SPEC-0672.",
+              "contentHash": "d08cac7ee84717726c45617250a07a4ac6d7b2d28765ce9d732f17c28092db51",
+              "image": null
+            },
             {
               "observationId": "finish:F0605-P01:0:4c8b53494a8680e8",
               "kind": "finish",
@@ -11551,6 +11656,15 @@
               "evidence": "Complete retained image for Traditional Chinese Hop's Snorlax M2a F 136/193 (colorless-energy-star-pattern). The printed name, collector identity and attacks establish this card release and Work equivalence. Publisher render: identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "a57d9396d4ea0201115816e27317dff63832791c55d08879ee7c1935a5daa42b",
               "image": "verification/specimens/SPEC-0313.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0672",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://down-tw.img.susercontent.com/file/tw-11134207-820lc-mud7dtgw6eps6e.webp",
+              "evidence": "Complete legible face of the Traditional Chinese Hop's Snorlax: 赫普的卡比獸 HP150, Ability 大方, attack 極限壓制 140, Illus. OKACHEKE, M2a F, 136/193, regulation I, ©2025. The regular card without a Poké Ball or Colorless Energy star mirror pattern; rainbow holographic reflections show across the artwork and along the card edges. A photograph, not a render.",
+              "contentHash": "7634569e7452d70772bc09aab90e480ce6ff3ba4947e999429592fb6113283d3",
+              "image": "verification/specimens/SPEC-0672.png"
             },
             {
               "observationId": "unit:U0128",
@@ -77400,6 +77514,38 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:a1e527120cdef16b6c2a331d",
+              "semanticPrintingId": "PRINTING:a1e527120cdef16b6c2a331d",
+              "cardReleaseId": "RELEASE:JP:Japanese:XY2:066:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "non-holo",
+              "edition": "Unlimited",
+              "foilPattern": null,
+              "markings": [],
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0628",
+              "sourcePrintingId": "F0628-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a1e527120cdef16b6c2a331d",
+              "specimenIds": [
+                "SPEC-0670"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://efour.b-cdn.net/uploads/default/original/3X/7/8/78e41b825c9aea0f86c188d6316d6747900091f3.png",
+                  "sourceType": "Third-party collector photograph",
+                  "evidence": "Complete legible face of the Japanese XY2 Snorlax: カビゴン HP130, Ability にどね, attack たおれこみプレス 120, Illus. Mitsuhiro Arita, ©2014, 066/080 U with the XY2 mark. The edition-mark position at lower left, below にげる, is visibly empty; no 1st Edition mark is printed. Retained as SPEC-0670.",
+                  "retrievedAt": "2026-11-01"
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:d65e70736aa2aabf3b6c6b20",
               "semanticPrintingId": "PRINTING:d65e70736aa2aabf3b6c6b20",
               "cardReleaseId": "RELEASE:JP:Japanese:XY2:066:Snorlax-Stir-and-Snooze-Sleepy-Press",
@@ -77412,12 +77558,17 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0628",
-              "sourcePrintingId": "F0628-P02",
+              "sourcePrintingId": "F0628-P01",
               "establishingClaimId": "CLAIM:finish:PRINTING:d65e70736aa2aabf3b6c6b20",
               "specimenIds": [
                 "SPEC-0586"
               ],
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
                 {
                   "sourceType": "Inspected card photograph; external origin unknown",
                   "evidence": "Japanese カビゴン HP130, にどね and たおれこみプレス 120; XY2 066/080 U, Mitsuhiro Arita and visible 1st Edition mark at lower left. Pastel background colors are not treated as foil evidence. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0586.",
@@ -77495,25 +77646,63 @@
               "originalHash": "a8f14959fbec9802be9da3245a50f47674d084e0e26e6c289b6b142bee662948",
               "previewSrc": "images/previews/SPEC-0586.png?v=7c44fc1fe4d82ad4f28a1a42afb15db8415664ee4b95279711a66891e7bff73b",
               "thumbnailSrc": "images/thumbs/SPEC-0586.png?v=65d1d60eb9abd9819e91931e8391e28a32bb49ac812fee3c4e03ec06e6793d07"
+            },
+            {
+              "src": "verification/specimens/SPEC-0670.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0670",
+              "contentHash": "848aae917e4518d29bf0ba43eda3ffc4436f10ea79e52f2213f6b166660fcddc",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "848aae917e4518d29bf0ba43eda3ffc4436f10ea79e52f2213f6b166660fcddc",
+              "previewSrc": "images/previews/SPEC-0670.png?v=86d8150847b63885ea1555ff3320e34138c8096b43521da75365c3bf8fda6513",
+              "thumbnailSrc": "images/thumbs/SPEC-0670.png?v=1af2eb02ac06b8d7bdafec3a80bf0d608c3f9f320a37348b2f401f2e628083f3"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0628-P02:0:cf4e63a2604b4b57",
+              "observationId": "finish:F0628-P01:0:4cbd2a2857b6bd83",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "0feba40f1109119e5b004edb9c9ed0415c1dc7d65b084a6d6b0f64e9fc759228",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0628-P01:1:cf4e63a2604b4b57",
               "kind": "finish",
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Japanese カビゴン HP130, にどね and たおれこみプレス 120; XY2 066/080 U, Mitsuhiro Arita and visible 1st Edition mark at lower left. Pastel background colors are not treated as foil evidence. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied. Retained as SPEC-0586.",
-              "contentHash": "b0b4a9c0b0ee03ceb3f4039ac0eef231ef96cefdb0c95f52c1bee79169324820",
+              "contentHash": "fe300120925d255b4286a16f6eca0355e7f97e94be02d35e9a300ddc13d4bebd",
               "image": null
             },
             {
-              "observationId": "finish:F0628-P02:1:fad842ebdbe91c29",
+              "observationId": "finish:F0628-P01:2:fad842ebdbe91c29",
               "kind": "finish",
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-29 confirmation establishes the specimen's finish; the retained inspected card photograph; external origin unknown supports card identity and any independently visible properties.",
-              "contentHash": "e99e3ce2aed5824930dc773aabdac843a0e7b1e5028aa2afebafd60da5a9c1e2",
+              "contentHash": "ef222434d6e00cdb62ae8bc5e1e5b1cb9cd0cd5bc312e6d837c357bb88d1decd",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0628-P02:0:4cbd2a2857b6bd83",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Wild-Blaze/Snorlax-XY2066",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "8060123c763d285d6ee91648129ae39161941fcb1a993957ce942d9278cf83c0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0628-P02:1:5493cc7c6d1df531",
+              "kind": "finish",
+              "provider": "Third-party collector photograph",
+              "url": "https://efour.b-cdn.net/uploads/default/original/3X/7/8/78e41b825c9aea0f86c188d6316d6747900091f3.png",
+              "evidence": "Complete legible face of the Japanese XY2 Snorlax: カビゴン HP130, Ability にどね, attack たおれこみプレス 120, Illus. Mitsuhiro Arita, ©2014, 066/080 U with the XY2 mark. The edition-mark position at lower left, below にげる, is visibly empty; no 1st Edition mark is printed. Retained as SPEC-0670.",
+              "contentHash": "9e3f22cfb90dafc38c4ec8d95c43471a708f884a99ae3ce415641c5210bbc6fc",
               "image": null
             },
             {
@@ -77542,6 +77731,15 @@
               "evidence": "Japanese カビゴン HP130, にどね and たおれこみプレス 120; XY2 066/080 U, Mitsuhiro Arita and visible 1st Edition mark at lower left. Pastel background colors are not treated as foil evidence. The collection owner identifies this pictured card as Non-Holo. This positive determination does not close the release’s finish list. Physical ownership and the original external photograph provider were not supplied.",
               "contentHash": "e64d0d9f233713bda46f30ae2e10eba77d62f7778f9c5c20102578b0f1c88756",
               "image": "verification/specimens/SPEC-0586.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0670",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.elitefourum.com/t/can-anyone-help-finding-2-snorlax-cards/51087",
+              "evidence": "Complete legible face of the Japanese XY2 Snorlax: カビゴン HP130, Ability にどね, attack たおれこみプレス 120, Illus. Mitsuhiro Arita, ©2014, 066/080 U with the XY2 mark. The edition-mark position at lower left, below にげる, is visibly empty; no 1st Edition mark is printed.",
+              "contentHash": "4b993de62c8a8955e75816777dd8cd65da67a9ba67b64b253ab7273cff137a2a",
+              "image": "verification/specimens/SPEC-0670.png"
             },
             {
               "observationId": "unit:U0560",
