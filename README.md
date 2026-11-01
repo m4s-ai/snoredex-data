@@ -134,10 +134,10 @@ Current-known status snapshot: **2026-11-01**. Legacy claim counts refer to `car
 | Area | Current state |
 |---|---|
 | Legacy Cardmarket baseline | **242 products** harvested: **198 singles** retained and 44 accessories excluded. 7 retained products are code cards and are explicitly flagged. |
-| Legacy language-claim review | **719 claims**: 627 externally confirmed, 92 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
-| Evidence-safe application status | **625 established**, **2 needs evidence**, **92 owner-adjudicated not printed**, and **0 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
+| Legacy language-claim review | **719 claims**: 624 externally confirmed, 95 contradicted, 0 awaiting manual review, and 0 still open within the legacy candidate universe. Raw Cardmarket languages remain preserved beside their verdicts. |
+| Evidence-safe application status | **622 established**, **2 needs evidence**, **95 owner-adjudicated not printed**, and **0 disputed**. Raw verdicts and observations stay queryable; unsupported confirmation does not mint a printing. |
 | Current-known physical checklist | **906 items** across 174 cards and 15 languages: 906 documented printings plus 0 explicit unresolved placeholders. |
-| Current-known finish evidence | **637 card-number × language units**: 552 externally confirmed, 8 marketplace-only positives, 0 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 93 units. |
+| Current-known finish evidence | **637 card-number × language units**: 552 externally confirmed, 8 marketplace-only positives, 0 without positive finish evidence, and 77 not applicable. The remaining detail/mapping queue contains 90 units. |
 | Evidence registry | **46 providers**, 1836 evidence records, 1827 unique URLs, and 7,401 attributed claims. Every external provider is positive only. The separate owner-adjudication store records final language and printing absence decisions. |
 | Quality gate | Deterministic generators, structural and evidence audits, cross-artifact consistency checks, and the full offline gate run on Ubuntu and Windows for ready pull requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source release checks run on Linux. |
 | Site and publication | The repository is public. The interactive site is generated and usable locally; Pages deployment is approved by the owner but still requires a manual workflow run. |
@@ -185,7 +185,7 @@ throughout this project and is uncommon:
 | Single tier 1-2 source | 618 |
 | Single tier 3 source | 6 |
 
-624 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 6 do. What it forbids is a claim that is neither — all 26 uncorroborated claims with no URL come from tier 1 or 2; their inspections, attestations or owner adjudications are retained in the repository.
+624 of 719 resolved claims rest on one provider. Check `E3` does not forbid that: it requires an uncorroborated claim to be **checkable or strong**, so a tier-3 page anyone can open may carry one alone, and 6 do. What it forbids is a claim that is neither — all 29 uncorroborated claims with no URL come from tier 1 or 2; their inspections, attestations or owner adjudications are retained in the repository.
 <!-- /generated:evidence-strength -->
 
 Specimen-backed claims cite stable ids in

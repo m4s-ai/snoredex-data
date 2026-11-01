@@ -21,12 +21,12 @@
     ],
     "verification": {
       "description": "Every card x language x variant claim was checked against sources outside Cardmarket. See verification/RESUME.md.",
-      "confirmed": 627,
-      "contradicted": 92,
+      "confirmed": 624,
+      "contradicted": 95,
       "needsManualReview": 0,
       "open": 0,
       "totalUnits": 719,
-      "lastUpdated": "2026-10-01"
+      "lastUpdated": "2026-11-01"
     },
     "editionRuleset": {
       "westernFirstEdition": "Base Set through Neo Destiny except Base Set 2 (WOTC, English+European)",
@@ -49,8 +49,8 @@
       "withReverseHolo": 224,
       "withMirrorHolo": 23,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 17,
-      "withAnyUnresolvedDetail": 93,
+      "withUnresolvedProductMapping": 14,
+      "withAnyUnresolvedDetail": 90,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     }
@@ -23640,7 +23640,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0309",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0309-P01",
@@ -23689,7 +23689,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0310",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0310-P01",
@@ -23738,7 +23738,7 @@
             },
             "status": "confirmed",
             "finishUnitId": "F0311",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": [
               {
                 "printingId": "F0311-P01",
@@ -31229,23 +31229,23 @@
       },
       "languagesConfirmed": [
         "English",
-        "French",
         "German"
       ],
       "languagesContradicted": [],
       "languagesUnresolved": [
+        "French",
         "Italian"
       ],
       "languageVerification": {
         "status": "partial",
         "claimed": 4,
         "repositoryConfirmed": 4,
-        "confirmed": 3,
+        "confirmed": 2,
         "contradicted": 0,
         "notPrinted": 0,
         "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
+        "needsEvidence": 2,
+        "unresolved": 2,
         "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
       },
       "languagesNotPrinted": [],
@@ -31257,6 +31257,7 @@
         "Italian"
       ],
       "languagesNeedsEvidence": [
+        "French",
         "Italian"
       ]
     },
@@ -31317,7 +31318,7 @@
           "pending": "no positive evidence for this finish anywhere in this set-number-language unit",
           "not-applicable": "this product-language claim is contradicted"
         },
-        "status": "partial",
+        "status": "confirmed",
         "availableFinishes": [
           "holo"
         ],
@@ -31372,17 +31373,17 @@
           },
           {
             "language": "French",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -31390,24 +31391,24 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0309",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "German",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -31415,24 +31416,24 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0310",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           },
           {
             "language": "Italian",
-            "claimStatus": "confirmed",
+            "claimStatus": "contradicted",
             "availableFinishes": [],
             "unitAvailableFinishes": [
               "non-holo",
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "other-product",
-              "holo": "pending",
-              "reverse-holo": "other-product",
-              "mirror-holo": "pending"
+              "non-holo": "not-applicable",
+              "holo": "not-applicable",
+              "reverse-holo": "not-applicable",
+              "mirror-holo": "not-applicable"
             },
             "unitFinishStatus": {
               "non-holo": "confirmed",
@@ -31440,45 +31441,44 @@
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
-            "status": "pending",
+            "status": "not-applicable",
             "finishUnitId": "F0311",
-            "productMappingStatus": "partial",
+            "productMappingStatus": "confirmed",
             "printings": []
           }
         ]
       },
       "languagesConfirmed": [
-        "English",
-        "French",
-        "German"
+        "English"
       ],
-      "languagesContradicted": [],
-      "languagesUnresolved": [
-        "Italian"
-      ],
-      "languageVerification": {
-        "status": "partial",
-        "claimed": 4,
-        "repositoryConfirmed": 4,
-        "confirmed": 3,
-        "contradicted": 0,
-        "notPrinted": 0,
-        "disputed": 0,
-        "needsEvidence": 1,
-        "unresolved": 1,
-        "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
-      },
-      "languagesNotPrinted": [],
-      "languagesDisputed": [],
-      "languagesRepositoryConfirmed": [
-        "English",
+      "languagesContradicted": [
         "French",
         "German",
         "Italian"
       ],
-      "languagesNeedsEvidence": [
+      "languagesUnresolved": [],
+      "languageVerification": {
+        "status": "resolved",
+        "claimed": 4,
+        "repositoryConfirmed": 1,
+        "confirmed": 1,
+        "contradicted": 3,
+        "notPrinted": 3,
+        "disputed": 0,
+        "needsEvidence": 0,
+        "unresolved": 0,
+        "note": "languages is the raw Cardmarket claim and is not a print manifest. Use languagesConfirmed for exact printings established within the permitted evidence granularity. languagesRepositoryConfirmed preserves the raw verdict; its languagesNeedsEvidence subset cannot yet establish the exact card and is also in languagesUnresolved. languagesContradicted splits into languagesNotPrinted, where an owner adjudication settled the question, and languagesDisputed, where a source disagrees and nothing has settled it. Unresolved and disputed never mean absent."
+      },
+      "languagesNotPrinted": [
+        "French",
+        "German",
         "Italian"
-      ]
+      ],
+      "languagesDisputed": [],
+      "languagesRepositoryConfirmed": [
+        "English"
+      ],
+      "languagesNeedsEvidence": []
     },
     {
       "name": "Snorlax Lv.35",
