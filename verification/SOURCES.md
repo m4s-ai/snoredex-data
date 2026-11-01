@@ -21,17 +21,17 @@ in `verification/owner_adjudications.json`.
 | **Pokémon official website (Mainland China)** | official-publisher | 1 | positive only | 18 | 59 | language, finish, product, date |
 | **The Pokémon Company official cards and checklists** | official-publisher | 1 | positive only | 166 | 503 | language, finish, product, date |
 | **52poke (Wiki)** | collector-database | 2 | positive only | 15 | 36 | language, artist, edition, finish, date |
-| **Bulbapedia** | fan-wiki | 2 | positive only | 115 | 730 | language, edition, date, finish |
+| **Bulbapedia** | fan-wiki | 2 | positive only | 115 | 729 | language, edition, date, finish |
 | **CGC certification and registry** | grading-registry | 2 | positive only | 0 | 0 | finish, language |
 | **Cardmarket exact product image** | marketplace-photo | 2 | positive only | 49 | 261 | language, identity, finish, edition, image |
 | **Cardmarket seller listing photograph** | marketplace-photo | 2 | positive only | 14 | 69 | language, identity, finish, edition |
-| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 515 | language, finish, edition, rarity |
+| **Collection owner attestation** | non-url-evidence | 2 | positive only | 1 | 518 | language, finish, edition, rarity |
 | **Elite Fourum** | collector-community | 2 | positive only | 7 | 23 | language, edition |
 | **Malie TCGL reference** | open-database | 2 | positive only | 2 | 7 | card-content, size, back, foil |
 | **PSA certification and registry** | grading-registry | 2 | positive only | 4 | 16 | finish, identity |
 | **SNKRDUNK** | marketplace | 2 | positive only | 1 | 5 | finish, language |
 | **Seller listing photograph** | marketplace-photo | 2 | positive only | 199 | 863 | language, identity, finish, edition |
-| **TCGdex** | open-database | 2 | positive only | 312 | 818 | language, finish, card-content |
+| **TCGdex** | open-database | 2 | positive only | 312 | 816 | language, finish, card-content |
 | **pokemontcg.io** | open-database | 2 | positive only | 1 | 123 | artist, date |
 | **Collectory** | collector-database | 3 | positive only | 22 | 53 | identity, rarity |
 | **Edaily reviewed Korean product-launch report** | news | 3 | positive only | 1 | 1 | date |

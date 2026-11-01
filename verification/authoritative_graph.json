@@ -25577,12 +25577,12 @@
         "claimKind": "card-release",
         "sourceKind": "legacy-language-unit",
         "sourceId": "U0473",
-        "sourceRecord": "https://api.tcgdex.net/v2/fr/cards/pl2-33",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
+        "sourceRecord": null,
+        "evidenceStatus": "contradicted",
+        "disposition": "bounded-contradicted",
         "proposedTargetId": "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "materializedTargetId": "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "reason": "Western language under Western distribution"
+        "materializedTargetId": null,
+        "reason": "Owner excludes localized League promo; regular V1 independently establishes the release"
       }
     },
     {
@@ -25594,12 +25594,12 @@
         "claimKind": "card-release",
         "sourceKind": "legacy-language-unit",
         "sourceId": "U0474",
-        "sourceRecord": "https://api.tcgdex.net/v2/de/cards/pl2-33",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
+        "sourceRecord": null,
+        "evidenceStatus": "contradicted",
+        "disposition": "bounded-contradicted",
         "proposedTargetId": "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "materializedTargetId": "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "reason": "Western language under Western distribution"
+        "materializedTargetId": null,
+        "reason": "Owner excludes localized League promo; regular V1 independently establishes the release"
       }
     },
     {
@@ -25611,12 +25611,12 @@
         "claimKind": "card-release",
         "sourceKind": "legacy-language-unit",
         "sourceId": "U0475",
-        "sourceRecord": "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
+        "sourceRecord": null,
+        "evidenceStatus": "contradicted",
+        "disposition": "bounded-contradicted",
         "proposedTargetId": "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "materializedTargetId": "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "reason": "Western language under Western distribution"
+        "materializedTargetId": null,
+        "reason": "Owner excludes localized League promo; regular V1 independently establishes the release"
       }
     },
     {
@@ -55339,10 +55339,11 @@
           "CLAIM:legacy:U0473"
         ],
         "establishingClaimIds": [
-          "CLAIM:legacy:U0355",
+          "CLAIM:legacy:U0355"
+        ],
+        "nonEstablishingClaimIds": [
           "CLAIM:legacy:U0473"
         ],
-        "nonEstablishingClaimIds": [],
         "legacyVariants": [
           "V1",
           "V2"
@@ -57561,10 +57562,11 @@
           "CLAIM:legacy:U0474"
         ],
         "establishingClaimIds": [
-          "CLAIM:legacy:U0356",
+          "CLAIM:legacy:U0356"
+        ],
+        "nonEstablishingClaimIds": [
           "CLAIM:legacy:U0474"
         ],
-        "nonEstablishingClaimIds": [],
         "legacyVariants": [
           "V1",
           "V2"
@@ -59778,10 +59780,11 @@
           "CLAIM:legacy:U0475"
         ],
         "establishingClaimIds": [
-          "CLAIM:legacy:U0357",
+          "CLAIM:legacy:U0357"
+        ],
+        "nonEstablishingClaimIds": [
           "CLAIM:legacy:U0475"
         ],
-        "nonEstablishingClaimIds": [],
         "legacyVariants": [
           "V1",
           "V2"
@@ -80755,7 +80758,7 @@
       "entityId": "LEGACYPRODUCT:https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V2-RR33",
       "origin": "authoritative-locality-migration",
       "payload": {
-        "disposition": "split",
+        "disposition": "carried",
         "claimIds": [
           "CLAIM:legacy:U0472",
           "CLAIM:legacy:U0473",
@@ -80763,12 +80766,9 @@
           "CLAIM:legacy:U0475"
         ],
         "cardReleaseIds": [
-          "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-          "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-          "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-          "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over"
+          "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over"
         ],
-        "reason": "4 established language-bearing card release(s)",
+        "reason": "1 established language-bearing card release(s)",
         "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V2-RR33"
       }
     },
@@ -198909,36 +198909,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:legacy:U0473",
-      "relation": "materializes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:legacy:U0474",
-      "relation": "materializes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:legacy:U0475",
-      "relation": "materializes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:legacy:U0476",
       "relation": "materializes",
       "toType": "card-release",
@@ -310575,15 +310545,12 @@
     {
       "sourceKind": "legacy-cardmarket-product",
       "sourceId": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Rising-Rivals/Snorlax-Lv37-V2-RR33",
-      "disposition": "split",
+      "disposition": "carried",
       "targetRef": "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
       "targetRefs": [
-        "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-        "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over"
+        "RELEASE:WEST:English:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over"
       ],
-      "reason": "4 established language-bearing card release(s)"
+      "reason": "1 established language-bearing card release(s)"
     },
     {
       "sourceKind": "legacy-cardmarket-product",
@@ -316807,23 +316774,23 @@
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0473",
-      "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:WEST:French:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "reason": "Western language under Western distribution"
+      "disposition": "bounded-contradicted",
+      "targetRef": null,
+      "reason": "Owner excludes localized League promo; regular V1 remains established"
     },
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0474",
-      "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:WEST:German:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "reason": "Western language under Western distribution"
+      "disposition": "bounded-contradicted",
+      "targetRef": null,
+      "reason": "Owner excludes localized League promo; regular V1 remains established"
     },
     {
       "sourceKind": "legacy-language-unit",
       "sourceId": "U0475",
-      "disposition": "established-and-mapped",
-      "targetRef": "RELEASE:WEST:Italian:RR:33:Snorlax-Lv37-Pick-and-Collect-Roll-Over",
-      "reason": "Western language under Western distribution"
+      "disposition": "bounded-contradicted",
+      "targetRef": null,
+      "reason": "Owner excludes localized League promo; regular V1 remains established"
     },
     {
       "sourceKind": "legacy-language-unit",
@@ -327678,19 +327645,19 @@
   ],
   "summary": {
     "entities": 9147,
-    "edges": 13214,
+    "edges": 13211,
     "migrationInputs": 3353,
     "migrationDispositions": {
-      "bounded-contradicted": 93,
+      "bounded-contradicted": 96,
       "candidate-needs-evidence": 376,
-      "carried": 68,
-      "established-and-mapped": 1716,
+      "carried": 69,
+      "established-and-mapped": 1713,
       "linked-local-counterpart": 126,
       "mapped": 531,
       "needs-evidence": 218,
       "needs-positive-local-identity": 18,
       "positively-excluded": 84,
-      "split": 123
+      "split": 122
     },
     "candidateClaims": 2259,
     "cardReleases": 629,
