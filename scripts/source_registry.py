@@ -745,6 +745,7 @@ PROVIDERS: list[dict[str, Any]] = [
             "www.ebay.de", "pokipair.com", "www.pokipair.com", "media.pokipair.com",
             "coleka.com", "www.coleka.com",
             "beehivetcg.com", "rocketcoll.com",
+            "pao-onlineshop.com", "makeshop-multi-images.akamaized.net", "excaliburtcg.co.uk",
         ],
         "licenseOrTerms": "Individual retailer site terms; used for identification only.",
         "category": "retail-listing",
@@ -758,6 +759,21 @@ PROVIDERS: list[dict[str, Any]] = [
             "not authoritative catalogues, so per-host provider entries would imply a coverage "
             "guarantee none of them offers. An image counts only when it identifies the printing."
         ),
+    },
+    {
+        "providerId": "pikaqian",
+        "displayName": "PikaQian retained card images",
+        "organization": "PikaQian",
+        "homepage": "https://pikaqian.com",
+        "hosts": [],  # Manual identity review only; do not regrade older specimen assertions by host.
+        "licenseOrTerms": "Site terms; retained images used for identification only.",
+        "category": "card-database",
+        "authorityTier": 3,
+        "coverage": "Printed identity of the exact retained Simplified Chinese card image only",
+        "supportsAbsence": False,
+        "usedFor": ["identity", "language"],
+        "attribution": "PikaQian card image; original card artwork remains its rights holders'.",
+        "notes": "Reference depictions do not establish a physical finish, absence or catalogue completeness.",
     },
     {
         "providerId": "internal-derivation",
@@ -868,6 +884,7 @@ SOURCE_TYPE_PATTERNS: list[tuple[re.Pattern[str], str | None]] = [
     (re.compile(r"third-party scan archive", re.I), None),
     (re.compile(r"pkparaiso", re.I), "pkparaiso"),
     (re.compile(r"collectory", re.I), "collectory"),
+    (re.compile(r"pikaqian retained reference image", re.I), "pikaqian"),
     (re.compile(r"wikidex", re.I), "wikidex"),
     (re.compile(r"photograph", re.I), "inspected-specimen"),
     (re.compile(r"owner attestation", re.I), "owner-attestation"),

@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 662,
+  "count": 669,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -11782,7 +11782,8 @@
       "observed": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
       "recordedAt": "2026-09-21",
       "citedBy": [
-        "KR:s5a:093/070:base"
+        "KR:s5a:093/070:base",
+        "U0601"
       ],
       "physicalObservation": {
         "finish": "holo",
@@ -11804,7 +11805,8 @@
       "observed": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle.",
       "recordedAt": "2026-09-21",
       "citedBy": [
-        "KR:s1H:070/060:base"
+        "KR:s1H:070/060:base",
+        "U0508"
       ],
       "physicalObservation": {
         "finish": "holo",
@@ -14380,6 +14382,137 @@
         "cardSize": "standard",
         "basis": "The official EX Dragon Frontiers checklist gives cards 1-12 exactly two foil versions: the regular holo and the reverse holo, which carries the EX Dragon Frontiers set-logo stamp in the artwork field. The complete, legible face of 10/101 shows no such stamp, so the photographed copy is the regular holo."
       }
+    },
+    {
+      "specimenId": "SPEC-0663",
+      "setCode": "mC",
+      "number": "568/742",
+      "variant": "base",
+      "language": "Japanese",
+      "heldBy": "third-party retailer",
+      "inspectedFrom": "retained retailer reference image; identity only",
+      "photograph": "SPEC-0663.jpg",
+      "photographSource": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg",
+      "photographSha256": "sha256:1641dbb7ce1e5ff76159cffcd8185e9979a976cea6084673f38fa7cfdac4e31f",
+      "observed": "Japanese card face, mC H 568/742, HP160, Po-Suzuki visible. Identity image; physical finish and exact pattern not established by the stock scan or seller foil title.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0589"
+      ],
+      "listingUrl": "https://pao-onlineshop.com/view/item/000000112928"
+    },
+    {
+      "specimenId": "SPEC-0664",
+      "setCode": "CS1aC",
+      "number": "110/135",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party database",
+      "inspectedFrom": "PikaQian retained reference image; identity only",
+      "photograph": "SPEC-0664.png",
+      "photographSource": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp",
+      "photographSha256": "sha256:6e89d0cd1fad0547d2a6d64df5ddc3c0e931841dbf8ac41c5c8c698fdc47a53a",
+      "observed": "Simplified Chinese face, CS1aC F 110/135 U, Yuu Nishida; large stars depicted on card body. 300px reference image; source-native reverse-holo label and graphic pattern are leads pending physical-image verification and source-capability review.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0599"
+      ],
+      "listingUrl": "https://pikaqian.com/cards/47f5e484-2acb-4492-a941-3cc9c5a5643d"
+    },
+    {
+      "specimenId": "SPEC-0665",
+      "setCode": "CS6bC",
+      "number": "113/131",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party database",
+      "inspectedFrom": "PikaQian retained reference image; identity only",
+      "photograph": "SPEC-0665.png",
+      "photographSource": "https://images.pikaqian.com/cs6bc/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e.webp",
+      "photographSha256": "sha256:3a8c3314655cbf6c16980bf4230a480b624116fbab62824d09a18ac96b36afa5",
+      "observed": "Simplified Chinese face, CS6bC H 113/131 R, Asako Ito; coloured vertical foil depiction in illustration. 300px reference image. No new physical finish or exact pattern accepted.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0213"
+      ],
+      "listingUrl": "https://pikaqian.com/cards/4f51c003-92e6-4ee7-ab30-e6fee8d4d80e"
+    },
+    {
+      "specimenId": "SPEC-0666",
+      "setCode": "CSV10C",
+      "number": "175/222",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party retailer",
+      "inspectedFrom": "retained retailer reference image; identity only",
+      "photograph": "SPEC-0666.png",
+      "photographSource": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946",
+      "photographSha256": "sha256:ce1565ac1e010aba28dce9cce82a776ca499a31ddeb70bc463dc045b6328af8b",
+      "observed": "Simplified Chinese Hop's Snorlax, CSV10C 175/222 R, GOSSAN; large ball design depicted. Reference depiction, not a physical foil observation.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0761"
+      ],
+      "listingUrl": "https://excaliburtcg.co.uk/products/csv10c-175-foil-v1"
+    },
+    {
+      "specimenId": "SPEC-0667",
+      "setCode": "151C",
+      "number": "143/151",
+      "variant": "V1",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained eBay image, manually inspected; local Tesseract unavailable",
+      "photograph": "SPEC-0667.png",
+      "photographSource": "https://i.ebayimg.com/images/g/zdYAAeSwt4dpezFO/s-l1600.webp",
+      "photographSha256": "sha256:eae0be919c923d86a16d1799f97f1bb59ff6b292d106dc206a2f20f59a12645c",
+      "observed": "Simplified Chinese face, 151C G 143/151 U, HYOGONOSUKE; large Master Ball design depicted. Stock depiction. No actual physical surface observation or finish-list closure.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0266"
+      ],
+      "listingUrl": "https://www.ebay.com/itm/389905853131"
+    },
+    {
+      "specimenId": "SPEC-0668",
+      "setCode": "CSV5C",
+      "number": "115/129",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained eBay image, manually inspected; local Tesseract unavailable",
+      "photograph": "SPEC-0668.png",
+      "photographSource": "https://i.ebayimg.com/images/g/dCcAAeSweONo1onO/s-l1600.webp",
+      "photographSha256": "sha256:deae948d86af8a7ec8687231e098a84280ee14ac901d12d08ec4ac3c00bafaa9",
+      "observed": "Two-front composite, Simplified Chinese Snorlax Doll, CSV5C 115/129 U, AYUMI ODASHIMA; Master Ball and Poke Ball designs depicted. Composite stock depiction. No physical finish or same-card link to generic back established.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0521"
+      ],
+      "listingUrl": "https://www.ebay.com/itm/226993782091"
+    },
+    {
+      "specimenId": "SPEC-0669",
+      "setCode": "CS5aC",
+      "number": "093/127",
+      "variant": "base",
+      "language": "S-Chinese",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Retained eBay image, manually inspected; local Tesseract unavailable",
+      "photograph": "SPEC-0669.png",
+      "photographSource": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+      "photographSha256": "sha256:8e0e73d2247db9d639f08819fc2eaa708a65bbb43024a91abb36a73aa3d35dbd",
+      "observed": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border. This directly observed mirror-holo surface has a vertical-line foil pattern. No other finish or inventory completeness is established.",
+      "recordedAt": "2026-10-31",
+      "citedBy": [
+        "U0183"
+      ],
+      "physicalObservation": {
+        "finish": "mirror-holo",
+        "foilPattern": "vertical-line",
+        "basis": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border."
+      },
+      "listingUrl": "https://www.ebay.co.uk/itm/127836388784"
     }
   ]
 }

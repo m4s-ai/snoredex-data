@@ -1,0 +1,190 @@
+{
+  "sourceCommit": "db28300bf7b22b01569adb2da328f68b56ef3183",
+  "purpose": "Pre-bridge standalone physical identity and collection-state migration regression",
+  "physicalEntities": [
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0552",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0552",
+        "cardReleaseId": "RELEASE:KR:Korean:s5a:093/070:Snorlax-Gormandize-Body-Slam",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0552",
+        "specimenIds": [
+          "SPEC-0552"
+        ]
+      }
+    },
+    {
+      "entityType": "physical-printing",
+      "entityId": "PHYSICAL:specimen:SPEC-0553",
+      "origin": "physical-evidence-projection",
+      "payload": {
+        "physicalPrintingId": "PHYSICAL:specimen:SPEC-0553",
+        "cardReleaseId": "RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
+        "finish": "holo",
+        "edition": null,
+        "foilPattern": null,
+        "markings": [],
+        "distribution": null,
+        "cardSize": "unknown",
+        "basis": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card.",
+        "errorClass": null,
+        "classificationState": "classified-from-positive-evidence",
+        "sourceFinishUnitId": null,
+        "sourcePrintingId": null,
+        "establishingClaimId": "CLAIM:specimen:SPEC-0553",
+        "specimenIds": [
+          "SPEC-0553"
+        ]
+      }
+    }
+  ],
+  "collectorItems": [
+    {
+      "itemId": "item-36bb064e-b7da-5403-a6c9-6ee9b7cf4b4c",
+      "legacyChecklistIds": [],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-VMAX-G-Max-Fall",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:s1H",
+      "localSetId": "LOCALSET:KR:s1H",
+      "cardReleaseId": "RELEASE:KR:Korean:s1H:070/060:Snorlax-VMAX-G-Max-Fall",
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0553",
+      "sourcePrintingId": null,
+      "finishUnitId": null,
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0508",
+        "CLAIM:source-first:KR:s1H:070/060:base",
+        "CLAIM:specimen:SPEC-0553"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax VMAX",
+      "localCardName": "잠만보 VMAX",
+      "localSetCode": "s1H",
+      "localSetName": "소드&실드 확장팩 「실드」",
+      "collectorNumber": "070",
+      "collectorNumberDenominator": "060",
+      "collectorNumberSortKey": "000000000070",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "observed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-9c0d1489-5340-50e2-b836-f2e4ffbd1382",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "HR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:s1H:070/060:Snorlax-VMAX-G-Max-Fall"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2020-02-07",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2020-02-07|LOCALIZATION:KR:ko|s000000000001h|000000000070|claim:CLAIM:specimen:SPEC-0553",
+      "imageAssetId": "asset-039d9bb8-06a0-5608-8e38-9a5da28c778e",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://bulbapedia.bulbagarden.net/wiki/Shield_(TCG)",
+        "https://m.bunjang.co.kr/products/430796194",
+        "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://bulbapedia.bulbagarden.net/wiki/Shield_(TCG)",
+        "https://m.bunjang.co.kr/products/430796194",
+        "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+VMAX+%E2%80%94+s1H+%E2%80%94+%EC%86%8C%EB%93%9C%26%EC%8B%A4%EB%93%9C+%ED%99%95%EC%9E%A5%ED%8C%A9+%E3%80%8C%EC%8B%A4%EB%93%9C%E3%80%8D+070+%28verified-printing%29&row-id=item-36bb064e-b7da-5403-a6c9-6ee9b7cf4b4c&card-name=Snorlax+VMAX&set-code=s1H+%E2%80%94+%EC%86%8C%EB%93%9C%26%EC%8B%A4%EB%93%9C+%ED%99%95%EC%9E%A5%ED%8C%A9+%E3%80%8C%EC%8B%A4%EB%93%9C%E3%80%8D&card-number=070&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    },
+    {
+      "itemId": "item-761bf8d5-a2ca-5693-846b-8c374a932673",
+      "legacyChecklistIds": [],
+      "active": true,
+      "itemKind": "verified-printing",
+      "progressClass": "current-known",
+      "workId": "WORK:Snorlax-Gormandize-Body-Slam",
+      "workMappingState": "mapped-by-explicit-equivalence",
+      "setEditionId": "EDITION:KR:Korean:s5a",
+      "localSetId": "LOCALSET:KR:s5a",
+      "cardReleaseId": "RELEASE:KR:Korean:s5a:093/070:Snorlax-Gormandize-Body-Slam",
+      "physicalPrintingId": "PHYSICAL:specimen:SPEC-0552",
+      "sourcePrintingId": null,
+      "finishUnitId": null,
+      "sourceClaimRefs": [
+        "CLAIM:legacy:U0601",
+        "CLAIM:source-first:KR:s5a:093/070:base",
+        "CLAIM:specimen:SPEC-0552"
+      ],
+      "localizationId": "LOCALIZATION:KR:ko",
+      "cardName": "Snorlax",
+      "localCardName": "잠만보",
+      "localSetCode": "s5a",
+      "localSetName": "쌍벽의 파이터",
+      "collectorNumber": "093",
+      "collectorNumberDenominator": "070",
+      "collectorNumberSortKey": "000000000093",
+      "edition": null,
+      "editionAssignmentStatus": "not-applicable",
+      "finishVerificationStatus": "observed",
+      "finish": "holo",
+      "finishFamily": "holo",
+      "finishGroupId": "finish-group-a640fc43-7247-53ce-997f-79d031cede2f",
+      "foilPattern": null,
+      "markings": [],
+      "distribution": null,
+      "cardSize": "standard",
+      "errorClass": null,
+      "rarity": {
+        "display": "UR",
+        "normalizedId": null,
+        "evidenceStatus": "source-backed",
+        "claimRefs": [
+          "RARITYCLAIM:issue260:s5a:093/070:Snorlax-Gormandize-Body-Slam"
+        ]
+      },
+      "completenessStatus": "positive-evidence-only",
+      "releaseDate": "2021-04-21",
+      "releaseDatePrecision": "day",
+      "releaseApproximate": false,
+      "releaseSortKey": "2021-04-21|LOCALIZATION:KR:ko|s000000000005a|000000000093|claim:CLAIM:specimen:SPEC-0552",
+      "imageAssetId": "asset-492011dc-de37-5e42-8e64-c68a6e4964ee",
+      "imageScope": "exact-printing",
+      "sourceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)",
+        "https://m.bunjang.co.kr/products/430221399",
+        "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg"
+      ],
+      "evidenceLinks": [
+        "https://bulbapedia.bulbagarden.net/wiki/List_of_Pok%C3%A9mon_Trading_Card_Game_expansions_in_other_languages",
+        "https://bulbapedia.bulbagarden.net/wiki/Matchless_Fighters_(TCG)",
+        "https://m.bunjang.co.kr/products/430221399",
+        "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg"
+      ],
+      "correctionLink": "https://github.com/m4s-ai/snoredex-data/issues/new?template=printing-correction.yml&title=%5BCorrection%5D+Snorlax+%E2%80%94+s5a+%E2%80%94+%EC%8C%8D%EB%B2%BD%EC%9D%98+%ED%8C%8C%EC%9D%B4%ED%84%B0+093+%28verified-printing%29&row-id=item-761bf8d5-a2ca-5693-846b-8c374a932673&card-name=Snorlax&set-code=s5a+%E2%80%94+%EC%8C%8D%EB%B2%BD%EC%9D%98+%ED%8C%8C%EC%9D%B4%ED%84%B0&card-number=093&current-state=Item+kind%3A+verified-printing+Progress%3A+current-known+Evidence+state%3A+observed+Completeness%3A+positive-evidence-only+Edition+status%3A+not-applicable+Edition%3A+unknown+Finish%3A+holo+Finish+family%3A+holo+Foil+pattern%3A+unknown+Markings%3A+unknown+Distribution%3A+unknown+Card+size%3A+standard"
+    }
+  ]
+}

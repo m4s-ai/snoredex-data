@@ -2,6 +2,7 @@
 """Keep active pipeline documentation and deployment orchestration aligned."""
 from __future__ import annotations
 
+import ast
 import json
 import re
 from pathlib import Path
@@ -173,6 +174,16 @@ def routing_regressions() -> None:
 
 
 def main() -> int:
+    assignments = ast.parse((ROOT / "scripts/regen.py").read_text(encoding="utf-8")).body
+    regen = next(ast.literal_eval(node.value) for node in assignments
+                 if isinstance(node, ast.Assign) and any(
+                     isinstance(target, ast.Name) and target.id == "REGEN" for target in node.targets))
+    manifest = json.loads((ROOT / "verification/scoped_pipeline_manifest.json").read_text(encoding="utf-8"))
+    for commands in [regen] + [[step["command"] for step in lane["steps"]] for lane in manifest["lanes"]]:
+        owners = [command[0] for command in commands]
+        if "scripts/confirmed_releases.py" in owners:
+            assert owners.index("scripts/source_registry.py") < owners.index("scripts/confirmed_releases.py"), \
+                "new providers must be registered before confirmed-language authority is projected"
     texts = {path: path.read_text(encoding="utf-8") for path in ACTIVE_MARKDOWN + WORKFLOWS}
 
     missing: set[str] = set()

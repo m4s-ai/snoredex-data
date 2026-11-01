@@ -57,18 +57,18 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 547,
-      "withOnlyMarketplaceClaim": 10,
-      "pendingFinish": 3,
+      "withConfirmedFinish": 550,
+      "withOnlyMarketplaceClaim": 8,
+      "pendingFinish": 2,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 18,
-      "withNonHolo": 324,
-      "withHolo": 265,
+      "withNonHolo": 323,
+      "withHolo": 268,
       "withReverseHolo": 224,
       "withMirrorHolo": 23,
       "withBothNonHoloAndHolo": 55,
-      "withUnresolvedProductMapping": 20,
-      "withAnyUnresolvedDetail": 98,
+      "withUnresolvedProductMapping": 19,
+      "withAnyUnresolvedDetail": 96,
       "tcgdexUrlsRequested": 308,
       "tcgdexFetchErrors": 0
     },
@@ -5673,7 +5673,7 @@
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "partial",
       "printings": [
         {
           "finish": "non-holo",
@@ -5738,6 +5738,42 @@
             }
           ],
           "printingId": "F0060-P03"
+        },
+        {
+          "finish": "mirror-holo",
+          "foilPattern": "vertical-line",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "The physical card on fabric reads Simplified Chinese CS5aC 093/127 R. Parallel vertical rainbow foil is visible across the artwork and silver border. This directly observed mirror-holo surface has a vertical-line foil pattern. No other finish or inventory completeness is established. Retained as SPEC-0669.",
+              "retrievedAt": "2026-10-31"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0669"
+          ],
+          "image": "verification/specimens/SPEC-0669.png",
+          "printingId": "F0060-P04"
         }
       ],
       "unresolved": [
@@ -31796,6 +31832,18 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
+              "url": "https://www.nacg.tw/files/item/149595.jpg?v=1748956270",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0323.",
+              "retrievedAt": "2026-08-28"
+            },
+            {
+              "url": "https://a.rimg.com.tw/s6/76c/3b0/akb5566/9/18/22223353127192_302.jpeg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Complete retained image for Traditional Chinese Snorlax S10a F 077/071 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0324.",
+              "retrievedAt": "2026-08-28"
+            },
+            {
               "url": "https://www.nacg.tw/product-details.php?id=149595",
               "sourceType": "Specialist card listing with exact retained image",
               "authorityTier": "specialist-reference",
@@ -31820,6 +31868,11 @@
               "evidence": "Independent seller photograph of exact Traditional Chinese S10a F 077/071 CHR."
             }
           ],
+          "specimenIds": [
+            "SPEC-0323",
+            "SPEC-0324"
+          ],
+          "image": "verification/specimens/SPEC-0323.jpg",
           "printingId": "F0331-P01"
         }
       ],
@@ -32919,7 +32972,7 @@
       "finishUnitId": "F0349",
       "cardName": "Snorlax VMAX",
       "setCode": "s1H",
-      "releaseSetCode": null,
+      "releaseSetCode": "s1H",
       "setName": "Shield",
       "number": "70",
       "language": "Korean",
@@ -32938,23 +32991,47 @@
           "image": "images/s1H_70_Snorlax_VMAX_V2_467629.png"
         }
       ],
-      "availableFinishes": [],
+      "availableFinishes": [
+        "holo"
+      ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "pending",
-      "completenessStatus": "pending",
-      "productMappingStatus": "pending",
+      "availabilityStatus": "confirmed",
+      "completenessStatus": "positive-evidence-only",
+      "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
-      "printings": [],
-      "unresolved": [
-        "No positive finish evidence has been recorded for this set-number-language unit.",
-        "One or more Cardmarket product variants are not mapped to a logical printing: V2"
-      ]
+      "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/430796194_1_1789200596.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Korean Hangul Snorlax VMAX card face, HP340, printed s1H D 070/060 HR and Illus. aky CG Works. Rainbow reflective foil and fine surface texture are visibly demonstrated across the physical card. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0553.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0553"
+          ],
+          "image": "verification/specimens/SPEC-0553.png",
+          "printingId": "F0349-P01"
+        }
+      ],
+      "unresolved": []
     },
     {
       "finishUnitId": "F0350",
@@ -33560,7 +33637,7 @@
       "finishUnitId": "F0357",
       "cardName": "Snorlax",
       "setCode": "s4",
-      "releaseSetCode": null,
+      "releaseSetCode": "CS2aC",
       "setName": "Shocking Volt Tackle",
       "number": "84",
       "language": "S-Chinese",
@@ -33580,63 +33657,93 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "non-holo": "pending",
+        "holo": "confirmed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "pending",
+      "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "non-holo",
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://media.pokipair.com/2024/09/06022957/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-157.png",
+              "sourceType": "Retail listing",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. The collection owner identifies this first image as the Holo printing and states that 086 has exactly Holo and Reverse Holo finishes. Retained as SPEC-0473.",
+              "retrievedAt": "2026-09-02",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-02",
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
             }
           ],
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
+          "specimenIds": [
+            "SPEC-0473"
+          ],
+          "image": "verification/specimens/SPEC-0473.png",
           "printingId": "F0357-P01"
         },
         {
           "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "star",
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shocking-Volt-Tackle/Snorlax-s484",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+              "url": "https://media.pokipair.com/2024/09/06023031/CS2A-Vivid-Portrayals-Simplified-Chinese-Pokemon-158.png",
+              "sourceType": "Retail listing",
+              "evidence": "Complete PokiPair set-list image of Simplified Chinese Snorlax CS2aC 086/115 R. The Simplified Chinese text, printed CS2aC set code and collector number establish the exact localized card. Repeating large stars are visible across the reflective card body; the collection owner identifies this second image as Reverse Holo with a star pattern. Retained as SPEC-0474.",
+              "retrievedAt": "2026-09-02",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-09-02",
+              "evidence": "The collection owner's explicit 2026-09-02 confirmation establishes the specimen's finish; the retained retail listing supports card identity and any independently visible properties."
             }
           ],
+          "specimenIds": [
+            "SPEC-0474"
+          ],
+          "image": "verification/specimens/SPEC-0474.png",
           "printingId": "F0357-P02"
         }
       ],
-      "unresolved": [
-        "The exact reverse- or mirror-holo pattern is not identified for every known printing of those types."
-      ]
+      "unresolved": []
     },
     {
       "finishUnitId": "F0358",
@@ -33729,7 +33836,7 @@
       "finishUnitId": "F0359",
       "cardName": "Snorlax",
       "setCode": "s5a",
-      "releaseSetCode": null,
+      "releaseSetCode": "s5a",
       "setName": "Matchless Fighters",
       "number": "93",
       "language": "Korean",
@@ -33749,20 +33856,45 @@
         }
       ],
       "availableFinishes": [
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "pending",
       "printings": [
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://media.bunjang.co.kr/product/430221399_1_1788929272.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Korean Hangul card face, Snorlax HP130, printed s5a D 093/070 UR and Illus. Saki Hayashiro. Gold reflective foil and fine surface texture are visible across the physical card, including border and illustration. Local Tesseract OCR was unavailable; printed text was read visually. No exact foil-pattern taxonomy or finish inventory completeness is asserted. Server returned WebP bytes despite the .jpg URL; a lossless PNG decoding is filed for importer compatibility, with the original WebP retained in the research bundle. Retained as SPEC-0552.",
+              "retrievedAt": "2026-09-21"
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0552"
+          ],
+          "image": "verification/specimens/SPEC-0552.png",
+          "printingId": "F0359-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -33780,7 +33912,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0359-P01"
+          "printingId": "F0359-P02"
         }
       ],
       "unresolved": [

@@ -327,6 +327,13 @@
       "authorityTier": 3,
       "licenseOrTerms": "Publisher's own terms; exact dated article text retained for date verification only.",
       "rawRetention": "Retain the exact source-native date excerpt, acquisition URL, retrieval date, the retained file's SHA-256 and the as-fetched SHA-256. Only individually reviewed date fields are covered; no acquisition adapter is asserted."
+    },
+    {
+      "providerId": "pikaqian",
+      "operator": "PikaQian",
+      "authorityTier": 3,
+      "licenseOrTerms": "Site terms; retained images used for identification only.",
+      "rawRetention": "Retain exact original image, source page URL, actual retrieval date, SHA-256 and inspection limits. Digital images do not establish physical finish."
     }
   ],
   "surfaces": [
@@ -3621,6 +3628,52 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "No printed rarity symbol is an inspected native value; separate exact constructed-product membership is necessary for Fixed normalization."
+          }
+        },
+        {
+          "edgeId": "seller-cn-retained-photo-20261031",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "marketplace-specimen"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Exact retained Simplified Chinese seller photographs only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "image",
+            "finish",
+            "specimen-existence"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The retained physical photo proves only this identified card and visible treatment; stock depictions, other variants and missing listings establish no physical finish or absence."
+          },
+          "knownPositiveObservationId": "obs-seller-cn-retained-photo-20261031",
+          "outOfScopeChallengeObservationId": "obs-seller-cn-retained-photo-20261031-boundary",
+          "boundary": {
+            "outsideScope": [
+              "stock images as physical-finish evidence",
+              "other variants",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The retained physical photo proves only this identified card and visible treatment; stock depictions, other variants and missing listings establish no physical finish or absence."
           }
         }
       ]
@@ -9417,6 +9470,217 @@
             ],
             "zeroResultMeans": "unknown",
             "challenge": "A pokumon.com card image establishes only the pictured card's identity; finish, other cards, complete sets and missing images remain unknown."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "pikaqian-reference-images",
+      "providerId": "pikaqian",
+      "label": "PikaQian retained identity images",
+      "match": {
+        "urlPrefixes": [
+          "https://images.pikaqian.com/",
+          "https://pikaqian.com/cards/"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-31",
+      "freshnessPolicy": "Retain exact bytes and provenance as SPEC; re-review changed images.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "Exact retained card image and its identified source page",
+        "parameters": [],
+        "pagination": "Not applicable to one retained image",
+        "expectedIdentifiers": [
+          "printed language",
+          "printed set code",
+          "full collector number"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "Identity reference depictions only",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "pikaqian-reference-images-cn-identity",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Exact retained images only; no historical enumeration"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "language",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+          },
+          "knownPositiveObservationId": "obs-pikaqian-reference-images-cn-identity",
+          "outOfScopeChallengeObservationId": "obs-pikaqian-reference-images-cn-identity-boundary",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "unpictured cards",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+          }
+        }
+      ]
+    },
+    {
+      "surfaceId": "retailer-reference-images",
+      "providerId": "retailer-listing",
+      "label": "PAO and Excalibur retained identity images",
+      "match": {
+        "urlPrefixes": [
+          "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/",
+          "https://pao-onlineshop.com/view/item/000000112928",
+          "https://excaliburtcg.co.uk/cdn/shop/files/",
+          "https://excaliburtcg.co.uk/products/csv10c-175-foil-v1"
+        ],
+        "nonUrlEvidenceIds": []
+      },
+      "state": "active",
+      "failureState": null,
+      "accessMode": "manual",
+      "adapterState": "not-applicable",
+      "lastCheckedAt": "2026-10-31",
+      "freshnessPolicy": "Retain exact bytes and provenance as SPEC; re-review changed images.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": "Exact retained card image and its identified source page",
+        "parameters": [],
+        "pagination": "Not applicable to one retained image",
+        "expectedIdentifiers": [
+          "printed language",
+          "printed set code",
+          "full collector number"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "Identity reference depictions only",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "retailer-reference-images-jp-identity",
+          "coverage": {
+            "localities": [
+              "JP"
+            ],
+            "languages": [
+              "Japanese"
+            ],
+            "scripts": [
+              "Jpan"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Exact retained images only; no historical enumeration"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "language",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+          },
+          "knownPositiveObservationId": "obs-retailer-reference-images-jp-identity",
+          "outOfScopeChallengeObservationId": "obs-retailer-reference-images-jp-identity-boundary",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "unpictured cards",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+          }
+        },
+        {
+          "edgeId": "retailer-reference-images-cn-identity",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Exact retained images only; no historical enumeration"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "identity",
+            "language",
+            "image"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+          },
+          "knownPositiveObservationId": "obs-retailer-reference-images-cn-identity",
+          "outOfScopeChallengeObservationId": "obs-retailer-reference-images-cn-identity-boundary",
+          "boundary": {
+            "outsideScope": [
+              "physical finish",
+              "unpictured cards",
+              "absence or completeness"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
           }
         }
       ]
@@ -16845,6 +17109,184 @@
         "pokumon-card-images-exs-snorlax-positive"
       ],
       "outcome": "A pokumon.com card image establishes only the pictured card's identity; finish, other cards, complete sets and missing images remain unknown."
+    },
+    {
+      "observationId": "obs-pikaqian-reference-images-cn-identity",
+      "surfaceId": "pikaqian-reference-images",
+      "queryUrl": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pikaqian",
+        "recordKey": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp"
+      },
+      "validatesEdges": [
+        "pikaqian-reference-images-cn-identity"
+      ],
+      "kind": "known-positive",
+      "queryParameters": {
+        "specimen": "SPEC-0664"
+      },
+      "expectedIdentifiers": [
+        "CN CS1aC 110/135"
+      ],
+      "outcome": "Simplified Chinese face, CS1aC F 110/135 U, Yuu Nishida; large stars depicted on card body."
+    },
+    {
+      "observationId": "obs-pikaqian-reference-images-cn-identity-boundary",
+      "surfaceId": "pikaqian-reference-images",
+      "queryUrl": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "pikaqian",
+        "recordKey": "https://images.pikaqian.com/cs1ac/47f5e484-2acb-4492-a941-3cc9c5a5643d.webp"
+      },
+      "validatesEdges": [
+        "pikaqian-reference-images-cn-identity"
+      ],
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "physical finish and other-card transfer"
+      },
+      "expectedIdentifiers": [
+        "CN CS1aC 110/135"
+      ],
+      "outcome": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+    },
+    {
+      "observationId": "obs-retailer-reference-images-jp-identity",
+      "surfaceId": "retailer-reference-images",
+      "queryUrl": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "retailer-listing",
+        "recordKey": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg"
+      },
+      "validatesEdges": [
+        "retailer-reference-images-jp-identity"
+      ],
+      "kind": "known-positive",
+      "queryParameters": {
+        "specimen": "SPEC-0663"
+      },
+      "expectedIdentifiers": [
+        "JP mC 568/742"
+      ],
+      "outcome": "Japanese card face, mC H 568/742, HP160, Po-Suzuki visible."
+    },
+    {
+      "observationId": "obs-retailer-reference-images-jp-identity-boundary",
+      "surfaceId": "retailer-reference-images",
+      "queryUrl": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "retailer-listing",
+        "recordKey": "https://makeshop-multi-images.akamaized.net/PAOonline/itemimages/000000112928_zCmVQsw.jpg"
+      },
+      "validatesEdges": [
+        "retailer-reference-images-jp-identity"
+      ],
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "physical finish and other-card transfer"
+      },
+      "expectedIdentifiers": [
+        "JP mC 568/742"
+      ],
+      "outcome": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+    },
+    {
+      "observationId": "obs-retailer-reference-images-cn-identity",
+      "surfaceId": "retailer-reference-images",
+      "queryUrl": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "retailer-listing",
+        "recordKey": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946"
+      },
+      "validatesEdges": [
+        "retailer-reference-images-cn-identity"
+      ],
+      "kind": "known-positive",
+      "queryParameters": {
+        "specimen": "SPEC-0666"
+      },
+      "expectedIdentifiers": [
+        "CN CSV10C 175/222"
+      ],
+      "outcome": "Simplified Chinese Hop's Snorlax, CSV10C 175/222 R, GOSSAN; large ball design depicted."
+    },
+    {
+      "observationId": "obs-retailer-reference-images-cn-identity-boundary",
+      "surfaceId": "retailer-reference-images",
+      "queryUrl": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "retailer-listing",
+        "recordKey": "https://excaliburtcg.co.uk/cdn/shop/files/477_d86beabd-4f46-426e-967f-5d43992f9ec7.png?v=1784806168&width=1946"
+      },
+      "validatesEdges": [
+        "retailer-reference-images-cn-identity"
+      ],
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "physical finish and other-card transfer"
+      },
+      "expectedIdentifiers": [
+        "CN CSV10C 175/222"
+      ],
+      "outcome": "An identity depiction establishes only its printed card identity, never physical finish, inventory completeness, unpictured variants or absence."
+    },
+    {
+      "observationId": "obs-seller-cn-retained-photo-20261031",
+      "surfaceId": "seller-listing-photos",
+      "queryUrl": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "seller-listing-photo",
+        "recordKey": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp"
+      },
+      "validatesEdges": [
+        "seller-cn-retained-photo-20261031"
+      ],
+      "kind": "known-positive",
+      "queryParameters": {
+        "specimen": "SPEC-0669"
+      },
+      "expectedIdentifiers": [
+        "CS5aC 093/127",
+        "Simplified Chinese",
+        "vertical foil on physical card"
+      ],
+      "outcome": "SPEC-0669 retains a physical card on fabric with readable CS5aC 093/127 R and parallel vertical foil across artwork and border."
+    },
+    {
+      "observationId": "obs-seller-cn-retained-photo-20261031-boundary",
+      "surfaceId": "seller-listing-photos",
+      "queryUrl": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
+      "retrievedAt": "2026-10-31",
+      "fixtureRef": {
+        "kind": "source-registry-evidence",
+        "providerId": "seller-listing-photo",
+        "recordKey": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp"
+      },
+      "validatesEdges": [
+        "seller-cn-retained-photo-20261031"
+      ],
+      "kind": "out-of-scope-challenge",
+      "queryParameters": {
+        "challenge": "stock depictions and other-printing transfer"
+      },
+      "expectedIdentifiers": [
+        "CS5aC 093/127"
+      ],
+      "outcome": "The retained physical photo proves only this identified card and visible treatment; stock depictions, other variants and missing listings establish no physical finish or absence."
     }
   ]
 }

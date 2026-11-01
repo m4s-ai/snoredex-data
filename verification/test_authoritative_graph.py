@@ -733,6 +733,62 @@ def verify_research_correction() -> None:
                    for row in graph["entities"] if row["entityType"] == "release-event")
 
 
+def verify_shared_finish_printings(graph):
+    projected = project_physical_evidence(deepcopy(graph))
+    assert not validate(projected)
+    assert project_physical_evidence(deepcopy(projected)) == projected
+    finishes = graph_module._read_json(graph_module.FINISH_UNITS)
+    finishes["units"].reverse()
+    for unit in finishes["units"]:
+        unit["printings"].reverse()
+    original_read = graph_module._read_json
+    with patch.object(graph_module, "_read_json", side_effect=lambda path:
+                      finishes if path == graph_module.FINISH_UNITS else original_read(path)):
+        assert project_physical_evidence(deepcopy(projected)) == projected
+    physicals = {row["entityId"]: row["payload"] for row in projected["entities"]
+                 if row["entityType"] == "physical-printing"}
+    shared = [row for row in physicals.values() if row.get("sourcePrintingIds")]
+    assert len(shared) >= 2
+    from collector_catalogue import physical_printing_indexes
+    from specimen_links import release_reference_ids
+    index, _ = physical_printing_indexes(physicals)
+    for row in shared:
+        assert row["sourcePrintingId"] in row["sourcePrintingIds"]
+        assert all(index[source_id] is row for source_id in row["sourcePrintingIds"])
+        assert set(row["sourcePrintingIds"]) <= release_reference_ids({}, [row], {})
+    tampered = deepcopy(projected)
+    next(row["payload"] for row in tampered["entities"]
+         if row["entityType"] == "physical-printing"
+         and row["payload"].get("sourcePrintingIds"))["sourcePrintingIds"].append("F-MISSING")
+    assert any("finish printing alias is stale" in error for error in validate(tampered))
+
+
+def verify_standalone_promotion(graph):
+    fixture = json.loads((ROOT / "verification/evidence/open-issue-picture-research-20261031/standalone-promotion-regression.json").read_text(encoding="utf-8"))
+    previous = {row["entityId"]: row for row in fixture["physicalEntities"]}
+    before = deepcopy(graph)
+    before["entities"] = [deepcopy(previous.get(row["entityId"], row)) for row in before["entities"]]
+    promoted = project_physical_evidence(deepcopy(before))
+    assert not validate(promoted)
+    assert project_physical_evidence(deepcopy(promoted)) == promoted
+    physicals = {row["entityId"]: row["payload"] for row in promoted["entities"]
+                 if row["entityType"] == "physical-printing"}
+    for physical_id in previous:
+        assert physicals[physical_id]["sourceFinishUnitId"]
+        assert physicals[physical_id]["finish"] == "holo"
+        assert physicals[physical_id]["cardSize"] == "standard"
+    physical_rows = [row for row in before["entities"] if row["entityType"] == "physical-printing"]
+    before["entities"] = [row for row in before["entities"] if row["entityType"] != "physical-printing"] + physical_rows[::-1]
+    assert project_physical_evidence(deepcopy(before)) == promoted
+    wrong = deepcopy(before)
+    for row in wrong["entities"]:
+        if row["entityId"] in previous:
+            row["payload"]["finish"] = "reverse-holo"
+    mismatched = project_physical_evidence(wrong)
+    assert not ({row["entityId"] for row in mismatched["entities"]} & previous.keys()), \
+        "an unrelated finish must not inherit a standalone printing ID"
+
+
 def main() -> None:
     verify_research_correction()
     verify_standalone_printing_identity()
@@ -751,6 +807,8 @@ def main() -> None:
     assert not graph_module._specimen_has_cited_legacy_identity({**specimen, "citedBy": ["neighbour"]}, merged, units_by_id)
     assert graph_module._specimen_has_cited_legacy_identity({**specimen, "setCode": "xs5a", "citedBy": ["neighbour"]}, merged, units_by_id)
     graph = json.loads((ROOT / "verification/authoritative_graph.json").read_text(encoding="utf-8"))
+    verify_standalone_promotion(graph)
+    verify_shared_finish_printings(graph)
     assert not validate(graph)
     assert not validate(issue263_rebuilt_graph())
     import admit_issue263_s5af_20260909 as s5af_pass
