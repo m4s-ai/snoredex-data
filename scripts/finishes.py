@@ -795,6 +795,14 @@ def resolve_override_sources(
     return resolved
 
 
+def foil_pattern_status(printings: list[dict[str, Any]]) -> str:
+    """Report optional named treatments, without requiring a name for ordinary foil."""
+    return "confirmed" if any(
+        printing["finish"] in {"reverse-holo", "mirror-holo"} and printing.get("foilPattern")
+        for printing in printings
+    ) else "not-applicable"
+
+
 def strongest_status(printings: list[dict[str, Any]], finish: str | None = None) -> str:
     statuses = [item["verificationStatus"] for item in printings if finish is None or item["finish"] == finish]
     return max(statuses, key=lambda status: STATUS_RANK[status]) if statuses else "pending"
@@ -1561,18 +1569,7 @@ def _build_finish_unit(
 
     def _build_finish_unit_part10():
         nonlocal pattern_status, printing, unresolved
-        pattern_target_printings = [
-            printing for printing in printings if printing["finish"] in {"reverse-holo", "mirror-holo"}
-        ]
-        patterned = [printing for printing in pattern_target_printings if printing.get("foilPattern")]
-        if not pattern_target_printings:
-            pattern_status = "not-applicable"
-        elif len(patterned) == len(pattern_target_printings):
-            pattern_status = "confirmed"
-        elif patterned:
-            pattern_status = "partial"
-        else:
-            pattern_status = "pending"
+        pattern_status = foil_pattern_status(printings)
         unresolved = []
         if not all_claims_contradicted and not known_printings:
             unresolved.append("No positive finish evidence has been recorded for this set-number-language unit.")
@@ -1598,8 +1595,6 @@ def _build_finish_unit(
                 "One or more Cardmarket product variants are not mapped to a logical printing: "
                 + ", ".join(sorted(required_variants - mapped_variants))
             )
-        if pattern_status in {"partial", "pending"}:
-            unresolved.append("The exact reverse- or mirror-holo pattern is not identified for every known printing of those types.")
         # A contradicted language-product claim is already resolved and cannot create a finish TODO.
         if all_claims_contradicted:
             completeness_status = "not-applicable"
@@ -1863,7 +1858,7 @@ def _build_finish_documents(
     )
     review_document = {
         "meta": {
-            "description": "Finish units that still need finish, pattern, marking, size, or Cardmarket-product mapping evidence.",
+            "description": "Finish units that still need finish, marking, size, or Cardmarket-product mapping evidence. Special foil-pattern names are optional.",
             "generated": generated_date,
             "count": len(review_rows),
             "pendingByLanguage": dict(sorted(pending_by_language.items(),
@@ -1874,7 +1869,7 @@ def _build_finish_documents(
 
     combination_counts = Counter(" + ".join(unit["availableFinishes"]) or "pending" for unit in finish_units)
     pattern_counts = Counter(
-        printing["foilPattern"] or "unidentified"
+        printing["foilPattern"] or "none-recorded"
         for unit in finish_units
         for printing in unit["printings"]
         if printing["finish"] in {"holo", "reverse-holo", "mirror-holo"}

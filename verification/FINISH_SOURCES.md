@@ -391,6 +391,21 @@ A stamp and a finish are separate fields.
 - Later prerelease, Staff, Play!, retailer, Pokémon Center, and championship marks use
   `markings.role=distribution-promo`. They do not imply reverse holo; finish needs its own source.
 
+## Optional foil-pattern names
+
+`finish` is sufficient to describe ordinary Holo, Reverse Holo or Mirror Holo.
+`foilPattern` is an optional positive description of a distinctive treatment, not a
+mandatory completion field. A null value neither asserts an unidentified special
+pattern nor proves a plain surface. Do not invent a named treatment or an additional
+physical variant merely to fill that field (owner clarification, 2026-11-02, #441).
+
+`patternStatus` reports `confirmed` when a reverse/mirror named treatment is recorded,
+otherwise `not-applicable`. A mixture of named and unnamed finishes is valid and does
+not create a pattern-review task. Finish evidence, unknown technical finishes, source
+coverage and product mappings retain their independent statuses. Marketplace-only
+finish claims remain candidates; they do not establish extra physical printings.
+The analysis counter calls unnamed treatments `none-recorded`, not `unidentified`.
+
 ## Repeatable workflow
 
 The examples assume the repository root. Scripts resolve data paths from their own locations;
