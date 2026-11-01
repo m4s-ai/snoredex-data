@@ -140,8 +140,11 @@
         "confirmed": 45,
         "contradicted": 24
       },
+      "sibling-derived": {
+        "confirmed": 1
+      },
       "specimen-or-card": {
-        "confirmed": 579,
+        "confirmed": 578,
         "contradicted": 43
       }
     },
@@ -161,17 +164,37 @@
     "unsoundByRarity": {
       "Promo": 1
     },
-    "verdictsBeyondTheirGranularity": 1,
+    "verdictsBeyondTheirGranularity": 2,
     "verdictsBeyondTheirGranularityByRule": {
+      "granularity-cannot-support-a-confirmation": 1,
       "step-from-product-to-card": 1
     },
     "applicationStatuses": {
-      "exists": 623,
+      "exists": 622,
       "not-printed": 95,
-      "needs-evidence": 1
+      "needs-evidence": 2
     }
   },
   "verdictsBeyondTheirGranularity": [
+    {
+      "unitId": "U0469",
+      "setCode": "CL",
+      "number": "33",
+      "variant": "V2",
+      "language": "French",
+      "status": "confirmed",
+      "providerId": "tcgdex",
+      "granularity": "sibling-derived",
+      "rarity": "Promo",
+      "insideNumberedRun": false,
+      "runMembershipBasis": "distribution-rarity",
+      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
+      "sourceCarriesCardList": false,
+      "inference": null,
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "granularity-cannot-support-a-confirmation",
+      "applicationStatus": "needs-evidence"
+    },
     {
       "unitId": "U0471",
       "setCode": "CL",
@@ -9134,16 +9157,16 @@
       "language": "French",
       "status": "confirmed",
       "providerId": "tcgdex",
-      "granularity": "specimen-or-card",
+      "granularity": "sibling-derived",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
       "inference": null,
-      "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictWithinGranularity": false,
+      "verdictTransitionRule": "granularity-cannot-support-a-confirmation",
+      "applicationStatus": "needs-evidence"
     },
     {
       "unitId": "U0470",

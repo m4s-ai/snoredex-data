@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-11-01** · SQLite schema: **1.7.0** · source fingerprint:
-`a79e8015ca81fef3…`
+`c3c5fe70e3819f36…`
 
 ## Outcome
 
@@ -19,8 +19,8 @@ not a universal all-locality completeness claim and contains no append-only evid
 | Legacy Cardmarket products | 198 (191 collectible, 7 code cards) |
 | Legacy raw product-language claims | 794 (75 code-card claims out of scope) |
 | Repository language verdicts | 624 confirmed · 95 contradicted |
-| App language statuses | 623 exists · 1 needs-evidence · 95 not-printed · 0 disputed (95 owner-adjudicated) |
-| Established product-edition rows | 647 (95 absent-language and 1 unverified-language projections suppressed) |
+| App language statuses | 622 exists · 2 needs-evidence · 95 not-printed · 0 disputed (95 owner-adjudicated) |
+| Established product-edition rows | 646 (95 absent-language and 2 unverified-language projections suppressed) |
 | Finish units / logical printings | 637 / 910 |
 | Current-known physical checklist | 908 (908 documented · 0 unresolved placeholders) |
 | Collector compatibility projection | 812 current-known · 96 finish candidates · 0 research placeholders (96 research rows) |
@@ -33,8 +33,8 @@ not a universal all-locality completeness claim and contains no append-only evid
 ## The challenged data points
 
 The database preserves all **624** raw
-`repository_verdict='confirmed'` rows. Only **623** have evidence whose
-granularity may establish the exact card. The remaining **1** are
+`repository_verdict='confirmed'` rows. Only **622** have evidence whose
+granularity may establish the exact card. The remaining **2** are
 `application_status='needs-evidence'`: their set/product or sibling observation remains queryable,
 but it cannot materialize a card printing or enter the release/checklist projections.
 
@@ -62,7 +62,7 @@ Portuguese `xPRE 076` rows, for example, remain disputed because no owner adjudi
   Spanish, so the application code is `es-ES`; Portuguese remains the source's unqualified `pt`.
 - Edition rows exist only for positively established product languages. The source projection's
   95 rows for explicitly absent languages and
-  1 rows for unverified languages are recorded as quality
+  2 rows for unverified languages are recorded as quality
   issues, not exported as facts.
 - Code cards remain queryable but are `out-of-scope` and never enter the physical checklist.
 - Missing artists, missing date sources, opaque variants and unresolved finishes stay null or
