@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-evidence-semantics",
     "schemaVersion": "1.1.0",
-    "generated": "2026-10-31",
+    "generated": "2026-11-01",
     "issue": "https://github.com/m4s-ai/snoredex-data/issues/137",
     "status": "active application policy. Raw verdicts remain unchanged",
     "description": "Every unit carries a reviewed evidenceGranularity and, when applicable, an evidenceIncludesCardList capability. For set-level confirmations the report also records whether the inference from set to card carries. applicationStatus is the conservative consumer projection. sourceType is descriptive only."
@@ -137,38 +137,38 @@
         "contradicted": 28
       },
       "product-or-set": {
-        "confirmed": 46,
+        "confirmed": 45,
         "contradicted": 24
       },
       "specimen-or-card": {
-        "confirmed": 581,
-        "contradicted": 40
+        "confirmed": 579,
+        "contradicted": 43
       }
     },
-    "setLevelConfirmations": 46,
+    "setLevelConfirmations": 45,
     "setLevelConfirmationsThatCarry": 44,
-    "setLevelConfirmationsThatDoNotCarry": 2,
+    "setLevelConfirmationsThatDoNotCarry": 1,
     "setLevelConfirmationsNeedingSetSize": 0,
-    "setLevelConfirmationsNotReachingTheCard": 2,
+    "setLevelConfirmationsNotReachingTheCard": 1,
     "contradictionsByBacking": {
-      "owner-adjudicated": 92
+      "owner-adjudicated": 95
     },
     "setLevelConfirmationsByRunBasis": {
       "printed-set-size": 43,
       "rarity-table": 1,
-      "distribution-rarity": 2
+      "distribution-rarity": 1
     },
     "unsoundByRarity": {
-      "Promo": 2
+      "Promo": 1
     },
-    "verdictsBeyondTheirGranularity": 2,
+    "verdictsBeyondTheirGranularity": 1,
     "verdictsBeyondTheirGranularityByRule": {
-      "step-from-product-to-card": 2
+      "step-from-product-to-card": 1
     },
     "applicationStatuses": {
-      "exists": 625,
-      "not-printed": 92,
-      "needs-evidence": 2
+      "exists": 623,
+      "not-printed": 95,
+      "needs-evidence": 1
     }
   },
   "verdictsBeyondTheirGranularity": [
@@ -190,50 +190,12 @@
       "verdictWithinGranularity": false,
       "verdictTransitionRule": "step-from-product-to-card",
       "applicationStatus": "needs-evidence"
-    },
-    {
-      "unitId": "U0475",
-      "setCode": "RR",
-      "number": "33",
-      "variant": "V2",
-      "language": "Italian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "distribution-rarity",
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
     }
   ],
   "setLevelConfirmationsThatDoNotCarry": [
     {
       "unitId": "U0471",
       "setCode": "CL",
-      "number": "33",
-      "variant": "V2",
-      "language": "Italian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
-      "rarity": "Promo",
-      "insideNumberedRun": false,
-      "runMembershipBasis": "distribution-rarity",
-      "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
-      "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
-    },
-    {
-      "unitId": "U0475",
-      "setCode": "RR",
       "number": "33",
       "variant": "V2",
       "language": "Italian",
@@ -9246,18 +9208,18 @@
       "number": "33",
       "variant": "V2",
       "language": "French",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0474",
@@ -9265,18 +9227,18 @@
       "number": "33",
       "variant": "V2",
       "language": "German",
-      "status": "confirmed",
-      "providerId": "tcgdex",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
       "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": null,
+      "inference": "owner-adjudicated",
       "verdictWithinGranularity": true,
-      "verdictTransitionRule": "card-level-record",
-      "applicationStatus": "exists"
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0475",
@@ -9284,18 +9246,18 @@
       "number": "33",
       "variant": "V2",
       "language": "Italian",
-      "status": "confirmed",
-      "providerId": "bulbapedia",
-      "granularity": "product-or-set",
+      "status": "contradicted",
+      "providerId": "owner-attestation",
+      "granularity": "specimen-or-card",
       "rarity": "Promo",
       "insideNumberedRun": false,
       "runMembershipBasis": "distribution-rarity",
       "runMembershipReason": "a promo is distributed outside the expansion's numbered run",
       "sourceCarriesCardList": false,
-      "inference": "does-not-carry",
-      "verdictWithinGranularity": false,
-      "verdictTransitionRule": "step-from-product-to-card",
-      "applicationStatus": "needs-evidence"
+      "inference": "owner-adjudicated",
+      "verdictWithinGranularity": true,
+      "verdictTransitionRule": "owner-adjudication",
+      "applicationStatus": "not-printed"
     },
     {
       "unitId": "U0476",

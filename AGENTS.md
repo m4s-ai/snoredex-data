@@ -81,7 +81,7 @@ skill and trust mechanisms, not Hermes commands. Without automatic discovery, fo
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
-   A single non-URL source may confirm a unit: **21 units rest on owner attestation alone**; the
+   A single non-URL source may confirm a unit: **24 units rest on owner attestation alone**; the
    current `E6` output reports how many rest on an inspected specimen alone. The owner holds
    those cards and no database records them, so refusing the evidence buys a false "open" count
    rather than better evidence.
