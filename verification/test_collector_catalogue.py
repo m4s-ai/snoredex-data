@@ -437,7 +437,13 @@ def edition_rule_regressions() -> None:
     by_legacy = {legacy: row["itemId"] for row in items for legacy in row["legacyChecklistIds"]}
     assert by_legacy["bw-p-207-japanese-none-holo"] == "item-0106f682-b985-523b-8a3a-53fc115c003d"
     assert collector.CUMULATIVE_CHECKLIST_REKEYS["bw-p-207-japanese-none-holo-unknown"] == "bw-p-207-japanese-none-holo"
-    assert by_legacy["m2a-136-t-chinese-none-unresolved"] == "item-e5b51865-71fe-5301-bcbc-31e60bef7952"
+    # The TW M2a F 136 research slot was resolved by SPEC-0672 (#439); its retired ids route
+    # straight to the holo printing, never through the retired placeholder id.
+    assert by_legacy["m2a-136-t-chinese-none-holo"] == "item-0d1708db-fae8-56d3-9f55-7d303b646b98"
+    for retired in ("m2a-136-t-chinese-none-unresolved-unknown", "m2a-136-t-chinese-none-unresolved"):
+        assert collector.CUMULATIVE_CHECKLIST_REKEYS[retired] == "m2a-136-t-chinese-none-holo"
+    # #439 is closed: every research placeholder became a verified printing.
+    assert not [row["itemId"] for row in items if row["itemKind"] == "research-placeholder"]
 
 
 def product_rarity_regressions() -> None:

@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-10-31",
+    "generated": "2026-11-01",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 125,
       "absenceEdges": 0,
       "observations": 180,
-      "resolvedVerdictSources": 1832
+      "resolvedVerdictSources": 1836
     },
     "surfaceStates": {
       "active": 57,
@@ -11581,7 +11581,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:878441690f2d10d5c93cc1b762baf63b26a886135f2899809565966d2592091b",
+      "rawRecordHash": "sha256:f75bd12c7435cb864e1c842c630303004e82ea673fb84772834261a8178328c2",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -11763,7 +11763,7 @@
           "F0625-P01",
           "F0625-P02",
           "F0626-P01",
-          "F0628-P02",
+          "F0628-P01",
           "F0629-P01",
           "ID:AC3a:145/205:base",
           "ID:AS1b:112/150:base",
@@ -12079,7 +12079,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:29c912b292376fdc338c2ed1f078295152a29f91d7a3fc30b1ac7104e1a6c573",
+      "rawRecordHash": "sha256:a30620f59c98c03e9ba6721afe308ea386afd8f523e45e8ded32f86b5ec4a205",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -12155,7 +12155,7 @@
           "F0619-P01",
           "F0625-P01",
           "F0625-P02",
-          "F0628-P02",
+          "F0628-P01",
           "G2  base",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
@@ -26519,6 +26519,19 @@
       ]
     },
     {
+      "sourceKey": "https://www.elitefourum.com/t/can-anyone-help-finding-2-snorlax-cards/51087",
+      "providerId": "elitefourum",
+      "surfaceId": "elitefourum-topics",
+      "capabilityEdgeIds": [
+        "elitefourum-positive-research",
+        "elitefourum-black-star-language-table"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "language"
+      ]
+    },
+    {
       "sourceKey": "https://www.elitefourum.com/t/collectors-guide-to-eevee-cards-in-all-languages/62616",
       "providerId": "elitefourum",
       "surfaceId": "elitefourum-topics",
@@ -26923,6 +26936,20 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://efour.b-cdn.net/uploads/default/original/3X/7/8/78e41b825c9aea0f86c188d6316d6747900091f3.png",
+      "providerId": "inspected-specimen",
+      "surfaceId": "inspected-specimens",
+      "capabilityEdgeIds": [
+        "inspected-specimen-positive",
+        "obs-cn-inspected-native-rarity-20261007-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -36609,6 +36636,21 @@
       ]
     },
     {
+      "sourceKey": "https://down-tw.img.susercontent.com/file/tw-11134207-820lc-mud7dtgw6eps6e.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://federicstore.it/wp-content/uploads/2020/06/50-68-destinosfuggente.png",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -37830,6 +37872,21 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/p8EAAeSw9bRq4cwz/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
