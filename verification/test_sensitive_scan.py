@@ -21,6 +21,7 @@ AT = "@"
 MAIL = "someone" + AT + "example.org"
 HOME = "/" + "home/someone/"
 TOKEN = "Bear" + "er abcdefghijk"
+ENDPOINT = b"10." + b"77.0.12:3002"
 
 
 def git(root: Path, *args: str) -> str:
@@ -95,6 +96,24 @@ def verify_tree(root: Path) -> None:
     assert f"clean.txt: {HOME}" in hits, "a dirty tracked file is read from the working tree"
 
 
+def verify_endpoint_findings() -> None:
+    """A private network endpoint in a tracked file is a P4 finding, address and port included."""
+    assert scan.blob_findings(b"route: firecrawl http://" + ENDPOINT + b" via a host") == [ENDPOINT.decode()]
+    assert scan.blob_findings(b"asset revision 10.508.02.148") == [], \
+        "a three-digit segment is a version string, not an address"
+    assert scan.blob_findings(b"serving on 127.0.0.1") == [], \
+        "loopback names no real host, and every test server uses it"
+    assert scan.blob_findings(b"version 1.2.3 on port 8080") == []
+
+
+def verify_unportable_paths() -> None:
+    """X6: every tracked path must be checkoutable on Windows (#465 shipped `s?-mirror…`)."""
+    import review_findings
+    paths = [b"raw/s?-mirror.jpg", b"a/b:c.txt", b"docs/con.txt", b"dir./x", b"ok/name.jpg", b""]
+    assert review_findings.unportable_paths(paths) == [
+        "raw/s?-mirror.jpg", "a/b:c.txt", "docs/con.txt", "dir./x"], review_findings.unportable_paths(paths)
+
+
 def verify_reviewed_history(root: Path) -> None:
     """#467: only the owner-accepted finding in the exact pinned blob is accepted."""
     profile = "C:" + "\\" + "Users" + "\\"
@@ -126,6 +145,8 @@ def verify_shallow(source: Path, target: Path) -> None:
 
 def main() -> int:
     verify_findings()
+    verify_endpoint_findings()
+    verify_unportable_paths()
     with tempfile.TemporaryDirectory() as folder:
         root = Path(folder) / "repo"
         root.mkdir()
@@ -135,7 +156,7 @@ def main() -> int:
         verify_reviewed_history(root)
         verify_shallow(root, Path(folder) / "shallow")
     print("sensitive scan passed: findings, memo reuse, corrupt/disabled memo, size and path limits, "
-          "dirty tree files, shallow clone, owner-accepted history blobs")
+          "dirty tree files, shallow clone, private endpoints, Windows paths, owner-accepted history blobs")
     return 0
 
 

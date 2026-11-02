@@ -154,6 +154,19 @@ NON_EMAIL_PATTERN = re.compile(
 EMAIL_PATTERN = re.compile(
     r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", re.IGNORECASE
 )
+
+# Private network endpoints are infrastructure detail, not documentation: a tracked file that names
+# one tells every reader where the author's lab lives. P4 matched neither addresses nor ports, so a
+# retained evidence README could publish the retrieval setup and still pass the gate.
+_OCTET = r"(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)"
+PRIVATE_ENDPOINT_PATTERN = re.compile(
+    r"(?<![\d.])"
+    r"(?:10(?:\.%s){3}"
+    r"|192\.168(?:\.%s){2}"
+    r"|172\.(?:1[6-9]|2\d|3[01])(?:\.%s){2})" % (_OCTET, _OCTET, _OCTET)
+    + r"(?::\d{2,5})?"
+)
+
 EMAIL_LOCAL_CHARS = frozenset(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._%+-"
 )
@@ -161,6 +174,7 @@ NON_EMAIL_MARKERS = (
     b"api_key", b"api-key", b"apikey", b"passwd", b"password", b"bearer",
     b"authorization:", b"cookie:", b"c:\\users\\", b"/users/", b"/home/",
 )
+PRIVATE_ENDPOINT_MARKERS = (b"10.", b"192.168", b"172.")
 
 MEMO_LIMIT = 5_000_000  # larger blobs are not scanned, as before
 SCANNER_FINGERPRINT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -212,10 +226,13 @@ def _candidate_matches(data: bytes) -> tuple[str, list[re.Match]]:
         return "", []
     has_email_candidate = b"@" in data
     has_other_candidate = any(marker in data.lower() for marker in NON_EMAIL_MARKERS)
-    if not has_email_candidate and not has_other_candidate:
+    has_endpoint_candidate = any(marker in data for marker in PRIVATE_ENDPOINT_MARKERS)
+    if not has_email_candidate and not has_other_candidate and not has_endpoint_candidate:
         return "", []
     text = data.decode("utf-8", errors="ignore")
     matches = list(NON_EMAIL_PATTERN.finditer(text)) if has_other_candidate else []
+    if has_endpoint_candidate:
+        matches.extend(PRIVATE_ENDPOINT_PATTERN.finditer(text))
     if has_email_candidate:
         matches.extend(_email_matches(text))
     return text, matches
