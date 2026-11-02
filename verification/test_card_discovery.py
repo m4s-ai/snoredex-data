@@ -1456,5 +1456,93 @@ class CardDiscoveryTests(unittest.TestCase):
         self.assertNotIn("absent", projection["slices"][0]["terminalMeaning"])
 
 
+class OfficialSourceIntegrationTests(unittest.TestCase):
+    bundle = ROOT / "verification" / "evidence" / "issue-444-official-source-integration-20261102"
+
+    def test_retained_capture_hashes_and_uninspected_miniapp_boundary(self) -> None:
+        import hashlib
+
+        captures = json.loads((self.bundle / "sources.json").read_text(encoding="utf-8"))["captures"]
+        for capture in captures:
+            self.assertEqual(hashlib.sha256((self.bundle / capture["file"]).read_bytes()).hexdigest(),
+                             capture["sha256"])
+        capabilities = discovery.read_json(ROOT / "verification" / "source_capabilities.json")
+        miniapp = next(s for s in capabilities["surfaces"]
+                       if s["surfaceId"] == "pokemon-cn-member-miniapp")
+        self.assertEqual(miniapp["coverageEdges"], [])
+        self.assertNotEqual(miniapp["adapterState"], "active")
+
+    def test_japan_all_pages_and_positive_rarity_boundary(self) -> None:
+        pages = []
+        for page in (1, 2):
+            raw = (self.bundle / "raw" / f"jp-api-all-page{page}.json").read_bytes()
+            discovery.validate_japan_query(raw, "カビゴン", page)
+            pages.append({"pageNo": page, **discovery.parse_list(raw, "pokemon-japan-html")})
+        self.assertTrue(discovery.pagination_complete(pages))
+        self.assertEqual(sum(len(p["detailIds"]) for p in pages), 58)
+        self.assertFalse(discovery.pagination_complete(pages[:1]))
+        for rarity, count in (("HR", 62), ("UR", 108)):
+            raw = (self.bundle / "raw" / f"jp-all-{rarity}-control.json").read_bytes()
+            self.assertEqual(discovery.parse_list(raw, "pokemon-japan-html")["resultCount"], count)
+            zero = discovery.parse_list((self.bundle / "raw" / f"jp-api-{rarity}.json").read_bytes(),
+                                        "pokemon-japan-html")
+            self.assertEqual(zero["detailIds"], [])
+            self.assertFalse(discovery.pagination_complete([{"pageNo": 1, **zero}]))
+
+    def test_japan_rejects_ignored_filter_wrong_page_and_truncation(self) -> None:
+        raw = (self.bundle / "raw" / "jp-api-default-page1.json").read_bytes()
+        with self.assertRaises(discovery.DiscoveryError):
+            discovery.validate_japan_query(raw, "カビゴン", 1)
+        raw = (self.bundle / "raw" / "jp-api-all-page1.json").read_bytes()
+        with self.assertRaises(discovery.DiscoveryError):
+            discovery.validate_japan_query(raw, "カビゴン", 2)
+        value = json.loads(raw)
+        value["cardList"].pop()
+        with self.assertRaises(discovery.DiscoveryError):
+            discovery.parse_list(json.dumps(value).encode(), "pokemon-japan-html")
+
+    def test_japan_native_detail_identity(self) -> None:
+        raw = (self.bundle / "raw" / "jp-sr-detail-37881.html").read_bytes()
+        row = discovery.parse_detail(raw, "37881", "pokemon-japan-html")
+        self.assertEqual((row["localName"], row["rawSetCode"], row["localCollectorNumber"]),
+                         ("カビゴンV", "S1H", "066/060"))
+        self.assertNotIn("finish", row)
+
+    def test_reviewed_unnumbered_card_keeps_raw_null_without_weakening_other_matches(self) -> None:
+        adapter = {**ADAPTER, "detailEndpointTemplate": "https://example.invalid/{rawProviderId}"}
+        raw = {"detailId": "1082", "localName": "カビゴン", "rawSetCode": "DP1",
+               "localCollectorNumber": None}
+        target = {"cardReleaseId": "JP-DP1-unnumbered", "locality": "JP", "language": "Japanese",
+                  "localSetCode": "DP1", "localNumber": "", "localIdentifierKnown": True,
+                  "sourceRecords": ["https://example.invalid/1082"]}
+        scope = {**SLICE_TW, "locality": "JP", "language": "Japanese"}
+        key = discovery.raw_key(adapter["providerId"], adapter["surfaceId"], scope["rawLocale"], "1082")
+        mapping = {key: {"mode": "exact-match", "targetCardReleaseId": target["cardReleaseId"],
+                         "evidence": "Reviewed exact official source ID for this unnumbered card."}}
+        request = {**REQUEST, "details": [{"rawProviderId": "1082", "responseHash": "sha256:detail"}]}
+        row = discovery.normalize_record(adapter, scope, request, raw, [target], mapping, {})
+        self.assertEqual(row["bucket"], "matched")
+        self.assertIsNone(row["raw"]["localCollectorNumber"])
+        for changed in ({**target, "localNumber": "047"}, {**target, "locality": "WEST"},
+                        {**target, "sourceRecords": []}, {**target, "localIdentifierKnown": False}):
+            row = discovery.normalize_record(adapter, scope, request, raw, [changed], mapping, {})
+            self.assertEqual(row["bucket"], "needs-evidence")
+
+    def test_singapore_missing_fields_cannot_borrow_west_identity(self) -> None:
+        contract = discovery.read_json(discovery.CONTRACT_PATH)
+        adapter = next(a for a in contract["adapters"]
+                       if a["adapterId"] == "pokemon-asia-sea-english-name")
+        raw = (self.bundle / "raw" / "sea-sg-detail-17964.html").read_bytes()
+        row = discovery.parse_detail(raw, "17964")
+        self.assertEqual(row["localName"], "Hop’s Snorlax")
+        self.assertIsNone(row["localCollectorNumber"])
+        request = {**REQUEST, "details": [{"rawProviderId": "17964", "responseHash": "sha256:detail"}]}
+        west = {"cardReleaseId": "WEST-example", "locality": "WEST", "language": "English",
+                "localSetCode": row["rawSetCode"], "localNumber": "117/159"}
+        record = discovery.normalize_record(adapter, adapter["slices"][0], request, row, [west], {}, {})
+        self.assertEqual(record["bucket"], "needs-evidence")
+        self.assertIsNone(record.get("targetCardReleaseId"))
+
+
 if __name__ == "__main__":
     unittest.main()

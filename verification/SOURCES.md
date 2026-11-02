@@ -92,7 +92,7 @@ in `verification/owner_adjudications.json`.
 
 - **Organization:** The Pokémon Company
 - **Terms:** Publisher's own terms.
-- **Coverage:** recent localized card details, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields
+- **Coverage:** recent localized card details including bounded Singapore English discovery, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields
 - **Evidence mode:** positive only
 - **Attribution:** Asian card data © The Pokémon Company.
 - **Notes:** The searchable card database is recent and does not cover all older printings. Individually inspected archived card-list rows positively support only the exact cards they show; the archive is not assumed historically complete and omissions remain unknown. Separately reviewed manual date fields are limited to Taiwan Classic/Ancient Roar, Indonesia Chatime and Singapore Journey Together Hop's Snorlax campaigns; they confer no card-existence, finish or completeness authority. No surface establishes physical finish.
@@ -104,7 +104,7 @@ in `verification/owner_adjudications.json`.
 - **Coverage:** Japanese-market cards and illustrators, plus individually reviewed Japanese campaign and delivery date fields
 - **Evidence mode:** positive only
 - **Attribution:** Japanese card data © The Pokémon Company.
-- **Notes:** The reviewed search surface has secret/rainbow coverage gaps. Exact positive detail pages remain evidence; missing results never establish absence. The separate CoroCoro Start Deck 100 announcement date surface establishes only its first physical delivery month, distinct from application opening and later delivery waves; it grants no identity or finish authority.
+- **Notes:** The bounded Snorlax search omits specific HR/UR records, although global HR/UR categories and Snorlax SR have positive results; no rarity class is excluded as a whole. Exact positive detail pages remain evidence; missing results never establish absence. The separate CoroCoro Start Deck 100 announcement date surface establishes only its first physical delivery month, distinct from application opening and later delivery waves; it grants no identity or finish authority.
 
 ### Pokémon Card official database and rules (Korea) — <https://pokemoncard.co.kr>
 

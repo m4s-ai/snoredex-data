@@ -97,7 +97,9 @@ PROVIDERS: list[dict[str, Any]] = [
         "supportsAbsence": False,
         "usedFor": ["language", "artist", "date"],
         "attribution": "Japanese card data © The Pokémon Company.",
-        "notes": ("The reviewed search surface has secret/rainbow coverage gaps. Exact positive "
+        "notes": ("The bounded Snorlax search omits specific HR/UR records, although global "
+                  "HR/UR categories and Snorlax SR have positive results; no rarity class is "
+                  "excluded as a whole. Exact positive "
                   "detail pages remain evidence; missing results never establish absence. "
                   "The separate CoroCoro Start Deck 100 announcement date surface establishes "
                   "only its first physical delivery month, distinct from application opening "
@@ -112,7 +114,7 @@ PROVIDERS: list[dict[str, Any]] = [
         "licenseOrTerms": "Publisher's own terms.",
         "category": "official-publisher",
         "authorityTier": 1,
-        "coverage": "recent localized card details, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields",
+        "coverage": "recent localized card details including bounded Singapore English discovery, exact inspected archived card-list rows, and retained Taiwan, Indonesia and Singapore product/campaign date fields",
         "supportsAbsence": False,
         "usedFor": ["language", "card-existence", "local-set-identifier", "rarity", "date"],
         "attribution": "Asian card data © The Pokémon Company.",

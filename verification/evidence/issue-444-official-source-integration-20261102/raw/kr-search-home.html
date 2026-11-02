@@ -1,0 +1,1628 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>포켓몬 카드 게임</title>
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/css/swiper.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css"/>
+         <link href="/v2/css/bootstrap.css?v2" rel="stylesheet">
+        <link href="/v2/css/default.css" rel="stylesheet">
+        <link href="/v2/css/animate.css" rel="stylesheet">
+        <link href="/v2/css/style-magnific-popup.css" rel="stylesheet">
+        <link href="/v2/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/v2/css/fontium.css" rel="stylesheet">
+        <link href="/v2/css/style1.css?85" rel="stylesheet">
+        <link href="/v2/css/layerslider.css" rel="stylesheet">
+        <link href="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" rel="stylesheet"
+              type="text/css">
+	    <link rel="stylesheet" href="/v3/css/commoncardsub.css?t=86f537cc161ba3da">
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="/v2/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.magnific-popup.min.js"></script>
+
+                    <meta name="keywords" content="포켓몬">
+            <meta name="description" content="포켓몬 카드 게임 공식 사이트 입니다.">
+            <meta property="og:title" content="포켓몬 카드 게임"/>
+            <meta property="og:url" content="http://pokemoncard.co.kr"/>
+            <meta property="og:site_name" content="Pokémon Card Game"/>
+            <meta property="og:description" content="포켓몬 카드 게임의 한국 공식사이트, 신제품 소개 및 카드 정보, 포켓몬스쿨 일정, 대회 안내 제공">
+            <meta property="og:image"
+                  content="/s3.php?key=home%2Fdata%2Fdata1_www%2F2016%2F06%2F2016-06-20_00-44-39-61799-1466351079.jpg"/>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+
+    <script src="/v3/js/common.js"></script>
+         <script type="text/javascript" src="/v2/js/jquery.magnific-popup.min.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.scrollTo-min.js"></script>
+        <script type="text/javascript" src="/v2/js/SmoothScroll.js"></script>
+        <script type="text/javascript" src="/v2/js/wow.js"></script>
+        <script type="text/javascript" src="/v2/js/custom.js"></script>
+        <script type="text/javascript" src="/v2/js/plugins.js"></script>
+        <script type="text/javascript" src="/v2/js/greensock.js"></script>
+        <script type="text/javascript" src="/v2/js/layerslider.transitions.js"></script>
+        <script type="text/javascript" src="/v2/js/layerslider.kreaturamedia.jquery.js"></script>
+        <script type="text/javascript" src="/v2/js/jquery.sticky.js"></script>
+        <script type="text/javascript" src="/v2/js/cat_list.js?78"></script>
+        <script type="text/javascript" src="/v2/js/function.js"></script>
+        <script type="text/javascript" src="/v2/js/formData.js"></script>
+       <script type="text/javascript"
+                src="//cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#social_rt").sticky({topSpacing: 100});
+
+                var cwpc = $("#carousel-indicators-pc").width();
+                var cwmo = $("#carousel-indicators-mobile").width();
+
+                $("#carousel-indicators-pc").css("margin-left","-" + (cwpc / 2) +"px");
+                $("#carousel-indicators-mobile").css("margin-left","-" + (cwmo / 2) +"px");
+
+                var ch = $("#carousel-example-index").height();
+
+                $(".carousel-control-right").css("top",( (ch + 76) / 2 * -1 ) );
+                $(".carousel-control-left").css("top",( (ch + 76) / 2 * -1 ) );
+
+                var ww = $(document).width() - 24;
+                var calcH = (ww * 298) / 408;
+                $(".myinfo-box-mobile .tab-content .tab-pane").height(calcH);
+
+            });
+        </script>
+                 
+        <!-- Facebook Pixel Code -->
+
+        <script>
+
+            !function (f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function () {
+                    n.callMethod ?
+
+                        n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+                };
+
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+
+                s.parentNode.insertBefore(t, s)
+            }(window, document, 'script',
+
+                'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', '2037312413208523');
+
+            fbq('track', 'PageView');
+
+        </script>
+
+        <noscript><img height="1" width="1" style="display:none"
+                       src="https://www.facebook.com/tr?id=2037312413208523&ev=PageView&noscript=1"/></noscript>
+
+        <!-- End Facebook Pixel Code -->
+
+        <meta name="google-site-verification" content="b-u0TiON-ceDw-l4NiwkleAGnrA0TGgRu-_YKJYliAY"/>
+        <meta name="naver-site-verification" content="3fb143ded9e75a67d2ed85842b89b35422496d58"/>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142581117-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-142581117-1');
+        </script>
+        <script type="text/javascript" charset="UTF-8" src="//t1.daumcdn.net/kas/static/kp.js"></script>
+        <script type="text/javascript">kakaoPixel('327812162506475690').pageView();</script>
+        <!-- ADN Tracker[공통] start -->
+        <script src="//fin.rainbownine.net/js/across_adn_2.0.1.js" type="text/javascript"></script>
+        <!-- ADN Tracker[공통] end -->
+
+</head>
+
+<body>
+   <!-- ADN Tracker[방문자] start -->
+    <script type="text/javascript">
+    window.addEventListener('load', function() {
+        var across_adn_contain = new fn_across_adn_contain();
+        var across_adn_param = [];
+        across_adn_param = {"ut":"Home","ui":"108221"};
+        across_adn_contain.init(across_adn_param);
+    });
+    </script>
+    <!-- ADN Tracker[방문자] end -->
+    
+<div id="wrap">
+	<!-- header -->
+
+
+	<header id="hd" class="page-pokemon page-card">
+		<h1>
+			<a href="/main"><img src="/v3/img/card_main_logo.png" alt="pokemon 포켓몬 카드 게임"></a>
+		</h1>
+		<div class="container flex-justify-space">
+			<button type="button" class="js-mn no-style" title="메뉴열기/닫기">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
+			<nav id="gnb">
+				<ul class="gnb">
+
+
+					<li class="my-news d-lg-none d-block">
+											<div>
+							<a href="/member/login?next=/cards" class="badge badge-muted2 badge-round">로그인</a>
+						</div>
+                           
+
+					</li>
+
+
+
+					<li>
+						<a href="/news"  >새소식</a>
+					</li>
+					<li>
+						<a href="/card/category/info1" >제품정보</a>
+					</li>												 
+					<li>
+						<a href="/card/play" >놀이방법</a>
+					</li>
+					<li>
+						<a href="/card/category/event" >이벤트</a>
+					</li>
+					<li>
+						<a href="/cards"  class="active">카드검색</a>
+					</li>
+					<li>
+						<a href="/recipe" >덱레시피</a>
+					</li>
+					<li>
+						<a href="/players" >플레이어즈</a>
+					</li>
+					<li>
+						<a href="https://pokemon-reservation.co.kr/home/selectReservStatusList.do">예약</a>
+					</li>
+
+					<li class="d-lg-none d-block">
+						<a href="https://www.pokemonkorea.co.kr/pokedex" target="_blank"><img src="/v3/img/modal_alet.jpg" alt="" class="mr-2">포켓몬 공식 사이트</a>
+					</li>
+					<li class="d-lg-none d-block">
+						<a href="http://www.pokemonstore.co.kr" target="_blank"><img src="/v3/img/icon/icon_poke.png" alt="" class="mr-2">포켓몬 스토어</a>
+					</li>
+
+
+				</ul>
+			</nav>
+
+			<ul id="acc">
+
+
+									<li>
+					<a href="/member/login?next=/cards"><i class="icon-login"></i>로그인</a>
+				</li>
+
+				
+				<li>
+					<button type="button" class="no-style collapsed" data-toggle="collapse" data-target="#search"><i class="icon-search"></i>카드검색</button>
+				</li>
+			</ul>
+ 
+ 
+		</div>
+		<div class="btn-store d-lg-flex d-none">
+			<a href="https://pokemonkorea.co.kr/" class="pokehome" target="_blank"><i class="icon-pokehome">포켓몬 공식 사이트</i></a>
+			<a href="http://www.pokemonstore.co.kr" class="pokestore" target="_blank"><i class="icon-pokestore">포켓몬 스토어</i></a>
+		</div>
+		<div id="search" class="collapse">
+		<form id="header-search-form" action="/cards" method="get">
+			<div class="search-wrp">
+				<input type="text" id="header-search-input"   name="s" placeholder="카드검색 (포켓몬 이름 혹은 텍스트를 입력하세요)" value="">
+				<button type="button" id="header-search_text_submit" class="no-style btn-search"><p class="sr-only">카드검색</p></button>
+				<button tabindex="button" data-toggle="collapse" data-target="#search" class="no-style btn-close"><p class="sr-only">닫기</p></button>
+			</div>
+		</form>
+		</div>
+	</header>
+    <script>
+        jQuery(window).load(function () {
+            var ww = $(document).width();
+
+            if(ww < 640){
+                $("#header-search-input").attr("placeholder","포켓몬 이름 혹은 텍스트를 입력하세요.");
+                if($("#search_text").length > 0){
+                    $("#search_text").attr("placeholder","포켓몬 이름 혹은 텍스트를 입력하세요.");
+                }
+            }
+            $(document).on("click", "button#header-search_text_submit", function (e) {
+                $("#header-search-form").submit();
+            });
+
+            $(document).on("click", "button#button-top-menu", function (e) {
+                if($("#navbar-search-box").hasClass("in") ){
+
+                    $("#button-top-search").click();
+
+                }
+
+            });
+
+        });
+
+    </script>
+ 
+
+<div id="ct" class="sub-card">
+<script type="text/javascript" src="/v2/js/jquery.range-min.js"></script>
+<script type="text/javascript" src="/v2/js/select2.min.js"></script>
+<link href="/v2/css/jquery.range.css" rel="stylesheet">
+<link href="/v2/css/select2.min.css" rel="stylesheet"/>
+<link href="/v2/css/cards2.css?v=79" rel="stylesheet">
+<link href="/v2/css/card-search-icons.css?v=20261027-content-qa" rel="stylesheet">
+<section id="home_wrapper" class="home-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="cards-top">
+    <h1 class="section-title no-border">카드검색</h1>
+</div>
+ 
+<script src="/v3/js/jquery.nice-select.min.js"></script>
+<link rel="stylesheet" href="v3/css/nice-select.css">
+<script>
+    $(document).ready(function () {
+        $('select').niceSelect();
+    });
+</script>
+<style>
+    select.select-css{
+        border: 0;
+        color:#fff;
+    }
+    .nav-search .search-wrp input {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: calc(100% - 160px);
+        height: 30px;
+        padding-left: 14px;
+        border: 0;
+        background: transparent;
+        outline: none !important;
+        border-left: 1px #ddd solid;
+        margin-top: 12px;
+    }
+
+    .select-css {
+        width: 140px !important;
+        position: absolute;
+        z-index: 5;
+        height: 25px;
+        line-height: 25px;
+        top: 13px;
+        left: 5px;
+        border-right: 1px #eee solid;
+        font-size: 15px;
+    }
+
+    .select-css + input.form-control{
+        padding-left: 156px;
+    }
+
+    @media (max-width: 991px) {
+        .nav-search .search-wrp input {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: calc(100% - 140px);
+            padding-left: 10px;
+            border: 0;
+            background: transparent;
+            outline: none !important;
+            height: 20px;
+            font-size: 15px;
+            margin-top: 10px;
+            border-left: 1px #ddd solid;
+        }
+
+        .select-css {
+            width: 100px !important;
+            position: absolute;
+            z-index: 5;
+            height: 25px;
+            line-height: 25px;
+            top: 8px;
+            left: 5px;
+            border-right: 1px #eee solid;
+            font-size: 15px;
+        }
+
+        .select-css + input.form-control{
+            padding-left: 116px;
+        }
+
+        .nice-select {
+            font-size: 14px;
+
+            padding-left: 12px;
+            padding-right: 20px;
+        }
+
+        .nice-select:after {
+            right: 8px
+        }
+
+    }
+</style>
+ 
+<!--<input type="hidden" class="testsql" name="testsql" value="SELECT * FROM `v2_tcg_cards` WHERE `CardNum` IN ("BS2026006001","BS2026006002","BS2026006003","BS2026006004","BS2026006005","BS2026006006","BS2026006007","BS2026006008","BS2026006009","BS2026006010","BS2026006011","BS2026006012","BS2026006013","BS2026006014","BS2026006015","BS2026006016","BS2026006017","BS2026006018","BS2026006019","BS2026006020","BS2026006021","BS2026006022","BS2026006023","BS2026006024","BS2026006025","BS2026006026","BS2026006027","BS2026006028") order by order_num desc "/>-->
+<div class="first_wrap">
+    <div class="container">
+
+        <div id="search_text_wrap" class="col-xs-12">
+            <div class="main-search-box">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                        <a href="#card_search" aria-controls="card_search" role="tab" data-toggle="tab">카드
+                            검색</a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#qna" aria-controls="qna" role="tab" data-toggle="tab">Q&A</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="search-box-group tab-pane in active" id="card_search">
+                        <div class="input-group">
+ 
+                            <select  name="search_params" id="search_params" class="select-css">
+                                <option value="all" >전체</option>
+                                <option value="cardname" >카드 이름</option>
+                                <option value="cardtext" >카드 텍스트</option>
+                            </select>
+ 
+
+                            <input type="text" class="form-control" id="search_text" name="search_text"
+                                   placeholder="카드검색 (포켓몬 이름 혹은 텍스트를 입력하세요)"
+                                   value="">
+                            <span class="input-group-btn">
+                                        <button id="search_text_submit" class="btn btn-default"
+                                                type="button">검색</button>
+                                    </span>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="search-box-group tab-pane" id="qna">
+                        <div class="input-group">
+                            <input type="hidden" name="search_param" value="all" id="search_param">
+                            <input type="text" class="form-control" name="keyword" placeholder="검색하고 싶은 키워드를 입력하세요"
+                                   value="">
+                            <span class="input-group-btn">
+                                    <button id="search_keyword_submit" class="btn btn-default" type="button">검색</button>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-xs-12 margin-top-20">
+                    <span id="advanced_search" class="btn btn-primary">
+                        조건 검색
+                        <i aria-hidden="true" class="card-search-icon card-search-icon-down"></i>
+                    </span>
+            <span id="advanced_search_info" class="btn btn-default">
+                        <i aria-hidden="true" class="card-search-icon card-search-icon-info"></i> 조건 검색이란?
+                    </span>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container keyword_wrap" style="display: none;">
+    <div class="keyword_wrap_header">
+        <i aria-hidden="true" class="card-search-icon card-search-icon-square"></i> 검색 키워드 : <span id="keyword_text">키워드 미작성</span> <br/>
+        <i aria-hidden="true" class="card-search-icon card-search-icon-square"></i> 검색 결과 : <span id="keyword_count">0</span>건
+    </div>
+    <div class="keyword_wrap_body">
+    </div>
+    <div class="text-center">
+        <button id="close_keyword_wrap" type="button" class="btn btn-primary btn-lg">Q&A 닫기</button>
+    </div>
+</div>
+
+<div class="container search_option" style="position: fixed; top: -9999px;">
+    <ul class="tabs">
+        <li rel="tab1" data-id="1" id="포켓몬" class="active AreaClicked">포켓몬</li>
+        <li rel="tab2" data-id="2" id="트레이너스">트레이너스</li>
+        <li rel="tab3" data-id="3" id="에너지">에너지</li>
+    </ul>
+    <div id="SearchTypePokemon" class="sub_search">
+        <div class="wrap">
+            <div class="col-md-8 no_pd_left">
+                <div class="form-group">
+                    <label>제품명</label>
+                    <select class="select" name="GoodsName" style="width: 100%;">
+                        <optgroup label="전체">
+                            <option value="전체">전체</option>
+                            <option value="썬&문전체">썬&문 전체</option>
+                            <option value="XY BREAK전체">XY BREAK 전체</option>
+                            <option value="XY전체">XY 전체</option>
+                            <option value="BW전체">BW 전체</option>
+                            <option value="프로모전체">프로모 카드 전체</option>
+                            <option value="DP전체">DP 전체</option>
+                                                    </optgroup>
+                        <optgroup label="썬&문 전체">
+                            <option value="썬&문전체">썬&문 전체</option>
+                            <option value="썬&문 강화 확장팩 「GX 배틀부스트」">썬&문 강화 확장팩 「GX 배틀부스트」</option><option value="썬&문 강화 확장팩 「썬&문」">썬&문 강화 확장팩 「썬&문」</option><option value="썬&문 강화 확장팩 「새로운 시련」">썬&문 강화 확장팩 「새로운 시련」</option><option value="썬&문 강화 확장팩 「빛나는 전설」">썬&문 강화 확장팩 「빛나는 전설」</option><option value="썬&문 확장팩 제1탄 「썬 컬렉션」">썬&문 확장팩 제1탄 「썬 컬렉션」</option><option value="썬&문 확장팩 제1탄 「문 컬렉션」">썬&문 확장팩 제1탄 「문 컬렉션」</option><option value="썬&문 확장팩 제3탄 「어둠을 밝힌 무지개」">썬&문 확장팩 제3탄 「어둠을 밝힌 무지개」</option><option value="썬&문 확장팩 제3탄 「빛을 삼킨 어둠」">썬&문 확장팩 제3탄 「빛을 삼킨 어둠」</option><option value="썬&문 확장팩 제4탄 「각성의 용사」">썬&문 확장팩 제4탄 「각성의 용사」</option><option value="썬&문 확장팩 제2탄 「알로라의 달빛」">썬&문 확장팩 제2탄 「알로라의 달빛」</option><option value="썬&문 확장팩 제4탄 「초차원의 침략자」">썬&문 확장팩 제4탄 「초차원의 침략자」</option><option value="썬&문 확장팩 제2탄 「알로라의 햇빛」">썬&문 확장팩 제2탄 「알로라의 햇빛」</option>                        </optgroup>
+                        <optgroup label="XY BREAK">
+                            <option value="XY BREAK전체">XY BREAK 전체</option>
+                            <option value="XY BREAK 확장팩 「프리미엄 챔피언팩」">XY BREAK 확장팩 「프리미엄 챔피언팩」</option><option value="XY BREAK 확장팩 BASE PACK 20th Anniversary">XY BREAK 확장팩 BASE PACK 20th Anniversary</option><option value="XY BREAK 확장팩 제9탄 「천공의 분노」">XY BREAK 확장팩 제9탄 「천공의 분노」</option><option value="XY BREAK 확장팩 제10탄 「초능력의 제왕」">XY BREAK 확장팩 제10탄 「초능력의 제왕」</option><option value="XY BREAK 확장팩 제8탄 「푸른 충격」">XY BREAK 확장팩 제8탄 「푸른 충격」</option><option value="XY BREAK 확장팩 제8탄 「붉은 섬광」">XY BREAK 확장팩 제8탄 「붉은 섬광」</option><option value="XY BREAK 확장팩 제11탄 「냉혹한 반역자」">XY BREAK 확장팩 제11탄 「냉혹한 반역자」</option><option value="XY BREAK 확장팩 제11탄 「타오르는 투사」">XY BREAK 확장팩 제11탄 「타오르는 투사」</option><option value="XY BREAK 확장팩 「환상 전설 드림 컬렉션」">XY BREAK 확장팩 「환상 전설 드림 컬렉션」</option><option value="XY BREAK 확장팩 「포켓심쿵 컬렉션」">XY BREAK 확장팩 「포켓심쿵 컬렉션」</option>                        </optgroup>
+                        <optgroup label="XY">
+                            <option value="XY전체">XY 전체</option>
+                            <option value="XY 확장팩 제3탄 「라이징피스트」">XY 확장팩 제3탄 「라이징피스트」</option><option value="XY 확장팩 제4탄 「팬텀게이트」">XY 확장팩 제4탄 「팬텀게이트」</option><option value="XY 확장팩 제7탄 「밴디트링」">XY 확장팩 제7탄 「밴디트링」</option><option value="XY 확장팩 제6탄 「에메랄드 브레이크」">XY 확장팩 제6탄 「에메랄드 브레이크」</option><option value="XY 확장팩 제2탄 「와일드 블레이즈」">XY 확장팩 제2탄 「와일드 블레이즈」</option><option value="XY 확장팩 제5탄 「가이아 볼케이노」">XY 확장팩 제5탄 「가이아 볼케이노」</option><option value="XY 확장팩 제5탄 「타이달스톰」">XY 확장팩 제5탄 「타이달스톰」</option><option value="XY 확장팩 제1탄 「Y컬렉션」">XY 확장팩 제1탄 「Y컬렉션」</option><option value="XY 확장팩 제1탄 「X컬렉션」">XY 확장팩 제1탄 「X컬렉션」</option><option value="XY 확장팩 「마그마단vs아쿠아단 더블크라이시스」">XY 확장팩 「마그마단vs아쿠아단 더블크라이시스」</option><option value="XY 확장팩 「레전드 컬렉션」">XY 확장팩 「레전드 컬렉션」</option>                        </optgroup>
+                        <optgroup label="BW">
+                            <option value="BW전체">BW 전체</option>
+                            <option value="BW 확장팩 「EX 배틀 부스트」">BW 확장팩 「EX 배틀 부스트」</option><option value="BW 확장팩 제9탄 「메갈로캐논」">BW 확장팩 제9탄 「메갈로캐논」</option><option value="BW 확장팩 제7탄 「플라스마게일」">BW 확장팩 제7탄 「플라스마게일」</option><option value="BW 확장팩 제4탄 「다크러시」">BW 확장팩 제4탄 「다크러시」</option><option value="BW 확장팩 제2탄 「레드 컬렉션」">BW 확장팩 제2탄 「레드 컬렉션」</option><option value="BW 확장팩 제6탄 「프리즈볼트」">BW 확장팩 제6탄 「프리즈볼트」</option><option value="BW 확장팩 제6탄 「콜드플레어」">BW 확장팩 제6탄 「콜드플레어」</option><option value="BW 확장팩 제3탄 「헤일 블리자드」">BW 확장팩 제3탄 「헤일 블리자드」</option><option value="BW 확장팩 제3탄 「사이코 드라이브」">BW 확장팩 제3탄 「사이코 드라이브」</option><option value="BW 확장팩 제8탄 「스파이럴포스」">BW 확장팩 제8탄 「스파이럴포스」</option><option value="BW 확장팩 제8탄 「볼트너클」">BW 확장팩 제8탄 「볼트너클」</option><option value="BW 확장팩 제1탄 「블랙 컬렉션」">BW 확장팩 제1탄 「블랙 컬렉션」</option><option value="BW 확장팩 제1탄 「화이트 컬렉션」">BW 확장팩 제1탄 「화이트 컬렉션」</option><option value="BW 확장팩 제5탄 「드래곤 블라스트」">BW 확장팩 제5탄 「드래곤 블라스트」</option><option value="BW 확장팩 제5탄 「드래곤 블레이드」">BW 확장팩 제5탄 「드래곤 블레이드」</option><option value="BW 확장팩 「샤이니 컬렉션」">BW 확장팩 「샤이니 컬렉션」</option><option value="BW 확장팩 「드래곤 컬렉션」">BW 확장팩 「드래곤 컬렉션」</option><option value="BW 프로모 카드">BW 프로모 카드</option><option value="비크티니 BWR 쟁탈전 프로모 카드 팩">비크티니 BWR 쟁탈전 프로모 카드 팩</option><option value="BW 「퍼스트 세트 - 풀의 진화」">BW 「퍼스트 세트 - 풀의 진화」</option><option value="비크티니 BWR 쟁탈전 우승">비크티니 BWR 쟁탈전 우승</option><option value="BW「퍼스트 세트 - 불꽃의 진화」">BW「퍼스트 세트 - 불꽃의 진화」</option><option value="BW「퍼스트 세트 - 물의 진화」">BW「퍼스트 세트 - 물의 진화」</option><option value="BW 「퍼스트 세트 - 불꽃의 진화」">BW 「퍼스트 세트 - 불꽃의 진화」</option><option value="BW 「퍼스트 세트 - 물의 진화」">BW 「퍼스트 세트 - 물의 진화」</option>                        </optgroup>
+                        <optgroup label="DP">
+                            <option value="DP전체">DP 전체</option>
+                            <option value="MEGA 「스타트 덱 100 배틀컬렉션」">MEGA 「스타트 덱 100 배틀컬렉션」</option><option value="스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」">스칼렛&바이올렛 하이클래스팩 「샤이니트레저 ex」</option><option value="스칼렛&바이올렛 하이클래스팩 「테라스탈 페스타 ex」">스칼렛&바이올렛 하이클래스팩 「테라스탈 페스타 ex」</option><option value="스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」">스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」</option><option value="MEGA 하이클래스팩 「MEGA 드림 ex」">MEGA 하이클래스팩 「MEGA 드림 ex」</option><option value="스칼렛&바이올렛 랜덤 스타트 덱 Generations">스칼렛&바이올렛 랜덤 스타트 덱 Generations</option><option value="스칼렛&바이올렛 확장팩 「블랙볼트」">스칼렛&바이올렛 확장팩 「블랙볼트」</option><option value="스칼렛&바이올렛 확장팩 「화이트플레어」">스칼렛&바이올렛 확장팩 「화이트플레어」</option><option value="스칼렛&바이올렛 ex 스타트 덱">스칼렛&바이올렛 ex 스타트 덱</option><option value="스칼렛&바이올렛 확장팩 「흑염의 지배자」">스칼렛&바이올렛 확장팩 「흑염의 지배자」</option><option value="MEGA 확장팩 「30th CELEBRATION」">MEGA 확장팩 「30th CELEBRATION」</option><option value="스칼렛&바이올렛 확장팩 「초전브레이커」">스칼렛&바이올렛 확장팩 「초전브레이커」</option><option value="스칼렛&바이올렛 확장팩 「스텔라미라클」">스칼렛&바이올렛 확장팩 「스텔라미라클」</option><option value="스칼렛&바이올렛 확장팩 「변환의 가면」">스칼렛&바이올렛 확장팩 「변환의 가면」</option><option value="스칼렛&바이올렛 확장팩 「배틀파트너즈」">스칼렛&바이올렛 확장팩 「배틀파트너즈」</option><option value="스칼렛&바이올렛 확장팩 「로켓단의 영광」">스칼렛&바이올렛 확장팩 「로켓단의 영광」</option><option value="MEGA 확장팩 「닌자스피너」">MEGA 확장팩 「닌자스피너」</option><option value="MEGA 확장팩 「어비스아이」">MEGA 확장팩 「어비스아이」</option><option value="MEGA 확장팩 「니힐제로」">MEGA 확장팩 「니힐제로」</option><option value="MEGA 확장팩 「인페르노X」">MEGA 확장팩 「인페르노X」</option><option value="MEGA 확장팩 「스톰에메랄다」">MEGA 확장팩 「스톰에메랄다」</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 확장팩 「스칼렛 ex」">포켓몬 카드 게임 스칼렛&바이올렛 확장팩 「스칼렛 ex」</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 확장팩 「바이올렛 ex」">포켓몬 카드 게임 스칼렛&바이올렛 확장팩 「바이올렛 ex」</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 강화 확장팩 「트리플렛비트」">포켓몬 카드 게임 스칼렛&바이올렛 강화 확장팩 「트리플렛비트」</option><option value="스칼렛&바이올렛 확장팩 「와일드포스」">스칼렛&바이올렛 확장팩 「와일드포스」</option><option value="스칼렛&바이올렛 확장팩 「사이버저지」">스칼렛&바이올렛 확장팩 「사이버저지」</option><option value="스칼렛&바이올렛 확장팩 「스노해저드」">스칼렛&바이올렛 확장팩 「스노해저드」</option><option value="스칼렛&바이올렛 확장팩 「클레이버스트」">스칼렛&바이올렛 확장팩 「클레이버스트」</option><option value="스칼렛&바이올렛 「배틀 아카데미」">스칼렛&바이올렛 「배틀 아카데미」</option><option value="스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」">스칼렛&바이올렛 강화 확장팩 「크림슨헤이즈」</option><option value="스칼렛&바이올렛 확장팩 「고대의 포효」">스칼렛&바이올렛 확장팩 「고대의 포효」</option><option value="스칼렛&바이올렛 확장팩 「미래의 일섬」">스칼렛&바이올렛 확장팩 「미래의 일섬」</option><option value="스칼렛&바이올렛 강화 확장팩 「나이트원더러」">스칼렛&바이올렛 강화 확장팩 「나이트원더러」</option><option value="스칼렛&바이올렛 강화 확장팩 「낙원드래고나」">스칼렛&바이올렛 강화 확장팩 「낙원드래고나」</option><option value="스칼렛&바이올렛 강화 확장팩 「열풍의 아레나」">스칼렛&바이올렛 강화 확장팩 「열풍의 아레나」</option><option value="MEGA 확장팩 「메가브레이브」">MEGA 확장팩 「메가브레이브」</option><option value="MEGA 확장팩 「메가심포니아」">MEGA 확장팩 「메가심포니아」</option><option value="스칼렛&바이올렛 강화 확장팩 「레이징서프」">스칼렛&바이올렛 강화 확장팩 「레이징서프」</option><option value="스칼렛&바이올렛 스타터 덱&강화 세트 「고대의 코라이돈 ex」">스칼렛&바이올렛 스타터 덱&강화 세트 「고대의 코라이돈 ex」</option><option value="스칼렛&바이올렛 스타터 덱&강화 세트 「미래의 미라이돈 ex」">스칼렛&바이올렛 스타터 덱&강화 세트 「미래의 미라이돈 ex」</option><option value="DP 확장팩 모험의 시작">DP 확장팩 모험의 시작</option><option value="DP 확장팩 시공의 격돌">DP 확장팩 시공의 격돌</option><option value="DP 확장팩 암흑의 초승달">DP 확장팩 암흑의 초승달</option><option value="스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」">스칼렛&바이올렛 스페셜 덱 세트 ex 「이상해꽃·리자몽·거북왕」</option><option value="스칼렛&바이올렛 배틀 강화 BOX 「배틀파트너즈」">스칼렛&바이올렛 배틀 강화 BOX 「배틀파트너즈」</option><option value="스칼렛&바이올렛 배틀 강화 BOX 「스텔라미라클」">스칼렛&바이올렛 배틀 강화 BOX 「스텔라미라클」</option><option value="MEGA 프리미엄 트레이너 박스 MEGA">MEGA 프리미엄 트레이너 박스 MEGA</option><option value="스칼렛&바이올렛 배틀 강화 BOX 「흑염의 지배자」">스칼렛&바이올렛 배틀 강화 BOX 「흑염의 지배자」</option><option value="DP 확장팩 불꽃 튀는 대결">DP 확장팩 불꽃 튀는 대결</option><option value="DP 확장팩 또 다른 세계">DP 확장팩 또 다른 세계</option><option value="DP 확장팩 7개의 신비">DP 확장팩 7개의 신비</option><option value="DP 확장팩 보이지 않는 힘">DP 확장팩 보이지 않는 힘</option><option value="DP 확장팩 화려한 전설">DP 확장팩 화려한 전설</option><option value="DP 확장팩 호수의 기적">DP 확장팩 호수의 기적</option><option value="DP 확장팩 고대의 수호자">DP 확장팩 고대의 수호자</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 프리미엄 트레이너 박스 ex">포켓몬 카드 게임 스칼렛&바이올렛 프리미엄 트레이너 박스 ex</option><option value="스칼렛&바이올렛 스타터 세트 ex 「나오하&루카리오 ex」">스칼렛&바이올렛 스타터 세트 ex 「나오하&루카리오 ex」</option><option value="스칼렛&바이올렛 스타터 세트 ex 「꾸왁스&따라큐 ex」">스칼렛&바이올렛 스타터 세트 ex 「꾸왁스&따라큐 ex」</option><option value="스칼렛&바이올렛 스타터 세트 ex 「뜨아거&전룡 ex」">스칼렛&바이올렛 스타터 세트 ex 「뜨아거&전룡 ex」</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 스타터 세트 ex 피카츄 스페셜 세트">포켓몬 카드 게임 스칼렛&바이올렛 스타터 세트 ex 피카츄 스페셜 세트</option><option value="스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」">스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「님피아 ex」</option><option value="스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「파라블레이즈 ex」">스칼렛&바이올렛 스타터 세트 테라스탈타입:스텔라 「파라블레이즈 ex」</option><option value="스칼렛&바이올렛 스타터 세트 테라스탈 「뮤츠 ex」">스칼렛&바이올렛 스타터 세트 테라스탈 「뮤츠 ex」</option><option value="스칼렛&바이올렛 스타터 세트 테라스탈 「라우드본 ex」">스칼렛&바이올렛 스타터 세트 테라스탈 「라우드본 ex」</option><option value="스타터 세트 MEGA 「메가팬텀 ex」">스타터 세트 MEGA 「메가팬텀 ex」</option><option value="스타터 세트 MEGA 「메가디안시 ex」">스타터 세트 MEGA 「메가디안시 ex」</option><option value="스칼렛&바이올렛 배틀 마스터 덱 「테라스탈 리자몽 ex」">스칼렛&바이올렛 배틀 마스터 덱 「테라스탈 리자몽 ex」</option><option value="스칼렛&바이올렛 스타터 세트 ex 「성호의 메탕&메타그로스 ex」">스칼렛&바이올렛 스타터 세트 ex 「성호의 메탕&메타그로스 ex」</option><option value="스칼렛&바이올렛 스타터 세트 ex 「마리의 모르페코&오롱털 ex」">스칼렛&바이올렛 스타터 세트 ex 「마리의 모르페코&오롱털 ex」</option><option value="MEGA 스타터 세트 ex 「이브이 ex」">MEGA 스타터 세트 ex 「이브이 ex」</option><option value="MEGA 스타터 세트 ex 「조로아&조로아크 ex」">MEGA 스타터 세트 ex 「조로아&조로아크 ex」</option><option value="스칼렛&바이올렛 배틀 마스터 덱 「파오젠 ex」">스칼렛&바이올렛 배틀 마스터 덱 「파오젠 ex」</option><option value="MEGA 스타터 세트 ex 「나오하&마스카나 ex」">MEGA 스타터 세트 ex 「나오하&마스카나 ex」</option><option value="스칼렛&바이올렛 「ex 스페셜 세트 ver.2」">스칼렛&바이올렛 「ex 스페셜 세트 ver.2」</option><option value="MEGA 「ex 스페셜 세트」">MEGA 「ex 스페셜 세트」</option><option value="스칼렛&바이올렛 「ex 스페셜 세트」">스칼렛&바이올렛 「ex 스페셜 세트」</option><option value="MEGA 스페셜 카드 세트 「메가엘레이드 ex」">MEGA 스페셜 카드 세트 「메가엘레이드 ex」</option><option value="스칼렛&바이올렛 스타트 덱 Generations 스페셜 배틀 세트">스칼렛&바이올렛 스타트 덱 Generations 스페셜 배틀 세트</option><option value="DP 랜덤 구축덱">DP 랜덤 구축덱</option><option value="DP 펄기아 덱">DP 펄기아 덱</option><option value="스칼렛&바이올렛 스페셜 점보 카드 세트 「리자몽 ex」">스칼렛&바이올렛 스페셜 점보 카드 세트 「리자몽 ex」</option><option value="DP 디아루가 덱">DP 디아루가 덱</option><option value="실드전 트리플렛비트 참가상">실드전 트리플렛비트 참가상</option><option value="포켓몬 카드 게임 스칼렛&바이올렛 「에너지 카드 세트」">포켓몬 카드 게임 스칼렛&바이올렛 「에너지 카드 세트」</option><option value="스칼렛&바이올렛 스페셜 점보 카드 세트 「오거폰」">스칼렛&바이올렛 스페셜 점보 카드 세트 「오거폰」</option><option value="레이징서프 실드전 참가상">레이징서프 실드전 참가상</option><option value="DP 다크라이덱">DP 다크라이덱</option><option value="열풍의 아레나 실드전 참가상">열풍의 아레나 실드전 참가상</option><option value="DP 크레세리아덱">DP 크레세리아덱</option><option value="낙원드래고나 실드전 참가상">낙원드래고나 실드전 참가상</option><option value="크림슨헤이즈 실드전 참가상">크림슨헤이즈 실드전 참가상</option><option value="MEGA 「30th CELEBRATION FUTURISTIC BOX」">MEGA 「30th CELEBRATION FUTURISTIC BOX」</option><option value="스칼렛&바이올렛 「Pikachu Present Box」">스칼렛&바이올렛 「Pikachu Present Box」</option><option value="포켓몬 카드샵 스탬프 랠리 이벤트">포켓몬 카드샵 스탬프 랠리 이벤트</option><option value="스칼렛&바이올렛 「블랙볼트 ・ 화이트플레어 카드 앨범 세트」">스칼렛&바이올렛 「블랙볼트 ・ 화이트플레어 카드 앨범 세트」</option><option value="스칼렛&바이올렛 컬렉션 세트 「테라스탈 페스타 ex」">스칼렛&바이올렛 컬렉션 세트 「테라스탈 페스타 ex」</option><option value="「스타트 덱 100 배틀컬렉션」 미니리그 완주상">「스타트 덱 100 배틀컬렉션」 미니리그 완주상</option><option value="스칼렛&바이올렛 플레이매트 세트 「테라스탈 페스타 ex」">스칼렛&바이올렛 플레이매트 세트 「테라스탈 페스타 ex」</option><option value="포켓몬 카드 게임 온라인 공식 인증샵 구입 특전">포켓몬 카드 게임 온라인 공식 인증샵 구입 특전</option><option value="포켓몬 원더 아일랜드 in JEJU 스탬프랠리">포켓몬 원더 아일랜드 in JEJU 스탬프랠리</option><option value="포켓몬 카드 게임 Let's Play 2023">포켓몬 카드 게임 Let's Play 2023</option><option value="극장판 포켓몬스터DP 「아르세우스 초극의 시공으로」극장 선물">극장판 포켓몬스터DP 「아르세우스 초극의 시공으로」극장 선물</option><option value="「돌아온 명탐정 피카츄」 조기 구입 특전">「돌아온 명탐정 피카츄」 조기 구입 특전</option><option value="「극장판 포켓몬스터 AG: 뮤와 파동의 용사 루카리오」 극장 선물">「극장판 포켓몬스터 AG: 뮤와 파동의 용사 루카리오」 극장 선물</option><option value="스칼렛&바이올렛 스페셜 점보 카드 세트 「피카츄」">스칼렛&바이올렛 스페셜 점보 카드 세트 「피카츄」</option><option value="「포켓몬스터: 성도지방 이야기">「포켓몬스터: 성도지방 이야기</option><option value=" 최종장」 극장 선물"> 최종장」 극장 선물</option><option value="스칼렛&바이올렛「컬렉션 파일 세트 릴리에」">스칼렛&바이올렛「컬렉션 파일 세트 릴리에」</option><option value="포켓몬 메가페스타 2026">포켓몬 메가페스타 2026</option><option value="스칼렛&바이올렛「컬렉션 파일 세트 N」">스칼렛&바이올렛「컬렉션 파일 세트 N」</option><option value="레이징서프 실드전 조 리그 1위">레이징서프 실드전 조 리그 1위</option><option value="스칼렛&바이올렛 스페셜 세트 「모야모」">스칼렛&바이올렛 스페셜 세트 「모야모」</option><option value="레이징서프 실드전 토너먼트 우승">레이징서프 실드전 토너먼트 우승</option>                        </optgroup>
+                        <optgroup label="프로모">
+                            <option value="프로모전체">프로모 카드 전체</option>
+                            <option value="썬&문 프로모">썬&문 프로모 카드 전체</option>
+                            <option value="DP 프로모 카드">DP 프로모 카드</option><option value="테라스탈 페스타 ex 프로모 카드 팩">테라스탈 페스타 ex 프로모 카드 팩</option><option value="스칼렛&바이올렛 스타터 세트 ex 프로모 카드   팩  ">스칼렛&바이올렛 스타터 세트 ex 프로모 카드   팩  </option><option value="2023 코리안리그 파이널 시즌 입상 프로모">2023 코리안리그 파이널 시즌 입상 프로모</option><option value="미니리그 참가 프로모">미니리그 참가 프로모</option><option value="스칼렛&바이올렛 프로모 카드 팩 제7탄">스칼렛&바이올렛 프로모 카드 팩 제7탄</option><option value="MEGA 프로모 카드 팩 제5탄">MEGA 프로모 카드 팩 제5탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제2탄">스칼렛&바이올렛 프로모 카드 팩 제2탄</option><option value="MEGA 프로모 카드 팩 제1탄">MEGA 프로모 카드 팩 제1탄</option><option value="MEGA 프로모 카드 팩 제3탄">MEGA 프로모 카드 팩 제3탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제5탄">스칼렛&바이올렛 프로모 카드 팩 제5탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제4탄">스칼렛&바이올렛 프로모 카드 팩 제4탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제1탄">스칼렛&바이올렛 프로모 카드 팩 제1탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제3탄">스칼렛&바이올렛 프로모 카드 팩 제3탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제10탄">스칼렛&바이올렛 프로모 카드 팩 제10탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제8탄">스칼렛&바이올렛 프로모 카드 팩 제8탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제9탄">스칼렛&바이올렛 프로모 카드 팩 제9탄</option><option value="MEGA 프로모 카드 팩 제2탄">MEGA 프로모 카드 팩 제2탄</option><option value="MEGA 프로모 카드 팩 제4탄">MEGA 프로모 카드 팩 제4탄</option><option value="소드&실드 프로모팩 제12탄">소드&실드 프로모팩 제12탄</option><option value="스칼렛&바이올렛 프로모 카드 팩 제6탄">스칼렛&바이올렛 프로모 카드 팩 제6탄</option><option value="확장팩 「변환의 가면」 프로모션 박스">확장팩 「변환의 가면」 프로모션 박스</option><option value="<포켓몬스터: 메가볼티지> 프로모 카드 팩"><포켓몬스터: 메가볼티지> 프로모 카드 팩</option><option value="배틀파트너즈 프로모 카드 팩">배틀파트너즈 프로모 카드 팩</option><option value="열풍의 아레나 구입 특전 프로모 카드 팩">열풍의 아레나 구입 특전 프로모 카드 팩</option><option value="2016 코리안리그 프로모">2016 코리안리그 프로모</option><option value="열풍의 아레나 실드전 입상 프로모">열풍의 아레나 실드전 입상 프로모</option><option value="강화 확장팩 「포켓몬 카드 151」 프로모 카드 팩">강화 확장팩 「포켓몬 카드 151」 프로모 카드 팩</option><option value="실드전 프로모 카드 팩">실드전 프로모 카드 팩</option><option value="포켓몬스터 애니메이션 국내 방영 25주년 기념 프로모">포켓몬스터 애니메이션 국내 방영 25주년 기념 프로모</option><option value="2023 코리안리그 파이널 시즌 프로모">2023 코리안리그 파이널 시즌 프로모</option><option value="2026 코리안리그 시즌4 프로모">2026 코리안리그 시즌4 프로모</option><option value="2023 코리안리그 시즌1 프로모">2023 코리안리그 시즌1 프로모</option><option value="2025 코리안리그 시즌2 4강 프로모">2025 코리안리그 시즌2 4강 프로모</option><option value="2023 코리안리그 시즌3 4강 프로모">2023 코리안리그 시즌3 4강 프로모</option><option value="처음 배우는 교실 프로모">처음 배우는 교실 프로모</option><option value="2025 코리안리그 시즌3 프로모">2025 코리안리그 시즌3 프로모</option><option value="2023 코리안리그 시즌1 우승 프로모">2023 코리안리그 시즌1 우승 프로모</option><option value="2025 코리안리그 시즌3 우승 프로모">2025 코리안리그 시즌3 우승 프로모</option><option value="2024 코리안리그 파이널 우승 프로모">2024 코리안리그 파이널 우승 프로모</option><option value="2023 코리안리그 시즌1 준우승 프로모">2023 코리안리그 시즌1 준우승 프로모</option><option value="포켓몬 월드챔피언십2023 개최 기념 참가 프로모 카드">포켓몬 월드챔피언십2023 개최 기념 참가 프로모 카드</option><option value="2025 코리안리그 시즌3 준우승 프로모">2025 코리안리그 시즌3 준우승 프로모</option><option value="2024 코리안리그 파이널 준우승 프로모">2024 코리안리그 파이널 준우승 프로모</option><option value="포켓몬 카드샵 스탬프 랠리 프로모">포켓몬 카드샵 스탬프 랠리 프로모</option><option value="2023 코리안리그 시즌1 4강 프로모">2023 코리안리그 시즌1 4강 프로모</option><option value="2025 코리안리그 시즌3 4강 프로모">2025 코리안리그 시즌3 4강 프로모</option><option value="짐 프로모팩 4탄">짐 프로모팩 4탄</option><option value="2023 코리안리그 시즌4 프로모">2023 코리안리그 시즌4 프로모</option><option value="2024 코리안리그 파이널 4강 프로모">2024 코리안리그 파이널 4강 프로모</option><option value="2024 코리안리그 시즌3 프로모">2024 코리안리그 시즌3 프로모</option><option value="2025 코리안리그 시즌4 우승 프로모">2025 코리안리그 시즌4 우승 프로모</option><option value="2023 코리안리그 시즌4 우승 프로모">2023 코리안리그 시즌4 우승 프로모</option><option value="2025 코리안리그 파이널 프로모">2025 코리안리그 파이널 프로모</option><option value="2025 코리안리그 시즌1 프로모">2025 코리안리그 시즌1 프로모</option><option value="2026 포켓몬 카드샵 대항전 대표 선발전 프로모">2026 포켓몬 카드샵 대항전 대표 선발전 프로모</option><option value="2024 코리안리그 시즌1 프로모">2024 코리안리그 시즌1 프로모</option><option value="2024 코리안리그 시즌3 우승 프로모">2024 코리안리그 시즌3 우승 프로모</option><option value="2025 코리안리그 시즌4 준우승 프로모">2025 코리안리그 시즌4 준우승 프로모</option><option value="2023 코리안리그 시즌4 준우승 프로모">2023 코리안리그 시즌4 준우승 프로모</option><option value="Pokémon Town 2025 프로모">Pokémon Town 2025 프로모</option><option value="포켓몬 카드샵 대표 선발전 프로모">포켓몬 카드샵 대표 선발전 프로모</option><option value="2024 코리안리그 시즌1 우승 프로모">2024 코리안리그 시즌1 우승 프로모</option><option value="2026 코리안리그 파이널 프로모">2026 코리안리그 파이널 프로모</option><option value="2023 코리안리그 시즌2 프로모">2023 코리안리그 시즌2 프로모</option><option value="2024 코리안리그 시즌3 준우승 프로모">2024 코리안리그 시즌3 준우승 프로모</option><option value="2025 코리안리그 시즌4 4강 프로모">2025 코리안리그 시즌4 4강 프로모</option><option value="2023 코리안리그 시즌4 4강 프로모">2023 코리안리그 시즌4 4강 프로모</option><option value="낙원드래고나 실드전 입상 프로모">낙원드래고나 실드전 입상 프로모</option><option value="2024 코리안리그 시즌1 준우승 프로모">2024 코리안리그 시즌1 준우승 프로모</option><option value="2023 코리안리그 시즌2 우승 프로모">2023 코리안리그 시즌2 우승 프로모</option><option value="2024 코리안리그 시즌3 4강 프로모">2024 코리안리그 시즌3 4강 프로모</option><option value="2025 코리안리그 파이널 우승 프로모">2025 코리안리그 파이널 우승 프로모</option><option value="2024 코리안리그 시즌1 4강 프로모">2024 코리안리그 시즌1 4강 프로모</option><option value="2023 코리안리그 시즌2 준우승 프로모">2023 코리안리그 시즌2 준우승 프로모</option><option value="2025 코리안리그 파이널 준우승 프로모">2025 코리안리그 파이널 준우승 프로모</option><option value="포켓몬 월드챔피언십2024 개최 기념 참가 프로모 카드">포켓몬 월드챔피언십2024 개최 기념 참가 프로모 카드</option><option value="포켓몬스쿨 프로모">포켓몬스쿨 프로모</option><option value="2023 코리안리그 시즌2 4강 프로모">2023 코리안리그 시즌2 4강 프로모</option><option value="2025 코리안리그 파이널 4강 프로모">2025 코리안리그 파이널 4강 프로모</option><option value="2025 포켓몬 카드샵 대항전 대표 선발전 프로모">2025 포켓몬 카드샵 대항전 대표 선발전 프로모</option><option value="2026 코리안리그 시즌1 프로모">2026 코리안리그 시즌1 프로모</option><option value="2025 코리안리그 전 시즌 참가 프로모">2025 코리안리그 전 시즌 참가 프로모</option><option value="2025 코리안리그 시즌1 우승 프로모">2025 코리안리그 시즌1 우승 프로모</option><option value="2024 코리안리그 전 시즌 참가 프로모">2024 코리안리그 전 시즌 참가 프로모</option><option value="2026 코리안리그 시즌2 프로모">2026 코리안리그 시즌2 프로모</option><option value="2024 코리안리그 시즌2 프로모">2024 코리안리그 시즌2 프로모</option><option value="2025 코리안리그 시즌1 준우승 프로모">2025 코리안리그 시즌1 준우승 프로모</option><option value="2023 코리안리그 파이널 시즌 우승 프로모">2023 코리안리그 파이널 시즌 우승 프로모</option><option value="2024 코리안리그 시즌2 우승 프로모">2024 코리안리그 시즌2 우승 프로모</option><option value="2025 코리안리그 시즌1 4강 프로모">2025 코리안리그 시즌1 4강 프로모</option><option value="2023 코리안리그 시즌3 프로모">2023 코리안리그 시즌3 프로모</option><option value="2023 코리안리그 파이널 시즌 준우승 프로모">2023 코리안리그 파이널 시즌 준우승 프로모</option><option value="2024 코리안리그 시즌2 준우승 프로모">2024 코리안리그 시즌2 준우승 프로모</option><option value="2025 코리안리그 시즌2 우승 프로모">2025 코리안리그 시즌2 우승 프로모</option><option value="2023 코리안리그 시즌3 우승 프로모">2023 코리안리그 시즌3 우승 프로모</option><option value="2024 코리안리그 파이널 프로모">2024 코리안리그 파이널 프로모</option><option value="2025 코리안리그 시즌4 프로모">2025 코리안리그 시즌4 프로모</option><option value="2023 코리안리그 파이널 시즌 4강 프로모">2023 코리안리그 파이널 시즌 4강 프로모</option><option value="2025 코리안리그 시즌2 프로모">2025 코리안리그 시즌2 프로모</option><option value="2026 코리안리그 시즌3 프로모">2026 코리안리그 시즌3 프로모</option><option value="2024 코리안리그 시즌2 4강 프로모">2024 코리안리그 시즌2 4강 프로모</option><option value="2025 코리안리그 시즌2 준우승 프로모">2025 코리안리그 시즌2 준우승 프로모</option><option value="2023 코리안리그 시즌3 준우승 프로모">2023 코리안리그 시즌3 준우승 프로모</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 no_pd">
+                <div class="form-group">
+                    <label id="sort_wrap">정렬 옵션</label>
+                    <select class="select2 sort" name="sort" id="sort" style="width: 100%;">
+                        <option value="1" data-orderby="order_num" data-order="DESC" selected>최신순</option>
+                        <option value="2" data-orderby="order_num" data-order="ASC">오래된순</option>
+                        <option value="3" data-orderby="CardNum" data-order="ASC">카드 번호</option>
+                        <option value="4" data-orderby="CardNum" data-order="DESC">카드 번호 - 역순</option>
+                        <option value="5" data-orderby="GoodsNum" data-order="ASC">패키지명</option>
+                        <option value="6" data-orderby="GoodsNum" data-order="DESC">패키지명 - 역순</option>
+                        <option value="7" data-orderby="HP" data-order="ASC">HP</option>
+                        <option value="8" data-orderby="HP" data-order="DESC">HP - 역순</option>
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="clearfix"></div> 
+            <div id="tab1" class="tab_content">
+                <div id="text_button_warp" class="col-md-6 no_pd">
+                    <label class="mgt30">카드 종류</label>
+                    <div id="CardType" class="type search_button_wrap">
+                        <div class="select" data-id="기본" ><span>기본</span></div>
+                        <div class="select" data-id="1진화" ><span>1진화</span></div>
+                        <div class="select" data-id="2진화" ><span>2진화</span></div>
+						<!-- 개발확인 <div class="select" data-id="ex" ><span>포켓몬 ex</span></div> -->
+                        <div class="select" data-id="기본 포켓몬 ex" ><span>포켓몬 ex</span></div>
+                        <div class="select" data-id="고대" ><span>고대</span></div>
+                        <div class="select" data-id="미래" ><span>미래</span></div>
+						
+						
+                        <div class="select" data-id="V" ><span>포켓몬 V</span></div>
+                        <div class="select" data-id="포켓몬 GX" ><span>포켓몬 GX</span></div>
+                         <div class="select" data-id="일격" ><span>일격</span></div>
+                        <div class="select" data-id="연격" ><span>연격</span></div>
+                         <div class="select" data-id="퓨전" ><span>퓨전</span></div>
+                          <div class="select" data-id="프리즘스타"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/prism.png"
+                                        style="width: 15px; height: auto;">프리즘스타</span></span></div>
+                        <div class="select" data-id="포켓몬 EX" ><span>포켓몬 EX</span></div>
+                        <div class="select" data-id="M진화" ><span>M진화</span></div>
+                        <div class="select" data-id="BREAK진화" ><span>BREAK진화</span></div>
+                        <div class="select" data-id="복원" ><span>복원</span></div>
+                        <!-- add p65458 20260508 김태영 팀장님이 현업 요청으로 유선으로 전달 메가진화 ex 추가 요청 -->
+                        <div class="select" data-id="메가진화 ex" ><span>메가진화 ex</span></div>
+                        <div class="select" data-id="all" ><span> <i aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="text_button_warp" class="col-md-6 no_pd">
+                    <label class="mgt30">특성</label>
+                    <div id="ability_label1" class="type search_button_wrap">
+                        <div class="select" data-id="특성"><span>특성</span></div>
+                        <div class="select" data-id="고대능력"><span>고대능력</span></div>
+                        <div class="select" data-id="포켓파워"><span>포켓파워</span></div>
+                        <div class="select" data-id="포켓바디"><span>포켓바디</span></div>
+                        <div class="select" data-id="all"><span> <i aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 no_pd">
+                    <label class="mgt30">카드 타입</label>
+                    <div id="CardMonType" class="type search_button_wrap">
+                        <div class="select clicked" data-id="풀"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type1.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="불꽃"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type2.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="물"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type3.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="번개"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type4.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="초"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type5.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="격투"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type6.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="악"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type7.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="강철"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type8.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="페어리"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type11.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="드래곤"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type10.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="무색"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type9.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="all"><span> <i
+                                        aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 no_pd">
+                    <label class="mgt30">약점</label>
+                    <div id="Weakness" class="type search_button_wrap">
+                        <div class="select clicked" data-id="풀"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type1.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="불꽃"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type2.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="물"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type3.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="번개"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type4.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="초"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type5.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="격투"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type6.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="악"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type7.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="강철"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type8.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="페어리"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type11.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="드래곤"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type10.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="무색"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type9.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="all"><span> <i
+                                        aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-6 no_pd">
+                    <label class="mgt30">저항력</label>
+                    <div id="Resistance" class="type search_button_wrap">
+                        <div class="select clicked" data-id="풀"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type1.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="불꽃"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type2.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="물"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type3.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="번개"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type4.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="초"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type5.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="격투"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type6.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="악"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type7.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="강철"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type8.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="페어리"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type11.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="드래곤"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type10.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="무색"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type9.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="all"><span> <i
+                                        aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 no_pd">
+                    <label class="mgt30">기술에 필요한 에너지</label>
+                    <div id="TechErg" class="type search_button_wrap">
+                        <div class="select clicked" data-id="풀"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type1.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="불꽃"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type2.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="물"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type3.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="번개"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type4.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="초"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type5.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="격투"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type6.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="악"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type7.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="강철"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type8.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="페어리"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type11.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="드래곤"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type10.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="무색"><span><img
+                                        src="/public-assets/home/data/cards.image_www/data/images/symbol/type9.png"
+                                        class="type_b"></span></div>
+                        <div class="select clicked" data-id="all"><span> <i
+                                        aria-hidden="true" class="card-search-icon card-search-icon-bars colour_grey"></i> 모두 선택</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="range_wrap">
+                    <div id="hp_wrap" class="col-md-6 no_pd_left">
+                        <label class="mgt30">HP</label>
+                        <input type="hidden" class="hp" name="hp" value="380"/>
+                    </div>
+                    <div id="retreat_wrap" class="col-md-6 no_pd">
+                        <label class="mgt30">후퇴</label>
+                        <input type="hidden" class="retreat" name="retreat" value="5"/>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div id="tab2" class="tab_content">
+                <div class="clearfix"></div>
+                <label class="mgt30">카드종류</label>
+                <div id="CardType" class="type search_button_wrap">
+                    <div class="select" data-id="아이템"><span>아이템</span></div>
+					<div class="select" data-id="포켓몬의 도구"><span>포켓몬의 도구</span></div>
+                    <div class="select" data-id="서포"><span>서포트</span></div>
+                    <div class="select" data-id="스타디움"><span>스타디움</span></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="tab3" class="tab_content">
+                <div class="clearfix"></div>
+                <label class="mgt30">카드종류</label>
+                <div id="CardType" class="type search_button_wrap">
+                    <div class="select" data-id="기본 에너지"><span>기본 에너지</span></div>
+                    <div class="select" data-id="특수 에너지"><span>특수 에너지</span></div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12 no_pd mgt20">
+                <!-- 					<div class="col-md-3 col-md-offset-9 no_pd"> -->
+                <!-- 					</div>	 -->
+            </div>
+            <div class="clearfix"></div>
+            <div class=" mgt20">
+                <!-- 					<button id="filter_reset" class="btn btn-default">필터 초기화</button> -->
+                <button id="searchs" class="btn btn-primary btn-lg btn-block"><img src="/v2/img/search.png"
+                                                                                  class="search_img"> 조건 검색
+                </button>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+</div>
+<input name="limit" value="1" type="hidden">
+<div class="container" style="background-color: #fff; padding-top: 20px;">
+    <div id="card_wrap">
+         <div class="card"><a href="/cards/detail/BS2026006001"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_001.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006002"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_002.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006003"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_003.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006004"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_004.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006005"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_005.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006006"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_006.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006007"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_007.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006008"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_008.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006009"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_009.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006010"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_010.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006011"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_011.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006012"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_012.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006013"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_013.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006014"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_014.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006015"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_015.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006016"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_016.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006017"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_017.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006018"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_018.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006019"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_019.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006020"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_020.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006021"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_021.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006022"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_022.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006023"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_023.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006024"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_024.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006025"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_025.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006026"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_026.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006027"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_027.png?w=400"></a></div><div class="card"><a href="/cards/detail/BS2026006028"><img src="/public-assets/home/data/cards.image_www/data/wmimages/MEGA/M6a/M6a_028.png?w=400"></a></div>     </div>
+</div>
+<div class="text-center mgt30 mgb60">
+    <button id="load_more" type="button" class="btn btn-primary btn-lg" style="display: none;">
+        <!-- <i class="fa fa-spinner fa-pulse mgr10"></i> --> 더 불러오기...
+    </button>
+    <button id="load_more_search_text" type="button" class="btn btn-primary btn-lg" style="display: none;">
+        <!-- <i class="fa fa-spinner fa-pulse mgr10"></i> --> 더 불러오기...
+    </button>
+</div>
+<script>
+    var ori_form_data;
+    
+    if (ori_form_data) {
+        $("#card_wrap").children().remove();
+
+        //console.log(ori_formdata);
+        var formData = new FormData();
+        Object.keys(ori_form_data).forEach(function(v,i){
+            console.log(v, ori_form_data[v]);
+            formData.append(v, ori_form_data[v]);
+        });
+
+        $.ajax({
+            url: '/v2/ajax2_dev2',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+
+            success: function (data) {
+
+                var obj = jQuery.parseJSON(data);
+                console.log("msg = " + obj.msg);
+                /*
+                                console.log("msg = "+obj.msg);
+                                console.log("count = "+obj.count);
+                */
+                if (obj.count == 0) {
+                    sweetAlert("", "더 불러올 정보가 없습니다.", "error");
+                    return;
+                }
+                var output = "";
+
+                $.each(obj.result, function (key, val) {
+                    output += '<div class="card"><a href="/cards/detail/' + val.CardNum + '" target="_blank"><img src="' + cardThumbSrc(val.feature_image) + '"></a></div>';
+
+                });
+                $("#card_wrap").append(output);
+                $("[name=limit]").val(obj.limit);
+                $("button#load_more").show();
+
+                $(".card").mouseover(function () {
+                    $(this).addClass("js-animation-start");
+                });
+                $(".card").mouseleave(function () {
+                    $(this).removeClass("js-animation-start");
+                });
+
+            }
+        });
+    }
+
+    $(document).on("click", "#advanced_search_info", function () {
+
+        swal({
+            title: "",
+            text: '<b><i aria-hidden="true" class="card-search-icon card-search-icon-info"></i> 조건 검색이란?</b> <br /><br />검색어를 통한 검색이 아닌, 타입이나 약점 등의 조건이 같은 카드만을 일괄적으로 표시합니다. 원하는 조건의 버튼을 누른 후, 조건 검색 버튼을 눌러주세요.<br /><br />',
+            showCancelButton: false,
+            closeOnConfirm: false,
+            html: true
+        });
+    });
+
+
+    (function () {
+        if (jQuery && jQuery.fn && jQuery.fn.select2 && jQuery.fn.select2.amd) var e = jQuery.fn.select2.amd;
+        return e.define("select2/i18n/ko", [], function () {
+            return {
+                errorLoading: function () {
+                    return "결과를 불러올 수 없습니다."
+                }, inputTooLong: function (e) {
+                    var t = e.input.length - e.maximum, n = "너무 깁니다. " + t + " 글자 지워주세요.";
+                    return n
+                }, inputTooShort: function (e) {
+                    var t = e.minimum - e.input.length, n = "너무 짧습니다. " + t + " 글자 더 입력해주세요.";
+                    return n
+                }, loadingMore: function () {
+                    return "불러오는 중…"
+                }, maximumSelected: function (e) {
+                    var t = "최대 " + e.maximum + "개까지만 선택 가능합니다.";
+                    return t
+                }, noResults: function () {
+                    return "결과가 없습니다."
+                }, searching: function () {
+                    return "검색 중…"
+                }
+            }
+        }), {define: e.define, require: e.require}
+    })();
+
+    $("[name=GoodsName], [name=sort]").select2();
+
+
+    function reset_form() {
+
+        $("[name=search_text]").val("");
+        $("[name=limit]").val(0);
+        //     $("[name=GoodsName]").select2("val", "전체");
+        $("#card_wrap").children().remove();
+        $("button#load_more").hide();
+        $("button#load_more_search_text").hide();
+    }
+
+    jQuery(window).load(function () {
+        var ww = $(document).width();
+
+        var no_columns = 4;
+        if(ww < 700) {
+            no_columns = 2;
+
+            $('#card_wrap').pinterest_grid({
+                no_columns: no_columns,
+                padding_x: 10,
+                padding_y: 10,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
+        } else if( ww < 990){
+            no_columns = 4;
+
+            $('#card_wrap').pinterest_grid({
+                no_columns: no_columns,
+                padding_x: 10,
+                padding_y: 10,
+                margin_bottom: 50,
+                single_column_breakpoint: 700
+            });
+        }
+// 	    reset_form();
+    });
+
+    function advacned_search_option(status) {
+        if (status == "show") {
+            $(".search_option").css("position", "inherit");
+            $(".search_option").css("top", "auto");
+            $("span#advanced_search i").addClass("fa-rotate-180");
+        } else if (status == "hide") {
+            $(".search_option").css("position", "fixed");
+            $(".search_option").css("top", "-9999px");
+            $("span#advanced_search i").removeClass("fa-rotate-180");
+        } else if (status == "toggle") {
+
+            if ($('.search_option').css('position') === "fixed") {
+                $(".search_option").css("position", "inherit");
+                $(".search_option").css("top", "auto");
+                $("span#advanced_search i").addClass("fa-rotate-180");
+            } else {
+                $(".search_option").css("position", "fixed");
+                $(".search_option").css("top", "-9999px");
+                $("span#advanced_search i").removeClass("fa-rotate-180");
+            }
+        }
+    }
+
+
+    $(document).on("click", ".search_button_wrap [data-id=all]", function () {
+
+        var dataId = $(this).closest("div.search_button_wrap[id]").attr("id");
+
+        if ($(this).attr('class') === "select clicked") {
+            $("#tab1 div#" + dataId + " div").each(function () {
+                $(this).attr("class", "select clicked");
+            });
+        } else {
+            $("#tab1 div#" + dataId + " div").each(function () {
+                $(this).attr("class", "select");
+            });
+        }
+    });
+
+
+    $(document).on("click", "button#load_more, button#searchs", function () {
+
+        if ($(this).attr("id") == "search") {
+            $("[name=limit]").val(0);
+            $("#card_wrap").children().remove();
+        }
+
+        var CardTypeNum = $("ul.tabs li.active").data("id");
+        var limit = $("[name=limit]").val();
+        var CardType1 = [];
+        $("#tab1 div#CardType div.clicked").each(function () {
+            CardType1.push($(this).data("id"));
+        });
+        var CardType2 = [];
+        $("#tab2 div#CardType div.clicked").each(function () {
+            CardType2.push($(this).data("id"));
+        });
+        var CardType3 = [];
+        $("#tab3 div#CardType div.clicked").each(function () {
+            CardType3.push($(this).data("id"));
+        });
+        var CardMonType = [];
+        $("div.tab_content div#CardMonType div.clicked").each(function () {
+            CardMonType.push($(this).data("id"));
+        });
+        var Weakness = [];
+        $("div.tab_content div#Weakness div.clicked").each(function () {
+            Weakness.push($(this).data("id"));
+        });
+        var Resistance = [];
+        $("div.tab_content div#Resistance div.clicked").each(function () {
+            Resistance.push($(this).data("id"));
+        });
+        var TechErg = [];
+        $("div.tab_content div#TechErg div.clicked").each(function () {
+            TechErg.push($(this).data("id"));
+        });
+
+
+        var ability_label1 = [];
+        $("div.tab_content div#ability_label1 div.clicked").each(function () {
+            ability_label1.push($(this).data("id"));
+        });
+
+        var order = $("[name=sort]").find(':selected').data('order');
+        var orderby = $("[name=sort]").find(':selected').data('orderby');
+			console.log("order ==> "+order);
+			console.log("orderby ==> "+orderby);
+			console.log("CardType1 ==> "+CardType1);
+			console.log("CardType3 ==> "+CardType3);
+
+			console.log("CardMonType ==> "+CardMonType);
+			console.log("Weakness ==> "+Weakness);
+			console.log("Resistance ==> "+Resistance);
+			console.log("TechErg ==> "+TechErg);
+			console.log("ability_label1 ==> "+ability_label1);
+			console.log("hp ==> "+$("[name=hp]").val());
+			console.log("retreat ==> "+$("[name=retreat]").val());
+        var formData = new FormData();
+        formData.append("action", "get_more_cards");
+        formData.append("limit", limit);
+        formData.append("GoodsName", $("[name=GoodsName]").val());
+        formData.append("CardTypeNum", CardTypeNum);
+        if (CardTypeNum == 1) {
+			console.log(CardType1);
+            formData.append("CardType", CardType1);
+            formData.append("CardMonType", CardMonType);
+            formData.append("Weakness", Weakness);
+            formData.append("Resistance", Resistance);
+            formData.append("TechErg", TechErg);
+            formData.append("ability_label1", ability_label1);
+            formData.append("hp", $("[name=hp]").val());
+            formData.append("retreat", $("[name=retreat]").val());
+        } else if (CardTypeNum == 2) {
+            formData.append("CardType", CardType2);
+        } else if (CardTypeNum == 3) {
+            formData.append("CardType", CardType3);
+        }
+        formData.append("order", order);
+        formData.append("orderby", orderby);
+
+
+        $.ajax({
+            url: '/v2/ajax2_dev2',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+
+            success: function (data) {
+
+                var obj = jQuery.parseJSON(data);
+                console.log("msg = " + obj.msg);
+                                 console.log("msg = "+obj.msg);
+                               // console.log("count = "+obj.count);
+ 
+                if (obj.count == 0) {
+                    sweetAlert("", "더 불러올 정보가 없습니다.", "error");
+                    return;
+                }
+                var output = "";
+
+                $.each(obj.result, function (key, val) {
+                    output += '<div class="card"><a href="/cards/detail/' + val.CardNum + '" target="_blank"><img src="' + cardThumbSrc(val.feature_image) + '"></a></div>';
+
+                });
+                $("#card_wrap").append(output);
+                $("[name=limit]").val(obj.limit);
+                $("button#load_more").show();
+
+                $(".card").mouseover(function () {
+                    $(this).addClass("js-animation-start");
+                });
+                $(".card").mouseleave(function () {
+                    $(this).removeClass("js-animation-start");
+                });
+
+            }
+        });
+    });
+
+    $(document).on("click", "div.tab_content div.select", function () {
+        reset_form();
+    });
+
+    $("[name=GoodsName], [name=sort]").change(function () {
+        reset_form();
+    });
+
+
+    $('.hp').jRange({
+        from: 0,
+        to: 380,
+        step: 1,
+        format: '%s',
+        step: 10,
+        width: $("#hp_wrap").width(),
+        showLabels: true,
+        isRange: true,
+        ondragend: function (value) {
+            reset_form()
+        }
+    });
+
+
+    $('.retreat').jRange({
+        from: 0,
+        to: 5,
+        step: 1,
+        format: '%s',
+        scale: [0, 1, 2, 3, 4, 5],
+        width: "100%",
+        showLabels: true,
+        isRange: true,
+        ondragend: function (value) {
+            reset_form()
+        }
+    });
+
+
+        
+
+
+    var cardThumbnailPublicBase = "\/public-assets\/home\/data\/cards.image_www\/data\/wmimages\/";
+    function cardThumbSrc(feature) {
+        var path = String(feature || "");
+        var extra = "";
+        var q = path.indexOf("?");
+        if (q >= 0) {
+            extra = "&" + path.substring(q + 1);
+            path = path.substring(0, q);
+        }
+        path = path.replace(/^(?:https?:)?\/\/cards\.image\.pokemonkorea\.co\.kr\/data\//i, "");
+        if (path.indexOf("wmimages/") !== 0) {
+            path = path.replace("images/", "wmimages/");
+        }
+        var fallback = "/s3.php?key=" + encodeURIComponent("home/data/cards.image_www/data/" + path) + extra;
+        var decoded;
+        try { decoded = decodeURIComponent(path); } catch (error) { return fallback; }
+        if (!cardThumbnailPublicBase || decoded.indexOf("wmimages/") !== 0 || /[%\\\x00-\x1f\x7f?#]/.test(decoded) || !/\.(?:jpe?g|png|gif|webp|avif|ico)$/i.test(decoded)) {
+            return fallback;
+        }
+        var segments = decoded.split("/");
+        for (var i = 0; i < segments.length; i++) {
+            if (!segments[i] || segments[i] === "." || segments[i] === "..") return fallback;
+        }
+        return cardThumbnailPublicBase + segments.slice(1).map(encodeURIComponent).join("/") + (extra ? "?" + extra.substring(1) : "");
+    }
+
+    function search_text(status) {
+        if (status == "load_more") {
+            var limit = $("[name=limit]").val();
+        } else {
+            $("#card_wrap").children().remove();
+            var limit = 0;
+        }
+        var search_text = $("[name=search_text]").val();
+
+        var formData = new FormData();
+        formData.append("action", "search_text_cards");
+        formData.append("search_text", $("[name=search_text]").val());
+ 
+
+        formData.append("search_params", $("[name=search_params]").val());
+
+ 
+
+        formData.append("limit", limit);
+        $.ajax({
+            url: '/v2/ajax2_dev2',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+
+            success: function (data) {
+
+                var obj = jQuery.parseJSON(data);
+                console.log("msg = " + obj.msg);
+                console.log("count = " + obj.count);
+                if (obj.count == 0) {
+
+                    alert("더 불러올 정보가 없습니다.");
+
+                    return;
+                }
+                var output = "";
+
+                $.each(obj.result, function (key, val) {
+                    output += '<div class="card"><a href="/cards/detail/' + val.CardNum + '" target="_blank"><img src="' + cardThumbSrc(val.feature_image) + '"></a></div>';
+
+                });
+                $("#card_wrap").append(output);
+                $("[name=limit]").val(obj.limit);
+                $("button#load_more_search_text").show();
+
+                $(".card").mouseover(function () {
+                    $(this).addClass("js-animation-start");
+                });
+                $(".card").mouseleave(function () {
+                    $(this).removeClass("js-animation-start");
+                });
+
+            }
+        });
+    }
+
+
+    function search_text_load_more() {
+        var search_text = $("[name=search_text]").val();
+        var limit = $("[name=limit]").val();
+        var formData = new FormData();
+        formData.append("action", "search_text_cards");
+        formData.append("search_text", $("[name=search_text]").val());
+        formData.append("limit", limit);
+        $.ajax({
+            url: '/v2/ajax2_dev2',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+
+            success: function (data) {
+
+                var obj = jQuery.parseJSON(data);
+                console.log("msg = " + obj.msg);
+                console.log("count = " + obj.count);
+                if (obj.count == 0) {
+
+                    $("[name=limit]").val(0);
+                    alert("더 불러올 정보가 없습니다.");
+                    return;
+                }
+                var output = "";
+
+                $.each(obj.result, function (key, val) {
+                    output += '<div class="card"><a href="/cards/detail/' + val.CardNum + '" target="_blank"><img src="' + cardThumbSrc(val.feature_image) + '"></a></div>';
+
+                });
+                $("#card_wrap").append(output);
+                $("[name=limit]").val(obj.limit);
+                $("button#load_more_search_text").show();
+
+                $(".card").mouseover(function () {
+                    $(this).addClass("js-animation-start");
+                });
+                $(".card").mouseleave(function () {
+                    $(this).removeClass("js-animation-start");
+                });
+
+            }
+        });
+    }
+
+    function search_keyword() {
+        //console.log($(".main-search-box > .nav-tabs > li").next().children().click());
+        $(".main-search-box > .nav-tabs > li").next().children().click()
+        var keyword = $("[name=keyword]").val();
+
+        if (keyword.length < 2) {
+            sweetAlert("", "두글자 이상 작성해 주셔야 합니다.", "error");
+            return;
+        }
+
+        if (keyword == "" || keyword == " ") {
+            sweetAlert("", "불러올 정보가 없습니다.", "error");
+            return;
+        }
+
+        var formData = new FormData();
+        formData.append("action", "search_cards_keyword");
+        formData.append("keyword", keyword);
+        $.ajax({
+            url: '/v2/ajax2_dev2',
+            data: formData,
+            cache: false,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            success: function (data) {
+                var obj = JSON.parse(data);
+                if (obj.status) {
+                    $(".keyword_wrap_header #keyword_text").text(obj.keyword);
+                    $(".keyword_wrap_header #keyword_count").text(obj.count);
+
+
+                    var contents = jQuery.parseJSON(obj.contents);
+
+                    var output = "";
+
+                    $.each(contents, function (key, val) {
+						console.log(val);
+                        output += '<div class="keyword_wrap_list"><h1>' + val.title + '</h1><p>' + val.content + '</p></div><hr />';
+                    });
+                    $(".keyword_wrap_body").html(output);
+
+                    $(".keyword_wrap").css("display", "block");
+
+                } else {
+                    swal({title: "", text: obj.msg, timer: 1500, showConfirmButton: false});
+                }
+            }
+        });
+    }
+
+
+    $(document).on("click", "button#load_more_search_text", function (e) {
+        e.preventDefault();
+        search_text("load_more");
+        advacned_search_option('hide');
+
+    });
+
+    $(document).on("click", "button#search_text_submit", function (e) {
+        e.preventDefault();
+        search_text("load");
+        advacned_search_option('hide');
+
+    });
+
+    $(document).on("click", "button#search_keyword_submit", function (e) {
+        search_keyword();
+
+    });
+
+
+    $("[name=keyword]").keypress(function (event) {
+        if (event.which == 13) {
+            search_keyword();
+        }
+    });
+
+    $("[name=search_text]").keypress(function (event) {
+        if (event.which == 13) {
+            search_text("load");
+            advacned_search_option('hide');
+        }
+    });
+
+
+    /*
+        $(document).keyup(function (e) {
+            e.preventDefault();
+            if ($("[name=keyword]") && (e.keyCode === 13)) {
+                alert(1);
+            }
+            if ($("[name=search_text]") && (e.keyCode === 13)) {
+                search_text("load");
+                advacned_search_option('hide');
+            }
+        });
+    */
+
+    $(document).on("click", "button#close_keyword_wrap", function (e) {
+        $(".keyword_wrap").css("display", "none");
+    });
+
+
+    // 여기까지
+
+
+    $('.search-panel .dropdown-menu').find('a').click(function (e) {
+        e.preventDefault();
+        var param = $(this).attr("href").replace("#", "");
+        var concept = $(this).text();
+        $('.search-panel span#search_concept').text(concept);
+        $('.input-group #search_param').val(param);
+    });
+
+    $(".search_button_wrap .select").click(function () {
+        $(this).toggleClass("clicked");
+
+    });
+
+
+    $(".tab_content").hide();
+    $(".tab_content:first").show();
+
+    $("ul.tabs li").click(function () {
+        reset_form();
+        $("ul.tabs li").removeClass("active");
+        $(this).addClass("active");
+        $(".tab_content").hide()
+        var activeTab = $(this).attr("rel");
+        $("#" + activeTab).fadeIn()
+    });
+
+
+    $('span#advanced_search').click(function () {
+        advacned_search_option("toggle");
+    });
+
+
+    $('#faq_toggle').click(function () {
+        if ($('.faq_option').css('display') === "block") {
+            $(".faq_option").css("display", "none");
+            $("span#faq_toggle i").removeClass("fa-rotate-180");
+        } else {
+            $(".faq_option").css("display", "block");
+            $("span#faq_toggle i").addClass("fa-rotate-180");
+        }
+    });
+
+    $(".card").mouseover(function () {
+        $(this).addClass("js-animation-start");
+    });
+    $(".card").mouseleave(function () {
+        $(this).removeClass("js-animation-start");
+    });
+
+
+</script>
+
+ 
+	</div>
+	
+	<footer id="ft" class="page-pokemon">
+		<div class="ft-top">
+			<div class="container flex-justify-space">
+				<a href="https://www.pokemonkorea.co.kr" target="_blank"><img src="/v3/img/ft_logo.png" alt="pokemon korea, inc."></a>
+				<ul class="list-split d-lg-block d-none">
+									<li><a href="https://www.pokemonkorea.co.kr/company" target="_blank">회사소개</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/business" target="_blank">사업내용</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/partner" target="_blank">제휴안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/terms" target="_blank">이용약관</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/privacy" target="_blank">개인정보처리방침</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/email" target="_blank">이메일무단수집거부</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/domestic_representative" target="_blank">대한민국 내 대리인 안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/faq" target="_blank">고객센터</a></li>
+								</ul>
+			</div>
+			<a href="" class="btn-top"><p class="sr-only">go top</p></a>
+		</div>
+		<div class="ft-mdl">
+			<div class="container flex-justify-space">
+				<div class="d-lg-block d-none">
+					<p>(주)포켓몬코리아&nbsp;&nbsp; 경기도 용인시 수지구 신수로 801, 4층 </p>
+					<ul class="list-split">
+						<li>대표이사:임재범</li>
+						<li>개인정보관리책임자:임재범</li>
+						<li>사업자등록번호:113-86-07676</li>
+					</ul>
+				</div>
+				<ul class="d-flex">
+					<li><a href="https://www.facebook.com/PokemonCoKr" target="_blank" class="icon-face">facebook</a></li>
+					<!-- <li><a href="https://story.kakao.com/ch/pokemonkorea" target="_blank" class="icon-kakao">kakakostory</a></li> -->
+					<li><a href="https://instagram.com/pokemon_korea_official?igshid=OGQ5ZDc2ODk2ZA==" target="_blank" class="icon-insta">instagram</a></li>
+					<li><a href="https://www.youtube.com/playlist?list=PLi-MwfPpkXIK9BlTTdsy_7NwbNkJT_GCY" target="_blank" class="icon-youtube">youtube</a></li>
+					<li><a href="http://www.pokemonstore.co.kr" target="_blank" class="icon-pokemon">pokemon</a></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div class="ft-btm">
+			<div class="container">
+				<ul class="list-mn d-lg-none d-block">
+									<li><a href="https://www.pokemonkorea.co.kr/company">회사소개</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/business">사업내용</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/partner">제휴안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/terms">이용약관</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/privacy">개인정보처리방침</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/email">이메일무단수집거부</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/domestic_representative">대한민국 내 대리인 안내</a></li>
+									<li><a href="https://www.pokemonkorea.co.kr/faq">고객센터</a></li>
+								</ul>
+				<div class="row flex-lg-row-reverse flex-justify-space"> 
+									<div class="copylight">
+						<ul>
+							<li></li><li><font color="#ffffff"><br></font></li><li><span style="font-size: 14px;"><font color="#ffffff">©2026 Pokémon. ©1995-2026 Nintendo/Creatures Inc./GAME FREAK inc.</font></span></li><li><span style="font-size: 14px;"><font color="#ffffff">©Nintendo, Creatures, GAME FREAK, TV Tokyo, ShoPro, JR Kikaku. ©Pokémon. ©1998-2020 PIKACHU PROJECT.　&nbsp;&nbsp;</font></span></li><li><span style="font-size: 14px;"><font color="#ffffff">포켓몬스터, 포켓몬, Pokémon, 몬스터볼, Nintendo Switch, Nintendo 3DS, Nintendo DS는 Nintendo의 상표입니다.</font></span></li><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span></ul><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><p><font face="Noto Sans KR" style="" color="#ffffff"><span style="font-size: 14px;">본 사이트의 콘텐츠에 대한 무단 복제 및 도용을 금하며 </span><br class="d-lg-none d-block"><span style="font-size: 14px;">이를 어길 시 법적 조치를 받을 수 있습니다.</span></font></p><span style="font-size: 14px;"><font color="#ffffff">
+					</font></span></div><span style="font-size: 14px;"><font color="#ffffff">
+					</font></span><div class="customer"><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><div class="d-flex"><span style="font-size: 14px;">
+							</span><p><font face="Noto Sans KR" style="" color="#ffffff"><span style="font-size: 14px;">고객센</span><span style="font-size: 14px;">터</span></font></p><span style="font-size: 14px;">
+							</span><ul class="d-lg-block d-none"><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">운영시간 : 평일 15시 ~ 18시</span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">031-272-0108&nbsp;</span></font></li><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;"><br></span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+								</font></span><li><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">카드 게임 및 카드 게임 이벤트 : 1588-4273</span></font></li><li></li><li><font color="#ffffff" face="Noto Sans KR"><span style="font-size: 14px;">webmaster@pokemonkorea.co.kr</span></font></li><li><font color="#ffffff" face="Noto Sans KR"><span style="font-size: 14px;"><br></span></font></li><span style="font-size: 14px;"><font color="#ffffff">
+							</font></span></ul><span style="font-size: 14px;">
+							</span><ul class="d-lg-none d-block"><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">운영시간 : 평일 15시 ~ 18시<br>031-272-0108</span></li><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">카드 게임 및 카드 게임 이벤트 : 1588-4273</span></li><span style="font-size: 14px;">
+								</span><li><span style="font-size: 14px;">webmaster@pokemonkorea.co.kr</span></li><span style="font-size: 14px;">
+							</span></ul><span style="font-size: 14px;">
+						</span></div><span style="font-size: 14px;"><font color="#ffffff">
+						</font></span><p><font face="Noto Sans KR" color="#ffffff"><span style="font-size: 14px;">※당사에서는 Pokémon GO 관련 문의는 대응하지 않습니다.&nbsp;</span></font></p>
+					</div>				</div>
+			</div>
+		</div>
+	</footer>
+ 
+		</div>
+	</footer>
+	<div class="d-lg-block d-none">
+		<!-- ADN 클로징패널 PC 설치  start -->
+		<script type="text/javascript">
+		var adn_panel_param = adn_panel_param || [];
+		adn_panel_param.push([{
+		ui:'108221',	
+		ci:'1082210002',
+		gi:'113535'
+		}]);
+		</script>
+		<script type="text/javascript" async src="//fin.rainbownine.net/js/across_adn_closed_pc_ad_1.0.4.js"></script>
+		<!-- ADN 클로징패널 PC 설치 end -->
+	</div>
+	<div class="d-lg-none d-block">
+		<!-- ADN 클로징패널 MO 설치  start -->
+		<script type="text/javascript">
+		var adn_mobile_panel_param = adn_mobile_panel_param || [];
+		adn_mobile_panel_param.push([{
+		ui:'108221',	
+		ci:'1082210001',
+		gi:'113536'
+		}]);
+		</script>
+		<script type="text/javascript" async src="//fin.rainbownine.net/js/across_adn_closed_mobile_ad_1.0.4.js"></script>
+		<!-- ADN 클로징패널 MO 설치 end -->
+	</div>
+	
+<script>
+var swiperVisual = new Swiper('.sect-visual', {
+	loop: true,
+	centeredSlides: true,
+	slidesPerView: 1.4,
+	spaceBetween: 0,
+	loopedSlides: 7,
+	navigation: {
+		nextEl: '.sect-visual .swiper-button-next',
+		prevEl: '.sect-visual .swiper-button-prev',
+	},
+	breakpoints: {
+		991: {
+			slidesPerView: 1.2,
+		},
+	},
+});
+var swiperMov = new Swiper('.sect-mov-swiper .container', {
+	slidesPerView: 1.5,
+	spaceBetween: 150,
+	centeredSlides: true,
+	loop: true,
+	loopedSlides: 7,
+	navigation: {
+		nextEl: '.sect-mov-swiper .d-lg-block .swiper-button-next',
+		prevEl: '.sect-mov-swiper .d-lg-block .swiper-button-prev',
+	},
+	pagination: {
+        el: '.sect-mov-swiper .d-lg-none .swiper-pagination',
+      },
+	breakpoints: {
+		991: {
+			slidesPerView: 1,
+			spaceBetween: 0,
+		},
+	},
+});
+var sect1Menu = ['플레이어즈 랭킹', '코리안리그 랭킹']
+var swiperBanner = new Swiper('.sect-rank .swiper-container', {
+	slidesPerView:2,
+	breakpoints: {
+		991: {
+			slidesPerView: 1.1,
+			spaceBetween: 20,
+			pagination: {
+				el: '.sect-rank .swiper-pagination-name',
+				clickable: true,
+				renderBullet: function(index, className) {
+					return '<span class="' + className + '">' + '<span class="name">' + (sect1Menu[index]) + '</span>' + '</span>';
+				},
+			},
+		},
+	}
+});
+var swiper = new Swiper('.sect-info .swiper-container', {
+	slidesPerView:7,
+	spaceBetween: 10,
+	centeredSlides: true,
+	loopedSlides: 150,
+	loop: true,
+	navigation: {
+	nextEl: '.sect-info .swiper-button-next',
+	prevEl: '.sect-info .swiper-button-prev',
+	},
+	breakpoints: {
+		991: {
+			slidesPerView: 2.8,
+			spaceBetween: 15,
+		},
+	}
+});
+$(".slider01").ionRangeSlider({
+	type: "double",
+	min: 0,
+	max: 340,
+	from: 0,
+	to: 340,
+	});
+$(".slider02").ionRangeSlider({
+	type: "double",
+	grid: true,
+	grid_num: 5,
+	min: 0,
+	max: 5,
+	from: 0,
+	to: 5,
+	});
+$(document).ready(function(){
+	if($(window).width() < 991){
+		$('input.js-place01').attr('placeholder','카드 검색 (포켓몬 이름 혹은 텍스트)');
+	};
+});
+$(window).on('load',function(){
+   $('.btn-top').click(function(){
+      $('html, body').animate({'scrollTop': $('#ct').offset().top - $('#hd').outerHeight() }, 400);
+
+      return false;
+   });
+});
+
+</script>
+</div>
+</body>
+</html>
+
+ 

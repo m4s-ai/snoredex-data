@@ -70,12 +70,26 @@ PUBLIC_MASKING_RESPONSE_HASHES = frozenset({
     "d92677a3eda4616ae93d206f80f0208a3f206b09ec2b12de30bac60d9b66ad74",  # sg
     "ced799972589624e94060523d73cef76df7cfe8b13d2c5875e2060166a49598a",  # my, LF
     "13f027aa3714b87e61d08eb0e625cd0e21d38131f4add7dd6002b5ee48ae45bb",  # sg, LF
+    "b0e8cafa960da6a7066f6c2a224bbb0c6a512c9bd945ea861c38b8adec1a6695",  # SG campaign, same masking code
+})
+
+# Official Korean footer contact, reviewed in these exact retained public responses only.
+PUBLIC_CONTACT_RESPONSE_HASHES = frozenset({
+    "4c46c8025c6bb7f6a3b3f0d596c7ca7f39ad3d28e197bf9f735b66846ecdf3a0",  # retained provenance excerpts of the same public footer
+    "698436be2fb952fc23de610391ae2168ce4a31a2f22234dc784eebe096712f83",
+    "8a1e3a4a2834426213924d2342ff8843f9dee8929b243d0ca2559bcea6bde893",
+    "3332426eecddfdf9641675600ae6df045c2e432bbe51a4ee1282265c59ad0432",
 })
 
 
 def reviewed_public_masking_literal(data: bytes, found: str) -> bool:
     """Accept only the reviewed masking token in these exact public responses."""
     return found == "password" and hashlib.sha256(data).hexdigest() in PUBLIC_MASKING_RESPONSE_HASHES
+
+
+def reviewed_public_contact_literal(data: bytes, found: str) -> bool:
+    return (found == "webmaster@pokemonkorea.co.kr"
+            and hashlib.sha256(data).hexdigest() in PUBLIC_CONTACT_RESPONSE_HASHES)
 
 
 DOC_HEADER = re.compile(
@@ -908,6 +922,10 @@ def _collect_g2c(state: dict[str, Any]) -> dict[str, Any]:
             }
             expected_query_fields = {
                 "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
+                "pokemon-japan-html": {
+                    "nameQueries", "se_ta", "regulation_sidebar_form", "pg", "illust",
+                    "sm_and_keyword", "pageParameter",
+                },
                 "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
                 "confirmed-source-json": {
                     "nameQueries", "retainedUnitIds", "providerIdentity", "sourceRecord",
@@ -2480,7 +2498,8 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
                         at = text.find("@", at + 1)
 
                 matches = filter(
-                    lambda match: not reviewed_public_masking_literal(data, match.group(0)), matches
+                    lambda match: not (reviewed_public_masking_literal(data, match.group(0))
+                                       or reviewed_public_contact_literal(data, match.group(0))), matches
                 )
                 found_hits = []
                 for match in sorted(matches, key=lambda row: row.start()):

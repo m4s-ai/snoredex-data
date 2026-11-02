@@ -53,6 +53,18 @@ def main() -> int:
         expect(f"other findings remain scanned in {name}",
                rf.reviewed_public_masking_literal(response, "api" + "key"), False)
 
+    response_root = Path(__file__).resolve().parent / "evidence/issue-444-official-source-integration-20261102/raw"
+    cases = [("sea-sg-distribution.html", masking_token, rf.reviewed_public_masking_literal)]
+    public_contact = "webmaster" + "@" + "pokemonkorea.co.kr"
+    cases.extend((name, public_contact, rf.reviewed_public_contact_literal)
+                 for name in ("kr-old-detail.html", "kr-search-home.html", "kr-snorlax-page1.html"))
+    cases.append(("../sources.json", public_contact, rf.reviewed_public_contact_literal))
+    for name, literal, reviewed in cases:
+        response = (response_root / name).read_bytes()
+        expect(f"exact public literal in {name}", reviewed(response, literal), True)
+        expect(f"changed public response in {name}", reviewed(response + b"changed", literal), False)
+        expect(f"other literal in {name}", reviewed(response, "private" + "@" + "example.invalid"), False)
+
     families = [
         "_collect_g0", "_collect_g0b", "_collect_g1", "_collect_g2", "_collect_g2b",
         "_collect_g2c", "_collect_g3", "_collect_g4", "_collect_g5", "_collect_g6",

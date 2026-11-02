@@ -1144,10 +1144,28 @@ https://www.pokemon-card.com/card-search/resultAPI.php
   ?keyword=<UTF-8 escaped>&se_ta=&regulation_sidebar_form=all&pg=&illust=&sm_and_keyword=true&page=<N>
 ```
 
-- `regulation_sidebar_form=all` is **required**; without it the API silently filters to Standard-legal cards (11 hits instead of 57).
-- The page parameter is **`page`**, not `pg`. `pg=1` returns zero hits — it looks like pagination but is not.
-- The search matches fuzzily and returns ゴンベ (Munchlax) alongside カビゴン; filter by name.
-- Detail page `details.php/card/<id>/regu/all` yields collector number, set code (from the card image path) and illustrator.
+- Send the complete parameter set above and require the response to echo the requested keyword,
+  `regulation=all`, and page. A short query can silently return the unfiltered Standard listing.
+- The page parameter is **`page`**, not `pg`; follow and account for every declared result page.
+- The fuzzy search also returns ゴンベ (Munchlax) and カビゴンドール (Snorlax Doll).
+  Preserve those raw records and positively exclude their explicit different identities.
+- Detail page `details.php/card/<id>/regu/all` supplies its printed collector number where present,
+  set code from the card image path, and illustrator. Unnumbered DP1 detail1082 retains a null
+  source-native number; do not fabricate one from the existing catalogue.
+
+The #444 integration retains the 2026-11-02 controls: 58 name-query IDs over two pages,
+including 52 Snorlax names; the Snorlax HR and UR queries return zero, while the global
+HR/UR queries return 62/108 records and the Snorlax SR query returns two. These are specific
+omissions, not a prohibition on whole rarity classes. An exact positive remains usable;
+silence neither disproves a card nor establishes an operator's reason for omitting it.
+The active JP adapter tests query echoes, pagination, row ranges and this positive-only boundary.
+Retained controls: [#444 source integration](evidence/issue-444-official-source-integration-20261102/README.md).
+
+The same integration activates a separate bounded Singapore-English slice of the existing Asia
+adapter. It does not substitute WEST numbers into absent HTML fields or infer a distinct SEA
+physical edition from language. The official Chinese 宝可梦卡牌会员 directory is registered from
+its publisher announcement, with native card acquisition still explicitly uninspected. Korea's
+new 24-ID name response is independent of the retained 45 positive historical identities.
 
 **Read the illustrator out of the anchor, never out of the flattened page text.** The credit sits in
 its own field — `<div class="author">` containing an `<a>` whose text is the name — and the anchor is

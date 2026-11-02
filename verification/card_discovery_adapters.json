@@ -2,8 +2,8 @@
   "meta": {
     "schema": "snoredex-card-discovery-contract",
     "schemaVersion": "1.0.0",
-    "coverageVersion": "1.19.0",
-    "reviewedAt": "2026-09-01",
+    "coverageVersion": "1.20.0",
+    "reviewedAt": "2026-11-02",
     "policies": [
       "Discovery starts from provider-native localized name queries and never from snorlax_cards.json, units.json, or the legacy Cardmarket candidate list.",
       "Every fetched detail record is retained before identity matching and reaches exactly one visible accounting bucket.",
@@ -435,6 +435,80 @@
             "KR:svM:094/175:base"
           ],
           "positiveNameExclusions": []
+        }
+      ]
+    },
+    {
+      "adapterId": "pokemon-japan-native-name",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "pokemon-japan-html",
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "state": "active",
+      "listEndpointTemplate": "https://www.pokemon-card.com/card-search/resultAPI.php",
+      "detailEndpointTemplate": "https://www.pokemon-card.com/card-search/details.php/card/{rawProviderId}/regu/all",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "page",
+      "pageSize": 39,
+      "slices": [
+        {
+          "sliceId": "pokemon-japan-snorlax-positive",
+          "coverageEdgeId": "jp-card-search-positive",
+          "rawLocale": "ja",
+          "locality": "JP",
+          "language": "Japanese",
+          "script": "Jpan",
+          "nameQueries": [
+            "カビゴン"
+          ],
+          "positiveNameExclusions": [
+            {
+              "prefix": "ゴンベ",
+              "identity": "Munchlax",
+              "reason": "The official name identifies Munchlax, not Snorlax."
+            },
+            {
+              "prefix": "カビゴンドール",
+              "identity": "Snorlax Doll",
+              "reason": "The official name identifies the Snorlax Doll Trainer card, not a Snorlax Pokémon."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "adapterId": "pokemon-asia-sea-english-name",
+      "adapterVersion": "1.0.0",
+      "responseFormat": "pokemon-asia-html",
+      "providerId": "pokemon-card-asia",
+      "surfaceId": "asia-sea-english-card-search",
+      "state": "active",
+      "listEndpointTemplate": "https://asia.pokemon-card.com/{rawLocale}/card-search/list/",
+      "detailEndpointTemplate": "https://asia.pokemon-card.com/{rawLocale}/card-search/detail/{rawProviderId}/",
+      "category": "card",
+      "sourceFirst": true,
+      "pageParameter": "pageNo",
+      "pageSize": 20,
+      "slices": [
+        {
+          "sliceId": "pokemon-asia-sg-snorlax",
+          "coverageEdgeId": "asia-sea-english-card-search-positive",
+          "rawLocale": "sg",
+          "locality": "SEA",
+          "language": "English",
+          "script": "Latn",
+          "localityEvidenceMode": "unqualified-language",
+          "nameQueries": [
+            "Snorlax"
+          ],
+          "positiveNameExclusions": [
+            {
+              "prefix": "Snorlax Doll",
+              "identity": "Snorlax Doll",
+              "reason": "The official name identifies a Trainer card rather than a Snorlax Pokémon."
+            }
+          ]
         }
       ]
     }
@@ -1026,6 +1100,150 @@
       "mode": "exact-match",
       "targetCardReleaseId": "RELEASE:WEST:French:LOR:TG10:Snorlax-Unfazed-Fat-Thumping-Snore",
       "evidence": "The current retained TCGdex detail is the provider rekey of swsh11.5tg-TG10 and preserves the same French Origine Perdue Galerie de Dresseurs TG10 identity."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "31158",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:XY-P:149:Snorlax-Plump-Body-Knock-Away",
+      "evidence": "Reviewed official Japanese detail 31158: カビゴン, source-native XYP 149/XY-P, matches the existing Japanese XY-P 149 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "32302",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:XY-P:261:Snorlax-Thick-Skinned-Body-Slam",
+      "evidence": "Reviewed official Japanese detail 32302: カビゴン, source-native XYP 261/XY-P, matches the existing Japanese XY-P 261 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "36395",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sm10:076:Snorlax-Lazy-Eating-Big-Counter",
+      "evidence": "Reviewed official Japanese detail 36395: カビゴン, source-native SM10 076/095, matches the existing Japanese sm10 076 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "43464",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sv2a:143:Snorlax-Voraciousness-Thudding-Press",
+      "evidence": "Reviewed official Japanese detail 43464: カビゴン, source-native SV2a 143/165, matches the existing Japanese sv2a 143 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "43966",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sv2a:181:Snorlax-Voraciousness-Thudding-Press",
+      "evidence": "Reviewed official Japanese detail 43966: カビゴン, source-native SV2a 181/165, matches the existing Japanese sv2a 181 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "45096",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sv4a:310:Snorlax-Voraciousness-Thudding-Press",
+      "evidence": "Reviewed official Japanese detail 45096: カビゴン, source-native SV4a 310/190, matches the existing Japanese sv4a 310 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "45501",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:svIba:046:Snorlax-Lazy-Press",
+      "evidence": "Reviewed official Japanese detail 45501: カビゴン, source-native SVI 046/066, matches the existing Japanese svIba 046 card release. Raw source identifiers are retained; no finish or edition is inferred. The page explicitly names バトルアカデミー, Po-Suzuki, HP160 and ぐうたらプレス120; svIba is the existing qualified Battle Academy identity, not a rewritten source-native SVI code."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "45627",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sv5a:051:Snorlax-But-First-Food-Heavy-Impact",
+      "evidence": "Reviewed official Japanese detail 45627: カビゴン, source-native SV5a 051/066, matches the existing Japanese sv5a 051 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "46215",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:svLN:010:Snorlax-Spike-Draw-Mega-Punch",
+      "evidence": "Reviewed official Japanese detail 46215: カビゴン, source-native SVLN 010/022, matches the existing Japanese svLN 010 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "47083",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:sv9:075:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "evidence": "Reviewed official Japanese detail 47083: ホップのカビゴン, source-native SV9 075/100, matches the existing Japanese sv9 075 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "48658",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:m2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "evidence": "Reviewed official Japanese detail 48658: ホップのカビゴン, source-native M2a 136/193, matches the existing Japanese m2a 136 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "49283",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:mC:567:Snorlax-But-First-Food-Heavy-Impact",
+      "evidence": "Reviewed official Japanese detail 49283: カビゴン, source-native MC 567/742, matches the existing Japanese mC 567 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "49284",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:mC:568:Snorlax-Lazy-Press",
+      "evidence": "Reviewed official Japanese detail 49284: カビゴン, source-native MC 568/742, matches the existing Japanese mC 568 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "49285",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:mC:569:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+      "evidence": "Reviewed official Japanese detail 49285: ホップのカビゴン, source-native MC 569/742, matches the existing Japanese mC 569 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "49695",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:m3:062:Snorlax-Gormandizer-Collapse",
+      "evidence": "Reviewed official Japanese detail 49695: カビゴン, source-native M3 062/080, matches the existing Japanese m3 062 card release. Raw source identifiers are retained; no finish or edition is inferred."
+    },
+    {
+      "providerId": "pokemon-card-jp",
+      "surfaceId": "jp-card-search",
+      "rawLocale": "ja",
+      "rawProviderId": "1082",
+      "mode": "exact-match",
+      "targetCardReleaseId": "RELEASE:JP:Japanese:DP1:unnumbered:Snorlax-Lv35-Block-Ease-Up",
+      "evidence": "Reviewed official detail1082 is the exact source URL already establishing the existing Japanese DP1 unnumbered card. The source-native collector number remains null; the existing canonical unnumbered identity is used without inventing a printed identifier, finish or edition."
     }
   ],
   "gaps": [
@@ -1035,8 +1253,8 @@
       "providerId": "pokemon-card-jp",
       "surfaceId": "jp-card-search",
       "terminalState": "needs-evidence",
-      "reason": "The known omission of secret and rainbow records needs a parser-specific accounting design before activation.",
-      "retryCondition": "Activate a Japanese slice after retained pagination fixtures and omission-preserving tests exist."
+      "reason": "Active bounded Japanese name acquisition retains all declared pages and filter echoes; known Snorlax HR/UR omissions remain unknown, although global categories and Snorlax SR have positives.",
+      "retryCondition": "Recheck exact omitted identities through independent positive sources; no whole-rarity exclusion or historical closure."
     },
     {
       "gapId": "official-asia-cn",
@@ -1044,8 +1262,8 @@
       "providerId": "pokemon-card-asia",
       "surfaceId": "asia-card-search",
       "terminalState": "blocked-by-source",
-      "reason": "The official Asia card-search capability does not cover mainland China.",
-      "retryCondition": "Activate only after a provider-native official or bounded specialist Simplified-Chinese surface is registered in the capability graph."
+      "reason": "The Asia search has no mainland-CN locale. An official Chinese WeChat directory is now registered, but no native card responses or usable acquisition endpoint have been retained.",
+      "retryCondition": "Obtain supported access and retain native card IDs/responses from 宝可梦卡牌会员 or another bounded CN surface; an announcement is not a card enumeration."
     },
     {
       "gapId": "official-italian-archive-filter-coverage",
@@ -1143,7 +1361,7 @@
       "providerId": "pokemon-card-korea",
       "surfaceId": "pokemon-card-korea-card-search",
       "terminalState": "needs-evidence",
-      "reason": "The retained official Korean 잠만보 response accounts for 45 positive identities within that bounded response, while additional independently retained Korean releases and the region-dependent route prevent any provider-wide historical-completeness claim.",
+      "reason": "The retained official Korean 잠만보 response accounts for 45 positive identities within that bounded response, while additional independently retained Korean releases and the region-dependent route prevent any provider-wide historical-completeness claim. The new 24-ID card-name response is a separate limited observation and cannot replace those earlier positives.",
       "retryCondition": "Rerun the exact Korean name slice for positive deltas and retain any alternate positive routes; missing rows, failed routes and zero results remain unknown."
     }
   ]
