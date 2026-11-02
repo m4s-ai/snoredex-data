@@ -572,13 +572,27 @@ def source_first_release_for(
     return matches[0] if matches else None
 
 
+_SOURCE_FIRST_CACHE: dict[tuple, list[dict]] = {}
+
+
 def load_source_first_releases() -> list[dict]:
-    graph = json.loads(AUTHORITATIVE_GRAPH.read_text(encoding="utf-8-sig"))
-    return [
-        row.get("payload") or {}
-        for row in graph.get("entities", [])
-        if row.get("entityType") == "card-release"
-    ]
+    """Card-release payloads from the graph, parsed once per unchanged graph file (#460).
+
+    The evidence check asks once per unprojected specimen; re-parsing the 12 MB graph each time
+    cost ~20 s. The cache key carries path, size and mtime, so a rewritten or re-pointed graph is
+    read again. Callers only read the payloads.
+    """
+    info = AUTHORITATIVE_GRAPH.stat()
+    key = (str(AUTHORITATIVE_GRAPH), info.st_size, info.st_mtime_ns)
+    if key not in _SOURCE_FIRST_CACHE:
+        graph = json.loads(AUTHORITATIVE_GRAPH.read_text(encoding="utf-8-sig"))
+        _SOURCE_FIRST_CACHE.clear()
+        _SOURCE_FIRST_CACHE[key] = [
+            row.get("payload") or {}
+            for row in graph.get("entities", [])
+            if row.get("entityType") == "card-release"
+        ]
+    return _SOURCE_FIRST_CACHE[key]
 
 
 def write_registry(doc: dict) -> None:

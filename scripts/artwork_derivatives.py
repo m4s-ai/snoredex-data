@@ -19,6 +19,8 @@ import zlib
 from pathlib import Path
 from typing import Callable, Iterable
 
+from file_digest import sha256_hex
+
 ROOT = Path(__file__).resolve().parent.parent
 PREVIEW_WIDTH = 360
 THUMBNAIL_WIDTH = 120
@@ -772,7 +774,7 @@ def derivative_path(source: Path, kind: str) -> Path:
 def file_digest(path: Path) -> str | None:
     if not path.is_file():
         return None
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    return sha256_hex(path)
 
 
 def _source_key(source: Path) -> str:

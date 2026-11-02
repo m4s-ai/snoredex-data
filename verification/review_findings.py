@@ -28,13 +28,16 @@ import re
 import contextlib
 import subprocess
 import sys
-import threading
 import traceback
 from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
 from checks import Check, Note, Suite
+from sensitive_scan import (  # noqa: F401 - re-exported for the findings harness
+    SENSITIVE_SCAN_EXEMPT, reviewed_public_contact_literal, reviewed_public_masking_literal,
+    scan_history, scan_tree,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -48,52 +51,10 @@ RESERVED_DROPDOWN_OPTIONS = {"none"}
 # Documentation roles (#100). The stage is the design constraint, not a label: `auto` is paid for
 # on every task because AGENTS.md (and the CLAUDE.md shim that imports it) is injected at session start, so only what changes
 # behaviour before an agent acts belongs there. Everything else is opened deliberately.
-# Files that quote the sensitive-expression patterns themselves, so P4 and P6 would otherwise
-# match on the check's own vocabulary. Both paths of the readiness audit are listed on purpose:
-# P6 walks *history*, where blobs carry the path the file had at the time, and #102 moved it to
-# verification/history/. Rewriting the old path out is what broke P6 in that PR.
-SENSITIVE_SCAN_EXEMPT = frozenset({
-    "verification/PUBLIC-READINESS-AUDIT.md",          # pre-#102 path, still in history
-    "verification/history/PUBLIC-READINESS-AUDIT.md",  # current path
-    "verification/review_findings.py",
-})
-
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
 
 # D6 (#461): ceiling for the always-loaded agent guide, below Codex's 32 KiB combined default.
 AGENT_GUIDE_BUDGET_BYTES = 28 * 1024
-
-# Reviewed 30th campaign HTML embeds public New Relic input-masking code. Its three
-# password literals are a type comparison and two boolean mask settings, not secrets.
-# Pin exact blobs (including the two LF-normalized versions in local commit history).
-# Never exempt paths, changed bytes, or other findings in these same responses.
-PUBLIC_MASKING_RESPONSE_HASHES = frozenset({
-    "48636dd43d1fd020e2744e840bc9b1723f92597b265ac96a251b5d5da67852ab",  # id
-    "baa1867e8814b378e29f6fb19f10a88f2ef8e05fa4482a0fbc983286c78b6e21",  # my
-    "d92677a3eda4616ae93d206f80f0208a3f206b09ec2b12de30bac60d9b66ad74",  # sg
-    "ced799972589624e94060523d73cef76df7cfe8b13d2c5875e2060166a49598a",  # my, LF
-    "13f027aa3714b87e61d08eb0e625cd0e21d38131f4add7dd6002b5ee48ae45bb",  # sg, LF
-    "b0e8cafa960da6a7066f6c2a224bbb0c6a512c9bd945ea861c38b8adec1a6695",  # SG campaign, same masking code
-})
-
-# Official Korean footer contact, reviewed in these exact retained public responses only.
-PUBLIC_CONTACT_RESPONSE_HASHES = frozenset({
-    "4c46c8025c6bb7f6a3b3f0d596c7ca7f39ad3d28e197bf9f735b66846ecdf3a0",  # retained provenance excerpts of the same public footer
-    "698436be2fb952fc23de610391ae2168ce4a31a2f22234dc784eebe096712f83",
-    "8a1e3a4a2834426213924d2342ff8843f9dee8929b243d0ca2559bcea6bde893",
-    "3332426eecddfdf9641675600ae6df045c2e432bbe51a4ee1282265c59ad0432",
-})
-
-
-def reviewed_public_masking_literal(data: bytes, found: str) -> bool:
-    """Accept only the reviewed masking token in these exact public responses."""
-    return found == "password" and hashlib.sha256(data).hexdigest() in PUBLIC_MASKING_RESPONSE_HASHES
-
-
-def reviewed_public_contact_literal(data: bytes, found: str) -> bool:
-    return (found == "webmaster@pokemonkorea.co.kr"
-            and hashlib.sha256(data).hexdigest() in PUBLIC_CONTACT_RESPONSE_HASHES)
-
 
 DOC_HEADER = re.compile(
     r"<!--\s*doc:\s*role=(?P<role>[^;\r\n]+)(?:;|\r?\n)\s*"
@@ -2413,23 +2374,18 @@ def _collect_g7(state: dict[str, Any]) -> dict[str, Any]:
 def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     tracked = None
-    sensitive_matches = None
     personal_commit_emails = None
     path = None
-    non_email_pattern = None
-    non_email_markers = None
     identity_fields = None
     history_shallow = None
     history_scanned = None
     history_hits = None
-    email_pattern = None
-    email_local_chars = None
     decisions = None
     decision_keys = None
     data = None
     with guarded("G8", "publication readiness"):
         def _collect_g8_part1():
-            nonlocal email_local_chars, email_pattern, non_email_markers, non_email_pattern, path
+            nonlocal path
             required_licences = {
                 "LICENSES/PolyForm-Noncommercial-1.0.0.md": {
                     "url": "https://github.com/polyformproject/polyform-licenses/blob/1.0.0/PolyForm-Noncommercial-1.0.0.md",
@@ -2464,91 +2420,11 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
                     (ROOT / doc).exists(),
                     f"{doc} is required before publication (#5)",
                 )
-            non_email_pattern = re.compile(
-                r"(?:api[_-]?key|passwd|password|Bearer\s+[A-Za-z0-9._-]{8,}|Authorization:|Cookie:)"
-                r"|C:\\Users\\|(?<![A-Za-z0-9._-])/(?:Users/[a-z]|home/[a-z]+/)",
-                re.IGNORECASE,
-            )
-            email_pattern = re.compile(
-                r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", re.IGNORECASE
-            )
-            email_local_chars = frozenset(
-                "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._%+-"
-            )
-            non_email_markers = (
-                b"api_key", b"api-key", b"apikey", b"passwd", b"password", b"bearer",
-                b"authorization:", b"cookie:", b"c:\\users\\", b"/users/", b"/home/",
-            )
-
-        def _collect_g8_part2():
-            nonlocal sensitive_matches
-            def sensitive_matches(data: bytes, label: str) -> list[str]:
-                if b"\0" in data:
-                    return []
-
-                lowered = data.lower()
-                has_email_candidate = b"@" in data
-                has_other_candidate = any(marker in lowered for marker in non_email_markers)
-                if not has_email_candidate and not has_other_candidate:
-                    return []
-
-                text = data.decode("utf-8", errors="ignore")
-                matches = list(non_email_pattern.finditer(text)) if has_other_candidate else []
-                if has_email_candidate:
-                    at = text.find("@")
-                    while at >= 0:
-                        start = at
-                        while start and text[start - 1] in email_local_chars:
-                            start -= 1
-                        match = email_pattern.match(text, start)
-                        if match is not None and match.start() <= at < match.end():
-                            matches.append(match)
-                        at = text.find("@", at + 1)
-
-                matches = filter(
-                    lambda match: not (reviewed_public_masking_literal(data, match.group(0))
-                                       or reviewed_public_contact_literal(data, match.group(0))), matches
-                )
-                found_hits = []
-                for match in sorted(matches, key=lambda row: row.start()):
-                    found = match.group(0)
-                    preceding = text[match.start() - 1:match.start()]
-                    recent_url_start = text.rfind("https://", max(0, match.start() - 300), match.start())
-                    recent_url_prefix = (
-                        text[recent_url_start:match.start()] if recent_url_start >= 0 else ""
-                    )
-                    inside_source_url = bool(recent_url_prefix) and not any(
-                        delimiter in recent_url_prefix for delimiter in ('"', "'", "\n", "\r")
-                    )
-                    # Official source assets use names such as `S10a_F@4x.png`. In a URL path the
-                    # segment resembles an email syntactically but is an image-density filename, not
-                    # contact data. `SV2a F@4x.png` even contains a source-native space, so retain a
-                    # short URL-context check as well as the ordinary path-boundary check.
-                    source_asset_name = (
-                        (preceding in {"/", "\\"} or inside_source_url)
-                        and found.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))
-                    )
-                    if "noreply" not in found.lower() and not source_asset_name:
-                        found_hits.append(f"{label}: {found[:80]}")
-                return found_hits
 
         def _collect_g8_part3():
-            nonlocal data, path, tracked
-            scanned, hits = 0, []
+            nonlocal tracked
             tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).split(b"\0")
-            for raw_name in tracked:
-                if not raw_name:
-                    continue
-                relative = raw_name.decode("utf-8", errors="surrogateescape")
-                path = ROOT / relative
-                if relative in SENSITIVE_SCAN_EXEMPT:
-                    continue  # These files quote the expressions and known historical finding.
-                try:
-                    data = path.read_bytes()
-                except OSError:
-                    continue
-                scanned += 1
-                hits.extend(sensitive_matches(data, relative))
+            scanned, hits = scan_tree(ROOT)
             check(
                 "P4",
                 "No secrets, personal paths, or contact details in the complete tracked tree",
@@ -2559,61 +2435,7 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
 
         def _collect_g8_part4():
             nonlocal data, decision_keys, decisions, history_hits, history_scanned, history_shallow, path
-            def scan_history() -> tuple[bool, int, list[str]]:
-                """Scan every reachable Git blob, not merely the current version of each filename."""
-                try:
-                    shallow = subprocess.check_output(
-                        ["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, text=True
-                    ).strip() == "true"
-                    objects = subprocess.check_output(
-                        ["git", "rev-list", "--objects", "--all"], cwd=ROOT, text=True
-                    ).splitlines()
-                except (OSError, subprocess.CalledProcessError):
-                    return True, 0, ["Git history could not be read"]
-
-                process = subprocess.Popen(
-                    ["git", "cat-file", "--batch"], cwd=ROOT,
-                    stdin=subprocess.PIPE, stdout=subprocess.PIPE,
-                )
-                assert process.stdin is not None and process.stdout is not None
-
-                # Keep git fed while this thread scans the previous blob. Writing one SHA and then
-                # waiting for its response turned 3,900 tiny pipe round-trips into minutes on Windows;
-                # the producer keeps the same constant-memory protocol busy in both directions.
-                def feed_objects() -> None:
-                    try:
-                        process.stdin.writelines(
-                            (entry.partition(" ")[0] + "\n").encode("ascii")
-                            for entry in objects
-                        )
-                    except BrokenPipeError:
-                        pass  # The return-code check below reports a failed git process.
-                    finally:
-                        process.stdin.close()
-
-                writer = threading.Thread(target=feed_objects)
-                writer.start()
-                history_hits = []
-                scanned_blobs = 0
-                for entry in objects:
-                    sha, _, path = entry.partition(" ")
-                    header = process.stdout.readline().decode("ascii", errors="replace").strip().split()
-                    if len(header) < 3 or header[1] == "missing":
-                        continue
-                    object_type, size = header[1], int(header[2])
-                    data = process.stdout.read(size)
-                    process.stdout.read(1)  # protocol newline
-                    if object_type != "blob" or size > 5_000_000:
-                        continue
-                    if path in SENSITIVE_SCAN_EXEMPT:
-                        continue
-                    scanned_blobs += 1
-                    history_hits.extend(sensitive_matches(data, f"{sha[:10]}:{path or '(unknown path)'}"))
-                writer.join()
-                if process.wait(timeout=10) != 0:
-                    return True, 0, ["Git history could not be read"]
-                return shallow, scanned_blobs, sorted(set(history_hits))
-            history_shallow, history_scanned, history_hits = scan_history()
+            history_shallow, history_scanned, history_hits = scan_history(ROOT)
             decisions_path = ROOT / "publication-decisions.json"
             try:
                 decisions = json.loads(decisions_path.read_text(encoding="utf-8"))
@@ -2743,7 +2565,6 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
             )
 
         _collect_g8_part1()
-        _collect_g8_part2()
         _collect_g8_part3()
         _collect_g8_part4()
         _collect_g8_part5()

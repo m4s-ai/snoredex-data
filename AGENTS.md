@@ -244,7 +244,7 @@ python -m playwright install chromium            # UI-relevant PRs and the L4 la
 
 python scripts/regen.py                          # write every derived artifact, then run the core gate
 python scripts/regen.py --check                  # ALTERNATIVE when already generated; also what CI calls
-# Full retained-run validation: L4 and PRs changing discovery inputs.
+# Full retained-run validation: L4 and every PR (memo-replayed when unchanged).
 python scripts/source_adapters.py --check --full-refresh
 python scripts/card_discovery.py --check --full-refresh
 # Diagnostic only: limit determinism checks for a focused meta-test; never a merge substitute.
@@ -266,14 +266,16 @@ git diff --exit-code -- . ':(exclude)*.sqlite'    # optional clean-tree check af
 
 Every `--check` mode is observational: it may not create or replace files, update timestamps, or
 write databases, and it must be mutually exclusive with refresh, replay, acceptance, and other
-write actions. An acceptance command must render from the newly accepted canonical state; an
+write actions. The sole permitted write is the content-addressed
+[verification memo](WORKFLOW-MAP.md#verification-memo) in `.git/snoredex-memo/`: outside the tree,
+never evidence, safe to delete; `--memo off` gives a reference run. An acceptance command must render from the newly accepted canonical state; an
 immediate second offline check must be clean.
 
 **The `.sqlite` files are excluded from the byte diff, and always must be:** SQLite embeds its
 library version, so `--check` compares `database.py`'s logical dump instead
 ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
 
-**`P6`/`P7` read git history.** They fail on a shallow clone (`git fetch --unshallow` once), and a
+**`P6`/`P7` read git history.** They fail on a shallow clone (`git fetch --unshallow` once; `regen.py` stops at once), and a
 green run before the commit cannot validate it: run `review_findings.py --scope publication` again
 after the batch's commit/push ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
@@ -347,6 +349,8 @@ When a queue grows because the corpus grew, record the cause beside the number.
   hand-merge a generated file. Do not stack unrelated tasks or reuse an old issue's branch.
 - **Attribute honestly.** End commit messages with the `Co-Authored-By` trailer of the agent and
   model that actually made the commit, as your runtime supplies it; never name another model.
+- Open a PR as a draft until the local gate is green; drafts skip CI. When the diff touches
+  `ui-pr.yml` paths, run `python verification/test_site.py` before pushing.
 - The release gate runs on Ubuntu and Windows. The Windows leg keeps the filesystem-touching steps
   (generator determinism, `git diff --exit-code`, `review_findings.py`, `publish.py --verify`) for
   path portability; the browser suite is Linux-only.

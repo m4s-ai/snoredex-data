@@ -40,6 +40,18 @@ jobs:
         with:
           python-version: "3.11"
 
+      # Verification memo (#460): steps whose observed inputs are unchanged since they passed on
+      # this branch or on main are reported instead of rerun. L4 never restores it.
+      - name: Restore verification memo
+        if: env.GATE_LEVEL == 'L3'
+        uses: actions/cache/restore@v4
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-v1-${{ runner.os }}-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+          restore-keys: |
+            snoredex-memo-v1-${{ runner.os }}-${{ github.head_ref || github.ref_name }}-
+            snoredex-memo-v1-${{ runner.os }}-main-
+
       - name: Install browser test dependencies
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
         run: python -m pip install -r requirements.txt
@@ -68,22 +80,20 @@ jobs:
           PY
 
       - name: Generated artifacts and core regressions
-        run: python scripts/regen.py --check
+        shell: bash
+        run: |
+          if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi
+          python scripts/regen.py --check --memo "${memo}"
 
+      # Every PR runs the retained-run validation; the memo replays it when none of the files it
+      # reads changed (#460). This replaces a hand-kept path filter that rarely skipped anything.
       - name: Full retained discovery history
         if: runner.os == 'Linux'
-        env:
-          DISCOVERY_BASE_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+        shell: bash
         run: |
-          if [ "${GITHUB_EVENT_NAME}" = "pull_request" ]; then
-            if ! git diff --name-only "${DISCOVERY_BASE_SHA}...${GITHUB_SHA}" | grep -Eq \
-              '^(verification/runs/(source-adapters|card-discovery)/|verification/(source_adapters|source_adapter_schema|card_discovery_adapters|card_discovery_schema|source_capability_graph|source_capability_schema|authoritative_graph|confirmed_sources|source_first_prints)\.json$|scripts/(source_adapters|card_discovery|projection_runs|bulbapedia_historical|source_capabilities|authoritative_graph)\.py$|\.github/workflows/release-gate\.yml$)'; then
-              echo "full retained discovery history: no retained-run or projection-input changes"
-              exit 0
-            fi
-          fi
-          python scripts/source_adapters.py --check --full-refresh
-          python scripts/card_discovery.py --check --full-refresh
+          if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi
+          python scripts/check_memo.py run --memo "${memo}" -- scripts/source_adapters.py --check --full-refresh
+          python scripts/check_memo.py run --memo "${memo}" -- scripts/card_discovery.py --check --full-refresh
 
       - name: Live finish-source verification
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
@@ -154,6 +164,15 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
+      # Only passed steps are stored, so a failing run may still save: the next push reruns the
+      # failure and whatever changed.
+      - name: Save verification memo
+        if: always() && env.GATE_LEVEL == 'L3'
+        uses: actions/cache/save@v4
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-v1-${{ runner.os }}-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
+
       - name: No absolute paths, secrets, or caches in the tree
         shell: bash
         run: |
@@ -169,6 +188,51 @@ jobs:
           print("no cache directories in the build tree")
           PY
 
+  # Each push to main runs every core step once more (a reference run) and seeds the memo that
+  # new pull requests restore. It is off the pull-request critical path (#460).
+  memo-seed:
+    if: ${{ github.event_name == 'push' }}
+    name: seed verification memo (${{ matrix.os }})
+    env:
+      PYTHONDONTWRITEBYTECODE: "1"
+      PYTHONUTF8: "1"
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Restore previous main memo
+        uses: actions/cache/restore@v4
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-v1-${{ runner.os }}-main-${{ github.run_id }}
+          restore-keys: snoredex-memo-v1-${{ runner.os }}-main-
+
+      - name: Full core gate on main, refreshing the memo
+        run: python scripts/regen.py --check --memo refresh
+
+      - name: Full retained discovery history (refresh)
+        if: runner.os == 'Linux'
+        run: |
+          python scripts/check_memo.py run --memo refresh -- scripts/source_adapters.py --check --full-refresh
+          python scripts/check_memo.py run --memo refresh -- scripts/card_discovery.py --check --full-refresh
+
+      - name: Save main memo
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-v1-${{ runner.os }}-main-${{ github.run_id }}
+
   post-push:
     if: ${{ github.event_name == 'push' }}
     name: post-push P6/P7 audit
@@ -181,6 +245,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+
+      # Restore only: memo-seed alone saves, so a partial cache never shadows the full one.
+      - name: Restore main memo
+        uses: actions/cache/restore@v4
+        with:
+          path: .git/snoredex-memo
+          key: snoredex-memo-v1-Linux-main-${{ github.run_id }}
+          restore-keys: snoredex-memo-v1-Linux-main-
 
       - name: Audit the published commit history
         shell: bash

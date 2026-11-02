@@ -21,6 +21,7 @@ syntax and publish checks remain separate because they are not regeneration conc
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import os
 import pathlib
 import subprocess
@@ -32,8 +33,10 @@ sys.dont_write_bytecode = True
 os.environ["GIT_OPTIONAL_LOCKS"] = "0"
 try:
     from scripts.workflow_observation import tree_snapshot
+    from scripts import check_memo
 except ModuleNotFoundError:
     from workflow_observation import tree_snapshot
+    import check_memo
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 
@@ -108,9 +111,11 @@ TESTS = [
     ["verification/test_asia_locality_matrix.py"],
     ["verification/test_locality_matrix.py"],
     ["verification/test_authoritative_graph.py"],
+    ["verification/test_authoritative_graph_replays.py"],
     ["verification/test_physical_evidence_workflow.py"],
     ["verification/test_fetch_attachment.py"],
     ["verification/test_tcgdex_snapshot.py"],
+    ["verification/test_file_digest.py"],
     ["verification/fetch_attachment.py", "--evidence-check"],
     ["verification/test_collector_catalogue.py"],
     ["verification/test_card_content.py"],
@@ -130,6 +135,8 @@ TESTS = [
     ["verification/test_workflow_loop.py"],
     ["verification/test_measure_workflow.py"],
     ["verification/test_findings_harness.py"],
+    ["verification/test_sensitive_scan.py"],
+    ["verification/test_check_memo.py"],
     ["verification/review_findings.py"],          # cross-artifact + publication
     ["verification/test_regen_readiness.py"],
 ]
@@ -140,12 +147,43 @@ CHILD_ENV["PYTHONIOENCODING"] = "utf-8"
 CHILD_ENV["PYTHONDONTWRITEBYTECODE"] = "1"
 
 
-def run(cmd: list[str], label: str) -> bool:
-    print(f"\n=== {label} ===", flush=True)
+def run_step(session: check_memo.MemoSession, phase: str, cmd: list[str], capture: bool,
+             quiet: bool = False) -> tuple[bool, str]:
+    """Run one step through the verification memo; return (passed, printable block).
+
+    An unchanged step (#460) reports a memo hit instead of running. Captured output is returned so
+    parallel steps print in list order; `quiet` keeps a passing step's output out of the log.
+    """
+    label = " ".join(cmd)
+    header = f"\n=== {label} ==="
+    if not capture:
+        print(header, flush=True)
     started = time.perf_counter()
-    proc = subprocess.run(cmd, cwd=ROOT, env=CHILD_ENV)
-    print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
-    return proc.returncode == 0
+    outcome = session.execute(phase, cmd, CHILD_ENV, capture=capture)
+    if outcome.hit is not None:
+        footer = check_memo.hit_line(label, outcome.hit)
+    else:
+        footer = f"--- {label}: {time.perf_counter() - started:.2f}s"
+    passed = outcome.returncode == 0
+    body = outcome.output or ""
+    if quiet and passed:
+        body = ""
+    block = "\n".join(part for part in (header if capture else "", body.rstrip("\n"), footer) if part)
+    return passed, block
+
+
+def run_phase(session: check_memo.MemoSession, commands: list[list[str]], jobs: int) -> list[list[str]]:
+    """Run observational steps in parallel, print their blocks in list order, return the failures."""
+    def one(cmd: list[str]) -> tuple[bool, str]:
+        return run_step(session, "check", cmd, capture=True, quiet=cmd[0].endswith("review_findings.py"))
+
+    failures = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, jobs)) as pool:
+        for cmd, (passed, block) in zip(commands, pool.map(one, commands)):
+            print(block, flush=True)
+            if not passed:
+                failures.append(cmd)
+    return failures
 
 
 def tree_state() -> tuple[dict, dict, dict]:
@@ -170,34 +208,45 @@ def tree_state() -> tuple[dict, dict, dict]:
     return tree_snapshot(ROOT, paths=[os.fsdecode(path) for path in metadata]), metadata, index_state
 
 
-def verify(check_commands: list[list[str]], tests: list[list[str]]) -> bool:
-    determinism_failures = [
-        cmd for cmd in check_commands
-        if not run([sys.executable, *cmd], " ".join(cmd))
-    ]
+def verify(session: check_memo.MemoSession, check_commands: list[list[str]],
+           tests: list[list[str]], jobs: int) -> bool:
+    determinism_failures = run_phase(session, check_commands, jobs)
     if determinism_failures:
         print("\nFAILED determinism checks:", file=sys.stderr)
         for cmd in determinism_failures:
             print(f"  - {' '.join(cmd)}", file=sys.stderr)
         return False
+    test_failures = run_phase(session, tests, jobs)
+    for cmd in test_failures:
+        print(f"\nFAILED {' '.join(cmd)}", file=sys.stderr)
+    return not test_failures
 
-    for test in tests:
-        if test[0].endswith("review_findings.py"):
-            label = " ".join(test)
-            print(f"\n=== {label} ===", flush=True)
-            started = time.perf_counter()
-            proc = subprocess.run([sys.executable, *test], cwd=ROOT, text=True,
-                                  encoding="utf-8", env=CHILD_ENV,
-                                  stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            print(f"--- {label}: {time.perf_counter() - started:.2f}s", flush=True)
-            if proc.returncode != 0:
-                print(proc.stdout)
-                print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
-                return False
-        elif not run([sys.executable, *test], " ".join(test)):
-            print(f"\nFAILED {' '.join(test)}", file=sys.stderr)
+
+def regenerate(session: check_memo.MemoSession) -> bool:
+    for cmd in REGEN:
+        passed, block = run_step(session, "write", cmd, capture=False)
+        print(block, flush=True)
+        if not passed:
+            print(f"\nFAILED regenerating {' '.join(cmd)}", file=sys.stderr)
             return False
     return True
+
+
+def shallow_clone_blocked(allow_shallow: bool) -> bool:
+    """Stop before minutes of work that a shallow clone cannot pass (#460).
+
+    collector_catalogue.py reconstructs predecessors from Git history and P6 audits it, so a
+    shallow clone fails late. Diagnostic runs may continue with --allow-shallow.
+    """
+    shallow = subprocess.run(
+        ["git", "rev-parse", "--is-shallow-repository"], cwd=ROOT, text=True,
+        stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+    ).stdout.strip() == "true"
+    if shallow and not allow_shallow:
+        print("regen.py: shallow clone. collector_catalogue.py and P6 need full Git history; run "
+              "`git fetch --unshallow` once, or pass --allow-shallow for a diagnostic run.",
+              file=sys.stderr)
+    return shallow and not allow_shallow
 
 
 def main() -> int:
@@ -206,8 +255,17 @@ def main() -> int:
                     help="verify artifacts and run the core regression gate")
     ap.add_argument("--check-only", action="append", metavar="SCRIPT",
                     help="run only selected CHECK entries (repeatable diagnostic hook)")
+    ap.add_argument("--allow-shallow", action="store_true",
+                    help="diagnostic only: run on a shallow clone (P6 still fails)")
+    ap.add_argument("--memo", choices=check_memo.MODES, default="use",
+                    help="use: skip steps whose observed inputs are unchanged (default); refresh: run "
+                         "every step and rewrite the memo; off: reference run without any memo")
+    ap.add_argument("--jobs", type=int, default=min(4, os.cpu_count() or 1),
+                    help="parallel CHECK/TESTS steps (REGEN stays serial); 1 = serial")
     args = ap.parse_args()
 
+    if shallow_clone_blocked(args.allow_shallow):
+        return 2
     if args.check_only and not args.check:
         ap.error("--check-only requires --check")
     check_commands = CHECK
@@ -219,19 +277,22 @@ def main() -> int:
         wanted = set(args.check_only)
         check_commands = [cmd for cmd in CHECK if cmd[0] in wanted]
 
-    if not args.check:
-        for cmd in REGEN:
-            if not run([sys.executable, *cmd], cmd[0]):
-                print(f"\nFAILED regenerating {' '.join(cmd)}", file=sys.stderr)
-                return 1
+    session = check_memo.MemoSession(ROOT, args.memo)
+    CHILD_ENV[check_memo.MODE_VAR] = session.mode
+    if not args.check and not regenerate(session):
+        return 1
 
     before_check = tree_state()
+    changed, valid = True, False
     try:
-        valid = verify(check_commands, [] if args.check_only else TESTS)
+        valid = verify(session, check_commands, [] if args.check_only else TESTS, args.jobs)
     finally:
         changed = tree_state() != before_check
         if changed:
             print("\nRead-only gate changed working-tree files, metadata or Git index.", file=sys.stderr)
+        else:  # a run that wrote nothing may keep what passed; generators only after a green run
+            session.commit(full_success=valid and not args.check_only)
+        print("\n" + session.summary())
     if changed or not valid:
         return 1
 

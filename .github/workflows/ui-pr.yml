@@ -33,12 +33,15 @@ concurrency:
 
 jobs:
   browser:
+    # Like the release gate, draft pull requests skip the browser suite until ready for review.
+    if: ${{ github.event_name != 'pull_request' || !github.event.pull_request.draft }}
     name: ui-browser (chromium)
     runs-on: ubuntu-latest
     steps:
+      # verification/test_site.py reads the checked-out tree only; no Git history is needed.
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 1
 
       - uses: actions/setup-python@v5
         with:
@@ -46,6 +49,12 @@ jobs:
 
       - name: Install browser test dependencies
         run: python -m pip install -r requirements.txt
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install Chromium with Linux dependencies
         run: python -m playwright install --with-deps chromium
