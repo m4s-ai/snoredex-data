@@ -275,7 +275,7 @@ immediate second offline check must be clean.
 library version, so `--check` compares `database.py`'s logical dump instead
 ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
 
-**`P6`/`P7` read git history.** They fail on a shallow clone (`git fetch --unshallow` once; `regen.py` stops at once), and a
+**`P6`/`P7` read git history**, and the post-push audit adds GitHub's pull-request heads (#467). They fail on a shallow clone (`git fetch --unshallow` once; `regen.py` stops at once), and a
 green run before the commit cannot validate it: run `review_findings.py --scope publication` again
 after the batch's commit/push ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
