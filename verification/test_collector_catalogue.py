@@ -492,6 +492,13 @@ def product_rarity_regressions() -> None:
                         for route in transition["transitions"] if spec_0030_item in route["fromItemIds"]]
     assert spec_0030_routes and all(route == [by_legacy_all["pkmtch-s-p-s-p-145-t-chinese-none-mirror-holo"]["itemId"]]
                                     for route in spec_0030_routes), spec_0030_routes
+    # An owner-rejected finish candidate retires; it never merges into the surviving printing of
+    # its release (PT Boundaries Crossed 109 reverse holo, #458).
+    rejected_bcr = "item-476cc110-23ba-56f1-9a86-d94eede81570"
+    bcr_routes = [(route["changeKind"], route["fromItemIds"], route["toItemIds"])
+                  for transition in read("collector_migrations.json")["catalogueTransitions"]
+                  for route in transition["transitions"] if rejected_bcr in route["fromItemIds"]]
+    assert bcr_routes and all(route == ("retired-1:0", [rejected_bcr], []) for route in bcr_routes), bcr_routes
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.

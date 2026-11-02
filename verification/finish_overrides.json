@@ -1041,8 +1041,8 @@
       "languages": [
         "Spanish"
       ],
-      "retrievedAt": "2026-08-27",
-      "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo.",
+      "retrievedAt": "2026-11-02",
+      "evidence": "The complete localized Diamond & Pearl checklist lists 37 Snorlax; its legend reads \"Cartas 18-119: aparecen en una versión no foil.\" and has no Parallel Set entry (the English checklist: \"Cards 18-119: come in foil versions and non-foil versions.\"). It supports the non-holo only. Re-read 2026-11-02 (PDF SHA-256 d79480876287ccd76033c086e50c8459fd2376dd8c44051a77e5ad4562858908); the earlier reading had carried over the English Parallel Set legend.",
       "evidenceScope": "standard-set"
     },
     "fco-official-checklist-en": {
@@ -2391,6 +2391,24 @@
       "retrievedAt": "2026-09-08",
       "evidence": "The retained revision (verification/evidence/issue-266-generations-reverse-20260908.json) names Snorlax 58/83 as Rare and states that cards in the English, German, French, Italian and Spanish sets were also available as Reverse Holos. Applied only to the already established English, French and Italian GEN 58 releases. No ordinary finish, stamp, edition or absence is inferred.",
       "evidenceScope": "standard-set"
+    },
+    "elitefourum-quuador-sets-languages-20261101": {
+      "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+      "sourceType": "Elite Fourum collector-community post",
+      "authorityTier": "specialist-reference",
+      "coverage": "positive-only",
+      "supportsAbsence": false,
+      "languages": [
+        "German",
+        "Italian",
+        "Portuguese",
+        "Spanish"
+      ],
+      "claimFields": [
+        "finish"
+      ],
+      "retrievedAt": "2026-11-01",
+      "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
     }
   },
   "overrides": [
@@ -5502,20 +5520,6 @@
       "printings": [
         {
           "finish": "non-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sourceRefs": [
-            "dp-official-checklist-es"
-          ]
-        },
-        {
-          "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
@@ -11613,6 +11617,158 @@
         "Thai"
       ],
       "printings": []
+    },
+    {
+      "setCode": "HIF",
+      "number": "50",
+      "languages": [
+        "Portuguese"
+      ],
+      "printings": [
+        {
+          "finish": "reverse-holo",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ],
+          "evidenceOnlyForExistingPrintings": true
+        }
+      ]
+    },
+    {
+      "setCode": "FL",
+      "number": "15",
+      "languages": [
+        "German"
+      ],
+      "printings": [
+        {
+          "finish": "reverse-holo",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ],
+          "evidenceOnlyForExistingPrintings": true
+        }
+      ]
+    },
+    {
+      "setCode": "FL",
+      "number": "15",
+      "languages": [
+        "Italian"
+      ],
+      "printings": [
+        {
+          "finish": "holo",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ],
+          "evidenceOnlyForExistingPrintings": true
+        }
+      ]
+    },
+    {
+      "setCode": "SK",
+      "number": "100",
+      "languages": [
+        "Italian"
+      ],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ],
+          "evidenceOnlyForExistingPrintings": true
+        }
+      ]
+    },
+    {
+      "setCode": "JU",
+      "number": "11",
+      "languages": [
+        "Spanish"
+      ],
+      "printings": [
+        {
+          "finish": "holo",
+          "edition": "1st Edition",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "JU",
+      "number": "11",
+      "languages": [
+        "Portuguese"
+      ],
+      "printings": [
+        {
+          "finish": "holo",
+          "edition": "1st Edition",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ]
+        }
+      ]
+    },
+    {
+      "setCode": "JU",
+      "number": "27",
+      "languages": [
+        "Portuguese"
+      ],
+      "printings": [
+        {
+          "finish": "non-holo",
+          "edition": "1st Edition",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V2"
+          ],
+          "verificationStatus": "confirmed",
+          "sourceRefs": [
+            "elitefourum-quuador-sets-languages-20261101"
+          ]
+        }
+      ]
     }
   ]
 }
