@@ -55,6 +55,97 @@ def main() -> None:
         {"same": {"contentHash": "sha256:a"}, "removed": {"contentHash": "sha256:b"}},
         {"same": {"contentHash": "sha256:c"}, "added": {"contentHash": "sha256:d"}},
     ) == (["same"], ["added"], ["removed"])
+    # Aggregate availability across distributions must not regularize stamped cards.
+    for field, native in (("normal", "normal"), ("holo", "holo"), ("reverse", "reverse")):
+        aggregate = {"variants": {field: True}}
+        assert finishes.tcgdex_regular_variant(aggregate, field)
+        qualified = {**aggregate, "variants_detailed": [
+            {"type": native, "size": "standard", "stamp": ["player-rewards-program"]}]}
+        assert not finishes.tcgdex_regular_variant(qualified, field)
+        for qualifier in ({"foil": "unreviewed"}, {"subtype": "error"}, {"size": "jumbo"}):
+            assert not finishes.tcgdex_regular_variant({**aggregate, "variants_detailed": [
+                {"type": native, "size": "standard", **qualifier}]}, field)
+        qualified["variants_detailed"].append({"type": native, "size": "standard"})
+        assert finishes.tcgdex_regular_variant(qualified, field)
+        qualified["variants"][field] = False
+        assert not finishes.tcgdex_regular_variant(qualified, field)
+    for field, native, size in (("normal", "Normale", "Standard"),
+                                ("normal", "básico", "estándar"),
+                                ("holo", "Olografica", "Standard"),
+                                ("reverse", "Reverse", "Padrão")):
+        assert finishes.tcgdex_regular_variant({"variants": {field: True},
+            "variants_detailed": [{"type": native, "size": size}]}, field)
+    for field, native, foil in (("holo", "holo", "Cosmos"), ("holo", "Holo", "Ouro"),
+                               ("reverse", "Reverse", "Énergie")):
+        assert finishes.tcgdex_regular_variant({"variants": {field: True},
+            "variants_detailed": [{"type": native, "size": "standard", "foil": foil}]}, field)
+    for foil in ("pokeball", "masterball", "league"):
+        assert not finishes.tcgdex_regular_variant({"variants": {"reverse": True},
+            "variants_detailed": [{"type": "reverse", "size": "standard", "foil": foil}]}, "reverse")
+    assert not finishes.tcgdex_regular_variant({"variants": {"holo": True},
+        "variants_detailed": [{"type": "holo"}]}, "holo")
+    assert not finishes.tcgdex_regular_variant({"variants": {"holo": True},
+        "variants_detailed": [{"type": "unreviewed", "size": "standard"}]}, "holo")
+
+    # Qualified API evidence attaches to one compatible physical identity, never another copy.
+    def cosmos_evidence():
+        return {"finish": "holo", "foilPattern": None, "cardSize": "standard",
+                "mappedVariants": ["base"], "verificationStatus": "confirmed", "_origin": "auto",
+                "_tcgdexFoilPattern": "cosmos", "sources": [{"url": "https://example.test/api"}]}
+    def observed_cosmos(**extra):
+        return {"finish": "holo", "foilPattern": "cosmos", "cardSize": "standard",
+                "mappedVariants": ["base"], "verificationStatus": "confirmed", "_origin": "specimen",
+                "markings": [{"kind": "observed-marking", "role": "print-identity", "text": "promo"}],
+                "sources": [{"url": "https://example.test/photo"}], **extra}
+    target = observed_cosmos()
+    assert finishes.absorb_qualified_tcgdex_evidence([cosmos_evidence(), target]) == [target]
+    assert len(target["sources"]) == 2 and target["markings"]
+    assert finishes.absorb_qualified_tcgdex_evidence([target, cosmos_evidence()]) == [target]
+    assert len(target["sources"]) == 2, "replay must not duplicate provenance"
+    for extra in ({"cardSize": "jumbo"}, {"edition": "1st Edition"},
+                  {"foilPattern": "unreviewed"}, {"distribution": {"kind": "prerelease"}},
+                  {"markings": [{"kind": "staff", "role": "distribution-promo", "text": "Staff"}]}):
+        assert len(finishes.absorb_qualified_tcgdex_evidence([cosmos_evidence(), observed_cosmos(**extra)])) == 2
+    one, two = observed_cosmos(), observed_cosmos(markings=[{
+        "kind": "observed-marking", "role": "print-identity", "text": "other"}])
+    assert len(finishes.absorb_qualified_tcgdex_evidence([cosmos_evidence(), one, two])) == 3
+    for extra in ({"verificationStatus": "pending"}, {"conflictsWith": ["SPEC-conflict"]}):
+        conflict = observed_cosmos(**extra)
+        for items in ([cosmos_evidence(), conflict], [conflict, cosmos_evidence()]):
+            assert len(finishes.absorb_qualified_tcgdex_evidence(items)) == 2
+            assert conflict["verificationStatus"] == extra.get("verificationStatus", "confirmed")
+    unknown = cosmos_evidence()
+    unknown.pop("_tcgdexFoilPattern")
+    assert len(finishes.absorb_qualified_tcgdex_evidence([unknown, one, observed_cosmos(foilPattern="star")])) == 3
+    pin = observed_cosmos(foilPattern=None, markings=[], distribution={"kind": "collection-promo"})
+    assert finishes.absorb_qualified_tcgdex_evidence([cosmos_evidence(), pin]) == [pin]
+
+    import review_integrity
+    probe_url = "https://api.tcgdex.net/test-qualified"
+    probe_unit = {"setCode": "TEST", "number": "1", "language": "English", "status": "confirmed",
+                  "sourceUrl": probe_url}
+    def preservation_check(details, printings):
+        suite = review_integrity.Suite()
+        review_integrity._check_tcgdex_positives(suite, [probe_unit], [{**probe_unit, "printings": printings}],
+            {probe_url: {"payload": {"variants": {"normal": True}, "variants_detailed": details}}})
+        return suite.checks[0].ok
+    stamped = [{"type": "normal", "size": "standard", "stamp": ["player-rewards-program"]}]
+    regular = [{"type": "normal", "size": "standard"}]
+    assert preservation_check(stamped, [])
+    assert not preservation_check(regular, []), "a seeded missing regular positive must still fail"
+    assert preservation_check(regular, [{"finish": "non-holo", "sources": [{"url": probe_url}]}])
+
+    retained = {"setCode": "TEST", "number": "1", "language": "English", "printings": [{
+        "printingId": "FTEST-P01", "finish": "non-holo", "cardSize": "standard",
+        "mappedVariants": ["base"], "verificationStatus": "confirmed"}]}
+    assert finishes.refresh_printing_losses([retained], [retained]) == []
+    assert finishes.refresh_printing_losses([retained], [])
+    downgraded = {**retained, "printings": [{**retained["printings"][0],
+                                           "verificationStatus": "marketplace-claimed"}]}
+    assert finishes.refresh_printing_losses([retained], [downgraded])
+    wrong_stamp = {**retained, "printings": [{**retained["printings"][0],
+        "markings": [{"kind": "staff", "text": "Staff", "role": "distribution-promo"}]}]}
+    assert finishes.refresh_printing_losses([retained], [wrong_stamp])
     with tempfile.TemporaryDirectory() as temporary:
         candidate_path = Path(temporary) / "candidate.json"
         original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
@@ -95,18 +186,35 @@ def main() -> None:
         original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
         original_cache_dir = finishes.CACHE_DIR
         original_arguments = sys.argv
+        original_prepare = finishes._prepare_finish_indexes
+        original_build = finishes._build_finish_units
+        original_output = finishes.OUTPUT_PATH
+        finishes._prepare_finish_indexes = lambda _context: None
+        finishes._build_finish_units = lambda _context: [retained]
+        finishes.OUTPUT_PATH = temporary_root / "finish_units.json"
+        finishes.OUTPUT_PATH.write_text(json.dumps({"units": [retained]}), encoding="utf-8")
         finishes.SNAPSHOT_PATH = snapshot_path
         finishes.REFRESH_CANDIDATE_PATH = candidate_path
         finishes.CACHE_DIR = temporary_root / "cache"
         try:
             finishes.write_refresh_candidate(staged)
             sys.argv = ["finishes.py", "--refresh", "--accept-refresh"]
+            previous_bytes = snapshot_path.read_bytes()
+            finishes._build_finish_units = lambda _context: []
+            context = {"tcgdex_urls": sorted(staged), "snapshot_document": old_snapshot}
+            assert finishes._resolve_tcgdex(context) == 2
+            assert snapshot_path.read_bytes() == previous_bytes
+            assert candidate_path.exists()
+            finishes._build_finish_units = lambda _context: [retained]
             context = {"tcgdex_urls": sorted(staged), "snapshot_document": old_snapshot}
             assert finishes._resolve_tcgdex(context) is None
             accepted = json.loads(snapshot_path.read_text(encoding="utf-8"))
             assert context["snapshot_document"] == accepted
         finally:
             finishes.SNAPSHOT_PATH = original_snapshot_path
+            finishes._prepare_finish_indexes = original_prepare
+            finishes._build_finish_units = original_build
+            finishes.OUTPUT_PATH = original_output
             finishes.REFRESH_CANDIDATE_PATH = original_candidate_path
             finishes.CACHE_DIR = original_cache_dir
             sys.argv = original_arguments

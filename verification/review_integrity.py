@@ -25,6 +25,9 @@ import checks
 from checks import (ROOT, STATUSES as KNOWN_STATUSES, VERIFICATION, Check, Metric,
                     Suite, read_json)
 
+sys.path.insert(0, str(ROOT / "scripts"))
+from finishes import tcgdex_regular_variant
+
 RESOLVED = ("confirmed", "contradicted")
 # KNOWN_STATUSES is imported above: one definition shared with the writers, so a value
 # cannot be valid to write and invalid to check (#29).
@@ -329,11 +332,11 @@ def _check_tcgdex_positives(
         finish_unit = finish_units_by_key.get(
             (unit.get("setCode"), str(unit.get("number")), unit.get("language"))
         )
-        variants = (tcgdex_snapshot.get(url) or {}).get("payload", {}).get("variants", {})
+        payload = (tcgdex_snapshot.get(url) or {}).get("payload", {})
         for field, finish in (
             ("normal", "non-holo"), ("holo", "holo"), ("reverse", "reverse-holo")
         ):
-            if variants.get(field) is not True:
+            if not tcgdex_regular_variant(payload, field):
                 continue
             # Rule 4: only a recorded owner adjudication may overrule a positive source flag.
             if (unit.get("setCode"), str(unit.get("number")), unit.get("language"), finish) in owner_rejected:

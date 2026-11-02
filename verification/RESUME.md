@@ -48,6 +48,14 @@ its hashes and URL set, then writes the versioned snapshot. The ignored cache re
 state only and is never the release source of truth. A refresh failure is an unreachable source
 (retry it), not evidence that a card or finish is absent.
 
+Current TCGdex aggregate flags also pool specialized distributions and sizes. The finish reader
+qualifies regular printings against reviewed `variants_detailed` rows when present; qualified
+stamped, mirror and oversized rows are not silently turned into ordinary expansion copies.
+Acceptance also previews the finish output and fails before writing the snapshot if an existing
+identity, mapping or evidence status would disappear. Preserve a reviewed old positive observation
+with its retained payload/hash/date through the existing curated override path; never reinterpret a
+new `false` as absence. See [the 2026-11-02 review](evidence/issue-438-finish-review-20261102/README.md).
+
 `python scripts/finishes.py --reproject` is an explicit write path for the card projection from the
 committed finish store. It cannot be combined with `--check`; check-only runs observe existing bytes
 and never repair missing projections.

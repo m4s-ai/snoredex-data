@@ -134,6 +134,9 @@ The default personal file is `snoredex-tracker.sqlite` and is gitignored. Its `a
 contains card details beside `have`, `wanted`, `quantity`, `notes` and a derived
 `collection_status` (`have`, `need`, `skip`, or `research`). Unresolved catalogue placeholders
 and finish candidates start as `research`, not as things a collector is told to buy. The
+A promoted standalone specimen retains its collector `itemId` through the graph's optional
+`identityAnchorClaimId`. That anchor references positive evidence for the same physical printing;
+its current establishing claim and new checklist references remain separate. The
 compatibility projection maps every legacy `checklist_id` exactly once to the collector's stable
 `itemId` and its `itemKind`/`progressClass`; it does not alter evidence or owner decisions.
 

@@ -9,6 +9,7 @@ import sqlite3
 import stat
 import sys
 import tempfile
+from collections import defaultdict
 from copy import deepcopy
 from pathlib import Path
 from unittest.mock import patch
@@ -415,6 +416,69 @@ def verify_standalone_printing_identity() -> None:
                and row["toId"] == holo["physicalPrintingId"] for row in result["edges"])
 
 
+def verify_uncited_standalone_promotion() -> None:
+    graph = {"meta": {}, "entities": [{"entityType": "card-release", "entityId": "release",
+             "payload": {"cardReleaseId": "release", "localSetCode": "TEST",
+                         "localNumber": "1", "language": "Japanese"}}],
+             "edges": [], "migrationDispositions": []}
+    specimen = {"specimenId": "SPEC-uncited", "setCode": "TEST", "number": "1",
+                "language": "Japanese", "recordedAt": "2026-09-28",
+                "physicalObservation": {"finish": "holo", "basis": "visible foil"}}
+    finishes = {"units": []}
+    inputs = {graph_module.UNITS: [], graph_module.FINISH_UNITS: finishes,
+              ROOT / "verification/source_first_prints.json": {"prints": []},
+              graph_module.SPECIMENS: {"specimens": [specimen]}}
+    with patch.object(graph_module, "_read_json", side_effect=inputs.__getitem__):
+        before = project_physical_evidence(deepcopy(graph))
+        printing = {"printingId": "FTEST-P01", "finish": "holo", "cardSize": "standard",
+                    "mappedVariants": ["base"], "verificationStatus": "confirmed"}
+        finishes["units"] = [{"finishUnitId": "FTEST", "setCode": "TEST", "number": "1",
+                              "language": "Japanese", "printings": [printing]}]
+        promoted = project_physical_evidence(deepcopy(before))
+        physicals = [row for row in promoted["entities"] if row["entityType"] == "physical-printing"]
+        assert len(physicals) == 1, "uncited retained specimen promotion must not materialize twice"
+        assert physicals[0]["entityId"] == "PHYSICAL:specimen:SPEC-uncited"
+        assert physicals[0]["payload"]["specimenIds"] == ["SPEC-uncited"]
+        assert physicals[0]["payload"].get("markings") is None
+        assert physicals[0]["payload"]["cardSize"] == "standard"
+        assert physicals[0]["payload"]["establishingClaimId"] != "CLAIM:specimen:SPEC-uncited"
+        assert physicals[0]["payload"]["identityAnchorClaimId"] == "CLAIM:specimen:SPEC-uncited"
+        claims = {row['entityId']: row['payload'] for row in promoted['entities']
+                  if row['entityType'] == 'candidate-claim'}
+        relations = defaultdict(list)
+        for edge in promoted['edges']:
+            relations[(edge['fromType'], edge['fromId'], edge['relation'])].append(
+                (edge['toType'], edge['toId']))
+        physical = physicals[0]['payload']
+        errors = []
+        graph_module._validate_printing_identity_anchor(
+            errors, physical['physicalPrintingId'], physical, claims, relations)
+        assert not errors
+        for broken in ('missing', 'wrong-target', 'pending'):
+            changed = deepcopy(claims)
+            anchor = physical['identityAnchorClaimId']
+            if broken == 'missing':
+                changed.pop(anchor)
+            elif broken == 'wrong-target':
+                for field in ('materializedTargetId', 'provenanceTargetId', 'corroboratedTargetId'):
+                    changed[anchor][field] = 'another-physical-printing'
+            else:
+                changed[anchor]['evidenceStatus'] = 'pending'
+            errors = []
+            graph_module._validate_printing_identity_anchor(
+                errors, physical['physicalPrintingId'], physical, changed, relations)
+            assert errors, f'{broken} identity anchor must fail closed'
+        assert project_physical_evidence(deepcopy(promoted)) == promoted
+        before["entities"].reverse()
+        assert project_physical_evidence(deepcopy(before)) == promoted
+        printing["finish"] = "reverse-holo"
+        different = project_physical_evidence(deepcopy(before))
+        old = next(row["payload"] for row in different["entities"]
+                   if row["entityId"] == "PHYSICAL:specimen:SPEC-uncited")
+        assert old["finish"] == "holo" and old["sourceFinishUnitId"] is None
+        assert len([row for row in different["entities"] if row["entityType"] == "physical-printing"]) == 2
+
+
 def verify_shared_finish_printings(graph):
     projected = project_physical_evidence(deepcopy(graph))
     assert not validate(projected)
@@ -473,6 +537,7 @@ def verify_standalone_promotion(graph):
 
 def main() -> None:
     verify_standalone_printing_identity()
+    verify_uncited_standalone_promotion()
     # A retained legacy specimen may follow its reviewed local re-key, but not a neighbour.
     specimen = {"setCode": "s5a", "number": "93/070", "language": "Indonesian", "citedBy": ["U0603"]}
     release = {"localSetCode": "s5a I", "localNumber": "093/070", "language": "Indonesian",

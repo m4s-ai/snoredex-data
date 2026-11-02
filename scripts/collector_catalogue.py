@@ -1394,6 +1394,10 @@ def local_card_name(
     return None
 
 
+def physical_identity_anchor(physical):
+    return physical.get('identityAnchorClaimId') or physical['establishingClaimId']
+
+
 def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
     graph = read_json(GRAPH_PATH)
     date_document, reviewed_dates, _ = load_reviewed_dates()
@@ -1722,7 +1726,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "sourcePrintingId": source_printing_id,
             "finishUnitId": (unit or {}).get("finishUnitId") or (old or {}).get("finishUnitId"),
             "sourceClaimRefs": sorted({value for value in (
-                (claim or {}).get("claimId"), *(release.get("establishingClaimIds") or [])
+                (claim or {}).get("claimId"), (physical or {}).get("identityAnchorClaimId"),
+                *(release.get("establishingClaimIds") or [])
             ) if value}),
             "localizationId": context["identity"]["localizationId"],
             "cardName": context["cardName"],
@@ -1771,7 +1776,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         unit = unit_by_printing.get(source_printing_id)
         claim = claims[physical["establishingClaimId"]]
         items.append(common_item(
-            anchor="claim:" + claim["claimId"], kind="verified-printing", progress="current-known",
+            anchor="claim:" + physical_identity_anchor(physical),
+            kind="verified-printing", progress="current-known",
             release_id=physical["cardReleaseId"], physical=physical,
             source_printing_id=source_printing_id, unit=unit, old=old, claim=claim,
         ))
