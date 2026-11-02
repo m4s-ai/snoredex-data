@@ -1857,6 +1857,23 @@ def _collect_g5(state: dict[str, Any]) -> dict[str, Any]:
             f"{len(adjudicated_finish_problems)} problem(s): {adjudicated_finish_problems[:5]}",
         )
 
+        # Finish printing ids are ordinal within their unit; folding or removing a printing renumbers
+        # the rest. A specimen citation must follow the renumbering or the registry silently drops it.
+        printing_ids = {p.get("printingId") for unit in finish_units for p in unit["printings"]}
+        dangling_citations = sorted(
+            f"{row['specimenId']} -> {cited}"
+            for row in load("verification/specimens.json")["specimens"]
+            for cited in row.get("citedBy") or []
+            if re.fullmatch(r"F\d+-P\d+", cited) and cited not in printing_ids
+        )
+        check(
+            "R8",
+            "Every specimen citation of a finish printing names a printing that exists",
+            "FAIL",
+            not dangling_citations,
+            f"{len(dangling_citations)} dangling citation(s): {dangling_citations[:5]}",
+        )
+
         check(
             "I5",
             "Evidence strength",
