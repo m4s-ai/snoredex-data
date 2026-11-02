@@ -47,7 +47,7 @@
         "properties": {
           "adapterId": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "adapterVersion": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
-          "responseFormat": {"enum": ["52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html", "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json"]},
+          "responseFormat": {"enum": ["52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json", "pokemon-asia-html", "pokemon-japan-html", "pokemon-official-localized-html", "source-first-print-json", "tcgdex-json"]},
           "providerId": {"type": "string"},
           "surfaceId": {"type": "string"},
           "state": {"const": "active"},

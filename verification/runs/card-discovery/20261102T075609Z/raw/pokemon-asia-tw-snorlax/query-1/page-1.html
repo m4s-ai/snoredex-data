@@ -1,0 +1,1789 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hant-TW">
+    <head>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-207741180-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
+            }
+            gtag('js', new Date())
+            gtag('config', 'UA-207741180-1')
+            gtag('config', 'G-37BZT5HRQK')
+        </script>
+        <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MHWCRQD');</script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>卡牌搜尋結果 | 訓練家網站</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+
+        <meta name="author" content="Pokémon">
+                    <meta name="keyword" content="卡牌搜尋結果,寶可夢集換式卡牌遊戲,寶可夢集,pokemon">
+            <meta name="description" content="為您傳遞寶可夢集換式卡牌遊戲的規則・商品・活動資訊的官方網站之[卡牌搜尋結果]頁面。">
+        
+                    <meta property="og:title" content="訓練家網站">
+            <meta property="og:type" content="website">
+            <meta property="og:url" content="http://asia.pokemon-card.com/tw/card-search/list/?cardType=all&amp;keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&amp;pageNo=1&amp;regulation=all">
+            <meta property="og:image" content="http://asia.pokemon-card.com/build/images/tw/ogp/ogp.png">
+            <meta property="og:site_name" content="寶可夢集換式卡牌遊戲 訓練家網站">
+                            <meta property="og:description" content="為您傳遞寶可夢集換式卡牌遊戲的規則・商品・活動資訊的官方網站之[卡牌搜尋結果]頁面。">
+                        <meta property="og:app_id" content="439325390737330">
+                    <meta property="og:app_id" content="439325390737330">
+                    <link rel="stylesheet" href="/build/vendors-node_modules_jquery-ui-timepicker-addon_dist_jquery-ui-timepicker-addon_min_css-node_-c3e24d.css"><link rel="stylesheet" href="/build/main.css">
+                <script async src="https://tw-cdn.loycus.jp/script.min.js?whc=1731046888295"></script>
+    </head>
+    <body>
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MHWCRQD"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <header class="navigationHeader tw">
+    <div class="logoArea">
+        <a href="https://asia.pokemon-card.com/tw/">
+            <img
+                class="logo"
+                src="/build/images/tw/header/logo.svg"
+                alt="寶可夢集換式卡牌遊戲 訓練家網站"
+            >
+        </a>
+    </div>
+    <nav class="siteLinkBox">
+        <ul class="siteLink">
+            <li class="siteLinkItem forBeginners">
+                <a href="https://asia.pokemon-card.com/tw/about/"><span>新手指南</span></a>
+            </li>
+            <li class="siteLinkItem">
+                <a href="https://asia.pokemon-card.com/tw/products/">商品資訊</a>
+            </li>
+            <li class="siteLinkItem">
+                <a href="https://asia.pokemon-card.com/tw/card-search">卡牌</a>
+            </li>
+            <li class="siteLinkItem">
+                <a href="https://asia.pokemon-card.com/tw/deck/">牌組構築</a>
+            </li>
+            <li class="siteLinkItem">
+                <a href="https://asia.pokemon-card.com/tw/rules/">規則</a>
+            </li>
+            <li class="siteLinkItem game-on">
+                <a id="eventLink" href="https://asia.pokemon-card.com/tw/event/">Pokémon Game On!<br>(活動)</a>
+            </li>
+            <li class="siteLinkItem">
+                <a href="https://asia.pokemon-card.com/tw/shopmap/">店鋪搜尋</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <ul class="menu">
+            <li class="menuItem">
+                <button
+                    class="modalOpen headerSearchButton"
+                    data-target="#headerSearchModal"
+                >
+                    <span class="icon-search"></span>
+                </button>
+            </li>
+            <li class="menuItem">
+                <a href="/tw/mypage/">
+                                        <img
+                        src="/build/images/header/before_login.png"
+                        alt="登入"
+                    >
+                                    </a>
+            </li>
+            <li class="siteLinkOpen">
+                <button class="siteLinkOpenButton">
+                    <span class="line"></span>
+                    <span class="line"></span>
+                    <span class="line"></span>
+                </button>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+        <main class="content tw">
+            <div class="wrapper">
+    <header>
+        <h1 class="pageHeader">
+            卡牌搜尋結果
+        </h1>
+    </header>
+    <form action="/tw/card-search/list/" method="POST" id="searchForm">
+    <div class="searchResultPage">
+        <div class="resultHeader">
+            <div class="resultSummary">
+                <p class="resultLabel">搜尋結果</p>
+                <p class="resultNumber">43</p>
+                <p class="resultUnit">個</p>
+                <p class="resultPageNumber">第 1 頁</p>
+                <p class="resultTotalPages">/ 共 3 頁</p>
+            </div>
+            <div class="selectBox sortContainer">
+                <select class="sort" id="pcSort" name="sortCondition">
+                    <option value="">排序</option>
+                                                            <option value="1" >依HP排序</option>
+                                                            <option value="2" >依發售日排序</option>
+                                                            <option value="3" >依招式傷害值排序</option>
+                                                            <option value="4" >依圖鑑編號排序</option>
+                                    </select>
+            </div>
+        </div>
+        <div class="cardList">
+            <div class="leftColumn">
+                <!-- カード検索用の検索コンポーネント -->
+<div class="searchBox">
+    <h5 class="searchTitle list-only">卡牌搜尋</h5>
+    <hr class="list-only">
+    <div class="keywordButton">
+        <div class="keyword">
+            <input type="text" id="keyword" name="keyword" placeholder="關鍵字篩選" value="卡比獸">
+        </div>
+        <button type="submit" id="searchButton" class="button search searchButton">
+            搜尋
+        </button>
+    </div>
+    <div class="cardTypeSelector">
+        <h5 class="cardTypeLabel">卡牌種類</h5>
+        <div class="cardTypes">
+            <div class="inputInline">
+                <input class="cardTypeOption" id="all" type="radio" name="cardType" value="all" checked data-default>
+                <label for="all" class="radio">
+                    全部
+                </label>
+            </div>
+                        <div class="inputInline">
+                <input class="cardTypeOption" id="Pokemon" type="radio" name="cardType" value="1" >
+                <label for="Pokemon" class="radio">
+                    寶可夢卡
+                </label>
+            </div>
+                        <div class="inputInline">
+                <input class="cardTypeOption" id="Trainers" type="radio" name="cardType" value="2" >
+                <label for="Trainers" class="radio">
+                    訓練家卡
+                </label>
+            </div>
+                        <div class="inputInline">
+                <input class="cardTypeOption" id="Energy" type="radio" name="cardType" value="3" >
+                <label for="Energy" class="radio">
+                    能量卡
+                </label>
+            </div>
+                    </div>
+    </div>
+    <div class="spAddSearchConditions closed">
+        <div class="spAddSearchConditionsLabel closed">追加條件</div>
+        <div class="specifyConditions accordionMenu">
+                        <div class="conditionRow all">
+                <h5 class="specifyConditionLabel">賽制</h5>
+                <div class="conditionContainer">
+                                        <div class="inputInline regulationOption">
+                        <input id="Standard" type="radio" name="regulation" value="1" checked data-default>
+                        <label for="Standard" class="regulation radio">
+                            標準
+                        </label>
+                    </div>
+                                        <div class="inputInline regulationOption">
+                        <input id="Wide" type="radio" name="regulation" value="2"  >
+                        <label for="Wide" class="regulation radio">
+                            開放
+                        </label>
+                    </div>
+                                        <div class="inputInline regulationOption">
+                        <input id="Others" type="radio" name="regulation" value="3"  >
+                        <label for="Others" class="regulation radio">
+                            其他
+                        </label>
+                    </div>
+                                        <div class="inputInline regulationOption">
+                        <input id="regulation_all" type="radio" name="regulation" value="all" checked>
+                        <label for="regulation_all" class="regulation radio">
+                            全部
+                        </label>
+                    </div>
+                </div>
+            </div>
+                        <div class="conditionRow all">
+                <h5 class="specifyConditionLabel">商品</h5>
+                <div class="conditionContainer">
+                    <button type="button" class="button secondary arrow modalOpen" data-target="#productSelectorModal">商品名</button>
+                </div>
+            </div>
+                                                                  <div class="conditionRow trainers">
+                        <h5 class="specifyConditionLabel">訓練家卡種類</h5>
+                        <div class="conditionContainer">
+                                               <div class="options">
+                                <input id="trainersTag_1" type="checkbox" name="trainersTag[]" value="1"  >
+                                <label for="trainersTag_1">物品卡</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_2" type="checkbox" name="trainersTag[]" value="2"  >
+                                <label for="trainersTag_2">支援者卡</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_3" type="checkbox" name="trainersTag[]" value="3"  >
+                                <label for="trainersTag_3">競技場卡</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_18" type="checkbox" name="trainersTag[]" value="18"  >
+                                <label for="trainersTag_18">寶可夢道具</label>
+                            </div>
+                                           </div>
+                   </div>
+                                                                                                     <div class="conditionRow trainers">
+                        <h5 class="specifyConditionLabel">特別卡牌</h5>
+                        <div class="conditionContainer">
+                                               <div class="options">
+                                <input id="trainersTag_20" type="checkbox" name="trainersTag[]" value="20"  class="spCheckbox">
+                                <label for="trainersTag_20">一擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_21" type="checkbox" name="trainersTag[]" value="21"  class="spCheckbox">
+                                <label for="trainersTag_21">連擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_22" type="checkbox" name="trainersTag[]" value="22"  class="spCheckbox">
+                                <label for="trainersTag_22">匯流</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_104" type="checkbox" name="trainersTag[]" value="104"  class="spCheckbox">
+                                <label for="trainersTag_104">ACE SPEC</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_105" type="checkbox" name="trainersTag[]" value="105"  class="spCheckbox">
+                                <label for="trainersTag_105">古代</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="trainersTag_106" type="checkbox" name="trainersTag[]" value="106"  class="spCheckbox">
+                                <label for="trainersTag_106">未來</label>
+                            </div>
+                                           </div>
+                   </div>
+                                                                       <div class="cardTypeLabelContainer pokemon">
+                <div class="cardTypeLabel">寶可夢條件</div>
+            </div>
+            <div class="conditionRow pokemon">
+                <h5 class="specifyConditionLabel">進化</h5>
+                <div class="conditionContainer">
+                                        <div class="options">
+                        <input id="evolve_1" type="checkbox" name="evolve[]" value="1" >
+                        <label for="evolve_1">基礎</label>
+                    </div>
+                                        <div class="options">
+                        <input id="evolve_2" type="checkbox" name="evolve[]" value="2" >
+                        <label for="evolve_2">1階進化</label>
+                    </div>
+                                        <div class="options">
+                        <input id="evolve_3" type="checkbox" name="evolve[]" value="3" >
+                        <label for="evolve_3">2階進化</label>
+                    </div>
+                                        <div class="options">
+                        <input id="evolve_4" type="checkbox" name="evolve[]" value="4" >
+                        <label for="evolve_4">其他</label>
+                    </div>
+                                                            <div class="options">
+                        <input id="specialEvolve_17" type="checkbox" name="spEvolve[]" value="17" >
+                        <label for="specialEvolve_17">VMAX</label>
+                    </div>
+                                        <div class="options">
+                        <input id="specialEvolve_101" type="checkbox" name="spEvolve[]" value="101" >
+                        <label for="specialEvolve_101">VSTAR</label>
+                    </div>
+                                    </div>
+            </div>
+                        <div class="conditionRow pokemon">
+                <h5 class="specifyConditionLabel">寶可夢種類</h5>
+                <div class="conditionContainer">
+                                        <div class="options">
+                        <input id="spPokemon_6" type="checkbox" name="spPokemon[]" value="6" >
+                        <label for="spPokemon_6">寶可夢V</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spPokemon_7" type="checkbox" name="spPokemon[]" value="7" >
+                        <label for="spPokemon_7">寶可夢V-UNION</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spPokemon_8" type="checkbox" name="spPokemon[]" value="8" >
+                        <label for="spPokemon_8">寶可夢GX</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spPokemon_102" type="checkbox" name="spPokemon[]" value="102" >
+                        <label for="spPokemon_102">光輝寶可夢</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spPokemon_103" type="checkbox" name="spPokemon[]" value="103" >
+                        <label for="spPokemon_103">寶可夢ex</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spPokemon_107" type="checkbox" name="spPokemon[]" value="107" >
+                        <label for="spPokemon_107">超級進化寶可夢ex</label>
+                    </div>
+                                    </div>
+            </div>
+                        <div class="conditionRow pokemon">
+                <h5 class="specifyConditionLabel">屬性</h5>
+                <div class="conditionContainer">
+                    <button type="button" class="button secondary modalOpen arrow typeSelect energyModalButton" data-target="#typeSelectorModal" data-type="#typeSelectEnergy">屬性</button>
+                    <input type="hidden" class="typeSelectValues" id="typeSelectEnergy" name="pokemonEnergy" value="">
+                    <button type="button" class="button secondary modalOpen arrow typeSelect energyModalButton" data-target="#typeSelectorModal" data-type="#typeSelectWeakness">弱點</button>
+                    <input type="hidden" class="typeSelectValues"  id="typeSelectWeakness" name="pokemonWeakness" value="">
+                    <button type="button" class="button secondary modalOpen arrow typeSelect energyModalButton" data-target="#typeSelectorModal" data-type="#typeSelectResistance">抵抗力</button>
+                    <input type="hidden" class="typeSelectValues" id="typeSelectResistance" name="pokemonResistance" value="">
+                    <button type="button" class="button secondary modalOpen arrow typeSelect energyModalButton" data-target="#typeSelectorModal" data-type="#typeSelectMove">招式的能量</button>
+                    <input type="hidden" class="typeSelectValues" id="typeSelectMove" name="pokemonMoveEnergy" value="">
+                </div>
+            </div>
+            <div class="conditionRow pokemon">
+                <h5 class="specifyConditionLabel">HP</h5>
+                <div class="conditionContainer">
+                    <div class="rangeInput">
+                        <select name="hpLowerLimit">
+                            <option value="none">無下限</option>
+                                                            <option value="30" >30</option>
+                                                            <option value="40" >40</option>
+                                                            <option value="50" >50</option>
+                                                            <option value="60" >60</option>
+                                                            <option value="70" >70</option>
+                                                            <option value="80" >80</option>
+                                                            <option value="90" >90</option>
+                                                            <option value="100" >100</option>
+                                                            <option value="110" >110</option>
+                                                            <option value="120" >120</option>
+                                                            <option value="130" >130</option>
+                                                            <option value="140" >140</option>
+                                                            <option value="150" >150</option>
+                                                            <option value="160" >160</option>
+                                                            <option value="170" >170</option>
+                                                            <option value="180" >180</option>
+                                                            <option value="190" >190</option>
+                                                            <option value="200" >200</option>
+                                                            <option value="210" >210</option>
+                                                            <option value="220" >220</option>
+                                                            <option value="230" >230</option>
+                                                            <option value="240" >240</option>
+                                                            <option value="250" >250</option>
+                                                            <option value="260" >260</option>
+                                                            <option value="270" >270</option>
+                                                            <option value="280" >280</option>
+                                                            <option value="290" >290</option>
+                                                            <option value="300" >300</option>
+                                                    </select>
+                        <div class="dash">～</div>
+                        <select name="hpUpperLimit">
+                            <option value="none">無上限</option>
+                                                        <option value="300" >300</option>
+                                                        <option value="290" >290</option>
+                                                        <option value="280" >280</option>
+                                                        <option value="270" >270</option>
+                                                        <option value="260" >260</option>
+                                                        <option value="250" >250</option>
+                                                        <option value="240" >240</option>
+                                                        <option value="230" >230</option>
+                                                        <option value="220" >220</option>
+                                                        <option value="210" >210</option>
+                                                        <option value="200" >200</option>
+                                                        <option value="190" >190</option>
+                                                        <option value="180" >180</option>
+                                                        <option value="170" >170</option>
+                                                        <option value="160" >160</option>
+                                                        <option value="150" >150</option>
+                                                        <option value="140" >140</option>
+                                                        <option value="130" >130</option>
+                                                        <option value="120" >120</option>
+                                                        <option value="110" >110</option>
+                                                        <option value="100" >100</option>
+                                                        <option value="90" >90</option>
+                                                        <option value="80" >80</option>
+                                                        <option value="70" >70</option>
+                                                        <option value="60" >60</option>
+                                                        <option value="50" >50</option>
+                                                        <option value="40" >40</option>
+                                                        <option value="30" >30</option>
+                                                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="conditionRow pokemon">
+                <h5 class="specifyConditionLabel">撤退的能量</h5>
+                <div class="conditionContainer">
+                    <div class="rangeInput">
+                        <select name="retreatCostLowerLimit">
+                                                            <option value="0" >0</option>
+                                                            <option value="1" >1</option>
+                                                            <option value="2" >2</option>
+                                                            <option value="3" >3</option>
+                                                            <option value="4" >4</option>
+                                                            <option value="5" >5</option>
+                                                    </select>
+                        <div class="dash">～</div>
+                        <select name="retreatCostUpperLimit">
+                            <option value="none">無上限</option>
+                                                            <option name="retreatCostUpperLimit" value="5" >5</option>
+                                                            <option name="retreatCostUpperLimit" value="4" >4</option>
+                                                            <option name="retreatCostUpperLimit" value="3" >3</option>
+                                                            <option name="retreatCostUpperLimit" value="2" >2</option>
+                                                            <option name="retreatCostUpperLimit" value="1" >1</option>
+                                                            <option name="retreatCostUpperLimit" value="0" >0</option>
+                                                    </select>
+                    </div>
+                </div>
+            </div>
+                                                                  <div class="conditionRow pokemon">
+                        <h5 class="specifyConditionLabel">特別卡牌</h5>
+                        <div class="conditionContainer">
+                                               <div class="options">
+                                <input id="pokemonTag_20" type="checkbox" name="pokemonTag[]" value="20"  class="spCheckbox">
+                                <label for="pokemonTag_20">一擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="pokemonTag_21" type="checkbox" name="pokemonTag[]" value="21"  class="spCheckbox">
+                                <label for="pokemonTag_21">連擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="pokemonTag_22" type="checkbox" name="pokemonTag[]" value="22"  class="spCheckbox">
+                                <label for="pokemonTag_22">匯流</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="pokemonTag_105" type="checkbox" name="pokemonTag[]" value="105"  class="spCheckbox">
+                                <label for="pokemonTag_105">古代</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="pokemonTag_106" type="checkbox" name="pokemonTag[]" value="106"  class="spCheckbox">
+                                <label for="pokemonTag_106">未來</label>
+                            </div>
+                                           </div>
+                   </div>
+                                                           <div class="cardTypeLabelContainer energy">
+                <div class="cardTypeLabel">能量卡條件</div>
+            </div>
+                                                                  <div class="conditionRow energy">
+                        <h5 class="specifyConditionLabel">特別卡牌</h5>
+                        <div class="conditionContainer">
+                                               <div class="options">
+                                <input id="energiesTag_20" type="checkbox" name="energiesTag[]" value="20"  class="spCheckbox">
+                                <label for="energiesTag_20">一擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="energiesTag_21" type="checkbox" name="energiesTag[]" value="21"  class="spCheckbox">
+                                <label for="energiesTag_21">連擊</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="energiesTag_22" type="checkbox" name="energiesTag[]" value="22"  class="spCheckbox">
+                                <label for="energiesTag_22">匯流</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="energiesTag_104" type="checkbox" name="energiesTag[]" value="104"  class="spCheckbox">
+                                <label for="energiesTag_104">ACE SPEC</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="energiesTag_105" type="checkbox" name="energiesTag[]" value="105"  class="spCheckbox">
+                                <label for="energiesTag_105">古代</label>
+                            </div>
+                                                                                  <div class="options">
+                                <input id="energiesTag_106" type="checkbox" name="energiesTag[]" value="106"  class="spCheckbox">
+                                <label for="energiesTag_106">未來</label>
+                            </div>
+                                           </div>
+                   </div>
+                                                           <div class="conditionRow energy">
+                <h5 class="specifyConditionLabel">能量卡種類</h5>
+                <div class="conditionContainer">
+                                        <div class="options">
+                        <input id="spEnergyTag_4" type="checkbox" name="energyType[]" value="4" >
+                        <label for="spEnergyTag_4">基本能量卡</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spEnergyTag_5" type="checkbox" name="energyType[]" value="5" >
+                        <label for="spEnergyTag_5">特殊能量卡</label>
+                    </div>
+                                    </div>
+            </div>
+                        <div class="conditionRow all" id="spCardContainer">
+                <h5 class="specifyConditionLabel">特別卡牌</h5>
+                <div class="conditionContainer">
+                                        <div class="options">
+                        <input id="spCard_20" type="checkbox" name="spCardType[]" value="20"  class="spCheckbox">
+                        <label for="spCard_20">一擊</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spCard_21" type="checkbox" name="spCardType[]" value="21"  class="spCheckbox">
+                        <label for="spCard_21">連擊</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spCard_22" type="checkbox" name="spCardType[]" value="22"  class="spCheckbox">
+                        <label for="spCard_22">匯流</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spCard_104" type="checkbox" name="spCardType[]" value="104"  class="spCheckbox">
+                        <label for="spCard_104">ACE SPEC</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spCard_105" type="checkbox" name="spCardType[]" value="105"  class="spCheckbox">
+                        <label for="spCard_105">古代</label>
+                    </div>
+                                        <div class="options">
+                        <input id="spCard_106" type="checkbox" name="spCardType[]" value="106"  class="spCheckbox">
+                        <label for="spCard_106">未來</label>
+                    </div>
+                                    </div>
+            </div>
+                        <div class="conditionRow all">
+                <h5 class="specifyConditionLabel">稀有度</h5>
+                <div class="conditionContainer">
+                    <div class="rarities">
+                                                                        <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_2" type="checkbox" name="rarity[]" value="2" >
+                            <label for="rarity_2">U</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_21" type="checkbox" name="rarity[]" value="21" >
+                            <label for="rarity_21">MA</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_20" type="checkbox" name="rarity[]" value="20" >
+                            <label for="rarity_20">MUR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_19" type="checkbox" name="rarity[]" value="19" >
+                            <label for="rarity_19">BWR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2" style="display: block;">
+                            <input id="rarity_18" type="checkbox" name="rarity[]" value="18" >
+                            <label for="rarity_18">ACE</label>
+                        </div>
+                                                <div class="rarityOption regulationId1" style="display: block;">
+                            <input id="rarity_17" type="checkbox" name="rarity[]" value="17" >
+                            <label for="rarity_17">SSR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1" style="display: block;">
+                            <input id="rarity_16" type="checkbox" name="rarity[]" value="16" >
+                            <label for="rarity_16">S</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2" style="display: block;">
+                            <input id="rarity_15" type="checkbox" name="rarity[]" value="15" >
+                            <label for="rarity_15">SAR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2" style="display: block;">
+                            <input id="rarity_14" type="checkbox" name="rarity[]" value="14" >
+                            <label for="rarity_14">AR</label>
+                        </div>
+                                                <div class="rarityOption regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_13" type="checkbox" name="rarity[]" value="13" >
+                            <label for="rarity_13">A</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_12" type="checkbox" name="rarity[]" value="12" >
+                            <label for="rarity_12">K</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_10" type="checkbox" name="rarity[]" value="10" >
+                            <label for="rarity_10">UR</label>
+                        </div>
+                                                <div class="rarityOption " style="display: block;">
+                            <input id="rarity_9" type="checkbox" name="rarity[]" value="9" >
+                            <label for="rarity_9">HR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_8" type="checkbox" name="rarity[]" value="8" >
+                            <label for="rarity_8">SR</label>
+                        </div>
+                                                <div class="rarityOption regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_7" type="checkbox" name="rarity[]" value="7" >
+                            <label for="rarity_7">TR</label>
+                        </div>
+                                                <div class="rarityOption regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_6" type="checkbox" name="rarity[]" value="6" >
+                            <label for="rarity_6">PR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_5" type="checkbox" name="rarity[]" value="5" >
+                            <label for="rarity_5">RRR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_4" type="checkbox" name="rarity[]" value="4" >
+                            <label for="rarity_4">RR</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_3" type="checkbox" name="rarity[]" value="3" >
+                            <label for="rarity_3">R</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_1" type="checkbox" name="rarity[]" value="1" >
+                            <label for="rarity_1">C</label>
+                        </div>
+                                                <div class="rarityOption regulationId1 regulationId2 regulationId3" style="display: block;">
+                            <input id="rarity_11" type="checkbox" name="rarity[]" value="11" >
+                            <label for="rarity_11">無標記</label>
+                        </div>
+                                            </div>
+                </div>
+            </div>
+                        <div class="conditionRow">
+                <h5 class="specifyConditionLabel">繪師姓名</h5>
+                <div class="conditionContainer">
+                    <input type="text" class="illustratorName" placeholder="繪師姓名等" name="illustratorName" value="">
+                </div>
+            </div>
+                        <input type="hidden" class="expansionCodes" name="expansionCodes" value="">
+        </div>
+    </div>
+    <div class="spSearchButton">
+        <button type="button" class="button secondary clearButton formClearButton">清空條件</button>
+        <button type="submit" class="button search searchButton">搜尋</button>
+    </div>
+</div>
+<section id="productSelectorModal" class="modal addSearchConditionModal productSelector">
+    <div class="modalWrapper">
+        <div class="modalWindow">
+            <div class="close">
+                <button class="closeButton" type="button">modal.close</button>
+            </div>
+            <div class="headerWrapper">
+                <div class="spClose"></div>
+                <h3 class="modalHeader">
+                    商品名
+                </h3>
+            </div>
+            <div class="modalBody">
+                                <div class="conditionRow">
+                    <div class="conditionLabel">
+                        超級進化
+                        <div class="toggleAccordion opened"></div>
+                    </div>
+                    <div class="accordionMenu">
+                        <div class="optionContainer multiColumn">
+                                                                                                                <div class="options">
+                                <input id="checkbox138" type="checkbox" class="expansionCode" value="M6" >
+                                <label for="checkbox138">擴充包「綠寶石風暴」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox137" type="checkbox" class="expansionCode" value="MTK" >
+                                <label for="checkbox137">戰術牌組「超級快龍ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox136" type="checkbox" class="expansionCode" value="MTH" >
+                                <label for="checkbox136">戰術牌組「超級巨牙鯊ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox135" type="checkbox" class="expansionCode" value="MTS" >
+                                <label for="checkbox135">戰術牌組「超級沙奈朵ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox134" type="checkbox" class="expansionCode" value="MTL" >
+                                <label for="checkbox134">戰術牌組「超級噴火龍Xex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox133" type="checkbox" class="expansionCode" value="M5" >
+                                <label for="checkbox133">擴充包「深淵之瞳」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox132" type="checkbox" class="expansionCode" value="M4" >
+                                <label for="checkbox132">擴充包「忍者飛旋」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox131" type="checkbox" class="expansionCode" value="MJ" >
+                                <label for="checkbox131">New Trainer Journey</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox130" type="checkbox" class="expansionCode" value="M3" >
+                                <label for="checkbox130">擴充包「虛無歸零」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox129" type="checkbox" class="expansionCode" value="MC" >
+                                <label for="checkbox129">初階牌組 100對戰收藏</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox128" type="checkbox" class="expansionCode" value="M2a" >
+                                <label for="checkbox128">高級擴充包「超級進化夢想ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox127" type="checkbox" class="expansionCode" value="M2" >
+                                <label for="checkbox127">擴充包「烈獄狂火X」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox126" type="checkbox" class="expansionCode" value="MBD" >
+                                <label for="checkbox126">挑戰牌組 「超級蒂安希ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox125" type="checkbox" class="expansionCode" value="MBG" >
+                                <label for="checkbox125">挑戰牌組「超級耿鬼ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox124" type="checkbox" class="expansionCode" value="M1S" >
+                                <label for="checkbox124">擴充包「超級交響樂」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox123" type="checkbox" class="expansionCode" value="M1L" >
+                                <label for="checkbox123">擴充包「超級勇氣」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox122" type="checkbox" class="expansionCode" value="M-P" >
+                                <label for="checkbox122">特典卡 超級進化 </label>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+                                <div class="conditionRow">
+                    <div class="conditionLabel">
+                        朱＆紫
+                        <div class="toggleAccordion opened"></div>
+                    </div>
+                    <div class="accordionMenu">
+                        <div class="optionContainer multiColumn">
+                                                                                                                <div class="options">
+                                <input id="checkbox121" type="checkbox" class="expansionCode" value="SVQL" >
+                                <label for="checkbox121">ex初階牌組 噴火龍</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox120" type="checkbox" class="expansionCode" value="SVQP" >
+                                <label for="checkbox120">ex初階牌組 皮卡丘</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox119" type="checkbox" class="expansionCode" value="SV11B" >
+                                <label for="checkbox119">擴充包「漆黑伏特」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox118" type="checkbox" class="expansionCode" value="SV11W" >
+                                <label for="checkbox118">擴充包 「純白閃焰」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox117" type="checkbox" class="expansionCode" value="SV10" >
+                                <label for="checkbox117">擴充包「火箭隊的榮耀」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox116" type="checkbox" class="expansionCode" value="SV9a" >
+                                <label for="checkbox116">強化擴充包「熱風競技場」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox115" type="checkbox" class="expansionCode" value="SVOD" >
+                                <label for="checkbox115">挑戰牌組 大吾的鐵啞鈴&amp;巨金怪ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox114" type="checkbox" class="expansionCode" value="SVOM" >
+                                <label for="checkbox114">挑戰牌組 瑪俐的莫魯貝可&amp;長毛巨魔ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox113" type="checkbox" class="expansionCode" value="SV9" >
+                                <label for="checkbox113">擴充包「對戰搭檔」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox112" type="checkbox" class="expansionCode" value="SVM" >
+                                <label for="checkbox112">雙ex初階牌組 Generations</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox111" type="checkbox" class="expansionCode" value="SV8a" >
+                                <label for="checkbox111">高級擴充包「太晶慶典ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox109" type="checkbox" class="expansionCode" value="SV8" >
+                                <label for="checkbox109">擴充包「超電突圍」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox108" type="checkbox" class="expansionCode" value="SVK" >
+                                <label for="checkbox108">牌組構築BOX 樂園騰龍</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox107" type="checkbox" class="expansionCode" value="SVPS" >
+                                <label for="checkbox107">ex特別組合 太晶屬性：星晶 蒼炎刃鬼ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox106" type="checkbox" class="expansionCode" value="SVPN" >
+                                <label for="checkbox106">ex特別組合 太晶屬性：星晶 仙子伊布ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox105" type="checkbox" class="expansionCode" value="SV7a" >
+                                <label for="checkbox105">強化擴充包「樂園騰龍」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox110" type="checkbox" class="expansionCode" value="SVI" >
+                                <label for="checkbox110">Trianers Camp</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox104" type="checkbox" class="expansionCode" value="SV7" >
+                                <label for="checkbox104">擴充包「星晶奇跡」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox103" type="checkbox" class="expansionCode" value="SVTH" >
+                                <label for="checkbox103">戰術牌組「巨鉗螳螂ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox102" type="checkbox" class="expansionCode" value="SVTG" >
+                                <label for="checkbox102">戰術牌組「太晶烈咬陸鯊ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox101" type="checkbox" class="expansionCode" value="SVTS" >
+                                <label for="checkbox101">戰術牌組「沙奈朵ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox100" type="checkbox" class="expansionCode" value="SVTR" >
+                                <label for="checkbox100">戰術牌組「密勒頓ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox99" type="checkbox" class="expansionCode" value="SVTL" >
+                                <label for="checkbox99">戰術牌組「太晶噴火龍ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox98" type="checkbox" class="expansionCode" value="SVTM" >
+                                <label for="checkbox98">戰術牌組「魔幻假面喵ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox97" type="checkbox" class="expansionCode" value="SV6a" >
+                                <label for="checkbox97">強化擴充包「黑夜漫遊者」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox96" type="checkbox" class="expansionCode" value="SV6" >
+                                <label for="checkbox96"> 擴充包「變幻假面」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox95" type="checkbox" class="expansionCode" value="SV5a" >
+                                <label for="checkbox95">強化擴充包「緋紅薄霧」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox94" type="checkbox" class="expansionCode" value="SVHM" >
+                                <label for="checkbox94">起始組合「未來密勒頓ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox93" type="checkbox" class="expansionCode" value="SVHK" >
+                                <label for="checkbox93">起始組合「古代故勒頓ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox92" type="checkbox" class="expansionCode" value="SV5M" >
+                                <label for="checkbox92">擴充包「異度審判」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox91" type="checkbox" class="expansionCode" value="SV5K" >
+                                <label for="checkbox91">擴充包「狂野之力」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox90" type="checkbox" class="expansionCode" value="SV4a" >
+                                <label for="checkbox90">高級擴充包「閃色寶藏ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox89" type="checkbox" class="expansionCode" value="SV4K" >
+                                <label for="checkbox89">擴充包「古代咆哮」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox88" type="checkbox" class="expansionCode" value="SV4M" >
+                                <label for="checkbox88">擴充包「未來閃光」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox87" type="checkbox" class="expansionCode" value="SV3a" >
+                                <label for="checkbox87">強化擴充包「激狂駭浪」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox86" type="checkbox" class="expansionCode" value="SVEM" >
+                                <label for="checkbox86">起始組合 太晶 超夢ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox85" type="checkbox" class="expansionCode" value="SVEL" >
+                                <label for="checkbox85">起始組合 太晶 骨紋巨聲鱷ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox84" type="checkbox" class="expansionCode" value="SVF" >
+                                <label for="checkbox84">牌組構築BOX黯焰支配者</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox83" type="checkbox" class="expansionCode" value="SV3" >
+                                <label for="checkbox83">擴充包「黯焰支配者」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox82" type="checkbox" class="expansionCode" value="SVD" >
+                                <label for="checkbox82">ex初階牌組</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox81" type="checkbox" class="expansionCode" value="SV2a" >
+                                <label for="checkbox81">強化擴充包「寶可夢卡牌151」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox80" type="checkbox" class="expansionCode" value="SVP1" >
+                                <label for="checkbox80">ex特別組合</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox78" type="checkbox" class="expansionCode" value="SVC" >
+                                <label for="checkbox78">起始組合ex 皮卡丘特別組合</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox76" type="checkbox" class="expansionCode" value="SV2P" >
+                                <label for="checkbox76">擴充包「冰雪險境」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox75" type="checkbox" class="expansionCode" value="SV2D" >
+                                <label for="checkbox75">擴充包「碟旋暴擊」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox74" type="checkbox" class="expansionCode" value="SV1a" >
+                                <label for="checkbox74">強化擴充包「三連音爆」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox73" type="checkbox" class="expansionCode" value="SVB" >
+                                <label for="checkbox73">頂級訓練家收藏箱ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox72" type="checkbox" class="expansionCode" value="SVAW" >
+                                <label for="checkbox72">起始組合ex 潤水鴨&amp;謎擬Ｑ ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox71" type="checkbox" class="expansionCode" value="SVAM" >
+                                <label for="checkbox71">起始組合ex 新葉喵&amp;路卡利歐 ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox70" type="checkbox" class="expansionCode" value="SVAL" >
+                                <label for="checkbox70">起始組合ex 呆火鱷&amp;電龍 ex</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox69" type="checkbox" class="expansionCode" value="SV1V" >
+                                <label for="checkbox69">擴充包「紫ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox68" type="checkbox" class="expansionCode" value="SV1S" >
+                                <label for="checkbox68">擴充包「朱ex」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox67" type="checkbox" class="expansionCode" value="SV-P" >
+                                <label for="checkbox67">特典卡 朱&amp;紫</label>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+                                <div class="conditionRow">
+                    <div class="conditionLabel">
+                        劍＆盾
+                        <div class="toggleAccordion opened"></div>
+                    </div>
+                    <div class="accordionMenu">
+                        <div class="optionContainer multiColumn">
+                                                                                                                <div class="options">
+                                <input id="checkbox66" type="checkbox" class="expansionCode" value="SO" >
+                                <label for="checkbox66">特別牌組組合 「噴火龍VSTAR vs 烈空坐VMAX」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox65" type="checkbox" class="expansionCode" value="S12a" >
+                                <label for="checkbox65">高級擴充包「天地萬物VSTAR」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox50" type="checkbox" class="expansionCode" value="S-P" >
+                                <label for="checkbox50">特典卡 劍&amp;盾</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox64" type="checkbox" class="expansionCode" value="SDM" >
+                                <label for="checkbox64">V初階牌組 「超夢」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox63" type="checkbox" class="expansionCode" value="SDP" >
+                                <label for="checkbox63">V初階牌組 「皮卡丘」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox62" type="checkbox" class="expansionCode" value="SDL" >
+                                <label for="checkbox62">V初階牌組 「噴火龍」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox61" type="checkbox" class="expansionCode" value="S12" >
+                                <label for="checkbox61"> 擴充包「思維激盪」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox60" type="checkbox" class="expansionCode" value="SN" >
+                                <label for="checkbox60">初階牌組100 特別版</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox59" type="checkbox" class="expansionCode" value="S11a" >
+                                <label for="checkbox59">強化擴充包「白熱奧祕」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox58" type="checkbox" class="expansionCode" value="SP6" >
+                                <label for="checkbox58"> VSTAR特別組合</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox57" type="checkbox" class="expansionCode" value="SPD" >
+                                <label for="checkbox57">VSTAR&amp;VMAX 高級牌組 代歐奇希斯</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox56" type="checkbox" class="expansionCode" value="SPZ" >
+                                <label for="checkbox56">VSTAR&amp;VMAX 高級牌組 捷拉奧拉</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox55" type="checkbox" class="expansionCode" value="S11" >
+                                <label for="checkbox55">擴充包 「迷途深淵」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox54" type="checkbox" class="expansionCode" value="S10b" >
+                                <label for="checkbox54">強化擴充包「Pokémon GO」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox53" type="checkbox" class="expansionCode" value="S10a" >
+                                <label for="checkbox53"> 強化擴充包「黑暗亡靈」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox52" type="checkbox" class="expansionCode" value="S10P" >
+                                <label for="checkbox52">擴充包「空間魔術師」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox51" type="checkbox" class="expansionCode" value="S10D" >
+                                <label for="checkbox51">擴充包「時間觀察者」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox49" type="checkbox" class="expansionCode" value="SLD" >
+                                <label for="checkbox49">起始組合VSTAR 達克萊伊</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox48" type="checkbox" class="expansionCode" value="SLL" >
+                                <label for="checkbox48">起始組合VSTAR 路卡利歐</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox47" type="checkbox" class="expansionCode" value="S9a" >
+                                <label for="checkbox47">強化擴充包「對戰地區」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox46" type="checkbox" class="expansionCode" value="SI" >
+                                <label for="checkbox46">初階牌組100</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox45" type="checkbox" class="expansionCode" value="SK" >
+                                <label for="checkbox45">頂級訓練家收藏箱 VSTAR</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox43" type="checkbox" class="expansionCode" value="SJ" >
+                                <label for="checkbox43">特別牌組組合 蒼響・藏瑪然特VS無極汰那</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox44" type="checkbox" class="expansionCode" value="S9" >
+                                <label for="checkbox44">擴充包「星星誕生」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox42" type="checkbox" class="expansionCode" value="S8b" >
+                                <label for="checkbox42">高級擴充包「VMAX絕群壓軸」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox21" type="checkbox" class="expansionCode" value="S8a" >
+                                <label for="checkbox21">擴充包「25週年收藏款」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox25" type="checkbox" class="expansionCode" value="SCD" >
+                                <label for="checkbox25"> V起始牌組 「強大」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox4" type="checkbox" class="expansionCode" value="S8" >
+                                <label for="checkbox4">擴充包「匯流藝術」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox41" type="checkbox" class="expansionCode" value="SP5" >
+                                <label for="checkbox41">蒼響V-UNION</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox39" type="checkbox" class="expansionCode" value="SP5" >
+                                <label for="checkbox39">超夢V-UNION</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox40" type="checkbox" class="expansionCode" value="SP5" >
+                                <label for="checkbox40">甲賀忍蛙V-UNION</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox26" type="checkbox" class="expansionCode" value="SH" >
+                                <label for="checkbox26"> 寶可夢卡牌家庭組合</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox20" type="checkbox" class="expansionCode" value="S7R" >
+                                <label for="checkbox20">擴充包「蒼空烈流」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox19" type="checkbox" class="expansionCode" value="S7D" >
+                                <label for="checkbox19"> 擴充包「摩天巔峰」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox24" type="checkbox" class="expansionCode" value="SCC" >
+                                <label for="checkbox24"> V起始牌組 「進化」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox18" type="checkbox" class="expansionCode" value="S6a" >
+                                <label for="checkbox18">強化擴充包「伊布英雄」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox16" type="checkbox" class="expansionCode" value="S6H" >
+                                <label for="checkbox16">擴充包「銀白戰槍」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox17" type="checkbox" class="expansionCode" value="S6K" >
+                                <label for="checkbox17"> 擴充包「漆黑幽魂」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox15" type="checkbox" class="expansionCode" value="S5a" >
+                                <label for="checkbox15"> 強化擴充包「雙璧戰士」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox23" type="checkbox" class="expansionCode" value="SCB" >
+                                <label for="checkbox23"> V起始牌組 「挑戰」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox14" type="checkbox" class="expansionCode" value="S5R" >
+                                <label for="checkbox14"> 擴充包「連撃大師」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox13" type="checkbox" class="expansionCode" value="S5I" >
+                                <label for="checkbox13"> 擴充包「一撃大師」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox22" type="checkbox" class="expansionCode" value="SCA" >
+                                <label for="checkbox22"> V起始牌組 「搭檔」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox12" type="checkbox" class="expansionCode" value="S4a" >
+                                <label for="checkbox12">高級擴充包「閃色明星V」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox11" type="checkbox" class="expansionCode" value="S4" >
+                                <label for="checkbox11">擴充包『驚天伏特攻擊』</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox10" type="checkbox" class="expansionCode" value="SC2D" >
+                                <label for="checkbox10"> V起始牌組「無極力量」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox9" type="checkbox" class="expansionCode" value="SC2b" >
+                                <label for="checkbox9">擴充包「無極力量」SET B</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox8" type="checkbox" class="expansionCode" value="SC2a" >
+                                <label for="checkbox8">擴充包「無極力量」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox7" type="checkbox" class="expansionCode" value="SC1D" >
+                                <label for="checkbox7">V起始牌組「劍&amp;盾」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox6" type="checkbox" class="expansionCode" value="SC1a" >
+                                <label for="checkbox6">擴充包「劍&amp;盾」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox5" type="checkbox" class="expansionCode" value="SC1b" >
+                                <label for="checkbox5">擴充包「劍&amp;盾」SET B</label>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+                                <div class="conditionRow">
+                    <div class="conditionLabel">
+                        太陽＆月亮
+                        <div class="toggleAccordion opened"></div>
+                    </div>
+                    <div class="accordionMenu">
+                        <div class="optionContainer multiColumn">
+                                                                                                                <div class="options">
+                                <input id="checkbox36" type="checkbox" class="expansionCode" value="AS6a" >
+                                <label for="checkbox36">擴充包「傳說交鋒」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox37" type="checkbox" class="expansionCode" value="AS6b" >
+                                <label for="checkbox37">擴充包「傳說交鋒」SET B</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox38" type="checkbox" class="expansionCode" value="AS6D" >
+                                <label for="checkbox38">G超起始牌組「傳說交鋒」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox33" type="checkbox" class="expansionCode" value="AS5a" >
+                                <label for="checkbox33">擴充包「雙倍爆擊」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox34" type="checkbox" class="expansionCode" value="As5b" >
+                                <label for="checkbox34">擴充包「雙倍爆擊」SET B</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox35" type="checkbox" class="expansionCode" value="AS5D" >
+                                <label for="checkbox35">G超起始牌組「雙倍爆擊」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox30" type="checkbox" class="expansionCode" value="AC2a" >
+                                <label for="checkbox30">擴充包「美夢成真組合篇」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox31" type="checkbox" class="expansionCode" value="AC2b" >
+                                <label for="checkbox31">擴充包「美夢成真組合篇」SET B</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox32" type="checkbox" class="expansionCode" value="AC2D" >
+                                <label for="checkbox32">G超起始牌組「美夢成真組合篇」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox27" type="checkbox" class="expansionCode" value="AC1a" >
+                                <label for="checkbox27">擴充包「眾星雲集組合篇」SET A</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox28" type="checkbox" class="expansionCode" value="AC1b" >
+                                <label for="checkbox28">擴充包「眾星雲集組合篇」SET B</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox29" type="checkbox" class="expansionCode" value="AC1D" >
+                                <label for="checkbox29">G超起始牌組「眾星雲集組合篇」</label>
+                            </div>
+                                                        <div class="options">
+                                <input id="checkbox79" type="checkbox" class="expansionCode" value="SM-P" >
+                                <label for="checkbox79">特典卡 太陽&amp;月亮</label>
+                            </div>
+                                                    </div>
+                    </div>
+                </div>
+                
+                <div class="modalFooter">
+                    <button type="button" class="button secondary clearButton modalClearButton">清空條件</button>
+                    <button type="button" class="button okButton selectProducts">OK</button>
+                </div>
+            </div>
+            <div class="bottomClose">
+                <button class="bottomCloseButton button secondary" type="button">關閉</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="typeSelectorModal" class="modal typeSelectorModal">
+    <div class="modalWrapper">
+        <div class="modalWindow">
+            <div class="close">
+                <button class="closeButton" type="button">modal.close</button>
+            </div>
+            <div class="headerWrapper">
+                <h3 class="modalHeader">
+                    屬性
+                </h3>
+            </div>
+            <div class="modalBody">
+                <div class="typeSelectorOuter">
+
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_1" value="1">
+                        <label for="energy_1">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Grass.png">
+                            草
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_2" value="2">
+                        <label for="energy_2">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Fire.png">
+                            火
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_3" value="3">
+                        <label for="energy_3">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Water.png">
+                            水
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_4" value="4">
+                        <label for="energy_4">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Lightning.png">
+                            雷
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_5" value="5">
+                        <label for="energy_5">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Psychic.png">
+                            超
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_6" value="6">
+                        <label for="energy_6">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Fighting.png">
+                            鬥
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_7" value="7">
+                        <label for="energy_7">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Darkness.png">
+                            惡
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_8" value="8">
+                        <label for="energy_8">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Metal.png">
+                            鋼
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_9" value="9">
+                        <label for="energy_9">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Fairy.png">
+                            妖
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_10" value="10">
+                        <label for="energy_10">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Dragon.png">
+                            龍
+                        </label>
+                    </div>
+                                        <div class="typeSelector">
+                        <input class="energy" type="checkbox" id="energy_11" value="11">
+                        <label for="energy_11">
+                            <img src="https://asia.pokemon-card.com/various_images/energy/Colorless.png">
+                            無
+                        </label>
+                    </div>
+                                    </div>
+                <div class="modalFooter">
+                    <button type="button" class="button secondary clearButton">清除</button>
+                    <button type="button" class="button okButton selectEnergies">OK</button>
+                </div>
+            </div>
+            <div class="bottomClose">
+                <button class="bottomCloseButton button secondary" type="button">關閉</button>
+            </div>
+        </div>
+    </div>
+</section>
+            </div>
+            <div class="rightColumn">
+                <div class="spResultHeader">
+                    <div class="resultSummary">
+                        <p class="resultNumber">43</p>
+                        <p class="resultUnit">個</p>
+                        <p class="resultPageNumber">第 1 頁</p>
+                        <p class="resultTotalPages">/ 共 3 頁</p>
+                    </div>
+                    <div class="sortContainer">
+                        <div class="selectBox">
+                            <select class="sort" id="spSort" name="sortCondition">
+                                <option value="">排序</option>
+                                                                                                <option value="1" >依HP排序</option>
+                                                                                                <option value="2" >依發售日排序</option>
+                                                                                                <option value="3" >依招式傷害值排序</option>
+                                                                                                <option value="4" >依圖鑑編號排序</option>
+                                                            </select>
+                        </div>
+                    </div>
+                </div>
+                                <ul class="list">
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/18039/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00018039.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/17038/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00017038.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/17039/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00017039.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/18292/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00018292.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/17040/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00017040.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/14796/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00014796.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/16453/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00016453.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/16454/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00016454.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/13148/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00013148.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/12537/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00012537.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/12164/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00012164.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/11337/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00011337.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/10298/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00010298.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/9173/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00009173.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/9339/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00009339.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/8943/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00008943.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/8266/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00008266.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/14986/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00014986.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/8304/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00008304.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                            <li class="card">
+                            <a href="/tw/card-search/detail/12268/">
+                                <div class="imageContainer loading">
+                                    <img
+                                        class="lazy"
+                                        src
+                                        data-original="https://asia.pokemon-card.com/tw/card-img/tw00012268.png"
+                                        alt
+                                    >
+                                </div>
+                            </a>
+                        </li>
+                                        </ul>
+                <section class="myPaginationBlock">
+                    <nav class="pagination">
+    <ol class="paginationBox">
+        <li class="paginationItem prev">
+                            <span>Prev</span>
+                    </li>
+                                    <li class="paginationItem current"><span>1</span></li>
+                                                <li class="paginationItem"><a href="/tw/card-search/list/?pageNo=2&amp;keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&amp;cardType=all&amp;regulation=all">2</a></li>
+                                                <li class="paginationItem"><a href="/tw/card-search/list/?pageNo=3&amp;keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&amp;cardType=all&amp;regulation=all">3</a></li>
+                            <li class="paginationItem next">
+                    <a href="/tw/card-search/list/?pageNo=2&amp;keyword=%E5%8D%A1%E6%AF%94%E7%8D%B8&amp;cardType=all&amp;regulation=all">Next</a>
+                </li>
+    </ol>
+</nav>
+
+                </section>
+            </div>
+            <div class="changeSearchCondition">
+                <button id="changeConditionButton"  type="button" class="button search changeConditionButton">更改搜尋條件</button>
+                            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+<nav class="breadcrumbs">
+    <ol>
+        <li class="top"><a href="https://asia.pokemon-card.com/tw/">TOP</a></li>
+                        <li><a href="/tw/card-search/">卡牌</a></li>
+                                <li class="current">
+            卡牌搜尋結果
+            
+        </li>
+                    </ol>
+</nav>
+
+<script src="/build/runtime.js" defer></script><script src="/build/vendors-node_modules_jquery_dist_jquery_js.js" defer></script><script src="/build/vendors-node_modules_core-js_internals_export_js-node_modules_core-js_internals_object-keys_js.js" defer></script><script src="/build/vendors-node_modules_core-js_modules_es_array_find_js-node_modules_core-js_modules_es_object_-823ffa.js" defer></script><script src="/build/pages/cardList.js" defer></script>
+
+        </main>
+
+        <footer class="footer">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let currentYear = Array.from(document.getElementsByClassName("current-year"))
+            currentYear.forEach(function( value ) {
+                value.innerText = new Date().getFullYear();
+            });
+        });
+    </script>
+    <div class="footerWrapper">
+        <section class="contact">
+            <a href="/tw/contact/">
+                <button class="button arrow large contactButton">
+                    Contact
+                </button>
+            </a>
+        </section>
+        <nav class="siteLink">
+            <ul>
+                <li class="siteLinkItem"><a href="https://asia.pokemon-card.com/tw/sitemap/">Site Map</a></li>
+                <li class="siteLinkItem"><a href="https://asia.pokemon-card.com/tw/policy/">Term of Use</a></li>
+                <li class="siteLinkItem"><a href="https://tw.portal-pokemon.com/privacypolicy/" target="_blank" rel="noopener">Privacy Notice</a></li>
+            </ul>
+        </nav>
+        <nav class="outerSiteLink">
+            <ul>
+                <li class="siteLinkItem"><a href="https://asia.pokemon-card.com/">Pokémon Trading Card Game Website</a></li>
+                <li class="siteLinkItem"><a href="https://tw.portal-pokemon.com" target="_blank" rel="noopener">The official Pokemon Website</a></li>
+                <li class="siteLinkItem"><a href="https://trainers-asia.portal-pokemon.com/tw/2026-27/" target="_blank" rel="noopener">Pokémon Asia Championship Series WEB Site</a></li>
+            </ul>
+        </nav>
+        <section class="note">
+            <p>©Pokémon/Nintendo/Creatures/GAME FREAK</p>
+            <p>TM, Ⓡ, and character names are trademarks of Nintendo.</p>
+        </section>
+    </div>
+</footer>
+
+        <div id="headerSearchModal" class="modal headerSearchModal">
+    <div class="modalWrapper">
+        <div class="modalWindow">
+            <div class="close">
+                <button class="closeButton" type="button">close</button>
+            </div>
+            <div class="headerWrapper">
+                <div class="spClose"></div>
+            </div>
+            <div class="modalBody">
+                <div class="headerSearch-tabs">
+                    <button data-tabname="tabContentCard" class="tabButton card selected">卡牌</button>
+                    <button data-tabname="tabContentQA" class="tabButton qa">Q&A</button>
+                </div>
+                <div class="headerSearch-content">
+                    <div id="tabContentCard" class="tabContent tabContentCard show">
+                        <form action="/tw/card-search/list/" method="POST">
+                            <div class="searchBox">
+                                <div class="keywordButton">
+                                    <div class="keyword">
+                                        <input type="text" id="header_keyword" name="keyword" placeholder="關鍵字篩選">
+                                    </div>
+                                    <button class="button search searchButton">搜尋</button>
+                                </div>
+                                <div class="cardTypeSelector">
+                                    <h5 class="cardTypeLabel">卡牌種類</h5>
+                                    <div class="cardTypes">
+                                        <div class="inputInline">
+                                            <input class="cardTypeOption" id="headerCardTypeAll" type="radio" name="cardType" value="all" checked>
+                                            <label for="headerCardTypeAll" class="radio">
+                                                全部
+                                            </label>
+                                                                                        <input class="cardTypeOption" id="header_Pokemon" type="radio" name="cardType" value="1">
+                                            <label for="header_Pokemon" class="radio">
+                                                寶可夢卡
+                                            </label>
+                                                                                        <input class="cardTypeOption" id="header_Trainers" type="radio" name="cardType" value="2">
+                                            <label for="header_Trainers" class="radio">
+                                                訓練家卡
+                                            </label>
+                                                                                        <input class="cardTypeOption" id="header_Energy" type="radio" name="cardType" value="3">
+                                            <label for="header_Energy" class="radio">
+                                                能量卡
+                                            </label>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                <div class="spSearchButton">
+                                    <button class="button search searchButton">搜尋</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="tabContentQA" class="tabContent tabContentQA">
+                        <form action="/tw/rules/search/" method="POST">
+                            <div class="searchBox">
+                                <div class="keywordButton">
+                                    <div class="keyword">
+                                        <input type="text" id="header_qa_keyword" name="keyword" placeholder="關鍵字篩選">
+                                    </div>
+                                    <button class="button search searchButton">搜尋</button>
+                                </div>
+                                <div class="regulationSelector">
+                                    <h5 class="regulationLabel">賽制</h5>
+                                    <div class="regulations">
+                                        <div class="inputInline">
+                                            <input id="headerRegulationAll" type="radio" name="regulation" value="all" checked>
+                                            <label for="headerRegulationAll" class="regulation radio">
+                                                全部
+                                            </label>
+                                                                                        <input id="header_regulationStandard" type="radio" name="regulation" value="1" >
+                                            <label for="header_regulationStandard" class="regulation radio">
+                                                標準
+                                            </label>
+                                                                                        <input id="header_regulationWide" type="radio" name="regulation" value="2" >
+                                            <label for="header_regulationWide" class="regulation radio">
+                                                開放
+                                            </label>
+                                                                                        <input id="header_regulationOthers" type="radio" name="regulation" value="3" >
+                                            <label for="header_regulationOthers" class="regulation radio">
+                                                其他
+                                            </label>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                <div class="spSearchButton">
+                                    <button class="button search searchButton">搜尋</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="bottomClose">
+                <button class="bottomCloseButton button secondary" type="button">關閉</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <button id="toTopButton" type="button" class="button toTopButton"></button>
+
+
+                    <script src="/build/vendors-node_modules_core-js_modules_es_array_concat_js-node_modules_core-js_modules_es_array-9a1f35.js" defer></script><script src="/build/vendors-node_modules_jquery-ui-timepicker-addon_dist_jquery-ui-timepicker-addon_min_js-node_m-cc9136.js" defer></script><script src="/build/app.js" defer></script>
+                    </body>
+</html>

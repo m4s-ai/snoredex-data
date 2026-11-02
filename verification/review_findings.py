@@ -908,6 +908,10 @@ def _collect_g2c(state: dict[str, Any]) -> dict[str, Any]:
             }
             expected_query_fields = {
                 "pokemon-asia-html": {"nameQueries", "cardType", "regulation", "pageParameter"},
+                "pokemon-japan-html": {
+                    "nameQueries", "se_ta", "regulation_sidebar_form", "pg", "illust",
+                    "sm_and_keyword", "pageParameter",
+                },
                 "tcgdex-json": {"nameQueries", "nameFilter", "pagination"},
                 "confirmed-source-json": {
                     "nameQueries", "retainedUnitIds", "providerIdentity", "sourceRecord",

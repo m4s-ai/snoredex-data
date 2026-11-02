@@ -172,6 +172,54 @@ class AsiaDetailParser(HTMLParser):
             self._buffer.append(data.strip())
 
 
+class JapanDetailParser(HTMLParser):
+    """Read the official identity fields without flattening unrelated page text."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.local_name = self.collector_number = self.card_image_url = None
+        self.raw_set_code = None
+        self.capture = None
+        self.parts: list[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        values = dict(attrs)
+        classes = (values.get("class") or "").split()
+        if tag == "h1" and "Heading1" in classes:
+            self.capture, self.parts = "name", []
+        elif tag == "div" and "subtext" in classes:
+            self.capture, self.parts = "number", []
+        elif tag == "img":
+            source = values.get("src") or ""
+            match = re.search(r"/card_images/large/([^/]+)/", source)
+            if match and self.card_image_url is None:
+                self.card_image_url = urllib.parse.urljoin("https://www.pokemon-card.com", source)
+                self.raw_set_code = match.group(1)
+
+    def handle_data(self, data: str) -> None:
+        if self.capture:
+            self.parts.append(data)
+
+    def handle_endtag(self, tag: str) -> None:
+        if (tag, self.capture) not in {("h1", "name"), ("div", "number")}:
+            return
+        text = " ".join(" ".join(self.parts).split())
+        if self.capture == "name":
+            self.local_name = text or None
+        else:
+            match = re.search(r"([0-9]+)\s*/\s*([A-Za-z0-9-]+)", text)
+            self.collector_number = "/".join(match.groups()) if match else None
+        self.capture = None
+
+
+def validate_japan_query(raw: bytes, query: str, page_no: int) -> None:
+    value = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(value, dict) or value.get("result") != 1 \
+            or value.get("regulation") != "all" or value.get("thisPage") != page_no \
+            or f"キーワード：{query}" not in value.get("searchCondition", []):
+        raise DiscoveryError("Japanese search did not echo the requested name, all formats and page")
+
+
 class OfficialLocalizedListParser(HTMLParser):
     """Retain provider-native Italian archive result entries without claiming archive closure."""
 
@@ -341,26 +389,225 @@ def parse_official_localized_page(
     return parser.query_echo, parser.entries, parser.current_page, parser.total_pages
 
 
+def parse_reviewed_id_list(raw: bytes):
+    value = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(value, list):
+        raise DiscoveryError("confirmed-source card list did not return an array")
+    detail_ids = []
+    for item in value:
+        if not isinstance(item, dict) or not isinstance(item.get("detailId"), str):
+            raise DiscoveryError("confirmed-source card row lacks a string detailId")
+        detail_ids.append(item["detailId"])
+    return {
+        "resultCount": len(value),
+        "totalPages": 1,
+        "detailIds": list(dict.fromkeys(detail_ids)),
+    }
+
+
+def parse_tcgdex_detail(raw: bytes, raw_provider_id: str, set_record: dict[str, Any] | None):
+    value = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(value, dict) or value.get("id") != raw_provider_id:
+        raise DiscoveryError(f"TCGdex detail id differs: {raw_provider_id}")
+    set_brief = value.get("set")
+    if not isinstance(set_brief, dict) or not isinstance(set_brief.get("id"), str):
+        raise DiscoveryError(f"TCGdex detail lacks a set id: {raw_provider_id}")
+    if not isinstance(set_record, dict) or set_record.get("id") != set_brief["id"]:
+        raise DiscoveryError(f"TCGdex detail lacks its retained set record: {raw_provider_id}")
+    series = set_record.get("serie")
+    if not isinstance(series, dict) or not isinstance(series.get("id"), str):
+        raise DiscoveryError(f"TCGdex set lacks a series identity: {set_brief['id']}")
+    product_scope = (
+        "digital-pocket" if series["id"] == "tcgp" else "physical-tcg"
+    )
+    return {
+        "detailId": raw_provider_id,
+        "localName": value.get("name"),
+        "rawSetCode": set_brief["id"],
+        "localCollectorNumber": value.get("localId"),
+        "cardImageUrl": value.get("image"),
+        "setSymbolUrl": set_brief.get("symbol"),
+        "productScope": product_scope,
+        "setName": set_brief.get("name"),
+        "setSeries": {"id": series["id"], "name": series.get("name")},
+        "providerRecord": value,
+        "providerSetIdentity": {
+            "id": set_record["id"],
+            "name": set_record.get("name"),
+            "serie": {"id": series["id"], "name": series.get("name")},
+            "releaseDate": set_record.get("releaseDate"),
+        },
+    }
+
+
+def japan_list_payload(raw: bytes) -> dict[str, Any]:
+    value = json.loads(raw.decode("utf-8-sig"))
+    if not isinstance(value, dict) or value.get("result") != 1 \
+            or value.get("regulation") != "all" \
+            or any(type(value.get(key)) is not int or value[key] < 0
+                   for key in ("hitCnt", "maxPage", "thisPage")) \
+            or not isinstance(value.get("cardList"), list):
+        raise DiscoveryError("Japanese list lacks all-format result and pagination metadata")
+    return value
+
+
+def request_query_parameters(adapter: dict[str, Any], slice_row: dict[str, Any]):
+    query_parameters = {"nameQueries": slice_row["nameQueries"]}
+    response_format = adapter.get("responseFormat", "pokemon-asia-html")
+    if response_format == "pokemon-asia-html":
+        query_parameters.update({
+            "cardType": "all", "regulation": "all",
+            "pageParameter": adapter["pageParameter"],
+        })
+    elif response_format == "pokemon-japan-html":
+        query_parameters.update({
+            "se_ta": "", "regulation_sidebar_form": "all", "pg": "",
+            "illust": "", "sm_and_keyword": "true", "pageParameter": "page",
+        })
+    elif response_format == "tcgdex-json":
+        query_parameters.update({
+            "nameFilter": slice_row.get("nameFilter", "strict-equality"),
+            "pagination": "disabled-provider-default",
+        })
+    elif response_format == "confirmed-source-json":
+        query_parameters.update({
+            "retainedUnitIds": slice_row["retainedUnitIds"],
+            "providerIdentity": "canonical-card-ed-num-query",
+            "sourceRecord": "verification/confirmed_sources.json",
+            "pagination": "exact-reviewed-positive-frontier",
+        })
+    elif response_format == "bulbapedia-historical-json":
+        query_parameters.update({
+            "retainedUnitIds": slice_row["retainedUnitIds"],
+            "retainedSetNames": slice_row["retainedSetNames"],
+            "sourceRecord": "verification/confirmed_sources.json",
+            "pageTitle": adapter["pageTitle"],
+            "revisionId": adapter["revisionId"],
+            "languageColumn": slice_row["language"],
+            "pagination": "single-revision-positive-frontier",
+        })
+    elif response_format == "source-first-print-json":
+        query_parameters.update({
+            "retainedPrintIds": slice_row["retainedPrintIds"],
+            "sourceRecord": "verification/source_first_prints.json",
+            "pagination": "exact-reviewed-positive-frontier",
+        })
+    elif response_format == "52poke-scan-json":
+        query_parameters.update({
+            "retainedRecordIds": slice_row["retainedRecordIds"],
+            "sourceRecord": "verification/evidence/issue-84-snorlax-alle-zh.json",
+            "pagination": "exact-reviewed-positive-frontier",
+        })
+    elif response_format == "pokemon-official-localized-html":
+        query_parameters.update({
+            "nameFilter": "provider-name-search",
+            "format": "unlimited",
+            "pageParameter": adapter["pageParameter"],
+            "pagination": "all-declared-result-pages",
+            "cacheKeyParameter": "snoredexRun",
+        })
+    else:
+        query_parameters.update({
+            "nameFilter": "provider-name-search",
+            "format": "unlimited",
+            "pagination": "single-retained-response-no-archive-closure",
+            "cacheKeyParameter": "snoredexRun",
+        })
+    return query_parameters
+
+
+def refresh_native_pages(run_dir: Path, manifest: dict[str, Any], request: dict[str, Any], adapter: dict[str, Any], slice_row: dict[str, Any]):
+    response_format = adapter.get("responseFormat", "pokemon-asia-html")
+    pages_by_pair = {(row["query"], row["pageNo"]): row for row in request["pages"]}
+    for query_index, query in enumerate(slice_row["nameQueries"], start=1):
+        page_no = 1
+        total_pages = None
+        while total_pages is None or page_no <= total_pages:
+            pair = (query, page_no)
+            page = pages_by_pair.get(pair)
+            if page is None:
+                parameters = {
+                    "pageNo": page_no, "keyword": query,
+                    "cardType": "all", "regulation": "all",
+                }
+                if response_format == "pokemon-japan-html":
+                    parameters = {"keyword": query, "se_ta": "",
+                                  "regulation_sidebar_form": "all", "pg": "",
+                                  "illust": "", "sm_and_keyword": "true", "page": page_no}
+                url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
+                raw = fetch_bytes(url)
+                if response_format == "pokemon-japan-html":
+                    validate_japan_query(raw, query, page_no)
+                parsed = parse_list(raw, response_format)
+                extension = "json" if response_format == "pokemon-japan-html" else "html"
+                relative = f"raw/{request['sliceId']}/query-{query_index}/page-{page_no}.{extension}"
+                page = {
+                    "query": query, "pageNo": page_no, "url": url,
+                    "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
+                    **parsed,
+                }
+                request["pages"].append(page)
+                pages_by_pair[pair] = page
+                request["checkpoint"]["completedPages"] = sorted(
+                    f"{row['query']}:{row['pageNo']}" for row in request["pages"]
+                )
+                request["checkpoint"]["nextPage"] = page_no + 1
+                save_manifest(run_dir, manifest)
+            total_pages = page["totalPages"]
+            page_no += 1
+
+
+
+def parse_retained_list(raw: bytes, page: dict[str, Any], response_format: str, slice_row: dict[str, Any], adapter: dict[str, Any]):
+    if response_format == "pokemon-japan-html":
+        validate_japan_query(raw, page["query"], page["pageNo"])
+    if response_format == "bulbapedia-historical-json":
+        try:
+            positive_sets = parse_historical_index(
+                raw,
+                slice_row["language"],
+                expected_revision=adapter["revisionId"],
+                expected_title=adapter["pageTitle"],
+            )
+        except HistoricalIndexError as error:
+            raise DiscoveryError(str(error)) from error
+        if page.get("parsedPositiveSetCount") != len(positive_sets):
+            raise DiscoveryError(
+                f"historical set accounting drift: {page['rawPath']}"
+            )
+        return {"resultCount": len(slice_row["retainedUnitIds"]), "totalPages": 1,
+                "detailIds": slice_row["retainedUnitIds"]}
+    else:
+        return parse_list(
+            raw, response_format, slice_row["rawLocale"],
+            adapter.get("adapterVersion"),
+        )
+
+
+def parse_japan_list(raw: bytes) -> dict[str, Any]:
+    value = japan_list_payload(raw)
+    rows = value["cardList"]
+    if any(not isinstance(row, dict) or not isinstance(row.get("cardID"), str)
+           or not row["cardID"].isdigit() for row in rows):
+        raise DiscoveryError("Japanese list row lacks a numeric provider card ID")
+    if rows and (type(value.get("cardStart")) is not int
+                 or type(value.get("cardEnd")) is not int
+                 or value["cardEnd"] - value["cardStart"] + 1 != len(rows)):
+        raise DiscoveryError("Japanese list rows differ from the declared result range")
+    return {"resultCount": value["hitCnt"], "totalPages": value["maxPage"],
+            "detailIds": [row["cardID"] for row in rows]}
+
+
 def parse_list(
     raw: bytes, response_format: str = "pokemon-asia-html", raw_locale: str = "it",
     adapter_version: str | None = None,
 ) -> dict[str, Any]:
+    if response_format == "pokemon-japan-html":
+        return parse_japan_list(raw)
     if response_format in {
         "52poke-scan-json", "confirmed-source-json", "source-first-print-json"
     }:
-        value = json.loads(raw.decode("utf-8-sig"))
-        if not isinstance(value, list):
-            raise DiscoveryError("confirmed-source card list did not return an array")
-        detail_ids = []
-        for item in value:
-            if not isinstance(item, dict) or not isinstance(item.get("detailId"), str):
-                raise DiscoveryError("confirmed-source card row lacks a string detailId")
-            detail_ids.append(item["detailId"])
-        return {
-            "resultCount": len(value),
-            "totalPages": 1,
-            "detailIds": list(dict.fromkeys(detail_ids)),
-        }
+        return parse_reviewed_id_list(raw)
     if response_format == "tcgdex-json":
         value = json.loads(raw.decode("utf-8-sig"))
         if not isinstance(value, list):
@@ -402,6 +649,14 @@ def parse_detail(
     response_format: str = "pokemon-asia-html",
     set_record: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
+    if response_format == "pokemon-japan-html":
+        parser = JapanDetailParser()
+        parser.feed(raw.decode("utf-8-sig"))
+        return {"detailId": raw_provider_id, "localName": parser.local_name,
+                "rawSetCode": parser.raw_set_code,
+                "localCollectorNumber": parser.collector_number,
+                "cardImageUrl": parser.card_image_url, "setSymbolUrl": None,
+                "productScope": "physical-tcg"}
     if response_format in {
         "52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json",
         "source-first-print-json",
@@ -411,38 +666,7 @@ def parse_detail(
             raise DiscoveryError(f"confirmed-source detail id differs: {raw_provider_id}")
         return value
     if response_format == "tcgdex-json":
-        value = json.loads(raw.decode("utf-8-sig"))
-        if not isinstance(value, dict) or value.get("id") != raw_provider_id:
-            raise DiscoveryError(f"TCGdex detail id differs: {raw_provider_id}")
-        set_brief = value.get("set")
-        if not isinstance(set_brief, dict) or not isinstance(set_brief.get("id"), str):
-            raise DiscoveryError(f"TCGdex detail lacks a set id: {raw_provider_id}")
-        if not isinstance(set_record, dict) or set_record.get("id") != set_brief["id"]:
-            raise DiscoveryError(f"TCGdex detail lacks its retained set record: {raw_provider_id}")
-        series = set_record.get("serie")
-        if not isinstance(series, dict) or not isinstance(series.get("id"), str):
-            raise DiscoveryError(f"TCGdex set lacks a series identity: {set_brief['id']}")
-        product_scope = (
-            "digital-pocket" if series["id"] == "tcgp" else "physical-tcg"
-        )
-        return {
-            "detailId": raw_provider_id,
-            "localName": value.get("name"),
-            "rawSetCode": set_brief["id"],
-            "localCollectorNumber": value.get("localId"),
-            "cardImageUrl": value.get("image"),
-            "setSymbolUrl": set_brief.get("symbol"),
-            "productScope": product_scope,
-            "setName": set_brief.get("name"),
-            "setSeries": {"id": series["id"], "name": series.get("name")},
-            "providerRecord": value,
-            "providerSetIdentity": {
-                "id": set_record["id"],
-                "name": set_record.get("name"),
-                "serie": {"id": series["id"], "name": series.get("name")},
-                "releaseDate": set_record.get("releaseDate"),
-            },
-        }
+        return parse_tcgdex_detail(raw, raw_provider_id, set_record)
     if response_format == "pokemon-official-localized-html":
         _, entries = parse_official_localized_entries(raw)
         matches = [row for row in entries if row["detailId"] == raw_provider_id]
@@ -539,7 +763,7 @@ def validate_contract(
         response_format = adapter.get("responseFormat", "pokemon-asia-html")
         if response_format not in {
             "52poke-scan-json", "bulbapedia-historical-json", "confirmed-source-json",
-            "pokemon-asia-html", "pokemon-official-localized-html",
+            "pokemon-asia-html", "pokemon-japan-html", "pokemon-official-localized-html",
             "source-first-print-json", "tcgdex-json",
         }:
             raise DiscoveryError(f"adapter {adapter_id} has an unsupported response format")
@@ -726,6 +950,41 @@ def acquisition_contract(contract: dict[str, Any]) -> dict[str, Any]:
     return value
 
 
+def reviewed_unnumbered_identity(
+    mapping: dict[str, Any] | None, source_matches: list[dict[str, Any]],
+    slice_row: dict[str, Any],
+) -> bool:
+    if not mapping or mapping.get("mode") != "exact-match":
+        return False
+    matches = [row for row in source_matches
+               if row["cardReleaseId"] == mapping["targetCardReleaseId"]]
+    if len(matches) != 1:
+        return False
+    target = matches[0]
+    return (target.get("localNumber") == ""
+            and target.get("localIdentifierKnown") is True
+            and target.get("locality") == slice_row["locality"]
+            and target.get("language") == slice_row["language"])
+
+
+def missing_identity_fields(
+    source_record: dict[str, Any], raw_provider_id: str,
+    mapping: dict[str, Any] | None, source_matches: list[dict[str, Any]],
+    slice_row: dict[str, Any],
+) -> list[str]:
+    missing = [field for field, value in (
+        ("detailId", raw_provider_id), ("localName", source_record.get("localName")),
+        ("rawSetCode", source_record.get("rawSetCode")),
+        ("localCollectorNumber", source_record.get("localCollectorNumber")),
+    ) if not isinstance(value, str) or not value.strip()]
+    # An exact reviewed source URL may identify an already known unnumbered card.
+    if missing == ["localCollectorNumber"] and reviewed_unnumbered_identity(
+        mapping, source_matches, slice_row
+    ):
+        return []
+    return missing
+
+
 def normalize_record(
     adapter: dict[str, Any],
     slice_row: dict[str, Any],
@@ -774,12 +1033,9 @@ def normalize_record(
         row for row in identity_releases
         if source_url in row.get("sourceRecords", [])
     ]
-    missing = [
-        field for field, value in (
-            ("detailId", raw_provider_id), ("localName", local_name),
-            ("rawSetCode", raw_set_code), ("localCollectorNumber", local_number),
-        ) if not isinstance(value, str) or not value.strip()
-    ]
+    missing = missing_identity_fields(
+        source_record, raw_provider_id, mapping, source_matches, slice_row
+    )
 
     equivalence_proposals: list[dict[str, Any]] = []
     target = None
@@ -1047,30 +1303,7 @@ def build_projection(
                 raw = checked_raw_path(run_dir, page["rawPath"]).read_bytes()
                 if content_hash(raw) != page["responseHash"]:
                     raise DiscoveryError(f"list response hash mismatch: {page['rawPath']}")
-                if response_format == "bulbapedia-historical-json":
-                    try:
-                        positive_sets = parse_historical_index(
-                            raw,
-                            slice_row["language"],
-                            expected_revision=adapter["revisionId"],
-                            expected_title=adapter["pageTitle"],
-                        )
-                    except HistoricalIndexError as error:
-                        raise DiscoveryError(str(error)) from error
-                    parsed = {
-                        "resultCount": len(slice_row["retainedUnitIds"]),
-                        "totalPages": 1,
-                        "detailIds": slice_row["retainedUnitIds"],
-                    }
-                    if page.get("parsedPositiveSetCount") != len(positive_sets):
-                        raise DiscoveryError(
-                            f"historical set accounting drift: {page['rawPath']}"
-                        )
-                else:
-                    parsed = parse_list(
-                        raw, response_format, slice_row["rawLocale"],
-                        adapter.get("adapterVersion"),
-                    )
+                parsed = parse_retained_list(raw, page, response_format, slice_row, adapter)
                 if parsed != {
                     "resultCount": page["resultCount"],
                     "totalPages": page["totalPages"],
@@ -1082,7 +1315,10 @@ def build_projection(
                 pages_by_query[page["query"]].append(page)
             for query in slice_row["nameQueries"]:
                 pages = pages_by_query.get(query, [])
-                if not pagination_complete(pages):
+                complete = pagination_complete(pages)
+                if complete and response_format == "pokemon-japan-html":
+                    complete = sum(len(page["detailIds"]) for page in pages) == pages[0]["resultCount"]
+                if not complete:
                     pagination_failed = True
                     run_errors.append({
                         "code": "incomplete-pagination", "sliceId": request["sliceId"],
@@ -1398,62 +1634,7 @@ def new_manifest(
     requests = []
     for adapter in contract["adapters"]:
         for slice_row in adapter["slices"]:
-            query_parameters = {"nameQueries": slice_row["nameQueries"]}
-            response_format = adapter.get("responseFormat", "pokemon-asia-html")
-            if response_format == "pokemon-asia-html":
-                query_parameters.update({
-                    "cardType": "all", "regulation": "all",
-                    "pageParameter": adapter["pageParameter"],
-                })
-            elif response_format == "tcgdex-json":
-                query_parameters.update({
-                    "nameFilter": slice_row.get("nameFilter", "strict-equality"),
-                    "pagination": "disabled-provider-default",
-                })
-            elif response_format == "confirmed-source-json":
-                query_parameters.update({
-                    "retainedUnitIds": slice_row["retainedUnitIds"],
-                    "providerIdentity": "canonical-card-ed-num-query",
-                    "sourceRecord": "verification/confirmed_sources.json",
-                    "pagination": "exact-reviewed-positive-frontier",
-                })
-            elif response_format == "bulbapedia-historical-json":
-                query_parameters.update({
-                    "retainedUnitIds": slice_row["retainedUnitIds"],
-                    "retainedSetNames": slice_row["retainedSetNames"],
-                    "sourceRecord": "verification/confirmed_sources.json",
-                    "pageTitle": adapter["pageTitle"],
-                    "revisionId": adapter["revisionId"],
-                    "languageColumn": slice_row["language"],
-                    "pagination": "single-revision-positive-frontier",
-                })
-            elif response_format == "source-first-print-json":
-                query_parameters.update({
-                    "retainedPrintIds": slice_row["retainedPrintIds"],
-                    "sourceRecord": "verification/source_first_prints.json",
-                    "pagination": "exact-reviewed-positive-frontier",
-                })
-            elif response_format == "52poke-scan-json":
-                query_parameters.update({
-                    "retainedRecordIds": slice_row["retainedRecordIds"],
-                    "sourceRecord": "verification/evidence/issue-84-snorlax-alle-zh.json",
-                    "pagination": "exact-reviewed-positive-frontier",
-                })
-            elif response_format == "pokemon-official-localized-html":
-                query_parameters.update({
-                    "nameFilter": "provider-name-search",
-                    "format": "unlimited",
-                    "pageParameter": adapter["pageParameter"],
-                    "pagination": "all-declared-result-pages",
-                    "cacheKeyParameter": "snoredexRun",
-                })
-            else:
-                query_parameters.update({
-                    "nameFilter": "provider-name-search",
-                    "format": "unlimited",
-                    "pagination": "single-retained-response-no-archive-closure",
-                    "cacheKeyParameter": "snoredexRun",
-                })
+            query_parameters = request_query_parameters(adapter, slice_row)
             requests.append({
                 "runId": run_id,
                 "adapterId": adapter["adapterId"],
@@ -1498,36 +1679,8 @@ def refresh_asia_request(
     adapter: dict[str, Any], slice_row: dict[str, Any],
     assertion_by_code: dict[tuple[str, str, str, str], dict[str, Any]],
 ) -> None:
-    pages_by_pair = {(row["query"], row["pageNo"]): row for row in request["pages"]}
-    for query_index, query in enumerate(slice_row["nameQueries"], start=1):
-        page_no = 1
-        total_pages = None
-        while total_pages is None or page_no <= total_pages:
-            pair = (query, page_no)
-            page = pages_by_pair.get(pair)
-            if page is None:
-                parameters = {
-                    "pageNo": page_no, "keyword": query,
-                    "cardType": "all", "regulation": "all",
-                }
-                url = request["endpoint"] + "?" + urllib.parse.urlencode(parameters)
-                raw = fetch_bytes(url)
-                parsed = parse_list(raw, "pokemon-asia-html")
-                relative = f"raw/{request['sliceId']}/query-{query_index}/page-{page_no}.html"
-                page = {
-                    "query": query, "pageNo": page_no, "url": url,
-                    "rawPath": relative, "responseHash": retain_response(run_dir, relative, raw),
-                    **parsed,
-                }
-                request["pages"].append(page)
-                pages_by_pair[pair] = page
-                request["checkpoint"]["completedPages"] = sorted(
-                    f"{row['query']}:{row['pageNo']}" for row in request["pages"]
-                )
-                request["checkpoint"]["nextPage"] = page_no + 1
-                save_manifest(run_dir, manifest)
-            total_pages = page["totalPages"]
-            page_no += 1
+    response_format = adapter.get("responseFormat", "pokemon-asia-html")
+    refresh_native_pages(run_dir, manifest, request, adapter, slice_row)
 
     discovered_ids = sorted({
         raw_id for page in request["pages"] for raw_id in page["detailIds"]
@@ -1539,7 +1692,7 @@ def refresh_asia_request(
                 rawLocale=slice_row["rawLocale"], rawProviderId=raw_provider_id
             )
             raw = fetch_bytes(url)
-            parsed = parse_detail(raw, raw_provider_id, "pokemon-asia-html")
+            parsed = parse_detail(raw, raw_provider_id, response_format)
             relative = f"raw/{request['sliceId']}/details/{raw_provider_id}.html"
             detail = {
                 "rawProviderId": raw_provider_id, "url": url,
@@ -1557,7 +1710,7 @@ def refresh_asia_request(
     for raw_provider_id in discovered_ids:
         detail = details[raw_provider_id]
         raw = checked_raw_path(run_dir, detail["rawPath"]).read_bytes()
-        source_record = parse_detail(raw, raw_provider_id, "pokemon-asia-html")
+        source_record = parse_detail(raw, raw_provider_id, response_format)
         assertion = assertion_by_code.get((
             adapter["providerId"], adapter["surfaceId"], slice_row["rawLocale"],
             source_record.get("rawSetCode"),
@@ -2250,7 +2403,7 @@ def refresh(
             slice_row = slices[request["sliceId"]]
             request["error"] = None
             response_format = adapter.get("responseFormat", "pokemon-asia-html")
-            if response_format == "pokemon-asia-html":
+            if response_format in {"pokemon-asia-html", "pokemon-japan-html"}:
                 refresh_asia_request(
                     run_dir, manifest, request, adapter, slice_row, assertion_by_code
                 )

@@ -69,6 +69,20 @@ class CompletenessGateTests(unittest.TestCase):
         errors = gate.validate_staging(mutated, "set-discovery")
         self.assertTrue(any("zero-result complete slice" in error for error in errors))
 
+    def test_unnumbered_identity_requires_reviewed_exact_source_and_known_target(self) -> None:
+        rows = [json.loads(line) for line in gate.CARD_RECORDS.read_text(encoding="utf-8").splitlines()]
+        row = next(row for row in rows if row["stableKey"] == "pokemon-card-jp|jp-card-search|ja|1082")
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "record.jsonl"
+            path.write_text(json.dumps(row) + "\n", encoding="utf-8")
+            self.assertEqual(gate.validate_card_records(path), [])
+            for field, value in (("sourceUrl", "https://example.invalid/wrong-card"),
+                                 ("stableKey", "unreviewed-card")):
+                changed = {**row, field: value}
+                path.write_text(json.dumps(changed) + "\n", encoding="utf-8")
+                self.assertTrue(any("localCollectorNumber" in error
+                                    for error in gate.validate_card_records(path)))
+
 
 if __name__ == "__main__":
     unittest.main()

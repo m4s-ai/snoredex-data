@@ -20,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 import asia_locality_matrix
+import card_discovery
 import locality_matrix
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -115,9 +116,30 @@ def validate_staging(document: dict[str, Any], name: str) -> list[str]:
     return errors
 
 
+def card_identity_errors(row: dict[str, Any], mappings: dict, releases: list) -> list[str]:
+    source = row.get("sourceRecord") or {}
+    proposal = row.get("normalizationProposal") or {}
+    mapping = mappings.get(row.get("stableKey"))
+    source_matches = [release for release in releases
+                      if row.get("sourceUrl") in release.get("sourceRecords", [])]
+    known_unnumbered = card_discovery.reviewed_unnumbered_identity(
+        mapping, source_matches, proposal
+    )
+    missing = [field for field in ("detailId", "productScope") if not source.get(field)]
+    if not source.get("localCollectorNumber") and not known_unnumbered:
+        missing.append("localCollectorNumber")
+    if source.get("productScope") != "physical-tcg":
+        missing.append("physical-tcg product scope")
+    return missing
+
+
 def validate_card_records(path: Path = CARD_RECORDS) -> list[str]:
     """Set-only rows cannot enter the card discovery output."""
     errors: list[str] = []
+    contract, _, identity = card_discovery.load_inputs()
+    mappings = {card_discovery.raw_key(
+        row["providerId"], row["surfaceId"], row["rawLocale"], row["rawProviderId"]
+    ): row for row in contract["explicitMappings"]}
     with path.open(encoding="utf-8") as handle:
         for line_number, line in enumerate(handle, 1):
             if not line.strip():
@@ -125,13 +147,7 @@ def validate_card_records(path: Path = CARD_RECORDS) -> list[str]:
             row = json.loads(line)
             if row.get("bucket") not in {"matched", "new-candidate"}:
                 continue
-            source = row.get("sourceRecord") or {}
-            missing = [
-                field for field in ("detailId", "localCollectorNumber", "productScope")
-                if not source.get(field)
-            ]
-            if source.get("productScope") != "physical-tcg":
-                missing.append("physical-tcg product scope")
+            missing = card_identity_errors(row, mappings, identity["cardReleases"])
             if missing:
                 errors.append(
                     f"card discovery record {row.get('recordId', line_number)} is not card-level: "

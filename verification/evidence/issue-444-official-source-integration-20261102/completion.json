@@ -1,0 +1,73 @@
+{
+  "issue": 444,
+  "base": "7a7322f6917b50dff8d1f9e7b3949b7f9ef0bdff",
+  "branch": "codex/444-official-source-integration",
+  "runId": "20261102T075609Z",
+  "targets": [
+    {
+      "target": "Japanese official API",
+      "acceptedFields": "provider-native identity only; no finish or absence",
+      "integration": "active acquisition, 16 reviewed explicit mappings in existing owner, including exact source-URL match to known unnumbered DP1",
+      "verification": {
+        "fetched": 58,
+        "matched": 52,
+        "ambiguous": 0,
+        "newCandidate": 0,
+        "positivelyExcluded": 6,
+        "needsEvidence": 0,
+        "accounted": 58
+      },
+      "remaining": "Specific omitted HR/UR prints remain unknown; known unnumbered DP1 matched without inventing a source-native number"
+    },
+    {
+      "target": "Singapore English official card search",
+      "acceptedFields": "native identity/product fields where returned; no distinct printed SEA edition inferred",
+      "integration": "active existing Asia adapter under new scoped capability",
+      "verification": {
+        "fetched": 24,
+        "matched": 0,
+        "ambiguous": 0,
+        "newCandidate": 0,
+        "positivelyExcluded": 1,
+        "needsEvidence": 23,
+        "accounted": 24
+      },
+      "remaining": "23 native records lack required identity fields; no WEST field substitution"
+    },
+    {
+      "target": "Chinese official miniapp directory",
+      "acceptedFields": "official directory announcement only",
+      "integration": "product-directory positive capability and explicitly uninspected card surface",
+      "verification": "retained announcement hash and no miniapp card capability tested",
+      "remaining": "supported access and actual native card responses needed"
+    },
+    {
+      "target": "Korean name search",
+      "acceptedFields": "bounded current24-ID response separate from retained45 positive identities",
+      "integration": "reviewed capability observation and retry metadata",
+      "verification": "retained raw response hashes",
+      "remaining": "historical completeness not established"
+    },
+    {
+      "target": "LATAM xJTG",
+      "acceptedFields": "none from new research",
+      "integration": "existing positive-only gap preserved",
+      "verification": "no existing data changed",
+      "remaining": "exact LA stamped-print evidence or owner adjudication"
+    }
+  ],
+  "checkpoint": {
+    "runId": "20261102T080248Z-source-discovery-8baaf050f0",
+    "passed": 19,
+    "failed": 0,
+    "L3": "Final delivery execution recorded in external gate log and exact-head PR checks"
+  },
+  "delivery": "Integration inputs and checkpoint recorded here; final L3 execution is evidenced by the exact-head PR checks and external gate log. No merge or deployment authorized.",
+  "collectorConservation": "all existing item and asset payloads preserved; discovery-run metadata/fingerprint updated; no new card or printing truth admitted",
+  "validationCommands": [
+    "python verification/test_card_discovery.py",
+    "python scripts/regen.py",
+    "python scripts/source_adapters.py --check --full-refresh",
+    "python scripts/card_discovery.py --check --full-refresh"
+  ]
+}

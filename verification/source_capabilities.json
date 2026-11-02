@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-manifest",
     "schemaVersion": "2.0.0",
-    "reviewedAt": "2026-10-12",
+    "reviewedAt": "2026-11-02",
     "policies": [
       "External providers record positive evidence only. A missing page, row, field, result, language, region, card, or finish remains unknown.",
       "Authority tier and card-existence capability never imply finish completeness or absence authority.",
@@ -524,6 +524,48 @@
             "zeroResultMeans": "unknown",
             "challenge": "Product membership and launch date require exact positive localized binding. Photographs independently support the observed no-rarity-symbol value; the publisher prose is not itself a Fixed-rarity assertion."
           }
+        },
+        {
+          "edgeId": "pokemon-cn-miniapp-directory-positive",
+          "coverage": {
+            "localities": [
+              "CN"
+            ],
+            "languages": [
+              "S-Chinese"
+            ],
+            "scripts": [
+              "Hans"
+            ],
+            "productCategories": [
+              "product"
+            ],
+            "timeRange": {
+              "start": "2022-09",
+              "end": null,
+              "basis": "explicit retained official Simplified Chinese pages only"
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "source-directory"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "A retained product or manufacturing page establishes only what it explicitly states; silence is not a complete catalogue or finish manifest."
+          },
+          "knownPositiveObservationId": "obs-cn-miniapp-directory-20261102",
+          "boundary": {
+            "outsideScope": [
+              "uninspected miniapp card rows or card IDs",
+              "card existence or physical finishes inferred from a platform announcement",
+              "complete current database coverage"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The announcement establishes the official directory and its described controls, not any unretained card row."
+          }
         }
       ]
     },
@@ -895,20 +937,24 @@
         ]
       },
       "state": "incomplete",
-      "failureState": "Known omission of Japanese secret and rainbow prints from returned results.",
+      "failureState": "The bounded all-format Snorlax search omits known HR/UR prints, although global HR/UR and Snorlax SR queries return positives; no class-wide exclusion or absence authority.",
       "accessMode": "scriptable",
-      "adapterState": "planned",
-      "lastCheckedAt": "2026-08-09",
-      "freshnessPolicy": "Re-check endpoint fields and pagination before every harvest; retain omissions as unknown.",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-11-02",
+      "freshnessPolicy": "Validate keyword/format/page echoes, enumerate every declared page, and retain omitted printings as unknown. Recheck retained HR/UR positive and boundary controls when acquisition changes.",
       "query": {
         "method": "GET",
-        "endpoint": "https://www.pokemon-card.com/card-search/index.php",
+        "endpoint": "https://www.pokemon-card.com/card-search/resultAPI.php",
         "parameters": [
           "keyword",
+          "se_ta=",
           "regulation_sidebar_form=all",
+          "pg=",
+          "illust=",
+          "sm_and_keyword=true",
           "page"
         ],
-        "pagination": "follow page until the provider returns no further result page; that closes only the captured response, not the card universe",
+        "pagination": "All declared JSON pages; positive bounded response only, not a complete print manifest.",
         "expectedIdentifiers": [
           "card detail id",
           "collector number",
@@ -959,13 +1005,14 @@
           "knownPositiveObservationId": "obs-jp-card-search",
           "boundary": {
             "outsideScope": [
-              "secret/rainbow prints",
+              "unreturned printings, including the observed Snorlax HR/UR omissions",
               "finish/treatment",
               "other localities"
             ],
             "zeroResultMeans": "unknown",
-            "challenge": "A missing search row is retained as unknown because positively known secret prints can be absent from this surface."
-          }
+            "challenge": "Global HR/UR positives do not guarantee every Snorlax variant appears; zero filtered results remain unknown, not a class-wide ban."
+          },
+          "outOfScopeChallengeObservationId": "obs-jp-search-omissions-20261102"
         }
       ]
     },
@@ -4366,20 +4413,21 @@
         ]
       },
       "state": "incomplete",
-      "failureState": "The search POST requires a primed browser session and region-dependent access; only the retained bounded positive response is replayable.",
+      "failureState": "The current public card-name action returns a bounded 24-ID response; the earlier retained 45 positive identities remain independent evidence. Routes and filters do not establish historical closure.",
       "accessMode": "browser",
       "adapterState": "active",
-      "lastCheckedAt": "2026-09-01",
+      "lastCheckedAt": "2026-11-02",
       "freshnessPolicy": "Rerun the exact 잠만보 card-name query through a primed browser session, retain every returned endpoint and detail, and treat missing or failed responses as unknown.",
       "query": {
         "method": "POST",
         "endpoint": "https://pokemoncard.co.kr/v2/ajax2_dev2",
         "parameters": [
+          "action=search_text_cards",
           "search_params=cardname",
           "search_text=잠만보",
-          "browser session from GET /cards"
+          "limit (provider page counter)"
         ],
-        "pagination": "30, 17 and 0 endpoint records were observed in consecutive batches; 47 endpoints normalized to 45 unique displayed set/number identities",
+        "pagination": "2026-11-02: limit=0 returned24 IDs and nextLimit1; limit1 returned0. Earlier retained47 endpoints/45 identities remain a separate positive scope.",
         "expectedIdentifiers": [
           "opaque provider record id",
           "Korean card name",
@@ -9684,6 +9732,133 @@
           }
         }
       ]
+    },
+    {
+      "surfaceId": "asia-sea-english-card-search",
+      "providerId": "pokemon-card-asia",
+      "label": "Official Singapore English card search (bounded SEA market context)",
+      "state": "incomplete",
+      "failureState": "The Singapore index is bounded and HTML details can omit printed collector numbers. English language and regional availability do not establish a distinct physical SEA edition.",
+      "accessMode": "scriptable",
+      "adapterState": "active",
+      "lastCheckedAt": "2026-11-02",
+      "freshnessPolicy": "Re-check locale route, category filters and pagination before every harvest.",
+      "query": {
+        "method": "GET",
+        "endpoint": "https://asia.pokemon-card.com/sg/card-search/list/",
+        "parameters": [
+          "keyword",
+          "cardType=all",
+          "regulation=all",
+          "pageNo"
+        ],
+        "pagination": "Follow every declared result page; the retained 2026-11-02 name response has 24 IDs across two pages.",
+        "expectedIdentifiers": [
+          "native detail ID",
+          "English card name",
+          "included product",
+          "set-symbol URL; collector number only when present"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "no reliable closed finish field",
+        "closedWithinScope": false
+      },
+      "coverageEdges": [
+        {
+          "edgeId": "asia-sea-english-card-search-positive",
+          "coverage": {
+            "localities": [
+              "SEA"
+            ],
+            "languages": [
+              "English"
+            ],
+            "scripts": [
+              "Latn"
+            ],
+            "productCategories": [
+              "card"
+            ],
+            "timeRange": {
+              "start": null,
+              "end": null,
+              "basis": "Only returned Singapore English publisher records; physical distribution independently illustrated by the retained Singapore campaign."
+            }
+          },
+          "positiveEvidenceCapabilities": [
+            "language",
+            "card-existence",
+            "product",
+            "local-set-identifier"
+          ],
+          "exhaustive": false,
+          "absenceCapability": {
+            "enabled": false,
+            "dimensions": [],
+            "exactScopes": [],
+            "rationale": "The official surface is recent and query-limited; its silence is not historical coverage."
+          },
+          "knownPositiveObservationId": "obs-sea-english-search-20261102",
+          "boundary": {
+            "outsideScope": [
+              "a separately manufactured SEA edition",
+              "WEST/LATAM or other localities inferred from language",
+              "unreturned historical releases",
+              "unprinted collector numbers",
+              "finish/treatment"
+            ],
+            "zeroResultMeans": "unknown",
+            "challenge": "The SG 17964 detail omits the collector number in HTML; no WEST identity or number is substituted. The regional promo announcement cannot establish every ordinary printing."
+          },
+          "outOfScopeChallengeObservationId": "obs-sea-english-identity-boundary-20261102"
+        }
+      ],
+      "match": {
+        "urlPrefixes": [
+          "https://asia.pokemon-card.com/sg/card-search/"
+        ],
+        "nonUrlEvidenceIds": []
+      }
+    },
+    {
+      "surfaceId": "pokemon-cn-member-miniapp",
+      "providerId": "pokemon-cn-official",
+      "label": "Official 宝可梦卡牌会员 card directory (uninspected WeChat surface)",
+      "match": {
+        "urlPrefixes": [],
+        "nonUrlEvidenceIds": [
+          "evidence:pokemon-cn-member-miniapp"
+        ]
+      },
+      "state": "needs-evidence",
+      "failureState": "Officially announced directory, but no usable public card endpoint or retained native miniapp card response has been established.",
+      "accessMode": "none",
+      "adapterState": "planned",
+      "lastCheckedAt": "2026-11-02",
+      "freshnessPolicy": "Retain operator-supported access, native card/product IDs and exact responses before activating any card capability.",
+      "query": {
+        "method": "MANUAL",
+        "endpoint": null,
+        "parameters": [
+          "official WeChat miniapp 宝可梦卡牌会员"
+        ],
+        "pagination": "Unknown until an actual card response is inspected.",
+        "expectedIdentifiers": [
+          "provider-native card ID",
+          "Simplified Chinese identity",
+          "product number"
+        ]
+      },
+      "finishCapability": {
+        "mode": "none",
+        "vocabulary": [],
+        "publicationForm": "No card response inspected.",
+        "closedWithinScope": false
+      },
+      "coverageEdges": []
     },
     {
       "surfaceId": "elitefourum-quuador-sets-languages",
@@ -17373,6 +17548,195 @@
         "CS5aC 093/127"
       ],
       "outcome": "The retained physical photo proves only this identified card and visible treatment; stock depictions, other variants and missing listings establish no physical finish or absence."
+    },
+    {
+      "observationId": "obs-jp-search-sr-20261102",
+      "surfaceId": "jp-card-search",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon-card.com/card-search/details.php/card/37881/regu/all",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/jp-sr-detail-37881.html",
+          "captureSha256": "sha256:2bcee3e5bd91597c1368089874f4dd9db74b81eb03ae65bfc2c874f3b257acf7",
+          "acquiredAt": "2026-11-02T07:27:36.057908+00:00",
+          "nativeId": "37881",
+          "name": "カビゴンV",
+          "setCode": "S1H",
+          "number": "066/060"
+        }
+      },
+      "expectedIdentifiers": [
+        "37881",
+        "066/060"
+      ],
+      "validatesEdges": [
+        "jp-card-search-positive"
+      ],
+      "outcome": "The returned Japanese SR detail supports its exact identity; SR/secret is not a prohibited class."
+    },
+    {
+      "observationId": "obs-jp-search-omissions-20261102",
+      "surfaceId": "jp-card-search",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://www.pokemon-card.com/card-search/resultAPI.php?keyword=%E3%82%AB%E3%83%93%E3%82%B4%E3%83%B3&se_ta=&regulation_sidebar_form=all&pg=&illust=&sm_and_keyword=true&page=1&sc_rare_hr=1",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/jp-api-HR.json",
+          "captureSha256": "sha256:488e5de0592eae321caf49be19546b8fac42802b3b3ea05f6fccaa607296c29a",
+          "acquiredAt": "2026-11-02T07:23:26.509701+00:00",
+          "query": "カビゴン",
+          "filter": "HR",
+          "hitCnt": 0,
+          "globalHrControl": {
+            "file": "verification/evidence/issue-444-official-source-integration-20261102/raw/jp-all-HR-control.json",
+            "hitCnt": 62
+          },
+          "globalUrControl": {
+            "file": "verification/evidence/issue-444-official-source-integration-20261102/raw/jp-all-UR-control.json",
+            "hitCnt": 108
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "カビゴン",
+        "HR"
+      ],
+      "validatesEdges": [
+        "jp-card-search-positive"
+      ],
+      "outcome": "Specific missing named prints stay unknown. Other HR/UR positives and all pages are retained; no operator motive or category-wide omission is asserted."
+    },
+    {
+      "observationId": "obs-sea-english-search-20261102",
+      "surfaceId": "asia-sea-english-card-search",
+      "kind": "known-positive",
+      "queryUrl": "https://asia.pokemon-card.com/sg/card-search/detail/17964/",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/sea-sg-detail-17964.html",
+          "captureSha256": "sha256:eb7ac87bbf17600bd78b8dc1ce45a06c262ad02720689f49131aeafa5ce5fc3e",
+          "acquiredAt": "2026-11-02T07:27:35.417173+00:00",
+          "nativeId": "17964",
+          "name": "Hop’s Snorlax",
+          "product": "Journey Together",
+          "setSymbol": "eng_SV09_exp.png",
+          "collectorNumber": null,
+          "distributionContext": {
+            "url": "https://asia.pokemon-card.com/sg/archives/6689/",
+            "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/sea-sg-distribution.html",
+            "scope": "Named physical promo distributed through specified Singapore stores; no distinct manufacturing inference."
+          }
+        }
+      },
+      "expectedIdentifiers": [
+        "17964",
+        "Journey Together"
+      ],
+      "validatesEdges": [
+        "asia-sea-english-card-search-positive"
+      ],
+      "outcome": "Exact retained positive source fields only."
+    },
+    {
+      "observationId": "obs-sea-english-identity-boundary-20261102",
+      "surfaceId": "asia-sea-english-card-search",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://asia.pokemon-card.com/sg/card-search/detail/17964/",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/sea-sg-detail-17964.html",
+          "captureSha256": "sha256:eb7ac87bbf17600bd78b8dc1ce45a06c262ad02720689f49131aeafa5ce5fc3e",
+          "acquiredAt": "2026-11-02T07:27:35.417173+00:00",
+          "nativeId": "17964",
+          "collectorNumber": null,
+          "physicalEditionDiscriminator": null
+        }
+      },
+      "expectedIdentifiers": [
+        "17964"
+      ],
+      "validatesEdges": [
+        "asia-sea-english-card-search-positive"
+      ],
+      "outcome": "A local English website and matching artwork do not supply an absent collector-number field or establish a different SEA physical edition."
+    },
+    {
+      "observationId": "obs-cn-miniapp-directory-20261102",
+      "surfaceId": "pokemon-cn-product-pages",
+      "kind": "known-positive",
+      "queryUrl": "https://www.pokemon.cn/tcg/other/17199.html",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/cn-official-miniapp.html",
+          "captureSha256": "sha256:db7ab6ae6a8c6c90f4543cc467a5ff4555ff91822d172ddaf2179781ae98897c",
+          "acquiredAt": "2026-11-02T07:26:12.891570+00:00",
+          "announcementDate": "2022-10-26",
+          "title": "卡表公开！宝可梦卡牌官方小程序——“宝可梦卡牌会员”正式上线！",
+          "directoryName": "宝可梦卡牌会员",
+          "operator": "Pokémon Shanghai",
+          "describedFilters": [
+            "card type",
+            "format",
+            "product series",
+            "product number"
+          ],
+          "inspectedCardRows": 0
+        }
+      },
+      "expectedIdentifiers": [
+        "宝可梦卡牌会员"
+      ],
+      "validatesEdges": [
+        "pokemon-cn-miniapp-directory-positive"
+      ],
+      "outcome": "Official source directory exists; no provider-native card response was inspected in the miniapp."
+    },
+    {
+      "observationId": "obs-kr-search-response-20261102",
+      "surfaceId": "pokemon-card-korea-card-search",
+      "kind": "out-of-scope-challenge",
+      "queryUrl": "https://pokemoncard.co.kr/v2/ajax2_dev2",
+      "queryParameters": {},
+      "retrievedAt": "2026-11-02",
+      "fixtureRef": {
+        "kind": "inline-record",
+        "record": {
+          "capturePath": "verification/evidence/issue-444-official-source-integration-20261102/raw/kr-card-name-0.json",
+          "captureSha256": "sha256:da65a1a47894cceb884ba16f99b3bc0563cdd56dfe177e28c2438e76051fa8b2",
+          "acquiredAt": "2026-11-02T07:29:27.497969+00:00",
+          "queryParameters": {
+            "action": "search_text_cards",
+            "search_params": "cardname",
+            "search_text": "잠만보",
+            "limit": 0
+          },
+          "responseCount": 24,
+          "endPage": "kr-card-name-1.json",
+          "scope": "Current response only; does not replace the retained45 identities."
+        }
+      },
+      "expectedIdentifiers": [
+        "잠만보"
+      ],
+      "validatesEdges": [
+        "pokemon-card-korea-card-search-positive"
+      ],
+      "outcome": "Different current name response cannot erase older positive identities or close Korean historical coverage."
     },
     {
       "observationId": "obs-elitefourum-quuador-sets-languages",
