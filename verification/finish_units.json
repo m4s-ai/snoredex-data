@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-11-01",
+    "generated": "2026-11-02",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -61,10 +61,10 @@
       "withOnlyMarketplaceClaim": 8,
       "pendingFinish": 0,
       "notApplicableFinish": 77,
-      "withOwnerAdjudication": 18,
+      "withOwnerAdjudication": 30,
       "withNonHolo": 323,
       "withHolo": 270,
-      "withReverseHolo": 224,
+      "withReverseHolo": 212,
       "withMirrorHolo": 23,
       "withBothNonHoloAndHolo": 55,
       "withUnresolvedProductMapping": 14,
@@ -1573,20 +1573,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -1611,31 +1610,6 @@
             }
           ],
           "printingId": "F0017-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Boundaries-Crossed/Snorlax-BCR109",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0017-P02"
         }
       ],
       "unresolved": []
@@ -2249,20 +2223,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -2287,31 +2260,6 @@
             }
           ],
           "printingId": "F0023-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/BREAKthrough/Snorlax-BKT118",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0023-P02"
         }
       ],
       "unresolved": []
@@ -8675,20 +8623,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "confirmed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -8712,8 +8659,8 @@
               "languages": [
                 "Spanish"
               ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo.",
+              "retrievedAt": "2026-11-02",
+              "evidence": "The complete localized Diamond & Pearl checklist lists 37 Snorlax; its legend reads \"Cartas 18-119: aparecen en una versión no foil.\" and has no Parallel Set entry (the English checklist: \"Cards 18-119: come in foil versions and non-foil versions.\"). It supports the non-holo only. Re-read 2026-11-02 (PDF SHA-256 d79480876287ccd76033c086e50c8459fd2376dd8c44051a77e5ad4562858908); the earlier reading had carried over the English Parallel Set legend.",
               "evidenceScope": "standard-set"
             }
           ],
@@ -8721,44 +8668,6 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0092-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "plain-foil-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            },
-            {
-              "url": "https://assets.pokemon.com/assets/cms2-es-es/pdf/trading-card-game/checklist/dp1_web_cardlist_es.pdf",
-              "sourceType": "Official Pokémon localized expansion checklist",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "Spanish"
-              ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The complete localized Diamond & Pearl checklist names the relevant row(s); its Standard Set, Standard Set Foil, and Parallel Set legend resolves 37 Snorlax Lv.35: Standard Set/non-holo + Parallel Set/reverse-holo.",
-              "evidenceScope": "standard-set"
-            }
-          ],
-          "printingId": "F0092-P02"
         }
       ],
       "unresolved": []
@@ -8787,20 +8696,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -8841,31 +8749,6 @@
           ],
           "image": "verification/specimens/SPEC-0056.jpg",
           "printingId": "F0093-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "plain-foil-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Diamond-Pearl/Snorlax-Lv35-DP37",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0093-P02"
         }
       ],
       "unresolved": []
@@ -10492,20 +10375,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -10530,31 +10412,6 @@
             }
           ],
           "printingId": "F0113-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Fates-Collide/Snorlax-FCO77",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0113-P02"
         }
       ],
       "unresolved": []
@@ -10859,7 +10716,7 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "confirmed",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
@@ -10901,7 +10758,7 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
@@ -10913,6 +10770,24 @@
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
               "supportsAbsence": false
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             }
           ],
           "printingId": "F0117-P02"
@@ -10949,7 +10824,7 @@
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "marketplace-claimed",
+        "holo": "confirmed",
         "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
@@ -10965,12 +10840,30 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/EX-FireRed-LeafGreen/Snorlax-FL15",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             }
           ],
           "foilPattern": null,
@@ -13396,20 +13289,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -13450,31 +13342,6 @@
           ],
           "image": "verification/specimens/SPEC-0053.jpg",
           "printingId": "F0140-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0140-P02"
         }
       ],
       "unresolved": []
@@ -14277,7 +14144,7 @@
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
@@ -14335,7 +14202,7 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Hidden-Fates/Snorlax-V1-HIF50",
@@ -14347,6 +14214,24 @@
               "sourceType": "Bulbapedia holofoil pattern history",
               "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
               "supportsAbsence": false
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             }
           ],
           "printingId": "F0148-P02"
@@ -15812,7 +15697,7 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "owner-attested",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -15821,6 +15706,24 @@
               "supportsAbsence": false,
               "retrievedAt": "2026-10-22",
               "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
@@ -15879,6 +15782,24 @@
                 "finish"
               ],
               "specimenId": "SPEC-0130"
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -15971,7 +15892,7 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "owner-attested",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -15980,6 +15901,24 @@
               "supportsAbsence": false,
               "retrievedAt": "2026-10-22",
               "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V1-JU11",
@@ -16024,6 +15963,24 @@
               ],
               "retrievedAt": "2026-08-26",
               "evidence": "The collection owner's explicit 2026-08-26 confirmation establishes the specimen's edition; the retained seller listing photograph supports card identity and any independently visible properties."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -16877,7 +16834,7 @@
           "mappedVariants": [
             "V2"
           ],
-          "verificationStatus": "owner-attested",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -16886,6 +16843,24 @@
               "supportsAbsence": false,
               "retrievedAt": "2026-10-22",
               "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Jungle/Snorlax-V2-JU27",
@@ -16918,6 +16893,24 @@
               "sourceType": "Seller listing photograph",
               "evidence": "Complete seller photograph of Portuguese Jungle Snorlax 27/64. Pokemon Basico, 90 PS, Poder Pokemon: Casca Grossa, Amasso, the Jungle symbol and 27/64 establish the exact localized card. The uniformly printed artwork field establishes the non-holo printing. The sold listing title independently identifies the card as Portuguese Jungle 27/64. The edition-mark position is visibly empty on the complete, legible card face, which establishes the Unlimited printing (owner rule 2026-10-22: a visible mark establishes 1st Edition, a visibly empty mark position on a set with both editions establishes Unlimited). Retained as SPEC-0120.",
               "retrievedAt": "2026-08-27"
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             },
             {
               "sourceType": "Owner attestation (domain expert)",
@@ -17089,20 +17082,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -17127,31 +17119,6 @@
             }
           ],
           "printingId": "F0175-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0175-P02"
         }
       ],
       "unresolved": []
@@ -17180,20 +17147,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -17218,31 +17184,6 @@
             }
           ],
           "printingId": "F0176-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0176-P02"
         }
       ],
       "unresolved": []
@@ -17271,20 +17212,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -17309,31 +17249,6 @@
             }
           ],
           "printingId": "F0177-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0177-P02"
         }
       ],
       "unresolved": []
@@ -17362,20 +17277,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -17400,31 +17314,6 @@
             }
           ],
           "printingId": "F0178-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0178-P02"
         }
       ],
       "unresolved": []
@@ -17491,20 +17380,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -17529,31 +17417,6 @@
             }
           ],
           "printingId": "F0180-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/XY-Kalos-Starter-Set/Snorlax-KSS26",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0180-P02"
         }
       ],
       "unresolved": []
@@ -24691,20 +24554,19 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "reverse-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "pending",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
-      "completenessStatus": "positive-evidence-only",
+      "completenessStatus": "owner-adjudicated",
       "productMappingStatus": "confirmed",
-      "patternStatus": "confirmed",
+      "patternStatus": "not-applicable",
       "printings": [
         {
           "finish": "non-holo",
@@ -24729,31 +24591,6 @@
             }
           ],
           "printingId": "F0264-P01"
-        },
-        {
-          "finish": "reverse-holo",
-          "foilPattern": "type-symbol-background",
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Plasma-Storm/Snorlax-PLS101",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            },
-            {
-              "url": "https://bulbapedia.bulbagarden.net/wiki/Holographic_card",
-              "sourceType": "Bulbapedia holofoil pattern history",
-              "evidence": "Documents reverse-holo pattern eras, including EX-era set-logo treatments, Dragon Frontiers foil placement, and later reverse-holo patterns.",
-              "supportsAbsence": false
-            }
-          ],
-          "printingId": "F0264-P02"
         }
       ],
       "unresolved": []
@@ -35825,7 +35662,7 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "confirmed",
         "mirror-holo": "pending"
@@ -35842,12 +35679,30 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Skyridge/Snorlax-SK100",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://www.elitefourum.com/t/sets-and-languages-compilation-overview-list/16565",
+              "sourceType": "Elite Fourum collector-community post",
+              "authorityTier": "specialist-reference",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "German",
+                "Italian",
+                "Portuguese",
+                "Spanish"
+              ],
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-01",
+              "evidence": "Quuador's sets-and-languages compilation (post 1, updated 2026-10-02) lists per set the variants printed in each language: Hidden Fates \"Portuguese Reverse Holo\"; EX FireRed & LeafGreen \"German 'Reverse' Holofoil\" and the Italian regular set; Skyridge the Italian regular set; Jungle \"Spanish 1st edition\" and \"Portuguese 1st edition\". Applied only to the named, already established releases; the finish of a regular print follows the card's set rarity. Excerpts: verification/evidence/issue-438-quuador-overview-20261101/excerpts.json."
             }
           ],
           "foilPattern": null,
