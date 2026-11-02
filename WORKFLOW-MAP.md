@@ -303,7 +303,9 @@ and workflow-call/manual release paths run L4 live/browser/publication checks. T
 source/card-discovery history checks run on Linux for L4 and for every ready pull request, where
 the [verification memo](#verification-memo) replays them when nothing they read changed. A push to
 `main` runs the separate publication/history audit, including P6/P7, and the `memo-seed` reference
-run on both platforms. The reusable pull-request gate does not install browser dependencies;
+run on both platforms. That audit first fetches GitHub's pull-request heads (`refs/pull/*/head`),
+which GitHub serves permanently, so P6 also covers history that only pull requests still reach; the
+owner-accepted exposures there are pinned by exact blob in `verification/sensitive_scan.py` (#467). The reusable pull-request gate does not install browser dependencies;
 UI-relevant paths on ready (non-draft) PRs select
 `.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
 downloads the artifact produced after the L4 gate and rejects missing, stale, or

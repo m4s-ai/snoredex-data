@@ -275,7 +275,7 @@ immediate second offline check must be clean.
 library version, so `--check` compares `database.py`'s logical dump instead
 ([LESSONS](LESSONS.md#the-gate-asked-for-a-byte-match-sqlite-cannot-give)).
 
-**`P6`/`P7` read git history.** They fail on a shallow clone (`git fetch --unshallow` once; `regen.py` stops at once), and a
+**`P6`/`P7` read git history**, and the post-push audit adds GitHub's pull-request heads (#467). They fail on a shallow clone (`git fetch --unshallow` once; `regen.py` stops at once), and a
 green run before the commit cannot validate it: run `review_findings.py --scope publication` again
 after the batch's commit/push ([LESSONS](LESSONS.md#the-gate-ran-before-the-thing-it-was-checking)).
 
@@ -311,7 +311,8 @@ the index lives in the code rather than here.
   `units.json` with fresh ids and discards the verification state: never run it.
 - **`scripts/analyze.py`** alone produces the four `analysis_artists/shared_cards/variants/
   language_drift` files, from `snorlax_cards.json` only.
-- **LF line endings** (`X1`) and **no UTF-8 BOM** (`X5`) in tracked text.
+- **LF line endings** (`X1`), **no UTF-8 BOM** (`X5`) in tracked text, and only paths a Windows
+  checkout can represent (`X6`).
 - `verification/checks.py` is the protocol shared by `review_integrity.py` (invariants *within*
   each store) and `review_findings.py` (consistency *between* stores and consumer artifacts).
 - **Active instructions are one live truth.** When new research invalidates operational guidance,

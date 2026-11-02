@@ -21,6 +21,7 @@ AT = "@"
 MAIL = "someone" + AT + "example.org"
 HOME = "/" + "home/someone/"
 TOKEN = "Bear" + "er abcdefghijk"
+ENDPOINT = b"10." + b"77.0.12:3002"
 
 
 def git(root: Path, *args: str) -> str:
@@ -95,6 +96,48 @@ def verify_tree(root: Path) -> None:
     assert f"clean.txt: {HOME}" in hits, "a dirty tracked file is read from the working tree"
 
 
+def verify_endpoint_findings() -> None:
+    """A private network endpoint in a tracked file is a P4 finding, address and port included."""
+    assert scan.blob_findings(b"route: firecrawl http://" + ENDPOINT + b" via a host") == [ENDPOINT.decode()]
+    assert scan.blob_findings(b"asset revision 10.508.02.148") == [], \
+        "a three-digit segment is a version string, not an address"
+    assert scan.blob_findings(b"serving on 127.0.0.1") == [], \
+        "loopback names no real host, and every test server uses it"
+    assert scan.blob_findings(b"version 1.2.3 on port 8080") == []
+
+
+def verify_unportable_paths() -> None:
+    """X6: every tracked path must be checkoutable on Windows (#465 shipped `s?-mirror…`)."""
+    import review_findings
+    paths = [b"raw/s?-mirror.jpg", b"a/b:c.txt", b"docs/con.txt", b"dir./x", b"ok/name.jpg", b""]
+    assert review_findings.unportable_paths(paths) == [
+        "raw/s?-mirror.jpg", "a/b:c.txt", "docs/con.txt", "dir./x"], review_findings.unportable_paths(paths)
+
+
+def verify_reviewed_history(root: Path) -> None:
+    """#467: only the owner-accepted finding in the exact pinned blob is accepted."""
+    profile = "C:" + "\\" + "Users" + "\\"
+    path = root / "old.ps1"
+    path.write_text(f"Set-Location {profile}someone\\x\n# contact {MAIL}\n", encoding="utf-8")
+    other = root / "other.ps1"
+    other.write_text(f"Push-Location {profile}else\n", encoding="utf-8")
+    git(root, "add", "old.ps1", "other.ps1")
+    git(root, "commit", "-q", "-m", "old passes")
+    pinned = git(root, "rev-parse", "HEAD:old.ps1").strip()
+    original = scan.REVIEWED_PULL_HEAD_BLOBS
+    scan.REVIEWED_PULL_HEAD_BLOBS = frozenset({pinned})
+    try:
+        hits = scan.scan_history(root)[2]
+    finally:
+        scan.REVIEWED_PULL_HEAD_BLOBS = original
+    assert scan.REVIEWED_PULL_HEAD_PROFILE_PATH == profile
+    assert not any(hit.startswith(pinned[:10]) and hit.endswith(profile) for hit in hits), hits
+    assert any(hit.startswith(pinned[:10]) and hit.endswith(MAIL) for hit in hits), \
+        "another finding in an accepted blob still fails"
+    assert any("other.ps1" in hit and hit.endswith(profile) for hit in hits), \
+        "the same path in any other blob still fails"
+
+
 def verify_shallow(source: Path, target: Path) -> None:
     git(target.parent, "clone", "-q", "--depth", "1", source.as_uri(), str(target))
     assert scan.scan_history(target) == (True, 0, [])
@@ -102,15 +145,18 @@ def verify_shallow(source: Path, target: Path) -> None:
 
 def main() -> int:
     verify_findings()
+    verify_endpoint_findings()
+    verify_unportable_paths()
     with tempfile.TemporaryDirectory() as folder:
         root = Path(folder) / "repo"
         root.mkdir()
         make_repo(root)
         verify_history(root)
         verify_tree(root)
+        verify_reviewed_history(root)
         verify_shallow(root, Path(folder) / "shallow")
     print("sensitive scan passed: findings, memo reuse, corrupt/disabled memo, size and path limits, "
-          "dirty tree files, shallow clone")
+          "dirty tree files, shallow clone, private endpoints, Windows paths, owner-accepted history blobs")
     return 0
 
 
