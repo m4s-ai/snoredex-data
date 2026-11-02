@@ -57,7 +57,19 @@ def main() -> None:
             parsed = urlparse(mapping.get("evidenceUrl") or "")
             assert parsed.scheme in {"http", "https"} and parsed.netloc, mapping
     projector = finish_projector()
+    # Ordinary foil needs no special pattern name; mixed named/plain treatments are valid.
+    ordinary = [{"finish": "holo"}, {"finish": "reverse-holo", "foilPattern": None},
+                {"finish": "mirror-holo", "foilPattern": None}]
+    assert projector.foil_pattern_status(ordinary) == "not-applicable"
+    named = {"finish": "mirror-holo", "foilPattern": "poke-ball"}
+    assert projector.foil_pattern_status([named]) == "confirmed"
+    assert projector.foil_pattern_status(ordinary + [named]) == "confirmed"
+    assert projector.foil_pattern_status([]) == "not-applicable"
+    assert "unidentified" not in json.loads(
+        (ROOT / "analysis_finishes.json").read_text(encoding="utf-8")
+    )["foilPatterns"]
     for unit in read("finish_units.json")["units"]:
+        assert unit["patternStatus"] not in {"pending", "partial"}, unit["finishUnitId"]
         for printing in unit["printings"]:
             for source in printing.get("sources", []):
                 if source.get("url"):
