@@ -661,6 +661,30 @@ def target_identity_index(items: list[dict[str, Any]]) -> dict[str, dict[str, se
     return index
 
 
+def rejected_release_finishes(target_items: list[dict[str, Any]]) -> set[str]:
+    """(release, finish) pairs the owner ruled were never printed (finishDecisions rejectedFinishes).
+
+    A rejected printing is retired in the migration ledger. Its release fallback must not fold it
+    into a surviving finish of the same card, which is a different collectible.
+    """
+    unit_keys = {row["finishUnitId"]: (row["setCode"], row["number"], row["language"])
+                 for row in read_json(FINISH_UNITS_PATH)["units"]}
+    rejected = {
+        (row["setCode"], row["number"], row["language"]): set(row.get("rejectedFinishes") or [])
+        for row in read_json(ADJUDICATIONS_PATH).get("finishDecisions", [])
+    }
+    pairs: set[str] = set()
+    for item in target_items:
+        for finish in rejected.get(unit_keys.get(item.get("finishUnitId")), ()):
+            pairs.add(f"{item['cardReleaseId']}\x1f{finish}")
+    return pairs
+
+
+def owner_rejected(source: dict[str, Any], index: dict[str, Any]) -> bool:
+    release = REVIEWED_CARD_RELEASE_REKEYS.get(source.get("cardReleaseId"), source.get("cardReleaseId"))
+    return f"{release}\x1f{source.get('finish')}" in index.get("rejectedFinishes", set())
+
+
 def reviewed_split_targets(
     source_item_id: str, index: dict[str, dict[str, set[str]]],
 ) -> set[str] | None:
@@ -694,6 +718,15 @@ def migration_targets(
             exact.update(index[field].get(value, set()))
     if exact:
         return exact
+    return release_fallback_targets(source, index)
+
+
+def release_fallback_targets(
+    source: dict[str, Any], index: dict[str, dict[str, set[str]]],
+) -> set[str]:
+    """Coarse finish-unit/release fallback; an owner-rejected finish retires instead of merging."""
+    if owner_rejected(source, index):
+        return set()
     for field in ("finishUnitId", "cardReleaseId"):
         candidates: set[str] = set()
         for value in item_identity_values(source, field):
@@ -785,6 +818,7 @@ def build_catalogue_transition_route(
     source_ids = {row["itemId"] for row in source_items}
     target_ids = {row["itemId"] for row in target_items}
     index = target_identity_index(target_items)
+    index["rejectedFinishes"] = rejected_release_finishes(target_items)
     edges = {
         row["itemId"]: migration_targets(row, target_ids, index)
         for row in source_items
