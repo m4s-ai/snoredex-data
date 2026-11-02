@@ -120,9 +120,10 @@
         "cardSize",
         "errorClass",
         "classificationState",
-        "establishingClaimId"
+        "establishingClaimId",
+        "identityAnchorClaimId"
       ],
-      "note": "A language confirmation alone establishes at most a card release. A physical-printing node requires positive evidence for the manufactured classification."
+      "note": "A language confirmation alone establishes at most a card release. A physical-printing node requires positive evidence for the manufactured classification. Optional identityAnchorClaimId retains a positive original specimen claim as the collector identity anchor when that same physical printing gains finish evidence; establishingClaimId still names its current establishing claim. The anchor must reference positive current evidence attached to this exact physical target."
     },
     "locality": {
       "grain": "one market or distribution territory",

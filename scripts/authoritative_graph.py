@@ -296,6 +296,40 @@ def _ordered_finish_rows(finish_units):
     )
 
 
+def _retained_identity_anchor(row):
+    if not str(row['entityId']).startswith('PHYSICAL:specimen:'):
+        return None
+    payload = row.get('payload') or {}
+    if payload.get('identityAnchorClaimId'):
+        return payload['identityAnchorClaimId']
+    if not payload.get('sourceFinishUnitId'):
+        return payload.get('establishingClaimId')
+    return None
+
+
+def _previous_printing_indexes(graph):
+    previous_physical_by_semantic: dict[str, str] = {}
+    previous_claim_by_physical: dict[str, str] = {}
+    previous_identity_anchors: dict[str, str] = {}
+    for row in sorted(graph["entities"], key=lambda row: row["entityId"]):
+        if row.get("entityType") != "physical-printing":
+            continue
+        payload = row.get("payload") or {}
+        anchor = _retained_identity_anchor(row)
+        if anchor:
+            previous_identity_anchors[str(row["entityId"])] = anchor
+        semantic_key = printing_semantic_key(payload.get("cardReleaseId"), payload)
+        # Retain standalone physical IDs without reusing their specimen claim as a finish claim.
+        previous_physical_by_semantic.setdefault(semantic_key, str(row["entityId"]))
+        if payload.get("sourceFinishUnitId"):
+            previous_physical_by_semantic[semantic_key] = str(row["entityId"])
+            claim_id = payload.get("establishingClaimId")
+            if claim_id:
+                previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
+
+    return previous_physical_by_semantic, previous_claim_by_physical, previous_identity_anchors
+
+
 def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
     """Refresh source provenance and rebuild finish/specimen nodes from canonical inputs.
 
@@ -335,20 +369,7 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
         and row.get("payload", {}).get("semanticPrintingId")
     }
     previous_finish_claims = _previous_finish_claims_by_semantic(graph)
-    previous_physical_by_semantic: dict[str, str] = {}
-    previous_claim_by_physical: dict[str, str] = {}
-    for row in sorted(graph["entities"], key=lambda row: row["entityId"]):
-        if row.get("entityType") != "physical-printing":
-            continue
-        payload = row.get("payload") or {}
-        semantic_key = printing_semantic_key(payload.get("cardReleaseId"), payload)
-        # Retain standalone physical IDs without reusing their specimen claim as a finish claim.
-        previous_physical_by_semantic.setdefault(semantic_key, str(row["entityId"]))
-        if payload.get("sourceFinishUnitId"):
-            previous_physical_by_semantic[semantic_key] = str(row["entityId"])
-            claim_id = payload.get("establishingClaimId")
-            if claim_id:
-                previous_claim_by_physical[str(row["entityId"])] = str(claim_id)
+    previous_physical_by_semantic, previous_claim_by_physical, previous_identity_anchors = _previous_printing_indexes(graph)
 
     generated_entities: list[dict[str, Any]] = []
     generated_edges: list[dict[str, Any]] = []
@@ -450,6 +471,8 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             "sourcePrintingId": printing_id,
             "establishingClaimId": claim_id,
         }
+        if anchor := previous_identity_anchors.get(physical_id):
+            physical_payload["identityAnchorClaimId"] = anchor
         if specimen_ids:
             physical_payload["specimenIds"] = specimen_ids
         _retain_field_sources(physical_payload, printing.get("specimenFieldSources"))
@@ -484,6 +507,15 @@ def project_physical_evidence(graph: dict[str, Any]) -> dict[str, Any]:
             },
         ])
     standalone_by_semantic = {}
+    # A new finish can retain a standalone ID even when the source uses a local alias and
+    # the finish store does not cite that specimen. Reattach compatible current provenance
+    # before the standalone fallback can materialize that retained ID a second time.
+    for payload in finish_by_semantic.values():
+        if str(payload["physicalPrintingId"]).startswith("PHYSICAL:specimen:"):
+            standalone_by_semantic[printing_semantic_key(payload["cardReleaseId"], payload)] = payload
+            if payload.get("cardSize") == "standard":
+                legacy = {**payload, "cardSize": "unknown"}
+                standalone_by_semantic[printing_semantic_key(payload["cardReleaseId"], legacy)] = payload
     # Groups are ordered with their primary first, including when its ID sorts last.
     for specimen_id, specimen in specimen_by_id.items():
         target = specimen_targets.get(specimen_id)
@@ -1042,6 +1074,24 @@ def _validate_releases(
     )
     _validate_release_editions(errors, releases, by_type["set-edition"], claims, relations)
 
+def _validate_printing_identity_anchor(errors, printing_id, printing, claims, relations):
+    anchor_id = printing.get("identityAnchorClaimId")
+    if anchor_id is None:
+        return
+    claim = claims.get(anchor_id, {})
+    positive_target = any(
+        claim.get(field) == printing_id
+        and ("physical-printing", printing_id) in relations[("candidate-claim", anchor_id, relation)]
+        for field, relation in (("materializedTargetId", "materializes"),
+                                ("provenanceTargetId", "provenance"),
+                                ("corroboratedTargetId", "corroborates"))
+    )
+    if (claim.get("claimKind") != "physical-printing"
+            or claim.get("evidenceStatus") not in {"confirmed", "observed"}
+            or not positive_target):
+        errors.append(f"physical printing identity anchor is not positive for this target: {printing_id} -> {anchor_id}")
+
+
 # Physical-printing and legacy migration invariants.
 def _validate_printings_and_migrations(
     errors: list[str],
@@ -1055,6 +1105,7 @@ def _validate_printings_and_migrations(
     # Physical printings are classifications of an established card release and must
     # point back to their own positive establishing claim.
     for printing_id, printing in printings.items():
+        _validate_printing_identity_anchor(errors, printing_id, printing, claims, relations)
         if printing.get("physicalPrintingId") != printing_id:
             errors.append(f"physical-printing payload id mismatch: {printing_id}")
         card_release_id = printing.get("cardReleaseId")

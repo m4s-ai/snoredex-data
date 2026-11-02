@@ -265,6 +265,51 @@ def load_refresh_candidate(expected_urls: set[str]) -> dict[str, dict[str, Any]]
     return records
 
 
+def _is_regular_tcgdex_detail(row, native_types, native_foils):
+    if not isinstance(row, dict):
+        return False
+    return all((
+        str(row.get('type') or '').casefold() in native_types,
+        not any(row.get(key) for key in ('stamp', 'subtype')),
+        str(row.get('foil') or '').casefold() in native_foils,
+        str(row.get('size') or '').casefold() in {'standard', 'estándar', 'padrão'},
+    ))
+
+
+def _tcgdex_detail_pattern(details, field):
+    if field != 'holo':
+        return None
+    foils = {str(row.get('foil') or '').casefold() for row in details}
+    return 'cosmos' if foils and foils <= {'cosmos', 'kosmos', 'cosmo'} else None
+
+
+def tcgdex_regular_details(payload: dict[str, Any], field: str) -> list[dict[str, Any]]:
+    """Qualify aggregate flags with native details when that surface is available."""
+    if (payload.get("variants") or {}).get(field) is not True:
+        return []
+    details = payload.get("variants_detailed")
+    if not isinstance(details, list):
+        return [{}]
+    native_types = {
+        "normal": {"normal", "normale", "básico"},
+        "holo": {"holo", "olografica"},
+        "reverse": {"reverse", "reversa"},
+    }
+    native_foils = {
+        "normal": {""},
+        "holo": {"", "cosmos", "kosmos", "cosmo", "gold", "oro", "or", "ouro"},
+        "reverse": {"", "energy", "energie", "énergie"},
+    }
+    # A reviewed ordinary pattern establishes the technical finish, not a normalized pattern.
+    # Stamped, edition/error-qualified, mirror-ball and oversized copies need exact mappings.
+    return [row for row in details
+            if _is_regular_tcgdex_detail(row, native_types[field], native_foils[field])]
+
+
+def tcgdex_regular_variant(payload: dict[str, Any], field: str) -> bool:
+    return bool(tcgdex_regular_details(payload, field))
+
+
 def fetch_tcgdex(url: str, refresh: bool = False, offline: bool = False,
                  max_age_days: float = CACHE_MAX_AGE_DAYS
                  ) -> tuple[str, dict[str, Any] | None, str | None]:
@@ -490,6 +535,46 @@ def _fold_sources(target: dict[str, Any], printing: dict[str, Any]) -> None:
     target["sources"].extend(source for source in printing["sources"] if source_signature(source) not in seen)
     if STATUS_RANK[printing["verificationStatus"]] > STATUS_RANK[target["verificationStatus"]]:
         target["verificationStatus"] = printing["verificationStatus"]
+
+
+def _cosmos_target_identity_matches(target, evidence):
+    return all((
+        target['finish'] == evidence['finish'],
+        target.get('edition') == evidence.get('edition'),
+        target.get('foilPattern') in {None, 'cosmos'},
+        _compatible_card_size(target, evidence),
+        set(target.get('mappedVariants') or []) >= set(evidence.get('mappedVariants') or []),
+    ))
+
+
+def _cosmos_target_is_established(target):
+    distribution = target.get('distribution')
+    regular_distribution = not distribution or distribution.get('kind') in {'collection-promo', 'blister-promo'}
+    return all((
+        target.get('_origin') != 'auto',
+        regular_distribution,
+        all(mark.get('role') == 'print-identity' for mark in target.get('markings') or []),
+        target['verificationStatus'] in {'confirmed', 'owner-attested'},
+        not target.get('conflictsWith'),
+    ))
+
+
+def absorb_qualified_tcgdex_evidence(printings):
+    """An exact positive native Cosmos field can identify one existing compatible printing."""
+    kept = []
+    for printing in printings:
+        if printing.get("_tcgdexFoilPattern") != "cosmos" or not _is_card_level_finish_evidence(printing):
+            kept.append(printing)
+            continue
+        matches = [other for other in printings
+                   if other is not printing
+                   and _cosmos_target_identity_matches(other, printing)
+                   and _cosmos_target_is_established(other)]
+        if len(matches) != 1:
+            kept.append(printing)
+            continue
+        _fold_sources(matches[0], printing)
+    return kept
 
 
 def absorb_editionless_finish_evidence(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -1072,6 +1157,33 @@ def _load_finish_context() -> dict[str, Any]:
     }
 
 
+def refresh_printing_losses(previous, proposed):
+    """A refresh may add evidence, but cannot silently discard an accepted identity or status."""
+    current = {
+        (group_key(unit), printing_signature(printing), tuple(sorted(printing.get("mappedVariants") or []))):
+        STATUS_RANK[printing["verificationStatus"]]
+        for unit in proposed for printing in unit["printings"]
+    }
+    return [
+        f"{unit['setCode']} {unit['number']} {unit['language']}: {printing['printingId']}"
+        for unit in previous for printing in unit["printings"]
+        if current.get((group_key(unit), printing_signature(printing),
+                        tuple(sorted(printing.get("mappedVariants") or []))), -1)
+        < STATUS_RANK[printing["verificationStatus"]]
+    ]
+
+
+def _reviewed_refresh_candidate(context, urls):
+    current_snapshot = load_refresh_candidate(set(urls))
+    tcgdex_data = {url: record['payload'] for url, record in current_snapshot.items()}
+    preview = dict(context, tcgdex_data=tcgdex_data, fetch_errors={})
+    _prepare_finish_indexes(preview)
+    losses = refresh_printing_losses(read_json(OUTPUT_PATH)['units'], _build_finish_units(preview))
+    if losses:
+        raise ValueError('prior printings need reviewed retained evidence: ' + '; '.join(losses))
+    return current_snapshot, tcgdex_data
+
+
 def _resolve_tcgdex(context: dict[str, Any]) -> int | None:
     """Resolve offline, refresh, and refresh-accept modes before projection starts."""
     tcgdex_urls = context["tcgdex_urls"]
@@ -1089,13 +1201,10 @@ def _resolve_tcgdex(context: dict[str, Any]) -> int | None:
     accepted_refresh = False
     if accept_refresh:
         try:
-            current_snapshot = load_refresh_candidate(set(tcgdex_urls))
+            current_snapshot, tcgdex_data = _reviewed_refresh_candidate(context, tcgdex_urls)
         except (OSError, ValueError, TypeError, json.JSONDecodeError) as error:
             print(f"cannot accept TCGdex refresh candidate: {error}", file=sys.stderr)
             return 2
-        tcgdex_data = {
-            url: record["payload"] for url, record in current_snapshot.items()
-        }
         accepted_refresh = True
     else:
         with ThreadPoolExecutor(max_workers=12) as executor:
@@ -1298,14 +1407,14 @@ def _build_finish_unit(
             payload = tcgdex_data.get(url)
             if payload is None:
                 continue
-            upstream_variants = payload.get("variants") or {}
             upstream_source = exact_source(
                 url,
                 "TCGdex API card variants",
                 f"{payload.get('id')} variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
             )
             for field, finish in (("normal", "non-holo"), ("holo", "holo"), ("reverse", "reverse-holo")):
-                if upstream_variants.get(field) is not True:
+                details = tcgdex_regular_details(payload, field)
+                if not details:
                     continue
                 sources = [upstream_source]
                 pattern = inferred_reverse_pattern if finish == "reverse-holo" else None
@@ -1323,6 +1432,7 @@ def _build_finish_unit(
                         "verificationStatus": "confirmed",
                         "sources": sources,
                         "_origin": "auto",
+                        "_tcgdexFoilPattern": _tcgdex_detail_pattern(details, field),
                     },
                 )
 
@@ -1559,7 +1669,8 @@ def _build_finish_unit(
         for printing in printings:
             add_printing(deduplicated_printings, printing)
         printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
-            absorb_patternless_marketplace_claims(absorb_editionless_finish_evidence(deduplicated_printings)),
+            absorb_patternless_marketplace_claims(absorb_editionless_finish_evidence(
+                absorb_qualified_tcgdex_evidence(deduplicated_printings))),
             owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(
@@ -1576,6 +1687,7 @@ def _build_finish_unit(
         for printing_index, printing in enumerate(printings, 1):
             printing["printingId"] = f"{finish_unit_id}-P{printing_index:02d}"
             printing.pop("_origin", None)
+            printing.pop("_tcgdexFoilPattern", None)
         available_finishes = [finish for finish in FINISHES if any(p["finish"] == finish for p in printings)]
         finish_status = {
             finish: "not-applicable" if all_claims_contradicted else strongest_status(printings, finish)

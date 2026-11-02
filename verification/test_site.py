@@ -171,11 +171,16 @@ def check_catalogue_boundaries(rows, projection, localizations, strengths, catal
     promo = next(item for item in catalogue["items"] if item["localSetCode"] == "FLF"
                  and any(mark.get("text") == "Build-A-Bear Workshop" for mark in item["markings"]))
     grade = projection.catalogue_language(promo, localizations[promo["localizationId"]], strengths)
-    check("retailer candidate keeps its own grade without borrowing a sibling variant",
+    check("retailer printing keeps its own language grade without borrowing a sibling variant",
           grade["languageEvidence"]["English"]["provider"] == "Cardmarket exact product image"
           and not grade["languageEvidence"]["English"]["corroborated"])
-    check("unconfirmed retailer finish stays outside the table while its positive date is retained",
-          promo["releaseDate"] == "2019-08-29" and promo["itemId"] not in {row["rowId"] for row in rows})
+    check("confirmed Build-A-Bear finish enters the table while its positive date is retained",
+          promo["releaseDate"] == "2019-08-29" and promo["finish"] == "non-holo"
+          and promo["itemKind"] == "verified-printing"
+          and promo["itemId"] in {row["rowId"] for row in rows})
+    candidates = [item for item in catalogue["items"] if item["itemKind"] == "finish-candidate"]
+    check("unconfirmed finish candidates remain outside the confirmed table",
+          bool(candidates) and not {item["itemId"] for item in candidates} & {row["rowId"] for row in rows})
 
 
 def check_predecessor_artists(rows, projection, records, checklist, graph):

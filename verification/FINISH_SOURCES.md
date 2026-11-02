@@ -24,6 +24,21 @@ the ignored `cache/finish-tcgdex/refresh-candidate.json`. The second is the expl
 step; it consumes and hash-validates that staged candidate without fetching again, then writes the
 versioned snapshot only after the drift has been reviewed.
 
+The aggregate `variants` flags may now include stamped distributions, jumbo copies or special
+mirror treatments. When `variants_detailed` is available, the regular-card projection requires a
+positive matching type with an explicit reviewed standard size and no stamp or subtype. Reviewed
+ordinary Cosmos/Gold Holo and Energy reverse treatments establish their technical finish without
+inventing a normalized optional pattern; ball mirrors, League-only treatments and unreviewed native
+values require exact mappings. The complete native details remain in the snapshot. A missing
+regular match leaves that projection unestablished; it does not refute the qualified printing.
+
+Acceptance previews the complete proposed finish output and refuses to lose an existing identity,
+product mapping or evidence status. A later `false` does not erase a retained positive observation.
+Reviewed historical observations may be conserved through existing scoped finish overrides with
+their original accepted payload, hash and date. Unknown optional details are not claims that the
+copy was unstamped. The [2026-11-02 review](evidence/issue-438-finish-review-20261102/README.md)
+records the first qualified refresh and its explicit historical retentions.
+
 ## Evidence rules
 
 The finish layer is positive only. A missing API field, missing price subtype, empty population

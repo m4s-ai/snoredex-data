@@ -511,6 +511,13 @@ def main() -> None:
     promotion = read("verification/evidence/open-issue-picture-research-20261031/standalone-promotion-regression.json")
     current_items = read("collector_catalogue.json")["items"]
     item_by_id = {row["itemId"]: row for row in current_items}
+    standalone = read('verification/evidence/issue-438-finish-review-20261102/standalone-promotion-regression.json')
+    for previous in standalone['collectorItems']:
+        assert previous['itemId'] in item_by_id, 'finish evidence must retain a standalone collector ID'
+        current = item_by_id[previous['itemId']]
+        for field in ('physicalPrintingId', 'cardReleaseId', 'localizationId', 'finish', 'itemKind'):
+            assert current[field] == previous[field], f'standalone promotion changed {field}'
+        assert set(previous['sourceClaimRefs']) <= set(current['sourceClaimRefs'])
     index = collector.target_identity_index(current_items)
     for previous in promotion["collectorItems"]:
         targets = collector.migration_targets(previous, set(item_by_id), index)
