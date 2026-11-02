@@ -56,6 +56,22 @@ NON_EMAIL_PATTERN = re.compile(
 EMAIL_PATTERN = re.compile(
     r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[a-z]{2,}", re.IGNORECASE
 )
+
+# Private network endpoints are infrastructure detail, not documentation: a tracked file that names
+# one tells every reader where the author's lab lives. P4 matched neither addresses nor ports, so a
+# retained evidence README could publish the retrieval setup and still pass the gate.
+_OCTET = r"(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)"
+PRIVATE_ENDPOINT_PATTERN = re.compile(
+    r"(?<![\d.])"
+    r"(?:10(?:\.%s){3}"
+    r"|192\.168(?:\.%s){2}"
+    r"|172\.(?:1[6-9]|2\d|3[01])(?:\.%s){2})" % (_OCTET, _OCTET, _OCTET)
+    + r"(?::\d{2,5})?"
+)
+
+# GitHub's pull-request namespace. A clone may map it locally as `refs/remotes/origin/pr/N`, so both
+# spellings have to match; see published_refs().
+GITHUB_PULL_REF = re.compile(r"/(?:pull|pr)/\d")
 EMAIL_LOCAL_CHARS = frozenset(
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789._%+-"
 )
@@ -63,6 +79,7 @@ NON_EMAIL_MARKERS = (
     b"api_key", b"api-key", b"apikey", b"passwd", b"password", b"bearer",
     b"authorization:", b"cookie:", b"c:\\users\\", b"/users/", b"/home/",
 )
+PRIVATE_ENDPOINT_MARKERS = (b"10.", b"192.168", b"172.", b"127.")
 
 MEMO_LIMIT = 5_000_000  # larger blobs are not scanned, as before
 SCANNER_FINGERPRINT = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
@@ -114,10 +131,13 @@ def _candidate_matches(data: bytes) -> tuple[str, list[re.Match]]:
         return "", []
     has_email_candidate = b"@" in data
     has_other_candidate = any(marker in data.lower() for marker in NON_EMAIL_MARKERS)
-    if not has_email_candidate and not has_other_candidate:
+    has_endpoint_candidate = any(marker in data for marker in PRIVATE_ENDPOINT_MARKERS)
+    if not has_email_candidate and not has_other_candidate and not has_endpoint_candidate:
         return "", []
     text = data.decode("utf-8", errors="ignore")
     matches = list(NON_EMAIL_PATTERN.finditer(text)) if has_other_candidate else []
+    if has_endpoint_candidate:
+        matches.extend(PRIVATE_ENDPOINT_PATTERN.finditer(text))
     if has_email_candidate:
         matches.extend(_email_matches(text))
     return text, matches
@@ -230,10 +250,40 @@ def fill_memo(root: Path, memo: dict[str, list[str]], shas: list[str]) -> bool:
     return bool(missing)
 
 
+def published_refs(root: Path) -> list[str]:
+    """Every ref this repository publishes, minus GitHub's synthetic pull-request refs.
+
+    A `pull_request` workflow builds a `refs/pull/N/merge` commit that exists only to be tested, and
+    GitHub also serves every pull branch as `refs/pull/N/head`. Neither is a branch of the repository:
+    making the repository public publishes `refs/heads`, `refs/tags` and the remote-tracking branches,
+    not the pull requests. Auditing them reports findings nobody can fix by changing this repository.
+
+    Both naming schemes have to be excluded, because a clone may map the pull namespace into
+    `refs/remotes/origin/pr/N` via its fetch refspec. That mapping is local configuration, so matching
+    only `/pull/` made the verdict depend on one developer's clone: 82 hits from a locally mapped
+    `origin/pr/*` looked exactly like a repository finding. The check must answer the same way in
+    every clone, so the pull namespace is excluded wherever it appears.
+    """
+    try:
+        refs = [ref for ref in
+                _git(root, "for-each-ref", "--format=%(refname)",
+                     "refs/heads", "refs/tags", "refs/remotes").decode().split()
+                if ref != "refs/remotes/origin/HEAD"]
+    except (OSError, subprocess.CalledProcessError):
+        return []
+    return [ref for ref in refs if not GITHUB_PULL_REF.search(ref)]
+
+
 def _history_candidates(root: Path) -> list[tuple[str, str]]:
-    """Reachable blobs up to MEMO_LIMIT outside the exempt paths, typed without reading content."""
+    """Reachable blobs up to MEMO_LIMIT outside the exempt paths, typed without reading content.
+
+    Reachability comes from the published refs, never from `--all`: `--all` also walks `refs/stash`
+    and whatever pull refs the local fetch refspec created, so the same commit could pass in CI and
+    fail in a developer's clone.
+    """
+    refs = published_refs(root) or ["HEAD"]
     objects = [line.partition(" ") for line in
-               _git(root, "rev-list", "--objects", "--all").decode("utf-8", "surrogateescape").splitlines()]
+               _git(root, "rev-list", "--objects", *refs).decode("utf-8", "surrogateescape").splitlines()]
     info = _object_info(root, [sha for sha, _, _ in objects])
     return [(sha, path) for sha, _, path in objects
             if info.get(sha, ("", 0))[0] == "blob" and info[sha][1] <= MEMO_LIMIT

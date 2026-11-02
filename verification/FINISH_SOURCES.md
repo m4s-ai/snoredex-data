@@ -137,6 +137,20 @@ Before handing off either kind of observation, apply the
 [specimen and reference acceptance contract](RESUME.md#specimen-and-reference-acceptance-contract)
 to verify that the property-specific sources reach the registry, artwork and collector views.
 
+### A model's reading is a lead, never the finish (#438)
+
+A vision model may screen photographs for promising leads; it may not carry the claim. Measured on
+2026-11-02 against specimens whose finish was already established: `deepseek/deepseek-v4.1-flash-1017`
+scored 7/16 over all four finishes — every one of the four `mirror-holo` photographs was misread as
+`reverse-holo` or `non-holo`, and two known `non-holo` photographs were called `reverse-holo`.
+`openai/gpt-6-luna-pro` scored 7/12 with one such false `reverse-holo`. Both describe ordinary
+highlights as "rainbow foil", which is exactly what the glare rule above forbids.
+
+So a finish claim rests on a feature a person can point at in the retained image — a mirror band, a
+parallel line texture, a Poké Ball/Master Ball outline, a set-logo stamp — recorded in `basis`. Record
+a model's classification in the batch README as a lead, and treat a photograph that only *looks* foil
+as unset. This is a reading rule; no check can distinguish glare from foil.
+
 ### Multiple views of one physical card
 
 Each original photograph retains its own SPEC record, bytes, SHA-256, source and inspection date.

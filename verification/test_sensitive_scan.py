@@ -21,6 +21,7 @@ AT = "@"
 MAIL = "someone" + AT + "example.org"
 HOME = "/" + "home/someone/"
 TOKEN = "Bear" + "er abcdefghijk"
+ENDPOINT = b"10." + b"77.0.12:3002"
 
 
 def git(root: Path, *args: str) -> str:
@@ -95,6 +96,44 @@ def verify_tree(root: Path) -> None:
     assert f"clean.txt: {HOME}" in hits, "a dirty tracked file is read from the working tree"
 
 
+def verify_pull_refs(folder: Path) -> None:
+    """A locally mapped pull ref is not a published ref, so its blobs are not P6 findings (#465).
+
+    A clone may fetch GitHub's pull namespace into `refs/remotes/origin/pr/N`. That is local
+    configuration, so a blob reachable only through it must never turn P6 red while the same commit
+    is green in a clean clone — that is what made one clone report 82 hits nobody could find.
+    """
+    root = folder / "refs-repo"
+    root.mkdir()
+    make_repo(root)
+    git(root, "checkout", "-q", "-b", "stray")
+    # Distinct bytes from notes.txt: `rev-list --objects` reports one path per blob, so a copy with
+    # identical content would never appear under its own name.
+    (root / "stray.txt").write_text(f"second contact {MAIL}\n", encoding="utf-8")
+    git(root, "add", "stray.txt")
+    git(root, "commit", "-q", "-m", "stray")
+    sha = git(root, "rev-parse", "HEAD").strip()
+    git(root, "checkout", "-q", "--detach", "HEAD~1")
+    git(root, "branch", "-q", "-D", "stray")
+    git(root, "update-ref", "refs/remotes/origin/pr/7", sha)
+    assert "refs/remotes/origin/pr/7" not in scan.published_refs(root), scan.published_refs(root)
+    assert not any("stray.txt" in hit for hit in scan.scan_history(root)[2]), \
+        "a blob reachable only through a pull ref is not a finding"
+    git(root, "update-ref", "refs/heads/stray", sha)
+    assert any("stray.txt" in hit for hit in scan.scan_history(root)[2]), \
+        "a real branch carrying the same blob is a finding"
+
+
+def verify_endpoint_findings() -> None:
+    """A private network endpoint in a tracked file is a P4 finding, address and port included."""
+    assert scan.blob_findings(b"route: firecrawl http://" + ENDPOINT + b" via a host") == [ENDPOINT.decode()]
+    assert scan.blob_findings(b"asset revision 10.508.02.148") == [], \
+        "a three-digit segment is a version string, not an address"
+    assert scan.blob_findings(b"serving on 127.0.0.1") == [], \
+        "loopback names no real host, and every test server uses it"
+    assert scan.blob_findings(b"version 1.2.3 on port 8080") == []
+
+
 def verify_shallow(source: Path, target: Path) -> None:
     git(target.parent, "clone", "-q", "--depth", "1", source.as_uri(), str(target))
     assert scan.scan_history(target) == (True, 0, [])
@@ -102,6 +141,7 @@ def verify_shallow(source: Path, target: Path) -> None:
 
 def main() -> int:
     verify_findings()
+    verify_endpoint_findings()
     with tempfile.TemporaryDirectory() as folder:
         root = Path(folder) / "repo"
         root.mkdir()
@@ -109,8 +149,9 @@ def main() -> int:
         verify_history(root)
         verify_tree(root)
         verify_shallow(root, Path(folder) / "shallow")
+        verify_pull_refs(Path(folder))
     print("sensitive scan passed: findings, memo reuse, corrupt/disabled memo, size and path limits, "
-          "dirty tree files, shallow clone")
+          "dirty tree files, shallow clone, private endpoints, pull refs")
     return 0
 
 

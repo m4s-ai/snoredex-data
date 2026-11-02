@@ -35,8 +35,8 @@ from typing import Any
 
 from checks import Check, Note, Suite
 from sensitive_scan import (  # noqa: F401 - re-exported for the findings harness
-    SENSITIVE_SCAN_EXEMPT, reviewed_public_contact_literal, reviewed_public_masking_literal,
-    scan_history, scan_tree,
+    SENSITIVE_SCAN_EXEMPT, published_refs, reviewed_public_contact_literal,
+    reviewed_public_masking_literal, scan_history, scan_tree,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -60,6 +60,12 @@ DOC_HEADER = re.compile(
     r"<!--\s*doc:\s*role=(?P<role>[^;\r\n]+)(?:;|\r?\n)\s*"
     r"stage=(?P<stage>[^\s>]+)\s*-->"
 )
+
+# Characters Windows refuses in a file name, and the device names it reserves (X6). A tracked path
+# carrying either cannot be checked out on the Windows leg of the gate, which fails before it can
+# report why, so the check has to run on the Linux side against every tracked path.
+WINDOWS_INVALID_NAME = re.compile(r'[<>:"|?*\x00-\x1f]')
+WINDOWS_RESERVED_NAME = re.compile(r"^(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?$", re.IGNORECASE)
 
 # The check protocol is shared with `review_integrity.py` — one implementation of how a check is
 # declared and when the process exits non-zero. The output format below stays this suite's own.
@@ -2482,29 +2488,11 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
                 f"{history_scanned} blobs. Public repository approval must remain false unless these are "
                 f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
             )
-            def published_refs() -> list[str]:
-                """Every ref this repository publishes, minus GitHub's synthetic pull-request merge refs.
-
-                A `pull_request` workflow builds a `refs/pull/N/merge` commit that exists only to be tested.
-                Its identity fields belong to GitHub and to whoever opened the pull request, not to either
-                branch, so auditing them reports a finding nobody can fix by changing this repository.
-
-                This used to exempt exactly one commit — the one that happened to be `HEAD` — which made the
-                verdict depend on the checkout rather than on the repository: the same commit passed on the
-                Windows runner and failed on the Linux one, twice, on #49. Excluding the whole pull namespace
-                is what makes the check deterministic. Branches and tags are still audited in full, because
-                making a repository public publishes every one of them.
-                """
-                try:
-                    refs = subprocess.check_output(
-                        ["git", "for-each-ref", "--format=%(refname)", "refs/heads", "refs/tags",
-                         "refs/remotes"], cwd=ROOT, text=True
-                    ).split()
-                except (OSError, subprocess.CalledProcessError):
-                    return []
-                return [ref for ref in refs if "/pull/" not in ref]
             try:
-                audited = published_refs()
+                # One definition of "published", shared with P6's reachability walk
+                # (`sensitive_scan.published_refs`): two copies of this filter is how the same commit
+                # ended up green under one check and red under the other.
+                audited = published_refs(ROOT)
                 identity_fields = subprocess.check_output(
                     ["git", "log", "--format=%H%x00%ae%x00%ce"] + audited, cwd=ROOT
                 ).decode("utf-8", errors="replace").splitlines() if audited else []
@@ -2572,6 +2560,26 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
         updates.update({"tracked": tracked})
     return updates
 
+def unportable_paths(tracked: list[bytes]) -> list[str]:
+    """Tracked paths a Windows checkout cannot represent (X6).
+
+    Windows refuses `? * < > | "` and a colon in a name, silently strips a trailing dot or space, and
+    reserves device names, so a commit that is green on Linux can be uncheckoutable on the Windows leg
+    of the gate — which fails before it can report why. Only the Linux side sees every tracked path.
+    """
+    unportable = []
+    for raw_name in tracked:
+        if not raw_name:
+            continue
+        name = raw_name.decode("utf-8", errors="surrogateescape")
+        for part in name.split("/"):
+            if (WINDOWS_INVALID_NAME.search(part) or part.endswith((".", " "))
+                    or WINDOWS_RESERVED_NAME.match(part)):
+                unportable.append(name)
+                break
+    return unportable
+
+
 def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     with guarded("G9", "portability contract"):
@@ -2627,6 +2635,13 @@ def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
                     pass
         check("X5", "Tracked text artifacts contain no UTF-8 BOM", "FAIL", not bom_files,
               f"BOM files: {bom_files[:10]}")
+
+        # #465 shipped a retained photograph named `s?-mirror…`; only a human review caught it,
+        # because the Windows leg fails before it can report an uncheckoutable path.
+        unportable = unportable_paths(tracked)
+        check("X6", "Every tracked path is checkoutable on Windows", "FAIL", not unportable,
+              f"{len(unportable)} tracked path(s) a Windows checkout cannot represent: "
+              f"{unportable[:5]}. Rename the file and every reference to it.")
     return updates
 
 def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
