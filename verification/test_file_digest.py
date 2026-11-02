@@ -14,16 +14,17 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import file_digest  # noqa: E402
 
 
-def old_file(path: Path, data: bytes) -> None:
+def old_file(path: Path, data: bytes, age_seconds: int) -> None:
+    """Write `data` with an explicit past mtime; distinct ages, since Windows clocks tick coarsely."""
     path.write_bytes(data)
-    past = time.time_ns() - 10_000_000_000
+    past = time.time_ns() - age_seconds * 1_000_000_000
     os.utime(path, ns=(past, past))
 
 
 def main() -> int:
     with tempfile.TemporaryDirectory() as folder:
         path = Path(folder) / "image.bin"
-        old_file(path, b"first")
+        old_file(path, b"first", 20)
         assert file_digest.sha256_hex(path) == hashlib.sha256(b"first").hexdigest()
         assert any(key[0] == str(path) for key in file_digest._CACHE), "an old file is cached"
         if os.name != "nt":  # POSIX ctime changes on every write; Windows ctime is creation time
@@ -32,7 +33,7 @@ def main() -> int:
             os.utime(path, ns=(info.st_atime_ns, info.st_mtime_ns))
             assert file_digest.sha256_hex(path) == hashlib.sha256(b"other").hexdigest(), \
                 "a rewrite with the old mtime must not reuse the cached digest"
-        old_file(path, b"third")
+        old_file(path, b"third", 10)
         assert file_digest.sha256_hex(path) == hashlib.sha256(b"third").hexdigest()
         fresh = Path(folder) / "fresh.bin"
         fresh.write_bytes(b"fresh")
