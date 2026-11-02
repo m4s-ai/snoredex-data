@@ -6,6 +6,8 @@ to a counter file outside that repository whenever it actually runs, so "skipped
 """
 from __future__ import annotations
 
+import contextlib
+import importlib.util
 import json
 import os
 import re
@@ -163,16 +165,43 @@ def cases_session(repo: Repo) -> None:
     (repo.root / "out.txt").write_text("edited by hand\n", encoding="utf-8")
     check(repo.run(generator, phase="write")[0] == 1, "T17 a changed output runs the generator again")
     database = repo.root / "store.sqlite"
-    with sqlite3.connect(database) as connection:
+    with contextlib.closing(sqlite3.connect(database)) as connection, connection:
         connection.execute("create table t (v)")
     reader = repo.step("sqlitereader", "import sqlite3\nsqlite3.connect('store.sqlite').execute('select 1').fetchall()")
     repo.run(reader)
-    with sqlite3.connect(database) as connection:
+    with contextlib.closing(sqlite3.connect(database)) as connection, connection:
         connection.execute("insert into t values (1)")
     check(repo.run(reader)[0] == 1, "T20 a changed SQLite input runs again")
 
 
 ENV_READ = re.compile(r"""(?:os\.environ\.get|os\.getenv|getenv)\(\s*["']([A-Z0-9_]+)["']|os\.environ\[\s*["']([A-Z0-9_]+)["']\s*\]""")
+
+
+def case_cli(repo: Repo) -> None:
+    script = repo.step("cli", "pass")
+    original_root = memo.ROOT
+    memo.ROOT = repo.root
+    try:
+        env_before = os.environ.get("MEMO_TEST_COUNTER")
+        os.environ["MEMO_TEST_COUNTER"] = str(repo.counter)
+        before = repo.runs()
+        check(memo.main(["run", "--memo", "off", "--", script, "--flag"]) == 0 and repo.runs() == before + 1,
+              "T23 the CLI accepts --memo before -- on every supported Python")
+    finally:
+        memo.ROOT = original_root
+        if env_before is None:
+            os.environ.pop("MEMO_TEST_COUNTER", None)
+
+
+def case_windows_command_lines() -> None:
+    spec = importlib.util.spec_from_file_location("memo_tracer", memo.TRACER_DIR / "sitecustomize.py")
+    tracer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(tracer)  # inert: SNOREDEX_MEMO_TRACE is not set here
+    argv = ["git", "show", "abc:path with space.json", 'quote"d']
+    line = subprocess.list2cmdline(argv)
+    check(tracer.argv_list(line, {line: argv}) == argv, "T24 a Windows command line maps back to its arguments")
+    check(tracer.argv_list(argv, {}) == argv, "T24 a POSIX argument list passes through")
+    check(tracer.argv_list("cmd /c dir", {}) == ["cmd", "/c", "dir"], "T24 an unknown shell string stays foreign")
 
 
 def case_bytecode() -> None:
@@ -204,10 +233,12 @@ def main() -> int:
         cases_unsafe(repo)
         cases_store(repo)
         cases_session(repo)
+        case_cli(repo)
     case_bytecode()
+    case_windows_command_lines()
     case_environment()
-    print("check memo passed: T1-T22 (inputs, probes, listings, Git replays, unsafe steps, "
-          "store integrity, sessions, generators, SQLite, environment key, bytecode sources)")
+    print("check memo passed: T1-T24 (inputs, probes, listings, Git replays, unsafe steps, "
+          "store integrity, sessions, generators, SQLite, environment key, bytecode sources, CLI, Windows command lines)")
     return 0
 
 

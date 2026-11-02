@@ -429,17 +429,20 @@ def hit_line(label: str, hit: dict[str, Any]) -> str:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    argv = list(sys.argv[1:] if argv is None else argv)
+    # Split at "--" ourselves: argparse.REMAINDER swallows options before it on Python 3.11.
+    command = argv[argv.index("--") + 1:] if "--" in argv else []
+    argv = argv[:argv.index("--")] if "--" in argv else argv
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
+                                     usage="%(prog)s {run,clear} [--memo MODE] [-- script.py [arguments]]")
     parser.add_argument("action", choices=("run", "clear"))
     parser.add_argument("--memo", choices=MODES, default="use")
-    parser.add_argument("command", nargs=argparse.REMAINDER, help="-- script.py [arguments]")
     args = parser.parse_args(argv)
     if args.action == "clear":
         store = store_dir(ROOT)
         if store is not None:
             shutil.rmtree(store, ignore_errors=True)
         return 0
-    command = args.command[1:] if args.command[:1] == ["--"] else args.command
     if not command:
         parser.error("run needs -- script.py [arguments]")
     session = MemoSession(ROOT, args.memo)

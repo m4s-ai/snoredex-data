@@ -3,6 +3,19 @@ import os
 import sys
 
 
+def argv_list(argv, cmdlines):
+    """The argument list of a Popen audit event.
+
+    On Windows the event carries the command line string that `subprocess.list2cmdline` built;
+    the tracer remembers each list it converted, so the original arguments are recovered exactly.
+    A string it did not build (shell=True) splits on whitespace, which keeps it non-replayable.
+    """
+    if isinstance(argv, (list, tuple)):
+        return [os.fsdecode(a) for a in argv]
+    text = os.fsdecode(argv)
+    return list(cmdlines.get(text) or text.split())
+
+
 def _install(trace_dir: str) -> None:
     import atexit
     import json
@@ -31,9 +44,21 @@ def _install(trace_dir: str) -> None:
         writing = any(c in mode for c in "wxa+") if mode else bool(flags & write_flags)
         add("writes" if writing else "reads", path)
 
+    import subprocess
+    cmdlines = {}
+    list2cmdline = subprocess.list2cmdline
+
+    def remembering_list2cmdline(seq):
+        seq = list(seq)
+        line = list2cmdline(seq)
+        cmdlines[line] = [os.fsdecode(a) for a in seq]
+        return line
+
+    subprocess.list2cmdline = remembering_list2cmdline
+
     def on_popen(args):
         _executable, argv, cwd, env = args
-        argv = [os.fsdecode(a) for a in (argv if isinstance(argv, (list, tuple)) else [argv])]
+        argv = argv_list(argv, cmdlines)
         record["procs"].append({"argv": argv, "cwd": os.fsdecode(cwd) if cwd else os.getcwd(),
                                 "envTraced": env is None or "SNOREDEX_MEMO_TRACE" in env})
 
