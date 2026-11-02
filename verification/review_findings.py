@@ -61,6 +61,12 @@ DOC_HEADER = re.compile(
     r"stage=(?P<stage>[^\s>]+)\s*-->"
 )
 
+# Characters Windows refuses in a file name, and the device names it reserves (X6). A tracked path
+# carrying either cannot be checked out on the Windows leg of the gate, which fails before it can
+# report why, so the check has to run on the Linux side against every tracked path.
+WINDOWS_INVALID_NAME = re.compile(r'[<>:"|?*\x00-\x1f]')
+WINDOWS_RESERVED_NAME = re.compile(r"^(?:con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\..*)?$", re.IGNORECASE)
+
 # The check protocol is shared with `review_integrity.py` — one implementation of how a check is
 # declared and when the process exits non-zero. The output format below stays this suite's own.
 suite = Suite()
@@ -2572,6 +2578,26 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
         updates.update({"tracked": tracked})
     return updates
 
+def unportable_paths(tracked: list[bytes]) -> list[str]:
+    """Tracked paths a Windows checkout cannot represent (X6).
+
+    Windows refuses `? * < > | "` and a colon in a name, silently strips a trailing dot or space, and
+    reserves device names, so a commit that is green on Linux can be uncheckoutable on the Windows leg
+    of the gate — which fails before it can report why. Only the Linux side sees every tracked path.
+    """
+    unportable = []
+    for raw_name in tracked:
+        if not raw_name:
+            continue
+        name = raw_name.decode("utf-8", errors="surrogateescape")
+        for part in name.split("/"):
+            if (WINDOWS_INVALID_NAME.search(part) or part.endswith((".", " "))
+                    or WINDOWS_RESERVED_NAME.match(part)):
+                unportable.append(name)
+                break
+    return unportable
+
+
 def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     with guarded("G9", "portability contract"):
@@ -2627,6 +2653,13 @@ def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
                     pass
         check("X5", "Tracked text artifacts contain no UTF-8 BOM", "FAIL", not bom_files,
               f"BOM files: {bom_files[:10]}")
+
+        # #465 shipped a retained photograph named `s?-mirror…`; only a human review caught it,
+        # because the Windows leg fails before it can report an uncheckoutable path.
+        unportable = unportable_paths(tracked)
+        check("X6", "Every tracked path is checkoutable on Windows", "FAIL", not unportable,
+              f"{len(unportable)} tracked path(s) a Windows checkout cannot represent: "
+              f"{unportable[:5]}. Rename the file and every reference to it.")
     return updates
 
 def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:
