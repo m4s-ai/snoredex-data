@@ -8,6 +8,7 @@ are not restated here — a second copy is a copy that goes stale.
 | Question | Where it is answered |
 |---|---|
 | What are the rules, and what will trip me up? | [`AGENTS.md`](AGENTS.md) — loaded automatically; `CLAUDE.md` shim imports it |
+| How does my agent runtime load rules and skills? | [`RUNTIMES.md`](RUNTIMES.md) — Claude Code, Codex and Hermes differences, limits, attribution |
 | What is true right now? | [`verification/DATA-HANDOFF-AUDIT.md`](verification/DATA-HANDOFF-AUDIT.md) — generated from the data, so it cannot drift |
 | What should I work on? | The [issue tracker](https://github.com/m4s-ai/snoredex-data/issues) |
 | Which existing workflow fits this task? | [WORKFLOW-MAP.md §4](WORKFLOW-MAP.md#4-use-case-contracts) — task phrases → skill, domain contract and implementation owner; also works without automatic skill discovery |

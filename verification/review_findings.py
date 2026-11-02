@@ -60,6 +60,9 @@ SENSITIVE_SCAN_EXEMPT = frozenset({
 
 DOC_STAGES = ("auto", "task", "reference", "public", "generated", "history")
 
+# D6 (#461): ceiling for the always-loaded agent guide, below Codex's 32 KiB combined default.
+AGENT_GUIDE_BUDGET_BYTES = 28 * 1024
+
 # Reviewed 30th campaign HTML embeds public New Relic input-masking code. Its three
 # password literals are a type comparison and two boolean mask settings, not secrets.
 # Pin exact blobs (including the two LF-normalized versions in local commit history).
@@ -1642,11 +1645,16 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                     drift.update(figure_drift(patterns, expected, required=required, docs=docs))
                 check(ident, title, "FAIL", not drift,
                       f"{len(drift)} stated figure(s) disagree with the data: {drift}")
-            documented_figures(
-                "E4", "Every document stating the attestation-only count states the real one",
-                [([r"\*?\*?(\d+) units rest on owner attestation alone"], attestation_only)],
-                required=True, docs=policy_docs,
-            )
+            # RESUME.md owns the attestation-only figure as published policy (owner, #461); the
+            # always-loaded AGENTS.md points to it. Any other document restating it must be current.
+            attestation_pattern = [r"\*?\*?(\d+) units rest on owner attestation alone"]
+            resume_doc = {"verification/RESUME.md": policy_docs["verification/RESUME.md"]}
+            attestation_drift = figure_drift(attestation_pattern, attestation_only, required=True,
+                                             docs=resume_doc)
+            attestation_drift.update(figure_drift(attestation_pattern, attestation_only))
+            check("E4", "Every document stating the attestation-only count states the real one", "FAIL",
+                  not attestation_drift,
+                  f"{len(attestation_drift)} stated figure(s) disagree with the data: {attestation_drift}")
             documented_figures(
                 "E7", "Documented single-source exposure matches the data",
                 [([r"(\d+) of \d+ resolved units\*{0,2} do", r"(\d+) resolved units do"], len(weak_single)),
@@ -3570,6 +3578,21 @@ def _collect_g14(state: dict[str, Any]) -> dict[str, Any]:
                 f"content is covered by `database.py --check` and `tracker.py check-template` instead."
                 if unscoped else
                 "AGENTS.md states no gate diff at all, so the gate it documents cannot be run.",
+            )
+            # Codex stops adding AGENTS.md files once their combined size reaches
+            # `project_doc_max_bytes` (32 KiB by default) and Hermes truncates the middle of a
+            # context file past its character cap (#461). The ceiling keeps headroom for a
+            # user-level guide and a nested file; a new rule must pay for itself by moving detail
+            # into the skill or contract that owns it.
+            agent_guide_bytes = sum(len((ROOT / name).read_bytes()) for name in ("AGENTS.md", "CLAUDE.md"))
+            check(
+                "D6",
+                "The always-loaded agent guide stays within the runtime load budget",
+                "FAIL",
+                agent_guide_bytes <= AGENT_GUIDE_BUDGET_BYTES,
+                f"AGENTS.md + CLAUDE.md = {agent_guide_bytes} bytes; budget {AGENT_GUIDE_BUDGET_BYTES} "
+                f"(Codex reads at most 32,768 combined). Move task-specific detail into its skill or "
+                f"contract instead of raising the budget.",
             )
 
         _collect_g14_part1()

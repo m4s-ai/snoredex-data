@@ -27,6 +27,24 @@ MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 RUNTIME_LINKS = {(ROOT / "llms.txt", "collector_deployment.json")}
 
 
+def skill_frontmatter(path: Path) -> dict[str, str]:
+    """Read the name/description lines of a skill's YAML frontmatter."""
+    head = path.read_text(encoding="utf-8").split("---\n")[1]
+    return dict(line.split(": ", 1) for line in head.splitlines() if line.startswith(("name: ", "description: ")))
+
+
+def check_claude_skill_shims() -> None:
+    """Claude Code reads nothing under .agents/, so each canonical skill needs an exact pointer shim (#461)."""
+    canonical = {path.parent.name: path for path in sorted((ROOT / ".agents" / "skills").glob("*/SKILL.md"))}
+    shims = {path.parent.name: path for path in sorted((ROOT / ".claude" / "skills").glob("*/SKILL.md"))}
+    assert set(shims) == set(canonical), f"Claude skill shims out of step: {sorted(set(shims) ^ set(canonical))}"
+    for name, shim in shims.items():
+        assert skill_frontmatter(shim) == skill_frontmatter(canonical[name]), f"{name}: shim frontmatter drifted"
+        text = shim.read_text(encoding="utf-8")
+        assert f"../../../.agents/skills/{name}/SKILL.md" in MARKDOWN_LINK.findall(text), name
+        assert not any(line.startswith("## ") for line in text.splitlines()), f"{name}: shim holds procedure"
+
+
 def workflow_routes(text: str) -> list[list[str]]:
     """Read the one six-column routing table in section 4, not incidental prose IDs."""
     heading = "## 4. Use-case contracts\n"
@@ -246,6 +264,7 @@ def main() -> int:
         "CLAUDE.md must not duplicate AGENTS.md section rules"
     )
     assert "scripts/regen.py" in texts[ROOT / "HANDOVER.md"]
+    check_claude_skill_shims()
     active_text = "\n".join(texts[path] for path in ACTIVE_MARKDOWN)
     assert not re.search(
         r"^#{1,6}\s+(?:\d+\.\s*)?(?:prioritised|current) backlog\b",

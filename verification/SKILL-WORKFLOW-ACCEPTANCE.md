@@ -7,8 +7,9 @@ No case authorizes a live issue edit, import, refresh, external message or merge
 receives only a case's prompt/inputs and the available skills and routing documents. Keep the
 acceptance section separate until the response is recorded. Follow
 [ADR-0010](ADR-0010-agent-discovery-surface.md#acceptance-and-evidence) for revision, environment,
-document-navigation and result reporting. Replay affected cases after a substantive skill change;
-do not turn prose phrases into regex tests.
+document-navigation and result reporting. Replay affected cases after a substantive skill change
+and when the model, model version, reasoning effort or agent runtime changes
+([RUNTIMES.md](../RUNTIMES.md#changing-model-or-runtime)); do not turn prose phrases into regex tests.
 
 ## Evaluation inputs
 
