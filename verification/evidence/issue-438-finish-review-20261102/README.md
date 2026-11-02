@@ -10,7 +10,7 @@
 | SM05 DE/ES/FR/IT/PT | Exact native `holo: true` and standard Holo detail rows | Owner-approved snapshot accepted | Five existing collector candidates promoted with their IDs retained | Feature branch | Review/merge |
 | EN FLF 80 V2 Build-A-Bear | Exact Pokumon primary record: English, Non-holo | Existing scoped override confirmed; text source carries finish | Confirmed collector item; identity and stamp sources remain separate | Feature branch | Review/merge |
 | ES GEN 58 Non-Holo | No accepted new finish evidence | No claim changed | Existing state preserved | Feature branch | Exact positive Spanish finish source |
-| TCGdex refresh | 308 URL set unchanged; all 308 payload hashes changed; 49 card records have normal/holo/reverse boolean drift | Exact staged SHA-256 below; no live refetch | All 968 prior collector IDs retained; 886 → 903 technical finish rows; 65 → 59 candidates | Feature branch | Review/merge; future drift reviews |
+| TCGdex refresh | 308 URL set unchanged; all 308 payload hashes changed; 49 card records have normal/holo/reverse boolean drift | Exact staged SHA-256 below; no live refetch | All 968 prior collector IDs retained; 886 → 900 technical finish rows; 65 → 59 candidates | Feature branch | Review/merge; future drift reviews |
 
 Staged candidate SHA-256: `2367c6864c3db38088f8aded3d1eb15d6e5fdd019a907bfe660976a04a3d11a4`.
 The exact reviewed payloads are now the versioned snapshot. Pricing and richer detail metadata explain
@@ -87,8 +87,8 @@ corrections, not a fixed monthly publisher SLA: https://tcgdex.dev/fr/faq .
   acceptance leaves old snapshot bytes and the staged candidate unchanged.
 - Snapshot acceptance was explicitly approved in this chat. Language units, specimens and owner
   decisions are preserved against current main, including the separately merged #465 decisions.
-- Final data conservation is captured in `integration-validation.json`: 968 → 984 collector items,
-  903 → 925 verified printings, 65 → 59 candidates, and zero lost prior collector, physical or claim
+- Final data conservation is captured in `integration-validation.json`: 968 → 981 collector items,
+  903 → 922 verified printings, 65 → 59 candidates, and zero lost prior collector, physical or claim
   IDs. The six promotions are the five SM05 languages plus English Build-A-Bear.
 - Full regeneration/core, browser acceptance and post-push publication receipts are reported in
   the PR. They are separate checks and are never inferred from this evidence capture.
@@ -105,12 +105,28 @@ positive current evidence attached to the same physical target; missing, pending
 anchors fail validation. Tests cover replay, source order and incompatible finishes.
 
 The original reviewed graph base was recovered through the canonical projector after the interrupted
-preview, then reconciled to main `fef8a594` (including merged #465). No reviewed locality base, owner
+preview, then reconciled to main `fb0ad8c5` (including merged #465 and #466). No reviewed locality base, owner
 decision, specimen metadata or image was replaced by a generated catalogue. The official acceptance command consumed the staged cache file. The accepted versioned snapshot
 remains byte-identical to the post-acceptance checkpoint; its SHA-256 is recorded in the integration
 report. No refetch was used.
 
-The corrected gain is **17 technical finish rows and 16 collector items**, not 23 new cards. Six
+The corrected gain is **14 technical finish rows and 13 collector items**, not 23 new cards. Six
 Cosmos-only API statements attach finish evidence to existing compatible printings, preserving
 their pattern, stamp, distribution and dates. Ambiguous, conflicted or pending targets are not
 upgraded through this attachment path.
+
+## P1 product-identity refinement
+
+Review finding 4448392823 exposed duplicate generic English Holo rows for PGO055, VIV131 and
+SVP051. New positive API flags previously coexisted with richer curated V1 product identities.
+The exact qualified detail rows name products 665278, 512365 and 720390, matching the retained
+V1 product references. Product IDs link identities; they do not prove language or finish.
+
+The existing override refinement path now attaches each positive API claim to that V1 identity;
+SVP051 also declares its V1 auto-finish mapping explicitly. V2 Tin/Prerelease/Pokemon Center
+identities remain separate and receive no borrowed V1 evidence. Positive API suppression was not
+weakened. `product-refinement-regression.json` retains the exact approved payloads and hashes.
+Regression checks cover all three products, V2 separation, replay, input order and a seeded
+generic duplicate. The previous 17-row/16-item preview included these three duplicates and is
+superseded by the 14-row/13-item result above. All 968 main collector IDs and existing physical
+IDs remain conserved, and the three source/owner stores match merged main byte-for-byte.

@@ -4074,7 +4074,7 @@
         "claimId": "CLAIM:finish:F0249-P03",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0249-P04",
+        "sourceId": "F0249-P03",
         "semanticPrintingId": "PRINTING:b60bd808e4f00ddd7f91b180",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -7371,7 +7371,7 @@
         "claimId": "CLAIM:finish:F0578-P03",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0578-P04",
+        "sourceId": "F0578-P03",
         "semanticPrintingId": "PRINTING:1805d58c56b4dfa6b0c142de",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -11857,23 +11857,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:65eaeed211fff257a548af66",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:65eaeed211fff257a548af66",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0249-P02",
-        "semanticPrintingId": "PRINTING:65eaeed211fff257a548af66",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-        "materializedTargetId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:65ef67fb1eb82d0db0fdab58",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -15014,23 +14997,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:bcd2b7944726e7a35545afbc",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:bcd2b7944726e7a35545afbc",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0578-P03",
-        "semanticPrintingId": "PRINTING:bcd2b7944726e7a35545afbc",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-        "materializedTargetId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-        "reason": "finish printing record carries positive evidence"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:bd1069574e7abf7cbb83fe95",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -15047,23 +15013,6 @@
         "specimenIds": [
           "SPEC-0553"
         ]
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:bd3ce37367f8e92bbabd86aa",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0507-P03",
-        "semanticPrintingId": "PRINTING:bd3ce37367f8e92bbabd86aa",
-        "evidenceStatus": "confirmed",
-        "disposition": "established-and-mapped",
-        "proposedTargetId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-        "materializedTargetId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-        "reason": "finish printing record carries positive evidence"
       }
     },
     {
@@ -17287,7 +17236,7 @@
         "claimId": "CLAIM:finish:PRINTING:fcfeca4f697098e3cceb3a28",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0249-P03",
+        "sourceId": "F0249-P02",
         "semanticPrintingId": "PRINTING:fcfeca4f697098e3cceb3a28",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -92588,7 +92537,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0249",
-        "sourcePrintingId": "F0249-P04",
+        "sourcePrintingId": "F0249-P03",
         "establishingClaimId": "CLAIM:finish:F0249-P03"
       }
     },
@@ -96756,7 +96705,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0578",
-        "sourcePrintingId": "F0578-P04",
+        "sourcePrintingId": "F0578-P03",
         "establishingClaimId": "CLAIM:finish:F0578-P03"
       }
     },
@@ -102095,27 +102044,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-        "semanticPrintingId": "PRINTING:65eaeed211fff257a548af66",
-        "cardReleaseId": "RELEASE:WEST:English:PGO:055:Snorlax-Block-Collapse",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0249",
-        "sourcePrintingId": "F0249-P02",
-        "establishingClaimId": "CLAIM:finish:PRINTING:65eaeed211fff257a548af66"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:65ef67fb1eb82d0db0fdab58",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -105737,48 +105665,6 @@
     },
     {
       "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-        "semanticPrintingId": "PRINTING:bcd2b7944726e7a35545afbc",
-        "cardReleaseId": "RELEASE:WEST:English:VIV:131:Snorlax-Gormandize-Body-Slam",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0578",
-        "sourcePrintingId": "F0578-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:bcd2b7944726e7a35545afbc"
-      }
-    },
-    {
-      "entityType": "physical-printing",
-      "entityId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "physicalPrintingId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-        "semanticPrintingId": "PRINTING:bd3ce37367f8e92bbabd86aa",
-        "cardReleaseId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
-        "finish": "holo",
-        "edition": null,
-        "foilPattern": null,
-        "markings": null,
-        "distribution": null,
-        "cardSize": "standard",
-        "errorClass": null,
-        "classificationState": "classified-from-positive-evidence",
-        "sourceFinishUnitId": "F0507",
-        "sourcePrintingId": "F0507-P03",
-        "establishingClaimId": "CLAIM:finish:PRINTING:bd3ce37367f8e92bbabd86aa"
-      }
-    },
-    {
-      "entityType": "physical-printing",
       "entityId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -108173,7 +108059,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0249",
-        "sourcePrintingId": "F0249-P03",
+        "sourcePrintingId": "F0249-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:fcfeca4f697098e3cceb3a28"
       }
     },
@@ -192021,16 +191907,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:65eaeed211fff257a548af66",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:65ef67fb1eb82d0db0fdab58",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -193703,30 +193579,10 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:bcd2b7944726e7a35545afbc",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:bd1069574e7abf7cbb83fe95",
       "relation": "materializes",
       "toType": "physical-printing",
       "toId": "PHYSICAL:specimen:SPEC-0553",
-      "provenance": {
-        "disposition": "established-and-mapped"
-      }
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "relation": "materializes",
-      "toType": "physical-printing",
-      "toId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
       "provenance": {
         "disposition": "established-and-mapped"
       }
@@ -254849,22 +254705,6 @@
     },
     {
       "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:65eaeed211fff257a548af66",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:English:PGO:055:Snorlax-Block-Collapse",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
       "fromId": "PHYSICAL:PRINTING:65ef67fb1eb82d0db0fdab58",
       "relation": "established-by",
       "toType": "candidate-claim",
@@ -257261,38 +257101,6 @@
       "relation": "realizes",
       "toType": "card-release",
       "toId": "RELEASE:WEST:Spanish:TEU:120:Eevee-Snorlax-GX-Cheer-Up-Dump-Truck-Press-Megaton-Friends-GX",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:bcd2b7944726e7a35545afbc",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:English:VIV:131:Snorlax-Gormandize-Body-Slam",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "relation": "established-by",
-      "toType": "candidate-claim",
-      "toId": "CLAIM:finish:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "provenance": {}
-    },
-    {
-      "fromType": "physical-printing",
-      "fromId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "relation": "realizes",
-      "toType": "card-release",
-      "toId": "RELEASE:WEST:English:SVP:051:Snorlax-Voraciousness-Thudding-Press",
       "provenance": {}
     },
     {
@@ -306283,19 +306091,12 @@
       "sourceKind": "finish-printing-record",
       "sourceId": "F0249-P02",
       "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0249-P03",
-      "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:fcfeca4f697098e3cceb3a28",
       "reason": "finish printing record carries positive evidence"
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0249-P04",
+      "sourceId": "F0249-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0249-P03",
       "reason": "finish printing record carries positive evidence"
@@ -308794,13 +308595,6 @@
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0507-P03",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
       "sourceId": "F0508-P01",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0508-P01",
@@ -309572,13 +309366,6 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0578-P03",
-      "disposition": "established-and-mapped",
-      "targetRef": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0578-P04",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:F0578-P03",
       "reason": "finish printing record carries positive evidence"
@@ -328566,14 +328353,14 @@
     }
   ],
   "summary": {
-    "entities": 9170,
-    "edges": 13263,
-    "migrationInputs": 3347,
+    "entities": 9164,
+    "edges": 13254,
+    "migrationInputs": 3344,
     "migrationDispositions": {
       "bounded-contradicted": 96,
       "candidate-needs-evidence": 341,
       "carried": 69,
-      "established-and-mapped": 1742,
+      "established-and-mapped": 1739,
       "linked-local-counterpart": 126,
       "mapped": 531,
       "needs-evidence": 218,
@@ -328581,9 +328368,9 @@
       "positively-excluded": 84,
       "split": 122
     },
-    "candidateClaims": 2253,
+    "candidateClaims": 2250,
     "cardReleases": 629,
-    "physicalPrintings": 925,
+    "physicalPrintings": 922,
     "setSourceRecords": 752,
     "setSourceDispositions": 752,
     "localizations": 16

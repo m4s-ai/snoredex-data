@@ -5,10 +5,10 @@
     "datasetId": "snoredex-data/snorlax-current-known",
     "fromSchema": "snoredex-checklist",
     "fromSchemaVersion": "1.5.0",
-    "fromFingerprint": "sha256:b8e1a4865281286b2290c9c73714bb0e5f2e17be821ed4b5e8a4029a3a5ea384",
+    "fromFingerprint": "sha256:badf26673396d93defd311e9ea96b3d9b0766ab197a0f483957245f778debd98",
     "toSchema": "snoredex-collector-catalogue",
     "toSchemaVersion": "1.0.0",
-    "toFingerprint": "sha256:a0f6e168e96cda758e30732fc3e87b8ca86b4956a9314d4cd0ec48e7bacd6d93",
+    "toFingerprint": "sha256:c2178a77d3f181fcb455a8073d75e30057702f2baeb42acc1e6263fc747fba3d",
     "cumulative": true
   },
   "catalogueTransitions": [
@@ -924,7 +924,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a0f6e168e96cda758e30732fc3e87b8ca86b4956a9314d4cd0ec48e7bacd6d93",
+      "toFingerprint": "sha256:c2178a77d3f181fcb455a8073d75e30057702f2baeb42acc1e6263fc747fba3d",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:3298f2574d6b35c9a5f93e6de6189127ee741c1d78aace39d12b67c286b8854f",
       "cumulative": true,
@@ -7959,12 +7959,11 @@
             "item-ab69c864-e5e8-5869-b342-83d1fcfc30f8"
           ],
           "toItemIds": [
-            "item-7d7be8c1-5048-5a5e-990c-cedbdb381335",
-            "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
+            "item-7d7be8c1-5048-5a5e-990c-cedbdb381335"
           ],
-          "changeKind": "split-1:N",
-          "automaticStateAction": "none",
-          "reconciliation": "requires-user-resolution"
+          "changeKind": "rekey-1:1",
+          "automaticStateAction": "preserve",
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-abbc406b-c097-5426-9c37-9aec7e4d97de",
@@ -11977,7 +11976,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a0f6e168e96cda758e30732fc3e87b8ca86b4956a9314d4cd0ec48e7bacd6d93",
+      "toFingerprint": "sha256:c2178a77d3f181fcb455a8073d75e30057702f2baeb42acc1e6263fc747fba3d",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:c9b59276dadaf321b39ada5d17eaea74c4beecd00f8dc0cae0a46fc37afb8f15",
       "cumulative": true,
@@ -18987,12 +18986,11 @@
             "item-ab69c864-e5e8-5869-b342-83d1fcfc30f8"
           ],
           "toItemIds": [
-            "item-7d7be8c1-5048-5a5e-990c-cedbdb381335",
-            "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
+            "item-7d7be8c1-5048-5a5e-990c-cedbdb381335"
           ],
-          "changeKind": "split-1:N",
-          "automaticStateAction": "none",
-          "reconciliation": "requires-user-resolution"
+          "changeKind": "rekey-1:1",
+          "automaticStateAction": "preserve",
+          "reconciliation": "one-to-one-preserve"
         },
         {
           "fromItemId": "item-abbc406b-c097-5426-9c37-9aec7e4d97de",
@@ -23116,7 +23114,7 @@
       ],
       "toSchema": "snoredex-collector-catalogue",
       "toSchemaVersion": "1.0.0",
-      "toFingerprint": "sha256:a0f6e168e96cda758e30732fc3e87b8ca86b4956a9314d4cd0ec48e7bacd6d93",
+      "toFingerprint": "sha256:c2178a77d3f181fcb455a8073d75e30057702f2baeb42acc1e6263fc747fba3d",
       "compatibility": "compatible-data-only",
       "rollbackFingerprint": "sha256:7f88c3c6dffc4b1fe73c868cd6be1baaa36116129b5217eaa1f17d590bd47d81",
       "cumulative": true,
@@ -37227,14 +37225,6 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "pgo-055-english-none-holo",
-      "toItemIds": [
-        "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
       "fromItemId": "pgo-055-english-none-holo-booster-set-pokemon-go",
       "toItemIds": [
         "item-37eec489-2239-5124-aa02-18835b41139d"
@@ -40411,14 +40401,6 @@
       "automaticStateAction": "preserve"
     },
     {
-      "fromItemId": "svp-051-english-none-holo",
-      "toItemIds": [
-        "item-ec43af7e-76d0-5709-92e5-26d6fa207dc9"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
       "fromItemId": "svp-051-english-none-holo-elite-trainer-box-pokemon-151-elite-trainer-box",
       "toItemIds": [
         "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085"
@@ -41334,14 +41316,6 @@
       "fromItemId": "unp-no-number-japanese-none-holo-speckled",
       "toItemIds": [
         "item-b8ee4e09-36fe-5d18-a6cc-96bec13637ed"
-      ],
-      "changeKind": "rekey-1:1",
-      "automaticStateAction": "preserve"
-    },
-    {
-      "fromItemId": "viv-131-english-none-holo",
-      "toItemIds": [
-        "item-5ab48d9c-100b-5e06-ba1b-f74104213f44"
       ],
       "changeKind": "rekey-1:1",
       "automaticStateAction": "preserve"
@@ -46391,13 +46365,6 @@
         ]
       },
       {
-        "legacyChecklistId": "pgo-055-english-none-holo",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
-        ]
-      },
-      {
         "legacyChecklistId": "pgo-055-english-none-holo-booster-set-pokemon-go",
         "disposition": "projected",
         "targetItemIds": [
@@ -48890,13 +48857,6 @@
         ]
       },
       {
-        "legacyChecklistId": "svp-051-english-none-holo",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-ec43af7e-76d0-5709-92e5-26d6fa207dc9"
-        ]
-      },
-      {
         "legacyChecklistId": "svp-051-english-none-holo-elite-trainer-box-pokemon-151-elite-trainer-box",
         "disposition": "projected",
         "targetItemIds": [
@@ -49664,13 +49624,6 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-b8ee4e09-36fe-5d18-a6cc-96bec13637ed"
-        ]
-      },
-      {
-        "legacyChecklistId": "viv-131-english-none-holo",
-        "disposition": "projected",
-        "targetItemIds": [
-          "item-5ab48d9c-100b-5e06-ba1b-f74104213f44"
         ]
       },
       {
@@ -52751,8 +52704,7 @@
         "targetItemIds": [
           "item-07516c6b-12c5-5579-af26-f8706499a8fc",
           "item-37eec489-2239-5124-aa02-18835b41139d",
-          "item-7d7be8c1-5048-5a5e-990c-cedbdb381335",
-          "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
+          "item-7d7be8c1-5048-5a5e-990c-cedbdb381335"
         ],
         "reason": null
       },
@@ -52935,8 +52887,7 @@
         "disposition": "projected",
         "targetItemIds": [
           "item-85d569de-bd2a-51f6-a00e-7d870e35b60f",
-          "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085",
-          "item-ec43af7e-76d0-5709-92e5-26d6fa207dc9"
+          "item-d8a77dec-1a8d-55a7-910c-7f72d0e28085"
         ],
         "reason": null
       },
@@ -53041,8 +52992,7 @@
         "targetItemIds": [
           "item-00aed8d8-829f-567f-9f95-e50bcb827fd2",
           "item-01487d2d-b352-5287-acda-1be9e4620cb7",
-          "item-2c2df99c-323f-57b4-82d4-8220b8e7b430",
-          "item-5ab48d9c-100b-5e06-ba1b-f74104213f44"
+          "item-2c2df99c-323f-57b4-82d4-8220b8e7b430"
         ],
         "reason": null
       },
@@ -58448,11 +58398,6 @@
         "targetItemId": "item-e58d20c3-0043-57f3-afa6-529d0cd6987e"
       },
       {
-        "physicalPrintingId": "PHYSICAL:PRINTING:65eaeed211fff257a548af66",
-        "disposition": "projected",
-        "targetItemId": "item-eb2fa93b-ee67-5571-88c0-c90af2057d83"
-      },
-      {
         "physicalPrintingId": "PHYSICAL:PRINTING:65ef67fb1eb82d0db0fdab58",
         "disposition": "projected",
         "targetItemId": "item-4320a985-66ec-52e9-8149-bce9099f4c1b"
@@ -59201,16 +59146,6 @@
         "physicalPrintingId": "PHYSICAL:PRINTING:bc0d883c97eb0d03d0fbbc48",
         "disposition": "projected",
         "targetItemId": "item-5b3bf265-4715-577a-927b-2168b61b0f08"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:PRINTING:bcd2b7944726e7a35545afbc",
-        "disposition": "projected",
-        "targetItemId": "item-5ab48d9c-100b-5e06-ba1b-f74104213f44"
-      },
-      {
-        "physicalPrintingId": "PHYSICAL:PRINTING:bd3ce37367f8e92bbabd86aa",
-        "disposition": "projected",
-        "targetItemId": "item-ec43af7e-76d0-5709-92e5-26d6fa207dc9"
       },
       {
         "physicalPrintingId": "PHYSICAL:PRINTING:bf0e4553a710e29792bbea61",
@@ -60174,9 +60109,9 @@
       }
     ],
     "summary": {
-      "legacyChecklistRows": 901,
+      "legacyChecklistRows": 898,
       "cardReleases": 629,
-      "physicalPrintings": 925,
+      "physicalPrintings": 922,
       "cardReleasesWithoutCollectorItem": 0
     }
   }

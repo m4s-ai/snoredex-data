@@ -9,6 +9,7 @@ import json
 import sys
 import tempfile
 from pathlib import Path
+from copy import deepcopy
 
 ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT = ROOT / "verification" / "finish_tcgdex_snapshot.json"
@@ -33,8 +34,65 @@ def load_finish_source_verifier():
     return module
 
 
+def assert_product_scoped_holo(unit, case):
+    holos = [printing for printing in unit['printings'] if printing['finish'] == 'holo']
+    assert not any(not p.get('distribution') and not p.get('markings') and not p.get('foilPattern')
+                   for p in holos), 'generic Holo must not duplicate existing product-backed identities'
+    base = [p for p in holos if p['mappedVariants'] == [case['variant']]
+            and (p.get('distribution') or {}).get('kind') == case['expectedDistributionKind']]
+    assert len(base) == 1, 'positive field evidence must attach to exactly one existing base identity'
+    assert case['sourceUrl'] in {source.get('url') for source in base[0]['sources']}
+    assert all(case['sourceUrl'] not in {source.get('url') for source in p['sources']}
+               for p in holos if p['mappedVariants'] == ['V2']), 'V1 evidence cannot corroborate V2'
+
+
+def verify_product_scoped_refinement(finishes):
+    fixture = json.loads((ROOT / 'verification/evidence/issue-438-finish-review-20261102/product-refinement-regression.json').read_text(encoding='utf-8'))
+    context = finishes._load_finish_context()
+    context.update(tcgdex_data={url: record['payload'] for url, record in context['snapshot_document']['records'].items()}, fetch_errors={})
+    for case in fixture['cases']:
+        record = case['record']
+        assert finishes.json_hash(record['payload']) == record['contentHash']
+        assert record['payload']['variants']['holo'] is True
+        assert any((row.get('thirdParty') or {}).get('cardmarket') == case['cardmarketProductId']
+                   for row in finishes.tcgdex_regular_details(record['payload'], 'holo'))
+        card = context['cards_by_product'][(case['setCode'], case['number'], case['variant'])]
+        product_id = case['cardmarketProductId']
+        assert card['imageUrl'].endswith(f'/{product_id}/{product_id}.jpg')
+        context['tcgdex_data'][case['sourceUrl']] = record['payload']
+    finishes._prepare_finish_indexes(context)
+    for case in fixture['cases']:
+        key = (case['setCode'], case['number'], case['language'])
+        result = finishes._build_finish_unit(context, 1, key)
+        assert_product_scoped_holo(result, case)
+        assert finishes._build_finish_unit(context, 1, key) == result, 'replay must not accumulate evidence'
+        reordered = deepcopy(context)
+        overrides = reordered['overrides_by_group'][(case['setCode'], case['number'])]
+        overrides.reverse()
+        for override in overrides:
+            if 'printings' in override:
+                override['printings'].reverse()
+        other = finishes._build_finish_unit(reordered, 1, key)
+        assert_product_scoped_holo(other, case)
+        def identities(unit):
+            return {finishes.printing_signature(p): {source.get('url') for source in p['sources']}
+                    for p in unit['printings']}
+        assert identities(result) == identities(other), 'source ordering must preserve identity/provenance'
+        seeded = deepcopy(result)
+        seeded['printings'].append({'finish': 'holo', 'distribution': None, 'markings': None,
+                                   'foilPattern': None, 'mappedVariants': [case['variant']],
+                                   'sources': [{'url': case['sourceUrl']}]})
+        try:
+            assert_product_scoped_holo(seeded, case)
+        except AssertionError as error:
+            assert 'generic Holo' in str(error)
+        else:
+            raise AssertionError('seeded duplicate verified printing escaped the regression')
+
+
 def main() -> None:
     finishes = load_finishes()
+    verify_product_scoped_refinement(finishes)
     document = json.loads(SNAPSHOT.read_text(encoding="utf-8"))
     records = document.get("records", {})
     expected = {
