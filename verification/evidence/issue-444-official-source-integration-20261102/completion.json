@@ -63,14 +63,14 @@
     "L3": "Final delivery execution recorded in external gate log and exact-head PR checks"
   },
   "delivery": "Integration inputs and checkpoint recorded here; final L3 execution is evidenced by the exact-head PR checks and external gate log. No merge or deployment authorized.",
-  "collectorConservation": "Current main collector payloads and owner decisions preserved; only discovery metadata/fingerprint changes",
+  "collectorConservation": "All 978 current-main collector payloads and current SPEC-0673/owner decisions preserved; discovery metadata/fingerprint only",
   "validationCommands": [
     "python verification/test_card_discovery.py",
     "python scripts/regen.py",
     "python scripts/source_adapters.py --check --full-refresh",
     "python scripts/card_discovery.py --check --full-refresh"
   ],
-  "integratedBase": "e7d3ef9220babd426b32b5f4bb581f534d7ff372",
+  "integratedBase": "5db7328c3dcb338ea98c974740f2bac9e1e862c3",
   "acquisitionRunId": "20261102T075609Z",
   "replayReason": "Capability fixture paths moved into the existing raw-byte preservation lane; acquisition inputs and all original response/retrieval metadata unchanged."
 }
