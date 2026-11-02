@@ -576,3 +576,26 @@ equivalence of `review_findings.py`, and the `memo-seed` reference run on every 
 
 *Issue #460.*
 
+## The gate audited what CI fetched, not what GitHub publishes
+
+**Trap:** *published history is every ref GitHub serves, including each pull request's head, not just the
+refs a CI checkout fetches.*
+
+P6 scans every blob reachable from `--all`. A CI checkout with `fetch-depth: 0` fetches branches and
+tags, never `refs/pull/*`, so P6 had never seen what pull requests alone still reach. GitHub keeps
+`refs/pull/N/head` for every pull request, after its branch is deleted, and serves it publicly once the
+repository is public. Early pull requests carried pass scripts with the owner's Windows profile path;
+the branches were rewritten, the pull heads were not and cannot be from the repository side.
+
+It surfaced in a clone that happened to fetch the pull namespace: 82 hits that CI could not
+reproduce. That looked like a local artifact, and the first fix proposed narrowing P6 to branches and
+tags (#465). Checking what the extra refs actually were showed the opposite: CI was the one with the
+blind spot. The owner accepted the exposure instead of a GitHub Support removal, and the acceptance is
+pinned to the 82 exact blobs and the one finding, so anything new in a pull head still fails.
+
+**Now guarded by** the post-push audit, which fetches `refs/pull/*/head` before P6 (asserted by
+`verification/test_gate_handoff.py`), and by `REVIEWED_PULL_HEAD_BLOBS` with its cases in
+`verification/test_sensitive_scan.py`.
+
+*Issue #467.*
+

@@ -89,6 +89,11 @@ def main() -> int:
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "post-push" in release and "P6/P7" in release
     assert "python verification/review_findings.py --scope publication 2>&1" in release
+    # #467: the post-push P6 audit covers GitHub's pull-request heads, mapped under `/pull/`.
+    post_push = release.split("  post-push:", 1)[1]
+    assert "git fetch --no-tags origin '+refs/pull/*/head:refs/remotes/origin/pull/*/head'" in post_push
+    assert post_push.index("Fetch published pull-request heads") < post_push.index(
+        "Audit the published commit history")
     assert "verification/gate_manifest.py" in release
     assert "actions/upload-artifact@v4" in release
     assert "name: pages-artifact\n          path: _site\n          include-hidden-files: true" in release

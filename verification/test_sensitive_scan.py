@@ -95,6 +95,30 @@ def verify_tree(root: Path) -> None:
     assert f"clean.txt: {HOME}" in hits, "a dirty tracked file is read from the working tree"
 
 
+def verify_reviewed_history(root: Path) -> None:
+    """#467: only the owner-accepted finding in the exact pinned blob is accepted."""
+    profile = "C:" + "\\" + "Users" + "\\"
+    path = root / "old.ps1"
+    path.write_text(f"Set-Location {profile}someone\\x\n# contact {MAIL}\n", encoding="utf-8")
+    other = root / "other.ps1"
+    other.write_text(f"Push-Location {profile}else\n", encoding="utf-8")
+    git(root, "add", "old.ps1", "other.ps1")
+    git(root, "commit", "-q", "-m", "old passes")
+    pinned = git(root, "rev-parse", "HEAD:old.ps1").strip()
+    original = scan.REVIEWED_PULL_HEAD_BLOBS
+    scan.REVIEWED_PULL_HEAD_BLOBS = frozenset({pinned})
+    try:
+        hits = scan.scan_history(root)[2]
+    finally:
+        scan.REVIEWED_PULL_HEAD_BLOBS = original
+    assert scan.REVIEWED_PULL_HEAD_PROFILE_PATH == profile
+    assert not any(hit.startswith(pinned[:10]) and hit.endswith(profile) for hit in hits), hits
+    assert any(hit.startswith(pinned[:10]) and hit.endswith(MAIL) for hit in hits), \
+        "another finding in an accepted blob still fails"
+    assert any("other.ps1" in hit and hit.endswith(profile) for hit in hits), \
+        "the same path in any other blob still fails"
+
+
 def verify_shallow(source: Path, target: Path) -> None:
     git(target.parent, "clone", "-q", "--depth", "1", source.as_uri(), str(target))
     assert scan.scan_history(target) == (True, 0, [])
@@ -108,9 +132,10 @@ def main() -> int:
         make_repo(root)
         verify_history(root)
         verify_tree(root)
+        verify_reviewed_history(root)
         verify_shallow(root, Path(folder) / "shallow")
     print("sensitive scan passed: findings, memo reuse, corrupt/disabled memo, size and path limits, "
-          "dirty tree files, shallow clone")
+          "dirty tree files, shallow clone, owner-accepted history blobs")
     return 0
 
 

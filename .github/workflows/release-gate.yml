@@ -246,6 +246,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      # GitHub serves every pull request's head permanently, so they are published history too
+      # (#467). Mapped under a `/pull/` path: P6 (`--all`) scans them, P7's merge-ref filter skips
+      # them as before.
+      - name: Fetch published pull-request heads
+        run: git fetch --no-tags origin '+refs/pull/*/head:refs/remotes/origin/pull/*/head'
+
       # Restore only: memo-seed alone saves, so a partial cache never shadows the full one.
       - name: Restore main memo
         uses: actions/cache/restore@v4

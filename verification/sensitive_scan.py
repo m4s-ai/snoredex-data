@@ -48,6 +48,104 @@ PUBLIC_CONTACT_RESPONSE_HASHES = frozenset({
     "3332426eecddfdf9641675600ae6df045c2e432bbe51a4ee1282265c59ad0432",
 })
 
+# Owner decision 2026-11-02 (#467): these exact blobs are old `verification/passes/*.ps1` versions that
+# GitHub still serves through `refs/pull/N/head` of early pull requests. They carry the owner's
+# Windows profile path, not a credential. The branches were rewritten long ago, but pull-request
+# heads cannot be rewritten from the repository. The owner accepted this exposure instead of a
+# GitHub Support removal. Only the profile-path finding in these exact bytes is accepted. Any other
+# finding in them, and the same path in any other blob, still fails P6.
+REVIEWED_PULL_HEAD_PROFILE_PATH = "C:\\Users\\"
+REVIEWED_PULL_HEAD_BLOBS = frozenset({
+    "037952dfb4f3273a483ebf2746e4e1fc1d31dc19",
+    "0767f443436aae02bbec642a543983eada696a63",
+    "09784f3d9624a005f091ec1b319c9b33bec7acb1",
+    "0aa4d18e19f94be215662a9b27a94eacc56e9098",
+    "0acbbf5d6b5da22f428ce8fb6fe1b012ec7a0ddb",
+    "0d6791bc2e35efb947d9a9ff3060865cf8bd4a16",
+    "0d9dba0e8849916e6e9abdc6a0ec159d616d2dc1",
+    "0faf388e221fcbff9568b357d7b0ed03dc3ed497",
+    "14ab2fca2e49dcd754fdbdd98f31d6d6c9188ccc",
+    "2448b4c3812e304041e159339b0e3073559ab914",
+    "2458569a942327774e26877d0aa785b0fe0ba4e1",
+    "297757e141c6b5e705f48daef4819d2e2e994818",
+    "2cc9481247eb3365320c3478b1a06eafeab0fce9",
+    "2f24d952405bc5937ac0b828c611e3cb9b1269f1",
+    "3199cf048b069a67475184d8e215434764011800",
+    "37a2d3ccb1b26cd90d0918752fbc50045cc7961e",
+    "38327362afbbd7dfdc22ae0dfd24a0841be0d1e1",
+    "39317494367b19b39dc4dd6809b7b658bef40500",
+    "3aa17cda40c3a963731320f4591d2293d5a1a701",
+    "3de12e618a77a27e987f306c397a12b94055728a",
+    "3f1a543b770e02a7d42c52eb9d22cb553261e0e6",
+    "3f53ca860fdcabbc668dcb71ba2e2f995868d4df",
+    "3fa811591a953df83bbfbcbcee15923e799a0aba",
+    "411c8dcf0428f56d9269c59fe72c9da549785857",
+    "46bb103182c9a8516df9657356e9b26319f776da",
+    "4bb58e77fda22aac6824b5df43af1d63375900bd",
+    "4d501b0294c0635618dba28545cebc6c37d252e5",
+    "4ddbe389f9d43a0a7b8160b57fb65d58dc4e06bf",
+    "53083e4874609c42ac89b845b09f13c84d7046d3",
+    "61ada73c1ce6fc14e1b8297933d10013c63fea2f",
+    "68085351871cd724ee001dc38992dd6db0a01775",
+    "693ab4247ec7753b84e1a314a867d619a34bc687",
+    "6b0255fd3c1b99ee578a5d9defe0c65408bb2130",
+    "709fc0d3b3284dc9a8b38b697707e64f7c3aa56f",
+    "73a9ed9b45b3ddb6815e0607113514efdba4d87d",
+    "798f120d7c204ff8b4aecd1b2e272db0470f3e59",
+    "7b4bcce1b8a306709703cd2a1b715f0ca00f69f2",
+    "7fc8481a2dcea468f0529e1259d3d4efdaa558bb",
+    "80a0e907f5bf55f87ab3757746967ec8ca75996d",
+    "826799fc49db98488df687689dfbbda7b5e56015",
+    "84dbd498bfe48d55dcd1657bd31daef4ce596496",
+    "853982371941d67f86dc8f15eddfd6b81e398f3c",
+    "8621e92bad1c6015ff746417c3692cbfb4004126",
+    "887380c30ee25cbf0da3c3c4bd5c4938e0646c76",
+    "8f75223d3a8d1871d7d867bbf337997404dd17da",
+    "91561ed763bf9e4428b4dd4a5b99bf72032f78d6",
+    "91a7e6bc5546e01fb7dabda7bad25719ac6a62af",
+    "9496c0df1402377d03c72c1adfb2baa97070370c",
+    "9627c87f2ed968186d71187c100f6a6a6e8a8a14",
+    "9cea82d1e8b791687c1503fede2ed460cdbc303a",
+    "9db898064813d37d854c7f0a69f385bdd27767e0",
+    "a06fdb07724a1b4a296c215318185bce811a5522",
+    "a489b252602a29ab6a8b5373de98e330990d654f",
+    "a9e1b075ac66f4baa892bbd833794fd311d8d188",
+    "ac288e6536c35b3ff4cc67022ac001c188cc2850",
+    "b57167b29484bc4bc9b6a88cce42f58122ba2c5e",
+    "b5ac3ac069bbb37e9b7d0444621d1a3118395876",
+    "b62901f557c45d814ef27b37d4c7f653d1763026",
+    "be378ab294177473dedc3c6c09b76d3d91694f92",
+    "c748e977d4cc13059cbdc90ea3e1aba89cbdcd54",
+    "c7fae5c789a35d6ce84fd894c61fdcbda54524bb",
+    "c9d1dcecadf7dc896f7e9e0fbcf83cd6286f7d6f",
+    "cbfb60e9835c05e8a912dd53f8ec88b15547d317",
+    "cc13b2ed3336aa80ed7739bfe13207a75fa582b4",
+    "ccbb2f368f888b8b71f3644fad279248d6adf35f",
+    "cd6698a26a36dd4d6efcc0727078772a311782c8",
+    "d445b93e024b35ffe8c04f50cc48e340bd3fa113",
+    "d4d51d41e0344579c2ba70b9f3833e4b87e6b8b6",
+    "d5055a4a21adf0088e866ad72ec613ec63922365",
+    "d8ac9e5b515a7eafb52ce0fc3047e578fe74c7f8",
+    "da34281efe25611e153d30cb9111d841f0d60daa",
+    "e4797e641aab2a2cf2e6f4606f4f2e96dbd2eed9",
+    "e77b8f992d4d3872efb2ff83b9d67a3c4a367830",
+    "e8deb6be564f2996f1568b5d6c7f22016c7b9607",
+    "ecdebc3d6913f07b0550315a9855eed464294364",
+    "ede58eee843edeacace19566d7d95b830aed404b",
+    "eff6ecaad01edf263968c7127a4568433a58f624",
+    "f1d625b8cd6db79ac0c2080c5e423c95ec4a8893",
+    "f1dbdf31833fbd208e3851ef2772c218f3403801",
+    "fbe8e74a482b542f6e668618c76a2d0871f70146",
+    "fd088df4bdfe2ce4f5b4c3d9fae40ce42e4f5b12",
+    "ff7c8dd5c03b492c46f2cb57bf826a33a7ec4b7b",
+})
+
+
+def reviewed_history_finding(sha: str, finding: str) -> bool:
+    """Whether the owner accepted this exact finding in this exact blob (#467)."""
+    return finding == REVIEWED_PULL_HEAD_PROFILE_PATH and sha in REVIEWED_PULL_HEAD_BLOBS
+
+
 NON_EMAIL_PATTERN = re.compile(
     r"(?:api[_-]?key|passwd|password|Bearer\s+[A-Za-z0-9._-]{8,}|Authorization:|Cookie:)"
     r"|C:\\Users\\|(?<![A-Za-z0-9._-])/(?:Users/[a-z]|home/[a-z]+/)",
@@ -253,7 +351,8 @@ def scan_history(root: Path) -> tuple[bool, int, list[str]]:
     except (OSError, subprocess.CalledProcessError):
         return True, 0, ["Git history could not be read"]
     hits = {f"{sha[:10]}:{path or '(unknown path)'}: {finding}"
-            for sha, path in candidates for finding in memo.get(sha, [])}
+            for sha, path in candidates for finding in memo.get(sha, [])
+            if not reviewed_history_finding(sha, finding)}
     return False, len(candidates), sorted(hits)
 
 
