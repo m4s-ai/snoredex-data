@@ -23,7 +23,7 @@ existing manifest/completion record current; do not create another queue or rese
 
 | Boundary | Work and verification | Completion claim |
 |---|---|---|
-| Start | Fetch current main, check collisions, prepare image/OCR/decoder tools. Establish L3 once before mutation, or reuse a recorded successful full gate for the exact unchanged base/tree. Record pre-existing failures. | Known starting state, not a gate per image. |
+| Start | Fetch current main, check collisions, prepare image/OCR/decoder tools. Run `python scripts/regen.py --check` once before mutation; steps whose observed inputs are unchanged since they passed are replayed from the [verification memo](#verification-memo). Record pre-existing failures. | Known starting state, not a gate per image. |
 | Intake | Inspect and retain all supplied inputs, use one reviewed manifest for related photos, and validate through the canonical importer. Apply claims/provider mappings only within their evidence contracts. | Retained and validated; consumer integration may still be pending. |
 | Checkpoint | Run the owning `scoped_regen.py --lane …` once after accumulated edits, or when the updated consumers are needed. Check exact references and unresolved candidates. | Affected evidence consumers current; L3 still pending. |
 | Delivery | Before handing off a completed package/PR for merge or export, run `python scripts/regen.py` once and review the complete diff. Use `--check` instead only if all projections are already current. | Full local L3; CI still checks the actual PR head. |
@@ -300,10 +300,11 @@ release-gate.yml (workflow_call, Linux + Windows)
 
 The reusable gate is mode-sensitive: draft PRs skip its gate job, ready PRs run deterministic L3,
 and workflow-call/manual release paths run L4 live/browser/publication checks. The full retained
-source/card-discovery history checks run on Linux for L4 and for ready pull requests changing
-retained-run or projection-input paths. A push to `main` runs only the separate publication/history
-audit, including P6/P7. The reusable pull-request gate does not install browser dependencies;
-UI-relevant paths, including on draft PRs, select
+source/card-discovery history checks run on Linux for L4 and for every ready pull request, where
+the [verification memo](#verification-memo) replays them when nothing they read changed. A push to
+`main` runs the separate publication/history audit, including P6/P7, and the `memo-seed` reference
+run on both platforms. The reusable pull-request gate does not install browser dependencies;
+UI-relevant paths on ready (non-draft) PRs select
 `.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
 downloads the artifact produced after the L4 gate and rejects missing, stale, or
 fingerprint-disagreeing handoffs before deployment. The explicit lists are deployment and UI
@@ -344,7 +345,8 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/discovery_cycle.py` acquires/validates a retained source-first run.
 - `scripts/source_adapters.py --check --full-refresh` and
   `scripts/card_discovery.py --check --full-refresh` validate every retained discovery run in the
-  L4 history lane; their default `--check` projects only the selected run and direct predecessor.
+  L4 lane and on every pull request (through `scripts/check_memo.py run`, so an unchanged history is
+  replayed); their default `--check` projects only the selected run and direct predecessor.
 - `scripts/measure_discovery.py` reports retained-run selection, raw I/O bytes, parser cost and
   projection cost for both modes without changing generated files.
 - `verification/verify_finish_sources.py` performs the explicit live finish-source check.
@@ -377,6 +379,38 @@ a passing check.
 
 They are invoked by a use-case or release workflow, not silently by an unrelated data
 projection.
+
+#### Verification memo
+
+A gate step that already passed with exactly the same inputs is not run again (#460).
+`scripts/check_memo.py` runs each `regen.py`, `scoped_regen.py` and CI retained-run step under the
+tracer in `scripts/memo_trace/sitecustomize.py`, which records the repository files the step opened,
+the directories it listed, the paths whose existence it probed, the SQLite files it connected to and
+the Git commands it ran, including those of its Python child processes. A later run replays a step
+only when every recorded input digest, listing, probe and replayed Git output is unchanged.
+
+- **Key:** step command and phase, memo engine and tracer bytes, Python version, platform, Git
+  version and the environment variables a step may read (`PYTHON*`, `SNOREDEX_*`, `GIT_*`,
+  locale); `verification/test_check_memo.py` fails when a script reads any other variable.
+- **Fail-safe:** a step is never memoized when it fails, uses the network, starts a program other
+  than Python or Git, runs Git with `--batch`/`--stdin` or a writing subcommand, starts a Python
+  child the tracer cannot see (`-I`/`-E`/`-S`, a replaced environment, `os._exit` after `fork`), or
+  writes inside the repository in check mode. Cached bytecode counts as its source file.
+- **Generators:** a REGEN entry also pins its outputs and is stored only after a fully green
+  `regen.py`; scoped lanes reuse generator entries but store only observational ones.
+- **Store:** `<git-common-dir>/snoredex-memo/v1/`, outside the working tree, so the read-only guard
+  is unaffected. Entries expire after 14 days; `python scripts/check_memo.py clear` or deleting the
+  directory only costs time. The P4/P6 scanner keeps a blob memo there too
+  (`verification/sensitive_scan.py`): a Git blob is immutable, so a blob it already read under the
+  same scanner bytes is never read again.
+- **Modes:** `--memo use` (default), `--memo refresh` (run everything, rewrite entries) and
+  `--memo off` (reference run, no memo and no blob memo). L4 always runs `off`; each push to `main`
+  runs `refresh` in the `memo-seed` job, which saves the cache pull requests restore. CI caches
+  `.git/snoredex-memo` per OS and branch and saves it even after a failure, because only passed
+  steps are stored.
+- **Parallelism:** `regen.py --jobs N` (default up to 4) runs CHECK and TESTS steps concurrently and
+  prints their output in list order; REGEN stays serial, and determinism failures still stop the run
+  before TESTS.
 
 ## 4. Use-case contracts
 

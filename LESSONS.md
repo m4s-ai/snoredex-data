@@ -553,3 +553,26 @@ did not exist. Both came from the document and the workflow describing different
 content stays covered by the two `--check` steps, which is the property that can actually hold.
 
 *PR #130.*
+
+## The gate re-read what could not have changed
+
+**Trap:** *a gate step whose inputs are unchanged since it passed has nothing new to say.*
+
+The core gate grew from about a minute (August) to nine minutes (November) without any single
+step becoming wrong. The publication scan streamed every Git blob ever committed through Python on
+every run (14 GB, most of it SQLite and graph versions it then discarded), so it slowed with each
+commit: 49 s to 125 s in CI within nine days. The physical-evidence check parsed the 12 MB graph
+once per photographed specimen, 107 times per run. And every run executed all steps although a
+typical change touched a handful of files.
+
+None of that was a correctness problem, which is why nothing reported it; it only made each
+evidence intake slower than the evidence. The fix is the rule in the trap: a blob is immutable, so
+it is scanned once per scanner version, and a step is skipped only when everything it was observed
+to read is byte-identical — never on a declared dependency list, which would drift like any prose.
+
+**Now guarded by** `verification/test_check_memo.py` and `verification/test_sensitive_scan.py`
+(the memo must miss on every kind of change and never store an unobservable step), the cold/warm
+equivalence of `review_findings.py`, and the `memo-seed` reference run on every push to `main`.
+
+*Issue #460.*
+

@@ -27,12 +27,14 @@ try:
         tree_paths as observed_tree_paths,
         tree_snapshot,
     )
+    from scripts import check_memo
 except ModuleNotFoundError:  # Direct execution puts scripts/ rather than the repo on sys.path.
     from workflow_observation import (  # type: ignore[no-redef]
         changed_paths as observed_changed_paths,
         tree_paths as observed_tree_paths,
         tree_snapshot,
     )
+    import check_memo  # type: ignore[no-redef]
 
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
@@ -89,7 +91,7 @@ def make_run_id(lane: str, manifest: dict[str, Any], commit: str) -> str:
 
 
 def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
-             dry_run: bool) -> dict[str, Any]:
+             dry_run: bool, session: check_memo.MemoSession | None = None) -> dict[str, Any]:
     command = step["command"]
     if dry_run:
         return {"status": "not-run", "reason": "dry-run", "durationMs": 0.0}
@@ -98,22 +100,35 @@ def run_step(step: dict[str, Any], include_live: bool, include_browser: bool,
     if step.get("browser") and not include_browser:
         return {"status": "not-run", "reason": "browser disabled; pass --include-browser", "durationMs": 0.0}
 
+    session = session or check_memo.MemoSession(ROOT, "off")
+    # A step that declares projection writes is a generator; everything else is observational.
+    # Lanes reuse generator memo entries but store only observational ones (#460): a generator
+    # entry is written only by a fully green regen.py run.
+    phase = "write" if step.get("writes") else "check"
     started = time.perf_counter()
-    process = subprocess.run(
-        [sys.executable, *command], cwd=ROOT,
-        env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8",
-             "PYTHONDONTWRITEBYTECODE": "1", "GIT_OPTIONAL_LOCKS": "0"},
-        text=True, encoding="utf-8", stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    outcome = session.execute(
+        phase, command,
+        {**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8",
+         "PYTHONDONTWRITEBYTECODE": "1", "GIT_OPTIONAL_LOCKS": "0"},
+        capture=True,
     )
-    return {
-        "status": "passed" if process.returncode == 0 else "failed",
-        "returnCode": process.returncode,
+    return step_result(outcome, started)
+
+
+def step_result(outcome: check_memo.StepOutcome, started: float) -> dict[str, Any]:
+    result = {
+        "status": "passed" if outcome.returncode == 0 else "failed",
+        "returnCode": outcome.returncode,
         "durationMs": round((time.perf_counter() - started) * 1000, 1),
-        "outputTail": process.stdout[-2000:],
+        "outputTail": (outcome.output or "")[-2000:],
     }
+    if outcome.hit is not None:
+        result["memo"] = f"hit: unchanged since {outcome.hit['createdAt']}"
+    return result
 
 
-def execute_lane(lane: dict[str, Any], args: argparse.Namespace) -> tuple[list[dict[str, Any]], list[str]]:
+def execute_lane(lane: dict[str, Any], args: argparse.Namespace,
+                 session: check_memo.MemoSession | None = None) -> tuple[list[dict[str, Any]], list[str]]:
     results: list[dict[str, Any]] = []
     skipped = list(lane["skippedChecks"])
     previous_failed = False
@@ -122,7 +137,7 @@ def execute_lane(lane: dict[str, Any], args: argparse.Namespace) -> tuple[list[d
         if previous_failed:
             result = {"status": "not-run", "reason": "previous step failed", "durationMs": 0.0}
         else:
-            result = run_step(step, args.include_live, args.include_browser, args.dry_run)
+            result = run_step(step, args.include_live, args.include_browser, args.dry_run, session)
         if result["status"] != "not-run":
             after = tree_snapshot(ROOT)
             result["observedChangedPaths"] = sorted(observed_changed_paths(before, after))
@@ -147,6 +162,8 @@ def main() -> int:
     parser.add_argument("--include-live", action="store_true", help="execute manifest steps marked network=true")
     parser.add_argument("--include-browser", action="store_true", help="execute manifest steps marked browser=true")
     parser.add_argument("--dry-run", action="store_true", help="emit the lane plan without executing steps")
+    parser.add_argument("--memo", choices=check_memo.MODES, default="use",
+                        help="skip steps whose observed inputs are unchanged (#460); off runs everything")
     parser.add_argument("--out", type=pathlib.Path,
                         default=ROOT / "verification" / "cache" / "scoped-runs")
     args = parser.parse_args()
@@ -162,7 +179,9 @@ def main() -> int:
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
 
     started = time.perf_counter()
-    results, skipped = execute_lane(lane, args)
+    session = check_memo.MemoSession(ROOT, "off" if args.dry_run else args.memo)
+    results, skipped = execute_lane(lane, args, session)
+    session.commit(full_success=False)
 
     counts = collections.Counter(result["status"] for result in results)
     report = {
@@ -186,6 +205,7 @@ def main() -> int:
             "notRun": counts["not-run"], "durationMs": round(sum(row.get("durationMs", 0) for row in results), 1),
         },
         "steps": results,
+        "memo": session.summary(),
         "wallDurationMs": round((time.perf_counter() - started) * 1000, 1),
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -193,6 +213,7 @@ def main() -> int:
     print(f"scoped workflow: runId={run_id} lane={lane['id']} "
           f"{counts['passed']} passed, {counts['not-run']} not-run, {counts['failed']} failed; "
           f"report={report_path.relative_to(ROOT) if report_path.is_relative_to(ROOT) else report_path}; L3 not run")
+    print(session.summary())
     return 1 if counts["failed"] else 0
 
 

@@ -73,8 +73,17 @@ def main() -> int:
     assert "push:" in release and "branches: [main]" in release
     assert "github.event_name != 'pull_request'" in release
     assert "--full-refresh" in release
-    assert "bulbapedia_historical" in release
-    assert ".github/workflows/release-gate\\.yml" in release
+    # #460: every PR runs the retained-run validation through the memo instead of a path filter;
+    # L4 runs it without memo, and main seeds the memo for pull requests.
+    for script in ("source_adapters", "card_discovery"):
+        assert (f'check_memo.py run --memo "${{memo}}" -- scripts/{script}.py --check --full-refresh'
+                in release)
+        assert f"check_memo.py run --memo refresh -- scripts/{script}.py --check --full-refresh" in release
+    assert 'if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi' in release
+    assert 'python scripts/regen.py --check --memo "${memo}"' in release
+    assert "python scripts/regen.py --check --memo refresh" in release
+    assert "if: always() && env.GATE_LEVEL == 'L3'" in release
+    assert "path: .git/snoredex-memo" in release
     assert "Install browser test dependencies\n        if: runner.os == 'Linux' && github.event_name != 'pull_request'" in release
     assert "matrix:\n        os: [ubuntu-latest, windows-latest]" in release
     assert "runner.os == 'Linux' && github.event_name != 'pull_request'" in release

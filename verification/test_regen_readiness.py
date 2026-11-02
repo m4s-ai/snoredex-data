@@ -193,21 +193,21 @@ def check_stale_artifacts(scratch: pathlib.Path) -> None:
     originals = [(path, path.read_bytes(), path.stat().st_mtime_ns) for path, _, _ in TARGETS]
     for path, original, _ in originals:
         (scratch / path.name).write_bytes(original)
-    original_run = regen_module.run
+    original_step = regen_module.run_step
 
-    def isolated_run(cmd: list[str], label: str) -> bool:
-        attribute, name = targets[cmd[1]]
+    def isolated_step(session, phase: str, cmd: list[str], capture: bool, quiet: bool = False):
+        attribute, name = targets[cmd[0]]
         script = (
             "import pathlib, sys; "
             f"sys.path.insert(0, {str(ROOT / 'scripts')!r}); "
-            f"import {pathlib.Path(cmd[1]).stem} as module; "
+            f"import {pathlib.Path(cmd[0]).stem} as module; "
             f"module.{attribute} = pathlib.Path({str(scratch / name)!r}); "
             "sys.argv = [sys.argv[0], '--check']; raise SystemExit(module.main())"
         )
-        return original_run([sys.executable, "-c", script], label)
+        return original_step(session, phase, ["-c", script], capture, quiet)
 
     with patch.multiple(regen_module, ROOT=scratch, TESTS=[]), \
-            patch.object(regen_module, "run", isolated_run), \
+            patch.object(regen_module, "run_step", isolated_step), \
             patch.object(sys, "argv", ["regen.py", "--check", "--check-only",
                                       "scripts/evidence_semantics.py", "--check-only",
                                       "scripts/authoritative_graph.py"]):

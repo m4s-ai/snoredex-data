@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import parse_qs, quote, urlencode, urlsplit
 
+from file_digest import sha256_hex
 from authoritative_graph import printing_semantic_key as graph_printing_semantic_key
 from source_registry import provenance_url
 from reviewed_release_dates import apply_item_date, check_reviewed_targets, load_reviewed_dates
@@ -1532,7 +1533,7 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
             "assetId": aid,
             "path": relative,
             "url": ASSET_BASE_URL + quote(relative, safe="/"),
-            "sha256": sha256_bytes(path.read_bytes()),
+            "sha256": "sha256:" + sha256_hex(path),
             "mimeType": image_mime(path),
             "imageScope": scope,
             "altTextBasis": alt_text,
@@ -2442,7 +2443,7 @@ def validate_catalogue(
     for aid, asset in assets.items():
         path = ROOT / str(asset.get("path") or "")
         if check_asset_bytes and (
-            not path.is_file() or asset.get("sha256") != sha256_bytes(path.read_bytes())
+            not path.is_file() or asset.get("sha256") != "sha256:" + sha256_hex(path)
             or asset.get("mimeType") != image_mime(path)
         ):
             errors.append(f"asset bytes/hash/MIME differ: {aid}")
