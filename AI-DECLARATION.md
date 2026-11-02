@@ -15,7 +15,7 @@ This format is based on [AI-DECLARATION.md](https://ai-declaration.md/en/0.1.2/)
 
 ## Notes
 
-- Claude Code and OpenAI Codex have been used as human-directed copilot agents across architecture,
+- Claude Code, OpenAI Codex and Hermes Agent have been used as human-directed copilot agents across architecture,
   implementation, testing, documentation, review, issue remediation, and CI/CD configuration.
 - The repository owner defines the goals and evidence policy, supplies domain knowledge, reviews
   changes, and retains every legal, licensing, and publication decision.

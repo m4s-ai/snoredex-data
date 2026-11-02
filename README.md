@@ -394,6 +394,7 @@ All paths are relative to the repository root.
 | [`scripts/`](scripts/) | The generators — data, finish model, checklist, chronology, issue templates, site and publication artifact. |
 | [`site/`](site/) | Source CSS and JavaScript for the generated site. |
 | [`AGENTS.md`](AGENTS.md) · [`CLAUDE.md`](CLAUDE.md) | Canonical agent rules and the Claude import shim that loads them. |
+| [`RUNTIMES.md`](RUNTIMES.md) | Runtime-specific notes: instruction loading limits, skill discovery and attribution per agent runtime. |
 | [`HANDOVER.md`](HANDOVER.md) | Cold-start guide and repository map; priorities live in the issue tracker. |
 | [`verification/RESUME.md`](verification/RESUME.md) | Verification playbook — source techniques, corrections, dead ends. |
 | [`CONTRIBUTING.md`](CONTRIBUTING.md) | How to report a correction and how it is graded. |
