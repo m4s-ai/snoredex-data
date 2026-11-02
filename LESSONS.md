@@ -576,3 +576,28 @@ equivalence of `review_findings.py`, and the `memo-seed` reference run on every 
 
 *Issue #460.*
 
+## The Windows leg cannot report a path it cannot check out
+
+**Trap:** *a tracked file name Windows refuses fails the Windows gate before any check runs.*
+
+A retained seller photograph was filed as `s?-mirror__….jpg`, the `?` standing in for "number not
+readable". Linux accepts the name, so every local check and the Linux leg were green; Windows refuses
+`?` in a file name, so its checkout would have failed before `regen.py` could say why. Only a human
+review noticed. The same review found the batch README naming a private network address and port of
+the retrieval setup, which P4 did not look for at all.
+
+Both are now checked where every path and byte is visible: `X6` fails on any tracked path Windows
+cannot represent (reserved characters, device names, a trailing dot or space), and P4/P6 report
+private network endpoints (RFC 1918, with port) alongside the existing personal-path patterns.
+
+A gate fix has a limit, though. The same batch also narrowed P6 to branches and tags, because 82 hits
+appeared only in one clone. They were real: GitHub serves every pull request's head permanently, and
+those heads still carry content that was rewritten out of the branches. Narrowing the check would have
+turned a publication finding into a green gate; it was reverted, and the finding went to the owner
+(#467). Before treating a red publication check as an artifact, find out what the extra refs are.
+
+**Now guarded by** `X6` and the private-endpoint pattern in `verification/sensitive_scan.py`, with
+cases in `verification/test_sensitive_scan.py`.
+
+*PR #465.*
+

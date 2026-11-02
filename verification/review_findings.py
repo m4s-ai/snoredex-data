@@ -35,8 +35,8 @@ from typing import Any
 
 from checks import Check, Note, Suite
 from sensitive_scan import (  # noqa: F401 - re-exported for the findings harness
-    SENSITIVE_SCAN_EXEMPT, published_refs, reviewed_public_contact_literal,
-    reviewed_public_masking_literal, scan_history, scan_tree,
+    SENSITIVE_SCAN_EXEMPT, reviewed_public_contact_literal, reviewed_public_masking_literal,
+    scan_history, scan_tree,
 )
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -2488,11 +2488,29 @@ def _collect_g8(state: dict[str, Any]) -> dict[str, Any]:
                 f"{history_scanned} blobs. Public repository approval must remain false unless these are "
                 f"reviewed or history is rewritten. e.g. {history_hits[:4]}",
             )
+            def published_refs() -> list[str]:
+                """Every ref this repository publishes, minus GitHub's synthetic pull-request merge refs.
+
+                A `pull_request` workflow builds a `refs/pull/N/merge` commit that exists only to be tested.
+                Its identity fields belong to GitHub and to whoever opened the pull request, not to either
+                branch, so auditing them reports a finding nobody can fix by changing this repository.
+
+                This used to exempt exactly one commit — the one that happened to be `HEAD` — which made the
+                verdict depend on the checkout rather than on the repository: the same commit passed on the
+                Windows runner and failed on the Linux one, twice, on #49. Excluding the whole pull namespace
+                is what makes the check deterministic. Branches and tags are still audited in full, because
+                making a repository public publishes every one of them.
+                """
+                try:
+                    refs = subprocess.check_output(
+                        ["git", "for-each-ref", "--format=%(refname)", "refs/heads", "refs/tags",
+                         "refs/remotes"], cwd=ROOT, text=True
+                    ).split()
+                except (OSError, subprocess.CalledProcessError):
+                    return []
+                return [ref for ref in refs if "/pull/" not in ref]
             try:
-                # One definition of "published", shared with P6's reachability walk
-                # (`sensitive_scan.published_refs`): two copies of this filter is how the same commit
-                # ended up green under one check and red under the other.
-                audited = published_refs(ROOT)
+                audited = published_refs()
                 identity_fields = subprocess.check_output(
                     ["git", "log", "--format=%H%x00%ae%x00%ce"] + audited, cwd=ROOT
                 ).decode("utf-8", errors="replace").splitlines() if audited else []
