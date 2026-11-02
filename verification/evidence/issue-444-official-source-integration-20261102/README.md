@@ -13,3 +13,5 @@ This bundle retains the source responses and field-level provenance from the res
 - LATAM xJTG: existing stamp-specific uncertainty remains; no new exact LA stamped-card evidence was found.
 
 No photo, owner absence decision or collector identity is reclassified by source onboarding. The new observations retain positive capability and outside-scope challenges. Tests exercise pagination, query/filter failure, identity parsing and the SEA/WEST boundary.
+
+After integrating main #458 and moving capture fixtures into the existing raw-byte preservation lane, the canonical replay owner creates a new projection run from acquisition `20261102T075609Z`. It retains every original response, request retrieval time and replay provenance; it is not a new fetch. `completion.json` names both runs.

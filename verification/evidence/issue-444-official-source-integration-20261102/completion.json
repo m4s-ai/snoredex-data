@@ -2,7 +2,7 @@
   "issue": 444,
   "base": "7a7322f6917b50dff8d1f9e7b3949b7f9ef0bdff",
   "branch": "codex/444-official-source-integration",
-  "runId": "20261102T075609Z",
+  "runId": "20261102T084220Z",
   "targets": [
     {
       "target": "Japanese official API",
@@ -63,11 +63,14 @@
     "L3": "Final delivery execution recorded in external gate log and exact-head PR checks"
   },
   "delivery": "Integration inputs and checkpoint recorded here; final L3 execution is evidenced by the exact-head PR checks and external gate log. No merge or deployment authorized.",
-  "collectorConservation": "all existing item and asset payloads preserved; discovery-run metadata/fingerprint updated; no new card or printing truth admitted",
+  "collectorConservation": "Current main collector payloads and owner decisions preserved; only discovery metadata/fingerprint changes",
   "validationCommands": [
     "python verification/test_card_discovery.py",
     "python scripts/regen.py",
     "python scripts/source_adapters.py --check --full-refresh",
     "python scripts/card_discovery.py --check --full-refresh"
-  ]
+  ],
+  "integratedBase": "e7d3ef9220babd426b32b5f4bb581f534d7ff372",
+  "acquisitionRunId": "20261102T075609Z",
+  "replayReason": "Capability fixture paths moved into the existing raw-byte preservation lane; acquisition inputs and all original response/retrieval metadata unchanged."
 }
