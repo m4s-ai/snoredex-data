@@ -18,6 +18,8 @@
 | PT Plasma Storm 101 | same | oldid 4322565 |
 | EN/FR/DE/IT/PT Kalos Starter Set 26 | "kalos starter war es auch nie nur im gespräch das es reverse holos gibt, das ist ein fixed produkt" | — |
 
+For Italian KSS 26, the owner checked the Elite Fourum thread [Italian exclusive variants - Dragons Exalted & Kalos Starter Set](https://www.elitefourum.com/t/italian-exclusive-variants-dragons-exalted-kalos-starter-set/56541/85) on 2026-11-02. That thread documents the Italian-only holo "Easter egg" cards of Kalos Starter Set numbers, which came one per Italian pack. A user asks for the Snorlax in post 5, but up to post 85 no photo or statement shows an Italian holo Snorlax. The owner's verdict: "Nichts bestätigt". The Italian list therefore stays closed at non-holo. A photographed Italian holo KSS 26 would no longer match the closed list, `E13` would fail, and the decision would have to be reopened.
+
 The owner had a local session read all eight Portuguese candidate set pages in full on 2026-11-01. Six state that the Portuguese set had no reverse holos, four of them with the sentence "The Portuguese version of this set lacked any Reverse Holos." Hidden Fates and Kalos Starter Set say nothing about it. Quuador's list agrees for all six. Each rejected reverse holo had rested on the Cardmarket reverse axis alone.
 
 ## Positive evidence from Quuador's list
