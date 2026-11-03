@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-03",
-  "projectionVersion": "43df57e7c4ba7b0bdd5d5205c7bd98b6f40f14e58ad573f92646f872dc0971c7",
+  "projectionVersion": "452b7f9a25443b67f8c7cbbb630a03e410eb176f0854d1d47f2bc34d10186026",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 941,
-    "sourceObservations": 3493
+    "sourceObservations": 3494
   },
   "groups": [
     {
@@ -90987,26 +90987,20 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:ba2630437dd83460686bcdef",
-              "semanticPrintingId": "PRINTING:ba2630437dd83460686bcdef",
+              "physicalPrintingId": "PHYSICAL:PRINTING:f090fba61b3bb67a8581d6e7",
+              "semanticPrintingId": "PRINTING:f090fba61b3bb67a8581d6e7",
               "cardReleaseId": "RELEASE:CN:S-Chinese:CSZC:018:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "multicolour sparkle across artwork and frame",
-              "markings": [
-                {
-                  "kind": "observed-marking",
-                  "role": "print-identity",
-                  "text": "F regulation mark"
-                }
-              ],
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0083",
-              "sourcePrintingId": "F0083-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:ba2630437dd83460686bcdef",
+              "sourcePrintingId": "F0083-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:f090fba61b3bb67a8581d6e7",
               "specimenIds": [
                 "SPEC-0149"
               ],
@@ -91016,6 +91010,11 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F regulation mark and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo. Retained as SPEC-0149.",
                   "retrievedAt": "2026-08-27"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             }
@@ -91031,9 +91030,7 @@
             "foilPattern": [
               "multicolour sparkle across artwork and frame"
             ],
-            "markings": [
-              "F regulation mark"
-            ],
+            "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -91074,12 +91071,21 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0083-P02:0:2d80017bb69cd2fc",
+              "observationId": "finish:F0083-P01:0:2d80017bb69cd2fc",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/erwAAOSwjxpn2Lqe/s-l1600.jpg",
               "evidence": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F regulation mark and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo. Retained as SPEC-0149.",
-              "contentHash": "c2a5ac187266581a776dab9e33ffd03c373b8c1baa3ea3c8a5571b481904b660",
+              "contentHash": "ffe0786842139340219b958b3c8fbf6c42fe584641842c661504f40e9dce1737",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0083-P01:1:340718616fc26815",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Variety-Treasure-Box/Snorlax-CSZC018",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "e1395f385b46c1df5a2870a2515c65b625de5c30ccd19351ed2f329c6f55c24d",
               "image": null
             },
             {
@@ -91088,7 +91094,7 @@
               "provider": null,
               "url": "https://www.ebay.com/itm/356707199467",
               "evidence": "Complete front photograph of Simplified Chinese Snorlax CSZC 018/066 from Variety Treasure Box. The Simplified Chinese text, printed CSZC set code, F regulation mark and collector number establish the exact card. Dense multicoloured reflective flecks are directly visible across the artwork and card frame, and the seller independently identifies the pictured card as Special Holo.",
-              "contentHash": "35476e1734f3d96d2a8beb2eb8960d63707857f9a622937a027e4d35fdf26ee1",
+              "contentHash": "b2dada41d14cc69fa8c6bd4a1cc8b58bf69458923bc0d5a8e484d93844dc0ed5",
               "image": "verification/specimens/SPEC-0149.jpg"
             },
             {
@@ -91267,26 +91273,20 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:87ae7e905f92815fd73b84d1",
-              "semanticPrintingId": "PRINTING:87ae7e905f92815fd73b84d1",
+              "physicalPrintingId": "PHYSICAL:PRINTING:cbac18e4f44036765425d08d",
+              "semanticPrintingId": "PRINTING:cbac18e4f44036765425d08d",
               "cardReleaseId": "RELEASE:CN:S-Chinese:CSUC:010:Snorlax-Unfazed-Fat-Thumping-Snore",
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": [
-                {
-                  "kind": "observed-marking",
-                  "role": "print-identity",
-                  "text": "F regulation mark"
-                }
-              ],
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0073",
               "sourcePrintingId": "F0073-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:87ae7e905f92815fd73b84d1",
+              "establishingClaimId": "CLAIM:finish:PRINTING:cbac18e4f44036765425d08d",
               "specimenIds": [
                 "SPEC-0153"
               ],
@@ -91309,9 +91309,7 @@
               "holo"
             ],
             "foilPattern": [],
-            "markings": [
-              "F regulation mark"
-            ],
+            "markings": [],
             "confidence": null,
             "note": "No separate ML/OCR confidence is stored; these are the current canonical detection fields."
           },
@@ -91346,7 +91344,7 @@
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/PYIAAeSwGRBopW3h/s-l1600.jpg",
               "evidence": "Complete seller image of Simplified Chinese Snorlax CSUC 010/012. The Simplified Chinese text, CSUC set code and 010/012 collector number establish the exact localized card; the exact listing item data identify rarity CHR and finish Holo. Retained as SPEC-0153.",
-              "contentHash": "ecccd90c269c1a75d56e1b84d7c6397190bb0b2a9bc0fa35ecdb05c4551865b2",
+              "contentHash": "66bb01977582a0d8bf13617e9ae85700c350ff4f004ed7a9adf56fa02e27a543",
               "image": null
             },
             {
@@ -91355,7 +91353,7 @@
               "provider": null,
               "url": "https://www.ebay.com/itm/167729662724",
               "evidence": "Complete seller image of Simplified Chinese Snorlax CSUC 010/012. The Simplified Chinese text, CSUC set code and 010/012 collector number establish the exact localized card; the exact listing item data identify rarity CHR and finish Holo.",
-              "contentHash": "a029e9ebc97c21c76d87d644bb5dbc56730a65972557a3a6956589feedf9add6",
+              "contentHash": "79af0420c2947dc85651bbf80169c8ea3eee1fcf148ac82dbf9a3e2816086a17",
               "image": "verification/specimens/SPEC-0153.jpg"
             },
             {
