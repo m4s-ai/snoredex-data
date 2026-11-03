@@ -427,6 +427,19 @@ A stamp and a finish are separate fields.
 - Later prerelease, Staff, Play!, retailer, Pokémon Center, and championship marks use
   `markings.role=distribution-promo`. They do not imply reverse holo; finish needs its own source.
 
+## "Mirror" in Chinese sources is not `mirror-holo` (#438)
+
+The collection owner fixed the vocabulary on 2026-11-03. Simplified Chinese sources call the
+Western holo 镜面 ("mirror"): the official finish guide's "R and above are mirror-processed foil
+cards" means `holo`, and a rarity-R photograph with line foil across artwork and border is a holo.
+The technical `mirror-holo` is a reverse holo with a mirror finish, where everything outside the
+artwork, text box included, reflects solidly. A pattern on that foil outside the artwork (Poké
+Ball, Master Ball, star, sparkle) is stored as `reverse-holo` with its `foilPattern`, so a
+pattern-less Cardmarket reverse claim folds into the one photographed pattern. The correction is
+[`correct_438_cn_mirror_terminology_20261103.py`](passes/correct_438_cn_mirror_terminology_20261103.py);
+earlier `mirror-holo` ball or star records outside its scope (for example `xsv2a`, `xm2a`) are
+unchanged until reviewed.
+
 ## Optional foil-pattern names
 
 `finish` is sufficient to describe ordinary Holo, Reverse Holo or Mirror Holo.

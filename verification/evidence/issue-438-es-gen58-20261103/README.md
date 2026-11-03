@@ -1,3 +1,7 @@
+<!-- doc: role=retained evidence for issue 438, European Spanish GEN 58 seller photograph and owner reading; stage=history -->
+
+> Historical record — 2026-11-03; current values are determined by canonical stores.
+
 # Issue #438: ES GEN 58 Non-Holo (2026-11-03)
 
 Target: European Spanish Generations Snorlax 58/83 (`U0245`), finish Non-Holo, previously only

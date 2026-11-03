@@ -57,16 +57,16 @@
     },
     "counts": {
       "totalFinishUnits": 637,
-      "withConfirmedFinish": 552,
-      "withOnlyMarketplaceClaim": 8,
+      "withConfirmedFinish": 554,
+      "withOnlyMarketplaceClaim": 6,
       "pendingFinish": 0,
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 36,
-      "withNonHolo": 319,
-      "withHolo": 284,
+      "withNonHolo": 320,
+      "withHolo": 290,
       "withReverseHolo": 206,
-      "withMirrorHolo": 23,
-      "withBothNonHoloAndHolo": 65,
+      "withMirrorHolo": 15,
+      "withBothNonHoloAndHolo": 71,
       "withUnresolvedProductMapping": 14,
       "withAnyUnresolvedDetail": 34,
       "tcgdexUrlsRequested": 308,
@@ -100,20 +100,19 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -121,17 +120,38 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/iW4AAeSweFNqNd-i/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025. No Poké Ball or Master Ball pattern. Collection owner reads the pictured copy as Non-Holo. Retained as SPEC-0676.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0676"
+          ],
+          "image": "verification/specimens/SPEC-0676.jpg",
           "printingId": "F0000-P01"
         },
         {
@@ -143,27 +163,13 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0000-P02"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -174,10 +180,82 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0000-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "master-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/op8AAeSw-JNqJlYx/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025. A Master Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0683.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0683"
+          ],
+          "image": "verification/specimens/SPEC-0683.jpg",
           "printingId": "F0000-P03"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/HHoAAeSwOZxq3rvy/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025, in a graded holder labelled 2025 POKEMON CHN 卡比兽 151C-143/151 GEM MINT 10, No.13049519. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0684.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0684"
+          ],
+          "image": "verification/specimens/SPEC-0684.jpg",
+          "printingId": "F0000-P04"
         }
       ],
       "unresolved": []
@@ -241,7 +319,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0001-P01"
@@ -4920,20 +4998,19 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -4941,17 +5018,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-CS1aC110",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/wqwAAeSwUIZo1mF7/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 招来, 瘫倒 120, Illus. Eri Yamaki, D regulation mark, cs1aC 110/135 U, ©2023. No star reverse pattern. Collection owner reads the pictured copy as Non-Holo. Retained as SPEC-0677.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0677"
+          ],
+          "image": "verification/specimens/SPEC-0677.jpg",
           "printingId": "F0051-P01"
         },
         {
@@ -4963,27 +5061,13 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dynamax-Clash-Thunder/Snorlax-CS1aC110",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0051-P02"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -4994,9 +5078,45 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0051-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "star",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/nrcAAeSwe8hoBY52/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 招来, 瘫倒 120, Illus. Eri Yamaki, D regulation mark, cs1aC 110/135 U, ©2023. A star pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0685.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0685"
+          ],
+          "image": "verification/specimens/SPEC-0685.jpg",
           "printingId": "F0051-P03"
         }
       ],
@@ -5061,7 +5181,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0052-P01"
@@ -5128,7 +5248,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0053-P01"
@@ -5259,7 +5379,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0055-P01"
@@ -5508,7 +5628,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0058-P01"
@@ -5611,14 +5731,14 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "holo": "confirmed",
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -5646,26 +5766,7 @@
           "printingId": "F0060-P01"
         },
         {
-          "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-Charm/Snorlax-PKMSCHCS5aC-093",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0060-P02"
-        },
-        {
-          "finish": "mirror-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
@@ -5685,13 +5786,13 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
-          "printingId": "F0060-P03"
+          "printingId": "F0060-P02"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "holo",
           "foilPattern": "vertical-line",
           "markings": [],
           "distribution": null,
@@ -5717,13 +5818,42 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "specimenIds": [
             "SPEC-0669"
           ],
           "image": "verification/specimens/SPEC-0669.png",
+          "printingId": "F0060-P03"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "star",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/IUYAAeSwJaRqUc11/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, Illus. Saboteri, F regulation mark, cs5aC 093/127 R, held in hand. A star pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0686.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Brave-Stars-Charm/Snorlax-PKMSCHCS5aC-093",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0686"
+          ],
+          "image": "verification/specimens/SPEC-0686.jpg",
           "printingId": "F0060-P04"
         }
       ],
@@ -5894,20 +6024,20 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "holo": "confirmed",
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -5929,26 +6059,7 @@
           "printingId": "F0063-P01"
         },
         {
-          "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0063-P02"
-        },
-        {
-          "finish": "mirror-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
@@ -5968,9 +6079,38 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0063-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "star",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/lZEAAeSwJllplWKj/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 无畏脂肪, 轰隆鼾声 180, Illus. 0313, F regulation mark, cs6bC 113/131 R, on a stand. A star pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0687.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Azure-Shadow-Pursuit/Snorlax-CS6bC113",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0687"
+          ],
+          "image": "verification/specimens/SPEC-0687.jpg",
           "printingId": "F0063-P03"
         }
       ],
@@ -6105,7 +6245,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0065-P01"
@@ -6203,12 +6343,13 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo",
         "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "confirmed",
         "mirror-holo": "confirmed"
       },
@@ -6236,6 +6377,32 @@
           "markings": null,
           "distribution": null,
           "printingId": "F0067-P01"
+        },
+        {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": null,
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "printingId": "F0067-P02"
         },
         {
           "finish": "reverse-holo",
@@ -6275,7 +6442,7 @@
             "SPEC-0434"
           ],
           "image": "verification/specimens/SPEC-0434.png",
-          "printingId": "F0067-P02"
+          "printingId": "F0067-P03"
         },
         {
           "finish": "mirror-holo",
@@ -6304,25 +6471,13 @@
               ],
               "retrievedAt": "2026-08-29",
               "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
-            },
-            {
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "S-Chinese"
-              ],
-              "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
             }
           ],
           "specimenIds": [
             "SPEC-0433"
           ],
           "image": "verification/specimens/SPEC-0433.png",
-          "printingId": "F0067-P03"
+          "printingId": "F0067-P04"
         }
       ],
       "unresolved": []
@@ -6386,7 +6541,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0068-P01"
@@ -6453,7 +6608,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0069-P01"
@@ -6520,7 +6675,7 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
           "printingId": "F0070-P01"
@@ -6857,20 +7012,20 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "holo",
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
-        "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "holo": "confirmed",
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -6892,26 +7047,7 @@
           "printingId": "F0074-P01"
         },
         {
-          "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0074-P02"
-        },
-        {
-          "finish": "mirror-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": null,
           "distribution": null,
@@ -6931,9 +7067,38 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0074-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/hKMAAeSwmmZqj~yp/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese Hop's Snorlax (赫普的卡比兽) HP 150 with the Hop portrait badge, 特性 慷慨, 强劲压制 140, Illus. GOSSAN, I regulation mark, csv10C 175/222 R, ©2026. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0688.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Chasing-Glory-Together/Hops-Snorlax-CSV10C175",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0688"
+          ],
+          "image": "verification/specimens/SPEC-0688.jpg",
           "printingId": "F0074-P03"
         }
       ],
@@ -6964,20 +7129,19 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -6985,17 +7149,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/fYsAAeSwHQBqnPop/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽娃娃 (Snorlax Doll) Item/Trainer card, HP 120, Illus. AYUMI ODASHIMA, G regulation mark, csv5C 115/129 U, on a stand. No Poké Ball or Master Ball pattern. Collection owner reads the pictured copy as Non-Holo. Retained as SPEC-0679.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0679"
+          ],
+          "image": "verification/specimens/SPEC-0679.jpg",
           "printingId": "F0075-P01"
         },
         {
@@ -7007,27 +7192,13 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Dark-Crystal-Blaze/Snorlax-Doll-CSV5C115",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0075-P02"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -7038,9 +7209,45 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0075-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/M~0AAeSwnpJqwADt/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽娃娃 (Snorlax Doll) Item/Trainer card, HP 120, Illus. AYUMI ODASHIMA, G regulation mark, csv5C 115/129 U, ©2025. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0689.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0689"
+          ],
+          "image": "verification/specimens/SPEC-0689.jpg",
           "printingId": "F0075-P03"
         }
       ],
@@ -7071,20 +7278,19 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "non-holo",
@@ -7092,17 +7298,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/Ls0AAeSw7uhqQHSb/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U, ©2026, in a CGC holder labelled S. Chinese Sharp Blade Awakening 158/204 with no variant noted. No Poké Ball or Master Ball pattern. Collection owner reads the pictured copy as Non-Holo. Retained as SPEC-0678.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0678"
+          ],
+          "image": "verification/specimens/SPEC-0678.jpg",
           "printingId": "F0076-P01"
         },
         {
@@ -7114,27 +7341,13 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0076-P02"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
+            },
             {
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -7145,10 +7358,82 @@
                 "S-Chinese"
               ],
               "retrievedAt": "2026-08-27",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror processing, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment. It does not state that these are the only printings."
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "printingId": "F0076-P02"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "master-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/eGkAAeSw0-5qorAj/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U, ©2026, on a stand. A Master Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0691.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0691"
+          ],
+          "image": "verification/specimens/SPEC-0691.jpg",
           "printingId": "F0076-P03"
+        },
+        {
+          "finish": "reverse-holo",
+          "foilPattern": "poke-ball",
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://i.ebayimg.com/images/g/9YoAAeSwajdqwAFS/s-l1600.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0690.",
+              "retrievedAt": "2026-11-03"
+            },
+            {
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
+              "authorityTier": "official-primary",
+              "coverage": "positive-only",
+              "supportsAbsence": false,
+              "languages": [
+                "S-Chinese"
+              ],
+              "retrievedAt": "2026-08-27",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0690"
+          ],
+          "image": "verification/specimens/SPEC-0690.jpg",
+          "printingId": "F0076-P04"
         }
       ],
       "unresolved": []
@@ -33331,11 +33616,12 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
@@ -33370,6 +33656,41 @@
           "printingId": "F0356-P01"
         },
         {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cf.shopee.tw/file/644ed665071a40763485c6bd554c2537",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Traditional Chinese 卡比獸 HP 130, 特性 積食, 泰山壓頂 100, Illus. Atsuko Nishida, D regulation mark, s4 F 084/100 R, ©2020. Rainbow vertical-line foil runs across the artwork and the card frame. Collection owner confirms the pictured copy as Holo. Retained as SPEC-0682.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0682"
+          ],
+          "image": "verification/specimens/SPEC-0682.jpg",
+          "printingId": "F0356-P02"
+        },
+        {
           "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
@@ -33386,7 +33707,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0356-P02"
+          "printingId": "F0356-P03"
         }
       ],
       "unresolved": []
@@ -34105,11 +34426,12 @@
       ],
       "availableFinishes": [
         "non-holo",
+        "holo",
         "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
@@ -34139,6 +34461,41 @@
           "printingId": "F0365-P01"
         },
         {
+          "finish": "holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "base"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-7ra0m-mcrx474ykjen3a",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Traditional Chinese 卡比獸 HP 130, 特性 積食, 泰山壓頂 100, Illus. Narumi Sato, D regulation mark, s8b F 126/184, ©2021. Rainbow vertical-line foil runs across the artwork and the card frame. Collection owner confirms the pictured copy as Holo. Retained as SPEC-0681.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0681"
+          ],
+          "image": "verification/specimens/SPEC-0681.jpg",
+          "printingId": "F0365-P02"
+        },
+        {
           "finish": "reverse-holo",
           "foilPattern": null,
           "markings": null,
@@ -34155,7 +34512,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0365-P02"
+          "printingId": "F0365-P03"
         }
       ],
       "unresolved": []
@@ -34993,20 +35350,56 @@
         }
       ],
       "availableFinishes": [
+        "non-holo",
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "pending",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "marketplace-claimed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
       "patternStatus": "not-applicable",
       "printings": [
+        {
+          "finish": "non-holo",
+          "foilPattern": null,
+          "markings": [],
+          "distribution": null,
+          "cardSize": "standard",
+          "mappedVariants": [
+            "V1"
+          ],
+          "verificationStatus": "confirmed",
+          "sources": [
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-7qul4-libactig0ud0b4",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Traditional Chinese 卡比獸 HP 160, 重磅衝擊 80, Illus. Oswaldo KATO, E regulation mark, sI F 341/414, ©2021. Collection owner reads the pictured copy as Non-Holo; this is the Start Deck 100 card, separate from the sN 008/024 special edition. Retained as SPEC-0680.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+            }
+          ],
+          "specimenIds": [
+            "SPEC-0680"
+          ],
+          "image": "verification/specimens/SPEC-0680.jpg",
+          "printingId": "F0377-P01"
+        },
         {
           "finish": "reverse-holo",
           "foilPattern": null,
@@ -35024,7 +35417,7 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
-          "printingId": "F0377-P01"
+          "printingId": "F0377-P02"
         }
       ],
       "unresolved": []
@@ -41945,7 +42338,7 @@
         "mirror-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
         "mirror-holo": "confirmed"
@@ -41962,17 +42355,38 @@
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151/Snorlax-V1-sv2a143",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://media.bunjang.co.kr/product/423488323_1_1786153555.jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Korean 잠만보 HP 150, 특성 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, G regulation mark, sv2a 143/165 U, card on a stand. No Poké Ball or Master Ball pattern is visible; the same seller lists the Korean Poké Ball mirror separately (Bunjang 423490680). Collection owner reads the pictured copy as Non-Holo. Retained as SPEC-0675.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0675"
+          ],
+          "image": "verification/specimens/SPEC-0675.png",
           "printingId": "F0462-P01"
         },
         {
@@ -42706,43 +43120,23 @@
         }
       ],
       "availableFinishes": [
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "V1"
-          ],
-          "verificationStatus": "marketplace-claimed",
-          "sources": [
-            {
-              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
-              "sourceType": "Cardmarket catalogue hint (not external verification)",
-              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
-            }
-          ],
-          "printingId": "F0472-P01"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
+          "foilPattern": "geometric sparkle across artwork and frame",
           "markings": [],
           "distribution": null,
           "cardSize": "standard",
@@ -42756,13 +43150,18 @@
               "sourceType": "Seller listing photograph",
               "evidence": "The middle card in the original three-card photograph is Korean 잠만보 sv4a G145/190. Blue-purple reflective geometric foil on illustration and frame positively establishes mirror-holo. Left card is Japanese; right Korean card has no accepted finish observation. Exact mirror subtype remains unknown. Manual visual extraction. No exhaustive finish inventory asserted. Retained as SPEC-0624.",
               "retrievedAt": "2026-10-07"
+            },
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
+              "sourceType": "Cardmarket catalogue hint (not external verification)",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
           "specimenIds": [
             "SPEC-0624"
           ],
           "image": "verification/specimens/SPEC-0624.png",
-          "printingId": "F0472-P02"
+          "printingId": "F0472-P01"
         }
       ],
       "unresolved": []
@@ -42796,32 +43195,42 @@
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "marketplace-claimed",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
-      "availabilityStatus": "marketplace-claimed",
+      "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
           "finish": "reverse-holo",
-          "foilPattern": null,
-          "markings": null,
+          "foilPattern": "geometric sparkle across artwork and frame",
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
             "V1"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://cf.shopee.tw/file/tw-11134207-820le-mmc0jd2o1jbcdf",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Traditional Chinese 卡比獸 HP 150, 特性 貪嘴, 養肥壓制 130, Illus. HYOGONOSUKE, G regulation mark, sv4a F 145/190, ©2023. Square geometric sparkle foil is visible across the artwork and the card frame. Retained as SPEC-0692.",
+              "retrievedAt": "2026-11-03"
+            },
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Shiny-Treasure-ex/Snorlax-V1-sv4a145",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
             }
           ],
+          "specimenIds": [
+            "SPEC-0692"
+          ],
+          "image": "verification/specimens/SPEC-0692.jpg",
           "printingId": "F0473-P01"
         }
       ],
