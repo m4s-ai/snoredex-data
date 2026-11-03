@@ -809,6 +809,19 @@ def main() -> None:
                and source.get("sourceType", "").startswith("Owner attestation")
                for source in non_holo_print["sources"])
     assert specimen_by_id["SPEC-0674"]["physicalObservation"]["ownerAttestedFields"] == ["finish"]
+    # A class statement (the CN finish guide) folds into the photographed pattern instead of
+    # standing beside it as a second collectible (#438); with two patterns only the Cardmarket
+    # remainder stays a candidate. Card-level evidence for a parallel printing is never folded:
+    # PGO 055 keeps its regular holo next to the cosmos product variant.
+    unit_by_id = {unit["finishUnitId"]: unit for unit in finish_units}
+    cs1ac = [(p["finish"], p["foilPattern"]) for p in unit_by_id["F0051"]["printings"]]
+    assert cs1ac == [("non-holo", None), ("reverse-holo", "star")], cs1ac
+    assert any("16377" in (s.get("url") or "") for s in unit_by_id["F0051"]["printings"][1]["sources"])
+    remainder = [p for p in unit_by_id["F0000"]["printings"]
+                 if p["finish"] == "reverse-holo" and not p["foilPattern"]]
+    assert [p["verificationStatus"] for p in remainder] == ["marketplace-claimed"]
+    pgo = {(p["finish"], p["foilPattern"]) for p in unit_by_id["F0250"]["printings"]}
+    assert {("holo", None), ("holo", "cosmos")} <= pgo
     reverse_print = next(p for p in spanish_generations["printings"] if p["finish"] == "reverse-holo")
     assert any("oldid=4587656" in source.get("url", "")
                and source.get("claimFields") == ["finish"]

@@ -627,6 +627,45 @@ def variant_name_finish(variant_name: str) -> tuple[str | None, str | None]:
     return finish, pattern
 
 
+MARKETPLACE_HINT = "Cardmarket catalogue hint (not external verification)"
+
+
+def absorb_patternless_class_statements(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Fold a pattern-less class statement into the patterned printings it describes.
+
+    A product-line description (the official Simplified Chinese finish guide: "R and above are
+    holo", "C, U and R come as patterned random foil") says a finish exists, never which pattern.
+    Once photographs establish patterned printings of that finish, the statement is evidence for
+    each of them, not another collectible. A marketplace claim merged into the same row survives
+    as a candidate for absorb_patternless_marketplace_claims, which refines only a single pattern.
+    """
+    kept = []
+    for printing in printings:
+        siblings = _patterned_siblings(printing, printings)
+        split = _class_statement_sources(printing) if siblings else None
+        if split is None:
+            kept.append(printing)
+            continue
+        class_sources, market_sources = split
+        for sibling in siblings:
+            seen = {source_signature(source) for source in sibling["sources"]}
+            sibling["sources"].extend(s for s in class_sources if source_signature(s) not in seen)
+        if market_sources:
+            kept.append({**printing, "sources": market_sources, "verificationStatus": "marketplace-claimed"})
+    return kept
+
+
+def _class_statement_sources(printing: dict[str, Any]):
+    """(class, marketplace) sources of a pattern-less row resting on nothing card-level, else None."""
+    class_sources = [s for s in printing["sources"] if s.get("coverage") == "product-line-description"]
+    market_sources = [s for s in printing["sources"] if s.get("sourceType") == MARKETPLACE_HINT]
+    only_class_and_market = len(class_sources) + len(market_sources) == len(printing["sources"])
+    if (printing.get("foilPattern") or not class_sources or not only_class_and_market
+            or not _is_card_level_finish_evidence(printing)):
+        return None
+    return class_sources, market_sources
+
+
 def absorb_patternless_marketplace_claims(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Fold a pattern-less marketplace finish claim into its one established patterned printing.
 
@@ -1672,8 +1711,8 @@ def _build_finish_unit(
         for printing in printings:
             add_printing(deduplicated_printings, printing)
         printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
-            absorb_patternless_marketplace_claims(absorb_editionless_finish_evidence(
-                absorb_qualified_tcgdex_evidence(deduplicated_printings))),
+            absorb_patternless_marketplace_claims(absorb_patternless_class_statements(
+                absorb_editionless_finish_evidence(absorb_qualified_tcgdex_evidence(deduplicated_printings)))),
             owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(

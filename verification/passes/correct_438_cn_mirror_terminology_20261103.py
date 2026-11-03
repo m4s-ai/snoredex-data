@@ -35,7 +35,14 @@ sys.path.insert(0, str(ROOT / "scripts"))
 from atomic_write import atomic_write  # noqa: E402
 OVERRIDES = V / "finish_overrides.json"
 SPECIMENS = V / "specimens.json"
+ROUTES = V / "collector_migration_routes.json"
 SOURCE_ID = "pokemon-cn-simplified-finish-rules"
+FOLDED_IDS = {  # pattern-less guide row -> the single photographed pattern it folds into
+    "cs1ac-110-s-chinese-none-reverse-holo": "cs1ac-110-s-chinese-none-reverse-holo-star",
+    "cs5ac-093-s-chinese-none-holo": "cs5ac-093-s-chinese-none-holo-vertical-line",
+    "csv5c-115-s-chinese-none-reverse-holo": "csv5c-115-s-chinese-none-reverse-holo-poke-ball",
+}
+FOLD_REASON = "The guide's class statement folds into the one photographed pattern (#438, 2026-11-03)."
 # Printed rarity decides which half of the guide a card falls under.
 TARGETS = {
     ("CS5aC", "093"): "holo",          # R
@@ -78,6 +85,12 @@ def main() -> int:
     if source["evidence"] != EVIDENCE:
         pending.append(f"source {SOURCE_ID} evidence")
         source["evidence"] = EVIDENCE
+    # The guide states rarity classes, never a card's pattern: a product-line description, so
+    # finishes.py folds it into the photographed patterned printings instead of keeping a
+    # pattern-less duplicate beside them.
+    if source.get("coverage") != "product-line-description":
+        pending.append(f"source {SOURCE_ID} coverage -> product-line-description")
+        source["coverage"] = "product-line-description"
 
     found = set()
     for row in overrides["overrides"]:
@@ -111,6 +124,15 @@ def main() -> int:
         observation["foilPattern"] = SPARKLE
         observation["basis"] = SPEC_0624_BASIS
 
+    # The guide row folds into its single photographed pattern; collector state follows, and the
+    # routes this pass's earlier run pointed at the pattern-less id are chained onward.
+    routes_text = ROUTES.read_text(encoding="utf-8")
+    known = {row["from"] for row in json.loads(routes_text)["cumulativeChecklistRekeys"]}
+    new_routes = [(old, new) for old, new in FOLDED_IDS.items() if old not in known]
+    chained = [old for old in FOLDED_IDS if f'"to": "{old}"' in routes_text]
+    pending += [f"route {old} -> {FOLDED_IDS[old]}" for old, _ in new_routes]
+    pending += [f"chain routes into {old}" for old in chained]
+
     if not pending:
         print("no pending changes; CN mirror terminology already corrected")
         return 0
@@ -119,6 +141,18 @@ def main() -> int:
         return 1
     for path, document in ((OVERRIDES, overrides), (SPECIMENS, specimens)):
         atomic_write(path, json.dumps(document, indent=2, ensure_ascii=False) + "\n")
+    for old in chained:
+        routes_text = routes_text.replace(f'"to": "{old}"', f'"to": "{FOLDED_IDS[old]}"')
+    if new_routes:
+        # The routes file keeps one route per line; append inside the rekey array.
+        anchor = '\n  ],\n  "cardReleaseRekeys"'
+        index = routes_text.index(anchor)
+        routes_text = routes_text[:index] + "".join(
+            ",\n    " + json.dumps({"from": old, "to": new, "reason": FOLD_REASON}, ensure_ascii=False)
+            for old, new in new_routes
+        ) + routes_text[index:]
+    json.loads(routes_text)
+    atomic_write(ROUTES, routes_text)
     print(f"wrote {OVERRIDES.name}, {SPECIMENS.name}")
     return 0
 
