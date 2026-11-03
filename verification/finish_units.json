@@ -1,7 +1,7 @@
 {
   "meta": {
     "description": "One row per set code x collector number x language, with logical physical printings, their identifying metadata and release dates, and Cardmarket product mappings.",
-    "generated": "2026-11-02",
+    "generated": "2026-11-03",
     "scope": "Physical cards only; online/live code cards are excluded.",
     "sourcePolicy": [
       "Only positive availability is asserted. pending means not yet established, never proven absent.",
@@ -13235,7 +13235,7 @@
         "reverse-holo"
       ],
       "finishStatus": {
-        "non-holo": "marketplace-claimed",
+        "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "confirmed",
         "mirror-holo": "pending"
@@ -13252,17 +13252,38 @@
           "mappedVariants": [
             "base"
           ],
-          "verificationStatus": "marketplace-claimed",
+          "verificationStatus": "confirmed",
           "sources": [
             {
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
               "sourceType": "Cardmarket catalogue hint (not external verification)",
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+            },
+            {
+              "url": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Spanish Generations Snorlax 58/83 photographed as a physical card with rounded corners and a slight tilt on a black background, unlike the SPEC-0131 database render. Básico, PS 130, Habilidad Vuelta y Cabezadita, Presión Soporífera 120, Ilus. Mitsuhiro Arita, 58/83 with rarity star, Generations set symbol, ©2016 Pokémon. The card body shows the ordinary printed silver gradient and no type-symbol background pattern. Collection owner reads the pictured copy as Non-Holo. No complete finish inventory is asserted. Retained as SPEC-0674.",
+              "retrievedAt": "2026-11-03",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             }
           ],
           "foilPattern": null,
           "markings": null,
           "distribution": null,
+          "specimenIds": [
+            "SPEC-0674"
+          ],
+          "image": "verification/specimens/SPEC-0674.png",
           "printingId": "F0139-P01"
         },
         {

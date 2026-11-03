@@ -800,8 +800,14 @@ def main() -> None:
     assert spanish_swsh032["printings"][0]["foilPattern"] == "cosmos"
     spanish_generations = next(unit for unit in finish_units if unit["finishUnitId"] == "F0139")
     assert spanish_generations["finishStatus"]["reverse-holo"] == "confirmed"
-    assert spanish_generations["finishStatus"]["non-holo"] == "marketplace-claimed"
+    assert spanish_generations["finishStatus"]["non-holo"] == "confirmed"
     assert spanish_generations["completenessStatus"] == "positive-evidence-only"
+    non_holo_print = next(p for p in spanish_generations["printings"] if p["finish"] == "non-holo")
+    # SPEC-0674 carries identity; the finish rests on the owner's reading, not the photo.
+    assert any(source.get("claimFields") == ["finish"]
+               and source.get("sourceType", "").startswith("Owner attestation")
+               for source in non_holo_print["sources"])
+    assert specimen_by_id["SPEC-0674"]["physicalObservation"]["ownerAttestedFields"] == ["finish"]
     reverse_print = next(p for p in spanish_generations["printings"] if p["finish"] == "reverse-holo")
     assert any("oldid=4587656" in source.get("url", "")
                and source.get("claimFields") == ["finish"]

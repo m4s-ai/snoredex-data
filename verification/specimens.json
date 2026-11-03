@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 673,
+  "count": 674,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -14608,6 +14608,33 @@
         "basis": "The seller photograph shows a matte artwork field and a smooth reflective foil across the rest of the card body, the Japanese mirror (reverse) treatment; the listing title calls it ミラーカード."
       },
       "listingUrl": "https://paypayfleamarket.yahoo.co.jp/item/z681976292"
+    },
+    {
+      "specimenId": "SPEC-0674",
+      "setCode": "GEN",
+      "number": "58/83",
+      "variant": "base",
+      "language": "Spanish",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "todocoleccion seller photograph (lot 525356167, seller cromosdefutbolTC, Sevilla, listing language Español), 720x994 WebP from cloud10.todocoleccion.online opened in the desktop in-app browser, decoded losslessly to PNG and visually inspected",
+      "photograph": "SPEC-0674.png",
+      "photographSource": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+      "photographSha256": "sha256:58fa0a64bb0a1cf56cb6f492204a743ec9d9dc30c05687b0d1d2e597e9766d9e",
+      "observed": "Spanish Generations Snorlax 58/83 photographed as a physical card with rounded corners and a slight tilt on a black background, unlike the SPEC-0131 database render. Básico, PS 130, Habilidad Vuelta y Cabezadita, Presión Soporífera 120, Ilus. Mitsuhiro Arita, 58/83 with rarity star, Generations set symbol, ©2016 Pokémon. The card body shows the ordinary printed silver gradient and no type-symbol background pattern. Collection owner reads the pictured copy as Non-Holo. No complete finish inventory is asserted.",
+      "recordedAt": "2026-11-03",
+      "citedBy": [
+        "U0245"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "ownerAttestedFields": [
+          "finish"
+        ],
+        "ownerAttestedAt": "2026-11-03",
+        "cardSize": "standard",
+        "basis": "The collection owner explicitly read the photographed Spanish GEN 58/83 card as Non-Holo on 2026-11-03 (issue #438 session). Image inspection establishes the exact European Spanish card identity; the absent type-symbol reverse pattern is recorded as context only, not as the basis."
+      },
+      "listingUrl": "https://www.todocoleccion.net/cromos-futbol/58-83-snorlax-rara-xy-generaciones-generations-pokemon-trading-card-carta~x525356167"
     }
   ]
 }

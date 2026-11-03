@@ -37,7 +37,7 @@
     },
     "finishVerification": {
       "description": "Positive finish availability by set number, language, and mapped Cardmarket product. See verification/finish_units.json.",
-      "lastUpdated": "2026-11-02",
+      "lastUpdated": "2026-11-03",
       "totalFinishUnits": 637,
       "withConfirmedFinish": 552,
       "withOnlyMarketplaceClaim": 8,
@@ -16136,13 +16136,13 @@
               "reverse-holo"
             ],
             "finishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
-              "non-holo": "marketplace-claimed",
+              "non-holo": "confirmed",
               "holo": "pending",
               "reverse-holo": "confirmed",
               "mirror-holo": "pending"
@@ -16158,8 +16158,12 @@
                 "markings": null,
                 "distribution": null,
                 "cardSize": "standard",
-                "verificationStatus": "marketplace-claimed",
-                "productMapping": "mapped"
+                "verificationStatus": "confirmed",
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0674.png",
+                "specimenIds": [
+                  "SPEC-0674"
+                ]
               },
               {
                 "printingId": "F0139-P02",

@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-11-02",
+  "generated": "2026-11-03",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 46,
-   "evidenceRecords": 1844,
-   "uniqueUrls": 1835,
+   "evidenceRecords": 1845,
+   "uniqueUrls": 1836,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7455
+   "claimsAttributed": 7461
   }
  },
  "providers": [
@@ -1034,7 +1034,7 @@
    "notes": "Never rendered as a hyperlink. No personal identifiers are published.",
    "hosts": [],
    "uniqueSources": 1,
-   "claimsSupported": 518
+   "claimsSupported": 521
   },
   {
    "providerId": "inspected-specimen",
@@ -1101,8 +1101,8 @@
    "hosts": [
     "down-tw.img.susercontent.com"
    ],
-   "uniqueSources": 200,
-   "claimsSupported": 868
+   "uniqueSources": 201,
+   "claimsSupported": 871
   }
  ],
  "evidence": [
@@ -15056,7 +15056,7 @@
     "language",
     "rarity"
    ],
-   "stableIdCount": 452,
+   "stableIdCount": 455,
    "stableIds": [
     "CN:30thC:095/103:base",
     "CN:CS2DaC:038/053:base",
@@ -15083,6 +15083,7 @@
     "F0104-P02",
     "F0132-P01",
     "F0138-P01",
+    "F0139-P01",
     "F0140-P01",
     "F0142-P01",
     "F0142-P02",
@@ -15391,6 +15392,7 @@
     "SPEC-0633",
     "SPEC-0642",
     "SPEC-0644",
+    "SPEC-0674",
     "TH:AS1b:112/150:base",
     "TH:AS5a:142/184:base",
     "TH:MA4:091/123:base",
@@ -15431,6 +15433,7 @@
     "U0175",
     "U0176",
     "U0233",
+    "U0245",
     "U0246",
     "U0255",
     "U0257",
@@ -15511,8 +15514,8 @@
     "override:owner-svp184-western-prerelease-variants",
     "override:owner-swsh032-spanish-cosmos-holo-20260924"
    ],
-   "retrievedAt": "2026-11-01",
-   "usageCount": 516
+   "retrievedAt": "2026-11-03",
+   "usageCount": 519
   },
   {
    "canonicalUrl": "https://github.com/m4s-ai/snoredex-data/issues/268",
@@ -28726,6 +28729,25 @@
    ],
    "retrievedAt": "2026-08-28",
    "usageCount": 7
+  },
+  {
+   "canonicalUrl": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+   "nonUrlEvidenceId": null,
+   "providerId": "seller-listing-photo",
+   "sourceTypes": [
+    "Seller listing photograph"
+   ],
+   "dimensions": [
+    "identity"
+   ],
+   "stableIdCount": 3,
+   "stableIds": [
+    "F0139-P01",
+    "SPEC-0674",
+    "U0245"
+   ],
+   "retrievedAt": "2026-11-03",
+   "usageCount": 3
   },
   {
    "canonicalUrl": "https://collectorworth.tor1.digitaloceanspaces.com/media/pokemon_card/price_signals/pokemon_9b398ab7-0c42-41b9-969a-12173b5b8bdc_1777478517.jpg",

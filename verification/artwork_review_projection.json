@@ -3,8 +3,8 @@
   "schemaVersion": "1.2.0",
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
-  "generated": "2026-11-02",
-  "projectionVersion": "58267a41cc8a187ef574bddda615ed1f35cd310c6d6f86886efa833334b3ae1e",
+  "generated": "2026-11-03",
+  "projectionVersion": "a5c55cd1f1f7e387172db1951060380959a7977f258df30b765e34e60f9797f3",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 922,
-    "sourceObservations": 3425
+    "physicalPrintings": 923,
+    "sourceObservations": 3429
   },
   "groups": [
     {
@@ -78208,6 +78208,49 @@
                   "evidenceScope": "standard-set"
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:a51f2a987f2e16a655d73b3a",
+              "semanticPrintingId": "PRINTING:a51f2a987f2e16a655d73b3a",
+              "cardReleaseId": "RELEASE:WEST:Spanish:GEN:58:Snorlax-Stir-and-Snooze-Sleepy-Press",
+              "finish": "non-holo",
+              "edition": null,
+              "foilPattern": null,
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0139",
+              "sourcePrintingId": "F0139-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a51f2a987f2e16a655d73b3a",
+              "specimenIds": [
+                "SPEC-0674"
+              ],
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
+                },
+                {
+                  "url": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Spanish Generations Snorlax 58/83 photographed as a physical card with rounded corners and a slight tilt on a black background, unlike the SPEC-0131 database render. Básico, PS 130, Habilidad Vuelta y Cabezadita, Presión Soporífera 120, Ilus. Mitsuhiro Arita, 58/83 with rarity star, Generations set symbol, ©2016 Pokémon. The card body shows the ordinary printed silver gradient and no type-symbol background pattern. Collection owner reads the pictured copy as Non-Holo. No complete finish inventory is asserted. Retained as SPEC-0674.",
+                  "retrievedAt": "2026-11-03",
+                  "claimFields": [
+                    "identity"
+                  ]
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-11-03",
+                  "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                }
+              ]
             }
           ],
           "detection": {
@@ -78248,9 +78291,47 @@
               "originalHash": "6b0f60a61336c529c6187a0eee0c33d6e7eaeda28d40311fd880756f749ebe6a",
               "previewSrc": "images/previews/SPEC-0131.png?v=4640abb30dd87991fb698a2f68a44602ece49db0fac2652e76ae6fffc23c956f",
               "thumbnailSrc": "images/thumbs/SPEC-0131.png?v=8a9caa52137d599eaeb9e696a06fa1f2b18af1bbf5d596018fd9932f356bcad1"
+            },
+            {
+              "src": "verification/specimens/SPEC-0674.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0674",
+              "contentHash": "58fa0a64bb0a1cf56cb6f492204a743ec9d9dc30c05687b0d1d2e597e9766d9e",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "58fa0a64bb0a1cf56cb6f492204a743ec9d9dc30c05687b0d1d2e597e9766d9e",
+              "previewSrc": "images/previews/SPEC-0674.png?v=a7a9c5af47214068334f9447d4878c7b29e177a71b8bdf0d331f5ba6f3511abc",
+              "thumbnailSrc": "images/thumbs/SPEC-0674.png?v=4f03d00de9bc267794844c5873e478f672c7cf2622fd5c71887e8d00636c3387"
             }
           ],
           "observations": [
+            {
+              "observationId": "finish:F0139-P01:0:7408347bd100316b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Generations/Snorlax-GEN58",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "fbc1c8cdc0c2255ff63b027ece4a0ae47f0f93fa35f492ecb206c9efd27893b9",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0139-P01:1:e57b3f5a3202ad4a",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+              "evidence": "Spanish Generations Snorlax 58/83 photographed as a physical card with rounded corners and a slight tilt on a black background, unlike the SPEC-0131 database render. Básico, PS 130, Habilidad Vuelta y Cabezadita, Presión Soporífera 120, Ilus. Mitsuhiro Arita, 58/83 with rarity star, Generations set symbol, ©2016 Pokémon. The card body shows the ordinary printed silver gradient and no type-symbol background pattern. Collection owner reads the pictured copy as Non-Holo. No complete finish inventory is asserted. Retained as SPEC-0674.",
+              "contentHash": "e6a18289e0d9cac188312f83cf603d6e6fefc4a3f7acef59a6f8cf25aaa514d4",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0139-P01:2:f0193bcbefff3fc7",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "780380ccb1ab019a163f4e72e620b0c7c985508f68b79dede9b3d12f2ad15e08",
+              "image": null
+            },
             {
               "observationId": "finish:F0139-P02:0:5c83ca3adad15293",
               "kind": "finish",
@@ -78286,6 +78367,15 @@
               "evidence": "Spanish database scan of Generations Snorlax 58/83. Pokémon Básico, Vuelta y Cabezadita, Presión Soporífera, the Generations symbol and 58/83 establish the localized card identity. No physical finish is inferred from this database render.",
               "contentHash": "395a6ffde990a9d85a372df1fb40351073d2325b10139ea7f11c4dd12dff107f",
               "image": "verification/specimens/SPEC-0131.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0674",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.todocoleccion.net/cromos-futbol/58-83-snorlax-rara-xy-generaciones-generations-pokemon-trading-card-carta~x525356167",
+              "evidence": "Spanish Generations Snorlax 58/83 photographed as a physical card with rounded corners and a slight tilt on a black background, unlike the SPEC-0131 database render. Básico, PS 130, Habilidad Vuelta y Cabezadita, Presión Soporífera 120, Ilus. Mitsuhiro Arita, 58/83 with rarity star, Generations set symbol, ©2016 Pokémon. The card body shows the ordinary printed silver gradient and no type-symbol background pattern. Collection owner reads the pictured copy as Non-Holo. No complete finish inventory is asserted.",
+              "contentHash": "ab18086c14105855e5a37bf6b9ad8b178ba8d541ee12b94410883faf5cc6fd9d",
+              "image": "verification/specimens/SPEC-0674.png"
             },
             {
               "observationId": "unit:U0245",
