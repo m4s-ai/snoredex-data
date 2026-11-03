@@ -817,9 +817,10 @@ def main() -> None:
     cs1ac = [(p["finish"], p["foilPattern"]) for p in unit_by_id["F0051"]["printings"]]
     assert cs1ac == [("non-holo", None), ("reverse-holo", "star")], cs1ac
     assert any("16377" in (s.get("url") or "") for s in unit_by_id["F0051"]["printings"][1]["sources"])
-    remainder = [p for p in unit_by_id["F0000"]["printings"]
-                 if p["finish"] == "reverse-holo" and not p["foilPattern"]]
-    assert [p["verificationStatus"] for p in remainder] == ["marketplace-claimed"]
+    # 151C 143 has two photographed balls; the owner closed its list (OAF-20261103-151C-143-zh-hans),
+    # so the pattern-less Cardmarket reverse folds into both instead of staying a third printing.
+    assert [(p["finish"], p["foilPattern"]) for p in unit_by_id["F0000"]["printings"]] == [
+        ("non-holo", None), ("reverse-holo", "master-ball"), ("reverse-holo", "poke-ball")]
     pgo = {(p["finish"], p["foilPattern"]) for p in unit_by_id["F0250"]["printings"]}
     assert {("holo", None), ("holo", "cosmos")} <= pgo
     reverse_print = next(p for p in spanish_generations["printings"] if p["finish"] == "reverse-holo")

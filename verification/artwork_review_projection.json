@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-03",
-  "projectionVersion": "a902a35ddade3c65a31c6a72f704c0a19b67f2e0b3b731e422e707d24696509e",
+  "projectionVersion": "7d37118b0b41fe77cde022f8d2678ddd7b0673c1060829c23ef7822ca9970ec5",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 934,
-    "sourceObservations": 3500
+    "sourceObservations": 3504
   },
   "groups": [
     {
@@ -23878,7 +23878,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0076",
-              "sourcePrintingId": "F0076-P03",
+              "sourcePrintingId": "F0076-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:17f5e7e2f114012be81886e1",
               "specimenIds": [
                 "SPEC-0691"
@@ -23901,6 +23901,11 @@
                   ],
                   "retrievedAt": "2026-08-27",
                   "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             },
@@ -23917,7 +23922,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0076",
-              "sourcePrintingId": "F0076-P04",
+              "sourcePrintingId": "F0076-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:5b424b59bcc760a3370a3a21",
               "specimenIds": [
                 "SPEC-0690"
@@ -23940,6 +23945,11 @@
                   ],
                   "retrievedAt": "2026-08-27",
                   "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 }
               ]
             }
@@ -24036,12 +24046,39 @@
               "image": null
             },
             {
-              "observationId": "finish:F0076-P03:0:80dc2d55912f76fe",
+              "observationId": "finish:F0076-P02:0:80dc2d55912f76fe",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/eGkAAeSw0-5qorAj/s-l1600.jpg",
               "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U, ©2026, on a stand. A Master Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0691.",
-              "contentHash": "a554587f557c102c05572c641f39ec94b5c51376cd7352e52d3974e227979bfb",
+              "contentHash": "ecf53a23d7f76fab9731dc6f63952f471e26f874df7e7db9b3f0ef5b59177587",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0076-P02:1:c356431bdf00288b",
+              "kind": "finish",
+              "provider": "Official Mainland China Simplified Chinese card-finish guide",
+              "url": "https://www.pokemon.cn/tcg/product/16377.html",
+              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
+              "contentHash": "31ad59ed38aa19c72ca4e63bcf7e948bf0b57aed897fa8d62e62f5d6a847978e",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0076-P02:2:fa9b07cdc750416b",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "587fe7238ce1b8c1be123b1b13b1446f29da2dc2115a81bc6c4f3ca74a45da15",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0076-P03:0:68d28b398957a401",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/9YoAAeSwajdqwAFS/s-l1600.jpg",
+              "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0690.",
+              "contentHash": "7f2cd6b628a595ae010fcf79fcc3821961107613abf463fe7a54e214136f7af6",
               "image": null
             },
             {
@@ -24050,25 +24087,16 @@
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
-              "contentHash": "8b927c06457663032fc5dd7175fd93b0184152ba7c1ef5c6a4fcc93d34faab19",
+              "contentHash": "bdf8a0efc4f69dba0a8975fecbcf33496ad64bbdc6bf6d0e6edfcb1c08b2df80",
               "image": null
             },
             {
-              "observationId": "finish:F0076-P04:0:68d28b398957a401",
+              "observationId": "finish:F0076-P03:2:fa9b07cdc750416b",
               "kind": "finish",
-              "provider": "Seller listing photograph",
-              "url": "https://i.ebayimg.com/images/g/9YoAAeSwajdqwAFS/s-l1600.jpg",
-              "evidence": "Simplified Chinese 卡比兽 HP 160, 填饱肚子, 重磅冲击 160, Illus. Souichirou Gunjima, H regulation mark, csv7C 158/204 U. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0690.",
-              "contentHash": "c7e9209eb879a7fa517045ac072ab12950cfa400e8fe6430d5cc42bc9005a2e3",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0076-P04:1:c356431bdf00288b",
-              "kind": "finish",
-              "provider": "Official Mainland China Simplified Chinese card-finish guide",
-              "url": "https://www.pokemon.cn/tcg/product/16377.html",
-              "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
-              "contentHash": "e75620304f9cb3ad9ccbf7afb8593a8bde3044831d36b433551c8a5fdcafba6f",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Blade-Awakening/Snorlax-CSV7C158",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "9075e7c0dee0a2e6feb4808b5ed8acee738c7656a950ddbabd935c743aa95a90",
               "image": null
             },
             {
@@ -106778,7 +106806,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0000",
-              "sourcePrintingId": "F0000-P03",
+              "sourcePrintingId": "F0000-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:36d58c3f5f8d0b2e11e15db8",
               "specimenIds": [
                 "SPEC-0683"
@@ -106789,6 +106817,11 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025. A Master Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0683.",
                   "retrievedAt": "2026-11-03"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/16377.html",
@@ -106860,7 +106893,7 @@
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0000",
-              "sourcePrintingId": "F0000-P04",
+              "sourcePrintingId": "F0000-P03",
               "establishingClaimId": "CLAIM:finish:PRINTING:c55cffdd779d1f42be611f75",
               "specimenIds": [
                 "SPEC-0684"
@@ -106871,6 +106904,11 @@
                   "sourceType": "Seller listing photograph",
                   "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025, in a graded holder labelled 2025 POKEMON CHN 卡比兽 151C-143/151 GEM MINT 10, No.13049519. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0684.",
                   "retrievedAt": "2026-11-03"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
+                  "sourceType": "Cardmarket catalogue hint (not external verification)",
+                  "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest."
                 },
                 {
                   "url": "https://www.pokemon.cn/tcg/product/16377.html",
@@ -106990,39 +107028,57 @@
               "image": null
             },
             {
-              "observationId": "finish:F0000-P03:0:0575fc157553cab4",
+              "observationId": "finish:F0000-P02:0:0575fc157553cab4",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/op8AAeSw-JNqJlYx/s-l1600.jpg",
               "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025. A Master Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0683.",
-              "contentHash": "859ed849ee326286a9730af9178378a421ad41405be80e87a97d316dd27b3a9e",
+              "contentHash": "9844011338a0badb0f18854723debd0750dda506547e8205524f74b7b145986c",
               "image": null
             },
             {
-              "observationId": "finish:F0000-P03:1:c356431bdf00288b",
+              "observationId": "finish:F0000-P02:1:7709aa3056de8185",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "8194827b6685514928a60ba5faadd31bb5d48dabb1e68539a563794d67ab11ad",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0000-P02:2:c356431bdf00288b",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
-              "contentHash": "c498fd9ca9b86291c802846ff52f439f331e6b36c02cd58fd8fd56a69c987b1e",
+              "contentHash": "5b2c3f7e5b42b34a4219fc4765a0568fddd4f2632de05aa71ad4a432b272c342",
               "image": null
             },
             {
-              "observationId": "finish:F0000-P04:0:46b67b828352e4f8",
+              "observationId": "finish:F0000-P03:0:46b67b828352e4f8",
               "kind": "finish",
               "provider": "Seller listing photograph",
               "url": "https://i.ebayimg.com/images/g/HHoAAeSwOZxq3rvy/s-l1600.jpg",
               "evidence": "Simplified Chinese 卡比兽 HP 150, 特性 贪嘴, 厚重压制 130, Illus. HYOGONOSUKE, G regulation mark, 151C 143/151 U, ©2025, in a graded holder labelled 2025 POKEMON CHN 卡比兽 151C-143/151 GEM MINT 10, No.13049519. A Poké Ball pattern is visible in the reflective foil across the card body outside the artwork. Retained as SPEC-0684.",
-              "contentHash": "5e2d880f5eefa565d878f2bb89858242108f1be53129b12c0c8e2db8855af117",
+              "contentHash": "18d644794966a6776771e4a5b07b5a7a0bb756373ddfdea509573ce3a30090f0",
               "image": null
             },
             {
-              "observationId": "finish:F0000-P04:1:c356431bdf00288b",
+              "observationId": "finish:F0000-P03:1:7709aa3056de8185",
+              "kind": "finish",
+              "provider": "Cardmarket catalogue hint (not external verification)",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Collect-151/Snorlax-V1-151C143",
+              "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
+              "contentHash": "3bc8567d49c7d4d01b6c912cd92c4c24da19c263ae4cf0e2adc554f580a2abc2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0000-P03:2:c356431bdf00288b",
               "kind": "finish",
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
-              "contentHash": "468057cd0871a715ed98a421a18128878576eb3fae63d8263e48287c26df66cc",
+              "contentHash": "2a580564b8b806964243031fd951fb6b8fb880665a95c1b49a2415d2edd8db5a",
               "image": null
             },
             {

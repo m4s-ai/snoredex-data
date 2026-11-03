@@ -7957,24 +7957,6 @@
     },
     {
       "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:085041b1c853fa80570d19b9",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:085041b1c853fa80570d19b9",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0000-P02",
-        "semanticPrintingId": "PRINTING:085041b1c853fa80570d19b9",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
       "entityId": "CLAIM:finish:PRINTING:08a14f6837fcc8761ae6bfdf",
       "origin": "physical-evidence-projection",
       "payload": {
@@ -8654,7 +8636,7 @@
         "claimId": "CLAIM:finish:PRINTING:17f5e7e2f114012be81886e1",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0076-P03",
+        "sourceId": "F0076-P02",
         "semanticPrintingId": "PRINTING:17f5e7e2f114012be81886e1",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -10090,7 +10072,7 @@
         "claimId": "CLAIM:finish:PRINTING:36d58c3f5f8d0b2e11e15db8",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0000-P03",
+        "sourceId": "F0000-P02",
         "semanticPrintingId": "PRINTING:36d58c3f5f8d0b2e11e15db8",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -11555,7 +11537,7 @@
         "claimId": "CLAIM:finish:PRINTING:5b424b59bcc760a3370a3a21",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0076-P04",
+        "sourceId": "F0076-P03",
         "semanticPrintingId": "PRINTING:5b424b59bcc760a3370a3a21",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -15217,7 +15199,7 @@
         "claimId": "CLAIM:finish:PRINTING:c55cffdd779d1f42be611f75",
         "claimKind": "physical-printing",
         "sourceKind": "finish-printing-record",
-        "sourceId": "F0000-P04",
+        "sourceId": "F0000-P03",
         "semanticPrintingId": "PRINTING:c55cffdd779d1f42be611f75",
         "evidenceStatus": "confirmed",
         "disposition": "established-and-mapped",
@@ -15420,24 +15402,6 @@
         "materializedTargetId": null,
         "reason": "finish printing record carries positive evidence",
         "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CS5aC:093:Snorlax-Block-Collapse"
-      }
-    },
-    {
-      "entityType": "candidate-claim",
-      "entityId": "CLAIM:finish:PRINTING:cf3aaa809bbf792afe371241",
-      "origin": "physical-evidence-projection",
-      "payload": {
-        "claimId": "CLAIM:finish:PRINTING:cf3aaa809bbf792afe371241",
-        "claimKind": "physical-printing",
-        "sourceKind": "finish-printing-record",
-        "sourceId": "F0076-P02",
-        "semanticPrintingId": "PRINTING:cf3aaa809bbf792afe371241",
-        "evidenceStatus": "marketplace-claimed",
-        "disposition": "candidate-needs-evidence",
-        "proposedTargetId": null,
-        "materializedTargetId": null,
-        "reason": "finish printing record carries positive evidence",
-        "proposedCardReleaseId": "RELEASE:CN:S-Chinese:CSV7C:158:Snorlax-But-First-Food-Heavy-Impact"
       }
     },
     {
@@ -98500,7 +98464,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0076",
-        "sourcePrintingId": "F0076-P03",
+        "sourcePrintingId": "F0076-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:17f5e7e2f114012be81886e1",
         "specimenIds": [
           "SPEC-0691"
@@ -100269,7 +100233,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0000",
-        "sourcePrintingId": "F0000-P03",
+        "sourcePrintingId": "F0000-P02",
         "establishingClaimId": "CLAIM:finish:PRINTING:36d58c3f5f8d0b2e11e15db8",
         "specimenIds": [
           "SPEC-0683"
@@ -102067,7 +102031,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0076",
-        "sourcePrintingId": "F0076-P04",
+        "sourcePrintingId": "F0076-P03",
         "establishingClaimId": "CLAIM:finish:PRINTING:5b424b59bcc760a3370a3a21",
         "specimenIds": [
           "SPEC-0690"
@@ -106339,7 +106303,7 @@
         "errorClass": null,
         "classificationState": "classified-from-positive-evidence",
         "sourceFinishUnitId": "F0000",
-        "sourcePrintingId": "F0000-P04",
+        "sourcePrintingId": "F0000-P03",
         "establishingClaimId": "CLAIM:finish:PRINTING:c55cffdd779d1f42be611f75",
         "specimenIds": [
           "SPEC-0684"
@@ -190360,14 +190324,6 @@
     },
     {
       "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:085041b1c853fa80570d19b9",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:151C:143:Snorlax-Voraciousness-Thudding-Press",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
       "fromId": "CLAIM:finish:PRINTING:08a14f6837fcc8761ae6bfdf",
       "relation": "materializes",
       "toType": "physical-printing",
@@ -194322,14 +194278,6 @@
       "relation": "proposes-for",
       "toType": "card-release",
       "toId": "RELEASE:CN:S-Chinese:CS5aC:093:Snorlax-Block-Collapse",
-      "provenance": {}
-    },
-    {
-      "fromType": "candidate-claim",
-      "fromId": "CLAIM:finish:PRINTING:cf3aaa809bbf792afe371241",
-      "relation": "proposes-for",
-      "toType": "card-release",
-      "toId": "RELEASE:CN:S-Chinese:CSV7C:158:Snorlax-But-First-Food-Heavy-Impact",
       "provenance": {}
     },
     {
@@ -304401,20 +304349,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0000-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0000-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:36d58c3f5f8d0b2e11e15db8",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0000-P04",
+      "sourceId": "F0000-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:c55cffdd779d1f42be611f75",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
@@ -305185,20 +305126,13 @@
     {
       "sourceKind": "finish-printing-record",
       "sourceId": "F0076-P02",
-      "disposition": "candidate-needs-evidence",
-      "targetRef": null,
-      "reason": "finish printing record carries positive evidence"
-    },
-    {
-      "sourceKind": "finish-printing-record",
-      "sourceId": "F0076-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:17f5e7e2f114012be81886e1",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
     },
     {
       "sourceKind": "finish-printing-record",
-      "sourceId": "F0076-P04",
+      "sourceId": "F0076-P03",
       "disposition": "established-and-mapped",
       "targetRef": "PHYSICAL:PRINTING:5b424b59bcc760a3370a3a21",
       "reason": "canonical specimen observations and finish evidence establish the exact finish and edition"
@@ -329289,12 +329223,12 @@
     }
   ],
   "summary": {
-    "entities": 9187,
-    "edges": 13289,
-    "migrationInputs": 3355,
+    "entities": 9185,
+    "edges": 13287,
+    "migrationInputs": 3353,
     "migrationDispositions": {
       "bounded-contradicted": 96,
-      "candidate-needs-evidence": 340,
+      "candidate-needs-evidence": 338,
       "carried": 69,
       "established-and-mapped": 1751,
       "linked-local-counterpart": 126,
@@ -329304,7 +329238,7 @@
       "positively-excluded": 84,
       "split": 122
     },
-    "candidateClaims": 2261,
+    "candidateClaims": 2259,
     "cardReleases": 629,
     "physicalPrintings": 934,
     "setSourceRecords": 752,

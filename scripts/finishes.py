@@ -666,23 +666,38 @@ def _class_statement_sources(printing: dict[str, Any]):
     return class_sources, market_sources
 
 
-def absorb_patternless_marketplace_claims(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Fold a pattern-less marketplace finish claim into its one established patterned printing.
+def absorb_patternless_marketplace_claims(
+    printings: list[dict[str, Any]], decision: dict[str, Any] | None = None
+) -> list[dict[str, Any]]:
+    """Fold a pattern-less marketplace finish claim into its established patterned printings.
 
     A Cardmarket reverse-holo axis says only that a reverse exists. When a photograph has since
     established exactly one reverse of the same identity with a visible pattern, that printing
     is the claimed reverse, not a second collectible. With two or more patterned candidates the
-    claim stays unrefined (reconciliation refines only when one compatible value remains).
+    claim stays unrefined (reconciliation refines only when one compatible value remains) —
+    unless the owner has closed the unit's finish list with that finish: then the list holds
+    no further printing, and the claim is satisfied by every patterned one (#438).
     """
+    closed = set(decision.get("availableFinishes") or []) if (
+        decision and decision.get("decision") == "finish-complete") else set()
     kept = []
     for printing in printings:
-        siblings = _patterned_siblings(printing, printings)
-        if (printing.get("foilPattern") or printing["verificationStatus"] != "marketplace-claimed"
-                or not _is_card_level_finish_evidence(printing) or len(siblings) != 1):
+        targets = _claim_fold_targets(printing, printings, closed)
+        if not targets:
             kept.append(printing)
             continue
-        _fold_sources(siblings[0], printing)
+        for sibling in targets:
+            _fold_sources(sibling, printing)
     return kept
+
+
+def _claim_fold_targets(printing: dict[str, Any], printings: list[dict[str, Any]], closed: set[str]):
+    """Patterned printings a pattern-less marketplace claim folds into; empty keeps the claim."""
+    if (printing.get("foilPattern") or printing["verificationStatus"] != "marketplace-claimed"
+            or not _is_card_level_finish_evidence(printing)):
+        return []
+    siblings = _patterned_siblings(printing, printings)
+    return siblings if printing["finish"] in closed or len(siblings) == 1 else []
 
 
 def drop_owner_rejected_finishes(
@@ -1711,8 +1726,11 @@ def _build_finish_unit(
         for printing in printings:
             add_printing(deduplicated_printings, printing)
         printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
-            absorb_patternless_marketplace_claims(absorb_patternless_class_statements(
-                absorb_editionless_finish_evidence(absorb_qualified_tcgdex_evidence(deduplicated_printings)))),
+            absorb_patternless_marketplace_claims(
+                absorb_patternless_class_statements(absorb_editionless_finish_evidence(
+                    absorb_qualified_tcgdex_evidence(deduplicated_printings))),
+                owner_finish_decisions.get((set_code, number, language)),
+            ),
             owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(
