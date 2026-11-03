@@ -435,10 +435,14 @@ cards" means `holo`, and a rarity-R photograph with line foil across artwork and
 The technical `mirror-holo` is a reverse holo with a mirror finish, where everything outside the
 artwork, text box included, reflects solidly. A pattern on that foil outside the artwork (Poké
 Ball, Master Ball, star, sparkle) is stored as `reverse-holo` with its `foilPattern`, so a
-pattern-less Cardmarket reverse claim folds into the one photographed pattern. The correction is
-[`correct_438_cn_mirror_terminology_20261103.py`](passes/correct_438_cn_mirror_terminology_20261103.py);
-earlier `mirror-holo` ball or star records outside its scope (for example `xsv2a`, `xm2a`) are
-unchanged until reviewed.
+pattern-less Cardmarket reverse claim folds into the one photographed pattern. The corrections are
+[`correct_438_cn_mirror_terminology_20261103.py`](passes/correct_438_cn_mirror_terminology_20261103.py)
+and, after the owner reviewed every remaining record,
+[`correct_438_mirror_holo_scope_20261103.py`](passes/correct_438_mirror_holo_scope_20261103.py);
+`finishes.py` maps a curated "Poké Ball/Master Ball mirror holo" variant name the same way. Only
+TW S-P 145 (owner: reverse holo with mirror finish) and the unreviewed JP sA 10 remain
+`mirror-holo`. Cardmarket's `xsv2a` is not a separate card: `sv2a` is the printed number, and the
+`x` code only separates the mirror cards.
 
 ## The owner's rarity rule is a research guide, not evidence (#438)
 

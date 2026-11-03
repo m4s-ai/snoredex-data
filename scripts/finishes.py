@@ -608,6 +608,25 @@ def _patterned_siblings(printing: dict[str, Any], printings: list[dict[str, Any]
     ]
 
 
+VARIANT_NAME_FINISHES = (("non-holo", "non-holo"), ("mirror holo", "mirror-holo"), ("holo", "holo"))
+VARIANT_NAME_PATTERNS = (
+    ("master ball", "master-ball"), ("poké ball", "poke-ball"), ("poke ball", "poke-ball"),
+    ("cosmos", "cosmos"), ("colourless-energy star", "colorless-energy-star"),
+)
+
+
+def variant_name_finish(variant_name: str) -> tuple[str | None, str | None]:
+    """Read the technical finish and pattern a curated variant name states (first match wins)."""
+    name = variant_name.casefold()
+    finish = next((value for phrase, value in VARIANT_NAME_FINISHES if phrase in name), None)
+    pattern = next((value for phrase, value in VARIANT_NAME_PATTERNS if phrase in name), None)
+    # A patterned "mirror" is a reverse holo with that pattern; mirror-holo is the plain solid
+    # mirror finish outside the artwork (owner vocabulary, 2026-11-03, #438).
+    if finish == "mirror-holo" and pattern:
+        finish = "reverse-holo"
+    return finish, pattern
+
+
 def absorb_patternless_marketplace_claims(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Fold a pattern-less marketplace finish claim into its one established patterned printing.
 
@@ -1493,23 +1512,7 @@ def _build_finish_unit(
 
             variant_name = str(product.get("variantName") or "")
             if variant_name:
-                normalized_name = variant_name.casefold()
-                named_finish = None
-                named_pattern = None
-                if "non-holo" in normalized_name:
-                    named_finish = "non-holo"
-                elif "mirror holo" in normalized_name:
-                    named_finish = "mirror-holo"
-                elif "holo" in normalized_name:
-                    named_finish = "holo"
-                if "master ball" in normalized_name:
-                    named_pattern = "master-ball"
-                elif "poké ball" in normalized_name or "poke ball" in normalized_name:
-                    named_pattern = "poke-ball"
-                elif "cosmos" in normalized_name:
-                    named_pattern = "cosmos"
-                elif "colourless-energy star" in normalized_name:
-                    named_pattern = "colorless-energy-star"
+                named_finish, named_pattern = variant_name_finish(variant_name)
                 if named_finish:
                     add_printing(
                         printings,

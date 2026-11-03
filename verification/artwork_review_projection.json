@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-03",
-  "projectionVersion": "452b7f9a25443b67f8c7cbbb630a03e410eb176f0854d1d47f2bc34d10186026",
+  "projectionVersion": "a95c62553343e7ef86ca1f8528b51d3252964a2e94b3f153f1c0b6b1084d962c",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -16,8 +16,8 @@
     "mappedAppearances": 0,
     "unmappedReleases": 0,
     "cardReleases": 629,
-    "physicalPrintings": 941,
-    "sourceObservations": 3494
+    "physicalPrintings": 939,
+    "sourceObservations": 3507
   },
   "groups": [
     {
@@ -10489,20 +10489,20 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:760b4269462960075b2e8546",
-              "semanticPrintingId": "PRINTING:760b4269462960075b2e8546",
+              "physicalPrintingId": "PHYSICAL:PRINTING:5b82cd8aabb903857012f5b7",
+              "semanticPrintingId": "PRINTING:5b82cd8aabb903857012f5b7",
               "cardReleaseId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0606",
               "sourcePrintingId": "F0606-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:760b4269462960075b2e8546",
+              "establishingClaimId": "CLAIM:finish:PRINTING:5b82cd8aabb903857012f5b7",
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
@@ -10521,6 +10521,11 @@
                   "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
                 },
                 {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
                   "url": "https://www.pokeca.net/product/22292",
                   "sourceType": "Specialist card listing with exact variant image",
                   "authorityTier": "physical-specimen",
@@ -10537,21 +10542,26 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:7c29f4d9750a8aa764278b2c",
-              "semanticPrintingId": "PRINTING:7c29f4d9750a8aa764278b2c",
+              "physicalPrintingId": "PHYSICAL:PRINTING:982c11a503f1e91cba753c5d",
+              "semanticPrintingId": "PRINTING:982c11a503f1e91cba753c5d",
               "cardReleaseId": "RELEASE:ID:Indonesian:MA3 I:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "colorless-energy-star",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0606",
               "sourcePrintingId": "F0606-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:7c29f4d9750a8aa764278b2c",
+              "establishingClaimId": "CLAIM:finish:PRINTING:982c11a503f1e91cba753c5d",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+                },
                 {
                   "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
                   "sourceType": "Specialist card listing with exact variant image",
@@ -10630,7 +10640,7 @@
             "variant": "V1, base, V2",
             "finish": [
               "holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "poke-ball",
@@ -10774,39 +10784,48 @@
               "image": null
             },
             {
-              "observationId": "finish:F0606-P01:0:4c8b53494a8680e8",
+              "observationId": "finish:F0606-P01:0:0104be7d6a00a549",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern",
+              "contentHash": "8ee52fb5bf645ad67742af003dcd7a64b4b00d5e5f306dcb93161726eea87a2d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0606-P01:1:4c8b53494a8680e8",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
               "evidence": "Identifies Snorlax 136/193 with the Colorless Energy mirror treatment.",
-              "contentHash": "6e1ba369cb3c9cda1772fdf9d62ebf57248e1307c0cb74aba500c4eb09d41450",
+              "contentHash": "70c9c8cdc757bd0ca2305e92c990ca72967f438664005418e69019b6b8380b8a",
               "image": null
             },
             {
-              "observationId": "finish:F0606-P01:1:70095cbef928516c",
+              "observationId": "finish:F0606-P01:2:70095cbef928516c",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "59a14a0c76177850ea0b5f0cbff2cd972fc9a3d9b4dfcc8e574def731c989777",
+              "contentHash": "5dd26929eb8bf303394d1a62eb5e817215e75732f0946d8fdb9b3bd96ec8325d",
               "image": null
             },
             {
-              "observationId": "finish:F0606-P01:2:8b0b29f7efff8575",
+              "observationId": "finish:F0606-P01:3:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "f986e687e61f59d8de9b77e53bb5d273f0e1d1b44b77c12efd443375aef57300",
+              "contentHash": "bf1e9d9e037fd17e24b7c0f6ead93ca5d74036a7a32784d98d6fbce01facde63",
               "image": null
             },
             {
-              "observationId": "finish:F0606-P01:3:e73541456a7ba796",
+              "observationId": "finish:F0606-P01:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "38c4344a3780192bbe80e86ccf5810bee4f2ad3bcc0b35134d4e84e8abfc4857",
+              "contentHash": "5105a2d7d2ed7a2881231ecdb0423fb994278df6667bf9ec3172c43e1c0af71e",
               "image": null
             },
             {
@@ -10815,7 +10834,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "8bd0c969ce0e12c4a9ca808e05d08716991f9d5c0179bea7993c831d2c4d6c94",
+              "contentHash": "34bac69522d9633cf4341c5e308492997e6eab60f263ca627c0dd6e0ea625598",
               "image": null
             },
             {
@@ -10824,25 +10843,34 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "981fb9b9082197ec87339e3178a67b8cf64f1408bec19310154f75c89403feda",
+              "contentHash": "815c6d5b9bc4fa901b547ae6b151c25a23d8b37dd282184e55fe43b8db1a3bc6",
               "image": null
             },
             {
-              "observationId": "finish:F0606-P02:2:c2330fed34cbcc7f",
+              "observationId": "finish:F0606-P02:2:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "9ac7f2623ce2a8908ffeeeb5649bf9e759aaf49ce1bea5111244e35a4beadd15",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0606-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "61983c088c9191abb72cdb3b8e94dc70b7b91dc94abb5446e170aca93f61a83d",
+              "contentHash": "be3c2a4269d9a5dcb854db881c6a1ba8be84bc74cdaf07f6a2b3dc230b41e31a",
               "image": null
             },
             {
-              "observationId": "finish:F0606-P02:3:e73541456a7ba796",
+              "observationId": "finish:F0606-P02:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "2f29728c728c314dcc30dba7ab2af2736b5bf4d933e58fc586642a6eed0720e1",
+              "contentHash": "b861ad5628f39e200b7cf8b8342603709e3dc4b8a417552cf027372d157d47cf",
               "image": null
             },
             {
@@ -11234,21 +11262,79 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:5c85931880a3b6b122807e77",
-              "semanticPrintingId": "PRINTING:5c85931880a3b6b122807e77",
+              "physicalPrintingId": "PHYSICAL:PRINTING:12faa180d7d851dd8431ced1",
+              "semanticPrintingId": "PRINTING:12faa180d7d851dd8431ced1",
               "cardReleaseId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "poke-ball",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0607",
+              "sourcePrintingId": "F0607-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:12faa180d7d851dd8431ced1",
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "Cardmarket stock image (visual evidence)",
+                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+                  "supportsAbsence": false,
+                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
+                },
+                {
+                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
+                  "sourceType": "Official Japanese MEGA Dream ex product page",
+                  "authorityTier": "official-primary",
+                  "coverage": "product-line-description",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
+                  "url": "https://www.pokeca.net/product/22292",
+                  "sourceType": "Specialist card listing with exact variant image",
+                  "authorityTier": "physical-specimen",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
+                },
+                {
+                  "sourceType": "Owner attestation plus downloaded scan review",
+                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
+                  "supportsAbsence": false
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:31167d0b34951ac935947280",
+              "semanticPrintingId": "PRINTING:31167d0b34951ac935947280",
+              "cardReleaseId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "colorless-energy-star",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0607",
               "sourcePrintingId": "F0607-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:5c85931880a3b6b122807e77",
+              "establishingClaimId": "CLAIM:finish:PRINTING:31167d0b34951ac935947280",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+                },
                 {
                   "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
                   "sourceType": "Specialist card listing with exact variant image",
@@ -11273,54 +11359,6 @@
                   "supportsAbsence": false,
                   "retrievedAt": "2026-07-23",
                   "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
-                },
-                {
-                  "sourceType": "Owner attestation plus downloaded scan review",
-                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-                  "supportsAbsence": false
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:a282684242a44a4f1e539c3d",
-              "semanticPrintingId": "PRINTING:a282684242a44a4f1e539c3d",
-              "cardReleaseId": "RELEASE:TH:Thai:MA3:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0607",
-              "sourcePrintingId": "F0607-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:a282684242a44a4f1e539c3d",
-              "sources": [
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-                  "sourceType": "Cardmarket stock image (visual evidence)",
-                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-                  "supportsAbsence": false,
-                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
-                },
-                {
-                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
-                  "sourceType": "Official Japanese MEGA Dream ex product page",
-                  "authorityTier": "official-primary",
-                  "coverage": "product-line-description",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
-                },
-                {
-                  "url": "https://www.pokeca.net/product/22292",
-                  "sourceType": "Specialist card listing with exact variant image",
-                  "authorityTier": "physical-specimen",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
                 },
                 {
                   "sourceType": "Owner attestation plus downloaded scan review",
@@ -11364,7 +11402,7 @@
             "variant": "V1, base, V2",
             "finish": [
               "holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "poke-ball",
@@ -11488,39 +11526,48 @@
               "image": null
             },
             {
-              "observationId": "finish:F0607-P01:0:4c8b53494a8680e8",
+              "observationId": "finish:F0607-P01:0:0104be7d6a00a549",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern",
+              "contentHash": "c96fa9d311f22560754baf7019b6e4abf5d4f8cd12c2c40c9ff40ca006ca63a0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0607-P01:1:4c8b53494a8680e8",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
               "evidence": "Identifies Snorlax 136/193 with the Colorless Energy mirror treatment.",
-              "contentHash": "d96a75caae8fb20733eb30bed01aa53d7ea3ec7c8e5b3b8aaeff211a1d27fc10",
+              "contentHash": "7ff168db321cefa5637a4277b58c77251b9a45bb0809da56208ad3f381484669",
               "image": null
             },
             {
-              "observationId": "finish:F0607-P01:1:70095cbef928516c",
+              "observationId": "finish:F0607-P01:2:70095cbef928516c",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "b0135cec98905f8db90f71338a6063b5c3c45554fc89c7a52c8e0e655461657a",
+              "contentHash": "92b5d483ce8f9f42fa6cea75c3db804a1dad10175681c051d8273a877855f83f",
               "image": null
             },
             {
-              "observationId": "finish:F0607-P01:2:8b0b29f7efff8575",
+              "observationId": "finish:F0607-P01:3:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "6f1bcb148a7f24c423eef2c0f1ea6d3525f7f9f76086f153b5035f8b4e74e4d9",
+              "contentHash": "93e3e6ce2ac4c8f3952f9242023da201858583d4eace5251879e4e68aba264a0",
               "image": null
             },
             {
-              "observationId": "finish:F0607-P01:3:e73541456a7ba796",
+              "observationId": "finish:F0607-P01:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "0d39e724bae635904124f7788cbed31725e9dc93c636e06fb4a119bc23feef6a",
+              "contentHash": "91d60c12e0d1e27d4c6d878cdfcd1c14284fbe7648277b15882e9018135858a7",
               "image": null
             },
             {
@@ -11529,7 +11576,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "96ab969259ac4d889d5017b19e143ecd1e57afbbb988ed9d68189ac5f0f39f77",
+              "contentHash": "cfe57be81f1fe0dcd580f03e05a9f36b00ba9bc595f6ef83612cffc4987c00de",
               "image": null
             },
             {
@@ -11538,25 +11585,34 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "23b7488a39b75781ed7b0f199e86651a511cb5db6745a8e247157cc41a33f144",
+              "contentHash": "42c4e95067e1c2c5e4dc6825d3e756457f5c40f0198307da4d5a6b08d4d48076",
               "image": null
             },
             {
-              "observationId": "finish:F0607-P02:2:c2330fed34cbcc7f",
+              "observationId": "finish:F0607-P02:2:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "de82ed5732fe03bebeef4ac9715e23d954eec6ec65d785ac7c6d632b9a39f3b1",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0607-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "7ecc19327aa2dbb388a6fb3ef6726cff897edcf52d09d4fc79739b3e68ac78e1",
+              "contentHash": "6c24b912b648f049e6387d06c690058260becd73b4dc0513ef949d16b03df699",
               "image": null
             },
             {
-              "observationId": "finish:F0607-P02:3:e73541456a7ba796",
+              "observationId": "finish:F0607-P02:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "e9cfdfcb94d8781b116861c5c701211077a7f8818e84dcef3a6c7ecf3d19a11a",
+              "contentHash": "94c6f9910f13fd6fca0274ac177e894076e0f86224d35a2775d4dc4d4bfdac4f",
               "image": null
             },
             {
@@ -11681,6 +11737,59 @@
           ],
           "physicalPrintings": [
             {
+              "physicalPrintingId": "PHYSICAL:PRINTING:0c40c06d51b59838ed4f7066",
+              "semanticPrintingId": "PRINTING:0c40c06d51b59838ed4f7066",
+              "cardReleaseId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "poke-ball",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0605",
+              "sourcePrintingId": "F0605-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0c40c06d51b59838ed4f7066",
+              "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "Cardmarket stock image (visual evidence)",
+                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+                  "supportsAbsence": false,
+                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
+                },
+                {
+                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
+                  "sourceType": "Official Japanese MEGA Dream ex product page",
+                  "authorityTier": "official-primary",
+                  "coverage": "product-line-description",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
+                  "url": "https://www.pokeca.net/product/22292",
+                  "sourceType": "Specialist card listing with exact variant image",
+                  "authorityTier": "physical-specimen",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
+                },
+                {
+                  "sourceType": "Owner attestation plus downloaded scan review",
+                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
+                  "supportsAbsence": false
+                }
+              ]
+            },
+            {
               "physicalPrintingId": "PHYSICAL:PRINTING:8edc82f6b7151c3ad24b9cd5",
               "semanticPrintingId": "PRINTING:8edc82f6b7151c3ad24b9cd5",
               "cardReleaseId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
@@ -11708,21 +11817,26 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:cc2bdcc737584632ac55a1be",
-              "semanticPrintingId": "PRINTING:cc2bdcc737584632ac55a1be",
+              "physicalPrintingId": "PHYSICAL:PRINTING:9e425af07f8fc23ff2b1e8dc",
+              "semanticPrintingId": "PRINTING:9e425af07f8fc23ff2b1e8dc",
               "cardReleaseId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "colorless-energy-star",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0605",
               "sourcePrintingId": "F0605-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:cc2bdcc737584632ac55a1be",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9e425af07f8fc23ff2b1e8dc",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+                },
                 {
                   "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
                   "sourceType": "Specialist card listing with exact variant image",
@@ -11754,54 +11868,6 @@
                   "supportsAbsence": false
                 }
               ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:d308802e3de534a43bd4634d",
-              "semanticPrintingId": "PRINTING:d308802e3de534a43bd4634d",
-              "cardReleaseId": "RELEASE:TW:T-Chinese:M2a F:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0605",
-              "sourcePrintingId": "F0605-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:d308802e3de534a43bd4634d",
-              "sources": [
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-                  "sourceType": "Cardmarket stock image (visual evidence)",
-                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-                  "supportsAbsence": false,
-                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
-                },
-                {
-                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
-                  "sourceType": "Official Japanese MEGA Dream ex product page",
-                  "authorityTier": "official-primary",
-                  "coverage": "product-line-description",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
-                },
-                {
-                  "url": "https://www.pokeca.net/product/22292",
-                  "sourceType": "Specialist card listing with exact variant image",
-                  "authorityTier": "physical-specimen",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
-                },
-                {
-                  "sourceType": "Owner attestation plus downloaded scan review",
-                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-                  "supportsAbsence": false
-                }
-              ]
             }
           ],
           "detection": {
@@ -11811,7 +11877,7 @@
             "variant": "V1, base, V2, poke-ball-pattern, colorless-energy-star-pattern",
             "finish": [
               "holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "poke-ball",
@@ -11935,39 +12001,48 @@
               "image": null
             },
             {
-              "observationId": "finish:F0605-P01:0:4c8b53494a8680e8",
+              "observationId": "finish:F0605-P01:0:0104be7d6a00a549",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern",
+              "contentHash": "0b24f309b6f0c27e5ad0cb26ec8dcac3b35c997c9bc77f71254cd1e82f31de80",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0605-P01:1:4c8b53494a8680e8",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
               "evidence": "Identifies Snorlax 136/193 with the Colorless Energy mirror treatment.",
-              "contentHash": "2cb9d891c262ecf8a827041ba4356d2411a01b2b4b0d7947e1636d4ec451def5",
+              "contentHash": "ea082be21e2e297cad3b6d8b0510b866fae45a1e011f3a6bd3bb35e7a4d97589",
               "image": null
             },
             {
-              "observationId": "finish:F0605-P01:1:70095cbef928516c",
+              "observationId": "finish:F0605-P01:2:70095cbef928516c",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "56d286a5c1334bc833876ac7d6a30292c15b575c3e1c78bda6b4e66ca015bbb2",
+              "contentHash": "022bf7519e48d1868937bff67193c903d5907acb98be8b8917f1e24c46c5bf56",
               "image": null
             },
             {
-              "observationId": "finish:F0605-P01:2:8b0b29f7efff8575",
+              "observationId": "finish:F0605-P01:3:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "6fad9f631f26a892a8ee8acf83587789b341571a06257d810bc02d040747696a",
+              "contentHash": "1404c6c93390e5642f8cb350485989c1bc60a968306209cbe1671f100db79c91",
               "image": null
             },
             {
-              "observationId": "finish:F0605-P01:3:e73541456a7ba796",
+              "observationId": "finish:F0605-P01:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "585840c0723012a23e0bbc828df08d546fe1e2ed348fc29f5104be1c382215c3",
+              "contentHash": "336d3b0d3be654b653e9a170628d0f2280c69409b7cdda586fc3b2273e3b85a1",
               "image": null
             },
             {
@@ -11976,7 +12051,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "5d90b93c59b76577747fb1b2877b0e3d3c4ca2b9581f4145b70062e1a9ebe254",
+              "contentHash": "27b59acc0a899c5c15ee420ff5830ed9e20f87cf87fb9e763a261f48e3ad378b",
               "image": null
             },
             {
@@ -11985,25 +12060,34 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "3895e67cb85ca8cc3cb0c3633d0b368e215accba6d52d4e67f95e8361ebae98b",
+              "contentHash": "6be382a34174d014216fb226e71927d8b2c9f16251539b31fe26a1b6585a7a91",
               "image": null
             },
             {
-              "observationId": "finish:F0605-P02:2:c2330fed34cbcc7f",
+              "observationId": "finish:F0605-P02:2:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "dffc043f2759026d5c3caf759def0c86d3b03bd6b427cb1830e7804875301abb",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0605-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "ecd6f278683e93081258880a685d34af7fac1ca7408ea8dbce1cd7157f373dff",
+              "contentHash": "144a16128fd329a1da2d06f4529a7470384cd7a86c590985528af4199e7de5af",
               "image": null
             },
             {
-              "observationId": "finish:F0605-P02:3:e73541456a7ba796",
+              "observationId": "finish:F0605-P02:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "6512f5bb935c9e6672666eeb317d40077d80efd1b865bcd5b0aee9c8fccb7189",
+              "contentHash": "e04262796ffcf27c2d7448fd31129cd2a7b562ebc40c550e9f5625dc5df4c51f",
               "image": null
             },
             {
@@ -12137,21 +12221,26 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0603-P01",
-              "semanticPrintingId": "PRINTING:dbe74f1c06d0fe67aa475b90",
+              "physicalPrintingId": "PHYSICAL:PRINTING:8642217a35732a3ce3d213fc",
+              "semanticPrintingId": "PRINTING:8642217a35732a3ce3d213fc",
               "cardReleaseId": "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "colorless-energy-star",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0603",
               "sourcePrintingId": "F0603-P01",
-              "establishingClaimId": "CLAIM:finish:F0603-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:8642217a35732a3ce3d213fc",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+                },
                 {
                   "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
                   "sourceType": "Specialist card listing with exact variant image",
@@ -12185,20 +12274,20 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:F0603-P02",
-              "semanticPrintingId": "PRINTING:1dea835423c0989d39e40916",
+              "physicalPrintingId": "PHYSICAL:PRINTING:bd163a8239505ecc9716568f",
+              "semanticPrintingId": "PRINTING:bd163a8239505ecc9716568f",
               "cardReleaseId": "RELEASE:JP:Japanese:xm2a:136:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0603",
               "sourcePrintingId": "F0603-P02",
-              "establishingClaimId": "CLAIM:finish:F0603-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:bd163a8239505ecc9716568f",
               "sources": [
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
@@ -12215,6 +12304,11 @@
                   "supportsAbsence": false,
                   "retrievedAt": "2026-07-23",
                   "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
                 },
                 {
                   "url": "https://www.pokeca.net/product/22292",
@@ -12239,7 +12333,7 @@
             "artist": "OKACHEKE",
             "variant": "V1, V2",
             "finish": [
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "poke-ball",
@@ -12275,39 +12369,48 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0603-P01:0:4c8b53494a8680e8",
+              "observationId": "finish:F0603-P01:0:0104be7d6a00a549",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern",
+              "contentHash": "15da207f01c3ec9a434ecf6ea1f93535456460139ee1250fe7ba61af9157fd29",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0603-P01:1:4c8b53494a8680e8",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
               "evidence": "Identifies Snorlax 136/193 with the Colorless Energy mirror treatment.",
-              "contentHash": "e3be26b2dc4e3069e420dabc1db57267be72bf635e17cd1828afc8f98a5e3c65",
+              "contentHash": "3995ae5a560aa47e9d14de119e417ecd7bf52ad60bae81c099a1538ee481d7e2",
               "image": null
             },
             {
-              "observationId": "finish:F0603-P01:1:70095cbef928516c",
+              "observationId": "finish:F0603-P01:2:70095cbef928516c",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "b01e5011e3bdd858c6090aae2c4105e5ea5c29d50b6ddc32744b1d71a23f146b",
+              "contentHash": "89df65e752faf076816b83d053f367f5bf435056f3095cfc1fecb6c64f7c8c4d",
               "image": null
             },
             {
-              "observationId": "finish:F0603-P01:2:8b0b29f7efff8575",
+              "observationId": "finish:F0603-P01:3:8b0b29f7efff8575",
               "kind": "finish",
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "579980feeff888f3724560dc5e1fc043a07462683b2d42f7e4fcaeb9a560bfc0",
+              "contentHash": "21517a83882f2102e85b2ae65bf91a4824ba0400d252a6cd622148d8ab52d8d3",
               "image": null
             },
             {
-              "observationId": "finish:F0603-P01:3:e73541456a7ba796",
+              "observationId": "finish:F0603-P01:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "2934669a2360cb7956932f950806fd923eb1e3e3e7519d1a705f707e1cd05352",
+              "contentHash": "f9a10d8bfec7fa7b3ff2acddd52d597865f801fdbd0145b492578e1d2e00a80d",
               "image": null
             },
             {
@@ -12316,7 +12419,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "e2437c82a2a1fd709df9e6d6f04c24545198e7688c20e14d8bcc1a3e82ae93ee",
+              "contentHash": "800205e510572cb7571953ad378ea5bf3db5f1e769f242e52ff6584814da72cf",
               "image": null
             },
             {
@@ -12325,25 +12428,34 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "2254350d84ab57805a5a6160820f254325a390958939c1c6f7528fec22dd3f77",
+              "contentHash": "c516d4708ea1391ae1dc53111d5f820de3bc044a7ec83fa6cabf436dac7894d6",
               "image": null
             },
             {
-              "observationId": "finish:F0603-P02:2:c2330fed34cbcc7f",
+              "observationId": "finish:F0603-P02:2:a971f565ce22278f",
+              "kind": "finish",
+              "provider": "user + read off 5x upscaled crop of the scan",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
+              "contentHash": "33ce279afd41e1524b352d01e42f1e0950dbdd699757dd76b001a477fb9ce8fe",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0603-P02:3:c2330fed34cbcc7f",
               "kind": "finish",
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "b6ebcdb9a0bf041691c69fd2f4e30a6fbdf4786d921077d9003e7b65d635cd98",
+              "contentHash": "c2e91915c96e580acc4dd2be000c619cbb860ef235c378e4ac11b5e8a6575628",
               "image": null
             },
             {
-              "observationId": "finish:F0603-P02:3:e73541456a7ba796",
+              "observationId": "finish:F0603-P02:4:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "f9b0338604fb56838375959ee199c119fe9182d2e9d1e4ea911f61f377f41c0b",
+              "contentHash": "20c01a65b95fc72d6f95a0d1efd6d8d6b891c6d787d15b81b8f7237e9159c785",
               "image": null
             },
             {
@@ -12392,72 +12504,10 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:b41f1d8dedca63c41d5a7341",
-              "semanticPrintingId": "PRINTING:b41f1d8dedca63c41d5a7341",
+              "physicalPrintingId": "PHYSICAL:PRINTING:47ee3f4b6a5a615d6eef2512",
+              "semanticPrintingId": "PRINTING:47ee3f4b6a5a615d6eef2512",
               "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0604",
-              "sourcePrintingId": "F0604-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:b41f1d8dedca63c41d5a7341",
-              "specimenIds": [
-                "SPEC-0410"
-              ],
-              "sources": [
-                {
-                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410.",
-                  "retrievedAt": "2026-08-28"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-                  "sourceType": "Cardmarket stock image (visual evidence)",
-                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-                  "supportsAbsence": false,
-                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
-                },
-                {
-                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
-                  "sourceType": "Official Japanese MEGA Dream ex product page",
-                  "authorityTier": "official-primary",
-                  "coverage": "product-line-description",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
-                  "sourceType": "user + read off 5x upscaled crop of the scan",
-                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
-                },
-                {
-                  "url": "https://www.pokeca.net/product/22292",
-                  "sourceType": "Specialist card listing with exact variant image",
-                  "authorityTier": "physical-specimen",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "retrievedAt": "2026-07-23",
-                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
-                },
-                {
-                  "sourceType": "Owner attestation plus downloaded scan review",
-                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-                  "supportsAbsence": false
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:ee4456f2b28427f6f6447af2",
-              "semanticPrintingId": "PRINTING:ee4456f2b28427f6f6447af2",
-              "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "colorless-energy-star",
               "markings": null,
@@ -12467,7 +12517,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0604",
               "sourcePrintingId": "F0604-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:ee4456f2b28427f6f6447af2",
+              "establishingClaimId": "CLAIM:finish:PRINTING:47ee3f4b6a5a615d6eef2512",
               "specimenIds": [
                 "SPEC-0437"
               ],
@@ -12514,6 +12564,68 @@
                   "supportsAbsence": false
                 }
               ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:d1496d0dfa7a9835b21452e3",
+              "semanticPrintingId": "PRINTING:d1496d0dfa7a9835b21452e3",
+              "cardReleaseId": "RELEASE:KR:Korean:xm2a:136/193:Hops-Snorlax-Extra-Helpings-Dynamic-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "poke-ball",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0604",
+              "sourcePrintingId": "F0604-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:d1496d0dfa7a9835b21452e3",
+              "specimenIds": [
+                "SPEC-0410"
+              ],
+              "sources": [
+                {
+                  "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410.",
+                  "retrievedAt": "2026-08-28"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "Cardmarket stock image (visual evidence)",
+                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+                  "supportsAbsence": false,
+                  "image": "images/xm2a_136_Hop_s_Snorlax_V2_861745.png"
+                },
+                {
+                  "url": "https://www.pokemon-card.com/ex/m2a/index.html",
+                  "sourceType": "Official Japanese MEGA Dream ex product page",
+                  "authorityTier": "official-primary",
+                  "coverage": "product-line-description",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion."
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+                  "sourceType": "user + read off 5x upscaled crop of the scan",
+                  "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+                },
+                {
+                  "url": "https://www.pokeca.net/product/22292",
+                  "sourceType": "Specialist card listing with exact variant image",
+                  "authorityTier": "physical-specimen",
+                  "coverage": "positive-only",
+                  "supportsAbsence": false,
+                  "retrievedAt": "2026-07-23",
+                  "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment."
+                },
+                {
+                  "sourceType": "Owner attestation plus downloaded scan review",
+                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
+                  "supportsAbsence": false
+                }
+              ]
             }
           ],
           "detection": {
@@ -12522,7 +12634,7 @@
             "artist": null,
             "variant": "V1, V2",
             "finish": [
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "poke-ball",
@@ -12585,7 +12697,7 @@
               "provider": "user + read off 5x upscaled crop of the scan",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Curated variant name: mirror holo, colourless-energy star pattern",
-              "contentHash": "cbf80924d236aaea19e8828d2a89addcf810e78d166bfdddbf965cb0a881dbe3",
+              "contentHash": "ca7e359926284da51cbdde882183007f890909b0137b2e0d5074c890c04e6fd7",
               "image": null
             },
             {
@@ -12594,7 +12706,7 @@
               "provider": "Specialist card listing with exact variant image",
               "url": "https://shopping.fullcomp.jp/products/pdtubc5cjfpn",
               "evidence": "Identifies Snorlax 136/193 with the Colorless Energy mirror treatment.",
-              "contentHash": "7c057677d3ed2701df605d37780c933b4bcd255530594da011f0e66bcb607e15",
+              "contentHash": "41ce18f43d8bde079c4155ad6d78055f81c07d369bc8844aa598d7be3396e2e0",
               "image": null
             },
             {
@@ -12603,7 +12715,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "654cd3735200d2dc130f51e8202bd6d6cd2f3247212437ebb08d09d2fab27b72",
+              "contentHash": "c0a13916c1d25b76e3e868e8eb823fe8b5ecb4f753cbbe8d3c23cdf415e171d3",
               "image": null
             },
             {
@@ -12612,7 +12724,7 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "25d69455ab342ca36756c9d166b8c1ed67043ab4b27fc37288632f5a4f49a9f3",
+              "contentHash": "a6a597a7a23a13b4fefefb4009e0d292cf6e6cc2b689979e0ae5a76ae08c8fb3",
               "image": null
             },
             {
@@ -12621,7 +12733,7 @@
               "provider": "Seller listing photograph",
               "url": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
               "evidence": "Complete seller photograph of Korean Hop's Snorlax 136/193. The Hangul name and rules text, Trainer portrait and printed m2a identity establish the localized card. A large Colorless Energy symbol is directly visible across the reflective card body; the listing identifies it as the type-mirror version. Retained as SPEC-0437.",
-              "contentHash": "4d815eb5ccd35748b7380bee9308cffafa59a16c8607417e8806bf94da7f34c4",
+              "contentHash": "f8950f8e9bd5d4081eb30213ded54b68151f42c1691b5ca696ac622423b54bb5",
               "image": null
             },
             {
@@ -12630,7 +12742,7 @@
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "204ce1bd29fd50f99ecfd271bcaa8600ea77114dea3a386841f34f9e3513158a",
+              "contentHash": "db6533a3c0cedd7c9dee8b9f76ce06ea60410e7486bba5ee6fdf74e8e8c14c46",
               "image": null
             },
             {
@@ -12639,7 +12751,7 @@
               "provider": "Seller listing photograph",
               "url": "https://marketplace-article-scans.s3.cardmarket.com/2102018708/2102018708.jpg",
               "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment. Retained as SPEC-0410.",
-              "contentHash": "a71b2a854766351a10bf267e5609491e946de141f074208d09ea9b17360c7783",
+              "contentHash": "30ae9928c16907cb28f0362754cd1e38502b0aeb6ec29c5feec63fb3be177eb6",
               "image": null
             },
             {
@@ -12648,7 +12760,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "f80ed46f5e73c54c23f662cf2e21cd95538b7e49d55f2800eae9a72f01fbc4c8",
+              "contentHash": "a48723aa617a796854028cf36c6310d03b0c0a61f41dc6633ceb0082fdd2d929",
               "image": null
             },
             {
@@ -12657,7 +12769,7 @@
               "provider": "Official Japanese MEGA Dream ex product page",
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "evidence": "Documents energy-symbol mirror cards and multiple Poke Ball mirror designs in the expansion.",
-              "contentHash": "145ea02074f1505db5b17f6cc8e00deec9fe03d79f5f75a3bfd5ca432b7bb4a6",
+              "contentHash": "9454babf073a0c63c58b714e05835554bab2427aa23ebad205c74db16207a83b",
               "image": null
             },
             {
@@ -12666,7 +12778,7 @@
               "provider": "user + read off 5x upscaled crop of the scan",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Curated variant name: mirror holo, Poké Ball pattern",
-              "contentHash": "e4806934cf86761e56d6d4af4779f864d5decc212f630f97387875a9614ef24f",
+              "contentHash": "77c6ecb109736f15912a9b1c348244543ccbb1cac741114336774922d3da1184",
               "image": null
             },
             {
@@ -12675,7 +12787,7 @@
               "provider": "Specialist card listing with exact variant image",
               "url": "https://www.pokeca.net/product/22292",
               "evidence": "Identifies Snorlax 136/193 with the Monster Ball mirror treatment.",
-              "contentHash": "e44a772751b2d7f39932c59772d189ee2031f730ce31764046b05175f9afd81c",
+              "contentHash": "1f399e4849bde68f2eb965643fe98003f3a31c7050dc14d73f2cb23082cdcc10",
               "image": null
             },
             {
@@ -12684,7 +12796,7 @@
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "844ee84d0aa54afd2a2789d9822705dcb6531d4f6e87dfc02a0e0509734b7fdb",
+              "contentHash": "cadb5af3950f71891b9417c4846c7cffc6a7b3e5b69d9d75e91fd724c12214f5",
               "image": null
             },
             {
@@ -12702,7 +12814,7 @@
               "provider": null,
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
               "evidence": "Complete Cardmarket seller photograph of Korean Hop's Snorlax. The visible Hangul name and rules text, Trainer portrait, m2a set mark and collector number 136/193 establish the localized card identity. Cardmarket files this physical card under the xm2a V2 Additionals product. The large Poké Ball silhouette is directly visible across the reflective card body and establishes the Poké Ball mirror treatment.",
-              "contentHash": "6c9ec491d37f4da7bc6ce1b861ddbd01a91d09bbc25a76810cf25aa48df58ee3",
+              "contentHash": "b656b953eb2715b0ea388ea38359691d41419f0e0a1bffed47851d5cef0ce341",
               "image": "verification/specimens/SPEC-0410.jpg"
             },
             {
@@ -12711,7 +12823,7 @@
               "provider": null,
               "url": "https://globalbunjang.com/product/420832203",
               "evidence": "Complete seller photograph of Korean Hop's Snorlax 136/193. The Hangul name and rules text, Trainer portrait and printed m2a identity establish the localized card. A large Colorless Energy symbol is directly visible across the reflective card body; the listing identifies it as the type-mirror version.",
-              "contentHash": "e50bd5dc960651c8f2326229b546767c7ae81964dc1d3ccb02dbb0d133d2a8f3",
+              "contentHash": "0daf6e5dfc733d3e79e3a788ef4a2c1e3dd27ebcf189588f3c578fa48e7b0d79",
               "image": "verification/specimens/SPEC-0437.png"
             },
             {
@@ -24374,10 +24486,10 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:6638ebddef62af5b63c20024",
-              "semanticPrintingId": "PRINTING:6638ebddef62af5b63c20024",
+              "physicalPrintingId": "PHYSICAL:PRINTING:877b297c24bace029db6bc37",
+              "semanticPrintingId": "PRINTING:877b297c24bace029db6bc37",
               "cardReleaseId": "RELEASE:TW:T-Chinese:CLF:016/032:Snorlax-Collect-Collapse",
-              "finish": "mirror-holo",
+              "finish": "holo",
               "edition": null,
               "foilPattern": null,
               "markings": [],
@@ -24387,7 +24499,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0037",
               "sourcePrintingId": "F0037-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:6638ebddef62af5b63c20024",
+              "establishingClaimId": "CLAIM:finish:PRINTING:877b297c24bace029db6bc37",
               "specimenIds": [
                 "SPEC-0319",
                 "SPEC-0320",
@@ -24476,7 +24588,7 @@
             "artist": null,
             "variant": "base",
             "finish": [
-              "mirror-holo"
+              "holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -24555,7 +24667,7 @@
               "provider": "Seller listing photograph",
               "url": "https://shopee.tw/product/16896213/51412187955",
               "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph.",
-              "contentHash": "3a15e5c38bcedd05d0e74b35dbe41ccb9e65a554c14df8a212063a8ccfb25497",
+              "contentHash": "5ccd3667bf07ff091b7ae35e7a1a33f02b93b6377a620c546c4d8eb9bbc8e09b",
               "image": null
             },
             {
@@ -24564,7 +24676,7 @@
               "provider": "Seller listing photograph",
               "url": "https://cf.shopee.tw/file/tw-11134207-7r991-lny2yl0igo4d9b",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0320.",
-              "contentHash": "da8f4825f7dcc0c0f39ddab794419ed78e21f0cf4135a49a0d25f542f1d507f4",
+              "contentHash": "1a120182a8c1f8f70adf04681a3b42aa98b86f9ddd721962dffd28506f9bb2f7",
               "image": null
             },
             {
@@ -24573,7 +24685,7 @@
               "provider": "Seller listing photograph",
               "url": "https://shopee.tw/product/6777510/50602680694",
               "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph.",
-              "contentHash": "d4eaffe2c379d7d2f5c11776056abdd56308e96ac5db14b66b78c3d1dbfa6043",
+              "contentHash": "8943b060e0746a2c55c4cd14954b4a697c50a4f47e33bfff48bd16e5c8d930e5",
               "image": null
             },
             {
@@ -24582,7 +24694,7 @@
               "provider": "Seller listing photograph",
               "url": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0321.",
-              "contentHash": "3b9ebde670d98cc3ae587af4cfcc2f4775fc940a9c02a913ac78c7a191fefa44",
+              "contentHash": "206b80149c57095f2862b7c00f1afb24848bc40a0716e3fdacf2365949b9e66c",
               "image": null
             },
             {
@@ -24591,7 +24703,7 @@
               "provider": "Seller listing photograph",
               "url": "https://shopee.tw/product/9736187/25206242683",
               "evidence": "Exact CLF 016/032 Traditional Chinese card photographed with full-card mirror holo.",
-              "contentHash": "7c201056ada3f433783f8816b9f647de639572be5e5d99585febe3d70821b949",
+              "contentHash": "eeaad14d97d0f3b900cfade00bb136840a81d9fbb300c4f4a788c4a5e4f7f4a3",
               "image": null
             },
             {
@@ -24600,7 +24712,7 @@
               "provider": "Seller listing photograph",
               "url": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0319.",
-              "contentHash": "c99d170e6715b565678dee8303b96619ee82a521b6033fb9bb25417d8a181cc7",
+              "contentHash": "3622fb9f369934fee14e563509f55c98d84df39ed2e8b27ce77dbda07a7cb2d0",
               "image": null
             },
             {
@@ -24609,7 +24721,7 @@
               "provider": "Seller listing photograph",
               "url": "https://shopee.tw/product/4914178/22786197647",
               "evidence": "Additional exact CLF 016/032 Traditional Chinese mirror-holo card photograph.",
-              "contentHash": "51a27bf6ca582798cb9483235cbd3993db378a41aaa0d7455eda1601e388c130",
+              "contentHash": "6ecfec65e609186b684ab527995f766920472850fb376c1c0a1b6f885a3d0da6",
               "image": null
             },
             {
@@ -24618,7 +24730,7 @@
               "provider": "Seller listing photograph",
               "url": "https://cf.shopee.tw/file/tw-11134207-820lg-mpg97q4m34lof2",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity. Retained as SPEC-0322.",
-              "contentHash": "20886662d06157b324287f9b6239a08a486139b54dd921ecb5de9f03bfe64d36",
+              "contentHash": "e6766ea6c9085e92a08be229cb7475a8fef91b5626407da5071cda1c727f7ca6",
               "image": null
             },
             {
@@ -24636,7 +24748,7 @@
               "provider": null,
               "url": "https://shopee.tw/product/9736187/25206242683",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
-              "contentHash": "04ba294dd9a99f2cb0e1e0285900148d7bfa9d9f56f164e507efa1d732b4a571",
+              "contentHash": "3f01a7ada0b19e01c8b4b88d0d95211bafe8275bdd51b978045df038dfc25752",
               "image": "verification/specimens/SPEC-0319.jpg"
             },
             {
@@ -24645,7 +24757,7 @@
               "provider": null,
               "url": "https://shopee.tw/product/4914178/22786197647",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
-              "contentHash": "6eb26985c58986ce8bea42204e9bcf8206afbce465f4ac190b3c49f5113655b5",
+              "contentHash": "b1a8268ed706e0c6a93157b8335c5698c5fb67f21b22f17d3af3cdcd5f0e3fba",
               "image": "verification/specimens/SPEC-0320.jpg"
             },
             {
@@ -24654,7 +24766,7 @@
               "provider": null,
               "url": "https://shopee.tw/product/6777510/50602680694",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
-              "contentHash": "f14ad1da902ea54cba9ef169eea72921656262970ae129bfad7ca8d306121ed9",
+              "contentHash": "d180e62302596d9cad2080311b0b05847fc481ca2189c5f45cafbbf468d4adf8",
               "image": "verification/specimens/SPEC-0321.jpg"
             },
             {
@@ -24663,7 +24775,7 @@
               "provider": null,
               "url": "https://shopee.tw/product/16896213/51412187955",
               "evidence": "Complete retained image for Traditional Chinese Snorlax CLF 016/032 (base). The printed name, collector identity and attacks establish this card release and Work equivalence. The physical finish is recorded separately from identity.",
-              "contentHash": "6df3dede5594c21ea8c8065bea90ac06158d4728410bc09ef5528986ba5e497b",
+              "contentHash": "4b1f53f97e117406b499fa72366783742a0b23130a9cdecdf5ad6562537ded18",
               "image": "verification/specimens/SPEC-0322.jpg"
             },
             {
@@ -54595,7 +54707,7 @@
               "finish": "holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
@@ -54603,6 +54715,9 @@
               "sourceFinishUnitId": "F0067",
               "sourcePrintingId": "F0067-P02",
               "establishingClaimId": "CLAIM:finish:PRINTING:505ba33ab347572253b6f3d4",
+              "specimenIds": [
+                "SPEC-0433"
+              ],
               "sources": [
                 {
                   "url": "https://www.pokemon.cn/tcg/product/16377.html",
@@ -54615,28 +54730,7 @@
                   ],
                   "retrievedAt": "2026-08-27",
                   "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
-              "semanticPrintingId": "PRINTING:8c1f16fe9e5eb9a3d2ea8056",
-              "cardReleaseId": "RELEASE:CN:S-Chinese:CSM2bC:124:Snorlax-Lazy-Eating-Big-Counter",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0067",
-              "sourcePrintingId": "F0067-P04",
-              "establishingClaimId": "CLAIM:finish:PRINTING:8c1f16fe9e5eb9a3d2ea8056",
-              "specimenIds": [
-                "SPEC-0433"
-              ],
-              "sources": [
+                },
                 {
                   "sourceType": "Owner attestation (domain expert)",
                   "claimFields": [
@@ -54708,8 +54802,7 @@
             "finish": [
               "holo",
               "non-holo",
-              "reverse-holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "large-type-symbol-left"
@@ -54760,7 +54853,25 @@
               "provider": "Official Mainland China Simplified Chinese card-finish guide",
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings.",
-              "contentHash": "1bde0c25bb0d34de13e254e9212eab038a5531a452e881d00088cc1591420453",
+              "contentHash": "4985cea6f8f2f14cc4299fb7bee7d64ef36c511fc82d1d983aa2d009dd34edf2",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P02:1:31f59c63a2d61a47",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
+              "contentHash": "b9a1c39f1bd24fdf7948105f7612c3a74666b81eeed2364011104fa91866d332",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0067-P02:2:478bb509eba75baa",
+              "kind": "finish",
+              "provider": "Owner-supplied physical card photograph",
+              "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
+              "contentHash": "80cf3323d47778b53910717031782c7f6c8fb8ed9bbb7b9cf656ac598faa1d21",
               "image": null
             },
             {
@@ -54791,30 +54902,12 @@
               "image": null
             },
             {
-              "observationId": "finish:F0067-P04:0:31f59c63a2d61a47",
-              "kind": "finish",
-              "provider": "Owner attestation (domain expert)",
-              "url": null,
-              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "d8aab037bff1d9a007b7332a20cb8ee2838b7e42c42e1b0d71a3ed2963abf3bd",
-              "image": null
-            },
-            {
-              "observationId": "finish:F0067-P04:1:478bb509eba75baa",
-              "kind": "finish",
-              "provider": "Owner-supplied physical card photograph",
-              "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
-              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
-              "contentHash": "88b2c9a59d86fda898a5486cdd6e5e4fff45bdc5d964fdf952c0e3b3a6632192",
-              "image": null
-            },
-            {
               "observationId": "specimen:SPEC-0433",
               "kind": "specimen",
               "provider": null,
               "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
               "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo.",
-              "contentHash": "a1ec39e0efbfb5b73514956700263dd3f8176ebbf1d168584c81b9eefc2365ef",
+              "contentHash": "87fcb58ce2ddab2f8cdb95ecc65c055fd9c0afb5680259b651cdb68852fbc4bc",
               "image": "verification/specimens/SPEC-0433.png"
             },
             {
@@ -74611,27 +74704,27 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:31ae3cadc286170698bdc014",
-              "semanticPrintingId": "PRINTING:31ae3cadc286170698bdc014",
+              "physicalPrintingId": "PHYSICAL:PRINTING:358015d25d89708bb3fa8eff",
+              "semanticPrintingId": "PRINTING:358015d25d89708bb3fa8eff",
               "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
-              "foilPattern": "poke-ball",
+              "foilPattern": "master-ball",
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0456",
-              "sourcePrintingId": "F0456-P03",
-              "establishingClaimId": "CLAIM:finish:PRINTING:31ae3cadc286170698bdc014",
+              "sourcePrintingId": "F0456-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:358015d25d89708bb3fa8eff",
               "specimenIds": [
-                "SPEC-0471"
+                "SPEC-0472"
               ],
               "sources": [
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
+                  "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
                   "retrievedAt": "2026-09-01",
                   "claimFields": [
                     "identity"
@@ -74648,27 +74741,27 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:9ba9e79d59ffa49ecc15e7d4",
-              "semanticPrintingId": "PRINTING:9ba9e79d59ffa49ecc15e7d4",
+              "physicalPrintingId": "PHYSICAL:PRINTING:51fb343ff99b4828b6c23675",
+              "semanticPrintingId": "PRINTING:51fb343ff99b4828b6c23675",
               "cardReleaseId": "RELEASE:CN:S-Chinese:SV-P/CS:277:Snorlax-Spike-Draw-Mega-Punch",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
-              "foilPattern": "master-ball",
+              "foilPattern": "poke-ball",
               "markings": [],
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0456",
-              "sourcePrintingId": "F0456-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:9ba9e79d59ffa49ecc15e7d4",
+              "sourcePrintingId": "F0456-P03",
+              "establishingClaimId": "CLAIM:finish:PRINTING:51fb343ff99b4828b6c23675",
               "specimenIds": [
-                "SPEC-0472"
+                "SPEC-0471"
               ],
               "sources": [
                 {
                   "sourceType": "Owner-supplied physical card photograph",
-                  "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
+                  "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
                   "retrievedAt": "2026-09-01",
                   "claimFields": [
                     "identity"
@@ -74729,7 +74822,7 @@
             "variant": "base",
             "finish": [
               "non-holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "master-ball",
@@ -74854,7 +74947,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse. Retained as SPEC-0472.",
-              "contentHash": "122a2bb69745de077daf9c126d449ac607dc5407980d30c4265d3a0d4343eafb",
+              "contentHash": "2b40158efc89e9e860f963bfa4cad64e309d1e9d8f49592f171f30b22386896f",
               "image": null
             },
             {
@@ -74863,7 +74956,7 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "c65ac95ce614342820bdf4d7452b655537aa5bbc442371227ad8f62d8622ee04",
+              "contentHash": "d935468b75cebf6fadadbe5e3786bd0f8041db2445e4d1446bc23875c7d40a9b",
               "image": null
             },
             {
@@ -74872,7 +74965,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse. Retained as SPEC-0471.",
-              "contentHash": "3ad35b2b62dce1b25083221efc6592cfb4c2c2c92212e5c129039b04c1b1a88a",
+              "contentHash": "0a3694df2537dcb497ed1acc4b15fa4e230926ab001128b556bd5d00c78aba02",
               "image": null
             },
             {
@@ -74881,7 +74974,7 @@
               "provider": "Owner attestation (domain expert)",
               "url": null,
               "evidence": "The collection owner's explicit 2026-09-01 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties.",
-              "contentHash": "249e40ef746c0e22ba022ccdb66894a6022ac7de112e429325f211893ddc3f71",
+              "contentHash": "95ebcaf2ac5efea7019d0b2bb180603a39857d4574d57c8fc56b9619e2af75ce",
               "image": null
             },
             {
@@ -74935,7 +75028,7 @@
               "provider": null,
               "url": null,
               "evidence": "Lower-left Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. Large repeated Poké Ball silhouettes are directly visible across the reflective card body, and the collection owner identifies this copy as Pokeball Reverse.",
-              "contentHash": "4ca9b5f522bf07dbe449e318e7c5adcb2a92832dc83785fb2696af18ba052152",
+              "contentHash": "2ba9aa43666f81708279518c5f189f4a6603abf8fbf5abb8718216123c5b7541",
               "image": "verification/specimens/SPEC-0471.png"
             },
             {
@@ -74944,7 +75037,7 @@
               "provider": null,
               "url": null,
               "evidence": "Lower-right Simplified Chinese Snorlax 277/SV-P promo cropped from SPEC-0469. The exact card identity and Pikachu PROMO stamp are visible. The large Master Ball silhouette is directly visible across the reflective card body, and the collection owner identifies this copy as Masterball Reverse.",
-              "contentHash": "2201f7fc5cbe16d524f163e4a9b276d4bbf9290ad5cb56741c57cd18fa3dd9af",
+              "contentHash": "2af825412f2ccb1e4b684f14b68bc09c8f28b98d28914a10a4d2ea9ffe4f6a2d",
               "image": "verification/specimens/SPEC-0472.png"
             },
             {
@@ -101004,10 +101097,10 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:025d4f8d86f9a0db9a436142",
-              "semanticPrintingId": "PRINTING:025d4f8d86f9a0db9a436142",
+              "physicalPrintingId": "PHYSICAL:PRINTING:8604ca0fc06c610e73544487",
+              "semanticPrintingId": "PRINTING:8604ca0fc06c610e73544487",
               "cardReleaseId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "poke-ball",
               "markings": null,
@@ -101017,7 +101110,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0457",
               "sourcePrintingId": "F0457-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:025d4f8d86f9a0db9a436142",
+              "establishingClaimId": "CLAIM:finish:PRINTING:8604ca0fc06c610e73544487",
               "specimenIds": [
                 "SPEC-0019"
               ],
@@ -101035,10 +101128,10 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:6b10493667a50689f6de8c30",
-              "semanticPrintingId": "PRINTING:6b10493667a50689f6de8c30",
+              "physicalPrintingId": "PHYSICAL:PRINTING:9435de96cf52ba278f2f7f42",
+              "semanticPrintingId": "PRINTING:9435de96cf52ba278f2f7f42",
               "cardReleaseId": "RELEASE:ID:Indonesian:SV-P:117:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "master-ball",
               "markings": null,
@@ -101048,7 +101141,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0457",
               "sourcePrintingId": "F0457-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:6b10493667a50689f6de8c30",
+              "establishingClaimId": "CLAIM:finish:PRINTING:9435de96cf52ba278f2f7f42",
               "specimenIds": [
                 "SPEC-0020"
               ],
@@ -101072,7 +101165,7 @@
             "artist": null,
             "variant": "V1, V2",
             "finish": [
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "master-ball",
@@ -101135,7 +101228,7 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V2-SV-PID117",
               "evidence": "Curated variant name: Master Ball mirror holo",
-              "contentHash": "f6f4e740f4c2926329def40e64d01161397b4c8544568b5333476f0360c28dda",
+              "contentHash": "fa591e10163edc796a01188e83da2053eab1802249a8c0d8b9574887913027c3",
               "image": null
             },
             {
@@ -101144,7 +101237,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2. Retained as SPEC-0020.",
-              "contentHash": "ac0c31aea3898af9b51f2b94c27f4daf92d3ce8e944dbde38fc371a528b9e37f",
+              "contentHash": "079dcee36a832e5dfd7fa6fcd4e2d544f942f9c03e238a62f3360f74289d1144",
               "image": null
             },
             {
@@ -101153,7 +101246,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\" Retained as SPEC-0019.",
-              "contentHash": "dace40c0c29aa66e3584d16b7f58ddd3f564b876b332b5fb3191f0c54a80dcdc",
+              "contentHash": "0eadcc943ac257c020b114365eaa80733d83145ace7811c8b842fe2e07571eb3",
               "image": null
             },
             {
@@ -101162,7 +101255,7 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Scarlet-Violet-Indonesian-Promos/Snorlax-V1-SV-PID117",
               "evidence": "Curated variant name: Poké Ball mirror holo",
-              "contentHash": "38764b2320e48bcea9efcfe84561754aad7bc3d6b7f7144ecc09c66dd4472e58",
+              "contentHash": "cfb701905baf8cf4b45b3386ee0a445bf5a6476850df79c2d161727b8206954f",
               "image": null
             },
             {
@@ -101189,7 +101282,7 @@
               "provider": null,
               "url": null,
               "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Poké Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, left card). The pattern is faint - faint enough that this project first recorded the card as non-holo - but the ball outlines are legible across the text box and lower border at full resolution. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V1: \"V1 is Pokeball and V2 is Masterball, for a human it's visible.\"",
-              "contentHash": "eed239e939dc47d9b0ca9401adb5d571aa362b7316b9c61ee4ac40eeb1c49439",
+              "contentHash": "43aae1a626ece935ee40186ebd3dd7e4acd4d152faf0aeb01417900e3fc16454",
               "image": "verification/specimens/SPEC-0019.png"
             },
             {
@@ -101198,7 +101291,7 @@
               "provider": null,
               "url": null,
               "evidence": "Indonesian \"117/SV-P\" Snorlax carrying a Master Ball mirror foil pattern, cropped from the owner's side-by-side photograph of the sealed pair (SPEC-0013, right card). The pattern is strong and covers the whole face; the ball silhouettes carry a raised top rather than being plain spheres, which is what distinguishes them from the Poké Ball pattern on SPEC-0019. Card text: \"Snorlax\", HP 150, Basic, Ability \"Kemaruk\", attack \"Tekanan Gedebuk\" 130, Illus. HYOGONOSUKE, \"117/SV-P\", PROMO, regulation mark G, ©2024. Still sealed in its promo wrapper. The owner assigns this pattern to Cardmarket's V2.",
-              "contentHash": "0294ca845ba15fbf0f4eebf95ab0d0c301ec894553cb4ddbc2badc9ed6ecb7b3",
+              "contentHash": "85411ad46cbb5c99f689d7f13c4d42c2fc445cb4cc3d75182ae16bb363128a7e",
               "image": "verification/specimens/SPEC-0020.png"
             },
             {
@@ -106035,33 +106128,6 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:019b2a6e944d465d403775ba",
-              "semanticPrintingId": "PRINTING:b6d6a7d7c2462f20bb7e4029",
-              "cardReleaseId": "RELEASE:KR:Korean:sv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": null,
-              "markings": [],
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0462",
-              "sourcePrintingId": "F0462-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:019b2a6e944d465d403775ba",
-              "specimenIds": [
-                "SPEC-0617"
-              ],
-              "sources": [
-                {
-                  "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
-                  "sourceType": "Seller listing photograph",
-                  "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
-                  "retrievedAt": "2026-10-07"
-                }
-              ]
-            },
-            {
               "physicalPrintingId": "PHYSICAL:PRINTING:a2fd6f7b715ebc0c96bfa65c",
               "semanticPrintingId": "PRINTING:a2fd6f7b715ebc0c96bfa65c",
               "cardReleaseId": "RELEASE:KR:Korean:sv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
@@ -106111,8 +106177,7 @@
             "artist": "HYOGONOSUKE",
             "variant": "V1",
             "finish": [
-              "non-holo",
-              "mirror-holo"
+              "non-holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -106138,17 +106203,6 @@
               "contentHash": null,
               "kind": "source-url",
               "reviewable": false
-            },
-            {
-              "src": "verification/specimens/SPEC-0617.png",
-              "label": "inspected specimen",
-              "observationId": "specimen:SPEC-0617",
-              "contentHash": "5f8383663842d941c8a47c40f6736323a1d0a344d405c0bf503c71a4bc1217c7",
-              "kind": "repository",
-              "reviewable": true,
-              "originalHash": "5f8383663842d941c8a47c40f6736323a1d0a344d405c0bf503c71a4bc1217c7",
-              "previewSrc": "images/previews/SPEC-0617.png?v=1ff0213905da2387aee336d5f3b67e1b95df2bd47d8ba31528d28a5c312de7ca",
-              "thumbnailSrc": "images/thumbs/SPEC-0617.png?v=553717b991d80a191efc7730918967cdbebf93b5a7d4135217afd29f03615b83"
             },
             {
               "src": "verification/specimens/SPEC-0675.png",
@@ -106191,15 +106245,6 @@
               "image": null
             },
             {
-              "observationId": "finish:F0462-P02:0:c3575e4a374f1122",
-              "kind": "finish",
-              "provider": "Seller listing photograph",
-              "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
-              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
-              "contentHash": "c59622340e581e91eb6c5ea86e47d622ec39cfcd6972f7bfec5cb61a953abe9e",
-              "image": null
-            },
-            {
               "observationId": "source-first:KR:sv2a:143/165:base",
               "kind": "source-first",
               "provider": "pokemon-card-korea",
@@ -106207,15 +106252,6 @@
               "evidence": "The retained official Pokémon Korea exact-name catalogue detail identifies 잠만보 sv2a 143/165 in 스칼렛&바이올렛 강화 확장팩 「포켓몬 카드 151」, with illustrator HYOGONOSUKE and HP150. The page establishes this Korean card release and its local identity. Alternate publisher renders remain identity evidence only; no physical finish or catalogue absence is inferred.",
               "contentHash": "6f1f3b71a8e46c0114666e1ce63ae6e6f89aa6d34c7ec9e47f34896c23b70129",
               "image": "https://cards.image.pokemonkorea.co.kr/data/wmimages/SV/SV2a/SV2a_143.png?w=512"
-            },
-            {
-              "observationId": "specimen:SPEC-0617",
-              "kind": "specimen",
-              "provider": null,
-              "url": "https://www.ebay.com/itm/287288757860",
-              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
-              "contentHash": "c357ed95600f976758149e4137649a096e30a49d6c1f6b774cbc073eeaf094c7",
-              "image": "verification/specimens/SPEC-0617.png"
             },
             {
               "observationId": "specimen:SPEC-0675",
@@ -106421,21 +106457,26 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:3394fc00d5d777e1cb3e333a",
-              "semanticPrintingId": "PRINTING:3394fc00d5d777e1cb3e333a",
+              "physicalPrintingId": "PHYSICAL:PRINTING:0c33b5c28b62c3ace33a466b",
+              "semanticPrintingId": "PRINTING:0c33b5c28b62c3ace33a466b",
               "cardReleaseId": "RELEASE:TW:T-Chinese:sv2a F:143/165:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "master-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0616",
               "sourcePrintingId": "F0616-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:3394fc00d5d777e1cb3e333a",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0c33b5c28b62c3ace33a466b",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Master Ball mirror holo"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
                   "sourceType": "Cardmarket stock image (visual evidence)",
@@ -106479,21 +106520,26 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:c9dfbced1573aad2970788d3",
-              "semanticPrintingId": "PRINTING:c9dfbced1573aad2970788d3",
+              "physicalPrintingId": "PHYSICAL:PRINTING:da1c332812e334fbfc134942",
+              "semanticPrintingId": "PRINTING:da1c332812e334fbfc134942",
               "cardReleaseId": "RELEASE:TW:T-Chinese:sv2a F:143/165:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "poke-ball",
-              "markings": [],
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0616",
               "sourcePrintingId": "F0616-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:c9dfbced1573aad2970788d3",
+              "establishingClaimId": "CLAIM:finish:PRINTING:da1c332812e334fbfc134942",
               "sources": [
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Poké Ball mirror holo"
+                },
                 {
                   "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
                   "sourceType": "Cardmarket stock image (visual evidence)",
@@ -106516,7 +106562,7 @@
             "variant": "V1, base, V2, poke-ball-pattern",
             "finish": [
               "non-holo",
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "master-ball",
@@ -106619,39 +106665,57 @@
               "image": null
             },
             {
-              "observationId": "finish:F0616-P01:0:adb029765fdd6a82",
+              "observationId": "finish:F0616-P01:0:944c12b87f4bc83d",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "evidence": "Curated variant name: Master Ball mirror holo",
+              "contentHash": "8b250aada318da279cbd6594d73b8696558e5e1189f60d71def88d4a161cc4c3",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0616-P01:1:adb029765fdd6a82",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "db881fd8c4f3441a8452b3a9f156d5460cc0fd4cef1a9c30f38a2fe3550a5d3a",
+              "contentHash": "c81b4338c53cb837dae419f38f790a953e1ef658e7e22057ccccbe15afdc80e7",
               "image": null
             },
             {
-              "observationId": "finish:F0616-P01:1:e73541456a7ba796",
+              "observationId": "finish:F0616-P01:2:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "bd8a062672d475be3bb850cd80d79b7b3568d0abb685d6696f1469c5e0a061a7",
+              "contentHash": "18423be52c5f77f247a02574fcb0d903c416f67cc79a80de29eec27500e3a63a",
               "image": null
             },
             {
-              "observationId": "finish:F0616-P02:0:82509ec6950bc93b",
+              "observationId": "finish:F0616-P02:0:3272ff38ca47c499",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "evidence": "Curated variant name: Poké Ball mirror holo",
+              "contentHash": "373dacafc393a02c23efbb690b219b687e19e0ba3d54594eedc0aa679804205d",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0616-P02:1:82509ec6950bc93b",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "caf79ff0e01e1013968d0f3da57ae7c3feaa5fdbc9f25b96ef5f85a86c4e1f35",
+              "contentHash": "7af788ec2ebdddbcd8bd442a26d47fcc4757275170a877c0908d615c0a7b377e",
               "image": null
             },
             {
-              "observationId": "finish:F0616-P02:1:e73541456a7ba796",
+              "observationId": "finish:F0616-P02:2:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "fd41cb0b853666209cd9c529468fef12fdd7586d1538ff1caa1b617cee259c70",
+              "contentHash": "6cfa86e34b02ced594740fa603ad7f4cd2936685d6ff487624fb411fbabe6ab0",
               "image": null
             },
             {
@@ -107270,27 +107334,32 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:F0614-P02",
-              "semanticPrintingId": "PRINTING:3d97fbf78c967180e0ce27f7",
+              "physicalPrintingId": "PHYSICAL:PRINTING:27c6ae5673e0ce41cd4f044d",
+              "semanticPrintingId": "PRINTING:27c6ae5673e0ce41cd4f044d",
               "cardReleaseId": "RELEASE:JP:Japanese:xsv2a:143:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
-              "foilPattern": "master-ball",
-              "markings": [],
+              "foilPattern": "poke-ball",
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0614",
-              "sourcePrintingId": "F0614-P01",
-              "establishingClaimId": "CLAIM:finish:F0614-P02",
+              "sourcePrintingId": "F0614-P02",
+              "establishingClaimId": "CLAIM:finish:PRINTING:27c6ae5673e0ce41cd4f044d",
               "sources": [
                 {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Poké Ball mirror holo"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
                   "sourceType": "Cardmarket stock image (visual evidence)",
                   "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
                   "supportsAbsence": false,
-                  "image": "images/xsv2a_143_Snorlax_V2_837511.jpg"
+                  "image": "images/xsv2a_143_Snorlax_V1_837510.jpg"
                 },
                 {
                   "sourceType": "Owner attestation plus downloaded scan review",
@@ -107300,27 +107369,32 @@
               ]
             },
             {
-              "physicalPrintingId": "PHYSICAL:F0614-P03",
-              "semanticPrintingId": "PRINTING:068d599d765623f61f750410",
+              "physicalPrintingId": "PHYSICAL:PRINTING:52678dc80da50decbb7a286d",
+              "semanticPrintingId": "PRINTING:52678dc80da50decbb7a286d",
               "cardReleaseId": "RELEASE:JP:Japanese:xsv2a:143:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
-              "foilPattern": "poke-ball",
-              "markings": [],
+              "foilPattern": "master-ball",
+              "markings": null,
               "distribution": null,
               "cardSize": "standard",
               "errorClass": null,
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0614",
-              "sourcePrintingId": "F0614-P02",
-              "establishingClaimId": "CLAIM:finish:F0614-P03",
+              "sourcePrintingId": "F0614-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:52678dc80da50decbb7a286d",
               "sources": [
                 {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Master Ball mirror holo"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
                   "sourceType": "Cardmarket stock image (visual evidence)",
                   "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
                   "supportsAbsence": false,
-                  "image": "images/xsv2a_143_Snorlax_V1_837510.jpg"
+                  "image": "images/xsv2a_143_Snorlax_V2_837511.jpg"
                 },
                 {
                   "sourceType": "Owner attestation plus downloaded scan review",
@@ -107336,7 +107410,7 @@
             "artist": "HYOGONOSUKE",
             "variant": "V1, V2",
             "finish": [
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "master-ball",
@@ -107372,39 +107446,57 @@
           ],
           "observations": [
             {
-              "observationId": "finish:F0614-P01:0:adb029765fdd6a82",
+              "observationId": "finish:F0614-P01:0:944c12b87f4bc83d",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "evidence": "Curated variant name: Master Ball mirror holo",
+              "contentHash": "7473d24e7396f14ad8f07db1db0ae0c1dcd41dbb6b8d945104f3a8ade41d43e0",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0614-P01:1:adb029765fdd6a82",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "4ae500d2a6f5b400e764abc1f16b1e3f3de4a081c83f7d5062b51cfdfef0a8e2",
+              "contentHash": "45af7af15bb25a5d4e5534f41f3d83374e8a723188cb9aca62217879193b55a8",
               "image": null
             },
             {
-              "observationId": "finish:F0614-P01:1:e73541456a7ba796",
+              "observationId": "finish:F0614-P01:2:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "84b95c872ae9c6a96885327b04d392471dc58a0371a8bbd97bc9a43616e8d141",
+              "contentHash": "c856ec4d0aa70ef3d357fa50d6ff4c7645de66616f50ac4a3b9949fc14a73202",
               "image": null
             },
             {
-              "observationId": "finish:F0614-P02:0:82509ec6950bc93b",
+              "observationId": "finish:F0614-P02:0:3272ff38ca47c499",
+              "kind": "finish",
+              "provider": "user",
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "evidence": "Curated variant name: Poké Ball mirror holo",
+              "contentHash": "8e63a80e815669c33789acfeb3aa117ea41e04a93732b7255ff936c421611f2c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0614-P02:1:82509ec6950bc93b",
               "kind": "finish",
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "c41e1017767c3c8f73bda27048448194dc3132f60b6b864b38994524290bd535",
+              "contentHash": "ebe9211c83ffff53bf0e1a7062180c7d8b1a0b8c8d2357b9b40f68f88e71bd67",
               "image": null
             },
             {
-              "observationId": "finish:F0614-P02:1:e73541456a7ba796",
+              "observationId": "finish:F0614-P02:2:e73541456a7ba796",
               "kind": "finish",
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "b5769e8d7279ceeab949d5e3636034ada6e20eadd45991778325de352d54ad28",
+              "contentHash": "8bcbebc4519c3998c92a17136da124811ba275ebc3ae498f5044c86715dcdd9d",
               "image": null
             },
             {
@@ -107453,53 +107545,10 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:a3a1698dade6697f4fdbc497",
-              "semanticPrintingId": "PRINTING:a3a1698dade6697f4fdbc497",
+              "physicalPrintingId": "PHYSICAL:PRINTING:75a4b29b69b6de8a881e9827",
+              "semanticPrintingId": "PRINTING:75a4b29b69b6de8a881e9827",
               "cardReleaseId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
-              "edition": null,
-              "foilPattern": "master-ball",
-              "markings": null,
-              "distribution": null,
-              "cardSize": "standard",
-              "errorClass": null,
-              "classificationState": "classified-from-positive-evidence",
-              "sourceFinishUnitId": "F0615",
-              "sourcePrintingId": "F0615-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:a3a1698dade6697f4fdbc497",
-              "specimenIds": [
-                "SPEC-0659"
-              ],
-              "sources": [
-                {
-                  "sourceType": "Inspected card photograph; external origin unknown",
-                  "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30). Retained as SPEC-0659.",
-                  "retrievedAt": "2026-10-30"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
-                  "sourceType": "user",
-                  "evidence": "Curated variant name: Master Ball mirror holo"
-                },
-                {
-                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
-                  "sourceType": "Cardmarket stock image (visual evidence)",
-                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-                  "supportsAbsence": false,
-                  "image": "images/xsv2a_143_Snorlax_V2_837511.jpg"
-                },
-                {
-                  "sourceType": "Owner attestation plus downloaded scan review",
-                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-                  "supportsAbsence": false
-                }
-              ]
-            },
-            {
-              "physicalPrintingId": "PHYSICAL:PRINTING:a68b9f50e4e10e59cee8b0eb",
-              "semanticPrintingId": "PRINTING:a68b9f50e4e10e59cee8b0eb",
-              "cardReleaseId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
-              "finish": "mirror-holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "poke-ball",
               "markings": null,
@@ -107509,11 +107558,12 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0615",
               "sourcePrintingId": "F0615-P02",
-              "establishingClaimId": "CLAIM:finish:PRINTING:a68b9f50e4e10e59cee8b0eb",
+              "establishingClaimId": "CLAIM:finish:PRINTING:75a4b29b69b6de8a881e9827",
               "specimenIds": [
                 "SPEC-0061",
                 "SPEC-0660",
-                "SPEC-0612"
+                "SPEC-0612",
+                "SPEC-0617"
               ],
               "sources": [
                 {
@@ -107548,6 +107598,66 @@
                   "sourceType": "Owner attestation plus downloaded scan review",
                   "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
                   "supportsAbsence": false
+                },
+                {
+                  "sourceType": "Owner attestation (domain expert)",
+                  "claimFields": [
+                    "finish"
+                  ],
+                  "retrievedAt": "2026-11-03",
+                  "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
+                },
+                {
+                  "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
+                  "retrievedAt": "2026-10-07",
+                  "claimFields": [
+                    "identity"
+                  ]
+                }
+              ]
+            },
+            {
+              "physicalPrintingId": "PHYSICAL:PRINTING:a8509468f3408cbf31669d8d",
+              "semanticPrintingId": "PRINTING:a8509468f3408cbf31669d8d",
+              "cardReleaseId": "RELEASE:KR:Korean:xsv2a:143/165:Snorlax-Voraciousness-Thudding-Press",
+              "finish": "reverse-holo",
+              "edition": null,
+              "foilPattern": "master-ball",
+              "markings": null,
+              "distribution": null,
+              "cardSize": "standard",
+              "errorClass": null,
+              "classificationState": "classified-from-positive-evidence",
+              "sourceFinishUnitId": "F0615",
+              "sourcePrintingId": "F0615-P01",
+              "establishingClaimId": "CLAIM:finish:PRINTING:a8509468f3408cbf31669d8d",
+              "specimenIds": [
+                "SPEC-0659"
+              ],
+              "sources": [
+                {
+                  "sourceType": "Inspected card photograph; external origin unknown",
+                  "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30). Retained as SPEC-0659.",
+                  "retrievedAt": "2026-10-30"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "sourceType": "user",
+                  "evidence": "Curated variant name: Master Ball mirror holo"
+                },
+                {
+                  "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+                  "sourceType": "Cardmarket stock image (visual evidence)",
+                  "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
+                  "supportsAbsence": false,
+                  "image": "images/xsv2a_143_Snorlax_V2_837511.jpg"
+                },
+                {
+                  "sourceType": "Owner attestation plus downloaded scan review",
+                  "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
+                  "supportsAbsence": false
                 }
               ]
             }
@@ -107558,7 +107668,7 @@
             "artist": null,
             "variant": "V1, V2",
             "finish": [
-              "mirror-holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "master-ball",
@@ -107658,6 +107768,17 @@
               "thumbnailSrc": "images/thumbs/SPEC-0612.png?v=2ac60be25b7a51e3cbf62e12e8f6e14bcde7ef9776da46f8799c534746843b94"
             },
             {
+              "src": "verification/specimens/SPEC-0617.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0617",
+              "contentHash": "5f8383663842d941c8a47c40f6736323a1d0a344d405c0bf503c71a4bc1217c7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "5f8383663842d941c8a47c40f6736323a1d0a344d405c0bf503c71a4bc1217c7",
+              "previewSrc": "images/previews/SPEC-0617.png?v=1ff0213905da2387aee336d5f3b67e1b95df2bd47d8ba31528d28a5c312de7ca",
+              "thumbnailSrc": "images/thumbs/SPEC-0617.png?v=553717b991d80a191efc7730918967cdbebf93b5a7d4135217afd29f03615b83"
+            },
+            {
               "src": "verification/specimens/SPEC-0659.png",
               "label": "inspected specimen",
               "observationId": "specimen:SPEC-0659",
@@ -107687,7 +107808,7 @@
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30). Retained as SPEC-0659.",
-              "contentHash": "f8135d01b362016f8526253a4ae3237d22591a951e2cce106d391b4e776de515",
+              "contentHash": "75368340e513713121543258c1ff72ab5c911c59015cc12814b082a9e3f49d13",
               "image": null
             },
             {
@@ -107696,7 +107817,7 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
               "evidence": "Curated variant name: Master Ball mirror holo",
-              "contentHash": "2efe2ff9a775cce16964ccb263a23de2c8a754a6a8e4bb64f4724f39c88db693",
+              "contentHash": "6069b1e813b5bd30bc49e73fe8f695a1568f01786b69b479ff16cad511bc74d8",
               "image": null
             },
             {
@@ -107705,7 +107826,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "fcf7f0ccf02ed57b1d1102a0671150a40676a357e5a8fc005607ba72f74e37d7",
+              "contentHash": "12bb7229e657fdcb74b86530e1bf60f7c0163df48910f0f6dab18d21e822b686",
               "image": null
             },
             {
@@ -107714,7 +107835,7 @@
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "b7d3eb3fa2f0e985d5021690910d9fa4f5964da0e2df7bcc75ecc6738d83f64d",
+              "contentHash": "bfb59e1d7f1ccaf46fce78d4f3eedb82569082e22fb0908be118939afbb27e74",
               "image": null
             },
             {
@@ -107723,7 +107844,7 @@
               "provider": "user",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Curated variant name: Poké Ball mirror holo",
-              "contentHash": "7c13abe613b5caeb8832605a08e5d33f2d736c615ce4ddadf5feec0fab278e00",
+              "contentHash": "5cb1662b464a04dae3de7a77a358d53f71a2d639c95a557ef1925cf181e6e40f",
               "image": null
             },
             {
@@ -107732,7 +107853,7 @@
               "provider": "Cardmarket stock image (visual evidence)",
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
               "evidence": "Finish, marking, or size is visible in the downloaded stock image; this does not use Cardmarket's language filter as evidence.",
-              "contentHash": "55bbddc638ada2d16fe0b5a0615b1d4a18937e8790ed25d88ce2dd75e11e6290",
+              "contentHash": "807a2832da10a3626909a73f8525e1a30804fbf380445aff0a867265ad849b27",
               "image": null
             },
             {
@@ -107741,7 +107862,7 @@
               "provider": "Seller listing photograph",
               "url": "https://media.bunjang.co.kr/product/433161764_1_1789832224_w640.jpg",
               "evidence": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0612.",
-              "contentHash": "722655b3d7c0bf5367984bddd04364608d6e90bb11a42a13f36c1c450689b41c",
+              "contentHash": "d982c0416dbd242324100ba3bad8485a24c834812504d2bdacae80811da39b59",
               "image": null
             },
             {
@@ -107750,7 +107871,7 @@
               "provider": "Inspected card photograph; external origin unknown",
               "url": null,
               "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Poké Ball silhouettes repeat across the card body (Poké Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. The collection owner identifies the card as the Korean sv2a Poké Ball reverse holo (2026-10-30). Retained as SPEC-0660.",
-              "contentHash": "f755adf4c4496e74dd35d2660558e63d1ad3d583cf47585c967169b4466b0848",
+              "contentHash": "a97af0ca0e541d866b0631fb7ea4c266c1de6dce00ba602fdce7023ba9a9bc6d",
               "image": null
             },
             {
@@ -107759,7 +107880,7 @@
               "provider": "Owner-supplied physical card photograph",
               "url": null,
               "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Retained as SPEC-0061.",
-              "contentHash": "a14a06b0283d7320852402237b4c47ee07fd9e5dd07c4be4880b11e7f8d622ec",
+              "contentHash": "2ee26768446c6401211cc5ad4cef2df7a7569f6220950ebf156b7f32c838bdc9",
               "image": null
             },
             {
@@ -107768,7 +107889,25 @@
               "provider": "Owner attestation plus downloaded scan review",
               "url": null,
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
-              "contentHash": "65e04a93d7b238f2d3143353734ed6ec9ae99365551439d396b85603d5a887bb",
+              "contentHash": "84d60343f902321c042f3a0000d0c2fb4e970cbab35e75bd8a362beda988269c",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P02:6:f0193bcbefff3fc7",
+              "kind": "finish",
+              "provider": "Owner attestation (domain expert)",
+              "url": null,
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties.",
+              "contentHash": "1c8f9172a58b6d6fc9aafed3d81cfd4373af7da6656363f294d29debfedf5012",
+              "image": null
+            },
+            {
+              "observationId": "finish:F0615-P02:7:f078e4c7e74c81a4",
+              "kind": "finish",
+              "provider": "Seller listing photograph",
+              "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
+              "contentHash": "44c010481e6b73fcf0c53249cbc0970e81113f24ca5f38d0e4790a4014398c2c",
               "image": null
             },
             {
@@ -107804,7 +107943,7 @@
               "provider": null,
               "url": null,
               "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064.",
-              "contentHash": "1251edbe508dabadfba9fd0eaf24c434123c79ab2252f3287a8419854bc8b9dc",
+              "contentHash": "1da5bab3d8b825884aec5af25f1ae1b85d2bf6ea69c9dab09c3fdfcdf57d936c",
               "image": "verification/specimens/SPEC-0061.jpg"
             },
             {
@@ -107831,8 +107970,17 @@
               "provider": null,
               "url": "https://m.bunjang.co.kr/products/433161764",
               "evidence": "Korean 잠만보 sv2a G 143/165 R. Reflective rainbow Poké Ball outlines visibly repeat over the text panel. Poké Ball mirror-holo positively observed. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
-              "contentHash": "2b73a2103b9a2b24166a03733338dcc9641f7ed2e8d0d50cf2990a029825177b",
+              "contentHash": "c953f040ebe0d7f7e2aa078cdc67ef91e5bc7c89881ccc5240e36c6347bf2bbc",
               "image": "verification/specimens/SPEC-0612.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0617",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/287288757860",
+              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted.",
+              "contentHash": "160bb75a06d215850c400681f1026963ba7b0cdd2ab229a4935e3e3ad6f14798",
+              "image": "verification/specimens/SPEC-0617.png"
             },
             {
               "observationId": "specimen:SPEC-0659",
@@ -107840,7 +107988,7 @@
               "provider": null,
               "url": null,
               "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Master Ball silhouettes repeat across the card body (Master Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. A Korean sv2a 181/165 AR Snorlax lies beside it in the same frame; it is a different release and is not part of this record. The collection owner identifies the card as the Korean sv2a Master Ball reverse holo (2026-10-30).",
-              "contentHash": "efa5e7911c3f972be5d308268d31e2050886969bece5e325deacec01074768ec",
+              "contentHash": "38d56f7a9b1c8636799470dd03f9b40a4243d4c9b7f6c3663c603b5612653e8e",
               "image": "verification/specimens/SPEC-0659.png"
             },
             {
@@ -107849,7 +107997,7 @@
               "provider": null,
               "url": null,
               "evidence": "Owner-supplied photograph of Korean 잠만보 HP150, 식탐, 철퍼덕프레스 130, Illus. HYOGONOSUKE, printed G sv2a 143/165 U. Poké Ball silhouettes repeat across the card body (Poké Ball mirror holo). The collector line is legible: the rarity mark after 143/165 is U. The collection owner identifies the card as the Korean sv2a Poké Ball reverse holo (2026-10-30).",
-              "contentHash": "cf5d85f1bf9d46b3023b08b6bcd3a8917b5c6b0d119c1861e2e5421a1497b817",
+              "contentHash": "790f6fa7f6c6f99a2933b1dcbf9fd6c7af660aa7c5a76acabf8f2ae6d527ce0b",
               "image": "verification/specimens/SPEC-0660.png"
             },
             {

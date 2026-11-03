@@ -241,9 +241,10 @@ def main() -> None:
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )
     assert simplified_chinese_promo["completenessStatus"] == "owner-adjudicated"
-    assert simplified_chinese_promo["availableFinishes"] == ["non-holo", "mirror-holo"]
+    assert simplified_chinese_promo["availableFinishes"] == ["non-holo", "reverse-holo"]
     assert simplified_chinese_promo["finishStatus"]["holo"] == "pending"
-    assert simplified_chinese_promo["finishStatus"]["reverse-holo"] == "pending"
+    assert simplified_chinese_promo["finishStatus"]["reverse-holo"] == "confirmed"
+    assert simplified_chinese_promo["finishStatus"]["mirror-holo"] == "pending"
     assert simplified_chinese_promo["patternStatus"] == "confirmed"
     assert simplified_chinese_promo["unresolved"] == []
     promo_printings = simplified_chinese_promo["printings"]
@@ -254,8 +255,8 @@ def main() -> None:
         for row in promo_printings
     } == {
         ("non-holo", None, ("SPEC-0470",)),
-        ("mirror-holo", "poke-ball", ("SPEC-0471",)),
-        ("mirror-holo", "master-ball", ("SPEC-0472",)),
+        ("reverse-holo", "poke-ball", ("SPEC-0471",)),
+        ("reverse-holo", "master-ball", ("SPEC-0472",)),
     }, "the owner photograph establishes exactly the three named Promo-card printings"
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {

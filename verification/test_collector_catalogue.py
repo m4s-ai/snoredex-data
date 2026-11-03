@@ -265,7 +265,7 @@ def reinspection_regressions() -> None:
         if row["localizationId"] == "LOCALIZATION:ID:id"
         and row["localSetCode"] == "SV-P"
         and row["collectorNumber"] == "117"
-        and row["finish"] == "mirror-holo"
+        and row["finish"] == "reverse-holo"
         and row["foilPattern"] == "poke-ball"
     ]
     assert len(bridged_indonesian_promo) == 1
@@ -923,13 +923,17 @@ def main() -> None:
         assert bs2["changeKind"] == "rekey-1:1"
         assert bs2["automaticStateAction"] == "preserve"
     old_promo_reverse = "item-ba258f3e-4106-5795-87f4-97d9c19a3e42"
-    promo_mirror_targets = {
-        "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8",
-        "item-c7eec9be-fb9a-5be1-a093-39b147541339",
+    # The two ball printings were re-keyed from mirror-holo to reverse-holo (#438, owner
+    # vocabulary 2026-11-03); their live items move 1:1 and keep collection state.
+    promo_rekeys = {
+        "item-9e12f0a7-cf6b-58ac-bb90-0d82a72559e8": "item-d86f64e9-f28a-5b74-bcee-9a370c46bed7",
+        "item-c7eec9be-fb9a-5be1-a093-39b147541339": "item-05066956-63df-5919-8027-5ee0e52e4e98",
     }
-    for target in promo_mirror_targets:
-        assert next(row for row in live_route["transitions"] if row["fromItemIds"] == [target])[
-            "changeKind"] == "retained"
+    promo_mirror_targets = set(promo_rekeys.values())
+    for old_item, new_item in promo_rekeys.items():
+        rekey = next(row for row in live_route["transitions"] if row["fromItemIds"] == [old_item])
+        assert (rekey["toItemIds"], rekey["changeKind"], rekey["automaticStateAction"]) == (
+            [new_item], "rekey-1:1", "preserve")
     for route in historical_routes:
         promo_reverse = next(
             row for row in route["transitions"]

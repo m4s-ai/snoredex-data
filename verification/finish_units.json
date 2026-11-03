@@ -63,9 +63,9 @@
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 43,
       "withNonHolo": 318,
-      "withHolo": 290,
-      "withReverseHolo": 201,
-      "withMirrorHolo": 15,
+      "withHolo": 291,
+      "withReverseHolo": 211,
+      "withMirrorHolo": 2,
       "withBothNonHoloAndHolo": 71,
       "withUnresolvedProductMapping": 14,
       "withAnyUnresolvedDetail": 34,
@@ -3642,13 +3642,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "pending",
+        "holo": "confirmed",
         "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -3657,7 +3657,7 @@
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "holo",
           "foilPattern": null,
           "markings": [],
           "distribution": null,
@@ -6344,14 +6344,13 @@
       "availableFinishes": [
         "non-holo",
         "holo",
-        "reverse-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "marketplace-claimed",
         "holo": "confirmed",
         "reverse-holo": "confirmed",
-        "mirror-holo": "confirmed"
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -6381,7 +6380,7 @@
         {
           "finish": "holo",
           "foilPattern": null,
-          "markings": null,
+          "markings": [],
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -6389,6 +6388,23 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
+              "sourceType": "Owner-supplied physical card photograph",
+              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
+              "retrievedAt": "2026-08-29",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-08-29",
+              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
+            },
             {
               "url": "https://www.pokemon.cn/tcg/product/16377.html",
               "sourceType": "Official Mainland China Simplified Chinese card-finish guide",
@@ -6402,6 +6418,10 @@
               "evidence": "The official guide states that cards of rarity R and above are foil cards produced with mirror (镜面) processing, which is the Western holo, and that Simplified Chinese C, U and R cards can be pulled as the locality-specific patterned random foil treatment, a reverse holo. The collection owner fixed this terminology on 2026-11-03 (#438). It does not state that these are the only printings."
             }
           ],
+          "specimenIds": [
+            "SPEC-0433"
+          ],
+          "image": "verification/specimens/SPEC-0433.png",
           "printingId": "F0067-P02"
         },
         {
@@ -6443,41 +6463,6 @@
           ],
           "image": "verification/specimens/SPEC-0434.png",
           "printingId": "F0067-P03"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": [],
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [
-            "base"
-          ],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://drive.google.com/file/d/1uloH5V3ZD7TjMmmB6VHGv7WCtN_I-5j1/view",
-              "sourceType": "Owner-supplied physical card photograph",
-              "evidence": "The retained full-card photograph reads Simplified Chinese Snorlax, CSM2bC 124/150, Illus. kanahei. A continuous reflective silver foil treatment is visible on the card border, and the collection-owner checklist labels this specimen Holo. Retained as SPEC-0433.",
-              "retrievedAt": "2026-08-29",
-              "claimFields": [
-                "identity"
-              ]
-            },
-            {
-              "sourceType": "Owner attestation (domain expert)",
-              "claimFields": [
-                "finish"
-              ],
-              "retrievedAt": "2026-08-29",
-              "evidence": "The collection owner's explicit 2026-08-29 confirmation establishes the specimen's finish; the retained owner-supplied physical card photograph supports card identity and any independently visible properties."
-            }
-          ],
-          "specimenIds": [
-            "SPEC-0433"
-          ],
-          "image": "verification/specimens/SPEC-0433.png",
-          "printingId": "F0067-P04"
         }
       ],
       "unresolved": []
@@ -41662,13 +41647,13 @@
       ],
       "availableFinishes": [
         "non-holo",
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -41711,7 +41696,7 @@
           "printingId": "F0456-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "master-ball",
           "markings": [],
           "distribution": null,
@@ -41745,7 +41730,7 @@
           "printingId": "F0456-P02"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
           "markings": [],
           "distribution": null,
@@ -41818,13 +41803,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -41833,7 +41818,7 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "master-ball",
           "markings": null,
           "distribution": null,
@@ -41861,7 +41846,7 @@
           "printingId": "F0457-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
           "markings": null,
           "distribution": null,
@@ -42208,14 +42193,13 @@
         }
       ],
       "availableFinishes": [
-        "non-holo",
-        "mirror-holo"
+        "non-holo"
       ],
       "finishStatus": {
         "non-holo": "confirmed",
         "holo": "pending",
         "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -42262,28 +42246,6 @@
           ],
           "image": "verification/specimens/SPEC-0675.png",
           "printingId": "F0462-P01"
-        },
-        {
-          "finish": "mirror-holo",
-          "foilPattern": null,
-          "markings": [],
-          "distribution": null,
-          "cardSize": "standard",
-          "mappedVariants": [],
-          "verificationStatus": "confirmed",
-          "sources": [
-            {
-              "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
-              "sourceType": "Seller listing photograph",
-              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
-              "retrievedAt": "2026-10-07"
-            }
-          ],
-          "specimenIds": [
-            "SPEC-0617"
-          ],
-          "image": "verification/specimens/SPEC-0617.png",
-          "printingId": "F0462-P02"
         }
       ],
       "unresolved": []
@@ -54069,13 +54031,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -54084,9 +54046,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54094,6 +54056,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54128,9 +54095,9 @@
           "printingId": "F0603-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54138,6 +54105,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54211,13 +54183,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -54226,7 +54198,7 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "colorless-energy-star",
           "markings": null,
           "distribution": null,
@@ -54285,7 +54257,7 @@
           "printingId": "F0604-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
           "markings": null,
           "distribution": null,
@@ -54383,13 +54355,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -54398,9 +54370,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54408,6 +54380,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54442,9 +54419,9 @@
           "printingId": "F0605-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54452,6 +54429,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54525,13 +54507,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -54540,9 +54522,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54550,6 +54532,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54584,9 +54571,9 @@
           "printingId": "F0606-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54594,6 +54581,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54667,13 +54659,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -54682,9 +54674,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "colorless-energy-star",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54692,6 +54684,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V1-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, colourless-energy star pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -54726,9 +54723,9 @@
           "printingId": "F0607-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -54736,6 +54733,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/MEGA-Dream-ex-Additionals/Hops-Snorlax-V2-xm2a136",
+              "sourceType": "user + read off 5x upscaled crop of the scan",
+              "evidence": "Curated variant name: mirror holo, Poké Ball pattern"
+            },
             {
               "url": "https://www.pokemon-card.com/ex/m2a/index.html",
               "sourceType": "Official Japanese MEGA Dream ex product page",
@@ -55615,13 +55617,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -55630,9 +55632,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "master-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -55640,6 +55642,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
@@ -55656,9 +55663,9 @@
           "printingId": "F0614-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -55666,6 +55673,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Poké Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
@@ -55721,13 +55733,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -55736,7 +55748,7 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "master-ball",
           "markings": null,
           "distribution": null,
@@ -55776,7 +55788,7 @@
           "printingId": "F0615-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
           "markings": null,
           "distribution": null,
@@ -55795,6 +55807,23 @@
               "sourceType": "Owner-supplied physical card photograph",
               "evidence": "Close owner photograph captured 2025-05-04 of Korean 잠만보 xsv2a 143/165, HP 150. Repeated Poké Ball silhouettes are directly visible across the card body, establishing the Poké Ball mirror-holo printing. This is the same physical card shown in the group views SPEC-0058, SPEC-0059, SPEC-0063 and SPEC-0064. Retained as SPEC-0061.",
               "retrievedAt": "2026-08-26"
+            },
+            {
+              "url": "https://i.ebayimg.com/images/g/0mQAAeSw7T5p6Ywb/s-l1600.webp",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Korean sv2a143/165, reflective repeating ball outlines. Mirror supported, distinguishing Master Ball M not confidently readable; seller Master Ball attribution remains separate. Local Tesseract OCR unavailable; printed text and treatment read visually. No finish inventory closure or ownership attestation asserted. Retained as SPEC-0617.",
+              "retrievedAt": "2026-10-07",
+              "claimFields": [
+                "identity"
+              ]
+            },
+            {
+              "sourceType": "Owner attestation (domain expert)",
+              "claimFields": [
+                "finish"
+              ],
+              "retrievedAt": "2026-11-03",
+              "evidence": "The collection owner's explicit 2026-11-03 confirmation establishes the specimen's finish; the retained seller listing photograph supports card identity and any independently visible properties."
             },
             {
               "sourceType": "Inspected card photograph; external origin unknown",
@@ -55823,6 +55852,7 @@
           "specimenIds": [
             "SPEC-0061",
             "SPEC-0612",
+            "SPEC-0617",
             "SPEC-0660"
           ],
           "image": "verification/specimens/SPEC-0061.jpg",
@@ -55868,13 +55898,13 @@
         }
       ],
       "availableFinishes": [
-        "mirror-holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
         "holo": "pending",
-        "reverse-holo": "pending",
-        "mirror-holo": "confirmed"
+        "reverse-holo": "confirmed",
+        "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -55883,9 +55913,9 @@
       "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "master-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -55893,6 +55923,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V2-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Master Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",
@@ -55909,9 +55944,9 @@
           "printingId": "F0616-P01"
         },
         {
-          "finish": "mirror-holo",
+          "finish": "reverse-holo",
           "foilPattern": "poke-ball",
-          "markings": [],
+          "markings": null,
           "distribution": null,
           "cardSize": "standard",
           "mappedVariants": [
@@ -55919,6 +55954,11 @@
           ],
           "verificationStatus": "confirmed",
           "sources": [
+            {
+              "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Pokemon-Card-151-Additionals/Snorlax-V1-xsv2a143",
+              "sourceType": "user",
+              "evidence": "Curated variant name: Poké Ball mirror holo"
+            },
             {
               "sourceType": "Owner attestation plus downloaded scan review",
               "evidence": "The repository owner identified the treatment and it was checked against the downloaded product scan.",

@@ -2980,7 +2980,7 @@ def _collect_g11(state: dict[str, Any]) -> dict[str, Any]:
                           f"{promo_stamp_implies_reverse[:5]}")
                     balls = {
                         i["foilPattern"] for i in items
-                        if i["setCode"] == "xsv2a" and i["finish"] == "mirror-holo"
+                        if i["setCode"] == "xsv2a" and i["finish"] == "reverse-holo"
                     }
 
                 def _collect_g11_part2_if_part5():
