@@ -440,6 +440,21 @@ pattern-less Cardmarket reverse claim folds into the one photographed pattern. T
 earlier `mirror-holo` ball or star records outside its scope (for example `xsv2a`, `xm2a`) are
 unchanged until reviewed.
 
+## The owner's rarity rule is a research guide, not evidence (#438)
+
+The collection owner described the usual pattern on 2026-11-03, with exceptions: Common and
+Uncommon cards are Non-Holo; Rares are Non-Holo and/or Holo (early sets printed some Rares both
+ways, later sets made some Rares Holo and some Non-Holo, and since Scarlet & Violet every Rare is
+Holo). Western sets add Reverse Holos to these rarities, in era-specific forms (EX-era stamps,
+Diamond & Pearl mirror finish, energy or Poké Ball symbols). Japanese and other Asian languages
+except Simplified Chinese carry Reverse Holos mostly in High Class and special sets, for example
+the s10a/s10b Enhanced Expansion Packs, and not in regular releases; Simplified Chinese uses many
+patterned reverses (stars, large Poké Ball and Master Ball).
+
+The rule ranks research and frames owner decisions. It never confirms or refutes a finish by
+itself: a closed list still needs an owner `finishDecisions` entry, as in
+[`record_438_owner_rarity_rule_20261103.py`](passes/record_438_owner_rarity_rule_20261103.py).
+
 ## Optional foil-pattern names
 
 `finish` is sufficient to describe ordinary Holo, Reverse Holo or Mirror Holo.
