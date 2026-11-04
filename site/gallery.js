@@ -43,6 +43,9 @@ function openCard(card, button) {
   opener = button;
   document.querySelector("#card-title").textContent = card.name;
   document.querySelector("#card-picture").replaceChildren(picture(card, true));
+  if (card.imageScope === "representative") {
+    document.querySelector("#card-picture").append(element("p", "Representative card image"));
+  }
   const facts = document.querySelector("#card-facts");
   facts.replaceChildren();
   const release = card.date
@@ -71,7 +74,8 @@ function openCard(card, button) {
     sources.append(item);
   }
   if (card.imageSource) {
-    const imageSource = element("a", "Retained card image");
+    const imageSource = element("a", card.imageScope === "representative"
+      ? "Retained representative image" : "Retained exact-printing image");
     imageSource.href = card.imageSource;
     const item = element("li");
     item.append(imageSource);

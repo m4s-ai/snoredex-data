@@ -24,8 +24,7 @@ Dieser ExecPlan bleibt während der Umsetzung aktuell. Siehe [OpenAI ExecPlan-Le
 ## Decision Log
 
 - 2026-11-04. Aktive Katalogeinträge als Livebestand projizieren. Die KSS-Hypothese und die beiden offenen CL-Prerelease-Claims bleiben mit eigenen IDs und Evidenzstatus auf die Galerie beschränkt.
-- 2026-11-04. Fehlende exakte Bilder behalten einen neutralen Platzhalter. Vorhandene exakte Render und Fotos verwenden lokale Derivate. Ein separat aufbereitetes Foto behält einen Verweis auf das unberührte SPEC-Original.
-- 2026-11-04. Fünf vorhandene englische Kartenbilder wurden anhand der sichtbaren Merkmale konkreten Druckeinträgen zugeordnet. Die Zuordnung gilt ausschließlich für diese Einträge.
+- 2026-11-04. Exakte Bilder verwenden die kanonischen lokalen Derivate. Fünf vorhandene englische Kartenbilder stehen als ausdrücklich repräsentative Bilder in der Galerie. Fehlt eine geeignete Quelle, bleibt der Platzhalter bedienbar.
 - 2026-11-04. Fortlaufendes Raster als Einstieg, 3×3 und seitenweise Befüllung als Binder-Standard. Der Browser hält diese Einstellungen bis zum Neuladen im Speicher.
 - 2026-11-04. Artwork-Nummern bezeichnen die Position in der aktuellen historischen Reihenfolge. Ein später belegtes früheres Artwork kann nachfolgende Nummern verschieben. Stabile Katalog- und Gruppen-IDs bleiben die Referenz.
 
@@ -37,11 +36,11 @@ scripts/site.py erzeugt die Website aus collector_catalogue.json. verification/a
 
 1. Aktive Katalogeinträge mit ID, Merkmalen und Quellen in die Galerie übernehmen. Geprüfte Appearance-IDs bevorzugen. Die bestehenden Bildgruppen aus der Artwork-Projektion verwenden und Gruppen mit gesichtetem, gleichem Motiv zusammenführen. Das früheste belegte Datum eines bestätigten Gruppenmitglieds bestimmt die Gruppenposition. Die Kacheln behalten ihr eigenes Datum.
 2. Aus scripts/site.py eine zweite Seite erzeugen und von der Tabelle verlinken. Auf Hover und Tastaturfokus erscheinen Set, Nummer und Künstler. Die Lightbox liefert Variante, Datum, Evidenzstatus und Quellen. Das Binder-Raster unterstützt zwei Seiten, 3×3, 4×4, 5×5 und freie Zeilen- und Spaltenwerte von 1 bis 8. Beide Befüllungsrichtungen verwenden dieselbe sortierte Liste.
-3. Exakte lokale Bilder über Thumbnail und Preview anzeigen. Fotos mit geprüftem Zuschnitt getrennt speichern. Platzhalter bleiben interaktiv. Die Pages-Allowlist und der Browser-Workflow erfassen die neuen Dateien.
+3. Lokale Bilder über kanonische Thumbnails und Previews anzeigen. Repräsentative Bilder in der Lightbox kennzeichnen. Die Pages-Allowlist und der Browser-Workflow erfassen die neuen Dateien.
 
 ## Artifacts and Notes
 
-site/gallery-review.json hält die Verbindungen zwischen bestehenden Bildgruppen, die konkreten Bildzuordnungen, die drei zusätzlichen Rechercheeinträge und die Zuschnittreferenz von SPEC-0601. Die vier Eckpunkte stehen in Originalpixeln in der Reihenfolge oben links, unten links, unten rechts, oben rechts. Für dieses Foto wurde die Kartenfläche mit Pillow QUAD und bikubischer Abtastung auf 520 × 728 Pixel ausgerichtet. Die WebP-Dateien wurden mit Qualitätsstufen 87 für die Vorschau und 84 für das 220 × 308 Pixel große Thumbnail gespeichert.
+site/gallery-review.json hält die Verbindungen zwischen bestehenden Bildgruppen, repräsentative Bildzuordnungen und die drei zusätzlichen Rechercheeinträge. SPEC-0601 verwendet das Thumbnail und die Vorschau aus verification/artwork_derivative_manifest.json. WORKFLOW-MAP.md dokumentiert die Zuständigkeit der Galerieprojektion und den Vorrang kanonischer Appearance-IDs.
 
 ## Concrete Steps and Validation
 
@@ -57,6 +56,6 @@ Der Site-Generator erzeugt dieselbe Projektion aus denselben Eingaben. Ein Rollb
 
 ## Outcomes & Retrospective
 
-Die Galerie projiziert 973 Kartenplätze in 54 Artwork-Gruppen. Alle 629 Releases sind über die vorhandene Artwork-Projektion abgedeckt. 244 bestehende Bildgruppen wurden nach visueller Sichtung zu 50 gemeinsamen Motiven verbunden. Vier eigenständige Bildgruppen bleiben separat. Von den Kartenplätzen haben 323 ein konkret zugeordnetes Bild und 650 einen Platzhalter.
+Die Galerie projiziert 973 Kartenplätze in 54 Artwork-Gruppen. Alle 629 Releases sind über die vorhandene Artwork-Projektion abgedeckt. 244 bestehende Bildgruppen wurden nach visueller Sichtung zu 50 gemeinsamen Motiven verbunden. Vier eigenständige Bildgruppen bleiben separat. 318 Kartenplätze haben ein Bild mit kanonischem Exact-Printing-Scope, fünf ein repräsentatives Bild und 650 einen Platzhalter.
 
 Der abschließende Lauf von `python scripts/regen.py --check` bestätigte die Generatoren und Kernregressionen. Die Browser-Suite meldete 112 von 112 bestandene Prüfungen. Chrome lud außerdem die lokal gepackte Galerie samt Kartenbild und zeigte Hover-Effekt und Dunkelmodus im Pages-Artefakt.

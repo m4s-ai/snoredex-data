@@ -33,6 +33,11 @@ def main():
         return gallery_cards(catalogue, artwork, review, derivatives, [], site.release_sort, excluded, verdicts)
 
     cards = project(rejected)
+    specimen = next(card for card in cards if card["imageSource"] == "verification/specimens/SPEC-0601.png")
+    assert specimen["imageScope"] == "exact-printing"
+    assert specimen["preview"] == derivatives[specimen["imageSource"]]["preview"]["path"]
+    representative = {card["id"] for card in cards if card["imageScope"] == "representative"}
+    assert representative == review["representativeImages"].keys()
     assert len({card["id"] for card in cards}) == len(cards)
     artwork_numbers = list(dict.fromkeys(card["artworkNumber"] for card in cards))
     assert artwork_numbers == list(range(1, len(artwork_numbers) + 1))

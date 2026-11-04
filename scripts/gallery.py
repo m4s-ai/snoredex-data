@@ -55,16 +55,16 @@ def open_research(items, research, rejected, verdicts):
 
 
 def gallery_images(item, assets, review, derivatives):
-    source = review["reviewedImages"].get(item["itemId"])
+    source = None
     if item["imageScope"] == "exact-printing":
-        source = assets.get(item["imageAssetId"], {}).get("path") or source
+        source = assets.get(item["imageAssetId"], {}).get("path")
+    scope = "exact-printing" if source else "representative"
+    source = source or review["representativeImages"].get(item["itemId"])
     if not source:
         return {}
-    if source in review["photoDerivatives"]:
-        return dict(review["photoDerivatives"][source], imageSource=source)
     record = derivatives.get(source, {})
     paths = {kind: record.get(kind, {}).get("path") or source for kind in ("thumbnail", "preview")}
-    return dict(paths, imageSource=source)
+    return dict(paths, imageSource=source, imageScope=scope)
 
 
 def release_artist_fallbacks(items, artists):
@@ -92,6 +92,7 @@ def gallery_card(item, group, artist, language, images):
         "kind": item["itemKind"], "status": item["finishVerificationStatus"],
         "note": item.get("researchNote"), "thumbnail": images.get("thumbnail"),
         "preview": images.get("preview"), "imageSource": images.get("imageSource"),
+        "imageScope": images.get("imageScope"),
         "sources": sorted(set(item["sourceLinks"]) | set(item["evidenceLinks"])),
     }
 

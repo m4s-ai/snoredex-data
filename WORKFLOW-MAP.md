@@ -497,6 +497,10 @@ distribution, and card size. It is not derived from list order.
 ## 7. Boundaries
 
 - `scripts/site.py` and `site/app.js` own the generated data/evidence review view (#411).
+- `scripts/gallery.py` owns the gallery projection. `site/gallery-review.json` holds its visual
+  group aliases over the retained artwork projection and its explicitly representative image
+  selections. A reviewed appearance ID from the artwork projection takes precedence over a gallery
+  alias. Gallery aliases and representative images carry no catalogue identity or evidence authority.
   Its main table projects every active `verified-printing` in `collector_catalogue.json` once, preserving canonical
   locality, evidence state and correction identity; the legacy chronology export is not its membership input.
   Unconfirmed finish candidates and research placeholders remain in the data exports, outside the table.

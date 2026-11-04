@@ -282,6 +282,7 @@ def check_gallery(browser, origin):
     page.goto(origin + "/index.html")
     page.get_by_role("link", name="Artwork gallery").click()
     page.wait_for_url("**/gallery.html")
+    assert page.get_by_role("region", name="Cards").is_visible()
     cards = page.locator(".gallery-card")
     first = cards.first
     first.focus()
@@ -292,6 +293,9 @@ def check_gallery(browser, origin):
     assert page.get_by_text("#1", exact=True).is_visible()
     page.keyboard.press("Escape")
     page.wait_for_function("document.activeElement === document.querySelector('.gallery-card')")
+    page.locator('[data-card-id="item-d7633bea-072e-5d80-9781-f95f47f797d7"]').click()
+    assert page.get_by_text("Representative card image", exact=True).is_visible()
+    page.keyboard.press("Escape")
 
     page.locator("#binder-toggle").click()
     assert cards.count() == 18
