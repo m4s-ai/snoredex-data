@@ -699,7 +699,9 @@ def main() -> None:
     assert german_wcd_sources[
         "https://i.ebayimg.com/images/g/P9gAAeSwG55ptwIt/s-l1600.jpg"
     ]["claimFields"] == ["identity"]
-    assert german_units["F0633"]["printings"][0]["specimenIds"] == ["SPEC-0128"]
+    german_xy179, = german_units["F0633"]["printings"]
+    assert (german_xy179["finish"], german_xy179["foilPattern"]) == ("holo", "cosmos")
+    assert set(german_xy179["specimenIds"]) == {"SPEC-0128", "SPEC-0696"}
     spanish_ju11 = next(unit for unit in finish_units if unit["finishUnitId"] == "F0165")
     assert spanish_ju11["availabilityStatus"] == "confirmed"
     assert all(p["finish"] == "holo" for p in spanish_ju11["printings"])
