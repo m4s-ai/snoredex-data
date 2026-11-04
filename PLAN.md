@@ -27,6 +27,7 @@ Dieser ExecPlan bleibt während der Umsetzung aktuell. Siehe [OpenAI ExecPlan-Le
 - 2026-11-04. Exakte Bilder verwenden die kanonischen lokalen Derivate. Fünf vorhandene englische Kartenbilder stehen als ausdrücklich repräsentative Bilder in der Galerie. Fehlt eine geeignete Quelle, bleibt der Platzhalter bedienbar.
 - 2026-11-04. Fortlaufendes Raster als Einstieg, 3×3 und seitenweise Befüllung als Binder-Standard. Der Browser hält diese Einstellungen bis zum Neuladen im Speicher.
 - 2026-11-04. Artwork-Nummern bezeichnen die Position in der aktuellen historischen Reihenfolge. Ein später belegtes früheres Artwork kann nachfolgende Nummern verschieben. Stabile Katalog- und Gruppen-IDs bleiben die Referenz.
+- 2026-11-04. Gruppen mit demselben frühesten Datum folgen Setkürzel und Kartennummer ihres frühesten bestätigten Drucks, nicht der Gruppen-ID. Der Abgleich mit der Sammlerliste eines Sammlerkollegen zeigte vier sonst zufällig sortierte Stellen (sm9, s1H, s10a, sv2a).
 
 ## Context and Orientation
 
