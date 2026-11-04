@@ -108,8 +108,11 @@ A Cardmarket finish axis names no pattern. When a photograph establishes exactly
 that finish with a visible pattern and otherwise identical identity, `finishes.py`
 (`absorb_patternless_marketplace_claims`) folds the pattern-less marketplace claim into it: it is
 the claimed printing, not a second collectible. With two or more patterned candidates of that
-finish (Poké Ball and Master Ball mirrors, for example), the claim stays unrefined. JP mC 568 (SPEC-0673,
-plain mirror) is the worked example.
+finish (Poké Ball and Master Ball reverses, for example), the claim stays unrefined unless an owner
+`finishDecisions` entry closes the list with that finish; then it supports every patterned printing
+(151C 143, CSV7C 158). A pattern-less row resting only on a `product-line-description` (a class
+statement such as the official CN finish guide) folds into every patterned sibling the same way.
+JP mC 568 (SPEC-0673, plain mirror) is the worked example.
 
 The "identified physical scan" row above was unimplementable until 2026-08-09: a specimen record
 had no finish field, so what the photograph showed could only be written as prose that no check
@@ -117,7 +120,7 @@ reads. A specimen may now carry an optional `physicalObservation`:
 
 ```json
 "physicalObservation": {
-  "finish": "mirror-holo",
+  "finish": "reverse-holo",
   "foilPattern": "Master Ball mirror",
   "markings": null,
   "markingRole": null,

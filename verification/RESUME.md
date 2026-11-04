@@ -1007,7 +1007,7 @@ even a claimed absence of a particular set edition requires owner adjudication, 
 
 User-supplied domain knowledge, and it overturned an earlier conclusion of mine:
 
-- **`x<SET>`** = special editions of cards from `<SET>` — mirror-holo ball patterns or retail stamps. **Not** a Cardmarket invention, so they *are* documentable.
+- **`x<SET>`** = special treatments of cards from `<SET>` — patterned reverse holos (Poké Ball, Master Ball, energy star) or retail stamps. The treatments are real and documentable, but the code is Cardmarket's: the card's printed number belongs to `<SET>` (`xsv2a 143` is `sv2a 143`), and the `x` only separates the treatment (owner, 2026-11-03).
 - **`PPS<n> <SET>`** = Play! Pokémon Prize Pack Series `<n>`, reprint of a card from `<SET>` carrying the Play! stamp.
 
 The original pass recorded the following findings. These are historical outcomes, not current
