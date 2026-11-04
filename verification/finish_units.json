@@ -63,9 +63,9 @@
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 47,
       "withNonHolo": 316,
-      "withHolo": 293,
-      "withReverseHolo": 211,
-      "withMirrorHolo": 2,
+      "withHolo": 291,
+      "withReverseHolo": 212,
+      "withMirrorHolo": 3,
       "withBothNonHoloAndHolo": 71,
       "withUnresolvedProductMapping": 14,
       "withAnyUnresolvedDetail": 34,
@@ -38214,22 +38214,22 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "reverse-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "confirmed",
-        "reverse-holo": "pending",
+        "holo": "pending",
+        "reverse-holo": "confirmed",
         "mirror-holo": "pending"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
       "completenessStatus": "positive-evidence-only",
       "productMappingStatus": "confirmed",
-      "patternStatus": "not-applicable",
+      "patternStatus": "confirmed",
       "printings": [
         {
-          "finish": "holo",
+          "finish": "reverse-holo",
           "foilPattern": "diagonal rainbow",
           "markings": [],
           "distribution": null,
@@ -38279,13 +38279,13 @@
         }
       ],
       "availableFinishes": [
-        "holo"
+        "mirror-holo"
       ],
       "finishStatus": {
         "non-holo": "pending",
-        "holo": "confirmed",
+        "holo": "pending",
         "reverse-holo": "pending",
-        "mirror-holo": "pending"
+        "mirror-holo": "confirmed"
       },
       "applicabilityStatus": "applicable",
       "availabilityStatus": "confirmed",
@@ -38294,9 +38294,9 @@
       "patternStatus": "not-applicable",
       "printings": [
         {
-          "finish": "holo",
+          "finish": "mirror-holo",
           "foilPattern": null,
-          "markings": null,
+          "markings": [],
           "distribution": {
             "kind": "fixed-deck",
             "name": "Korean localized sN deck"
@@ -38308,18 +38308,16 @@
           "verificationStatus": "confirmed",
           "sources": [
             {
-              "url": "https://pokemoncard.co.kr/card/436",
-              "sourceType": "Official Korean localized product treatment specification",
-              "authorityTier": "official-primary",
-              "coverage": "positive-only",
-              "supportsAbsence": false,
-              "languages": [
-                "Korean"
-              ],
-              "retrievedAt": "2026-10-06",
-              "evidence": "Exact Korean product states 60장 덱 (전종 홀로). Matched sN 008/024. The statement does not identify mirror treatment or foil pattern."
+              "url": "https://media.bunjang.co.kr/product/420392678_1_1784261373_w960jpg",
+              "sourceType": "Seller listing photograph",
+              "evidence": "Korean sN 008/024; Oswaldo KATO. Retained as SPEC-0699.",
+              "retrievedAt": "2026-11-04"
             }
           ],
+          "specimenIds": [
+            "SPEC-0699"
+          ],
+          "image": "verification/specimens/SPEC-0699.png",
           "printingId": "F0418-P01"
         }
       ],

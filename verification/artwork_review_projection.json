@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-04",
-  "projectionVersion": "815ddba1d9a3368bf22677c055b0f5199214862803f6701245474914e460c801",
+  "projectionVersion": "386c6a42d4e05baf8e951d2e5d9ac87d35d447c50decf4aa82fbc8af1e67a281",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 934,
-    "sourceObservations": 3514
+    "sourceObservations": 3515
   },
   "groups": [
     {
@@ -48236,10 +48236,10 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:44987d5fe8d7e8c2cc81138b",
-              "semanticPrintingId": "PRINTING:44987d5fe8d7e8c2cc81138b",
+              "physicalPrintingId": "PHYSICAL:PRINTING:811e57b7cb65dc818abf9704",
+              "semanticPrintingId": "PRINTING:811e57b7cb65dc818abf9704",
               "cardReleaseId": "RELEASE:JP:Japanese:sN:008:Snorlax-Heavy-Impact",
-              "finish": "holo",
+              "finish": "reverse-holo",
               "edition": null,
               "foilPattern": "diagonal rainbow",
               "markings": [],
@@ -48249,7 +48249,7 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0417",
               "sourcePrintingId": "F0417-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:44987d5fe8d7e8c2cc81138b",
+              "establishingClaimId": "CLAIM:finish:PRINTING:811e57b7cb65dc818abf9704",
               "specimenIds": [
                 "SPEC-0218"
               ],
@@ -48269,7 +48269,7 @@
             "artist": "Oswaldo KATO",
             "variant": "base",
             "finish": [
-              "holo"
+              "reverse-holo"
             ],
             "foilPattern": [
               "diagonal rainbow"
@@ -48309,7 +48309,7 @@
               "provider": "retained Cardmarket product scan",
               "url": "https://product-images.s3.cardmarket.com/51/sN/606631/606631.jpg",
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sN 008 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Broad diagonal rainbow foil bands are visible across the lower card face. Retained as SPEC-0218.",
-              "contentHash": "efe7592e772c16c873faad0c14ed180167a5de28846221e318a5b2d618cb61d2",
+              "contentHash": "906aa1e209f719f24cd1e5b964dcfcc4acd456f2d06cc12c3920aeff371672ae",
               "image": null
             },
             {
@@ -48318,7 +48318,7 @@
               "provider": null,
               "url": "https://www.cardmarket.com/en/Pokemon/Products/Singles/Start-Deck-100-CoroCoro-Comic-Version/Snorlax-sN008",
               "evidence": "Complete retained Cardmarket catalogue scan for Japanese Snorlax sN 008 (base). Japanese text, artwork, set identity and the visible collector identity establish this exact card. The scan is positive evidence for the pictured card only; it is not a complete product or finish manifest. Broad diagonal rainbow foil bands are visible across the lower card face.",
-              "contentHash": "5dbbfc93f1bab83343290f1ff11adef163db4a8b547680b27581d9d3e0acf993",
+              "contentHash": "e08a7c5e6e779427bf9ba1e26816910b8f15bc56f8fe2810ab2c41f231388601",
               "image": "verification/specimens/SPEC-0218.jpg"
             },
             {
@@ -48356,13 +48356,13 @@
           ],
           "physicalPrintings": [
             {
-              "physicalPrintingId": "PHYSICAL:PRINTING:329101b60315cbf46ce50d47",
-              "semanticPrintingId": "PRINTING:329101b60315cbf46ce50d47",
+              "physicalPrintingId": "PHYSICAL:PRINTING:0a3864097f29d34d07570d6f",
+              "semanticPrintingId": "PRINTING:0a3864097f29d34d07570d6f",
               "cardReleaseId": "RELEASE:KR:Korean:sN:008/024:Snorlax-Heavy-Impact",
-              "finish": "holo",
+              "finish": "mirror-holo",
               "edition": null,
               "foilPattern": null,
-              "markings": null,
+              "markings": [],
               "distribution": {
                 "kind": "fixed-deck",
                 "name": "Korean localized sN deck"
@@ -48372,19 +48372,16 @@
               "classificationState": "classified-from-positive-evidence",
               "sourceFinishUnitId": "F0418",
               "sourcePrintingId": "F0418-P01",
-              "establishingClaimId": "CLAIM:finish:PRINTING:329101b60315cbf46ce50d47",
+              "establishingClaimId": "CLAIM:finish:PRINTING:0a3864097f29d34d07570d6f",
+              "specimenIds": [
+                "SPEC-0699"
+              ],
               "sources": [
                 {
-                  "url": "https://pokemoncard.co.kr/card/436",
-                  "sourceType": "Official Korean localized product treatment specification",
-                  "authorityTier": "official-primary",
-                  "coverage": "positive-only",
-                  "supportsAbsence": false,
-                  "languages": [
-                    "Korean"
-                  ],
-                  "retrievedAt": "2026-10-06",
-                  "evidence": "Exact Korean product states 60장 덱 (전종 홀로). Matched sN 008/024. The statement does not identify mirror treatment or foil pattern."
+                  "url": "https://media.bunjang.co.kr/product/420392678_1_1784261373_w960jpg",
+                  "sourceType": "Seller listing photograph",
+                  "evidence": "Korean sN 008/024; Oswaldo KATO. Retained as SPEC-0699.",
+                  "retrievedAt": "2026-11-04"
                 }
               ]
             }
@@ -48395,7 +48392,7 @@
             "artist": "Oswaldo KATO",
             "variant": "base",
             "finish": [
-              "holo"
+              "mirror-holo"
             ],
             "foilPattern": [],
             "markings": [],
@@ -48432,16 +48429,27 @@
               "originalHash": "7df4cb9094405827701a0608aeb36a3fab2c046e50d0fbf7c1034bd944a2b615",
               "previewSrc": "images/previews/SPEC-0247.png?v=f0587578bf9ed09e4616761a80fba280f4a0bf5074387cad3a7937fd1c6f901a",
               "thumbnailSrc": "images/thumbs/SPEC-0247.png?v=75b2bf8474ea737cde3fa09cf939f8af380579cf5a33be6038f779fe826e8081"
+            },
+            {
+              "src": "verification/specimens/SPEC-0699.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0699",
+              "contentHash": "8aba3b8ba028250f489e1725d2ee78303439084c1f82f29d583a1aa18984dc0f",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8aba3b8ba028250f489e1725d2ee78303439084c1f82f29d583a1aa18984dc0f",
+              "previewSrc": "images/previews/SPEC-0699.png?v=99c4806cc0554ef51356b4b6f2ce16d0b096818f1004243977e49a59fc022e7a",
+              "thumbnailSrc": "images/thumbs/SPEC-0699.png?v=a3131bc3059ce515daef3612425f448ef0bfa350ee918ba16ec5b06c7602919e"
             }
           ],
           "observations": [
             {
-              "observationId": "finish:F0418-P01:0:666d0a557cf5ce79",
+              "observationId": "finish:F0418-P01:0:01b700ab32b5757f",
               "kind": "finish",
-              "provider": "Official Korean localized product treatment specification",
-              "url": "https://pokemoncard.co.kr/card/436",
-              "evidence": "Exact Korean product states 60장 덱 (전종 홀로). Matched sN 008/024. The statement does not identify mirror treatment or foil pattern.",
-              "contentHash": "aad034d76a39ea32b187958c8d9bf64db6a8b9c5239f00297585e8d7a2d2c5f9",
+              "provider": "Seller listing photograph",
+              "url": "https://media.bunjang.co.kr/product/420392678_1_1784261373_w960jpg",
+              "evidence": "Korean sN 008/024; Oswaldo KATO. Retained as SPEC-0699.",
+              "contentHash": "38f21622648f238106a23f94cad294bb922faa976807c32d28b6ba06215a72f2",
               "image": null
             },
             {
@@ -48461,6 +48469,15 @@
               "evidence": "Complete official Korean render for Snorlax sN 008/024. The printed Korean name, collector identity, attacks and rarity no printed rarity symbol establish this card release and Work equivalence. Retained as identity and rarity evidence only; no physical finish is inferred.",
               "contentHash": "1ef1c4823c26df00f1d88708286706a5d3e41c8985bb77997cdbfb4685fae7a6",
               "image": "verification/specimens/SPEC-0247.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0699",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://m.bunjang.co.kr/products/420392678",
+              "evidence": "Korean sN 008/024; Oswaldo KATO.",
+              "contentHash": "946bf704f1de442ec0729116db641c658c7c2f992549804cfcab39aeacac20cd",
+              "image": "verification/specimens/SPEC-0699.png"
             },
             {
               "observationId": "unit:U0770",

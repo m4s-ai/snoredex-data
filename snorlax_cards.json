@@ -45,9 +45,9 @@
       "notApplicableFinish": 77,
       "withOwnerAdjudication": 47,
       "withNonHolo": 316,
-      "withHolo": 293,
-      "withReverseHolo": 211,
-      "withMirrorHolo": 2,
+      "withHolo": 291,
+      "withReverseHolo": 212,
+      "withMirrorHolo": 3,
       "withBothNonHoloAndHolo": 71,
       "withUnresolvedProductMapping": 14,
       "withAnyUnresolvedDetail": 34,
@@ -47689,32 +47689,34 @@
         "status": "confirmed",
         "availableFinishes": [
           "non-holo",
-          "holo"
+          "reverse-holo",
+          "mirror-holo"
         ],
         "unitAvailableFinishes": [
           "non-holo",
-          "holo"
+          "reverse-holo",
+          "mirror-holo"
         ],
         "byLanguage": [
           {
             "language": "Japanese",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo"
+              "reverse-holo"
             ],
             "unitAvailableFinishes": [
-              "holo"
+              "reverse-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
-              "reverse-holo": "pending",
+              "holo": "pending",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
-              "reverse-holo": "pending",
+              "holo": "pending",
+              "reverse-holo": "confirmed",
               "mirror-holo": "pending"
             },
             "status": "confirmed",
@@ -47723,7 +47725,7 @@
             "printings": [
               {
                 "printingId": "F0417-P01",
-                "finish": "holo",
+                "finish": "reverse-holo",
                 "foilPattern": "diagonal rainbow",
                 "markings": [],
                 "distribution": null,
@@ -47741,22 +47743,22 @@
             "language": "Korean",
             "claimStatus": "confirmed",
             "availableFinishes": [
-              "holo"
+              "mirror-holo"
             ],
             "unitAvailableFinishes": [
-              "holo"
+              "mirror-holo"
             ],
             "finishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
+              "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
             "unitFinishStatus": {
               "non-holo": "pending",
-              "holo": "confirmed",
+              "holo": "pending",
               "reverse-holo": "pending",
-              "mirror-holo": "pending"
+              "mirror-holo": "confirmed"
             },
             "status": "confirmed",
             "finishUnitId": "F0418",
@@ -47764,16 +47766,20 @@
             "printings": [
               {
                 "printingId": "F0418-P01",
-                "finish": "holo",
+                "finish": "mirror-holo",
                 "foilPattern": null,
-                "markings": null,
+                "markings": [],
                 "distribution": {
                   "kind": "fixed-deck",
                   "name": "Korean localized sN deck"
                 },
                 "cardSize": "standard",
                 "verificationStatus": "confirmed",
-                "productMapping": "mapped"
+                "productMapping": "mapped",
+                "image": "verification/specimens/SPEC-0699.png",
+                "specimenIds": [
+                  "SPEC-0699"
+                ]
               }
             ]
           },
