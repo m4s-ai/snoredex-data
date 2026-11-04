@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-11-03",
+    "generated": "2026-11-04",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 128,
       "absenceEdges": 0,
       "observations": 187,
-      "resolvedVerdictSources": 1863
+      "resolvedVerdictSources": 1864
     },
     "surfaceStates": {
       "active": 58,
@@ -32334,7 +32334,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date",
-        "finish",
         "finish-override"
       ]
     },
@@ -39217,6 +39216,21 @@
     },
     {
       "sourceKey": "https://media.bunjang.co.kr/product/418966418_1_1784832595_w480.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/420392678_1_1784261373_w960jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
