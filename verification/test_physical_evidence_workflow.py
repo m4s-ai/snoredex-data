@@ -241,9 +241,10 @@ def main() -> None:
         unit for unit in finish_units if unit["finishUnitId"] == "F0456"
     )
     assert simplified_chinese_promo["completenessStatus"] == "owner-adjudicated"
-    assert simplified_chinese_promo["availableFinishes"] == ["non-holo", "mirror-holo"]
+    assert simplified_chinese_promo["availableFinishes"] == ["non-holo", "reverse-holo"]
     assert simplified_chinese_promo["finishStatus"]["holo"] == "pending"
-    assert simplified_chinese_promo["finishStatus"]["reverse-holo"] == "pending"
+    assert simplified_chinese_promo["finishStatus"]["reverse-holo"] == "confirmed"
+    assert simplified_chinese_promo["finishStatus"]["mirror-holo"] == "pending"
     assert simplified_chinese_promo["patternStatus"] == "confirmed"
     assert simplified_chinese_promo["unresolved"] == []
     promo_printings = simplified_chinese_promo["printings"]
@@ -254,8 +255,8 @@ def main() -> None:
         for row in promo_printings
     } == {
         ("non-holo", None, ("SPEC-0470",)),
-        ("mirror-holo", "poke-ball", ("SPEC-0471",)),
-        ("mirror-holo", "master-ball", ("SPEC-0472",)),
+        ("reverse-holo", "poke-ball", ("SPEC-0471",)),
+        ("reverse-holo", "master-ball", ("SPEC-0472",)),
     }, "the owner photograph establishes exactly the three named Promo-card printings"
     source_first_prints = read("source_first_prints.json")["prints"]
     single_provider_counts = {
@@ -800,8 +801,28 @@ def main() -> None:
     assert spanish_swsh032["printings"][0]["foilPattern"] == "cosmos"
     spanish_generations = next(unit for unit in finish_units if unit["finishUnitId"] == "F0139")
     assert spanish_generations["finishStatus"]["reverse-holo"] == "confirmed"
-    assert spanish_generations["finishStatus"]["non-holo"] == "marketplace-claimed"
+    assert spanish_generations["finishStatus"]["non-holo"] == "confirmed"
     assert spanish_generations["completenessStatus"] == "positive-evidence-only"
+    non_holo_print = next(p for p in spanish_generations["printings"] if p["finish"] == "non-holo")
+    # SPEC-0674 carries identity; the finish rests on the owner's reading, not the photo.
+    assert any(source.get("claimFields") == ["finish"]
+               and source.get("sourceType", "").startswith("Owner attestation")
+               for source in non_holo_print["sources"])
+    assert specimen_by_id["SPEC-0674"]["physicalObservation"]["ownerAttestedFields"] == ["finish"]
+    # A class statement (the CN finish guide) folds into the photographed pattern instead of
+    # standing beside it as a second collectible (#438); with two patterns only the Cardmarket
+    # remainder stays a candidate. Card-level evidence for a parallel printing is never folded:
+    # PGO 055 keeps its regular holo next to the cosmos product variant.
+    unit_by_id = {unit["finishUnitId"]: unit for unit in finish_units}
+    cs1ac = [(p["finish"], p["foilPattern"]) for p in unit_by_id["F0051"]["printings"]]
+    assert cs1ac == [("non-holo", None), ("reverse-holo", "star")], cs1ac
+    assert any("16377" in (s.get("url") or "") for s in unit_by_id["F0051"]["printings"][1]["sources"])
+    # 151C 143 has two photographed balls; the owner closed its list (OAF-20261103-151C-143-zh-hans),
+    # so the pattern-less Cardmarket reverse folds into both instead of staying a third printing.
+    assert [(p["finish"], p["foilPattern"]) for p in unit_by_id["F0000"]["printings"]] == [
+        ("non-holo", None), ("reverse-holo", "master-ball"), ("reverse-holo", "poke-ball")]
+    pgo = {(p["finish"], p["foilPattern"]) for p in unit_by_id["F0250"]["printings"]}
+    assert {("holo", None), ("holo", "cosmos")} <= pgo
     reverse_print = next(p for p in spanish_generations["printings"] if p["finish"] == "reverse-holo")
     assert any("oldid=4587656" in source.get("url", "")
                and source.get("claimFields") == ["finish"]

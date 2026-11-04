@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-11-02",
+    "generated": "2026-11-03",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 128,
       "absenceEdges": 0,
       "observations": 187,
-      "resolvedVerdictSources": 1844
+      "resolvedVerdictSources": 1863
     },
     "surfaceStates": {
       "active": 58,
@@ -11851,7 +11851,7 @@
       ],
       "outcome": "Recorded owner statements positively support only their named claims.",
       "rawRecordRef": "verification/source_registry.json:evidence:owner-attestation",
-      "rawRecordHash": "sha256:e2c1db3254b842cb3694d07e219846dd96ca02d7d50d6d24de265679420627da",
+      "rawRecordHash": "sha256:a65b19a28bacbd6e6dd09c84b83bb0604adcf8794e4cbec419de2d6bd12e0a11",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:owner-attestation",
@@ -11876,18 +11876,20 @@
           "language",
           "rarity"
         ],
-        "stableIdCount": 452,
+        "stableIdCount": 481,
         "stableIds": [
           "CN:30thC:095/103:base",
           "CN:CS2DaC:038/053:base",
           "CN:CS2aC:086/115:base",
           "CN:CSVSC:046/066:base",
+          "F0000-P01",
           "F0002-P01",
           "F0003-P01",
           "F0009-P01",
           "F0025-P01",
           "F0028-P01",
           "F0029-P01",
+          "F0051-P01",
           "F0057-P01",
           "F0057-P02",
           "F0067-P02",
@@ -11895,6 +11897,8 @@
           "F0071-P01",
           "F0072-P01",
           "F0072-P02",
+          "F0075-P01",
+          "F0076-P01",
           "F0079-P01",
           "F0080-P01",
           "F0093-P01",
@@ -11903,6 +11907,7 @@
           "F0104-P02",
           "F0132-P01",
           "F0138-P01",
+          "F0139-P01",
           "F0140-P01",
           "F0142-P01",
           "F0142-P02",
@@ -11956,13 +11961,16 @@
           "F0332-P01",
           "F0351-P01",
           "F0352-P01",
+          "F0356-P02",
           "F0357-P01",
           "F0357-P02",
+          "F0365-P02",
           "F0367-P01",
           "F0369-P01",
           "F0372-P01",
           "F0374-P01",
           "F0375-P01",
+          "F0377-P01",
           "F0379-P01",
           "F0387-P02",
           "F0388-P02",
@@ -11975,6 +11983,7 @@
           "F0456-P01",
           "F0456-P02",
           "F0456-P03",
+          "F0462-P01",
           "F0474-P01",
           "F0474-P02",
           "F0482-P01",
@@ -12024,10 +12033,10 @@
           "F0606-P02",
           "F0607-P01",
           "F0607-P02",
+          "F0614-P01",
           "F0614-P02",
-          "F0614-P03",
+          "F0615-P01",
           "F0615-P02",
-          "F0615-P03",
           "F0616-P01",
           "F0616-P02",
           "F0619-P01",
@@ -12200,6 +12209,7 @@
           "SPEC-0608",
           "SPEC-0609",
           "SPEC-0614",
+          "SPEC-0617",
           "SPEC-0618",
           "SPEC-0619",
           "SPEC-0623",
@@ -12211,6 +12221,15 @@
           "SPEC-0633",
           "SPEC-0642",
           "SPEC-0644",
+          "SPEC-0674",
+          "SPEC-0675",
+          "SPEC-0676",
+          "SPEC-0677",
+          "SPEC-0678",
+          "SPEC-0679",
+          "SPEC-0680",
+          "SPEC-0681",
+          "SPEC-0682",
           "TH:AS1b:112/150:base",
           "TH:AS5a:142/184:base",
           "TH:MA4:091/123:base",
@@ -12246,17 +12265,22 @@
           "U0097",
           "U0098",
           "U0099",
+          "U0103",
           "U0129",
           "U0170",
+          "U0174",
           "U0175",
           "U0176",
           "U0233",
+          "U0245",
           "U0246",
           "U0255",
           "U0257",
           "U0258",
           "U0260",
+          "U0266",
           "U0285",
+          "U0292",
           "U0297",
           "U0308",
           "U0311",
@@ -12277,6 +12301,7 @@
           "U0477",
           "U0482",
           "U0503",
+          "U0521",
           "U0531",
           "U0532",
           "U0540",
@@ -12288,6 +12313,7 @@
           "U0579",
           "U0583",
           "U0586",
+          "U0599",
           "U0605",
           "U0610",
           "U0612",
@@ -12300,6 +12326,7 @@
           "U0648",
           "U0652",
           "U0653",
+          "U0654",
           "U0656",
           "U0657",
           "U0658",
@@ -12307,9 +12334,11 @@
           "U0677",
           "U0679",
           "U0683",
+          "U0685",
           "U0751",
           "U0763",
           "U0768",
+          "U0780",
           "U0785",
           "U0786",
           "U0787",
@@ -12331,8 +12360,8 @@
           "override:owner-svp184-western-prerelease-variants",
           "override:owner-swsh032-spanish-cosmos-holo-20260924"
         ],
-        "retrievedAt": "2026-11-01",
-        "usageCount": 516
+        "retrievedAt": "2026-11-03",
+        "usageCount": 546
       }
     },
     {
@@ -12353,7 +12382,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:ebde4f1ad0affac6fff0a51cf17ccccf0ff4f07048caae08804a702fca6e7ff9",
+      "rawRecordHash": "sha256:0cc6654565ec040359ef8218ba2f6e94a9f4b9d26e4fd98c2ab489e5c39eabba",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -12423,8 +12452,8 @@
           "F0519-P02",
           "F0530-P01",
           "F0534-P01",
+          "F0615-P01",
           "F0615-P02",
-          "F0615-P03",
           "F0619-P01",
           "F0625-P01",
           "F0625-P02",
@@ -12791,7 +12820,7 @@
       ],
       "outcome": "The retained official article positively states that rarity R and above cards are foil, and that Simplified Chinese C, U and R cards can appear as the locality-specific patterned random foil treatment.",
       "rawRecordRef": "verification/source_registry.json:https://www.pokemon.cn/tcg/product/16377.html",
-      "rawRecordHash": "sha256:6ca66476713a51b5c53f65783527774a3399d41ff5cea0e444a60b72ae86310c",
+      "rawRecordHash": "sha256:493cee1b52dab3ae29be790ca00f805888ab176473f01246c592d9af436cb621",
       "rawRecord": {
         "canonicalUrl": "https://www.pokemon.cn/tcg/product/16377.html",
         "nonUrlEvidenceId": null,
@@ -12803,30 +12832,31 @@
           "finish",
           "finish-override"
         ],
-        "stableIdCount": 19,
+        "stableIdCount": 20,
         "stableIds": [
+          "F0000-P02",
           "F0000-P03",
           "F0001-P01",
-          "F0051-P03",
+          "F0051-P02",
           "F0052-P01",
           "F0053-P01",
           "F0055-P01",
           "F0058-P01",
-          "F0060-P03",
-          "F0060-P04",
-          "F0063-P03",
+          "F0060-P02",
+          "F0063-P02",
           "F0065-P01",
-          "F0067-P03",
+          "F0067-P02",
           "F0068-P01",
           "F0069-P01",
           "F0070-P01",
-          "F0074-P03",
-          "F0075-P03",
+          "F0074-P02",
+          "F0075-P02",
+          "F0076-P02",
           "F0076-P03",
           "override:pokemon-cn-simplified-finish-rules"
         ],
         "retrievedAt": "2026-08-27",
-        "usageCount": 19
+        "usageCount": 20
       }
     },
     {
@@ -19522,7 +19552,7 @@
       ],
       "outcome": "SPEC-0669 retains a physical card on fabric with readable CS5aC 093/127 R and parallel vertical foil across artwork and border.",
       "rawRecordRef": "verification/source_registry.json:https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
-      "rawRecordHash": "sha256:f1dbb114645f73a11b2a311c97cd7ee25f76d8538274f6d4d4bb9e14200055bf",
+      "rawRecordHash": "sha256:9a4dbe2ef5f5946246b1430d137dee50dfb3792bf2b4885200ec52db0a6c9cd4",
       "rawRecord": {
         "canonicalUrl": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
         "nonUrlEvidenceId": null,
@@ -19537,7 +19567,7 @@
         ],
         "stableIdCount": 3,
         "stableIds": [
-          "F0060-P04",
+          "F0060-P02",
           "SPEC-0669",
           "U0183"
         ],
@@ -19562,7 +19592,7 @@
       ],
       "outcome": "The retained physical photo proves only this identified card and visible treatment; stock depictions, other variants and missing listings establish no physical finish or absence.",
       "rawRecordRef": "verification/source_registry.json:https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
-      "rawRecordHash": "sha256:f1dbb114645f73a11b2a311c97cd7ee25f76d8538274f6d4d4bb9e14200055bf",
+      "rawRecordHash": "sha256:9a4dbe2ef5f5946246b1430d137dee50dfb3792bf2b4885200ec52db0a6c9cd4",
       "rawRecord": {
         "canonicalUrl": "https://i.ebayimg.com/images/g/2L4AAeSwkXBp8jDF/s-l1600.webp",
         "nonUrlEvidenceId": null,
@@ -19577,7 +19607,7 @@
         ],
         "stableIdCount": 3,
         "stableIds": [
-          "F0060-P04",
+          "F0060-P02",
           "SPEC-0669",
           "U0183"
         ],
@@ -36768,6 +36798,34 @@
       ]
     },
     {
+      "sourceKey": "https://cf.shopee.tw/file/644ed665071a40763485c6bd554c2537",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cf.shopee.tw/file/tw-11134207-7qul4-libactig0ud0b4",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://cf.shopee.tw/file/tw-11134207-7r98p-lq0zta37yupu9a",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -36798,7 +36856,36 @@
       ]
     },
     {
+      "sourceKey": "https://cf.shopee.tw/file/tw-11134207-7ra0m-mcrx474ykjen3a",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://cf.shopee.tw/file/tw-11134207-81ztc-mhx0q1fnelmuc0",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cf.shopee.tw/file/tw-11134207-820le-mmc0jd2o1jbcdf",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -36824,6 +36911,20 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://cloud10.todocoleccion.online/cromos-futbol/tc/2020/11/27/15/108337555_251653700_tcimg_5927ACD7.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -37462,7 +37563,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "identity"
       ]
     },
@@ -37601,6 +37701,21 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/9K8AAOSw8YNnAU3d/s-l1200.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/9YoAAeSwajdqwAFS/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -37763,6 +37878,21 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/HHoAAeSwOZxq3rvy/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/HWAAAOSwCFhmfJaN/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -37773,6 +37903,21 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/IUYAAeSwJaRqUc11/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
         "identity"
       ]
     },
@@ -37851,6 +37996,20 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/Ls0AAeSw7uhqQHSb/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/MRAAAeSwQw5qVjfE/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -37867,6 +38026,21 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/MkwAAeSw3zdpdq0P/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/M~0AAeSwnpJqwADt/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -38209,6 +38383,21 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/eGkAAeSw0-5qorAj/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/eOUAAOSwVUtnIBz1/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -38239,6 +38428,20 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/f5kAAOSwuqpnXwML/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/fYsAAeSwHQBqnPop/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -38295,6 +38498,21 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/hKMAAeSwmmZqj~yp/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/hd0AAeSw0olqL~V0/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -38335,6 +38553,20 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/iW4AAeSweFNqNd-i/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -38384,6 +38616,21 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/kycAAeSw5zJqKml1/s-l1600.webp",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/lZEAAeSwJllplWKj/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -38472,6 +38719,21 @@
       ]
     },
     {
+      "sourceKey": "https://i.ebayimg.com/images/g/nrcAAeSwe8hoBY52/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://i.ebayimg.com/images/g/o4EAAeSwrKZqeeWs/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -38488,6 +38750,21 @@
     },
     {
       "sourceKey": "https://i.ebayimg.com/images/g/oYwAAeSwNF5qBmre/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/op8AAeSw-JNqJlYx/s-l1600.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
       "capabilityEdgeIds": [
@@ -38689,6 +38966,20 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://i.ebayimg.com/images/g/wqwAAeSwUIZo1mF7/s-l1600.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },
@@ -39024,6 +39315,20 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "finish",
+        "identity"
+      ]
+    },
+    {
+      "sourceKey": "https://media.bunjang.co.kr/product/423488323_1_1786153555.jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
         "identity"
       ]
     },

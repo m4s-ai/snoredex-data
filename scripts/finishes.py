@@ -608,23 +608,96 @@ def _patterned_siblings(printing: dict[str, Any], printings: list[dict[str, Any]
     ]
 
 
-def absorb_patternless_marketplace_claims(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """Fold a pattern-less marketplace finish claim into its one established patterned printing.
+VARIANT_NAME_FINISHES = (("non-holo", "non-holo"), ("mirror holo", "mirror-holo"), ("holo", "holo"))
+VARIANT_NAME_PATTERNS = (
+    ("master ball", "master-ball"), ("poké ball", "poke-ball"), ("poke ball", "poke-ball"),
+    ("cosmos", "cosmos"), ("colourless-energy star", "colorless-energy-star"),
+)
 
-    A Cardmarket reverse-holo axis says only that a reverse exists. When a photograph has since
-    established exactly one reverse of the same identity with a visible pattern, that printing
-    is the claimed reverse, not a second collectible. With two or more patterned candidates the
-    claim stays unrefined (reconciliation refines only when one compatible value remains).
+
+def variant_name_finish(variant_name: str) -> tuple[str | None, str | None]:
+    """Read the technical finish and pattern a curated variant name states (first match wins)."""
+    name = variant_name.casefold()
+    finish = next((value for phrase, value in VARIANT_NAME_FINISHES if phrase in name), None)
+    pattern = next((value for phrase, value in VARIANT_NAME_PATTERNS if phrase in name), None)
+    # A patterned "mirror" is a reverse holo with that pattern; mirror-holo is the plain solid
+    # mirror finish outside the artwork (owner vocabulary, 2026-11-03, #438).
+    if finish == "mirror-holo" and pattern:
+        finish = "reverse-holo"
+    return finish, pattern
+
+
+MARKETPLACE_HINT = "Cardmarket catalogue hint (not external verification)"
+
+
+def absorb_patternless_class_statements(printings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Fold a pattern-less class statement into the patterned printings it describes.
+
+    A product-line description (the official Simplified Chinese finish guide: "R and above are
+    holo", "C, U and R come as patterned random foil") says a finish exists, never which pattern.
+    Once photographs establish patterned printings of that finish, the statement is evidence for
+    each of them, not another collectible. A marketplace claim merged into the same row survives
+    as a candidate for absorb_patternless_marketplace_claims, which refines only a single pattern.
     """
     kept = []
     for printing in printings:
         siblings = _patterned_siblings(printing, printings)
-        if (printing.get("foilPattern") or printing["verificationStatus"] != "marketplace-claimed"
-                or not _is_card_level_finish_evidence(printing) or len(siblings) != 1):
+        split = _class_statement_sources(printing) if siblings else None
+        if split is None:
             kept.append(printing)
             continue
-        _fold_sources(siblings[0], printing)
+        class_sources, market_sources = split
+        for sibling in siblings:
+            seen = {source_signature(source) for source in sibling["sources"]}
+            sibling["sources"].extend(s for s in class_sources if source_signature(s) not in seen)
+        if market_sources:
+            kept.append({**printing, "sources": market_sources, "verificationStatus": "marketplace-claimed"})
     return kept
+
+
+def _class_statement_sources(printing: dict[str, Any]):
+    """(class, marketplace) sources of a pattern-less row resting on nothing card-level, else None."""
+    class_sources = [s for s in printing["sources"] if s.get("coverage") == "product-line-description"]
+    market_sources = [s for s in printing["sources"] if s.get("sourceType") == MARKETPLACE_HINT]
+    only_class_and_market = len(class_sources) + len(market_sources) == len(printing["sources"])
+    if (printing.get("foilPattern") or not class_sources or not only_class_and_market
+            or not _is_card_level_finish_evidence(printing)):
+        return None
+    return class_sources, market_sources
+
+
+def absorb_patternless_marketplace_claims(
+    printings: list[dict[str, Any]], decision: dict[str, Any] | None = None
+) -> list[dict[str, Any]]:
+    """Fold a pattern-less marketplace finish claim into its established patterned printings.
+
+    A Cardmarket reverse-holo axis says only that a reverse exists. When a photograph has since
+    established exactly one reverse of the same identity with a visible pattern, that printing
+    is the claimed reverse, not a second collectible. With two or more patterned candidates the
+    claim stays unrefined (reconciliation refines only when one compatible value remains) —
+    unless the owner has closed the unit's finish list with that finish: then the list holds
+    no further printing, and the claim is satisfied by every patterned one (#438).
+    """
+    closed = set(decision.get("availableFinishes") or []) if (
+        decision and decision.get("decision") == "finish-complete") else set()
+    kept = []
+    for printing in printings:
+        targets = _claim_fold_targets(printing, printings, closed)
+        if not targets:
+            kept.append(printing)
+            continue
+        for sibling in targets:
+            _fold_sources(sibling, printing)
+    return kept
+
+
+def _claim_fold_targets(printing: dict[str, Any], printings: list[dict[str, Any]], closed: set[str]):
+    """Patterned printings a pattern-less marketplace claim folds into; empty keeps the claim."""
+    if (printing.get("foilPattern") or printing["verificationStatus"] != "marketplace-claimed"
+            or not _is_card_level_finish_evidence(printing)):
+        return []
+    siblings = _patterned_siblings(printing, printings)
+    return siblings if printing["finish"] in closed or len(siblings) == 1 else []
 
 
 def drop_owner_rejected_finishes(
@@ -1493,23 +1566,7 @@ def _build_finish_unit(
 
             variant_name = str(product.get("variantName") or "")
             if variant_name:
-                normalized_name = variant_name.casefold()
-                named_finish = None
-                named_pattern = None
-                if "non-holo" in normalized_name:
-                    named_finish = "non-holo"
-                elif "mirror holo" in normalized_name:
-                    named_finish = "mirror-holo"
-                elif "holo" in normalized_name:
-                    named_finish = "holo"
-                if "master ball" in normalized_name:
-                    named_pattern = "master-ball"
-                elif "poké ball" in normalized_name or "poke ball" in normalized_name:
-                    named_pattern = "poke-ball"
-                elif "cosmos" in normalized_name:
-                    named_pattern = "cosmos"
-                elif "colourless-energy star" in normalized_name:
-                    named_pattern = "colorless-energy-star"
+                named_finish, named_pattern = variant_name_finish(variant_name)
                 if named_finish:
                     add_printing(
                         printings,
@@ -1669,8 +1726,11 @@ def _build_finish_unit(
         for printing in printings:
             add_printing(deduplicated_printings, printing)
         printings = [] if all_claims_contradicted else drop_owner_rejected_finishes(
-            absorb_patternless_marketplace_claims(absorb_editionless_finish_evidence(
-                absorb_qualified_tcgdex_evidence(deduplicated_printings))),
+            absorb_patternless_marketplace_claims(
+                absorb_patternless_class_statements(absorb_editionless_finish_evidence(
+                    absorb_qualified_tcgdex_evidence(deduplicated_printings))),
+                owner_finish_decisions.get((set_code, number, language)),
+            ),
             owner_finish_decisions.get((set_code, number, language)),
         )
         printings.sort(
