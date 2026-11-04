@@ -5,14 +5,18 @@ on:
     types: [opened, reopened, synchronize, ready_for_review]
     paths:
       - index.html
+      - gallery.html
       - site/app.css
       - site/app.js
+      - site/gallery.*
+      - site/gallery-review.json
       - snorlax_cards.json
       - analysis_checklist.json
       - collector_catalogue.json
       - images/**
       - verification/specimens/**
       - scripts/site.py
+      - scripts/gallery.py
       - scripts/collector_catalogue.py
       - scripts/artwork_review.py
       - scripts/artwork_derivatives.py

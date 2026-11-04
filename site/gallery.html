@@ -1,0 +1,66 @@
+<!doctype html>
+<!-- GALLERY_HEADER -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artwork gallery · Snoredex</title>
+<link rel="stylesheet" href="site/app.css">
+<link rel="stylesheet" href="site/gallery.css">
+<link rel="icon" href="data:,">
+</head>
+<body class="gallery">
+<header class="gallery-toolbar">
+  <a href="index.html">← Collection table</a>
+  <h1>Artwork gallery</h1>
+  <label>Artwork order
+    <select id="artwork-order">
+      <option value="ascending">Oldest artwork first</option>
+      <option value="descending">Newest artwork first</option>
+    </select>
+  </label>
+  <button id="binder-toggle" type="button" aria-pressed="false" aria-controls="binder-controls">Binder</button>
+</header>
+<main>
+  <section id="binder-controls" aria-label="Binder settings" hidden>
+    <form id="binder-settings">
+      <div class="gallery-presets" aria-label="Page sizes">
+        <button type="button" data-size="3">3×3</button>
+        <button type="button" data-size="4">4×4</button>
+        <button type="button" data-size="5">5×5</button>
+      </div>
+      <label>Rows <input name="rows" type="number" min="1" max="8" value="3" required></label>
+      <label>Columns <input name="columns" type="number" min="1" max="8" value="3" required></label>
+      <label>Fill order
+        <select name="order">
+          <option value="page">Page by page</option>
+          <option value="row">Across both pages</option>
+        </select>
+      </label>
+      <button type="submit">Apply layout</button>
+    </form>
+    <div class="gallery-pager">
+      <button id="binder-prev" type="button">Previous</button>
+      <output id="binder-position" aria-live="polite"></output>
+      <button id="binder-next" type="button">Next</button>
+    </div>
+  </section>
+  <div id="gallery-cards" aria-label="Cards"></div>
+  <noscript><p>Enable JavaScript to browse the gallery, or open the <a href="index.html">collection table</a>.</p></noscript>
+</main>
+<dialog id="card-dialog" aria-labelledby="card-title">
+  <form method="dialog"><button type="submit" autofocus>Close</button></form>
+  <h2 id="card-title"></h2>
+  <div class="gallery-detail">
+    <div id="card-picture"></div>
+    <div>
+      <dl id="card-facts"></dl>
+      <p id="card-note" hidden></p>
+      <ul id="card-sources" aria-label="Sources"></ul>
+    </div>
+  </div>
+</dialog>
+<!-- GALLERY_DATA -->
+<script src="site/gallery.js" defer></script>
+</body>
+</html>

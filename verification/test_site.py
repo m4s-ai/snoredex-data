@@ -277,6 +277,70 @@ def serve_site(directory: Path = ROOT):
             thread.join()
 
 
+def check_gallery(browser, origin):
+    page = browser.new_page(reduced_motion="reduce")
+    page.goto(origin + "/index.html")
+    page.get_by_role("link", name="Artwork gallery").click()
+    page.wait_for_url("**/gallery.html")
+    cards = page.locator(".gallery-card")
+    first = cards.first
+    first.focus()
+    assert first.locator(".gallery-caption").evaluate(
+        "(caption) => getComputedStyle(caption).transitionDuration === '0s'")
+    first.press("Enter")
+    assert page.locator("#card-dialog").is_visible()
+    assert page.get_by_text("#1", exact=True).is_visible()
+    page.keyboard.press("Escape")
+    page.wait_for_function("document.activeElement === document.querySelector('.gallery-card')")
+
+    page.locator("#binder-toggle").click()
+    assert cards.count() == 18
+    initial_card = first.get_attribute("data-card-id")
+    artwork_order = page.locator("#artwork-order")
+    artwork_order.select_option("descending")
+    assert first.get_attribute("data-card-id") != initial_card
+    artwork_order.select_option("ascending")
+    assert first.get_attribute("data-card-id") == initial_card
+    fourth = cards.nth(3)
+    assert fourth.evaluate("(card) => card.style.gridArea") == "2 / 1"
+    page.locator("select[name=order]").select_option("row")
+    page.get_by_role("button", name="Apply layout").click()
+    assert fourth.evaluate("(card) => card.style.gridArea") == "1 / 5"
+    page.locator("input[name=rows]").fill("9")
+    page.get_by_role("button", name="Apply layout").click()
+    assert cards.count() == 18
+    assert not page.locator("input[name=rows]").evaluate("(input) => input.validity.valid")
+    page.locator("input[name=rows]").fill("2")
+    page.locator("input[name=columns]").fill("4")
+    page.get_by_role("button", name="Apply layout").click()
+    assert cards.count() == 16
+    page.get_by_role("button", name="5×5").click()
+    assert cards.count() == 50
+    total = page.locator("#gallery-data").evaluate("(node) => JSON.parse(node.textContent).length")
+    next_spread = page.locator("#binder-next")
+    for _ in range((total - 1) // 50):
+        next_spread.click()
+    assert next_spread.is_disabled()
+    assert cards.count() == (total % 50 or 50)
+    assert page.locator(".binder-empty").count() == 50 - cards.count()
+    page.get_by_role("link", name="Collection table").click()
+    page.wait_for_url("**/index.html")
+    page.close()
+
+    mobile = browser.new_page(viewport={"width": 375, "height": 667}, is_mobile=True, has_touch=True)
+    mobile.goto(origin + "/gallery.html")
+    hypothesis = mobile.locator('[data-card-id="research-kss-26-it-wave-holo"]')
+    assert hypothesis.locator(".gallery-placeholder").count() == 1
+    hypothesis.tap()
+    assert mobile.locator("#card-dialog").is_visible()
+    assert "closed at non-holo" in mobile.locator("#card-note").inner_text()
+    mobile.get_by_role("button", name="Close").tap()
+    mobile.locator("#binder-toggle").tap()
+    assert mobile.locator("#gallery-cards").evaluate("(node) => node.scrollWidth > node.clientWidth")
+    assert mobile.evaluate("document.documentElement.scrollWidth === window.innerWidth")
+    mobile.close()
+
+
 def main() -> int:
     try:
         from playwright.sync_api import sync_playwright
@@ -1162,7 +1226,7 @@ def main() -> int:
         })""")
         check("a wide viewport restores the full section navigation",
               not nav_wide["toggleShown"] and nav_wide["listShown"] and nav_wide["open"]
-              and nav_wide["links"] == 6,
+              and nav_wide["links"] == 7,
               str(nav_wide))
 
         page.locator('#section-nav-list a[href="#about"]').click()
@@ -1208,6 +1272,8 @@ def main() -> int:
               export_path.read_bytes().startswith(b"\xef\xbb\xbf"),
               "no BOM; a double-clicked file falls back to the local codepage")
 
+        check_gallery(browser, origin)
+        print("[ok ] gallery navigation, dialog, binder and mobile")
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 

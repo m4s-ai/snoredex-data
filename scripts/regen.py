@@ -125,6 +125,7 @@ TESTS = [
     ["verification/test_malie_package.py"],
     ["verification/test_retired_projections.py"],
     ["verification/test_artwork_review.py"],
+    ["verification/test_gallery.py"],
     ["verification/test_korean_burning_confrontation.py"],
     ["verification/test_completeness_gate.py"],
     ["verification/test_workflow_gate_matrix.py"],
