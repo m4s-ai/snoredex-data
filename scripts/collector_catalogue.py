@@ -708,6 +708,8 @@ def migration_targets(
     index: dict[str, dict[str, set[str]]],
 ) -> set[str]:
     """Find targets only through producer-owned identity, never presentation fields."""
+    if owner_rejected(source, index):
+        return set()
     if source["itemId"] in target_ids:
         return {source["itemId"]}
     reviewed_targets = reviewed_split_targets(source["itemId"], index)
@@ -725,9 +727,7 @@ def migration_targets(
 def release_fallback_targets(
     source: dict[str, Any], index: dict[str, dict[str, set[str]]],
 ) -> set[str]:
-    """Coarse finish-unit/release fallback; an owner-rejected finish retires instead of merging."""
-    if owner_rejected(source, index):
-        return set()
+    """Coarse finish-unit/release fallback after checking for owner rejections."""
     for field in ("finishUnitId", "cardReleaseId"):
         candidates: set[str] = set()
         for value in item_identity_values(source, field):
