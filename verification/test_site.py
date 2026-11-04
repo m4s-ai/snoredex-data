@@ -293,7 +293,7 @@ def check_gallery(browser, origin):
     assert page.get_by_text("#1", exact=True).is_visible()
     page.keyboard.press("Escape")
     page.wait_for_function("document.activeElement === document.querySelector('.gallery-card')")
-    page.locator('[data-card-id="item-d7633bea-072e-5d80-9781-f95f47f797d7"]').click()
+    page.locator('[data-card-id="item-5ce65b63-1889-524e-a13b-01cc05d3b10c"]').click()
     assert page.get_by_text("Representative card image", exact=True).is_visible()
     page.keyboard.press("Escape")
 
