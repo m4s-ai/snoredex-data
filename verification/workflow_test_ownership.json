@@ -104,6 +104,7 @@
     {"id": "collector-contract", "command": ["verification/test_collector_catalogue.py"], "primaryOwner": "collector-contract", "boundary": "projection", "gateLevel": "L2", "fixtures": ["collector-contract"]},
     {"id": "retired-projections", "command": ["verification/test_retired_projections.py"], "primaryOwner": "retired-projections", "boundary": "import", "gateLevel": "L0", "fixtures": []},
     {"id": "artwork-projection", "command": ["verification/test_artwork_review.py"], "primaryOwner": "artwork-projection", "boundary": "projection", "gateLevel": "L2", "fixtures": ["authoritative-graph"]},
+    {"id": "gallery-projection", "command": ["verification/test_gallery.py"], "primaryOwner": "gallery-projection", "boundary": "projection", "gateLevel": "L2", "fixtures": []},
     {"id": "korean-locality", "command": ["verification/test_korean_burning_confrontation.py"], "primaryOwner": "korean-locality", "boundary": "import", "gateLevel": "L1", "fixtures": []},
     {"id": "completeness-gate", "command": ["verification/test_completeness_gate.py"], "primaryOwner": "completeness-gate", "boundary": "cross-artifact", "gateLevel": "L2", "fixtures": []},
     {"id": "gate-matrix", "command": ["verification/test_workflow_gate_matrix.py"], "primaryOwner": "gate-matrix", "boundary": "import", "gateLevel": "L0", "fixtures": []},

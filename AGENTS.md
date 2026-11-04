@@ -53,12 +53,15 @@ modes.
 
 | Level | Actions |
 |---|---|
-| Free | local generation and checks, commits on the task branch |
-| Only on explicit instruction | push, opening a PR, issue/PR comments, live source refreshes (Cardmarket quota), `finishes.py --refresh --accept-refresh`, running the `Publish site` workflow |
+| Free | local generation and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch |
+| Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening a PR, issue/PR comments, live source refreshes (Cardmarket quota), `finishes.py --refresh --accept-refresh`, running the `Publish site` workflow |
 | Owner only | `owner_adjudications.json` entries (including `rejectedFinishes`), `publication-decisions.json` |
 | Never | push to `main`, run `mkunits`, edit `verification/archive/`, bypass or weaken the publication gate |
 
-An instruction covers the run it names and does not carry over to later tasks. A Pages run stays
+An instruction covers the run it names and does not carry over to later tasks. An authorized PR
+keeps its follow-up push permission for in-scope fixes while it is open. Before pushing a
+follow-up, pass the checks required for its scope by the
+[batch execution contract](WORKFLOW-MAP.md#batch-execution-contract). A Pages run stays
 gated by `verification/publication_gate.py` and the recorded approvals; afterwards check the
 deployed page and report the run. Publishing cannot be undone.
 

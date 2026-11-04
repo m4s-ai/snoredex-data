@@ -38,6 +38,7 @@ FILES = [
     *MALIE_FILES,
     "exports/malie/README.md",
     "index.html",
+    "gallery.html",
     "llms.txt",
     "README.md",
     "DATABASE.md",
