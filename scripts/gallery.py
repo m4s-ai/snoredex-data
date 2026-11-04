@@ -1,6 +1,13 @@
 """Project the current catalogue into the artwork gallery rendered by site.py."""
 
+import re
+
 UNDATED = "9999-99-99"
+
+
+def number_key(number):
+    match = re.match(r"\D*(\d+)", number or "")
+    return int(match.group(1)) if match else float("inf")
 
 
 def release_groups(artwork, review):
@@ -98,13 +105,17 @@ def gallery_card(item, group, artist, language, images):
 
 
 def chronological_cards(cards, release_sort):
-    group_dates = {}
+    # A group sorts by its earliest verified printing; same-day groups follow that printing's set
+    # code and collector number, so a set's lower number comes first rather than the group id.
+    unplaced = (UNDATED, "", float("inf"))
+    group_keys = {}
     dates = {card["id"]: release_sort(card["date"]) if card["date"] else UNDATED for card in cards}
     for card in cards:
         if card["kind"] == "verified-printing":
             group = card["group"]
-            group_dates[group] = min(group_dates.get(group, UNDATED), dates[card["id"]])
-    ordered = sorted(cards, key=lambda row: (group_dates.get(row["group"], UNDATED), row["group"],
+            key = (dates[card["id"]], (card["setCode"] or "").casefold(), number_key(card["number"]))
+            group_keys[group] = min(group_keys.get(group, unplaced), key)
+    ordered = sorted(cards, key=lambda row: (group_keys.get(row["group"], unplaced), row["group"],
                                             dates[row["id"]], row["id"]))
     groups = dict.fromkeys(card["group"] for card in ordered)
     numbers = {group: number for number, group in enumerate(groups, start=1)}

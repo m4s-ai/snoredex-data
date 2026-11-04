@@ -52,6 +52,14 @@ def main():
     assert {c["date"] for c in jungle if c["setCode"] == "LC"} == {"2002-05-24"}
     assert {c["date"] for c in jungle if c["setCode"] == "XYPR"} == {"2016-12-14"}
     assert {"B2", "XY-P"} <= {c["setCode"] for c in jungle}
+    def artwork_number(set_code, number):
+        return next(c["artworkNumber"] for c in cards if c["setCode"] == set_code and c["number"] == number)
+
+    # Same-day groups follow the set's collector numbers, not their group ids.
+    assert artwork_number("s10a", "058/071") < artwork_number("s10a", "077/071")
+    assert artwork_number("sv2a", "143/165") < artwork_number("sv2a", "181/165")
+    assert artwork_number("sm9", "066/095") < artwork_number("sm9", "106/095")
+    assert artwork_number("s1H", "045/060") < artwork_number("s1H", "046/060") < artwork_number("s1H", "066/060")
     groups = release_groups(artwork, review)
     image_groups = [image_group for family in review["artworkGroups"].values() for image_group in family]
     assert len(image_groups) == len(set(image_groups))
