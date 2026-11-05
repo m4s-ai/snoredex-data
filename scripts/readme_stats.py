@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the generated blocks in README.md and FINDINGS.md from the current data.
+"""Regenerate the generated blocks in README.md, METHODOLOGY.md and FINDINGS.md from the current data.
 
 The finish coverage table drifted twice by being hand-maintained: it claimed 276 non-holo and
 24 both-non-holo-and-holo units while the generated data said 270 and 18, and the wrong numbers
@@ -10,8 +10,10 @@ The top-level status, badge counts, and finish table all come from the canonical
 the repository's front page honest as verification progresses or publication decisions change.
 
 Blocks are delimited by `<!-- generated:NAME -->` / `<!-- /generated:NAME -->`. Everything between
-the markers is replaced; everything outside is left alone. Most blocks live in README.md; the
-market split lives in FINDINGS.md, next to the drift tables it belongs with.
+the markers is replaced; everything outside is left alone. The front-page blocks (badges, status,
+current state) live in README.md; the evidence ladder, evidence strength and finish coverage live
+in METHODOLOGY.md beside the prose that explains them; the market split lives in FINDINGS.md, next
+to the drift tables it belongs with.
 
     python scripts/readme_stats.py          # rewrite
     python scripts/readme_stats.py --check  # fail if stale, for the release gate
@@ -29,11 +31,14 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent.parent
 README_PATH = ROOT / "README.md"
 FINDINGS_PATH = ROOT / "FINDINGS.md"
+METHODOLOGY_PATH = ROOT / "METHODOLOGY.md"
+# Where the site lives once the owner has approved publication. Deployment is a manual workflow
+# run, so this is the address, not proof that the current commit is what it serves.
+SITE_URL = "https://m4s-ai.github.io/snoredex-data/"
 # The evidence ladder is published in four places and had drifted in all four (#67). Each keeps
 # its own framing around the table; the table itself comes from source_registry.json.
-# The ladder is generated once, into README.md, and linked from everywhere else. Three synced
+# The ladder is generated once, into METHODOLOGY.md, and linked from everywhere else. Three synced
 # copies needed a writer, a --check mode and a check (E12) to stay honest; one copy needs none.
-LADDER_PATHS = (README_PATH,)
 ANALYSIS_PATH = ROOT / "analysis_finishes.json"
 DATASET_PATH = ROOT / "snorlax_cards.json"
 UNITS_PATH = ROOT / "verification" / "units.json"
@@ -141,27 +146,32 @@ def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]
     return "\n".join(lines)
 
 
-def badges_block(dataset: dict[str, Any], checklist: dict[str, Any],
-                 decisions: dict[str, Any]) -> str:
-    cards = dataset["meta"]["singlesCaptured"]
-    items = checklist["meta"]["counts"]["items"]
-    publication_approved = decisions.get("sitePublicationApproved") is True
+def badges_block(checklist: dict[str, Any], decisions: dict[str, Any]) -> str:
+    counts = checklist["meta"]["counts"]
     grants_approved = decisions.get("licenseGrantsApproved") is True
-    publication = "approved" if publication_approved else "owner_approval_required"
-    publication_color = "2ea44f" if publication_approved else "d97706"
-    licence = "grants_in_force" if grants_approved else "grants_not_in_force"
+    # Once approved, show the state of the last real Pages deployment rather than the decision:
+    # a failed or never-run deployment must not look live.
+    site = (
+        "[![Website](https://img.shields.io/github/deployments/m4s-ai/snoredex-data/github-pages"
+        f"?label=website)]({SITE_URL})"
+        if decisions.get("sitePublicationApproved") is True
+        else "[![Website](https://img.shields.io/badge/website-not_yet_published-d97706)]"
+        "(publication-decisions.json)"
+    )
+    licence = "PolyForm_NC_%2B_CC_BY--NC--SA" if grants_approved else "grants_not_in_force"
     licence_color = "2ea44f" if grants_approved else "d97706"
     return "\n".join((
+        site,
         "[![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/"
         "release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/"
         "workflows/release-gate.yml)",
-        f"[![Legacy cards](https://img.shields.io/badge/legacy_cards-{cards}-2563eb)]"
-        "(legacy-cardmarket-baseline.json)",
+        "[![Open issues](https://img.shields.io/github/issues/m4s-ai/snoredex-data)]"
+        "(https://github.com/m4s-ai/snoredex-data/issues)",
         f"[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-"
-        f"{items}_items-2563eb)]"
+        f"{counts['items']}_printings-2563eb)]"
         "(analysis_checklist.json)",
-        f"[![Publication](https://img.shields.io/badge/publication-{publication}-"
-        f"{publication_color})](publication-decisions.json)",
+        f"[![Languages](https://img.shields.io/badge/languages-{counts['languages']}-2563eb)]"
+        "(DATA-GUIDE.md)",
         f"[![Licence](https://img.shields.io/badge/licence-{licence}-{licence_color})]"
         "(LICENSE.md)",
         "[![AI-DECLARATION: copilot](https://img.shields.io/badge/"
@@ -192,9 +202,11 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
     code_cards = sum(bool(card.get("isCodeCard")) for card in dataset["cards"])
     repository_visibility = decisions.get("repositoryVisibility", "unknown")
     publication_state = (
-        "approved by the owner but still requires a manual workflow run"
+        f"live at <{SITE_URL}>; each deployment is a manual, gated workflow run, so the live "
+        "site can lag `main`"
         if decisions.get("sitePublicationApproved") is True
-        else "manual and blocked until every required owner decision is recorded"
+        else "generated and usable locally; Pages deployment is manual and blocked until every "
+        "required owner decision is recorded"
     )
     licence_state = (
         "active under the recorded owner approvals"
@@ -244,7 +256,7 @@ def current_state_block(dataset: dict[str, Any], units: list[dict[str, Any]],
         "requests. UI-relevant pull requests add a Chromium behavior lane; browser and live-source "
         "release checks run on Linux. |",
         f"| Site and publication | The repository is {repository_visibility}. The interactive site "
-        f"is generated and usable locally; Pages deployment is {publication_state}. |",
+        f"is {publication_state}. |",
         "| Licensing | Verbatim PolyForm Noncommercial 1.0.0 and CC BY-NC-SA 4.0 texts are present "
         f"and hash-verified. The intended mixed-work grants are {licence_state}. |",
         "| AI transparency | Development used AI in a human-directed copilot workflow. Scope and "
@@ -290,35 +302,26 @@ def status_block(decisions: dict[str, Any], baseline: dict[str, Any]) -> str:
     grants = decisions.get("licenseGrantsApproved") is True
     site = decisions.get("sitePublicationApproved") is True
     public = decisions.get("repositoryVisibility") == "public"
-    licensor = decisions.get("licensor") or "an unrecorded licensor"
-    approved_at = decisions.get("approvedAt") or "an unrecorded date"
 
-    licence = (
-        f"The licence grants are **in force**, granted by `{licensor}`."
-        if grants
-        else "The licence grants are **not yet in force**."
-    )
+    licence = "" if grants else " The licence grants are **not yet in force** ([`LICENSE.md`](LICENSE.md))."
     if site and public:
         publication = (
-            f"Publication was approved on {approved_at}: the repository is **public** and the site "
-            "may be deployed. Deployment stays a manual workflow run — merging never publishes."
+            f"**Live site:** <{SITE_URL}>. Each deployment is a manual, gated workflow run — merging "
+            "never publishes — so the live site can lag `main`."
         )
     elif site:
         publication = (
-            "Site publication is approved but the repository is **not public**, so the correction "
-            "links would 404. Check P8 blocks this."
+            "**Site:** publication is approved but the repository is **not public**, so the "
+            "correction links would 404. Check P8 blocks this."
         )
     else:
         publication = (
-            "Publication is a separate decision and is **not yet approved**: GitHub Pages requires "
-            "a manual run that the publication gate still blocks."
+            "**Site:** not yet published. Publication is a separate owner decision "
+            "([`publication-decisions.json`](publication-decisions.json)) and the gate still blocks it."
         )
     return "\n".join([
-        "> [!IMPORTANT]",
-        f"> {licence} {publication} See",
-        "> [`publication-decisions.json`](publication-decisions.json), "
-        "[`LICENSE.md`](LICENSE.md), and",
-        "> [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md#6-gate-mode-boundaries-292).",
+        "> [!NOTE]",
+        f"> {publication}{licence} See [`WORKFLOW-MAP.md`](WORKFLOW-MAP.md#6-gate-mode-boundaries-292).",
         ">",
         f"> **Data coverage:** `{baseline['meta']['baselineId']}` is a frozen historical "
         "Cardmarket-derived candidate universe, **not a complete all-locality catalogue**. "
@@ -339,7 +342,7 @@ def main() -> int:
     decisions = read_json(DECISIONS_PATH)
     baseline = read_json(LEGACY_BASELINE_PATH)
     original = README_PATH.read_text(encoding="utf-8")
-    updated = replace_block(original, "badges", badges_block(dataset, checklist, decisions))
+    updated = replace_block(original, "badges", badges_block(checklist, decisions))
     updated = replace_block(updated, "status", status_block(decisions, baseline))
     updated = replace_block(
         updated,
@@ -348,11 +351,15 @@ def main() -> int:
             dataset, units, finish_doc, checklist, sources, decisions, baseline, semantics
         ),
     )
-    updated = replace_block(
-        updated, "evidence-strength", evidence_strength_block(units, sources)
+
+    method = METHODOLOGY_PATH.name
+    methodology_original = METHODOLOGY_PATH.read_text(encoding="utf-8")
+    methodology_updated = replace_block(
+        methodology_original, "evidence-strength", evidence_strength_block(units, sources), method
     )
-    updated = replace_block(
-        updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"])
+    methodology_updated = replace_block(
+        methodology_updated, "finish-coverage", finish_coverage_block(counts, finish_doc["units"]),
+        method,
     )
 
     findings_original = FINDINGS_PATH.read_text(encoding="utf-8")
@@ -360,20 +367,18 @@ def main() -> int:
         findings_original, "market-split", market_split_block(dataset), "FINDINGS.md"
     )
 
-    # One ladder, four readers. Each document keeps its own surrounding framing — an agent's
-    # working rules, a cold-start guide, a contributor's introduction — but the table between the
-    # markers is the same generated bytes, so a tier cannot mean one thing in CONTRIBUTING.md and
-    # another in the registry (#67).
-    ladder = authority_tiers_block(sources)
+    # One ladder, many readers. Each document keeps its own surrounding framing — an agent's
+    # working rules, a cold-start guide, a contributor's introduction — and links to the single
+    # generated table, so a tier cannot mean one thing in CONTRIBUTING.md and another in the
+    # registry (#67).
+    methodology_updated = replace_block(
+        methodology_updated, "authority-tiers", authority_tiers_block(sources), method
+    )
     documents = [
-        (README_PATH, original, replace_block(updated, "authority-tiers", ladder)),
+        (README_PATH, original, updated),
+        (METHODOLOGY_PATH, methodology_original, methodology_updated),
         (FINDINGS_PATH, findings_original, findings_updated),
     ]
-    for path in LADDER_PATHS:
-        if path == README_PATH:
-            continue
-        before = path.read_text(encoding="utf-8")
-        documents.append((path, before, replace_block(before, "authority-tiers", ladder, path.name)))
 
     if "--check" in sys.argv:
         stale = [path.name for path, before, after in documents if before != after]
@@ -391,7 +396,7 @@ def main() -> int:
                 handle.write(after)
             written.append(path.name)
     print(f"{', '.join(written)} updated" if written
-          else "README.md and FINDINGS.md already current")
+          else "README.md, METHODOLOGY.md and FINDINGS.md already current")
     return 0
 
 

@@ -122,4 +122,4 @@ checkpointing on the first 429. All 198 product pages were retrieved with zero e
 
 That run is history, not a build step. The same search today returns different products, prices and
 language filters, so `snorlax_cards.json` is an input of record rather than something this
-repository can rebuild — see [How the repository is built](README.md#how-the-repository-is-built).
+repository can rebuild — see [How the repository is built](METHODOLOGY.md#how-the-repository-is-built).

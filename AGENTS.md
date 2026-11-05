@@ -77,7 +77,7 @@ deployed page and report the run. Publishing cannot be undone.
    record (owner, 2026-10-22). There is no open API; the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `verification/source_registry.json` ranks each provider by `authorityTier` —
-   the evidence ladder in [`README.md`](README.md#how-a-claim-becomes-a-fact), generated from that
+   the evidence ladder in [`METHODOLOGY.md`](METHODOLOGY.md#how-a-claim-becomes-a-fact), generated from that
    registry. Tiers 1-3 grade external evidence, strongest first; tier 5 marks what is **not**
    external evidence. There is deliberately no tier 4.
 
