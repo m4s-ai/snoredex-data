@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-11-03",
+    "generated": "2026-11-04",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 128,
       "absenceEdges": 0,
       "observations": 187,
-      "resolvedVerdictSources": 1863
+      "resolvedVerdictSources": 1864
     },
     "surfaceStates": {
       "active": 58,
@@ -12382,7 +12382,7 @@
       ],
       "outcome": "A retained physical photograph establishes visible properties of its identified specimen. SPEC-0524 and SPEC-0525 establish the pictured first-edition stamp and complete Unlimited edition area for Spanish Jungle 27/64; this grants no edition inference for other copies.",
       "rawRecordRef": "verification/source_registry.json:evidence:inspected-specimen",
-      "rawRecordHash": "sha256:0cc6654565ec040359ef8218ba2f6e94a9f4b9d26e4fd98c2ab489e5c39eabba",
+      "rawRecordHash": "sha256:9fd4acf8818fe8a050ffbf7bd09c517ed72b93b7d17be6788d86546f30cabef4",
       "rawRecord": {
         "canonicalUrl": null,
         "nonUrlEvidenceId": "evidence:inspected-specimen",
@@ -12416,7 +12416,7 @@
           "identity",
           "language"
         ],
-        "stableIdCount": 262,
+        "stableIdCount": 276,
         "stableIds": [
           "CS1aC 188 V2",
           "CSM2.1C 054 base",
@@ -12458,6 +12458,12 @@
           "F0625-P01",
           "F0625-P02",
           "F0628-P01",
+          "F0631-P01",
+          "F0632-P01",
+          "F0633-P01",
+          "F0634-P01",
+          "F0635-P01",
+          "F0636-P01",
           "G2  base",
           "ID:SV-P:117:V1",
           "ID:SV-P:117:V2",
@@ -12595,6 +12601,12 @@
           "SPEC-0659",
           "SPEC-0660",
           "SPEC-0662",
+          "SPEC-0693",
+          "SPEC-0694",
+          "SPEC-0695",
+          "SPEC-0696",
+          "SPEC-0697",
+          "SPEC-0698",
           "SV-P/CS 277 base",
           "TW:AS5a:204/184:base",
           "TW:s5a F:093/070:base",
@@ -12610,6 +12622,8 @@
           "U0192",
           "U0201",
           "U0224",
+          "U0226",
+          "U0227",
           "U0228",
           "U0229",
           "U0230",
@@ -12681,8 +12695,8 @@
           "U0775",
           "U0780"
         ],
-        "retrievedAt": "2026-10-31",
-        "usageCount": 450
+        "retrievedAt": "2026-11-04",
+        "usageCount": 480
       }
     },
     {
@@ -32334,7 +32348,6 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "date",
-        "finish",
         "finish-override"
       ]
     },
@@ -39231,6 +39244,21 @@
       ]
     },
     {
+      "sourceKey": "https://media.bunjang.co.kr/product/420392678_1_1784261373_w960jpg",
+      "providerId": "seller-listing-photo",
+      "surfaceId": "seller-listing-photos",
+      "capabilityEdgeIds": [
+        "seller-listing-photo-positive",
+        "obs-cn-seller-native-rarity-20261007-positive",
+        "seller-cn-retained-photo-20261031"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "finish",
+        "identity"
+      ]
+    },
+    {
       "sourceKey": "https://media.bunjang.co.kr/product/420832203_1_1788061991_w480.jpg",
       "providerId": "seller-listing-photo",
       "surfaceId": "seller-listing-photos",
@@ -41461,7 +41489,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },
@@ -42709,7 +42736,6 @@
       ],
       "absenceEdgeIds": [],
       "dimensions": [
-        "finish",
         "language"
       ]
     },

@@ -499,6 +499,15 @@ def product_rarity_regressions() -> None:
                   for transition in read("collector_migrations.json")["catalogueTransitions"]
                   for route in transition["transitions"] if rejected_bcr in route["fromItemIds"]]
     assert bcr_routes and all(route == ("retired-1:0", [rejected_bcr], []) for route in bcr_routes), bcr_routes
+    # Reusing a source printing ID must not transfer ownership from rejected XY179 Non-Holo.
+    for rejected_xy179 in ("item-d7633bea-072e-5d80-9781-f95f47f797d7",
+                           "item-46288195-eeab-54b6-90d1-eeb898be3ff7"):
+        routes = [route for transition in read("collector_migrations.json")["catalogueTransitions"]
+                  for route in transition["transitions"] if rejected_xy179 in route["fromItemIds"]]
+        assert routes and all(
+            route["changeKind"] == "retired-1:0" and route["fromItemIds"] == [rejected_xy179]
+            and not route["toItemIds"] for route in routes
+        ), routes
     # The rarity of a jumbo is its Oversized product, never the standard card's.
     assert all((row["cardSize"] == "jumbo") == (row["rarity"]["display"] == "Oversized") for row in items)
     # A photographed V2 promo is V2 only; the reviewed holo -> V1 mapping fills unpinned printings.
