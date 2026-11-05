@@ -7,8 +7,9 @@ languages a card is *sold* in. This project records which ones were actually *pr
 the evidence for each.
 
 <!-- generated:badges — regenerate with `python scripts/readme_stats.py`; do not hand-edit -->
-[![Website](https://img.shields.io/badge/website-open_the_collection-2ea44f)](https://m4s-ai.github.io/snoredex-data/)
+[![Website](https://img.shields.io/github/deployments/m4s-ai/snoredex-data/github-pages?label=website)](https://m4s-ai.github.io/snoredex-data/)
 [![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/workflows/release-gate.yml)
+[![Open issues](https://img.shields.io/github/issues/m4s-ai/snoredex-data)](https://github.com/m4s-ai/snoredex-data/issues)
 [![Current-known checklist](https://img.shields.io/badge/current--known_checklist-888_printings-2563eb)](analysis_checklist.json)
 [![Languages](https://img.shields.io/badge/languages-15-2563eb)](DATA-GUIDE.md)
 [![Licence](https://img.shields.io/badge/licence-PolyForm_NC_%2B_CC_BY--NC--SA-2ea44f)](LICENSE.md)

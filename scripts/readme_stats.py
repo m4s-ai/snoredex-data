@@ -149,8 +149,11 @@ def evidence_strength_block(units: list[dict[str, Any]], sources: dict[str, Any]
 def badges_block(checklist: dict[str, Any], decisions: dict[str, Any]) -> str:
     counts = checklist["meta"]["counts"]
     grants_approved = decisions.get("licenseGrantsApproved") is True
+    # Once approved, show the state of the last real Pages deployment rather than the decision:
+    # a failed or never-run deployment must not look live.
     site = (
-        f"[![Website](https://img.shields.io/badge/website-open_the_collection-2ea44f)]({SITE_URL})"
+        "[![Website](https://img.shields.io/github/deployments/m4s-ai/snoredex-data/github-pages"
+        f"?label=website)]({SITE_URL})"
         if decisions.get("sitePublicationApproved") is True
         else "[![Website](https://img.shields.io/badge/website-not_yet_published-d97706)]"
         "(publication-decisions.json)"
@@ -162,6 +165,8 @@ def badges_block(checklist: dict[str, Any], decisions: dict[str, Any]) -> str:
         "[![Release gate](https://github.com/m4s-ai/snoredex-data/actions/workflows/"
         "release-gate.yml/badge.svg)](https://github.com/m4s-ai/snoredex-data/actions/"
         "workflows/release-gate.yml)",
+        "[![Open issues](https://img.shields.io/github/issues/m4s-ai/snoredex-data)]"
+        "(https://github.com/m4s-ai/snoredex-data/issues)",
         f"[![Current-known checklist](https://img.shields.io/badge/current--known_checklist-"
         f"{counts['items']}_printings-2563eb)]"
         "(analysis_checklist.json)",
