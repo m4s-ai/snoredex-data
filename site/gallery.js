@@ -31,6 +31,15 @@ function picture(card, detail = false) {
   const image = element("img");
   image.alt = detail ? card.name : "";
   image.decoding = "async";
+  if (card.imageSizes?.length) {
+    const sizes = detail ? card.imageSizes.filter((size) => size.width >= 600) : card.imageSizes;
+    image.srcset = sizes.map((size) => `${size.path} ${size.width}w`).join(", ");
+    image.sizes = detail ? "(max-width: 36rem) 224px, 320px" : "(max-width: 40rem) 50vw, 320px";
+    image.width = card.imageWidth;
+    image.height = card.imageHeight;
+    image.style.maxWidth = `${Math.floor(card.imageWidth / window.devicePixelRatio)}px`;
+    image.style.marginInline = "auto";
+  }
   if (!detail) image.loading = "lazy";
   image.addEventListener("error", () => {
     image.replaceWith(element("span", "Image unavailable", "gallery-placeholder"));

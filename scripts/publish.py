@@ -20,6 +20,7 @@ import sys
 from pathlib import Path
 
 from malie_export import validate_bundle
+from gallery_image_assets import filter_gallery_outputs
 
 ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_PREFIX = "_site"
@@ -139,7 +140,7 @@ def collect() -> list[str]:
         for path in sorted(base.rglob("*")):
             if path.is_file() and path.suffix.lower() in extensions:
                 wanted.append(str(path.relative_to(ROOT)).replace("\\", "/"))
-    return wanted
+    return filter_gallery_outputs(wanted, ROOT)
 
 
 def validate_output(out: Path) -> Path:
