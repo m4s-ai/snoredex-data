@@ -45,7 +45,7 @@ nothing to correct unless you have actually seen it.
 ## How your report is graded
 
 Evidence is ranked, and the ranking is public: see
-[the ladder in `README.md`](README.md#how-a-claim-becomes-a-fact), generated from
+[the ladder in `METHODOLOGY.md`](METHODOLOGY.md#how-a-claim-becomes-a-fact), generated from
 [`verification/source_registry.json`](verification/source_registry.json). Tiers 1-3 grade external
 evidence, strongest first; tier 5 marks what is *not* external evidence.
 
@@ -81,7 +81,7 @@ unattributed edit.
   is a physically distinct edition and is in scope, but it has no rows in the legacy Cardmarket
   universe. State `WEST / es-ES` or `LATAM / es-419`; never submit an unqualified Spanish claim.
 - Before reporting, it is worth skimming
-  [Scope and caveats](README.md#scope-and-caveats--read-before-using) — some surprising values are
+  [Scope and caveats](DATA-GUIDE.md#scope-and-caveats--read-before-using) — some surprising values are
   documented limitations rather than errors.
 
 ## Changing the code or data directly

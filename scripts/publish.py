@@ -41,6 +41,8 @@ FILES = [
     "gallery.html",
     "llms.txt",
     "README.md",
+    "DATA-GUIDE.md",
+    "METHODOLOGY.md",
     "DATABASE.md",
     "FINDINGS.md",
     "LICENSE.md",

@@ -344,6 +344,9 @@ def _collect_g1(state: dict[str, Any]) -> dict[str, Any]:
 
         def _collect_g1_part3():
             nonlocal ai_declaration_path, line, unit
+            # The finish table and the finish prose moved to METHODOLOGY.md with the rest of the model.
+            methodology = (ROOT / "METHODOLOGY.md").read_text(encoding="utf-8")
+            prose = readme + "\n" + methodology
             reverse_family_units = sum(
                 bool({"reverse-holo", "mirror-holo"} & set(unit["availableFinishes"]))
                 for unit in finish_units
@@ -355,33 +358,33 @@ def _collect_g1(state: dict[str, Any]) -> dict[str, Any]:
                 "Both Non-Holo and Holo": counts["withBothNonHoloAndHolo"],
             }
             for label, expected in expected_finish_rows.items():
-                matching = [line for line in readme.splitlines() if line.startswith(f"| {label} |")]
+                matching = [line for line in methodology.splitlines() if line.startswith(f"| {label} |")]
                 if len(matching) != 1:
-                    prose_errors.append(f"README has {len(matching)} rows named '{label}', expected one")
+                    prose_errors.append(f"METHODOLOGY has {len(matching)} rows named '{label}', expected one")
                     continue
                 stated = matching[0].rstrip("| ").split("|")[-1].strip()
                 if stated != str(expected):
-                    prose_errors.append(f"README '{label}' says {stated}, generated data says {expected}")
-            if "| Mirror holo |" in readme or "| Mirror Holo |" in readme:
-                prose_errors.append("README exposes Mirror Holo as a separate collector-facing finish")
+                    prose_errors.append(f"METHODOLOGY '{label}' says {stated}, generated data says {expected}")
+            if "| Mirror holo |" in prose or "| Mirror Holo |" in prose:
+                prose_errors.append("README or METHODOLOGY exposes Mirror Holo as a separate collector-facing finish")
             check(
                 "F3.1",
-                "README finish-family table matches the generated finish stores",
+                "METHODOLOGY finish-family table matches the generated finish stores",
                 "FAIL",
                 not prose_errors,
                 "; ".join(prose_errors),
             )
             jtg_english = finish_by_key.get(("JTG", "117", "English"))
             jtg_finishes = sorted(jtg_english["availableFinishes"]) if jtg_english else []
-            jtg_prose_wrong = "JTG 117` now explicitly\nshows non-holo, holo," in readme or (
-                "shows non-holo, holo, and intricate-tile reverse-holo" in readme.replace("\n", " ")
+            jtg_prose_wrong = "JTG 117` now explicitly\nshows non-holo, holo," in prose or (
+                "shows non-holo, holo, and intricate-tile reverse-holo" in prose.replace("\n", " ")
             )
             check(
                 "F3.2",
-                "README describes regular JTG 117 as holo + reverse holo only",
+                "README and METHODOLOGY describe regular JTG 117 as holo + reverse holo only",
                 "FAIL",
                 not jtg_prose_wrong,
-                f"README describes regular JTG 117 as non-holo + holo + reverse holo; the verified model and "
+                f"README or METHODOLOGY describes regular JTG 117 as non-holo + holo + reverse holo; the verified model and "
                 f"review_integrity.py check 'regular JTG 117 discloses holo + reverse only' both say "
                 f"{jtg_finishes}. The non-holo printing belongs to the Prize Pack product, not the regular card.",
             )
@@ -528,7 +531,8 @@ def _collect_g2(state: dict[str, Any]) -> dict[str, Any]:
 
         # The destructive one must never be presented as part of a rebuild. Checked as prose because that
         # is where the instruction lived, and prose is what a reader follows.
-        rebuild_docs = {"README.md": readme, "HANDOVER.md": handover}
+        rebuild_docs = {"METHODOLOGY.md": (ROOT / "METHODOLOGY.md").read_text(encoding="utf-8"),
+                        "HANDOVER.md": handover}
         resurrected = [
             name for name, text in rebuild_docs.items()
             if re.search(r"mkunits\s*(->|→)\s*build", text)
@@ -547,7 +551,7 @@ def _collect_g2(state: dict[str, Any]) -> dict[str, Any]:
             "Docs state that the harvest is not reproducible",
             "FAIL",
             all(re.search(r"not reproducible|nicht reproduzierbar", text) for text in rebuild_docs.values()),
-            "README and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
+            "METHODOLOGY and HANDOVER must both say the harvest cannot be re-run, or the next reader will try.",
         )
     return updates
 
@@ -1562,7 +1566,8 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
                            "verification/RESUME.md": (ROOT / "verification" / "RESUME.md")
                            .read_text(encoding="utf-8")}
             figure_docs = dict(policy_docs)
-            figure_docs["README.md"] = (ROOT / "README.md").read_text(encoding="utf-8")
+            for rel in ("README.md", "METHODOLOGY.md", "DATA-GUIDE.md"):
+                figure_docs[rel] = (ROOT / rel).read_text(encoding="utf-8")
 
         def _collect_g4_part3():
             nonlocal corroborated_units, drift, figure_drift, single_source_units, u, weak_single
@@ -1693,7 +1698,8 @@ def _collect_g4(state: dict[str, Any]) -> dict[str, Any]:
             settled_count = sum(len(c.get("languagesNotPrinted") or []) for c in cards)
             disputed_count = sum(len(c.get("languagesDisputed") or []) for c in cards)
             split_docs = dict(policy_docs)
-            split_docs["README.md"] = (ROOT / "README.md").read_text(encoding="utf-8")
+            for rel in ("README.md", "METHODOLOGY.md", "DATA-GUIDE.md"):
+                split_docs[rel] = (ROOT / rel).read_text(encoding="utf-8")
             documented_figures(
                 "E11", "Documented not-printed / disputed split matches the data",
                 [([r"\*{0,2}(\d+) are settled", r"\*{0,2}(\d+) settled and \d+ disputed"], settled_count),

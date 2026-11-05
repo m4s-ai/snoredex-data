@@ -90,8 +90,11 @@ snoredex-tracker-template.sqlite
                               scripts/tracker.py; sync preserves have/wanted/quantity/notes.
 images/                       Card images named SETCODE_NUMBER_NAME[_Vn]_ID.jpg or .png. The
                               extension states the actual format.
-README.md / CONTRIBUTING.md   The public pair: how to use the data, and how to report a
-                              correction. Written for people, not agents.
+README.md / CONTRIBUTING.md   The public pair: what the project is and where the site lives, and
+                              how to report a correction. Written for people, not agents.
+DATA-GUIDE.md                 Which data file to use, and the scope caveats behind its fields.
+METHODOLOGY.md                Evidence ladder, evidence strength, finish model and build pipeline;
+                              holds the generated ladder and finish-coverage blocks.
 DATABASE.md                   The contract snoredex.sqlite offers an application.
 LICENSE.md / LICENSES/        The mixed-work licence structure plus verbatim publisher texts;
 THIRD_PARTY_NOTICES.md        upstream attribution. AI-DECLARATION.md states the AI transparency
