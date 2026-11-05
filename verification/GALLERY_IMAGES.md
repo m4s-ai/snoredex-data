@@ -28,6 +28,12 @@ resolved prepared candidate can supply its gallery image. Pending, rejected and 
 candidates stay visible in the inventory; a usable accepted alternative can still be selected.
 The publisher includes only selected accepted gallery outputs.
 
+Reviewed items with no candidate source use `unavailableTargets` in the recipe store:
+`{itemId, note}` records a concrete image need without inventing a source or crop. IDs must be
+unique and present in the inventory, and the review note must be nonempty. If a candidate later
+arrives, validation requires reviewing that source and replacing the source-less entry with its
+recipe. These entries display placeholders and publish no image files.
+
 ## Recipe format
 
 Each recipe has these fields.

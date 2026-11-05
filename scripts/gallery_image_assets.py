@@ -184,9 +184,11 @@ def validate_record_images(record, dimensions, root):
 def validated_recipes(inventory, root=ROOT, replacing=()):
     if inventory.get("meta", {}).get("inputs") != inventory_inputs(root):
         raise ValueError("Gallery inventory is stale; regenerate it with scripts/site.py")
-    recipes = read_store(root, RECIPES)["recipes"]
+    store = read_store(root, RECIPES)
+    recipes = store["recipes"]
+    unavailable_targets(store, inventory)
     manifest = read_store(root, MANIFEST)
-    if manifest.get("schemaVersion") != 1 or read_store(root, RECIPES).get("schemaVersion") != 1:
+    if manifest.get("schemaVersion") != 1 or store.get("schemaVersion") != 1:
         raise ValueError("Unsupported gallery image store version")
     ids = {recipe["id"] for recipe in recipes}
     if len(ids) != len(recipes) or set(manifest["entries"]) - ids:
@@ -195,6 +197,20 @@ def validated_recipes(inventory, root=ROOT, replacing=()):
         validate_recipe(recipe, inventory, root)
         validate_prepared_recipe(recipe, manifest["entries"].get(recipe["id"]), replacing, root)
     return recipes, manifest["entries"]
+
+
+def unavailable_targets(store, inventory):
+    entries = {item["itemId"]: item for item in inventory["items"]}
+    targets = set()
+    for target in store.get("unavailableTargets", []):
+        item_id = target.get("itemId")
+        note = target.get("note")
+        if item_id not in entries or item_id in targets or not isinstance(note, str) or not note.strip():
+            raise ValueError("Unavailable targets require unique known item IDs and review notes")
+        if entries[item_id]["candidates"]:
+            raise ValueError("A source-less image need gained candidates; review those sources")
+        targets.add(item_id)
+    return targets
 
 
 def validate_prepared_recipe(recipe, record, replacing, root):
@@ -231,6 +247,7 @@ def apply_prepared(cards, inventory, root=ROOT):
     recipes, records = validated_recipes(inventory, root)
     selected = select_prepared(recipes, records)
     targeted = {target["itemId"] for recipe in recipes for target in recipe["targets"]}
+    targeted.update(unavailable_targets(read_store(root, RECIPES), inventory))
     entries = {item["itemId"]: item for item in inventory["items"]}
     for card in cards:
         item_id = card["id"]
