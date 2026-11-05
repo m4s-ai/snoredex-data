@@ -12,6 +12,7 @@ from artwork_derivatives import encode_png
 from gallery_image_assets import (
     apply_prepared, crop_dimensions, recipe_digest, select_prepared, validated_recipes, validate_recipe,
     validate_record,
+    unavailable_targets, published_gallery_images,
 )
 from gallery_image_inventory import INPUTS, inventory_inputs, source_info
 
@@ -129,6 +130,31 @@ def check_stale_outputs(root, inventory, recipe):
     must_reject(lambda: validated_recipes(inventory, root))
 
 
+def check_source_less_targets(root, inventory):
+    inventory = copy.deepcopy(inventory)
+    inventory["items"].append({"itemId": "research-no-source", "candidates": []})
+    store = {"schemaVersion": 1, "recipes": [], "unavailableTargets": [
+        {"itemId": "research-no-source", "note": "Need a retained localized prerelease front"}]}
+    path = root / "verification/gallery_image_recipes.json"
+    path.write_text(json.dumps(store))
+    (root / "verification/gallery_image_inventory.json").write_text(json.dumps(inventory))
+    (root / "verification/gallery_image_manifest.json").write_text(json.dumps({"schemaVersion": 1, "entries": {}}))
+    cards = [{"id": "research-no-source", "thumbnail": "wrong.jpg", "preview": "wrong.jpg"},
+             {"id": "fixture-item", "thumbnail": "untouched.jpg"}]
+    apply_prepared(cards, inventory, root)
+    assert cards[0]["thumbnail"] is None and cards[0]["preview"] is None
+    assert inventory["items"][-1]["status"] == "needs-image"
+    assert cards[1]["thumbnail"] == "untouched.jpg" and not published_gallery_images(root)
+    for target in [{"itemId": "unknown", "note": "Need a front"},
+                   {"itemId": "research-no-source", "note": " "},
+                   {"itemId": "fixture-item", "note": "Has an actual candidate"}]:
+        wrong = {**store, "unavailableTargets": [target]}
+        must_reject(lambda: unavailable_targets(wrong, inventory))
+    must_reject(lambda: unavailable_targets({**store, "unavailableTargets": store["unavailableTargets"] * 2}, inventory))
+    inventory["items"][-1]["candidates"] = [{"source": "new-front.png"}]
+    must_reject(lambda: validated_recipes(inventory, root))
+
+
 def main():
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
@@ -136,6 +162,7 @@ def main():
         check_recipe_integrity(root, inventory, recipe)
         check_quality_selection(recipe)
         check_specimen_media(root, inventory, recipe)
+        check_source_less_targets(root, inventory)
         check_stale_outputs(root, inventory, recipe)
     print("Gallery image checks passed, including seeded identity, source and stale-output violations.")
 
