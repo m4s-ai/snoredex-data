@@ -1,6 +1,553 @@
 {
   "schemaVersion": 1,
-  "baselineCommit": "5b463000f49084aefaae7032576554e8106353fa",
-  "note": "Batch 0 infrastructure. Subsequent batches explicitly bind reviewed recipes to item IDs. Items without a recipe retain their legacy gallery image until their batch.",
-  "recipes": []
+  "baselineCommit": "b1e23ca97be9fd57b9d68800c2ef2bf78a22f0b1",
+  "note": "Bounded pilot #478: twelve target items; original-preserving gallery recipes and quality decisions.",
+  "recipes": [
+    {
+      "id": "pilot-478-spec-0521",
+      "source": "verification/specimens/SPEC-0521.jpg",
+      "sourceSha256": "ac14b8ad5d5c86d195babd8cbf20096e93988ca972fe834761aa3ea7b9d8eee5",
+      "sourceDimensions": [
+        1140,
+        1575
+      ],
+      "corners": [
+        [
+          15,
+          10
+        ],
+        [
+          1120,
+          12
+        ],
+        [
+          1128,
+          1564
+        ],
+        [
+          11,
+          1565
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Full Japanese 207/BW-P card front, including blue border, bottom promo number and foil surface. Minor tilt corrected, no on-card detail removed. Effective width 1103px."
+      },
+      "targets": [
+        {
+          "itemId": "item-0106f682-b985-523b-8a3a-53fc115c003d",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0046",
+      "source": "verification/specimens/SPEC-0046.jpg",
+      "sourceSha256": "521dd7de3a98d38563f84735a65d0be5d6967b0f0e83510f73f14be9e700fa7f",
+      "sourceDimensions": [
+        1200,
+        1600
+      ],
+      "corners": [
+        [
+          130,
+          149
+        ],
+        [
+          1094,
+          154
+        ],
+        [
+          1105,
+          1515
+        ],
+        [
+          112,
+          1518
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Polish DP 37/130 reverse-holo photograph: background removed, complete yellow border and number retained. Natural reverse-foil reflections and surface wear remain; rules text and illustrator remain readable at full resolution. Effective width 960px."
+      },
+      "targets": [
+        {
+          "itemId": "item-05779600-0348-5c04-b378-ea75df235303",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0047",
+      "source": "verification/specimens/SPEC-0047.jpg",
+      "sourceSha256": "08a2731b393c18aafa77fe4d4c0ef1c61f61688769206669565fc676e998f21c",
+      "sourceDimensions": [
+        2958,
+        4968
+      ],
+      "corners": [
+        [
+          311,
+          1442
+        ],
+        [
+          2620,
+          1430
+        ],
+        [
+          2640,
+          4660
+        ],
+        [
+          335,
+          4690
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Russian BKT 118/162: isolated physical card from CGC holder, excluding label and outer slab. All four borders, rules, artist and number retained. Effective width capped at 1200px."
+      },
+      "targets": [
+        {
+          "itemId": "item-372d04a7-8a45-5c35-8623-7c27168d6c65",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0652",
+      "source": "verification/specimens/SPEC-0652.jpg",
+      "sourceSha256": "35eda4bc8b93156eb3636e582e3c2bfde0f37511a0013ae0b1b991fca9c23a10",
+      "sourceDimensions": [
+        3840,
+        2880
+      ],
+      "corners": [
+        [
+          346,
+          626
+        ],
+        [
+          1676,
+          622
+        ],
+        [
+          1660,
+          2484
+        ],
+        [
+          324,
+          2460
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "rejected",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. French PGO 055/078: isolated front from front/back composite; printed fine detail remains blurred despite nominal 1200px output. Other retained candidates for this exact item are only 255px wide. Placeholder until a sharp full-front photograph or suitable localized render is retained; do not upscale or reconstruct text."
+      },
+      "targets": [
+        {
+          "itemId": "item-0af8fa59-039c-5ab3-990b-c7e79327f656",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0599",
+      "source": "verification/specimens/SPEC-0599.png",
+      "sourceSha256": "fc36a8cca9f6e8125b5111572d848588d4114e1aaa6277bbb8de649b4f00674b",
+      "sourceDimensions": [
+        2524,
+        3460
+      ],
+      "corners": [
+        [
+          156,
+          204
+        ],
+        [
+          2260,
+          220
+        ],
+        [
+          2348,
+          3220
+        ],
+        [
+          152,
+          3260
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Spanish XY179: perspective-corrected individual front, sleeve and surrounding mat removed from the rectangular card frame. Complete yellow border, promo star and number retained. Natural border reflection remains. Effective width capped at 1200px."
+      },
+      "targets": [
+        {
+          "itemId": "item-38bdb198-c9f1-5fde-9f0b-e026306df7d6",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0601",
+      "source": "verification/specimens/SPEC-0601.png",
+      "sourceSha256": "0a2dfa65d03069bbc435e86b652fdfe5cbe403cd7e1cd8d606d9eecffddcdba7",
+      "sourceDimensions": [
+        1024,
+        1024
+      ],
+      "corners": [
+        [
+          276,
+          137
+        ],
+        [
+          795,
+          166
+        ],
+        [
+          757,
+          895
+        ],
+        [
+          220,
+          865
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "rejected",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Traditional Chinese AS5a 204/184: reviewed rotated/perspective crop of sleeved front yields only 512px effective width, below 600px. KIWI watermark is outside the card; no watermark or card content was reconstructed. No alternative retained candidate exists for this item. Placeholder requires a sharper full-front photo with at least 600px effective card width."
+      },
+      "targets": [
+        {
+          "itemId": "item-33591f6c-0431-5903-a55d-51cd8d25df5e",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0042",
+      "source": "verification/specimens/SPEC-0042.jpg",
+      "sourceSha256": "ad7f48ec5393d4a8bee7c33c1225ad4972eaed894433cc12d0dd665310186b88",
+      "sourceDimensions": [
+        3024,
+        4032
+      ],
+      "corners": [
+        [
+          428,
+          764
+        ],
+        [
+          2320,
+          764
+        ],
+        [
+          2328,
+          3416
+        ],
+        [
+          404,
+          3448
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Dutch Jungle 27/64 1st Edition: browser EXIF rotation applied (decoded 3024x4032); large dark background excluded and slight tilt corrected. Complete border and EDITIE 1 stamp retained. Natural edge wear remains. Effective width capped at 1200px."
+      },
+      "targets": [
+        {
+          "itemId": "item-4befeecb-ee16-58c1-85db-e777efdab6ec",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0041",
+      "source": "verification/specimens/SPEC-0041.png",
+      "sourceSha256": "9b2506a445bf9e1b0745db54b0b774caee0f8838c21ad1f53853398fdaf8d243",
+      "sourceDimensions": [
+        954,
+        1600
+      ],
+      "corners": [
+        [
+          97,
+          470
+        ],
+        [
+          851,
+          469
+        ],
+        [
+          858,
+          1513
+        ],
+        [
+          107,
+          1517
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Dutch Jungle 11/64 1st Edition: isolated front from CGC slab. EDITIE 1 stamp, full yellow border, holo artwork, number and artist retained. Natural card condition remains visible. Effective width 745px; no enlargement."
+      },
+      "targets": [
+        {
+          "itemId": "item-ceb9707a-679d-5a5f-8c39-8e013a201eb4",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0120",
+      "source": "verification/specimens/SPEC-0120.jpg",
+      "sourceSha256": "908cb5ad2d9a440067280f7145a6489c35a7ee01edcb686ef4f4ff5a0b42f296",
+      "sourceDimensions": [
+        1600,
+        1600
+      ],
+      "corners": [
+        [
+          320,
+          108
+        ],
+        [
+          1298,
+          108
+        ],
+        [
+          1278,
+          1437
+        ],
+        [
+          345,
+          1437
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Portuguese Jungle 27/64 Unlimited: patterned surroundings removed, perspective aligned. Complete yellow border, empty edition-mark position, rules and number retained. Effective width 927px; no artificial detail added."
+      },
+      "targets": [
+        {
+          "itemId": "item-fcce88c2-780c-50f5-97df-4d96989c6bf4",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0525",
+      "source": "verification/specimens/SPEC-0525.png",
+      "sourceSha256": "3bbebc23ac964c1ffaa111aee80dada95bceb9f17d721307697daebce279e3a2",
+      "sourceDimensions": [
+        1600,
+        1082
+      ],
+      "corners": [
+        [
+          64,
+          47
+        ],
+        [
+          786,
+          26
+        ],
+        [
+          791,
+          1045
+        ],
+        [
+          37,
+          1050
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Spanish Jungle 27/64 Unlimited: left/front card separated from paired back, tilt and perspective corrected. Complete border, edition-mark position and number retained. Effective width 706px."
+      },
+      "targets": [
+        {
+          "itemId": "item-f21fbdb7-d21a-5a4f-8413-e425273b72ee",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0507",
+      "source": "verification/specimens/SPEC-0507.png",
+      "sourceSha256": "39c3a4b0beed8880f3ec54fa69ae0c45fe4233ca5292247b5dd09263e7d9c9dd",
+      "sourceDimensions": [
+        660,
+        920
+      ],
+      "corners": [
+        [
+          16,
+          24
+        ],
+        [
+          649,
+          24
+        ],
+        [
+          649,
+          899
+        ],
+        [
+          16,
+          899
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "render",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Official English 30C 119/128 publisher render, not a photograph. Source-native BASIC tab and anniversary logo remain complete; outer publisher frame cropped. Effective width 625px. Exact item link does not turn a digital image into physical-photo evidence."
+      },
+      "targets": [
+        {
+          "itemId": "item-fe42bd72-da0c-56e6-b003-ce446aad9b4b",
+          "scope": "exact-printing"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0133",
+      "source": "verification/specimens/SPEC-0133.png",
+      "sourceSha256": "9fbe037d38f29d023f960bddc480857134bed2780e6f0382171288070797bfd0",
+      "sourceDimensions": [
+        492,
+        690
+      ],
+      "corners": [
+        [
+          0,
+          0
+        ],
+        [
+          492,
+          0
+        ],
+        [
+          492,
+          690
+        ],
+        [
+          0,
+          690
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "render",
+      "review": {
+        "status": "rejected",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Spanish Jungle 11/64 database depiction is only 492px wide. No derivative is generated and no upscale is allowed. Replaced for the same Unlimited target by retained physical photograph SPEC-0129."
+      },
+      "targets": [
+        {
+          "itemId": "item-d6220148-0686-51cd-9413-ccedf795abf8",
+          "scope": "representative"
+        }
+      ]
+    },
+    {
+      "id": "pilot-478-spec-0129",
+      "source": "verification/specimens/SPEC-0129.jpg",
+      "sourceSha256": "84ab65029f730f26d318f2921d8e8a55a1d850b50e08cb03de6245a4594f9a60",
+      "sourceDimensions": [
+        1053,
+        1446
+      ],
+      "corners": [
+        [
+          30,
+          30
+        ],
+        [
+          1023,
+          30
+        ],
+        [
+          1023,
+          1414
+        ],
+        [
+          29,
+          1414
+        ]
+      ],
+      "aspectRatio": [
+        5,
+        7
+      ],
+      "mediaKind": "photo",
+      "review": {
+        "status": "accepted",
+        "note": "Pilot #478, visually reviewed 2026-11-05 against retained original and prepared contact sheet. Replacement for undersized SPEC-0133: Spanish Jungle 11/64 Unlimited physical photograph. Black outer background cropped; complete yellow border, visible empty edition-mark position, holo surface, artist and number retained. Effective width 988px."
+      },
+      "targets": [
+        {
+          "itemId": "item-d6220148-0686-51cd-9413-ccedf795abf8",
+          "scope": "exact-printing"
+        }
+      ]
+    }
+  ]
 }
