@@ -33,6 +33,10 @@ def main():
         return gallery_cards(catalogue, artwork, review, derivatives, [], site.release_sort, excluded, verdicts)
 
     cards = project(rejected)
+    inventory = load("verification/gallery_image_inventory.json")
+    assert {item["itemId"] for item in inventory["items"]} == {card["id"] for card in cards}
+    assert all(candidate["source"] in inventory["sources"]
+               for item in inventory["items"] for candidate in item["candidates"])
     specimen = next(card for card in cards if card["imageSource"] == "verification/specimens/SPEC-0601.png")
     assert specimen["imageScope"] == "exact-printing"
     assert specimen["preview"] == derivatives[specimen["imageSource"]]["preview"]["path"]

@@ -1278,6 +1278,8 @@ def main() -> int:
 
         check_gallery(browser, origin)
         print("[ok ] gallery navigation, dialog, binder and mobile")
+        from test_gallery_preparation import check_gallery_preparation
+        check_gallery_preparation(browser)
         browser.close()
         shutil.rmtree(scratch, ignore_errors=True)
 
