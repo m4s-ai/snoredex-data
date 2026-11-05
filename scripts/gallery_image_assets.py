@@ -109,8 +109,6 @@ def validate_recipe(recipe, inventory, root=ROOT):
         raise ValueError("Gallery original changed; review its recipe again")
     if recipe.get("mediaKind") not in {"photo", "render"}:
         raise ValueError("Recipe must classify its source as photo or render")
-    if source["kind"] == "photo" and recipe["mediaKind"] != "photo":
-        raise ValueError("A specimen photograph must remain classified as a photo")
     validate_review(recipe.get("review", {}))
     validate_geometry(recipe, source)
     validate_targets(recipe, {item["itemId"]: item for item in inventory["items"]})

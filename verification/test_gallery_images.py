@@ -86,6 +86,30 @@ def check_quality_selection(recipe):
     assert crop_dimensions(sheared)[0] < 600
 
 
+def check_specimen_media(root, inventory, recipe):
+    # Storage identifies retained evidence, not whether its pixels came from a camera.
+    assert inventory["sources"][recipe["source"]]["kind"] == "unclassified"
+    render = copy.deepcopy(recipe)
+    render.update(id="fixture-render", mediaKind="render")
+    validate_recipe(render, inventory, root)
+    validate_recipe(recipe, inventory, root)
+    unreviewed = copy.deepcopy(render)
+    unreviewed["mediaKind"] = "unclassified"
+    must_reject(lambda: validate_recipe(unreviewed, inventory, root))
+    source = "verification/specimens/SPEC-0507.png"
+    info = source_info(ROOT, source)
+    assert info["kind"] == "unclassified" and info["dimensions"] == [660, 920]
+    actual = copy.deepcopy(render)
+    actual.update(source=source, sourceSha256=info["sha256"], sourceDimensions=[660, 920],
+                  corners=[[0, 0], [660, 0], [660, 920], [0, 920]])
+    actual_inventory = {"sources": {source: info}, "items": [{"itemId": "fixture-item",
+        "candidates": [{"source": source, "scope": "exact-printing"}]}]}
+    validate_recipe(actual, actual_inventory, ROOT)
+    selected = select_prepared([actual, recipe], {actual["id"]: {"quality": "ready"},
+                                                recipe["id"]: {"quality": "ready"}})
+    assert selected["fixture-item"][0]["mediaKind"] == "photo"
+
+
 def check_stale_outputs(root, inventory, recipe):
     verification = root / "verification"
     (verification / "gallery_image_recipes.json").write_text(json.dumps({"schemaVersion": 1, "recipes": [recipe]}))
@@ -111,6 +135,7 @@ def main():
         inventory, recipe = fixture(root)
         check_recipe_integrity(root, inventory, recipe)
         check_quality_selection(recipe)
+        check_specimen_media(root, inventory, recipe)
         check_stale_outputs(root, inventory, recipe)
     print("Gallery image checks passed, including seeded identity, source and stale-output violations.")
 

@@ -36,7 +36,7 @@ def source_info(root, relative):
     if not dimensions:
         raise ValueError(f"Unreadable gallery source: {relative}")
     return {
-        "path": relative, "kind": "photo" if relative.startswith("verification/specimens/") else "unclassified",
+        "path": relative, "kind": "unclassified",
         "sha256": hashlib.sha256(data).hexdigest(), "dimensions": list(dimensions),
         "resolution": "short-edge-below-600" if min(dimensions) < 600 else "crop-review-needed",
     }

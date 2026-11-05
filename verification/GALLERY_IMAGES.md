@@ -11,6 +11,8 @@ to #478. This document defines the preparation interface used by later batches.
   It joins catalogue assets, the retained artwork projection, physical-printing specimen references
   and explicitly representative gallery images. Source-frame dimensions and hashes are recorded.
   Remote candidates require retained local bytes before preparation.
+  Local sources remain unclassified until recipe review: the SPEC directory contains both
+  physical photographs and digital renders. The reviewed recipe's `mediaKind` determines priority.
 - `verification/gallery_image_recipes.json` holds reviewed source choices, geometry and target
   item IDs. The same source may serve several compatible targets. An exact scope requires an exact
   candidate link. A representative image stays representative in the lightbox.
