@@ -222,6 +222,11 @@ def check_responsive_gallery(browser, root, recipe, record):
     page.wait_for_function("document.querySelector('#card-picture img').complete")
     assert page.locator("#card-picture img").evaluate("(i) => i.currentSrc").endswith(record["images"][-1]["path"])
     assert page.get_by_role("link", name="Retained exact-printing image").get_attribute("href") == recipe["source"]
+    page.keyboard.press("Escape")
+    page.evaluate("() => { cards[0].imageScope = 'representative'; render(); }")
+    page.locator(".gallery-card").click()
+    assert page.get_by_text("Representative card image", exact=True).is_visible()
+    assert page.get_by_role("link", name="Retained representative image").get_attribute("href") == recipe["source"]
     page.close()
 
 

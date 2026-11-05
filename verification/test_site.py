@@ -291,11 +291,11 @@ def check_gallery(browser, origin):
     first.press("Enter")
     assert page.locator("#card-dialog").is_visible()
     assert page.get_by_text("#1", exact=True).is_visible()
+    first_card = page.locator("#gallery-data").evaluate("(node) => JSON.parse(node.textContent)[0]")
+    representative = bool(first_card.get("preview") and first_card.get("imageScope") == "representative")
+    assert page.get_by_text("Representative card image", exact=True).count() == int(representative)
     page.keyboard.press("Escape")
     page.wait_for_function("document.activeElement === document.querySelector('.gallery-card')")
-    page.locator('[data-card-id="item-5ce65b63-1889-524e-a13b-01cc05d3b10c"]').click()
-    assert page.get_by_text("Representative card image", exact=True).is_visible()
-    page.keyboard.press("Escape")
 
     page.locator("#binder-toggle").click()
     assert cards.count() == 18
