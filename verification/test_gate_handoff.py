@@ -95,9 +95,12 @@ def main() -> int:
     assert post_push.index("Fetch published pull-request heads") < post_push.index(
         "Audit the published commit history")
     assert "verification/gate_manifest.py" in release
-    assert "actions/upload-artifact@v4" in release
+    assert "actions/upload-artifact@v6" in release
     assert "name: pages-artifact\n          path: _site\n          include-hidden-files: true" in release
-    assert "actions/download-artifact@v4" in pages
+    assert "actions/download-artifact@v7" in pages
+    # upload-pages-artifact v4+ excludes dotfiles by default; the deployed tree must stay the
+    # verified one, so the Pages upload keeps hidden files exactly like the gate's handoff.
+    assert "actions/upload-pages-artifact@v5\n        with:\n          path: _site\n          include-hidden-files: true" in pages
     assert "pages-artifact" in pages
     assert "--check-dir" in pages and "--expected-gate L4" in pages
     assert "Regenerate site artifacts" not in pages

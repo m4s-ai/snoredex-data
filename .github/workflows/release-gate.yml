@@ -32,11 +32,11 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -44,7 +44,7 @@ jobs:
       # this branch or on main are reported instead of rerun. L4 never restores it.
       - name: Restore verification memo
         if: env.GATE_LEVEL == 'L3'
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .git/snoredex-memo
           key: snoredex-memo-v1-${{ runner.os }}-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
@@ -147,7 +147,7 @@ jobs:
             --commit "${GITHUB_SHA}"
 
       - name: Upload gate manifest
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: gate-manifest-${{ matrix.os }}
           path: _gate/gate-manifest-${{ runner.os }}.json
@@ -156,7 +156,7 @@ jobs:
 
       - name: Upload checked Pages artifact
         if: runner.os == 'Linux' && github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: pages-artifact
           path: _site
@@ -168,7 +168,7 @@ jobs:
       # failure and whatever changed.
       - name: Save verification memo
         if: always() && env.GATE_LEVEL == 'L3'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .git/snoredex-memo
           key: snoredex-memo-v1-${{ runner.os }}-${{ github.head_ref || github.ref_name }}-${{ github.run_id }}
@@ -202,16 +202,16 @@ jobs:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
       - name: Restore previous main memo
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .git/snoredex-memo
           key: snoredex-memo-v1-${{ runner.os }}-main-${{ github.run_id }}
@@ -228,7 +228,7 @@ jobs:
 
       - name: Save main memo
         if: always()
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: .git/snoredex-memo
           key: snoredex-memo-v1-${{ runner.os }}-main-${{ github.run_id }}
@@ -238,11 +238,11 @@ jobs:
     name: post-push P6/P7 audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -254,7 +254,7 @@ jobs:
 
       # Restore only: memo-seed alone saves, so a partial cache never shadows the full one.
       - name: Restore main memo
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: .git/snoredex-memo
           key: snoredex-memo-v1-Linux-main-${{ github.run_id }}
