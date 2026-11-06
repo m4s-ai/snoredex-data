@@ -22,7 +22,7 @@ jobs:
     name: Owner publication approval
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Require explicit publication decisions
         env:
           GH_TOKEN: ${{ github.token }}
@@ -50,10 +50,10 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 
@@ -61,13 +61,13 @@ jobs:
       # plus one gate manifest per OS. This job only verifies that handoff and deploys those bytes;
       # it does not regenerate a second projection tree.
       - name: Download verified Pages artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: pages-artifact
           path: _site
 
       - name: Download release gate manifests
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           pattern: gate-manifest-*
           path: _gate
@@ -92,9 +92,11 @@ jobs:
             --catalogue _site/collector_catalogue.json \
             --expected-commit "${GITHUB_SHA}"
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      # v4+ drops dotfiles unless asked; deploy exactly the verified bytes, .nojekyll included.
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+          include-hidden-files: true
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
