@@ -2,7 +2,7 @@
   "meta": {
     "schema": "snoredex-source-capability-graph",
     "schemaVersion": "2.0.0",
-    "generated": "2026-11-04",
+    "generated": "2026-11-06",
     "manifest": "verification/source_capabilities.json",
     "manifestSchema": "verification/source_capability_schema.json",
     "sourceRegistry": "verification/source_registry.json",
@@ -20,7 +20,7 @@
       "coverageEdges": 128,
       "absenceEdges": 0,
       "observations": 187,
-      "resolvedVerdictSources": 1864
+      "resolvedVerdictSources": 1865
     },
     "surfaceStates": {
       "active": 58,
@@ -21627,6 +21627,19 @@
       "absenceEdgeIds": [],
       "dimensions": [
         "language"
+      ]
+    },
+    {
+      "sourceKey": "https://web.archive.org/web/20260925052354id_/https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+      "providerId": "bulbapedia",
+      "surfaceId": "bulbapedia-mediawiki",
+      "capabilityEdgeIds": [
+        "bulbapedia-positive",
+        "bulbapedia-historical-index-positive"
+      ],
+      "absenceEdgeIds": [],
+      "dimensions": [
+        "date"
       ]
     },
     {

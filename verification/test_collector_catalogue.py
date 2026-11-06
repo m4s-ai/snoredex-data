@@ -35,6 +35,13 @@ def reviewed_release_date_regressions() -> None:
     items = {row["itemId"]: row for row in catalogue["items"]}
     legacy = {row["checklistId"]: row for row in read("analysis_checklist.json")["items"]}
     dates.check_reviewed_targets(catalogue["items"], reviewed)
+    conflicts = dates.numbered_run_date_conflicts(catalogue["items"])
+    assert not conflicts, f"one localized numbered run carries several launch dates: {conflicts}"
+    # Seeded: a non-holo of the same run inheriting another locality's date must be caught (#494).
+    run = [row for row in catalogue["items"] if row["setEditionId"] == "EDITION:WEST:Spanish:JU"]
+    seeded = [dict(run[0]), dict(run[1], releaseDate="1999-06-16", releaseDatePrecision="day")]
+    assert dates.numbered_run_date_conflicts(seeded), "a split launch date must be reported"
+    assert not dates.numbered_run_date_conflicts([seeded[0], dict(seeded[1], distribution={"kind": "retailer-promo"})])
     assert len(completion["items"]) == 116
     assert len({row["itemId"] for row in completion["items"]}) == 116
     # Compare the overlay against the same current canonical inputs. The frozen
