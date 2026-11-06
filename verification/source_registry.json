@@ -1,7 +1,7 @@
 {
  "meta": {
   "description": "Canonical provider registry and evidence index for every sourced claim.",
-  "generated": "2026-11-04",
+  "generated": "2026-11-06",
   "policy": [
    "Every sourced claim maps to exactly one provider. An unmatched source fails generation.",
    "External providers record positive evidence only. Missing rows, fields, pages, and results remain unknown.",
@@ -10,10 +10,10 @@
   ],
   "counts": {
    "providers": 46,
-   "evidenceRecords": 1864,
-   "uniqueUrls": 1855,
+   "evidenceRecords": 1865,
+   "uniqueUrls": 1856,
    "nonUrlEvidenceClasses": 9,
-   "claimsAttributed": 7598
+   "claimsAttributed": 7616
   }
  },
  "providers": [
@@ -221,8 +221,8 @@
    "hosts": [
     "bulbapedia.bulbagarden.net"
    ],
-   "uniqueSources": 115,
-   "claimsSupported": 717
+   "uniqueSources": 116,
+   "claimsSupported": 733
   },
   {
    "providerId": "pokewiki",
@@ -700,7 +700,7 @@
     "images.wikidexcdn.net"
    ],
    "uniqueSources": 6,
-   "claimsSupported": 13
+   "claimsSupported": 15
   },
   {
    "providerId": "snkrdunk",
@@ -4094,6 +4094,38 @@
    ],
    "retrievedAt": "2026-07-22",
    "usageCount": 2
+  },
+  {
+   "canonicalUrl": "https://web.archive.org/web/20260925052354id_/https://bulbapedia.bulbagarden.net/wiki/Jungle_(TCG)",
+   "nonUrlEvidenceId": null,
+   "providerId": "bulbapedia",
+   "sourceTypes": [
+    "Reviewed item-scoped release date"
+   ],
+   "dimensions": [
+    "date"
+   ],
+   "stableIdCount": 16,
+   "stableIds": [
+    "item-0bfa6f3f-f964-5c18-81e8-9f158f1ed769",
+    "item-4befeecb-ee16-58c1-85db-e777efdab6ec",
+    "item-7c2d03fa-ab81-5384-8c49-8df03c302572",
+    "item-7e440522-be8f-5e0e-90fd-26c1d78e589d",
+    "item-9379b3ed-1ce8-52a0-832e-679ff6b8c565",
+    "item-9917b05f-7f34-5061-a486-376660605929",
+    "item-a371c960-b853-5205-85ba-14e879939feb",
+    "item-a573bfa7-ffed-5208-823d-f4e0c7eb85b8",
+    "item-bffdd1fe-0a91-5c0f-936f-54388d38c0b8",
+    "item-ceb9707a-679d-5a5f-8c39-8e013a201eb4",
+    "item-d6220148-0686-51cd-9413-ccedf795abf8",
+    "item-e416ec54-f526-5e7d-91d0-32f804acb4ad",
+    "item-f21fbdb7-d21a-5a4f-8413-e425273b72ee",
+    "item-f3389482-15ad-5b3d-89df-92d88250aae6",
+    "item-f93c16e8-4bd2-58b1-8ade-ecea50fea44d",
+    "item-fcce88c2-780c-50f5-97df-4d96989c6bf4"
+   ],
+   "retrievedAt": "2026-11-06T12:38:53Z",
+   "usageCount": 16
   },
   {
    "canonicalUrl": null,
@@ -39553,13 +39585,15 @@
    "dimensions": [
     "date"
    ],
-   "stableIdCount": 2,
+   "stableIdCount": 4,
    "stableIds": [
+    "item-a573bfa7-ffed-5208-823d-f4e0c7eb85b8",
     "item-bffdd1fe-0a91-5c0f-936f-54388d38c0b8",
-    "item-d6220148-0686-51cd-9413-ccedf795abf8"
+    "item-d6220148-0686-51cd-9413-ccedf795abf8",
+    "item-f21fbdb7-d21a-5a4f-8413-e425273b72ee"
    ],
    "retrievedAt": "2026-10-11T10:34:41Z",
-   "usageCount": 2
+   "usageCount": 4
   },
   {
    "canonicalUrl": "https://www.wog.ch/de/index.cfm/details/product/95982-Pokemon-Morpeko-Relaxo-Pin-Kollektion",

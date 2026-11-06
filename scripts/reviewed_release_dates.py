@@ -83,6 +83,22 @@ def apply_predecessor_dates(items, reviewed_dates, sort_date):
             item["releaseDateSource"] = date_source(row)
 
 
+def numbered_run_date_conflicts(items):
+    """Localized numbered runs whose regular printings disagree about their launch date (#494).
+
+    A release date belongs to the language-qualified expansion launch, so every regular printing of
+    one numbered run shares it whatever its finish or edition. Distribution promos (a retailer
+    reprint of a run card, for instance) keep their own dates; unnumbered promo series have none.
+    """
+    runs = {}
+    for item in items:
+        if (item.get("active") and item.get("itemKind") == "verified-printing"
+                and item.get("collectorNumberDenominator") and not item.get("distribution")):
+            key = (item["setEditionId"], item["collectorNumberDenominator"])
+            runs.setdefault(key, set()).add(tuple(item.get(field) for field in DATE_FIELDS))
+    return {key: sorted(values, key=str) for key, values in runs.items() if len(values) > 1}
+
+
 def check_reviewed_targets(items, reviewed_dates):
     missing = set(reviewed_dates) - {item["itemId"] for item in items}
     if missing:
