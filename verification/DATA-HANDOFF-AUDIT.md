@@ -3,7 +3,7 @@
 # Data handoff audit — current repository state
 
 Snapshot date: **2026-11-04** · SQLite schema: **1.7.0** · source fingerprint:
-`494f5f9d63784db1…`
+`c7a1d277b856fdf7…`
 
 ## Outcome
 
