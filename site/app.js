@@ -14,12 +14,7 @@
 
   const readJSON = (id) => JSON.parse(document.getElementById(id).textContent);
   const ROWS = readJSON("data-rows");
-  const META = readJSON("data-meta");
-  const LANGS = META.languages;
-  // 18 fixed columns from scripts/site.py's COLUMNS, the language matrix, then the narrow-screen
-  // disclosure column and the correction column. Named because three call sites need it and the
-  // literal drifted the moment #121 added a column.
-  const DETAIL_SPAN = 18 + LANGS.length + 2;
+  const DETAIL_SPAN = document.querySelectorAll("#collection-table thead th").length;
 
   const FINISH_LABELS = {
     "non-holo": "Non-Holo",
@@ -42,7 +37,6 @@
 
   const $ = (sel, root) => (root || document).querySelector(sel);
   const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
-  const LANGUAGE_STATES = { present: "confirmed", absent: "not confirmed" };
 
 
   function escapeHTML(value) {
@@ -80,8 +74,6 @@
     setCode: (r) => (r.setCode || "").toLowerCase(),
     setName: (r) => (r.setName || "").toLowerCase(),
     number: null, // natural
-    variant: (r) => ((r.variant || "") + " " + (r.variantName || "")).toLowerCase(),
-    variantName: (r) => (r.variantName || "").toLowerCase(),
     rarity: (r) => (r.rarity || "").toLowerCase(),
     artist: (r) => (r.artist || "").toLowerCase(),
     edition: (r) => (r.edition || "").toLowerCase(),
@@ -92,11 +84,8 @@
     size: (r) => (r.sizes || []).join(","),
     distribution: (r) => (r.distributions || []).join(","),
     evidence: (r) => (r.evidence || []).join(","),
-    langCount: (r) => r.confirmedLanguages.length,
+    language: (r) => r.languageLabel.toLowerCase(),
   };
-  LANGS.forEach((lang) => {
-    SORTERS["lang-" + lang.code] = (r) => r.langCodes.includes(lang.code) ? 1 : 0;
-  });
 
   let sortKey = "release";
   let sortDir = 1;
@@ -128,8 +117,6 @@
     setName: [],
     number: [],
     edition: [],
-    variant: [],
-    variantName: [],
     rarity: [],
     artist: [],
     finish: [],
@@ -141,13 +128,11 @@
     evidence: [],
     yearFrom: "",
     yearTo: "",
-    langMin: "",
-    langMax: "",
-    lang: {}, // code -> "" | "present" | "absent"
+    language: [],
   };
 
   const MULTI = ["dateStatus", "name", "setCode", "setName", "number", "edition",
-    "variant", "variantName", "rarity", "artist", "finish", "pattern", "marking",
+    "language", "rarity", "artist", "finish", "pattern", "marking",
     "markingRole", "size", "distribution", "evidence"];
 
   const valuesOrNone = (values) => values && values.length ? values : ["—"];
@@ -159,8 +144,7 @@
     setName: (r) => [r.setName],
     number: (r) => [r.number || "—"],
     edition: (r) => [r.edition],
-    variant: (r) => [r.variant],
-    variantName: (r) => [r.variantName || "—"],
+    language: (r) => [r.languageLabel],
     rarity: (r) => [r.rarity || "—"],
     artist: (r) => [r.artist || "—"],
     finish: (r) => valuesOrNone(r.finishes),
@@ -188,17 +172,6 @@
     if (state.yearFrom && year < parseInt(state.yearFrom, 10)) return false;
     if (state.yearTo && year > parseInt(state.yearTo, 10)) return false;
 
-    const n = row.confirmedLanguages.length;
-    if (state.langMin !== "" && n < parseInt(state.langMin, 10)) return false;
-    if (state.langMax !== "" && n > parseInt(state.langMax, 10)) return false;
-
-    for (const code of Object.keys(state.lang)) {
-      const mode = state.lang[code];
-      if (!mode) continue;
-      const has = row.langCodes.includes(code);
-      if (mode === "present" && !has) return false;
-      if (mode === "absent" && has) return false;
-    }
     return true;
   }
 
@@ -207,13 +180,9 @@
     const params = new URLSearchParams();
     if (state.q) params.set("q", state.q);
     MULTI.forEach((f) => { if (state[f].length) params.set(f, state[f].join("~")); });
-    ["yearFrom", "yearTo", "langMin", "langMax"].forEach((f) => {
+    ["yearFrom", "yearTo"].forEach((f) => {
       if (state[f] !== "") params.set(f, state[f]);
     });
-    const langBits = Object.entries(state.lang)
-      .filter(([, v]) => v)
-      .map(([k, v]) => `${k}:${v === "present" ? "1" : "0"}`);
-    if (langBits.length) params.set("lang", langBits.join("~"));
     if (sortKey !== "release" || sortDir !== 1) params.set("sort", `${sortKey}:${sortDir > 0 ? "a" : "d"}`);
     const query = params.toString();
     const url = window.location.pathname + (query ? "?" + query : "") + window.location.hash;
@@ -222,18 +191,30 @@
 
   function readURL() {
     const params = new URLSearchParams(window.location.search);
-    state.q = params.get("q") || "";
-    MULTI.forEach((f) => { state[f] = (params.get(f) || "").split("~").filter(Boolean); });
-    ["yearFrom", "yearTo", "langMin", "langMax"].forEach((f) => { state[f] = params.get(f) || ""; });
-    state.lang = {};
-    (params.get("lang") || "").split("~").filter(Boolean).forEach((bit) => {
-      const [code, flag] = bit.split(":");
-      state.lang[code] = flag === "1" ? "present" : "absent";
+    const allowed = new Set(["q", "yearFrom", "yearTo", "sort", ...MULTI]);
+    const invalid = [...params].some(([key, value]) => {
+      if (!allowed.has(key) || params.getAll(key).length !== 1) return true;
+      if (MULTI.includes(key)) return value.split("~").some(v => !distinct(ROW_FIELD[key]).includes(v));
+      if (key === "sort") {
+        const parts = value.split(":");
+        return parts.length !== 2 || !Object.hasOwn(SORTERS, parts[0]) || !["a", "d"].includes(parts[1]);
+      }
+      if (key === "yearFrom" || key === "yearTo") {
+        const input = document.getElementById("f-" + key);
+        return !/^\d{4}$/.test(value) || Number(value) < Number(input.min) || Number(value) > Number(input.max);
+      }
+      return false;
     });
-    const sort = params.get("sort");
-    if (sort) {
-      const [key, dir] = sort.split(":");
-      if (SORTERS.hasOwnProperty(key)) { sortKey = key; sortDir = dir === "d" ? -1 : 1; }
+    if (invalid) {
+      window.history.replaceState(null, "", window.location.pathname + window.location.hash);
+      return;
+    }
+    state.q = params.get("q") || "";
+    MULTI.forEach(f => { state[f] = (params.get(f) || "").split("~").filter(Boolean); });
+    ["yearFrom", "yearTo"].forEach(f => { state[f] = params.get(f) || ""; });
+    if (params.has("sort")) {
+      const [key, direction] = params.get("sort").split(":");
+      sortKey = key; sortDir = direction === "a" ? 1 : -1;
     }
   }
 
@@ -261,30 +242,6 @@
       });
     });
 
-    const langGrid = document.getElementById("langfilters");
-    LANGS.forEach((lang) => {
-      const wrap = document.createElement("div");
-      wrap.className = "field";
-      const id = "f-lang-" + lang.code;
-      const label = document.createElement("label");
-      label.htmlFor = id;
-      label.textContent = lang.code;
-      const select = document.createElement("select");
-      select.id = id;
-      [["", "any"], ...Object.entries(LANGUAGE_STATES)].forEach(([value, text]) => {
-        const option = document.createElement("option");
-        option.value = value;
-        option.textContent = text;
-        select.appendChild(option);
-      });
-      wrap.append(label, select);
-      langGrid.appendChild(wrap);
-      select.addEventListener("change", (event) => {
-        state.lang[lang.code] = event.target.value;
-        render();
-      });
-    });
-
     $("#mobile-sort-key").addEventListener("change", (event) => {
       if (!Object.prototype.hasOwnProperty.call(SORTERS, event.target.value)) return;
       sortKey = event.target.value;
@@ -297,13 +254,12 @@
     });
 
     $("#f-q").addEventListener("input", (event) => { state.q = event.target.value; render(); });
-    ["yearFrom", "yearTo", "langMin", "langMax"].forEach((field) => {
+    ["yearFrom", "yearTo"].forEach((field) => {
       $("#f-" + field).addEventListener("input", (event) => { state[field] = event.target.value; render(); });
     });
     $("#reset").addEventListener("click", () => {
       MULTI.forEach((f) => { state[f] = []; });
-      state.q = ""; state.yearFrom = ""; state.yearTo = ""; state.langMin = ""; state.langMax = "";
-      state.lang = {};
+      state.q = ""; state.yearFrom = ""; state.yearTo = "";
       sortKey = "release"; sortDir = 1;
       syncControls();
       render();
@@ -331,11 +287,7 @@
       if (!select) return;
       Array.from(select.options).forEach((o) => { o.selected = state[field].includes(o.value); });
     });
-    ["yearFrom", "yearTo", "langMin", "langMax"].forEach((f) => { $("#f-" + f).value = state[f]; });
-    LANGS.forEach((lang) => {
-      const select = document.getElementById("f-lang-" + lang.code);
-      if (select) select.value = state.lang[lang.code] || "";
-    });
+    ["yearFrom", "yearTo"].forEach((f) => { $("#f-" + f).value = state[f]; });
     syncSortControls();
   }
 
@@ -369,11 +321,7 @@
     });
     if (state.yearFrom) add("from " + state.yearFrom, () => { state.yearFrom = ""; });
     if (state.yearTo) add("to " + state.yearTo, () => { state.yearTo = ""; });
-    if (state.langMin !== "") add("min langs " + state.langMin, () => { state.langMin = ""; });
-    if (state.langMax !== "") add("max langs " + state.langMax, () => { state.langMax = ""; });
-    Object.entries(state.lang).forEach(([code, mode]) => {
-      if (mode) add(code + " " + LANGUAGE_STATES[mode], () => { state.lang[code] = ""; });
-    });
+
   }
 
 
@@ -407,17 +355,12 @@
              weak: !ev.checkable && !ev.corroborated };
   }
 
-  /* Values the narrow breakpoint takes off screen, restated for the per-row disclosure (#121).
-   * Built from the same row object the cells use, so the panel cannot drift out of step with the
-   * table it stands in for. Languages are summarised as the confirmed list: the 17-column matrix
-   * conveys presence by position, which a stacked panel cannot reproduce, and the confirmed names
-   * are what that position was being read for. */
+  // Details use the same structured identity and evidence as the visible row.
   function rowDetailHTML(row) {
-    const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
     const entries = [
       ["Release", escapeHTML(row.dateDisplay)],
       ["Expansion", escapeHTML(row.setName || "—")],
-      ["Variant", escapeHTML(variant)],
+      ["Language", escapeHTML(row.languageLabel)],
       ["Rarity", escapeHTML(row.rarity || "—")],
       ["Artist", escapeHTML(row.artist || "—")],
       ["Edition", escapeHTML(row.edition)],
@@ -429,10 +372,7 @@
       ["Evidence", escapeHTML(row.evidence.join(", ") || "—")],
       ["Sources", (row.sourceLinks || []).map(url => '<a href="' + escapeHTML(url) +
         '" target="_blank" rel="noopener">' + escapeHTML(url) + '</a>').join('<br>') || "—"],
-      ["Confirmed languages", row.confirmedLanguages.length
-        ? escapeHTML(row.confirmedLanguages.join(", ")) +
-          ' <span class="detail-count">(' + row.confirmedLanguages.length + ")</span>"
-        : "—"],
+
     ];
     return '<dl class="rowdetail-list">' + entries
       .map(([term, value]) => "<dt>" + term + "</dt><dd>" + value + "</dd>").join("") + "</dl>";
@@ -440,29 +380,15 @@
 
   function rowHTML(row, index) {
     const detailId = "rowdetail-" + index;
-    const langCells = LANGS.map((lang) => {
-      const has = row.langCodes.includes(lang.code);
-      const state = has ? "present" : "absent";
-      const note = has ? evidenceNote(row, lang.code) : null;
-      // Keep the cell label to the compact state used across the 17-column matrix. The evidence
-      // control carries the full accessible label and opens a touch/keyboard detail popover.
-      const label = lang.name + ": " + LANGUAGE_STATES[state];
-      const attrs = note
-        ? ' data-tier="' + note.tier + '"' + (note.weak ? ' data-unverifiable="true"' : "")
-        : "";
-      const symbol = note
-        ? '<button type="button" class="lang-evidence-trigger" aria-expanded="false" ' +
-          'aria-label="' + escapeHTML(label + " — " + note.text) + '" ' +
-          'data-label="' + escapeHTML(label) + '" data-evidence="' + escapeHTML(note.text) + '">' +
-          '<span aria-hidden="true">✓</span></button>'
-        : '<span aria-hidden="true">' + (has ? "✓" : "—") + "</span>";
-      return '<td class="langcell ' + (has ? "yes" : "no") + '" data-state="' + state + '"' +
-        attrs + ' title="' + escapeHTML(note ? label + " — " + note.text : label) +
-        '" aria-label="' + escapeHTML(label) + '">' +
-        symbol + "</td>";
-    }).join("");
+    const note = evidenceNote(row, row.langCodes[0]);
+    const label = row.languageLabel + ": confirmed";
+    const languageCell = '<td class="col-language" data-tier="' + (note ? note.tier : 0) +
+      '" data-unverifiable="' + Boolean(note && note.weak) + '">' +
+      (note ? '<button type="button" class="lang-evidence-trigger" aria-expanded="false" aria-label="' +
+        escapeHTML(label + " — " + note.text) + '" data-label="' + escapeHTML(label) +
+        '" data-evidence="' + escapeHTML(note.text) + '"><span>' + escapeHTML(row.languageLabel) +
+        '</span></button>' : escapeHTML(row.languageLabel)) + '</td>';
     const finishPills = row.finishDisplay.map((f) => pill(f.label, f.status)).join("");
-    const variant = row.variant + (row.variantName ? " — " + row.variantName : "");
     const evidence = row.evidence.join(", ") || "—";
     const image = row.image
       ? '<button type="button" class="card-preview-trigger" aria-expanded="false" ' +
@@ -487,8 +413,8 @@
       '<td class="col-card">' + escapeHTML(row.name) + "</td>" +
       '<td class="col-set">' + escapeHTML(row.setCode) + "</td>" +
       '<td class="col-number">' + escapeHTML(row.number || "—") + "</td>" +
+      languageCell +
       clippedCell(row.setName, "col-expansion") +
-      clippedCell(variant, "col-variant") +
       clippedCell(row.rarity || "—", "col-rarity") +
       clippedCell(row.artist || "—", "col-artist") +
       '<td class="col-edition">' + escapeHTML(row.edition) + "</td>" +
@@ -499,8 +425,6 @@
       clippedCell(row.sizes.join(", "), "col-size") +
       clippedCell(row.distributions.join(", ") || "—", "col-distribution") +
       clippedCell(evidence, "col-evidence", row.evidence.map((e) => pill(e, e)).join("") || "—") +
-      '<td class="langcount">' + row.confirmedLanguages.length + "</td>" +
-      langCells +
       '<td class="col-more">' +
       '<button type="button" class="rowmore" aria-expanded="false" aria-controls="' + detailId + '" ' +
       'data-row-id="' + escapeHTML(row.rowId) + '" data-detail-id="' + detailId + '" ' +
@@ -874,8 +798,7 @@
    * single one would silently break the row structure of the whole file.
    *
    * Exports what the reader is looking at — current filters, current sort order — since that is the
-   * view they asked for. The language matrix becomes one column per language holding yes/no, which
-   * is the same information the ticks carry, in a form a spreadsheet can filter. */
+   * view they asked for. Each exported row carries its own language. */
   function initExport() {
     const button = $("#export-tsv");
     if (!button) return;
@@ -886,20 +809,19 @@
       // order — so the file and the table cannot disagree about what "the current view" means.
       const rows = visibleRows;
       const header = [
-        "Release", "Card", "Set", "No.", "Expansion", "Variant", "Variant name", "Rarity",
+        "Release", "Card", "Set", "No.", "Language", "Expansion", "Rarity",
         "Artist", "Edition", "Finish", "Pattern", "Stamp / marking", "Marking role", "Size",
-        "Distribution", "Evidence", "Confirmed languages", "Language count",
-      ].concat(LANGS.map((lang) => lang.name));
+        "Distribution", "Evidence",
+      ];
 
       const body = rows.map((row) => [
-        row.dateDisplay, row.name, row.setCode, row.number || "", row.setName || "",
-        row.variant || "", row.variantName || "", row.rarity || "", row.artist || "",
+        row.dateDisplay, row.name, row.setCode, row.number || "", row.languageLabel, row.setName || "",
+        row.rarity || "", row.artist || "",
         row.edition || "", (row.finishes || []).map(finishLabel).join("; "),
         (row.patterns || []).map(patternLabel).join("; "), (row.markings || []).join("; "),
         (row.markingRoles || []).join("; "), (row.sizes || []).join("; "),
         (row.distributions || []).join("; "), (row.evidence || []).join("; "),
-        row.confirmedLanguages.join("; "), row.confirmedLanguages.length,
-      ].concat(LANGS.map((lang) => (row.langCodes.includes(lang.code) ? "yes" : "no")))
+       ]
         .map(clean).join("\t"));
 
       // A BOM so a spreadsheet opening this by double-click reads it as UTF-8 rather than as the

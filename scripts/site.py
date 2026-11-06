@@ -64,8 +64,8 @@ COLUMNS = [
     # column into the frozen pane to reach it. Set and number belong together anyway (#124).
     ("", None, "img"), ("Release", "release", "col-release"), ("Card", "name", "col-card"),
     ("Set", "setCode", "col-set"), ("No.", "number", "col-number"),
+    ("Language", "language", "col-language"),
     ("Expansion", "setName", "secondary col-expansion"),
-    ("Variant", "variant", "secondary col-variant"),
     ("Rarity", "rarity", "secondary col-rarity"),
     ("Artist", "artist", "secondary col-artist"),
     ("Edition", "edition", "col-edition"), ("Finish", "finish", "col-finish"),
@@ -75,7 +75,6 @@ COLUMNS = [
     ("Size", "size", "secondary col-size"),
     ("Distribution", "distribution", "secondary col-distribution"),
     ("Evidence", "evidence", "secondary col-evidence"),
-    ("Langs", "langCount", "langcount"),
 ]
 
 
@@ -283,6 +282,7 @@ def catalogue_release(item, assets, localizations, records, artists, predecessor
         dateSource=catalogue_date_source(item, record, predecessors),
         image=image, cardmarketUrl="", correctionUrl=item["correctionLink"], itemKind=item["itemKind"],
         sourceLinks=item["sourceLinks"], localizationId=item["localizationId"],
+        language=language, languageLabel=localization["displayName"],
         confirmedLanguages=language_fields["confirmedLanguages"],
         languageEvidence=language_fields["languageEvidence"],
         finishCompletenessByLanguage={language:item["completenessStatus"]},
@@ -462,7 +462,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
         }
         search = " ".join(str(v).lower() for v in [
             row["name"], row["setCode"], row["setName"], row["number"], row["variant"],
-            row.get("variantName") or "", row.get("rarity") or "", row.get("artist") or "",
+            row.get("languageLabel", ""), row.get("variantName") or "", row.get("rarity") or "", row.get("artist") or "",
             row["edition"], " ".join(sorted(finishes)), " ".join(sorted(technical_finishes)),
             " ".join(sorted(patterns)),
             " ".join(sorted(markings)), " ".join(lang_codes), display_date(row),
@@ -474,6 +474,7 @@ def build_rows(releases: list[dict[str, Any]]) -> list[dict[str, Any]]:
             "splitPhysicalPrinting": bool(row.get("splitPhysicalPrinting")),
             "itemKind": row.get("itemKind"),
             "localizationId": row.get("localizationId"),
+            "languageLabel": row.get("languageLabel", ", ".join(row["confirmedLanguages"])),
             "sourceLinks": row.get("sourceLinks", []),
             "name": row["name"],
             "setCode": row["setCode"],
@@ -612,13 +613,6 @@ def main() -> int:
                 f'<th scope="col" class="{cls}" data-key="{key}" aria-sort="none">'
                 f'<button type="button" class="sort" data-key="{key}">{html.escape(label)}</button></th>'
             )
-    for lang in LANG_ORDER:
-        head_cells.append(
-            f'<th scope="col" class="langcell" data-key="lang-{LANG_CODE[lang]}" '
-            f'aria-sort="none" title="{html.escape(lang)}">'
-            f'<button type="button" class="sort" data-key="lang-{LANG_CODE[lang]}" '
-            f'aria-label="Sort by {html.escape(lang)} availability">{LANG_CODE[lang]}</button></th>'
-        )
     # Narrow-screen disclosure column (#121). Hidden above the narrow breakpoint, where every column
     # it stands in for is on screen already.
     head_cells.append('<th scope="col" class="col-more"><span class="sr">Details</span></th>')
@@ -628,9 +622,6 @@ def main() -> int:
         f'<option value="{html.escape(key)}"{(" selected" if key == "release" else "")}>'
         f'{html.escape(label)}</option>'
         for label, key, _ in COLUMNS if key is not None
-    ) + "".join(
-        f'<option value="lang-{LANG_CODE[lang]}">{html.escape(lang)} availability</option>'
-        for lang in LANG_ORDER
     )
 
     open_units = sum(1 for u in units if u["status"] in ("pending", "needs-manual-review"))
@@ -735,8 +726,6 @@ def main() -> int:
       </div>
       <div class="field"><label for="f-yearFrom">Year from</label><input id="f-yearFrom" type="number" min="1996" max="2030"></div>
       <div class="field"><label for="f-yearTo">Year to</label><input id="f-yearTo" type="number" min="1996" max="2030"></div>
-      <div class="field"><label for="f-langMin">Min langs</label><input id="f-langMin" type="number" min="0" max="17"></div>
-      <div class="field"><label for="f-langMax">Max langs</label><input id="f-langMax" type="number" min="0" max="17"></div>
       <button type="button" class="ghost" id="reset">Reset all</button>
       <button type="button" class="ghost" id="export-tsv">Export TSV</button>
       <button type="button" class="ghost" onclick="window.print()">Print filtered view</button>
@@ -750,8 +739,7 @@ def main() -> int:
         {multiselect("setName", "Expansion")}
         {multiselect("number", "Collector number")}
         {multiselect("edition", "Edition")}
-        {multiselect("variant", "Variant")}
-        {multiselect("variantName", "Variant description")}
+        {multiselect("language", "Language")}
         {multiselect("rarity", "Rarity")}
         {multiselect("artist", "Artist")}
         {multiselect("finish", "Finish")}
@@ -762,10 +750,6 @@ def main() -> int:
         {multiselect("distribution", "Distribution")}
         {multiselect("evidence", "Evidence")}
       </div>
-    </details>
-    <details class="morefilters">
-      <summary>Language filters (any / confirmed / not confirmed)</summary>
-      <div class="langgrid" id="langfilters"></div>
     </details>
     <div class="chips" id="chips"></div>
     <div class="count" id="count" role="status" aria-live="polite" aria-atomic="true"></div>
@@ -780,11 +764,8 @@ def main() -> int:
   </div>
 
   <p class="language-legend" id="collection-table-legend">
-    <strong>Language availability:</strong>
-    <span><span class="yes" aria-hidden="true">&#10003;</span> confirmed</span>
-    <span><span class="no" aria-hidden="true">&mdash;</span> not confirmed in this row; not proof of absence</span>
-    <span><span class="yes legend-unverifiable" aria-hidden="true">&#10003;</span> confirmed, but on a
-      single source with no public URL &mdash; hover any tick for its provider and evidence tier</span>
+    <span>Select a language name for its provider and evidence tier.</span>
+    <span>A dotted underline marks a single source with no public URL.</span>
     <span>Ellipsized values can be selected to expand.</span>
   </p>
 

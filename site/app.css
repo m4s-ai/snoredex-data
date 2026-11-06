@@ -168,7 +168,7 @@ tr.yearsep td {
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .col-expansion { width: calc(10rem + 10px); min-width: calc(10rem + 10px); }
-.col-variant { width: calc(8rem + 10px); min-width: calc(8rem + 10px); }
+.col-language { width: calc(8rem + 10px); min-width: calc(8rem + 10px); }
 .col-rarity { width: calc(6.5rem + 10px); min-width: calc(6.5rem + 10px); }
 .col-artist { width: calc(7rem + 10px); min-width: calc(7rem + 10px); }
 .col-pattern { width: calc(4.75rem + 10px); min-width: calc(4.75rem + 10px); }
@@ -233,7 +233,7 @@ tr.yearsep td {
   #collection-table { max-width: 2400px; }
 
   .col-expansion { width: calc(13rem + 10px); min-width: calc(13rem + 10px); }
-  .col-variant { width: calc(11rem + 10px); min-width: calc(11rem + 10px); }
+  .col-language { width: calc(11rem + 10px); min-width: calc(11rem + 10px); }
   /* Wide enough for "no printed rarity symbol", the most frequent long rarity value. */
   .col-rarity { width: calc(9rem + 10px); min-width: calc(9rem + 10px); }
   .col-artist { width: calc(9rem + 10px); min-width: calc(9rem + 10px); }
@@ -319,8 +319,8 @@ tbody tr:hover td.corr { background: var(--panel); }
    Deliberately an underline rather than a colour change, so it carries no contrast burden and
    stays visible to anyone who cannot distinguish the colours. */
 .legend-unverifiable,
-.langcell.yes[data-unverifiable="true"] .lang-evidence-trigger > span,
-.langcell.yes[data-unverifiable="true"] > span {
+.col-language[data-unverifiable="true"] .lang-evidence-trigger > span,
+.col-language[data-unverifiable="true"] > span {
   border-bottom: 2px dotted currentColor;
   padding-bottom: 1px;
 }
@@ -378,7 +378,7 @@ tr.rowdetail > td { white-space: normal; background: var(--panel); }
   .langcount, .langcell { display: none; }
   /* The retained columns keep the fixed widths meant for a 34-column desktop matrix, which alone
    * overflowed a phone by ~530px. Here they wrap to the space available instead. */
-  .col-card, .col-variant, .col-evidence, .col-finish {
+  .col-card, .col-language, .col-evidence, .col-finish {
     width: auto; min-width: 0; white-space: normal;
   }
   .col-evidence { max-width: 11rem; }
@@ -417,7 +417,7 @@ tr.rowdetail > td { white-space: normal; background: var(--panel); }
     grid-template-areas:
       "image card card"
       "image set number"
-      "variant variant variant"
+      "language language language"
       "finish finish finish"
       "evidence evidence evidence"
       "more report report";
@@ -435,7 +435,7 @@ tr.rowdetail > td { white-space: normal; background: var(--panel); }
   #rows .col-set { display: block; grid-area: set; color: var(--muted); font-weight: 650; }
   #rows .col-number { display: block; grid-area: number; color: var(--muted); }
   #rows .col-number::before { content: "No. "; font-weight: 650; }
-  #rows .col-variant { display: block; grid-area: variant; margin-top: 4px; }
+  #rows .col-language { display: block; grid-area: language; margin-top: 4px; }
   #rows .col-finish { display: block; grid-area: finish; }
   #rows .col-evidence { display: block; grid-area: evidence; max-width: none; }
   #rows .col-finish::before, #rows .col-evidence::before {
@@ -496,7 +496,8 @@ tr.rowdetail > td { white-space: normal; background: var(--panel); }
   #collection-table th:nth-child(6) { width: 9%; }
   #collection-table th:nth-child(10) { width: 12%; }
   #collection-table th:nth-child(11) { width: 25%; }
-  #collection-table th:nth-child(18) { width: 10%; }
+  .col-language { display: table-cell !important; color: #000; }
+  .col-number { min-width: 50px; }
   th, td { padding: 2px 4px; overflow-wrap: anywhere; white-space: normal; }
   thead { display: table-header-group; }
   thead th { position: static; }
@@ -505,3 +506,6 @@ tr.rowdetail > td { white-space: normal; background: var(--panel); }
   a { color: #000; text-decoration: none; }
   section { padding-top: 12px; break-inside: auto; }
 }
+
+.col-language { color: var(--confirmed); white-space: normal; }
+.lang-evidence-trigger { text-align: left; line-height: 1.3; }

@@ -80,12 +80,8 @@ THEME_SURFACES = [
     ("confirmed pill", ".pill.confirmed", "color", "text", 4.5),
     ("not-applicable pill", ".pill.not-applicable", "color", "text", 4.5),
     ("treatment badge", "#rows .treatment", "color", "text", 4.5),
-    ("language present", "td.langcell.yes", "color", "text", 4.5),
-    ("language absent", "td.langcell.no", "color", "text", 4.5),
-    ("language count", "td.langcount", "color", "text", 4.5),
+    ("language present", "td.col-language", "color", "text", 4.5),
     ("legend text", ".language-legend", "color", "text", 4.5),
-    ("legend present state", ".language-legend .yes", "color", "text", 4.5),
-    ("legend absent state", ".language-legend .no", "color", "text", 4.5),
     ("sources link", "#sources a", "color", "text", 4.5),
     ("footer text", "footer.sitefoot", "color", "text", 4.5),
 ]
@@ -455,7 +451,7 @@ def main() -> int:
               const primary = getComputedStyle(document.querySelector('button.ghost'));
               const control = getComputedStyle(document.querySelector('.field select'));
               const panel = getComputedStyle(document.querySelector('.controls'));
-              const absent = getComputedStyle(document.querySelector('td.langcell.no'));
+              const absent = getComputedStyle(document.querySelector('td.col-language'));
               const body = getComputedStyle(document.body);
               return {
                 colorScheme: getComputedStyle(document.documentElement).colorScheme,
@@ -692,8 +688,7 @@ def main() -> int:
               f"Localized anniversary rows: {localized}")
 
         required_filters = [
-            "dateStatus", "name", "setCode", "setName", "number", "edition", "variant",
-            "variantName", "rarity", "artist", "finish", "pattern", "marking",
+            "dateStatus", "name", "setCode", "setName", "number", "edition", "language", "rarity", "artist", "finish", "pattern", "marking",
             "markingRole", "size", "distribution", "evidence",
         ]
         missing_filters = [
@@ -756,41 +751,36 @@ def main() -> int:
         page.select_option("#f-name", [])
         page.wait_for_timeout(120)
 
-        # URL values stay compatible; the complement of confirmed does not assert absence.
-        page.select_option("#f-lang-JA", "present")
+        page.select_option("#f-language", ["Japanese"])
         page.wait_for_timeout(120)
-        present = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        page.select_option("#f-lang-JA", "absent")
-        page.wait_for_timeout(120)
-        absent = page.eval_on_selector_all("#rows tr:not(.yearsep)", "els => els.length")
-        check("language confirmation filter partitions the rows",
-              present + absent == EXPECTED_ROWS and present > 0 and absent > 0,
-              f"present={present} absent={absent} total={EXPECTED_ROWS}")
-
-        page.select_option("#f-lang-JA", "")
-        page.wait_for_timeout(120)
-
-        present_cell = page.locator("#rows td.langcell.yes").first
-        absent_cell = page.locator("#rows td.langcell.no").first
-        language_accessibility = {
-            "presentLabel": present_cell.get_attribute("aria-label"),
-            "absentLabel": absent_cell.get_attribute("aria-label"),
-            "presentSnapshot": present_cell.aria_snapshot(),
-            "absentSnapshot": absent_cell.aria_snapshot(),
-            "legend": page.locator("#collection-table-legend").inner_text(),
-        }
-        check("language cells expose confirmation without asserting absence",
-              language_accessibility["presentLabel"].endswith(": confirmed")
-              and language_accessibility["absentLabel"].endswith(": not confirmed")
-              and "confirmed" in language_accessibility["presentSnapshot"]
-              and "not confirmed" in language_accessibility["absentSnapshot"],
-              str(language_accessibility))
-        check("language symbols have a visible non-color legend",
-              "✓ confirmed" in language_accessibility["legend"]
-              and "— not confirmed" in language_accessibility["legend"]
-              and "not proof of absence" in language_accessibility["legend"],
-              language_accessibility["legend"])
-
+        check("language filter selects exact language", page.locator("#rows .col-language").count() > 0
+              and all(t == "Japanese" for t in page.locator("#rows .col-language").all_text_contents()))
+        page.select_option("#f-language", [])
+        localizations = {r["localizationId"]: r["displayName"] for r in
+                         json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["localizations"]}
+        displayed = page.evaluate("JSON.parse(document.querySelector('#data-rows').textContent)")
+        def labels_match(rows):
+            return all(r["languageLabel"] == localizations[r["localizationId"]] for r in rows)
+        check("language labels follow exact localization", labels_match(displayed))
+        check("language label guard rejects seeded wrong localization",
+              not labels_match([dict(displayed[0], languageLabel="incorrect")]))
+        check("matrix removed", page.locator(".langcell, .langcount").count() == 0)
+        for query in ("lang=JA:1", "langMin=1", "variantName=WEST", "unknown=1", "language=Unknown",
+                      "sort=language:wrong", "language=Japanese&unknown=1", "yearFrom=0000"):
+            page.goto(url.split("?", 1)[0].split("#", 1)[0] + "?" + query)
+            page.wait_for_selector("#rows .col-language")
+            check("invalid link resets: " + query, "?" not in page.url
+                  and page.locator("#rows .rowmore").count() == EXPECTED_ROWS)
+        page.goto(url.split("?", 1)[0].split("#", 1)[0] + "?language=Japanese~German&sort=language:d")
+        page.wait_for_selector("#rows .col-language")
+        check("valid multi-language link restores selection",
+              set(page.locator("#rows .col-language").all_text_contents()) == {"Japanese", "German"})
+        page.goto(url.split("?", 1)[0].split("#", 1)[0] + "?language=Japanese&q=zzzznotacard")
+        page.wait_for_selector("#rows .empty")
+        check("valid empty filter retains URL", "language=Japanese" in page.url)
+        page.goto(url.split("?", 1)[0].split("#", 1)[0])
+        page.wait_for_selector("#rows .col-language")
+        page.locator("#collection-table").scroll_into_view_if_needed()
         evidence_trigger = page.locator(".lang-evidence-trigger").first
         evidence_label = evidence_trigger.get_attribute("aria-label") or ""
         evidence_trigger.focus()
@@ -838,25 +828,16 @@ def main() -> int:
         check("year headings are hidden outside chronological order", seps == 0,
               f"{seps} year separator rows while sorted by collector number")
 
-        page.click('th[data-key="lang-JA"] button.sort')
-        page.wait_for_timeout(150)
-        ja_ends = page.evaluate("""() => {
-          const headers = [...document.querySelectorAll('thead th')];
-          const column = headers.findIndex((th) => th.dataset.key === 'lang-JA') + 1;
-          const cells = [...document.querySelectorAll(
-            `#rows tr:not(.yearsep) td:nth-child(${column})`
-          )];
-          return [cells[0].className, cells[cells.length - 1].className];
-        }""")
-        check("language columns are sortable by absence/presence",
-              "no" in ja_ends[0] and "yes" in ja_ends[1],
-              f"first/last classes={ja_ends}")
+        page.click('th[data-key="language"] button.sort')
+        language_values = page.locator("#rows .col-language").all_text_contents()
+        check("language sorts", language_values == sorted(language_values, key=str.lower))
 
         page.click('th[data-key="release"] button.sort')
         page.wait_for_timeout(150)
         seps = page.eval_on_selector_all("#rows tr.yearsep", "els => els.length")
         check("year headings return under release sort", seps > 0, f"{seps} separators")
 
+        page.eval_on_selector_all("details", "els => els.forEach(d => d.open = true)")
         # --- URL round-trip ---
         page.select_option("#f-edition", ["1st Edition"])
         page.click('th[data-key="name"] button.sort')
@@ -870,10 +851,7 @@ def main() -> int:
             return !row || element.querySelector('.col-card').textContent !== row.name
               || element.querySelector('.col-number').textContent !== (row.number || '—')
               || element.querySelector('td.corr a').getAttribute('href') !== row.correctionUrl
-              || [...element.querySelectorAll('.langcell')].some((cell, i) =>
-                cell.classList.contains('yes') !== row.langCodes.includes(languages[i].code)
-                || (cell.dataset.tier && Number(cell.dataset.tier)
-                  !== row.langEvidence[languages[i].code].tier));
+              || element.querySelector('.col-language').textContent !== row.languageLabel;
           }).length;
         }""")
         check("filtered and sorted rows keep their correction and language evidence identity",
@@ -1127,11 +1105,11 @@ def main() -> int:
             return cell ? getComputedStyle(cell).display !== 'none' : null;
           };
           return {
-            core: ['td.img', '.col-card', '.col-set', '.col-number', '.col-variant',
+            core: ['td.img', '.col-card', '.col-set', '.col-number', '.col-language',
                    '.col-finish', '.col-evidence'].map(shown),
             withdrawn: ['.col-release', '.col-expansion', '.col-rarity', '.col-artist',
                         '.col-edition', '.col-pattern', '.col-marking', '.col-marking-role',
-                        '.col-size', '.col-distribution', '.langcount', '.langcell'].map(shown),
+                        '.col-size', '.col-distribution'].map(shown),
             more: shown('.col-more'),
             detailRows: document.querySelectorAll('#rows tr.rowdetail').length,
           };
@@ -1155,7 +1133,7 @@ def main() -> int:
             expanded: button.getAttribute('aria-expanded'),
             visible: panel ? !panel.hidden && getComputedStyle(panel).display !== 'none' : false,
             terms: terms,
-            hasLanguages: terms.includes('Confirmed languages'),
+            hasLanguages: terms.includes('Language'),
             rowAfter: panel ? panel.previousElementSibling.contains(button) : false,
           };
         }""")
@@ -1269,7 +1247,7 @@ def main() -> int:
         # silently shift every later column of that row.
         check("the export is tab-separated with one column per language and no ragged rows",
               export_header[:4] == ["Release", "Card", "Set", "No."]
-              and all(name in export_header for name in ("English", "Japanese"))
+              and "Language" in export_header and "Language count" not in export_header
               and all(len(line.split("\t")) == len(export_header) for line in export_lines[1:]),
               f"header={export_header[:6]}… width={len(export_header)}")
         check("the export starts with a UTF-8 BOM so spreadsheets read the accents",
