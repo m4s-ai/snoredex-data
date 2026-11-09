@@ -97,14 +97,17 @@ RUNTIME_FILES = {"collector_deployment.json"}
 # Whole directories, restricted by extension so a stray file cannot ride along.
 TREES = [
     ("site", {".css", ".js"}),
+    # images/ includes the preview and thumbnail derivatives of every specimen photograph.
     ("images", {".jpg", ".jpeg", ".png", ".webp"}),
-    # Owner specimen photographs, added as claims requiring them arise (#32). Listed here so a
-    # photograph is published when it lands rather than silently dropped from the artifact, which
-    # is what happens to anything not allowlisted. Publication rests on the owner decision in
-    # LICENSE.md, which covers the category rather than a fixed list; the directory need not exist.
-    ("verification/specimens", {".jpg", ".jpeg", ".png", ".webp"}),
+    # verification/specimens/ is deliberately absent: the originals are ~1 GB, over the GitHub
+    # Pages site limit, so a deployment timed out (run 42534207499). site.py embeds their previews
+    # and links each original on GitHub, where the repository keeps it.
     ("LICENSES", {".md", ".txt"}),
 ]
+
+# GitHub Pages rejects a site over 1 GB, and deploy-pages only says so by timing out after ten
+# minutes. Fail the verified artifact first, with headroom.
+MAX_ARTIFACT_BYTES = 900 * 1024 * 1024
 
 # Anything matching these must never appear in the artifact, even if a rule above would admit it.
 FORBIDDEN = [
@@ -219,6 +222,13 @@ def malie_problems(out: Path) -> list[str]:
     return []
 
 
+def size_problems(size: int) -> list[str]:
+    if size <= MAX_ARTIFACT_BYTES:
+        return []
+    return [f"artifact is {size // 2**20} MiB, over the {MAX_ARTIFACT_BYTES // 2**20} MiB "
+            "ceiling below the 1 GB GitHub Pages site limit"]
+
+
 def verify(out: Path) -> int:
     out = validate_output(out)
     if not out.is_dir():
@@ -270,13 +280,15 @@ def verify(out: Path) -> int:
             if target and not target_path.exists() and relative_target not in RUNTIME_FILES:
                 problems.append(f"{name} references a missing local target: {target}")
 
+    size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
+    problems += size_problems(size)
+
     if problems:
         print(f"artifact verification failed ({len(problems)} problems):", file=sys.stderr)
         for problem in problems[:25]:
             print(f"  {problem}", file=sys.stderr)
         return 1
 
-    size = sum(p.stat().st_size for p in out.rglob("*") if p.is_file())
     print(f"artifact verified: {len(present)} files, {size // 1024} KB, allowlist only")
     return 0
 
