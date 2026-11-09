@@ -3,32 +3,21 @@ name: UI browser gate
 on:
   pull_request:
     types: [opened, reopened, synchronize, ready_for_review]
+    # Page behaviour changes only with this code. Regenerated data (index.html, gallery.html,
+    # images, stores) reaches the browser suite at L4 before every deploy, and the embedded table
+    # projection is checked on every pull request by test_collector_catalogue.py.
     paths:
-      - index.html
-      - gallery.html
       - site/app.css
       - site/app.js
       - site/gallery.*
-      - site/gallery-review.json
-      - snorlax_cards.json
-      - analysis_checklist.json
-      - collector_catalogue.json
-      - images/**
-      - verification/specimens/**
       - scripts/site.py
       - scripts/gallery.py
       - scripts/gallery_image_*.py
       - verification/prepare_gallery_images.py
-      - verification/gallery_image*
+      - verification/gallery_image_renderer.js
       - verification/test_gallery_preparation.py
-      - scripts/collector_catalogue.py
-      - scripts/artwork_review.py
-      - scripts/artwork_derivatives.py
       - verification/test_site.py
-      - verification/artwork_review_projection.json
-      - verification/artwork_derivative_manifest.json
       - requirements.txt
-      - llms.txt
       - .github/workflows/ui-pr.yml
   workflow_dispatch:
 

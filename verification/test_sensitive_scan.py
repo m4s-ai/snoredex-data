@@ -16,6 +16,7 @@ sys.path.insert(0, str(ROOT / "verification"))
 import sensitive_scan as scan  # noqa: E402
 
 os.environ.pop("SNOREDEX_MEMO", None)  # the outer gate's memo mode must not switch this test's memo off
+os.environ.pop("SNOREDEX_BLOB_MEMO", None)  # nor the Linux L4 lane's blob-memo switch
 
 AT = "@"
 MAIL = "someone" + AT + "example.org"
@@ -85,6 +86,13 @@ def verify_disabled_memo(root: Path, expected: tuple, counter: list[int]) -> Non
     os.environ["SNOREDEX_MEMO"] = "off"
     assert scan.memo_path(root) is None
     assert scan.scan_history(root) == expected and counter[-1] == 2
+    # Linux L4: steps run cold, but an immutable blob already read is answered from the memo.
+    os.environ["SNOREDEX_BLOB_MEMO"] = "use"
+    try:
+        assert scan.memo_path(root) is not None
+        assert scan.scan_history(root) == expected and counter[-1] == 0
+    finally:
+        os.environ.pop("SNOREDEX_BLOB_MEMO", None)
 
 
 def verify_tree(root: Path) -> None:

@@ -15,6 +15,30 @@ Newest first.
 
 ---
 
+## The site outgrew GitHub Pages and the deploy only timed out
+
+**Trap:** *the published artifact has a size limit: specimen originals stay in the repository, and
+the site carries their derivatives.*
+
+Publish run 42534207499 passed the whole L4 gate and then hung in `deploy-pages` until its
+ten-minute timeout, without saying why. The artifact was 1052 MiB, 977 MB of it full-resolution
+specimen photographs, and GitHub Pages rejects a site over 1 GB. `publish.py` allowlisted
+`verification/specimens/` so that a new photograph would be published when it landed; every intake
+batch added megabytes, and no check measured the sum.
+
+The repository keeps every original. The site embeds each one's preview derivative and links the
+original on GitHub, and the collector catalogue points specimen assets at `raw.githubusercontent.com`
+with path and hash unchanged. The artifact fell to about 190 MiB.
+
+**Now guarded by** `size_problems()` in `scripts/publish.py`, which fails `--verify` above 900 MiB
+so the gate reports growth before a deployment can time out, and by
+`verification/test_collector_catalogue.py`, which fails when a published page points at a specimen
+original.
+
+*PR #548.*
+
+---
+
 ## A missing stamp was treated as a guess
 
 **Trap:** *When a card has exactly two documented versions that differ by a visible mark, a
@@ -570,11 +594,18 @@ evidence intake slower than the evidence. The fix is the rule in the trap: a blo
 it is scanned once per scanner version, and a step is skipped only when everything it was observed
 to read is byte-identical — never on a declared dependency list, which would drift like any prose.
 
+The Linux L4 lane, the reference run that builds the published artifact, still kept the memo off,
+so every publish reread the whole history: 17,053 blobs, 6.6 GB, 258 s of a 518 s leg. A reference
+run must run every step, not reread an immutable blob, so that lane now keeps only the scanner's
+blob memo, restored from `main` (#553); Windows L4 replays the memo `main` seeded for the same tree
+(#550). The leg fell to 233 s.
+
 **Now guarded by** `verification/test_check_memo.py` and `verification/test_sensitive_scan.py`
 (the memo must miss on every kind of change and never store an unobservable step), the cold/warm
-equivalence of `review_findings.py`, and the `memo-seed` reference run on every push to `main`.
+equivalence of `review_findings.py`, the `memo-seed` reference run on every push to `main`, and
+`verification/test_gate_handoff.py`, which pins the blob-memo switch to the Linux L4 step.
 
-*Issue #460.*
+*Issue #460; PRs #550 and #553.*
 
 ## The Windows leg cannot report a path it cannot check out
 
