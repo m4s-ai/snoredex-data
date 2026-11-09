@@ -10,6 +10,8 @@ to #478. This document defines the preparation interface used by later batches.
 - `scripts/site.py` generates `verification/gallery_image_inventory.json` for every gallery item.
   It joins catalogue assets, the retained artwork projection, physical-printing specimen references
   and explicitly representative gallery images. Source-frame dimensions and hashes are recorded.
+  A specimen citation to the item's existing finish-printing ID supplies exact scope for that
+  item only. The citation leaves the finish projection and verification status independent.
   Remote candidates require retained local bytes before preparation.
   Local sources remain unclassified until recipe review: the SPEC directory contains both
   physical photographs and digital renders. The reviewed recipe's `mediaKind` determines priority.

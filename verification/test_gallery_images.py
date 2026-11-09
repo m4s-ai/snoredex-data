@@ -14,7 +14,7 @@ from gallery_image_assets import (
     validate_record,
     unavailable_targets, published_gallery_images,
 )
-from gallery_image_inventory import INPUTS, inventory_inputs, source_info
+from gallery_image_inventory import INPUTS, inventory_inputs, item_candidates, source_info
 
 
 def fixture(root):
@@ -68,6 +68,21 @@ def check_recipe_integrity(root, inventory, recipe):
     path.write_bytes(original + b"changed")
     must_reject(lambda: validate_recipe(recipe, inventory, root))
     path.write_bytes(original)
+
+
+def check_finish_printing_citation(recipe):
+    source = recipe["source"]
+    member = {"images": [{"src": source, "observationId": "specimen:SPEC-0001"}]}
+    assets = {"asset": {"assetId": "asset", "path": source}}
+    item = {"itemId": "fixture-item", "imageAssetId": "asset", "imageScope": "card-release",
+            "sourcePrintingId": "F0001-P01"}
+    citations = {"F0001-P01": {"SPEC-0001"}}
+    assert item_candidates(item, member, assets, {}, citations) == [{
+        "source": source, "scope": "exact-printing", "identityBasis": "finish-printing-citation",
+        "sourceRef": "specimen:SPEC-0001",
+    }]
+    sibling = {**item, "sourcePrintingId": "F0001-P02"}
+    assert item_candidates(sibling, member, assets, {}, citations)[0]["scope"] == "representative"
 
 
 def check_quality_selection(recipe):
@@ -160,6 +175,7 @@ def main():
         root = Path(directory)
         inventory, recipe = fixture(root)
         check_recipe_integrity(root, inventory, recipe)
+        check_finish_printing_citation(recipe)
         check_quality_selection(recipe)
         check_specimen_media(root, inventory, recipe)
         check_source_less_targets(root, inventory)

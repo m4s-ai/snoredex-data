@@ -3,9 +3,10 @@
     "generatedBy": "scripts/site.py",
     "schemaVersion": 1,
     "inputs": {
-      "collector_catalogue.json": "6af31e5b4ede6bfca889b3a2b6df4ff27f9f6a7d4d9589126ea57df38cc190ce",
-      "verification/artwork_review_projection.json": "cde6b607bce5beccf62c89247ad60c4abd98f26f49cd8493bd222d666912fe95",
-      "site/gallery-review.json": "17ec06e7ace5f4e8acc08d6cc52bf31571b142e25822bbabb2d4fb2c51554523"
+      "collector_catalogue.json": "a8668d93f6a75ce863951bddaafbdf2b768749003d21dd6dd0e8bc7d8e99fc7b",
+      "verification/artwork_review_projection.json": "e48c2a7b2e352d4c48466095d8f51a139e9766d7d66324c80f97c2b0bcb70455",
+      "site/gallery-review.json": "17ec06e7ace5f4e8acc08d6cc52bf31571b142e25822bbabb2d4fb2c51554523",
+      "verification/specimens.json": "047f396d645c187699c0cf9248ab5baaf5b6473e73a149aa3fea0ec23020eaa3"
     },
     "note": "Generated inventory; dimensions describe the source frame, not a reviewed card crop."
   },
@@ -8899,6 +8900,106 @@
         960
       ],
       "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0700.png": {
+      "path": "verification/specimens/SPEC-0700.png",
+      "kind": "unclassified",
+      "sha256": "03b48f5a5feec56cd01122d5e344ead9ddef1fe47d1d81a06be1a310949269cb",
+      "dimensions": [
+        1053,
+        1467
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0701.png": {
+      "path": "verification/specimens/SPEC-0701.png",
+      "kind": "unclassified",
+      "sha256": "d955ca18567d65641939b42d65e6417e8451fcec6213c73c789b6effb97c75f4",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0702.png": {
+      "path": "verification/specimens/SPEC-0702.png",
+      "kind": "unclassified",
+      "sha256": "7ab498cf71c3701d8b27bdbd53f5050ac46b52ea05b2ba9a5fbed3faf2c4eed2",
+      "dimensions": [
+        861,
+        1158
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0703.png": {
+      "path": "verification/specimens/SPEC-0703.png",
+      "kind": "unclassified",
+      "sha256": "7488861dfff67c33f4f220ae6b2b16c1027ea3956407ab91b1901a0963243129",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0704.png": {
+      "path": "verification/specimens/SPEC-0704.png",
+      "kind": "unclassified",
+      "sha256": "44a76e8da1edc1227360116a47912942ee24e6302a92fefb7e72e03ca30b20a4",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0705.png": {
+      "path": "verification/specimens/SPEC-0705.png",
+      "kind": "unclassified",
+      "sha256": "4090a1775cb2709829e0ebf57f5247030c5297292547c48ef1e3f4aa56f969c2",
+      "dimensions": [
+        1199,
+        1599
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0706.png": {
+      "path": "verification/specimens/SPEC-0706.png",
+      "kind": "unclassified",
+      "sha256": "ae0e551f3d19287b3f5858c11a0408189ae76fee317075f3fd6dd9882840d67b",
+      "dimensions": [
+        1600,
+        1600
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0707.png": {
+      "path": "verification/specimens/SPEC-0707.png",
+      "kind": "unclassified",
+      "sha256": "a8f623db1e1437736c576e6e0e06fae06fee41f4b72a26c6544545989a2f9d19",
+      "dimensions": [
+        1080,
+        1440
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0708.png": {
+      "path": "verification/specimens/SPEC-0708.png",
+      "kind": "unclassified",
+      "sha256": "017b8ea86871a03e132877ca5a7c2b8862af27bba4e2a34a02905000e0c801a6",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "resolution": "crop-review-needed"
+    },
+    "verification/specimens/SPEC-0709.png": {
+      "path": "verification/specimens/SPEC-0709.png",
+      "kind": "unclassified",
+      "sha256": "3309463630f2ab99f08f85c0aed8db824f1fbdfde879735794d2819f070a23b5",
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "resolution": "crop-review-needed"
     }
   },
   "items": [
@@ -11362,9 +11463,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0264.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-33d051b6-7c7b-5e48-8207-0284789768d9"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0264"
         }
       ],
       "legacyImage": null,
@@ -12814,9 +12915,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0294.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-c2d3d701-7f32-5339-b240-2e2bf5710b72"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0294"
         }
       ],
       "legacyImage": null,
@@ -13508,9 +13609,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0242.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-64e209ef-65ed-59de-b916-7050fc58595d"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0242"
         }
       ],
       "legacyImage": null,
@@ -13922,13 +14023,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0120"
+        },
+        {
+          "source": "verification/specimens/SPEC-0707.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0707"
+        },
+        {
+          "source": "verification/specimens/SPEC-0708.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0708"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0708"
     },
     {
       "itemId": "item-28831041-e122-588e-bec3-058620ccbc5a",
@@ -15552,9 +15665,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0489.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-c9424381-df05-5602-98f1-6c14ea4d53ab"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0489"
         }
       ],
       "legacyImage": null,
@@ -17618,9 +17731,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0475.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-8eb51cf6-5f71-5557-af03-cc3cb2e23673"
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0475"
         }
       ],
       "legacyImage": null,
@@ -18079,13 +18192,25 @@
         {
           "source": "images/JU_27_Snorlax_V2_273824.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0089"
+        },
+        {
+          "source": "verification/specimens/SPEC-0701.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0701"
+        },
+        {
+          "source": "verification/specimens/SPEC-0702.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0702"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0702"
     },
     {
       "itemId": "item-4dcb2672-7488-5679-af7f-ebd58fe84990",
@@ -18148,13 +18273,25 @@
         {
           "source": "images/JU_27_Snorlax_V2_273824.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0089"
+        },
+        {
+          "source": "verification/specimens/SPEC-0701.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0701"
+        },
+        {
+          "source": "verification/specimens/SPEC-0702.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0702"
         }
       ],
       "legacyImage": "images/JU_27_Snorlax_V2_273824.jpg",
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0701"
     },
     {
       "itemId": "item-4eadeaf8-dfd8-58a8-a1ee-d1d05fe2f422",
@@ -18355,9 +18492,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0444.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-e5ae6323-c0d3-556c-9b7d-8241551f4a27"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0444"
         }
       ],
       "legacyImage": null,
@@ -18982,9 +19119,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0243.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-8cc4f6d8-bc9f-50ca-aeb3-abea3237110d"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0243"
         }
       ],
       "legacyImage": null,
@@ -19576,13 +19713,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0119"
+        },
+        {
+          "source": "verification/specimens/SPEC-0703.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0703"
+        },
+        {
+          "source": "verification/specimens/SPEC-0704.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0704"
         }
       ],
       "legacyImage": "images/JU_11_Snorlax_V1_273808.jpg",
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0703"
     },
     {
       "itemId": "item-5cf644a0-990f-5f2c-8399-f30ec7d89b1d",
@@ -22111,6 +22260,12 @@
           "scope": "representative",
           "identityBasis": "legacy-product",
           "sourceRef": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f"
+        },
+        {
+          "source": "verification/specimens/SPEC-0709.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0709"
         }
       ],
       "legacyImage": null,
@@ -23396,13 +23551,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0120"
+        },
+        {
+          "source": "verification/specimens/SPEC-0707.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0707"
+        },
+        {
+          "source": "verification/specimens/SPEC-0708.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0708"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0707"
     },
     {
       "itemId": "item-7ce23250-2233-516d-92b9-92145fb06406",
@@ -26033,13 +26200,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0121"
+        },
+        {
+          "source": "verification/specimens/SPEC-0705.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0705"
+        },
+        {
+          "source": "verification/specimens/SPEC-0706.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0706"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0706"
     },
     {
       "itemId": "item-9699b852-dfee-5044-8a71-84fa39833523",
@@ -28154,8 +28333,8 @@
         },
         {
           "source": "verification/specimens/SPEC-0120.jpg",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0120"
         }
       ],
@@ -28305,9 +28484,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0169.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-39b6b795-7eed-5137-87a4-cfd9f7dc9648"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0169"
         }
       ],
       "legacyImage": null,
@@ -28440,13 +28619,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0121"
+        },
+        {
+          "source": "verification/specimens/SPEC-0705.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0705"
+        },
+        {
+          "source": "verification/specimens/SPEC-0706.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0706"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0705"
     },
     {
       "itemId": "item-a50d6bc6-40fc-5a9c-9395-2cf86cc7c247",
@@ -29485,13 +29676,25 @@
         {
           "source": "images/JU_11_Snorlax_V1_273808.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-c3cc3a3e-e8c1-597b-92e3-9649d1dc2b1b"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0119"
+        },
+        {
+          "source": "verification/specimens/SPEC-0703.png",
+          "scope": "representative",
+          "identityBasis": "release-image",
+          "sourceRef": "specimen:SPEC-0703"
+        },
+        {
+          "source": "verification/specimens/SPEC-0704.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0704"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0704"
     },
     {
       "itemId": "item-b1ce4a75-fbb7-543f-a543-13f3eba1cf2a",
@@ -31192,14 +31395,14 @@
         },
         {
           "source": "verification/specimens/SPEC-0129.jpg",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0129"
         },
         {
           "source": "verification/specimens/SPEC-0130.jpg",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0130"
         },
         {
@@ -32141,9 +32344,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0629.jpg",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-f4218db9-de84-5793-bfbf-d474c06f1fae"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0629"
         }
       ],
       "legacyImage": null,
@@ -33335,13 +33538,19 @@
         {
           "source": "images/JU_27_Snorlax_V2_273824.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-58df8f92-36b5-51f1-865a-592ea7acde6f"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0090"
+        },
+        {
+          "source": "verification/specimens/SPEC-0709.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0709"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0709"
     },
     {
       "itemId": "item-d3538ef6-c49b-53aa-bdcc-e14b7ff041fd",
@@ -35701,11 +35910,17 @@
           "scope": "exact-printing",
           "identityBasis": "exact-printing",
           "sourceRef": "asset-6de555a7-5438-5e42-8c1e-2f50bfa703e5"
+        },
+        {
+          "source": "verification/specimens/SPEC-0700.png",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
+          "sourceRef": "specimen:SPEC-0700"
         }
       ],
       "legacyImage": "verification/specimens/SPEC-0204.jpg",
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-01-spec-0700"
     },
     {
       "itemId": "item-e716bb22-3016-5c2d-899a-7fdd8501a7d0",
@@ -37591,14 +37806,14 @@
         },
         {
           "source": "verification/specimens/SPEC-0579.jpg",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0579"
         },
         {
           "source": "verification/specimens/SPEC-0580.jpg",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0580"
         }
       ],
@@ -38114,9 +38329,9 @@
         },
         {
           "source": "verification/specimens/SPEC-0156.png",
-          "scope": "representative",
-          "identityBasis": "card-release",
-          "sourceRef": "asset-aa4b1fd4-6326-5488-8f83-fb0a68fb20e4"
+          "scope": "exact-printing",
+          "identityBasis": "physical-printing-specimen",
+          "sourceRef": "specimen:SPEC-0156"
         }
       ],
       "legacyImage": null,
