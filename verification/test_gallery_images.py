@@ -3,6 +3,7 @@
 import copy
 import json
 from pathlib import Path
+import re
 import sys
 import tempfile
 
@@ -10,9 +11,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 from artwork_derivatives import encode_png
 from gallery_image_assets import (
-    apply_prepared, crop_dimensions, recipe_digest, select_prepared, validated_recipes, validate_recipe,
-    validate_record,
-    unavailable_targets, published_gallery_images,
+    MANIFEST, MIN_WIDTH, RECIPES, apply_prepared, crop_dimensions, read_store, recipe_digest, select_prepared,
+    validated_recipes, validate_recipe, validate_record, unavailable_targets, published_gallery_images,
 )
 from gallery_image_inventory import INPUTS, inventory_inputs, item_candidates, source_info
 
@@ -170,6 +170,74 @@ def check_source_less_targets(root, inventory):
     must_reject(lambda: validated_recipes(inventory, root))
 
 
+def require(condition, item_id, message):
+    if not condition:
+        raise ValueError(f"{item_id}: {message}")
+
+
+def published_state(root):
+    page = (root / "gallery.html").read_text(encoding="utf-8")
+    cards = re.search(r'<script[^>]*id="gallery-data"[^>]*>(.*?)</script>', page, re.S).group(1)
+    return {"cards": json.loads(cards), "inventory": read_store(root, "verification/gallery_image_inventory.json"),
+            "store": read_store(root, RECIPES), "records": read_store(root, MANIFEST)["entries"]}
+
+
+def image_need_reasons(store, records):
+    reviewed = {target["itemId"] for recipe in store["recipes"] for target in recipe["targets"]
+                if recipe["review"]["status"] == "rejected"
+                or records.get(recipe["id"], {}).get("quality") == "below-minimum"}
+    return reviewed | {row["itemId"] for row in store.get("unavailableTargets", []) if row["note"].strip()}
+
+
+def check_accepted_card(card, item, choice, root):
+    item_id = card["id"]
+    require(choice, item_id, "accepted without a selected prepared recipe")
+    recipe, record, target = choice
+    require(item["selectedRecipe"] == card["imageRecipe"] == recipe["id"], item_id, "selected recipe differs")
+    paths = [row["path"] for row in card["imageSizes"]]
+    require(paths == [row["path"] for row in record["images"]], item_id, "srcset differs from the manifest")
+    require(card["thumbnail"] == paths[0] and card["preview"] == paths[-1], item_id, "preview is not a variant")
+    require(all(path.startswith("images/gallery/") and (root / path).is_file() for path in paths),
+            item_id, "prepared image missing")
+    require(card["imageWidth"] == record["images"][-1]["width"] >= MIN_WIDTH, item_id, "width below minimum")
+    require(card["imageSource"].endswith(recipe["source"]) and (root / recipe["source"]).is_file(),
+            item_id, "imageSource is not the recipe's retained original")
+    require(card["imageScope"] == target["scope"], item_id, "imageScope differs from the recipe target")
+
+
+def check_published_items(state, root=ROOT):
+    """Join every published card to its inventory item, recipe and prepared images."""
+    cards, items = state["cards"], {item["itemId"]: item for item in state["inventory"]["items"]}
+    require(len(cards) == len(items) == len({card["id"] for card in cards} & items.keys()),
+            "gallery", "one card per inventory item")
+    selected = select_prepared(state["store"]["recipes"], state["records"])
+    reasons = image_need_reasons(state["store"], state["records"])
+    for card in cards:
+        item = items[card["id"]]
+        if item["status"] == "accepted":
+            check_accepted_card(card, item, selected.get(card["id"]), root)
+            continue
+        require(item["status"] == "needs-image" and not item.get("selectedRecipe"), card["id"], "unknown status")
+        require(not any(card.get(key) for key in ("thumbnail", "preview", "imageSource", "imageSizes")),
+                card["id"], "needs-image card shows an image")
+        require(card["id"] in reasons, card["id"], "needs-image without a reviewed rejection or unavailable note")
+
+
+def check_published_violations(state):
+    accepted = next(index for index, card in enumerate(state["cards"]) if card.get("imageRecipe"))
+    missing = next(index for index, card in enumerate(state["cards"]) if not card.get("preview"))
+    scope = {"exact-printing": "representative"}.get(state["cards"][accepted]["imageScope"], "exact-printing")
+    seeds = [(accepted, {"imageScope": scope}), (accepted, {"imageWidth": MIN_WIDTH - 1}),
+             (accepted, {"imageSource": "verification/specimens/SPEC-0001.png"}),
+             (accepted, {"preview": "images/gallery/missing.webp"}), (missing, {"preview": "images/gallery/x.webp"})]
+    for index, change in seeds:
+        seeded = copy.deepcopy(state)
+        seeded["cards"][index].update(change)
+        must_reject(lambda: check_published_items(seeded))
+    must_reject(lambda: check_published_items({**state, "cards": state["cards"] + [state["cards"][accepted]]}))
+    must_reject(lambda: check_published_items({**state, "store": {**state["store"], "unavailableTargets": []}}))
+
+
 def main():
     with tempfile.TemporaryDirectory() as directory:
         root = Path(directory)
@@ -180,7 +248,11 @@ def main():
         check_specimen_media(root, inventory, recipe)
         check_source_less_targets(root, inventory)
         check_stale_outputs(root, inventory, recipe)
-    print("Gallery image checks passed, including seeded identity, source and stale-output violations.")
+    state = published_state(ROOT)
+    check_published_items(state)
+    check_published_violations(state)
+    print(f"Gallery image checks passed for {len(state['cards'])} published items, "
+          "including seeded identity, source, scope and stale-output violations.")
 
 
 if __name__ == "__main__":

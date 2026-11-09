@@ -90,7 +90,13 @@ original was never enlarged before intake.
    check's read-only tree snapshot then reports the browser suite's writes as a change.
 6. Check the gallery at desktop/mobile widths and high pixel density. Prepared images use srcset
    and cap their displayed width against available pixels. The lightbox links the original.
-   Record batch IDs, commit, checks and unresolved image needs in its issue.
+   The per-item data join needs no browser. `verification/test_gallery_images.py` checks every
+   published card against its inventory item, selected recipe and manifest images, and every
+   pull request runs it. An accepted card must have existing srcset variants that are at least
+   600px wide, the recipe's retained original, and its target scope. A `needs-image` card shows no
+   image and must have a rejected or below-minimum recipe, or an `unavailableTargets` note. Look
+   in the browser only for presentation. Record batch IDs, commit, checks and unresolved image
+   needs in its issue.
 
 Each delivery follows the existing batch execution contract and full release gate. The browser
 suite includes synthetic full-detail PNG/JPEG, perspective, rotation, responsive display, retry,
