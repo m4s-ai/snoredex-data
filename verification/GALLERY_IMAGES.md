@@ -92,10 +92,11 @@ original was never enlarged before intake.
    and cap their displayed width against available pixels. The lightbox links the original.
    The per-item data join needs no browser. `verification/test_gallery_images.py` checks every
    published card against its inventory item, selected recipe and manifest images, and every
-   pull request runs it. An accepted card must have existing srcset variants that are at least
-   600px wide, the recipe's retained original, and its target scope. A `needs-image` card shows no
-   image and must have a rejected or below-minimum recipe, or an `unavailableTargets` note. Look
-   in the browser only for presentation. Record batch IDs, commit, checks and unresolved image
+   pull request runs it. An accepted card's srcset variants must exist, with the full-size variant
+   at least 600px wide; it must cite the recipe's retained original and its target scope. A
+   `needs-image` card shows no image and must have a rejected or below-minimum recipe, or an
+   `unavailableTargets` note. An `awaiting-batch` item has neither yet and keeps its legacy image.
+   Look in the browser only for presentation. Record batch IDs, commit, checks and unresolved image
    needs in its issue.
 
 Each delivery follows the existing batch execution contract and full release gate. The browser

@@ -205,37 +205,68 @@ def check_accepted_card(card, item, choice, root):
     require(card["imageScope"] == target["scope"], item_id, "imageScope differs from the recipe target")
 
 
+def check_unprepared_card(card, item, reasons, batched):
+    item_id = card["id"]
+    require(not (item.get("selectedRecipe") or card.get("imageRecipe") or card.get("imageSizes")),
+            item_id, "unprepared card carries a prepared image")
+    if item["status"] == "awaiting-batch":  # no recipe yet: keeps its legacy image until its batch begins
+        require(item_id not in batched, item_id, "batched item still awaits its batch")
+        return
+    require(item["status"] == "needs-image", item_id, "unknown status")
+    require(not any(card.get(key) for key in ("thumbnail", "preview", "imageSource")),
+            item_id, "needs-image card shows an image")
+    require(item_id in reasons, item_id, "needs-image without a reviewed rejection or unavailable note")
+
+
 def check_published_items(state, root=ROOT):
     """Join every published card to its inventory item, recipe and prepared images."""
-    cards, items = state["cards"], {item["itemId"]: item for item in state["inventory"]["items"]}
+    cards, items, store = state["cards"], {item["itemId"]: item for item in state["inventory"]["items"]}, state["store"]
     require(len(cards) == len(items) == len({card["id"] for card in cards} & items.keys()),
             "gallery", "one card per inventory item")
-    selected = select_prepared(state["store"]["recipes"], state["records"])
-    reasons = image_need_reasons(state["store"], state["records"])
+    selected = select_prepared(store["recipes"], state["records"])
+    reasons = image_need_reasons(store, state["records"])
+    batched = {target["itemId"] for recipe in store["recipes"] for target in recipe["targets"]}
+    batched |= {row["itemId"] for row in store.get("unavailableTargets", [])}
     for card in cards:
         item = items[card["id"]]
         if item["status"] == "accepted":
             check_accepted_card(card, item, selected.get(card["id"]), root)
-            continue
-        require(item["status"] == "needs-image" and not item.get("selectedRecipe"), card["id"], "unknown status")
-        require(not any(card.get(key) for key in ("thumbnail", "preview", "imageSource", "imageSizes")),
-                card["id"], "needs-image card shows an image")
-        require(card["id"] in reasons, card["id"], "needs-image without a reviewed rejection or unavailable note")
+        else:
+            check_unprepared_card(card, item, reasons, batched)
+
+
+def unprepared_variant(state, index, status, show=None, unbatch=True, note=False):
+    """Turn the accepted card at index into an unprepared item, independent of what the data holds."""
+    seeded = copy.deepcopy(state)
+    card = seeded["cards"][index]
+    next(row for row in seeded["inventory"]["items"] if row["itemId"] == card["id"]).update(
+        status=status, selectedRecipe=None)
+    card.update(dict.fromkeys(("thumbnail", "preview", "imageSource", "imageScope", "imageSizes", "imageRecipe")))
+    card.update(show or {})
+    for recipe in seeded["store"]["recipes"] if unbatch else []:
+        recipe["targets"] = [target for target in recipe["targets"] if target["itemId"] != card["id"]]
+    if note:
+        seeded["store"].setdefault("unavailableTargets", []).append({"itemId": card["id"], "note": "Seeded need."})
+    return seeded
 
 
 def check_published_violations(state):
     accepted = next(index for index, card in enumerate(state["cards"]) if card.get("imageRecipe"))
-    missing = next(index for index, card in enumerate(state["cards"]) if not card.get("preview"))
+    check_published_items(unprepared_variant(state, accepted, "awaiting-batch"))
+    check_published_items(unprepared_variant(state, accepted, "needs-image", note=True))
     scope = {"exact-printing": "representative"}.get(state["cards"][accepted]["imageScope"], "exact-printing")
-    seeds = [(accepted, {"imageScope": scope}), (accepted, {"imageWidth": MIN_WIDTH - 1}),
-             (accepted, {"imageSource": "verification/specimens/SPEC-0001.png"}),
-             (accepted, {"preview": "images/gallery/missing.webp"}), (missing, {"preview": "images/gallery/x.webp"})]
-    for index, change in seeds:
+    seeds = [{"imageScope": scope}, {"imageWidth": MIN_WIDTH - 1},
+             {"imageSource": "verification/specimens/SPEC-0001.png"}, {"preview": "images/gallery/missing.webp"}]
+    for change in seeds:
         seeded = copy.deepcopy(state)
-        seeded["cards"][index].update(change)
+        seeded["cards"][accepted].update(change)
         must_reject(lambda: check_published_items(seeded))
-    must_reject(lambda: check_published_items({**state, "cards": state["cards"] + [state["cards"][accepted]]}))
-    must_reject(lambda: check_published_items({**state, "store": {**state["store"], "unavailableTargets": []}}))
+    for seeded in (unprepared_variant(state, accepted, "needs-image", {"preview": "images/gallery/x.webp"}, note=True),
+                   unprepared_variant(state, accepted, "needs-image"),
+                   unprepared_variant(state, accepted, "awaiting-batch", unbatch=False),
+                   unprepared_variant(state, accepted, "awaiting-batch", {"imageRecipe": "seeded"}),
+                   {**state, "cards": state["cards"] + [state["cards"][accepted]]}):
+        must_reject(lambda: check_published_items(seeded))
 
 
 def main():
