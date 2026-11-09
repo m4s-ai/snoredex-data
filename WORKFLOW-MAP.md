@@ -354,7 +354,12 @@ The following operational scripts are intentionally outside the normal offline D
 - `scripts/measure_discovery.py` reports retained-run selection, raw I/O bytes, parser cost and
   projection cost for both modes without changing generated files.
 - `verification/verify_finish_sources.py` performs the explicit live finish-source check.
-- `scripts/publish.py` assembles and verifies the allowlisted public artifact.
+- `scripts/publish.py` assembles and verifies the allowlisted public artifact. It leaves the
+  specimen originals in `verification/specimens/` out: they alone exceed the 1 GB GitHub Pages
+  site limit. The site embeds their `images/` derivatives and links each original on GitHub, and
+  the collector catalogue gives specimen assets a `raw.githubusercontent.com` URL. `--verify` fails
+  an artifact over 900 MiB, before `deploy-pages` could only time out
+  ([LESSONS](LESSONS.md#the-site-outgrew-github-pages-and-the-deploy-only-timed-out)).
 - `scripts/collector_deployment.py` binds the deployment manifest to the deployed commit.
 - `scripts/absence_model.py` supplies absence/application semantics to the evidence layer.
 - `scripts/measure_workflow.py` measures the selected core/CI/Pages lanes, declared store
@@ -494,10 +499,10 @@ distribution, and card size. It is not derived from list order.
 
 | Event | Gate | Expensive checks | Artifact behavior |
 |---|---|---|---|
-| Draft PR | reusable L3 gate skipped | UI paths still run the Chromium behavior lane | no release artifact |
-| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows; discovery-input paths add full retained-run validation on Linux; UI paths add Chromium behavior lane | gate manifest only |
-| Push to `main` | publication/history audit, including P6/P7 | sensitive-history and commit-identity checks at `GITHUB_SHA` | no second build |
-| Manual Pages run | L4 | live finish sources, Linux browser, allowlist, publication approval | download the already verified `pages-artifact` |
+| Draft PR | reusable L3 gate and Chromium lane skipped | none | no release artifact |
+| Ready PR | L3 | offline deterministic suite on Ubuntu + Windows and full retained-run validation on Linux, both replayed by the memo where unchanged; page-code paths add the Chromium behavior lane | gate manifest only |
+| Push to `main` | publication/history audit, including P6/P7; `memo-seed` | sensitive-history and commit-identity checks at `GITHUB_SHA`; full core gate on both platforms, refreshing the memo | no second build |
+| Manual Pages run | L4 | Linux: step-memo-free reference run (P4/P6 blob memo only), live finish sources, browser, allowlist, 900 MiB size ceiling, publication approval; Windows: path portability, replaying `main`'s memo | download the already verified `pages-artifact` |
 
 ## 7. Boundaries
 

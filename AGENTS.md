@@ -354,14 +354,17 @@ When a queue grows because the corpus grew, record the cause beside the number.
 - **Attribute honestly.** End commit messages with the `Co-Authored-By` trailer of the agent and
   model that actually made the commit, as your runtime supplies it; never name another model.
 - Open a PR as a draft until the local gate is green; drafts skip CI. When the diff touches
-  `ui-pr.yml` paths, run `python verification/test_site.py` before pushing.
-- The release gate runs on Ubuntu and Windows. The Windows leg keeps the filesystem-touching steps
-  (generator determinism, `git diff --exit-code`, `review_findings.py`, `publish.py --verify`) for
-  path portability; the browser suite is Linux-only.
+  `ui-pr.yml` paths (page code only), run `python verification/test_site.py` before pushing. A
+  check that only reads generated data belongs in an offline test, never the browser suite.
+- The release gate runs on Ubuntu and Windows. Windows checks path portability and at L4 replays
+  the memo `main` seeded; Linux L4 is the step-memo-free reference run that builds the artifact.
+  The browser suite is Linux-only.
 - **Merging never publishes.** Pages deployment is a manual `workflow_dispatch` run, gated on
   `verification/publication_gate.py` and the approvals recorded in `publication-decisions.json`,
   and it verifies the repository's real visibility against the GitHub API. Publishing is the one
   step in this project that cannot be undone; see the authority table for who may start it.
+  Specimen originals stay off Pages, and `publish.py --verify` fails an artifact over 900 MiB
+  ([LESSONS](LESSONS.md#the-site-outgrew-github-pages-and-the-deploy-only-timed-out)).
 - Licence grants are **in force** (`M4S.Collection`, 2026-07-26): a mixed work, not OSI open
   source — PolyForm Noncommercial 1.0.0 for code, CC BY-NC-SA 4.0 for the data selection,
   arrangement and annotation ([`LICENSE.md`](LICENSE.md)).
