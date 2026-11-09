@@ -575,9 +575,9 @@ class CardDiscoveryTests(unittest.TestCase):
                     "status": status,
                     "contractHash": discovery.content_hash(run_contract),
                     "capabilityGraphHash": run_capability_hash,
-                }), encoding="utf-8")
+                }), encoding="utf-8", newline="\n")
                 (run_dir / "contract.json").write_text(
-                    json.dumps(run_contract), encoding="utf-8"
+                    json.dumps(run_contract), encoding="utf-8", newline="\n"
                 )
             with (
                 mock.patch.object(discovery, "RUNS_DIR", runs_dir),
@@ -615,9 +615,9 @@ class CardDiscoveryTests(unittest.TestCase):
                     "runId": run_id, "status": "complete",
                     "contractHash": discovery.content_hash(contract),
                     "capabilityGraphHash": capability_hash,
-                }), encoding="utf-8")
+                }), encoding="utf-8", newline="\n")
                 (run_dir / "contract.json").write_text(
-                    json.dumps(contract), encoding="utf-8"
+                    json.dumps(contract), encoding="utf-8", newline="\n"
                 )
             with (
                 mock.patch.object(discovery, "RUNS_DIR", runs_dir),
@@ -657,7 +657,7 @@ class CardDiscoveryTests(unittest.TestCase):
                 run_dir = runs_dir / run_id
                 run_dir.mkdir()
                 (run_dir / "contract.json").write_text(
-                    json.dumps(snapshot), encoding="utf-8"
+                    json.dumps(snapshot), encoding="utf-8", newline="\n"
                 )
                 (run_dir / "manifest.json").write_text(
                     json.dumps({
@@ -665,7 +665,7 @@ class CardDiscoveryTests(unittest.TestCase):
                         "status": "complete",
                         "contractHash": discovery.content_hash(snapshot),
                     }),
-                    encoding="utf-8",
+                    encoding="utf-8", newline="\n",
                 )
             with (
                 mock.patch.object(discovery, "RUNS_DIR", runs_dir),
@@ -703,9 +703,9 @@ class CardDiscoveryTests(unittest.TestCase):
             source_dir = runs_dir / source_id
             source_raw = source_dir / "raw" / "fixture-slice"
             source_raw.mkdir(parents=True)
-            (source_raw / "page.html").write_text("retained", encoding="utf-8")
+            (source_raw / "page.html").write_text("retained", encoding="utf-8", newline="\n")
             (source_dir / "contract.json").write_text(
-                json.dumps(contract), encoding="utf-8"
+                json.dumps(contract), encoding="utf-8", newline="\n"
             )
             source_request = {
                 **acquisition,
@@ -720,7 +720,7 @@ class CardDiscoveryTests(unittest.TestCase):
                 "status": "complete",
                 "contractHash": discovery.content_hash(contract),
                 "requests": [source_request],
-            }), encoding="utf-8")
+            }), encoding="utf-8", newline="\n")
 
             current_id = "20260820T122400Z"
             current_dir = runs_dir / current_id
@@ -738,7 +738,7 @@ class CardDiscoveryTests(unittest.TestCase):
                 "failures": [{"sliceId": "fixture-slice"}],
             }
             (current_dir / "manifest.json").write_text(
-                json.dumps({**manifest, "status": "incomplete"}), encoding="utf-8"
+                json.dumps({**manifest, "status": "incomplete"}), encoding="utf-8", newline="\n"
             )
             with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
                 discovery.reuse_unfinished_requests(current_dir, manifest, source_id)
@@ -761,18 +761,18 @@ class CardDiscoveryTests(unittest.TestCase):
             second_source_request["sliceId"] = "fixture-slice-2"
             second_source_raw = source_dir / "raw" / "fixture-slice-2"
             second_source_raw.mkdir()
-            (second_source_raw / "page.html").write_text("second", encoding="utf-8")
+            (second_source_raw / "page.html").write_text("second", encoding="utf-8", newline="\n")
             (source_dir / "manifest.json").write_text(json.dumps({
                 "runId": source_id,
                 "status": "complete",
                 "contractHash": discovery.content_hash(contract),
                 "requests": [source_request, second_source_request],
-            }), encoding="utf-8")
+            }), encoding="utf-8", newline="\n")
             newer_raw = newer_dir / "raw" / "fixture-slice-2"
             newer_raw.mkdir(parents=True)
-            (newer_raw / "page.html").write_text("newer", encoding="utf-8")
+            (newer_raw / "page.html").write_text("newer", encoding="utf-8", newline="\n")
             (newer_dir / "contract.json").write_text(
-                json.dumps(contract), encoding="utf-8"
+                json.dumps(contract), encoding="utf-8", newline="\n"
             )
             newer_request = copy.deepcopy(second_source_request)
             newer_request["runId"] = newer_id
@@ -782,7 +782,7 @@ class CardDiscoveryTests(unittest.TestCase):
                 "status": "complete",
                 "contractHash": discovery.content_hash(contract),
                 "requests": [newer_request],
-            }), encoding="utf-8")
+            }), encoding="utf-8", newline="\n")
             stale_target_dir = runs_dir / "20260820T130000Z"
             stale_target_dir.mkdir()
             stale_manifest = copy.deepcopy(manifest)
@@ -793,7 +793,7 @@ class CardDiscoveryTests(unittest.TestCase):
             second_target_request["sliceId"] = "fixture-slice-2"
             stale_manifest["requests"].append(second_target_request)
             (stale_target_dir / "manifest.json").write_text(
-                json.dumps({**stale_manifest, "status": "incomplete"}), encoding="utf-8"
+                json.dumps({**stale_manifest, "status": "incomplete"}), encoding="utf-8", newline="\n"
             )
             with mock.patch.object(discovery, "RUNS_DIR", runs_dir):
                 with self.assertRaisesRegex(

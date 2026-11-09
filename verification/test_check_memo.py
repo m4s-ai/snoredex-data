@@ -42,7 +42,7 @@ class Repo:
         self.git("init", "-q")
         self.git("config", "user.email", "test" + "@" + "users.noreply.github.com")
         self.git("config", "user.name", "test")
-        (self.root / "data.txt").write_text("one\n", encoding="utf-8")
+        (self.root / "data.txt").write_text("one\n", encoding="utf-8", newline="\n")
         (self.root / "listed").mkdir()
         self.commit()
 
@@ -55,7 +55,7 @@ class Repo:
         self.git("commit", "-q", "--allow-empty", "-m", "fixture")
 
     def step(self, name: str, body: str) -> str:
-        (self.root / f"{name}.py").write_text(COUNTER_PREFIX + body + "\n", encoding="utf-8")
+        (self.root / f"{name}.py").write_text(COUNTER_PREFIX + body + "\n", encoding="utf-8", newline="\n")
         return f"{name}.py"
 
     def runs(self) -> int:
@@ -78,15 +78,15 @@ def check(condition: bool, label: str) -> None:
 def cases_inputs(repo: Repo) -> None:
     reader = repo.step("reader", "open('data.txt').read()")
     check(repo.run(reader)[0] == 1 and repo.run(reader)[0] == 0, "T1 unchanged inputs are skipped")
-    (repo.root / "data.txt").write_text("two\n", encoding="utf-8")
+    (repo.root / "data.txt").write_text("two\n", encoding="utf-8", newline="\n")
     check(repo.run(reader)[0] == 1, "T2 a changed input runs again")
     prober = repo.step("prober", "from pathlib import Path\nPath('maybe.txt').exists()")
     repo.run(prober)
-    (repo.root / "maybe.txt").write_text("now\n", encoding="utf-8")
+    (repo.root / "maybe.txt").write_text("now\n", encoding="utf-8", newline="\n")
     check(repo.run(prober)[0] == 1, "T3 a probed path that appears runs again")
     lister = repo.step("lister", "os.listdir('listed')")
     repo.run(lister)
-    (repo.root / "listed" / "new.txt").write_text("x", encoding="utf-8")
+    (repo.root / "listed" / "new.txt").write_text("x", encoding="utf-8", newline="\n")
     check(repo.run(lister)[0] == 1, "T4 a listed directory that gains a file runs again")
     head = repo.step("head", "import subprocess\nsubprocess.run(['git', 'rev-parse', 'HEAD'], check=True)")
     repo.run(head)
@@ -128,12 +128,12 @@ def only_entry(repo: Repo) -> Path:
 def cases_store(repo: Repo) -> None:
     steady = repo.step("steady", "open('data.txt').read()")
     repo.run(steady)
-    only_entry(repo).write_text("{broken", encoding="utf-8")
+    only_entry(repo).write_text("{broken", encoding="utf-8", newline="\n")
     check(repo.run(steady)[0] == 1, "T11 a corrupt entry is a miss, not a crash")
     entry_path = only_entry(repo)
     entry = json.loads(entry_path.read_text(encoding="utf-8"))
     entry["createdAt"] = "2000-01-01T00:00:00+00:00"
-    entry_path.write_text(json.dumps(entry), encoding="utf-8")
+    entry_path.write_text(json.dumps(entry), encoding="utf-8", newline="\n")
     check(repo.run(steady)[0] == 1, "T12 an entry older than MAX_AGE_DAYS is a miss")
     original = memo.engine_digest
     memo.engine_digest = lambda: "another engine"
@@ -162,7 +162,7 @@ def cases_session(repo: Repo) -> None:
     repo.run(generator, phase="write", success=False)
     check(repo.run(generator, phase="write")[0] == 1, "T17 no write entry without a fully green run")
     check(repo.run(generator, phase="write")[0] == 0, "T17 a fully green run stores the write entry")
-    (repo.root / "out.txt").write_text("edited by hand\n", encoding="utf-8")
+    (repo.root / "out.txt").write_text("edited by hand\n", encoding="utf-8", newline="\n")
     check(repo.run(generator, phase="write")[0] == 1, "T17 a changed output runs the generator again")
     database = repo.root / "store.sqlite"
     with contextlib.closing(sqlite3.connect(database)) as connection, connection:

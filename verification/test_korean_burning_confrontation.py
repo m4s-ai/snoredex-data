@@ -32,7 +32,7 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         row["observed"]["localSetCode"] = "DP2"
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "evidence.json"
-            path.write_text(json.dumps(mutated, ensure_ascii=False), encoding="utf-8")
+            path.write_text(json.dumps(mutated, ensure_ascii=False), encoding="utf-8", newline="\n")
             with self.assertRaisesRegex(ValueError, "observed drifted"):
                 korean.read_evidence(path)
 
@@ -119,7 +119,7 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         redirect["observed"]["japaneseExpansion"] = "drifted"
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "evidence.json"
-            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8")
+            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8", newline="\n")
             with mock.patch.object(equivalence, "EVIDENCE", path):
                 with self.assertRaisesRegex(ValueError, "redirect evidence drifted"):
                     equivalence.validate_evidence()
@@ -132,7 +132,7 @@ class KoreanBurningConfrontationTests(unittest.TestCase):
         redirect["establishes"].pop()
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "evidence.json"
-            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8")
+            path.write_text(json.dumps(snapshot, ensure_ascii=False), encoding="utf-8", newline="\n")
             with mock.patch.object(equivalence, "EVIDENCE", path):
                 with self.assertRaisesRegex(ValueError, "redirect evidence drifted"):
                     equivalence.validate_evidence()

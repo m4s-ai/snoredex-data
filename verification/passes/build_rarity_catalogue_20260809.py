@@ -253,7 +253,7 @@ def main() -> int:
         "rarities": RARITIES,
         "editionAvailability": EDITION_AVAILABILITY,
     }
-    OUTPUT.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUTPUT.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     finishes = [r["rarityId"] for r in RARITIES if r["impliesFinish"]]
     coded = [r["rarityId"] for r in RARITIES if r["localeCodes"]]
     print(f"wrote {OUTPUT.relative_to(ROOT)}: {len(RARITIES)} rarities, "

@@ -34,12 +34,12 @@ def make_repo(root: Path) -> None:
     git(root, "init", "-q")
     git(root, "config", "user.email", "test" + AT + "users.noreply.github.com")
     git(root, "config", "user.name", "test")
-    (root / "notes.txt").write_text(f"contact {MAIL}\n", encoding="utf-8")
-    (root / "clean.txt").write_text("nothing to see\n", encoding="utf-8")
-    (root / "big.txt").write_text(MAIL + "\n" + "x" * scan.MEMO_LIMIT, encoding="utf-8")
+    (root / "notes.txt").write_text(f"contact {MAIL}\n", encoding="utf-8", newline="\n")
+    (root / "clean.txt").write_text("nothing to see\n", encoding="utf-8", newline="\n")
+    (root / "big.txt").write_text(MAIL + "\n" + "x" * scan.MEMO_LIMIT, encoding="utf-8", newline="\n")
     exempt = root / "verification" / "history" / "PUBLIC-READINESS-AUDIT.md"
     exempt.parent.mkdir(parents=True)
-    exempt.write_text(MAIL + "\n", encoding="utf-8")
+    exempt.write_text(MAIL + "\n", encoding="utf-8", newline="\n")
     git(root, "add", "-A")
     git(root, "commit", "-q", "-m", "fixture")
 
@@ -74,7 +74,7 @@ def verify_history(root: Path) -> None:
         assert counter[-1] == 2
         assert scan.scan_history(root) == (shallow, scanned, hits) and counter[-1] == 0, \
             "a second run must answer every blob from the memo"
-        scan.memo_path(root).write_text("{broken", encoding="utf-8")
+        scan.memo_path(root).write_text("{broken", encoding="utf-8", newline="\n")
         assert scan.scan_history(root) == (shallow, scanned, hits) and counter[-1] == 2
         verify_disabled_memo(root, (shallow, scanned, hits), counter)
     finally:
@@ -99,7 +99,7 @@ def verify_tree(root: Path) -> None:
     scanned, hits = scan.scan_tree(root)
     # P4 has no size limit: unlike P6 it also reads big.txt, as before #460.
     assert scanned == 3 and hits == [f"big.txt: {MAIL}", f"notes.txt: {MAIL}"], (scanned, hits)
-    (root / "clean.txt").write_text(f"now {HOME}x\n", encoding="utf-8")
+    (root / "clean.txt").write_text(f"now {HOME}x\n", encoding="utf-8", newline="\n")
     scanned, hits = scan.scan_tree(root)
     assert f"clean.txt: {HOME}" in hits, "a dirty tracked file is read from the working tree"
 
@@ -121,14 +121,35 @@ def verify_unportable_paths() -> None:
     assert review_findings.unportable_paths(paths) == [
         "raw/s?-mirror.jpg", "a/b:c.txt", "docs/con.txt", "dir./x"], review_findings.unportable_paths(paths)
 
+def verify_crlf_prone_writers() -> None:
+    """X7: a text write without newline= writes CRLF on Windows and dirties every regenerated file."""
+    import review_findings
+    nl = 'newline="' + chr(92) + 'n"'
+    source = chr(10).join([
+        'p.write_text(s, encoding="utf-8")',
+        f'p.write_text(s, encoding="utf-8", {nl})',
+        'open(p, "w", encoding="utf-8")',
+        'open(p, "a")',
+        f'open(p, "w", {nl})',
+        'open(p, "wb")',
+        'open(p)',
+        'p.open("w")',
+        'p.open(mode="r")',
+        'tempfile.NamedTemporaryFile(mode="w", delete=False)',
+        'tempfile.NamedTemporaryFile(mode="wb", delete=False)',
+        'io.open(p, "w", **options)',
+    ])
+    found = review_findings.crlf_prone_writers({"seed.py": source})
+    assert found == ["seed.py:1", "seed.py:3", "seed.py:4", "seed.py:8", "seed.py:10"], found
+
 
 def verify_reviewed_history(root: Path) -> None:
     """#467: only the owner-accepted finding in the exact pinned blob is accepted."""
     profile = "C:" + "\\" + "Users" + "\\"
     path = root / "old.ps1"
-    path.write_text(f"Set-Location {profile}someone\\x\n# contact {MAIL}\n", encoding="utf-8")
+    path.write_text(f"Set-Location {profile}someone\\x\n# contact {MAIL}\n", encoding="utf-8", newline="\n")
     other = root / "other.ps1"
-    other.write_text(f"Push-Location {profile}else\n", encoding="utf-8")
+    other.write_text(f"Push-Location {profile}else\n", encoding="utf-8", newline="\n")
     git(root, "add", "old.ps1", "other.ps1")
     git(root, "commit", "-q", "-m", "old passes")
     pinned = git(root, "rev-parse", "HEAD:old.ps1").strip()
@@ -155,6 +176,7 @@ def main() -> int:
     verify_findings()
     verify_endpoint_findings()
     verify_unportable_paths()
+    verify_crlf_prone_writers()
     with tempfile.TemporaryDirectory() as folder:
         root = Path(folder) / "repo"
         root.mkdir()

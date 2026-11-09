@@ -81,7 +81,7 @@ def main() -> None:
         document["decisions"].sort(key=lambda d: d["unitId"])
         document["meta"]["generated"] = DECIDED_AT
         adj_path.write_text(
-            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     print(f"Recorded {added} owner adjudication(s); {len(document['decisions'])} decisions total. "
           f"KSS 26 is now fully settled.")

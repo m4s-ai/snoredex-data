@@ -108,7 +108,7 @@ def main() -> int:
                 "at": CHECKED_AT,
             })
 
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     if additions:
         with JOURNAL.open("a", encoding="utf-8", newline="\n") as handle:
             for row in additions:

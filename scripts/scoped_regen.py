@@ -209,7 +209,7 @@ def main() -> int:
         "wallDurationMs": round((time.perf_counter() - started) * 1000, 1),
     }
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"scoped workflow: runId={run_id} lane={lane['id']} "
           f"{counts['passed']} passed, {counts['not-run']} not-run, {counts['failed']} failed; "
           f"report={report_path.relative_to(ROOT) if report_path.is_relative_to(ROOT) else report_path}; L3 not run")

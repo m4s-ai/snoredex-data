@@ -122,7 +122,7 @@ def routing_regressions() -> None:
         }.items():
             target = root / path
             target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_text(content, encoding="utf-8")
+            target.write_text(content, encoding="utf-8", newline="\n")
         row = (
             "| Example | `workflow:example` / `lane:example` | "
             f"[example]({skill_path}) | [owner](scripts/example.py) | Observation | Review |\n"
@@ -184,10 +184,10 @@ def routing_regressions() -> None:
             rejects(text, expected)
             renamed.rename(target)
             rejects(text.replace(path, path + ".missing"), path)
-        (root / skill_path).write_text("---\nname: renamed\n---\n", encoding="utf-8")
+        (root / skill_path).write_text("---\nname: renamed\n---\n", encoding="utf-8", newline="\n")
         rejects(text, skill_path)
-        (root / skill_path).write_text("---\nname: example\n---\n", encoding="utf-8")
-        (root / "scripts" / "helper.py").write_text("# not an operator entry\n", encoding="utf-8")
+        (root / skill_path).write_text("---\nname: example\n---\n", encoding="utf-8", newline="\n")
+        (root / "scripts" / "helper.py").write_text("# not an operator entry\n", encoding="utf-8", newline="\n")
         check()
 
 

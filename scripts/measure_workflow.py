@@ -293,7 +293,7 @@ def main() -> int:
         "steps": results,
     }
     args.out.parent.mkdir(parents=True, exist_ok=True)
-    args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    args.out.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(
         f"workflow measurement: {report['summary']['steps']} steps, "
         f"{report['summary']['passed']} passed, {report['summary']['notRun']} not-run, "

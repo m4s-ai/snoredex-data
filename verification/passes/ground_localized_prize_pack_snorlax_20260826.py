@@ -276,11 +276,11 @@ def main() -> int:
     )
 
     finish_overrides["meta"]["lastUpdated"] = "2026-08-26"
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     FINISH_OVERRIDES.write_text(
-        json.dumps(finish_overrides, indent=2, ensure_ascii=False) + "\n", encoding="utf-8"
+        json.dumps(finish_overrides, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n"
     )
-    SPECIMENS.write_text(json.dumps(specimens, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    SPECIMENS.write_text(json.dumps(specimens, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     if additions:
         with JOURNAL.open("a", encoding="utf-8", newline="\n") as handle:
             for row in additions:

@@ -814,7 +814,7 @@ def main() -> int:
         hostile_html = pattern.sub(
             lambda found: found.group(1) + encoded + found.group(3), hostile_html, count=1
         )
-        (hostile_root / "index.html").write_text(hostile_html, encoding="utf-8")
+        (hostile_root / "index.html").write_text(hostile_html, encoding="utf-8", newline="\n")
         hostile_page = browser.new_page()
         hostile_page.goto((hostile_root / "index.html").as_uri())
         hostile_page.wait_for_selector("#rows tr")

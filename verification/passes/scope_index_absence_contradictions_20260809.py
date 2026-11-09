@@ -96,7 +96,7 @@ def main() -> int:
         )
         corrected += 1
 
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"narrowed {corrected} card-level absence inference(s) to the set slot they can support")
     for unit_id, print_id in sorted(FALSIFIED_BY.items()):
         unit = by_id[unit_id]

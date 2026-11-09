@@ -26,7 +26,7 @@ def fixture(root):
     for relative in INPUTS:
         path = root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("{}")
+        path.write_text("{}", newline="\n")
     inventory = {"meta": {"inputs": inventory_inputs(root)}, "sources": {source: info}, "items": [{
         "itemId": "fixture-item", "candidates": [{"source": source, "scope": "exact-printing"}],
     }]}
@@ -128,20 +128,20 @@ def check_specimen_media(root, inventory, recipe):
 
 def check_stale_outputs(root, inventory, recipe):
     verification = root / "verification"
-    (verification / "gallery_image_recipes.json").write_text(json.dumps({"schemaVersion": 1, "recipes": [recipe]}))
-    (verification / "gallery_image_manifest.json").write_text(json.dumps({"schemaVersion": 1, "entries": {}}))
+    (verification / "gallery_image_recipes.json").write_text(json.dumps({"schemaVersion": 1, "recipes": [recipe]}), newline="\n")
+    (verification / "gallery_image_manifest.json").write_text(json.dumps({"schemaVersion": 1, "entries": {}}), newline="\n")
     must_reject(lambda: validated_recipes(inventory, root))
     must_reject(lambda: validate_record(recipe, {"recipeSha256": recipe_digest(recipe),
                                                 "sourceSha256": "0" * 64}, root))
     pending = copy.deepcopy(recipe)
     pending["review"]["status"] = "pending"
-    (verification / "gallery_image_recipes.json").write_text(json.dumps({"schemaVersion": 1, "recipes": [pending]}))
+    (verification / "gallery_image_recipes.json").write_text(json.dumps({"schemaVersion": 1, "recipes": [pending]}), newline="\n")
     cards = [{"id": "fixture-item", "thumbnail": "legacy.jpg", "preview": "legacy.jpg"},
              {"id": "later-batch", "thumbnail": "untouched.jpg"}]
     apply_prepared(cards, inventory, root)
     assert cards[0]["thumbnail"] is None and cards[0]["preview"] is None
     assert cards[1]["thumbnail"] == "untouched.jpg"
-    (root / "collector_catalogue.json").write_text('{"changed":true}')
+    (root / "collector_catalogue.json").write_text('{"changed":true}', newline="\n")
     must_reject(lambda: validated_recipes(inventory, root))
 
 
@@ -151,9 +151,9 @@ def check_source_less_targets(root, inventory):
     store = {"schemaVersion": 1, "recipes": [], "unavailableTargets": [
         {"itemId": "research-no-source", "note": "Need a retained localized prerelease front"}]}
     path = root / "verification/gallery_image_recipes.json"
-    path.write_text(json.dumps(store))
-    (root / "verification/gallery_image_inventory.json").write_text(json.dumps(inventory))
-    (root / "verification/gallery_image_manifest.json").write_text(json.dumps({"schemaVersion": 1, "entries": {}}))
+    path.write_text(json.dumps(store), newline="\n")
+    (root / "verification/gallery_image_inventory.json").write_text(json.dumps(inventory), newline="\n")
+    (root / "verification/gallery_image_manifest.json").write_text(json.dumps({"schemaVersion": 1, "entries": {}}), newline="\n")
     cards = [{"id": "research-no-source", "thumbnail": "wrong.jpg", "preview": "wrong.jpg"},
              {"id": "fixture-item", "thumbnail": "untouched.jpg"}]
     apply_prepared(cards, inventory, root)

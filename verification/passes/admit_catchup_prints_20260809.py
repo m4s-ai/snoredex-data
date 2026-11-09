@@ -236,10 +236,10 @@ def main() -> int:
         "prints": ADMITTED,
         "held": HELD,
     }
-    OUTPUT.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    OUTPUT.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
     body = json.dumps(specimen_doc, indent=2, ensure_ascii=False) + "\n"
-    SPECIMENS.write_text(body, encoding="utf-8")
+    SPECIMENS.write_text(body, encoding="utf-8", newline="\n")
 
     print(f"admitted {len(ADMITTED)} source-first prints, held {len(HELD)}")
     for entry in ADMITTED:

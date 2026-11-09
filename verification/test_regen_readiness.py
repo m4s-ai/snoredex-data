@@ -96,23 +96,23 @@ def run_aggregation_regressions() -> None:
 
 def check_writes(scratch: pathlib.Path) -> None:
     tracked = scratch / "tracked.txt"
-    tracked.write_text("original")
+    tracked.write_text("original", newline="\n")
     subprocess.run(["git", "add", "tracked.txt"], cwd=scratch, check=True)
-    tracked.write_text("pre-existing dirty edit")
+    tracked.write_text("pre-existing dirty edit", newline="\n")
     untracked = scratch / "untracked.txt"
-    untracked.write_text("before")
-    (scratch / ".gitignore").write_text("cache/\n")
+    untracked.write_text("before", newline="\n")
+    (scratch / ".gitignore").write_text("cache/\n", newline="\n")
     (scratch / "cache").mkdir()
     ignored = scratch / "cache" / "candidate.json"
-    ignored.write_text("before")
+    ignored.write_text("before", newline="\n")
     clean = scratch / "clean.txt"
-    clean.write_text("before")
+    clean.write_text("before", newline="\n")
     os.utime(clean, (1000000000, 1000000000))
     subprocess.run(["git", "config", "core.trustctime", "false"], cwd=scratch, check=True)
     subprocess.run(["git", "add", "clean.txt"], cwd=scratch, check=True)
     subprocess.run(["git", "-c", "user.name=workflow-test", "-c", "user.email=workflow-test.invalid",
                     "commit", "-qm", "fixture"], cwd=scratch, check=True)
-    (scratch / "staged.txt").write_text("staged before")
+    (scratch / "staged.txt").write_text("staged before", newline="\n")
     subprocess.run(["git", "add", "staged.txt"], cwd=scratch, check=True)
     hidden_write = "p=Path('clean.txt'); s=p.stat(); p.write_text('after!'); os.utime(p, ns=(s.st_atime_ns, s.st_mtime_ns))"
     resolve_undo = "subprocess.run(['git', 'update-index', '--clear-resolve-undo'], check=True)"
@@ -154,10 +154,10 @@ def check_writes(scratch: pathlib.Path) -> None:
         for phase in ("CHECK", "TESTS"):
             for mutation in mutations:
                 for exit_code in (0, 1):
-                    tracked.write_text("pre-existing dirty edit")
-                    untracked.write_text("before")
-                    ignored.write_text("before")
-                    clean.write_text("before")
+                    tracked.write_text("pre-existing dirty edit", newline="\n")
+                    untracked.write_text("before", newline="\n")
+                    ignored.write_text("before", newline="\n")
+                    clean.write_text("before", newline="\n")
                     os.utime(clean, (1000000000, 1000000000))
                     subprocess.run(["git", "restore", "--staged", "--source=HEAD", "--",
                                     "tracked.txt", "clean.txt"], cwd=scratch, check=True)

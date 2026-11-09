@@ -44,7 +44,7 @@ def main() -> int:
         git("init", "--quiet")
         git("config", "user.email", "workflow-test.invalid")
         git("config", "user.name", "workflow-test")
-        (repo / "tracked.txt").write_text("base", encoding="utf-8")
+        (repo / "tracked.txt").write_text("base", encoding="utf-8", newline="\n")
         (repo / "ignored.sqlite").write_bytes(b"base")
         (repo / "binary.dat").write_bytes(b"\0before")
         (repo / "deleted.txt").write_bytes(b"deleted")
@@ -62,10 +62,10 @@ def main() -> int:
         assert index.read_bytes() == original_index
 
         # A pre-existing unstaged edit must still be observed when the measured step edits it.
-        (repo / "tracked.txt").write_text("dirty before", encoding="utf-8")
+        (repo / "tracked.txt").write_text("dirty before", encoding="utf-8", newline="\n")
         before = tree_snapshot(repo)
-        (repo / "tracked.txt").write_text("dirty after", encoding="utf-8")
-        (repo / "new.txt").write_text("created", encoding="utf-8")
+        (repo / "tracked.txt").write_text("dirty after", encoding="utf-8", newline="\n")
+        (repo / "new.txt").write_text("created", encoding="utf-8", newline="\n")
         (repo / "binary.dat").write_bytes(b"\0after")
         (repo / "deleted.txt").unlink()
         git("mv", "rename from.txt", "renamed ü.txt")
@@ -79,10 +79,10 @@ def main() -> int:
         assert "ignored.sqlite" not in before and "ignored.sqlite" not in after
 
         # Staged paths are part of the same observed tree and are compared by bytes, not status.
-        (repo / "staged.txt").write_text("staged before", encoding="utf-8")
+        (repo / "staged.txt").write_text("staged before", encoding="utf-8", newline="\n")
         git("add", "staged.txt")
         before = tree_snapshot(repo)
-        (repo / "staged.txt").write_text("staged after", encoding="utf-8")
+        (repo / "staged.txt").write_text("staged after", encoding="utf-8", newline="\n")
         assert "staged.txt" in changed_paths(before, tree_snapshot(repo))
 
     specs = pages_specs(ROOT / "_site-measure-pages-test")

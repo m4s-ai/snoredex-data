@@ -107,7 +107,7 @@ def main() -> int:
     document["meta"]["schemaVersion"] = "1.1.0"
 
     ADJUDICATIONS.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
     )
     print(f"{DECISION['adjudicationId']}: mP1 012 Japanese -> finish-complete "
           f"{DECISION['availableFinishes']} ({len(decisions)} finish decisions)")

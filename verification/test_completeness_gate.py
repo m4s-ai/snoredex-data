@@ -58,7 +58,7 @@ class CompletenessGateTests(unittest.TestCase):
             path = Path(directory) / "records.jsonl"
             path.write_text(
                 "".join(json.dumps(row, ensure_ascii=False) + "\n" for row in rows),
-                encoding="utf-8",
+                encoding="utf-8", newline="\n",
             )
             errors = gate.validate_card_records(path)
         self.assertTrue(any("is not card-level" in error for error in errors))
@@ -74,12 +74,12 @@ class CompletenessGateTests(unittest.TestCase):
         row = next(row for row in rows if row["stableKey"] == "pokemon-card-jp|jp-card-search|ja|1082")
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "record.jsonl"
-            path.write_text(json.dumps(row) + "\n", encoding="utf-8")
+            path.write_text(json.dumps(row) + "\n", encoding="utf-8", newline="\n")
             self.assertEqual(gate.validate_card_records(path), [])
             for field, value in (("sourceUrl", "https://example.invalid/wrong-card"),
                                  ("stableKey", "unreviewed-card")):
                 changed = {**row, field: value}
-                path.write_text(json.dumps(changed) + "\n", encoding="utf-8")
+                path.write_text(json.dumps(changed) + "\n", encoding="utf-8", newline="\n")
                 self.assertTrue(any("localCollectorNumber" in error
                                     for error in gate.validate_card_records(path)))
 

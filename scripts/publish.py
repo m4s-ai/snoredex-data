@@ -201,9 +201,9 @@ def build(out: Path) -> list[str]:
             original = target.read_text(encoding="utf-8")
             rewritten = relink_markdown(original, relative, published)
             if rewritten != original:
-                target.write_text(rewritten, encoding="utf-8")
+                target.write_text(rewritten, encoding="utf-8", newline="\n")
     # Pages serves Jekyll by default, which would skip files beginning with an underscore.
-    (out / ".nojekyll").write_text("", encoding="utf-8")
+    (out / ".nojekyll").write_text("", encoding="utf-8", newline="\n")
     return wanted
 
 

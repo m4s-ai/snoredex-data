@@ -121,7 +121,7 @@ def main() -> int:
         unit["sourceType"] = unit["sourceType"].rstrip().rstrip(",") + ", card list row"
         updated += 1
 
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"recorded the card list behind {updated} confirmation(s)")
     for group in ("own-edition", "fixed-product"):
         members = [uid for uid, (kind, _) in ROWS.items() if kind == group]

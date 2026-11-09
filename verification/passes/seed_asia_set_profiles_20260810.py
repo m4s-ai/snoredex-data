@@ -148,7 +148,7 @@ def main() -> int:
         1 for row in records if row["sourceKind"] == "source-first-local-set-profile"
     )
     SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n",
-                       encoding="utf-8")
+                       encoding="utf-8", newline="\n")
 
     sized = sum(
         1 for row in records

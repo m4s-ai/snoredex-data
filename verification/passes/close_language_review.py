@@ -257,12 +257,12 @@ def main() -> None:
     if missing:
         raise SystemExit(f"Missing expected units: {', '.join(missing)}")
 
-    units_path.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    units_path.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     with journal_path.open("a", encoding="utf-8", newline="\n") as handle:
         for row in log_rows:
             handle.write(json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n")
     state = {"phase": "language-review-closure", "completedAt": now}
-    (VERIFICATION / "state.json").write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8")
+    (VERIFICATION / "state.json").write_text(json.dumps(state, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     dataset_path = ROOT / "snorlax_cards.json"
     dataset = read_json(dataset_path)
@@ -274,7 +274,7 @@ def main() -> None:
         "totalUnits": 719,
         "lastUpdated": now[:10],
     })
-    dataset_path.write_text(json.dumps(dataset, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    dataset_path.write_text(json.dumps(dataset, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Updated {len(seen)} language-review units; state={state['phase']}")
 
 

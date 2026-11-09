@@ -214,7 +214,7 @@ def main() -> None:
         },
         "sourceRecords": records,
     }
-    OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    OUTPUT.write_text(json.dumps(output, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(
         f"wrote {OUTPUT.relative_to(ROOT)}: {len(records)} source records "
         f"({len(legacy_groups)} legacy profiles, {len(source_first_groups)} source-first, "

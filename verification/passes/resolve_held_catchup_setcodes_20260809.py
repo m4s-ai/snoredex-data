@@ -178,9 +178,9 @@ def main() -> int:
     document["prints"].sort(key=lambda entry: entry["printId"])
     document["meta"]["generated"] = date.today().isoformat()
     document["meta"]["counts"] = {"admitted": len(document["prints"]), "held": len(document["held"])}
-    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     SPECIMENS.write_text(json.dumps(specimen_doc, indent=2, ensure_ascii=False) + "\n",
-                         encoding="utf-8")
+                         encoding="utf-8", newline="\n")
 
     print(f"admitted {len(document['prints'])} source-first prints, "
           f"{len(document['held'])} held")

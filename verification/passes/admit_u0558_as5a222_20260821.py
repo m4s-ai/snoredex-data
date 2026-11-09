@@ -73,7 +73,7 @@ def read(path: Path) -> dict:
 
 
 def write(path: Path, document: dict) -> None:
-    path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def main() -> int:

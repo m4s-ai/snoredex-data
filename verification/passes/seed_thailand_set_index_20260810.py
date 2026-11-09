@@ -120,7 +120,7 @@ def main() -> int:
     document["meta"]["counts"]["sourceRecords"] = len(records)
     document["meta"]["counts"]["localitySetIndexRecords"] = sum(
         1 for row in records if row["sourceKind"] == "locality-set-index-record")
-    SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     INPUT.unlink()
 
     thai = [r for r in records if r["sourceKind"] == "locality-set-index-record"

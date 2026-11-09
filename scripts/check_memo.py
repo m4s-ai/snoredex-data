@@ -311,7 +311,7 @@ def read_entry(path: Path) -> dict[str, Any] | None:
 def write_entry(path: Path, entry: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
-    temporary.write_text(json.dumps(entry, sort_keys=True), encoding="utf-8")
+    temporary.write_text(json.dumps(entry, sort_keys=True), encoding="utf-8", newline="\n")
     os.replace(temporary, path)
 
 

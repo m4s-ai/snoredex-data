@@ -141,7 +141,7 @@ def main() -> int:
         unit["providerId"] = "pokemon-card-asia"
         unit["evidence"] = evidence
 
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"raised {len(FINDINGS)} confirmation(s) from a set release to the publisher's card page")
     for unit_id, (expected, url, _) in sorted(FINDINGS.items()):
         set_code, number, variant, language = expected

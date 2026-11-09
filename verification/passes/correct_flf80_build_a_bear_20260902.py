@@ -42,7 +42,7 @@ def read(path: Path):
 
 
 def write(path: Path, payload) -> None:
-    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def journal_key(row: dict) -> tuple[str | None, str | None, str | None, str]:

@@ -122,7 +122,7 @@ def main() -> int:
         if isinstance(specimens.get("count"), int):
             specimens["count"] = len(specimens["specimens"])
         SPECIMENS.write_text(
-            json.dumps(specimens, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(specimens, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
         print(f"{SPECIMEN_ID} recorded: mP1 012 Japanese, third-party seller listing photograph")
 
@@ -137,7 +137,7 @@ def main() -> int:
         changed = True
     if changed:
         OVERRIDES.write_text(
-            json.dumps(overrides, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(overrides, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
         print("finish override recorded: mP1 012 Japanese non-holo (positive evidence only)")
     else:
