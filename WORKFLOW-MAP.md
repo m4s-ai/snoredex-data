@@ -408,8 +408,10 @@ only when every recorded input digest, listing, probe and replayed Git output is
   (`verification/sensitive_scan.py`): a Git blob is immutable, so a blob it already read under the
   same scanner bytes is never read again.
 - **Modes:** `--memo use` (default), `--memo refresh` (run everything, rewrite entries) and
-  `--memo off` (reference run, no memo and no blob memo). L4 always runs `off`; each push to `main`
-  runs `refresh` in the `memo-seed` job, which saves the cache pull requests restore. CI caches
+  `--memo off` (reference run, no memo and no blob memo). Linux L4, which builds the published
+  artifact, always runs `off`; Windows L4 runs `use` on the memo the same tree's `memo-seed` run
+  left (owner, 2026-11-09). Each push to `main` runs `refresh` in the `memo-seed` job, which saves
+  the cache pull requests and Windows L4 restore. CI caches
   `.git/snoredex-memo` per OS and branch and saves it even after a failure, because only passed
   steps are stored.
 - **Parallelism:** `regen.py --jobs N` (default up to 4) runs CHECK and TESTS steps concurrently and

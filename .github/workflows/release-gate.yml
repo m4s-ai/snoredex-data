@@ -41,9 +41,11 @@ jobs:
           python-version: "3.11"
 
       # Verification memo (#460): steps whose observed inputs are unchanged since they passed on
-      # this branch or on main are reported instead of rerun. L4 never restores it.
+      # this branch or on main are reported instead of rerun. Linux L4 never restores it: that is
+      # the reference run that builds and checks the published artifact. Windows L4 replays the
+      # memo the main push's full Windows run seeded for the same tree (owner, 2026-11-09).
       - name: Restore verification memo
-        if: env.GATE_LEVEL == 'L3'
+        if: env.GATE_LEVEL == 'L3' || runner.os == 'Windows'
         uses: actions/cache/restore@v5
         with:
           path: .git/snoredex-memo
@@ -82,7 +84,7 @@ jobs:
       - name: Generated artifacts and core regressions
         shell: bash
         run: |
-          if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi
+          if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then memo=off; else memo=use; fi
           python scripts/regen.py --check --memo "${memo}"
 
       # Every PR runs the retained-run validation; the memo replays it when none of the files it
