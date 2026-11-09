@@ -308,7 +308,8 @@ def main() -> int:
     assert "name: UI browser gate" in ui
     assert "paths:" in ui and "site/app.css" in ui and "site/app.js" in ui
     assert "requirements.txt" in ui
-    assert "llms.txt" in ui
+    # Regenerated data is not a UI trigger; it reaches the browser suite at L4 (see ui-pr.yml).
+    assert "images/**" not in ui and "index.html" not in ui.split("paths:", 1)[1].split("workflow_dispatch", 1)[0]
     assert "verification/test_site.py" in ui
     assert "python verification/test_site.py" in ui
 
