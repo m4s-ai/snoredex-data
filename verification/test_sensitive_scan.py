@@ -138,6 +138,8 @@ def verify_crlf_prone_writers() -> None:
         'tempfile.NamedTemporaryFile(mode="w", delete=False)',
         'tempfile.NamedTemporaryFile(mode="wb", delete=False)',
         'io.open(p, "w", **options)',
+        'webbrowser.open("http://localhost:8000/")',
+        'zipfile.ZipFile(p).open("data.json", "w")',
     ])
     found = review_findings.crlf_prone_writers({"seed.py": source})
     assert found == ["seed.py:1", "seed.py:3", "seed.py:4", "seed.py:8", "seed.py:10"], found

@@ -2623,7 +2623,8 @@ def _write_mode(call: ast.Call) -> str:
     if name not in {"open", "fdopen", "NamedTemporaryFile"}:
         return ""
     mode = _mode_argument(call)
-    return mode.value if isinstance(mode, ast.Constant) and isinstance(mode.value, str) else ""
+    value = mode.value if isinstance(mode, ast.Constant) and isinstance(mode.value, str) else ""
+    return value if re.fullmatch(r"[rwaxbt+]+", value) else ""  # a URL or member name is no mode
 
 
 def _is_crlf_prone(node: ast.AST) -> bool:
