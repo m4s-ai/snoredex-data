@@ -3,10 +3,10 @@
     "generatedBy": "scripts/site.py",
     "schemaVersion": 1,
     "inputs": {
-      "collector_catalogue.json": "9fa8a6703c575fe3bc0f21edab7d51cbffb7ed85a27719e1226b201b19b8c733",
-      "verification/artwork_review_projection.json": "785a915c2a1acd4493642f4d7bd0ff2551a11e071f64fdb9c69a2d5625436b7a",
+      "collector_catalogue.json": "c19ae59a3c8cc4357c352ba34bfd64f623814e98f6e9105a5334a8859fe00dd3",
+      "verification/artwork_review_projection.json": "9e10ab366a101b8ba00f9cab79cb13163a088a8b1b06e8a56c9205bb9cda3f24",
       "site/gallery-review.json": "64a0ca7752ac82ee3bad34e1f92b2412bb3cb669148485f947784d18e58e5ae5",
-      "verification/specimens.json": "ff74d0c4ade0219383f3466fc20a52140f285fd9979d3aa84ff0952d3c22c647"
+      "verification/specimens.json": "b5522bbd39a39b4aa5c19a816e94ee2837ebf6b1d152177eb8130693567103e1"
     },
     "note": "Generated inventory; dimensions describe the source frame, not a reviewed card crop."
   },
@@ -12644,8 +12644,8 @@
         {
           "source": "images/FL_15_Snorlax_276191.jpg",
           "scope": "representative",
-          "identityBasis": "legacy-product",
-          "sourceRef": "asset-8adb807f-4a78-5ebc-8427-08e7d35159bd"
+          "identityBasis": "release-image",
+          "sourceRef": "unit:U0529"
         },
         {
           "source": "verification/specimens/SPEC-0107.jpg",
@@ -12655,14 +12655,14 @@
         },
         {
           "source": "verification/specimens/SPEC-0730.png",
-          "scope": "representative",
-          "identityBasis": "release-image",
+          "scope": "exact-printing",
+          "identityBasis": "finish-printing-citation",
           "sourceRef": "specimen:SPEC-0730"
         }
       ],
       "legacyImage": null,
-      "status": "needs-image",
-      "selectedRecipe": null
+      "status": "accepted",
+      "selectedRecipe": "gap-481-03-spec-0730"
     },
     {
       "itemId": "item-1cd769ff-9d83-5b3b-b3a2-ad81eac45bdb",
@@ -35599,14 +35599,14 @@
         },
         {
           "source": "verification/specimens/SPEC-0730.png",
-          "scope": "exact-printing",
-          "identityBasis": "finish-printing-citation",
+          "scope": "representative",
+          "identityBasis": "release-image",
           "sourceRef": "specimen:SPEC-0730"
         }
       ],
       "legacyImage": "verification/specimens/SPEC-0107.jpg",
-      "status": "accepted",
-      "selectedRecipe": "gap-481-03-spec-0730"
+      "status": "needs-image",
+      "selectedRecipe": null
     },
     {
       "itemId": "item-df7017fe-862e-5534-986c-27a6b887a1c9",
