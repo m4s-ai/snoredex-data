@@ -2,8 +2,8 @@
 # Gallery images
 
 The owner-approved plan is tracked in [#476](https://github.com/m4s-ai/snoredex-data/issues/476).
-Batch 0 (#477) introduces the inventory and preparation path. The twelve real pilot sources belong
-to #478. This document defines the preparation interface used by later batches.
+Batch 0 (#477) introduced the inventory and preparation path, the twelve-source pilot (#478)
+accepted it on real sources, and later batches (#479–#481) follow this interface.
 
 ## Inputs and ownership
 
@@ -66,7 +66,13 @@ original was never enlarged before intake.
 ## Prepare and accept one bounded batch
 
 1. Regenerate the current inventory with `python scripts/site.py`. Freeze the batch's target IDs
-   and source choices in the issue before editing recipes.
+   and source choices in an issue comment before editing recipes or retaining sources. Gap rounds
+   source images with the card-search skill and retain them as SPEC files through specimen intake.
+   Keep a downloaded JPEG's bytes unchanged when it carries only technical metadata. Otherwise
+   retain a pixel-identical PNG (same decoded pixels, mode and dimensions) that omits the metadata,
+   and record both hashes in the bundle's `source-map.json`. Every evidence bundle `README.md`
+   starts with a `<!-- doc: role=...; stage=... -->` header whose stage is one of `DOC_STAGES`
+   (usually `reference` or `task`); without it gate `D1` fails.
 2. Record recipes with `pending` review status, hashes, decoded dimensions, corners and notes.
 3. Install the pinned verification requirements and Chromium. Run
    `python verification/prepare_gallery_images.py --prepare RECIPE_ID`, passing several IDs when
@@ -80,11 +86,13 @@ original was never enlarged before intake.
 5. Run `python scripts/site.py` and `python verification/prepare_gallery_images.py --check`.
    The check is observational and needs no browser. Source, recipe, processor or output drift fails
    the check rather than reusing stale images. Re-preparation uses `--prepare`, separate from checks.
+   Never run `verification/test_site.py` in parallel with `python scripts/regen.py --check`: the
+   check's read-only tree snapshot then reports the browser suite's writes as a change.
 6. Check the gallery at desktop/mobile widths and high pixel density. Prepared images use srcset
    and cap their displayed width against available pixels. The lightbox links the original.
    Record batch IDs, commit, checks and unresolved image needs in its issue.
 
 Each delivery follows the existing batch execution contract and full release gate. The browser
 suite includes synthetic full-detail PNG/JPEG, perspective, rotation, responsive display, retry,
-integrity and rejected-low-resolution cases. The twelve real-source pilot remains a separate
-acceptance step before series processing.
+integrity and rejected-low-resolution cases. The twelve real-source pilot (#478) completed that
+acceptance before series processing.
