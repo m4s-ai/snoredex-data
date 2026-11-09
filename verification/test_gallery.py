@@ -40,8 +40,13 @@ def main():
     specimen = next(card for card in cards if card["imageSource"] == "verification/specimens/SPEC-0601.png")
     assert specimen["imageScope"] == "exact-printing"
     assert specimen["preview"] == derivatives[specimen["imageSource"]]["preview"]["path"]
-    representative = {card["id"] for card in cards if card["imageScope"] == "representative"}
-    assert representative == review["representativeImages"].keys()
+    overrides = review["representativeImages"]
+    assets = {asset["assetId"]: asset.get("path") for asset in catalogue["assets"]}
+    exact = {item["itemId"]: assets[item["imageAssetId"]] for item in catalogue["items"]
+             if item["imageScope"] == "exact-printing" and assets.get(item["imageAssetId"])}
+    representative = {card["id"]: card["imageSource"] for card in cards if card["imageScope"] == "representative"}
+    assert representative == {item_id: source for item_id, source in overrides.items() if item_id not in exact}
+    assert all(card["imageSource"] == exact[card["id"]] for card in cards if card["id"] in overrides.keys() & exact.keys())
     assert len({card["id"] for card in cards}) == len(cards)
     artwork_numbers = list(dict.fromkeys(card["artworkNumber"] for card in cards))
     assert artwork_numbers == list(range(1, len(artwork_numbers) + 1))
