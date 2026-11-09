@@ -54,7 +54,7 @@ modes.
 | Level | Actions |
 |---|---|
 | Free | local generation and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch |
-| Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening a PR, issue/PR comments, live source refreshes (Cardmarket quota), `finishes.py --refresh --accept-refresh`, running the `Publish site` workflow |
+| Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening or merging a PR (one instruction may name a series, e.g. "merge green batch PRs after a clean exact-head review"), issue/PR comments, live source refreshes (Cardmarket quota), `finishes.py --refresh --accept-refresh`, running the `Publish site` workflow |
 | Owner only | `owner_adjudications.json` entries (including `rejectedFinishes`), `publication-decisions.json` |
 | Never | push to `main`, run `mkunits`, edit `verification/archive/`, bypass or weaken the publication gate |
 
@@ -348,9 +348,11 @@ When a queue grows because the corpus grew, record the cause beside the number.
   artifacts sneak back in.
 - **One isolated branch per issue,** cut fresh from `origin/main` and never shared with another
   in-flight task (e.g. `fix/<n>-<slug>`). A branch the runtime assigns takes precedence over this
-  convention and over a name an issue prescribes; link the issue from the PR. When a branch falls
-  behind, rebase onto the new `origin/main` and regenerate with `python scripts/regen.py`; never
-  hand-merge a generated file. Do not stack unrelated tasks or reuse an old issue's branch.
+  convention and over a name an issue prescribes; link the issue from the PR. When an authorized PR
+  branch falls behind, merge `origin/main` into it, resolve generated-file conflicts only by
+  rerunning `python scripts/regen.py` (never hand-merge one), and fast-forward push. A rebase
+  needs the force push the authority table gates. Do not stack unrelated tasks or reuse an old
+  issue's branch.
 - **Attribute honestly.** End commit messages with the `Co-Authored-By` trailer of the agent and
   model that actually made the commit, as your runtime supplies it; never name another model.
 - Open a PR as a draft until the local gate is green; drafts skip CI. When the diff touches

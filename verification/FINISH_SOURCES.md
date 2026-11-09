@@ -104,6 +104,16 @@ checklist gives two foil versions, and the reverse holo carries the set-logo sta
 field. SPEC-0662 (Italian DF 10, no stamp) is therefore the regular holo. Without a documented
 two-version scope, or with the mark position cropped or illegible, the finish stays unset.
 
+Set-specific cues that separate holo from reverse holo on a photograph, each a visible feature to
+record in `basis`:
+
+- **FireRed & LeafGreen and other EX-era sets:** the reverse holo carries the Poké Ball foil
+  pattern across the card body, including the rules box; the regular holo has foil only inside the
+  artwork window (SPEC-0730, a plain rules area: regular holo). The two were mixed up before #551.
+- **Dragon Frontiers 1–12:** the reverse holo carries the set-logo stamp in the artwork (above).
+- **Rising Rivals Rival Season print:** a diagonal crosshatch foil, distinct from both the regular
+  holo and the reverse holo.
+
 A Cardmarket finish axis names no pattern. When a photograph establishes exactly one printing of
 that finish with a visible pattern and otherwise identical identity, `finishes.py`
 (`absorb_patternless_marketplace_claims`) folds the pattern-less marketplace claim into it: it is
