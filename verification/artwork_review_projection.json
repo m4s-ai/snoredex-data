@@ -4,7 +4,7 @@
   "proposalSchema": "snoredex-artwork-review-proposal",
   "proposalSchemaVersion": "1.2.0",
   "generated": "2026-11-09",
-  "projectionVersion": "c3facb843bd54ad8272a207a00748e46bab0dd30f64b2d9a0fcc58e455f8462e",
+  "projectionVersion": "042743651f362a646b2017da0c78471570658a9a650f8e91817496696328e0a1",
   "identitySource": "verification/authoritative_graph.json",
   "appearanceIdentity": "Automatic image groups use a stable pinned-image anchor and are review suggestions only; reviewedAppearanceId remains null until a human artwork decision is imported.",
   "reviewBoundary": "Browser proposals never write authoritative stores; reviewed imports must validate stale ids, hashes and before-values.",
@@ -17,7 +17,7 @@
     "unmappedReleases": 0,
     "cardReleases": 629,
     "physicalPrintings": 934,
-    "sourceObservations": 3537
+    "sourceObservations": 3548
   },
   "groups": [
     {
@@ -16423,6 +16423,17 @@
               "originalHash": "65217fe4de4517b7656be9982e38fe68de3a0c4f32ab6cffe13fb23bc3c03cc6",
               "previewSrc": "images/previews/TRR_104_Rocket_s_Snorlax_ex_276396.jpg?v=407b512e6ecd7b5cabb89f3798f14628b6aa37f0c06d371761faf2da45aa0c8c",
               "thumbnailSrc": "images/thumbs/TRR_104_Rocket_s_Snorlax_ex_276396.jpg?v=f0308c625e67e8b7e2f6209461e5aa5415564aa19e9c0bcafd9bd1e19c0bd64c"
+            },
+            {
+              "src": "verification/specimens/SPEC-0728.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0728",
+              "contentHash": "1e843e2abfd0133653a126f785a140b8c7640d69df8a0667f8da77d4562ead40",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "1e843e2abfd0133653a126f785a140b8c7640d69df8a0667f8da77d4562ead40",
+              "previewSrc": "images/previews/SPEC-0728.png?v=52b3127d13022b939377fd0d88b935af6a7fe78d9fb12c861553ae8848d7274a",
+              "thumbnailSrc": "images/thumbs/SPEC-0728.png?v=9ddf5a84e0a035ed3acf8f105421b03362af9a9a4d08421a6a8a9a00a8a1365e"
             }
           ],
           "observations": [
@@ -16443,6 +16454,15 @@
               "evidence": "ex7-104 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "d51a937d9ba334e2be6154b8c4c35496fcd2b62db46bcb0fd3484ff3e77be655",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0728",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/318884625719",
+              "evidence": "English Rocket's Snorlax ex 104/109, 100 HP and printed Team Rocket R logo. The complete silver-edged face shows colored foil and the collector number.",
+              "contentHash": "a008b460ecbfe37bb51e944d53b9ae8b36bf790e0fd4b93927d2e2268d6d49f0",
+              "image": "verification/specimens/SPEC-0728.png"
             },
             {
               "observationId": "unit:U0629",
@@ -27656,6 +27676,17 @@
               "originalHash": "5450ef2043b862ad5b5e53ebcc16bdca6bcbd58934b4e41514658d85add19227",
               "previewSrc": "images/previews/DF_10_Snorlax___Delta_Species_277215.jpg?v=bd8fbbf33441ce9ce134f4a063dcbad94717d50da4497bd4ebf5f0fdc4d022b4",
               "thumbnailSrc": "images/thumbs/DF_10_Snorlax___Delta_Species_277215.jpg?v=018e4d622349ceddf5d16ca3816bbafaf3802c2b5ed0cda9863e7b8b60215304"
+            },
+            {
+              "src": "verification/specimens/SPEC-0725.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0725",
+              "contentHash": "e2d385804ed913d0246fe49c7bf39c0b91c8c6f0d1e91df15833cf9c9b7590eb",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "e2d385804ed913d0246fe49c7bf39c0b91c8c6f0d1e91df15833cf9c9b7590eb",
+              "previewSrc": "images/previews/SPEC-0725.png?v=73b5dc120ee051060cefef297c62534987a67a87b6b98ea8fa7c0778e29f6c8b",
+              "thumbnailSrc": "images/thumbs/SPEC-0725.png?v=32bb9fd9439b575d12b655ef25b7fcf1f106781a393d557ca5e46a6c25dae4db"
             }
           ],
           "observations": [
@@ -27712,6 +27743,15 @@
               "evidence": "Identifies Snorlax 10/101 as the stamped EX Dragon Frontiers reverse-holo printing.",
               "contentHash": "05450a0bf4a0b62a6a9b08dd77c32c77c4c4e4637fc169f37dde3bce360ce239",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0725",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/377487364733",
+              "evidence": "English Snorlax delta species 10/101, 80 HP and Masakazu Fukuda. The lower artwork window shows the Dragon Frontiers logo. Complete face and collector number.",
+              "contentHash": "9b24b1d4e30bb06af04c30d4fa5db9a435feb234d7172b36b0afe904ad163ad8",
+              "image": "verification/specimens/SPEC-0725.png"
             },
             {
               "observationId": "unit:U0447",
@@ -27852,6 +27892,28 @@
               "originalHash": "5450ef2043b862ad5b5e53ebcc16bdca6bcbd58934b4e41514658d85add19227",
               "previewSrc": "images/previews/DF_10_Snorlax___Delta_Species_277215.jpg?v=bd8fbbf33441ce9ce134f4a063dcbad94717d50da4497bd4ebf5f0fdc4d022b4",
               "thumbnailSrc": "images/thumbs/DF_10_Snorlax___Delta_Species_277215.jpg?v=018e4d622349ceddf5d16ca3816bbafaf3802c2b5ed0cda9863e7b8b60215304"
+            },
+            {
+              "src": "verification/specimens/SPEC-0731.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0731",
+              "contentHash": "d8d53ada1434681e280f11aa53ea9e445a6aa95276f1035e2455dd05cc22efea",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "d8d53ada1434681e280f11aa53ea9e445a6aa95276f1035e2455dd05cc22efea",
+              "previewSrc": "images/previews/SPEC-0731.png?v=c68f12e4abd5c9ad60c95ef549bdafe49f0747aaacf59c2099fa352c7ad408ad",
+              "thumbnailSrc": "images/thumbs/SPEC-0731.png?v=ac28be2557d6ce2e1ccf86768edc747df43fa31d72878d95fdaae0ce77430b53"
+            },
+            {
+              "src": "verification/specimens/SPEC-0732.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0732",
+              "contentHash": "f36cf9b275ec1e3fb6a35ad0598fcbd9abcd32490c07762142cc7b1b44cad462",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "f36cf9b275ec1e3fb6a35ad0598fcbd9abcd32490c07762142cc7b1b44cad462",
+              "previewSrc": "images/previews/SPEC-0732.png?v=521c9e022d7f2d347e6aa268c37c29908afd75a50acaebd4ea735db6cd9cb7a3",
+              "thumbnailSrc": "images/thumbs/SPEC-0732.png?v=53d9167b6f4b9f293cd2bced096fe86deb9804115f2d5ebd27d8a032238c024b"
             }
           ],
           "observations": [
@@ -27899,6 +27961,24 @@
               "evidence": "Identifies Snorlax 10/101 as the stamped EX Dragon Frontiers reverse-holo printing.",
               "contentHash": "f5f90aaa4f53248b21e8f68f389c08f62cc8dc50994e8ea233f7990aac1d69d2",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0731",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.fr/itm/317707101243",
+              "evidence": "French Ronflex delta species 10/101, 80 PV and Masakazu Fukuda. Complete face with the artwork logo position visible and without the reverse stamp. The seller's reverse label does not match this face.",
+              "contentHash": "93d763be1fb66ad071ea77f13ffb5bff204bee2549170e39bab0b6f7553c26cd",
+              "image": "verification/specimens/SPEC-0731.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0732",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.fr/itm/227386771872",
+              "evidence": "French Ronflex delta species 10/101, 80 PV and Masakazu Fukuda. The Île des Dragons logo is visible within the artwork. Complete front.",
+              "contentHash": "0e3bc70abc97190c4a6e6f84ed5e94e48a8e48464fb86d89a921dff67d82286d",
+              "image": "verification/specimens/SPEC-0732.png"
             },
             {
               "observationId": "unit:U0448",
@@ -28039,6 +28119,17 @@
               "originalHash": "5450ef2043b862ad5b5e53ebcc16bdca6bcbd58934b4e41514658d85add19227",
               "previewSrc": "images/previews/DF_10_Snorlax___Delta_Species_277215.jpg?v=bd8fbbf33441ce9ce134f4a063dcbad94717d50da4497bd4ebf5f0fdc4d022b4",
               "thumbnailSrc": "images/thumbs/DF_10_Snorlax___Delta_Species_277215.jpg?v=018e4d622349ceddf5d16ca3816bbafaf3802c2b5ed0cda9863e7b8b60215304"
+            },
+            {
+              "src": "verification/specimens/SPEC-0727.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0727",
+              "contentHash": "b3729cacc627c99a706be3a1602ca55b67a8bd019f837da832b3173564ce953a",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "b3729cacc627c99a706be3a1602ca55b67a8bd019f837da832b3173564ce953a",
+              "previewSrc": "images/previews/SPEC-0727.png?v=52a40ce946526507c86c559a6f7b0f3d33e30de8f1b38ef92d046f1bd2d17921",
+              "thumbnailSrc": "images/thumbs/SPEC-0727.png?v=a8c0f9456281c622e462895293b588f4c72c4009ca891461caaec4a75c582452"
             }
           ],
           "observations": [
@@ -28086,6 +28177,15 @@
               "evidence": "Identifies Snorlax 10/101 as the stamped EX Dragon Frontiers reverse-holo printing.",
               "contentHash": "f6ec39fb23451b11ccd8eff36b103f7be751254eae356cd3ac62f3c63e6429d5",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0727",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/206059496054",
+              "evidence": "German Relaxo delta species 10/101, 80 KP and Masakazu Fukuda. Complete face and clear logo position within the artwork without the reverse treatment stamp.",
+              "contentHash": "c99a6971f1c6ddd5806db52ce01ea42372ad04918e0911b999415c6a041842d5",
+              "image": "verification/specimens/SPEC-0727.png"
             },
             {
               "observationId": "unit:U0449",
@@ -28450,6 +28550,17 @@
               "originalHash": "8e2a8aff24421a1dfdb3b1c4dc0b81ca140fc6c20ba4326b2d4a220f48bfc7ac",
               "previewSrc": "images/previews/PCG9_001_Snorlax___Delta_Species_761840.jpg?v=5076a3cf22c357af5615df9ce95d87698268e39f23cf6d0e4368a917cee26914",
               "thumbnailSrc": "images/thumbs/PCG9_001_Snorlax___Delta_Species_761840.jpg?v=1454c962665b03a4f22ba540b35744e5a66f4d0a415e30d87a3311cf50d84a12"
+            },
+            {
+              "src": "verification/specimens/SPEC-0729.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0729",
+              "contentHash": "871a9f992b400d18adb9e41bec1316502cc9e69186a25583e7aa753f4407a0bf",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "871a9f992b400d18adb9e41bec1316502cc9e69186a25583e7aa753f4407a0bf",
+              "previewSrc": "images/previews/SPEC-0729.png?v=b9fd974609694f2ed04f507aaf88df273680075e0e6c63e7643d5cb52465af81",
+              "thumbnailSrc": "images/thumbs/SPEC-0729.png?v=df8d98f17e031950ce6e08cd421a96044ee122609a05c8abb4781bd564598b73"
             }
           ],
           "observations": [
@@ -28506,6 +28617,15 @@
               "evidence": "The collection owner decided on 2026-10-22 that a card positively documented in both 1st Edition and Unlimited is catalogued as one item per edition, and that Jungle 11/64 and 27/64 exist in both editions in all seven Western languages (edition_rules.json, owner-confirmed for Jungle). Finish follows the owner's Jungle number-to-finish rule. No edition-stamp wording is asserted.",
               "contentHash": "cc56bdfae3e15058e8255fb78adc999f91cbc8a8c3db0ad26a337fa7c2a26f36",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0729",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/388881762735",
+              "evidence": "Japanese Snorlax delta species 001/068, HP80 and Masakazu Fukuda. Visible rainbow foil and complete face without the first-edition stamp.",
+              "contentHash": "8f2fbc40d80382a6fe051ffa5eac45b7b7ca1c8e36fd3d91e2221b40c6fc3fb5",
+              "image": "verification/specimens/SPEC-0729.png"
             },
             {
               "observationId": "unit:U0631",
@@ -67788,6 +67908,28 @@
               "originalHash": "eff8602698338ac3a685c318fe7d851bcc617bfe2fd5cbe489e00ba4b6dfd7dd",
               "previewSrc": "images/previews/FL_15_Snorlax_276191.jpg?v=f059050467364768d333bb1c7626941ad119e69ae159666fca4ef421502db520",
               "thumbnailSrc": "images/thumbs/FL_15_Snorlax_276191.jpg?v=b543887ea2f8d6d46a07b80a5df7245c776e6ef1e044bf162d49f724c6311295"
+            },
+            {
+              "src": "verification/specimens/SPEC-0722.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0722",
+              "contentHash": "0520f867493ab8e77999b8f32116dcadff2ab158d2f08ba728190b15aa4a4412",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "0520f867493ab8e77999b8f32116dcadff2ab158d2f08ba728190b15aa4a4412",
+              "previewSrc": "images/previews/SPEC-0722.png?v=7cb59b6348221cb41938325224b118174b67240dc3ecfe3509cdeb4dbae8e857",
+              "thumbnailSrc": "images/thumbs/SPEC-0722.png?v=e6c2c146f5618ddcdc4c6ba363484e901eabce82f982512eafd33c1ad55dacf7"
+            },
+            {
+              "src": "verification/specimens/SPEC-0726.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0726",
+              "contentHash": "fdfbb9981ed174dbc3d7d662f35c67ed8a1b2dfa9bc7c88e10c15f8256358af7",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "fdfbb9981ed174dbc3d7d662f35c67ed8a1b2dfa9bc7c88e10c15f8256358af7",
+              "previewSrc": "images/previews/SPEC-0726.png?v=bc3d30e38a770fef1fec5b941432dcc6c32ecde4be8e2158edf8b09ea2732834",
+              "thumbnailSrc": "images/thumbs/SPEC-0726.png?v=c42891601d7074a5d61641146071eb52179aa0ad749735b62ee1aafd2f03228a"
             }
           ],
           "observations": [
@@ -67853,6 +67995,24 @@
               "evidence": "This is a positive marketplace catalogue claim only; it is not treated as proof or as a complete finish manifest.",
               "contentHash": "a958e12938d274eadaa6d8d09bff118b579965dc88628bb84ae7fb24c6cea01d",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0722",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/377130887930",
+              "evidence": "English Snorlax 15/112, 90 HP and Kagemaru Himeno. Visible Poké Ball reverse treatment across the rules area. Complete front, including set symbol and number.",
+              "contentHash": "afe99a2d9592967e4512abdbb1fa84abf1e27fb683096a6b5a889c1110ac7c42",
+              "image": "verification/specimens/SPEC-0722.png"
+            },
+            {
+              "observationId": "specimen:SPEC-0726",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.com/itm/227297984809",
+              "evidence": "English Snorlax 15/112, 90 HP and Kagemaru Himeno. Visible foil spots in the artwork and complete printed rules area and border.",
+              "contentHash": "1f8992ee9d66dc455228b120c437347d01e9bee451c3f56193d1e91dac43b3fa",
+              "image": "verification/specimens/SPEC-0726.png"
             },
             {
               "observationId": "unit:U0526",
@@ -68032,6 +68192,17 @@
               "originalHash": "0519a06a047d9095c4f2d49f2ff612bafef3844c3a9354612ec41af6bc8a478e",
               "previewSrc": "images/previews/SPEC-0142.png?v=18e3becf6fea73c790f13e90f06cdac8c47deec5605f5feff82cc54454e0df96",
               "thumbnailSrc": "images/thumbs/SPEC-0142.png?v=2c3932865977b141edf58a4a83b6523fb3d387f5e25f209bd62458b966adade2"
+            },
+            {
+              "src": "verification/specimens/SPEC-0723.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0723",
+              "contentHash": "476d9c48a8f7cc8809739f94d747916262a6d8afe2bcdd3491bc604beefe8bee",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "476d9c48a8f7cc8809739f94d747916262a6d8afe2bcdd3491bc604beefe8bee",
+              "previewSrc": "images/previews/SPEC-0723.png?v=1113284292a62611a7e4a0b3aa52fb1cefc3b9beaa79e156d75161489110bf6d",
+              "thumbnailSrc": "images/thumbs/SPEC-0723.png?v=ed8fc82fde632082943b1db71d5533ecfc95b87b4ded9ff3f151142d53cc71ce"
             }
           ],
           "observations": [
@@ -68133,6 +68304,15 @@
               "evidence": "Back photograph from the same eBay listing and physical French FL 15/112 Ronflex as SPEC-0140 and SPEC-0141. The ordinary western Pokémon back is retained separately so every listing photograph used in the assessment remains part of the data specification.",
               "contentHash": "48377354fb093e5b26cf924b95827f8c4126a1556ac106b05b1d10bf1df43502",
               "image": "verification/specimens/SPEC-0142.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0723",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.fr/itm/357950785315",
+              "evidence": "French Ronflex 15/112, 90 PV, Repos and Kagemaru Himeno. Visible foil within the artwork. Complete printed face and collector number.",
+              "contentHash": "d8f7c37a618c067e8660e1784ad19c2db72be5c2d546bfa799c78cf693835110",
+              "image": "verification/specimens/SPEC-0723.png"
             },
             {
               "observationId": "unit:U0527",
@@ -68274,6 +68454,17 @@
               "originalHash": "eff8602698338ac3a685c318fe7d851bcc617bfe2fd5cbe489e00ba4b6dfd7dd",
               "previewSrc": "images/previews/FL_15_Snorlax_276191.jpg?v=f059050467364768d333bb1c7626941ad119e69ae159666fca4ef421502db520",
               "thumbnailSrc": "images/thumbs/FL_15_Snorlax_276191.jpg?v=b543887ea2f8d6d46a07b80a5df7245c776e6ef1e044bf162d49f724c6311295"
+            },
+            {
+              "src": "verification/specimens/SPEC-0724.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0724",
+              "contentHash": "744af23979602344fc3c1b41c5859c366acd4285535acddbeaa4631398639036",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "744af23979602344fc3c1b41c5859c366acd4285535acddbeaa4631398639036",
+              "previewSrc": "images/previews/SPEC-0724.png?v=ffdc613dc88d32f2abd465c09cbcc6a1d9775acd972d88e0f071aaf40060d6eb",
+              "thumbnailSrc": "images/thumbs/SPEC-0724.png?v=b7f5fb93c45b6f43ba756b8e960ee7c3a49549571732bd94e44689014b87cda9"
             }
           ],
           "observations": [
@@ -68330,6 +68521,15 @@
               "evidence": "ex6-15 variants=true is positive evidence that the printing exists; false values are not used as contradiction.",
               "contentHash": "a80398303facafdb6eb624354c230e4b74bf72e974a9d40fb32b5b004e52099a",
               "image": null
+            },
+            {
+              "observationId": "specimen:SPEC-0724",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.de/itm/157601973369",
+              "evidence": "German Relaxo 15/112, 90 KP, Ausruhen and Kagemaru Himeno. Visible Poké Ball reverse treatment across the rules area. Complete face.",
+              "contentHash": "77cc65d348e969b84d74cff48685e7c2096cdbad9f9faa8f4ed91635df4a6706",
+              "image": "verification/specimens/SPEC-0724.png"
             },
             {
               "observationId": "unit:U0528",
@@ -68481,6 +68681,17 @@
               "originalHash": "64d2dee04d66438f4312e177f6c52d8845091a80ccae688c91976804d218c79e",
               "previewSrc": "images/previews/SPEC-0107.png?v=66e6a68d04d6db22ccd3025ebfae2f553bcb49ee9575dccf8a5fd544ae7fc8c3",
               "thumbnailSrc": "images/thumbs/SPEC-0107.png?v=66e6a68d04d6db22ccd3025ebfae2f553bcb49ee9575dccf8a5fd544ae7fc8c3"
+            },
+            {
+              "src": "verification/specimens/SPEC-0730.png",
+              "label": "inspected specimen",
+              "observationId": "specimen:SPEC-0730",
+              "contentHash": "8d3a586f79d3411c961a35bbba751f1dbe84f4780895714df766490ebfca6c04",
+              "kind": "repository",
+              "reviewable": true,
+              "originalHash": "8d3a586f79d3411c961a35bbba751f1dbe84f4780895714df766490ebfca6c04",
+              "previewSrc": "images/previews/SPEC-0730.png?v=d11cd4315135754c98a40b60444132c0fff66c0321ddfceecd9788e2e51a3dc4",
+              "thumbnailSrc": "images/thumbs/SPEC-0730.png?v=d8fbd0ed053035d624e8777434fc7a17d0e49785a685a22bb514bccc63fa8416"
             }
           ],
           "observations": [
@@ -68537,6 +68748,15 @@
               "evidence": "Archived physical-card sale image paired with the exact sale record 'POKEMON SNORLAX REVERSE HOLO EX FIRERED & LEAFGREEN 15/112 ITA PL NO CHARIZARD' dated 2026-04-02. The pictured slab contains Snorlax 15/112 with the EX-era reverse-holo energy-symbol treatment.",
               "contentHash": "ce9dea5417d6992de4a766324f594adb9fef629652687f9e435a808ccecabedb",
               "image": "verification/specimens/SPEC-0107.jpg"
+            },
+            {
+              "observationId": "specimen:SPEC-0730",
+              "kind": "specimen",
+              "provider": null,
+              "url": "https://www.ebay.it/itm/197818085939",
+              "evidence": "Italian Snorlax 15/112, 90 PV, Riposarsi and Kagemaru Himeno. Foil spots appear within the artwork and the complete rules area is plain. The front shows the regular Holo treatment.",
+              "contentHash": "426e5c7a30291428edff3a42ae125baf23990936723b2f204d0c75f1b1ba93fb",
+              "image": "verification/specimens/SPEC-0730.png"
             },
             {
               "observationId": "unit:U0529",
