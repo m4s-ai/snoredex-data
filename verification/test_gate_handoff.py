@@ -81,13 +81,19 @@ def main() -> int:
         assert f"check_memo.py run --memo refresh -- scripts/{script}.py --check --full-refresh" in release
     assert 'if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi' in release
     assert 'python scripts/regen.py --check --memo "${memo}"' in release
-    # Linux L4 stays the memo-free reference run that builds the published artifact; Windows L4
-    # replays the memo main's full Windows run seeded (owner, 2026-11-09). No L4 leg saves one.
+    # Linux L4 stays the step-memo-free reference run that builds the published artifact and keeps
+    # only P6's immutable-blob memo; Windows L4 replays the memo main's full Windows run seeded
+    # (owner, 2026-11-09). No L4 leg saves one.
     regen_step = release.split("- name: Generated artifacts and core regressions", 1)[1].split("- name:", 1)[0]
-    assert ('if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then memo=off; '
-            'else memo=use; fi') in regen_step
+    assert ('if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then\n'
+            '            memo=off; export SNOREDEX_BLOB_MEMO=use\n'
+            '          else\n'
+            '            memo=use\n'
+            '          fi') in regen_step
+    assert release.count("SNOREDEX_BLOB_MEMO") == regen_step.count("SNOREDEX_BLOB_MEMO") == 1, \
+        "the blob-memo switch is part of the step memo key; set it only for Linux L4"
     restore_step = release.split("- name: Restore verification memo", 1)[1].split("- name:", 1)[0]
-    assert "if: env.GATE_LEVEL == 'L3' || runner.os == 'Windows'" in restore_step
+    assert "if:" not in restore_step
     assert "python scripts/regen.py --check --memo refresh" in release
     assert "if: always() && env.GATE_LEVEL == 'L3'" in release
     assert "path: .git/snoredex-memo" in release

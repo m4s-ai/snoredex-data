@@ -41,11 +41,11 @@ jobs:
           python-version: "3.11"
 
       # Verification memo (#460): steps whose observed inputs are unchanged since they passed on
-      # this branch or on main are reported instead of rerun. Linux L4 never restores it: that is
-      # the reference run that builds and checks the published artifact. Windows L4 replays the
-      # memo the main push's full Windows run seeded for the same tree (owner, 2026-11-09).
+      # this branch or on main are reported instead of rerun. Linux L4 runs every step without it:
+      # that is the reference run that builds and checks the published artifact. It restores the
+      # cache only for P6's immutable-blob memo (see the next step). Windows L4 replays the memo the
+      # main push's full Windows run seeded for the same tree (owner, 2026-11-09).
       - name: Restore verification memo
-        if: env.GATE_LEVEL == 'L3' || runner.os == 'Windows'
         uses: actions/cache/restore@v5
         with:
           path: .git/snoredex-memo
@@ -84,7 +84,14 @@ jobs:
       - name: Generated artifacts and core regressions
         shell: bash
         run: |
-          if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then memo=off; else memo=use; fi
+          # Linux L4: every step cold, but P6 need not reread a Git blob it already read; a Git blob
+          # is immutable and new blobs are always read. Set here only: the variable is part of the
+          # step memo key, so setting it elsewhere would invalidate every pull request's memo.
+          if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then
+            memo=off; export SNOREDEX_BLOB_MEMO=use
+          else
+            memo=use
+          fi
           python scripts/regen.py --check --memo "${memo}"
 
       # Every PR runs the retained-run validation; the memo replays it when none of the files it
