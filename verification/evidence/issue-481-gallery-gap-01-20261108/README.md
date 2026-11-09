@@ -1,3 +1,4 @@
+<!-- doc: role=retained gallery image research and source provenance; stage=task -->
 # Gallery image research, #481 round 01
 
 The [frozen round](https://github.com/m4s-ai/snoredex-data/issues/481#issuecomment-6726889800)
