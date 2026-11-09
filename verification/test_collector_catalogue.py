@@ -574,6 +574,11 @@ def site_table_projection_regressions() -> None:
           and exs_rows[1]["image"] is not None
           and len({row["rowId"] for row in exs_rows}) == 2,
           f"EXS rows: {exs_rows}")
+    # Specimen originals are not in the Pages artifact (its 1 GB limit, #548): the table embeds
+    # their preview, and the gallery links the original on GitHub.
+    check("published pages never point at a specimen original",
+          not any((row["image"] or "").startswith("verification/specimens/") for row in embedded)
+          and '"imageSource":"verification/specimens/' not in (ROOT / "gallery.html").read_text(encoding="utf-8"))
     localizations = {r["localizationId"]: r["displayName"] for r in read("collector_catalogue.json")["localizations"]}
     labels_match = lambda rows: all(r["languageLabel"] == localizations[r["localizationId"]] for r in rows)
     check("language labels follow exact localization", labels_match(embedded))

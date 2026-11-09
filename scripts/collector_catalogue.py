@@ -77,6 +77,8 @@ PUBLISHED_CATALOGUE_SOURCES = (
 DATASET_ID = "snoredex-data/snorlax-current-known"
 SOURCE_REPOSITORY = "https://github.com/m4s-ai/snoredex-data"
 ASSET_BASE_URL = "https://m4s-ai.github.io/snoredex-data/"
+# Specimen originals are not on Pages (its 1 GB site limit); the repository serves their exact bytes.
+SPECIMEN_ASSET_BASE_URL = "https://raw.githubusercontent.com/m4s-ai/snoredex-data/main/"
 CORRECTION_FORM_URL = SOURCE_REPOSITORY + "/issues/new"
 CORRECTION_TEMPLATE = "printing-correction.yml"
 CORRECTION_URL_MAX_LENGTH = 6000
@@ -1536,7 +1538,8 @@ def build_catalogue() -> tuple[dict[str, Any], dict[str, Any]]:
         assets[aid] = {
             "assetId": aid,
             "path": relative,
-            "url": ASSET_BASE_URL + quote(relative, safe="/"),
+            "url": (SPECIMEN_ASSET_BASE_URL if relative.startswith("verification/specimens/")
+                    else ASSET_BASE_URL) + quote(relative, safe="/"),
             "sha256": "sha256:" + sha256_hex(path),
             "mimeType": image_mime(path),
             "imageScope": scope,
