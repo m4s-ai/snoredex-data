@@ -26,6 +26,7 @@ from database import sqlite_dump  # noqa: E402
 REFERENCE_TAG = "refactor-reference-20261109"
 DETAIL_LIMIT = 40
 VALUE_LIMIT = 100
+ABSENT = "<absent>"
 
 # Paths not compared, per collection, as prefixes of "id" or "id/field/...". Every generated date and
 # fingerprint in these payloads is derived from committed inputs or code constants, not the wall
@@ -94,16 +95,20 @@ def flatten(value, path: str) -> dict:
     return {path: value}
 
 
-def short(value, quote: bool = True) -> str:
-    text = json.dumps(value, ensure_ascii=False) if quote else value
+def short(text: str) -> str:
     return text if len(text) <= VALUE_LIMIT else text[:VALUE_LIMIT] + "..."
+
+
+def render(leaves: dict, path: str) -> str:
+    """Serialized leaf, so that False/0 and 1/1.0 differ; a missing path is not null."""
+    return json.dumps(leaves[path], ensure_ascii=False) if path in leaves else ABSENT
 
 
 def changed_fields(record_id: str, old, new, skip: tuple) -> list[str]:
     old, new = flatten(old, record_id), flatten(new, record_id)
     paths = sorted(p for p in old.keys() | new.keys() if not p.startswith(skip))
-    return [f"{short(p, False)}: {short(old.get(p))} -> {short(new.get(p))}"
-            for p in paths if old.get(p) != new.get(p) or (p in old) != (p in new)]
+    pairs = [(p, render(old, p), render(new, p)) for p in paths]
+    return [f"{short(p)}: {short(a)} -> {short(b)}" for p, a, b in pairs if a != b]
 
 
 def diff_collection(name: str, ref: dict, cur: dict) -> tuple[str, list[str], int]:
@@ -112,8 +117,8 @@ def diff_collection(name: str, ref: dict, cur: dict) -> tuple[str, list[str], in
     ref = {i: v for i, v in ref.items() if not i.startswith(skip)}
     cur = {i: v for i, v in cur.items() if not i.startswith(skip)}
     added, removed = sorted(cur.keys() - ref.keys()), sorted(ref.keys() - cur.keys())
-    details = [f"{name} / {short(i, False)}: added" for i in added]
-    details += [f"{name} / {short(i, False)}: removed" for i in removed]
+    details = [f"{name} / {short(i)}: added" for i in added]
+    details += [f"{name} / {short(i)}: removed" for i in removed]
     changed = 0
     for i in sorted(ref.keys() & cur.keys()):
         fields = changed_fields(i, ref[i], cur[i], skip)
@@ -145,18 +150,22 @@ def selftest(ref: dict) -> int:
     cur = copy.deepcopy(ref)
     rows = cur["index.rows"]
     first, second = list(rows)[:2]
-    rows[first]["selftestField"] = "changed"
+    rows[first]["selftestField"] = "カビゴン"
     del rows[second]
     rows["selftest-added"] = {"rowId": "selftest-added"}
     _, details, count = diff_collection("index.rows", ref["index.rows"], rows)
     expected = ["index.rows / selftest-added: added", f"index.rows / {second}: removed",
-                f'index.rows / {first}/selftestField: null -> "changed"']
+                f'index.rows / {first}/selftestField: {ABSENT} -> "カビゴン"']
     assert count == 3 and sorted(details) == sorted(expected), details
-    print("selftest ok: one changed field, one removed id and one added id reported exactly")
+    typed = changed_fields("t", {"flag": False, "n": 1, "z": None}, {"flag": 0, "n": 1.0}, ())
+    assert typed == ["t/flag: false -> 0", "t/n: 1 -> 1.0", f"t/z: null -> {ABSENT}"], typed
+    print(f"selftest ok: changed, removed and added ids, type changes and null vs absent; {details[-1]}")
     return 0
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):  # cp1252 consoles cannot print Japanese card names
+        stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--ref", default=REFERENCE_TAG, help=f"git revision (default {REFERENCE_TAG})")
     parser.add_argument("--selftest", action="store_true", help="check the differ on mutated payloads")
