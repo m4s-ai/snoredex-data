@@ -225,12 +225,12 @@ verification/
                               detect byte drift. Follow the specimen and reference acceptance
                               contract in RESUME.md and the batch execution contract in WORKFLOW-MAP.md:
                               scoped checkpoints during intake, one full gate at package delivery.
-                              Checks S7-S12 cover
-                              it; publish.py already allowlists the directory and LICENSE.md
-                              decision 4 covers the category, so no approval is needed per image.
-                              PNG and JPEG only: publish.py also allowlists .webp, but
-                              `image_format` in review_findings.py knows PNG and JPEG magic
-                              alone, so a committed .webp would fail S9.
+                              Checks S7-S12 cover intake. The repository retains the originals.
+                              Pages serves image derivatives from images/, and the gallery links
+                              to the repository copy on GitHub. LICENSE.md decisions 3 and 4
+                              cover publication of these evidence categories.
+                              Import a PNG or JPEG. For a WebP source, retain the original and
+                              convert it losslessly to PNG per the specimen-intake skill.
                               A raw GitHub attachment URL is blocked by the agent proxy, but the
                               issue HTML contains the signed private-user-images URL. The one-command
                               route is `fetch_attachment.py --issue NUMBER --manifest PATH`; it
