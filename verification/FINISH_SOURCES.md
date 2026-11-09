@@ -107,9 +107,10 @@ two-version scope, or with the mark position cropped or illegible, the finish st
 Set-specific cues that separate holo from reverse holo on a photograph, each a visible feature to
 record in `basis`:
 
-- **FireRed & LeafGreen and other EX-era sets:** the reverse holo carries the Poké Ball foil
-  pattern across the card body, including the rules box; the regular holo has foil only inside the
+- **FireRed & LeafGreen:** the reverse holo carries its energy-symbol and Poké Ball foil pattern
+  outside the artwork window, including the rules box; the regular holo has foil only inside the
   artwork window (SPEC-0730, a plain rules area: regular holo). The two were mixed up before #551.
+  Other EX sets use their own reverse patterns (`scripts/finishes.py`); never carry this one over.
 - **Dragon Frontiers 1–12:** the reverse holo carries the set-logo stamp in the artwork (above).
 - **Rising Rivals Rival Season print:** a diagonal crosshatch foil, distinct from both the regular
   holo and the reverse holo.

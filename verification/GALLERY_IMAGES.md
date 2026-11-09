@@ -71,7 +71,8 @@ original was never enlarged before intake.
    Keep a downloaded JPEG's bytes unchanged when it carries only technical metadata. Otherwise
    retain a pixel-identical PNG (same decoded pixels, mode and dimensions) that omits the metadata,
    and record both hashes in the bundle's `source-map.json`. Every evidence bundle `README.md`
-   starts with the `<!-- doc: role=...; stage=task -->` header; without it gate `D1` fails.
+   starts with a `<!-- doc: role=...; stage=... -->` header whose stage is one of `DOC_STAGES`
+   (usually `reference` or `task`); without it gate `D1` fails.
 2. Record recipes with `pending` review status, hashes, decoded dimensions, corners and notes.
 3. Install the pinned verification requirements and Chromium. Run
    `python verification/prepare_gallery_images.py --prepare RECIPE_ID`, passing several IDs when
