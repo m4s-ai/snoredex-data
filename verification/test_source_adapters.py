@@ -244,9 +244,9 @@ class SourceAdapterTests(unittest.TestCase):
                     "status": status,
                     "contractHash": adapters.content_hash(run_contract),
                     "capabilityGraphHash": run_capability_hash,
-                }), encoding="utf-8")
+                }), encoding="utf-8", newline="\n")
                 (run_dir / "contract.json").write_text(
-                    json.dumps(run_contract), encoding="utf-8"
+                    json.dumps(run_contract), encoding="utf-8", newline="\n"
                 )
             with (
                 mock.patch.object(adapters, "RUNS_DIR", runs_dir),
@@ -286,9 +286,9 @@ class SourceAdapterTests(unittest.TestCase):
                     "runId": run_id, "status": "complete",
                     "contractHash": adapters.content_hash(contract),
                     "capabilityGraphHash": capability_hash,
-                }), encoding="utf-8")
+                }), encoding="utf-8", newline="\n")
                 (run_dir / "contract.json").write_text(
-                    json.dumps(contract), encoding="utf-8"
+                    json.dumps(contract), encoding="utf-8", newline="\n"
                 )
             with (
                 mock.patch.object(adapters, "RUNS_DIR", runs_dir),
@@ -329,9 +329,9 @@ class SourceAdapterTests(unittest.TestCase):
             runs_dir = temporary_root / "runs"
             source_dir = runs_dir / source_id
             (source_dir / "raw").mkdir(parents=True)
-            (source_dir / "raw" / "sets.json").write_text("[]", encoding="utf-8")
+            (source_dir / "raw" / "sets.json").write_text("[]", encoding="utf-8", newline="\n")
             (source_dir / "contract.json").write_text(
-                json.dumps(source_contract), encoding="utf-8"
+                json.dumps(source_contract), encoding="utf-8", newline="\n"
             )
             (source_dir / "manifest.json").write_text(json.dumps({
                 "runId": source_id,
@@ -340,7 +340,7 @@ class SourceAdapterTests(unittest.TestCase):
                 "capabilityGraphHash": "sha256:previous",
                 "requests": [],
                 "failures": [],
-            }), encoding="utf-8")
+            }), encoding="utf-8", newline="\n")
             projection = {"meta": {"counts": {"records": 0, "runErrors": 0}}, "records": []}
             with (
                 mock.patch.object(adapters, "RUNS_DIR", runs_dir),

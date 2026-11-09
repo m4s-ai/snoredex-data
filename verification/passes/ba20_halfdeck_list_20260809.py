@@ -83,7 +83,7 @@ def main() -> int:
         unit["sourceType"] = SOURCE_TYPE
         updated += 1
 
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"recorded the half-deck list behind {updated} Battle Academy 2020 confirmation(s)")
     for unit_id in TARGETS:
         unit = by_id[unit_id]

@@ -295,7 +295,7 @@ def save_memo(path: Path | None, memo: dict[str, list[str]]) -> None:
     temporary = path.with_name(path.name + f".{os.getpid()}.tmp")
     temporary.write_text(json.dumps(
         {"schema": MEMO_SCHEMA, "fingerprint": SCANNER_FINGERPRINT, "blobs": memo},
-        sort_keys=True, separators=(",", ":")), encoding="utf-8")
+        sort_keys=True, separators=(",", ":")), encoding="utf-8", newline="\n")
     os.replace(temporary, path)
 
 

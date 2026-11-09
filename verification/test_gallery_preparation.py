@@ -90,12 +90,12 @@ def pixel_samples(page, root, record):
 
 
 def check_prepared_binding(root, recipe, record):
-    (root / RECIPES).write_text(json.dumps({"schemaVersion": 1, "recipes": [recipe]}))
-    (root / MANIFEST).write_text(json.dumps({"schemaVersion": 1, "entries": {recipe["id"]: record}}))
+    (root / RECIPES).write_text(json.dumps({"schemaVersion": 1, "recipes": [recipe]}), newline="\n")
+    (root / MANIFEST).write_text(json.dumps({"schemaVersion": 1, "entries": {recipe["id"]: record}}), newline="\n")
     for relative in INPUTS:
         path = root / relative
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text("{}")
+        path.write_text("{}", newline="\n")
     inventory = {"meta": {"inputs": inventory_inputs(root)},
                  "sources": {recipe["source"]: source_info(root, recipe["source"])},
                  "items": [{"itemId": "fixture-item", "candidates": [
@@ -105,7 +105,7 @@ def check_prepared_binding(root, recipe, record):
     assert cards[0]["imageSizes"] == record["images"]
     assert cards[0]["imageSource"] == recipe["source"]
     assert inventory["items"][0]["status"] == "accepted"
-    (root / "verification/gallery_image_inventory.json").write_text(json.dumps(inventory))
+    (root / "verification/gallery_image_inventory.json").write_text(json.dumps(inventory), newline="\n")
     assert published_gallery_images(root) == {output["path"] for output in record["images"]}
     assert filter_gallery_outputs(["index.html", "images/gallery/orphan.webp"], root) == ["index.html"]
     before = {path: (path.read_bytes(), path.stat().st_mtime_ns) for path in root.rglob("*") if path.is_file()}
@@ -212,7 +212,7 @@ def check_responsive_gallery(browser, root, recipe, record):
     card.update(prepared_image(recipe, record, recipe["targets"][0]))
     template = (ROOT / "site/gallery.html").read_text(encoding="utf-8")
     data = '<script id="gallery-data" type="application/json">' + json.dumps([card]) + "</script>"
-    (root / "gallery.html").write_text(template.replace("<!-- GALLERY_DATA -->", data), encoding="utf-8")
+    (root / "gallery.html").write_text(template.replace("<!-- GALLERY_DATA -->", data), encoding="utf-8", newline="\n")
     page = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=2)
     page.goto((root / "gallery.html").as_uri())
     thumbnail = page.locator(".gallery-card img")

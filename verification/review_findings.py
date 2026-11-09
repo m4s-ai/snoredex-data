@@ -20,6 +20,7 @@ Runs on Python 3.9+ with no third-party dependencies and no network access.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import hashlib
 import importlib.util
@@ -2604,6 +2605,49 @@ def unportable_paths(tracked: list[bytes]) -> list[str]:
     return unportable
 
 
+def _mode_argument(call: ast.Call) -> ast.expr | None:
+    # Path.open(mode) and NamedTemporaryFile(mode) take the mode first; open/io.open/os.fdopen second.
+    func = call.func
+    first = isinstance(func, ast.Attribute) and getattr(func.value, "id", None) not in {"io", "os", "codecs"}
+    positional = call.args[0 if first else 1:][:1]
+    keyword = [kw.value for kw in call.keywords if kw.arg == "mode"]
+    return (keyword or positional or [None])[0]
+
+
+def _write_mode(call: ast.Call) -> str:
+    """The literal mode a call opens a file with ("w" for write_text), or "" when it opens none."""
+    func = call.func
+    name = func.attr if isinstance(func, ast.Attribute) else getattr(func, "id", None)
+    if name == "write_text":
+        return "w"
+    if name not in {"open", "fdopen", "NamedTemporaryFile"}:
+        return ""
+    mode = _mode_argument(call)
+    value = mode.value if isinstance(mode, ast.Constant) and isinstance(mode.value, str) else ""
+    return value if re.fullmatch(r"[rwaxbt+]+", value) else ""  # a URL or member name is no mode
+
+
+def _is_crlf_prone(node: ast.AST) -> bool:
+    if not isinstance(node, ast.Call):
+        return False
+    mode = _write_mode(node)
+    return ("b" not in mode and bool(set(mode) & set("wax"))
+            and not any(kw.arg in {"newline", None} for kw in node.keywords))
+
+
+def crlf_prone_writers(sources: dict[str, str]) -> list[str]:
+    """`file:line` of every text write without `newline=`; Windows would translate `\\n` to CRLF."""
+    return [f"{name}:{node.lineno}" for name, text in sorted(sources.items())
+            for node in ast.walk(ast.parse(text, filename=name)) if _is_crlf_prone(node)]
+
+
+def _writer_sources(tracked: list[bytes]) -> dict[str, str]:
+    names = (raw.decode("utf-8", errors="surrogateescape") for raw in tracked)
+    return {name: (ROOT / name).read_text(encoding="utf-8") for name in names
+            if name.endswith(".py") and name.startswith(("scripts/", "verification/"))
+            and not name.startswith("verification/archive/") and (ROOT / name).exists()}
+
+
 def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
     updates: dict[str, Any] = {}
     with guarded("G9", "portability contract"):
@@ -2666,6 +2710,12 @@ def _collect_g9(state: dict[str, Any]) -> dict[str, Any]:
         check("X6", "Every tracked path is checkoutable on Windows", "FAIL", not unportable,
               f"{len(unportable)} tracked path(s) a Windows checkout cannot represent: "
               f"{unportable[:5]}. Rename the file and every reference to it.")
+        # A text write without newline="\n" turns \n into CRLF on Windows: the index stays LF through
+        # .gitattributes, but every regenerated file then shows as modified in the working tree.
+        crlf_writers = crlf_prone_writers(_writer_sources(tracked))
+        check("X7", "Text writers pin LF line endings", "FAIL", not crlf_writers,
+              f"{len(crlf_writers)} write_text/open(..., 'w') call(s) without newline=: "
+              f"{crlf_writers[:10]}. Pass newline=\"\\n\".")
     return updates
 
 def _collect_g10(state: dict[str, Any]) -> dict[str, Any]:

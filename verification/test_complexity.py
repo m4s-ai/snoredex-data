@@ -70,40 +70,40 @@ def outer(value, rows):
             ) + f"{'    ' * (count + 1)}pass\n"
 
         (root / "scripts" / "active.py").write_text(
-            nested_ifs("eleven", 10), encoding="utf-8"
+            nested_ifs("eleven", 10), encoding="utf-8", newline="\n"
         )
         (root / "verification" / "test_excluded.py").write_text(
-            nested_ifs("test_bad", 20), encoding="utf-8"
+            nested_ifs("test_bad", 20), encoding="utf-8", newline="\n"
         )
         (root / "verification" / "archive" / "old.py").write_text(
-            nested_ifs("old", 20), encoding="utf-8"
+            nested_ifs("old", 20), encoding="utf-8", newline="\n"
         )
         (root / "verification" / "passes" / "old.py").write_text(
-            nested_ifs("old", 20), encoding="utf-8"
+            nested_ifs("old", 20), encoding="utf-8", newline="\n"
         )
         (root / "verification" / "complexity_baseline.json").write_text(
-            '{"exceptions": {}}', encoding="utf-8"
+            '{"exceptions": {}}', encoding="utf-8", newline="\n"
         )
         metrics, failures, _, _ = scan(root)
         check("new CC 11 fails", any("active.py::eleven" in failure for failure in failures))
         check("test/archive/pass files are excluded", not any("old" in failure for failure in failures))
 
         (root / "verification" / "complexity_baseline.json").write_text(
-            '{"exceptions": {"scripts/active.py::eleven": 11}}', encoding="utf-8"
+            '{"exceptions": {"scripts/active.py::eleven": 11}}', encoding="utf-8", newline="\n"
         )
         _, failures, _, _ = scan(root)
         check("allowlisted score passes", not failures)
         (root / "scripts" / "active.py").write_text(
-            nested_ifs("eleven", 11), encoding="utf-8"
+            nested_ifs("eleven", 11), encoding="utf-8", newline="\n"
         )
         _, failures, _, _ = scan(root)
         check("allowlisted score increase fails", any("exceeds 11" in failure for failure in failures))
         (root / "verification" / "complexity_baseline.json").write_text(
             '{"exceptions": {"scripts/active.py::eleven": 12, "scripts/gone.py::gone": 11}}',
-            encoding="utf-8",
+            encoding="utf-8", newline="\n",
         )
         (root / "scripts" / "active.py").write_text(
-            nested_ifs("eleven", 10), encoding="utf-8"
+            nested_ifs("eleven", 10), encoding="utf-8", newline="\n"
         )
         _, failures, tightening, removed = scan(root)
         check("lower score is non-blocking", not failures)

@@ -220,7 +220,7 @@ def main() -> None:
             finishes.write_refresh_candidate(staged)
             assert finishes.load_refresh_candidate(set(staged)) == staged
             candidate_path.write_text(candidate_path.read_text(encoding="utf-8")
-                                      .replace("test-card", "tampered"), encoding="utf-8")
+                                      .replace("test-card", "tampered"), encoding="utf-8", newline="\n")
             try:
                 finishes.load_refresh_candidate(set(staged))
             except ValueError:
@@ -239,7 +239,7 @@ def main() -> None:
             "generated": "2026-08-01",
             "records": staged,
         }
-        snapshot_path.write_text(json.dumps(old_snapshot), encoding="utf-8")
+        snapshot_path.write_text(json.dumps(old_snapshot), encoding="utf-8", newline="\n")
         original_snapshot_path = finishes.SNAPSHOT_PATH
         original_candidate_path = finishes.REFRESH_CANDIDATE_PATH
         original_cache_dir = finishes.CACHE_DIR
@@ -250,7 +250,7 @@ def main() -> None:
         finishes._prepare_finish_indexes = lambda _context: None
         finishes._build_finish_units = lambda _context: [retained]
         finishes.OUTPUT_PATH = temporary_root / "finish_units.json"
-        finishes.OUTPUT_PATH.write_text(json.dumps({"units": [retained]}), encoding="utf-8")
+        finishes.OUTPUT_PATH.write_text(json.dumps({"units": [retained]}), encoding="utf-8", newline="\n")
         finishes.SNAPSHOT_PATH = snapshot_path
         finishes.REFRESH_CANDIDATE_PATH = candidate_path
         finishes.CACHE_DIR = temporary_root / "cache"
@@ -295,7 +295,7 @@ def main() -> None:
                     }
                 }
             }),
-            encoding="utf-8",
+            encoding="utf-8", newline="\n",
         )
         original_verification = verifier.VERIFICATION
         original_fixture = verifier.FIXTURE
@@ -334,7 +334,7 @@ def main() -> None:
                 "https://example.test/identity": products,
                 "https://example.test/prices": {"success": True, "error": None,
                                                 "results": price_rows},
-            }}), encoding="utf-8")
+            }}), encoding="utf-8", newline="\n")
             verifier.VERIFICATION = verification
             verifier.FIXTURE = fixture
             try:

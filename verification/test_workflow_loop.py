@@ -92,9 +92,9 @@ def main() -> int:
             )
         missing_staging_path = Path(raw_records) / "missing-staging.json"
         assert _read_staging(missing_staging_path) == {}
-        missing_staging_path.write_text("{truncated", encoding="utf-8")
+        missing_staging_path.write_text("{truncated", encoding="utf-8", newline="\n")
         assert _read_staging(missing_staging_path) == {}
-        missing_staging_path.write_text("[]", encoding="utf-8")
+        missing_staging_path.write_text("[]", encoding="utf-8", newline="\n")
         assert _read_staging(missing_staging_path) == {}
         records_path.write_bytes(b'{"recordId":"record-2"}\n')
         assert not _records_projection_matches(records_projection, records_path)
@@ -370,7 +370,7 @@ def main() -> int:
         for path, run_id in ((older, older.name), (newer, newer.name)):
             path.mkdir()
             (path / "manifest.json").write_text(
-                json.dumps({"runId": run_id, "status": "complete"}), encoding="utf-8"
+                json.dumps({"runId": run_id, "status": "complete"}), encoding="utf-8", newline="\n"
             )
         # Filesystem mtimes are deliberately reversed; manifest run identity still wins.
         os.utime(older / "manifest.json", (200, 200))

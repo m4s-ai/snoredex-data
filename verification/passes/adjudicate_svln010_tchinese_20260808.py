@@ -87,7 +87,7 @@ def main() -> int:
         document["meta"]["count"] = len(decisions)
 
     ADJUDICATIONS.write_text(
-        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
     )
     print(f"{DECISION['adjudicationId']}: svLN 010 T-Chinese -> not-printed "
           f"({len(decisions)} owner decisions)")

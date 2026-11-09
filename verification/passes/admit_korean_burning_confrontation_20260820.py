@@ -250,11 +250,11 @@ def main() -> int:
         row["sourceKind"] == "source-first-local-set-profile"
         for row in set_document["sourceRecords"])
 
-    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    SETS.write_text(json.dumps(set_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    SETS.write_text(json.dumps(set_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     specimen_document["count"] = len(specimens)
     SPECIMENS.write_text(json.dumps(specimen_document, indent=2, ensure_ascii=False) + "\n",
-                         encoding="utf-8")
+                         encoding="utf-8", newline="\n")
     print(f"resolved SPEC-0037 -> {ADMITTED_ENTRY['printId']}; store now "
           f"{document['meta']['counts']}")
     return 0

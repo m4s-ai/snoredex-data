@@ -911,7 +911,7 @@ def main() -> int:
     }
     report_path = args.out / f"{run_id}.json" if args.out.suffix != ".json" else args.out
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     candidate_summary = _discovery_summary(
         args.loop, current["progress"], decision=decision,
     )

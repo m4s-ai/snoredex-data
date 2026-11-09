@@ -197,7 +197,7 @@ def main() -> int:
         "ADR-0001 D5 (owner, 2026-08-10) for codes backed by a tier-1 publisher record, "
         "language and identity only"
     )
-    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
     print(f"admitted {added} catch-up print(s), held {held_added}; "
           f"store now {document['meta']['counts']}")

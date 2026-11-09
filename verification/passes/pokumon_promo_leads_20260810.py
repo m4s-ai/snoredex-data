@@ -112,7 +112,7 @@ def main() -> int:
         "admitted": len(document["prints"]),
         "held": len(held),
     }
-    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"held {added} new promo lead(s); store now {document['meta']['counts']}")
     for locality, language, set_code, number, card_name, _slug, _n in LEADS:
         print(f"  {locality}  {set_code:<5}{number:>5}  {language:<11} {card_name}")

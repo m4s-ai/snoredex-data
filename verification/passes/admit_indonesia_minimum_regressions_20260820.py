@@ -165,8 +165,8 @@ def main() -> int:
     set_document["meta"]["counts"]["sourceFirstLocalSets"] = sum(
         row["sourceKind"] == "source-first-local-set-profile" for row in set_rows
     )
-    PRINTS.write_text(json.dumps(print_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    SETS.write_text(json.dumps(set_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(print_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
+    SETS.write_text(json.dumps(set_document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"admitted {added_prints} Indonesian print(s), added {added_profiles} local-set profile(s)")
     return 0
 

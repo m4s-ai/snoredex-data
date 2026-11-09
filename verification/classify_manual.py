@@ -78,7 +78,7 @@ def write_csv(path, rows: list[dict]) -> None:
     for row in rows:
         writer.writerow({field: "" if row.get(field) is None else row.get(field)
                          for field in CSV_FIELDS})
-    path.write_text(buffer.getvalue(), encoding="utf-8")
+    path.write_text(buffer.getvalue(), encoding="utf-8", newline="\n")
 
 
 def main() -> int:

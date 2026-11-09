@@ -89,7 +89,7 @@ def main() -> None:
 
     if changed:
         SPECIMENS.write_text(
-            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     print(f"Corrected {changed} Indonesian specimen record(s) to the SV-P/ID 117 identity.")
 

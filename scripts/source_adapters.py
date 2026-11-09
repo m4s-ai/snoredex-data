@@ -89,7 +89,7 @@ def capability_slice(capability: Any, surface_ids: Iterable[str] | None) -> dict
 
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
 
 def render_projection(projection: dict[str, Any]) -> tuple[str, str]:
@@ -845,7 +845,7 @@ def refresh(run_id: str, retrieved_at: str | None) -> None:
     write_json(run_dir / "manifest.json", manifest)
     projection, _ = build_latest(contract, capability)
     summary_text, records_text = render_projection(projection)
-    OUTPUT_PATH.write_text(summary_text, encoding="utf-8")
+    OUTPUT_PATH.write_text(summary_text, encoding="utf-8", newline="\n")
     RECORDS_PATH.write_bytes(records_text.encode("utf-8"))
     print(
         f"retained {run_id}: {projection['meta']['counts']['records']} source-first records, "
@@ -920,7 +920,7 @@ def replay_run(source_run_id: str, run_id: str, replayed_at: str | None) -> None
 
     projection, _ = build_latest(contract, capability)
     summary_text, records_text = render_projection(projection)
-    OUTPUT_PATH.write_text(summary_text, encoding="utf-8")
+    OUTPUT_PATH.write_text(summary_text, encoding="utf-8", newline="\n")
     RECORDS_PATH.write_bytes(records_text.encode("utf-8"))
     counts = projection["meta"]["counts"]
     print(
@@ -988,7 +988,7 @@ def main() -> int:
                 f"accounted slices; {counts['gaps']} explicit gaps"
             )
             return 0
-        OUTPUT_PATH.write_text(rendered, encoding="utf-8")
+        OUTPUT_PATH.write_text(rendered, encoding="utf-8", newline="\n")
         RECORDS_PATH.write_bytes(records_rendered.encode("utf-8"))
         print(f"wrote {OUTPUT_PATH.relative_to(ROOT)} from immutable run {run_dir.name}")
         return 0

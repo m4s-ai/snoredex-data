@@ -54,7 +54,7 @@ def main() -> int:
         counts[value] += 1
 
     if changed:
-        UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+        UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"recorded structured evidence fields on {changed} unit(s); {len(units)} total")
     for value in sorted(counts):
         print(f"  {value:18} {counts[value]}")

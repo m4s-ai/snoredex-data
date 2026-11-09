@@ -314,8 +314,8 @@ the index lives in the code rather than here.
   `units.json` with fresh ids and discards the verification state: never run it.
 - **`scripts/analyze.py`** alone produces the four `analysis_artists/shared_cards/variants/
   language_drift` files, from `snorlax_cards.json` only.
-- **LF line endings** (`X1`), **no UTF-8 BOM** (`X5`) in tracked text, and only paths a Windows
-  checkout can represent (`X6`).
+- **LF line endings** (`X1`; every text writer passes `newline=` so Windows writes LF too, `X7`),
+  **no UTF-8 BOM** (`X5`) in tracked text, and only paths a Windows checkout can represent (`X6`).
 - `verification/checks.py` is the protocol shared by `review_integrity.py` (invariants *within*
   each store) and `review_findings.py` (consistency *between* stores and consumer artifacts).
 - **Active instructions are one live truth.** When new research invalidates operational guidance,

@@ -1288,7 +1288,7 @@ def main() -> None:
                              if row["specimenId"] == "SPEC-0551")
         assert not identity_only.get("physicalObservation")
         identity_only["recordedAt"] = "2031-02-03"
-        specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+        specimens_path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
         original_specimens_path = graph_module.SPECIMENS
         graph_module.SPECIMENS = specimens_path
         try:
@@ -1296,7 +1296,7 @@ def main() -> None:
                             if not row.get("citedBy") and not row.get("physicalObservation")
                             and not row.get("sameCardAs") and row["specimenId"] == "SPEC-0012")
             unlinked["recordedAt"] = "2040-01-01"
-            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
             dated_identity = project_physical_evidence(deepcopy(graph))
             assert dated_identity["meta"]["generated"] == "2031-02-03"
             assert project_physical_evidence(deepcopy(dated_identity)) == dated_identity
@@ -1304,17 +1304,17 @@ def main() -> None:
             assert project_physical_evidence(dated_identity)["meta"]["generated"] == "2031-02-04"
             # An unknown citation cannot promote the later unadmitted date either.
             unlinked["citedBy"] = ["nonexistent:release"]
-            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
             assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2031-02-03"
             # Direct source-first evidence remains supporting without a reverse citation.
             direct = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0285")
             direct["citedBy"] = []
             direct["recordedAt"] = "2032-01-01"
-            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
             assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2032-01-01"
             physical = next(row for row in specimens["specimens"] if row["specimenId"] == "SPEC-0554")
             physical["recordedAt"] = "2033-01-01"
-            specimens_path.write_text(json.dumps(specimens), encoding="utf-8")
+            specimens_path.write_text(json.dumps(specimens), encoding="utf-8", newline="\n")
             assert project_physical_evidence(deepcopy(graph))["meta"]["generated"] == "2033-01-01"
         finally:
             graph_module.SPECIMENS = original_specimens_path
@@ -1340,7 +1340,7 @@ def main() -> None:
             for printing in unit.get("printings", []):
                 if printing.get("markings"):
                     printing["markings"].reverse()
-        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8", newline="\n")
         original_finish_path = graph_module.FINISH_UNITS
         graph_module.FINISH_UNITS = finish_path
         try:
@@ -1363,7 +1363,7 @@ def main() -> None:
             if printing.get("printingId") == retained_source_id
         )
         shifted["printingId"] = "F0167-P99"
-        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8", newline="\n")
         original_finish_path = graph_module.FINISH_UNITS
         graph_module.FINISH_UNITS = finish_path
         try:
@@ -1602,10 +1602,10 @@ def main() -> None:
         conflicted_printing["verificationStatus"] = "pending"
         conflicted_printing["specimenIds"] = ["SPEC-0014"]
         conflicted_printing["conflictsWith"] = ["SPEC-0040"]
-        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8")
+        finish_path.write_text(json.dumps(finish_copy), encoding="utf-8", newline="\n")
         specimens_path.write_text(
             (ROOT / "verification/specimens.json").read_text(encoding="utf-8"),
-            encoding="utf-8",
+            encoding="utf-8", newline="\n",
         )
         original_finish_path = graph_module.FINISH_UNITS
         original_specimens_path = graph_module.SPECIMENS
@@ -1664,7 +1664,7 @@ def main() -> None:
             row for row in invalid["entities"] if row["entityType"] == "localization"
         )
         localization["payload"]["localizationId"] = "INVALID"
-        output.write_text(json.dumps(invalid), encoding="utf-8")
+        output.write_text(json.dumps(invalid), encoding="utf-8", newline="\n")
         before = output.read_bytes()
         original_output = graph_module.OUTPUT
         original_arguments = sys.argv

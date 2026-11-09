@@ -86,7 +86,7 @@ def main() -> int:
                 return 1
 
             path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n",
-                            encoding="utf-8")
+                            encoding="utf-8", newline="\n")
             changed += 1
             print(f"{run_dir.name}: pinned to {', '.join(surfaces)}")
 

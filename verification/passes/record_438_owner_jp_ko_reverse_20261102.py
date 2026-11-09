@@ -105,7 +105,7 @@ def main() -> int:
         else:
             existing.clear()
             existing.update(entry)
-    ADJUDICATIONS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n")
+    ADJUDICATIONS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", newline="\n")
     print(f"wrote {ADJUDICATIONS}")
     return 0
 

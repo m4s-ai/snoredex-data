@@ -164,7 +164,7 @@ def main() -> int:
         record["physicalObservation"] = observation
 
     body = json.dumps(document, indent=2, ensure_ascii=False) + "\n"
-    SPECIMENS.write_text(body, encoding="utf-8")
+    SPECIMENS.write_text(body, encoding="utf-8", newline="\n")
 
     print(f"recorded a physical observation on {len(OBSERVATIONS)} of {len(records)} specimens")
     for specimen_id, observation in sorted(OBSERVATIONS.items()):

@@ -36,8 +36,8 @@ def main() -> int:
         assert not validate_manifest(
             linux, catalogue=committed_catalogue, expected_commit=commit, expected_gate="L4"
         )
-        (temp / "gate-manifest-Linux.json").write_text(json.dumps(linux), encoding="utf-8")
-        (temp / "gate-manifest-Windows.json").write_text(json.dumps(windows), encoding="utf-8")
+        (temp / "gate-manifest-Linux.json").write_text(json.dumps(linux), encoding="utf-8", newline="\n")
+        (temp / "gate-manifest-Windows.json").write_text(json.dumps(windows), encoding="utf-8", newline="\n")
         assert not validate_directory(
             temp, catalogue=committed_catalogue,
             expected_commit=commit, expected_gate="L4", minimum=2,

@@ -260,7 +260,7 @@ def verify_derivative_writer() -> None:
             first_entry["preview"]["sha256"] = hashlib.sha256(first_preview.read_bytes()).hexdigest()
             for kind in ("preview", "thumbnail"):
                 first_entry[kind].pop("encoderVersion", None)
-            manifest_path.write_text(json.dumps(first), encoding="utf-8")
+            manifest_path.write_text(json.dumps(first), encoding="utf-8", newline="\n")
             artwork_derivatives._MANIFEST_CACHE = first
             if artwork_derivatives.current_derivatives(source, first_entry["sourceHash"]):
                 fail("old PNG encoder cache survived version invalidation")
@@ -407,7 +407,7 @@ def main() -> int:
             with patch.object(sys, "argv", ["artwork_review.py", "--check"]):
                 assert artwork_review.main() == 0
                 assert (output.read_bytes(), output.stat().st_mtime_ns) == before
-                output.write_text("{}\n", encoding="utf-8")
+                output.write_text("{}\n", encoding="utf-8", newline="\n")
                 assert artwork_review.main() == 1
                 output.unlink()
                 assert artwork_review.main() == 1

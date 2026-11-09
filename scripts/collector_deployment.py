@@ -136,7 +136,7 @@ def main() -> int:
             raise ValueError("; ".join(errors))
         args.out.parent.mkdir(parents=True, exist_ok=True)
         args.out.write_text(
-            json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
         print(f"collector deployment manifest: {args.out}")
         return 0

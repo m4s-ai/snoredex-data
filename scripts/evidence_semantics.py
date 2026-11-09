@@ -393,7 +393,7 @@ def main() -> int:
         return 0
 
     OUTPUT_PATH.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n",
-                           encoding="utf-8")
+                           encoding="utf-8", newline="\n")
     counts = document["counts"]
     print(f"{OUTPUT_PATH.relative_to(ROOT)}: {counts['units']} units classified")
     for grain, statuses in counts["byGranularity"].items():

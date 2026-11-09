@@ -137,7 +137,7 @@ def main() -> None:
         document["specimens"].sort(key=lambda s: s["specimenId"])
         document["count"] = len(document["specimens"])
         SPECIMENS.write_text(
-            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     held = sum(1 for s in document["specimens"] if s.get("heldBy") == OWNER)
     print(f"Added {added} specimen record(s); {len(document['specimens'])} total "

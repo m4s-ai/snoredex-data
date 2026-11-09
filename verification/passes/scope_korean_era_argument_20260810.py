@@ -85,7 +85,7 @@ def main() -> int:
         return 0
 
     unit["evidence"] = unit["evidence"].rstrip().rstrip(".") + "." + CORRECTION
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"{UNIT_ID} HSZ 027 Korean: rationale does not cover 2012-04-20; inference narrowed, "
           f"verdict unchanged, retraction referred to the owner (#88)")
     print("  26 other market-history contradictions checked: all covered by their cited bound")

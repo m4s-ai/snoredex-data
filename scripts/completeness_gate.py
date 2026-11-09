@@ -342,7 +342,7 @@ def main() -> int:
             if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != rendered:
                 raise GateError(f"stale summary: {OUTPUT.relative_to(ROOT)}")
         else:
-            OUTPUT.write_text(rendered, encoding="utf-8")
+            OUTPUT.write_text(rendered, encoding="utf-8", newline="\n")
         print(
             f"[ ok ] completeness gate: {inputs['source']['meta']['generatedFromRun']} + "
             f"{inputs['card']['meta']['generatedFromRun']}; "

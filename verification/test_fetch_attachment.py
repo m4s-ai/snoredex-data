@@ -37,7 +37,7 @@ def verify_multiple_views_case(*, secondary_finish: bool, reverse: bool) -> None
     with tempfile.TemporaryDirectory() as directory:
         scratch = Path(directory)
         registry = scratch / "specimens.json"
-        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
         manifest = scratch / "intake.json"
         # Existing valid PNG/JPEG fixtures exercise storage; this is not a visual identity test.
         inputs = [ROOT / "verification/specimens/SPEC-0040.png",
@@ -56,7 +56,7 @@ def verify_multiple_views_case(*, secondary_finish: bool, reverse: bool) -> None
             del rows[1]["physicalObservation"]["finish"]
         if reverse:
             rows.reverse()
-        manifest.write_text(json.dumps({"observations": rows}), encoding="utf-8")
+        manifest.write_text(json.dumps({"observations": rows}), encoding="utf-8", newline="\n")
         args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
                                allow_small=False, replace=False, dry_run=False)
         with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
@@ -74,13 +74,13 @@ def verify_multiple_views_case(*, secondary_finish: bool, reverse: bool) -> None
             # Reusing an ID for the other view fails before either retained image is replaced.
             manifest.write_text(json.dumps({"observations": [
                 {**rows[1], "specimenId": rows[0]["specimenId"]},
-            ]}), encoding="utf-8")
+            ]}), encoding="utf-8", newline="\n")
             expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
             assert all(path.read_bytes() == content for path, content in before.items() if path != manifest)
             # A replacement that contradicts another retained view must fail atomically too.
             changed = deepcopy(next(row for row in rows if row["specimenId"] == "SPEC-0001"))
             changed["physicalObservation"]["edition"] = "Unlimited"
-            manifest.write_text(json.dumps({"observations": [changed]}), encoding="utf-8")
+            manifest.write_text(json.dumps({"observations": [changed]}), encoding="utf-8", newline="\n")
             args.replace = True
             for dry_run in (True, False):
                 args.dry_run = dry_run
@@ -113,7 +113,7 @@ def verify_unnumbered_manifest() -> None:
     with tempfile.TemporaryDirectory() as directory:
         scratch = Path(directory)
         registry, manifest = scratch / "specimens.json", scratch / "intake.json"
-        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
         row = {
             "attachment": str(ROOT / "verification/specimens/SPEC-0040.png"),
             "photographSource": "https://example.test/unnumbered", "setCode": "DP1",
@@ -125,13 +125,13 @@ def verify_unnumbered_manifest() -> None:
                                allow_small=False, replace=False, dry_run=False)
         with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
                             SPECIMEN_DIR=scratch / "photos"):
-            manifest.write_text(json.dumps({"observations": [row]}), encoding="utf-8")
+            manifest.write_text(json.dumps({"observations": [row]}), encoding="utf-8", newline="\n")
             assert fetch_attachment.command_issue(fetch_attachment.load_registry(), args) == 0
             assert fetch_attachment.load_registry()["specimens"][0]["number"] == ""
             for invalid in ({**row, "number": None},
                             {key: value for key, value in row.items() if key != "number"}):
                 expect_failure(lambda: fetch_attachment.validate_manifest_fields(invalid, "SPEC-0001"))
-            manifest.write_text(json.dumps({"observations": [{**row, "setCode": "JU"}]}), encoding="utf-8")
+            manifest.write_text(json.dumps({"observations": [{**row, "setCode": "JU"}]}), encoding="utf-8", newline="\n")
             expect_failure(lambda: fetch_attachment.command_issue(fetch_attachment.load_registry(), args))
 
 
@@ -144,7 +144,7 @@ def verify_dry_run_preserves_photograph_date() -> None:
         current = next(row for row in doc["specimens"] if row.get("photograph")
                        and row.get("heldBy") != "third-party seller")
         image = (fetch_attachment.SPECIMEN_DIR / current["photograph"]).read_bytes()
-        registry.write_text(json.dumps({"count": 1, "specimens": [current]}), encoding="utf-8")
+        registry.write_text(json.dumps({"count": 1, "specimens": [current]}), encoding="utf-8", newline="\n")
         manifest.write_text(json.dumps({"observations": [{
             "specimenId": current["specimenId"], "setCode": current["setCode"],
             "number": current["number"], "variant": current["variant"],
@@ -153,7 +153,7 @@ def verify_dry_run_preserves_photograph_date() -> None:
             "recordedAt": "2026-09-29" if current["recordedAt"] != "2026-09-29" else "2026-09-28",
             **({"physicalObservation": current["physicalObservation"]}
                if "physicalObservation" in current else {}),
-        }]}), encoding="utf-8")
+        }]}), encoding="utf-8", newline="\n")
         args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
                                allow_small=False, replace=True, dry_run=True)
         with patch.multiple(fetch_attachment, SPECIMENS_JSON=registry,
@@ -178,7 +178,7 @@ def verify_duplicate_photo_batch() -> None:
     with tempfile.TemporaryDirectory() as directory:
         scratch = Path(directory)
         registry, manifest = scratch / "specimens.json", scratch / "manifest.json"
-        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+        registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
         source = ROOT / "verification/specimens/SPEC-0041.png"
         rows = [{
             "specimenId": f"SPEC-99{index:02d}", "attachment": str(source),
@@ -194,7 +194,7 @@ def verify_duplicate_photo_batch() -> None:
                     rows[1]["sameCardAs"] = {"specimenId": "SPEC-9901", "basis": "synthetic link"}
                 for reverse in (False, True):
                     ordered = rows[::-1] if reverse else rows
-                    manifest.write_text(json.dumps({"observations": ordered}), encoding="utf-8")
+                    manifest.write_text(json.dumps({"observations": ordered}), encoding="utf-8", newline="\n")
                     before = {path: path.read_bytes() for path in scratch.rglob("*") if path.is_file()}
                     for replace, dry_run in ((False, False), (True, False), (False, True), (True, True)):
                         args = SimpleNamespace(issue=None, issue_html=None, manifest=str(manifest),
@@ -275,7 +275,7 @@ def verify_group_projection(records, scratch) -> None:
     document = {**original_doc, "specimens": original_doc["specimens"] + records}
     document["count"] = len(document["specimens"])
     path = scratch / "all-specimens.json"
-    path.write_text(json.dumps(document), encoding="utf-8")
+    path.write_text(json.dumps(document), encoding="utf-8", newline="\n")
     with patch.object(finishes, "SPECIMENS_PATH", path):
         context = finishes._load_finish_context()
         assert finishes._resolve_tcgdex(context) is None
@@ -296,7 +296,7 @@ def verify_group_projection(records, scratch) -> None:
             # Keep legacy printings intact but remove fixture evidence to exercise the fallback.
             baseline = json.loads((ROOT / "verification/finish_units.json").read_text(encoding="utf-8"))
             current_finishes = baseline
-        finish_path.write_text(json.dumps(current_finishes), encoding="utf-8")
+        finish_path.write_text(json.dumps(current_finishes), encoding="utf-8", newline="\n")
         with patch.multiple(graph_module, SPECIMENS=path, FINISH_UNITS=finish_path):
             projected = graph_module.project_physical_evidence(deepcopy(graph))
         errors = graph_module.validate(projected, identity_inputs={"specimens": document, "finishes": current_finishes})
@@ -704,7 +704,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     fetch_attachment.SPECIMENS_JSON = registry
     fetch_attachment.SPECIMEN_DIR = scratch
-    registry.write_text(json.dumps({"count": len(records), "specimens": records}), encoding="utf-8")
+    registry.write_text(json.dumps({"count": len(records), "specimens": records}), encoding="utf-8", newline="\n")
     try:
         seen_allow_small = []
         original_validate = fetch_attachment.validate
@@ -715,11 +715,11 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         assert seen_allow_small == [True, False, False]
         fetch_attachment.validate = original_validate
         registry.write_text(
-            json.dumps({"count": len(records) - 1, "specimens": records}), encoding="utf-8"
+            json.dumps({"count": len(records) - 1, "specimens": records}), encoding="utf-8", newline="\n"
         )
         assert fetch_attachment.command_evidence_check(check_projection=False) == 1
         registry.write_text(
-            json.dumps({"count": len(records), "specimens": records}), encoding="utf-8"
+            json.dumps({"count": len(records), "specimens": records}), encoding="utf-8", newline="\n"
         )
         photo_paths[0].write_bytes(image[:-1] + b"\x00")
         assert fetch_attachment.command_evidence_check(check_projection=False) == 1
@@ -735,7 +735,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
     issue_html = scratch / ".fetch-attachment-test-issue.html"
     issue_html.write_text(
         '<a href="https://github.com/user-attachments/assets/stable">'
-        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8", newline="\n"
     )
     manifest = scratch / ".fetch-attachment-test-manifest.json"
     manifest.write_text(json.dumps({"issue": 999, "observations": [{
@@ -743,9 +743,9 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     registry = scratch / ".fetch-attachment-test-import.json"
-    registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_download_candidates = fetch_attachment.download_candidates
@@ -781,9 +781,9 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "observed": "positive", "recordedAt": "2026-08-29",
         "allowUnprojected": True,
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     direct_registry = scratch / ".fetch-attachment-test-direct-registry.json"
-    direct_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    direct_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     fetch_attachment.SPECIMENS_JSON = direct_registry
@@ -812,7 +812,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
     source_first_issue = scratch / ".fetch-attachment-test-source-first.html"
     source_first_issue.write_text(
         '<a href="https://github.com/user-attachments/assets/source-first">'
-        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8", newline="\n"
     )
     source_first_manifest = scratch / ".fetch-attachment-test-source-first-manifest.json"
     source_first_manifest.write_text(json.dumps({"issue": 999, "observations": [{
@@ -820,11 +820,11 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "variant": "base", "language": "T-Chinese", "heldBy": "owner",
         "inspectedFrom": "photo", "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "mirror-holo", "basis": "observed card surface"},
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     source_first_units = scratch / ".fetch-attachment-test-source-first-units.json"
-    source_first_units.write_text(json.dumps({"units": []}), encoding="utf-8")
+    source_first_units.write_text(json.dumps({"units": []}), encoding="utf-8", newline="\n")
     source_first_registry = scratch / ".fetch-attachment-test-source-first-registry.json"
-    source_first_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8")
+    source_first_registry.write_text(json.dumps({"count": 0, "specimens": []}), encoding="utf-8", newline="\n")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_finish_units = fetch_attachment.FINISH_UNITS
@@ -847,7 +847,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         source_first_units.write_text(json.dumps({"units": [{
             "setCode": "S-P", "number": "145", "language": "T-Chinese",
             "products": [{"variant": "V1", "claimStatus": "confirmed"}],
-        }]}), encoding="utf-8")
+        }]}), encoding="utf-8", newline="\n")
         assert fetch_attachment.command_issue(
             source_first_doc,
             SimpleNamespace(issue=999, issue_html=str(source_first_issue),
@@ -857,7 +857,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         source_first_units.write_text(json.dumps({"units": [{
             "setCode": "S-P", "number": "145", "language": "T-Chinese",
             "products": [{"variant": "base", "claimStatus": "contradicted"}],
-        }]}), encoding="utf-8")
+        }]}), encoding="utf-8", newline="\n")
         try:
             fetch_attachment.command_issue(
                 source_first_doc,
@@ -884,7 +884,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
     metadata_issue = scratch / ".fetch-attachment-test-metadata.html"
     metadata_issue.write_text(
         '<a href="https://github.com/user-attachments/assets/metadata">'
-        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+        '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8", newline="\n"
     )
     metadata_manifest = scratch / ".fetch-attachment-test-metadata-manifest.json"
     metadata_manifest.write_text(json.dumps({"issue": 999, "observations": [{
@@ -892,7 +892,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "variant": "V1", "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "corrected basis"},
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     metadata_registry = scratch / ".fetch-attachment-test-metadata-registry.json"
     metadata_registry.write_text(json.dumps({"count": 1, "specimens": [{
         "specimenId": "SPEC-0098", "setCode": "JU", "number": "11", "variant": "V1",
@@ -902,7 +902,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         }, "photograph": "SPEC-0098.png",
         "photographSource": "https://github.com/user-attachments/assets/metadata",
         "photographSha256": digest,
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     metadata_photo = scratch / "SPEC-0098.png"
     metadata_photo.write_bytes(image)
     original_registry = fetch_attachment.SPECIMENS_JSON
@@ -933,7 +933,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
     signed_issue_html.write_text(
         '<a href="https://github.com/user-attachments/assets/ordinary">'
         '<img src="https://cdn.example.test/ordinary.png"></a>' + signed_only,
-        encoding="utf-8"
+        encoding="utf-8", newline="\n"
     )
     signed_manifest = scratch / ".fetch-attachment-test-signed-only-manifest.json"
     signed_manifest.write_text(json.dumps({"issue": 999, "observations": [{
@@ -941,7 +941,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
         "observed": "positive", "recordedAt": "2026-08-24",
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     signed_registry = scratch / ".fetch-attachment-test-signed-only-registry.json"
     signed_registry.write_text(json.dumps({"count": 1, "specimens": [{
         "specimenId": "SPEC-0099",
@@ -950,7 +950,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
         "recordedAt": "2026-08-24", "citedBy": ["F0167-P01"],
         "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
         "photographSource": "https://github.com/m4s-ai/snoredex-data/issues/999#attachment-2",
-    }]}), encoding="utf-8")
+    }]}), encoding="utf-8", newline="\n")
     original_registry = fetch_attachment.SPECIMENS_JSON
     original_specimen_dir = fetch_attachment.SPECIMEN_DIR
     original_download_candidates = fetch_attachment.download_candidates
@@ -975,7 +975,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
             '<a href="https://github.com/user-attachments/assets/ordinary">'
             '<img src="https://cdn.example.test/ordinary.png"></a>'
             '<a href="https://github.com/user-attachments/assets/wrapped">'
-            '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8"
+            '<img src="https://cdn.example.test/card.png"></a>', encoding="utf-8", newline="\n"
         )
         wrapped_manifest = scratch / ".fetch-attachment-test-wrapped-manifest.json"
         wrapped_manifest.write_text(json.dumps({"issue": 999, "observations": [{
@@ -983,7 +983,7 @@ def verify_import_files(scratch: Path, image: bytes, digest: str, signed_only: s
             "language": "Dutch", "heldBy": "owner", "inspectedFrom": "photo",
             "observed": "positive", "recordedAt": "2026-08-24",
             "physicalObservation": {"finish": "holo", "basis": "observed card surface"},
-        }]}), encoding="utf-8")
+        }]}), encoding="utf-8", newline="\n")
         assert fetch_attachment.command_issue(
             signed_doc,
             SimpleNamespace(
@@ -1027,7 +1027,7 @@ def verify_direct_imports(scratch: Path, image: bytes) -> None:
                     "physicalObservation": {"edition": "1st Edition", "basis": "synthetic storage fixture"}}
         (photos / previous["photograph"]).write_bytes(b"previous view")
         registry = folder / "specimens.json"
-        registry.write_text(json.dumps({"count": 2, "specimens": [previous, primary]}), encoding="utf-8")
+        registry.write_text(json.dumps({"count": 2, "specimens": [previous, primary]}), encoding="utf-8", newline="\n")
         args = SimpleNamespace(specimen="SPEC-0001", source=str(source),
                                attachment_url="https://example.test/replacement",
                                replace=True, allow_small=False, dry_run=False)

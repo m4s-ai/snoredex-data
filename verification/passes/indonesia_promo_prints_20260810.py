@@ -182,7 +182,7 @@ def main() -> int:
         "admitted": len(document["prints"]),
         "held": len(document.get("held", [])),
     }
-    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    PRINTS.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
     print(f"admitted {added} Indonesian promo print(s), held {held_added}; "
           f"store now {document['meta']['counts']}")

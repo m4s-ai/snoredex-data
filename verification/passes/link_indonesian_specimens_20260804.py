@@ -55,7 +55,7 @@ def main() -> None:
 
     if added:
         ADJUDICATIONS.write_text(
-            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
 
     print(f"Added {added} specimen reference(s) to {len(LINKS)} Indonesian adjudication(s).")
 

@@ -100,13 +100,13 @@ def _install(trace_dir: str) -> None:
     def dump():
         data = {k: sorted(v) if isinstance(v, set) else v for k, v in record.items()}
         target = os.path.join(trace_dir, f"{os.getpid()}-{uuid.uuid4().hex}.json")
-        with open(target + ".tmp", "w", encoding="utf-8") as handle:
+        with open(target + ".tmp", "w", encoding="utf-8", newline="\n") as handle:
             json.dump(data, handle)
         os.replace(target + ".tmp", target)
 
     if hasattr(os, "register_at_fork"):
         os.register_at_fork(after_in_child=lambda: open(
-            os.path.join(trace_dir, f"{os.getpid()}-{uuid.uuid4().hex}.forked"), "w").close())
+            os.path.join(trace_dir, f"{os.getpid()}-{uuid.uuid4().hex}.forked"), "w", newline="\n").close())
     atexit.register(dump)
     sys.addaudithook(hook)
 

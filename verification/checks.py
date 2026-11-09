@@ -70,7 +70,7 @@ def write_json(path: Path, payload: Any) -> None:
     body = json.dumps(payload, indent=2, ensure_ascii=False) + "\n"
     tmp = path.with_name(path.name + ".tmp")
     try:
-        tmp.write_text(body, encoding="utf-8")
+        tmp.write_text(body, encoding="utf-8", newline="\n")
         os.replace(tmp, path)
     finally:
         if tmp.exists():

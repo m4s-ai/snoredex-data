@@ -60,7 +60,7 @@ def main() -> int:
     unit["providerId"] = "pokemon-official"
     unit["evidence"] = EVIDENCE
     unit["checkedAt"] = "2026-08-11T08:38:14Z"
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
 
     rows = [json.loads(line) for line in JOURNAL.read_text(encoding="utf-8").splitlines() if line]
     if not any(row.get("unitId") == UNIT_ID and row.get("source") == SOURCE_URL for row in rows):

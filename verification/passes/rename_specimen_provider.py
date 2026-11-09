@@ -41,7 +41,7 @@ def main() -> None:
             unit["providerId"] = NEW
             renamed += 1
     if renamed:
-        UNITS.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        UNITS.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     print(f"Renamed {renamed} unit(s) from {OLD} to {NEW}")
 
 

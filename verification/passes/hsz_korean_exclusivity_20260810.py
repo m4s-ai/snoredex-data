@@ -101,7 +101,7 @@ def main() -> int:
     unit["sourceUrl"] = ARTICLE
     unit["sourceType"] = (
         "Bulbapedia (fan wiki), product article, exclusivity statement + half-deck list")
-    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"{UNIT_ID} HSZ 027 Korean: era argument -> product-article exclusivity statement")
     print(f"  {ARTICLE}")
     print("  verdict unchanged; no Korean printing found in koreanpokemoncards.com or pokumon")

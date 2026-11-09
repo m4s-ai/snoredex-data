@@ -87,7 +87,7 @@ def main() -> int:
         print(f"Cardmarket specimen corroboration current ({len(TARGETS)} units)")
         return 0
 
-    UNITS.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    UNITS.write_text(json.dumps(units, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     if additions:
         with JOURNAL.open("a", encoding="utf-8", newline="\n") as handle:
             for row in additions:

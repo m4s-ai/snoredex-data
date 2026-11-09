@@ -99,11 +99,11 @@ def main() -> int:
         target["checkedAt"] = stamp
 
         UNITS.write_text(
-            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(document, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
 
         # Corrections are appended, never rewritten: the journal records how the state was reached.
-        with JOURNAL.open("a", encoding="utf-8") as handle:
+        with JOURNAL.open("a", encoding="utf-8", newline="\n") as handle:
             handle.write(json.dumps({
                 "unitId": UNIT_ID,
                 "status": "contradicted",
@@ -133,7 +133,7 @@ def main() -> int:
     }:
         dataset["meta"]["verification"].update(tally)
         dataset_path.write_text(
-            json.dumps(dataset, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+            json.dumps(dataset, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n"
         )
         print(f"meta.verification reconciled: {tally['confirmed']} confirmed, "
               f"{tally['contradicted']} contradicted")

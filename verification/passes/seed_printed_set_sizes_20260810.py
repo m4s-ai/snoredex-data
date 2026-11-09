@@ -110,7 +110,7 @@ def main() -> int:
     document["meta"]["counts"]["sourceRecords"] = len(records)
     document["meta"]["counts"]["printedSetSizeRecords"] = sum(
         1 for row in records if row["sourceKind"] == "printed-set-size-record")
-    SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    SOURCES.write_text(json.dumps(document, indent=2, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"added {added} printed-set-size record(s); "
           f"{document['meta']['counts']['printedSetSizeRecords']} total")
     for set_code, (size, numbering, _p, _b) in sorted(SIZES.items()):
