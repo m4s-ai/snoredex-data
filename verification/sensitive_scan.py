@@ -3,7 +3,7 @@
 Moved verbatim out of `review_findings.py` (#460) so its exact bytes can fingerprint a memo: a Git
 blob is immutable, so a blob this scanner version has already read never needs reading again. The
 memo lives in `<git-common-dir>/snoredex-memo/`, outside the working tree; deleting it only costs
-time, and `SNOREDEX_MEMO=off` (the L4 reference lane) disables it.
+time. `SNOREDEX_MEMO=off` disables it unless `SNOREDEX_BLOB_MEMO=use`, which the Linux L4 lane sets.
 """
 from __future__ import annotations
 
@@ -257,8 +257,13 @@ def _git(root: Path, *args: str, data: bytes | None = None) -> bytes:
 
 
 def memo_path(root: Path) -> Path | None:
-    """The fingerprinted memo file outside the working tree, or None when the memo is off."""
-    if os.environ.get("SNOREDEX_MEMO") == "off":
+    """The fingerprinted memo file outside the working tree, or None when the memo is off.
+
+    `SNOREDEX_BLOB_MEMO=use` keeps it under `SNOREDEX_MEMO=off`: the Linux L4 lane runs every step
+    cold but need not reread an immutable blob this scanner version has already read; new blobs
+    are always read (owner, 2026-11-09).
+    """
+    if os.environ.get("SNOREDEX_MEMO") == "off" and os.environ.get("SNOREDEX_BLOB_MEMO") != "use":
         return None
     try:
         common = _git(root, "rev-parse", "--git-common-dir").decode().strip()
