@@ -307,7 +307,9 @@ run on both platforms. That audit first fetches GitHub's pull-request heads (`re
 which GitHub serves permanently, so P6 also covers history that only pull requests still reach; the
 owner-accepted exposures there are pinned by exact blob in `verification/sensitive_scan.py` (#467). The reusable pull-request gate does not install browser dependencies;
 UI-relevant paths on ready (non-draft) PRs select
-`.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Pages does not regenerate a second projection tree; it
+`.github/workflows/ui-pr.yml`, which runs the Chromium behavior suite. Those paths are page and
+gallery code only: regenerated data reaches the browser suite at L4 before deployment, and the
+embedded table projection is checked offline in `test_collector_catalogue.py`. Pages does not regenerate a second projection tree; it
 downloads the artifact produced after the L4 gate and rejects missing, stale, or
 fingerprint-disagreeing handoffs before deployment. The explicit lists are deployment and UI
 boundaries, not a second full-build order.

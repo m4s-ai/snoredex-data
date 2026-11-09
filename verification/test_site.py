@@ -2,8 +2,9 @@
 """Browser tests for the public site (#7, #9, #10).
 
 These drive the real page in Chromium rather than asserting on the generator's output, because
-the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, print and review
-proposal downloads — only exist at runtime.
+the behaviours the epic asks for — filtering, sorting, URL round-trip, year headings, print and
+export — only exist at runtime. Checks that only read the embedded table data live in
+test_collector_catalogue.py, which every pull request runs without a browser.
 
 Run against a temporary local HTTP server, as for a served checkout:
 
@@ -16,7 +17,6 @@ test failure: a release gate that silently skips its browser contract is not a r
 from __future__ import annotations
 
 import json
-import importlib.util
 import os
 import re
 import shutil
@@ -127,98 +127,6 @@ results: list[tuple[str, bool, str]] = []
 
 def check(name: str, ok: bool, detail: str = "") -> None:
     results.append((name, ok, detail))
-
-
-def check_catalogue_evidence(embedded):
-    spec = importlib.util.spec_from_file_location("site_projection", ROOT / "scripts/site.py")
-    projection = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(projection)
-    load = lambda path: json.loads((ROOT / path).read_text(encoding="utf-8"))
-    graph = load("verification/authoritative_graph.json")
-    records = projection.catalogue_source_records(graph, load("verification/source_first_prints.json"))
-    strengths = projection.catalogue_language_evidence(records, load("analysis_checklist.json"),
-        load("analysis_confirmed_releases.json"), graph)
-    localizations = {row["localizationId"]:row for row in load("collector_catalogue.json")["localizations"]}
-    check("every confirmed table language has a registered provider and authority tier",
-          all(row["langEvidence"][code]["provider"] and row["langEvidence"][code]["tier"] in (1, 2, 3)
-              for row in embedded for code in row["langCodes"]))
-    check("claim and predecessor ordering cannot change language evidence",
-          all(projection.catalogue_language(item, localizations[item["localizationId"]], strengths) ==
-              projection.catalogue_language(dict(item, sourceClaimRefs=list(reversed(item["sourceClaimRefs"])),
-                  legacyChecklistIds=list(reversed(item["legacyChecklistIds"]))),
-                  localizations[item["localizationId"]], strengths) for item in CANONICAL_ITEMS))
-    expected_artists = {item["itemId"]:records[ref]["illustrator"] for item in CANONICAL_ITEMS
-                        for ref in item["sourceClaimRefs"] if records.get(ref, {}).get("illustrator")}
-    check("source-native illustrator credits survive for every supported table item",
-          all(row["artist"] == expected_artists.get(row["rowId"], row["artist"]) for row in embedded))
-    check_catalogue_boundaries(embedded, projection, localizations, strengths, load("collector_catalogue.json"))
-    check_exact_provider_agreement(embedded, projection)
-    check_predecessor_artists(embedded, projection, records, load("analysis_checklist.json"), graph)
-
-
-def check_catalogue_boundaries(rows, projection, localizations, strengths, catalogue):
-    chinese = next(row for row in rows if row["setCode"] == "30thC" and row["number"] == "095/103")
-    check("historical source-first alias resolves to registered photograph authority",
-          chinese["langEvidence"]["ZH-S"]["tier"] == 1
-          and chinese["langEvidence"]["ZH-S"]["provider"] == "Inspected physical specimen")
-    indonesian = next(row for row in rows if row["setCode"] == "S8b I" and row["number"] == "126/184")
-    check("exact predecessor corroboration survives source-first attachment",
-          indonesian["langEvidence"]["ID"]["corroborated"])
-    promo = next(item for item in catalogue["items"] if item["localSetCode"] == "FLF"
-                 and any(mark.get("text") == "Build-A-Bear Workshop" for mark in item["markings"]))
-    grade = projection.catalogue_language(promo, localizations[promo["localizationId"]], strengths)
-    check("retailer printing keeps its own language grade without borrowing a sibling variant",
-          grade["languageEvidence"]["English"]["provider"] == "Cardmarket exact product image"
-          and not grade["languageEvidence"]["English"]["corroborated"])
-    check("confirmed Build-A-Bear finish enters the table while its positive date is retained",
-          promo["releaseDate"] == "2019-08-29" and promo["finish"] == "non-holo"
-          and promo["itemKind"] == "verified-printing"
-          and promo["itemId"] in {row["rowId"] for row in rows})
-    candidates = [item for item in catalogue["items"] if item["itemKind"] == "finish-candidate"]
-    check("unconfirmed finish candidates remain outside the confirmed table",
-          bool(candidates) and not {item["itemId"] for item in candidates} & {row["rowId"] for row in rows})
-
-
-def check_predecessor_artists(rows, projection, records, checklist, graph):
-    predecessors = projection.catalogue_predecessors(graph, checklist)
-    expected = {item["itemId"]:predecessors[ref]["artist"] for item in CANONICAL_ITEMS
-                for ref in item["legacyChecklistIds"] + item["sourceClaimRefs"]
-                if predecessors.get(ref, {}).get("artist")
-                and predecessors[ref].get("cardReleaseId", item["cardReleaseId"]) == item["cardReleaseId"]
-                and not any(records.get(claim, {}).get("illustrator") or records.get(claim, {}).get("artist")
-                            for claim in item["sourceClaimRefs"])}
-    check("every exact predecessor artist survives a changed image asset",
-          all(row["artist"] == expected.get(row["rowId"], row["artist"]) for row in rows))
-    check("Spanish Jungle 27 retains its exact predecessor illustrator",
-          next(row for row in rows if row["setCode"] == "JU" and row["number"].split("/")[0] == "27" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
-    check("Spanish Jungle 11 retains its exact graph claim illustrator without a checklist predecessor",
-          next(row for row in rows if row["setCode"] == "JU" and row["number"].split("/")[0] == "11" and "ES" in row["langCodes"])["artist"] == "Ken Sugimori")
-    item = dict(itemId="sample", legacyChecklistIds=["one", "two"])
-    old = {"one":{"artist":"Old credit"}, "two":{"artist":"Other credit"}}
-    check("positive source-native artist outranks conflicting legacy fallback",
-          projection.catalogue_artist(item, {"illustrator":"Source credit"}, "image", {}, old) == "Source credit")
-    try:
-        projection.catalogue_artist(item, {}, "image", {"image":"Fallback"}, old)
-    except ValueError:
-        check("ambiguous exact predecessor artists fail instead of borrowing an image credit", True)
-    else:
-        check("ambiguous exact predecessor artists fail instead of borrowing an image credit", False)
-    unrelated = dict(itemId="sample", cardReleaseId="release", legacyChecklistIds=[], sourceClaimRefs=["claim"])
-    check("a graph claim for another release cannot supply the artist",
-          projection.catalogue_artist(unrelated, {}, "image", {},
-              {"claim":{"artist":"Neighbour credit", "cardReleaseId":"another-release"}}) is None)
-
-
-def check_exact_provider_agreement(rows, projection):
-    korean = next(row for row in rows if row["setCode"] == "20th" and "KO" in row["langCodes"])
-    check("independent exact Korean checklist and photograph evidence is corroborated",
-          korean["langEvidence"]["KO"]["corroborated"])
-    item = dict(sourceClaimRefs=["one", "two"], legacyChecklistIds=[], itemKind="verified-printing")
-    localization = dict(language="Korean", locality="KR")
-    grade = dict(language="Korean", provider="Bulbapedia", authorityTier=3, corroborated=False, checkable=True)
-    fields = projection.catalogue_language(item, localization, {"one":grade, "two":dict(grade)})
-    check("two references to the same provider are not independent corroboration",
-          not fields["languageEvidence"]["Korean"]["corroborated"])
 
 
 def check_desktop_sources(page):
@@ -361,10 +269,6 @@ def main() -> int:
             return 1
 
         page = browser.new_page()
-        artwork_requests = []
-        page.on("request", lambda request: artwork_requests.append(request.url)
-                if "artwork_review_projection" in request.url else None)
-        page.add_init_script("localStorage.setItem('snoredex-artwork-review-proposals-v1', 'retained-draft')")
         console_errors: list[str] = []
         page.on("console", lambda m: console_errors.append(m.text) if m.type == "error" else None)
         page.on("pageerror", lambda e: console_errors.append(str(e)))
@@ -373,62 +277,7 @@ def main() -> int:
         # Column and language filters live in collapsed <details>; open them as a user would.
         page.eval_on_selector_all("details.morefilters", "els => els.forEach(d => d.open = true)")
 
-        total = page.evaluate("JSON.parse(document.getElementById('data-rows').textContent).length")
         check("page loads with no console errors", not console_errors, "; ".join(console_errors[:3]))
-        check("all rows render", total == EXPECTED_ROWS, f"data has {total} rows")
-        embedded = page.evaluate("() => JSON.parse(document.getElementById('data-rows').textContent)")
-        check_catalogue_evidence(embedded)
-        expected = {item["itemId"]: item for item in CANONICAL_ITEMS}
-        check("main table represents every active canonical item exactly once",
-              len(embedded) == len(expected) and {row["rowId"] for row in embedded} == set(expected),
-              f"canonical={len(expected)} table={len(embedded)}")
-        check("canonical evidence states and correction identities survive rendering",
-              all(row["itemKind"] == expected[row["rowId"]]["itemKind"]
-                  and row["edition"] == (expected[row["rowId"]]["edition"] or
-                      {"not-applicable":"none"}.get(expected[row["rowId"]]["editionAssignmentStatus"], "unknown"))
-                  and row["correctionUrl"] == expected[row["rowId"]]["correctionLink"]
-                  and expected[row["rowId"]]["finishVerificationStatus"] in row["evidence"]
-                  for row in embedded), "no candidate is promoted to verified")
-        check("canonical field values and date precision survive the main table projection",
-              all(row["dateDisplay"] == ("Undated" if not (item := expected[row["rowId"]])["releaseDate"]
-                      else ("~" if item["releaseApproximate"] else "") + item["releaseDate"])
-                  and row["rarity"] == item["rarity"]["display"]
-                  and row["sourceLinks"] == item["sourceLinks"]
-                  and row["number"] == (item["collectorNumber"] or "") +
-                      ("/" + item["collectorNumberDenominator"] if item["collectorNumberDenominator"] else "")
-                  for row in embedded), "dates, numbers, rarity and sources match canonical items")
-
-
-        check("page advertises the concise LLM entry point",
-              page.locator('head link[rel="describedby"][href="llms.txt"]').count() == 1
-              and (ROOT / "llms.txt").read_text(encoding="utf-8").startswith("# Snoredex Data\n"),
-              "missing describedby relation or llms.txt H1")
-
-        check("retired artwork review has no controls, metadata or navigation",
-              page.locator('#artwork-review, #artwork-review-app, #ar-load, #ar-export, '
-                           '#data-artwork-review-meta, a[href="#artwork-review"]').count() == 0)
-        check("removing the review UI preserves existing draft storage and performs no artwork fetch",
-              page.evaluate("localStorage.getItem('snoredex-artwork-review-proposals-v1')") == "retained-draft"
-              and not artwork_requests)
-
-
-        exs_rows = page.evaluate("""() => JSON.parse(
-          document.getElementById('data-rows').textContent
-        ).filter(r => r.setCode === 'EXS')""")
-        check("both dated EXS physical variants appear in 1998",
-              len(exs_rows) == 2
-              and [row["dateDisplay"] for row in exs_rows] == ["1998-03-23", "1998-12-04"]
-              and [row["distributions"] for row in exs_rows] == [["vending-sheet"], ["fixed-deck"]]
-              and [row["image"] for row in exs_rows][0] == "verification/specimens/SPEC-0661.jpg"
-              and exs_rows[1]["image"] is not None
-              and len({row["rowId"] for row in exs_rows}) == 2,
-              f"EXS rows: {exs_rows}")
-
-        # --- complete light/dark themes (#43) ---
-        check("removed UI features leave no controls or embedded checklist",
-              page.locator('#theme-toggle, #cl-download, #data-checklist, '
-                           '#collection-sticky-header, #collection-scroll-tools').count() == 0)
-
         for scheme in ("light", "dark"):
             theme_context = browser.new_context(color_scheme=scheme)
             prior_scheme = "dark" if scheme == "light" else "light"
@@ -756,15 +605,6 @@ def main() -> int:
         check("language filter selects exact language", page.locator("#rows .col-language").count() > 0
               and all(t == "Japanese" for t in page.locator("#rows .col-language").all_text_contents()))
         page.select_option("#f-language", [])
-        localizations = {r["localizationId"]: r["displayName"] for r in
-                         json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))["localizations"]}
-        displayed = page.evaluate("JSON.parse(document.querySelector('#data-rows').textContent)")
-        def labels_match(rows):
-            return all(r["languageLabel"] == localizations[r["localizationId"]] for r in rows)
-        check("language labels follow exact localization", labels_match(displayed))
-        check("language label guard rejects seeded wrong localization",
-              not labels_match([dict(displayed[0], languageLabel="incorrect")]))
-        check("matrix removed", page.locator(".langcell, .langcount").count() == 0)
         for query in ("lang=JA:1", "langMin=1", "variantName=WEST", "unknown=1", "language=Unknown",
                       "sort=language:wrong", "language=Japanese&unknown=1", "yearFrom=0000"):
             page.goto(url.split("?", 1)[0].split("#", 1)[0] + "?" + query)
