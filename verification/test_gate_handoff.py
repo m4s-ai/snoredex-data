@@ -74,13 +74,20 @@ def main() -> int:
     assert "github.event_name != 'pull_request'" in release
     assert "--full-refresh" in release
     # #460: every PR runs the retained-run validation through the memo instead of a path filter;
-    # L4 runs it without memo, and main seeds the memo for pull requests.
+    # L4 runs it on Linux without memo, and main seeds the memo for pull requests.
     for script in ("source_adapters", "card_discovery"):
         assert (f'check_memo.py run --memo "${{memo}}" -- scripts/{script}.py --check --full-refresh'
                 in release)
         assert f"check_memo.py run --memo refresh -- scripts/{script}.py --check --full-refresh" in release
     assert 'if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi' in release
     assert 'python scripts/regen.py --check --memo "${memo}"' in release
+    # Linux L4 stays the memo-free reference run that builds the published artifact; Windows L4
+    # replays the memo main's full Windows run seeded (owner, 2026-11-09). No L4 leg saves one.
+    regen_step = release.split("- name: Generated artifacts and core regressions", 1)[1].split("- name:", 1)[0]
+    assert ('if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then memo=off; '
+            'else memo=use; fi') in regen_step
+    restore_step = release.split("- name: Restore verification memo", 1)[1].split("- name:", 1)[0]
+    assert "if: env.GATE_LEVEL == 'L3' || runner.os == 'Windows'" in restore_step
     assert "python scripts/regen.py --check --memo refresh" in release
     assert "if: always() && env.GATE_LEVEL == 'L3'" in release
     assert "path: .git/snoredex-memo" in release

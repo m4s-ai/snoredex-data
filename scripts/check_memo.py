@@ -10,7 +10,7 @@ programs, Git batch/stdin or write commands, untraced Python children, a check t
 the repository) makes the step non-memoizable, so it always runs.
 
 The memo lives in `<git-common-dir>/snoredex-memo/v1/steps/`, outside the working tree. It is never
-evidence; deleting it only costs time. `--memo off` is the reference mode (the L4 lane uses it) and
+evidence; deleting it only costs time. `--memo off` is the reference mode (the Linux L4 lane uses it) and
 `--memo refresh` runs every step while rewriting the memo (each push to `main` uses it).
 
     python scripts/check_memo.py run [--memo use|refresh|off] -- scripts/X.py --check
