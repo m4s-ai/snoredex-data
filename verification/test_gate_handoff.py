@@ -82,7 +82,7 @@ def main() -> int:
     assert 'if [ "${GATE_LEVEL}" = "L4" ]; then memo=off; else memo=use; fi' in release
     assert 'python scripts/regen.py --check --memo "${memo}"' in release
     # Linux L4 stays the step-memo-free reference run that builds the published artifact and keeps
-    # only P6's immutable-blob memo; Windows L4 replays the memo main's full Windows run seeded
+    # only the P4/P6 scanner's immutable-blob memo; Windows L4 replays the memo main's full Windows run seeded
     # (owner, 2026-11-09). No L4 leg saves one.
     regen_step = release.split("- name: Generated artifacts and core regressions", 1)[1].split("- name:", 1)[0]
     assert ('if [ "${GATE_LEVEL}" = "L4" ] && [ "${RUNNER_OS}" = "Linux" ]; then\n'
