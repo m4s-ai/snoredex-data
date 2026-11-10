@@ -19,6 +19,7 @@ import argparse
 import sqlite3
 import sys
 import tempfile
+from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -48,22 +49,28 @@ STATE = ("have", "wanted", "quantity", "notes")
 
 
 def catalogue_rows(catalogue: Path) -> tuple[list, list, list, str]:
-    db = sqlite3.connect(f"file:{catalogue.as_posix()}?mode=ro", uri=True)
+    """Everything the tracker copies from a 2.x catalogue; any other file ends in one error line."""
+    try:
+        with closing(sqlite3.connect(f"file:{catalogue.as_posix()}?mode=ro", uri=True)) as db:
+            return read_catalogue(db)
+    except sqlite3.Error as error:
+        raise SystemExit(f"error: cannot use catalogue {catalogue}: {error}")
+
+
+def read_catalogue(db) -> tuple[list, list, list, str]:
     version = db.execute("SELECT value FROM metadata WHERE key='schema_version'").fetchone()
     if not version or not version[0].startswith("2."):
-        raise SystemExit(f"error: {catalogue} is not a 2.x catalogue; build it with scripts/build.py")
+        raise sqlite3.DatabaseError("not a 2.x catalogue; build it with scripts/build.py")
     cursor = db.execute("SELECT * FROM app_checklist ORDER BY item_id")
-    columns = [row[0] for row in cursor.description]
-    rows = cursor.fetchall()
+    columns, rows = [row[0] for row in cursor.description], cursor.fetchall()
     seed = db.execute("SELECT item_id, wanted FROM collection_tracker_seed ORDER BY item_id").fetchall()
     fingerprint = db.execute("SELECT value FROM metadata WHERE key='catalogue_fingerprint'").fetchone()[0]
-    db.close()
     return columns, rows, seed, fingerprint
 
 
-def sync(tracker: Path, catalogue: Path) -> tuple[int, int]:
+def sync(tracker: Path, catalogue: Path, read=None) -> tuple[int, int]:
     """Refresh the catalogue copy; returns (added, retired). User state is only ever inserted."""
-    columns, rows, seed, fingerprint = catalogue_rows(catalogue)
+    columns, rows, seed, fingerprint = read or catalogue_rows(catalogue)
     db = sqlite3.connect(tracker)
     known = {row[1] for row in db.execute("PRAGMA table_info(items)")}
     if not known:
@@ -89,11 +96,12 @@ def sync(tracker: Path, catalogue: Path) -> tuple[int, int]:
 def init(tracker: Path, catalogue: Path, force: bool = False) -> int:
     if tracker.exists() and not force:
         raise SystemExit(f"error: {tracker} exists; use sync, or --force to start over")
+    read = catalogue_rows(catalogue)  # validated before the tracker is touched
     tracker.unlink(missing_ok=True)
     db = sqlite3.connect(tracker)
     db.executescript(SCHEMA)
     db.close()
-    return sync(tracker, catalogue)[0]
+    return sync(tracker, catalogue, read)[0]
 
 
 def set_state(tracker: Path, item_id: str, state: str, quantity: int | None, notes: str | None) -> None:
@@ -193,41 +201,73 @@ def selftest_catalogue(path: Path, items: list) -> Path:
     return path
 
 
+def old_catalogue(path: Path) -> Path:
+    db = sqlite3.connect(path)
+    db.execute("CREATE TABLE metadata (key TEXT PRIMARY KEY, value TEXT)")
+    db.execute("INSERT INTO metadata VALUES ('schema_version', '1.7.0')")
+    db.commit()
+    db.close()
+    return path
+
+
+def refused(call) -> bool:
+    try:
+        call()
+    except SystemExit as stop:
+        return isinstance(stop.code, str) and stop.code.startswith("error:")
+    return False
+
+
+def selftest_tracker(tmp: Path) -> Path:
+    """init refuses a bad catalogue without leaving a file; set and sync keep state."""
+    catalogue = selftest_catalogue(tmp / "a.sqlite", [("i1", "current-known", "c1"), ("i2", "research", "c2")])
+    tracker = tmp / "t.sqlite"
+    for bad in (tmp / "missing.sqlite", old_catalogue(tmp / "v1.sqlite")):
+        assert refused(lambda: init(tracker, bad)) and not tracker.exists(), bad
+    assert init(tracker, catalogue) == 2
+    set_state(tracker, "i1", "have", 2, "binder")
+    assert sync(tracker, selftest_catalogue(tmp / "b.sqlite", [("i1", "current-known", "c1"),
+                                                               ("i3", "current-known", "c3")])) == (1, 1)
+    assert summary(tracker) == "active=2 have=1 need=1 skip=0 research=0", summary(tracker)
+    db = sqlite3.connect(tracker)
+    assert db.execute("SELECT have, quantity, notes FROM collection_state WHERE item_id='i1'").fetchone() == (
+        1, 2, "binder")
+    assert db.execute("SELECT active FROM items WHERE item_id='i2'").fetchone() == (0,)
+    db.close()
+    return tracker
+
+
+def selftest_migrate(tmp: Path, tracker: Path) -> None:
+    """migrate carries state, skips untouched rows, refuses lost state; a failed init --force keeps all."""
+    old = tmp / "old.sqlite"
+    db = sqlite3.connect(old)
+    db.execute("CREATE TABLE collection_state (checklist_id TEXT, have, wanted, quantity, notes)")
+    db.execute("CREATE TABLE catalog_items (checklist_id TEXT, collector_progress_class TEXT)")
+    db.executemany("INSERT INTO collection_state VALUES (?, ?, ?, ?, ?)",
+                   [("c3", 1, 1, 1, "old"), ("gone", 0, 1, 0, ""), ("retired", 0, 0, 0, "")])
+    db.executemany("INSERT INTO catalog_items VALUES (?, ?)", [("c3", "current-known"), ("retired", "research"),
+                                                               ("lost", "research")])
+    db.commit()
+    db.close()
+    assert migrate(old, tracker, tmp / "b.sqlite") == 0  # an untouched retired research row is no state
+    db = sqlite3.connect(tracker)
+    assert db.execute("SELECT have, notes FROM collection_state WHERE item_id='i3'").fetchone() == (1, "old")
+    db.close()
+    db = sqlite3.connect(old)
+    db.execute("INSERT INTO collection_state VALUES ('lost', 1, 1, 1, 'keep me')")
+    db.commit()
+    db.close()
+    assert migrate(old, tracker, tmp / "b.sqlite") == 1  # a retired row with state stops it
+    assert refused(lambda: init(tracker, tmp / "v1.sqlite", force=True))  # a failed --force keeps the tracker
+    assert summary(tracker) == "active=2 have=2 need=0 skip=0 research=0", summary(tracker)
+
+
 def selftest() -> int:
     with tempfile.TemporaryDirectory() as tmp:
         tmp = Path(tmp)
-        catalogue = selftest_catalogue(tmp / "a.sqlite", [("i1", "current-known", "c1"), ("i2", "research", "c2")])
-        tracker = tmp / "t.sqlite"
-        assert init(tracker, catalogue) == 2
-        set_state(tracker, "i1", "have", 2, "binder")
-        assert sync(tracker, selftest_catalogue(tmp / "b.sqlite", [("i1", "current-known", "c1"),
-                                                                   ("i3", "current-known", "c3")])) == (1, 1)
-        assert summary(tracker) == "active=2 have=1 need=1 skip=0 research=0", summary(tracker)
-        db = sqlite3.connect(tracker)
-        assert db.execute("SELECT have, quantity, notes FROM collection_state WHERE item_id='i1'").fetchone() == (
-            1, 2, "binder")
-        assert db.execute("SELECT active FROM items WHERE item_id='i2'").fetchone() == (0,)
-        db.close()
-        old = tmp / "old.sqlite"
-        db = sqlite3.connect(old)
-        db.execute("CREATE TABLE collection_state (checklist_id TEXT, have, wanted, quantity, notes)")
-        db.execute("CREATE TABLE catalog_items (checklist_id TEXT, collector_progress_class TEXT)")
-        db.executemany("INSERT INTO collection_state VALUES (?, ?, ?, ?, ?)",
-                       [("c3", 1, 1, 1, "old"), ("gone", 0, 1, 0, ""), ("retired", 0, 0, 0, "")])
-        db.executemany("INSERT INTO catalog_items VALUES (?, ?)", [("c3", "current-known"), ("retired", "research"),
-                                                                   ("lost", "research")])
-        db.commit()
-        db.close()
-        assert migrate(old, tracker, tmp / "b.sqlite") == 0  # an untouched retired research row is no state
-        db = sqlite3.connect(tracker)
-        assert db.execute("SELECT have, notes FROM collection_state WHERE item_id='i3'").fetchone() == (1, "old")
-        db.close()
-        db = sqlite3.connect(old)
-        db.execute("INSERT INTO collection_state VALUES ('lost', 1, 1, 1, 'keep me')")
-        db.commit()
-        db.close()
-        assert migrate(old, tracker, tmp / "b.sqlite") == 1  # a retired row with state stops it
-    print("collection selftest ok: init, set, sync (one item added, one retired), migrate, lost-state refusal")
+        selftest_migrate(tmp, selftest_tracker(tmp))
+    print("collection selftest ok: init refusals, set, sync (one item added, one retired), migrate, "
+          "lost-state refusal, failed init --force keeps the tracker")
     return 0
 
 
