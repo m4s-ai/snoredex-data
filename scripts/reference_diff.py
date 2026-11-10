@@ -21,7 +21,7 @@ from pathlib import Path
 sys.dont_write_bytecode = True  # importing database.py must not leave __pycache__ in the checkout
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
-from database import sqlite_dump  # noqa: E402
+from build import sqlite_dump  # noqa: E402
 
 REFERENCE_TAG = "refactor-reference-20261109"
 DETAIL_LIMIT = 40

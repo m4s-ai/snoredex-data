@@ -63,7 +63,7 @@ def main() -> int:
 
     # The site's only correction affordance is a link into this repository's issue tracker. A
     # public site in front of a private tracker asks strangers for help and then 404s them, so
-    # the two decisions are not independent. Check P8 in review_findings.py mirrors this.
+    # the two decisions are not independent. Check P8 in publication_audit.py mirrors this.
     site = ROOT / "index.html"
     if site.exists() and "github.com/m4s-ai/snoredex-data" in site.read_text(encoding="utf-8"):
         if visibility != "public" or decision.get("repositoryPublicationApproved") is not True:
