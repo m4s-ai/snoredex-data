@@ -304,7 +304,12 @@ def row_image(asset: dict):
     return asset.get("preview") if str(asset.get("path")).startswith(SPECIMEN_DIR) else asset.get("path")
 
 
-def table_row(item: dict, localization: dict, printing: dict, asset: dict, grades: dict, tiers: dict) -> dict:
+def language_evidence(grade: dict, provider: dict) -> dict:
+    return {"tier": provider["authorityTier"], "provider": provider["displayName"],
+            "corroborated": grade["corroborated"], "checkable": grade["checkable"]}
+
+
+def table_row(item: dict, localization: dict, printing: dict, asset: dict, grades: dict, providers: dict) -> dict:
     language = {"LATAM": "Spanish (Latin America)"}.get(localization["locality"], localization["language"])
     date_sort, display, date_status = date_view(item)
     best, finishes, technical = finish_view(item)
@@ -333,7 +338,7 @@ def table_row(item: dict, localization: dict, printing: dict, asset: dict, grade
         "evidence": sorted(filter(None, {item["finishVerificationStatus"] or "pending",
                                          item["completenessStatus"], item["itemKind"]})),
         "confirmedLanguages": [language], "langCodes": lang_codes,
-        "langEvidence": {code: {"tier": tiers[grade["provider"]], **grade} for code in lang_codes},
+        "langEvidence": {code: language_evidence(grade, providers[grade["providerId"]]) for code in lang_codes},
         "correctionUrl": item["correctionLink"],
     }
     row["search"] = row_search(row)
@@ -352,9 +357,9 @@ def table_rows(document: dict, printings: dict, images: dict, evidence: dict) ->
     localizations = {row["localizationId"]: row for row in document["localizations"]}
     assets = {row["assetId"]: row for row in images["assets"]}
     grades = {row["itemId"]: row for row in evidence["printings"]}
-    tiers = {row["provider"]: row["authorityTier"] for row in evidence["providers"]}
+    providers = {row["providerId"]: row for row in evidence["providers"]}
     return [table_row(item, localizations[item["localizationId"]], printings[item["itemId"]],
-                      assets.get(item["imageAssetId"]) or {}, grades[item["itemId"]], tiers)
+                      assets.get(item["imageAssetId"]) or {}, grades[item["itemId"]], providers)
             for item in document["items"] if item["active"] and item["itemKind"] == "verified-printing"]
 
 
@@ -466,6 +471,28 @@ def render(template: str, slots: dict) -> str:
     return re.sub(pattern, lambda match: str(slots[match.group(1)]), template)
 
 
+# confirmed_releases.py's language order: the legacy pairs count only these languages.
+LEGACY_LANGUAGES = [name for name in LANG_CODE if name != "Spanish (Latin America)"]
+
+
+def page_counts(document: dict, sets: dict, claims: dict, evidence: dict) -> dict:
+    """The index page's counts, over the language claims, finish units and items."""
+    rows = claims["languageClaims"]
+    status = Counter(row["applicationStatus"] for row in rows)
+    names = {row["languageCode"]: row["sourceName"] for row in sets["languages"]}
+    units = claims["finishUnits"]
+    return {
+        "establishedLanguageClaims": status["exists"], "languageClaimsNeedingEvidence": status["needs-evidence"],
+        "adjudicatedNotPrinted": status["not-printed"], "disputedClaims": status["disputed"],
+        "finishUnits": len(units), "confirmedFinishes": sum(u["availabilityStatus"] == "confirmed" for u in units),
+        "checklistItems": document["qualitySummary"]["legacyCompatibility"]["counts"]["legacyRows"],
+        "confirmedLegacyPairs": sum(row["applicationStatus"] == "exists" and not row["isCodeCard"]
+                                    and names[row["languageCode"]] in LEGACY_LANGUAGES for row in rows),
+        "openLegacyClaims": sum(row["repositoryVerdict"] in ("pending", "needs-manual-review") for row in rows),
+        **evidence["meta"]["frozenRegistryCounts"],
+    }
+
+
 def stats_html(row_count: int, counts: dict) -> str:
     stats = [(row_count, "current confirmed physical printings")] + [(counts[key], label) for key, label in STAT_LABELS]
     return "".join(f'<div class="stat"><span class="n">{n}</span><span class="k">{html.escape(k)}</span></div>'
@@ -514,15 +541,16 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", required=True, type=Path, help="directory to write the end product into")
     args = parser.parse_args()
-    printings_doc, sets, images, evidence = (read(name) for name in (
-        "printings.json", "sets.json", "images.json", "evidence.json"))
+    printings_doc, sets, images, evidence, claims = (read(name) for name in (
+        "printings.json", "sets.json", "images.json", "evidence.json", "claims.json"))
     printings = {row["itemId"]: row for row in printings_doc["printings"]}
     document = catalogue(printings_doc, sets, images, evidence)
     rows = table_rows(document, printings, images, evidence)
     cards = gallery_cards(document, printings, images)
     outputs = {
         "collector_catalogue.json": json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-        "index.html": index_page(rows, printings_doc["meta"]["siteGenerated"], evidence["meta"]["pageCounts"]),
+        "index.html": index_page(rows, printings_doc["meta"]["siteGenerated"],
+                                 page_counts(document, sets, claims, evidence)),
         "gallery.html": gallery_page(cards),
     }
     args.out.mkdir(parents=True, exist_ok=True)
