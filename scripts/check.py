@@ -58,10 +58,8 @@ COLLECTIONS = {
         "cardSize": S, "errorClass": OS, "rarity": D, "completenessStatus": COMPLETENESS,
         "completenessEvidence?": D, "imageAssetId": OS, "releaseDate?": OS, "releaseDatePrecision?": PRECISION,
         "releaseApproximate?": B, "artist?": S}),
-    "printings.meta": (None, None, {"generatedBy": S, "dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
+    "printings.meta": (None, None, {"dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
                                     "legacyQuality": D}),
-    "sets.meta": (None, None, {"generatedBy": S}),
-    "images.meta": (None, None, {"generatedBy": S}),
     "sets.localizations": ("localizationId", "localizationId", {
         "localizationId": S, "locality": S, "languageId": S, "language": S, "languageTag": S, "script": OS,
         "displayName": S, "displayOrder": I}),
@@ -84,14 +82,13 @@ COLLECTIONS = {
     "images.placeholders": ("id", "id", {
         "id": S, "baseItemId": S, "finish": FINISHES, "foilPattern": OS, "distribution": OS, "status": S,
         "note": OS, "sources": L}),
-    "evidence.meta": (None, None, {"generatedBy": S, "frozenRegistryCounts": D}),
     "evidence.providers": ("providerId", "providerId", {
         "providerId": S, "displayName": S, "organization": OS, "homepage": OS, "category": S, "authorityTier": I,
         "coverage": S, "usedFor": L, "attribution": S, "notes": S, "hosts": L,
         "supportsAbsence?": B, "absenceScopes?": L}),  # declared so that E9, not the schema, owns them
     "evidence.printings": ("itemId", "itemId", {
         "itemId": S, "sourceLinks": L, "languageEvidence?": D, "dateSource?": OD}),
-    "claims.meta": (None, None, {"generatedBy": S, "legacyDatabase": D}),
+    "claims.meta": (None, None, {"legacyDatabase": D}),
     "claims.legacyProducts": ("productId", "productId", {
         "productId": I, "cardName": S, "setCode": S, "collectorNumber": OS, "setName": S, "rarity": OS,
         "variantToken": S, "variantName": OS, "variantNameSource": OS, "cardKey": OS, "market": S,
@@ -146,7 +143,10 @@ def load() -> dict:
             raise SystemExit(f"check: data/{name}.json is not UTF-8 JSON: {error}")
     owner = json.loads(OWNER.read_text(encoding="utf-8"))
     specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
-    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens})
+    fingerprints = {name: json.loads((ROOT / name).read_text(encoding="utf-8"))["meta"]
+                    for name in ("collector_migrations.json", "collector_catalogue.json")}
+    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens},
+                fingerprints=fingerprints)
 
 
 def rows(model: dict, name: str) -> list:
@@ -356,11 +356,35 @@ def repository_files(model: dict) -> tuple[int, list]:
 
 def owner_links(model: dict) -> tuple[int, list]:
     """Each cited adjudication is an owner decision about the citing unit (rule 4)."""
-    # ponytail: one direction only, because main keeps adding decisions to the owner file that data/
-    # snapshots; add "every decision is cited" when migrate_model.py is deleted at the cut.
     decisions = {d["adjudicationId"]: d["unitId"] for d in model["owner"]["decisions"]}
     cited = [(c["unitId"], c["adjudicationId"]) for c in rows(model, C) if c["adjudicationId"]]
     return len(cited), [unit for unit, adjudication in cited if decisions.get(adjudication) != unit]
+
+
+def uncited_decisions(model: dict) -> tuple[int, list]:
+    """Every owner decision is cited by a claim: an owner decision data/ does not carry is not applied."""
+    cited = {c["adjudicationId"] for c in rows(model, C)}
+    decisions = model["owner"]["decisions"]
+    return len(decisions), [d["adjudicationId"] for d in decisions if d["adjudicationId"] not in cited]
+
+
+def migration_route(model: dict) -> tuple[int, list]:
+    """collector_migrations.json routes the checklist app to the committed catalogue, which build.py --check
+    holds equal to a fresh build: a data change cannot ship without a migration route."""
+    route, catalogue = (model["fingerprints"][name] for name in ("collector_migrations.json",
+                                                                 "collector_catalogue.json"))
+    same = route["toFingerprint"] == catalogue["catalogueFingerprint"]
+    return 1, [] if same else [f"toFingerprint {route['toFingerprint']} != {catalogue['catalogueFingerprint']}"]
+
+
+def add_decision(m: dict) -> None:
+    m["owner"] = copy.deepcopy(m["owner"])
+    m["owner"]["decisions"].append(dict(m["owner"]["decisions"][0], adjudicationId="OA-uncited", unitId="U9999"))
+
+
+def stale_route(m: dict) -> None:
+    m["fingerprints"] = copy.deepcopy(m["fingerprints"])
+    m["fingerprints"]["collector_migrations.json"]["toFingerprint"] = "sha256:stale"
 
 
 def specimen_refs(model: dict) -> tuple[int, list]:
@@ -390,6 +414,8 @@ REFERENCES = {
     "image files exist in the repository": (repository_files, change(
         "images.assets", lambda a: "preview" not in a, path="images/none.png")),
     "adjudicationId -> a verification/owner_adjudications.json decision on that unit": (owner_links, owner_unit),
+    "every owner decision is cited by its claim": (uncited_decisions, add_decision),
+    "collector_migrations.json toFingerprint = the catalogue fingerprint": (migration_route, stale_route),
     "completenessEvidence.adjudicationId -> owner finishDecisions": (
         lambda m: missing(((r["itemId"], r["completenessEvidence"].get("adjudicationId"))
                            for r in rows(m, P) if "completenessEvidence" in r),
