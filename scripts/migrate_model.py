@@ -205,19 +205,22 @@ def verdict(claim: dict) -> dict:
     return {("repositoryVerdict" if key == "verificationStatus" else key): value for key, value in claim.items()}
 
 
-def language_claims(db) -> list[dict]:
-    """One record per language unit, its Cardmarket product identity and product facts inline."""
-    products = {row["product_id"]: record(row, ("product_id", *PRODUCT_DROPPED))
-                for row in query(db, "SELECT * FROM products")}
+def legacy_products(db) -> list[dict]:
+    """The Cardmarket products of the legacy candidate universe, one record each."""
     axes = grouped(query(db, "SELECT * FROM product_axes ORDER BY product_id, axis"), lambda row: row["product_id"])
+    return [dict(record(row, PRODUCT_DROPPED), axes=[axis["axis"] for axis in axes[row["product_id"]]])
+            for row in query(db, "SELECT * FROM products ORDER BY product_id")]
+
+
+def language_claims(db) -> list[dict]:
+    """One record per language unit: its product, language and evidence."""
     editions = grouped(query(db, "SELECT * FROM product_editions ORDER BY product_id, language_code, edition"),
                        lambda row: (row["product_id"], row["language_code"]))
     claims = []
     for row in query(db, "SELECT * FROM product_languages ORDER BY unit_id"):
         pid, code = row["product_id"], row["language_code"]
         assert {key: row[key] for key in CLAIM_CONSTANTS} == CLAIM_CONSTANTS, row["unit_id"]
-        claims.append({"unitId": row["unit_id"], "productId": pid, "languageCode": code, **products[pid],
-                       "axes": [axis["axis"] for axis in axes[pid]],
+        claims.append({"unitId": row["unit_id"], "productId": pid, "languageCode": code,
                        **verdict(record(row, ("product_id", "language_code", "unit_id", *CLAIM_CONSTANTS))),
                        "editions": [record(e, ("product_id", "language_code")) for e in editions[(pid, code)]]})
     return claims
@@ -243,6 +246,8 @@ def finish_printing(row: dict, item: dict | None, assets: dict, links: dict) -> 
     rec = {"printingId": row["printing_id"]}
     if item is None:
         rec.update(orphan_printing(row, links["markings"]))
+        if links["physical"]:  # the same physical card an item carries under another finish unit
+            rec["physicalPrintingId"] = links["physical"]
     if links["product"]:
         rec["productId"] = links["product"]
     if row["release_date"]:
@@ -261,7 +266,11 @@ def finish_printings(db, printings: list, assets: dict) -> list[dict]:
     products = {row["printing_id"]: row["product_id"] for row in query(db, "SELECT * FROM printing_product_map")}
     sources = grouped(query(db, "SELECT * FROM printing_sources ORDER BY printing_id, source_order"),
                       lambda row: row["printing_id"])
+    physical = {row["source_id"]: row["target_ref"] for row in query(
+        db, "SELECT source_id, target_ref FROM graph_migration_dispositions "
+            "WHERE source_kind = 'finish-printing-record' AND target_ref LIKE 'PHYSICAL:%'")}
     return [finish_printing(row, items.get(row["printing_id"]), assets, {
+        "physical": physical.get(row["printing_id"]),
         "markings": [record(m, ("printing_id", "marking_order")) for m in marks[row["printing_id"]]],
         "product": products.get(row["printing_id"]), "sources": sources[row["printing_id"]]})
         for row in query(db, "SELECT * FROM printings ORDER BY printing_id")]
@@ -277,6 +286,7 @@ def claims_document(db, printings: list, assets: dict) -> dict:
     meta = {row["key"]: row["value"] for row in query(db, "SELECT * FROM metadata")}
     return {
         "meta": {"legacyDatabase": {key: meta[key] for key in STORED_META}},
+        "legacyProducts": legacy_products(db),
         "languageClaims": language_claims(db),
         "releaseRows": [record(row, ("date_sort",)) for row in query(db, "SELECT * FROM release_rows ORDER BY row_id")],
         "finishUnits": finish_units(db),
@@ -360,21 +370,11 @@ def values(records, columns: list, **fixed) -> list:
 
 
 def printing_rows(model: dict) -> list[dict]:
-    """The finish printings as the old `printings` table held them, items supplying the shared facts."""
-    items = {row["sourcePrintingId"]: row for row in model["printings"] if row["sourcePrintingId"]}
-    assets = {row["assetId"]: row["path"] for row in model["assets"]}
-    rows = []
-    for rec in model["finishPrintings"]:
-        item = items.get(rec["printingId"])
-        base = rec if item is None else {
-            "finishUnitId": item["finishUnitId"], "finish": item["finish"], "foilPattern": item["foilPattern"],
-            "cardSize": item["cardSize"], "verificationStatus": item["finishVerificationStatus"],
-            "distribution": item["distribution"], "markings": item["markings"]}
-        rows.append(dict(base, printingId=rec["printingId"], releaseDate=rec.get("releaseDate"),
-                         imagePath=rec.get("image", assets.get((item or {}).get("imageAssetId"))),
-                         finishFamily=build.CATALOGUE_FAMILY.get(base["finish"]),
-                         **{"distribution" + k.title(): (base["distribution"] or {}).get(k) for k in DISTRIBUTION}))
-    return rows
+    """The finish printings as the old `printings` table held them (build.py resolves them)."""
+    rows = build.finish_printing_rows(model["printings"], {row["assetId"]: row["path"] for row in model["assets"]},
+                                      model["finishPrintings"])
+    return [dict(row, **{"distribution" + k.title(): (row["distribution"] or {}).get(k) for k in DISTRIBUTION})
+            for row in rows]
 
 
 def source_rows(model: dict) -> list:
@@ -403,16 +403,15 @@ def metadata_rows(model: dict) -> list:
     return list({**model["claimsMeta"]["legacyDatabase"], **derived}.items())
 
 
-def claim_tables(db, claims: list) -> list[bool]:
-    products = {rec["productId"]: rec for rec in claims}
+def claim_tables(db, products: list, claims: list) -> list[bool]:
     product_columns = table_columns(db, "products", PRODUCT_DROPPED)
     return [
-        compare(db, "products", product_columns, set(values(claims, product_columns))),
+        compare(db, "products", product_columns, values(products, product_columns)),
         compare(db, "product_languages", table_columns(db, "product_languages"),
                 values([dict(rec, verificationStatus=rec["repositoryVerdict"]) for rec in claims],
                        table_columns(db, "product_languages"), **CLAIM_CONSTANTS)),
         compare(db, "product_axes", ["product_id", "axis"],
-                [(pid, axis) for pid, rec in products.items() for axis in rec["axes"]]),
+                [(rec["productId"], axis) for rec in products for axis in rec["axes"]]),
         compare(db, "product_editions", table_columns(db, "product_editions"),
                 [(rec["productId"], rec["languageCode"], e["edition"], e["editionSystem"], e["source"])
                  for rec in claims for e in rec["editions"]]),
@@ -480,7 +479,7 @@ def coverage() -> int:
                 table_columns(db, "languages"))),
         compare(db, "providers", table_columns(db, "providers"), values(model["evidence"]["providers"],
                 table_columns(db, "providers"), supports_absence=0)),
-        *claim_tables(db, model["claims"]["languageClaims"]),
+        *claim_tables(db, model["claims"]["legacyProducts"], model["claims"]["languageClaims"]),
         compare(db, "release_rows", table_columns(db, "release_rows"), values(release_rows,
                 table_columns(db, "release_rows"))),
         *finish_tables(db, flat), *owner_tables(db),

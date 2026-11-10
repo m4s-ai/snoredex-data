@@ -2,8 +2,9 @@
 """Build the end product from the canonical model in data/.
 
 Reads data/, the page templates (templates/index.html, and site/gallery.html in place) and the
-owner's publication-decisions.json, and writes collector_catalogue.json, index.html and
-gallery.html into --out. It never reads the committed pages.
+owner's publication-decisions.json, owner adjudications and specimens, and writes into --out:
+collector_catalogue.json, index.html, gallery.html, snoredex.sqlite (its contract is
+templates/schema.sql) and snoredex-tracker-template.sqlite. It never reads the committed outputs.
 
     python scripts/build.py --out DIR
 """
@@ -14,10 +15,13 @@ import hashlib
 import html
 import json
 import re
+import sqlite3
 import sys
 from collections import Counter
 from pathlib import Path
 from urllib.parse import quote, urlencode
+
+import collection
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -481,12 +485,13 @@ def page_counts(document: dict, sets: dict, claims: dict, evidence: dict) -> dic
     status = Counter(row["applicationStatus"] for row in rows)
     names = {row["languageCode"]: row["sourceName"] for row in sets["languages"]}
     units = claims["finishUnits"]
+    code_cards = {row["productId"] for row in claims["legacyProducts"] if row["isCodeCard"]}
     return {
         "establishedLanguageClaims": status["exists"], "languageClaimsNeedingEvidence": status["needs-evidence"],
         "adjudicatedNotPrinted": status["not-printed"], "disputedClaims": status["disputed"],
         "finishUnits": len(units), "confirmedFinishes": sum(u["availabilityStatus"] == "confirmed" for u in units),
         "checklistItems": document["qualitySummary"]["legacyCompatibility"]["counts"]["legacyRows"],
-        "confirmedLegacyPairs": sum(row["applicationStatus"] == "exists" and not row["isCodeCard"]
+        "confirmedLegacyPairs": sum(row["applicationStatus"] == "exists" and row["productId"] not in code_cards
                                     and names[row["languageCode"]] in LEGACY_LANGUAGES for row in rows),
         "openLegacyClaims": sum(row["repositoryVerdict"] in ("pending", "needs-manual-review") for row in rows),
         **evidence["meta"]["frozenRegistryCounts"],
@@ -537,6 +542,178 @@ def gallery_page(cards: list) -> str:
         "<!-- GALLERY_DATA -->", json_block("gallery-data", cards))
 
 
+# --- snoredex.sqlite ---
+
+SCHEMA_SQL = ROOT / "templates" / "schema.sql"
+DATABASE_SCHEMA = ("snoredex-database", "2.0.0")
+OWNER_ADJUDICATIONS = ROOT / "verification" / "owner_adjudications.json"  # owner file, read in place
+SPECIMENS = ROOT / "verification" / "specimens.json"  # curated specimen store, read in place
+
+
+def snake(key: str) -> str:
+    return re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", key).lower()
+
+
+def sql_value(value):
+    if isinstance(value, (list, dict)):
+        return json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return int(value) if isinstance(value, bool) else value
+
+
+def sql_row(record: dict, columns: list) -> list:
+    """A model record as a row: snake_case names, JSON for nested values; every field must land."""
+    row = {}
+    for key, value in record.items():
+        name = snake(key)
+        row[name + "_json" if name + "_json" in columns else name] = value
+    assert set(row) <= set(columns), sorted(set(row) - set(columns))
+    return [sql_value(row.get(column)) for column in columns]
+
+
+def insert(db, table: str, records) -> int:
+    columns = [row[1] for row in db.execute(f'PRAGMA table_info("{table}")')]
+    rows = [sql_row(record, columns) for record in records]
+    db.executemany(f'INSERT INTO "{table}" VALUES ({", ".join("?" * len(columns))})', rows)
+    return len(rows)
+
+
+def without_keys(record: dict, *keys: str) -> dict:
+    return {key: value for key, value in record.items() if key not in keys}
+
+
+def finish_printing_rows(items: list, assets: dict, finish_printings: list) -> list[dict]:
+    """Finish printings resolved: the item that carries one supplies the facts they share."""
+    carried = {row["sourcePrintingId"]: row for row in items if row["sourcePrintingId"]}
+    rows = []
+    for rec in finish_printings:
+        item = carried.get(rec["printingId"])
+        base = rec if item is None else {
+            "finishUnitId": item["finishUnitId"], "finish": item["finish"], "foilPattern": item["foilPattern"],
+            "cardSize": item["cardSize"], "verificationStatus": item["finishVerificationStatus"],
+            "distribution": item["distribution"], "markings": item["markings"]}
+        rows.append({"printingId": rec["printingId"], "itemId": (item or {}).get("itemId"),
+                     **without_keys(base, "printingId", "productId", "releaseDate", "image", "sources",
+                                    "physicalPrintingId"),
+                     "finishFamily": CATALOGUE_FAMILY.get(base["finish"]), "productId": rec.get("productId"),
+                     "releaseDate": rec.get("releaseDate"),
+                     "imagePath": rec.get("image", assets.get((item or {}).get("imageAssetId"))),
+                     "physicalPrintingId": rec.get("physicalPrintingId")})
+    return rows
+
+
+def printing_records(document: dict, printings: dict, evidence: dict) -> list[dict]:
+    grades = {row["itemId"]: row for row in evidence["printings"]}
+    records = []
+    for item in sorted(document["items"], key=lambda row: row["itemId"]):
+        stored, grade = printings[item["itemId"]], grades[item["itemId"]]
+        language = grade.get("languageEvidence") or {}
+        records.append({**without_keys(item, "legacyChecklistIds", "markings", "sourceLinks", "evidenceLinks"),
+                        "identityAnchor": stored["identityAnchor"], "artist": stored.get("artist"),
+                        "languageProviderId": language.get("providerId"),
+                        "languageCorroborated": language.get("corroborated"),
+                        "languageCheckable": language.get("checkable"), "dateSource": grade.get("dateSource")})
+    return records
+
+
+def printing_children(db, items: list) -> list[int]:
+    items = sorted(items, key=lambda row: row["itemId"])
+    return [
+        insert(db, "printing_legacy_ids", ({"itemId": i["itemId"], "legacyChecklistId": legacy}
+                                            for i in items for legacy in i["legacyChecklistIds"])),
+        insert(db, "printing_markings", ({"itemId": i["itemId"], "markingOrder": n, **mark}
+                                          for i in items for n, mark in enumerate(i["markings"]))),
+        insert(db, "printing_source_links", ({"itemId": i["itemId"], "url": url}
+                                              for i in items for url in i["sourceLinks"])),
+    ]
+
+
+def source_records(finish_printings: list):
+    for rec in finish_printings:
+        for order, entry in enumerate(rec["sources"]):
+            source = entry["source"]
+            yield {"printing_id": rec["printingId"], "source_order": order, "provider_id": entry["providerId"],
+                   "url": source.get("url"), "identity_url": source.get("identityUrl"),
+                   "source_type": source["sourceType"], "evidence": source["evidence"],
+                   "authority_class": source.get("authorityTier"), "coverage": source.get("coverage"),
+                   "retrieved_at": source.get("retrievedAt"), "source_json": source}
+
+
+def claim_tables(db, model: dict) -> list[int]:
+    claims = model["claims"]
+    units = claims["finishUnits"]
+    owner = json.loads(OWNER_ADJUDICATIONS.read_text(encoding="utf-8"))["decisions"]
+    specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
+    return [
+        insert(db, "legacy_products", claims["legacyProducts"]),
+        insert(db, "owner_adjudications", sorted(owner, key=lambda row: row["adjudicationId"])),
+        insert(db, "language_claims", claims["languageClaims"]),
+        insert(db, "release_rows", (dict(row, dateSort=release_sort(row["releaseDate"]))
+                                    for row in claims["releaseRows"])),
+        insert(db, "finish_units", (without_keys(unit, "products") for unit in units)),
+        insert(db, "finish_unit_products", ({"finishUnitId": u["finishUnitId"], **p} for u in units
+                                             for p in u["products"])),
+        insert(db, "finish_printings", model["finishRows"]),
+        insert(db, "finish_printing_sources", source_records(claims["finishPrintings"])),
+        insert(db, "specimens", ({"specimen_id": s["specimenId"], "specimen_json": s}
+                                 for s in sorted(specimens, key=lambda row: row["specimenId"]))),
+    ]
+
+
+def model_tables(db, model: dict) -> list[int]:
+    document, images = model["document"], model["images"]
+    previews = {row["assetId"]: row.get("preview") for row in images["assets"]}
+    return [
+        insert(db, "metadata", ({"key": k, "value": v} for k, v in sorted(model["metadata"].items()))),
+        insert(db, "languages", model["sets"]["languages"]),
+        insert(db, "localizations", document["localizations"]),
+        insert(db, "local_sets", document["localSets"]),
+        insert(db, "set_editions", (without_keys(row, "localSetCode", "localSetName") for row in document["setEditions"])),
+        insert(db, "works", document["works"]),
+        insert(db, "assets", (dict(row, preview=previews[row["assetId"]]) for row in document["assets"])),
+        insert(db, "providers", model["evidence"]["providers"]),
+        insert(db, "printings", printing_records(document, model["printings"], model["evidence"])),
+        *printing_children(db, document["items"]),
+        insert(db, "gallery_images", images["galleryImages"]),
+        insert(db, "artwork_groups", images["artworkGroups"]),
+        insert(db, "gallery_placeholders", images["placeholders"]),
+    ]
+
+
+def database_metadata(document: dict) -> dict:
+    return {"schema": DATABASE_SCHEMA[0], "schema_version": DATABASE_SCHEMA[1],
+            "data_as_of": document["meta"]["dataAsOf"],
+            "catalogue_fingerprint": document["meta"]["catalogueFingerprint"],
+            "catalogue_schema_version": document["meta"]["schemaVersion"],
+            "candidate_universe_id": COVERAGE["candidateUniverseId"],
+            "legacy_source_commit": COVERAGE["sourceCommit"]}
+
+
+def write_database(path: Path, model: dict) -> dict:
+    """Build the database from the model; the schema file is the contract. Returns rows per table."""
+    path.unlink(missing_ok=True)
+    db = sqlite3.connect(path)
+    db.executescript(SCHEMA_SQL.read_text(encoding="utf-8"))
+    model_tables(db, model)
+    claim_tables(db, model)
+    db.commit()
+    integrity = db.execute("PRAGMA integrity_check").fetchone()[0]
+    broken = db.execute("PRAGMA foreign_key_check").fetchall()
+    tables = [row[0] for row in db.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY rowid")]
+    counts = {name: db.execute(f'SELECT COUNT(*) FROM "{name}"').fetchone()[0] for name in tables}
+    db.close()
+    assert integrity == "ok" and not broken, (integrity, broken[:5])
+    return counts
+
+
+def sqlite_dump(path: Path) -> str:
+    """A logical dump: page layouts differ across SQLite builds even when every row is the same."""
+    db = sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True)
+    try:
+        return "\n".join(db.iterdump())
+    finally:
+        db.close()
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--out", required=True, type=Path, help="directory to write the end product into")
@@ -556,8 +733,15 @@ def main() -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     for name, text in outputs.items():
         (args.out / name).write_text(text, encoding="utf-8", newline="\n")
+    counts = write_database(args.out / "snoredex.sqlite", {
+        "document": document, "images": images, "sets": sets, "evidence": evidence, "printings": printings,
+        "claims": claims, "metadata": database_metadata(document),
+        "finishRows": finish_printing_rows(document["items"], {a["assetId"]: a["path"] for a in images["assets"]},
+                                           claims["finishPrintings"])})
+    seeded = collection.init(args.out / "snoredex-tracker-template.sqlite", args.out / "snoredex.sqlite", force=True)
     print(f"{args.out}: {len(document['items'])} items, {len(rows)} rows, {len(cards)} gallery cards; "
-          f"{document['meta']['catalogueFingerprint']}")
+          f"{document['meta']['catalogueFingerprint']}; snoredex.sqlite {sum(counts.values())} rows in "
+          f"{len(counts)} tables; tracker template {seeded} items")
     return 0
 
 
