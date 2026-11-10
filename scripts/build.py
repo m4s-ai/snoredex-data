@@ -415,7 +415,7 @@ def gallery_artists(items: list, printings: dict) -> tuple[dict, dict]:
 
 
 def chronological(cards: list) -> list:
-    """A group sorts by its earliest verified printing, then set code and number (gallery.py)."""
+    """A group sorts by its earliest verified printing, then set code and number."""
     unplaced = (UNDATED, "", float("inf"))
     dates = {c["id"]: release_sort(c["date"]) if c["date"] else UNDATED for c in cards}
     group_keys = {}
@@ -451,7 +451,7 @@ def gallery_cards(document: dict, printings: dict, images: dict) -> list[dict]:
 # --- pages ---
 
 INDEX_TEMPLATE = ROOT / "templates" / "index.html"
-GALLERY_TEMPLATE = ROOT / "site" / "gallery.html"  # the page source site.py reads, used in place
+GALLERY_TEMPLATE = ROOT / "site" / "gallery.html"  # the gallery page source, used in place
 # Owner-only decision record, read in place: the published licence wording must come from the record
 # the publication gate enforces, never from a copy (AGENTS.md: owner files move unchanged).
 DECISIONS = ROOT / "publication-decisions.json"
@@ -480,7 +480,7 @@ def render(template: str, slots: dict) -> str:
     return re.sub(pattern, lambda match: str(slots[match.group(1)]), template)
 
 
-# confirmed_releases.py's language order: the legacy pairs count only these languages.
+# The legacy release rows' language order: the legacy pairs count only these languages.
 LEGACY_LANGUAGES = [name for name in LANG_CODE if name != "Spanish (Latin America)"]
 
 
@@ -549,7 +549,7 @@ def licence_slots() -> dict:
 
 
 def open_claims_note(count: int) -> str:
-    """A scope warning that appears only while legacy claims are open (site.py, #68)."""
+    """A scope warning that appears only while legacy claims are open (#68)."""
     return (f"<li><strong>{count} legacy claims remain open.</strong> They are shown as "
             f"unresolved rather than quietly dropped. This is queue depth inside the frozen candidate "
             f"universe, not a count of undiscovered local printings.</li>" if count else "")

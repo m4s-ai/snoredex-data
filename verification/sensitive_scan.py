@@ -1,6 +1,6 @@
 """Sensitive-expression scanner for the P4 (tree) and P6 (history) publication checks.
 
-Moved verbatim out of `review_findings.py` (#460) so its exact bytes can fingerprint a memo: a Git
+Moved verbatim out of the former findings harness (#460) so its exact bytes can fingerprint a memo: a Git
 blob is immutable, so a blob this scanner version has already read never needs reading again. The
 memo lives in `<git-common-dir>/snoredex-memo/`, outside the working tree; deleting it only costs
 time. `SNOREDEX_MEMO=off` disables it unless `SNOREDEX_BLOB_MEMO=use`, which the Linux L4 lane sets.

@@ -25,10 +25,10 @@ SPECIMENS = ROOT / "verification" / "specimens.json"
 
 NONE = type(None)
 S, OS, I, B, OB, L, D, OD = (str,), (str, NONE), (int,), (bool,), (bool, NONE), (list,), (dict,), (dict, NONE)
-RESOLVED = ("confirmed", "contradicted")  # review_integrity.RESOLVED
+RESOLVED = ("confirmed", "contradicted")  # the verdicts that resolve a claim
 GRANULARITIES = frozenset(("specimen-or-card", "product-or-set", "market-or-era", "sibling-derived",
-                           "unclassified"))  # review_integrity.ALLOWED_EVIDENCE_GRANULARITIES
-FINISHES = frozenset(("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown"))  # ALLOWED_FINISHES
+                           "unclassified"))  # how far a claim's evidence reaches
+FINISHES = frozenset(("non-holo", "holo", "reverse-holo", "mirror-holo", "unknown"))  # technical finishes
 COMPLETENESS = frozenset(("owner-adjudicated", "positive-evidence-only", "pending", "not-applicable"))
 MARKING_ROLES = frozenset(("print-identity", "reverse-holo-treatment", "distribution-promo"))
 MAPPED, UNMAPPED = ("mapped", "mapped-by-explicit-equivalence"), ("needs-explicit-equivalence", "unmapped")
@@ -51,7 +51,7 @@ COLLECTIONS = {
         "cardName": S, "localCardName": OS, "collectorNumber": OS, "collectorNumberDenominator": OS,
         "edition": enum("1st Edition", "Unlimited", None),
         "editionAssignmentStatus": enum("assigned", "not-applicable", "unresolved"),
-        # site.py STATUS_RANK is the finish-status vocabulary the table ranks
+        # the finish-status vocabulary the table ranks (build.py STATUS_RANK)
         "finishVerificationStatus": enum("pending", "other-product", "unmapped", "marketplace-claimed",
                                          "owner-attested", "observed", "confirmed"),
         "finish": FINISHES | {None}, "finishGroupId": S, "foilPattern": OS, "markings": L, "distribution": OD,
@@ -107,7 +107,7 @@ COLLECTIONS = {
         "dateApproximate": B, "sourceProviderId": OS, "sourceUrl": OS, "sourcePage": OS, "sourceField": OS}),
     "claims.finishUnits": ("finishUnitId", "finishUnitId", {
         "finishUnitId": S, "cardName": S, "setCode": S, "collectorNumber": OS, "languageCode": S,
-        "applicabilityStatus": enum("applicable", "not-applicable"),  # review_integrity ALLOWED_*
+        "applicabilityStatus": enum("applicable", "not-applicable"),  # the finish-unit state vocabularies
         "availabilityStatus": enum("confirmed", "owner-attested", "marketplace-claimed", "pending", "not-applicable"),
         "completenessStatus": COMPLETENESS,
         "productMappingStatus": enum("confirmed", "partial", "pending", "not-applicable"),
@@ -440,7 +440,7 @@ def resolved(model: dict) -> list:
 
 
 def expected_status(claim: dict, code_cards: set) -> str:
-    """evidence_semantics.application_status/transition_support, plus database.py's code-card exclusion."""
+    """A confirmation counts only where its evidence reaches the card; code cards are out of scope."""
     if claim["productId"] in code_cards:
         return "out-of-scope"
     grain, inference = claim["evidenceGranularity"], claim["evidenceInference"]
@@ -459,7 +459,7 @@ def application_status(model: dict) -> tuple[int, list]:
 
 
 def incomplete_claim(claim: dict) -> bool:
-    """review_integrity: resolved units have a provider (E2), evidence of 20+ chars, sourceType, granularity."""
+    """A resolved claim has a provider (E2), evidence of 20+ characters, a sourceType and a granularity."""
     evidence, source_type = claim["evidence"], claim["sourceType"]
     return (not claim["providerId"] or not isinstance(evidence, str) or len(evidence) < 20
             or not isinstance(source_type, str) or not source_type.strip()
@@ -467,7 +467,7 @@ def incomplete_claim(claim: dict) -> bool:
 
 
 def unverifiable(model: dict) -> tuple[int, list]:
-    # was E3 (review_findings.py): fails only with no URL AND uncorroborated AND a declared provider below tier 2
+    # E3: fails only with no URL AND uncorroborated AND a declared provider below tier 2
     tiers = {p["providerId"]: p["authorityTier"] for p in rows(model, "evidence.providers")}
     return failing(resolved(model), lambda c: not c["sourceUrl"] and not c["corroborated"]
                    and tiers.get(c["providerId"], 0) > 2, lambda c: c["unitId"])
@@ -480,7 +480,7 @@ def absence_authority(provider: dict) -> bool:
 
 
 def item_kind_error(item: dict) -> bool:
-    """collector_catalogue.validate_catalogue: what an item carries matches its kind."""
+    """What an item carries matches its kind (verified printing, finish candidate, research placeholder)."""
     kind, physical, progress = item["itemKind"], item["physicalPrintingId"], item["progressClass"]
     if kind == "verified-printing":
         return not physical or progress != "current-known"
@@ -497,7 +497,7 @@ def item_kinds(model: dict) -> tuple[int, list]:
 
 
 def work_mapping(model: dict) -> tuple[int, list]:
-    """validate_catalogue and the catalogue schema allOf: mapped -> workId, unmapped -> none, one per release."""
+    """The catalogue schema allOf: mapped -> workId, unmapped -> none, one mapping per card release."""
     items, by_release, errors = rows(model, P), {}, []
     for item in items:
         state = (item["workMappingState"], item["workId"])
@@ -510,7 +510,7 @@ def work_mapping(model: dict) -> tuple[int, list]:
 
 
 def marking_error(marks: list, finish: str | None) -> bool:
-    """normalized_markings (kind/role/text non-empty strings) and review_integrity's stamp roles."""
+    """A marking has non-empty kind, role and text; a reverse-holo treatment sits only on a reverse holo."""
     return any(not isinstance(m, dict) or any(not isinstance(m.get(k), str) or not m[k] for k in ("kind", "text"))
                or m.get("role") not in MARKING_ROLES
                or (m["role"] == "reverse-holo-treatment" and finish != "reverse-holo") for m in marks)
@@ -523,7 +523,7 @@ def markings(model: dict) -> tuple[int, list]:
 
 
 def not_applicable_units(model: dict) -> tuple[int, list]:
-    """review_integrity._check_finish_states: a not-applicable unit has no printings and only contradicted products."""
+    """A not-applicable finish unit has no printings, nothing unresolved and only contradicted products."""
     printed = {r["finishUnitId"] for r in rows(model, P)} | {r.get("finishUnitId") for r in rows(model, FP)}
     units = [u for u in rows(model, FU) if u["applicabilityStatus"] == "not-applicable"]
     return failing(units, lambda u: u["availabilityStatus"] != "not-applicable" or u["unresolved"]
@@ -532,14 +532,14 @@ def not_applicable_units(model: dict) -> tuple[int, list]:
 
 
 def source_error(printing: dict) -> bool:
-    """review_integrity._check_finish_printings: sources exist, none supports absence, scopes are known."""
+    """A finish printing cites sources, none claims absence authority, and every evidence scope is known."""
     sources = [s["source"] for s in printing["sources"]]
     return not sources or any(s.get("supportsAbsence") is True
                               or s.get("evidenceScope") not in (None, "finish-unit", "standard-set") for s in sources)
 
 
 def unknown_finishes(model: dict) -> tuple[int, list]:
-    """review_integrity._check_finish_unknowns: an unknown finish keeps its unit unresolved."""
+    """An unknown finish keeps its finish unit unresolved."""
     open_units = {u["finishUnitId"] for u in rows(model, FU) if u["unresolved"]}
     unknown = [(r["itemId"], r["finishUnitId"]) for r in rows(model, P) if r["finish"] == "unknown"]
     unknown += [(r["printingId"], r["finishUnitId"]) for r in rows(model, FP) if r.get("finish") == "unknown"]

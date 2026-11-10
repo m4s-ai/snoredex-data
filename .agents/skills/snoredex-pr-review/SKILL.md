@@ -14,11 +14,10 @@ regenerates, commits, pushes, resolves threads or merges. Remediation belongs to
 
 ## PR-review context
 
-Read [AGENTS.md](../../../AGENTS.md) and the parts of [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md)
-that own the touched paths. Read [verification/RESUME.md](../../../verification/RESUME.md) when the
-diff changes a confirmation or contradiction, and
-[verification/FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md) when it touches finishes.
-These repository rules override the general guidelines below wherever they are more specific.
+Read [AGENTS.md](../../../AGENTS.md). Read [METHODOLOGY.md](../../../METHODOLOGY.md) when the diff
+changes a confirmation, contradiction, finish or source, and [DATA-GUIDE.md](../../../DATA-GUIDE.md)
+or [DATABASE.md](../../../DATABASE.md) when it changes a field or the database. These repository
+rules override the general guidelines below wherever they are more specific.
 
 ## PR-review workflow
 
@@ -26,10 +25,10 @@ These repository rules override the general guidelines below wherever they are m
    review `git diff <merge-base>..<head>`, not a stale summary. If the head moves, restart.
 2. Read the linked issue and PR description to learn the stated intent. An intentional, stated
    change is not a bug.
-3. Read every changed hunk with enough surrounding code to trace callers and consumers. Locate
-   the owning generator for any generated artifact before judging it.
-4. Run cheap observational checks only when they decide a finding:
-   `python scripts/regen.py --check` or a scoped `--check-only`. Never run a write mode.
+3. Read every changed hunk with enough surrounding code to trace callers and consumers. A change
+   to a build output is judged at its source in `data/`, `templates/`, `site/` or `scripts/`.
+4. Run cheap observational checks only when they decide a finding: `python scripts/check.py`,
+   `python scripts/build.py --check` or `python scripts/regen.py --check`. Never run a write mode.
 5. Verify each candidate finding by tracing a concrete path from a real input or caller to the
    wrong result. Drop speculation that names no provably affected code.
 6. Emit the output below. Post to GitHub only when asked (see *Posting*).
@@ -38,24 +37,25 @@ These repository rules override the general guidelines below wherever they are m
 
 Flag these when the diff introduces them; they are bugs here even when the code runs:
 
-- A hand-edited generated file (`index.html`, `<!-- generated:… -->` README blocks, files whose
-  header says so) or a hand edit of `units.json` / `finish_units.json` outside the importer.
+- A hand-edited build output (`collector_catalogue.json`, `index.html`, `gallery.html`, the two
+  `.sqlite` files) that `python scripts/build.py --check` would not reproduce from its sources.
 - Evidence graded by its neighbour: a `providerId`, `corroborated` or specimen authority that
-  the unit itself does not rest on (`S13`/`S14`), or a Cardmarket filter/offer/count used as
-  positive evidence.
+  the claim itself does not rest on (check.py rules "S13" and "S14"), or a Cardmarket
+  filter/offer/count used as positive evidence.
 - An absence argument: a contradiction, `not-printed` or finish decision derived from a source's
   silence or a missing row, an external provider with `supportsAbsence=true`, or `pending`
   described as absent.
 - A finish inferred from a language confirmation, a V-token meaning carried across sets, a
   European Spanish claim read as LATAM, or a recorded set size overruling a distribution rarity.
 - A `--check` path that writes, a script that resolves paths from the working directory instead
-  of `Path(__file__)`, a non-stdlib generator dependency, CRLF or a UTF-8 BOM.
-- A baseline raised to silence a losing move, an edited archive pass, or a rule stated more
-  strictly (or loosely) than the check that enforces it.
+  of `Path(__file__)`, a non-stdlib dependency, CRLF or a UTF-8 BOM.
+- A removed or re-keyed `itemId` without a route in `collector_migrations.json`.
+- A check.py rule without a negative case, a complexity-baseline exception added or raised, an
+  edited archive file, or a rule stated more strictly (or loosely) than the check that enforces it.
 - Active instructions left contradicting the change in another live document.
 
-Do not flag: style without documented standard, counts that merely drift in the progress
-direction, pre-existing issues outside the diff, or a lone tier-3 source with a `sourceUrl`.
+Do not flag: style without documented standard, pre-existing issues outside the diff, or a lone
+tier-3 source with a `sourceUrl`.
 
 ## General review guidelines
 

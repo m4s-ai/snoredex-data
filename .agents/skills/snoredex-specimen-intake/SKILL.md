@@ -1,101 +1,92 @@
 ---
 name: snoredex-specimen-intake
-description: File physical Snoredex card or seller-listing photographs as stable specimen evidence and project their supported observations. Use for local images, issue attachments, scans, or listing photos; not for source pages without a card image.
+description: File physical Snoredex card or seller-listing photographs as stable specimen records in verification/specimens.json and cite them from data/. Use for local images, issue attachments, scans or listing photos; not for source pages without a card image.
 ---
 
 <!-- doc: role=specimen-intake workflow skill; stage=task -->
 
 # Snoredex specimen intake
 
-Turn physical-card image evidence into a stable, checkable specimen record without asserting anything the image cannot establish.
+Turn physical-card image evidence into a stable, checkable specimen record without asserting
+anything the image cannot establish. There is no importer: filing is a manual
+procedure, guarded by `scripts/check.py` and its `--selftest`.
 
 ## Specimen-intake context
 
-Read [AGENTS.md](../../../AGENTS.md), [HANDOVER.md](../../../HANDOVER.md), the complete [verification playbook](../../../verification/RESUME.md), [FINISH_SOURCES.md](../../../verification/FINISH_SOURCES.md), and the physical-evidence path in [WORKFLOW-MAP.md](../../../WORKFLOW-MAP.md).
+Read [AGENTS.md](../../../AGENTS.md), the finish and source-technique sections of
+[METHODOLOGY.md](../../../METHODOLOGY.md) (recording what a photograph shows, editions, multiple
+views, GitHub issue attachments) and [DATA-GUIDE.md](../../../DATA-GUIDE.md).
 
 ## Specimen-intake workflow
 
-1. Inspect the original image at sufficient resolution. Identify only visible facts: card identity, printed language/locality markers, finish or foil pattern, stamps or markings, distribution marks, and size cues.
-2. Match or create the stable `SPEC-nnnn` record through the canonical manifest workflow, following the collision check below. Do not replace a specimen with prose or reuse a neighbouring specimen's authority.
-3. Collect related photos in one reviewed observation manifest. For issue attachments run `python verification/fetch_attachment.py --issue <number> --manifest <path>`; for local inputs use `--manifest <path>` without `--issue`. The direct `--specimen ... --from ...` form remains available for an existing record.
-4. Preserve the stable issue or listing URL as provenance and the imported byte hash as integrity evidence. File seller photographs as third-party-held specimens, never as a bare marketplace link.
-5. Record visible physical properties under `physicalObservation`. For explicit owner determinations, preserve the field-specific attribution described in `FINISH_SOURCES.md`; unclear image properties remain unset without that separate evidence. For a set printed in both editions, record the edition the face shows: a visible 1st Edition mark is 1st Edition, and a visibly empty mark position on a complete, legible face is Unlimited (owner rule 2026-10-22; see RESUME).
-6. Follow the [batch execution contract](../../../WORKFLOW-MAP.md#batch-execution-contract): after accumulated imports, run `python scripts/scoped_regen.py --lane physical-evidence` once when consumers are needed. Use the physical workflow loop instead only for stop/reconciliation diagnosis; it already runs that lane.
-7. Apply the [specimen and reference acceptance contract](../../../verification/RESUME.md#specimen-and-reference-acceptance-contract), including direct/reverse references and registry, artwork and collector views. Report retained, integrated and unresolved evidence separately. Keep L3 pending during intake; run the full gate once at package delivery, not after each photo or chat message.
+1. Obtain the original bytes. For an issue attachment, fetch the issue's HTML page and download the
+   resolved image URL as METHODOLOGY.md describes. Determine the format from the bytes, not the URL.
+2. Inspect the original at sufficient resolution. Identify only visible facts: card identity,
+   printed language and locality markers, finish or foil pattern, stamps or markings, distribution
+   marks and size cues.
+3. Run the collision check below, then assign the next free `SPEC-nnnn`. Identical bytes reuse their
+   existing record; never give identical bytes a second id.
+4. Save the photograph as `verification/specimens/SPEC-nnnn.<png|jpg>` and add its record to
+   `verification/specimens.json`, keeping the fields existing records use: `specimenId`, `setCode`,
+   `number`, `variant`, `language`, `heldBy`, `inspectedFrom`, `observed`, `recordedAt` (the real
+   inspection date), `photograph`, `photographSha256`, `photographSource` (the issue or image URL)
+   and `listingUrl` for a seller photo (never invent one), and `citedBy` (the exact `unitId` or
+   printing id the image supports). Update the register's `count`. File a seller photograph as a
+   third-party-held specimen, never as a bare marketplace link.
+5. Record visible physical properties under `physicalObservation` (`finish`, `foilPattern`,
+   `markings`, `markingRole`, `cardSize`, `edition`) with a `basis` that quotes what the image
+   shows. Leave a property unset when the image does not establish it. An explicit owner
+   determination is recorded as `ownerAttestedFields` with `ownerAttestedAt`. For a set printed in
+   both editions, a visible 1st Edition mark is 1st Edition and a visibly empty mark position on a
+   complete, legible face is Unlimited.
+6. Cite the specimen where it carries a claim: a language claim's `sourceRef: "specimen:SPEC-nnnn"`
+   with the matching provider (`inspected-specimen`, `cardmarket-listing-photo` or
+   `seller-listing-photo`), or the printing's evidence. Follow
+   [claim evidence](../snoredex-claim-evidence/SKILL.md) for the claim change.
+7. Run `python scripts/check.py`: every `specimen:SPEC-nnnn` in `data/` must resolve, and specimen
+   authority must cite a specimen. Run `python scripts/regen.py` once at delivery. Report retained,
+   cited and unresolved evidence separately.
 
 ### WebP source photographs
 
-If a seller or browser image is WebP, keep the original and use the established WebP-to-PNG intake; do not ask the user to supply another format when the original bytes are reachable. The canonical importer and image-integrity gate accept PNG/JPEG, so WebP cannot be the committed `SPEC` photograph.
-
-1. Determine the actual format from the bytes, not the URL suffix or HTTP content type. Retain the untouched original WebP in the batch's `verification/evidence/...` bundle.
-2. Prepare an available image decoder before the batch gate, then decode to PNG. Do not crop, resize, enhance, or otherwise transform it. Compare decoded source pixels with pixels reopened from the PNG in the same mode (RGB or RGBA); require exact equality before import. Reuse the prepared tool for subsequent photos.
-3. Record the original URL, retrieval date, MIME type, byte size, dimensions and SHA-256, plus the filed PNG path and SHA-256, decoder/library version, conversion method and pixel-equality result in `sources.json`.
-4. Import the PNG through the canonical manifest importer. Keep the manifest replayable from a retained PNG path, normally `verification/specimens/SPEC-nnnn.png` after successful import. Preserve the original WebP and conversion record beside the manifest.
-5. Inspect the original at sufficient resolution for identity and finish. The lossless conversion preserves pixels; it does not make seller metadata authoritative or establish more than the photographed copy shows.
-
-Prior examples are documented in [issue #256 WebP evidence rounds](../../../verification/evidence/issue-256-web-research-20260921-round3/README.md) and the related rounds 6–9.
+Keep the original WebP and convert losslessly; never ask for another format when the original bytes
+are reachable. Retain the untouched WebP under `verification/evidence/<task>-<date>/`, decode to PNG
+without cropping, resizing or enhancement, and require exact pixel equality between the decoded
+source and the reopened PNG in the same mode. Record the original URL, retrieval date, MIME type,
+size, dimensions and SHA-256, plus the PNG's path and SHA-256, the decoder and version and the
+equality result, in that folder's `sources.json`. File the PNG as the specimen.
 
 ## Specimen-intake image verification
 
-Run **local OCR first** for every supplied image when its output is readable enough to verify, so
-extraction stays inspectable and locally controlled; complement with whatever image inspection the
-runtime provides (a vision-capable tool) for artwork, layout, finish, stamps and damage. OCR can
-establish printed text (name, attacks, artist, set code, number); it cannot reliably establish
-foil/finish or subtle stamps — finish needs visible visual evidence, a comparison photo, or explicit
-owner confirmation. Record the confidence/evidence class per field: observation, OCR extraction,
-user confirmation, inference. Leave uncertain finish details unset rather than guessing.
+Run local OCR first when its output is readable enough to verify, then inspect the image for
+artwork, layout, finish, stamps and damage. OCR establishes printed text (name, attacks, artist,
+set code, number), never foil or subtle stamps; finish needs a visible feature, a comparison photo
+or an explicit owner determination. Record per field whether it is an observation, OCR extraction,
+user confirmation or inference, and leave uncertain finishes unset.
 
-The current [fetch_attachment](../../../verification/fetch_attachment.py) importer retains **one
-photograph per `SPEC-nnnn` evidence record**. Reuse that record for identical bytes and unchanged
-metadata; a manifest cannot repeat its ID. For distinct original photos of the same physical card,
-assign separate observation IDs in the reviewed manifest so every image keeps its own original
-bytes, hash and provenance. Choose one primary observation and put
-`"sameCardAs": {"specimenId": "SPEC-nnnn", "basis": "<positive same-card identification>"}`
-on every additional view, pointing directly to that primary. Prose alone does not join observations.
-The [multi-view contract](../../../verification/FINISH_SOURCES.md#multiple-views-of-one-physical-card)
-defines reference validation, complementary observations and atomic conflict rejection.
-Use the same exact `citedBy` claim only when each image supports it; keep each photo's visible
-properties separate. A linked view may record only edition or another observed property when the
-group positively establishes finish; an identity-only view omits `physicalObservation`. The
-projectors combine compatible group facts once and retain all view IDs and field-specific sources.
-The relationship does not establish independent corroboration, extra owned cards or a complete
-printing inventory. Never deduplicate cards solely on text, number or artwork.
-Do not use `--replace` to add an angle: it overwrites the retained photo and may remove the
-superseded file. Identical image bytes must not receive another SPEC ID. If the association or
-required property cannot be established, retain the uncertainty rather than transferring a finish
-from a neighbouring photo.
+One photograph per `SPEC-nnnn`. For several original photos of the same physical card, give each its
+own record and put `"sameCardAs": {"specimenId": "SPEC-nnnn", "basis": "<positive same-card
+identification>"}` on every additional view, pointing directly to the primary. Views record only
+their own positive properties and never count as independent corroboration. Never deduplicate cards
+on text, number or artwork alone, and never overwrite a retained photograph to add an angle.
 
-## Specimen-intake multi-photo finish batches
+## Specimen-intake multi-photo batches
 
-When one contribution holds several cards, keep the batch discipline:
-
-1. Inventory every image first with a stable sequence number, source path, SHA-256 and OCR output —
-   do not process only the clearest image.
-2. Build a review table with one row per photographed card, linking every view and its SPEC ID:
-   identity, language/market, set code,
-   collector number, artist, candidate reference IDs, visible or owner-confirmed finish, stamp, and
-   confidence.
-3. Group by the base print key `(localization, market, set code, collector number)`, then compare
-   finish and stamp separately — cards with identical printed text may still be distinct variants.
+1. Inventory every image first with a sequence number, source path, SHA-256 and OCR output.
+2. Build one review row per photographed card: identity, language and market, set code, collector
+   number, artist, candidate claim ids, visible or owner-confirmed finish, stamp and confidence.
+3. Group by `(localization, market, set code, collector number)`, then compare finish and stamp
+   separately: cards with identical text may still be distinct variants.
 4. Never merge Non-Holo, Holo, Reverse Holo, Cosmos Holo, Poké Ball, Master Ball, stamped and other
-   confirmed treatments. A generic model `reverse_holo` label is not authority for Poké Ball / Master
-   Ball / ordinary Holo — present the image-linked proposal for review; an explicit owner correction
-   overrides model evidence.
-5. Do not treat one photo as proof that no parallel or finish variant exists; one specimen only
-   establishes what the visible card face itself proves.
+   treatments. A model's label is a lead; an explicit owner correction overrides it.
+5. One specimen establishes only what its visible face proves, never that no other variant exists.
 
-If the original bytes cannot be obtained or safely matched to a specimen, stop with the exact missing input. A missing photograph is not evidence of absence.
+If the original bytes cannot be obtained or matched, stop with the exact missing input. A missing
+photograph is not evidence of absence.
 
 ## Specimen-intake collision check
 
-Before assigning IDs, fetch the latest `origin/main` and compare its specimen IDs and photograph
-hashes with the working branch. Inspect known overlapping intake PRs/tasks without modifying their
-work. Record each source image/hash to SPEC mapping in the manifest; a branch-local next number is
-not a reservation. If an overlapping allocation is known, coordinate or defer that allocation.
-
-Repeat this comparison before integrating/pushing the batch. Reuse identical retained bytes with
-compatible metadata; do not overwrite a retained ID or photograph to resolve a collision. Re-key
-only the unintegrated conflicting observation through its manifest, including `sameCardAs`,
-`citedBy` and affected references, then rerun intake and reference acceptance. Reconcile the branch
-with current main when needed. If origin is unavailable, report that collision safety is unverified
-and keep the allocation provisional. No central reservation service is needed.
+Before assigning ids, fetch `origin/main` and compare its specimen ids and photograph hashes with the
+working branch; inspect known overlapping intake PRs without modifying them. A branch-local next
+number is not a reservation. Repeat the comparison before pushing. Reuse identical bytes; on a
+collision re-key only the unintegrated observation and every reference to it.

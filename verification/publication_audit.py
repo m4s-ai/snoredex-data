@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Publication-scope audit: the tree and history boundary checked before and after every push.
 
-Moved unchanged from `review_findings.py --scope publication` (its section G8) when the cut retired
-that harness, together with the two portability checks X6 and X7 of its section G9, which guard the
-same tracked tree. Exit 0 when no FAIL check fires.
+Carries the publication scope of the former findings harness unchanged (its section G8), together
+with the two portability checks X6 and X7 of its section G9, which guard the same tracked tree. Exit 0 when no FAIL check fires.
 
     python verification/publication_audit.py
 """

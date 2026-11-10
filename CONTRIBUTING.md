@@ -45,9 +45,9 @@ nothing to correct unless you have actually seen it.
 ## How your report is graded
 
 Evidence is ranked, and the ranking is public: see
-[the ladder in `METHODOLOGY.md`](METHODOLOGY.md#how-a-claim-becomes-a-fact), generated from
-[`verification/source_registry.json`](verification/source_registry.json). Tiers 1-3 grade external
-evidence, strongest first; tier 5 marks what is *not* external evidence.
+[the ladder in `METHODOLOGY.md`](METHODOLOGY.md#how-a-claim-becomes-a-fact); every provider and its
+tier is listed in [`data/evidence.json`](data/evidence.json). Tiers 1-3 grade external evidence,
+strongest first; tier 5 marks what is *not* external evidence.
 
 **An inspected physical specimen is tier 1.** Exact seller or catalogue photographs and
 collection-owner attestations are tier 2. A photograph supports only details actually visible on
@@ -59,7 +59,7 @@ Absence is the one thing this ladder does not settle by rank — **no source set
 tier**. Converging evidence from dependable sources is what the collection owner weighs, and
 deciding which way it points is their call, recorded separately as an adjudication and never
 credited to a single provider. So *"it isn't listed anywhere"* is not a correction, however many
-places you looked. [`verification/FINISH_SOURCES.md`](verification/FINISH_SOURCES.md) explains why.
+places you looked. [How absence is handled](METHODOLOGY.md#how-absence-is-handled) explains why.
 
 One consequence worth knowing: **"not printed" here means no regular release.** A proof copy or an
 error card is a different category, so finding one does not overturn a decision — but it is still
@@ -70,9 +70,10 @@ A correction does not need to reach the top of the ladder to be worth filing.
 ## What happens next
 
 A correction is triaged, checked against the ladder above, and either applied with its source
-recorded in the evidence registry, or closed with the reason stated in the issue. Every claim in
-the dataset traces back to a source, so an accepted correction adds one — it never lands as an
-unattributed edit.
+recorded in `data/`, or closed with the reason stated in the issue. Every claim in the dataset
+traces back to a source, so an accepted correction adds one — it never lands as an unattributed
+edit. A photograph you supply is filed as a numbered specimen record with its image and source, so
+it stays checkable after the listing or issue attachment is gone.
 
 ## Scope
 
@@ -87,8 +88,9 @@ unattributed edit.
 ## Changing the code or data directly
 
 Pull requests are welcome but are not the expected path, and a data change made without a source
-will not be merged. Generated files must be regenerated rather than hand-edited — each one carries
-a header saying so.
+will not be merged. The facts live in `data/` and are edited by hand, with each record naming its
+source; `scripts/check.py` validates them. The catalogue, the two pages, the database and the
+tracker template are generated from `data/` by `scripts/build.py` and must never be hand-edited.
 
 Before opening a pull request, run the same gate CI runs:
 
@@ -98,8 +100,8 @@ python -m playwright install chromium
 python scripts/regen.py --check
 ```
 
-That is the deterministic offline merge gate. UI-relevant pull requests also run the Chromium
-browser contract. The manual release lane adds browser, live-source and publication checks.
+That runs the data checks, the build comparison and the publication audit. Pull requests that change
+page code also run the Chromium browser suite (`python verification/test_site.py`).
 
 ## Licensing of contributions
 

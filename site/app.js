@@ -406,7 +406,7 @@
       : escapeHTML(row.dateDisplay);
     return (
       "<tr>" +
-      // Identity block, in the order and with the classes scripts/site.py emits for the header —
+      // Identity block, in the order and with the classes templates/index.html declares for the header —
       // app.css pins exactly these five columns, so the two must not drift apart (#124).
       '<td class="img">' + image + "</td>" +
       '<td class="col-release">' + release + "</td>" +

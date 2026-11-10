@@ -24,6 +24,7 @@ STEPS = (
     ("verification/test_complexity.py",),
     ("verification/test_sensitive_scan.py",),
     ("verification/test_gate_handoff.py",),
+    ("verification/test_links.py",),
     ("verification/publication_audit.py",),
 )
 
