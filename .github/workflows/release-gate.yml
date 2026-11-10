@@ -95,6 +95,14 @@ jobs:
           fi
           python scripts/regen.py --check --memo "${memo}"
 
+      # Refactor (#559): validate the canonical model and build every output from it. The build
+      # inserting into templates/schema.sql with its constraints is itself a check.
+      - name: Model check and build
+        shell: bash
+        run: |
+          python scripts/check.py
+          python scripts/build.py --out "${RUNNER_TEMP}/snoredex-build"
+
       # Every PR runs the retained-run validation; the memo replays it when none of the files it
       # reads changed (#460). This replaces a hand-kept path filter that rarely skipped anything.
       - name: Full retained discovery history

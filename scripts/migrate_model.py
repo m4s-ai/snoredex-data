@@ -23,6 +23,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import build
+from check import dump  # the one data/ serializer; check.py outlives this migration
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -55,18 +56,6 @@ STORED_META = ("application_status_policy", "generated", "graph_edge_count", "gr
                "history_included", "schema", "schema_version", "scope")
 DROPPED_META = ("generator_sha256", "source_fingerprint_sha256")  # and every input_sha256:* key
 REGISTRY_COUNTS = ("claimsAttributed", "evidenceRecords", "uniqueUrls", "nonUrlEvidenceClasses")
-
-
-def dump(document: dict) -> str:
-    """The data/ format: top-level keys in order, one record (or header object) per line."""
-    line = lambda value: json.dumps(value, ensure_ascii=False)
-    parts = []
-    for key, value in document.items():
-        if isinstance(value, list) and value:
-            parts.append(f"{line(key)}: [\n" + ",\n".join(map(line, value)) + "\n]")
-        else:
-            parts.append(f"{line(key)}: {line(value)}")
-    return "{\n" + ",\n".join(parts) + "\n}\n"
 
 
 def html_block(name: str, element_id: str):
