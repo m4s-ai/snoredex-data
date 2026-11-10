@@ -41,6 +41,8 @@ HTML_BLOCKS = [("index.rows", "index.html", "data-rows", "rowId"),
                ("index.coverage", "index.html", "data-coverage", None),
                ("index.meta", "index.html", "data-meta", None),
                ("gallery.cards", "gallery.html", "gallery-data", "id")]
+FILES = {"catalogue": "collector_catalogue.json", "index": "index.html", "gallery": "gallery.html",
+         "sqlite": "snoredex.sqlite"}
 CATALOGUE_KEYS = {"items": "itemId", "assets": "assetId", "localSets": "localSetId",
                   "setEditions": "setEditionId", "works": "workId",
                   "localizations": "localizationId", "meta": None, "qualitySummary": None}
@@ -77,13 +79,25 @@ def sqlite_lines(read) -> dict:
         return dict(Counter(sqlite_dump(path).splitlines()))  # line -> occurrences
 
 
-def payloads(read) -> dict:
-    texts = {name: read(name).decode("utf-8") for name in ("index.html", "gallery.html")}
-    result = {name: keyed(html_block(texts[file], block), key) for name, file, block, key in HTML_BLOCKS}
-    catalogue = json.loads(read("collector_catalogue.json"))
-    for field, key in CATALOGUE_KEYS.items():
-        result[f"catalogue.{field}"] = keyed(catalogue[field], key)
-    result["sqlite"] = sqlite_lines(read)
+def tree_reader(tree: Path):
+    def read(path: str) -> bytes:
+        if not (tree / path).is_file():
+            raise SystemExit(f"error: no {path} in {tree}")
+        return (tree / path).read_bytes()
+    return read
+
+
+def payloads(read, only=tuple(FILES)) -> dict:
+    """The payload collections of the files named by short name in `only`."""
+    texts = {FILES[name]: read(FILES[name]).decode("utf-8") for name in ("index", "gallery") if name in only}
+    result = {name: keyed(html_block(texts[file], block), key)
+              for name, file, block, key in HTML_BLOCKS if file in texts}
+    if "catalogue" in only:
+        catalogue = json.loads(read(FILES["catalogue"]))
+        for field, key in CATALOGUE_KEYS.items():
+            result[f"catalogue.{field}"] = keyed(catalogue[field], key)
+    if "sqlite" in only:
+        result["sqlite"] = sqlite_lines(read)
     return result
 
 
@@ -140,7 +154,8 @@ def report(ref: dict, cur: dict) -> int:
         if len(details) > DETAIL_LIMIT:
             print(f"  ... and {len(details) - DETAIL_LIMIT} more")
     for name, paths in VOLATILE.items():
-        print(f"not compared: {name} / {', '.join(paths)}")
+        if name in ref:
+            print(f"not compared: {name} / {', '.join(paths)}")
     print(f"verdict: {'IDENTICAL' if not total else f'{total} differing ids'}")
     return 1 if total else 0
 
@@ -168,12 +183,15 @@ def main() -> int:
         stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--ref", default=REFERENCE_TAG, help=f"git revision (default {REFERENCE_TAG})")
+    parser.add_argument("--tree", type=Path, default=ROOT, help="directory holding the current payloads")
+    parser.add_argument("--only", nargs="+", choices=list(FILES), default=list(FILES),
+                        help="compare only these files, by short name")
     parser.add_argument("--selftest", action="store_true", help="check the differ on mutated payloads")
     args = parser.parse_args()
-    current = payloads(lambda path: (ROOT / path).read_bytes())
+    current = payloads(tree_reader(args.tree), args.only)
     if args.selftest:
         return selftest(current)
-    return report(payloads(lambda path: git_bytes(args.ref, path)), current)
+    return report(payloads(lambda path: git_bytes(args.ref, path), args.only), current)
 
 
 if __name__ == "__main__":
