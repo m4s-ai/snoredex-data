@@ -1,0 +1,241 @@
+<!doctype html>
+{{header}}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Snoredex — documented Snorlax TCG printings</title>
+<meta name="description" content="An auditable view of current-known physical Snorlax Pokemon TCG printings descended from a historical Cardmarket candidate universe. It is not an all-locality print manifest.">
+<link rel="describedby" href="llms.txt">
+<link rel="stylesheet" href="site/app.css">
+<link rel="icon" href="data:,">
+<style>.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <div class="masthead-row">
+      <div class="masthead-copy">
+        <h1>Snoredex — documented Snorlax TCG printings</h1>
+        <p class="tagline">An auditable catalogue of <strong>physical</strong> Snorlax Pok&eacute;mon TCG
+        printings: variants, editions, languages, finishes, foil patterns, stamps, distribution and card
+        size. This table shows the current confirmed result of the retained research.</p>
+      </div>
+    </div>
+    <nav class="sections" id="section-nav" aria-label="Sections">
+      <details id="section-nav-disclosure" open>
+        <summary class="nav-toggle" id="nav-toggle">
+        <span class="nav-toggle-icon" aria-hidden="true">&#9776;</span>
+        <span class="nav-toggle-text">Sections</span>
+        </summary>
+        <ul id="section-nav-list">
+        <li><a href="#about">About</a></li>
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="gallery.html">Artwork gallery</a></li>
+        <li><a href="#methodology">Data exports</a></li>
+        <li><a href="#contribute">Help correct this</a></li>
+        <li><a href="#sources">Sources</a></li>
+        <li><a href="#license">License</a></li>
+        </ul>
+      </details>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="about">
+  <h2>What this is</h2>
+  <p>This view shows every active confirmed physical printing in
+  <a href="collector_catalogue.json"><code>collector_catalogue.json</code></a>, with its current
+  field values and sources. It combines verified legacy printings with positively documented
+  source-first releases. <strong>It is not a complete all-locality catalogue.</strong>
+  The <a href="legacy-cardmarket-baseline.json">historical Cardmarket baseline</a> remains
+  provenance, not the table's membership boundary.</p>
+  <div class="stats">
+    {{stats}}
+  </div>
+
+  <div class="callout">
+    <strong>Scope limits — read these before relying on anything here.</strong>
+    <ul>
+      <li><strong>Physical cards only.</strong> Code cards are excluded. Language and finish
+      evidence are separate; a language confirmation never establishes a finish.</li>
+      <li><strong>Pending means unresolved, never absent.</strong> Missing source entries are gaps.
+      Only an explicit collection-owner adjudication settles absence; otherwise contradictions remain disputed.</li>
+      <li><strong>ES is European Spanish; ES-LA is Latin American Spanish.</strong> Localized source-first releases retain their own set codes and numbers.
+      LATAM (<code>es-419</code>) is a separate physical edition in the locality graph, never implied
+      by European Spanish (<code>es-ES</code>) or a Cardmarket filter.</li>
+      <li><strong>Evidence must reach the exact card.</strong> {{needs_evidence}} claims remain
+      <code>needs-evidence</code> in the data exports; unresolved candidates are excluded from this table.</li>
+      {{open_claims_note}}
+    </ul>
+    <p><a href="DATA-GUIDE.md#scope-and-caveats--read-before-using">Scope and caveats</a> ·
+      <a href="METHODOLOGY.md">Evidence grades and methodology</a></p>
+  </div>
+</section>
+
+<section id="collection">
+  <h2>Collection</h2>
+  <p>Every meaningful column is sortable and filterable. Filters combine with AND between fields and
+  OR within a field. Your filter and sort state is stored in the page URL, so a filtered view can be
+  shared or bookmarked.</p>
+
+  <div class="controls">
+    <div class="row">
+      <div class="field" style="flex:1 1 260px">
+        <label for="f-q">Search</label>
+        <input id="f-q" type="search" placeholder="card, set, artist, stamp, language…" style="width:100%">
+      </div>
+      <div class="field"><label for="f-yearFrom">Year from</label><input id="f-yearFrom" type="number" min="1996" max="2030"></div>
+      <div class="field"><label for="f-yearTo">Year to</label><input id="f-yearTo" type="number" min="1996" max="2030"></div>
+      <button type="button" class="ghost" id="reset">Reset all</button>
+      <button type="button" class="ghost" id="export-tsv">Export TSV</button>
+      <button type="button" class="ghost" onclick="window.print()">Print filtered view</button>
+    </div>
+    <details class="morefilters">
+      <summary>Column filters</summary>
+      <div class="row" style="margin-top:8px">
+        <div class="field"><label for="f-dateStatus">Release status</label><select id="f-dateStatus" multiple size="4" aria-label="Filter by Release status"></select></div>
+        <div class="field"><label for="f-name">Card</label><select id="f-name" multiple size="4" aria-label="Filter by Card"></select></div>
+        <div class="field"><label for="f-setCode">Set</label><select id="f-setCode" multiple size="4" aria-label="Filter by Set"></select></div>
+        <div class="field"><label for="f-setName">Expansion</label><select id="f-setName" multiple size="4" aria-label="Filter by Expansion"></select></div>
+        <div class="field"><label for="f-number">Collector number</label><select id="f-number" multiple size="4" aria-label="Filter by Collector number"></select></div>
+        <div class="field"><label for="f-edition">Edition</label><select id="f-edition" multiple size="4" aria-label="Filter by Edition"></select></div>
+        <div class="field"><label for="f-language">Language</label><select id="f-language" multiple size="4" aria-label="Filter by Language"></select></div>
+        <div class="field"><label for="f-rarity">Rarity</label><select id="f-rarity" multiple size="4" aria-label="Filter by Rarity"></select></div>
+        <div class="field"><label for="f-artist">Artist</label><select id="f-artist" multiple size="4" aria-label="Filter by Artist"></select></div>
+        <div class="field"><label for="f-finish">Finish</label><select id="f-finish" multiple size="4" aria-label="Filter by Finish"></select></div>
+        <div class="field"><label for="f-pattern">Foil pattern</label><select id="f-pattern" multiple size="4" aria-label="Filter by Foil pattern"></select></div>
+        <div class="field"><label for="f-marking">Stamp / marking</label><select id="f-marking" multiple size="4" aria-label="Filter by Stamp / marking"></select></div>
+        <div class="field"><label for="f-markingRole">Marking role</label><select id="f-markingRole" multiple size="4" aria-label="Filter by Marking role"></select></div>
+        <div class="field"><label for="f-size">Card size</label><select id="f-size" multiple size="4" aria-label="Filter by Card size"></select></div>
+        <div class="field"><label for="f-distribution">Distribution</label><select id="f-distribution" multiple size="4" aria-label="Filter by Distribution"></select></div>
+        <div class="field"><label for="f-evidence">Evidence</label><select id="f-evidence" multiple size="4" aria-label="Filter by Evidence"></select></div>
+      </div>
+    </details>
+    <div class="chips" id="chips"></div>
+    <div class="count" id="count" role="status" aria-live="polite" aria-atomic="true"></div>
+    <div class="mobile-sort" id="collection-mobile-sort">
+      <div class="field">
+        <label for="mobile-sort-key">Sort cards by</label>
+        <select id="mobile-sort-key"><option value="release" selected>Release</option><option value="name">Card</option><option value="setCode">Set</option><option value="number">No.</option><option value="language">Language</option><option value="setName">Expansion</option><option value="rarity">Rarity</option><option value="artist">Artist</option><option value="edition">Edition</option><option value="finish">Finish</option><option value="pattern">Pattern</option><option value="marking">Stamp / marking</option><option value="markingRole">Marking role</option><option value="size">Size</option><option value="distribution">Distribution</option><option value="evidence">Evidence</option></select>
+      </div>
+      <button type="button" class="ghost" id="mobile-sort-direction"
+        aria-label="Sort ascending">&#8593; Ascending</button>
+    </div>
+  </div>
+
+  <p class="language-legend" id="collection-table-legend">
+    <span>Select a language name for its provider and evidence tier.</span>
+    <span>A dotted underline marks a single source with no public URL.</span>
+    <span>Ellipsized values can be selected to expand.</span>
+  </p>
+
+  <div class="tableframe" id="collection-table-frame">
+    <div class="tablewrap" id="collection-table-scroll" tabindex="0"
+      aria-describedby="collection-table-legend">
+      <table id="collection-table">
+        <caption class="sr">Chronological list of documented Snorlax card printings</caption>
+        <thead><tr><th scope="col" class="img"><span class="sr">Image</span></th><th scope="col" class="col-release" data-key="release" aria-sort="none"><button type="button" class="sort" data-key="release">Release</button></th><th scope="col" class="col-card" data-key="name" aria-sort="none"><button type="button" class="sort" data-key="name">Card</button></th><th scope="col" class="col-set" data-key="setCode" aria-sort="none"><button type="button" class="sort" data-key="setCode">Set</button></th><th scope="col" class="col-number" data-key="number" aria-sort="none"><button type="button" class="sort" data-key="number">No.</button></th><th scope="col" class="col-language" data-key="language" aria-sort="none"><button type="button" class="sort" data-key="language">Language</button></th><th scope="col" class="secondary col-expansion" data-key="setName" aria-sort="none"><button type="button" class="sort" data-key="setName">Expansion</button></th><th scope="col" class="secondary col-rarity" data-key="rarity" aria-sort="none"><button type="button" class="sort" data-key="rarity">Rarity</button></th><th scope="col" class="secondary col-artist" data-key="artist" aria-sort="none"><button type="button" class="sort" data-key="artist">Artist</button></th><th scope="col" class="col-edition" data-key="edition" aria-sort="none"><button type="button" class="sort" data-key="edition">Edition</button></th><th scope="col" class="col-finish" data-key="finish" aria-sort="none"><button type="button" class="sort" data-key="finish">Finish</button></th><th scope="col" class="secondary col-pattern" data-key="pattern" aria-sort="none"><button type="button" class="sort" data-key="pattern">Pattern</button></th><th scope="col" class="secondary col-marking" data-key="marking" aria-sort="none"><button type="button" class="sort" data-key="marking">Stamp / marking</button></th><th scope="col" class="secondary col-marking-role" data-key="markingRole" aria-sort="none"><button type="button" class="sort" data-key="markingRole">Marking role</button></th><th scope="col" class="secondary col-size" data-key="size" aria-sort="none"><button type="button" class="sort" data-key="size">Size</button></th><th scope="col" class="secondary col-distribution" data-key="distribution" aria-sort="none"><button type="button" class="sort" data-key="distribution">Distribution</button></th><th scope="col" class="secondary col-evidence" data-key="evidence" aria-sort="none"><button type="button" class="sort" data-key="evidence">Evidence</button></th><th scope="col" class="col-more"><span class="sr">Details</span></th><th scope="col" class="corr">Report</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="methodology">
+  <h2>Data exports</h2>
+  <ul>
+    <li><a href="snoredex.sqlite">snoredex.sqlite</a> — normalized current-state application database</li>
+    <li><a href="snoredex-tracker-template.sqlite">snoredex-tracker-template.sqlite</a> — blank have/have-not tracker</li>
+    <li><a href="DATABASE.md">DATABASE.md</a> — schema, status rules and example queries</li>
+    <li><a href="legacy-cardmarket-baseline.json">legacy-cardmarket-baseline.json</a> — immutable historical candidate universe and provenance</li>
+    <li><a href="snorlax_cards.json">snorlax_cards.json</a> — main dataset</li>
+    <li><a href="analysis_checklist.json">analysis_checklist.json</a> — canonical checklist items</li>
+    <li><a href="analysis_confirmed_releases.json">analysis_confirmed_releases.json</a> — chronological rows</li>
+    <li><a href="analysis_confirmed_releases.csv">analysis_confirmed_releases.csv</a> — spreadsheet export</li>
+    <li><a href="verification/finish_units.json">verification/finish_units.json</a> — finish state store</li>
+    <li><a href="verification/units.json">verification/units.json</a> — language state store</li>
+    <li><a href="verification/owner_adjudications.json">verification/owner_adjudications.json</a> — collection-owner application decisions</li>
+    <li><a href="verification/bulbapedia_release_dates.json">verification/bulbapedia_release_dates.json</a> — reviewed release-date sources</li>
+    <li><a href="verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md">verification/history/BULBAPEDIA-RELEASE-DATE-AUDIT.md</a> — full date-difference audit</li>
+    <li><a href="verification/source_registry.json">verification/source_registry.json</a> — source registry</li>
+    <li><a href="verification/source_capability_graph.json">verification/source_capability_graph.json</a> — bounded provider/surface coverage graph with hashed fixtures</li>
+    <li><a href="verification/source_capabilities.json">verification/source_capabilities.json</a> — reviewed source capability manifest</li>
+    <li><a href="verification/source_capability_schema.json">verification/source_capability_schema.json</a> — versioned manifest schema</li>
+    <li><a href="verification/artwork_review_projection.json">verification/artwork_review_projection.json</a> — retained graph/image projection</li>
+  </ul>
+  <p><a href="https://github.com/m4s-ai/snoredex-data">Repository</a> ·
+  <a href="https://github.com/m4s-ai/snoredex-data/issues">Issue tracker</a> ·
+  <a href="README.md">Dataset documentation</a> ·
+  <a href="verification/RESUME.md">Verification playbook</a></p>
+</section>
+
+<section id="contribute">
+  <h2>Help correct this</h2>
+  <p>Use the row&rsquo;s <strong>Correction?</strong> link to report positive evidence for that
+  printing. For artwork or a printing outside this table,
+  <a href="https://github.com/m4s-ai/snoredex-data/issues/new/choose">open a correction issue</a>
+  and identify the card with supporting sources or images. A missing source entry is not proof of absence; pending means unresolved, never
+  unavailable. <a href="CONTRIBUTING.md">Contribution guide</a> ·
+  <a href="verification/FINISH_SOURCES.md">Evidence ladder</a> ·
+  <a href="verification/open-items.html">Open questions</a></p>
+</section>
+
+<section id="sources">
+  <h2>Sources</h2>
+  <p>{{claims_attributed}} claims are attributed across
+  {{evidence_records}} distinct sources
+  ({{unique_urls}} unique URLs and
+  {{non_url_classes}} non-URL evidence classes). Providers confirm only what they name; omission never establishes absence.</p>
+  <p><a href="verification/source_registry.json">Download the machine-readable registry</a> ·
+  <a href="verification/SOURCES.md">Readable provider summary</a></p>
+</section>
+
+<section id="license">
+  <h2>License and notices</h2>
+  <p>This repository is a mixed work; no single licence covers all of it. The intended terms are
+  <strong>PolyForm Noncommercial 1.0.0</strong> for original software and
+  <strong>CC BY-NC-SA 4.0</strong> for the original data selection and arrangement, verification
+  annotations, documentation and site copy. The verbatim texts are included, and the grants are
+  {{grants_state}}. This is noncommercial source-available, not OSI open source.</p>
+  <p><strong>Licensor: {{licensor}}.</strong> That is the name CC BY-NC-SA attribution
+  must credit, and the party from whom a commercial exception is sought. Both licences here are
+  noncommercial; neither permits commercial use without a separate
+  grant. Licensing and commercial-use enquiries:
+  <a href="{{licensor_contact}}" rel="noopener">@{{licensor}} on Instagram</a>.
+  That is a licensing contact, not a corrections channel — corrections belong in the
+  <a href="#contribute">issue tracker</a>, where they are recorded with their evidence.</p>
+  <p><strong>Excluded:</strong> Pok&eacute;mon card artwork and images, names, logos and trademarks,
+  illustrator credits and the underlying illustrations, quoted provider content, and third-party
+  photographs. The licences above grant nothing in respect of any of it.</p>
+  <p>Pok&eacute;mon and all related names are trademarks of Nintendo, Creatures Inc. and GAME FREAK
+  inc. &copy; Pok&eacute;mon / Nintendo / Creatures / GAME FREAK. Retained card images come from the
+  sources named in the evidence registry and are included for identification and review.</p>
+  <p><strong>This is an unofficial fan project.</strong> It is not affiliated with, endorsed by,
+  sponsored by, or associated with Nintendo, Creatures Inc., GAME FREAK inc., The Pok&eacute;mon
+  Company, Cardmarket, or any other rights holder or data provider named here.</p>
+  <p><strong>No warranty.</strong> This records evidence and its strength. It is not a print manifest
+  and is not guaranteed complete. Do not rely on it for purchase, grading, insurance or valuation
+  decisions without independent verification.</p>
+  <p><a href="LICENSE.md">Full licensing scope</a> ·
+  <a href="THIRD_PARTY_NOTICES.md">Third-party notices</a></p>
+</section>
+
+<footer class="sitefoot">
+  <p>Generated {{generated}} from the current-known repository data under legacy baseline
+  <code>{{baseline_id}}</code>. No analytics, no cookies, no trackers,
+  no runtime third-party API dependency. Artwork data and images load from this HTTP site.</p>
+  <p>Data attribution: {{licensor}} · CC BY-NC-SA 4.0 (grants {{grants_state}}).
+  Card artwork and other third-party material are excluded; see <a href="LICENSE.md">licensing scope</a>.</p>
+</footer>
+
+</main>
+
+{{block:data-rows}}
+{{block:data-coverage}}
+{{block:data-meta}}
+<script src="site/app.js"></script>
+</body>
+</html>

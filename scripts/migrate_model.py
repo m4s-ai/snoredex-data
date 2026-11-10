@@ -3,7 +3,8 @@
 
 Refactor-time migration (Phase 1a). It reads `collector_catalogue.json` and the JSON blocks of
 `index.html` and `gallery.html`; the only curated store it reads is `site/gallery-review.json`, for
-the card release a gallery research placeholder varies. Everything `scripts/build.py` can derive
+the card release a gallery research placeholder varies, and the stores behind the index page's
+counts (`page_counts`). Everything `scripts/build.py` can derive
 is left out. Deterministic and re-runnable while main moves on.
 
     python scripts/migrate_model.py
@@ -141,6 +142,30 @@ def without(rows: list, key: str, *drop: str) -> list:
     return sorted(({k: v for k, v in row.items() if k not in drop} for row in rows), key=lambda row: row[key])
 
 
+def read_store(relative: str):
+    return json.loads((ROOT / relative).read_text(encoding="utf-8-sig"))
+
+
+def page_counts() -> dict:
+    """The index page's counts over stores outside the model, computed as site.py computes them."""
+    cards = read_store("snorlax_cards.json")["cards"]
+    language = {key: sum(len(card.get(field) or []) for card in cards) for key, field in (
+        ("establishedLanguageClaims", "languagesConfirmed"), ("languageClaimsNeedingEvidence", "languagesNeedsEvidence"),
+        ("adjudicatedNotPrinted", "languagesNotPrinted"), ("disputedClaims", "languagesDisputed"))}
+    finishes = read_store("analysis_finishes.json")["counts"]
+    registry = read_store("verification/source_registry.json")["meta"]["counts"]
+    variants = read_store("analysis_confirmed_releases.json")["variants"]
+    return {
+        **language, "finishUnits": finishes["totalFinishUnits"], "confirmedFinishes": finishes["withConfirmedFinish"],
+        "checklistItems": read_store("analysis_checklist.json")["meta"]["counts"]["items"],
+        **{key: registry[key] for key in ("claimsAttributed", "evidenceRecords", "uniqueUrls", "nonUrlEvidenceClasses")},
+        "confirmedLegacyPairs": sum(len(row["confirmedLanguages"]) for row in variants
+                                    if row["edition"] != "1st Edition"),
+        "openLegacyClaims": sum(row["status"] in ("pending", "needs-manual-review")
+                                for row in read_store("verification/units.json")),
+    }
+
+
 def model() -> dict[str, str]:
     catalogue = json.loads((ROOT / "collector_catalogue.json").read_text(encoding="utf-8"))
     rows = {row["rowId"]: row for row in html_block("index.html", "data-rows")}
@@ -162,7 +187,8 @@ def model() -> dict[str, str]:
             "setEditions": without(catalogue["setEditions"], "setEditionId", "localSetCode", "localSetName", "sortKey"),
             "works": without(catalogue["works"], "workId", "displayName")}),
         "images.json": dump(images_document(catalogue, rows, items, html_block("gallery.html", "gallery-data"))),
-        "evidence.json": dump({"providers": provider_tiers(rows), "printings": [links for _, links in records]}),
+        "evidence.json": dump({"meta": {"pageCounts": page_counts()}, "providers": provider_tiers(rows),
+                               "printings": [links for _, links in records]}),
     }
 
 

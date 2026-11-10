@@ -188,9 +188,9 @@ def main() -> int:
                         help="compare only these files, by short name")
     parser.add_argument("--selftest", action="store_true", help="check the differ on mutated payloads")
     args = parser.parse_args()
+    if args.selftest:  # mutates the table rows only, whatever --only says
+        return selftest(payloads(tree_reader(args.tree), ["index"]))
     current = payloads(tree_reader(args.tree), args.only)
-    if args.selftest:
-        return selftest(current)
     return report(payloads(lambda path: git_bytes(args.ref, path), args.only), current)
 
 
