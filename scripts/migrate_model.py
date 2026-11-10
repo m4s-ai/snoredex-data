@@ -22,8 +22,9 @@ import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
-import build
-from check import dump  # the one data/ serializer; check.py outlives this migration
+sys.dont_write_bytecode = True  # --check and --coverage are observational: no __pycache__ in the checkout
+import build  # noqa: E402
+from check import dump  # noqa: E402  # the one data/ serializer; check.py outlives this migration
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -43,6 +44,7 @@ LEGACY_QUALITY = ("authoritativeGraphFingerprint", "authoritativeGraphSchemaVers
                   "discoveryTerminalState", "setDiscoveryRun", "cardDiscoveryRun", "predecessor")
 IMAGE_FIELDS = ("thumbnail", "preview", "imageSource", "imageScope")
 DB = ROOT / "snoredex.sqlite"
+GENERATED = "scripts/migrate_model.py from the committed end product; do not edit before the cut"
 FLAGS = {"corroborated", "is_code_card", "date_approximate"}
 DISTRIBUTION = ("kind", "name", "region", "date")
 # Dropped on purpose: dated marketplace context (owner decision for the re-cut database).
@@ -320,15 +322,25 @@ def model() -> dict[str, str]:
     printings = [printing for printing, _ in records]
     db = open_db()
     provider_rows = providers(db)
-    return {
-        "printings.json": dump({"meta": printings_meta(catalogue), "printings": printings}),
-        "sets.json": dump(sets_document(catalogue, db)),
-        "images.json": dump(images_document(catalogue, rows, items, html_block("gallery.html", "gallery-data"))),
-        "evidence.json": dump({"meta": {"frozenRegistryCounts": registry_counts()}, "providers": provider_rows,
-                               "printings": provider_ids([links for _, links in records], provider_rows)}),
-        "claims.json": dump(claims_document(db, printings,
-                                            {row["assetId"]: row["path"] for row in catalogue["assets"]})),
+    documents = {
+        "printings.json": {"meta": printings_meta(catalogue), "printings": printings},
+        "sets.json": sets_document(catalogue, db),
+        "images.json": images_document(catalogue, rows, items, html_block("gallery.html", "gallery-data")),
+        "evidence.json": {"meta": {"frozenRegistryCounts": registry_counts()}, "providers": provider_rows,
+                          "printings": provider_ids([links for _, links in records], provider_rows)},
+        "claims.json": claims_document(db, printings, {row["assetId"]: row["path"] for row in catalogue["assets"]}),
     }
+    return serialized(documents)
+
+
+def serialized(documents: dict) -> dict:
+    return {name: dump(marked(document)) for name, document in documents.items()}
+
+
+def marked(document: dict) -> dict:
+    """Every data/ file names its generator in its leading `meta` header until the cut."""
+    meta = {"generatedBy": GENERATED, **document.get("meta", {})}
+    return {"meta": meta, **{key: value for key, value in document.items() if key != "meta"}}
 
 
 # --- --coverage: every kept table of the old database, reproduced from data/ and the owner files ---

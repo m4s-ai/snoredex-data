@@ -127,12 +127,24 @@ def legacy_map(catalogue: Path) -> dict:
     return mapping
 
 
+def old_defaults(source) -> dict:
+    """Each old row's seeded `wanted`, as tracker.py seeded it; empty when the old file cannot say."""
+    try:
+        return {cid: int(progress == "current-known") for cid, progress in source.execute(
+            "SELECT checklist_id, collector_progress_class FROM catalog_items")}
+    except sqlite3.OperationalError:
+        return {}
+
+
 def placed_state(old_rows: list, mapping: dict, defaults: dict) -> tuple[dict, list]:
-    """Old rows by item_id; rows with state that cannot be placed (unknown id or conflict) are problems."""
+    """Old rows by item_id; rows with state that cannot be placed (unknown id or conflict) are problems.
+
+    `defaults` holds each old row's untouched `wanted`; without one, wanted=0 counts as state (skip).
+    """
     placed, problems = {}, []
     for checklist_id, *state in old_rows:
         item_id = mapping.get(checklist_id)
-        personal = tuple(state) != (0, defaults.get(item_id, 1), 0, "")
+        personal = tuple(state) != (0, defaults.get(checklist_id, 1), 0, "")
         if item_id is None or placed.get(item_id, tuple(state)) != tuple(state):
             problems.append((checklist_id, item_id, tuple(state), personal))
         elif personal:
@@ -142,14 +154,12 @@ def placed_state(old_rows: list, mapping: dict, defaults: dict) -> tuple[dict, l
 
 def migrate(old: Path, tracker: Path, catalogue: Path) -> int:
     """Carry state onto item_id; write nothing if any row with state cannot be placed."""
-    if not tracker.is_file():
-        raise SystemExit(f"error: {tracker} not found; run init first")
     source = sqlite3.connect(f"file:{old.as_posix()}?mode=ro", uri=True)  # never written
     old_rows = source.execute(f"SELECT checklist_id, {', '.join(STATE)} FROM collection_state "
                               "ORDER BY checklist_id").fetchall()
+    defaults = old_defaults(source)
     source.close()
     db = sqlite3.connect(tracker)
-    defaults = dict(db.execute("SELECT item_id, wanted FROM collection_state"))
     placed, problems = placed_state(old_rows, legacy_map(catalogue), defaults)
     for checklist_id, item_id, state, personal in problems:
         print(f"{'LOST' if personal else 'skipped'}: {checklist_id} -> {item_id or 'no item'} {state}")
@@ -201,11 +211,14 @@ def selftest() -> int:
         old = tmp / "old.sqlite"
         db = sqlite3.connect(old)
         db.execute("CREATE TABLE collection_state (checklist_id TEXT, have, wanted, quantity, notes)")
+        db.execute("CREATE TABLE catalog_items (checklist_id TEXT, collector_progress_class TEXT)")
         db.executemany("INSERT INTO collection_state VALUES (?, ?, ?, ?, ?)",
-                       [("c3", 1, 1, 1, "old"), ("gone", 0, 1, 0, "")])
+                       [("c3", 1, 1, 1, "old"), ("gone", 0, 1, 0, ""), ("retired", 0, 0, 0, "")])
+        db.executemany("INSERT INTO catalog_items VALUES (?, ?)", [("c3", "current-known"), ("retired", "research"),
+                                                                   ("lost", "research")])
         db.commit()
         db.close()
-        assert migrate(old, tracker, tmp / "b.sqlite") == 0
+        assert migrate(old, tracker, tmp / "b.sqlite") == 0  # an untouched retired research row is no state
         db = sqlite3.connect(tracker)
         assert db.execute("SELECT have, notes FROM collection_state WHERE item_id='i3'").fetchone() == (1, "old")
         db.close()
@@ -213,7 +226,7 @@ def selftest() -> int:
         db.execute("INSERT INTO collection_state VALUES ('lost', 1, 1, 1, 'keep me')")
         db.commit()
         db.close()
-        assert migrate(old, tracker, tmp / "b.sqlite") == 1  # a row with state and no item stops it
+        assert migrate(old, tracker, tmp / "b.sqlite") == 1  # a retired row with state stops it
     print("collection selftest ok: init, set, sync (one item added, one retired), migrate, lost-state refusal")
     return 0
 
@@ -239,6 +252,8 @@ def main() -> int:
 def run(args) -> int:
     if args.command == "selftest":
         return selftest()
+    if args.command != "init" and not args.tracker.is_file():  # never create a stub tracker
+        raise SystemExit(f"error: no tracker at {args.tracker}; run init first")
     if args.command == "init":
         print(f"{args.tracker}: {init(args.tracker, args.catalogue, args.force)} items")
     elif args.command == "set":

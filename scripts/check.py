@@ -58,8 +58,10 @@ COLLECTIONS = {
         "cardSize": S, "errorClass": OS, "rarity": D, "completenessStatus": COMPLETENESS,
         "completenessEvidence?": D, "imageAssetId": OS, "releaseDate?": OS, "releaseDatePrecision?": PRECISION,
         "releaseApproximate?": B, "artist?": S}),
-    "printings.meta": (None, None, {"dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
+    "printings.meta": (None, None, {"generatedBy": S, "dataAsOf": S, "siteGenerated": S, "previousFingerprint": OS,
                                     "legacyQuality": D}),
+    "sets.meta": (None, None, {"generatedBy": S}),
+    "images.meta": (None, None, {"generatedBy": S}),
     "sets.localizations": ("localizationId", "localizationId", {
         "localizationId": S, "locality": S, "languageId": S, "language": S, "languageTag": S, "script": OS,
         "displayName": S, "displayOrder": I}),
@@ -82,14 +84,14 @@ COLLECTIONS = {
     "images.placeholders": ("id", "id", {
         "id": S, "baseItemId": S, "finish": FINISHES, "foilPattern": OS, "distribution": OS, "status": S,
         "note": OS, "sources": L}),
-    "evidence.meta": (None, None, {"frozenRegistryCounts": D}),
+    "evidence.meta": (None, None, {"generatedBy": S, "frozenRegistryCounts": D}),
     "evidence.providers": ("providerId", "providerId", {
         "providerId": S, "displayName": S, "organization": OS, "homepage": OS, "category": S, "authorityTier": I,
         "coverage": S, "usedFor": L, "attribution": S, "notes": S, "hosts": L,
         "supportsAbsence?": B, "absenceScopes?": L}),  # declared so that E9, not the schema, owns them
     "evidence.printings": ("itemId", "itemId", {
         "itemId": S, "sourceLinks": L, "languageEvidence?": D, "dateSource?": OD}),
-    "claims.meta": (None, None, {"legacyDatabase": D}),
+    "claims.meta": (None, None, {"generatedBy": S, "legacyDatabase": D}),
     "claims.legacyProducts": ("productId", "productId", {
         "productId": I, "cardName": S, "setCode": S, "collectorNumber": OS, "setName": S, "rarity": OS,
         "variantToken": S, "variantName": OS, "variantNameSource": OS, "cardKey": OS, "market": S,

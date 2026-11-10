@@ -62,7 +62,7 @@ CREATE TABLE works (
     display_name TEXT
 ) WITHOUT ROWID;
 
--- One retained image file; preview_path is the derivative pages show for a specimen original.
+-- One retained image file; preview is the derivative pages show for a specimen original.
 CREATE TABLE assets (
     asset_id TEXT PRIMARY KEY,
     path TEXT NOT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE providers (
     organization TEXT,
     homepage TEXT,
     category TEXT NOT NULL,
-    authority_tier INTEGER NOT NULL CHECK (authority_tier BETWEEN 1 AND 5),
+    authority_tier INTEGER NOT NULL CHECK (authority_tier IN (1, 2, 3, 5)),
     coverage TEXT NOT NULL,
     used_for_json TEXT NOT NULL,
     attribution TEXT NOT NULL,

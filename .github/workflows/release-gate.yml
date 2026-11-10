@@ -101,6 +101,8 @@ jobs:
         shell: bash
         run: |
           python scripts/check.py
+          python scripts/check.py --selftest
+          python scripts/collection.py selftest
           python scripts/build.py --out "${RUNNER_TEMP}/snoredex-build"
 
       # Every PR runs the retained-run validation; the memo replays it when none of the files it

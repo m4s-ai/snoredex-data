@@ -21,7 +21,8 @@ from collections import Counter
 from pathlib import Path
 from urllib.parse import quote, urlencode
 
-import collection
+sys.dont_write_bytecode = True  # build writes only into --out: no __pycache__ in the checkout
+import collection  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -703,15 +704,6 @@ def write_database(path: Path, model: dict) -> dict:
     db.close()
     assert integrity == "ok" and not broken, (integrity, broken[:5])
     return counts
-
-
-def sqlite_dump(path: Path) -> str:
-    """A logical dump: page layouts differ across SQLite builds even when every row is the same."""
-    db = sqlite3.connect(f"file:{path.as_posix()}?mode=ro", uri=True)
-    try:
-        return "\n".join(db.iterdump())
-    finally:
-        db.close()
 
 
 def main() -> int:
