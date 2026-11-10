@@ -265,7 +265,7 @@ def lone_release(m: dict):
 
 
 def foreign_language(m: dict) -> None:
-    unit = edit(m, FU, lambda u: u["products"])
+    unit = edit(m, FU, lambda u: u["products"] and u["completenessStatus"] != "owner-adjudicated")
     spoken = {c["languageCode"] for c in rows(m, C) if c["productId"] == unit["products"][0]["productId"]}
     unit["languageCode"] = min(ids(m, "sets.languages") - spoken)
 
@@ -546,6 +546,34 @@ def unknown_finishes(model: dict) -> tuple[int, list]:
     return len(unknown), [label for label, unit in unknown if unit not in open_units]
 
 
+def decision_problem(unit: dict, decision: dict | None, printed: set) -> str | None:
+    """E13: an owner finish decision names exactly the list the evidence established, rejects nothing
+    still available, and never applies to a finish unit with no printing at all."""
+    label, available = unit["finishUnitId"], sorted(unit["availableFinishes"])
+    named = sorted((decision or {}).get("availableFinishes") or [])
+    if unit["completenessStatus"] == "owner-adjudicated" and (not decision or named != available):
+        return f"{label}: owner-adjudicated, decision names {named if decision else 'nothing'}, unit has {available}"
+    return rejection_problem(label, decision, set(named) | set(available), printed) if decision else None
+
+
+def rejection_problem(label: str, decision: dict, available: set, printed: set) -> str | None:
+    rejected = set(decision.get("rejectedFinishes") or [])
+    if rejected & available:
+        return f"{label}: rejected finish {sorted(rejected)} is still available"
+    return None if label in printed else f"{label}: adjudicated with no printing evidence at all"
+
+
+def finish_decisions(model: dict) -> tuple[int, list]:
+    """Owner finishDecisions, keyed by set code, number and language name, against the finish units."""
+    names = {row["languageCode"]: row["sourceName"] for row in rows(model, "sets.languages")}
+    decisions = {(d["setCode"], d["number"], d["language"]): d for d in model["owner"]["finishDecisions"]}
+    printed = {r["finishUnitId"] for r in rows(model, P)} | {r.get("finishUnitId") for r in rows(model, FP)}
+    pairs = [(u, decisions.get((u["setCode"], u["collectorNumber"], names[u["languageCode"]])))
+             for u in rows(model, FU) if u["languageCode"] in names]  # an unresolved language: its reference
+    problems = [decision_problem(unit, decision, printed) for unit, decision in pairs]
+    return sum(decision is not None for _, decision in pairs), [p for p in problems if p]
+
+
 def records(name: str, test, subset=None):
     """A rule failing every record of `name` (or `subset(model)`) that `test` rejects."""
     key = COLLECTIONS[name][0]
@@ -585,6 +613,9 @@ DOMAIN = {
     "finish printings cite sources, none with absence authority": (records(FP, source_error), change(FP, sources=[])),
     "an unknown finish keeps its finish unit unresolved": (unknown_finishes, change(
         FP, lambda r: "finish" in r, finish="unknown")),
+    "E13: an owner finish decision closes only the list the evidence established": (finish_decisions, change(
+        FU, lambda u: u["completenessStatus"] == "owner-adjudicated",
+        availableFinishes=["holo", "mirror-holo", "non-holo", "reverse-holo"])),
 }
 RULES = {
     "format: canonical serialization": (file_format, lambda m: m.update(

@@ -103,9 +103,10 @@ and report the run. Publishing cannot be undone.
 
    **The finish layer has the same mechanism.** An owner `finishDecisions` entry **closes a list
    and never asserts a finish**: it names exactly the finishes the evidence already found and never
-   applies to a unit with no printings. TCGdex `true` confirms a printing; `false` does not refute
-   one. Only the owner overrules a positive flag, through `rejectedFinishes`. **`not-printed` means
-   no regular release**; a proof or error card does not falsify it.
+   applies to a unit with no printings (check.py rule "E13"). TCGdex `true` confirms a printing;
+   `false` does not refute one. Only the owner overrules a positive flag, through
+   `rejectedFinishes`. **`not-printed` means no regular release**; a proof or error card does not
+   falsify it.
 5. **`pending` means not yet established, never proven absent.** In the data, the site copy and
    anything you write.
 6. **Evidence is entered as records in `data/`** (and, for a physical specimen, in
