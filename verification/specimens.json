@@ -2,7 +2,7 @@
   "schema": "snoredex-specimens",
   "schemaVersion": "1.0.0",
   "note": "Physical cards the collection owner holds and inspected, each with a stable id so a claim can cite the specimen rather than describe it in prose (#32). `photograph` is null until the image is supplied; when present, `photographSha256` pins the committed bytes so later drift is detected. The record is the evidence either way, and the file is what lets a third party re-check it. Photographs live in the photo repository m4s-ai/snoredex-photos under verification/specimens/ and are covered by LICENSE.md decision 4 as a category, so they can be added over time without a fresh approval.",
-  "count": 741,
+  "count": 742,
   "specimens": [
     {
       "specimenId": "SPEC-0001",
@@ -16021,6 +16021,33 @@
         "F0308-P02"
       ],
       "listingUrl": "https://www.ebay.co.uk/itm/405434571459"
+    },
+    {
+      "specimenId": "SPEC-0742",
+      "setCode": "JU",
+      "number": "27/64",
+      "variant": "V2",
+      "language": "Italian",
+      "heldBy": "third-party seller",
+      "inspectedFrom": "Cardmarket seller scan supplied by the collection owner as an image copy; original 2586x1944 JPEG visually inspected",
+      "photograph": "SPEC-0742.jpg",
+      "photographSource": "https://i.imgur.com/hUEP4N5.jpeg",
+      "photographSha256": "sha256:8e3c32bfcbe38430ad631e151520ace0642e6b440164d32013d2cd1fc469a431",
+      "observed": "Flatbed scan showing the back and the complete front of one Italian Jungle Snorlax 27/64 beside a paper tag reading 3. Pokémon Base, 90 PV, Potere Pokémon: Pellaccia, Body Slam, Illus. Ken Sugimori, the Jungle symbol and 27/64 with the rare star establish identity. The EDIZIONE 1 stamp is printed left of the species line below the artwork, and the artwork field is uniformly printed without a foil pattern. The collection owner supplied the image on 2026-11-11 through the copy at the recorded URL and stated that it is a Cardmarket offer photograph; the offer, seller and article number were not supplied, so no listing URL is recorded.",
+      "recordedAt": "2026-11-11",
+      "citedBy": [
+        "F0171-P01"
+      ],
+      "physicalObservation": {
+        "finish": "non-holo",
+        "edition": "1st Edition",
+        "foilPattern": null,
+        "markings": "EDIZIONE 1",
+        "markingRole": "print-identity",
+        "cardSize": "standard",
+        "basis": "The scanned Italian 27/64 face visibly carries EDIZIONE 1 and a uniformly printed artwork field; the owner's Jungle number rule of 2026-09-10 fixes 27/64 as Non-Holo."
+      },
+      "listingUrl": null
     }
   ]
 }
