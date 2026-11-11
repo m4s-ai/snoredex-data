@@ -6,14 +6,24 @@ writes nothing. It never compares against the old pipeline's outputs.
 
     python scripts/check.py              # exit 0 when every rule holds, 1 otherwise
     python scripts/check.py --selftest   # each rule fires on exactly its own mutation
+    python scripts/check.py --photos DIR # also verify the originals in a photo-repository checkout
+
+The specimen originals live in the photo repository m4s-ai/snoredex-photos under the same path
+(verification/specimens/...). The offline rules prove that every specimen path in data/ is a
+photograph the register names, with the register's SHA-256 on its asset; --photos proves that each
+registered photograph exists in the checkout with those bytes. --photos is run at intake and after
+changing photographs, not in regen.py or CI. A photograph no record names yet is only noted: an
+intake pushes it first.
 """
 from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import re
 import sys
+import tempfile
 from collections import Counter
 from pathlib import Path
 
@@ -22,6 +32,7 @@ DATA = ROOT / "data"
 FILES = ("printings", "sets", "images", "evidence", "claims")
 OWNER = ROOT / "verification" / "owner_adjudications.json"
 SPECIMENS = ROOT / "verification" / "specimens.json"
+PHOTO_DIR = "verification/specimens/"  # the originals' path, in the photo repository
 
 NONE = type(None)
 S, OS, I, B, OB, L, D, OD = (str,), (str, NONE), (int,), (bool,), (bool, NONE), (list,), (dict,), (dict, NONE)
@@ -143,7 +154,9 @@ def load() -> dict:
             raise SystemExit(f"check: data/{name}.json is not UTF-8 JSON: {error}")
     owner = json.loads(OWNER.read_text(encoding="utf-8"))
     specimens = json.loads(SPECIMENS.read_text(encoding="utf-8"))["specimens"]
-    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens})
+    photographs = {PHOTO_DIR + row["photograph"]: row.get("photographSha256") for row in specimens if row.get("photograph")}
+    return dict(model, raw=raw, owner=owner, specimens={row["specimenId"] for row in specimens},
+                photographs=photographs)
 
 
 def rows(model: dict, name: str) -> list:
@@ -343,12 +356,30 @@ def printing_units(model: dict) -> tuple[int, list]:
     return len(found), [label for label, printing, unit in found if not printing.startswith(unit + "-")]
 
 
-def repository_files(model: dict) -> tuple[int, list]:
+def image_paths(model: dict) -> list:
+    """Every image path data/ names: assets and previews, gallery sources and sizes, finish-printing images."""
     assets = rows(model, "images.assets")
     paths = [a["path"] for a in assets] + [a["preview"] for a in assets if "preview" in a]
     paths += [p for r in rows(model, "images.galleryImages") for p in [r["source"], *(i["path"] for i in r["images"])]]
-    paths += [r["image"] for r in rows(model, FP) if r.get("image")]
+    return paths + [r["image"] for r in rows(model, FP) if r.get("image")]
+
+
+def repository_files(model: dict) -> tuple[int, list]:
+    paths = [path for path in image_paths(model) if not path.startswith(PHOTO_DIR)]  # originals: the next rule
     return len(paths), [path for path in paths if not (ROOT / path).is_file()]
+
+
+def specimen_originals(model: dict) -> tuple[int, list]:
+    """A specimen original lives in the photo repository, so data/ may name it only as a registered
+    photograph, and every registered photograph records its SHA-256; check.py --photos then proves the
+    registered bytes. Counts the specimen paths in data/ plus the register's photographs."""
+    photographs = model["photographs"]
+    paths = [path for path in image_paths(model) if path.startswith(PHOTO_DIR)]
+    errors = [f"{path}: the register records no SHA-256" for path, sha in sorted(photographs.items()) if not sha]
+    errors += [path for path in paths if path not in photographs]
+    errors += [f"{a['assetId']}: sha256 differs from the register" for a in rows(model, "images.assets")
+               if a["path"] in photographs and a["sha256"] != photographs[a["path"]]]
+    return len(paths) + len(photographs), errors
 
 
 def owner_links(model: dict) -> tuple[int, list]:
@@ -394,8 +425,11 @@ REFERENCES = {
     "finish-unit product has a claim in the unit's language": (product_claims, foreign_language),
     "finish printing id belongs to its finish unit": (printing_units, change(
         FP, lambda r: "finishUnitId" in r, finishUnitId="F0000")),
-    "image files exist in the repository": (repository_files, change(
+    "image files exist in the repository (originals excepted)": (repository_files, change(
         "images.assets", lambda a: "preview" not in a, path="images/none.png")),
+    "specimen original path -> a photograph verification/specimens.json names, same SHA-256": (
+        specimen_originals, change("images.galleryImages", lambda r: r["source"].startswith(PHOTO_DIR),
+                                   source=PHOTO_DIR + "SPEC-9999.png")),
     "adjudicationId -> a verification/owner_adjudications.json decision on that unit": (owner_links, owner_unit),
     "every owner decision is cited by its claim": (uncited_decisions, add_decision),
     "completenessEvidence.adjudicationId -> owner finishDecisions": (
@@ -631,14 +665,64 @@ def selftest(base: dict) -> int:
     return 0
 
 
+def digest(path: Path) -> str:
+    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def photo_problems(photos: Path, photographs: dict) -> tuple[int, list, list]:
+    """Every photograph the register names exists under the photo checkout with its SHA-256. Also returns
+    the photographs no record names: an intake in flight pushes its photograph before its record lands."""
+    problems = []
+    for path, sha in sorted(photographs.items()):
+        file = photos / path
+        if not file.is_file():
+            problems.append(f"{path}: missing")
+        elif digest(file) != sha:
+            problems.append(f"{path}: SHA-256 differs")
+    present = {f.relative_to(photos).as_posix() for f in (photos / PHOTO_DIR).rglob("*") if f.is_file()}
+    return len(photographs), problems, sorted(present - photographs.keys())
+
+
+def photo_selftest() -> None:
+    """One matching file passes; a changed byte and a missing file fail; an unnamed file is only reported."""
+    with tempfile.TemporaryDirectory() as tmp:
+        root, name = Path(tmp), "SPEC-0001.png"
+        (root / PHOTO_DIR).mkdir(parents=True)
+        file = root / PHOTO_DIR / name
+        file.write_bytes(b"photo")
+        register = {PHOTO_DIR + name: digest(file)}
+        assert photo_problems(root, register) == (1, [], []), photo_problems(root, register)
+        file.write_bytes(b"photO")
+        assert photo_problems(root, register)[1] == [f"{PHOTO_DIR}{name}: SHA-256 differs"]
+        file.unlink()
+        assert photo_problems(root, register)[1] == [f"{PHOTO_DIR}{name}: missing"]
+        file.write_bytes(b"photo")
+        (root / PHOTO_DIR / "SPEC-0002.png").write_bytes(b"other")
+        assert photo_problems(root, register) == (1, [], [f"{PHOTO_DIR}SPEC-0002.png"])
+
+
+def check_photos(photos: Path | None, model: dict) -> int:
+    if photos is None:
+        print("note originals not checked: run python scripts/check.py --photos DIR against a photo-repository checkout")
+        return 0
+    count, problems, unnamed = photo_problems(photos, model["photographs"])
+    print(f"{'FAIL' if problems else 'ok  '} originals in {photos} match their SHA-256: {count} checked"
+          + (f", {len(problems)} failing: {problems[:5]}" if problems else ""))
+    if unnamed:
+        print(f"note {len(unnamed)} photograph(s) in {photos} not named by the register: {unnamed[:5]}")
+    return 1 if problems else 0
+
+
 def main() -> int:
     for stream in (sys.stdout, sys.stderr):
         stream.reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--selftest", action="store_true", help="mutate the loaded model, expect each rule to fire")
+    parser.add_argument("--photos", type=Path, metavar="DIR", help="a checkout of the photo repository to verify")
     args = parser.parse_args()
     model = load()
     if args.selftest:
+        photo_selftest()
         return selftest(model)
     results = run(model)
     for name, (count, errors) in results.items():
@@ -646,7 +730,7 @@ def main() -> int:
               + (f", {len(errors)} failing: {errors[:5]}" if errors else ""))
     failed = sum(bool(errors) for _, errors in results.values())
     print(f"check: {len(results) - failed} of {len(results)} rules hold")
-    return 1 if failed else 0
+    return 1 if check_photos(args.photos, model) or failed else 0
 
 
 if __name__ == "__main__":

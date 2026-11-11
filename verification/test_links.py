@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Every relative link in the documents and page templates resolves to a file in the repository.
 
-Markdown outside verification/archive, evidence and specimens, plus templates/index.html and
-site/gallery.html (both rendered at the repository root). A `#fragment` on a Markdown target must
-name a heading there. Exit 1 lists every broken link.
+Markdown outside verification/archive and evidence and the dated readiness audit, plus
+templates/index.html and site/gallery.html (both rendered at the repository root). A `#fragment` on
+a Markdown target must name a heading there. Exit 1 lists every broken link.
 """
 from __future__ import annotations
 
@@ -14,8 +14,7 @@ from pathlib import Path, PurePosixPath
 
 ROOT = Path(__file__).resolve().parents[1]
 # PUBLIC-READINESS-AUDIT.md is a dated record kept unchanged for publication check P3.
-EXEMPT = ("verification/archive/", "verification/evidence/", "verification/specimens/",
-          "verification/history/PUBLIC-READINESS-AUDIT.md")
+EXEMPT = ("verification/archive/", "verification/evidence/", "verification/history/PUBLIC-READINESS-AUDIT.md")
 PAGES = ("templates/index.html", "site/gallery.html")
 MARKDOWN_LINK = re.compile(r"\]\(([^)\s]+)\)")
 HTML_LINK = re.compile(r'(?:href|src)="([^"]+)"')

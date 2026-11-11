@@ -68,9 +68,9 @@ TREES = [
     ("site", {".css", ".js"}),
     # images/ includes the preview and thumbnail derivatives of every specimen photograph.
     ("images", {".jpg", ".jpeg", ".png", ".webp"}),
-    # verification/specimens/ is deliberately absent: the originals are ~1 GB, over the GitHub
-    # Pages site limit, so a deployment timed out (run 42534207499). build.py embeds their previews
-    # and links each original on GitHub, where the repository keeps it.
+    # The specimen originals are not in this repository and never on Pages: they live in the photo
+    # repository m4s-ai/snoredex-photos under the same path. build.py embeds their previews and
+    # links each original there.
     ("LICENSES", {".md", ".txt"}),
 ]
 

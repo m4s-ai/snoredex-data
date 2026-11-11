@@ -45,7 +45,7 @@ a fact.
 | [`snoredex.sqlite`](snoredex.sqlite) | The same facts as an application database; start from the `app_*` views ([DATABASE.md](DATABASE.md)) |
 | [`snoredex-tracker-template.sqlite`](snoredex-tracker-template.sqlite) | A blank personal have/need tracker; manage your copy with `scripts/collection.py` |
 | [`index.html`](index.html), [`gallery.html`](gallery.html) | The table and the artwork gallery |
-| [`verification/owner_adjudications.json`](verification/owner_adjudications.json), [`verification/specimens.json`](verification/specimens.json) | Owner decisions and the register of inspected physical specimens |
+| [`verification/owner_adjudications.json`](verification/owner_adjudications.json), [`verification/specimens.json`](verification/specimens.json) | Owner decisions and the register of inspected physical specimens; the photographs it names live in [`m4s-ai/snoredex-photos`](https://github.com/m4s-ai/snoredex-photos) under `verification/specimens/` |
 
 The catalogue, both pages, the database and the tracker template are built from `data/` by
 `scripts/build.py`; never edit them by hand.

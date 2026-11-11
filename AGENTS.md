@@ -43,10 +43,10 @@ faces. A question or audit request is answered, not implemented; read-only work 
 
 | Level | Actions |
 |---|---|
-| Free | local builds and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch |
+| Free | local builds and checks, commits on the task branch, fast-forward pushes of verified follow-up commits to an existing authorized PR branch, pushes of intake photographs to `main` of the photo repository `m4s-ai/snoredex-photos` |
 | Only on explicit instruction | first push of a task branch, force pushes (including `--force-with-lease` after a rebase), opening or merging a PR (one instruction may name a series), issue/PR comments, live source refreshes (Cardmarket quota), running the `Publish site` workflow |
 | Owner only | `verification/owner_adjudications.json` entries (including `rejectedFinishes`), `publication-decisions.json` |
-| Never | push to `main`, edit `verification/archive/`, bypass or weaken the publication gate |
+| Never | push to this repository's `main`, edit `verification/archive/`, bypass or weaken the publication gate |
 
 An instruction covers the run it names and does not carry over to later tasks. An authorized PR
 keeps its follow-up push permission for in-scope fixes while it is open; run
@@ -61,10 +61,10 @@ and report the run. Publishing cannot be undone.
    An exact product image or seller photo is tier 2 (`cardmarket-product-image`,
    `cardmarket-listing-photo`) only when the inspected card face itself establishes the claimed
    property — not tier 1, because the card cannot be re-examined and metadata may be wrong. File it
-   as a `SPEC-nnnn` record in `verification/specimens.json` with image and provenance, never a bare
-   link: listings change. An illustrator credit read from a retained product image attests the
-   artwork and needs no SPEC record. There is no open Cardmarket API; the rolling ~55-request quota
-   returns HTTP 429.
+   as a `SPEC-nnnn` record in `verification/specimens.json` with provenance and the image's SHA-256,
+   the image itself in the photo repository, never a bare link: listings change. An illustrator
+   credit read from a retained product image attests the artwork and needs no SPEC record. There is
+   no open Cardmarket API; the rolling ~55-request quota returns HTTP 429.
 2. **Grade every source.** `providerId` names it, `corroborated` says whether a second provider
    agreed, and `data/evidence.json` `providers` ranks each provider by `authorityTier`. Tiers 1-3
    grade external evidence, strongest first; tier 5 marks what is **not** external evidence. There
@@ -110,9 +110,11 @@ and report the run. Publishing cannot be undone.
 5. **`pending` means not yet established, never proven absent.** In the data, the site copy and
    anything you write.
 6. **Evidence is entered as records in `data/`** (and, for a physical specimen, in
-   `verification/specimens.json` with its photograph under `verification/specimens/`). There is no
-   importer: entry is by hand, and `python scripts/check.py` and its `--selftest` are the guard; a new rule goes into check.py with its
-   negative case. Never write a prose description of a specimen into a claim; cite its `SPEC-nnnn`.
+   `verification/specimens.json`, with its photograph under `verification/specimens/` in the photo
+   repository `m4s-ai/snoredex-photos`). There is no importer: entry is by hand, and
+   `python scripts/check.py` and its `--selftest` are the guard; a new rule goes into check.py
+   with its negative case. Never write a prose description of a specimen into a claim; cite its
+   `SPEC-nnnn`.
 7. **Never hand-edit a generated file.** `scripts/build.py` writes five outputs:
    `collector_catalogue.json`, `index.html`, `gallery.html`, `snoredex.sqlite` and
    `snoredex-tracker-template.sqlite`. Change their sources instead: `data/`, `templates/`,
@@ -181,7 +183,13 @@ and report the run. Publishing cannot be undone.
 - **Physical specimens are cited, not described.** A card the owner holds has a stable id in
   `verification/specimens.json`; a claim references it as `sourceRef: "specimen:SPEC-nnnn"`. The
   issue URL a photograph came from is provenance, not a place the image will still be: commit the
-  bytes. WebP originals are retained and losslessly converted, never rejected.
+  bytes to the photo repository `m4s-ai/snoredex-photos` under the path the record names
+  (`verification/specimens/SPEC-nnnn.<ext>`) and record their SHA-256 in `photographSha256`. A
+  photograph is pushed to the photo repository as part of intake, before the record that names it
+  lands here, and it is never changed or renamed afterwards. check.py proves every specimen path in
+  `data/` is a registered photograph; `python scripts/check.py --photos DIR` proves each registered
+  photograph exists in a checkout with its SHA-256.
+  WebP originals are retained and losslessly converted, never rejected.
 - **Item identity is frozen.** `itemId`, `physicalPrintingId`, `finishGroupId`, `legacyChecklistIds`
   and the other contract ids in `data/printings.json` are stored verbatim and never recomputed; an
   external app keys user state by `itemId`. No migration routes are kept: removing or re-keying an
@@ -204,6 +212,7 @@ python scripts/regen.py                          # build the outputs, then run e
 python scripts/regen.py --check                  # observational: what CI runs
 python scripts/check.py                          # validate data/ (format, schema, references, rules)
 python scripts/check.py --selftest               # each rule fires on exactly its own mutation
+python scripts/check.py --photos DIR             # also: registered photographs exist with their bytes
 python scripts/build.py                          # write the five outputs into the repository
 python scripts/build.py --check                  # fail if a committed output is stale; writes nothing
 python scripts/build.py --out DIR                # write them elsewhere
@@ -244,7 +253,7 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
 ## Git and publication
 
 - Repository is `github.com/m4s-ai/snoredex-data`. Work lands on a **feature branch via pull
-  request** — never push to `main`.
+  request** — never push to this repository's `main`.
 - **Sync `main` before starting any task**: `git fetch origin` and base the work on the current
   `origin/main`. A stale base is how parallel work silently collides.
 - **One isolated branch per issue**, cut fresh from `origin/main` and never shared with another
@@ -260,8 +269,9 @@ Serve the site locally with `python -m http.server 8000`, then open <http://loca
 - The release gate runs on Ubuntu and Windows; the browser suite is Linux-only.
 - **Merging never publishes.** Pages deployment is a manual `workflow_dispatch` run, gated on
   `verification/publication_gate.py` and the approvals recorded in `publication-decisions.json`, and
-  it verifies the repository's real visibility against the GitHub API. Specimen originals stay off
-  Pages, and `publish.py --verify` fails an artifact over 900 MiB.
+  it verifies the repository's real visibility against the GitHub API. Specimen originals were
+  never on Pages; they live in the photo repository `m4s-ai/snoredex-photos`, which `--photos`
+  checks at intake rather than CI. `publish.py --verify` fails an artifact over 900 MiB.
 - Licence grants are **in force** (`M4S.Collection`, 2026-07-26): a mixed work, not OSI open
   source — PolyForm Noncommercial 1.0.0 for code, CC BY-NC-SA 4.0 for the data selection,
   arrangement and annotation ([`LICENSE.md`](LICENSE.md)).
