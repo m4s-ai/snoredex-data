@@ -69,7 +69,9 @@ python scripts/collection.py sync                     # after a new catalogue: r
 ```
 
 `sync` refreshes the catalogue copy, adds new items and marks vanished items inactive; it never
-changes `have`, `wanted`, quantities or notes. A research item is tracked but never counted as need.
+changes `have`, `wanted`, quantities or notes. A re-keyed item therefore arrives as one retired and
+one new item: its state stays on the retired row, and the new row starts from the seed. A research
+item is tracked but never counted as need.
 
 ## Migrating an old tracker
 

@@ -214,9 +214,8 @@ python scripts/publish.py --out _site --verify
 python verification/publication_audit.py         # L1, P1-P8, X6, X7: tree and history boundary
 ```
 
-`regen.py --check` runs check.py, its selftest, the tracker selftest, `build.py --check`, the
-complexity guard, the sensitive-scan test, the gate-handoff test, the link check and the
-publication audit; `regen.py` first runs `build.py`, then the same steps. Every
+`regen.py` runs check.py, its selftest, the tracker selftest, build.py, the complexity guard, the
+sensitive-scan test, the gate-handoff test, the link check and the publication audit. Every
 `--check` is observational: it creates and replaces nothing in the checkout. The `.sqlite` files
 are compared by logical dump, never by bytes, because SQLite embeds its library version.
 

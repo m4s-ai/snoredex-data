@@ -57,7 +57,9 @@ before building anything on the data.
 `itemId`. Its collections are `localizations`, `localSets`, `setEditions`, `works`, `items` and
 `assets`, plus `meta` and `qualitySummary`; the JSON schema is
 [`collector_catalogue.schema.json`](collector_catalogue.schema.json). `meta.catalogueFingerprint`
-hashes the whole document. An `itemId` is stored verbatim and never recomputed.
+hashes the whole document. An `itemId` is stored verbatim and never recomputed. No migration
+routes are published, so between two catalogue versions an item can be removed or re-keyed, and a
+consumer sees that as an id that is gone and one that is new.
 
 ## The five files in `data/`
 

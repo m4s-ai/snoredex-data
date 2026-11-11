@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """The one gate: build the outputs from data/, then check the model, the code and the publication boundary.
 
-    python scripts/regen.py          # write the outputs with build.py, then run every --check step
-    python scripts/regen.py --check  # observational: every check, build.py --check included (what CI calls)
+    python scripts/regen.py          # write the outputs with build.py, then run every check
+    python scripts/regen.py --check  # observational: build.py --check instead of writing (what CI calls)
 
 Exit code is non-zero when any step fails. The browser suite (verification/test_site.py) and the
 Pages artifact steps (publish.py, gate_manifest.py, publication_gate.py) stay in the workflows.
@@ -20,7 +20,7 @@ STEPS = (
     ("scripts/check.py",),
     ("scripts/check.py", "--selftest"),
     ("scripts/collection.py", "selftest"),
-    ("scripts/build.py", "--check"),
+    ("scripts/build.py",),  # --check is appended under --check
     ("verification/test_complexity.py",),
     ("verification/test_sensitive_scan.py",),
     ("verification/test_gate_handoff.py",),
@@ -34,10 +34,8 @@ def main() -> int:
     parser.add_argument("--check", action="store_true", help="write nothing; fail if an output is stale")
     args = parser.parse_args()
     env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1", "GIT_OPTIONAL_LOCKS": "0"}
-    # Write mode builds first, then runs exactly the --check steps, so the delivery command itself
-    # proves that an immediate second `regen.py --check` is clean.
-    for step in STEPS if args.check else (("scripts/build.py",), *STEPS):
-        command = list(step)
+    for step in STEPS:
+        command = [*step, "--check"] if args.check and step == ("scripts/build.py",) else list(step)
         print(f"=== {' '.join(command)}", flush=True)
         if subprocess.run([sys.executable, *command], cwd=ROOT, env=env).returncode:
             print(f"regen.py: FAILED at {' '.join(command)}")
